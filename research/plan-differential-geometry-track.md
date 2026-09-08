@@ -716,7 +716,7 @@ countable bases and otherwise needs at most \(\mathrm{AC}_\omega\).
 **`requires`:** `smooth-manifolds-and-smooth-maps`,
 `partitions-of-unity-and-paracompactness`, `compactness`,
 `countability-axioms-and-cardinal-functions`, `the-exponential-function`,
-`darboux-lhopital-and-taylor`
+`darboux-lhopital-and-taylor`, `fubini-and-change-of-variables`
 
 The topological partition theorem produces continuous functions; manifold
 arguments need smooth ones. This page therefore begins with the flat
@@ -745,17 +745,33 @@ stronger AC+DC cost of the published general topological partition theorem.
 5. `lem-smooth-bump-between-concentric-euclidean-balls` — **lemma** `[LA]`.
    For $0<r<R$, an explicit radial $C^\infty$ function equals one on
    $\overline B(0,r)$ and has support in $B(0,R)$.
+   Published local repair (2026-09-08): use $s=(r+R)/2$ in the step-function
+   formula, so support lies in $\overline B(0,s)\subset B(0,R)$.
+   Declare the existing support definition; prove all coordinate derivatives
+   continuous by induction with the published one-variable chain/product rules.
 6. `lem-euclidean-bump-for-a-compact-set-inside-an-open-set` — **lemma**
    `[LA]`. A finite cover by balls from item 5 and the finite product
    $1-\prod(1-\rho_i)$ yields $\rho=1$ near $K$ with compact support in
    $U\subseteq\mathbb R^n$.
+   Published local repair (2026-09-08): extract a finite subcover from all
+   admissible ball triples using `lem-compactness-is-intrinsic`, then use the
+   explicit translated bumps. Their finite closed union bounds the final
+   support inside $U$; handle empty $K$ by zero. No new Phase-2 supplier.
 7. `lem-chart-bump-at-a-point-with-prescribed-support` — **lemma** `[LA]`.
+   Published local repair (2026-09-08): retain the inverse image of the closed
+   outer Euclidean ball as a compact closed support bound in the manifold.
+   Use Heine–Borel, metric/topological compactness agreement, the topological
+   continuous-image theorem and compact-in-Hausdorff closedness. Handle
+   dimension zero separately; no new Phase-2 supplier is needed.
    If $p\in U$ with $U$ open in a smooth manifold, then some smooth
    $\rho:M\to[0,1]$ equals one on a neighbourhood of $p$ and has compact
    support contained in $U$; extension by zero is proved smooth near the
    chart boundary because the Euclidean support is compactly contained.
 8. `lem-manifold-bump-for-a-compact-set-inside-an-open-set` — **lemma**
    `[LA]`. Compactness reduces item 7 to finitely many functions.
+   Published local repair (2026-09-08): form all eligible bumps before
+   extracting a finite subcover; retain their finite closed support union.
+   Prove finite sums smooth in charts and handle the empty compact set.
 
 **Locally finite smooth algebra**
 
@@ -832,8 +848,15 @@ stronger AC+DC cost of the published general topological partition theorem.
     sublevel sets lie in compact exhaustion stages and $F$ is proper.
     LANDMARK.
 25. `cor-every-closed-subset-of-a-manifold-is-the-zero-set-of-a-smooth-nonnegative-function` —
-    **corollary** `[LA]`. Use a countable locally finite family of bumps on
-    $M\setminus A$ with positive coefficients and prove the zero set exactly.
+    **corollary** `[LA]`. Published proof repair remains open: local finiteness
+    on $M\setminus A$ does not establish smoothness across $A$. Use positive
+    diagonal weights controlling all derivatives on a countable compact
+    chart-box cover. The published `thm-weierstrass-m-test-for-function-series`
+    and `thm-uniform-derivative-limit-on-a-closed-interval` supply the
+    convergence tools; prove the coordinate-segment induction inline.
+    Resolve inherited countable-choice hypotheses first. Exact open repairs
+    are in `published-consumer-supplier-ledger.md`; no new Phase-2 pair is
+    currently required by this strategy.
 26. `cor-every-open-subset-of-a-manifold-is-the-cozero-set-of-a-smooth-function` —
     **corollary** `[LA]`.
 27. `prop-every-smooth-manifold-admits-a-countable-smooth-atlas-with-relatively-compact-domains` —
@@ -862,6 +885,8 @@ stronger AC+DC cost of the published general topological partition theorem.
 1. `ex-the-standard-compactly-supported-bump-on-the-line` — **example**
    `[LL]`; formula and all endpoint derivatives.
 2. `ex-a-radial-bump-on-euclidean-space` — **example** `[AA]`.
+   Published formula repaired (2026-09-08): use the intermediate radius
+   $s=(r+R)/2$, as in the repaired A-page lemma.
 3. `ex-a-two-function-smooth-partition-on-the-circle` — **example** `[AA]`;
    constructed in overlapping angular charts.
 4. `ex-a-smooth-partition-on-real-space-subordinate-to-two-half-spaces` —

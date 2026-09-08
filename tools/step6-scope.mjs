@@ -15,6 +15,7 @@ import { dirname, join, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { split, yaml } from './pathway-lib.mjs';
 import { itemHashGuard } from './item-hash.mjs';
+import { step6Escalations } from './step6-escalations.mjs';
 
 const argv = process.argv.slice(2);
 const command = argv[0];
@@ -37,6 +38,13 @@ const decisionsPath = (group) => R('research', `${run}-alpha-${group}-6b-decisio
 const ledgerPath = R(option('ledger', 'research/defect-ledger.jsonl'));
 const publishedRepairsPath = R('research', `${run}-step8-published-repairs.jsonl`);
 const publishedClaimsPath = R('research', `${run}-step6-published-claims.jsonl`);
+
+if (command === 'check-escalations') {
+  const holds = step6Escalations(ROOT, run);
+  if (holds.length) fail(`Step 6b owner decision required:\n${holds.join('\n')}`, 1);
+  console.log('Step 6b: no owner escalations');
+  process.exit(0);
+}
 
 const readJson = (path, what) => {
   if (!existsSync(path)) fail(`${what} is missing at ${path}`, 1);
@@ -819,11 +827,21 @@ if (command === 'check') {
           if (!groupSubjects.has(decision.id)) error('decision-route', `${decision.obligation} names ${decision.id} outside group ${group.label}`);
         }
         const allowed = ['touched', 'page'].includes(decision.route)
-          ? ['accepted_repair', 'amended_repair', 'reverted_change']
+          ? ['accepted_repair', 'amended_repair', 'reverted_change', 'reviewed_no_defect']
           : ['confirmed_fatal', 'confirmed_nonfatal', 'false_positive'];
+        if (decision.verdict === 'escalated'
+          || (decision.repair_confidence !== undefined && decision.repair_confidence !== 1)) {
+          error('owner-escalation', `${decision.obligation} requires an owner decision: ${decision.evidence ?? 'uncertain repair'}`);
+          continue;
+        }
         if (!allowed.includes(decision.verdict)) error('decision-verdict', `${decision.obligation} has invalid verdict ${decision.verdict}`);
         if (typeof decision.evidence !== 'string' || !decision.evidence.trim()) error('decision-evidence', `${decision.obligation} has no evidence`);
-        if (!Array.isArray(decision.defect_ids) || !decision.defect_ids.length || !unique(decision.defect_ids)) {
+        const cleanChange = decision.verdict === 'reviewed_no_defect';
+        if (cleanChange && (!['metadata', 'audit_enrichment'].includes(decision.change_kind)
+          || decision.defect_ids?.length !== 0)) {
+          error('decision-clean-change', `${decision.obligation} needs metadata/audit_enrichment change_kind and empty defect_ids`);
+        }
+        if (!Array.isArray(decision.defect_ids) || (!cleanChange && !decision.defect_ids.length) || !unique(decision.defect_ids)) {
           error('decision-ledger-refs', `${decision.obligation} needs one or more unique defect_ids`);
           continue;
         }

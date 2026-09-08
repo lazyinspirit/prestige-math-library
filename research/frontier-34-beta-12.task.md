@@ -1,0 +1,33 @@
+# Batch 12 of run `frontier-34` — The De Rham Complex Homotopy and Mayer Vietoris · Riemannian Metrics Length Distance and Volume
+
+2 A/B pairs in differential-geometry. Own only these pairs.
+
+## `the-de-rham-complex-homotopy-and-mayer-vietoris`
+
+| | |
+|---|---|
+| A page | `the-de-rham-complex-homotopy-and-mayer-vietoris` · order **471** · `differential-geometry` |
+| B page | `the-de-rham-complex-homotopy-and-mayer-vietoris-examples` |
+| title | The De Rham Complex Homotopy and Mayer Vietoris |
+| requires | `integration-of-forms-and-the-general-stokes-theorem-examples`, `chain-complexes-and-homology`, `chain-homotopy-and-the-homotopy-category`, `long-exact-sequences-in-homology` |
+| design | `research/plan-differential-geometry-track.md` L414 (id mention, not a heading — locate the section yourself)<br>`research/plan-differential-topology-track.md` L122 (id mention, not a heading — locate the section yourself) |
+
+Read every listed design location. Record which one controls and why.
+
+Read the complete design section and preserve its scope, conventions, warnings, and proof route. This generated file contains no mathematical review.
+
+Compare the design with `research/plan-spec.json`. The current plan controls this run; record every conflict in the batch notes.
+
+## `riemannian-metrics-length-distance-and-volume`
+
+| | |
+|---|---|
+| A page | `riemannian-metrics-length-distance-and-volume` · order **477** · `differential-geometry` |
+| B page | `riemannian-metrics-length-distance-and-volume-examples` |
+| title | Riemannian Metrics Length Distance and Volume |
+| requires | `smooth-partitions-of-unity-and-exhaustions`, `tangent-cotangent-and-the-differential`, `smooth-vector-bundles-and-sections`, `tensor-fields-exterior-algebra-and-differential-forms`, `the-exterior-derivative-and-cartan-calculus`, `manifolds-with-boundary-collars-and-orientations`, `integration-of-forms-and-the-general-stokes-theorem`, `compactness`, `line-integrals-and-the-gradient-theorem` |
+| design | `research/plan-differential-geometry-track.md` L4504 |
+
+Read the complete design section and preserve its scope, conventions, warnings, and proof route. This generated file contains no mathematical review.
+
+Compare the design with `research/plan-spec.json`. The current plan controls this run; record every conflict in the batch notes.

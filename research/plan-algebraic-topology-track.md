@@ -459,56 +459,208 @@ cone vertex used by a contraction are supplied.
 This is the earlier supplier omitted by the published comparison and
 simplicial-approximation proofs.  “Barycentric subdivision” here means the
 order-complex construction on nonempty faces, not AT-3's subdivision operator
-on singular chains.  The two constructions agree on characteristic simplices
-only after the comparison item below proves that fact.
+on singular chains. The comparison is a later AT-3 obligation, owned by
+`def-barycentric-subdivision-chain-operator` and
+`thm-barycentric-subdivision-is-a-chain-map`, not an AT-24 prerequisite.
+There, construct ordered affine chains, verify the cone identity, and compare
+the signed characteristic-simplex formulas before pushing them to singular
+chains. Do not identify oriented simplicial generators with all ordered
+singular generators. Specify whether the chosen conventions give equality or
+a chain homotopy. The published AT-3 proof amendment remains Phase 3.
 
 ### A-page items, in dependency order
 
-1. `def-face-poset-and-order-complex` — define finite chains in a poset and
-   their abstract order complex, including empty and zero-dimensional cases.
-2. `def-barycentric-subdivision-of-an-abstract-simplicial-complex` — vertices
-   are nonempty faces of $K$ and simplices are strict inclusion chains.
-3. `def-canonical-barycentric-realization-map` — send a face-vertex to the
-   barycenter of that face and extend affinely.
-4. `thm-barycentric-subdivision-realizes-homeomorphically` — prove simplex by
-   simplex that the canonical map $|\operatorname{sd}K|\to|K|$ is a
-   homeomorphism, and use the weak topology for arbitrary $K$ rather than a
-   finite-union shortcut.
-5. `def-oriented-simplicial-subdivision-chain-map` — sum the consistently
-   oriented top simplices of each subdivided simplex.
-6. `thm-simplicial-subdivision-is-a-chain-map-and-homology-isomorphism` —
-   cancel interior faces, construct the last-vertex simplicial approximation
-   after a chosen vertex order, and prove the two composites chain homotopic
-   to the identity; record the finite ordering choice.
-7. `lem-mesh-of-iterated-simplicial-barycentric-subdivision-tends-to-zero` —
-   for a finite Euclidean realization, prove the factor $n/(n+1)$ on each
-   positive-dimensional simplex.  This item must not cite the similarly named
-   singular-chain lemma as a definition of $\operatorname{sd}K$.
-8. `def-open-and-closed-stars-in-a-subdivision` — distinguish vertex stars in
-   the subdivided complex from the star/closure/link notation of AT-1.
-9. `lem-the-open-star-criterion-produces-a-simplicial-map` — subordinate
-   vertex-star choices span target simplices, including repeated image
-   vertices.
-10. `thm-relative-simplicial-approximation-after-subdivision` — for finite
-    simplicial pairs, approximate a continuous map by a simplicial map after
-    sufficiently many source subdivisions; preserve a subcomplex on which the
-    map is already simplicial after the compatible subdivision.  Print the
-    homotopy-of-pairs conclusion and the finite Lebesgue-number hypothesis.
-11. `lem-compact-subsets-of-an-arbitrary-simplicial-realization-meet-finitely-many-open-simplices`
-    — prove the weak-topology/closure-finite argument directly, hence compact
-    singular chains lie in a finite subcomplex.  No local-finiteness hypothesis
-    is allowed.
-12. `lem-two-finite-linear-subdivisions-have-a-common-simplicial-refinement`
-    — triangulate intersection cells compatibly in increasing face dimension;
-    this is the choice-independence input for continuous polyhedral maps.
+The synchronized inventory has 25 A items and 6 B items. These statements,
+proof routes and explicit dependencies match the reviewed batch-7 manifest;
+no prerequisite is removed to recover the former smaller inventory.
+
+1. `def-face-poset-and-order-complex` — The face poset consists of nonempty faces ordered by inclusion. For a poset P, its order complex has vertices P and finite totally ordered subsets as faces, including the empty face.
+
+   Proof: Check closure under subsets; distinguish the empty poset from a poset with a least element.
+
+   Dependencies: `def-abstract-simplicial-complex`, `def-partial-order`.
+
+2. `def-barycentric-subdivision-of-an-abstract-simplicial-complex` — sd K is the order complex of the nonempty face poset of K; sd of a subcomplex is a subcomplex.
+
+   Proof: Singleton faces become vertices; no vertex is assigned to the empty face.
+
+   Dependencies: `def-face-poset-and-order-complex`.
+
+3. `def-canonical-barycentric-realization-map` — b_K sends vertex sigma to |sigma|^{-1} times the sum of its vertices, and extends affinely on chains.
+
+   Proof: Every chain lies in its maximal face, so the affine extension lies in |K|; empty realizations give the empty map.
+
+   Dependencies: `def-barycentric-subdivision-of-an-abstract-simplicial-complex`, `def-geometric-realization-of-an-abstract-simplicial-complex`.
+
+4. `lem-finite-simplicial-weak-topology-agrees-with-euclidean-topology` — For finite K, the weak topology is the Euclidean subspace topology in R^{V(K)}; in particular it is compact metric and Hausdorff. Every finite subcomplex P of arbitrary K embeds as a closed subspace |P| of |K|, with this same topology.
+
+   Proof: A weakly closed subset is the finite union of its closed intersections with the compact Euclidean simplices, each closed in the ambient space. The converse follows by restriction. The published finite-realization proposition now contains this argument under the owner's 2026-09-08 early-repair authorization; Terra accepted it and independent audit closure is pending. For the embedding clause, a closed subset of |P| is a finite union of closed subsets of its simplices; each has closed intersection with every simplex of K. Conversely every ambient closed set restricts to a closed set on |P|.
+
+   Dependencies: `def-geometric-realization-of-an-abstract-simplicial-complex`, `thm-heine-borel-rn`.
+
+5. `lem-barycentric-face-chains-triangulate-a-geometric-simplex` — The barycenters of each strict face chain are affinely independent, and their simplices triangulate the original simplex, with precisely common-chain-face intersections.
+
+   Proof: Induct over dimension: triangulate the boundary compatibly and cone from the interior barycenter. Every ray from the barycenter meets the boundary once; this gives coverage and intersections. Alternatively order coordinate levels and recover positive weights uniquely; ties omit zero-weight vertices.
+
+   Dependencies: `def-canonical-barycentric-realization-map`, `lem-barycentric-coordinates-are-unique`, `lem-finite-simplicial-weak-topology-agrees-with-euclidean-topology`.
+
+6. `thm-barycentric-subdivision-realizes-homeomorphically` — For every abstract K with weak realization topology, b_K:|sd K| -> |K| is a homeomorphism, compatible with all subcomplex inclusions.
+
+   Proof: The finite-simplex homeomorphisms agree on common faces. Continuity of b_K and its inverse follows by restricting to each original simplex and each subdivided simplex, using weak topology. Never invoke a global finite-union argument for infinite K.
+
+   Dependencies: `lem-barycentric-face-chains-triangulate-a-geometric-simplex`, `def-geometric-realization-of-an-abstract-simplicial-complex`.
+
+7. `def-open-and-closed-stars-in-a-subdivision` — The open vertex star consists of points with positive coordinate at that vertex; the closed star is the subcomplex of faces of simplices containing it. Apply this separately to K and sd K.
+
+   Proof: The open star is weakly open by restriction to each simplex; identify its closure simplexwise. A collection only of cofaces is not itself a subcomplex.
+
+   Dependencies: `def-barycentric-subdivision-of-an-abstract-simplicial-complex`, `def-geometric-realization-of-an-abstract-simplicial-complex`.
+
+8. `lem-compact-subsets-of-an-arbitrary-simplicial-realization-meet-finitely-many-open-simplices` — Assuming the Axiom of Countable Choice, every compact subset of |K| meets finitely many open simplices and is contained in a finite subcomplex, with no local-finiteness assumption. In particular a finite family of continuous maps from compact simplices has image in one finite subcomplex.
+
+   Proof: If infinitely many interiors meet C, choose countably many distinct interiors and one point from each. Every subset of the chosen set meets every closed simplex finitely and is therefore weakly closed. The chosen set is a closed discrete compact space, a contradiction. Add finitely many faces. This selection uses countable choice available in ZFC; do not claim a choice-free proof.
+
+   Dependencies: `def-geometric-realization-of-an-abstract-simplicial-complex`, `thm-closed-subspace-of-a-compact-space-is-compact`, `def-countable-choice`.
+
+9. `lem-an-augmented-simplicial-cone-has-an-explicit-chain-contraction` — Here K is a cone with apex a precisely when sigma union {a} is a face for every face sigma of K. If K is a simplicial cone with specified apex a, its augmented integral complex contracts by h[v0,...,vn]=[a,v0,...,vn], with repeated vertices interpreted as zero and h[-1](1)=[a].
+
+   Proof: Repeat the alternating-boundary computation for a cone, not merely a full simplex; d h+h d=id, including degree -1. In particular sd of a full simplex is a cone with apex its maximal face.
+
+   Dependencies: `def-simplicial-chain-groups-and-boundary`, `def-augmentation-and-reduced-simplicial-homology`, `def-contractible-complex`, `def-abstract-simplicial-complex`.
+
+10. `lem-simplicial-chain-maps-carried-by-specified-cones-are-chain-homotopic` — Let each simplex sigma of K be assigned a cone subcomplex Phi(sigma) of L with specified contraction, nested under faces. Any two augmentation-preserving chain maps carried by Phi are joined by a carried chain homotopy.
+
+   Proof: Set h[-1]=0; recursively h(sigma)=c_Phi(sigma)(f(sigma)-g(sigma)-h(d sigma)). The bracket is a cycle by the induction identity and d squared=0; apply the specified contraction. No unproved general acyclic-carrier theorem is invoked.
+
+   Dependencies: `lem-an-augmented-simplicial-cone-has-an-explicit-chain-contraction`, `def-chain-homotopy`.
+
+11. `def-oriented-simplicial-subdivision-chain-map` — The graded subdivision operator S:C_n(K;Z)->C_n(sd K;Z) sends each oriented simplex to its consistently oriented top-dimensional subdivided simplices, S_0[v]=[{v}].
+
+   Proof: Define orientation via the affine realization and give the equivalent recursive formula S(sigma)=c_sigma S(d sigma) on augmented chains with S[-1]=id. Name it a graded operator until boundary compatibility is proved.
+
+   Dependencies: `def-barycentric-subdivision-of-an-abstract-simplicial-complex`, `def-simplicial-chain-groups-and-boundary`, `lem-barycentric-face-chains-triangulate-a-geometric-simplex`.
+
+12. `lem-oriented-simplicial-subdivision-commutes-with-boundary` — dS=Sd on the augmented complex, hence also on ordinary chains.
+
+   Proof: Cone recursion gives d c S d=S d-c d S d=S d by induction. Explain that this is precisely cancellation of internal codimension-one faces; check dimensions zero and one.
+
+   Dependencies: `def-oriented-simplicial-subdivision-chain-map`, `lem-an-augmented-simplicial-cone-has-an-explicit-chain-contraction`, `thm-the-simplicial-boundary-squares-to-zero`.
+
+13. `lem-last-vertex-map-is-carried-by-original-simplices` — For a specified total order on V(K), lambda:sd K->K sends a nonempty face to its greatest vertex. It is simplicial and carried by original faces.
+
+   Proof: Nested faces have selected vertices in the largest face. For finite K the order is a finite choice; for arbitrary K existence of such an order is supplied by ZFC, or retain the order as data.
+
+   Dependencies: `def-barycentric-subdivision-of-an-abstract-simplicial-complex`, `def-simplicial-map-and-its-geometric-realization`, `lem-induced-simplicial-chain-maps-commute-with-boundaries`.
+
+14. `thm-simplicial-subdivision-is-a-chain-map-and-homology-isomorphism` — For an abstract simplicial complex equipped with a chosen total order on its vertices, S is a chain-homotopy equivalence on integral ordinary and augmented chains. Its inverse up to homotopy is lambda_#. Consequently subdivision preserves ordinary homology and the local augmented reduced convention, including degree -1.
+
+   Proof: For lambda S and id use carrier the full original simplex. For S lambda and id on a face chain use carrier sd of its largest face, a cone; deleting the maximum only shrinks the carrier. Apply carried induction to both composites. The inverse homology map is independent of chosen order. Tensoring these explicit identities gives any abelian coefficients only after the coefficient complex is explicitly defined.
+
+   Dependencies: `lem-oriented-simplicial-subdivision-commutes-with-boundary`, `lem-last-vertex-map-is-carried-by-original-simplices`, `lem-simplicial-chain-maps-carried-by-specified-cones-are-chain-homotopic`, `thm-chain-homotopic-maps-induce-the-same-map-on-homology`.
+
+15. `lem-mesh-of-iterated-simplicial-barycentric-subdivision-tends-to-zero` — If finite Euclidean K has dimension n>=1, simplex mesh(sd^r K)<= (n/(n+1))^r mesh(K); every vertex star has diameter at most twice simplex mesh. Empty and zero-dimensional complexes have mesh zero.
+
+   Proof: For nested nonempty faces F<G, b_G=(|F|/|G|)b_F+(1-|F|/|G|)b_{G\F}; bound their distance by n/(n+1) times the diameter of the original simplex. Diameter of a convex hull equals the maximum vertex distance. Distinguish simplex mesh from Maunder star-cover mesh.
+
+   Dependencies: `lem-barycentric-face-chains-triangulate-a-geometric-simplex`, `lem-finite-simplicial-weak-topology-agrees-with-euclidean-topology`, `def-metric-bounded-diameter`.
+
+16. `lem-the-open-star-criterion-produces-a-simplicial-map` — For finite K, continuous f:|K|->|L| and vertices g(v) with f(st(v)) subset st(g(v)), g extends simplicially. f(x) and |g|(x) lie in the carrier simplex of f(x); straight-line interpolation is continuous, fixed where they agree, and respects every given subcomplex pair mapped by f.
+
+   Proof: The empty source is immediate. Fix a finite vertex enumeration of K and enumerate its rational barycentric grids by increasing denominator and lexicographic order, with repetitions; rounding coordinates in each simplex proves this sequence d_j dense. The image C=f(|K|) is compact: pull back any open cover and use compactness of |K|. If the union of supports of f(d_j) were infinite, recursively take the least j whose image support is not contained in the finite union of previously selected supports. The resulting distinct points q_n meet each closed target simplex tau in at most |vertices(tau)| points: each such occurrence adds a fresh vertex of tau. Every subset of {q_n} therefore meets every simplex in a finite closed set, so is weakly closed. Thus {q_n} is closed in C and discrete, contradicting compactness via its singleton cover. The union W of supports is consequently finite. The subcomplex P of all target simplices with vertices in W is finite and weakly closed (its intersection with each simplex is a finite union of faces). The closed set f^{-1}(|P|) contains the dense sequence, hence equals |K|. No Countable Choice is used: all infinitely repeated selections were least natural indices. For each source simplex use its barycenter in the star criterion to show the images of its vertices span a target face. For arbitrary x, each positive-coordinate vertex v has g(v) in the carrier of f(x), so |g|(x) and f(x) lie in that same simplex of P. Finite weak and Euclidean subspace topologies agree; H(x,t)=(1-t)f(x)+t|g|(x) is continuous into |P| and then |L|. It fixes every point where the maps agree and remains in each specified target subcomplex on the corresponding source subcomplex.
+
+   Dependencies: `def-open-and-closed-stars-in-a-subdivision`, `def-simplicial-map-and-its-geometric-realization`, `prop-a-finite-simplicial-complex-has-compact-hausdorff-realization`, `thm-closed-subspace-of-a-compact-space-is-compact`, `lem-finite-simplicial-weak-topology-agrees-with-euclidean-topology`, `def-homotopy-relative-and-path-homotopy`.
+
+17. `thm-finite-simplicial-approximation-for-maps-of-pairs` — For finite K, A subset K and B subset L, every continuous f:(|K|,|A|)->(|L|,|B|) has a simplicial approximation g:(sd^r K,sd^r A)->(L,B) for all sufficiently large r, homotopic as a map of pairs to f b_K^r.
+
+   Proof: Pull back target open stars; choose 2 mesh < the Lebesgue number. Finite vertex choices give g. The carrier argument keeps A in B throughout. This does not fix a positive-dimensional simplicial restriction pointwise.
+
+   Dependencies: `thm-barycentric-subdivision-realizes-homeomorphically`, `lem-mesh-of-iterated-simplicial-barycentric-subdivision-tends-to-zero`, `lem-the-open-star-criterion-produces-a-simplicial-map`, `thm-lebesgue-number-lemma`.
+
+18. `def-relative-derived-subdivision-of-a-finite-simplicial-pair` — For finite A subset K define D_A K by leaving A unchanged and, in increasing dimension, coning each subdivided boundary of a simplex outside A from its barycenter. Iterate with A fixed.
+
+   Proof: Prove this is a linear subdivision by the same radial cone argument; D_empty K=sd K. Each original subcomplex receives a compatible subdivision.
+
+   Dependencies: `lem-barycentric-face-chains-triangulate-a-geometric-simplex`, `def-barycentric-subdivision-of-an-abstract-simplicial-complex`.
+
+19. `lem-relative-derived-subdivision-makes-the-fixed-subcomplex-full` — After one relative derived subdivision A is full: each simplex meets |A| in a face or the empty set; later relative derived subdivisions preserve this.
+
+   Proof: List simplices as a face of A followed by a strict chain of larger faces outside A. The vertices lying in A span exactly that face. Include A empty and A=K.
+
+   Dependencies: `def-relative-derived-subdivision-of-a-finite-simplicial-pair`.
+
+20. `lem-relative-subdivision-neighbourhood-adjustment` — For finite A subset K, a further subdivision near A admits a piecewise affine h:|K|->|K| homotopic to id rel |A|, sending a neighbourhood of A into A. Off that neighbourhood the remaining vertex stars shrink under sufficiently many relative subdivisions; near A their h-images are subordinate to vertex stars of A.
+
+   Proof: Use Maunder 2.5.20 construction K+ between D_A K and D_A^2 K: move barycenters of mixed simplices to an A-vertex in their A-face, leaving A and the supplement fixed. Fullness makes this simplicial and keeps the homotopy in original faces. Track inherited stars under further subdivisions using vertex selection. Proposition 2.5.19 provides shrinkage only away from the fixed region.
+
+   Dependencies: `lem-relative-derived-subdivision-makes-the-fixed-subcomplex-full`, `lem-the-open-star-criterion-produces-a-simplicial-map`, `lem-mesh-of-iterated-simplicial-barycentric-subdivision-tends-to-zero`.
+
+21. `thm-relative-simplicial-approximation-after-subdivision` — Let K,L be finite complexes, A subset K, and f:|K|->|L| continuous with f|A simplicial. For some r there is g:D_A^r K->L with |g|=f on |A| and |g| homotopic to f rel |A|. Thus it is a homotopy of pairs (K,A)->(L,f(A)). A preassigned compatible linear subdivision on A can be extended before applying this assertion.
+
+   Proof: Approximate f h, not f itself. Away from A use shrinking stars and a finite Lebesgue number; near A use the neighbourhood adjustment and simplicial restriction. Set g(v)=f(v) on A, and concatenate the two homotopies. Extension of a subdivision on A is the same boundary-coning induction defining relative subdivision. Never promise an ordinary iterated barycentric source subdivision fixed on a nonconstant edge.
+
+   Dependencies: `lem-relative-subdivision-neighbourhood-adjustment`, `def-relative-derived-subdivision-of-a-finite-simplicial-pair`, `lem-the-open-star-criterion-produces-a-simplicial-map`, `thm-lebesgue-number-lemma`, `lem-finite-simplicial-weak-topology-agrees-with-euclidean-topology`.
+
+22. `def-finite-convex-cell-complex-and-linear-subdivision` — A finite convex cell complex in Euclidean space consists of compact convex polyhedral cells, includes their faces and the empty cell, and intersections are common faces. A linear subdivision has the same underlying set and every new simplex is contained in an old cell.
+
+   Proof: Use finite systems of affine inequalities for the intersection cells; explicitly define faces by active supporting equalities. Do not confuse these finite convex cells with arbitrary CW cells.
+
+   Dependencies: `def-geometric-realization-of-an-abstract-simplicial-complex`.
+
+23. `lem-intersections-of-finite-linear-complexes-form-a-convex-cell-complex` — If two finite linear simplicial complexes have the same underlying polyhedron, their nonempty intersections, with all faces, form a finite convex cell complex refining both. Each cell has finitely many faces and a relative interior point; its proper faces cover its boundary.
+
+   Proof: Write each simplex by barycentric nonnegativity in its affine hull; combine finite inequalities. Active constraints define the finite face lattice. A point with all non-identically-zero inequalities strict is obtained by averaging finite witnesses. Use maximal line segments to prove boundary coverage. Check that intersections of intersection cells are faces of each by adding active constraints.
+
+   Dependencies: `def-finite-convex-cell-complex-and-linear-subdivision`.
+
+24. `lem-finite-convex-cell-complexes-admit-compatible-triangulations` — Any finite convex cell complex has a simplicial triangulation obtained by choosing one relative interior point in each nonempty cell and coning its already triangulated boundary in increasing dimension.
+
+   Proof: Dimension zero starts the induction. The ray from the chosen point to any other point meets the boundary exactly once; cones cover and have common-face intersections. Use common boundary triangulations for adjacent cells.
+
+   Dependencies: `lem-intersections-of-finite-linear-complexes-form-a-convex-cell-complex`, `lem-barycentric-face-chains-triangulate-a-geometric-simplex`.
+
+25. `lem-two-finite-linear-subdivisions-have-a-common-simplicial-refinement` — Two finite linear subdivisions of a fixed finite Euclidean simplicial complex have a common finite simplicial refinement.
+
+   Proof: Intersect the two finite families of cells and triangulate that intersection complex compatibly. The underlying set is unchanged and containment in both original triangulations is immediate. This makes no assertion about arbitrary homeomorphic triangulations or common stellar subdivisions.
+
+   Dependencies: `lem-finite-convex-cell-complexes-admit-compatible-triangulations`, `lem-intersections-of-finite-linear-complexes-form-a-convex-cell-complex`.
 
 ### B page — `simplicial-subdivision-and-simplicial-approximation-examples`
 
-- `ex-barycentric-subdivision-of-an-edge-and-triangle`;
-- `ex-the-subdivision-chain-of-an-oriented-two-simplex`;
-- `ex-a-relative-simplicial-approximation-fixed-on-the-endpoints`;
-- `ex-a-compact-set-in-an-infinite-non-locally-finite-realization-still-meets-finitely-many-cells`;
-- `cex-a-continuous-map-need-not-be-simplicial-before-subdivision`.
+1. `ex-barycentric-subdivision-of-an-edge-and-triangle` — An edge subdivides into two edges; a triangle into six triangles indexed by maximal nonempty face chains.
+
+   Proof: List chains vertex<edge and vertex<edge<triangle. Check face and empty-complex counts.
+
+   Dependencies: `def-barycentric-subdivision-of-an-abstract-simplicial-complex`, `thm-barycentric-subdivision-realizes-homeomorphically`.
+
+2. `ex-the-subdivision-chain-of-an-oriented-two-simplex` — Compute S[a,b,c] and its boundary explicitly, preserving orientation.
+
+   Proof: Use S[a,b]=[{a},{a,b}]-[{b},{a,b}] and S[a,b,c]=c_{abc}(S[b,c]-S[a,c]+S[a,b]); expand six terms and show the three interior radial edges cancel.
+
+   Dependencies: `def-oriented-simplicial-subdivision-chain-map`, `lem-oriented-simplicial-subdivision-commutes-with-boundary`.
+
+3. `ex-a-relative-simplicial-approximation-fixed-on-the-endpoints` — For f:[0,1]->[0,1], f(x)=x^2, a simplicial map after midpoint subdivision can be homotopic to f rel both endpoints.
+
+   Proof: Send vertices 0,1/2,1 to 0,0,1. The affine realization g stays in the target edge; (1-t)x^2+t g(x) fixes 0 and 1.
+
+   Dependencies: `thm-relative-simplicial-approximation-after-subdivision`, `lem-the-open-star-criterion-produces-a-simplicial-map`.
+
+4. `ex-a-compact-set-in-an-infinite-non-locally-finite-realization-still-meets-finitely-many-cells` — In the weak realization of countably many edges sharing a vertex, any compact subset lies in finitely many edges, although the common vertex is not locally finite.
+
+   Proof: Use compact-support lemma. Choosing one noncentral point on every edge gives a closed discrete noncompact set, irrespective of their metric distances in an auxiliary drawing.
+
+   Dependencies: `lem-compact-subsets-of-an-arbitrary-simplicial-realization-meet-finitely-many-open-simplices`, `def-open-and-closed-stars-in-a-subdivision`.
+
+5. `cex-a-continuous-map-need-not-be-simplicial-before-subdivision` — A continuous self-map of an edge can fail to be simplicial in the original triangulation.
+
+   Proof: f(x)=x^2 fixes both vertices, whereas the unique simplicial self-map fixing them is x. At x=1/2 the values differ. This is a failure of exact simpliciality, not a claim that f has no simplicial approximation.
+
+   Dependencies: `lem-the-open-star-criterion-produces-a-simplicial-map`, `thm-finite-simplicial-approximation-for-maps-of-pairs`.
+
+6. `cex-ordinary-barycentric-subdivision-cannot-fix-a-nonconstant-simplicial-edge` — If the fixed subcomplex contains an edge mapped identically to an unsubdivided target edge, a simplicial map from sd^r K to that target cannot agree pointwise there for r>=1.
+
+   Proof: Its source midpoint is a vertex and would have to map to the target midpoint, which is not a vertex. Relative derived subdivision avoids this obstruction.
+
+   Dependencies: `def-barycentric-subdivision-of-an-abstract-simplicial-complex`, `thm-relative-simplicial-approximation-after-subdivision`.
 
 Every B item depends only on A-page items and the B page requires only its A
 companion.  Full treatments: Hatcher §2.C, pp. 177--184, together with the
@@ -2113,7 +2265,8 @@ ten published AT pages and all published items are read-only during this pass.
 | AT-3 A | `thm-simplicial-and-singular-homology-agree-for-simplicial-complexes` asserts the relative-skeletal direct-sum comparison and arbitrary-complex compact support without their premises. | Add direct dependencies on AT-24's common-subdivision/compact-support results and the published pair LES/naturality, excision, good-pair quotient, disjoint-union splitting, and sphere-homology results; spell out the finite-subcomplex passage. Ordinary comparison remains valid, including the empty complex; do not conflate the two reduced conventions. |
 | AT-4 A | `thm-relative-homology-of-consecutive-cw-skeleta` calls $H_n(X^n,X^{n-1};G)\cong\bigoplus G$ natural without orientations. | State the natural result with each cell's orientation module; obtain copies of $G$ only after choosing orientations, and record the sign change. |
 | AT-4 A | `prop-relative-cw-inclusions-are-cofibrations` assembles infinitely many cellwise extensions using “weak topology” without proving the needed product assertion. | Add the explicit disk-cylinder retraction and a closure-finite/product-with-$I$ weak-topology lemma, or cite a published relative-CW NDR/HEP theorem. Record ordinary choice over the cell set. |
-| AT-5 A | `lem-finite-simplicial-approximation-for-homology-comparison` uses $\operatorname{sd}^rK$, mesh, closed stars and a relative simplicial approximation theorem, but points only to AT-3's singular-chain subdivision lemma. | Depend directly on AT-24 and use its abstract barycentric subdivision, star criterion, mesh and relative theorem. |
+| AT-5 A | `lem-finite-simplicial-approximation-for-homology-comparison` uses abstract subdivision and stars but cites the singular-chain mesh lemma. | Use AT-24's abstract subdivision, finite realization, mesh and open-star interfaces. Retain a local constrained-star proof for maps of pairs. The relative theorem requiring an already-simplicial restriction is not a direct substitute. |
+| AT-5 A | `lem-subdivision-compatible-continuous-polyhedral-homology-comparison`, Step 2.1, uses common refinement without declaring its supplier. | After Phase 2 publishes AT-24, cite `lem-two-finite-linear-subdivisions-have-a-common-simplicial-refinement`; keep the scope to finite linear subdivisions. Repair its approximation/comparison suppliers separately. |
 | AT-5 A | `def-local-degree-at-an-isolated-preimage` uses cyclic local homology groups and neighborhood independence before `lem-local-sphere-orientations-and-finite-puncture-excision`; `def-mayer-vietoris-connecting-class` is recorded as justified by its later independence lemma. | Move the local-homology lemma before local degree.  For Mayer--Vietoris, prove lift/representative independence before introducing the named homomorphism (or remove only the redundant later edge after the definition itself contains the complete proof). |
 | AT-1/AT-4/AT-5 A | Compact-support and cellwise proofs hide choices: one cell from each of an infinite family, one vertex in every component, or extensions for every cell. | Restrict choices to the finite support actually used whenever possible; otherwise state the ordinary-choice use.  No dependent-choice claim may be inferred from “choose successively.” |
 
@@ -2129,8 +2282,8 @@ companions remain leaves; their examples expose no additional supplier gap.
    Eilenberg--Zilber comparison, external cochain product, finite-free homology
    chain models, product/dimension additivity, and cellular projective/lens
    inputs.  The topological Künneth exact-sequence row depends on HA
-   `thm-pid-kunneth-exactness-for-free-chain-complexes`; its nonnatural
-   splitting row depends on HA `thm-pid-kunneth-short-exact-sequence-splits-nonnaturally`.
+   `thm-pid-kunneth-exactness-from-cycle-boundary-presentations`; its nonnatural
+   splitting row depends on HA `thm-pid-kunneth-splitting-from-cycle-boundary-presentations`.
 2. **AT-9:** replace the informal “higher cup-$i$ products” premise by an
    explicit $C_2$ free resolution and Steenrod diagonal, the acyclic-models
    existence/uniqueness comparison, the exact cup-$i$ coboundary identity,
@@ -2241,6 +2394,9 @@ Phase 2 does not silently repair Phase 3 material.
   `homology-axioms-degree-and-classical-applications` (AT-5 A).
 - `thm-simplicial-and-singular-homology-agree-for-simplicial-complexes` — home
   `relative-homology-excision-and-mayer-vietoris` (AT-3 A).
+- `lem-subdivision-compatible-continuous-polyhedral-homology-comparison` —
+  home `homology-axioms-degree-and-classical-applications` (AT-5 A),
+  consuming the common finite linear refinement lemma.
 
 **AT-24, transitively blocked published consumers (60).**
 

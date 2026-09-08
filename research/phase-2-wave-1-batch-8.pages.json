@@ -1,0 +1,988 @@
+[
+  {
+    "order": 366.0403,
+    "id": "classical-affine-varieties-coordinate-rings-morphisms-and-rational-maps-interface",
+    "kind": "A",
+    "category": "algebraic-geometry",
+    "title": "Classical Affine Varieties: Coordinate Rings, Morphisms, and Rational Maps",
+    "companion": "classical-affine-varieties-coordinate-rings-morphisms-and-rational-maps-interface-examples",
+    "requires": [
+      "ideals-and-quotient-rings",
+      "the-field-of-fractions-and-localisation",
+      "prime-spectra-and-radicals",
+      "noether-normalisation-and-nullstellensatz"
+    ],
+    "items": [
+      {
+        "id": "def-classical-affine-algebraic-set-with-empty-boundaries",
+        "kind": "definition",
+        "title": "Classical affine algebraic sets, including the empty boundaries",
+        "deps": [
+          "def-multivariate-polynomial-ring-by-iteration",
+          "def-polynomial-evaluation-and-root",
+          "def-algebraically-closed-field"
+        ],
+        "statement": "Fix an algebraically closed field $k$ and $n\\ge0$. Write $R=k[x_1,\\ldots,x_n]$ for the iterated polynomial ring of [[def-multivariate-polynomial-ring-by-iteration]]. Algebraic closure has the meaning of [[def-algebraically-closed-field]]. For any $S\\subseteq R$, define $$V(S)=\\{a\\in k^n:\\text{for every }f\\in S,\\ f(a)=0\\}.$$ An affine algebraic set is any such subset, including the empty set. Here $k^0=\\{()\\}$ and $R=k$ when $n=0$. With the abbreviations $V(0):=V(\\{0\\})$ and $V(1):=V(\\{1\\})$, one has $V(\\varnothing)=V(0)=k^n$ and $V(1)=\\varnothing$: an empty list of equations imposes no condition, whereas $1(a)=1\\ne0$. Evaluation, as in [[def-polynomial-evaluation-and-root]], is performed successively in the finitely many variables.",
+        "proof_plan": "Evaluate polynomials at finite tuples; state boundary conventions explicitly.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "design_row": 1
+      },
+      {
+        "id": "lem-classical-zero-locus-ideal-radical-invariance",
+        "kind": "lemma",
+        "title": "A classical zero locus depends only on the generated ideal and its radical",
+        "deps": [
+          "def-classical-affine-algebraic-set-with-empty-boundaries",
+          "thm-generated-ideal-description-in-a-commutative-ring",
+          "def-radical-of-an-ideal"
+        ],
+        "statement": "For $S\\subseteq R=k[x_1,\\ldots,x_n]$, one has $V(S)=V((S))=V(\\sqrt{(S)})$.",
+        "proof_plan": "Ideal combinations vanish if generators do; a field has no nonzero nilpotents.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 2,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "thm-classical-affine-zero-loci-form-zariski-closed-sets",
+        "kind": "theorem",
+        "title": "Classical affine zero loci form the Zariski closed sets",
+        "deps": [
+          "def-classical-affine-algebraic-set-with-empty-boundaries",
+          "lem-classical-zero-locus-ideal-radical-invariance",
+          "def-sum-and-product-of-ideals"
+        ],
+        "statement": "Affine zero loci are the closed sets of a topology on $k^n$: arbitrary intersections and finite unions are zero loci. In particular $V(I)\\cup V(J)=V(IJ)$. Every algebraic subset $X$ carries the induced topology, whose closed sets are $X\\cap V(S)$.",
+        "proof_plan": "Intersection corresponds to the union of equation sets. Outside both V(I),V(J), select one nonvanishing equation from each and multiply.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 3,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "def-classical-vanishing-ideal",
+        "kind": "definition",
+        "title": "The classical vanishing ideal",
+        "deps": [
+          "def-classical-affine-algebraic-set-with-empty-boundaries",
+          "lem-ideal-criterion-and-intersections"
+        ],
+        "statement": "For any subset $E\\subseteq k^n$, define $$I(E)=\\{f\\in k[x_1,\\ldots,x_n]:f(a)=0\\text{ for every }a\\in E\\}.$$ This is the vanishing ideal. Indeed $0\\in I(E)$, $(f-g)(a)=0-0=0$ for $f,g\\in I(E)$, and $(rf)(a)=r(a)0=0$ for any polynomial $r$. These verify [[lem-ideal-criterion-and-intersections]]. Also $f^m\\in I(E)$, $m\\ge1$, implies $f(a)^m=0$ and hence $f(a)=0$ for every $a\\in E$; thus $I(E)$ is radical. Vacuous quantification gives $I(\\varnothing)=R$.",
+        "proof_plan": "Evaluate sums and polynomial multiples; if a power vanishes then its base vanishes.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "design_row": 4
+      },
+      {
+        "id": "lem-classical-zero-locus-vanishing-ideal-galois-connection",
+        "kind": "lemma",
+        "title": "Zero loci and vanishing ideals form a Galois connection",
+        "deps": [
+          "def-classical-affine-algebraic-set-with-empty-boundaries",
+          "lem-classical-zero-locus-ideal-radical-invariance",
+          "def-classical-vanishing-ideal",
+          "thm-classical-affine-zero-loci-form-zariski-closed-sets"
+        ],
+        "statement": "For $E\\subseteq k^n$ and an ideal $J\\subseteq R$, $E\\subseteq V(J)$ iff $J\\subseteq I(E)$. Both $I$ and $V$ reverse inclusion. Moreover $V(I(E))=\\overline E$ in the Zariski topology, and $V(I(V(J)))=V(J)$.",
+        "proof_plan": "Unpack universal quantifiers. Every closed set containing E contains V(I(E)); apply this to closed E.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 5,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "thm-classical-affine-nullstellensatz-correspondence",
+        "kind": "theorem",
+        "title": "Classical affine algebraic sets correspond to radical ideals, and irreducible sets to prime ideals",
+        "deps": [
+          "thm-classical-affine-zero-loci-form-zariski-closed-sets",
+          "def-classical-vanishing-ideal",
+          "lem-classical-zero-locus-vanishing-ideal-galois-connection",
+          "cor-strong-nullstellensatz-two-inclusions",
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form",
+          "def-prime-and-maximal-ideals",
+          "thm-correspondence-theorem-ideals",
+          "lem-radical-commutes-with-quotient-correspondence",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Nullstellensatz route. For every ideal $J\\subseteq R=k[x_1,\\ldots,x_n]$, $I(V(J))=\\sqrt J$. Together with $V(I(X))=X$ for algebraic $X$, these are inverse inclusion-reversing bijections between radical ideals and algebraic sets. Nonempty irreducible algebraic sets correspond precisely to proper prime ideals, and points to maximal ideals. The empty set corresponds to $R$. For $A=R/I(X)$ the same correspondence identifies radical ideals of $A$ with closed subsets of $X$; in particular $I_X(V_X(H))=\\sqrt H$.",
+        "proof_plan": "Apply the exact two strong-Nullstellensatz inclusions. If fg vanishes, split X using V(f),V(g); conversely a reducible closed union gives two functions outside I(X) whose product lies in it. Use weak Nullstellensatz for maximal ideals. Its published Zariski suppliers now explicitly embed the denominator localization, apply the integral-elements subring theorem to A[a_i]=K, and prove the specialization onto k[u][1/g] surjective before the g+1 nonunit contradiction; use these repaired interfaces, not the superseded integrality shortcut. Prove the relative version for ideals of k[X] by pulling them back along the quotient map; this supplies later localization arguments in k[X], not only in the polynomial ring.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 6,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "def-classical-affine-variety-interface",
+        "kind": "definition",
+        "title": "A classical affine variety",
+        "deps": [
+          "thm-classical-affine-zero-loci-form-zariski-closed-sets",
+          "thm-classical-affine-nullstellensatz-correspondence"
+        ],
+        "statement": "Over an algebraically closed field $k$, a classical affine variety is a nonempty affine algebraic set $X\\subseteq k^n$ which is irreducible in its Zariski topology: if $X=C\\cup D$ with $C,D$ closed in $X$, then $C=X$ or $D=X$. The empty algebraic set is not a variety; a singleton, including $k^0$, is irreducible. This convention reserves “algebraic set” for the possibly reducible or empty case.",
+        "proof_plan": "State the nonempty convention before using the word variety.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "design_row": 7
+      },
+      {
+        "id": "lem-classical-irreducible-space-open-intersection-criterion",
+        "kind": "lemma",
+        "title": "Irreducibility is equivalent to the nonempty-open intersection criterion",
+        "deps": [
+          "def-classical-affine-variety-interface"
+        ],
+        "statement": "For a nonempty topological space $X$, irreducibility is equivalent to the intersection of every two nonempty open subsets being nonempty. Every nonempty open subspace of an irreducible space is itself irreducible and dense. This applies to the classical Zariski spaces.",
+        "proof_plan": "Take complements of a union of two proper closed subsets. Relative nonempty opens of an open subspace are open in the original space.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 8,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "lem-classical-affine-variety-nonempty-opens-dense",
+        "kind": "lemma",
+        "title": "Every nonempty open of a classical affine variety is dense",
+        "deps": [
+          "lem-classical-irreducible-space-open-intersection-criterion"
+        ],
+        "statement": "Every nonempty open subset of an irreducible classical affine variety $X$ is dense. Every finite intersection of nonempty open subsets of $X$ is nonempty and dense; the intersection of the empty family is $X$.",
+        "proof_plan": "If the closure of U were proper its nonempty open complement would miss U; apply the intersection criterion inductively.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 9,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "def-classical-affine-coordinate-ring",
+        "kind": "definition",
+        "title": "The coordinate ring of a classical affine algebraic set",
+        "deps": [
+          "def-classical-vanishing-ideal",
+          "def-quotient-ring",
+          "thm-quotient-ring-laws"
+        ],
+        "statement": "For any affine algebraic set $X\\subseteq k^n$, its coordinate ring is $$k[X]=k[x_1,\\ldots,x_n]/I(X).$$ Write $\\bar x_i$ for the coordinate classes. The quotient operations and identity are those of [[def-quotient-ring]] and [[thm-quotient-ring-laws]]. The structure map sends $c\\in k$ to its constant class; all $k$-algebras and maps are unital, with the zero algebra allowed. Thus $k[\\varnothing]=0$, where $0=1$. Since $I(X)$ is radical by [[def-classical-vanishing-ideal]], $k[X]$ is reduced: $\\bar f^{\\,m}=0$ implies $f^m\\in I(X)$ and hence $f\\in I(X)$, so $\\bar f=0$. The finite coordinate classes generate it as a $k$-algebra.",
+        "proof_plan": "Use quotient ring laws; evaluation will be identified in row 12.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "design_row": 10
+      },
+      {
+        "id": "thm-classical-affine-variety-prime-coordinate-ring",
+        "kind": "theorem",
+        "title": "A classical affine variety has a domain coordinate ring, and conversely",
+        "deps": [
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "def-classical-affine-variety-interface",
+          "def-classical-affine-coordinate-ring",
+          "thm-quotient-is-domain-iff-ideal-prime",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Nullstellensatz route. For an affine algebraic set $X$, $X$ is a classical affine variety if and only if $k[X]$ is a nonzero integral domain.",
+        "proof_plan": "Combine proper-prime correspondence with quotient-domain equivalence; the zero ring is not a domain.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 11,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "thm-classical-polynomial-functions-equal-coordinate-ring",
+        "kind": "theorem",
+        "title": "Polynomial functions on an affine algebraic set are its coordinate ring",
+        "deps": [
+          "def-classical-affine-coordinate-ring",
+          "thm-first-isomorphism-theorem-rings",
+          "thm-universal-property-of-a-polynomial-ring"
+        ],
+        "statement": "Evaluation induces an isomorphism of $k$-algebras from $k[X]$ to the algebra of polynomial functions $X\\to k$, including $X=\\varnothing$.",
+        "proof_plan": "The evaluation homomorphism has kernel precisely I(X); its image is precisely polynomial functions. Apply the first isomorphism theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 12,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "def-classical-principal-open",
+        "kind": "definition",
+        "title": "A principal open subset of a classical affine variety",
+        "deps": [
+          "thm-classical-affine-zero-loci-form-zariski-closed-sets",
+          "def-classical-affine-coordinate-ring",
+          "thm-classical-polynomial-functions-equal-coordinate-ring"
+        ],
+        "statement": "For an affine algebraic set $X$ and $f\\in k[X]$, the principal open is $$D_X(f)=\\{x\\in X:f(x)\\ne0\\}.$$ Evaluation is independent of a polynomial representative by [[thm-classical-polynomial-functions-equal-coordinate-ring]]. The complement is the relatively closed zero locus of that representative. In particular $D_X(0)=\\varnothing$ and $D_X(1)=X$. The notation applies to reducible and empty algebraic sets as well as varieties.",
+        "proof_plan": "Use polynomial-function identification to make representatives irrelevant.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "design_row": 13
+      },
+      {
+        "id": "lem-classical-principal-opens-form-affine-basis",
+        "kind": "lemma",
+        "title": "Principal opens form a basis and multiply under intersection",
+        "deps": [
+          "thm-classical-affine-zero-loci-form-zariski-closed-sets",
+          "def-classical-principal-open"
+        ],
+        "statement": "The principal opens $D_X(f)$ form an open basis on every affine algebraic set $X$, and $D_X(f)\\cap D_X(g)=D_X(fg)$.",
+        "proof_plan": "The complement of a common zero locus is the union of the nonvanishing loci of its defining equations; multiplication gives the intersection formula.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 14,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "def-classical-regular-function-on-open-set",
+        "kind": "definition",
+        "title": "A regular function on an open subset of a classical affine variety",
+        "deps": [
+          "def-classical-affine-coordinate-ring",
+          "thm-classical-polynomial-functions-equal-coordinate-ring",
+          "lem-classical-principal-opens-form-affine-basis"
+        ],
+        "statement": "Let $U$ be open in an affine algebraic set $X$ and $A=k[X]$. A function $s:U\\to k$ is regular if for each $x\\in U$ there are an open neighbourhood $W\\subseteq U$ of $x$ and $g,h\\in A$ with $h(y)\\ne0$ for every $y\\in W$ such that $s(y)=g(y)/h(y)$ there. Write $\\mathcal O_X(U)$ for these functions. The quotient need only hold locally; no single fraction on all of $U$ is required. On the empty open the unique empty function is regular. Constants are regular by $c=c/1$.",
+        "proof_plan": "Define local quotients as actual functions, avoiding premature function fields.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "design_row": 19
+      },
+      {
+        "id": "lem-classical-regular-functions-locality-and-gluing",
+        "kind": "lemma",
+        "title": "Classical regular functions satisfy locality and unique gluing",
+        "deps": [
+          "def-classical-regular-function-on-open-set"
+        ],
+        "statement": "Regular functions on opens in an affine algebraic set form unital $k$-algebras, have restriction homomorphisms, and glue uniquely from every compatible open cover. Regularity can be checked on an open cover.",
+        "proof_plan": "Use common denominators for ring operations. Glue as set functions; each point inherits one local quotient presentation. Equality is pointwise.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 20,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "thm-classical-principal-open-coordinate-ring-localization",
+        "kind": "theorem",
+        "title": "Regular functions on a principal open are the principal localization",
+        "deps": [
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "thm-classical-polynomial-functions-equal-coordinate-ring",
+          "lem-classical-principal-opens-form-affine-basis",
+          "def-classical-regular-function-on-open-set",
+          "lem-classical-regular-functions-locality-and-gluing",
+          "def-principal-localisation",
+          "thm-universal-property-of-localisation",
+          "prop-localisation-zero-equality-and-kernel-criteria",
+          "thm-generated-ideal-description-in-a-commutative-ring",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Nullstellensatz route. For every affine algebraic set $X$, $A=k[X]$ and $f\\in A$, the map $$A_f\\longrightarrow\\mathcal O_X(D_X(f)),\\qquad a/f^r\\longmapsto(x\\mapsto a(x)/f(x)^r)$$ is an isomorphism of unital $k$-algebras. If $D_X(f)=\\varnothing$, then $f=0$ in the reduced ring $A$, and both sides are zero rings.",
+        "proof_plan": "Work for reduced A, avoiding an invalid cancellation in a reducible ring. For a regular section choose principal neighbourhoods D(a_i) on which it is b_i/c_i. The containment D(a_i) subset D(c_i) gives a_i^N in (c_i) by strong Nullstellensatz, so replace by presentations g_i/h_i on D(h_i). Covering D(f) gives f^N in the ideal generated by all h_i^2, hence a finite expression f^N=sum u_i h_i^2 without invoking a later compactness theorem. On overlaps the equality of sections implies h_i h_j(g_i h_j-g_j h_i)=0 as a polynomial function on X. Therefore sum u_i g_i h_i divided by f^N represents the section. A fraction vanishing on D(f) has numerator times f zero on X, which proves injectivity by the localization zero criterion. Handle f=0 first.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 15,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "lem-classical-affine-algebraic-set-finite-irreducible-components",
+        "kind": "lemma",
+        "title": "A classical affine algebraic set has a unique finite irredundant decomposition",
+        "deps": [
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "cor-finite-variable-polynomial-ring-noetherian",
+          "cor-radical-ideal-has-finitely-many-minimal-primes-noetherian",
+          "thm-noetherian-ring-ideal-characterisations",
+          "thm-quotient-is-field-iff-ideal-maximal",
+          "thm-classical-affine-zero-loci-form-zariski-closed-sets",
+          "def-axiom-of-choice",
+          "def-dependent-choice"
+        ],
+        "statement": "Assume also Dependent Choice for the cited minimal-prime existence theorem. Assume the Axiom of Choice, inherited from the Nullstellensatz route. Every affine algebraic set $X$ has a finite irredundant decomposition into nonempty irreducible closed subsets, unique up to permutation. These are its maximal irreducible closed subsets. The empty set has the empty decomposition.",
+        "proof_plan": "A field has only the ideals zero and the whole field, so it is Noetherian. Hilbert basis gives a Noetherian polynomial ring. Express radical I(X) as a finite intersection of minimal primes by the actual published corollary, translate via row 6 and the finite-union zero-locus identity. For uniqueness intersect any irreducible component with the other finite cover and induct on its length; irredundancy forces equality.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 16,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "def-reduced-finitely-generated-k-algebra-interface",
+        "kind": "definition",
+        "title": "A reduced finitely generated $k$-algebra",
+        "deps": [
+          "def-nilradical-and-reduced-ring",
+          "def-finite-type-and-module-finite-algebras"
+        ],
+        "statement": "A reduced finite-type $k$-algebra is a commutative unital $k$-algebra $A$ admitting a finite list $a_1,\\ldots,a_n$ such that every element is a polynomial in that list with coefficients from $k$, and such that $a^m=0$, $m\\ge1$, implies $a=0$. With the terminology of [[def-nilradical-and-reduced-ring]] and [[def-finite-type-and-module-finite-algebras]], equivalently finite type means admitting a surjection $k[T_1,\\ldots,T_n]\\to A$. The zero algebra is included. “Module-finite” instead means finitely generated as a $k$-module; finite type does not impose that condition.",
+        "proof_plan": "Use the earlier finite-type presentation definition; zero algebra is admitted.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "design_row": 17
+      },
+      {
+        "id": "lem-classical-affine-closed-points-are-maximal-ideals",
+        "kind": "lemma",
+        "title": "Classical affine points are maximal ideals",
+        "deps": [
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "def-classical-affine-coordinate-ring",
+          "cor-weak-nullstellensatz-algebraically-closed-coordinate-form",
+          "thm-correspondence-theorem-ideals",
+          "lem-evaluation-ideal-is-maximal",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Nullstellensatz route. For every affine algebraic set $X$ and $A=k[X]$, the map $x\\mapsto\\mathfrak m_x=\\ker(\\operatorname{ev}_x:A\\to k)$ is a bijection from $X$ to the maximal ideals of $A$. Its residue-field map $A/\\mathfrak m_x\\to k$ is the canonical $k$-isomorphism given by evaluation. Both sets are empty when $X$ is empty.",
+        "proof_plan": "Lift maximal ideals through the quotient and use weak Nullstellensatz. Evaluation kills I(X) exactly at X. Distinct points differ in a coordinate.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 18,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "thm-classical-affine-global-regular-functions-coordinate-ring",
+        "kind": "theorem",
+        "title": "Global regular functions on a classical affine variety are its coordinate ring",
+        "deps": [
+          "thm-classical-principal-open-coordinate-ring-localization",
+          "def-classical-regular-function-on-open-set",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Nullstellensatz route. For every affine algebraic set $X$, the canonical map $k[X]\\to\\mathcal O_X(X)$ is an isomorphism. This includes varieties and the empty set.",
+        "proof_plan": "Apply row 15 with f=1.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 21,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "def-classical-affine-variety-morphism",
+        "kind": "definition",
+        "title": "A morphism from an open subset of a classical affine variety to an affine variety",
+        "deps": [
+          "def-classical-regular-function-on-open-set",
+          "lem-classical-regular-functions-locality-and-gluing"
+        ],
+        "statement": "Let $U$ be open in an affine algebraic set $X$ and let $Y$ be an affine algebraic set. A set map $\\phi:U\\to Y$ is a morphism over $k$ if $s\\circ\\phi\\in\\mathcal O_X(U)$ for every $s\\in\\mathcal O_Y(Y)$. For a map whose target is an open subset of an affine algebraic set, the phrase **locally regular morphism** means a continuous map pulling regular functions on each target open back to regular functions on its inverse image. An **isomorphism** between open subsets of affine algebraic sets is a bijection for which the map and its inverse are locally regular morphisms. Continuity and this local pullback property for the affine-target definition will be established in the next lemma; they are not assumed in the affine-target test.",
+        "proof_plan": "The global-pullback condition is well typed without a prior continuity assumption. Coordinates test it by polynomial algebra; all-open pullback is a consequence of row 24.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "design_row": 22
+      },
+      {
+        "id": "def-classical-regular-map-image-and-set-theoretic-fibre",
+        "kind": "definition",
+        "title": "Images and set-theoretic fibres of classical regular maps",
+        "deps": [
+          "def-classical-affine-variety-morphism"
+        ],
+        "statement": "For a morphism $\\phi:U\\to Y$, its image is $\\phi(U)=\\{\\phi(x):x\\in U\\}$, and its fibre over $y\\in Y$ is the set $\\phi^{-1}(\\{y\\})=\\{x\\in U:\\phi(x)=y\\}$. These are set-theoretic notions. A fibre can be empty. No assertion that images are closed is part of this definition; a fibre here is not a scheme fibre or an ideal quotient.",
+        "proof_plan": "Define the two underlying sets; later closedness of fibres follows from row 24.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "design_row": 23
+      },
+      {
+        "id": "lem-classical-morphism-inverse-image-of-closed-is-closed",
+        "kind": "lemma",
+        "title": "A classical morphism pulls Zariski closed sets back to closed sets",
+        "deps": [
+          "thm-classical-affine-zero-loci-form-zariski-closed-sets",
+          "def-classical-regular-function-on-open-set",
+          "def-classical-affine-variety-morphism"
+        ],
+        "statement": "An affine-target morphism $\\phi:U\\to Y$ pulls every Zariski closed subset of $Y$ back to a relatively closed subset of $U$, hence is continuous. The zero set of every regular function on any open of an affine algebraic set is relatively closed. For every open $W\\subseteq Y$ and every regular function $s$ on $W$, $s\\circ\\phi$ is regular on $\\phi^{-1}(W)$.",
+        "proof_plan": "The zero locus of a regular function is locally closed in each quotient-presentation neighbourhood, hence is closed in U because its complement is locally open. Pull back target equations coordinatewise. For all-open pullback, use continuity to pull back the local quotient neighbourhood and its nonvanishing denominator.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 24,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "thm-classical-affine-morphisms-coordinate-ring-antiequivalence",
+        "kind": "theorem",
+        "title": "Classical affine morphisms are contravariantly equivalent to coordinate-ring homomorphisms",
+        "deps": [
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "thm-classical-polynomial-functions-equal-coordinate-ring",
+          "thm-classical-affine-global-regular-functions-coordinate-ring",
+          "def-classical-affine-variety-morphism",
+          "lem-classical-morphism-inverse-image-of-closed-is-closed",
+          "thm-quotient-ring-universal-property",
+          "thm-universal-property-of-a-polynomial-ring",
+          "def-finite-type-and-module-finite-algebras",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Nullstellensatz route. For affine algebraic sets $X,Y$, pullback gives a natural bijection $$\\operatorname{Mor}_k(X,Y)\\cong\\operatorname{Hom}_{k\\text{-alg}}(k[Y],k[X]).$$ It reverses composition and preserves identities. Restricted to nonempty irreducible sets, this is an antiequivalence with nonzero finite-type domain $k$-algebras: every such domain is a coordinate ring. Empty algebraic sets and zero unital algebras are allowed in the displayed bijection.",
+        "proof_plan": "For alpha:k[Y]->k[X], the tuple alpha(y_i)(x) satisfies every equation of Y. Conversely a morphism acts on polynomial functions. Evaluation and generator uniqueness give inverse constructions. All-open pullback follows from row 24. Verify identities and composition explicitly; inspect the empty/zero Hom cases.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 25,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "thm-classical-affine-algebraic-sets-reduced-algebras-antiequivalence",
+        "kind": "theorem",
+        "title": "Classical affine algebraic sets and reduced finitely generated $k$-algebras are contravariantly equivalent",
+        "deps": [
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "def-classical-affine-coordinate-ring",
+          "def-reduced-finitely-generated-k-algebra-interface",
+          "lem-classical-affine-closed-points-are-maximal-ideals",
+          "thm-classical-affine-morphisms-coordinate-ring-antiequivalence",
+          "cor-reduced-quotient-by-the-nilradical",
+          "def-finite-type-and-module-finite-algebras",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Nullstellensatz route. Affine algebraic sets over algebraically closed $k$, with locally regular morphisms, are contravariantly equivalent to reduced finite-type unital $k$-algebras. Both object realization and full faithfulness hold, including the correspondence $\\varnothing\\leftrightarrow0$.",
+        "proof_plan": "Write A=k[t_1,...,t_n]/J by finite generation. Reducedness makes J radical; strong Nullstellensatz gives k[V(J)]=A. Apply the general algebraic-set Hom calculation of row 25, including the zero algebra. Explain antiequivalence by these object and Hom constructions rather than presupposing scheme duality.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 26,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "lem-classical-affine-morphisms-equal-on-dense-open",
+        "kind": "lemma",
+        "title": "Affine-source morphisms agreeing on a dense open agree everywhere",
+        "deps": [
+          "lem-classical-affine-variety-nonempty-opens-dense",
+          "thm-classical-affine-global-regular-functions-coordinate-ring",
+          "def-classical-affine-variety-morphism",
+          "lem-classical-morphism-inverse-image-of-closed-is-closed",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Nullstellensatz route. If $X,Y$ are affine varieties and two morphisms $\\phi,\\psi:X\\to Y$ agree on a dense open subset of $X$, they agree everywhere.",
+        "proof_plan": "The coordinate differences are global polynomial functions, whose vanishing sets are closed and contain a dense set.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 27,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "def-classical-germ-and-local-ring",
+        "kind": "definition",
+        "title": "Germs and the local ring of a classical affine variety",
+        "deps": [
+          "def-classical-regular-function-on-open-set",
+          "lem-classical-regular-functions-locality-and-gluing"
+        ],
+        "statement": "For a point $x$ of an affine algebraic set $X$, a germ of a regular function at $x$ is a pair $(U,s)$, where $U$ is an open neighbourhood of $x$ and $s\\in\\mathcal O_X(U)$, modulo equality on some open neighbourhood of $x$ contained in both domains. Write $\\mathcal O_{X,x}$ for the set of germs. Reflexivity uses $U$; symmetry reverses equality; transitivity intersects the two witness neighbourhoods, which still contain $x$. Add and multiply representatives after restricting to their intersection. If either representative is replaced by an equivalent one, intersect the two equality neighbourhoods: there both sums and both products agree. Thus the operations are well-defined. The restriction and algebra laws of [[lem-classical-regular-functions-locality-and-gluing]] on a common finite intersection give a unital $k$-algebra; constants define its structure map. Evaluation of a germ at $x$ is well-defined by the same equality condition. Its local-ring property is proved in the following theorem.",
+        "proof_plan": "Neighbourhood intersections prove transitivity and ring-operation independence; the constant one germ differs from zero at x.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "design_row": 28
+      },
+      {
+        "id": "thm-classical-affine-local-ring-is-localization",
+        "kind": "theorem",
+        "title": "The classical affine local ring is localization at the point's maximal ideal",
+        "deps": [
+          "lem-classical-principal-opens-form-affine-basis",
+          "lem-classical-affine-closed-points-are-maximal-ideals",
+          "def-classical-germ-and-local-ring",
+          "thm-universal-property-of-localisation",
+          "thm-localisation-at-a-prime-is-local",
+          "prop-localisation-zero-equality-and-kernel-criteria",
+          "thm-classical-polynomial-functions-equal-coordinate-ring",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Nullstellensatz route. For $x$ in an affine variety $X$, put $A=k[X]$ and $\\mathfrak m_x=\\ker\\operatorname{ev}_x$. The map $$A_{\\mathfrak m_x}\\longrightarrow\\mathcal O_{X,x},\\qquad a/s\\longmapsto\\text{germ}_x(a/s)$$ is an isomorphism. The unique maximal ideal corresponds to germs vanishing at $x$, and the residue field is canonically $k$.",
+        "proof_plan": "Every germ has a quotient presentation with denominator nonzero at x, proving surjectivity. If a/s has zero germ, choose D(h) around x inside its zero neighbourhood; then ha is zero on all X (outside D(h), h=0). As h is not in m_x, the localization criterion gives a/s=0. Identify evaluation and apply the local-at-prime theorem.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 29,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "thm-classical-principal-open-is-affine-variety",
+        "kind": "theorem",
+        "title": "Every nonempty principal open is a classical affine variety",
+        "deps": [
+          "thm-classical-affine-variety-prime-coordinate-ring",
+          "thm-classical-principal-open-coordinate-ring-localization",
+          "def-classical-affine-variety-morphism",
+          "thm-classical-affine-morphisms-coordinate-ring-antiequivalence",
+          "thm-universal-property-of-a-polynomial-ring",
+          "thm-quotient-ring-universal-property",
+          "thm-universal-property-of-localisation",
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "lem-classical-morphism-inverse-image-of-closed-is-closed",
+          "def-axiom-of-choice",
+          "thm-classical-affine-global-regular-functions-coordinate-ring",
+          "thm-classical-polynomial-functions-equal-coordinate-ring"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Nullstellensatz route. For an affine variety $X$ and $0\\ne f\\in A=k[X]$, $D_X(f)$ with its regular functions is isomorphic to the closed graph $$Z=\\{(x,t)\\in X\\times k:tf(x)=1\\}.$$ Its coordinate ring is canonically $A[T]/(Tf-1)\\cong A_f$, a nonzero domain; hence $D_X(f)$ is affine in this intrinsic realization.",
+        "proof_plan": "Construct mutually inverse algebra homomorphisms A[T]/(Tf-1) and A_f from their universal properties. A_f embeds in Frac(A), hence is a domain. Strong Nullstellensatz identifies its graph coordinate ring. Projection and x |-> (x,1/f(x)) are inverse morphisms by local coordinate quotients; row 15 identifies regular functions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 30,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "def-classical-affine-open-subset",
+        "kind": "definition",
+        "title": "A classical affine open subset and its coordinate ring",
+        "deps": [
+          "def-classical-affine-variety-morphism",
+          "thm-classical-affine-morphisms-coordinate-ring-antiequivalence",
+          "thm-classical-principal-open-is-affine-variety",
+          "def-axiom-of-choice"
+        ],
+        "statement": "An affine open subset $U$ of a classical affine variety $X$ is an open subset equipped with an isomorphism, in the locally regular sense, to a classical affine variety. Assume AC for the coordinate-ring and principal-open interfaces used here. Its coordinate algebra is $\\mathcal O_X(U)$; any specified affine realization identifies this algebra with that realization’s coordinate ring. Two such identifications differ by the pullback of their transition isomorphism in [[thm-classical-affine-morphisms-coordinate-ring-antiequivalence]], so the algebra of functions on $U$ is independent of the realization. Nonempty principal opens have this property by [[thm-classical-principal-open-is-affine-variety]]. Arbitrary opens are not declared affine.",
+        "proof_plan": "An isomorphism transports regular functions in both directions by row 24; the coordinate-ring dictionary makes realizations canonically agree.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "design_row": 31
+      },
+      {
+        "id": "def-classical-variety-function-field",
+        "kind": "definition",
+        "title": "The function field of an irreducible classical affine variety",
+        "deps": [
+          "thm-classical-affine-variety-prime-coordinate-ring",
+          "def-field-of-fractions",
+          "thm-field-of-fractions-is-a-field-and-the-domain-embeds",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC for the domain-coordinate interface used here. For a classical affine variety $X$, its function field is $$k(X)=\\operatorname{Frac}(k[X]).$$ The coordinate ring is a nonzero integral domain by [[thm-classical-affine-variety-prime-coordinate-ring]], so [[def-field-of-fractions]] and [[thm-field-of-fractions-is-a-field-and-the-domain-embeds]] give a field and the injective map $a\\mapsto a/1$. Elements have the form $a/b$ with $b\\ne0$; they are called rational functions. Equality is $a/b=c/d$ iff $ad=bc$. Fractions are field elements, not initially functions defined at every point.",
+        "proof_plan": "Use the proved nonzero domain hypothesis from row 11.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "design_row": 32
+      },
+      {
+        "id": "lem-classical-regular-functions-on-open-embed-in-function-field",
+        "kind": "lemma",
+        "title": "Regular functions on a nonempty open embed in the affine function field",
+        "deps": [
+          "lem-classical-affine-variety-nonempty-opens-dense",
+          "thm-classical-polynomial-functions-equal-coordinate-ring",
+          "def-classical-regular-function-on-open-set",
+          "lem-classical-regular-functions-locality-and-gluing",
+          "def-classical-variety-function-field",
+          "def-axiom-of-choice",
+          "thm-classical-affine-zero-loci-form-zariski-closed-sets"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Nullstellensatz route. For an affine variety $X$ and nonempty open $U$, there is a canonical injective $k$-algebra map $\\mathcal O_X(U)\\hookrightarrow k(X)$. A quotient presentation on any nonempty open subdomain computes the same field element, and these embeddings commute with restrictions to nonempty opens.",
+        "proof_plan": "Select one local presentation a/b on a nonempty open. Every other presentation c/d agrees on a nonempty intersection, so ad-bc vanishes there. Its closed zero set and density show ad=bc in k[X]. Thus the fraction is independent; common denominators prove ring laws. If the fraction is zero all local numerators vanish and the function is zero.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "thm-classical-function-field-independent-of-affine-open",
+        "kind": "theorem",
+        "title": "The function field is independent of the chosen nonempty principal affine open",
+        "deps": [
+          "lem-classical-principal-opens-form-affine-basis",
+          "thm-classical-principal-open-coordinate-ring-localization",
+          "thm-classical-principal-open-is-affine-variety",
+          "def-classical-affine-open-subset",
+          "def-classical-variety-function-field",
+          "thm-universal-property-of-the-field-of-fractions",
+          "lem-classical-regular-functions-on-open-embed-in-function-field",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Nullstellensatz route. For every nonempty affine open $U$ in an affine variety $X$, restriction gives the canonical identification $\\operatorname{Frac}(\\mathcal O_X(U))=k(X)$. In particular, for $f\\ne0$, $k[D_X(f)]=k[X]_f$ and $\\operatorname{Frac}(k[D_X(f)])=k(X)$. The identifications commute with further nonempty affine-open restriction.",
+        "proof_plan": "For principal opens use fraction-field universality on A subset A_f subset Frac(A). For any affine open U, the preceding open-section embedding gives A subset O_X(U) subset Frac(A), and the two inclusions induce the same fraction field. This preserves the stronger old affine-open interface rather than merely its principal-open special case.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 33,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "def-classical-rational-map",
+        "kind": "definition",
+        "title": "A rational map as an equivalence class of morphisms on nonempty opens",
+        "deps": [
+          "lem-classical-affine-variety-nonempty-opens-dense",
+          "def-classical-affine-variety-morphism"
+        ],
+        "statement": "For affine varieties $X,Y$, a representative of a rational map $X\\dashrightarrow Y$ is a pair $(U,\\phi)$ with $U\\subseteq X$ nonempty open and $\\phi:U\\to Y$ a morphism. Two pairs represent the same rational map when their maps agree on some nonempty open subset of their common domain. A rational map is an equivalence class for this relation; its equivalence-relation well-definedness is supplied by [[lem-classical-rational-map-equivalence-transitive]]. The domain of a representative need not be all of $X$.",
+        "proof_plan": "Keep representatives as a set of pairs; defer equivalence verification explicitly using justified_by.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "design_row": 34,
+        "justified_by": [
+          "lem-classical-rational-map-equivalence-transitive"
+        ]
+      },
+      {
+        "id": "lem-classical-rational-map-equivalence-transitive",
+        "kind": "lemma",
+        "title": "The rational-map relation is transitive",
+        "deps": [
+          "lem-classical-irreducible-space-open-intersection-criterion",
+          "lem-classical-affine-variety-nonempty-opens-dense",
+          "def-classical-rational-map"
+        ],
+        "statement": "The relation used to define rational maps between affine varieties is reflexive, symmetric and transitive, hence is an equivalence relation.",
+        "proof_plan": "For witnesses W12 and W23 use W12 intersection W23, nonempty by irreducibility; restriction preserves morphisms.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 35,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "def-classical-rational-map-domain-union",
+        "kind": "definition",
+        "title": "The candidate domain of a rational map",
+        "deps": [
+          "def-classical-rational-map",
+          "lem-classical-rational-map-equivalence-transitive"
+        ],
+        "statement": "For a rational-map class $\\Phi:X\\dashrightarrow Y$, define its candidate domain by $$D(\\Phi)=\\bigcup_{(U,\\phi)\\in\\Phi}U.$$ It is open and nonempty because every representative domain is open and the class contains a representative. At this point the definition is only a union of domains; it asserts neither a glued map nor maximality.",
+        "proof_plan": "Take only a set union of open domains.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "design_row": 36
+      },
+      {
+        "id": "def-classical-dominant-morphism-and-rational-map",
+        "kind": "definition",
+        "title": "Dominant classical morphisms and rational maps",
+        "deps": [
+          "lem-classical-affine-variety-nonempty-opens-dense",
+          "lem-classical-morphism-inverse-image-of-closed-is-closed",
+          "def-classical-rational-map",
+          "lem-classical-rational-map-equivalence-transitive"
+        ],
+        "statement": "A morphism $\\phi:U\\to Y$ from a nonempty open in an affine variety to an affine variety is dominant when $\\overline{\\phi(U)}=Y$. A rational map is dominant when one representative is dominant. This does not depend on the representative. Indeed, if $\\phi$ is dominant and $W\\subseteq U$ is nonempty open, then for each nonempty open $T\\subseteq Y$, $\\phi^{-1}(T)$ is a nonempty open in $U$ by [[lem-classical-morphism-inverse-image-of-closed-is-closed]] and dominance. It meets $W$ by [[lem-classical-affine-variety-nonempty-opens-dense]], so $\\phi(W)$ meets every such $T$, proving $\\phi|_W$ dominant. If two representatives agree on a nonempty common open, restricting a dominant one to that open gives a dense image contained in the image of the other. Thus every representative is dominant. Conversely, if any restriction is dominant, the original image contains a dense subset and is dominant.",
+        "proof_plan": "A dominant continuous map from an irreducible open source remains dominant after restriction to a nonempty open: if its restricted image lies in closed Z, the closed preimage of Z contains a dense open and hence the entire source. Apply common restrictions.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "design_row": 37
+      },
+      {
+        "id": "lem-classical-open-source-morphisms-equal-on-dense-open",
+        "kind": "lemma",
+        "title": "Morphisms defined on an open source and agreeing on a dense open agree on their common domain",
+        "deps": [
+          "lem-classical-affine-variety-nonempty-opens-dense",
+          "def-classical-affine-variety-morphism",
+          "lem-classical-morphism-inverse-image-of-closed-is-closed"
+        ],
+        "statement": "Let $U,V$ be nonempty opens of an affine variety $X$, and let $\\phi:U\\to Y$, $\\psi:V\\to Y$ be morphisms to an affine variety. If they agree on a nonempty open subset of $U\\cap V$, they agree on all of $U\\cap V$. More generally agreement on any subset dense in their common domain suffices.",
+        "proof_plan": "For each target coordinate the difference is a regular function on U intersection V. Its closed zero locus contains the dense agreement set; all coordinates therefore agree. Irreducibility makes every witness open dense.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 38,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "lem-classical-morphisms-glue-on-open-cover",
+        "kind": "lemma",
+        "title": "Compatible classical morphisms to an affine target glue over an open cover",
+        "deps": [
+          "lem-classical-regular-functions-locality-and-gluing",
+          "def-classical-affine-variety-morphism",
+          "lem-classical-morphism-inverse-image-of-closed-is-closed"
+        ],
+        "statement": "For an open $U$ of an affine variety X and an open cover $U=\\bigcup_i U_i$, compatible morphisms $\\phi_i:U_i\\to Y$ to a fixed affine target glue uniquely to a morphism $\\phi:U\\to Y$.",
+        "proof_plan": "Glue coordinate functions using row 20. The tuple satisfies each target equation locally and hence at every point. Polynomial pullbacks are regular, proving the morphism property.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 39,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "thm-classical-rational-map-maximal-domain-affine-target",
+        "kind": "theorem",
+        "title": "A rational map to an affine target has a unique maximal open domain",
+        "deps": [
+          "def-classical-rational-map",
+          "lem-classical-rational-map-equivalence-transitive",
+          "def-classical-rational-map-domain-union",
+          "lem-classical-open-source-morphisms-equal-on-dense-open",
+          "lem-classical-morphisms-glue-on-open-cover"
+        ],
+        "statement": "The candidate domain of a rational map $\\Phi:X\\dashrightarrow Y$ with affine target supports a unique morphism restricting to every representative. It is a representative of $\\Phi$, and is the unique maximal representative domain.",
+        "proof_plan": "By row 38 representatives agree on their full overlaps. Row 39 glues them on their union. The resulting morphism represents the same class and contains every other domain, proving uniqueness and maximality.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 40,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "lem-classical-dominant-rational-maps-compose",
+        "kind": "lemma",
+        "title": "Dominant rational maps compose on nonempty open domains",
+        "deps": [
+          "lem-classical-affine-variety-nonempty-opens-dense",
+          "lem-classical-morphism-inverse-image-of-closed-is-closed",
+          "lem-classical-rational-map-equivalence-transitive",
+          "def-classical-dominant-morphism-and-rational-map",
+          "lem-classical-open-source-morphisms-equal-on-dense-open",
+          "thm-classical-rational-map-maximal-domain-affine-target"
+        ],
+        "statement": "Dominant rational maps between affine varieties compose to a well-defined dominant rational map. Representatives $\\phi:U\\to Y$ and $\\psi:V\\to Z$ compose on $W=U\\cap\\phi^{-1}(V)$. Composition is independent of representatives, associative, and has identity rational maps.",
+        "proof_plan": "Dominance makes the preimage of nonempty open V nonempty; continuity makes it open. Restriction remains dominant by row 37, and composition of dominant continuous maps is dominant: preimages of nonempty target opens are nonempty open. Common restrictions compare alternative representatives; row 38 and irreducibility give equality on nonempty overlaps. Associativity and identities follow on a common domain from ordinary composition.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "lem-classical-dominant-map-pulls-back-function-fields",
+        "kind": "lemma",
+        "title": "Dominant maps pull back function fields functorially",
+        "deps": [
+          "def-classical-variety-function-field",
+          "thm-classical-function-field-independent-of-affine-open",
+          "def-classical-dominant-morphism-and-rational-map",
+          "thm-classical-rational-map-maximal-domain-affine-target",
+          "thm-universal-property-of-the-field-of-fractions",
+          "lem-classical-regular-functions-on-open-embed-in-function-field",
+          "lem-classical-dominant-rational-maps-compose",
+          "lem-classical-morphism-inverse-image-of-closed-is-closed",
+          "def-axiom-of-choice",
+          "thm-classical-polynomial-functions-equal-coordinate-ring",
+          "thm-classical-affine-zero-loci-form-zariski-closed-sets"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Nullstellensatz route. A dominant rational map $\\Phi:X\\dashrightarrow Y$ of affine varieties induces a canonical injective $k$-homomorphism $\\Phi^*:k(Y)\\hookrightarrow k(X)$. It agrees with pullback of regular functions wherever defined, is independent of representatives, preserves identities, and reverses composition of dominant rational maps.",
+        "proof_plan": "Use the maximal representative. Pullback embeds k[Y] in the regular functions of its domain: a function whose pullback is zero vanishes on a dense image and thus vanishes identically. Embed those functions into k(X), then extend to Frac(k[Y]). Composition is defined by the preceding composition lemma and equality is checked on a common nonempty open.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 41,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "thm-classical-dominant-rational-maps-function-field-embeddings",
+        "kind": "theorem",
+        "title": "Dominant rational maps to an affine variety correspond to field embeddings",
+        "deps": [
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "thm-classical-affine-morphisms-coordinate-ring-antiequivalence",
+          "thm-classical-function-field-independent-of-affine-open",
+          "def-classical-dominant-morphism-and-rational-map",
+          "thm-classical-rational-map-maximal-domain-affine-target",
+          "lem-classical-dominant-map-pulls-back-function-fields",
+          "thm-classical-principal-open-is-affine-variety",
+          "lem-classical-open-source-morphisms-equal-on-dense-open",
+          "def-axiom-of-choice",
+          "lem-classical-regular-functions-on-open-embed-in-function-field",
+          "lem-classical-affine-variety-nonempty-opens-dense"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Nullstellensatz route. For affine varieties $X,Y$, pullback is a natural bijection between dominant rational maps $X\\dashrightarrow Y$ and $k$-field embeddings $k(Y)\\hookrightarrow k(X)$. The inverse is defined on a nonempty principal open by a common denominator for the images of finitely many coordinate generators.",
+        "proof_plan": "Choose a common nonzero denominator d in k[X] for the images of generators of k[Y]. Row 30 and row 25 realize the resulting algebra map on D(d). If its image were nondense, row 6 gives a nonzero element of k[Y] vanishing there, contradicting the field embedding. Equal pullbacks force equality of coordinate functions on a common principal domain.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 42,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "def-classical-integral-affine-atlas-and-chartwise-morphism",
+        "kind": "definition",
+        "title": "Integral classical varieties in the compatible affine-atlas register",
+        "deps": [
+          "def-classical-affine-variety-interface",
+          "lem-classical-irreducible-space-open-intersection-criterion",
+          "def-classical-regular-function-on-open-set",
+          "lem-classical-regular-functions-locality-and-gluing",
+          "def-classical-affine-variety-morphism",
+          "lem-classical-morphism-inverse-image-of-closed-is-closed",
+          "thm-classical-principal-open-is-affine-variety",
+          "def-classical-affine-open-subset",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Under AC for the affine-coordinate and principal-open interfaces, an integral classical prevariety over $k$ is a nonempty irreducible topological space $X$ equipped with a finite cover by open charts $U_i$ homeomorphic to classical affine varieties, whose transition maps and inverse transition maps on overlaps are locally regular. The atlas is part of the data. On any open $W\\subseteq X$, a function $s:W\\to k$ is regular if in each chart it is regular on $W\\cap U_i$. A map is a morphism if it is continuous and pulls back regular functions on every target open to regular functions on its inverse image. Equivalently it passes this test locally in source and target charts. An integral classical variety is such a prevariety satisfying the separation axiom: the equalizer of any two morphisms from an affine variety into $X$ is closed. An affine open is an open subset isomorphic, with these functions, to an affine variety.\n\nThe chartwise tests are invariant under compatible refinement: on an overlap, [[lem-classical-morphism-inverse-image-of-closed-is-closed]] shows that locally regular transition maps pull local quotient functions back to regular functions, and [[lem-classical-regular-functions-locality-and-gluing]] transfers the test in both directions. More explicitly, if a continuous map passes the affine-chart test, then for any target section on $W$ and any source point over $W$, a target chart and a source chart give a neighbourhood where its pullback is regular. Locality makes the pullback regular on the whole inverse image. The converse is restriction of the global test. Affine targets satisfy the stated separation axiom: choose their finitely many coordinate functions; the equalizer is the intersection of the closed zero sets of the pulled-back coordinate differences. Thus a single affine chart gives an example of an integral classical variety. No theorem constructing a glued space from unspecified charts is asserted.",
+        "proof_plan": "Spell out transition compatibility using local quotient functions and row 24. Define functions chartwise, and note the criterion is invariant under compatible refinement. The finite atlas replaces any need to invoke an abstract quasi-compactness equivalence.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-classical-integral-affine-charts-have-canonical-common-function-field",
+        "kind": "lemma",
+        "title": "Compatible affine charts of an integral classical variety have one function field",
+        "deps": [
+          "def-classical-integral-affine-atlas-and-chartwise-morphism",
+          "lem-classical-irreducible-space-open-intersection-criterion",
+          "lem-classical-principal-opens-form-affine-basis",
+          "thm-classical-principal-open-is-affine-variety",
+          "thm-classical-function-field-independent-of-affine-open",
+          "lem-classical-regular-functions-on-open-embed-in-function-field",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Nullstellensatz route. All nonempty affine charts and all nonempty affine opens of an integral classical variety $X$ have canonically isomorphic fraction fields. These comparisons satisfy the cocycle identity on triple intersections and commute with restriction and isomorphisms. The resulting field is denoted $k(X)$.",
+        "proof_plan": "For charts A,B their intersection is a nonempty open in both. Pick a nonempty principal affine open W of A inside the intersection. Transition compatibility identifies W with an affine open in B. Row 33 identifies both chart fraction fields with k(W). Independence of W follows by restricting to a nonempty principal affine open inside two choices; the open-section embedding proves equality there determines the fraction. Triple intersections prove the cocycle condition. This proves independence before k(X) is used for nonaffine varieties.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      },
+      {
+        "id": "def-classical-birational-equivalence",
+        "kind": "definition",
+        "title": "Birational maps and birational equivalence of classical varieties",
+        "deps": [
+          "def-classical-rational-map",
+          "def-classical-dominant-morphism-and-rational-map",
+          "lem-classical-dominant-map-pulls-back-function-fields",
+          "def-classical-integral-affine-atlas-and-chartwise-morphism",
+          "lem-classical-integral-affine-charts-have-canonical-common-function-field",
+          "lem-classical-dominant-rational-maps-compose",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC for the function-field and affine-atlas interfaces used here. For affine varieties, a dominant rational map $\\Phi:X\\dashrightarrow Y$ is birational if there is a dominant rational map $\\Psi:Y\\dashrightarrow X$ with $\\Psi\\circ\\Phi=\\operatorname{id}_X$ and $\\Phi\\circ\\Psi=\\operatorname{id}_Y$ as rational-map classes. Composition here is [[lem-classical-dominant-rational-maps-compose]], the proved composition on nonempty inverse-image domains. For integral classical varieties equipped with compatible affine atlases, birational equivalence means the existence of isomorphic nonempty open subsets. The following theorem identifies this with the inverse-rational-map definition in the affine case and with a $k$-isomorphism of their function fields.",
+        "proof_plan": "Use the now-proved composition of dominant rational maps; no composition through an indeterminacy locus is asserted.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "design_row": 43
+      },
+      {
+        "id": "thm-classical-birational-equivalence-iff-function-fields-isomorphic",
+        "kind": "theorem",
+        "title": "Classical integral varieties are birational exactly when their function fields are isomorphic over $k$",
+        "deps": [
+          "thm-classical-function-field-independent-of-affine-open",
+          "lem-classical-dominant-map-pulls-back-function-fields",
+          "thm-classical-dominant-rational-maps-function-field-embeddings",
+          "def-classical-birational-equivalence",
+          "def-classical-integral-affine-atlas-and-chartwise-morphism",
+          "lem-classical-integral-affine-charts-have-canonical-common-function-field",
+          "lem-classical-open-source-morphisms-equal-on-dense-open",
+          "lem-classical-principal-opens-form-affine-basis",
+          "thm-classical-principal-open-is-affine-variety",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Nullstellensatz route. Two integral classical varieties over algebraically closed $k$ are birationally equivalent exactly when their function fields are isomorphic over $k$. For affine varieties this is also equivalent to the existence of mutually inverse dominant rational maps.",
+        "proof_plan": "Apply row 42 to a field isomorphism and its inverse; functoriality and injectivity of the correspondence make the rational compositions identities. Conversely use row 41. Shrink the representative domains by inverse images until both compositions are defined and are identities, obtaining isomorphic nonempty opens. For general integral classical varieties, choose nonempty affine charts and apply the common-function-field lemma, then the affine result. Opens in a chart are open in the entire variety. Conversely, from an isomorphism of nonempty opens choose a nonempty principal affine open on the source inside one target chart inverse image; its image is an affine open in the target, and the same lemma identifies the two ambient fields.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "design_row": 44,
+        "axiom_strength": "ZF + AC + DC, a conservative sufficient upper bound inherited from the prerequisite closure; no necessity claim and no unproved AC-to-DC implication used."
+      }
+    ]
+  },
+  {
+    "order": 366.0404,
+    "id": "classical-affine-varieties-coordinate-rings-morphisms-and-rational-maps-interface-examples",
+    "kind": "B",
+    "category": "algebraic-geometry",
+    "title": "Classical Affine Varieties: Coordinate Rings, Morphisms, and Rational Maps — Examples",
+    "companion": "classical-affine-varieties-coordinate-rings-morphisms-and-rational-maps-interface",
+    "requires": [
+      "classical-affine-varieties-coordinate-rings-morphisms-and-rational-maps-interface"
+    ],
+    "items": [
+      {
+        "id": "ex-classical-affine-line-coordinate-local-and-function-field-dictionary",
+        "kind": "example",
+        "title": "The affine-line coordinate, local, and function-field dictionary",
+        "deps": [
+          "thm-classical-affine-nullstellensatz-correspondence",
+          "def-classical-affine-coordinate-ring",
+          "thm-classical-principal-open-coordinate-ring-localization",
+          "thm-classical-affine-morphisms-coordinate-ring-antiequivalence",
+          "thm-classical-affine-local-ring-is-localization",
+          "thm-classical-principal-open-is-affine-variety",
+          "def-classical-variety-function-field",
+          "thm-classical-function-field-independent-of-affine-open",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice, inherited from the Nullstellensatz route. Let $k$ be algebraically closed and $X=\\mathbf A^1_k$ with coordinate $t$. Then $k[X]=k[t]$, $\\mathcal O_{X,a}=k[t]_{(t-a)}$ with residue field k, and $k(X)=k(t)$. The principal open $D(t)=k\\setminus\\{0\\}$ has coordinate ring $k[t,t^{-1}]$ and the same function field. The morphism $\\phi:\\mathbf A^1\\to\\mathbf A^1$, $t\\mapsto t^2$, pulls back the target coordinate u to $t^2$. These calculations hold in every characteristic.",
+        "proof_plan": "The zero ideal in k[t] is radical, so row 6 gives I(A^1)=0. Apply the proved localization and fraction-field identifications; evaluate pullback on the coordinate generator. All calculations work in every characteristic.",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  }
+]

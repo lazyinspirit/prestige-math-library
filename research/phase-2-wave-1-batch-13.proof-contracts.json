@@ -1,0 +1,1484 @@
+{
+  "version": 1,
+  "scope": [
+    "def-epsilon-nfa-word-transition",
+    "thm-subset-construction-reachability-invariant",
+    "prop-deterministic-automata-are-special-nondeterministic-automata",
+    "ex-epsilon-closure-and-word-transition-on-a-three-state-nfa",
+    "ex-subset-construction-for-an-epsilon-nfa",
+    "cex-omitting-epsilon-closure-breaks-determinisation",
+    "def-turing-machine-initial-and-halting-configuration-interface",
+    "ex-initial-configuration-on-empty-input",
+    "ex-accepting-and-rejecting-configurations-are-machine-relative"
+  ],
+  "contracts": {
+    "def-epsilon-nfa-word-transition": {
+      "assumptions": "ZF. Finite Q and Sigma; q0 in Q; F subset Q; total delta: Q x (tagged Sigma plus epsilon) -> P(Q); n=|Q|; S subset Q; H(T)=T union union_{q in T}delta(q,epsilon). Paths may have zero edges. Words are functions from natural initial segments.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-power-set",
+          "source_section": "Definition",
+          "quote": "Let $x$ be a set. By [[lem-the-power-set-of-a-set-is-a-set]] there is exactly one\nset whose elements are precisely the subsets of $x$\n([[def-subset-and-proper-subset]]); it is the **power set** of $x$, written\n$\\mathcal{P}(x)$. Thus $z \\in \\mathcal{P}(x)$ holds if and only if\n$z \\subseteq x$, and in the class notation of the page,\n\n$$\\mathcal{P}(x) = \\{\\, z : z \\subseteq x \\,\\}.$$",
+          "uses": [
+            "1.1",
+            "4.1",
+            "4.2",
+            "6.1"
+          ],
+          "application": "[F1] Power sets contain precisely the subsets of their argument, and indexed unions have the existential membership rule ([[def-power-set]], [[def-indexed-union-and-intersection]])."
+        },
+        {
+          "fact": "F1",
+          "source": "def-indexed-union-and-intersection",
+          "source_section": "Definition",
+          "quote": "Let $(A_i)_{i \\in I}$ be an indexed family ([[def-indexed-family]]). Its\n**indexed union** is\n\n$$\\bigcup_{i \\in I} A_i \\;:=\\; \\bigcup \\{A_i : i \\in I\\},$$\n\nthe union of its range ([[def-union-of-a-set-and-binary-union]]); so\n$z \\in \\bigcup_{i \\in I} A_i$ holds if and only if $z \\in A_i$ for some\n$i \\in I$.\n\nWhen $I \\neq \\varnothing$ its **indexed intersection** is\n\n$$\\bigcap_{i \\in I} A_i \\;:=\\; \\bigcap \\{A_i : i \\in I\\},$$\n\nwhich is legitimate because a family with $I \\neq \\varnothing$ has a value at\nsome index, so its range is nonempty\n([[def-relation-domain-range-and-field]]) and\n[[lem-the-intersection-of-a-nonempty-set-is-a-set]] applies\n([[def-intersection-of-a-set-and-binary-intersection]]); so\n$z \\in \\bigcap_{i \\in I} A_i$ holds if and only if $z \\in A_i$ for every\n$i \\in I$.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "4.2",
+            "6.1"
+          ],
+          "application": "[F1] Power sets contain precisely the subsets of their argument, and indexed unions have the existential membership rule ([[def-power-set]], [[def-indexed-union-and-intersection]])."
+        },
+        {
+          "fact": "F2",
+          "source": "thm-subset-of-a-finite-set",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite set ([[def-countable]]) and let $B \\subseteq A$. Then:\n\n1. $B$ is finite;\n2. $\\lvert B\\rvert \\le \\lvert A\\rvert$ ([[def-finite-cardinality]]);\n3. $\\lvert B\\rvert = \\lvert A\\rvert$ if and only if $B = A$;\n4. every injection $f : A \\to A$ is a bijection, and every surjection\n   $f : A \\to A$ is a bijection.\n\nClause 3 is the finite form of the Dedekind statement: a finite set is not\nequinumerous with a proper subset of itself. Clause 4 is its working form, and\n**finiteness is exactly the hypothesis that fails in general**: the successor map\nis an injection of $\\mathbb{N}$ into itself that is not surjective, which is the\nfalse statement recorded on this page's companion.",
+          "uses": [
+            "2.1"
+          ],
+          "application": "[F2] A subset of a finite set is finite, its cardinality is no larger, and equality occurs exactly for the whole set ([[thm-subset-of-a-finite-set]]). Cardinalities are natural numbers ([[def-finite-cardinality]])."
+        },
+        {
+          "fact": "F2",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{N}$ is the set of von Neumann naturals\n([[def-natural-numbers]]): $0 = \\varnothing$, $\\sigma(n) = n \\cup \\{n\\}$, and\n$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ is itself the set of its predecessors,\nthe order being the additive order of [[def-nat-order]] identified with\nmembership in [[lem-nat-order-is-membership]]. Write $A \\approx B$ when a\nbijection $A \\to B$ exists ([[def-equinumerous]],\n[[def-injection-surjection-bijection]]). A set $A$ is **finite** when\n$A \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-countable]]).\n\n**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write\n\n$$\\lvert A\\rvert := \\text{that } n,$$\n\nthe **cardinality**, or number of elements, of $A$. The notation $\\lvert A\\rvert$\nis defined for finite $A$ only, and its value is a natural number.\n\n**Why exactly one, which is the whole content of the definition.** At least one\nsuch $n$ exists: that is literally what \"$A$ is finite\" says. At most one exists:\nif $A \\approx n$ and $A \\approx m$ with $n, m \\in \\mathbb{N}$, then $n \\approx A$,\nbecause the inverse of a bijection is a bijection, and hence $n \\approx m$,\nbecause a composition of bijections is a bijection\n([[def-injection-surjection-bijection]]); and $n \\approx m$ forces $n = m$ by\nclaim 3 of [[lem-pigeonhole]]. So $\\lvert A\\rvert$ names a single natural number\nand not a family of choices.\n\n**Four consequences, proved here because everything on this page uses them.**\n\n**(a) $\\lvert n\\rvert = n$ for every $n \\in \\mathbb{N}$.** The identity map\n$\\mathrm{id}_n$ is a bijection $n \\to n$, so $n \\approx n$; thus $n$ is finite and\nthe unique natural equinumerous with it is $n$ itself.\n\n**(b) $\\lvert\\varnothing\\rvert = 0$, and a finite $A$ satisfies\n$\\lvert A\\rvert = 0$ if and only if $A = \\varnothing$.** Since $0 = \\varnothing$,\npart (a) gives $\\lvert\\varnothing\\rvert = 0$. Conversely, if $\\lvert A\\rvert = 0$\nthen there is a bijection $f : A \\to \\varnothing$; were some $a \\in A$, the value\n$f(a)$ would be an element of $\\varnothing$, and $\\varnothing$ has none, so\n$A = \\varnothing$.\n\n**(c) Transport along a bijection.** If $A$ is finite and $f : A \\to B$ is a\nbijection, then $B$ is finite and $\\lvert B\\rvert = \\lvert A\\rvert$. Indeed\n$B \\approx A$ through $f^{-1}$ and $A \\approx \\lvert A\\rvert$, so\n$B \\approx \\lvert A\\rvert$ by transitivity.\n\n**(d) Equality of cardinalities is equinumerosity.** For finite $A$ and $B$:\n$\\lvert A\\rvert = \\lvert B\\rvert$ if and only if $A \\approx B$. If the\ncardinalities agree then $A \\approx \\lvert A\\rvert = \\lvert B\\rvert \\approx B$;\nconversely $A \\approx B$ gives $\\lvert B\\rvert = \\lvert A\\rvert$ by (c).",
+          "uses": [
+            "2.1"
+          ],
+          "application": "[F2] A subset of a finite set is finite, its cardinality is no larger, and equality occurs exactly for the whole set ([[thm-subset-of-a-finite-set]]). Cardinalities are natural numbers ([[def-finite-cardinality]])."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-recursion",
+          "source_section": "Statement",
+          "quote": "Let $(N,0,\\sigma)$ be a Peano system ([[def-peano-system]]), in particular the natural numbers $\\mathbb{N}$ ([[def-natural-numbers]]). For any set $A$, any element $a \\in A$, and any function $f : A \\to A$, there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$.",
+          "uses": [
+            "1.1",
+            "4.2"
+          ],
+          "application": "[F3] A self-map of a set, with a specified initial element, has a unique natural-number iterate sequence ([[thm-recursion]])."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.2",
+            "5.1",
+            "6.1"
+          ],
+          "application": "[F4] A property true at zero and preserved by successor holds at every natural number ([[thm-induction-principle]])."
+        },
+        {
+          "fact": "F5",
+          "source": "def-computation-alphabet-and-word-convention",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be a finite set, called an **alphabet**. For each natural number\n$n$, a **word of length $n$ over $\\Sigma$** is a function $w:n\\to\\Sigma$,\nequivalently an element of $\\Sigma^{n}$\n([[def-the-set-of-functions-from-one-set-to-another]]). Writing\n$w(i)=a_i$ for $i<n$, we display the word as $a_0a_1\\cdots a_{n-1}$. This is\nthe same finite-word convention already used in\n[[def-finite-words-factor-avoidance-and-prefix-states]].\n\nThe unique word of length $0$ is the **empty word** $\\varepsilon$.\n\nIf $u:m\\to\\Sigma$ and $v:n\\to\\Sigma$ are words, their **concatenation** is the\nword $uv:(m+n)\\to\\Sigma$ defined by\n$$ (uv)(i):=\\begin{cases}u(i),&i<m,\\\\v(i-m),&m\\le i<m+n.\\end{cases} $$\n\nThe set of **all finite words over $\\Sigma$** is\n$$ \\Sigma^*:=\\bigcup_{n\\in\\mathbb N}\\Sigma^n, $$\nan indexed union in the sense of [[def-indexed-union-and-intersection]].",
+          "uses": [
+            "4.2",
+            "5.1",
+            "7.1"
+          ],
+          "application": "[F5] Words are functions $w:r\\to\\Sigma$, including the unique empty word, and $\\Sigma^*$ is a set ([[def-computation-alphabet-and-word-convention]])."
+        },
+        {
+          "fact": "F6",
+          "source": "def-language-over-an-alphabet",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be an alphabet. A **language over $\\Sigma$** is a subset\n$L\\subseteq\\Sigma^*$, where $\\Sigma^*$ is the set of finite words of\n[[def-computation-alphabet-and-word-convention]] and $\\subseteq$ is the subset\nrelation of [[def-subset-and-proper-subset]].\n\nThus a language is a set of words over a fixed alphabet, not a set of alphabet\nsymbols.",
+          "uses": [
+            "7.1"
+          ],
+          "application": "[F6] A language over $\\Sigma$ is a subset of $\\Sigma^*$ ([[def-language-over-an-alphabet]])."
+        },
+        {
+          "fact": "F7",
+          "source": "def-cartesian-product",
+          "source_section": "Definition",
+          "quote": "Let $A$ and $B$ be sets. By\n[[lem-ordered-pairs-lie-in-the-double-power-set]] every ordered pair $(a,b)$ with\n$a \\in A$ and $b \\in B$ is an element of $\\mathcal{P}(\\mathcal{P}(A \\cup B))$, so\n[[def-axiom-schema-of-separation]] applied inside that set produces the\n**Cartesian product**\n\n$$A \\times B := \\{\\, z \\in \\mathcal{P}(\\mathcal{P}(A \\cup B)) : \\exists a \\in A\\ \\exists b \\in B\\ z = (a,b) \\,\\}.$$\n\nIts elements are exactly the ordered pairs $(a,b)$ ([[def-ordered-pair]]) with\n$a \\in A$ and $b \\in B$: no such pair is lost, because each such pair lies in\nthe ambient set being separated. Thus $z \\in A \\times B$ holds if and only if\n$z = (a,b)$ for some $a \\in A$ and some $b \\in B$.",
+          "uses": [
+            "4.2",
+            "7.1"
+          ],
+          "application": "[F7] Cartesian products are sets of the specified ordered pairs ([[def-cartesian-product]]); Separation forms the subset of an ambient set satisfying a formula with fixed parameters ([[def-axiom-schema-of-separation]])."
+        },
+        {
+          "fact": "F7",
+          "source": "def-axiom-schema-of-separation",
+          "source_section": "Definition",
+          "quote": "Let $\\varphi(z, \\bar p)$ be a formula of the language of set theory\n([[def-language-of-set-theory]]) in which the variable $y$ does not occur free.\nThe **Separation instance** for $\\varphi$ is the sentence\n\n$$\\forall \\bar p\\,\\forall x\\,\\exists y\\,\\forall z\\,\\bigl(z \\in y \\leftrightarrow (z \\in x \\wedge \\varphi(z,\\bar p))\\bigr).$$\n\nThe **Axiom Schema of Separation** is the collection of all these sentences, one\nfor each such $\\varphi$. In words: for any parameters $\\bar p$ and any set $x$,\nthere is a set $y$ whose elements are exactly the elements $z$ of $x$ for which\n$\\varphi(z,\\bar p)$ holds.\n\nIt is a schema and not a single axiom because $\\varphi$ ranges over the formulas\nof the language, of which there are infinitely many, and the language provides no\nway to quantify over them.",
+          "uses": [
+            "4.2",
+            "7.1"
+          ],
+          "application": "[F7] Cartesian products are sets of the specified ordered pairs ([[def-cartesian-product]]); Separation forms the subset of an ambient set satisfying a formula with fixed parameters ([[def-axiom-schema-of-separation]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "H is a self-map of P(Q), so recursion supplies increasing saturation stages in Q.",
+          "inputs": [
+            "ZF. Finite Q and Sigma; q0 in Q; F subset Q; total delta: Q x (tagged Sigma plus epsilon) -> P(Q); n=|Q|; S subset Q; H(T)=T union union_{q in T}delta(q,epsilon). Paths may have zero edges. Words are functions from natural initial segments.",
+            "F1",
+            "F3"
+          ],
+          "argument": "For $T\\subseteq Q$, the union of the sets $\\delta(q,\\varepsilon)$ with $q\\in T$ is a subset of $Q$. Thus $H(T)=T\\cup\\bigcup_{q\\in T}\\delta(q,\\varepsilon)$ is a self-map of $\\mathcal P(Q)$. Applying natural-number recursion with initial element $S$ gives the unique sequence $C_k(S)$, with $C_k(S)\\subseteq C_{k+1}(S)\\subseteq Q$. [F1, F3]"
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Stationarity persists; n+1 strict inclusions would force cardinality at least n+1 inside Q, so C_n=C_(n+1).",
+          "inputs": [
+            "ZF. Finite Q and Sigma; q0 in Q; F subset Q; total delta: Q x (tagged Sigma plus epsilon) -> P(Q); n=|Q|; S subset Q; H(T)=T union union_{q in T}delta(q,epsilon). Paths may have zero edges. Words are functions from natural initial segments.",
+            "1.1",
+            "F2",
+            "F4"
+          ],
+          "argument": "If $C_j=C_{j+1}$, applying $H$ repeatedly gives $C_{j+r}=C_j$ for every natural $r$: the case $r=0$ is equality and the successor follows from $H(C_j)=C_j$. If $C_n\\ne C_{n+1}$, therefore all inclusions from $C_0$ through $C_{n+1}$ are strict. Each raises natural cardinality by at least one, by the finite-subset equality criterion. Starting at $|C_0|\\ge0$, induction gives $|C_{n+1}|\\ge n+1$, contradicting $C_{n+1}\\subseteq Q$ and $|Q|=n$. Hence $C_n=C_{n+1}$ and all subsequent stages equal $E(S)$. [step 1.1, F2, F4]"
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "E(S) is closed, contains S, and is contained in every closed superset of S.",
+          "inputs": [
+            "ZF. Finite Q and Sigma; q0 in Q; F subset Q; total delta: Q x (tagged Sigma plus epsilon) -> P(Q); n=|Q|; S subset Q; H(T)=T union union_{q in T}delta(q,epsilon). Paths may have zero edges. Words are functions from natural initial segments.",
+            "1.1",
+            "2.1",
+            "F4"
+          ],
+          "argument": "The equality $H(E(S))=E(S)$ says precisely that $E(S)$ is epsilon-closed, and $S=C_0\\subseteq E(S)$. If $S\\subseteq T$ and $T$ is epsilon-closed, then $C_0\\subseteq T$; from $C_k\\subseteq T$, every successor of a state in $C_k$ is in $T$, so $C_{k+1}\\subseteq T$. Induction gives $E(S)\\subseteq T$. This proves leastness and extensivity. [step 1.1, step 2.1, F4]"
+        },
+        {
+          "id": "derive-3.2",
+          "step": "3.2",
+          "claim": "C_k(S) equals endpoints of epsilon paths of at most k edges in both directions; stabilization gives all finite epsilon paths.",
+          "inputs": [
+            "ZF. Finite Q and Sigma; q0 in Q; F subset Q; total delta: Q x (tagged Sigma plus epsilon) -> P(Q); n=|Q|; S subset Q; H(T)=T union union_{q in T}delta(q,epsilon). Paths may have zero edges. Words are functions from natural initial segments.",
+            "1.1",
+            "2.1",
+            "F4"
+          ],
+          "argument": "For every $k$, $C_k(S)$ is exactly the set of endpoints of epsilon paths from $S$ with at most $k$ edges. At $k=0$ both sets are $S$. An endpoint in $C_{k+1}$ either already lies in $C_k$, or follows one epsilon edge from a state in $C_k$; retaining or appending that edge gives a path of length at most $k+1$. Conversely a path of length at most $k+1$ either has length zero, or deleting its last edge leaves a path of length at most $k$, whose endpoint belongs to $C_k$; its last endpoint lies in $C_{k+1}$. These implications give the successor equivalence and induction proves the claim. Stabilization then implies that $E(S)$ is exactly the endpoints of all finite epsilon paths: paths of length at most $n$ give $C_n$, while longer paths give a stage equal to $C_n$. [step 1.1, step 2.1, F4]"
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Leastness gives monotonicity and idempotence; path starting-point membership gives union preservation, including the empty union.",
+          "inputs": [
+            "ZF. Finite Q and Sigma; q0 in Q; F subset Q; total delta: Q x (tagged Sigma plus epsilon) -> P(Q); n=|Q|; S subset Q; H(T)=T union union_{q in T}delta(q,epsilon). Paths may have zero edges. Words are functions from natural initial segments.",
+            "3.1",
+            "3.2",
+            "F1"
+          ],
+          "argument": "If $S\\subseteq T$, the closed set $E(T)$ contains $S$, so leastness gives $E(S)\\subseteq E(T)$. Because $E(S)$ is already closed, leastness gives $E(E(S))\\subseteq E(S)$ and extensivity gives the reverse inclusion. For any family $(S_i)_{i\\in I}$, a path starts in $\\bigcup_iS_i$ exactly when its starting state belongs to some $S_i$. Applying the endpoint equivalence gives $E(\\bigcup_iS_i)=\\bigcup_iE(S_i)$ in both directions. For $I=\\varnothing$ neither side has a path starting point, so $E(\\varnothing)=\\varnothing$. [step 3.1, step 3.2, F1]"
+        },
+        {
+          "id": "derive-4.2",
+          "step": "4.2",
+          "claim": "The typed frozen-index self-map has a unique recursive sequence whose terminal value defines a set-valued word function.",
+          "inputs": [
+            "ZF. Finite Q and Sigma; q0 in Q; F subset Q; total delta: Q x (tagged Sigma plus epsilon) -> P(Q); n=|Q|; S subset Q; H(T)=T union union_{q in T}delta(q,epsilon). Paths may have zero edges. Words are functions from natural initial segments.",
+            "1.1",
+            "3.1",
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F7"
+          ],
+          "argument": "Fix $w:r\\to\\Sigma$. On $\\mathbb N\\times\\mathcal P(Q)$ define $J_w(i,T)=(i+1,E(\\bigcup_{q\\in T}\\delta(q,w(i))))$ if $i<r$, and $J_w(i,T)=(i,T)$ if $i\\ge r$. In the first clause $w(i)$ exists; in both clauses the value lies in the product. Recursion starting at $(0,E(S))$ gives a unique sequence. For $k\\le r$ its value is $(k,T_k)$, as follows by induction from its first clause. In particular $T_0=E(S)$ and $T_{k+1}=E(\\bigcup_{q\\in T_k}\\delta(q,w(k)))$ for $k<r$. Define $\\widehat\\delta(S,w)=T_r$. The graph is the subset of $(\\mathcal P(Q)\\times\\Sigma^*)\\times\\mathcal P(Q)$ consisting of the triples satisfying this finite-sequence prescription, so Separation gives a set function; existence and uniqueness of the sequence give exactly one output for each input. Here the ambient products are sets; the finite-sequence condition is a set-theoretic formula with parameters $S,w,\\delta$. [step 1.1, step 3.1, F1, F3, F4, F5, F7]"
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Prefix compatibility proves the last-letter equation, and length induction proves uniqueness of the word function.",
+          "inputs": [
+            "ZF. Finite Q and Sigma; q0 in Q; F subset Q; total delta: Q x (tagged Sigma plus epsilon) -> P(Q); n=|Q|; S subset Q; H(T)=T union union_{q in T}delta(q,epsilon). Paths may have zero edges. Words are functions from natural initial segments.",
+            "4.2",
+            "F4",
+            "F5"
+          ],
+          "argument": "If two words agree at positions below $m$, their sequences for the same $S$ agree through stage $m$: the initial sets agree, and equality at stage $k<m$ gives equal unions with the same letter, hence equal next closures. Induction proves this prefix compatibility. Taking the words $u$ and $ua$ proves the displayed successor equation, while $r=0$ proves the empty-word equation. Any other function satisfying those equations agrees at the empty word and, if it agrees at $u$, agrees at $ua$ by substitution. Every nonempty word has this last-letter decomposition, so induction on length proves uniqueness on all words. [step 4.2, F4, F5]"
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "Splitting at the last letter edge and concatenating witnesses prove both endpoint implications for every word.",
+          "inputs": [
+            "ZF. Finite Q and Sigma; q0 in Q; F subset Q; total delta: Q x (tagged Sigma plus epsilon) -> P(Q); n=|Q|; S subset Q; H(T)=T union union_{q in T}delta(q,epsilon). Paths may have zero edges. Words are functions from natural initial segments.",
+            "3.2",
+            "5.1",
+            "F1",
+            "F4"
+          ],
+          "argument": "For spelling $\\varepsilon$, the endpoint assertion is the epsilon-path assertion. Suppose the assertion holds for $u$ and consider $ua$. A path spelling $ua$ has a last non-epsilon edge: its label is $a$, its preceding path spells $u$, and its following path has only epsilon labels. The preceding endpoint is in $\\widehat\\delta(S,u)$, so the last edge lands in $\\bigcup_{q\\in\\widehat\\delta(S,u)}\\delta(q,a)$ and its epsilon suffix lands in the closure of that union. Conversely a state in this closure has an epsilon path from some $v\\in\\delta(q,a)$ with $q\\in\\widehat\\delta(S,u)$. The induction hypothesis supplies a path spelling $u$ to $q$; concatenating this path, the edge to $v$, and that epsilon path gives spelling $ua$. Only witnesses for this one membership are used. Induction proves both directions for all words. [step 3.2, step 5.1, F1, F4]"
+        },
+        {
+          "id": "derive-7.1",
+          "step": "7.1",
+          "claim": "The final-state intersection is exactly path acceptance and defines a language; empty and one-state degeneracies are covered.",
+          "inputs": [
+            "ZF. Finite Q and Sigma; q0 in Q; F subset Q; total delta: Q x (tagged Sigma plus epsilon) -> P(Q); n=|Q|; S subset Q; H(T)=T union union_{q in T}delta(q,epsilon). Paths may have zero edges. Words are functions from natural initial segments.",
+            "4.1",
+            "5.1",
+            "6.1",
+            "F5",
+            "F6",
+            "F7"
+          ],
+          "argument": "Consequently the acceptance predicate holds exactly when a finite path from $q_0$ spelling $w$ ends in $F$. Its defining set is a subset of $\\Sigma^*$, hence a language. Empty $S$ has no path starts, so $\\widehat\\delta(\\varnothing,w)=\\varnothing$ for every word; empty $F$ accepts no word. If $\\Sigma=\\varnothing$ the only word is $\\varepsilon$, already treated. A one-state $Q$ and epsilon self-loops satisfy the same stabilization argument; $Q=\\varnothing$ is excluded by $q_0\\in Q$. Thus the definitions and all asserted properties are well-defined in the boundary cases as well. [step 4.1, step 5.1, step 6.1, F5, F6, F7] ∎"
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 proves E(empty)=empty; step 7.1 proves empty starting subsets and empty finals behave correctly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 3.2 and 5.1 cover zero-edge paths and the length-zero word."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 7.1 explicitly permits one-state Q, with stabilization in step 2.1; step 6.1 includes one-letter words."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 7.1 covers empty alphabet and epsilon self-loops; the Definition excludes empty Q by the given start."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.2 includes both path endpoints and zero-edge paths; step 4.2 freezes at the final word index."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 6.1 uses only individual witnesses supplied by membership, and step 4.1 needs no choice for an empty family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.2 gives closure-membership to path witnesses, and step 6.1 concatenates witnesses for the word implication."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.2 maps epsilon paths into stages, and step 6.1 splits any spelling path at its last letter edge."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-g-6b",
+        "notes": "Finite strict inclusion cannot persist through n+1 stages, so C_n is closed; induction proves leastness and the finite-path characterization in both directions. Union preservation follows from the starting vertex, including the empty family. The fixed-word recursion is a self-map on N x P(Q), and its graph is separated in an ambient set; prefix compatibility proves the word recursion. Splitting at the last letter proves path iff without simultaneous choices. Empty S,F,Sigma and zero-length paths are checked. Read direct ZF suppliers; Gallier Definitions 3.5-3.7 and Aho sections 1-2 agree with the stated tagged-label convention. Sources and locators are linked in the current item; current reader/refuter evidence was checked against the actual proof."
+      }
+    },
+    "thm-subset-construction-reachability-invariant": {
+      "assumptions": "ZF. Epsilon-NFA N=(Q,Sigma,delta,q0,F); E is its epsilon closure; S0=E({q0}); mu(T,a)=E(union_{q in T}delta(q,a)); G={T subset Q:T intersects F}; S is any subset of Q.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-epsilon-nfa-word-transition",
+          "source_section": "Definition",
+          "quote": "An **epsilon-NFA** is a tuple $N=(Q,\\Sigma,\\delta,q_0,F)$ with finite $Q$, $q_0\\in Q$, $F\\subseteq Q$, a finite alphabet $\\Sigma$, and a total map\n$$\\delta:Q\\times(\\Sigma\\sqcup\\{\\varepsilon\\})\\longrightarrow\\mathcal P(Q).$$\nHere the disjoint union tags letters and the empty-input label separately; $\\varepsilon$ on an edge consumes no letter. Missing arrows in a diagram mean empty transition sets. Words and concatenation have the convention of [[def-computation-alphabet-and-word-convention]].\n\nFor $S\\subseteq Q$, put $n=|Q|$ and define\n$$C_0(S)=S,\\qquad C_{k+1}(S)=C_k(S)\\cup\\bigcup_{q\\in C_k(S)}\\delta(q,\\varepsilon),\\qquad E(S)=C_n(S).$$\nWrite $\\operatorname{ECl}(S)=E(S)$ and $\\operatorname{ECl}(q)=E(\\{q\\})$. A subset $T$ is **epsilon-closed** when $\\delta(q,\\varepsilon)\\subseteq T$ for every $q\\in T$. The construction below shows that $E(S)$ is the least epsilon-closed superset of $S$.\n\nThe **extended word transition** is the unique function $\\widehat\\delta:\\mathcal P(Q)\\times\\Sigma^*\\to\\mathcal P(Q)$ satisfying\n$$\\widehat\\delta(S,\\varepsilon)=E(S),\\qquad \\widehat\\delta(S,ua)=E\\left(\\bigcup_{q\\in\\widehat\\delta(S,u)}\\delta(q,a)\\right).$$\nAbbreviate $\\widehat\\delta(q,w)=\\widehat\\delta(\\{q\\},w)$. A finite path of length $\\ell$ is a sequence $x_0,\\ldots,x_\\ell$ of states together with labels $b_0,\\ldots,b_{\\ell-1}$ such that $x_{j+1}\\in\\delta(x_j,b_j)$. Its spelling is the word obtained by erasing the epsilon labels. Length-zero paths are allowed. The set $\\widehat\\delta(S,w)$ consists exactly of endpoints of such paths starting in $S$ with spelling $w$.\n\nThe closure is extensive, monotone, idempotent, preserves every set-indexed union of subsets of $Q$, and satisfies $E(\\varnothing)=\\varnothing$. A word is **accepted** when $\\widehat\\delta(q_0,w)\\cap F\\ne\\varnothing$, and\n$$L(N)=\\{w\\in\\Sigma^*: \\widehat\\delta(q_0,w)\\cap F\\ne\\varnothing\\}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "3.1",
+            "4.1"
+          ],
+          "application": "[F1] Epsilon closure maps subsets to subsets, has $E(\\varnothing)=\\varnothing$, and the NFA word transition satisfies the initial and successor equations and the final-set intersection test ([[def-epsilon-nfa-word-transition]])."
+        },
+        {
+          "fact": "F2",
+          "source": "cor-cardinality-of-the-power-set",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite set and $n := \\lvert A\\rvert$. Then the power set\n$\\mathcal{P}(A)$ is finite and\n\n$$\\lvert\\mathcal{P}(A)\\rvert = 2^{\\,n},$$\n\nthe power being the $\\mathbb{N}$-valued exponentiation of [[def-nat-power]].\nMoreover $n < 2^{\\,n}$.\n\nThe last inequality is the quantitative form, for finite $A$, of Cantor's\ntheorem $A \\prec \\mathcal{P}(A)$ ([[thm-cantor-powerset]]), which holds for every\nset whatsoever. The two statements are consistent and the proof below derives the\ninequality from Cantor's theorem rather than leaving them side by side.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "[F2] For finite $Q$, its power set is finite with cardinality $2^{|Q|}$ ([[cor-cardinality-of-the-power-set]])."
+        },
+        {
+          "fact": "F3",
+          "source": "def-deterministic-finite-automaton",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be an alphabet. A **deterministic finite automaton** over\n$\\Sigma$ is a quintuple\n$$ D=(Q,\\Sigma,\\delta,q_0,F) $$\nsuch that:\n\n- $Q$ is a finite set of **states**.\n- $q_0\\in Q$ is the **start state**.\n- $F\\subseteq Q$ is the set of **accepting states**.\n- $\\delta:Q\\times\\Sigma\\to Q$ is a total **transition function** in the sense\n  of [[def-function]], with domain exactly the Cartesian product\n  $Q\\times\\Sigma$ of [[def-cartesian-product]].\n\nThe adjective \"deterministic\" means that for each pair $(q,a)\\in Q\\times\\Sigma$\nthere is exactly one next state $\\delta(q,a)$, and \"finite\" means that $Q$ has\nfinite cardinality in the sense of [[def-finite-cardinality]].",
+          "uses": [
+            "1.1"
+          ],
+          "application": "[F3] A DFA requires a finite state set, an element chosen as start, a subset of accepting states, and a total letter transition into its state set ([[def-deterministic-finite-automaton]])."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-existence-and-uniqueness-of-extended-dfa-transition",
+          "source_section": "Statement",
+          "quote": "For every DFA $D=(Q,\\Sigma,\\delta,q_0,F)$ there exists a unique function\n$$ \\delta^*:Q\\times\\Sigma^*\\to Q $$\nsuch that, for all $q\\in Q$, $u\\in\\Sigma^*$, and $a\\in\\Sigma$,\n$$ \\delta^*(q,\\varepsilon)=q,\\qquad \\delta^*(q,ua)=\\delta(\\delta^*(q,u),a). $$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "4.1"
+          ],
+          "application": "[F4] Every DFA has a unique extended transition with $d^*(q,\\varepsilon)=q$ and $d^*(q,ua)=d(d^*(q,u),a)$ ([[thm-existence-and-uniqueness-of-extended-dfa-transition]])."
+        },
+        {
+          "fact": "F5",
+          "source": "def-dfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA, and let $\\delta^*$ be its extended\ntransition function. This function exists and is unique by\n[[thm-existence-and-uniqueness-of-extended-dfa-transition]].\n\nA word $w\\in\\Sigma^*$ is **accepted by $D$** when\n$$ \\delta^*(q_0,w)\\in F. $$\n\nThe **language recognized by $D$** is\n$$ L(D):=\\{w\\in\\Sigma^*: \\delta^*(q_0,w)\\in F\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "3.1"
+          ],
+          "application": "[F5] A DFA accepts $w$ exactly when its extended transition from the start belongs to its accepting set ([[def-dfa-acceptance-and-recognized-language]])."
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ],
+          "application": "[F6] Zero and successor establish a property for every natural length ([[thm-induction-principle]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "The full power set has 2^|Q| states, the tuple is a total DFA, and its extended transition exists.",
+          "inputs": [
+            "ZF. Epsilon-NFA N=(Q,Sigma,delta,q0,F); E is its epsilon closure; S0=E({q0}); mu(T,a)=E(union_{q in T}delta(q,a)); G={T subset Q:T intersects F}; S is any subset of Q.",
+            "F1",
+            "F2",
+            "F3",
+            "F4"
+          ],
+          "argument": "Since $Q$ is finite, $\\mathcal P(Q)$ is finite with $2^{|Q|}$ elements. It is nonempty because $\\varnothing\\subseteq Q$. For every $T\\subseteq Q$ and $a\\in\\Sigma$, all $\\delta(q,a)$ lie in $\\mathcal P(Q)$, so their union and its closure are subsets of $Q$. Thus $\\mu$ is defined on all $\\mathcal P(Q)\\times\\Sigma$ and takes values in $\\mathcal P(Q)$. Moreover $S_0\\subseteq Q$ and $G\\subseteq\\mathcal P(Q)$. These verify the DFA hypotheses and give its extended transition $\\mu^*$. [F1, F2, F3, F4]"
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "At the empty word both sides of the invariant equal E(S).",
+          "inputs": [
+            "ZF. Epsilon-NFA N=(Q,Sigma,delta,q0,F); E is its epsilon closure; S0=E({q0}); mu(T,a)=E(union_{q in T}delta(q,a)); G={T subset Q:T intersects F}; S is any subset of Q.",
+            "F1",
+            "F4"
+          ],
+          "argument": "Fix any $S\\subseteq Q$. At length zero, $\\mu^*(E(S),\\varepsilon)=E(S)=\\widehat\\delta(S,\\varepsilon)$. This includes $S=\\varnothing$ and subsets that are not epsilon-closed. [F1, F4, base]"
+        },
+        {
+          "id": "derive-1.3",
+          "step": "1.3",
+          "claim": "Substitution of the length-k invariant in the DFA successor equation yields the NFA successor value for ua.",
+          "inputs": [
+            "ZF. Epsilon-NFA N=(Q,Sigma,delta,q0,F); E is its epsilon closure; S0=E({q0}); mu(T,a)=E(union_{q in T}delta(q,a)); G={T subset Q:T intersects F}; S is any subset of Q.",
+            "F1",
+            "F4"
+          ],
+          "argument": "Assume the equality holds for every word $u$ of length $k$, and write a word of length $k+1$ uniquely as $ua$. Then $\\mu^*(E(S),ua)=\\mu(\\mu^*(E(S),u),a)=\\mu(\\widehat\\delta(S,u),a)=E(\\bigcup_{q\\in\\widehat\\delta(S,u)}\\delta(q,a))=\\widehat\\delta(S,ua)$. The second equality uses the induction hypothesis, and the last uses the NFA recursion. [F1, F4, ih, given]"
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Length induction gives the invariant for all S,w and specialization gives the start-state identity.",
+          "inputs": [
+            "ZF. Epsilon-NFA N=(Q,Sigma,delta,q0,F); E is its epsilon closure; S0=E({q0}); mu(T,a)=E(union_{q in T}delta(q,a)); G={T subset Q:T intersects F}; S is any subset of Q.",
+            "1.2",
+            "1.3",
+            "F6"
+          ],
+          "argument": "Induction on length proves the equality for every $w$; since $S$ was arbitrary, it holds for every subset. Taking $S=\\{q_0\\}$ gives $\\mu^*(S_0,w)=\\widehat\\delta(q_0,w)$. [step 1.2, step 1.3, F6, discharge-induction]"
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Final-set intersection transfers acceptance in both directions, proving language equality including empty/full F.",
+          "inputs": [
+            "ZF. Epsilon-NFA N=(Q,Sigma,delta,q0,F); E is its epsilon closure; S0=E({q0}); mu(T,a)=E(union_{q in T}delta(q,a)); G={T subset Q:T intersects F}; S is any subset of Q.",
+            "2.1",
+            "F1",
+            "F5"
+          ],
+          "argument": "If $D_N$ accepts $w$, then $\\mu^*(S_0,w)\\in G$, so $\\widehat\\delta(q_0,w)\\cap F\\ne\\varnothing$ and $N$ accepts $w$. Conversely if $N$ accepts $w$, that intersection is nonempty, so $\\mu^*(S_0,w)\\in G$ and $D_N$ accepts $w$. This proves equality of the two languages, also for $F=\\varnothing$ (neither accepts) and $F=Q$ (acceptance is exactly nonemptiness of the reached subset). [step 2.1, F1, F5, given]"
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "The empty subset returns to itself on every letter and every word; empty alphabet and one-state Q remain valid.",
+          "inputs": [
+            "ZF. Epsilon-NFA N=(Q,Sigma,delta,q0,F); E is its epsilon closure; S0=E({q0}); mu(T,a)=E(union_{q in T}delta(q,a)); G={T subset Q:T intersects F}; S is any subset of Q.",
+            "F1",
+            "F4",
+            "F6",
+            "1.1",
+            "3.1"
+          ],
+          "argument": "For any letter $a$, the union indexed by the empty set is empty, whence $\\mu(\\varnothing,a)=E(\\varnothing)=\\varnothing$. Its extended transition stays empty: the empty-word value is empty, and if the value at $u$ is empty, the successor value is $\\mu(\\varnothing,a)=\\varnothing$. Induction gives absorption for every word. If $\\Sigma=\\varnothing$, the transition has empty domain and the same empty-word calculation applies; a one-state $Q$ causes no exception to the power-set count or the proof. [F1, F4, F6, step 1.1, step 3.1, discharge-induction] ∎"
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.1 make empty a valid absorbing state; step 3.1 covers empty F."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 proves the length-zero invariant."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.3 treats a one-letter word by its empty prefix; step 4.1 includes one-state Q."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 treats the empty alphabet; step 3.1 treats F=Q and F=empty."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no ordered interval or tape endpoint in this DFA claim; the empty-word boundary is recorded under zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 exhibits empty in the power set and E({q0}) as start, without choosing subset representatives."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 transfers DFA acceptance to NFA acceptance."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 transfers NFA acceptance to DFA acceptance."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-g-6b",
+        "notes": "The full finite powerset, closed start and total transition meet the current DFA definition. Induction begins at E(S), which is essential for unclosed S and the empty word, and uses exactly the NFA and DFA successor rules. Final-set membership is equivalent in both directions to nonempty intersection; the empty subset absorbs every word. Empty alphabet/finals and F=Q are covered. Checked all six suppliers; Aho section 2 uses the full powerset, whereas Gallier section 3.5 uses closed subsets as accurately distinguished locally. Sources and locators are linked in the current item; current reader/refuter evidence was checked against the actual proof."
+      }
+    },
+    "prop-deterministic-automata-are-special-nondeterministic-automata": {
+      "assumptions": "ZF. Total DFA D=(Q,Sigma,d,q0,F); N_D keeps Q,Sigma,q0,F, with delta(q,a)={d(q,a)} and delta(q,epsilon)=empty; q is any state and w any word.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-deterministic-finite-automaton",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be an alphabet. A **deterministic finite automaton** over\n$\\Sigma$ is a quintuple\n$$ D=(Q,\\Sigma,\\delta,q_0,F) $$\nsuch that:\n\n- $Q$ is a finite set of **states**.\n- $q_0\\in Q$ is the **start state**.\n- $F\\subseteq Q$ is the set of **accepting states**.\n- $\\delta:Q\\times\\Sigma\\to Q$ is a total **transition function** in the sense\n  of [[def-function]], with domain exactly the Cartesian product\n  $Q\\times\\Sigma$ of [[def-cartesian-product]].\n\nThe adjective \"deterministic\" means that for each pair $(q,a)\\in Q\\times\\Sigma$\nthere is exactly one next state $\\delta(q,a)$, and \"finite\" means that $Q$ has\nfinite cardinality in the sense of [[def-finite-cardinality]].",
+          "uses": [
+            "1.1"
+          ],
+          "application": "[F1] A DFA has finite $Q,\\Sigma$, start $q_0\\in Q$, finals $F\\subseteq Q$, and a total transition $d:Q\\times\\Sigma\\to Q$ ([[def-deterministic-finite-automaton]])."
+        },
+        {
+          "fact": "F2",
+          "source": "def-epsilon-nfa-word-transition",
+          "source_section": "Definition",
+          "quote": "An **epsilon-NFA** is a tuple $N=(Q,\\Sigma,\\delta,q_0,F)$ with finite $Q$, $q_0\\in Q$, $F\\subseteq Q$, a finite alphabet $\\Sigma$, and a total map\n$$\\delta:Q\\times(\\Sigma\\sqcup\\{\\varepsilon\\})\\longrightarrow\\mathcal P(Q).$$\nHere the disjoint union tags letters and the empty-input label separately; $\\varepsilon$ on an edge consumes no letter. Missing arrows in a diagram mean empty transition sets. Words and concatenation have the convention of [[def-computation-alphabet-and-word-convention]].\n\nFor $S\\subseteq Q$, put $n=|Q|$ and define\n$$C_0(S)=S,\\qquad C_{k+1}(S)=C_k(S)\\cup\\bigcup_{q\\in C_k(S)}\\delta(q,\\varepsilon),\\qquad E(S)=C_n(S).$$\nWrite $\\operatorname{ECl}(S)=E(S)$ and $\\operatorname{ECl}(q)=E(\\{q\\})$. A subset $T$ is **epsilon-closed** when $\\delta(q,\\varepsilon)\\subseteq T$ for every $q\\in T$. The construction below shows that $E(S)$ is the least epsilon-closed superset of $S$.\n\nThe **extended word transition** is the unique function $\\widehat\\delta:\\mathcal P(Q)\\times\\Sigma^*\\to\\mathcal P(Q)$ satisfying\n$$\\widehat\\delta(S,\\varepsilon)=E(S),\\qquad \\widehat\\delta(S,ua)=E\\left(\\bigcup_{q\\in\\widehat\\delta(S,u)}\\delta(q,a)\\right).$$\nAbbreviate $\\widehat\\delta(q,w)=\\widehat\\delta(\\{q\\},w)$. A finite path of length $\\ell$ is a sequence $x_0,\\ldots,x_\\ell$ of states together with labels $b_0,\\ldots,b_{\\ell-1}$ such that $x_{j+1}\\in\\delta(x_j,b_j)$. Its spelling is the word obtained by erasing the epsilon labels. Length-zero paths are allowed. The set $\\widehat\\delta(S,w)$ consists exactly of endpoints of such paths starting in $S$ with spelling $w$.\n\nThe closure is extensive, monotone, idempotent, preserves every set-indexed union of subsets of $Q$, and satisfies $E(\\varnothing)=\\varnothing$. A word is **accepted** when $\\widehat\\delta(q_0,w)\\cap F\\ne\\varnothing$, and\n$$L(N)=\\{w\\in\\Sigma^*: \\widehat\\delta(q_0,w)\\cap F\\ne\\varnothing\\}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "4.1"
+          ],
+          "application": "[F2] Epsilon-NFA closure is finite saturation; word transition starts with that closure and, after a letter, closes the union of successors; acceptance is nonempty intersection with $F$ ([[def-epsilon-nfa-word-transition]])."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-existence-and-uniqueness-of-extended-dfa-transition",
+          "source_section": "Statement",
+          "quote": "For every DFA $D=(Q,\\Sigma,\\delta,q_0,F)$ there exists a unique function\n$$ \\delta^*:Q\\times\\Sigma^*\\to Q $$\nsuch that, for all $q\\in Q$, $u\\in\\Sigma^*$, and $a\\in\\Sigma$,\n$$ \\delta^*(q,\\varepsilon)=q,\\qquad \\delta^*(q,ua)=\\delta(\\delta^*(q,u),a). $$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ],
+          "application": "[F3] The extended DFA transition exists and satisfies the empty-word and last-letter equations ([[thm-existence-and-uniqueness-of-extended-dfa-transition]])."
+        },
+        {
+          "fact": "F4",
+          "source": "def-dfa-acceptance-and-recognized-language",
+          "source_section": "Definition",
+          "quote": "Let $D=(Q,\\Sigma,\\delta,q_0,F)$ be a DFA, and let $\\delta^*$ be its extended\ntransition function. This function exists and is unique by\n[[thm-existence-and-uniqueness-of-extended-dfa-transition]].\n\nA word $w\\in\\Sigma^*$ is **accepted by $D$** when\n$$ \\delta^*(q_0,w)\\in F. $$\n\nThe **language recognized by $D$** is\n$$ L(D):=\\{w\\in\\Sigma^*: \\delta^*(q_0,w)\\in F\\}. $$\nThis is a language over $\\Sigma$ in the sense of\n[[def-language-over-an-alphabet]].",
+          "uses": [
+            "4.1"
+          ],
+          "application": "[F4] DFA acceptance is the condition $d^*(q_0,w)\\in F$ ([[def-dfa-acceptance-and-recognized-language]])."
+        },
+        {
+          "fact": "F5",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ],
+          "application": "[F5] Induction holds for every natural length ([[thm-induction-principle]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Singleton letter values and empty epsilon values define a total epsilon-NFA with the original tuple data.",
+          "inputs": [
+            "ZF. Total DFA D=(Q,Sigma,d,q0,F); N_D keeps Q,Sigma,q0,F, with delta(q,a)={d(q,a)} and delta(q,epsilon)=empty; q is any state and w any word.",
+            "F1",
+            "F2"
+          ],
+          "argument": "For each letter pair $(q,a)$ the element $d(q,a)$ exists in $Q$, so its singleton is a subset of $Q$. Each epsilon value is also a subset of $Q$, and the tagged epsilon domain is disjoint from the letter domain. Thus the prescription is total into $\\mathcal P(Q)$; the other tuple requirements are inherited from $D$. It defines $N_D$. [F1, F2, given]"
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "All saturation stages equal their initial set S, so E(S)=S.",
+          "inputs": [
+            "ZF. Total DFA D=(Q,Sigma,d,q0,F); N_D keeps Q,Sigma,q0,F, with delta(q,a)={d(q,a)} and delta(q,epsilon)=empty; q is any state and w any word.",
+            "F2",
+            "F5"
+          ],
+          "argument": "For any $S\\subseteq Q$, the first saturation stage is $S\\cup\\bigcup_{q\\in S}\\varnothing=S$. Whenever a stage equals $S$, its next stage has the same value. Induction gives $C_k(S)=S$ for all $k$, hence $E(S)=S$, including $S=\\varnothing$. [F2, F5, given]"
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The NFA state set at the empty word from q is the singleton containing the DFA state q.",
+          "inputs": [
+            "ZF. Total DFA D=(Q,Sigma,d,q0,F); N_D keeps Q,Sigma,q0,F, with delta(q,a)={d(q,a)} and delta(q,epsilon)=empty; q is any state and w any word.",
+            "1.2",
+            "F2",
+            "F3"
+          ],
+          "argument": "Fix $q\\in Q$. For the empty word, $\\widehat\\delta(q,\\varepsilon)=E(\\{q\\})=\\{q\\}=\\{d^*(q,\\varepsilon)\\}$. [step 1.2, F2, F3, base]"
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "The singleton successor union and identity closure yield the singleton containing d*(q,ua).",
+          "inputs": [
+            "ZF. Total DFA D=(Q,Sigma,d,q0,F); N_D keeps Q,Sigma,q0,F, with delta(q,a)={d(q,a)} and delta(q,epsilon)=empty; q is any state and w any word.",
+            "1.2",
+            "F2",
+            "F3"
+          ],
+          "argument": "Assume $\\widehat\\delta(q,u)=\\{d^*(q,u)\\}$ for all words of length $k$. For a word $ua$ of length $k+1$, the union defining its next NFA state set has the single index $d^*(q,u)$. Therefore $\\widehat\\delta(q,ua)=E(\\delta(d^*(q,u),a))=E(\\{d(d^*(q,u),a)\\})=\\{d^*(q,ua)\\}$. These equalities use the displayed singleton prescription, the identity closure, and the DFA successor equation. [step 1.2, F2, F3, given, ih]"
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Induction establishes the singleton identity for every word and state.",
+          "inputs": [
+            "ZF. Total DFA D=(Q,Sigma,d,q0,F); N_D keeps Q,Sigma,q0,F, with delta(q,a)={d(q,a)} and delta(q,epsilon)=empty; q is any state and w any word.",
+            "2.1",
+            "2.2",
+            "F5"
+          ],
+          "argument": "Induction proves the singleton identity for every word and every initial state $q$. This remains valid when the alphabet is empty, since then there is only the empty word, and when $Q$ has one state. [step 2.1, step 2.2, F5, discharge-induction]"
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Intersection of the reached singleton with F is nonempty iff its sole element belongs to F, proving language equality.",
+          "inputs": [
+            "ZF. Total DFA D=(Q,Sigma,d,q0,F); N_D keeps Q,Sigma,q0,F, with delta(q,a)={d(q,a)} and delta(q,epsilon)=empty; q is any state and w any word.",
+            "3.1",
+            "F2",
+            "F4"
+          ],
+          "argument": "At $q=q_0$, nonempty intersection $\\widehat\\delta(q_0,w)\\cap F\\ne\\varnothing$ implies its sole possible element $d^*(q_0,w)$ lies in $F$. Conversely membership of that element in $F$ witnesses the nonempty intersection. The NFA and DFA acceptance tests therefore agree for every word, giving $L(N_D)=L(D)$; in particular empty $F$ rejects all words and $F=Q$ accepts all words. [step 3.1, F2, F4, discharge-induction] ∎"
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.2 proves E(empty)=empty; step 4.1 treats empty final set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the singleton identity at the empty word."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 applied to the empty prefix covers one-letter input; step 3.1 includes one-state Q."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 treats empty alphabet, and step 4.1 treats full final set."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The singleton embedding has no interval or head coordinate; finite-word endpoints are handled by its base and successor steps."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 defines singleton values using the already total d, not a selection from multiple successors."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 derives DFA membership in F from the NFA singleton intersection."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 uses membership in F to witness the NFA singleton intersection."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-g-6b",
+        "notes": "The given DFA total map supplies each singleton letter value and the separate epsilon tag receives empty. Saturation is the identity, hence induction proves the singleton equality from every state for every word, including empty alphabet and empty word. Singleton intersection is equivalent in both directions to DFA final-state membership, including empty/full finals. Checked current DFA definition, extended transition, acceptance, induction and epsilon interface; Gallier section 3.5 p.34 explicitly observes the DFA inclusion. Sources and locators are linked in the current item; current reader/refuter evidence was checked against the actual proof."
+      }
+    },
+    "ex-epsilon-closure-and-word-transition-on-a-three-state-nfa": {
+      "assumptions": "ZF. Distinct states p,q,r; letters a,b; Q={p,q,r}, Sigma={a,b}, start p, F={r}; delta(p,epsilon)={q}, delta(q,a)={q,r}, delta(r,b)={r}; all other six entries empty.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-epsilon-nfa-word-transition",
+          "source_section": "Definition",
+          "quote": "An **epsilon-NFA** is a tuple $N=(Q,\\Sigma,\\delta,q_0,F)$ with finite $Q$, $q_0\\in Q$, $F\\subseteq Q$, a finite alphabet $\\Sigma$, and a total map\n$$\\delta:Q\\times(\\Sigma\\sqcup\\{\\varepsilon\\})\\longrightarrow\\mathcal P(Q).$$\nHere the disjoint union tags letters and the empty-input label separately; $\\varepsilon$ on an edge consumes no letter. Missing arrows in a diagram mean empty transition sets. Words and concatenation have the convention of [[def-computation-alphabet-and-word-convention]].\n\nFor $S\\subseteq Q$, put $n=|Q|$ and define\n$$C_0(S)=S,\\qquad C_{k+1}(S)=C_k(S)\\cup\\bigcup_{q\\in C_k(S)}\\delta(q,\\varepsilon),\\qquad E(S)=C_n(S).$$\nWrite $\\operatorname{ECl}(S)=E(S)$ and $\\operatorname{ECl}(q)=E(\\{q\\})$. A subset $T$ is **epsilon-closed** when $\\delta(q,\\varepsilon)\\subseteq T$ for every $q\\in T$. The construction below shows that $E(S)$ is the least epsilon-closed superset of $S$.\n\nThe **extended word transition** is the unique function $\\widehat\\delta:\\mathcal P(Q)\\times\\Sigma^*\\to\\mathcal P(Q)$ satisfying\n$$\\widehat\\delta(S,\\varepsilon)=E(S),\\qquad \\widehat\\delta(S,ua)=E\\left(\\bigcup_{q\\in\\widehat\\delta(S,u)}\\delta(q,a)\\right).$$\nAbbreviate $\\widehat\\delta(q,w)=\\widehat\\delta(\\{q\\},w)$. A finite path of length $\\ell$ is a sequence $x_0,\\ldots,x_\\ell$ of states together with labels $b_0,\\ldots,b_{\\ell-1}$ such that $x_{j+1}\\in\\delta(x_j,b_j)$. Its spelling is the word obtained by erasing the epsilon labels. Length-zero paths are allowed. The set $\\widehat\\delta(S,w)$ consists exactly of endpoints of such paths starting in $S$ with spelling $w$.\n\nThe closure is extensive, monotone, idempotent, preserves every set-indexed union of subsets of $Q$, and satisfies $E(\\varnothing)=\\varnothing$. A word is **accepted** when $\\widehat\\delta(q_0,w)\\cap F\\ne\\varnothing$, and\n$$L(N)=\\{w\\in\\Sigma^*: \\widehat\\delta(q_0,w)\\cap F\\ne\\varnothing\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ],
+          "application": "[F1] Epsilon closure is finite saturation; the empty-word value is the initial closure and each next letter takes a successor union followed by closure. Acceptance tests nonempty intersection with the final set ([[def-epsilon-nfa-word-transition]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "The nine entries type-check; closure adds q exactly when p is present, fixing the four explicitly used subsets.",
+          "inputs": [
+            "ZF. Distinct states p,q,r; letters a,b; Q={p,q,r}, Sigma={a,b}, start p, F={r}; delta(p,epsilon)={q}, delta(q,a)={q,r}, delta(r,b)={r}; all other six entries empty.",
+            "F1"
+          ],
+          "argument": "The table gives a subset of $Q$ at each of its nine state/label pairs, so the transition is total on the required domain. The finite sets, start and finals meet the epsilon-NFA requirements. Starting from $\\{p\\}$, saturation adds $q$ in one stage and adds nothing thereafter, since neither $q$ nor $r$ has an epsilon successor. Thus $E(\\{p\\})=\\{p,q\\}$; more generally $E(T)=T\\cup\\{q\\}$ if $p\\in T$, and $E(T)=T$ otherwise. In particular $E(\\varnothing)=\\varnothing$, $E(\\{q,r\\})=\\{q,r\\}$ and $E(\\{r\\})=\\{r\\}$. [given, F1]"
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The reached subsets for epsilon,a,b are {p,q},{q,r},empty by direct successor unions.",
+          "inputs": [
+            "ZF. Distinct states p,q,r; letters a,b; Q={p,q,r}, Sigma={a,b}, start p, F={r}; delta(p,epsilon)={q}, delta(q,a)={q,r}, delta(r,b)={r}; all other six entries empty.",
+            "1.1",
+            "F1"
+          ],
+          "argument": "The empty-word value is $\\widehat\\delta(p,\\varepsilon)=\\{p,q\\}$. For $a$, the successor union from this set is $\\delta(p,a)\\cup\\delta(q,a)=\\varnothing\\cup\\{q,r\\}=\\{q,r\\}$, already closed; hence $\\widehat\\delta(p,a)=\\{q,r\\}$. For $b$, the corresponding union is $\\varnothing\\cup\\varnothing=\\varnothing$, so $\\widehat\\delta(p,b)=\\varnothing$. [step 1.1, given, F1]"
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The reached subsets for aa,ab,aba are {q,r},{r},empty by the displayed unions and closures.",
+          "inputs": [
+            "ZF. Distinct states p,q,r; letters a,b; Q={p,q,r}, Sigma={a,b}, start p, F={r}; delta(p,epsilon)={q}, delta(q,a)={q,r}, delta(r,b)={r}; all other six entries empty.",
+            "1.1",
+            "2.1",
+            "F1"
+          ],
+          "argument": "After $a$ the set is $\\{q,r\\}$. Its $a$-successor union is $\\{q,r\\}\\cup\\varnothing=\\{q,r\\}$, and its $b$-successor union is $\\varnothing\\cup\\{r\\}=\\{r\\}$. Both are closed, giving $\\widehat\\delta(p,aa)=\\{q,r\\}$ and $\\widehat\\delta(p,ab)=\\{r\\}$. From $\\{r\\}$ the $a$-successor union is empty, so $\\widehat\\delta(p,aba)=\\varnothing$. [step 1.1, step 2.1, given, F1]"
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "The six computed intersections with {r} establish the three acceptances and three rejections.",
+          "inputs": [
+            "ZF. Distinct states p,q,r; letters a,b; Q={p,q,r}, Sigma={a,b}, start p, F={r}; delta(p,epsilon)={q}, delta(q,a)={q,r}, delta(r,b)={r}; all other six entries empty.",
+            "2.1",
+            "3.1",
+            "F1"
+          ],
+          "argument": "The sets for $a,aa,ab$ each contain $r$, whereas the sets for $\\varepsilon,b,aba$ do not. Intersecting them with $F=\\{r\\}$ gives $\\{r\\}$ in the first three cases and $\\varnothing$ in the other three, proving every asserted acceptance and rejection. [step 2.1, step 3.1, F1, given] ∎"
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 computes E(empty), and steps 2.1 and 3.1 obtain empty reached subsets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the empty-word value {p,q}."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 computes both one-letter words a and b."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks every missing-arrow empty transition; step 3.1 computes the dead continuation aba."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This fixed automaton has no tape or ordered interval endpoints; the zero-letter input is separately computed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 specifies all nine entries, and steps 2.1 through 4.1 use explicit sets without any selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 shows each asserted accepted word has nonempty intersection with {r}."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 computes empty intersection for each asserted rejected word; thus the listed acceptance classification is exact."
+        }
+      ]
+    },
+    "ex-subset-construction-for-an-epsilon-nfa": {
+      "assumptions": "ZF. Distinct p,q,r; Q={p,q,r}, Sigma={a,b}, start p, F={r}; delta(p,epsilon)={q}, delta(q,a)={q,r}, delta(r,b)={r}, other entries empty. A={p,q}, B={q,r}, C={r}, Z=empty.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-epsilon-nfa-word-transition",
+          "source_section": "Definition",
+          "quote": "An **epsilon-NFA** is a tuple $N=(Q,\\Sigma,\\delta,q_0,F)$ with finite $Q$, $q_0\\in Q$, $F\\subseteq Q$, a finite alphabet $\\Sigma$, and a total map\n$$\\delta:Q\\times(\\Sigma\\sqcup\\{\\varepsilon\\})\\longrightarrow\\mathcal P(Q).$$\nHere the disjoint union tags letters and the empty-input label separately; $\\varepsilon$ on an edge consumes no letter. Missing arrows in a diagram mean empty transition sets. Words and concatenation have the convention of [[def-computation-alphabet-and-word-convention]].\n\nFor $S\\subseteq Q$, put $n=|Q|$ and define\n$$C_0(S)=S,\\qquad C_{k+1}(S)=C_k(S)\\cup\\bigcup_{q\\in C_k(S)}\\delta(q,\\varepsilon),\\qquad E(S)=C_n(S).$$\nWrite $\\operatorname{ECl}(S)=E(S)$ and $\\operatorname{ECl}(q)=E(\\{q\\})$. A subset $T$ is **epsilon-closed** when $\\delta(q,\\varepsilon)\\subseteq T$ for every $q\\in T$. The construction below shows that $E(S)$ is the least epsilon-closed superset of $S$.\n\nThe **extended word transition** is the unique function $\\widehat\\delta:\\mathcal P(Q)\\times\\Sigma^*\\to\\mathcal P(Q)$ satisfying\n$$\\widehat\\delta(S,\\varepsilon)=E(S),\\qquad \\widehat\\delta(S,ua)=E\\left(\\bigcup_{q\\in\\widehat\\delta(S,u)}\\delta(q,a)\\right).$$\nAbbreviate $\\widehat\\delta(q,w)=\\widehat\\delta(\\{q\\},w)$. A finite path of length $\\ell$ is a sequence $x_0,\\ldots,x_\\ell$ of states together with labels $b_0,\\ldots,b_{\\ell-1}$ such that $x_{j+1}\\in\\delta(x_j,b_j)$. Its spelling is the word obtained by erasing the epsilon labels. Length-zero paths are allowed. The set $\\widehat\\delta(S,w)$ consists exactly of endpoints of such paths starting in $S$ with spelling $w$.\n\nThe closure is extensive, monotone, idempotent, preserves every set-indexed union of subsets of $Q$, and satisfies $E(\\varnothing)=\\varnothing$. A word is **accepted** when $\\widehat\\delta(q_0,w)\\cap F\\ne\\varnothing$, and\n$$L(N)=\\{w\\in\\Sigma^*: \\widehat\\delta(q_0,w)\\cap F\\ne\\varnothing\\}.$$",
+          "uses": [
+            "1.1"
+          ],
+          "application": "[F1] Epsilon closure is the least epsilon-closed superset, computed by finite saturation ([[def-epsilon-nfa-word-transition]])."
+        },
+        {
+          "fact": "F2",
+          "source": "thm-subset-construction-reachability-invariant",
+          "source_section": "Statement",
+          "quote": "Let $N=(Q,\\Sigma,\\delta,q_0,F)$ be an epsilon-NFA, with $E=\\operatorname{ECl}$ and $\\widehat\\delta$ as in [[def-epsilon-nfa-word-transition]]. Define\n$$D_N=(\\mathcal P(Q),\\Sigma,\\mu,S_0,G),\\qquad S_0=E(\\{q_0\\}),\\qquad G=\\{T\\subseteq Q:T\\cap F\\ne\\varnothing\\},$$\n$$\\mu(T,a)=E\\left(\\bigcup_{q\\in T}\\delta(q,a)\\right).$$\nThis is a total DFA with $2^{|Q|}$ states. Its extended transition satisfies, for every $S\\subseteq Q$ and $w\\in\\Sigma^*$,\n$$\\mu^*(E(S),w)=\\widehat\\delta(S,w).$$\nIn particular $\\mu^*(S_0,w)=\\widehat\\delta(q_0,w)$ and $L(D_N)=L(N)$. The empty subset is a legitimate absorbing state, whether or not it is reachable from $S_0$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "5.1"
+          ],
+          "application": "[F2] The subset DFA has $\\mu(T,x)=E(\\bigcup_{q\\in T}\\delta(q,x))$, start $E(\\{p\\})$, and final subsets meeting $F$. Its extended transition equals the NFA word transition from that start and its full state set has $2^{|Q|}$ elements ([[thm-subset-construction-reachability-invariant]])."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "4.1"
+          ],
+          "application": "[F3] Induction from zero and successor proves a property for every natural length ([[thm-induction-principle]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "The complete NFA prescription is total; initial closure is A and A,B,C,Z are closed.",
+          "inputs": [
+            "ZF. Distinct p,q,r; Q={p,q,r}, Sigma={a,b}, start p, F={r}; delta(p,epsilon)={q}, delta(q,a)={q,r}, delta(r,b)={r}, other entries empty. A={p,q}, B={q,r}, C={r}, Z=empty.",
+            "F1"
+          ],
+          "argument": "There are nine domain pairs; the three prescribed nonempty entries and the six empty entries all lie in $\\mathcal P(Q)$. This makes a total epsilon-NFA with the stated start and finals. Its only epsilon edge is from $p$ to $q$, so saturation adds $q$ precisely when $p$ is present and $q$ absent. Hence $E(\\{p\\})=A$, and $A,B,C,Z$ are each closed. [given, F1]"
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Direct successor unions give rows A:(B,Z) and B:(B,C).",
+          "inputs": [
+            "ZF. Distinct p,q,r; Q={p,q,r}, Sigma={a,b}, start p, F={r}; delta(p,epsilon)={q}, delta(q,a)={q,r}, delta(r,b)={r}, other entries empty. A={p,q}, B={q,r}, C={r}, Z=empty.",
+            "1.1",
+            "F2"
+          ],
+          "argument": "From $A$, the $a$-union is $\\varnothing\\cup\\{q,r\\}=B$ and the $b$-union is $\\varnothing\\cup\\varnothing=Z$. From $B$, the $a$-union is $\\{q,r\\}\\cup\\varnothing=B$ and the $b$-union is $\\varnothing\\cup\\{r\\}=C$. Closing these unions leaves them unchanged. This computes the first two rows. [step 1.1, given, F2]"
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "Direct successor unions give rows C:(Z,C) and Z:(Z,Z).",
+          "inputs": [
+            "ZF. Distinct p,q,r; Q={p,q,r}, Sigma={a,b}, start p, F={r}; delta(p,epsilon)={q}, delta(q,a)={q,r}, delta(r,b)={r}, other entries empty. A={p,q}, B={q,r}, C={r}, Z=empty.",
+            "1.1",
+            "F2"
+          ],
+          "argument": "From $C$, the $a$-union is $\\varnothing=Z$ and the $b$-union is $\\{r\\}=C$. From $Z$, both unions are empty, so both transitions return $Z$. Again each result is closed. This computes the last two rows. [step 1.1, given, F2]"
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The words epsilon,a,ab,b explicitly reach A,B,C,Z.",
+          "inputs": [
+            "ZF. Distinct p,q,r; Q={p,q,r}, Sigma={a,b}, start p, F={r}; delta(p,epsilon)={q}, delta(q,a)={q,r}, delta(r,b)={r}, other entries empty. A={p,q}, B={q,r}, C={r}, Z=empty.",
+            "1.1",
+            "2.1",
+            "F2"
+          ],
+          "argument": "The start is $A$, and the words $\\varepsilon,a,ab,b$ reach $A,B,C,Z$, respectively: the middle two follow the transitions $A\\xrightarrow{a}B\\xrightarrow{b}C$, and $A\\xrightarrow{b}Z$. Thus each of the four states is reachable. [step 1.1, step 2.1, F2]"
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Induction using the complete table proves every word remains in {A,B,C,Z}.",
+          "inputs": [
+            "ZF. Distinct p,q,r; Q={p,q,r}, Sigma={a,b}, start p, F={r}; delta(p,epsilon)={q}, delta(q,a)={q,r}, delta(r,b)={r}, other entries empty. A={p,q}, B={q,r}, C={r}, Z=empty.",
+            "2.1",
+            "2.2",
+            "3.1",
+            "F2",
+            "F3"
+          ],
+          "argument": "Every word reaches one of these four states. Indeed at length zero the state is $A$. If a prefix reaches one of the four, then appending $a$ or $b$ reaches one of the four by the computed rows. Induction on word length therefore gives the assertion for every word; the induction applies to the property that every word of a given length reaches the four-state set. [step 2.1, step 2.2, step 3.1, F2, F3]"
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Listing all eight subsets identifies exactly four unreachable states; intersection with F identifies reachable finals B,C.",
+          "inputs": [
+            "ZF. Distinct p,q,r; Q={p,q,r}, Sigma={a,b}, start p, F={r}; delta(p,epsilon)={q}, delta(q,a)={q,r}, delta(r,b)={r}, other entries empty. A={p,q}, B={q,r}, C={r}, Z=empty.",
+            "3.1",
+            "4.1",
+            "F2"
+          ],
+          "argument": "The eight subsets are $Z,\\{p\\},\\{q\\},C,A,\\{p,r\\},B,\\{p,q,r\\}$. By the two reachability implications, precisely $\\{p\\},\\{q\\},\\{p,r\\},\\{p,q,r\\}$ are unreachable. Of the reachable subsets, $B\\cap F=C\\cap F=\\{r\\}$ and $A\\cap F=Z\\cap F=\\varnothing$, giving exactly the displayed accepting states. The full DFA also designates its unreachable subsets containing $r$ as final; the table states the finals of its reachable part. [step 3.1, step 4.1, given, F2] ∎"
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.2 computes both empty-state transitions Z:(Z,Z)."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 reaches A with epsilon, the zero-letter word."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 reaches B on a and Z on b, the two one-letter inputs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 4.1 and 5.1 include the dead state and unreachable subsets and distinguish unreachable final subsets."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This reachable-subset table has no ordered interval or head endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 supplies a particular reaching word for each listed state; no choice over unspecified witnesses occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 proves reachable implies belonging to {A,B,C,Z}."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 proves membership in the four-state list implies reachability."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-g-6b",
+        "notes": "Recomputed all eight transitions: A maps to B,Z; B to B,C; C to Z,C; Z to Z,Z. The sole epsilon edge p->q makes all four closed. Words epsilon,a,ab,b respectively reach A,B,C,Z, and closure of this list under both letters proves exhaustiveness by induction. Enumerating all eight subsets leaves precisely {p},{q},{p,r},{p,q,r} unreachable; finals in the reachable part are B,C. The current subset theorem supplies exactly this construction; Aho section 2 gives the convention, not this original witness. Sources and locators are linked in the current item; current reader/refuter evidence was checked against the actual proof."
+      }
+    },
+    "cex-omitting-epsilon-closure-breaks-determinisation": {
+      "assumptions": "ZF. Variant 1 changes only the subset start to {q0}; variant 2 keeps E({q0}) but uses nu(S,a)=union_{q in S}delta(q,a). Both retain P(Q) and the final-intersection test. Step 1.1 constructs Q={p,q}, Sigma={a}, start p, F={q}, delta(p,epsilon)={q}, delta(q,a)={p}, remaining entries empty.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-epsilon-nfa-word-transition",
+          "source_section": "Definition",
+          "quote": "An **epsilon-NFA** is a tuple $N=(Q,\\Sigma,\\delta,q_0,F)$ with finite $Q$, $q_0\\in Q$, $F\\subseteq Q$, a finite alphabet $\\Sigma$, and a total map\n$$\\delta:Q\\times(\\Sigma\\sqcup\\{\\varepsilon\\})\\longrightarrow\\mathcal P(Q).$$\nHere the disjoint union tags letters and the empty-input label separately; $\\varepsilon$ on an edge consumes no letter. Missing arrows in a diagram mean empty transition sets. Words and concatenation have the convention of [[def-computation-alphabet-and-word-convention]].\n\nFor $S\\subseteq Q$, put $n=|Q|$ and define\n$$C_0(S)=S,\\qquad C_{k+1}(S)=C_k(S)\\cup\\bigcup_{q\\in C_k(S)}\\delta(q,\\varepsilon),\\qquad E(S)=C_n(S).$$\nWrite $\\operatorname{ECl}(S)=E(S)$ and $\\operatorname{ECl}(q)=E(\\{q\\})$. A subset $T$ is **epsilon-closed** when $\\delta(q,\\varepsilon)\\subseteq T$ for every $q\\in T$. The construction below shows that $E(S)$ is the least epsilon-closed superset of $S$.\n\nThe **extended word transition** is the unique function $\\widehat\\delta:\\mathcal P(Q)\\times\\Sigma^*\\to\\mathcal P(Q)$ satisfying\n$$\\widehat\\delta(S,\\varepsilon)=E(S),\\qquad \\widehat\\delta(S,ua)=E\\left(\\bigcup_{q\\in\\widehat\\delta(S,u)}\\delta(q,a)\\right).$$\nAbbreviate $\\widehat\\delta(q,w)=\\widehat\\delta(\\{q\\},w)$. A finite path of length $\\ell$ is a sequence $x_0,\\ldots,x_\\ell$ of states together with labels $b_0,\\ldots,b_{\\ell-1}$ such that $x_{j+1}\\in\\delta(x_j,b_j)$. Its spelling is the word obtained by erasing the epsilon labels. Length-zero paths are allowed. The set $\\widehat\\delta(S,w)$ consists exactly of endpoints of such paths starting in $S$ with spelling $w$.\n\nThe closure is extensive, monotone, idempotent, preserves every set-indexed union of subsets of $Q$, and satisfies $E(\\varnothing)=\\varnothing$. A word is **accepted** when $\\widehat\\delta(q_0,w)\\cap F\\ne\\varnothing$, and\n$$L(N)=\\{w\\in\\Sigma^*: \\widehat\\delta(q_0,w)\\cap F\\ne\\varnothing\\}.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ],
+          "application": "[F1] An epsilon-NFA starts its extended transition at $E(\\{q_0\\})$, closes every post-letter successor union, and accepts exactly when the resulting subset meets $F$ ([[def-epsilon-nfa-word-transition]])."
+        },
+        {
+          "fact": "F2",
+          "source": "thm-subset-construction-reachability-invariant",
+          "source_section": "Statement",
+          "quote": "Let $N=(Q,\\Sigma,\\delta,q_0,F)$ be an epsilon-NFA, with $E=\\operatorname{ECl}$ and $\\widehat\\delta$ as in [[def-epsilon-nfa-word-transition]]. Define\n$$D_N=(\\mathcal P(Q),\\Sigma,\\mu,S_0,G),\\qquad S_0=E(\\{q_0\\}),\\qquad G=\\{T\\subseteq Q:T\\cap F\\ne\\varnothing\\},$$\n$$\\mu(T,a)=E\\left(\\bigcup_{q\\in T}\\delta(q,a)\\right).$$\nThis is a total DFA with $2^{|Q|}$ states. Its extended transition satisfies, for every $S\\subseteq Q$ and $w\\in\\Sigma^*$,\n$$\\mu^*(E(S),w)=\\widehat\\delta(S,w).$$\nIn particular $\\mu^*(S_0,w)=\\widehat\\delta(q_0,w)$ and $L(D_N)=L(N)$. The empty subset is a legitimate absorbing state, whether or not it is reachable from $S_0$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ],
+          "application": "[F2] The correct subset DFA has that closed start, those closed successor unions, and final subsets meeting $F$, with exactly the same accepted language ([[thm-subset-construction-reachability-invariant]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "The four specified pairs form a total two-state epsilon-NFA and E({p})={p,q}.",
+          "inputs": [
+            "ZF. Variant 1 changes only the subset start to {q0}; variant 2 keeps E({q0}) but uses nu(S,a)=union_{q in S}delta(q,a). Both retain P(Q) and the final-intersection test. Step 1.1 constructs Q={p,q}, Sigma={a}, start p, F={q}, delta(p,epsilon)={q}, delta(q,a)={p}, remaining entries empty.",
+            "F1"
+          ],
+          "argument": "Let $Q=\\{p,q\\}$, $\\Sigma=\\{a\\}$, start $p$, and $F=\\{q\\}$, with $p\\ne q$. Put $\\delta(p,\\varepsilon)=\\{q\\}$, $\\delta(q,a)=\\{p\\}$, $\\delta(p,a)=\\varnothing$, and $\\delta(q,\\varepsilon)=\\varnothing$. All four domain entries are specified subsets of the finite state set, so this is an epsilon-NFA. Saturation from $\\{p\\}$ gives $\\{p,q\\}$ and then stays there; thus $E(\\{p\\})=\\{p,q\\}$. [construct, F1]"
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The original accepts epsilon, while changing only the start to {p} rejects it.",
+          "inputs": [
+            "ZF. Variant 1 changes only the subset start to {q0}; variant 2 keeps E({q0}) but uses nu(S,a)=union_{q in S}delta(q,a). Both retain P(Q) and the final-intersection test. Step 1.1 constructs Q={p,q}, Sigma={a}, start p, F={q}, delta(p,epsilon)={q}, delta(q,a)={p}, remaining entries empty.",
+            "1.1",
+            "F1",
+            "F2"
+          ],
+          "argument": "In the correct construction the empty word reaches $\\{p,q\\}$, whose intersection with $F$ is $\\{q\\}$, so it is accepted. In the first defective construction the empty word leaves the start at $\\{p\\}$, whose intersection with $F$ is empty, so it is rejected. This mismatch occurs before any letter transition, even though all post-letter closures in that variant are retained. [step 1.1, F1, F2, given]"
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "Without post-letter closure the corrected-start variant rejects a; the true closure and the explicit path accept a.",
+          "inputs": [
+            "ZF. Variant 1 changes only the subset start to {q0}; variant 2 keeps E({q0}) but uses nu(S,a)=union_{q in S}delta(q,a). Both retain P(Q) and the final-intersection test. Step 1.1 constructs Q={p,q}, Sigma={a}, start p, F={q}, delta(p,epsilon)={q}, delta(q,a)={p}, remaining entries empty.",
+            "1.1",
+            "F1",
+            "F2"
+          ],
+          "argument": "In the second defective construction the start is correctly $\\{p,q\\}$, but on the single letter $a$ its successor union is $\\delta(p,a)\\cup\\delta(q,a)=\\varnothing\\cup\\{p\\}=\\{p\\}$. Omitting closure leaves that set, disjoint from $F$, so the variant rejects $a$. The correct construction instead closes it to $E(\\{p\\})=\\{p,q\\}$, which meets $F$; equivalently the original NFA has the accepting path $p\\xrightarrow{\\varepsilon}q\\xrightarrow{a}p\\xrightarrow{\\varepsilon}q$. [step 1.1, F1, F2, given]"
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Both variants are total DFAs, so the exhibited mismatches refute the two language-preservation claims.",
+          "inputs": [
+            "ZF. Variant 1 changes only the subset start to {q0}; variant 2 keeps E({q0}) but uses nu(S,a)=union_{q in S}delta(q,a). Both retain P(Q) and the final-intersection test. Step 1.1 constructs Q={p,q}, Sigma={a}, start p, F={q}, delta(p,epsilon)={q}, delta(q,a)={p}, remaining entries empty.",
+            "2.1",
+            "2.2",
+            "F2"
+          ],
+          "argument": "Each defective rule still gives a total DFA on the finite power set: its letter outputs are subsets and each of its starts is a subset. The failures are therefore language failures, not missing transitions. The empty word distinguishes the first variant and $a$ distinguishes the second, refuting both universal preservation claims. [step 2.1, step 2.2, F2, discharge-construct] ∎"
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 specifies the empty transition entries; step 2.1 computes the empty-word mismatch."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the zero-letter word before any transition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 computes the one-letter distinguishing input a."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies the defective constructions remain total DFAs, excluding a mere typing failure."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample concerns finite-word acceptance and has no interval or tape endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 provides all four transitions and step 2.2 displays the actual accepting path."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted assertions are universal language-preservation claims, not biconditionals; steps 2.1 and 2.2 exhibit one mismatch for each."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No iff-reverse assertion is promised; the two distinct universal claims are refuted individually in steps 2.1 and 2.2."
+        }
+      ]
+    },
+    "def-turing-machine-initial-and-halting-configuration-interface": {
+      "assumptions": "ZF. Finite Q,Sigma,Gamma; blank in Gamma; Sigma subset Gamma minus {blank}; pairwise distinct q0,qacc,qrej in Q; total delta:(Q minus {qacc,qrej}) x Gamma -> Q x Gamma x {L,R}. Tape support is {i in N:t(i)!=blank}; input w:m->Sigma; t_w(i)=w(i) for i<m and blank otherwise.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-function",
+          "source_section": "Definition",
+          "quote": "A **function** is a relation $f$ such that $(a,b) \\in f$ and $(a,c) \\in f$ imply\n$b = c$; \"relation\" is as in [[def-relation-domain-range-and-field]].\n\nFor $a \\in \\operatorname{dom} f$ there is such a $b$, and by the condition just\nstated there is only one; $f(a)$ denotes that unique $b$, so that\n$(a,b) \\in f$ holds if and only if $a \\in \\operatorname{dom} f$ and $b = f(a)$\n([[thm-the-characterising-property-of-ordered-pairs]]).\n\nWe write $f : A \\to B$, and say $f$ is a **function from $A$ to $B$**, when $f$\nis a function with $\\operatorname{dom} f = A$ and\n$\\operatorname{ran} f \\subseteq B$ ([[def-subset-and-proper-subset]]); $A$ is the\n**domain** of $f$ and $B$ is a **codomain** for $f$. Equivalently\n$f \\subseteq A \\times B$ with $\\operatorname{dom} f = A$\n([[def-cartesian-product]], [[def-ordered-pair]]).",
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "application": "[F1] A function on a domain has exactly one value there and takes values in its specified codomain ([[def-function]]); all functions $A\\to B$ form the set $B^A$ ([[def-the-set-of-functions-from-one-set-to-another]])."
+        },
+        {
+          "fact": "F1",
+          "source": "def-the-set-of-functions-from-one-set-to-another",
+          "source_section": "Definition",
+          "quote": "Let $A$ and $B$ be sets. By\n[[lem-the-set-of-functions-between-two-sets-is-a-set]] the functions\n$A \\to B$ ([[def-function]]) form a set; it is written\n\n$$B^{A} := \\{\\, f : f \\text{ is a function with } \\operatorname{dom} f = A \\text{ and } \\operatorname{ran} f \\subseteq B \\,\\}.$$\n\nThus $f \\in B^{A}$ holds if and only if $f : A \\to B$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "application": "[F1] A function on a domain has exactly one value there and takes values in its specified codomain ([[def-function]]); all functions $A\\to B$ form the set $B^A$ ([[def-the-set-of-functions-from-one-set-to-another]])."
+        },
+        {
+          "fact": "F2",
+          "source": "def-computation-alphabet-and-word-convention",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be a finite set, called an **alphabet**. For each natural number\n$n$, a **word of length $n$ over $\\Sigma$** is a function $w:n\\to\\Sigma$,\nequivalently an element of $\\Sigma^{n}$\n([[def-the-set-of-functions-from-one-set-to-another]]). Writing\n$w(i)=a_i$ for $i<n$, we display the word as $a_0a_1\\cdots a_{n-1}$. This is\nthe same finite-word convention already used in\n[[def-finite-words-factor-avoidance-and-prefix-states]].\n\nThe unique word of length $0$ is the **empty word** $\\varepsilon$.\n\nIf $u:m\\to\\Sigma$ and $v:n\\to\\Sigma$ are words, their **concatenation** is the\nword $uv:(m+n)\\to\\Sigma$ defined by\n$$ (uv)(i):=\\begin{cases}u(i),&i<m,\\\\v(i-m),&m\\le i<m+n.\\end{cases} $$\n\nThe set of **all finite words over $\\Sigma$** is\n$$ \\Sigma^*:=\\bigcup_{n\\in\\mathbb N}\\Sigma^n, $$\nan indexed union in the sense of [[def-indexed-union-and-intersection]].",
+          "uses": [
+            "1.2",
+            "3.1"
+          ],
+          "application": "[F2] A word of length $m$ is a function $m\\to\\Sigma$; the empty word has domain zero ([[def-computation-alphabet-and-word-convention]])."
+        },
+        {
+          "fact": "F3",
+          "source": "def-natural-numbers",
+          "source_section": "Definition",
+          "quote": "The set of **natural numbers** is the **smallest inductive set**\n([[def-inductive-set]]),\n\n$$\\mathbb{N} = \\omega := \\bigcap\\,\\{\\, I : I \\text{ is inductive} \\,\\},$$\n\nwhich exists and is itself inductive by [[lem-omega-smallest-inductive]] (the\nAxiom of Infinity, [[def-axiom-of-infinity]], supplies one inductive set to\nintersect within, and Separation, [[def-axiom-schema-of-separation]], makes the\nintersection a set). On $\\mathbb{N}$ we take\n\n$$0 := \\varnothing, \\qquad \\sigma(n) := n \\cup \\{n\\},$$\n\nthe distinguished element and the successor function. Thus\n$0 = \\varnothing$, $1 = \\{0\\}$, $2 = \\{0, 1\\}$, $3 = \\{0, 1, 2\\}$, and in general\n$n = \\{0, 1, \\dots, n-1\\}$ is the set of its predecessors.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ],
+          "application": "[F3] Naturals contain zero and each natural $m$ is the finite initial segment of its predecessors ([[def-natural-numbers]]); its cardinality is $m$ ([[def-finite-cardinality]])."
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{N}$ is the set of von Neumann naturals\n([[def-natural-numbers]]): $0 = \\varnothing$, $\\sigma(n) = n \\cup \\{n\\}$, and\n$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ is itself the set of its predecessors,\nthe order being the additive order of [[def-nat-order]] identified with\nmembership in [[lem-nat-order-is-membership]]. Write $A \\approx B$ when a\nbijection $A \\to B$ exists ([[def-equinumerous]],\n[[def-injection-surjection-bijection]]). A set $A$ is **finite** when\n$A \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-countable]]).\n\n**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write\n\n$$\\lvert A\\rvert := \\text{that } n,$$\n\nthe **cardinality**, or number of elements, of $A$. The notation $\\lvert A\\rvert$\nis defined for finite $A$ only, and its value is a natural number.\n\n**Why exactly one, which is the whole content of the definition.** At least one\nsuch $n$ exists: that is literally what \"$A$ is finite\" says. At most one exists:\nif $A \\approx n$ and $A \\approx m$ with $n, m \\in \\mathbb{N}$, then $n \\approx A$,\nbecause the inverse of a bijection is a bijection, and hence $n \\approx m$,\nbecause a composition of bijections is a bijection\n([[def-injection-surjection-bijection]]); and $n \\approx m$ forces $n = m$ by\nclaim 3 of [[lem-pigeonhole]]. So $\\lvert A\\rvert$ names a single natural number\nand not a family of choices.\n\n**Four consequences, proved here because everything on this page uses them.**\n\n**(a) $\\lvert n\\rvert = n$ for every $n \\in \\mathbb{N}$.** The identity map\n$\\mathrm{id}_n$ is a bijection $n \\to n$, so $n \\approx n$; thus $n$ is finite and\nthe unique natural equinumerous with it is $n$ itself.\n\n**(b) $\\lvert\\varnothing\\rvert = 0$, and a finite $A$ satisfies\n$\\lvert A\\rvert = 0$ if and only if $A = \\varnothing$.** Since $0 = \\varnothing$,\npart (a) gives $\\lvert\\varnothing\\rvert = 0$. Conversely, if $\\lvert A\\rvert = 0$\nthen there is a bijection $f : A \\to \\varnothing$; were some $a \\in A$, the value\n$f(a)$ would be an element of $\\varnothing$, and $\\varnothing$ has none, so\n$A = \\varnothing$.\n\n**(c) Transport along a bijection.** If $A$ is finite and $f : A \\to B$ is a\nbijection, then $B$ is finite and $\\lvert B\\rvert = \\lvert A\\rvert$. Indeed\n$B \\approx A$ through $f^{-1}$ and $A \\approx \\lvert A\\rvert$, so\n$B \\approx \\lvert A\\rvert$ by transitivity.\n\n**(d) Equality of cardinalities is equinumerosity.** For finite $A$ and $B$:\n$\\lvert A\\rvert = \\lvert B\\rvert$ if and only if $A \\approx B$. If the\ncardinalities agree then $A \\approx \\lvert A\\rvert = \\lvert B\\rvert \\approx B$;\nconversely $A \\approx B$ gives $\\lvert B\\rvert = \\lvert A\\rvert$ by (c).",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ],
+          "application": "[F3] Naturals contain zero and each natural $m$ is the finite initial segment of its predecessors ([[def-natural-numbers]]); its cardinality is $m$ ([[def-finite-cardinality]])."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-subset-of-a-finite-set",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite set ([[def-countable]]) and let $B \\subseteq A$. Then:\n\n1. $B$ is finite;\n2. $\\lvert B\\rvert \\le \\lvert A\\rvert$ ([[def-finite-cardinality]]);\n3. $\\lvert B\\rvert = \\lvert A\\rvert$ if and only if $B = A$;\n4. every injection $f : A \\to A$ is a bijection, and every surjection\n   $f : A \\to A$ is a bijection.\n\nClause 3 is the finite form of the Dedekind statement: a finite set is not\nequinumerous with a proper subset of itself. Clause 4 is its working form, and\n**finiteness is exactly the hypothesis that fails in general**: the successor map\nis an injection of $\\mathbb{N}$ into itself that is not surjective, which is the\nfalse statement recorded on this page's companion.",
+          "uses": [
+            "2.1"
+          ],
+          "application": "[F4] Every subset of a finite set is finite ([[thm-subset-of-a-finite-set]])."
+        },
+        {
+          "fact": "F5",
+          "source": "def-cartesian-product",
+          "source_section": "Definition",
+          "quote": "Let $A$ and $B$ be sets. By\n[[lem-ordered-pairs-lie-in-the-double-power-set]] every ordered pair $(a,b)$ with\n$a \\in A$ and $b \\in B$ is an element of $\\mathcal{P}(\\mathcal{P}(A \\cup B))$, so\n[[def-axiom-schema-of-separation]] applied inside that set produces the\n**Cartesian product**\n\n$$A \\times B := \\{\\, z \\in \\mathcal{P}(\\mathcal{P}(A \\cup B)) : \\exists a \\in A\\ \\exists b \\in B\\ z = (a,b) \\,\\}.$$\n\nIts elements are exactly the ordered pairs $(a,b)$ ([[def-ordered-pair]]) with\n$a \\in A$ and $b \\in B$: no such pair is lost, because each such pair lies in\nthe ambient set being separated. Thus $z \\in A \\times B$ holds if and only if\n$z = (a,b)$ for some $a \\in A$ and some $b \\in B$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ],
+          "application": "[F5] Cartesian products are sets of the specified ordered pairs ([[def-cartesian-product]]); Separation forms the subset of an ambient set satisfying a formula with fixed parameters ([[def-axiom-schema-of-separation]])."
+        },
+        {
+          "fact": "F5",
+          "source": "def-axiom-schema-of-separation",
+          "source_section": "Definition",
+          "quote": "Let $\\varphi(z, \\bar p)$ be a formula of the language of set theory\n([[def-language-of-set-theory]]) in which the variable $y$ does not occur free.\nThe **Separation instance** for $\\varphi$ is the sentence\n\n$$\\forall \\bar p\\,\\forall x\\,\\exists y\\,\\forall z\\,\\bigl(z \\in y \\leftrightarrow (z \\in x \\wedge \\varphi(z,\\bar p))\\bigr).$$\n\nThe **Axiom Schema of Separation** is the collection of all these sentences, one\nfor each such $\\varphi$. In words: for any parameters $\\bar p$ and any set $x$,\nthere is a set $y$ whose elements are exactly the elements $z$ of $x$ for which\n$\\varphi(z,\\bar p)$ holds.\n\nIt is a schema and not a single axiom because $\\varphi$ ranges over the formulas\nof the language, of which there are infinitely many, and the language provides no\nway to quantify over them.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ],
+          "application": "[F5] Cartesian products are sets of the specified ordered pairs ([[def-cartesian-product]]); Separation forms the subset of an ambient set satisfying a formula with fixed parameters ([[def-axiom-schema-of-separation]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Separation inside the tape function set produces finite-support tapes and products produce configurations.",
+          "inputs": [
+            "ZF. Finite Q,Sigma,Gamma; blank in Gamma; Sigma subset Gamma minus {blank}; pairwise distinct q0,qacc,qrej in Q; total delta:(Q minus {qacc,qrej}) x Gamma -> Q x Gamma x {L,R}. Tape support is {i in N:t(i)!=blank}; input w:m->Sigma; t_w(i)=w(i) for i<m and blank otherwise.",
+            "F1",
+            "F5"
+          ],
+          "argument": "The ambient tape functions form the set $\\Gamma^{\\mathbb N}$. For any such $t$, its support is the subset of $\\mathbb N$ satisfying $t(i)\\ne\\sqcup$; Separation forms this set. Separating those functions whose supports are finite forms $\\mathcal T_M\\subseteq\\Gamma^{\\mathbb N}$. Taking the product gives the configuration set $Q\\times\\mathbb N\\times\\mathcal T_M$. Each separating formula uses the fixed tuple as parameters and does not mention the resulting set as a free variable. [F1, F5]"
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "The two disjoint exhaustive index clauses define a unique total tape function into Gamma.",
+          "inputs": [
+            "ZF. Finite Q,Sigma,Gamma; blank in Gamma; Sigma subset Gamma minus {blank}; pairwise distinct q0,qacc,qrej in Q; total delta:(Q minus {qacc,qrej}) x Gamma -> Q x Gamma x {L,R}. Tape support is {i in N:t(i)!=blank}; input w:m->Sigma; t_w(i)=w(i) for i<m and blank otherwise.",
+            "F1",
+            "F2",
+            "F5"
+          ],
+          "argument": "Fix $w:m\\to\\Sigma$. For each $i\\in\\mathbb N$, exactly one of $i<m$ and $i\\ge m$ holds. In the first case $w(i)$ exists uniquely and belongs to $\\Sigma\\subseteq\\Gamma$; in the second the assigned blank belongs to $\\Gamma$. Thus the graph of the displayed prescription, separated inside $\\mathbb N\\times\\Gamma$, defines a unique total $t_w:\\mathbb N\\to\\Gamma$. [F1, F2, F5, given]"
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Blank exclusion proves support(t_w)=m in both directions, hence finiteness.",
+          "inputs": [
+            "ZF. Finite Q,Sigma,Gamma; blank in Gamma; Sigma subset Gamma minus {blank}; pairwise distinct q0,qacc,qrej in Q; total delta:(Q minus {qacc,qrej}) x Gamma -> Q x Gamma x {L,R}. Tape support is {i in N:t(i)!=blank}; input w:m->Sigma; t_w(i)=w(i) for i<m and blank otherwise.",
+            "1.2",
+            "F3",
+            "F4"
+          ],
+          "argument": "If $i<m$, blank exclusion gives $t_w(i)=w(i)\\ne\\sqcup$, so $i\\in\\operatorname{supp}(t_w)$. Conversely $i\\in\\operatorname{supp}(t_w)$ rules out $i\\ge m$, since that clause would give $t_w(i)=\\sqcup$; hence $i<m$. Therefore $\\operatorname{supp}(t_w)=m$, which is finite with cardinality $m$. In particular any subset of the occupied cells is finite. Thus $t_w\\in\\mathcal T_M$. [step 1.2, F3, F4, given]"
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "Distinct designated states make accepting and rejecting predicates disjoint and their union exactly the halting predicate.",
+          "inputs": [
+            "ZF. Finite Q,Sigma,Gamma; blank in Gamma; Sigma subset Gamma minus {blank}; pairwise distinct q0,qacc,qrej in Q; total delta:(Q minus {qacc,qrej}) x Gamma -> Q x Gamma x {L,R}. Tape support is {i in N:t(i)!=blank}; input w:m->Sigma; t_w(i)=w(i) for i<m and blank otherwise.",
+            "1.1",
+            "F5"
+          ],
+          "argument": "If one configuration were both accepting and rejecting, its state would satisfy $q=q_{\\mathrm{acc}}=q_{\\mathrm{rej}}$, contrary to their distinctness. Conversely every state equal to $q_{\\mathrm{acc}}$ satisfies the accepting predicate and cannot satisfy the rejecting one, and every state equal to $q_{\\mathrm{rej}}$ satisfies the rejecting predicate and cannot satisfy the accepting one. Membership in the displayed two-element set is equivalent in both directions to one of these equalities, so the halting configurations are precisely the union of these two disjoint classes. Each class is a subset of the configuration set given by its state equality. [step 1.1, F5, given]"
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Length zero, length one, last occupied cell, and first blank cell obey the prescription; the initial triple is a configuration.",
+          "inputs": [
+            "ZF. Finite Q,Sigma,Gamma; blank in Gamma; Sigma subset Gamma minus {blank}; pairwise distinct q0,qacc,qrej in Q; total delta:(Q minus {qacc,qrej}) x Gamma -> Q x Gamma x {L,R}. Tape support is {i in N:t(i)!=blank}; input w:m->Sigma; t_w(i)=w(i) for i<m and blank otherwise.",
+            "1.2",
+            "2.1",
+            "F2",
+            "F3"
+          ],
+          "argument": "For $m=0$, there are no indices $i<m$, so $t_w(i)=\\sqcup$ everywhere and the support is empty. For $m=1$, its value at zero is $w(0)\\ne\\sqcup$ and all cells $i\\ge1$ are blank, so its support is $\\{0\\}$. In general the last occupied cell is $m-1$ when $m>0$, and cell $m$ is blank. Since $q_0\\in Q$ and $0\\in\\mathbb N$, $I_M(w)$ is a configuration for every input, including both these cases. If $\\Sigma=\\varnothing$ only the length-zero case occurs. [step 1.2, step 2.1, F2, F3, given]"
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "The distinct start state is nonhalting; the clamped endpoint and degenerate permitted alphabets need no extra choice.",
+          "inputs": [
+            "ZF. Finite Q,Sigma,Gamma; blank in Gamma; Sigma subset Gamma minus {blank}; pairwise distinct q0,qacc,qrej in Q; total delta:(Q minus {qacc,qrej}) x Gamma -> Q x Gamma x {L,R}. Tape support is {i in N:t(i)!=blank}; input w:m->Sigma; t_w(i)=w(i) for i<m and blank otherwise.",
+            "3.1",
+            "2.2",
+            "F3"
+          ],
+          "argument": "The state of $I_M(w)$ is $q_0$, distinct from both halting states. It therefore satisfies neither halting equality and is nonhalting, for every $w$. The left endpoint zero remains a natural coordinate under the clamped convention. Neither this endpoint rule nor the boundary predicates assert that any transition has occurred. Empty $Q$ or one-state $Q$ cannot satisfy the tuple hypotheses; the tape alphabet can be just $\\{\\sqcup\\}$ when the input alphabet is empty. Thus the construction and all boundary assertions require no extra nonempty selection or computational assumption. [step 3.1, step 2.2, F3, given] ∎"
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 gives the empty-input blank tape and handles an empty input alphabet."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies input length zero and head coordinate zero; step 4.1 states the clamped boundary."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 computes support={0} for length one; step 4.1 explains why one-state Q cannot satisfy the tuple."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 allows Gamma={blank} with empty Sigma and excludes empty Q by the tuple hypotheses."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 checks last occupied cell m-1 and first blank cell m; step 4.1 handles the leftmost head coordinate."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 separate uniquely prescribed functions; the Definition supplies blank and the three states as data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 shows nonblank implies i<m; step 2.2 shows accepting or rejecting implies halting."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 shows i<m implies nonblank; step 2.2 shows halting implies one of the two outcome equalities."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-g-6b",
+        "notes": "Separation inside Gamma^N defines finite-support tapes and inside N x Gamma defines the unique initial tape. Blank exclusion proves support(t_w)=m in BOTH directions. Distinct qacc,qrej give disjoint outcomes, and the additional q0 distinctness gives a nonhalting initial configuration. Empty input/alphabet, Gamma={blank}, length one and head zero are valid; no run/reachability theorem is asserted. Checked all eight ZF suppliers. Savage 5.1.1 has a single-ended tape and abnormal left exit; Watrous 12.1 excludes halting transition entries but has a two-sided tape and preceding blank start; MIT lecture 5 slides 8-10 has a right-infinite tape and full transition domain. Local differences are explicitly conventions. Sources and locators are linked in the current item; current reader/refuter evidence was checked against the actual proof."
+      }
+    },
+    "ex-initial-configuration-on-empty-input": {
+      "assumptions": "ZF. Q={s,A,R} with distinct states, Sigma={a}, Gamma={a,blank} with a!=blank; start s, accept A, reject R. Delta(s,a)=(A,a,right), delta(s,blank)=(A,blank,right). Input is epsilon. The blank tape maps every natural index to blank.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-turing-machine-initial-and-halting-configuration-interface",
+          "source_section": "Definition",
+          "quote": "A **raw Turing-machine tuple** is\n$$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta),$$\nwhere $Q,\\Sigma,\\Gamma$ are finite sets, $\\sqcup\\in\\Gamma$ is the blank symbol, $\\Sigma\\subseteq\\Gamma\\setminus\\{\\sqcup\\}$, the three designated states $q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\in Q$ are pairwise distinct, and\n$$\\delta:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma\\longrightarrow Q\\times\\Gamma\\times\\{\\mathsf L,\\mathsf R\\}$$\nis a total function. The direction tags $\\mathsf L,\\mathsf R$ are distinct. There are no transition entries at halting states.\n\nA **tape** for this tuple is a function $t:\\mathbb N\\to\\Gamma$ with finite support\n$$\\operatorname{supp}(t)=\\{i\\in\\mathbb N:t(i)\\ne\\sqcup\\}.$$\nWrite $\\mathcal T_M$ for the set of these tapes. A **configuration** is a triple $C=(q,h,t)\\in Q\\times\\mathbb N\\times\\mathcal T_M$. The tape has cells $0,1,2,\\ldots$. The left-boundary convention leaves a left-moving head at zero when it is already at zero; at a positive cell it moves to its predecessor. Right movement increases the cell number by one. No permanent end marker is imposed.\n\nFor an input word $w:m\\to\\Sigma$ in the convention of [[def-computation-alphabet-and-word-convention]], define\n$$t_w(i)=\\begin{cases}w(i),&i<m,\\\\\\sqcup,&i\\ge m,\\end{cases}\\qquad I_M(w)=(q_0,0,t_w).$$\nThus the initial head scans the first input cell for nonempty input, and cell zero for empty input. In both cases it is a valid tape coordinate.\n\nRelative to $M$, a configuration $(q,h,t)$ is **accepting** iff $q=q_{\\mathrm{acc}}$, **rejecting** iff $q=q_{\\mathrm{rej}}$, and **halting** iff $q\\in\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\}$. It is **nonhalting** otherwise. These are predicates on configurations, not claims that configurations are reachable. The initial configuration is always nonhalting.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ],
+          "application": "[F1] The raw tuple requires totality on the nonhalting state/tape-symbol pairs. The initial tape writes the length-$m$ word at indices below $m$ and blank elsewhere; configurations have a natural head coordinate and finite-support tape, and halting is determined by the two designated states ([[def-turing-machine-initial-and-halting-configuration-interface]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Both required nonhalting domain pairs have one correctly typed output, so the displayed raw tuple is valid.",
+          "inputs": [
+            "ZF. Q={s,A,R} with distinct states, Sigma={a}, Gamma={a,blank} with a!=blank; start s, accept A, reject R. Delta(s,a)=(A,a,right), delta(s,blank)=(A,blank,right). Input is epsilon. The blank tape maps every natural index to blank.",
+            "F1"
+          ],
+          "argument": "Removing $A,R$ from $Q$ leaves exactly $\\{s\\}$, so the transition domain is $\\{(s,a),(s,\\sqcup)\\}$. The two entries give one value to each pair, both in $Q\\times\\Gamma\\times\\{\\mathsf L,\\mathsf R\\}$. All sets are finite, $\\sqcup\\notin\\Sigma$, and the three designated states are distinct. Thus the data meet every raw-tuple requirement. [given, F1]"
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "At length zero every initial-tape value is blank, the support is empty and the head coordinate zero is valid.",
+          "inputs": [
+            "ZF. Q={s,A,R} with distinct states, Sigma={a}, Gamma={a,blank} with a!=blank; start s, accept A, reject R. Delta(s,a)=(A,a,right), delta(s,blank)=(A,blank,right). Input is epsilon. The blank tape maps every natural index to blank.",
+            "1.1",
+            "F1"
+          ],
+          "argument": "The empty word has length zero. For any natural $i$, the condition $i<0$ is false, so its initial-tape formula gives $t_{\\varepsilon}(i)=\\sqcup=t_{\\mathrm{blank}}(i)$. Its support is $\\{i:\\sqcup\\ne\\sqcup\\}=\\varnothing$, a finite set. Hence it is a tape and $I_M(\\varepsilon)=(s,0,t_{\\mathrm{blank}})$ is a configuration; zero is a head coordinate even though it is not an index of an input letter. [step 1.1, F1]"
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The state s equals neither halting state, so the initial triple is nonhalting.",
+          "inputs": [
+            "ZF. Q={s,A,R} with distinct states, Sigma={a}, Gamma={a,blank} with a!=blank; start s, accept A, reject R. Delta(s,a)=(A,a,right), delta(s,blank)=(A,blank,right). Input is epsilon. The blank tape maps every natural index to blank.",
+            "2.1",
+            "F1"
+          ],
+          "argument": "Its state is $s$, unequal to $A$ and $R$. The accepting and rejecting equalities are both false, so their disjunction is false and the configuration is nonhalting. This conclusion concerns the initial triple and does not apply the transition function. [step 2.1, given, F1] ∎"
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the all-blank tape with empty support for empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks input length zero and valid head coordinate zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The example specifies only the empty word, not a one-letter input; the general one-letter case belongs to the supplier definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 checks that the only nonhalting state is s and both tape-symbol transitions exist."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 retains the head at cell zero although no input letter occupies it."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 explicitly gives both transition values and step 2.1 gives every tape value."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 checks both halting equalities are false, so the initial configuration is nonhalting."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example asserts one explicit nonhalting configuration, not a converse characterization of all nonhalting configurations."
+        }
+      ]
+    },
+    "ex-accepting-and-rejecting-configurations-are-machine-relative": {
+      "assumptions": "ZF. Q={s,A,R} with distinct states, Sigma={a}, Gamma={a,blank} with a!=blank; common start s, delta(s,a)=(A,a,right), delta(s,blank)=(A,blank,right). M designates accept A/reject R; N designates accept R/reject A. C=(A,0,t_blank), t_blank(i)=blank for all natural i.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-turing-machine-initial-and-halting-configuration-interface",
+          "source_section": "Definition",
+          "quote": "A **raw Turing-machine tuple** is\n$$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta),$$\nwhere $Q,\\Sigma,\\Gamma$ are finite sets, $\\sqcup\\in\\Gamma$ is the blank symbol, $\\Sigma\\subseteq\\Gamma\\setminus\\{\\sqcup\\}$, the three designated states $q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\in Q$ are pairwise distinct, and\n$$\\delta:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma\\longrightarrow Q\\times\\Gamma\\times\\{\\mathsf L,\\mathsf R\\}$$\nis a total function. The direction tags $\\mathsf L,\\mathsf R$ are distinct. There are no transition entries at halting states.\n\nA **tape** for this tuple is a function $t:\\mathbb N\\to\\Gamma$ with finite support\n$$\\operatorname{supp}(t)=\\{i\\in\\mathbb N:t(i)\\ne\\sqcup\\}.$$\nWrite $\\mathcal T_M$ for the set of these tapes. A **configuration** is a triple $C=(q,h,t)\\in Q\\times\\mathbb N\\times\\mathcal T_M$. The tape has cells $0,1,2,\\ldots$. The left-boundary convention leaves a left-moving head at zero when it is already at zero; at a positive cell it moves to its predecessor. Right movement increases the cell number by one. No permanent end marker is imposed.\n\nFor an input word $w:m\\to\\Sigma$ in the convention of [[def-computation-alphabet-and-word-convention]], define\n$$t_w(i)=\\begin{cases}w(i),&i<m,\\\\\\sqcup,&i\\ge m,\\end{cases}\\qquad I_M(w)=(q_0,0,t_w).$$\nThus the initial head scans the first input cell for nonempty input, and cell zero for empty input. In both cases it is a valid tape coordinate.\n\nRelative to $M$, a configuration $(q,h,t)$ is **accepting** iff $q=q_{\\mathrm{acc}}$, **rejecting** iff $q=q_{\\mathrm{rej}}$, and **halting** iff $q\\in\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\}$. It is **nonhalting** otherwise. These are predicates on configurations, not claims that configurations are reachable. The initial configuration is always nonhalting.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ],
+          "application": "[F1] A raw tuple has three pairwise distinct designated states and a total transition on the complement of its two halting states. A configuration is a state/head/finite-support-tape triple; acceptance and rejection mean equality of its state to that machine's respective designated state ([[def-turing-machine-initial-and-halting-configuration-interface]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Both designated-state orderings give valid tuples on the identical two-pair transition domain.",
+          "inputs": [
+            "ZF. Q={s,A,R} with distinct states, Sigma={a}, Gamma={a,blank} with a!=blank; common start s, delta(s,a)=(A,a,right), delta(s,blank)=(A,blank,right). M designates accept A/reject R; N designates accept R/reject A. C=(A,0,t_blank), t_blank(i)=blank for all natural i.",
+            "F1"
+          ],
+          "argument": "Both machines remove the same set $\\{A,R\\}$ from $Q$. Their nonhalting domain is therefore exactly $\\{(s,a),(s,\\sqcup)\\}$, and the two displayed entries provide a unique correctly typed output at each pair. In $M$ the designated triple is $(s,A,R)$, and in $N$ it is $(s,R,A)$; each has distinct entries. Their finite sets and blank exclusions are the same, so both tuples satisfy all the requirements. [given, F1]"
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The all-blank tape has empty support and C is the same valid configuration for both machines.",
+          "inputs": [
+            "ZF. Q={s,A,R} with distinct states, Sigma={a}, Gamma={a,blank} with a!=blank; common start s, delta(s,a)=(A,a,right), delta(s,blank)=(A,blank,right). M designates accept A/reject R; N designates accept R/reject A. C=(A,0,t_blank), t_blank(i)=blank for all natural i.",
+            "1.1",
+            "F1"
+          ],
+          "argument": "The blank tape has support $\\{i\\in\\mathbb N:\\sqcup\\ne\\sqcup\\}=\\varnothing$. It is consequently a tape for both machines, and $A\\in Q$ and $0\\in\\mathbb N$ make $C$ a configuration of both. The shared state, head, and tape components require no change when the designations are interchanged. [step 1.1, given, F1]"
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "In M the equality to the accepting state holds and equality to the rejecting state fails.",
+          "inputs": [
+            "ZF. Q={s,A,R} with distinct states, Sigma={a}, Gamma={a,blank} with a!=blank; common start s, delta(s,a)=(A,a,right), delta(s,blank)=(A,blank,right). M designates accept A/reject R; N designates accept R/reject A. C=(A,0,t_blank), t_blank(i)=blank for all natural i.",
+            "2.1",
+            "F1"
+          ],
+          "argument": "For $M$ the accepting equality is $A=q_{\\mathrm{acc}}^M=A$, which is true, whereas the rejecting equality is $A=q_{\\mathrm{rej}}^M=R$, which is false. Thus $C$ is accepting and not rejecting for $M$. [step 2.1, given, F1]"
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "In N the equality to the rejecting state holds and equality to the accepting state fails, proving machine relativity.",
+          "inputs": [
+            "ZF. Q={s,A,R} with distinct states, Sigma={a}, Gamma={a,blank} with a!=blank; common start s, delta(s,a)=(A,a,right), delta(s,blank)=(A,blank,right). M designates accept A/reject R; N designates accept R/reject A. C=(A,0,t_blank), t_blank(i)=blank for all natural i.",
+            "2.1",
+            "3.1",
+            "F1"
+          ],
+          "argument": "For $N$ the rejecting equality is $A=q_{\\mathrm{rej}}^N=A$, which is true, whereas the accepting equality is $A=q_{\\mathrm{acc}}^N=R$, which is false. Thus $C$ is rejecting and not accepting for $N$. It is halting for both machines, but the named outcome depends on the machine's designations, as asserted. [step 2.1, step 3.1, given, F1] ∎"
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 computes empty support of the common tape."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies zero as the common head coordinate."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the singleton nonhalting state set {s} and its two symbol pairs."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 shows swapping designated states preserves the exact transition domain."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 verifies the shared leftmost head position without invoking a move."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 specifies both tuples entirely; step 2.1 specifies the common tape pointwise."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 evaluates the accepting equality and failed rejecting equality for M."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 evaluates the rejecting equality and failed accepting equality for N; all claimed predicate tests are evaluated."
+        }
+      ]
+    }
+  }
+}

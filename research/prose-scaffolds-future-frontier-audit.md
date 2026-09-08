@@ -1,5 +1,34 @@
 # Prose-scaffold future-frontier integration audit
 
+## UC-73 scope amendment, 2026-09-08
+
+Computability prose §53 now binds six replacement pairs (38 A, 15 B items).
+New A626.2/B626.4 `nondeterministic-recursive-padding-and-time-separation`
+supplies the published nondeterministic time-hierarchy theorem. Existing
+A612.2 gains a clocked simulation theorem with separate time and space
+interpreters. Both page registration and the 144-pair Phase-2 manifest are
+updated; new item arrays remain empty until scaffolding. Full proof gates
+and contracts are in `plan-computability-theory-track.md` §53.1; consumer
+repair strategies are in `published-consumer-supplier-ledger.md`. This is
+scope integration, not a proof-completeness certificate. The historical
+four-track inventory below has a different scope and is unchanged.
+
+2026-09-08 correction: the historical counts and certificates below describe
+the earlier inventory. The new cross-library audit found omitted machine
+prerequisites and mathematical interfaces, so that receipt is not a current
+all-item adequacy certificate. See
+`research/four-track-cross-library-reconciliation-2026-09-08.md` and
+`research/four-track-dependency-reconciliation.json` for the reconciled
+inventory, explicit prose-only boundaries, and deferred published repairs.
+
+Current reconciled inventory: 58 pairs, 985 proposed items (756 A, 229 B).
+All current page edges are integrated without changing orders or hydrating
+canonical item arrays. The added 38 A items fit the existing pages. RL-12 also
+gains six local Serre-proof items and two definitions moved from RL-14, with no
+new pair. The
+four-track gate registry still has five unresolved quantum obligations;
+neither this integration nor a passing plan validator licenses their use.
+
 Final supervising audit, 2026-09-07. This receipt covers the owner-authorised
 Homological Algebra enrichment and the Braid Groups, Quantum Groups,
 Kazhdan--Lusztig Theory, and Representation Theory of Symmetric Groups prose

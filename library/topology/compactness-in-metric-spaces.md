@@ -2,7 +2,7 @@
 page: compactness-in-metric-spaces
 title: "Compactness in Metric Spaces"
 status: published
-items: [def-dependent-choice, def-metric-compactness, lem-compactness-is-intrinsic,
+items: [def-metric-compactness, lem-compactness-is-intrinsic,
         def-metric-compactness-variants, def-totally-bounded,
         lem-totally-bounded-basic, thm-compact-iff-finite-intersection-property,
         lem-closed-subset-of-a-compact-space-is-compact,

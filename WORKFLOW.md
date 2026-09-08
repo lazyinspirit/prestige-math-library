@@ -100,6 +100,7 @@ web access, sessions, and output capture. Stage profiles override role defaults.
 | Step 5 authors and author recovery | Astra / medium |
 | Step 3 initial reviewers; Group Alpha (`alpha`) | Sol / high |
 | Step 3 final adjudicators and their gate recovery | Astra / medium |
+| Step 6b adjudicators and their gate recovery | Astra / medium |
 | Step 8 adjudication | Sol / xhigh |
 | Step 8 final adjudication | Astra / medium |
 | Step 2 partition; Step 6 readers/refuters; Step 7 group readers; other Step 9/10 agents | Terra / high |
@@ -107,6 +108,18 @@ web access, sessions, and output capture. Stage profiles override role defaults.
 
 Other dispatches use their role defaults; for example, unprofiled Beta uses
 Terra xhigh. Consult the stage-selected profile, not a role name alone.
+
+Step 6b accepts sound items, repairs only with 100% confidence, and otherwise
+records `escalated` in its group decisions for an owner hold. Unresolved
+escalations block closure and automatic gate repair. Adjudicators must search
+the web and read authoritative sources for unfamiliar mathematics, recording
+the relevant statements and checked hypotheses. Step 6c is unchanged.
+
+Step 6b uses `reviewed_no_defect` for independently reviewed, sound metadata
+normalization or audit enrichment on touched/page routes. It requires exact
+change evidence, a `metadata` or `audit_enrichment` change kind, empty defect
+references, and a current carrier hash. It cannot close a reported defect or
+orphan an existing defect-ledger row.
 Rate limits do not authorize a model change; substitution requires an owner
 instruction.
 
@@ -121,7 +134,7 @@ obeys role slots and the configured global limit, currently **24** in
 Whole-run writes and ordered snapshots/receipts are serial.
 Dispatch starts are staggered by three seconds; completion wakes the engine.
 Controls/external work use the configured 30-second polling fallback.
-Configured reports are every ten minutes. Supervisors also check every ten
+Configured reports are every ten minutes. Supervisors check every ten
 minutes and intervene only on blockers or repairs that fail to finish.
 
 Agents and judges currently compact at **200,000 total context tokens**.
@@ -141,7 +154,10 @@ Logs retain bounded beginnings/ends with truncation markers.
 A stage clears only when successful matching results cover every unit,
 required artifacts exist, and its gates pass. Process exit alone is insufficient.
 The engine recomputes coverage from disk, adopts compatible live dispatches,
-and reconciles their eventual receipts.
+and reconciles their eventual receipts. Persisted stage ownership also adopts
+repair-hook labels outside the primary result pattern. A group join waits
+for adopted repair jobs as well as locally launched jobs before rerunning
+gates or spending another repair round.
 Legacy results may use `coversMap`; when no result declares coverage, the
 coverage helper falls back to a result count. Artifact and gate checks still apply.
 
@@ -171,15 +187,37 @@ pages fail validation if their declared page prerequisites or authored logical
 dependencies reach `deferred-set-theory-beyond-choice`, even transitively. That
 catalogue is a target ledger, never a supplier page.
 
-Source gates require harvest dispositions, fetched source evidence, live URLs,
-and result backing. Recover URLs before replacing sources. Missing full text
-blocks source closure; a source-scouting Beta handles work needing judgment.
+Source gates require harvest dispositions and verified active sources or
+documented Step 1 source-drop decisions. After an initial full-text failure,
+agents search the web autonomously and retry recovery five times. The fetch
+tool also retries failed bodies five times and records attempts. Genuine
+open-web absence permits an alternate proof, not removal of mathematics.
+Retain `source_resolution` evidence and complete per-item arguments with
+dependencies as specified in `briefs/beta-scaffold.md`. Only fully confident
+decisions pass; uncertainty escalates to the owner. Step 3 independently
+judges soundness, not availability of the original or a second treatment.
+Compressed-object PDF sources require `mutool` for an accurate page count;
+parser failure leaves them unstamped. A page-count pass does not establish
+that the cited chapter is present or has been read. Source fetching allows
+at least two seconds per address connection attempt, within its overall
+timeout, to avoid premature failures on reachable academic hosts.
+URL liveness reads decoded coverage strings and excludes `historical_*`
+snapshots, `checks`, `recovery_attempts`, and `source_resolution`; valid dropped sources are
+history, not live citations. Fetch/backing/coverage gates validate each drop;
+it supplies no fabricated fetch stamp or mathematical approval.
 
 Splicing preserves an existing complete same-page inventory when a run
 manifest is empty; partial or missing inventories fail. Manifest items require
 explicit `deps` arrays, normalized mechanically when absent.
 Proof contracts recognize `deps`, `justified_by`, and `forward_refs`;
 forward references still require their own ordering/cycle checks.
+
+Step 3 records same-frontier cross-batch dependencies (including same-group
+batches) under `briefs/tasks/frontier-dependency-ledger.md`. Consumer-batch inputs
+merge into `research/RUN-cross-batch-dependencies.json`; writers maintain them
+after dependency edits. Stage joins refresh and deduplicate the ledger, and
+Step 9's lead reads it for scope and impact. This inventory does not replace
+mathematical review, Step-6 verdicts, or certification.
 
 Manifest policy accepts an existing item only when the canonical plan already
 homes it on that same page, or an owner-approved re-home receipt licenses the
@@ -221,6 +259,19 @@ Escalation holds Step 3 without more mathematical dispatches until an owner
 decision or changed evidence resolves it. Provider/launch retry limits and all
 other stages' budgets are unchanged. The final task is generated from the
 current canonical template, not a stale run-specific recheck prompt.
+
+### Phase-2 supplier boundary
+
+Step 3 checks structural page prerequisites and actual item-level proof
+dependencies separately. A defect in another item merely sharing a prerequisite
+page is Phase-3 consumer debt, not a blocker on a new supplier. Retain that debt
+in `research/published-consumer-supplier-ledger.md`. A blocking published defect
+must identify the owned item, actual dependency path, and affected premise;
+unlinked proof uses and well-definedness obligations count too. Reroute or
+prove those premises locally when possible. Never accept a defective actual
+supplier, waive the Foundations boundary, or replace independent verdicts with
+a graph traversal. Apply this rule through the Step-3 prompts and normal recheck,
+not by editing an insufficient verdict to sufficient.
 
 ```bash
 autopilot pause --state-dir .autopilot/RUN

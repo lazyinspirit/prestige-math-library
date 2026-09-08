@@ -59,6 +59,7 @@ parts:
       - solvability-by-radicals-and-kummer-theory
       - the-group-algebra-and-representations
       - maschkes-theorem-and-complete-reducibility
+      - finite-averaging-and-character-theory-prerequisites
       - characters-and-the-orthogonality-relations
       - induced-representations-and-frobenius-reciprocity
 ---
@@ -124,6 +125,9 @@ and Sylow theory turns the prime divisors of $|G|$ into existence, conjugacy, an
 statements for $p$-subgroups. Nilpotence, the Frattini subgroup, the Galois
 correspondence, finite fields, cyclotomic extensions, solvability by radicals, and Artin's
 proof of the fundamental theorem of algebra show how extensions are built. Representation
-theory then passes to $k[G]$-modules: Maschke gives semisimplicity, characters encode
-orthogonality and central-character arithmetic, and induction adds Frobenius reciprocity,
+theory then passes to $k[G]$-modules, where Maschke gives semisimplicity. Finite averaging
+supplies the intervening linear-algebra and character-theory interface: projections,
+idempotent traces, class-function indicators, the normalized Hermitian form, equality for
+finite unit sums, and the Galois behavior of cyclotomic averages. Characters can then encode
+orthogonality and central-character arithmetic, while induction adds Frobenius reciprocity,
 Mackey decomposition, and Burnside's $p^aq^b$ solvability theorem.

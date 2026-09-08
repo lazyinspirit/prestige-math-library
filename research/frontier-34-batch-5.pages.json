@@ -1,0 +1,515 @@
+[
+  {
+    "order": 365.917,
+    "id": "minkowski-theory-and-number-field-class-groups",
+    "kind": "A",
+    "category": "number-theory",
+    "title": "Minkowski Theory and Number Field Class Groups",
+    "companion": "minkowski-theory-and-number-field-class-groups-examples",
+    "requires": [
+      "decomposition-inertia-and-frobenius-examples"
+    ],
+    "items": [
+      {
+        "id": "def-minkowski-embedding-of-a-number-field",
+        "kind": "definition",
+        "deps": [
+          "def-archimedean-embeddings-and-number-field-signature"
+        ],
+        "statement": "For a degree n number field of signature (r1,r2), sigma:K -> R^r1 x C^r2 = R^n lists the real embeddings and one embedding from each conjugate pair. Complex coordinates are separate unscaled real and imaginary coordinates.",
+        "proof_plan": "Fix a finite ordering and representatives. Complex conjugation and permutation only apply real orthogonal maps; no sqrt(2) factors.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Chapter 4, before Proposition 4.26, printed pp.79–80"
+        }
+      },
+      {
+        "id": "def-full-euclidean-lattice-and-covolume",
+        "kind": "definition",
+        "deps": [
+          "def-linear-basis",
+          "def-determinant-of-a-square-matrix"
+        ],
+        "statement": "For n>=1, a full lattice is Lambda=A Z^n with A an invertible real n by n matrix. Its covolume is |det A|.",
+        "proof_plan": "Unimodular changes of integral basis have determinant +/-1, so the number is independent of basis; spell out integer inverse matrices. The next lemma identifies this with volume.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Lattices; Remark 4.16(a), pp.73–75"
+        }
+      },
+      {
+        "id": "lem-full-lattice-fundamental-domain-and-bounded-points",
+        "kind": "lemma",
+        "deps": [
+          "def-full-euclidean-lattice-and-covolume",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "lem-euclidean-linear-maps-have-matrices-and-are-bounded"
+        ],
+        "statement": "The half-open domain D=A[0,1)^n tiles R^n uniquely under Lambda translations and has volume covol(Lambda). Every bounded set meets Lambda in finitely many points.",
+        "proof_plan": "Apply coordinatewise integer parts after A^-1. Boundedness of A^-1 gives finitely many integer tuples in a bounded box. Use determinant volume scaling with its inherited choice hypotheses; boundary ambiguity is removed by half-open intervals.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Lemma 4.14; fundamental parallelopiped and Remark 4.16, pp.73–75"
+        }
+      },
+      {
+        "id": "lem-blichfeldt-lattice-point-principle",
+        "kind": "lemma",
+        "deps": [
+          "lem-full-lattice-fundamental-domain-and-bounded-points",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-lebesgue-measure-is-a-complete-measure"
+        ],
+        "statement": "For a full lattice Lambda and Lebesgue measurable S with vol(S)>covol(Lambda), there are distinct x,y in S with x-y in Lambda.",
+        "proof_plan": "Enumerate Z^n explicitly. Partition S by D+v and translate pieces into D. If all pieces are disjoint, countable additivity and translation invariance give vol(S)<=vol(D), a contradiction. This works for infinite volume as well and does not select infinitely many witnesses.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Theorem 4.17 and proof, printed p.75"
+        }
+      },
+      {
+        "id": "thm-minkowski-convex-body-theorem",
+        "kind": "theorem",
+        "deps": [
+          "lem-blichfeldt-lattice-point-principle",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "def-convex-subset-of-euclidean-space"
+        ],
+        "statement": "For n>=1, a measurable convex set C=-C in R^n with vol(C)>2^n covol(Lambda) contains a nonzero point of Lambda.",
+        "proof_plan": "Apply Blichfeldt to C/2. For distinct x,y there, 2x,-2y belong to C, and their midpoint x-y belongs to C. All Euclidean-volume axiom assumptions are inherited explicitly.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Discussion preceding Theorem 4.19, printed p.76"
+        }
+      },
+      {
+        "id": "cor-minkowski-convex-body-theorem-at-equality",
+        "kind": "corollary",
+        "deps": [
+          "thm-minkowski-convex-body-theorem",
+          "lem-full-lattice-fundamental-domain-and-bounded-points"
+        ],
+        "statement": "If C is compact, convex and origin symmetric and vol(C)>=2^n covol(Lambda), C contains a nonzero lattice point.",
+        "proof_plan": "Each (1+1/k)C has a nonzero lattice point, all within 2C. A finite intersection argument on the finite set (Lambda intersect 2C) minus {0}, followed by closedness, gives one in C. No unbounded or merely open equality assertion.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Theorem 4.19, printed p.76; Stein Lemma 7.1.5"
+        }
+      },
+      {
+        "id": "def-successive-minima-of-a-convex-body-with-respect-to-a-lattice",
+        "kind": "definition",
+        "deps": [
+          "def-full-euclidean-lattice-and-covolume",
+          "def-convex-subset-of-euclidean-space"
+        ],
+        "statement": "A centrally symmetric convex body means a compact convex C=-C with nonempty interior. Define lambda_i(C,Lambda)=inf{t>0:dim_R span(tC intersect Lambda)>=i}, for 1<=i<=n.",
+        "proof_plan": "Keep both arguments explicit. Positivity, finiteness, attainment and the distinction between a real directional basis and an integral lattice basis are proved next.",
+        "source": {
+          "url": "https://people.maths.ox.ac.uk/greenbj/papers/addcomb2009-3.pdf",
+          "locator": "Section 3.7, printed p.27, successive-minima paragraph"
+        }
+      },
+      {
+        "id": "lem-successive-minima-attainment-and-adapted-flag",
+        "kind": "lemma",
+        "deps": [
+          "def-successive-minima-of-a-convex-body-with-respect-to-a-lattice",
+          "lem-full-lattice-fundamental-domain-and-bounded-points",
+          "thm-linear-change-of-variables-for-lebesgue-measure"
+        ],
+        "statement": "For a symmetric convex body C and full lattice, 0<lambda_1<=...<=lambda_n<infinity. There are independent b_i in lambda_i C intersect Lambda with Lambda intersect lambda_i int(C) contained in span_R(b_1,...,b_(i-1)). Also vol(int C)=vol(C), and replacing C by int C preserves the infima.",
+        "proof_plan": "Symmetry and an interior ball imply a ball about 0 lies in C. Boundedness and that ball sandwich C between two balls. Use finiteness of lattice points in a fixed large dilate for attainment. Choose successively minimal gauge outside the preceding span, treating ties as blocks. For 0<t<1, tC is contained in int C by convexity and the interior ball; determinant scaling and t increasing to 1 give equal volumes and equal infima. The b_i need not generate Lambda over Z.",
+        "source": {
+          "url": "https://people.maths.ox.ac.uk/greenbj/papers/addcomb2009-3.pdf",
+          "locator": "Section 3.7, directional basis and Theorem 3.3 opening, pp.27–28"
+        }
+      },
+      {
+        "id": "lem-triangular-borel-maps-scale-euclidean-volume",
+        "kind": "lemma",
+        "deps": [
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-linear-change-of-variables-for-lebesgue-measure"
+        ],
+        "statement": "If a_i>0 and f_i:R^(n-i)->R are Borel, T_i(x)=a_i x_i+f_i(x_(i+1),...,x_n) defines a Borel bijection with Borel inverse and vol(T(E))=(product a_i)vol(E) for every Borel E.",
+        "proof_plan": "Invert recursively from coordinate n down. Decompose into one-coordinate affine shears/scalings, and apply Tonelli to indicator functions on each coordinate fiber. Borel inverse ensures T(E) is Borel. This supplies Green’s volume step without unjustified differentiability of slice centers.",
+        "source": {
+          "url": "https://people.maths.ox.ac.uk/greenbj/papers/addcomb2009-3.pdf",
+          "locator": "Theorem 3.3, printed p.28, triangular-volume step (local Fubini replacement)"
+        }
+      },
+      {
+        "id": "lem-minkowski-successive-minima-volume-deformation",
+        "kind": "lemma",
+        "deps": [
+          "lem-successive-minima-attainment-and-adapted-flag",
+          "lem-triangular-borel-maps-scale-euclidean-volume"
+        ],
+        "statement": "For U=int(C), adapted b_i and lambda_0=0 there is a Borel injection F:U->R^n with vol(F(U))=(product lambda_i)vol(U). If x,y differ last in coordinate k relative to b_i, (F(x)-F(y))/2 belongs to lambda_k U and has nonzero kth coordinate.",
+        "proof_plan": "For each j, select a point s_j(x) in the open slice with fixed tail (x_j,...,x_n); s_1=x. For j>1 take the first rational prefix in a fixed enumeration lying in the slice. The domains of candidates are open, so the selector is Borel and depends only on the tail. Extend prefix functions by zero off the open projection. Put F=sum_j(lambda_j-lambda_(j-1))s_j. Coordinate i is lambda_i x_i plus a Borel function of the later coordinates, hence the previous lemma gives volume. For last differing k, s_j(x)=s_j(y) for j>k; symmetry and convexity give the difference claim, and its kth coordinate is lambda_k(x_k-y_k)/2. This explicitly replaces the centroid regularity shortcut in Green.",
+        "source": {
+          "url": "https://people.maths.ox.ac.uk/greenbj/papers/addcomb2009-3.pdf",
+          "locator": "Theorem 3.3, pp.27–28, full deformation proof"
+        }
+      },
+      {
+        "id": "thm-minkowski-second-theorem-on-successive-minima",
+        "kind": "theorem",
+        "deps": [
+          "lem-minkowski-successive-minima-volume-deformation",
+          "lem-blichfeldt-lattice-point-principle",
+          "lem-successive-minima-attainment-and-adapted-flag",
+          "cor-index-of-a-full-rank-integer-sublattice-is-the-absolute-determinant",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-linear-change-of-variables-for-lebesgue-measure"
+        ],
+        "statement": "For a symmetric convex body C and full lattice Lambda in R^n, (2^n/n!)covol(Lambda) <= (product_i lambda_i(C,Lambda))vol(C) <= 2^n covol(Lambda).",
+        "proof_plan": "Upper: if vol(F(U))>covol(2Lambda), Blichfeldt gives distinct F(x),F(y) whose half difference is in Lambda. The preceding lemma puts it in lambda_k U but outside the preceding flag, contradiction. Lower: C contains conv{+/- b_i/lambda_i}. Its volume is (2^n/n!)|det(b_i)|/(product lambda_i): split into orthants, integrate the unit simplex inductively by Tonelli, then apply linear scaling. Since the b_i span a full sublattice, |det(b_i)|>=covol(Lambda). State both bounds, including n=1. No appeal to later Freiman machinery.",
+        "source": {
+          "url": "https://people.maths.ox.ac.uk/greenbj/papers/addcomb2009-3.pdf",
+          "locator": "Theorem 3.3, pp.27–28 (upper bound); lower bound is the explicit cross-polytope argument"
+        }
+      },
+      {
+        "id": "thm-ring-of-integers-and-ideals-are-full-lattices",
+        "kind": "theorem",
+        "deps": [
+          "def-minkowski-embedding-of-a-number-field",
+          "def-full-euclidean-lattice-and-covolume",
+          "thm-ring-of-integers-free-of-rank-degree",
+          "thm-discriminant-as-an-embedding-determinant",
+          "lem-nonzero-number-field-ideal-has-finite-quotient",
+          "cor-index-of-a-full-rank-integer-sublattice-is-the-absolute-determinant",
+          "def-fractional-ideal"
+        ],
+        "statement": "The Minkowski images of O_K and every nonzero fractional O_K-ideal are full lattices in R^n.",
+        "proof_plan": "For O_K turn conjugate embedding rows into real and imaginary rows; nonzero discriminant makes the real matrix nonsingular. Integral ideals are finite-index subgroups and therefore free of full rank by integer sublattice theorem. For fractional I choose d!=0 in O_K with dI integral. Multiplication by d is an invertible real block map (real scalar blocks, complex multiplication blocks), so pull back the full lattice. No fractional ideal index [O_K:I] is used.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Proposition 4.26, pp.79–80; Stein Lemma 7.1.8"
+        }
+      },
+      {
+        "id": "thm-covolume-of-an-ideal-lattice",
+        "kind": "theorem",
+        "deps": [
+          "thm-ring-of-integers-and-ideals-are-full-lattices",
+          "thm-discriminant-as-an-embedding-determinant",
+          "def-absolute-norm-of-an-ideal",
+          "cor-index-of-a-full-rank-integer-sublattice-is-the-absolute-determinant"
+        ],
+        "statement": "For nonzero integral a, covol(sigma(a))=2^(-r2)sqrt(|d_K|)N(a) in the unscaled embedding.",
+        "proof_plan": "Each conjugate pair contributes determinant of modulus 2 on replacing real/imaginary rows by conjugate rows. Compute O_K first and multiply by integer index N(a). Fractional ideals must first be scaled to integral ideals whenever this formula is used.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Proposition 4.26, printed pp.79–80"
+        }
+      },
+      {
+        "id": "lem-archimedean-norm-bound",
+        "kind": "lemma",
+        "deps": [
+          "def-minkowski-embedding-of-a-number-field",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "cor-volume-of-the-unit-n-ball",
+          "thm-am-gm",
+          "thm-field-norm-and-trace-by-embeddings",
+          "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets"
+        ],
+        "statement": "For t>0 let X_t={(x,z):sum|x_i|+2sum|z_j|<=t}. It is a compact symmetric convex body of volume 2^r1(pi/2)^r2 t^n/n!, and product|x_i| product|z_j|^2 <=(t/n)^n throughout X_t.",
+        "proof_plan": "Use real signs and polar integration with rho_j=2|z_j|; each angular integral gives (pi/2)rho_j d rho_j. Prove the needed integer-exponent simplex integral by repeated one-variable integration (integration by parts or binomial expansion), including exponent zero and empty variable groups. AM-GM uses n factors with each complex radius twice; equality at equal radii proves sharpness for this region. It is a weighted sum ball, not the nonconvex norm-product sublevel set. For numerical corollaries establish 3<pi<4 inline: the twelve unit-circle points obtained by sign changes and coordinate swaps from (1,0) and (sqrt(3)/2,1/2) form an inscribed polygon of area 3 (twelve determinant triangles of area 1/4). The disk contains a positive-area open patch outside it, and the surrounding square of area 4 contains a positive-area corner outside the disk. Use the published unit-ball volume formula and triangle area by linear scaling of the simplex.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "4.21; Lemmas 4.22–4.23; Example 4.24; Lemma 4.25, pp.77–79"
+        }
+      },
+      {
+        "id": "thm-small-element-in-a-number-field-ideal",
+        "kind": "theorem",
+        "deps": [
+          "cor-minkowski-convex-body-theorem-at-equality",
+          "thm-covolume-of-an-ideal-lattice",
+          "lem-archimedean-norm-bound"
+        ],
+        "statement": "For every nonzero integral a there is nonzero alpha in a with |N_K/Q(alpha)| <= (4/pi)^r2 (n!/n^n)sqrt(|d_K|)N(a).",
+        "proof_plan": "Choose t^n=(4/pi)^r2 n! sqrt(|d_K|)N(a), so vol(X_t)=2^n covol(sigma(a)). Apply the compact equality theorem and the norm estimate. Track n=r1+2r2 explicitly.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Proposition 4.27, pp.80–81"
+        }
+      },
+      {
+        "id": "thm-minkowski-bound-for-ideal-classes",
+        "kind": "theorem",
+        "deps": [
+          "thm-small-element-in-a-number-field-ideal",
+          "def-ideal-class-group-of-a-domain",
+          "lem-ideal-class-group-well-defined",
+          "cor-ring-of-integers-is-a-dedekind-domain",
+          "thm-nonzero-ideals-in-dedekind-domains-are-invertible",
+          "thm-ideal-norm-is-multiplicative",
+          "thm-principal-ideal-norm-is-absolute-field-norm"
+        ],
+        "statement": "Every class in Cl(O_K) contains a nonzero integral ideal b with N(b)<=M_K=(4/pi)^r2(n!/n^n)sqrt(|d_K|). The current cited abstract ideal-group suppliers assume AC; see the fatal axiom-interface finding in batch notes.",
+        "proof_plan": "For representative I take d!=0 with a=d I^-1 integral. Choose alpha in a by the small-element theorem. Then b=(alpha)a^-1=(alpha/d)I is integral because (alpha) is contained in a, and [b]=[I]. Both a,b are integral, so N(b)N(a)=N((alpha)); cancel N(a)>0. Independence of d follows from the displayed principal multiplier. Do not silently claim a ZF-only class-group dependency closure.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Theorem 4.3 statement p.70 and proof p.81"
+        }
+      },
+      {
+        "id": "lem-finitely-many-number-field-ideals-of-bounded-norm",
+        "kind": "lemma",
+        "deps": [
+          "def-absolute-norm-of-an-ideal",
+          "lem-nonzero-number-field-ideal-has-finite-quotient",
+          "thm-ring-of-integers-free-of-rank-degree",
+          "thm-lagrange"
+        ],
+        "statement": "For every real B>=1, the nonzero integral ideals a of O_K with N(a)<=B form a finite set.",
+        "proof_plan": "If N(a)=m, Lagrange in the finite additive quotient gives m O_K subset a. Such ideals inject into the subsets of the finite ring O_K/m O_K. Union over 1<=m<=floor B is finite. Supply finite powerset and finite-union reasoning inline.",
+        "source": {
+          "url": "https://wstein.org/books/ant/ant.pdf",
+          "locator": "Proposition 6.3.6 and proof, printed p.76"
+        }
+      },
+      {
+        "id": "thm-finiteness-of-the-number-field-class-group",
+        "kind": "theorem",
+        "deps": [
+          "thm-minkowski-bound-for-ideal-classes",
+          "lem-finitely-many-number-field-ideals-of-bounded-norm"
+        ],
+        "statement": "The ideal class group Cl(O_K) is finite, with the hypotheses inherited from the class-group supplier chain.",
+        "proof_plan": "Take the image in the quotient of the finite set of bounded integral representatives; the bound theorem proves surjectivity.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Theorem 4.4, pp.70–71"
+        }
+      },
+      {
+        "id": "cor-class-group-generated-by-small-primes",
+        "kind": "corollary",
+        "deps": [
+          "thm-minkowski-bound-for-ideal-classes",
+          "thm-number-field-integral-ideal-factorisation-in-zf",
+          "thm-ideal-norm-is-multiplicative"
+        ],
+        "statement": "Cl(O_K) is generated by the classes of prime ideals p with N(p)<=M_K.",
+        "proof_plan": "Factor each bounded representative; every prime factor has integer norm at least 2 and norm at most that of the representative. An empty generating set means the trivial group.",
+        "source": {
+          "url": "https://wstein.org/books/ant/ant.pdf",
+          "locator": "Lemma 7.3.1 and proof, printed p.84"
+        }
+      },
+      {
+        "id": "cor-no-nontrivial-number-field-has-discriminant-plus-or-minus-one",
+        "kind": "corollary",
+        "deps": [
+          "thm-small-element-in-a-number-field-ideal",
+          "cor-trace-and-norm-of-an-algebraic-integer"
+        ],
+        "statement": "If n=[K:Q]>1, then |d_K|>1. More precisely sqrt(|d_K|)>=(pi/4)^r2 n^n/n!.",
+        "proof_plan": "Apply the small-element theorem to O_K; a nonzero integral norm is a positive integer in absolute value. Let a_n=(pi/4)^(n/2)n^n/n!. Then a_2=pi/2>1 and a_(n+1)/a_n=(sqrt(pi)/2)(1+1/n)^n>1 by binomial expansion and pi>1; r2<=n/2 gives the desired lower bound. Establish numerical inequalities from earlier real/complex pi conventions, not decimals.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Theorem 4.9 proof, printed p.72; Stein Corollary 7.1.9"
+        }
+      },
+      {
+        "id": "cor-no-nontrivial-number-field-is-unramified-over-q",
+        "kind": "corollary",
+        "deps": [
+          "cor-no-nontrivial-number-field-has-discriminant-plus-or-minus-one",
+          "thm-ramified-primes-and-the-number-field-discriminant",
+          "lem-every-integer-above-one-has-a-prime-divisor"
+        ],
+        "statement": "Every finite extension K/Q with degree>1 has a ramified rational prime.",
+        "proof_plan": "The nonzero integer |d_K|>1 has a prime divisor; the published iff criterion converts divisibility to finite-prime ramification. The explicit prime-divisor lemma supplies existence.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Theorem 4.9, printed p.72"
+        }
+      },
+      {
+        "id": "lem-bounded-conjugates-give-finitely-many-integral-polynomials",
+        "kind": "lemma",
+        "deps": [
+          "cor-algebraic-integer-minimal-polynomial-criterion",
+          "thm-field-norm-and-trace-by-embeddings"
+        ],
+        "statement": "For fixed n and R>=1, only finitely many monic integer polynomials of degree at most n have all complex roots of modulus <=R. In degree m the kth coefficient has modulus <=binom(m,k)R^k.",
+        "proof_plan": "Expand the product over roots and bound each elementary symmetric sum. Each coefficient ranges over a finite integer interval. The finite union over 1<=m<=n is canonically enumerable.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Theorem 8.43 proof, pp.151–152, bounded minimal-polynomial coefficients"
+        }
+      },
+      {
+        "id": "lem-hermite-minkowski-bounded-primitive-integral-element",
+        "kind": "lemma",
+        "deps": [
+          "thm-minkowski-convex-body-theorem",
+          "thm-covolume-of-an-ideal-lattice",
+          "cor-trace-and-norm-of-an-algebraic-integer",
+          "thm-field-norm-and-trace-by-embeddings",
+          "lem-bounded-conjugates-give-finitely-many-integral-polynomials",
+          "lem-restriction-fibres-for-embeddings-in-a-finite-tower",
+          "thm-finite-extension-is-separable-iff-separable-degree-is-full",
+          "cor-fields-of-characteristic-zero-and-finite-fields-are-perfect",
+          "lem-archimedean-norm-bound",
+          "cor-the-algebraic-numbers-in-c-form-an-algebraic-closure-of-q"
+        ],
+        "statement": "For fixed n>=2 and B>=1, every degree-n field with |d_K|<=B has a primitive integral alpha whose conjugates have modulus <=sqrt(1+(sqrt(B)+1)^2).",
+        "proof_plan": "Set T=sqrt(B)+1. If r1>0 use |x1|<T, all other real coordinates |xi|<1 and all complex moduli <1. Volume 2^r1 T pi^r2 exceeds 2^n covol(sigma(O_K)). Nonzero alpha has only its distinguished real value possibly of modulus >=1; integrality of norm forces that value to be unique. If r1=0 use |Re z1|<1, |Im z1|<T, and |zj|<1 for j>1. Volume 4T pi^(r2-1) again exceeds the threshold. The distinguished conjugate pair has modulus >=1 and nonzero imaginary part, so either member occurs exactly once among the n embedding values. Each embedding of Q(alpha) extends exactly [K:Q(alpha)] times in a finite separable extension; this multiplicity forces K=Q(alpha). Apply the finite-tower restriction-fibre lemma and characteristic-zero separability to identify the fibre cardinal with the ordinary degree. No unit theorem or normal closure finiteness is used. Take the algebraic numbers inside C as the specified algebraic closure of Q; all number-field embedding values lie in it.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Theorem 8.43, printed pp.151–152; corrected explicit box volumes"
+        }
+      },
+      {
+        "id": "thm-hermite-minkowski-finiteness",
+        "kind": "theorem",
+        "deps": [
+          "lem-hermite-minkowski-bounded-primitive-integral-element",
+          "lem-bounded-conjugates-give-finitely-many-integral-polynomials"
+        ],
+        "statement": "For fixed positive integers n and B, only finitely many Q-isomorphism classes of degree-n number fields have |d_K|<=B.",
+        "proof_plan": "Handle n=1 by Q. Every other field is Q[X]/(f) for one of the finitely many irreducible monic integral minimal polynomials furnished by the two lemmas. Count fields as isomorphism classes, not chosen embedded copies.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Theorem 8.43, printed pp.151–152"
+        }
+      }
+    ]
+  },
+  {
+    "order": 365.918,
+    "id": "minkowski-theory-and-number-field-class-groups-examples",
+    "kind": "B",
+    "category": "number-theory",
+    "title": "Minkowski Theory and Number Field Class Groups — Examples",
+    "companion": "minkowski-theory-and-number-field-class-groups",
+    "requires": [
+      "minkowski-theory-and-number-field-class-groups"
+    ],
+    "items": [
+      {
+        "id": "ex-minkowski-bound-for-gaussian-integers",
+        "kind": "example",
+        "deps": [
+          "thm-ring-of-integers-of-a-quadratic-field",
+          "cor-discriminant-of-a-quadratic-field",
+          "thm-minkowski-bound-for-ideal-classes",
+          "thm-principal-ideal-norm-is-absolute-field-norm"
+        ],
+        "statement": "For K=Q(i), d_K=-4, M_K=4/pi<2, and Cl(Z[i]) is trivial.",
+        "proof_plan": "The only norm-one ideal is the unit ideal. Use the bound to show every class contains it; optionally invoke the earlier PID criterion. Do not copy Stein Example 7.3.2’s erroneous 8/pi arithmetic.",
+        "source": {
+          "url": "https://wstein.org/books/ant/ant.pdf",
+          "locator": "Example 7.1.3, printed p.78"
+        }
+      },
+      {
+        "id": "ex-class-group-of-q-sqrt-minus-five",
+        "kind": "example",
+        "deps": [
+          "thm-ring-of-integers-of-a-quadratic-field",
+          "cor-discriminant-of-a-quadratic-field",
+          "thm-minkowski-bound-for-ideal-classes",
+          "thm-principal-ideal-norm-is-absolute-field-norm",
+          "thm-dedekind-kummer-prime-factorisation",
+          "thm-ideal-norm-is-multiplicative"
+        ],
+        "statement": "For K=Q(sqrt(-5)), Cl(O_K) is cyclic of order 2, generated by p=(2,1+sqrt(-5)).",
+        "proof_plan": "d=-20, M=2sqrt(20)/pi lies between 2 and 3. Modulo 2 the polynomial is (X+1)^2, giving the only prime norm 2 and p^2=(2). The equation a^2+5b^2=2 has no integer solution, so p is not principal. Hence exactly two classes.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Example 4.6, printed p.71"
+        }
+      },
+      {
+        "id": "ex-class-group-of-q-sqrt-ten",
+        "kind": "example",
+        "deps": [
+          "thm-ring-of-integers-of-a-quadratic-field",
+          "cor-discriminant-of-a-quadratic-field",
+          "thm-minkowski-bound-for-ideal-classes",
+          "thm-principal-ideal-norm-is-absolute-field-norm",
+          "thm-dedekind-kummer-prime-factorisation",
+          "thm-ideal-norm-is-multiplicative"
+        ],
+        "statement": "For K=Q(sqrt(10)), Cl(O_K) is cyclic of order 2, generated by p2=(2,sqrt(10)).",
+        "proof_plan": "M=sqrt(10), so norms 1,2,3 suffice. Let p3=(3,sqrt(10)-1), q3=(3,sqrt(10)+1). p2^2=(2). Norm +/-2 is impossible modulo 5. Compute (2+sqrt(10))=p2 p3 by inclusion and norm 6, giving [p3]=[p2]; p3 q3=(3), giving [q3]=[p2]. Prove the three displayed norms from quotient evaluations. This is a direct ideal relation variant of Stein.",
+        "source": {
+          "url": "https://wstein.org/books/ant/ant.pdf",
+          "locator": "Example 7.1.4 and complete calculation, printed pp.78–79"
+        }
+      },
+      {
+        "id": "ex-class-group-from-small-prime-ideals",
+        "kind": "example",
+        "deps": [
+          "thm-minkowski-bound-for-ideal-classes",
+          "cor-squarefree-power-basis-discriminant-gives-ring-of-integers",
+          "thm-dedekind-kummer-prime-factorisation",
+          "thm-power-basis-discriminant-is-polynomial-discriminant"
+        ],
+        "statement": "For f=X^5-X+1 and alpha a root, O_K=Z[alpha], d_K=2869=19*151, signature (1,2), M_K<4, and Cl(O_K) is trivial.",
+        "proof_plan": "Prove f irreducible modulo 3: it has no roots and remainder upon division by each monic irreducible quadratic X^2+1, X^2+X+2, X^2+2X+2 is nonzero. A reducible quintic without linear factors must have a quadratic factor. Compute resultant(f,f prime)=2869 by an explicit determinant or Euclidean remainder calculation; verify 19,151 prime. f prime=5X^4-1 has only two real critical points; both critical values are positive, so f has one real root. Bound (4/pi)^2*120/3125*sqrt(2869)<4, for example pi>3 and sqrt(2869)<54. Norm 2 or 3 ideals would give maps O_K->F2 or F3 and hence roots of f; evaluate all residues to exclude them. Thus only norm-one representative remains.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Example 4.8 p.72, with Example 2.39 arithmetic rederived inline"
+        }
+      },
+      {
+        "id": "ex-discriminant-lower-bound",
+        "kind": "example",
+        "deps": [
+          "cor-no-nontrivial-number-field-has-discriminant-plus-or-minus-one"
+        ],
+        "statement": "The Minkowski lower bound gives |d|>=4 in signature (2,0), |d|>=pi^2/4 in signature (0,1), and sqrt(|d|)>=9pi/8 in signature (1,1).",
+        "proof_plan": "Substitute each signature into (pi/4)^r2 n^n/n! and square as needed. Keep exact constants and show each excludes |d|=1.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Theorem 4.9 proof and constant table, pp.70–72"
+        }
+      },
+      {
+        "id": "ex-no-everywhere-unramified-extension-of-q",
+        "kind": "example",
+        "deps": [
+          "cor-no-nontrivial-number-field-is-unramified-over-q",
+          "cor-discriminant-of-a-quadratic-field",
+          "thm-ramified-primes-and-the-number-field-discriminant"
+        ],
+        "statement": "Q(sqrt(5)) ramifies at 5 and Q(i) at 2; every nontrivial number field ramifies at some finite rational prime.",
+        "proof_plan": "Compute discriminants 5 and -4 and use the iff ramification criterion. Clarify that the assertion concerns finite primes; an imaginary field is not being excluded only by an infinite-place condition.",
+        "source": {
+          "url": "https://www.jmilne.org/math/CourseNotes/ANT.pdf",
+          "locator": "Theorem 4.9, printed p.72"
+        }
+      },
+      {
+        "id": "cex-minkowski-constants-change-under-scaled-embedding",
+        "kind": "counterexample",
+        "deps": [
+          "def-minkowski-embedding-of-a-number-field",
+          "thm-covolume-of-an-ideal-lattice",
+          "lem-archimedean-norm-bound"
+        ],
+        "statement": "Mixing the unscaled covolume with the sqrt(2)-scaled norm-region volume can yield a false bound. For Q(i) the falsely reduced constant predicts a nonzero Gaussian integer of absolute norm <=2/pi<1.",
+        "proof_plan": "Compute sigma(Z[i])=Z^2 of covolume 1 and scaled image sqrt(2)Z^2 of covolume 2. In scaled coordinates N=(u^2+v^2)/2, and the matching region has twice the unscaled area. Combining that area with covolume 1 halves the correct bound 4/pi to 2/pi; every nonzero Gaussian norm is a positive integer. Matching both conventions restores 4/pi.",
+        "source": {
+          "url": "https://wstein.org/books/ant/ant.pdf",
+          "locator": "Lemmas 7.1.7–7.1.8, pp.80–81; explicit normalization counterexample"
+        }
+      }
+    ]
+  }
+]

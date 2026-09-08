@@ -1,0 +1,1559 @@
+[
+  {
+    "order": 288.089,
+    "id": "fourier-transform-convolution-and-approximate-identities",
+    "kind": "A",
+    "category": "functional-analysis",
+    "title": "Fourier Transform Convolution and Approximate Identities",
+    "companion": "fourier-transform-convolution-and-approximate-identities-examples",
+    "requires": [
+      "unbounded-self-adjoint-operators-and-stones-theorem-examples"
+    ],
+    "items": [
+      {
+        "id": "def-complex-lp-and-euclidean-test-function-conventions",
+        "kind": "definition",
+        "title": "Complex Lp and complex Euclidean test functions",
+        "statement": "For 1≤p≤∞, complex Lp consists of measurable complex functions with finite modulus Lp norm, modulo a.e. equality; complex Cc, C∞c and C0 mean that both real and imaginary parts belong to their published real counterparts. Partial derivatives are taken componentwise. All four pages work over C, with inner products linear in the first variable. Assume countable choice throughout these Euclidean measure-theory applications.",
+        "strategy": "Explicitly distinguish the published real-valued Lp quotient and real test-function definitions from this complex extension. The integral itself already has complex linearity. Finitely many component choices add no choice strength; countable choice covers approximation sequences.",
+        "deps": [
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-l-one-of-a-measure",
+          "def-c-c-and-c-c-infinity-on-rn",
+          "def-c-zero-on-rn",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-countable-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "§14.1, complex Fourier and L2 conventions; componentwise reduction supplied locally"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-complex-lp-completeness-density-and-inner-product",
+        "kind": "lemma",
+        "title": "Complex Lp completeness, density and the L2 inner product",
+        "statement": "The complex Lp spaces are Banach. For p<∞, C∞c(Rn;C) is dense. Norm-convergent sequences admit an a.e. convergent subsequence. In L2, <f,g>=∫f conj(g) is an inner product with its modulus norm and satisfies |<f,g>|≤||f||2||g||2; equality for nonzero g means f=cg a.e. for a complex c.",
+        "strategy": "Use |Re f|,|Im f|≤|f|≤|Re f|+|Im f|. Apply real Holder to moduli; the usual Minkowski proof then works for complex functions. A complex Cauchy sequence has two real Lp limits, whose recombination is the norm limit. Combine two real compact smooth approximations. Obtain a.e. subsequences successively for the two components. For L2, integrability follows from Holder on moduli; positivity and definiteness follow from the nonnegative integral. Expand ∫|f-zg|² and minimize over z to get complex Cauchy–Schwarz with its phase-sensitive equality condition. The same argument works for finite tuples by summing inner products.",
+        "deps": [
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-holder-inequality-for-integrals",
+          "thm-minkowski-inequality-for-integrals",
+          "thm-c-c-infinity-rn-is-dense-in-l-p-of-rn",
+          "cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences",
+          "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "§14.1, Lemma 14.9 and Theorem 14.10 use complex L2; local proof supplies the real-to-complex interface"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-complex-translation-and-approximate-identity-interfaces",
+        "kind": "lemma",
+        "title": "Translation and approximate identities on complex Lp",
+        "statement": "Translation is norm-continuous on complex Lp for 1≤p<∞. The published L1 convolution bound and approximate-identity convergence extend to complex functions and complex kernels obeying the same mass, uniform norm and tail assumptions.",
+        "strategy": "Translation follows componentwise. For complex convolution apply the real Young estimate to |f| and |K| and the integral triangle inequality. The real proof of approximate-identity convergence applies verbatim after this bound: integrate ||τ_y f-f||p against |Kε(y)|, split into small translations and the kernel tail, and use ∫Kε=1. Alternatively expand the four real convolutions; their norm errors are controlled by the same translation split. No positivity of K is assumed.",
+        "deps": [
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "lem-complex-lp-completeness-density-and-inner-product",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "thm-young-convolution-inequality",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-integral-triangle-inequality"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "§14.1, Lemma 14.12 and Theorem 14.7; componentwise complex extension of local MT15"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-fourier-transform-on-l-one-of-rn",
+        "kind": "definition",
+        "title": "Fourier transform on complex L1 classes",
+        "statement": "For n≥1 and f in complex L1(Rn), set Ff(ξ)=∫ f(x)exp(-2πi x·ξ) dx, using a measurable representative. The companion well-definedness lemma validates the construction.",
+        "strategy": "Use the existing quotient Lp and complex exponential; no second definition of convolution or Lebesgue measure.",
+        "deps": [
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "def-l-one-of-a-measure",
+          "def-complex-exponential",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 (2022)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Definition 11.1, p.119; substitute ξ→2πξ"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-l-one-fourier-transform-is-well-defined",
+        "kind": "lemma",
+        "title": "The integral transform is representative independent",
+        "statement": "The integral defining Ff is absolutely convergent for every ξ and unchanged by null-set modifications.",
+        "strategy": "The exponential has modulus one; apply integral invariance to the difference of representatives.",
+        "deps": [
+          "def-fourier-transform-on-l-one-of-rn",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "thm-integral-triangle-inequality"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 (2022)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Definition 11.1 and (11.2)"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions",
+        "kind": "theorem",
+        "title": "The L1 transform is bounded and uniformly continuous",
+        "statement": "F:L1(Rn)→BUC(Rn) is linear, with sup|Ff|≤||f||1.",
+        "strategy": "Linearity is integral linearity. Bound the difference at ξ+h and ξ by ∫|f(x)||exp(-2πi x·h)-1|dx independently of ξ; DCT with majorant 2|f| proves uniform continuity.",
+        "deps": [
+          "lem-l-one-fourier-transform-is-well-defined",
+          "thm-dominated-convergence",
+          "thm-complex-exponential-addition-and-real-extension",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 (2022)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Proposition 11.2 and (11.2), p.119; uniform estimate made explicit"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-fourier-translation-modulation-dilation-and-reflection-laws",
+        "kind": "theorem",
+        "title": "Translation, modulation, linear dilation and reflection laws",
+        "statement": "For τ_a f(x)=f(x-a), M_bf(x)=exp(2πib·x)f(x), invertible real A: Fτ_af=e^(-2πia·ξ)Ff; FM_bf(ξ)=Ff(ξ-b); F(f∘A)(ξ)=|det A|^-1 Ff(A^-Tξ). Reflection gives F(f(-·))(ξ)=Ff(-ξ); conjugation gives F(conj f)(ξ)=conj(Ff(-ξ)).",
+        "strategy": "Use the fixed translation sign and change of variables. State absolute determinant, including orientation-reversing A, rather than λ^n for negative λ.",
+        "deps": [
+          "lem-l-one-fourier-transform-is-well-defined",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "thm-complex-exponential-addition-and-real-extension",
+          "def-translation-of-a-function-on-rn"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 (2022)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Propositions 11.12–11.13, p.123; Teschl Lemma 14.2 for translations/modulations"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-fourier-transform-converts-convolution-to-products",
+        "kind": "theorem",
+        "title": "Fourier transform turns L1 convolution into multiplication",
+        "statement": "Assuming countable choice, f,g∈L1 imply F(f*g)=Ff Fg at every frequency.",
+        "strategy": "Use Borel representatives from MT15, Tonelli on |f(x-y)g(y)| (double integral ||f||1||g||1), then complex Fubini and translation. Identify the a.e. convolution class with its MT15 definition.",
+        "deps": [
+          "lem-l-one-fourier-transform-is-well-defined",
+          "thm-fourier-translation-modulation-dilation-and-reflection-laws",
+          "def-countable-choice",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-borel-representatives-make-the-convolution-integrand-borel-measurable",
+          "lem-convolution-is-independent-of-the-chosen-borel-representatives",
+          "thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 (2022)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Proposition 11.10, pp.122–123"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+        "kind": "lemma",
+        "title": "Euclidean Gaussian transform with the 2π normalization",
+        "statement": "For t>0, F(exp(-πt|x|²))(ξ)=t^(-n/2)exp(-π|ξ|²/t).",
+        "strategy": "First verify integrability of all polynomial Gaussian majorants. Convert the published improper Gaussian integral to the Lebesgue integral using its earlier agreement theorem. In one dimension differentiate G under the integral and integrate by parts on [-R,R]; the vanishing boundary yields G′=-2πξG and G(0)=1. Differentiate exp(πξ²)G to solve without an ODE existence theorem. Tensor by Fubini and scale. Do not cite the later homonymous Gaussian Fourier lemma or assume Schwartz theory.",
+        "deps": [
+          "lem-l-one-fourier-transform-is-well-defined",
+          "cor-c-one-change-of-variables-for-l-one-functions",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-dominated-convergence",
+          "thm-gaussian-integral",
+          "thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-integration-by-parts"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 (2022)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Proposition 11.14, pp.123–124, first proof"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-riemann-lebesgue",
+        "kind": "theorem",
+        "title": "Riemann–Lebesgue lemma",
+        "statement": "Assuming countable choice, Ff∈C0(Rn) for every f∈L1(Rn).",
+        "strategy": "For ξ≠0 put h=ξ/(2|ξ|²); the translation formula gives 2|Ff(ξ)|≤||τ_hf-f||1. Translation continuity as h→0 proves decay uniformly as |ξ|→∞. This avoids the source’s forward use of Schwartz invariance.",
+        "deps": [
+          "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions",
+          "thm-fourier-translation-modulation-dilation-and-reflection-laws",
+          "def-countable-choice",
+          "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "def-c-zero-on-rn",
+          "lem-complex-translation-and-approximate-identity-interfaces"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Corollary 14.5, p.381; proof reordered via MT15 translation continuity"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-gaussian-fourier-summability-kernel-is-an-approximate-identity",
+        "kind": "lemma",
+        "title": "Gaussian summability kernels",
+        "statement": "k_t(x)=t^(-n/2)exp(-π|x|²/t) has mass one, Fk_t(ξ)=exp(-πt|ξ|²), and (k_t) as t↓0 is the existing L1 approximate identity.",
+        "strategy": "Use Gaussian formula and scaling; tail integral outside δ becomes the fixed Gaussian tail outside δ/√t. Verify the inverse Gaussian integral directly from the same formula, not from Fourier inversion.",
+        "deps": [
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "thm-fourier-translation-modulation-dilation-and-reflection-laws",
+          "def-l-one-approximate-identity-on-rn",
+          "thm-dominated-convergence"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Theorem 14.7 proof, p.382"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-radial-majorized-kernels-recover-lebesgue-point-values",
+        "kind": "lemma",
+        "title": "Lebesgue-point convergence for radial-majorized kernels",
+        "statement": "Let |K(y)|≤Φ(|y|), where Φ is bounded, nonnegative and decreasing with ∫Rn Φ(|y|)dy<∞, and ∫K=1. For f∈L1 and every Lebesgue point x with value a, ∫ε^-n K(y/ε)f(x-y)dy→a.",
+        "strategy": "Write A(r)=∫|y|<r |f(x-y)-a|dy=o(r^n). On dyadic shells with radii 2^j ε<δ use A(2^j ε)≤η(2^j ε)^n and sum the Φ bounds by comparison with its radial integral. The innermost ball is bounded by Φ(0)ε^-n A(ε). Outside δ use integrability of f, the bound ε^-n Φ(δ/ε)→0 (prove r^nΦ(r)→0 from annulus integrals), and the vanishing kernel tail for the constant a. First ε→0 then η→0. This is a new local proof, not an appeal to general approximate-identity pointwise convergence.",
+        "deps": [
+          "def-lebesgue-point-and-lebesgue-set",
+          "def-l-one-approximate-identity-on-rn",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-euclidean-balls-have-positive-finite-lebesgue-measure",
+          "thm-linear-change-of-variables-for-lebesgue-measure"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Problem 15.8, p.420; explicit dyadic proof replacing the hint"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-fourier-inversion-at-lebesgue-points-under-summability",
+        "kind": "theorem",
+        "title": "Gaussian Fourier summability at Lebesgue points",
+        "statement": "Assuming countable choice, ∫ Ff(ξ)e^(-πt|ξ|²)e^(2πix·ξ)dξ=(f*k_t)(x) for every x and f∈L1. As t↓0 it converges in L1 to f and at every Lebesgue point to its Lebesgue value.",
+        "strategy": "Absolute double integral is ||f||1∫e^(-πt|ξ|²)dξ. Apply Fubini, K, the new radial lemma and MT15 norm convergence. The term Gaussian/Abel summability here means Gaussian regularization; the Poisson Abel variant is additionally computed on the B page.",
+        "deps": [
+          "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions",
+          "lem-gaussian-fourier-summability-kernel-is-an-approximate-identity",
+          "lem-radial-majorized-kernels-recover-lebesgue-point-values",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-countable-choice",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "lem-complex-translation-and-approximate-identity-interfaces"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Theorem 14.7, p.382, with Problem 15.8 fully supplied locally"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-l-one-fourier-inversion",
+        "kind": "theorem",
+        "title": "L1 Fourier inversion with an integrable transform",
+        "statement": "Assuming countable choice, if f,Ff∈L1, g(x)=∫Ff(ξ)e^(2πix·ξ)dξ is continuous and equals f a.e.; it equals every Lebesgue-point value.",
+        "strategy": "Use reflected bounded-continuous transform for g. DCT removes Gaussian damping; SUM identifies values on the Lebesgue set and the published almost-everywhere Lebesgue-point theorem identifies classes. Do not claim recovery of an arbitrary representative at every point.",
+        "deps": [
+          "thm-fourier-inversion-at-lebesgue-points-under-summability",
+          "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions",
+          "thm-fourier-translation-modulation-dilation-and-reflection-laws",
+          "thm-dominated-convergence",
+          "def-countable-choice",
+          "thm-almost-every-point-is-a-lebesgue-point"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Corollary 14.8, p.382"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-fourier-transform-of-a-product-under-an-integrable-transform-hypothesis",
+        "kind": "theorem",
+        "title": "Fourier transform of a product with one integrable transform",
+        "statement": "If f,g∈L1 and Ff∈L1, then using the continuous representative of f, fg∈L1 and F(fg)(ξ)=∫Ff(η)Fg(ξ-η)dη at every ξ. Assume countable choice.",
+        "strategy": "Inversion makes f bounded by ||Ff||1. Substitute its inverse integral into F(fg); absolute double integral is ||Ff||1||g||1. No L1 assumption on Fg and no unjustified general L1 product closure.",
+        "deps": [
+          "thm-l-one-fourier-inversion",
+          "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 (2022)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Proposition 11.18, pp.125–126; local Fubini proof extends its Schwartz case"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-uniqueness-of-the-l-one-fourier-transform",
+        "kind": "corollary",
+        "title": "Uniqueness of the L1 Fourier transform",
+        "statement": "Under countable choice, Ff=Fg implies f=g in L1.",
+        "strategy": "Apply inversion to f-g whose zero transform is integrable.",
+        "deps": [
+          "thm-l-one-fourier-inversion",
+          "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Theorem 14.7"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-convolution-approximate-identities-from-fourier-multipliers",
+        "kind": "corollary",
+        "title": "Fourier multipliers of approximate identities",
+        "statement": "For any MT15 L1 approximate identity Kε, FKε(ξ)→1 for each ξ; for f∈L1, F(f*Kε)=Ff FKε→Ff uniformly. Under countable choice f*Kε→f in every applicable finite Lp norm.",
+        "strategy": "For fixed ξ split ∫Kε(y)(exp(-2πiy·ξ)-1) at a small ball; use the uniform L1 norm and tails. Uniform transform convergence follows from B and the existing L1 norm theorem, not merely pointwise multiplier convergence.",
+        "deps": [
+          "thm-fourier-transform-converts-convolution-to-products",
+          "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "def-l-one-approximate-identity-on-rn",
+          "lem-complex-translation-and-approximate-identity-interfaces"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Theorem 14.7 and Lemma 14.12; MT15 supplies the norm theorem"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-fourier-transform-of-a-finite-complex-measure",
+        "kind": "theorem",
+        "title": "Fourier transform of a finite complex Borel measure",
+        "statement": "For a complex Borel measure μ on Rn with finite variation, Fμ(ξ)=∫e^(-2πix·ξ)dμ(x) is bounded uniformly continuous with sup|Fμ|≤|μ|(Rn).",
+        "strategy": "Use the existing complex-measure integral and variation bound. Apply positive-measure DCT against |μ| to the uniform difference estimate. No Riemann–Lebesgue assertion for atomic measures.",
+        "deps": [
+          "def-complex-measure",
+          "def-integration-against-a-signed-or-complex-measure",
+          "thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation",
+          "thm-dominated-convergence",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-complex-exponential-addition-and-real-extension"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Problem 14.10, p.387"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-gaussian-smoothing-of-finite-complex-measures",
+        "kind": "lemma",
+        "title": "Gaussian smoothing of finite measures",
+        "statement": "h_t(x)=∫k_t(x-y)dμ(y) belongs to L1 with ||h_t||1≤|μ|(Rn); Fh_t=Fk_t Fμ. For φ∈Cc, ∫φ(x)h_t(x)dx→∫φ dμ.",
+        "strategy": "Since μ≪|μ|, use RN and the absolute-value density theorem to obtain μ=u|μ| with |u|=1 a.e. This reduces complex Fubini to positive sigma-finite measures. Bound the double integral by |μ|(Rn)||k_t||1. For testing, compactly supported continuous φ is uniformly continuous; split the translated Gaussian integral into a small ball and its tail.",
+        "deps": [
+          "thm-fourier-transform-of-a-finite-complex-measure",
+          "lem-gaussian-fourier-summability-kernel-is-an-approximate-identity",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation",
+          "cor-finite-complex-measures-admit-integrable-radon-nikodym-densities",
+          "def-c-c-and-c-c-infinity-on-rn",
+          "thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Problem 14.10, p.387; explicit smoothing argument"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-uniqueness-of-finite-borel-measures-from-their-fourier-transforms",
+        "kind": "corollary",
+        "title": "Uniqueness of finite Borel measures from their Fourier transforms",
+        "statement": "Assuming countable choice, finite complex Borel measures μ,ν on Rn with Fμ=Fν are equal.",
+        "strategy": "Gaussian smoothing and L1 uniqueness show smoothed differences vanish; pass to limits against Cc. Finite variation on second-countable locally compact Rn is regular by the published regularity corollary. The uniqueness argument in the published complex C0 representation theorem, step 2.1, uses equality on Cc: split real/imaginary signed parts into Jordan components and invoke positive RMK uniqueness. No choice beyond the standing countable-choice assumption is asserted necessary by those supplier statements; transitive axiom audit remains a release obligation.",
+        "deps": [
+          "lem-gaussian-smoothing-of-finite-complex-measures",
+          "cor-uniqueness-of-the-l-one-fourier-transform",
+          "cor-second-countable-lch-locally-finite-borel-measures-are-regular",
+          "thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Problem 14.10, p.387"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "rem-probability-characteristic-function-normalization",
+        "kind": "remark",
+        "title": "Characteristic-function normalization",
+        "statement": "For a probability measure μ, φ(t)=∫exp(it·x)dμ(x)=Fμ(-t/(2π)).",
+        "strategy": "This is a sign and scale dictionary only, and introduces no probability construction.",
+        "deps": [
+          "thm-fourier-transform-of-a-finite-complex-measure"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "§14.1"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "rem-riesz-thorin-supplied-by-measure-theory",
+        "kind": "remark",
+        "title": "The interpolation input belongs to measure theory",
+        "statement": "MT17 supplies the published finite-target-exponent Riesz–Thorin theorem; its present statement does not cover an L1→L∞ endpoint.",
+        "strategy": "Orientation only; do not mint a second interpolation theorem or infer Hausdorff–Young without checking endpoint conventions.",
+        "deps": [
+          "thm-riesz-thorin-interpolation"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "§14.1, L1 bound (14.2) and Theorem 14.10; interpolation theorem supplied by the existing local thm-riesz-thorin-interpolation, not newly harvested from §15.1."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.09,
+    "id": "fourier-transform-convolution-and-approximate-identities-examples",
+    "kind": "B",
+    "category": "functional-analysis",
+    "title": "Fourier Transform Convolution and Approximate Identities — Examples",
+    "companion": "fourier-transform-convolution-and-approximate-identities",
+    "requires": [
+      "fourier-transform-convolution-and-approximate-identities"
+    ],
+    "items": [
+      {
+        "id": "ex-fourier-transform-of-an-interval-indicator",
+        "kind": "example",
+        "title": "Transform of an interval indicator",
+        "statement": "F1_[a,b](ξ)=(exp(-2πiaξ)-exp(-2πibξ))/(2πiξ) for ξ≠0; at ξ=0 the value is b-a.",
+        "strategy": "Integrate the exponential and take the continuous value at zero.",
+        "deps": [
+          "def-fourier-transform-on-l-one-of-rn",
+          "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions",
+          "thm-complex-exponential-addition-and-real-extension"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Problem 14.4(i)"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-fourier-transform-of-a-gaussian",
+        "kind": "example",
+        "title": "Scaled and tensor Gaussian examples",
+        "statement": "F(exp(-πt|x|²))=t^(-n/2)exp(-π|ξ|²/t), t>0.",
+        "strategy": "Use the A lemma; compute mass and reciprocal width explicitly.",
+        "deps": [
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "thm-fourier-translation-modulation-dilation-and-reflection-laws"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "§14.1"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-fourier-transform-of-the-poisson-kernel",
+        "kind": "example",
+        "title": "Poisson kernel transform and Abel summability on the line",
+        "statement": "For a>0, P_a(x)=a/(π(a²+x²)) has transform exp(-2πa|ξ|). For f∈L1(R), its Abel Fourier integral equals f*P_a and converges at Lebesgue points.",
+        "strategy": "Compute F(exp(-2πa|x|)) by integrating two half-lines, obtaining P_a. Both functions are integrable, so inversion and evenness prove the claimed direction. P_a=a^-1 P_1(x/a) satisfies the radial lemma; absolute Fubini gives the Abel identity.",
+        "deps": [
+          "def-fourier-transform-on-l-one-of-rn",
+          "thm-l-one-fourier-inversion",
+          "thm-fourier-translation-modulation-dilation-and-reflection-laws",
+          "lem-radial-majorized-kernels-recover-lebesgue-point-values",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Problem 14.4(ii), real positive parameter"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-fourier-transform-of-a-compactly-supported-triangle-function",
+        "kind": "example",
+        "title": "Triangle function and squared sinc",
+        "statement": "For T(x)=(1-|x|)_+, FT(ξ)=(sin(πξ)/(πξ))², value one at zero.",
+        "strategy": "Compute the convolution of two indicators of [-1/2,1/2] by overlap lengths, then C.",
+        "deps": [
+          "thm-fourier-transform-converts-convolution-to-products",
+          "ex-fourier-transform-of-an-interval-indicator"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "§14.1"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-fourier-transform-of-an-l-one-function-need-not-be-integrable",
+        "kind": "counterexample",
+        "title": "An L1 transform need not be integrable",
+        "statement": "The transform of 1_[-1/2,1/2] is not in L1(R).",
+        "strategy": "On a fixed middle subinterval of each integer period |sin πξ|≥1/2; the integrals dominate a divergent harmonic series.",
+        "deps": [
+          "ex-fourier-transform-of-an-interval-indicator"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "§14.1"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-fourier-inversion-need-not-hold-at-every-point-of-an-l-one-representative",
+        "kind": "counterexample",
+        "title": "Null-set modifications defeat everywhere representative recovery",
+        "statement": "Take f=1_{0}. Then f and Ff are integrable and Ff=0, but the inverse integral at zero is 0≠f(0).",
+        "strategy": "A singleton is null; distinguish the zero L1 class and this representative.",
+        "deps": [
+          "lem-l-one-fourier-transform-is-well-defined",
+          "thm-l-one-fourier-inversion",
+          "cor-integral-over-a-null-set-vanishes",
+          "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "§14.1"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-riemann-lebesgue-has-no-universal-rate",
+        "kind": "counterexample",
+        "title": "There is no universal Riemann–Lebesgue decay rate",
+        "statement": "For every positive function r(R)→0 there exists f∈L1(R) with |Ff(ξ_k)|/r(|ξ_k|) unbounded along ξ_k→∞.",
+        "strategy": "Proposed local construction, with independent full-text verification still outstanding: f=Σ2^-k exp(2πiξ_k x)exp(-πx²). Choose ξ_k increasing with r(ξ_k)<2^-2k; the series converges in L1. Each summand has positive Gaussian transform, so Ff(ξ_k)≥2^-k. This proves a single-function failure of O(r), not only failure of a uniform norm-ball bound.",
+        "deps": [
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "thm-fourier-translation-modulation-dilation-and-reflection-laws",
+          "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions",
+          "thm-dominated-convergence"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Corollary 14.5 supplies decay only. The stronger no-rate construction below is proposed locally and awaits independent full-text verification; see coverage open obligations."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "rem-wiener-tauberian-theorem",
+        "kind": "remark",
+        "title": "Wiener Tauberian orientation",
+        "statement": "Wiener’s L1 Tauberian theorem says that translates of f∈L1(Rn) span a dense subspace of L1 precisely when Ff has no zeros. This is recorded, not proved here.",
+        "strategy": "Orientation only. Explain that annihilators in L∞ convert translate density into the no-common-zero convolution annihilator conclusion of the cited Corollary 3.4; this is different from Teschl’s L2 almost-everywhere nonvanishing exercise. No later proof may use this remark as a supplier.",
+        "deps": [],
+        "sources": {
+          "references": [
+            {
+              "title": "Gian Maria Dall’Ara, Wiener’s Tauberian Theorem and the Pompeiu Problem on L∞(Rd) (2026)",
+              "url": "https://gdallaramath.wordpress.com/wp-content/uploads/2026/03/wiener-theorem.pdf",
+              "locator": "§3, Theorem 3.1 and Corollary 3.4, pp.3–6"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "proved_here": false,
+        "verification": {
+          "precheck": "n/a"
+        },
+        "external_dependency": {
+          "source_url": "https://gdallaramath.wordpress.com/wp-content/uploads/2026/03/wiener-theorem.pdf",
+          "exact_statement": "For f∈L1(Rn) whose Fourier transform has no zeros, f*g=0 with g∈L∞ forces g=0 (Corollary 3.4, singleton family); via L1–L∞ duality this is density of the translate span.",
+          "local_proof_attempt": "The source proves a local frequency inversion lemma by a Neumann series and then uses tempered-distribution support; these inputs are not proved at this location.",
+          "necessity": "The design explicitly requests a Wiener Tauberian orientation. It supplies no logical dependency to any item in this batch."
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.091,
+    "id": "schwartz-space-and-the-plancherel-theorem",
+    "kind": "A",
+    "category": "functional-analysis",
+    "title": "Schwartz Space and the Plancherel Theorem",
+    "companion": "schwartz-space-and-the-plancherel-theorem-examples",
+    "requires": [
+      "fourier-transform-convolution-and-approximate-identities-examples"
+    ],
+    "items": [
+      {
+        "id": "def-schwartz-space-and-its-seminorms",
+        "kind": "definition",
+        "title": "Schwartz space and its seminorms",
+        "statement": "S(Rn)={f∈C∞(Rn;C): pαβ(f)=sup_x|x^α ∂^β f(x)|<∞ for every α,β}.",
+        "strategy": "Reuse def-ck-and-multi-index-notation-in-several-variables, including zero multi-index and |α|. Verify vector-space and seminorm laws directly.",
+        "deps": [
+          "def-complex-lp-and-euclidean-test-function-conventions",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "def-c-c-and-c-c-infinity-on-rn"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 (2022)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Definition 11.3, p.120"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-schwartz-topology-and-convergence",
+        "kind": "definition",
+        "title": "Schwartz topology and convergence",
+        "statement": "Neighbourhoods are finite intersections pαβ(f-f0)<ε. Convergence means all these seminorm differences tend to zero.",
+        "strategy": "Define locally convex here by the convex balanced seminorm balls; verify Hausdorff and topological vector space operations directly. This requires no unauthored general locally convex theorem.",
+        "deps": [
+          "def-schwartz-space-and-its-seminorms"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 (2022)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Definition 11.3 and (11.5), p.120"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-schwartz-space-is-frechet",
+        "kind": "theorem",
+        "title": "Schwartz space is Fréchet",
+        "statement": "The Schwartz topology is locally convex, metrizable and complete. With q_j=max_{|α|,|β|≤j}pαβ, d(f,g)=Σ_{j≥0}2^(-j-1)min(1,q_j(f-g)) is a complete invariant metric generating it.",
+        "strategy": "Prove both neighbourhood inclusions using a finite initial sum and geometric tail. A metric-Cauchy sequence is Cauchy in every q_j. Uniform derivative limits on coordinate segments, separately in real/imaginary parts, identify a smooth limit. Pass each weighted Cauchy bound to the pointwise limit to prove convergence in every seminorm, not only boundedness.",
+        "deps": [
+          "def-schwartz-topology-and-convergence",
+          "thm-uniform-derivative-limit-on-a-closed-interval"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Lemma 14.29 and equations (14.95)–(14.96), p.404"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-schwartz-functions-and-all-derivatives-are-integrable",
+        "kind": "lemma",
+        "title": "Schwartz derivatives are integrable",
+        "statement": "For every α,β and 1≤p≤∞, x^α ∂^β f∈Lp for f∈S; its norm is bounded by a finite sum of Schwartz seminorms.",
+        "strategy": "Bound by C(1+|x|)^(-n-1) for L1 using expansion of polynomial weights; sum dyadic annuli or product factors (1+x_j²)^-1. L∞ plus L1 gives all intermediate Lp; no Sobolev result.",
+        "deps": [
+          "def-schwartz-space-and-its-seminorms",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-linear-change-of-variables-for-lebesgue-measure"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 (2022)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Equation (11.7), p.120; Teschl Problem 14.1"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+        "kind": "lemma",
+        "title": "Explicit compactly supported smooth cutoffs",
+        "statement": "There is χ∈C∞c(Rn) with 0≤χ≤1, χ=1 for |x|≤1 and χ=0 for |x|≥2. Its dilates satisfy ∂^βχ(x/R)=R^-|β|(∂^βχ)(x/R).",
+        "strategy": "Construct a(t)=exp(-1/t) for t>0 and a(t)=0 otherwise. Inductively its positive-side derivatives are polynomials in 1/t times exp(-1/t); exponential domination makes each derivative and its difference quotient tend to zero at zero, proving smoothness and flatness. Set σ(t)=a(t)/(a(t)+a(1-t)); the denominator is everywhere positive. Then χ(x)=σ((4-|x|²)/3), supported in the closed radius-two ball. Apply repeated chain rule for dilates. No later smooth-step definition is used.",
+        "deps": [
+          "thm-exponential-beats-every-polynomial",
+          "thm-chain-rule-for-total-derivatives",
+          "def-ck-and-multi-index-notation-in-several-variables"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 (2022)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Remark 11.5 and Exercise 11.1, pp.120,135 motivate the cutoff; explicit flat-function construction supplied locally, not asserted to occur in Exercise 11.1."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-smooth-compactly-supported-functions-are-dense-in-schwartz-space",
+        "kind": "lemma",
+        "title": "Smooth compact supports are dense in Schwartz space",
+        "statement": "χ(x/R)f→f in every Schwartz seminorm as R→∞.",
+        "strategy": "Apply multi-index Leibniz. The term with no derivative of χ is a rapidly decaying tail; every other term is supported on R≤|x|≤2R with factors R^-|γ|. An extra weight bounds each by O(R^-1).",
+        "deps": [
+          "def-schwartz-space-and-its-seminorms",
+          "def-schwartz-topology-and-convergence",
+          "lem-schwartz-cutoffs-from-the-standard-smooth-step",
+          "def-ck-and-multi-index-notation-in-several-variables"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 (2022)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Remark 11.5 and Exercise 11.1"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space",
+        "kind": "theorem",
+        "title": "Basic operations are continuous on Schwartz space",
+        "statement": "Differentiation, multiplication by a fixed polynomial, translation by a fixed vector and modulation by a fixed frequency are continuous linear maps S→S. Reflection and conjugation are continuous (conjugation antilinear).",
+        "strategy": "Use Leibniz and binomial expansion to bound each output seminorm by finitely many input seminorms. Include pointwise multiplication S×S→S as a continuous bilinear operation for the later convolution consequence.",
+        "deps": [
+          "def-schwartz-space-and-its-seminorms",
+          "def-schwartz-topology-and-convergence",
+          "def-ck-and-multi-index-notation-in-several-variables",
+          "thm-complex-exponential-addition-and-real-extension"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 (2022)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Equation (11.6), Proposition 11.7; Teschl text preceding Lemma 14.4"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+        "kind": "theorem",
+        "title": "Fourier transform acts continuously on Schwartz space",
+        "statement": "F:S→S is continuous with F(∂^αf)=(2πiξ)^α Ff and ∂^βFf=F((-2πix)^βf).",
+        "strategy": "Difference quotients are dominated by polynomial-weighted |f|. Integration by parts on expanding boxes has vanishing boundary terms by rapid decay. Derivative/multiplication identities and the L1 seminorm estimate bound every output seminorm explicitly.",
+        "deps": [
+          "thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space",
+          "lem-schwartz-functions-and-all-derivatives-are-integrable",
+          "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions",
+          "thm-dominated-convergence",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-integration-by-parts"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 (2022)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Theorem 11.6 and Proposition 11.7, pp.121–122"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-fourier-inversion-on-schwartz-space",
+        "kind": "theorem",
+        "title": "Fourier inversion on Schwartz space",
+        "statement": "For f∈S, f(x)=∫Ff(ξ)exp(2πix·ξ)dξ for every x.",
+        "strategy": "SI and FS put both transforms in L1. Invoke the earlier Gaussian-regularized inversion and continuity to upgrade a.e. equality. Never swap the undamped double integral of f(y)exp(2πi(x-y)ξ), whose absolute integral is infinite.",
+        "deps": [
+          "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+          "lem-schwartz-functions-and-all-derivatives-are-integrable",
+          "thm-l-one-fourier-inversion"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 (2022)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Theorem 11.15, pp.124–125"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+        "kind": "corollary",
+        "title": "Fourier transform is a topological automorphism of Schwartz space",
+        "statement": "F is bijective on S with inverse RF, where Rf(x)=f(-x), and F²=R.",
+        "strategy": "Use inversion and reflection to verify both inverse identities and continuity of the inverse.",
+        "deps": [
+          "thm-fourier-inversion-on-schwartz-space",
+          "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+          "thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 (2022)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Remark 11.16, p.124"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-schwartz-convolution-and-product-transform-laws",
+        "kind": "corollary",
+        "title": "Schwartz convolution and product laws",
+        "statement": "The convolution and product of two Schwartz functions are Schwartz, and F(f*g)=Ff Fg, F(fg)=Ff*Fg.",
+        "strategy": "Product closure is SO. C and inverse automorphism identify convolution with the inverse transform of the product; uniqueness identifies its continuous representative. Alternatively bound convolution derivatives directly.",
+        "deps": [
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space",
+          "thm-fourier-transform-converts-convolution-to-products",
+          "thm-fourier-transform-of-a-product-under-an-integrable-transform-hypothesis",
+          "cor-uniqueness-of-the-l-one-fourier-transform"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Semyon Dyatlov, MIT 18.155 (2022)",
+              "url": "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf",
+              "locator": "Proposition 11.18 and Exercise 11.8; Teschl Corollary 14.13"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-parseval-pairing-on-schwartz-space",
+        "kind": "theorem",
+        "title": "Parseval pairing on Schwartz space",
+        "statement": "For f,g∈S, ∫Ff conj(Fg)=∫f conj(g); the inner product is linear in the first variable.",
+        "strategy": "Insert inversion for g and use Fubini with absolute bound ||f||1||Fg||1; use conjugation with the correct sign. This yields the norm equality and does not assume Plancherel.",
+        "deps": [
+          "thm-fourier-inversion-on-schwartz-space",
+          "lem-schwartz-functions-and-all-derivatives-are-integrable",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Lemma 14.9, p.383, polarized pairing version"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-schwartz-space-is-dense-in-l-two",
+        "kind": "lemma",
+        "title": "Schwartz space is dense in L2",
+        "statement": "Assuming countable choice, S is dense in complex L2(Rn).",
+        "strategy": "MT15 C∞c density and the direct inclusion C∞c⊂S suffice; real and imaginary approximants can be combined if needed.",
+        "deps": [
+          "def-schwartz-space-and-its-seminorms",
+          "thm-c-c-infinity-rn-is-dense-in-l-p-of-rn",
+          "def-countable-choice",
+          "lem-complex-lp-completeness-density-and-inner-product"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Text before Lemma 14.4 and Theorem 14.10"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-plancherel",
+        "kind": "theorem",
+        "title": "Plancherel theorem",
+        "statement": "Assuming countable choice, the Fourier transform on S extends uniquely to a surjective linear L2 isometry preserving the complex L2 pairing, hence a unitary F2:L2→L2.",
+        "strategy": "For any Schwartz approximation use PA and L2 completeness to define the limit and show independence; the existing bounded-map extension theorem supplies uniqueness. The image is closed by completeness and contains S by AS, hence is all L2 by DS. Explicitly prove surjectivity.",
+        "deps": [
+          "thm-parseval-pairing-on-schwartz-space",
+          "lem-schwartz-space-is-dense-in-l-two",
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "thm-riesz-fischer-completeness-of-l-p",
+          "thm-extension-of-a-bounded-map-from-a-dense-subspace",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "lem-complex-lp-completeness-density-and-inner-product"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Theorem 14.10, p.383"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-simultaneous-smooth-approximation-in-l-one-and-l-two",
+        "kind": "lemma",
+        "title": "Simultaneous L1 and L2 smooth approximation",
+        "statement": "For f∈L1∩L2 there are f_j∈C∞c converging to f in both norms, under countable choice.",
+        "strategy": "First truncate f to bounded compact support with DCT in both norms; then mollify each truncation, choosing the parameter to make both errors <1/j. A single sequence is essential.",
+        "deps": [
+          "thm-dominated-convergence",
+          "thm-l-one-approximate-identities-converge-in-l-p",
+          "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset",
+          "prop-mollifier-families-are-l-one-approximate-identities",
+          "def-countable-choice",
+          "lem-complex-translation-and-approximate-identity-interfaces"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Lemma 14.11 proof, p.383"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-l-one-l-two-agreement-of-fourier-transform",
+        "kind": "theorem",
+        "title": "Agreement of the integral and L2 transforms",
+        "statement": "For f∈L1∩L2, the bounded continuous L1 transform represents F2f a.e.",
+        "strategy": "Apply simultaneous approximation. Integral transforms converge uniformly by B; L2 transforms converge in L2 and have an a.e. convergent subsequence. Their limits agree. Do not infer pointwise convergence from L2 convergence alone.",
+        "deps": [
+          "thm-plancherel",
+          "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions",
+          "lem-simultaneous-smooth-approximation-in-l-one-and-l-two",
+          "cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences",
+          "lem-complex-lp-completeness-density-and-inner-product"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Lemma 14.11, p.383"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-l-two-fourier-inversion",
+        "kind": "theorem",
+        "title": "L2 Fourier inversion",
+        "statement": "F2²f=f(-·) in L2, and F2^-1=RF2. Truncated integral transforms converge in L2, not necessarily pointwise.",
+        "strategy": "Pass F²=R from the dense Schwartz subspace using isometry and reflection. Truncations of an L2 function are L1 by Cauchy–Schwarz on finite balls; AG identifies their integral transforms.",
+        "deps": [
+          "thm-plancherel",
+          "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space",
+          "thm-l-one-l-two-agreement-of-fourier-transform",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Equation (14.17), p.384"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-periodic-continuous-functions-are-determined-by-their-fourier-coefficients",
+        "kind": "lemma",
+        "title": "Fourier uniqueness for continuous functions on the Euclidean torus",
+        "statement": "A continuous Z^n-periodic function with every coefficient ∫[0,1]^n f(x)e^(-2πik·x)dx equal to zero vanishes.",
+        "strategy": "Supply the compact torus explicitly as the product of n unit circles; verify characters separate points and their complex algebra is conjugation closed. Apply the earlier complex Stone–Weierstrass theorem to approximate conj(f) uniformly, giving ∫|f|²=0 and then f=0 by continuity. No dependency on later Fourier-series Fejer items or B-page density examples.",
+        "deps": [
+          "thm-complex-stone-weierstrass-self-adjoint",
+          "thm-complex-exponential-addition-and-real-extension",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Noam Elkies, Theta functions and weighted theta functions of Euclidean lattices",
+              "url": "https://people.math.harvard.edu/~elkies/aws09.pdf",
+              "locator": "Proof of Theorem 2, pp.10–11; uniqueness step expanded locally"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-poisson-summation-for-schwartz-functions",
+        "kind": "theorem",
+        "title": "Poisson summation for Schwartz functions",
+        "statement": "For f∈S(Rn), Σ_{k∈Zn}f(k)=Σ_{k∈Zn}Ff(k), both absolutely convergent. More generally Σf(x+k)=ΣFf(k)e^(2πik·x), uniformly in x.",
+        "strategy": "Periodize f; rapid decay gives absolute uniform convergence of every derivative on a unit cube. Fubini and cube tiling identify coefficients with Ff(k). FS makes those coefficients rapidly decreasing, hence the Fourier series is uniformly absolutely convergent. The local periodic uniqueness lemma identifies it with the periodization. Evaluate x=0; no Dirac-comb or distribution prerequisite.",
+        "deps": [
+          "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+          "lem-schwartz-functions-and-all-derivatives-are-integrable",
+          "lem-periodic-continuous-functions-are-determined-by-their-fourier-coefficients",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-dominated-convergence",
+          "thm-uniform-derivative-limit-on-a-closed-interval"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Noam Elkies, Theta functions and weighted theta functions of Euclidean lattices",
+              "url": "https://people.math.harvard.edu/~elkies/aws09.pdf",
+              "locator": "Theorem 2 and proof, pp.10–11, specialized to Zn with the negative-sign convention"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.092,
+    "id": "schwartz-space-and-the-plancherel-theorem-examples",
+    "kind": "B",
+    "category": "functional-analysis",
+    "title": "Schwartz Space and the Plancherel Theorem — Examples",
+    "companion": "schwartz-space-and-the-plancherel-theorem",
+    "requires": [
+      "schwartz-space-and-the-plancherel-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-gaussians-and-polynomials-times-gaussians-are-schwartz",
+        "kind": "example",
+        "title": "Polynomial Gaussians are Schwartz",
+        "statement": "For t>0 and every polynomial P, P(x)exp(-πt|x|²)∈S(Rn).",
+        "strategy": "Each derivative is another polynomial times the Gaussian; exponential decay dominates every polynomial.",
+        "deps": [
+          "def-schwartz-space-and-its-seminorms",
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "def-ck-and-multi-index-notation-in-several-variables"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "§14.1"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-a-smooth-integrable-function-need-not-be-schwartz",
+        "kind": "counterexample",
+        "title": "Smooth and integrable does not imply Schwartz",
+        "statement": "f(x)=1/(1+x²) is C∞∩L1(R) but not Schwartz.",
+        "strategy": "Its integral is finite by the 1/x² tail and boundedness near zero; x^4 f is unbounded.",
+        "deps": [
+          "def-schwartz-space-and-its-seminorms"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "§14.1"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-a-schwartz-function-need-not-have-compact-support",
+        "kind": "counterexample",
+        "title": "A Schwartz function need not have compact support",
+        "statement": "The Gaussian exp(-π|x|²) has support all of Rn.",
+        "strategy": "It is positive everywhere and Schwartz by the preceding example.",
+        "deps": [
+          "ex-gaussians-and-polynomials-times-gaussians-are-schwartz",
+          "def-c-c-and-c-c-infinity-on-rn"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "§14.1"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-hermite-functions-as-fourier-eigenfunctions",
+        "kind": "example",
+        "title": "Normalized Hermite Fourier eigenfunctions",
+        "statement": "Put h0(x)=2^(1/4)exp(-πx²), a†=√π x-(2√π)^-1 d/dx, and h_m=(m!)^-1/2(a†)^m h0. These form an orthonormal basis of L2(R), lie in S, and Fh_m=(-i)^m h_m.",
+        "strategy": "The commutator with a=√π x+(2√π)^-1d/dx is [a,a†]=1 and ah0=0. Integration by parts yields orthogonality and norms by induction. FS gives F a†=-i a† F. For completeness, h_m is a degree-m polynomial times h0 with nonzero leading coefficient: a function orthogonal to all has all Gaussian-weighted moments zero. Expand exp(-2πixξ) under the integral, using Cauchy–Schwarz with the majorant exp(-πx²+2π|ξ||x|); L1 uniqueness forces f h0=0. This gives a local proof without invoking spectral harmonic-oscillator completeness.",
+        "deps": [
+          "def-schwartz-space-and-its-seminorms",
+          "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization",
+          "cor-uniqueness-of-the-l-one-fourier-transform",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-dominated-convergence",
+          "thm-plancherel",
+          "thm-integration-by-parts",
+          "lem-complex-lp-completeness-density-and-inner-product"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Daniel W. Stroock, Topics in Fourier Analysis (2024)",
+              "url": "https://ocw.mit.edu/courses/res-18-015-topics-in-fourier-analysis-spring-2024/mitres_18_015_s24_full_lec.pdf",
+              "locator": "Theorem 10.1 and proof, pp.22–23; §11 opening and Theorem 11.1, pp.23–24; rescaled/sign-converted"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-plancherel-for-an-interval-indicator",
+        "kind": "example",
+        "title": "Sinc-square integral from Plancherel",
+        "statement": "∫R (sin(πξ)/(πξ))² dξ=1.",
+        "strategy": "Compute the indicator transform inline (B leaves in a different pair cannot supply dependencies), then apply AG and PL to 1_[-1/2,1/2].",
+        "deps": [
+          "def-fourier-transform-on-l-one-of-rn",
+          "thm-l-one-l-two-agreement-of-fourier-transform",
+          "thm-plancherel"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "§14.1"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-poisson-summation-for-the-gaussian-and-theta-functional-equation",
+        "kind": "example",
+        "title": "Gaussian Poisson summation and theta inversion",
+        "statement": "For t>0, θ(t)=Σ_{k∈Z}exp(-πt k²) satisfies θ(t)=t^-1/2 θ(1/t).",
+        "strategy": "Apply PS and G, checking absolute convergence. State this real positive theta parameter identity only; modular-form theory belongs elsewhere.",
+        "deps": [
+          "thm-poisson-summation-for-schwartz-functions",
+          "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Noam Elkies, Theta functions and weighted theta functions of Euclidean lattices",
+              "url": "https://people.math.harvard.edu/~elkies/aws09.pdf",
+              "locator": "Equations (17)–(18), and proof following Theorem 2, p.11"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-heisenberg-uncertainty-inequality",
+        "kind": "theorem",
+        "title": "Heisenberg uncertainty and Gaussian equality",
+        "statement": "For f∈S(Rn), a,b∈Rn, |||x-a|f||2 |||ξ-b|Ff||2≥ n/(4π)||f||2². Equality for nonzero f holds exactly for f(x)=c exp(-λ|x-a|²/2) exp(2πib·x), λ>0.",
+        "strategy": "Translate and modulate to zero centres. Integration by parts gives n||f||²=-2Re Σ∫x_j f conj(∂_j f). Cauchy–Schwarz for the vector tuples and PA/FS give the constant. Equality forces ∇f=-λ x f with one positive real λ for all coordinates; multiply by exp(λ|x|²/2) and integrate along coordinate segments. State the coordinate inequality separately if desired: equality in one coordinate allows an arbitrary Schwartz factor in the other coordinates, and is NOT restricted to a full n-dimensional Gaussian. Use the local complex L2 tuple equality condition; the published modulus-only Holder equality cannot by itself force the phase.",
+        "deps": [
+          "thm-parseval-pairing-on-schwartz-space",
+          "thm-fourier-transform-maps-schwartz-space-continuously-to-itself",
+          "thm-fourier-translation-modulation-dilation-and-reflection-laws",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-integration-by-parts",
+          "lem-complex-lp-completeness-density-and-inner-product"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "Theorem 14.15, pp.385–386; radial sum and equality conditions expanded"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "rem-hausdorff-young-and-interpolation",
+        "kind": "remark",
+        "title": "Hausdorff–Young and interpolation orientation",
+        "statement": "With the fixed normalization, Fourier has norm-one L1→L∞ and L2→L2 endpoints. The intended Hausdorff–Young interpolation route needs a Riesz–Thorin theorem allowing q0=∞; the current published local statement only permits finite q0,q1.",
+        "strategy": "Preserve the Hausdorff–Young orientation and flag the exact endpoint gap. Do not claim that the finite-target-exponent theorem proves the desired interpolation step. No item in this batch uses the unproved intermediate-p conclusion.",
+        "deps": [
+          "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions",
+          "thm-plancherel",
+          "thm-riesz-thorin-interpolation"
+        ],
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis (2017)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+              "locator": "§14.1, L1 bound (14.2) and Theorem 14.10; interpolation theorem supplied by the existing local thm-riesz-thorin-interpolation, not newly harvested from §15.1."
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      }
+    ]
+  }
+]

@@ -4,17 +4,19 @@ kind: lemma
 title: "The countable-product cylinder premeasure is countably additive"
 status: published
 origin: pipeline
-deps: [lem-cylinder-premeasure-from-consistent-finite-dimensional-laws-is-well-defined, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, def-product-measure-on-sigma-finite-spaces, prop-sigma-finite-section-measure-functions-are-measurable, thm-continuity-from-above-for-measures, def-countable-choice, thm-countable-union-of-countable, def-dependent-choice]
+deps: [lem-cylinder-premeasure-from-consistent-finite-dimensional-laws-is-well-defined, thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique, def-product-measure-on-sigma-finite-spaces, prop-sigma-finite-section-measure-functions-are-measurable, thm-continuity-from-above-for-measures, def-countable-choice, def-dependent-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
-  proof: ai-generated
+  proof: ai-altered
 verification:
-  audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
+  precheck: pass
+  verified:
+    model: Codex
+    verdict: repaired-and-locally-checked
+    date: 2026-09-08
+    scope: "Owner-authorized finite-tail and dependent-choice proof completion; local checks only, no judge"
+    delegated_by: owner
 sources:
   references:
     - title: "Kajino, Probability Theory, proof of Theorem 3.65"
@@ -45,8 +47,9 @@ measure converging to that of its intersection.
 [F4] Countable choice supplies a point of the product of the nonempty coordinate
 spaces. ([[def-countable-choice]])
 
-[F5] Under countable choice, a countable union of finite coordinate supports is
-countable. ([[thm-countable-union-of-countable]])
+[F5] On a nonempty product, consistent finite-dimensional laws define a
+well-defined finitely additive cylinder law.
+([[lem-cylinder-premeasure-from-consistent-finite-dimensional-laws-is-well-defined]])
 
 [F6] Dependent choice licenses a recursively constructed sequence when the
 admissible next coordinate depends on the prefix already chosen.
@@ -54,10 +57,12 @@ admissible next coordinate depends on the prefix already chosen.
 
 ## Proof
 
-1.1 Every coordinate space is nonempty because it carries a probability measure. By [F4], the coordinate product is therefore nonempty, so the finitely additive cylinder law is well-defined. Let $C_n\downarrow\varnothing$ be cylinders and suppose that $\mu_0(C_n)\ge\eta>0$ for every $n$. By [F5], enumerate the countable union of their finite supports. After enlarging supports, take $C_n$ to be determined by the first $k_n$ active coordinates, with $(k_n)$ nondecreasing. Recursively regarding each finite product as a two-factor product, [F2] expresses each cylinder mass as the integral of its measurable next-coordinate section-mass function. [F1, F2, F4, F5]
+1.1 Index the given coordinates by $0,1,\ldots$. Each coordinate space is nonempty since its measure has total mass one. Countable choice in [F4] supplies a point of their product, and [F5] gives the finitely additive cylinder law. Finite product laws are consistent: projecting away a factor preserves the rectangle values because that factor has mass one, and uniqueness in [F1] gives equality on the finite product sigma-algebra. This also justifies regrouping any finite block into two factors. [F1, F4, F5, given]
 
-2.1 The finite-stage section argument recursively maintains the following invariant after $m$ coordinates have been chosen: every remaining $C_n$-section has tail-cylinder mass at least $\eta/2^m$. For a prefix with this invariant, let $D_n$ be the measurable set of possible next coordinates whose further section has mass at least $\eta/2^{m+1}$. The $D_n$ decrease with $n$. The section formula and the bound by $1$ give the next-coordinate measure of $D_n$ at least $\eta/2^{m+1}$; [F3] therefore makes $\bigcap_nD_n$ nonempty. Every choice from this intersection extends the prefix and preserves the invariant. [F2, F3, step 1.1]
+2.1 For a cylinder $C$ and a prefix $p=(x_0,\ldots,x_{m-1})$, define $h_C(p)$ using only finite products: represent $C$ on coordinates $0,\ldots,k-1$ with $k\ge m$, fix the prefix in its measurable base, and measure the remaining section with $\bigotimes_{m\le j<k}\mu_j$. For $k=m$ this is the indicator of membership in the base. Enlarging $k$ leaves the value unchanged by the mass-one rectangle formula; two representations agree after enlargement, using the product point of step 1.1. Thus $h_C(p)$ is well-defined and lies in $[0,1]$. By choosing $k\ge m+1$, [F2] gives a measurable function $z\mapsto h_C(p,z)$ and $$h_C(p)=\int_{E_m}h_C(p,z)\,d\mu_m(z).$$ Inclusion of cylinders gives pointwise inequality of these functions by finite-product monotonicity. No measure on an infinite tail is used. [F1, F2, F5, step 1.1, construct]
 
-3.1 By [F6], make the recursively compatible selections from step 2.1. For each $n$, once the first $k_n$ active coordinates have been selected, they lie in the finite base of $C_n$ because its remaining section has positive mass. Fill any inactive coordinates with the product point supplied by [F4]. The resulting point lies in every $C_n$, contradicting $\bigcap_nC_n=\varnothing$. Thus $\mu_0(C_n)\downarrow0$. [F4, F6, step 2.1]
+3.1 Let $C_n\downarrow\varnothing$ and suppose their masses do not tend to zero. Finite additivity makes the masses decreasing in $[0,1]$, so there is $\eta>0$ with $\mu_0(C_n)\ge\eta$ for all $n$. Call a prefix $p$ of length $m$ admissible if $h_{C_n}(p)\ge\eta/2^m$ for every $n$; the empty prefix is admissible. Given one, put $t=\eta/2^{m+1}$ and $$D_n=\{z\in E_m:h_{C_n}(p,z)\ge t\}.$$ These sets are measurable and decrease. Step 2.1 and the bound $0\le h_{C_n}\le1$ yield $$2t\le h_{C_n}(p)\le\mu_m(D_n)+t\mu_m(E_m\setminus D_n)\le\mu_m(D_n)+t.$$ Hence $\mu_m(D_n)\ge t$, and [F3] implies $\mu_m(\bigcap_nD_n)\ge t>0$. Any point in this intersection extends $p$ to an admissible prefix. [F2, F3, step 1.1, step 2.1, construct]
 
-4.1 Finite additivity plus continuity at the empty set gives countable additivity whenever a disjoint union remains a cylinder: apply it to the decreasing remainders. Hence $\mu_0$ is a premeasure. [step 3.1] ∎
+4.1 The admissible finite prefixes form a nonempty set. Relate a prefix to its admissible one-coordinate extensions; step 3.1 proves this relation is entire. Dependent choice in [F6], starting at the empty prefix, gives a compatible chain, whose union is a point $x$ of the original coordinate product. For each $n$, choose a finite initial block determining $C_n$. Once that block is fixed, $h_{C_n}$ is its membership indicator; admissibility makes it positive, so $x\in C_n$. This contradicts the empty intersection. Thus $\mu_0(C_n)\to0$. Using all original coordinates also handles cylinders with empty or finitely many active coordinates; there is no terminal-prefix exception. [F6, step 2.1, step 3.1]
+
+5.1 If disjoint cylinders $A_j$ have union a cylinder $A$, then $R_N=A\setminus\bigcup_{j<N}A_j$ decreases to the empty set and remains in the cylinder algebra. Finite additivity gives $$\mu_0(A)=\sum_{j<N}\mu_0(A_j)+\mu_0(R_N).$$ Step 4.1 sends the remainder to zero, proving countable additivity for every such union. Hence $\mu_0$ is a premeasure. [F5, step 1.1, step 4.1, algebra] ∎

@@ -768,6 +768,17 @@ This pair is inserted before harmonic theory because the flux identity for
 spherical means is already a divergence-theorem argument. Delaying this
 machinery to the Green-function page made PDE-3 circular.
 
+**Published-consumer cutover.** The chart/polar bridge also supplies
+`lem-smooth-sphere-data-have-a-harmonic-replacement`, Step 3.1. Prove its
+rotation-invariance use locally from the chart density: for orthogonal O,
+D(OX)^T D(OX)=DX^T DX. No additional pair is needed. Retain the bridge and
+chart-independence dependencies when repairing this published proof.
+The existing polar definition and formula assume Countable Choice. In the
+published spherical-average definition and sphere/ball scaling lemma, expose
+that sufficient hypothesis or prove a choice-free replacement; the bridge
+alone does not discharge it. Reconcile downstream harmonic consumers under
+the same convention, without claiming that this axiom is necessary.
+
 ### A-page items, in dependency order
 
 1. `def-bounded-c-one-domain-boundary-charts-and-outward-normal` (definition; **L/NA**) — Define a bounded $C^1$ domain by local graph charts and construct its continuous outward unit normal, with overlap signs fixed by the interior side.
@@ -775,7 +786,7 @@ machinery to the Green-function page made PDE-3 circular.
 3. `lem-surface-integral-is-independent-of-c-one-boundary-charts` (lemma; **L/A**) — Tangential change of variables proves chart independence, refinement independence and additivity.
 4. `thm-divergence-theorem-for-bounded-c-one-euclidean-domains` (theorem; **L/A**) — For $F\in C^1(\overline\Omega;\mathbb R^d)$, $d\ge2$, prove $\int_\Omega\operatorname{div}F=\int_{\partial\Omega}F\cdot\nu$ by reducing graph patches to Fubini and the one-dimensional FTC.
 5. `def-bounded-piecewise-c-one-euclidean-domain` (definition; **L/NA**) — Define a bounded domain whose boundary is a finite union of oriented compact $C^1$ faces, with pairwise face intersections surface-null and a consistent outward normal off those edges; include punctured domains and truncated cones by explicit face presentations.
-6. `thm-divergence-theorem-for-bounded-piecewise-c-one-domains` (theorem; **L/A**) — Extend item 4 to item 5's class by a finite $C^1$ decomposition/face calculation; the surface-null edges contribute nothing and internal faces cancel with opposite normals. This is the exact version used on punctured domains and truncated space-time cones.
+6. `thm-divergence-theorem-for-bounded-piecewise-c-one-domains` (theorem; **L/A**) — Extend the local graph/partition argument to item 5's finite-face class using `lem-surface-null-edges-admit-small-gradient-cutoffs`: cover edge preimages by cubes, convert to finitely many ambient balls, and use scaled bumps with arbitrarily small integral gradient. Apply the graph identity to the cut-off field and pass to the limit. Internal faces cancel only in a specified gluing with opposite normals. Do not require a decomposition into globally $C^1$ domains. The complete local cutoff argument is in `research/phase-2-local-mathematical-repairs-2026-09-08.md`.
 7. `def-classical-normal-derivative` (definition; **L/NA**) — For a $C^1$ function near the boundary set $\partial_\nu u=Du\cdot\nu$; no Sobolev trace or conormal derivative is implied.
 8. `cor-first-green-identity-on-a-bounded-c-one-domain` (corollary; **L/A**) — $\int_\Omega(v\Delta u+Du\cdot Dv)=\int_{\partial\Omega}v\partial_\nu u$ for the displayed $C^2/C^1$ regularity.
 9. `cor-second-green-identity-on-a-bounded-c-one-domain` (corollary; **L/A**) — Subtract the two first identities, retaining the regularity and orientation conventions.
@@ -820,8 +831,8 @@ for the real-variable proofs.
 
 1. `def-distributional-harmonicity-and-poisson-equation-in-rn` (definition; **L/NA**) — Retain the published definition of classical and distributional harmonicity and of $-\Delta u=f$ on an open subset of $\mathbb R^n$; the test-function pairing comes from FA-24.
 2. `def-spherical-averages-and-local-ball-means-in-rn` (definition; **L/NA**) — Retain the published averages, using MT-11's polar surface measure, MT-17's ball-average operator and Lebesgue volume on translated/dilated spheres and balls.
-3. `lem-sphere-and-ball-measures-scale` (lemma; **L/A**) — Derive $|\partial B_r|=|S^{n-1}|r^{n-1}$ and $|B_r|=|S^{n-1}|r^n/n$ from polar coordinates.
-4. `lem-radial-derivative-of-a-spherical-average` (lemma; **L/A**) — For $u\in C^2$, prove $M_u'(r)=r\fint_{B_r}\Delta u/n$ by differentiation under the integral and polar-coordinate integration by parts.
+3. `lem-sphere-and-ball-measures-scale` (lemma; **L/A**) — Derive $|\partial B_r|=|S^{n-1}|r^{n-1}$ using PDE-2D's `lem-euclidean-chart-measure-agrees-with-polar-surface-measure`, then derive $|B_r|=|S^{n-1}|r^n/n$ from polar coordinates. This is a protected published Phase-3 cutover.
+4. `lem-radial-derivative-of-a-spherical-average` (lemma; **L/A**) — For $u\in C^2$, prove $M_u'(r)=r\fint_{B_r}\Delta u/n$ using the published differentiation-under-the-integral theorem, PDE-2D's chart/polar bridge and bounded-C1 divergence theorem for $n\ge2$. Handle $n=1$ separately by the ordinary fundamental theorem at the two endpoints. This repairs the published radial-only integration step in Phase 3; it creates no new supplier item.
 5. `thm-spherical-mean-value-property-for-harmonic-functions` (theorem; **L/A**) — A harmonic function equals its spherical average on every compactly contained ball.
 6. `cor-ball-mean-value-property-for-harmonic-functions` (corollary; **L/A**) — Integrate the spherical identity to obtain the ball identity.
 7. `def-radial-mollifier-family-in-rn` (definition; **L/NA**) — Retain the published unit-mass radial family with its support and scaling conventions.
@@ -2440,7 +2451,10 @@ Add two pairs without renumbering existing pages:
 | 458.0021 | A | `euclidean-surface-measure-divergence-and-green-identities` | `lebesgue-measure-on-euclidean-space`; `the-lebesgue-integral-and-the-convergence-theorems`; `product-measures-and-the-fubini-tonelli-theorems`; `fubini-and-change-of-variables`; `the-fundamental-theorems-of-calculus`; `inner-product-spaces-and-orthogonality`; `smooth-partitions-of-unity-and-exhaustions` |
 | 458.0022 | B | `euclidean-surface-measure-divergence-and-green-identities-examples` | its A page only |
 
-Repair the four published A-page declarations as follows:
+Repair the four published A-page declarations as follows. On 2026-09-08 the
+PDE-1 deletion and all five additions were applied to `plan-spec.json` after
+group-c recheck. Its published header remains unchanged for Phase 3; this
+does not assert that the other three published cutovers below are applied.
 
 - `partial-differential-equations-and-characteristics`: remove
   `itos-formula-and-brownian-martingales-examples` (unpublished and not a
@@ -2517,14 +2531,22 @@ The eight published PDE pages and all their items remain read-only. Once the
 new suppliers have been published, make these exact content repairs:
 
 1. `lem-radial-derivative-of-a-spherical-average`: add
-   `thm-divergence-theorem-for-bounded-c-one-euclidean-domains`. Replace proof
+   `thm-divergence-theorem-for-bounded-c-one-euclidean-domains`,
+   `lem-euclidean-chart-measure-agrees-with-polar-surface-measure`, and the
+   published `thm-differentiation-under-the-integral-sign`. Use a compact
+   radial interval and a uniform gradient bound for differentiation. For
+   $n\ge2$, replace proof
    step 1.2 by
    $\int_{B_r(x)}\Delta u=\int_{\partial B_r(x)}Du\cdot\nu
    =r^{n-1}\omega_{n-1}m'(r)$. The current radial differentiation plus polar
    coordinates omits the angular Hessian/divergence cancellation and does not
    prove the displayed equality. Its consumer
    `lem-classical-subharmonic-mean-value-inequalities` is transitively blocked
-   until this repair.
+   until this repair. For $n=1$, prove the identity using the ordinary
+   fundamental theorem at the two endpoints; the new divergence theorem
+   does not cover that dimension. Also amend the published
+   `lem-sphere-and-ball-measures-scale` to declare and use the same chart/polar
+   bridge. A parametrization alone does not prove the surface-measure scaling.
 2. On `harmonic-functions-and-mean-values-in-rn`, publish
    `lem-zero-mass-radial-test-functions-are-compactly-supported-laplacians`
    and `lem-harmonic-distribution-mollifications-stabilise-locally` before

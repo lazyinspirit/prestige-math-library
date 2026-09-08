@@ -7,10 +7,16 @@ whose pages belong to batch `<i>`. Resolve each finding in this batch's
 manifest, coverage, and notes, or rebut it with exact mathematical and source
 evidence. Add every missing definition, lemma, theorem, and backward dependency.
 
+Apply `briefs/beta-scaffold.md`'s Phase-2 boundary. Rebut page-only published
+debt with the actual proof-dependency evidence and retain it for the consumer
+ledger. Do not repeatedly rewrite a scaffold to fix unrelated published items.
+Actual inadequate suppliers still need a local replacement or authorized repair.
+
 If closure requires a new A/B pair, specify it completely and keep the consumer
 blocked until the authorized plan writer adds it to the prose scaffold and
-plan. Every added item needs a coverage disposition, locator, and current
-fetch-verified backing.
+plan. Every added item needs a coverage disposition and either a verified
+source/locator or a complete alternative under the documented source-drop
+contract in `briefs/beta-scaffold.md`.
 
 Append `## Scaffold-fix round` to the batch notes with each finding ID,
 disposition, evidence, change, and remaining blocker. Run the batch coverage

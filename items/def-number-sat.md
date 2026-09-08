@@ -5,16 +5,17 @@ title: "NumberSAT"
 status: published
 origin: pipeline
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
-deps: [def-boolean-formula-cnf-and-sat]
+deps: []
 verification:
-  audited: 2026-09-07
-  precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
+  verified:
+    model: "gpt-6-astra"
     verdict: pass
-    date: 2026-09-06
+    date: 2026-09-08
+    scope: "Local definition and prerequisite repair; not independent review or a whole-closure audit"
+    delegated_by: owner
+  precheck: n/a
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity: A Modern Approach"
@@ -24,6 +25,13 @@ sources:
 ---
 
 ## Definition
+
+A Boolean formula is a finite expression built from variables, the constants
+$\top,\bot$, and the connectives $\neg,\land,\lor$. Under an assignment of
+zeros and ones to its variables, evaluate constants as one and zero, negation
+as complementation, conjunction as minimum, and disjunction as maximum.
+An assignment satisfies the formula when its value is one. Fix an effective
+binary encoding of these expression trees and finite lists of variable names.
 
 An input to $\mathrm{NumberSAT}$ is well formed when it encodes a Boolean
 formula $\varphi$ together with an ordered list

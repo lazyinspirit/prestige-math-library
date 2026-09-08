@@ -52,6 +52,8 @@ import { join } from 'node:path';
 import { spawn } from 'node:child_process';
 import { REPO } from './paths.mjs';
 import { markSuspect } from './bot-wall.mjs';
+import { citationUrls } from './citation-urls.mjs';
+import { sourceDropped } from './source-resolution.mjs';
 
 const argv = process.argv.slice(2);
 const option = (name) => {
@@ -94,13 +96,8 @@ for (const file of [...manifests, ...ledgers, ...coverages]) {
 }
 
 const urls = new Set();
-const collect = (text) => {
-  for (const match of text.matchAll(/https?:\/\/[^\s"'<>`\]]+/g)) {
-    // Parentheses are valid and common at the end of Wikipedia paths. Inputs
-    // are quoted YAML/JSON strings, so only prose punctuation is extraneous.
-    const url = match[0].replace(/[,.;:]+$/g, '');
-    try { urls.add(new URL(url).href); } catch { /* malformed text is not a fetch target */ }
-  }
+const collect = (value, options) => {
+  for (const url of citationUrls(value, options)) urls.add(url);
 };
 
 const itemIds = new Set();
@@ -116,7 +113,9 @@ for (const id of itemIds) {
   if (existsSync(file)) collect(readFileSync(file, 'utf8'));
 }
 for (const ledger of ledgers) collect(readFileSync(absolute(ledger), 'utf8'));
-for (const coverage of coverages) collect(readFileSync(absolute(coverage), 'utf8'));
+for (const coverage of coverages) {
+  collect(JSON.parse(readFileSync(absolute(coverage), 'utf8')), { coverage: true });
+}
 
 // A URL recorded as `original_url` on a coverage source is a DECLARED
 // SUPERSEDED citation: the recover-apply repair (§3.11c) swapped the
@@ -130,11 +129,13 @@ for (const coverage of coverages) collect(readFileSync(absolute(coverage), 'utf8
 // is coverage-schema-scoped: items and ledgers keep the full harvest, and
 // a source whose original_url equals its url (never swapped) is untouched.
 const superseded = new Set();
+let documentedDrops = 0;
 for (const coverage of coverages) {
   try {
     const parsed = JSON.parse(readFileSync(absolute(coverage), 'utf8'));
     for (const page of parsed.pages ?? []) {
       for (const source of page.sources ?? []) {
+        if (sourceDropped(source)) { documentedDrops++; continue; }
         if (source?.original_url && source?.url && source.original_url !== source.url) {
           try { superseded.add(new URL(source.original_url).href); } catch { /* not a URL */ }
         }
@@ -371,6 +372,7 @@ writeFileSync(absolute(out), JSON.stringify(result, null, 2) + '\n');
 console.log(`url-sweep: ${result.summary.live}/${result.summary.urls} live; ${result.summary.failed} failed`
   + (recover ? `; ${result.summary.recovered} recoverable from the archive` : '')
   + `; ${result.summary.suspect} suspect` + ` -> ${out}`);
+console.log(`url-sweep: ${rows.length + documentedDrops} citation decision(s) (${documentedDrops} documented source drops)`);
 if (result.summary.suspect) {
   console.log(`\nSUSPECT — ${result.summary.suspect} URL(s) answered 200 from what looks like a wall,`);
   console.log('not the document. These are NOT dead and do not fail the gate; read them.');

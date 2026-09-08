@@ -7,13 +7,18 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [lem-smooth-bump-between-concentric-euclidean-balls, def-the-standard-smooth-step-function]
+deps: [lem-smooth-bump-between-concentric-euclidean-balls, lem-compactness-is-intrinsic, thm-algebra-of-derivatives, def-ck-and-multi-index-notation-in-several-variables, def-support-and-compactly-supported-riemann-integral-in-rn]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-30
+  verified:
+    model: Codex
+    verdict: repaired-and-locally-checked
+    date: 2026-09-08
+    scope: "Owner-authorized finite-cover and support repair; local checks only, no independent judge"
+    delegated_by: owner
   precheck: pass
 sources:
   scraped: []
@@ -34,20 +39,24 @@ If $K\subseteq U\subseteq\mathbb R^n$ with $K$ compact and $U$ open, then there 
 
 **Given:** A compact set $K\subseteq\mathbb R^n$ and an open set $U\supseteq K$.
 
-[L1] For every $p\in K$ there are radii $0<r_p<R_p$ with $\overline B_{r_p}(p)\subseteq B_{R_p}(p)\subseteq U$.
+[L1] Compactness gives a finite subcover from an indexed ambient open cover ([[lem-compactness-is-intrinsic]], claim 3).
 
-[L2] Each such concentric pair admits a smooth bump equal to $1$ on the inner closed ball and supported in the outer ball ([[lem-smooth-bump-between-concentric-euclidean-balls]]).
+[L2] The explicit concentric-ball construction gives a smooth function into $[0,1]$, equal to $1$ on the inner closed ball and supported inside the outer open ball ([[lem-smooth-bump-between-concentric-euclidean-balls]]).
 
-[F1] The standard smooth step function $\sigma$ is $0$ on $(-\infty,0]$ and $1$ on $[1,\infty)$ ([[def-the-standard-smooth-step-function]]).
+[L3] The one-variable sum and product rules apply to coordinate derivatives ([[thm-algebra-of-derivatives]]). Smoothness requires all iterated coordinate derivatives to exist and be continuous ([[def-ck-and-multi-index-notation-in-several-variables]]).
 
-[A1] Finite sums of smooth real-valued functions on $\mathbb R^n$ are smooth.
+[F1] Support is the closure of the nonzero locus ([[def-support-and-compactly-supported-riemann-integral-in-rn]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 For each $p\in K$, choose radii as in [L1] and a bump $\rho_p$ as in [L2]; compactness gives finitely many points $p_1,\dots,p_m$ such that $K\subseteq \bigcup_{i=1}^m B_{r_{p_i}}(p_i)$. [L1, L2, given, choose]
+1.1 If $K=\varnothing$, the zero function has empty support and satisfies the claim. Suppose henceforth that $K\ne\varnothing$. Consider all triples $(p,r,R)$ with $p\in K$, $0<r<R$, and $B_R(p)\subseteq U$. Their inner balls $B_r(p)$ form an indexed open cover of $K$: openness gives a ball $B_R(p)\subseteq U$ at each $p$, and $r=R/2$ is admissible. This defines the whole family without making a simultaneous choice at every point. [given, F1, construct]
 
-2.1 Put $s:=\rho_{p_1}+\cdots+\rho_{p_m}$; then $s$ is smooth by [A1], one has $s\ge 1$ on $K$, and $\operatorname{supp}(s)\subseteq U$. [A1, step 1.1]
+2.1 By [L1], finitely many admissible triples $(p_i,r_i,R_i)$, $1\le i\le m$, have inner balls covering $K$. For each of these finitely many triples use the explicit formula in [L2], with $x$ replaced by $x-p_i$, to define $\rho_i$. Translation preserves the coordinate-derivative formulas, so each $\rho_i$ is smooth, lies in $[0,1]$, equals $1$ on $\overline B_{r_i}(p_i)$, and has support contained in $B_{R_i}(p_i)\subseteq U$. [L1, L2, step 1.1]
 
-3.1 Define $\rho:=\sigma\circ s$; then $\rho$ is smooth, equals $1$ on $K$, and vanishes off $U$, so $\operatorname{supp}(\rho)\subseteq U$. [F1, step 2.1] ∎
+3.1 Define $\rho=1-\prod_{i=1}^m(1-\rho_i)$. Repeated use of [L3] shows that each iterated coordinate derivative is a finite sum of products of continuous derivatives of the $\rho_i$, so $\rho$ is smooth. Since every factor lies in $[0,1]$, so does $\rho$. On each inner ball one factor is zero; hence $\rho=1$ on their union, an open neighbourhood of $K$. [L3, step 2.1, construct]
+
+4.1 Let $F=\bigcup_{i=1}^m\operatorname{supp}\rho_i$. Each support is closed by [F1], so the finite union $F$ is closed, and step 2.1 gives $F\subseteq U$. Off $F$, every $\rho_i$ vanishes, so the formula in step 3.1 gives $\rho=0$. Therefore the closure of the nonzero locus of $\rho$ lies in $F$: $\operatorname{supp}\rho\subseteq F\subseteq U$. [F1, step 2.1, step 3.1, construct]
+
+5.1 Steps 3.1 and 4.1 give all three required properties; step 1.1 handled the empty case. [step 1.1, step 3.1, step 4.1] ∎

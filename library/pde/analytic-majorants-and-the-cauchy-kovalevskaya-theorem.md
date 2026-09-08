@@ -1,0 +1,11 @@
+---
+page: analytic-majorants-and-the-cauchy-kovalevskaya-theorem
+title: Analytic Majorants and the Cauchy–Kovalevskaya Theorem
+status: draft
+items: ["def-real-analytic-germ-in-several-variables", "def-coefficientwise-majorisation-of-multivariable-power-series", "lem-coefficient-majorisation-is-preserved-by-sums-products-composition-and-differentiation", "lem-an-analytic-germ-has-a-rational-geometric-majorant", "thm-real-analytic-inverse-and-implicit-function-theorems", "lem-analytic-ordinary-differential-systems-by-coefficient-majorants", "lem-analytic-noncharacteristic-hypersurfaces-flatten-to-a-coordinate-hyperplane", "lem-analytic-cauchy-data-reduce-to-zero-data-in-normal-form", "lem-normal-form-pde-determines-a-unique-formal-taylor-series", "lem-a-positive-majorant-system-dominates-the-formal-cauchy-recursion", "lem-the-goursat-majorant-equation-has-a-convergent-positive-power-series-solution", "thm-cauchy-kovalevskaya-for-first-order-analytic-systems-in-normal-form", "lem-higher-order-analytic-normal-form-reduces-to-a-first-order-system", "thm-cauchy-kovalevskaya-for-a-noncharacteristic-analytic-cauchy-problem", "rem-cauchy-kovalevskaya-is-an-analytic-not-smooth-well-posedness-theorem"]
+examples: []
+---
+
+An analytic Cauchy problem has two separate tasks: its equation must determine the Taylor coefficients, and the resulting formal series must converge. This page proves both. Ordinary multi-index coefficients are compared with nonnegative coefficients; products, substitutions, and derivatives preserve the comparison. A rational geometric bound and an independently proved analytic ODE theorem lead to a convergent Goursat majorant. The coefficient recursion then yields existence and uniqueness for first-order analytic systems in normal form.
+
+The higher-order reduction introduces the complete lower jet and recovers its derivative compatibility by formal uniqueness. Analytic coordinates flatten the initial hypersurface, and the noncharacteristic condition selects a local solved branch for the highest normal derivative. Cauchy data are prescribed on that branch with compatible tangential derivatives. All conclusions concern analytic germs near the initial point. The companion examples calculate solutions and distinguish this conclusion from smooth-data existence or continuous dependence.

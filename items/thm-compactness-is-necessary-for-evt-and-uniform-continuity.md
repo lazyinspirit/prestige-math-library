@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-heine-borel-characterisation-r, def-open-cover-r, thm-extreme-value-r, thm-heine-cantor-r, cor-boundedness-theorem-r, cor-continuous-extension-from-a-dense-subset-r, thm-algebra-of-continuous-functions, def-continuity-real, def-uniform-continuity-real, def-open-and-closed-in-r, def-interior-closure-boundary-r, thm-closure-characterisations-r, def-bounded-set, def-max-min, lem-finite-set-has-max, lem-sup-epsilon, def-complete-ordered-field, def-interval, def-neighbourhood-r, def-integer-power, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-power-monotone, lem-of-abs-value, def-ordered-field]
+deps: [thm-heine-borel-characterisation-r, def-open-cover-r, thm-extreme-value-r, thm-heine-cantor-r, cor-boundedness-theorem-r, lem-of-triangle-inequality, thm-algebra-of-continuous-functions, def-continuity-real, def-uniform-continuity-real, def-open-and-closed-in-r, def-interior-closure-boundary-r, thm-closure-characterisations-r, def-bounded-set, def-max-min, lem-finite-set-has-max, lem-sup-epsilon, def-complete-ordered-field, def-interval, def-neighbourhood-r, def-integer-power, cor-archimedean-reciprocal, thm-of-archimedean, lem-of-inverse-positive, lem-power-monotone, lem-of-abs-value, def-ordered-field]
 justified_by: []
 aliases: [thm-rudin-4-20]
 forward_refs: [cex-evt-fails-on-the-open-interval-and-on-the-half-line]
@@ -16,11 +16,12 @@ short: "compactness is necessary"
 proof_strategy: constructive
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
+  verified:
+    model: gpt-6-astra
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-09-09
+    scope: "Local author proof repair and used published supplier-interface review; no independent judge or whole-closure certification."
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -51,16 +52,16 @@ Let $E \subseteq \mathbb{R}$ be nonempty and **not** compact
 
 Together with [[cor-boundedness-theorem-r]], [[thm-extreme-value-r]] and
 [[thm-heine-cantor-r]] this says that **compactness is exactly the hypothesis
-those three theorems need**: on a compact set every continuous function is
-bounded, attains its extrema and is uniformly continuous, and on a set that is
-not compact each of those three conclusions fails for some continuous function.
+needed for universal boundedness and attainment of extrema**. On a compact set
+every continuous function is also uniformly continuous. The converse for uniform
+continuity asserted here applies to bounded sets.
 
 **Claim 3 carries the boundedness hypothesis because it must.** On an unbounded
-closed set every uniformly continuous function is still uniformly continuous,
-and a noncompact set may well carry only uniformly continuous functions of
-interest; what claim 3 asserts is the sharp statement for the bounded case, which
-is the case Heine-Cantor leaves open. The unbounded case is covered by claims 1
-and 2, which hold with no extra hypothesis.
+closed uniformly discrete set, every function is uniformly continuous: if
+distinct points are separated by a fixed positive distance $c$, take
+$\delta=c$ for every $\varepsilon>0$, so $|x-y|<\delta$ forces $x=y$.
+Thus claim 3 cannot be asserted for all unbounded sets. Claims 1 and 2 still
+hold without the boundedness hypothesis.
 
 **Every witness is exhibited, not merely asserted to exist.** Four functions do
 the work: $x$ and $-1/(1+x^{2})$ when $E$ is unbounded, and $1/(x-x_0)$ and
@@ -83,7 +84,7 @@ $\overline{E} \setminus E$.
 
 [L6] Archimedean property in reciprocal form, reciprocals, and squares: for every real $\eta > 0$ there is a natural $n \ge 1$ with $1/n < \eta$; $0 < s < t$ implies $0 < 1/t < 1/s$; $0 \le a < b$ implies $a^{2} < b^{2}$; and $t \ge 1$ implies $t^{2} \ge t$ ([[cor-archimedean-reciprocal]], [[thm-of-archimedean]], [[lem-of-inverse-positive]], [[lem-power-monotone]], [[def-integer-power]]).
 
-[L7] Extension theorem: a uniformly continuous real function on a nonempty $D \subseteq \mathbb{R}$ extends to a continuous function on $\overline{D}$ ([[cor-continuous-extension-from-a-dense-subset-r]], [[def-uniform-continuity-real]]).
+[L7] Uniform continuity requires one positive $\delta$ for all pairs at each positive $\varepsilon$ ([[def-uniform-continuity-real]]). The triangle inequality gives $|u-v|\ge |u|-|v|$ by applying it to $u=(u-v)+v$ ([[lem-of-triangle-inequality]]).
 
 [L8] Ordered-field arithmetic in $\mathbb{R}$: totality and trichotomy; $|u| > 0$ exactly when $u \ne 0$; $1 + t^{2} \ge 1 > 0$ for every real $t$; and the minimum of a two-element set of reals ([[def-ordered-field]], [[lem-of-abs-value]], [[lem-finite-set-has-max]], [[def-max-min]], [[def-interval]]).
 
@@ -105,7 +106,7 @@ $\overline{E} \setminus E$.
 
 3.2 **Second case, claim 2.** Put $g(x) := -|x - x_0|$ for $x \in E$, continuous on $E$ by [L4]. Since $E$ is bounded, [L2] gives a real $M \ge 0$ with $|x| \le M$ on $E$, so $|x - x_0| \le M + |x_0|$ and $-(M + |x_0|) \le g(x) < 0$ for every $x \in E$: $g$ is bounded, and $g[E]$ is nonempty and bounded above by $0$. For a real $\varepsilon > 0$, step 2.2 supplies $x \in E$ with $|x - x_0| < \varepsilon$, that is $g(x) > -\varepsilon$; so $\sup g[E] = 0$ by [L5], and it is not attained because $g(x) < 0$ everywhere on $E$. As in step 2.1, $g$ therefore has no greatest value on $E$. [step 2.1, step 2.2, L2, L4, L5, L8, construct]
 
-4.1 **Second case, claim 3.** Put $h := f$ of step 3.1, continuous on $E$. Suppose $h$ were uniformly continuous on $E$. By [L7] there would be a continuous $H : \overline{E} \to \mathbb{R}$ with $H(x) = h(x)$ for $x \in E$, and $x_0 \in \overline{E}$. Continuity of $H$ at $x_0$ with $\varepsilon := 1$ gives a real $\delta > 0$ such that every $z \in \overline{E}$ with $|z - x_0| < \delta$ satisfies $|H(z) - H(x_0)| < 1$, hence $|H(z)| < |H(x_0)| + 1 =: B$, a real with $B > 0$. Put $r := \min\{\delta, 1/B\} > 0$; by step 2.2 there is $x \in E$ with $|x - x_0| < r$, and then $0 < |x - x_0| < 1/B$ gives $|h(x)| = 1/|x - x_0| > B$ by [L6], while $x \in \overline{E}$ with $|x - x_0| < \delta$ gives $|h(x)| = |H(x)| < B$. That is impossible, so $h$ is not uniformly continuous on $E$. [step 2.2, step 3.1, L6, L7, L8]
+4.1 **Second case, claim 3.** Put $h := f$ of step 3.1, continuous on $E$. Fix any $\delta>0$. By step 2.2 choose $y\in E$ with $|y-x_0|<\delta/2$, and then choose $x\in E$ with $|x-x_0|<\min\{\delta/2,1/(|h(y)|+2)\}$. These are two finite selections. The triangle inequality gives $|x-y|<\delta$, while $|h(x)|=1/|x-x_0|>|h(y)|+2$. Hence $|h(x)-h(y)|\ge |h(x)|-|h(y)|>2$. Thus every positive $\delta$ fails the uniform-continuity condition for $\varepsilon=1$, proving claim 3. [step 2.2, step 3.1, L6, L7, L8]
 
 5.1 The two cases of step 1.1 are exhaustive, and in each of them claims 1 and 2 have been established by exhibiting the functions named, while claim 3, whose hypothesis places $E$ in the second case, is step 4.1. [step 1.2, step 1.3, step 2.1, step 3.1, step 3.2, step 4.1, discharge-construct: the four witnesses x and -1/(1+x^2) and 1/(x-x_0) and -|x-x_0|] ∎
 
@@ -113,6 +114,6 @@ $\overline{E} \setminus E$.
 
 - **The bounded non-closed case is where all three failures happen at once.** There $x_0 \in \overline{E} \setminus E$ is a hole in the domain, and $1/(x-x_0)$ blows up at it: it is unbounded, it is not uniformly continuous, and $-|x-x_0|$ approaches its supremum $0$ without reaching it. The unbounded case needs a different witness for claim 2, because $-|x - x_0|$ need not be bounded there, and $-1/(1+x^{2})$ is the standard substitute.
 
-- **Claim 3 is proved through the extension theorem rather than through sequences.** The textbook route takes a sequence in $E$ converging to $x_0$, notes that it is Cauchy, and observes that a uniformly continuous function must carry it to a Cauchy, hence bounded, sequence. Producing that sequence from adherence spends countable choice ([[lem-sequential-characterisation-of-closure-r]]). The argument above spends none: [[cor-continuous-extension-from-a-dense-subset-r]] constructs the extension without selecting anything, and the contradiction is then a single $\varepsilon$-$\delta$ estimate at the point $x_0$.
+- **Claim 3 uses only two nearby points for each proposed radius.** Adherence supplies each point in turn, and the reciprocal estimate separates their function values. This finite selection argument requires no Axiom of Choice.
 
 - **What "not attained" means here, precisely.** The supremum of $g[E]$ exists as a real number and equals $0$, and no point of $E$ has $g$-value $0$. That is stronger than saying $g$ has no maximum: it identifies the value the function fails to reach. The companion page works both witnesses out concretely in [[cex-evt-fails-on-the-open-interval-and-on-the-half-line]].

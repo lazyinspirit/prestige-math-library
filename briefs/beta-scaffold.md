@@ -8,12 +8,27 @@ content or request broader access.
 ## Dependencies
 
 A scaffold is ready only when every claim can be proved from its hypotheses and
-earlier local results. Audit the complete transitive closure of page `requires`
-and item `deps` through the plan, all run manifests, and published items. For
-each dependency, verify its exact statement, hypotheses, direction,
+earlier local results. Check page `requires` for structural closure and legal
+order. Audit the actual transitive proof prerequisites of every owned item
+through the plan, run manifests and published items, including `deps`,
+well-definedness obligations and load-bearing body references. Sharing a
+prerequisite page does not make every item on that page a proof dependency. For
+each actual dependency, verify its exact statement, hypotheses, direction,
 conventions, axiom strength, and use in the proposed proof. A resolving ID is
 not enough. There must be no missing, circular, forward, or inadequate
 dependency.
+
+During Phase 2, defects in published consumers being supplied by this frontier
+are Phase-3 debt, not blockers on their suppliers. Record those defects, exact
+planned suppliers and repair strategies in the published-consumer-supplier
+ledger; batch writers without ledger access record them in their owned notes
+for reconciliation. A published defect blocks an owned item only when its
+proposed proof actually uses the defective result or affected clause. Give the
+exact item path and mathematical use; then supply an adequate local proof or
+reroute to an adequate prerequisite. Do not assume that unused declared edges
+are harmless: justify their removal against the proof. Do not require a
+semantic audit of all co-resident published items to clear a supplier pair.
+This distinction never waives structural gates or the Foundations boundary below.
 
 Add every needed definition, lemma, or theorem in proof order. The owner
 authorizes new prerequisite A/B pairs when closure requires them. Add each pair
@@ -39,20 +54,52 @@ against authoritative sources before using or approving it. This includes
 definitions, results, dependencies, examples, counterexamples, proof routes,
 and scope decisions. Prefer primary papers, author-hosted books or notes, and
 official references. Read the complete relevant text. Abstracts, snippets,
-citations, and truncated passages are not evidence. Missing full text is a
-blocker.
+citations, and truncated passages are not full-text evidence.
 
-For each A page, use at least two independent treatments, including a textbook,
+Unless a documented drop below makes them unavailable, use at least two
+independent treatments per A page, including a textbook,
 monograph, or full lecture-note set. Record each source's URL, exact locator,
 relevant headings or named results, and support. Give every harvested result a
 disposition. Link included or inline results to item IDs; give deferred results
 a valid destination and out-of-scope results a specific reason.
 
-Fetch-verify every source. Prefer another live or archived copy of the same
-text. A different treatment must be read and reharvested with new locators and
-contents; retain `original_url`. Never remove mathematics to clear a source
-check.
+Verify every URL serves the complete relevant text, not merely HTTP 200 or a
+PDF-shaped file. Run `source-fetch-check --stamp`; inspect the actual text.
+After failure, search author/institutional copies and complete archives
+autonomously, retrying recovery five times after the initial failure. Record
+real attempts; do not invent failures or treat a temporary network outage as
+proof of open-web absence. Stop retrying once the text is recovered.
+Reuse recorded fetch attempts; five retries do not mean five agent dispatches.
+
+If the original is genuinely unavailable on the open web, find an alternate
+proof yourself or in accessible authoritative literature. Preserve every
+result, hypothesis and dependency; add needed lemmas. Read and reharvest any
+replacement treatment with its own locators. If you are not 100% confident in
+the alternative mathematics, set `source_resolution.status: owner-escalation`,
+keep the batch blocked, and report the URL, searches and exact uncertainty to
+the owner. Never manufacture confidence or a read/fetch stamp.
+
+Otherwise drop the original as proof backing, retaining its source record and
+result dispositions as history. Add `source_resolution` with:
+
+- `status: dropped`, `decided_by: step-1-scaffolder`, `confidence: certain`;
+- `reason`, `search_summary`, `searches: [{query, outcome}]`;
+- `attempts: [{url, at, outcome}]`: initial failure plus five recovery retries;
+- `alternatives: [{item, argument, deps}]`: a complete alternate argument for
+  every included/inline result, with exact earlier dependency IDs.
+
+Keep replacement URLs in separate active source records and align arguments
+and dependencies with the manifest. Do not invent headings or locators for
+unread text. Valid drops waive the unavailable original and any source-count
+shortfall, not scope, provenance, dependency or review checks. Step 3
+independently adjudicates these arguments.
 
 Record exact changes, evidence, dependency paths, checks, and blockers in the
 named artifact. Report only checks you ran. After a handoff or context reset,
 reread the current scaffold, dependencies, sources, and open obligations.
+
+# Frontier dependency bookkeeping
+
+Step-3 reviewers and subsequent scaffold repairers also follow
+`briefs/tasks/frontier-dependency-ledger.md`. Record and maintain cross-batch
+dependencies without changing other batches or expanding repair authority.

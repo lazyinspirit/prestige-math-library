@@ -6,8 +6,8 @@ status: published
 origin: session
 provenance:
   statement: literature-derived
-  proof: ai-generated
-deps: [def-reduction-gadget-and-interface-invariant, def-directed-hamiltonian-path-and-cycle-problems, def-polynomial-time-many-one-reduction, def-multigraph-loop-and-digraph, thm-three-sat-is-np-complete]
+  proof: ai-altered
+deps: [def-reduction-gadget-and-interface-invariant, def-directed-hamiltonian-path-and-cycle-problems, def-polynomial-time-many-one-reduction, def-multigraph-loop-and-digraph]
 proof_strategy: direct
 sources:
   scraped: []
@@ -17,7 +17,12 @@ sources:
     - title: "Sanjeev Arora and Boaz Barak, Computational Complexity: A Modern Approach"
       url: "https://theory.cs.princeton.edu/complexity/book.pdf"
 verification:
-  audited: 2026-09-05
+  verified:
+    model: "gpt-6-astra"
+    verdict: pass
+    date: 2026-09-08
+    scope: "Local reduction prerequisite and first-deviation proof repair; not independent review"
+    delegated_by: owner
   precheck: pass
 ---
 
@@ -39,7 +44,9 @@ $s_\varphi,t_\varphi$ such that
 
 ## Facts & Assumptions
 
-**Given:** A $3$-CNF formula $$ \varphi=C_1\land\cdots\land C_m. $$
+**Given:** A $3$-CNF formula $ \varphi=C_1\land\cdots\land C_m. $
+
+Each clause is a disjunction of exactly three literal occurrences, where a literal is a Boolean variable or its negation; repeated occurrences are allowed. The formula is satisfiable when a truth assignment makes every clause true. The empty conjunction is true. The language $3$-SAT consists of the well-formed satisfiable encodings under explicit variable-name and clause-list coding; malformed strings are excluded.
 
 [L1] A polynomial-time many-one reduction is a total polynomial-time function preserving membership in both directions, by [[def-polynomial-time-many-one-reduction]].
 
@@ -55,7 +62,7 @@ $s_\varphi,t_\varphi$ such that
 
 2.1 Suppose that $\varphi$ is satisfiable. In each gadget $X_i$, choose the left-to-right crossbar route if $x_i=true$ and the right-to-left route if $x_i=false$. Concatenating these routes through the identified vertices $q_i=p_{i+1}$ already yields a directed path from $s_\varphi$ to $t_\varphi$ visiting every gadget vertex exactly once. Now fix a clause $C_j$, and choose one literal of $C_j$ that is true under the satisfying assignment. If it is a positive occurrence of $x_i$, replace the local edge $\ell_{i,j}\to r_{i,j}$ on the left-to-right route by the detour $\ell_{i,j}\to c_j\to r_{i,j}$. If it is a negative occurrence of $x_i$, replace the local edge $r_{i,j}\to \ell_{i,j}$ on the right-to-left route by $r_{i,j}\to c_j\to \ell_{i,j}$. Doing this once for each clause visits every clause vertex exactly once and does not revisit any gadget vertex, because each detour leaves and re-enters the same clause pair. Hence $D_\varphi$ has a directed Hamiltonian path from $s_\varphi$ to $t_\varphi$. [L2, step 1.1, construct]
 
-2.2 Suppose conversely that $D_\varphi$ has a directed Hamiltonian path from $s_\varphi$ to $t_\varphi$. We first verify the interface invariant omitted by a merely pictorial gadget argument. If the path enters a clause vertex $c_j$ from an occurrence pair in $X_i$ and leaves toward a different occurrence pair, then the unused vertex of the first pair can subsequently be entered only from its other crossbar neighbour; after that entry, every possible exit goes to that already visited neighbour, the visited mate, or the already visited clause vertex. The path is therefore stuck before reaching $t_\varphi$. The same four-case check applies with the crossbar direction reversed and with positive and negative occurrence arcs exchanged. Hence every visit to $c_j$ leaves through the mate in the same occurrence pair: a clause visit only replaces one crossbar edge by its two-edge detour. It follows that the path cannot jump between variable gadgets through a clause vertex. The remaining connections force it through $X_1,\ldots,X_n$ in order, and within each $X_i$ it traverses the entire crossbar monotonically from one end to the other. Set $x_i=true$ exactly for a left-to-right traversal. Every clause vertex is visited by a same-pair detour whose orientation exists only for a literal made true by this assignment. Thus every clause has a true literal and $\varphi$ is satisfiable. [L2, F1, step 1.1, cases]
+2.2 Suppose conversely that $D_\varphi$ has a directed Hamiltonian path from $s_\varphi$ to $t_\varphi$. Consider the first departure from traversal of successive crossbars in one direction, with optional same-pair clause detours. Until such a departure, the preceding crossbar vertices have been visited and the succeeding ones have not. One possible departure would exit directly to $q_i$ from the same end that was just entered from $p_i$. This leaves the opposite end unvisited; its only later possible entry is from its crossbar neighbor, after which its exits to that neighbor and to the already visited $q_i$ are blocked. This is impossible. Every other possible departure is an arc to a clause vertex $c_j$: all other available unvisited successors continue the crossbar or its prescribed gadget connector. If the departure is from the first endpoint of its pair and does not return to the second endpoint, that second endpoint remains unvisited. Its only neighbors are its visited mate, the clause vertex just visited, and its next crossbar neighbor. It can later be entered only from the last of these, after which every exit goes to a visited vertex, although it is not $t_\varphi$. If instead the departure is from the second endpoint after its mate has already been visited, its next crossbar separator remains unvisited. An interior separator has only its two crossbar neighbors; entering it later from the other neighbor again leaves no unvisited exit. For a separator at the far end, its only possible incoming arcs are from the departed endpoint and $p_i$, both already visited with their successors fixed, so it cannot be entered later at all. These arguments are unchanged on reversing left and right and also cover clauses containing both signs of a variable. Consequently no first departure exists. Thus every clause visit is a same-pair detour, the gadgets are traversed in order, and each entire crossbar is traversed monotonically. Set $x_i=true$ exactly for a left-to-right traversal. The detour through every clause vertex has the orientation of a literal made true by this assignment, so every clause is satisfied. [L2, F1, step 1.1, cases]
 
 3.1 Now add one fresh vertex $z_\varphi$ and the two arcs $z_\varphi\to s_\varphi$ and $t_\varphi\to z_\varphi$. If $D_\varphi$ has a Hamiltonian path from $s_\varphi$ to $t_\varphi$, then adjoining $z_\varphi$ closes that path to a directed Hamiltonian cycle in $D'_\varphi$. Conversely, any directed Hamiltonian cycle in $D'_\varphi$ must pass through the fresh vertex $z_\varphi$, whose only outgoing arc is to $s_\varphi$ and whose only incoming arc is from $t_\varphi$. Deleting $z_\varphi$ from the cycle therefore yields a directed Hamiltonian path from $s_\varphi$ to $t_\varphi$ in $D_\varphi$. [F1, step 2.1, step 2.2, construct]
 

@@ -36,6 +36,43 @@ const stages = step6Stages(deps) as any[];
 const byId = (id: string) => stages.find((stage) => stage.id === id);
 const ordinaryCtx = { run: 'future-run', repo: mkdtempSync(join(tmpdir(), 'step6-ctx-')), dispatchDir: '/tmp/none' };
 
+test('6b initial and repair Alpha dispatches use Astra medium; other roles are unchanged', async () => {
+  const { MODEL_PROFILE_NAMES } = await import('../../models.mjs');
+  const stage = byId('6b-adjudicate');
+  for (const label of ['6b-a', 'gate-batch-1-a']) {
+    assert.equal(stage.modelProfile({ role: 'alpha', job: 'adjudication', label }), MODEL_PROFILE_NAMES.astraMedium);
+  }
+  assert.equal(stage.modelProfile({ role: 'tool' }), undefined);
+  assert.equal(byId('6c-cross').modelProfile, undefined);
+});
+
+test('6b escalation or sub-100% repair confidence holds any failed gate without dispatch', async () => {
+  const root = mkdtempSync(join(tmpdir(), 'step6-owner-'));
+  try {
+    mkdirSync(join(root, 'research'));
+    const path = join(root, 'research', 'r-alpha-a-6b-decisions.json');
+    for (const decision of [
+      { verdict: 'escalated', evidence: 'Cannot justify the proposed repair' },
+      { verdict: 'amended_repair', repair_confidence: 0.99, evidence: 'Uncertain hypothesis' },
+    ]) {
+      writeFileSync(path, JSON.stringify({ version: 1, run: 'r', group: 'a', decisions: [{ obligation: 'reader:1:x', id: 'x', ...decision }] }));
+      const outcome = await byId('6b-adjudicate').onGateFailure({
+        ctx: { repo: root, run: 'r' }, failure: { id: 'risk-report' },
+        executor: { launch: () => assert.fail('owner hold must not dispatch') },
+      });
+      assert.match(outcome.owner.reason, /reader:1:x/);
+      const result = spawnSync(process.execPath, [join(REPO, 'tools/step6-scope.mjs'), 'check-escalations', '--root', root, '--run', 'r'], { encoding: 'utf8' });
+      assert.equal(result.status, 1);
+      assert.match(result.stderr, /owner decision required/);
+    }
+    writeFileSync(path, JSON.stringify({ decisions: [{ verdict: 'amended_repair', repair_confidence: 1 }] }));
+    const clean = spawnSync(process.execPath, [join(REPO, 'tools/step6-scope.mjs'), 'check-escalations', '--root', root, '--run', 'r'], { encoding: 'utf8' });
+    assert.equal(clean.status, 0, clean.stderr);
+    const gates = byId('6b-adjudicate').gates({ run: 'r' });
+    assert.equal(gates[0].id, 'step6-owner-escalations');
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
 test('the active stage table contains the rebuilt Step 6 in order', async () => {
   const active = await import('../stages/mathlib.mts');
   const ids = active.stages.map((stage: any) => stage.id);
@@ -657,6 +694,34 @@ test('adjudicate accepts the same legacy reader batch label that split routed', 
     }));
     fx.run('stamp', '--run', 'r');
     assert.match(fx.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('sound audit enrichment needs no invented defect but retains hash and route checks', () => {
+  const fx = fixture();
+  try {
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), '');
+    prepareSplit(fx);
+    writeFileSync(join(fx.root, 'research', 'r-refute-1.json'), JSON.stringify({
+      batch: '1', opened: [...fx.ids, 'p'], not_opened: [], flagged: [], coverage_note: 'all read',
+    }));
+    fx.run('collect', '--run', 'r', '--batch', '1');
+    const path = join(fx.root, 'research', 'r-alpha-a-6b-decisions.json');
+    const doc = { version: 1, run: 'r', group: 'a', decisions: [
+      { obligation: 'touched:1:thm-touched-high-risk', id: 'thm-touched-high-risk', route: 'touched',
+        verdict: 'reviewed_no_defect', change_kind: 'audit_enrichment', defect_ids: [], evidence: 'Full current carrier reviewed; sound audit annotation.' },
+    ] };
+    writeFileSync(path, JSON.stringify(doc));
+    fx.run('stamp', '--run', 'r');
+    assert.match(fx.run('check', '--run', 'r', '--phase', 'adjudicate'), /0 error/);
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), JSON.stringify({
+      defect_id: 'r-open', run: 'r', subject: 'thm-touched-high-risk',
+      caught_at_stage: '6a-read', severity: 'fatal', disposition: 'open',
+    }) + '\n');
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /ledger-unowned/);
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), '');
+    writeFileSync(join(fx.root, 'items', 'thm-touched-high-risk.md'), 'changed after review');
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /decision-stale/);
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
 

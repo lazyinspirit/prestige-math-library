@@ -27,14 +27,14 @@
 // to clear the gate would have taken both off the page, and the run would have
 // reported success.
 //
-// THE RULE. A result that had source backing may not end up with none. Finding
-// a replacement source is judgment and belongs to a scout; noticing that the
-// backing is gone, and naming exactly which results lost it, is a function of
-// files on disk and belongs here.
+// THE RULE. Preserve every result through open source backing or a validated
+// Step 1 source-drop record with its alternate argument. Scouts decide;
+// Step 3 judges mathematics. This tool checks evidence and names omissions.
 //
 // Exit 1 on any lost backing. `--reharvest-plan` writes the scout's work list.
 
 import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { sourceDropped, sourceResolutionErrors } from './source-resolution.mjs';
 
 const argv = process.argv.slice(2);
 const opt = (n, d = null) => {
@@ -65,7 +65,13 @@ if (!existsSync(livenessPath)) {
 
 const liveness = JSON.parse(readFileSync(livenessPath, 'utf8'));
 const livenessRows = liveness.rows ?? liveness.results ?? liveness.urls ?? [];
-if (!Array.isArray(livenessRows) || !livenessRows.length) {
+const coverageFiles = coverageArg.split(',').map((s) => s.trim()).filter(Boolean);
+const onlyDrops = coverageFiles.every((file) => {
+  if (!existsSync(file)) return false;
+  const sources = (JSON.parse(readFileSync(file, 'utf8')).pages ?? []).flatMap((p) => p.sources ?? []);
+  return sources.length > 0 && sources.every(sourceDropped);
+});
+if (!Array.isArray(livenessRows) || (!livenessRows.length && !onlyDrops)) {
   console.error(`ERROR backing-empty-liveness: ${livenessPath} carries no rows — a sweep over nothing is not a sweep`);
   process.exit(2);
 }
@@ -77,6 +83,8 @@ const okByUrl = new Map(livenessRows.map((r) => [normUrl(r.url), r.ok === true])
  *  sweep collects from these same files, so an absent row means the shapes
  *  disagree, and inventing a death from that would delete real results. */
 const sourceUsable = (s) => {
+  if (sourceResolutionErrors(s).length) return false;
+  if (sourceDropped(s)) return true; // alternative arguments, never claimed original-source backing
   const known = okByUrl.get(normUrl(s.url));
   if (known === false) return false;
   if (requireVerified && !s.fetch_verified) return false;
@@ -96,6 +104,13 @@ for (const file of files) {
   filesRead += 1;
   const cov = JSON.parse(readFileSync(file, 'utf8'));
   for (const page of cov.pages ?? []) {
+    for (const s of page.sources ?? []) {
+      const errors = sourceResolutionErrors(s);
+      if (errors.length) {
+        console.error(`ERROR backing-source-resolution: ${page.page}: ${s.url} — ${errors.join('; ')}`);
+        process.exit(1);
+      }
+    }
     // item -> every source row that backs it, live or not
     const backing = new Map();
     for (const s of page.sources ?? []) {
@@ -192,11 +207,9 @@ if (work.length) {
       console.error(`    "${d.result}" via ${d.title ?? 'untitled'} @ ${d.locator ?? 'no locator'}`);
     }
   }
-  console.error('A replacement SOURCE is the remedy, never a dropped result: find a different');
-  console.error('treatment carrying the same definition/theorem/example, re-read the range, and');
-  console.error('rewrite that source\'s contents rows faithfully.');
+  console.error('Use an open alternative treatment or a documented, fully confident local proof; never a dropped result.');
   if (planPath) console.error(`wrote the scout's work list to ${planPath}`);
   process.exit(1);
 }
 
-console.log(`source-backing: ${itemsChecked} authored result(s) across ${filesRead} file(s), every one still backed by an openable source`);
+console.log(`source-backing: ${itemsChecked} authored result(s) across ${filesRead} file(s), every one still backed by an openable source or documented alternative argument`);

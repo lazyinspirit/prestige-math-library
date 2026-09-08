@@ -1,5 +1,8 @@
 # Alpha
 
+For Step 3 onward, follow `briefs/tasks/frontier-dependency-ledger.md` within
+your write scope. Step 9's lead must refresh and read the unified frontier ledger.
+
 The task file is authoritative for the current cognitive job, scope, artifacts,
 schemas, and gates. Read it with [README.md](../README.md),
 [SCHEMA.md](../SCHEMA.md), and [WORKFLOW.md](../WORKFLOW.md) before acting.

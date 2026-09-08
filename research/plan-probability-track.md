@@ -185,9 +185,14 @@ items.  Root must mirror the published files exactly with these amendments
   `def-generated-sigma-algebra`.
 * `def-consistent-family-of-finite-dimensional-distributions`: add
   `def-coordinate-maps-and-cylinder-sigma-algebra`.
-* `lem-countable-product-cylinder-premeasure-is-countably-additive`: add
-  `def-product-measure-on-sigma-finite-spaces` and
-  `prop-sigma-finite-section-measure-functions-are-measurable`.
+* `lem-countable-product-cylinder-premeasure-is-countably-additive`:
+  synchronized and locally completed on 2026-09-08. Both section-measure
+  suppliers are declared in content and plan. Define tail-section masses
+  using finite products only; use the original coordinate order, prove the
+  positive-level-set estimate, and apply DC to the entire relation of
+  admissible finite prefixes. This handles finite/empty active supports.
+  The unused countable-union dependency is removed; CC and DC remain explicit.
+  No additional Phase-2 supplier is needed.
 * `cor-countable-independent-copies-exist`: add
   `thm-countable-product-of-probability-spaces`.
 * `thm-kolmogorov-extension-for-standard-borel-coordinate-spaces`: add

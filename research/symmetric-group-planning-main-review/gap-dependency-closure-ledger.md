@@ -1,5 +1,23 @@
 # Symmetric-group scaffold gap and dependency closure ledger
 
+## 2026-09-08 cross-library correction
+
+The earlier closure table below is historical, not a current unconditional
+certificate. The QG-7/QG-8 global-basis route lacks the equivariant/perverse-
+sheaf and quiver-Ext supplier stack used by its cited proof. SYMR-12 inherits
+that open gate. The QG foundation source gates also remain binding for the
+future quantum/Fock consumers. See `research/four-track-proof-gates.json`.
+
+This reconciliation repaired SYMR-2's Young's-rule page edge, SYMR-4's hook-
+formula edge, SYMR-5's published Coxeter owner, and SYMR-9's published
+induction/coinduction owner. SYMR-16 now uses real uniform convergence instead
+of a valued-field norm; three planned S3 examples use A-page polytabloid bases
+and local computations rather than a B example. The 257-item inventory is
+unchanged. Exact prose-only suppliers remain unhydrated authoring boundaries.
+All 16 SYMR pairs have zero explicit direct/transitive published consumers in
+`research/four-track-dependency-reconciliation.json`; no new Phase-2 root is
+established by these repairs.
+
 Independent review stream: `/root/symmetric_scaffold`, 2026-09-07. The final
 section below records the reconciled canonical disposition. Later headings
 labelled historical preserve the earlier defect discovery trail; their former

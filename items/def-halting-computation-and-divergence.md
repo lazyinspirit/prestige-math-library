@@ -8,17 +8,19 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 deps:
-  - def-initial-accepting-and-rejecting-configurations
+  - def-turing-machine-configuration
+  - def-tape-finite-support-convention
   - def-one-step-configuration-relation
-  - def-sequence
+  - def-function
 justified_by: []
 verification:
   precheck: n/a
-  audited: 2026-08-31
-  judge:
-    model: "gpt-5.6-terra"
+  verified:
+    model: "gpt-6-astra"
     verdict: pass
-    date: 2026-08-30
+    date: 2026-09-08
+    scope: "Local machine-boundary definition and direct-prerequisite repair; not independent review"
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -34,8 +36,10 @@ Fix a deterministic one-tape Turing machine
 $M=(Q,\Sigma,\Gamma,\sqcup,q_0,q_{\mathrm{acc}},q_{\mathrm{rej}},\delta)$ and
 an input word $w\in\Sigma^*$.
 
+Configurations are triples $(q,h,t)$ as in [[def-turing-machine-configuration]]. Write $I_M(w)=(q_0,0,t_w)$, where $t_w$ is the input word followed by blanks, the initial tape of [[def-tape-finite-support-convention]]. For the empty word it is blank everywhere. A configuration is accepting when its state is $q_{\mathrm{acc}}$, rejecting when its state is $q_{\mathrm{rej}}$, and halting when either condition holds. The two halting states are distinct. The relation $\vdash_M$ is the one-step relation of [[def-one-step-configuration-relation]].
+
 A **finite computation history** of $M$ on input $w$ is a finite list of
-configurations
+configurations, meaning a function on $\{0,\ldots,n\}$ with values in the configuration set ([[def-function]]), written
 $$ C_0,C_1,\dots,C_n $$
 such that $C_0=I_M(w)$ and
 $$ C_i\vdash_M C_{i+1}\qquad(0\le i<n). $$

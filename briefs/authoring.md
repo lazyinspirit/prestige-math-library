@@ -1,7 +1,10 @@
 # Step 5 authoring
 
+Maintain your consumer batch's dependency input under
+`briefs/tasks/frontier-dependency-ledger.md` after dependency edits.
+
 Complete every assigned item and page. Edit only your batch's draft content,
-contracts, and notes. Keep IDs stable; write pages at
+contracts, notes, and consumer-batch dependency input. Keep IDs stable; write pages at
 `library/<page.category>/<page.id>.md`. Do not change plans, workflow state,
 published content, or other batches; do not judge, stamp, or request permissions.
 If completing a proof needs a scope change, record the prerequisite and proposed

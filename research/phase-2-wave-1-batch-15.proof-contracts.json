@@ -1,0 +1,1694 @@
+{
+  "version": 1,
+  "scope": [
+    "def-serial-relation-dependent-choice-principle-over-zf",
+    "lem-prescribed-start-and-starting-point-free-serial-choice-are-equivalent-in-zf",
+    "def-complete-metric-baire-principle-over-zf",
+    "lem-open-dense-and-closed-nowhere-dense-baire-forms-are-equivalent-in-zf",
+    "thm-serial-dependent-choice-implies-complete-metric-baire-over-zf",
+    "lem-discrete-sequence-spaces-are-complete-in-zf",
+    "lem-serial-relation-successor-sets-are-open-dense",
+    "thm-complete-metric-baire-principle-implies-dependent-choice-over-zf",
+    "thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf",
+    "ex-blair-sequence-space-for-a-serial-relation"
+  ],
+  "contracts": {
+    "def-serial-relation-dependent-choice-principle-over-zf": {
+      "assumptions": "ZF; No choice principle is assumed.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition excludes empty A because omega has no map to it."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition indexes the chain at 0 and specifies f(0)=a_0 in the prescribed form."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition checks singleton A using its forced self-loop."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits reflexivity and repeated values; singleton check supplies a degenerate chain."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The carrier is an arbitrary set, with no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition explicitly quantifies over nonempty A; it defines rather than assumes a choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item defines two global principles; their equivalence is a separate lemma."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item defines two global principles; their equivalence is a separate lemma."
+        }
+      ],
+      "source_evidence": [
+        {
+          "url": "https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf",
+          "locator": "Definition 5.1, p.10; compare Karagila Definition 4, p.4 for the nonempty prescribed-start form.",
+          "use": "Statement provenance and the specific construction described in this locator; all inference details are in the local argument."
+        },
+        {
+          "url": "https://karagila.org/wp-content/uploads/2016/10/axiom-of-choice-in-analysis.pdf",
+          "locator": "Definition 4, printed pp.4–5",
+          "use": "Nonempty prescribed-start DC comparison."
+        }
+      ]
+    },
+    "lem-prescribed-start-and-starting-point-free-serial-choice-are-equivalent-in-zf": {
+      "assumptions": "ZF; Each implication assumes only its own displayed antecedent; no global AC assumption.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-serial-relation-dependent-choice-principle-over-zf",
+          "source_section": "Definition",
+          "quote": "Work in ZF. Write $\\omega=\\{0,1,2,\\ldots\\}$ as in [[def-natural-numbers]].\nA relation $R\\subseteq A\\times A$ is **serial on $A$** when\n$ (\\forall a\\in A)(\\exists b\\in A)\\ a\\,R\\,b $, where $a\\,R\\,b$ means\n$(a,b)\\in R$ ([[def-relation-domain-range-and-field]]).\n\n**Dependent Choice (DC)** is the following global principle: for every\n**nonempty** set $A$ and every serial relation $R$ on $A$, there is a function\n$f:\\omega\\to A$ such that $f(n)\\,R\\,f(n+1)$ for every $n\\in\\omega$.\nHere function has its ordinary set-theoretic meaning [[def-function]].\n\nThe **prescribed-start form** asks, for each such $A,R$ and each $a_0\\in A$,\nfor such an $f$ with $f(0)=a_0$. The equivalence of these global principles\nrequires a proof; it is not part of the definition.\n\nNeither form requires distinct values, an irreflexive relation, or transitivity.\nOn a singleton $A=\\{a\\}$, seriality forces $a\\,R\\,a$ and the constant map\nsatisfies the requirement. The empty carrier is excluded: it has a vacuously\nserial relation but admits no map from $\\omega$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ],
+          "application": "Starting-point-free DC supplies a chain on any nonempty serial carrier; prescribed-start DC also fixes its initial value ([[def-serial-relation-dependent-choice-principle-over-zf]])."
+        },
+        {
+          "fact": "F2",
+          "source": "def-axiom-schema-of-separation",
+          "source_section": "Definition",
+          "quote": "for any parameters $\\bar p$ and any set $x$,\nthere is a set $y$ whose elements are exactly the elements $z$ of $x$ for which\n$\\varphi(z,\\bar p)$ holds.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ],
+          "application": "Separation forms a subset specified by a formula with parameters ([[def-axiom-schema-of-separation]])."
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-schema-of-replacement",
+          "source_section": "Definition",
+          "quote": "if for every $z \\in A$ there is exactly one\n$w$ with $\\varphi(z,w,\\bar p)$, then there is a set $B$ whose elements are\nexactly those $w$.",
+          "uses": [
+            "4.1"
+          ],
+          "application": "Replacement forms the image of a set under a uniquely specified assignment ([[def-axiom-schema-of-replacement]])."
+        },
+        {
+          "fact": "F4",
+          "source": "def-union-of-a-set-and-binary-union",
+          "source_section": "Definition",
+          "quote": "$$z \\in \\bigcup x \\leftrightarrow \\exists s\\,(s \\in x \\wedge z \\in s).$$",
+          "uses": [
+            "4.1"
+          ],
+          "application": "The union of a set has precisely the elements belonging to its members ([[def-union-of-a-set-and-binary-union]])."
+        },
+        {
+          "fact": "F5",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "3.1"
+          ],
+          "application": "A property holding at zero and preserved by successor holds on all naturals ([[thm-induction-principle]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Prescribed-start DC implies unrestricted DC.",
+          "inputs": [
+            "Nonempty A; serial R; one a_0 in A; prescribed-start principle.",
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "The tagged finite-path set P exists and contains the length-one path at a_0.",
+          "inputs": [
+            "Starting-point-free DC assumed; fixed A,R,a_0; bounding set omega x P(omega x A); finite function and path predicate.",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "One-step extension S is a serial relation on P.",
+          "inputs": [
+            "(l,p) in P implies l>=1; successor b of p(l-1); q=p union {(l,b)}.",
+            "F1",
+            "F2",
+            "1.2"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "DC gives nested p_k with l_k=l_0+k and unbounded domains.",
+          "inputs": [
+            "P nonempty; S serial; induction base l_0 and reflexive containment; each successor adds one coordinate.",
+            "F1",
+            "F5",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Union f is a function omega -> A with f(0)=a_0.",
+          "inputs": [
+            "Set-indexed p_k; compatibility in p_max(j,k); n in l_(n+1); all paths begin at a_0.",
+            "F3",
+            "F4",
+            "3.1"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Every adjacent pair of f is an R-edge, completing both implications.",
+          "inputs": [
+            "n,n+1 in domain p_(n+2); its path property; union restricts to this path; unrestricted implication already established.",
+            "1.2",
+            "4.1",
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement concerns nonempty serial carriers; step 1.2 proves the auxiliary carrier P nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 seeds coordinate 0; step 4.1 proves f(0)=a_0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 includes length-one paths with no edge requirement; step 2.1 extends them."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 5.1 require only R-edges, so loops and repeated values remain allowed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the last coordinate l-1 only when l>=1; step 5.1 places both adjacent coordinates inside a longer path."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes one a_0; step 2.1 fixes one successor; step 3.1 uses exactly the assumed DC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves prescribed-start implies unrestricted DC."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2–5.1 construct the prescribed chain from unrestricted DC."
+        }
+      ],
+      "source_evidence": [
+        {
+          "url": "https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf",
+          "locator": "Propositions 5.3–5.4, pp.10–11, finite-path state construction adapted to paths with fixed start.",
+          "use": "Statement provenance and the specific construction described in this locator; all inference details are in the local argument."
+        },
+        {
+          "url": "https://karagila.org/wp-content/uploads/2016/10/axiom-of-choice-in-analysis.pdf",
+          "locator": "Definition 4, printed pp.4–5",
+          "use": "Nonempty prescribed-start DC comparison."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-6b",
+        "notes": "The carrier is a set of tagged nonempty finite paths starting at a_0. One serial extension uses one witness; DC is applied once to this nonempty carrier. Lengths l_0+k are unbounded, so the compatible union is total on omega and retains every adjacent edge, including the length-one seed. Current item, direct supplier statements, reader-15 and refute-15 checked; source comparison: Miller, ac.pdf, Proposition 5.4, pp.10–11 (https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf)."
+      }
+    },
+    "def-complete-metric-baire-principle-over-zf": {
+      "assumptions": "ZF; No choice principle is assumed.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition proves empty X is complete and Baire; the empty set has constant empty meagre witness."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition uses omega indexing including 0 and the witness N_n=empty for every n."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "No number of selected points or one-element counting formula occurs in this category definition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition handles the empty metric space; meagre witnesses may repeat empty sets."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Category is defined for arbitrary metric spaces, not intervals with distinguished endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition requires an actual witness sequence for each meagre-set assertion and does not select decompositions for a family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "These are definitions; their equivalent category formulations are proved separately."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "These are definitions; their equivalent category formulations are proved separately."
+        }
+      ],
+      "source_evidence": [
+        {
+          "url": "https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf",
+          "locator": "Definitions 4.2–4.4, p.8; category conventions extended to metric spaces.",
+          "use": "Statement provenance and the specific construction described in this locator; all inference details are in the local argument."
+        },
+        {
+          "url": "https://karagila.org/wp-content/uploads/2016/10/axiom-of-choice-in-analysis.pdf",
+          "locator": "Chapter 2, Definitions 10–11 and Theorems 13–18, printed pp.8–11",
+          "use": "Independent comparison; local proof retains explicit choice qualifications and expands compressed construction steps."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-6b",
+        "notes": "Meagreness requires one actual omega-sequence, with containment in its union. No countable selection of decompositions is asserted. Relative closure/interior and the empty complete space satisfy the definitions. Current item, direct supplier statements, reader-15 and refute-15 checked; source comparison: Miller, ac.pdf, Proposition 5.4, pp.10–11 (https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf)."
+      }
+    },
+    "lem-open-dense-and-closed-nowhere-dense-baire-forms-are-equivalent-in-zf": {
+      "assumptions": "ZF; No choice principle is assumed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complete-metric-baire-principle-over-zf",
+          "source_section": "Definition",
+          "quote": "Work in ZF. Let $(X,d)$ be a metric space. Closure, interior and density are\nas in [[def-metric-interior-closure-boundary]], with all complements relative\nto $X$. Families indexed by $\\omega$ are functions, as in [[def-indexed-family]],\nand their unions and intersections are those of [[def-indexed-union-and-intersection]].\n\nA set $N\\subseteq X$ is **nowhere dense** if\n$\\operatorname{int}_X(\\overline N)=\\varnothing$.\nA set $M\\subseteq X$ is **meagre** if there exists a sequence $(N_n)_{n\\in\\omega}$\nof nowhere dense subsets of $X$ such that $M\\subseteq\\bigcup_{n\\in\\omega}N_n$.\nA set $C\\subseteq X$ is **comeagre** if $X\\setminus C$ is meagre.\n\nThe space is **Baire** if, for every sequence $(U_n)_{n\\in\\omega}$ of open\ndense subsets of $X$, the intersection $\\bigcap_{n\\in\\omega}U_n$ is dense in $X$.\nThe **complete-metric Baire principle (CM-Baire)** asserts that every complete\nmetric space, in the sense of [[def-complete-metric-space]], is Baire.\n\nThis includes the empty space: its only subset is open and dense, its\n$\\omega$-indexed intersection is empty and dense in that space, and there\nare no Cauchy sequences into it. The empty set is meagre in every space,\nwitnessed by $N_n=\\varnothing$ for every $n$.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "2.3",
+            "2.4"
+          ],
+          "application": "Meagreness is witnessed by containment in one sequence of nowhere dense sets; comeagre means meagre complement ([[def-complete-metric-baire-principle-over-zf]])."
+        },
+        {
+          "fact": "F2",
+          "source": "cor-distributive-and-de-morgan-laws-for-indexed-families",
+          "source_section": "Statement",
+          "quote": "Let $(A_i)_{i \\in I}$ be an indexed family with $I \\neq \\varnothing$ and let $B$\nand $X$ be sets. Then $(B \\cap A_i)_{i \\in I}$, $(B \\cup A_i)_{i \\in I}$ and\n$(X \\setminus A_i)_{i \\in I}$ are indexed families with index set $I$, and\n\n$$B \\cap \\bigcup_{i \\in I} A_i = \\bigcup_{i \\in I} (B \\cap A_i), \\qquad B \\cup \\bigcap_{i \\in I} A_i = \\bigcap_{i \\in I} (B \\cup A_i),$$\n\n$$X \\setminus \\bigcup_{i \\in I} A_i = \\bigcap_{i \\in I} (X \\setminus A_i), \\qquad X \\setminus \\bigcap_{i \\in I} A_i = \\bigcup_{i \\in I} (X \\setminus A_i).$$",
+          "uses": [
+            "3.1"
+          ],
+          "application": "Indexed De Morgan laws apply to a nonempty index set, in particular $\\omega$ ([[cor-distributive-and-de-morgan-laws-for-indexed-families]])."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-metric-closure-characterisation",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]) and let $A \\subseteq X$,\nwith closure, derived set and limit points as in\n[[def-metric-interior-closure-boundary]]. Then:\n\n1. If $A \\ne \\emptyset$, then $\\overline{A} = \\{\\, x \\in X : d(x,A) = 0 \\,\\}$,\n   where $d(x,A)$ is the distance from a point to a nonempty set\n   ([[def-metric-bounded-diameter]]).\n2. $\\overline{A} = A \\cup A'$.\n3. $\\overline{A}$ is closed, contains $A$, and is contained in every closed\n   $F \\subseteq X$ with $A \\subseteq F$. So $\\overline{A}$ is the smallest closed\n   superset of $A$, and $A$ is closed if and only if $A = \\overline{A}$.\n\nClaims 2 and 3 hold for every $A$, the empty set included: $\\overline{\\emptyset}$\nis empty because no ball meets $\\emptyset$, and $\\emptyset$ is closed because $X$\nis open ([[def-metric-topology]]). Claim 1 carries the hypothesis $A \\ne \\emptyset$\nbecause $d(x,A)$ is defined only for nonempty $A$\n([[def-metric-bounded-diameter]]).",
+          "uses": [
+            "2.1",
+            "2.2"
+          ],
+          "application": "Closure is the smallest closed superset, including for the empty set; a set is closed exactly when it equals its closure ([[thm-metric-closure-characterisation]])."
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-interior-closure-boundary",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $A \\subseteq X$ and let\n$x \\in X$. Balls are as in [[def-metric-ball]] and open sets as in\n[[def-metric-topology]]; recall that a real $r$ written as a radius is always\n$> 0$.\n\n- $x$ is an **interior point** of $A$ if $B(x,r) \\subseteq A$ for some $r$. The\n  set of interior points is the **interior** $\\operatorname{int}(A)$.\n- $x$ is an **adherent point** of $A$ if $B(x,r) \\cap A \\ne \\emptyset$ for every\n  $r$. The set of adherent points is the **closure** $\\overline{A}$.\n- $x$ is a **limit point** (accumulation point) of $A$ if\n  $B(x,r) \\cap (A \\setminus \\{x\\}) \\ne \\emptyset$ for every $r$. The set of limit\n  points is the **derived set** $A'$.\n- $x$ is an **isolated point** of $A$ if $x \\in A$ and $B(x,r) \\cap A = \\{x\\}$\n  for some $r$.\n- The **boundary** of $A$ is $\\partial A := \\overline{A} \\setminus \\operatorname{int}(A)$.\n- $A$ is **dense** in $X$ if $\\overline{A} = X$.\n\n**The interior is open, and it is the largest open subset of $A$.** If\n$x \\in \\operatorname{int}(A)$, fix $r$ with $B(x,r) \\subseteq A$; the ball\n$B(x,r)$ is itself open ([[thm-metric-open-set-algebra]]), so every\n$y \\in B(x,r)$ has some $s$ with $B(y,s) \\subseteq B(x,r) \\subseteq A$, which\nputs $y$ in $\\operatorname{int}(A)$. Hence $B(x,r) \\subseteq \\operatorname{int}(A)$\nand $\\operatorname{int}(A)$ is open. It is contained in $A$, since\n$x \\in B(x,r) \\subseteq A$ for an interior point $x$; and if $V \\subseteq A$ is\nopen then every $v \\in V$ has a ball inside $V \\subseteq A$, so\n$V \\subseteq \\operatorname{int}(A)$.\n\n**Two descriptions of the boundary agree.** $x \\in \\partial A$ says that every\nball around $x$ meets $A$ and that no ball around $x$ is contained in $A$; the\nsecond half says exactly that every ball around $x$ meets $X \\setminus A$. So\n\n$$\\partial A = \\{\\, x \\in X : B(x,r) \\cap A \\ne \\emptyset \\text{ and } B(x,r) \\cap (X \\setminus A) \\ne \\emptyset \\text{ for every } r \\,\\},$$\n\nfrom which $\\partial A = \\partial(X \\setminus A)$ is immediate.\n\n**Elementary containments, straight from the definitions.** $A \\subseteq \\overline{A}$,\nbecause $x \\in A$ lies in every $B(x,r) \\cap A$; $A' \\subseteq \\overline{A}$,\nbecause a ball meeting $A \\setminus \\{x\\}$ meets $A$; and\n$\\operatorname{int}(A) \\subseteq A \\subseteq \\overline{A}$. A point of $A$ is\neither isolated in $A$ or a limit point of $A$, and not both, according to\nwhether some ball meets $A$ only in $x$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "application": "Density, closure and interior have their metric ball definitions ([[def-metric-interior-closure-boundary]]). Open sets contain a ball about each point and closed sets have open complement ([[def-metric-topology]])."
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "A subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "application": "Density, closure and interior have their metric ball definitions ([[def-metric-interior-closure-boundary]]). Open sets contain a ball about each point and closed sets have open complement ([[def-metric-topology]])."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-metric-open-set-algebra",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), with open and closed sets\nas in [[def-metric-topology]] and balls as in [[def-metric-ball]]. Then:\n\n1. **Balls are open.** $B(x,r)$ is open, for every $x \\in X$ and every $r > 0$.\n2. **Arbitrary unions.** If $\\mathcal{U}$ is any collection of open subsets of\n   $X$, then $\\bigcup \\mathcal{U}$ is open.\n3. **Finite intersections.** If $n \\ge 1$ and $U_0, \\dots, U_{n-1}$ are open,\n   then $U_0 \\cap \\dots \\cap U_{n-1}$ is open.\n4. **Closed balls are closed.** $\\bar B(x,r)$ is closed, for every $x \\in X$ and\n   every $r > 0$.\n\nTogether with the fact that $\\emptyset$ and $X$ are open, recorded already in\n[[def-metric-topology]], claims 2 and 3 say that $\\mathcal{T}_d$ has exactly the\nclosure properties that the word *topology* names.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "Metric balls are open, and finite intersections of open sets are open ([[thm-metric-open-set-algebra]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "D dense iff D meets every nonempty open set iff its complement has empty interior.",
+          "inputs": [
+            "Ball definitions of closure/interior; each point of an open set has a ball inside it; balls nonempty and open.",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Closed nowhere dense complements are open dense, and conversely.",
+          "inputs": [
+            "F closed gives cl(F)=F; open U gives closed X minus U; open-set density test.",
+            "F1",
+            "F3",
+            "F5",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "Condition (2) implies (3) using the canonical sequence cl(N_n).",
+          "inputs": [
+            "Assume (2); nonempty open V with one meagre witness (N_n); closed cl(N_n) has empty interior and contains N_n.",
+            "F1",
+            "F3",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-2.3",
+          "step": "2.3",
+          "claim": "Condition (3) implies (2).",
+          "inputs": [
+            "Assume (3); a closed nowhere dense sequence F_n; nonempty interior of its union would be open and covered by that witness.",
+            "F1",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-2.4",
+          "step": "2.4",
+          "claim": "Conditions (3) and (4) imply one another.",
+          "inputs": [
+            "Meagre complement of C; non-dense C misses a nonempty open V; any witness also covers V. Conversely, meagre open V has comeagre complement disjoint from V.",
+            "F1",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Conditions (1) and (2) are equivalent by relative complements.",
+          "inputs": [
+            "Index omega nonempty; termwise complement correspondence; X minus union F_n equals intersection U_n; density/interior test.",
+            "F2",
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "All four forms are equivalent, including the empty space.",
+          "inputs": [
+            "Implication graph (1)<->(2)<->(3)<->(4); X empty has only empty subsets and no nonempty open test sets.",
+            "3.1",
+            "2.2",
+            "2.3",
+            "2.4"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 checks X empty; step 2.2 uses closure valid also for empty N_n."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 uses omega including zero, a nonempty index set for De Morgan."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 tests every nonempty open set, also a singleton open set; no second point is required."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 handles empty X and steps 2.2–2.3 permit repeated/empty witness sets."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem is about arbitrary metric spaces; it singles out no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2 takes one meagre witness and canonically closes its terms; step 2.4 restricts an existing witness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 2.2, 2.4 and 3.1 prove (2)->(3), (3)->(4) and (1)->(2)."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.3, 2.4 and 3.1 prove (3)->(2), (4)->(3) and (2)->(1)."
+        }
+      ],
+      "source_evidence": [
+        {
+          "url": "https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf",
+          "locator": "Definitions 4.2–4.4, p.8 and Proposition 5.4(2), p.10; local complement proof of the four forms.",
+          "use": "Statement provenance and the specific construction described in this locator; all inference details are in the local argument."
+        },
+        {
+          "url": "https://karagila.org/wp-content/uploads/2016/10/axiom-of-choice-in-analysis.pdf",
+          "locator": "Chapter 2, Definitions 10–11 and Theorems 13–18, printed pp.8–11",
+          "use": "Independent comparison; local proof retains explicit choice qualifications and expands compressed construction steps."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-6b",
+        "notes": "All four implications use complements relative to X and the nonempty index set omega. Canonical closure of each member of one given meagre witness needs no selection. Closure-characterisation claim 3 includes the empty set; the separate distance-to-set clause is not used. Current item, direct supplier statements, reader-15 and refute-15 checked; source comparison: Miller, ac.pdf, Proposition 5.4, pp.10–11 (https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf)."
+      }
+    },
+    "thm-serial-dependent-choice-implies-complete-metric-baire-over-zf": {
+      "assumptions": "ZF; DC is the explicit antecedent, used for state-chain selection in step 4.1.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-prescribed-start-and-starting-point-free-serial-choice-are-equivalent-in-zf",
+          "source_section": "Statement",
+          "quote": "In ZF, the starting-point-free and prescribed-start global principles in\n[[def-serial-relation-dependent-choice-principle-over-zf]] are equivalent.",
+          "uses": [
+            "4.1"
+          ],
+          "application": "DC has the equivalent prescribed-start form for every nonempty serial set ([[lem-prescribed-start-and-starting-point-free-serial-choice-are-equivalent-in-zf]])."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-open-dense-and-closed-nowhere-dense-baire-forms-are-equivalent-in-zf",
+          "source_section": "Statement",
+          "quote": "For any metric space $(X,d)$, the following are equivalent in ZF, with the\ncategory conventions of [[def-complete-metric-baire-principle-over-zf]]:\n\n1. Every $\\omega$-indexed intersection of open dense sets is dense.\n2. Every union of a $\\omega$-indexed sequence of closed nowhere dense sets has empty interior.\n3. Every nonempty open subset of $X$ is nonmeagre in the ambient space $X$.\n4. Every comeagre subset of $X$ is dense.\n\nFor any $D\\subseteq X$, density is equivalent to meeting every nonempty open\nset, and to $\\operatorname{int}(X\\setminus D)=\\varnothing$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "7.1"
+          ],
+          "application": "Density is tested by nonempty open sets, and the four Baire formulations are equivalent in ZF ([[lem-open-dense-and-closed-nowhere-dense-baire-forms-are-equivalent-in-zf]])."
+        },
+        {
+          "fact": "F3",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "$$B(x,r) := \\{\\, y \\in X : d(x,y) < r \\,\\}, \\qquad \\bar B(x,r) := \\{\\, y \\in X : d(x,y) \\le r \\,\\}, \\qquad S(x,r) := \\{\\, y \\in X : d(x,y) = r \\,\\}.$$",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ],
+          "application": "$B(c,r)=\\{x:d(c,x)<r\\}$ and $\\bar B(c,r)=\\{x:d(c,x)\\le r\\}$ for $r>0$ ([[def-metric-ball]])."
+        },
+        {
+          "fact": "F4",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "A subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ],
+          "application": "Open sets contain a positive-radius ball about each of their points ([[def-metric-topology]]); balls and finite intersections of open sets are open ([[thm-metric-open-set-algebra]])."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-metric-open-set-algebra",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), with open and closed sets\nas in [[def-metric-topology]] and balls as in [[def-metric-ball]]. Then:\n\n1. **Balls are open.** $B(x,r)$ is open, for every $x \\in X$ and every $r > 0$.\n2. **Arbitrary unions.** If $\\mathcal{U}$ is any collection of open subsets of\n   $X$, then $\\bigcup \\mathcal{U}$ is open.\n3. **Finite intersections.** If $n \\ge 1$ and $U_0, \\dots, U_{n-1}$ are open,\n   then $U_0 \\cap \\dots \\cap U_{n-1}$ is open.\n4. **Closed balls are closed.** $\\bar B(x,r)$ is closed, for every $x \\in X$ and\n   every $r > 0$.\n\nTogether with the fact that $\\emptyset$ and $X$ are open, recorded already in\n[[def-metric-topology]], claims 2 and 3 say that $\\mathcal{T}_d$ has exactly the\nclosure properties that the word *topology* names.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ],
+          "application": "Open sets contain a positive-radius ball about each of their points ([[def-metric-topology]]); balls and finite intersections of open sets are open ([[thm-metric-open-set-algebra]])."
+        },
+        {
+          "fact": "F5",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "1.1",
+            "5.1",
+            "6.1"
+          ],
+          "application": "Given any positive real $\\varepsilon$, some positive integer $t$ satisfies $1/t<\\varepsilon$ ([[cor-archimedean-reciprocal]])."
+        },
+        {
+          "fact": "F6",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.",
+          "uses": [
+            "3.1",
+            "5.1",
+            "6.1"
+          ],
+          "application": "Metric symmetry and the triangle inequality hold, and $d(c,c)=0$ ([[def-metric-space]])."
+        },
+        {
+          "fact": "F7",
+          "source": "def-cauchy-in-metric",
+          "source_section": "Definition",
+          "quote": "$(x_k)$ is a **Cauchy sequence in $(X,d)$** if for every rational\n$\\varepsilon > 0$ there is $K \\in \\mathbb{N}$ such that\n\n$$d(x_m, x_n) < \\varepsilon \\qquad \\text{for all } m, n \\ge K .$$",
+          "uses": [
+            "5.1"
+          ],
+          "application": "A sequence is Cauchy if all distances on a sufficiently late tail are less than any positive rational tolerance ([[def-cauchy-in-metric]]). "
+        },
+        {
+          "fact": "F10",
+          "source": "def-complete-metric-space",
+          "source_section": "Definition",
+          "quote": "$(X,d)$ is **complete** if every Cauchy sequence in $(X,d)$\n([[def-cauchy-in-metric]]) converges to a point of $X$\n([[def-metric-convergence]]).",
+          "uses": [
+            "5.1"
+          ],
+          "application": "In a complete metric space each Cauchy sequence has a limit in $X$ ([[def-complete-metric-space]])."
+        },
+        {
+          "fact": "F11",
+          "source": "def-metric-convergence",
+          "source_section": "Definition",
+          "quote": "Unwound, this\nsays: for every **rational** $\\varepsilon > 0$ there is $K \\in \\mathbb{N}$ with\n$d(x_k, p) < \\varepsilon$ for every $k \\ge K$.",
+          "uses": [
+            "6.1"
+          ],
+          "application": "Convergence puts distances to the limit eventually below any positive rational tolerance ([[def-metric-convergence]])."
+        },
+        {
+          "fact": "F9",
+          "source": "def-axiom-schema-of-separation",
+          "source_section": "Definition",
+          "quote": "for any parameters $\\bar p$ and any set $x$,\nthere is a set $y$ whose elements are exactly the elements $z$ of $x$ for which\n$\\varphi(z,\\bar p)$ holds.",
+          "uses": [
+            "2.1"
+          ],
+          "application": "Separation forms a subset of a set by a formula with parameters ([[def-axiom-schema-of-separation]])."
+        },
+        {
+          "fact": "F8",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ],
+          "application": "Natural-number induction proves a property from its zero and successor cases ([[thm-induction-principle]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Empty X is Baire; every nonempty open W contains a closed ball of positive rational radius at most any prescribed b>0.",
+          "inputs": [
+            "Arbitrary nonempty open V for density; c in W; B(c,delta) subset W; reciprocal r<min(delta,b).",
+            "F2",
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The set S of admissible tagged balls exists with initial stage-zero state.",
+          "inputs": [
+            "Separation in omega x X x Q; V intersect U_0 nonempty open; radius bound b=1.",
+            "F2",
+            "F4",
+            "F9",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The next-stage closed-ball inclusion defines a serial relation on S.",
+          "inputs": [
+            "Current state (n,c,r); c in open ball B(c,r); dense U_(n+1); radius bound 1/(n+2); new closed ball lies inside V.",
+            "F2",
+            "F3",
+            "F4",
+            "F6",
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "One prescribed-start DC chain supplies centres and nested balls at the correct stages.",
+          "inputs": [
+            "Nonempty S, serial relation, specified s_0; stage increments by one; natural induction; r_n<=1/(n+1).",
+            "F1",
+            "F3",
+            "F8",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "The centres are Cauchy and have a limit x in X.",
+          "inputs": [
+            "Nested C_m subset C_n; c_m in C_m; triangle bound 2r_n<=2/(n+1); reciprocal tolerance epsilon/2; completeness.",
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "F8",
+            "F10",
+            "4.1"
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "For every n the limit satisfies d(x,c_n)<=r_n.",
+          "inputs": [
+            "Tail centres in C_n; if gap eta>0 take rational reciprocal e<eta; convergence gives m>=n with d(x,c_m)<e; triangle contradiction.",
+            "F3",
+            "F5",
+            "F6",
+            "F11",
+            "5.1"
+          ]
+        },
+        {
+          "id": "derive-7.1",
+          "step": "7.1",
+          "claim": "Intersection of U_n meets every nonempty open V and is dense.",
+          "inputs": [
+            "Limit in every C_n; C_n subset V intersect U_n; V arbitrary; empty-space case already covered.",
+            "F2",
+            "4.1",
+            "6.1",
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 separately proves the empty-space conclusion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 constructs the stage-zero initial state; step 1.1 requires strictly positive radii."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 uses bound b=1; for singleton X, steps 3.1 and 5.1 give the same centre and zero distances."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 5.1 allow isolated points and repeated centres; no distinctness is used."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 6.1 proves the weak closed-ball bound and explicitly allows equality at radius r_n."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1–3.1 establish a nonempty serial state set; step 4.1 uses prescribed-start DC once."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1–7.1 prove the DC-to-CM-Baire direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item asserts only DC implies CM-Baire; the converse is a later assigned theorem."
+        }
+      ],
+      "source_evidence": [
+        {
+          "url": "https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf",
+          "locator": "Proposition 5.4 (1)->(2), pp.10–11; local tagged-ball and epsilon expansion.",
+          "use": "Statement provenance and the specific construction described in this locator; all inference details are in the local argument."
+        },
+        {
+          "url": "https://karagila.org/wp-content/uploads/2016/10/axiom-of-choice-in-analysis.pdf",
+          "locator": "Chapter 2, Definitions 10–11 and Theorems 13–18, printed pp.8–11",
+          "use": "Independent comparison; local proof retains explicit choice qualifications and expands compressed construction steps."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-6b",
+        "notes": "The state set contains centre and positive rational radius, so prescribed-start DC supplies centres as well as nested closed balls in a single selection. Tail distances are at most 2/(n+1). Convergence at a positive reciprocal below the alleged boundary gap proves membership in each closed ball, including equality. The empty space is handled separately. Current item, direct supplier statements, reader-15 and refute-15 checked; source comparison: Miller, ac.pdf, Proposition 5.4, pp.10–11 (https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf)."
+      }
+    },
+    "lem-discrete-sequence-spaces-are-complete-in-zf": {
+      "assumptions": "ZF; No choice principle is assumed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-the-set-of-functions-from-one-set-to-another",
+          "source_section": "Definition",
+          "quote": "$$B^{A} := \\{\\, f : f \\text{ is a function with } \\operatorname{dom} f = A \\text{ and } \\operatorname{ran} f \\subseteq B \\,\\}.$$\n\nThus $f \\in B^{A}$ holds if and only if $f : A \\to B$.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "All functions between two sets form a set ([[def-the-set-of-functions-from-one-set-to-another]])."
+        },
+        {
+          "fact": "F2",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ],
+          "application": "Every nonempty subset of $\\omega$ has a least element ([[thm-well-ordering-principle]])."
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-schema-of-replacement",
+          "source_section": "Definition",
+          "quote": "if for every $z \\in A$ there is exactly one\n$w$ with $\\varphi(z,w,\\bar p)$, then there is a set $B$ whose elements are\nexactly those $w$.",
+          "uses": [
+            "1.1",
+            "3.2"
+          ],
+          "application": "Replacement makes each uniquely specified set-indexed assignment a set of values ([[def-axiom-schema-of-replacement]])."
+        },
+        {
+          "fact": "F4",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "4.1",
+            "5.1"
+          ],
+          "application": "Positive integer reciprocals become smaller than any positive real tolerance ([[cor-archimedean-reciprocal]])."
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-space",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set. A **metric** on $X$ is a function\n$d : X \\times X \\to \\mathbb{R}$ such that for all $x, y, z \\in X$:\n\n- **(M1) Separation.** $d(x,y) = 0$ if and only if $x = y$.\n- **(M2) Symmetry.** $d(x,y) = d(y,x)$.\n- **(M3) Triangle inequality.** $d(x,z) \\le d(x,y) + d(y,z)$.",
+          "uses": [
+            "2.2"
+          ],
+          "application": "A metric satisfies separation, symmetry and the triangle inequality; an ultrametric also satisfies the strong triangle inequality ([[def-metric-space]])."
+        },
+        {
+          "fact": "F6",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "$$B(x,r) := \\{\\, y \\in X : d(x,y) < r \\,\\}, \\qquad \\bar B(x,r) := \\{\\, y \\in X : d(x,y) \\le r \\,\\}, \\qquad S(x,r) := \\{\\, y \\in X : d(x,y) = r \\,\\}.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ],
+          "application": "Metric balls use strict distance bounds ([[def-metric-ball]]); open sets contain balls about all their points and closed sets have open complement ([[def-metric-topology]])."
+        },
+        {
+          "fact": "F6",
+          "source": "def-metric-topology",
+          "source_section": "Definition",
+          "quote": "A subset $U \\subseteq X$ is **open in $(X,d)$** if for every $x \\in U$ there is a\nreal $r > 0$ with $B(x,r) \\subseteq U$ ([[def-metric-ball]]). A subset\n$F \\subseteq X$ is **closed in $(X,d)$** if its complement $X \\setminus F$ is\nopen.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ],
+          "application": "Metric balls use strict distance bounds ([[def-metric-ball]]); open sets contain balls about all their points and closed sets have open complement ([[def-metric-topology]])."
+        },
+        {
+          "fact": "F7",
+          "source": "def-cauchy-in-metric",
+          "source_section": "Definition",
+          "quote": "$(x_k)$ is a **Cauchy sequence in $(X,d)$** if for every rational\n$\\varepsilon > 0$ there is $K \\in \\mathbb{N}$ such that\n\n$$d(x_m, x_n) < \\varepsilon \\qquad \\text{for all } m, n \\ge K .$$",
+          "uses": [
+            "3.2"
+          ],
+          "application": "Cauchy means all sufficiently late pairwise distances are below each positive rational tolerance ([[def-cauchy-in-metric]])."
+        },
+        {
+          "fact": "F9",
+          "source": "def-metric-convergence",
+          "source_section": "Definition",
+          "quote": "Unwound, this\nsays: for every **rational** $\\varepsilon > 0$ there is $K \\in \\mathbb{N}$ with\n$d(x_k, p) < \\varepsilon$ for every $k \\ge K$.",
+          "uses": [
+            "5.1"
+          ],
+          "application": "Convergence means distances to the proposed limit are eventually below each positive rational tolerance ([[def-metric-convergence]])."
+        },
+        {
+          "fact": "F10",
+          "source": "def-complete-metric-space",
+          "source_section": "Definition",
+          "quote": "$(X,d)$ is **complete** if every Cauchy sequence in $(X,d)$\n([[def-cauchy-in-metric]]) converges to a point of $X$\n([[def-metric-convergence]]).",
+          "uses": [
+            "5.1"
+          ],
+          "application": "Completeness requires a limit for every Cauchy sequence ([[def-complete-metric-space]])."
+        },
+        {
+          "fact": "F8",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "5.1"
+          ],
+          "application": "Induction applies to natural-number properties ([[thm-induction-principle]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Y is a nonempty set and d is a well-defined nonnegative symmetric function, zero exactly on the diagonal.",
+          "inputs": [
+            "A nonempty; fixed a_* gives constant function; differing-coordinate set nonempty for unequal f,g; least natural coordinate; Replacement.",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Strict reciprocal bound is equivalent to agreement through t; agreement below l gives bound 1/(l+1).",
+          "inputs": [
+            "First disagreement k; reciprocal order for k<=t versus k>t; equality case d=0; possible l=0.",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "d satisfies the strong and ordinary triangle inequalities.",
+          "inputs": [
+            "Equal intermediate pairs handled separately; least disagreements i,j; common prefix below min(i,j); nonnegative maximum <= sum.",
+            "F5",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Each finite cylinder is nonempty and clopen, including the empty prefix.",
+          "inputs": [
+            "Constant-tail extension; for l>=1, B(f,1/l)=[s]; outside point differs at i<l and its ball fixes that coordinate.",
+            "F6",
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "step": "3.2",
+          "claim": "Least stabilization stages define a limiting function with eventual equality at each coordinate.",
+          "inputs": [
+            "Cauchy sequence f_j; positive rational 1/(n+1); least K_n; unique value f_(K_n)(n); j>=K_n; prefix equivalence.",
+            "F2",
+            "F3",
+            "F7",
+            "2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Cylinders form a metric basis.",
+          "inputs": [
+            "Open O contains B(f,epsilon); l>=1 with 1/l<epsilon; distance of any extension <=1/(l+1).",
+            "F4",
+            "F6",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Every Cauchy sequence converges to the defined f; Y is complete also for singleton A.",
+          "inputs": [
+            "Finite H_0=0, H_(t+1)=max(H_t,K_t); induction gives all prefix thresholds; reciprocal smallness; eventual prefix agreement; all singleton distances zero.",
+            "F4",
+            "F8",
+            "F9",
+            "F10",
+            "2.1",
+            "3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement excludes empty A; step 3.1 checks the empty prefix cylinder Y."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 sets d(f,f)=0; step 2.1 handles t=0; step 5.1 sets H_0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 checks singleton A; step 3.1 covers l=1 and radius 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.2 handle equal function pairs; step 5.1 covers all-zero singleton distances."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 distinguishes k<=t from k>t at the strict reciprocal threshold; step 3.1 uses exactly radius 1/l."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes one a_*; step 3.2 defines unique least K_n and values; step 5.1 uses finite deterministic maxima."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the strict distance bound forces agreement through t."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves agreement through t forces the strict distance bound, including equal functions."
+        }
+      ],
+      "source_evidence": [
+        {
+          "url": "https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf",
+          "locator": "Section 1 opening, p.2; Proposition 5.4 (2)->(1), p.11; local metric, cylinder and least-stabilization proofs.",
+          "use": "Statement provenance and the specific construction described in this locator; all inference details are in the local argument."
+        },
+        {
+          "url": "https://karagila.org/wp-content/uploads/2016/10/axiom-of-choice-in-analysis.pdf",
+          "locator": "Chapter 2, Definitions 10–11 and Theorems 13–18, printed pp.8–11",
+          "use": "Independent comparison; local proof retains explicit choice qualifications and expands compressed construction steps."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-6b",
+        "notes": "For A nonempty a single fixed a_* extends every finite prefix. The strict threshold d<1/(t+1) fixes coordinates through t, hence B(f,1/l) is the length-l cylinder for l>=1. Least Cauchy stabilization indices and finite maxima define a limit without countable choice. The empty prefix and singleton carrier are valid. Current item, direct supplier statements, reader-15 and refute-15 checked; source comparison: Miller, ac.pdf, Proposition 5.4, pp.10–11 (https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf)."
+      }
+    },
+    "lem-serial-relation-successor-sets-are-open-dense": {
+      "assumptions": "ZF; No choice principle is assumed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-serial-relation-dependent-choice-principle-over-zf",
+          "source_section": "Definition",
+          "quote": "Work in ZF. Write $\\omega=\\{0,1,2,\\ldots\\}$ as in [[def-natural-numbers]].\nA relation $R\\subseteq A\\times A$ is **serial on $A$** when\n$ (\\forall a\\in A)(\\exists b\\in A)\\ a\\,R\\,b $, where $a\\,R\\,b$ means\n$(a,b)\\in R$ ([[def-relation-domain-range-and-field]]).\n\n**Dependent Choice (DC)** is the following global principle: for every\n**nonempty** set $A$ and every serial relation $R$ on $A$, there is a function\n$f:\\omega\\to A$ such that $f(n)\\,R\\,f(n+1)$ for every $n\\in\\omega$.\nHere function has its ordinary set-theoretic meaning [[def-function]].\n\nThe **prescribed-start form** asks, for each such $A,R$ and each $a_0\\in A$,\nfor such an $f$ with $f(0)=a_0$. The equivalence of these global principles\nrequires a proof; it is not part of the definition.\n\nNeither form requires distinct values, an irreflexive relation, or transitivity.\nOn a singleton $A=\\{a\\}$, seriality forces $a\\,R\\,a$ and the constant map\nsatisfies the requirement. The empty carrier is excluded: it has a vacuously\nserial relation but admits no map from $\\omega$.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ],
+          "application": "Seriality means that every $a\\in A$ has at least one $b\\in A$ with $a\\,R\\,b$ ([[def-serial-relation-dependent-choice-principle-over-zf]])."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-discrete-sequence-spaces-are-complete-in-zf",
+          "source_section": "Statement",
+          "quote": "In ZF, let $A\\ne\\varnothing$ and $Y=A^\\omega$. For $f,g\\in Y$ define\n$d(f,g)=0$ if $f=g$, and otherwise $d(f,g)=1/(k+1)$ where\n$k=\\min\\{i\\in\\omega:f(i)\\ne g(i)\\}$.\nThen $(Y,d)$ is a nonempty complete ultrametric space. For each finite function\n$s:l\\to A$, its cylinder $[s]=\\{f\\in Y:f\\restriction l=s\\}$ is nonempty\nand clopen, and these cylinders form a basis for the metric topology.\nOnly this explicitly metrized constant-factor sequence space is asserted here.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1"
+          ],
+          "application": "Finite-prefix cylinders in $Y$ are nonempty clopen sets forming a metric basis ([[lem-discrete-sequence-spaces-are-complete-in-zf]])."
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-schema-of-separation",
+          "source_section": "Definition",
+          "quote": "for any parameters $\\bar p$ and any set $x$,\nthere is a set $y$ whose elements are exactly the elements $z$ of $x$ for which\n$\\varphi(z,\\bar p)$ holds.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "Separation gives subsets defined by formulas with fixed parameters ([[def-axiom-schema-of-separation]])."
+        },
+        {
+          "fact": "F5",
+          "source": "def-metric-interior-closure-boundary",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $A \\subseteq X$ and let\n$x \\in X$. Balls are as in [[def-metric-ball]] and open sets as in\n[[def-metric-topology]]; recall that a real $r$ written as a radius is always\n$> 0$.\n\n- $x$ is an **interior point** of $A$ if $B(x,r) \\subseteq A$ for some $r$. The\n  set of interior points is the **interior** $\\operatorname{int}(A)$.\n- $x$ is an **adherent point** of $A$ if $B(x,r) \\cap A \\ne \\emptyset$ for every\n  $r$. The set of adherent points is the **closure** $\\overline{A}$.\n- $x$ is a **limit point** (accumulation point) of $A$ if\n  $B(x,r) \\cap (A \\setminus \\{x\\}) \\ne \\emptyset$ for every $r$. The set of limit\n  points is the **derived set** $A'$.\n- $x$ is an **isolated point** of $A$ if $x \\in A$ and $B(x,r) \\cap A = \\{x\\}$\n  for some $r$.\n- The **boundary** of $A$ is $\\partial A := \\overline{A} \\setminus \\operatorname{int}(A)$.\n- $A$ is **dense** in $X$ if $\\overline{A} = X$.\n\n**The interior is open, and it is the largest open subset of $A$.** If\n$x \\in \\operatorname{int}(A)$, fix $r$ with $B(x,r) \\subseteq A$; the ball\n$B(x,r)$ is itself open ([[thm-metric-open-set-algebra]]), so every\n$y \\in B(x,r)$ has some $s$ with $B(y,s) \\subseteq B(x,r) \\subseteq A$, which\nputs $y$ in $\\operatorname{int}(A)$. Hence $B(x,r) \\subseteq \\operatorname{int}(A)$\nand $\\operatorname{int}(A)$ is open. It is contained in $A$, since\n$x \\in B(x,r) \\subseteq A$ for an interior point $x$; and if $V \\subseteq A$ is\nopen then every $v \\in V$ has a ball inside $V \\subseteq A$, so\n$V \\subseteq \\operatorname{int}(A)$.\n\n**Two descriptions of the boundary agree.** $x \\in \\partial A$ says that every\nball around $x$ meets $A$ and that no ball around $x$ is contained in $A$; the\nsecond half says exactly that every ball around $x$ meets $X \\setminus A$. So\n\n$$\\partial A = \\{\\, x \\in X : B(x,r) \\cap A \\ne \\emptyset \\text{ and } B(x,r) \\cap (X \\setminus A) \\ne \\emptyset \\text{ for every } r \\,\\},$$\n\nfrom which $\\partial A = \\partial(X \\setminus A)$ is immediate.\n\n**Elementary containments, straight from the definitions.** $A \\subseteq \\overline{A}$,\nbecause $x \\in A$ lies in every $B(x,r) \\cap A$; $A' \\subseteq \\overline{A}$,\nbecause a ball meeting $A \\setminus \\{x\\}$ meets $A$; and\n$\\operatorname{int}(A) \\subseteq A \\subseteq \\overline{A}$. A point of $A$ is\neither isolated in $A$ or a limit point of $A$, and not both, according to\nwhether some ball meets $A$ only in $x$.",
+          "uses": [
+            "3.1"
+          ],
+          "application": "A set is dense when its closure, defined by meeting every ball, is the whole space ([[def-metric-interior-closure-boundary]])."
+        },
+        {
+          "fact": "F4",
+          "source": "def-indexed-family",
+          "source_section": "Definition",
+          "quote": "Let $I$ be a set. An **indexed family** with **index set** $I$ is a function $A$\n([[def-function]]) with $\\operatorname{dom} A = I$. It is written\n$(A_i)_{i \\in I}$, and $A_i$ abbreviates the value $A(i)$.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "An indexed family is a function with the stated index set as domain ([[def-indexed-family]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "The U_n form a set function on omega.",
+          "inputs": [
+            "Separation for each U_n and for its uniquely specified graph inside omega x P(Y).",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Each U_n is open.",
+          "inputs": [
+            "f in U_n with one m witnessing f(n) R f(m); cylinder through max(n,m) fixes both coordinates.",
+            "F2",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "Each cylinder meets U_n by an explicit extension.",
+          "inputs": [
+            "Fixed a_*; prefix s:l->A; L=max(l,n+1)>n; t fills new positions; one successor b of t(n); append b at L and constant tail.",
+            "F1",
+            "F2",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Each U_n is dense; singleton carriers give U_n=Y.",
+          "inputs": [
+            "Every nonempty open set contains a cylinder; each cylinder meets U_n; density is ball closure test; singleton seriality forces self-loop.",
+            "F1",
+            "F2",
+            "F5",
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement assumes A nonempty; step 2.2 permits the empty prefix l=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1–2.2 cover n=0; L=max(l,n+1) always exceeds n."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 proves U_n=Y for singleton A."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 permits self-loops; step 2.2 never assumes b differs from t(n)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 fixes coordinates through max(n,m); step 2.2 appends at L outside the prefix."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.2 uses one fixed a_* and one successor for one cylinder and n; no family of choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The lemma asserts openness and density, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The lemma asserts openness and density, not an iff characterization."
+        }
+      ],
+      "source_evidence": [
+        {
+          "url": "https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf",
+          "locator": "Proposition 5.4 (2)->(1), p.11, U_n definition; local finite-cylinder witness argument.",
+          "use": "Statement provenance and the specific construction described in this locator; all inference details are in the local argument."
+        },
+        {
+          "url": "https://karagila.org/wp-content/uploads/2016/10/axiom-of-choice-in-analysis.pdf",
+          "locator": "Chapter 2, Definitions 10–11 and Theorems 13–18, printed pp.8–11",
+          "use": "Independent comparison; local proof retains explicit choice qualifications and expands compressed construction steps."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-6b",
+        "notes": "The witness coordinate is unrestricted. Openness fixes both coordinates; density appends one successor at L=max(l,n+1), a fresh coordinate. This proves one existential extension at a time and does not select an infinite relation-path. Current item, direct supplier statements, reader-15 and refute-15 checked; source comparison: Miller, ac.pdf, Proposition 5.4, pp.10–11 (https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf)."
+      }
+    },
+    "thm-complete-metric-baire-principle-implies-dependent-choice-over-zf": {
+      "assumptions": "ZF; CM-Baire is the explicit antecedent.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complete-metric-baire-principle-over-zf",
+          "source_section": "Definition",
+          "quote": "Work in ZF. Let $(X,d)$ be a metric space. Closure, interior and density are\nas in [[def-metric-interior-closure-boundary]], with all complements relative\nto $X$. Families indexed by $\\omega$ are functions, as in [[def-indexed-family]],\nand their unions and intersections are those of [[def-indexed-union-and-intersection]].\n\nA set $N\\subseteq X$ is **nowhere dense** if\n$\\operatorname{int}_X(\\overline N)=\\varnothing$.\nA set $M\\subseteq X$ is **meagre** if there exists a sequence $(N_n)_{n\\in\\omega}$\nof nowhere dense subsets of $X$ such that $M\\subseteq\\bigcup_{n\\in\\omega}N_n$.\nA set $C\\subseteq X$ is **comeagre** if $X\\setminus C$ is meagre.\n\nThe space is **Baire** if, for every sequence $(U_n)_{n\\in\\omega}$ of open\ndense subsets of $X$, the intersection $\\bigcap_{n\\in\\omega}U_n$ is dense in $X$.\nThe **complete-metric Baire principle (CM-Baire)** asserts that every complete\nmetric space, in the sense of [[def-complete-metric-space]], is Baire.\n\nThis includes the empty space: its only subset is open and dense, its\n$\\omega$-indexed intersection is empty and dense in that space, and there\nare no Cauchy sequences into it. The empty set is meagre in every space,\nwitnessed by $N_n=\\varnothing$ for every $n$.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "Under CM-Baire, every sequence of open dense sets in a complete metric space has dense intersection ([[def-complete-metric-baire-principle-over-zf]])."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-discrete-sequence-spaces-are-complete-in-zf",
+          "source_section": "Statement",
+          "quote": "In ZF, let $A\\ne\\varnothing$ and $Y=A^\\omega$. For $f,g\\in Y$ define\n$d(f,g)=0$ if $f=g$, and otherwise $d(f,g)=1/(k+1)$ where\n$k=\\min\\{i\\in\\omega:f(i)\\ne g(i)\\}$.\nThen $(Y,d)$ is a nonempty complete ultrametric space. For each finite function\n$s:l\\to A$, its cylinder $[s]=\\{f\\in Y:f\\restriction l=s\\}$ is nonempty\nand clopen, and these cylinders form a basis for the metric topology.\nOnly this explicitly metrized constant-factor sequence space is asserted here.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "The reciprocal first-difference metric makes $A^\\omega$ nonempty and complete in ZF ([[lem-discrete-sequence-spaces-are-complete-in-zf]])."
+        },
+        {
+          "fact": "F3",
+          "source": "lem-serial-relation-successor-sets-are-open-dense",
+          "source_section": "Statement",
+          "quote": "Work in ZF. Let $A\\ne\\varnothing$, let $R\\subseteq A\\times A$ be serial,\nand give $Y=A^\\omega$ the reciprocal first-difference metric of\n[[lem-discrete-sequence-spaces-are-complete-in-zf]]. Then\n$U_n=\\{f\\in Y:(\\exists m\\in\\omega)\\ f(n)\\,R\\,f(m)\\}$, for $n\\in\\omega$,\nis a sequence of open dense sets. Witness indices $m$ are unrestricted.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "The sets $U_i=\\{f:(\\exists j\\in\\omega)f(i)\\,R\\,f(j)\\}$ form a sequence of open dense subsets of that space ([[lem-serial-relation-successor-sets-are-open-dense]])."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ],
+          "application": "A nonempty subset of $\\omega$ has a least element ([[thm-well-ordering-principle]]); Separation forms sets defined inside a given set ([[def-axiom-schema-of-separation]])."
+        },
+        {
+          "fact": "F4",
+          "source": "def-axiom-schema-of-separation",
+          "source_section": "Definition",
+          "quote": "for any parameters $\\bar p$ and any set $x$,\nthere is a set $y$ whose elements are exactly the elements $z$ of $x$ for which\n$\\varphi(z,\\bar p)$ holds.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ],
+          "application": "A nonempty subset of $\\omega$ has a least element ([[thm-well-ordering-principle]]); Separation forms sets defined inside a given set ([[def-axiom-schema-of-separation]])."
+        },
+        {
+          "fact": "F5",
+          "source": "thm-recursion",
+          "source_section": "Statement",
+          "quote": "Let $(N,0,\\sigma)$ be a Peano system ([[def-peano-system]]), in particular the natural numbers $\\mathbb{N}$ ([[def-natural-numbers]]). For any set $A$, any element $a \\in A$, and any function $f : A \\to A$, there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$.",
+          "uses": [
+            "3.1"
+          ],
+          "application": "For a self-map $q$ of a set and a specified initial element, recursion on the naturals gives a function with successor rule $k(n+1)=q(k(n))$ ([[thm-recursion]])."
+        },
+        {
+          "fact": "F6",
+          "source": "lem-prescribed-start-and-starting-point-free-serial-choice-are-equivalent-in-zf",
+          "source_section": "Statement",
+          "quote": "In ZF, the starting-point-free and prescribed-start global principles in\n[[def-serial-relation-dependent-choice-principle-over-zf]] are equivalent.",
+          "uses": [
+            "4.1"
+          ],
+          "application": "Starting-point-free DC implies prescribed-start DC in ZF ([[lem-prescribed-start-and-starting-point-free-serial-choice-are-equivalent-in-zf]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "CM-Baire yields one f in all U_i.",
+          "inputs": [
+            "A nonempty; Y nonempty complete; U_i sequence open dense; dense empty set impossible in nonempty Y.",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Least-index graph q is a function omega -> omega satisfying f(i) R f(q(i)).",
+          "inputs": [
+            "f in U_i for every i; W_i nonempty subset of omega; least-element theorem; graph defined by Separation.",
+            "F4",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Recursion and composition give an R-chain a:omega -> A.",
+          "inputs": [
+            "q self-map of omega; initial 0; k(n+1)=q(k(n)); a(n)=f(k(n)); edge from q property at k(n).",
+            "F4",
+            "F5",
+            "2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "The global unrestricted principle and hence prescribed-start DC follow.",
+          "inputs": [
+            "Arbitrary nonempty serial A,R; constructed chain; earlier equivalence of global principles; q(i) may be smaller or larger than i, so no growth or injectivity assumption.",
+            "F6",
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 uses nonempty A to obtain nonempty Y and then nonempty dense intersection."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 specifies k(0)=0; step 2.1 allows a least witness index 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 includes singleton carriers; with a self-loop all q(i)=0 and the recursion is constant."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 permits repeated values and nonincreasing witness indices."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The recursion has domain omega with no terminal index; its initial index is covered by zero."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes one f from a proved nonempty intersection; steps 2.1–3.1 use unique minima and deterministic recursion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1–4.1 prove CM-Baire implies DC."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reverse implication DC implies CM-Baire is a separate earlier theorem."
+        }
+      ],
+      "source_evidence": [
+        {
+          "url": "https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf",
+          "locator": "Proposition 5.4 (2)->(1), p.11, range extraction expanded as a least-index map and recursion.",
+          "use": "Statement provenance and the specific construction described in this locator; all inference details are in the local argument."
+        },
+        {
+          "url": "https://karagila.org/wp-content/uploads/2016/10/axiom-of-choice-in-analysis.pdf",
+          "locator": "Chapter 2, Definitions 10–11 and Theorems 13–18, printed pp.8–11",
+          "use": "Independent comparison; local proof retains explicit choice qualifications and expands compressed construction steps."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-6b",
+        "notes": "CM-Baire applies to the nonempty complete constant-factor sequence space and its actual omega-family of open dense U_i. Separation defines the unique least witness q(i); natural recursion applies to its total self-map of omega. The explicit example has q(0)=4 and q(3)=0, validating the repaired statement allowing either index direction. Self-loops and repeated values require no exception. Current item, direct supplier statements, reader-15 and refute-15 checked; source comparison: Miller, ac.pdf, Proposition 5.4, pp.10–11 (https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf)."
+      }
+    },
+    "thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf": {
+      "assumptions": "ZF; Each implication assumes only its own displayed antecedent; no global AC assumption.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-serial-dependent-choice-implies-complete-metric-baire-over-zf",
+          "source_section": "Statement",
+          "quote": "In ZF, assume [[def-serial-relation-dependent-choice-principle-over-zf|DC]].\nThen [[def-complete-metric-baire-principle-over-zf|CM-Baire]] holds: for every\ncomplete metric space $(X,d)$ and every sequence $(U_n)_{n\\in\\omega}$ of open\ndense subsets, $\\bigcap_n U_n$ is dense.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "DC implies CM-Baire with these conventions ([[thm-serial-dependent-choice-implies-complete-metric-baire-over-zf]])."
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complete-metric-baire-principle-implies-dependent-choice-over-zf",
+          "source_section": "Statement",
+          "quote": "In ZF, the [[def-complete-metric-baire-principle-over-zf|complete-metric Baire principle]] implies both starting-point-free and prescribed-start Dependent\nChoice. No monotonicity of the witness indices or distinctness of the resulting\nchain values is asserted.\n\nMore explicitly, for any $f\\in\\bigcap_i U_i$, where\n$U_i=\\{f:(\\exists j\\in\\omega)f(i)\\,R\\,f(j)\\}$, the least-index map\n$q(i)=\\min\\{j\\in\\omega:f(i)\\,R\\,f(j)\\}$ exists. Recursion\n$k(0)=0$, $k(n+1)=q(k(n))$ gives the chain $a(n)=f(k(n))$.",
+          "uses": [
+            "2.1"
+          ],
+          "application": "CM-Baire implies both starting-point-free and prescribed-start DC ([[thm-complete-metric-baire-principle-implies-dependent-choice-over-zf]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "DC implies CM-Baire over ZF.",
+          "inputs": [
+            "Assume serial DC; forward implication has exactly the same complete-space and omega-family conventions.",
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "CM-Baire implies both DC forms, completing the equivalence.",
+          "inputs": [
+            "Assume CM-Baire; reverse implication covers every nonempty serial carrier; forward implication proved under its separate antecedent.",
+            "F2",
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement includes empty metric spaces; step 1.1 retains that forward conclusion."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Statement uses omega indexing; steps 1.1–2.1 preserve the suppliers zero-based conventions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 quantifies over all nonempty serial carriers, including singleton carriers."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement and step 2.1 inherit serial DC without injectivity or irreflexivity constraints."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is an equivalence of global principles, not an interval theorem."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 assumes exactly DC; step 2.1 assumes exactly CM-Baire and produces chains only for nonempty carriers."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 is DC implies CM-Baire."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 is CM-Baire implies DC in both forms."
+        }
+      ],
+      "source_evidence": [
+        {
+          "url": "https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf",
+          "locator": "Proposition 5.4 (1)<->(2), pp.10–11.",
+          "use": "Statement provenance and the specific construction described in this locator; all inference details are in the local argument."
+        },
+        {
+          "url": "https://karagila.org/wp-content/uploads/2016/10/axiom-of-choice-in-analysis.pdf",
+          "locator": "Chapter 2, Definitions 10–11 and Theorems 13–18, printed pp.8–11",
+          "use": "Independent comparison; local proof retains explicit choice qualifications and expands compressed construction steps."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-6b",
+        "notes": "The two cited implications have exactly the same ZF, nonempty serial-carrier and omega-family conventions; both DC forms and the empty-space Baire case are covered. No independence claim is made. Current item, direct supplier statements, reader-15 and refute-15 checked; source comparison: Miller, ac.pdf, Proposition 5.4, pp.10–11 (https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf)."
+      }
+    },
+    "ex-blair-sequence-space-for-a-serial-relation": {
+      "assumptions": "ZF; No choice principle is assumed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-discrete-sequence-spaces-are-complete-in-zf",
+          "source_section": "Statement",
+          "quote": "In ZF, let $A\\ne\\varnothing$ and $Y=A^\\omega$. For $f,g\\in Y$ define\n$d(f,g)=0$ if $f=g$, and otherwise $d(f,g)=1/(k+1)$ where\n$k=\\min\\{i\\in\\omega:f(i)\\ne g(i)\\}$.\nThen $(Y,d)$ is a nonempty complete ultrametric space. For each finite function\n$s:l\\to A$, its cylinder $[s]=\\{f\\in Y:f\\restriction l=s\\}$ is nonempty\nand clopen, and these cylinders form a basis for the metric topology.\nOnly this explicitly metrized constant-factor sequence space is asserted here.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "The reciprocal metric on $\\omega^\\omega$ is complete and its finite-prefix cylinders are nonempty clopen basic sets ([[lem-discrete-sequence-spaces-are-complete-in-zf]])."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-serial-relation-successor-sets-are-open-dense",
+          "source_section": "Statement",
+          "quote": "Work in ZF. Let $A\\ne\\varnothing$, let $R\\subseteq A\\times A$ be serial,\nand give $Y=A^\\omega$ the reciprocal first-difference metric of\n[[lem-discrete-sequence-spaces-are-complete-in-zf]]. Then\n$U_n=\\{f\\in Y:(\\exists m\\in\\omega)\\ f(n)\\,R\\,f(m)\\}$, for $n\\in\\omega$,\nis a sequence of open dense sets. Witness indices $m$ are unrestricted.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "3.1"
+          ],
+          "application": "For a serial relation the sets $U_n$ encode occurrence of a successor somewhere in the range and are open dense ([[lem-serial-relation-successor-sets-are-open-dense]])."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complete-metric-baire-principle-implies-dependent-choice-over-zf",
+          "source_section": "Statement",
+          "quote": "In ZF, the [[def-complete-metric-baire-principle-over-zf|complete-metric Baire principle]] implies both starting-point-free and prescribed-start Dependent\nChoice. No monotonicity of the witness indices or distinctness of the resulting\nchain values is asserted.\n\nMore explicitly, for any $f\\in\\bigcap_i U_i$, where\n$U_i=\\{f:(\\exists j\\in\\omega)f(i)\\,R\\,f(j)\\}$, the least-index map\n$q(i)=\\min\\{j\\in\\omega:f(i)\\,R\\,f(j)\\}$ exists. Recursion\n$k(0)=0$, $k(n+1)=q(k(n))$ gives the chain $a(n)=f(k(n))$.",
+          "uses": [
+            "2.1"
+          ],
+          "application": "The converse Baire-to-DC theorem uses least witness indices followed by natural recursion to extract a chain from a point in all $U_n$ ([[thm-complete-metric-baire-principle-implies-dependent-choice-over-zf]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Natural successor is serial; g extends the prefix, belongs to U_0, and d(g,h)=1/4.",
+          "inputs": [
+            "i+1 in omega; g=(2,0,2,3,0,...); h=(2,0,2,0,0,...); first difference at 3; g(3)=g(0)+1.",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "The explicit f belongs to every U_n but fails adjacency at n=0.",
+          "inputs": [
+            "Given f values; witnesses m=4 for n=0,2; m=3 for n=1; m=0 for n=3; m=n+1 for n>=4; f(1)=0 !=3.",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The least-index map and recursion yield indices 0,4,5,... and chain values 2,3,4,... .",
+          "inputs": [
+            "First occurrences of 3,1,2 at 4,3,0; tail f(j)=j-1; q(i)=i+1 for i>=4; k(0)=0 and k(t)=t+3 for t>=1.",
+            "F3",
+            "1.2"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Successor availability in the range does not imply adjacency and allows backward witness indices.",
+          "inputs": [
+            "General definition of U_n; explicit adjacency failure; q(3)=0; extracted chain values already calculated.",
+            "F2",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty carrier omega and a prefix of length three."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 calculate U_0 and failure of adjacency at coordinate 0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 handles n=1 by witness 3; step 2.1 computes k(1)=4 and extracted value 3."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 includes repeated value 2 at coordinates 0 and 2; step 2.1 computes their equal least witness."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 appends at coordinate 3; step 1.2 separates the first four positions from the n>=4 tail."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 give explicit functions, successor witnesses and minima; no CM-Baire assumption is used for this instance."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a worked instance and adjacency failure, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a worked instance and adjacency failure, not an iff theorem."
+        }
+      ],
+      "source_evidence": [
+        {
+          "url": "https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf",
+          "locator": "Proposition 5.4 converse construction, p.11; new explicit natural-successor specialization and all numerical calculations supplied locally.",
+          "use": "Statement provenance and the specific construction described in this locator; all inference details are in the local argument."
+        },
+        {
+          "url": "https://karagila.org/wp-content/uploads/2016/10/axiom-of-choice-in-analysis.pdf",
+          "locator": "Chapter 2, Definitions 10–11 and Theorems 13–18, printed pp.8–11",
+          "use": "Independent comparison; local proof retains explicit choice qualifications and expands compressed construction steps."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-b-6b",
+        "notes": "Directly recomputed d(g,h)=1/4, successor witnesses for n=0,1,2,3 and n>=4, q(0)=q(2)=4, q(1)=3, q(3)=0, and q(i)=i+1 for i>=4. Extraction from 0 yields indices 0,4,5,... and values 2,3,4,..., while the original adjacent edge 0 to 1 fails. Current item, direct supplier statements, reader-15 and refute-15 checked; source comparison: Miller, ac.pdf, Proposition 5.4, pp.10–11 (https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf)."
+      }
+    }
+  },
+  "source_excerpts": [
+    {
+      "source_url": "https://people.math.wisc.edu/~awmille1/old/m873-08/ac.pdf",
+      "locator": "Proposition 5.4, printed p.10",
+      "quote": "The following are equivalent (in ZF)",
+      "context": "The numbered list is DC, the complete-metric Baire theorem in comeagre-dense form, and a well-foundedness formulation. This batch proves the first equivalence locally; it does not assert the third formulation."
+    },
+    {
+      "source_url": "https://karagila.org/wp-content/uploads/2016/10/axiom-of-choice-in-analysis.pdf",
+      "locator": "Definition 4, printed p.4",
+      "quote": "given a non-empty set X and a binary",
+      "context": "The continuing definition specifies a serial relation and a prescribed-start chain; the nonempty carrier is retained. The local finite-path lemma reconciles it with Miller’s starting-point-free form."
+    }
+  ]
+}

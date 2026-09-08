@@ -7,11 +7,16 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-chain-conditions-in-short-exact-sequences, def-quotient-module, lem-primary-submodule-zero-divisor-characterisation]
+deps: [thm-chain-conditions-in-short-exact-sequences, def-quotient-module, lem-primary-submodule-zero-divisor-characterisation, thm-equivalent-characterizations-of-noetherian-modules]
 proof_strategy: direct
 verification:
-  audited: 2026-08-28
   precheck: pass
+  verified:
+    model: Codex
+    verdict: repaired-and-locally-checked
+    date: 2026-09-08
+    scope: "Owner-authorized ACC dependency and proof clarification; local checks only, no independent judge"
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -38,14 +43,16 @@ with submodules $A,B \subseteq M$, then $Q=A$ or $Q=B$. Then $Q$ is primary.
 
 [L3] A proper submodule is primary exactly when the classical power condition of the previous lemma holds ([[lem-primary-submodule-zero-divisor-characterisation]]).
 
+[L4] If every submodule is finitely generated, every ascending sequence of submodules stabilizes. This implication uses no choice principle ([[thm-equivalent-characterizations-of-noetherian-modules]], condition 1 implies condition 2).
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 Let $N=M/Q$. By [L1], the quotient module $N$ is Noetherian. The submodule $0 \subset N$ is irreducible: if $0=A'\cap B'$ in $N$, then taking inverse images in $M$ gives $Q=A\cap B$ with $Q \subseteq A,B$, so the irreducibility of $Q$ forces $A=Q$ or $B=Q$, hence $A'=0$ or $B'=0$. [L1, L2, given, algebra]
 
-2.1 Let $x \in R$ be a zero divisor on $N$. Then $(0:_N x)\neq0$. Because $N$ is Noetherian, the ascending chain $$ (0:_N x)\subseteq (0:_N x^2)\subseteq\cdots $$ stabilizes; choose $n \ge 1$ with $(0:_N x^n)=(0:_N x^{n+1})=(0:_N x^{2n})$. If $z \in (0:_N x^n)\cap x^nN$, write $z=x^ny$. Then $x^nz=0$, so $x^{2n}y=0$ and hence $y \in (0:_N x^{2n})=(0:_N x^n)$. Therefore $z=x^ny=0$, and $$ 0=(0:_N x^n)\cap x^nN. $$ [step 1.1, choose, algebra]
+2.1 Let $x \in R$ be a zero divisor on $N$, and write $K_k:=\{y\in N:x^ky=0\}$. Since $R$ is commutative, multiplication by $x^k$ is $R$-linear, so $K_k$ and $x^kN$ are submodules. Also $K_1\ne0$ and $K_k\subseteq K_{k+1}$. By [L4] this ascending sequence stabilizes; choose $n\ge1$ beyond its stabilization index, so $K_n=K_{2n}$. If $z\in K_n\cap x^nN$, write $z=x^ny$. Then $x^{2n}y=x^nz=0$, hence $y\in K_{2n}=K_n$ and $z=0$. Thus $0=K_n\cap x^nN$. This uses only the choice-free implication of [L4]. [L4, step 1.1, choose, algebra]
 
-3.1 Since $(0:_N x)\subseteq (0:_N x^n)$ is nonzero, the irreducibility of $0 \subset N$ and the decomposition in step 2.1 force $x^nN=0$. Thus every zero divisor on $N$ acts nilpotently on $N$. By [L3], this means $Q$ is primary. [L3, step 2.1, algebra]
+3.1 Since $0\ne K_1\subseteq K_n$, irreducibility of $0\subset N$ and $0=K_n\cap x^nN$ force $x^nN=0$. Consequently, if $xm\in Q$ and $m\notin Q$, the nonzero coset $m+Q$ shows that $x$ is a zero divisor on $N$, so some $n\ge1$ satisfies $x^nM\subseteq Q$. By [L3], $Q$ is primary. [L2, L3, step 1.1, step 2.1, algebra]
 
-4.1 Hence every irreducible submodule of a Noetherian module is primary. [step 1.1, step 3.1] ∎
+4.1 Hence every irreducible submodule of a Noetherian module is primary, without an additional choice assumption. [step 1.1, step 3.1] ∎

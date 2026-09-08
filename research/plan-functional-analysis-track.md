@@ -1355,6 +1355,10 @@ Items:
 1. `def-character-and-maximal-ideal-space` (definition) — nonzero multiplicative linear functionals and $\Delta(A)$ with weak-star topology.
 2. `thm-characters-on-a-unital-banach-algebra-are-continuous` (theorem) — $\chi(1)=1$, $|\chi(a)|\le r(a)\le\|a\|$, hence $\|\chi\|=1$.
 3. `thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra` (theorem) — for a commutative **unital** complex Banach algebra, maximal ideals are precisely character kernels by Gelfand–Mazur; record the maximal-ideal choice implementation.
+   Phase-2 direct demand: this theorem and item 2 supply the published
+   `thm-wiener-lemma-for-absolutely-convergent-fourier-series`. Keep their
+   FA-18 A home: 288.081 precedes the consumer at 288.1401. The older Fourier
+   instruction to transfer them to FA-17 is superseded. No new pair is needed.
 4. `thm-spectrum-as-character-values` (theorem) — $\sigma(a)=\{\chi(a):\chi\in\Delta(A)\}$ for commutative unital complex $A$.
 5. `thm-maximal-ideal-space-is-compact-hausdorff` (theorem) — a weak-star closed subset of the dual unit ball, with the combined existence/compactness choice ledger.
 6. `def-gelfand-transform` (definition) — $a\mapsto\widehat a$ in $C(\Delta(A))$.

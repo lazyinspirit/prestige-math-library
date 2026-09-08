@@ -384,7 +384,9 @@ function groupHeader(g, index, seam, rejections, alerts, phase = 'step8') {
 
   L.push(reading ? '## Read scope' : '## Read scope, write scope');
   L.push('');
-  L.push('**Read the entire assigned group and anything it cites.** `items/` holds every published item and');
+  L.push(reading
+    ? '**Read the entire assigned group and anything it cites.** `items/` holds every published item and'
+    : '**Audit and repair one item at a time. Inspect related items first only when necessary.** `items/` holds every published item and');
   L.push('every item this run has built, and your sandbox is the repository root. Open');
   L.push(`anything ${reading ? 'an owned item' : 'a rejection'} touches — a published dependency, another group's page,`);
   L.push('a definition three levels down. Adjudicating a citation objection without');

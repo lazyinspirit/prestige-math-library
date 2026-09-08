@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-projective-closure-affine-set, def-homogeneous-ideal-saturation, lem-homogenization-dehomogenization-correspondence, thm-affine-nullstellensatz-correspondence]
+deps: [def-projective-closure-affine-set, def-homogeneous-ideal-saturation, lem-homogenization-dehomogenization-correspondence]
 proof_strategy: direct
 sources:
   scraped: []
@@ -17,12 +17,13 @@ sources:
     - title: "Michael Artin, Algebraic Geometry, Chapter 3"
       url: "https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf"
 verification:
-  audited: 2026-09-06
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
+  verified:
+    model: "gpt-6-astra"
     verdict: pass
-    date: 2026-09-06
+    date: 2026-09-08
+    scope: "Local prerequisite and homogeneous-ideal proof repair; not independent judging or whole-closure certification."
+    delegated_by: "Owner-requested UC-73 audit"
 ---
 
 ## Statement
@@ -35,6 +36,6 @@ If $A=V(I)\subseteq\mathbf A_k^n$ and $I=I(A)$, write $I^h=(f^h:f\in I)$ for the
 
 1.1 Dehomogenization on $D_+(x_0)$ identifies $V_+(I^h)$ there with $A$. [given, algebra]
 
-2.1 $G$ vanishes on this chart exactly when $G(1,x)\in I$; homogenizing this condition is exactly $x_0^rG\in I^h$ for some $r$. [step 1.1, algebra]
+2.1 Let G be homogeneous of degree d. It vanishes on the embedded A exactly when $g=G(1,x)\in I(A)=I$. If g is nonzero of degree e, homogenization gives $G=x_0^{d-e}g^h\in I^h$. If g=0, the same homogenization identity gives G=0. Conversely, if $x_0^rG\in I^h$, dehomogenizing an ideal expression gives $g\in I$, because every generator $f^h$ dehomogenizes to f in I. Thus the homogeneous elements vanishing on A are exactly the homogeneous elements of $I^h:x_0^\infty$. [step 1.1, algebra]
 
-3.1 Homogeneous equations vanish on a set exactly when they vanish on its closure, hence the ideal is $I^h:x_0^\infty$. [step 2.1] ∎
+3.1 A homogeneous equation vanishes on A exactly when its projective closed zero locus contains the projective closure of A. Both the homogeneous vanishing ideal of that closure and $I^h:x_0^\infty$ are homogeneous ideals; agreement in every homogeneous degree therefore proves equality for all polynomials. If A is empty, I is the unit ideal, as are both ideals in the formula. No Nullstellensatz or choice principle is needed because $I=I(A)$ is given. [step 2.1, given, algebra] ∎

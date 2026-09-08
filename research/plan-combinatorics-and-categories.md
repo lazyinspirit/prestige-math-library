@@ -9968,8 +9968,12 @@ The mandatory item-dependency spine is $1\to2\to3\to4$, items 1 and 4 into
 5, items 3--5 into 6, $7\to8$, items 6--8 into 9, items 1, 7, and 9 into 10,
 and item 10 into each of 11 and 12.  Item 1 also cites the published
 `def-induced-copy-number` and `def-induced-embedding-and-induced-copy`; item 2
-cites `def-blockade-length-and-width` and
-`def-blockade-rainbow-induced-copy`.  The counting steps cite the published
+cites `def-blockade-length-and-width` and the published directional-sparsity
+definition. Define a good induced embedding directly by requiring each vertex
+label to map into its assigned block, as in the primary paper's §4 before 4.2.
+Do not depend on `def-blockade-rainbow-induced-copy`, whose owner is later at
+413; an unlabelled rainbow condition is weaker than this local definition.
+The counting steps cite the published
 finite-counting lemmas they actually invoke, and the restriction step cites the
 published Rödl and induced-counting theorem items, not merely their page names.
 This makes item 10 transitively dependent on every item 1--9.  No QID proof item
@@ -10238,3 +10242,38 @@ For B-leaf discipline, move
 `incidence-algebras-and-mobius-inversion-examples` to its A companion. Each B
 page then requires only its A. These are Phase-3 page-edge repairs using
 published suppliers; no new Combinatorics supplier or Phase-2 root is created.
+
+## III.10 Orphan proof routes and retirement gate (2026-09-08)
+
+The page-inventory removals in III.2 did not remove the two published orphan
+supplier files or their incoming proof edges. Neither orphan is an adequate
+supplier for future scaffolds merely because its item header is published.
+Preserve published files while preparing their Phase-3 repairs.
+
+`thm-leaf-deletion-preserves-virality-of-a-finite-family` claims two ordinary
+leaf deletions suffice. Its cited unordered theorem in Nguyen--Scott--Seymour,
+*Induced subgraph density IV*, instead uses $H_1,\overline{H_2}$ in the family
+and a degree-one vertex in each $H_i$: the second deletion is a co-leaf in
+the forbidden graph $\overline{H_2}$. Consult the complete proof and its
+ordered-graph reduction at <https://arxiv.org/html/2307.06455v1>, the unordered
+virality theorem (numbered 7.7 in the served revised text). The original
+download's 7.8 locator is not a substitute for matching the exact hypotheses.
+
+No future proof may use the stronger symmetric orphan or treat the draft
+`thm-leaf-and-coleaf-deletion-preserves-virality-of-a-finite-family` as proved:
+the latter still needs its complete local proof. In particular, using the
+same forbidden graph in both slots requires both leaf and co-leaf hypotheses.
+Recheck the graph definitions and the cited six-vertex figures before any
+cutover. Do not silently weaken a claimed result or assert the unsupported
+statement is false without a counterexample. The published impact comprises
+23 items; exact IDs and direct edges are in the central consumer ledger and
+`phase-2-expansion-census.json.publishedOrphanImpact`.
+
+`thm-forest-free-graphs-have-a-linear-anticomplete-pair-or-a-high-degree-vertex`
+has a matching theorem and complete external proof in Chudnovsky--Scott--
+Seymour--Spirkl, *Pure pairs. I. Trees and linear anticomplete pairs*,
+<https://arxiv.org/pdf/1809.00919>. Its local two-step source import is not a
+proof of that theorem. Build an adequate local proof scaffold before using it
+as a future supplier; its two published consequences remain Phase-3 repairs.
+These obligations are separate from the loglog/density pair and cannot be
+discharged by that pair's publication or by restoring page inventory entries.

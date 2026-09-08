@@ -16,9 +16,9 @@ short: "uniform continuity of a real function"
 verification:
   precheck: n/a
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
+    date: 2026-09-08
   audited: 2026-07-27
 sources:
   scraped: []
@@ -92,9 +92,10 @@ two points because $|x - x'| = |x' - x|$.
   every $x' \in A$, with one $\delta$ ([[def-neighbourhood-r]]). That is
   continuity on $A$ with the radius independent of the centre.
 
-- **On an interval this is the notion the extension theorem needs.** A
-  uniformly continuous function on a set $D$ extends to one on the closure of
-  $D$ ([[cor-continuous-extension-from-a-dense-subset-r]]); mere continuity does
+- **On an interval this is the notion the extension theorem needs.** Assuming
+  the Axiom of Choice ([[def-axiom-of-choice]]), a uniformly continuous function
+  on a set $D$ extends to one on the closure of $D$
+  ([[cor-continuous-extension-from-a-dense-subset-r]]); mere continuity does
   not suffice, since $x \mapsto 1/x$ on $(0,1)$ has no continuous extension to
   $[0,1]$ ([[def-interval]]).
 

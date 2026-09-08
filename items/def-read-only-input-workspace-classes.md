@@ -5,13 +5,17 @@ title: "Read-only-input work-space classes and constructibility"
 status: published
 origin: pipeline
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
-deps: [def-asymptotic-resource-comparison, def-multitape-and-nondeterministic-machines]
+deps: [def-multitape-and-nondeterministic-machines]
 verification:
-  audited: 2026-09-06
+  verified:
+    model: "gpt-6-astra"
+    verdict: pass
+    date: 2026-09-08
+    scope: "Local definition and prerequisite repair; not independent review or a whole-closure audit"
+    delegated_by: owner
   precheck: n/a
-  judge: {model: "gpt-5.6-terra", verdict: pass, date: 2026-09-06}
 sources:
   references:
     - title: "Arora and Barak, Computational Complexity, Definition 4.1 and Remark 4.2"
@@ -19,6 +23,10 @@ sources:
 ---
 
 ## Definition
+
+For nonnegative functions $f,g$ on the natural numbers, $f(n)=O(g(n))$
+means that constants $c>0$ and $n_0$ exist with $f(n)\le c g(n)$ for every
+$n\ge n_0$. Resource bounds below are functions $s:\mathbb N\to\mathbb N$.
 
 A read-only-input machine has one read-only input tape and finitely many work
 tapes. On an input $x$ of length $n$, the input is bracketed by endmarkers and

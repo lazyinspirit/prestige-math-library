@@ -7,6 +7,7 @@ import { join } from 'node:path';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { repairGateBatch, repairFingerprint } from './step56-repairs.mts';
 import { authorInputs } from '../../author-check.mts';
+import { step6Escalations } from '../../step6-escalations.mjs';
 
 const TERRA_HIGH = MODEL_PROFILE_NAMES.terraHigh;
 const ASTRA_MEDIUM = MODEL_PROFILE_NAMES.astraMedium;
@@ -399,6 +400,7 @@ export function step6Stages(d: any) {
       id: '6b-adjudicate',
       label: 'group Alpha adjudication of touched items and refuter findings',
       role: 'alpha',
+      modelProfile: (plan: any) => plan.role === 'alpha' ? ASTRA_MEDIUM : undefined,
       units: batches,
       pattern: resultPattern('alpha', '6b-[a-z]+'),
       artifacts: (ctx: any, unit: string) => {
@@ -420,15 +422,20 @@ export function step6Stages(d: any) {
           timeout: 14400,
         })),
       gates: (ctx: any) => [
+        gate('step6-owner-escalations', ['node', 'tools/step6-scope.mjs', 'check-escalations', '--run', ctx.run]),
         ...repoWide(ctx).filter((candidate: any) => candidate.id !== 'splice-verify'),
         ...contractGates(ctx, { reviewed: true }), decisionStampGate(ctx), routingGate(ctx, 'adjudicate'),
       ],
       perItemFixBudget: 3,
       batchRepairs: true,
       repairFingerprint,
-      onGateFailure: (args: any) => args.failure.id === 'stage-stalemate'
-        ? handleGateFailure(args, '6b')
-        : repairGateBatch(args, { alphaGroups, MECHANICAL_REPAIRS, mechanicalRepair }),
+      onGateFailure: (args: any) => {
+        const holds = step6Escalations(args.ctx.repo, args.ctx.run);
+        if (holds.length) return { owner: { reason: holds.join('\n') } };
+        return args.failure.id === 'stage-stalemate'
+          ? handleGateFailure(args, '6b')
+          : repairGateBatch(args, { alphaGroups, MECHANICAL_REPAIRS, mechanicalRepair });
+      },
     },
     {
       id: '6b-baseline',

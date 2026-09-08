@@ -1,0 +1,1283 @@
+[
+  {
+    "order": 458.0001,
+    "id": "analytic-majorants-and-the-cauchy-kovalevskaya-theorem",
+    "kind": "A",
+    "category": "pde",
+    "title": "Analytic Majorants and the Cauchy–Kovalevskaya Theorem",
+    "companion": "analytic-majorants-and-the-cauchy-kovalevskaya-theorem-examples",
+    "requires": [
+      "partial-differential-equations-and-characteristics",
+      "power-series-and-real-analytic-functions",
+      "holomorphic-functions-of-several-variables",
+      "holomorphic-inverse-and-weierstrass-preparation"
+    ],
+    "items": [
+      {
+        "id": "def-real-analytic-germ-in-several-variables",
+        "kind": "definition",
+        "title": "Real analytic germs in several variables",
+        "statement": "Fix $n\\ge1$ and $a\\in\\mathbb R^n$. A real analytic germ at $a$ is an equivalence class of real functions agreeing on a neighborhood of $a$, represented on some polydisc $|x_i-a_i|<r_i$, $r_i>0$, by an absolutely convergent series $f(x)=\\sum_{\\alpha\\in\\mathbb N^n}c_\\alpha(x-a)^\\alpha$ with real coefficients. Here $0\\in\\mathbb N$, $\\alpha!=\\prod_i\\alpha_i!$, and $c_\\alpha=D^\\alpha f(a)/\\alpha!$. A vector germ has a finite positive number of such components, with a common polydisc obtained by taking coordinatewise minima of their radii.\n\nThe multi-index convention and absolute convergence are those of [[def-multivariable-power-series]]; for $n=1$ this agrees with [[def-real-analytic-function]]. The same coefficients define the complexification. Indeed choose a positive real polyradius $s<r$; absolute convergence at $a+s$ bounds $|c_\\alpha|s^\\alpha$ uniformly. [[thm-power-series-define-holomorphic-functions-in-several-variables]] therefore gives a holomorphic sum on the complex $s$-polydisc and the displayed derivative formula. Restriction to the real slice recovers $f$.",
+        "deps": [
+          "def-multivariable-power-series",
+          "def-real-analytic-function",
+          "thm-power-series-define-holomorphic-functions-in-several-variables"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §3, Definition 12 and equation (25), printed p. 7. Real restriction and finite-vector convention are spelled out locally."
+            },
+            {
+              "title": "Ageno, Part III: Analysis of Partial Differential Equations",
+              "url": "https://giacomoageno.github.io/LectureNotesAPDE.pdf",
+              "locator": "Ageno §2.3.3, proof of Theorem 2.22, PDF pp. 25–27; independent comparison for the analytic reduction and majorant argument."
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-coefficientwise-majorisation-of-multivariable-power-series",
+        "kind": "definition",
+        "title": "Coefficientwise majorisation",
+        "statement": "Fix a centre, $n\\ge1$ coordinates, and ordinary coefficients as in [[def-multivariable-power-series]]. For formal series $f(z)=\\sum_\\alpha a_\\alpha z^\\alpha$ and $G(z)=\\sum_\\alpha b_\\alpha z^\\alpha$, write $f\\ll G$ if for every $\\alpha\\in\\mathbb N^n$ we have $|a_\\alpha|\\le b_\\alpha$. In particular every $b_\\alpha$ is real and nonnegative. For analytic series $a_\\alpha=D^\\alpha f(0)/\\alpha!$; these are not the unnormalized derivatives. Vectors are compared component by component and must have the same number of components. No convergence is required for this relation.",
+        "deps": [
+          "def-multivariable-power-series"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §2 equation (12), printed p. 5; §3 equation (28), printed p. 7."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-coefficient-majorisation-is-preserved-by-sums-products-composition-and-differentiation",
+        "kind": "lemma",
+        "title": "Operations preserving coefficient majorisation",
+        "statement": "For scalar formal series in finitely many variables, $f\\ll F$ and $g\\ll G$ imply $f+g\\ll F+G$, $fg\\ll FG$, and $\\partial_jf\\ll\\partial_jF$. If $h_i\\ll H_i$ and every $h_i,H_i$ has zero constant coefficient, then $f(h_1,\\ldots,h_k)\\ll F(H_1,\\ldots,H_k)$. The same statements hold componentwise for finite vectors wherever the operations are defined. For convergent series these formal operations represent the corresponding analytic operations on sufficiently small polydiscs. If a convergent series $f$ has $f(0)\\ne0$, its reciprocal is also analytic near zero.",
+        "deps": [
+          "def-coefficientwise-majorisation-of-multivariable-power-series",
+          "thm-power-series-define-holomorphic-functions-in-several-variables",
+          "thm-geometric-series"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §1 Exercise 3, printed p. 2; §3 equations (25), (28)–(30), pp. 7–8. The convolution and substitution arguments below provide the formal details."
+            }
+          ]
+        },
+        "strategy": "Use the finite convolution sum at each monomial and the triangle inequality. Zero constant terms make every fixed-degree composition coefficient a finite sum. For convergent series shrink the polydisc to place the inner values inside the outer convergence polydisc and use absolute rearrangement. For the harvested quotient assertion, if f=a+h with a!=0 and h(0)=0, shrink until |h/a|<1 and use a^(-1) sum_{k>=0}(-h/a)^k. Multiplying the convergent series verifies the reciprocal identity."
+      },
+      {
+        "id": "lem-an-analytic-germ-has-a-rational-geometric-majorant",
+        "kind": "lemma",
+        "title": "Geometric majorants for analytic germs",
+        "statement": "For any finite family of analytic germs $f_j$ in $n\\ge1$ variables at zero there are $M,r>0$ such that $|[z^\\alpha]f_j|\\le Mr^{-|\\alpha|}$ for every $j,\\alpha$. Consequently $f_j\\ll M/(1-(z_1+\\cdots+z_n)/r)$, and $f_j-f_j(0)\\ll M/(1-(z_1+\\cdots+z_n)/r)-M$.",
+        "deps": [
+          "def-real-analytic-germ-in-several-variables",
+          "lem-coefficient-majorisation-is-preserved-by-sums-products-composition-and-differentiation",
+          "thm-cauchy-estimates-on-a-polydisc"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §3 equations (29)–(30), printed pp. 7–8; local proof uses polydisc Cauchy estimates."
+            }
+          ]
+        },
+        "strategy": "Complexify on a polydisc and choose a strictly smaller equal-radius closed polydisc. Cauchy estimates give |a_alpha|<=M r^(-|alpha|); the multinomial coefficient in the proposed majorant is at least one."
+      },
+      {
+        "id": "thm-real-analytic-inverse-and-implicit-function-theorems",
+        "kind": "theorem",
+        "title": "Real analytic inverse and implicit functions",
+        "statement": "Let $f$ be a real analytic map between open subsets of $\\mathbb R^n$, $n\\ge1$. If $Df(a)$ is invertible, $f$ has a real analytic local inverse near $f(a)$. Let $P(x,y)$ be real analytic near $(a,b)\\in\\mathbb R^d\\times\\mathbb R^k$, $k\\ge1$, with $P(a,b)=0$ and $D_yP(a,b)$ invertible. On sufficiently small neighborhoods its zero set is exactly the graph of a unique real analytic $y=g(x)$ with $g(a)=b$.",
+        "deps": [
+          "def-real-analytic-germ-in-several-variables",
+          "thm-power-series-define-holomorphic-functions-in-several-variables",
+          "thm-holomorphic-inverse-function-theorem-several-variables",
+          "cor-uniqueness-of-multivariable-power-series-coefficients",
+          "thm-power-series-expansion-in-several-complex-variables"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Real inverse/implicit reduction used in Gantumur §5, printed p. 12. The local proof below derives the analytic assertion from the earlier holomorphic inverse theorem and power-series expansion."
+            },
+            {
+              "title": "Ageno, Part III: Analysis of Partial Differential Equations",
+              "url": "https://giacomoageno.github.io/LectureNotesAPDE.pdf",
+              "locator": "Ageno §2.3.3, proof of Theorem 2.22, PDF pp. 25–27; independent comparison for the analytic reduction and majorant argument."
+            }
+          ]
+        },
+        "strategy": "Complexify with real coefficients, apply holomorphic inverse, and shrink to conjugation-invariant neighborhoods. Uniqueness implies G(conjugate z)=conjugate G(z), so restriction is real. For the implicit theorem invert (x,y)->(x,P(x,y))."
+      },
+      {
+        "id": "lem-analytic-ordinary-differential-systems-by-coefficient-majorants",
+        "kind": "lemma",
+        "title": "Analytic ODE systems from majorants",
+        "statement": "For an analytic map $H(t,v)$ near $(0,v_0)\\in\\mathbb R\\times\\mathbb R^N$, $N\\ge1$, the problem $v^{\\prime}=H(t,v)$, $v(0)=v_0$, has a unique analytic solution germ. If $v_0=0$ and all Taylor coefficients of $H$ at $(0,0)$ are nonnegative, then the solution has nonnegative Taylor coefficients.",
+        "deps": [
+          "lem-coefficient-majorisation-is-preserved-by-sums-products-composition-and-differentiation",
+          "lem-an-analytic-germ-has-a-rational-geometric-majorant",
+          "thm-real-analytic-inverse-and-implicit-function-theorems",
+          "thm-power-series-define-holomorphic-functions-in-several-variables"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §3 equations (26)–(34), printed pp. 7–8, Theorem 15. The autonomous augmentation and quadratic majorant below avoid the misnormalized scalar formula (18)."
+            }
+          ]
+        },
+        "strategy": "Shift v0 to zero and adjoin t as one unknown with derivative 1. For N unknowns enlarge M>=1 and dominate each component by M/(1-sum V_j/r). The common scalar solution W obeys W-(N/(2r))W^2=Mt, W(0)=0, and is analytic by the implicit theorem. Its recurrence W=Mt+(N/(2r))W^2 is nonnegative. ODE coefficient recursion is triangular; dominate it by W and differentiate the convergent series. This avoids relying on CK or on a merely smooth ODE theorem."
+      },
+      {
+        "id": "lem-analytic-noncharacteristic-hypersurfaces-flatten-to-a-coordinate-hyperplane",
+        "kind": "lemma",
+        "title": "Analytic flattening and the normal principal coefficient",
+        "statement": "Let $\\phi$ be real analytic near $a\\in\\mathbb R^{d+1}$ with $\\phi(a)=0$ and $d\\phi(a)\\ne0$. There are analytic coordinates $(x,t)$ with $t=\\phi$ near a. For an analytic scalar equation $P(z,(D^\\alpha u)_{|\\alpha|\\le m})=0$, $m\\ge1$, the derivative of its transformed equation with respect to the pure normal m-jet equals the principal symbol of its linearization evaluated at $d\\phi$. At a compatible m-jet where that scalar is nonzero the equation has a unique local analytic solved branch for the pure normal m-jet. Euclidean normal data mean $D^ju(X(x))[\\nu(x),\\ldots,\\nu(x)]$, and can instead be flattened using analytic normal-line coordinates.",
+        "deps": [
+          "thm-real-analytic-inverse-and-implicit-function-theorems",
+          "lem-principal-symbol-under-a-c-one-coordinate-change",
+          "def-characteristic-covector-hypersurface-and-noncharacteristic-data",
+          "thm-symmetry-of-higher-mixed-partials"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §5 equations (61)–(68), printed pp. 12–13. The linearization and analytic normal-line extensions are derived locally."
+            },
+            {
+              "title": "Ageno, Part III: Analysis of Partial Differential Equations",
+              "url": "https://giacomoageno.github.io/LectureNotesAPDE.pdf",
+              "locator": "Ageno §§2.3.1–2.3.2, Definitions 2.13–2.19, normal coordinates (2.7), and the transformed principal coefficient, PDF pp. 20–24. The normal derivative below includes the required multinomial weights absent from Definition 2.15."
+            }
+          ]
+        },
+        "strategy": "Use (old tangential coordinates,phi) with invertible Jacobian. Iterate the analytic chain rule: only products of first coordinate derivatives multiply order-m unknown derivatives. In the fully nonlinear case differentiate the transformed equation with respect to its pure normal jet at a specified compatible jet; apply the implicit theorem there. Never infer a branch without a compatible jet. For prescribed Euclidean normal jets use an analytic parametrization X(y) and the unit normal nu(y), and invert (y,t)->X(y)+t nu(y); its derivative has independent tangent columns and normal column. Here normal jets mean D^j u(X(y))[nu(y),...,nu(y)]=sum_{|alpha|=j}(j!/alpha!)nu(y)^alpha D^alpha u(X(y)). These are t-derivatives of the pullback. For another analytic transverse field, convert jets successively by the triangular chain rule. Square root normalization of the nonzero analytic gradient is analytic by the implicit theorem."
+      },
+      {
+        "id": "lem-analytic-cauchy-data-reduce-to-zero-data-in-normal-form",
+        "kind": "lemma",
+        "title": "Subtracting analytic Cauchy jets",
+        "statement": "Let $m\\ge1$. Suppose $\\partial_t^m u=F(t,x,(\\partial_x^\\alpha\\partial_t^j u)_{|\\alpha|+j\\le m,\\ j<m})$ is analytic near the initial jet supplied by analytic functions $g_j(x)$, $0\\le j<m$. The substitution $u=v+P$, $P(t,x)=\\sum_{j=0}^{m-1}t^jg_j(x)/j!$, bijectively transforms solutions with $\\partial_t^ju(0,x)=g_j(x)$ into solutions of a solved analytic equation with exactly the same allowed jet orders and zero Cauchy data.",
+        "deps": [
+          "def-real-analytic-germ-in-several-variables",
+          "lem-coefficient-majorisation-is-preserved-by-sums-products-composition-and-differentiation",
+          "thm-symmetry-of-higher-mixed-partials"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §4 Corollary 20 proof, printed p. 11; the finite Taylor subtraction is computed locally."
+            },
+            {
+              "title": "Ageno, Part III: Analysis of Partial Differential Equations",
+              "url": "https://giacomoageno.github.io/LectureNotesAPDE.pdf",
+              "locator": "Ageno §2.3.3, proof of Theorem 2.22, PDF pp. 25–27; independent comparison for the analytic reduction and majorant argument."
+            }
+          ]
+        },
+        "strategy": "Differentiate the finite Taylor polynomial explicitly; its mth normal derivative is zero. Translate every allowed jet slot by the corresponding analytic derivative of P. This is a finite analytic substitution near the actual initial jet."
+      },
+      {
+        "id": "lem-normal-form-pde-determines-a-unique-formal-taylor-series",
+        "kind": "lemma",
+        "title": "Formal recursion for solved analytic normal equations",
+        "statement": "For $m\\ge1$ and analytic $F$ near zero, the scalar zero-data equation $\\partial_t^mu=F(t,x,(\\partial_x^\\alpha\\partial_t^ju)_{|\\alpha|+j\\le m,\\ j<m})$ has a unique formal series $u\\in\\mathbb R\\lbrack\\lbrack x,t\\rbrack\\rbrack$ with $\\partial_t^ju(0,x)=0$ for $j<m$. For $m=1$ this also holds for finite systems $u_t=F(t,x,u,D_xu)$. No convergence is asserted. Analytic data reduce to this statement by subtraction of their normal Taylor polynomial.",
+        "deps": [
+          "lem-coefficient-majorisation-is-preserved-by-sums-products-composition-and-differentiation",
+          "lem-analytic-cauchy-data-reduce-to-zero-data-in-normal-form"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §4 Theorem 18 proof, equations (41)–(43), printed p. 9; higher-order recursion is expanded locally."
+            }
+          ]
+        },
+        "strategy": "Write u=sum a_q(x)t^q. Equate t^q: (q+m)!/q! a_(q+m) equals the t^q coefficient of F. Every allowed normal derivative has j<m, hence uses only a_l with l<=q+m-1. All inner jet series have zero total constant after zero-data reduction. Work in formal x-series, so differentiation in x never raises normal order."
+      },
+      {
+        "id": "lem-a-positive-majorant-system-dominates-the-formal-cauchy-recursion",
+        "kind": "lemma",
+        "title": "Positive majorants dominate the Cauchy recursion",
+        "statement": "Let $d,N\\ge1$ and $u_t=F(t,x,u,D_xu)$ have zero data, with $F(0)=0$ and every ordinary coefficient bounded in modulus by $Mr^{-q}$ at total degree q, where $M,r>0$. For $0<\\rho\\le1$ set $G(t,x,U,p)=M/((1-(\\sum_i x_i+t/\\rho+\\sum_jU_j)/r)(1-\\sum_{i,j}p_{ij}/r))-M$. Each component of F is majorised by G. If an analytic vector U solves $\\partial_tU_j=G(t,x,U,D_xU)$, has $U(0,0)=D_xU(0,0)=0$, and has nonnegative Taylor coefficients in its trace $U(0,x)$, then the zero-data formal solution u is majorised componentwise by U at the origin.",
+        "deps": [
+          "lem-coefficient-majorisation-is-preserved-by-sums-products-composition-and-differentiation",
+          "lem-an-analytic-germ-has-a-rational-geometric-majorant",
+          "lem-normal-form-pde-determines-a-unique-formal-taylor-series"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §4 equations (42)–(46), printed pp. 9–10. Origin values and the possibly nonzero initial trace are distinguished here."
+            }
+          ]
+        },
+        "strategy": "Induct on normal derivative count, for all tangential multi-indices together. The iterated product and chain rules have nonnegative integer coefficients; at the origin the inner jet centre remains zero. Nonzero positive initial tangential coefficients only increase the bound. For general F first replace u by u-t F(0), then recompute M,r for the transformed right-hand side."
+      },
+      {
+        "id": "lem-the-goursat-majorant-equation-has-a-convergent-positive-power-series-solution",
+        "kind": "lemma",
+        "title": "Convergence of the Goursat majorant",
+        "statement": "For integers $d,N\\ge1$ and $M,r>0$, choose $0<\\rho\\le1$ with $a=1-dNM\\rho/r>0$ and put $b=dN\\rho/r$. The equation $a q-bq^2=M/(1-y/r)-M$ has a unique analytic branch $q=g(y)$ through $(0,0)$ with nonnegative coefficients. The solution of $v^{\\prime}(\\sigma)=g(\\sigma/\\rho+Nv(\\sigma))$, $v(0)=0$, is analytic with nonnegative coefficients. Setting $U_j(t,x)=v(t+\\rho\\sum_i x_i)$ gives a convergent majorant system solution of the preceding lemma, with $U(0,0)=D_xU(0,0)=0$. Its initial trace $U(0,x)$ is nonnegative coefficientwise but need not vanish identically.",
+        "deps": [
+          "thm-real-analytic-inverse-and-implicit-function-theorems",
+          "lem-analytic-ordinary-differential-systems-by-coefficient-majorants",
+          "lem-a-positive-majorant-system-dominates-the-formal-cauchy-recursion"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §4 equations (47)–(52) and Remark 19, printed p. 10."
+            }
+          ]
+        },
+        "strategy": "At (y,q)=(0,0) the derivative in q is a>0. Positivity follows recursively from q=(b/a)q^2+(M/a)sum_{k>=1}(y/r)^k. Apply the earlier analytic ODE lemma. Direct substitution yields U_t=M/[(1-(sum x+t/rho+NU)/r)(1-dN U_x/r)]-M where each spatial derivative is rho v'. Shrink |sigma| and |sigma/rho+Nv| below their actual analytic radii; continuity keeps denominators nonzero. The trace v(rho sum x) majorises zero, but is not identically zero."
+      },
+      {
+        "id": "thm-cauchy-kovalevskaya-for-first-order-analytic-systems-in-normal-form",
+        "kind": "theorem",
+        "title": "Cauchy–Kovalevskaya for first-order analytic systems",
+        "statement": "Let $d,N\\ge1$, let $g:\\mathbb R^d\\to\\mathbb R^N$ be analytic near zero, and let F be analytic near $(0,0,g(0),Dg(0))$. Then $u_t=F(t,x,u,D_xu)$, $u(0,x)=g(x)$ has a unique real analytic solution germ at $(0,0)$. Existence holds on a nonempty neighborhood; uniqueness is among analytic germs.",
+        "deps": [
+          "lem-analytic-cauchy-data-reduce-to-zero-data-in-normal-form",
+          "lem-normal-form-pde-determines-a-unique-formal-taylor-series",
+          "lem-a-positive-majorant-system-dominates-the-formal-cauchy-recursion",
+          "lem-the-goursat-majorant-equation-has-a-convergent-positive-power-series-solution",
+          "thm-power-series-define-holomorphic-functions-in-several-variables"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §4 Theorem 18, printed pp. 9–10; Corollary 20 proof, p. 11, for nonzero analytic data."
+            },
+            {
+              "title": "Ageno, Part III: Analysis of Partial Differential Equations",
+              "url": "https://giacomoageno.github.io/LectureNotesAPDE.pdf",
+              "locator": "Ageno §2.3.3, proof of Theorem 2.22, PDF pp. 25–27; independent comparison for the analytic reduction and majorant argument."
+            }
+          ]
+        },
+        "strategy": "Subtract g and then t times the constant right-hand side at the centre. The positive Goursat solution bounds every formal coefficient on a smaller complex polydisc. Absolute convergence and termwise differentiation show the residual analytic series is zero. The formal recursion gives uniqueness, and real coefficients give a real solution."
+      },
+      {
+        "id": "lem-higher-order-analytic-normal-form-reduces-to-a-first-order-system",
+        "kind": "lemma",
+        "title": "Reduction of higher-order normal form with jet compatibility",
+        "statement": "For the scalar solved normal equation of order $m\\ge1$ with allowed jets $|\\alpha|+j\\le m$, $j<m$, introduce $U_\\beta$ for all $(d+1)$-multi-indices $|\\beta|\\le m-1$. With data $U_{(\\alpha,j)}(0,x)=\\partial_x^\\alpha g_j(x)$ there is an analytic first-order system involving only these U and their first spatial derivatives whose analytic solution satisfies $U_\\beta=D^\\beta U_0$. Thus this system and the original scalar equation with its m data are equivalent.",
+        "deps": [
+          "lem-normal-form-pde-determines-a-unique-formal-taylor-series",
+          "thm-cauchy-kovalevskaya-for-first-order-analytic-systems-in-normal-form",
+          "thm-symmetry-of-higher-mixed-partials",
+          "lem-analytic-ordinary-differential-systems-by-coefficient-majorants"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §4 Corollary 20 and proof, equations (53)–(57), printed p. 11. The compatibility recovery is proved by formal uniqueness below."
+            },
+            {
+              "title": "Ageno, Part III: Analysis of Partial Differential Equations",
+              "url": "https://giacomoageno.github.io/LectureNotesAPDE.pdf",
+              "locator": "Ageno §2.3.3, proof of Theorem 2.22 Step 1, equations (2.11)–(2.13), PDF p. 25."
+            }
+          ]
+        },
+        "strategy": "If |beta|<=m-2 set d_tU_beta=U_(beta+e_t). If |beta|=m-1 and beta_t<m-1 choose a spatial i with beta_i>0 and set d_tU_beta=d_i U_(beta-e_i+e_t). For beta=(m-1)e_t use F; express every order-m nonpure-normal derivative as d_iU_gamma. Set U_(alpha,j)(0,x)=d_x^alpha g_j(x). Construct the scalar formal recursion first: its formal derivatives solve this system. First-order formal uniqueness identifies them with Taylor series of the analytic system solution, proving U_beta=D^beta U_0 and independence of each chosen i."
+      },
+      {
+        "id": "thm-cauchy-kovalevskaya-for-a-noncharacteristic-analytic-cauchy-problem",
+        "kind": "theorem",
+        "title": "Cauchy–Kovalevskaya on a noncharacteristic analytic hypersurface",
+        "statement": "An analytic scalar PDE of total order $m\\ge1$, locally solved for the highest normal derivative on an analytic noncharacteristic hypersurface, has a unique local real analytic solution germ for prescribed analytic normal jets through order m-1. In solved coordinates the allowed right-hand jets satisfy $|\\alpha|+j\\le m$ and $j<m$. For an implicit fully nonlinear equation fix a compatible m-jet and require a nonzero derivative in the highest normal jet there; existence and uniqueness hold in its selected local implicit branch. The data are required to induce the lower and mixed components of that compatible jet. Normal jets are the symmetric Euclidean derivatives along the unit normal at the surface, or jets in a specified analytic transverse coordinate.",
+        "deps": [
+          "lem-analytic-noncharacteristic-hypersurfaces-flatten-to-a-coordinate-hyperplane",
+          "lem-analytic-cauchy-data-reduce-to-zero-data-in-normal-form",
+          "thm-cauchy-kovalevskaya-for-first-order-analytic-systems-in-normal-form",
+          "lem-higher-order-analytic-normal-form-reduces-to-a-first-order-system",
+          "lem-analytic-ordinary-differential-systems-by-coefficient-majorants"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §4 Corollary 20, printed p. 11, and §5 equations (61)–(68), pp. 12–13; the nonlinear selected-jet and normal-data conventions are explicit local extensions."
+            },
+            {
+              "title": "Ageno, Part III: Analysis of Partial Differential Equations",
+              "url": "https://giacomoageno.github.io/LectureNotesAPDE.pdf",
+              "locator": "Ageno §2.3.2, Theorem 2.22, PDF p. 24; complete proof §2.3.3, PDF pp. 25–27. That source is quasilinear; the local implicit-branch extension is derived here."
+            }
+          ]
+        },
+        "strategy": "Flatten analytically, using normal-line coordinates for symmetric Euclidean normal jets or the specified analytic transverse coordinate. Subtract the normal Taylor polynomial. Use F3 for the jet-system reduction and compatibility, F4 for analytic existence and uniqueness with at least one spatial variable, and F5 for the finite ODE case with no spatial variables. Recover the scalar solution and pull back by the analytic inverse, staying inside the selected compatible implicit branch."
+      },
+      {
+        "id": "rem-cauchy-kovalevskaya-is-an-analytic-not-smooth-well-posedness-theorem",
+        "kind": "remark",
+        "title": "The analytic existence and uniqueness boundary",
+        "statement": "[[thm-cauchy-kovalevskaya-for-a-noncharacteristic-analytic-cauchy-problem]] gives existence and uniqueness of analytic germs under its specified total-order and normal-order conditions. It does not assert an analytic solution for smooth nonanalytic initial data, or continuous dependence in any smooth topology. In particular an equation solved for a time derivative is not automatically in the required normal form: a right-hand derivative of higher total order violates that formulation. The proof above uses no recorded-not-proved CK result.",
+        "deps": [
+          "thm-cauchy-kovalevskaya-for-a-noncharacteristic-analytic-cauchy-problem"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §4 Example 21 and §5 characteristic discussion, printed pp. 11–14; the analytic-germ theorem above fixes the local scope."
+            },
+            {
+              "title": "Ageno, Part III: Analysis of Partial Differential Equations",
+              "url": "https://giacomoageno.github.io/LectureNotesAPDE.pdf",
+              "locator": "Ageno §2.3.3, proof of Theorem 2.22, PDF pp. 25–27; independent comparison for the analytic reduction and majorant argument."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 458.0002,
+    "id": "analytic-majorants-and-the-cauchy-kovalevskaya-theorem-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "Analytic Majorants and the Cauchy–Kovalevskaya Theorem: Examples",
+    "companion": "analytic-majorants-and-the-cauchy-kovalevskaya-theorem",
+    "requires": [
+      "analytic-majorants-and-the-cauchy-kovalevskaya-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-majorising-a-two-variable-analytic-germ-by-a-geometric-series",
+        "kind": "example",
+        "title": "A concrete geometric majorant",
+        "statement": "For $f(x,y)=x^2+1/(1-x-y)$ at the origin, $r=1/2$ and $M=2$ give $f\\ll2/(1-2x-2y)$.",
+        "deps": [
+          "def-coefficientwise-majorisation-of-multivariable-power-series",
+          "lem-an-analytic-germ-has-a-rational-geometric-majorant"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §3 Exercise 14, printed p. 8, supplies the geometric-majorant construction; this concrete polynomial perturbation and calculation are adapted locally."
+            }
+          ]
+        },
+        "strategy": "Expand the rational term: coefficient at x^a y^b is binomial(a+b,a). Compare with 2^(a+b+1)binomial(a+b,a), including the extra x^2 coefficient."
+      },
+      {
+        "id": "ex-cauchy-kovalevskaya-for-an-analytic-transport-equation",
+        "kind": "example",
+        "title": "Analytic transport data",
+        "statement": "For a fixed $a\\in\\mathbb R^d$ and analytic g near zero, the problem $u_t+a\\cdot D_xu=0$, $u(0,x)=g(x)$ has the analytic solution $u(t,x)=g(x-at)$ near zero.",
+        "deps": [
+          "thm-cauchy-kovalevskaya-for-first-order-analytic-systems-in-normal-form",
+          "lem-coefficient-majorisation-is-preserved-by-sums-products-composition-and-differentiation",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §5 transport discussion following Exercise 24, printed p. 14; the constant-vector solution is computed locally."
+            },
+            {
+              "title": "Ageno, Part III: Analysis of Partial Differential Equations",
+              "url": "https://giacomoageno.github.io/LectureNotesAPDE.pdf",
+              "locator": "Ageno §2.3.3, proof of Theorem 2.22, PDF pp. 25–27; independent comparison for the analytic reduction and majorant argument."
+            }
+          ]
+        },
+        "strategy": "Differentiate g(x-at); the terms cancel. The initial condition holds, and analytic uniqueness identifies this formula with CK."
+      },
+      {
+        "id": "ex-cauchy-kovalevskaya-for-a-second-order-normal-form",
+        "kind": "example",
+        "title": "A second-order normal system",
+        "statement": "For analytic g,h, the equation $u_{tt}=u_{xx}$ with data $u(0,x)=g(x)$, $u_t(0,x)=h(x)$ is equivalent to $u_t=v$, $v_t=w_x$, $w_t=v_x$, with data $(u,v,w)(0,x)=(g,h,g^{\\prime})$.",
+        "deps": [
+          "lem-higher-order-analytic-normal-form-reduces-to-a-first-order-system"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §4 Corollary 20 and equations (55)–(57), printed p. 11; scalar wave specialization computed locally."
+            },
+            {
+              "title": "Ageno, Part III: Analysis of Partial Differential Equations",
+              "url": "https://giacomoageno.github.io/LectureNotesAPDE.pdf",
+              "locator": "Ageno §2.3.3, proof of Theorem 2.22 Step 1, PDF p. 25; the wave instance is calculated locally."
+            }
+          ]
+        },
+        "strategy": "Compute (w-u_x)_t=v_x-v_x=0 and its zero initial value. Recover both the scalar wave equation and both prescribed jets."
+      },
+      {
+        "id": "cex-smooth-nonanalytic-data-need-not-have-an-analytic-solution",
+        "kind": "counterexample",
+        "title": "Smooth data do not force an analytic solution",
+        "statement": "Smooth initial data do not suffice for an analytic solution germ even for $u_t=0$. Define $g(0)=0$ and $g(x)=\\exp(-1/x^2)$ for $x\\ne0$. This g is smooth and nonanalytic at zero. The problem $u_t=0$, $u(0,x)=g(x)$ has the smooth solution u=g(x), but has no analytic solution germ at $(0,0)$.",
+        "deps": [
+          "def-real-analytic-germ-in-several-variables",
+          "thm-cauchy-kovalevskaya-for-first-order-analytic-systems-in-normal-form",
+          "thm-exponential-beats-every-polynomial",
+          "thm-derivative-of-exponential",
+          "thm-chain-rule",
+          "thm-algebra-of-derivatives",
+          "cor-exponential-reciprocal-and-positivity"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ageno, Part III: Analysis of Partial Differential Equations",
+              "url": "https://giacomoageno.github.io/LectureNotesAPDE.pdf",
+              "locator": "Ageno, §2.4.1, PDF p. 28, nonanalytic Cauchy-data limitation; the flat-function witness and its derivatives are proved locally."
+            }
+          ]
+        },
+        "strategy": "For x!=0, induction with the product and chain rules gives g^(m)(x)=P_m(1/x)exp(-1/x^2). Put y=1/x^2 and use exponential domination of every polynomial to make both this expression and its quotient by x tend to zero. Inductively every derivative exists at zero with value zero. Positivity away from zero contradicts equality to the zero Taylor series. Restriction of an analytic solution to t=0 would be analytic. The smooth solution g(x) still exists."
+      },
+      {
+        "id": "cex-a-characteristic-analytic-surface-does-not-determine-the-normal-jet",
+        "kind": "counterexample",
+        "title": "Characteristic analytic data may be nonunique or incompatible",
+        "statement": "Analytic Cauchy data on a characteristic analytic surface need not determine a unique analytic solution or even admit a solution. For $u_x=0$ in $(x,t)$ on the surface t=0, zero trace data have infinitely many analytic solutions, while trace $u(x,0)=x$ admits no differentiable solution near zero.",
+        "deps": [
+          "def-characteristic-covector-hypersurface-and-noncharacteristic-data",
+          "thm-cauchy-kovalevskaya-for-a-noncharacteristic-analytic-cauchy-problem"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §5 transport discussion after Exercise 24, printed p. 14."
+            }
+          ]
+        },
+        "strategy": "The principal symbol is xi_x, zero at dt. The solutions 0 and t give nonuniqueness. Differentiating the prescribed trace x contradicts u_x=0."
+      },
+      {
+        "id": "cex-analytic-heat-data-can-have-divergent-time-taylor-series",
+        "kind": "counterexample",
+        "title": "Analytic heat data need not give a time-analytic germ",
+        "statement": "Analytic initial data alone do not guarantee time-analytic solvability of $u_t=u_{xx}$. For $u(0,x)=1/(1+x^2)$, any analytic solution at zero would have $\\partial_t^ku(0,0)=(-1)^k(2k)!$ for every k, and its time Taylor series would have radius zero.",
+        "deps": [
+          "lem-normal-form-pde-determines-a-unique-formal-taylor-series",
+          "rem-cauchy-kovalevskaya-is-an-analytic-not-smooth-well-posedness-theorem",
+          "thm-symmetry-of-higher-mixed-partials",
+          "thm-geometric-series",
+          "def-characteristic-covector-hypersurface-and-noncharacteristic-data"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf",
+              "locator": "Gantumur, §4 Example 21, printed p. 11."
+            },
+            {
+              "title": "Ageno, Part III: Analysis of Partial Differential Equations",
+              "url": "https://giacomoageno.github.io/LectureNotesAPDE.pdf",
+              "locator": "Ageno §2.4.1, first bullet, PDF p. 28, datum 1/(1+x²)."
+            }
+          ]
+        },
+        "strategy": "The coefficient is (-1)^k(2k)!/k!. The ratio of successive absolute coefficients is (2k+2)(2k+1)/(k+1), tending to infinity. This equation has total order two; t=0 is characteristic, so this contradicts no CK hypothesis."
+      },
+      {
+        "id": "cex-analytic-elliptic-cauchy-solutions-lack-smooth-continuous-dependence",
+        "kind": "counterexample",
+        "title": "Hadamard instability despite analytic solvability",
+        "statement": "For positive integers k the harmonic analytic functions $u_k(x,t)=e^{-\\sqrt{k}}\\sinh(kt)\\cos(kx)/k$ have zero value data and normal data $e^{-\\sqrt{k}}\\cos(kx)$ tending to zero in every $C^j$ seminorm on compact x-intervals, but $u_k(0,t)\\to+\\infty$ for every fixed t>0. Thus analytic solvability gives no continuous solution map from that smooth-data topology to pointwise evaluation at any positive time.",
+        "deps": [
+          "thm-cauchy-kovalevskaya-for-a-noncharacteristic-analytic-cauchy-problem",
+          "thm-exponential-beats-every-polynomial",
+          "thm-sine-and-cosine-derivatives",
+          "thm-derivative-of-exponential",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "lem-exponential-series-has-infinite-radius",
+          "lem-sine-and-cosine-series-converge-everywhere",
+          "lem-coefficient-majorisation-is-preserved-by-sums-products-composition-and-differentiation"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Ageno, Part III: Analysis of Partial Differential Equations",
+              "url": "https://giacomoageno.github.io/LectureNotesAPDE.pdf",
+              "locator": "Ageno, §2.4.1 Hadamard example, PDF pp. 28–29. The factor exp(-sqrt(k)) is a local strengthening making all fixed derivative seminorms tend to zero."
+            }
+          ]
+        },
+        "strategy": "Differentiate twice to obtain u_tt+u_xx=0. Each fixed data derivative has bound k^j exp(-sqrt(k))->0; u_k(0,t) grows like exp(kt-sqrt(k))/(2k). Use sinh(s)=(exp(s)-exp(-s))/2. Put z=sqrt(k) to apply polynomial domination to z^(2j)exp(-z); for each fixed t>0, eventually kt-sqrt(k)>kt/2, so the solution diverges."
+      }
+    ]
+  },
+  {
+    "order": 458.0021,
+    "id": "euclidean-surface-measure-divergence-and-green-identities",
+    "kind": "A",
+    "category": "pde",
+    "title": "Euclidean Surface Measure, Divergence, and Green Identities",
+    "companion": "euclidean-surface-measure-divergence-and-green-identities-examples",
+    "requires": [
+      "lebesgue-measure-on-euclidean-space",
+      "the-lebesgue-integral-and-the-convergence-theorems",
+      "product-measures-and-the-fubini-tonelli-theorems",
+      "fubini-and-change-of-variables",
+      "the-fundamental-theorems-of-calculus",
+      "inner-product-spaces-and-orthogonality",
+      "smooth-partitions-of-unity-and-exhaustions",
+      "radon-measures-and-the-riesz-markov-kakutani-theorem"
+    ],
+    "items": [
+      {
+        "id": "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+        "kind": "definition",
+        "title": "Bounded C1 domains and their outward normals",
+        "statement": "Throughout this surface-integration page assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]) for the earlier Lebesgue and polar measure machinery. Let $n\\ge2$. A bounded $C^1$ domain is a nonempty bounded open set $\\Omega\\subset\\mathbb R^n$ whose boundary is locally, after a rigid change of coordinates, the graph $z=h(y)$ of a $C^1$ function, with $\\Omega$ locally exactly the subgraph $z<h(y)$. Connectedness is not required. The outward normal in these coordinates is $\\nu=(-Dh,1)/\\sqrt{1+|Dh|^2}$, transported by the orthogonal coordinate map. Its overlap agreement is justified with surface charts below.\n\nThe convention $F\\in C^1(\\overline\\Omega)$ means F is continuously differentiable in $\\Omega$, and F and its first derivatives extend continuously to its closure. For $C^2$ require the same for derivatives through order two. No ambient extension across the boundary is required. Derivatives use [[def-total-derivative-in-euclidean-space]]; products are the real Euclidean inner products of [[def-inner-product-space]]. Write $\\operatorname{div}F=\\sum_i\\partial_iF_i$, $Du=(\\partial_iu)_i$ and $\\Delta u=\\sum_i\\partial_i^2u$.",
+        "deps": [
+          "def-total-derivative-in-euclidean-space",
+          "def-inner-product-space",
+          "def-countable-choice"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter, §1.10 Definitions 1.34–1.35 and §1.10.3, printed pp. 13–16 (PDF pp. 19–22). Interior-up-to-boundary regularity is the local convention."
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-surface-integral-is-independent-of-c-one-boundary-charts"
+        ]
+      },
+      {
+        "id": "lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound",
+        "kind": "lemma",
+        "title": "Compactly supported scaled Euclidean bumps",
+        "statement": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge1$ there is a fixed smooth $b:\\mathbb R^n\\to[0,1]$, equal to one on $\\overline B_1(0)$ and with support contained in $B_2(0)$. For $a\\in\\mathbb R^n,r>0$, $b_{a,r}(x)=b((x-a)/r)$ satisfies $\\int|Db_{a,r}|=C_nr^{n-1}$, where $C_n=\\int|Db|<\\infty$. For every $0<r<R$ one can instead obtain a smooth bump equal to one on $\\overline B_r(a)$ and supported strictly inside $B_R(a)$.",
+        "deps": [
+          "def-the-standard-smooth-step-function",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-algebra-of-derivatives",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-monotone-convergence-for-the-integral",
+          "def-countable-choice"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter, §1.9.1 Theorem 1.29 and Example 1.30, printed p. 12. The strict support margin and exact gradient scaling are computed locally."
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "Oh §3.9, Proposition 3.23 and its complete local graph and partition proof, printed/PDF pp. 47–48.",
+              "original_url": "https://web.math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf"
+            }
+          ]
+        },
+        "strategy": "Choose r<s<R and put b(x)=sigma((s^2-|x|^2)/(s^2-r^2)). This is one on the closed r-ball and zero for |x|>=s; its support is contained in the closed s-ball, hence strictly inside B_R. Use r=1,s=3/2,R=2 for a fixed bump. Its derivative is bounded on a compact ball; linear change of variables and Db_(a,r)=r^(-1)Db((x-a)/r) give the exact gradient scaling. This proves the needed support margin directly from the smooth step function."
+      },
+      {
+        "id": "lem-finite-ambient-partitions-for-euclidean-boundary-integration",
+        "kind": "lemma",
+        "title": "Finite ambient partitions near compact sets",
+        "statement": "Under the page measure convention, if a finite family of open sets $U_j\\subset\\mathbb R^n$ covers compact K, there are smooth nonnegative $\\chi_j$ with compact support in $U_j$ such that $\\sum_j\\chi_j=1$ on a neighborhood of K. These are ambient smooth functions, also when K is only a $C^1$ hypersurface.",
+        "deps": [
+          "lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound",
+          "thm-heine-borel-rn",
+          "thm-algebra-of-derivatives",
+          "def-the-standard-smooth-step-function"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter, §1.9.2 Theorem 1.31, printed pp. 12–13. A finite normalized-bump construction is supplied here."
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "Oh §3.9, Proposition 3.23 and its complete local graph and partition proof, printed/PDF pp. 47–48.",
+              "original_url": "https://web.math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf"
+            }
+          ]
+        },
+        "strategy": "If K is empty take all functions zero. Otherwise for each point of K choose nested balls whose outer closed balls lie in some U_j. Use the preceding bumps and compactness to select finitely many positive bumps whose sum s is positive near K. Choose 0<c<min_K s and set theta=sigma((s-c/2)/(c/2)). Then theta=1 near K and its support lies in the compact set {s>=c/2}, inside {s>0}. The functions theta b_l/s, extended by zero, are smooth and sum to one near K; group them by U_j. Every support has a strict margin inside its assigned U_j. These are ambient functions, not smooth functions on a merely C1 manifold."
+      },
+      {
+        "id": "def-surface-integral-on-a-compact-c-one-hypersurface",
+        "kind": "definition",
+        "title": "Surface integration on compact C1 hypersurfaces",
+        "statement": "Assume the $\\mathrm{AC}_\\omega$ convention of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]]. Let S be a compact embedded $C^1$ hypersurface in $\\mathbb R^n$, $n\\ge2$. Choose finitely many regular injective $C^1$ parametrizations $X_j:V_j\\to S\\cap O_j$ with $C^1$ coordinate transitions, and an ambient partition $\\chi_j$ from [[lem-finite-ambient-partitions-for-euclidean-boundary-integration]], with supports compactly contained in the corresponding chart neighborhoods. Put $J_{X_j}=\\sqrt{\\det(DX_j^TDX_j)}$, using [[def-gram-matrix-and-gram-determinant]].\n\nFor a nonnegative Borel f on S define $\\int_S f\\,dS=\\sum_j\\int_{V_j}(\\chi_j f)(X_j(y))J_{X_j}(y)\\,dy$, where the integrals on the right are those of [[def-nonnegative-lebesgue-integral]] and $0\\cdot\\infty=0$. Set $S(A)=\\int_S\\mathbf1_A\\,dS$ for Borel A. For signed f with $\\int_S|f|\\,dS<\\infty$ use the difference of the positive and negative integrals. The same chart formula restricts to a compact Borel face contained in a regular patch. The empty surface has zero integral. Independence and finiteness are established by the following chart-independence lemma.",
+        "deps": [
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "lem-finite-ambient-partitions-for-euclidean-boundary-integration",
+          "def-gram-matrix-and-gram-determinant",
+          "def-nonnegative-lebesgue-integral"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter, §1.10.2, printed p. 15 (PDF p. 21), Gram surface density and partition patching."
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-surface-integral-is-independent-of-c-one-boundary-charts"
+        ]
+      },
+      {
+        "id": "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+        "kind": "lemma",
+        "title": "Borel change of variables from the compact-support formula and Radon uniqueness",
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $m\\ge1$, let U,V be open subsets of $\\mathbb R^m$, and let $T:U\\to V$ be a $C^1$ diffeomorphism. For every nonnegative Borel $h:V\\to[0,\\infty]$, $\\int_V h(y)\\,dy=\\int_U h(T(x))|\\det DT(x)|\\,dx$, with equality in $[0,\\infty]$ and $0\\cdot\\infty=0$. This statement concerns Borel h; no completed-measurable substitution is asserted.",
+        "deps": [
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "cor-second-countable-lch-locally-finite-borel-measures-are-regular",
+          "thm-rmk-uniqueness-among-radon-measures",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-continuous-preimages-of-borel-sets-are-borel",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values",
+          "def-countable-choice",
+          "cor-change-of-variables-for-compactly-supported-functions",
+          "thm-continuous-on-a-rectangle-is-riemann-integrable",
+          "thm-multidimensional-darboux-equals-riemann",
+          "def-multidimensional-darboux-sums",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter, §1.11 Theorem 1.44, printed p. 17 (PDF p. 23), for the substitution statement. The Darboux bridge and Radon-uniqueness proof below are local, and do not consume the defective published compact-support Lebesgue or measurable-C1 proofs."
+            }
+          ]
+        },
+        "strategy": "First establish the continuous compact-support Lebesgue formula locally, without consuming lem-c-one-change-of-variables-for-continuous-compactly-supported-integrands. For any continuous compactly supported real k on an open Euclidean set, its zero extension is continuous: its compact support has a neighborhood inside the domain, and outside that support it vanishes. Choose a nondegenerate bounding box Q. The continuous-on-a-rectangle theorem makes the extension Riemann integrable. For each grid partition of Q disjointify its closed cells along their coordinate faces. The lower and upper Borel step functions from cell infima and suprema bound k; faces have zero Lebesgue measure and each cell has its geometric volume, so the two step integrals equal the Darboux sums. After adding a constant if necessary, monotonicity traps the Lebesgue integral between those sums. Darboux equals Riemann makes their gap arbitrarily small; subtract the constant using linearity. Thus the two integrals of k agree. Given f in C_c(V), both its zero extension and the zero extension of (f composed T)|det DT| are continuous compactly supported: the latter support is contained in the compact T inverse(supp f). The published Riemann compact-support substitution corollary applies to the zero extension of f, and the just-proved comparison on bounding boxes identifies both sides with their Lebesgue integrals. This proves the needed continuous compact-support substitution identity from adequate earlier results. On B(U), define mu(A)=lambda_m(T(A)) and nu(A)=integral_A |det DT|d lambda_m. A homeomorphism maps Borel sets to Borel sets, so mu is a Borel measure; nu is a Borel measure by the indefinite-integral theorem. Both are finite on compact sets: T(K) is compact and |det DT| is continuous and bounded on K. Each point of U has a relatively compact Euclidean neighborhood, so compact-finiteness gives local finiteness; second-countable LCH regularity makes both measures Radon. Before using test functions, prove two integration identities: integral_U psi dmu=integral_V psi(T inverse(y))d lambda_m and integral_U psi dnu=integral_U psi|det DT|d lambda_m for nonnegative Borel psi. In each case check indicators from the definition of the measure, extend to nonnegative simple functions, and pass to explicit dyadic increasing simple approximations by monotone convergence; the dyadic level sets are Borel. Split positive and negative parts for integrable real psi. For phi in C_c(U), the first identity and the continuous compact-support substitution formula just proved locally applied to phi composed with T inverse yield integral phi dmu=integral phi dnu. Radon uniqueness gives mu=nu on B(U). For Borel h>=0 on V, use the first identity with psi=h composed with T, replace mu by nu, and use the second identity; measurability of the final product follows from the arithmetic-measurability theorem. This proves precisely the Borel interface needed below without invoking the defective published measurable-C1 proof.",
+        "axiom_strength": "AC_omega is inherited from the Lebesgue/Radon infrastructure; no stronger choice principle is added"
+      },
+      {
+        "id": "lem-surface-integral-is-independent-of-c-one-boundary-charts",
+        "kind": "lemma",
+        "title": "Chart and partition independence of surface measure",
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Every regular chart density is continuous and strictly positive. The chart integral on a compact embedded $C^1$ hypersurface defines a finite Borel measure independent of the finite charts and subordinate partitions. In graph coordinates $X(y)=(y,h(y))$ its density is $\\sqrt{1+|Dh|^2}$. On a one-sided domain boundary the outward unit normal agrees on chart overlaps and is continuous.",
+        "deps": [
+          "def-surface-integral-on-a-compact-c-one-hypersurface",
+          "thm-gram-determinant-detects-linear-independence",
+          "thm-determinant-multiplicative",
+          "thm-determinant-of-transpose",
+          "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter, §1.10.2–1.10.3, printed pp. 15–16, Gram density and graph normal. Overlap independence is proved by the full determinant and Borel substitution calculation."
+            }
+          ]
+        },
+        "strategy": "For X=Y composed T on an overlap, DX^T DX=DT^T(DY^T DY)DT, so its square-root determinant gains |det DT|. Use dimension-(n-1) change of variables and insert product partitions. Graph Gram matrix is I+Dh(Dh)^T, whose determinant is 1+|Dh|^2 by choosing an orthonormal basis with first direction Dh (zero case separately). Finite compact chart refinements give finiteness. Orientation comes from the actual open-set side."
+      },
+      {
+        "id": "lem-local-graph-flux-from-fubini-and-the-fundamental-theorem",
+        "kind": "lemma",
+        "title": "The local graph flux calculation",
+        "statement": "Assume $\\mathrm{AC}_\\omega$. In a graph cylinder $Q\\times(a,b)$ with $h\\in C^1(Q)$ and $a<h<b$, suppose $\\Omega$ locally is $z<h(y)$ and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$ is localized with support compactly contained in the cylinder. Then $\\int_\\Omega\\operatorname{div}F=\\int_Q(F_n(y,h(y))-\\sum_{i<n}F_i(y,h(y))\\partial_i h(y))\\,dy$. An interior compactly supported C1 vector field has integral divergence zero.",
+        "deps": [
+          "lem-surface-integral-is-independent-of-c-one-boundary-charts",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-newton-leibniz-with-interior-derivative",
+          "thm-differentiation-under-the-integral-sign",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-algebra-of-derivatives"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter §1.12, printed pp. 17–18 (PDF pp. 23–24)."
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "Oh §3.9, Proposition 3.23 and its complete local graph and partition proof, printed/PDF pp. 47–48.",
+              "original_url": "https://web.math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf"
+            }
+          ]
+        },
+        "strategy": "Integrate the normal derivative from a fixed lower cylinder face where F vanishes to h(y). For i<n differentiate integral_a^h(y) F_i(y,z)dz: its integral derivative over the base is zero and its endpoint term is F_i(y,h)d_i h. If F is only C1 up to the boundary, first use h(y)-epsilon then pass to the boundary by uniform continuity of F and its derivatives. Extend localized field by zero only across the cylinder sides where it vanishes. Sum the n component identities."
+      },
+      {
+        "id": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+        "kind": "theorem",
+        "title": "Divergence on a bounded C1 Euclidean domain",
+        "statement": "Assume $\\mathrm{AC}_\\omega$. For $n\\ge2$, a bounded $C^1$ domain Omega and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, $\\int_\\Omega\\operatorname{div}F\\,dx=\\int_{\\partial\\Omega}F\\cdot\\nu\\,dS$. Both integrals are finite, with the continuous interior derivative convention and the outward normal on every boundary component.",
+        "deps": [
+          "lem-surface-integral-is-independent-of-c-one-boundary-charts",
+          "lem-finite-ambient-partitions-for-euclidean-boundary-integration",
+          "lem-local-graph-flux-from-fubini-and-the-fundamental-theorem",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-algebra-of-derivatives",
+          "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter §1.12 Theorem 1.46, printed pp. 17–18 (PDF pp. 23–24)."
+            },
+            {
+              "title": "Sung-Jin Oh, Lecture Notes for Math 222A",
+              "url": "https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf",
+              "locator": "Oh §3.9, Proposition 3.23 and its complete local graph and partition proof, printed/PDF pp. 47–48.",
+              "original_url": "https://web.math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf"
+            }
+          ]
+        },
+        "strategy": "Cover closure Omega by finitely many boundary cylinders and an interior open set, use the ambient partition, and apply the local graph identity to chi_j F. Summing product rules cancels sum Dchi_j=0. Compactness bounds F, DF, and boundary area. No general Stokes theorem or future distribution theorem is used."
+      },
+      {
+        "id": "def-bounded-piecewise-c-one-euclidean-domain",
+        "kind": "definition",
+        "title": "Specified finite piecewise C1 boundary presentations",
+        "statement": "Under the $\\mathrm{AC}_\\omega$ convention of [[def-bounded-c-one-domain-boundary-charts-and-outward-normal]], a finite piecewise $C^1$ presentation of a nonempty bounded open $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, consists of compact faces $S_1,\\ldots,S_q$ covering its boundary, each a compact Borel subset of a regular $C^1$ hypersurface patch, and a compact edge set $E\\subset\\partial\\Omega$. Require $S_j\\cap E$ to have surface measure zero in each face, using [[lem-surface-integral-is-independent-of-c-one-boundary-charts]]. E contains the boundaries of the faces relative to their patches and every overlap $S_i\\cap S_j$, i different from j. At every point outside E the domain boundary is locally a single $C^1$ graph with Omega on one side. Each face carries this actual outward unit normal off E. Values assigned to the normal on E do not affect its integral.\n\nFor a specified finite gluing also list the open pieces with disjoint interiors, the shared faces, and their opposite outward normals. Require the pieces to cover the final domain up to their boundary faces, and the exposed faces to give its specified presentation. Internal faces are counted twice before cancellation, once from each side. The phrase piecewise smooth by itself supplies none of this data.",
+        "deps": [
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "lem-surface-integral-is-independent-of-c-one-boundary-charts"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter §1.12, printed p. 18, mentions the piecewise extension. The exact finite-face/null-edge class is the explicit local presentation retained in the batch design."
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-surface-null-edges-admit-small-gradient-cutoffs",
+        "kind": "lemma",
+        "title": "Cutoffs around surface-null edges",
+        "statement": "Assume $\\mathrm{AC}_\\omega$ and $n\\ge2$. Let E be a compact subset of finitely many compact regular $C^1$ hypersurface patches, with its intersection with each patch surface-null. For every $\\varepsilon>0$ there is smooth $0\\le\\eta\\le1$, equal to one near E, supported within distance epsilon of E, such that $\\int_{\\mathbb R^n}|D\\eta|<\\varepsilon$. These cutoffs can be chosen with support volume tending to zero as epsilon tends to zero.",
+        "deps": [
+          "lem-surface-integral-is-independent-of-c-one-boundary-charts",
+          "lem-closed-open-and-cubic-covers-give-the-same-lebesgue-outer-measure",
+          "lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound",
+          "thm-linear-change-of-variables-for-lebesgue-measure",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter §1.10.2 and §1.12, printed pp. 15–18, for the surface convention and motivation only. The complete cube-cover and scaled-bump argument is local, as retained in research/phase-2-local-mathematical-repairs-2026-09-08.md, §PDE-2D."
+            }
+          ]
+        },
+        "strategy": "Complete local proof: refine to finitely many parameter boxes with bounded chart derivatives and surface density bounded below. Cubic null covers give ambient balls centered on E with r_j<delta and sum r_j^(n-1)<a; compactness gives a finite cover. Set b_j(x)=b((x-c_j)/r_j) for the existing bump b, and eta=1-product(1-b_j). Then integral|Deta| <= K sum r_j^(n-1), where K=integral|Db|, while support volume <= 2^n volume(B_1) delta sum r_j^(n-1). Choose delta<epsilon/4 and a<epsilon/(2 max(1,K)). Empty E uses eta=0. Full chart-cover and finite-choice details: research/phase-2-local-mathematical-repairs-2026-09-08.md. Hunter supplies background conventions, not the omitted proof of this exact lemma."
+      },
+      {
+        "id": "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+        "kind": "theorem",
+        "title": "Divergence for finite piecewise C1 presentations",
+        "statement": "Assume $\\mathrm{AC}_\\omega$. If Omega has the specified finite piecewise $C^1$ presentation and $F\\in C^1(\\overline\\Omega;\\mathbb R^n)$, then $\\int_\\Omega\\operatorname{div}F=\\sum_j\\int_{S_j}F\\cdot\\nu_j\\,dS$, with faces counted once off E. All integrals are finite. In a specified finite gluing, the two fluxes on every shared face cancel.",
+        "deps": [
+          "def-bounded-piecewise-c-one-euclidean-domain",
+          "lem-surface-null-edges-admit-small-gradient-cutoffs",
+          "lem-finite-ambient-partitions-for-euclidean-boundary-integration",
+          "lem-local-graph-flux-from-fubini-and-the-fundamental-theorem",
+          "thm-dominated-convergence",
+          "thm-algebra-of-derivatives",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+          "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter §1.12, printed p. 18, for the stated piecewise extension; the edge-error limit is proved locally under the exact finite presentation."
+            }
+          ]
+        },
+        "strategy": "Apply the local graph calculation to (1-eta_epsilon)F, whose boundary support avoids the edges, then partition finitely. The omitted bulk divergence tends to zero by dominated convergence, the cutoff error is bounded by ||F||infinity integral|Deta|, and the boundary flux converges by finite area and surface-nullity of E. In a finite decomposition sum the piece identities; opposite normals cancel shared faces. Do not claim a finite decomposition into globally C1 domains for boxes."
+      },
+      {
+        "id": "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+        "kind": "lemma",
+        "title": "Agreement with the existing polar sphere measure",
+        "statement": "Assume $\\mathrm{AC}_\\omega$ and $n\\ge2$. The chart surface measure on $S^{n-1}$ equals the polar measure $\\sigma$. Orthogonal transformations preserve it. The map $\\omega\\mapsto a+R\\omega$, $R>0$, multiplies surface measure by $R^{n-1}$, and $|S^{n-1}|=n|B_1|$.",
+        "deps": [
+          "lem-surface-integral-is-independent-of-c-one-boundary-charts",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter §1.11, Proposition 1.45 and its preceding sphere parametrization, printed pp. 16–17 (PDF pp. 22–23). The identification with the existing cone-defined measure is proved here."
+            }
+          ]
+        },
+        "strategy": "On a sphere patch use (r,y)->rX(y). Since X is a unit vector orthogonal to all tangent derivatives, the Jacobian modulus is r^(n-1)sqrt(det(DX^T DX)). Sum a partition to obtain the polar formula for this chart measure; apply the uniqueness clause of the earlier polar theorem. Alternatively apply the cone set formula patchwise."
+      },
+      {
+        "id": "def-classical-normal-derivative",
+        "kind": "definition",
+        "title": "Classical normal derivative",
+        "statement": "For a bounded $C^1$ domain $\\Omega$ and $u\\in C^1(\\overline\\Omega)$, the classical normal derivative is $\\partial_\\nu u(x)=Du(x)\\cdot\\nu(x)$ on $\\partial\\Omega$. Here Du is the continuous extension of the interior gradient and $\\nu$ is the outward unit normal. For a specified finite piecewise $C^1$ presentation define the same expression on each face off its edge set E; arbitrary values on E do not change a surface integral. This definition uses a classical continuous trace, and asserts neither a Sobolev trace nor a conormal derivative.",
+        "deps": [
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "def-bounded-piecewise-c-one-euclidean-domain"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter §2.5, immediately before Theorem 2.23, printed p. 32 (PDF p. 38)."
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-first-green-identity-on-a-bounded-c-one-domain",
+        "kind": "corollary",
+        "title": "First Green identity",
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Let $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, be a bounded $C^1$ domain or have the specified finite piecewise $C^1$ presentation. For real $u\\in C^2(\\overline\\Omega)$ and $v\\in C^1(\\overline\\Omega)$, $$\\int_\\Omega(v\\Delta u+Du\\cdot Dv)\\,dx=\\int_{\\partial\\Omega}v\\partial_\\nu u\\,dS.$$ In the piecewise case the right side is the sum over faces, counted once off E. All integrals are finite.",
+        "deps": [
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "def-classical-normal-derivative",
+          "thm-algebra-of-derivatives"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter §2.5, Theorem 2.23, equation (2.11) and its proof, printed p. 32 (PDF p. 38); the weaker C1 assumption on v follows from the displayed product computation."
+            }
+          ]
+        },
+        "strategy": "Apply divergence to v Du and expand each component by the product rule. The stated up-to-boundary regularity ensures all terms are bounded and all integrals finite."
+      },
+      {
+        "id": "cor-second-green-identity-on-a-bounded-c-one-domain",
+        "kind": "corollary",
+        "title": "Second Green identity",
+        "statement": "Assume $\\mathrm{AC}_\\omega$. For a bounded $C^1$ domain $\\Omega\\subset\\mathbb R^n$, $n\\ge2$, or the specified finite piecewise $C^1$ class, and real $u,v\\in C^2(\\overline\\Omega)$, $$\\int_\\Omega(v\\Delta u-u\\Delta v)\\,dx=\\int_{\\partial\\Omega}(v\\partial_\\nu u-u\\partial_\\nu v)\\,dS.$$ The face convention and finiteness are those of the first Green identity; every normal is outward from Omega, including normals on holes.",
+        "deps": [
+          "cor-first-green-identity-on-a-bounded-c-one-domain"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter §2.5, Theorem 2.23, equation (2.12) and proof, printed p. 32 (PDF p. 38)."
+            }
+          ]
+        },
+        "strategy": "Subtract the two first Green identities; real Euclidean gradient dot products cancel. Keep the outward orientation on every component, including holes."
+      },
+      {
+        "id": "rem-euclidean-divergence-versus-classical-and-manifold-stokes",
+        "kind": "remark",
+        "title": "Euclidean divergence and the Stokes comparison",
+        "statement": "The Euclidean results here prove the divergence identity in every dimension $n\\ge2$ from graph integration, a finite partition, and explicit edge cutoffs. The earlier three-dimensional finite-gluing vector-calculus result is a narrower comparison. In the later smooth differential-form setting, the flux form $\\iota_F(dx_1\\wedge\\cdots\\wedge dx_n)$ has exterior derivative $(\\operatorname{div}F)dx_1\\wedge\\cdots\\wedge dx_n$, so manifold Stokes specializes to the smooth-boundary formula. That comparison supplies no dependency for this proof. Neither rough-boundary divergence nor Sobolev traces are asserted here.",
+        "deps": [
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter §1.12, Theorem 1.46 and ensuing discussion, printed pp. 17–18 (PDF pp. 23–24). The manifold comparison is a forward explanatory comment, not a theorem used in this batch."
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 458.0022,
+    "id": "euclidean-surface-measure-divergence-and-green-identities-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "Euclidean Surface Measure, Divergence, and Green Identities: Examples",
+    "companion": "euclidean-surface-measure-divergence-and-green-identities",
+    "requires": [
+      "euclidean-surface-measure-divergence-and-green-identities"
+    ],
+    "items": [
+      {
+        "id": "ex-surface-density-and-outward-normal-on-a-graph",
+        "kind": "example",
+        "title": "Graph density and outward orientation",
+        "statement": "For a subgraph $z<h(y)$ in $\\mathbb R^n$, the boundary chart $X(y)=(y,h(y))$ has $dS=\\sqrt{1+|Dh|^2}\\,dy$ and $\\nu\\,dS=(-Dh,1)\\,dy$. If $h(y)=a\\cdot y+b$, both factors are constant. In $\\mathbb R^3$, the patch $h(y_1,y_2)=2y_1-y_2+3$, $0<y_1,y_2<1$, has area $\\sqrt6$ and upward flux 1 for $F=e_3$. Assume the surface-measure convention $\\mathrm{AC}_\\omega$.",
+        "deps": [
+          "lem-surface-integral-is-independent-of-c-one-boundary-charts"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter §1.10.3, graph surface element and Example 1.43, printed p. 16 (PDF p. 22). The affine numerical instance is computed here."
+            }
+          ]
+        },
+        "strategy": "Compute DX^TDX=I+Dh(Dh)^T and dot the proposed normal with (e_i,d_i h); the final component points out of the subgraph."
+      },
+      {
+        "id": "ex-divergence-theorem-on-a-ball-in-rn",
+        "kind": "example",
+        "title": "Flux and scaling on balls",
+        "statement": "Assume $\\mathrm{AC}_\\omega$, $n\\ge2$, and $R>0$. On $B_R(a)$, $F(x)=x-a$ gives $|\\partial B_R(a)|=n|B_R(a)|/R=R^{n-1}|S^{n-1}|$. Constant vector fields have zero total flux. If $f\\in C^1((0,R])$ and $F(x)=f(|x-a|)(x-a)$ admits a C1 extension to the closed ball, its flux is $f(R)R|\\partial B_R(a)|$.",
+        "deps": [
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "lem-euclidean-chart-measure-agrees-with-polar-surface-measure"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter §§1.10.2–1.11, sphere element and Proposition 1.45, printed pp. 16–17, and §1.12 Theorem 1.46, printed p. 17 (PDF pp. 22–23). These radial-field instances are evaluated directly."
+            }
+          ]
+        },
+        "strategy": "The outward normal is (x-a)/R. Compute divergence of the radial field as n f(r)+r f'(r) away from the centre and use its assumed C1 extension. Apply divergence and the polar comparison."
+      },
+      {
+        "id": "ex-internal-face-cancellation-for-two-glued-regions",
+        "kind": "example",
+        "title": "Internal faces cancel for glued boxes",
+        "statement": "Assume $\\mathrm{AC}_\\omega$ and $n\\ge2$. The boxes $Q_-=(-1,0)\\times(0,1)^{n-1}$ and $Q_+=(0,1)\\times(0,1)^{n-1}$ glue to $Q=(-1,1)\\times(0,1)^{n-1}$ up to their common face. For $F\\in C^1(\\overline Q;\\mathbb R^n)$ their divergence identities sum to the identity on Q because the common fluxes cancel. The same calculation applies after replacing the coordinate intervals by arbitrary positive-length adjacent intervals.",
+        "deps": [
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter §1.12, discussion following Theorem 1.46, printed p. 18 (PDF p. 24). The faces and field calculation below make the finite-gluing instance explicit."
+            }
+          ]
+        },
+        "strategy": "List their 2n faces with outward normals plus or minus e_i. Their shared face has equal area elements and opposite normals. Parameter boundaries have Lebesgue measure zero; intersections contribute no surface integral."
+      },
+      {
+        "id": "cex-reversing-boundary-orientation-reverses-flux",
+        "kind": "counterexample",
+        "title": "The wrong normal gives the wrong sign",
+        "statement": "The claim that the divergence formula remains valid with the inward unit normal is false. A witness is $F(x)=x$ on $B_R(0)\\subset\\mathbb R^n$, $n\\ge2$, $R>0$: the inward flux is $-n|B_R|$ but the divergence integral is $n|B_R|>0$. Use $\\mathrm{AC}_\\omega$ for the integration convention.",
+        "deps": [
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+          "ex-divergence-theorem-on-a-ball-in-rn"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter §1.12 Theorem 1.46, printed p. 17 (PDF p. 23), explicitly requires the outward normal. This sign counterexample is its ball specialization."
+            }
+          ]
+        },
+        "strategy": "Use F dot nu=R for the outward normal and -R for the inward normal; ball volume is positive."
+      },
+      {
+        "id": "cex-a-corner-is-not-covered-by-the-single-c-one-chart-theorem",
+        "kind": "counterexample",
+        "title": "A box is not a C1-boundary domain",
+        "statement": "The claim that every finite piecewise $C^1$ domain is a $C^1$-boundary domain is false. For $n\\ge2$, the box $Q=(0,1)^n$ has a finite piecewise $C^1$ presentation, but at any edge or vertex its boundary has no single regular one-sided $C^1$ graph chart.",
+        "deps": [
+          "def-bounded-c-one-domain-boundary-charts-and-outward-normal",
+          "def-bounded-piecewise-c-one-euclidean-domain",
+          "ex-internal-face-cancellation-for-two-glued-regions"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter Definition 1.35, printed pp. 13–14, and the piecewise-boundary comparison after Theorem 1.46, printed p. 18 (PDF pp. 19–20 and 24). The normal-limit contradiction is supplied here."
+            }
+          ]
+        },
+        "strategy": "Approach an edge along the interiors of two adjacent faces. Their outward normals are distinct constants; a C1 boundary would have one continuous normal. The contradiction excludes a C1 chart, while the explicit finite faces verify the piecewise definition."
+      },
+      {
+        "id": "ex-punctured-domains-and-truncated-cones-with-explicit-faces",
+        "kind": "example",
+        "title": "Holes and truncated space-time cones",
+        "statement": "Assume $\\mathrm{AC}_\\omega$. Removing $\\overline B_r(a)\\subset\\Omega$ from a bounded $C^1$ domain, with positive distance from $\\partial\\Omega$ and r>0, adds the boundary normal $-(x-a)/r$ on the hole. In spatial dimension $d\\ge1$, let $a_0<b_0$ and $R(t)=R_0+c(t-a_0)>0$ on $[a_0,b_0]$. The space-time region $K=\\{(x,t):a_0<t<b_0,\\ |x|<R(t)\\}$ has a specified finite piecewise $C^1$ presentation with bottom, top, and lateral faces. The lateral outward normal is $(x/|x|,-c)/\\sqrt{1+c^2}$. Its divergence formula passes to a conical tip by truncation for fields whose values and first interior derivatives extend continuously and boundedly to the tip.",
+        "deps": [
+          "def-bounded-piecewise-c-one-euclidean-domain",
+          "thm-divergence-theorem-for-bounded-piecewise-c-one-domains",
+          "lem-euclidean-chart-measure-agrees-with-polar-surface-measure",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Hunter §1.12, Theorem 1.46 and piecewise-boundary discussion, printed pp. 17–18 (PDF pp. 23–24). The hole orientation, cone presentation, and all three tip estimates are explicitly derived here, rather than attributed to an unstated rough-boundary theorem."
+            }
+          ]
+        },
+        "strategy": "The hole has two disjoint C1 boundary components. For the cone truncate with positive radii: top and bottom normals are plus/minus e_t and the lateral equation is |x|-R(t)=0. Parametrize lateral faces by (R(t)omega,t); the two rim sets are parameter-null. If a radius is zero at an endpoint, truncate distance delta from that tip. In spatial dimension d>=1 the omitted cap area is |B_1^d|(|c|delta)^d, so its flux tends to zero for bounded F. The omitted volume is O(delta^(d+1)), and the lateral area is O(delta^d) by density sqrt(1+c^2)R(t)^(d-1) dS(omega)dt (for d=1 the two rays each have arclength density sqrt(1+c^2)). Bounded F and div F control all three errors. This proves the tip limit rather than treating the apex as a regular chart."
+      }
+    ]
+  }
+]

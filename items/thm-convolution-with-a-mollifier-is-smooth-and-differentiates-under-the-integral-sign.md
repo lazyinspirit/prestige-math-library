@@ -7,12 +7,17 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-mollifier-family-generated-by-a-unit-mass-smooth-bump, lem-borel-representatives-make-the-convolution-integrand-borel-measurable, thm-differentiation-under-the-integral-sign, def-ck-and-multi-index-notation-in-several-variables]
+deps: [def-mollifier-family-generated-by-a-unit-mass-smooth-bump, thm-arithmetic-and-lattice-operations-preserve-measurability, thm-differentiation-under-the-integral-sign, thm-dominated-convergence, def-ck-and-multi-index-notation-in-several-variables, def-countable-choice, thm-lebesgue-measure-is-a-complete-measure]
 landmark: false
-proof_strategy: "Fix $f \\in L^1_{\\mathrm{loc}}$ and differentiate the kernel variable under the integral sign. Every derivative of the mollifier remains integrable and compactly supported, so the integral-sign differentiation theorem applies repeatedly."
+proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: Codex
+    verdict: repaired-and-locally-checked
+    date: 2026-09-08
+    scope: "Owner-authorized measurable-input and derivative-continuity repair; local checks only, no independent judge"
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -20,6 +25,8 @@ sources:
       url: "https://djvu.online/file/u1gYJemR8hzMe"
 ---
 ## Statement
+
+Assume the Axiom of Countable Choice ([[def-countable-choice]]).
 
 Let $f : \mathbb{R}^n \to \mathbb{C}$ be locally integrable, let
 $\varphi \in C_c^\infty(\mathbb{R}^n)$ have mass $1$, and let
@@ -34,7 +41,7 @@ $$ \partial^\alpha(f*\varphi_\varepsilon) = f*(\partial^\alpha \varphi_\varepsil
 
 ## Facts & Assumptions
 
-**Given:** A locally integrable function $f$, a unit-mass smooth bump, and $\varepsilon > 0$.
+**Given:** Countable Choice, a locally integrable function $f$, a unit-mass smooth bump, and $\varepsilon > 0$.
 
 [L1] The mollifier family is defined in [[def-mollifier-family-generated-by-a-unit-mass-smooth-bump]].
 
@@ -42,12 +49,20 @@ $$ \partial^\alpha(f*\varphi_\varepsilon) = f*(\partial^\alpha \varphi_\varepsil
 
 [L3] Multi-index notation and Euclidean smoothness are fixed in [[def-ck-and-multi-index-notation-in-several-variables]].
 
+[L4] Products and sums of finite measurable real functions are measurable; applying this to real and imaginary parts gives the complex version ([[thm-arithmetic-and-lattice-operations-preserve-measurability]]).
+
+[L5] Dominated convergence passes pointwise limits through integrals under an integrable absolute majorant ([[thm-dominated-convergence]]).
+
+[L6] Under Countable Choice, Lebesgue measure is a complete measure, so the integral theorems apply on its measure space ([[thm-lebesgue-measure-is-a-complete-measure]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Fix $x_0 \in \mathbb{R}^n$. Because $\varphi_\varepsilon$ has compact [L1, L3, given, choose, algebra] support, there are $r>0$ and a compact set $K$ such that $\varphi_\varepsilon(x-y)=0$ and $\partial^\alpha\varphi_\varepsilon(x-y)=0$ whenever $|x-x_0|<r$ and $y \notin K$. Local integrability of $f$ therefore makes $|f|\,\mathbf{1}_K$ integrable, so $y \mapsto f(y)\varphi_\varepsilon(x-y)$ and $y \mapsto f(y)\partial^\alpha\varphi_\varepsilon(x-y)$ are integrable for $|x-x_0|<r$. [L1, L3, given, choose, algebra]
+1.1 Fix $\varepsilon>0$ and $x_0\in\mathbb R^n$. Choose $R>0$ with $\operatorname{supp}\varphi_\varepsilon\subseteq\overline B_R(0)$ and put $K=\overline B_{R+1}(x_0)$. Every derivative of $\varphi_\varepsilon$ vanishes off its support. Thus, for $x\in B_1(x_0)$, all translated kernel derivatives vanish when $y\notin K$. Each derivative $\partial^\alpha\varphi_\varepsilon$ is bounded by a finite constant $C_\alpha$, since it is continuous with compact support. [L1, L3, given, choose]
 
-2.1 Fix a coordinate index $j$ and a point $x$ with $|x-x_0|<r/2$. For [L2, step 1.1, algebra] $|t|<r/2$, the point $x+te_j$ still satisfies $|x+te_j-x_0|<r$, so $$ G(y,t):=f(y)\varphi_\varepsilon(x+te_j-y) $$ is integrable in $y$. Because $\partial_j\varphi_\varepsilon$ is continuous with compact support, some constant $C_j$ satisfies $$ |\partial_j\varphi_\varepsilon(x+te_j-y)| \le C_j\,\mathbf{1}_K(y) \qquad (|t|<r/2). $$ Hence $$ |\partial_t G(y,t)| = |f(y)\partial_j\varphi_\varepsilon(x+te_j-y)| \le C_j |f(y)|\,\mathbf{1}_K(y), $$ and the right-hand side is integrable by step 1.1. Applying [L2] on the interval $(-r/2,r/2)$ gives $$ \partial_j(f*\varphi_\varepsilon)(x) = \int f(y)\,\partial_j\varphi_\varepsilon(x-y)\,dy = \bigl(f*(\partial_j\varphi_\varepsilon)\bigr)(x). $$ Since $x_0$ was arbitrary, this holds for every $x$. [L2, step 1.1, algebra]
+2.1 For each multi-index $\alpha$ define $F_\alpha(x)=\int f(y)\partial^\alpha\varphi_\varepsilon(x-y)\,dy$. At fixed $x$, the integrand is Lebesgue measurable by [L4], because $f$ is measurable and the translated kernel derivative is continuous. On $B_1(x_0)$ its absolute value is bounded by $C_\alpha|f|\mathbf1_K$, which is integrable by local integrability. Consequently every $F_\alpha$ is well-defined. If $x_m\to x$ in $B_1(x_0)$, continuity of the kernel gives pointwise convergence of the integrands; [L5] with this same majorant gives $F_\alpha(x_m)\to F_\alpha(x)$. Thus every $F_\alpha$ is continuous locally, hence globally since $x_0$ was arbitrary. [L4, L5, step 1.1]
 
-3.1 Repeating step 2.1 for higher derivatives and using [L3] yields the general [L2, L3, step 2.1, induction] multi-index formula $\partial^\alpha(f*\varphi_\varepsilon)=f*(\partial^\alpha\varphi_\varepsilon)$. Hence $f*\varphi_\varepsilon$ is smooth. [L2, L3, step 2.1, induction] ∎
+3.1 Fix $x\in B_{1/2}(x_0)$ and a coordinate $j$. For $|t|<1/2$, the integrand $G(y,t)=f(y)\partial^\alpha\varphi_\varepsilon(x+te_j-y)$ is integrable, differentiable in $t$, and has measurable derivative. The derivative is bounded by $C_{\alpha+e_j}|f|\mathbf1_K$ on this interval. Therefore [L2] yields $\partial_jF_\alpha(x)=F_{\alpha+e_j}(x)$. This identity holds for every $\alpha,j,x$. [L2, L4, step 1.1, step 2.1]
+
+4.1 Since $F_0=f*\varphi_\varepsilon$, repeated use of step 3.1 gives every ordered iterated derivative of $F_0$ as the integral of $f$ against the corresponding derivative of the smooth kernel. All these integrals are continuous by step 2.1. Hence $F_0\in C^\infty$ by [L3], and in particular $\partial^\alpha F_0=F_\alpha=f*(\partial^\alpha\varphi_\varepsilon)$ for every multi-index $\alpha$. [L3, step 2.1, step 3.1] ∎

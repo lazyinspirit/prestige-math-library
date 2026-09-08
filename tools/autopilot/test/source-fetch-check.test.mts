@@ -13,7 +13,7 @@ import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
-import { execFile } from 'node:child_process';
+import { execFile, spawnSync } from 'node:child_process';
 import { promisify } from 'node:util';
 import { createServer } from 'node:http';
 import type { Server } from 'node:http';
@@ -29,6 +29,8 @@ const TOOL = join(REPO, 'tools', 'source-fetch-check.mjs');
 // ---- a local source host: PDF, HTML, substantive plain text, and failures ----
 let server: Server;
 let base = '';
+let compressedLong: Buffer | undefined;
+let compressedShort: Buffer | undefined;
 /** A byte-level PDF the page counter can read: n page objects + padding. */
 const fakePdf = (pages: number) => Buffer.concat([
   Buffer.from('%PDF-1.4\n'),
@@ -37,9 +39,27 @@ const fakePdf = (pages: number) => Buffer.concat([
 ]);
 
 before(async () => {
+  if (spawnSync('mutool', ['-v']).status === 0) {
+    const dir = mkdtempSync(join(tmpdir(), 'sfc-compressed-'));
+    try {
+      const page = join(dir, 'page.txt');
+      writeFileSync(page, '%%MediaBox 0 0 100 100\n0 0 m 100 100 l S\n');
+      const make = (n: number) => {
+        const raw = join(dir, `raw-${n}.pdf`), packed = join(dir, `packed-${n}.pdf`);
+        assert.equal(spawnSync('mutool', ['create', '-o', raw, ...Array(n).fill(page)]).status, 0);
+        assert.equal(spawnSync('mutool', ['clean', '-Z', raw, packed]).status, 0);
+        const pdf = readFileSync(packed);
+        assert.match(pdf.toString('latin1'), /\/Type\s*\/ObjStm\b/);
+        return Buffer.concat([pdf, Buffer.alloc(20_000, 0x20)]);
+      };
+      compressedLong = make(12); compressedShort = make(2);
+    } finally { rmSync(dir, { recursive: true, force: true }); }
+  }
   const article = `<html><body><main>${'Lemma 1. A finite intersection of open sets is open. '.repeat(120)}</main></body></html>`;
   const plainText = 'Theorem. Every finite projective plane is a symmetric design. '.repeat(100);
   server = createServer((req, res) => {
+    if (req.url === '/compressed-long.pdf') { res.writeHead(200, { 'content-type': 'application/pdf' }); res.end(compressedLong); return; }
+    if (req.url === '/compressed-short.pdf') { res.writeHead(200, { 'content-type': 'application/pdf' }); res.end(compressedShort); return; }
     if (req.url === '/notes.pdf') { res.writeHead(200, { 'content-type': 'application/pdf' }); res.end(fakePdf(12)); return; }
     if (req.url === '/abstract.pdf') { res.writeHead(200, { 'content-type': 'application/pdf' }); res.end(fakePdf(2)); return; }
     if (req.url === '/article.html') { res.writeHead(200, { 'content-type': 'text/html' }); res.end(article); return; }
@@ -92,6 +112,27 @@ test('a real PDF and a substantive page stamp; the stamps carry evidence', async
   assert.equal(html.fetch_verified.kind, 'html');
   assert.ok(html.fetch_verified.text_chars > 2_000);
   rmSync(dir, { recursive: true, force: true });
+});
+
+test('compressed object streams are counted by the PDF parser', async (t) => {
+  if (!compressedLong) { t.skip('mutool unavailable'); return; }
+  const { dir, file } = coverage([`${base}/compressed-long.pdf`]);
+  try {
+    const r = await run(file, ['--stamp']);
+    assert.equal(r.status, 0, r.stderr);
+    assert.equal(JSON.parse(readFileSync(file, 'utf8')).pages[0].sources[0].fetch_verified.pages, 12);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('a compressed two-page extract still fails and receives no stamp', async (t) => {
+  if (!compressedShort) { t.skip('mutool unavailable'); return; }
+  const { dir, file } = coverage([`${base}/compressed-short.pdf`]);
+  try {
+    const r = await run(file, ['--stamp']);
+    assert.equal(r.status, 1);
+    assert.match(r.stderr, /2 page\(s\)/);
+    assert.ok(!JSON.parse(readFileSync(file, 'utf8')).pages[0].sources[0].fetch_verified);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
 });
 
 test('a substantive text/plain lecture note stamps as reader-visible full text', async () => {

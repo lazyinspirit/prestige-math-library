@@ -86,6 +86,27 @@ is binding.
 
 ### Published suppliers
 
+The exact planned-owner closure also requires SYMR-2 to import RG-10
+`the-branching-rule-and-the-young-graph` for Young's rule, and SYMR-4 to
+import RG-11 `the-hook-length-formula-and-rsk-correspondence` for hook
+lengths and their dimension formula. Both imports already occur at item level;
+their A-page edges are now explicit. They are planned, not published, inputs.
+
+Cross-library reconciliation (2026-09-08): SYMR-5 explicitly requires
+`braided-and-symmetric-monoidal-categories`, the actual A-page owner of
+`thm-the-symmetric-group-has-the-coxeter-presentation`. SYMR-9 explicitly
+requires `group-cohomology-as-a-derived-functor` for its exact finite-group
+induction/coinduction definitions, freeness and adjunctions. These are
+published suppliers, not new Phase-2 pairs. SYMR-16's profile-distance lemma
+uses the published real-function uniform-convergence definition, not the
+number-theory definition of a norm over an absolutely valued field.
+
+The S3 Frobenius-characteristic example and the two S3 Plancherel checks do
+not consume RG-9's B example. They enumerate the standard tableaux directly
+from RG-9's A-page polytabloid-basis theorem, obtaining dimensions 1,2,1.
+The Frobenius example expands the three Schur functions itself. Thus every
+B companion stays a dependency leaf, including across categories.
+
 The abstract-algebra pages for group algebras, Maschke, ordinary characters,
 and finite induction are published and supply their exact item IDs. The
 group-theory pages `modular-representations-and-projective-covers` and
@@ -212,10 +233,12 @@ of every central proof route. The final disposition is recorded in
 `research/symmetric-group-planning-main-review/gap-dependency-closure-ledger.md`:
 Nakayama is closed by the q-Schur/Jantzen route; modular branching by
 Kleshchev's first-level calculation, Brundan's q-Schur comparison, modular JM
-primary idempotents and finite-group biadjunction; quantum/global bases and
-nondegenerate Ariki by QG-6/QG-8 plus the Hecke--KLR bridge; Murnaghan by CEF;
-and shifted-character multiplication by Ivanov--Kerov. No central item remains
-licensed only by an unaudited citation.
+primary idempotents and finite-group biadjunction; Murnaghan by CEF; and
+shifted-character multiplication by Ivanov--Kerov. Quantum/global bases and
+nondegenerate Ariki require QG-6/QG-8 plus the Hecke--KLR bridge. These routes
+are not yet closed: SYMR-12 inherits the quantum proof gates in
+`research/four-track-proof-gates.json`, including the missing geometric
+global-basis machinery. Structural validation does not certify their adequacy.
 
 ## 10. Reconciliation decisions reserved for the supervisor
 

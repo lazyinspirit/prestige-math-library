@@ -1,0 +1,695 @@
+[
+  {
+    "order": 288.107,
+    "id": "strong-laws-of-large-numbers",
+    "kind": "A",
+    "category": "probability",
+    "title": "Strong Laws of Large Numbers",
+    "companion": "strong-laws-of-large-numbers-examples",
+    "requires": [
+      "weak-laws-and-series-of-independent-random-variables-examples"
+    ],
+    "items": [
+      {
+        "id": "def-strong-law-of-large-numbers-for-a-sequence",
+        "kind": "definition",
+        "title": "Strong laws: centered and common-mean forms",
+        "deps": [
+          "def-partial-sums-and-sample-means",
+          "def-almost-sure-convergence-of-random-variables",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable"
+        ],
+        "statement": "For integrable real X_n, the centered strong law is (S_n-E S_n)/n -> 0 almost surely. With a common finite mean mu this is S_n/n -> mu. For IID variables state E|X_1|<infinity explicitly; independence is not part of the definition of the convergence assertion.",
+        "strategy": "Keep pathwise convergence on one measurable probability-one event distinct from convergence in probability. Never write E S_n when its summands are not integrable.",
+        "sources": {
+          "references": [
+            {
+              "title": "§2.4, Theorem 2.4.1, p. 76",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "§3.5, Theorem 3.14, pp. 68–69",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "cor-kolmogorov-strong-law-for-independent-uniformly-bounded-variances",
+        "kind": "corollary",
+        "title": "Uniformly bounded variances imply the centered strong law",
+        "deps": [
+          "cor-independent-nonidentical-finite-variance-strong-law",
+          "thm-p-series-real-exponents",
+          "def-strong-law-of-large-numbers-for-a-sequence"
+        ],
+        "statement": "Independent square-integrable real X_n with sup_n Var(X_n)<infinity satisfy (S_n-E S_n)/n ->0 almost surely; their means can differ.",
+        "strategy": "Bound the normalized variance sum by C sum n^-2. Index from n=1 and include C=0.",
+        "sources": {
+          "references": [
+            {
+              "title": "§2.5, Theorems 2.5.6 and 2.5.9, pp. 84–86",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "§10.1, Theorem 10.1.1, pp. 42–43; its fourth-moment case is subsumed",
+              "url": "https://www.statslab.cam.ac.uk/~jrn10/Lectures/pmall.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "cor-iid-finite-variance-strong-law",
+        "kind": "corollary",
+        "title": "IID finite-variance strong law",
+        "deps": [
+          "cor-kolmogorov-strong-law-for-independent-uniformly-bounded-variances",
+          "def-identically-distributed-and-iid-random-variables",
+          "thm-change-of-variables-for-expectation",
+          "cor-expectation-linearity-monotonicity-and-modulus-bound"
+        ],
+        "statement": "IID square-integrable real variables with mean mu satisfy S_n/n ->mu almost surely.",
+        "strategy": "Equal laws give equal first and second moments, hence a common finite variance. Use the preceding corollary and finite expectation linearity.",
+        "sources": {
+          "references": [
+            {
+              "title": "§2.4, Theorem 2.4.1, p. 76; finite-variance specialization",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-tail-sum-integrability-equivalence",
+        "kind": "lemma",
+        "title": "Tail sums detect integrability",
+        "deps": [
+          "cor-layer-cake-formulas-for-random-variables",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "statement": "For nonnegative measurable X, possibly extended-valued, sum_{n>=1} P(X>n) <= E X <= 1+sum_{n>=1}P(X>n), in the extended order. Thus E X<infinity iff the tail sum is finite. The same equivalence holds at thresholds c n for every c>0.",
+        "strategy": "Integrate the decreasing tail function on successive unit intervals, using finite bounds then monotone convergence. For c n apply the comparison to X/c. Do not subtract infinities or mix > with >= at atoms.",
+        "sources": {
+          "references": [
+            {
+              "title": "§3.5, Exercise 3.14, p. 69; correct its X_n typographical slip and use strict tails",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            },
+            {
+              "title": "§2.4, Lemma 2.4.2, p. 76",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-iid-linear-truncation-occurs-only-finitely-often",
+        "kind": "lemma",
+        "title": "Linear truncation changes only finitely many terms",
+        "deps": [
+          "lem-tail-sum-integrability-equivalence",
+          "cor-first-borel-cantelli-lemma-for-events",
+          "def-identically-distributed-and-iid-random-variables",
+          "def-truncation-at-a-fixed-level"
+        ],
+        "statement": "For identically distributed real X_n with E|X_1|<infinity, Y_n=X_n 1_{|X_n|<=n} differs from X_n only finitely often almost surely. Consequently (sum_{k<=n}X_k-sum_{k<=n}Y_k)/n ->0 almost surely. Independence is unnecessary.",
+        "strategy": "Identical laws identify tail probabilities; BC1 applies to their summable series. On the resulting event the difference of sums is eventually a fixed finite real number.",
+        "sources": {
+          "references": [
+            {
+              "title": "§2.4, Lemma 2.4.2 and proof, p. 76",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "§3.5, Theorem 3.14 proof, pp. 68–69",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-summability-of-truncated-normalized-variances",
+        "kind": "lemma",
+        "title": "Summable variances after linear truncation",
+        "deps": [
+          "def-truncation-at-a-fixed-level",
+          "thm-change-of-variables-for-expectation",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "thm-integral-test-for-series"
+        ],
+        "statement": "For identically distributed real X_n with E|X_1|<infinity and Y_n=X_n 1_{|X_n|<=n}, sum_{n>=1}Var(Y_n)/n^2 <= sum_{n>=1}E(Y_n^2)/n^2 <= 2 E|X_1| < infinity. No independence is required.",
+        "strategy": "Tonelli on the common law times counting measure gives E[|X_1|^2 sum_{n>=max(1,ceil |X_1|)}n^-2]. For 0<=x<=1 the kernel is at most 2x; for x>1 set m=ceil x and use sum_{n>=m}n^-2 <=m^-2+1/m <=2/m, giving x^2 times the sum <=2x. Handle x=0 separately. All truncated variables are bounded, hence square-integrable.",
+        "sources": {
+          "references": [
+            {
+              "title": "§2.4, Lemmas 2.4.3–2.4.4, pp. 76–77; sharpen the constant by direct kernel estimation",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "§3.5, Theorem 3.14 proof, p. 69",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "lem-cesaro-limit-of-truncated-means",
+        "kind": "lemma",
+        "title": "Cesaro convergence of truncated means",
+        "deps": [
+          "thm-dominated-convergence",
+          "thm-change-of-variables-for-expectation",
+          "thm-cesaro-mean-theorem",
+          "def-truncation-at-a-fixed-level"
+        ],
+        "statement": "For identically distributed integrable real X_n and Y_n=X_n 1_{|X_n|<=n}, E Y_n -> E X_1 and n^-1 sum_{k=1}^n E Y_k -> E X_1.",
+        "strategy": "Apply DCT to x 1_{|x|<=n} on the common law, dominated by |x|. Do not claim Y_n ->X_1 pointwise on the original probability space. Reindex the published zero-based Cesaro theorem to k=1,...,n.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 2.5.10 proof, pp. 86–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Theorem 3.14 proof, pp. 68–69",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-kolmogorov-iid-l1-strong-law",
+        "kind": "theorem",
+        "title": "Kolmogorov strong law for integrable IID variables",
+        "deps": [
+          "def-strong-law-of-large-numbers-for-a-sequence",
+          "lem-iid-linear-truncation-occurs-only-finitely-often",
+          "lem-summability-of-truncated-normalized-variances",
+          "lem-cesaro-limit-of-truncated-means",
+          "thm-kolmogorov-strong-law-under-summable-normalized-variances",
+          "lem-measurable-functions-preserve-independence"
+        ],
+        "statement": "IID real X_n with E|X_1|<infinity satisfy S_n/n -> E X_1 almost surely.",
+        "strategy": "Coordinatewise truncations are mutually independent and L2. Their normalized variances are summable, so the published variance criterion (itself convergence of the centered series followed by Kronecker) gives (sum Y_k-sum E Y_k)/n ->0. Intersect the two full-probability events, restore X_k and use Cesaro centering. No ergodic theorem or pairwise-only series assertion is used.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 2.5.10 and complete proof, pp. 86–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Theorem 3.14 and complete proof, pp. 68–69",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-integrability-is-necessary-for-an-iid-finite-mean-strong-law",
+        "kind": "theorem",
+        "title": "A finite IID almost-sure average limit forces integrability",
+        "deps": [
+          "lem-tail-sum-integrability-equivalence",
+          "thm-kolmogorov-iid-l1-strong-law",
+          "cor-second-borel-cantelli-lemma-under-pairwise-independence",
+          "lem-measurable-functions-preserve-independence",
+          "def-identically-distributed-and-iid-random-variables"
+        ],
+        "statement": "If real IID X_n have S_n/n converging almost surely to a finite real random variable L, then E|X_1|<infinity and L=E X_1 almost surely.",
+        "strategy": "On the convergence event X_n/n=S_n/n-((n-1)/n)(S_{n-1}/(n-1)) ->0 for n>=2. Thus |X_n|>n occurs only finitely often. If its probability series diverged, BC2 would force infinitely many occurrences, a contradiction. Equal laws and the tail lemma give integrability; apply the independent L1 theorem and uniqueness of real limits. No initial assumption that L is constant.",
+        "sources": {
+          "references": [
+            {
+              "title": "§3.5, Exercise 3.15, p. 69",
+              "url": "https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf"
+            },
+            {
+              "title": "§2.3, Exercise 2.3.17(i), p. 75; §2.5, Theorem 2.5.10",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "def-pairwise-independent-random-elements",
+        "kind": "definition",
+        "title": "Pairwise independence of random elements",
+        "deps": [
+          "def-independent-random-elements"
+        ],
+        "statement": "A family of random elements is pairwise independent when every two distinct members form an independent family. Identically distributed means equality of the marginal laws; the phrase pairwise-independent identically distributed does not abbreviate to IID, which already means mutual independence here.",
+        "strategy": "Use the established random-element definition on each two-member subfamily. The existing def-pairwise-independence is only an event definition; this supplies the needed random-element interface.",
+        "sources": {
+          "references": [
+            {
+              "title": "§2.4, Theorem 2.4.1, p. 76",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-geometric-subsequence-variance-bound-for-pairwise-independent-truncations",
+        "kind": "lemma",
+        "title": "Geometric subsequence variance bound",
+        "deps": [
+          "def-pairwise-independent-random-elements",
+          "lem-summability-of-truncated-normalized-variances",
+          "cor-chebyshev-inequality-for-random-variables",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "thm-factorization-of-expectations-for-independent-variables",
+          "lem-measurable-functions-preserve-independence",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces"
+        ],
+        "statement": "Let X_n be pairwise independent, identically distributed and integrable; put Y_n=X_n 1_{|X_n|<=n}, T_n=sum_{k<=n}Y_k. For q>1, m_j=floor(q^j), and epsilon>0, sum_{j>=1}P(|T_{m_j}-E T_{m_j}|>epsilon m_j) <= [4/(epsilon^2(1-q^-2))] sum_{k>=1}Var(Y_k)/k^2 <infinity.",
+        "strategy": "Apply preservation of independence separately to each pair, then factor each mixed moment to cancel covariances in the finite sum. Chebyshev and Tonelli interchange nonnegative sums. Since floor(q^j)>=q^j/2, sum_{j:m_j>=k}m_j^-2 <=4 k^-2/(1-q^-2). Repeated early m_j cause no problem; the sequence is strictly increasing eventually. Do not invoke Kolmogorov maximal inequality or random-series convergence for a merely pairwise independent family.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 2.4.1 proof, geometric subsequence calculation, pp. 77–78",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "thm-etemadi-strong-law-for-pairwise-independent-iid-variables",
+        "kind": "theorem",
+        "title": "Etemadi strong law under pairwise independence",
+        "deps": [
+          "def-pairwise-independent-random-elements",
+          "lem-geometric-subsequence-variance-bound-for-pairwise-independent-truncations",
+          "lem-iid-linear-truncation-occurs-only-finitely-often",
+          "lem-cesaro-limit-of-truncated-means",
+          "cor-first-borel-cantelli-lemma-for-events",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability"
+        ],
+        "statement": "Pairwise independent identically distributed real X_n with E|X_1|<infinity satisfy S_n/n ->E X_1 almost surely. The stable design ID retains iid, but the statement and title explicitly require only pairwise independence.",
+        "strategy": "Proposed mathematically verified route: treat positive and negative parts separately. For nonnegative variables, BC1 applied to the geometric lemma for all rational epsilon>0 gives T_mj/m_j ->mu. Nonnegativity gives T_mj/m_(j+1) <=T_n/n <=T_m_(j+1)/m_j when m_j<=n<m_(j+1). Thus mu/q<=liminf<=limsup<=q mu. Intersect events for q=1+1/r, r>=1, let r increase, and restore the original variables. BLOCKED design-route obligation: the design instead mandates a cubic subsequence; that route has not been justified at L1 and must not be silently substituted. See notes for the failed cubic variance bound and concrete counterexample to its summability.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 2.4.1 and complete proof, pp. 76–78",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "cor-iid-strong-law-implies-the-weak-law",
+        "kind": "corollary",
+        "title": "The IID strong law implies the weak law",
+        "deps": [
+          "thm-kolmogorov-iid-l1-strong-law",
+          "thm-almost-sure-convergence-implies-convergence-in-probability"
+        ],
+        "statement": "For IID integrable real X_n, S_n/n ->E X_1 in probability.",
+        "strategy": "Apply the existing almost-sure-to-probability implication to the strong law; do not repeat a truncation weak-law proof.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 2.4.1 and Theorem 2.3.2, pp. 76–78 and 67",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "cor-birkhoff-strong-law-for-iid-coordinate-shifts",
+        "kind": "corollary",
+        "title": "Birkhoff agreement for IID coordinate shifts",
+        "deps": [
+          "thm-birkhoff-ergodic-theorem",
+          "thm-countable-product-of-probability-spaces",
+          "cor-coordinate-random-elements-on-a-countable-product-are-independent",
+          "lem-finite-measure-uniqueness-on-a-pi-system",
+          "thm-kolmogorov-zero-one-law",
+          "thm-change-of-variables-for-expectation"
+        ],
+        "statement": "Assume countable choice and dependent choice. On the canonical product of an integrable Borel probability law nu on R, the coordinate averages converge almost surely to integral x dnu by the ergodic theorem. This agrees with the independently proved Kolmogorov law.",
+        "strategy": "BLOCKED until the existing MT-23 pair supplies Birkhoff and the current plan is authorized to require it. Inline: the left shift is measurable by its coordinates and preserves the product measure by the cylinder formula and finite-measure uniqueness. Strictly invariant measurable events are tail events, so the zero-one law makes the shift ergodic. Apply the finite-probability ergodic case of Birkhoff to the integrable first coordinate, identifying its integral. If MT-23 uses invariance modulo null sets, prove the equivalent invariant representative or invoke its explicit equivalence. This item is never a dependency of the independent SLLN. Required supplier contract: its finite-probability specialization must identify the invariant limit by its integral (or prove L1 convergence), and must prove that ergodicity makes that limit constant. Mere almost-sure convergence to an unspecified invariant function is insufficient to identify the mean. The reserved supplier A/B pair is the-ergodic-theorems-of-von-neumann-and-birkhoff and its -examples companion, at orders 288.045/288.046; its complete required inventory and prerequisites are recorded in batch notes F1. Both inventories and the PT6 backward page requirement must be installed by their authorized writer before this consumer is ready.",
+        "sources": {
+          "references": [
+            {
+              "title": "§9.2, Theorem 9.2.1, p. 39; §9.3, Theorems 9.3.2–9.3.3, pp. 40–42; §10.2, Theorem 10.2.1, p. 43",
+              "url": "https://www.statslab.cam.ac.uk/~jrn10/Lectures/pmall.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "rem-strong-law-does-not-assert-a-rate",
+        "kind": "remark",
+        "title": "The qualitative strong law does not supply an error rate",
+        "deps": [
+          "def-strong-law-of-large-numbers-for-a-sequence"
+        ],
+        "statement": "Almost-sure convergence means an eventual tolerance bound on each path; it contains no specified deterministic rate. Ordinary convergence alone supplies no universal deterministic rate: for any positive r_n ->0, the deterministic sequence sqrt(r_n) tends to zero but is not O(r_n). No law of the iterated logarithm is used here.",
+        "strategy": "Distinguish this statement about ordinary convergence from the stronger claim about arbitrarily slow IID sample-mean convergence. The latter remains an explicit source/proof obligation in notes if the design intends that stronger quantification; do not silently assert it. The following finite-variance result has a separate moment hypothesis.",
+        "sources": {
+          "references": [
+            {
+              "title": "§2.5.1, opening and Theorem 2.5.11, p. 87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-finite-variance-logarithmic-rate-for-iid-sums",
+        "kind": "theorem",
+        "title": "A logarithmic almost-sure rate for finite-variance IID sums",
+        "deps": [
+          "thm-kolmogorov-strong-law-under-summable-normalized-variances",
+          "thm-kolmogorov-maximal-inequality",
+          "cor-first-borel-cantelli-lemma-for-events",
+          "thm-p-series-real-exponents",
+          "def-identically-distributed-and-iid-random-variables"
+        ],
+        "statement": "For IID real X_n with mean mu and variance sigma^2<infinity, for every epsilon>0, (S_n-n mu)/(sqrt(n)(log n)^(1/2+epsilon)) ->0 almost surely, with n>=2 and natural logarithm.",
+        "strategy": "Preserve the design block route: the published random-series/normalizer criterion gives convergence at 2^j (indeed at all n). To spell out maximal interpolation, independent centered blocks of length 2^j have total variance 2^j sigma^2; at threshold delta sqrt(2^j)(log 2^j)^(1/2+epsilon) the maximal bound is C delta^-2 j^(-1-2epsilon), summable. BC1 at countably many delta gives negligible block oscillation. For 2^j<=n<2^(j+1) the positive increasing normalizer is at least its left endpoint value. Combine the block endpoint and oscillation terms. Include sigma=0 and note the direct random-series proof already exists inline in the cited published theorem; this is an explicit named specialization, not a new mathematical claim.",
+        "sources": {
+          "references": [
+            {
+              "title": "§2.5.1, Theorem 2.5.11 and complete proof, p. 87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "cor-iid-strong-law-with-one-sided-infinite-mean",
+        "kind": "corollary",
+        "title": "One-sided infinite means give infinite average limits",
+        "deps": [
+          "thm-kolmogorov-iid-l1-strong-law",
+          "thm-monotone-convergence-for-the-integral",
+          "lem-measurable-functions-preserve-independence"
+        ],
+        "statement": "For IID real X_n, if E X_1^+=infinity and E X_1^-<infinity, then S_n/n ->+infinity almost surely. With the signs reversed the limit is -infinity. This does not assign an expectation when both parts have infinite integrals.",
+        "strategy": "For each positive integer M, cap X_n above at M. The capped variables are integrable IID, so their averages converge almost surely. The original average is no smaller. Intersect countably many events and let M increase; MCT on the positive parts sends the capped means to +infinity while the negative-part mean stays finite. Negate for the second clause.",
+        "sources": {
+          "references": [
+            {
+              "title": "§2.4, Theorem 2.4.5 and complete proof, p. 78",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.108,
+    "id": "strong-laws-of-large-numbers-examples",
+    "kind": "B",
+    "category": "probability",
+    "title": "Strong Laws of Large Numbers — Examples",
+    "companion": "strong-laws-of-large-numbers",
+    "requires": [
+      "strong-laws-of-large-numbers"
+    ],
+    "items": [
+      {
+        "id": "ex-almost-sure-frequency-of-heads",
+        "kind": "example",
+        "title": "Almost-sure frequency of heads",
+        "deps": [
+          "cor-iid-finite-variance-strong-law",
+          "cor-countable-independent-copies-exist",
+          "cor-expectation-of-an-indicator-is-probability"
+        ],
+        "statement": "Assuming countable choice and dependent choice, the Bernoulli(p) product model has n^-1 sum_{k<=n}X_k ->p almost surely for every p in [0,1].",
+        "strategy": "Construct the two-point law, compute mean p and variance p(1-p), and apply the finite-variance law; handle p=0,1.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 2.4.1, p. 76; Bernoulli specialization",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-strong-law-for-empirical-indicator-averages",
+        "kind": "example",
+        "title": "Empirical frequencies for a fixed measurable set",
+        "deps": [
+          "thm-kolmogorov-iid-l1-strong-law",
+          "lem-measurable-functions-preserve-independence",
+          "cor-expectation-of-an-indicator-is-probability",
+          "thm-change-of-variables-for-expectation"
+        ],
+        "statement": "For IID random elements X_k with law nu and each fixed measurable B, n^-1 sum 1_{X_k in B} ->nu(B) almost surely. For a specified countable collection of B these conclusions hold on one common event.",
+        "strategy": "Indicator transforms are IID bounded real variables. State that the null set may depend on B; an uncountable simultaneous or uniform assertion requires an additional theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "§2.4, Example 2.4.8 and opening of Theorem 2.4.9 proof, p. 79",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-strong-law-estimator-of-an-integrable-mean",
+        "kind": "example",
+        "title": "A consistent mean estimator without finite variance",
+        "deps": [
+          "thm-kolmogorov-iid-l1-strong-law",
+          "cor-countable-independent-copies-exist",
+          "thm-integration-against-a-density",
+          "thm-change-of-variables-for-expectation",
+          "thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "statement": "For IID observations with density (3/2)x^(-5/2) on [1,infinity), the sample mean converges almost surely to 3 even though the second moment is infinite. Assume countable choice and dependent choice for the product construction.",
+        "strategy": "Integrate the density to one, x times the density to 3, and x^2 times it to infinity using powers. Apply the L1 law, with no finite-variance or rate conclusion. For divergent moments use bounded-interval Riemann/Lebesgue agreement and monotone convergence; the cited improper-integral theorem assumes convergence and cannot alone establish divergence.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 2.5.10, pp. 86–87; explicit integrable heavy-tail application",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-nonidentical-strong-law-under-summable-normalized-variances",
+        "kind": "example",
+        "title": "A nonidentical law with growing variances",
+        "deps": [
+          "cor-independent-nonidentical-finite-variance-strong-law",
+          "cor-countable-independent-copies-exist",
+          "lem-measurable-functions-preserve-independence",
+          "thm-integral-test-for-series"
+        ],
+        "statement": "Let epsilon_n be independent fair signs and X_n=sqrt(n)/log(n+1) times epsilon_n. Then E X_n=0, Var(X_n)=n/log^2(n+1), and S_n/n ->0 almost surely, although the variances are unbounded. Assume countable choice and dependent choice for existence.",
+        "strategy": "Verify moments directly. The normalized variance series is sum 1/(n log^2(n+1)), convergent by comparison with the integral of 1/(x log^2 x) from 2 to infinity.",
+        "sources": {
+          "references": [
+            {
+              "title": "Theorems 2.5.6 and 2.5.9, pp. 84–86; explicit nonidentical application",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-weak-law-does-not-imply-strong-law",
+        "kind": "counterexample",
+        "title": "An independent sample-mean weak law without a strong law",
+        "deps": [
+          "thm-countable-product-of-probability-spaces",
+          "cor-coordinate-random-elements-on-a-countable-product-are-independent",
+          "cor-markov-inequality-for-random-variables",
+          "thm-cesaro-mean-theorem",
+          "cor-second-borel-cantelli-lemma-under-pairwise-independence",
+          "thm-integral-test-for-series"
+        ],
+        "statement": "Assume countable choice and dependent choice. For n>=3 take independent events E_n with P(E_n)=1/(n log n) and set X_n=n 1_{E_n}; set X_1=X_2=0. Then S_n/n ->0 in probability but not almost surely; the same holds for the centered averages since E S_n/n ->0.",
+        "strategy": "E X_n=1/log n ->0, so Cesaro and Markov give the weak law. The event probabilities have divergent sum, hence BC2 gives E_n infinitely often. At those indices S_n/n>=1. This is a counterexample about averages of independent variables, not merely a sequence of isolated rare-event indicators.",
+        "sources": {
+          "references": [
+            {
+              "title": "§2.3, Exercise 2.3.11, p. 75; rare-event mechanism adapted to independent sample sums",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      },
+      {
+        "id": "cex-iid-strong-law-fails-at-infinite-absolute-mean",
+        "kind": "counterexample",
+        "title": "Cauchy averages remain Cauchy",
+        "deps": [
+          "thm-integrability-is-necessary-for-an-iid-finite-mean-strong-law",
+          "cor-countable-independent-copies-exist",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-grouping-independent-sigma-algebras",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-integration-against-a-density",
+          "thm-change-of-variables-for-expectation",
+          "thm-lebesgue-measure-under-dilations-and-reflections",
+          "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line",
+          "thm-dominated-convergence",
+          "thm-almost-sure-convergence-implies-convergence-in-probability",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-principal-inverse-tangent-calculus"
+        ],
+        "statement": "Assuming countable choice and dependent choice, IID standard Cauchy variables have E|X_1|=infinity; every S_n/n has the same standard Cauchy law. Hence no sample mean converges in probability to any finite constant, and the averages cannot converge almost surely to any finite random limit.",
+        "strategy": "Define f_a(x)=a/(pi(a^2+x^2)), a>0, and normalize by arctangent integration. Derive the convolution density from product joint laws, Tonelli and translation invariance (no conditional expectation). For D=(x^2+(a+b)^2)(x^2+(a-b)^2)>0, expand 1/[(y^2+a^2)((y-x)^2+b^2)] as (2xy+x^2+b^2-a^2)/[D(y^2+a^2)]+[-2x(y-x)+x^2+a^2-b^2]/[D((y-x)^2+b^2)]. Integrate over [-R,R] before taking R to infinity: logarithmic boundary terms vanish and arctangent terms yield pi(a+b)/(ab(x^2+(a+b)^2)). The exceptional x=0,a=b follows by DCT, dominating f_a(y)f_b(x-y) by f_a(y)/(pi b). Therefore f_a*f_b=f_(a+b); independence of the next coordinate from the past and induction give S_n density f_n, then scaling gives S_n/n density f_1. The positive Cauchy mass outside any fixed interval about any constant does not vanish. The absolute first moment diverges logarithmically, so the earlier necessity theorem also excludes a finite random almost-sure limit. Use the published principal inverse tangent calculus primitive and its inverse range to get limits at infinity; never cite the later characteristic-function example. For divergent moments use bounded-interval Riemann/Lebesgue agreement and monotone convergence; the cited improper-integral theorem assumes convergence and cannot alone establish divergence.",
+        "sources": {
+          "references": [
+            {
+              "title": "§2.2, Example 2.2.15, p. 65; tail obstruction and all-n statement",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "§1.20, Theorem 1.63 and Example 1.116, printed pp. 126 and 128 (PDF pp. 116 and 118); elementary two-Cauchy calculation extended to positive scales",
+              "url": "https://www.stat.purdue.edu/~dasgupta/gradprob.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        }
+      },
+      {
+        "id": "cex-identical-distribution-without-independence-can-defeat-the-mean-law",
+        "kind": "counterexample",
+        "title": "Equal distributions alone do not imply the mean law",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "def-partial-sums-and-sample-means",
+          "cor-expectation-of-an-indicator-is-probability"
+        ],
+        "statement": "Let X be Bernoulli(1/2) on a two-point probability space and put X_n=X for every n. Then S_n/n=X for every n, so it does not tend to E X=1/2 either almost surely or in probability.",
+        "strategy": "The error is exactly 1/2 on both atoms for every n. The two-copy joint event has probability 1/2, not (1/2)^2, so even pairwise independence fails.",
+        "sources": {
+          "references": [
+            {
+              "title": "§2.4, Theorem 2.4.1, p. 76; necessity of an independence hypothesis illustrated",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      }
+    ]
+  }
+]

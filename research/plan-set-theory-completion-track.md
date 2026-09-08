@@ -67,7 +67,7 @@ mathematics merely to control frontier selection.
 | label | A-page id | direct same-category prerequisites |
 |---|---|---|
 | SET-1 | `formal-set-theoretic-syntax-structures-and-satisfaction` | published naturals (which already reaches relations/functions) |
-| SET-2 | `deduction-soundness-completeness-and-compactness` | SET-1 |
+| SET-2 | `deduction-soundness-completeness-and-compactness` | SET-1; published `countability-and-uncountability` and `cardinal-arithmetic-and-cofinality` (including ordinal recursion) |
 | SET-3 | `arithmetization-incompleteness-and-relative-consistency` | SET-2 |
 | SET-4 | `well-founded-relations-rank-and-the-cumulative-hierarchy` | published ordinals/transfinite recursion |
 | SET-5 | `reflection-absoluteness-and-elementary-submodels` | SET-2, SET-4 |
@@ -86,7 +86,7 @@ defining DC again. The stable published `def-dependent-choice` rehome remains
 a Phase-3 consumer repair, not a prerequisite for Phase 2.
 | SET-7 | `boolean-algebras-stone-duality-and-the-prime-ideal-theorem` | SET-2; published compactness (whose closure contains filters/ultrafilters) |
 | SET-8 | `club-stationary-sets-and-pressing-down` | SET-1; published cardinal arithmetic/cofinality |
-| SET-9 | `set-theoretic-trees-delta-systems-and-diamond` | SET-8 |
+| SET-9 | `set-theoretic-trees-delta-systems-and-diamond` | SET-8; published `filters-and-ultrafilters` for the explicitly ZFC finite-petals route |
 | SET-10 | `borel-analytic-sets-perfect-sets-and-determinacy` | SET-4; published complete metrizability and Lebesgue measure (both already reach countability) |
 | SET-11 | `the-constructible-hierarchy-and-inner-models` | SET-5 |
 | SET-12 | `condensation-gch-and-diamond-in-l` | SET-11, SET-9, SET-3 |
@@ -214,6 +214,28 @@ lemma, Gödel completeness, compactness, and upward/downward Löwenheim--Skolem;
 elementary embeddings and the Tarski--Vaught test; countable Skolem hulls;
 nonstandard models; `fs-categorical-first-order-zf`.
 
+**Binding calculus (primitive-syntax repair, 2026-09-08).** Keep SET-1's
+primitive negation, conjunction and existential quantifier; universal
+quantification abbreviates negated existential negation. The Hilbert system
+has Boolean tautology instances, free-for universal instantiation, restricted
+universal distribution, free-for existential introduction, reflexive equality
+and free-for formula substitution for equality. Its rules are MP, universal
+generalization, and existential elimination from phi→psi to exists x phi→psi
+when x is not free in psi. Do not try to derive primitive existential
+introduction from universal instantiation alone. Source: Moschovakis §1H.1–1H.2,
+printed pp34–35, https://www.math.ucla.edu/~ynm/lectures/lnl.pdf.
+
+Finite-support and proof-transformation arguments handle all three rules.
+The deduction induction's existential case commutes sigma→(phi→psi) to
+phi→(sigma→psi), eliminates x, then commutes back; x is not free in sigma
+or psi. For open-assumption discharge, guard both quantifier rules, not only
+generalization. Soundness checks the new axiom by a witness and the new rule
+under an x-varied assignment. Fresh-constant replacement preserves free-for
+and eigenvariable restrictions. Derive existential monotonicity and quantified
+double-negation replacement explicitly before the Henkin truth rules; do not
+use semantic completeness to prove its own syntactic prerequisites. The
+existing item inventory supplies these obligations; no new A/B pair is needed.
+
 **Proof spine.** The countable-language Henkin construction is coded and its
 choices are canonical least natural-number codes. This is sufficient for the
 language of set theory. Arbitrary well-orderable languages require an explicit
@@ -307,12 +329,24 @@ item; regularity of the ambient cardinal is never omitted.
 König's lemma; Aronszajn and Suslin trees; tree property; normal and splitting
 trees; Delta-system lemma; ccc products and specialization; definitions of
 diamond, clubsuit and square; diamond builds a Suslin tree; Kurepa line/tree
-interface; partition relations and Ramsey/Erdős--Rado orientation;
+interface; partition relations, infinite Ramsey and general-cardinal Erdős--Rado;
 Halpern--Läuchli finite-tree statement; `fs-every-omega-one-tree-has-a-cofinal-branch`.
 
 **Dependency boundary.** This page does **not** prove `V=L -> diamond`.
 SET-12 proves that implication from constructibility and may then cite this
 page's earlier theorem `diamond ->` “a Suslin tree exists.”
+
+**Erdős--Rado proof spine.** Before the orientation remark add
+`def-finite-beth-iteration-above-a-cardinal`,
+`lem-erdos-rado-pattern-closure-and-end-homogeneity`, and
+`thm-general-cardinal-erdos-rado`. Prove
+`beth_n(kappa)^+ -> (kappa^+)^(n+1)_kappa` for every infinite kappa and finite
+n, including zero. The closure construction uses only earlier cardinal
+exponent laws, absorption, successor regularity and recursion. The full
+arbitrary-cardinal argument is in
+`phase-2-set-blocker-resolution-2026-09-08.md`; Monk 9.9 states only the
+countable-color version. The current 41-item A inventory fits this page;
+no later large-cardinal page or recorded item is a prerequisite.
 
 ## SET-10. Borel and Analytic Sets, Perfect Sets, and Determinacy
 
@@ -412,6 +446,17 @@ tree; finite-support iteration kills all named Suslin trees; consistency of SH;
 diamond and `L` give a Suslin tree; consistency of not-SH; exact conditional
 independence summary; `fs-sh-is-ch`.
 
+**Kurepa prerequisites.** Prove pruning and normal-tree reduction, the
+first-difference rule for branch lexicographic order, countable-order
+embedding in Q, rational specialization from a countable antichain cover,
+the separable-interval quotient, existence and uniqueness of order completion,
+and the order-density/completion lemma
+before the equivalence. Monk 9.12–9.18 and 9.36–9.37 have been read in full;
+the necessary history-tree normalization (before selecting splitting levels),
+indexing and convex-class corrections are recorded in
+`phase-2-set-blocker-resolution-2026-09-08.md`. The SET-9 orientation is
+not a supplier for either implication.
+
 **Target.** Proves every mathematical clause of
 `rem-suslin-hypothesis-independent`, including the ccc-square consequence.
 
@@ -492,6 +537,15 @@ extension of finite partial prime ideals; compactness tree; BPI in the basic
 Cohen model; failure of AC there; `Con(ZF)->Con(ZF+BPI+not AC)`; BPI equivalent
 to the ultrafilter lemma; combination with SET-20 giving strict relative
 placement over ZF; `fs-bpi-well-orders-every-set`.
+
+**Finite-product proof spine.** Include the finite word-calculus rearrangement
+lemma, soundness of the three rule classes, monotonicity under shrinking
+universal sets, and finite density-preserving thinning before the matrix
+theorem. Monk 29.28, printed pp.661–670, was read in full. In the complement
+case extend the finitely many cone roots to the common height h=max n_i,
+then restrict the p=h+k dense sets to those cones; this proves the required
+(h,k)-matrix assertion. Do not identify full products with level products or
+claim that this ZFC proof supplies the later symmetric-model support analysis.
 
 **Target.** Proves every clause of `rem-halpern-levy-bpi-not-ac`.
 

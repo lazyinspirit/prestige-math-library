@@ -1,0 +1,626 @@
+[
+  {
+    "order": 408.1,
+    "id": "quantitative-induced-density-and-the-loglog-step",
+    "kind": "A",
+    "category": "combinatorics",
+    "title": "Quantitative Induced Density and the Log-Log Step",
+    "companion": "quantitative-induced-density-and-the-loglog-step-examples",
+    "requires": [
+      "induced-subgraphs-and-hereditary-graph-classes",
+      "regular-pairs-and-induced-counting",
+      "sparse-restricted-subgraphs-and-rodl-nikiforov",
+      "blockades-combs-and-pattern-graphs",
+      "the-logarithm-and-general-powers",
+      "finite-counting-and-binomial-coefficients"
+    ],
+    "items": [
+      {
+        "id": "def-induced-copy-density-and-homogeneous-restriction-parameter",
+        "kind": "definition",
+        "title": "Induced copy density and homogeneous restriction parameter",
+        "deps": [
+          "def-induced-copy-number",
+          "def-induced-embedding-and-induced-copy",
+          "def-edge-density-between-vertex-sets",
+          "thm-two-element-subsets-count",
+          "cor-cardinality-of-the-power-set"
+        ],
+        "statement": "For a nonempty finite graph G of order n and finite H of order h, put d_ind(H,G)=ind_H(G)/n^h. For a,b>=0 define rho_G(a,b) as the largest |S|/n over nonempty S for which e(G[S])<=a binom(|S|,2) or e(complement(G)[S])<=b binom(|S|,2). Singletons qualify, so this finite maximum exists. Edge-density quotients are used only when |S|>=2.",
+        "proof_plan": "Use labelled embeddings, not unlabelled image sets; define the null-pattern count to be 1. Finite maximum is over nonempty subsets, never an unsupported supremum over all graphs.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "Sections 2 and 5, before 5.2 and its beta_s definition"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-qid-restricted-blockade-with-empty-blocks",
+        "kind": "definition",
+        "title": "Qid restricted blockade with empty blocks",
+        "deps": [
+          "def-blockade-length-and-width",
+          "def-directional-and-weak-sparsity-between-vertex-sets",
+          "def-complete-anticomplete-pure-and-x-sparse-blockades"
+        ],
+        "statement": "A QID block sequence is a finite sequence of pairwise disjoint vertex subsets, with empty subsets permitted. It is x-restricted if for each earlier block B_i, every vertex in all later blocks has at most x|B_i| neighbors in B_i in one fixed choice of G or its complement for that index i. Uniform choice of K gives x-sparsity in K; equivalence with the published blockade notion requires positive width and 0<=x<=1. A positive-width sequence is a published blockade.",
+        "proof_plan": "Extend directional sparsity by the same degree inequality to empty sets; do not silently change the published nonempty convention.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "Section 2, blockade conventions"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-labelled-blowup-and-good-induced-copy",
+        "kind": "definition",
+        "title": "Labelled blowup and good induced copy",
+        "deps": [
+          "def-induced-copy-density-and-homogeneous-restriction-parameter",
+          "def-blockade-length-and-width",
+          "def-directional-and-weak-sparsity-between-vertex-sets"
+        ],
+        "statement": "For a nonempty labelled graph J, integer t>=1 and 0<=q<=1, a (t,q)-blowup consists of disjoint t-element sets A_j. Each A_i is q-sparse to A_j in G for ij a nonedge, and in its complement for ij an edge, in BOTH directions. A good induced embedding of J[I] sends each i to A_i.",
+        "proof_plan": "The explicit label-to-block condition defines good copies locally, as in the primary paper section 4 before 4.2; no rainbow-copy supplier is needed. Internal edges of the A_j are unrestricted. The density notation of the preceding definition fixes the count.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "Section 4, definition preceding 4.2"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-good-copy-extension-count",
+        "kind": "lemma",
+        "title": "Good copy extension count",
+        "deps": [
+          "def-labelled-blowup-and-good-induced-copy",
+          "thm-product-rule",
+          "thm-sum-rule",
+          "thm-subset-of-a-finite-set"
+        ],
+        "statement": "If j=|J|>=1 and the host is a (t,1/j)-blowup, every good embedding of J[I] extends to at least (t/j)^(j-|I|) good embeddings of J.",
+        "proof_plan": "Induct on the number of labels still missing. At the next label the union of at most |I| forbidden sets removes at most |I|t/j vertices, leaving at least t/j. Disjoint blocks force injectivity; extensions through different vertices are distinct. Include I empty and I=V(J).",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "4.2, internal claim (1)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-few-induced-copies-exclude-a-fixed-labelled-blowup",
+        "kind": "lemma",
+        "title": "Few induced copies exclude a fixed labelled blowup",
+        "deps": [
+          "lem-good-copy-extension-count",
+          "def-induced-copy-density-and-homogeneous-restriction-parameter"
+        ],
+        "statement": "If ind_J(G)<(t/|J|)^|J| for nonempty J and integer t>=1, no (t,1/|J|)-blowup exists.",
+        "proof_plan": "Apply the extension count to the unique empty embedding. This is an exclusion of approximate labelled blowups, not ordinary complete blowups.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "4.2"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qid-bipartite-density-trimming",
+        "kind": "lemma",
+        "title": "Qid bipartite density trimming",
+        "deps": [
+          "thm-double-counting",
+          "cor-the-averaging-principle",
+          "def-qid-restricted-blockade-with-empty-blocks"
+        ],
+        "statement": "For disjoint finite A,B and c>=0, if e(A,B)<=c|A||B|, at least |A|/2 vertices of A have at most 2c|B| neighbors in B.",
+        "proof_plan": "Sum degrees over vertices exceeding the threshold. Handle c=0 and empty sets separately. The output controls degrees FROM A INTO B; it does not claim symmetric directional sparsity.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "4.1"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qid-fixed-size-density-selection",
+        "kind": "lemma",
+        "title": "Qid fixed size density selection",
+        "deps": [
+          "thm-double-counting",
+          "cor-the-averaging-principle",
+          "thm-binomial-closed-formula",
+          "thm-two-element-subsets-count",
+          "def-induced-copy-density-and-homogeneous-restriction-parameter"
+        ],
+        "statement": "If 1<=m<=|A|, some m-subset C of A satisfies e(C,B)<=m e(A,B)/|A|. If 2<=m<=|A|, some m-subset C has e(G[C])/binom(m,2)<=e(G[A])/binom(|A|,2); a singleton has zero edges. The analogous upper-density choice is obtained in the complement.",
+        "proof_plan": "Double-count pairs (subset,edge): each cross edge occurs in binom(|A|-1,m-1) subsets; each internal edge in binom(|A|-2,m-2). Apply averaging over the nonempty family of m-subsets. This is existence, never arbitrary trimming.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "4.3 proof (1); 5.2 proof (1)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-local-special-copy-trichotomy",
+        "kind": "lemma",
+        "title": "Local special copy trichotomy",
+        "deps": [
+          "def-induced-copy-density-and-homogeneous-restriction-parameter",
+          "lem-few-induced-copies-exclude-a-fixed-labelled-blowup",
+          "thm-double-counting",
+          "thm-cardinality-of-a-set-of-functions",
+          "thm-real-power-laws"
+        ],
+        "statement": "Let H be nonempty, g in V(H), b,c>0, a=b+(1+c)|H|, 0<x<=1/2. Suppose A,B are disjoint and each v in A has at least x|B| nonneighbors in B. Then either some Bprime subset B of size >=x|B| has ind_(H-g)(G[Bprime])<x^b |Bprime|^(|H|-1); or ind_H(G)>=x^a |A||B|^(|H|-1); or subsets Aprime,Bprime of respective relative size >=x^a have cross density <=2x^c.",
+        "proof_plan": "For positive A,B, delete the edges at g in a fixed order to produce H_0,...,H_d. Count special copies sending g into A and the others into B. Locate the first multiplicative drop by x^c. Fibre over embeddings of H-{g,h}; discard fibres with nonedge count below tau_(t-1)/(2|B|^(k-2)); a remaining fibre has edge/nonedge ratio <=2x^c. Define U in B and V in A using H_(t-1), not H, for the g-side adjacency pattern; conclude Aprime=V and Bprime=U. If A or B is empty the count alternative is immediate (with integer powers). X is the design-required preliminary exclusion interface, not a necessary premise of the source 3.1 proof.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "3.1 complete proof"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qid-maximal-blowup-trichotomy",
+        "kind": "lemma",
+        "title": "Qid maximal blowup trichotomy",
+        "deps": [
+          "lem-local-special-copy-trichotomy",
+          "lem-few-induced-copies-exclude-a-fixed-labelled-blowup",
+          "lem-good-copy-extension-count",
+          "lem-qid-bipartite-density-trimming",
+          "lem-qid-fixed-size-density-selection",
+          "thm-real-power-laws",
+          "lem-integer-part"
+        ],
+        "statement": "For nonempty H, g in H and alpha>0 there exist beta,gamma>0 such that for n>=2 and 0<x<=1/(8|H|), either an A of size >=x^beta n has ind_(H-g)(G[A])<x^alpha |A|^(|H|-1), or ind_H(G)>=x^gamma n^|H|, or disjoint A,B have |A|>=x^beta n, |B|>=n/(2|H|) and B is x-sparse to A in G or its complement.",
+        "proof_plan": "Follow 4.3: round x down to reciprocal integer, doubling final exponents. For h>=2 enlarge alpha to integer >=h(h+1); r_h=0, r_i=alpha+2h+1+(h+1)r_(i+1), beta=r_1+3, gamma=2r_1+beta*h. Use t=floor(x^(beta-1)n), t_i=x^(-r_i)t, q_i=x^(r_i)/h. Maximize J admitting a (t_|J|,q_|J|)-blowup. Exclude J=H with X. If all mismatch sets have size <n/(2h), at least n/2 vertices remain. Apply L successively, trim with T and S, and extend the blowup, a contradiction. Correct t_(k+1)=s*t_k with s=x^(r_k-r_(k+1)); complement BOTH H and G in the complementary case. Explicit singleton case when x^beta n<=1.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "4.3 complete proof"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-special-copy-trichotomy-produces-a-restricted-blockade",
+        "kind": "lemma",
+        "title": "Special copy trichotomy produces a restricted blockade",
+        "deps": [
+          "lem-good-copy-extension-count",
+          "lem-few-induced-copies-exclude-a-fixed-labelled-blowup",
+          "lem-local-special-copy-trichotomy",
+          "lem-qid-maximal-blowup-trichotomy",
+          "def-qid-restricted-blockade-with-empty-blocks",
+          "thm-logarithm-change-of-base",
+          "thm-real-power-laws",
+          "lem-integer-part"
+        ],
+        "statement": "For each nonempty H there are k1,k2>0 so that if n>=1, 0<x<=1/(8|H|), and ind_H(G)<x^k1 n^|H|, there is a QID x-restricted sequence of length >=2 log_2(1/x) and width >=floor(x^k2 n). At least half its indices form a uniformly x-sparse sequence in G or its complement.",
+        "proof_plan": "Induct on h, using M with alpha=k1prime. Set d0=log_2(2h), k1=gamma+2d0*h, k2=k2prime+beta+2d0. Maximize an initial restricted sequence whose earlier blocks have size >=x^k2 n and last block >=(2h)^(1-k)n. If it is too short the last block exceeds x^(2d0)n. Apply M there: many copies contradicts the global bound, a sparse pair extends the sequence, and few H-g copies gives induction. Keep exponent beta+2d0 (not beta+d0) in the final induction. Width zero uses empty blocks explicitly. h=1 hypothesis is impossible.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "4.4; 2.3"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-subreciprocal-function-and-ell-divisibility",
+        "kind": "definition",
+        "title": "Subreciprocal function and ell divisibility",
+        "deps": [
+          "def-induced-copy-density-and-homogeneous-restriction-parameter",
+          "def-qid-restricted-blockade-with-empty-blocks",
+          "def-logarithm-to-a-base",
+          "lem-integer-part"
+        ],
+        "statement": "A positive function ell on (0,1/2) is subreciprocal when it is nonincreasing and 1<ell(x)<=1/x. A NONEMPTY graph H is ell-divisive if some 0<c<1/2 and d>1 ensure that ind_H(G)<=x^d |G|^|H| for 0<x<c implies a QID sequence of length >=ell(x), width >=floor(x^d |G|), uniformly x-sparse in G or its complement, for each nonempty G.",
+        "proof_plan": "Fix empty-block and non-strict copy-threshold conventions. Restrict the general theorem to nonempty patterns; null-pattern strict final interfaces are vacuous.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "Section 5 before 5.1"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-subreciprocal-functions-close-under-the-density-recursion",
+        "kind": "lemma",
+        "title": "Admissible parameters for the density recursion",
+        "deps": [
+          "def-subreciprocal-function-and-ell-divisibility",
+          "thm-logarithm-change-of-base",
+          "thm-real-power-laws",
+          "thm-natural-logarithm-laws",
+          "lem-integer-part"
+        ],
+        "statement": "Given subreciprocal ell, 0<c<1/2 and d>1, set z=ell(c)^(-1/2), and choose b>2 with 2^(2-b)=1-z. For 0<epsilon<c put x=2^(1-b)epsilon, p=z ell(x), and eta=x^d/4. Let t be the least natural number with p^t>=epsilon^(-2) (equivalently t=-floor(-2 log_2(1/epsilon)/log_2 p)). Then 0<eta<1, p>1, p^2>=ell(x), 1<=t<=5 log_2(1/epsilon)/log_2 ell(epsilon), and delta=2^(-20bd log_2(1/epsilon)^2/log_2 ell(epsilon))<x^d eta^t.",
+        "proof_plan": "This item asserts admissibility of recursion parameters; no function-closure operation is claimed. By lem-integer-part, the displayed floor construction is the least integer t above u=2 log_2(1/epsilon)/log_2 p, hence u<=t<u+1; this is the required one-unit rounding bound, not an undeclared ceiling. Monotonicity and ell(epsilon)<=1/epsilon give u<=4 log_2(1/epsilon)/log_2 ell(epsilon), hence t<4 log_2(1/epsilon)/log_2 ell(epsilon)+1<=5 log_2(1/epsilon)/log_2 ell(epsilon). Then x>epsilon^b and 4^(-t)>epsilon^(2t) give the displayed delta bound. All logarithms have positive arguments and log ell>0.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "5.2, setup preceding claim (1)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-qid-finite-density-recursion-profile",
+        "kind": "definition",
+        "title": "Qid finite density recursion profile",
+        "deps": [
+          "def-induced-copy-density-and-homogeneous-restriction-parameter",
+          "cor-cardinality-of-the-power-set"
+        ],
+        "statement": "Fix a nonempty finite G, 0<eta<1, and integer s>=0. Define beta_s(a,b) to be the minimum of rho_F(a,b) over induced F with |F|>=eta^s |G|. Thus 0<beta_s<=1, attained in a finite nonempty family; if a>=1 or b>=1 then beta_s=1.",
+        "proof_plan": "Take a finite maximum for each rho_F and a finite minimum over F, avoiding a universal maximum over all graphs. All subsets F considered are nonempty.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "5.2, definition of beta_s"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-qid-logarithmic-and-constant-divisibility",
+        "kind": "lemma",
+        "title": "Qid logarithmic and constant divisibility",
+        "deps": [
+          "lem-special-copy-trichotomy-produces-a-restricted-blockade",
+          "def-subreciprocal-function-and-ell-divisibility",
+          "lem-subreciprocal-functions-close-under-the-density-recursion",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws",
+          "lem-integer-part",
+          "thm-logarithm-change-of-base"
+        ],
+        "statement": "Every nonempty graph H is ell-divisive for ell(x)=log_2(1/x), and also for ell(x)=2. Both functions are subreciprocal on (0,1/2).",
+        "proof_plan": "Derive base-two logarithm and power monotonicity, and decreasing powers for bases in (0,1), from natural-logarithm order and change of base. Prove log_2(y)<=y for all y>=2 by the floor and integer induction argument. Use the uniformly sparse half-subsequence with d>max(1,k1,k2) and c=1/(16|H|); verify strict count threshold, monotone floor width, and length greater than 2. Constants may depend on H.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "5.1 and paragraph on constant ell before it"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-ell-divisibility-amplifies-through-a-blockade",
+        "kind": "lemma",
+        "title": "Ell divisibility amplifies through a blockade",
+        "deps": [
+          "lem-special-copy-trichotomy-produces-a-restricted-blockade",
+          "def-subreciprocal-function-and-ell-divisibility",
+          "lem-subreciprocal-functions-close-under-the-density-recursion",
+          "def-qid-finite-density-recursion-profile",
+          "lem-qid-bipartite-density-trimming",
+          "lem-qid-fixed-size-density-selection",
+          "thm-two-element-subsets-count",
+          "def-induced-copy-number",
+          "lem-integer-part"
+        ],
+        "statement": "Let ell be subreciprocal, let H be a nonempty ell-divisive graph with witnesses 0<c<1/2 and d>1, and write h=|H|. Set z=ell(c)^(-1/2), choose b>2 with 2^(2-b)=1-z, and, for 0<epsilon<c, set x=2^(1-b)epsilon, p=z ell(x), eta=x^d/4, t=-floor(-2 log_2(1/epsilon)/log_2 p), and delta=2^(-20bd log_2(1/epsilon)^2/log_2 ell(epsilon)). Thus 0<eta<1 and t is the least natural with p^t>=epsilon^(-2). Fix a nonempty G with ind_H(G)<=(delta|G|)^h and delta|G|>1, and let beta_r(u,v) be the profile of def-qid-finite-density-recursion-profile for this fixed G and eta. Then, for every integer s with 1<=s<=t and all u,v>=epsilon, beta_(s-1)(u,v)>=eta min(beta_s(pu,v),beta_s(u,pv)).",
+        "proof_plan": "The preceding parameter lemma supplies p>1, the least-natural t and delta<x^d eta^t; lem-integer-part supplies the floor-derived one-unit bounds. For each induced F with |F|>=eta^(s-1)|G|, use delta|G|>1 and delta<x^d eta^t to obtain |F|>=eta^(-1) and ind_H(F)<=x^d|F|^h by direct embedding inclusion (the earlier strict inheritance lemma is not a <= statement). Ell-divisibility gives a sequence with width floor(x^d|F|)=floor(4eta|F|)>=2eta|F|. Put gamma_1=beta_s(pu,v), gamma_2=beta_s(u,pv), gamma=min(gamma_1,gamma_2); when the sparse alternative is in G, set m=-floor(-eta gamma_1|F|), the least natural at least eta gamma_1|F|. The floor bounds eta gamma_1|F|<=m<eta gamma_1|F|+1, together with integrality of the available C_i, justify exact-m selection without a ceiling. Reverse-process blocks, trim relative to the already selected union, then apply beta_s. If opposite density appears finish; otherwise sum kpu binom(m,2)+2xm^2 binom(k,2)<=u binom(km,2), using p/k<=z and 2x<=(1-z)u. In the complementary sequence exchange u,v, without assuming complement closure of H-free graphs. Treat the empty tail and m=1 separately.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "5.2 claim (1)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-quantitative-density-theorem-for-ell-divisive-graphs",
+        "kind": "theorem",
+        "title": "Quantitative density theorem for ell divisive graphs",
+        "deps": [
+          "def-induced-copy-density-and-homogeneous-restriction-parameter",
+          "def-subreciprocal-function-and-ell-divisibility",
+          "lem-ell-divisibility-amplifies-through-a-blockade",
+          "thm-real-power-laws",
+          "thm-logarithm-change-of-base",
+          "lem-subreciprocal-functions-close-under-the-density-recursion",
+          "def-qid-finite-density-recursion-profile"
+        ],
+        "statement": "If a nonempty finite H is ell-divisive for subreciprocal ell, some C_H,ell>0 has this property: for 0<epsilon<1/2 and delta=2^(-C_H,ell log_2(1/epsilon)^2/log_2 ell(epsilon)), every nonempty G with ind_H(G)<=(delta|G|)^|H| has a nonempty S of size >=delta|G| for which e(G[S])<=epsilon binom(|S|,2) or e(complement(G)[S])<=epsilon binom(|S|,2).",
+        "proof_plan": "Singleton handles delta*n<=1. Iterate I exactly t times: beta_0(epsilon,epsilon)>=eta^t min_i beta_t(p^i epsilon,p^(t-i)epsilon)=eta^t>=delta since p^t epsilon^2>=1. To cover epsilon>=c, choose a>1 with 2^(-a)=c and apply the small-epsilon result to epsilon^a; monotonicity of ell gives delta_prime>=delta after replacing C by a^2 C. No old quantitative remark is cited. The source proof uses no regularity theorem; those pages remain background requirements, not fictitious proof dependencies.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "5.2 complete proof"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-fox-sudakov-quantitative-induced-density-bound",
+        "kind": "corollary",
+        "title": "Fox sudakov quantitative induced density bound",
+        "deps": [
+          "thm-quantitative-density-theorem-for-ell-divisive-graphs",
+          "lem-qid-logarithmic-and-constant-divisibility"
+        ],
+        "statement": "For every nonempty finite H there is C_H>0 such that for 0<x<1/2, delta=2^(-C_H(log_2(1/x))^2), and nonempty G with ind_H(G)<=(delta|G|)^|H|, a nonempty S of size >=delta|G| has at most x binom(|S|,2) edges in G or its complement. In particular this holds for H-free G. The strict few-copy version also covers the null H vacuously.",
+        "proof_plan": "Apply G with ell=2 using V. This is the exact H-dependent interface used by the published classical bound. It does not assert the stronger absolute C|H| exponent from Fox-Sudakov; that is separately documented in coverage.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "5.2 at ell=2; 1.7 (comparison of constant dependence)"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-loglog-quantitative-induced-density-bound",
+        "kind": "theorem",
+        "title": "Loglog quantitative induced density bound",
+        "deps": [
+          "thm-quantitative-density-theorem-for-ell-divisive-graphs",
+          "lem-qid-logarithmic-and-constant-divisibility"
+        ],
+        "statement": "For every nonempty finite H there is C_H>0 such that for 0<x<1/2 and delta=2^(-C_H(log_2(1/x))^2/log_2 log_2(1/x)), nonempty G with ind_H(G)<=(delta|G|)^|H| has a nonempty S of size >=delta|G| with e(G[S])<=x binom(|S|,2) or the same inequality in the complement. H-free graphs qualify; the strict few-copy version covers the null pattern vacuously.",
+        "proof_plan": "Use G and V with ell(x)=log_2(1/x). The denominator is positive throughout the open interval; never use the formula at x=1/2. No downstream homogeneous-set theorem is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "1.8; 5.1 and 5.2"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 408.2,
+    "id": "quantitative-induced-density-and-the-loglog-step-examples",
+    "kind": "B",
+    "category": "combinatorics",
+    "title": "Quantitative Induced Density and the Log-Log Step: Examples",
+    "companion": "quantitative-induced-density-and-the-loglog-step",
+    "requires": [
+      "quantitative-induced-density-and-the-loglog-step"
+    ],
+    "items": [
+      {
+        "id": "ex-a-labelled-blowup-and-its-good-copies",
+        "kind": "example",
+        "title": "A labelled blowup and its good copies",
+        "deps": [
+          "def-labelled-blowup-and-good-induced-copy",
+          "lem-good-copy-extension-count",
+          "thm-product-rule"
+        ],
+        "statement": "For J=P3 and independent blocks of size 3, complete on consecutive pairs and anticomplete on the end pair, there are 27 good copies, 9 good copies extending a prescribed middle vertex, and 126 total labelled induced embeddings of P3.",
+        "proof_plan": "Good copies give 3^3 and 3^2. The whole graph is K_(3,6): centers in the size-3 side contribute 3*6*5=90, and centers in the size-6 side contribute 6*3*2=36, for 126 total. Include endpoints in the same block; rainbow alone does not impose the label assignment.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "4.2, explicit specialization"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-checking-the-subreciprocal-condition-for-the-quadratic-log-bound",
+        "kind": "example",
+        "title": "Checking the subreciprocal condition for the quadratic log bound",
+        "deps": [
+          "def-subreciprocal-function-and-ell-divisibility",
+          "cor-fox-sudakov-quantitative-induced-density-bound",
+          "thm-logarithm-change-of-base"
+        ],
+        "statement": "For ell(x)=2, verify 1<2<1/x when 0<x<1/2, log_2 ell=1, and at x=1/16 the exponent is 16C.",
+        "proof_plan": "Substitute the constant function into the formula, and verify all domain inequalities.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "Section 5, ell=2"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-checking-the-subreciprocal-condition-for-the-loglog-bound",
+        "kind": "example",
+        "title": "Checking the subreciprocal condition for the loglog bound",
+        "deps": [
+          "def-subreciprocal-function-and-ell-divisibility",
+          "lem-qid-logarithmic-and-constant-divisibility",
+          "thm-loglog-quantitative-induced-density-bound",
+          "thm-logarithm-change-of-base"
+        ],
+        "statement": "For ell(x)=log_2(1/x), verify subreciprocity on (0,1/2). At x=1/16, ell=4 and log_2 ell=2, so the exponent is 8C.",
+        "proof_plan": "Use the proof of subreciprocity from V, then evaluate at 1/16. Constants are symbolic, not certified numerical witnesses for arbitrary H.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "5.1 and 5.2"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-comparing-the-two-quantitative-density-scales",
+        "kind": "example",
+        "title": "Comparing the two quantitative density scales",
+        "deps": [
+          "cor-fox-sudakov-quantitative-induced-density-bound",
+          "thm-loglog-quantitative-induced-density-bound",
+          "thm-logarithm-change-of-base",
+          "thm-natural-logarithm-laws"
+        ],
+        "statement": "For fixed positive C1,C2, the logarithmic ratio of the loglog loss to the quadratic loss is C2/(C1 log_2 log_2(1/x)), tending to zero as x decreases to zero. Thus the loglog guaranteed fraction eventually exceeds the classical fraction; with equal C and x=1/16 they are 2^(-8C) and 2^(-16C).",
+        "proof_plan": "Compare positive exponents, accounting for reversal under 2^(-u). Do not assert pointwise dominance for unrelated constants over the entire interval.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I",
+              "url": "https://arxiv.org/html/2301.10147v3",
+              "locator": "1.7\u20131.8, numerical comparison"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

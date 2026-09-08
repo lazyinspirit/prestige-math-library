@@ -1,5 +1,8 @@
 # Step-6 Alpha
 
+Maintain the records in `briefs/tasks/frontier-dependency-ledger.md` within your
+authorized consumer batches; this does not replace Step-6 edge verdicts.
+
 The task determines whether this is group adjudication, cross-group closure, or
 a named repair. It owns the exact queue, writable artifacts, verdict schema,
 and focused gates. Read it first, then verify all reader, refuter, detector,
@@ -27,6 +30,20 @@ verification record. Preserve stable item ids. Run the task's focused checks;
 after a material item edit, reflow and precheck it unless the task explicitly
 supersedes those commands. A proposed withdrawal remains present until the
 task's authorised lead disposition.
+
+At Step 6b, including gate repairs, accept a sound item; repair a defect only
+when 100% confident in the repair. Otherwise escalate to the owner, without
+speculative edits or closing unresolved defects or risk reviews. Search the
+web for unfamiliar mathematics, read authoritative sources, and cite the
+relevant statements and checked hypotheses in your evidence.
+Record an escalation in the group's `research/<run>-alpha-<g>-6b-decisions.json`:
+use the exact obligation, id and route, `verdict: "escalated"`, nonempty
+`evidence` explaining the uncertainty, sources consulted and owner decision
+needed, and `defect_ids: []` (or existing open references). For a gate-only
+finding use `obligation: "gate:<unique-id>"` and `route: "gate"`.
+Preserve other decisions, write the group report, and return normally so the
+engine can hold for the owner. Never clear an escalation without an owner
+resolution. Record `repair_confidence: 1` for each repair you complete.
 
 Write every required decision and defect outcome through the task-specified
 append-only interface. Do not rewrite shared ledgers or invent a defect row for

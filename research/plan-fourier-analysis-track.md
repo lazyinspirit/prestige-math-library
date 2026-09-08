@@ -112,10 +112,13 @@ none licenses an edit to a current library page or item now.
   item already has the correct non-Dini proof; this is a plan-spec repair.
 - FR-2: replace its page edge to FR-1 B by FR-1 A.  Its published item proofs
   otherwise have their mathematical suppliers.
-- FR-3: add the transferred FA-17 A theorem
+- FR-3: use the FA-18 A theorem
   `thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra` to
   `thm-wiener-lemma-for-absolutely-convergent-fourier-series`; step 2.1 uses
-  precisely that result but its current `deps` omit it.  Once FA-17 is
+  precisely that result but its current `deps` omit it. Also declare FA-18's
+  `thm-characters-on-a-unital-banach-algebra-are-continuous` for Step 1.1.
+  FA-18 is already earlier than FR-3 in the binding plan; no transfer to
+  FA-17 is needed. Once FA-17 and FA-18 are
   published, rewrite `cor-holomorphic-functional-calculus-in-the-wiener-algebra`
   to target FA-17's proved calculus, eliminating its current complex-analysis
   `forward_refs`.  Preserve the two published B-page counterexamples
@@ -133,7 +136,8 @@ none licenses an edit to a current library page or item now.
   supplier, not a claim that the published Riesz-product argument is invalid.
 - FR-5: after FR-4K/FR-4C publish, retain the already-published
   `lem-fourier-maximal-weak-bound-closes-almost-everywhere-convergence` on
-  FR-5 A and add FR-4C's maximal inequality as its missing supplier. Do not
+  FR-5 A as a conditional lemma; its assumed weak bound is not a missing
+  prerequisite. Do not add FR-4C as a dependency of that implication. Do not
   duplicate or temporarily move that stable ID during Phase 2. Add
   `thm-kolmogorov-lone-fourier-series-diverges-almost-everywhere`
   and `thm-carleson-hunt-maximal-inequality-on-the-torus` as dependencies of
@@ -415,10 +419,11 @@ jump from extrema at points approaching the jump.
 **B page:** `absolute-convergence-and-the-wiener-algebra-examples`
 **Requires:** the FR-1 and FR-2 A pages, Parseval from
 `orthonormal-bases-parseval-and-fourier-series`, and FA-17 A
-`banach-algebras-spectrum-and-holomorphic-functional-calculus`.  The
-maximal-ideal/character theorem currently listed on FA-17's B companion must be
-transferred to FA-17 A before FR-3 may target it; otherwise that companion would
-not be a dependency leaf.  The periodic weak derivative is
+`banach-algebras-spectrum-and-holomorphic-functional-calculus`, and FA-18 A
+`gelfand-theory-and-commutative-c-star-algebras`. The binding FA-18 prose owns
+character continuity and the maximal-ideal criterion; its order 288.081 is
+earlier than FR-3 at 288.1401. Keep these single A-page homes and the B pages
+as leaves. The periodic weak derivative is
 still developed locally, but Wiener inversion no longer smuggles in an unproved
 maximal-ideal criterion. **Sources read:** L ch. 4, pp. 27–30; G §3.3,
 pp. 192–202; T §1, PDF pp. 1–18.
@@ -437,7 +442,7 @@ pp. 192–202; T §1, PDF pp. 1–18.
 | 10 | `def-periodic-ltwo-weak-derivative` (definition) — define the weak derivative directly on $\mathbb T$ by periodic test functions. | Keeps the Fourier claim closed without redefining general Sobolev spaces. | literature-derived | not-applicable | Standard periodic specialization. |
 | 11 | `lem-fourier-coefficients-of-a-periodic-weak-derivative` (lemma) — $\widehat g(k)=2\pi i k\widehat f(k)$ when $g$ is the periodic weak derivative of $f$. | Supplies the exact weighted-$\ell^2$ bridge used next. | literature-derived | ai-altered | Test against smooth characters. |
 | 12 | `cor-one-ltwo-derivative-implies-an-absolutely-convergent-fourier-series` (corollary) — $f\in L^2$ with weak derivative in $L^2$ has $\widehat f\in\ell^1$. | Cheap periodic criterion. | literature-derived | ai-altered | Items 4 and 11. |
-| 13 | `thm-wiener-lemma-for-absolutely-convergent-fourier-series` (theorem) — a nowhere-zero $f\in A(\mathbb T)$ has $1/f\in A(\mathbb T)$. | Gives the named inverse-closedness theorem. | literature-derived | literature-derived | Identify every character with evaluation, then cite FA-17 A's transferred `thm-maximal-ideals-and-characters-of-a-commutative-banach-algebra`. |
+| 13 | `thm-wiener-lemma-for-absolutely-convergent-fourier-series` (theorem) — a nowhere-zero $f\in A(\mathbb T)$ has $1/f\in A(\mathbb T)$. | Gives the named inverse-closedness theorem. | literature-derived | literature-derived | Use FA-18's character-continuity theorem, identify every character with evaluation via A-norm Fourier truncations, and apply its maximal-ideal/character criterion under explicit AC. |
 | 14 | `cor-holomorphic-functional-calculus-in-the-wiener-algebra` (corollary) — if $f\in A(\mathbb T)$ and $\Phi$ is holomorphic near $f(\mathbb T)$, then $\Phi\circ f\in A(\mathbb T)$. | Shows what Wiener inversion is for. | literature-derived | ai-altered | FA-17's proved Banach-algebra holomorphic calculus plus item 13; no forward complex-analysis result. |
 
 **B-page leaves.**

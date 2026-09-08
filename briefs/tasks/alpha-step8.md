@@ -5,6 +5,9 @@ and incoming alerts. Read each owned rejection against the current item and its
 cited dependencies; the exact `(id, model, context_sha256)` tuple identifies
 one adjudication.
 
+Audit one item, record its decision, complete any authorized repair and focused
+checks, then proceed to the next. Inspect related items first only when necessary.
+
 Web search is available in this role. If any mathematics is uncertain, use it
 and verify the point against original sources before deciding the outcome or
 making a repair. Record the sources consulted and the exact claim each source

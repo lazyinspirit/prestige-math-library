@@ -173,12 +173,11 @@ mathematical evidence. There is **no blocker** to the prose scaffold.
 - Lie groups and all Lie-algebra structure theory are denied because the seam
   assigns them wholly to differential geometry. The Lie-algebra heading in
   Craven's notes is harvested as out of scope for exactly this reason.
-- The proof of CFSG, the proof of Gromov's polynomial-growth theorem, the
-  Novikov--Boone and Adian--Rabin undecidability proofs, and the full
-  O'Nan--Scott proof are source-cited survey results, `proved_here: false`, and
-  never dependency targets. Each requires a research programme far larger than
-  the machinery of its page; their precise statements and consequences remain
-  valuable.
+- The owner will delete the CFSG landscape stub A/B pair. Other recorded
+  results, including Gromov growth and Novikov--Boone/Adian--Rabin, require
+  local proof suppliers under the Phase-2 retirement target. Their former
+  survey treatment is not a completion route. Until the proof scaffolds and
+  prerequisites below are closed, these endpoints remain retirement blockers.
 - Locally compact group structure, Haar measure, Pontryagin duality, and
   representation theory of general topological groups require measure or
   functional analysis and are not inferred from profinite compactness.
@@ -843,15 +842,17 @@ groups.
     this library uses the five coarse landscape because no later item needs
     the finer labels.
 14. `thm-onan-scott-classification-of-finite-primitive-groups` — **theorem**
-    `[LS]`, `proved_here: false`: every finite primitive permutation group falls
-    into the stated socle types, with convention mapping to the cited version.
-    LANDMARK; never a dependency target.
+    `[LL]` proof obligation: every finite primitive permutation group falls
+    into the stated socle types. U-C19 found the published proof assumes its
+    case analysis; exact proof scope remains unclosed as recorded below.
+    Do not consume the current defective proof or relabel it as retirement.
 15. `rem-cfsg-refinements-of-the-onan-scott-reduction` — **remark** `[LS]`,
     `proved_here: false`: classification of almost-simple cases uses CFSG and
     belongs to `GT-20`'s survey.
 16. `prop-two-transitive-groups-have-affine-or-almost-simple-socle-type` —
-    **proposition** `[LS]`, `proved_here: false` in the exact sourced finite
-    form; it is not used later.
+    **proposition** `[LL]`: the U-C19 repaired published proof gives the
+    elementary Burnside argument using published finite-group suppliers,
+    without O'Nan–Scott, CFSG or the general Frobenius theorem.
 17. `rem-algorithmic-role-of-onan-scott` — **remark** `[LN]`, a faithful
     source summary of reduction structure, not an invented theorem.
 
@@ -864,8 +865,9 @@ groups.
 - `fs-onan-scott-is-the-classification-of-finite-simple-groups` `[LN]` — it is
   a structural classification of primitive actions.
 - `fs-the-onan-scott-theorem-requires-the-classification-of-finite-simple-groups`
-  `[LN]` — the structural theorem does not; many applications and refinements
-  do.
+  `[LN]` — U-C19 leaves this independence assertion A-P: the exact cited
+  TW-inclusive construction uses Schreier; an adequate CFSG-free proof has
+  not been supplied. Preserve the uncertainty rather than assert necessity.
 
 ### B page — `socles-and-the-onan-scott-landscape-examples`
 
@@ -3307,7 +3309,7 @@ provides the whole work, not that every chapter was read.
 | Lie groups and Lie algebras, including Craven's Lie methods and construction of Lie-type groups | explicit seam ownership by differential geometry | differential-geometry track; `GT-20` uses family names only |
 | maximal-class/coclass $p$-groups, critical subgroups, fusion and transfer | need a substantial coprime-action/local finite-group block; none is needed for Frattini or extraspecial classification | advanced finite-$p$/local-group sequel after modular characters |
 | Nielsen transformations, Whitehead algorithm, Stallings folding, Howson theorem, automorphisms of free groups | require a coherent folding/automorphism complex beyond subgroup freeness | advanced combinatorial-group sequel citing `GT-5` |
-| Higman embedding, generalized word problem, Novikov--Boone construction | require recursive-function and embedding machinery far beyond defining the decision problems | computable/combinatorial group theory sequel; negative theorem remains `[LS]` |
+| Higman embedding, generalized word problem, Novikov--Boone construction | require recursive-function and embedding machinery beyond decision-problem definitions | retirement proof scaffold required; the Computability track's machine definitions alone do not discharge these results |
 | one-relator torsion theorem outside small cancellation, Freiheitssatz | Magnus induction/Fox calculus need their own page | one-relator-groups sequel after `GT-8` |
 | ends, accessibility and Stallings splitting theorem | ends and accessibility are not built; using the theorem to prove the Bass--Serre machinery would be circular | geometric-group sequel after `GT-15` |
 | CAT(0) spaces/cube complexes, buildings, mapping class groups, arithmetic groups | each needs a major geometric subject not commissioned here | separate GGT/application tracks |
@@ -3317,7 +3319,7 @@ provides the whole work, not that every chapter was read.
 | derived inverse limits, $\varprojlim^1$, Mittag--Leffler, profinite/Galois cohomology | require derived functors of limits and continuous cochains/topological modules | homological-algebra/profinite-cohomology sequel |
 | Haar measure, Pontryagin duality, locally compact group structure | profinite compactness alone does not supply measure/duality theory | functional/harmonic analysis |
 | Jennings theory, block defect groups, Brauer main theorems, Green correspondence beyond the stated vertex theorem, tame/wild type, support varieties | need deeper local modular theory and/or cohomology; would overload the introductory two-pair block with new prerequisites | modular-representation sequel after `GT-19` |
-| proof of O'Nan--Scott, Gromov polynomial-growth, CFSG, Novikov--Boone/Adian--Rabin | each proof is a major research programme not reproducible from the page machinery | exact statements retained as source-cited non-load-bearing `[LS]` items |
+| remaining recorded O'Nan--Scott refinements, Gromov polynomial-growth, Novikov--Boone/Adian--Rabin | current page machinery does not prove these endpoints | local proof suppliers and full prerequisite closure required for retirement; only the CFSG landscape stub pair is owner-exempt |
 | étale fundamental groups and infinite Galois groups | require schemes or infinite Galois theory, absent from this library band | algebraic geometry/number theory, citing `GT-16` |
 
 ---
@@ -3467,6 +3469,12 @@ authoritative merely because the syntactic validators accept it.
 
 ### 30.2 Binding A/B page requirements
 
+Live Step-3 supervision, 2026-09-08: the canonical SC/HG supplier closures
+now replace eleven upstream B-page requirements by their earlier A companions.
+Their current plan closures have 40 and 115 pages with no B supplier. This
+applies the B-leaf cutovers, not every minimal-prerequisite rewrite below;
+published headers remain Phase-3 work.
+
 Every B page requires only its own A page. Every A page uses the following
 adequate earlier **A-page** closure. This table replaces §3 and the current live
 page requirements.
@@ -3553,7 +3561,7 @@ binding repairs are:
 
 | recorded supplier | direct published consumers | complete additional transitive impact | repair |
 |---|---|---|---|
-| `rem-cfsg-refinements-of-the-onan-scott-reduction` | `fs-onan-scott-is-the-classification-of-finite-simple-groups`; `fs-the-onan-scott-theorem-requires-the-classification-of-finite-simple-groups` | none | Remove both edges; refute by the proved structural theorem's scope and page metadata, without asserting an unproved classification theorem. |
+| `rem-cfsg-refinements-of-the-onan-scott-reduction` | `fs-the-onan-scott-theorem-requires-the-classification-of-finite-simple-groups` | unclosed proof scope | The classification-question comparison is repaired independently by S3. The independence assertion remains A-P; removing its edge does not prove it. |
 | `rem-finitely-generated-abelian-groups-admit-invariant-factor-normal-form` | `thm-word-problem-for-finitely-generated-abelian-groups` | `ex-word-problem-in-a-finite-cyclic-presentation` on its B page | Repoint to the published invariant-factor theorem for finitely generated abelian groups/modules and make the algorithm explicit. |
 | `rem-novikov-boone-undecidability-of-the-word-problem` | `fs-every-finitely-presented-group-has-solvable-word-problem`; `fs-recursively-enumerable-trivial-words-form-a-decision-algorithm`; `fs-the-novikov-boone-theorem-proves-the-uniform-problem-only`; `fs-unsolvable-word-problem-means-no-word-can-be-decided`; `rem-adian-rabin-undecidability-for-markov-properties` | `rem-triviality-and-finiteness-are-undecidable-for-finite-presentations` | Remove all five edges. The deep undecidability remarks and any false statement whose only counterwitness is one of them must be recorded leaves; no local proof is claimed. |
 | `rem-adian-rabin-undecidability-for-markov-properties` | `rem-triviality-and-finiteness-are-undecidable-for-finite-presentations` | none | Remove the edge; both remarks are leaves. |
@@ -3578,23 +3586,20 @@ The remaining recorded leaves already have zero consumers:
 
 Additional nominal-proof repairs are mandatory:
 
-- `thm-onan-scott-classification-of-finite-primitive-groups` was designed in
-  §GT-4 as `[LS]`, `proved_here: false`, and “never a dependency target,” but
-  the published file was changed to `proof: ai-altered` and its `[A2]` is the
-  whole O'Nan--Scott conclusion. Restore it to a recorded leaf. Remove its six
-  outgoing supplier edges: `ex-simple-diagonal-action` must verify its action
-  directly from the type definition; the two O'Nan--Scott `fs-` items and
-  `rem-algorithmic-role-of-onan-scott` become metadata/source-summary leaves;
-  `rem-cfsg-refinements-of-the-onan-scott-reduction` remains a recorded leaf;
-  and `prop-two-transitive-groups-have-affine-or-almost-simple-socle-type`
-  returns to the `[LS]`, `proved_here: false` leaf promised in §GT-4. No one of
-  those items may supply another result. A complete, readable copy of the
-  primary Liebeck--Praeger--Saxl proof was not obtained in this pass; the
-  search endpoint exposed proof fragments and then failed full retrieval.
-  That is a proof-source blocker, and incorporating the classification is in
-  any event outside this scaffold's deliberately bounded elementary socle
-  page. This is a Phase-3 restoration of intended status, not a Phase-2
-  supplier request.
+- U-C19 preserves the O'Nan–Scott five-type claim for genuine Phase-3 proof
+  repair; do not restore it to a recorded leaf and call the dependency closed.
+  The full Liebeck–Praeger–Saxl 1988 proof is now recovered/read, but its
+  Schreier uses in pp.394–396 leave the exact proof destination unclosed.
+  The excluded CFSG stub is not a supplier. Record the faithful twisted-wreath
+  construction, almost-simple nonregularity and finite case partition as
+  unresolved proof obligations, not nominally covered Phase-2 items.
+  The two-transitive proposition has meanwhile been repaired by a complete
+  elementary Burnside proof, and the classification-question comparison by S3.
+  The asserted CFSG-independence refutation remains A-P: a source that uses
+  Schreier neither proves independence nor proves that no alternative exists.
+  Correct the coarse map: III(a)=HS/SD, III(b)=HC/CD/PA. The TW definition
+  needs its actual inducing homomorphism, function group, faithful top action
+  and unique regular socle. Exact evidence: uc19-astra-agent-2.md.
 - `thm-finite-characteristically-simple-groups-are-direct-products-of-isomorphic-simple-groups`
   must replace its unlinked `[A2]` by the short local argument: automorphic
   images of a minimal normal subgroup are minimal normal, distinct images
@@ -3664,13 +3669,46 @@ planned-only enrichment with item-level zero published consumers.
 8. `lem-minimal-power-diagram-has-a-periodic-boundary-shell`.
 9. `thm-c-prime-one-sixth-torsion-elements-come-from-relator-roots`.
 
+SC-2 must cover self-adjacent arcs: opposite readings of the same face are
+inverse cyclic rotations, never equal for a nonempty cyclically reduced word.
+The explicit cyclic-index reflection proof must retain proper-power relators.
+SC-3 sums arc occurrences with multiplicity. SC-5 likewise counts corner
+occurrences, not distinct boundary vertices: two exterior arcs have four
+endpoint corner occurrences, since consecutive exterior arcs would force a
+suppressed degree-two boundary vertex. Do not assume simple face attaching
+walks or import a stronger piece convention. The wave-1 local proofs supply
+these occurrence arguments without a new A/B pair or regularity prerequisite.
+
+SC-6 must supply a subword of the original linear null word, not merely
+a cyclic reading. Root the block tree at the word basepoint; choose a terminal
+shell whose exterior arc avoids the attachment/basepoint internally. For a
+single root face start reading at that basepoint. Rotate/orient the relator
+using symmetrisation. This exact linear interface supplies the published
+Dehn-presentation definition; the current draft and owning contract carry it.
+
 SC-4 must print the Euler identity and account separately for boundary
 valence-one spurs; SC-5 may suppress a spur only because the outer word is
-freely reduced. SC-8 chooses a conjugate of minimum cyclic length and a
-minimum-area diagram for its least positive power; it must prove, rather than
-assume, that the shell overlaps force cyclic periodicity. SC-9 states
+freely reduced. Before SC-8, include
+`def-sc-toolkit-cyclically-dehn-reduced-word` and
+`lem-sc-toolkit-periodic-word-square-alternative`, with the commuting-word
+and periodic-piece lemmas already added to the wave-1 scaffold. Use the
+complete Lipschutz §6 argument: retain the common-root exception; otherwise
+all powers of the word, or of a nonempty representative of its square, are
+Dehn-reduced. SC-8 applies this to a shortest torsion conjugate and excludes
+both latter alternatives by SC-6. Do not apply Lipschutz's stated
+infinite-order lemma to a torsion element, or reuse the unverified
+one-period shortening inequality from the damaged book OCR. SC-9 states
 “conjugate to a power of a root of a cyclic conjugate of a defining relator,”
 with symmetrisation and proper-power conventions explicit.
+
+The wave-1 scaffold also places the labelled-diagram definition, van Kampen
+existence, and minimal-diagram/block-cut reduction before SC-1. Touikan §3.1.1
+and Theorem 3.1.7 supply the complete balloon-diagram construction and
+unfolding direction. Cancellable-pair deletion lowers area by two. For a
+singular diagram, apply the nonsingular curvature count to an end block of the
+finite block-cut tree; its unique attachment is semi-exterior, while an end
+bridge is a spur. Thus the long shell transfers to the full outer boundary walk
+without assuming that every diagram is a topological disc.
 
 **B page** `small-cancellation-disc-diagrams-and-torsion-toolkit-examples`,
 requiring only the A page: `ex-curvature-ledger-for-a-two-cell-diagram`,
@@ -3693,9 +3731,11 @@ consumers.
 3. `lem-reduction-of-teichmuller-lifted-traces-recovers-modular-traces`.
 4. `thm-irreducible-brauer-characters-are-linearly-independent-on-p-regular-elements`.
 
-BR-1 is proved from the already published Wedderburn--Artin decomposition (or
-the finite-dimensional density corollary proved from it), not cited as an
-unproved Jacobson-density theorem. BR-2 isolates one simple at a time by an
+BR-1 now uses the finite simultaneous-density proof written in the current
+batch-3 manifest: split submodules of finite sums of simples by induction,
+then apply Schur's lemma to the cyclic vector listing the chosen bases.
+This avoids the defective published radical/composition-series route and
+does not assume a density theorem. BR-2 isolates one simple at a time by an
 algebra element and an endomorphism of trace one. BR-3 states the splitting
 modular-system and Teichmüller-lift hypotheses exactly. BR-4 is the missing
 independence half; the published basis theorem retains its own spanning proof.
@@ -3726,6 +3766,37 @@ Each has zero published consumers.
 8. `lem-weighted-coordinate-boxes-give-matching-growth-bounds`.
 9. `thm-bass-guivarch-growth-degree-formula-with-proof`.
 
+Before BG-2, add `lem-hall-malcev-integer-abelian-structure-and-rank`.
+It supplies finite generation of subgroups of finitely generated abelian
+groups, decomposition as a finite sum of infinite and finite cyclic groups,
+uniqueness of the number of infinite factors, and preservation of that number
+under a surjection with finite kernel. Use this local integer result instead
+of the generic PID classification, finite-free PID submodule theorem, and
+PID free-rank definition throughout this pair.
+
+The proof has three finite steps. Project a subgroup of Z^n to its last
+coordinate, use `lem-subgroups-of-z-are-cyclic`, lift its generator, and
+split off that lift; induction gives a finite basis of the kernel and then
+of the subgroup. A subgroup of a finitely generated abelian group is the
+image of its inverse image in Z^n, so is finitely generated. For a finite
+presentation Z^n/K, diagonalize a finite basis matrix of K by integer row
+and column operations: every failed divisibility produces a smaller positive
+pivot by `thm-division-algorithm-in-z`; after the pivot divides the entire
+remaining rectangle, clear its row and column and recurse. Each operation
+has an explicit inverse. Taking the quotient gives the cyclic factors,
+including unit, zero, and empty cases. Finally Hom(M,Q), with pointwise
+operations, is Q^r for this decomposition: finite torsion maps to zero.
+Finite-dimensional linear algebra makes r intrinsic. A homomorphism to Q
+kills a finite kernel and factors uniquely through the quotient, proving
+rank invariance without tensor exactness or a PID uniqueness theorem.
+All selections are finite; there is no ACC-to-maximal-condition step.
+
+Source checks: Conrad, *Modules over a PID*, Theorem 2.2 (pp.2–3),
+and Brussel, *Finitely Generated Modules over a PID*, Theorems 1.0.1 and
+2.1.2 (pp.3–5, Euclidean branch) and §3.2 (p.8). Their full relevant proofs
+were read on 2026-09-08. The integer specialization and Hom(M,Q) argument
+are supplied locally; the non-Euclidean factorization branch is not used.
+
 The rank in BG-2 is the torsion-free rank of
 `gamma_i(G)/gamma_{i+1}(G)`, and the degree is
 `sum_i i rank(...)`. BG-4 first passes to a finite-index torsion-free
@@ -3734,6 +3805,15 @@ assert unique integral Mal'cev coordinates for a group with torsion. BG-7
 proves both inequalities in the distortion exponent. BG-9 proves upper and
 lower polynomial bounds, so the word “growth” means equivalence class and not
 an unsupported exact asymptotic constant.
+
+Use the corrected 837-page Druţu--Kapovich edition for Lemma 14.17,
+Lemma 14.21, Proposition 14.20, Proposition 14.25 and Theorem 14.26. Its closed
+lcs alphabet includes finite-order carries, and collection always retains the
+ambient lower-central weights. The 585-page draft's assertion that a
+torsion-free nilpotent group has torsion-free lower-central quotients is false
+and must not be used; Remark 13.83(2) in the revised edition gives the explicit
+Heisenberg-subgroup counterexample. Power compression for the last central
+term is still valid and supplies the reverse distortion inequality.
 
 **B page** `hall-malcev-coordinates-and-bass-guivarch-growth-examples`,
 requiring only the A page: `ex-bass-dimension-of-a-free-abelian-group`,
@@ -3746,9 +3826,106 @@ published consumers.
 
 #### HG. Quantitative hyperbolic-geometry toolkit
 
+**Owner-authorized deferral, 2026-09-08:** remove this pair from
+`phase-2-wave-1`, not from Phase 2. Preserve its complete 29-A/5-B scaffold
+and sources in `research/phase-2-hg-deferred.pages.json` and
+`research/phase-2-hg-deferred.coverage.json`. Build the following prerequisite
+pair first. HG is not buildable until its exact cone/filling interfaces are
+proved and accepted. The old cone-extraction sentence is not a proof.
+
+##### HG-P. Asymptotic cones and the sublinear triangle criterion
+
+A `asymptotic-cones-and-the-sublinear-triangle-criterion`, order 302.00405;
+B the same ID plus `-examples`, order 302.0041, requiring only A.
+Category: group-theory. A requires `filters-and-ultrafilters`,
+`cayley-graphs-word-metrics-and-quasi-isometry`,
+`small-cancellation-and-dehn-algorithms`, and `free-groups-and-presentations`.
+It does not require HG, its published hyperbolicity consumers, or any recorded
+result. State AC where used and identify each selected family inside proofs.
+
+Binding inventory (proof order; every intermediate result is proved here):
+
+1. `def-rescaled-ultralimit-and-asymptotic-cone`: fix a nonprincipal
+   ultrafilter, basepoints and positive scales tending to zero; use sequences
+   at bounded rescaled distance, identify zero ultradistance and prove the
+   quotient metric. Construct the tail filter and extend it using the
+   published ultrafilter lemma; construct bounded real ultralimits by nested
+   intervals. Do not import the B-page Frechet-filter example.
+2. `lem-geodesic-segments-have-isometric-ultralimits`: parameterize chosen
+   segments by distance, truncate consistently and pass distance identities
+   to ultralimits. Handle endpoints escaping to infinity as rays or lines;
+   record AC for choosing representative geodesics.
+3. `def-real-tree-tripods-and-geodesic-triangle-minsize`: define real trees,
+   slimness and minsize locally, including the perimeter-bounded supremum.
+   Do not import later HG definitions. Prove the equivalence between unique
+   arcs and tripod triangles, and the elementary ray/line uniqueness rules.
+4. `lem-tree-cones-give-uniform-two-side-control`: under the hypothesis that
+   every basepoint/scaling cone for one fixed free ultrafilter is a real tree,
+   prove a uniform bound M*d(y,z) on the Hausdorff distance of [x,y],[x,z]
+   when d(y,z)>1. Negate the bound, rescale at a maximizing point, and treat
+   segments, rays and lines separately; distinct parallel branches contradict
+   the tree rules. Supplier: items 1–3.
+5. `thm-all-asymptotic-cones-are-trees-implies-uniform-slimness`: prove the
+   full fat-triangle extraction, not merely assert convergence. Maximize
+   distance from a side to the opposite sides, rescale by that distance,
+   and separate bounded and unbounded ratios to the third side. Use item 4
+   to control rays/lines. In both cases the resulting separated branches
+   contradict the tree rules. All basepoints/scales are quantified.
+6. `lem-sublinear-minsize-makes-every-cone-geodesic-a-limit-geodesic`:
+   for c on a cone segment [a,b], apply minsize to triangles of representatives.
+   The three selected side points coalesce; equality in
+   d(a,b)<=d(a,x)+d(x,b)+2d(x,c)=d(a,c)+d(c,b)
+   forces x=c. Handle bounded perimeters separately. Supplier: items 1–3.
+7. `thm-sublinear-triangle-minsize-implies-hyperbolicity`: item 6 makes
+   every cone triangle a limit triangle. Minsize makes its three sides meet;
+   apply the tripod criterion and item 5. Do not assume the characterization
+   while proving it. Export a finite slimness bound for the given space.
+8. `def-bounded-edge-coarse-triangular-filling`: define triangulated disks,
+   vertex maps, edge bound, combinatorial area and coarse boundary minsize.
+9. `lem-relator-disks-give-area-controlled-coarse-fillings`: construct the
+   disk from a normal-closure expression, resolve folds/spurs without
+   unbounded area, triangulate each bounded-perimeter relator polygon and
+   count triangles. Record a bound C(L)*(Area(w)+|w|+1), a coarse edge bound
+   depending only on L, and the passage from graph geodesic triangles to
+   edge loops with bounded endpoint errors. Existence alone is insufficient.
+10. `lem-coarse-triangle-minsize-is-bounded-by-square-root-area`: prove the
+    planar distance-coordinate argument, including the boundary winding/
+    separation lemma and area bound for each affine image triangle. A source
+    citation or an unproved appeal to planar separation is not a supplier;
+    add local sublemmas or exact earlier dependencies during scaffolding.
+    Export minsize <= C*r*sqrt(number of triangles)+C*r, allowing the
+    discretization error; no unjustified sharp constant is required.
+11. `thm-linear-relator-area-implies-slim-geodesic-triangles`: combine
+    items 9–10 to obtain sublinear minsize, then item 7. Preserve the
+    bounded relator perimeter and the area constant throughout.
+12. `lem-uniform-filling-data-give-a-uniform-slimness-bound`: separately
+    prove uniformity in the filling constants and relator perimeter before
+    HG exports a constant depending only on K,L. A qualitative theorem for
+    one space is insufficient. Give the uniform extraction estimates, or a
+    fully justified tree-of-spaces contradiction preserving the common
+    minsize bound. This remains a mandatory proof gate, not a certified claim.
+
+B: `ex-asymptotic-cones-of-lines-and-trees` (direct metric computation),
+`ex-euclidean-triangle-has-positive-linear-minsize` (scaled fixed triangle),
+`ex-scaling-distinguishes-sublinear-minsize-from-bounded-perimeter`
+(compute the rescaled perimeter/minsize ratios). B items are dependency leaves.
+
+Sources: Druţu–Kapovich, revised *Geometric Group Theory*,
+https://www.math.ucdavis.edu/~kapovich/EPR/ggt.pdf, Chapter 10; full
+Lemma 11.168/Proposition 11.167 proofs pp.422–425; full Proposition 11.176/
+Lemma 11.177 proof pp.428–429; full Propositions 9.103–9.104 pp.330–332;
+Theorem 11.181 p.432. The latter passages were read on 2026-09-08.
+Chapter 10 still needs its complete targeted harvest at Step 1. These sources
+do not constitute library dependencies. Do not reproduce the source's false
+Remark 10.1 assertion that countable choice follows by induction in ZF.
+This is a scoped prerequisite design, not an assertion that its proofs have
+already passed review. Full construction, planar lemma, uniformity, source,
+and dependency gates must close before either HG-P or HG is accepted.
+
 **A page** `quantitative-hyperbolic-geometry-toolkit`
 
-**requires** `cayley-graphs-word-metrics-and-quasi-isometry`,
+**requires** `asymptotic-cones-and-the-sublinear-triangle-criterion`, `filters-and-ultrafilters`,
+`cayley-graphs-word-metrics-and-quasi-isometry`,
 `geometric-actions-svarc-milnor-and-growth`,
 `small-cancellation-and-dehn-algorithms`, `free-groups-and-presentations`
 
@@ -3779,9 +3956,49 @@ used only for compact boundary statements; local finiteness is stated where a
 finite ball is counted. “Elementary” means finite or virtually cyclic. The
 centralizer conclusion is for finitely generated hyperbolic groups, not
 arbitrary groups acting on a hyperbolic space. The Dehn clause
-attaches every null loop of length at most `10 delta` and proves both finite
+normalizes to an integer Delta>=max(3,2*delta), attaches every null loop of
+length at most `10 Delta`, and proves both finite
 presentability and the shortening property. The boundary clauses specify the
 Gromov-product convention and all additive constant changes.
+
+The quantitative constants are fixed as follows. For δ>0, reproduce the
+halfspace proof of Druţu--Kapovich Theorem 11.45 to show that a 6δ-local
+arc-length geodesic is a `(3,4δ)`-quasi-geodesic; for δ=0 use the tripod
+argument and assume a positive locality radius. Since δ-slim triangles give
+product constant 3δ locally, reproduce the complete corrected AFP proof to
+obtain `M(λ,ε,δ)=92λ²(ε+3δ)` for possibly discontinuous compact-interval
+quasi-geodesic maps. The optimized AFP interpolation gives a continuous
+`(λ,4ε)` map at Hausdorff distance `2ε`; the printed Gouëzel--Shchur Lemma 2.1
+is a weaker expository version. Projection uses supplied attained closest
+points and an auxiliary product constant strictly greater than `3δ`, followed
+by a limit. The scaffold must reproduce the projection induction, optimized
+Morse recurrence, constant inequalities and both Hausdorff inclusions rather
+than cite them as external dependencies. The quantitative toolkit also requires
+the earlier `filters-and-ultrafilters` A page. The filling converse explicitly
+assumes AC. Construct its free ultrafilter locally: the tails T_n={m:n≤m}
+are nonempty and intersect as T_max(n,k); their upward closure is a proper
+filter. Extend it with the A-page ultrafilter lemma. Since T_(n+1) avoids n,
+every singleton complement is in the extension, which is therefore
+nonprincipal. Declare the filter and natural-order interfaces; never consume
+the B example `ex-frechet-filter`. AC also selects the counterexample triangles
+and geodesic representatives used by the cone argument.
+For the filling converse consume HG-P's proved
+`thm-linear-relator-area-implies-slim-geodesic-triangles` and
+`lem-uniform-filling-data-give-a-uniform-slimness-bound`, not the old inline
+cone-extraction assertion. Conclude slim triangles first, then thin bigons.
+For the Dehn construction, if every based subword of length <=5*Delta is
+geodesic, bracketing any real subarc of length <=6*delta by vertices adds
+at most two edges; 6*delta+2<=5*Delta. The whole path is therefore
+6*delta-local. Its quasi-geodesic estimate at the equal endpoints bounds
+its length by 12*delta, impossible for length >10*Delta. A nongeodesic
+based subword thus has length <=5*Delta and a strictly shorter replacement;
+their relator has length <10*Delta and the subword is more than half of it.
+Short null words are relators themselves. Use positive delta also for trees,
+then the same normalization. This supplies the based, not just cyclic, route.
+Hamann Theorems 5.3.7--5.3.8 give the torsion-allowed
+independent-loxodromic construction. Canary Theorem 5.7, together with
+Proposition 5.1, upgrades polewise convergence of powers to uniform convergence
+off a repelling neighbourhood.
 
 **B page** `quantitative-hyperbolic-geometry-toolkit-examples`, requiring only
 the A page: `ex-morse-stability-in-a-tree`,
@@ -3800,15 +4017,18 @@ page. There are no hidden consumers outside the sets printed here.
 
 #### SC consumer map
 
-SC-1 through SC-5 have zero direct published consumers and the complete
-transitive published impact is the following curvature set:
+SC-1 through SC-4 supply the internal prerequisites of SC-5. The
+curvature repair impact is the following set:
 
 - `small-cancellation-and-dehn-algorithms`: `lem-curvature-count-for-reduced-c-prime-one-sixth-diagrams`, `thm-greendlinger-lemma-for-c-prime-one-sixth-presentations`, `cor-finite-c-prime-one-sixth-presentations-have-solvable-word-problem`, `cor-linear-isoperimetric-bound-for-finite-c-prime-one-sixth-presentations`, `thm-dehn-algorithm-solves-the-word-problem`, `fs-greendlinger-lemma-applies-to-every-finitely-presented-group`;
 - its B page: `ex-a-greendlinger-cell-in-a-van-kampen-diagram`, `ex-a-dehn-reduction-sequence`.
 
-SC-6 directly supplies
+SC-5 `lem-boundary-spur-or-at-most-three-shell-from-curvature` directly supplies
 `lem-curvature-count-for-reduced-c-prime-one-sixth-diagrams`; its transitive
-impact is the preceding set minus that direct item. SC-7 and SC-8 have zero
+impact includes the preceding set. The arbitrary-given-diagram Greendlinger
+consumer also needs SC-2, including self-incidence. SC-6 concerns a null word
+and a minimum diagram, so it is not a substitute for this stronger contract.
+SC-7 and SC-8 have zero
 direct published consumers and transitively affect the torsion set below.
 SC-9 directly supplies `thm-torsion-theorem-for-c-prime-one-sixth-groups`; its
 complete transitive impact is:
@@ -3816,8 +4036,11 @@ complete transitive impact is:
 - `small-cancellation-and-dehn-algorithms`:
   `cor-c-prime-one-sixth-with-no-proper-power-relators-is-torsion-free`,
   `fs-no-proper-power-relators-alone-implies-torsion-free`;
-- its B page: `ex-a-torsion-free-small-cancellation-group`,
-  `cex-a-no-proper-power-presentation-with-torsion-outside-small-cancellation`.
+- its B page: `cex-a-no-proper-power-presentation-with-torsion-outside-small-cancellation`.
+
+U-C19 repaired `ex-a-torsion-free-small-cancellation-group` independently by
+Tietze elimination to F_6; it no longer waits on SC-9. Original scan evidence
+is retained as historical evidence, not current repair debt.
 
 Every SC B item has zero direct and zero transitive published consumers.
 
@@ -3910,6 +4133,27 @@ Every HG B item has zero direct and zero transitive published consumers.
 
 ### 30.7 Group-owned low-degree (co)homology Phase-2 supplier
 
+**Binding axiom correction, owner approved 2026-09-08:** assume the Axiom of
+Choice in `lem-bar-two-cocycles-classify-abelian-kernel-extensions`,
+`lem-pullback-and-coefficient-pushout-realize-bar-cohomology-maps`,
+`def-low-degree-transgression-for-a-group-extension`,
+`lem-transgression-kernel-is-the-image-of-restriction`,
+`lem-kernel-of-degree-two-inflation-is-the-transgression-image`, and
+`thm-inflation-restriction-transgression-five-term-sequence`; each declares
+`def-axiom-of-choice`. Apply AC to the fibers of the extension projection,
+then normalize the section at the identity. For transgression apply AC also
+to the nonempty Q-indexed sets of a satisfying
+(alpha(q)*d-d)(n)=n*a-a for every n, and normalize eta(1)=0.
+Print this assumption in Statement/Given, not merely in a proof instruction.
+The first-cohomology three-term sequence remains choice-free; the separate
+homology comparison retains DC and supplied-resolution data. The concrete
+Heisenberg example has explicit sections and does not need an arbitrary
+choice construction for its computation. Phase-3 consumers of the general
+five-term result must propagate AC, or supply a separate adequate proof.
+This is a sufficient axiom contract, not a necessity claim. Source: Dekimpe,
+Hartl and Wauters §10.1–10.2, https://arxiv.org/pdf/1103.4052, full printed
+pp.20–21 read; the displayed normalizer equation and minus sign agree.
+
 The earlier three-HA-root proposal is withdrawn. HA-12
 `group-cohomology-as-a-derived-functor` is already a published, nonempty pair,
 so adding a draft theorem there is Phase 3 rather than pair-only Phase 2.
@@ -3934,7 +4178,15 @@ The A page requires exactly the following strictly earlier A pages:
 `group-extensions-complements-and-schur-zassenhaus`. In particular it does
 not require GT-21: that published A page's live prerequisite is the empty
 HA-17 B page, so using GT-21 would inherit the defect this replacement is
-designed to remove. Author the new A items in this order:
+designed to remove. Before transfer, the current scaffold's
+`lem-diagonal-bar-coinvariants-compute-group-homology` must prove the
+left/right resolution comparison with the augmented tensor bicomplex.
+Use free-module exactness, the projective retract of a canonical free cover,
+and finite staircase elimination in each total degree, with supplied
+resolution data and DC explicit. Do not import the unpublished Tor-balance
+theorem or infer this comparison from the left-derived definition alone.
+The later Tor page remains a Phase-2 prerequisite of the planned HA-12
+cutover. Author the remaining new A items in this order:
 
 1. `def-finite-index-transfer-on-normalized-bar-chains` — fix left-module,
    right-coset-representative, and Schreier-rewriting conventions and print the
@@ -4108,23 +4360,50 @@ prerequisites remain outside the Group Theory audit.
 ### 30.8 Authoritative full-text evidence and blockers
 
 - Cornelia Druţu and Michael Kapovich, *Geometric Group Theory*, complete
-  author-hosted manuscript,
+  585-page author-hosted manuscript,
   <https://www.math.ucdavis.edu/~kapovich/EPR/kapovich_drutu.pdf>: Chapter 9,
   especially Theorem 9.38 (Morse), Theorems 9.83--9.89 (boundary extension),
   §§9.11--9.13 and Theorem 9.108/Proposition 9.109/Lemma 9.112 (hyperbolic
-  groups, linear filling, and Dehn presentations); §12.5, Definition 12.42,
-  Proposition 12.43, Lemma 12.44, Proposition 12.45 and Theorem 12.48 (the
-  complete Bass--Guivarc'h proof). The whole 585-page text was obtained and
-  the cited proof ranges read.
+  groups, linear filling, and Dehn presentations); and Lemma 12.38 through
+  Corollary 12.39 (last-central-term power compression). The whole 585-page
+  text was obtained and the cited proof ranges read. Its later collection
+  proof is superseded because it incorrectly treats lower-central quotients of
+  a torsion-free nilpotent group as torsion-free.
+- Druţu and Kapovich, corrected 837-page edition,
+  <https://www.math.ucdavis.edu/~kapovich/EPR/ggt.pdf>: Lemma 11.46 and
+  Theorem 11.45 (explicit local-geodesic constants); Proposition 9.104,
+  Proposition 11.176, Lemma 11.177 and Theorem 11.181 (complete
+  filling-to-hyperbolicity chain); Remark 13.83(2), Lemma 14.17,
+  Lemma 14.21, Proposition 14.20, Proposition 14.25 and Theorem 14.26
+  (torsion-aware collection and the Bass--Guivarc'h proof). These complete
+  ranges were read from the fetched 837-page PDF.
+- Sébastien Gouëzel and Vladimir Shchur, “A corrected quantitative version of
+  the Morse lemma,” complete paper,
+  <https://arxiv.org/pdf/1810.04579>: Theorem 1.1, Lemmas 2.1--2.5 and the
+  full printed expository argument were read. The paper explicitly repairs the
+  reversed inequality in the 2013 paper, but prints a detailed argument with
+  constant 2460 and only summarizes the optimization to 92; it is not by
+  itself the complete proof of the exact constant.
+- Sébastien Gouëzel, *AFP Gromov_Hyperbolicity*, complete formal sources,
+  <https://www.isa-afp.org/browser_info/current/AFP/Gromov_Hyperbolicity/Isometries.html>
+  and
+  <https://www.isa-afp.org/browser_info/current/AFP/Gromov_Hyperbolicity/Morse_Gromov_Theorem.html>:
+  the full optimized interpolation proof and the complete projection,
+  recurrence, limiting, reverse-inclusion and endpoint-case proof of
+  `92λ²(C+δ)` were read. They are proof templates to reproduce locally, not
+  external theorem dependencies; the local slim-triangle convention
+  substitutes product constant 3δ.
 - Matthias Hamann, *Geometric Group Theory*, complete author text,
   <https://www.math.uni-hamburg.de/home/hamann/Lehre/GeoGrTh/GeoGrThEn.pdf>:
   Proposition 5.2.5 and Theorem 5.2.6 prove undistortion and the virtually
-  cyclic centralizer; Theorems 5.3.7--5.3.8 prove the general (torsion-allowed)
-  boundary trichotomy and rank-two free-subgroup conclusion.
+  cyclic centralizer; Remark 5.3.6 and Theorems 5.3.7--5.3.8, read through
+  the complete proofs on pp.91--94, give the general (torsion-allowed)
+  boundary trichotomy and independent-loxodromic construction.
 - Richard Canary, *Anosov Representations: Informal Lecture Notes*, complete
   author-hosted text, <https://websites.umich.edu/~canary/lecnotespublic.pdf>:
   Proposition 4.3/Corollary 4.4 and Proposition 5.1 prove infinite cyclic
-  undistortion and north--south dynamics; Theorem 7.3 gives the ping-pong
+  undistortion and pointwise pole dynamics; the complete proof of Theorem 5.7
+  supplies uniform-on-compact convergence, and Theorem 7.3 gives the ping-pong
   proof. Its subgroup corollaries explicitly impose torsion-freeness, which is
   why it is not used to certify the two finite-torsion claims isolated in
   §30.4.
@@ -4134,21 +4413,27 @@ prerequisites remain outside the Group Theory audit.
   control. Its Bass theorem is a statement with a reference, not the proof
   source for BG, and this edition was not used for small cancellation.
 - Nicholas Touikan, *An Introduction to Combinatorial and Geometric Group
-  Theory*, complete author HTML, §3.5,
+  Theory*, complete author PDF §3.1.1 and Theorem 3.1.7, plus complete author
+  HTML §§3.4--3.5,
   <https://ntouikan.ext.unb.ca/MATH6022/IntroCGGT/html_output/section-18.html>:
-  arc reduction, pieces, shells, and Proposition 3.5.5. This supports SC-1--SC-6.
-- Roger C. Lyndon and Paul E. Schupp, *Combinatorial Group Theory*, Chapter V,
-  §10, Theorem 10.1 and Lemma 10.2, Springer (1977/2001),
-  <https://doi.org/10.1007/978-3-642-61896-3>; a complete searchable scan was
-  retrieved from
-  <https://www.scribd.com/document/384118619/CombinatorialGroupTheory> and the
-  entire proof on pp. 281--282 was read. Lemma 10.2 proves the relator-power
-  piece criterion. The proof of Theorem 10.1 then chooses a shortest conjugate,
-  applies the Chapter V Greendlinger theorem to a least power, separates the
-  repeated-period and one-period cases, and obtains either a common relator root
-  or a shorter conjugate contradiction. Together with Touikan's complete
-  diagram/Greendlinger development, this closes SC-7--SC-9; the earlier source
-  blocker is resolved.
+  balloon diagrams, van Kampen existence, arc reduction, pieces, shells,
+  Proposition 3.5.5, and the singular-diagram extension after Corollary 3.5.8.
+  This supports the local setup and SC-1--SC-6.
+- Seymour Lipschutz, “An extension of Greendlinger's results on the word
+  problem,” *Proc. AMS* 15 (1964), 37--43, DOI
+  <https://doi.org/10.1090/S0002-9939-1964-0160808-5>, complete university-library
+  copy <http://lib.ysu.am/articles_art/6b5e2e5df94354a3efa7529c0c38c956.pdf>.
+  All eight PDF pages were read; the images of printed pp.41--42 were checked
+  for fractions, inverses and all four overlap cases. §2 and the complete
+  proof of Lemma 4 in §6 supply the revised SC-7--SC-9 route described above.
+  The local alternative retains the common-root cases excluded by the
+  source's infinite-order hypothesis. Only finite words and individual
+  relators are used, so no finiteness assumption on the relator set is needed.
+  This replaces the Lyndon--Schupp Scribd treatment: its damaged fractions
+  did not verify the claimed C′(1/6) shortening, and the accessible same-book
+  university PDF contained only front matter. Source recovery does not close
+  the separate van Kampen/singular-diagram prerequisite B1-SC-SETUP in the
+  wave-1 notes; the SC pair remains uncertified until that argument is repaired.
 - Peter Webb, *A Course in Finite Group Representation Theory*, complete
   author-hosted text,
   <https://www-users.cse.umn.edu/~webb/RepBook/RepBookLatex.pdf>, and the
@@ -4179,8 +4464,9 @@ The inaccessible monograph citations in §§0--29 are corroborating
 bibliography only. They do not license a proof claim. In particular, the Jay
 Williams descriptive-set-theory paper currently cited by the published
 small-cancellation torsion item is not an acceptable proof source merely
-because it restates the classical theorem. The replacement proof source is the
-fully read Lyndon--Schupp range above.
+because it restates the classical theorem. The replacement proof route uses
+the fully read Lipschutz range above and the explicit local deduction, with
+the remaining diagram prerequisite recorded separately.
 
 ### 30.9 Final phase partition
 
@@ -4228,3 +4514,108 @@ requirements are `free-groups-and-presentations`, `metric-spaces`,
 `completeness-and-uniform-continuity`, and `limits-of-real-functions`.
 No Group Theory item uses the removed B page. This is a Phase-3 page repair
 using published A suppliers, with zero new supplier items and no Phase-2 root.
+The central Phase-2 plan now carries this exact seven-A prerequisite list
+(2026-09-08 supervisor reconciliation). The published page header remains
+unchanged until Phase 3. This removes the unrelated fundamental-group/Taylor
+branch from the prospective Hall--Mal'cev closure; it does not discharge
+the inherited published DC defects or certify the remaining proofs.
+The same reconciliation applies §30.2's exact A lists to amenability,
+profinite systems and pro-p groups, whose previously inherited free-product,
+topology and Frattini suppliers disappeared with the unrelated branch.
+Their published headers likewise remain Phase-3-only edits.
+
+### 30.12 Complete retirement obligations (2026-09-08)
+
+The Phase-2 target includes proved replacements for recorded results, not only
+repair of their current consumers. Removing a consumer edge or referring to
+`proved_here: false` metadata does not discharge the recorded mathematics.
+The owner will delete `the-finite-simple-group-classification-landscape` and
+its B companion; that pair is the only owner exception. Preserve published
+files during this work.
+
+`hall-malcev-coordinates-and-bass-guivarch-growth` proves growth estimates
+starting from nilpotence. It does not prove that polynomial growth implies
+virtual nilpotence. The latter is the outstanding Gromov retirement endpoint.
+
+Bruce Kleiner's complete *A new proof of Gromov's theorem on groups of
+polynomial growth*, <https://arxiv.org/pdf/0710.4593>, supplies a possible
+route. Before registering it as buildable, assign local proof items for the
+Cayley-graph Poincare estimate (§2), finite dimensionality of harmonic
+functions of bounded polynomial growth (§3), the infinite-image linear
+representation (§4 and Appendix A), and the induction to virtual nilpotence
+(§5). The linear-group input must also be proved: the paper explicitly uses
+Tits' alternative or Shalom's amenable-linear-group theorem. The analytic
+argument must not assume doubling estimates derived from Gromov itself.
+The current scaffold does not close that input chain. Record the endpoint as
+an unresolved proof-scaffold obligation, not as an empty pair counted complete.
+
+Novikov--Boone and Adian--Rabin likewise need a full finite-presentation
+simulation/embedding construction and reduction proof. The existing
+computability definitions and word-problem terminology are insufficient.
+Retain the exact recorded statements in the retirement inventory until their
+supplier scaffolds and authoritative proof sources are closed. Do not turn
+these theorems into axioms, omit their conclusions, or count a citation as a
+local proof.
+
+
+## U-C19 reconciliation: direct Boone construction (binding Phase 2)
+
+A `boone-machine-simulation-and-fixed-presentation-undecidability` (610.1), B `boone-machine-simulation-and-fixed-presentation-undecidability-examples` (610.2), category group-theory. Waiting, not authored or published. These 13 A items and 3 B items replace the unregistered Higman proposal, not the separate Higman/Adian–Rabin retirement obligations. Published machine/halting and free-group/HNN interfaces supply the prerequisites; the Phase-2 machine-configuration boundary interface must publish first. No Recorded, Not Proved Here item is a supplier.
+
+Authoritative full proof: [Rotman, Chapter 12, pp418–447](https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf), especially Corollary12.6, Lemmas12.7 and12.10–12.15, Theorem12.8. Source recovery is complete for this route, but it does not certify future authored proofs. Every construction and both simulation directions below are mandatory.
+
+1. `lem-normalized-fixed-halting-machine-for-boone-simulation`: A fixed deterministic finite tape machine with one stopping state recognizes an undecidable language. Its inputs and transitions admit effective finite-word encodings.
+   Suppliers: `thm-halting-is-recognizable-and-undecidable`, `def-deterministic-one-tape-turing-machine`, `def-turing-machine-initial-and-halting-configuration-interface`.
+   Proof obligation: Compile the halting recognizer into separate write/left/right instructions, a two-sided blank tape and one designated stop. Give the finite compiler and both simulation directions, not an appeal to the Church–Turing thesis. Reject branches loop. Rotman pp420–428.
+
+2. `def-boone-machine-semigroup-and-augmented-configurations`: Define a finite positive semigroup presentation with one-state-letter transition relations F_i q_a G_i = H_i q_b K_i, including blank extension and stopping cleanup; define its augmented valid configurations.
+   Suppliers: `lem-normalized-fixed-halting-machine-for-boone-simulation`.
+   Proof obligation: List write, internal/end left/right moves with marker h. Cleanup is q0 s=q0, s q0 h=q0 h, h q0 h=q. Permit empty right tape in cleanup configurations; q is a terminal sink. Reclassify h as a tape letter. State words, contextual replacements and symmetric derivations explicitly. Rotman pp426–430.
+
+3. `lem-boone-semigroup-histories-detect-halting`: For the encoded initial word C(w), C(w)=q in the finite semigroup exactly when the fixed machine stops on w.
+   Suppliers: `def-boone-machine-semigroup-and-augmented-configurations`.
+   Proof obligation: Prove valid augmented shapes closed under each applicable forward and reverse relation. Their oriented successor is deterministic. Delete valleys in an undirected path to the terminal sink to obtain a forward history. Separate ordinary computation, right erasure, left erasure and terminal cleanup; do not use the false nonempty-right-tape invariant after stopping.
+
+4. `thm-fixed-finite-semigroup-has-undecidable-terminal-equality`: There is one fixed finite positive presentation with one-state-letter relations for which equality of encoded initial words to q is undecidable.
+   Suppliers: `lem-normalized-fixed-halting-machine-for-boone-simulation`, `lem-boone-semigroup-histories-detect-halting`.
+   Proof obligation: Reduce the fixed undecidable language by the explicit input encoding. This is a fixed presentation, not a varying-presentation uniform problem. Rotman Corollary12.6.
+
+5. `def-boone-group-presentation-and-special-word`: For the preceding semigroup define the finite Boone presentation B, the tape-letter inversion homomorphism # on words, special words Sigma=X# q_j Y for positive X,Y, and W(Sigma)=k Sigma^-1 t Sigma k^-1 Sigma^-1 t^-1 Sigma.
+   Suppliers: `def-boone-machine-semigroup-and-augmented-configurations`, `def-recursive-and-finite-group-presentations`.
+   Proof obligation: Relations: x s=s x^2; r_i s=s x r_i x; r_i^-1 F_i# q_a G_i r_i=H_i# q_b K_i; t commutes with r_i,x; k commutes with r_i,x,q^-1 t q. The sharp operation inverts each tape letter without reversing order; it is not word inversion. Include every generator and empty-word convention. Rotman p431, visually checked.
+
+6. `lem-boone-base-groups-and-associated-free-bases`: The tape group is an iterated HNN extension of the infinite cyclic group; the rule-letter associated subgroups have the displayed free bases, with the specified basis correspondence an isomorphism.
+   Suppliers: `def-boone-group-presentation-and-special-word`, `thm-reduced-words-form-the-free-group`, `thm-normal-form-for-free-products`, `thm-brittons-lemma`, `cor-the-base-group-embeds-in-its-hnn-extension`, `def-axiom-of-choice`.
+   Proof obligation: Assume AC; identify inherited transversal choices in HNN/free-product normal forms. Adjoin tape letters identifying <x> with <x^2>, then take a FREE product with the state group. Prove freeness of <F_i# q_a G_i, s x> and <H_i# q_b K_i, s x^-1> using the x->1 retraction and the free-product automorphism q_a->u q_a v. Correct Rotman p439(ii-prime): state letters have trivial associated subgroups, not q^-1 x q=x. Prove x->x^-1, s->s is a tape-group automorphism.
+
+7. `lem-boone-hnn-tower-and-auxiliary-subgroups`: Assume AC. Adjoining rule letters, then t, then k gives B as an HNN tower with embedded bases and the exact centralizing subgroups <x,r_i> and <x,r_i,q^-1 t q>.
+   Suppliers: `lem-boone-base-groups-and-associated-free-bases`, `thm-hnn-normal-form-theorem`, `thm-brittons-lemma`, `def-axiom-of-choice`.
+   Proof obligation: Prove the auxiliary freeness and every edge-group embedding before invoking Britton; derive the finite presentation from the tower. Rotman Lemma12.11 and Corollary12.12. No diagram existence theorem or recorded embedding result.
+
+8. `lem-boone-positive-history-pushing`: Assume AC. A positive semigroup history Sigma*=q implies Sigma=L q R for words L,R on x,r_i; consequently W(Sigma)=1 in B.
+   Suppliers: `def-boone-group-presentation-and-special-word`, `lem-boone-hnn-tower-and-auxiliary-subgroups`, `def-axiom-of-choice`.
+   Proof obligation: Prove the four signed pushing identities for r_i across a positive tape word and its sharp counterpart. Induct over forward AND reverse replacements; then use the t,k centralizer relations. Rotman Lemma12.10, pp432–433.
+
+9. `lem-boone-commutator-extracts-an-auxiliary-history`: Assume AC. If W(Sigma)=1, then L Sigma R=q in the rule-letter base group for auxiliary words L,R.
+   Suppliers: `lem-boone-hnn-tower-and-auxiliary-subgroups`, `thm-brittons-lemma`, `def-axiom-of-choice`.
+   Proof obligation: Apply Britton to k, then choose a representation in <x,r_i,q^-1 t q> minimizing the number of conjugated t occurrences. A t pinch either yields the required equation or removes two occurrences, contradicting minimality. Treat both signs. Rotman Lemma12.13.
+
+10. `lem-boone-reduced-auxiliary-words-have-no-rule-pinches`: Assume AC. Freely reduced auxiliary words contain no rule-letter HNN pinch with a nonzero intermediate power of x; reduced normal-form comparisons match the rule-letter lengths in L Sigma R=q.
+   Suppliers: `lem-boone-base-groups-and-associated-free-bases`, `lem-boone-hnn-tower-and-auxiliary-subgroups`, `thm-hnn-normal-form-theorem`, `def-axiom-of-choice`.
+   Proof obligation: Prove each rule associated subgroup intersects <x> trivially, using its free basis, the state free factor and tape Britton normal form. Then prove the rule-length comparison rather than assuming equal history lengths. Rotman Lemma12.14 and start of12.15.
+
+11. `lem-boone-positive-history-reconstruction`: Assume AC. If a special positive word Sigma satisfies L Sigma R=q with auxiliary L,R, then Sigma*=q in the positive semigroup.
+   Suppliers: `lem-boone-commutator-extracts-an-auxiliary-history`, `lem-boone-reduced-auxiliary-words-have-no-rule-pinches`, `lem-boone-positive-history-pushing`, `def-axiom-of-choice`.
+   Proof obligation: Induct on the common reduced rule length. At zero length free-product normal form forces the terminal state and empty tapes. A central rule pinch locates the exact F_i,G_i prefixes/suffixes. Prove all positivity tests: a wrong surviving tape sign forces x into <x^2>, impossible by tape Britton. Use x-inversion symmetry and handle BOTH rule orientations, empty remainders and cancellation at replacement interfaces. Remove one rule letter on each side and apply induction. Rotman Lemma12.15 pp443–447; this full induction is mandatory, not a named simulation principle.
+
+12. `thm-boone-special-word-equivalence`: Assume AC. For every special positive word Sigma, W(Sigma)=1 in B if and only if Sigma*=q in the finite semigroup.
+   Suppliers: `lem-boone-positive-history-pushing`, `lem-boone-commutator-extracts-an-auxiliary-history`, `lem-boone-positive-history-reconstruction`, `def-axiom-of-choice`.
+   Proof obligation: Combine both proved directions with exactly the positive-word domain; do not extend to arbitrary signed words. Rotman Lemma12.7.
+
+13. `thm-novikov-boone-undecidability-of-the-word-problem`: Assume AC. There exists one finitely presented group whose word problem in its fixed finite presentation is undecidable.
+   Suppliers: `thm-fixed-finite-semigroup-has-undecidable-terminal-equality`, `def-boone-group-presentation-and-special-word`, `thm-boone-special-word-equivalence`, `def-word-problem-for-a-fixed-finite-presentation`, `def-axiom-of-choice`.
+   Proof obligation: Fix the machine, semigroup and Boone group once. Compute w->C(w)->Sigma(w)->W(Sigma(w)); a word-problem decider would decide the fixed halting language. Record inherited AC only in the group normal-form proof. No Higman embedding, recorded Novikov–Boone result, or recursive/computable equivalence theorem is assumed. Rotman Theorem12.8.
+
+B items: `ex-boone-sharp-is-not-word-inversion`: For distinct tape letters a,b compute (ab)#=a^-1 b^-1, whereas (ab)^-1=b^-1 a^-1.; `ex-boone-halting-cleanup-through-an-empty-right-tape`: Give a stopping configuration whose cleanup passes through an empty right tape and ends at q.; `ex-fixed-boone-undecidability-implies-uniform-undecidability`: Specializing any uniform word-problem decider to the fixed Boone presentation gives a contradiction..
+
+Published consumers awaiting Phase 3: `fs-every-finitely-presented-group-has-solvable-word-problem`, `fs-unsolvable-word-problem-means-no-word-can-be-decided`, `fs-the-novikov-boone-theorem-proves-the-uniform-problem-only`. Each uses the final theorem and its full local closure. Preserve the existential counterexample, give the empty-word instance for the second item, and explicitly specialize a uniform decider for the third. Do not change these proofs before the supplier publishes. The recursively enumerable false statement is already repaired independently. Route retirement of `rem-novikov-boone-undecidability-of-the-word-problem` to the final theorem; no retirement certificate until its complete proof publishes. This amendment supersedes earlier out-of-scope/recorded-leaf instructions for this endpoint only.

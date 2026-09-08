@@ -5221,7 +5221,7 @@ resynchronisation just recorded.
 
 | pair (A page) | disposition |
 |---|---|
-| CA-1 `complex-differentiability-and-cauchy-riemann` | Phase-3 page edge to partitions/paracompactness; derivative uniqueness must precede naming the derivative. |
+| CA-1 `complex-differentiability-and-cauchy-riemann` | Canonical plan prerequisite to partitions/paracompactness applied during the 2026-09-08 Step-3 intervention; published proof debt remains: derivative uniqueness must precede naming the derivative. |
 | CA-2 `complex-power-series-and-analytic-functions` | clear. |
 | CA-3 `contour-integration` | the two rectifiable-integral definitions must follow the existence theorem, or be explicitly partial definitions until it is proved. |
 | CA-4 `goursat-and-cauchys-theorem-in-a-convex-domain` | clear. |

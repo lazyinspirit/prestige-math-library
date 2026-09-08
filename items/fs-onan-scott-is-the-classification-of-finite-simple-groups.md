@@ -6,21 +6,22 @@ status: published
 origin: session
 provenance:
   statement: literature-derived
-  proof: ai-generated
-deps: [rem-cfsg-refinements-of-the-onan-scott-reduction, thm-onan-scott-classification-of-finite-primitive-groups]
+  proof: ai-altered
+deps: [def-simple-group, def-symmetric-group, def-k-transitive-and-k-homogeneous-actions, prop-doubly-transitive-actions-are-primitive]
 proof_strategy: direct
 verification:
-  audited: 2026-08-27
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
+  verified:
+    model: gpt-6-astra
     verdict: pass
-    date: 2026-08-27
+    date: 2026-09-09
+    scope: "Local terminology/refutation repair; no independent judge"
+    delegated_by: owner
 sources:
   scraped: []
   references:
-    - title: "Leonard H. Soicher, Primitive permutation groups"
-      url: "https://web.archive.org/web/20180712185154if_/http://www.maths.qmul.ac.uk:80/~lsoicher/designtheory.org/library/encyc/topics/primitive.pdf"
+    - title: "Liebeck, Praeger and Saxl, On the O'Nan-Scott theorem for finite primitive permutation groups, Introduction and Section 2"
+      url: "https://www.cambridge.org/core/services/aop-cambridge-core/content/view/9286080793AA683DFB749077A44F9305/S144678870003216Xa.pdf/div-class-title-on-the-o-nan-scott-theorem-for-finite-primitive-permutation-groups-div.pdf"
 ---
 
 ## Statement
@@ -30,19 +31,16 @@ groups.
 
 ## Facts & Assumptions
 
-**Given:** The finite O'Nan-Scott theorem and the classification of finite simple groups are distinct named results.
+**Given:** The names refer to these two classification questions: O'Nan–Scott asks for the socle and action types of finite primitive permutation groups; the classification of finite simple groups asks for the abstract isomorphism types of all finite simple groups. Comparing the questions does not assume the conclusions or proofs of either classification.
 
-[L1] The O'Nan-Scott theorem classifies finite primitive permutation groups of
-degree at least $2$ by socle type
-([[thm-onan-scott-classification-of-finite-primitive-groups]]).
+[L1] A simple group is nontrivial and has no proper nontrivial normal subgroup ([[def-simple-group]]).
 
-[A1] Later refinements involving finite simple groups lie beyond the structural
-O'Nan-Scott reduction.
+[L2] The symmetric group consists of all permutations of a set ([[def-symmetric-group]]). A $2$-transitive action moves any ordered pair of distinct points to any other, and is primitive ([[def-k-transitive-and-k-homogeneous-actions]], [[prop-doubly-transitive-actions-are-primitive]]).
 
 ## Refutation
 
 **Proof technique:** direct.
 
-1.1 By [L1], the O'Nan-Scott theorem concerns primitive permutation actions, not the class of all finite simple groups. [L1]
+1.1 The natural action of $S_3$ on $\{1,2,3\}$ is $2$-transitive: specifying the images of two distinct points determines a permutation by sending the third point to the remaining point. It is therefore primitive by [L2], and lies in the domain of the O'Nan–Scott classification question. [given, L2, algebra]
 
-2.1 The sourced boundary fact [A1] separates the structural reduction from the later theory of finite simple groups. Therefore the two theorems serve different purposes, and the claim is false. [A1, step 1.1] ∎
+2.1 The subgroup $A=\{1,(123),(132)\}$ is nontrivial and proper in $S_3$. Conjugating either $3$-cycle by a permutation merely relabels its three entries, so it gives one of these same two $3$-cycles. Thus $A$ is normal and $S_3$ is not simple by [L1]. Consequently the two classification questions have different domains: one includes this action of a nonsimple group, whereas the other classifies simple groups up to abstract isomorphism. Their conclusions also ask for different data, action types versus a list of abstract simple groups. They are not the same theorem. [step 1.1, given, L1, algebra] ∎

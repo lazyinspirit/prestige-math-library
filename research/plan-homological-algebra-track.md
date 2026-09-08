@@ -1650,6 +1650,21 @@ every resolution by hand.
 `cex-a-nonnatural-choice-of-connecting-maps-does-not-form-a-delta-functor` `[AN]` ·
 `ex-two-universal-delta-functors-and-their-unique-isomorphism` `[AA]`.
 
+**Phase-3 dependency cutover (2026-09-08; published files stay unchanged):**
+the A-page false statement
+`fs-any-sequence-of-functors-with-long-exact-sequences-is-a-delta-functor`
+and the B counterexample
+`cex-a-nonnatural-choice-of-connecting-maps-does-not-form-a-delta-functor`
+currently consume the earlier B example
+`ex-a-degreewise-split-sequence-with-nonzero-connecting-map`.
+Replace that dependency in each proof by the already published A suppliers
+`thm-the-canonical-mapping-cone-sequence-is-degreewise-split-short-exact`
+and `prop-the-cone-connecting-map-agrees-with-the-shifted-identity-up-to-the-declared-sign`.
+Specialize them inline to the identity of the stalk complex Z[0], then compare
+two distinct isomorphic copies while negating only one connector. The two
+maps are +1 and -1 on Z and differ. This preserves the counterexample without
+making any B page a supplier; it needs no new Phase-2 pair.
+
 ### Sources and exact locators
 
 - **Weibel §2.1 “$\delta$-Functors”, §2.4 “Left Derived Functors”, and §2.5
@@ -4663,10 +4678,10 @@ they are not licences to point a spine theorem forward.
 
 This continuation supplies actual dependencies requested by the braid and
 symmetric-group leads. It does not change existing HA-1–HA-17 item identities
-or the running build. The six new A pages below have `-examples` companions;
+or the running build. The seven new A pages below have `-examples` companions;
 each companion requires its A page only and remains a leaf. Their category is
-`homological-algebra`. Integration into the live plan is pending the combined
-dependency review. No new source is represented as a complete textbook merely
+`homological-algebra`. All fourteen page records are registered in the canonical
+plan; item arrays remain empty until authorized scaffolding. No new source is represented as a complete textbook merely
 because one complete chapter was obtained.
 
 The sources and exact read ranges are recorded at the end of this continuation.
@@ -4685,7 +4700,8 @@ track, so the shared foundations cannot create a braid–symmetric cycle.
 **requires** `tensor-products-of-modules`, `free-modules-and-exact-sequences`,
 `abelian-categories`,
 `subobject-lattices-generators-and-the-grothendieck-axioms`,
-`rees-modules-artin-rees-and-hilbert-samuel-theory`.
+`rees-modules-artin-rees-and-hilbert-samuel-theory`,
+`tor-flatness-and-global-dimension`.
 
 This page extends the published commutative grading convention to associative
 graded algebras and bimodules. It develops degree-preserving maps and tensor
@@ -4836,6 +4852,15 @@ not a claim that bounded objects are automatically perfect.
 projective replacement and homological dimension suppliers.
 **Forward references: NONE.**
 
+**Binding external inputs for 21.7:**
+`thm-finitely-generated-modules-over-noetherian-rings-are-noetherian`
+supplies the left-Noetherian finite-kernel argument for noncommutative rings;
+the similarly titled commutative lemma on the complex-analysis track is not
+an adequate replacement. Use `def-left-and-right-global-dimension-of-a-ring`
+and `thm-projective-dimension-at-most-n-iff-the-nth-syzygy-is-projective`
+for the truncation, choosing a positive syzygy index even when the global
+dimension is zero. All three inputs are already published.
+
 ## HA-22. Hochschild Homology and Diagonal Koszul Resolutions
 
 **page id** `hochschild-homology-and-diagonal-koszul-resolutions`
@@ -4906,7 +4931,7 @@ are separate braid-specific theorems, not consequences asserted here.
 | 23.2 | `thm-hochschild-hyperhomology-is-resolution-independent` | Use the right-A^e bar resolution of A, reindexed in nonpositive degrees, which is bounded above projective and hence K-flat by the existing bounded-flat lemma. Tensoring preserves quasi-isomorphisms of F; comparisons between projective resolutions induce homotopy equivalences after tensoring. Uses 22.4–22.7, 20.2 and HA-5 comparison. |
 | 23.3 | `def-termwise-hochschild-homology-complex-and-iterated-homology` | The cochain complex `i↦HH_j(A,F^i)` has induced differential HH_j(d_F); define `H^i(HH_j(A,F))`. In the graded case retain i,j,internal degree separately. Uses 22.8, not 23.1 as an identification. |
 | 23.4 | `thm-termwise-hochschild-homology-respects-bimodule-chain-homotopies` | Apply the additive functor HH_j to the equality f-g=dh+hd; the induced equality is a cochain homotopy. Thus 23.3 is invariant under chain homotopy equivalence. It is not asserted invariant under all quasi-isomorphisms of bimodule complexes. |
-| 23.5 | `thm-termwise-hochschild-spectral-sequence-for-a-bounded-bimodule-complex` | Filter 23.1 so the first differential is b: `E1^(i,-j)=HH_j(A,F^i)`, `E2^(i,-j)=H^i(HH_j(A,F))`, abutting to hyperhomology in total degree i-j. Boundedness of i gives a finite filtration in each total degree; invoke HA-16's convergence theorem. Higher differentials and extension problems are not assumed zero. |
+| 23.5 | `thm-termwise-hochschild-spectral-sequence-for-a-bounded-bimodule-complex` | Filter 23.1 so the first differential is b: `E1^(i,-j)=HH_j(A,F^i)`, `E2^(i,-j)=H^i(HH_j(A,F))`, abutting to hyperhomology in total degree i-j. Boundedness of i gives a finite filtration in each total degree; invoke `thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology` on HA-15, with the cohomological reindexing proved there. This is the finite-filtration theorem (Stacks 012K, Lemma 12.24.11), not an unverified first-quadrant assertion for negative Hochschild degrees. Higher differentials and extension problems are not assumed zero. |
 | 23.6 | `lem-double-bar-comparison-for-cyclic-bimodule-tensor-products` | For field-algebras A,B, take M an A–B bimodule finite projective as a RIGHT B-module, and N a B–A bimodule finite projective as a RIGHT A-module. These are BPW's Rep-sided hypotheses. Compare `Bar(A) tensor_A (M tensor_B N)` with the double bar `Bar(A) tensor_A M tensor_B Bar(B) tensor_B N`. M's right-B flatness licenses the B-bar augmentation; the right-A projectivity of N and of M tensor_B N makes the outer A-bar terms projective on the needed enveloping side. Swap A,B for the other comparison. Take coinvariants after comparing these projective resolutions to obtain the natural chain-homotopy equivalences in BPW (3.37)–(3.39). No left projectivity is being inferred from right projectivity. |
 | 23.7 | `thm-derived-cyclicity-of-hochschild-hyperhomology` | For bounded complexes M of A–B bimodules termwise finite projective RIGHT B, and N of B–A bimodules termwise finite projective RIGHT A, obtain `HHhyper(A,M tensor_B^L N)≅HHhyper(B,N tensor_A^L M)`. Rotate the double-bar factors with the Koszul sign from their cochain/bar degrees; verify both bar boundaries and the M,N differentials, and that two rotations induce identity. Totalize finite complex directions using 20.3. Uses 23.2, 23.6; the stated right-side projectivity computes both derived tensors by ordinary total tensors. Left-side projectivity/finiteness is an additional condition only when invoking HA-20.4's projective-target functor. |
 | 23.8 | `thm-termwise-hochschild-cyclicity-for-bounded-projective-bimodule-complexes` | First apply the natural degree-j cyclicity of 23.6 to each pair M^i,N^l, then use `(-1)^(il)` when swapping the cochain directions. This gives an isomorphism on the iterated groups in 23.3. Check compatibility with induced differentials BEFORE taking their cohomology. It is a separate termwise result, not inferred from equality of the hyperhomology abutments. BPW §3.8.6. |

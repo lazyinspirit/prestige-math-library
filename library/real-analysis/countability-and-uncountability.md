@@ -6,7 +6,7 @@ items: [def-equinumerous,
         lem-nat-order-is-membership, lem-pigeonhole, def-countable,
         thm-schroder-bernstein, lem-subset-of-countable,
         lem-countable-iff-surjection-from-n, lem-finite-subsets-listable,
-        thm-n-cross-n-countable, thm-product-of-countable, def-countable-choice,
+        thm-n-cross-n-countable, thm-product-of-countable, def-countable-choice, def-dependent-choice,
         thm-countable-union-of-countable, thm-rationals-countable,
         thm-cantor-powerset, thm-r-uncountable, cor-interval-uncountable,
         cor-irrationals-uncountable, rem-continuum-hypothesis]
@@ -73,8 +73,9 @@ construction depends on the starting interval being $(0,1)$, and
 interval, open or closed, is uncountable; that is the form the last of the false
 statements below actually needs.
 
-The choice ledger for this page is short and explicit. Every definition, lemma
-and theorem proved here is a theorem of ZF except
+The choice principles [[def-countable-choice]] and [[def-dependent-choice]] are
+stated here as optional assumptions, not proved. Every lemma and theorem
+proved here is a theorem of ZF except
 [[thm-countable-union-of-countable]], which assumes the Axiom of
 Countable Choice ([[def-countable-choice]]) and flags the exact step that spends
 it: the selection, for every index at once, of one surjection onto $A_n$ out of

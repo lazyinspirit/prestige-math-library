@@ -13,6 +13,7 @@ parts:
       - construction-of-the-natural-numbers
       - formal-set-theoretic-syntax-structures-and-satisfaction
       - order-zorn-and-the-axiom-of-choice
+      - dependent-choice-and-the-complete-metric-baire-theorem
       - filters-and-ultrafilters
   - part: ordinals-and-cardinals
     title: "Ordinals and cardinals"
@@ -23,6 +24,8 @@ parts:
       - cardinal-arithmetic-and-cofinality
       - weak-choice-principles-and-sierpinskis-theorem
       - club-stationary-sets-and-pressing-down
+      - set-theoretic-trees-delta-systems-and-diamond
+      - deduction-soundness-completeness-and-compactness
 ---
 
 ## sets-relations-and-functions
@@ -36,21 +39,22 @@ is what lets a quotient later be taken without asking whether it exists.
 ## naturals-order-and-choice
 
 The natural numbers are built as the von Neumann finite ordinals, with induction and
-recursion proved rather than assumed. Formal syntax for arbitrary set signatures makes such
-recursion precise: unique parsing supports term denotation and satisfaction in nonempty set
-structures, then substitution, renaming, isomorphism, and relativization; this remains a ZF
-metatheory and supplies no uniform truth predicate for the universe. Partial orders, chains,
-and maximal elements give Zorn's lemma, which is where choice enters in the form the rest of
-the library uses. Filters and ultrafilters are the first application: a maximal filter exists
-because Zorn says so.
+recursion proved rather than assumed. Formal syntax for arbitrary set signatures makes this
+recursion precise: parsing supports term denotation, satisfaction, substitution, renaming,
+isomorphism, and relativization within ZF. Partial orders, chains, and maximal elements give
+Zorn's lemma, where full choice enters. The dependent-choice page works over ZF, reconciles
+the serial-relation and category formulations, and proves equivalence with the complete-metric
+Baire principle while identifying local uses of choice. Filters and ultrafilters are the
+first application of full choice: a maximal filter exists because Zorn says so.
 
 ## ordinals-and-cardinals
 
-Well-ordering extends induction past the finite, and transfinite recursion makes a definition
-by stages legitimate. The well-founded-relations page separates induction, recursion, rank,
-and Mostowski collapse from any ambient use of Foundation, then relates membership rank to
-the cumulative hierarchy. Ordinal arithmetic reaches the first uncountable ordinal, while
-cardinals, cofinality, and the alephs measure size. The weak-choice page keeps ZF distinctions
-between choice principles explicit and proves Sierpiński's local-GCH implication to choice.
-For regular uncountable cardinals, clubs, stationary sets, normality, pressing down, and
-stationary partitions provide the corresponding large-ordinal combinatorics.
+Well-ordering extends induction past the finite, and transfinite recursion makes staged
+definitions legitimate. Well-founded relations, rank, and Mostowski collapse lead to the
+cumulative hierarchy; ordinal arithmetic, cardinals, cofinality, and alephs measure size.
+The weak-choice page keeps ZF distinctions explicit, while clubs, stationarity, normality,
+pressing down, and stationary partitions provide large-ordinal combinatorics. Trees and finite
+delta systems organize branch, antichain, and compatibility arguments; Diamond is explicitly
+assumed where it constructs a normal Suslin tree. The logic page then uses set-coded derivations
+for deduction and soundness, Henkin constructions for countable-language completeness and
+compactness, and elementary embeddings and diagrams for its stated Löwenheim--Skolem results.

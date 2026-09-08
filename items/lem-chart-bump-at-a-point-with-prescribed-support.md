@@ -7,13 +7,18 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-smooth-manifold, prop-chart-maps-are-diffeomorphisms-onto-euclidean-open-sets, lem-euclidean-bump-for-a-compact-set-inside-an-open-set, lem-smooth-maps-paste-over-an-open-cover, prop-identity-maps-and-composites-of-smooth-maps-are-smooth]
+deps: [def-smooth-manifold, prop-chart-maps-are-diffeomorphisms-onto-euclidean-open-sets, lem-euclidean-bump-for-a-compact-set-inside-an-open-set, lem-smooth-maps-paste-over-an-open-cover, prop-identity-maps-and-composites-of-smooth-maps-are-smooth, thm-heine-borel-rn, thm-compactness-agrees-with-metric-compactness, thm-compactness-under-continuous-maps, thm-compact-subset-of-a-hausdorff-space-is-closed]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-30
+  verified:
+    model: Codex
+    verdict: repaired-and-locally-checked
+    date: 2026-09-08
+    scope: "Owner-authorized chart-bump support and compactness repair; local checks only, no independent judge"
+    delegated_by: owner
   precheck: pass
 sources:
   scraped: []
@@ -43,15 +48,22 @@ composites of smooth maps are smooth
 ([[lem-smooth-maps-paste-over-an-open-cover]],
 [[prop-identity-maps-and-composites-of-smooth-maps-are-smooth]]).
 
-[A1] Closed bounded subsets of Euclidean space are compact, and compact
-subsets of the Hausdorff manifold $M$ are closed.
+[L3] Closed bounded subsets of $\mathbb R^n$, $n\ge1$, are compact ([[thm-heine-borel-rn]]); metric and topological compactness agree ([[thm-compactness-agrees-with-metric-compactness]]).
+
+[L4] Continuous images of compact spaces are compact ([[thm-compactness-under-continuous-maps]], clause 1), and compact subsets of a Hausdorff space are closed ([[thm-compact-subset-of-a-hausdorff-space-is-closed]], clause 3). The manifold $M$ is Hausdorff by [[def-smooth-manifold]].
+
+[F2] For a real-valued function on $M$, its support means the closure in $M$ of its nonzero locus.
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Choose a smooth chart $(U,\varphi)$ with $p\in U$ and put $a:=\varphi(p)$. Choose $0<r<R$ such that $$\overline B_r(a)\subseteq B_R(a)\subseteq\overline B_R(a)\subseteq\varphi(W\cap U).$$ Applying [L1] to $\overline B_r(a)\subseteq B_R(a)$ gives a smooth $\widetilde\rho:\mathbb R^n\to[0,1]$ equal to $1$ on $\overline B_r(a)$ and supported in $B_R(a)$. Its support is compact by [A1]. [F1, L1, A1, given, choose]
+1.1 If $M$ has dimension zero, each singleton is open by the chart condition and is closed since $M$ is Hausdorff. Define $\rho(p)=1$ and $\rho=0$ elsewhere. This is locally constant, hence smooth in charts, and its support is $\{p\}\subseteq W$. Henceforth assume the dimension $n$ is positive. [F1, F2, L4, given, construct]
 
-2.1 Let $K:=\varphi^{-1}(\operatorname{supp}(\widetilde\rho))$. By step 1.1, $K$ is a compact, hence closed, subset of $W\cap U$. On the open cover $U\cup(M\setminus K)$, define $\rho=\widetilde\rho\circ\varphi$ on $U$ and $\rho=0$ on $M\setminus K$. The formulas agree on $U\setminus K$, so [L2] gives a smooth global function. [F1, L2, A1, step 1.1]
+2.1 Choose a smooth chart $(U,\varphi)$ with $p\in U$ and put $a=\varphi(p)$. Since $\varphi(W\cap U)$ is open, choose $\varepsilon>0$ with $B_\varepsilon(a)\subseteq\varphi(W\cap U)$, and put $R=\varepsilon/2$, $r=R/2$. Then $\overline B_R(a)\subseteq\varphi(W\cap U)$. By [L3], $\overline B_r(a)$ is compact. Apply [L1] inside $B_R(a)$ to obtain a smooth $\widetilde\rho:\mathbb R^n\to[0,1]$ equal to one on $\overline B_r(a)$ with support in $B_R(a)$. [F1, L1, L3, step 1.1, choose]
 
-3.1 One has $\rho(p)=\widetilde\rho(a)=1$, and $\rho$ vanishes outside $W$, so $\operatorname{supp}(\rho)\subseteq W$. [step 1.1, step 2.1] ∎
+3.1 The closed ball $\overline B_R(a)$ is compact by [L3]. Its image $K=\varphi^{-1}(\overline B_R(a))$ under the continuous inverse chart, viewed as a map into $M$, is compact by [L4]. Thus $K$ is closed in $M$ and $K\subseteq W\cap U$. [F1, L3, L4, step 2.1, construct]
+
+4.1 On the open cover $U\cup(M\setminus K)$, use $\rho=\widetilde\rho\circ\varphi$ on $U$ and $\rho=0$ on $M\setminus K$. The functions agree on $U\setminus K$, since its coordinate image misses $\overline B_R(a)$ and hence the support of $\widetilde\rho$. Composition and pasting in [L2] give a smooth global real-valued function whose values lie in $[0,1]$. [L2, step 2.1, step 3.1, construct]
+
+5.1 The function equals one at $p$ by step 2.1. Its nonzero locus is contained in the closed set $K$ by step 4.1, so [F2] gives $\operatorname{supp}\rho\subseteq K\subseteq W$. This proves the positive-dimensional case, and step 1.1 proves the zero-dimensional case. [F2, step 1.1, step 2.1, step 3.1, step 4.1] ∎

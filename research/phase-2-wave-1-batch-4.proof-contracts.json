@@ -1,0 +1,1999 @@
+{
+  "version": 1,
+  "scope": [
+    "def-complex-lp-and-euclidean-test-function-conventions",
+    "thm-complex-holder-minkowski-and-the-quotient-norm",
+    "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+    "thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p",
+    "def-complex-l-two-inner-product",
+    "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+    "lem-complex-lp-completeness-density-and-inner-product",
+    "lem-complex-lq-norm-from-finite-simple-dual-tests",
+    "lem-complex-translation-and-approximate-identity-interfaces",
+    "ex-complex-phase-in-l-q-dual-norming",
+    "ex-complex-l-two-pairing-on-two-step-functions",
+    "ex-complex-mollification-by-components"
+  ],
+  "contracts": {
+    "def-complex-lp-and-euclidean-test-function-conventions": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition admits the unique empty function and the zero simple test."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition gives the zero function modulus zero; the rational-indicator illustration computes a nonzero representative of the zero class."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition computes the Dirac essential norm as one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition makes sense on zero measure spaces and defines essential support without assuming the open union is a null set."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition separately specifies p=1 and p=infinity; Euclidean dimension is n>=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition assumes countable choice only for the Lebesgue indicator illustration; the zero simple test exists without selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: compact integrability restricts to each bounded ball from its compact closure; modulus integrability implies component integrability."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: a bounded ball contains each compact set; integrable components dominate the modulus."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Definition: finite-valued component measurability closes under the displayed modulus/power threshold formulas. Quotient is only a set quotient here; essential support uses open zero-a.e. sets without claiming their union is null. Zero simple test and zero measures are admitted. Compact/ball local-integrability equivalence uses Heine-Borel. Countable choice is stated for the rational-indicator example; Dirac norm is one."
+      }
+    },
+    "thm-complex-holder-minkowski-and-the-quotient-norm": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complex-lp-and-euclidean-test-function-conventions",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. A finite-valued function $f=u+iv:X\\to\\mathbb C$ is **measurable** when $u,v$ are real measurable functions. Write\n$$N_p(f)=\\left(\\int_X|f|^p\\,d\\mu\\right)^{1/p}\\quad(1\\le p<\\infty),\\qquad N_\\infty(f)=\\inf\\{M\\in[0,\\infty]:|f|\\le M\\text{ a.e.}\\}.$$\nThe infimum of the empty set of finite bounds is $\\infty$; equivalently allow $M=\\infty$. Define $\\mathcal L^p(\\mu;\\mathbb C)=\\{f:f\\text{ measurable},N_p(f)<\\infty\\}$ and its **set quotient** $L^p(\\mu;\\mathbb C)=\\mathcal L^p/\\!\\sim$, where $f\\sim g$ means $f=g$ a.e. This extends [[def-l-p-space-as-a-quotient-by-null-functions]] and [[def-essential-supremum-with-respect-to-a-measure]]. Norm and vector-space assertions are established separately.\n\nHere $|u+iv|=\\sqrt{u^2+v^2}$ and $\\overline{u+iv}=u-iv$ as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. These operations preserve measurability: $u^2+v^2$ is measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]], and\n$$\\{|f|>a\\}=\\begin{cases}\\{u^2+v^2>a^2\\},&a\\ge0,\\\\X,&a<0.\\end{cases}$$\nThus [[thm-threshold-characterisations-of-real-and-extended-real-measurability]] applies. For $g=a+ib$, the formulas $fg=(ua-vb)+i(ub+va)$ and $\\overline f=u-iv$ prove the remaining claims by real arithmetic closure. Nonnegative powers are measurable because $\\{r^t>b\\}=\\{r>b^{1/t}\\}$ for $r\\ge0,t>0,b\\ge0$, with the negative thresholds automatic.\n\nA **finite simple** complex function has finite range and measurable fibers. Its **finite-measure support** condition is $\\mu(\\{s\\ne0\\})<\\infty$. This concerns the nonzero set, not compactness of its closure. The zero function is an admissible finite simple function, including when $X=\\varnothing$ or $\\mu(X)=0$.\n\nIntegration is componentwise: for integrable $f=u+iv$,\n$$\\int f\\,d\\mu=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$\nThis is the earlier convention of [[def-integrable-real-and-complex-functions-and-their-integrals]] and [[def-l-one-of-a-measure]]. The inequalities $|u|,|v|\\le|f|\\le|u|+|v|$ show that integrability of the modulus and integrability of both components are equivalent.\n\nFor $n\\ge1$, define complex $C_c(\\mathbb R^n)$, $C_0(\\mathbb R^n)$ and $C_c^\\infty(\\mathbb R^n)$ by requiring both components to lie in the corresponding real spaces ([[def-c-c-and-c-c-infinity-on-rn]], [[def-c-zero-on-rn]]). Derivatives are componentwise, with the multi-index and all-ordered-partials conventions of [[def-ck-and-multi-index-notation-in-several-variables]]. The union of the two compact component supports is compact. A measurable complex $f$ is **locally integrable** for Lebesgue measure if $\\int_K|f|<\\infty$ on every compact $K$. The component inequalities give the equivalent componentwise condition. By [[thm-heine-borel-rn]], closed bounded balls are compact and each compact set is bounded. Hence compact integrability implies integrability on every bounded open ball by restriction from its closure; conversely each compact set is contained in a bounded open ball. These prove both directions of the ball formulation.\n\nFor a topological $X$ with Borel sets contained in $\\mathcal A$, define\n$$\\operatorname{ess\\,supp}_\\mu f=X\\setminus\\bigcup\\{U:U\\text{ open and }f=0\\text{ a.e. on }U\\}.$$\nChanging $f$ on one measurable null set preserves the zero-a.e. property on every $U$, since the union of that set and the old exceptional set is null. Thus essential support depends only on the a.e. class. Ordinary support means $\\overline{\\{f\\ne0\\}}$ and can change with the representative.\n\nFor the following illustration assume [[def-countable-choice]]. For $f=\\mathbf1_{\\mathbb Q}$ on $\\mathbb R$, [[prop-countable-subsets-of-rn-are-lebesgue-null]] gives $f=0$ Lebesgue-a.e.; therefore $N_\\infty(f)=0$ and $\\operatorname{ess\\,supp}f=\\varnothing$, since $U=\\mathbb R$ occurs in the union. But [[lem-q-and-irrationals-dense-r]] gives $\\overline{\\{f\\ne0\\}}=\\mathbb R$. For the Dirac probability measure at zero ([[def-dirac-measure]], [[prop-dirac-measure-is-a-probability-measure]]), the bound $1$ holds everywhere and every $0\\le M<1$ fails on $\\{0\\}$, of measure one. Thus $N_{\\infty,\\delta_0}(f)=1$.\n\nThe raw $L^2$ pairing convention is $\\langle f,g\\rangle=\\int f\\overline g$, linear in the first variable. Its integrability and class invariance are obligations of the later pairing items. **Bilinear tests** instead use $\\int fs$, with no conjugation of $s$.",
+          "uses": [
+            "1.1",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-holder-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $p,q\\in[1,\\infty]$ be\nconjugate exponents, and let $f,g$ be measurable real-valued functions.\n\n1. If $1\\le p<\\infty$ and $q<\\infty$ with $f\\in\\mathcal L^p(\\mu)$ and\n   $g\\in\\mathcal L^q(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_q.$$\n2. If $p=1$ and $q=\\infty$ with $f\\in\\mathcal L^1(\\mu)$ and\n   $g\\in L^\\infty(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_1\\|g\\|_\\infty.$$\n3. If $p=\\infty$ and $q=1$ with $f\\in L^\\infty(\\mu)$ and\n   $g\\in\\mathcal L^1(\\mu)$, then\n   $$\\int |fg|\\,d\\mu\\le\\|f\\|_\\infty\\|g\\|_1.$$\n\nIn every case the right-hand side is finite, so $fg$ is integrable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-minkowski-inequality-for-integrals",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $1\\le p<\\infty$ and $f,g\\in\\mathcal L^p(\\mu)$, then\n   $$\\|f+g\\|_p\\le\\|f\\|_p+\\|g\\|_p.$$\n2. If $f,g\\in L^\\infty(\\mu)$, then\n   $$\\|f+g\\|_\\infty\\le\\|f\\|_\\infty+\\|g\\|_\\infty.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-integral-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "If $f\\in L^1(\\mu)$, then\n$$\\left|\\int f\\,d\\mu\\right|\\le\\int |f|\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Let $f,g\\in L^1(\\mu)$. Then the following are equivalent:\n\n1. $f=g$ almost everywhere;\n2. for every measurable $A$,\n   $$\\int_A f\\,d\\mu=\\int_A g\\,d\\mu.$$\n\nFor integrable real or complex $h$, the notation in condition 2 means\n$\\int_A h\\,d\\mu:=\\int h\\chi_A\\,d\\mu$; the product is integrable because\n$|h\\chi_A|\\le|h|$.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. $\\int cf\\,d\\mu=c\\int f\\,d\\mu$.",
+          "uses": [
+            "1.2",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-essential-supremum-with-respect-to-a-measure",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, and let $f:X\\to\\mathbb R$ be\nmeasurable. The **essential supremum of $|f|$ with respect to $\\mu$** is\n\n$$\\|f\\|_{\\infty,\\mu}:=\\inf\\{M\\in[0,\\infty] : |f|\\le M \\text{ }\\mu\\text{-almost everywhere}\\}.$$\n\nWhen the measure is fixed from context, this is written $\\|f\\|_\\infty$. The\nphrase **essentially bounded** means $\\|f\\|_\\infty<\\infty$.\n\nThe later proposition\n[[prop-essential-supremum-is-attained-as-the-least-essential-bound]] proves\nthat when $\\|f\\|_\\infty<\\infty$, the inequality $|f|\\le\\|f\\|_\\infty$ itself\nholds almost everywhere and that this bound is the least essential bound.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "1.5",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$\n\nFor every $m\\in\\mathbb N$ one also has\n\n$$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$\n\nincluding $m=0$, where both sides are $0$.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "1.5"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "step": "1.1",
+          "claim": "By F1 the real functions $|f|,|g|$ are measurable with finite respective norms. Applying F3 to these functions and using $|fg|=|f||g|$ gives $\\int|fg|\\le N_p(f)N_{p^{\\prime}}(g)<\\infty$, for $1<p<\\infty$ and also $(p,p^{\\prime})=(1,\\infty),(\\infty,1)$. Thus $fg$ is complex integrable and F5 gives the asserted integral bound.",
+          "inputs": [
+            "A measure space, finite-valued measurable representatives, and the exponents and finite norms stated above.",
+            "F1",
+            "F3",
+            "F5",
+            "F2"
+          ]
+        },
+        {
+          "id": "argument-1.2",
+          "step": "1.2",
+          "claim": "For finite $p$, F2 and F8 give $N_p(f+g)\\le N_p(|f|+|g|)$. Real Minkowski on the two real nonnegative functions gives $N_p(f+g)\\le N_p(f)+N_p(g)$, so addition preserves the finite-functional class.",
+          "inputs": [
+            "A measure space, finite-valued measurable representatives, and the exponents and finite norms stated above.",
+            "F2",
+            "F8",
+            "F4"
+          ]
+        },
+        {
+          "id": "argument-1.3",
+          "step": "1.3",
+          "claim": "For $p=\\infty$ put $a=N_\\infty(f)$ and $b=N_\\infty(g)$. Every $a+\\eta$ and $b+\\eta$ with $\\eta>0$ is an essential bound: an essential bound smaller than it exists by the infimum property. Off the union of two null sets, $|f+g|\\le a+b+2\\eta$. Taking infima and then $\\eta\\downarrow0$ gives $N_\\infty(f+g)\\le a+b$.",
+          "inputs": [
+            "A measure space, finite-valued measurable representatives, and the exponents and finite norms stated above.",
+            "F2",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "argument-1.4",
+          "step": "1.4",
+          "claim": "If $f=f_1$ a.e. and $g=g_1$ a.e., then $\\alpha f+\\beta g=\\alpha f_1+\\beta g_1$ off the union of their measurable disagreement sets. For finite $p$, $|f|^p=|f_1|^p$ a.e., so F7 makes their integrals equal. At infinity the sets of essential bounds agree. Thus both operations and $N_p$ descend. Pointwise complex vector identities descend as well; scalar closure and $N_p(cf)=|c|N_p(f)$ follow from F2 and F8 for finite $p$, and scaling essential bounds for infinity. For $c=0$ this equality is immediate without dividing by $c$.",
+          "inputs": [
+            "A measure space, finite-valued measurable representatives, and the exponents and finite norms stated above.",
+            "F7",
+            "F2",
+            "F8",
+            "F1",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "argument-1.5",
+          "step": "1.5",
+          "claim": "For finite $p$, $N_p(f)=0$ iff $|f|^p=0$ a.e. by F6, iff $f=0$ a.e. by F2. For infinity, if $N_\\infty(f)=0$, each measurable set $E_m=\\{|f|>1/m\\}$ is null by F9. Since $\\{f\\ne0\\}=\\bigcup_{m\\ge1}E_m$, F10 gives $f=0$ a.e. The converse follows since zero is then an essential bound. This proves positive definiteness, including zero measure spaces.",
+          "inputs": [
+            "A measure space, finite-valued measurable representatives, and the exponents and finite norms stated above.",
+            "F6",
+            "F2",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "step": "2.1",
+          "claim": "Finally $|\\overline f|=|f|$, and pointwise $|\\operatorname{Re}f|,|\\operatorname{Im}f|\\le|f|\\le|\\operatorname{Re}f|+|\\operatorname{Im}f|$. Monotonicity of finite integrals or of essential bounds gives the two lower component bounds; the triangle inequality applied to $f=\\operatorname{Re}f+i\\operatorname{Im}f$ gives the upper bound. Together with homogeneity, definiteness and the descended operations, this proves all norm assertions.",
+          "inputs": [
+            "A measure space, finite-valued measurable representatives, and the exponents and finite norms stated above.",
+            "F1",
+            "F2",
+            "F8",
+            "F9",
+            "1.2",
+            "1.3",
+            "1.4",
+            "1.5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.5 applies on the empty space, whose only class is zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.4 and 1.5 handle scalar zero and both zero-norm implications."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes p=1; step 1.4 includes scalar one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.5 includes zero measure and null representatives."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.3 prove the Hölder endpoints and the infinity triangle inequality."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.5 uses the explicitly defined null sets E_m; step 1.3 uses one infimum witness at a time, not simultaneous choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.5 proves norm zero implies the zero class."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.5 proves the zero class has norm zero."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Proof 1.1 applies real Holder to moduli with both conjugate endpoints. Steps 1.3-1.5 use essential bounds, handle scalar zero separately and use the countable union of {|f|>1/m} for definiteness. Null disagreement sets are measurable; representative independence and both component bounds follow for all p including infinity and zero measure."
+      }
+    },
+    "thm-complex-lp-completeness-and-almost-everywhere-subsequences": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "source_section": "Statement",
+          "quote": "On any measure space, if $p,p^{\\prime}\\in[1,\\infty]$ are conjugate, $f\\in L^p(\\mu;\\mathbb C)$ and $g\\in L^{p^{\\prime}}(\\mu;\\mathbb C)$, then\n$$\\int|fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_{p^{\\prime}},\\qquad \\left|\\int fg\\,d\\mu\\right|\\le\\|f\\|_p\\|g\\|_{p^{\\prime}}.$$\nFor every $1\\le p\\le\\infty$, complex vector operations and $\\|[f]\\|_p=N_p(f)$ are well-defined on the a.e. quotient and give a norm, with\n$$\\|f+g\\|_p\\le\\|f\\|_p+\\|g\\|_p,\\qquad \\|\\overline f\\|_p=\\|f\\|_p,$$\n$$\\|\\operatorname{Re}f\\|_p,\\|\\operatorname{Im}f\\|_p\\le\\|f\\|_p\\le\\|\\operatorname{Re}f\\|_p+\\|\\operatorname{Im}f\\|_p.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-riesz-fischer-completeness-of-l-p",
+          "source_section": "Statement",
+          "quote": "Assume countable choice (in particular, the Axiom of Choice suffices). Let $(X,\\mathcal A,\\mu)$ be a measure space and let $1\\le p\\le\\infty$. Then\n$L^p(\\mu)$, with the norm of\n[[thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space]], is\ncomplete. Equivalently, the metric induced by that norm is a complete metric in\nthe sense of [[def-complete-metric-space]].\n\nMoreover, if a sequence in $L^p(\\mu)$ converges in norm, then some subsequence\nadmits measurable representatives converging almost everywhere in the sense of\n[[def-convergence-almost-everywhere-relative-to-a-measure]].",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences",
+          "source_section": "Statement",
+          "quote": "Let $1\\le p\\le\\infty$. If $u_n\\to u$ in $L^p(\\mu)$, then some subsequence of\n$(u_n)$ admits measurable representatives converging almost everywhere to a\nmeasurable representative of $u$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$\n\nFor every $m\\in\\mathbb N$ one also has\n\n$$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$\n\nincluding $m=0$, where both sides are $0$.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "step": "1.1",
+          "claim": "For $u_n=\\operatorname{Re}[f_n]$ and $v_n=\\operatorname{Im}[f_n]$, F1 gives $\\|u_n-u_m\\|_p,\\|v_n-v_m\\|_p\\le\\|[f_n]-[f_m]\\|_p$. Both real sequences are therefore Cauchy. F2 supplies real classes $u,v$ with $u_n\\to u$, $v_n\\to v$.",
+          "inputs": [
+            "Countable choice, a measure space, $1\\le p\\le\\infty$, and a complex Lp Cauchy sequence $([f_n])$.",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "step": "2.1",
+          "claim": "Choose measurable representatives $U,V$ of these two classes and put $f=U+iV$. F1 shows $f\\in\\mathcal L^p(\\mu;\\mathbb C)$ and $\\|[f_n]-[f]\\|_p\\le\\|u_n-u\\|_p+\\|v_n-v\\|_p\\to0$. Thus every Cauchy sequence converges, at infinity as well as at finite $p$.",
+          "inputs": [
+            "Countable choice, a measure space, $1\\le p\\le\\infty$, and a complex Lp Cauchy sequence $([f_n])$.",
+            "F1",
+            "1.1"
+          ]
+        },
+        {
+          "id": "argument-1.2",
+          "step": "1.2",
+          "claim": "For a sequence already converging to $[f]$, its real components converge to $\\operatorname{Re}[f]$ by F1. Apply F3 to obtain indices $n_k$ and real representatives $a_k\\to U$ off a measurable null set. Its imaginary components still converge in norm; apply F3 to that subsequence to obtain further indices $k_j$ and imaginary representatives $b_j\\to V$ off a second measurable null set. Then $a_{k_j}+ib_j$ represents $[f_{n_{k_j}}]$ and converges to $U+iV$ outside the union of those two null sets, which is null by F5.",
+          "inputs": [
+            "Countable choice, a measure space, $1\\le p\\le\\infty$, and a complex Lp Cauchy sequence $([f_n])$.",
+            "F1",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "argument-3.1",
+          "step": "3.1",
+          "claim": "The simultaneous representative selections used by the real results are permitted by F4; selection of the two limit representatives requires only two choices. All functions can be assigned zero on the measurable exceptional sets: a function pieced from a measurable function on a measurable set and zero on its complement is measurable. If predetermined measurable representatives are desired, their disagreement sets with the selected representatives are themselves measurable and null; F5 applied to their countable union preserves the a.e. convergence. Hence the assertions hold on incomplete measures without prescribing arbitrary, possibly nonmeasurable, values on null sets.",
+          "inputs": [
+            "Countable choice, a measure space, $1\\le p\\le\\infty$, and a complex Lp Cauchy sequence $([f_n])$.",
+            "F4",
+            "F5",
+            "2.1",
+            "1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 give the zero limit on an empty space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 allows both component limits to vanish; step 3.1 specifies zero on exceptional sets."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 apply the real suppliers at p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly handles incomplete measures; step 2.1 also handles zero measure spaces."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly includes p=infinity; F2 and F3 have the full closed exponent range."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies the countable representative selections and the assumed axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The item asserts completeness and existence of a subsequence, not an iff characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no converse from a.e. convergence to norm convergence in this statement."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "owner-authorized-orchestrator",
+        "notes": "Owner-authorized Riesz–Fischer supplier repair closes reader:4:1: countable choice selects representatives; zero-patched approximants converge everywhere to a measurable limit on incomplete measures. Read this complete consumer: component contractions and two successive subsequences give complex completeness/a.e. convergence, while the interface merely invokes the separately reviewed density and pairing clauses under their exact hypotheses. Countable choice was already assumed here, so no stronger assumption is imported."
+      }
+    },
+    "thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "source_section": "Statement",
+          "quote": "On any measure space, if $p,p^{\\prime}\\in[1,\\infty]$ are conjugate, $f\\in L^p(\\mu;\\mathbb C)$ and $g\\in L^{p^{\\prime}}(\\mu;\\mathbb C)$, then\n$$\\int|fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_{p^{\\prime}},\\qquad \\left|\\int fg\\,d\\mu\\right|\\le\\|f\\|_p\\|g\\|_{p^{\\prime}}.$$\nFor every $1\\le p\\le\\infty$, complex vector operations and $\\|[f]\\|_p=N_p(f)$ are well-defined on the a.e. quotient and give a norm, with\n$$\\|f+g\\|_p\\le\\|f\\|_p+\\|g\\|_p,\\qquad \\|\\overline f\\|_p=\\|f\\|_p,$$\n$$\\|\\operatorname{Re}f\\|_p,\\|\\operatorname{Im}f\\|_p\\le\\|f\\|_p\\le\\|\\operatorname{Re}f\\|_p+\\|\\operatorname{Im}f\\|_p.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-finite-p",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space and let $1 \\le p < \\infty$. Then\nevery element of $L^p(\\mu)$ can be approximated in $L^p$ by simple functions\nwhose supports have finite measure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-c-c-infinity-rn-is-dense-in-l-p-of-rn",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $1 \\le p < \\infty$. Then $C_c^\\infty(\\mathbb{R}^n)$ is dense in\n$L^p(\\mathbb{R}^n)$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-l-infinity-closure-of-c-c-rn-is-c-zero-rn",
+          "source_section": "Statement",
+          "quote": "Inside $L^\\infty(\\mathbb{R}^n)$ with the essential-supremum norm, the closure of\n$C_c(\\mathbb{R}^n)$ is exactly $C_0(\\mathbb{R}^n)$. In particular it is not all\nof $L^\\infty(\\mathbb{R}^n)$.",
+          "uses": [
+            "1.3",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "step": "1.1",
+          "claim": "By F1, $u,v\\in L^p(\\mu;\\mathbb R)$. F2 supplies real simple $a,b$ with $\\|u-a\\|_p<\\eta/2$ and $\\|v-b\\|_p<\\eta/2$, each with finite-measure nonzero set. The finite intersections of their fibers form a finite measurable partition on which $s=a+ib$ is constant, and $\\{s\\ne0\\}\\subseteq\\{a\\ne0\\}\\cup\\{b\\ne0\\}$ has finite measure. F1 gives $\\|f-s\\|_p<\\eta$. This uses only two approximation choices for the specified tolerance, not a simultaneous choice function.",
+          "inputs": [
+            "A complex class $f=u+iv$, an error tolerance $\\eta>0$, and $1\\le p<\\infty$ for the finite-p assertions; countable choice for smooth Euclidean density.",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "argument-1.2",
+          "step": "1.2",
+          "claim": "In Euclidean Lebesgue space, under the countable-choice hypothesis F5, apply F3 to $u,v$ with errors $\\eta/2$ to obtain $a,b\\in C_c^\\infty(\\mathbb R^n;\\mathbb R)$. Their sum $a+ib$ is smooth componentwise and is supported in the union of the two compact supports, hence is complex $C_c^\\infty$. F1 again bounds its error by $\\eta$. The inclusion $C_c^\\infty\\subseteq C_c$ proves continuous compact-support density as well.",
+          "inputs": [
+            "A complex class $f=u+iv$, an error tolerance $\\eta>0$, and $1\\le p<\\infty$ for the finite-p assertions; countable choice for smooth Euclidean density.",
+            "F5",
+            "F3",
+            "F1"
+          ]
+        },
+        {
+          "id": "argument-1.3",
+          "step": "1.3",
+          "claim": "If a complex L-infinity class $f$ is in the closure of complex $C_c$, approximating $f$ to any positive tolerance and projecting its approximants gives, by F1, real $C_c$ approximations to both component classes. F4 therefore supplies $U,V\\in C_0(\\mathbb R^n;\\mathbb R)$ representing them. The complex function $U+iV$ represents $f$ and vanishes at infinity: outside the union of two compact sets where the separate component errors are below $\\eta/2$, its modulus is below $\\eta$.",
+          "inputs": [
+            "A complex class $f=u+iv$, an error tolerance $\\eta>0$, and $1\\le p<\\infty$ for the finite-p assertions; countable choice for smooth Euclidean density.",
+            "F1",
+            "F4"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "step": "2.1",
+          "claim": "Conversely, if $f$ has a $C_0$ representative $U+iV$, F4 supplies real $C_c$ approximants to $U,V$ with essential-norm errors below $\\eta/2$. Their complex sum lies in $C_c$ and has error below $\\eta$ by F1. Thus precisely the stated classes form the closure. The constant-one class is excluded: any continuous representative equal to one a.e. must equal one everywhere, since a nonzero continuous discrepancy persists on an open ball of positive Lebesgue measure; that constant does not vanish at infinity. The finite-p assertions therefore have no such infinity extension.",
+          "inputs": [
+            "A complex class $f=u+iv$, an error tolerance $\\eta>0$, and $1\\le p<\\infty$ for the finite-p assertions; countable choice for smooth Euclidean density.",
+            "F4",
+            "F1",
+            "1.3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 admits zero approximants on the empty measure space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 admits both approximants zero for the zero class; steps 1.2–2.1 admit zero smooth/C0 functions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 includes p=1; step 2.1 checks the constant-one obstruction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 requires no sigma-finiteness and allows null support."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 are finite-p only; steps 1.3–2.1 prove the separate infinity statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses two witnesses at fixed tolerance; step 1.2 explicitly invokes the countable-choice smooth-density hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.3 proves closure membership gives a C0 representative."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves a C0 representative gives closure membership."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Proof 1.1 uses two approximants for a fixed tolerance, with finite fiber partition and finite union of nonzero supports; it does not select a whole sequence. Smooth Euclidean density retains countable choice. Steps 1.3/2.1 prove both essential-norm C0 closure directions by real projections/recombination. Finite-p claims do not extend to all L-infinity."
+      }
+    },
+    "def-complex-l-two-inner-product": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition integrates the zero function on an empty space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition gives zero if either representative is zero."
+        },
+        {
+          "case": "one",
+          "status": "not_applicable",
+          "reason": "The raw pairing definition asserts no unit vector or integrability of the constant-one function; its arguments are arbitrary L2 classes."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition allows zero classes and zero measure; integrability requires no nonzero norm."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This definition concerns only exponent two, not an interval of exponents."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "For one pair of classes only two representatives are used; no family of choices is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The raw pairing definition states no iff result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Well-definedness and definiteness are assigned to the following theorem, not asserted here."
+        }
+      ]
+    },
+    "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complex-l-two-inner-product",
+          "source_section": "Definition",
+          "quote": "For $[f],[g]\\in L^2(\\mu;\\mathbb C)$, the proposed pairing is\n$$\\langle[f],[g]\\rangle:=\\int_X f\\overline g\\,d\\mu.$$\nThe integral is computed from measurable representatives. By [[thm-complex-holder-minkowski-and-the-quotient-norm]], $\\overline g\\in L^2$ and $\\int|f\\overline g|\\le\\|f\\|_2\\|g\\|_2<\\infty$, so this representative expression is defined. The measurable and integration conventions are those of [[def-complex-lp-and-euclidean-test-function-conventions]]. This fixes the **first-variable-linear** convention. The following theorem, named in `justified_by`, establishes class invariance and the inner-product axioms; the present definition does not assume that obligation.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "source_section": "Statement",
+          "quote": "On any measure space, if $p,p^{\\prime}\\in[1,\\infty]$ are conjugate, $f\\in L^p(\\mu;\\mathbb C)$ and $g\\in L^{p^{\\prime}}(\\mu;\\mathbb C)$, then\n$$\\int|fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_{p^{\\prime}},\\qquad \\left|\\int fg\\,d\\mu\\right|\\le\\|f\\|_p\\|g\\|_{p^{\\prime}}.$$\nFor every $1\\le p\\le\\infty$, complex vector operations and $\\|[f]\\|_p=N_p(f)$ are well-defined on the a.e. quotient and give a norm, with\n$$\\|f+g\\|_p\\le\\|f\\|_p+\\|g\\|_p,\\qquad \\|\\overline f\\|_p=\\|f\\|_p,$$\n$$\\|\\operatorname{Re}f\\|_p,\\|\\operatorname{Im}f\\|_p\\le\\|f\\|_p\\le\\|\\operatorname{Re}f\\|_p+\\|\\operatorname{Im}f\\|_p.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Let $f,g\\in L^1(\\mu)$. Then the following are equivalent:\n\n1. $f=g$ almost everywhere;\n2. for every measurable $A$,\n   $$\\int_A f\\,d\\mu=\\int_A g\\,d\\mu.$$\n\nFor integrable real or complex $h$, the notation in condition 2 means\n$\\int_A h\\,d\\mu:=\\int h\\chi_A\\,d\\mu$; the product is integrable because\n$|h\\chi_A|\\le|h|$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "step": "1.1",
+          "claim": "F2 makes $f\\overline g$ integrable. Replacing $f,g$ by a.e.-equal representatives changes their product only on the union of the two measurable null disagreement sets. F4 therefore leaves the integral in F1 unchanged. This proves representative independence.",
+          "inputs": [
+            "A measure space and complex $L^2$ classes; for the tuple assertion a fixed finite tuple length $m\\ge0$.",
+            "F2",
+            "F4",
+            "F1"
+          ]
+        },
+        {
+          "id": "argument-1.2",
+          "step": "1.2",
+          "claim": "For an integrable $h=u+iv$, F7 gives $\\int\\overline h=\\int u-i\\int v=\\overline{\\int h}$. Hence F6 implies $\\langle g,f\\rangle=\\overline{\\langle f,g\\rangle}$. F3 applied to $(af+bk)\\overline g$ gives $\\langle af+bk,g\\rangle=a\\langle f,g\\rangle+b\\langle k,g\\rangle$, and applied to $f\\overline{ag+bk}=\\overline a f\\overline g+\\overline b f\\overline k$ gives conjugate-linearity in the second variable. All products are integrable by F2.",
+          "inputs": [
+            "A measure space and complex $L^2$ classes; for the tuple assertion a fixed finite tuple length $m\\ge0$.",
+            "F7",
+            "F6",
+            "F3",
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "argument-1.3",
+          "step": "1.3",
+          "claim": "F6 gives $\\langle f,f\\rangle=\\int|f|^2=\\|f\\|_2^2\\ge0$. By F5 this number is zero iff $|f|^2=0$ a.e., which is equivalent to $f=0$ as a class. Thus the form is positive definite and its norm is exactly the modulus $L^2$ norm.",
+          "inputs": [
+            "A measure space and complex $L^2$ classes; for the tuple assertion a fixed finite tuple length $m\\ge0$.",
+            "F6",
+            "F5",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "step": "2.1",
+          "claim": "For $g\\ne0$ put $a=\\langle f,g\\rangle$, $b=\\|g\\|_2^2>0$ and $c=a/b$. Sesquilinearity yields $\\|f-cg\\|_2^2=\\|f\\|_2^2-\\overline c a-c\\overline a+|c|^2b=\\|f\\|_2^2-|a|^2/b$. Nonnegativity proves $|a|^2\\le\\|f\\|_2^2b$, hence Cauchy–Schwarz. Equality implies $\\|f-cg\\|_2=0$, so $f=cg$ a.e. Conversely, if $f=dg$ a.e., then $\\langle f,g\\rangle=db$ and $\\|f\\|_2=|d|\\|g\\|_2$, giving equality. For $g=0$, both sides of the inequality are zero for every $f$.",
+          "inputs": [
+            "A measure space and complex $L^2$ classes; for the tuple assertion a fixed finite tuple length $m\\ge0$.",
+            "F2",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "id": "argument-3.1",
+          "step": "3.1",
+          "claim": "Finite summation preserves the linearity and symmetry identities. Also $B(F,F)=\\sum_{j<m}\\|f_j\\|_2^2\\ge0$, and a finite sum of nonnegative reals is zero iff every summand is zero; step 1.3 then gives definiteness. For $G\\ne0$, set $c=B(F,G)/B(G,G)$. Expanding the finite sum using step 1.2 gives $\\|F-cG\\|^2=\\|F\\|^2-|B(F,G)|^2/\\|G\\|^2$. Nonnegativity gives $|B(F,G)|\\le\\|F\\|\\|G\\|$. The expansion $\\|F+G\\|^2=\\|F\\|^2+2\\operatorname{Re}B(F,G)+\\|G\\|^2\\le(\\|F\\|+\\|G\\|)^2$ gives the triangle inequality; scalar homogeneity follows by scaling each squared component norm. Thus this square root is indeed a norm. As above, equality in Cauchy–Schwarz is equivalent to each $f_j-cg_j$ having norm zero, with this same $c$ for all $j$; conversely a common scalar multiple gives equality by homogeneity. For $G=0$ both sides are zero. If $m=0$, the tuple space has just its zero element and all sums are zero, so the same axioms and zero case apply.",
+          "inputs": [
+            "A measure space and complex $L^2$ classes; for the tuple assertion a fixed finite tuple length $m\\ge0$.",
+            "1.3",
+            "1.2",
+            "F2",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 explicitly treats the empty tuple; step 1.3 treats the empty measure space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 handles g=0 separately, avoiding division by zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 with m=1 recovers step 2.1 and the scalar result."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.3 and 3.1 handle null classes and tuples with zero components."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Only L2 and fixed finite tuples are under consideration; no exponent endpoint limit is claimed."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The projection scalar is explicitly computed when its denominator is positive; no choice family is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 infer a scalar multiple from equality; step 1.3 proves zero pairing implies the zero class."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 3.1 verify equality for scalar multiples; step 1.3 verifies zero-class positivity equality."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Entire Proof 1.1-3.1 checked. Holder ensures integrability, the two measurable null disagreement sets ensure class independence, and component integration supplies conjugation. With first-variable linearity c=<f,g>/||g||² gives the exact nonnegative square; equality is equivalent in both directions to f=cg for nonzero g. The tuple proof uses a common scalar, proves its triangle inequality, and handles G=0 and m=0. The title-only Unicode normalization changes no mathematics; its separate post-reader accounting is escalated."
+      }
+    },
+    "lem-complex-lp-completeness-density-and-inner-product": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For every measure space and $1\\le p\\le\\infty$, $L^p(\\mu;\\mathbb C)$ is complete. Every sequence converging in this norm has a subsequence of measurable representatives converging a.e. to a measurable representative of its norm limit. For finite $p$ no pointwise convergence of the whole sequence is asserted.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p",
+          "source_section": "Statement",
+          "quote": "On every measure space, complex finite simple functions with finite-measure nonzero sets are dense in $L^p(\\mu;\\mathbb C)$ for $1\\le p<\\infty$. Assuming countable choice, $C_c^\\infty(\\mathbb R^n;\\mathbb C)$, and consequently $C_c(\\mathbb R^n;\\mathbb C)$, is dense in Euclidean Lebesgue $L^p$ for $n\\ge1$ and the same finite exponents. The $L^\\infty$ closure of complex $C_c$ consists exactly of classes with a complex $C_0$ representative. Neither assertion claims density of finite-measure-supported tests or smooth functions in all of $L^\\infty$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "source_section": "Statement",
+          "quote": "On every measure space the pairing $\\langle f,g\\rangle=\\int f\\overline g$ on complex $L^2$ is representative-independent, linear in the first variable, conjugate-linear in the second, conjugate symmetric and positive definite, with $\\langle f,f\\rangle=\\|f\\|_2^2$. Moreover,\n$$|\\langle f,g\\rangle|\\le\\|f\\|_2\\|g\\|_2.$$\nIf $g\\ne0$ as a class, equality holds iff $f=cg$ a.e. for some $c\\in\\mathbb C$. If $g=0$, equality holds for every $f$.\n\nFor each finite $m\\ge0$, the same conclusions hold on tuples $F=(f_j)_{j<m}$, with pairing $B(F,G)=\\sum_{j<m}\\langle f_j,g_j\\rangle$ and $\\|F\\|^2=\\sum_{j<m}\\|f_j\\|_2^2$. For $G\\ne0$, equality means $f_j=cg_j$ a.e. for every $j$, with one common scalar $c$.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "step": "1.1",
+          "claim": "The measure space and exponent satisfy F1, and the assumed countable choice is exactly its additional hypothesis. It therefore supplies completeness for every $1\\le p\\le\\infty$ and a.e.-convergent subsequences with the specified limit class.",
+          "inputs": [
+            "Countable choice, an arbitrary measure space and exponents in the stated ranges; Euclidean Lebesgue measure for smooth density.",
+            "F1"
+          ]
+        },
+        {
+          "id": "argument-1.2",
+          "step": "1.2",
+          "claim": "For $p<\\infty$, F2 applies to the same measure space and gives finite-simple approximants with finite-measure nonzero sets. In the Euclidean clause its Lebesgue and countable-choice hypotheses also hold, so it supplies smooth compactly supported approximants.",
+          "inputs": [
+            "Countable choice, an arbitrary measure space and exponents in the stated ranges; Euclidean Lebesgue measure for smooth density.",
+            "F2"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "step": "2.1",
+          "claim": "For $p=2$, F3 proves that the representative formula descends to an inner product and that its squared norm equals $\\int|f|^2$. Thus its induced norm is the same $L^2$ norm used in step 1.1. F3 also supplies precisely the nonzero-second-argument scalar-multiple criterion and the zero-second-argument exception, and its finite-sum proof supplies the common-scalar tuple version. This collects the asserted interfaces without any additional analytic hypothesis.",
+          "inputs": [
+            "Countable choice, an arbitrary measure space and exponents in the stated ranges; Euclidean Lebesgue measure for smooth density.",
+            "F3",
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 imports F3 including empty tuples; step 1.1 includes empty measure spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly retains the g=0 equality exception."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 include p=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 retains arbitrary measure spaces for simple density; step 2.1 retains zero components."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 includes infinity while step 1.2 requires finite p."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Given and step 1.1 retain countable choice; step 1.2 checks the smooth-density hypothesis."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 applies F3 equality implies a scalar multiple for nonzero g."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 applies F3 scalar multiple implies equality."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "owner-authorized-orchestrator",
+        "notes": "Owner-authorized Riesz–Fischer supplier repair closes reader:4:1: countable choice selects representatives; zero-patched approximants converge everywhere to a measurable limit on incomplete measures. Read this complete consumer: component contractions and two successive subsequences give complex completeness/a.e. convergence, while the interface merely invokes the separately reviewed density and pairing clauses under their exact hypotheses. Countable choice was already assumed here, so no stronger assumption is imported."
+      }
+    },
+    "lem-complex-lq-norm-from-finite-simple-dual-tests": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complex-lp-and-euclidean-test-function-conventions",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. A finite-valued function $f=u+iv:X\\to\\mathbb C$ is **measurable** when $u,v$ are real measurable functions. Write\n$$N_p(f)=\\left(\\int_X|f|^p\\,d\\mu\\right)^{1/p}\\quad(1\\le p<\\infty),\\qquad N_\\infty(f)=\\inf\\{M\\in[0,\\infty]:|f|\\le M\\text{ a.e.}\\}.$$\nThe infimum of the empty set of finite bounds is $\\infty$; equivalently allow $M=\\infty$. Define $\\mathcal L^p(\\mu;\\mathbb C)=\\{f:f\\text{ measurable},N_p(f)<\\infty\\}$ and its **set quotient** $L^p(\\mu;\\mathbb C)=\\mathcal L^p/\\!\\sim$, where $f\\sim g$ means $f=g$ a.e. This extends [[def-l-p-space-as-a-quotient-by-null-functions]] and [[def-essential-supremum-with-respect-to-a-measure]]. Norm and vector-space assertions are established separately.\n\nHere $|u+iv|=\\sqrt{u^2+v^2}$ and $\\overline{u+iv}=u-iv$ as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. These operations preserve measurability: $u^2+v^2$ is measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]], and\n$$\\{|f|>a\\}=\\begin{cases}\\{u^2+v^2>a^2\\},&a\\ge0,\\\\X,&a<0.\\end{cases}$$\nThus [[thm-threshold-characterisations-of-real-and-extended-real-measurability]] applies. For $g=a+ib$, the formulas $fg=(ua-vb)+i(ub+va)$ and $\\overline f=u-iv$ prove the remaining claims by real arithmetic closure. Nonnegative powers are measurable because $\\{r^t>b\\}=\\{r>b^{1/t}\\}$ for $r\\ge0,t>0,b\\ge0$, with the negative thresholds automatic.\n\nA **finite simple** complex function has finite range and measurable fibers. Its **finite-measure support** condition is $\\mu(\\{s\\ne0\\})<\\infty$. This concerns the nonzero set, not compactness of its closure. The zero function is an admissible finite simple function, including when $X=\\varnothing$ or $\\mu(X)=0$.\n\nIntegration is componentwise: for integrable $f=u+iv$,\n$$\\int f\\,d\\mu=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$\nThis is the earlier convention of [[def-integrable-real-and-complex-functions-and-their-integrals]] and [[def-l-one-of-a-measure]]. The inequalities $|u|,|v|\\le|f|\\le|u|+|v|$ show that integrability of the modulus and integrability of both components are equivalent.\n\nFor $n\\ge1$, define complex $C_c(\\mathbb R^n)$, $C_0(\\mathbb R^n)$ and $C_c^\\infty(\\mathbb R^n)$ by requiring both components to lie in the corresponding real spaces ([[def-c-c-and-c-c-infinity-on-rn]], [[def-c-zero-on-rn]]). Derivatives are componentwise, with the multi-index and all-ordered-partials conventions of [[def-ck-and-multi-index-notation-in-several-variables]]. The union of the two compact component supports is compact. A measurable complex $f$ is **locally integrable** for Lebesgue measure if $\\int_K|f|<\\infty$ on every compact $K$. The component inequalities give the equivalent componentwise condition. By [[thm-heine-borel-rn]], closed bounded balls are compact and each compact set is bounded. Hence compact integrability implies integrability on every bounded open ball by restriction from its closure; conversely each compact set is contained in a bounded open ball. These prove both directions of the ball formulation.\n\nFor a topological $X$ with Borel sets contained in $\\mathcal A$, define\n$$\\operatorname{ess\\,supp}_\\mu f=X\\setminus\\bigcup\\{U:U\\text{ open and }f=0\\text{ a.e. on }U\\}.$$\nChanging $f$ on one measurable null set preserves the zero-a.e. property on every $U$, since the union of that set and the old exceptional set is null. Thus essential support depends only on the a.e. class. Ordinary support means $\\overline{\\{f\\ne0\\}}$ and can change with the representative.\n\nFor the following illustration assume [[def-countable-choice]]. For $f=\\mathbf1_{\\mathbb Q}$ on $\\mathbb R$, [[prop-countable-subsets-of-rn-are-lebesgue-null]] gives $f=0$ Lebesgue-a.e.; therefore $N_\\infty(f)=0$ and $\\operatorname{ess\\,supp}f=\\varnothing$, since $U=\\mathbb R$ occurs in the union. But [[lem-q-and-irrationals-dense-r]] gives $\\overline{\\{f\\ne0\\}}=\\mathbb R$. For the Dirac probability measure at zero ([[def-dirac-measure]], [[prop-dirac-measure-is-a-probability-measure]]), the bound $1$ holds everywhere and every $0\\le M<1$ fails on $\\{0\\}$, of measure one. Thus $N_{\\infty,\\delta_0}(f)=1$.\n\nThe raw $L^2$ pairing convention is $\\langle f,g\\rangle=\\int f\\overline g$, linear in the first variable. Its integrability and class invariance are obligations of the later pairing items. **Bilinear tests** instead use $\\int fs$, with no conjugation of $s$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "source_section": "Statement",
+          "quote": "On any measure space, if $p,p^{\\prime}\\in[1,\\infty]$ are conjugate, $f\\in L^p(\\mu;\\mathbb C)$ and $g\\in L^{p^{\\prime}}(\\mu;\\mathbb C)$, then\n$$\\int|fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_{p^{\\prime}},\\qquad \\left|\\int fg\\,d\\mu\\right|\\le\\|f\\|_p\\|g\\|_{p^{\\prime}}.$$\nFor every $1\\le p\\le\\infty$, complex vector operations and $\\|[f]\\|_p=N_p(f)$ are well-defined on the a.e. quotient and give a norm, with\n$$\\|f+g\\|_p\\le\\|f\\|_p+\\|g\\|_p,\\qquad \\|\\overline f\\|_p=\\|f\\|_p,$$\n$$\\|\\operatorname{Re}f\\|_p,\\|\\operatorname{Im}f\\|_p\\le\\|f\\|_p\\le\\|\\operatorname{Re}f\\|_p+\\|\\operatorname{Im}f\\|_p.$$",
+          "uses": [
+            "1.2",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-sigma-finite-and-semifinite-measures",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space ([[def-measure-space]]).\n\n- The measure $\\mu$ is **finite** if $\\mu(X)<+\\infty$.\n- It is **sigma-finite** if there is a sequence $(E_n)_{n\\in\\mathbb N}$ in $\\mathcal A$ such that $X=\\bigcup_nE_n$ and $\\mu(E_n)<+\\infty$ for every $n$.\n- It is **semifinite** if, whenever $E\\in\\mathcal A$ and $\\mu(E)>0$, there is $F\\in\\mathcal A$ with $F\\subseteq E$ and $0<\\mu(F)<+\\infty$.\n\nThe last condition is automatic when $0<\\mu(E)<+\\infty$, by taking $F=E$; its substantive case is $\\mu(E)=+\\infty$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-conjugate-exponents",
+          "source_section": "Definition",
+          "quote": "Numbers $p,q \\in [1,\\infty]$ are **conjugate exponents** when\n\n$$\\frac1p+\\frac1q=1,$$\n\nwith the convention $1/\\infty:=0$. Thus the endpoint pairs $(1,\\infty)$ and\n$(\\infty,1)$ are conjugate, and if $1<p<\\infty$ then the conjugate of $p$ is\n\n$$q=\\frac{p}{p-1}.$$\n\nNo other endpoint pair is conjugate: $(1,1)$ gives $2$, while\n$(\\infty,\\infty)$ gives $0$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-essential-supremum-with-respect-to-a-measure",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, and let $f:X\\to\\mathbb R$ be\nmeasurable. The **essential supremum of $|f|$ with respect to $\\mu$** is\n\n$$\\|f\\|_{\\infty,\\mu}:=\\inf\\{M\\in[0,\\infty] : |f|\\le M \\text{ }\\mu\\text{-almost everywhere}\\}.$$\n\nWhen the measure is fixed from context, this is written $\\|f\\|_\\infty$. The\nphrase **essentially bounded** means $\\|f\\|_\\infty<\\infty$.\n\nThe later proposition\n[[prop-essential-supremum-is-attained-as-the-least-essential-bound]] proves\nthat when $\\|f\\|_\\infty<\\infty$, the inequality $|f|\\le\\|f\\|_\\infty$ itself\nholds almost everywhere and that this bound is the least essential bound.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-integral-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "If $f\\in L^1(\\mu)$, then\n$$\\left|\\int f\\,d\\mu\\right|\\le\\int |f|\\,d\\mu.$$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f,g : X \\to \\overline{\\mathbb{R}}$ be measurable. Then:\n\n1. $cf$ is measurable for every real scalar $c$;\n2. $\\max(f,g)$, $\\min(f,g)$, $|f|$, $f^+$, and $f^-$ are measurable;\n3. if $f+g$ is pointwise defined, then $f+g$ is measurable;\n4. with the convention of\n   [[rem-zero-times-infinity-convention-for-pointwise-products]], the pointwise\n   product $fg$ is measurable.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-threshold-characterisations-of-real-and-extended-real-measurability",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal{A})$ be a measurable space and let\n$f : X \\to \\overline{\\mathbb{R}}$. The following are equivalent:\n\n1. $f$ is measurable;\n2. $\\{x : f(x) > a\\} \\in \\mathcal{A}$ for every real $a$;\n3. $\\{x : f(x) \\ge a\\} \\in \\mathcal{A}$ for every real $a$;\n4. $\\{x : f(x) < a\\} \\in \\mathcal{A}$ for every real $a$;\n5. $\\{x : f(x) \\le a\\} \\in \\mathcal{A}$ for every real $a$.\n\nMoreover, in any one of conditions 2 through 5 it is enough to test only\nrational thresholds $a \\in \\mathbb{Q}$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. $\\int cf\\,d\\mu=c\\int f\\,d\\mu$.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$\n\nFor every $m\\in\\mathbb N$ one also has\n\n$$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$\n\nincluding $m=0$, where both sides are $0$.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "step": "1.1",
+          "claim": "Put $a=|g|$ and $\\theta=\\overline g/a$ on $\\{a>0\\}$, zero elsewhere. The function $b=1/a$ on $\\{a>0\\}$, zero elsewhere, is measurable: for $t\\ge0$, its strict upper level set is $\\{0<a<1/t\\}$ when $t>0$ and $\\{a>0\\}$ when $t=0$; negative upper thresholds give $X$. Real positive powers of $a$ have upper sets $\\{a>t^{1/\\gamma}\\}$ for $\\gamma>0,t\\ge0$. Thus F9–F10 and F1 show the phase, the powers and all ensuing products are measurable. F8 gives $|\\theta|\\le1$ and $g\\theta=a$.",
+          "inputs": [
+            "A measurable finite-valued complex function $g$ and conjugate $q,r\\in[1,\\infty]$, with either the sigma-finite/test-integrability hypothesis or the stated already-Lq hypothesis.",
+            "F9",
+            "F10",
+            "F1",
+            "F8"
+          ]
+        },
+        {
+          "id": "argument-1.2",
+          "step": "1.2",
+          "claim": "Let $E$ be measurable of finite measure and let $h$ be a bounded measurable function vanishing outside $E$, with $\\|h\\|_r\\le1$ and $\\int_E|g|<\\infty$. Round each coordinate of $h$ down to an integer multiple of $1/m$ on $E$ and set the result $t_m$ to zero off $E$. This has finite range, measurable fibers, and $|t_m-h|\\le\\sqrt2/m$. When $r=\\infty$ and $|h|\\le1$, replace each of its finitely many values $z$ by $z/\\max(1,|z|)$; these values lie in the closed unit disk and the error is at most $2\\sqrt2/m$, because the displacement of $z$ is at most $|z-h|$. For finite $r$, the uniform error $e_m$ gives $\\|t_m-h\\|_r\\le e_m\\mu(E)^{1/r}\\to0$; for infinity it gives $\\|t_m-h\\|_\\infty\\le e_m\\to0$. Put $d_m=\\max(1,\\|t_m\\|_r)$ and $s_m=t_m/d_m$. F2 gives $1\\le d_m\\le1+\\|t_m-h\\|_r$, hence $d_m\\to1$ and $s_m\\to h$ uniformly, since $h$ is bounded. Each $s_m$ is an admissible finite simple test, and F7 gives $|\\int g(s_m-h)|\\le\\sup_E|s_m-h|\\int_E|g|\\to0$. Therefore $S(g)\\ge|\\int gh|$. If $\\mu(E)=0$, the integral is zero and the zero test already suffices.",
+          "inputs": [
+            "A measurable finite-valued complex function $g$ and conjugate $q,r\\in[1,\\infty]$, with either the sigma-finite/test-integrability hypothesis or the stated already-Lq hypothesis.",
+            "F2",
+            "F7",
+            "F1",
+            "F9",
+            "F10"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "step": "2.1",
+          "claim": "Let $E$ have finite measure with $a\\le B<\\infty$ on $E$, and put $A=\\|g\\mathbf1_E\\|_q$ for finite $q$. If $A=0$, $S(g)\\ge A$ from the zero test. If $A>0$ and $1<q<\\infty$, set $h=\\mathbf1_E\\theta a^{q-1}/A^{q-1}$. This is bounded, and $(q-1)r=q$ gives $\\int|h|^r=A^{-q}\\int_E a^q=1$. Moreover $\\int gh=A^{-(q-1)}\\int_E a^q=A$. For $q=1$ set $h=\\mathbf1_E\\theta$ instead; it is bounded by one and $\\int gh=\\int_E a=A$. In both cases $\\int_E|g|\\le B\\mu(E)<\\infty$, so step 1.2 applies and gives $S(g)\\ge\\|g\\mathbf1_E\\|_q$.",
+          "inputs": [
+            "A measurable finite-valued complex function $g$ and conjugate $q,r\\in[1,\\infty]$, with either the sigma-finite/test-integrability hypothesis or the stated already-Lq hypothesis.",
+            "1.2",
+            "F4",
+            "F11",
+            "1.1"
+          ]
+        },
+        {
+          "id": "argument-3.1",
+          "step": "3.1",
+          "claim": "Under sigma-finiteness take a covering $H_j$ of finite measure and put $E_n=(\\bigcup_{j\\le n}H_j)\\cap\\{1/n\\le a\\le n\\}$ for $n\\ge1$. These finite-measure sets increase and cover $\\{a>0\\}$. For finite $q$, $a^q\\mathbf1_{E_n}\\uparrow a^q$ everywhere, so F6 yields $\\|g\\mathbf1_{E_n}\\|_q\\uparrow\\|g\\|_q$, possibly infinitely. Step 2.1 proves $S(g)\\ge\\|g\\|_q$. If that norm is finite, F2 bounds every admissible test by $\\|g\\|_q$; if it is infinite the lower bound already gives equality at infinity. The assumed test integrability ensures every integral in the defining supremum is meaningful.",
+          "inputs": [
+            "A measurable finite-valued complex function $g$ and conjugate $q,r\\in[1,\\infty]$, with either the sigma-finite/test-integrability hypothesis or the stated already-Lq hypothesis.",
+            "F6",
+            "2.1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "argument-3.2",
+          "step": "3.2",
+          "claim": "If instead $g\\in L^q$ with $q<\\infty$ on an arbitrary measure space, use $E_n=\\{1/n\\le a\\le n\\}$. F11 gives $n^{-q}\\mu(E_n)\\le\\int a^q<\\infty$, hence $\\mu(E_n)<\\infty$. The same increasing limit and step 2.1 give $S(g)\\ge\\|g\\|_q$. Hölder gives the reverse bound and integrability of every $gs$: a finite simple function of finite-measure support belongs to every finite-exponent Lr, and is bounded when $r=\\infty$. No sigma-finiteness of $X$ is needed.",
+          "inputs": [
+            "A measurable finite-valued complex function $g$ and conjugate $q,r\\in[1,\\infty]$, with either the sigma-finite/test-integrability hypothesis or the stated already-Lq hypothesis.",
+            "F11",
+            "2.1",
+            "F2",
+            "F6"
+          ]
+        },
+        {
+          "id": "argument-4.1",
+          "step": "4.1",
+          "claim": "Now let $q=\\infty$ and $M=\\|g\\|_\\infty>0$, possibly infinite under the sigma-finite hypothesis. For any $0<t<M$, the measurable set $D=\\{a>t\\}$ has positive measure, since otherwise $t$ would be an essential bound. In the sigma-finite case, $D=\\bigcup_n(D\\cap E_n)$ with the sets from step 3.1. F12 implies some $B=D\\cap E_n$ has positive measure, and $0<\\mu(B)<\\infty$ with $a\\le n$ there. In the semifinite already-L-infinity case, $M<\\infty$; the set $\\{a>M+1\\}$ is null by F5. Semifiniteness applied to $D\\cap\\{a\\le M+1\\}$ gives a measurable $B$ of finite positive measure. In either case $h=\\theta\\mathbf1_B/\\mu(B)$ is bounded, $\\|h\\|_1=1$, and $\\int gh=\\mu(B)^{-1}\\int_Ba\\ge t$. Step 1.2 now yields $S(g)\\ge t$. Letting $t\\uparrow M$, or taking arbitrarily large $t$ if $M=\\infty$, proves $S(g)\\ge M$. For finite $M$, F2 gives $S(g)\\le M$. If $M=0$, F2 and the zero test give $S(g)=0$.",
+          "inputs": [
+            "A measurable finite-valued complex function $g$ and conjugate $q,r\\in[1,\\infty]$, with either the sigma-finite/test-integrability hypothesis or the stated already-Lq hypothesis.",
+            "3.1",
+            "F12",
+            "F5",
+            "1.2",
+            "F2",
+            "F3",
+            "F4",
+            "1.1"
+          ]
+        },
+        {
+          "id": "argument-5.1",
+          "step": "5.1",
+          "claim": "The measure on $X=\\{x\\}$ with $\\mu(\\varnothing)=0$, $\\mu(X)=\\infty$ is countably additive: a disjoint family contains at most one nonempty member. It is not semifinite. For $g(x)=1$, its essential norm is one, yet the only finite-measure-supported simple function is zero, so $S(g)=0$. This verifies the necessity of a measure hypothesis at the infinity endpoint. Finally the zero test makes every stated supremum nonempty; on zero measure spaces it and every other integral have value zero. The previous steps prove all the claimed identities and therefore the finite-bound membership conclusion.",
+          "inputs": [
+            "A measurable finite-valued complex function $g$ and conjugate $q,r\\in[1,\\infty]$, with either the sigma-finite/test-integrability hypothesis or the stated already-Lq hypothesis.",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 5.1 includes the zero test and zero measure spaces."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 defines the phase at g=0; step 2.1 skips zero truncations and step 4.1 treats M=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 uses unit-disk finite-grid approximation for q=1 and computes its integral; step 4.1 normalizes the L1 test."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.1 verifies the one-point infinite-mass obstruction, including countable additivity and absence of nonzero tests."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 handles q=1; step 4.1 handles q=infinity, finite or infinite norm."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 uses explicit coordinate rounding. Step 3.1 fixes one sigma-finite exhaustion; step 4.1 selects just one finite positive set for a fixed t, not a family of choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 show finite testing bound implies finite modulus norm under the sigma-finite hypothesis."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 3.1–4.1 apply Hölder to show Lq membership gives the testing bound in the stated cases."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Steps 1.1-2.1 use measurable conjugate phase and normalized bounded finite-grid tests; errors are uniform on a finite-measure set with integrable |g|. Steps 3.1/3.2 separately justify sigma-finite exhaustion and finite-q level-set exhaustion for already-Lq inputs. Step 4.1 uses a bounded positive finite-measure subset at infinity, with semifiniteness explicitly required. Zero test treats M=0 and null spaces; singleton infinite-mass counterexample verifies endpoint necessity. Extended norms never produce undefined test integrals."
+      }
+    },
+    "lem-complex-translation-and-approximate-identity-interfaces": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complex-lp-and-euclidean-test-function-conventions",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. A finite-valued function $f=u+iv:X\\to\\mathbb C$ is **measurable** when $u,v$ are real measurable functions. Write\n$$N_p(f)=\\left(\\int_X|f|^p\\,d\\mu\\right)^{1/p}\\quad(1\\le p<\\infty),\\qquad N_\\infty(f)=\\inf\\{M\\in[0,\\infty]:|f|\\le M\\text{ a.e.}\\}.$$\nThe infimum of the empty set of finite bounds is $\\infty$; equivalently allow $M=\\infty$. Define $\\mathcal L^p(\\mu;\\mathbb C)=\\{f:f\\text{ measurable},N_p(f)<\\infty\\}$ and its **set quotient** $L^p(\\mu;\\mathbb C)=\\mathcal L^p/\\!\\sim$, where $f\\sim g$ means $f=g$ a.e. This extends [[def-l-p-space-as-a-quotient-by-null-functions]] and [[def-essential-supremum-with-respect-to-a-measure]]. Norm and vector-space assertions are established separately.\n\nHere $|u+iv|=\\sqrt{u^2+v^2}$ and $\\overline{u+iv}=u-iv$ as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. These operations preserve measurability: $u^2+v^2$ is measurable by [[thm-arithmetic-and-lattice-operations-preserve-measurability]], and\n$$\\{|f|>a\\}=\\begin{cases}\\{u^2+v^2>a^2\\},&a\\ge0,\\\\X,&a<0.\\end{cases}$$\nThus [[thm-threshold-characterisations-of-real-and-extended-real-measurability]] applies. For $g=a+ib$, the formulas $fg=(ua-vb)+i(ub+va)$ and $\\overline f=u-iv$ prove the remaining claims by real arithmetic closure. Nonnegative powers are measurable because $\\{r^t>b\\}=\\{r>b^{1/t}\\}$ for $r\\ge0,t>0,b\\ge0$, with the negative thresholds automatic.\n\nA **finite simple** complex function has finite range and measurable fibers. Its **finite-measure support** condition is $\\mu(\\{s\\ne0\\})<\\infty$. This concerns the nonzero set, not compactness of its closure. The zero function is an admissible finite simple function, including when $X=\\varnothing$ or $\\mu(X)=0$.\n\nIntegration is componentwise: for integrable $f=u+iv$,\n$$\\int f\\,d\\mu=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$\nThis is the earlier convention of [[def-integrable-real-and-complex-functions-and-their-integrals]] and [[def-l-one-of-a-measure]]. The inequalities $|u|,|v|\\le|f|\\le|u|+|v|$ show that integrability of the modulus and integrability of both components are equivalent.\n\nFor $n\\ge1$, define complex $C_c(\\mathbb R^n)$, $C_0(\\mathbb R^n)$ and $C_c^\\infty(\\mathbb R^n)$ by requiring both components to lie in the corresponding real spaces ([[def-c-c-and-c-c-infinity-on-rn]], [[def-c-zero-on-rn]]). Derivatives are componentwise, with the multi-index and all-ordered-partials conventions of [[def-ck-and-multi-index-notation-in-several-variables]]. The union of the two compact component supports is compact. A measurable complex $f$ is **locally integrable** for Lebesgue measure if $\\int_K|f|<\\infty$ on every compact $K$. The component inequalities give the equivalent componentwise condition. By [[thm-heine-borel-rn]], closed bounded balls are compact and each compact set is bounded. Hence compact integrability implies integrability on every bounded open ball by restriction from its closure; conversely each compact set is contained in a bounded open ball. These prove both directions of the ball formulation.\n\nFor a topological $X$ with Borel sets contained in $\\mathcal A$, define\n$$\\operatorname{ess\\,supp}_\\mu f=X\\setminus\\bigcup\\{U:U\\text{ open and }f=0\\text{ a.e. on }U\\}.$$\nChanging $f$ on one measurable null set preserves the zero-a.e. property on every $U$, since the union of that set and the old exceptional set is null. Thus essential support depends only on the a.e. class. Ordinary support means $\\overline{\\{f\\ne0\\}}$ and can change with the representative.\n\nFor the following illustration assume [[def-countable-choice]]. For $f=\\mathbf1_{\\mathbb Q}$ on $\\mathbb R$, [[prop-countable-subsets-of-rn-are-lebesgue-null]] gives $f=0$ Lebesgue-a.e.; therefore $N_\\infty(f)=0$ and $\\operatorname{ess\\,supp}f=\\varnothing$, since $U=\\mathbb R$ occurs in the union. But [[lem-q-and-irrationals-dense-r]] gives $\\overline{\\{f\\ne0\\}}=\\mathbb R$. For the Dirac probability measure at zero ([[def-dirac-measure]], [[prop-dirac-measure-is-a-probability-measure]]), the bound $1$ holds everywhere and every $0\\le M<1$ fails on $\\{0\\}$, of measure one. Thus $N_{\\infty,\\delta_0}(f)=1$.\n\nThe raw $L^2$ pairing convention is $\\langle f,g\\rangle=\\int f\\overline g$, linear in the first variable. Its integrability and class invariance are obligations of the later pairing items. **Bilinear tests** instead use $\\int fs$, with no conjugation of $s$.",
+          "uses": [
+            "1.1",
+            "1.3",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "source_section": "Statement",
+          "quote": "On any measure space, if $p,p^{\\prime}\\in[1,\\infty]$ are conjugate, $f\\in L^p(\\mu;\\mathbb C)$ and $g\\in L^{p^{\\prime}}(\\mu;\\mathbb C)$, then\n$$\\int|fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_{p^{\\prime}},\\qquad \\left|\\int fg\\,d\\mu\\right|\\le\\|f\\|_p\\|g\\|_{p^{\\prime}}.$$\nFor every $1\\le p\\le\\infty$, complex vector operations and $\\|[f]\\|_p=N_p(f)$ are well-defined on the a.e. quotient and give a norm, with\n$$\\|f+g\\|_p\\le\\|f\\|_p+\\|g\\|_p,\\qquad \\|\\overline f\\|_p=\\|f\\|_p,$$\n$$\\|\\operatorname{Re}f\\|_p,\\|\\operatorname{Im}f\\|_p\\le\\|f\\|_p\\le\\|\\operatorname{Re}f\\|_p+\\|\\operatorname{Im}f\\|_p.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice.\n\nLet $1 \\le p < \\infty$ and $f \\in L^p(\\mathbb{R}^n)$. Then\n\n$$\\|\\tau_h f-f\\|_p \\longrightarrow 0 \\qquad(h \\to 0).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-young-convolution-inequality",
+          "source_section": "Statement",
+          "quote": "Let $1 \\le p,q,r \\le \\infty$ satisfy\n\n$$ \\frac1r = \\frac1p + \\frac1q - 1. $$\n\nIf $f \\in L^p(\\mathbb{R}^n)$ and $g \\in L^q(\\mathbb{R}^n)$, then the\nconvolution $f*g$ is defined almost everywhere and satisfies\n\n$$ \\|f*g\\|_r \\le \\|f\\|_p\\|g\\|_q. $$",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-minkowski-integral-inequality",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mu)$ and $(Y,\\nu)$ be sigma-finite measure spaces, let\n$1 \\le p < \\infty$, and let $F : X \\times Y \\to \\mathbb{C}$ be measurable with\n\n$$ \\int_Y \\|F(\\cdot,y)\\|_{L^p(X)}\\,d\\nu(y) < \\infty. $$\n\nThen the function\n$$ H(x) := \\int_Y |F(x,y)|\\,d\\nu(y) $$\nbelongs to $L^p(X)$ and\n\n$$ \\|H\\|_{L^p(X)} \\le \\int_Y \\|F(\\cdot,y)\\|_{L^p(X)}\\,d\\nu(y). $$",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-completion-measurable-functions-have-base-measurable-representatives",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $(X,\\mathcal{A}_0,\\mu)$ be a measure space and let\n$(X,\\overline{\\mathcal{A}_0},\\overline{\\mu})$ be its completion. If\n$f : X \\to \\overline{\\mathbb{R}}$ is measurable with respect to\n$\\overline{\\mathcal{A}_0}$, then there is an $\\mathcal{A}_0$-measurable function\n$g : X \\to \\overline{\\mathbb{R}}$ such that $f=g$ almost everywhere.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-borel-representatives-make-the-convolution-integrand-borel-measurable",
+          "source_section": "Statement",
+          "quote": "Let $\\tilde f,\\tilde g : \\mathbb{R}^n \\to \\mathbb{C}$ be Borel measurable\nfunctions. Then\n\n$$ H(x,y) := \\tilde f(x-y)\\tilde g(y) $$\n\nis Borel measurable on $\\mathbb{R}^{2n}$. In particular, for each fixed\n$x \\in \\mathbb{R}^n$, the section $y \\mapsto H(x,y)$ is measurable.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, let $h \\in \\mathbb{R}^n$, and let $E + h$ be the translate of\n$E \\subseteq \\mathbb{R}^n$ ([[def-translation-of-a-set-in-rn]]). Then:\n\n1. $\\lambda_n^*(E+h) = \\lambda_n^*(E)$ for **every** subset $E$;\n2. $E$ is Lebesgue measurable if and only if $E+h$ is;\n3. $\\lambda_n(E+h) = \\lambda_n(E)$ for every Lebesgue measurable $E$.\n\n**No choice principle is used.** Lebesgue outer measure is defined as an infimum\nand the Carathéodory condition is a family of equations between its values, so\nall three clauses are statements about objects that exist in ZF; countable\nchoice is needed to know that $\\lambda_n$ is a measure, not to know that it is\ntranslation invariant.",
+          "uses": [
+            "1.1",
+            "1.5",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-lebesgue-measure-under-dilations-and-reflections",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), let $c$ be a nonzero real and write\n$cE := \\{\\, cx : x \\in E \\,\\}$ for $E \\subseteq \\mathbb{R}^n$, where\n$(cx)_i := cx_i$. Then:\n\n1. $\\lambda_n^*(cE) = |c|^{\\,n}\\,\\lambda_n^*(E)$ for every subset $E$, the\n   product being defined in $\\overline{\\mathbb{R}}$ because $|c|^{\\,n} > 0$;\n2. $E$ is Lebesgue measurable if and only if $cE$ is;\n3. $\\lambda_n(cE) = |c|^{\\,n}\\lambda_n(E)$ for every Lebesgue measurable $E$.\n\nAt $c = -1$ the map is reflection in the origin and $|c|^{\\,n} = 1$, so it\npreserves outer measure, measurability and measure. The value $c = 0$ is\nexcluded because $0E$ is $\\{0\\}$ or $\\varnothing$ and carries no information\nabout $E$.",
+          "uses": [
+            "1.4",
+            "1.5",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Let $f,g\\in L^1(\\mu)$. Then the following are equivalent:\n\n1. $f=g$ almost everywhere;\n2. for every measurable $A$,\n   $$\\int_A f\\,d\\mu=\\int_A g\\,d\\mu.$$\n\nFor integrable real or complex $h$, the notation in condition 2 means\n$\\int_A h\\,d\\mu:=\\int h\\chi_A\\,d\\mu$; the product is integrable because\n$|h\\chi_A|\\le|h|$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "1.3",
+            "1.4",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).\n\nLet $f : \\mathbb{R}^n \\to \\mathbb{C}$ be locally integrable, let\n$\\varphi \\in C_c^\\infty(\\mathbb{R}^n)$ have mass $1$, and let\n$\\varphi_\\varepsilon$ be the associated mollifier. Then for every\n$\\varepsilon > 0$, the convolution\n\n$$ (f*\\varphi_\\varepsilon)(x) := \\int_{\\mathbb{R}^n} f(y)\\varphi_\\varepsilon(x-y)\\,dy $$\n\nis smooth, and for every multi-index $\\alpha$,\n\n$$ \\partial^\\alpha(f*\\varphi_\\varepsilon) = f*(\\partial^\\alpha \\varphi_\\varepsilon). $$",
+          "uses": [
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset",
+          "source_section": "Statement",
+          "quote": "Let $f,g \\in L^1(\\mathbb{R}^n)$ be represented by Borel functions still\ndenoted $f,g$. For any complex-valued function $u$ on $\\mathbb R^n$, use the\nsupport convention\n\n$$\\operatorname{supp}(u):=\\overline{\\{x\\in\\mathbb R^n:u(x)\\ne0\\}},$$\n\nwhich extends the real-valued definition of\n[[def-support-and-compactly-supported-riemann-integral-in-rn]]. Define\n$$ h(x) := \\begin{cases} \\int_{\\mathbb{R}^n} f(x-y)g(y)\\,dy,& \\text{if the integral exists},\\\\ 0,& \\text{otherwise}. \\end{cases} $$\nThen\n\n$$ \\operatorname{supp}(h) \\subseteq \\overline{\\operatorname{supp}(f) + \\operatorname{supp}(g)}. $$",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F14",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Countable Choice**, written $\\mathrm{AC}_\\omega$, is the following\nstatement.\n\n> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.\n\nEquivalently, in the vocabulary of [[def-choice-function]]: every at most\ncountable family of nonempty sets ([[def-countable]]) has a choice function.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F15",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "1.5",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F16",
+          "source": "thm-integral-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "If $f\\in L^1(\\mu)$, then\n$$\\left|\\int f\\,d\\mu\\right|\\le\\int |f|\\,d\\mu.$$",
+          "uses": [
+            "1.2",
+            "1.3",
+            "2.2",
+            "2.3"
+          ]
+        },
+        {
+          "fact": "F17",
+          "source": "thm-heine-borel-rn",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ and let $d_2$ be the Euclidean metric on it\n([[lem-metrics-on-rn]]). Then:\n\n1. **Closed boxes are compact.** For reals $a_k \\le b_k$ $(k < n)$ the box\n   $Q = \\{\\, x \\in \\mathbb{R}^n : a_k \\le x_k \\le b_k \\text{ for every } k < n \\,\\}$\n   is a compact subset of $(\\mathbb{R}^n, d_2)$ ([[def-metric-compactness]]).\n2. **Heine-Borel.** A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset of\n   $(\\mathbb{R}^n, d_2)$ if and only if $K$ is closed in $\\mathbb{R}^n$\n   ([[def-metric-topology]]) and bounded\n   ([[def-metric-bounded-diameter]]).\n3. **The real line.** A subset $K \\subseteq \\mathbb{R}$ is a compact subset of\n   $(\\mathbb{R}, d_{\\mathbb{R}})$, the usual metric $d_{\\mathbb{R}}(x,y) = |x-y|$\n   ([[lem-real-line-is-a-metric-space]]), if and only if $K$ is closed in\n   $\\mathbb{R}$ and bounded.\n\n**No choice principle is used.** The bisection below halves one coordinate at a\ntime and takes the **left** half whenever the left half still fails to be finitely\ncovered, the right half otherwise: a rule with two outcomes, decided by a\nproperty of the box, not a selection. That is the whole reason the theorem is\navailable in ZF, while the general \"complete and totally bounded implies compact\"\n([[thm-complete-and-totally-bounded-implies-compact]]) is not.\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its metrics only there; the last remark below records what\nhappens at $n = 0$.",
+          "uses": [
+            "1.3",
+            "1.5",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F18",
+          "source": "thm-heine-cantor-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d_X)$ be a compact metric space ([[def-metric-compactness]]), let\n$(Y,d_Y)$ be any metric space ([[def-metric-space]]) and let $f : X \\to Y$ be\ncontinuous ([[def-metric-continuity]]). Then $f$ is uniformly continuous\n([[def-metric-uniform-continuity]]).\n\nNo choice principle is used: the cover built below is cut out by a property, and\nthe Lebesgue number lemma it is fed to is itself choice free\n([[thm-lebesgue-number-lemma]]).",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F19",
+          "source": "thm-extreme-value-metric",
+          "source_section": "Statement",
+          "quote": "Let $(X,d)$ be a nonempty compact metric space ([[def-metric-compactness]],\n[[def-metric-space]]) and let $f : X \\to \\mathbb{R}$ be continuous\n([[def-metric-continuity]]), $\\mathbb{R}$ carrying its usual metric\n$d_{\\mathbb{R}}(s,t) = |s-t|$ ([[lem-real-line-is-a-metric-space]]). Then the\nimage $f[X]$ is bounded above and below ([[def-bounded-set]]), and it has a\nmaximum and a minimum ([[def-max-min]]): there are points\n$x_{\\max}, x_{\\min} \\in X$ with\n\n$$f(x_{\\min}) \\;\\le\\; f(x) \\;\\le\\; f(x_{\\max}) \\qquad \\text{for every } x \\in X,$$\n\nand then $f(x_{\\max}) = \\sup f[X]$ and $f(x_{\\min}) = \\inf f[X]$\n([[def-complete-ordered-field]], [[def-infimum]]).\n\nNonemptiness of $X$ is a hypothesis and not an oversight: for $X = \\emptyset$ the\nimage is empty and has neither a supremum nor a maximum. No choice principle is\nused.",
+          "uses": [
+            "1.3",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F20",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "step": "1.1",
+          "claim": "Write $f=u+iv$. Translation invariance F8 gives $\\int|f(x-h)|^p\\,dx=\\int|f(x)|^p\\,dx$ for finite $p$: first substitute translated level sets for a nonnegative simple function, then take the supremum defining its nonnegative integral. For infinity the sets $\\{|f(\\cdot-h)|>a\\}$ have the same measure as $\\{|f|>a\\}$, so the essential bounds coincide. Null disagreement sets also translate to null sets, so translations act on classes. For finite $p$, F3 and F2 give $\\|\\tau_hf-f\\|_p\\le\\|\\tau_hu-u\\|_p+\\|\\tau_hv-v\\|_p\\to0$. The isometry gives continuity at every $h_0$ from $\\|\\tau_hf-\\tau_{h_0}f\\|_p=\\|\\tau_{h-h_0}f-f\\|_p$.",
+          "inputs": [
+            "Countable choice, Euclidean dimension $n\\ge1$, and the kernels and inputs in the statement; limits of kernels are as $\\varepsilon\\downarrow0$.",
+            "F8",
+            "F3",
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "argument-1.2",
+          "step": "1.2",
+          "claim": "Under the given countable-choice hypothesis F14, F6 applied to each component supplies Borel representatives of $K,f$; any infinite component values in the base representative occur on a Borel null set and can be set to zero there. F7 makes $(x,y)\\mapsto K(y)f(x-y)$ Borel. Apply F4 to the nonnegative real inputs $|K|\\in L^1$ and $|f|\\in L^p$: the envelope $A(x)=\\int|K(y)||f(x-y)|\\,dy$ is finite a.e. and $\\|A\\|_p\\le\\|K\\|_1\\|f\\|_p$. On this set the complex integral exists absolutely and its modulus is at most $A$ by F16. For measurability, expand $K=a+ib$, $f=u+iv$ and write $K*f=(a*u-b*v)+i(a*v+b*u)$ wherever all integrals converge. Each real convolution is an Lp measurable function by F4 since $a,b\\in L^1$ and $u,v\\in L^p$ by F2. Define the output to be zero on the measurable exceptional set. F2 and monotonicity now give the claimed sharp norm bound, including $p=\\infty$.",
+          "inputs": [
+            "Countable choice, Euclidean dimension $n\\ge1$, and the kernels and inputs in the statement; limits of kernels are as $\\varepsilon\\downarrow0$.",
+            "F6",
+            "F14",
+            "F7",
+            "F4",
+            "F16",
+            "F2"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "step": "2.1",
+          "claim": "For any other measurable representatives let $N_K,N_f$ be their measurable null disagreement sets. For each fixed $x$, the integrands coincide outside $N_K\\cup(x-N_f)$, a measurable null set by F8–F9. The same is true of their absolute values, so absolute integrability holds for either pair exactly when it holds for the other. At those points F10 gives equal integrals. Thus the measurable class in step 1.2 is representative-independent throughout $L^1$ times Lp, without restricting both inputs to $L^1$.",
+          "inputs": [
+            "Countable choice, Euclidean dimension $n\\ge1$, and the kernels and inputs in the statement; limits of kernels are as $\\varepsilon\\downarrow0$.",
+            "F8",
+            "F9",
+            "F10",
+            "1.2"
+          ]
+        },
+        {
+          "id": "argument-2.2",
+          "step": "2.2",
+          "claim": "For finite $p$, normalization and F15 give $K_\\varepsilon*f-f=\\int K_\\varepsilon(y)(f(\\cdot-y)-f(\\cdot))\\,dy$ a.e. Its absolute value is bounded by the envelope with integrand $|K_\\varepsilon(y)||f(x-y)-f(x)|$ by F16. This integrand is measurable by F7 applied to Borel representatives and ordinary products. Its section norm is $|K_\\varepsilon(y)|\\|\\tau_yf-f\\|_p$, measurable by step 1.1 and bounded by $2\\|f\\|_p|K_\\varepsilon(y)|$, which is integrable. Euclidean Lebesgue measure is sigma-finite, since $[-j,j]^n$ for positive integers $j$ cover it and have finite measure $(2j)^n$ by F20. Therefore F5 applies and gives $\\|K_\\varepsilon*f-f\\|_p\\le\\int|K_\\varepsilon(y)|\\|\\tau_yf-f\\|_p\\,dy$.",
+          "inputs": [
+            "Countable choice, Euclidean dimension $n\\ge1$, and the kernels and inputs in the statement; limits of kernels are as $\\varepsilon\\downarrow0$.",
+            "F15",
+            "F16",
+            "F7",
+            "1.1",
+            "F20",
+            "F5",
+            "F2",
+            "1.2"
+          ]
+        },
+        {
+          "id": "argument-3.1",
+          "step": "3.1",
+          "claim": "For any $\\eta>0$, step 1.1 gives $\\delta>0$ with $\\|\\tau_yf-f\\|_p<\\eta$ whenever $|y|<\\delta$. Splitting the last integral yields $\\|K_\\varepsilon*f-f\\|_p\\le M\\eta+2\\|f\\|_p\\int_{|y|\\ge\\delta}|K_\\varepsilon(y)|\\,dy$. The tail tends to zero, so the limit superior is at most $M\\eta$. Let $\\eta\\downarrow0$ to obtain convergence. No separate normalization of the real and imaginary kernel parts has been used.",
+          "inputs": [
+            "Countable choice, Euclidean dimension $n\\ge1$, and the kernels and inputs in the statement; limits of kernels are as $\\varepsilon\\downarrow0$.",
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "id": "argument-1.3",
+          "step": "1.3",
+          "claim": "A complex $f\\in C_0$ is bounded: its components are bounded on a sufficiently large closed ball by F17 and F19 and are small outside by definition. It is uniformly continuous: for a given $\\eta>0$, take $R$ with $|f(x)|<\\eta/2$ for $|x|>R$ and use F18 on the closed ball of radius $R+2$ to choose $0<\\delta<1$ making differences below $\\eta$ there. If $|x-z|<\\delta$, either both points are in that ball or both have radius greater than $R$, in which case their values differ by less than $\\eta$. This proves uniform continuity. Hence $K*f$ exists everywhere and $|(K*f)(x+z)-(K*f)(x)|\\le\\|K\\|_1\\sup_w|f(w+z)-f(w)|\\to0$. As $|x|\\to\\infty$, $f(x-y)\\to0$ for fixed $y$, dominated by the integrable function $\\|f\\|_\\infty|K(y)|$; F11 gives $(K*f)(x)\\to0$. Thus $K*f\\in C_0$.",
+          "inputs": [
+            "Countable choice, Euclidean dimension $n\\ge1$, and the kernels and inputs in the statement; limits of kernels are as $\\varepsilon\\downarrow0$.",
+            "F17",
+            "F19",
+            "F18",
+            "F11",
+            "F1",
+            "F16"
+          ]
+        },
+        {
+          "id": "argument-2.3",
+          "step": "2.3",
+          "claim": "For $f\\in C_0$, put $\\omega_f(\\delta)=\\sup_{|y|<\\delta,x}|f(x-y)-f(x)|$. Step 1.3 gives $\\omega_f(\\delta)\\to0$. Taking pointwise absolute values in the normalized error integral and then the supremum gives $\\|K_\\varepsilon*f-f\\|_{\\mathrm{sup}}\\le M\\omega_f(\\delta)+2\\|f\\|_{\\mathrm{sup}}\\int_{|y|\\ge\\delta}|K_\\varepsilon(y)|\\,dy$. First send $\\varepsilon\\downarrow0$, then $\\delta\\downarrow0$. This proves the uniform assertion by a direct supremum estimate.",
+          "inputs": [
+            "Countable choice, Euclidean dimension $n\\ge1$, and the kernels and inputs in the statement; limits of kernels are as $\\varepsilon\\downarrow0$.",
+            "1.3",
+            "F15",
+            "F16"
+          ]
+        },
+        {
+          "id": "argument-1.4",
+          "step": "1.4",
+          "claim": "For a fixed $K\\in L^1$ of integral one, substitution $y=x/\\varepsilon$ using F9 gives $\\int K_\\varepsilon=\\int K=1$, $\\|K_\\varepsilon\\|_1=\\|K\\|_1$, and $\\int_{|x|\\ge\\delta}|K_\\varepsilon(x)|\\,dx=\\int_{|y|\\ge\\delta/\\varepsilon}|K(y)|\\,dy\\to0$ by F11, dominated by $|K|$. Thus scaled integrable mass-one kernels satisfy all three conditions, whether or not they are nonnegative.",
+          "inputs": [
+            "Countable choice, Euclidean dimension $n\\ge1$, and the kernels and inputs in the statement; limits of kernels are as $\\varepsilon\\downarrow0$.",
+            "F9",
+            "F11"
+          ]
+        },
+        {
+          "id": "argument-1.5",
+          "step": "1.5",
+          "claim": "For locally integrable $f=u+iv$, F1 gives locally integrable real components. Apply F12 to each with the real kernel $\\rho_\\varepsilon$. By F15 their recombination gives all ordered partial derivatives, equal to the integrals with the corresponding kernel derivatives. To check their continuity explicitly, fix $x_0$ and a closed unit ball of x-values about it. The y-supports of $\\partial^\\alpha\\rho_\\varepsilon(x-y)$ for those x-values lie in a fixed closed bounded ball $Q$, compact by F17. The derivative of the kernel is globally bounded, say by $C_\\alpha$, by F19 on a ball containing its compact support. Thus the integrands are dominated by $C_\\alpha|f|\\mathbf1_Q$, integrable by local integrability. As $x\\to x_0$ their pointwise limits are the integrands at $x_0$, so F11 gives continuity of every derivative integral. The change of variables between the two convolution orders follows from F8–F9. Hence the convolution is smooth with the stated formula.",
+          "inputs": [
+            "Countable choice, Euclidean dimension $n\\ge1$, and the kernels and inputs in the statement; limits of kernels are as $\\varepsilon\\downarrow0$.",
+            "F1",
+            "F12",
+            "F15",
+            "F17",
+            "F19",
+            "F11",
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "argument-4.1",
+          "step": "4.1",
+          "claim": "If the locally integrable input has compact support $S$, then $\\int|f|=\\int_S|f|<\\infty$. A Borel representative can be made zero outside the closed set $S$ while preserving its class by step 2.1. F13 gives output support inside $\\overline{S+\\operatorname{supp}\\rho_\\varepsilon}$. Both input supports are bounded, so this closed sum closure is bounded and hence compact by F17. The smooth output has closed support inside it, therefore compact support. Zero input or zero convolution yields the empty support; neither requires a nonempty support choice. All estimates above apply at p=1; the only general infinity assertion is the isometry and Young bound, with uniform approximation restricted to C0.",
+          "inputs": [
+            "Countable choice, Euclidean dimension $n\\ge1$, and the kernels and inputs in the statement; limits of kernels are as $\\varepsilon\\downarrow0$.",
+            "2.1",
+            "F13",
+            "F17",
+            "1.5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 explicitly treats empty support and zero output."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 gives zero norm when either factor is zero; step 3.1 applies without dividing by the input norm."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–3.1 include p=1; step 1.4 verifies unit kernel mass."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 treats arbitrary a.e. representative changes in L1 times Lp, including p=infinity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–1.2 include infinity; steps 2.2–3.1 use only finite p, while step 2.3 separately proves the C0 endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly uses countable choice for completion representatives; compact boundedness in step 1.5 is applied on nonempty balls, and step 4.1 handles empty supports."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement gives sufficient kernel conditions and approximation conclusions, not their necessity."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization of approximate identities is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Proof 1.1-4.1 checked against current real suppliers. The Given countable-choice hypothesis discharges the hypotheses of the base-representative and Euclidean-measure suppliers; F6, not the choice definition itself, supplies Borel representatives. Real Young on absolute values proves absolute existence and the sharp bound including infinity. Fixed-x null sets prove representative invariance. The finite-p integral envelope is product measurable with integrable section norm and sigma-finite factors. Absolute kernel tails, not signed tails, control both errors. Local compact domination justifies derivatives for signed real smooth kernels; support closure is compact for compact input. No general infinity convergence is claimed. The collected completeness interface is declared but its completeness clause is not used in this proof."
+      }
+    },
+    "ex-complex-phase-in-l-q-dual-norming": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-complex-lq-norm-from-finite-simple-dual-tests",
+          "source_section": "Statement",
+          "quote": "Let $1\\le q\\le\\infty$, let $r$ be its conjugate exponent, and let $\\Sigma_{\\mathrm{fin}}$ denote the complex finite simple functions whose nonzero sets have finite measure. Define\n$$S(g):=\\sup\\left\\{\\left|\\int_X gs\\,d\\mu\\right|:s\\in\\Sigma_{\\mathrm{fin}},\\ \\|s\\|_r\\le1\\right\\}.$$\nOn a sigma-finite measure space, if $g:X\\to\\mathbb C$ is measurable and $gs$ is integrable for every $s\\in\\Sigma_{\\mathrm{fin}}$, then $\\|g\\|_q=S(g)$, allowing extended values. Thus a finite uniform bound on these tests proves $g\\in L^q$ with its norm at most that bound.\n\nIf $g$ is already in $L^q$, the same identity holds on every measure space for $q<\\infty$, and on semifinite measure spaces for $q=\\infty$. The pairing is bilinear; a sesquilinear formulation replaces $s$ by its conjugate. The zero test is allowed, including on zero measure spaces.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "1.2",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "step": "1.1",
+          "claim": "Direct multiplication gives $\\omega^2=(-1-i\\sqrt3)/2$, $\\omega^3=1$, $1+\\omega+\\omega^2=0$ and $|\\omega|=1$. Thus all three values of $g$ have modulus one, so F3 gives $\\|g\\|_1=(1+1+1)/3=1$. The measure is a probability measure: disjoint sets just partition three atoms, and their weighted cardinalities add to one on $X$.",
+          "inputs": [
+            "The three-atom probability space and the explicitly displayed $g$ and $\\omega$.",
+            "F3",
+            "F2"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "step": "2.1",
+          "claim": "The conjugated test has modulus one on each atom, so its essential infinity norm is one. Coordinatewise $gs=(1,1,1)$, and F3–F4 give $\\int gs=1$. Every complex test of norm at most one has integral modulus at most $\\|g\\|_1=1$ by F1; all tests here have finite-measure support. Hence this test attains the full complex supremum.",
+          "inputs": [
+            "The three-atom probability space and the explicitly displayed $g$ and $\\omega$.",
+            "F3",
+            "F4",
+            "F1",
+            "F2",
+            "1.1"
+          ]
+        },
+        {
+          "id": "argument-1.2",
+          "step": "1.2",
+          "claim": "For a real test $t=(t_0,t_1,t_2)\\in[-1,1]^3$, set $w_\\sigma=\\prod_{j=0}^2(1+\\sigma_jt_j)/2$ for $\\sigma\\in\\{-1,1\\}^3$. Each weight is nonnegative, summing the product over all signs gives $\\sum_\\sigma w_\\sigma=1$, and summing $\\sigma_jw_\\sigma$ gives $t_j$. Thus $t=\\sum_\\sigma w_\\sigma\\sigma$. For the linear expression $L(t)=(t_0+\\omega t_1+\\omega^2t_2)/3=\\int gt$, F2 implies $|L(t)|\\le\\sum_\\sigma w_\\sigma|L(\\sigma)|\\le\\max_\\sigma|L(\\sigma)|$.",
+          "inputs": [
+            "The three-atom probability space and the explicitly displayed $g$ and $\\omega$.",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "argument-3.1",
+          "step": "3.1",
+          "claim": "At the two equal-sign vertices, $L(\\sigma)=0$ because $1+\\omega+\\omega^2=0$. Every other sign vertex has one exceptional sign, at some coordinate $j$, so $L(\\sigma)=\\pm2\\omega^j/3$ and has modulus $2/3$. For instance $t=(1,-1,-1)$ gives $L(t)=2/3$. This proves both the real upper bound and its attainment. Finally F4 gives $\\int g^2=(1+\\omega^2+\\omega^4)/3=(1+\\omega^2+\\omega)/3=0$, proving the claimed failure of the unconjugated phase.",
+          "inputs": [
+            "The three-atom probability space and the explicitly displayed $g$ and $\\omega$.",
+            "F4",
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The displayed probability space has exactly three nonempty atoms; its empty measurable subset contributes zero by the simple-integral definition."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 computes the zero integrals for equal-sign vertices and the unconjugated phase."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 compute unit norm and the integral one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 allows coordinates at ±1, where some convex weights vanish."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.2–3.1 test all cube vertices and prove the entire real supremum, in the q=1 endpoint setting."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All eight sign vertices and their weights are given by finite explicit formulas."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a fixed calculation comparing two suprema, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No equivalence is asserted; both upper bounds and witnesses are computed in steps 1.2–1.4."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Verification 1.1-3.1: omega cubed is one and the three phases sum to zero. Conjugate test gives one; convex weights reduce real cube tests to eight vertices, whose maximum modulus is 2/3 and is attained. Unconjugated test gives zero. Finite atomic supports meet every dual-test hypothesis."
+      }
+    },
+    "ex-complex-l-two-pairing-on-two-step-functions": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "source_section": "Statement",
+          "quote": "On every measure space the pairing $\\langle f,g\\rangle=\\int f\\overline g$ on complex $L^2$ is representative-independent, linear in the first variable, conjugate-linear in the second, conjugate symmetric and positive definite, with $\\langle f,f\\rangle=\\|f\\|_2^2$. Moreover,\n$$|\\langle f,g\\rangle|\\le\\|f\\|_2\\|g\\|_2.$$\nIf $g\\ne0$ as a class, equality holds iff $f=cg$ a.e. for some $c\\in\\mathbb C$. If $g=0$, equality holds for every $f$.\n\nFor each finite $m\\ge0$, the same conclusions hold on tuples $F=(f_j)_{j<m}$, with pairing $B(F,G)=\\sum_{j<m}\\langle f_j,g_j\\rangle$ and $\\|F\\|^2=\\sum_{j<m}\\|f_j\\|_2^2$. For $G\\ne0$, equality means $f_j=cg_j$ a.e. for every $j$, with one common scalar $c$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "step": "1.1",
+          "claim": "F2 gives measure one to both intervals; they are disjoint, and both functions vanish elsewhere. Their squared moduli are each $\\mathbf1_{[0,1)}+\\mathbf1_{[1,2)}$, so F3 gives $\\|f\\|_2^2=\\|g\\|_2^2=1+1=2$. Thus both are integrable $L^2$ representatives.",
+          "inputs": [
+            "Countable choice and the two disjoint unit intervals with the displayed complex coefficients.",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "step": "2.1",
+          "claim": "On the first interval $f\\overline g=1\\cdot(-i)=-i$ and on the second it is $i\\cdot1=i$. F1 and F4 therefore give $\\langle f,g\\rangle=(-i)\\cdot1+i\\cdot1=0$. The bilinear product instead has value $i$ on each interval, so $\\int fg=i\\cdot1+i\\cdot1=2i$.",
+          "inputs": [
+            "Countable choice and the two disjoint unit intervals with the displayed complex coefficients.",
+            "F1",
+            "F4",
+            "F2",
+            "1.1"
+          ]
+        },
+        {
+          "id": "argument-3.1",
+          "step": "3.1",
+          "claim": "The coefficients of $if$ are $i,-1$ and those of $\\overline f$ are $1,-i$, so $(if)\\overline f$ has values $i,i$. Hence $\\langle if,f\\rangle=2i$. The coefficients of $\\overline{if}$ are $-i,-1$, so $f\\overline{if}$ has values $-i,-i$ and $\\langle f,if\\rangle=-2i$. These computations agree with first-variable linearity and second-variable conjugate-linearity and show concretely why the bilinear expression cannot replace the inner product.",
+          "inputs": [
+            "Countable choice and the two disjoint unit intervals with the displayed complex coefficients.",
+            "F1",
+            "F2",
+            "F4",
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Both specified intervals have length one; the space and supports in this example are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the zero inner product despite both positive norms."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 computes both unit interval measures explicitly."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 displays orthogonality without either input being zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Example uses half-open intervals, so the shared endpoint belongs only to the second interval; step 1.1 verifies disjointness."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement and step 1.1 assume countable choice exactly as required by F2; no further selection is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example compares explicit integrals and makes no iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse theorem is claimed for these two functions."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Verification 1.1-3.1: two disjoint length-one intervals give squared norms two. Products are -i and i for the pairing, i and i for bilinear integration; multiplication by i gives 2i in the first slot and -2i in the second. Countable choice matches the current box-measure supplier."
+      }
+    },
+    "ex-complex-mollification-by-components": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-complex-translation-and-approximate-identity-interfaces",
+          "source_section": "Statement",
+          "quote": "Assume countable choice, let $n\\ge1$, and use Lebesgue measure on $\\mathbb R^n$. Translation $\\tau_hf(x)=f(x-h)$ is an isometry of complex $L^p$ for $1\\le p\\le\\infty$ and depends norm-continuously on $h$ for $p<\\infty$.\n\nFor complex $K\\in L^1$ and $f\\in L^p$, the convolution\n$$(K*f)(x)=\\int K(y)f(x-y)\\,dy$$\nexists absolutely a.e., defines a measurable class independent of representatives, and satisfies $\\|K*f\\|_p\\le\\|K\\|_1\\|f\\|_p$.\n\nIf $K_\\varepsilon\\in L^1(\\mathbb R^n;\\mathbb C)$ satisfy\n$$\\int K_\\varepsilon=1,\\qquad M:=\\sup_{\\varepsilon>0}\\|K_\\varepsilon\\|_1<\\infty,\\qquad \\int_{|y|\\ge\\delta}|K_\\varepsilon(y)|\\,dy\\longrightarrow0\\quad(\\delta>0),$$\nthen $K_\\varepsilon*f\\to f$ in $L^p$ for $p<\\infty$, and uniformly for $f\\in C_0(\\mathbb R^n;\\mathbb C)$. For fixed $K\\in L^1$, $K*f\\in C_0$ when $f\\in C_0$. These assertions allow complex and sign-changing kernels. In particular $K_\\varepsilon(x)=\\varepsilon^{-n}K(x/\\varepsilon)$ is such an approximate identity whenever $K\\in L^1$ and $\\int K=1$.\n\nIf $\\rho\\in C_c^\\infty(\\mathbb R^n;\\mathbb R)$ has mass one, $\\rho_\\varepsilon(x)=\\varepsilon^{-n}\\rho(x/\\varepsilon)$, and $f$ is complex locally integrable, then $\\rho_\\varepsilon*f$ is smooth and\n$$\\partial^\\alpha(\\rho_\\varepsilon*f)=(\\partial^\\alpha\\rho_\\varepsilon)*f.$$\nA compactly supported input gives a compactly supported output. No general $L^\\infty$ translation-continuity or approximate-identity convergence is asserted.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "source_section": "Statement",
+          "quote": "On any measure space, if $p,p^{\\prime}\\in[1,\\infty]$ are conjugate, $f\\in L^p(\\mu;\\mathbb C)$ and $g\\in L^{p^{\\prime}}(\\mu;\\mathbb C)$, then\n$$\\int|fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_{p^{\\prime}},\\qquad \\left|\\int fg\\,d\\mu\\right|\\le\\|f\\|_p\\|g\\|_{p^{\\prime}}.$$\nFor every $1\\le p\\le\\infty$, complex vector operations and $\\|[f]\\|_p=N_p(f)$ are well-defined on the a.e. quotient and give a norm, with\n$$\\|f+g\\|_p\\le\\|f\\|_p+\\|g\\|_p,\\qquad \\|\\overline f\\|_p=\\|f\\|_p,$$\n$$\\|\\operatorname{Re}f\\|_p,\\|\\operatorname{Im}f\\|_p\\le\\|f\\|_p\\le\\|\\operatorname{Re}f\\|_p+\\|\\operatorname{Im}f\\|_p.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$\n\nFor every $m\\in\\mathbb N$ one also has\n\n$$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$\n\nincluding $m=0$, where both sides are $0$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. $\\int cf\\,d\\mu=c\\int f\\,d\\mu$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative\nLebesgue integral equals its simple integral:\n$$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "argument-1.1",
+          "step": "1.1",
+          "claim": "The input is bounded and supported in $[0,2]$, so F3 makes it integrable and locally integrable. In the convolution integral, $f(x-t)$ has real part one exactly for $t\\in[x-1,x]$ and imaginary part one exactly for $t\\in[x-2,x-1]$. Integrating the two components gives the displayed formula. Their common endpoint has measure zero by F3. F1 makes the output smooth. Since $\\rho_\\varepsilon$ vanishes outside $[-\\varepsilon,\\varepsilon]$, both integrals vanish for $x<-\\varepsilon$ and for $x>2+\\varepsilon$, proving the stated support inclusion.",
+          "inputs": [
+            "Countable choice, the specified real nonnegative mass-one smooth kernel, $\\varepsilon>0$, and the displayed complex two-step function.",
+            "F3",
+            "F1"
+          ]
+        },
+        {
+          "id": "argument-2.1",
+          "step": "2.1",
+          "claim": "For $0<\\varepsilon<1/4$, put $U=\\bigcup_{a\\in\\{0,1,2\\}}[a-\\varepsilon,a+\\varepsilon]$. Outside $U$, the entire interval $[x-\\varepsilon,x+\\varepsilon]$ stays in a constant region of $f$, so the unit kernel mass from F1 implies $(\\rho_\\varepsilon*f)(x)=f(x)$. Each component of the convolution is between zero and one, because $\\rho_\\varepsilon\\ge0$ and its integral is one. The same is true for each component of $f$, including its value at the shared endpoint. Consequently the modulus error is at most $\\sqrt2\\le2$ everywhere and is zero outside $U$. F3–F4 give $\\mu(U)\\le6\\varepsilon$. Since $|\\rho_\\varepsilon*f-f|^p\\le2^p\\mathbf1_U$, F5–F6 and the definition of $N_p$ in F2 give $\\|\\rho_\\varepsilon*f-f\\|_p^p\\le2^p\\mu(U)\\le2^p6\\varepsilon$. Taking p-th roots proves the bound, and its limit is zero for each fixed finite $p$.",
+          "inputs": [
+            "Countable choice, the specified real nonnegative mass-one smooth kernel, $\\varepsilon>0$, and the displayed complex two-step function.",
+            "F1",
+            "F3",
+            "F4",
+            "F2",
+            "F5",
+            "F6",
+            "1.1"
+          ]
+        },
+        {
+          "id": "argument-3.1",
+          "step": "3.1",
+          "claim": "Let $h$ be any continuous complex function. If $\\|h-f\\|_\\infty<1/2$, choose a real essential bound $a<1/2$ for the error. On $(-1/2,0)$ the function $f$ is zero, so $|h(x)|\\le a$ a.e.; by continuity this inequality holds throughout that interval, since any failure persists on an open interval of positive measure by F3. Similarly $|h(x)-1|\\le a$ throughout $(0,1/2)$. Taking the respective limits at zero gives $|h(0)|\\le a$ and $|h(0)-1|\\le a$, whence $1\\le|h(0)|+|h(0)-1|\\le2a<1$, a contradiction. Thus every such $h$ has error at least $1/2$, in particular the smooth function from step 1.1.",
+          "inputs": [
+            "Countable choice, the specified real nonnegative mass-one smooth kernel, $\\varepsilon>0$, and the displayed complex two-step function.",
+            "F3",
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The kernel has unit mass and the input has support [0,2], so neither support is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the error is zero outside the three endpoint neighborhoods."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use and verify the unit kernel mass and component bounds by one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 removes endpoint overlap as a null set, and step 2.1 permits arbitrary nonnegative kernels satisfying the hypotheses, without symmetry."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 tracks all three jumps at 0,1,2; step 3.1 proves the infinity obstruction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The statement assumes countable choice for F1 and F3. The proof uses a single essential-bound witness in step 3.1, not a choice family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Only finite-p convergence and an infinity lower bound are claimed."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "There is no converse classification of continuous approximants or kernels."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-e",
+        "notes": "Verification 1.1-3.1: interval convolution bounds have the correct orientation; the shared endpoint is null. For epsilon<1/4 the error is zero outside three intervals totaling 6 epsilon and bounded by sqrt(2)<=2. The finite-p estimate now uses the exact nonnegative-integral monotonicity and simple-indicator integral suppliers. Every continuous candidate would force |h(0)| and |h(0)-1| below 1/2 if its essential error were below 1/2, contradiction using positive interval measure. Nonnegative kernel and countable-choice hypotheses are retained."
+      }
+    }
+  }
+}

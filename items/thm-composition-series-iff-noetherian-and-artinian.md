@@ -7,17 +7,13 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-composition-series-and-length-of-a-module, thm-equivalent-characterizations-of-noetherian-modules, thm-equivalent-characterizations-of-artinian-modules, thm-chain-conditions-in-short-exact-sequences]
+deps: [def-composition-series-and-length-of-a-module, thm-equivalent-characterizations-of-noetherian-modules, thm-equivalent-characterizations-of-artinian-modules, thm-chain-conditions-in-short-exact-sequences, def-dependent-choice, def-axiom-of-choice]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "deepseek-v4-pro + claude-sonnet-5"
-    verdict: pass
-    date: 2026-08-17
   audited: 2026-08-17
 sources:
   scraped: []
@@ -33,11 +29,11 @@ A module with a composition series is both Noetherian and Artinian. Conversely, 
 
 ## Facts & Assumptions
 
-**Given:** The hypotheses and objects in the Statement.
+**Given:** The hypotheses and objects in the Statement. Dependent choice ([[def-dependent-choice]]) is assumed only for the converse and is available under the Axiom of Choice ([[def-axiom-of-choice]]).
 
 [L1] A composition series of a left $R$-module $M$ is a finite chain $$0=M_0<M_1<\cdots<M_n=M$$ whose factors $M_i/M_{i-1}$ are simple. If such a series exists, the length $\ell_R(M)$ is its number $n$ of factors; thm-jordan-holder-theorem-for-modules proves independence of the chosen series. The zero module has the empty series and length $0$. ([[def-composition-series-and-length-of-a-module]]).
 
-[L2] For a left $R$-module $M$, the following are equivalent: every submodule is finitely generated; every ascending chain of submodules stabilizes; and every nonempty family of submodules has a maximal member. The implication from ACC to the maximal condition uses dependent choice; the other displayed implications are choice-free. ([[thm-equivalent-characterizations-of-noetherian-modules]]).
+[L2] For a left $R$-module $M$, write (1) every submodule is finitely generated, (2) ACC, and (3) every nonempty set of submodules has a maximal member. The implications $1\Rightarrow2$ and $3\Rightarrow1$ are choice-free; $2\Rightarrow3$ assumes DC, under which the three conditions are equivalent. ([[thm-equivalent-characterizations-of-noetherian-modules]]).
 
 [L3] For a left $R$-module $M$, DCC is equivalent to the condition that every nonempty family of submodules has a minimal member. The implication from DCC to the minimal condition uses dependent choice. ([[thm-equivalent-characterizations-of-artinian-modules]]).
 
@@ -47,8 +43,8 @@ A module with a composition series is both Noetherian and Artinian. Conversely, 
 
 **Proof technique:** direct.
 
-1.1 Let $0=M_0<\cdots<M_n=M$ be a composition series [L1] and induct on $i$ that $M_i$ is Noetherian and Artinian. The zero module $M_0$ satisfies both conditions vacuously. A simple factor $M_i/M_{i-1}$ has only the submodules $0$ and itself, so every chain of its submodules stabilizes and it too satisfies both conditions. Applying [L4] to the short exact sequence $0\to M_{i-1}\to M_i\to M_i/M_{i-1}\to0$ carries both conditions from $M_{i-1}$ and the simple factor to $M_i$. At $i=n$ this gives the forward implication, which uses no choice principle. [L1, L4, given, algebra]
+1.1 Let $0=M_0<\cdots<M_n=M$ be a composition series [L1] and induct on $i$ that $M_i$ is Noetherian and Artinian. The zero module $M_0$ satisfies both conditions vacuously. A simple factor has only the submodules $0$ and itself; any one nonzero element generates it, since its cyclic submodule is nonzero. Thus all its submodules are finitely generated and all descending chains stabilize. Applying [L4] to $0\to M_{i-1}\to M_i\to M_i/M_{i-1}\to0$ carries both conditions to $M_i$. At $i=n$ this gives the forward implication, without any choice principle. [L1, L4, given, algebra]
 
-2.1 Conversely, assume dependent choice and let $M$ be Noetherian and Artinian. Every submodule of $M$ is Noetherian by [L4], so a nonzero submodule $N$ has a nonempty family of proper submodules, which by the maximal condition of [L2] has a maximal member — a maximal proper submodule of $N$. Dependent choice applied to this relation, starting at $M$, yields a chain $M=N_0>N_1>\cdots$ in which $N_{k+1}$ is a maximal proper submodule of $N_k$ for as long as $N_k\ne0$. [step 1.1, L2, L4, given, algebra]
+1.2 Conversely, assume dependent choice and let $M$ be Noetherian and Artinian. Every submodule of $M$ is Noetherian by [L4], so a nonzero submodule $N$ has a maximal proper submodule by the nonempty maximal condition of [L2], using DC. Define a relation on the submodules of $M$ by taking a maximal proper submodule at each nonzero term and letting zero be its own successor. This relation is serial. DC, available from the assumed AC, supplies a sequence starting at $M$; it strictly decreases until it reaches zero and is then constant. These are the precise choice uses in the converse. [L2, L4, given, choose]
 
-3.1 The chain of step 2.1 is strictly descending while its terms are nonzero, so the descending chain condition forces some $N_r=0$. Since $N_{k+1}$ is maximal proper in $N_k$, the quotient $N_k/N_{k+1}$ is nonzero and has no proper nonzero submodule, hence is simple. Reversing the chain gives $0=N_r<\cdots<N_0=M$, a composition series. For $M=0$ the empty chain is already the required series, so no choice is consumed in that case. This proves the stated claim. [L1, L3, step 2.1, given, algebra] ∎
+2.1 The chain of step 1.2 is strictly descending while its terms are nonzero, so the descending chain condition forces some $N_r=0$. Since $N_{k+1}$ is maximal proper in $N_k$, the quotient $N_k/N_{k+1}$ is nonzero and has no proper nonzero submodule, hence is simple. Reversing the chain gives $0=N_r<\cdots<N_0=M$, a composition series. For $M=0$ the empty chain is already the required series, so no choice is consumed in that case. This proves the stated claim. [L1, L3, step 1.2, given, algebra] ∎

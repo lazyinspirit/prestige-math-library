@@ -1,0 +1,1489 @@
+[
+  {
+    "order": 366.059,
+    "id": "zariski-tangent-spaces-regular-points-smoothness-and-bertini",
+    "kind": "A",
+    "category": "algebraic-geometry",
+    "title": "Zariski Tangent Spaces Regular Points Smoothness and Bertini",
+    "companion": "zariski-tangent-spaces-regular-points-smoothness-and-bertini-examples",
+    "requires": [
+      "dimension-constructible-images-and-dimensions-of-fibres-examples",
+      "regular-local-rings-and-homological-dimension"
+    ],
+    "items": [
+      {
+        "id": "def-zariski-cotangent-space-point",
+        "kind": "definition",
+        "title": "The intrinsic cotangent space",
+        "statement": "For a point x of a locally Noetherian scheme X, put C_xX=m_x/m_x^2, a vector space over kappa(x)=O_{X,x}/m_x. In the classical block x is a closed k-point and k is algebraically closed. All uses of earlier choice-dependent results retain the Axiom of Choice.",
+        "deps": [
+          "def-residue-field-scheme-point",
+          "def-locally-noetherian-and-noetherian-scheme"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74f, Proposition 4.29; AG10 10.58\u201310.60",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-zariski-tangent-space-point",
+        "kind": "definition",
+        "title": "The intrinsic tangent space",
+        "statement": "T_xX=Hom_{kappa(x)}(C_xX,kappa(x)). For finite-type schemes this is finite dimensional. This intrinsic tangent space is distinguished from the relative tangent space at a nonrational point.",
+        "deps": [
+          "def-zariski-cotangent-space-point"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74f, 4.29\u20134.30",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-cotangent-localization-at-rational-point",
+        "kind": "lemma",
+        "title": "Cotangent spaces commute with localization at a rational point",
+        "statement": "For a k-algebra A with maximal ideal m and A/m=k, the natural map m/m^2 -> mA_m/(mA_m)^2 is an isomorphism. More generally m^r/m^{r+1} -> (mA_m)^r/(mA_m)^{r+1} is an isomorphism for every r>=0.",
+        "deps": [
+          "def-zariski-cotangent-space-point",
+          "thm-localisation-at-a-prime-is-local",
+          "prop-localisation-zero-equality-and-kernel-criteria"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74f, Proposition 4.27 and 4.30(d); \u00a74g",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Every s outside m acts on each quotient as the nonzero scalar s mod m. Localization thus leaves each quotient unchanged; prove the displayed maps using fractions, including r=0."
+      },
+      {
+        "id": "lem-tangent-vectors-as-dual-number-points",
+        "kind": "lemma",
+        "title": "Tangent vectors at rational points are dual-number points",
+        "statement": "For any k-scheme X and rational point x in X(k), T_xX is naturally the fibre over x of Hom_k(Spec(k[epsilon]/(epsilon^2)),X) -> X(k). Equivalently its vectors are k-derivations O_{X,x}->k, with module action by evaluation at x. This statement does not identify the intrinsic tangent space at an arbitrary nonrational point with relative dual-number points.",
+        "deps": [
+          "def-zariski-tangent-space-point",
+          "def-dual-numbers-scheme",
+          "thm-affine-scheme-ring-anti-equivalence",
+          "lem-cotangent-localization-at-rational-point"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74f, 4.25\u20134.30",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "A based morphism factors through any affine neighborhood of its unique image point. Write its ring map as a -> a(x)+epsilon D(a). Multiplicativity is precisely the Leibniz identity. D kills k and m^2; conversely use O=k direct-sum m to extend a linear map m/m^2->k."
+      },
+      {
+        "id": "lem-tangent-points-over-square-zero-vector-extensions",
+        "kind": "lemma",
+        "title": "Square-zero vector extensions encode tangent vectors with coefficients",
+        "statement": "Let W be finite dimensional over k, with k-algebra k direct-sum W and W^2=0. For a classical affine variety X, k-algebra maps k[X]->k direct-sum W correspond naturally to pairs (x,t) with x in X(k) and t in W tensor_k T_xX.",
+        "deps": [
+          "lem-tangent-vectors-as-dual-number-points"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Exercise 4-10, p.99",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "The augmentation gives x. The remaining map D is a derivation with values in W and hence a linear map m_x/m_x^2->W. Finite-dimensional linear duality identifies this with W tensor T_xX."
+      },
+      {
+        "id": "def-jacobian-matrix-affine-algebraic-set",
+        "kind": "definition",
+        "title": "Equation rows and coordinate columns in a Jacobian",
+        "statement": "For A=k[t_1,...,t_n]/I with chosen ideal generators f_1,...,f_r and a rational point a, J(a) is the r by n matrix (partial f_i/partial t_j)(a). Derivatives are formal monomial derivatives. For a reduced algebraic set use I=I(X), not merely an ideal with the same zero set.",
+        "deps": [
+          "def-coordinate-ring-affine-algebraic-set"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74d, 4.22; Arapura 5.1.2",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-zariski-tangent-space-jacobian-kernel",
+        "kind": "theorem",
+        "title": "The Jacobian kernel computes the tangent space",
+        "statement": "For any finite-type affine k-scheme Spec(k[t_1,...,t_n]/I) and a k-rational point a, T_aX is canonically ker J(a) in k^n. The kernel is independent of the chosen generators of I. No reducedness or perfectness is needed at a rational point.",
+        "deps": [
+          "def-jacobian-matrix-affine-algebraic-set",
+          "lem-tangent-vectors-as-dual-number-points"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74d, 4.22 and \u00a74f, Proposition 4.26",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Expand f(a+epsilon v)=f(a)+epsilon sum_j partial_j f(a)v_j. A polynomial combination of ideal generators has differential sum_i h_i(a)df_i(a), proving generator independence in both directions."
+      },
+      {
+        "id": "lem-tangent-space-functoriality-classical",
+        "kind": "lemma",
+        "title": "Differentials, open restriction, and the chain rule",
+        "statement": "A k-morphism f:X->Y at rational points induces d_xf:T_xX->T_{f(x)}Y by dualizing the map on maximal ideals modulo squares. Identity and composition obey the identity and chain rules. Open immersions induce isomorphisms on tangent spaces.",
+        "deps": [
+          "def-zariski-tangent-space-point",
+          "def-morphism-of-schemes",
+          "lem-tangent-vectors-as-dual-number-points"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74e, Lemma 4.24; \u00a74f, 4.31",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "The local ring homomorphism carries m_y and m_y^2 into m_x and m_x^2. Dualization reverses this direction. Open restriction preserves stalks. In coordinates this is formal differentiation of the component functions."
+      },
+      {
+        "id": "lem-tangent-space-product",
+        "kind": "lemma",
+        "title": "Tangent space of a classical product",
+        "statement": "For classical varieties over algebraically closed k, T_{(x,y)}(X times_k Y) is naturally T_xX direct-sum T_yY.",
+        "deps": [
+          "lem-tangent-vectors-as-dual-number-points",
+          "thm-affine-variety-product-coordinate-ring",
+          "thm-dimension-product-varieties"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Exercise 4-4",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Use affine neighborhoods. Algebra maps from A tensor_k B to the dual numbers correspond to the two based algebra maps. This respects vector addition and scalars by the derivation formula."
+      },
+      {
+        "id": "def-regular-local-ring-geometric-point",
+        "kind": "definition",
+        "title": "Regular points use the existing regular-local-ring definition",
+        "statement": "A point x of a locally Noetherian scheme is regular if O_{X,x} is a regular local ring, equivalently dim T_xX=dim O_{X,x}. This is absolute regularity, not yet smoothness over a field.",
+        "deps": [
+          "def-zariski-tangent-space-point",
+          "def-embedding-dimension-and-regular-local-ring"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74i, 4.44\u20134.45",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-local-dimension-reduced-variety-components",
+        "kind": "lemma",
+        "title": "Local dimension for a reducible classical algebraic set",
+        "statement": "For a reduced classical finite-type space X over algebraically closed k and closed point x, dim O_{X,x} equals the maximum of dim X_i over irreducible components X_i containing x.",
+        "deps": [
+          "lem-dimension-local-ring-codimension-closure",
+          "lem-dimension-finite-union-components",
+          "lem-classical-variety-noetherian-components",
+          "thm-stalk-structure-sheaf-prime-localization"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74h\u2013i, proof of 4.45; \u00a73c, 3.14",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Prime chains in the local ring lie over a minimal prime, and localization retains precisely the components through x. Reduce each quotient to the irreducible closed-point dimension theorem."
+      },
+      {
+        "id": "thm-embedding-dimension-at-least-local-dimension",
+        "kind": "theorem",
+        "title": "Tangent dimension bounds local dimension",
+        "statement": "For every point of a locally Noetherian scheme, dim_{kappa(x)} T_xX >= dim O_{X,x}. At a classical closed point this is dim T_xX >= dim_x X with the componentwise convention.",
+        "deps": [
+          "def-zariski-tangent-space-point",
+          "thm-dimension-at-most-embedding-dimension",
+          "lem-local-dimension-reduced-variety-components"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74i, Theorem 4.44",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Apply the earlier Noetherian local embedding bound; local rings at points are nonzero. For classical points use the preceding local-dimension bridge."
+      },
+      {
+        "id": "def-singular-and-regular-loci-variety",
+        "kind": "definition",
+        "title": "Regular and singular loci",
+        "statement": "X_reg consists of points whose local rings are regular; X_sing is its complement. For a reducible classical space use dim_x X, never a single global dimension in the numerical test.",
+        "deps": [
+          "def-regular-local-ring-geometric-point",
+          "lem-local-dimension-reduced-variety-components"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74h\u2013i, 4.35 and 4.45",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-jacobian-criterion-affine-variety",
+        "kind": "theorem",
+        "title": "Jacobian rank detects regularity at closed points over a perfect field",
+        "statement": "Let k be perfect, A=k[t_1,...,t_n]/I with I=(f_1,...,f_r), and a a closed point with residue field L. Then L/k is finite separable. Evaluate the r by n matrix of formal partial derivatives in L. The local ring A_a is regular if and only if rank_L J(a)=n-dim A_a. At k-rational points the same rank criterion holds over any field. For classical reduced algebraic sets over algebraically closed k, dim A_a is the maximum dimension of the components through a.",
+        "deps": [
+          "thm-zariski-tangent-space-jacobian-kernel",
+          "thm-embedding-dimension-at-least-local-dimension",
+          "def-regular-local-ring-geometric-point",
+          "thm-ag-perfect-field-jacobian-regularity",
+          "lem-maximal-ideal-residue-field-of-an-affine-algebra-is-finite",
+          "cor-algebraic-extensions-of-perfect-fields-are-separable"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74h\u2013i; AG10 10.62\u201310.64",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            },
+            {
+              "title": "Stacks Project Lemma 10.140.4: separable-residue cotangent injection",
+              "url": "https://stacks.math.columbia.edu/tag/00TU"
+            },
+            {
+              "title": "Stacks Project Lemma 10.140.5: regularity and smoothness with separable residue field",
+              "url": "https://stacks.math.columbia.edu/tag/00TV"
+            }
+          ]
+        },
+        "strategy": "The two explicit residue-field suppliers give finiteness of L/k and then separability from perfectness. At rational points apply the established tangent-kernel formula and rank-nullity. For finite separable residue field L, the prerequisite supplier must prove m/m^2 is isomorphic to Omega_(A/k) tensor_A L: injectivity requires the separable-residue cotangent argument, and the right term Omega_(L/k) vanishes. The polynomial-quotient presentation then gives embedding dimension n-rank_L J(a). Compare with the definition of regularity. This does not apply the rational dual-number identification to nonrational points."
+      },
+      {
+        "id": "cor-hypersurface-singular-locus-gradient",
+        "kind": "corollary",
+        "title": "The gradient test for a reduced hypersurface",
+        "statement": "Let k be algebraically closed and let nonconstant squarefree f in k[t_1,...,t_n], n>=1, define X. Then X_sing is the common zero locus of f and all its formal first partial derivatives. The same scheme computation applies to Spec(k[t]/(f)) without taking a radical; replacing (f) by its radical changes the object.",
+        "deps": [
+          "thm-zariski-tangent-space-jacobian-kernel",
+          "def-regular-local-ring-geometric-point",
+          "lem-local-dimension-reduced-variety-components",
+          "thm-principal-subvariety-codimension-one"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74a, 4.1\u20134.7; \u00a74h, 4.37",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Each hypersurface component has dimension n-1; rank of its one-row Jacobian is zero or one. This is a set-theoretic regular locus statement, not a claim of presentation-independent singular subscheme ideals."
+      },
+      {
+        "id": "lem-regular-point-lies-on-one-component",
+        "kind": "lemma",
+        "title": "A regular point lies on one irreducible component",
+        "statement": "A regular point of a reduced Noetherian scheme lies on exactly one irreducible component.",
+        "deps": [
+          "def-regular-local-ring-geometric-point",
+          "thm-regular-local-rings-are-domains-and-cohen-macaulay",
+          "def-irreducible-component-scheme"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74i, proof of 4.45",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "The minimal primes of the local ring correspond to components through the point; a regular local ring is a domain. Spell out the localization/minimal-prime correspondence."
+      },
+      {
+        "id": "thm-regular-locus-is-open-variety",
+        "kind": "theorem",
+        "title": "Openness of the regular locus over a perfect field",
+        "statement": "For a finite-type reduced k-scheme with k perfect, X_reg is open, including nonequidimensional and empty X.",
+        "deps": [
+          "thm-jacobian-criterion-affine-variety",
+          "lem-regular-point-lies-on-one-component",
+          "lem-classical-variety-noetherian-components",
+          "thm-ag-perfect-field-jacobian-regularity"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74h, Theorem 4.37",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "At a regular point remove the other finitely many components, and use a nonvanishing rank minor on the surviving component. The supplier handles nonrational points over perfect fields."
+      },
+      {
+        "id": "lem-separating-hypersurface-chart-variety",
+        "kind": "lemma",
+        "title": "A dense hypersurface chart with a nonzero partial derivative",
+        "statement": "Every irreducible classical variety of dimension d over algebraically closed k is birational to an irreducible hypersurface in A^{d+1} whose defining equation has a nonzero partial derivative in the last coordinate. It has an open subset isomorphic to an open subset of that hypersurface.",
+        "deps": [
+          "thm-ag-separating-transcendence-basis-perfect-field",
+          "thm-primitive-element-theorem-for-finite-separable-extensions",
+          "thm-birational-equivalence-function-fields",
+          "thm-dimension-equals-transcendence-degree"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74h proof of 4.37, using 3.36\u20133.37",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Use a separating transcendence basis and primitive element; clear denominators of its separable minimal polynomial. Shrink the two rational inverse maps to inverse affine opens. The separating-basis result is NOT implied by the theorem that algebraic extensions of perfect fields are separable."
+      },
+      {
+        "id": "thm-nonempty-regular-locus-reduced-variety-perfect-field",
+        "kind": "theorem",
+        "title": "Dense regular loci on every component",
+        "statement": "If X is reduced of finite type over a perfect field, every irreducible component contains a dense open subset consisting of points regular on X. For nonempty X the regular locus is nonempty.",
+        "deps": [
+          "thm-regular-locus-is-open-variety",
+          "lem-separating-hypersurface-chart-variety",
+          "cor-hypersurface-singular-locus-gradient",
+          "thm-ag-perfect-field-jacobian-regularity"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74h, Theorem 4.37; AG10 10.65",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Over algebraically closed k use the separating hypersurface chart, the nonzero partial derivative, and delete intersections with other components. The perfect-field extension uses the supplier, with reducedness preserved; it is not inferred merely from openness."
+      },
+      {
+        "id": "cor-minimum-tangent-dimension-and-homogeneous-regularity",
+        "kind": "corollary",
+        "title": "Minimal tangent dimension and homogeneous spaces",
+        "statement": "For irreducible classical X, dim X=min_x dim T_xX. Such X is regular exactly when its tangent-space dimension is constant. More generally a reduced classical space with transitive automorphisms is regular.",
+        "deps": [
+          "thm-nonempty-regular-locus-reduced-variety-perfect-field",
+          "thm-embedding-dimension-at-least-local-dimension",
+          "lem-tangent-space-functoriality-classical"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Corollaries 4.38\u20134.40",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Combine the bound with one regular point; automorphisms carry regular local rings isomorphically to each other."
+      },
+      {
+        "id": "def-smooth-morphism-to-field-classical",
+        "kind": "definition",
+        "title": "Smoothness over a field by geometric regularity",
+        "statement": "A finite-type k-scheme X is smooth over k if for every field extension K/k all local rings of X_K are regular. X_K is formed by tensoring affine coordinate rings with K and gluing as in the prerequisite supplier. This definition retains nilpotents in every field change.",
+        "deps": [
+          "def-regular-local-ring-geometric-point",
+          "thm-ag-field-extension-of-schemes"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "33.12.1\u201333.12.3 and 33.12.6",
+              "url": "https://stacks.math.columbia.edu/tag/038S"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-regular-equals-smooth-over-perfect-field",
+        "kind": "theorem",
+        "title": "Regular equals smooth over a perfect field",
+        "statement": "For every finite-type scheme X over a perfect field k, X is regular if and only if X is smooth over k.",
+        "deps": [
+          "def-smooth-morphism-to-field-classical",
+          "thm-ag-geometric-regularity-perfect-base"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "33.12.2\u201333.12.3; perfect fields have no nontrivial finite purely inseparable extensions",
+              "url": "https://stacks.math.columbia.edu/tag/038S"
+            }
+          ]
+        },
+        "strategy": "The forward implication is the proved algebraic field-extension regularity theorem applied chartwise; the reverse takes K=k. This includes nonclosed points and is not just the rational-point Jacobian identity."
+      },
+      {
+        "id": "thm-regular-not-smooth-imperfect-field",
+        "kind": "theorem",
+        "title": "Purely inseparable field algebras separate regularity from smoothness",
+        "statement": "For a field k of characteristic p>0 and a not in k^p, L=k[t]/(t^p-a) is a field and Spec L is regular. For K containing alpha with alpha^p=a, L tensor_k K is K[u]/(u^p), which is not regular. Consequently Spec L is not smooth over k.",
+        "deps": [
+          "lem-p-power-polynomial-is-irreducible-when-its-constant-is-not-a-pth-power",
+          "def-smooth-morphism-to-field-classical",
+          "thm-affine-scheme-ring-anti-equivalence"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Example 33.12.7, first example",
+              "url": "https://stacks.math.columbia.edu/tag/038S"
+            }
+          ]
+        },
+        "strategy": "The first local ring is a field. After the displayed substitution the unique local ring has dimension zero and one-dimensional maximal ideal modulo its square. A theorem kind and thm- prefix replace the invalid cex-/theorem design row."
+      },
+      {
+        "id": "def-tangent-cone-point",
+        "kind": "definition",
+        "title": "The tangent cone retains its scheme structure",
+        "statement": "For x in a locally Noetherian scheme, define Cone_xX=Spec(gr_{m_x} O_{X,x}) over kappa(x). The underlying reduced cone is a different object.",
+        "deps": [
+          "def-associated-graded-ring-and-module",
+          "def-affine-scheme-spectrum",
+          "def-zariski-cotangent-space-point"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74g, Proposition 4.34; AG10 10.69\u201310.71",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-tangent-cone-initial-ideal-presentation",
+        "kind": "lemma",
+        "title": "All initial forms define the tangent cone",
+        "statement": "At a rational origin of Spec(k[t_1,...,t_n]/I), gr_m O_{X,0} is k[t_1,...,t_n]/in_m(I), where in_m(I) is generated by the lowest nonzero homogeneous terms of every polynomial in I. For I=(f), in_m(I)=(f_m), with f_m the lowest homogeneous part. Initial forms of an arbitrary generating set need not generate in_m(I).",
+        "deps": [
+          "def-tangent-cone-point",
+          "lem-cotangent-localization-at-rational-point"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74g, Proposition 4.34 and preceding warning",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Compare the degree-r kernels of the polynomial-to-associated-graded map. In a polynomial domain initial(fg)=initial(f)initial(g), which proves the principal-ideal clause."
+      },
+      {
+        "id": "lem-tangent-cone-linear-span-tangent-space",
+        "kind": "lemma",
+        "title": "The scheme-theoretic linear span of the tangent cone",
+        "statement": "At a rational point, Cone_xX embeds in the affine space associated to T_xX, and no proper linear closed subscheme of that affine space contains Cone_xX. This assertion is about the scheme-theoretic cone, not the span of its reduced set of points.",
+        "deps": [
+          "def-tangent-cone-point",
+          "lem-tangent-cone-initial-ideal-presentation",
+          "def-zariski-tangent-space-point"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74g, Proposition 4.34 and AG10 10.71",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Choose a basis of m/m^2 and lift it. The resulting polynomial algebra surjects onto gr_m O and is an isomorphism in degree one. Its homogeneous kernel therefore has zero degree-one part."
+      },
+      {
+        "id": "def-multiplicity-hypersurface-point",
+        "kind": "definition",
+        "title": "Hypersurface multiplicity at a rational point",
+        "statement": "For a nonzero polynomial f vanishing at a rational point a, the multiplicity of its hypersurface equation is the least total degree of a nonzero term of f(a+t). Equivalently it is the m-adic order of f in the ambient regular local ring. Multiplying the local equation by a unit does not change this number.",
+        "deps": [
+          "lem-tangent-cone-initial-ideal-presentation"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74b, Definition 4.9 and following multiplicity paragraph",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-hypersurface-smooth-iff-multiplicity-one",
+        "kind": "lemma",
+        "title": "Multiplicity one is the smooth hypersurface test",
+        "statement": "For a nonzero nonconstant hypersurface equation f over k and rational point a, Spec(k[t_1,...,t_n]/(f)) is smooth over k at a if and only if the multiplicity of f at a is one.",
+        "deps": [
+          "def-multiplicity-hypersurface-point",
+          "thm-zariski-tangent-space-jacobian-kernel",
+          "thm-ag-standard-smooth-geometric-regularity"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74a\u2013b; AG10 10.61\u201310.64",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "A nonzero linear term is a nonzero partial derivative and gives a standard smooth presentation. Conversely geometric regularity implies regularity and the hypersurface local dimension is n-1, so the Jacobian row cannot vanish."
+      },
+      {
+        "id": "lem-smoothness-stable-under-product-classical",
+        "kind": "lemma",
+        "title": "Products preserve smoothness",
+        "statement": "Products of smooth classical varieties over algebraically closed k are smooth; on nonempty components their dimensions add. More generally finite-type smooth k-schemes have smooth products over k.",
+        "deps": [
+          "lem-tangent-space-product",
+          "thm-dimension-product-varieties",
+          "thm-regular-equals-smooth-over-perfect-field",
+          "thm-ag-standard-smooth-base-change-composition"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a72.8; Milne Exercise 4-4",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            }
+          ]
+        },
+        "strategy": "For the classical case add tangent dimensions and geometric dimensions. For general fields use the supplier\u2019s standard smooth presentations and field-change compatibility, not a claim that the product of arbitrary regular k-schemes is regular."
+      },
+      {
+        "id": "def-smooth-morphism-classical",
+        "kind": "definition",
+        "title": "Smooth morphisms via local standard smooth presentations",
+        "statement": "A morphism of finite-type k-schemes is smooth if locally on source and target it has a standard smooth algebra presentation. Use the prerequisite pair\u2019s definition and equivalence with finite presentation, flatness and geometrically regular fibres. At smooth rational points this agrees with surjectivity of the differential, by the following lemma.",
+        "deps": [
+          "def-ag-standard-smooth-algebra",
+          "thm-ag-standard-smooth-geometric-regularity"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a71.2, \u00a71.9, \u00a72.12; exact presentation dictionary is a supplier obligation",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-smooth-map-tangent-surjectivity-criterion",
+        "kind": "lemma",
+        "title": "The submersion criterion between smooth varieties",
+        "statement": "For f:X->Y between smooth classical varieties, f is smooth at x if and only if d_xf is surjective. At such a point the scheme-theoretic fibre is regular of dimension dim_x X-dim_{f(x)}Y and has tangent space ker d_xf.",
+        "deps": [
+          "def-smooth-morphism-classical",
+          "lem-tangent-space-functoriality-classical",
+          "thm-ag-submersion-criterion-standard-smooth",
+          "lem-regular-local-quotient-by-parameter-is-regular",
+          "lem-regular-local-residue-field-koszul-resolution",
+          "def-koszul-complex-of-a-sequence-with-coefficients",
+          "thm-regular-sequences-give-acyclic-koszul-complexes",
+          "def-tor-by-resolving-the-right-module"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a72.1\u20132.2",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            },
+            {
+              "title": "Stacks Project Lemma 10.128.2: parameters mapping to a regular sequence imply flatness",
+              "url": "https://stacks.math.columbia.edu/tag/07DY"
+            }
+          ]
+        },
+        "strategy": "Lift a cotangent basis at y; surjectivity means its images are independent in m_x/m_x^2. Extend them to a regular parameter system and apply repeated parameter quotient. The supplier proves the local presentation and flatness implications, which cannot be replaced by the reduced-fibre calculation. The required local flatness theorem must cover modules finite over the target local algebra S, without requiring them finite over the base local ring R. The published closed-fibre criterion imposes R-finiteness and cannot supply that step for general positive-dimensional fibres. For the regular-parameter flatness application, resolve the base residue field by its parameter Koszul complex. After tensoring with the source local ring, identify the complex directly from its differential with the Koszul complex of the pulled-back parameters. Their regularity gives vanishing of positive homology and hence Tor_1. Apply the proposed finite-S-module criterion to M=S. Do not invoke flat base change to establish this complex identity: flatness is the conclusion still being proved."
+      },
+      {
+        "id": "lem-smooth-hyperplane-slice-at-transverse-point",
+        "kind": "lemma",
+        "title": "A transverse hyperplane slice is smooth at the chosen point",
+        "statement": "Let X be smooth classical of dimension d>=1 near x and H an affine hyperplane through x. If the linear part of its equation is nonzero on T_xX, the scheme-theoretic intersection is smooth of local dimension d-1 at x, with tangent space T_xX intersect ker(dh).",
+        "deps": [
+          "lem-smooth-map-tangent-surjectivity-criterion"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Exercise 4-2, pp.98\u201399",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Apply the submersion criterion to h:X->A^1 and the fibre over zero."
+      },
+      {
+        "id": "lem-smooth-curve-realizing-a-tangent-direction",
+        "kind": "lemma",
+        "title": "A tangent direction is realized by a local smooth curve",
+        "statement": "At a smooth point x of a positive-dimensional classical variety X, every vector v in T_xX belongs to the image of T_xC for some smooth locally closed curve C through x. If v is nonzero one can take T_xC=kv; if v=0 any resulting tangent line contains it. The dimension-zero case admits no such curve.",
+        "deps": [
+          "lem-smooth-hyperplane-slice-at-transverse-point"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Exercise 4-3, p.98",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Choose d-1 independent ambient linear forms whose restricted cotangent forms annihilate the chosen line kv (choose any line if v=0). Apply the preceding slice lemma successively, and restrict to an affine smooth one-dimensional neighborhood of x."
+      },
+      {
+        "id": "lem-dominant-map-generic-differential-surjectivity-char-zero",
+        "kind": "lemma",
+        "title": "A dominant map has a surjective differential on a dense source open",
+        "statement": "For a dominant morphism f:X->Y of irreducible classical varieties over an algebraically closed field of characteristic zero, there are nonempty regular opens U in X and V in Y with f(U) contained in V on which d_xf is surjective.",
+        "deps": [
+          "lem-tangent-space-functoriality-classical",
+          "thm-nonempty-regular-locus-reduced-variety-perfect-field",
+          "thm-ag-field-differentials-separable-rank"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a73.1, generic smoothness in the source, with explicit algebraic rank supplier",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            }
+          ]
+        },
+        "strategy": "Over k(Y) choose a separating transcendence basis of k(X); field derivations of k(Y)/k extend through the separable extension. The corresponding generic matrix has full target rank. Clear finitely many denominators and keep a nonzero minor on regular affine charts."
+      },
+      {
+        "id": "cor-generic-smoothness-on-source-characteristic-zero",
+        "kind": "corollary",
+        "title": "Generic smoothness on the source",
+        "statement": "A dominant morphism of irreducible classical varieties in characteristic zero is smooth on a nonempty open subset of its source. Neither the whole source nor the target is assumed smooth.",
+        "deps": [
+          "lem-dominant-map-generic-differential-surjectivity-char-zero",
+          "lem-smooth-map-tangent-surjectivity-criterion"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a73.1",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            }
+          ]
+        },
+        "strategy": "Apply the submersion criterion on the regular opens constructed in the preceding lemma."
+      },
+      {
+        "id": "lem-critical-locus-image-dimension-bound",
+        "kind": "lemma",
+        "title": "Critical loci have small images in characteristic zero",
+        "statement": "For f:X->Y between smooth classical varieties over algebraically closed k of characteristic zero, C_r={x:rank d_xf<=r} is closed and dim closure(f(C_r))<=r for r>=0.",
+        "deps": [
+          "lem-dominant-map-generic-differential-surjectivity-char-zero",
+          "thm-chevalley-constructible-image-varieties",
+          "thm-dimension-equals-transcendence-degree",
+          "lem-classical-variety-noetherian-components"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a73.4, used with smooth ambient source and target",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            }
+          ]
+        },
+        "strategy": "Write the differential using local tangent frames from a nonvanishing Jacobian minor; rank drop is determinantal. For each irreducible component Z of C_r take W=closure f(Z). On regular dense opens of Z and W the dominant differential has rank dim W; its composite into ambient tangent spaces has rank <=r. Take the finite maximum. The restriction to smooth X,Y avoids claiming closedness for ranks between arbitrary singular tangent spaces."
+      },
+      {
+        "id": "thm-generic-smoothness-characteristic-zero",
+        "kind": "theorem",
+        "title": "Generic smoothness over a dense target open",
+        "statement": "Let k be algebraically closed of characteristic zero and let f:X->Y be a morphism of irreducible classical varieties with X smooth. There is a dense open U in Y such that f^{-1}(U)->U is smooth. If f is not dominant this inverse image may be empty. For dominant f the fibres over a further dense open are nonempty and smooth of pure dimension dim X-dim Y.",
+        "deps": [
+          "lem-critical-locus-image-dimension-bound",
+          "lem-smooth-map-tangent-surjectivity-criterion",
+          "thm-nonempty-regular-locus-reduced-variety-perfect-field",
+          "cor-dominant-morphism-image-contains-open"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a73.3\u20133.4; Arapura Theorem 5.4.2",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            }
+          ]
+        },
+        "strategy": "If nondominant remove the image closure. Otherwise first restrict the target to its regular locus. For n=dim Y>0 remove the closure of the image of C_{n-1}, which has dimension <=n-1. Apply the submersion criterion at every remaining point. For n=0 the target is a point and X is smooth by hypothesis."
+      },
+      {
+        "id": "def-linear-system-base-locus",
+        "kind": "definition",
+        "title": "Linear systems, base loci, and general members",
+        "statement": "A linear system on X is a nonzero finite-dimensional subspace W of sections of an invertible O_X-module L (locally free of rank one). Its parameter space P(W) consists of one-dimensional subspaces of W. The base locus is the common zero set of its sections. On local trivializations, a section cuts out its principal-ideal closed subscheme; transition units make these agree. General means all parameters in some nonempty Zariski open. For hyperplanes use restrictions of degree-one homogeneous forms, and for degree-e hypersurfaces restrictions of degree-e forms.",
+        "deps": [
+          "def-module-on-ringed-space",
+          "thm-quasi-coherent-ideal-closed-subscheme-correspondence",
+          "def-projective-space-points"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a73.9; Arapura \u00a75.4",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-linear-system-incidence-is-smooth",
+        "kind": "lemma",
+        "title": "The universal member away from the base locus",
+        "statement": "For smooth classical X and W of dimension r+1, the incidence I={(x,[s]):s(x)=0} over X minus the base locus is locally a product with P^{r-1} for r>=1, hence smooth. For r=0 it is empty. Its fibre over [s] is the zero subscheme of s away from the base locus.",
+        "deps": [
+          "def-linear-system-base-locus",
+          "lem-smoothness-stable-under-product-classical",
+          "def-incidence-correspondence-varieties"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Proof of Theorem 5.4.5; extended to a finite-dimensional linear system as in Vakil \u00a73.9",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "strategy": "On a trivialization where one basis section is invertible, solve the single linear equation for its coefficient. This gives the product with P^{r-1}; chart transitions are regular. Retain the ideal of the equation, not just its radical."
+      },
+      {
+        "id": "thm-bertini-smooth-hyperplane-section",
+        "kind": "theorem",
+        "title": "Bertini smoothness away from the base locus",
+        "statement": "Over algebraically closed k of characteristic zero, let X be smooth quasi-projective and let W be a nonzero finite-dimensional linear system. A general member is smooth on X minus its base locus (possibly empty). In particular general hyperplane sections for a fixed projective embedding are smooth. No irreducibility or connectedness conclusion is asserted.",
+        "deps": [
+          "lem-linear-system-incidence-is-smooth",
+          "thm-generic-smoothness-characteristic-zero"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a73.9\u20133.11; Arapura Theorem 5.4.5",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            }
+          ]
+        },
+        "strategy": "Apply target generic smoothness to the smooth incidence projection to P(W), componentwise if necessary. If its image is not dense remove its closure. This proves the entire base-locus-free part of each general member smooth, not merely a dense part of each member."
+      },
+      {
+        "id": "cor-smooth-projective-complete-intersections-general",
+        "kind": "corollary",
+        "title": "General hypersurfaces give smooth complete intersections",
+        "statement": "Let X be a nonempty smooth projective variety of dimension d over algebraically closed characteristic-zero k. For 0<=r<=d and positive degrees e_1,...,e_r, a nonempty open subset of the product of hypersurface parameter spaces gives smooth nonempty scheme-theoretic intersections in X of pure dimension d-r. For r>d, general intersections are empty. Include r=0 with the empty tuple.",
+        "deps": [
+          "thm-bertini-smooth-hyperplane-section",
+          "lem-smooth-map-tangent-surjectivity-criterion",
+          "thm-dimension-theorem-intersection-projective",
+          "cor-homogeneous-polynomial-becomes-hyperplane-section",
+          "thm-classical-projective-projection-closed"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theorem 5.4.5; general hypersurfaces via the earlier Veronese interface",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "strategy": "Inductively apply Bertini to the restricted degree-e system, avoiding the finitely many linear subspaces of sections vanishing on a component. Principal intersections drop dimension one and projectivity gives nonemptiness while dimension is positive. To obtain an OPEN in the full product, form the universal intersection and project its closed rank-defect locus from projective X; closed projection makes its complement open. The induction supplies one good tuple. After dimension zero a general extra hypersurface avoids the finite intersection."
+      },
+      {
+        "id": "rem-jacobian-presentation-independence",
+        "kind": "remark",
+        "title": "Conventions and hypotheses that must survive authoring",
+        "statement": "Use equation rows for J, rational points for the elementary dual-number comparison, all ideal generators for tangent spaces, and all initial forms for cones. Regularity is absolute; smoothness is relative. Over imperfect fields these differ. Target generic smoothness needs a smooth source. Frobenius defeats arbitrary basepoint-free systems in positive characteristic, not embedded hyperplane Bertini itself. A reduced cone may span less than the tangent space. The current scaffold is blocked on the missing prerequisite pair and the dependency and fetch findings in the batch notes.",
+        "deps": [
+          "thm-zariski-tangent-space-jacobian-kernel",
+          "lem-tangent-cone-linear-span-tangent-space",
+          "thm-regular-not-smooth-imperfect-field",
+          "thm-generic-smoothness-characteristic-zero"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74d\u2013i; Arapura \u00a75.4; AG10 \u00a7f",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 366.06,
+    "id": "zariski-tangent-spaces-regular-points-smoothness-and-bertini-examples",
+    "kind": "B",
+    "category": "algebraic-geometry",
+    "title": "Zariski Tangent Spaces Regular Points Smoothness and Bertini \u2014 Examples",
+    "companion": "zariski-tangent-spaces-regular-points-smoothness-and-bertini",
+    "requires": [
+      "zariski-tangent-spaces-regular-points-smoothness-and-bertini"
+    ],
+    "items": [
+      {
+        "id": "ex-tangent-space-parabola",
+        "kind": "example",
+        "title": "The parabola at a general point",
+        "statement": "For y=x^2 at (a,a^2), T consists of (u,2au). The local parameter x-a generates m and identifies m/m^2 with k.",
+        "deps": [
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74a; Arapura 5.1.1\u20135.1.2",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Compute the one-row matrix (-2a,1) and compare the local parameter quotient; this works also in characteristic two."
+      },
+      {
+        "id": "ex-node-two-tangent-directions",
+        "kind": "example",
+        "title": "A node has two distinct tangent directions",
+        "statement": "For char k not 2, the curve y^2=x^2+x^3 has at the origin tangent space k^2, multiplicity two, and tangent cone Spec(k[x,y]/(y^2-x^2)), the two distinct lines y=+x and y=-x.",
+        "deps": [
+          "thm-zariski-tangent-space-jacobian-kernel",
+          "lem-tangent-cone-initial-ideal-presentation",
+          "def-multiplicity-hypersurface-point"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "4.4, 4.10",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Read the lowest term and factor it; compute the vanishing Jacobian at the origin."
+      },
+      {
+        "id": "ex-cusp-double-tangent",
+        "kind": "example",
+        "title": "The cusp retains a doubled tangent line",
+        "statement": "For char k not 2 or 3, y^2=x^3 has tangent space k^2, multiplicity two, and tangent cone Spec(k[x,y]/(y^2)) at the origin. The reduced cone is the line y=0 and does not span k^2.",
+        "deps": [
+          "thm-zariski-tangent-space-jacobian-kernel",
+          "lem-tangent-cone-initial-ideal-presentation",
+          "def-multiplicity-hypersurface-point"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "4.3, 4.12; AG10 10.68",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "The gradient vanishes and the lowest term is y^2. Its degree-one relation space is zero, while its radical contains y."
+      },
+      {
+        "id": "ex-smooth-quadric-hypersurface",
+        "kind": "example",
+        "title": "A nondegenerate projective quadric",
+        "statement": "For algebraically closed k of characteristic not 2 and n>=2, the quadric sum_{i=0}^n X_i^2=0 in P^n is smooth of dimension n-1.",
+        "deps": [
+          "cor-hypersurface-singular-locus-gradient",
+          "thm-regular-equals-smooth-over-perfect-field"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a74a gradient method; Arapura \u00a75.2",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "On each affine chart the vanishing of all projective partials would force every homogeneous coordinate to vanish; use the chart equation to justify the missing chart partial."
+      },
+      {
+        "id": "cex-nonreduced-hypersurface-jacobian",
+        "kind": "counterexample",
+        "title": "The equation must define the intended scheme",
+        "statement": "In characteristic p>0 the ideal (x^p) in k[x] has zero Jacobian, whereas its reduced zero set is the smooth point with ideal (x). The thickened scheme itself is correctly detected as nonregular: dimension zero, embedding dimension one.",
+        "deps": [
+          "thm-zariski-tangent-space-jacobian-kernel",
+          "def-regular-local-ring-geometric-point"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "4.2 and Exercise 4-9",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Compare the two quotient rings explicitly. This refutes applying the thickened equation to the reduced set, not the scheme Jacobian formula."
+      },
+      {
+        "id": "cex-regular-not-smooth-purely-inseparable-point",
+        "kind": "counterexample",
+        "title": "A regular inseparable point becomes nonregular",
+        "statement": "For k=F_p(s), Spec(k[t]/(t^p-s)) is regular and not smooth over k. After adjoining alpha with alpha^p=s its ring is K[u]/(u^p).",
+        "deps": [
+          "thm-regular-not-smooth-imperfect-field"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "33.12.7, first example",
+              "url": "https://stacks.math.columbia.edu/tag/038S"
+            }
+          ]
+        },
+        "strategy": "Use the s-adic exponent of a rational pth power to show s is not a pth power; exhibit u=t-alpha and compute m/m^2."
+      },
+      {
+        "id": "cex-bertini-characteristic-p-failure",
+        "kind": "counterexample",
+        "title": "Frobenius linear systems have nonreduced general members",
+        "statement": "Over algebraically closed characteristic-p k, the basepoint-free system span(X^p,Y^p) on P^1 has every member equal as a scheme to a point of multiplicity p. It is not smooth. This refutes the arbitrary-linear-system characteristic-p extension; ordinary embedded hyperplane Bertini is not refuted.",
+        "deps": [
+          "def-linear-system-base-locus",
+          "thm-zariski-tangent-space-jacobian-kernel",
+          "def-regular-local-ring-geometric-point"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a73.11 final warning; Arapura 5.4.3",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            }
+          ]
+        },
+        "strategy": "Write aX^p+bY^p=(alpha X+beta Y)^p. Basepoint freeness follows since X and Y cannot vanish together. On a chart meeting its zero, the local ring is k[u]/(u^p)."
+      },
+      {
+        "id": "ex-tangent-space-product-origin",
+        "kind": "example",
+        "title": "The product of two parabolas",
+        "statement": "For X defined in A^4 by y=x^2 and v=u^2, T_0X is {(a,0,b,0)} of dimension two, in agreement with the direct-sum formula.",
+        "deps": [
+          "lem-tangent-space-product",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Exercise 4-4",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Compute the two independent Jacobian rows and compare the two factors."
+      },
+      {
+        "id": "ex-projective-cone-singular-vertex",
+        "kind": "example",
+        "title": "A projective cone with a smooth conic base",
+        "statement": "In characteristic not 2, the projective quadric cone X_0^2+X_1^2-X_2^2=0 in P^3 has smooth conic base X_3=0 and a singular vertex [0:0:0:1]. The vertex has tangent dimension three and local dimension two.",
+        "deps": [
+          "cor-hypersurface-singular-locus-gradient",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Exercise 4-8, singularity part",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Use the X_3 chart at the vertex and the projective gradient on the base."
+      },
+      {
+        "id": "cex-generic-target-smoothness-needs-smooth-source",
+        "kind": "counterexample",
+        "title": "A cusp family defeats the missing source hypothesis",
+        "statement": "In characteristic zero let C be y^2=x^3. The projection C times A^1 -> A^1 is dominant and every fibre is the singular cusp. There is no nonempty target open over which it is smooth.",
+        "deps": [
+          "lem-tangent-space-product",
+          "thm-zariski-tangent-space-jacobian-kernel",
+          "def-smooth-morphism-classical",
+          "thm-ag-standard-smooth-geometric-regularity"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "\u00a73.1 contrasted with \u00a73.3; explicit product witness using Milne 4.12",
+              "url": "https://virtualmath1.stanford.edu/~vakil/0506-216/216class5152.pdf"
+            }
+          ]
+        },
+        "strategy": "At each cusp-origin point of a fibre compute local dimension one and tangent dimension two. Smoothness would imply geometric regularity of the scheme-theoretic fibre."
+      },
+      {
+        "id": "ex-determinantal-quadric-singularity",
+        "kind": "example",
+        "title": "The rank-one 2 by 2 determinantal cone",
+        "statement": "For xt-yz=0 in A^4, the origin has tangent dimension four; every other point has tangent dimension three. Thus the origin is its unique singular point.",
+        "deps": [
+          "cor-hypersurface-singular-locus-gradient",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Example 5.1.3",
+              "url": "https://www.math.purdue.edu/~arapura/preprints/algeom.pdf"
+            }
+          ]
+        },
+        "strategy": "The Jacobian is (t,-z,-y,x). The hypersurface is irreducible by treating it as a primitive degree-one polynomial in t, so it is reduced."
+      },
+      {
+        "id": "ex-tangent-spaces-general-and-special-linear-groups",
+        "kind": "example",
+        "title": "Dual numbers compute tangent spaces of matrix groups",
+        "statement": "At the identity, T GL_n=M_n(k) and T SL_n={B:trace B=0}.",
+        "deps": [
+          "lem-tangent-vectors-as-dual-number-points",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Examples 4.46\u20134.47; Arapura Exercise 5.1.4",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Use (I+epsilon B)^{-1}=I-epsilon B and the determinant expansion 1+epsilon trace B. State these groups as their determinant presentations; do not infer a Lie bracket."
+      },
+      {
+        "id": "ex-tangent-dimension-distinguishes-three-line-configurations",
+        "kind": "example",
+        "title": "Three axes are not three coplanar lines",
+        "statement": "The union of coordinate axes in A^3 is not isomorphic to the union of three distinct lines through the origin in A^2: their unique singular points have tangent dimensions three and two.",
+        "deps": [
+          "lem-tangent-space-functoriality-classical",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Example 4.43",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Use ideals (xy,xz,yz) and (xy(x-y)); every nonorigin point has an open neighborhood in one line. An isomorphism must preserve the singular point and tangent dimension."
+      },
+      {
+        "id": "ex-higher-plane-curve-tangent-cones",
+        "kind": "example",
+        "title": "Different singularities can share a tangent cone",
+        "statement": "Over algebraically closed characteristic-zero k, at the origin the equations 2x^4-3x^2y+y^2-2y^3+y^4 and x^4+x^2y^2-2x^2y-xy^2-y^2 have double-line cone (y^2). The equations (x^2+y^2)^2+3x^2y-y^3, (x^2+y^2)^3-4x^2y^2, and x^6-x^2y^3-y^5 have respective cone equations y(3x^2-y^2), x^2y^2, and y^3(x^2+y^2), and multiplicities 3,4,5. Each tangent space has dimension two.",
+        "deps": [
+          "lem-tangent-cone-initial-ideal-presentation",
+          "def-multiplicity-hypersurface-point",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Examples 4.13\u20134.17, pp.84\u201385",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Read lowest homogeneous parts, discard nonzero scalar units, and factor. The computation does not classify analytic branches as tacnodes or ramphoid cusps."
+      },
+      {
+        "id": "ex-orthogonal-and-symplectic-tangent-matrices",
+        "kind": "example",
+        "title": "Classical bilinear-form equations linearize to matrix spaces",
+        "statement": "For characteristic not two, the tangent spaces of O_n and SO_n at the identity consist of skew-symmetric n by n matrices. For the affine scheme defined by A^t J A=J and det A=1, J=[[0,I],[-I,0]], the tangent space consists of B=[[P,Q],[R,-P^t]] with Q,R symmetric; its vector-space dimension is n(2n+1).",
+        "deps": [
+          "lem-tangent-vectors-as-dual-number-points"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Example 4.48 and Exercise 4-6, pp.97\u201399",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Expand (I+epsilon B)^t J(I+epsilon B) and the determinant. For J=I obtain B^t+B=0. For the alternating block J solve B^t J+JB=0; the trace equation is automatic. Count matrix entries. No unproved global group-dimension conclusion follows from the tangent count."
+      },
+      {
+        "id": "ex-irreducible-curve-with-arbitrary-embedding-dimension",
+        "kind": "example",
+        "title": "An irreducible curve can have arbitrarily large tangent dimension",
+        "statement": "For every n>=1, the monomial curve Spec k[t^n,t^{n+1},...,t^{2n-1}] has dimension one and tangent dimension n at the point t=0. Thus it has no closed embedding in A^{n-1}.",
+        "deps": [
+          "def-zariski-tangent-space-point",
+          "thm-dimension-equals-transcendence-degree",
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Exercise 4-5, p.99",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "The subalgebra is an integral finite-type domain with transcendence degree one. Its maximal ideal at the origin is generated by the displayed n monomials; their distinct degrees lie below the least possible degree 2n of a nonzero product in m^2. They therefore give a basis of m/m^2. Tangent functoriality of a closed embedding or the Jacobian kernel bound gives the obstruction."
+      },
+      {
+        "id": "cex-nonradical-ideal-can-have-the-same-tangent-space",
+        "kind": "counterexample",
+        "title": "A nonradical ideal need not enlarge every tangent space",
+        "statement": "In k[x,y], I=(x^2,xy) is strictly smaller than its radical (x). At (0,1) the scheme defined by I and its reduced line have the same one-dimensional tangent space, because y is a unit locally. At the origin the first tangent space has dimension two and the reduced line has dimension one.",
+        "deps": [
+          "thm-zariski-tangent-space-jacobian-kernel"
+        ],
+        "status": "draft",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Exercise 4-9, p.99",
+              "url": "https://www.jmilne.org/math/CourseNotes/AG.pdf"
+            }
+          ]
+        },
+        "strategy": "Compute the rows (2x,0) and (y,x) at both points; compare with the row (1,0) for (x). This directly answers the exercise in every characteristic."
+      }
+    ]
+  }
+]

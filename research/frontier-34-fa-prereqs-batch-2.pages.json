@@ -1,0 +1,755 @@
+[
+  {
+    "order": 288.065,
+    "id": "reflexivity-and-eberlein-smulian",
+    "kind": "A",
+    "category": "functional-analysis",
+    "title": "Reflexivity and Eberlein Smulian",
+    "companion": "reflexivity-and-eberlein-smulian-examples",
+    "requires": [
+      "banach-alaoglu-goldstine-and-krein-milman-examples"
+    ],
+    "items": [
+      {
+        "id": "thm-reflexive-iff-unit-ball-weakly-compact",
+        "kind": "theorem",
+        "title": "Reflexive iff unit ball weakly compact",
+        "deps": [
+          "def-reflexive-banach-space",
+          "thm-canonical-bidual-map-is-an-isometry",
+          "thm-banach-alaoglu",
+          "thm-goldstine",
+          "def-weak-topology-on-a-normed-space",
+          "def-weak-star-topology"
+        ],
+        "strategy": "J_X identifies the weak topology with the relative weak-star topology on J_X(X). Surjectivity transfers Alaoglu compactness. Conversely the compact image of B_X is weak-star closed and Goldstine dense in B_X**; hence equal. Intended relative costs are BPI forward and HB through Goldstine in the converse. Batch 1 now supplies matching interfaces but flags inherited stronger AC and incomplete closure; those intended costs are not verified implemented costs.",
+        "statement": "For a real or complex Banach space X, J_X is onto if and only if its closed unit ball is compact in sigma(X,X*)."
+      },
+      {
+        "id": "thm-a-banach-space-is-reflexive-iff-its-dual-is-reflexive",
+        "kind": "theorem",
+        "title": "A banach space is reflexive iff its dual is reflexive",
+        "deps": [
+          "def-reflexive-banach-space",
+          "thm-canonical-bidual-map-is-an-isometry",
+          "cor-density-characterised-by-annihilator-zero",
+          "lem-complete-subspace-is-closed"
+        ],
+        "strategy": "If J_X is onto, represent F in X*** by F composed with J_X. Conversely J_X(X) is closed by completeness, and any annihilator F is evaluation by f in X*; vanishing on all J_Xx forces f=0, hence F=0. Annihilator separation proves density. HB plus inherited countable-choice closedness; no Alaoglu is needed.",
+        "statement": "For a real or complex Banach X, X is reflexive iff X* is reflexive."
+      },
+      {
+        "id": "thm-closed-subspaces-of-reflexive-spaces-are-reflexive",
+        "kind": "theorem",
+        "title": "Closed subspaces of reflexive spaces are reflexive",
+        "deps": [
+          "def-reflexive-banach-space",
+          "thm-dual-of-a-closed-subspace-is-a-dual-quotient",
+          "thm-geometric-hahn-banach-for-subspaces",
+          "lem-closed-subspace-of-a-banach-space-is-banach"
+        ],
+        "strategy": "For y** compose with restriction X*->Y*. Reflexivity represents the composite by x. Annihilating Y-perp forces x in Y; surjectivity of restriction then proves y**=J_Yx. HB supplies extension/separation; no compactness shortcut is required.",
+        "statement": "Every norm-closed linear subspace Y of a real or complex reflexive Banach space X is reflexive."
+      },
+      {
+        "id": "thm-quotients-of-reflexive-spaces-are-reflexive",
+        "kind": "theorem",
+        "title": "Quotients of reflexive spaces are reflexive",
+        "deps": [
+          "def-reflexive-banach-space",
+          "thm-dual-of-a-quotient-is-the-annihilator",
+          "thm-norm-preserving-extension-from-any-subspace",
+          "thm-quotient-of-banach-by-closed-subspace-is-banach"
+        ],
+        "strategy": "Identify (X/Y)* with Y-perp, extend a functional on Y-perp to X* using HB, represent it by x, and verify its quotient representative is x+Y. Do not assert that the quotient map carries the closed unit ball onto the quotient closed unit ball.",
+        "statement": "If X is a real or complex reflexive Banach space and Y is a closed linear subspace, X/Y is reflexive."
+      },
+      {
+        "id": "thm-reflexivity-of-lp-for-one-less-p-less-infinity",
+        "kind": "theorem",
+        "title": "Reflexivity of lp for one less p less infinity",
+        "deps": [
+          "def-reflexive-banach-space",
+          "thm-arbitrary-measure-duality-for-l-p-when-one-less-p-less-infinity"
+        ],
+        "strategy": "Apply the real representation theorem at p and its conjugate q and verify the composite is J_Lp, using the bilinear integral pairing. Preserve the complex-scalar scope obligation in the notes rather than silently treating the real supplier as complex.",
+        "statement": "Under the countable-choice hypothesis of the published scalar duality theorem, real Lp(mu) is reflexive on any measure space for 1<p<infinity. The complex extension remains a separate open obligation, not supplied by the real theorem."
+      },
+      {
+        "id": "def-relative-weak-compactness-and-three-sequential-notions",
+        "kind": "definition",
+        "title": "Relative weak compactness and three sequential notions",
+        "deps": [
+          "def-weak-topology-on-a-normed-space"
+        ],
+        "strategy": "Define all notions before their equivalence. A cluster point is an indexed-sequence cluster point, not an unspecified accumulation point of a finite range.",
+        "statement": "For A in Banach X, relative weak compactness means weak closure in X is weakly compact; relative weak sequential compactness means every sequence in A has a weakly convergent subsequence with limit in X; relative weak countable compactness means every sequence in A has a weak cluster point in X (every neighborhood contains infinitely many indexed terms). Absolute versions require the limits or cluster points in A. Empty A satisfies the three relative conditions."
+      },
+      {
+        "id": "lem-eberlein-smulian-separable-reduction",
+        "kind": "lemma",
+        "title": "Eberlein smulian separable reduction",
+        "deps": [
+          "def-relative-weak-compactness-and-three-sequential-notions",
+          "thm-norm-preserving-extension-from-any-subspace",
+          "thm-mazur-weak-and-norm-closure-of-convex-sets",
+          "lem-closed-subspace-of-a-banach-space-is-banach"
+        ],
+        "strategy": "Enumerate rational (Gaussian rational in the complex case) finite linear combinations. Hahn-Banach makes restriction X*->Y* onto; thus both weak topologies have the same finite-coordinate tests. Convex norm closure equals weak closure. This reduction alone does not prove Eberlein-Smulian.",
+        "statement": "For a sequence in X, its closed scalar span Y is a separable Banach subspace. Its weak topology is the relative weak topology inherited from X, and Y is weakly closed."
+      },
+      {
+        "id": "lem-eberlein-smulian-metrization-on-the-relevant-dual-ball",
+        "kind": "lemma",
+        "title": "Eberlein smulian metrization on the relevant dual ball",
+        "deps": [
+          "lem-eberlein-smulian-separable-reduction",
+          "thm-dual-norms-every-vector"
+        ],
+        "strategy": "Choose norming functionals on a countable dense subset of the unit sphere. Their evaluations separate points; compact-to-Hausdorff identifies the topologies on K. This does not metrize all of Y or all weak compact sets in nonseparable spaces. The design title refers to a dual ball, so exact Whitley reconciliation remains open.",
+        "statement": "A weakly compact subset K of a separable normed space Y is weakly metrizable: a countable norming family in Y* gives a continuous injection of K into a countable scalar product, hence a homeomorphism onto its image."
+      },
+      {
+        "id": "thm-eberlein-smulian",
+        "kind": "theorem",
+        "title": "Eberlein smulian",
+        "deps": [
+          "def-relative-weak-compactness-and-three-sequential-notions",
+          "lem-eberlein-smulian-separable-reduction",
+          "lem-eberlein-smulian-metrization-on-the-relevant-dual-ball"
+        ],
+        "strategy": "BLOCKED: recover and read Whitley pp.116–118 in full. The two existing lemmas only close the compact-to-subsequence direction. Add the recursive bidual closure/norming construction before this theorem; the current deps are necessary but not sufficient and must not be certified.",
+        "statement": "For a subset A of a real or complex Banach space, relative weak compactness, relative weak sequential compactness, and relative weak countable compactness are equivalent."
+      },
+      {
+        "id": "cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence",
+        "kind": "corollary",
+        "title": "Reflexive iff every bounded sequence has a weakly convergent subsequence",
+        "deps": [
+          "thm-reflexive-iff-unit-ball-weakly-compact",
+          "thm-eberlein-smulian"
+        ],
+        "strategy": "Apply Eberlein-Smulian to the closed unit ball; use weak closedness of that ball and rescale bounded sequences. Blocked with Eberlein-Smulian.",
+        "statement": "A Banach space is reflexive iff every bounded sequence has a weakly convergent subsequence in the space."
+      },
+      {
+        "id": "def-schur-property",
+        "kind": "definition",
+        "title": "Schur property",
+        "deps": [
+          "def-weak-topology-on-a-normed-space"
+        ],
+        "strategy": "Definition concerns sequences only; it does not identify the weak and norm topologies.",
+        "statement": "A Banach space has the Schur property when every weakly convergent sequence converges in norm."
+      },
+      {
+        "id": "thm-ell-one-has-the-schur-property",
+        "kind": "theorem",
+        "title": "Ell one has the schur property",
+        "deps": [
+          "def-schur-property",
+          "cor-ell-p-duality-by-counting-measure",
+          "thm-complex-dual-of-ell-one-is-ell-infinity"
+        ],
+        "strategy": "BLOCKED full-text gliding-hump source verification. From weak nullity and norms bounded away from zero, choose a subsequence and successive finite blocks with head and tail errors small. One bounded scalar phase sequence norms the selected blocks and contradicts weak nullity. Do not choose a different functional for every subsequence term.",
+        "statement": "Real and complex ell-one have the Schur property."
+      },
+      {
+        "id": "cor-ell-one-is-not-reflexive",
+        "kind": "corollary",
+        "title": "Ell one is not reflexive",
+        "deps": [
+          "thm-ell-one-has-the-schur-property",
+          "cor-reflexive-iff-every-bounded-sequence-has-a-weakly-convergent-subsequence"
+        ],
+        "strategy": "Coordinate unit vectors have mutual distance 2. A weakly convergent subsequence would converge in norm by Schur, impossible.",
+        "statement": "The Banach space ell-one is not reflexive."
+      },
+      {
+        "id": "def-uniformly-convex-banach-space",
+        "kind": "definition",
+        "title": "Uniformly convex banach space",
+        "deps": [
+          "def-banach-space"
+        ],
+        "strategy": "State the unit-ball version; distinguish it from strict convexity and from invariance under equivalent renorming.",
+        "statement": "A Banach space is uniformly convex if for each epsilon in (0,2] there is delta>0 such that ||x||,||y||<=1 and ||x-y||>=epsilon imply ||(x+y)/2||<=1-delta."
+      },
+      {
+        "id": "lem-uniform-convexity-gives-unique-asymptotic-centers",
+        "kind": "lemma",
+        "title": "Uniform convexity gives unique asymptotic centers",
+        "deps": [
+          "def-uniformly-convex-banach-space"
+        ],
+        "strategy": "BLOCKED: verify a full proof of existence and uniqueness, with the radius-zero case, a bounded minimizing sequence, and the midpoint estimate. Neither Brezis Theorem 3.31 nor its norming-slice proof supplies this result. Retain the requested result; do not substitute the theorem it was meant to support.",
+        "statement": "For a bounded sequence in a uniformly convex Banach space, the asymptotic radius function r(y)=limsup_n||x_n-y|| has a unique minimizer on each nonempty closed convex subset."
+      },
+      {
+        "id": "thm-milman-pettis",
+        "kind": "theorem",
+        "title": "Milman pettis",
+        "deps": [
+          "def-uniformly-convex-banach-space",
+          "thm-goldstine",
+          "thm-canonical-bidual-map-is-an-isometry",
+          "lem-complete-subspace-is-closed",
+          "def-reflexive-banach-space"
+        ],
+        "strategy": "Brezis Theorem 3.31: for z in S_X**, choose a norm-one functional almost norming z and a small weak-star slice of B_X**. Goldstine supplies x in the slice. A hypothetical z outside Jx+epsilon B_X** allows a second Goldstine point in the slice farther than epsilon from x, contradicting uniform convexity. Thus J_X(B_X) is norm dense in B_X**, and completeness makes it closed. For complex scalars use real parts. This proof does not dispose of the separately required asymptotic-center lemma.",
+        "statement": "Every real or complex uniformly convex Banach space is reflexive."
+      },
+      {
+        "id": "lem-james-noncompactness-sequence",
+        "kind": "lemma",
+        "title": "James noncompactness sequence",
+        "deps": [
+          "def-relative-weak-compactness-and-three-sequential-notions",
+          "thm-norm-preserving-extension-from-any-subspace"
+        ],
+        "strategy": "BLOCKED: the design names a separated convex-tail construction but does not state its quantified interface. Recover Megginson sections 1.13 and 2.9 and state every bound, index inequality, and separation constant before approval. No theorem-shaped paraphrase is accepted as a proof."
+      },
+      {
+        "id": "lem-james-norm-attainment-compactness-criterion",
+        "kind": "lemma",
+        "title": "James norm attainment compactness criterion",
+        "deps": [
+          "lem-james-noncompactness-sequence"
+        ],
+        "strategy": "BLOCKED: missing full Megginson sections 1.13 and 2.9. Specify and prove the combinatorial criterion including all completeness and nested-choice hypotheses; the design title alone cannot serve as a dependency."
+      },
+      {
+        "id": "thm-james-reflexivity-theorem",
+        "kind": "theorem",
+        "title": "James reflexivity theorem",
+        "deps": [
+          "def-reflexive-banach-space",
+          "thm-reflexive-iff-unit-ball-weakly-compact",
+          "lem-james-norm-attainment-compactness-criterion"
+        ],
+        "strategy": "BLOCKED hard direction pending the exact two James lemmas. Easy direction is compactness and continuity. The closed-ball statement handles X={0}; do not copy a unit-sphere formulation without an X!=0 hypothesis. Moors New2 Theorem 9 is separable-only and cannot replace the missing general theorem.",
+        "statement": "A real or complex Banach space is reflexive iff every bounded scalar-linear functional attains its norm on the closed unit ball, including the zero space."
+      },
+      {
+        "id": "lem-bishop-phelps-support-cone-construction",
+        "kind": "lemma",
+        "title": "Bishop phelps support cone construction",
+        "deps": [
+          "def-banach-space",
+          "thm-separation-of-disjoint-convex-sets-one-open"
+        ],
+        "strategy": "BLOCKED: obtain the full real support-cone proof and state its quantitative interface. The design locator Megginson sections 2.8–2.9 does not identify the book support-points section 2.11. Do not substitute a dual convex-body theorem without proving the dictionary."
+      },
+      {
+        "id": "thm-bishop-phelps",
+        "kind": "theorem",
+        "title": "Bishop phelps",
+        "deps": [
+          "lem-bishop-phelps-support-cone-construction",
+          "def-dual-space-of-a-normed-space"
+        ],
+        "strategy": "BLOCKED support-cone proof. The complex general-convex statement is not asserted. Any complex unit-ball specialization must be justified using the real-part correspondence.",
+        "statement": "For every nonempty closed bounded convex subset C of a real Banach X, the continuous linear functionals attaining their supremum on C are norm dense in X*. In particular norm-attaining functionals are dense for the unit ball."
+      },
+      {
+        "id": "thm-separable-dual-implies-separable-primal",
+        "kind": "theorem",
+        "title": "Separable dual implies separable primal",
+        "deps": [
+          "def-dual-space-of-a-normed-space",
+          "cor-density-characterised-by-annihilator-zero"
+        ],
+        "strategy": "Handle X={0}. For a dense sequence f_n choose x_n in the unit ball with |f_n(x_n)|>=||f_n||/2 (take x_n=0 when f_n=0). Any functional annihilating their span has arbitrarily small norm by approximation with f_n. HB annihilator separation gives density; rational or Gaussian rational span gives countability.",
+        "statement": "Under countable choice, if the continuous dual of a real or complex normed space X is norm separable, then X is norm separable."
+      },
+      {
+        "id": "cor-separable-reflexive-space-has-separable-dual",
+        "kind": "corollary",
+        "title": "Separable reflexive space has separable dual",
+        "deps": [
+          "thm-separable-dual-implies-separable-primal",
+          "def-reflexive-banach-space"
+        ],
+        "strategy": "J_X identifies X** with X, making X** separable; apply the preceding theorem to X*. Separability of X alone does not suffice.",
+        "statement": "Under countable choice, a separable reflexive Banach space has separable dual."
+      },
+      {
+        "id": "lem-clarkson-inequalities-for-real-and-complex-lp",
+        "kind": "lemma",
+        "title": "Clarkson inequalities in both exponent ranges",
+        "deps": [
+          "def-uniformly-convex-banach-space"
+        ],
+        "strategy": "BLOCKED source and scalar prerequisites. State and prove: for p>=2, ||(f+g)/2||_p^p+||(f-g)/2||_p^p <= (||f||_p^p+||g||_p^p)/2; for 1<p<=2 and q=p/(p-1), the left side with q powers is <= ((||f||_p^p+||g||_p^p)/2)^(q/p). The uniform-convexity corollary must cite this item; exact scalar inequalities, Holder/Minkowski IDs, and full-text backing remain to be audited."
+      },
+      {
+        "id": "cor-lp-is-uniformly-convex-for-one-less-p-less-infinity",
+        "kind": "corollary",
+        "title": "Lp is uniformly convex for one less p less infinity",
+        "deps": [
+          "def-uniformly-convex-banach-space",
+          "lem-clarkson-inequalities-for-real-and-complex-lp"
+        ],
+        "strategy": "BLOCKED: no Clarkson item exists in the plan. Add and prove the exact p>=2 and 1<p<=2 inequalities and their scalar hypotheses before this corollary; the current dependency array is incomplete.",
+        "statement": "For 1<p<infinity, scalar Lp spaces with their usual norms are uniformly convex."
+      }
+    ],
+    "summary": "BLOCKED: full design inventory retained. See frontier-34-fa-prereqs-batch-2.notes.md for unresolved source and dependency obligations. No authoring/splice clearance."
+  },
+  {
+    "order": 288.066,
+    "id": "reflexivity-and-eberlein-smulian-examples",
+    "kind": "B",
+    "category": "functional-analysis",
+    "title": "Reflexivity and Eberlein Smulian — Examples",
+    "companion": "reflexivity-and-eberlein-smulian",
+    "requires": [
+      "reflexivity-and-eberlein-smulian"
+    ],
+    "items": [
+      {
+        "id": "ex-hilbert-spaces-are-uniformly-convex",
+        "kind": "example",
+        "title": "Hilbert spaces are uniformly convex",
+        "deps": [
+          "def-uniformly-convex-banach-space"
+        ],
+        "strategy": "BLOCKED later Hilbert definition/parallelogram supplier. Preserve the example and register exact forward_refs only after batch 3 has supplied its IDs; cannot pretend a prerequisite is already earlier."
+      },
+      {
+        "id": "ex-reflexivity-of-ell-p-and-lp",
+        "kind": "example",
+        "title": "Reflexivity of ell p and lp",
+        "deps": [
+          "thm-reflexivity-of-lp-for-one-less-p-less-infinity",
+          "cor-ell-p-duality-by-counting-measure"
+        ],
+        "strategy": "For 1<p<infinity apply the real arbitrary-measure result, with counting measure giving ell-p. Record endpoints separately; complex Lp scope awaits its scalar bridge."
+      },
+      {
+        "id": "cex-c0-is-not-reflexive",
+        "kind": "counterexample",
+        "title": "C0 is not reflexive",
+        "deps": [
+          "def-reflexive-banach-space",
+          "thm-dual-of-c0-is-ell-one",
+          "thm-complex-dual-of-ell-one-is-ell-infinity",
+          "cor-ell-p-duality-by-counting-measure"
+        ],
+        "strategy": "Under the sourced bilinear sequence dualities the canonical map is c0 inclusion into ell-infinity; the constant-one sequence is not in its image. For the real ell-one dual use the real counting-measure corollary, not the complex-only theorem.",
+        "statement": "Real and complex c0 are not reflexive."
+      },
+      {
+        "id": "cex-weak-and-norm-topologies-differ-on-ell-one-despite-identical-convergent-sequences",
+        "kind": "counterexample",
+        "title": "Weak and norm topologies differ on ell one despite identical convergent sequences",
+        "deps": [
+          "thm-ell-one-has-the-schur-property",
+          "def-weak-topology-on-a-normed-space"
+        ],
+        "strategy": "Every basic weak neighborhood of zero contains a nonzero common-kernel vector of its finitely many functionals and all its multiples; it cannot lie in a norm ball. Schur nevertheless identifies convergent sequences. Verify finite-codimension kernel existence inline."
+      },
+      {
+        "id": "rem-complex-bishop-phelps-for-general-convex-sets",
+        "kind": "remark",
+        "title": "Complex bishop phelps for general convex sets",
+        "deps": [
+          "thm-bishop-phelps"
+        ],
+        "strategy": "BLOCKED Lomonosov primary full text. This non-load-bearing unproved boundary replaces the design cex-prefixed reservation with the correctly prefixed remark. Exact primary statement, source URL and external_dependency fields are still required before materialization; no counterexample verification is claimed.",
+        "proved_here": false
+      },
+      {
+        "id": "ex-norm-attaining-functionals-on-a-hilbert-space",
+        "kind": "example",
+        "title": "Norm attaining functionals on a hilbert space",
+        "deps": [],
+        "strategy": "BLOCKED later Hilbert Riesz theorem and definition. Retain the direct Riesz route prescribed by the design; exact later forward_refs remain missing and must be registered before approval. No provisional James dependency is asserted. Norm attainment is on the closed unit ball and includes zero functionals."
+      }
+    ],
+    "summary": "BLOCKED: full design inventory retained. See frontier-34-fa-prereqs-batch-2.notes.md for unresolved source and dependency obligations. No authoring/splice clearance."
+  },
+  {
+    "order": 288.067,
+    "id": "schauder-bases-approximation-and-banach-space-pathologies",
+    "kind": "A",
+    "category": "functional-analysis",
+    "title": "Schauder Bases Approximation and Banach Space Pathologies",
+    "companion": "schauder-bases-approximation-and-banach-space-pathologies-examples",
+    "requires": [
+      "reflexivity-and-eberlein-smulian-examples"
+    ],
+    "items": [
+      {
+        "id": "def-schauder-basis-and-coordinate-functionals",
+        "kind": "definition",
+        "title": "Schauder basis and coordinate functionals",
+        "deps": [
+          "def-banach-space",
+          "def-series-and-absolute-convergence-in-a-normed-space"
+        ],
+        "strategy": "The linearity argument is finite scalar algebra and uniqueness. Continuity awaits the coefficient-space lemma described in notes.",
+        "statement": "A Schauder basis (e_n) in a real or complex Banach X is a sequence such that every x has a unique expansion x=sum_n a_n e_n converging in norm in the fixed order. Define e_n*(x)=a_n. Coordinate linearity follows from uniqueness; boundedness is not part of the definition."
+      },
+      {
+        "id": "def-partial-sum-projections-and-basis-constant",
+        "kind": "definition",
+        "title": "Partial sum projections and basis constant",
+        "deps": [
+          "def-schauder-basis-and-coordinate-functionals",
+          "def-operator-norm"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (definition)"
+      },
+      {
+        "id": "cor-banach-space-with-a-schauder-basis-is-separable",
+        "kind": "corollary",
+        "title": "Banach space with a schauder basis is separable",
+        "deps": [
+          "def-schauder-basis-and-coordinate-functionals"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (corollary) — rational finite combinations after fixing the scalar-field countable dense subfield"
+      },
+      {
+        "id": "def-approximation-property-and-bounded-approximation-property",
+        "kind": "definition",
+        "title": "Approximation property and bounded approximation property",
+        "deps": [
+          "def-banach-space",
+          "def-bounded-linear-operator"
+        ],
+        "strategy": "Explicitly define finite-rank as finite-dimensional image and include K empty. A sequence of approximants is not required in a nonseparable space.",
+        "statement": "AP: for every norm-compact K subset X and epsilon>0 there is a bounded finite-rank operator T:X->X with sup_K||Tx-x||<epsilon. Lambda-BAP additionally requires ||T||<=lambda uniformly in K,epsilon; BAP means some finite lambda exists."
+      },
+      {
+        "id": "lem-pointwise-convergent-uniformly-bounded-operators-converge-uniformly-on-compact-sets",
+        "kind": "lemma",
+        "title": "Pointwise convergent uniformly bounded operators converge uniformly on compact sets",
+        "deps": [
+          "def-bounded-linear-operator",
+          "def-operator-norm"
+        ],
+        "strategy": "The limit is linear and ||T||<=M by taking limits. A finite delta-net of K reduces the estimate to finitely many convergence thresholds plus 2M delta. Handle M=0 separately; no choice family of arbitrary points is needed after choosing one finite net.",
+        "statement": "If T_n:X->Y are bounded linear maps, sup_n||T_n||=M<infinity, and T_nx->Tx for all x, then convergence is uniform on each norm-compact K subset X."
+      },
+      {
+        "id": "def-finitely-additive-charge-and-total-variation-on-the-power-set-of-n",
+        "kind": "definition",
+        "title": "Finitely additive charge and total variation on the power set of n",
+        "deps": [
+          "def-c-zero-and-ell-infinity"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (definition)"
+      },
+      {
+        "id": "def-finitely-additive-integral-on-ell-infinity",
+        "kind": "definition",
+        "title": "Finitely additive integral on ell infinity",
+        "deps": [
+          "def-finitely-additive-charge-and-total-variation-on-the-power-set-of-n"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (definition) — define first on finite-range sequences and extend uniformly"
+      },
+      {
+        "id": "def-james-space",
+        "kind": "definition",
+        "title": "James space",
+        "deps": [
+          "def-c-zero-and-ell-infinity"
+        ],
+        "strategy": "Freeze the cyclic endpoint term and the factor 1/2 from Bühler–Salamon Definition 2.75. The later noncanonical isometry is norm-convention-sensitive. Translate their one-based indices to zero-based indices; do not identify equivalent James norms as isometric.",
+        "statement": "Use real sequences indexed n>=0. For a finite increasing tuple p=(p_1,...,p_k), k>=2, let q_p(x)^2=(sum_{j<k}|x_{p_j}-x_{p_{j+1}}|^2+|x_{p_k}-x_{p_1}|^2)/2; set q_p=0 for k=1. Set J={x in c0:sup_p q_p(x)<infinity}, ||x||_J=sup_p q_p(x)."
+      },
+      {
+        "id": "lem-james-formula-defines-a-norm",
+        "kind": "lemma",
+        "title": "James formula defines a norm",
+        "deps": [
+          "def-james-space"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (lemma)"
+      },
+      {
+        "id": "thm-james-space-is-complete-and-separable",
+        "kind": "theorem",
+        "title": "James space is complete and separable",
+        "deps": [
+          "lem-james-formula-defines-a-norm",
+          "lem-c-zero-is-a-closed-subspace-of-ell-infinity"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (theorem)"
+      },
+      {
+        "id": "def-unconditional-convergence-of-a-banach-space-series",
+        "kind": "definition",
+        "title": "Unconditional convergence of a banach space series",
+        "deps": [
+          "def-series-and-absolute-convergence-in-a-normed-space"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (definition) — convergence under every permutation, kept distinct from absolute and conditional convergence"
+      },
+      {
+        "id": "def-unconditional-and-conditional-basis",
+        "kind": "definition",
+        "title": "Unconditional and conditional basis",
+        "deps": [
+          "def-schauder-basis-and-coordinate-functionals",
+          "def-unconditional-convergence-of-a-banach-space-series"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (definition)"
+      },
+      {
+        "id": "thm-unconditional-convergence-equivalences",
+        "kind": "theorem",
+        "title": "Unconditional convergence equivalences",
+        "deps": [
+          "def-unconditional-convergence-of-a-banach-space-series",
+          "thm-dual-norms-every-vector",
+          "thm-banach-series-criterion"
+        ],
+        "strategy": "Mueger A.4: failure of finite-tail control constructs disjoint bad blocks, then a divergent permutation/subseries; choose least finite-set codes to avoid unspecified choices here. Finite-tail control makes the ordinary partial sums Cauchy and controls the finite-subset net by comparison with that limit. Split Re/Im positive/negative scalar tests to bound sum |f(x_n)| by four times the tail bound. HB norming then proves multiplier Cauchyness. Completeness gives limits. Read A.4 in the alternate short notes; its net-completeness appeal can be replaced by the explicit ordinary partial-sum argument.",
+        "statement": "For a series in a real or complex Banach space, the following are equivalent: all rearrangements converge; all rearrangements converge to the same sum; the finite-subset sum net converges; finite sums outside a sufficiently large finite set are uniformly small; every subseries converges; every bounded scalar multiplier series converges."
+      },
+      {
+        "id": "lem-dvoretzky-rogers-finite-block-estimate",
+        "kind": "lemma",
+        "title": "Dvoretzky rogers finite block estimate",
+        "deps": [
+          "cor-finite-dimensional-normed-spaces-are-banach"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (lemma) — in sufficiently high finite dimension choose unit vectors whose scalar combinations obey the source's Euclidean upper estimate; isolate the finite-dimensional geometric input"
+      },
+      {
+        "id": "thm-dvoretzky-rogers",
+        "kind": "theorem",
+        "title": "Dvoretzky rogers",
+        "deps": [
+          "lem-dvoretzky-rogers-finite-block-estimate",
+          "thm-unconditional-convergence-equivalences"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (theorem) — every infinite-dimensional Banach space admits an unconditionally convergent series that is not absolutely convergent"
+      },
+      {
+        "id": "cor-absolute-and-unconditional-convergence-agree-universally-iff-finite-dimensional",
+        "kind": "corollary",
+        "title": "Absolute and unconditional convergence agree universally iff finite dimensional",
+        "deps": [
+          "thm-dvoretzky-rogers",
+          "thm-unconditional-convergence-equivalences",
+          "thm-coordinate-map-for-a-finite-dimensional-normed-space"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (corollary) — combine item 24 with finite-dimensional coordinate equivalence, including the zero-dimensional case"
+      },
+      {
+        "id": "lem-schauder-coefficient-space-is-banach",
+        "kind": "lemma",
+        "title": "The convergent coefficient-series space is Banach",
+        "deps": [
+          "def-schauder-basis-and-coordinate-functionals",
+          "thm-coordinate-map-for-a-finite-dimensional-normed-space"
+        ],
+        "statement": "For a Schauder basis (e_n), the space E of scalar sequences a for which sum a_n e_n converges is Banach in ||a||_E=sup_N||sum_{n<=N}a_ne_n||. The summation map E->X is a bounded linear bijection.",
+        "strategy": "Prove coordinates of an E-Cauchy sequence converge by continuity of coordinates on each finite span. For one epsilon fix a sufficiently close E-sequence a^k and then a tail index for its convergent series. Finite blocks of the coordinatewise limit differ from those of a^k by at most 2epsilon; hence its series is Cauchy. Pass finite-sum inequalities to the limit to obtain convergence in E. Uniqueness/existence of the basis expansion gives bijectivity. No coordinate functional on X is assumed bounded. BLOCKED independent full-source verification of this repair."
+      },
+      {
+        "id": "thm-coordinate-functionals-of-a-schauder-basis-are-bounded",
+        "kind": "theorem",
+        "title": "Coordinate functionals of a schauder basis are bounded",
+        "deps": [
+          "def-partial-sum-projections-and-basis-constant",
+          "thm-bounded-inverse-theorem",
+          "lem-schauder-coefficient-space-is-banach"
+        ],
+        "strategy": "BLOCKED new coefficient-space lemma. Define E of scalar sequences whose e_n series converges, with norm sup_N||sum_{n<=N}a_ne_n||. Prove E complete using finite-dimensional coordinate continuity and a uniform-tail estimate. The summation map E->X is a bounded bijection, hence has bounded inverse. This proves bounded P_N before any use of UBP. The design UBP-first route is circular; this repaired route inherits DC through bounded inverse.",
+        "statement": "Each coordinate functional and each partial-sum map is bounded; the partial-sum maps have a common finite operator-norm bound."
+      },
+      {
+        "id": "thm-schauder-basis-implies-bounded-approximation-property",
+        "kind": "theorem",
+        "title": "Schauder basis implies bounded approximation property",
+        "deps": [
+          "thm-coordinate-functionals-of-a-schauder-basis-are-bounded",
+          "lem-pointwise-convergent-uniformly-bounded-operators-converge-uniformly-on-compact-sets",
+          "def-approximation-property-and-bounded-approximation-property"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (theorem) — partial sum projections supply the approximants"
+      },
+      {
+        "id": "lem-james-space-dual-and-bidual-identification",
+        "kind": "lemma",
+        "title": "James space dual and bidual identification",
+        "deps": [
+          "thm-james-space-is-complete-and-separable",
+          "thm-coordinate-functionals-of-a-schauder-basis-are-bounded"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (lemma) — compute the coordinate/bounded-variation description following Bühler–Salamon"
+      },
+      {
+        "id": "thm-canonical-image-of-james-space-has-codimension-one",
+        "kind": "theorem",
+        "title": "Canonical image of james space has codimension one",
+        "deps": [
+          "lem-james-space-dual-and-bidual-identification",
+          "def-reflexive-banach-space"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (theorem) — hence $J$ is not reflexive"
+      },
+      {
+        "id": "thm-james-space-is-isometrically-isomorphic-to-its-bidual",
+        "kind": "theorem",
+        "title": "James space is isometrically isomorphic to its bidual",
+        "deps": [
+          "lem-james-space-dual-and-bidual-identification"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (theorem) — by a noncanonical isometry; this is why FA-7's definition names $J_X$"
+      },
+      {
+        "id": "rem-enflo-space-without-the-approximation-property",
+        "kind": "remark",
+        "title": "Enflo space without the approximation property",
+        "deps": [
+          "def-approximation-property-and-bounded-approximation-property",
+          "thm-schauder-basis-implies-bounded-approximation-property"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (remark, L/NS) — exact primary theorem and the proved implication basis $\\Rightarrow$ AP; never a dependency"
+      },
+      {
+        "id": "lem-finite-range-sequences-are-uniformly-dense-in-ell-infinity",
+        "kind": "lemma",
+        "title": "Finite-range sequences are uniformly dense in ell-infinity",
+        "deps": [
+          "def-c-zero-and-ell-infinity"
+        ],
+        "statement": "Every bounded real or complex scalar sequence is uniformly approximable by sequences taking only finitely many values.",
+        "strategy": "Partition a bounded scalar interval or square into finitely many half-open cells of diameter below epsilon and replace each coordinate by its cell representative. This is explicit coordinatewise quantization. Needed before extension of the finitely additive integral; source backing for the ba development is still open."
+      },
+      {
+        "id": "lem-finitely-additive-integral-is-well-defined-and-isometric",
+        "kind": "lemma",
+        "title": "Finitely additive integral is well defined and isometric",
+        "deps": [
+          "def-finitely-additive-integral-on-ell-infinity",
+          "thm-extension-of-a-bounded-map-from-a-dense-subspace",
+          "lem-finite-range-sequences-are-uniformly-dense-in-ell-infinity"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (lemma) — independence of a finite-range decomposition and equality with total variation"
+      },
+      {
+        "id": "thm-dual-of-ell-infinity-is-ba",
+        "kind": "theorem",
+        "title": "Dual of ell infinity is ba",
+        "deps": [
+          "lem-finitely-additive-integral-is-well-defined-and-isometric",
+          "def-dual-space-of-a-normed-space"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (theorem) — $\\varphi\\mapsto[A\\mapsto\\varphi(1_A)]$ is an isometric isomorphism onto $ba(2^{\\mathbb N})$"
+      },
+      {
+        "id": "thm-existence-of-a-shift-invariant-mean-on-bounded-sequences",
+        "kind": "theorem",
+        "title": "Existence of a shift-invariant mean on bounded real sequences",
+        "deps": [
+          "thm-hahn-banach-dominated-extension",
+          "def-c-zero-and-ell-infinity",
+          "def-cesaro-mean"
+        ],
+        "statement": "There is a positive real-linear norm-one L on ell-infinity(R) with L(1)=1, L(Sx)=L(x), and L(x)=lim x_n whenever x converges.",
+        "strategy": "BLOCKED source-complete A-supplier registration: extend the constant-sequence functional under the sublinear functional limsup of Cesaro means. Show domination on x and -x gives positivity, normalization, shift invariance, and ordinary-limit extension. This is the independently proved A replacement needed because the existing ex-banach-limit-from-hahn-banach and lem-banach-limit-properties are B-only and cannot supply FA-11. Not a rehome or modification of either published item."
+      },
+      {
+        "id": "cor-countably-additive-part-of-ba-is-ell-one",
+        "kind": "corollary",
+        "title": "Countably additive part of ba is ell one",
+        "deps": [
+          "thm-dual-of-ell-infinity-is-ba",
+          "cor-ell-p-duality-by-counting-measure",
+          "thm-existence-of-a-shift-invariant-mean-on-bounded-sequences"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (corollary) — identify the $\\ell^1$ subspace and show it is proper using a Banach limit"
+      }
+    ],
+    "summary": "BLOCKED: full design inventory retained. See frontier-34-fa-prereqs-batch-2.notes.md for unresolved source and dependency obligations. No authoring/splice clearance."
+  },
+  {
+    "order": 288.068,
+    "id": "schauder-bases-approximation-and-banach-space-pathologies-examples",
+    "kind": "B",
+    "category": "functional-analysis",
+    "title": "Schauder Bases Approximation and Banach Space Pathologies — Examples",
+    "companion": "schauder-bases-approximation-and-banach-space-pathologies",
+    "requires": [
+      "schauder-bases-approximation-and-banach-space-pathologies"
+    ],
+    "items": [
+      {
+        "id": "ex-standard-schauder-bases-of-c0-and-ell-p",
+        "kind": "example",
+        "title": "Standard schauder bases of c0 and ell p",
+        "deps": [
+          "def-partial-sum-projections-and-basis-constant",
+          "lem-finite-truncations-are-dense-in-c0-and-ell-one",
+          "cor-ell-p-duality-by-counting-measure"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. exact basis constants"
+      },
+      {
+        "id": "cex-standard-unit-vectors-are-not-a-schauder-basis-of-ell-infinity",
+        "kind": "counterexample",
+        "title": "Standard unit vectors are not a schauder basis of ell infinity",
+        "deps": [
+          "def-schauder-basis-and-coordinate-functionals",
+          "def-c-zero-and-ell-infinity"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. "
+      },
+      {
+        "id": "ex-the-summing-basis-of-c0-is-conditional",
+        "kind": "example",
+        "title": "The summing basis of c0 is conditional",
+        "deps": [
+          "def-unconditional-and-conditional-basis"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. "
+      },
+      {
+        "id": "cex-reordering-a-conditional-basis-can-destroy-convergence",
+        "kind": "counterexample",
+        "title": "Reordering a conditional basis can destroy convergence",
+        "deps": [
+          "ex-the-summing-basis-of-c0-is-conditional"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. "
+      },
+      {
+        "id": "ex-banach-limit-revisited-as-a-charge",
+        "kind": "example",
+        "title": "Banach limit revisited as a charge",
+        "deps": [
+          "thm-dual-of-ell-infinity-is-ba",
+          "thm-existence-of-a-shift-invariant-mean-on-bounded-sequences"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. identify the associated purely finitely additive behavior"
+      },
+      {
+        "id": "cex-ell-one-and-ell-infinity-are-not-reflexive",
+        "kind": "counterexample",
+        "title": "Ell one and ell infinity are not reflexive",
+        "deps": [
+          "thm-a-banach-space-is-reflexive-iff-its-dual-is-reflexive",
+          "cor-ell-one-is-not-reflexive"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. reconcile FA-7 and item 13"
+      },
+      {
+        "id": "rem-subspaces-of-classical-spaces-can-fail-ap",
+        "kind": "remark",
+        "title": "Subspaces of classical spaces can fail ap",
+        "deps": [
+          "def-approximation-property-and-bounded-approximation-property"
+        ],
+        "strategy": "BLOCKED scope reservation; not an approved proof contract. (remark, L/NS) — the source-cited Szankowski/Enflo boundary; no dependency"
+      }
+    ],
+    "summary": "BLOCKED: full design inventory retained. See frontier-34-fa-prereqs-batch-2.notes.md for unresolved source and dependency obligations. No authoring/splice clearance."
+  }
+]

@@ -1,0 +1,1809 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-characteristic-divisibility-and-invertibility-of-a-natural-scalar-in-a-field",
+    "lem-finite-dimensional-subspace-admits-a-linear-projection-without-choice",
+    "lem-trace-of-an-idempotent-is-the-dimension-of-its-image",
+    "lem-indicator-basis-for-invariant-functions-on-a-finite-orbit-partition",
+    "lem-standard-hermitian-form-on-functions-on-a-nonempty-finite-set-is-an-inner-product",
+    "lem-equality-case-for-a-finite-sum-of-unit-complex-numbers",
+    "lem-conjugates-of-an-average-of-roots-of-unity-are-averages-of-roots-of-unity",
+    "lem-kernel-of-a-direct-sum-of-representations-is-the-intersection",
+    "lem-a-group-is-abelian-iff-every-conjugacy-class-is-a-singleton",
+    "ex-coordinate-projection-onto-a-subspace-of-c-three",
+    "ex-conjugacy-class-indicator-basis-for-s-three",
+    "ex-standard-hermitian-inner-product-on-functions-on-a-three-point-set",
+    "cex-unit-complex-sum-strict-with-distinct-summands"
+  ],
+  "contracts": {
+    "lem-characteristic-divisibility-and-invertibility-of-a-natural-scalar-in-a-field": {
+      "assumptions": "A field $k$ and an integer $n>0$. No axiom of choice is assumed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "A **field** is a set $F$ equipped with two binary operations $+$ (addition) and\n$\\cdot$ (multiplication) and two distinguished elements $0 \\ne 1$ of $F$,\nsatisfying:\n\n- **(A)** $(F, +)$ is an abelian group with identity $0$: addition is\n  associative and commutative, $x + 0 = x$ for all $x$, and every $x$ has an\n  additive inverse $-x$ with $x + (-x) = 0$.\n- **(M)** Multiplication is associative and commutative **on all of $F$**, and\n  $x \\cdot 1 = x$ for every $x \\in F$; moreover $(F \\setminus \\{0\\}, \\cdot)$ is an\n  abelian group with identity $1$, so every $x \\ne 0$ has a multiplicative inverse\n  $x^{-1}$ with $x \\cdot x^{-1} = 1$.\n- **(D)** Multiplication distributes over addition: $x \\cdot (y + z) = x\\cdot y + x\\cdot z$.\n\nWe write $x - y := x + (-y)$ and $x/y := x \\cdot y^{-1}$ (for $y \\ne 0$), and\nabbreviate $x \\cdot y$ as $xy$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ],
+          "application": "In a field $0\\ne1$, distributivity holds and every nonzero scalar has an inverse"
+        },
+        {
+          "fact": "F2",
+          "source": "lem-characteristic-and-additive-order",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a ring ([[def-ring]]) and let $\\operatorname{ord}(1_R)$ be the order\nof $1_R$ in the abelian group $(R,+,0_R)$ ([[def-order-in-a-group]]), with\n$\\operatorname{ord}(1_R) = \\infty$ when no $n \\ge 1$ satisfies\n$n \\cdot 1_R = 0_R$. Throughout, a natural number written where an integer is\nexpected means its image under the embedding $\\iota_{\\mathbb{Z}} : \\mathbb{N} \\to \\mathbb{Z}$\nof [[lem-nat-embeds-int]]. Then:\n\n1. if $\\operatorname{ord}(1_R)$ is finite then\n   $\\operatorname{char}(R) = \\operatorname{ord}(1_R)$\n   ([[def-ring-characteristic]]), and if $\\operatorname{ord}(1_R) = \\infty$ then\n   $\\operatorname{char}(R) = 0$; so the characteristic is the additive order of\n   $1_R$, with the value $0$ recording infinite order;\n2. for every $n \\in \\mathbb{Z}$, the equation $n \\cdot 1_R = 0_R$ holds if and\n   only if $\\operatorname{char}(R)$ divides $n$ in $\\mathbb{Z}$, divisibility\n   being the relation of [[def-divides-in-z]];\n3. if $R$ is an integral domain\n   ([[def-zero-divisor-and-integral-domain]]) then for every $a \\in R$ with\n   $a \\ne 0_R$ and every $n \\in \\mathbb{Z}$,\n   $n a = 0_R$ if and only if $n \\cdot 1_R = 0_R$; consequently every nonzero\n   element of $R$ has the same additive order as $1_R$.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ],
+          "application": "For any integer $n$, $n\\cdot1_k=0$ if and only if $\\operatorname{char}(k)\\mid n$"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Put $s=n\\cdot1_k$. For every $t\\in k$, distributivity gives $0t=(0+0)t=0t+0t$, so cancellation gives $0t=0$. Since $0\\ne1$, the scalar zero is not invertible. If $s$ is invertible, it is therefore nonzero, and the equivalence in F2 gives $\\operatorname{char}(k)\\nmid n$.",
+          "inputs": [
+            "A field $k$ and an integer $n>0$.",
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Conversely, if $\\operatorname{char}(k)\\nmid n$, F2 gives $s\\ne0$, and the field inverse axiom gives $s^{-1}\\in k$ with $ss^{-1}=s^{-1}s=1$.",
+          "inputs": [
+            "A field $k$ and an integer $n>0$.",
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "By integer divisibility, $0\\mid n$ would mean $n=0q=0$ for some integer $q$, impossible for $n>0$. Thus characteristic zero is included. At $n=1$, the scalar is $1_k$ with inverse $1_k$. Together with the two implications this proves the claim.",
+          "inputs": [
+            "A field $k$ and an integer $n>0$.",
+            "1.1",
+            "1.2",
+            "F2",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The scalar list has prescribed positive length n."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 excludes the zero scalar; step 2.1 handles characteristic zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 handles n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The zero ring is excluded by the field hypothesis."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "statement requires n>0; step 2.1 treats its smallest value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The inverse is supplied by the field axiom for this one scalar."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that invertibility forces the scalar to be nonzero, and F2 then excludes divisibility by the characteristic."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 proves that nondivisibility makes the scalar nonzero, so the field axiom supplies its inverse."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "phase-2-wave-1 alpha-d Step 6b",
+        "notes": "Both implications checked against def-field and lem-characteristic-and-additive-order clause 2: step 1.1 excludes invertible zero and hence divisibility; step 1.2 obtains an inverse from nondivisibility. n>0 excludes 0 dividing n, characteristic zero is included and n=1 gives the unit. No AC. Milne pp.8–9 and Etingof Theorem 4.1.1 motivate exactly this normalization; current reader/refuter evidence agrees."
+      }
+    },
+    "lem-finite-dimensional-subspace-admits-a-linear-projection-without-choice": {
+      "assumptions": "$V$ finite-dimensional over a field $k$, and $U\\le V$. No axiom of choice is assumed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) that is\nfinite-dimensional with $\\dim_F V = n$ ([[def-dimension]]), and let $U$ be a\nlinear subspace of $V$ ([[def-linear-subspace]]). Then\n\n1. $U$ is finite-dimensional over $F$ and $\\dim_F U \\le n$;\n2. $\\dim_F U = n$ **if and only if** $U = V$;\n3. **Extension, with no choice principle.** Every linearly independent\n   $A_0 \\subseteq U$ is contained in a basis of $U$: there is a basis $B$ of $U$\n   with $A_0 \\subseteq B \\subseteq U$. Claim 1 is the case $A_0 = \\varnothing$.\n   Since $V$ is itself a linear subspace of $V$ ([[def-linear-subspace]]), claim 3\n   applies with $V$ in place of $U$, and hence to **any** finite-dimensional\n   vector space over $F$ in place of the pair $(V, U)$.\n\n**Nothing above uses a choice principle**, and claim 3 in particular is the\nfinite-dimensional substitute for the Zorn-based extension theorem stated earlier\non this page. In finite dimension the extension terminates on its own, because\n[[cor-independent-set-is-no-larger-than-a-finite-spanning-set]] bounds the size\nof an independent set and [[thm-well-ordering-principle]] then supplies a largest\none; no selection is made anywhere.\n\n**Finiteness is essential in claim 2.** Without it the equality case fails: the\ncompanion page exhibits a\nproper linear subspace of an infinite-dimensional space whose basis is\nequinumerous with a basis of the whole space.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ],
+          "application": "Every independent subset of a subspace of a finite-dimensional space extends to a finite basis, without a choice principle"
+        },
+        {
+          "fact": "F2",
+          "source": "def-linear-map",
+          "source_section": "Definition",
+          "quote": "Let $V$ and $W$ be vector spaces over the same field $F$. A function\n$T:V\\to W$ is **linear** when\n\n$$T(au+bv)=aT(u)+bT(v)$$\n\nfor all $a,b\\in F$ and $u,v\\in V$. Such a function is a **linear map**, or\n**linear transformation**.",
+          "uses": [
+            "2.1"
+          ],
+          "application": "Linearity means $P(av+bw)=aP(v)+bP(w)$ for all scalars and vectors"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Apply F1 to the empty independent subset of $U$ to obtain a finite basis $u_1,\\ldots,u_r$. This is independent in $V$, so apply F1 with subspace $V$ to extend it to $u_1,\\ldots,u_r,w_1,\\ldots,w_s$. Every vector has an expansion in this basis; two expansions agree coefficientwise because their difference is a zero linear combination of an independent family.",
+          "inputs": [
+            "$V$ finite-dimensional over a field $k$, and $U\\le V$.",
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Define $P(\\sum_{j=1}^r a_j u_j+\\sum_{\\ell=1}^s b_\\ell w_\\ell)=\\sum_{j=1}^r a_j u_j$. The uniqueness just proved makes $P$ a well-defined function $V\\to V$. If $v,v'$ have $u$-coordinates $a_j,a'_j$, then $cv+dv'$ has $u$-coordinates $ca_j+da'_j$. Consequently $P(cv+dv')=\\sum_j(ca_j+da'_j)u_j=cP(v)+dP(v')$, so $P$ is linear.",
+          "inputs": [
+            "$V$ finite-dimensional over a field $k$, and $U\\le V$.",
+            "1.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Each $P(v)$ belongs to $U$. For $u\\in U$, its basis expression uses only the $u_j$, so $P(u)=u$. Thus every $u\\in U$ is in the image, and $\\operatorname{im}P=U$. Since $P(v)\\in U$, also $P(P(v))=P(v)$.",
+          "inputs": [
+            "$V$ finite-dimensional over a field $k$, and $U\\le V$.",
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "If $U=0$, then $r=0$ and the formula gives $P=0$. If $U=V$, no added vectors are needed and $P=\\operatorname{id}_V$. If $V=0$, both lists are empty and these formulas coincide. Only two applications of the choice-free finite extension result and finite enumerations were used; no simultaneous choice over an infinite family occurs.",
+          "inputs": [
+            "$V$ finite-dimensional over a field $k$, and $U\\le V$.",
+            "F1",
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 4.1 covers empty basis lists."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 4.1 covers U=0 and V=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 gives P(u_1)=u_1 for a one-vector U basis."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1 covers U=V."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or ordered parameter occurs in the assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 uses the explicit choice-free extension clause, and step 4.1 records the finite uses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is an existence assertion, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is an existence assertion, not a biconditional."
+        }
+      ]
+    },
+    "lem-trace-of-an-idempotent-is-the-dimension-of-its-image": {
+      "assumptions": "$P\\in\\operatorname{End}_k(V)$, $\\dim_kV<\\infty$, and $P^2=P$. No axiom of choice is assumed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-idempotent-endomorphisms-are-diagonalisable-projections",
+          "source_section": "Statement",
+          "quote": "If an endomorphism $T:V\\to V$ of a finite-dimensional vector space satisfies $T^2=T$, then it is diagonalisable and\n\n$$V=\\operatorname{im}T\\oplus\\ker T.$$\n\nUnder this decomposition, $T$ is projection onto $\\operatorname{im}T$ along $\\ker T$.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "$V=\\operatorname{im}P\\oplus\\ker P$, with $P$ the projection onto its image"
+        },
+        {
+          "fact": "F2",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "2.1"
+          ],
+          "application": "Trace is the matrix trace in any ordered basis, with trace zero on the zero space"
+        },
+        {
+          "fact": "F3",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "**Extension, with no choice principle.** Every linearly independent $A_0 \\subseteq U$ is contained in a basis of $U$: there is a basis $B$ of $U$ with $A_0 \\subseteq B \\subseteq U$. Claim 1 is the case $A_0 = \\varnothing$. Since $V$ is itself a linear subspace of $V$ ([[def-linear-subspace]]), claim 3 applies with $V$ in place of $U$, and hence to **any** finite-dimensional vector space over $F$ in place of the pair $(V, U)$.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "Apply the empty-set case separately to $\\operatorname{im}P$ and $\\ker P$ to obtain finite bases for an adapted basis of $V$"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "By F1, both $\\operatorname{im}P$ and $\\ker P$ are subspaces of the finite-dimensional space $V$. Apply F3 to each empty independent subset to obtain finite bases, and concatenate them in the displayed direct-sum order, putting the $r=\\dim_k\\operatorname{im}P$ image basis vectors first. For $u=P(v)$, $P(u)=P^2(v)=P(v)=u$; for $w\\in\\ker P$, $P(w)=0$. Thus the matrix is $\\operatorname{diag}(I_r,0)$.",
+          "inputs": [
+            "$P\\in\\operatorname{End}_k(V)$, $\\dim_kV<\\infty$, and $P^2=P$.",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "F2 permits this basis for computing trace. Summing the diagonal gives $\\operatorname{tr}(P)=\\underbrace{1_k+\\cdots+1_k}_{r\\text{ terms}}=r\\cdot1_k$. For $r=0$ this is the empty sum $0$; when $V=0$ it also agrees with F2. For $P=\\operatorname{id}_V$, it gives $(\\dim_kV)\\cdot1_k$.",
+          "inputs": [
+            "$P\\in\\operatorname{End}_k(V)$, $\\dim_kV<\\infty$, and $P^2=P$.",
+            "F2",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "If $\\operatorname{char}(k)=p>0$, take $V=k^p$. Its identity has rank $p$ and trace $p\\cdot1_k=0$, whereas its zero map has rank $0$ and trace $0$. Therefore equal traces need not imply equal integer ranks, even among idempotents on the same space.",
+          "inputs": [
+            "$P\\in\\operatorname{End}_k(V)$, $\\dim_kV<\\infty$, and $P^2=P$.",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 treats the empty diagonal."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 treats zero rank and the zero space."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 with r=1 gives trace 1_k."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1 checks positive-characteristic rank collapse."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 uses a finite adapted basis supplied by the finite-dimensional decomposition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The assertion is an equality, not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The assertion is an equality, not a biconditional."
+        }
+      ]
+    },
+    "lem-indicator-basis-for-invariant-functions-on-a-finite-orbit-partition": {
+      "assumptions": "A left action of $G$ on $X$, a finite orbit set $\\mathcal O$, and a field $k$. No axiom of choice is assumed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-group-action",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group with identity $e$ and let $X$ be a set. A **left action** of\n$G$ on $X$ is a function $G\\times X\\to X$, written $(g,x)\\mapsto g\\cdot x$,\nsuch that\n\n$$e\\cdot x=x,\\qquad (gh)\\cdot x=g\\cdot(h\\cdot x)$$\n\nfor all $g,h\\in G$ and $x\\in X$. Then $X$ is a **$G$-set**. The action is\n**transitive** when every $x,y\\in X$ satisfy $g\\cdot x=y$ for some $g\\in G$.\nIt is **faithful** when $g\\cdot x=x$ for every $x\\in X$ implies $g=e$.",
+          "uses": [
+            "4.1"
+          ],
+          "application": "A left action satisfies $e\\cdot x=x$ and $(gh)\\cdot x=g\\cdot(h\\cdot x)$"
+        },
+        {
+          "fact": "F2",
+          "source": "thm-orbits-partition-the-set",
+          "source_section": "Statement",
+          "quote": "For a left action of $G$ on $X$, define $x\\sim y$ when $y=g\\cdot x$ for some\n$g\\in G$. This is an equivalence relation, its equivalence class at $x$ is\n$G\\cdot x$, and the distinct orbits partition $X$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1"
+          ],
+          "application": "Distinct orbits partition $X$, and two points share an orbit exactly when one is $g\\cdot x$ for some $g$"
+        },
+        {
+          "fact": "F3",
+          "source": "def-vector-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be a field ([[def-field]]), with additive identity $0_F$, multiplicative\nidentity $1_F$, and the field axioms as stated there. A **vector space over $F$**,\nalso called an **$F$-vector space**, consists of\n\n- a set $V$, whose elements are called **vectors**;\n- a binary operation $+ : V \\times V \\to V$ on $V$ ([[def-binary-operation]]),\n  the **vector addition**;\n- an element $0_V \\in V$, the **zero vector**;\n- a map $\\cdot \\,:\\, F \\times V \\to V$, the **scalar multiplication**, written\n  $\\lambda v := \\cdot(\\lambda, v)$;\n\nsubject to the following axioms, in which $u, v \\in V$ and $\\lambda, \\mu \\in F$\nare arbitrary.\n\n- **(V1)** $(V, +, 0_V)$ is an abelian group ([[def-group]]): $+$ is associative\n  and commutative, $0_V$ is a two-sided identity for $+$\n  ([[def-identity-element]]), and every $v \\in V$ has an additive inverse\n  ([[def-invertible-element]]).\n- **(V2)** $\\lambda(u + v) = \\lambda u + \\lambda v$.\n- **(V3)** $(\\lambda + \\mu)v = \\lambda v + \\mu v$.\n- **(V4)** $(\\lambda\\mu)v = \\lambda(\\mu v)$.\n- **(V5)** $1_F v = v$.\n\nThe elements of $F$ are called **scalars**. When several vector spaces are in\nplay we write $0_V$ for the zero of $V$, and we write $-v$ for the additive\ninverse of $v$ and $u - v := u + (-v)$.\n\n**The notation $0_V$ and $-v$ is legitimate.** Axiom (V1) asserts only that some\ntwo-sided identity and some additive inverses exist. That there is at most one\ntwo-sided identity for $+$ is [[lem-identity-unique]], and that an invertible\nelement of a monoid has exactly one inverse is [[lem-inverse-unique]]; both are\nproved before [[def-group]] and are inherited here with the group structure. So\n$0_V$ and $-v$ denote well-defined elements, and nothing below re-derives them.\n\n**What (V1) buys, and why it is not restated.** Associativity, commutativity, the\nidentity law $v + 0_V = v = 0_V + v$, the inverse law $v + (-v) = 0_V$,\ncancellation ([[lem-group-cancellation]]) and the inverse identities\n([[lem-group-inverse-laws]]) are facts about abelian groups. They are quoted from\nthe group page wherever they are used and are never proved again for vectors.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "The vector-space axioms are the abelian addition laws, two distributive laws, scalar associativity and the scalar identity law"
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-sum-in-a-commutative-monoid",
+          "source_section": "Definition",
+          "quote": "Let $(M,+,0)$ be a commutative monoid ([[def-semigroup-and-monoid]]), let $S$ be a finite set with $n:=|S|$ ([[def-finite-cardinality]]), and let $a:S\\to M$. Choose a bijection $\\phi:n\\to S$ and define\n\n$$\\sum_{s\\in S}a_s:=a_{\\phi(0)}+a_{\\phi(1)}+\\cdots+a_{\\phi(n-1)},$$\n\nwhere the right side is the finite monoid product of [[def-monoid-finite-product]] written additively. In particular, the sum over the empty set is $0$.\n\nThis value is independent of the enumeration. If $\\psi:n\\to S$ is another bijection, then $\\phi^{-1}\\circ\\psi$ is a permutation of $n$ ([[def-injection-surjection-bijection]]), and generalised commutativity gives\n\n$$\\sum_{k<n}a_{\\psi(k)}=\\sum_{k<n}a_{\\phi(k)}$$\n\n([[thm-generalised-associativity]]). Thus the displayed notation names one element of $M$ and does not select a preferred enumeration.\n\nWhen $M$ is the additive monoid of $\\mathbb R$ or of $\\mathbb N$, this definition agrees with [[def-sum-over-a-finite-index-set]]: both enumerate $S$, apply the same finite recursion with identity $0$, and are independent of the enumeration.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "5.1"
+          ],
+          "application": "Finite sums in an additive commutative monoid are independent of enumeration and the empty sum is zero"
+        },
+        {
+          "fact": "F5",
+          "source": "def-linear-basis",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]).\n\nA subset $B \\subseteq V$ is a **basis of $V$** when\n\n- **(B1)** $B$ is linearly independent ([[def-linear-independence]]), and\n- **(B2)** $B$ spans $V$, that is $\\operatorname{span}(B) = V$\n  ([[def-linear-combination-and-span]], which is where the words *spans* and\n  *spanning set* are fixed; they are not redefined here).\n\n**The empty set is a basis of the zero space, and of nothing else.**\n$\\varnothing$ is linearly independent ([[def-linear-independence]]) and\n$\\operatorname{span}(\\varnothing) = \\{0_V\\}$\n([[lem-span-is-the-set-of-linear-combinations]]), so $\\varnothing$ is a basis of\n$V$ exactly when $V = \\{0_V\\}$. This is the case $n = 0$ from which every\ninduction on this page starts, and it is a genuine case rather than a convention.\n\n### Ordered bases\n\nAn **ordered basis of $V$** is a finite list $v : n \\to V$, with $n \\in\n\\mathbb{N}$ and $n = \\{0, \\dots, n-1\\}$ the von Neumann natural\n([[def-natural-numbers]], [[lem-nat-order-is-membership]]), such that $v$ is\ninjective ([[def-injection-surjection-bijection]]) and its image $v[n]$ is a\nbasis of $V$.\n\nBy claim 6 of [[lem-independent-list-is-injective]], a list is linearly\nindependent exactly when it is injective with linearly independent image, so an\nordered basis is equally described as a **linearly independent list $v : n \\to V$\nwith $\\operatorname{span}(v[n]) = V$**: the injectivity does not have to be\nimposed separately. The empty list is the ordered basis of the zero space.\n\nAn ordered basis is a list, so it carries an order; a basis is a set, so it does\nnot. Reordering an ordered basis gives a different ordered basis with the same\nimage, and the coordinates of\n[[thm-unique-coordinates-with-respect-to-an-ordered-basis]] are attached to the\nlist, not to the set.\n\n### Bases of a linear subspace\n\nLet $U$ be a linear subspace of $V$ ([[def-linear-subspace]]), which is itself a\nvector space over $F$, with the addition, the zero vector and the scalar\nmultiplication of $V$ restricted to $U$. For $A \\subseteq U$ the two readings of\n\"$A$ is a basis\" — computed inside $U$, or computed inside $V$ — agree, so the\nphrase needs no disambiguation below.\n\n- **Independence agrees.** The finite sums $\\sum_{i<n}\\lambda_i a_i$ of a list\n  $a : n \\to U$ are given by the same recursion in $U$ as in $V$\n  ([[def-monoid-finite-product]]), the base value $0_V$ and the operation $+$\n  being literally those of $V$ ([[def-linear-subspace]]). So a list into $U$ has\n  the same sums whichever space it is read in, and the vanishing condition of\n  [[def-linear-independence]] is the same condition in both.\n- **The span agrees.** A subset of $U$ is a linear subspace of $U$ exactly when it\n  is a linear subspace of $V$, conditions (W1), (W2), (W3) being the same\n  conditions in either reading. Now $\\operatorname{span}_V(A) \\subseteq U$, since\n  $U$ is a linear subspace of $V$ containing $A$ and the span is contained in\n  every such subspace; so $\\operatorname{span}_V(A)$ is a linear subspace of $U$\n  containing $A$, whence $\\operatorname{span}_U(A) \\subseteq \\operatorname{span}_V(A)$.\n  Conversely $\\operatorname{span}_U(A)$ is a linear subspace of $V$ containing\n  $A$, whence $\\operatorname{span}_V(A) \\subseteq \\operatorname{span}_U(A)$. The\n  two are therefore equal, and we write $\\operatorname{span}(A)$ for both.\n\nConsequently $A \\subseteq U$ is a basis of the vector space $U$ if and only if\n$A$ is linearly independent as a subset of $V$ and $\\operatorname{span}(A) = U$.",
+          "uses": [
+            "3.1",
+            "5.1"
+          ],
+          "application": "A basis is a linearly independent spanning subset; the empty basis belongs to the zero space"
+        },
+        {
+          "fact": "F6",
+          "source": "def-conjugacy-class-and-centralizer",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group and $x\\in G$ ([[def-group]]). The **conjugacy class** of\n$x$ is\n\n$$\\operatorname{Cl}_G(x):=\\{gxg^{-1}:g\\in G\\}.$$\n\nThe **centralizer** of $x$ is\n\n$$C_G(x):=\\{g\\in G:gx=xg\\}=\\{g\\in G:gxg^{-1}=x\\}.$$\n\nThe subgroup property implicit in the notation is proved in\n[[lem-centralizers-and-normalizers-are-subgroups]].",
+          "uses": [
+            "4.1"
+          ],
+          "application": "The conjugacy class of $x$ is $\\{gxg^{-1}:g\\in G\\}$"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Write $W$ for the invariant functions. The zero function is invariant. If $f,h\\in W$ and $a,b\\in k$, then $(af+bh)(g\\cdot x)=af(g\\cdot x)+bh(g\\cdot x)=af(x)+bh(x)=(af+bh)(x)$, so $af+bh\\in W$. For each $x$, associativity and commutativity of function addition, the zero and negative identities, $a(f+h)=af+ah$, $(a+b)f=af+bf$, $(ab)f=a(bf)$ and $1_k f=f$ are the corresponding field equalities evaluated at $x$. Equality at every $x$ is equality of functions. This verifies all the axioms in F3.",
+          "inputs": [
+            "A left action of $G$ on $X$, a finite orbit set $\\mathcal O$, and a field $k$.",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "By F2, $x$ and $g\\cdot x$ belong to the same orbit. Consequently $\\mathbf1_O(g\\cdot x)=\\mathbf1_O(x)$, so every orbit indicator lies in $W$. If $f\\in W$, its values at any two points of one orbit coincide by F2 and invariance. Each orbit is nonempty, so there is a unique scalar $c_O$ such that $f(x)=c_O$ for all $x\\in O$. This defines $c_O$ by its unique value and does not choose orbit representatives.",
+          "inputs": [
+            "A left action of $G$ on $X$, a finite orbit set $\\mathcal O$, and a field $k$.",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Define $h=\\sum_{O\\in\\mathcal O}c_O\\mathbf1_O$ using F4 in the additive vector space $W$. Evaluation of a finite sum is the sum of its values, by the recursive pointwise addition. At a point $x$, exactly one indicator is $1_k$, namely that of its orbit, and every other term vanishes. Thus $h(x)=c_{G\\cdot x}=f(x)$, so $h=f$ and the indicators span $W$.",
+          "inputs": [
+            "A left action of $G$ on $X$, a finite orbit set $\\mathcal O$, and a field $k$.",
+            "F4",
+            "F2",
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Suppose $\\sum_{O\\in\\mathcal O}a_O\\mathbf1_O=0$. Fix any orbit $O$ and one $x\\in O$, possible because $O$ is nonempty. Evaluation at $x$ gives $a_O=0$. This holds for each orbit separately, so no simultaneous choice is required. Also different orbits have different indicators by evaluation on either orbit and $1_k\\ne0_k$. Hence these $|\\mathcal O|$ vectors are independent and, by F5 and step 2.1, form a basis, giving the asserted dimension.",
+          "inputs": [
+            "A left action of $G$ on $X$, a finite orbit set $\\mathcal O$, and a field $k$.",
+            "F5",
+            "2.1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "On $X=G$, set $g\\cdot x=gxg^{-1}$. Then $exe^{-1}=x$ and $(gh)x(gh)^{-1}=g(hxh^{-1})g^{-1}$, so this is an action by F1. F6 identifies its orbits as the conjugacy classes. Invariance is precisely constancy on conjugacy classes, the definition of a class function here. If $G$ is finite there are finitely many classes, so steps 1.1–3.1 apply.",
+          "inputs": [
+            "A left action of $G$ on $X$, a finite orbit set $\\mathcal O$, and a field $k$.",
+            "F1",
+            "F6",
+            "1.1",
+            "3.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "If $X=\\varnothing$, there is just the empty function, which is the zero function; there are no orbits and F4 gives the zero function as the empty sum. F5 gives the empty basis and dimension zero. With one orbit, step 2.1 reads $f=c_X\\mathbf1_X$, and step 3.1 proves that this single nonzero indicator is a basis.",
+          "inputs": [
+            "A left action of $G$ on $X$, a finite orbit set $\\mathcal O$, and a field $k$.",
+            "F4",
+            "F5",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 5.1 treats X empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 5.1 treats the zero function space; step 3.1 treats zero coefficients."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 5.1 treats one orbit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "statement permits infinite X provided its orbit set is finite; steps 1.2–3.1 only sum over orbits."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The orbit set is not an interval."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.2 uses unique orbit values; step 3.1 takes a witness only for one arbitrary nonempty orbit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The main assertion is a basis construction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The main assertion is a basis construction."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "phase-2-wave-1 alpha-d Step 6b",
+        "notes": "Finite orbit set, not necessarily finite X: thm-orbits-partition-the-set supplies disjoint nonempty orbits. The unique constant value on an orbit defines coefficients without choosing representatives. Evaluation proves spanning and independence over any field, including positive characteristic. Empty X gives the zero function space and empty basis; a singleton orbit gives one nonzero basis vector. Conjugation is explicitly an action. Checked F1–F6 and steps 1.1–5.1; Etingof §4.2 and Judson §14.2 only supply the class-function setting."
+      }
+    },
+    "lem-standard-hermitian-form-on-functions-on-a-nonempty-finite-set-is-an-inner-product": {
+      "assumptions": "$X$ finite and nonempty, $m=|X|>0$ viewed in $\\mathbb R\\subset\\mathbb C$, and functions $f,h:X\\to\\mathbb C$. No axiom of choice is assumed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-inner-product-space",
+          "source_section": "Definition",
+          "quote": "Let $F$ be either $\\mathbb R$ or $\\mathbb C$, with conjugation equal to the identity on $\\mathbb R$ and with complex conjugation as in [[def-complex-conjugate-real-imaginary-part-and-modulus]]. An **inner product** on an $F$-vector space $V$ is a function $\\langle\\,\\cdot\\,,\\,\\cdot\\,\\rangle:V\\times V\\to F$ such that for all $u,v,w\\in V$ and $a,b\\in F$:\n\n1. $\\langle au+bv,w\\rangle=a\\langle u,w\\rangle+b\\langle v,w\\rangle$;\n2. $\\langle u,v\\rangle=\\overline{\\langle v,u\\rangle}$;\n3. $\\langle v,v\\rangle$ is real and nonnegative, and $\\langle v,v\\rangle=0$ if and only if $v=0$.\n\nThe first two clauses imply conjugate-linearity in the second argument: $\\langle u,av+bw\\rangle=\\overline a\\langle u,v\\rangle+\\overline b\\langle u,w\\rangle$. This is the linear-first convention of [[def-sesquilinear-and-hermitian-forms-over-a-field-with-involution]]. A vector space equipped with an inner product is an **inner product space**.",
+          "uses": [
+            "3.1"
+          ],
+          "application": "The linear-first inner-product axioms are linearity in the first variable, conjugate symmetry, and positive definiteness"
+        },
+        {
+          "fact": "F2",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "1.1"
+          ],
+          "application": "For $z=a+bi$, $\\overline z=a-bi$ and $|z|=\\sqrt{a^2+b^2}$"
+        },
+        {
+          "fact": "F3",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ ([[def-finite-cardinality]]), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n([[def-equinumerous]]), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of [[def-finite-sum]] when the\nvalues are real and of [[def-nat-finite-sum-and-product]] when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ ([[def-injection-surjection-bijection]]), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\n[[lem-finite-sum-permutation-invariance]] to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an\nenumeration: it asserts that all enumerations give the same value, and that value\nis what the notation names. Only one bijection is ever produced at a time, from a\nset already known to be nonempty.\n\n**Three clauses, recorded here because the page uses them constantly.**\n\n**(a) The bridge to the old notation.** Taking $S = n$ and $\\varphi = \\mathrm{id}_n$,\nwhich is legitimate since $\\lvert n\\rvert = n$, gives\n\n$$\\sum_{i \\in n} a_i = \\sum_{k<n} a_k, \\qquad \\prod_{i \\in n} a_i = \\prod_{k<n} a_k .$$\n\nSo the new notation **extends** the sum over an initial segment rather than\ncompeting with it, and every law proved for the latter is available for the\nformer whenever the index set is a natural number.\n\n**(b) Reindexing along a bijection.** If $h : T \\to S$ is a bijection of finite\nsets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for\nproducts. Indeed $\\lvert T\\rvert = \\lvert S\\rvert = n$ by transport\n([[def-finite-cardinality]]), and if $\\varphi : n \\to S$ is a bijection then\n$h^{-1} \\circ \\varphi : n \\to T$ is one, so\n$\\sum_{j \\in T} a_{h(j)} = \\sum_{k<n} a_{h(h^{-1}(\\varphi(k)))} = \\sum_{k<n} a_{\\varphi(k)} = \\sum_{i \\in S} a_i$.\n\n**(c) The empty index set and a constant summand.** $\\lvert\\varnothing\\rvert = 0$,\nso $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$ by\nthe base clause of the recursion. And for a constant $c$, clause (a) together\nwith the constant clause of [[lem-nat-finite-sum-laws-and-the-canonical-embedding]]\nin $\\mathbb{N}$, or clause 2 of [[lem-finite-sum-laws]] in $\\mathbb{R}$, gives\n\n$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}), \\qquad \\sum_{i \\in S} c = \\iota(\\lvert S\\rvert)\\cdot c \\quad (c \\in \\mathbb{R}),$$\n\nthe second with $\\iota$ written out because $\\lvert S\\rvert$ is a natural number\nand not an element of $\\mathbb{R}$ ([[def-canonical-natural]]).",
+          "uses": [
+            "2.3"
+          ],
+          "application": "Finite real sums are defined by enumeration, independently of that enumeration"
+        },
+        {
+          "fact": "F4",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical natural $\\iota(n) \\in \\mathbb{R}$ ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "2.3"
+          ],
+          "application": "A finite sum of nonnegative reals is nonnegative and is zero only if every summand is zero"
+        },
+        {
+          "fact": "F5",
+          "source": "def-finite-sum-in-a-commutative-monoid",
+          "source_section": "Definition",
+          "quote": "Let $(M,+,0)$ be a commutative monoid ([[def-semigroup-and-monoid]]), let $S$ be a finite set with $n:=|S|$ ([[def-finite-cardinality]]), and let $a:S\\to M$. Choose a bijection $\\phi:n\\to S$ and define\n\n$$\\sum_{s\\in S}a_s:=a_{\\phi(0)}+a_{\\phi(1)}+\\cdots+a_{\\phi(n-1)},$$\n\nwhere the right side is the finite monoid product of [[def-monoid-finite-product]] written additively. In particular, the sum over the empty set is $0$.\n\nThis value is independent of the enumeration. If $\\psi:n\\to S$ is another bijection, then $\\phi^{-1}\\circ\\psi$ is a permutation of $n$ ([[def-injection-surjection-bijection]]), and generalised commutativity gives\n\n$$\\sum_{k<n}a_{\\psi(k)}=\\sum_{k<n}a_{\\phi(k)}$$\n\n([[thm-generalised-associativity]]). Thus the displayed notation names one element of $M$ and does not select a preferred enumeration.\n\nWhen $M$ is the additive monoid of $\\mathbb R$ or of $\\mathbb N$, this definition agrees with [[def-sum-over-a-finite-index-set]]: both enumerate $S$, apply the same finite recursion with identity $0$, and are independent of the enumeration.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.3"
+          ],
+          "application": "Finite monoid sums are independent of enumeration and agree with real sums on real summands"
+        },
+        {
+          "fact": "F6",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.2",
+            "2.2",
+            "2.3"
+          ],
+          "application": "Conjugation preserves addition and multiplication, is involutive, and $z\\overline z=|z|^2\\ge0$ with equality exactly at $z=0$"
+        },
+        {
+          "fact": "F7",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.2"
+          ],
+          "application": "A property holding at zero and preserved under successor holds for every natural number"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Pointwise addition and scaling make $\\mathbb C^X$ a vector space: each abelian addition identity, both distributive identities, scalar associativity and the scalar identity hold at each $x$ by the field laws in $\\mathbb C$. F5 defines every complex sum in the displayed form. Since $m>0$, $m^{-1}$ exists and is positive real, and F2 gives $\\overline{m^{-1}}=m^{-1}$. Thus the form is defined on every pair of functions.",
+          "inputs": [
+            "$X$ finite and nonempty, $m=|X|>0$ viewed in $\\mathbb R\\subset\\mathbb C$, and functions $f,h:X\\to\\mathbb C$.",
+            "F5",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "For complex lists $a_j,b_j$ and $c\\in\\mathbb C$, finite sums satisfy $\\sum_j(a_j+b_j)=\\sum_j a_j+\\sum_j b_j$, $\\sum_j ca_j=c\\sum_j a_j$ and $\\overline{\\sum_j a_j}=\\sum_j\\overline{a_j}$. Here is the induction verifying their complex types: at length zero all sums vanish and $\\overline0=0$. On appending $a,b$, the first formula follows by rearranging $(A+B)+(a+b)=(A+a)+(B+b)$; the second from $cA+ca=c(A+a)$; the third from $\\overline{A+a}=\\overline A+\\overline a$. F7 proves the three identities for every length, and F5 transfers them to any finite enumeration of $X$.",
+          "inputs": [
+            "$X$ finite and nonempty, $m=|X|>0$ viewed in $\\mathbb R\\subset\\mathbb C$, and functions $f,h:X\\to\\mathbb C$.",
+            "F7",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For $a,b\\in\\mathbb C$ and $f_1,f_2,h\\in\\mathbb C^X$, expand the summand and apply step 1.2 to obtain $\\langle af_1+bf_2,h\\rangle=m^{-1}\\sum_x(af_1(x)+bf_2(x))\\overline{h(x)}=a\\langle f_1,h\\rangle+b\\langle f_2,h\\rangle$.",
+          "inputs": [
+            "$X$ finite and nonempty, $m=|X|>0$ viewed in $\\mathbb R\\subset\\mathbb C$, and functions $f,h:X\\to\\mathbb C$.",
+            "1.2"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "Applying conjugation to the finite sum and using its involution gives $\\overline{\\langle h,f\\rangle}=m^{-1}\\sum_x\\overline{h(x)}f(x)=\\langle f,h\\rangle$.",
+          "inputs": [
+            "$X$ finite and nonempty, $m=|X|>0$ viewed in $\\mathbb R\\subset\\mathbb C$, and functions $f,h:X\\to\\mathbb C$.",
+            "1.1",
+            "1.2",
+            "F6"
+          ]
+        },
+        {
+          "id": "derive-2.3",
+          "step": "2.3",
+          "claim": "On the diagonal, F6 gives $\\langle f,f\\rangle=m^{-1}\\sum_x|f(x)|^2$. These are nonnegative real summands, so F5 identifies their sum with the real finite sum of F3, and F4 shows the result is real and nonnegative. If it is zero, multiplication by $m>0$ gives $\\sum_x|f(x)|^2=0$; F4 forces each $|f(x)|^2=0$, hence $f(x)=0$ by F6. Conversely $f=0$ makes every summand zero.",
+          "inputs": [
+            "$X$ finite and nonempty, $m=|X|>0$ viewed in $\\mathbb R\\subset\\mathbb C$, and functions $f,h:X\\to\\mathbb C$.",
+            "F6",
+            "F5",
+            "F3",
+            "F4",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Steps 2.1–2.3 verify F1 and therefore give an inner product. If $X=\\{x\\}$ the expression is $f(x)\\overline{h(x)}$ and the same verification applies. The zero function has diagonal value zero by step 2.3; the empty set is excluded precisely because the prescribed normalization would divide by zero.",
+          "inputs": [
+            "$X$ finite and nonempty, $m=|X|>0$ viewed in $\\mathbb R\\subset\\mathbb C$, and functions $f,h:X\\to\\mathbb C$.",
+            "2.1",
+            "2.3",
+            "F1",
+            "2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "statement excludes empty X; step 3.1 explains the denominator."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.3 treats the zero function in both directions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 calculates the singleton form."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.3 proves there is no nonzero null vector."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "statement requires m>0; step 3.1 covers its smallest value."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.2 uses an arbitrary finite enumeration and F5 makes the value independent of it."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.3: diagonal zero implies f=0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.3: f=0 implies diagonal zero."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "phase-2-wave-1 alpha-d Step 6b",
+        "notes": "The normalization uses the positive real cardinality of nonempty finite X. Complex monoid sums are typed separately from real sums; step 1.2 proves complex distributivity and conjugation by finite induction before use. Linear-first and conjugate symmetry match def-inner-product-space and Axler 6.2–6.3. The real nonnegative-sum clause of lem-finite-sum-laws applies to squared moduli, proving both directions of definiteness. Singleton and zero function checked; empty X correctly excluded because of division by zero. Reader/refuter evidence agrees."
+      }
+    },
+    "lem-equality-case-for-a-finite-sum-of-unit-complex-numbers": {
+      "assumptions": "$n>0$ and $|z_i|=1$ for $1\\le i\\le n$; natural scalars in inequalities are their real images. No axiom of choice is assumed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-complex-conjugate-real-imaginary-part-and-modulus",
+          "source_section": "Definition",
+          "quote": "Every $z\\in\\mathbb C$ has unique coordinates $z=a+bi$\n([[thm-complex-numbers-form-a-field]]). Define\n$$\\operatorname{Re}z=a,\\qquad \\operatorname{Im}z=b,\\qquad \\overline z=a-bi,$$\nand define its **modulus** by\n$$|z|=\\sqrt{a^2+b^2}.$$\nThe real numbers are least-upper-bound complete\n([[cor-cauchy-reals-lub-complete]]), so the nonnegative square root exists and\nis unique by [[thm-of-square-roots]].",
+          "uses": [
+            "4.1",
+            "5.1"
+          ],
+          "application": "The modulus of $a+bi$ is the nonnegative square root of $a^2+b^2$"
+        },
+        {
+          "fact": "F2",
+          "source": "def-sum-over-a-finite-index-set",
+          "source_section": "Definition",
+          "quote": "Let $S$ be a finite set, $n := \\lvert S\\rvert$ ([[def-finite-cardinality]]), and\nlet $a : S \\to \\mathbb{R}$ or $a : S \\to \\mathbb{N}$, written $a_i$ for $a(i)$.\nChoose a bijection $\\varphi : n \\to S$, which exists because $S \\approx n$\n([[def-equinumerous]]), and set\n\n$$\\sum_{i \\in S} a_i := \\sum_{k<n} a_{\\varphi(k)}, \\qquad \\prod_{i \\in S} a_i := \\prod_{k<n} a_{\\varphi(k)},$$\n\nthe right-hand sides being the iterated operations of [[def-finite-sum]] when the\nvalues are real and of [[def-nat-finite-sum-and-product]] when they are natural.\n\n**Independence of the enumeration, which is the content of the definition.** Let\n$\\varphi, \\psi : n \\to S$ be two bijections. Then $\\pi := \\varphi^{-1} \\circ \\psi$\nis a bijection $n \\to n$ ([[def-injection-surjection-bijection]]), and\n$a_{\\psi(k)} = a_{\\varphi(\\pi(k))}$ for every $k < n$. Applying\n[[lem-finite-sum-permutation-invariance]] to the list $c_k := a_{\\varphi(k)}$\ngives\n\n$$\\sum_{k<n} a_{\\psi(k)} = \\sum_{k<n} c_{\\pi(k)} = \\sum_{k<n} c_k = \\sum_{k<n} a_{\\varphi(k)},$$\n\nand identically for products. So the value does not depend on which bijection is\nused, and $\\sum_{i \\in S} a_i$ is a single well-determined element.\n\n**No choice principle is involved.** The definition does not select an\nenumeration: it asserts that all enumerations give the same value, and that value\nis what the notation names. Only one bijection is ever produced at a time, from a\nset already known to be nonempty.\n\n**Three clauses, recorded here because the page uses them constantly.**\n\n**(a) The bridge to the old notation.** Taking $S = n$ and $\\varphi = \\mathrm{id}_n$,\nwhich is legitimate since $\\lvert n\\rvert = n$, gives\n\n$$\\sum_{i \\in n} a_i = \\sum_{k<n} a_k, \\qquad \\prod_{i \\in n} a_i = \\prod_{k<n} a_k .$$\n\nSo the new notation **extends** the sum over an initial segment rather than\ncompeting with it, and every law proved for the latter is available for the\nformer whenever the index set is a natural number.\n\n**(b) Reindexing along a bijection.** If $h : T \\to S$ is a bijection of finite\nsets, then $\\sum_{j \\in T} a_{h(j)} = \\sum_{i \\in S} a_i$, and likewise for\nproducts. Indeed $\\lvert T\\rvert = \\lvert S\\rvert = n$ by transport\n([[def-finite-cardinality]]), and if $\\varphi : n \\to S$ is a bijection then\n$h^{-1} \\circ \\varphi : n \\to T$ is one, so\n$\\sum_{j \\in T} a_{h(j)} = \\sum_{k<n} a_{h(h^{-1}(\\varphi(k)))} = \\sum_{k<n} a_{\\varphi(k)} = \\sum_{i \\in S} a_i$.\n\n**(c) The empty index set and a constant summand.** $\\lvert\\varnothing\\rvert = 0$,\nso $\\sum_{i \\in \\varnothing} a_i = 0$ and $\\prod_{i \\in \\varnothing} a_i = 1$ by\nthe base clause of the recursion. And for a constant $c$, clause (a) together\nwith the constant clause of [[lem-nat-finite-sum-laws-and-the-canonical-embedding]]\nin $\\mathbb{N}$, or clause 2 of [[lem-finite-sum-laws]] in $\\mathbb{R}$, gives\n\n$$\\sum_{i \\in S} c = \\lvert S\\rvert \\cdot c \\quad (c \\in \\mathbb{N}), \\qquad \\sum_{i \\in S} c = \\iota(\\lvert S\\rvert)\\cdot c \\quad (c \\in \\mathbb{R}),$$\n\nthe second with $\\iota$ written out because $\\lvert S\\rvert$ is a natural number\nand not an element of $\\mathbb{R}$ ([[def-canonical-natural]]).",
+          "uses": [
+            "4.1"
+          ],
+          "application": "Real finite sums may be computed in any enumeration"
+        },
+        {
+          "fact": "F3",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical natural $\\iota(n) \\in \\mathbb{R}$ ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2"
+          ],
+          "application": "Finite real sums distribute over addition and scaling, and a sum of nonnegative terms vanishes only when every term vanishes"
+        },
+        {
+          "fact": "F4",
+          "source": "def-finite-sum-in-a-commutative-monoid",
+          "source_section": "Definition",
+          "quote": "Let $(M,+,0)$ be a commutative monoid ([[def-semigroup-and-monoid]]), let $S$ be a finite set with $n:=|S|$ ([[def-finite-cardinality]]), and let $a:S\\to M$. Choose a bijection $\\phi:n\\to S$ and define\n\n$$\\sum_{s\\in S}a_s:=a_{\\phi(0)}+a_{\\phi(1)}+\\cdots+a_{\\phi(n-1)},$$\n\nwhere the right side is the finite monoid product of [[def-monoid-finite-product]] written additively. In particular, the sum over the empty set is $0$.\n\nThis value is independent of the enumeration. If $\\psi:n\\to S$ is another bijection, then $\\phi^{-1}\\circ\\psi$ is a permutation of $n$ ([[def-injection-surjection-bijection]]), and generalised commutativity gives\n\n$$\\sum_{k<n}a_{\\psi(k)}=\\sum_{k<n}a_{\\phi(k)}$$\n\n([[thm-generalised-associativity]]). Thus the displayed notation names one element of $M$ and does not select a preferred enumeration.\n\nWhen $M$ is the additive monoid of $\\mathbb R$ or of $\\mathbb N$, this definition agrees with [[def-sum-over-a-finite-index-set]]: both enumerate $S$, apply the same finite recursion with identity $0$, and are independent of the enumeration.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.2"
+          ],
+          "application": "Complex finite sums are defined in the additive monoid, with empty sum zero"
+        },
+        {
+          "fact": "F5",
+          "source": "lem-finite-sum-reindexing-and-fubini",
+          "source_section": "Statement",
+          "quote": "Let $(M,+,0)$ be a commutative monoid and let all index sets below be finite.\n\n1. If $h:T\\to S$ is a bijection and $a:S\\to M$, then $\\sum_{t\\in T}a_{h(t)}=\\sum_{s\\in S}a_s$.\n2. If $S$ and $T$ are disjoint and $a:S\\cup T\\to M$, then $\\sum_{u\\in S\\cup T}a_u=\\sum_{s\\in S}a_s+\\sum_{t\\in T}a_t$.\n3. If $a:S\\times T\\to M$, then\n   $$\\sum_{(s,t)\\in S\\times T}a_{s,t}=\\sum_{s\\in S}\\left(\\sum_{t\\in T}a_{s,t}\\right)=\\sum_{t\\in T}\\left(\\sum_{s\\in S}a_{s,t}\\right).$$",
+          "uses": [
+            "2.1"
+          ],
+          "application": "Finite monoid sums can be reindexed, split over disjoint subsets, and summed in either order on a Cartesian product"
+        },
+        {
+          "fact": "F6",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1"
+          ],
+          "application": "Conjugation preserves addition and multiplication; $z\\overline z=|z|^2$, $|z|=0$ exactly when $z=0$, and $|zw|=|z||w|$"
+        },
+        {
+          "fact": "F7",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ],
+          "application": "Base and successor steps establish a property for all finite lengths"
+        },
+        {
+          "fact": "F8",
+          "source": "lem-of-square-monotone",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field. For $a, b \\ge 0$:\n\n$$a < b \\iff a^2 < b^2, \\qquad a \\le b \\iff a^2 \\le b^2.$$\n\nMore generally, for arbitrary $a, b \\in F$, $a^2 < b^2 \\iff |a| < |b|$.",
+          "uses": [
+            "4.1"
+          ],
+          "application": "For nonnegative reals, $a\\le b$ if and only if $a^2\\le b^2$"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Put $S=\\sum_{i=1}^n z_i$, using F4. For any complex finite lists, distributivity over a finite sum follows by induction: it holds for the empty sum; appending $a$ changes $cA$ to $c(A+a)=cA+ca$. Likewise conjugation through a finite sum holds at zero and is preserved by $\\overline{A+a}=\\overline A+\\overline a$. F7 therefore gives these identities for every finite length.",
+          "inputs": [
+            "$n>0$ and $|z_i|=1$ for $1\\le i\\le n$; natural scalars in inequalities are their real images.",
+            "F4",
+            "F7",
+            "F6"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Consequently $|S|^2=S\\overline S=\\sum_{i,j}z_i\\overline{z_j}$. Split the pairs into $i=j$, $i<j$ and $j<i$, and reindex the third part by swapping its coordinates, as permitted by F5. The diagonal sum is $n$ since $z_i\\overline{z_i}=1$, giving $|S|^2=n+\\sum_{i<j}(z_i\\overline{z_j}+z_j\\overline{z_i})$.",
+          "inputs": [
+            "$n>0$ and $|z_i|=1$ for $1\\le i\\le n$; natural scalars in inequalities are their real images.",
+            "F5",
+            "1.1",
+            "F6"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "For each pair $i<j$, expand $|z_i-z_j|^2=(z_i-z_j)(\\overline{z_i}-\\overline{z_j})=2-z_i\\overline{z_j}-z_j\\overline{z_i}$. There are $n(n-1)/2$ such pairs: the count is zero at $n=1$, and adjoining index $n+1$ adds the $n$ pairs $(i,n+1)$, so the formula is preserved by $n(n-1)/2+n=n(n+1)/2$. Induction gives this count for all positive $n$. Adding the displayed expansions to step 2.1 cancels each off-diagonal term and yields $\\sum_{i<j}|z_i-z_j|^2=n(n-1)-(|S|^2-n)=n^2-|S|^2$.",
+          "inputs": [
+            "$n>0$ and $|z_i|=1$ for $1\\le i\\le n$; natural scalars in inequalities are their real images.",
+            "2.1",
+            "F6",
+            "F7",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Each squared modulus is a nonnegative real by F1 and F6. Use F2 to enumerate the pair set and F3 to conclude $n^2-|S|^2\\ge0$. Since $|S|\\ge0$ and $n>0$, F8 now gives $|S|\\le n$.",
+          "inputs": [
+            "$n>0$ and $|z_i|=1$ for $1\\le i\\le n$; natural scalars in inequalities are their real images.",
+            "F1",
+            "F6",
+            "F2",
+            "F3",
+            "F8",
+            "3.1"
+          ]
+        },
+        {
+          "id": "derive-4.2",
+          "step": "4.2",
+          "claim": "If $|S|=n$, the identity in step 3.1 makes the sum of squared differences zero. F3 forces $|z_i-z_j|^2=0$ for every pair, and F6 gives $z_i=z_j$. For $n>1$, take the pairs $(1,j)$ to conclude every $z_j=z_1$. For $n=1$ that conclusion already holds and the pair sum is empty.",
+          "inputs": [
+            "$n>0$ and $|z_i|=1$ for $1\\le i\\le n$; natural scalars in inequalities are their real images.",
+            "3.1",
+            "F3",
+            "F6",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Conversely, if every $z_i=z_1$, repeated addition gives $S=nz_1$. Thus $|S|=|n||z_1|=n$ by F6 and the real modulus in F1. At $n=1$ this reads $|z_1|=1$. This proves both directions of the equality characterization.",
+          "inputs": [
+            "$n>0$ and $|z_i|=1$ for $1\\le i\\le n$; natural scalars in inequalities are their real images.",
+            "F6",
+            "F1",
+            "4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 4.2 treats the empty pair set at n=1; the statement excludes an empty summand list."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 4.1 permits S=0; step 4.2 treats zero squared differences."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 4.2–5.1 handle n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 5.1 handles repeated identical summands."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "statement requires n>0, with its lower boundary treated in steps 4.2–5.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All summands are given in an indexed list; no representatives are selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 4.2 proves equality implies agreement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 5.1 proves agreement implies equality."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "phase-2-wave-1 alpha-d Step 6b",
+        "notes": "Verified n²-|sum z_i|²=sum_{i<j}|z_i-z_j|² by diagonal/off-diagonal reindexing and the inductive pair count. All ordered comparisons concern real squared moduli; lem-of-square-monotone applies to nonnegative |S| and positive n. A zero sum of nonnegative terms forces pairwise equality; equal unit summands conversely attain n. n=1 has an empty pair sum and both implications remain valid. Complex finite-sum laws are derived, not incorrectly imported from real-only laws. Etingof Lemma 5.4.5 uses precisely this strictness; no integrality assertion is taken from it."
+      }
+    },
+    "lem-conjugates-of-an-average-of-roots-of-unity-are-averages-of-roots-of-unity": {
+      "assumptions": "$n>0$, each $z_i$ a complex root of unity, and $a=n^{-1}\\sum_{i=1}^n z_i$. No axiom of choice is assumed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-roots-of-unity-in-a-field",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a field and let $n\\ge1$ be an integer. An element $x\\in K$ is an\n**$n$-th root of unity** when $x^{n}=1$, that is when $x$ is a root of\n$t^{n}-1\\in K[t]$ ([[def-polynomial-evaluation-and-root]]). Write\n\n$$\\mu_n(K):=\\{\\,x\\in K: x^{n}=1\\,\\}.$$\n\n**This is a subgroup of $K^{\\times}$** ([[def-subgroup]]). Every $x\\in\\mu_n(K)$\nis invertible, with inverse $x^{n-1}$ ([[def-invertible-element]]), so\n$\\mu_n(K)\\subseteq K^{\\times}$; it contains $1$; it is closed under\nmultiplication, since $(xy)^{n}=x^{n}y^{n}=1$; and it is closed under inverses,\nsince $(x^{-1})^{n}=(x^{n})^{-1}=1$.\n\nAn element $\\zeta\\in\\mu_n(K)\\subseteq K^{\\times}$ is a **primitive $n$-th root\nof unity** when its order in the group $K^{\\times}$ is exactly $n$\n([[def-order-in-a-group]]):\n\n$$\\operatorname{ord}(\\zeta)=n .$$\n\nEquivalently, $\\zeta^n=1$ and no exponent $k$ with $1\\le k<n$ has\n$\\zeta^k=1$.\n\n**An $n$-th root of unity need not be primitive.** In $\\mathbb Q$ the element\n$-1$ is a fourth root of unity of order two, not four; and $\\mu_n(K)$ may consist\nof $1$ alone, as $\\mu_3(\\mathbb Q)$ does. The two notions are separated\ndeliberately, and the exact circumstances under which a primitive $n$-th root of\nunity exists are the content of\n[[prop-the-roots-of-unity-in-a-field-form-a-finite-cyclic-group]] and\n[[thm-separability-of-x-n-minus-one-and-the-order-of-the-group-of-roots-of-unity]].",
+          "uses": [
+            "1.1",
+            "7.1"
+          ],
+          "application": "A root of unity satisfies a positive power equation $z^m=1$; its order is the least positive such exponent"
+        },
+        {
+          "fact": "F2",
+          "source": "thm-isomorphisms-extend-to-splitting-fields",
+          "source_section": "Statement",
+          "quote": "Let $\\sigma:F\\to F'$ be a field isomorphism, let $0\\ne f\\in F[x]$, and put $f'=\\sigma_*f$. If $E/F$ is a splitting field of $f$ and $E'/F'$ is a splitting field of $f'$, then $\\sigma$ extends to a field isomorphism $E\\to E'$.",
+          "uses": [
+            "5.1"
+          ],
+          "application": "An isomorphism of base fields extends to an isomorphism between splitting fields of a nonzero polynomial and its transported polynomial"
+        },
+        {
+          "fact": "F3",
+          "source": "def-conjugate-elements-over-a-field",
+          "source_section": "Definition",
+          "quote": "Let $\\alpha$ and $\\beta$ be elements of field extensions of $F$, both\nalgebraic over $F$. They are **conjugate over $F$** when they have the same\nminimal polynomial over $F$ ([[thm-evaluation-kernel-and-minimal-polynomial]]),\nor equivalently when $\\beta$ is a root of the minimal polynomial of $\\alpha$.\nThe relation is relative to the chosen base field. Relative embeddings and\nautomorphisms are those of\n[[def-f-homomorphisms-and-embeddings-of-field-extensions]].",
+          "uses": [
+            "3.1",
+            "7.1"
+          ],
+          "application": "Conjugates over $\\mathbb Q$ are roots of the same minimal polynomial"
+        },
+        {
+          "fact": "F4",
+          "source": "def-cyclotomic-extension",
+          "source_section": "Definition",
+          "quote": "Let $K$ be a field and $n\\ge1$. A **cyclotomic extension of $K$ of order $n$** is\na splitting field $E$ of $t^{n}-1$ over $K$\n([[def-polynomials-that-split-and-splitting-fields]]); one exists by\n[[thm-splitting-fields-exist-for-nonzero-polynomials]]. It is written\n\n$$K(\\mu_n):=E .$$\n\n**The notation is accurate.** The roots of $t^{n}-1$ in $E$ are exactly the\nelements of $\\mu_n(E)$ ([[def-roots-of-unity-in-a-field]]), and a splitting field\nis generated over $K$ by the roots, so\n\n$$E=K\\bigl(\\mu_n(E)\\bigr)$$\n\nin the sense of [[def-finitely-generated-field-extension]]: $E$ is the smallest\nsubfield of itself containing $K$ and the $n$-th roots of unity it holds.\n\n**When the characteristic does not divide $n$** the extension has a single\ngenerator: by\n[[thm-separability-of-x-n-minus-one-and-the-order-of-the-group-of-roots-of-unity]]\nthe group $\\mu_n(E)$ is then cyclic of order $n$ and\n\n$$K(\\mu_n)=K(\\zeta)$$\n\nfor any primitive $n$-th root of unity $\\zeta\\in E$. Without that hypothesis the\nnotation still names a splitting field, but $\\mu_n(E)$ can be much smaller than\n$n$ and no primitive $n$-th root of unity need exist\n([[prop-p-power-roots-of-unity-in-characteristic-p]]).",
+          "uses": [
+            "1.1"
+          ],
+          "application": "A cyclotomic extension of order $N$ is the splitting field of $t^N-1$, generated by its roots"
+        },
+        {
+          "fact": "F5",
+          "source": "cor-every-complex-polynomial-splits-into-linear-factors",
+          "source_section": "Statement",
+          "quote": "Every nonconstant polynomial in $\\mathbb C[x]$ splits over $\\mathbb C$.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "Every nonconstant complex polynomial splits over $\\mathbb C$"
+        },
+        {
+          "fact": "F6",
+          "source": "thm-finitely-generated-algebraic-extensions-are-finite",
+          "source_section": "Statement",
+          "quote": "If $a_1,\\ldots,a_r$ are algebraic over $F$, then $F(a_1,\\ldots,a_r)/F$ is finite.",
+          "uses": [
+            "2.1"
+          ],
+          "application": "A field obtained by adjoining finitely many algebraic elements has finite degree"
+        },
+        {
+          "fact": "F7",
+          "source": "thm-finite-field-extensions-are-algebraic",
+          "source_section": "Statement",
+          "quote": "Every finite field extension $K/F$ is algebraic: each $a\\in K$ is a root of a nonzero polynomial in $F[t]$.",
+          "uses": [
+            "2.1"
+          ],
+          "application": "Every element of a finite field extension is algebraic"
+        },
+        {
+          "fact": "F8",
+          "source": "prop-algebraic-splitting-extensions-are-normal",
+          "source_section": "Statement",
+          "quote": "Let $E/F$ be algebraic. If $E$ is a splitting field over $F$ of a nonzero polynomial $f\\in F[x]$, then $E/F$ is normal.",
+          "uses": [
+            "3.1"
+          ],
+          "application": "An algebraic splitting field of a nonzero polynomial is normal"
+        },
+        {
+          "fact": "F9",
+          "source": "lem-an-isomorphism-extends-across-a-simple-root-adjunction",
+          "source_section": "Statement",
+          "quote": "Let $\\sigma:F\\to F'$ be a field isomorphism, let $p\\in F[x]$ be monic and irreducible, and put $p'=\\sigma_*p$. If $\\alpha$ is a root of $p$ in an extension of $F$ and $\\beta$ is a root of $p'$ in an extension of $F'$, then there is a unique field isomorphism\n$$ \\widetilde\\sigma:F(\\alpha)\\longrightarrow F'(\\beta) $$\nextending $\\sigma$ and satisfying $\\widetilde\\sigma(\\alpha)=\\beta$.",
+          "uses": [
+            "4.1"
+          ],
+          "application": "If two elements are roots of corresponding monic irreducible polynomials, a base-field isomorphism extends to their simple fields sending one root to the other"
+        },
+        {
+          "fact": "F10",
+          "source": "def-finite-sum-in-a-commutative-monoid",
+          "source_section": "Definition",
+          "quote": "Let $(M,+,0)$ be a commutative monoid ([[def-semigroup-and-monoid]]), let $S$ be a finite set with $n:=|S|$ ([[def-finite-cardinality]]), and let $a:S\\to M$. Choose a bijection $\\phi:n\\to S$ and define\n\n$$\\sum_{s\\in S}a_s:=a_{\\phi(0)}+a_{\\phi(1)}+\\cdots+a_{\\phi(n-1)},$$\n\nwhere the right side is the finite monoid product of [[def-monoid-finite-product]] written additively. In particular, the sum over the empty set is $0$.\n\nThis value is independent of the enumeration. If $\\psi:n\\to S$ is another bijection, then $\\phi^{-1}\\circ\\psi$ is a permutation of $n$ ([[def-injection-surjection-bijection]]), and generalised commutativity gives\n\n$$\\sum_{k<n}a_{\\psi(k)}=\\sum_{k<n}a_{\\phi(k)}$$\n\n([[thm-generalised-associativity]]). Thus the displayed notation names one element of $M$ and does not select a preferred enumeration.\n\nWhen $M$ is the additive monoid of $\\mathbb R$ or of $\\mathbb N$, this definition agrees with [[def-sum-over-a-finite-index-set]]: both enumerate $S$, apply the same finite recursion with identity $0$, and are independent of the enumeration.",
+          "uses": [
+            "2.1",
+            "6.1"
+          ],
+          "application": "Finite sums use repeated addition with empty sum zero"
+        },
+        {
+          "fact": "F11",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "6.1"
+          ],
+          "application": "Base and successor steps prove a statement for every finite length"
+        },
+        {
+          "fact": "F12",
+          "source": "def-normal-algebraic-extension",
+          "source_section": "Definition",
+          "quote": "An algebraic field extension $E/F$ is **normal** if, for every $\\alpha\\in E$, the minimal polynomial of $\\alpha$ over $F$ splits over $E$.\n\nEquivalently, every irreducible polynomial $p\\in F[x]$ that has one root in $E$ splits over $E$. Indeed, the monic associate of such a $p$ is the minimal polynomial of any one of its roots in $E$, and multiplying by a nonzero scalar does not change whether a polynomial splits.",
+          "uses": [
+            "3.1"
+          ],
+          "application": "Normality says each element’s minimal polynomial over the base field splits in the extension"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Let $m_i$ be the positive order of $z_i$, and set $N=m_1\\cdots m_n>0$. Each $m_i$ divides $N$, hence $z_i^N=(z_i^{m_i})^{N/m_i}=1$. The nonconstant polynomial $q(t)=t^N-1$ splits in $\\mathbb C$ by F5. Let $R$ be its set of roots there and $E=\\mathbb Q(R)\\subset\\mathbb C$. The linear factorization has $N$ factors, so $R$ is finite. The polynomial splits over $E$, and $E$ is generated by these roots, so it is the cyclotomic splitting field of F4. All $z_i$ belong to $E$.",
+          "inputs": [
+            "$n>0$, each $z_i$ a complex root of unity, and $a=n^{-1}\\sum_{i=1}^n z_i$.",
+            "F5",
+            "F4",
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Each member of $R$ is algebraic over $\\mathbb Q$, being a root of $q\\in\\mathbb Q[t]\\setminus\\{0\\}$. F6 makes $E/\\mathbb Q$ finite, and F7 makes it algebraic. As $1/n\\in\\mathbb Q$, repeated addition and multiplication in $E$ show that $a\\in E$; F10 gives the same finite sum in $E$ and $\\mathbb C$. In particular $a$ is algebraic by F7.",
+          "inputs": [
+            "$n>0$, each $z_i$ a complex root of unity, and $a=n^{-1}\\sum_{i=1}^n z_i$.",
+            "F6",
+            "F7",
+            "F10",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "F8 applies to the algebraic splitting field $E/\\mathbb Q$ of the nonzero polynomial $q$, giving normality. Let $p$ be the monic minimal polynomial of $a$ over $\\mathbb Q$. By F12, $p$ splits over $E$. If $b\\in\\mathbb C$ is a conjugate of $a$, then $p(b)=0$ by F3. Write $p(t)=\\prod_j(t-r_j)$ with $r_j\\in E$. The field $\\mathbb C$ has no zero divisors, so $\\prod_j(b-r_j)=0$ forces $b=r_j$ for some $j$; thus $b\\in E$.",
+          "inputs": [
+            "$n>0$, each $z_i$ a complex root of unity, and $a=n^{-1}\\sum_{i=1}^n z_i$.",
+            "F8",
+            "F12",
+            "F3",
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Apply F9 to the identity isomorphism of $\\mathbb Q$ and the monic irreducible polynomial $p$, with roots $a$ and $b$. It gives a $\\mathbb Q$-isomorphism $\\tau:\\mathbb Q(a)\\to\\mathbb Q(b)$ satisfying $\\tau(a)=b$. Both fields lie in $E$. Since $\\mathbb Q\\subseteq\\mathbb Q(a)\\subseteq E$, one has $\\mathbb Q(a)(R)=E$; the two inclusions follow respectively because $E$ contains $a,R$ and because $\\mathbb Q(R)=E$. The same argument gives $\\mathbb Q(b)(R)=E$. Thus $E$ is a splitting field of $q$ over each of these base fields.",
+          "inputs": [
+            "$n>0$, each $z_i$ a complex root of unity, and $a=n^{-1}\\sum_{i=1}^n z_i$.",
+            "F9",
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "The coefficients of $q$ are rational and $\\tau$ fixes them, so $\\tau_*q=q\\ne0$. Apply F2 to the two splitting-field structures from step 4.1. It extends $\\tau$ to a field isomorphism $\\sigma:E\\to E$. This is a $\\mathbb Q$-automorphism and $\\sigma(a)=b$.",
+          "inputs": [
+            "$n>0$, each $z_i$ a complex root of unity, and $a=n^{-1}\\sum_{i=1}^n z_i$.",
+            "F2",
+            "4.1"
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "A field homomorphism preserves finite sums: it sends the empty sum to $0$, and $\\sigma(A+z)=\\sigma(A)+\\sigma(z)$ preserves the assertion when a term is appended; F11 proves this for every length in F10. Since $\\sigma(1/n)=1/n$, it follows that $b=\\sigma(a)=n^{-1}\\sum_i\\sigma(z_i)$.",
+          "inputs": [
+            "$n>0$, each $z_i$ a complex root of unity, and $a=n^{-1}\\sum_{i=1}^n z_i$.",
+            "F11",
+            "F10",
+            "5.1"
+          ]
+        },
+        {
+          "id": "derive-7.1",
+          "step": "7.1",
+          "claim": "Multiplicativity gives $\\sigma(z_i)^{m_i}=\\sigma(z_i^{m_i})=1$. If $\\sigma(z_i)^d=1$ for a positive $d<m_i$, applying $\\sigma^{-1}$ gives $z_i^d=1$, contrary to the definition of $m_i$ in F1. Thus the order is exactly $m_i$. This covers $m_i=1$ and repeated roots. When $n=1$, the construction still applies with $a=z_1$. When $a=0$, its minimal polynomial is $t$, so $b=0$; steps 4.1–6.1 still apply. No step imposed integrality on $a$.",
+          "inputs": [
+            "$n>0$, each $z_i$ a complex root of unity, and $a=n^{-1}\\sum_{i=1}^n z_i$.",
+            "F1",
+            "4.1",
+            "6.1",
+            "1.1",
+            "5.1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "statement excludes n=0, where the average is undefined."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 7.1 treats a=0 and b=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 7.1 treats n=1 and root order 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 7.1 allows repeated roots, and step 1.1 allows N=1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "statement requires n>0; step 7.1 treats n=1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 4.1–5.1 use uniquely defined orders and one extension for an arbitrary b; no simultaneous family of automorphisms is chosen."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The assertion quantifies over conjugates and is not a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The assertion quantifies over conjugates and is not a biconditional."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "phase-2-wave-1 alpha-d Step 6b",
+        "notes": "For n>0, the product N of positive root orders gives a finite splitting field E of t^N-1 inside C. Its finite algebraic extension contains a. Normality (prop-algebraic-splitting-extensions-are-normal and def-normal-algebraic-extension) first puts every conjugate b in E. The actual Q(a)→Q(b) root isomorphism then extends between the two splitting-field structures on E, using thm-isomorphisms-extend-to-splitting-fields. Rational coefficients are fixed, so the average transports; applying the inverse automorphism preserves exact orders. n=1, a=0, order one and repetitions checked. Milne Proposition 2.12/Corollary 2.13 and Definition 3.7 support this route. No integrality premise or conclusion from Etingof Lemma 5.4.5 is imported."
+      }
+    },
+    "lem-kernel-of-a-direct-sum-of-representations-is-the-intersection": {
+      "assumptions": "A finite index set $I$ and homomorphisms $\\rho_i:G\\to\\operatorname{GL}(V_i)$ with each $V_i$ finite-dimensional over $k$. No axiom of choice is assumed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-dimensional-representation-of-a-group-over-a-field",
+          "source_section": "Definition",
+          "quote": "Let $k$ be a field ([[def-field]]) and let $G$ be a group. A\n**finite-dimensional representation of $G$ over $k$** is a finite-dimensional\n$k$-vector space $V$ ([[def-vector-space]], [[def-dimension]]) together with a\ngroup homomorphism\n$$\\rho:G\\longrightarrow \\operatorname{GL}(V),$$\nwhere $\\operatorname{GL}(V)$ denotes the group of invertible $k$-linear maps\n$V \\to V$ ([[def-linear-isomorphism-and-invertible-linear-map]], [[def-group-homomorphism]]).\n\nThe associated action is\n$$g \\cdot v:=\\rho(g)(v).$$\nThis makes $V$ into a $G$-module over $k$ in the sense of\n[[def-g-module-over-a-commutative-ring]].\n\nThe **degree** of the representation is the dimension of its underlying vector\nspace:\n$$\\deg(\\rho):=\\dim_k V.$$",
+          "uses": [
+            "1.2",
+            "2.1"
+          ],
+          "application": "A finite-dimensional representation is a homomorphism to the group of invertible linear maps of a finite-dimensional space"
+        },
+        {
+          "fact": "F2",
+          "source": "def-kernel-and-image-of-group-homomorphism",
+          "source_section": "Definition",
+          "quote": "The kernel and image of a group homomorphism.\n\nFor a group homomorphism $f:G\\to H$, define\n\n$$\\ker f:=\\{g\\in G:f(g)=e_H\\},\\qquad\\operatorname{im}f:=\\{f(g):g\\in G\\}.$$\n\nThus $f$ is surjective exactly when $\\operatorname{im}f=H$\n([[def-injection-surjection-bijection]]).",
+          "uses": [
+            "2.2",
+            "3.1",
+            "4.1"
+          ],
+          "application": "The kernel consists of elements mapped to the identity of the target group"
+        },
+        {
+          "fact": "F3",
+          "source": "def-direct-sum-of-a-family-of-modules",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a unital ring and $(M_i)_{i\\in I}$ a family of left $R$-modules ([[def-left-and-right-modules]]). Their **direct product** is the module $\\prod_{i\\in I}M_i$ with coordinatewise operations. The **support** of $m=(m_i)$ is $\\{i\\in I:m_i\\ne0\\}$, and the **direct sum** is the submodule\n$$\\bigoplus_{i\\in I}M_i=\\{m\\in\\prod_{i\\in I}M_i:\\operatorname{supp}(m)\\text{ is finite}\\}$$\n([[def-submodule]]).\n\nThis subset is a submodule because the support of a sum is contained in the union of two finite supports and scalar multiplication cannot enlarge support.\n\nFor each $i$, the coordinate inclusion $\\jmath_i:M_i\\to\\bigoplus_jM_j$ puts its input in coordinate $i$ and zero elsewhere. If $I=\\varnothing$, both product and direct sum are the zero module.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.2",
+            "4.1"
+          ],
+          "application": "The direct sum consists of finitely supported tuples with coordinatewise operations and has coordinate inclusions; the empty sum is zero"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Because $I$ is finite, every tuple has finite support, so $V=\\prod_{i\\in I}V_i$ with the operations in F3. Choose a finite basis of each $V_i$. This uses only finitely many existential witnesses. Their coordinate inclusions form a finite basis of $V$: they span because each coordinate has a basis expansion, and a zero combination has all coefficients zero by projecting to each coordinate and using that coordinate’s independence. Thus $V$ is finite-dimensional. Zero-dimensional coordinates contribute empty bases.",
+          "inputs": [
+            "A finite index set $I$ and homomorphisms $\\rho_i:G\\to\\operatorname{GL}(V_i)$ with each $V_i$ finite-dimensional over $k$.",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "For $g\\in G$, define $\\rho(g)$ by the displayed coordinate formula. The equality $\\rho_i(g)(av_i+bw_i)=a\\rho_i(g)v_i+b\\rho_i(g)w_i$ in every coordinate proves linearity. Also $\\rho_i(g)\\rho_i(g^{-1})=\\operatorname{id}_{V_i}$ and the reversed product is the identity, so $\\rho(g^{-1})$ is a two-sided inverse of $\\rho(g)$. Hence $\\rho(g)\\in\\operatorname{GL}(V)$.",
+          "inputs": [
+            "A finite index set $I$ and homomorphisms $\\rho_i:G\\to\\operatorname{GL}(V_i)$ with each $V_i$ finite-dimensional over $k$.",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For every tuple $v$, the $i$-coordinate of $\\rho(gh)v$ is $\\rho_i(gh)v_i=\\rho_i(g)\\rho_i(h)v_i$, the $i$-coordinate of $\\rho(g)\\rho(h)v$. Similarly $\\rho(e)v=v$. Therefore $\\rho$ is a homomorphism and, with step 1.1, a finite-dimensional representation as in F1.",
+          "inputs": [
+            "A finite index set $I$ and homomorphisms $\\rho_i:G\\to\\operatorname{GL}(V_i)$ with each $V_i$ finite-dimensional over $k$.",
+            "1.1",
+            "F1",
+            "1.2"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "If $g\\in\\ker\\rho$, F2 gives $\\rho(g)=\\operatorname{id}_V$. For any $i$ and $v_i\\in V_i$, apply this equality to the coordinate inclusion $\\jmath_i(v_i)$. Its $i$-coordinate yields $\\rho_i(g)v_i=v_i$. Since $v_i$ was arbitrary, $\\rho_i(g)=\\operatorname{id}_{V_i}$, so $g\\in\\ker\\rho_i$ for every $i$.",
+          "inputs": [
+            "A finite index set $I$ and homomorphisms $\\rho_i:G\\to\\operatorname{GL}(V_i)$ with each $V_i$ finite-dimensional over $k$.",
+            "F2",
+            "F3",
+            "1.2"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Conversely, if $g\\in\\ker\\rho_i$ for every $i$, then for every tuple $v$, $\\rho(g)v=(\\rho_i(g)v_i)_i=(v_i)_i=v$. Hence $\\rho(g)=\\operatorname{id}_V$ and $g\\in\\ker\\rho$. This proves the intersection formula.",
+          "inputs": [
+            "A finite index set $I$ and homomorphisms $\\rho_i:G\\to\\operatorname{GL}(V_i)$ with each $V_i$ finite-dimensional over $k$.",
+            "F2",
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "For $I=\\varnothing$, F3 gives $V=0$. Its unique endomorphism is its identity and is invertible, so every $g$ acts identically and $\\ker\\rho=G$. The condition that $g$ lie in each kernel is vacuous, giving the same $G$. For a one-element family steps 2.2–3.1 give the single coordinate kernel. For a zero coordinate its kernel is $G$, so it places no further restriction on the intersection.",
+          "inputs": [
+            "A finite index set $I$ and homomorphisms $\\rho_i:G\\to\\operatorname{GL}(V_i)$ with each $V_i$ finite-dimensional over $k$.",
+            "F3",
+            "2.2",
+            "3.1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 4.1 treats the empty direct sum and empty intersection."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1 and 4.1 treat zero-dimensional coordinates."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 4.1 treats a singleton family."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1 treats all-zero coordinates as well."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The index set has no prescribed ordering or endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 uses finitely many basis witnesses, not arbitrary-index choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.2 gives kernel containment in every coordinate kernel."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 3.1 gives the reverse containment."
+        }
+      ]
+    },
+    "lem-a-group-is-abelian-iff-every-conjugacy-class-is-a-singleton": {
+      "assumptions": "A group $G$, with identity $e$. No axiom of choice is assumed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-conjugacy-class-and-centralizer",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a group and $x\\in G$ ([[def-group]]). The **conjugacy class** of\n$x$ is\n\n$$\\operatorname{Cl}_G(x):=\\{gxg^{-1}:g\\in G\\}.$$\n\nThe **centralizer** of $x$ is\n\n$$C_G(x):=\\{g\\in G:gx=xg\\}=\\{g\\in G:gxg^{-1}=x\\}.$$\n\nThe subgroup property implicit in the notation is proved in\n[[lem-centralizers-and-normalizers-are-subgroups]].",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ],
+          "application": "$\\operatorname{Cl}_G(h)=\\{ghg^{-1}:g\\in G\\}$"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "If $G$ is abelian, then for all $g,h\\in G$ one has $ghg^{-1}=hgg^{-1}=h$. Thus every element of $\\operatorname{Cl}_G(h)$ is $h$; and $ehe^{-1}=h$ shows that $h$ belongs to the class. Hence $\\operatorname{Cl}_G(h)=\\{h\\}$.",
+          "inputs": [
+            "A group $G$, with identity $e$.",
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Conversely, suppose every class is a singleton. Since $ehe^{-1}=h$, that singleton must be $\\{h\\}$. For arbitrary $g,h$, F1 then gives $ghg^{-1}=h$. Multiplying on the right by $g$ yields $gh=hg$. Thus every pair commutes and $G$ is abelian.",
+          "inputs": [
+            "A group $G$, with identity $e$.",
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "In the trivial group the sole class is $\\{e\\}$ and $ee=ee$, so both properties hold. In all groups, the membership $h\\in\\operatorname{Cl}_G(h)$ used above prevents empty classes. The argument quantifies over arbitrary $g,h$ and makes no cardinality assumption.",
+          "inputs": [
+            "A group $G$, with identity $e$.",
+            "F1",
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 proves classes nonempty; a group contains its identity."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no vector or scalar zero in this statement."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 treats the one-element group."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 includes both trivial and infinite groups."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no ordered parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 uses h itself as a class witness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves that commutativity fixes every element under conjugation and identifies each conjugacy class with its singleton."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the singleton-class hypothesis to obtain ghg^{-1}=h for arbitrary g,h, hence gh=hg."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "phase-2-wave-1 alpha-d Step 6b",
+        "notes": "Both directions checked for arbitrary groups against def-conjugacy-class-and-centralizer. Commutativity gives ghg^-1=h and identity conjugation ensures the class is nonempty. Conversely singleton membership gives ghg^-1=h for every g,h; right multiplication by g gives gh=hg. The trivial group satisfies both sides, and no finite cardinality or choice is used. Current contract now points separately to steps 1.1 and 1.2. Judson §14.2 and Etingof §4.3(1) agree with the limited source use."
+      }
+    },
+    "ex-coordinate-projection-onto-a-subspace-of-c-three": {
+      "assumptions": "$P:\\mathbb C^3\\to\\mathbb C^3$, $P(x,y,z)=(x,x+z,z)$, and the subspace $U$ displayed above. No axiom of choice is assumed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-finite-dimensional-subspace-admits-a-linear-projection-without-choice",
+          "source_section": "Statement",
+          "quote": "For a subspace $U$ of a finite-dimensional $k$-vector space $V$, there is a linear $P:V\\to V$ with $P^2=P$, $\\operatorname{im}P=U$, and $P|_U=\\operatorname{id}_U$. No choice axiom is required. This includes $U=0$ and $U=V$.",
+          "uses": [
+            "2.1"
+          ],
+          "application": "The existence lemma supplies the projection interface; the example explicitly verifies linearity, idempotence, image and restriction for this formula."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "For $v=(x,y,z)$, $v'=(x',y',z')$ and $a,b\\in\\mathbb C$, the formula gives $P(av+bv')=(ax+bx',a(x+z)+b(x'+z'),az+bz')=aP(v)+bP(v')$. Moreover $P^2(x,y,z)=P(x,x+z,z)=(x,x+z,z)=P(x,y,z)$.",
+          "inputs": [
+            "$P:\\mathbb C^3\\to\\mathbb C^3$, $P(x,y,z)=(x,x+z,z)$, and the subspace $U$ displayed above."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For every $(x,y,z)$, $P(x,y,z)=x(1,1,0)+z(0,1,1)\\in U$. Conversely any $u=s(1,1,0)+t(0,1,1)=(s,s+t,t)$ satisfies $P(u)=(s,s+t,t)=u$, so $\\operatorname{im}P=U$ and $P|_U=\\operatorname{id}_U$. This explicitly realizes the projection supplied by F1.",
+          "inputs": [
+            "$P:\\mathbb C^3\\to\\mathbb C^3$, $P(x,y,z)=(x,x+z,z)$, and the subspace $U$ displayed above.",
+            "F1",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The equation $P(x,y,z)=0$ is equivalent to $x=0$ and $z=0$, with $y$ arbitrary. Hence $\\ker P=\\{(0,y,0):y\\in\\mathbb C\\}=\\operatorname{span}\\{(0,1,0)\\}$. Every vector decomposes as $(x,y,z)=(x,x+z,z)+(0,y-x-z,0)$ with the first summand in $U$ and the second in $\\ker P$. If $(s,s+t,t)=(0,y,0)$, then $s=t=y=0$, so the intersection is zero and the decomposition is unique. Thus the stated kernel is exactly the direction along which $P$ projects.",
+          "inputs": [
+            "$P:\\mathbb C^3\\to\\mathbb C^3$, $P(x,y,z)=(x,x+z,z)$, and the subspace $U$ displayed above.",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The displayed basis and ambient space are fixed and nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 gives P(0)=0; step 3.1 computes the zero fiber."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 gives P(1,1,0)=(1,1,0)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1 proves the range and kernel meet only at zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The coordinates range over C without endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The formula specifies P explicitly and requires no selected complement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 3.1: P(x,y,z)=0 implies x=z=0."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 3.1: x=z=0 implies P(x,y,z)=0."
+        }
+      ]
+    },
+    "ex-conjugacy-class-indicator-basis-for-s-three": {
+      "assumptions": "$S_3$ is the permutation group of $\\{1,2,3\\}$; products act rightmost first, and $k$ is a field. No axiom of choice is assumed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-indicator-basis-for-invariant-functions-on-a-finite-orbit-partition",
+          "source_section": "Statement",
+          "quote": "Let a group $G$ act on a set $X$ with finitely many distinct orbits $\\mathcal O$, and let $k$ be any field. The invariant functions $f:X\\to k$, meaning $f(g\\cdot x)=f(x)$ for all $g,x$, form a vector space under pointwise operations. Its basis is $\\{\\mathbf1_O:O\\in\\mathcal O\\}$ and its dimension is $|\\mathcal O|$. Here $\\mathbf1_O$ is $1_k$ on $O$ and $0_k$ elsewhere. For conjugation on a finite group, these are the class functions and conjugacy-class indicators. If $X=\\varnothing$, the basis is empty.",
+          "uses": [
+            "2.1"
+          ],
+          "application": "For conjugation on a finite group, the distinct conjugacy-class indicators form a basis of class functions over any field"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Conjugation sends a transposition $(ab)$ to $(\\tau(a)\\,\\tau(b))$: at $\\tau(a)$ the composite $\\tau(ab)\\tau^{-1}$ sends $\\tau(a)$ to $\\tau(b)$, at $\\tau(b)$ it sends it to $\\tau(a)$, and it fixes every other point. In particular $(23)(12)(23)=(13)$ and $(13)(12)(13)=(23)$. Thus all three transpositions, and no other permutations, constitute one conjugacy class.",
+          "inputs": [
+            "$S_3$ is the permutation group of $\\{1,2,3\\}$; products act rightmost first, and $k$ is a field."
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Similarly, $\\tau(123)\\tau^{-1}$ sends $\\tau(1)$ to $\\tau(2)$, then to $\\tau(3)$, then to $\\tau(1)$, so it is a three-cycle. Directly $(12)(123)(12)=(132)$, so the two three-cycles form one class. Every conjugate of $e$ is $e$. A permutation of three points is either the identity, a transposition, or a three-cycle: fixing two points forces the third to be fixed; fixing exactly one exchanges the other two; fixing none forces a three-cycle by following any point’s successive images. Hence the three listed classes exhaust $S_3$.",
+          "inputs": [
+            "$S_3$ is the permutation group of $\\{1,2,3\\}$; products act rightmost first, and $k$ is a field."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The group is finite and these are exactly its three classes by steps 1.1–1.2, so F1 gives the asserted indicator basis over $k$. More explicitly, for every class function $f$ one has $f=f(e)\\mathbf1_{C_1}+f((12))\\mathbf1_{C_2}+f((123))\\mathbf1_{C_3}$, because evaluation on each of the three classes picks out its constant value. For example the coefficients $(0,1,-1)$ give the function with values $0$ at $e$, $1_k$ on the transpositions, and $-1_k$ on the three-cycles. This calculation remains valid in characteristic two, where the last two values coincide, while the indicator basis itself stays independent by evaluation on the three disjoint nonempty classes.",
+          "inputs": [
+            "$S_3$ is the permutation group of $\\{1,2,3\\}$; products act rightmost first, and $k$ is a field.",
+            "1.1",
+            "1.2",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The displayed group and all three classes are explicitly nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 with all coefficients zero gives the zero class function."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.2 checks the singleton identity class."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 explicitly handles characteristic two and coinciding function values."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1–2.1 use the explicit representatives e, (12), (123)."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The principal assertion is a concrete basis, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The principal assertion is a concrete basis, not an iff."
+        }
+      ]
+    },
+    "ex-standard-hermitian-inner-product-on-functions-on-a-three-point-set": {
+      "assumptions": "$X=\\{1,2,3\\}$, point indicators $e_1,e_2,e_3$, and the displayed normalized form and vectors $f,h$. No axiom of choice is assumed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-standard-hermitian-form-on-functions-on-a-nonempty-finite-set-is-an-inner-product",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a nonempty finite set. On $\\mathbb C^X$, with pointwise vector-space operations, define $\\langle f,h\\rangle=|X|^{-1}\\sum_{x\\in X}f(x)\\overline{h(x)}$. The denominator is the positive real image of $|X|$. This is an inner product, linear in the first variable.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "The normalized finite function-space form is an inner product linear in its first variable"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "The set $X$ is nonempty of cardinality three, so F1 applies with normalization $1/3$. The point indicators are a basis: $v=v(1)e_1+v(2)e_2+v(3)e_3$ for every function $v$, and evaluating a zero combination at each point makes all coefficients zero.",
+          "inputs": [
+            "$X=\\{1,2,3\\}$, point indicators $e_1,e_2,e_3$, and the displayed normalized form and vectors $f,h$.",
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For $j=k$, only the value at point $j$ contributes to $\\langle e_j,e_k\\rangle$, giving $1/3$. For $j\\ne k$, the two indicators never both have nonzero value at the same point, so the pairing is zero. Thus $\\langle e_j,e_k\\rangle=\\delta_{jk}/3$, which is the matrix $I_3/3$.",
+          "inputs": [
+            "$X=\\{1,2,3\\}$, point indicators $e_1,e_2,e_3$, and the displayed normalized form and vectors $f,h$.",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "Since $\\overline i=-i$, $\\langle f,h\\rangle=(1(-i)+i(1)+0(1))/3=0$. Also $\\langle f,f\\rangle=(1\\cdot1+i(-i)+0)/3=(1+1)/3=2/3$. In particular this nonzero vector has strictly positive diagonal value.",
+          "inputs": [
+            "$X=\\{1,2,3\\}$, point indicators $e_1,e_2,e_3$, and the displayed normalized form and vectors $f,h$.",
+            "1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Put $u_j=\\sqrt3\\,e_j$, where $\\sqrt3$ is the positive real square root. Direct substitution gives $\\langle u_j,u_k\\rangle=3\\langle e_j,e_k\\rangle=\\delta_{jk}$. Scaling each basis vector by the nonzero scalar $\\sqrt3$ preserves spanning and independence (divide the coefficients by $\\sqrt3$), so $(u_1,u_2,u_3)$ is an orthonormal basis.",
+          "inputs": [
+            "$X=\\{1,2,3\\}$, point indicators $e_1,e_2,e_3$, and the displayed normalized form and vectors $f,h$.",
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "X is the fixed three-point set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 checks zero off-diagonal pairings and step 2.2 the zero mixed pairing."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 gives unit diagonal pairings after rescaling."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.2 checks the chosen nonzero vector has positive squared norm."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The set labels 1,2,3 are not interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "All three indicators and the positive scalar are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a calculation rather than a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a calculation rather than a biconditional."
+        }
+      ]
+    },
+    "cex-unit-complex-sum-strict-with-distinct-summands": {
+      "assumptions": "The universal equality assertion for unit complex summands. No axiom of choice is assumed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-equality-case-for-a-finite-sum-of-unit-complex-numbers",
+          "source_section": "Statement",
+          "quote": "For an integer $n>0$ and $z_1,\\ldots,z_n\\in\\mathbb C$ with $|z_i|=1$, one has $|\\sum_{i=1}^n z_i|\\le n$. Equality holds if and only if all the $z_i$ are equal. This includes $n=1$.",
+          "uses": [
+            "2.1"
+          ],
+          "application": "The upper bound is attained exactly when all unit summands agree"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Take $n=2$, $z_1=1$ and $z_2=-1$ in $\\mathbb C$. Their moduli are $\\sqrt{1^2+0^2}=1$ and $\\sqrt{(-1)^2+0^2}=1$, so both satisfy the unit-modulus hypothesis and $n>0$.",
+          "inputs": [
+            "The universal equality assertion for unit complex summands."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Their sum is $1+(-1)=0$, whose modulus is zero. Consequently $|z_1+z_2|=0<2=n$, so this instance fails the asserted equality and refutes its universal quantifier. The summands are distinct, in agreement with F1.",
+          "inputs": [
+            "The universal equality assertion for unit complex summands.",
+            "F1",
+            "1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness has exactly two summands."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 computes the zero sum."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 checks that each summand has modulus one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 exhibits exact cancellation of two nonzero summands."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "statement requires n>0 and step 1.1 verifies the witness n=2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two witnesses are explicitly specified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted assertion is universal equality, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted assertion is universal equality, not an iff."
+        }
+      ]
+    }
+  }
+}

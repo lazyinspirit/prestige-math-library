@@ -11,8 +11,13 @@ provenance:
 deps: [prop-sigma-finite-section-measure-functions-are-measurable, lem-finite-rectangle-unions-form-a-generating-algebra, thm-monotone-class, thm-monotone-convergence-for-the-integral, def-integral-over-a-measurable-set, def-finite-sigma-finite-and-semifinite-measures]
 proof_strategy: direct
 verification:
-  audited: 2026-08-29
   precheck: pass
+  verified:
+    model: Codex
+    verdict: repaired-and-locally-checked
+    date: 2026-09-08
+    scope: "Owner-authorized missing decreasing-intersection argument; local checks only, no independent judge"
+    delegated_by: owner
 sources:
   references:
     - title: "Terence Tao, An Introduction to Measure Theory, Theorem 1.7.15"
@@ -46,8 +51,8 @@ $$\int_X \nu(E_x)\,d\mu = \int_Y \mu(E^y)\,d\nu.$$
 
 1.1 Fix $n,m \ge 1$. Let $\mathcal D_{n,m}$ be the family of measurable subsets $F \subseteq X_n \times Y_m$ such that $$\int_{X_n}\nu(F_x)\,d\mu=\int_{Y_m}\mu(F^y)\,d\nu.$$ If $F=(A \times B) \cap (X_n \times Y_m)$, then $F_x=(B \cap Y_m)$ for $x \in A \cap X_n$ and $\varnothing$ otherwise, so both integrals equal $\mu(A \cap X_n)\nu(B \cap Y_m)$. Finite additivity gives the same equality for the algebra of [L2]. [L2, L3, A1]
 
-1.2 If $F_k \uparrow F$ inside $X_n \times Y_m$, then [L1] and [L4] give $$\int_{X_n}\nu((F_k)_x)\,d\mu \uparrow \int_{X_n}\nu(F_x)\,d\mu,$$ and similarly on $Y_m$. Thus $\mathcal D_{n,m}$ is a monotone class. By [L2] and [L3], every measurable subset of $X_n \times Y_m$ belongs to $\mathcal D_{n,m}$. [L1, L4, L2, L3]
+2.1 If $F_k\uparrow F$ inside $X_n\times Y_m$, then [L1] and [L4] give $\int_{X_n}\nu((F_k)_x)\,d\mu\uparrow\int_{X_n}\nu(F_x)\,d\mu$, and similarly on $Y_m$. Hence $\mathcal D_{n,m}$ is closed under increasing unions. For $F\in\mathcal D_{n,m}$, put $F^c=(X_n\times Y_m)\setminus F$. Each section-integral of $F^c$ equals the finite number $\mu(X_n)\nu(Y_m)$ minus the corresponding section-integral of $F$. This follows by adding the complementary sections and integrating; all quantities are finite because they are bounded by that finite product. Thus $F^c\in\mathcal D_{n,m}$. If $F_k\downarrow F$, their relative complements increase to $F^c$; closure under increasing unions and complements therefore gives $F\in\mathcal D_{n,m}$. The class is now proved monotone in both directions and contains the relative rectangle algebra by step 1.1. Applying [L2] and [L3] on $X_n\times Y_m$ yields every product-measurable subset of that rectangle. [L1, L2, L3, L4, A1, step 1.1]
 
-2.1 Put $E_{n,m}:=E \cap (X_n \times Y_m)$. Step 1.2 gives $$\int_{X_n}\nu((E_{n,m})_x)\,d\mu=\int_{Y_m}\mu((E_{n,m})^y)\,d\nu.$$ Now $(E_{n,m})_x = E_x \cap Y_m$ for $x \in X_n$ and $\varnothing$ otherwise, so as $n,m \to \infty$ the two integrands increase pointwise to $\nu(E_x)$ and $\mu(E^y)$. [step 1.2, A1]
+3.1 Put $E_{n,m}:=E \cap (X_n \times Y_m)$. Step 2.1 gives $$\int_{X_n}\nu((E_{n,m})_x)\,d\mu=\int_{Y_m}\mu((E_{n,m})^y)\,d\nu.$$ Now $(E_{n,m})_x = E_x \cap Y_m$ for $x \in X_n$ and $\varnothing$ otherwise, so as $n,m \to \infty$ the two integrands increase pointwise to $\nu(E_x)$ and $\mu(E^y)$. [step 2.1, A1]
 
-3.1 Applying [L4] on both sides of step 2.1 and then letting $n,m \to \infty$ gives $$\int_X \nu(E_x)\,d\mu = \int_Y \mu(E^y)\,d\nu.$$ This is the claimed equality. [L4, step 2.1, L1] ∎
+4.1 Applying [L4] on both sides of step 3.1 and then letting $n,m \to \infty$ gives $$\int_X \nu(E_x)\,d\mu = \int_Y \mu(E^y)\,d\nu.$$ This is the claimed equality. [L4, step 3.1, L1] ∎

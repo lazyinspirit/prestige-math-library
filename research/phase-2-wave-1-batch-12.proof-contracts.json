@@ -1,0 +1,1668 @@
+{
+  "version": 1,
+  "scope": [
+    "def-semilinear-galois-action-on-a-scalar-extended-algebra",
+    "lem-galois-fixed-points-recover-a-finite-dimensional-scalar-extension",
+    "lem-galois-orbit-sums-of-split-central-idempotents-descend",
+    "lem-a-descended-galois-orbit-idempotent-is-primitive",
+    "thm-galois-orbits-classify-simple-modules-after-splitting-base-change",
+    "ex-galois-descent-for-the-two-nontrivial-characters-of-c-three",
+    "ex-the-rational-simple-block-of-the-quaternion-group",
+    "cex-a-galois-stable-character-need-not-have-schur-index-one"
+  ],
+  "contracts": {
+    "def-semilinear-galois-action-on-a-scalar-extended-algebra": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition allows empty split product for zero algebra."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition uses zero algebra and zero semilinear space; all action equations still hold."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition imposes T_1=id and unit 1 tensor 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition includes the zero algebra; primitivity explicitly excludes c=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Semilinear actions have no interval or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition quantifies over given actions and modules; no choice of a representative for infinitely many objects is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This definition introduces actions, rather than asserting an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The twist identities are derived equations, not a converse existence assertion."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Weizhe Zheng, Lectures on Algebra (10 January 2025)",
+          "url": "https://server.mcm.ac.cn/~zheng/algebra.pdf",
+          "locator": "§3.8 opening, pp.132–133; §3.2, pp.117–118"
+        },
+        {
+          "title": "Gábor Wiese, Galois Representations",
+          "url": "https://math.uni.lu/wiese/notes/GalRep.pdf",
+          "locator": "Definition 2.2.7 and Remark 2.2.8, pp.28–29"
+        }
+      ],
+      "definition_checks": [
+        "F-balancing of both tensors is checked by efr tensor as=ef tensor a(rs)=ef tensor (ra)s.",
+        "Inverse-pullback composition is tau_B inverse sigma_B inverse=(sigma tau)_B inverse.",
+        "Transported basis coefficients satisfy r_ij w_i=sigma(r_ij) star w_i.",
+        "Associativity and unit action follow by the displayed elementary-tensor identities."
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "phase-2-wave-1 alpha-d Step 6b",
+        "notes": "Checked balancing over central F and multiplication/unit for sigma_B and E⊗S using the exact tensor-algebra and outer-action suppliers. Inverse pullback changes E-scalars as well as the B-action; successive pullbacks give tau^-1 sigma^-1=(sigma tau)^-1. In the transported basis the A-matrices are sigma(rho(a)). This is derived explicitly and does not adopt the conflicting inverse-matrix wording in Wiese Remark 2.2.8(iv). Twisting and its inverse preserve submodules/simplicity; the stabilizer is well-defined. Zero algebra is allowed as an empty split product and nonzero primitive idempotents exclude its zero identity. Zheng §3.8 and Wiese Definition 2.2.7 read; reader/refuter claims checked."
+      }
+    },
+    "lem-galois-fixed-points-recover-a-finite-dimensional-scalar-extension": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-semilinear-galois-action-on-a-scalar-extended-algebra",
+          "source_section": "Definition",
+          "quote": "Let $E/F$ be a finite Galois extension with group $\\Gamma$ as in\n[[def-finite-galois-extension-and-galois-group]], and let $A$ be a finite-dimensional\nunital $F$-algebra. Put $B=E\\otimes_F A$. Its multiplication and unit are\n$(e\\otimes a)(f\\otimes a')=ef\\otimes aa'$ and $1\\otimes1$, by\n[[thm-tensor-product-of-algebras-over-a-commutative-ring]]. Define\n$\\sigma_B(e\\otimes a)=\\sigma(e)\\otimes a$. This is well-defined because\n$\\sigma$ fixes $F$; the displayed multiplication shows it is a semilinear algebra\nautomorphism, with inverse $(\\sigma^{-1})_B$.\n\nA **semilinear Galois action** on an $E$-space $W$ consists of additive maps\n$T_\\sigma:W\\to W$ such that, for every $e\\in E$, $w\\in W$, and\n$\\sigma,\\tau\\in\\Gamma$,\n$$T_\\sigma(ew)=\\sigma(e)T_\\sigma(w),\\qquad T_1=\\operatorname{id},\\qquad T_\\sigma T_\\tau=T_{\\sigma\\tau}.$$\nFor a $B$-module it is **compatible** if\n$T_\\sigma(bw)=\\sigma_B(b)T_\\sigma(w)$ for all $b,w$.\nWrite $W^\\Gamma=\\{w:T_\\sigma(w)=w\\text{ for all }\\sigma\\}$.\n\nFor a left $B$-module $W$, its **twist** ${}^\\sigma W$ has the same underlying\nadditive group, with action\n$$b\\star w=\\sigma_B^{-1}(b)w.$$\nIn particular its $E$-scalar structure changes: $e\\star w=\\sigma^{-1}(e)w$.\nApplying this formula twice gives\n$\\tau_B^{-1}\\sigma_B^{-1}(b)=(\\sigma\\tau)_B^{-1}(b)$, hence\n${}^\\sigma({}^\\tau W)={} ^{\\sigma\\tau}W$.\nIf $(w_j)$ is an original $E$-basis, it is also a basis in the twisted scalar\nstructure. An original equation $aw_j=\\sum_i r_{ij}w_i$ for $a\\in A$\nbecomes $aw_j=\\sum_i\\sigma(r_{ij})\\star w_i$. Thus the transported matrices\nare $\\sigma(\\rho(a))$. Twisting and its inverse preserve submodules and\nisomorphisms, so they preserve simplicity. The **decomposition group** of a\nsimple class is $\\Gamma_W=\\{\\sigma:{}^\\sigma W\\cong W\\}$, its stabilizer.\n\nA **central idempotent** is $c\\in Z(B)$ with $c^2=c$. It is **primitive** if\n$c\\ne0$ and $c$ is not a sum of two nonzero orthogonal central idempotents.\nAn algebra is **split semisimple** over $E$ if it is a finite product of\n$M_n(E)$ with $n\\ge1$; the empty product means the zero algebra. This is\ncompatible with the zero-ring convention in [[def-semisimple-ring]]. A central\nidempotent **supports** a simple module when it acts as the identity on it.\n\nFor a left $A$-module $S$, extend scalars along the field map $F\\to E$ as in\n[[def-restriction-and-extension-of-scalars]], and give $E\\otimes_F S$ the action\n$$(e\\otimes a)(f\\otimes s)=ef\\otimes as.$$\nThe relations $(efr)\\otimes as=ef\\otimes a(rs)=ef\\otimes(ra)s$ for $r\\in F$\nverify balancing in both tensor factors; additivity extends this rule to sums.\nAssociativity follows from $a(a's)=(aa')s$, and $1\\otimes1$ acts identically.\nThe outer $E$-action is the one in [[thm-bimodule-actions-induced-on-tensor-products]].\nThis construction uses tensors over the central field $F$, even when $A$ is\nnoncommutative. Its canonical compatible action is\n$T_\\sigma(e\\otimes s)=\\sigma(e)\\otimes s$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1",
+            "4.1"
+          ],
+          "use_explanation": "Semilinear actions and canonical tensor actions have the formulas in",
+          "locator": "items/def-semilinear-galois-action-on-a-scalar-extended-algebra.md#definition"
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-galois-extension-characterizations",
+          "source_section": "Statement",
+          "quote": "Let $K/F$ be a finite extension and put $G=\\operatorname{Aut}(K/F)$. The following conditions are equivalent:\n\n1. $K/F$ is Galois, that is, normal and separable.\n2. $K$ is the splitting field over $F$ of a separable polynomial.\n3. $|G|=[K:F]$.\n4. $K^G=F$.\n\nIn particular, a finite extension is Galois if and only if it is the splitting field of a separable polynomial.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ],
+          "use_explanation": "Finite Galois implies $|\\Gamma|=[E:F]$ and $E^\\Gamma=F$:",
+          "locator": "items/thm-finite-galois-extension-characterizations.md#statement"
+        },
+        {
+          "fact": "F3",
+          "source": "thm-trace-form-is-nondegenerate-iff-separable",
+          "source_section": "Statement",
+          "quote": "Let $K/F$ be a finite field extension and let\n\n$$T_{K/F}(x,y)=\\operatorname{Tr}_{K/F}(xy)$$\n\nbe its trace form ([[def-trace-form-of-a-finite-extension]]). Then\n$T_{K/F}$ is nondegenerate\n([[def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form]])\nif and only if $K/F$ is separable\n([[def-separable-elements-and-separable-extensions]]).",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "The trace pairing of a finite separable extension is nondegenerate:",
+          "locator": "items/thm-trace-form-is-nondegenerate-iff-separable.md#statement"
+        },
+        {
+          "fact": "F4",
+          "source": "thm-field-norm-and-trace-by-embeddings",
+          "source_section": "Statement",
+          "quote": "Let $K/F$ be a finite field extension, let $\\Omega/F$ be an algebraic closure,\nlet $\\Sigma=\\operatorname{Hom}_F(K,\\Omega)$, and let\n$[K:F]_i$ be the inseparable degree ([[def-inseparable-degree]]). Then for every\n$a\\in K$,\n\n$$\\operatorname{Tr}_{K/F}(a)=[K:F]_i\\sum_{\\sigma\\in\\Sigma}\\sigma(a),$$\n\nand\n\n$$N_{K/F}(a)=\\left(\\prod_{\\sigma\\in\\Sigma}\\sigma(a)\\right)^{[K:F]_i}.$$\n\nIn particular, when $K/F$ is separable these are the ordinary sum and product\nover the distinct $F$-embeddings of $K$ into $\\Omega$; and when\n$[K:F]_i>1$ in characteristic $p>0$, the trace map is identically zero because\n$[K:F]_i$ is a power of $p$.",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "For a separable extension, trace is the sum of the distinct embeddings:",
+          "locator": "items/thm-field-norm-and-trace-by-embeddings.md#statement"
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dedekind-linear-independence-of-characters",
+          "source_section": "Statement",
+          "quote": "Let $G$ be a group and $K$ a field. Every finite family of distinct group homomorphisms $G\\to K^\\times$ is linearly independent over $K$ as a family of functions.",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "Distinct multiplicative characters of a group are linearly independent over the target field:",
+          "locator": "items/thm-dedekind-linear-independence-of-characters.md#statement"
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tensor-product-basis-from-bases",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring. If $M$ is free with basis $(e_i)_{i\\in I}$ and $N$ is free with basis $(f_j)_{j\\in J}$, then $M\\otimes_RN$ is free with basis\n\n$$\\bigl(e_i\\otimes f_j\\bigr)_{(i,j)\\in I\\times J}.$$\n\nEquivalently, the canonical map $R^{(I\\times J)}\\to M\\otimes_RN$ sending the standard basis vector at $(i,j)$ to $e_i\\otimes f_j$ is an isomorphism. This includes an empty basis in either factor.",
+          "uses": [
+            "1.3"
+          ],
+          "use_explanation": "Tensor products of free modules have the product basis, including empty bases:",
+          "locator": "items/thm-tensor-product-basis-from-bases.md#statement"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "The trace-dual basis satisfies Tr(a_i b_j)=delta_ij.",
+          "inputs": [
+            "F2",
+            "F3",
+            "E/F finite separable; H_ij=Tr(a_i a_j); b_j=sum_k(H inverse)_kj a_k",
+            "Given: $E/F$, $\\Gamma$, and $W$ as stated. All bases and sums used below are finite."
+          ],
+          "calculation": "Put $n=[E:F]=|\\Gamma|\\ge1$, choose an $F$-basis $a_1,\\ldots,a_n$ of $E$, and form its trace Gram matrix $H_{ij}=\\operatorname{Tr}(a_i a_j)$. Separability and nondegeneracy make $H$ invertible. Set $b_j=\\sum_k(H^{-1})_{kj}a_k$. Then $\\operatorname{Tr}(a_i b_j)=\\delta_{ij}$. The invertible coefficient matrix also shows that $(b_j)$ is a basis."
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "A finite F-independent invariant list is E-independent.",
+          "inputs": [
+            "F1",
+            "F2",
+            "Invariant v_j; minimal-support nonzero relation normalized to one coefficient 1; E^Gamma=F",
+            "Given: $E/F$, $\\Gamma$, and $W$ as stated. All bases and sums used below are finite."
+          ],
+          "calculation": "Any finite $F$-independent list $v_1,\\ldots,v_r$ in $W^\\Gamma$ is $E$-independent. Indeed, if a relation exists, select one with the least positive number of nonzero coefficients and normalize one of those coefficients to $1$. Applying $T_\\sigma$ and subtracting produces a relation with that coefficient zero; minimality forces every other coefficient to be fixed by every $\\sigma$. They all lie in $F$, contradicting $F$-independence. A one-term relation is already impossible since a nonzero scalar cannot annihilate a nonzero vector."
+        },
+        {
+          "id": "derive-1-3",
+          "step": "1.3",
+          "claim": "A canonical tensor is fixed iff every E coefficient belongs to F; V embeds as 1 tensor V.",
+          "inputs": [
+            "F6",
+            "F1",
+            "F2",
+            "Finite F-basis v_j of V; unique expression sum e_j tensor v_j; canonical action",
+            "Given: $E/F$, $\\Gamma$, and $W$ as stated. All bases and sums used below are finite."
+          ],
+          "calculation": "For the canonical action, choose a finite $F$-basis $(v_j)$ of $V$. Each tensor has a unique expression $\\sum_j e_j\\otimes v_j$: the product $F$-basis in F6, regrouped by the $v_j$, proves existence and uniqueness of its coefficients in $E$. Such a tensor is fixed exactly when $\\sigma(e_j)=e_j$ for every $\\sigma,j$, equivalently each $e_j\\in F$. It then equals $1\\otimes\\sum_j e_jv_j$. Conversely every $1\\otimes v$ is fixed. This also proves that $v\\mapsto1\\otimes v$ is injective, including the empty-basis case."
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "sum_i a_i sigma(b_i)=delta_(1,sigma).",
+          "inputs": [
+            "F4",
+            "F5",
+            "1.1",
+            "X_sigma,i=sigma(a_i), Y_sigma,j=sigma(b_j); X transpose Y=I; automorphisms restricted to E^times",
+            "Given: $E/F$, $\\Gamma$, and $W$ as stated. All bases and sums used below are finite."
+          ],
+          "calculation": "Let $X_{\\sigma i}=\\sigma(a_i)$ and $Y_{\\sigma j}=\\sigma(b_j)$. A relation among the rows of $X$ vanishes on the $a_i$, hence by $F$-linearity on every $x\\in E$; restricting to $E^\\times$ and using independence of the distinct automorphisms as multiplicative characters makes every coefficient zero. Thus $X$ is invertible. The trace formula gives $X^{\\mathsf T}Y=I$, so $XY^{\\mathsf T}=I$. Its row at $1\\in\\Gamma$ yields $\\sum_i a_i\\sigma(b_i)=\\delta_{1,\\sigma}$."
+        },
+        {
+          "id": "derive-2-2",
+          "step": "2.2",
+          "claim": "Every tensor in ker(mu) is zero.",
+          "inputs": [
+            "1.2",
+            "Kernel element expressed using a finite independent list of invariant vectors",
+            "Given: $E/F$, $\\Gamma$, and $W$ as stated. All bases and sums used below are finite."
+          ],
+          "calculation": "Any tensor in the kernel is a finite sum $\\sum_j e_j\\otimes w_j$. By eliminating dependent members of the finite list $(w_j)$, rewrite it as $\\sum_{k=1}^r f_k\\otimes v_k$ with the $v_k$ $F$-independent and invariant. Its image is $\\sum_k f_kv_k=0$, so step 1.2 forces every $f_k=0$. Hence the tensor is zero and $\\mu$ is injective. For $W=0$ the domain and codomain are zero and the same argument uses the empty list."
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "P_i(w) is invariant and sum_i a_i P_i(w)=w, so mu is surjective.",
+          "inputs": [
+            "F1",
+            "2.1",
+            "P_i(w)=sum_sigma sigma(b_i)T_sigma(w); finite permutation sigma to tau sigma",
+            "Given: $E/F$, $\\Gamma$, and $W$ as stated. All bases and sums used below are finite."
+          ],
+          "calculation": "For $w\\in W$ define $P_i(w)=\\sum_{\\sigma\\in\\Gamma}\\sigma(b_i)T_\\sigma(w)$. For $\\tau\\in\\Gamma$, semilinearity gives $T_\\tau(P_i(w))=\\sum_\\sigma(\\tau\\sigma)(b_i)T_{\\tau\\sigma}(w)=P_i(w)$, since $\\sigma\\mapsto\\tau\\sigma$ permutes the finite group. Moreover $\\sum_i a_iP_i(w)=\\sum_\\sigma\\delta_{1,\\sigma}T_\\sigma(w)=w$. Thus $P_i(w)\\in W^\\Gamma$, and $\\mu$ is onto. The formula $\\mu(e\\otimes w)=ew$ is $F$-balanced and $E$-linear."
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "mu is a unital algebra isomorphism when the action preserves multiplication.",
+          "inputs": [
+            "F1",
+            "3.1",
+            "2.2",
+            "1.3",
+            "Invariant u,v; central scalars e,f; mu((e tensor u)(f tensor v))=efuv=(eu)(fv)",
+            "Given: $E/F$, $\\Gamma$, and $W$ as stated. All bases and sums used below are finite."
+          ],
+          "calculation": "If $W$ is an algebra, its fixed space is an $F$-subalgebra containing $1$. For invariant $u,v$ and $e,f\\in E$, $\\mu((e\\otimes u)(f\\otimes v))=efuv=(eu)(fv)$ and $\\mu(1\\otimes1)=1$. Distributing over finite sums proves multiplicativity on all tensors. Together with bijectivity, this proves both algebra assertions. If $E=F$, $\\Gamma=\\{1\\}$ and the map is the usual multiplication $F\\otimes_F W\\cong W$; the proof divides by no group order in any characteristic."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.2 treats the empty tensor list; step 1.3 includes the empty basis."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 proves the zero-space map is injective and both spaces are zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 handles E=F and preservation of the algebra unit."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 use separability and never divide by the group order, including positive characteristic."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The theorem concerns finite field extensions, with no ordered parameter or endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 chooses one finite basis; step 1.2 uses the least positive support size, not an infinite family of choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.3 proves fixedness forces every coefficient into F."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.3 proves tensors 1 tensor v are fixed."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Weizhe Zheng, Lectures on Algebra (10 January 2025)",
+          "url": "https://server.mcm.ac.cn/~zheng/algebra.pdf",
+          "locator": "Theorem 3.8.1 and complete proof, pp.132–133"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "phase-2-wave-1 alpha-d Step 6b",
+        "notes": "Finite Galois gives separability, |Gamma|=[E:F] and E^Gamma=F. The trace Gram inverse gives dual bases with correct column indices. Dedekind independence on E^× makes the square embedding matrix X invertible; X^T Y=I implies XY^T=I and sum_i a_i sigma(b_i)=delta_1,sigma. Averaged P_i(w) are invariant by group reindexing and span w. Minimal finite relations prove invariant F-independent lists E-independent and tensor injectivity without an infinite invariant basis. Canonical fixed tensors follow from unique coefficients; multiplication and units are checked. W=0 and E=F hold; no division by |Gamma| occurs in positive characteristic. Checked exact F2–F6 and Zheng Theorem 3.8.1 complete proof."
+      }
+    },
+    "lem-galois-orbit-sums-of-split-central-idempotents-descend": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-semilinear-galois-action-on-a-scalar-extended-algebra",
+          "source_section": "Definition",
+          "quote": "Let $E/F$ be a finite Galois extension with group $\\Gamma$ as in\n[[def-finite-galois-extension-and-galois-group]], and let $A$ be a finite-dimensional\nunital $F$-algebra. Put $B=E\\otimes_F A$. Its multiplication and unit are\n$(e\\otimes a)(f\\otimes a')=ef\\otimes aa'$ and $1\\otimes1$, by\n[[thm-tensor-product-of-algebras-over-a-commutative-ring]]. Define\n$\\sigma_B(e\\otimes a)=\\sigma(e)\\otimes a$. This is well-defined because\n$\\sigma$ fixes $F$; the displayed multiplication shows it is a semilinear algebra\nautomorphism, with inverse $(\\sigma^{-1})_B$.\n\nA **semilinear Galois action** on an $E$-space $W$ consists of additive maps\n$T_\\sigma:W\\to W$ such that, for every $e\\in E$, $w\\in W$, and\n$\\sigma,\\tau\\in\\Gamma$,\n$$T_\\sigma(ew)=\\sigma(e)T_\\sigma(w),\\qquad T_1=\\operatorname{id},\\qquad T_\\sigma T_\\tau=T_{\\sigma\\tau}.$$\nFor a $B$-module it is **compatible** if\n$T_\\sigma(bw)=\\sigma_B(b)T_\\sigma(w)$ for all $b,w$.\nWrite $W^\\Gamma=\\{w:T_\\sigma(w)=w\\text{ for all }\\sigma\\}$.\n\nFor a left $B$-module $W$, its **twist** ${}^\\sigma W$ has the same underlying\nadditive group, with action\n$$b\\star w=\\sigma_B^{-1}(b)w.$$\nIn particular its $E$-scalar structure changes: $e\\star w=\\sigma^{-1}(e)w$.\nApplying this formula twice gives\n$\\tau_B^{-1}\\sigma_B^{-1}(b)=(\\sigma\\tau)_B^{-1}(b)$, hence\n${}^\\sigma({}^\\tau W)={} ^{\\sigma\\tau}W$.\nIf $(w_j)$ is an original $E$-basis, it is also a basis in the twisted scalar\nstructure. An original equation $aw_j=\\sum_i r_{ij}w_i$ for $a\\in A$\nbecomes $aw_j=\\sum_i\\sigma(r_{ij})\\star w_i$. Thus the transported matrices\nare $\\sigma(\\rho(a))$. Twisting and its inverse preserve submodules and\nisomorphisms, so they preserve simplicity. The **decomposition group** of a\nsimple class is $\\Gamma_W=\\{\\sigma:{}^\\sigma W\\cong W\\}$, its stabilizer.\n\nA **central idempotent** is $c\\in Z(B)$ with $c^2=c$. It is **primitive** if\n$c\\ne0$ and $c$ is not a sum of two nonzero orthogonal central idempotents.\nAn algebra is **split semisimple** over $E$ if it is a finite product of\n$M_n(E)$ with $n\\ge1$; the empty product means the zero algebra. This is\ncompatible with the zero-ring convention in [[def-semisimple-ring]]. A central\nidempotent **supports** a simple module when it acts as the identity on it.\n\nFor a left $A$-module $S$, extend scalars along the field map $F\\to E$ as in\n[[def-restriction-and-extension-of-scalars]], and give $E\\otimes_F S$ the action\n$$(e\\otimes a)(f\\otimes s)=ef\\otimes as.$$\nThe relations $(efr)\\otimes as=ef\\otimes a(rs)=ef\\otimes(ra)s$ for $r\\in F$\nverify balancing in both tensor factors; additivity extends this rule to sums.\nAssociativity follows from $a(a's)=(aa')s$, and $1\\otimes1$ acts identically.\nThe outer $E$-action is the one in [[thm-bimodule-actions-induced-on-tensor-products]].\nThis construction uses tensors over the central field $F$, even when $A$ is\nnoncommutative. Its canonical compatible action is\n$T_\\sigma(e\\otimes s)=\\sigma(e)\\otimes s$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ],
+          "use_explanation": "Tensor algebra actions, twists, support and split semisimplicity are defined in",
+          "locator": "items/def-semilinear-galois-action-on-a-scalar-extended-algebra.md#definition"
+        },
+        {
+          "fact": "F2",
+          "source": "lem-galois-fixed-points-recover-a-finite-dimensional-scalar-extension",
+          "source_section": "Statement",
+          "quote": "Let $E/F$ be finite Galois with group $\\Gamma$, and let $W$ be a\nfinite-dimensional semilinear $\\Gamma$-space. Then\n$$\\mu:E\\otimes_F W^\\Gamma\\longrightarrow W,\\qquad e\\otimes w\\longmapsto ew$$\nis an $E$-linear isomorphism. If $W$ is an $E$-algebra and the action is by\nsemilinear algebra automorphisms, this is an algebra isomorphism. For a\nfinite-dimensional $F$-space $V$ with the canonical action on $E\\otimes_F V$,\n$$(E\\otimes_F V)^\\Gamma=1\\otimes V.$$\nHere $v\\mapsto1\\otimes v$ is injective, so $1\\otimes V$ is a copy of $V$.\nConsequently $E\\otimes_F(E\\otimes_F V)^\\Gamma\\cong E\\otimes_F V$, respecting\nalgebra multiplication and units when $V$ is an $F$-algebra.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1"
+          ],
+          "use_explanation": "Canonical fixed tensors are exactly $1\\otimes A$, and $A\\to E\\otimes_F A$ is injective:",
+          "locator": "items/lem-galois-fixed-points-recover-a-finite-dimensional-scalar-extension.md#statement"
+        },
+        {
+          "fact": "F3",
+          "source": "lem-the-center-of-a-full-matrix-algebra-over-a-field-consists-of-the-scalar-matrices",
+          "source_section": "Statement",
+          "quote": "Let $k$ be a field and let $n \\ge 1$. Then\n\n$$ Z(M_n(k))=\\{\\lambda I_n:\\lambda \\in k\\}. $$",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "$Z(M_n(E))=EI_n$ for $n\\ge1$:",
+          "locator": "items/lem-the-center-of-a-full-matrix-algebra-over-a-field-consists-of-the-scalar-matrices.md#statement"
+        },
+        {
+          "fact": "F4",
+          "source": "thm-simple-modules-over-semisimple-rings",
+          "source_section": "Statement",
+          "quote": "Let $r\\ge1$, let every $n_i\\ge1$, let every $D_i$ be a division ring, and put $R=\\prod_{i=1}^rM_{n_i}(D_i)$. Then every simple left $R$-module is supported on exactly one factor and is isomorphic to that factor's column module $D_i^{n_i}$. These column modules give all simple left $R$-module isomorphism classes, with one class for each factor. See [[thm-wedderburn-artin-theorem]].",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "A finite nonempty product of full matrix rings over division rings has exactly one simple left-module class per factor, its column module:",
+          "locator": "items/thm-simple-modules-over-semisimple-rings.md#statement"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Central idempotents are unique subset sums, primitive exactly for singleton subsets.",
+          "inputs": [
+            "F3",
+            "B=product_j M_dj(E); r>0; lambda squared=lambda in a field",
+            "Given: $B\\cong\\prod_{j=1}^rM_{d_j}(E)$ with every $d_j\\ge1$, allowing $r=0$."
+          ],
+          "calculation": "For $r>0$, a central element has a scalar matrix in each coordinate, since commuting can be tested one coordinate at a time. The equation $\\lambda^2=\\lambda$ in the field $E$ forces $\\lambda=0$ or $1$. Hence all central idempotents are unique subset sums of the coordinate identities $c_1,\\ldots,c_r$. Such a nonzero sum is primitive exactly when its subset is a singleton: a larger subset splits into two nonempty subsets, whereas a singleton cannot."
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Support identifies primitive idempotents with simple classes, equivariantly in both directions.",
+          "inputs": [
+            "F4",
+            "F1",
+            "1.1",
+            "Column module E^dj; sigma_B(c) star w=cw; sigma_B has inverse",
+            "Given: $B\\cong\\prod_{j=1}^rM_{d_j}(E)$ with every $d_j\\ge1$, allowing $r=0$."
+          ],
+          "calculation": "The simple module for factor $j$ is $E^{d_j}$, on which $c_j$ acts as identity and every other $c_k$ as zero. F4 says these give every class exactly once. An automorphism $\\sigma_B$ preserves centrality, idempotence, nonzeroness and orthogonal splittings in both directions (use its inverse), so it permutes primitive central idempotents. The twist equation gives $\\sigma_B(c)\\star w=cw$. Thus identity action of $c$ on $W$ is equivalent to identity action of $\\sigma_B(c)$ on ${}^\\sigma W$, proving both directions of the claimed compatibility."
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Each nonempty orbit sum is a fixed nonzero central idempotent and has a unique preimage e_O.",
+          "inputs": [
+            "F2",
+            "1.1",
+            "2.1",
+            "O a nonempty orbit in the finite coordinate family; c_O=sum_(c in O)c",
+            "Given: $B\\cong\\prod_{j=1}^rM_{d_j}(E)$ with every $d_j\\ge1$, allowing $r=0$."
+          ],
+          "calculation": "Each orbit $O$ is a nonempty subset of this finite family. The sum $c_O$ is nonzero, central and idempotent, since its terms are nonzero orthogonal coordinate identities. Every $\\sigma_B$ permutes its terms, so it is fixed. F2 gives a unique $e_O\\in A$ such that $1\\otimes e_O=c_O$."
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "The preimages are nonzero central orthogonal idempotents with sum 1_A.",
+          "inputs": [
+            "F1",
+            "F2",
+            "3.1",
+            "1 tensor(e_O squared-e_O)=0; all commutators with 1 tensor a vanish; scalar extension is injective",
+            "Given: $B\\cong\\prod_{j=1}^rM_{d_j}(E)$ with every $d_j\\ge1$, allowing $r=0$."
+          ],
+          "calculation": "The identities $1\\otimes(e_O^2-e_O)=c_O^2-c_O=0$ and $1\\otimes(e_Oa-ae_O)=c_O(1\\otimes a)-(1\\otimes a)c_O=0$ for every $a\\in A$ imply idempotence and centrality by injectivity. Nonzeroness follows from $c_O\\ne0$. Disjoint orbits have disjoint coordinate supports, so $c_Oc_{O'}=0$ for $O\\ne O'$, and all orbit sums add to $1_B$. Injectivity reflects these two equalities to $A$."
+        },
+        {
+          "id": "derive-5-1",
+          "step": "5.1",
+          "claim": "The zero algebra has empty simple/idempotent families; a singleton orbit descends unchanged.",
+          "inputs": [
+            "3.1",
+            "F2",
+            "4.1",
+            "r=0 implies B=0; w=1w=0 for unital zero-ring modules",
+            "Given: $B\\cong\\prod_{j=1}^rM_{d_j}(E)$ with every $d_j\\ge1$, allowing $r=0$."
+          ],
+          "calculation": "If $r=0$, $B=0$ and injectivity gives $A=0$. A unital module over the zero ring is zero because $w=1w=0w=0$, so there are no simple modules and no nonzero primitive central idempotents. The families are empty, with sum $0=1_A$. If an orbit has one element, step 3.1 descends that element itself, with the same nonzeroness and uniqueness proof."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 5.1 proves the empty factor family corresponds to A=B=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1 excludes nonzero simple modules over the zero ring."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 treats singleton orbits; step 4.1 proves the sum equals 1_A."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 treats n=1 matrix factors with the same scalar-idempotent calculation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Finite factor sets and Galois actions have no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses a nonempty finite orbit; no representative from an infinite family is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves that c acting identically implies sigma(c) acts identically on the twist."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 uses the equality sigma(c) star w=cw for the reverse implication too."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Weizhe Zheng, Lectures on Algebra (10 January 2025)",
+          "url": "https://server.mcm.ac.cn/~zheng/algebra.pdf",
+          "locator": "§3.2 Theorem 3.2.1 and §3.8 Theorem 3.8.1; central-idempotent argument reconstructed locally"
+        },
+        {
+          "title": "Gábor Wiese, Galois Representations",
+          "url": "https://math.uni.lu/wiese/notes/GalRep.pdf",
+          "locator": "Definition 2.2.7 and Lemma 2.2.9, pp.28–29"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "phase-2-wave-1 alpha-d Step 6b",
+        "notes": "The matrix-center supplier requires d_j≥1, as stated; its scalar idempotents are exactly 0 and 1, so central idempotents are unique subsets of split factors. The simple-module supplier is used only for a nonempty product; the zero product is handled separately. The twist formula sigma_B(c) star w=cw proves support compatibility in both directions. A nonempty orbit sum is nonzero and invariant; fixed-tensor descent gives a unique preimage. Injectivity reflects idempotence, commutator vanishing, orthogonality and sum-to-unit. Zero algebra and singleton orbits verified. Zheng Theorem 3.8.1 and Wiese Lemma 2.2.9 agree; no multiplicity-one descent is asserted."
+      }
+    },
+    "lem-a-descended-galois-orbit-idempotent-is-primitive": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-galois-orbit-sums-of-split-central-idempotents-descend",
+          "source_section": "Statement",
+          "quote": "Let $E/F$ be finite Galois with group $\\Gamma$, let $A$ be a finite-dimensional\nunital $F$-algebra, and assume $B=E\\otimes_F A$ is split semisimple. Its primitive\ncentral idempotents are the coordinate identities in a split matrix\ndecomposition. They correspond bijectively to simple left $B$-module classes\nby support. The action $\\sigma_B$ permutes these idempotents, and $c$ supports\n$W$ if and only if $\\sigma_B(c)$ supports ${}^\\sigma W$.\n\nFor every orbit $O$ of primitive central idempotents there is a unique nonzero\ncentral idempotent $e_O\\in A$ with\n$$1\\otimes e_O=c_O:=\\sum_{c\\in O}c.$$\nDistinct $e_O$ are orthogonal and their sum is $1_A$. For $A=0$, both families\nare empty and this last equality means $0=1_A$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ],
+          "use_explanation": "Orbit sums descend uniquely to nonzero orthogonal central idempotents whose sum is $1$, and central idempotents upstairs are unique subset sums of split factors:",
+          "locator": "items/lem-galois-orbit-sums-of-split-central-idempotents-descend.md#statement"
+        },
+        {
+          "fact": "F2",
+          "source": "thm-wedderburn-artin-theorem",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a nonzero unital ring. Then $R$ is semisimple if and only if $$R\\cong\\prod_{i=1}^rM_{n_i}(D_i)$$ for positive integers $r,n_i$ and division rings $D_i$. See [[thm-endomorphism-ring-of-the-left-regular-module-is-opposite]].",
+          "uses": [
+            "3.1"
+          ],
+          "use_explanation": "Every nonzero semisimple ring is a finite product of full matrix rings over division rings:",
+          "locator": "items/thm-wedderburn-artin-theorem.md#statement"
+        },
+        {
+          "fact": "F3",
+          "source": "thm-simple-modules-over-semisimple-rings",
+          "source_section": "Statement",
+          "quote": "Let $r\\ge1$, let every $n_i\\ge1$, let every $D_i$ be a division ring, and put $R=\\prod_{i=1}^rM_{n_i}(D_i)$. Then every simple left $R$-module is supported on exactly one factor and is isomorphic to that factor's column module $D_i^{n_i}$. These column modules give all simple left $R$-module isomorphism classes, with one class for each factor. See [[thm-wedderburn-artin-theorem]].",
+          "uses": [
+            "5.1"
+          ],
+          "use_explanation": "Such a product has exactly one simple left-module class for each factor, its column module:",
+          "locator": "items/thm-simple-modules-over-semisimple-rings.md#statement"
+        },
+        {
+          "fact": "F4",
+          "source": "thm-uniqueness-of-wedderburn-artin-data",
+          "source_section": "Statement",
+          "quote": "The division rings and matrix sizes in a Wedderburn-Artin decomposition of a nonzero semisimple ring are unique up to permutation and division-ring isomorphism. See [[thm-wedderburn-artin-theorem]].",
+          "uses": [
+            "5.1"
+          ],
+          "use_explanation": "The matrix sizes and division rings in the decomposition are unique up to permutation and isomorphism:",
+          "locator": "items/thm-uniqueness-of-wedderburn-artin-data.md#statement"
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) that is\nfinite-dimensional with $\\dim_F V = n$ ([[def-dimension]]), and let $U$ be a\nlinear subspace of $V$ ([[def-linear-subspace]]). Then\n\n1. $U$ is finite-dimensional over $F$ and $\\dim_F U \\le n$;\n2. $\\dim_F U = n$ **if and only if** $U = V$;\n3. **Extension, with no choice principle.** Every linearly independent\n   $A_0 \\subseteq U$ is contained in a basis of $U$: there is a basis $B$ of $U$\n   with $A_0 \\subseteq B \\subseteq U$. Claim 1 is the case $A_0 = \\varnothing$.\n   Since $V$ is itself a linear subspace of $V$ ([[def-linear-subspace]]), claim 3\n   applies with $V$ in place of $U$, and hence to **any** finite-dimensional\n   vector space over $F$ in place of the pair $(V, U)$.\n\n**Nothing above uses a choice principle**, and claim 3 in particular is the\nfinite-dimensional substitute for the Zorn-based extension theorem stated earlier\non this page. In finite dimension the extension terminates on its own, because\n[[cor-independent-set-is-no-larger-than-a-finite-spanning-set]] bounds the size\nof an independent set and [[thm-well-ordering-principle]] then supplies a largest\none; no selection is made anywhere.\n\n**Finiteness is essential in claim 2.** Without it the equality case fails: the\ncompanion page exhibits a\nproper linear subspace of an infinite-dimensional space whose basis is\nequinumerous with a basis of the whole space.",
+          "uses": [
+            "4.1"
+          ],
+          "use_explanation": "A proper subspace of a finite-dimensional space has strictly smaller dimension:",
+          "locator": "items/thm-dimension-of-a-linear-subspace.md#statement"
+        },
+        {
+          "fact": "F6",
+          "source": "lem-galois-fixed-points-recover-a-finite-dimensional-scalar-extension",
+          "source_section": "Statement",
+          "quote": "Let $E/F$ be finite Galois with group $\\Gamma$, and let $W$ be a\nfinite-dimensional semilinear $\\Gamma$-space. Then\n$$\\mu:E\\otimes_F W^\\Gamma\\longrightarrow W,\\qquad e\\otimes w\\longmapsto ew$$\nis an $E$-linear isomorphism. If $W$ is an $E$-algebra and the action is by\nsemilinear algebra automorphisms, this is an algebra isomorphism. For a\nfinite-dimensional $F$-space $V$ with the canonical action on $E\\otimes_F V$,\n$$(E\\otimes_F V)^\\Gamma=1\\otimes V.$$\nHere $v\\mapsto1\\otimes v$ is injective, so $1\\otimes V$ is a copy of $V$.\nConsequently $E\\otimes_F(E\\otimes_F V)^\\Gamma\\cong E\\otimes_F V$, respecting\nalgebra multiplication and units when $V$ is an $F$-algebra.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "The canonical map $A\\to E\\otimes_F A$, $a\\mapsto1\\otimes a$, is injective:",
+          "locator": "items/lem-galois-fixed-points-recover-a-finite-dimensional-scalar-extension.md#statement"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Each descended orbit idempotent is primitive.",
+          "inputs": [
+            "F6",
+            "F1",
+            "A proposed orthogonal central splitting e_O=f+g; nonempty invariant subsets partitioning one orbit",
+            "Given: $A,E/F$, and the descended idempotents $e_O$ as stated."
+          ],
+          "calculation": "Suppose $e_O=f+g$ with nonzero orthogonal central idempotents $f,g\\in A$. Their scalar extensions are nonzero: F6 makes the canonical scalar-extension map injective. Since $fe_O=f$ and $ge_O=g$, the subset description in F1 writes $1\\otimes f$ and $1\\otimes g$ as disjoint nonempty subsets partitioning $O$. Each subset is $\\Gamma$-stable because its sum is a tensor $1\\otimes a$ and the subset representation is unique. But a nonempty invariant subset of one orbit equals the entire orbit: for any of its points, every point of the orbit is a translate. Two such disjoint subsets cannot exist. Thus $e_O$ is primitive."
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Every primitive central idempotent is one of the e_O.",
+          "inputs": [
+            "1.1",
+            "F1",
+            "e=sum_O ee_O; primitive e; e_O=e+(e_O-e) with orthogonal summands",
+            "Given: $A,E/F$, and the descended idempotents $e_O$ as stated."
+          ],
+          "calculation": "For any primitive central idempotent $e$ of $A$, the products $ee_O$ are central orthogonal idempotents summing to $e$. At least one is nonzero since $e\\ne0$; exactly one is nonzero by primitivity of $e$. For that orbit, $e=ee_O$. Now $e_O=e+(e_O-e)$ is a sum of orthogonal central idempotents: $(e_O-e)^2=e_O-e$ and $e(e_O-e)=0$. Primitivity from step 1.1 forces $e_O-e=0$. Thus every primitive central idempotent is exactly one $e_O$."
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "Each Ae_O is a matrix factor M_n(D).",
+          "inputs": [
+            "F2",
+            "2.1",
+            "A nonzero semisimple; matrix units E_kl; a central matrix is dI with d in Z(D)",
+            "Given: $A,E/F$, and the descended idempotents $e_O$ as stated."
+          ],
+          "calculation": "For $A\\ne0$, choose $A\\cong\\prod_j M_{n_j}(D_j)$ by F2. A matrix commuting with all $E_{kk}$ has zero off-diagonal entries, and commuting with all $E_{kl}$ makes its diagonal entries equal. Commuting also with matrices having any $d\\in D_j$ in position $(1,1)$ forces that common entry into $Z(D_j)$. Conversely such scalar matrices commute with everything. Since a division ring has no idempotents except $0,1$, the primitive central idempotents in this product are exactly its factor identities. By step 2.1, each $Ae_O$ is therefore one factor $M_n(D)$."
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "Each matrix block is simple and Artinian.",
+          "inputs": [
+            "F5",
+            "3.1",
+            "Nonzero X in ideal J with x_pq nonzero; E_ap X E_qb=x_pq E_ab; finite F-dimension of the block",
+            "Given: $A,E/F$, and the descended idempotents $e_O$ as stated."
+          ],
+          "calculation": "A nonzero two-sided ideal $J\\subset M_n(D)$ contains a matrix $X$ with entry $x_{pq}\\ne0$. For any $a,b$, $E_{ap}XE_{qb}=x_{pq}E_{ab}\\in J$. Left multiplying by the diagonal matrix having $x_{pq}^{-1}$ in position $(a,a)$ gives $E_{ab}\\in J$. Hence $I=\\sum_aE_{aa}\\in J$ and $J=M_n(D)$. Also every left or right ideal is an $F$-subspace of the finite-dimensional algebra $Ae_O$; a strict descending chain strictly decreases dimension and so terminates. Thus this ring is simple and Artinian, without asserting that its regular left module is simple when $n>1$."
+        },
+        {
+          "id": "derive-5-1",
+          "step": "5.1",
+          "claim": "Each block has one simple column type and D=End_A(S)^op; zero and n=1 cases are included.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F1",
+            "3.1",
+            "4.1",
+            "S=D^n; commuting endomorphisms are right multiplications; composition reverses their order",
+            "Given: $A,E/F$, and the descended idempotents $e_O$ as stated."
+          ],
+          "calculation": "F3 gives its unique simple left-module class $S=D^n$. A commuting endomorphism of this column module preserves the first coordinate line, and its value there determines all other coordinates by the matrix units; commuting with left multiplication by $D$ forces it to be right multiplication by a fixed $d\\in D$. Composition reverses the order of these right multiplications, so $\\operatorname{End}_A(S)\\cong D^{\\mathrm{op}}$, or $D\\cong\\operatorname{End}_A(S)^{\\mathrm{op}}$. F4 ensures that using another product description does not change the factor data up to the stated equivalences. For $A=0$, F1 supplies empty families and there is no primitive idempotent or simple module; for $n=1$ the same calculations give the division ring itself."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 5.1 records the empty zero-algebra family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use nonzero idempotents; step 5.1 handles A=0 separately."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 includes n=1, the division ring itself."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 chooses a nonzero entry only from a nonzero ideal element, so its inverse exists."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no ordered domain or analytic endpoint in the block assertion."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 selects a nonzero product from a finite sum equal to e nonzero; step 4.1 selects an entry of a finite matrix."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 proves every descended orbit idempotent is primitive."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves every primitive central idempotent is a descended orbit idempotent."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Weizhe Zheng, Lectures on Algebra (10 January 2025)",
+          "url": "https://server.mcm.ac.cn/~zheng/algebra.pdf",
+          "locator": "§3.2 Theorem 3.2.1, Remark 3.2.3; §3.3 Lemma 3.3.2 and Warning 3.3.3(1), pp.117–118; §3.8 Theorem 3.8.1"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "phase-2-wave-1 alpha-d Step 6b",
+        "notes": "A hypothetical nontrivial split of e_O gives disjoint nonempty Gamma-invariant subsets of one orbit, impossible by transitivity. Conversely the finite orthogonal products ee_O show every primitive central idempotent is one e_O. Wedderburn–Artin is invoked only for nonzero semisimple A. Matrix units prove simplicity of each factor as a ring; ideals are subspaces of its finite-dimensional F-algebra, so descending chains terminate. Column simples are unique per factor and commuting endomorphisms act by right multiplication, yielding End_A(S)=D^op, not D. A=0 and n=1 checked. Exact six suppliers and Zheng §§3.2–3.3 read; regular-module simplicity is not claimed when n>1."
+      }
+    },
+    "thm-galois-orbits-classify-simple-modules-after-splitting-base-change": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-semilinear-galois-action-on-a-scalar-extended-algebra",
+          "source_section": "Definition",
+          "quote": "Let $E/F$ be a finite Galois extension with group $\\Gamma$ as in\n[[def-finite-galois-extension-and-galois-group]], and let $A$ be a finite-dimensional\nunital $F$-algebra. Put $B=E\\otimes_F A$. Its multiplication and unit are\n$(e\\otimes a)(f\\otimes a')=ef\\otimes aa'$ and $1\\otimes1$, by\n[[thm-tensor-product-of-algebras-over-a-commutative-ring]]. Define\n$\\sigma_B(e\\otimes a)=\\sigma(e)\\otimes a$. This is well-defined because\n$\\sigma$ fixes $F$; the displayed multiplication shows it is a semilinear algebra\nautomorphism, with inverse $(\\sigma^{-1})_B$.\n\nA **semilinear Galois action** on an $E$-space $W$ consists of additive maps\n$T_\\sigma:W\\to W$ such that, for every $e\\in E$, $w\\in W$, and\n$\\sigma,\\tau\\in\\Gamma$,\n$$T_\\sigma(ew)=\\sigma(e)T_\\sigma(w),\\qquad T_1=\\operatorname{id},\\qquad T_\\sigma T_\\tau=T_{\\sigma\\tau}.$$\nFor a $B$-module it is **compatible** if\n$T_\\sigma(bw)=\\sigma_B(b)T_\\sigma(w)$ for all $b,w$.\nWrite $W^\\Gamma=\\{w:T_\\sigma(w)=w\\text{ for all }\\sigma\\}$.\n\nFor a left $B$-module $W$, its **twist** ${}^\\sigma W$ has the same underlying\nadditive group, with action\n$$b\\star w=\\sigma_B^{-1}(b)w.$$\nIn particular its $E$-scalar structure changes: $e\\star w=\\sigma^{-1}(e)w$.\nApplying this formula twice gives\n$\\tau_B^{-1}\\sigma_B^{-1}(b)=(\\sigma\\tau)_B^{-1}(b)$, hence\n${}^\\sigma({}^\\tau W)={} ^{\\sigma\\tau}W$.\nIf $(w_j)$ is an original $E$-basis, it is also a basis in the twisted scalar\nstructure. An original equation $aw_j=\\sum_i r_{ij}w_i$ for $a\\in A$\nbecomes $aw_j=\\sum_i\\sigma(r_{ij})\\star w_i$. Thus the transported matrices\nare $\\sigma(\\rho(a))$. Twisting and its inverse preserve submodules and\nisomorphisms, so they preserve simplicity. The **decomposition group** of a\nsimple class is $\\Gamma_W=\\{\\sigma:{}^\\sigma W\\cong W\\}$, its stabilizer.\n\nA **central idempotent** is $c\\in Z(B)$ with $c^2=c$. It is **primitive** if\n$c\\ne0$ and $c$ is not a sum of two nonzero orthogonal central idempotents.\nAn algebra is **split semisimple** over $E$ if it is a finite product of\n$M_n(E)$ with $n\\ge1$; the empty product means the zero algebra. This is\ncompatible with the zero-ring convention in [[def-semisimple-ring]]. A central\nidempotent **supports** a simple module when it acts as the identity on it.\n\nFor a left $A$-module $S$, extend scalars along the field map $F\\to E$ as in\n[[def-restriction-and-extension-of-scalars]], and give $E\\otimes_F S$ the action\n$$(e\\otimes a)(f\\otimes s)=ef\\otimes as.$$\nThe relations $(efr)\\otimes as=ef\\otimes a(rs)=ef\\otimes(ra)s$ for $r\\in F$\nverify balancing in both tensor factors; additivity extends this rule to sums.\nAssociativity follows from $a(a's)=(aa')s$, and $1\\otimes1$ acts identically.\nThe outer $E$-action is the one in [[thm-bimodule-actions-induced-on-tensor-products]].\nThis construction uses tensors over the central field $F$, even when $A$ is\nnoncommutative. Its canonical compatible action is\n$T_\\sigma(e\\otimes s)=\\sigma(e)\\otimes s$.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ],
+          "use_explanation": "Canonical semilinear tensor actions and inverse-pullback twists are specified in",
+          "locator": "items/def-semilinear-galois-action-on-a-scalar-extended-algebra.md#definition"
+        },
+        {
+          "fact": "F2",
+          "source": "lem-galois-orbit-sums-of-split-central-idempotents-descend",
+          "source_section": "Statement",
+          "quote": "Let $E/F$ be finite Galois with group $\\Gamma$, let $A$ be a finite-dimensional\nunital $F$-algebra, and assume $B=E\\otimes_F A$ is split semisimple. Its primitive\ncentral idempotents are the coordinate identities in a split matrix\ndecomposition. They correspond bijectively to simple left $B$-module classes\nby support. The action $\\sigma_B$ permutes these idempotents, and $c$ supports\n$W$ if and only if $\\sigma_B(c)$ supports ${}^\\sigma W$.\n\nFor every orbit $O$ of primitive central idempotents there is a unique nonzero\ncentral idempotent $e_O\\in A$ with\n$$1\\otimes e_O=c_O:=\\sum_{c\\in O}c.$$\nDistinct $e_O$ are orthogonal and their sum is $1_A$. For $A=0$, both families\nare empty and this last equality means $0=1_A$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "5.1"
+          ],
+          "use_explanation": "Split primitive central idempotents correspond to simple classes, equivariantly, and their orbit sums descend:",
+          "locator": "items/lem-galois-orbit-sums-of-split-central-idempotents-descend.md#statement"
+        },
+        {
+          "fact": "F3",
+          "source": "lem-a-descended-galois-orbit-idempotent-is-primitive",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite-dimensional semisimple unital $F$-algebra and suppose\n$E/F$ is finite Galois with $E\\otimes_F A$ split semisimple. The elements\n$e_O$ obtained by descending Galois orbit sums are precisely the primitive\ncentral idempotents of $A$. Each $Ae_O$ is a simple Artinian ring with unit\n$e_O$ and has exactly one simple left-module class. For $A=0$ there are no\nsuch blocks.\nMore precisely, if $Ae_O\\cong M_n(D)$ and $S=D^n$ is its column simple,\nthen $D\\cong\\operatorname{End}_A(S)^{\\mathrm{op}}$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ],
+          "use_explanation": "The descended orbit idempotents are precisely the primitive central idempotents of $A$, with one simple type per block and $D=\\operatorname{End}_A(S)^{\\mathrm{op}}$:",
+          "locator": "items/lem-a-descended-galois-orbit-idempotent-is-primitive.md#statement"
+        },
+        {
+          "fact": "F4",
+          "source": "thm-wedderburn-artin-theorem",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a nonzero unital ring. Then $R$ is semisimple if and only if $$R\\cong\\prod_{i=1}^rM_{n_i}(D_i)$$ for positive integers $r,n_i$ and division rings $D_i$. See [[thm-endomorphism-ring-of-the-left-regular-module-is-opposite]].",
+          "uses": [
+            "1.1",
+            "7.1"
+          ],
+          "use_explanation": "Nonzero semisimple rings are finite products of matrix rings over division rings:",
+          "locator": "items/thm-wedderburn-artin-theorem.md#statement"
+        },
+        {
+          "fact": "F5",
+          "source": "thm-simple-modules-over-semisimple-rings",
+          "source_section": "Statement",
+          "quote": "Let $r\\ge1$, let every $n_i\\ge1$, let every $D_i$ be a division ring, and put $R=\\prod_{i=1}^rM_{n_i}(D_i)$. Then every simple left $R$-module is supported on exactly one factor and is isomorphic to that factor's column module $D_i^{n_i}$. These column modules give all simple left $R$-module isomorphism classes, with one class for each factor. See [[thm-wedderburn-artin-theorem]].",
+          "uses": [
+            "1.1",
+            "3.1",
+            "7.1"
+          ],
+          "use_explanation": "The simple left modules of such a product are its factor column modules:",
+          "locator": "items/thm-simple-modules-over-semisimple-rings.md#statement"
+        },
+        {
+          "fact": "F6",
+          "source": "thm-tensor-products-commute-with-arbitrary-direct-sums",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring, let $(M_i)_{i\\in I}$ be any family of $R$-modules, and let $N$ be an $R$-module. The homomorphism induced by the coordinate inclusions is a natural $R$-module isomorphism\n\n$$\\Phi:\\bigoplus_{i\\in I}(M_i\\otimes_RN)\\longrightarrow\\left(\\bigoplus_{i\\in I}M_i\\right)\\otimes_RN,$$\n\n$$\\Phi\\bigl(\\jmath_i(m\\otimes n)\\bigr)=\\jmath_i(m)\\otimes n.$$\n\nThe same holds with the direct sum in the second variable: there is a natural $R$-module isomorphism\n\n$$\\Phi':\\bigoplus_{i\\in I}(N\\otimes_RM_i)\\longrightarrow N\\otimes_R\\left(\\bigoplus_{i\\in I}M_i\\right),\\qquad \\Phi'\\bigl(\\jmath_i(n\\otimes m)\\bigr)=n\\otimes\\jmath_i(m).$$\n\nThe assertion includes $I=\\varnothing$, when both sides are zero.",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "Tensoring over $F$ commutes with direct sums, by the coordinate maps:",
+          "locator": "items/thm-tensor-products-commute-with-arbitrary-direct-sums.md#statement"
+        },
+        {
+          "fact": "F7",
+          "source": "thm-tensor-product-basis-from-bases",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring. If $M$ is free with basis $(e_i)_{i\\in I}$ and $N$ is free with basis $(f_j)_{j\\in J}$, then $M\\otimes_RN$ is free with basis\n\n$$\\bigl(e_i\\otimes f_j\\bigr)_{(i,j)\\in I\\times J}.$$\n\nEquivalently, the canonical map $R^{(I\\times J)}\\to M\\otimes_RN$ sending the standard basis vector at $(i,j)$ to $e_i\\otimes f_j$ is an isomorphism. This includes an empty basis in either factor.",
+          "uses": [
+            "2.1",
+            "6.1"
+          ],
+          "use_explanation": "Product bases describe tensors of free modules, also for empty bases:",
+          "locator": "items/thm-tensor-product-basis-from-bases.md#statement"
+        },
+        {
+          "fact": "F8",
+          "source": "thm-jordan-holder-theorem-for-modules",
+          "source_section": "Statement",
+          "quote": "Any two composition series of a module have the same length, and their simple factors agree up to permutation and isomorphism. See [[def-composition-series-and-length-of-a-module]].",
+          "uses": [
+            "3.1",
+            "4.1"
+          ],
+          "use_explanation": "The simple factors of two finite composition series agree with multiplicity:",
+          "locator": "items/thm-jordan-holder-theorem-for-modules.md#statement"
+        },
+        {
+          "fact": "F9",
+          "source": "thm-dimension-of-a-linear-subspace",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]) that is\nfinite-dimensional with $\\dim_F V = n$ ([[def-dimension]]), and let $U$ be a\nlinear subspace of $V$ ([[def-linear-subspace]]). Then\n\n1. $U$ is finite-dimensional over $F$ and $\\dim_F U \\le n$;\n2. $\\dim_F U = n$ **if and only if** $U = V$;\n3. **Extension, with no choice principle.** Every linearly independent\n   $A_0 \\subseteq U$ is contained in a basis of $U$: there is a basis $B$ of $U$\n   with $A_0 \\subseteq B \\subseteq U$. Claim 1 is the case $A_0 = \\varnothing$.\n   Since $V$ is itself a linear subspace of $V$ ([[def-linear-subspace]]), claim 3\n   applies with $V$ in place of $U$, and hence to **any** finite-dimensional\n   vector space over $F$ in place of the pair $(V, U)$.\n\n**Nothing above uses a choice principle**, and claim 3 in particular is the\nfinite-dimensional substitute for the Zorn-based extension theorem stated earlier\non this page. In finite dimension the extension terminates on its own, because\n[[cor-independent-set-is-no-larger-than-a-finite-spanning-set]] bounds the size\nof an independent set and [[thm-well-ordering-principle]] then supplies a largest\none; no selection is made anywhere.\n\n**Finiteness is essential in claim 2.** Without it the equality case fails: the\ncompanion page exhibits a\nproper linear subspace of an infinite-dimensional space whose basis is\nequinumerous with a basis of the whole space.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "5.2"
+          ],
+          "use_explanation": "Finite-dimensional subspaces have finite bases, independent sets extend to bases, and a proper subspace has strictly smaller dimension:",
+          "locator": "items/thm-dimension-of-a-linear-subspace.md#statement"
+        },
+        {
+          "fact": "F10",
+          "source": "lem-characteristic-and-additive-order",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a ring ([[def-ring]]) and let $\\operatorname{ord}(1_R)$ be the order\nof $1_R$ in the abelian group $(R,+,0_R)$ ([[def-order-in-a-group]]), with\n$\\operatorname{ord}(1_R) = \\infty$ when no $n \\ge 1$ satisfies\n$n \\cdot 1_R = 0_R$. Throughout, a natural number written where an integer is\nexpected means its image under the embedding $\\iota_{\\mathbb{Z}} : \\mathbb{N} \\to \\mathbb{Z}$\nof [[lem-nat-embeds-int]]. Then:\n\n1. if $\\operatorname{ord}(1_R)$ is finite then\n   $\\operatorname{char}(R) = \\operatorname{ord}(1_R)$\n   ([[def-ring-characteristic]]), and if $\\operatorname{ord}(1_R) = \\infty$ then\n   $\\operatorname{char}(R) = 0$; so the characteristic is the additive order of\n   $1_R$, with the value $0$ recording infinite order;\n2. for every $n \\in \\mathbb{Z}$, the equation $n \\cdot 1_R = 0_R$ holds if and\n   only if $\\operatorname{char}(R)$ divides $n$ in $\\mathbb{Z}$, divisibility\n   being the relation of [[def-divides-in-z]];\n3. if $R$ is an integral domain\n   ([[def-zero-divisor-and-integral-domain]]) then for every $a \\in R$ with\n   $a \\ne 0_R$ and every $n \\in \\mathbb{Z}$,\n   $n a = 0_R$ if and only if $n \\cdot 1_R = 0_R$; consequently every nonzero\n   element of $R$ has the same additive order as $1_R$.",
+          "uses": [
+            "2.2"
+          ],
+          "use_explanation": "In characteristic zero the additive order of $1$ is infinite:",
+          "locator": "items/lem-characteristic-and-additive-order.md#statement"
+        },
+        {
+          "fact": "F11",
+          "source": "def-field",
+          "source_section": "Definition",
+          "quote": "A **field** is a set $F$ equipped with two binary operations $+$ (addition) and\n$\\cdot$ (multiplication) and two distinguished elements $0 \\ne 1$ of $F$,\nsatisfying:\n\n- **(A)** $(F, +)$ is an abelian group with identity $0$: addition is\n  associative and commutative, $x + 0 = x$ for all $x$, and every $x$ has an\n  additive inverse $-x$ with $x + (-x) = 0$.\n- **(M)** Multiplication is associative and commutative **on all of $F$**, and\n  $x \\cdot 1 = x$ for every $x \\in F$; moreover $(F \\setminus \\{0\\}, \\cdot)$ is an\n  abelian group with identity $1$, so every $x \\ne 0$ has a multiplicative inverse\n  $x^{-1}$ with $x \\cdot x^{-1} = 1$.\n- **(D)** Multiplication distributes over addition: $x \\cdot (y + z) = x\\cdot y + x\\cdot z$.\n\nWe write $x - y := x + (-y)$ and $x/y := x \\cdot y^{-1}$ (for $y \\ne 0$), and\nabbreviate $x \\cdot y$ as $xy$.",
+          "uses": [
+            "2.2"
+          ],
+          "use_explanation": "Every nonzero field element has an inverse:",
+          "locator": "items/def-field.md#definition"
+        },
+        {
+          "fact": "F12",
+          "source": "def-finite-sum-in-a-commutative-monoid",
+          "source_section": "Definition",
+          "quote": "Let $(M,+,0)$ be a commutative monoid ([[def-semigroup-and-monoid]]), let $S$ be a finite set with $n:=|S|$ ([[def-finite-cardinality]]), and let $a:S\\to M$. Choose a bijection $\\phi:n\\to S$ and define\n\n$$\\sum_{s\\in S}a_s:=a_{\\phi(0)}+a_{\\phi(1)}+\\cdots+a_{\\phi(n-1)},$$\n\nwhere the right side is the finite monoid product of [[def-monoid-finite-product]] written additively. In particular, the sum over the empty set is $0$.\n\nThis value is independent of the enumeration. If $\\psi:n\\to S$ is another bijection, then $\\phi^{-1}\\circ\\psi$ is a permutation of $n$ ([[def-injection-surjection-bijection]]), and generalised commutativity gives\n\n$$\\sum_{k<n}a_{\\psi(k)}=\\sum_{k<n}a_{\\phi(k)}$$\n\n([[thm-generalised-associativity]]). Thus the displayed notation names one element of $M$ and does not select a preferred enumeration.\n\nWhen $M$ is the additive monoid of $\\mathbb R$ or of $\\mathbb N$, this definition agrees with [[def-sum-over-a-finite-index-set]]: both enumerate $S$, apply the same finite recursion with identity $0$, and are independent of the enumeration.",
+          "uses": [
+            "2.2"
+          ],
+          "use_explanation": "Finite sums in a commutative monoid include the empty sum $0$:",
+          "locator": "items/def-finite-sum-in-a-commutative-monoid.md#definition"
+        },
+        {
+          "fact": "F13",
+          "source": "lem-finite-sum-reindexing-and-fubini",
+          "source_section": "Statement",
+          "quote": "Let $(M,+,0)$ be a commutative monoid and let all index sets below be finite.\n\n1. If $h:T\\to S$ is a bijection and $a:S\\to M$, then $\\sum_{t\\in T}a_{h(t)}=\\sum_{s\\in S}a_s$.\n2. If $S$ and $T$ are disjoint and $a:S\\cup T\\to M$, then $\\sum_{u\\in S\\cup T}a_u=\\sum_{s\\in S}a_s+\\sum_{t\\in T}a_t$.\n3. If $a:S\\times T\\to M$, then\n   $$\\sum_{(s,t)\\in S\\times T}a_{s,t}=\\sum_{s\\in S}\\left(\\sum_{t\\in T}a_{s,t}\\right)=\\sum_{t\\in T}\\left(\\sum_{s\\in S}a_{s,t}\\right).$$",
+          "uses": [
+            "3.2"
+          ],
+          "use_explanation": "Finite sums are unchanged by bijective reindexing:",
+          "locator": "items/lem-finite-sum-reindexing-and-fubini.md#statement"
+        },
+        {
+          "fact": "F14",
+          "source": "thm-strong-induction",
+          "source_section": "Statement",
+          "quote": "Let $P$ be a property of naturals such that for every $n \\in \\mathbb{N}$, if $P(m)$ holds for all $m < n$ then $P(n)$. Then $P(n)$ holds for all $n \\in \\mathbb{N}$. (At $n = 0$ the hypothesis is vacuous, so $P(0)$ is forced.)",
+          "uses": [
+            "2.2",
+            "5.2"
+          ],
+          "use_explanation": "Strong induction permits assuming all smaller natural-number cases:",
+          "locator": "items/thm-strong-induction.md#statement"
+        },
+        {
+          "fact": "F15",
+          "source": "thm-group-actions-and-group-ring-modules-correspond",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring, let $G$ be a group, and let $M$ be a left\n$R$-module. Then:\n\n1. every $R$-linear action of $G$ on $M$ extends uniquely to a left\n   $R[G]$-module structure on $M$ satisfying\n   $$(r[e]) \\cdot m=rm\\qquad(r \\in R,\\ m \\in M);$$\n2. every left $R[G]$-module structure on $M$ satisfying\n   $$(r[e]) \\cdot m=rm\\qquad(r \\in R,\\ m \\in M)$$\n   restricts to an $R$-linear action of $G$ on $M$;\n3. these two constructions are inverse to each other.\n\nMoreover, if $M$ and $N$ carry the corresponding structures, then an\n$R$-linear map $f:M \\to N$ is $G$-equivariant if and only if it is an\n$R[G]$-module homomorphism.",
+          "uses": [
+            "3.2",
+            "6.1",
+            "7.1"
+          ],
+          "use_explanation": "Linear $G$-actions and $k[G]$-module structures correspond, as do equivariant maps and module homomorphisms:",
+          "locator": "items/thm-group-actions-and-group-ring-modules-correspond.md#statement"
+        },
+        {
+          "fact": "F16",
+          "source": "def-splitting-field-for-a-finite-group",
+          "source_section": "Definition",
+          "quote": "Let $G$ be a finite group and let $k$ be a field. The field $k$ is a\n**splitting field for $G$** when every irreducible representation $V$ of $G$\nover $k$ satisfies\n$$\\operatorname{End}_G(V)=k,$$\nmeaning that every $G$-endomorphism of $V$ is a scalar operator\n$\\lambda\\operatorname{id}_V$ with $\\lambda \\in k$\n([[def-finite-dimensional-representation-of-a-group-over-a-field]], [[def-intertwiner-equivalent-and-faithful-representations]]).",
+          "uses": [
+            "7.1"
+          ],
+          "use_explanation": "A splitting field for $G$ has scalar endomorphisms for every irreducible representation:",
+          "locator": "items/def-splitting-field-for-a-finite-group.md#definition"
+        },
+        {
+          "fact": "F17",
+          "source": "def-semisimple-module",
+          "source_section": "Definition",
+          "quote": "A left $R$-module is **semisimple** when it is an internal direct sum of simple submodules, allowing the empty direct sum. Hence the zero module is semisimple.",
+          "uses": [
+            "5.2"
+          ],
+          "use_explanation": "A module is semisimple when it is a direct sum of simple submodules, allowing the empty sum:",
+          "locator": "items/def-semisimple-module.md#definition"
+        },
+        {
+          "fact": "F18",
+          "source": "def-semisimple-ring",
+          "source_section": "Definition",
+          "quote": "A unital ring $R$ is **semisimple** when its left regular module ${}_R R$ is semisimple. This is a left-module definition and uses no Jacobson radical. For the zero ring, the regular module is zero and hence semisimple; the Wedderburn-Artin theorem below is stated for nonzero rings.",
+          "uses": [
+            "6.1"
+          ],
+          "use_explanation": "A ring is semisimple when its left regular module is semisimple:",
+          "locator": "items/def-semisimple-ring.md#definition"
+        },
+        {
+          "fact": "F19",
+          "source": "thm-group-ring-is-a-unital-algebra-with-basis-g",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and let $G$ be a group. Write $[g] \\in R[G]$ for\nthe basis vector of [[def-group-ring]] indexed by $g \\in G$.\n\nThere is a unique $R$-bilinear multiplication on $R[G]$ satisfying\n$$[g][h]=[gh]\\qquad(g,h\\in G).$$\nWith this product, $R[G]$ is a unital $R$-algebra whose underlying\n$R$-module has basis $\\{[g]:g\\in G\\}$. Its identity is $[e]$, where $e$ is the\nidentity of $G$, and every basis element $[g]$ is a unit with inverse\n$[g^{-1}]$.",
+          "uses": [
+            "6.1"
+          ],
+          "use_explanation": "The group algebra has the group basis, with multiplication $[g][h]=[gh]$:",
+          "locator": "items/thm-group-ring-is-a-unital-algebra-with-basis-g.md#statement"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "The zero case is empty; otherwise blocks indexed by O exhaust the simple A-types S_O.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "A semisimple finite-dimensional; orbit idempotents; S_O a column left ideal",
+            "Given: The algebra and field hypotheses in the statement; all modules are unital left modules."
+          ],
+          "calculation": "If $A=0$, $B=0$ and every unital module is zero, since $w=1w=0w=0$. There are no simple classes, so the empty map is the asserted bijection. Henceforth take $A\\ne0$. By F2–F3, each orbit $O$ gives a block $Ae_O\\cong M_{n_O}(D_O)$ with one simple type $S_O=D_O^{n_O}$, where $n_O\\ge1$. F4–F5 show that these exhaust all simple $A$-modules with no repetition. In particular these simples are finite-dimensional, because each is a column left ideal of the finite-dimensional algebra."
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "Every finite-dimensional split-algebra module is explicitly a finite sum of column modules.",
+          "inputs": [
+            "F9",
+            "E_11 M basis v_t; standard vector j in copy t maps to E_j1 v_t; inverse recovery via E_1j",
+            "Given: The algebra and field hypotheses in the statement; all modules are unital left modules."
+          ],
+          "calculation": "For completeness, any finite-dimensional module $M$ over $M_d(E)$ is a sum of column modules by an explicit map. The orthogonal $E_{jj}$ give $M=\\bigoplus_{j=1}^d E_{jj}M$. Choose an $E$-basis $(v_t)_{t=1}^h$ of $E_{11}M$ by F9, and send the $j$th standard vector in column copy $t$ to $E_{j1}v_t$. Matrix multiplication $E_{ab}E_{j1}=\\delta_{bj}E_{a1}$ proves module linearity. Every $x\\in E_{jj}M$ equals $E_{j1}(E_{1j}x)$, proving spanning. Applying $E_{1j}$ to a relation $\\sum_{k,t}\\lambda_{kt}E_{k1}v_t=0$ gives $\\sum_t\\lambda_{jt}v_t=0$, proving independence. Thus $M\\cong(E^d)^{\\oplus h}$. For a product of matrix rings, first decompose by its coordinate identities and apply this argument to each coordinate. It includes $h=0$."
+        },
+        {
+          "id": "derive-1-3",
+          "step": "1.3",
+          "claim": "Finite basis extension constructs a linear projection P onto any submodule U.",
+          "inputs": [
+            "F9",
+            "k=F or E of characteristic zero; V finite-dimensional; U a k[G]-submodule",
+            "Given: The algebra and field hypotheses in the statement; all modules are unital left modules."
+          ],
+          "calculation": "For the finite-group specialization, let $G,F,E$ satisfy the finite-group hypotheses, and fix $k=F$ or $k=E$. The field inclusion makes $k$ characteristic zero. Let $V$ be a finite-dimensional $k[G]$-module and $U\\subseteq V$ a submodule. F9 supplies a finite basis $u_1,\\ldots,u_r$ of $U$ extended to a basis $u_1,\\ldots,u_r,v_{r+1},\\ldots,v_d$ of $V$. Define $P(\\sum_{j\\le r}a_ju_j+\\sum_{j>r}a_jv_j)=\\sum_{j\\le r}a_ju_j$. Coordinate uniqueness makes $P$ linear, with image $U$ and $P|_U=\\operatorname{id}$. This includes $U=0$ and $U=V$."
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "Bc_O is n_O copies of E tensor S_O, of finite E-dimension.",
+          "inputs": [
+            "F6",
+            "F7",
+            "F1",
+            "1.1",
+            "Ae_O is n_O column ideals; e tensor ae_O maps to (e tensor a)c_O",
+            "Given: The algebra and field hypotheses in the statement; all modules are unital left modules."
+          ],
+          "calculation": "Separating a matrix into its $n_O$ columns gives $Ae_O\\cong S_O^{\\oplus n_O}$ as left $A$-modules. Scalar extension yields $Bc_O\\cong (E\\otimes_F S_O)^{\\oplus n_O}$: the first identification sends $e\\otimes ae_O$ to $(e\\otimes a)c_O$; it is onto and injective by regrouping the tensor basis along a basis of $Ae_O$. The direct-sum isomorphism is F6, and its coordinate formula commutes with the $B$-action. F7 similarly gives $\\dim_E(E\\otimes_F S_O)=\\dim_F S_O$."
+        },
+        {
+          "id": "derive-2-2",
+          "step": "2.2",
+          "claim": "The average Q=N^-1 sum_g gPg^-1 is a well-defined linear map.",
+          "inputs": [
+            "F10",
+            "F11",
+            "F12",
+            "F14",
+            "1.3",
+            "N=|G|>0; characteristic zero; finite sums of endomorphisms; induction gives distributivity",
+            "Given: The algebra and field hypotheses in the statement; all modules are unital left modules."
+          ],
+          "calculation": "Since $G$ contains its identity, $N=|G|\\ge1$. F10 gives $N\\cdot1_k\\ne0$, and F11 gives its inverse $N^{-1}$. In the additive commutative monoid of linear endomorphisms set $Q=N^{-1}\\sum_{g\\in G}gPg^{-1}$. This finite sum is defined by F12. Composition and evaluation distribute over it: for an empty list both sides are zero, and adjoining one term follows from binary distributivity; induction on the list length proves the finite identity. Thus $Q$ is a linear map."
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "E tensor S_O has exactly the constituents indexed by O, all with positive multiplicity.",
+          "inputs": [
+            "1.2",
+            "2.1",
+            "F8",
+            "F2",
+            "F5",
+            "n_O>0; Bc_O regular column decomposition; finite simple decompositions give composition series",
+            "Given: The algebra and field hypotheses in the statement; all modules are unital left modules."
+          ],
+          "calculation": "Put $M=E\\otimes_F S_O$. By step 1.2 it has a finite simple decomposition. The regular module $Bc_O$ consists of exactly the split factors indexed by $O$, each with its nonzero column multiplicity. Comparing step 2.1 with these decompositions, F8 gives $n_O$ times the multiplicity of each class in $M$ equal to its regular-block multiplicity. Since $n_O>0$, precisely the classes in $O$ occur in $M$, each positively; no other class occurs. The use of F8 is legitimate because ordering the summands of a finite simple direct sum gives a composition series."
+        },
+        {
+          "id": "derive-3-2",
+          "step": "3.2",
+          "claim": "Q is a module map, has image in U and restricts to identity on U.",
+          "inputs": [
+            "F15",
+            "F13",
+            "1.3",
+            "2.2",
+            "Conjugation hQh^-1; bijection g to hg; every gPg^-1 maps into U and fixes U",
+            "Given: The algebra and field hypotheses in the statement; all modules are unital left modules."
+          ],
+          "calculation": "For $h\\in G$, distributing composition and reindexing by $g\\mapsto hg$ gives $hQh^{-1}=N^{-1}\\sum_g(hg)P(hg)^{-1}=Q$. Hence $Q$ is $G$-equivariant and is a module map by F15. Since $U$ is $G$-stable, each $gPg^{-1}$ maps into $U$ and is identity on $U$. Therefore $Q(V)\\subseteq U$ and $Q(u)=N^{-1}Nu=u$ for $u\\in U$."
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "All constituent multiplicities in O equal a unique positive integer.",
+          "inputs": [
+            "F8",
+            "3.1",
+            "F1",
+            "Canonical T_sigma gives a B-isomorphism from the twist to M; twists permute simple constituents",
+            "Given: The algebra and field hypotheses in the statement; all modules are unital left modules."
+          ],
+          "calculation": "The canonical map $T_\\sigma(e\\otimes s)=\\sigma(e)\\otimes s$ is an isomorphism ${}^\\sigma M\\to M$: for $b\\in B$, $T_\\sigma(\\sigma_B^{-1}(b)m)=bT_\\sigma(m)$, and its inverse is $T_{\\sigma^{-1}}$. Twisting a direct-sum decomposition therefore permutes the simple types of $M$ without changing their multiplicities, by F8. Any two classes in $O$ are related by a twist, so all the positive multiplicities of step 3.1 equal one integer $m_{S_O}$. F8 also proves its uniqueness."
+        },
+        {
+          "id": "derive-4-2",
+          "step": "4.2",
+          "claim": "V=U direct-sum ker(Q) as k[G]-modules.",
+          "inputs": [
+            "3.2",
+            "v=Qv+(v-Qv); Q|U=id; U intersection ker(Q)=0",
+            "Given: The algebra and field hypotheses in the statement; all modules are unital left modules."
+          ],
+          "calculation": "For $v\\in V$, the vector $v-Qv$ lies in $\\ker Q$ because $Qv\\in U$ and $Q$ fixes $U$. Thus $v=Qv+(v-Qv)$ belongs to $U+\\ker Q$. If $u\\in U\\cap\\ker Q$, then $u=Qu=0$, proving $V=U\\oplus\\ker Q$. The kernel is a submodule since $Q$ is a module map."
+        },
+        {
+          "id": "derive-5-1",
+          "step": "5.1",
+          "claim": "Intrinsic support gives a canonical bijection with disjoint complete constituent sets.",
+          "inputs": [
+            "F2",
+            "F3",
+            "3.1",
+            "4.1",
+            "The unique simple class of each descended block; O recovered as the constituent support",
+            "Given: The algebra and field hypotheses in the statement; all modules are unital left modules."
+          ],
+          "calculation": "The assignment $[S_O]\\mapsto O$ is independent of the displayed matrix decomposition: F2 defines the orbit intrinsically via central idempotents, and F3 gives its unique simple class downstairs. Step 3.1 shows different orbits have disjoint supports and that every simple $B$-class is in the support assigned to its orbit. Conversely that support recovers $O$ from $S_O$. This proves bijectivity in both directions. If $E=F$, all orbits are singletons and $E\\otimes_F S\\cong S$, so the multiplicity is $1$."
+        },
+        {
+          "id": "derive-5-2",
+          "step": "5.2",
+          "claim": "Every finite-dimensional k[G]-module is a finite direct sum of simples.",
+          "inputs": [
+            "4.2",
+            "F9",
+            "F14",
+            "F17",
+            "Strong induction on dim V; zero empty sum; a nonzero proper U and its complement have smaller dimensions",
+            "Given: The algebra and field hypotheses in the statement; all modules are unital left modules."
+          ],
+          "calculation": "Apply strong induction on $d=\\dim_k V$ to the assertion that every such $V$ is a finite direct sum of simple submodules. For $d=0$ use the empty sum. For $d>0$, a simple $V$ is already one summand. Otherwise the definition of simplicity supplies a nonzero proper submodule $U$. Step 4.2 splits it off; both $U$ and $\\ker Q$ are proper, the latter because $Q$ is identity on the nonzero $U$. F9 gives dimensions strictly below $d$ for both. The induction hypothesis decomposes each into finitely many simple submodules, whose combined direct sum is $V$. F14 proves the assertion for every $d$, and F17 identifies these modules as semisimple."
+        },
+        {
+          "id": "derive-6-1",
+          "step": "6.1",
+          "claim": "F[G] and E[G] are semisimple; E tensor F[G] is E[G] as an algebra.",
+          "inputs": [
+            "F15",
+            "5.2",
+            "F18",
+            "F7",
+            "F19",
+            "Regular group module with N basis vectors; e tensor[g] maps to e[g]; basis products [g][h]=[gh]",
+            "Given: The algebra and field hypotheses in the statement; all modules are unital left modules."
+          ],
+          "calculation": "The group ring has the finite group basis $[g]$, with $[g][h]=[gh]$; its regular action is one of the actions in F15. Apply step 5.2 to $V=k[G]$, whose dimension is $N$, and then F18 to obtain semisimplicity of $k[G]$ for both $k=F,E$. The basis map $E\\otimes_F F[G]\\to E[G]$, $e\\otimes[g]\\mapsto e[g]$, is bijective by F7 and multiplicative by the group-basis product. For the trivial group this is just $E\\otimes_F F\\cong E$, and averaging above is $Q=P$."
+        },
+        {
+          "id": "derive-7-1",
+          "step": "7.1",
+          "claim": "The given splitting condition makes E[G] split semisimple, so the general classification applies.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F15",
+            "F16",
+            "5.1",
+            "6.1",
+            "Each division factor is opposite to End_G(W)=E; E/F finite Galois; characteristic zero",
+            "Given: The algebra and field hypotheses in the statement; all modules are unital left modules."
+          ],
+          "calculation": "Apply F4 to the nonzero semisimple algebra $E[G]$. For a factor $M_n(D)$, its column module $W=D^n$ is simple by F5. To compute its endomorphisms without assuming splitting, let $f$ commute with the factor action. Commuting with $E_{11}$ forces $f(e_1)=e_1d$ for some $d\\in D$; commuting with $E_{j1}$ gives $f(e_j)=e_jd$, and commuting with diagonal left multiplications gives $f(x)=xd$ for every column $x$. Conversely each right multiplication commutes with all matrices. Their compositions reverse multiplication in $D$, so $\\operatorname{End}(W)\\cong D^{\\mathrm{op}}$ as an $E$-algebra. F15 identifies this endomorphism ring with $\\operatorname{End}_G(W)$; by the given splitting-field condition F16 it is exactly the scalar field $E$. Taking the opposite ring leaves $E$ unchanged, so every division factor is $E$ as an $E$-algebra. Hence $E[G]$ is split semisimple. The general classification in step 5.1 now applies to $F[G]$ and the given finite Galois extension and prove the specialization. All selections in this argument concern finite-dimensional spaces or finite decompositions; no additional arbitrary-index choice assumption is used."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the bijection of empty simple-class sets for A=0; step 5.2 uses an empty decomposition for V=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 includes E_11 M=0; step 1.3 includes U=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 treats E=F and multiplicity 1; step 6.1 treats the trivial group."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 uses N>0 and characteristic zero before inversion; step 7.1 keeps the division-ring opposite orientation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The algebra/module classification has no interval or limiting endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 1.3 use only finite basis extension; step 5.2 selects one nonzero proper submodule only when V is not simple."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 assign each simple downstairs its uniquely determined orbit."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 5.1 recover the unique simple downstairs from any orbit and prove every extended simple occurs."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Weizhe Zheng, Lectures on Algebra (10 January 2025)",
+          "url": "https://server.mcm.ac.cn/~zheng/algebra.pdf",
+          "locator": "Proposition 4.3.2, pp.145–146 (block/scalar-extension multiplicities); Theorem 3.8.1, pp.132–133; Theorem 4.1.6, p.139 (averaging proof, expanded here in finite dimension)"
+        },
+        {
+          "title": "Gábor Wiese, Galois Representations",
+          "url": "https://math.uni.lu/wiese/notes/GalRep.pdf",
+          "locator": "Lemma 2.2.9, Proposition 2.2.11 and Corollary 2.2.12, pp.29–30"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "phase-2-wave-1 alpha-d Step 6b",
+        "notes": "Checked all 13 numbered steps and 19 cited facts. Nonzero descended blocks provide exactly one finite-dimensional simple A-type. Matrix units decompose finite-dimensional split modules; scalar extension of Ae_O=S_O^n_O identifies constituent support via finite composition series and Jordan–Hölder. Canonical semilinear maps identify each twist with the original tensor module, forcing equal positive multiplicities and uniqueness. Supports recover the orbit, giving both bijection directions; A=0 and E=F are explicit. For finite groups in characteristic zero, finite basis projection, invertibility of |G|, reindexing of the average, and strict dimension induction prove semisimplicity locally. The given splitting-field scalar-endomorphism condition identifies each opposite division factor with E; no existence of E or multiplicity one is claimed. All selections are finite. Checked Zheng Theorem 4.1.6/Proposition 4.3.2 and Wiese Lemma 2.2.9/Corollary 2.2.12 with their field and semisimplicity hypotheses; published Maschke/Schur-index results are not inputs."
+      }
+    },
+    "ex-galois-descent-for-the-two-nontrivial-characters-of-c-three": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-galois-orbits-classify-simple-modules-after-splitting-base-change",
+          "source_section": "Statement",
+          "quote": "In ZFC, let $A$ be a finite-dimensional semisimple unital $F$-algebra and let\n$E/F$ be finite Galois with group $\\Gamma$, such that $B=E\\otimes_F A$ is split\nsemisimple. There is a canonical bijection between simple left $A$-module\nisomorphism classes and $\\Gamma$-orbits $O$ of simple left $B$-module classes.\nFor the class $S$ corresponding to $O$ there is a unique positive integer\n$m_S$ such that\n$$E\\otimes_F S\\cong\\bigoplus_{[W]\\in O}W^{\\oplus m_S}.$$\nDistinct simple $A$-modules have disjoint constituent sets, and every simple\n$B$-module occurs. For $A=0$, both sets of classes are empty.\n\nIn particular, let $G$ be a finite group, let $F$ have characteristic zero,\nand let $E/F$ be a finite Galois extension which is a splitting field for $G$.\nThe assertions apply to $A=F[G]$ and $B=E[G]$. Neither algebraic closure of\n$F$ nor multiplicity one is assumed. This is conditional on the given $E$;\nit makes no assertion about existence of a finite Galois splitting field.",
+          "uses": [
+            "4.1"
+          ],
+          "use_explanation": "Simple modules over a semisimple algebra correspond to Galois orbits after splitting base change, with one common positive multiplicity:",
+          "locator": "items/thm-galois-orbits-classify-simple-modules-after-splitting-base-change.md#statement"
+        },
+        {
+          "fact": "F2",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "5.1"
+          ],
+          "use_explanation": "The trace of an endomorphism is the trace of its matrix in any basis:",
+          "locator": "items/def-trace-of-an-endomorphism.md#definition"
+        },
+        {
+          "fact": "F3",
+          "source": "thm-group-ring-is-a-unital-algebra-with-basis-g",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and let $G$ be a group. Write $[g] \\in R[G]$ for\nthe basis vector of [[def-group-ring]] indexed by $g \\in G$.\n\nThere is a unique $R$-bilinear multiplication on $R[G]$ satisfying\n$$[g][h]=[gh]\\qquad(g,h\\in G).$$\nWith this product, $R[G]$ is a unital $R$-algebra whose underlying\n$R$-module has basis $\\{[g]:g\\in G\\}$. Its identity is $[e]$, where $e$ is the\nidentity of $G$, and every basis element $[g]$ is a unit with inverse\n$[g^{-1}]$.",
+          "uses": [
+            "2.2",
+            "4.1"
+          ],
+          "use_explanation": "The group algebra has the group basis, with multiplication $[g][h]=[gh]$:",
+          "locator": "items/thm-group-ring-is-a-unital-algebra-with-basis-g.md#statement"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "Q(zeta)/Q is quadratic Galois with conjugates zeta,zeta squared.",
+          "inputs": [
+            "p=X squared+X+1; (r+1/2) squared+3/4>0 over Q; distinct roots in E",
+            "Given: $p(X)=X^2+X+1$, $E=\\mathbb Q(\\zeta)$, and the displayed matrix $M$."
+          ],
+          "calculation": "A rational root $r$ of $p$ would satisfy $(r+1/2)^2+3/4=0$, impossible in the ordered field $\\mathbb Q$. A reducible quadratic over a field has a linear factor and thus a root, so $p$ is irreducible and $(1,\\zeta)$ is a rational basis of $E$. We have $\\zeta^3=1$ and $\\zeta\\ne1$; the two roots are $\\zeta,\\zeta^2$, and they are distinct since equality would force $\\zeta=1$. Both lie in $E$. An embedding of this quadratic field is determined by a root, so the identity and $\\zeta\\mapsto\\zeta^2$ are its two automorphisms. Equivalently it is a finite normal separable extension, hence Galois, with this two-element group."
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "The displayed M represents multiplication by zeta, satisfies M cubed=I, and is rationally simple.",
+          "inputs": [
+            "1.1",
+            "Basis (1,zeta); x nonzero in E implies x,zeta x independent",
+            "Given: $p(X)=X^2+X+1$, $E=\\mathbb Q(\\zeta)$, and the displayed matrix $M$."
+          ],
+          "calculation": "Multiplication sends $1\\mapsto\\zeta$ and $\\zeta\\mapsto-1-\\zeta$, giving $M$. Direct multiplication gives $M^2=\\begin{pmatrix}-1&1\\\\-1&0\\end{pmatrix}$, $M^2+M+I=0$ and $M^3=I$. Thus it defines a $C_3$-action. For $0\\ne x\\in S$, the vectors $x,\\zeta x$ are rationally independent, because $(a+b\\zeta)x=0$ in the field implies $a=b=0$. Any nonzero invariant rational subspace contains such $x$ and $\\zeta x$, and hence equals $S$. This proves simplicity."
+        },
+        {
+          "id": "derive-2-2",
+          "step": "2.2",
+          "claim": "e=(2-g-g squared)/3 is the rational block idempotent and Q[C3]e is E.",
+          "inputs": [
+            "F3",
+            "1.1",
+            "t=1+g+g squared; t squared=3t; basis e,ge; full evaluation kernel Q t",
+            "Given: $p(X)=X^2+X+1$, $E=\\mathbb Q(\\zeta)$, and the displayed matrix $M$."
+          ],
+          "calculation": "Put $t=1+g+g^2$. Since every group element occurs three times in its square, $t^2=3t$. Thus $e=1-t/3$ is central and $e^2=e$. Also $te=0$, whence $e+ge+g^2e=0$. The two coefficient vectors $e=(2-g-g^2)/3$ and $ge=(-1+2g-g^2)/3$ are independent: $ae+bge=0$ gives $2a-b=-a+2b=0$, so $a=b=0$. They span the ideal by the relation just found. Evaluation $g\\mapsto\\zeta$ sends $e\\mapsto1$ and $ge\\mapsto\\zeta$, so restricts to an algebra isomorphism $\\mathbb Q[C_3]e\\to E$, preserving the block unit. The full evaluation map has kernel $\\mathbb Qt$: if $a+b\\zeta+c\\zeta^2=0$, then $(a-c)+(b-c)\\zeta=0$, so $a=b=c$."
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "The extended matrix has two distinct eigenline modules, each once, exchanged by Galois.",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "v_lambda=(1,-lambda); lambda in {zeta,zeta squared}; determinant zeta-zeta squared nonzero",
+            "Given: $p(X)=X^2+X+1$, $E=\\mathbb Q(\\zeta)$, and the displayed matrix $M$."
+          ],
+          "calculation": "For either $\\lambda=\\zeta$ or $\\zeta^2$, set $v_\\lambda=(1,-\\lambda)^{\\mathsf T}$. Then $Mv_\\lambda=(\\lambda,1+\\lambda)^{\\mathsf T}=\\lambda v_\\lambda$. The determinant of $(v_\\zeta,v_{\\zeta^2})$ is $\\zeta-\\zeta^2\\ne0$, so these form an $E$-basis of $E\\otimes_{\\mathbb Q}S$. Consequently both eigenline modules occur exactly once. Conjugating coefficients interchanges the two eigenvectors and their distinct eigenvalues; the lines give nonisomorphic one-dimensional modules since an intertwiner between them would force $\\zeta=\\zeta^2$."
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "E[C3] is E cubed, so the orbit theorem applies with multiplicity one.",
+          "inputs": [
+            "F1",
+            "3.1",
+            "2.1",
+            "F3",
+            "1.1",
+            "Lagrange polynomials ell_lambda; three distinct roots; simple rational module S",
+            "Given: $p(X)=X^2+X+1$, $E=\\mathbb Q(\\zeta)$, and the displayed matrix $M$."
+          ],
+          "calculation": "To check the splitting hypothesis for the whole algebra, evaluation at $1,\\zeta,\\zeta^2$ gives $E[C_3]\\to E^3$. Its inverse sends the $\\lambda$th coordinate vector to $\\ell_\\lambda(g)$, where $\\ell_\\lambda(X)=\\prod_{\\mu\\ne\\lambda}(X-\\mu)/(\\lambda-\\mu)$ and the product ranges over the other two roots. All denominators are nonzero, and $\\ell_\\lambda(\\mu)=\\delta_{\\lambda\\mu}$ proves the inverse identities on evaluations; a degree at most two polynomial vanishing at three distinct roots is zero, by successive division by $X-\\mu$. Thus the algebra is split. The characteristic-zero specialization of F1 now identifies the orbit in step 3.1 with the simple rational module in step 2.1, with multiplicity $1$ as computed."
+        },
+        {
+          "id": "derive-5-1",
+          "step": "5.1",
+          "claim": "The rational character is 2,-1,-1, equal to the sum of the eigenline characters.",
+          "inputs": [
+            "F2",
+            "1.1",
+            "2.1",
+            "3.1",
+            "Displayed matrices I,M,M squared; zeta+zeta squared=-1",
+            "Given: $p(X)=X^2+X+1$, $E=\\mathbb Q(\\zeta)$, and the displayed matrix $M$."
+          ],
+          "calculation": "Finally $\\operatorname{tr}(I)=2$, $\\operatorname{tr}(M)=-1$ and $\\operatorname{tr}(M^2)=-1$. On either eigenline the traces are its scalar values; adding gives $\\zeta+\\zeta^2=-1$ at $g$ and $\\zeta^2+\\zeta^4=-1$ at $g^2$. This checks the character and the identity value directly."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes the nonempty group C3 and a two-dimensional nonzero module."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks that a nonzero x has independent x,zeta x; step 2.2 computes the zero evaluation kernel equation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 computes trace at identity as 2; step 3.1 computes each multiplicity as 1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 proves the eigenvalues are distinct; step 4.1 verifies each interpolation denominator is nonzero."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This explicit rational matrix has no interval domain or endpoint parameter."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses x only inside a nonzero invariant subspace; all other displayed vectors and polynomials are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example verifies a specified construction and has no asserted iff classification."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse beyond the explicit inverse evaluation map is asserted; that inverse is checked in step 4.1."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Weizhe Zheng, Lectures on Algebra (10 January 2025)",
+          "url": "https://server.mcm.ac.cn/~zheng/algebra.pdf",
+          "locator": "Theorem 3.8.1, Example 3.8.2 and Proposition 4.3.2, specialized to the quadratic cyclotomic field"
+        },
+        {
+          "title": "Gábor Wiese, Galois Representations",
+          "url": "https://math.uni.lu/wiese/notes/GalRep.pdf",
+          "locator": "Corollary 2.2.12, p.30 (specialization; matrices computed here)"
+        }
+      ]
+    },
+    "ex-the-rational-simple-block-of-the-quaternion-group": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-galois-orbits-classify-simple-modules-after-splitting-base-change",
+          "source_section": "Statement",
+          "quote": "In ZFC, let $A$ be a finite-dimensional semisimple unital $F$-algebra and let\n$E/F$ be finite Galois with group $\\Gamma$, such that $B=E\\otimes_F A$ is split\nsemisimple. There is a canonical bijection between simple left $A$-module\nisomorphism classes and $\\Gamma$-orbits $O$ of simple left $B$-module classes.\nFor the class $S$ corresponding to $O$ there is a unique positive integer\n$m_S$ such that\n$$E\\otimes_F S\\cong\\bigoplus_{[W]\\in O}W^{\\oplus m_S}.$$\nDistinct simple $A$-modules have disjoint constituent sets, and every simple\n$B$-module occurs. For $A=0$, both sets of classes are empty.\n\nIn particular, let $G$ be a finite group, let $F$ have characteristic zero,\nand let $E/F$ be a finite Galois extension which is a splitting field for $G$.\nThe assertions apply to $A=F[G]$ and $B=E[G]$. Neither algebraic closure of\n$F$ nor multiplicity one is assumed. This is conditional on the given $E$;\nit makes no assertion about existence of a finite Galois splitting field.",
+          "uses": [
+            "4.1"
+          ],
+          "use_explanation": "The orbit classification gives the common scalar-extension multiplicity under the semisimple and splitting hypotheses:",
+          "locator": "items/thm-galois-orbits-classify-simple-modules-after-splitting-base-change.md#statement"
+        },
+        {
+          "fact": "F2",
+          "source": "thm-simple-modules-over-semisimple-rings",
+          "source_section": "Statement",
+          "quote": "Let $r\\ge1$, let every $n_i\\ge1$, let every $D_i$ be a division ring, and put $R=\\prod_{i=1}^rM_{n_i}(D_i)$. Then every simple left $R$-module is supported on exactly one factor and is isomorphic to that factor's column module $D_i^{n_i}$. These column modules give all simple left $R$-module isomorphism classes, with one class for each factor. See [[thm-wedderburn-artin-theorem]].",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ],
+          "use_explanation": "A matrix-ring factor over a division ring has one simple left-module class, its column module:",
+          "locator": "items/thm-simple-modules-over-semisimple-rings.md#statement"
+        },
+        {
+          "fact": "F3",
+          "source": "def-trace-of-an-endomorphism",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a finite-dimensional vector space over $F$ and let $T:V\\to V$ be\nlinear. Choose any ordered basis $\\mathcal B$ of $V$ and define the **trace of\nthe endomorphism $T$** by\n\n$$\\operatorname{tr}(T):=\\operatorname{tr}([T]_{\\mathcal B}^{\\mathcal B}).$$\n\nThis is independent of the chosen basis: matrices of the same endomorphism in\ntwo ordered bases are similar, and similar matrices have equal trace. When\n$V$ is the zero space, the empty basis gives trace $0$.",
+          "uses": [
+            "5.1"
+          ],
+          "use_explanation": "Trace is the sum of the diagonal entries of a representing matrix:",
+          "locator": "items/def-trace-of-an-endomorphism.md#definition"
+        },
+        {
+          "fact": "F4",
+          "source": "def-quaternion-group-of-order-eight",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb{H}$ be the quaternions, with the basis quaternions\n$1=(1,0,0,0)$, $i=(0,1,0,0)$, $j=(0,0,1,0)$, $k=(0,0,0,1)$ and the real\nembedding $\\lambda\\mapsto\\hat\\lambda$ of [[def-quaternions]]. Write\n\n$$n:=\\widehat{-1}=(-1,0,0,0),\\qquad -x:=nx\\ \\ (x\\in\\mathbb{H}),$$\n\nso that $-x=(-x_0,-x_1,-x_2,-x_3)$ by the formula\n$\\hat\\lambda x=x\\hat\\lambda=(\\lambda x_0,\\lambda x_1,\\lambda x_2,\\lambda x_3)$\nrecorded in [[def-quaternions]].\n\nBy [[thm-quaternions-form-a-division-ring]] the set\n$\\mathbb{H}\\setminus\\{0_{\\mathbb{H}}\\}$ is a group under quaternion\nmultiplication ([[def-group]]); write it $\\mathbb{H}^{\\times}$. The\n**quaternion group** is the subset\n\n$$Q_8\\;:=\\;\\{\\,1,\\,-1,\\,i,\\,-i,\\,j,\\,-j,\\,k,\\,-k\\,\\}\\;\\subseteq\\;\\mathbb{H}^{\\times}.$$\n\nThat $Q_8$ is a subgroup of $\\mathbb{H}^{\\times}$ ([[def-subgroup]]), that it has\nexactly eight elements, and that $-1$ is its only element of order $2$ are proved\nin [[prop-the-quaternion-group-has-order-eight-and-a-unique-element-of-order-two]]\nand are not assumed here.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ],
+          "use_explanation": "The quaternion group is the set of eight signed basis quaternions, with multiplication inherited from the quaternion algebra:",
+          "locator": "items/def-quaternion-group-of-order-eight.md#definition"
+        },
+        {
+          "fact": "F5",
+          "source": "prop-the-quaternion-group-has-order-eight-and-a-unique-element-of-order-two",
+          "source_section": "Statement",
+          "quote": "Let $Q_8=\\{1,-1,i,-i,j,-j,k,-k\\}\\subseteq\\mathbb{H}^{\\times}$ be as in\n[[def-quaternion-group-of-order-eight]]. Then:\n\n1. $Q_8$ is a subgroup of $\\mathbb{H}^{\\times}$ and $|Q_8|=8$;\n2. $1$ is the only element of order $1$, $-1$ is the only element of order $2$,\n   and each of $\\pm i,\\pm j,\\pm k$ has order $4$;\n3. $\\langle i\\rangle=\\{1,i,-1,-i\\}$ is a subgroup of order $4$ containing $-1$,\n   and the same holds for $\\langle j\\rangle$ and $\\langle k\\rangle$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ],
+          "use_explanation": "These elements form a group of order eight, and $z=-1$ has order two:",
+          "locator": "items/prop-the-quaternion-group-has-order-eight-and-a-unique-element-of-order-two.md#statement"
+        },
+        {
+          "fact": "F6",
+          "source": "thm-group-ring-is-a-unital-algebra-with-basis-g",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and let $G$ be a group. Write $[g] \\in R[G]$ for\nthe basis vector of [[def-group-ring]] indexed by $g \\in G$.\n\nThere is a unique $R$-bilinear multiplication on $R[G]$ satisfying\n$$[g][h]=[gh]\\qquad(g,h\\in G).$$\nWith this product, $R[G]$ is a unital $R$-algebra whose underlying\n$R$-module has basis $\\{[g]:g\\in G\\}$. Its identity is $[e]$, where $e$ is the\nidentity of $G$, and every basis element $[g]$ is a unit with inverse\n$[g^{-1}]$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ],
+          "use_explanation": "The group algebra has the group basis, with multiplication $[g][h]=[gh]$:",
+          "locator": "items/thm-group-ring-is-a-unital-algebra-with-basis-g.md#statement"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "e,ue,ve,uve form the quaternion block basis with the stated multiplication table.",
+          "inputs": [
+            "F6",
+            "F4",
+            "F5",
+            "Eight distinct group-basis elements in four disjoint pairs; z central of order two; u squared=v squared=z",
+            "Given: $Q_8$ as in F4–F5, renamed with generators $u,v$, and $E=\\mathbb Q(i)$ where $i^2=-1$."
+          ],
+          "calculation": "The quaternion multiplication gives $z$ central, $u^2=v^2=z$, and $vu=zuv$. Thus $e^2=(1-2z+z^2)/4=e$ and $ze=-e$. The four elements $e,ue,ve,uve$ span $D$, since $(zh)e=-he$ for $h=1,u,v,uv$. They are rationally independent: $he=(h-zh)/2$ has its two nonzero coefficients on one of four disjoint pairs of the eight group-basis elements. Hence they form a basis. Write $x=ue$, $y=ve$, $w=uve$; then $x^2=y^2=w^2=-e$, $xy=w=-yx$, $yw=x=-wy$, and $wx=y=-xw$."
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "The block is a division algebra with unique simple left module D.",
+          "inputs": [
+            "F2",
+            "1.1",
+            "q bar(q)=bar(q) q=(a squared+b squared+c squared+d squared)e; rational nonzero q has positive norm",
+            "Given: $Q_8$ as in F4–F5, renamed with generators $u,v$, and $E=\\mathbb Q(i)$ where $i^2=-1$."
+          ],
+          "calculation": "For $q=ae+bx+cy+dw$, put $\\overline q=ae-bx-cy-dw$. Using the multiplication table, all mixed terms cancel and $q\\overline q=\\overline q q=(a^2+b^2+c^2+d^2)e$. For rational coefficients this sum is positive when $q\\ne0$. Thus $q^{-1}=\\overline q/(a^2+b^2+c^2+d^2)$ exists on both sides, and $D$ is a division algebra. Every nonzero left ideal contains an invertible element and hence $e$, so its left regular module is simple. F2 for a single $1\\times1$ factor says this is its unique simple class. The zero quaternion needs no inverse; the unit is $e$."
+        },
+        {
+          "id": "derive-2-2",
+          "step": "2.2",
+          "claim": "I,U,V,UV define a splitting isomorphism E tensor D to M_2(E).",
+          "inputs": [
+            "1.1",
+            "U=diag(i,-i), V=[[0,1],[-1,0]]; coefficients recovered from matrix entries by dividing by 2 and 2i",
+            "Given: $Q_8$ as in F4–F5, renamed with generators $u,v$, and $E=\\mathbb Q(i)$ where $i^2=-1$."
+          ],
+          "calculation": "Set $U=\\begin{pmatrix}i&0\\\\0&-i\\end{pmatrix}$ and $V=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}$. We have $U^2=V^2=-I$ and $VU=-UV$, so the multiplication table defines an $E$-algebra map $E\\otimes_{\\mathbb Q}D\\to M_2(E)$ sending $e,x,y,w$ to $I,U,V,UV$. A linear combination of these images is $\\begin{pmatrix}a+bi&c+di\\\\-c+di&a-bi\\end{pmatrix}$. Every matrix occurs uniquely: its entries $r,s,t,h$ give $a=(r+h)/2$, $b=(r-h)/(2i)$, $c=(s-t)/2$, $d=(s+t)/(2i)$. Thus the map is an algebra isomorphism."
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "The complementary sign block is Q^4 and the full extended algebra is M_2(E) times E^4.",
+          "inputs": [
+            "F6",
+            "F2",
+            "1.1",
+            "2.1",
+            "2.2",
+            "f=(1+z)/2; basis f,uf,vf,uvf; sign matrix H satisfies HH transpose=4I",
+            "Given: $Q_8$ as in F4–F5, renamed with generators $u,v$, and $E=\\mathbb Q(i)$ where $i^2=-1$."
+          ],
+          "calculation": "Let $f=1-e=(1+z)/2$. The complementary block has basis $f,uf,vf,uvf$ by the same disjoint-pair argument. Here $zf=f$, so $uf,vf$ commute and square to $f$. Evaluating them independently at $\\epsilon,\\eta\\in\\{1,-1\\}$ gives a map $\\mathbb Q[Q_8]f\\to\\mathbb Q^4$. Its sign matrix has rows $(1,\\epsilon,\\eta,\\epsilon\\eta)$; the inner product of a row with itself is $4$, and with a different row is $(1+\\epsilon\\epsilon')(1+\\eta\\eta')=0$. Its inverse is one quarter its transpose. Hence $\\mathbb Q[Q_8]\\cong D\\times\\mathbb Q^4$ and, extending the displayed basis maps, $E[Q_8]\\cong M_2(E)\\times E^4$. The rational regular module is the direct sum of $D$ and four copies of $\\mathbb Q$, each simple over its factor; the extended regular module is the sum of the two simple columns of $M_2(E)$ and four one-dimensional factors. Thus both regular modules are semisimple, and the displayed extended product is split, without an omitted block. The column simples over this product have only scalar endomorphisms (commute with matrix units), so it also satisfies the group splitting-field convention."
+        },
+        {
+          "id": "derive-3-2",
+          "step": "3.2",
+          "claim": "The extended regular quaternion module is exactly W direct-sum W.",
+          "inputs": [
+            "F2",
+            "2.2",
+            "M_2(E) separates into first and second column ideals; W=E^2 simple",
+            "Given: $Q_8$ as in F4–F5, renamed with generators $u,v$, and $E=\\mathbb Q(i)$ where $i^2=-1$."
+          ],
+          "calculation": "The subspaces of matrices supported in the first column and in the second column are left ideals, each isomorphic to $W=E^2$ by reading that column. They have zero intersection and their sum is all of $M_2(E)$. F2 makes $W$ simple. Consequently $E\\otimes_{\\mathbb Q}D\\cong W\\oplus W$ as group modules, with multiplicity exactly two: its $E$-dimension is four and $\\dim_EW=2$."
+        },
+        {
+          "id": "derive-4-1",
+          "step": "4.1",
+          "claim": "W is Galois-stable and its rational descent multiplicity is two.",
+          "inputs": [
+            "F1",
+            "3.1",
+            "3.2",
+            "Q(i)/Q quadratic Galois; conjugation sends U to -U and fixes V; VUV^-1=-U",
+            "Given: $Q_8$ as in F4–F5, renamed with generators $u,v$, and $E=\\mathbb Q(i)$ where $i^2=-1$."
+          ],
+          "calculation": "The polynomial $X^2+1$ has no rational root, and its distinct roots $i,-i$ lie in $E$. Thus $E/\\mathbb Q$ is finite normal separable, with nontrivial automorphism $\\sigma(i)=-i$. Coefficient conjugation sends $U$ to $-U$ and fixes $V$. Since $VUV^{-1}=-U$ and $VVV^{-1}=V$, conjugation by $V$ intertwines the representation with its coefficient-conjugate; these equations on the generators suffice on every group element. Therefore $[W]$ is Galois-stable. The hypotheses for F1 are all met by step 3.1 and this finite Galois extension. F1 identifies $D$ with this singleton orbit, and step 3.2 computes its common multiplicity as two."
+        },
+        {
+          "id": "derive-5-1",
+          "step": "5.1",
+          "claim": "The degree-two character has class values 2,-2,0,0,0; rational D has twice that trace.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "2.2",
+            "3.2",
+            "Matrices I,-I,U,V,UV; the three noncentral signed pairs are exchanged by conjugation",
+            "Given: $Q_8$ as in F4–F5, renamed with generators $u,v$, and $E=\\mathbb Q(i)$ where $i^2=-1$."
+          ],
+          "calculation": "The matrices for $1,z,u,v,uv$ are $I,-I,U,V,UV$. Their traces are $2,-2,0,0,0$ respectively; multiplying the last three by $-I$ keeps their traces zero. The class list follows directly from the relations: conjugation preserves each pair $\\{h,zh\\}$ for $h=u,v,uv$, and conjugation by a different generator exchanges its two members, whereas $1,z$ are central. Thus this list exhausts all eight elements and gives exactly the stated class values. All values lie in $\\mathbb Q$. The trace of the rational regular module $D$ is twice this character after extension, since its extension is the displayed two column copies."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The example fixes Q8 with eight elements and the nonzero four-dimensional block D."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 excludes only q=0 from inversion; step 5.1 computes the three zero character values."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 identifies the block unit e; step 5.1 gives the trace at the group identity."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 divides only by nonzero 2 and 2i; step 4.1 shows a singleton orbit still has multiplicity two."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Quaternion coefficients and finite group classes have no interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.2 give explicit bases, and step 3.2 gives explicit column submodules; no arbitrary representative choice is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example asserts a concrete decomposition, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The matrix isomorphism is checked by its explicit coefficient inverse in step 2.2, rather than a separate claimed converse theorem."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Weizhe Zheng, Lectures on Algebra (10 January 2025)",
+          "url": "https://server.mcm.ac.cn/~zheng/algebra.pdf",
+          "locator": "Example 3.7.4(3), p.125 (norm calculation adapted to Q); Proposition 4.3.2"
+        },
+        {
+          "title": "Gábor Wiese, Galois Representations",
+          "url": "https://math.uni.lu/wiese/notes/GalRep.pdf",
+          "locator": "Remark 2.4.2(ii), p.34; Exercise 14, p.70 (real quaternion example adapted to Q and Q(i))"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "phase-2-wave-1 alpha-d Step 6b",
+        "notes": "Disjoint group-basis pairs give the four-element basis of Q[Q8]e. The quaternion norm sum of four rational squares is positive for a nonzero element, yielding a two-sided inverse and a simple division block. I,U,V,UV span M2(Q(i)) with the displayed inverse coefficient formulas, and the complementary sign matrix splits all four remaining factors. Column left ideals give exactly two copies of a two-dimensional simple; the finite Galois involution is intertwined by V. Direct traces give 2,-2,0,0,0 and the conjugacy pairs exhaust Q8. Thus stability coexists with multiplicity two; all hypotheses of the orbit theorem hold for the whole algebra. Zheng Example 3.7.4(3) is specialized to rational coefficients; Wiese Exercise 14 is only a prompt, while its Remark 2.4.2(ii) distinguishes ordinary and reduced traces. Current reader/refuter evidence checked."
+      }
+    },
+    "cex-a-galois-stable-character-need-not-have-schur-index-one": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-galois-orbits-classify-simple-modules-after-splitting-base-change",
+          "source_section": "Statement",
+          "quote": "In ZFC, let $A$ be a finite-dimensional semisimple unital $F$-algebra and let\n$E/F$ be finite Galois with group $\\Gamma$, such that $B=E\\otimes_F A$ is split\nsemisimple. There is a canonical bijection between simple left $A$-module\nisomorphism classes and $\\Gamma$-orbits $O$ of simple left $B$-module classes.\nFor the class $S$ corresponding to $O$ there is a unique positive integer\n$m_S$ such that\n$$E\\otimes_F S\\cong\\bigoplus_{[W]\\in O}W^{\\oplus m_S}.$$\nDistinct simple $A$-modules have disjoint constituent sets, and every simple\n$B$-module occurs. For $A=0$, both sets of classes are empty.\n\nIn particular, let $G$ be a finite group, let $F$ have characteristic zero,\nand let $E/F$ be a finite Galois extension which is a splitting field for $G$.\nThe assertions apply to $A=F[G]$ and $B=E[G]$. Neither algebraic closure of\n$F$ nor multiplicity one is assumed. This is conditional on the given $E$;\nit makes no assertion about existence of a finite Galois splitting field.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ],
+          "use_explanation": "The orbit theorem allows a common positive multiplicity, not necessarily one:",
+          "locator": "items/thm-galois-orbits-classify-simple-modules-after-splitting-base-change.md#statement"
+        },
+        {
+          "fact": "F2",
+          "source": "ex-the-rational-simple-block-of-the-quaternion-group",
+          "source_section": "Example",
+          "quote": "Write the quaternion group as $Q_8=\\{1,z,u,zu,v,zv,uv,zuv\\}$, where\n$z$ is the group element $-1$, $z^2=1$, $u^2=v^2=z$ and $vu=zuv$.\nThe central idempotent $e=(1-z)/2$ in $\\mathbb Q[Q_8]$ cuts out the\nfour-dimensional division algebra\n$$D=\\mathbb Q[Q_8]e\\cong(-1,-1)_{\\mathbb Q}.$$\nIts unique simple left module is $D$ itself. For $E=\\mathbb Q(i)$,\n$E\\otimes_{\\mathbb Q}D\\cong M_2(E)$, and its left regular module is\n$W\\oplus W$, where $W=E^2$ is simple of degree two. The character of $W$\nhas values $2,-2,0,0,0$ on the classes\n$\\{1\\},\\{z\\},\\{u,zu\\},\\{v,zv\\},\\{uv,zuv\\}$. Its Galois orbit is a\nsingleton but its descent multiplicity is two. In fact $E$ splits the entire\ngroup algebra.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "use_explanation": "For $F=\\mathbb Q$, $E=\\mathbb Q(i)$ and $Q_8$, the simple $E$-module $W$ has rational-valued character $\\chi=(2,-2,0,0,0)$ on the five classes, is Galois-stable, and the rational module $D$ satisfies $E\\otimes_{\\mathbb Q}D\\cong W\\oplus W$. The extension is finite Galois and splits the whole group algebra:",
+          "locator": "items/ex-the-rational-simple-block-of-the-quaternion-group.md#example"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1-1",
+          "step": "1.1",
+          "claim": "The quaternion W meets all hypotheses and 2 chi has the rational model D.",
+          "inputs": [
+            "F2",
+            "F1",
+            "F=Q, E=Q(i), G=Q8; stable simple W of degree two; E tensor D=W direct-sum W",
+            "Given: The module $W$ in F2, with matrices $U=\\operatorname{diag}(i,-i)$ and $V=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}$ for the generators $u,v$."
+          ],
+          "calculation": "F2 verifies every hypothesis: characteristic zero, finite Galois extension, whole-algebra splitting, simplicity and Galois stability. It also supplies a rational realization of $2\\chi$, namely the four-dimensional simple rational module $D$. F1 identifies its descent multiplicity with two, in agreement with the explicit column decomposition. It remains to rule out a rational representation of character $\\chi$ itself."
+        },
+        {
+          "id": "derive-1-2",
+          "step": "1.2",
+          "claim": "A rational model of chi would have Z=-I and R squared=T squared=-I with RT=-TR.",
+          "inputs": [
+            "F2",
+            "Dimension chi(1)=2; Z squared=I, trace Z=-2; explicit plus/minus eigenspace projectors",
+            "Given: The module $W$ in F2, with matrices $U=\\operatorname{diag}(i,-i)$ and $V=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}$ for the generators $u,v$."
+          ],
+          "calculation": "Any rational representation with character $\\chi$ has dimension $\\chi(1)=2$. Let $Z$ represent $z$, so $Z^2=I$ and $\\operatorname{tr}(Z)=-2$. Every vector decomposes as $(x+Zx)/2+(x-Zx)/2$, in the $+1$ and $-1$ eigenspaces respectively, whose intersection is zero. If their dimensions are $r,s$, then $r+s=2$ and $r-s=-2$, giving $r=0$, $s=2$. Thus $Z=-I$. Its generator matrices $R,T\\in M_2(\\mathbb Q)$ would satisfy $R^2=T^2=-I$ and $RT=-TR$, by the relations in F2."
+        },
+        {
+          "id": "derive-2-1",
+          "step": "2.1",
+          "claim": "In a rational basis R=J and T=[[a,b],[b,-a]].",
+          "inputs": [
+            "1.2",
+            "x nonzero; R squared=-I prevents a rational eigenvalue; solve JT+TJ=0 entry by entry",
+            "Given: The module $W$ in F2, with matrices $U=\\operatorname{diag}(i,-i)$ and $V=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}$ for the generators $u,v$."
+          ],
+          "calculation": "For any nonzero rational vector $x$, the vectors $x,Rx$ are independent. Otherwise $Rx=rx$ with $r\\in\\mathbb Q$, and $R^2x=r^2x=-x$ would force $r^2=-1$, impossible. In the basis $(x,Rx)$, $R$ is therefore $J=\\begin{pmatrix}0&-1\\\\1&0\\end{pmatrix}$. Write $T=\\begin{pmatrix}a&b\\\\c&d\\end{pmatrix}$ in this same rational basis. The equation $JT+TJ=0$ is $\\begin{pmatrix}b-c&-d-a\\\\a+d&b-c\\end{pmatrix}=0$, so $c=b$ and $d=-a$."
+        },
+        {
+          "id": "derive-3-1",
+          "step": "3.1",
+          "claim": "No rational model of chi exists, and the least positive rational multiplicity is two.",
+          "inputs": [
+            "1.1",
+            "F1",
+            "1.2",
+            "2.1",
+            "T squared=(a squared+b squared)I cannot be -I in Q; D realizes 2 chi",
+            "Given: The module $W$ in F2, with matrices $U=\\operatorname{diag}(i,-i)$ and $V=\\begin{pmatrix}0&1\\\\-1&0\\end{pmatrix}$ for the generators $u,v$."
+          ],
+          "calculation": "Consequently $T^2=\\begin{pmatrix}a&b\\\\b&-a\\end{pmatrix}^2=(a^2+b^2)I$. It cannot equal $-I$, since $a^2+b^2\\ge0$ in $\\mathbb Q$. This excludes every rational degree-two representation of character $\\chi$, and hence every rational model whose scalar extension is $W$ (scalar extension preserves its matrices' traces). Since step 1.1 realizes $2\\chi$ and no positive integer lies strictly between $1$ and $2$, the least positive rational realization multiplicity is exactly two. The excluded conclusion is multiplicity one, not the common-positive-multiplicity conclusion of F1."
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness is the nonempty group Q8 and its nonzero two-dimensional module."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 forces the plus eigenspace dimension to zero; step 3.1 allows a=b=0 and still excludes T squared=-I."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.2–3.1 exclude realization multiplicity one; step 1.1 realizes multiplicity two."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 proves x,Rx independent before using them as a basis."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The counterexample has no interval-valued domain or endpoint assumption."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 chooses x only in a two-dimensional nonzero rational space."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies the proposed implication hypotheses for the explicit W."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted claim is a one-way implication; step 3.1 disproves its conclusion, and no reverse implication is asserted."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Weizhe Zheng, Lectures on Algebra (10 January 2025)",
+          "url": "https://server.mcm.ac.cn/~zheng/algebra.pdf",
+          "locator": "Example 3.7.4(3) and Proposition 4.3.2 (explicit rational matrix obstruction computed locally)"
+        },
+        {
+          "title": "Gábor Wiese, Galois Representations",
+          "url": "https://math.uni.lu/wiese/notes/GalRep.pdf",
+          "locator": "Corollary 2.5.10, p.40; Exercise 14, p.70"
+        }
+      ]
+    }
+  }
+}

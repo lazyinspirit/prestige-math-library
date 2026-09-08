@@ -1,0 +1,1 @@
+Repair batch 14 using every finding in research/phase-2-wave-1-author-check-14.json. Work only on this batch's items, pages, manifest and contract. Preserve its scope. Run focused checks and explain any detector defect; do not edit tools.

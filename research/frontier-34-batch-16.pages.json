@@ -1,0 +1,644 @@
+[
+  {
+    "order": 643,
+    "id": "the-ip-equals-pspace-theorem",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "The IP = PSPACE Theorem",
+    "companion": "the-ip-equals-pspace-theorem-examples",
+    "requires": [
+      "arithmetization-and-the-sum-check-protocol",
+      "space-complexity-savitch-and-tqbf"
+    ],
+    "items": [
+      {
+        "id": "def-qbf-arithmetization-operators",
+        "kind": "definition",
+        "title": "Boolean quantifier and multilinearization operators",
+        "deps": [
+          "def-quantified-boolean-formula-and-tqbf"
+        ]
+      },
+      {
+        "id": "lem-quantifier-polynomials-agree-on-booleans",
+        "kind": "lemma",
+        "title": "Boolean quantifier operators agree with QBF semantics",
+        "deps": [
+          "def-qbf-arithmetization-operators"
+        ]
+      },
+      {
+        "id": "lem-multilinearization-preserves-boolean-values",
+        "kind": "lemma",
+        "title": "Multilinearization preserves Boolean values",
+        "deps": [
+          "def-qbf-arithmetization-operators"
+        ]
+      },
+      {
+        "id": "lem-qbf-degree-reduction-schedule",
+        "kind": "lemma",
+        "title": "A quadratic-length operator schedule with polynomial individual degrees",
+        "deps": [
+          "lem-quantifier-polynomials-agree-on-booleans",
+          "lem-multilinearization-preserves-boolean-values",
+          "lem-formula-arithmetization-degree-and-evaluation-cost"
+        ]
+      },
+      {
+        "id": "lem-shamir-uniform-binary-extension-field",
+        "kind": "lemma",
+        "title": "Constructing and sampling a polynomial-size binary extension field",
+        "deps": [
+          "cor-irreducible-polynomials-exist-over-finite-fields-in-every-degree",
+          "thm-polynomial-quotient-is-a-field-iff-irreducible"
+        ]
+      },
+      {
+        "id": "def-shamir-protocol-for-tqbf",
+        "kind": "definition",
+        "title": "The reverse-operator protocol for TQBF",
+        "deps": [
+          "lem-qbf-degree-reduction-schedule",
+          "lem-shamir-uniform-binary-extension-field",
+          "def-ip"
+        ]
+      },
+      {
+        "id": "lem-honest-prover-maintains-the-claim-invariant",
+        "kind": "lemma",
+        "title": "The honest prover maintains the operator claim",
+        "deps": [
+          "def-shamir-protocol-for-tqbf"
+        ]
+      },
+      {
+        "id": "lem-each-round-has-polynomial-communication",
+        "kind": "lemma",
+        "title": "Degree, randomness, bit cost and communication in every round",
+        "deps": [
+          "def-shamir-protocol-for-tqbf",
+          "lem-formula-arithmetization-degree-and-evaluation-cost"
+        ]
+      },
+      {
+        "id": "lem-shamir-protocol-has-perfect-completeness",
+        "kind": "lemma",
+        "title": "Perfect completeness of the TQBF protocol",
+        "deps": [
+          "lem-honest-prover-maintains-the-claim-invariant"
+        ]
+      },
+      {
+        "id": "lem-first-false-claim-survives-with-root-bound-probability",
+        "kind": "lemma",
+        "title": "A false claim can become true only at a polynomial root",
+        "deps": [
+          "def-shamir-protocol-for-tqbf",
+          "thm-root-bound-for-polynomials-over-a-domain"
+        ]
+      },
+      {
+        "id": "lem-total-soundness-follows-by-union-bound",
+        "kind": "lemma",
+        "title": "Adaptive conditional soundness and the terminal evaluation check",
+        "deps": [
+          "lem-first-false-claim-survives-with-root-bound-probability",
+          "thm-finite-union-bound"
+        ]
+      },
+      {
+        "id": "thm-tqbf-has-a-polynomial-round-interactive-proof",
+        "kind": "theorem",
+        "title": "TQBF has a polynomial-round perfectly complete interactive proof",
+        "deps": [
+          "lem-each-round-has-polynomial-communication",
+          "lem-shamir-protocol-has-perfect-completeness",
+          "lem-total-soundness-follows-by-union-bound"
+        ]
+      },
+      {
+        "id": "lem-interactive-proofs-pull-back-under-polynomial-reductions",
+        "kind": "lemma",
+        "title": "Interactive proofs pull back under polynomial-time many-one reductions",
+        "deps": [
+          "def-ip"
+        ]
+      },
+      {
+        "id": "thm-pspace-is-contained-in-ip",
+        "kind": "theorem",
+        "title": "PSPACE is contained in IP",
+        "deps": [
+          "thm-tqbf-is-pspace-complete",
+          "thm-tqbf-has-a-polynomial-round-interactive-proof",
+          "lem-interactive-proofs-pull-back-under-polynomial-reductions"
+        ]
+      },
+      {
+        "id": "thm-ip-equals-pspace",
+        "kind": "theorem",
+        "title": "IP equals PSPACE",
+        "deps": [
+          "thm-pspace-is-contained-in-ip",
+          "thm-ip-is-contained-in-pspace"
+        ]
+      },
+      {
+        "id": "cor-ip-is-closed-under-complement",
+        "kind": "corollary",
+        "title": "IP is closed under complement",
+        "deps": [
+          "thm-ip-equals-pspace",
+          "cor-pspace-equals-npspace-and-is-closed-under-complement"
+        ]
+      },
+      {
+        "id": "thm-ip-can-be-given-perfect-completeness",
+        "kind": "theorem",
+        "title": "Every IP language has a perfectly complete polynomial-round protocol",
+        "deps": [
+          "thm-ip-is-contained-in-pspace",
+          "thm-tqbf-is-pspace-complete",
+          "thm-tqbf-has-a-polynomial-round-interactive-proof",
+          "lem-interactive-proofs-pull-back-under-polynomial-reductions"
+        ]
+      },
+      {
+        "id": "fs-ip-equals-pspace-needs-no-degree-reduction",
+        "kind": "false statement",
+        "title": "The arithmetization proof needs no degree reduction",
+        "deps": [
+          "def-qbf-arithmetization-operators"
+        ]
+      },
+      {
+        "id": "fs-the-verifier-trusts-the-final-field-value",
+        "kind": "false statement",
+        "title": "The verifier may trust the prover's final field value",
+        "deps": [
+          "def-shamir-protocol-for-tqbf"
+        ]
+      }
+    ],
+    "scaffold_status": "blocked: see frontier-34-batch-16.notes.md; structural inventory is not mathematical approval"
+  },
+  {
+    "order": 644,
+    "id": "the-ip-equals-pspace-theorem-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "The IP = PSPACE Theorem: Examples and Counterexamples",
+    "requires": [
+      "the-ip-equals-pspace-theorem"
+    ],
+    "items": [
+      {
+        "id": "ex-multilinearization-preserves-boolean-values",
+        "kind": "example",
+        "title": "Multilinearizing a polynomial without changing its Boolean table",
+        "deps": [
+          "lem-multilinearization-preserves-boolean-values"
+        ]
+      },
+      {
+        "id": "ex-ip-can-be-given-perfect-completeness",
+        "kind": "example",
+        "title": "Pulling a perfectly complete TQBF protocol back through a reduction",
+        "deps": [
+          "thm-ip-can-be-given-perfect-completeness"
+        ]
+      },
+      {
+        "id": "cex-ip-equals-pspace-needs-no-degree-reduction",
+        "kind": "counterexample",
+        "title": "Dummy universal quantifiers cause exponential degree growth",
+        "deps": [
+          "fs-ip-equals-pspace-needs-no-degree-reduction"
+        ]
+      },
+      {
+        "id": "cex-the-verifier-trusts-the-final-field-value",
+        "kind": "counterexample",
+        "title": "A false constant claim passes if the terminal check is removed",
+        "deps": [
+          "fs-the-verifier-trusts-the-final-field-value"
+        ]
+      }
+    ],
+    "scaffold_status": "blocked: see frontier-34-batch-16.notes.md; structural inventory is not mathematical approval"
+  },
+  {
+    "order": 647,
+    "id": "gap-amplification-and-assignment-testing",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Gap Amplification and Assignment Testing",
+    "companion": "gap-amplification-and-assignment-testing-examples",
+    "requires": [
+      "expander-graphs-and-constraint-graphs",
+      "the-cook-levin-theorem",
+      "randomized-complexity-and-amplification"
+    ],
+    "items": [
+      {
+        "id": "def-gap-preserving-csp-reduction",
+        "kind": "definition",
+        "title": "Uniform CSP reductions and normalized unsatisfaction",
+        "deps": [
+          "def-gap-csp"
+        ]
+      },
+      {
+        "id": "def-degree-reduction-by-expander-clouds",
+        "kind": "definition",
+        "title": "Replacing variable occurrences by expander clouds",
+        "deps": [
+          "def-constraint-graph-regularization"
+        ]
+      },
+      {
+        "id": "lem-cloud-consistency-forces-near-constant-labels",
+        "kind": "lemma",
+        "title": "Cloud inconsistency controls distance from plurality",
+        "deps": [
+          "lem-cloud-plurality-rounding"
+        ]
+      },
+      {
+        "id": "thm-degree-reduction-preserves-unsatisfaction",
+        "kind": "theorem",
+        "title": "Quantitative gap preservation by cloud regularization",
+        "deps": [
+          "lem-cloud-consistency-forces-near-constant-labels",
+          "lem-regularization-preserves-value-quantitatively"
+        ]
+      },
+      {
+        "id": "lem-gap-lazy-expander-preprocessing",
+        "kind": "lemma",
+        "title": "Tautological overlay and exact laziness with explicit gap loss",
+        "deps": [
+          "thm-degree-reduction-preserves-unsatisfaction",
+          "lem-constraint-expander-overlay"
+        ]
+      },
+      {
+        "id": "def-constraint-graph-powering",
+        "kind": "definition",
+        "title": "Binary walk constraints on endpoint local-opinion labels",
+        "deps": [
+          "lem-gap-lazy-expander-preprocessing",
+          "def-constraint-graph-and-labeling-value"
+        ]
+      },
+      {
+        "id": "lem-powering-preserves-perfect-satisfiability",
+        "kind": "lemma",
+        "title": "Consistent neighborhood opinions satisfy every powered constraint",
+        "deps": [
+          "def-constraint-graph-powering"
+        ]
+      },
+      {
+        "id": "lem-gap-binomial-central-window-comparison",
+        "kind": "lemma",
+        "title": "Binomial probability comparison in a central square-root window",
+        "deps": [
+          "lem-bernoulli-and-binomial-mean-and-variance",
+          "thm-chebyshev-inequality"
+        ]
+      },
+      {
+        "id": "lem-gap-lazy-walk-opinion-stability",
+        "kind": "lemma",
+        "title": "Nearby lazy-walk lengths preserve plurality probability",
+        "deps": [
+          "lem-gap-binomial-central-window-comparison",
+          "def-constraint-graph-powering"
+        ]
+      },
+      {
+        "id": "lem-gap-plurality-first-moment",
+        "kind": "lemma",
+        "title": "Decoded bad edges yield many detected middle positions",
+        "deps": [
+          "lem-gap-lazy-walk-opinion-stability"
+        ]
+      },
+      {
+        "id": "lem-gap-opinion-hit-second-moment",
+        "kind": "lemma",
+        "title": "Second-moment control without assuming consistent local labels",
+        "deps": [
+          "lem-gap-plurality-first-moment",
+          "lem-expander-walk-bad-edge-return",
+          "lem-cauchy-schwarz-for-finite-random-variables"
+        ]
+      },
+      {
+        "id": "lem-powering-amplifies-small-gaps",
+        "kind": "lemma",
+        "title": "Local-opinion powering amplifies small unsatisfaction gaps",
+        "deps": [
+          "lem-gap-opinion-hit-second-moment"
+        ]
+      },
+      {
+        "id": "thm-gap-amplification-step",
+        "kind": "theorem",
+        "title": "A uniform constant-factor-size gap amplification step",
+        "deps": [
+          "lem-powering-amplifies-small-gaps",
+          "lem-powering-preserves-perfect-satisfiability",
+          "lem-gap-lazy-expander-preprocessing"
+        ]
+      },
+      {
+        "id": "def-explicit-constant-rate-constant-distance-code",
+        "kind": "definition",
+        "title": "Uniform encoders with constant binary rate and relative distance",
+        "deps": []
+      },
+      {
+        "id": "lem-gap-greedy-inner-code",
+        "kind": "lemma",
+        "title": "Polynomial search for logarithmic-length inner codes",
+        "deps": [
+          "def-explicit-constant-rate-constant-distance-code",
+          "thm-binomial-theorem"
+        ]
+      },
+      {
+        "id": "lem-gap-code-field-construction",
+        "kind": "lemma",
+        "title": "Uniform binary extension fields for concatenated codes",
+        "deps": [
+          "cor-irreducible-polynomials-exist-over-finite-fields-in-every-degree",
+          "thm-polynomial-quotient-is-a-field-iff-irreducible"
+        ]
+      },
+      {
+        "id": "lem-gap-reed-solomon-outer-code",
+        "kind": "lemma",
+        "title": "Evaluation codes with rate one half and relative distance at least one half",
+        "deps": [
+          "lem-gap-code-field-construction",
+          "thm-root-bound-for-polynomials-over-a-domain"
+        ]
+      },
+      {
+        "id": "lem-gap-concatenated-code-parameters",
+        "kind": "lemma",
+        "title": "Rate, distance and bit cost of concatenated encoders",
+        "deps": [
+          "lem-gap-greedy-inner-code",
+          "lem-gap-reed-solomon-outer-code"
+        ]
+      },
+      {
+        "id": "thm-explicit-code-construction-and-distance",
+        "kind": "theorem",
+        "title": "An explicit binary code family of constant rate and relative distance",
+        "deps": [
+          "lem-gap-concatenated-code-parameters"
+        ]
+      },
+      {
+        "id": "def-assignment-tester-and-rejection-ratio",
+        "kind": "definition",
+        "title": "Assignment testers preserve designated inputs and reject in proportion to distance",
+        "deps": [
+          "def-gap-preserving-csp-reduction"
+        ]
+      },
+      {
+        "id": "def-hadamard-linearity-constraint-system",
+        "kind": "definition",
+        "title": "Walsh-Hadamard tables and the three-query linearity constraints",
+        "deps": []
+      },
+      {
+        "id": "lem-gap-cube-character-orthogonality",
+        "kind": "lemma",
+        "title": "Orthogonality and Parseval for normalized binary-cube characters",
+        "deps": [
+          "def-hadamard-linearity-constraint-system"
+        ]
+      },
+      {
+        "id": "lem-gap-blr-fourier-identity",
+        "kind": "lemma",
+        "title": "BLR acceptance is a cubic Fourier sum",
+        "deps": [
+          "lem-gap-cube-character-orthogonality"
+        ]
+      },
+      {
+        "id": "thm-linearity-test-rejects-proportionally-to-distance",
+        "kind": "theorem",
+        "title": "BLR rejection controls distance from a linear table",
+        "deps": [
+          "lem-gap-blr-fourier-identity"
+        ]
+      },
+      {
+        "id": "lem-gap-hadamard-self-correction",
+        "kind": "lemma",
+        "title": "Two uniform queries recover an arbitrary prescribed linear coordinate",
+        "deps": [
+          "thm-linearity-test-rejects-proportionally-to-distance"
+        ]
+      },
+      {
+        "id": "def-quadratic-consistency-test",
+        "kind": "definition",
+        "title": "Tensor consistency with self-corrected Walsh-Hadamard queries",
+        "deps": [
+          "lem-gap-hadamard-self-correction"
+        ]
+      },
+      {
+        "id": "lem-gap-random-linear-subsum",
+        "kind": "lemma",
+        "title": "A nonzero binary linear form is one on half its inputs",
+        "deps": [
+          "def-hadamard-linearity-constraint-system"
+        ]
+      },
+      {
+        "id": "lem-quadratic-test-soundness",
+        "kind": "lemma",
+        "title": "An incorrect tensor matrix fails the corrected quadratic test with constant probability",
+        "deps": [
+          "def-quadratic-consistency-test",
+          "lem-gap-random-linear-subsum"
+        ]
+      },
+      {
+        "id": "lem-circuit-satisfaction-is-linear-quadratic-consistency",
+        "kind": "lemma",
+        "title": "Boolean gate equations and their random linear combinations",
+        "deps": [
+          "lem-gap-random-linear-subsum",
+          "def-boolean-circuit-size-depth-fanin-and-basis"
+        ]
+      },
+      {
+        "id": "lem-gap-raw-input-comparison",
+        "kind": "lemma",
+        "title": "Comparing raw input coordinates to the decoded witness",
+        "deps": [
+          "lem-gap-hadamard-self-correction",
+          "def-assignment-tester-and-rejection-ratio"
+        ]
+      },
+      {
+        "id": "lem-gap-bounded-input-assignment-tester",
+        "kind": "lemma",
+        "title": "An exponential-table constant-query tester with raw-input proximity",
+        "deps": [
+          "lem-quadratic-test-soundness",
+          "lem-circuit-satisfaction-is-linear-quadratic-consistency",
+          "lem-gap-raw-input-comparison",
+          "thm-linearity-test-rejects-proportionally-to-distance"
+        ]
+      },
+      {
+        "id": "lem-gap-tester-query-constraint-conversion",
+        "kind": "lemma",
+        "title": "Converting constant-query tests to constant-alphabet binary constraints",
+        "deps": [
+          "lem-gap-bounded-input-assignment-tester"
+        ]
+      },
+      {
+        "id": "lem-gap-exponential-table-cost",
+        "kind": "lemma",
+        "title": "Hadamard and quadratic tables have exponential size in circuit size",
+        "deps": [
+          "lem-gap-bounded-input-assignment-tester"
+        ]
+      },
+      {
+        "id": "lem-gap-input-preserving-cloud-comparisons",
+        "kind": "lemma",
+        "title": "Comparison constraints retain the designated raw inputs under powering",
+        "deps": [
+          "def-assignment-tester-and-rejection-ratio",
+          "def-constraint-graph-powering"
+        ]
+      },
+      {
+        "id": "lem-gap-proximity-amplification-dichotomy",
+        "kind": "lemma",
+        "title": "Decoded proximity or failed input comparisons forces rejection",
+        "deps": [
+          "lem-gap-input-preserving-cloud-comparisons",
+          "lem-powering-amplifies-small-gaps",
+          "lem-cloud-consistency-forces-near-constant-labels"
+        ]
+      },
+      {
+        "id": "lem-gap-proximity-preserving-tester-composition",
+        "kind": "lemma",
+        "title": "Composing with bounded-input testers preserves input proximity quantitatively",
+        "deps": [
+          "lem-gap-tester-query-constraint-conversion",
+          "thm-explicit-code-construction-and-distance",
+          "lem-gap-proximity-amplification-dichotomy"
+        ]
+      },
+      {
+        "id": "lem-gap-rejection-ratio-amplification",
+        "kind": "lemma",
+        "title": "Doubling the rejection ratio with constant alphabet and size factor",
+        "deps": [
+          "lem-gap-proximity-preserving-tester-composition",
+          "lem-gap-exponential-table-cost"
+        ]
+      },
+      {
+        "id": "lem-gap-inverse-polynomial-initial-tester",
+        "kind": "lemma",
+        "title": "Gate constraints give an initial inverse-polynomial rejection ratio",
+        "deps": [
+          "lem-circuit-satisfaction-is-linear-quadratic-consistency",
+          "def-assignment-tester-and-rejection-ratio"
+        ]
+      },
+      {
+        "id": "thm-constant-query-assignment-tester",
+        "kind": "theorem",
+        "title": "A constant-query assignment tester with a uniform positive rejection ratio",
+        "deps": [
+          "lem-gap-rejection-ratio-amplification",
+          "lem-gap-inverse-polynomial-initial-tester"
+        ]
+      },
+      {
+        "id": "lem-tester-size-and-construction-time-are-polynomial",
+        "kind": "lemma",
+        "title": "Logarithmically many constant-factor amplification stages have polynomial cost",
+        "deps": [
+          "thm-constant-query-assignment-tester",
+          "lem-gap-exponential-table-cost"
+        ]
+      },
+      {
+        "id": "fs-repeating-constraints-amplifies-the-gap",
+        "kind": "false statement",
+        "title": "Repeating every constraint increases normalized unsatisfaction",
+        "deps": [
+          "def-gap-preserving-csp-reduction"
+        ]
+      }
+    ],
+    "scaffold_status": "blocked: see frontier-34-batch-16.notes.md; structural inventory is not mathematical approval"
+  },
+  {
+    "order": 648,
+    "id": "gap-amplification-and-assignment-testing-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Gap Amplification and Assignment Testing: Examples and Counterexamples",
+    "requires": [
+      "gap-amplification-and-assignment-testing"
+    ],
+    "items": [
+      {
+        "id": "ex-degree-reduction-preserves-unsatisfaction",
+        "kind": "example",
+        "title": "Cloud rounding with explicit degree and gap constants",
+        "deps": [
+          "thm-degree-reduction-preserves-unsatisfaction"
+        ]
+      },
+      {
+        "id": "ex-tester-size-and-construction-time-are-polynomial",
+        "kind": "example",
+        "title": "Constant-size local tests and polynomially many amplification stages",
+        "deps": [
+          "lem-tester-size-and-construction-time-are-polynomial"
+        ]
+      },
+      {
+        "id": "cex-repeating-constraints-amplifies-the-gap",
+        "kind": "counterexample",
+        "title": "Repeated contradictory constraints keep the same unsatisfaction",
+        "deps": [
+          "fs-repeating-constraints-amplifies-the-gap"
+        ]
+      },
+      {
+        "id": "ex-gap-hadamard-tables-are-exponential",
+        "kind": "example",
+        "title": "The Hadamard-quadratic table cost for a growing circuit",
+        "deps": [
+          "lem-gap-exponential-table-cost"
+        ]
+      }
+    ],
+    "scaffold_status": "blocked: see frontier-34-batch-16.notes.md; structural inventory is not mathematical approval"
+  }
+]

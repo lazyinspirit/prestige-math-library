@@ -1,0 +1,431 @@
+[
+  {
+    "order": 150.0021,
+    "id": "modular-traces-and-brauer-character-independence",
+    "kind": "A",
+    "category": "group-theory",
+    "title": "Modular Traces and Brauer-Character Independence",
+    "companion": "modular-traces-and-brauer-character-independence-examples",
+    "requires": [
+      "modular-representations-and-projective-covers",
+      "the-group-algebra-and-representations",
+      "chain-conditions-and-semisimple-modules"
+    ],
+    "items": [
+      {
+        "id": "lem-a-finite-dimensional-algebra-separates-its-simple-modules",
+        "kind": "lemma",
+        "deps": [
+          "thm-schurs-lemma-for-modules",
+          "def-direct-sum-of-a-family-of-modules",
+          "def-linear-basis",
+          "cor-independent-set-is-no-larger-than-a-finite-spanning-set"
+        ],
+        "statement": "For a finite-dimensional split k-algebra A and pairwise nonisomorphic simple left modules S_i with End_A(S_i)=k, the action map A -> product_i End_k(S_i) is surjective.",
+        "proof_route": "Prove finite simultaneous density locally, without importing Jacobson radical, composition-series, or general density theorems. First prove by induction on the number of simple summands that every submodule N of a finite direct sum W has a complement which is a sum of some of those simple types. Write W=S direct-sum T with S simple. If S is contained in N, split N/S inside T by induction. If S intersects N trivially, projection embeds N into T; split its image in T by induction, and the graph description gives W=N direct-sum (S direct-sum C). This proves the claim including the empty sum. Each S_i is cyclic, hence spanned over k by the images of a finite basis of A. Extract a basis e_i1,...,e_id_i by scanning that finite spanning list and keeping a vector exactly when it is outside the preceding span. There are finitely many simple types: for any finite distinct selection, the following argument gives a surjection from A onto their nonzero endomorphism factors, bounding the selection's size by dim_k A; therefore a family of distinct types cannot have more than dim_k A members (finite induction, not an infinite choice). For the given finite family form W=direct-sum_i S_i^{d_i} and v=(e_ij). If Av is proper, the complement just proved gives a nonzero A-linear map F:W->S_l vanishing on Av for some l. Schur's lemma makes its restrictions to other types zero and its restrictions to the copies of S_l scalar multiples of the identity. Then F(v)=sum_j c_j e_lj=0 forces every coefficient zero, a contradiction. Thus Av=W. Given any prescribed k-endomorphisms u_i, choose a with av=(u_i(e_ij)); this a acts as u_i on every S_i, proving surjectivity. The empty family is immediate. Only finite choices are used. The assumption End_A(S_i)=k means equality with the scalar endomorphisms, not merely an abstract ring isomorphism."
+      },
+      {
+        "id": "lem-modular-trace-functions-of-simple-modules-are-linearly-independent",
+        "kind": "lemma",
+        "deps": [
+          "lem-a-finite-dimensional-algebra-separates-its-simple-modules"
+        ],
+        "statement": "The k-linear trace functionals a -> tr(a|S_i) on a finite-dimensional split algebra are linearly independent. For A=kG this implies independence of their restrictions as functions on G.",
+        "proof_route": "Lift a matrix unit E_11 in one factor and zero matrices elsewhere; its traces form a Kronecker delta vector. Extend any relation on the basis G k-linearly to kG. Do not use the identity matrix as a trace-one matrix when p divides dim(S_i)."
+      },
+      {
+        "id": "lem-modular-trace-depends-only-on-the-p-regular-part",
+        "kind": "lemma",
+        "deps": [
+          "def-finite-dimensional-representation-of-a-group-over-a-field",
+          "thm-bezout-identity",
+          "def-linear-basis",
+          "cor-independent-set-is-no-larger-than-a-finite-spanning-set"
+        ],
+        "statement": "For finite G in characteristic p, write g=su=us with s of order prime to p and u of p-power order. Then tr(g|V)=tr(s|V) for every finite-dimensional kG-module V.",
+        "proof_route": "Write order(g)=m*p^a with gcd(m,p)=1. Bezout gives e*m+f*p^a=1; set u=g^(e*m), s=g^(f*p^a). These commute, multiply to g, and have respectively p-power and prime-to-p orders. Put N=rho(u)-I. In characteristic p, N^(p^a)=rho(u)^(p^a)-I=0 by the binomial identity. Since rho(s) commutes with N, T=rho(s)*N is nilpotent too. Prove trace(T)=0 over k itself: the finite kernel flag 0<=ker(T)<=ker(T^2)<=...<=V admits a basis adapted to all its members, by extending independent lists a finite number of times using the finite dimension bound. T sends each member to the preceding member, so its matrix has zero diagonal. The trace is basis-independent because tr(AB)=tr(BA) by the finite double-sum identity. Thus tr(rho(g))-tr(rho(s))=tr(T)=0. This gives the entire assertion without a splitting extension or any claim that u acts trivially; all choices are finite."
+      },
+      {
+        "id": "lem-prime-to-p-roots-lift-uniquely-in-a-complete-discrete-valuation-ring",
+        "kind": "lemma",
+        "deps": [
+          "def-splitting-p-modular-system-for-a-finite-group",
+          "def-discrete-valuation-ring"
+        ],
+        "statement": "For a complete DVR O with residue characteristic p and m prime to p, reduction gives a bijection between mth roots of unity in O and those in k; the inverse respects multiplication.",
+        "proof_route": "For a residue root choose one lift x_0 in O and set f(X)=X^m-1. Its derivative f'(x_0)=m*x_0^(m-1) is a unit. Iterate the deterministic Newton formula x_(n+1)=x_n-f(x_n)/f'(x_n). Taylor expansion shows v(f(x_(n+1)))>=2*v(f(x_n)), all x_n have the original nonzero residue, and every derivative remains a unit. Therefore x_n is Cauchy in the uniformizer-adic topology; completeness gives a root with the prescribed residue. No sequence of arbitrary lift choices is needed. If x,y lift the same root, (x^m-y^m)/(x-y)=sum_(j=0)^(m-1) x^(m-1-j)y^j is a unit since its residue is m*bar(x)^(m-1); thus x=y. Products and inverses of roots lift products and inverses of residues, so uniqueness makes reduction a group isomorphism. For orders dividing the prime-to-p exponent of G, splitting on the relevant cyclic subgroup supplies the eigenvalues. No later Brauer-page definition is used."
+      },
+      {
+        "id": "def-lifted-modular-trace-on-p-regular-elements",
+        "kind": "definition",
+        "deps": [
+          "lem-prime-to-p-roots-lift-uniquely-in-a-complete-discrete-valuation-ring",
+          "def-splitting-p-modular-system-for-a-finite-group"
+        ],
+        "statement": "Fix a splitting p-modular system (K,O,k). On p-regular g define phi_V(g) as the sum in O of the unique prime-to-p lifts of its eigenvalues with multiplicity. These are the Brauer characters for this fixed lifting convention.",
+        "proof_route": "Diagonalizability follows from the square-free polynomial x^m-1. The multiset of eigenvalues and uniqueness of lifts make the definition basis-independent and constant on conjugacy classes."
+      },
+      {
+        "id": "lem-reduction-of-teichmuller-lifted-traces-recovers-modular-traces",
+        "kind": "lemma",
+        "deps": [
+          "def-lifted-modular-trace-on-p-regular-elements"
+        ],
+        "statement": "Reduction O -> k sends phi_V(g) to tr(g|V) for every p-regular g.",
+        "proof_route": "Reduction is an additive ring map; reduce each summand. Never lift a sum by the multiplicative root-lifting map."
+      },
+      {
+        "id": "thm-irreducible-brauer-characters-are-linearly-independent-on-p-regular-elements",
+        "kind": "theorem",
+        "deps": [
+          "lem-modular-trace-functions-of-simple-modules-are-linearly-independent",
+          "lem-modular-trace-depends-only-on-the-p-regular-part",
+          "lem-reduction-of-teichmuller-lifted-traces-recovers-modular-traces",
+          "def-discrete-valuation-ring"
+        ],
+        "statement": "For a fixed splitting p-modular system, the irreducible Brauer characters are linearly independent over K on p-regular elements, and remain independent after field extension.",
+        "proof_route": "Scale a nonzero finite K-linear relation by a uniformizer power so every coefficient is integral and at least one is a unit. Reduce, use the p-regular-part trace lemma to extend the relation to G, and contradict modular-trace independence. A nonzero maximal minor proves independence after field extension; complex-valued conventions use a fixed embedding of the cyclotomic value field, not an embedding of all K into C."
+      }
+    ]
+  },
+  {
+    "order": 150.0022,
+    "id": "modular-traces-and-brauer-character-independence-examples",
+    "kind": "B",
+    "category": "group-theory",
+    "title": "Modular Traces and Brauer-Character Independence: Examples",
+    "companion": "modular-traces-and-brauer-character-independence",
+    "requires": [
+      "modular-traces-and-brauer-character-independence"
+    ],
+    "items": [
+      {
+        "id": "ex-modular-traces-for-a-cyclic-p-prime-group",
+        "kind": "example",
+        "deps": [
+          "thm-irreducible-brauer-characters-are-linearly-independent-on-p-regular-elements",
+          "def-lifted-modular-trace-on-p-regular-elements"
+        ],
+        "statement": "For C_m with p not dividing m, the m one-dimensional characters have lifted values zeta^(ij); their trace table is a Vandermonde matrix.",
+        "proof_route": "Use distinct mth roots; its determinant is a product of nonzero differences, both in k and after lifting."
+      },
+      {
+        "id": "ex-brauer-character-independence-for-s-three-in-characteristic-two",
+        "kind": "example",
+        "deps": [
+          "thm-irreducible-brauer-characters-are-linearly-independent-on-p-regular-elements",
+          "lem-modular-trace-depends-only-on-the-p-regular-part",
+          "def-lifted-modular-trace-on-p-regular-elements"
+        ],
+        "statement": "For S_3 in a splitting characteristic-two field, the trivial and natural two-dimensional modules have Brauer rows (1,1) and (2,-1) on 1 and a 3-cycle.",
+        "proof_route": "Take r=[[0,1],[1,1]] and t=[[0,1],[1,0]] over F_2 inside k. They satisfy r^3=t^2=1 and trt=r^-1 and generate the six matrices of GL_2(F_2), giving S_3. Over the splitting field the two distinct nontrivial cube-root eigenlines of r are interchanged by t; hence there is no invariant line, proving absolute irreducibility. Their lifts sum to -1, whereas the trace at the identity is 2; the trivial row is (1,1), so the two-row determinant is -3, nonzero in characteristic zero and in characteristic two after reduction. For completeness, there are exactly two p-regular conjugacy classes. The A-page independence theorem bounds any family of distinct simple characters by the dimension two of functions on those classes. These two simples exhaust them. This argument uses neither a radical quotient nor the later Brauer basis theorem."
+      },
+      {
+        "id": "cex-ordinary-traces-on-p-singular-elements-do-not-define-brauer-characters",
+        "kind": "counterexample",
+        "deps": [
+          "lem-modular-trace-depends-only-on-the-p-regular-part",
+          "def-lifted-modular-trace-on-p-regular-elements"
+        ],
+        "statement": "The ordinary trivial and sign representations of C_2 have the same characteristic-two reduction but opposite values at its nonidentity element.",
+        "proof_route": "In any fixed splitting 2-modular system for C_2, take the two rank-one O-lattices on which the generator acts by 1 and -1. Their K-representations have opposite values at that generator because K has characteristic zero, while both reductions are the trivial k-module because k has characteristic two. Thus no value on this p-singular element is determined by the reduced module. The construction uses the supplied modular system and needs no independent construction of Q_2 or Z_2. Also J=[[1,1],[0,1]] satisfies J^2=I in characteristic two, J is not I, and tr(J)=tr(I), showing explicitly that equality of modular traces does not imply equality of operators."
+      }
+    ]
+  },
+  {
+    "order": 365.0721,
+    "id": "group-homology-transfer-and-low-degree-exact-sequences",
+    "kind": "A",
+    "category": "group-theory",
+    "title": "Group Homology Transfer and Low-Degree Exact Sequences",
+    "companion": "group-homology-transfer-and-low-degree-exact-sequences-examples",
+    "requires": [
+      "chain-complexes-and-homology",
+      "group-cohomology-as-a-derived-functor",
+      "free-groups-and-presentations",
+      "group-extensions-complements-and-schur-zassenhaus"
+    ],
+    "items": [
+      {
+        "id": "lem-diagonal-bar-coinvariants-compute-group-homology",
+        "kind": "lemma",
+        "deps": [
+          "def-group-homology-as-a-derived-functor",
+          "thm-the-bar-complex-is-a-free-resolution-of-the-trivial-module",
+          "thm-normalized-and-unnormalized-bar-complexes-are-chain-homotopy-equivalent",
+          "def-projective-object",
+          "def-dependent-choice"
+        ],
+        "statement": "For a left G-module M, normalized group homology is computed by diagonal coinvariants (Bbar_n(G) tensor_Z M)_G; identify it with the right-resolution convention via b*g=g^-1*b.",
+        "proof_route": "Turn the homogeneous normalized left bar complex into a right ZG-resolution by b*g=g^(-1)b. The map [(b tensor m)] in Bbar(G) tensor_ZG M to the diagonal-orbit class [b tensor m] in (Bbar(G) tensor_Z M)_G is well-defined because (b*g) tensor m and b tensor g*m become the same orbit; its inverse chooses the displayed representative and uses the same balancing identity. Check both composites and every face map. Compose this chain isomorphism with the published free-bar-resolution computation of the derived functor. Carry the inherited Dependent Choice and supplied-resolution convention explicitly; no cochain comparison is used. Prove the required left/right resolution comparison here; the unpublished Tor page is not a supplier. Write R=ZG and let P_q->M be the supplied left projective resolution. Form D_pq=Bbar_p^right(G) tensor_R P_q with total differential d_B tensor 1+(-1)^p 1 tensor d_P. Each Bbar_p^right is free, so tensoring with it is a direct sum of copies of the underlying exact sequence; finite support makes exactness choice-free. Each P_q is a retract of its canonical free cover: lift its identity through that cover by projectivity. Tensoring with P_q is consequently a retract of tensoring with that free module and preserves exactness. Thus the two augmented directions give chain maps Tot(D)->Bbar^right tensor_R M and Tot(D)->Z tensor_R P, with exact augmented columns and rows respectively. Prove both maps induce homology isomorphisms by finite staircase elimination: in the augmented mapping-cone bicomplex, remove a total cycle's outermost component using exactness in the augmented direction, subtract the total boundary of its chosen primitive, and repeat toward the axis. The other differential moves the residual component one step toward that axis; only n+2 positions occur in total degree n. The last augmented component is removed by exactness at the axis, so every cone cycle is a boundary. This proves both comparison maps are quasi-isomorphisms without a spectral sequence. The augmentations commute with coefficient and group maps; hence the resulting homology identification is natural and is compatible with the supplied-resolution comparison. Do not infer a right-resolution computation merely from the definition that resolves M on the left."
+      },
+      {
+        "id": "def-finite-index-transfer-on-normalized-bar-chains",
+        "kind": "definition",
+        "deps": [
+          "lem-diagonal-bar-coinvariants-compute-group-homology",
+          "def-normalized-bar-resolution"
+        ],
+        "statement": "For H of finite index choose representatives T of right cosets Ht with 1 in T; write x=r(x)*t(x), r(x) in H. In degree n transfer sends [(g_0,...,g_n) tensor m] to sum over t in T of [(r(tg_0),...,r(tg_n)) tensor t*m].",
+        "proof_route": "Use left modules and diagonal coinvariants. Print the associated Schreier recursion t_0=t, t_i=rep(H*t_(i-1)*g_i), h_i=t_(i-1)*g_i*t_i^-1; for trivial coefficients the inhomogeneous sum is sum_t[h_1|...|h_n].",
+        "justified_by": [
+          "lem-bar-transfer-is-a-chain-map-and-choice-independent-up-to-chain-homotopy"
+        ]
+      },
+      {
+        "id": "lem-bar-transfer-is-a-chain-map-and-choice-independent-up-to-chain-homotopy",
+        "kind": "lemma",
+        "deps": [
+          "def-finite-index-transfer-on-normalized-bar-chains"
+        ],
+        "statement": "The displayed transfer respects all faces and degeneracies and is independent of T up to chain homotopy.",
+        "proof_route": "Check diagonal-coinvariant invariance by coset permutation. Vertexwise retraction commutes with every deletion. Compare two vertex maps by the alternating prism sum (f(v_0),...,f(v_i),g(v_i),...,g(v_n)), including both endpoint faces; reindex coset representatives and transform coefficients before using the prism."
+      },
+      {
+        "id": "lem-corestriction-after-bar-transfer-is-index-multiplication-on-homology",
+        "kind": "lemma",
+        "deps": [
+          "def-finite-index-transfer-on-normalized-bar-chains",
+          "lem-bar-transfer-is-a-chain-map-and-choice-independent-up-to-chain-homotopy"
+        ],
+        "statement": "Inclusion-induced homology followed after transfer is multiplication by [G:H] in every degree.",
+        "proof_route": "Construct locally, for each coset, the alternating prism between the H-equivariant retraction/inclusion and the identity on the homogeneous bar construction; verify the face cancellations, normalization, and descent under coset permutation. On G-coinvariants every translated summand equals the input. Here corestriction means the covariant inclusion map on homology."
+      },
+      {
+        "id": "thm-positive-degree-integral-homology-of-a-finite-group-is-annihilated-by-its-order",
+        "kind": "theorem",
+        "deps": [
+          "lem-corestriction-after-bar-transfer-is-index-multiplication-on-homology",
+          "lem-diagonal-bar-coinvariants-compute-group-homology"
+        ],
+        "statement": "For a finite group G and n>0, |G| H_n(G;Z)=0.",
+        "proof_route": "Set H=1; the normalized trivial-group chain complex has no positive degrees. Coefficients are the trivial integral module."
+      },
+      {
+        "id": "lem-bar-first-integral-homology-is-the-abelianization",
+        "kind": "lemma",
+        "deps": [
+          "lem-diagonal-bar-coinvariants-compute-group-homology",
+          "def-normalized-bar-resolution"
+        ],
+        "statement": "Naturally H_1(G;Z)=G_ab; for R normal in F, H_1(R;Z)_(F/R)=R/[F,R].",
+        "proof_route": "The degree-two bar boundary imposes [xy]=[x]+[y]; conjugation coinvariants impose frf^-1=r, giving the stated quotient."
+      },
+      {
+        "id": "lem-free-group-augmentation-ideal-has-the-generator-difference-basis",
+        "kind": "lemma",
+        "deps": [
+          "thm-reduced-words-form-the-free-group",
+          "def-group-homology-as-a-derived-functor",
+          "def-projective-object",
+          "def-dependent-choice"
+        ],
+        "statement": "For a free group F on any set X, the generator-difference complex is an exact free left resolution without choice. Assuming DC and supplied projective-resolution data, H_q(F;Z)=0 for q>1 and H_1(F;Z) is the direct sum of copies of Z indexed by X.",
+        "proof_route": "Telescoping and the finite-forest terminal-vertex argument prove exactness. Convert to a right free resolution by inversion and compare its tensor complex with the supplied left projective resolution through the tensor bicomplex. Prove tensor exactness using finite support and projective retracts, and prove both augmentation kernels acyclic by finite elimination. DC is explicit only for the derived identification; arbitrary free modules are not asserted projective."
+      },
+      {
+        "id": "lem-low-degree-filtration-sequence-for-a-first-quadrant-bicomplex",
+        "kind": "lemma",
+        "deps": [
+          "def-chain-complex-in-an-abelian-category",
+          "def-homology-object-of-a-chain-complex"
+        ],
+        "statement": "For a first-quadrant bicomplex with anticommuting differentials and direct-sum totalization, construct the row filtration through total degree three and its exact sequence H_2(Tot) -> E2_(2,0) -> E2_(0,1) -> H_1(Tot) -> E2_(1,0) -> 0.",
+        "proof_route": "Use the increasing row filtration F_r Tot_n=direct_sum_(p<=r,p+q=n) D_(p,q). In total degrees at most three, write a filtered cycle as its p-components and eliminate successively the vertical boundaries. The obstruction to eliminating the p=2 component is its E2_(2,0) class; choosing a horizontal primitive produces the degree-(\u22122,1) zigzag d2 to E2_(0,1). Its vanishing is exactly the condition for lifting to a total 1-cycle modulo F_0. Projection of a total 1-cycle gives the edge map to E2_(1,0), and a horizontal 1-cycle lifts because there is no negative vertical degree. Direct substitution proves consecutive composites zero, and reversing each obstruction calculation proves exactness. Only the finite filtrations 0 subset F_0 subset F_1 subset F_2 (and F_3 for independence of choices) occur, so convergence is the equality of the associated graded pieces with these explicit subquotients. Do not appeal to the withdrawn HA-16/17 spectral-sequence supplier."
+      },
+      {
+        "id": "def-free-presentation-lyndon-bar-bicomplex-and-edge-maps",
+        "kind": "definition",
+        "deps": [
+          "lem-diagonal-bar-coinvariants-compute-group-homology",
+          "lem-bar-first-integral-homology-is-the-abelianization",
+          "lem-low-degree-filtration-sequence-for-a-first-quadrant-bicomplex",
+          "def-group-presentation"
+        ],
+        "statement": "For 1 -> R -> F -> G -> 1, construct a first-quadrant resolution bicomplex with E2_(p,q)=H_p(G;H_q(R;Z)) and total homology H_*(F;Z); identify the degree-one edge maps.",
+        "proof_route": "Let C_q=(B_q(F))_R, a free left ZG-module, with G-action from F/R. Set D_(p,q)=B_p^right(G) tensor_ZG C_q. Use d_h=d tensor 1 and d_v=(-1)^p 1 tensor d. Row homology is zero for p>0 and gives (B_q(F))_F for p=0; column homology gives B_p^right(G) tensor_ZG H_q(R;Z). Identify the G-action with conjugation. Prove total comparison and the two low-degree filtrations locally, including naturality; do not use B(G) tensor B(R) with a fictitious strict action."
+      },
+      {
+        "id": "lem-free-presentation-bicomplex-collapses-in-positive-middle-group-degree",
+        "kind": "lemma",
+        "deps": [
+          "def-free-presentation-lyndon-bar-bicomplex-and-edge-maps",
+          "lem-free-group-augmentation-ideal-has-the-generator-difference-basis",
+          "lem-bar-first-integral-homology-is-the-abelianization",
+          "lem-low-degree-filtration-sequence-for-a-first-quadrant-bicomplex"
+        ],
+        "statement": "For the free-presentation bicomplex total homology vanishes in degrees >1; its E2_(0,1) is R/[F,R], and degree-one arrows are inclusion and quotient on abelianizations.",
+        "proof_route": "Apply the two-term free resolution and explicitly identify the filtration edge maps. The title does not mean every positive-degree E2 term vanishes: H_1(F;Z) need not vanish."
+      },
+      {
+        "id": "thm-free-presentation-homology-five-term-sequence",
+        "kind": "theorem",
+        "deps": [
+          "def-free-presentation-lyndon-bar-bicomplex-and-edge-maps",
+          "lem-free-presentation-bicomplex-collapses-in-positive-middle-group-degree",
+          "lem-low-degree-filtration-sequence-for-a-first-quadrant-bicomplex"
+        ],
+        "statement": "Naturally for a free presentation, 0 -> H_2(G;Z) -> R/[F,R] -> F_ab -> G_ab -> 0 is exact.",
+        "proof_route": "Apply the low-degree filtration lemma and H_2(F;Z)=0. Define the filtration transgression locally by hx=-vy mapping to [hy], prove representative and lift independence, and chase the two adjacent kernels directly; the two degree-one arrows come from inclusion and quotient. Do not claim the H_2 injection itself is a homology map induced by an inclusion."
+      },
+      {
+        "id": "def-crossed-homomorphisms-principal-coboundaries-and-first-cohomology",
+        "kind": "definition",
+        "deps": [
+          "def-inhomogeneous-group-cochains",
+          "cor-normalized-cochains-compute-group-cohomology"
+        ],
+        "statement": "For a left G-module A, Z1_cr consists of d(gh)=d(g)+g*d(h), B1_cr consists of g*a-a, and H1_cr=Z1_cr/B1_cr agrees with H^1(G,A).",
+        "proof_route": "Substitute n=0 and n=1 in the published differential; keep the principal-coboundary sign fixed."
+      },
+      {
+        "id": "def-degree-one-restriction-inflation-and-quotient-action",
+        "kind": "definition",
+        "deps": [
+          "def-crossed-homomorphisms-principal-coboundaries-and-first-cohomology"
+        ],
+        "statement": "For 1 -> N -> G -> Q -> 1, define restriction d|N, inflation c composed with G->Q with A^N included in A, and (g*d)(n)=g*d(g^-1*n*g).",
+        "proof_route": "The quotient action is initially a G-action on crossed homomorphisms; only its action on cohomology factors through Q.",
+        "justified_by": [
+          "lem-degree-one-maps-and-quotient-action-are-well-defined"
+        ]
+      },
+      {
+        "id": "lem-degree-one-maps-and-quotient-action-are-well-defined",
+        "kind": "lemma",
+        "deps": [
+          "def-degree-one-restriction-inflation-and-quotient-action"
+        ],
+        "statement": "These formulas descend to inflation H^1(Q,A^N)->H^1(G,A), restriction into H^1(N,A)^Q, and a Q-action on H^1(N,A).",
+        "proof_route": "Compute conjugation by n in N as a principal difference; compute the difference for restriction of d in Z1(G,A). Check preservation of principal maps and invariant coefficients."
+      },
+      {
+        "id": "thm-degree-one-inflation-restriction-exact-sequence",
+        "kind": "theorem",
+        "deps": [
+          "lem-degree-one-maps-and-quotient-action-are-well-defined"
+        ],
+        "statement": "The sequence 0 -> H^1(Q,A^N) -> H^1(G,A) -> H^1(N,A)^Q is exact.",
+        "proof_route": "Subtract a principal cochain to make a restricting cocycle zero on N; compare d(ng) and d(g(g^-1ng)) to show values lie in A^N and descend to Q. Verify injectivity using a principal inflated map."
+      },
+      {
+        "id": "lem-bar-two-cocycles-classify-abelian-kernel-extensions",
+        "kind": "lemma",
+        "deps": [
+          "def-inhomogeneous-group-cochains",
+          "cor-normalized-cochains-compute-group-cohomology",
+          "def-equivalence-of-group-extensions-with-fixed-kernel-and-quotient",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. Normalized bar H^2(G,A) classifies extensions inducing the fixed action on abelian A; zero corresponds to split extensions.",
+        "proof_route": "Apply AC to the nonempty fibers of an arbitrary extension E->G; normalize the resulting section by setting s(1)=1. The unique factor set defined by s(g)s(h)=i(f(g,h))s(gh) is normalized and satisfies the cocycle equation by associativity. Conversely the law (a,g)(b,h)=(a+g*b+f(g,h),gh) gives a group, with identity (0,1) and inverse determined by the normalized cocycle equation. A change of section s'(g)=i(b(g))s(g) changes f by b(g)+g*b(h)-b(gh); the coordinate change (a,g)->(a-b(g),g) identifies the corresponding extensions. Every extension is recovered by (a,g)->i(a)s(g). Zero cohomology class is equivalent to existence of a homomorphic section. This proves classification with the explicitly assumed AC; supplied sections suffice for each individual construction without that global axiom.",
+        "axiom_strength": "ZF + AC for arbitrary sections/cochain choices; no claim that AC is necessary for the five-term statement. The separate homology balance convention retains its explicit DC assumption."
+      },
+      {
+        "id": "lem-pullback-and-coefficient-pushout-realize-bar-cohomology-maps",
+        "kind": "lemma",
+        "deps": [
+          "lem-bar-two-cocycles-classify-abelian-kernel-extensions",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. Pullback of an abelian-kernel extension and pushout along a module map represent pullback and coefficient maps on normalized bar H^2.",
+        "proof_route": "Construct both groups with their kernels and quotient maps, identify their factor sets and show independence of representative. Prove only abelian-kernel pushouts, not arbitrary group pushout exactness.",
+        "axiom_strength": "ZF + AC for arbitrary sections/cochain choices; no claim that AC is necessary for the five-term statement. The separate homology balance convention retains its explicit DC assumption."
+      },
+      {
+        "id": "def-low-degree-transgression-for-a-group-extension",
+        "kind": "definition",
+        "deps": [
+          "lem-degree-one-maps-and-quotient-action-are-well-defined",
+          "lem-bar-two-cocycles-classify-abelian-kernel-extensions",
+          "lem-pullback-and-coefficient-pushout-realize-bar-cohomology-maps",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. For Q-invariant [d] in H^1(N,A), let D={(d(n),n)} in A semidirect G. Define Tra[d] as 0 -> A^N -> Normalizer(D)/D -> Q -> 1.",
+        "proof_route": "Prove normalizer surjectivity and intersection with A equals A^N. Apply AC first to the fibers of G->Q and set alpha(1)=1. For each q the set E_q={a in A : (alpha(q)*d-d)(n)=n*a-a for every n in N} is nonempty by invariance of [d]. Apply AC to this Q-indexed family, set eta(1)=0, and obtain maps alpha and eta with alpha(q)*d-d = (n -> n*eta(q)-eta(q)). For f(q,r)=alpha(q)alpha(r)alpha(qr)^-1, print F(q,r)=eta(q)+alpha(q)*eta(r)-f(q,r)*eta(qr)-d(f(q,r)). Prove F is A^N-valued, normalized, a cocycle, additive on classes and independent of choices. This is the DHW sign convention.",
+        "axiom_strength": "ZF + AC for arbitrary sections/cochain choices; no claim that AC is necessary for the five-term statement. The separate homology balance convention retains its explicit DC assumption."
+      },
+      {
+        "id": "lem-transgression-kernel-is-the-image-of-restriction",
+        "kind": "lemma",
+        "deps": [
+          "def-low-degree-transgression-for-a-group-extension",
+          "thm-degree-one-inflation-restriction-exact-sequence",
+          "lem-bar-two-cocycles-classify-abelian-kernel-extensions",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. ker(Tra)=im(res:H^1(G,A)->H^1(N,A)^Q).",
+        "proof_route": "A global complement normalizes its intersection with A semidirect N; conversely lift a complement in Normalizer(D)/D to a global complement. Check its intersection with A is trivial and projection onto G is onto.",
+        "axiom_strength": "ZF + AC for arbitrary sections/cochain choices; no claim that AC is necessary for the five-term statement. The separate homology balance convention retains its explicit DC assumption."
+      },
+      {
+        "id": "lem-kernel-of-degree-two-inflation-is-the-transgression-image",
+        "kind": "lemma",
+        "deps": [
+          "def-low-degree-transgression-for-a-group-extension",
+          "lem-pullback-and-coefficient-pushout-realize-bar-cohomology-maps",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. ker(inf:H^2(Q,A^N)->H^2(G,A))=im(Tra).",
+        "proof_route": "Pull back then push out an extension with zero inflated class; in the resulting split extension recover the N-complement and show the normalizer quotient represents the original class. Track both kernel embeddings; do not assume coefficient inclusion is injective on H^2.",
+        "axiom_strength": "ZF + AC for arbitrary sections/cochain choices; no claim that AC is necessary for the five-term statement. The separate homology balance convention retains its explicit DC assumption."
+      },
+      {
+        "id": "thm-inflation-restriction-transgression-five-term-sequence",
+        "kind": "theorem",
+        "deps": [
+          "thm-degree-one-inflation-restriction-exact-sequence",
+          "lem-transgression-kernel-is-the-image-of-restriction",
+          "lem-kernel-of-degree-two-inflation-is-the-transgression-image",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume the Axiom of Choice. For every group extension and left G-module A, 0 -> H^1(Q,A^N) -> H^1(G,A) -> H^1(N,A)^Q -> H^2(Q,A^N) -> H^2(G,A) is exact.",
+        "proof_route": "Assemble the three exactness results with the printed maps and signs; exactness is not asserted at the final H^2(G,A) without a following arrow.",
+        "axiom_strength": "ZF + AC for arbitrary sections/cochain choices; no claim that AC is necessary for the five-term statement. The separate homology balance convention retains its explicit DC assumption."
+      }
+    ]
+  },
+  {
+    "order": 365.0722,
+    "id": "group-homology-transfer-and-low-degree-exact-sequences-examples",
+    "kind": "B",
+    "category": "group-theory",
+    "title": "Group Homology Transfer and Low-Degree Exact Sequences: Examples",
+    "companion": "group-homology-transfer-and-low-degree-exact-sequences",
+    "requires": [
+      "group-homology-transfer-and-low-degree-exact-sequences"
+    ],
+    "items": [
+      {
+        "id": "ex-transfer-annihilation-for-a-cyclic-group",
+        "kind": "example",
+        "deps": [
+          "thm-positive-degree-integral-homology-of-a-finite-group-is-annihilated-by-its-order",
+          "def-group-homology-as-a-derived-functor",
+          "thm-projective-resolutions-of-the-same-object-are-homotopy-equivalent-over-that-object"
+        ],
+        "statement": "For C_m, integral homology in positive odd degrees is Z/m and in positive even degrees is zero, agreeing with transfer annihilation.",
+        "proof_route": "Verify the periodic projective resolution with maps g-1 and 1+...+g^(m-1) directly, compare it with the supplied resolution by the exact projective-resolution homotopy-equivalence theorem, and then tensor with Z. Do not import the B-page cyclic calculation."
+      },
+      {
+        "id": "ex-free-presentation-five-term-sequence-for-a-cyclic-group",
+        "kind": "example",
+        "deps": [
+          "thm-free-presentation-homology-five-term-sequence"
+        ],
+        "statement": "For F=Z and R=mZ, the sequence is 0 -> 0 -> mZ -> Z -> Z/m -> 0.",
+        "proof_route": "F and R commute; the middle map is inclusion (multiplication by m after identifying mZ with Z); injectivity forces H_2(C_m;Z)=0."
+      },
+      {
+        "id": "ex-transgression-for-the-integral-heisenberg-extension",
+        "kind": "example",
+        "deps": [
+          "def-low-degree-transgression-for-a-group-extension",
+          "lem-bar-two-cocycles-classify-abelian-kernel-extensions"
+        ],
+        "statement": "For the integral Heisenberg extension 0 -> Z -> Heis(Z) -> Z^2 -> 0 with trivial coefficients Z, Tra(id_Z) is represented by minus the extension factor set.",
+        "proof_route": "Use triples (a,b,c)(a2,b2,c2)=(a+a2,b+b2,c+c2+a*b2), alpha(a,b)=(a,b,0). Then F((a,b),(a2,b2))=-a*b2. It is nonzero since a coboundary on an abelian group with trivial coefficients is symmetric and this cocycle is not."
+      }
+    ]
+  }
+]

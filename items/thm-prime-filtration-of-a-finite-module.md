@@ -7,15 +7,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-finitely-generated-modules-over-noetherian-rings-are-noetherian, thm-equivalent-characterizations-of-noetherian-modules, thm-existence-of-associated-primes, lem-associated-prime-equivalent-cyclic-embedding, def-quotient-module]
+deps: [thm-finitely-generated-modules-over-noetherian-rings-are-noetherian, thm-equivalent-characterizations-of-noetherian-modules, thm-existence-of-associated-primes, lem-associated-prime-equivalent-cyclic-embedding, def-quotient-module, def-dependent-choice, def-axiom-of-choice]
 proof_strategy: direct
 verification:
   audited: 2026-08-28
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-08-28
 sources:
   scraped: []
   references:
@@ -27,7 +23,7 @@ sources:
 
 ## Statement
 
-Let $R$ be a Noetherian commutative ring and let $M$ be a finitely generated
+Assume the Axiom of Choice. Let $R$ be a Noetherian commutative ring and let $M$ be a finitely generated
 left $R$-module. Then there exist submodules
 $$ 0=M_0\subset M_1\subset\cdots\subset M_n=M $$
 such that each quotient $M_i/M_{i-1}$ is isomorphic to $R/\mathfrak p_i$ for
@@ -36,11 +32,11 @@ filtration with $n=0$.
 
 ## Facts & Assumptions
 
-**Given:** A Noetherian commutative ring $R$ and a finitely generated left $R$-module $M$.
+**Given:** A Noetherian commutative ring $R$, a finitely generated left $R$-module $M$, and the Axiom of Choice ([[def-axiom-of-choice]]), hence dependent choice ([[def-dependent-choice]]).
 
 [L1] A finitely generated module over a Noetherian ring is Noetherian ([[thm-finitely-generated-modules-over-noetherian-rings-are-noetherian]]).
 
-[L2] In a Noetherian module, every nonempty family of submodules has a maximal member ([[thm-equivalent-characterizations-of-noetherian-modules]]).
+[L2] Under dependent choice, in a Noetherian module every nonempty family of submodules has a maximal member ([[thm-equivalent-characterizations-of-noetherian-modules]]).
 
 [L3] Every nonzero module over a Noetherian ring has an associated prime ([[thm-existence-of-associated-primes]]).
 
@@ -54,7 +50,7 @@ filtration with $n=0$.
 
 1.1 If $M=0$, then the empty chain $0=M$ is already a prime filtration. [given]
 
-2.1 Assume $M \neq 0$. Let $$ \Sigma=\{N \le M : N\text{ admits a prime filtration}\}. $$ By step 1.1, the zero submodule belongs to $\Sigma$. Since $M$ is Noetherian by [L1], fact [L2] gives a maximal member $N$ of $\Sigma$. [L1, L2, step 1.1, construct]
+2.1 Assume $M \neq 0$. Let $$ \Sigma=\{N \le M : N\text{ admits a prime filtration}\}. $$ By step 1.1, the zero submodule belongs to $\Sigma$. Since $M$ is Noetherian by [L1], [L2] gives a maximal member $N$ of $\Sigma$. This use of the maximal condition spends DC, supplied by the assumed AC; AC also supplies the choice assumptions of the associated-prime input in the next step. [L1, L2, step 1.1, given, construct]
 
 3.1 If $N \neq M$, then $M/N$ is a nonzero quotient module by [L5]. Fact [L3] gives an associated prime $\mathfrak p$ of $M/N$, and [L4] yields an embedded copy of $R/\mathfrak p$ in $M/N$. Let $N'$ be its preimage in $M$. Then $N \subsetneq N' \le M$ and $N'/N \cong R/\mathfrak p$. Appending $N'$ to a prime filtration of $N$ gives a prime filtration of $N'$, contradicting the maximality of $N$ in step 2.1. Therefore $N=M$. [L3, L4, L5, step 2.1, choose, algebra]
 

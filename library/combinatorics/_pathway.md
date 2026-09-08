@@ -60,6 +60,7 @@ parts:
       - quotient-blockades-and-mixing-relations
       - pure-pairs-forests-and-path-antipath-classes
       - cographs-perfect-patterns-and-pure-pairs
+      - quantitative-induced-density-and-the-loglog-step
       - the-five-cycle-and-erdos-hajnal
       - star-expansions-and-erdos-hajnal
       - iterative-sparsification-and-the-five-vertex-path
@@ -133,12 +134,12 @@ degree and gives the five colour theorem.
 ## probability
 
 Finite probability and expectation turn density into witnesses for homogeneous sets,
-induced-copy estimates, sparse pairs, and Erdős--Hajnal alternatives. Modules,
-substitutions, blockades, pure pairs, stars, combs, restriction, and sparsification develop
-clique-or-stable-set structure for the bull and $C_5$, while generalized niceness, thinning,
-leaf reducibility, Rödl initialization, and complement invariance return to the forbidden
-family. In the co-bird-free comb setting, the added structural page turns local obstruction
-lemmas into an endpoint: overlapping induced $E$ copies yield anticonnected classes, and
-iterated mixed quotients end in a pure blockade with an $E$-free pattern. This supplies the
-local decomposition used with the relevant Erdős--Hajnal input and the special-vertex
-criterion to obtain property $(*)$ for $\{E\}$.
+induced-copy estimates, sparse pairs, and Erdős--Hajnal alternatives. Modules, blockades,
+pure pairs, combs, restriction, and sparsification develop clique-or-stable-set structure
+for the bull and $C_5$. The quantitative induced-density page starts from few labelled
+induced copies, uses good-copy extension and restricted blockades, and turns finite density
+recursion into logarithmic and log-log homogeneous-set bounds, with explicit empty-block and
+singleton conventions. In the co-bird-free comb setting, overlapping induced $E$ copies yield
+anticonnected classes, and iterated mixed quotients end in a pure blockade with an $E$-free
+pattern. This supports the relevant Erdős--Hajnal input and the special-vertex criterion for
+property $(*)$ for $\{E\}$.

@@ -1,5 +1,15 @@
 # Library-wide dependency audit — 2026-09-08
 
+## Supplement: formerly excluded four-track interfaces
+
+The owner now includes quantum groups, braid groups, homological algebra and
+Kazhdan–Lusztig theory in a cross-library reconciliation, while retaining the
+recorded-catalogue supplier prohibition and published-file read-only rule.
+The dated receipt is `research/four-track-cross-library-reconciliation-2026-09-08.md`;
+the live consumer inventory is `research/four-track-dependency-reconciliation.json`.
+Earlier exclusions in this historical audit do not exempt these interfaces
+from the supplement. Existing whole-library retirement blockers remain open.
+
 ## Objective
 
 Audit every included category's published A/B pairs and repair its prose
@@ -15,8 +25,8 @@ plan, and leave the active workflow paused.
 Owner phases:
 
 1. repair all prose scaffolds;
-2. build all and only unpublished A/B pairs in the prerequisite closure of
-   published consumer repairs;
+2. build the unpublished suppliers and their prerequisite closure for published
+   consumer repairs and complete retirement of recorded mathematical results;
 3. repair the published consumers after that closure is published.
 
 The supplier-to-consumer record is maintained in
@@ -28,6 +38,10 @@ dependency, well-definedness justification, or load-bearing forward reference
 may reach `deferred-set-theory-beyond-choice` directly or transitively.
 
 ## Excluded categories
+
+Additional owner exception for retirement: the CFSG landscape stub A/B pair
+will be deleted by the owner. It is not a proof-supplier obligation. Audit
+external inbound references; do not delete or alter the published pair here.
 
 - `braid-groups`
 - `homological-algebra`
@@ -97,6 +111,41 @@ plan order moved, with their requirements and items unchanged. No file under
 `items/`, `library/`, or `generated/` changed. `validate-plan`, `depcheck`,
 `prosecheck`, and `git diff --check` pass. The workflow is paused with nothing
 in flight.
+
+Phase-2 execution supersedes that paused-run checkpoint: the obsolete
+`frontier-34-fa-prereqs` controller is stopped. Run `phase-2-wave-1` is running
+for the exact twenty-pair first wave recorded in
+`research/phase-2-build-manifest.md`, comprising forty pages in fifteen
+batches. Doctor passed and the detached controller is running. At the last
+check (03:30 UTC), Step 1 scaffold had 15/15 dispatches covered and the
+controller log reported its 24 stage gates running.
+
+Phase-2 closure was expanded after a ground-truth traversal from all published
+pages exposed 62 unpublished prerequisite pages, normalized to 52 A/B pairs,
+outside the former manifest. All 52 already existed in `plan-spec.json`. Phase
+2 now contains 122 pairs: 41 direct roots and 81 prerequisite pairs. The active
+run remains frozen at its original twenty pairs; 102 pairs are queued after it.
+Publishing the full closure supplies every declared prerequisite needed before
+Phase 3 repairs the published proofs. It does not itself perform those repairs.
+The owner's subsequent retirement requirement is stronger: all recorded
+mathematical clauses need local proof destinations, even without a published
+consumer. An expansion audit is checking that coverage; the 122-pair census is
+not yet a certificate of complete retirement or mathematical self-containment.
+The retirement audit has integrated twenty existing planned pairs: twelve
+Foundations destinations, de Rham and its smooth-singular comparison supplier,
+four Brauer-theory pairs, and two Algebraic Topology prerequisites. Current
+total: 142 pair obligations (41 direct roots, 17 retirement roots, 84
+prerequisites), of which 20 are in the frozen active run. Tor is a
+page-release-only obligation: its 49 items and B page are already published
+and must remain read-only. Further retirement gaps remain explicit blockers.
+The new audit applied four HA prerequisite contracts, fifteen unpublished AT
+contracts, the two HA-11a theorem-ID corrections, and the plan-only exactness
+direction correction. It also registered two true published Combinatorics
+orphans: the forest theorem has no local proof; the symmetric leaf-deletion
+claim does not match its cited leaf/co-leaf theorem. Their published impacts
+are two and 23 items respectively, now ledgered and blocked in future prose.
+No published content was changed. The complete audit and remaining source/
+proof gates are in `research/phase-2-expansion-audit.md`.
 
 The Group Theory SC source gate is closed: the complete proof of the classical
 small-cancellation torsion theorem and its relator-power lemma was retrieved and

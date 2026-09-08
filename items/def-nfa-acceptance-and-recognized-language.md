@@ -5,16 +5,17 @@ title: "Acceptance of a word by an NFA and the recognized language"
 status: published
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
-deps: [def-extended-nfa-transition, def-language-over-an-alphabet]
+deps: [def-nfa-with-epsilon-moves, def-language-over-an-alphabet]
 verification:
   precheck: n/a
-  audited: 2026-08-31
-  judge:
-    model: "gpt-5.6-terra"
+  verified:
+    model: "gpt-6-astra"
     verdict: pass
-    date: 2026-08-30
+    date: 2026-09-08
+    scope: "Local finite-run acceptance definition and prerequisite repair; not independent review"
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -26,7 +27,11 @@ sources:
 
 ## Definition
 
-Let $N=(Q,\Sigma,\delta,q_0,F)$ be an NFA with epsilon-moves.
+Let $N=(Q,\Sigma,\delta,q_0,F)$ be an NFA with epsilon-moves as in [[def-nfa-with-epsilon-moves]]. For $S\subseteq Q$ and $w\in\Sigma^*$, define $\widehat\delta(S,w)$ to be the set of states $r_m$ for which there are a finite state list $r_0,\ldots,r_m$ and labels $a_1,\ldots,a_m\in\Sigma\cup\{\varepsilon\}$ such that $r_0\in S$, $r_i\in\delta(r_{i-1},a_i)$ for $1\leq i\leq m$, and deleting every $\varepsilon$ label from the label list gives exactly $w$. The case $m=0$ is allowed and reads the empty word. Put $\widehat\delta(q,w)=\widehat\delta(\{q\},w)$ for a state $q$.
+
+This is a well-defined subset of the finite state set $Q$. Writing $E(S)=\widehat\delta(S,\varepsilon)$, it satisfies
+$$\widehat\delta(S,wa)=E\!\left(\bigcup_{q\in\widehat\delta(S,w)}\delta(q,a)\right)\qquad(a\in\Sigma).$$
+Indeed, split a run immediately before and after its last non-epsilon move: its prefix reads $w$, that move reads $a$, and its suffix uses only epsilon moves. Conversely concatenating these three finite pieces constructs a run reading $wa$. Thus the finite-run definition also supplies the usual recursively extended transition, including epsilon moves before and after the input.
 
 A word $w\in\Sigma^*$ is **accepted by $N$** when
 $$ \widehat\delta(q_0,w)\cap F\neq\varnothing. $$

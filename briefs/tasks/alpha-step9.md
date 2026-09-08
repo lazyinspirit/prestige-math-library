@@ -1,5 +1,8 @@
 # Step 9 — scope-denial delta review, `{{run}}`
 
+First follow `briefs/tasks/frontier-dependency-ledger.md`. Refresh and read
+`research/{{run}}-cross-batch-dependencies.json` for cross-batch scope and impact.
+
 Read only pending rows in `research/{{run}}-step9-scope-delta.json`. Verify each
 reason and destination against the current closure, plan, published files, and
 cited source, then update its owning group scope-decision row to `stands` or

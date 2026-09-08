@@ -371,6 +371,28 @@ test('a non-pipelined stage waits for every dispatch in the group ahead of it', 
   assert.deepEqual(gateRuns(fx), ['g1', 'g2'], 'and it runs the moment the group drains');
 });
 
+test('restart adopts repair-hook work outside the primary pattern and holds the join', async () => {
+  const fx = fixture();
+  const ex = makeExecutor(fx, pipelinedStages(fx), {
+    adoptCommand: "printf '%s\\n' '123 node dispatch --run testrun --role repairer --label repair-1 --covers 1'",
+  });
+  for (const u of ['1', '2']) {
+    cover(fx, 'worker', `a${u}`, [u]);
+    cover(fx, 'checker', `b${u}`, [u]);
+  }
+  ex.state.recordDispatchStart('s2:repair-1', {
+    stage: 's2', role: 'repairer', label: 'repair-1', covers: ['1'],
+  });
+  assert.deepEqual([...ex.adoptedUnits(ex.stages[1])], ['1']);
+  assert.deepEqual([...ex.adoptedUnits(ex.stages[0])], []);
+  assert.equal(await ex.tick(), 'working');
+  assert.deepEqual(gateRuns(fx), [], 'a live adopted repair must prevent gates and duplicate repair rounds');
+  assert.equal(ex.inflight.size, 0);
+  ex.config.adoptCommand = false;
+  await ex.tick();
+  assert.deepEqual(gateRuns(fx), ['g1', 'g2'], 'the join runs after the adopted repair exits');
+});
+
 test('a skipped member does not hold the group and does not have its gates run', async () => {
   const fx = fixture();
   const ex = makeExecutor(fx, pipelinedStages(fx));

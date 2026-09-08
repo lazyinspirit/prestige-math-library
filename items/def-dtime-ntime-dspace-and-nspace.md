@@ -5,17 +5,18 @@ title: "The classes DTIME, NTIME, DSPACE, and NSPACE"
 status: published
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
-deps: [def-asymptotic-resource-comparison, def-time-and-space-constructible-function, def-multitape-and-nondeterministic-machines, def-nondeterministic-accepting-computation]
+deps: [def-multitape-and-nondeterministic-machines, def-nondeterministic-accepting-computation]
 justified_by: []
 verification:
-  audited: 2026-09-01
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
+  verified:
+    model: "gpt-6-astra"
     verdict: pass
-    date: 2026-08-31
+    date: 2026-09-08
+    scope: "Local resource-class definition and prerequisite repair; not independent review"
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -30,6 +31,8 @@ sources:
 ## Definition
 
 Let $t,s:\mathbb N\to\mathbb N$.
+
+For nonnegative resource functions $a,b$, the notation $a(n)=O(b(n))$ means that some constants $c>0$ and $n_0$ satisfy $a(n)\leq c b(n)$ for every $n\geq n_0$. Every resource bound below uses constants fixed for the machine, uniformly over all its inputs and branches. Time counts transitions; space counts all cells visited on all tapes, including the input tape, with each distinct tape/cell pair counted once. No constructibility assumption on $t$ or $s$ is needed to define these classes.
 
 A language $L\subseteq\Sigma^*$ belongs to **DTIME$(t(n))$** when there exists
 a deterministic multitape Turing machine deciding $L$ in time $O(t(n))$.

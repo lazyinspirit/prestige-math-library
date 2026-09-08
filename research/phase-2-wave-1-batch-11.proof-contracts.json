@@ -1,0 +1,2279 @@
+{
+  "version": 1,
+  "scope": [
+    "def-borel-measurable-nonnegative-density-on-a-manifold",
+    "lem-measurable-density-chart-integrals-agree-on-overlaps",
+    "def-countable-chart-gluing-of-a-nonnegative-density-measure",
+    "thm-chart-gluing-defines-a-countably-additive-borel-density-measure",
+    "thm-density-measure-is-independent-of-the-chart-gluing",
+    "thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure",
+    "lem-bounded-borel-riemann-integrands-on-boxes-have-equal-lebesgue-integrals",
+    "thm-density-measure-integration-agrees-with-smooth-density-integration",
+    "cor-positive-density-measures-assign-positive-volume-to-nonempty-open-sets-and-metric-balls",
+    "fs-local-finiteness-means-finite-total-density-measure",
+    "fs-orientation-is-required-for-a-density-measure",
+    "ex-chart-gluing-recovers-euclidean-lebesgue-measure",
+    "ex-positive-weighted-volume-on-an-open-interval",
+    "ex-density-measure-in-two-overlapping-circle-charts",
+    "ex-density-measure-on-a-nonorientable-manifold",
+    "ex-zero-dimensional-density-measure-is-weighted-counting",
+    "cex-a-smooth-density-can-have-infinite-total-mass",
+    "ex-borel-ball-volume-before-any-comparison-theorem"
+  ],
+  "contracts": {
+    "def-borel-measurable-nonnegative-density-on-a-manifold": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: empty coefficient family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero density and dimension-zero convention."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: singleton coordinate mass one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: dimension zero uses the empty determinant."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: boundary coefficients are pointwise, including the face."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: AC_omega; only a countable atlas is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition: restriction from every chart to an atlas is immediate."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition: countable Borel gluing transports atlas coefficients to all charts."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b",
+        "notes": "The transition law uses absolute determinant and the cone [0,infinity], not vector-bundle addition involving signed infinities. Products are Borel, including 0 times infinity=0, by the rational-superlevel description. Countably many chart interiors and null boundary faces support the stated Borel convention. In dimension zero the empty determinant and each singleton reference mass are one. No orientation is needed; Lee Proposition 16.45 was checked for the smooth special case."
+      }
+    },
+    "lem-measurable-density-chart-integrals-agree-on-overlaps": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-borel-measurable-nonnegative-density-on-a-manifold",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $M$ be a Hausdorff second-countable smooth $n$-manifold, with boundary allowed. A **nonnegative Borel density** $r$ specifies, in every chart $x:U\\to x(U)$, a Borel function $r_x:x(U)\\to[0,\\infty]$ such that, on every overlap with $y:V\\to y(V)$,\n$$r_x(u)=r_y(y(x^{-1}(u)))\\left|\\det D(y\\circ x^{-1})(u)\\right|.$$\nBorel means measurability for the Borel sigma-algebras, as in [[def-borel-sigma-algebra]] and [[def-extended-real-valued-measurable-function]]; no measure on $M$ is needed to impose this condition. Smooth boundary charts use the structure of [[def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary]].\n\nThis extends the positive cone convention of [[def-density-bundle-and-smooth-density]]. It is an extended positive density cone, not an extended-valued section of the real line bundle. Transition factors are finite, strictly positive and smooth. For three charts $x,y,z$, the chain rule gives $J_{zx}=(J_{zy}\\circ y\\circ x^{-1})J_{yx}$, so repeated transitions give the same coefficient, including when it is infinite. On a countable atlas Borel coefficients satisfying the overlap law determine Borel coefficients in every chart: each transported coefficient is Borel, they agree on overlaps, and preimages are countable unions of Borel pieces. Conversely, Borel coefficients in every chart are Borel on that atlas. Nonnegative Borel products use the same convention: for $a,b\\ge0$ and $t\\ge0$, $\\{ab>t\\}=\\bigcup_{q\\in\\mathbb Q,\\ q>0}(\\{a>q\\}\\cap\\{b>t/q\\})$, also for infinite values; for $t<0$ the superlevel is the whole domain. This proves product measurability by countable unions.\n\nSet $0\\cdot\\infty=0$. A nonnegative finite Borel scalar $a$ multiplies coefficients by $a\\circ x^{-1}$; its transition law follows by multiplying the displayed identity. In dimension zero the empty determinant is one, charts are singletons, and $\\lambda_0$ gives the singleton mass one. The empty manifold has the unique empty coefficient family; the zero density has all coefficients zero. Coefficients are not identified almost everywhere.",
+          "uses": [
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $m\\ge1$, let U,V be open subsets of $\\mathbb R^m$, and let $T:U\\to V$ be a $C^1$ diffeomorphism. For every nonnegative Borel $h:V\\to[0,\\infty]$, $\\int_V h(y)\\,dy=\\int_U h(T(x))|\\det DT(x)|\\,dx$, with equality in $[0,\\infty]$ and $0\\cdot\\infty=0$. This statement concerns Borel h; no completed-measurable substitution is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-smooth-invariance-of-manifold-boundary",
+          "source_section": "Statement",
+          "quote": "A smooth diffeomorphism between relatively open half-space sets carries face points to face points and relative-interior points to relative-interior points; consequently $\\partial M$ and $\\operatorname{Int}M$ are intrinsic.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-borel-sigma-algebra-of-a-subspace-is-the-trace",
+          "source_section": "Statement",
+          "quote": "Let $Y$ be a subspace of a topological space $X$. Then\n\n$$\\mathcal B(Y)=\\mathcal B(X)|_Y.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-borel-sets-are-lebesgue-measurable",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then\n\n$$\\mathcal{B}(\\mathbb{R}^n) \\;\\subseteq\\; \\mathcal{L}(\\mathbb{R}^n) :$$\n\nevery Borel subset of $\\mathbb{R}^n$ ([[def-borel-sigma-algebra]]) is Lebesgue\nmeasurable ([[def-lebesgue-measure-and-the-lebesgue-sigma-algebra]]). In\nparticular every open set, every closed set and every countable intersection of\nopen sets is Lebesgue measurable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. **Degenerate boxes.** If $a_i \\le b_i$ are reals with $a_{i_0} = b_{i_0}$ for\n   some $i_0 < n$, then every set $R$ between the open box\n   $\\{x : a_i < x_i < b_i\\ (i<n)\\}$ and the closed rectangle $[a,b]$ is Lebesgue\n   measurable with $\\lambda_n(R) = 0$.\n2. **Coordinate hyperplanes.** For $i_0 < n$ and a real $c$, the set\n   $$H_{i_0,c} \\;:=\\; \\{\\, x \\in \\mathbb{R}^n : x_{i_0} = c \\,\\}$$\n   is Lebesgue measurable with $\\lambda_n(H_{i_0,c}) = 0$.\n\nAt $n = 1$ the hyperplane $H_{0,c}$ is the singleton $\\{c\\}$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "cor-integral-over-a-null-set-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $E$ be measurable with $\\mu(E)=0$.\nThen\n$$\\int_E f\\,d\\mu=0.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "For $n\\ge1$ put $W=x(U\\cap V\\cap\\operatorname{Int}M)$ and $Z=y(U\\cap V\\cap\\operatorname{Int}M)$. These are open in $\\mathbb R^n$. Boundary invariance makes $T=y\\circ x^{-1}:W\\to Z$ a smooth diffeomorphism. The images of $E\\cap\\operatorname{Int}M$ are Borel: charts are homeomorphisms and the trace sigma-algebra agrees with relative Borel sets.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "On $Z$ take $h=\\mathbf1_{y(E\\cap\\operatorname{Int}M)}r_y$, with the zero-times-infinity convention. It is nonnegative Borel. For $u\\in W$, $h(Tu)|\\det DT(u)|=\\mathbf1_{x(E\\cap\\operatorname{Int}M)}(u)r_x(u)$. Applying the Borel substitution formula to these exact domains and this integrand equates the two interior integrals.",
+          "inputs": [
+            "F1",
+            "F2",
+            "1.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "The remaining coordinate pieces of $E$ lie in the face $u_n=0$, or are empty for an interior chart. Their integrals vanish by nullity, without boundedness of $r_x$ or $r_y$. Adding them back proves the formula for $n\\ge1$.",
+          "inputs": [
+            "F6",
+            "F7",
+            "2.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "4.1",
+          "claim": "For $n=0$ each nonempty chart has one point. Thus $E$ is empty or the common singleton. Both integrals are respectively zero or the same weight, because the transition determinant is one. This proves the formula in every dimension, including zero or infinite weight.",
+          "inputs": [
+            "F1",
+            "3.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 4.1: empty E has zero integral."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 4.1: dimension zero and zero weight."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 4.1: singleton weight is the same."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1: the zero-dimensional chart case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1: coordinate faces have zero integral."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The two charts and E are given; no family of choices is made."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is an equality of integrals, not an iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is an equality of integrals, not an iff assertion."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b",
+        "notes": "Boundary invariance makes the coordinate interiors open, so lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness applies with m=n>=1 and smooth transition T. The function indicator of y(E intersect Int M) times r_y is nonnegative Borel and transforms by the stated density law. Boundary coordinate faces have measure zero even for infinite coefficient values. Empty sets and n=0 singletons are separate. AC_omega is explicit; completed-measurable substitution is not claimed."
+      }
+    },
+    "def-countable-chart-gluing-of-a-nonnegative-density-measure": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition: empty sums and empty-set value are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition: zero coefficients contribute zero; singleton charts treat n=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition: the partition sums to one pointwise."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition: singleton charts when n=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition: compact half-balls cover boundary points."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition: AC_omega selects countably many charts and finite annular covers; no arbitrary point-indexed choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This defines a set function; no iff is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This defines a set function; no iff is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b",
+        "notes": "Under AC_omega and second countability, a compact exhaustion and finite covers of its successive compact annuli give countably many precompact charts with locally finite supports. The smooth partition supplier applies also with boundary; aggregating labels stays smooth by local finiteness. Nonnegative chart sums permit infinite mass and vanish on empty charts. The proposed measure is subsequently justified by countable additivity and overlap independence, rather than presupposing them."
+      }
+    },
+    "thm-chart-gluing-defines-a-countably-additive-borel-density-measure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-countable-chart-gluing-of-a-nonnegative-density-measure",
+          "source_section": "Definition",
+          "quote": "For a density $r$ as in [[def-borel-measurable-nonnegative-density-on-a-manifold]], choose a countable locally finite chart cover $(U_i,x_i)$ and a subordinate smooth partition of unity $(\\varphi_i)$ with $\\varphi_i\\ge0$, $\\operatorname{supp}\\varphi_i\\subset U_i$ and $\\sum_i\\varphi_i=1$. Define the proposed set function on $\\mathcal B(M)$ by\n$$\\mu_{r,(x_i,\\varphi_i)}(E)=\\sum_i\\int_{x_i(E\\cap U_i)}(\\varphi_i\\circ x_i^{-1})r_{x_i}\\,d\\lambda_n.$$\nEach term is the nonnegative integral of [[def-nonnegative-lebesgue-integral]], with $0\\cdot\\infty=0$. Its coefficient, extended by zero outside the chart image, is Borel; smoothness of that zero extension is not required. Empty sums and the empty-set value are zero. For $n=0$ use singleton charts and the mass-one coordinate convention.\n\nHere is why the choices exist under countable choice, including at a boundary. From a countable base select a chart and a relatively compact ball or half-ball for each basis member whose closure fits inside such a chart; these members cover $M$. Their finite unions of compact closures give compact sets whose interiors cover $M$. Passing recursively to the least sufficiently large index gives an exhaustion $K_m\\subset\\operatorname{Int}K_{m+1}$. Cover each compact annulus $K_m\\setminus\\operatorname{Int}K_{m-1}$ by finitely many chart balls or half-balls whose closures lie in $\\operatorname{Int}K_{m+1}\\setminus K_{m-2}$ (take $K_0=K_{-1}=\\varnothing$). Such small coordinate neighborhoods exist at every point of the annulus. Countable choice selects one finite cover per annulus. The resulting countable chart cover is locally finite: $\\operatorname{Int}K_j$ misses all families indexed $m\\ge j+2$, and only finitely many sets come from each remaining annulus. Apply [[thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary]] to this cover; the boundaryless specialization is also [[cor-smooth-partitions-subordinate-to-a-countable-coordinate-cover]]. If the subordinate partition has several terms per chart, aggregate those terms; local finiteness makes each sum smooth, and its support remains in the assigned chart.\n\nCountable additivity is discharged by [[thm-chart-gluing-defines-a-countably-additive-borel-density-measure]]. Independence of both choices and the intrinsic notation $\\mu_r$ are discharged by [[thm-density-measure-is-independent-of-the-chart-gluing]].",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and define\n$$\\nu_f(A):=\\int_A f\\,d\\mu \\qquad (A\\in\\mathcal A).$$\nThen $\\nu_f$ is a measure on $(X,\\mathcal A)$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-beppo-levi-theorem",
+          "source_section": "Statement",
+          "quote": "Let $(f_k)$ be nonnegative measurable functions and let\n$$S_n:=\\sum_{k<n}f_k,\\qquad S:=\\sum_{k=0}^\\infty f_k.$$\nThen\n$$\\int S\\,d\\mu=\\sum_{k=0}^\\infty \\int f_k\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "For each chart set $q_i=(\\varphi_i\\circ x_i^{-1})r_{x_i}$. This is nonnegative Borel. The set function $\\nu_i(E)=\\int_{x_i(E\\cap U_i)}q_i\\,d\\lambda_n$ is a measure: disjoint Borel sets have disjoint Borel chart images, and the indefinite-integral theorem supplies countable additivity there. In dimension zero it is a singleton weight times its indicator, hence also a measure, even for infinite weight.",
+          "inputs": [
+            "F1",
+            "F2",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "For disjoint Borel $E_k$, $\\nu_i(\\bigcup_kE_k)=\\sum_k\\nu_i(E_k)$; equivalently apply the nonnegative summation theorem to $q_i\\mathbf1_{x_i(E_k\\cap U_i)}$. For $a_{ik}=\\nu_i(E_k)\\ge0$, both iterated sums equal $\\sup_{m,l}\\sum_{i\\le m,k\\le l}a_{ik}$: a finite selection in any row fits in some finite rectangle, and conversely every rectangle is bounded by either iterated sum. Consequently $\\mu(\\bigcup_kE_k)=\\sum_k\\mu(E_k)$.",
+          "inputs": [
+            "F3",
+            "1.1",
+            "F1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "Every $\\nu_i(\\varnothing)=0$, so $\\mu(\\varnothing)=0$; all values are nonnegative extended reals. Zero coefficients contribute zero, and a one-term family gives its chart measure. Thus the claimed Borel measure exists with no finiteness assumption.",
+          "inputs": [
+            "1.1",
+            "2.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1: empty-set axiom."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "steps 1.1 and 3.1: zero dimension and coefficient."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1: a one-term sum is its measure."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1: singleton measure including infinite weight."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval endpoint limit occurs; chart faces are already in the Borel domain."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The chart partition is given in the definition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Countable additivity is a direct assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Countable additivity is a direct assertion."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b",
+        "notes": "For a disjoint sequence of Borel sets, each chart integral is countably additive by MCT applied to increasing finite unions. Interchanging the two nonnegative countable sums means taking suprema over finite rectangles; no subtraction, finite total mass or sigma-finiteness is required. Empty M and n=0 weighted singletons follow directly. The pointwise Borel transition convention and AC_omega are the same as the definition."
+      }
+    },
+    "thm-density-measure-is-independent-of-the-chart-gluing": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-chart-gluing-defines-a-countably-additive-borel-density-measure",
+          "source_section": "Statement",
+          "quote": "The set function of [[def-countable-chart-gluing-of-a-nonnegative-density-measure]] is a countably additive nonnegative Borel measure. No local integrability or sigma-finiteness of $r$ is required.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-measurable-density-chart-integrals-agree-on-overlaps",
+          "source_section": "Statement",
+          "quote": "For a density $r$ as in [[def-borel-measurable-nonnegative-density-on-a-manifold]], charts $x:U\\to x(U)$ and $y:V\\to y(V)$, and every Borel $E\\subseteq U\\cap V$,\n$$\\int_{x(E)}r_x\\,d\\lambda_n=\\int_{y(E)}r_y\\,d\\lambda_n\\quad\\text{in }[0,\\infty].$$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-beppo-levi-theorem",
+          "source_section": "Statement",
+          "quote": "Let $(f_k)$ be nonnegative measurable functions and let\n$$S_n:=\\sum_{k<n}f_k,\\qquad S:=\\sum_{k=0}^\\infty f_k.$$\nThen\n$$\\int S\\,d\\mu=\\sum_{k=0}^\\infty \\int f_k\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "For a finite nonnegative Borel scalar $a$ on $M$, $ar$ is again a density: in coordinates its coefficient is $(a\\circ x^{-1})r_x$, and multiplying the transition law by $a\\circ x^{-1}$ proves its law, also at $r_x=\\infty$ when $a=0$. Thus the overlap lemma applies to $\\varphi_i r$ and $\\varphi_i\\psi_jr$.",
+          "inputs": [
+            "F2",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Fix a Borel $E\\subset U$. Transfer the $i$th gluing term, for the density $\\varphi_i r$, from $x_i$ to $x$ on $E\\cap U_i$. In the $x$ chart the transferred integrands sum to $r_x\\mathbf1_{x(E)}$: if $r_x$ is finite this is distributivity and $\\sum_i\\varphi_i=1$; if $r_x=\\infty$, at least one of the finitely many nonzero weights is positive, so the sum is infinite. The nonnegative summation theorem therefore gives the chart-restriction identity.",
+          "inputs": [
+            "F2",
+            "F3",
+            "1.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "2.2",
+          "claim": "For two partitions $(\\varphi_i)$ and $(\\psi_j)$, expand the first construction on a Borel $E$ as $\\sum_i\\sum_j\\int_{x_i(E\\cap U_i\\cap V_j)}(\\varphi_i\\psi_jr)_{x_i}$. This expansion follows from the same pointwise argument, now summing $\\psi_j$, and the nonnegative summation theorem. The overlap lemma transfers each summand to $y_j$. Both iterated sums are the supremum of the finite rectangular subsums, so reordering and summing $\\varphi_i$ gives the second construction.",
+          "inputs": [
+            "F2",
+            "F3",
+            "1.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "3.1",
+          "claim": "Thus the two Borel measures are identical on every Borel set. All formulas remain true for the empty set and zero density, giving zero; in dimension zero the chart formula is the singleton weight. Neither infinity nor boundary points require cancellation: the overlap lemma already treats both.",
+          "inputs": [
+            "F1",
+            "2.1",
+            "2.2",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1: empty E."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: zero density and n=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1: sum of partition weights is one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1: singleton chart."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1: boundary handled by the overlap lemma."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1: positive weight exists because a finite sum equals one, requiring no choice axiom beyond the given data."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Independence and the restriction equality are direct assertions."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Independence and the restriction equality are direct assertions."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b",
+        "notes": "For two locally finite partitions, insert the other partition sum, transfer each nonnegative product through the proved chart-overlap identity, and interchange nonnegative sums by finite-rectangle suprema. The weights are finite, with 0 times infinity=0; no infinity cancellation occurs. Chart restriction is the same argument with an indicator. The proof therefore covers infinite density coefficients, noncompact manifolds, boundary charts and n=0."
+      }
+    },
+    "thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-density-measure-is-independent-of-the-chart-gluing",
+          "source_section": "Statement",
+          "quote": "All chart-partition constructions give the same measure $\\mu_r$. Moreover, if $E$ is Borel and contained in any chart $x:U\\to x(U)$, then\n$$\\mu_r(E)=\\int_{x(E)}r_x\\,d\\lambda_n.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. $\\lambda_n$ is sigma-finite ([[def-finite-sigma-finite-and-semifinite-measures]]):\n   the cubes $(-k,k]^n$ are Lebesgue measurable with\n   $\\lambda_n\\big((-k,k]^n\\big) = (2k)^n < +\\infty$, they increase with $k$, and\n   their union over $k \\in \\mathbb{N}$ is $\\mathbb{R}^n$.\n2. Every bounded subset $E \\subseteq \\mathbb{R}^n$\n   ([[def-metric-bounded-diameter]]) has $\\lambda_n^*(E) < +\\infty$; a bounded\n   Lebesgue measurable set therefore has finite measure, and every compact\n   subset of $\\mathbb{R}^n$ is Lebesgue measurable of finite measure.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "cor-second-countable-lch-locally-finite-borel-measures-are-regular",
+          "source_section": "Statement",
+          "quote": "Every Borel measure finite on compact sets on a second-countable LCH space is regular.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-radon-measure-on-an-lch-space",
+          "source_section": "Definition",
+          "quote": "For this page, a Borel measure $\\mu$ on a locally compact Hausdorff space is\n**Radon** when $\\mu(K)<\\infty$ for every compact $K$, and, for every Borel\n$E$ and every open $U$,\n$$\\mu(E)=\\inf_{E\\subseteq V\\text{ open}}\\mu(V),\\qquad \\mu(U)=\\sup_{K\\subseteq U\\text{ compact}}\\mu(K).$$\nCohn calls this convention regular. It does not assert compact inner\napproximation for arbitrary Borel $E$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-completion-of-a-measure-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $(X,\\mathcal A,\\mu)$ be a measure space, and let $(X,\\overline{\\mathcal A},\\overline\\mu)$ be its completion construction. Then $\\overline\\mu$ is a complete measure on $\\overline{\\mathcal A}$ extending $\\mu$. It is the unique complete measure on $\\overline{\\mathcal A}$ that extends $\\mu$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-completion-of-a-measure-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. Its **completion domain** is\n\n$$\\overline{\\mathcal A}:=\\{E\\subseteq X: E=A\\cup N\\text{ for some }A,Z\\in\\mathcal A\\text{ and }N\\subseteq Z\\text{ with }\\mu(Z)=0\\}.$$\n\nFor a displayed representation $E=A\\cup N$, define the proposed **completed set function** by\n\n$$\\overline\\mu(E):=\\mu(A).$$\n\nThe value must not depend on the representation. That obligation is discharged by [[lem-completed-measure-is-well-defined]], and [[lem-completion-domain-is-a-sigma-algebra]] proves, under the Axiom of Countable Choice ([[def-countable-choice]]), that $\\overline{\\mathcal A}$ is a sigma-algebra. Thus the definite phrases **completion sigma-algebra** and **completed measure** are used only with those two results in force. Under the same choice hypothesis, [[thm-completion-of-a-measure-space]] proves that $\\overline\\mu$ is the unique complete extension on this domain.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "For each point $p$ in positive dimension, a chart contains a relative closed ball or half-ball $H$ around its coordinate image. Choose it bounded with closure inside the chart image. Its inverse image $K$ is compact and contains a neighborhood $W$ of $p$. The continuous coefficient on $H$ is bounded by a finite $C$, so $\\mu_r(W)\\le\\mu_r(K)=\\int_Hr_x\\le C\\lambda_n(H)<\\infty$. For $n=0$ take $W=K=\\{p\\}$, whose measure is the finite coefficient $r(p)$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "The neighborhoods $W$ cover any compact $K_0$ finitely, giving $\\mu_r(K_0)\\le\\sum_{j=1}^m\\mu_r(W_j)<\\infty$. They also show local finiteness. To get a countable cover, take the members of a countable base that are contained in some such $W$; these cover $M$ and individually have finite measure. Enumerating these basis members proves sigma-finiteness without selecting neighborhoods at every point.",
+          "inputs": [
+            "1.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "The same compact chart neighborhoods show local compactness also at the boundary; Hausdorffness and second countability are standing assumptions. The compact-finite Borel measure therefore satisfies the regularity theorem. Its conclusion includes the outer and open-set inner regularity required by the stated Radon convention.",
+          "inputs": [
+            "F3",
+            "F4",
+            "1.1",
+            "2.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "4.1",
+          "claim": "Apply the completion theorem to $(M,\\mathcal B(M),\\mu_r)$ under the standing countable choice. Explicitly, $E=B\\cup N$ with $B,Z$ Borel, $N\\subset Z$ and $\\mu_r(Z)=0$ has $\\overline\\mu_r(E)=\\mu_r(B)$. Empty $M$ and empty compact sets have mass zero; a singleton in dimension zero has its finite positive weight. No total-mass bound is asserted.",
+          "inputs": [
+            "F5",
+            "F6",
+            "3.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 4.1: empty manifold and compact set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: dimension zero; zero density excluded by positivity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 4.1: singleton weight."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1: zero-dimensional neighborhood."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1: relative half-ball handles the boundary."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1: all eligible basis elements form a countable cover; step 4.1 inherits AC_omega for completion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a sufficiency theorem, not a characterization of all Radon densities."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No necessity of smoothness or positivity is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b",
+        "notes": "Compact sets admit finitely many relatively compact coordinate half-balls where smooth finite density coefficients are bounded, proving compact finiteness before regularity is invoked. The second-countable LCH Borel-regularity supplier then applies; its hypotheses are exactly those of Folland Theorem 7.8, whose proof was checked. A countable base of precompact chart sets gives sigma-finiteness. Completion is stated separately from the Borel Radon measure."
+      }
+    },
+    "lem-bounded-borel-riemann-integrands-on-boxes-have-equal-lebesgue-integrals": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-multidimensional-darboux-sums",
+          "source_section": "Definition",
+          "quote": "Let $f:Q\\to\\mathbb R$ be bounded on a nondegenerate rectangle and let $P$ be a grid. For each cell $Q_i$, put\n$$m_i:=\\inf f[Q_i],\\quad M_i:=\\sup f[Q_i],\\quad L(f,P):=\\sum_i m_i\\operatorname{vol}(Q_i),\\quad U(f,P):=\\sum_i M_i\\operatorname{vol}(Q_i).$$\nThe extrema exist as finite reals because each nonempty image is bounded ([[def-bounded-set]], [[def-complete-ordered-field]], [[thm-infimum-property]], [[def-infimum]], [[lem-sup-unique]]), and the sums use the iterated convention of [[def-multidimensional-grid-partition]].\n\nSince $m_i\\le M_i$ and cell volumes are nonnegative, $L(f,P)\\le U(f,P)$. Moreover\n$$U(f,P)-L(f,P)=\\sum_i(M_i-m_i)\\operatorname{vol}(Q_i),$$\nthe sum of cell oscillations weighted by volume ([[lem-finite-sum-laws]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-multidimensional-darboux-equals-riemann",
+          "source_section": "Statement",
+          "quote": "A bounded function on a nondegenerate rectangle is Darboux integrable with\nvalue $I$ if and only if all tagged grid sums converge with mesh to $I$.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1",
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. **Degenerate boxes.** If $a_i \\le b_i$ are reals with $a_{i_0} = b_{i_0}$ for\n   some $i_0 < n$, then every set $R$ between the open box\n   $\\{x : a_i < x_i < b_i\\ (i<n)\\}$ and the closed rectangle $[a,b]$ is Lebesgue\n   measurable with $\\lambda_n(R) = 0$.\n2. **Coordinate hyperplanes.** For $i_0 < n$ and a real $c$, the set\n   $$H_{i_0,c} \\;:=\\; \\{\\, x \\in \\mathbb{R}^n : x_{i_0} = c \\,\\}$$\n   is Lebesgue measurable with $\\lambda_n(H_{i_0,c}) = 0$.\n\nAt $n = 1$ the hyperplane $H_{0,c}$ is the singleton $\\{c\\}$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. $\\int cf\\,d\\mu=c\\int f\\,d\\mu$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-integral-of-a-nonnegative-simple-function",
+          "source_section": "Definition",
+          "quote": "Let $s=\\sum_{j=1}^m c_j\\chi_{E_j}$ be a simple representation of a\nnonnegative simple measurable function\n([[def-nonnegative-simple-measurable-function]]) on a measure space\n$(X,\\mathcal A,\\mu)$, so the $E_j\\in\\mathcal A$ are pairwise disjoint and\n$c_j\\ge0$. Its\n**simple integral** is\n$$\\int s\\,d\\mu:=\\sum_{j=1}^m c_j\\mu(E_j),$$\nwhere $\\mu$ is the given measure ([[def-measure]]) and the convention\n$0\\cdot(+\\infty)=0$ is fixed once and for all.\n\nThe next lemma proves that this value is independent of the chosen simple\nrepresentation.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "source_section": "Statement",
+          "quote": "If $s$ is a nonnegative simple measurable function, then its nonnegative\nLebesgue integral equals its simple integral:\n$$\\int s\\,d\\mu=\\int_{\\mathrm{simple}} s\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Choose a finite $C\\ge0$ with $|f|\\le C$, and put $g=f+C\\ge0$. Its Borel measurability and $g\\le2C\\mathbf1_Q$ imply $\\int_Qg\\le2C\\prod_j(b_j-a_j)<\\infty$. Likewise $\\int_Q|f|\\le C\\prod_j(b_j-a_j)$, so $f$ is integrable.",
+          "inputs": [
+            "F3",
+            "F5",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "For a finite grid $P$, list its closed cells $Q_1,\\ldots,Q_m$ and disjointify them as $D_i=Q_i\\setminus\\bigcup_{j<i}Q_j$. These are Borel and partition $Q$; each $D_i$ contains the interior of $Q_i$ and differs from it only by grid faces. Thus $\\lambda_n(D_i)=\\operatorname{vol}(Q_i)$. Let $m_i=\\inf_{Q_i}g$ and $M_i=\\sup_{Q_i}g$. Each cell is nonempty and $g$ bounded, so these are finite.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "1.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "The nonnegative simple functions $l_P=\\sum_i m_i\\mathbf1_{D_i}$ and $u_P=\\sum_i M_i\\mathbf1_{D_i}$ satisfy $l_P\\le g\\le u_P$ everywhere, including every assigned face. Their integrals are respectively $L(g,P)$ and $U(g,P)$. Hence $L(g,P)\\le\\int_Qg\\le U(g,P)$.",
+          "inputs": [
+            "F1",
+            "F5",
+            "2.1",
+            "F7",
+            "F8",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "4.1",
+          "claim": "Every Riemann sum of $g$ equals the corresponding sum of $f$ plus $C\\operatorname{vol}(Q)$, so $g$ is Riemann integrable with value $J=I_R(f)+C\\operatorname{vol}(Q)$. Darboux equivalence gives $\\sup_PL(g,P)=\\inf_PU(g,P)=J$. Taking supremum and infimum in the preceding bounds yields $\\int_Qg=J$.",
+          "inputs": [
+            "F2",
+            "3.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d5",
+          "step": "5.1",
+          "claim": "The constant $C$ is integrable on $Q$, so linearity gives $\\int_Qf=\\int_Qg-C\\lambda_n(Q)=I_R(f)$. If $C=0$, all these quantities are zero; the proof also applies to $n=1$ and constant-one integrands. Degenerate boxes and dimension zero are outside the stated domain.",
+          "inputs": [
+            "F3",
+            "F6",
+            "1.1",
+            "4.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The box Q has n at least one and every side length positive, hence its defining coordinate product and every grid partition are nonempty.",
+          "reviewed": {
+            "upheld": true,
+            "by": "alpha/gate-batch-2-all",
+            "reason": "The detector sees a coordinate product, but the theorem assumes n>=1 and a_i<b_i in every coordinate; consequently Q is provably nonempty."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 5.1: C=0 forces f=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 5.1: n=1 and constant one included."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The statement explicitly requires n>=1 and all side lengths positive."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1: disjoint cells assign every face and retain the pointwise inequalities."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1: infima and suprema of nonempty bounded cell images exist; no extrema are selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Only Riemann implies Lebesgue equality is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Lebesgue integrability implying Riemann integrability is not asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b",
+        "notes": "Bounded Borel f on a box with n>=1 and strict positive side lengths can be shifted by C to a nonnegative function. Disjoint grid cells assign every boundary face without changing cell volumes, and lower/upper step functions still bound f pointwise. The Darboux lower/upper sums squeeze its Lebesgue integral. Subtracting the finite C times box volume is legitimate. C=0, constants and n=1 are explicit; no Lebesgue-to-Riemann converse is claimed."
+      }
+    },
+    "thm-density-measure-integration-agrees-with-smooth-density-integration": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-density-measure-is-independent-of-the-chart-gluing",
+          "source_section": "Statement",
+          "quote": "All chart-partition constructions give the same measure $\\mu_r$. Moreover, if $E$ is Borel and contained in any chart $x:U\\to x(U)$, then\n$$\\mu_r(E)=\\int_{x(E)}r_x\\,d\\lambda_n.$$",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then there is an increasing sequence of\nnonnegative simple measurable functions $(s_n)$ such that $s_n(x)\\uparrow f(x)$\nfor every $x\\in X$.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-integral-of-a-compactly-supported-smooth-density",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $\\delta$ be a compactly supported smooth density on $M^n$, with boundary allowed. Choose a chart partition $(\\rho_i)$ and write $\\rho_i\\delta=f_i|dx_i|$. For $n\\geq1$ define\n$$\\int_M\\delta=\\sum_i\\int_{\\mathbb R^n}\\widetilde f_i(x_i)\\,dx_i.$$\nThe zero extensions are Riemann integrable, including at genuine faces, by [[lem-chart-supported-coefficients-have-well-defined-riemann-integrable-half-space-extensions]]. The compact-support/local-finiteness argument of [[lem-a-locally-finite-sum-is-finite-near-the-compact-support-of-a-form]] applies to density supports as closed sets, so the sum is finite. For $n=0$ sum the scalar density values over the finite support, without orientation signs. Empty support gives zero. Choice independence is discharged by [[thm-density-integration-is-defined-without-an-orientation]].",
+          "uses": [
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-chart-supported-coefficients-have-well-defined-riemann-integrable-half-space-extensions",
+          "source_section": "Statement",
+          "quote": "Let $n\\geq1$, $H^n=\\{x\\in\\mathbb R^n:x_n\\geq0\\}$, and let $U$ be relatively open in $H^n$. If $f$ is smooth on $U$ with compact support $K\\subset U$, set $\\widetilde f=f$ on $U$ and $\\widetilde f=0$ on $\\mathbb R^n\\setminus U$. Then $\\widetilde f$ is bounded, compactly supported, smooth away from $\\{x_n=0\\}$, and Riemann integrable. Its Euclidean integral is independent of the bounding rectangle and of any auxiliary smooth extension. For an interior chart $U\\subset\\mathbb R^n$, the zero extension is smooth everywhere.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-bounded-borel-riemann-integrands-on-boxes-have-equal-lebesgue-integrals",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $n\\ge1$, let $Q=\\prod_{j=1}^n[a_j,b_j]$ with $a_j<b_j$, and let $f:Q\\to\\mathbb R$ be bounded and Borel. If $f$ is Riemann integrable, then $f\\in L^1(\\lambda_n|_Q)$ and its Lebesgue and Riemann integrals agree.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-integrable-real-and-complex-functions-and-their-integrals",
+          "source_section": "Definition",
+          "quote": "Let $f:X\\to\\mathbb R$ be measurable. Its positive and negative parts are\n$$f^+:=\\max\\{f,0\\},\\qquad f^-:=\\max\\{-f,0\\};$$\nthey are measurable by\n[[prop-closure-properties-of-measurable-functions-used-by-the-integral]] and\nsatisfy $f=f^+-f^-$ and $|f|=f^++f^-$.\n\nThe **Lebesgue integral of a real measurable function** is defined whenever at\nmost one of $\\int f^+\\,d\\mu$ and $\\int f^-\\,d\\mu$ is $+\\infty$, in which case\n$$\\int f\\,d\\mu:=\\int f^+\\,d\\mu-\\int f^-\\,d\\mu.$$\nThe function is **integrable** when both integrals are finite, equivalently\nwhen $\\int|f|\\,d\\mu<+\\infty$.\n\nFor a complex measurable function $h=u+iv$ with\n$u=\\operatorname{Re}h,\\ v=\\operatorname{Im}h$\n([[def-complex-conjugate-real-imaginary-part-and-modulus]]), define $h$ to be\n**integrable** when $|h|$ is integrable, and then define\n$$\\int h\\,d\\mu:=\\int u\\,d\\mu+i\\int v\\,d\\mu.$$",
+          "uses": [
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-completion-of-a-measure-space",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space. Its **completion domain** is\n\n$$\\overline{\\mathcal A}:=\\{E\\subseteq X: E=A\\cup N\\text{ for some }A,Z\\in\\mathcal A\\text{ and }N\\subseteq Z\\text{ with }\\mu(Z)=0\\}.$$\n\nFor a displayed representation $E=A\\cup N$, define the proposed **completed set function** by\n\n$$\\overline\\mu(E):=\\mu(A).$$\n\nThe value must not depend on the representation. That obligation is discharged by [[lem-completed-measure-is-well-defined]], and [[lem-completion-domain-is-a-sigma-algebra]] proves, under the Axiom of Countable Choice ([[def-countable-choice]]), that $\\overline{\\mathcal A}$ is a sigma-algebra. Thus the definite phrases **completion sigma-algebra** and **completed measure** are used only with those two results in force. Under the same choice hypothesis, [[thm-completion-of-a-measure-space]] proves that $\\overline\\mu$ is the unique complete extension on this domain.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "thm-completion-of-a-measure-space",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice. Let $(X,\\mathcal A,\\mu)$ be a measure space, and let $(X,\\overline{\\mathcal A},\\overline\\mu)$ be its completion construction. Then $\\overline\\mu$ is a complete measure on $\\overline{\\mathcal A}$ extending $\\mu$. It is the unique complete measure on $\\overline{\\mathcal A}$ that extends $\\mu$.",
+          "uses": [
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F10",
+          "source": "cor-integral-over-a-null-set-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $E$ be measurable with $\\mu(E)=0$.\nThen\n$$\\int_E f\\,d\\mu=0.$$",
+          "uses": [
+            "3.1",
+            "3.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F11",
+          "source": "thm-the-lebesgue-integral-respects-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Let $f,g\\in L^1(\\mu)$. Then the following are equivalent:\n\n1. $f=g$ almost everywhere;\n2. for every measurable $A$,\n   $$\\int_A f\\,d\\mu=\\int_A g\\,d\\mu.$$\n\nFor integrable real or complex $h$, the notation in condition 2 means\n$\\int_A h\\,d\\mu:=\\int h\\chi_A\\,d\\mu$; the product is integrable because\n$|h\\chi_A|\\le|h|$.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F12",
+          "source": "cor-additivity-of-the-nonnegative-lebesgue-integral",
+          "source_section": "Statement",
+          "quote": "If $f,g:X\\to[0,+\\infty]$ are measurable, then\n$$\\int(f+g)\\,d\\mu=\\int f\\,d\\mu+\\int g\\,d\\mu.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F13",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. $\\int cf\\,d\\mu=c\\int f\\,d\\mu$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "For $f=\\mathbf1_E$, with $E$ Borel, the left side is $\\mu_r(E)$ and the right side is its defining chart sum. For a nonnegative simple function $s=\\sum_{k=1}^m a_k\\mathbf1_{E_k}$ on disjoint Borel sets, finite additivity and homogeneity of the nonnegative integral give the formula term by term; a finite sum interchanges with the nonnegative chart sum. Coefficients $a_k=0$ contribute zero even when $\\mu_r(E_k)=\\infty$.",
+          "inputs": [
+            "F1",
+            "F12",
+            "F13",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Take nonnegative simple Borel $s_m\\uparrow f$. For each chart, $s_m(x_i^{-1}(u))q_i(u)\\uparrow f(x_i^{-1}(u))q_i(u)$, where $q_i=(\\varphi_i\\circ x_i^{-1})r_{x_i}$. This also holds if $q_i=\\infty$: a positive limiting value of $f$ forces an eventually positive $s_m$, whereas a zero limit makes every $s_m$ zero. Monotone convergence on $M$ and each chart, followed by $\\sup_m\\sum_i a_{mi}=\\sum_i\\sup_ma_{mi}$ for increasing nonnegative $a_{mi}$, proves the formula. The last identity follows by taking finite chart sums first and then their supremum.",
+          "inputs": [
+            "F2",
+            "F3",
+            "1.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "For real or complex Borel $f$ with $\\int|f|\\,d\\mu_r<\\infty$, apply the nonnegative formula to $|f|$. It gives $\\sum_i\\int |f\\circ x_i^{-1}|q_i<\\infty$, so every chart term is integrable and the sum of their absolute integrals is finite. Apply the formula separately to $f^+,f^-$, or to the four positive/negative real/imaginary parts. Subtraction now involves only finite numbers and produces the asserted absolutely convergent series. Where $q_i=\\infty$ and $f\\ne0$ the weighted absolute integrand $h_i$ is infinite only on a Lebesgue-null set: for $E_i=\\{h_i=\\infty\\}$ and every integer $m\\ge1$, $m\\lambda_n(E_i)\\le\\int h_i<\\infty$, forcing $\\lambda_n(E_i)=0$; one may set the signed coefficient to zero there. This leaves each part integral unchanged.",
+          "inputs": [
+            "F7",
+            "F10",
+            "2.1",
+            "F13",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d6",
+          "step": "3.2",
+          "claim": "Let $f\\ge0$ be measurable for the completed measure. Choose increasing completed-simple $s_m\\uparrow f$. For each of the countably many level sets in these simple functions, the completion definition supplies a Borel replacement with symmetric difference contained in a Borel null set. Countable choice selects these replacements; their exceptional Borel sets have a null union $N$. The replacement simple functions $t_m$ are nonnegative Borel and equal $s_m$ off $N$. Put $u_m=\\max_{k\\le m}t_k$ off $N$ and zero on $N$. Then $u_m$ is increasing Borel, and $g=\\sup_m u_m$ is Borel and equals $f$ off $N$. Applying monotone convergence to $u_m$, whose Borel and completed integrals agree by the extension property, gives equality of the Borel and completed integrals of $g$. The null-set integral property gives $\\int f\\,d\\overline\\mu_r=\\int g\\,d\\mu_r$. Thus the chart formula for $g$ computes the completed integral, including infinity.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F8",
+            "F9",
+            "F10",
+            "2.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "4.1",
+          "claim": "Now let $r$ be positive smooth and $f$ smooth with compact support $K$. Local finiteness of the partition supports gives a finite subfamily meeting $K$: finitely many neighborhoods witnessing local finiteness cover $K$. Each coefficient of $\\varphi_i fr$ is smooth with compact support inside its chart. Its zero extension is bounded and Riemann integrable by the chart extension result; it is Borel because it is smooth on a Borel chart image and zero elsewhere. A bounding nondegenerate box and the local Darboux bridge identify its Riemann and Lebesgue integrals. There are only finitely many terms; their absolute integrals are finite by boundedness and bounded support. The nonnegative formula of step 2.1 applied to $|f|$ therefore shows $f$ is integrable, so step 3.1 applies and the sum equals the defining smooth integral.",
+          "inputs": [
+            "2.1",
+            "3.1",
+            "F4",
+            "F5",
+            "F6",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d5",
+          "step": "5.1",
+          "claim": "In dimension zero, compact sets are finite: the singleton open cover has a finite subcover. The preceding smooth comparison is then the same finite sum $\\sum_{p\\in K}f(p)r(p)$ in both definitions. Empty $K$, the zero function, and empty $M$ all give zero. A singleton of weight one integrates $f$ to its value.",
+          "inputs": [
+            "F1",
+            "F4",
+            "4.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d7",
+          "step": "6.1",
+          "claim": "For completed real or complex $L^1$ functions apply the same construction to each nonnegative component and subtract, redefining on the exceptional Borel null set to get a finite-valued Borel representative. Its absolute integral is unchanged, so step 3.1 applies. Two Borel representatives differ inside a Borel null set $N$; the nonnegative chart formula for $\\mathbf1_N$ makes each chart contribution of $N$ zero. Null-set invariance, and for $L^1$ also almost-everywhere equality, show independence of every representative choice.",
+          "inputs": [
+            "3.1",
+            "F7",
+            "F10",
+            "F11",
+            "2.1",
+            "3.2",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 5.1: empty support and manifold."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 5.1: zero function and n=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 5.1: unit singleton."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 5.1: n=0 is a finite sum in the compact-support clause."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 4.1: half-space zero extension handles the face."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.2: AC_omega selects only countably many Borel replacements; step 4.1 uses a finite subcover."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This gives integral identities and representatives, not an iff claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse smoothness from integrability is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b",
+        "notes": "Indicators, simple functions and MCT prove the nonnegative formula before any signed manipulation. For L1 functions the total absolute integral is finite, so the chart series is absolutely summable and signed parts can be subtracted. Countably chosen Borel level-set representatives under AC_omega yield one common Borel null set for completed-measurable functions. Smooth compact support permits the local Darboux bridge; dimension zero gives finite sums. Lee density integration is used only for the smooth comparison."
+      }
+    },
+    "cor-positive-density-measures-assign-positive-volume-to-nonempty-open-sets-and-metric-balls": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure",
+          "source_section": "Statement",
+          "quote": "If $r$ is a finite-valued positive smooth density, $\\mu_r$ is finite on compact sets, locally finite, sigma-finite, and a regular Borel measure, hence Radon. Its completion is denoted $(M,\\overline{\\mathcal B(M)},\\overline\\mu_r)$ and is not identified with its Borel domain.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-density-measure-is-independent-of-the-chart-gluing",
+          "source_section": "Statement",
+          "quote": "All chart-partition constructions give the same measure $\\mu_r$. Moreover, if $E$ is Borel and contained in any chart $x:U\\to x(U)$, then\n$$\\mu_r(E)=\\int_{x(E)}r_x\\,d\\lambda_n.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-metric-ball",
+          "source_section": "Definition",
+          "quote": "Let $(X,d)$ be a metric space ([[def-metric-space]]), let $x \\in X$ and let\n$r \\in \\mathbb{R}$ with $r > 0$ ([[def-real-order]]). Define\n\n$$B(x,r) := \\{\\, y \\in X : d(x,y) < r \\,\\}, \\qquad \\bar B(x,r) := \\{\\, y \\in X : d(x,y) \\le r \\,\\}, \\qquad S(x,r) := \\{\\, y \\in X : d(x,y) = r \\,\\}.$$\n\n$B(x,r)$ is the **open ball**, $\\bar B(x,r)$ the **closed ball** and $S(x,r)$ the\n**sphere** of **centre** $x$ and **radius** $r$. The radius is always a strictly\npositive real; a ball of radius $0$ or of negative radius is never written in\nthis library.\n\n**Immediate consequences of the definitions.** For every $x \\in X$ and $r > 0$:\n\n- $x \\in B(x,r)$, because $d(x,x) = 0 < r$ (axiom (M1) of [[def-metric-space]]);\n  in particular open and closed balls are nonempty.\n- $B(x,r) \\subseteq \\bar B(x,r)$ and $S(x,r) \\subseteq \\bar B(x,r)$, and\n  $\\bar B(x,r)$ is the disjoint union of $B(x,r)$ and $S(x,r)$, by trichotomy of\n  the order of $\\mathbb{R}$ ([[def-complete-ordered-field]], [[def-ordered-field]]):\n  each $y$ satisfies exactly one of $d(x,y) < r$, $d(x,y) = r$, $d(x,y) > r$.\n- If $0 < s \\le r$ then $B(x,s) \\subseteq B(x,r)$ and\n  $\\bar B(x,s) \\subseteq \\bar B(x,r)$, by transitivity of the order.\n- Nonnegativity of the metric ([[lem-metric-nonnegativity]]) is what forces the\n  radius convention, and it forces it for the **open** ball only: if $r \\le 0$\n  then $B(x,r) = \\{y : d(x,y) < r\\}$ is empty, because $d(x,y) \\ge 0 \\ge r$\n  for every $y$. The other two sets behave differently at $r = 0$, and the\n  convention $r > 0$ excludes them for uniformity rather than for emptiness:\n  $\\bar B(x,0) = S(x,0) = \\{x\\}$, since $d(x,y) \\le 0$ together with\n  $d(x,y) \\ge 0$ gives $d(x,y) = 0$ and hence $y = x$ by (M1). For $r < 0$ all\n  three sets are empty.\n\n**A sphere may be empty, and so the three sets are not on a par.** For $r > 0$\nthe open and closed balls always contain $x$, but nothing in the definition\nproduces a point at distance exactly $r$ from $x$. If a metric takes only the\nvalues $0$ and $1$, as the discrete metric on the companion page does, then\n$S(x,2) = \\emptyset$ while $B(x,2) = \\bar B(x,2)$ is the whole space. So\nnonemptiness of a sphere is never available by convention: where it is used, it\nis proved.\n\n**The ambient space is part of the notation.** $B(x,r)$ depends on $(X,d)$ and\nnot on $x$ and $r$ alone. When more than one space or more than one metric is in\nplay we write $B_X(x,r)$, or $B_d(x,r)$, and likewise for $\\bar B$ and $S$. This\nmatters as soon as subspaces appear ([[def-isometry-and-metric-embedding]]): a\nball of a subspace is the trace on it of a ball of the ambient space, and the two\nare different sets.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Choose $p\\in O$ and a chart around it restricted inside $O$. For $n\\ge1$, continuity and $r_x(x(p))>0$ give a relative coordinate neighborhood where $r_x\\ge c=r_x(x(p))/2>0$. This neighborhood contains a closed nondegenerate Euclidean box $Q$ in the interior of the half-space: even if $p$ is on the face, move its last coordinate a sufficiently small positive distance and choose a still smaller box. Hence $\\mu_r(O)\\ge\\int_Qr_x\\ge c\\operatorname{vol}(Q)>0$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "For $n=0$ the singleton $\\{p\\}$ is open with measure $r(p)>0$, so again $\\mu_r(O)>0$. The empty manifold has no nonempty open subset, making this clause vacuous.",
+          "inputs": [
+            "F2",
+            "1.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "If $q\\in B_d(p,R)$, then $\\epsilon=R-d(p,q)>0$ and the triangle inequality gives $B_d(q,\\epsilon)\\subset B_d(p,R)$. Thus the ball is open in the metric topology, hence in the manifold topology and Borel. It contains $p$ since $d(p,p)=0<R$, so the preceding positivity applies. If $\\overline{B_d(p,R)}$ is compact, monotonicity and compact-finiteness give $\\mu_r(B_d(p,R))\\le\\mu_r(\\overline{B_d(p,R)})<\\infty$.",
+          "inputs": [
+            "F1",
+            "F4",
+            "1.1",
+            "2.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1: empty M is vacuous; O is required nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: n=0; statement excludes zero radius and zero density."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1: positive singleton weight."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1: discrete zero-dimensional case."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1: a boundary neighborhood contains a positive-volume interior box."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: select one point from the given nonempty O; no family choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Compact closure is sufficient, not asserted necessary for finite volume."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse compactness from finite volume is claimed."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b",
+        "notes": "At a point of a nonempty open set, a positive smooth coefficient has a strictly positive lower bound on a smaller interior coordinate box; this also works at boundary points by taking an interior box inside the half-chart. Dimension zero uses positive singleton weight. A ball for a topology-compatible metric with R>0 is nonempty open, hence positive, and compact closure implies finite mass. No positivity at radius zero or arbitrary finite mass for noncompact balls is asserted."
+      }
+    },
+    "fs-local-finiteness-means-finite-total-density-measure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure",
+          "source_section": "Statement",
+          "quote": "If $r$ is a finite-valued positive smooth density, $\\mu_r$ is finite on compact sets, locally finite, sigma-finite, and a regular Borel measure, hence Radon. Its completion is denoted $(M,\\overline{\\mathcal B(M)},\\overline\\mu_r)$ and is not identified with its Borel domain.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-density-measure-is-independent-of-the-chart-gluing",
+          "source_section": "Statement",
+          "quote": "All chart-partition constructions give the same measure $\\mu_r$. Moreover, if $E$ is Borel and contained in any chart $x:U\\to x(U)$, then\n$$\\mu_r(E)=\\int_{x(E)}r_x\\,d\\lambda_n.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Take $M=\\mathbb R$ with its identity chart and $r=|dx|$, coefficient one. This is a finite-valued positive smooth density, so its measure is locally finite and finite on compact sets. For every integer $N\\ge1$, $\\mu_r([-N,N])=\\int_{-N}^N1\\,dx=2N$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "For any finite proposed bound $L$, choose an integer $N>L/2$. Monotonicity gives $\\mu_r(\\mathbb R)\\ge2N>L$, so the total mass is infinite. The empty set and singleton have mass zero by the same length formula, and intervals of length one have mass one; none of these local values bounds the total.",
+          "inputs": [
+            "F3",
+            "1.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1: empty set has mass zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: singleton has mass zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1: interval of length one has mass one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1: zero-length interval has mass zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1: closed endpoints included in length formula."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1: Archimedean selection of one N for each proposed bound; no simultaneous choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The false universal implication from local finiteness to finite total mass is refuted by the unit density on R in steps 1.1–2.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The false statement contains no biconditional, so the R counterexample does not create a separate reverse implication to verify."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b",
+        "notes": "The unit density on R gives the standard length measure by the Euclidean identification supplier. Every compact subset is bounded and finite in measure, while [-N,N] has mass 2N for every positive integer N, disproving any finite total bound. Endpoints and singletons have zero measure, including zero-length intervals. The statement refutes one universal implication; it contains no biconditional or separate converse."
+      }
+    },
+    "fs-orientation-is-required-for-a-density-measure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-oriented-smooth-manifold-and-oriented-chart",
+          "source_section": "Definition",
+          "quote": "An orientation of an $n$-manifold is a smooth choice of a ray in $\\det T_pM$ for every $p$. For $n>0$, a chart is oriented when its coordinate frame is in that ray. For $n=0$, the datum is a sign at each point; the unique empty frame does not encode both choices.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure",
+          "source_section": "Statement",
+          "quote": "If $r$ is a finite-valued positive smooth density, $\\mu_r$ is finite on compact sets, locally finite, sigma-finite, and a regular Borel measure, hence Radon. Its completion is denoted $(M,\\overline{\\mathcal B(M)},\\overline\\mu_r)$ and is not identified with its Borel domain.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-every-smooth-manifold-admits-a-positive-smooth-density",
+          "source_section": "Statement",
+          "quote": "Assuming $\\mathrm{AC}_\\omega$, every smooth manifold, with or without boundary, admits a smooth positive density.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Let $T(s,t)=(s+1,-t)$ act on $X=\\mathbb R\\times(-1,1)$ and let $q:X\\to M=X/\\langle T\\rangle$ be the quotient. It is open since $q^{-1}q(V)=\\bigcup_{k\\in\\mathbb Z}T^kV$ is open for every open $V$. Rectangles of $s$-width less than one have disjoint translates, so $q$ restricts to a homeomorphism from each such rectangle onto an open chart. The quotient is Hausdorff: for two inequivalent points, first choose bounded neighborhoods; only finitely many integer translates can intersect them because their $s$-coordinates are bounded, and shrink the neighborhoods to exclude each of these finitely many intersections. Their quotient images then separate the two orbits. Images of rational rectangles form a countable base. Transition maps are restrictions of powers of $T$, hence smooth. If M had an orientation, its pullback to X would be a smooth sign $\\sigma:X\\to\\{+1,-1\\}$ relative to the coordinate frame. This sign is constant because X is connected (any two points are joined by a straight segment). But $DT=\\operatorname{diag}(1,-1)$ implies $\\sigma(Tp)=-\\sigma(p)$, contradicting constancy. Thus M is a smooth nonorientable surface.",
+          "inputs": [
+            "F1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "The explicit local coefficient one gives $|ds\\,dt|$. Since $DT=\\operatorname{diag}(1,-1)$ has absolute determinant one, all transition powers preserve this density. It descends to a positive smooth density on $M$, an explicit instance of the general existence theorem. Its coefficients are finite, so it defines a Radon measure. This nonorientable witness refutes the assertion.",
+          "inputs": [
+            "F2",
+            "F3",
+            "1.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness is a specified nonempty strip quotient."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The witnessing coefficient is strictly one, not zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1: unit coefficient and unit absolute Jacobian."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "The witness is a two-dimensional manifold with nonsingular transitions."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1: the seam is an identification in an open strip; t=+/-1 are excluded."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "The quotient and constant coefficients are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This refutes a universal prohibition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This refutes a universal prohibition."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b",
+        "notes": "The open Mobius quotient has an explicit Hausdorff second-countable smooth atlas. Its orientation-reversing transition has determinant -1, making a continuous orientation inconsistent after one circuit, while its absolute determinant is one and hence the constant density descends. This is a positive smooth density on a nonorientable manifold satisfying all gluing hypotheses. The external Mobius orientability supplier and local witness construction were both read."
+      }
+    },
+    "ex-chart-gluing-recovers-euclidean-lebesgue-measure": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-density-measure-is-independent-of-the-chart-gluing",
+          "source_section": "Statement",
+          "quote": "All chart-partition constructions give the same measure $\\mu_r$. Moreover, if $E$ is Borel and contained in any chart $x:U\\to x(U)$, then\n$$\\mu_r(E)=\\int_{x(E)}r_x\\,d\\lambda_n.$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Write $\\beta_n$ for the restriction of $\\lambda_n$ to\nthe Borel sigma-algebra $\\mathcal{B}(\\mathbb{R}^n)$\n([[def-borel-sigma-algebra]]). Then $\\mathcal{L}(\\mathbb{R}^n)$ is exactly the\ncompletion domain of $(\\mathbb{R}^n, \\mathcal{B}(\\mathbb{R}^n), \\beta_n)$\n([[def-completion-of-a-measure-space]]), and $\\lambda_n$ is the completed measure\nthere. Explicitly,\n\n$$E \\in \\mathcal{L}(\\mathbb{R}^n) \\iff E = A\\cup N \\text{ for some } A, Z \\in \\mathcal{B}(\\mathbb{R}^n) \\text{ with } N \\subseteq Z \\text{ and } \\beta_n(Z) = 0,$$\n\nand then $\\lambda_n(E) = \\beta_n(A)$.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Take the identity chart on $\\mathbb R^n$ and partition $\\varphi=1$. The coefficient is one, hence for each Borel $E$, $\\mu_r(E)=\\int_E1\\,d\\lambda_n=\\lambda_n(E)$. In particular $\\mu_r(\\prod_j[a_j,b_j])=\\prod_j(b_j-a_j)$; for the unit cube the result is one, and if a side has length zero the result is zero.",
+          "inputs": [
+            "F1",
+            "F3",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "The equality on Borel sets identifies the completed domain and measure with those in the Lebesgue completion theorem. Thus the completion is $(\\mathbb R^n,\\mathcal L(\\mathbb R^n),\\lambda_n)$. Empty sets have zero measure in both domains; the case $n=1$ is the usual interval-length formula.",
+          "inputs": [
+            "F2",
+            "1.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1: empty sets have mass zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1: zero side length gives zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1: unit cube; step 2.1: n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1: degenerate coordinate box."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1: closed boxes included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Identity chart and unit partition are explicit; only inherited AC_omega is used for completion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Equality of two measures is asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization of coordinate systems is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b",
+        "notes": "The identity chart on R^n and partition weight one satisfy the gluing conventions, so the density coefficient one gives Lebesgue Borel measure directly; independence removes the choice of that chart. The completed extension agrees with completed Lebesgue measure, distinguished from the Borel statement. Rectangles, null endpoints and infinite ambient mass are consistent with the suppliers; no orientation choice is required."
+      }
+    },
+    "ex-positive-weighted-volume-on-an-open-interval": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-density-measure-is-independent-of-the-chart-gluing",
+          "source_section": "Statement",
+          "quote": "All chart-partition constructions give the same measure $\\mu_r$. Moreover, if $E$ is Borel and contained in any chart $x:U\\to x(U)$, then\n$$\\mu_r(E)=\\int_{x(E)}r_x\\,d\\lambda_n.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure",
+          "source_section": "Statement",
+          "quote": "If $r$ is a finite-valued positive smooth density, $\\mu_r$ is finite on compact sets, locally finite, sigma-finite, and a regular Borel measure, hence Radon. Its completion is denoted $(M,\\overline{\\mathcal B(M)},\\overline\\mu_r)$ and is not identified with its Borel domain.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-logarithm-derivative-and-integral",
+          "source_section": "Statement",
+          "quote": "For $x>0$, $\\log$ is differentiable and\n$$\\log'(x)=\\frac1x,\\qquad \\log x=\\int_1^x\\frac{dt}{t}.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-bounded-borel-riemann-integrands-on-boxes-have-equal-lebesgue-integrals",
+          "source_section": "Statement",
+          "quote": "Assume $\\mathrm{AC}_\\omega$. Let $n\\ge1$, let $Q=\\prod_{j=1}^n[a_j,b_j]$ with $a_j<b_j$, and let $f:Q\\to\\mathbb R$ be bounded and Borel. If $f$ is Riemann integrable, then $f\\in L^1(\\lambda_n|_Q)$ and its Lebesgue and Riemann integrals agree.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-integral-over-a-null-set-vanishes",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable and let $E$ be measurable with $\\mu(E)=0$.\nThen\n$$\\int_E f\\,d\\mu=0.$$",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Then:\n\n1. **Degenerate boxes.** If $a_i \\le b_i$ are reals with $a_{i_0} = b_{i_0}$ for\n   some $i_0 < n$, then every set $R$ between the open box\n   $\\{x : a_i < x_i < b_i\\ (i<n)\\}$ and the closed rectangle $[a,b]$ is Lebesgue\n   measurable with $\\lambda_n(R) = 0$.\n2. **Coordinate hyperplanes.** For $i_0 < n$ and a real $c$, the set\n   $$H_{i_0,c} \\;:=\\; \\{\\, x \\in \\mathbb{R}^n : x_{i_0} = c \\,\\}$$\n   is Lebesgue measurable with $\\lambda_n(H_{i_0,c}) = 0$.\n\nAt $n = 1$ the hyperplane $H_{0,c}$ is the singleton $\\{c\\}$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-natural-logarithm-laws",
+          "source_section": "Statement",
+          "quote": "The function $\\log:(0,\\infty)\\to\\mathbb R$ is continuous and strictly increasing, is onto $\\mathbb R$, and satisfies, for $x,y>0$,\n$$\\log(xy)=\\log x+\\log y,\\qquad \\log(x/y)=\\log x-\\log y,\\qquad \\log(1/x)=-\\log x.$$\nAlso $\\log 1=0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "The function $x\\mapsto1/x$ is positive, finite and smooth on $(0,1)$. On $[a,b]\\subset(0,1)$ it is continuous and bounded; the logarithmic integral identity gives its Riemann integral $\\log b-\\log a=\\log(b/a)$. The Borel Darboux bridge equates the Lebesgue integral to this value. Removing the two null endpoints does not change it, so the chart formula gives $\\mu_r((a,b))=\\log(b/a)$. For example $(a,b)=(1/4,3/4)$ gives $\\log3$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F6",
+            "F7",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "Every compact subset of $(0,1)$ has finite measure by the positive smooth density theorem. More explicitly, it lies in $[a,b]\\subset(0,1)$ and is bounded in measure by $\\log(b/a)$. The increasing sets $K_N=[1/N,1-1/N]$, $N\\ge3$, exhaust $(0,1)$ and have mass $\\log(N-1)$. Monotone convergence applied to their indicators gives $\\mu_r((0,1))=\\lim_N\\log(N-1)=\\infty$. This divergence also follows without any limit identity for log: each interval $[2^j,2^{j+1}]$ contributes at least $1/2$ to $\\int_1^{2^m}dt/t$, so these logarithms are unbounded.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Empty intervals and singletons have zero mass by the null-set formula. There is no endpoint value of the density at zero or one because neither belongs to the manifold; its blowup at the omitted zero endpoint is consistent with local finiteness.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F6",
+            "F7",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1: empty interval."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: singleton mass zero; x=0 excluded."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1: x=1 excluded from M."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1: collapsed intervals have zero mass."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1 and 3.1: interior endpoints null, ambient endpoints omitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Identity chart and explicit exhaustion require no selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This computes a specified weighted measure."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse statement about all densities is made."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b",
+        "notes": "On (0,1), r(x)=1/x is smooth and strictly positive. Each compact subset stays away from zero and hence has bounded coefficient and finite mass. Direct integration on [a,b] gives log(b/a), with endpoints null. The compact exhaustion [1/N,1-1/N] for N>2 has mass log(N-1), unbounded as N grows. Thus the claimed infinite total mass does not violate Radon compact finiteness."
+      }
+    },
+    "ex-density-measure-in-two-overlapping-circle-charts": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-density-measure-is-independent-of-the-chart-gluing",
+          "source_section": "Statement",
+          "quote": "All chart-partition constructions give the same measure $\\mu_r$. Moreover, if $E$ is Borel and contained in any chart $x:U\\to x(U)$, then\n$$\\mu_r(E)=\\int_{x(E)}r_x\\,d\\lambda_n.$$",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-density-measure-integration-agrees-with-smooth-density-integration",
+          "source_section": "Statement",
+          "quote": "For a nonnegative Borel $f:M\\to[0,\\infty]$ and any chart partition $(x_i,\\varphi_i)$,\n$$\\int_M f\\,d\\mu_r=\\sum_i\\int_{x_i(U_i)}(\\varphi_i f r)_{x_i}\\,d\\lambda_n,$$\nwith values in $[0,\\infty]$ and all zero-times-infinity products equal to zero. For positive smooth $r$ and compactly supported smooth real $f$, this equals the smooth density integral $\\int_Mfr$. For real or complex $f\\in L^1(\\mu_r)$ the same chart formula holds, interpreted by real and imaginary positive and negative parts; the series converges absolutely. On the completion, nonnegative measurable functions and real or complex $L^1$ functions have Borel representatives modulo completed null sets, and the formulas are applied to those representatives.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Write $q:\\mathbb R\\to S^1$ for the quotient. The chart domains are $U_1=S^1\\setminus\\{q(\\pi)\\}$ and $U_2=S^1\\setminus\\{q(0)\\}$. On one overlap component $x_2=x_1$, and on the other $x_2=x_1+2\\pi$. Both derivatives equal one, so the two constant coefficients satisfy the density law.",
+          "inputs": [
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "The disjoint decomposition is $S^1=q((0,\\pi))\\sqcup q((\\pi,2\\pi))\\sqcup\\{q(0),q(\\pi)\\}$. The chart formula assigns the two arcs masses $\\pi$ and $\\pi$, and the endpoints mass zero. Hence $\\mu_r(S^1)=2\\pi$.",
+          "inputs": [
+            "F1",
+            "F3",
+            "1.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "For any subordinate pair $(\\varphi_1,\\varphi_2)$, translate the negative-angle part of the first chart by $2\\pi$. Translation has unit Jacobian. The chart-sum formula becomes $\\int_0^{2\\pi}(\\varphi_1(q(t))+\\varphi_2(q(t)))\\,dt=\\int_0^{2\\pi}1\\,dt=2\\pi$, ignoring only the already null endpoints. Thus overlapping chart weights count each arc once. Empty arcs contribute zero.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "1.1",
+            "2.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1: empty arcs contribute zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: both angular endpoint points are null."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1: partition weights sum to one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1: singleton endpoint pieces."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1: q(0) and q(pi) treated separately."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both charts are explicit; the assertion applies to every supplied subordinate partition."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a specific density calculation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization is made."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b",
+        "notes": "The angular overlap maps are translations with derivative one, so the angular coefficients obey the absolute-Jacobian law. Two disjoint semicircle interiors each have angular length pi and their endpoints are null, giving total mass 2pi. For overlapping charts it is the subordinate weights summing to one that prevent double counting. No choice of a global angle or subtraction of infinite chart integrals is used."
+      }
+    },
+    "ex-density-measure-on-a-nonorientable-manifold": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "fs-orientation-is-required-for-a-density-measure",
+          "source_section": "Statement",
+          "quote": "False assertion: a nonorientable smooth manifold cannot carry a positive smooth density measure.\n\nA counterexample is the open Möbius strip $(\\mathbb R\\times(-1,1))/\\langle(s,t)\\mapsto(s+1,-t)\\rangle$: it is a smooth nonorientable surface carrying the descended positive smooth density $|ds\\,dt|$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-density-measure-is-independent-of-the-chart-gluing",
+          "source_section": "Statement",
+          "quote": "All chart-partition constructions give the same measure $\\mu_r$. Moreover, if $E$ is Borel and contained in any chart $x:U\\to x(U)$, then\n$$\\mu_r(E)=\\int_{x(E)}r_x\\,d\\lambda_n.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure",
+          "source_section": "Statement",
+          "quote": "If $r$ is a finite-valued positive smooth density, $\\mu_r$ is finite on compact sets, locally finite, sigma-finite, and a regular Borel measure, hence Radon. Its completion is denoted $(M,\\overline{\\mathcal B(M)},\\overline\\mu_r)$ and is not identified with its Borel domain.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The quoted strip construction gives a Hausdorff second-countable smooth nonorientable surface. Its chart transitions are powers of $T$, with derivative $\\operatorname{diag}(1,(-1)^k)$. Thus $(ds)^2+((-1)^kdt)^2=ds^2+dt^2$ and $|\\det DT^k|=1$; both the quadratic form and the unit density agree on overlaps and descend smoothly.",
+          "inputs": [
+            "F1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "In such a chart an orthonormal frame has column matrix $A$ satisfying $A^{\\mathsf T}A=I$. Taking determinants gives $(\\det A)^2=1$, so the density on that frame is $|\\det A|=1$. Conversely a density with this normalization must have coefficient one on the coordinate frame, which is orthonormal. This verifies the claimed normalization directly without a general Riemannian volume theorem. The positive finite coefficient also gives a Radon measure.",
+          "inputs": [
+            "F3",
+            "1.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "Let $q$ be the quotient map. The set $W=q((0,1)\\times(-1,1))$ is a chart: no two points in this open strip are related by a nonzero power of $T$. Its mass is $1\\cdot2=2$. Its complement is the seam $S=q(\\{0\\}\\times(-1,1))$, a Borel set because $W$ is open. In the seam chart $q((-1/4,1/4)\\times(-1,1))$, $S$ is the coordinate line $s=0$; it has measure zero (or cover it by rectangles of arbitrarily small width). Hence $\\mu_r(M)=\\mu_r(W)+\\mu_r(S)=2$. The omitted edges $t=\\pm1$ are not points of $M$.",
+          "inputs": [
+            "F2",
+            "F4",
+            "1.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The displayed quotient is nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1: seam has zero mass."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1: every orthonormal frame has density value one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1: seam is a degenerate rectangle in its chart."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1: seam is counted once, t=+/-1 omitted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Charts and density are explicitly specified."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1: coefficient one implies orthonormal normalization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1: normalization forces coefficient one on the coordinate frame."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b",
+        "notes": "The flat Mobius quotient transitions are local Euclidean isometries with determinant modulus one, so Lee Proposition 16.45 gives coefficient one for its positive metric density without orientation. The open fundamental strip has coordinate area two; the omitted seam is chartwise null. Countable additivity and chart independence therefore give total mass two. This does not identify orientation with density existence or count the seam twice."
+      }
+    },
+    "ex-zero-dimensional-density-measure-is-weighted-counting": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-borel-measurable-nonnegative-density-on-a-manifold",
+          "source_section": "Definition",
+          "quote": "Assume $\\mathrm{AC}_\\omega$ ([[def-countable-choice]]). Let $M$ be a Hausdorff second-countable smooth $n$-manifold, with boundary allowed. A **nonnegative Borel density** $r$ specifies, in every chart $x:U\\to x(U)$, a Borel function $r_x:x(U)\\to[0,\\infty]$ such that, on every overlap with $y:V\\to y(V)$,\n$$r_x(u)=r_y(y(x^{-1}(u)))\\left|\\det D(y\\circ x^{-1})(u)\\right|.$$\nBorel means measurability for the Borel sigma-algebras, as in [[def-borel-sigma-algebra]] and [[def-extended-real-valued-measurable-function]]; no measure on $M$ is needed to impose this condition. Smooth boundary charts use the structure of [[def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary]].\n\nThis extends the positive cone convention of [[def-density-bundle-and-smooth-density]]. It is an extended positive density cone, not an extended-valued section of the real line bundle. Transition factors are finite, strictly positive and smooth. For three charts $x,y,z$, the chain rule gives $J_{zx}=(J_{zy}\\circ y\\circ x^{-1})J_{yx}$, so repeated transitions give the same coefficient, including when it is infinite. On a countable atlas Borel coefficients satisfying the overlap law determine Borel coefficients in every chart: each transported coefficient is Borel, they agree on overlaps, and preimages are countable unions of Borel pieces. Conversely, Borel coefficients in every chart are Borel on that atlas. Nonnegative Borel products use the same convention: for $a,b\\ge0$ and $t\\ge0$, $\\{ab>t\\}=\\bigcup_{q\\in\\mathbb Q,\\ q>0}(\\{a>q\\}\\cap\\{b>t/q\\})$, also for infinite values; for $t<0$ the superlevel is the whole domain. This proves product measurability by countable unions.\n\nSet $0\\cdot\\infty=0$. A nonnegative finite Borel scalar $a$ multiplies coefficients by $a\\circ x^{-1}$; its transition law follows by multiplying the displayed identity. In dimension zero the empty determinant is one, charts are singletons, and $\\lambda_0$ gives the singleton mass one. The empty manifold has the unique empty coefficient family; the zero density has all coefficients zero. Coefficients are not identified almost everywhere.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-density-measure-is-independent-of-the-chart-gluing",
+          "source_section": "Statement",
+          "quote": "All chart-partition constructions give the same measure $\\mu_r$. Moreover, if $E$ is Borel and contained in any chart $x:U\\to x(U)$, then\n$$\\mu_r(E)=\\int_{x(E)}r_x\\,d\\lambda_n.$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure",
+          "source_section": "Statement",
+          "quote": "If $r$ is a finite-valued positive smooth density, $\\mu_r$ is finite on compact sets, locally finite, sigma-finite, and a regular Borel measure, hence Radon. Its completion is denoted $(M,\\overline{\\mathcal B(M)},\\overline\\mu_r)$ and is not identified with its Borel domain.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "Each point has an open singleton chart, so M is discrete and every subset is Borel. Fix a countable base $(B_j)$. For each $p$ the base contains $\\{p\\}$; assigning the least such index injects M into $\\mathbb N$. Thus M is countable without selecting a chart for each point. Singleton indicators form a locally finite smooth partition in dimension zero.",
+          "inputs": [
+            "F1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "The singleton chart integral is $\\mu_w(\\{p\\})=w(p)\\lambda_0(\\mathbb R^0)=w(p)$. Countable additivity on the disjoint singleton decomposition of any A gives $\\mu_w(A)=\\sum_{p\\in A}w(p)$. The empty sum is zero; zero or infinite weights cause no cancellation.",
+          "inputs": [
+            "F1",
+            "F2",
+            "1.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d3",
+          "step": "3.1",
+          "claim": "A compact subset of a discrete space is finite, since its singleton cover has a finite subcover. Every scalar function here is smooth in local zero-dimensional coordinates. Thus finite positive weights satisfy the positive smooth density theorem and give a Radon measure; directly, compact masses are finite sums, and every set is open and approximated in measure by its finite subsets.",
+          "inputs": [
+            "F3",
+            "1.1",
+            "2.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d4",
+          "step": "4.1",
+          "claim": "For $M=\\mathbb N$ and $w(k)=2^{-k-1}$, the partial sum through $k=N-1$ is $1-2^{-N}$, which tends to one. For $w(k)=1$ the same partial sum is N, hence the total mass is infinite. In the one-point case the formula gives precisely its weight.",
+          "inputs": [
+            "2.1",
+            "3.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1: empty sum."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: zero weights; all statements concern n=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 4.1: total one and one-point case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1: singleton chart model R^0."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "A discrete zero-manifold has no coordinate boundary face."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1: least base index gives countability without point-indexed choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "These are measure formulas and a sufficient condition."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No necessity of positive weights for Radon regularity is asserted."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b",
+        "notes": "A least singleton-base index embeds the discrete manifold into N. Compact subsets are finite, singleton reference measure and empty determinant are one, and the chart formula is the nonnegative sum of weights. Finite partial sums of weights 2^(-k-1), k>=0, tend to one; weights all one give infinite mass. Smoothness is automatic on a discrete zero-manifold, and each finite compact set still has finite mass."
+      }
+    },
+    "cex-a-smooth-density-can-have-infinite-total-mass": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure",
+          "source_section": "Statement",
+          "quote": "If $r$ is a finite-valued positive smooth density, $\\mu_r$ is finite on compact sets, locally finite, sigma-finite, and a regular Borel measure, hence Radon. Its completion is denoted $(M,\\overline{\\mathcal B(M)},\\overline\\mu_r)$ and is not identified with its Borel domain.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-density-measure-is-independent-of-the-chart-gluing",
+          "source_section": "Statement",
+          "quote": "All chart-partition constructions give the same measure $\\mu_r$. Moreover, if $E$ is Borel and contained in any chart $x:U\\to x(U)$, then\n$$\\mu_r(E)=\\int_{x(E)}r_x\\,d\\lambda_n.$$",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$, **assume the Axiom of Countable Choice**\n([[def-countable-choice]]), and let $a_i \\le b_i$ be reals for $i<n$. Write\n\n$$R^{\\circ} := \\{\\, x \\in \\mathbb{R}^n : a_i < x_i < b_i \\text{ for every } i<n \\,\\}, \\qquad \\overline{R} := [a,b] = \\{\\, x \\in \\mathbb{R}^n : a_i \\le x_i \\le b_i \\text{ for every } i<n \\,\\}$$\n\n([[def-multidimensional-rectangle-and-volume]]). Then $R^{\\circ}$ is open and\n$\\overline{R}$ is closed, so both are Borel and Lebesgue measurable, and **every**\nset $R$ with $R^{\\circ} \\subseteq R \\subseteq \\overline{R}$ is Lebesgue\nmeasurable with\n\n$$\\lambda_n(R) \\;=\\; \\prod_{i<n}(b_i-a_i).$$\n\nIn particular this covers the four one-dimensional face conventions in each\ncoordinate — the open box, the closed box $[a,b]$, the half-open box\n$B(a,b) = \\prod_{i<n}(a_i,b_i]$ of [[def-half-open-box]], and every mixture of\nthem, in any combination of coordinates — and it gives measure $0$ to all of them\nwhenever $a_i = b_i$ for some $i<n$. For a half-open box with infinite\nparameters the value is already\n$\\lambda_n(B) = \\operatorname{vol}(B)$ ([[thm-lebesgue-measure-is-a-complete-measure]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "On $\\mathbb R$ the coefficient $r_x=1$ is positive and smooth. Its measure is locally finite, and $\\mu_r([-N,N])=\\int_{-N}^N1\\,dx=2N$ for every integer $N\\ge1$. Each compact K is bounded, hence contained in some $[-N,N]$ and has finite measure.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Given any finite $L>0$, an integer $N>L/2$ yields $\\mu_r(\\mathbb R)\\ge2N>L$, proving infinite total mass. Thus the hypothesis holds and the asserted finite-total-mass conclusion fails. The same chart computation gives $\\mu_r(\\varnothing)=\\mu_r(\\{0\\})=0$ and $\\mu_r([0,1])=1$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "1.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1: empty mass zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1: singleton zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1: unit interval."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1: degenerate interval singleton."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1: closed interval endpoints included."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1: one Archimedean integer for the given L."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a witness refuting a universal claim."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a witness refuting a universal claim."
+        }
+      ]
+    },
+    "ex-borel-ball-volume-before-any-comparison-theorem": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-positive-density-measures-assign-positive-volume-to-nonempty-open-sets-and-metric-balls",
+          "source_section": "Statement",
+          "quote": "Let $r$ be positive smooth. Every nonempty open $O\\subseteq M$ has $\\mu_r(O)>0$. If $d$ induces the manifold topology, then for every $p\\in M$ and $R>0$ the ball $B_d(p,R)$ is Borel and has positive measure. If its closure in $M$ is compact, it also has finite measure.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "ex-positive-weighted-volume-on-an-open-interval",
+          "source_section": "Example",
+          "quote": "On $M=(0,1)$ take $r=x^{-1}|dx|$. For $0<a<b<1$,\n$$\\mu_r((a,b))=\\log(b/a).$$\nThis density has finite mass on compact subsets of $M$ but infinite total mass.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "d1",
+          "step": "1.1",
+          "claim": "The inequality $|x-1/2|<1/4$ with $x\\in(0,1)$ is equivalent to $1/4<x<3/4$. The closure $[1/4,3/4]$ is compact inside M, and the weighted interval computation gives $\\mu(B(1/2,1/4))=\\log((3/4)/(1/4))=\\log3$. The ball is open Borel and has positive finite measure.",
+          "inputs": [
+            "F1",
+            "F2",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        },
+        {
+          "id": "d2",
+          "step": "2.1",
+          "claim": "Every $x\\in(0,1)$ satisfies $|x-1/2|<1/2<1$, so $B(1/2,1)=(0,1)$. Its mass is infinite by the interval example. Its closure in M is all of M, which is not compact: the open cover $\\{(1/N,1):N\\ge2\\}$ of M has no finite subcover. Thus the finite-volume hypothesis on the closure is absent in precisely this example. Both radii are strictly positive; neither ball is empty.",
+          "inputs": [
+            "F1",
+            "F2",
+            "1.1",
+            "The objects and hypotheses stated in this item; constructions are specified in this step."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1: both balls are nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "Zero radius is excluded; the zero endpoint lies outside M."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1: radius one gives all of M."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "Both intervals have positive length."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1: first closure lies inside M; zero and one are absent from M."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both centers and radii are explicit."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1: distance inequality implies the interval inequalities."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 1.1: the interval inequalities imply the distance inequality."
+        }
+      ]
+    }
+  }
+}

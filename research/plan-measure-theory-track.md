@@ -125,6 +125,16 @@ complete:
    semifiniteness. Normalize the input and dual test, or retain the boundary
    powers through Hadamard three-lines; never replace those powers by first
    powers without normalization.
+   Also retain the published theorem's arbitrary-measure-space case when
+   both target endpoints are finite. For each fixed finite-simple input,
+   the finitely many images of its indicator terms belong to finite-exponent
+   Lp spaces. Their nonzero supports are sigma-finite: each positive level
+   set has finite measure by the integral bound, and the countable level sets
+   cover the support. Perform the same analytic-family argument and dual
+   testing on their common sigma-finite support, extending tests by zero.
+   Source-space sigma-finiteness is unnecessary for this fixed finite-simple
+   argument or the already planned finite-p density theorem. Do not silently
+   narrow the published finite-endpoint statement to sigma-finite spaces.
 3. `cor-complex-interpolation-extensions-agree-on-intersections` — the endpoint
    extensions agree on the intersection, so the finite-simple operator determines
    one compatible interpolated extension.
@@ -152,7 +162,7 @@ Full-text backing was checked in Gerald Teschl, *Topics in Real and Functional
 Analysis*, Theorem 15.2 and Corollary 15.3 (all endpoints; the fetched full text is
 the PDF already recorded in FA batch 8 at
 `https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf`),
-and Richard Laugesen, *Linear Analysis and Partial Differential Equations Lecture
+and Richard Laugesen, *Harmonic Analysis Lecture
 Notes*, Appendix C, Theorem C.6 and Remark C.7 (complete proof and the
 semifinite-target caveat; `https://arxiv.org/pdf/0903.3845`).
 The proof must cite the published `thm-hadamard-three-lines`; a generic mention of
@@ -2409,6 +2419,18 @@ $\mathbb{R}$, restricted to $[0,1]$); a **Bernstein set**; **inner measure**
 $\lambda_*(E) := \sup\{\lambda(K) : K\subseteq E \text{ compact}\}$, with the
 theorem that for bounded $E$, measurability is $\lambda_*(E)=\lambda^*(E)$.
 
+**Published Vitali dependency repair (2026-09-08).** The nonmeasurability
+theorem takes a selector as given; its dependencies include the Vitali
+definition, AC, countable choice and the published Lebesgue-measure
+construction. Its proof derives countable choice from AC explicitly.
+Any later counterexample asserting that a nonmeasurable set exists must also
+invoke `thm-vitali-sets-exist-under-choice-on-r-over-q`, not silently add
+existence to its Given clause. The product-completeness counterexample now
+supplies this witness under explicit AC and uses the null rectangle
+`{0}×[0,1]`. Its exceptional-section consumer still needs the corresponding
+AC contract and completion/indicator dependencies; all required suppliers
+are already published. No new Phase-2 pair is needed.
+
 **THMS.** A Vitali set exists (**AC** on a family of size $\mathfrak{c}$; **not**
 AC$_\omega$, and the Statement says which); **a Vitali set is not Lebesgue
 measurable** (**landmark**; the countable-translates-tile-a-bounded-interval
@@ -3018,6 +3040,22 @@ family (`ex-`) if unsourced — it is standard, check.
 
 ## MT-11. Product Measures and the Fubini–Tonelli Theorems
 
+For `prop-sigma-finite-section-measure-functions-are-measurable`, establish
+measurability for every finite disjoint rectangle union by its finite section
+sum, constant on measurable Boolean atoms. Then apply the monotone-class
+theorem using explicit continuity-from-below and finite-measure continuity-
+from-above suppliers. Rectangle generators alone are not an algebra.
+This published local repair passed precheck/rendercheck on 2026-09-08.
+
+Binding section-integral proof correction (published local repair,
+2026-09-08): on each finite-measure rectangle, prove closure of the agreement
+class under relative complements by subtracting both section-integrals from
+the finite product mass. Increasing-union closure then yields decreasing-
+intersection closure by complements. Only after both directions are proved
+may the algebra monotone-class theorem be applied. The six published
+dependencies of `thm-iterated-section-measures-agree-on-product-measurable-sets`
+suffice; no Phase-2 prerequisite is added.
+
 `requires`: MT-8, MT-4, MT-1, MT-7, `the-riemann-integral-in-rn-and-jordan-content`,
 `fubini-and-change-of-variables`, `countability-axioms-and-cardinal-functions`
 
@@ -3440,6 +3478,25 @@ parallelogram-law verification (`ex-`). No generated statement.
 
 ## MT-15. Density, Separability and Convolution in $L^p$
 
+**Published smoothing contract.**
+`thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign`
+handles locally Lebesgue-integrable inputs directly by measurable
+multiplication, without assuming Borel representatives. A common compact
+support neighborhood gives integrable majorants for every kernel derivative.
+Use integral-sign differentiation for all ordered derivatives and dominated
+convergence for their continuity. The published mollifier definition,
+measurable-arithmetic theorem, integral-sign differentiation theorem, dominated
+convergence theorem and Euclidean smoothness definition supply the analytic
+argument. State Countable Choice and cite the published construction of
+Lebesgue measure as a complete measure. No Phase-2 prerequisite is needed;
+this is a sufficient foundation, not a claim that Countable Choice is necessary.
+
+The published interval-mollification example uses the same choice convention.
+Its possible transition intervals have width 2epsilon, not epsilon; smaller
+support may narrow them, and signed kernels need not give monotone transitions.
+Use its direct affine substitution and support calculation, not the
+bounded-continuous approximate-identity theorem for a discontinuous indicator.
+
 `requires`: MT-14, MT-4, MT-11, MT-10, `urysohn-lemma-and-tietze`,
 `the-topology-of-euclidean-space`, `countability-axioms-and-cardinal-functions`,
 `higher-derivatives-and-smoothness`
@@ -3658,6 +3715,19 @@ $(\infty,\infty)$ is of strong type $(p,p)$ for $1<p<\infty$) — proved by spli
 $f = f\mathbf{1}_{\{\lvert f\rvert>t/2\}}+f\mathbf{1}_{\{\lvert f\rvert\le t/2\}}$
 and integrating the distribution function with MT-11's layer-cake formula; hence
 $\lVert Mf\rVert_p\le C_{n,p}\lVert f\rVert_p$ for $1<p\le\infty$.
+Phase-3 proof audit (2026-09-08): normalize the split using `C=B+eta` and
+threshold `t/(2C)`, prove the large tail is integrable, and interpret the
+strong endpoint bound almost everywhere. On an arbitrary measure space,
+replace the published unqualified Tonelli invocation by the weighted-tail
+identity proved first for simple functions and then by monotone convergence.
+Declare the Riemann/Lebesgue bridge used to evaluate the power integral,
+including its choice assumptions and a lower cutoff at zero. The layer-cake
+supplier needs the same bridge/cutoff check. For the maximal-function
+application, use the stable domain `L1 + L-infinity` and verify local
+integrability and measurability, rather than identify it without explanation
+with an operator on all measurable functions. Exact targets and existing
+suppliers are in `published-consumer-supplier-ledger.md`; no new Phase-2 pair
+is needed and published content remains unchanged.
 The currently published MT-17 inventory also contains
 `thm-riesz-thorin-interpolation`; it is the defective item catalogued in §0A.2,
 not a usable supplier.  In the future atomic repair, move that stable ID to

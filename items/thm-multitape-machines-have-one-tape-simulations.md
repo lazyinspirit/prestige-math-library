@@ -6,13 +6,18 @@ status: published
 origin: session
 provenance:
   statement: literature-derived
-  proof: ai-generated
-deps: [def-multitape-and-nondeterministic-machines, def-language-recognized-and-decided, def-partial-function-computed-by-a-machine, thm-stay-put-moves-can-be-eliminated]
+  proof: ai-altered
+deps: [def-multitape-and-nondeterministic-machines, def-language-recognized-and-decided, def-partial-function-computed-by-a-machine]
 justified_by: []
 proof_strategy: direct
 verification:
   precheck: pass
-  audited: 2026-08-31
+  verified:
+    model: "gpt-6-astra"
+    verdict: pass
+    date: 2026-09-08
+    scope: "Local one-tape stay-put elimination and direct prerequisite audit; not independent review"
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -36,8 +41,6 @@ accept, reject, diverge, and output behavior as $M$.
 
 [F1] For this theorem, extend the standard terminology to a deterministic multitape machine by using its accept, reject, and divergence behavior for recognition and decision, and by treating its first tape as the output tape for partial-function computation. These are exactly the clauses of [[def-language-recognized-and-decided]] and [[def-partial-function-computed-by-a-machine]], with "tape" replaced by "first tape" in the output clause.
 
-[L2] Stay-put bookkeeping may be removed without changing accept, reject, divergence, or output behavior, by [[thm-stay-put-moves-can-be-eliminated]].
-
 ## Proof
 
 **Proof technique:** direct.
@@ -50,6 +53,6 @@ accept, reject, diverge, and output behavior as $M$.
 
 4.1 After the passes from steps 2.1 and 3.1, the encoding represents precisely the next $k$-tape configuration of $M$. If the simulated state is halting, $S_M$ postpones entering its own halting state while it copies the first block cell-for-cell, with the mark removed and internal blank cells preserved, to tape cells beginning at $0$, and erases every later cell, delimiter, and auxiliary symbol. It then enters the corresponding halting state. Hence its final tape is exactly the simulated first tape, not merely a compaction of its nonblank symbols. Induction on simulated steps now proves identical acceptance, rejection, divergence, and first-tape output on every original input. [step 1.1, step 2.1, step 3.1, construct]
 
-4.2 If one chooses a local implementation of step 3.1 that temporarily uses stay-put head motions during block maintenance, [L2] converts that implementation to an equivalent one-tape machine using only the library's standard left/right move convention. [L2, step 3.1]
+4.2 Eliminate any temporary stay-put motion in the one-tape bookkeeping as follows. Replace each instruction that writes $b$, stays, and enters state $p$ by an instruction that writes $b$, moves right, and enters a fresh auxiliary state remembering $p$. For every symbol $c$ read in that state, write $c$ unchanged, move left, and enter $p$. The intermediate head position is at least $1$, so the left move returns to the original cell even when that cell was $0$. The tape contents and original head position are restored after the two-step macro; if $p$ is halting, it is entered only on the second step. The finite set of source instructions gives finitely many new states, and every macro terminates, preserving divergence as well as both halting outcomes and the final tape. [L1, step 3.1, construct]
 
 5.1 Hence the matching behavior in step 4.1 means, by [F1], that $S_M$ recognizes and decides the same languages and computes the same partial functions as $M$. [F1, step 4.1, step 4.2] ∎

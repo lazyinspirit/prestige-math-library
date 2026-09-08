@@ -4585,6 +4585,7 @@ future build, not a caveat.
 | elementary symmetric vs power sums | **$e,h,p,m$** | **Milne writes $p_i$ for the elementary symmetric polynomials**, the opposite of everyone else |
 | character pairing | **bilinear** $\frac1{|G|}\sum\varphi(g^{-1})\psi(g)$ | needs no conjugation, ordering or $\mathbb{C}$; expansion file §II.7.a |
 | Noetherian, definition | **every submodule is finitely generated** | choice-free; the ACC equivalence costs dependent choice (§II.11) |
+| Noetherian in short exact sequences | Published `thm-chain-conditions-in-short-exact-sequences` repaired 2026-09-08 using finite generators of intersections and images, then finitely many lifts | choice-free; do not route through ACC-to-finite-generation. Artinian exactness uses DCC directly. |
 
 ---
 
@@ -4866,6 +4867,12 @@ Apply these composition changes exactly:
    removes the 19 multiple-home warnings while leaving the B page intact.
 
 ## III.3 Exact B-leaf `requires` cutover
+
+Step-3 supervision, 2026-09-08: the first four substitutions below are now
+applied to the canonical plan. Published page headers are unchanged and remain
+Phase-3 cutovers. The averaging and Galois-descent planned prerequisite closures
+now each contain 69 pages and no B supplier. This does not certify the
+published headers or their proofs.
 
 Replace these eight page-level edges. The right-hand A page contains every
 proof-bearing supplier used by the consumer; no item-dependency change is

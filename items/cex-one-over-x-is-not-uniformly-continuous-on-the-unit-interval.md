@@ -16,9 +16,9 @@ proof_strategy: direct
 verification:
   precheck: pass
   judge:
-    model: z-ai/glm-5.2
+    model: "gpt-5.6-terra"
     verdict: pass
-    date: 2026-07-27
+    date: 2026-09-08
   audited: 2026-07-27
 sources:
   scraped: []
@@ -90,4 +90,9 @@ $1/(k+1)$ leaves $(0,1)$ at $k = 0$.
 
 - **The failure is at the missing endpoint, and it is repaired by restoring it.** On $[a,1]$ with $0 < a < 1$ the same formula is uniformly continuous, by [[thm-heine-cantor-r]], since $[a,1]$ is closed and bounded. It is also repaired by an explicit estimate: on $[a,1]$ one has $|1/x - 1/x'| = |x - x'|/(xx') \le |x-x'|/a^{2}$, so $f$ is even Lipschitz there.
 
-- **A second reading of the same fact.** By [[cor-continuous-extension-from-a-dense-subset-r]], a uniformly continuous function on $(0,1)$ would extend continuously to $[0,1]$ and hence be bounded there ([[cor-boundedness-theorem-r]]); $1/x$ is unbounded on $(0,1)$, so it cannot be uniformly continuous. That route is shorter but rests on more, and the computation above is the elementary one.
+- **A second reading of the same fact.** Assuming the Axiom of Choice
+  ([[def-axiom-of-choice]]), [[cor-continuous-extension-from-a-dense-subset-r]]
+  says that a uniformly continuous function on $(0,1)$ would extend continuously
+  to $[0,1]$ and hence be bounded there ([[cor-boundedness-theorem-r]]); $1/x$
+  is unbounded on $(0,1)$, so it cannot be uniformly continuous. That route is
+  shorter but rests on more, and the computation above is the elementary one.

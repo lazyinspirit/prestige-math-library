@@ -39,10 +39,15 @@ it.
 **8. Command approvals.** Never ask the owner for command-prompt approval.
 Approve all command-prompt requests from other agents.
 
-**9. Full-text fetch blockers.** Failure to fetch the full text from a URL in
-Step 2 or Step 3 is a content blocker. The orchestrator must resolve it
-autonomously; do not defer it to the owner or allow the build to proceed with
-the missing source text.
+**9. Full-text recovery.** Step 1 agents must verify full text at every source
+URL. After failure, search the web autonomously and retry recovery five times.
+If the original is genuinely unavailable on the open web, develop a complete
+alternate proof locally or from accessible authoritative literature. Drop the
+source only with full mathematical confidence and the decision record required
+by `briefs/beta-scaffold.md`; otherwise escalate the URL and exact uncertainty
+to the owner. Gates respect valid drops without dropping results. Step 3
+independently judges the alternative: mathematical soundness overrides missing
+original text, but confidence and fetch receipts do not prove soundness.
 
 **10. Set Theory bootstrapping boundary.** No page in the `foundations`
 category may directly or transitively use an item from *Set Theory Beyond
@@ -52,3 +57,56 @@ directly or transitively require that catalogue page. The track exists to prove
 and retire those recorded results; it cannot assume them. Non-load-bearing
 orientation may use `external_refs`, but it must never enter a proof or a
 prerequisite closure. Treat either violation as fatal and unpublishable.
+
+**11. Axiom of Choice.** The owner authorizes assuming AC wherever a proof
+needs it. State the assumption in the item contract and identify the exact
+use inside the proof, declaring `def-axiom-of-choice` as a dependency.
+Propagate the assumption to consumers that use the affected result. Do not
+infer arbitrary-index choice from finite choice or DC. Keep choice-free
+arguments choice-free. This authorization does not permit using recorded
+results as suppliers or bypassing the Foundations bootstrapping boundary.
+
+**12. Phase-3 repair ledger.** Throughout Phase 2, maintain
+`research/published-consumer-supplier-ledger.md` as the existing canonical
+record of published items needing Phase-3 proof, definition, dependency or
+page-header repairs. Record each finding promptly with exact item/page IDs,
+evidence, required repair, supplying prerequisites and status.
+For each target, identify the exact Phase-2 supplier items and their current
+build/publication states, and record a recommended proof strategy with source
+evidence. During monitoring intervals, audit additional published items and
+improve these strategies. Before Phase 2 concludes, reconcile the ledger with
+all published-item audit findings; never claim exhaustive discovery while
+published items or dependency interfaces remain unaudited. Distinguish
+confirmed defects from downstream impact-review candidates and incomplete
+audits. Update existing entries rather than create duplicate ledgers. A new
+scaffold or published supplier does not close a published-proof defect;
+published content remains read-only except for owner-authorized early repairs.
+The current authorization permits confident repairs needing no Phase-2
+dependencies, one item at a time, without judges. It covers necessary
+dependency, home and verification updates. Record local checks honestly;
+do not represent them as independent review or an owner audit.
+Continue discovering defects after each repair. Record blocked repairs with
+exact pending suppliers and proof strategies in the same ledger. Try local
+closure first; if a necessary prerequisite is absent from Phase 2 and cannot
+be supplied locally, reconcile the relevant prose scaffolds and authoritative
+Phase-2 scope to include it.
+During Phase 2, distinguish actual item-level proof prerequisites from other
+items on prerequisite pages. Published consumer debt does not block its new
+supplier unless the supplier's proof actually depends on the defective result
+or affected clause. Require exact paths and mathematical uses for such blockers;
+retain unrelated debt in the ledger. Structural checks and the Foundations
+bootstrapping boundary remain unchanged.
+
+Maintain the ledger's deduplicated item classification index alongside each
+finding: U-P (unaudited/potential), U-C (unaudited/confirmed), A-R
+(defect-focused audit and repair), or A-P (audited/pending Phase 3).
+Audit scope must be explicit; local review is not an independent judge or
+whole-closure certification. Old publication stamps do not establish a current
+repair audit. Keep supplier-only mentions and incomplete reconciliation out of
+confirmed repair totals. A new defect reopens a repaired item. Move its one
+index row and update counts whenever its disposition changes, retaining the
+evidence and exact supplier mappings. Before Phase 2 concludes, reconcile the
+entire published census and all category/engine findings, resolve the U-P/U-C
+queues, and freeze the complete A-P list with publication-ready prerequisite
+IDs and repair strategies. Keep reviewed/no-repair-needed receipts outside
+the active defect classes; never label a sound item as repaired.

@@ -7,7 +7,7 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-altered
-deps: [lem-real-and-metric-notions-agree, thm-uniformly-continuous-extension-from-dense, thm-euclidean-space-complete, def-complete-metric-space, def-uniform-continuity-real, def-continuity-real, def-metric-interior-closure-boundary, def-interior-closure-boundary-r, thm-closure-characterisations-r, def-open-and-closed-in-r, def-isometry-and-metric-embedding, lem-real-line-is-a-metric-space, def-metric-ball, def-neighbourhood-r, def-metric-space, def-metric-uniform-continuity, def-metric-continuity]
+deps: [def-axiom-of-choice, lem-real-and-metric-notions-agree, thm-uniformly-continuous-extension-from-dense, thm-euclidean-space-complete, def-complete-metric-space, def-uniform-continuity-real, def-continuity-real, def-metric-interior-closure-boundary, def-interior-closure-boundary-r, thm-closure-characterisations-r, def-open-and-closed-in-r, def-isometry-and-metric-embedding, lem-real-line-is-a-metric-space, def-metric-ball, def-neighbourhood-r, def-metric-space, def-metric-uniform-continuity, def-metric-continuity]
 justified_by: []
 aliases: [cor-dense-extension-r]
 forward_refs: [cex-one-over-x-is-not-uniformly-continuous-on-the-unit-interval]
@@ -16,11 +16,12 @@ short: "continuous extension from a dense subset"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
+  verified:
+    model: gpt-6-astra
     verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+    date: 2026-09-09
+    scope: "Local author repair and full local proof/used supplier-interface review; no independent judge or whole-closure certification."
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -37,6 +38,8 @@ pipeline_run: null
 
 ## Statement
 
+Assume the Axiom of Choice ([[def-axiom-of-choice]]).
+
 Let $D \subseteq \mathbb{R}$ be nonempty and let $f : D \to \mathbb{R}$ be
 uniformly continuous on $D$ ([[def-uniform-continuity-real]]). Write
 $\overline{D}$ for the closure of $D$ in $\mathbb{R}$
@@ -47,11 +50,11 @@ $\overline{D}$ for the closure of $D$ in $\mathbb{R}$
 2. $g$ is the **only** continuous function $\overline{D} \to \mathbb{R}$
    extending $f$ ([[def-continuity-real]]).
 
-**Uniform continuity is what is needed, and continuity is not enough.** The
+**Uniform continuity is sufficient; continuity alone is not enough.** The
 function $x \mapsto 1/x$ is continuous on $D = (0,1)$, whose closure is $[0,1]$,
-and no continuous $g : [0,1] \to \mathbb{R}$ extends it, since a continuous
-function on the compact set $[0,1]$ is bounded ([[cor-boundedness-theorem-r]])
-while $1/x$ is not bounded on $(0,1)$. By this corollary, $x \mapsto 1/x$ is
+and no continuous $g : [0,1] \to \mathbb{R}$ extends it. Indeed continuity at
+$0$ would give $|g(x)-g(0)|<1$ for all sufficiently small positive $x$,
+whereas taking also $x<1/(|g(0)|+2)$ gives $1/x>|g(0)|+2$. By this corollary, $x \mapsto 1/x$ is
 therefore not uniformly continuous on $(0,1)$.
 
 **This is the metric extension theorem, read through the dictionary.** The work
@@ -60,8 +63,9 @@ metric space $X := \overline{D}$ with the subspace metric, its dense subset $D$,
 and the complete target $(\mathbb{R}, d_{\mathbb{R}})$
 ([[thm-euclidean-space-complete]]); [[lem-real-and-metric-notions-agree]]
 translates the hypothesis and the conclusion between the two vocabularies. The
-extension is *constructed* there and not selected, so no choice principle enters
-through it.
+extension value is uniquely defined there. Nevertheless its proof uses countable
+choice, supplied here by AC, both to obtain the Cantor-intersection point and
+to extract an approximating sequence in the uniqueness argument.
 
 **Why later pages need exactly this.** The exponential and the power functions
 are defined on $\mathbb{Q}$ first and then extended to $\mathbb{R}$, and the
@@ -70,7 +74,7 @@ the use for which it is stated here rather than inside an example.
 
 ## Facts & Assumptions
 
-**Given:** A nonempty set $D \subseteq \mathbb{R}$ and a function $f : D \to \mathbb{R}$ uniformly continuous on $D$; $X := \overline{D}$ with the subspace metric $d_X$ of $d_{\mathbb{R}}(x,y) = |x-y|$.
+**Given:** The Axiom of Choice, a nonempty set $D \subseteq \mathbb{R}$ and a function $f : D \to \mathbb{R}$ uniformly continuous on $D$; $X := \overline{D}$ with the subspace metric $d_X$ of $d_{\mathbb{R}}(x,y) = |x-y|$.
 
 [L1] The usual metric of $\mathbb{R}$, its subspace metrics, and its open balls $B(x,r) = (x-r,x+r) = N_r(x)$ ([[lem-real-line-is-a-metric-space]], [[def-isometry-and-metric-embedding]], [[def-metric-ball]], [[def-metric-space]], [[def-neighbourhood-r]]).
 
@@ -94,7 +98,7 @@ the use for which it is stated here rather than inside an example.
 
 2.2 **Transport of the hypothesis.** By [L6], applied to $S := D$, the uniform continuity of $f$ on $D$ in the sense of [[def-uniform-continuity-real]] is uniform continuity of $f : (D, d_D) \to (\mathbb{R}, d_{\mathbb{R}})$ as a map of metric spaces. [step 1.1, L6]
 
-3.1 By [L4] the target $(\mathbb{R}, d_{\mathbb{R}})$ is complete, so [L5] applies with $A := D$, this $X$, $Y := \mathbb{R}$ and $h := f$: there is a uniformly continuous $g : X \to \mathbb{R}$ with $g(x) = f(x)$ for every $x \in D$, and $g$ is the only continuous map $X \to \mathbb{R}$ extending $f$. [step 2.1, step 2.2, L4, L5]
+3.1 By [L4] the target $(\mathbb{R}, d_{\mathbb{R}})$ is complete, so [L5] applies with $A := D$, this $X$, $Y := \mathbb{R}$ and $h := f$: there is a uniformly continuous $g : X \to \mathbb{R}$ with $g(x) = f(x)$ for every $x \in D$, and $g$ is the only continuous map $X \to \mathbb{R}$ extending $f$. The assumed AC supplies the countable choices in the supplier's Cantor-intersection construction and approximating-sequence uniqueness argument. [given, step 2.1, step 2.2, L4, L5]
 
 4.1 **Transport of the conclusion.** By [L6], applied to $S := X = \overline{D}$, uniform continuity of $g$ as a map of metric spaces is uniform continuity of $g$ on $\overline{D}$ in the sense of [[def-uniform-continuity-real]], and continuity as a map of metric spaces is continuity on $\overline{D}$ in the sense of [[def-continuity-real]]. So $g$ is uniformly continuous on $\overline{D}$, extends $f$, and is the unique continuous extension of $f$ to $\overline{D}$: claims 1 and 2. [step 3.1, L6] ∎
 

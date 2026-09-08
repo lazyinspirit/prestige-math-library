@@ -1,0 +1,343 @@
+[
+  {
+    "order": 584.2,
+    "id": "finite-automata-transition-and-determinisation-interfaces",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Finite-Automata Transition and Determinisation Interfaces",
+    "companion": "finite-automata-transition-and-determinisation-interfaces-examples",
+    "requires": [
+      "deterministic-finite-automata-and-regular-languages"
+    ],
+    "items": [
+      {
+        "id": "def-epsilon-nfa-word-transition",
+        "kind": "definition",
+        "title": "Epsilon-NFAs, finite epsilon closure, and extended word transition",
+        "deps": [
+          "def-computation-alphabet-and-word-convention",
+          "def-power-set",
+          "def-indexed-union-and-intersection",
+          "def-finite-cardinality",
+          "thm-subset-of-a-finite-set",
+          "thm-recursion",
+          "thm-induction-principle",
+          "def-language-over-an-alphabet",
+          "def-cartesian-product",
+          "def-axiom-schema-of-separation"
+        ],
+        "statement": "An epsilon-NFA is N=(Q,Sigma,delta,q0,F), with finite Q, q0 in Q, F subset Q, finite alphabet Sigma and total delta:Q x (Sigma disjoint-union {epsilon}) -> P(Q); missing diagram arrows mean empty transition sets. Epsilon is a tagged empty-input label, not a letter. For S subset Q put C0=S and C(k+1)=Ck union union_{q in Ck}delta(q,epsilon). ECl(S)=C|Q| is the least epsilon-closed superset of S; ECl(q) abbreviates ECl({q}). Define widehat-delta:P(Q) x Sigma* -> P(Q) by widehat-delta(S,epsilon)=ECl(S) and widehat-delta(S,ua)=ECl(union_{q in widehat-delta(S,u)}delta(q,a)); widehat-delta(q,w)=widehat-delta({q},w). These are exactly endpoints of finite paths spelling w after erasing epsilon labels. Acceptance means widehat-delta(q0,w) intersects F, defining L(N).",
+        "strategy": "Package the well-definedness arguments here, before the theorem uses the interface. thm-recursion on P(Q) builds Ck. It is increasing; every strict inclusion increases finite cardinality by thm-subset-of-a-finite-set, so Cn=C(n+1) for n=|Q| (otherwise n+1 strict increases force cardinality >n). Equality persists; induction proves containment in each closed superset. Ck consists exactly of endpoints of epsilon paths of at most k edges, proved in both directions by deleting/appending the last edge. Thus ECl is extensive, monotone, idempotent, preserves unions, and ECl(empty)=empty; no graph or fixed-point theorem is imported. For a fixed word of length r, thm-recursion on N x P(Q), with index carried in the value and a frozen update after r, gives its unique sequence of state sets. Prove uniqueness and compatibility on prefixes by induction; Separation in the available function set packages all words. A finite path spelling ua splits at its last letter edge into a path spelling u, that edge, and an epsilon suffix; this gives both inclusions in the endpoint interpretation. All assertions are finite-set arguments in ZF. No later NFA item is cited.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean Gallier, Introduction to the Theory of Computation (2018), §§3.3–3.5",
+              "url": "https://www.cis.upenn.edu/~jean/tcbook.pdf"
+            },
+            {
+              "title": "Alfred Aho, COMS W3261 Lecture 3, §§1–2",
+              "url": "https://www.cs.columbia.edu/~aho/cs3261/Lectures/L3-Regular_Expressions.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-subset-construction-reachability-invariant",
+        "kind": "theorem",
+        "title": "Subset construction and its exact reachability invariant",
+        "deps": [
+          "def-epsilon-nfa-word-transition",
+          "def-deterministic-finite-automaton",
+          "thm-existence-and-uniqueness-of-extended-dfa-transition",
+          "def-dfa-acceptance-and-recognized-language",
+          "cor-cardinality-of-the-power-set",
+          "thm-induction-principle"
+        ],
+        "statement": "For every epsilon-NFA N, D_N=(P(Q),Sigma,mu,S0,G) is a total DFA, where S0=ECl({q0}), mu(S,a)=ECl(union_{q in S}delta(q,a)), and G={S subset Q:S intersects F}. For every S subset Q and w in Sigma*, mu*(ECl(S),w)=widehat-delta(S,w); in particular mu*(S0,w)=widehat-delta(q0,w), hence L(D_N)=L(N). The state set has 2^|Q| elements, and empty is a legitimate absorbing state.",
+        "strategy": "First use finite power-set cardinality to establish a finite, nonempty DFA state set; every transition lands in P(Q), including at empty. The earlier DFA existence theorem supplies mu*. Induct on word length for the displayed invariant: base is ECl(S), and the successor step substitutes the induction hypothesis into mu. The final-state test then gives language equality in both directions. Do not assert mu*(S,w)=widehat-delta(S,w) for unclosed S: it already fails at epsilon. Gallier restricts to closed subsets, while the present full-power-set convention matches the legacy supplier and Aho. An optional reachable-state table is an example, not a different theorem or a minimization assertion.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean Gallier, Introduction to the Theory of Computation (2018), §§3.3–3.5",
+              "url": "https://www.cis.upenn.edu/~jean/tcbook.pdf"
+            },
+            {
+              "title": "Alfred Aho, COMS W3261 Lecture 3, §§1–2",
+              "url": "https://www.cs.columbia.edu/~aho/cs3261/Lectures/L3-Regular_Expressions.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-deterministic-automata-are-special-nondeterministic-automata",
+        "kind": "proposition",
+        "title": "A DFA embeds as an epsilon-free NFA",
+        "deps": [
+          "def-epsilon-nfa-word-transition",
+          "def-deterministic-finite-automaton",
+          "thm-existence-and-uniqueness-of-extended-dfa-transition",
+          "def-dfa-acceptance-and-recognized-language",
+          "thm-induction-principle"
+        ],
+        "statement": "For a total DFA D=(Q,Sigma,d,q0,F), let N_D have the same Q,Sigma,q0,F, delta(q,a)={d(q,a)} and delta(q,epsilon)=empty. Then widehat-delta_N_D(q,w)={d*(q,w)} for every q,w and L(N_D)=L(D).",
+        "strategy": "Check the NFA tuple, prove ECl(S)=S because epsilon transitions are empty, and induct on word length for the singleton identity. Acceptance follows by intersecting the singleton with F. The direction is DFA to NFA; no subset theorem or later equivalence corollary is a premise.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean Gallier, Introduction to the Theory of Computation (2018), §§3.3–3.5",
+              "url": "https://www.cis.upenn.edu/~jean/tcbook.pdf"
+            },
+            {
+              "title": "Alfred Aho, COMS W3261 Lecture 3, §§1–2",
+              "url": "https://www.cs.columbia.edu/~aho/cs3261/Lectures/L3-Regular_Expressions.html"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 584.4,
+    "id": "finite-automata-transition-and-determinisation-interfaces-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Finite-Automata Transition and Determinisation Interfaces: Examples",
+    "companion": "finite-automata-transition-and-determinisation-interfaces",
+    "requires": [
+      "finite-automata-transition-and-determinisation-interfaces"
+    ],
+    "items": [
+      {
+        "id": "ex-epsilon-closure-and-word-transition-on-a-three-state-nfa",
+        "kind": "example",
+        "title": "Epsilon closure and word transitions on three states",
+        "deps": [
+          "def-epsilon-nfa-word-transition"
+        ],
+        "statement": "Let Q={p,q,r}, Sigma={a,b}, q0=p, F={r}; delta(p,epsilon)={q}, delta(q,a)={q,r}, delta(r,b)={r}, and all other entries are empty. Then ECl({p})={p,q}, ECl(empty)=empty; from p the state sets after epsilon,a,aa,ab,b,aba are respectively {p,q},{q,r},{q,r},{r},empty,empty. Thus a,aa,ab are accepted and epsilon,b,aba are rejected.",
+        "strategy": "Write all nine entries (three labels at three states); compute every closure and each listed word using the recursion. The example uses a local three-state witness rather than importing Gallier’s four-state suffix automaton.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean Gallier, Introduction to the Theory of Computation (2018), §§3.3–3.5",
+              "url": "https://www.cis.upenn.edu/~jean/tcbook.pdf"
+            },
+            {
+              "title": "Alfred Aho, COMS W3261 Lecture 3, §§1–2",
+              "url": "https://www.cs.columbia.edu/~aho/cs3261/Lectures/L3-Regular_Expressions.html"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-subset-construction-for-an-epsilon-nfa",
+        "kind": "example",
+        "title": "A complete determinisation table for a three-state epsilon-NFA",
+        "deps": [
+          "def-epsilon-nfa-word-transition",
+          "thm-subset-construction-reachability-invariant",
+          "thm-induction-principle"
+        ],
+        "statement": "For Q={p,q,r}, Sigma={a,b}, start p, final set {r}, delta(p,epsilon)={q}, delta(q,a)={q,r}, delta(r,b)={r}, and all other entries empty, the reachable subset states are A={p,q}, B={q,r}, C={r}, Z=empty. Their (a,b) rows are A:(B,Z), B:(B,C), C:(Z,C), Z:(Z,Z); start A, final states B,C. The other four of the eight full-power-set states are unreachable.",
+        "strategy": "Restate the whole NFA instead of depending on the generated companion example. Calculate each table entry; A,B,C,Z are reached by epsilon,a,ab,b. Closure of these four under each letter, with the theorem, proves exhaustiveness for all words; no finite smoke test substitutes for this induction.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean Gallier, Introduction to the Theory of Computation (2018), §§3.3–3.5",
+              "url": "https://www.cis.upenn.edu/~jean/tcbook.pdf"
+            },
+            {
+              "title": "Alfred Aho, COMS W3261 Lecture 3, §§1–2",
+              "url": "https://www.cs.columbia.edu/~aho/cs3261/Lectures/L3-Regular_Expressions.html"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-omitting-epsilon-closure-breaks-determinisation",
+        "kind": "counterexample",
+        "title": "Dropping epsilon closure changes the accepted language",
+        "deps": [
+          "def-epsilon-nfa-word-transition",
+          "thm-subset-construction-reachability-invariant"
+        ],
+        "statement": "The claim that epsilon closure can be omitted from determinisation is false. Let Q={p,q}, Sigma={a}, start p, finals {q}, delta(p,epsilon)={q}, delta(q,a)={p}, all other entries empty. A construction starting at {p} instead of ECl({p}) wrongly rejects epsilon. Even with corrected start {p,q}, omitting post-letter closure reaches {p} on a and rejects, while the true state set is {p,q} and accepts.",
+        "strategy": "Compute epsilon and a directly. Treat the two defective algorithms separately: the first omits start closure only and the second retains start closure but omits closure after each letter. The two-state witness proves both failures without any undecidability or minimization claim.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Jean Gallier, Introduction to the Theory of Computation (2018), §§3.3–3.5",
+              "url": "https://www.cis.upenn.edu/~jean/tcbook.pdf"
+            },
+            {
+              "title": "Alfred Aho, COMS W3261 Lecture 3, §§1–2",
+              "url": "https://www.cs.columbia.edu/~aho/cs3261/Lectures/L3-Regular_Expressions.html"
+            }
+          ]
+        },
+        "generation": {
+          "role": "counterexample"
+        }
+      }
+    ]
+  },
+  {
+    "order": 596.2,
+    "id": "turing-machine-configuration-boundary-interface",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "Turing-Machine Configuration Boundary Interface",
+    "companion": "turing-machine-configuration-boundary-interface-examples",
+    "requires": [
+      "formal-languages-encodings-and-decision-problems"
+    ],
+    "items": [
+      {
+        "id": "def-turing-machine-initial-and-halting-configuration-interface",
+        "kind": "definition",
+        "title": "Initial tapes and machine-relative halting configurations",
+        "deps": [
+          "def-computation-alphabet-and-word-convention",
+          "def-function",
+          "def-the-set-of-functions-from-one-set-to-another",
+          "def-natural-numbers",
+          "def-finite-cardinality",
+          "thm-subset-of-a-finite-set",
+          "def-cartesian-product",
+          "def-axiom-schema-of-separation"
+        ],
+        "statement": "Fix finite sets Q,Sigma,Gamma, blank sqcup in Gamma, Sigma subset Gamma minus {sqcup}, pairwise distinct q0,qacc,qrej in Q, and a total function delta:(Q minus {qacc,qrej}) x Gamma -> Q x Gamma x {L,R}. These data form the raw tuple M=(Q,Sigma,Gamma,sqcup,q0,qacc,qrej,delta). A tape is t:N->Gamma with finite support {i:t(i)!=sqcup}; a configuration is (q,h,t) with q in Q and h in N. For w:m->Sigma let t_w(i)=w(i) if i<m and sqcup otherwise, and I_M(w)=(q0,0,t_w). Relative to M, C=(q,h,t) is accepting iff q=qacc, rejecting iff q=qrej, and halting iff either; otherwise it is nonhalting. The right-infinite tape boundary convention keeps a left-moving head at zero when h=0.",
+        "strategy": "Construct tapes inside Gamma^N and configurations by products and Separation. Piecewise cases are disjoint and exhaustive; t_w has support exactly m because input letters are nonblank, so it is a tape, including m=0. Distinct designated states make the accepting/rejecting predicates disjoint and the initial configuration nonhalting. The tuple is specified directly, without citing the later machine, tape, or configuration definitions. This is a boundary interface, not a definition of runs, a simulation theorem, or a proof that all computations halt. Keep the initial head at cell 0, not on a prepended blank, and do not impose a permanent end marker. Watrous’s two-sided tape and preceding-blank initial head, and Savage’s abnormal left-boundary termination, are source variants rather than imported conventions.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John E. Savage, Models of Computation, §5.1",
+              "url": "https://cs.brown.edu/people/jsavage/book/pdfs/ModelsOfComputation_Chapter5.pdf"
+            },
+            {
+              "title": "John Watrous, Introduction to the Theory of Computing, Lecture 12, §12.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/ToC-notes/ToC-notes.12.pdf"
+            },
+            {
+              "title": "Michael Sipser, MIT 18.404J (2020), Lecture 5, slides 8–10",
+              "url": "https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/18c8cd00b14d48dc5865f3bdc41abd76_MIT18_404f20_lec5.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 596.4,
+    "id": "turing-machine-configuration-boundary-interface-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "Turing-Machine Configuration Boundary Interface: Examples",
+    "companion": "turing-machine-configuration-boundary-interface",
+    "requires": [
+      "turing-machine-configuration-boundary-interface"
+    ],
+    "items": [
+      {
+        "id": "ex-initial-configuration-on-empty-input",
+        "kind": "example",
+        "title": "The empty-input initial configuration",
+        "deps": [
+          "def-turing-machine-initial-and-halting-configuration-interface"
+        ],
+        "statement": "For the raw tuple with Q={s,A,R}, Sigma={a}, Gamma={a,sqcup}, start s, accept A, reject R, and delta(s,x)=(A,x,R) for each x in Gamma, I_M(epsilon)=(s,0,t_blank), where t_blank(i)=sqcup for all i. Its tape support is empty and it is nonhalting.",
+        "strategy": "Specify all nonhalting transitions and evaluate the initial-tape formula at length zero. Head position zero persists as a valid coordinate even though the input has no letters; do not infer that the initial configuration is accepting from the empty input.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John E. Savage, Models of Computation, §5.1",
+              "url": "https://cs.brown.edu/people/jsavage/book/pdfs/ModelsOfComputation_Chapter5.pdf"
+            },
+            {
+              "title": "John Watrous, Introduction to the Theory of Computing, Lecture 12, §12.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/ToC-notes/ToC-notes.12.pdf"
+            },
+            {
+              "title": "Michael Sipser, MIT 18.404J (2020), Lecture 5, slides 8–10",
+              "url": "https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/18c8cd00b14d48dc5865f3bdc41abd76_MIT18_404f20_lec5.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-accepting-and-rejecting-configurations-are-machine-relative",
+        "kind": "example",
+        "title": "The same triple can accept for one machine and reject for another",
+        "deps": [
+          "def-turing-machine-initial-and-halting-configuration-interface"
+        ],
+        "statement": "Take Q={s,A,R}, Sigma={a}, Gamma={a,sqcup}, start s and delta(s,x)=(A,x,R) for both tape symbols. Machine M designates A as accept and R as reject; machine N interchanges those designations. Both tuples have the same nonhalting domain. The triple (A,0,t_blank) is accepting for M and rejecting for N.",
+        "strategy": "Check both tuples satisfy pairwise distinct states and totality on their identical nonhalting domain. Apply each machine-relative predicate to the same state/head/tape triple; the outcome changes without changing its tape or state component. No computation reachability is claimed.",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "John E. Savage, Models of Computation, §5.1",
+              "url": "https://cs.brown.edu/people/jsavage/book/pdfs/ModelsOfComputation_Chapter5.pdf"
+            },
+            {
+              "title": "John Watrous, Introduction to the Theory of Computing, Lecture 12, §12.1",
+              "url": "https://cs.uwaterloo.ca/~watrous/ToC-notes/ToC-notes.12.pdf"
+            },
+            {
+              "title": "Michael Sipser, MIT 18.404J (2020), Lecture 5, slides 8–10",
+              "url": "https://ocw.mit.edu/courses/18-404j-theory-of-computation-fall-2020/18c8cd00b14d48dc5865f3bdc41abd76_MIT18_404f20_lec5.pdf"
+            }
+          ]
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

@@ -1,0 +1,520 @@
+[
+  {
+    "order": 71.0142,
+    "id": "small-cancellation-disc-diagrams-and-torsion-toolkit",
+    "kind": "A",
+    "category": "group-theory",
+    "title": "Small-Cancellation Disc Diagrams and the Torsion Toolkit",
+    "companion": "small-cancellation-disc-diagrams-and-torsion-toolkit-examples",
+    "requires": [
+      "free-groups-and-presentations",
+      "free-products-and-amalgamation",
+      "hnn-extensions-and-brittons-lemma"
+    ],
+    "items": [
+      {
+        "id": "def-sc-toolkit-symmetrised-relators-and-pieces",
+        "kind": "definition",
+        "title": "Sc toolkit symmetrised relators and pieces",
+        "deps": [
+          "def-group-presentation",
+          "def-cyclically-reduced-word"
+        ],
+        "statement": "Fix a set R of nonempty cyclically reduced words closed under inverses and cyclic rotations, with duplicate words removed. A piece is a nonempty common initial segment of two distinct words of R. C′(1/6) means that each piece in r has length strictly less than |r|/6. Equal rotations of a proper power do not count as distinct relators.",
+        "strategy": "Define the free-group convention locally; prove normal-closure preservation by conjugating rotations inline. Touikan uses occurrences and an irredundancy convention; do not import that convention for proper-power relators.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Touikan §3.5 Definition 3.5.2 (comparison of conventions)",
+              "url": "https://ntouikan.ext.unb.ca/MATH6022/IntroCGGT/html_output/section-18.html"
+            },
+            {
+              "title": "Lipschutz (1964), §2, printed pp.37–38: cancellation condition with the identical-word exception",
+              "url": "http://lib.ysu.am/articles_art/6b5e2e5df94354a3efa7529c0c38c956.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-sc-toolkit-labelled-planar-disc-diagram",
+        "kind": "definition",
+        "title": "Sc toolkit labelled planar disc diagram",
+        "deps": [
+          "def-sc-toolkit-symmetrised-relators-and-pieces",
+          "def-alphabet-words-and-reduction"
+        ],
+        "statement": "A diagram is a finite connected simply connected planar combinatorial 2-complex with oriented letter-labelled edges; reversing an edge inverts its label, and each face boundary reads a member of R. Area counts faces. Distinguish a nonsingular topological disc from a diagram with cut vertices, bridges or spurs. Boundary lengths count edge occurrences.",
+        "strategy": "Supply the finite combinatorial model explicitly and distinguish the outer boundary walk from the topological frontier. The full construction is provided by the next theorem; later curvature arguments first treat nonsingular blocks and then use the finite block-cut tree for a general diagram.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Touikan §3.4 opening definitions",
+              "url": "https://ntouikan.ext.unb.ca/MATH6022/IntroCGGT/html_output/section-17.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-sc-toolkit-van-kampen-existence",
+        "kind": "theorem",
+        "title": "Sc toolkit van kampen existence",
+        "deps": [
+          "def-sc-toolkit-labelled-planar-disc-diagram",
+          "prop-normal-closure-is-products-of-conjugates"
+        ],
+        "statement": "A word represents the identity in the presented group exactly when it is a boundary label of a diagram, allowing free reductions and boundary spurs.",
+        "strategy": "Follow Touikan Theorem 3.1.7. For sufficiency, write the freely reduced word as a finite product of conjugates of relators, form the planar balloon diagram with one relator disc at the end of each conjugating whisker, and fold consecutive inverse boundary edges. Choose a product with the fewest relator factors and, among its foldings, a first putative spherical closure; the enclosed component would delete a nonempty proper collection of faces and contradict minimality, so every fold remains planar and the final outer word is the given word. Conversely, cut a diagram along a spanning tree joining face basepoints to the outer basepoint; the resulting boundary word is a product of conjugates of oriented face words followed by freely cancelling tree-edge pairs, hence lies in the normal closure. Treat the zero-face tree by deleting spurs.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Touikan §3.1, Theorem 3.1.7 and the balloon-diagram construction",
+              "url": "https://ntouikan.ext.unb.ca/MATH6022/IntroCGGT/IntroCGGT.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-sc-toolkit-minimal-diagrams-and-cut-vertex-reduction",
+        "kind": "lemma",
+        "title": "Sc toolkit minimal diagrams and cut vertex reduction",
+        "deps": [
+          "def-sc-toolkit-labelled-planar-disc-diagram",
+          "thm-sc-toolkit-van-kampen-existence",
+          "thm-well-ordering-principle"
+        ],
+        "statement": "Every null word has an area-minimal diagram; such a diagram has no cancellable pair of adjacent faces. A singular diagram decomposes at cut vertices into nonsingular blocks and bridges, with the boundary read as the associated boundary walks.",
+        "strategy": "Use well-ordering of face counts. If adjacent faces form a cancellable pair, delete their interiors and their common arc and identify the two complementary boundary paths with matching labels; this preserves planarity, simple connectivity and the outer boundary word and lowers area by two. For a singular diagram use the finite block-cut tree of its 1-skeleton: bridges are edge blocks and maximal subdiagrams without a cut vertex are nonsingular disc blocks. Boundary walks concatenate according to this tree. An end disc block meets the remainder at one cut vertex, so an exterior arc avoiding that attachment is a contiguous segment of the full boundary. If a selected shell crosses the attachment, apply the angle count with the attachment declared semi-exterior; a freely reduced full boundary eliminates bridge end-spurs. This is the general-diagram reduction explained after Touikan Corollary 3.5.8.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Touikan §3.5 Figure 3.5.1 and nonsingular restriction before Definition 3.5.3",
+              "url": "https://ntouikan.ext.unb.ca/MATH6022/IntroCGGT/html_output/section-18.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-arc-reduction-and-combinatorial-curvature-of-a-disc-diagram",
+        "kind": "definition",
+        "title": "Arc reduction and combinatorial curvature of a disc diagram",
+        "deps": [
+          "def-sc-toolkit-labelled-planar-disc-diagram"
+        ],
+        "statement": "Replace maximal degree-two arc interiors by single labelled edges, retaining a separate convention for a one-face diagram. For angles in units of pi, put k(f)=sum of its corner angles−(degree(f)−2), and k(v)=2−chi(link(v))−sum of incident corner angles. A spur tip has a singleton link, no corners, and curvature 1.",
+        "strategy": "Define degrees with multiplicity and link vertices as edge germs. Keep bridge and spur contributions, and do not suppress a whole boundary circle to an undefined vertex-free cell.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Touikan §3.4.2 curvature formulas; §3.5.1 arc reduction",
+              "url": "https://ntouikan.ext.unb.ca/MATH6022/IntroCGGT/html_output/section-17.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-internal-arcs-of-a-reduced-small-cancellation-diagram-are-pieces",
+        "kind": "lemma",
+        "title": "Internal arcs of a reduced small cancellation diagram are pieces",
+        "deps": [
+          "def-sc-toolkit-symmetrised-relators-and-pieces",
+          "lem-sc-toolkit-minimal-diagrams-and-cut-vertex-reduction",
+          "def-arc-reduction-and-combinatorial-curvature-of-a-disc-diagram"
+        ],
+        "statement": "The nonempty word on every internal arc of a reduced diagram is a piece, including an arc with the same face on both sides. Consequently in a $C'(1/6)$ diagram its length is strictly less than one sixth of each incident face perimeter, with boundary occurrences counted separately.",
+        "strategy": "Opposite face-side readings share the arc. Distinct faces cannot cancel. For a self-adjacent arc, equality would identify a cyclically reduced word with an inverse rotation; the finite cyclic-index reflection forces either a self-inverse letter or adjacent inverse letters. Both are impossible, including proper powers.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Touikan §3.5 Figure 3.5.1 and following paragraph",
+              "url": "https://ntouikan.ext.unb.ca/MATH6022/IntroCGGT/html_output/section-18.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-c-prime-one-sixth-interior-faces-have-at-least-seven-arcs",
+        "kind": "lemma",
+        "title": "C prime one sixth interior faces have at least seven arcs",
+        "deps": [
+          "lem-internal-arcs-of-a-reduced-small-cancellation-diagram-are-pieces"
+        ],
+        "statement": "Every interior face of an arc-reduced reduced $C'(1/6)$ diagram has at least seven incident arcs, counted with multiplicity.",
+        "strategy": "Owner-authorized occurrence-count repair. The internal-arc supplier now proves the piece bound even for self-adjacency using the cyclic inverse-reflection contradiction. Read the complete two-step sum proof: boundary occurrences partition the nonempty relator, repeated arcs contribute separately, and strict inequalities give d>6. No simple face boundary or excluded proper-power assumption is needed. Precheck passes; mathematical proof change is recorded, not a waiver of regularity.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Touikan §3.5.1 paragraph preceding Definition 3.5.3",
+              "url": "https://ntouikan.ext.unb.ca/MATH6022/IntroCGGT/html_output/section-18.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-euler-curvature-identity-for-an-arc-reduced-disc-diagram",
+        "kind": "lemma",
+        "title": "Euler curvature identity for an arc reduced disc diagram",
+        "deps": [
+          "def-arc-reduction-and-combinatorial-curvature-of-a-disc-diagram"
+        ],
+        "statement": "For a finite diagram D, sum_v k(v)+sum_f k(f)=2(V−E+F)=2. Vertex links and all face boundary incidences are counted with multiplicity, including spurs.",
+        "strategy": "Cancel corner-angle sums. Sum_v chi(link(v))=2E−sum_f degree(f). Prove V−E+F=1 by finite collapses, including the zero-face tree case. A deleted spur removes one vertex and one edge, hence preserves Euler characteristic; its angle contribution must still be shown.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Touikan Lemmas 3.4.2–3.4.3, Corollary 3.4.5 and Theorem 3.4.6",
+              "url": "https://ntouikan.ext.unb.ca/MATH6022/IntroCGGT/html_output/section-17.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-boundary-spur-or-at-most-three-shell-from-curvature",
+        "kind": "lemma",
+        "title": "Boundary spur or at most three shell from curvature",
+        "deps": [
+          "lem-sc-toolkit-minimal-diagrams-and-cut-vertex-reduction",
+          "lem-c-prime-one-sixth-interior-faces-have-at-least-seven-arcs",
+          "lem-euler-curvature-identity-for-an-arc-reduced-disc-diagram"
+        ],
+        "statement": "An **$i$-shell** is a face with one exterior arc and a complementary path of exactly $i$ internal arcs. A reduced $C'(1/6)$ diagram other than a point has a boundary spur or an exposed face whose exterior boundary is connected and whose complementary path has at most three internal arcs. A one-face disc is a zero-shell. For a singular diagram one may take an end disc block, and choose the exterior arc so its interior avoids that block's attachment vertex; consequently it is contiguous in the full outer walk. In a nonsingular multi-face disc there are at least two distinct exposed faces with at most three internal arcs.",
+        "strategy": "Owner-authorized local proof repair after reading Touikan sections 3.4–3.5. Do not import his stronger piece convention. The repaired local internal-arc supplier handles same-face incidences under the actual distinct-full-word convention. Removed the unsupported simple-face-boundary assertion. Count corner occurrences in cyclic attaching walks; two exterior arcs give four distinct endpoint occurrences even if vertices repeat, since consecutive exterior arcs would force a suppressed degree-two boundary vertex. Links yield zero vertex curvature, interior faces have n>=7 including self-adjacencies, non-shell external faces have curvature<=0, and each positive shell contributes at most one. Total two forces two shells; the existing end-block attachment argument is unchanged. Proper powers are not excluded. Precheck passes.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Touikan Proposition 3.5.5, complete proof",
+              "url": "https://ntouikan.ext.unb.ca/MATH6022/IntroCGGT/html_output/section-18.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-greendlinger-shell-existence-from-the-curvature-count",
+        "kind": "theorem",
+        "title": "Greendlinger shell existence from the curvature count",
+        "deps": [
+          "lem-sc-toolkit-minimal-diagrams-and-cut-vertex-reduction",
+          "lem-boundary-spur-or-at-most-three-shell-from-curvature",
+          "lem-internal-arcs-of-a-reduced-small-cancellation-diagram-are-pieces"
+        ],
+        "statement": "Let $w$ be a nonempty freely reduced null word over a symmetrised $C'(1/6)$ presentation. The original linear word $w$ contains a contiguous subword $s$ that is an initial segment of a symmetrised defining relator $r$, with $|s|>|r|/2$.",
+        "strategy": "Owner-authorized U-C19 interface reconciliation: strengthen cyclic-reading output to the original linear word. The existing rooted block/two-shell proof avoids the basepoint; for a single root face read from that basepoint. Symmetrisation makes the chosen face reading a defining relator starting with s. No new geometric lemma. Full local proof read; original published consumers remain deferred until this draft is published.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Touikan Corollary 3.5.8, with singular-diagram obligation carried from the preceding lemma",
+              "url": "https://ntouikan.ext.unb.ca/MATH6022/IntroCGGT/html_output/section-18.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-minimal-cyclic-power-diagram-and-relator-root",
+        "kind": "definition",
+        "title": "Minimal cyclic power diagram and relator root",
+        "deps": [
+          "def-sc-toolkit-symmetrised-relators-and-pieces",
+          "thm-sc-toolkit-van-kampen-existence",
+          "def-group-power",
+          "thm-well-ordering-principle"
+        ],
+        "statement": "For a nonidentity finite-order element choose a shortest freely reduced representative among all conjugates in the quotient, and then a minimum-area diagram for its least positive power. A relator root is a nonempty word v, not a proper power, with a cyclic conjugate r=v^m literally, m≥1.",
+        "strategy": "Choose lengths and areas by least natural numbers. A shortest conjugacy representative is cyclically reduced. Do not assume this forces periodicity of every shell; that is the next proof obligation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lipschutz (1964), §2 and §6; minimum-length choices expanded locally",
+              "url": "http://lib.ysu.am/articles_art/6b5e2e5df94354a3efa7529c0c38c956.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-sc-toolkit-commuting-positive-words-have-a-common-root",
+        "kind": "lemma",
+        "title": "Sc toolkit commuting positive words have a common root",
+        "deps": [
+          "def-alphabet-words-and-reduction"
+        ],
+        "statement": "Nonempty words x,y satisfying xy=yx as literal words are positive powers of a common nonempty word.",
+        "strategy": "Induct on |x|+|y|: cancel the shorter prefix from the longer and apply induction; equal lengths give equality. Distinguish literal word commutation from group commutation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lipschutz (1964), §6 opening periodic-word argument; commuting-word input expanded locally",
+              "url": "http://lib.ysu.am/articles_art/6b5e2e5df94354a3efa7529c0c38c956.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-sc-toolkit-periodic-relator-overlap-is-a-piece",
+        "kind": "lemma",
+        "title": "Sc toolkit periodic relator overlap is a piece",
+        "deps": [
+          "def-sc-toolkit-symmetrised-relators-and-pieces",
+          "lem-sc-toolkit-commuting-positive-words-have-a-common-root"
+        ],
+        "statement": "If r=x^m a is a literal reduced relator word with m≥2 and xa≠ax, then x^(m−1) is a piece. If xa=ax and a is nonempty, x and a have a common word root; if a is empty, r is already a power of x.",
+        "strategy": "Compare r with its cyclic rotation x^(m−1)ax. They are distinct precisely in the noncommuting case, and have the required common prefix. Do not assert that every occurrence in a power is a piece.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lipschutz (1964), §6 opening remark, printed p.41",
+              "url": "http://lib.ysu.am/articles_art/6b5e2e5df94354a3efa7529c0c38c956.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-sc-toolkit-cyclically-dehn-reduced-word",
+        "kind": "definition",
+        "title": "Cyclically Dehn-reduced words",
+        "deps": [
+          "def-sc-toolkit-symmetrised-relators-and-pieces"
+        ],
+        "statement": "A word is Dehn-reduced if it is freely reduced and contains no contiguous segment longer than half a relator in the symmetrised set. It is cyclically Dehn-reduced if every cyclic rotation is Dehn-reduced. Length and containment here are literal free-word notions.",
+        "strategy": "Use Lipschutz's fully reduced terminology with an explicit local name; no algorithmic or finiteness conclusion is part of this definition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lipschutz (1964), §2, printed pp.37–38",
+              "url": "http://lib.ysu.am/articles_art/6b5e2e5df94354a3efa7529c0c38c956.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-sc-toolkit-periodic-word-square-alternative",
+        "kind": "lemma",
+        "title": "Periodic words: a relator root or Dehn-reduced powers",
+        "deps": [
+          "def-sc-toolkit-cyclically-dehn-reduced-word",
+          "lem-sc-toolkit-periodic-relator-overlap-is-a-piece",
+          "def-sc-toolkit-symmetrised-relators-and-pieces"
+        ],
+        "statement": "For a nonempty cyclically Dehn-reduced word w in a symmetrised C′(1/6) presentation, at least one holds: a cyclic rotation of w and a defining relator are positive powers of a common word; every positive power of w is Dehn-reduced; or w² is conjugate in the presented group to a nonempty word y whose every positive power is Dehn-reduced. The relator set need not be finite.",
+        "strategy": "Adapt the proof, not the infinite-order hypothesis, of Lipschutz §6. Retain every common-root exception explicitly. If a segment S longer than half a relator R in a power of w is not contained in any square v² of a cyclic rotation, write S=v^r a (r≥2, a a proper prefix). The preceding piece lemma makes |v^(r−1)|<|R|/6 unless v and R have a common root; then |S|<|R|/2 is a contradiction. If every rotated square is Dehn-reduced this settles all powers. Otherwise choose R=p q p t^−1 with v=pq a rotation of w and S=pqp longer than half R, maximizing the overlap. A one-period segment cannot be long because w is cyclically Dehn-reduced. The empty-q case gives the common-root exception by the preceding lemma. Otherwise p,q,t are nonempty; maximality gives reduced tq and qt. Comparing R with the inverse rotation q^−1 p^−1 t p^−1 gives |p|<|R|/6. Since |pq|≤|R|/2 and |t|<|R|/2, arithmetic gives |q|,|t|>|R|/6. Set y=tq; the relator identity gives v²=y. Check all four overlap cases from printed p.42 for a segment Q longer than half a relator R* in y^n: Q contains t; Q contains q; Q lies across tq; Q lies across qt. In the first two cases a full block longer than |R|/6 forces equal symmetrised relators, whose extension contradicts the reduced joins (or whose lone block is no longer than half R). In a crossing case one part exceeds |R*|/4, hence |R*|/6, again forcing equal relators; the extension contradicts a reduced join in v or R. Segments inside a single block are covered by the same crossing argument with the other part empty. Thus all powers of y are Dehn-reduced. Expand these endpoint comparisons in authoring; never infer infinite order merely from the source lemma's hypothesis. Only individual relators and finite words are used, so the argument also applies to infinite presentations.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lipschutz (1964), Lemma 4 and complete §6 proof, printed pp.39,41–42; common-root exceptions retained locally",
+              "url": "http://lib.ysu.am/articles_art/6b5e2e5df94354a3efa7529c0c38c956.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-minimal-power-diagram-has-a-periodic-boundary-shell",
+        "kind": "lemma",
+        "title": "A shortest finite-order representative shares a word root with a relator",
+        "deps": [
+          "thm-greendlinger-shell-existence-from-the-curvature-count",
+          "def-minimal-cyclic-power-diagram-and-relator-root",
+          "lem-sc-toolkit-periodic-word-square-alternative"
+        ],
+        "statement": "For a shortest representative z of a nonidentity torsion conjugacy class in a C′(1/6) presentation, a cyclic rotation of z and a cyclic conjugate of a defining relator are positive powers of a common word.",
+        "strategy": "Shortest conjugacy length makes every rotation of z Dehn-reduced: a segment longer than half a relator could be replaced by its shorter complement. Apply the periodic-word square alternative. Any nonempty word whose every positive power is Dehn-reduced has infinite order: a null power contradicts the now-complete local Greendlinger theorem, and any long cyclic segment occurs in a larger literal power. This excludes both the all-powers alternative for z and the square alternative, since z² has finite order. The common-root alternative remains. No unverified one-period shortening inequality is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lipschutz (1964), §6, printed pp.41–42; local torsion deduction retaining the common-root alternative",
+              "url": "http://lib.ysu.am/articles_art/6b5e2e5df94354a3efa7529c0c38c956.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-c-prime-one-sixth-torsion-elements-come-from-relator-roots",
+        "kind": "theorem",
+        "title": "C prime one sixth torsion elements come from relator roots",
+        "deps": [
+          "lem-minimal-power-diagram-has-a-periodic-boundary-shell",
+          "def-minimal-cyclic-power-diagram-and-relator-root"
+        ],
+        "statement": "In a group presented by a symmetrised C′(1/6) set of nonempty cyclically reduced free words, each nonidentity finite-order element is conjugate to a power of a root of a cyclic conjugate of a defining relator.",
+        "strategy": "Apply the preceding lemma to a shortest conjugacy representative. Replace its common word root by a shortest root, using decreasing positive word length, to obtain the primitive relator root. The C′(1/6) hypothesis and proper-power relators are retained. The completed diagram/Greendlinger chain supplies the only geometric prerequisite. No claim about torsion in arbitrary free-product factors is included.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lipschutz (1964), §6 periodic-word proof, with the local torsion deduction",
+              "url": "http://lib.ysu.am/articles_art/6b5e2e5df94354a3efa7529c0c38c956.pdf"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 71.0144,
+    "id": "small-cancellation-disc-diagrams-and-torsion-toolkit-examples",
+    "kind": "B",
+    "category": "group-theory",
+    "title": "Small-Cancellation Disc Diagrams and the Torsion Toolkit: Examples",
+    "companion": "small-cancellation-disc-diagrams-and-torsion-toolkit",
+    "requires": [
+      "small-cancellation-disc-diagrams-and-torsion-toolkit"
+    ],
+    "items": [
+      {
+        "id": "ex-curvature-ledger-for-a-two-cell-diagram",
+        "kind": "example",
+        "title": "Curvature ledger for a two cell diagram",
+        "deps": [
+          "def-arc-reduction-and-combinatorial-curvature-of-a-disc-diagram",
+          "lem-euler-curvature-identity-for-an-arc-reduced-disc-diagram"
+        ],
+        "statement": "Two faces sharing one internal arc give an arc-reduced graph with V=2,E=3,F=2. Give each of the two corners at each vertex angle 1/2 in units of pi. Both vertices have curvature zero; each two-sided face has curvature one, so the total is two.",
+        "strategy": "Compute links and all four corners. This is a combinatorial ledger; realizing arbitrary relator labels subject to C′(1/6) is not asserted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Touikan Theorem 3.4.6; explicit two-cell specialization",
+              "url": "https://ntouikan.ext.unb.ca/MATH6022/IntroCGGT/html_output/section-17.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-a-three-shell-after-arc-reduction",
+        "kind": "example",
+        "title": "A three shell after arc reduction",
+        "deps": [
+          "def-arc-reduction-and-combinatorial-curvature-of-a-disc-diagram",
+          "lem-boundary-spur-or-at-most-three-shell-from-curvature"
+        ],
+        "statement": "For a face with one exterior arc and three interior arcs, each interior arc shorter than |r|/6, the exposed boundary has length greater than |r|/2.",
+        "strategy": "Draw the four-arc face and sum strict inequalities. For a concrete length ledger use |r|=19 and interior arc lengths 3,3,3, giving exterior length 10. This is a local shell ledger; no unverified global presentation is claimed.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Touikan Definition 3.5.3 and Figure 3.5.4",
+              "url": "https://ntouikan.ext.unb.ca/MATH6022/IntroCGGT/html_output/section-18.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-relator-root-versus-proper-power",
+        "kind": "example",
+        "title": "Relator root versus proper power",
+        "deps": [
+          "def-sc-toolkit-symmetrised-relators-and-pieces",
+          "def-minimal-cyclic-power-diagram-and-relator-root"
+        ],
+        "statement": "For R the symmetrisation of a^7, the root is a; the equal cyclic rotations do not yield pieces, and <a|a^7> is cyclic of order seven.",
+        "strategy": "Use the exponent-sum map to Z/7 and reduction of powers to prove exact order, and distinguish the word root from a selected element of the quotient.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lipschutz (1964), §6 common-root exception; cyclic-group example computed locally",
+              "url": "http://lib.ysu.am/articles_art/6b5e2e5df94354a3efa7529c0c38c956.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-a-boundary-spur-when-free-reduction-is-omitted",
+        "kind": "counterexample",
+        "title": "A boundary spur when free reduction is omitted",
+        "deps": [
+          "def-sc-toolkit-labelled-planar-disc-diagram",
+          "def-arc-reduction-and-combinatorial-curvature-of-a-disc-diagram"
+        ],
+        "statement": "A one-edge tree labelled a has boundary walk aa^−1, no faces and two spur tips. Thus a null boundary that is not freely reduced need not contain any shell.",
+        "strategy": "Each tip has curvature one. Check both triviality and the absence of faces directly; this explains why free reduction is essential.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Touikan Lemma 3.4.3, zero-face case",
+              "url": "https://ntouikan.ext.unb.ca/MATH6022/IntroCGGT/html_output/section-17.html"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]

@@ -838,7 +838,10 @@ export class Executor {
         if (stage?.pattern && lm) {
           const rm = /--role\s+([^\s]+)/.exec(line);
           const resultName = `${rm ? rm[1] : ''}-${lm[1]}.result.json`;
-          if (!stagePattern(stage, this.ctx()).test(resultName)) continue;
+          // Repair-hook labels need not match the primary result pattern.
+          // Their persisted dispatch key still identifies the owning stage.
+          if (!stagePattern(stage, this.ctx()).test(resultName)
+            && !this.state.dispatch(`${stage.id}:${lm[1]}`)) continue;
         }
         const m = /--covers\s+([^\s]+)/.exec(line);
         if (!m) continue;
@@ -1119,7 +1122,9 @@ export class Executor {
     const statuses = active.map((s: any) => ({ s, st: this.stageStatus(s, ctx) }));
     const unitsAllDone = statuses.every(({ st }: any) => st.unitsDone);
     const gatesPending = statuses.some(({ st }: any) => !st.gatesPassed);
-    if (unitsAllDone && gatesPending && !this.inflight.size) {
+    const externalWork = !this.inflight.size
+      && active.some((s: Stage) => this.adoptedUnits(s).size > 0);
+    if (unitsAllDone && gatesPending && !this.inflight.size && !externalWork) {
       const outcome = await this.runGroupGates(statuses, ctx, group);
       if (outcome !== 'ok') return outcome;
     }

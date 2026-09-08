@@ -7,18 +7,20 @@ origin: session
 provenance:
   statement: ai-altered
   proof: not-applicable
-deps: [def-choice-function, def-axiom-of-choice, def-countable-choice, def-sequence, def-natural-numbers]
+deps: [def-choice-function, def-axiom-of-choice, def-countable-choice, def-function, def-natural-numbers]
 justified_by: []
+forward_refs: [rem-compactness-choice-ledger-metric]
 aliases: [def-dc]
 landmark: true
 short: "dependent choice (DC)"
 verification:
   precheck: n/a
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-27
-  audited: 2026-07-27
+  verified:
+    model: gpt-5.6-sol
+    verdict: certify
+    date: 2026-09-08
+    scope: owner-authorized-published-repair
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -42,11 +44,12 @@ The **Axiom of Dependent Choice**, written $\mathrm{DC}$, is the following
 statement.
 
 > For every nonempty set $X$, every relation $R$ entire on $X$, and every
-> $a \in X$, there is a sequence $x : \mathbb{N} \to X$ ([[def-sequence]],
+> $a \in X$, there is a function $x : \mathbb{N} \to X$ ([[def-function]],
 > [[def-natural-numbers]]) with
 > $$x_0 = a \qquad \text{and} \qquad x_n \mathbin{R} x_{n+1} \ \text{ for every } n \in \mathbb{N}.$$
 
-As everywhere in this library $\mathbb{N}$ contains $0$, and the sequence is
+Here a sequence in $X$ means a function from $\mathbb{N}$ to $X$, not necessarily
+a real-valued sequence. As everywhere in this library $\mathbb{N}$ contains $0$, and the sequence is
 indexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every
 later term is related to its predecessor.
 

@@ -1,0 +1,39 @@
+# Step 6b — routed group adjudication
+
+Work only on the dispatched group. For every batch, read its
+`research/<run>-step6-scope-<i>.json`, reader report and findings JSON, refuter
+report, current carrier, and cited dependencies.
+
+Compare each post-reader hash snapshot with `research/<run>-step6-hash-<i>-pre-6b.json`.
+The latter freezes repairs made by the full gate battery before this adjudication.
+For a changed carrier already routed as touched/page, decide its complete current
+state and use `amended_repair` when it differs from the reader result.
+For each other changed carrier, write `post-reader:<i>:<id>` with route `touched`
+(item) or `page`; compare against the post-reader and pre-6b snapshots for the
+accepted/amended/reverted verdict. Read these repairs independently and record
+the same evidence and ledger accountability as other repair obligations.
+
+Before closing the group, run `tools/risk-report.mjs` on each owned batch
+contract without `--require-reviewed`. For every item reported HIGH or CRITICAL,
+read the current proof and relevant reader/refuter and citation evidence, then
+write a specific `risk_review: {status: complete, reviewer, notes}` record into
+that batch contract. This is a mathematical review, not a routing stamp: repair
+any confirmed defect under the rules below, and make `notes` identify the
+actual risk and why it is resolved. Re-run the same owned-batch checks with
+`--require-reviewed` before completing the dispatch.
+
+Write exactly one decision for each routed `touched`, `page`, `reader`, and
+`refuter` obligation. Use `accepted_repair`, `amended_repair`, or
+`reverted_change` for touched/page carriers; use `confirmed_fatal`,
+`confirmed_nonfatal`, or `false_positive` for reader/refuter findings.
+
+For a confirmed defect, apply the in-scope repair and append its closed ledger
+row. A proposed withdrawal stays present for the 6c lead. Update only the
+contract, manifest, provenance, impact, and stale verification records made
+incorrect by that repair.
+
+Write `research/<run>-alpha-<g>-6b.md` and
+`research/<run>-alpha-<g>-6b-decisions.json` with `{version:1,run,group,decisions}`.
+Each decision needs its exact obligation, id, route, verdict, nonempty evidence,
+and unique ledger references; the stage stamps `subject_sha256`. Use shared or
+causal ledger references only with the fields required by `step6-scope.mjs`.

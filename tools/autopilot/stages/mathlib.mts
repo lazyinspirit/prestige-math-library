@@ -246,10 +246,10 @@ const batchCoverages = (ctx: any) => batches(ctx).map((b: any) => `research/${ct
  *  Owner instruction (2026-08-17): dead academic URLs are a normal case, and
  *  Betas prove full text is fetchable per URL at step 1. The Beta stamps each
  *  source at harvest time (`source-fetch-check --stamp`, per its brief); this
- *  gate is the no-network check that every source carries the stamp. */
+ *  gate accepts each stamp or a validated Step 1 source-drop decision. */
 const fetchGate = (ctx) => gate('source-fetch-check', ['node', 'tools/source-fetch-check.mjs',
   '--coverage', batchCoverages(ctx).join(',')], {
-  liveness: { pattern: /(\d+)\/\d+ source\(s\) fetch-verified/.source, min: 1, unit: 'sources fetch-verified' },
+  liveness: { pattern: /(\d+)\/\d+ source\(s\) resolved/.source, min: 1, unit: 'sources resolved' },
 });
 
 /** MECHANICAL REPAIRS, keyed by the failing gate.
@@ -761,9 +761,8 @@ const urlGate = (ctx) => gate('url-liveness', [
   ...batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.coverage.json`),
   '--out', `research/${ctx.run}-url-liveness.json`, '--recover', '--fail-on-dead',
 ], {
-  // Zero collected URLs prints "0/0 live" and exits 0 — a coverage selection
-  // gone wrong (wrong run name, empty files) must not pass as a sweep.
-  liveness: { pattern: /\/(\d+) live/.source, min: 1, unit: 'URLs collected' },
+  // Documented drops are decisions, not live URLs. Empty selections still fail.
+  liveness: { pattern: /(\d+) citation decision\(s\)/.source, min: 1, unit: 'citation decisions' },
 });
 
 // A dead citation is a broken link; a dead SOURCE is missing mathematics. This
@@ -3667,6 +3666,17 @@ export const stages = [
 // stage boundary so repair hooks and obligation re-dispatches cannot silently
 // fall back to their role's ordinary lane. Tool plans remain deterministic.
 for (const stage of stages) {
+  // Refresh the one frontier index at mutable joins, not frozen judge/stamp
+  // stages. Reviewers maintain batch-owned evidence; this merge is mechanical.
+  if (['3-review', '3-fix', '3-recheck', '4-splice', '5-author',
+    '6b-adjudicate', '6c-cross', '8-adjudicate', '8-preflight', '8-final',
+    '9-scope', '9-close'].includes(stage.id)) {
+    const previousGates = stage.gates;
+    stage.gates = (ctx: any) => [gate('frontier-dependency-ledger',
+      ['node', 'tools/frontier-dependency-ledger.mjs', 'refresh', '--run', ctx.run,
+        ...(['3-recheck', '9-scope', '9-close'].includes(stage.id) ? ['--require-reviewed'] : [])]),
+      ...(previousGates?.(ctx) ?? [])];
+  }
   if (/^(?:9|10)-/.test(stage.id)) {
     stage.modelProfile = (plan: any) => plan.role === 'tool' ? undefined
       : stage.id === '9-scope' && plan.role === 'alpha' && plan.label === 'step9-lead'

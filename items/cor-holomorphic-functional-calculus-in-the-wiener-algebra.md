@@ -7,15 +7,11 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [thm-wiener-algebra-is-a-banach-algebra, thm-wiener-lemma-for-absolutely-convergent-fourier-series, lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set, def-complex-chain-and-cycle, def-integration-and-index-of-complex-chain, def-null-homologous-and-homologous-complex-cycles, cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace]
-forward_refs: [thm-global-cauchy-integral-formula-homology]
+deps: [thm-wiener-algebra-is-a-banach-algebra, thm-wiener-lemma-for-absolutely-convergent-fourier-series, lem-compact-set-has-a-jordan-neighborhood-inside-an-open-set, def-complex-chain-and-cycle, def-integration-and-index-of-complex-chain, def-null-homologous-and-homologous-complex-cycles, cor-index-of-a-cycle-is-locally-constant-and-vanishes-far-from-its-trace, thm-global-cauchy-integral-formula-homology]
+forward_refs: []
 proof_strategy: direct
 verification:
   audited: 2026-09-06
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-06
 sources:
   references:
     - title: "Richard S. Laugesen, Harmonic Analysis Lecture Notes, Theorem 4.3"

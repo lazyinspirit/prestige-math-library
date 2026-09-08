@@ -38,6 +38,7 @@
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { REPO } from './paths.mjs';
+import { sourceDropped, sourceResolutionErrors } from './source-resolution.mjs';
 
 const argv = process.argv.slice(2);
 const asJson = argv.includes('--json');
@@ -136,7 +137,18 @@ for (const path of files) {
     // of the pair, because a harvested result may legitimately land on the B
     // companion as a worked example.
     const scaffolded = new Set(pages.flatMap((p) => (p.items ?? []).map((i) => i.id)));
+    const itemRecords = new Map(pages.flatMap((p) => (p.items ?? []).map((i) => [i.id, i])));
     for (const entry of covered.values()) {
+      for (const source of (entry.sources ?? []).filter(sourceDropped)) {
+        for (const alternative of source.source_resolution.alternatives) {
+          const item = itemRecords.get(alternative?.item);
+          if (!item || !Array.isArray(alternative.deps)
+              || alternative.deps.some((id) => !(item.deps ?? []).includes(id))) {
+            error('coverage-alternative-deps',
+              `${label}: ${entry.page}: alternative ${alternative?.item} must name a scaffolded item and declared dependencies`, entry.page);
+          }
+        }
+      }
       for (const result of harvestOf(entry)) {
         if (result.disposition === 'included' && result.item && !scaffolded.has(result.item)) {
           error('coverage-unknown-item',
@@ -153,23 +165,29 @@ for (const path of files) {
 
     // ---- sources
     const sources = entry.sources ?? [];
-    if (sources.length < 2) {
+    const activeSources = sources.filter((s) => !sourceDropped(s));
+    const hasDrop = sources.some(sourceDropped);
+    if (activeSources.length < 2 && !hasDrop) {
       error('coverage-thin-sources',
         `${where}: ${sources.length} source(s); a pair needs at least 2 independent treatments`, entry.page);
     }
-    const kinds = sources.map((s) => s.kind);
+    const kinds = activeSources.map((s) => s.kind);
     for (const kind of kinds) {
       if (kind && !ALL_KINDS.has(kind)) {
         error('coverage-unknown-kind', `${where}: unknown source kind "${kind}"`, entry.page);
       }
     }
-    if (!kinds.some((k) => PRIMARY_KINDS.has(k))) {
+    if (!kinds.some((k) => PRIMARY_KINDS.has(k)) && !hasDrop) {
       error('coverage-no-primary-source',
         `${where}: no source of kind ${[...PRIMARY_KINDS].join('/')}; an encyclopedia entry cannot be a pair's primary backing`,
         entry.page);
     }
     for (const source of sources) {
       const tag = `${where}: source ${source.url ?? '(no url)'}`;
+      for (const reason of sourceResolutionErrors(source)) {
+        error('coverage-source-resolution', `${tag}: ${reason}`, entry.page);
+      }
+      if (sourceDropped(source)) continue; // preserved dispositions are still checked below
       if (!/^https?:\/\//.test(source.url ?? '')) {
         error('coverage-source-url', `${tag}: needs an http(s) url`, entry.page);
       }

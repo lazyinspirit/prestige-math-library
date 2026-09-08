@@ -15,7 +15,12 @@ aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-30
+  verified:
+    model: Codex
+    verdict: repaired-and-locally-checked
+    date: 2026-09-08
+    scope: "Owner-authorized radial formula repair; local checks only, no independent judge"
+    delegated_by: owner
   precheck: pass
 sources:
   scraped: []
@@ -30,7 +35,7 @@ sources:
 
 ## Example
 
-For $0<r<R$, the function $\rho(x):=\sigma\bigl((R^2-\|x\|^2)/(R^2-r^2)\bigr)$ is a smooth radial bump on $\mathbb R^n$: it equals $1$ on $\overline B_r(0)$ and has support in $B_R(0)$.
+For $0<r<R$, put $s=(r+R)/2$. The function $\rho(x):=\sigma\bigl((s^2-\|x\|^2)/(s^2-r^2)\bigr)$ is a smooth radial bump on $\mathbb R^n$, $n\ge1$: it equals $1$ on $\overline B_r(0)$ and has support in $\overline B_s(0)\subset B_R(0)$.
 
 ## Facts & Assumptions
 
@@ -44,6 +49,6 @@ For $0<r<R$, the function $\rho(x):=\sigma\bigl((R^2-\|x\|^2)/(R^2-r^2)\bigr)$ i
 
 1.1 The displayed function is the explicit construction used in [L1]. [L1, given]
 
-2.1 Therefore it is smooth, radial, equal to $1$ on the inner closed ball, and supported in the outer open ball. [L1, step 1.1]
+2.1 By [L1] it is smooth, equals $1$ on the inner closed ball, and has support in $\overline B_s(0)\subset B_R(0)$. It is radial because the formula depends only on $\|x\|$. [L1, step 1.1]
 
 3.1 This is the required Euclidean example. [step 2.1] ∎

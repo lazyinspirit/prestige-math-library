@@ -1240,15 +1240,15 @@ Within each A page, items are in proof order. An item may cite only a published 
 ## TC-30. Interactive Proof Systems and Public Coins
 
 **page id** `interactive-proof-systems-and-public-coins`  
-**`requires`** `randomized-complexity-and-amplification`, `space-complexity-savitch-and-tqbf`
+**`requires`** `randomized-complexity-and-amplification`, `space-complexity-savitch-and-tqbf`, `finite-probability-spaces-and-random-variables`
 
 ### A-page items, in dependency order
 
 1. `def-interactive-proof-transcript-round-and-strategy` — **definition** `[LN]`.
 2. `def-completeness-and-soundness` — **definition** `[LN]`.
-3. `def-ip` — **definition** `[LN]`.
-4. `prop-np-is-contained-in-ip` — **proposition** `[LL]`.
-5. `lem-sequential-repetition-amplifies-error` — **lemma** `[LL]`.
+3. `lem-sequential-repetition-amplifies-error` — **lemma** `[LL]`; local conditional-moment proof, no draft Chernoff dependency.
+4. `def-ip` — **definition** `[LN]`; fixed-gap equivalence uses the preceding repetition lemma.
+5. `prop-np-is-contained-in-ip` — **proposition** `[LL]`.
 6. `def-private-coin-public-coin-and-arthur-merlin-protocol` — **definition** `[LN]`.
 7. `lem-hashing-commits-public-randomness` — **lemma** `[LL]`.
 8. `thm-private-coin-ip-equals-public-coin-ip` — **theorem** `[LL]`.
@@ -1276,7 +1276,12 @@ Within each A page, items are in proof order. An item may cite only a published 
 ## TC-31. Arithmetization and the Sum-Check Protocol
 
 **page id** `arithmetization-and-the-sum-check-protocol`  
-**`requires`** `interactive-proof-systems-and-public-coins`, `algebraic-extensions-degree-and-finite-fields`
+**`requires`** `interactive-proof-systems-and-public-coins`, `algebraic-extensions-degree-and-finite-fields`, `linear-algebra-methods-in-combinatorics`
+
+UC-73 local repair: `rem-polynomial-identity-bounds-for-sum-check` now proves
+its multivariate bound from the earlier monomial/degree definition and
+univariate root bound. The added combinatorics A-page prerequisite supplies
+that definition. The old draft Schwartz–Zippel edge is no longer used here.
 
 ### A-page items, in dependency order
 
@@ -2995,7 +3000,11 @@ listed on an already-published page cannot be published as Phase-2 work.
 Consequently all 55 old draft items in §52 are Phase-3 cleanup inputs, not
 Phase-2 suppliers.
 
-The cheapest adequate cutover uses five new A/B pairs and thirty A items.
+The original cutover used five new A/B pairs and thirty A items. The UC-73
+audit adds one clocked-simulation supplier to the resources pair and the
+seven-A/two-B nondeterministic separation pair below: six Phase-2 pairs,
+38 A items and 15 B items in this replacement lane. Local published repairs
+remove individual demands, not the other consumers of shared suppliers.
 Twenty-nine A items replace the twenty-nine old roots having direct published
 consumers; one additional polynomial-time verifier/reduction definition is an
 internal prerequisite that prevents the final pair from consuming the broken
@@ -3133,6 +3142,7 @@ the old draft stay-put theorem.
   items:
     - def-uniform-asymptotic-time-space-comparison
     - def-machine-time-and-space-constructibility
+    - thm-clocked-universal-simulation-with-time-and-space-bounds
     - def-primitive-recursive-functions-by-initial-functions-and-schemes
     - def-kleene-computation-predicate-and-output-map
     - thm-kleene-normal-form-for-the-fixed-machine-coding
@@ -3159,17 +3169,28 @@ the old draft stay-put theorem.
     - ex-schwartz-zippel-for-a-bivariate-polynomial
 ```
 
-The displayed order is proof order.  Items 1--2 fix big-O/little-o and
+The displayed order is proof order. The first two definitions fix big-O/little-o and
 time/space constructibility, including monotonicity and complete-input-reading
-guards.  Items 3--5 construct primitive recursion, sequence coding, the
+guards. The normal-form block constructs primitive recursion, sequence coding, the
 primitive-recursive step predicate, minimisation, normal form, and the
-partial-recursive/Turing-computable equivalence.  Items 6--7 define the two
+partial-recursive/Turing-computable equivalence. The reduction definitions fix the two
 reduction interfaces with totality, direction, and oracle-query semantics.
-Items 8--10 use the fixed effective machine coding and published step-by-step
+For subsets of the naturals, `def-computable-many-one-reducibility-interface`
+must define reductions by total computable maps from N to N. An equivalent
+encoded presentation must require canonical-numeral output on canonical
+inputs; unrestricted string-language reduction between numeral images is
+not that definition (invalid numerals can otherwise act as extra no outputs).
+Include the relativized N-to-N variant for oracle-c.e. completeness and
+prove any encoding bridge explicitly. This sharpens the existing Phase-2
+interface; it adds no item or pair. Source: Patey, *Computability Theory*,
+chapter 5, Definitions 4.1 and 5.2, printed pp.87–89,
+https://ludovicpatey.com/courses/comp-thy-2023/cr11-en.pdf
+(full pages read in the UC-73 audit).
+The numbering, specialization and fixed-point items use the fixed effective machine coding and published step-by-step
 interpreter to prove universality, s-m-n, and the fixed-point theorem; no old
-acceptable-numbering draft is cited.  Item 11 packages exactly the polynomial
-time, verifier, balance, and many-one notions needed by the next pair.  Items
-12--16 then define probabilistic polynomial time and its named classes, prove
+acceptable-numbering draft is cited. The verifier definition packages exactly the polynomial
+time, verifier, balance, and many-one notions needed by the next pair. The final
+probabilistic block defines polynomial time and its named classes, proves
 the finite pairwise-independent hashing and Chernoff interfaces, and prove
 Schwartz--Zippel by induction on the number of variables using the published
 monomial/degree and finite-field root bounds.  No P/NP, randomized-complexity,
@@ -3177,6 +3198,30 @@ or acceptable-numbering page is used as a hidden supplier.  The natural-number
 coding input is already in the A-prerequisite closure through
 `diagonalization-and-the-halting-problem`; it therefore does not introduce a
 direct dependency on a legacy `P` page.
+
+**UC-73 simulation proof obligation.** Immediately after constructibility,
+`thm-clocked-universal-simulation-with-time-and-space-bounds` constructs two
+distinct fixed finite-alphabet multitape interpreters, not one interpreter
+asserted to optimize both resources. On valid (M,x,b), each reproduces the
+outcome within b simulated steps and rejects at expiry; malformed encodings
+halt rejecting. For each fixed M, the time interpreter costs
+O_M(n+b log(b+2)); the space interpreter costs O_M(n+S+log(b+2)) cells,
+where n includes the encoded program/input and S counts visited simulated
+cells. Include b=0,1 and clock/decoder storage. Prove the first by the full
+buffer simulation and countdown argument and the second by current-configuration
+scanning with description-dependent symbol/tape constants. No fast-time
+claim is made for the space interpreter, and no linear-S space claim is
+inferred from the buffer time theorem. Dependencies are the published raw
+machine/configuration/encoding interfaces, the earlier new boundary and
+normal-form pairs, and these resource definitions where used—not the
+published consumer's unsupported simulator assertion. This is an unbuilt
+proof obligation, not an available theorem. Source route: Arora–Barak,
+Appendix 1.A, https://theory.cs.princeton.edu/complexity/book.pdf; the full
+construction was read by Astra 3. The space proof is the separate explicit
+configuration simulation, not a claim attributed to that appendix.
+Phase 3 splits `def-efficient-universal-simulation-with-clock` accordingly:
+time consumers use the time interpreter; space consumers use encoded-space
+simulation. Preserve each consumer's claim, not an unsupported joint bound.
 
 #### SAT tableaux and quantified-space completeness
 
@@ -3221,6 +3266,70 @@ count space-bounded configurations, prove TQBF membership, and prove hardness
 by the quantifier-reusing reachability recursion with an explicit polynomial
 formula-size and workspace induction.  The proof never consumes the draft
 Cook--Levin or TQBF items on the two following published pages.
+
+#### Nondeterministic recursive padding and time separation — UC-73 addition
+
+```yaml
+- order: 626.2
+  id: nondeterministic-recursive-padding-and-time-separation
+  title: Nondeterministic Recursive Padding and Time Separation
+  kind: A
+  category: computability-theory
+  companion: nondeterministic-recursive-padding-and-time-separation-examples
+  requires:
+    - effective-numberings-reductions-resources-and-randomness
+    - resource-bounds-and-machine-invariance
+    - robust-machine-models-and-universal-computation
+  items:
+    - def-nondeterministic-acceptance-time-and-exact-clock
+    - lem-nondeterministic-two-tape-simulation-with-linear-acceptance-time
+    - lem-prefix-program-codes-admit-linear-nondeterministic-universal-simulation
+    - lem-time-controlled-self-reference-for-nondeterministic-machines
+    - lem-clock-cutoffs-and-unions-preserve-nondeterministic-time-bounds
+    - lem-no-recursive-bound-covers-all-recursive-unary-languages
+    - thm-nondeterministic-recursive-padding-separation
+- order: 626.4
+  id: nondeterministic-recursive-padding-and-time-separation-examples
+  title: Nondeterministic Recursive Padding and Time Separation — Examples
+  kind: B
+  category: computability-theory
+  companion: nondeterministic-recursive-padding-and-time-separation
+  requires: [nondeterministic-recursive-padding-and-time-separation]
+  items:
+    - ex-nondeterministic-polynomial-logarithmic-time-separation
+    - ex-shortest-acceptance-and-clocked-all-branch-halting
+```
+
+The first definition distinguishes shortest accepting time from all-branch
+halting. The next four lemmas prove display/action verification, a concrete
+prefix-code interpreter, quantitative self-reference, and clock/union
+machines. None may invoke the later hierarchy theorem. Adapt prefix handling
+to the library's semi-infinite tapes explicitly; a fixed-code virtual prefix
+or a proved O(n+T) bound is acceptable when T>=n absorbs preprocessing.
+Prove the unary lemma by effective enumeration and finite bounded computation
+tree search, including arbitrary fixed time constants and short inputs.
+
+The final theorem supplies a binary language in nondeterministic O(T), for
+an exact clock T>=n, outside every O(a) with a>=n and a(n+1)=o(T(n)). Prove
+both recursive-padding inductions and the contradiction to the unary lemma.
+State every machine-dependent constant. Clock the accepting computation to
+obtain the library's all-branch convention. The B examples check a polynomial
+versus polynomial-logarithmic gap and illustrate the clock conversion.
+These are **commissioned proof obligations**, not proved prerequisites.
+
+Source route: Seiferas–Fischer–Meyer, *Separating Nondeterministic Time
+Complexity Classes*, pp.147–155, Lemmas 1–6, Theorem 4 and Corollary 4.1:
+https://www.researchgate.net/publication/220430544_Separating_Nondeterministic_Time_Complexity_Classes
+(author-uploaded full text read by Astra 5 and parent). The source's tape
+conventions and abbreviated simulation details require the local proofs above.
+Use only the identity-padding specialization needed here. No AC is needed.
+
+Direct published consumer: `thm-nondeterministic-time-hierarchy`, which must
+replace its external theorem invocation with the new separation theorem after
+publication. Its page `time-and-space-hierarchy-theorems` gains the new A
+prerequisite at Phase-3 cutover. The B page is a leaf. No new page enters the
+active wave; this pair waits in Phase 2. The A612.2 inventory remains gated
+on the newly required two-simulator construction, not an assumed joint bound.
 
 ### 53.2 Exact old-root cutover and published impact
 
@@ -3277,7 +3386,7 @@ consumer; its complete published impact is exactly the union stated in its
 row, reached through the new SAT/space A items.  These declarations cover
 every one of the thirty A and thirteen B items individually.
 
-### 53.3 Phase-3 published cleanup after the five pairs land
+### 53.3 Phase-3 published cleanup after the replacement suppliers land
 
 Published files remain immutable in Phase 2.  In Phase 3:
 
@@ -3336,3 +3445,8 @@ old IDs are covered; no new item path reaches a draft, Recorded/Not-Proved,
 or `deferred-set-theory-beyond-choice` item; and the post-Phase-3 reverse
 closure of every new interface equals the corresponding `Impact` union from
 §52.
+
+
+## U-C19 cross-track reconciliation: direct Boone simulation
+
+Binding group-theory pair `boone-machine-simulation-and-fixed-presentation-undecidability` / `boone-machine-simulation-and-fixed-presentation-undecidability-examples` at 610.1/610.2 supplies fixed finite-presentation undecidability. The complete 13+3 item scope and proof obligations are in the group-theory prose section “U-C19 reconciliation: direct Boone construction” and plan-spec.json. It consumes the published fixed halting recognizer and finite TM model, plus Phase-2 `def-turing-machine-initial-and-halting-configuration-interface`; it does not consume A609 recursive/computable equivalence, Higman embedding, or a recorded result. Its first lemma must give a finite compiler to the normalized machine; its semigroup lemma must prove reverse-rewriting correctness through stopping cleanup. Source: [Rotman Chapter12](https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf). This is a waiting supplier, not a published proof.

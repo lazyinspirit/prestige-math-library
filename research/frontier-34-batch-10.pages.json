@@ -1,0 +1,1120 @@
+[
+  {
+    "order": 458.007,
+    "id": "fundamental-solutions-newtonian-potentials-and-green-functions",
+    "kind": "A",
+    "category": "pde",
+    "title": "Fundamental Solutions Newtonian Potentials and Green Functions",
+    "companion": "fundamental-solutions-newtonian-potentials-and-green-functions-examples",
+    "requires": [
+      "maximum-principles-harnack-and-liouville-in-rn-examples",
+      "smooth-partitions-of-unity-and-exhaustions"
+    ],
+    "items": [
+      {
+        "id": "def-c-one-boundary-domain-outward-normal-and-surface-integral",
+        "kind": "definition",
+        "title": "Bounded C1 domains, outward normals and chart surface integrals",
+        "statement": "A domain is connected, nonempty and open. For n>=2, a bounded C1 domain is locally, after a rigid motion, {x_n<h(x\\prime)} with h in C1. Define nu=(-Dh,1)/sqrt(1+|Dh|^2), the chart density sqrt(det(Dpsi^t Dpsi)), and the surface integral using a finite ambient partition. C^k(closure Omega) means interior derivatives through order k extend continuously to the closure. Chart independence is proved below.",
+        "deps": [
+          "def-total-derivative-in-euclidean-space",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a71.10 Definition 1.35 and \u00a7\u00a71.10.2\u20131.10.3, pp.13\u201317"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-ambient-smooth-partition-near-a-compact-set",
+        "kind": "lemma",
+        "title": "A finite smooth partition near a compact set",
+        "statement": "For a finite open cover U_j of a compact K in R^n, construct nonnegative smooth chi_j with compact support in U_j and sum chi_j=1 on a neighborhood of K. The partition lives in ambient Euclidean space; no smooth structure on a merely C1 boundary is assumed.",
+        "deps": [
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set",
+          "thm-heine-borel-rn"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a71.9.2 Theorem 1.31 pp.12\u201313 (local construction expanded)"
+            }
+          ]
+        },
+        "strategy": "Shrink a finite ball cover of K inside the given cover, use Euclidean bumps, normalize their positive sum on a neighborhood of K, and multiply by a cutoff supported where the sum is positive. Group bumps by cover member."
+      },
+      {
+        "id": "lem-surface-integral-is-independent-of-boundary-charts",
+        "kind": "lemma",
+        "title": "Chart independence of the surface integral",
+        "statement": "The chart definition gives a finite Borel measure on a compact C1 boundary and is independent of charts and finite subordinate ambient partitions. It is additive, and integrates every continuous boundary function.",
+        "deps": [
+          "def-c-one-boundary-domain-outward-normal-and-surface-integral",
+          "lem-finite-ambient-smooth-partition-near-a-compact-set",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a71.10.2 pp.14\u201316; Theorem 1.44 p.17"
+            }
+          ]
+        },
+        "strategy": "On overlaps psi=theta composed with T. The Gram determinant transforms by |det DT|. Apply change of variables in n-1 dimensions, then insert the product partition chi_i eta_j. Extend the identity to nonnegative measurable integrands by monotone convergence."
+      },
+      {
+        "id": "lem-chart-surface-measure-agrees-with-polar-sphere-measure",
+        "kind": "lemma",
+        "title": "Chart surface measure equals the polar sphere measure",
+        "statement": "On S^(n-1), the chart measure dS agrees with the previously constructed polar measure sigma; |S^(n-1)|=n|B_1|. In particular dS on radius r spheres scales by r^(n-1).",
+        "deps": [
+          "lem-surface-integral-is-independent-of-boundary-charts",
+          "thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions",
+          "thm-polar-coordinates-formula-for-lebesgue-measure"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Proposition 1.45 and Example 1.43, pp.16\u201317"
+            }
+          ]
+        },
+        "strategy": "On a sphere chart psi, the map (r,t)->r psi(t) has absolute determinant r^(n-1) sqrt(det(Dpsi^t Dpsi)). Sum by a partition, compare the polar formula, and use its uniqueness. Include n=2 with |S^1|=2pi from the circle parametrization."
+      },
+      {
+        "id": "lem-divergence-flux-identity-on-a-c-one-graph-patch",
+        "kind": "lemma",
+        "title": "The flux identity on a C1 graph patch",
+        "statement": "For a C1 vector field F supported in a graph cylinder where Omega={x_n<h(x\\prime)}, the integral of div F equals the graph integral of F_n-sum_(i<n)F_i partial_i h. The density-weighted expression is F dot nu dS.",
+        "deps": [
+          "def-c-one-boundary-domain-outward-normal-and-surface-integral",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-newton-leibniz-with-interior-derivative",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-chain-rule-for-total-derivatives",
+          "thm-differentiation-under-the-integral-sign-on-a-compact-rectangle"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 1.46 and proof architecture, pp.17\u201318"
+            }
+          ]
+        },
+        "strategy": "Integrate the normal component by FTC. For each tangential component differentiate its integral from a fixed lower face to h(x\\prime), then integrate that compactly supported derivative to zero. This needs only first derivatives of h; do not differentiate a C1 cofactor matrix."
+      },
+      {
+        "id": "thm-divergence-theorem-for-bounded-c-one-euclidean-domains",
+        "kind": "theorem",
+        "title": "Divergence theorem on bounded C1 Euclidean domains",
+        "statement": "For bounded C1 Omega in R^n, n>=2, and F in C1(closure Omega;R^n), integral_Omega div F = integral_boundary F dot nu dS. The identity also holds for bounded open sets with compact C1 boundary, componentwise.",
+        "deps": [
+          "lem-surface-integral-is-independent-of-boundary-charts",
+          "lem-finite-ambient-smooth-partition-near-a-compact-set",
+          "lem-divergence-flux-identity-on-a-c-one-graph-patch"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 1.46 pp.17\u201318"
+            }
+          ]
+        },
+        "strategy": "Cover the compact closure by graph cylinders and interior patches. Apply the graph identity to chi_j F and the compact-support FTC identity in interior patches; sum, using sum chi_j=1 and sum Dchi_j=0."
+      },
+      {
+        "id": "cor-first-green-identity",
+        "kind": "corollary",
+        "title": "First Green identity",
+        "statement": "For a bounded C1 domain, u in C2(closure Omega), v in C1(closure Omega), integral_Omega(v Delta u+Du dot Dv)=integral_boundary v partial_nu u.",
+        "deps": [
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 2.23, equation (2.10), p.32"
+            }
+          ]
+        },
+        "strategy": "Apply divergence to v Du, with product rule and outward normal."
+      },
+      {
+        "id": "cor-second-green-identity",
+        "kind": "corollary",
+        "title": "Second Green identity",
+        "statement": "For u,v in C2(closure Omega) on a bounded C1 domain, integral_Omega(v Delta u-u Delta v)=integral_boundary(v partial_nu u-u partial_nu v).",
+        "deps": [
+          "cor-first-green-identity"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 2.23, equation (2.11), p.32"
+            }
+          ]
+        },
+        "strategy": "Subtract the two first identities."
+      },
+      {
+        "id": "def-fundamental-solution-of-a-constant-coefficient-operator",
+        "kind": "definition",
+        "title": "Fundamental solutions and translated poles",
+        "statement": "For L=sum a_alpha partial^alpha with real constant coefficients, E in D\\prime(R^n) is fundamental if LE=delta_0, with delta_y(phi)=phi(y). Define translation by tau_y E(phi)=E(phi(.+y)); L tau_y E=delta_y. Distributional derivatives use (-1)^|alpha| on tests. The evaluation and translated functionals are continuous in the published test topology.",
+        "deps": [
+          "def-distributional-harmonicity-and-poisson-equation-in-rn"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a72.6 p.34; \u00a73.3 pp.51\u201353"
+            }
+          ]
+        },
+        "strategy": "Verify continuity of evaluation, differentiation and translation directly from compact-support test convergence; finite sums define L."
+      },
+      {
+        "id": "def-laplace-fundamental-solution-with-positive-minus-laplacian-sign",
+        "kind": "definition",
+        "title": "The Laplace kernel for the positive minus-Laplacian",
+        "statement": "Write s_n=|S^(n-1)|. For n>=3 set Phi(x)=|x|^(2-n)/((n-2)s_n); for n=2 set Phi(x)=-(log|x|)/(2pi). Values at 0 are irrelevant to its regular distribution. The one-dimensional analogue is -|x|/2. The adjective positive refers to -Delta, not to the sign of the logarithmic function at every radius.",
+        "deps": [
+          "lem-chart-surface-measure-agrees-with-polar-sphere-measure"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a72.6 equations (2.12)\u2013(2.13), p.33"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-laplace-fundamental-solution-is-harmonic-off-its-pole",
+        "kind": "lemma",
+        "title": "Radial derivatives and harmonicity off the pole",
+        "statement": "For x!=0, D_i Phi=-x_i/(s_n|x|^n) and D_ij Phi=(n x_i x_j/|x|^2-delta_ij)/(s_n|x|^n), so Delta Phi=0. The formulas hold for n=2 as well.",
+        "deps": [
+          "def-laplace-fundamental-solution-with-positive-minus-laplacian-sign",
+          "thm-chain-rule-for-total-derivatives"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a72.6.1 equation (2.14), p.33"
+            }
+          ]
+        },
+        "strategy": "Differentiate the radial formula; sum the diagonal terms. The distributional Hessian will differ from the displayed off-pole function."
+      },
+      {
+        "id": "lem-laplace-fundamental-kernel-is-locally-integrable",
+        "kind": "lemma",
+        "title": "Local integrability of the kernel and its gradient",
+        "statement": "Phi and its off-pole gradient are in L1_loc. Near zero their absolute radial integrals are bounded by constants times integral_0^epsilon r dr (n>=3), integral_0^epsilon r|log r| dr (n=2), and integral_0^epsilon 1 dr for DPhi.",
+        "deps": [
+          "lem-laplace-fundamental-solution-is-harmonic-off-its-pole",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "thm-newton-leibniz-with-interior-derivative"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a72.6.1 p.33"
+            }
+          ]
+        },
+        "strategy": "Separate a ball about 0 and its complement; use polar coordinates and the explicit radial integrals."
+      },
+      {
+        "id": "lem-small-sphere-limits-for-the-laplace-fundamental-solution",
+        "kind": "lemma",
+        "title": "Small-sphere flux and vanishing boundary terms",
+        "statement": "On a sphere of radius epsilon with radially outward normal, integral partial_nu Phi=-1. For a C1 function a near 0, integral a partial_nu Phi -> -a(0), while integral Phi partial_nu a ->0. The latter is O(epsilon) for n>=3 and O(epsilon |log epsilon|) for n=2. The signs reverse for the inner normal of an excised domain.",
+        "deps": [
+          "lem-laplace-fundamental-solution-is-harmonic-off-its-pole",
+          "lem-chart-surface-measure-agrees-with-polar-sphere-measure"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a72.6.1 (2.15), \u00a72.7 (2.20)\u2013(2.22), pp.33,35\u201336"
+            }
+          ]
+        },
+        "strategy": "Use the exact radial derivative, subtract a(0), and bound the remaining terms by the modulus of continuity and bounded Da."
+      },
+      {
+        "id": "thm-minus-laplacian-of-the-fundamental-solution-is-dirac",
+        "kind": "theorem",
+        "title": "Minus the Laplacian of Phi is the Dirac distribution",
+        "statement": "The locally integrable function Phi satisfies -Delta T_Phi=delta_0 in D\\prime(R^n), n>=2.",
+        "deps": [
+          "def-fundamental-solution-of-a-constant-coefficient-operator",
+          "lem-laplace-fundamental-kernel-is-locally-integrable",
+          "lem-small-sphere-limits-for-the-laplace-fundamental-solution",
+          "cor-second-green-identity",
+          "thm-dominated-convergence"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a72.6.2 p.34 and Theorem 2.25 proof pp.35\u201336"
+            }
+          ]
+        },
+        "strategy": "For a compactly supported smooth test, excise a small ball in a larger ball containing its support. The outer terms vanish, the inner normal is minus the radial normal, and the two limits yield -integral Phi Delta phi=phi(0)."
+      },
+      {
+        "id": "lem-distributional-derivatives-commute-with-convolution-against-test-functions",
+        "kind": "lemma",
+        "title": "Distributional convolution with a test function",
+        "statement": "For T in D\\prime(R^n) and rho in C_c^infinity, (T*rho)(x)=T(rho(x-.)) is smooth and partial^alpha(T*rho)=(partial^alpha T)*rho=T*(partial^alpha rho). No convolution of two arbitrary distributions is claimed.",
+        "deps": [
+          "def-distributional-harmonicity-and-poisson-equation-in-rn",
+          "thm-multivariable-taylor-formula-with-lagrange-remainder"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a73.3 pp.51\u201353 (test topology and derivatives); test-convolution proof expanded locally"
+            }
+          ]
+        },
+        "strategy": "On each compact x-set all translated tests have one common compact support. Difference quotients converge in every test seminorm by Taylor/FTC, allowing continuity of T to pass each derivative. The derivative on T introduces a minus sign canceled by differentiation in the test variable."
+      },
+      {
+        "id": "def-newtonian-potential",
+        "kind": "definition",
+        "title": "Newtonian potentials and their admissibility classes",
+        "statement": "Define Nf(x)=integral_Rn Phi(x-y) f(y)dy wherever absolutely convergent. Initially f is bounded measurable with compact essential support. For compactly supported L1 data, Nf is the L1_loc equivalence class constructed below. Pointwise values for a general Lp representative are not assumed.",
+        "deps": [
+          "lem-laplace-fundamental-kernel-is-locally-integrable"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a72.7 equation (2.24), p.36"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-newtonian-potential-is-well-defined-for-compactly-supported-bounded-data",
+        "kind": "lemma",
+        "title": "Pointwise well-definedness for bounded compact sources",
+        "statement": "For bounded measurable compactly supported f, Nf is absolutely convergent for every x, locally bounded, and independent of changes to f on null sets.",
+        "deps": [
+          "def-newtonian-potential",
+          "lem-laplace-fundamental-kernel-is-locally-integrable",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-borel-representatives-make-the-convolution-integrand-borel-measurable",
+          "thm-completion-measurable-functions-have-base-measurable-representatives"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a72.6.1 p.33; \u00a72.7 (2.24), p.36"
+            }
+          ]
+        },
+        "strategy": "Choose a Borel representative, bounded with the same compact essential support, using the completion representative theorem. The product-measurability lemma applies to the Borel kernel and this source. On compact sets of x, all x-y lie in a fixed bounded ball. Bound by ||f||_infinity integral of |Phi| there. Translation preserves null sets, so equality of representatives holds at every x."
+      },
+      {
+        "id": "lem-newtonian-potential-of-a-compact-l-one-source-is-locally-integrable",
+        "kind": "lemma",
+        "title": "Local integrability for compact L1 sources",
+        "statement": "For f in L1 with compact essential support, integral_K integral |Phi(x-y) f(y)| dy dx < infinity for every compact K. Thus Nf exists almost everywhere and defines an L1_loc class independently of representatives. This includes compact Lp sources for 1<=p<=infinity; it does not assert everywhere finiteness for all such p.",
+        "deps": [
+          "def-newtonian-potential",
+          "lem-laplace-fundamental-kernel-is-locally-integrable",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "lem-borel-representatives-make-the-convolution-integrand-borel-measurable",
+          "thm-completion-measurable-functions-have-base-measurable-representatives",
+          "thm-holder-inequality-for-integrals"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a72.7 (2.24) and compact integrable density discussion p.36; Tonelli extension made explicit"
+            }
+          ]
+        },
+        "strategy": "Use a compactly supported Borel representative and the published product-measurability lemma before Tonelli. The inner integral over K of |Phi(x-y)| is uniformly bounded for y in the compact support; Tonelli bounds the double integral by C_K ||f||_1. Holder supplies Lp subset L1 on finite measure supports."
+      },
+      {
+        "id": "thm-newtonian-potential-solves-poisson-distributionally",
+        "kind": "theorem",
+        "title": "Newtonian potentials solve Poisson distributionally",
+        "statement": "For compactly supported f in Lp(R^n), 1<=p<=infinity, Nf in L1_loc satisfies -Delta(Nf)=f in D\\prime. In particular this holds for continuous compactly supported f.",
+        "deps": [
+          "lem-newtonian-potential-of-a-compact-l-one-source-is-locally-integrable",
+          "thm-minus-laplacian-of-the-fundamental-solution-is-dirac",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 2.25 pp.34\u201336, extended by the displayed absolute Fubini estimate"
+            }
+          ]
+        },
+        "strategy": "Bound the absolute double integral with Delta phi and compact support, exchange integrals by Fubini, and evaluate the translated fundamental-solution identity. No singular Hessian is differentiated under an absolute integral."
+      },
+      {
+        "id": "lem-newtonian-potentials-of-test-functions-are-smooth",
+        "kind": "lemma",
+        "title": "Smooth source differentiation on the source factor",
+        "statement": "For f in C_c^infinity, Nf is smooth, partial^alpha Nf=Phi*(partial^alpha f), and -Delta Nf=f pointwise.",
+        "deps": [
+          "lem-distributional-derivatives-commute-with-convolution-against-test-functions",
+          "lem-laplace-fundamental-kernel-is-locally-integrable",
+          "thm-newtonian-potential-solves-poisson-distributionally"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 2.25 and equation (2.17), pp.34\u201335"
+            }
+          ]
+        },
+        "strategy": "View Phi as its regular distribution and differentiate the test factor."
+      },
+      {
+        "id": "lem-cancelled-hessian-formula-for-newtonian-potentials",
+        "kind": "lemma",
+        "title": "The cancelled Hessian formula and its spherical term",
+        "statement": "For f in C_c^infinity and B_R(x) containing its support, D_ij Nf(x)=integral_B_R(x) D_ij Phi(x-y)(f(y)-f(x))dy-delta_ij f(x)/n. Equivalently use any smooth region containing x and the support with its explicit boundary term.",
+        "deps": [
+          "lem-newtonian-potentials-of-test-functions-are-smooth",
+          "lem-laplace-fundamental-solution-is-harmonic-off-its-pole",
+          "cor-second-green-identity",
+          "lem-small-sphere-limits-for-the-laplace-fundamental-solution",
+          "lem-chart-surface-measure-agrees-with-polar-sphere-measure",
+          "thm-dominated-convergence"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 2.26 and Corollary 2.27, pp.37\u201339"
+            }
+          ]
+        },
+        "strategy": "Integrate twice on an excised region and subtract f(x) before passage to the limit. Rotational symmetry gives integral sphere omega_i omega_j = s_n delta_ij/n. Keep the -delta_ij f(x)/n term."
+      },
+      {
+        "id": "def-compactly-supported-holder-data-for-newtonian-potentials",
+        "kind": "definition",
+        "title": "Compactly supported Holder data",
+        "statement": "For 0<alpha<=1, f in C_c^(0,alpha)(R^n) is compactly supported continuous with [f]_alpha=sup_(x!=y)|f(x)-f(y)|/|x-y|^alpha finite. This is a pointwise global Holder condition, including across the support boundary.",
+        "deps": [
+          "def-lipschitz-holder-contraction",
+          "def-real-power"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a71.3 pp.2\u20133"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-newtonian-potential-for-holder-data-is-classical",
+        "kind": "theorem",
+        "title": "Holder sources give classical Newtonian potentials",
+        "statement": "For n>=2, 0<alpha<=1 and f in C_c^(0,alpha), Nf belongs to C2(R^n), satisfies -Delta Nf=f pointwise, and obeys the cancelled Hessian formula above.",
+        "deps": [
+          "def-compactly-supported-holder-data-for-newtonian-potentials",
+          "lem-cancelled-hessian-formula-for-newtonian-potentials",
+          "lem-newtonian-potential-is-well-defined-for-compactly-supported-bounded-data",
+          "thm-dominated-convergence",
+          "def-radial-mollifier-family-in-rn"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a72.7.1 pp.37\u201339 and \u00a72.7.2 opening pp.39\u201340"
+            }
+          ]
+        },
+        "strategy": "Mollify f with a common compact support and uniformly bounded Holder seminorms. Split the Hessian integral at radius delta: its inner part is O(delta^alpha), uniformly in the mollification; on the complement use uniform convergence. The potentials and their first two derivatives converge locally uniformly; prove derivative identification by the FTC on coordinate segments. Do not assert smooth density in the same Holder norm."
+      },
+      {
+        "id": "thm-decay-of-the-newtonian-potential-of-compactly-supported-data",
+        "kind": "theorem",
+        "title": "Far-field asymptotics and the zero-mass improvement",
+        "statement": "For compactly supported f in L1 and mass m=integral f, Nf(x)=m Phi(x)+O(|x|^(1-n)) for n>=3 and Nf(x)=-(m/(2pi))log|x|+O(|x|^-1) for n=2. If m=0 these remainder bounds are the leading bounds. Constants may depend on the compact support and integral |y f(y)|.",
+        "deps": [
+          "lem-newtonian-potential-of-a-compact-l-one-source-is-locally-integrable",
+          "lem-laplace-fundamental-solution-is-harmonic-off-its-pole",
+          "cor-mean-value-theorem"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a72.7 pp.36\u201337, with zero-mass remainder from the displayed kernel derivative"
+            }
+          ]
+        },
+        "strategy": "For |x| larger than twice the support radius, expand Phi(x-y)-Phi(x) by the one-dimensional FTC along x-ty and bound DPhi uniformly. The n=2 logarithmic case is separate."
+      },
+      {
+        "id": "def-dirichlet-green-function-for-minus-laplacian",
+        "kind": "definition",
+        "title": "A Dirichlet Green function is a conditional object",
+        "statement": "For a bounded domain Omega and each pole y in Omega, G(x,y)=Phi(x-y)+h_y(x), where h_y is harmonic throughout Omega and continuous on its closure, and G(.,y) is continuous on closure Omega minus {y} and zero on every boundary point. Existence is not asserted. A boundary-regular Green family additionally has h_y in C1(closure Omega); stronger regularity needed to invoke a stated Green identity must be supplied.",
+        "deps": [
+          "def-laplace-fundamental-solution-with-positive-minus-laplacian-sign",
+          "def-fundamental-solution-of-a-constant-coefficient-operator",
+          "def-laplacian-of-a-c2-function"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford Math 220B, Green\u2019s Functions",
+              "url": "https://web.stanford.edu/class/math220b/handouts/greensfcns.pdf",
+              "locator": "\u00a74.1 (4.4)\u2013(4.7), pp.2\u20133"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-dirichlet-green-function-is-unique-and-positive",
+        "kind": "lemma",
+        "title": "Conditional uniqueness and positivity of Green functions",
+        "statement": "A Dirichlet Green function in the stated class is unique. On a bounded connected domain, if it exists, G(x,y)>0 for x!=y, in dimensions n>=2.",
+        "deps": [
+          "def-dirichlet-green-function-for-minus-laplacian",
+          "thm-weak-maximum-principle-for-the-laplacian",
+          "thm-strong-maximum-principle-for-harmonic-functions",
+          "lem-laplace-fundamental-solution-is-harmonic-off-its-pole",
+          "thm-open-connected-subsets-of-rn-are-polygonally-connected"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Harmonic functions",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f12/harmonic.pdf",
+              "locator": "\u00a77 Green\u2019s function approach, pp.9\u201311"
+            }
+          ]
+        },
+        "strategy": "Differences of the harmonic corrections vanish on the boundary, so maximum principle gives uniqueness. Excise a sufficiently small ball about y, where Phi+h_y is positive, and use the minimum principle. Strict positivity uses connectedness of a punctured Euclidean domain for n>=2, proved by perturbing a polygonal path around the point."
+      },
+      {
+        "id": "thm-green-function-symmetry",
+        "kind": "theorem",
+        "title": "Symmetry of a boundary-regular Green family",
+        "statement": "On a bounded C1 domain, a Dirichlet Green family with corrections h_y in C2(closure Omega) satisfies G(x,y)=G(y,x). The intended extension to corrections merely C1 up to the boundary requires the limiting Green identity flagged in the notes.",
+        "deps": [
+          "def-dirichlet-green-function-for-minus-laplacian",
+          "cor-second-green-identity",
+          "lem-small-sphere-limits-for-the-laplace-fundamental-solution"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford Math 220B, Green\u2019s Functions",
+              "url": "https://web.stanford.edu/class/math220b/handouts/greensfcns.pdf",
+              "locator": "Lemma 13 and complete proof, pp.12\u201314"
+            }
+          ]
+        },
+        "strategy": "Apply the second identity to G(.,x) and G(.,y) on Omega minus two disjoint small closed balls. The outer boundary contributes zero. At each pole the smooth other kernel contributes its value through the normalized inner flux; the remaining O(epsilon) or O(epsilon |log epsilon|) terms vanish."
+      },
+      {
+        "id": "def-poisson-kernel-from-a-green-function",
+        "kind": "definition",
+        "title": "The Poisson kernel with the outward normal sign",
+        "statement": "For a symmetric Green family with the necessary C1 boundary regularity, P_Omega(x,z)=-partial_(nu_z)G(x,z), z in boundary Omega, differentiating the second spatial variable. No normal derivative is asserted for arbitrary rough boundary or arbitrary Green family.",
+        "deps": [
+          "def-dirichlet-green-function-for-minus-laplacian",
+          "thm-green-function-symmetry",
+          "def-c-one-boundary-domain-outward-normal-and-surface-integral"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford Math 220B, Green\u2019s Functions",
+              "url": "https://web.stanford.edu/class/math220b/handouts/greensfcns.pdf",
+              "locator": "\u00a74.1 (4.7)\u2013(4.8), pp.3\u20135"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-green-representation-formula",
+        "kind": "theorem",
+        "title": "Green representation with explicit regularity obligations",
+        "statement": "Design target retained: for u in C2(Omega) intersect C1(closure Omega), u(x)=integral_Omega G(x,y)(-Delta u(y))dy+integral_boundary P(x,z)u(z)dS(z), whenever the stated Green family has the requisite boundary regularity. This target is BLOCKED as an ordinary Lebesgue-integral statement without an integrability hypothesis or a proved improper-integral convention. The fully justified starting case is u and the harmonic corrections in C2(closure Omega).",
+        "deps": [
+          "cor-second-green-identity",
+          "lem-small-sphere-limits-for-the-laplace-fundamental-solution",
+          "def-poisson-kernel-from-a-green-function",
+          "lem-laplace-fundamental-kernel-is-locally-integrable",
+          "thm-dominated-convergence"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford Math 220B, Green\u2019s Functions",
+              "url": "https://web.stanford.edu/class/math220b/handouts/greensfcns.pdf",
+              "locator": "Theorem 3 pp.1\u20135; Simon Chapter 4 pp.34\u201336"
+            }
+          ]
+        },
+        "strategy": "For the starting case, apply Green 2 on a once-punctured domain and pass to the small-sphere limit. Preserve the full C2(interior)/C1(closure) target as a fatal open obligation; do not quietly replace it by the starting case. Prove an appropriate boundary-exhaustion/Green identity and state the volume-integral meaning before authoring.",
+        "scaffold_blocker": "F3: the design omits integrability at the exterior boundary and the extension of Green identities below C2 up to the boundary."
+      },
+      {
+        "id": "cor-zero-dirichlet-green-representation-for-poisson-data",
+        "kind": "corollary",
+        "title": "Zero boundary data give the Green volume operator",
+        "statement": "Under the hypotheses and integral convention of Green representation, if u=0 on the boundary and -Delta u=f, then u(x)=integral_Omega G(x,y)f(y)dy. It inherits the representation blocker until that target is closed.",
+        "deps": [
+          "thm-green-representation-formula"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford Math 220B, Green\u2019s Functions",
+              "url": "https://web.stanford.edu/class/math220b/handouts/greensfcns.pdf",
+              "locator": "Equation (4.7) p.3"
+            }
+          ]
+        },
+        "strategy": "Set the boundary datum to zero; do not infer existence of a solution from a representation of an existing solution."
+      },
+      {
+        "id": "lem-neumann-compatibility-from-the-divergence-theorem",
+        "kind": "lemma",
+        "title": "Necessary compatibility for the Neumann problem",
+        "statement": "On a bounded C1 domain, a C2(closure Omega) solution of -Delta u=f and partial_nu u=g satisfies integral_Omega f=-integral_boundary g. This is necessity only.",
+        "deps": [
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a72.5 p.32; \u00a71.12 p.17"
+            }
+          ]
+        },
+        "strategy": "Apply divergence to Du with the adopted sign."
+      },
+      {
+        "id": "cor-neumann-solutions-are-unique-modulo-componentwise-constants",
+        "kind": "corollary",
+        "title": "Neumann uniqueness modulo componentwise constants",
+        "statement": "Two C2(closure Omega) solutions with the same f and normal data on a bounded C1 open set differ by a constant on each connected component; on a domain there is one constant.",
+        "deps": [
+          "cor-first-green-identity",
+          "thm-zero-derivative-on-connected-open-euclidean-set-iff-constant"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 2.24 p.32"
+            }
+          ]
+        },
+        "strategy": "For their difference w, Green 1 gives integral |Dw|^2=0. Continuity makes Dw=0 pointwise and connectedness gives constancy."
+      },
+      {
+        "id": "cor-classical-dirichlet-and-poisson-problems-are-unique",
+        "kind": "corollary",
+        "title": "Uniqueness for classical Dirichlet and Poisson boundary problems",
+        "statement": "On bounded domains, two C2(interior) functions continuous on the closure with the same Poisson source and Dirichlet trace agree. For the Neumann problem in the C2(closure) class, equality is up to componentwise constants and the source/normal compatibility condition is necessary.",
+        "deps": [
+          "thm-weak-maximum-principle-for-the-laplacian",
+          "cor-neumann-solutions-are-unique-modulo-componentwise-constants",
+          "lem-neumann-compatibility-from-the-divergence-theorem"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "Theorem 2.24 p.32"
+            }
+          ]
+        },
+        "strategy": "Apply the maximum principle to the harmonic difference and its negative; cite the energy and compatibility results for Neumann data."
+      },
+      {
+        "id": "rem-euclidean-divergence-versus-general-stokes",
+        "kind": "remark",
+        "title": "Euclidean C1 divergence and the manifold Stokes seam",
+        "statement": "This page proves the Euclidean C1 graph theorem locally. General smooth manifold Stokes and the previously published three-dimensional elementary-solid theorem have different interfaces. They are orientation only here; neither substitutes for the proof above.",
+        "deps": [
+          "thm-divergence-theorem-for-bounded-c-one-euclidean-domains"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a71.12 pp.17\u201318"
+            }
+          ]
+        }
+      }
+    ],
+    "scaffold_status": "blocked",
+    "conventions": "Real scalars; n>=2 unless the interval example explicitly uses n=1; outward normal; -Delta Phi=delta_0; Ck(closure) means continuous extension of derivatives. The local Lebesgue/polar/change-of-variables route inherits Countable Choice; no minimal axiom-strength claim for the full page closure is certified."
+  },
+  {
+    "order": 458.008,
+    "id": "fundamental-solutions-newtonian-potentials-and-green-functions-examples",
+    "kind": "B",
+    "category": "pde",
+    "title": "Fundamental Solutions Newtonian Potentials and Green Functions \u2014 Examples",
+    "companion": "fundamental-solutions-newtonian-potentials-and-green-functions",
+    "requires": [
+      "fundamental-solutions-newtonian-potentials-and-green-functions"
+    ],
+    "items": [
+      {
+        "id": "ex-flux-of-the-laplace-fundamental-solution",
+        "kind": "example",
+        "title": "The unit outward flux is the flux of minus DPhi",
+        "statement": "For every r>0, integral_(partial B_r) (-DPhi) dot nu=1, while integral DPhi dot nu=-1. For n=3 this is the inverse-square field with factor 1/(4pi).",
+        "deps": [
+          "lem-small-sphere-limits-for-the-laplace-fundamental-solution"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "(2.14)\u2013(2.15), p.33"
+            }
+          ]
+        },
+        "strategy": "Insert DPhi=-x/(s_n|x|^n) and the area s_n r^(n-1)."
+      },
+      {
+        "id": "ex-two-dimensional-logarithmic-kernel-has-unit-normalised-flux",
+        "kind": "example",
+        "title": "The separate logarithmic flux check",
+        "statement": "For n=2, Phi=-(log r)/(2pi), so -partial_r Phi=1/(2pi r); integrating over a circle gives 1. The small-circle term with Phi times a bounded normal derivative is O(r|log r|).",
+        "deps": [
+          "lem-small-sphere-limits-for-the-laplace-fundamental-solution"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "(2.12), (2.15), and (2.21), pp.33,35"
+            }
+          ]
+        },
+        "strategy": "Compute the circle length and logarithmic derivative directly."
+      },
+      {
+        "id": "ex-newtons-shell-theorem-from-the-mean-property",
+        "kind": "example",
+        "title": "The Newtonian potential of a spherical shell",
+        "statement": "For n>=3, R>0 and mass m uniformly distributed on S_R, its potential at |x|>R equals m Phi(x). Inside it equals m Phi(R). Surface potential is well-defined away from the shell; the boundary value may be obtained by continuity or direct integrability.",
+        "deps": [
+          "lem-laplace-fundamental-solution-is-harmonic-off-its-pole",
+          "lem-chart-surface-measure-agrees-with-polar-sphere-measure",
+          "thm-spherical-mean-value-property-for-harmonic-functions",
+          "thm-weak-maximum-principle-for-the-laplacian"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a72.6.2 physical superposition p.34; \u00a72.1 mean-value theorem"
+            }
+          ]
+        },
+        "strategy": "For exterior x, average the harmonic function y->Phi(x-y) over the sphere. For interior x, rotational invariance makes the shell potential radial and harmonic; boundedness at 0 forces a constant, whose value is calculated at 0. No B result is a spine supplier."
+      },
+      {
+        "id": "ex-newtonian-potential-of-a-radial-density",
+        "kind": "example",
+        "title": "One-dimensional integrals for a radial source",
+        "statement": "For bounded compactly supported f(y)=q(|y|), n>=3, Nf(r)=1/(n-2)[r^(2-n) integral_0^r q(s)s^(n-1)ds+integral_r^infinity q(s)s ds]. For n=2, Nf(r)=-log r integral_0^r q(s)s ds-integral_r^infinity q(s)s log s ds. Define the values at r=0 by limits.",
+        "deps": [
+          "lem-newtonian-potential-is-well-defined-for-compactly-supported-bounded-data",
+          "ex-newtons-shell-theorem-from-the-mean-property",
+          "thm-polar-coordinates-formula-for-lebesgue-measure"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a72.7 (2.24), p.36; \u00a72.1 mean value"
+            }
+          ]
+        },
+        "strategy": "Use polar integration and the shell mean. For n=2 independently show the circular average of log|x-s omega| is log(max(r,s)) away from r=s, via harmonic radiality and its value/asymptotic normalization; the diagonal shell radius is a null integration set."
+      },
+      {
+        "id": "cex-second-derivatives-of-the-fundamental-solution-are-not-locally-integrable-absolutely",
+        "kind": "counterexample",
+        "title": "The Hessian kernel is not absolutely locally integrable",
+        "statement": "For each pair i,j and n>=2, the off-pole D_ij Phi has a nonzero continuous angular factor times r^-n, and integral_(B_epsilon)|D_ij Phi|=infinity. Thus twice differentiating a potential by an absolute Hessian-kernel integral is invalid even for a source constant near its evaluation point.",
+        "deps": [
+          "lem-laplace-fundamental-solution-is-harmonic-off-its-pole",
+          "thm-polar-coordinates-formula-for-lebesgue-measure"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a72.6.1 p.33 and \u00a72.7.1 p.38"
+            }
+          ]
+        },
+        "strategy": "Find an open spherical cap on which the angular factor is bounded away from zero. The radial integral is integral_0^epsilon dr/r=infinity. The nonzero angular factor, not an O(r^-n) upper bound alone, proves divergence."
+      },
+      {
+        "id": "cex-green-functions-need-not-exist-with-the-naive-boundary-regularity",
+        "kind": "counterexample",
+        "title": "An isolated boundary point obstructs pointwise-zero Green data",
+        "statement": "For n>=2, Omega=B_1(0) minus {0} admits no Green family in the class demanding continuity and zero values at every boundary point. This does not deny existence of a potential-theoretic Green function with weaker boundary requirements.",
+        "deps": [
+          "def-dirichlet-green-function-for-minus-laplacian",
+          "lem-dirichlet-green-function-is-unique-and-positive",
+          "cor-removable-singularity-for-bounded-harmonic-functions",
+          "thm-strong-maximum-principle-for-harmonic-functions"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gantumur, Harmonic functions",
+              "url": "https://www.math.mcgill.ca/gantumur/math580f12/harmonic.pdf",
+              "locator": "\u00a77 boundary conditions and \u00a78 Theorem 17 removable singularities, pp.9\u201314"
+            }
+          ]
+        },
+        "strategy": "Fix y!=0. If G existed, its zero continuous limit at 0 would give a bounded harmonic removable singularity there. Its extension has the interior minimum 0 in a small ball avoiding y, contradicting strict positivity. No Wiener criterion is assumed."
+      },
+      {
+        "id": "cex-neumann-poisson-problem-needs-the-compatibility-condition",
+        "kind": "counterexample",
+        "title": "Constant positive source and zero Neumann trace are incompatible",
+        "statement": "On the unit ball, -Delta u=1 and partial_nu u=0 have no C2(closure) solution because |B_1|>0 contradicts the necessary compatibility condition.",
+        "deps": [
+          "lem-neumann-compatibility-from-the-divergence-theorem",
+          "lem-chart-surface-measure-agrees-with-polar-sphere-measure"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a72.5 p.32; \u00a71.12 p.17"
+            }
+          ]
+        },
+        "strategy": "Integrate the equation and compare the nonzero volume with zero boundary flux."
+      },
+      {
+        "id": "ex-one-dimensional-green-function-on-an-interval",
+        "kind": "example",
+        "title": "The interval Green kernel and its derivative jump",
+        "statement": "For a<b, G(x,y)=(min(x,y)-a)(b-max(x,y))/(b-a). It is symmetric, continuous, zero at both endpoints, affine on each side of y, and partial_x G(y+,y)-partial_x G(y-,y)=-1. Consequently -partial_x^2 G=delta_y.",
+        "deps": [
+          "def-fundamental-solution-of-a-constant-coefficient-operator",
+          "thm-newton-leibniz-with-interior-derivative"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Stanford Math 220B, Green\u2019s Functions",
+              "url": "https://web.stanford.edu/class/math220b/handouts/greensfcns.pdf",
+              "locator": "\u00a74.1 equations (4.2),(4.4),(4.7); one-dimensional construction from the defining ODE"
+            }
+          ]
+        },
+        "strategy": "Compute both slopes, their jump and endpoint values. Integrate twice against a test separately on (a,y) and (y,b); the jump yields the Dirac mass with the correct sign."
+      },
+      {
+        "id": "ex-adding-a-harmonic-function-preserves-a-fundamental-solution",
+        "kind": "example",
+        "title": "Adding an entire harmonic function preserves a fundamental solution",
+        "statement": "If -Delta E=delta_0 and h is an entire classical harmonic function, then E+T_h is another fundamental solution. Taking h=1 gives distinct solutions. A fundamental solution is not made unique by its defining equation.",
+        "deps": [
+          "def-fundamental-solution-of-a-constant-coefficient-operator",
+          "thm-minus-laplacian-of-the-fundamental-solution-is-dirac",
+          "cor-second-green-identity"
+        ],
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a72.6 fundamental-solution definition; \u00a72.5 Green identity"
+            }
+          ]
+        },
+        "strategy": "For compact tests, Green 2 on a large ball proves Delta T_h=0; use linearity. This does not preserve a prescribed Dirichlet boundary condition for G."
+      },
+      {
+        "id": "cex-c-one-boundary-regularity-does-not-ensure-absolute-green-volume-integrability",
+        "kind": "counterexample",
+        "title": "C1 boundary regularity does not ensure absolute Green volume integrability",
+        "statement": "On the unit ball in dimension n>=2 there is u in C2(B_1) intersect C1(closure B_1), zero together with its gradient on the boundary, for which integral_B_1 |G(0,y) Delta u(y)|dy=infinity, where G(0,y)=Phi(y)-Phi(1). Thus the design target needs a proved improper-integral convention or an extra integrability hypothesis.",
+        "deps": [
+          "def-dirichlet-green-function-for-minus-laplacian",
+          "lem-laplace-fundamental-solution-is-harmonic-off-its-pole",
+          "lem-laplace-fundamental-kernel-is-locally-integrable",
+          "thm-newton-leibniz-with-interior-derivative",
+          "thm-polar-coordinates-formula-for-lebesgue-measure",
+          "lem-euclidean-bump-for-a-compact-set-inside-an-open-set"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Hunter, Notes on Partial Differential Equations",
+              "url": "https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf",
+              "locator": "\u00a72.6 radial kernel and \u00a72.5 Green identities; explicit local counterexample to the lower-regularity extension"
+            }
+          ]
+        },
+        "strategy": "Put t=1-|y| near the boundary and set u(y)=chi(t) integral_0^t s sin(s^-3)ds, with chi=1 near 0 and supported in a small boundary collar. Set u=0 away from the collar. Its t derivative is t sin(t^-3), tending to 0, and its second derivative is sin(t^-3)-3t^-3 cos(t^-3). The radial Laplacian differs from this by a bounded term. The explicit zero-pole Green correction is constant, and G(0,y) is comparable to t. Polar integration reduces the absolute divergence to integral_0^epsilon t^-2 |cos(t^-3)|dt. Substitution z=t^-3 yields a positive multiple of integral z^-2/3 |cos z|dz, divergent by fixed-length intervals about 2pi k. This is a local calculus consequence of the kernel, not a citation of a source counterexample."
+      }
+    ],
+    "scaffold_status": "blocked"
+  }
+]

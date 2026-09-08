@@ -24,17 +24,20 @@ parts:
       - the-duality-of-lp-and-lq
       - the-maximal-function-and-lebesgue-differentiation
       - radon-measures-and-the-riesz-markov-kakutani-theorem
+      - complex-lp-spaces-and-test-function-conventions
       - differentiation-of-monotone-functions-and-the-vitali-covering-theorem
       - absolute-continuity-and-the-sharp-fundamental-theorem-of-calculus
 ---
 
 ## sigma-algebras-and-borel-sets
 
-A sigma-algebra supplies the closure for countable additivity; outer measure and Carathéodory
-build Lebesgue measure, measurable functions, and integration. Convergence, products, signed
+A sigma-algebra supplies closure for countable additivity; outer measure and Carathéodory build
+Lebesgue measure, measurable functions, and integration. Convergence, products, signed
 measures, Radon--Nikodym decomposition, the $L^p$ inequalities, density, convolution, and
-$L^p$--$L^q$ duality make this an analytic calculus. Riesz--Markov represents positive
-functionals by Radon measures, while Vitali covering, maximal estimates, and differentiation
-lead to the $L^1$ FTC and Banach--Zarecki. The Hausdorff-measure page adds diameter-power covers,
-the critical exponent, Lipschitz comparison, Euclidean normalisations, and mass-distribution
-computations for Cantor and digit-restriction sets, with its stated Countable Choice convention.
+$L^p$--$L^q$ duality make an analytic calculus. Riesz--Markov, Vitali covering, maximal
+estimates, differentiation, and Hausdorff measure lead to the stated representation, FTC,
+and dimension results. The complex $L^p$ page fixes measurable-component and almost-everywhere
+conventions, proves the first-variable-linear $L^2$ interface, and gives finite-$p$ density
+and duality tests under their sigma-finite or semifinite hypotheses. Its complex translation
+and convolution estimates give the stated approximation results without a general
+infinity-norm assertion.

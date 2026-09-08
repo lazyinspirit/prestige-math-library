@@ -1,0 +1,2264 @@
+[
+  {
+    "order": 657,
+    "id": "deduction-soundness-completeness-and-compactness",
+    "kind": "A",
+    "category": "foundations",
+    "title": "Deduction, Soundness, Completeness, and Compactness",
+    "companion": "deduction-soundness-completeness-and-compactness-examples",
+    "requires": [
+      "formal-set-theoretic-syntax-structures-and-satisfaction",
+      "countability-and-uncountability",
+      "cardinal-arithmetic-and-cofinality"
+    ],
+    "items": [
+      {
+        "id": "def-set-coded-formal-derivation",
+        "kind": "definition",
+        "title": "Formal proofs from sentence theories",
+        "deps": [
+          "def-set-coded-terms-and-formulas",
+          "def-theories-models-and-semantic-consequence",
+          "def-free-variables-and-syntactic-substitution"
+        ],
+        "statement": "For a set signature L and sentence theory T, a proof is a finite annotated list of assumptions, logical axiom instances, or applications of MP, universal generalization or restricted existential elimination. Existential introduction is an explicit free-for axiom. Use the published primitive negation, conjunction and existential syntax; domains are nonempty.",
+        "strategy": "Specify Boolean tautology instances, free-for universal instantiation, restricted universal distribution, free-for existential introduction, t=t and free-for formula substitution for equality. Rules: MP; phi/forall x phi; phi→psi / (exists x phi→psi) when x is not free in psi. Finite proof annotations name earlier lines and rule parameters. Sentence assumptions support both quantifier rules; open-assumption soundness/discharge must guard variables in both. No semantic completeness or quantified rewrite is assumed.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Moschovakis, Lecture Notes in Logic (2014), §1H.1–1H.2, printed pp34–35, axioms (9)–(11), rules (12)–(14); equality adapted to free-for formula substitution. Full text read for owner-requested primitive-existential repair."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "def-first-order-syntactic-consistency",
+        "kind": "definition",
+        "title": "Consistency and syntactic completeness",
+        "deps": [
+          "def-set-coded-formal-derivation"
+        ],
+        "statement": "Fix the contradictory sentence ⊥ := ∃x¬(x=x). T is consistent iff T does not prove ⊥, and syntactically complete iff for each sentence σ it proves σ or ¬σ. An expanded-language theory U extending T is conservative over T if every original-language sentence provable from U is already provable from T.",
+        "strategy": "Keep syntactic consistency separate from existence of a set model until model existence is proved; T need not be deductively closed.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Moschovakis, Lecture Notes in Logic, Definition 1H.11, printed p38; fixed-bottom convention adapted."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-derivation-finite-support-and-concatenation",
+        "kind": "lemma",
+        "title": "Finite support, weakening, and composition of derivations",
+        "deps": [
+          "def-set-coded-formal-derivation",
+          "thm-induction-principle",
+          "def-first-order-syntactic-consistency"
+        ],
+        "statement": "Every derivation uses finitely many assumptions; proof weakening and substitution of proofs for proved premises preserve derivability. An increasing union of consistent sentence theories is consistent.",
+        "strategy": "Track finite assumption support through all three inference rules. Concatenate proofs and renumber references; sentence assumptions preserve quantifier side conditions. A finite subset of a nonempty increasing chain union lies in one member. For an empty chain prove empty-theory consistency locally: assign every atom value 1, use classical Boolean values and give exists x phi the value of phi. This valuation preserves free-for substitution and validates every axiom and all three rules, but gives bottom=exists x not(x=x) value 0. Do not cite later soundness. No choice.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Moschovakis, Lemma 1H.3 pp35–36 and Lemma 1H.12 p38; local all-three-rule and empty-chain arguments."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-hilbert-propositional-and-equality-rules",
+        "kind": "lemma",
+        "title": "Derived propositional, quantifier and equality rules",
+        "deps": [
+          "def-set-coded-formal-derivation"
+        ],
+        "statement": "Derive identity, explosion, contraposition, double negation, conjunction rules, equality symmetry/transitivity/formula substitution, free-for existential introduction by its axiom and MP, and fresh-variable universal renaming. Also derive existential monotonicity and exists x not-not phi iff exists x phi before using replacement under a quantifier.",
+        "strategy": "Give tautology and MP steps; use equality substitution for symmetry/transitivity. Existential introduction is the displayed axiom, not contraposition of universal instantiation. For existential monotonicity compose phi→psi with psi→exists x psi, then eliminate x from the antecedent; x is not free in exists x psi. Apply this to both Boolean double-negation implications. Universal renaming uses instantiation and generalization with free-for restrictions. No completeness argument.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Moschovakis, §§1H.5–1H.10 pp36–38; explicit local derivations for the adapted axiom schemes."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-first-order-sentence-deduction",
+        "kind": "theorem",
+        "title": "Deduction theorem for sentence assumptions",
+        "deps": [
+          "lem-derivation-finite-support-and-concatenation",
+          "lem-hilbert-propositional-and-equality-rules",
+          "def-set-coded-formal-derivation"
+        ],
+        "statement": "For sentence sigma and any formula phi, T union {sigma} proves phi iff T proves sigma→phi. Open-assumption discharge requires that no variable generalized or existentially eliminated in the proof be free in the discharged assumption.",
+        "strategy": "Induct on proof length including every rule. For generalization use the restricted universal-distribution axiom. For existential elimination, turn sigma→(phi→psi) into phi→(sigma→psi) by a tautology, apply elimination since x is free in neither sigma nor psi, then commute to sigma→(exists x phi→psi). A sentence sigma supplies its side condition. Reverse direction uses MP.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "source_support": [
+          "Moschovakis, Theorem 1H.8 p37 (proof assigned as exercise); complete local three-rule induction."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-set-language-first-order-soundness",
+        "kind": "theorem",
+        "title": "Soundness for arbitrary set signatures",
+        "deps": [
+          "def-set-coded-formal-derivation",
+          "lem-formula-substitution-satisfaction",
+          "lem-satisfaction-coincidence",
+          "def-theories-models-and-semantic-consequence"
+        ],
+        "statement": "If T ⊢ φ, every set structure satisfying the sentence theory T satisfies φ under every assignment. In particular a theory with a model is consistent.",
+        "strategy": "Check every axiom semantically, including free-for existential introduction by assigning its witness term value. Induct through all three inference rules. For existential elimination, choose a witness for the antecedent, vary only x, apply the premise implication, and use satisfaction coincidence since x is not free in the conclusion. Sentence assumptions remain true under that variation. Generalization likewise uses all assignments. No compactness or AC.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Moschovakis, Theorem 1H.4 p36; local semantic verification of all six axiom schemes and three rules."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-proof-fresh-constant-elimination",
+        "kind": "lemma",
+        "title": "Fresh constants may be eliminated from a finite proof",
+        "deps": [
+          "def-set-coded-formal-derivation",
+          "lem-fresh-bound-variable-renaming",
+          "lem-derivation-finite-support-and-concatenation"
+        ],
+        "statement": "If c is absent from a sentence theory T and from a sentence σ, a proof T ⊢ σ in L(c) yields one in L. More generally a fresh constant in a proved formula can be replaced by a variable absent from the finite proof, then generalized.",
+        "strategy": "Choose a variable absent everywhere in the finite proof and conclusion, replace the fresh constant uniformly, and check every axiom and all three inference rules. Verify existential-introduction free-for conditions and the existential-elimination conclusion restriction as well as universal cases. Existing binders differ from the new variable; replacing a constant cannot create a forbidden occurrence of an old elimination variable. Eliminate finitely many constants one at a time; semantic alpha-renaming alone is not proof transformation.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "source_support": [
+          "Moschovakis, Lemma 1H.6 pp36–37 and Lemma 1I.4 pp40–41; local proof transformation including existential rules."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-consistent-sentence-decision",
+        "kind": "lemma",
+        "title": "A consistent theory can decide one sentence",
+        "deps": [
+          "def-first-order-syntactic-consistency",
+          "thm-first-order-sentence-deduction",
+          "lem-hilbert-propositional-and-equality-rules"
+        ],
+        "statement": "For consistent T and sentence σ, at least one of T∪{σ}, T∪{¬σ} is consistent. T∪{¬σ} is inconsistent iff T ⊢ σ.",
+        "strategy": "Use the deduction theorem to convert each alleged inconsistency to a negation and combine using the Boolean derived rules.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "source_support": [
+          "Moschovakis, Lemma 1H.12(3)–(4), printed p38; local deduction proof."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "def-henkin-witness-extension",
+        "kind": "definition",
+        "title": "Witness constants and Henkin theories",
+        "deps": [
+          "def-set-coded-terms-and-formulas",
+          "def-set-signature-and-finite-syntax-strings",
+          "def-free-variables-and-syntactic-substitution",
+          "def-theories-models-and-semantic-consequence"
+        ],
+        "statement": "A sentence theory in a language with a constant is Henkin if for every existential sentence ∃xφ(x) it contains an axiom ∃xφ(x)→φ(c) for some constant c; all other parameters in φ are already closed terms.",
+        "strategy": "Use disjoint tagged layers of new constants. Formula parameters are handled by substituting closed terms; the seed constant guarantees a nonempty term domain.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Moschovakis, Lecture Notes in Logic (2014), Definition 1I.2, printed p.39, and Lemma 1I.4, pp.40–41; witness-axiom convention explicitly distinguished. (https://www.math.ucla.edu/~ynm/lectures/lnl.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-fresh-henkin-axiom-preserves-consistency",
+        "kind": "lemma",
+        "title": "Adding one fresh witness preserves consistency",
+        "deps": [
+          "def-henkin-witness-extension",
+          "lem-proof-fresh-constant-elimination",
+          "thm-first-order-sentence-deduction",
+          "lem-consistent-sentence-decision",
+          "lem-hilbert-propositional-and-equality-rules"
+        ],
+        "statement": "If c is fresh for T and ∃xφ(x), consistency of T implies consistency of T∪{∃xφ(x)→φ(c)}. A seed constant without axioms is conservative.",
+        "strategy": "If adding exists x phi→phi(c) is inconsistent, sentence deduction yields exists x phi and not phi(c). Replace c by a proof-fresh variable z. From not phi[z/x], use propositional logic to obtain phi[z/x]→bottom, then restricted existential elimination to obtain exists z phi[z/x]→bottom. Prove the fresh-variable existential renaming via free-for introduction and elimination, so this contradicts the proved exists x phi. Do not identify exists x not-not phi with exists x phi by syntax; use the earlier derived equivalence where needed.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Moschovakis, Lemma 1I.4 pp40–41 and Lemma 1H.12(5) p38; witness-implication variant proved locally."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-countable-henkin-syntax-coding",
+        "kind": "lemma",
+        "title": "Canonical natural-number codes for countable Henkin syntax",
+        "deps": [
+          "def-set-signature-and-finite-syntax-strings",
+          "def-set-coded-terms-and-formulas",
+          "thm-n-cross-n-countable",
+          "thm-recursion",
+          "def-set-coded-formal-derivation"
+        ],
+        "statement": "Given an explicit injection of the signature into ω, every staged Henkin alphabet, term set, formula set and proof set has an explicit injection into ω. Sentences admit an exhaustive sequence, with repetitions allowed.",
+        "strategy": "Code finite tuples of natural numbers by a concrete iterated pairing map with a length tag, proving injectivity by induction. Tag witness constants by their finite stage and formula code. Enumerate valid codes in increasing order with a fixed fallback sentence. Do not assume that countably many unspecified countable sets have a chosen enumeration. Encode proof annotations by type tags, natural indices and length-tagged lists of syntax codes; retain the complete annotated record.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Moschovakis, Lecture Notes in Logic (2014), Lemma 1I.4, Sublemma 1 and proof, printed pp.40–41; explicit uniform pairing codes supplied locally. (https://www.math.ucla.edu/~ynm/lectures/lnl.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-countable-lindenbaum-henkin-completion",
+        "kind": "theorem",
+        "title": "Canonical countable Lindenbaum–Henkin construction",
+        "deps": [
+          "lem-countable-henkin-syntax-coding",
+          "lem-fresh-henkin-axiom-preserves-consistency",
+          "lem-consistent-sentence-decision",
+          "lem-derivation-finite-support-and-concatenation",
+          "thm-recursion",
+          "lem-proof-fresh-constant-elimination"
+        ],
+        "statement": "For an explicitly countable L and consistent sentence theory T, there is a consistent complete Henkin sentence theory H in a countable expansion of L. This is a classical ZF construction.",
+        "strategy": "At successive rounds enumerate the current language, decide each sentence by adding its positive side if consistent and its negative side otherwise, and add a fresh witness for every existential sentence. Dovetail the rounds so formulas with constants added in any round are eventually visited. Every finite initial extension is consistent; finite-support arguments handle both ω-unions. Take deductive closure at the end. Decisions are definable, not necessarily computable; the only selections are least natural codes.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Moschovakis, Lemma 1I.4 and both sublemmas, printed pp40–41; explicit two-round-index witness-axiom adaptation."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-complete-henkin-theory-truth-rules",
+        "kind": "lemma",
+        "title": "Boolean and witness closure of a complete Henkin theory",
+        "deps": [
+          "def-henkin-witness-extension",
+          "def-first-order-syntactic-consistency",
+          "lem-hilbert-propositional-and-equality-rules",
+          "lem-derivation-finite-support-and-concatenation"
+        ],
+        "statement": "For any consistent deductively closed complete Henkin theory H (countable or not), ¬σ∈H iff σ∉H, σ∧τ∈H iff σ,τ∈H, and ∃xφ(x)∈H iff φ(t)∈H for some closed term t.",
+        "strategy": "Prove each direction using syntactic completeness, consistency, witness axioms and the explicit existential-introduction axiom. Use derived existential monotonicity/double-negation equivalence and fresh-variable renaming rather than unproved rewriting inside quantifiers. Countability is needed only to construct H, not for these consequences.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Moschovakis, Lemma 1I.3, printed pp39–40; witness-axiom formulation adapted."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-henkin-term-equality-congruence",
+        "kind": "lemma",
+        "title": "Provable equality is a congruence on closed terms",
+        "deps": [
+          "lem-complete-henkin-theory-truth-rules",
+          "lem-hilbert-propositional-and-equality-rules"
+        ],
+        "statement": "On closed terms of any consistent complete Henkin theory H, s~t iff (s=t)∈H is an equivalence relation respected by every function and relation symbol and by substitution into formulas.",
+        "strategy": "Use finitely many one-place equality substitutions to replace a tuple. Show relation membership is independent of representatives in both directions.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Moschovakis, Lemma 1I.5 Sublemmas 1–4, pp41–43; closed-term and full-formula congruence adaptation."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "def-henkin-closed-term-model",
+        "kind": "definition",
+        "title": "The closed-term quotient structure",
+        "deps": [
+          "lem-henkin-term-equality-congruence",
+          "def-set-structures-and-variable-assignments"
+        ],
+        "statement": "The domain is the set of equivalence classes of closed terms under provable equality. Constants and functions are interpreted by term formation and relations by membership of their atomic sentences in H.",
+        "strategy": "Use the seed constant for nonemptiness and the earlier congruence for well-definedness. Equality is actual equality of classes, not a new predicate.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Moschovakis, Lemma 1I.5, printed pp41–43; quotient on closed terms instead of constants."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-henkin-closed-term-truth-lemma",
+        "kind": "theorem",
+        "title": "Truth lemma for the term quotient",
+        "deps": [
+          "def-henkin-closed-term-model",
+          "lem-complete-henkin-theory-truth-rules",
+          "lem-formula-substitution-satisfaction",
+          "thm-structural-recursion-on-set-coded-syntax",
+          "lem-henkin-term-equality-congruence"
+        ],
+        "statement": "For each formula φ and finite tuple of closed terms representing its free-variable assignment, the term model satisfies φ iff the corresponding closed instance belongs to H. Hence the term model satisfies H.",
+        "strategy": "Induct on term and formula formation; use the congruence at atoms, Boolean truth rules, and the witness equivalence at ∃. Only finitely many representatives are needed per formula: do not select representatives for the entire quotient.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Moschovakis, Lemma 1I.5, pp41–43; full local free-variable constructor induction for the closed-term quotient."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-countable-first-order-completeness",
+        "kind": "theorem",
+        "title": "Completeness for explicitly countable set languages",
+        "deps": [
+          "thm-countable-lindenbaum-henkin-completion",
+          "thm-henkin-closed-term-truth-lemma",
+          "lem-consistent-sentence-decision",
+          "thm-set-language-first-order-soundness",
+          "lem-countable-henkin-syntax-coding",
+          "lem-satisfaction-coincidence"
+        ],
+        "statement": "A consistent sentence theory in an explicitly countable language has an at most countable nonempty set model. For a sentence σ, T ⊨ σ iff T ⊢ σ.",
+        "strategy": "Build the term quotient. Enumerate its classes using closed-term codes; choose the least representative code to obtain an injection into ω without AC. For the consequence direction apply model existence to T∪{¬σ}.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Moschovakis, Theorem 1I.1 pp38–39 and final proof p44; least-code countability supplied explicitly."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-countable-first-order-compactness",
+        "kind": "theorem",
+        "title": "Compactness for explicitly countable languages",
+        "deps": [
+          "thm-countable-first-order-completeness",
+          "lem-derivation-finite-support-and-concatenation",
+          "thm-set-language-first-order-soundness"
+        ],
+        "statement": "A sentence theory in an explicitly countable language has a model iff every finite subset has a model. If T ⊨ σ, some finite T0⊆T entails σ.",
+        "strategy": "A finite proof of contradiction would already contradict soundness in a model of its finite assumptions. Apply completeness. Obtain finite entailment either from finite proof support or by adding ¬σ. Do not infer arbitrary-language compactness.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Moschovakis, Theorem 1J.1 p44; Weiss–D’Mello Theorem 1 and Exercise 6 p14 for finite entailment."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "def-elementary-set-structure-embedding",
+        "kind": "definition",
+        "title": "Elementary embeddings, substructures and chains",
+        "deps": [
+          "def-set-structures-and-variable-assignments",
+          "def-theories-models-and-semantic-consequence",
+          "lem-satisfaction-coincidence"
+        ],
+        "statement": "An elementary embedding preserves and reflects every formula on finite tuples. An elementary substructure is an inclusion with this property. An elementary chain is an increasing ordinal-indexed sequence whose earlier terms are elementary substructures of later terms. Elementary equivalence means agreement on all sentences (without a specified map). A sentence theory is categorical in cardinality kappa if any two of its kappa-sized models are isomorphic; consistency/nonvacuity is asserted separately.",
+        "strategy": "State function closure, constant inclusion and restricted relations for substructures; equality makes an elementary map injective. Distinguish elementary equivalence from elementary inclusion.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Weiss–D’Mello, Fundamentals of Model Theory, Definitions 18–22, printed pp.15–16; Definition 24, p.20; elementary-map formulation made explicit. (https://www.math.toronto.edu/weiss/model_theory.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-tarski-vaught-set-structure-test",
+        "kind": "theorem",
+        "title": "Tarski–Vaught witness test",
+        "deps": [
+          "def-elementary-set-structure-embedding",
+          "thm-set-structure-satisfaction-recursion",
+          "thm-structural-recursion-on-set-coded-syntax",
+          "def-term-denotation-in-a-set-structure",
+          "lem-satisfaction-coincidence"
+        ],
+        "statement": "For a nonempty L-substructure A⊆M, A≺M iff every existential formula with parameters from A that holds in M has a witness in A.",
+        "strategy": "Structural induction gives sufficiency; elementary inclusion gives necessity. Preserve the substructure premise rather than treating an arbitrary subset as a structure.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Weiss–D’Mello, Fundamentals of Model Theory, Lemma 5 and complete proof, printed p.19. (https://www.math.toronto.edu/weiss/model_theory.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "def-skolem-witness-hull",
+        "kind": "definition",
+        "title": "Witness functions and their hulls",
+        "deps": [
+          "def-elementary-set-structure-embedding",
+          "thm-recursion",
+          "lem-satisfaction-coincidence",
+          "thm-set-structure-satisfaction-recursion"
+        ],
+        "statement": "A witness family chooses for each existential L-formula and parameter tuple a satisfying element of M when one exists, and a fixed default otherwise. Its hull of A is the ω-iteration of closure under these functions, original functions and constants.",
+        "strategy": "Require a supplied family or a well-order of M before selecting witnesses. Include a fixed element even when A and the constant set are empty. This definition asserts no choice-free selection theorem.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Weiss–D’Mello, Fundamentals of Model Theory, Theorem 5 proof, printed p.20; witness family and default made explicit. (https://www.math.toronto.edu/weiss/model_theory.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-skolem-hull-size-and-elementarity",
+        "kind": "lemma",
+        "title": "Skolem hulls are small elementary substructures",
+        "deps": [
+          "def-skolem-witness-hull",
+          "thm-tarski-vaught-set-structure-test",
+          "thm-hessenberg",
+          "cor-cardinal-absorption",
+          "thm-well-ordering-theorem",
+          "def-axiom-of-choice",
+          "def-set-coded-terms-and-formulas"
+        ],
+        "statement": "In ZFC, if κ is infinite, |L|≤κ, |A|≤κ and A⊆M, a witness hull of A has size at most κ and is elementary in M. For countable L and A the hull is at most countable.",
+        "strategy": "Choose witness functions once using a well-order of M. Each step adds at most κ many values on finite tuples; cardinal absorption bounds the ω-union. Apply Tarski–Vaught. The countable conclusion for arbitrary M uses choice and is not a consequence of the choice-free Henkin algorithm.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Weiss–D’Mello, Fundamentals of Model Theory, Theorem 5 proof, printed p.20; finite-word count and choices expanded. (https://www.math.toronto.edu/weiss/model_theory.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-downward-lowenheim-skolem-with-parameters",
+        "kind": "theorem",
+        "title": "Downward Löwenheim–Skolem with parameters",
+        "deps": [
+          "lem-skolem-hull-size-and-elementarity",
+          "cor-cardinal-absorption",
+          "def-axiom-of-choice"
+        ],
+        "statement": "In ZFC, if M is infinite and max(|L|,ℵ0)≤κ≤|M|, then each A⊆M of size at most κ lies in an elementary substructure of M of size exactly κ.",
+        "strategy": "Enlarge A to a κ-element subset before taking the hull. Both inequalities on κ and the AC premise are part of the theorem.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Weiss–D’Mello, Fundamentals of Model Theory, Theorem 5, printed p.20; equality endpoint included. (https://www.math.toronto.edu/weiss/model_theory.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-elementary-ordinal-chain-union",
+        "kind": "theorem",
+        "title": "Unions of nonempty elementary chains",
+        "deps": [
+          "def-elementary-set-structure-embedding",
+          "thm-structural-recursion-on-set-coded-syntax",
+          "thm-set-structure-satisfaction-recursion",
+          "def-term-denotation-in-a-set-structure",
+          "lem-satisfaction-coincidence"
+        ],
+        "statement": "The union of a nonempty ordinal-indexed elementary chain is an L-structure in which each stage is elementary.",
+        "strategy": "Interpret functions and relations consistently on finite tuples; every tuple lies in one stage. Induct on formulas, sending an existential witness into a common later stage and then using elementarity between stages. Do not assume the union is elementary before proving the induction.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Weiss–D’Mello, Fundamentals of Model Theory, Theorem 4 and complete proof, printed pp.16–18; ordinal-index extension described before the theorem. (https://www.math.toronto.edu/weiss/model_theory.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-well-ordered-language-henkin-completeness",
+        "kind": "theorem",
+        "title": "Well-ordered language completeness with a size bound",
+        "deps": [
+          "lem-fresh-henkin-axiom-preserves-consistency",
+          "lem-consistent-sentence-decision",
+          "lem-derivation-finite-support-and-concatenation",
+          "thm-henkin-closed-term-truth-lemma",
+          "thm-transfinite-recursion",
+          "thm-well-ordering-theorem",
+          "cor-cardinal-absorption",
+          "def-axiom-of-choice",
+          "lem-proof-fresh-constant-elimination",
+          "thm-set-language-first-order-soundness"
+        ],
+        "statement": "In ZFC, for any infinite cardinal κ and set language L of size at most κ, every consistent L-sentence theory has a model of size at most κ. Finite satisfiability likewise gives such a model.",
+        "strategy": "Fix a well-order of L. Carry out ω many κ-long rounds of sentence decisions and fresh witnesses; κ bounds each expanded language and the total term set. Use finite proof support at every limit. Truth lemma applies to any complete Henkin theory. This result explicitly uses well-ordering/choice; it supplies the expanded-language theorem needed by upward Löwenheim–Skolem. It is not the ZF arbitrary-language/BPI theorem assigned to SET7. Full round-by-round cardinal and finite-support argument is supplied in phase-2-set-blocker-resolution-2026-09-08.md; 1J.6 itself is only a remark.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Moschovakis, Lemmas 1I.4–1I.5 pp40–43 and Remark 1J.6 p46; full local cardinal-length adaptation, not a proof credited to the remark."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "def-elementary-diagram-of-set-structure",
+        "kind": "definition",
+        "title": "Elementary diagrams",
+        "deps": [
+          "def-elementary-set-structure-embedding",
+          "def-set-signature-and-finite-syntax-strings",
+          "thm-set-structure-satisfaction-recursion",
+          "lem-satisfaction-coincidence",
+          "def-theories-models-and-semantic-consequence"
+        ],
+        "statement": "Expand L by a distinct constant c_a for each a∈M. The elementary diagram of M is the set of all expanded-language sentences true in the expansion naming every a.",
+        "strategy": "Use set satisfaction to form a set by Separation. The diagram contains all inequations c_a≠c_b for a≠b.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Weiss–D’Mello, Fundamentals of Model Theory, Chapter 3 opening and Definition 25, printed p.24. (https://www.math.toronto.edu/weiss/model_theory.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-elementary-diagram-embedding",
+        "kind": "lemma",
+        "title": "Models of the elementary diagram yield elementary embeddings",
+        "deps": [
+          "def-elementary-diagram-of-set-structure",
+          "def-elementary-set-structure-embedding",
+          "lem-formula-substitution-satisfaction",
+          "lem-satisfaction-coincidence",
+          "thm-set-structure-satisfaction-recursion",
+          "thm-structural-recursion-on-set-coded-syntax",
+          "def-ordered-pair",
+          "thm-the-characterising-property-of-ordered-pairs",
+          "thm-foundation-excludes-membership-cycles"
+        ],
+        "statement": "A model N of the elementary diagram yields the elementary embedding a↦c_a^N from M into the L-reduct of N; conversely such an embedding provides an expansion satisfying the diagram.",
+        "strategy": "For each formula with a tuple of named elements, its closed instance or negation belongs to the diagram. Equality supplies injectivity, and all formulas give preservation and reflection. The complete two-direction proof and literal-inclusion transport are recorded in phase-2-set-blocker-resolution-2026-09-08.md; Weiss–D'Mello Theorem9(2) is an exercise, not a supplied proof.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "source_support": [
+          "Weiss–D’Mello, Fundamentals of Model Theory, Theorem 9(2), Exercise 13 and Exercise 14, printed p.25; full local proof supplied, not attributed to the exercise. (https://www.math.toronto.edu/weiss/model_theory.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-upward-lowenheim-skolem-with-choice",
+        "kind": "theorem",
+        "title": "Upward Löwenheim–Skolem, including elementary extensions",
+        "deps": [
+          "lem-elementary-diagram-embedding",
+          "thm-well-ordered-language-henkin-completeness",
+          "thm-downward-lowenheim-skolem-with-parameters",
+          "def-axiom-of-choice",
+          "cor-cardinal-absorption"
+        ],
+        "statement": "In ZFC, for infinite M and infinite κ≥max(|M|,|L|), there is an elementary extension of M of cardinality κ. Thus an infinite model of a countable-language theory gives models in every infinite cardinality.",
+        "strategy": "Add κ fresh pairwise-distinct constants to the elementary diagram. Every finite fragment has an expansion of M because M is infinite. The well-ordered-language theorem gives a model of size at most κ and the new constants force size at least κ. Rename the image of the diagram embedding to get literal inclusion. For cardinalities below |M| use downward Löwenheim–Skolem.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Weiss–D’Mello, Theorem 6 proof p21, Theorem 9(2) and Exercise 15 p25; full elementary-diagram extension argument supplied locally."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "cor-arbitrarily-large-finite-models-give-infinite-model",
+        "kind": "corollary",
+        "title": "Arbitrarily large finite models imply an infinite model",
+        "deps": [
+          "thm-countable-first-order-compactness"
+        ],
+        "statement": "For a countable language, a theory having arbitrarily large finite models has an infinite model.",
+        "strategy": "Add countably many constants and all pairwise inequations. A finite subset uses only finitely many constants; interpret them distinctly in a sufficiently large finite model.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Moschovakis, Corollary 1J.2 p44; Weiss–D’Mello, Theorem 2 pp14–15, constant-inequality proof."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "def-nonstandard-natural-number-structure",
+        "kind": "definition",
+        "title": "Nonstandard models of the complete natural-number theory",
+        "deps": [
+          "def-theories-models-and-semantic-consequence",
+          "thm-recursion",
+          "def-natural-numbers",
+          "thm-set-structure-satisfaction-recursion",
+          "lem-satisfaction-coincidence",
+          "def-term-denotation-in-a-set-structure"
+        ],
+        "statement": "Let N be the standard set structure (ω,0,S,<), let Th(N) be its set of true sentences, and let the numeral n denote S iterated n times at 0. A model of Th(N) is nonstandard if it is not isomorphic to N.",
+        "strategy": "Define the standard structure and numeral recursion using the earlier natural numbers. Th(N) is a set by the earlier satisfaction theorem; no internal arithmetical truth predicate or incompleteness theorem is asserted.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Weiss–D’Mello, Fundamentals of Model Theory, Example 6 and Theorem 3, printed p.15; definition adapted to the assigned language (0,S,<). (https://www.math.toronto.edu/weiss/model_theory.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-nonstandard-natural-number-model-exists",
+        "kind": "theorem",
+        "title": "A countable nonstandard model has an element above all numerals",
+        "deps": [
+          "def-nonstandard-natural-number-structure",
+          "thm-countable-first-order-compactness",
+          "thm-countable-first-order-completeness"
+        ],
+        "statement": "There is an at most countable model of Th(N) with an element c greater than every standard numeral. Its reduct is not isomorphic to N.",
+        "strategy": "Every finite subset of Th(N) plus {n<c:n∈ω} is satisfied by N with c sufficiently large. Compactness and the countable model construction apply. Isomorphisms preserve 0,S and hence every numeral; c cannot map to a natural number.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Moschovakis, Theorem 1J.5 pp45–46; Weiss–D’Mello, Theorem 3 p15, greater-than-numerals variant."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "cor-countable-los-vaught-test",
+        "kind": "corollary",
+        "title": "The infinite-model categoricity test for completeness",
+        "deps": [
+          "thm-upward-lowenheim-skolem-with-choice",
+          "thm-downward-lowenheim-skolem-with-parameters",
+          "def-first-order-syntactic-consistency",
+          "thm-countable-first-order-completeness",
+          "def-axiom-of-choice"
+        ],
+        "statement": "In ZFC, if T is consistent in a countable language, all its models are infinite, and T is categorical in an infinite cardinal κ, then T is complete.",
+        "strategy": "If opposite decisions had models, use the upward/downward size results to produce κ-sized models with opposite truth values. They cannot be isomorphic. Retain consistency and the no-finite-model hypothesis.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Weiss–D’Mello, Theorem 6 and full proof, printed pp20–21; syntactic completeness obtained through local countable completeness."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "def-coded-first-order-zf-theory",
+        "kind": "definition",
+        "title": "The set of first-order ZF axiom sentences",
+        "deps": [
+          "def-language-of-set-theory",
+          "def-axiom-of-extensionality",
+          "def-axiom-schema-of-separation",
+          "def-axiom-of-pairing",
+          "def-axiom-of-union",
+          "def-axiom-of-power-set",
+          "def-axiom-schema-of-replacement",
+          "def-axiom-of-infinity",
+          "def-axiom-of-foundation",
+          "def-set-coded-terms-and-formulas",
+          "lem-countable-henkin-syntax-coding",
+          "def-free-variables-and-syntactic-substitution"
+        ],
+        "statement": "T_ZF is the set of coded membership-language sentences consisting of Extensionality, Pairing, Union, Power Set, Infinity and Foundation, and every Separation and Replacement instance. All free parameters in a schema instance are universally closed. The Axiom of Choice is excluded.",
+        "strategy": "Translate exactly the earlier displayed axioms into the SET1 syntax. Retain the implication-only Power Set form and functional-image Replacement form. For Separation choose the output variable fresh; for Replacement choose domain and range variables fresh. Expand unique existence and bounded quantifiers capture-freely. Use least fresh variable indices and the earlier finite-string coding: the collection is a subset of the countable sentence set. This is a set theory in the metatheory, not an assertion of its consistency.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "source_support": [
+          "Exact published axiom Definition sections listed here; comparison: Moschovakis, Lecture Notes in Logic (2014), Definition 1G.12, printed pp.33–34, and Definition 1A.5, pp.3–4. Published local Power Set and Infinity forms retained. (https://www.math.ucla.edu/~ynm/lectures/lnl.pdf)"
+        ],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-models-of-coded-zf-are-infinite",
+        "kind": "lemma",
+        "title": "Every set model of first-order ZF has infinitely many elements",
+        "deps": [
+          "def-coded-first-order-zf-theory",
+          "thm-set-structure-satisfaction-recursion",
+          "thm-recursion",
+          "thm-induction-principle",
+          "lem-pigeonhole",
+          "lem-nat-trichotomy"
+        ],
+        "statement": "If a nonempty set structure (M,E) satisfies T_ZF, its external domain M is infinite. No transitivity or external well-foundedness of E is assumed.",
+        "strategy": "Inside M, Infinity supplies e with no E-predecessors and closes an inductive object under s with t E s iff t E y or t=y. Extensionality gives uniqueness of each successor. In the external metatheory, inductively form x0=e,x1,...,xn for each finite n and show xi E xj for i<j. Pairing and Foundation imply no x E x: the singleton of x would have no E-minimal member if x E x. Thus the finitely many xi are distinct. This yields arbitrary finite lower bounds on the external domain size without treating M as transitive or applying an unproved internal truth predicate.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "source_support": [
+          "Published ZF axiom definitions, exactly translated in def-coded-first-order-zf-theory; Moschovakis Definition 1G.12, pp.33–34, and Definition 1A.5, pp.3–4, for comparison; local infinitude argument uses the published successor-form Infinity. (https://www.math.ucla.edu/~ynm/lectures/lnl.pdf)"
+        ],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "rem-first-order-choice-strength-boundary",
+        "kind": "remark",
+        "title": "Choice ledger and arbitrary-language boundary",
+        "deps": [
+          "thm-countable-first-order-completeness",
+          "thm-countable-first-order-compactness",
+          "thm-downward-lowenheim-skolem-with-parameters",
+          "thm-upward-lowenheim-skolem-with-choice"
+        ],
+        "statement": "Countable Henkin completeness and compactness above are classical ZF results. The stated general hull and cardinal-size theorems explicitly assume ZFC. Arbitrary-language compactness over ZF is reserved for the Boolean-prime-ideal page.",
+        "strategy": "Orientation only. No result recorded in the deferred set-theory catalogue is an input.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_destinations": [
+          "boolean-algebras-stone-duality-and-the-prime-ideal-theorem"
+        ],
+        "external_refs": [],
+        "review_status": "proposed; no readiness attestation",
+        "source_support": [
+          "Moschovakis, Remark 1J.6 p46 compared with the complete constructions of Lemmas 1I.4–1I.5 pp40–43."
+        ]
+      }
+    ]
+  },
+  {
+    "order": 658,
+    "id": "deduction-soundness-completeness-and-compactness-examples",
+    "kind": "B",
+    "category": "foundations",
+    "title": "Deduction, Soundness, Completeness, and Compactness: Examples and Counterexamples",
+    "companion": "deduction-soundness-completeness-and-compactness",
+    "requires": [
+      "deduction-soundness-completeness-and-compactness"
+    ],
+    "items": [
+      {
+        "id": "ex-first-order-sentence-deduction",
+        "kind": "example",
+        "title": "A two-premise formal deduction",
+        "deps": [
+          "thm-first-order-sentence-deduction",
+          "def-set-coded-formal-derivation"
+        ],
+        "statement": "From ∀x(P(x)→Q(x)) and ∀xP(x), derive ∀xQ(x).",
+        "strategy": "Instantiate at a variable, apply MP, generalize, then discharge either sentence assumption with the deduction theorem. Display the actual finite proof.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Moschovakis, axioms and rules §§1H.1–1H.2 pp34–35 and Theorem 1H.8 p37; explicit local instance."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "cex-generalization-after-open-assumption",
+        "kind": "counterexample",
+        "title": "The deduction theorem needs its free-variable restriction",
+        "deps": [
+          "def-set-coded-terms-and-formulas",
+          "thm-set-structure-satisfaction-recursion"
+        ],
+        "statement": "The unrestricted discharge rule would falsely prove P(x)→∀xP(x).",
+        "strategy": "Take the two-element structure with P true at exactly one point and assign x to that point; the antecedent is true and the consequent false. Generalization from an open premise changes the semantics of assumptions.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-generated"
+        },
+        "source_support": [
+          "Moschovakis, Lecture Notes in Logic (2014), Theorem 1H.8 and Theorem 1H.9, printed p.37, sentence side condition; explicit two-element refutation. (https://www.math.ucla.edu/~ynm/lectures/lnl.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "ex-seed-constant-for-empty-signature",
+        "kind": "example",
+        "title": "The empty signature still needs a nonempty term domain",
+        "deps": [
+          "def-henkin-closed-term-model",
+          "thm-set-language-first-order-soundness"
+        ],
+        "statement": "In the equality-only signature with no constants or function symbols there are no closed terms before adjoining a seed constant. The empty theory has a singleton model.",
+        "strategy": "Adjoin a countably infinite family of constants with a seed. Take H to be the complete theory of the one-element expansion interpreting every constant at its sole element. Soundness gives consistency, and the sole element supplies every existential witness, so H is Henkin. Every closed term is a constant and all constants are H-equal, giving exactly one quotient class. An arbitrary Henkin completion of the empty theory need not have this singleton quotient.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Moschovakis, Lemmas 1I.4–1I.5 pp40–43; singleton complete-theory example supplied locally."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "cex-isomorphic-inclusion-need-not-be-elementary",
+        "kind": "counterexample",
+        "title": "Isomorphism does not make an inclusion elementary",
+        "deps": [
+          "def-elementary-set-structure-embedding",
+          "thm-set-structure-satisfaction-recursion",
+          "lem-nat-nonzero-is-successor",
+          "lem-nat-order-add-compatible",
+          "lem-nat-trichotomy"
+        ],
+        "statement": "The ordered structures (ω,<) and (ω\\{0},<) are isomorphic, but the natural inclusion of the latter into the former is not elementary.",
+        "strategy": "At parameter 1, ∃y(y<1) holds in ω and fails in the positive tail. The shift is an isomorphism; inclusion is a different map.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Weiss–D’Mello, Fundamentals of Model Theory, Example 7, printed p.16; shift and failed formula computed. (https://www.math.toronto.edu/weiss/model_theory.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "ex-nonstandard-element-above-every-numeral",
+        "kind": "example",
+        "title": "Compactness produces a genuinely nonstandard element",
+        "deps": [
+          "thm-nonstandard-natural-number-model-exists"
+        ],
+        "statement": "The constant c in the constructed countable model exceeds every numeral, although there is no such element in standard ω.",
+        "strategy": "Work a finite fragment with n<c for n≤m and use c=m+1. Then explain why no one standard interpretation meets all constraints, while a new model does.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Weiss–D’Mello, Theorem 3 p15; explicit finite-fragment calculation in the local (0,S,<) language."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "fs-categorical-first-order-zf",
+        "kind": "false-statement",
+        "title": "FALSE: consistent first-order ZF has a unique model up to isomorphism",
+        "deps": [
+          "def-coded-first-order-zf-theory",
+          "lem-models-of-coded-zf-are-infinite",
+          "thm-countable-first-order-completeness",
+          "thm-upward-lowenheim-skolem-with-choice",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Conditional refutation in ZFC: if the ordinary first-order axiom theory ZF is syntactically consistent, it has nonisomorphic countable and ℵ1-sized set models. This does not assert Con(ZF).",
+        "strategy": "Apply countable completeness to the explicit coded T_ZF under the stated consistency antecedent. The earlier infinitude lemma makes its at most countable model countably infinite. Apply upward Löwenheim–Skolem to obtain an ℵ1-sized elementary extension. An isomorphism is a bijection, so these models are not isomorphic. Do not assert Con(ZF), external well-foundedness, or transitivity of either model.",
+        "axiom_base": "ZFC + Con(ZF)",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Moschovakis, Theorem 1J.3 and discussion pp44–45, Remark 1J.6 p46; Weiss–D’Mello Exercise 15 p25 with locally proved upward theorem."
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      }
+    ]
+  },
+  {
+    "order": 671,
+    "id": "set-theoretic-trees-delta-systems-and-diamond",
+    "kind": "A",
+    "category": "foundations",
+    "title": "Set-Theoretic Trees, Delta Systems, and Diamond",
+    "companion": "set-theoretic-trees-delta-systems-and-diamond-examples",
+    "requires": [
+      "club-stationary-sets-and-pressing-down",
+      "filters-and-ultrafilters"
+    ],
+    "items": [
+      {
+        "id": "def-set-theoretic-tree-and-levels",
+        "kind": "definition",
+        "title": "Set-theoretic trees, heights, levels, branches and antichains",
+        "deps": [
+          "def-well-order",
+          "def-ordinal",
+          "thm-mostowski-collapse"
+        ],
+        "statement": "A tree is a set with a strict partial order such that the strict predecessors of each node are well-ordered. ht(t) is their order type, Tα is the αth level, ht(T)=sup{ht(t)+1}. A branch is a maximal chain; a cofinal branch meets unboundedly many levels. An antichain consists of pairwise incomparable nodes.",
+        "strategy": "Distinguish a chain from a maximal branch, and strict order from its reflexive closure. The tree need not be a tree of finite sequences.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Chapter 9, printed p65 (tree terminology; normality conventions adapted)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-tree-predecessors-and-common-extensions",
+        "kind": "lemma",
+        "title": "Tree predecessors and compatibility",
+        "deps": [
+          "def-set-theoretic-tree-and-levels"
+        ],
+        "statement": "A node has a unique predecessor at each smaller height. Nodes with a common upper bound are comparable. Every level is an antichain.",
+        "strategy": "Use the ordinal enumeration of the predecessor well-order. For common upper bounds, compare inside that well-order, including equality with the upper bound.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Chapter 9, printed p65 (tree terminology; normality conventions adapted)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "def-kappa-tree-and-tree-property",
+        "kind": "definition",
+        "title": "κ-trees and the tree property",
+        "deps": [
+          "def-set-theoretic-tree-and-levels",
+          "def-cardinal",
+          "def-cofinality"
+        ],
+        "statement": "For an infinite cardinal κ, a κ-tree has height κ and each level has size less than κ. The tree property at κ says every κ-tree has a cofinal branch.",
+        "strategy": "The κ-tree hypothesis includes the level-size bound. A tree merely having κ nodes need not be a κ-tree. Regularity is imposed separately in statements that require it; this definition includes omega-trees, so the tree-property comparison with Koenig is well typed.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Chapter 9, printed p65; cardinal-tree convention made explicit"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "def-normal-splitting-set-theoretic-tree",
+        "kind": "definition",
+        "title": "Normal and splitting trees",
+        "deps": [
+          "def-set-theoretic-tree-and-levels"
+        ],
+        "statement": "A normal tree here has one root, extends every node to every higher level below its height, and has distinct predecessor sets for distinct nodes on a limit level. Splitting additionally requires at least two distinct immediate successors whenever a next level exists.",
+        "strategy": "Keep splitting an explicit additional convention; other texts build it into normality. Limit-level uniqueness is required in coding and lexicographic arguments.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Chapter 9, printed p65 (tree terminology; normality conventions adapted)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-normal-set-theoretic-tree-sequence-representation",
+        "kind": "lemma",
+        "title": "Normal trees have faithful sequence representations",
+        "deps": [
+          "def-normal-splitting-set-theoretic-tree",
+          "lem-tree-predecessors-and-common-extensions",
+          "thm-transfinite-recursion",
+          "thm-well-ordering-theorem",
+          "def-axiom-of-choice"
+        ],
+        "statement": "In ZFC, a normal tree T of nonzero ordinal height alpha is isomorphic to a downward-closed tree of sequences of lengths beta<alpha, ordered by proper initial segment. The alphabet may be T itself. If each node has at most countably many immediate successors, the alphabet may be omega. The representation preserves heights; surjectivity onto the full sequence space is not asserted.",
+        "strategy": "Fix an injection e_t from the immediate successors of each node t into a common alphabet: use identity into T in general, and choose injections into omega in the countable-successor case using the supplied well-ordering theorem. Transfinite recursion defines f(root) as the empty sequence, f(u)=f(t) concatenated with e_t(u) at successor heights, and f(u)=union_{beta<ht(u)} f(u_beta) at nonzero limit heights, where u_beta is the unique predecessor on level beta. Induct on heights: the sequences have the claimed domains and restrict to predecessor codes; same-height codes are injective at successors by injectivity of the parent code and e_t, and at limits by equality of all predecessor codes and the normal-tree limit uniqueness condition. If f(s) is a proper initial segment of f(t), restrict t to height ht(s) and use that level injectivity to recover s. Every proper restriction is a predecessor code, so the image is downward closed. No assumption that finite successor sets biject onto omega is made.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Proposition 9.33, printed p86; successor labels adapted to injections"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; final scaffold repair recorded in phase-2-wave-1-alpha-b-recheck.md"
+      },
+      {
+        "id": "def-aronszajn-suslin-and-special-tree",
+        "kind": "definition",
+        "title": "Aronszajn, Suslin and special trees",
+        "deps": [
+          "def-kappa-tree-and-tree-property",
+          "def-countable",
+          "def-first-uncountable-ordinal",
+          "thm-rationals-countable"
+        ],
+        "statement": "An Aronszajn tree is an ω1-tree with no cofinal branch. A Suslin tree is an Aronszajn tree with no uncountable antichain. A special tree admits a map f:T→ω taking distinct values on distinct comparable nodes.",
+        "strategy": "Prove directly that special is equivalent to a countable union of antichains (use the least fibre index for the converse). A strictly increasing rational labeling implies special using a fixed enumeration of Q. Do not assert an unproved converse about rational labelings.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Karagila, Axiomatic Set Theory, Chapter 9, Definition 9.1 and Exercise 9.4, printed p43; Definition 9.5, p44; specialization convention adapted"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-konig-finite-level-tree",
+        "kind": "theorem",
+        "title": "König’s lemma for finite levels",
+        "deps": [
+          "def-set-theoretic-tree-and-levels",
+          "thm-recursion",
+          "thm-well-ordering-theorem",
+          "lem-tree-predecessors-and-common-extensions",
+          "def-axiom-of-choice"
+        ],
+        "statement": "In ZFC, a height-ω tree whose levels are finite has an infinite branch.",
+        "strategy": "Choose a root with extensions to arbitrarily high levels; among finitely many immediate successors some still has this property. Iterate. For a countably coded tree use least codes and note that arbitrary families of finite sets require care in ZF. Do not apply the lemma to merely countable levels.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Theorem 9.32, printed p86"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-countable-normal-tree-cofinal-branch",
+        "kind": "lemma",
+        "title": "Branches through countable normal trees of limit height",
+        "deps": [
+          "def-normal-splitting-set-theoretic-tree",
+          "thm-recursion",
+          "lem-tree-predecessors-and-common-extensions"
+        ],
+        "statement": "If T is countable and normal of nonzero countable limit height δ, every node lies on a branch cofinal in δ. A countable collection of such branches can cover all nodes.",
+        "strategy": "Fix a cofinal ω-sequence in δ and an enumeration of T; extend recursively to those levels, using least available codes. Perform the construction for every node.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Karagila, Set Theory (2017), Lemma9.11"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-splitting-cofinal-branch-gives-antichain",
+        "kind": "lemma",
+        "title": "Splitting turns an uncountable branch into an antichain",
+        "deps": [
+          "def-normal-splitting-set-theoretic-tree",
+          "lem-tree-predecessors-and-common-extensions",
+          "def-kappa-tree-and-tree-property",
+          "def-axiom-of-choice"
+        ],
+        "statement": "A splitting ω1-tree with a cofinal branch has an uncountable antichain.",
+        "strategy": "At each branch node select the immediate successor not on the branch. Two selected nodes at different levels are incompatible because the later one follows the branch past the earlier split.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Theorem9.34",
+          "Karagila, Set Theory (2017), Exercise9.6"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-bounded-rational-tree-limit-extension",
+        "kind": "lemma",
+        "title": "Rational bounds at countable limit levels",
+        "deps": [
+          "def-normal-splitting-set-theoretic-tree",
+          "lem-tree-predecessors-and-common-extensions",
+          "thm-rationals-countable",
+          "thm-product-of-countable",
+          "thm-rat-ordered-field",
+          "thm-recursion"
+        ],
+        "statement": "Suppose a countable tree below a countable limit δ has a strictly increasing rational labeling with the invariant: for x, every higher level β<δ and every rational r>label(x), some extension y at level β has label(y)<r. Then it has a countable new level preserving this invariant and strict increase. Assume moreover that each node has infinitely many immediate successors with labels below any prescribed larger rational bound.",
+        "strategy": "Enumerate all requests (x,r) with label(x)<r. For the nth request choose rational q strictly between label(x) and r. First extend x along a successor below q that avoids the finitely many branches chosen for earlier requests: infinitely many successors below q and at most finitely many forbidden paths make this possible. Continue along a cofinal sequence of levels using the bounded-extension invariant, keeping every label below q. Add the resulting distinct branch as a new top with label q. There are countably many requests and pairwise distinct predecessor branches, so the new level is countable and limit-level uniqueness holds. Every old node and every bound request has its required extension. Infinitely many small immediate successors are imposed at successor stages, not at this limit.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Karagila, Set Theory (2017), Theorem9.2 proof",
+          "Monk, Set theory following Jech (2024), Theorem9.35"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-special-aronszajn-tree-construction",
+        "kind": "theorem",
+        "title": "A special Aronszajn tree exists",
+        "deps": [
+          "lem-bounded-rational-tree-limit-extension",
+          "def-aronszajn-suslin-and-special-tree",
+          "thm-transfinite-recursion",
+          "thm-countable-union-of-countable",
+          "thm-rationals-countable",
+          "def-normal-splitting-set-theoretic-tree",
+          "thm-rat-ordered-field",
+          "thm-product-of-countable",
+          "thm-countable-subsets-of-omega-one-are-bounded",
+          "def-axiom-of-choice"
+        ],
+        "statement": "In ZFC there exists a normal splitting special Aronszajn tree.",
+        "strategy": "Construct countable levels by transfinite recursion, maintaining strict rational labels and bounded extension. At successors give each node countably many successors, including infinitely many labels in every rational interval immediately above its label. At limits use the bounded extension lemma. No uncountable chain injects into Q; Q fibers give a countable antichain cover. A countable cover of an uncountable tree includes an uncountable antichain, so this example is not Suslin.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Karagila, Set Theory (2017), Theorem9.2 and Exercise9.4",
+          "Monk, Set theory following Jech (2024), Theorem9.35"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "def-finite-delta-system",
+        "kind": "definition",
+        "title": "Delta systems and roots",
+        "deps": [
+          "def-intersection-of-a-set-and-binary-intersection"
+        ],
+        "statement": "A family of sets is a delta system with root r if any two distinct members intersect in exactly r. An indexed delta system imposes that equality for distinct indices, allowing equal sets.",
+        "strategy": "Separate the indexed version, needed for repeated supports, from a family of distinct sets.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), delta-system definition immediately before Theorem 9.20, printed pp77–78; indexed convention supplied locally"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-regular-uncountable-finite-delta-system",
+        "kind": "theorem",
+        "title": "The finite delta-system lemma at a regular uncountable cardinal",
+        "deps": [
+          "def-finite-delta-system",
+          "thm-cofinality-basics",
+          "cor-cardinal-absorption",
+          "thm-transfinite-recursion",
+          "def-axiom-of-choice"
+        ],
+        "statement": "If κ is regular uncountable and F is a family of κ distinct finite sets, a subfamily of size κ is a delta system.",
+        "strategy": "Thin to a fixed finite size by regularity. Induct on this size: if an element occurs in κ members, delete it, apply induction, and restore it to the root; otherwise construct κ disjoint members recursively because fewer than κ previous finite sets exclude fewer than κ candidates.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Theorem 9.20, printed pp77–78"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "cor-indexed-omega-one-delta-system",
+        "kind": "corollary",
+        "title": "The indexed delta-system lemma",
+        "deps": [
+          "thm-regular-uncountable-finite-delta-system",
+          "thm-countable-union-of-countable",
+          "thm-countable-subsets-of-omega-one-are-bounded",
+          "def-finite-delta-system",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For an ω1-indexed family of finite sets there is an uncountable indexed delta subsystem, even if supports repeat.",
+        "strategy": "If a support repeats uncountably often, use those indices with that support as root. Otherwise countable fibres imply uncountably many distinct supports; choose one index per support and apply the theorem.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Theorem 9.20, printed pp77–78; indexed repetition argument supplied locally (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "def-poset-ccc-and-knaster-property",
+        "kind": "definition",
+        "title": "Compatibility, ccc and Knaster for posets",
+        "deps": [
+          "def-partial-order",
+          "def-countable",
+          "lem-tree-predecessors-and-common-extensions"
+        ],
+        "statement": "Order posets with stronger conditions smaller. Compatibility means having a common lower bound. ccc means every set of pairwise incompatible conditions is countable; Knaster means every uncountable set of conditions has an uncountable pairwise compatible subset.",
+        "strategy": "Show directly that Knaster implies ccc; a poset antichain is about incompatibility, not merely incomparability. In a tree ordered by reverse extension the notions agree by the common-extension lemma.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), property (K) definition preceding Lemma 15.14, printed p265; reverse-tree comparison expanded locally (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "def-finite-support-poset-product",
+        "kind": "definition",
+        "title": "Finite-support products",
+        "deps": [
+          "def-poset-ccc-and-knaster-property"
+        ],
+        "statement": "For posets Pi with greatest conditions 1i, the finite-support product consists of tuples equal to 1i except at finitely many coordinates, ordered coordinatewise.",
+        "strategy": "Compatibility is coordinatewise compatibility; only the union of two finite supports needs lower-bound choices. Include the empty support and the empty product.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), finite-support definition preceding Lemma 15.12, printed p265; coordinatewise compatibility verified locally (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-finite-knaster-poset-products",
+        "kind": "lemma",
+        "title": "Finite products preserve Knaster",
+        "deps": [
+          "def-finite-support-poset-product",
+          "def-poset-ccc-and-knaster-property",
+          "thm-countable-union-of-countable",
+          "thm-well-ordering-theorem",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Every finite product of Knaster posets is Knaster.",
+        "strategy": "Thin an uncountable indexed family coordinate by coordinate. If a projection has countable range, take an uncountable constant fibre; otherwise apply Knaster and retain corresponding indices. A finite sequence of thinnings stays uncountable.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Lemma 15.14, printed pp265–266; indexed thinning expanded locally (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-finite-support-knaster-poset-products",
+        "kind": "theorem",
+        "title": "Finite-support products of Knaster posets are Knaster",
+        "deps": [
+          "lem-finite-knaster-poset-products",
+          "cor-indexed-omega-one-delta-system",
+          "def-finite-support-poset-product",
+          "def-poset-ccc-and-knaster-property",
+          "thm-well-ordering-theorem",
+          "def-axiom-of-choice"
+        ],
+        "statement": "A finite-support product of any set-indexed family of Knaster posets is Knaster. In particular finite partial functions from any set to a fixed nonempty countable set, ordered by extension, form a Knaster poset.",
+        "strategy": "Thin supports to an indexed delta system and restrictions to its finite root to a pairwise compatible family. Off-root supports are disjoint. For partial functions add a greatest undefined value to each countable discrete factor. Do not claim arbitrary products of ccc posets are ccc.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Lemma 15.15 and Corollary 15.16, printed p266; partial-function encoding supplied locally (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-cocountable-ultrafilter-on-uncountable-set",
+        "kind": "lemma",
+        "title": "An ultrafilter containing all cocountable subsets",
+        "deps": [
+          "def-filter",
+          "thm-ultrafilter-lemma",
+          "thm-countable-union-of-countable",
+          "lem-subset-of-countable",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For any uncountable set X, there is an ultrafilter U on X containing all cocountable subsets; every member of U is uncountable.",
+        "strategy": "The cocountable subsets form a proper filter. Apply the earlier ZFC ultrafilter lemma. If a countable set belonged to U, so would its complement, contradicting properness. Only finite intersections are used; do not claim U is countably complete.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Lemma 16.36 proof, assertion (1), printed p331; proper-filter construction expanded locally (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-aronszajn-finite-petals-incomparability",
+        "kind": "lemma",
+        "title": "Two finite disjoint petals can be made cross-incomparable",
+        "deps": [
+          "def-aronszajn-suslin-and-special-tree",
+          "lem-cocountable-ultrafilter-on-uncountable-set",
+          "lem-ultrafilter-prime",
+          "lem-tree-predecessors-and-common-extensions",
+          "thm-countable-union-of-countable",
+          "def-filter",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For an uncountable family of pairwise disjoint finite subsets of an Aronszajn tree, two members have every node of one incomparable with every node of the other.",
+        "strategy": "Thin to a positive fixed finite size m. Assuming failure, for each S the sets Y(x,i) of other petals whose ith node is comparable with x∈S form a finite cover modulo one exception. A cocountable ultrafilter selects some Y(xS,iS). Thin to constant i. For S,R, the intersection of the two selected sets is uncountable, so choose a petal whose ith node is higher than xS and xR (bounded levels are countable and petals disjoint). It extends both, hence xS,xR are comparable. Distinct petals give uncountably many distinct xS, contradicting Aronszajn. Handle empty petals separately.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Lemma 16.36, printed pp331–332; bounded-level exclusion and maximal-branch argument expanded locally (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "def-finite-aronszajn-specialization-poset",
+        "kind": "definition",
+        "title": "Finite specializing conditions",
+        "deps": [
+          "def-aronszajn-suslin-and-special-tree",
+          "def-poset-ccc-and-knaster-property"
+        ],
+        "statement": "P(T) consists of finite partial maps p:T→ω such that x<_T y in dom(p) implies p(x)≠p(y). Order by reverse inclusion of graphs.",
+        "strategy": "Comparable means distinct here; never demand p(x)≠p(x). Compatibility must be checked on the union, not inferred from agreeing on overlap.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Lemma 16.37, printed p332; reflexive order and distinct-node conventions corrected explicitly (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-aronszajn-specialization-poset-ccc",
+        "kind": "theorem",
+        "title": "Finite specialization of an Aronszajn tree is ccc",
+        "deps": [
+          "def-finite-aronszajn-specialization-poset",
+          "cor-indexed-omega-one-delta-system",
+          "lem-aronszajn-finite-petals-incomparability",
+          "thm-countable-union-of-countable",
+          "thm-product-of-countable",
+          "thm-well-ordering-theorem",
+          "def-poset-ccc-and-knaster-property",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For every Aronszajn tree T, P(T) is ccc.",
+        "strategy": "Given an uncountable family, thin domains to a delta system and root labels to one assignment. Petals are pairwise disjoint; apply the finite-petals lemma and take the union of the resulting two conditions. Root-to-petal constraints already held in the original conditions. Pairs in one petal satisfy the original condition; the petal lemma is used only when one node is in each of the two different petals. If an empty petal repeats, the common root condition is already compatible.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Lemma 16.37, printed p332; corrected indexed-delta reference and complete union case analysis (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-specialization-dense-domains-and-union",
+        "kind": "lemma",
+        "title": "Dense domains and directed unions of specializing conditions",
+        "deps": [
+          "def-finite-aronszajn-specialization-poset",
+          "def-aronszajn-suslin-and-special-tree"
+        ],
+        "statement": "For each t∈T, Dt={p:t∈dom(p)} is dense. If a downward-directed family G meets every Dt, its union is a total specializing function.",
+        "strategy": "Avoid finitely many labels to add t. Directedness ensures consistency of values and of constraints on any two nodes. Existence of such G is not asserted from ccc; applications of Martin’s axiom belong later.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Theorem 16.38 proof, printed p332; density and union argument only, with no invocation of Martin’s axiom (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "def-diamond-on-omega-one",
+        "kind": "definition",
+        "title": "Diamond on ω1",
+        "deps": [
+          "def-club-subsets-of-ordinals",
+          "def-club-filter-and-nonstationary-ideal",
+          "def-first-uncountable-ordinal"
+        ],
+        "statement": "Diamond is a sequence ⟨Aα:α<ω1⟩ with Aα⊆α such that {α:A∩α=Aα} is stationary for every A⊆ω1.",
+        "strategy": "Include the stationary quantifier, not merely unbounded guesses. The sequence is an extra principle, not supplied by ZFC.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Karagila, Axiomatic Set Theory, Definition 9.7, printed p44 (https://karagila.org/files/set-theory-2017.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "prop-diamond-implies-continuum-hypothesis",
+        "kind": "proposition",
+        "title": "Diamond implies CH",
+        "deps": [
+          "def-diamond-on-omega-one",
+          "def-cardinal",
+          "thm-cantor-powerset",
+          "def-club-subsets-of-ordinals",
+          "def-axiom-of-choice"
+        ],
+        "statement": "In ZFC, diamond implies 2^ℵ0=ℵ1.",
+        "strategy": "For each real A⊆ω, take the least α>ω with Aα=A, which exists by diamond. This is an injection P(ω)→ω1; Cantor gives the reverse cardinal inequality.",
+        "axiom_base": "ZFC + diamond",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Karagila, Axiomatic Set Theory, Proposition 9.8, printed p44; least-index injection expanded locally (https://karagila.org/files/set-theory-2017.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "def-ostaszewski-club-principle",
+        "kind": "definition",
+        "title": "The Ostaszewski club principle",
+        "deps": [
+          "def-club-filter-and-nonstationary-ideal",
+          "def-cofinal-subset-of-an-ordinal",
+          "def-first-uncountable-ordinal",
+          "def-axiom-of-choice",
+          "thm-recursion"
+        ],
+        "statement": "Clubsuit is a sequence Cα cofinal in α for nonzero countable limit α, such that for every uncountable X⊆ω1, stationarily many α satisfy Cα⊆X. One may require each Cα to have order type ω.",
+        "strategy": "Distinguish the club principle from asserting that each Cα is a club of ω1. The order-type-ω convention is attained by thinning a cofinal set at each countable limit, using ZFC.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Mildenberger–Shelah, Specialising Aronszajn Trees, September 4, 2015 draft, Definition 1.11, printed p4; order-type-omega thinning proved locally (https://home.mathematik.uni-freiburg.de/mildenberger/postings/paperspdf/988_2015_09_04.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "prop-diamond-implies-ostaszewski-club",
+        "kind": "proposition",
+        "title": "Diamond implies clubsuit",
+        "deps": [
+          "def-diamond-on-omega-one",
+          "def-ostaszewski-club-principle",
+          "lem-limit-points-of-unbounded-sets",
+          "thm-small-intersections-of-clubs",
+          "thm-countable-subsets-of-omega-one-are-bounded",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Diamond implies the club principle.",
+        "strategy": "At limit α where Aα is cofinal choose an ω-ladder inside Aα; otherwise choose any ladder in α. For an uncountable X, intersect its stationary diamond guessing set with the club of its limit points. Every α there satisfies Cα⊆X.",
+        "axiom_base": "ZFC + diamond",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Mildenberger–Shelah, Specialising Aronszajn Trees, September 4, 2015 draft, Definitions 1.9 and 1.11, printed p4; implication derived locally (https://home.mathematik.uni-freiburg.de/mildenberger/postings/paperspdf/988_2015_09_04.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "def-jensen-square-sequence",
+        "kind": "definition",
+        "title": "Jensen’s square principle with its order-type bound",
+        "deps": [
+          "def-club-subsets-of-ordinals",
+          "def-cardinal",
+          "def-axiom-of-choice",
+          "thm-regularity-of-the-alephs",
+          "cor-cardinal-absorption"
+        ],
+        "statement": "For infinite κ, squareκ asserts a sequence Cα, indexed by nonzero limit α<κ+, where Cα is club in α, otp(Cα)≤κ, and Cβ=Cα∩β whenever β is a limit point of Cα. A thread is a club D⊆κ+ with D∩α=Cα at every limit point α of D.",
+        "strategy": "Record the bound on order type, not merely cardinality. The bound rules out threads: an increasing enumeration of D has an initial segment of limit order type strictly larger than κ below κ+. This is squareκ, not an unqualified square(κ) principle. No implication from V=L is used.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Cummings–Magidor, Martin’s Maximum and weak square, Definition 1.1, p1, and width-one identification, p2; no-thread consequence proved locally (https://www.math.cmu.edu/users/jcumming/papers/mm_square_final.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-countable-tree-antichain-sealing",
+        "kind": "lemma",
+        "title": "Seal a maximal antichain at a countable limit level",
+        "deps": [
+          "lem-countable-normal-tree-cofinal-branch",
+          "lem-tree-predecessors-and-common-extensions",
+          "def-normal-splitting-set-theoretic-tree"
+        ],
+        "statement": "In a countable normal tree of nonzero countable limit height, a countable covering family of cofinal branches can be chosen so every branch meets a given maximal antichain. Adding their distinct tops makes every new top extend a member of the antichain.",
+        "strategy": "For each node, maximality gives a comparable antichain node; extend above both, then take a cofinal branch. Deduplicate branches before adding tops. Normality and countability are preserved.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Karagila, Set Theory (2017), Lemma9.11"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "lem-club-tree-coding-antichain-reflection",
+        "kind": "lemma",
+        "title": "A club of correctly coded maximal-antichain restrictions",
+        "deps": [
+          "lem-closure-points-on-regular-cardinals",
+          "lem-tree-predecessors-and-common-extensions",
+          "thm-small-intersections-of-clubs",
+          "thm-countable-subsets-of-omega-one-are-bounded",
+          "cor-cardinal-absorption",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For a tree T of height ω1 with countable levels and a maximal antichain A, code T bijectively on ω1. There is a club of limit δ for which the coded nodes below δ are exactly T below level δ and A∩δ is maximal in that restriction.",
+        "strategy": "Close δ under the height map and under a function bounding codes on each countable level. Apply the published elementary-initial-segment club theorem to the countable-language structure (ω1,<_T,A) and intersect the two clubs. The first-order maximality sentence transfers. This uses neither V=L nor any unproved diamond construction. Alternatively choose for each node t a comparable a(t) in A, and close the coding ordinal under the code of a(t), the height map and bounds on each countable level. This proves reflection directly for any omega-one-tree; assuming T is already Suslin would be circular.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Karagila, Axiomatic Set Theory, Theorem 9.10 proof, printed p45; direct closure-map alternative to elementary-substructure reflection (https://karagila.org/files/set-theory-2017.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-diamond-constructs-normal-suslin-tree",
+        "kind": "theorem",
+        "title": "Diamond constructs a normal splitting Suslin tree",
+        "deps": [
+          "def-diamond-on-omega-one",
+          "lem-countable-tree-antichain-sealing",
+          "lem-club-tree-coding-antichain-reflection",
+          "lem-splitting-cofinal-branch-gives-antichain",
+          "thm-transfinite-recursion",
+          "thm-countable-union-of-countable",
+          "thm-zorn",
+          "thm-well-ordering-theorem",
+          "def-normal-splitting-set-theoretic-tree",
+          "def-aronszajn-suslin-and-special-tree",
+          "lem-tree-predecessors-and-common-extensions",
+          "def-axiom-of-choice"
+        ],
+        "statement": "In ZFC, diamond implies that a normal splitting Suslin tree exists.",
+        "strategy": "Build countable levels on ω1 with a fixed coherent level coding. Split at successors. At countable limits, if the diamond guess is a maximal antichain in the current tree, seal it with the preceding lemma; otherwise add a covering countable family of branches. For a maximal antichain A in the final tree, intersect its stationary guessing set with the coding/reflection club. At a matching δ all later nodes lie above A∩δ, so maximality forces A⊆T below δ. Thus all antichains are countable; splitting rules out cofinal branches. Explain the coding club rather than assuming arbitrary δ is a level boundary. Extend any antichain to a maximal one using Zorn: the union of an inclusion chain of antichains is an antichain. During the construction allocate all nodes consecutively from ω1 in countable blocks (root first); limit stages use the raw diamond guess only when it is a subset of the current node set and maximal there. The final coding club supplies exactly the stages where the raw guess equals the required initial-level antichain. Account explicitly for distinct top branches and countably infinite nonroot levels so the final coding is a bijection onto ω1.",
+        "axiom_base": "ZFC + diamond",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Karagila, Axiomatic Set Theory, Theorem 9.10 and Lemma 9.11, printed pp44–45; consecutive coding and deterministic recursion expanded locally (https://karagila.org/files/set-theory-2017.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-splitting-suslin-tree-poset-square-not-ccc",
+        "kind": "theorem",
+        "title": "A ccc tree poset whose square is not ccc",
+        "deps": [
+          "def-poset-ccc-and-knaster-property",
+          "def-finite-support-poset-product",
+          "def-normal-splitting-set-theoretic-tree",
+          "def-aronszajn-suslin-and-special-tree",
+          "lem-tree-predecessors-and-common-extensions",
+          "def-axiom-of-choice"
+        ],
+        "statement": "If T is a normal splitting Suslin tree, its reverse-extension poset is ccc but T×T is not ccc.",
+        "strategy": "For each node t choose two distinct immediate successors t0,t1. The pairs (t0,t1) form an uncountable product antichain. For comparable distinct parent nodes, simultaneous compatibility of both coordinates would force the later parent to extend both earlier successors, impossible. For incomparable parents, either coordinate is incompatible.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), tree definitions printed p65 and Proposition 9.34 printed pp86–87; split-pair product proof supplied locally (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "def-suslin-line-order-interface",
+        "kind": "definition",
+        "title": "Suslin lines in order language",
+        "deps": [
+          "def-partial-order",
+          "def-countable"
+        ],
+        "statement": "A Suslin line here is a dense linear order without endpoints, Dedekind complete, with no countable order-dense subset and no uncountable family of pairwise disjoint nonempty open intervals.",
+        "strategy": "Define these properties in order language; the absence of a countable dense set is not the assertion that every interval is nonseparable. A nowhere-separable core is a separate reduction in the Kurepa interface.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Theorem 9.17, printed pp72–73; dense complete order convention separated from nowhere-separable reduction (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "rem-kurepa-suslin-line-tree-interface",
+        "kind": "remark",
+        "title": "Kurepa’s line/tree correspondence: downstream proof contract",
+        "deps": [
+          "def-suslin-line-order-interface",
+          "def-aronszajn-suslin-and-special-tree"
+        ],
+        "statement": "Orientation: in ZFC a Suslin line exists iff a Suslin tree exists. The full equivalence is to be proved on suslin-trees-lines-algebras-and-independence, with normal-tree reduction, lexicographic maximal branches, order completion, and the nowhere-separable core accounted for.",
+        "strategy": "Non-load-bearing orientation only. Full Monk9.12–9.18 and9.36–9.37 read, with normalization/completion and rational-specialization corrections recorded in phase-2-set-blocker-resolution-2026-09-08.md. SET17 owns all these preparatory lemmas and both implications.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-supplied"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Theorems 9.13, 9.17 and 9.18, printed pp68–75; recorded equivalence with later proof ownership (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "open_obligations": [],
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_destinations": [
+          "suslin-trees-lines-algebras-and-independence"
+        ],
+        "external_refs": [],
+        "review_status": "proposed orientation; source read and downstream ownership resolved",
+        "proved_here": false,
+        "external_dependency": {
+          "source_url": "https://euclid.colorado.edu/~monkd/jech.pdf",
+          "exact_statement": "In ZFC a Suslin line exists if and only if a Suslin tree exists.",
+          "local_proof_attempt": "The definitions and independent tree constructions do not supply normalization, lexicographic branch order, completion preservation or the nowhere-separable reduction. Those steps are explicitly assigned to SET-17; no local proof is claimed.",
+          "necessity": "Orientation to the later suslin-trees-lines-algebras-and-independence page; this recorded result has no local consumer."
+        }
+      },
+      {
+        "id": "def-partition-arrow-notation",
+        "kind": "definition",
+        "title": "Partition arrows and homogeneous sets",
+        "deps": [
+          "def-cardinal"
+        ],
+        "statement": "κ→(λ)^n_r means every map from n-element subsets of κ to r has a homogeneous subset of cardinality λ.",
+        "strategy": "Distinguish fixed finite n from simultaneous all-finite-subsets assertions, ordinal targets from cardinal targets, and finite numbers of colors from infinite ones.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Chapter 29 opening partition definitions, printed p647; zero-arity and empty-subset conventions made explicit (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "thm-infinite-ramsey-finite-colors",
+        "kind": "theorem",
+        "title": "Infinite Ramsey theorem for fixed finite arity and colors",
+        "deps": [
+          "def-partition-arrow-notation",
+          "thm-recursion",
+          "thm-induction-principle",
+          "thm-well-ordering-theorem",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For positive finite n and r, every r-coloring of the n-element subsets of ω has an infinite homogeneous set.",
+        "strategy": "Induct on n. At n=1 use the infinite pigeonhole principle. At n+1 recursively choose increasing mi and nested infinite tails Si, each tail homogeneous for the n-variable coloring obtained by adjoining mi. Thin the indices to one of the finitely many tail colors; the corresponding mi form an infinite homogeneous set. This proof uses choices of infinite homogeneous tails, so retain the stated ZFC hypothesis rather than mislabeling it a canonical ZF construction.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Theorem 29.1, printed p648; increasing-tail recursion and choice of homogeneous tails expanded locally (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Theorem 9.9, printed pp62–63; relative finite iteration for the arbitrary-cardinal adaptation (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; local proof route supplied, independent review required",
+        "id": "def-finite-beth-iteration-above-a-cardinal",
+        "kind": "definition",
+        "title": "Finite beth iteration above an infinite cardinal",
+        "deps": [
+          "def-aleph-and-beth-hierarchies",
+          "thm-recursion",
+          "thm-transfinite-recursion",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For infinite cardinal kappa, define beth_0(kappa)=kappa and beth_(n+1)(kappa)=2^beth_n(kappa) for natural n. A superscript + on these cardinals denotes the successor cardinal.",
+        "strategy": "Apply natural-number recursion to cardinal powers under ZFC. This is a relative finite iteration, not the existing beth hierarchy starting at omega."
+      },
+      {
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Theorem 9.9, printed pp62–63, countable-color pattern closure; arbitrary-cardinal proof expanded from the assigned local resolution (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; local proof route supplied, independent review required",
+        "id": "lem-erdos-rado-pattern-closure-and-end-homogeneity",
+        "kind": "lemma",
+        "title": "Pattern closure yields an end-homogeneous sequence",
+        "deps": [
+          "def-partition-arrow-notation",
+          "lem-cardinal-arithmetic-basic-laws",
+          "cor-cardinal-absorption",
+          "thm-regularity-of-the-alephs",
+          "thm-every-infinite-cardinal-is-an-aleph",
+          "thm-transfinite-recursion",
+          "thm-cantor-powerset",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Let mu be infinite, 1<=r<=mu, d>=1 finite, lambda=(2^mu)^+, and F:[lambda]^(d+1)->r. There are distinct x_alpha for alpha<mu^+ and a outside their range such that F(u union {x_alpha})=F(u union {a}) for every d-element subset u of {x_beta:beta<alpha}. The sequence need not be increasing in lambda.",
+        "strategy": "Build increasing A_xi of size 2^mu for xi<mu^+. At each successor, for every C subset A_xi of size <=mu and every realized restriction u->F(u union {z}) on [C]^d for z outside C, add the least such z. There are at most (2^mu)^mu=2^mu subsets C and at most r^mu<=2^mu patterns; justify both with exponent laws and mu*mu=mu, including C empty. Limit unions and the final union A still have size 2^mu, since mu^+<=2^mu. Regularity of mu^+ puts each <=mu-sized C subset A inside some A_xi. Choose a outside A. Recursively take x_alpha in A outside the previous sequence with the same pattern as a on previous nodes. Such a representative exists by closure; choose the least one. Do not copy the countable-base variable slip in Monk's displayed equality."
+      },
+      {
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Theorem 9.9, printed pp62–63; arbitrary infinite-cardinal generalization and zero case proved locally (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; local proof route supplied, independent review required",
+        "id": "thm-general-cardinal-erdos-rado",
+        "kind": "theorem",
+        "title": "Erdős–Rado for arbitrary infinite cardinals and finite arity",
+        "deps": [
+          "def-finite-beth-iteration-above-a-cardinal",
+          "lem-erdos-rado-pattern-closure-and-end-homogeneity",
+          "cor-cardinal-absorption",
+          "thm-induction-principle",
+          "def-partition-arrow-notation",
+          "thm-cantor-powerset",
+          "def-axiom-of-choice"
+        ],
+        "statement": "In ZFC, beth_n(kappa)^+ -> (kappa^+)^(n+1)_kappa for every infinite cardinal kappa and every natural n, including n=0.",
+        "strategy": "Induct on n. For n=0, a kappa-coloring of kappa^+ has a fiber of size kappa^+: otherwise its kappa fibers each have size <=kappa, contradicting cardinal absorption. For n>=1 put mu=beth_(n-1)(kappa), apply the pattern-closure lemma with d=n and r=kappa, and define G on n-subsets of mu^+ by G(v)=F({x_beta:beta in v} union {a}). The induction hypothesis gives a kappa^+-sized homogeneous index set. For any (n+1)-subset of those indices use its largest INDEX alpha, not the ambient ordinal order of x_alpha; end-homogeneity reduces its F-color to G on the other n indices. The image is the desired homogeneous set. No recorded result, large cardinal or unproved stepping-up theorem is used."
+      },
+      {
+        "id": "rem-ramsey-and-erdos-rado-orientation",
+        "kind": "remark",
+        "title": "Ramsey and Erdős–Rado: exact orientation obligations",
+        "deps": [
+          "def-partition-arrow-notation",
+          "thm-infinite-ramsey-finite-colors",
+          "thm-general-cardinal-erdos-rado"
+        ],
+        "statement": "Retain the classical targets ω→(ω)^n_r for positive finite n,r, and beth_n(κ)+→(κ+)^(n+1)_κ for infinite κ and finite n. The latter uses beth_0(κ)=κ and beth_(m+1)(κ)=2^beth_m(κ).",
+        "strategy": "Both displayed targets are proved by the preceding local Ramsey and general-cardinal Erdos–Rado theorems. The generalization of Monk 9.9 includes the complete pattern-counting and successor-length closure argument; no deferred theorem is consumed.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "open_obligations": [],
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_destinations": [],
+        "external_refs": [],
+        "review_status": "proposed; proof ownership resolved locally",
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Theorem 29.1, printed p648, and Theorem 9.9, printed pp62–63; orientation to the completed local proofs (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ]
+      },
+      {
+        "id": "def-pruned-tree-products-and-dense-matrices",
+        "kind": "definition",
+        "title": "Finite products of pruned trees and dense matrices",
+        "deps": [
+          "def-set-theoretic-tree-and-levels"
+        ],
+        "statement": "For a rooted finitely branching height-ω tree with no terminal nodes, A is (h,k)-dense if some node at height h has every extension at height h+k below a member of A. A k-matrix for T1,...,Td is a product of (0,k)-dense sets; an (h,k)-matrix uses that common h in every factor. The level product uses tuples of equal height. Define k-dense as (0,k)-dense, infinity-dense as k-dense for every natural k, and domination of a node t by A as the existence of a in A with t<=a. Then A is k-dense iff it dominates the entire kth level, and infinity-dense iff it dominates every node.",
+        "strategy": "Specify d is a positive finite integer. Dense matrices concern the full product; do not conflate them with a same-level product or a finite-height tree. The unique root is below every node, so its level-k cone is exactly the kth level, proving the first equivalence. Every node lies on a finite level; quantifying the first equivalence over all k proves the second. These are the two harvested inline propositions, not an appeal to the deferred matrix theorem.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Halpern–Läuchli definitions and Propositions 1–2 preceding Theorem 29.28, printed p661 (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "rem-halpern-lauchli-finite-tree-statement",
+        "kind": "remark",
+        "title": "Halpern–Läuchli matrix statement and proof destination",
+        "deps": [
+          "def-pruned-tree-products-and-dense-matrices"
+        ],
+        "statement": "For a positive finite family of rooted finitely branching height-ω trees without terminal nodes and Q⊆∏Ti, either every k admits a k-matrix inside Q, or there is h such that every k admits an (h,k)-matrix inside the complement of Q.",
+        "strategy": "Non-load-bearing statement matching Monk29.28; complete proof pp661–670 read. SET21 owns the finite word-calculus and density-thinning lemmas, the matrix theorem and separate symmetric-model application. Extend all final cone roots to a common height and restrict dense sets there, as recorded in the resolution receipt. No strong-subtree equivalence is assumed.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-supplied"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), standing tree conventions and Theorem 29.28 statement, printed p661; full proof destination pp661–670 (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "open_obligations": [],
+        "justified_by": [],
+        "forward_refs": [],
+        "proof_destinations": [
+          "halpern-lauchli-and-bpi-without-choice"
+        ],
+        "external_refs": [],
+        "review_status": "proposed orientation; source read and downstream ownership resolved",
+        "proved_here": false,
+        "external_dependency": {
+          "source_url": "https://euclid.colorado.edu/~monkd/jech.pdf",
+          "exact_statement": "For positive finite d and rooted finitely branching height-omega trees without terminal nodes, every subset Q of the full product contains a k-matrix for every k, or there is h such that its complement contains an (h,k)-matrix for every k.",
+          "local_proof_attempt": "The two density equivalences and the empty/full Q instances are proved locally. They do not establish the word-calculus and density-thinning argument for arbitrary Q; that proof, including the common-height cone restriction, is assigned to SET-21.",
+          "necessity": "Orientation to halpern-lauchli-and-bpi-without-choice; no local theorem uses this recorded dichotomy."
+        }
+      }
+    ]
+  },
+  {
+    "order": 672,
+    "id": "set-theoretic-trees-delta-systems-and-diamond-examples",
+    "kind": "B",
+    "category": "foundations",
+    "title": "Set-Theoretic Trees, Delta Systems, and Diamond: Examples and Counterexamples",
+    "companion": "set-theoretic-trees-delta-systems-and-diamond",
+    "requires": [
+      "set-theoretic-trees-delta-systems-and-diamond"
+    ],
+    "items": [
+      {
+        "id": "ex-binary-tree-and-konig-branch",
+        "kind": "example",
+        "title": "The binary tree and a cofinal branch",
+        "deps": [
+          "thm-konig-finite-level-tree"
+        ],
+        "statement": "The tree 2^{<ω} has 2^n nodes on level n and the constant-zero sequence determines an infinite branch.",
+        "strategy": "Check predecessor order by restriction and exhibit the branch directly; use König for an arbitrary infinite prefix-closed binary subtree.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Theorem 9.32, printed p86; explicit binary-tree instance"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "cex-countable-levels-do-not-suffice-for-konig",
+        "kind": "counterexample",
+        "title": "Countable levels do not suffice for König’s lemma",
+        "deps": [
+          "def-set-theoretic-tree-and-levels",
+          "thm-konig-finite-level-tree",
+          "thm-product-of-countable",
+          "lem-subset-of-countable",
+          "thm-well-ordering-principle"
+        ],
+        "statement": "Finite strictly decreasing sequences of natural numbers form a height-ω tree with countable levels and no infinite branch.",
+        "strategy": "Sequences beginning at sufficiently large integers give arbitrary finite height; an infinite branch would be an infinite decreasing sequence in ω, contradicting well-ordering. The root has infinitely many successors.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Theorem 9.32, printed p86; decreasing-sequence witness supplied locally (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "ex-uncountable-delta-system-with-one-point-root",
+        "kind": "example",
+        "title": "An explicit uncountable delta system",
+        "deps": [
+          "def-finite-delta-system"
+        ],
+        "statement": "The family {{0,α+1}:α<ω1} is a delta system with root {0}.",
+        "strategy": "Compute every pairwise intersection and contrast with the pairwise disjoint singleton family, whose root is empty.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Theorem 9.20, printed pp77–78; explicit pairwise-intersection instance"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "cex-infinite-sets-delta-system-hypothesis",
+        "kind": "counterexample",
+        "title": "Finite sets cannot be replaced by arbitrary countable sets",
+        "deps": [
+          "def-finite-delta-system",
+          "thm-regular-uncountable-finite-delta-system"
+        ],
+        "statement": "The ω1-indexed family of infinite countable ordinals {α:ω≤α<ω1} has no uncountable delta subsystem.",
+        "strategy": "For α<β, α∩β=α. Three distinct members already have unequal pairwise intersections. All members are countable, so the finiteness restriction is substantive.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Theorem 9.20, printed pp77–78; explicit pairwise-intersection instance"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "ex-finite-specialization-compatibility",
+        "kind": "example",
+        "title": "Agreement on overlap is insufficient for specialization compatibility",
+        "deps": [
+          "def-finite-aronszajn-specialization-poset"
+        ],
+        "statement": "For x<_T y, {(x,0)} and {(y,0)} have disjoint domains but are incompatible; {(x,0)} and {(y,1)} have a common extension.",
+        "strategy": "Compute the union in each case. This explains why a delta system alone is not the ccc proof.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Monk, Set theory following Jech (2024), Lemma 16.37 defining condition (iii), printed p332; two singleton assignments calculated locally (https://euclid.colorado.edu/~monkd/jech.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "ex-diamond-suslin-ccc-square",
+        "kind": "example",
+        "title": "Under diamond, ccc fails to survive a square",
+        "deps": [
+          "thm-diamond-constructs-normal-suslin-tree",
+          "thm-splitting-suslin-tree-poset-square-not-ccc",
+          "lem-finite-knaster-poset-products",
+          "def-poset-ccc-and-knaster-property",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assuming diamond, the constructed tree poset is ccc and its square contains the explicit uncountable split-pair antichain.",
+        "strategy": "Keep diamond in the example hypothesis; ZFC alone has not supplied this Suslin tree. Contrast the finite-support Knaster theorem by observing this tree poset cannot be Knaster.",
+        "axiom_base": "ZFC + diamond",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Karagila, Axiomatic Set Theory, Theorem 9.10, printed pp44–45; ordinal-coded instance of the local split-pair theorem (https://karagila.org/files/set-theory-2017.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      },
+      {
+        "id": "fs-every-omega-one-tree-has-a-cofinal-branch",
+        "kind": "false-statement",
+        "title": "FALSE: every ω1-tree has a cofinal branch",
+        "deps": [
+          "thm-special-aronszajn-tree-construction",
+          "def-kappa-tree-and-tree-property",
+          "def-aronszajn-suslin-and-special-tree",
+          "thm-countable-subsets-of-omega-one-are-bounded",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Even a normal splitting ω1-tree with countable levels can have no cofinal branch.",
+        "strategy": "Use the earlier rationally specialized Aronszajn construction, which is a ZFC counterexample. Check all tree hypotheses and use the strictly increasing rational labels to exclude an ω1 branch.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_support": [
+          "Karagila, Axiomatic Set Theory, Theorem 9.2 and Exercise 9.4, printed p43; application of the local special-tree construction (https://karagila.org/files/set-theory-2017.pdf)"
+        ],
+        "justified_by": [],
+        "forward_refs": [],
+        "review_status": "proposed; no readiness attestation"
+      }
+    ]
+  }
+]

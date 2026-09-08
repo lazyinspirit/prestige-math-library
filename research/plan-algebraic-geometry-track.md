@@ -1,5 +1,32 @@
 # Algebraic geometry track — classical varieties, schemes, sheaves, curves, and blowups
 
+## UC-73 reconciliation — 2026-09-08
+
+The canonical `published-consumer-supplier-ledger.md` classification index and
+its Astra receipts supersede the historical direct-debt rows below. Local
+repairs now close the projective-closure, homogeneous-prime, cone,
+standard-projective-chart, projective-regular-function, affine-dimension,
+global-projective-function, projective-closure-saturation and principal-section
+items, plus the classical prevariety definition, using published suppliers or
+complete local arguments. Their old draft
+edges are no longer required by those repaired proofs. Empty opens have the
+zero ring of actual functions; the rational-function-field identification is
+only for nonempty opens. Strong Nullstellensatz uses declare inherited AC;
+the direct irreducibility and chart arguments remain choice-free.
+
+Other general-variety consumers still require the A366.0403 affine interface
+and later Phase-3 chart/gluing cutovers. Relative projective equations need
+the product-chart structure, not an unrelated dimension theorem. Distinguish
+the all-affine-morphism correspondence from the stronger reduced-algebra
+object correspondence: require only the clause actually used. Reducible and
+empty principal opens need the graph equation tf=1; an irreducible/nonzero-f
+supplier alone is not that general interface. Prove the extension locally
+at cutover or explicitly bind its existing all-algebraic-set suppliers.
+
+No new Algebraic Geometry pair is commissioned by these findings. Do not
+promote drafted interface items because their home page is published, and
+do not treat these bounded audits as certification of all downstream proofs.
+
 Prose scaffold, subjects-02 commission, 2026-08-14. Prefix: **AV**.
 Owned deliverable: this file only. This is not a build: it creates no page,
 authors no item, edits no machine-readable plan, and publishes nothing.
@@ -2358,7 +2385,7 @@ items contain the following **32 direct published-item -> draft-item edges**:
 | AV-3 A | `lem-standard-projective-opens-are-affine-spaces` | `def-affine-algebraic-set` |
 | AV-3 A | `def-projective-closure-affine-set` | `def-affine-algebraic-set` |
 | AV-3 A | `thm-ideal-projective-closure-saturation` | `thm-affine-nullstellensatz-correspondence` |
-| AV-3 A | `lem-projective-irreducibility-homogeneous-prime` | `thm-affine-nullstellensatz-correspondence` |
+| AV-3 A | `lem-projective-irreducibility-homogeneous-prime` | Closed locally by UC-73 Astra audit: uses published `cor-strong-nullstellensatz-two-inclusions`, with inherited AC declared. No draft replacement needed for this item. |
 | AV-3 A | `def-regular-function-projective-variety` | `def-function-field-variety` |
 | AV-3 A | `def-regular-function-projective-variety` | `def-regular-function-classical-variety` |
 | AV-3 A | `thm-global-regular-functions-projective-variety` | `thm-global-regular-functions-affine-variety-coordinate-ring` |
@@ -2433,57 +2460,61 @@ No A requirement names a B page. The B page contains the single leaf example
 listed below, and no page or item may depend on it. The A inventory order is
 binding; every internal dependency points to an earlier row. External item
 dependencies are taken only from the four declared A-page interfaces.
-Every A statement below is `literature-derived`; the sixteen definition rows
-have proof provenance `not-applicable` and the other twenty-eight rows have
+Every A statement below is `literature-derived`; the seventeen definition rows
+have proof provenance `not-applicable` and the other thirty-one rows have
 proof provenance `ai-altered`. The B example is `literature-derived` with
 proof provenance `not-applicable`.
 
-| # | exact A-item id | exact title and proof obligation |
+| # | exact A-item id | exact title, proof obligation and dependencies |
 |---:|---|---|
-| 1 | `def-classical-affine-algebraic-set-with-empty-boundaries` | *Classical affine algebraic sets, including the empty boundaries*: define $V(S)$, $V(\varnothing)$, and $V(1)$. |
-| 2 | `lem-classical-zero-locus-ideal-radical-invariance` | *A classical zero locus depends only on the generated ideal and its radical*. |
-| 3 | `thm-classical-affine-zero-loci-form-zariski-closed-sets` | *Classical affine zero loci form the Zariski closed sets*: prove arbitrary intersections and finite unions. |
-| 4 | `def-classical-vanishing-ideal` | *The classical vanishing ideal*. |
-| 5 | `lem-classical-zero-locus-vanishing-ideal-galois-connection` | *Zero loci and vanishing ideals form a Galois connection*. |
-| 6 | `thm-classical-affine-nullstellensatz-correspondence` | *Classical affine algebraic sets correspond to radical ideals, and irreducible sets to prime ideals*: cite both exact Nullstellensatz directions and carry their choice strength. |
-| 7 | `def-classical-affine-variety-interface` | *A classical affine variety*: nonempty and irreducible over an algebraically closed field. |
-| 8 | `lem-classical-irreducible-space-open-intersection-criterion` | *Irreducibility is equivalent to the nonempty-open intersection criterion*. |
-| 9 | `lem-classical-affine-variety-nonempty-opens-dense` | *Every nonempty open of a classical affine variety is dense*. |
-| 10 | `def-classical-affine-coordinate-ring` | *The coordinate ring of a classical affine algebraic set*. |
-| 11 | `thm-classical-affine-variety-prime-coordinate-ring` | *A classical affine variety has a domain coordinate ring, and conversely*. |
-| 12 | `thm-classical-polynomial-functions-equal-coordinate-ring` | *Polynomial functions on an affine algebraic set are its coordinate ring*. |
-| 13 | `def-classical-principal-open` | *A principal open subset of a classical affine variety*. |
-| 14 | `lem-classical-principal-opens-form-affine-basis` | *Principal opens form a basis and multiply under intersection*. |
-| 15 | `thm-classical-principal-open-coordinate-ring-localization` | *Regular functions on a principal open are the principal localization*: include the empty-open case and the strong-Nullstellensatz clearing-denominators step. |
-| 16 | `lem-classical-affine-algebraic-set-finite-irreducible-components` | *A classical affine algebraic set has a unique finite irredundant decomposition*: cite the minimal-prime theorem and inherit its choice strength. |
-| 17 | `def-reduced-finitely-generated-k-algebra-interface` | *A reduced finitely generated $k$-algebra*. |
-| 18 | `lem-classical-affine-closed-points-are-maximal-ideals` | *Classical affine points are maximal ideals*: state algebraic closure and cite weak Nullstellensatz. |
-| 19 | `def-classical-regular-function-on-open-set` | *A regular function on an open subset of a classical affine variety*. |
-| 20 | `lem-classical-regular-functions-locality-and-gluing` | *Classical regular functions satisfy locality and unique gluing*. |
-| 21 | `thm-classical-affine-global-regular-functions-coordinate-ring` | *Global regular functions on a classical affine variety are its coordinate ring*. |
-| 22 | `def-classical-affine-variety-morphism` | *A morphism from an open subset of a classical affine variety to an affine variety*: use pullback of regular functions, so later gluing is well typed. |
-| 23 | `def-classical-regular-map-image-and-set-theoretic-fibre` | *Images and set-theoretic fibres of classical regular maps*: explicitly distinguish later scheme fibres. |
-| 24 | `lem-classical-morphism-inverse-image-of-closed-is-closed` | *A classical morphism pulls Zariski closed sets back to closed sets*: prove it from coordinate pullback, not from an undeclared continuity assertion. |
-| 25 | `thm-classical-affine-morphisms-coordinate-ring-antiequivalence` | *Classical affine morphisms are contravariantly equivalent to coordinate-ring homomorphisms*. |
-| 26 | `thm-classical-affine-algebraic-sets-reduced-algebras-antiequivalence` | *Classical affine algebraic sets and reduced finitely generated $k$-algebras are contravariantly equivalent*: prove objects and morphisms here; this single theorem replaces both the old unproved announcement and its completion corollary. |
-| 27 | `lem-classical-affine-morphisms-equal-on-dense-open` | *Affine-source morphisms agreeing on a dense open agree everywhere*. |
-| 28 | `def-classical-germ-and-local-ring` | *Germs and the local ring of a classical affine variety*. |
-| 29 | `thm-classical-affine-local-ring-is-localization` | *The classical affine local ring is localization at the point's maximal ideal*. |
-| 30 | `thm-classical-principal-open-is-affine-variety` | *Every nonempty principal open is a classical affine variety*: realize $D_X(f)$ by the graph equation $tf-1$ and identify its coordinate ring with $k[X]_f$. |
-| 31 | `def-classical-affine-open-subset` | *A classical affine open subset and its coordinate ring*: principal opens are the proved basis used in this interface. |
-| 32 | `def-classical-variety-function-field` | *The function field of an irreducible classical affine variety*. |
-| 33 | `thm-classical-function-field-independent-of-affine-open` | *The function field is independent of the chosen nonempty principal affine open*. |
-| 34 | `def-classical-rational-map` | *A rational map as an equivalence class of morphisms on nonempty opens*. |
-| 35 | `lem-classical-rational-map-equivalence-transitive` | *The rational-map relation is transitive*: use irreducibility to keep the common restriction nonempty. |
-| 36 | `def-classical-rational-map-domain-union` | *The candidate domain of a rational map*: define only the union of representative domains; assert neither gluing nor maximality here. |
-| 37 | `def-classical-dominant-morphism-and-rational-map` | *Dominant classical morphisms and rational maps*. |
-| 38 | `lem-classical-open-source-morphisms-equal-on-dense-open` | *Morphisms defined on an open source and agreeing on a dense open agree on their common domain*: use row 24 and irreducibility. |
-| 39 | `lem-classical-morphisms-glue-on-open-cover` | *Compatible classical morphisms to an affine target glue over an open cover*: glue coordinate functions by row 20 and verify the image equations locally. |
-| 40 | `thm-classical-rational-map-maximal-domain-affine-target` | *A rational map to an affine target has a unique maximal open domain*: apply rows 38--39 to the union in row 36. |
-| 41 | `lem-classical-dominant-map-pulls-back-function-fields` | *Dominant maps pull back function fields functorially*: use the proved maximal-domain theorem, not the bare union definition. |
-| 42 | `thm-classical-dominant-rational-maps-function-field-embeddings` | *Dominant rational maps to an affine variety correspond to field embeddings*: the reverse direction explicitly cites row 6 for “nondense image implies a nonzero vanishing function.” |
-| 43 | `def-classical-birational-equivalence` | *Birational maps and birational equivalence of classical varieties*. |
-| 44 | `thm-classical-birational-equivalence-iff-function-fields-isomorphic` | *Classical integral varieties are birational exactly when their function fields are isomorphic over $k$*. |
+| 1 | `def-classical-affine-algebraic-set-with-empty-boundaries` | *Classical affine algebraic sets, including the empty boundaries*: define $V(S)$, $V(\varnothing)$, and $V(1)$. Dependencies: `def-multivariate-polynomial-ring-by-iteration`, `def-polynomial-evaluation-and-root`, `def-algebraically-closed-field`. |
+| 2 | `lem-classical-zero-locus-ideal-radical-invariance` | *A classical zero locus depends only on the generated ideal and its radical*. Dependencies: `def-classical-affine-algebraic-set-with-empty-boundaries`, `thm-generated-ideal-description-in-a-commutative-ring`, `def-radical-of-an-ideal`. |
+| 3 | `thm-classical-affine-zero-loci-form-zariski-closed-sets` | *Classical affine zero loci form the Zariski closed sets*: prove arbitrary intersections and finite unions. Dependencies: `def-classical-affine-algebraic-set-with-empty-boundaries`, `lem-classical-zero-locus-ideal-radical-invariance`, `def-sum-and-product-of-ideals`. |
+| 4 | `def-classical-vanishing-ideal` | *The classical vanishing ideal*. Dependencies: `def-classical-affine-algebraic-set-with-empty-boundaries`, `lem-ideal-criterion-and-intersections`. |
+| 5 | `lem-classical-zero-locus-vanishing-ideal-galois-connection` | *Zero loci and vanishing ideals form a Galois connection*. Dependencies: `def-classical-affine-algebraic-set-with-empty-boundaries`, `lem-classical-zero-locus-ideal-radical-invariance`, `def-classical-vanishing-ideal`. |
+| 6 | `thm-classical-affine-nullstellensatz-correspondence` | *Classical affine algebraic sets correspond to radical ideals, and irreducible sets to prime ideals*: cite both exact Nullstellensatz directions and carry their choice strength. The published Zariski suppliers must explicitly embed the localization, apply `cor-integral-elements-form-a-subring` to A[a_i]=K, and prove the specialization onto k[u][1/g] surjective before the g+1 nonunit contradiction; these supplier repairs were applied on 2026-09-08. Dependencies: `thm-classical-affine-zero-loci-form-zariski-closed-sets`, `def-classical-vanishing-ideal`, `lem-classical-zero-locus-vanishing-ideal-galois-connection`, `cor-strong-nullstellensatz-two-inclusions`, `cor-weak-nullstellensatz-algebraically-closed-coordinate-form`, `def-prime-and-maximal-ideals`, `thm-correspondence-theorem-ideals`, `lem-radical-commutes-with-quotient-correspondence`. |
+| 7 | `def-classical-affine-variety-interface` | *A classical affine variety*: nonempty and irreducible over an algebraically closed field. Dependencies: `thm-classical-affine-zero-loci-form-zariski-closed-sets`, `thm-classical-affine-nullstellensatz-correspondence`. |
+| 8 | `lem-classical-irreducible-space-open-intersection-criterion` | *Irreducibility is equivalent to the nonempty-open intersection criterion*. Dependencies: `def-classical-affine-variety-interface`. |
+| 9 | `lem-classical-affine-variety-nonempty-opens-dense` | *Every nonempty open of a classical affine variety is dense*. Dependencies: `lem-classical-irreducible-space-open-intersection-criterion`. |
+| 10 | `def-classical-affine-coordinate-ring` | *The coordinate ring of a classical affine algebraic set*. Dependencies: `def-classical-vanishing-ideal`, `def-quotient-ring`, `thm-quotient-ring-laws`. |
+| 11 | `thm-classical-affine-variety-prime-coordinate-ring` | *A classical affine variety has a domain coordinate ring, and conversely*. Dependencies: `thm-classical-affine-nullstellensatz-correspondence`, `def-classical-affine-variety-interface`, `def-classical-affine-coordinate-ring`, `thm-quotient-is-domain-iff-ideal-prime`. |
+| 12 | `thm-classical-polynomial-functions-equal-coordinate-ring` | *Polynomial functions on an affine algebraic set are its coordinate ring*. Dependencies: `def-classical-affine-coordinate-ring`, `thm-first-isomorphism-theorem-rings`, `thm-universal-property-of-a-polynomial-ring`. |
+| 13 | `def-classical-principal-open` | *A principal open subset of a classical affine variety*. Dependencies: `thm-classical-affine-zero-loci-form-zariski-closed-sets`, `def-classical-affine-coordinate-ring`, `thm-classical-polynomial-functions-equal-coordinate-ring`. |
+| 14 | `lem-classical-principal-opens-form-affine-basis` | *Principal opens form a basis and multiply under intersection*. Dependencies: `thm-classical-affine-zero-loci-form-zariski-closed-sets`, `def-classical-principal-open`. |
+| 15 | `def-classical-regular-function-on-open-set` | *A regular function on an open subset of a classical affine variety*. Dependencies: `def-classical-affine-coordinate-ring`, `thm-classical-polynomial-functions-equal-coordinate-ring`, `lem-classical-principal-opens-form-affine-basis`. |
+| 16 | `lem-classical-regular-functions-locality-and-gluing` | *Classical regular functions satisfy locality and unique gluing*. Dependencies: `def-classical-regular-function-on-open-set`. |
+| 17 | `thm-classical-principal-open-coordinate-ring-localization` | *Regular functions on a principal open are the principal localization*: include the empty-open case and the strong-Nullstellensatz clearing-denominators step. Dependencies: `thm-classical-affine-nullstellensatz-correspondence`, `thm-classical-polynomial-functions-equal-coordinate-ring`, `lem-classical-principal-opens-form-affine-basis`, `def-classical-regular-function-on-open-set`, `lem-classical-regular-functions-locality-and-gluing`, `def-principal-localisation`, `thm-universal-property-of-localisation`, `prop-localisation-zero-equality-and-kernel-criteria`, `thm-generated-ideal-description-in-a-commutative-ring`. |
+| 18 | `lem-classical-affine-algebraic-set-finite-irreducible-components` | *A classical affine algebraic set has a unique finite irredundant decomposition*: cite the minimal-prime theorem and inherit its choice strength. Dependencies: `thm-classical-affine-nullstellensatz-correspondence`, `cor-finite-variable-polynomial-ring-noetherian`, `cor-radical-ideal-has-finitely-many-minimal-primes-noetherian`, `thm-noetherian-ring-ideal-characterisations`, `thm-quotient-is-field-iff-ideal-maximal`. |
+| 19 | `def-reduced-finitely-generated-k-algebra-interface` | *A reduced finitely generated $k$-algebra*. Dependencies: `def-nilradical-and-reduced-ring`, `def-finite-type-and-module-finite-algebras`. |
+| 20 | `lem-classical-affine-closed-points-are-maximal-ideals` | *Classical affine points are maximal ideals*: state algebraic closure and cite weak Nullstellensatz. Dependencies: `thm-classical-affine-nullstellensatz-correspondence`, `def-classical-affine-coordinate-ring`, `cor-weak-nullstellensatz-algebraically-closed-coordinate-form`, `thm-correspondence-theorem-ideals`, `lem-evaluation-ideal-is-maximal`. |
+| 21 | `thm-classical-affine-global-regular-functions-coordinate-ring` | *Global regular functions on a classical affine variety are its coordinate ring*. Dependencies: `thm-classical-principal-open-coordinate-ring-localization`, `def-classical-regular-function-on-open-set`. |
+| 22 | `def-classical-affine-variety-morphism` | *A morphism from an open subset of a classical affine variety to an affine variety*: use pullback of regular functions, so later gluing is well typed. Dependencies: `def-classical-regular-function-on-open-set`, `lem-classical-regular-functions-locality-and-gluing`. |
+| 23 | `def-classical-regular-map-image-and-set-theoretic-fibre` | *Images and set-theoretic fibres of classical regular maps*: explicitly distinguish later scheme fibres. Dependencies: `def-classical-affine-variety-morphism`. |
+| 24 | `lem-classical-morphism-inverse-image-of-closed-is-closed` | *A classical morphism pulls Zariski closed sets back to closed sets*: prove it from coordinate pullback, not from an undeclared continuity assertion. Dependencies: `thm-classical-affine-zero-loci-form-zariski-closed-sets`, `def-classical-regular-function-on-open-set`, `def-classical-affine-variety-morphism`. |
+| 25 | `thm-classical-affine-morphisms-coordinate-ring-antiequivalence` | *Classical affine morphisms are contravariantly equivalent to coordinate-ring homomorphisms*. Dependencies: `thm-classical-affine-nullstellensatz-correspondence`, `thm-classical-polynomial-functions-equal-coordinate-ring`, `thm-classical-affine-global-regular-functions-coordinate-ring`, `def-classical-affine-variety-morphism`, `lem-classical-morphism-inverse-image-of-closed-is-closed`, `thm-quotient-ring-universal-property`, `thm-universal-property-of-a-polynomial-ring`, `def-finite-type-and-module-finite-algebras`. |
+| 26 | `thm-classical-affine-algebraic-sets-reduced-algebras-antiequivalence` | *Classical affine algebraic sets and reduced finitely generated $k$-algebras are contravariantly equivalent*: prove objects and morphisms here; this single theorem replaces both the old unproved announcement and its completion corollary. Dependencies: `thm-classical-affine-nullstellensatz-correspondence`, `def-classical-affine-coordinate-ring`, `def-reduced-finitely-generated-k-algebra-interface`, `lem-classical-affine-closed-points-are-maximal-ideals`, `thm-classical-affine-morphisms-coordinate-ring-antiequivalence`, `cor-reduced-quotient-by-the-nilradical`, `def-finite-type-and-module-finite-algebras`. |
+| 27 | `lem-classical-affine-morphisms-equal-on-dense-open` | *Affine-source morphisms agreeing on a dense open agree everywhere*. Dependencies: `lem-classical-affine-variety-nonempty-opens-dense`, `thm-classical-affine-global-regular-functions-coordinate-ring`, `def-classical-affine-variety-morphism`, `lem-classical-morphism-inverse-image-of-closed-is-closed`. |
+| 28 | `def-classical-germ-and-local-ring` | *Germs and the local ring of a classical affine variety*. Dependencies: `def-classical-regular-function-on-open-set`, `lem-classical-regular-functions-locality-and-gluing`. |
+| 29 | `thm-classical-affine-local-ring-is-localization` | *The classical affine local ring is localization at the point's maximal ideal*. Dependencies: `lem-classical-principal-opens-form-affine-basis`, `lem-classical-affine-closed-points-are-maximal-ideals`, `def-classical-germ-and-local-ring`, `thm-universal-property-of-localisation`, `thm-localisation-at-a-prime-is-local`, `prop-localisation-zero-equality-and-kernel-criteria`. |
+| 30 | `thm-classical-principal-open-is-affine-variety` | *Every nonempty principal open is a classical affine variety*: realize $D_X(f)$ by the graph equation $tf-1$ and identify its coordinate ring with $k[X]_f$. Dependencies: `thm-classical-affine-variety-prime-coordinate-ring`, `thm-classical-principal-open-coordinate-ring-localization`, `def-classical-affine-variety-morphism`, `thm-classical-affine-morphisms-coordinate-ring-antiequivalence`, `thm-universal-property-of-a-polynomial-ring`, `thm-quotient-ring-universal-property`, `thm-universal-property-of-localisation`. |
+| 31 | `def-classical-affine-open-subset` | *A classical affine open subset and its coordinate ring*: principal opens are the proved basis used in this interface. Dependencies: `def-classical-affine-variety-morphism`, `thm-classical-affine-morphisms-coordinate-ring-antiequivalence`, `thm-classical-principal-open-is-affine-variety`. |
+| 32 | `def-classical-variety-function-field` | *The function field of an irreducible classical affine variety*. Dependencies: `thm-classical-affine-variety-prime-coordinate-ring`, `def-field-of-fractions`, `thm-field-of-fractions-is-a-field-and-the-domain-embeds`. |
+| 33 | `lem-classical-regular-functions-on-open-embed-in-function-field` | For X an affine variety and U a nonempty open, every regular function on U determines a unique element of k(X); this is an injective k-algebra map compatible with restrictions. A quotient presentation on any nonempty subopen computes the same field element. Dependencies: `lem-classical-affine-variety-nonempty-opens-dense`, `thm-classical-polynomial-functions-equal-coordinate-ring`, `def-classical-regular-function-on-open-set`, `lem-classical-regular-functions-locality-and-gluing`, `def-classical-variety-function-field`. |
+| 34 | `thm-classical-function-field-independent-of-affine-open` | *The function field is independent of the chosen nonempty principal affine open*. Dependencies: `lem-classical-principal-opens-form-affine-basis`, `thm-classical-principal-open-coordinate-ring-localization`, `thm-classical-principal-open-is-affine-variety`, `def-classical-affine-open-subset`, `def-classical-variety-function-field`, `thm-universal-property-of-the-field-of-fractions`, `lem-classical-regular-functions-on-open-embed-in-function-field`. |
+| 35 | `def-classical-rational-map` | *A rational map as an equivalence class of morphisms on nonempty opens*. Dependencies: `lem-classical-affine-variety-nonempty-opens-dense`, `def-classical-affine-variety-morphism`. |
+| 36 | `lem-classical-rational-map-equivalence-transitive` | *The rational-map relation is transitive*: use irreducibility to keep the common restriction nonempty. Dependencies: `lem-classical-irreducible-space-open-intersection-criterion`, `lem-classical-affine-variety-nonempty-opens-dense`, `def-classical-rational-map`. |
+| 37 | `def-classical-rational-map-domain-union` | *The candidate domain of a rational map*: define only the union of representative domains; assert neither gluing nor maximality here. Dependencies: `def-classical-rational-map`, `lem-classical-rational-map-equivalence-transitive`. |
+| 38 | `def-classical-dominant-morphism-and-rational-map` | *Dominant classical morphisms and rational maps*. Dependencies: `lem-classical-affine-variety-nonempty-opens-dense`, `lem-classical-morphism-inverse-image-of-closed-is-closed`, `def-classical-rational-map`, `lem-classical-rational-map-equivalence-transitive`. |
+| 39 | `lem-classical-open-source-morphisms-equal-on-dense-open` | *Morphisms defined on an open source and agreeing on a dense open agree on their common domain*: use row 24 and irreducibility. Dependencies: `lem-classical-affine-variety-nonempty-opens-dense`, `def-classical-affine-variety-morphism`, `lem-classical-morphism-inverse-image-of-closed-is-closed`. |
+| 40 | `lem-classical-morphisms-glue-on-open-cover` | *Compatible classical morphisms to an affine target glue over an open cover*: glue coordinate functions by row 16 and verify the image equations locally. Dependencies: `lem-classical-regular-functions-locality-and-gluing`, `def-classical-affine-variety-morphism`, `lem-classical-morphism-inverse-image-of-closed-is-closed`. |
+| 41 | `thm-classical-rational-map-maximal-domain-affine-target` | *A rational map to an affine target has a unique maximal open domain*: apply rows 38--39 to the union in row 37. Dependencies: `def-classical-rational-map`, `lem-classical-rational-map-equivalence-transitive`, `def-classical-rational-map-domain-union`, `lem-classical-open-source-morphisms-equal-on-dense-open`, `lem-classical-morphisms-glue-on-open-cover`. |
+| 42 | `lem-classical-dominant-rational-maps-compose` | Dominant rational maps X dashed-arrow Y and Y dashed-arrow Z of affine varieties have a well-defined dominant composite, represented by composition on U intersection phi^{-1}(V). Composition is independent of representatives, associative and has identities. Dependencies: `lem-classical-affine-variety-nonempty-opens-dense`, `lem-classical-morphism-inverse-image-of-closed-is-closed`, `lem-classical-rational-map-equivalence-transitive`, `def-classical-dominant-morphism-and-rational-map`, `lem-classical-open-source-morphisms-equal-on-dense-open`, `thm-classical-rational-map-maximal-domain-affine-target`. |
+| 43 | `lem-classical-dominant-map-pulls-back-function-fields` | *Dominant maps pull back function fields functorially*: use the proved maximal-domain theorem, not the bare union definition. Dependencies: `def-classical-variety-function-field`, `thm-classical-function-field-independent-of-affine-open`, `def-classical-dominant-morphism-and-rational-map`, `thm-classical-rational-map-maximal-domain-affine-target`, `thm-universal-property-of-the-field-of-fractions`, `lem-classical-regular-functions-on-open-embed-in-function-field`, `lem-classical-dominant-rational-maps-compose`. |
+| 44 | `thm-classical-dominant-rational-maps-function-field-embeddings` | *Dominant rational maps to an affine variety correspond to field embeddings*: the reverse direction explicitly cites row 6 for “nondense image implies a nonzero vanishing function.” Dependencies: `thm-classical-affine-nullstellensatz-correspondence`, `thm-classical-affine-morphisms-coordinate-ring-antiequivalence`, `thm-classical-function-field-independent-of-affine-open`, `def-classical-dominant-morphism-and-rational-map`, `thm-classical-rational-map-maximal-domain-affine-target`, `lem-classical-dominant-map-pulls-back-function-fields`. |
+| 45 | `def-classical-integral-affine-atlas-and-chartwise-morphism` | An integral classical prevariety is a nonempty irreducible topological space with a finite cover by opens identified homeomorphically with classical affine varieties, with transition maps and their inverses locally regular. On any open, regular functions are those regular in each chart; a map is a morphism if continuous and if it pulls back all locally regular functions on target opens. Equivalently it is a morphism in affine charts. A classical integral variety satisfies in addition the separation axiom that equalizers of two morphisms from an affine variety into it are closed. Affine varieties meet this axiom by coordinate zero loci. The atlas is part of the data; no theorem constructing a glued space is asserted. Dependencies: `def-classical-affine-variety-interface`, `lem-classical-irreducible-space-open-intersection-criterion`, `def-classical-regular-function-on-open-set`, `lem-classical-regular-functions-locality-and-gluing`, `def-classical-affine-variety-morphism`, `lem-classical-morphism-inverse-image-of-closed-is-closed`, `thm-classical-principal-open-is-affine-variety`, `def-classical-affine-open-subset`. |
+| 46 | `lem-classical-integral-affine-charts-have-canonical-common-function-field` | All nonempty affine charts, and all nonempty affine opens, of an integral classical variety have canonically isomorphic fraction fields. The comparisons satisfy the cocycle identity on triple intersections and commute with restriction and isomorphisms. Denote the resulting field k(X). Dependencies: `def-classical-integral-affine-atlas-and-chartwise-morphism`, `lem-classical-irreducible-space-open-intersection-criterion`, `lem-classical-principal-opens-form-affine-basis`, `thm-classical-principal-open-is-affine-variety`, `thm-classical-function-field-independent-of-affine-open`, `lem-classical-regular-functions-on-open-embed-in-function-field`. |
+| 47 | `def-classical-birational-equivalence` | *Birational maps and birational equivalence of classical varieties*. Dependencies: `def-classical-rational-map`, `def-classical-dominant-morphism-and-rational-map`, `lem-classical-dominant-map-pulls-back-function-fields`, `def-classical-integral-affine-atlas-and-chartwise-morphism`, `lem-classical-integral-affine-charts-have-canonical-common-function-field`. |
+| 48 | `thm-classical-birational-equivalence-iff-function-fields-isomorphic` | *Classical integral varieties are birational exactly when their function fields are isomorphic over $k$*. Dependencies: `thm-classical-function-field-independent-of-affine-open`, `lem-classical-dominant-map-pulls-back-function-fields`, `thm-classical-dominant-rational-maps-function-field-embeddings`, `def-classical-birational-equivalence`, `def-classical-integral-affine-atlas-and-chartwise-morphism`, `lem-classical-integral-affine-charts-have-canonical-common-function-field`. |
 
 The B inventory is exactly one item:
 `ex-classical-affine-line-coordinate-local-and-function-field-dictionary`,
@@ -2492,12 +2523,12 @@ computes $k[\mathbf A^1]$, $k[t]_{(t-a)}$, $k(t)$, a principal open, and the
 corresponding morphism pullback. It is illustrative only and has zero direct
 or transitive consumers.
 
-The proof order adds exact logical edges absent from the old draft: row 30
-uses rows 11, 15, and 25; row 38 uses rows 9, 22, and 24; row 39 uses rows 20
-and 22; row 40 uses rows 34--36 and 38--39; row 41 uses rows 32--33, 37, and
-40; row 42 uses rows 6, 25, 33, 37, 40, and 41. Row 26 is proved and replaces
-both old duality ids, so no item directly or transitively consumes a
-recorded/not-proved result.
+The synchronized A inventory has 48 items. The four added interfaces supply
+regular functions on nonempty opens inside the function field, composition of
+dominant rational maps, integral affine atlases, and the canonical common
+field of overlapping charts. Their exact dependencies are included above in
+manifest order. The proved reduced-algebra antiequivalence replaces the old
+unproved announcement and completion corollary; neither is a supplier.
 
 **Authoritative full text.** The complete classical proofs and their
 hypotheses are in Milne, *Algebraic Geometry*, Ch. 2 §§a--m, Ch. 3 §§a--l,

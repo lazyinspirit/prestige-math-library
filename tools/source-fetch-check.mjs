@@ -28,9 +28,9 @@
 //   3. A PDF must carry the %PDF magic, a substantive size, and — when its
 //      page objects are countable — MORE THAN THREE PAGES: an abstract or
 //      front-matter extract is 1–3 pages, a citable treatment is not. Object-
-//      stream PDFs hide their page tree from a byte scan; those pass on size
-//      and stamp `pages: null`, and the count that IS recorded lets the
-//      step-3 Alpha weigh a claimed locator range against the document.
+//      stream PDFs are counted with MuPDF (`mutool`), since a byte scan can
+//      expose only a fraction of their pages. Parser failure leaves them
+//      unstamped. Step-3 Alpha still checks the claimed source range.
 //   4. An HTML page must carry substantive extracted text.
 //
 // STAMP MODE (`--stamp`) fetches every unstamped source and writes
@@ -41,14 +41,19 @@
 // scouting is owed: an alternate URL for the SAME source, or the archive
 // fallback under url-sweep's convention (url <- snapshot, original_url kept).
 //
-// CHECK MODE (no flag) is the gate: every source carries a stamp. No
-// network, cheap, and non-vacuous — zero sources is a failure, never a pass.
+// CHECK MODE accepts a fetch stamp or a validated Step 1 source-drop record.
+// Drops preserve alternate arguments; they are not fetch or proof approval.
+// No network in check mode; zero sources remains a failure.
 
-import { readFileSync, writeFileSync, existsSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, mkdtempSync, unlinkSync, rmdirSync } from 'node:fs';
+import { tmpdir } from 'node:os';
+import { spawnSync } from 'node:child_process';
+import { getDefaultAutoSelectFamilyAttemptTimeout, setDefaultAutoSelectFamilyAttemptTimeout } from 'node:net';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { REPO } from './paths.mjs';
 import { botWallReason } from './bot-wall.mjs';
+import { sourceDropped, sourceResolutionErrors } from './source-resolution.mjs';
 
 const argv = process.argv.slice(2);
 const option = (name) => { const i = argv.indexOf(name); return i >= 0 && argv[i + 1] ? argv[i + 1] : null; };
@@ -93,6 +98,9 @@ function abstractShape(url) {
  *  needed a stderr marker to recover the final URL; this replaces it.) */
 async function fetchFull(url) {
   try {
+    // The default 250ms address attempt can discard a reachable academic
+    // host before TCP connects. Retain the overall per-fetch deadline.
+    setDefaultAutoSelectFamilyAttemptTimeout(Math.max(2000, getDefaultAutoSelectFamilyAttemptTimeout()));
     const res = await fetch(url, {
       redirect: 'follow',
       signal: AbortSignal.timeout(timeoutSec * 1000),
@@ -112,10 +120,27 @@ async function fetchFull(url) {
   }
 }
 
-/** Count a PDF's page objects from bytes. Object-stream PDFs hide the page
- *  tree; return null rather than a false low count. */
+/** Compressed object streams can hide some or all page objects. A raw scan
+ *  is not a page count in that case: ask a PDF parser for the root count. */
 function pdfPageCount(buffer) {
   const text = buffer.toString('latin1');
+  if (/\/Type\s*\/ObjStm\b/.test(text)) {
+    const dir = mkdtempSync(join(tmpdir(), 'prestige-source-pdf-'));
+    const file = join(dir, 'source.pdf');
+    try {
+      writeFileSync(file, buffer);
+      const result = spawnSync('mutool', ['show', file, 'trailer/Root/Pages/Count'],
+        { encoding: 'utf8', timeout: 30_000, maxBuffer: 1024 * 1024 });
+      const count = result.stdout?.trim();
+      if (result.status !== 0 || !/^[1-9]\d*$/.test(count ?? '')) {
+        throw new Error('compressed PDF page count could not be verified with mutool');
+      }
+      return Number(count);
+    } finally {
+      if (existsSync(file)) unlinkSync(file);
+      rmdirSync(dir);
+    }
+  }
   const pages = text.match(/\/Type\s*\/Page(?![a-zA-Z])/g)?.length ?? 0;
   if (pages > 0) return pages;
   const counts = [...text.matchAll(/\/Type\s*\/Pages[^>]*?\/Count\s+(\d+)/g)].map((m) => Number(m[1]));
@@ -130,7 +155,9 @@ function classify(url, finalUrl, buffer, contentType = '') {
   const head = buffer.subarray(0, 8).toString('latin1');
   if (head.startsWith('%PDF')) {
     if (buffer.length < MIN_PDF) return { fail: `PDF of ${buffer.length} bytes — below the ${MIN_PDF}-byte floor` };
-    const pages = pdfPageCount(buffer);
+    let pages;
+    try { pages = pdfPageCount(buffer); }
+    catch (err) { return { fail: err.message }; }
     if (pages !== null && pages < MIN_PDF_PAGES) {
       return { fail: `PDF with ${pages} page(s) — an abstract or extract, not a citable treatment; find the full document` };
     }
@@ -159,6 +186,7 @@ function classify(url, finalUrl, buffer, contentType = '') {
 let verified = 0;
 let stamped = 0;
 let sources = 0;
+let dropped = 0;
 const failures = [];
 
 for (const file of coverages) {
@@ -170,13 +198,29 @@ for (const file of coverages) {
     for (const source of page.sources ?? []) {
       if (!source?.url) continue;
       sources += 1;
+      const resolutionErrors = sourceResolutionErrors(source);
+      if (resolutionErrors.length) {
+        failures.push(`fetch-check-source-resolution: ${page.page}: ${source.url} — ${resolutionErrors.join('; ')}`);
+        continue;
+      }
+      if (sourceDropped(source)) { dropped += 1; continue; }
       if (source.fetch_verified && !force) { verified += 1; continue; }
       const shape = abstractShape(source.url);
       if (shape) { failures.push(`fetch-check-abstract-url: ${page.page}: ${source.url} — ${shape}`); continue; }
       if (!stampMode) { failures.push(`fetch-check-unstamped: ${page.page}: ${source.url}`); continue; }
-      const got = await fetchFull(source.url);
+      let got, cls;
+      // Initial fetch plus five retries. Scaffolders also search for mirrors,
+      // archives and alternate proofs; repeated failures alone justify no drop.
+      for (let attempt = 0; attempt <= 5; attempt++) {
+        got = await fetchFull(source.url);
+        cls = got.error ? null : classify(source.url, got.finalUrl, got.buffer, got.contentType);
+        (source.recovery_attempts ??= []).push({
+          url: source.url, at: new Date().toISOString(), outcome: got.error ?? cls.fail ?? 'full-text body fetched',
+        });
+        changed = true;
+        if (!got.error && !cls.fail) break;
+      }
       if (got.error) { failures.push(`fetch-check-dead: ${page.page}: ${source.url} — ${got.error}`); continue; }
-      const cls = classify(source.url, got.finalUrl, got.buffer, got.contentType);
       if (cls.fail) { failures.push(`fetch-check-not-full-text: ${page.page}: ${source.url} — ${cls.fail}`); continue; }
       source.fetch_verified = {
         at: new Date().toISOString(),
@@ -195,4 +239,5 @@ if (!sources) { console.error('ERROR fetch-check-empty: zero sources in scope �
 for (const f of failures) console.error(`ERROR ${f}`);
 console.log(`source-fetch-check: ${verified}/${sources} source(s) fetch-verified`
   + (stampMode ? ` (${stamped} newly stamped)` : '') + (failures.length ? `, ${failures.length} FAILED` : ''));
+console.log(`source-fetch-check: ${verified + dropped}/${sources} source(s) resolved (${dropped} documented drops; not fetch stamps)`);
 process.exit(failures.length ? 1 : 0);

@@ -1,0 +1,1597 @@
+[
+  {
+    "order": 288.073,
+    "id": "orthonormal-bases-parseval-and-fourier-series",
+    "kind": "A",
+    "category": "functional-analysis",
+    "title": "Orthonormal Bases Parseval and Fourier Series",
+    "companion": "orthonormal-bases-parseval-and-fourier-series-examples",
+    "requires": [
+      "hilbert-space-geometry-and-riesz-representation-examples"
+    ],
+    "items": [
+      {
+        "id": "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+        "kind": "definition",
+        "title": "Orthonormal family complete orthonormal system and hilbert basis",
+        "deps": [
+          "def-hilbert-space",
+          "def-orthogonality-and-orthogonal-complement"
+        ],
+        "strategy": "Fix inner product linear in its first variable. Explain empty basis for zero space, distinction from Hamel bases, and finite-subset ordering rather than an assumed enumeration.",
+        "statement": "For a real or complex Hilbert space H, an indexed family (e_i) is orthonormal when <e_i,e_j>=delta_ij, and complete when its closed linear span is H. A Hilbert basis is a complete orthonormal family.",
+        "axiom_audit": "Definition, no new choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — Definition 2.62, p.87",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-bessel-inequality",
+        "kind": "lemma",
+        "title": "Finite bessel inequality",
+        "deps": [
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "lem-pythagorean-theorem-and-finite-orthogonal-sums"
+        ],
+        "strategy": "Show residual orthogonal to every e_i in F, then apply finite Pythagoras. Also establish best approximation by P_F for use in the net argument.",
+        "statement": "For finite F in an orthonormal index set, P_F x=sum_{i in F}<x,e_i>e_i has squared norm sum |<x,e_i>|^2; ||x-P_F x||^2=||x||^2-sum |<x,e_i>|^2.",
+        "axiom_audit": "ZF relative to supplied Hilbert structure.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 pp.47–48, Lemma 2.1",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-square-summable-family-on-an-arbitrary-index-set",
+        "kind": "definition",
+        "title": "Square summable family on an arbitrary index set",
+        "statement": "For any set I, sum_{i in I}|a_i|^2 is the supremum of its finite subsums; ell^2(I) is the vector space where this is finite, with its square-root norm.",
+        "strategy": "Define finite-subset net and its tails. Establish triangle inequality by finite-dimensional Cauchy–Schwarz and taking suprema; do not require an enumeration to define the space.",
+        "deps": [
+          "lem-finite-bessel-inequality",
+          "def-directed-set-and-net",
+          "def-net-convergence-and-cluster-point"
+        ],
+        "axiom_audit": "ZF for definition and finite estimates.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_obligation": "See batch coverage and notes; this local application or addition needs exact source support verified before readiness."
+      },
+      {
+        "id": "thm-bessel-inequality-for-an-arbitrary-orthonormal-family",
+        "kind": "theorem",
+        "title": "Bessel inequality for an arbitrary orthonormal family",
+        "deps": [
+          "lem-finite-bessel-inequality",
+          "def-square-summable-family-on-an-arbitrary-index-set"
+        ],
+        "strategy": "Take the supremum of finite Bessel bounds.",
+        "statement": "For x in H and any orthonormal family, sum_I |<x,e_i>|^2 <= ||x||^2 in the finite-supremum convention.",
+        "axiom_audit": "ZF relative to the supplied family.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 p.48, equation (2.4)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-only-countably-many-fourier-coefficients-are-nonzero",
+        "kind": "lemma",
+        "title": "Only countably many fourier coefficients are nonzero",
+        "deps": [
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "thm-bessel-inequality-for-an-arbitrary-orthonormal-family",
+          "thm-countable-union-of-countable"
+        ],
+        "strategy": "For m>=1, {i: |a_i|>=1/m} is finite, of cardinal at most m^2 sum|a_i|^2. Their union is the support. Explicitly invoke countable choice for enumerating this union, not a ZF countable-union assertion.",
+        "statement": "An ell^2(I) family has at most countable support; in particular the Fourier coefficients of a fixed x do.",
+        "axiom_audit": "AComega suffices; do not claim choice-free enumerability.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 p.48, threshold argument after (2.4)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums",
+        "kind": "lemma",
+        "title": "Square summable orthogonal families have norm convergent finite sums",
+        "statement": "For an orthonormal family in H and a in ell^2(I), the net sum_{i in F}a_i e_i converges in H. Its limit has coefficient a_i and squared norm sum_I |a_i|^2.",
+        "strategy": "Choose increasing finite sets with tail squared mass below 2^(-2n), using AComega; their partial sums are Cauchy. Bound every larger finite-sum error by the tail to prove convergence of the entire finite-subset net, independent of enumeration. Continuity of inner products gives coefficients.",
+        "deps": [
+          "def-square-summable-family-on-an-arbitrary-index-set",
+          "lem-pythagorean-theorem-and-finite-orthogonal-sums",
+          "thm-cauchy-schwarz-in-an-inner-product-space",
+          "def-hilbert-space",
+          "def-countable-choice"
+        ],
+        "axiom_audit": "Selected proof AComega; Hilbert completeness applies to the selected Cauchy sequence.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 p.49, Theorem 2.2",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+        "kind": "theorem",
+        "title": "Parseval equivalences for a complete orthonormal family",
+        "deps": [
+          "lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums",
+          "thm-bessel-inequality-for-an-arbitrary-orthonormal-family",
+          "thm-double-orthogonal-complement-is-closure"
+        ],
+        "strategy": "Construct the orthogonal-series limit; residual is perpendicular to all family members. Zero complement identifies it with x. Conversely Parseval makes the residual zero; net convergence gives dense span. Use the double-complement theorem for the remaining equivalence.",
+        "statement": "For an orthonormal family in H: dense span, zero orthogonal complement, Parseval equality for every x, and convergence P_F x -> x of the finite-subset net are equivalent.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 pp.50–51, Theorem 2.4",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-hilbert-space-fourier-expansion",
+        "kind": "theorem",
+        "title": "Hilbert space fourier expansion",
+        "deps": [
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family",
+          "lem-only-countably-many-fourier-coefficients-are-nonzero"
+        ],
+        "strategy": "Apply Parseval equivalences and coefficient continuity. With the support lemma, every enumeration of the nonzero coefficients has the same limit; this does not impose a global ordering on I.",
+        "statement": "For a complete orthonormal family, x=sum_I <x,e_i>e_i unconditionally in norm. The coefficients are unique.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 p.53, Problem 2.2",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-existence-of-a-maximal-orthonormal-family",
+        "kind": "theorem",
+        "title": "Existence of a maximal orthonormal family",
+        "deps": [
+          "thm-zorn",
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family"
+        ],
+        "strategy": "Partially order orthonormal subsets by inclusion; chain unions remain orthonormal, so Zorn applies. A nonzero vector in the orthogonal complement normalizes to an extension; conversely dense span prohibits an extension.",
+        "statement": "Every Hilbert space has a maximal orthonormal family, and an orthonormal family is maximal iff complete.",
+        "axiom_audit": "AC via Zorn. Not used to construct the separable basis.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 p.52, Theorem 2.7",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set",
+        "kind": "theorem",
+        "title": "Hilbert space with a given orthonormal basis is ell two of the index set",
+        "deps": [
+          "thm-hilbert-space-fourier-expansion",
+          "lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums",
+          "def-square-summable-family-on-an-arbitrary-index-set"
+        ],
+        "strategy": "Parseval gives isometry; synthesize any square-summable family by the preceding net lemma to prove onto, without presupposing completeness of ell^2(I). Obtain inner product by polarization or limit of finite pairings.",
+        "statement": "Given an orthonormal basis (e_i) of H over F, x -> (<x,e_i>) is a surjective linear isometry H -> ell^2(I,F), preserving inner products. In particular ell^2(I,F) is complete.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 p.52, ell^2(J) discussion following Theorem 2.7",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — Exercise 2.64, p.87",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-separable-hilbert-space-has-a-countable-orthonormal-basis",
+        "kind": "theorem",
+        "title": "Separable hilbert space has a countable orthonormal basis",
+        "deps": [
+          "def-orthonormal-family-complete-orthonormal-system-and-hilbert-basis",
+          "lem-finite-bessel-inequality"
+        ],
+        "strategy": "Run Gram–Schmidt in the given order, discard zero residuals, normalize each nonzero residual. Every input vector lies in the span of outputs generated up to its index; their span is dense. The infinite-dimensional case supplies infinitely many outputs.",
+        "statement": "A Hilbert space supplied with a countable dense sequence has a finite or countable orthonormal basis.",
+        "axiom_audit": "Deterministic from a supplied dense sequence; no maximal-family choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 pp.49–50, Gram–Schmidt and Theorem 2.3",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — Exercise 2.63, p.87",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-separable-infinite-dimensional-hilbert-space-is-ell-two",
+        "kind": "corollary",
+        "title": "Separable infinite dimensional hilbert space is ell two",
+        "deps": [
+          "thm-separable-hilbert-space-has-a-countable-orthonormal-basis",
+          "thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set"
+        ],
+        "strategy": "Combine the enumerated Gram–Schmidt basis with the coefficient isometry.",
+        "statement": "Every separable infinite-dimensional Hilbert space over F is linearly isometric to ell^2(N,F).",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 p.52, Theorem 2.6",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+        "kind": "lemma",
+        "title": "L two with the integral pairing is a hilbert space",
+        "statement": "For a measure space, real/complex L^2 with <f,g>=integral f conjugate(g) is Hilbert; its norm is the established quotient L^2 norm.",
+        "strategy": "Integral Cauchy–Schwarz makes the pairing finite and null-class invariant; integral positivity proves definiteness on the quotient; use MT Riesz–Fischer completeness. This supplies an A result rather than relying on a Hilbert-space B example.",
+        "deps": [
+          "def-hilbert-space",
+          "def-l-p-space-as-a-quotient-by-null-functions",
+          "cor-cauchy-schwarz-inequality-for-l-two",
+          "thm-riesz-fischer-completeness-of-l-p"
+        ],
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_obligation": "See batch coverage and notes; this local application or addition needs exact source support verified before readiness."
+      },
+      {
+        "id": "def-the-one-dimensional-torus-and-normalized-haar-integral",
+        "kind": "definition",
+        "title": "The one dimensional torus and normalized haar integral",
+        "deps": [
+          "thm-finite-products-of-compact-spaces",
+          "thm-lebesgue-measure-is-the-unique-normalised-translation-invariant-borel-measure",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "def-quotient-topology",
+          "lem-integer-part"
+        ],
+        "strategy": "Define the equivalence relation x-y in Z and its quotient topology using the earlier general quotient definition. Integrate periodic representatives on [0,1); translations preserve the integral by splitting intervals and Lebesgue translation invariance. Finite-product Fubini defines T^n. The following local lemma supplies compact Hausdorff topology; do not cite the later order-295 fundamental-group page.",
+        "statement": "T=R/Z with its quotient topology and probability Lebesgue integral represented on [0,1). T^n has the finite product topology and integral represented on [0,1)^n, for positive integer n.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_obligation": "See batch coverage and notes; this local application or addition needs exact source support verified before readiness."
+      },
+      {
+        "id": "lem-finite-tori-are-compact-hausdorff-character-spaces",
+        "kind": "lemma",
+        "title": "Finite tori are compact Hausdorff spaces separated by characters",
+        "deps": [
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "thm-quotient-universal-property",
+          "thm-sine-and-cosine-parametrize-the-unit-circle",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-sine-and-cosine-derivatives",
+          "cor-differentiable-implies-continuous",
+          "thm-compactness-under-continuous-maps",
+          "thm-heine-borel-r",
+          "thm-finite-products-of-compact-spaces",
+          "lem-integer-part"
+        ],
+        "statement": "The map [t] -> (cos(2 pi t),sin(2 pi t)) identifies T homeomorphically with the Euclidean unit circle. For finite n, T^n is compact Hausdorff and its coordinate characters separate points.",
+        "strategy": "The quotient map R->T is continuous and its restriction to [0,1] is onto by integer parts, so T is compact. The continuous trigonometric parametrization descends by the quotient universal property; period and unique parametrization on [0,2pi) give bijectivity. A continuous bijection from compact T onto the Hausdorff Euclidean circle is a homeomorphism. Finite products give compactness and Hausdorffness; distinct tuples differ in one coordinate, whose character separates them. Reprove this here from earlier local topology rather than importing the published but later order-295 circle theorem.",
+        "axiom_audit": "Finite compact products and elementary quotient construction; inspect inherited supplier axioms before certification.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_obligation": "Earlier published trigonometric and quotient machinery was inspected; complete source fetch and finite-product proof audit remain blocked. This replacement is required by the current plan order."
+      },
+      {
+        "id": "def-fourier-coefficients-and-trigonometric-polynomials",
+        "kind": "definition",
+        "title": "Fourier coefficients and trigonometric polynomials",
+        "deps": [
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "thm-finite-measure-l-r-includes-into-l-p-for-p-less-r",
+          "def-complex-exponential",
+          "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"
+        ],
+        "strategy": "Check representative independence modulo Z and null classes. L^2 embeds in L^1 since the total measure is one. For T^n use k dot x and k in Z^n.",
+        "statement": "On T, e_k(x)=exp(2 pi i kx), k in Z; for f in L^1, fhat(k)=integral f(x) exp(-2 pi i kx) dx. Trigonometric polynomials are finite linear combinations of characters.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.5 pp.63–64, equations (2.42)–(2.44)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-trigonometric-characters-are-orthonormal",
+        "kind": "lemma",
+        "title": "Trigonometric characters are orthonormal",
+        "deps": [
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-sine-and-cosine-derivatives"
+        ],
+        "strategy": "Integrate exp(2 pi i(k-l)x) over [0,1]; distinguish zero and nonzero integer frequency. Check inner product linear first, hence fhat(k)=<f,e_k>.",
+        "statement": "The family (e_k)_{k in Z} is orthonormal in complex L^2(T).",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_obligation": "See batch coverage and notes; this local application or addition needs exact source support verified before readiness."
+      },
+      {
+        "id": "cor-trigonometric-polynomials-are-dense-in-continuous-periodic-functions",
+        "kind": "corollary",
+        "title": "Trigonometric polynomials are dense in continuous periodic functions",
+        "deps": [
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "thm-complex-stone-weierstrass-self-adjoint",
+          "lem-finite-tori-are-compact-hausdorff-character-spaces"
+        ],
+        "strategy": "The character algebra contains 1, is self-adjoint by conjugate(e_k)=e_-k, and separates circle points by e_1 and the quotient-circle homeomorphism. Apply precisely the unital case of complex Stone–Weierstrass.",
+        "statement": "Trigonometric polynomials are uniformly dense in complex C(T).",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.5 p.68, Problem 2.19",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori",
+        "kind": "lemma",
+        "title": "Continuous periodic functions are dense in l p of finite tori",
+        "statement": "For n>=1 and 1<=p<infinity, C(T^n) is dense in L^p(T^n). Continuous functions are also dense in L^p of a bounded interval.",
+        "strategy": "Extend a representative on the unit cube by zero to R^n and use published C_c(R^n) density. Restrict an approximant to the cube and multiply by a continuous cutoff zero near its boundary and one on the inner cube. The boundary-strip error tends to zero, bounded by its volume times the finite sup norm to power p. Periodize; vanishing at the boundary makes it continuous on T^n. Interval version is restriction after zero-extension and rescaling.",
+        "deps": [
+          "thm-c-c-rn-is-dense-in-l-p-of-rn",
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "thm-minkowski-inequality-for-integrals"
+        ],
+        "axiom_audit": "AComega inherited from the published density route; finite explicit cutoffs add no choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.5 p.68, Problem 2.18",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-trigonometric-system-is-complete-in-l-two-of-the-torus",
+        "kind": "theorem",
+        "title": "Trigonometric system is complete in l two of the torus",
+        "deps": [
+          "lem-trigonometric-characters-are-orthonormal",
+          "cor-trigonometric-polynomials-are-dense-in-continuous-periodic-functions",
+          "lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori"
+        ],
+        "strategy": "First approximate by continuous periodic functions in L^2, then uniformly by trigonometric polynomials; ||g||_2<=||g||_infinity on probability T. No use of Parseval to establish completeness.",
+        "statement": "The characters form an orthonormal basis of complex L^2(T).",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.5 pp.64–65, Theorem 2.17",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — Example 2.66, pp.87–88",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-l-two-fourier-series-converges-in-mean-square",
+        "kind": "theorem",
+        "title": "L two fourier series converges in mean square",
+        "deps": [
+          "thm-trigonometric-system-is-complete-in-l-two-of-the-torus",
+          "thm-hilbert-space-fourier-expansion"
+        ],
+        "strategy": "Apply Hilbert Fourier expansion to the now-proved character basis. The symmetric intervals are cofinal among finite subsets. This is not pointwise convergence.",
+        "statement": "For f in L^2(T), sum_{|k|<=N} fhat(k)e_k -> f in L^2; the finite-subset net also converges.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.5 Theorem 2.17, equation (2.48)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-parseval-identity-for-fourier-series",
+        "kind": "theorem",
+        "title": "Parseval identity for fourier series",
+        "deps": [
+          "thm-trigonometric-system-is-complete-in-l-two-of-the-torus",
+          "thm-parseval-equivalences-for-a-complete-orthonormal-family"
+        ],
+        "strategy": "Use Parseval equivalences and finite-sum pairing followed by Cauchy–Schwarz.",
+        "statement": "For f,g in L^2(T), ||f||_2^2=sum_Z |fhat(k)|^2 and <f,g>=sum_Z fhat(k) conjugate(ghat(k)).",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.5 Theorem 2.17, equation (2.49)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-riesz-fischer-for-fourier-coefficients",
+        "kind": "theorem",
+        "title": "Riesz fischer for fourier coefficients",
+        "deps": [
+          "thm-trigonometric-system-is-complete-in-l-two-of-the-torus",
+          "thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set"
+        ],
+        "strategy": "Use coefficient isometry for the character basis. Distinguish this surjectivity theorem from MT completeness of L^p.",
+        "statement": "The Fourier coefficient map is a unitary bijection L^2(T) -> ell^2(Z). Thus every square-summable coefficient sequence determines a unique L^2 class.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.5 Theorem 2.17, final assertion",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-fourier-basis-and-parseval-on-the-n-torus",
+        "kind": "theorem",
+        "title": "Fourier basis and parseval on the n torus",
+        "deps": [
+          "def-the-one-dimensional-torus-and-normalized-haar-integral",
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
+          "thm-complex-stone-weierstrass-self-adjoint",
+          "lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori",
+          "thm-hilbert-space-with-a-given-orthonormal-basis-is-ell-two-of-the-index-set",
+          "lem-finite-tori-are-compact-hausdorff-character-spaces"
+        ],
+        "strategy": "Fubini computes orthogonality. Coordinate characters separate points, their algebra is unital and self-adjoint; compact finite-product Stone–Weierstrass and periodic L^2 density give completeness. Apply Hilbert expansion and coefficient isometry. Explicitly avoid any unproved Hilbert tensor-product identification.",
+        "statement": "For n>=1, characters exp(2 pi i k dot x), k in Z^n, form an orthonormal basis of L^2(T^n); expansion, Parseval and unitary coefficient surjectivity hold.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_obligation": "See batch coverage and notes; this local application or addition needs exact source support verified before readiness."
+      }
+    ],
+    "scaffold_status": "blocked"
+  },
+  {
+    "order": 288.074,
+    "id": "orthonormal-bases-parseval-and-fourier-series-examples",
+    "kind": "B",
+    "category": "functional-analysis",
+    "title": "Orthonormal Bases Parseval and Fourier Series — Examples",
+    "companion": "orthonormal-bases-parseval-and-fourier-series",
+    "requires": [
+      "orthonormal-bases-parseval-and-fourier-series"
+    ],
+    "items": [
+      {
+        "id": "ex-standard-basis-of-ell-two",
+        "kind": "example",
+        "title": "Standard basis of ell two",
+        "deps": [
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-hilbert-space-fourier-expansion"
+        ],
+        "strategy": "Use counting-measure L^2 and finite-coordinate tail estimates. Do not deduce its completeness circularly from a basis of a space not yet proved Hilbert.",
+        "statement": "The coordinate vectors form an orthonormal basis of ell^2(N), with the usual coordinate expansion and norm formula.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — Example 2.65, p.87",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-legendre-polynomials-from-gram-schmidt",
+        "kind": "example",
+        "title": "Legendre polynomials from gram schmidt",
+        "deps": [
+          "thm-separable-hilbert-space-has-a-countable-orthonormal-basis",
+          "thm-complex-stone-weierstrass-self-adjoint",
+          "lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space"
+        ],
+        "strategy": "Compute the three projections and normalizations explicitly. Real polynomial uniform density follows from the self-adjoint complex Stone–Weierstrass result by taking real parts; combine interval continuous L^2 density. Standard Legendre P_n use P_n(1)=1, not unit L^2 norm.",
+        "statement": "Gram–Schmidt on 1,x,x^2,... in real L^2([-1,1],dx) gives a complete orthonormal family, beginning 1/sqrt(2), sqrt(3/2)x, sqrt(5/8)(3x^2-1).",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §2.1 p.50, example after Theorem 2.3",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-haar-orthonormal-basis-of-l-two-zero-one",
+        "kind": "example",
+        "title": "Haar orthonormal basis of l two zero one",
+        "deps": [
+          "lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori",
+          "lem-l-two-with-the-integral-pairing-is-a-hilbert-space",
+          "thm-hilbert-space-fourier-expansion"
+        ],
+        "strategy": "Disjoint supports or zero integral on nested dyadic intervals prove orthogonality; compute norm one. Induct on levels to identify finite Haar spans with dyadic step functions. Uniform continuity approximates every continuous interval function by such steps; interval continuous L^2 density proves completeness. Endpoints are null.",
+        "statement": "The constant 1 and h_{j,k}=2^(j/2)(1_left-half-1_right-half) of each dyadic interval [k2^-j,(k+1)2^-j), j>=0,0<=k<2^j, form an orthonormal basis of L^2([0,1]).",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Vladimir Dobrushkin, Eigenfunction Expansion, APMA0360 course tutorial — Example 5, displayed dyadic functions and span discussion",
+              "url": "https://www.cfm.brown.edu/people/dobrush/am36/Mathematica/ch2/expand.html"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-fourier-series-of-a-sawtooth",
+        "kind": "example",
+        "title": "Fourier series of a sawtooth",
+        "deps": [
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "thm-l-two-fourier-series-converges-in-mean-square",
+          "thm-parseval-identity-for-fourier-series"
+        ],
+        "strategy": "Integrate by parts for each nonzero integer k; compute integral x^2=1/12. Pair positive and negative squared coefficients. Assign arbitrary endpoint values and claim only L^2 convergence.",
+        "statement": "For the periodic L^2 class f(x)=x on (-1/2,1/2), fhat(0)=0 and fhat(k)=(-1)^(k+1)/(2 pi i k), k nonzero. Parseval gives sum_{k>=1}1/k^2=pi^2/6.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Henri P. Gavin, Dynamic Periodic Response to Periodic Forcing, System Identification course notes, Fall 2013 — §4.2 p.7, formula below f(t)=t",
+              "url": "https://people.duke.edu/~hpgavin/SystemID/CourseNotes/Fourier.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-fourier-series-of-a-square-wave",
+        "kind": "example",
+        "title": "Fourier series of a square wave",
+        "deps": [
+          "def-fourier-coefficients-and-trigonometric-polynomials",
+          "thm-l-two-fourier-series-converges-in-mean-square",
+          "thm-parseval-identity-for-fourier-series"
+        ],
+        "strategy": "Integrate on the two half intervals and use ||f||_2=1. Distinguish norm convergence of the Fourier series from any pointwise or endpoint assertion.",
+        "statement": "For the periodic class sgn(x) on (-1/2,1/2), fhat(0)=0 and fhat(k)=(1-(-1)^k)/(pi i k), k nonzero; Parseval gives sum_{k positive odd}1/k^2=pi^2/8.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Henri P. Gavin, Dynamic Periodic Response to Periodic Forcing, System Identification course notes, Fall 2013 — §4.1 p.6, formula below f(t)=sgn(t)",
+              "url": "https://people.duke.edu/~hpgavin/SystemID/CourseNotes/Fourier.pdf"
+            }
+          ]
+        }
+      }
+    ],
+    "scaffold_status": "blocked"
+  },
+  {
+    "order": 288.075,
+    "id": "compact-operators-and-riesz-schauder-theory",
+    "kind": "A",
+    "category": "functional-analysis",
+    "title": "Compact Operators and Riesz Schauder Theory",
+    "companion": "compact-operators-and-riesz-schauder-theory-examples",
+    "requires": [
+      "orthonormal-bases-parseval-and-fourier-series-examples"
+    ],
+    "items": [
+      {
+        "id": "def-compact-linear-operator",
+        "kind": "definition",
+        "title": "Compact linear operator",
+        "deps": [
+          "def-bounded-linear-operator",
+          "def-metric-compactness"
+        ],
+        "strategy": "Scaling proves the equivalence and compact sets are bounded, hence T is bounded. Require actual compact closure, not just precompactness in an incomplete target.",
+        "statement": "For normed spaces X,Y over the same field R or C, a linear operator T is compact when every bounded set has image with compact closure in Y; equivalently the image of the closed unit ball has compact closure.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.2 p.183, Definition 4.20",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-sequential-characterization-of-compact-operators",
+        "kind": "theorem",
+        "title": "Sequential characterization of compact operators",
+        "deps": [
+          "def-compact-linear-operator",
+          "thm-metric-compactness-equivalences",
+          "def-dependent-choice"
+        ],
+        "strategy": "Forward: decreasing closures of image tails inside a compact closure intersect. Pick a cluster point once and choose successive least eligible indices in shrinking balls; this direction needs no recursive arbitrary choices. Converse: use DC to select a separated image sequence if total boundedness fails, and to approximate a Cauchy sequence in the closure by image points; sequential hypothesis gives completeness of the closure, hence metric compactness.",
+        "statement": "T:X->Y is compact iff every bounded sequence (x_n) has a subsequence for which T x_n converges in Y.",
+        "axiom_audit": "Forward ZF; selected converse DC, with AComega inherited by metric equivalences.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.2 p.183, Lemma 4.19",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-rank-operators-are-compact",
+        "kind": "lemma",
+        "title": "Finite rank operators are compact",
+        "deps": [
+          "def-compact-linear-operator",
+          "thm-closed-unit-ball-compact-iff-finite-dimensional",
+          "cor-finite-dimensional-subspaces-are-closed"
+        ],
+        "strategy": "Its image of the unit ball is bounded inside a finite-dimensional range; closure there is compact and the finite-dimensional range is closed in the ambient normed target.",
+        "statement": "A bounded finite-rank operator between normed spaces is compact.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.2 p.184, Example 4.23",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-compositions-with-a-compact-operator-are-compact",
+        "kind": "lemma",
+        "title": "Compositions with a compact operator are compact",
+        "deps": [
+          "def-compact-linear-operator",
+          "lem-composition-operator-norm-inequality"
+        ],
+        "strategy": "A sends bounded sets to bounded sets; B maps compact closures continuously to compact sets.",
+        "statement": "If T:X->Y is compact and A:W->X, B:Y->Z are bounded linear, then TA and BT are compact.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.1 pp.69–70, Theorem 3.1",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.2 p.185, Theorem 4.28(i)",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-linear-combinations-of-compact-operators-are-compact",
+        "kind": "lemma",
+        "title": "Linear combinations of compact operators are compact",
+        "statement": "Compact operators X->Y form a linear subspace. Consequently any polynomial in a compact endomorphism with zero constant coefficient is compact.",
+        "strategy": "For sums, use the continuous addition map on the product of the two compact image closures; scalar multiples are immediate. For polynomials apply the ideal property finitely many times.",
+        "deps": [
+          "def-compact-linear-operator",
+          "lem-compositions-with-a-compact-operator-are-compact",
+          "thm-finite-products-of-compact-spaces"
+        ],
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.1 Theorem 3.1",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.1 p.72, Problem 3.1",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-norm-limit-of-compact-operators-is-compact",
+        "kind": "theorem",
+        "title": "Norm limit of compact operators is compact",
+        "deps": [
+          "def-compact-linear-operator",
+          "thm-metric-compactness-equivalences",
+          "thm-complete-subspace-iff-closed"
+        ],
+        "strategy": "For epsilon choose one T_n within epsilon/3. A finite epsilon/3 net for its unit-ball image gives a finite epsilon net for T. The closure is complete as closed in Banach Y, so it is compact by metric completeness and total boundedness.",
+        "statement": "If Y is Banach and compact operators T_n:X->Y converge in operator norm to T, then T is compact.",
+        "axiom_audit": "AComega for the selected complete/totally-bounded compactness direction; the bundled equivalence also records DC. No false appeal to completeness only for linear subspaces.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.1 p.70, Theorem 3.2",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.2 pp.185–186, Theorem 4.28(ii)",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-approximable-operator",
+        "kind": "definition",
+        "title": "Approximable operator",
+        "deps": [
+          "lem-finite-rank-operators-are-compact",
+          "thm-norm-limit-of-compact-operators-is-compact"
+        ],
+        "strategy": "Define the closure and apply norm-closedness of compact operators. Keep approximation-property distinctions for the B remark and FA-11.",
+        "statement": "An approximable operator is in the operator-norm closure of bounded finite-rank operators. For Banach target it is compact; equality with all compact maps is not asserted in general.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "source_obligation": "See batch coverage and notes; this local application or addition needs exact source support verified before readiness."
+      },
+      {
+        "id": "thm-schauder-compact-adjoint-theorem",
+        "kind": "theorem",
+        "title": "Schauder compact adjoint theorem",
+        "deps": [
+          "def-transpose-of-a-bounded-operator",
+          "lem-transpose-is-bounded-and-has-the-same-norm",
+          "thm-canonical-bidual-map-is-an-isometry",
+          "lem-canonical-map-is-natural",
+          "thm-metric-compactness-equivalences",
+          "def-compact-linear-operator",
+          "thm-bounded-operator-space-is-banach",
+          "thm-complete-subspace-iff-closed"
+        ],
+        "strategy": "For compact T choose a finite delta net in T(B_X). Bounded functionals are determined up to norm epsilon on that image by their finitely many values: cover the bounded finite coordinate set and choose representatives in B_Y*. This gives total boundedness of T*(B_Y*); completeness of X* gives compactness. Apply this direction to T* for the converse and use T** J_X=J_Y T and the closed isometric image J_Y(Y). Banach transpose uses linear evaluation, no conjugation.",
+        "statement": "For Banach spaces X,Y and bounded T:X->Y, T is compact iff its Banach transpose T*:Y*->X* is compact.",
+        "axiom_audit": "HB for dual norm/isometry; DC inherited from the selected metric compactness route. Banach target indispensable.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.2 pp.186–187, Theorem 4.28(iii)",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-compact-operator-sends-weakly-convergent-sequences-to-norm-convergent-sequences",
+        "kind": "theorem",
+        "title": "Compact operator sends weakly convergent sequences to norm convergent sequences",
+        "deps": [
+          "thm-sequential-characterization-of-compact-operators",
+          "thm-uniform-boundedness-principle",
+          "thm-canonical-bidual-map-is-an-isometry",
+          "def-transpose-of-a-bounded-operator",
+          "cor-dual-separates-points",
+          "def-weak-convergence-of-nets-and-sequences"
+        ],
+        "strategy": "Uniform boundedness applied to J_X x_n gives norm boundedness. If norm convergence fails take a bad subsequence, then a compact image subsequence. Each functional identifies its norm limit with Tx because transpose preserves weak convergence and the dual separates points.",
+        "statement": "For Banach X,Y, compact T and x_n weakly converging to x, ||T x_n-Tx|| ->0.",
+        "axiom_audit": "DC/HB inherited; FA-8 weak convergence definition now resolves in batch 1, whose own closure remains blocked.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.2 pp.183–184, Lemma 4.21",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-kernel-of-identity-minus-compact-is-finite-dimensional",
+        "kind": "lemma",
+        "title": "Kernel of identity minus compact is finite dimensional",
+        "deps": [
+          "def-compact-linear-operator",
+          "thm-closed-unit-ball-compact-iff-finite-dimensional"
+        ],
+        "strategy": "The kernel is closed; its unit ball is closed in the compact closure of K(B_X), since K is the identity there. Apply the finite-dimensional compact-ball characterization.",
+        "statement": "For compact K:X->X on a Banach space, ker(I-K) is finite dimensional.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_obligation": "See batch coverage and notes; this local application or addition needs exact source support verified before readiness."
+      },
+      {
+        "id": "lem-range-of-identity-minus-compact-is-closed",
+        "kind": "lemma",
+        "title": "Range of identity minus compact is closed",
+        "deps": [
+          "thm-sequential-characterization-of-compact-operators",
+          "lem-closed-range-iff-quotient-estimate"
+        ],
+        "strategy": "If the estimate fails, select quotient-normalized representatives x_n with dist(x_n,N)=1, ||x_n||<=2, and (I-K)x_n ->0. Compactness gives a convergent subsequence of Kx_n and hence x_n; its limit is in N, contradiction. Apply the earlier quotient-estimate criterion.",
+        "statement": "For compact K on Banach X, ran(I-K) is closed and dist(x,ker(I-K)) <= C||(I-K)x|| for some C.",
+        "axiom_audit": "DC suffices for selections; inherited bounded-inverse/quotient axioms.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_obligation": "See batch coverage and notes; this local application or addition needs exact source support verified before readiness."
+      },
+      {
+        "id": "lem-riesz-schauder-ascent-and-descent-stabilize",
+        "kind": "lemma",
+        "title": "Riesz schauder ascent and descent stabilize",
+        "deps": [
+          "lem-kernel-of-identity-minus-compact-is-finite-dimensional",
+          "lem-range-of-identity-minus-compact-is-closed",
+          "lem-linear-combinations-of-compact-operators-are-compact",
+          "lem-riesz-lemma",
+          "thm-sequential-characterization-of-compact-operators",
+          "thm-bounded-inverse-theorem",
+          "def-dependent-choice"
+        ],
+        "strategy": "A^n=I-K_n with compact K_n, so preceding kernel/range lemmas apply. If kernel chain strictly grows, Riesz-separated unit vectors have K-images separated modulo earlier kernels. For descending closed ranges choose x_n in ran(A^n) at distance >1/2 from ran(A^(n+1)); for m>n, Kx_m and Ax_n lie in ran(A^(n+1)), again separating Kx_n. DC gives contradictions to compactness. Stability implies direct sum algebraically by writing A^m x=A^(2m)y. Bounded inverse applies on the closed stable range. No index theorem is used here.",
+        "statement": "For A=I-K with K compact on Banach X, both ker(A^n) and ran(A^n) stabilize. For sufficiently large m, X=ker(A^m) direct-sum ran(A^m), with finite-dimensional kernel and closed range; A restricts to a bounded isomorphism on ran(A^m).",
+        "axiom_audit": "DC for separated selections; no forward use of index zero.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.6 p.191, Lemma 6.32",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.6 p.192, Lemma 6.33",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — §5.2.3 p.226, Remark 5.23 algebraic part",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-fredholm-alternative-for-identity-minus-compact",
+        "kind": "theorem",
+        "title": "Fredholm alternative for identity minus compact",
+        "deps": [
+          "lem-riesz-schauder-ascent-and-descent-stabilize",
+          "lem-elementary-kernel-range-annihilator-identities",
+          "lem-transpose-reverses-composition",
+          "thm-rank-nullity"
+        ],
+        "strategy": "On the stabilized decomposition, A is invertible on the range summand and nilpotent on its finite-dimensional kernel summand; rank-nullity gives equality of defect dimensions and injectivity/surjectivity equivalence. Since ran A is closed, the elementary annihilator identity gives the stated solvability condition.",
+        "statement": "For compact K on Banach X, I-K is injective iff surjective, then boundedly invertible. For general y, (I-K)x=y is solvable iff phi(y)=0 for every phi in ker(I-K*). The kernel and cokernel are finite dimensional of equal dimension.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.5 p.189, Theorem 6.30",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.4 p.198, Remark 4.42",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-neumann-series-and-small-perturbations-of-bounded-inverses",
+        "kind": "lemma",
+        "title": "Neumann series and small perturbations of bounded inverses",
+        "statement": "For Banach X and ||R||<1, (I-R)^(-1)=sum_{n>=0}R^n in operator norm. If A:X->Y is boundedly invertible and ||A^(-1)E||<1, then A+E is boundedly invertible.",
+        "strategy": "Use completeness of bounded-operator space and geometric norm estimates. Multiply partial sums on both sides and pass to limits. Factor A+E=A(I+A^(-1)E). This is the operator-only precursor to the later Banach-algebra lemma.",
+        "deps": [
+          "thm-bounded-operator-space-is-banach",
+          "thm-banach-series-criterion",
+          "lem-composition-operator-norm-inequality"
+        ],
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.1 p.163, Lemma 6.1",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.1 p.164, Corollary 6.2",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-spectrum-and-resolvent-of-a-bounded-operator",
+        "kind": "definition",
+        "title": "Spectrum and resolvent of a bounded operator",
+        "statement": "For bounded T on a complex Banach space X, rho(T)={lambda in C:lambda I-T has a bounded two-sided inverse}; sigma(T)=C minus rho(T).",
+        "strategy": "Define eigenvalues, eigenspaces, and generalized eigenspace union_n ker(T-lambda I)^n; algebraic multiplicity is its dimension when finite. The real-operator complexification convention belongs to later FA-17. No Banach algebra or general spectral nonemptiness theorem is presumed.",
+        "deps": [
+          "def-bounded-linear-operator",
+          "def-banach-space"
+        ],
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.1 pp.163–164, definitions preceding Lemma 6.1",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-riesz-schauder-spectrum-of-a-compact-operator",
+        "kind": "theorem",
+        "title": "Riesz schauder spectrum of a compact operator",
+        "deps": [
+          "def-spectrum-and-resolvent-of-a-bounded-operator",
+          "lem-neumann-series-and-small-perturbations-of-bounded-inverses",
+          "thm-fredholm-alternative-for-identity-minus-compact",
+          "lem-riesz-schauder-ascent-and-descent-stabilize",
+          "lem-compositions-with-a-compact-operator-are-compact",
+          "thm-closed-unit-ball-compact-iff-finite-dimensional",
+          "thm-heine-borel-rn"
+        ],
+        "strategy": "Scale I-K/lambda for the Fredholm alternative and stabilization. The generalized kernel is finite dimensional. On the stable closed range K-lambda I is invertible and remains so nearby by Neumann perturbation; on the finite-dimensional nilpotent block only lambda is spectral, as its finite geometric inverse shows. Neumann gives an open resolvent and excludes |lambda|>||K||. Thus spectrum intersect {|lambda|>=epsilon} is compact in C=R^2 by Heine–Borel and every one of its points is isolated. Its singleton cover has a finite subcover, proving finiteness. For 0 on infinite-dimensional X, a bounded inverse would make I compact by the ideal property. No general spectral nonemptiness theorem or forward functional calculus is used.",
+        "statement": "For compact K on complex Banach X, every nonzero spectral value is an isolated eigenvalue with finite algebraic multiplicity; for each epsilon>0 only finitely many spectral values satisfy |lambda|>=epsilon. If X is infinite dimensional, 0 is spectral.",
+        "axiom_audit": "DC inherited. No claim that zero is an eigenvalue or isolated; finite-dimensional zero may be resolvent.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — §5.2.3 pp.224–225, Theorem 5.21",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-spectrum-of-a-compact-operator-is-countable-with-only-zero-as-possible-accumulation",
+        "kind": "corollary",
+        "title": "Spectrum of a compact operator is countable with only zero as possible accumulation",
+        "deps": [
+          "thm-riesz-schauder-spectrum-of-a-compact-operator",
+          "thm-countable-union-of-countable"
+        ],
+        "strategy": "Cover nonzero spectrum by the finite sets {|lambda|>=1/n}. State the countable-union choice cost conservatively; subset of C could also be enumerated geometrically.",
+        "statement": "The spectrum of a compact operator on complex Banach X is countable, and its only possible accumulation point is zero.",
+        "axiom_audit": "AComega for the selected finite-union enumeration, within inherited DC.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_obligation": "See batch coverage and notes; this local application or addition needs exact source support verified before readiness."
+      },
+      {
+        "id": "def-fredholm-operator-cokernel-and-index",
+        "kind": "definition",
+        "title": "Fredholm operator cokernel and index",
+        "deps": [
+          "def-quotient-vector-space-coset-notation",
+          "def-bounded-linear-operator"
+        ],
+        "strategy": "Distinguish algebraic cokernel from its quotient topology; closed range is explicitly part of the definition.",
+        "statement": "A bounded T:X->Y between Banach spaces is Fredholm if ker T is finite dimensional, ran T is closed, and coker T=Y/ran T is finite dimensional; ind T=dim ker T-dim coker T.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.5 p.184, definition",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-fredholm-splitting-and-parametrix",
+        "kind": "lemma",
+        "title": "Fredholm splitting and parametrix",
+        "deps": [
+          "def-fredholm-operator-cokernel-and-index",
+          "cor-finite-dimensional-subspaces-are-complemented",
+          "cor-finite-codimensional-subspaces-are-complemented",
+          "thm-bounded-inverse-theorem"
+        ],
+        "strategy": "Use complemented finite-dimensional kernel and closed finite-codimensional range. T:X_1->ran T is boundedly invertible. Define S as this inverse on ran T and zero on Y_0, and identify defects as minus the finite-rank projections.",
+        "statement": "For Fredholm T:X->Y there are bounded decompositions X=ker T direct-sum X_1 and Y=ran T direct-sum Y_0 and bounded S:Y->X with ST-I_X and TS-I_Y finite rank.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.5 p.186, equations (6.65)–(6.67)",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-a-compact-remainder-estimate-forces-closed-range",
+        "kind": "lemma",
+        "title": "A compact remainder estimate forces closed range",
+        "statement": "Suppose T:X->Y is bounded between Banach spaces and ||x||<=C||Tx||+||Kx|| for a compact K:X->Z with Banach Z. Then ker T is finite dimensional and ran T is closed.",
+        "strategy": "On ker T the estimate and compact subsequences imply unit-ball compactness. For closed range repeat the normalized quotient representatives argument: if dist(x,ker T)<=Cprime||Tx|| fails, select ||x_n||<=2, dist=1, Tx_n->0. A convergent Kx_n subsequence and the estimate on differences force x_n Cauchy; its limit contradicts dist=1. Invoke quotient-estimate criterion.",
+        "deps": [
+          "thm-sequential-characterization-of-compact-operators",
+          "thm-closed-unit-ball-compact-iff-finite-dimensional",
+          "lem-closed-range-iff-quotient-estimate"
+        ],
+        "axiom_audit": "DC via normalized representatives and compact subsequences; no Fredholm index assumption.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.3 pp.193–194, Lemma 4.39",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-atkinson",
+        "kind": "theorem",
+        "title": "Atkinson",
+        "deps": [
+          "lem-fredholm-splitting-and-parametrix",
+          "lem-a-compact-remainder-estimate-forces-closed-range",
+          "thm-schauder-compact-adjoint-theorem",
+          "lem-kernel-of-identity-minus-compact-is-finite-dimensional",
+          "thm-dual-of-a-quotient-is-the-annihilator",
+          "cor-dual-separates-points",
+          "lem-transpose-reverses-composition"
+        ],
+        "strategy": "Fredholm=>S is the preceding splitting construction. Conversely ||x||<=||S||||Tx||+||(I-ST)x|| gives finite kernel and closed range by the compact-remainder lemma. Apply Schauder to TS-I_Y: ker T* is contained in ker(S*T*-I_Y*) and is finite dimensional. The dual of Y/ran T is ker T*; dual norming implies a normed space with finite-dimensional dual is finite dimensional (embed by a dual basis), proving finite cokernel. The later Calkin equivalence is orientation only and supplies nothing here.",
+        "statement": "For bounded T:X->Y between Banach spaces, T is Fredholm iff some bounded S:Y->X satisfies ST-I_X and TS-I_Y compact.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.5 p.188, Theorem 6.28",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.5 p.184, Lemma 6.23",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.5 pp.184–185, Theorem 6.24",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.5 p.189, Problem 6.25",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.3 pp.192–195, Theorem 4.38",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-fredholm-index-is-additive",
+        "kind": "theorem",
+        "title": "Fredholm index is additive",
+        "deps": [
+          "thm-atkinson",
+          "lem-compositions-with-a-compact-operator-are-compact",
+          "lem-linear-combinations-of-compact-operators-are-compact",
+          "thm-rank-nullity"
+        ],
+        "strategy": "Compose parametrices; compact ideal and sum properties give Fredholmness by Atkinson. Verify the exact sequence 0 -> ker T -> ker UT -> ker U -> coker T -> coker UT -> coker U ->0, where maps are T, quotient, U on cosets, quotient. Every term is finite dimensional. Rank-nullity telescopes dimensions.",
+        "statement": "For Fredholm T:X->Y and U:Y->Z, UT is Fredholm and ind(UT)=ind U+ind T.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.5 p.186, Lemma 6.25",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.5 p.189, Problems 6.23–6.24",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.4 pp.195–196, Theorem 4.40",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-fredholm-index-is-locally-constant",
+        "kind": "theorem",
+        "title": "Fredholm index is locally constant",
+        "deps": [
+          "lem-fredholm-splitting-and-parametrix",
+          "lem-neumann-series-and-small-perturbations-of-bounded-inverses",
+          "thm-rank-nullity"
+        ],
+        "strategy": "Use the Fredholm splitting. For a sufficiently small perturbation, the block from X_1 to ran T remains invertible by Neumann. Bounded invertible row/column operations reduce the map to that block plus its finite-dimensional Schur complement ker T -> Y_0. This gives closed range and finite defects, with index dim ker T-dim Y_0 regardless of the Schur complement rank.",
+        "statement": "Fredholm operators form an open subset of B(X,Y), and their integer index is locally constant in operator norm.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.5 pp.186–187, Theorem 6.26",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.4 pp.196–198, Theorem 4.41(ii)",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-fredholm-index-is-stable-under-compact-perturbations",
+        "kind": "theorem",
+        "title": "Fredholm index is stable under compact perturbations",
+        "deps": [
+          "thm-atkinson",
+          "lem-compositions-with-a-compact-operator-are-compact",
+          "lem-linear-combinations-of-compact-operators-are-compact",
+          "thm-fredholm-index-is-locally-constant",
+          "thm-connected-subsets-of-r-are-intervals"
+        ],
+        "strategy": "A parametrix for T is a parametrix modulo compact maps for every T+tK, t in [0,1]. Atkinson gives Fredholmness along the path, local constancy and connectedness of the interval give index equality.",
+        "statement": "If T:X->Y is Fredholm and K:X->Y is compact, then T+K is Fredholm with ind(T+K)=ind T.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.5 p.188, Corollary 6.29",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            },
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.4 pp.196–198, Theorem 4.41(i)",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-lambda-identity-minus-compact-has-index-zero",
+        "kind": "corollary",
+        "title": "Lambda identity minus compact has index zero",
+        "deps": [
+          "thm-fredholm-index-is-stable-under-compact-perturbations",
+          "def-fredholm-operator-cokernel-and-index"
+        ],
+        "strategy": "Apply compact perturbation invariance to invertible lambda I, whose kernel and cokernel vanish. This is a later index restatement; the earlier Fredholm alternative did not use it.",
+        "statement": "For compact K on Banach X and nonzero scalar lambda, lambda I-K is Fredholm of index zero.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §6.5 pp.187–188, Theorem 6.27",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      }
+    ],
+    "scaffold_status": "blocked"
+  },
+  {
+    "order": 288.076,
+    "id": "compact-operators-and-riesz-schauder-theory-examples",
+    "kind": "B",
+    "category": "functional-analysis",
+    "title": "Compact Operators and Riesz Schauder Theory — Examples",
+    "companion": "compact-operators-and-riesz-schauder-theory",
+    "requires": [
+      "compact-operators-and-riesz-schauder-theory"
+    ],
+    "items": [
+      {
+        "id": "ex-diagonal-operator-on-ell-p-is-compact-iff-diagonal-tends-to-zero",
+        "kind": "example",
+        "title": "Diagonal operator on ell p is compact iff diagonal tends to zero",
+        "deps": [
+          "lem-finite-rank-operators-are-compact",
+          "thm-norm-limit-of-compact-operators-is-compact",
+          "thm-sequential-characterization-of-compact-operators",
+          "thm-riesz-fischer-completeness-of-l-p"
+        ],
+        "strategy": "Truncations have finite rank and operator-norm error sup_{n>N}|a_n|. Conversely nonvanishing tail gives infinitely many separated D_a e_n, contradicting compactness. This covers p=infinity without falsely calling e_n a Schauder basis there.",
+        "statement": "For 1<=p<=infinity and a bounded scalar sequence a, D_a on ell^p(N) is compact iff a_n->0.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.1 p.70, example after Theorem 3.2",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-continuous-kernel-integral-operator-is-compact-on-c-of-an-interval",
+        "kind": "example",
+        "title": "Continuous kernel integral operator is compact on c of an interval",
+        "deps": [
+          "thm-arzela-ascoli-for-real-ck",
+          "thm-finite-products-of-compact-spaces",
+          "def-compact-linear-operator"
+        ],
+        "strategy": "Bound the image unit ball by (b-a)||k||_infinity and its modulus of continuity by (b-a)sup_y|k(x,y)-k(xprime,y)|. Apply the published real compact-metric Ascoli theorem. For complex functions apply it to real/imaginary parts and take a finite product.",
+        "statement": "For a<b and continuous scalar k on [a,b]^2, Kf(x)=integral_a^b k(x,y)f(y)dy is compact on C([a,b]) with sup norm.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Gerald Teschl, Topics in Real and Functional Analysis, version November 17, 2017 — §3.1 p.71, Lemma 3.4",
+              "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-hilbert-schmidt-kernel-operator-is-compact-on-l-two",
+        "kind": "example",
+        "title": "Hilbert schmidt kernel operator is compact on l two",
+        "deps": [
+          "def-hilbert-schmidt-operator",
+          "thm-l-two-kernels-give-hilbert-schmidt-operators",
+          "thm-hilbert-schmidt-operators-are-compact"
+        ],
+        "strategy": "BLOCKED FORWARD SEAM, preserved from design: finalize after FA-16 defines Hilbert–Schmidt operators and proves the kernel theorem and compactness. Cauchy–Schwarz/Fubini supplies a well-defined bounded operator, but the Hilbert–Schmidt assertion cannot use an undefined later notion here. Do not pretend the dependency resolves backward.",
+        "statement": "For sigma-finite measure spaces and a square-integrable kernel k on their product, its integral operator L^2(Y)->L^2(X) is Hilbert–Schmidt with squared HS norm integral |k|^2 and is compact.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_obligation": "See batch coverage and notes; this local application or addition needs exact source support verified before readiness."
+      },
+      {
+        "id": "cex-identity-is-compact-iff-the-space-is-finite-dimensional",
+        "kind": "counterexample",
+        "title": "Identity is compact iff the space is finite dimensional",
+        "deps": [
+          "def-compact-linear-operator",
+          "thm-closed-unit-ball-compact-iff-finite-dimensional"
+        ],
+        "strategy": "Apply the earlier closed-unit-ball characterization directly; on ell^2 this gives the standard noncompact identity.",
+        "statement": "The identity of a normed space is compact iff the space is finite dimensional.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_obligation": "See batch coverage and notes; this local application or addition needs exact source support verified before readiness."
+      },
+      {
+        "id": "cex-a-compact-operator-can-have-nondense-range",
+        "kind": "counterexample",
+        "title": "A compact operator can have nondense range",
+        "deps": [
+          "lem-finite-rank-operators-are-compact",
+          "cor-finite-dimensional-subspaces-are-closed"
+        ],
+        "strategy": "Bound P by one and identify its one-dimensional range. Coordinate e_2 is outside the closed range.",
+        "statement": "On ell^2, P(x)=x_1 e_1 is a nonzero compact operator with closed proper, hence nondense, range.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_obligation": "See batch coverage and notes; this local application or addition needs exact source support verified before readiness."
+      },
+      {
+        "id": "ex-fredholm-alternative-for-an-integral-equation",
+        "kind": "example",
+        "title": "Fredholm alternative for an integral equation",
+        "deps": [
+          "ex-continuous-kernel-integral-operator-is-compact-on-c-of-an-interval",
+          "thm-fredholm-alternative-for-identity-minus-compact"
+        ],
+        "strategy": "Use the same-page compact-kernel example and the abstract Fredholm alternative. Keep the Banach transpose in C([a,b])*; do not identify it with a conjugated L^2 kernel without additional measure duality. The interval is the concrete compact K; no PDE claim.",
+        "statement": "For continuous kernel on a compact interval, f-Kf=g in C([a,b]) is solvable exactly when every phi in ker(I-K*) annihilates g; uniqueness for all g is equivalent to trivial homogeneous kernel.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_obligation": "See batch coverage and notes; this local application or addition needs exact source support verified before readiness."
+      },
+      {
+        "id": "cex-compactness-is-not-preserved-by-strong-operator-limits",
+        "kind": "counterexample",
+        "title": "Compactness is not preserved by strong operator limits",
+        "deps": [
+          "lem-finite-rank-operators-are-compact",
+          "thm-closed-unit-ball-compact-iff-finite-dimensional",
+          "def-square-summable-family-on-an-arbitrary-index-set"
+        ],
+        "strategy": "Define strong convergence here as convergence P_N x -> x for each x. Square-summable tails give this; test e_(N+1) for norm error. Use the A compact-ball criterion directly instead of a cross-page B dependency.",
+        "statement": "On ell^2, coordinate projections P_N have finite rank and converge strongly to I, but I is not compact and ||I-P_N||=1.",
+        "axiom_audit": "Inherited supplier axioms; closure not yet certified.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "source_obligation": "See batch coverage and notes; this local application or addition needs exact source support verified before readiness."
+      },
+      {
+        "id": "rem-approximation-property-controls-finite-rank-density-in-compact-operators",
+        "kind": "remark",
+        "title": "Approximation property controls finite rank density in compact operators",
+        "deps": [
+          "def-approximation-property-and-bounded-approximation-property",
+          "def-approximable-operator",
+          "def-compact-linear-operator"
+        ],
+        "strategy": "For compact closure C=T(B_X), use AP to choose finite-rank R:Y->Y uniformly epsilon-close to identity on C; RT is finite rank and ||RT-T||<=epsilon. Connect to FA-11 AP/BAP definitions. Do not infer from failure of AP alone a particular unproved counterexample on Y->Y. The converse all-domain characterization needs separate proof and is not silently asserted.",
+        "statement": "If Banach Y has the approximation property, every compact T:X->Y is approximable. This is not a universal finite-rank approximation theorem for arbitrary Banach targets.",
+        "axiom_audit": "Literature-derived remark proof not-applicable; explicit explanatory argument remains reviewable.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Theo Bühler and Dietmar Salamon, Functional Analysis — §4.2 p.188, Exercise 4.29 forward direction",
+              "url": "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
+            }
+          ]
+        }
+      }
+    ],
+    "scaffold_status": "blocked"
+  }
+]

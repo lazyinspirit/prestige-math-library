@@ -1360,6 +1360,91 @@ proofs are ZF; constructing an unbounded resolution is not needed here.
 | `ex-nonpermutable-regular-sequence` | `ex` | Exhibit a regular sequence whose permutation fails outside the Noetherian local hypotheses. | L/A; Stacks §15.31 examples. |
 | `ex-koszul-homology-after-localisation` | `ex` | Localise a Koszul complex and identify the surviving homology. | L/A; Stacks Lemma 15.29.4. |
 
+### CA-16M. Koszul Euler characteristics and Hilbert–Samuel multiplicity — U-C19 addition
+
+A/B IDs: `koszul-euler-characteristics-and-hilbert-samuel-multiplicity` and `koszul-euler-characteristics-and-hilbert-samuel-multiplicity-examples`, at 365.9021/365.9022. Both are new waiting Phase-2 pages; no published page receives draft items. Requires: `koszul-complexes-and-regular-sequences`, `chain-conditions-and-semisimple-modules`, `rees-modules-artin-rees-and-hilbert-samuel-theory`, `localisation-of-modules-and-support`, `relations-functions-and-quotients`, `long-exact-sequences-in-homology`, `noetherian-rings-and-hilbert-basis`, `valuation-rings-and-discrete-valuation-rings`. AC is available for the inherited Nakayama and finite-module inputs, with exact uses stated in proofs.
+
+This supplies `thm-multiplicity-under-reduction-by-a-parameter`, whose current proof remains pending Phase 3. Its superficial-regular-parameter alternative in CA-11 is strictly weaker. The prose-only CA-11 heading `graded-rees-artin-rees-and-hilbert-samuel` maps to canonical published `rees-modules-artin-rees-and-hilbert-samuel-theory`; do not add a backward Koszul prerequisite to that page. At Phase 3, relocate the repaired consumer after this bridge and reconcile its consumers and page headers; do not modify current published content merely to claim closure.
+
+Sources read for scope: Stacks 43.15.4–6, https://stacks.math.columbia.edu/tag/0AZU; filtered convergence conditions, https://stacks.math.columbia.edu/tag/012V. The following local tail-acyclicity and two-term-complex arguments replace any unproved generic spectral-sequence appeal. Authoring must expand every stated supporting argument and independently verify it. A planned obligation is not a published proof.
+
+#### `def-koszul-euler-characteristic-and-degree-indexed-multiplicity` (definition)
+
+For a bounded complex with finite-length homology, define its Euler characteristic by alternating homology lengths. For finite M over Noetherian local R and I with length(M/IM) finite, define e_r(I,M)=r! times the coefficient of n^r in its eventual Hilbert-Samuel polynomial, using length(M/I^(n+1)M); define zero-module and empty-sequence conventions.
+
+Dependencies: `def-koszul-complex-of-a-sequence-with-coefficients`, `def-composition-series-and-length-of-a-module`, `thm-existence-of-hilbert-samuel-polynomial`.
+
+Proof obligation: Define module-relative ideals of definition. Distinguish coefficient-indexed e_r from top-dimensional multiplicity; no degree/dimension theorem is imported. For I=R explicitly define the polynomial and all e_r as zero rather than invoke a proper-ideal-only convention.
+
+#### `lem-koszul-homology-finite-length-for-an-ideal-of-definition` (lemma)
+
+Also requires published `thm-radical-as-intersection-of-primes` on
+`prime-spectra-and-radicals`: identify sqrt(Ann N)=m, then use the finite
+maximal-ideal generators and a pigeonhole expansion to obtain m^c N=0.
+State the inherited separating-prime/AC use. The A-page declares this home.
+
+Assume AC. For finite M over a Noetherian local ring R and a finite sequence f generating I, length(M/IM)<infinity implies every H_i(K(f;M)) has finite length, including zero M and the empty sequence.
+
+Dependencies: `def-koszul-euler-characteristic-and-degree-indexed-multiplicity`, `cor-sequence-ideal-annihilates-koszul-homology`, `thm-finitely-generated-modules-over-noetherian-rings-are-noetherian`, `thm-support-and-annihilator-of-a-finite-module`, `thm-nakayama-lemma`, `cor-length-is-additive-in-short-exact-sequences`, `def-axiom-of-choice`.
+
+Proof obligation: Prove homology finite and supported in Supp(M) intersect V(I) by localization and Nakayama. Prove locally that finite closed-point-supported modules have finite length: a power of the finitely generated maximal ideal annihilates them; filter by its powers and use finite-dimensional residue-field quotients. Inherited Nakayama uses AC; finite selections require no extra choice.
+
+#### `lem-bounded-finite-length-complex-euler-identities` (lemma)
+
+A bounded complex of finite-length modules has equal alternating lengths of terms and homology. A short exact sequence of bounded complexes with finite-length homology has additive Euler characteristics.
+
+Dependencies: `def-koszul-euler-characteristic-and-degree-indexed-multiplicity`, `cor-length-is-additive-in-short-exact-sequences`, `thm-long-exact-sequence-in-homology`.
+
+Proof obligation: Use cycle/boundary short exact sequences and cancellation of finite sums. For the second assertion break the finite long exact homology sequence into kernel-image sequences. State all boundedness and finiteness conditions.
+
+#### `lem-shifted-adic-koszul-filtration-euler-comparison` (lemma)
+
+Assume AC and the module-relative finite-length hypothesis of the preceding Koszul lemma. With K in cochain degrees -r,...,0 and F^pK^n=I^max(0,p+n)K^n, the high filtration tails are acyclic. For sufficiently large p, K/F^pK has finite-length terms and the same homology as K.
+
+Dependencies: `lem-koszul-homology-finite-length-for-an-ideal-of-definition`, `lem-bounded-finite-length-complex-euler-identities`, `def-associated-graded-ring-and-module`, `thm-hilbert-basis-theorem`, `thm-artin-rees-lemma`, `thm-nakayama-lemma`, `thm-long-exact-sequence-in-homology`, `def-axiom-of-choice`.
+
+Proof obligation: Identify the graded differential explicitly. Graded homology is finite over the Noetherian graded ring and killed by all initial generators; module-relative finite length makes it supported in finitely many grading degrees. Thus adjacent high tails have isomorphic homology by LES. Fix p>=r beyond that range. Artin-Rees for cycles inside each finite F^pK^n forces the image of H(F^qK) into I H(F^pK) for large q. Surjectivity gives H=IH; Nakayama gives zero. Handle I=R separately by generator contraction; handle empty sequence and zero module. No spectral-sequence convergence is assumed.
+
+#### `thm-hilbert-samuel-multiplicity-as-koszul-euler-characteristic` (theorem)
+
+Assume AC. Under length(M/IM)<infinity for I=(f_1,...,f_r), the Hilbert-Samuel polynomial has degree at most r and e_r(I,M)=chi(K(f;M)). This includes vanishing degree-r coefficient, M=0 and r=0.
+
+Dependencies: `def-koszul-euler-characteristic-and-degree-indexed-multiplicity`, `lem-koszul-homology-finite-length-for-an-ideal-of-definition`, `lem-bounded-finite-length-complex-euler-identities`, `lem-shifted-adic-koszul-filtration-euler-comparison`, `thm-existence-of-hilbert-samuel-polynomial`, `def-axiom-of-choice`.
+
+Proof obligation: Compute the Euler characteristic of a sufficiently deep finite-length quotient using binomial ranks and alternating Hilbert-Samuel values. Prove the r-th finite-difference identity and degree<=r by counting monomials acting on M/IM. Align the n+1 convention explicitly. No parameter-reduction or Hilbert-Samuel dimension theorem is used.
+
+#### `lem-koszul-euler-characteristic-first-element-reduction` (lemma)
+
+Assume AC. If length(M/(x,y_1,...,y_s)M)<infinity, set C=M/xM and T=0:_M x. Then chi(K(x,y;M))=chi(K(y;C))-chi(K(y;T)). All homologies in this identity have finite length; empty y is permitted.
+
+Dependencies: `lem-koszul-homology-finite-length-for-an-ideal-of-definition`, `lem-bounded-finite-length-complex-euler-identities`, `thm-koszul-concatenation-and-mapping-cone`, `thm-long-exact-sequence-in-homology`, `def-axiom-of-choice`.
+
+Proof obligation: Prove C/yC and T/yT finite length by support and localized Nakayama, not a false assertion that T has finite length. Use the two-term x-complex: quotient out T[1], then map the quotient to C. Tensoring its acyclic kernel with bounded finite-free K(y) stays acyclic, proved locally by finite column filtration and LES. Apply the Euler identity to the short exact sequence of complexes. This replaces an unproved two-row spectral-sequence appeal.
+
+#### `ex-koszul-euler-characteristic-empty-sequence` (example)
+
+For a finite-length module M, the empty sequence has Euler characteristic length(M) and e_0(0,M)=length(M).
+
+Dependencies: `def-koszul-euler-characteristic-and-degree-indexed-multiplicity`, `thm-hilbert-samuel-multiplicity-as-koszul-euler-characteristic`.
+
+Proof obligation: Compute the degree-zero complex and constant Hilbert-Samuel function, including M=0.
+
+#### `ex-koszul-euler-characteristic-annihilator-correction` (example)
+
+For a DVR R with uniformizer t and residue field k, M=R direct-sum k has H_0(K(t;M)) of length 2, H_1 of length 1, and e_1((t),M)=1.
+
+Dependencies: `thm-hilbert-samuel-multiplicity-as-koszul-euler-characteristic`, `lem-koszul-euler-characteristic-first-element-reduction`, `thm-dvr-ideal-and-module-length`.
+
+Proof obligation: Compute kernel and cokernel of t and length M/t^(n+1)M=n+2. Use the stated DVR interface, no construction of a formal power series ring.
+
+#### `ex-koszul-euler-characteristic-redundant-zero-generator` (example)
+
+Over a DVR R with uniformizer t, the sequence (t,0) on R has equal length-one H_0 and H_1 and Euler characteristic zero; e_2((t),R)=0 although top-dimensional multiplicity is one.
+
+Dependencies: `thm-hilbert-samuel-multiplicity-as-koszul-euler-characteristic`, `lem-koszul-euler-characteristic-first-element-reduction`, `thm-dvr-ideal-and-module-length`.
+
+Proof obligation: Compute by tensoring with the zero one-element complex, checking that coefficient index and intrinsic dimension are not interchangeable.
+
 ### CA-17. Depth and Cohen--Macaulay modules
 
 - **A page id:** `depth-and-cohen-macaulay-modules`
@@ -3265,7 +3350,7 @@ citations; it does not mean the statement was generated.
 | A | `lem-localisation-of-a-primary-submodule` | `lem` | A \(\mathfrak p\)-primary submodule localizes to a proper \(S^{-1}\mathfrak p\)-primary submodule when \(S\cap\mathfrak p=\varnothing\), and to the whole module otherwise. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 §2; use a radical element of \(S\cap\mathfrak p\) in the second case and clear denominators in the first. |
 | A | `lem-contraction-recovers-primary-component-after-localising-away-from-radical` | `lem` | If \(Q\) is \(\mathfrak p\)-primary and \(S\cap\mathfrak p=\varnothing\), then \(Q\) is the contraction of \(S^{-1}Q\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 8 §2; \(sm\in Q\) with \(s\notin\mathfrak p\) forces \(m\in Q\). |
 | A | `lem-intersection-decomposition-strict-enlargement-step` | `lem` | If a submodule \(N\) is reducible, write \(N=N_1\cap N_2\) with both \(N_i\supsetneq N\); Noetherian induction may therefore reduce decomposition existence to the two larger submodules. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 §3 and BU §10; this is the termination step of Lasker--Noether. |
-| A | `lem-irreducible-submodule-is-primary-noetherian` | `lem` | An irreducible submodule of a Noetherian module is primary. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 §3; stabilize colon submodules \((Q:x^n)\) and use irreducibility on a constructed intersection. |
+| A | `lem-irreducible-submodule-is-primary-noetherian` | `lem` | An irreducible submodule of a Noetherian module is primary. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 §3; the published proof uses the short-exact quotient theorem, quotient definition, primary power criterion, and only the choice-free finite-generation-to-ACC clause of `thm-equivalent-characterizations-of-noetherian-modules`. Stabilize kernels, prove their intersection with the corresponding image is zero, and use irreducibility. No DC or new Phase-2 prerequisite. |
 | A | `lem-primary-decomposition-delete-redundant-components` | `lem` | From any finite primary decomposition one may delete components containing the intersection of the others until the decomposition is irredundant. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: BU §10; finiteness makes the deletion process terminate. |
 | A | `lem-primary-decomposition-combine-equal-radicals` | `lem` | Intersecting all components with the same radical yields one primary component with that radical. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 8 §2; finite intersections of primary submodules with common radical are primary. |
 | A | `lem-associated-primes-from-a-minimal-primary-decomposition` | `lem` | The radicals occurring in a minimal primary decomposition of \(N\subset M\) are exactly \(\operatorname{Ass}(M/N)\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 8 §4 and BU §10; colon elements expose each radical and exact-sequence bounds exclude others. |
@@ -3331,8 +3416,8 @@ citations; it does not mean the statement was generated.
 | A | `cor-noether-normalisation-module-finiteness` | `cor` | The normalized affine algebra is finite as a module over its polynomial subring. | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 4 §2; finitely many integral algebra generators imply module finiteness by CA-6. |
 | A | `cor-noether-normalisation-dimension-lower-bound` | `cor` | A domain finite over a polynomial ring in \(d\) variables has dimension at least \(d\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Chs. 3--4; going up lifts the standard polynomial prime chain. |
 | A | `lem-zariski-lemma-one-variable-localisation-not-finite` | `lem` | For a field \(k\), the field \(k(t)\) is not finite as a module over \(k[t]\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: TN §11 and H20 Ch. 4 §3; finitely many rational generators have denominators using only finitely many irreducible factors. |
-| A | `lem-zariski-lemma-localised-polynomial-ring-not-field` | `lem` | A localization of \(k[t_1,\ldots,t_r]\) obtained by inverting finitely many nonzero polynomials is not a field when \(r>0\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 4 §3; choose an irreducible polynomial not dividing the finite denominator product after a one-variable specialization. |
-| A | `lem-zariski-lemma-transcendence-basis-reduction` | `lem` | If a field is finitely generated as a \(k\)-algebra, a transcendence basis would make it integral over a finitely localized polynomial algebra. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: TN §11; clear the coefficients of the algebraic equations for the remaining generators. |
+| A | `lem-zariski-lemma-localised-polynomial-ring-not-field` | `lem` | A localization of \(k[t_1,\ldots,t_r]\) obtained by inverting finitely many nonzero polynomials is not a field when \(r>0\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: specialize by base-N weights, with t_1 mapping to u and s mapping to nonzero g; use the polynomial and localization universal properties to obtain a surjection onto k[u][1/g]. Prove this target is not a field using u if g is constant and g+1 otherwise, with the localization zero/equality criterion. No one-variable module-finiteness lemma is consumed. |
+| A | `lem-zariski-lemma-transcendence-basis-reduction` | `lem` | If a field is finitely generated as a \(k\)-algebra, a transcendence basis would make it integral over a finitely localized polynomial algebra. | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: clear the finitely many algebraic coefficient denominators and invert the product of leading coefficients. Embed A into K by the localization universal property and zero criterion. Use the definition of integrality and `cor-integral-elements-form-a-subring` to pass from integral generators to A[a_i]=K; algebraicity transitivity does not supply this step. |
 | A | `cor-field-finite-type-over-a-field-is-a-finite-extension` | `cor` | A field finitely generated as a \(k\)-algebra is finite algebraic over \(k\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: H20 Ch. 4 §3 and BU §14; the previous two lemmas force the transcendence basis to be empty, and finite algebraic generation is finite. |
 | A | `lem-maximal-ideal-residue-field-of-an-affine-algebra-is-finite` | `lem` | If \(A\) is a finitely generated \(k\)-algebra and \(\mathfrak m\) maximal, then \(A/\mathfrak m\) is finite over \(k\). | provenance.statement: literature-derived; provenance.proof: literature-derived; rationale: H20 Ch. 4 §4; the quotient is both a field and a finite-type \(k\)-algebra, so Zariski's lemma applies. |
 | A | `cor-weak-nullstellensatz-algebraically-closed-coordinate-form` | `cor` | Over algebraically closed \(k\), every maximal ideal of \(k[x_1,\ldots,x_n]\) is \((x_1-a_1,\ldots,x_n-a_n)\) for a unique point \(a\in k^n\). | provenance.statement: literature-derived; provenance.proof: ai-altered; rationale: TN §11 and BM Ch. 1 §2; the residue classes of coordinates lie in the residue field, which equals \(k\). |
@@ -4056,23 +4141,21 @@ arrays; retain the companion B pages and their order unchanged:
 
 ### 11.3 Exact future `plan-spec.json` reconciliation
 
-No machine-plan edit is authorized here.  A later authorized splice must first
+Apart from the three owner-authorized early repairs recorded below, a later
+authorized splice must first
 resynchronize every existing Commutative Algebra plan item mechanically: keep
 the published page composition and item order, subject to the single CA-11
 reorder above, and replace each plan item's `title`, `kind`, and `deps` with its
 immutable item-frontmatter values.  This is the exact repair for the 187
 dependency and 104 title mismatches; the kind replacement is idempotent.
 
-Before that resynchronization can satisfy strict precedence, rehome the
-published item `def-dependent-choice` from
-`compactness-in-metric-spaces` (order 120) to
-`countability-and-uncountability` (order 18), immediately after the already
-published `def-countable-choice`.  At the same deferred repair, replace its
-inapplicable `def-sequence` dependency and the two matching body links:
-`def-sequence` defines only real-valued sequences and cannot type a function
-from the naturals into an arbitrary set.  Cite `def-function` instead and keep
-the displayed map as an ordinary function $\mathbb N\to X$.  Its remaining
-dependencies are available by order 18.  Add
+The owner authorized the DC typing/home repair on 2026-09-08. The published
+item `def-dependent-choice` now has its single home immediately after
+`def-countable-choice` on `countability-and-uncountability` (order 18), rather
+than `compactness-in-metric-spaces` (120). Its dependency and body now use
+`def-function` for the arbitrary map $\mathbb N\to X$, not the real-sequence
+definition. Terra accepted the repaired item; independent audit closure is
+pending in the owner-repair receipt. Keep
 `countability-and-uncountability` to the `requires` of
 `noetherian-rings-and-hilbert-basis`; the entire later CA A-spine then inherits
 it.  This closes the four exact live forward edges
@@ -4084,11 +4167,11 @@ it.  This closes the four exact live forward edges
   `def-dependent-choice`, and
 - `thm-complete-nakayama-lemma` -> `def-dependent-choice`.
 
-One upstream published item also needs a deferred metadata/content repair:
-`thm-equivalent-characterizations-of-noetherian-modules` uses Dependent Choice
-in proof step 2.1 while expressly declining to cite it.  After the rehome, add
-`def-dependent-choice` to that theorem's `deps` and replace the sentence saying
-it is “not cited as a forward dependency” by an ordinary labelled assumption.
+The same owner authorization repaired
+`thm-equivalent-characterizations-of-noetherian-modules`: DC is an explicit
+dependency and labelled assumption for ACC-to-maximal only, and the proof
+gives all three implications. Terra accepted it; independent audit closure
+is pending. Its previous refusal to declare a forward dependency is removed.
 The theorem remains in its existing Abstract-Algebra home; no duplicate is
 minted here.
 
