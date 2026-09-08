@@ -17,20 +17,23 @@
 //        [--out research/<run>-scaffold-closure.json]
 //
 // Default (step 3 review): every A page in the manifests must HAVE a verdict.
-// --require-sufficient (step 3 re-check): every verdict must BE `sufficient`.
+// --require-sufficient: every verdict must BE `sufficient`.
+// --require-final (Step 3 final join): current final/owner decisions are required.
 
 import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { readResolution } from './scaffold-resolution.mjs';
 
 const argv = process.argv.slice(2);
 const opt = (n, d = null) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] && !argv[i + 1].startsWith('--') ? argv[i + 1] : d; };
 const run = opt('run');
 const requireSufficient = argv.includes('--require-sufficient');
+const requireFinal = argv.includes('--require-final');
 const outPath = opt('out');
 const asJson = argv.includes('--json');
 
 if (!run) {
-  console.error('usage: node tools/scaffold-verdicts.mjs --run <run> [--require-sufficient] [--out <closure.json>] [--json]');
+  console.error('usage: node tools/scaffold-verdicts.mjs --run <run> [--require-sufficient] [--require-final] [--out <closure.json>] [--json]');
   process.exit(2);
 }
 
@@ -78,13 +81,28 @@ for (const f of verdictFiles) {
   }
 }
 
+const escalated = [], needsFinal = [];
+if (requireFinal) for (const page of aPages) {
+  try {
+    const resolution = readResolution(process.cwd(), run, page);
+    if (resolution && ['accept', 'repaired'].includes(resolution.decision)) {
+      verdicts.set(page, { verdict: 'sufficient', missing: [], by: resolution.owner ? 'owner' : 'final-adjudicator' });
+    } else if (resolution) {
+      escalated.push(page);
+      verdicts.set(page, { verdict: 'insufficient', missing: [resolution.reason], by: resolution.owner ? 'owner' : 'final-adjudicator' });
+    } else {
+      needsFinal.push(page);
+      verdicts.set(page, { verdict: 'insufficient', missing: ['Current final adjudication required'], by: 'engine' });
+    }
+  } catch (error) { errors.push(`final-decision: ${page}: ${error.message}`); needsFinal.push(page); }
+}
 const missingVerdict = aPages.filter((id) => !verdicts.has(id));
 const insufficient = aPages.filter((id) => verdicts.get(id)?.verdict === 'insufficient');
 
 for (const id of missingVerdict) {
   errors.push(`verdict-missing: ${id} has no step-3 breadth/depth verdict from any group Alpha`);
 }
-if (requireSufficient) {
+if (requireSufficient || requireFinal) {
   for (const id of insufficient) {
     const row = verdicts.get(id);
     errors.push(`scaffold-insufficient: ${id} is still insufficient — missing ${row.missing.join(', ')}`);
@@ -101,10 +119,12 @@ const receipt = {
   verdicts: verdicts.size,
   missing_verdict: missingVerdict.sort(),
   insufficient: insufficient.sort(),
+  escalated: escalated.sort(),
+  needs_final: needsFinal.sort(),
   // What each insufficient pair still needs, so a fix stage reads the file
   // rather than a report's prose.
   work: insufficient.sort().map((id) => ({ page: id, missing: verdicts.get(id).missing })),
-  closed: missingVerdict.length === 0 && insufficient.length === 0,
+  closed: errors.length === 0 && missingVerdict.length === 0 && insufficient.length === 0 && needsFinal.length === 0,
 };
 if (outPath) writeFileSync(outPath, `${JSON.stringify(receipt, null, 2)}\n`);
 

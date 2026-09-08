@@ -1,7 +1,7 @@
 # autopilot
 
 A deterministic control plane for multi-stage agent pipelines. It runs a build
-from step 0 to step 10 with **no human and no orchestrator in the loop**, on any
+from step 0 to step 10, escalating uncertain decisions to the owner, on any
 platform that can start an agent from a command line.
 
 ## The rule it is built around
@@ -36,8 +36,8 @@ autopilot plan --run frontier-15 --pairs next
 autopilot start --run frontier-15 --detach
 ```
 
-`start --detach` is the last command that needs a person. Steps 1 → 10 run to
-completion: dispatching agents, retrying dead lanes once, running gates,
+After `start --detach`, steps 1 → 10 run until completion or an owner decision
+is needed: dispatching agents, retrying failed lanes, running gates,
 refusing to advance past a gate that checked nothing, and writing a status
 report every 10 minutes.
 
@@ -244,7 +244,11 @@ The hook also could not have worked as written — it fired only when the blocke
 *message* was new, and a gate that keeps failing the same way produces the same
 message every time. One round, then deadlock. It now fires whenever nothing is in
 flight and rounds remain, bounded by `maxFixRounds`; past the cap the gate still
-blocks and a person reads it.
+blocks and a person reads it. Step 3 instead uses Astra/medium final
+adjudication without a numeric repair cap: accept, repair with 100% confidence,
+or escalate to the owner. Owner decisions are final for the recorded scaffold.
+Unchanged unresolved final calls do not trigger another paid review. See
+WORKFLOW.md for the terminal decision command and retained integrity gates.
 
 Gate output is repair evidence, so the engine retains it in full. Item-scoped
 repair accounting extracts every canonical subject from the complete failure,

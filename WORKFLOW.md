@@ -98,10 +98,11 @@ web access, sessions, and output capture. Stage profiles override role defaults.
 |---|---|
 | Step 1 scaffolding; Step 9 `step9-lead` | Astra / medium |
 | Step 5 authors and author recovery | Astra / medium |
-| Group Alpha (`alpha`) | Sol / high |
+| Step 3 initial reviewers; Group Alpha (`alpha`) | Sol / high |
+| Step 3 final adjudicators and their gate recovery | Astra / medium |
 | Step 8 adjudication | Sol / xhigh |
 | Step 8 final adjudication | Astra / medium |
-| Step 2 partition; Step 3 `alpha-high` recheck; Step 6 readers/refuters; Step 7 group readers; other Step 9/10 agents | Terra / high |
+| Step 2 partition; Step 6 readers/refuters; Step 7 group readers; other Step 9/10 agents | Terra / high |
 | Item judge | Terra / xhigh |
 
 Other dispatches use their role defaults; for example, unprofiled Beta uses
@@ -191,6 +192,35 @@ Every confirmed fatal requires one compatible row in
 requires no open rows.
 
 ## Repairs and controls
+
+### Step-3 final decisions
+
+After the initial review and Beta fix, the final adjudicator accepts the
+scaffold, repairs it itself, or escalates to the owner. Repair is permitted
+only with 100% confidence in its ability to resolve the defect; otherwise it
+must escalate. There is no three-round mathematical repair cap and no return
+to a Beta/recheck loop. An unresolved final call on unchanged scaffold inputs
+also holds for the owner instead of buying another call.
+
+Terminal decisions are recorded with `tools/scaffold-resolution.mjs` and bind
+to the current A/B manifests, pair coverage and corresponding plan entries.
+Legacy sufficient verdicts alone do not close the final gate. Changed inputs
+require a current decision. Source, dependency, scope and integrity gates still
+run; terminal decisions do not waive them or authorize published-proof edits.
+
+The owner's recorded decision overrides the adjudicator and is final for those
+inputs. Only the owner or an explicitly instructed operator may use `--owner`:
+
+```bash
+node tools/scaffold-resolution.mjs record --run RUN --page A_PAGE --owner --decision accept --reason "Owner ruling"
+node tools/scaffold-resolution.mjs record --run RUN --page A_PAGE --owner --decision repaired --reason "Owner-directed repair applied"
+node tools/scaffold-resolution.mjs record --run RUN --page A_PAGE --owner --decision hold --reason "Decision still pending"
+```
+
+Escalation holds Step 3 without more mathematical dispatches until an owner
+decision or changed evidence resolves it. Provider/launch retry limits and all
+other stages' budgets are unchanged. The final task is generated from the
+current canonical template, not a stale run-specific recheck prompt.
 
 ```bash
 autopilot pause --state-dir .autopilot/RUN

@@ -1486,7 +1486,8 @@ export class Executor {
       // not leave a permanent scar on the status report.
       const before = this.state.data.blockers.length;
       const ownerIds = new Set(statuses.map(({ s }: any) => s.id));
-      this.state.data.blockers = this.state.data.blockers.filter((b: any) => !(ownerIds.has(b.stage) && /gate /.test(b.message)));
+      this.state.data.blockers = this.state.data.blockers.filter((b: any) => !(ownerIds.has(b.stage)
+        && (/gate /.test(b.message) || b.key === `owner:${b.stage}`)));
       if (this.state.data.blockers.length !== before) this.reporter.notify('unblocked', `${where}: gate blocker cleared on a later pass`);
       this.reporter.notify('gates-ok', `${where}: all gates green`);
     }
@@ -1676,7 +1677,8 @@ export class Executor {
     this.state.save();
     const budgetLabel = perItem > 0
       ? `repair cycle ${st.fixRounds}; ${perItem} tries per gate/item`
-      : `repair round ${st.fixRounds}/${maxRounds}`;
+      : maxRounds === Infinity ? `terminal adjudication cycle ${st.fixRounds}`
+        : `repair round ${st.fixRounds}/${maxRounds}`;
     this.reporter.notify('repair', `${stage.id}: ${describe}; starting ${budgetLabel}`);
     let report: any;
     let hookFailed = false;
@@ -1689,6 +1691,17 @@ export class Executor {
     }
     const requestedStarts = this._repairStarts ?? [];
     this._repairStarts = undefined;
+    if (report?.owner) {
+      st.fixRounds -= 1;
+      st.lastRepairAt = prevRoundAt;
+      if (gateAttemptsBefore) this.state.data.gateAttempts = gateAttemptsBefore;
+      const message = `stage ${stage.id}: owner decision required — ${report.owner.reason}`;
+      if (this.state.addBlocker(stage.id, message, `owner:${stage.id}`)) {
+        this.reporter.notify('owner-escalation', message);
+      }
+      this.state.save();
+      return 'waiting';
+    }
     if (report?.outage) {
       const waitMs = report.outage.retryAfterMs ?? OUTAGE_BACKOFF_MS;
       st.fixRounds -= 1;

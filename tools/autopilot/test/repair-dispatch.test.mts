@@ -83,7 +83,7 @@ test('a hook-started dispatch with no existing input becomes a blocker, not a sp
   rmSync(repo, { recursive: true, force: true });
 });
 
-test('the scaffold-fix hook dispatches one lane per owning batch, batch as cover', async () => {
+test('Step 3 routes unresolved scaffolds to disjoint final adjudicators', async () => {
   const repo = fixtureRepo();
   // receipt: three insufficient pages across TWO batches
   writeFileSync(join(repo, 'research', 'demo-scaffold-closure.json'), JSON.stringify({
@@ -99,6 +99,9 @@ test('the scaffold-fix hook dispatches one lane per owning batch, batch as cover
   }));
   const started: any[] = [];
   const executor = { start: (_s: any, p: any) => started.push(p) };
+  writeFileSync(join(repo, 'research', 'demo-alpha-groups.json'), JSON.stringify([
+    { label: 'a', covers: ['4'] }, { label: 'b', covers: ['6'] },
+  ]));
   const s3: any = stages.find((s: any) => s.id === '3-recheck');
   await s3.onGateFailure({
     ctx: { run: 'demo', repo }, executor, stage: s3, round: 1,
@@ -106,15 +109,16 @@ test('the scaffold-fix hook dispatches one lane per owning batch, batch as cover
   });
   assert.equal(started.length, 2, 'two batches own the three pages');
   assert.deepEqual(started.map((p) => p.covers).sort(), [['4'], ['6']]);
-  assert.deepEqual(started.map((p) => p.label).sort(), ['scaffold-fix-1-b4', 'scaffold-fix-1-b6']);
+  assert.ok(started.every(p => p.label.startsWith('scaffold-final-')));
   for (const p of started) {
-    assert.ok(Array.isArray(p.task), 'candidates stay an array; start() resolves them');
-    assert.equal(p.job, 'scaffolding');
+    assert.equal(typeof p.task, 'string');
+    assert.equal(p.job, 'adjudication');
+    assert.equal(p.role, 'alpha-high');
   }
   rmSync(repo, { recursive: true, force: true });
 });
 
-test('an unchanged post-fix Alpha receipt routes the still-insufficient page back to Beta', async () => {
+test('legacy rechecks migrate to final adjudication after three rounds', async () => {
   const repo = fixtureRepo();
   const research = join(repo, 'research');
   const dispatch = join(research, 'demo-dispatch');
@@ -146,8 +150,9 @@ test('an unchanged post-fix Alpha receipt routes the still-insufficient page bac
     failure: { id: 'scaffold-verdicts', why: '' },
   });
   assert.equal(started.length, 1);
-  assert.equal(started[0].role, 'beta');
-  assert.equal(started[0].label, 'scaffold-fix-3-b4');
+  assert.equal(started[0].role, 'alpha-high');
+  assert.match(started[0].label, /^scaffold-final-a-/);
+  assert.equal(s3.maxFixRounds, Infinity);
   rmSync(repo, { recursive: true, force: true });
 });
 
@@ -582,7 +587,7 @@ test('a prompt file carrying an identity placeholder blocks before any spawn', (
   rmSync(repo, { recursive: true, force: true });
 });
 
-test('an unfetchable source routes a scouting Beta per owning batch', async () => {
+test('Step-3 source residue goes to its final adjudicator, not another Beta', async () => {
   const repo = fixtureRepo();
   // a coverage whose one source is unstamped and unfetchable -> the stamp
   // repair leaves residue naming the page -> the hook routes a scout
@@ -601,8 +606,8 @@ test('an unfetchable source routes a scouting Beta per owning batch', async () =
     failure: { id: 'source-fetch-check', why: '' },
   });
   assert.equal(started.length, 1);
-  assert.equal(started[0].label, 'source-scout-2-b2');
-  assert.equal(started[0].job, 'scouting');
+  assert.match(started[0].label, /^scaffold-final-a-/);
+  assert.equal(started[0].job, 'adjudication');
   assert.deepEqual(started[0].covers, ['2']);
   rmSync(repo, { recursive: true, force: true });
 });

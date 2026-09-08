@@ -115,6 +115,27 @@ test('group Alpha resolves to Sol high', () => {
   assert.equal(row.provider_effort, 'high');
 });
 
+test('Step-3 review uses Sol high and final adjudication uses Astra medium', () => {
+  for (const id of ['3-review', '3-recheck']) {
+    const s = stage(id);
+    const plan = s.plan(ctx, ['1'])[0];
+    const profileName = selected(s, plan);
+    if (profileName) {
+      const profile = MODEL_PROFILES[profileName];
+      assert.equal(profile.model, id === '3-recheck' ? MODELS.astra.id : MODELS.sol.id, id);
+      assert.equal(profile.effort, id === '3-recheck' ? 'medium' : 'high', id);
+      continue;
+    }
+    const result = spawnSync('node', ['tools/dispatch.mjs',
+      '--role', plan.role, '--brief', plan.brief, '--label', `${id}-model-test`,
+      '--run', `${id}-model-test`, '--dry-run', '--json'], { cwd: REPO, encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr);
+    const row = JSON.parse(result.stdout);
+    assert.equal(row.model, MODELS.sol.id, id);
+    assert.equal(row.requested_effort, 'high', id);
+  }
+});
+
 test('Step-8 fatal group adjudicator uses Sol xhigh', () => {
   const result = spawnSync('node', ['tools/dispatch.mjs',
     '--role', 'alpha-adjudicate', '--brief', 'briefs/alpha.md',
@@ -157,7 +178,7 @@ test('the shared Step-1/3 scaffold brief mandates research and complete dependen
   assert.match(source, /every piece of mathematics unfamiliar/i);
   assert.match(source, /search the web/i);
   assert.match(source, /authoritative sources/i);
-  assert.match(source, /complete transitive closure/i);
+  assert.match(source, /complete transitive closure|actual transitive proof prerequisites/i);
   assert.match(source, /no missing,[\s\S]*inadequate[\s\S]*dependency/i);
   assert.match(source, /definition, lemma, or theorem/i);
   assert.match(source, /prerequisite A\/B pair/i);

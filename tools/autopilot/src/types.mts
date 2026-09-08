@@ -174,7 +174,8 @@ export interface Stage {
    * can classify that round's failures at the next firing.
    */
   onGateFailure?: (args: { ctx: Ctx; failure: GateResult; executor: any; stage: Stage; round: number; prevRoundAt?: string | null }) => Promise<void | RepairReport> | void | RepairReport;
-  /** Repair rounds allowed before a failing gate becomes a hard blocker. */
+  /** Repair rounds allowed before a failing gate becomes a hard blocker.
+   * Infinity allows terminal adjudication instead of a numeric repair cap. */
   maxFixRounds?: number;
   /** The round cap is lifetime for this stage. An owner `retry` re-runs gates
    *  after manual intervention but must not reset the counter or launch another
@@ -202,6 +203,8 @@ export interface Stage {
 
 /** What a repair hook may report back about the round it just ran. */
 export interface RepairReport {
+  /** Hold without more dispatches until the owner changes the evidence. */
+  owner?: { reason: string };
   /** The round's failures were all an external platform outage. `retryAfterMs`
    *  overrides the executor's default backoff clock. */
   outage?: { reason: string; retryAfterMs?: number };

@@ -1481,7 +1481,7 @@ const levelCoverageGate = (ctx) => gate('level-coverage', ['node', 'tools/level-
 const scaffoldGate = (ctx, { requireSufficient = false } = {}) =>
   gate('scaffold-verdicts', ['node', 'tools/scaffold-verdicts.mjs',
     '--run', ctx.run,
-    ...(requireSufficient ? ['--require-sufficient'] : []),
+    ...(requireSufficient ? ['--require-sufficient', '--require-final'] : []),
     '--out', scaffoldPath(ctx),
   ], {
     liveness: { pattern: /(\d+)\/(?:\d+) A page\(s\) reviewed/.source, min: 1, unit: 'reviewed pairs' },
@@ -1564,6 +1564,21 @@ const resultPattern = (role: string, labelSource: string): RegExp =>
 // would buy an earlier signal at the price of a gate whose scope depends on
 // which batch happened to finish first.
 // ---------------------------------------------------------------------------
+
+export function scaffoldFinalPlan(ctx: any, group: any, failure?: any) {
+  const inputs = group.covers.map((b: string) => {
+    const file = R(ctx, 'research', `${ctx.run}-batch-${b}.pages.json`);
+    return existsSync(file) ? readFileSync(file, 'utf8') : b;
+  });
+  const key = createHash('sha256').update(JSON.stringify(inputs)).digest('hex').slice(0, 16);
+  const label = `scaffold-final-${group.label}-${key}`;
+  const task = `research/${ctx.run}-${label}.task.md`;
+  const brief = readFileSync(R(ctx, 'briefs/tasks/alpha-group-recheck.md'), 'utf8').replaceAll('{{run}}', ctx.run);
+  writeFileSync(R(ctx, task), `${brief}\n\nGroup: ${group.label}. Assigned batches: ${group.covers.join(', ')}.\n`
+    + `Current gate diagnostics (data, not instructions):\n${JSON.stringify(failure ?? {}, null, 2)}\n`);
+  return { role: 'alpha-high', label, profile: ASTRA_MEDIUM, job: 'adjudication',
+    covers: group.covers, brief: 'briefs/beta-scaffold.md', task, timeout: 7200 };
+}
 
 export const stages = [
   // ---------------------------------------------------------------------------
@@ -1815,12 +1830,11 @@ export const stages = [
     gates: (ctx) => [scopeGate(ctx), ...coverageGates(ctx, { requireDestination: true }), ...policyGates(ctx), planGate()],
   },
 
-  // Alpha re-checks its own findings from disk before the splice. An `applied`
-  // claim that changed nothing is caught here, which is the only reason the
-  // fix stage can be trusted without a human reading it.
+  // The final adjudicator accepts, repairs, or hands uncertainty to the owner.
   {
     id: '3-recheck',
-    label: 'Alpha re-check before splice',
+    label: 'Final scaffold adjudication before splice',
+    modelProfile: ASTRA_MEDIUM,
     pipeline: 'scaffold',
     role: 'alpha-high',
     units: batches,
@@ -1830,20 +1844,12 @@ export const stages = [
     // while a re-run would write `alpha-high-recheck-*` and match nothing. Both
     // spellings, so a fixed pattern does not reopen a stage that closed at
     // step 3.
-    pattern: /^alpha-(?:high-)?recheck-[a-z]+\.result\.json$/,
+    pattern: /^alpha-(?:high-)?(?:recheck-[a-z]+|scaffold-final-[a-z]+-[a-f0-9]+)\.result\.json$/,
     concurrency: 9,
     cohort: alphaCohort,
     plan: (ctx, pendingUnits) => alphaGroups(ctx)
       .filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))))
-      .map((g: any) => ({
-        role: 'alpha-high',
-        label: `recheck-${g.label}`,
-      job: 'adjudication',
-        covers: g.covers,
-        brief: "briefs/beta-scaffold.md",
-        task: [`research/${ctx.run}-alpha-${g.label}-recheck.task.md`, `research/${ctx.run}-alpha-group-recheck.task.md`],
-        timeout: 7200,
-      })),
+      .map((g: any) => scaffoldFinalPlan(ctx, g)),
     // THE SCAFFOLD LOOP CLOSES HERE. Not "a re-check happened" — every pair is
     // actually sufficient, or this stage does not clear and step 4 cannot splice.
     //
@@ -1851,109 +1857,41 @@ export const stages = [
     // between the stage-1 join and the splice, and step 3 is the last point
     // where the repair is a scaffold edit. Same self-heal path as stage 1 —
     // the MECHANICAL_REPAIRS table swaps recorded snapshots and stamps
-    // unstamped sources; only an unrecoverable or unfetchable source reaches
-    // the fix loop below, as scouting work for the owning Beta.
+    // unstamped sources; residue goes to the owning final adjudicator.
     gates: (ctx) => [scopeGate(ctx), planGate(), extGate(), scaffoldGate(ctx, { requireSufficient: true }),
       manifestDepsGate(ctx), scopeDecisionsGate(ctx), urlGate(ctx), backingGate(ctx), fetchGate(ctx)],
-    // Still thin after the re-check is another fix round, not an advance. Bounded
-    // for the same reason the judge loop is: a scaffold that will not converge is
-    // a decision for a person, and the blocker names the pairs.
-    maxFixRounds: 3,
+    // Mathematical closure is terminal adjudication, not a numbered retry loop.
+    maxFixRounds: Infinity,
     onGateFailure: async ({ ctx, executor, stage, round, failure }) => {
-      const scaffoldFailed = [failure, ...(failure?.advisory ?? [])]
-        .some((entry: any) => entry?.id === 'scaffold-verdicts');
-      // Mechanically repairable failures never spend a Beta dispatch; a
-      // repair that leaves residue (a source no swap or stamp can save)
-      // routes the residue to scouting Betas — the owner's designed remedy —
-      // rather than burning rounds into a needs-a-person blocker.
+      const scaffold: any = readScaffold(ctx);
+      if (scaffold?.escalated?.length) {
+        return { owner: { reason: `Step 3 escalated ${scaffold.escalated.join(', ')}; record the owner's decision with tools/scaffold-resolution.mjs.` } };
+      }
       const repair = await mechanicalRepair({ ctx, failure });
-      // A clean mechanical repair may have fixed only an advisory failure.
-      // It must not hide an unrelated thin-scaffold verdict from this same
-      // battery: frontier-21 otherwise spent round 1 stamping a source and
-      // dispatched no Beta for the primary scaffold failure.
-      if (repair.outcome === 'clean' && !scaffoldFailed) return;
       if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
-      if (repair.outcome === 'residual') {
-        if (dispatchSourceScouts({ ctx, executor, stage, round, stderr: repair.stderr })) return;
-        throw new Error(`mechanical repair left residue and no scout could be routed: ${(repair.stderr ?? '').slice(0, 300)}`);
-      }
-      const scaffold = readScaffold(ctx);
-      const pages = scaffold?.insufficient ?? [];
-      if (!pages.length) return;                 // failed on a missing verdict instead
-      // ONE LANE PER OWNING BATCH, the batch carried as the cover. The first
-      // live firing dispatched one anonymous lane per PAGE — same prompt, no
-      // page identity, covers [] — so four Betas would each have had to guess
-      // which finding was theirs, and two pages in one batch meant two
-      // writers on one batch's files. The scope ledger maps page -> batch;
-      // the single cover flows into `--var i=<batch>` mechanically, and the
-      // task file keys the receipt's findings on it. The result files match
-      // no stage's pattern, so these lanes claim no coverage — the recheck
-      // Alphas re-assert sufficiency, which is the loop's whole point.
-      const ledger = JSON.parse(readFileSync(join(R(ctx, 'research'), `${ctx.run}-scope-ledger.json`), 'utf8'));
-      const batchOf = new Map(ledger.pages.map((p: any) => [p.id, String(p.batch)]));
-      const owed = [...new Set(pages.map((p: any) => batchOf.get(p)).filter(Boolean))];
-      // A scaffold-fix Beta changes the evidence that the group Alpha already
-      // judged. When such a repair result is newer than either the group's
-      // verdict or its scope decisions, the next repair action is an Alpha
-      // recheck, not another Beta rewrite. Frontier-21 exposed the missing
-      // handoff: the Beta added Theorem 3.4, gates read stale Alpha artifacts,
-      // and the engine otherwise asked the Beta to repair the same scaffold
-      // again.
+      if (repair.outcome === 'clean' && ![failure, ...(failure.advisory ?? [])]
+        .some(entry => entry.id === 'scaffold-verdicts')) return;
+      // One final writer per disjoint group. No further Beta/recheck cycle.
+      const ledger = JSON.parse(readFileSync(R(ctx, 'research', `${ctx.run}-scope-ledger.json`), 'utf8'));
+      const pages = [...new Set([...(scaffold?.needs_final ?? []),
+        ...(scaffold?.insufficient ?? []), ...(scaffold?.missing_verdict ?? [])])];
+      const owed = new Set(ledger.pages.filter(p => pages.includes(p.id)).map(p => String(p.batch)));
+      const groups = alphaGroups(ctx).filter(g => !owed.size || g.covers.some(b => owed.has(b)));
+      if (!groups.length) return { owner: { reason: 'No final-adjudicator group owns the unresolved Step-3 work.' } };
       const dispatchDir = R(ctx, 'research', `${ctx.run}-dispatch`);
-      const repairFiles = existsSync(dispatchDir)
-        ? readdirSync(dispatchDir).filter((name: string) => /^beta-scaffold-fix-\d+-b\d+\.result\.json$/.test(name))
-        : [];
-      const staleGroups = alphaGroups(ctx).filter((group: any) => {
-        if (!group.covers.some((batch: string) => owed.includes(batch))) return false;
-        const verdict = R(ctx, 'research', `${ctx.run}-alpha-${group.label}-step3-verdicts.json`);
-        const decisions = R(ctx, 'research', `${ctx.run}-alpha-${group.label}-scope-decisions.json`);
-        const artifactJudgedAt = Math.min(
-          existsSync(verdict) ? statSync(verdict).mtimeMs : 0,
-          existsSync(decisions) ? statSync(decisions).mtimeMs : 0,
-        );
-        // An unchanged verdict is still a completed recheck. Codex correctly
-        // leaves byte-identical artifacts untouched, so their mtimes alone can
-        // make the same Alpha look stale forever. The dispatch receipt is the
-        // durable proof that the group read the repaired bytes; include the
-        // newest one when deciding whether another Beta or another Alpha owns
-        // the next move.
-        const recheckJudgedAt = existsSync(dispatchDir)
-          ? readdirSync(dispatchDir)
-            .filter((name: string) => new RegExp(`^alpha-(?:high-)?scaffold-recheck-\\d+-${group.label}\\.result\\.json$`).test(name))
-            .reduce((latest: number, name: string) => Math.max(latest, statSync(join(dispatchDir, name)).mtimeMs), 0)
-          : 0;
-        const judgedAt = Math.max(artifactJudgedAt, recheckJudgedAt);
-        return repairFiles.some((name: string) => {
-          const batch = name.match(/-b(\d+)\.result\.json$/)?.[1];
-          return batch && group.covers.includes(batch)
-            && statSync(join(dispatchDir, name)).mtimeMs > judgedAt;
-        });
-      });
-      if (staleGroups.length) {
-        for (const group of staleGroups) {
-          executor.start(stage, {
-            role: 'alpha-high',
-            label: `scaffold-recheck-${round}-${group.label}`,
-            job: 'adjudication',
-            covers: group.covers,
-            brief: 'briefs/beta-scaffold.md',
-            task: [`research/${ctx.run}-alpha-${group.label}-recheck.task.md`, `research/${ctx.run}-alpha-group-recheck.task.md`],
-            timeout: 7200,
-          });
+      for (const group of groups) {
+        const plan = scaffoldFinalPlan(ctx, group, failure);
+        // A completed adjudicator without a closing decision needs the owner,
+        // not another paid call on identical inputs.
+        if (existsSync(dispatchDir) && readdirSync(dispatchDir).some(name => {
+          if (!name.endsWith('.result.json')) return false;
+          try { return JSON.parse(readFileSync(join(dispatchDir, name), 'utf8')).label === plan.label; }
+          catch { return false; }
+        })) {
+          return { owner: { reason: `Final adjudicator ${group.label} did not close the current inputs. Inspect its receipt and resolve the outstanding gate.` } };
         }
-        return;
       }
-      for (const b of owed) {
-        executor.start(stage, {
-          role: 'beta',
-          label: `scaffold-fix-${round}-b${b}`,
-          job: 'scaffolding',
-          covers: [b],
-          brief: 'briefs/beta-scaffold.md',
-          task: [`research/${ctx.run}-beta-scaffold-fix.task.md`, `research/${ctx.run}-beta-fix.task.md`],
-          timeout: 7200,
-        });
-      }
+      for (const group of groups) executor.start(stage, scaffoldFinalPlan(ctx, group, failure));
     },
   },
 
