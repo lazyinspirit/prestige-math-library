@@ -40,8 +40,8 @@ currently precedes the commutative-algebra terminus, NT-18 legally consumes
 NT-13 and gives a complete Hasse--Minkowski proof rather than an unproved
 remark.  The subjects-01 reconciliation also places the Möbius formula for
 monic irreducibles on NT-9, successive minima and Minkowski's second theorem
-on NT-22, and the arithmetic consequences of GA-3's Kronecker--Weber theorem
-on NT-24.
+on NT-22, and cyclotomic arithmetic via proved Frobenius suppliers on NT-24.
+The recorded-only Kronecker--Weber remark supplies nothing.
 
 **Amendments owed and unresolved references.** CA-18 owes stable ids for
 Jensen/Hadamard/log-derivative machinery; CA-21/22 must preserve their named
@@ -53,6 +53,14 @@ empty live `items[]`, so every candidate dependency is verified again at
 build time.  The only optional unresolved content is a fully sourced
 nonmonogenic B counterexample; omit it if no complete proof is acquired.
 
+**Incoming Commutative Algebra reconciliation (2026-09-08).** In the future
+machine-plan splice, `absolute-values-completions-and-p-adic-numbers` must
+replace its B-page requirement
+`regular-local-rings-and-homological-dimension-examples` with the A page
+`regular-local-rings-and-homological-dimension`. No Number Theory item may use
+the B page as a supplier. The later Number Theory audit must preserve and
+verify this exact cutover.
+
 **Scope denials and blockers.** General commutative algebra and Galois theory,
 function-theoretic Gamma/zeta, cryptographic algorithms, elliptic/higher
 Diophantine geometry, class field theory/Chebotarev/higher reciprocity,
@@ -61,7 +69,9 @@ prime-distribution theory, Gauss composition/narrow class groups, and open
 problems such as RH are explicitly denied or deferred with result-specific
 reasons in §§2 and 7.  There is no blocker.  The choice ledger is §9; notably
 the published metric completion and planned measure/Fourier routes transmit
-\(\mathsf{AC}_\omega\), while the intrinsic number-theoretic arguments are ZF.
+\(\mathsf{AC}_\omega\), while NT-22--NT-23 inherit full Choice from the
+adequate CA-9 ideal-class-group route.  The remaining intrinsic
+number-theoretic arguments are ZF.
 
 ---
 
@@ -138,11 +148,11 @@ block normalises \(|x|_p=p^{-v_p(x)}\).
    Pell equations remain because continued fractions give a complete
    elementary treatment.
 6. **Class field theory and higher reciprocity.** Ideles, Artin reciprocity,
-   the existence theorem of class field theory, and cubic and higher
-   reciprocity form a later subject.  The owner-authorised exception is
-   Kronecker--Weber: GA-3 proves it, and NT-24 cites it for its arithmetic
-   consequences.  Frobenius in a finite Galois extension and its cyclotomic
-   use are included; neither presumes the rest of class field theory.
+   the existence theorem of class field theory, Kronecker--Weber, and cubic
+   and higher reciprocity form a later subject.  GA-3 records but does not
+   prove Kronecker--Weber, so NT-24 neither cites nor consumes it.  Frobenius
+   in a finite Galois extension and its cyclotomic use are included; neither
+   presumes the rest of class field theory.
 7. **Additive and automorphic theory beyond the named remit.** Waring's
    problem, Goldbach-type questions, the circle method, modular forms,
    automorphic \(L\)-functions, and sieve theory beyond the elementary
@@ -198,8 +208,10 @@ rationale, kept because the proofs still have to discharge it.*
 
 - **A page id:** `primitive-roots-and-unit-groups-modulo-n`
 - **B page id:** `primitive-roots-and-unit-groups-modulo-n-examples`
-- **Requires (live, `plan-spec.json`):** `splitting-fields-examples` — one
-  declared edge, whose transitive closure supplies everything the page cites.
+- **Requires (binding repair):** `splitting-fields` — the live JSON still
+  names `splitting-fields-examples`, but that B page is a leaf and Phase 3
+  must perform the §15 A-for-B cutover.  The A-page transitive closure supplies
+  everything the page cites.
   Part I listed `congruences-and-the-chinese-remainder-theorem`,
   `cyclic-groups-and-direct-products`, `the-structure-of-finite-abelian-groups`
   and `polynomial-rings-and-roots` as direct requirements; all four are reached
@@ -1856,10 +1868,12 @@ page inherits NT-17's separately recorded completion cost.
 
 - **A page id:** `minkowski-theory-and-number-field-class-groups`
 - **B page id:** `minkowski-theory-and-number-field-class-groups-examples`
-- **Requires:** NT-19--NT-20; CA-9's `def-ideal-class-group-of-a-domain`,
-  `lem-ideal-class-group-well-defined`, and class-group/PID criterion; and the
-  published finite-dimensional Euclidean topology and volume theory.  This
-  page proves arithmetic finiteness of the already-defined class group.
+- **Requires:** `decomposition-inertia-and-frobenius`; CA-9's
+  `def-ideal-class-group-of-a-domain`, `lem-ideal-class-group-well-defined`,
+  `thm-unique-factorisation-of-ideals-in-dedekind-domains`, and
+  class-group/PID criterion; and the published finite-dimensional Euclidean
+  topology and volume theory.  This page proves arithmetic finiteness of the
+  already-defined class group.  Its B page requires this A page only.
 - **Primary backing:** Milne Ch. 4, pp. 68--82, Thms. 4.4--4.8 and the
   Minkowski class bound, together with Thm. 8.43 for Hermite--Minkowski.
   Independent complete treatments: Stein §§7.1--7.3; Conrad--Landesman
@@ -1871,10 +1885,15 @@ page inherits NT-17's separately recorded completion cost.
 |---|---|---|---|
 | `def-minkowski-embedding-of-a-number-field` | `def` | For signature \((r_1,r_2)\), the unscaled Minkowski embedding sends \(x\) to its \(r_1\) real values and one value in \(\mathbb C\) from each conjugate pair, identified with \(\mathbb R^{r_1+2r_2}\) by separate real and imaginary coordinates. | L/NA; Milne §4; Stein §7.1.  No \(\sqrt2\) scaling is used. |
 | `def-full-euclidean-lattice-and-covolume` | `def` | A full lattice in \(\mathbb R^n\) is the integer span of a real basis; its covolume is the absolute determinant of any basis matrix. | L/NA; Milne §4; Conrad--Landesman Ch. 25.  Unimodular changes prove basis independence. |
+| `lem-full-lattice-fundamental-domain-and-bounded-points` | `lem` | A full lattice admits a half-open fundamental parallelotope of volume equal to its covolume; every bounded set meets the lattice in finitely many points. | L/L; Stein §7.1; Green, Lecture 3, §1.  Use the basis-coordinate map to prove existence and uniqueness of the half-open representative, then bounded integer coordinates for finiteness. |
 | `lem-blichfeldt-lattice-point-principle` | `lem` | If a measurable set \(S\subset\mathbb R^n\) has volume greater than the covolume of a full lattice \(\Lambda\), two distinct points of \(S\) differ by an element of \(\Lambda\). | L/L; Milne Lemma 4.2; Stein §7.1.  Reduce to a fundamental parallelotope and apply finite or measure-theoretic pigeonhole with boundary handled explicitly. |
 | `thm-minkowski-convex-body-theorem` | `thm` | If \(C\subset\mathbb R^n\) is convex, centrally symmetric, and measurable with \(\operatorname{vol}(C)>2^n\operatorname{covol}(\Lambda)\), then \(C\) contains a nonzero point of \(\Lambda\). | L/L; Milne Thm. 4.4; Stein Thm. 7.1.3.  Apply Blichfeldt to \(\tfrac12C\); convexity and symmetry put the difference back in \(C\). |
-| `def-successive-minima-of-a-convex-body-with-respect-to-a-lattice` | `def` | For a centrally symmetric convex body \(C\subset\mathbb R^n\) and a full lattice \(\Lambda\), \(\lambda_i(C,\Lambda)\) is the infimum of \(\lambda>0\) for which \(\lambda C\cap\Lambda\) spans a real subspace of dimension at least \(i\). | L/NA; standard geometry-of-numbers convention.  Record \(0<\lambda_1\le\cdots\le\lambda_n<\infty\) and keep the body/lattice arguments explicit. |
-| `thm-minkowski-second-theorem-on-successive-minima` | `thm` | For the preceding data, \[\frac{2^n}{n!}\operatorname{covol}(\Lambda)\le \lambda_1\cdots\lambda_n\operatorname{vol}(C)\le 2^n\operatorname{covol}(\Lambda).\] | L/L; the standard successive-minima proof, cross-checked against Dummit's *Number Theory, Part 9*.  This is the exact supplier needed by combinatorics CB-32's full Freiman theorem. |
+| `cor-minkowski-convex-body-theorem-at-equality` | `cor` | If \(C\) is additionally compact and \(\operatorname{vol}(C)\ge 2^n\operatorname{covol}(\Lambda)\), then \(C\) contains a nonzero lattice point. | L/L; Green, Lecture 3, §2.  Apply the strict theorem to \((1+1/m)C\) and use bounded-lattice-point finiteness to extract a point occurring infinitely often and pass to the closed body. |
+| `def-successive-minima-of-a-convex-body-with-respect-to-a-lattice` | `def` | For a compact centrally symmetric convex set \(C\subset\mathbb R^n\) with nonempty interior and a full lattice \(\Lambda\), \(\lambda_i(C,\Lambda)\) is the infimum of \(\lambda>0\) for which \(\lambda C\cap\Lambda\) spans a real subspace of dimension at least \(i\). | L/NA; Henk §2; Green Lecture 3 §3.  This fixes “convex body” to mean compact with nonempty interior, records \(0<\lambda_1\le\cdots\le\lambda_n<\infty\), and keeps the body/lattice arguments explicit. |
+| `lem-successive-minima-attainment-and-adapted-flag` | `lem` | For a compact centrally symmetric convex body with nonempty interior, every successive minimum is attained, and lattice vectors \(a_1,\ldots,a_n\) may be chosen with \(a_i\in\lambda_iC\) so that their successive spans realize the rank jumps. | L/L; Henk, §2; Green, Lecture 3, §3.  Use bounded-lattice-point finiteness at each minimum and a finite-dimensional basis extraction. |
+| `lem-triangular-borel-maps-scale-euclidean-volume` | `lem` | An upper-triangular linear map with positive diagonal entries scales Lebesgue volume by the product of those entries, with the same conclusion for its inverse. | L/L; Green, Lecture 3, §3, with the standard finite-dimensional change-of-variables theorem.  This isolates the exact analytic input used in the upper-bound deformation. |
+| `lem-minkowski-successive-minima-volume-deformation` | `lem` | For an adapted successive-minima flag, the triangular deformation that scales the \(i\)-th adapted coordinate by \(\lambda_i\) sends the interior of \(C\) to a centrally symmetric convex set containing no nonzero lattice point; its volume is \((\prod_i\lambda_i)\operatorname{vol}(C)\). | L/L; Henk, §3; Green, Lecture 3, §3.  Prove lattice avoidance from the defining flag before applying the determinant calculation. |
+| `thm-minkowski-second-theorem-on-successive-minima` | `thm` | For the preceding data, \[\frac{2^n}{n!}\operatorname{covol}(\Lambda)\le \lambda_1\cdots\lambda_n\operatorname{vol}(C)\le 2^n\operatorname{covol}(\Lambda).\] | L/L; Henk, §3 (complete proof), and Green, Lecture 3, §3.  The lower bound places the cross-polytope generated by adapted lattice vectors inside \(C\); the upper bound applies the equality form of Minkowski to the volume deformation.  This is the exact supplier needed by combinatorics CB-32's full Freiman theorem. |
 | `thm-ring-of-integers-and-ideals-are-full-lattices` | `thm` | The Minkowski images of \(\mathcal O_K\) and every nonzero fractional ideal are full lattices in \(\mathbb R^{[K:\mathbb Q]}\). | L/L; Milne Prop. 4.5; Stein §7.1.  An integral basis and a fractional-ideal \(\mathbb Z\)-basis span the real embedding space. |
 | `thm-covolume-of-an-ideal-lattice` | `thm` | With the unscaled embedding,
 \[\operatorname{covol}(\sigma(\mathfrak a))=2^{-r_2}\sqrt{|d_K|}\,N\mathfrak a
@@ -1887,11 +1906,14 @@ for every nonzero integral ideal \(\mathfrak a\). | L/L; Milne Prop. 4.5; Stein 
 | `thm-minkowski-bound-for-ideal-classes` | `thm` | Every class in \(\operatorname{Cl}(\mathcal O_K)\) contains an integral ideal \(\mathfrak b\) with
 \[N\mathfrak b\le M_K:={4^{r_2}\over\pi^{r_2}}{n!\over n^n}\sqrt{|d_K|}.
 \] | L/L; Milne Thm. 4.8; Stein Thm. 7.2.1.  Apply the small-element theorem to an integral multiple of an inverse fractional ideal and check that the constructed ideal represents the original, not its inverse. |
-| `thm-finiteness-of-the-number-field-class-group` | `thm` | The ideal class group of \(\mathcal O_K\) is finite. | L/L; Milne Cor. 4.9; Stein §7.2.  There are only finitely many ideals of bounded norm because each contains the integer \(N\mathfrak a\) and finite quotients have only finitely many subgroups. |
-| `cor-class-group-generated-by-small-primes` | `cor` | The class group is generated by prime ideals of norm at most \(M_K\). | L/A; Milne Cor. 4.9; factor a bounded representative into prime ideals. |
+| `lem-finitely-many-number-field-ideals-of-bounded-norm` | `lem` | For every real \(B\ge1\), only finitely many nonzero integral ideals \(\mathfrak a\subseteq\mathcal O_K\) satisfy \(N\mathfrak a\le B\). | L/L; Stein Prop. 6.3.6.  If \(N\mathfrak a=m\), Lagrange in the finite additive quotient gives \(m\mathcal O_K\subseteq\mathfrak a\); such ideals inject into subsets of the finite ring \(\mathcal O_K/m\mathcal O_K\), and only finitely many \(m\le B\) occur. |
+| `thm-finiteness-of-the-number-field-class-group` | `thm` | The ideal class group of \(\mathcal O_K\) is finite. | L/L; Milne Cor. 4.9; Stein §7.2.  Map the finite set of bounded integral representatives onto the class group. |
+| `cor-class-group-generated-by-small-primes` | `cor` | The class group is generated by prime ideals of norm at most \(M_K\). | L/A; Milne Cor. 4.9.  Factor a bounded representative using CA-9's proved `thm-unique-factorisation-of-ideals-in-dedekind-domains`; multiplicativity of ideal norm bounds every prime factor.  Do not use the separately recorded ZF factorisation claim. |
 | `cor-no-nontrivial-number-field-has-discriminant-plus-or-minus-one` | `cor` | If \([K:\mathbb Q]>1\), then \(|d_K|>1\). | L/A; Milne Ch. 4 discriminant bound.  Apply Minkowski to the unit ideal and use the strict numerical inequality in each signature, with the small degrees checked separately. |
 | `cor-no-nontrivial-number-field-is-unramified-over-q` | `cor` | Every nontrivial number field has a rational prime ramified in it. | L/A; combine the preceding discriminant result with NT-20's ramification--discriminant criterion.  This concerns finite primes. |
-| `thm-hermite-minkowski-finiteness` | `thm` | For fixed positive integers \(n\) and \(B\), only finitely many isomorphism classes of degree-\(n\) number fields satisfy \(|d_K|\le B\). | L/L; Milne Thm. 8.43; Conrad--Landesman Ch. 28.  Produce a primitive integral element with uniformly bounded conjugates, hence one of finitely many monic integer minimal polynomials. |
+| `lem-bounded-conjugates-give-finitely-many-integral-polynomials` | `lem` | For fixed \(n\) and \(R\ge1\), only finitely many monic integer polynomials of degree at most \(n\) have every complex root of modulus at most \(R\). | L/L; Milne Thm. 8.43 proof, pp. 151--152.  Expand the elementary symmetric functions: in degree \(m\), the \(k\)-th coefficient has modulus at most \(\binom mkR^k\), leaving a finite integer box. |
+| `lem-hermite-minkowski-bounded-primitive-integral-element` | `lem` | For fixed \(n\ge2\) and \(B\ge1\), every degree-\(n\) field with \(|d_K|\le B\) has a primitive integral element whose conjugates have modulus bounded solely in terms of \(B\). | L/L; Milne Thm. 8.43, pp. 151--152.  Apply Minkowski to the explicit real or totally-complex asymmetric window; integrality of the norm and exact embedding-fibre multiplicity make its exceptional conjugate occur once, hence the element is primitive.  State both window volumes and the characteristic-zero separability argument. |
+| `thm-hermite-minkowski-finiteness` | `thm` | For fixed positive integers \(n\) and \(B\), only finitely many isomorphism classes of degree-\(n\) number fields satisfy \(|d_K|\le B\). | L/L; Milne Thm. 8.43; Conrad--Landesman Ch. 28.  Combine the bounded primitive-element lemma with the finite list of bounded monic integral minimal polynomials; handle \(n=1\) separately. |
 
 #### Proof strategy, normalization, and choice
 
@@ -1903,12 +1925,14 @@ well-defined in CA-9.  Multiplication by an element scales the ideal lattice
 by the absolute field norm, which makes the representative construction
 independent of the initially chosen integral multiple.
 
-Blichfeldt and Minkowski use only finite-dimensional Euclidean volume and
-finite pigeonhole arguments.  The number-theoretic construction is ZF once
-the cited published Euclidean measure results are available; it inherits
-exactly whatever choice strength those supplier items declare and adds no
-choice.  The finite set of bounded polynomials in Hermite--Minkowski is
-canonically enumerable.
+Blichfeldt and Minkowski use finite-dimensional Euclidean volume and finite
+pigeonhole arguments, but the published change-of-variables supplier records
+Countable Choice.  More decisively, the adequate CA-9 class-group and unique
+ideal-factorisation route records full Choice.  NT-22 therefore inherits
+Choice; it makes no ZF claim and never substitutes the recorded-but-unproved
+ZF ideal-factorisation item.  The finite set of bounded polynomials in
+Hermite--Minkowski is canonically enumerable once those predecessors are in
+place.
 
 #### B page
 
@@ -1926,9 +1950,12 @@ canonically enumerable.
 
 - **A page id:** `dirichlets-unit-theorem-regulators-and-s-units`
 - **B page id:** `dirichlets-unit-theorem-regulators-and-s-units-examples`
-- **Requires:** NT-19--NT-22; CA-9's fractional ideals, prime valuations, and
-  finite ideal class group; and the finite-dimensional lattice results just
-  proved on NT-22.
+- **Requires:** `minkowski-theory-and-number-field-class-groups` and
+  `pell-equations-and-generalized-pell-orbits`; CA-9's fractional ideals,
+  prime valuations, and class-group interface; and the finite-dimensional
+  lattice results just proved on NT-22.  The Pell page is needed by the real
+  quadratic worked example, rather than smuggled through the B page.  This
+  pair's B page requires this A page only.
 - **Primary backing:** Milne Ch. 5 “Units,” pp. 85--91, especially Lemmas
   5.1--5.2 and Thm. 5.3.  Independent complete-text treatments: Stein §8.1;
   Conrad--Landesman Ch. 29.  The \(S\)-unit extension is cross-checked against
@@ -1973,9 +2000,9 @@ convention explicitly.
 The \(S\)-integer ring is a CA localisation and its unit characterization is
 proved from prime-ideal valuations.  The map to \(\mathbb Z^S\) is intrinsic;
 choosing generators of a finite-index image only proves existence of a
-noncanonical direct-product isomorphism.  All new selections are finite and
-NT-23 is ZF once NT-22's lattice results are supplied; it inherits no choice
-beyond its cited predecessors.
+noncanonical direct-product isomorphism.  NT-23 inherits NT-22's full-Choice
+class-group route; it adds no stronger choice requirement and makes no
+standalone ZF claim.
 
 #### B page
 
@@ -1993,11 +2020,14 @@ beyond its cited predecessors.
 
 - **A page id:** `cyclotomic-arithmetic-and-reciprocity-via-frobenius`
 - **B page id:** `cyclotomic-arithmetic-and-reciprocity-via-frobenius-examples`
-- **Requires:** NT-3, NT-19--NT-21; GA-3's cyclotomic polynomials,
-  \(\mathbb Q(\zeta_n)/\mathbb Q\), degree \(\varphi(n)\), Galois
-  isomorphism with \((\mathbb Z/n\mathbb Z)^\times\), and existence and
-  uniqueness of the index-two subfield for odd prime level, together with
-  GA-3's `thm-kronecker-weber`.  Those Galois facts are cited, not re-minted.
+- **Requires:** `decomposition-inertia-and-frobenius`; GA-3's cyclotomic
+  polynomials, \(\mathbb Q(\zeta_n)/\mathbb Q\), degree \(\varphi(n)\),
+  Galois isomorphism with \((\mathbb Z/n\mathbb Z)^\times\), and existence
+  and uniqueness of the index-two subfield for odd prime level.  NT-3 and
+  the rest of the number-field interface are already in that A page's
+  transitive closure.  This pair's B page requires this A page only.
+  Kronecker--Weber is recorded but not proved in the present library and is
+  deliberately excluded.
 - **Primary backing:** Milne Ch. 6 “Cyclotomic Extensions,” pp. 95--104,
   Props. 6.2, Thm. 6.4, Lemma 6.5, Remark 6.6, and Ch. 8 Examples
   8.18--8.19.  Independent full-note treatment: Conrad--Landesman Chs. 10--11
@@ -2008,7 +2038,7 @@ beyond its cited predecessors.
 
 | id | kind | statement | provenance and locator |
 |---|---|---|---|
-| `def-conductor-of-a-cyclotomic-field` | `def` | If \(K=\mathbb Q(\zeta_n)\), its cyclotomic conductor is the least \(f\ge1\) such that \(K\subseteq\mathbb Q(\zeta_f)\). | L/NA; Milne Remark 6.6; Conrad--Landesman Remark 11.7.  Existence comes from \(n\) and leastness from well-ordering.  This is neither the Artin conductor of a character nor the conductor of an arbitrary abelian field supplied existentially by Kronecker--Weber. |
+| `def-conductor-of-a-cyclotomic-field` | `def` | If \(K=\mathbb Q(\zeta_n)\), its cyclotomic conductor is the least \(f\ge1\) such that \(K\subseteq\mathbb Q(\zeta_f)\). | L/NA; Milne Remark 6.6; Conrad--Landesman Remark 11.7.  Existence comes from \(n\) and leastness from well-ordering.  This is neither the Artin conductor of a character nor a conductor assigned to an arbitrary abelian field; no Kronecker--Weber premise is used. |
 | `thm-cyclotomic-ring-of-integers` | `thm` | For every \(n\ge1\), \(\mathcal O_{\mathbb Q(\zeta_n)}=\mathbb Z[\zeta_n]\); if \(f\) is the reduced conductor, \(1,\zeta_f,\dots,\zeta_f^{\varphi(f)-1}\) is an integral basis. | L/L; Milne Prop. 6.2(b), Thm. 6.4(b); Conrad--Landesman Thms. 10.1 and 11.6.  Prove the prime-power case by discriminant/index control, then combine coprime prime powers with the sourced compositum integer-ring theorem.  Integrality of \(\zeta_n\) alone is not maximality. |
 | `thm-discriminant-of-a-cyclotomic-field` | `thm` | If \(f>1\) is the reduced conductor and \(K=\mathbb Q(\zeta_f)\), then
 \[d_K=(-1)^{\varphi(f)/2}{f^{\varphi(f)}\over\prod_{\ell\mid f}\ell^{\varphi(f)/(\ell-1)}};
@@ -2026,7 +2056,6 @@ with distinct \(\mathfrak P_i\), each of residue degree \(d\), so \(edg=\varphi(
 | `thm-conductor-of-a-full-cyclotomic-field` | `thm` | The conductor of \(\mathbb Q(\zeta_n)\) is \(n\), except that it is \(n/2\) when \(n\equiv2\pmod4\); in particular \(\mathbb Q(\zeta_{2m})=\mathbb Q(\zeta_m)\) for odd \(m\), and \(\mathbb Q(\zeta_2)=\mathbb Q\) has conductor one. | L/L; Milne Remark 6.6; Conrad--Landesman Remark 11.7.  The equality follows from \(-\zeta_m\).  For reduced indices, compare each prime-power ramification index in an inclusion \(\mathbb Q(\zeta_f)\subseteq\mathbb Q(\zeta_g)\): divisibility of ramification indices forces every prime exponent in \(f\) to be no larger than its exponent in reduced \(g\), hence \(f\mid g\). |
 | `cor-unramified-prime-decomposition-in-a-cyclotomic-field` | `cor` | If \(\ell\nmid f\), every prime above \(\ell\) has residue degree \(\operatorname{ord}_f(\ell)\), and their number is \(\varphi(f)/\operatorname{ord}_f(\ell)\). | L/A; Milne Example 8.18; the Frobenius element corresponds to the class of \(\ell\) modulo \(f\). |
 | `cor-complete-splitting-in-a-cyclotomic-field` | `cor` | If \(\ell\nmid f\), then \(\ell\) splits completely in \(\mathbb Q(\zeta_f)\) iff \(\ell\equiv1\pmod f\). | L/A; Milne Example 8.18; NT-21's trivial-Frobenius criterion. |
-| `cor-ramification-support-of-an-abelian-number-field` | `cor` | If \(K/\mathbb Q\) is finite abelian, GA-3's `thm-kronecker-weber` places \(K\) in some \(\mathbb Q(\zeta_f)\); hence every rational prime ramified in \(K\) divides \(f\). | L/A; cite Kronecker--Weber and the cyclotomic ramification criterion above, then use ramification in towers.  NT-24 owns this arithmetic consequence but does not re-prove the Galois theorem or claim a canonical minimal embedding conductor. |
 | `def-quadratic-gauss-sum-in-a-cyclotomic-field` | `def` | For an odd prime \(p\) and a fixed primitive \(p\)-th root \(\zeta_p\), set \(\tau_p=\sum_{a\bmod p}(a/p)\zeta_p^a\in\mathbb Z[\zeta_p]\). | L/NA; Reed Lecture 9 §2; UCSB Lecture XVII.  The Legendre symbol is the total NT-2 symbol, so the zero term contributes zero. |
 | `lem-galois-action-on-the-quadratic-gauss-sum` | `lem` | If \(\sigma_b(\zeta_p)=\zeta_p^b\), then \(\sigma_b(\tau_p)=(b/p)\tau_p\). | L/L; Reed Lecture 9; Milne Example 8.19.  Substitute \(a\mapsto b^{-1}a\) and use multiplicativity of the Legendre symbol. |
 | `thm-quadratic-gauss-sum-square` | `thm` | \(\tau_p^2=p^*=(-1)^{(p-1)/2}p\). | L/L; Reed Lecture 9 §2; UCSB Lecture XVII.  Expand, set one nonzero index equal to a multiple of the other, and evaluate the inner complete additive-character sum.  The stronger analytic sign of \(\tau_p\) under a complex embedding is not needed. |
@@ -2053,6 +2082,10 @@ Gauss sum depends on the chosen primitive root: replacing \(\zeta_p\) by
 quadratic subfield are independent of that choice.  The signed field
 discriminant, the different ideal, and its positive ideal norm remain
 distinct objects.  All arguments are finite algebra and finite sums in ZF.
+The former candidate
+`cor-ramification-support-of-an-abelian-number-field` is withdrawn: it had
+zero published consumers, and it may not return until a proved
+Kronecker--Weber supplier replaces the recorded-only remark.
 
 #### B page
 
@@ -2792,14 +2825,14 @@ proof.
 | NT-18 | ZF intrinsically | Inherits \(\mathsf{AC}_\omega\) from NT-17.  The global square-class prime is the least prime in a proved nonempty progression, not an application of choice. |
 | NT-19--NT-20 | ZF | Finite bases exist by finite module theory; finite choice is a theorem of ZF.  No permanent basis is selected as field data. |
 | NT-21 | ZF intrinsically | Inherits NT-17's \(\mathsf{AC}_\omega\) for completions.  Finite prime orbits and residue fields add none. |
-| NT-22 | ZF relative to Euclidean volume | Its use of planned Lebesgue measure inherits the measure scaffold's \(\mathsf{AC}_\omega\) construction charge; Blichfeldt, convex-body scaling, and bounded-ideal enumeration add none. |
-| NT-23 | ZF intrinsically | Inherits NT-22's supplier charge.  Lattice bases, fundamental units, and the finite set \(S\) use only finite choice. |
+| NT-22 | ZF intrinsically | Inherits \(\mathsf{AC}_\omega\) from the change-of-variables/measure route and full Choice from CA-9's proved class-group and unique-ideal-factorisation interface.  Blichfeldt, convex-body scaling, and bounded-ideal enumeration add none. |
+| NT-23 | ZF intrinsically | Inherits NT-22's full-Choice supplier charge.  Lattice bases, fundamental units, and the finite set \(S\) add no stronger requirement. |
 | NT-24 | ZF intrinsically | Inherits NT-21 only when its completion/Frobenius supplier is followed through the DAG; the cyclotomic integer, ideal, and Gauss-sum arguments themselves are finite ZF algebra. |
 
-No item here requires dependent choice, BPI, Hahn--Banach, or full AC beyond a
-stronger label already carried by a named external supplier.  In particular,
-the Hasse--Minkowski proof does not spend choice merely because it asserts
-simultaneous local conditions.
+No item here requires dependent choice, BPI, or Hahn--Banach.  Full AC enters
+NT-22--NT-23 only through the named CA-9 suppliers; it is not hidden in the
+geometry-of-numbers proofs.  In particular, the Hasse--Minkowski proof does
+not spend choice merely because it asserts simultaneous local conditions.
 
 ## 10. Component-provenance plan
 
@@ -2876,12 +2909,13 @@ reconciliation receipts; unmarked entries remain requests.
    \(\mathbb Z\)-map for \(\mathbb Z_p\), and expose stable ids.  It should not
    also define \(\mathbb Q_p\); NT-17 owns the metric completion and proves the
    canonical comparison/fraction-field theorem.
-5. **Abstract algebra — applied in the receiving algebra scaffold:** keep cyclotomic extension/Galois-group and unique
-   index-two-subfield facts in GA-3 and general finite-character orthogonality
-   on its representation page.  GA-3 also owns `thm-kronecker-weber`; NT-24
-   cites it and owns the arithmetic consequence above.  Do not add cyclotomic
-   integer rings, prime decomposition, or arithmetic Frobenius there;
-   NT-21/NT-24 own them.
+5. **Abstract algebra — superseded correction:** keep cyclotomic
+   extension/Galois-group and unique index-two-subfield facts in GA-3 and
+   general finite-character orthogonality on its representation page.  GA-3's
+   actual published item is the recorded-only `rem-kronecker-weber`, so NT-24
+   does not cite it and the proposed arithmetic consequence is withdrawn.
+   Do not add cyclotomic integer rings, prime decomposition, or arithmetic
+   Frobenius there; NT-21/NT-24 own them.
 6. **Future quadratic-order/class-group interface:** the form--ideal
    correspondence, Gauss composition, indefinite reduction cycles, narrow
    class groups, and nonmaximal orders remain owed to a later scaffold.  NT-6
@@ -2990,3 +3024,312 @@ The widened sources' character, Minkowski-volume, Picard/class-group, and
 Frobenius conventions are compared in §7.16.  The pass does not annex
 commutative algebra, general Galois theory, complex-analytic Gamma/zeta, or
 class-field theory; those suppliers continue to be cited at the seams.
+
+## 14. Dependency-closure binding audit (2026-09-08)
+
+This section supersedes any contrary ordering, status, choice, or dependency
+claim above.  The audited live census is 54 Number Theory pages: 48 published
+pages forming 24 A/B pairs, and the six absent shells forming NT-22--NT-24.
+All 672 items listed on the published pages exist and are published.  The
+three absent pairs contain 81 repaired candidates (57 A items and 24 B items),
+none of which exists in `items/` or in the JSON plan.  Their stable ids are
+collision-free.  Published pages and items remain read-only in this phase.
+
+The current published item graph has no missing dependency, no
+published-to-draft edge, no duplicate home, and no direct or transitive route
+from a Number Theory item to `proved_here: false`, a “Recorded, Not Proved
+Here” item, or `deferred-set-theory-beyond-choice`.  Current depcheck also
+reports zero Number-Theory-specific body-link warnings.  The repairs below
+are nevertheless mandatory because page `requires`, same-page ordering, and
+B-leaf discipline are separate invariants.
+
+## 15. Exact A-for-B page cutover ledger
+
+Every B page requires its A companion and is a dependency leaf.  Accordingly,
+replace each left-hand A-page dependency on the middle B page by the right-hand
+A page.  The first and seventeenth rows are externally owned seams; the ninth
+is the already-recorded CA-18 seam.
+
+| consuming A page | remove B dependency | add A dependency |
+|---|---|---|
+| `primitive-roots-and-unit-groups-modulo-n` | `splitting-fields-examples` | `splitting-fields` |
+| `quadratic-residues-and-the-legendre-symbol` | `primitive-roots-and-unit-groups-modulo-n-examples` | `primitive-roots-and-unit-groups-modulo-n` |
+| `quadratic-reciprocity-and-the-jacobi-symbol` | `quadratic-residues-and-the-legendre-symbol-examples` | `quadratic-residues-and-the-legendre-symbol` |
+| `sums-of-two-squares` | `quadratic-reciprocity-and-the-jacobi-symbol-examples` | `quadratic-reciprocity-and-the-jacobi-symbol` |
+| `lagrange-four-square-theorem` | `sums-of-two-squares-examples` | `sums-of-two-squares` |
+| `positive-definite-binary-quadratic-forms-and-reduction` | `lagrange-four-square-theorem-examples` | `lagrange-four-square-theorem` |
+| `regular-continued-fractions-and-diophantine-approximation` | `positive-definite-binary-quadratic-forms-and-reduction-examples` | `positive-definite-binary-quadratic-forms-and-reduction` |
+| `pell-equations-and-generalized-pell-orbits` | `regular-continued-fractions-and-diophantine-approximation-examples` | `regular-continued-fractions-and-diophantine-approximation` |
+| `absolute-values-completions-and-p-adic-numbers` | `regular-local-rings-and-homological-dimension-examples` | `regular-local-rings-and-homological-dimension` |
+| `hilbert-symbols-and-the-quadratic-local-global-principle` | `absolute-values-completions-and-p-adic-numbers-examples` | `absolute-values-completions-and-p-adic-numbers` |
+| `number-fields-rings-of-integers-and-discriminants` | `hilbert-symbols-and-the-quadratic-local-global-principle-examples` | `hilbert-symbols-and-the-quadratic-local-global-principle` |
+| `prime-ideal-decomposition-ramification-and-the-different` | `number-fields-rings-of-integers-and-discriminants-examples` | `number-fields-rings-of-integers-and-discriminants` |
+| `decomposition-inertia-and-frobenius` | `prime-ideal-decomposition-ramification-and-the-different-examples` | `prime-ideal-decomposition-ramification-and-the-different` |
+| `minkowski-theory-and-number-field-class-groups` | `decomposition-inertia-and-frobenius-examples` | `decomposition-inertia-and-frobenius` |
+| `dirichlets-unit-theorem-regulators-and-s-units` | `minkowski-theory-and-number-field-class-groups-examples` | `minkowski-theory-and-number-field-class-groups` |
+| `cyclotomic-arithmetic-and-reciprocity-via-frobenius` | `dirichlets-unit-theorem-regulators-and-s-units-examples` | `decomposition-inertia-and-frobenius` |
+| `arithmetic-functions-and-dirichlet-convolution` | `bloch-schottky-and-picard-examples` | `bloch-schottky-and-picard` |
+| `average-orders-divisor-sums-and-representation-counts` | `arithmetic-functions-and-dirichlet-convolution-examples` | `arithmetic-functions-and-dirichlet-convolution` |
+| `chebyshev-bounds-and-mertens-theorems` | `average-orders-divisor-sums-and-representation-counts-examples` | `average-orders-divisor-sums-and-representation-counts` |
+| `dirichlet-series-and-euler-products` | `chebyshev-bounds-and-mertens-theorems-examples` | `chebyshev-bounds-and-mertens-theorems` |
+| `dirichlet-characters-l-functions-and-primes-in-progressions` | `dirichlet-series-and-euler-products-examples` | `dirichlet-series-and-euler-products` |
+| `primitive-dirichlet-l-functions-and-functional-equations` | `dirichlet-characters-l-functions-and-primes-in-progressions-examples` | `dirichlet-characters-l-functions-and-primes-in-progressions` |
+| `perron-inversion-and-the-explicit-formula` | `primitive-dirichlet-l-functions-and-functional-equations-examples` | `primitive-dirichlet-l-functions-and-functional-equations` |
+| `classical-zero-free-region-and-the-prime-number-theorem` | `perron-inversion-and-the-explicit-formula-examples` | `perron-inversion-and-the-explicit-formula` |
+
+Rows 1--13 and 17--24 are Phase-3 published page-frontmatter repairs; rows
+14--16 bind the future NT-22--NT-24 plan.  NT-23 additionally requires
+`pell-equations-and-generalized-pell-orbits` for its Pell worked example.
+
+## 16. Exact published same-page proof-order repairs
+
+Three current edges point forward.  They require Phase-3 prose and metadata
+repairs, not new suppliers.
+
+1. On `quadratic-reciprocity-and-the-jacobi-symbol`, remove
+   `def-jacobi-symbol`'s `justified_by:
+   [prop-jacobi-symbol-well-defined]`.  Define the symbol by canonical prime
+   factorisation and a commutative finite product; leave independence and the
+   zero convention to the later proposition.
+2. On `number-fields-rings-of-integers-and-discriminants`, move
+   `lem-discriminant-change-of-basis` before
+   `def-discriminant-of-a-number-field-basis-and-order`, state and prove the
+   lemma first for the raw trace-Gram determinant, then let the definition
+   name basis/order/field discriminants.  Remove the definition's forward
+   `justified_by` edge.
+3. On `chebyshev-bounds-and-mertens-theorems`, move
+   `thm-second-mertens-theorem-for-primes` before
+   `def-meissel-mertens-constant`; first prove existence of a constant in the
+   asymptotic, then define the displayed limit and name that constant.  Remove
+   the forward justification from the definition.
+
+## 17. Exact B-item leaf repairs and published impact
+
+No item outside a Number Theory B page depends on any Number Theory B item.
+Delete the following B-to-B dependencies in Phase 3 and make the consumer's
+calculation self-contained from A-page facts.  Each closure shown is the
+complete distinct published consumer closure, grouped by its single home page.
+
+| B supplier | direct published consumer(s) | complete published closure by home page |
+|---|---|---|
+| `ex-euclidean-algorithm-worked` | `ex-bezout-coefficients-not-unique` | `divisibility-gcd-and-bezout-examples`: `ex-bezout-coefficients-not-unique` |
+| `ex-zero-divisors-modulo-composites` | `fs-zero-product-property-modulo-n` | `congruences-and-the-chinese-remainder-theorem-examples`: `fs-zero-product-property-modulo-n` |
+| `ex-primes-dividing-x-squared-plus-three` | `cor-infinitely-many-primes-congruent-to-one-modulo-three` | `quadratic-reciprocity-and-the-jacobi-symbol-examples`: `cor-infinitely-many-primes-congruent-to-one-modulo-three` |
+| `ex-reduced-forms-of-discriminant-minus-eight` | `ex-primes-represented-by-x-squared-plus-two-y-squared` | `positive-definite-binary-quadratic-forms-and-reduction-examples`: `ex-primes-represented-by-x-squared-plus-two-y-squared` |
+| `cex-same-represented-integers-do-not-imply-proper-equivalence` | `ex-proper-versus-improper-equivalence-of-forms` | `positive-definite-binary-quadratic-forms-and-reduction-examples`: `ex-proper-versus-improper-equivalence-of-forms` |
+| `ex-ring-of-integers-of-q-sqrt-five` | `ex-nonmaximal-quadratic-order` | `number-fields-rings-of-integers-and-discriminants-examples`: `ex-nonmaximal-quadratic-order`, `ex-index-obstructs-naive-polynomial-factorization` |
+| `ex-nonmaximal-quadratic-order` | `ex-index-obstructs-naive-polynomial-factorization` | `number-fields-rings-of-integers-and-discriminants-examples`: `ex-index-obstructs-naive-polynomial-factorization` |
+| `ex-decomposition-inertia-in-a-quadratic-field` | `ex-gaussian-and-eisenstein-frobenius` | `decomposition-inertia-and-frobenius-examples`: `ex-gaussian-and-eisenstein-frobenius`, `cex-ramified-frobenius-has-no-canonical-lift` |
+| `ex-frobenius-in-a-small-cyclotomic-field` | `ex-decomposition-groups-in-a-tower` | `decomposition-inertia-and-frobenius-examples`: `ex-decomposition-groups-in-a-tower` |
+| `ex-gaussian-and-eisenstein-frobenius` | `cex-ramified-frobenius-has-no-canonical-lift` | `decomposition-inertia-and-frobenius-examples`: `cex-ramified-frobenius-has-no-canonical-lift` |
+| `ex-dirichlet-characters-modulo-three-four-and-five` | `ex-dirichlet-character-orthogonality-table`, `ex-the-character-chi-four-and-leibniz-series` | `dirichlet-characters-l-functions-and-primes-in-progressions-examples`: both direct consumers |
+| `ex-gauss-sum-for-chi-four` | `cex-gauss-sum-sign-is-not-canonical-without-conventions`, `ex-trivial-zeros-of-a-dirichlet-l-function` | `primitive-dirichlet-l-functions-and-functional-equations-examples`: both direct consumers |
+
+## 18. Planned suppliers: eligibility and exact zero-consumer ledger
+
+There are **zero Phase-2-eligible Number Theory roots**.  Every item below is
+planned-only enrichment, absent from disk and from `plan-spec.json`, and has
+zero direct published consumers and therefore zero transitive published
+consumers.  This item-level declaration is exhaustive.
+
+- NT-22 A (24; each direct = 0, transitive = 0):
+  `def-minkowski-embedding-of-a-number-field`,
+  `def-full-euclidean-lattice-and-covolume`,
+  `lem-full-lattice-fundamental-domain-and-bounded-points`,
+  `lem-blichfeldt-lattice-point-principle`,
+  `thm-minkowski-convex-body-theorem`,
+  `cor-minkowski-convex-body-theorem-at-equality`,
+  `def-successive-minima-of-a-convex-body-with-respect-to-a-lattice`,
+  `lem-successive-minima-attainment-and-adapted-flag`,
+  `lem-triangular-borel-maps-scale-euclidean-volume`,
+  `lem-minkowski-successive-minima-volume-deformation`,
+  `thm-minkowski-second-theorem-on-successive-minima`,
+  `thm-ring-of-integers-and-ideals-are-full-lattices`,
+  `thm-covolume-of-an-ideal-lattice`, `lem-archimedean-norm-bound`,
+  `thm-small-element-in-a-number-field-ideal`,
+  `thm-minkowski-bound-for-ideal-classes`,
+  `lem-finitely-many-number-field-ideals-of-bounded-norm`,
+  `thm-finiteness-of-the-number-field-class-group`,
+  `cor-class-group-generated-by-small-primes`,
+  `cor-no-nontrivial-number-field-has-discriminant-plus-or-minus-one`,
+  `cor-no-nontrivial-number-field-is-unramified-over-q`,
+  `lem-bounded-conjugates-give-finitely-many-integral-polynomials`,
+  `lem-hermite-minkowski-bounded-primitive-integral-element`,
+  `thm-hermite-minkowski-finiteness`.
+- NT-22 B (7; each direct = 0, transitive = 0):
+  `ex-minkowski-bound-for-gaussian-integers`,
+  `ex-class-group-of-q-sqrt-minus-five`,
+  `ex-class-group-of-q-sqrt-ten`,
+  `ex-class-group-from-small-prime-ideals`,
+  `ex-discriminant-lower-bound`,
+  `ex-no-everywhere-unramified-extension-of-q`,
+  `cex-minkowski-constants-change-under-scaled-embedding`.
+- NT-23 A (16; each direct = 0, transitive = 0):
+  `lem-roots-of-unity-in-a-number-field-are-finite`,
+  `thm-kronecker-root-of-unity-criterion`,
+  `lem-algebraic-integer-is-a-unit-iff-norm-is-plus-or-minus-one`,
+  `thm-product-formula-for-number-fields`,
+  `def-logarithmic-unit-embedding`,
+  `lem-unit-logarithms-lie-in-the-product-formula-hyperplane`,
+  `lem-kernel-of-the-unit-logarithm-is-the-roots-of-unity`,
+  `lem-logarithmic-unit-image-is-discrete`,
+  `thm-logarithmic-unit-image-is-a-full-lattice`,
+  `thm-dirichlet-unit-theorem`, `def-fundamental-units`,
+  `def-number-field-regulator`,
+  `thm-number-field-regulator-is-well-defined`,
+  `cor-unit-ranks-by-number-field-signature`,
+  `def-s-integers-and-s-units-of-a-number-field`, `thm-s-unit-theorem`.
+- NT-23 B (7; each direct = 0, transitive = 0):
+  `ex-units-of-q-and-imaginary-quadratic-fields`,
+  `ex-real-quadratic-units-and-pell`,
+  `ex-units-in-a-real-cubic-field`,
+  `ex-regulator-of-a-real-quadratic-field`,
+  `ex-change-of-fundamental-units-preserves-regulator`,
+  `ex-s-units-of-q`, `cex-z-sqrt-d-units-need-not-equal-ok-units`.
+- NT-24 A (17; each direct = 0, transitive = 0):
+  `def-conductor-of-a-cyclotomic-field`,
+  `thm-cyclotomic-ring-of-integers`,
+  `thm-discriminant-of-a-cyclotomic-field`,
+  `cor-total-ramification-in-a-prime-power-cyclotomic-field`,
+  `thm-prime-factorisation-in-a-cyclotomic-field`,
+  `cor-cyclotomic-ramification-criterion`,
+  `thm-conductor-of-a-full-cyclotomic-field`,
+  `cor-unramified-prime-decomposition-in-a-cyclotomic-field`,
+  `cor-complete-splitting-in-a-cyclotomic-field`,
+  `def-quadratic-gauss-sum-in-a-cyclotomic-field`,
+  `lem-galois-action-on-the-quadratic-gauss-sum`,
+  `thm-quadratic-gauss-sum-square`,
+  `thm-quadratic-subfield-of-a-prime-cyclotomic-field`,
+  `thm-quadratic-frobenius-restriction-identity`,
+  `cor-quadratic-reciprocity-via-frobenius`,
+  `cor-first-supplement-via-cyclotomic-frobenius`,
+  `cor-second-supplement-via-cyclotomic-frobenius`.
+- NT-24 B (10; each direct = 0, transitive = 0):
+  `ex-reduced-conductor-of-q-zeta-six`,
+  `ex-arithmetic-of-q-zeta-five`,
+  `ex-prime-decomposition-in-q-zeta-eight`,
+  `ex-prime-decomposition-in-q-zeta-twelve`,
+  `ex-quadratic-gauss-sum-for-three`,
+  `ex-quadratic-gauss-sum-for-five`,
+  `ex-quadratic-subfield-of-q-zeta-seven`,
+  `ex-frobenius-restriction-for-p-five-q-three`,
+  `ex-second-supplement-from-q-zeta-eight`,
+  `cex-gauss-sum-sign-without-a-complex-embedding`.
+
+The withdrawn
+`cor-ramification-support-of-an-abelian-number-field` likewise has zero direct
+and zero transitive published consumers, but is not part of the 81-item plan.
+
+## 19. Cross-category ownership and recorded-only seams
+
+- Commutative Algebra owns CA-18
+  `regular-local-rings-and-homological-dimension`; Number Theory's
+  `absolute-values-completions-and-p-adic-numbers` must require its A page,
+  never its B page.  This preserves the incoming CA reconciliation recorded
+  near the top of this scaffold.
+- Commutative Algebra CA-9 owns the ideal-class-group, invertible-fractional-
+  ideal, Dedekind, and unique-ideal-factorisation interface.  NT-22 must use
+  the proved `thm-unique-factorisation-of-ideals-in-dedekind-domains`, not
+  `thm-number-field-integral-ideal-factorisation-in-zf`, whose stronger
+  choice claim is separately recorded and is inadequate as a proof supplier.
+- Abstract Algebra owns `splitting-fields`; Complex Analysis owns
+  `bloch-schottky-and-picard`.  Their B companions are leaves and the two
+  external cutovers are exact in §15.
+- Galois Algebra owns the cyclotomic-field structure used by NT-24.  Its
+  `rem-kronecker-weber` is published but `proved_here: false`; it is not a
+  prerequisite.  The abelian-field ramification consequence is withdrawn,
+  not deferred through a hidden body link.
+- Combinatorics' planned CB-32 `sumset-calculus` pair is the planned (not
+  published) consumer of NT-22's
+  `thm-minkowski-second-theorem-on-successive-minima`.  Its owner must add
+  `minkowski-theory-and-number-field-class-groups` to the CB-32 A page's
+  `requires` and make the future full-Freiman theorem item cite that exact A
+  supplier.  This planned seam does not change NT-22's zero published impact.
+- Published Number Theory A pages are direct external prerequisites of these
+  pages (there are no external consumers of a Number Theory B page):
+  `congruences-and-the-chinese-remainder-theorem` feeds Abstract Algebra's
+  `cosets-and-lagranges-theorem` and
+  `semidirect-products-and-automorphism-groups`, plus Combinatorics'
+  `block-designs-and-finite-projective-planes`,
+  `combinatorial-classes-and-the-symbolic-method`,
+  `finite-probability-and-the-probabilistic-method`, and B page
+  `incidence-algebras-and-mobius-inversion-examples` (a separate downstream
+  B-leaf defect for its owner); `divisibility-gcd-and-bezout` feeds Abstract
+  Algebra's `rings-subrings-and-integral-domains`; and
+  `primes-and-the-fundamental-theorem-of-arithmetic` feeds Abstract Algebra's
+  `ideals-and-quotient-rings` and `sylow-theorems-and-nilpotent-groups`,
+  Combinatorics' `incidence-algebras-and-mobius-inversion` and B page
+  `chains-antichains-sperner-and-dilworth-examples`, and Complex Analysis'
+  `the-riemann-zeta-function`.  Finally,
+  `primitive-roots-and-unit-groups-modulo-n` feeds Group Theory's B page
+  `frattini-subgroups-and-the-burnside-basis-theorem-examples`, another
+  downstream owner repair.  These are consumers of existing published A
+  suppliers, not Phase-2 roots.
+
+The three downstream B-page repairs are exact: Combinatorics must move
+`primes-and-the-fundamental-theorem-of-arithmetic` from
+`chains-antichains-sperner-and-dilworth-examples` to its A companion, and move
+`congruences-and-the-chinese-remainder-theorem` from
+`incidence-algebras-and-mobius-inversion-examples` to its A companion; Group
+Theory must move `primitive-roots-and-unit-groups-modulo-n` from
+`frattini-subgroups-and-the-burnside-basis-theorem-examples` to its A
+companion.  Each B page then requires only its A companion.  Independently,
+that Group Theory A page currently requires
+`sylow-theorems-and-nilpotent-groups-examples`; its owner must replace that
+with `sylow-theorems-and-nilpotent-groups`.
+
+## 20. Exact plan/status drift amendments
+
+After the §15--§17 repairs land on published files in Phase 3, amend
+`plan-spec.json` as follows; do not attempt these changes during this prose
+audit.
+
+1. Apply all 24 page-requires replacements in §15.  Add the three absent
+   pairs with the exact prerequisite bindings in NT-22--NT-24 above, and add
+   their 81 items in displayed order.  Do not add the withdrawn
+   abelian-field ramification corollary.
+2. Copy the current published item `title`, `deps`, and `justified_by` fields
+   into the corresponding 672 plan items, then apply the three deliberate
+   order/justification changes in §16 and the 14 dependency deletions in §17.
+   The pre-repair drift is exactly 227 title fields, 157 dependency arrays,
+   two `justified_by` arrays, and zero kinds; this deterministic full-field
+   reconciliation is item-exact and avoids retaining stale arrays not listed
+   by a partial patch.
+3. On `classical-zero-free-region-and-the-prime-number-theorem-examples`,
+   make plan order match the published semantic order by placing
+   `rem-the-classical-zeta-region-is-not-a-uniform-dirichlet-l-region` first.
+4. Repair the four published B-page titles to the plan's em-dash form:
+   `absolute-values-completions-and-p-adic-numbers-examples`,
+   `hilbert-symbols-and-the-quadratic-local-global-principle-examples`,
+   `dirichlet-series-and-euler-products-examples`, and
+   `dirichlet-characters-l-functions-and-primes-in-progressions-examples`.
+   This is Phase 3; the plan titles are already canonical.
+
+The two stale plan `justified_by` arrays named in item-exact form are
+`def-jacobi-symbol -> prop-jacobi-symbol-well-defined` and
+`def-discriminant-of-a-number-field-basis-and-order ->
+lem-discriminant-change-of-basis`.  The third forward edge,
+`def-meissel-mertens-constant -> thm-second-mertens-theorem-for-primes`, is
+present in both plan and disk and is removed by §16 rather than classified as
+drift.
+
+## 21. Source and validation record
+
+The NT-22 repair was checked against complete authoritative text: Milne,
+[*Algebraic Number Theory* v3.08](https://www.jmilne.org/math/CourseNotes/ANT.pdf),
+Ch. 4 pp. 68--82 and Thm. 8.43 pp. 151--152; Stein,
+[*Algebraic Number Theory*](https://wstein.org/books/ant/ant.pdf), §§7.1--7.3;
+Martin Henk, [“Successive Minima and Lattice
+Points”](https://arxiv.org/abs/math/0204158), §§2--3; and Ben Green,
+[*Additive Combinatorics* Lecture
+3](https://people.maths.ox.ac.uk/greenbj/papers/addcomb2009-3.pdf), §§1--3.
+Henk and Green, not the earlier Dummit locator, provide the complete two-sided
+successive-minima proof.  Full text was obtained for every claim audited here;
+there is no mathematical-source blocker.
+
+The scoped acceptance conditions are: 81 unique absent candidate ids; every
+planned A prerequisite earlier and A-owned; every B page requiring only its A
+companion; no B item with any consumer; no unresolved or published-to-draft
+edge; no Number Theory path to a recorded-only result; exact published page
+membership; and zero Number-Theory-specific depcheck warning.  The repository
+workflow remains paused and untouched.

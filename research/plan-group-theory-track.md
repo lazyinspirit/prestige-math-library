@@ -6,8 +6,11 @@ Run `subjects-01`, track `group-theory`, wave 2. Owner commission 2026-08-13:
 This file is a **prose scaffold only**. It authors no item, changes no live plan,
 and runs no build or audit gate. Relative labels `GT-1`, `GT-2`, ... control
 dependency order within this proposal; the orchestrator assigns absolute page
-orders. Every proposed B page has id `<A-page-id>-examples`, requires only its
-A page, and is a leaf.
+orders. Sections 0--29 are the pre-publication design record. The binding
+post-publication audit is §30: it preserves the 46 stable published page ids and
+all 842 stable published item ids, replaces stale dependency claims, and adds
+four prerequisite-repair pairs. Every new B page has id
+`<A-page-id>-examples`, requires only its A page, and is a dependency leaf.
 
 The seam boundary is strict. The published group band and the abstract-algebra
 expansion supply elementary group theory, Sylow theory, the upper and lower
@@ -21,11 +24,11 @@ future build authors them.
 
 ## 0. Summary for the orchestrator
 
-**Track `group-theory`, wave 2, run `subjects-01`; prose scaffold complete.**
-Twenty-three A/B pairs are proposed in four placement blocks.
-Every A-page inventory is below the owner's 60-item ceiling. The cohomological
-block is deliberately placed after homological algebra rather than pointed
-backward from the earlier structure block.
+**Historical pre-publication summary; superseded for execution by §30.** The
+twenty-three pairs in this table are now published. Four additional repair
+pairs are specified in §30.5. The old item counts and “no blocker” conclusions
+below are retained only to explain the original design and must not drive a
+future build.
 
 ### Pairs scaffolded
 
@@ -3428,3 +3431,800 @@ builder repeats this sweep because intervening levels may have minted a stem.
 - The file contains no absolute order assignment, authored item, live-plan
   mutation, build artifact, gate output, or write request outside this prose
   scaffold.
+
+---
+
+## 30. Binding post-publication dependency and proof audit (2026-09-08)
+
+This section supersedes every conflicting readiness, count, ordering,
+dependency, and blocker statement in §§0--29. Published pages and items are
+immutable evidence in this pass. Nothing below authorises a change to
+`library/`, `items/`, generated output, or `research/plan-spec.json`.
+
+### 30.1 Immutable snapshot and audit method
+
+The live Group Theory band consists of **23 A pages, 23 B pages, and 842/842
+present item files**, all with `status: published`: 171 definitions, 103
+lemmas, 57 propositions, 139 theorems, 61 corollaries, 35 remarks, 132
+examples, 30 counterexamples, and 114 false statements. The first pair is
+stored under `library/abstract-algebra/`; the other 22 are under
+`library/group-theory/`. The live item graph is acyclic. It has 22 edges to a
+B-page item, but all 22 stay inside the same B page; no B item supplies an A
+page or a different B page. Thus the item graph respects page-level leafness,
+whereas the page graph does not: it contains B-as-supplier `requires` edges.
+This does **not** certify mathematical closure: 20 Group Theory items are explicitly
+`proof: not-supplied`/`proved_here: false`, and several nominally proved items
+merely invoke their own conclusion as an unlinked source assumption.
+
+The comparison used the page and item frontmatter actually on disk, not the
+historical inventories above. Against the current plan ledger, 161 published
+GT items disagree on `deps`: published headers contain 306 edges missing from
+the ledger, while the ledger contains 176 edges missing from published
+headers. Phase 3 must first repair the mathematical edges specified here and
+then replace the ledger dependency list of each GT item verbatim by its repaired
+published header. It must not take either side of the present drift as
+authoritative merely because the syntactic validators accept it.
+
+### 30.2 Binding A/B page requirements
+
+Every B page requires only its own A page. Every A page uses the following
+adequate earlier **A-page** closure. This table replaces §3 and the current live
+page requirements.
+
+| A page | binding `requires` after the repair pairs land |
+|---|---|
+| `frattini-subgroups-and-the-burnside-basis-theorem` | `sylow-theorems-and-nilpotent-groups`; `composition-series-and-solvable-groups`; `primitive-roots-and-unit-groups-modulo-n` |
+| `extraspecial-p-groups-and-central-products` | preceding Frattini A page; `dual-spaces-bilinear-forms-and-inertia` |
+| `blocks-primitivity-and-multiple-transitivity` | `group-actions-and-cayleys-theorem`; `semidirect-products-and-automorphism-groups` |
+| `socles-and-the-onan-scott-landscape` | preceding blocks A page; `composition-series-and-solvable-groups`; preceding Frattini A page |
+| `subgroups-of-free-groups-and-schreier-rewriting` | `free-groups-and-presentations`; `group-actions-and-cayleys-theorem`; `free-products-and-amalgamation` |
+| `hnn-extensions-and-brittons-lemma` | preceding subgroup A page; `free-products-and-amalgamation` |
+| `decision-problems-for-finitely-presented-groups` | `free-groups-and-presentations`; preceding subgroup A page; `free-products-and-amalgamation` |
+| `small-cancellation-and-dehn-algorithms` | preceding decision A page; preceding HNN A page; `small-cancellation-disc-diagrams-and-torsion-toolkit` |
+| `group-extensions-complements-and-schur-zassenhaus` | `semidirect-products-and-automorphism-groups`; `sylow-theorems-and-nilpotent-groups` |
+| `modular-representations-and-projective-covers` | `induced-representations-and-frobenius-reciprocity`; `modules-over-a-pid-and-canonical-forms`; `chain-conditions-and-semisimple-modules`; `valuation-rings-and-discrete-valuation-rings`; `inverse-limits-and-noetherian-completion`; `the-group-algebra-and-representations`; `maschkes-theorem-and-complete-reducibility` |
+| `brauer-characters-and-decomposition-matrices` | preceding modular-representation A page; `characters-and-the-orthogonality-relations`; `modular-traces-and-brauer-character-independence` |
+| `the-finite-simple-group-classification-landscape` | preceding socle A page; `composition-series-and-solvable-groups`; `sylow-theorems-and-nilpotent-groups` |
+| `cayley-graphs-word-metrics-and-quasi-isometry` | `free-groups-and-presentations`; `metric-spaces`; `graphs-walks-and-connectivity`; `trees-forests-and-spanning-trees`; `semidirect-products-and-automorphism-groups`; `completeness-and-uniform-continuity`; `limits-of-real-functions` |
+| `geometric-actions-svarc-milnor-and-growth` | preceding Cayley-graph A page; `composition-series-and-solvable-groups`; `modules-over-a-pid-and-canonical-forms`; `hall-malcev-coordinates-and-bass-guivarch-growth` |
+| `hyperbolic-spaces-and-hyperbolic-groups` | preceding geometric-actions A page; `quantitative-hyperbolic-geometry-toolkit`; preceding small-cancellation A page; `sylow-theorems-and-nilpotent-groups` |
+| `amenable-groups-and-folner-criteria` | preceding Cayley-graph A page; `free-products-and-amalgamation`; preceding hyperbolic A page; `matchings-covers-menger-and-network-flows`; `filters-and-ultrafilters` |
+| `simplicial-trees-and-group-actions` | `trees-forests-and-spanning-trees`; preceding Cayley-graph A page |
+| `graphs-of-groups-and-bass-serre-theory` | preceding simplicial-tree A page; preceding HNN A page; `free-products-and-amalgamation`; preceding subgroup A page |
+| `inverse-systems-profinite-groups-and-completion` | `uniform-spaces`; `normal-subgroups-and-quotient-groups`; `free-groups-and-presentations`; preceding Cayley-graph A page; `hereditary-and-productive-separation` |
+| `pro-p-groups-and-the-p-adic-integers` | preceding profinite A page; preceding Frattini A page; `cyclic-groups-and-direct-products` |
+| `crossed-homomorphisms-complements-and-first-cohomology` | preceding extensions A page; `group-cohomology-as-a-derived-functor`; `algebraic-extensions-degree-and-finite-fields` |
+| `group-homology-transfer-and-low-degree-exact-sequences` | `chain-complexes-and-homology`; `group-cohomology-as-a-derived-functor`; `free-groups-and-presentations`; `group-extensions-complements-and-schur-zassenhaus` |
+| `second-cohomology-and-abelian-kernel-extensions` | `group-cohomology-as-a-derived-functor`; `group-homology-transfer-and-low-degree-exact-sequences` |
+| `schur-multipliers-and-universal-central-extensions` | preceding second-cohomology A page; `group-cohomology-as-a-derived-functor`; `group-homology-transfer-and-low-degree-exact-sequences`; `ext-and-balanced-resolutions`; `tensor-products-of-modules`; `universal-coefficients-and-kunneth-theorems` |
+
+The current ledger instead makes 23 GT A pages consume the immediately
+preceding B page and additionally makes the Schur-multiplier A page consume
+`group-cohomology-as-a-derived-functor-examples`. The 24 forbidden edges are
+therefore the B targets after `sylow-theorems-and-nilpotent-groups`, GT-1
+through GT-8, `induced-representations-and-frobenius-reciprocity`, GT-18,
+GT-19, `applications-of-the-fundamental-group`, GT-10 through GT-17,
+`grothendieck-spectral-sequences-and-computations`, GT-21, GT-22, and
+`group-cohomology-as-a-derived-functor`. Delete all 24 and install the table;
+never redirect one B edge to a different B page.
+
+### 30.3 Published item-order and metadata repairs (Phase 3)
+
+The published-header item graph has nine forward edges, although it has no
+cycle. Repair the page order as follows.
+
+1. On the Brauer page, move
+   `def-decomposition-map-from-ordinary-to-modular-grothendieck-groups` and
+   `thm-decomposition-map-is-independent-of-stable-lattice-choice` immediately
+   after the first eight definition/setup items. Place
+   `thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions`
+   next, then `thm-brauer-nesbitt-module-determination` and
+   `cor-number-of-simple-kg-modules-equals-number-of-p-regular-conjugacy-classes`.
+   This removes the two forward edges in that chain.
+2. On the amenability page, move `def-folner-set-and-folner-condition`, its
+   boundary lemma, and `thm-folner-criterion-for-amenability` immediately after
+   `prop-finite-groups-are-amenable`. Then prove finitely generated abelian
+   groups by boxes and arbitrary abelian groups by the directed-union lemma.
+   Place subgroup/quotient, extension, local-amenability, and direct-union
+   closure only afterwards. This removes the three forward uses of the Følner
+   criterion and avoids using the general abelian theorem to prove itself.
+3. On Bass--Serre, move
+   `thm-fundamental-groups-from-different-maximal-trees-are-isomorphic` after
+   `thm-bass-serre-structure`. Its present proof consumes the later Bass--Serre
+   tree, quotient graph of groups, action, and structure theorem (four forward
+   edges).
+
+The 161-item header/ledger drift must be repaired after these moves. Per A/B
+page, the nonzero drift census is: GT-1 A 2/2/0; GT-2 A 41/168/52 and B
+6/13/14; GT-3 A 9/10/10 and B 3/4/3; GT-4 A 2/2/0 and B 1/0/1; GT-5 A
+4/7/2 and B 1/1/0; GT-6 A 3/0/8; GT-7 B 1/1/0; GT-8 A 1/0/2 and B 2/3/0;
+GT-9 A 1/4/3; GT-18 A 5/5/5 and B 2/0/2; GT-19 A 2/2/0; GT-10 A 22/9/41
+and B 5/5/6; GT-11 A 11/17/3 and B 5/6/3; GT-12 A 1/1/0 and B 1/1/0;
+GT-13 A 8/12/4 and B 1/2/0; GT-15 A 9/17/1 and B 1/1/1; GT-16 A 5/7/14
+and B 2/3/0; GT-17 A 1/1/0; GT-22 A 1/0/1; GT-23 A 2/2/0. Each triple is
+`items differing / published-only edges / ledger-only edges`. Zero rows are
+omitted.
+
+### 30.4 Recorded-result isolation and other Phase-3 repairs
+
+All 20 explicitly recorded items may remain valuable survey leaves, but no
+recorded item may be a dependency target. The exact present violations and
+binding repairs are:
+
+| recorded supplier | direct published consumers | complete additional transitive impact | repair |
+|---|---|---|---|
+| `rem-cfsg-refinements-of-the-onan-scott-reduction` | `fs-onan-scott-is-the-classification-of-finite-simple-groups`; `fs-the-onan-scott-theorem-requires-the-classification-of-finite-simple-groups` | none | Remove both edges; refute by the proved structural theorem's scope and page metadata, without asserting an unproved classification theorem. |
+| `rem-finitely-generated-abelian-groups-admit-invariant-factor-normal-form` | `thm-word-problem-for-finitely-generated-abelian-groups` | `ex-word-problem-in-a-finite-cyclic-presentation` on its B page | Repoint to the published invariant-factor theorem for finitely generated abelian groups/modules and make the algorithm explicit. |
+| `rem-novikov-boone-undecidability-of-the-word-problem` | `fs-every-finitely-presented-group-has-solvable-word-problem`; `fs-recursively-enumerable-trivial-words-form-a-decision-algorithm`; `fs-the-novikov-boone-theorem-proves-the-uniform-problem-only`; `fs-unsolvable-word-problem-means-no-word-can-be-decided`; `rem-adian-rabin-undecidability-for-markov-properties` | `rem-triviality-and-finiteness-are-undecidable-for-finite-presentations` | Remove all five edges. The deep undecidability remarks and any false statement whose only counterwitness is one of them must be recorded leaves; no local proof is claimed. |
+| `rem-adian-rabin-undecidability-for-markov-properties` | `rem-triviality-and-finiteness-are-undecidable-for-finite-presentations` | none | Remove the edge; both remarks are leaves. |
+| `rem-nonabelian-extension-obstruction-and-h-two-torsor` | `rem-nonabelian-extension-obstruction-in-h-three` | `fs-h-two-classifies-extensions-with-arbitrary-nonabelian-kernel` | Remove the edge and leave both obstruction remarks recorded leaves. Refute the false statement definitionally: ordinary $H^2(G,M)$ requires an abelian $G$-module, whereas an arbitrary nonabelian kernel is not such a coefficient object. |
+| `rem-nonabelian-extension-obstruction-in-h-three` | `fs-h-two-classifies-extensions-with-arbitrary-nonabelian-kernel` | none | Remove the edge and use the preceding coefficient-type refutation. |
+| `rem-schur-zassenhaus-conjugacy-in-full-generality` | `fs-schur-zassenhaus-conjugacy-needs-no-solvability-or-deeper-input` | none | Refute from the proved solvability-qualified theorem and its printed hypothesis; remove the survey edge. |
+| `rem-classification-of-finite-simple-groups` | `fs-the-library-proves-the-classification-of-finite-simple-groups` | none | Refute from `proved_here: false` metadata without a mathematical dependency edge. |
+| `rem-bass-guivarch-growth-degree-formula` | `cor-finitely-generated-nilpotent-groups-have-polynomial-growth`; `ex-growth-degree-of-the-discrete-heisenberg-group` | none | After repair pair BG lands, turn this into a proved agreement remark depending on BG-9; the two consumers then have proved closure. |
+| `rem-gromov-polynomial-growth-theorem` | `fs-gromovs-polynomial-growth-theorem-is-proved-on-this-page` | none | Remove the edge and use page metadata only. |
+| `rem-grigorchuk-groups-of-intermediate-growth` | `fs-every-subexponential-growth-group-has-polynomial-growth` | none | Remove the edge; without a full local construction the false statement is itself a recorded leaf. |
+| `rem-nonamenable-groups-without-nonabelian-free-subgroups` | `fs-every-nonamenable-group-contains-a-rank-two-free-subgroup` | none | Remove the edge; without a full local counterexample the false statement is itself a recorded leaf. |
+
+The remaining recorded leaves already have zero consumers:
+`rem-higman-neumann-neumann-embedding-theorem`,
+`rem-triviality-and-finiteness-are-undecidable-for-finite-presentations`,
+`rem-undecidability-of-the-isomorphism-problem-for-finitely-presented-groups`,
+`rem-groups-with-unsolvable-conjugacy-problem`,
+`rem-defect-groups-and-brauer-main-theorems`,
+`rem-feit-thompson-odd-order-theorem`,
+`rem-stallings-theorem-on-ends-and-splittings`, and
+`rem-malcev-finitely-generated-linear-groups-are-residually-finite`.
+
+Additional nominal-proof repairs are mandatory:
+
+- `thm-onan-scott-classification-of-finite-primitive-groups` was designed in
+  §GT-4 as `[LS]`, `proved_here: false`, and “never a dependency target,” but
+  the published file was changed to `proof: ai-altered` and its `[A2]` is the
+  whole O'Nan--Scott conclusion. Restore it to a recorded leaf. Remove its six
+  outgoing supplier edges: `ex-simple-diagonal-action` must verify its action
+  directly from the type definition; the two O'Nan--Scott `fs-` items and
+  `rem-algorithmic-role-of-onan-scott` become metadata/source-summary leaves;
+  `rem-cfsg-refinements-of-the-onan-scott-reduction` remains a recorded leaf;
+  and `prop-two-transitive-groups-have-affine-or-almost-simple-socle-type`
+  returns to the `[LS]`, `proved_here: false` leaf promised in §GT-4. No one of
+  those items may supply another result. A complete, readable copy of the
+  primary Liebeck--Praeger--Saxl proof was not obtained in this pass; the
+  search endpoint exposed proof fragments and then failed full retrieval.
+  That is a proof-source blocker, and incorporating the classification is in
+  any event outside this scaffold's deliberately bounded elementary socle
+  page. This is a Phase-3 restoration of intended status, not a Phase-2
+  supplier request.
+- `thm-finite-characteristically-simple-groups-are-direct-products-of-isomorphic-simple-groups`
+  must replace its unlinked `[A2]` by the short local argument: automorphic
+  images of a minimal normal subgroup are minimal normal, distinct images
+  centralize by `lem-distinct-minimal-normal-subgroups-centralize-one-another`,
+  their finite product is characteristic, and irredundancy makes the
+  intersections trivial. Add that existing lemma to its header. This is a
+  Phase-3 proof expansion with no new supplier.
+- `lem-distinct-components-commute` and
+  `thm-generalized-fitting-subgroup-contains-its-centralizer` currently cite
+  precisely those results as assumptions. The available Smith full text states
+  them but does not supply the omitted proof. Until an accessible full proof is
+  obtained and audited, mark both as not-proved-here dependency leaves and
+  remove the edge from the first to the second and from the second to
+  `rem-what-the-library-does-and-does-not-prove-about-cfsg`. The latter becomes
+  a metadata-only survey leaf. This is a source blocker, not a Phase-2 root.
+- `thm-finitely-generated-free-groups-are-subgroup-separable` must depend on
+  the proved `thm-marshall-hall-free-factor-theorem` and reproduce the finite
+  covering completion while retaining a lifted path for $g\notin H$ with
+  distinct endpoints. Its present `[F1]` is exactly its conclusion. It has zero
+  published consumers, so this is Phase 3 only.
+- `prop-free-abelian-groups-of-rank-at-least-two-are-not-hyperbolic` must prove
+  the grid rectangle is geodesic by coordinate lower bounds. The two boundary
+  examples (`ex-the-hyperbolic-plane-is-hyperbolic` and the Cantor-boundary
+  clause) remain B-page leaves unless their local proofs are expanded.
+- `cor-abelian-subgroups-of-hyperbolic-groups-are-virtually-cyclic` imports
+  without proof that torsion abelian subgroups are finite, and
+  `thm-hyperbolic-groups-have-bounded-orders-of-finite-subgroups` imports the
+  bounded-orbit theorem and its counting consequence. The full texts obtained
+  in this pass either state these facts with a reference or treat only the
+  torsion-free case. Both items have zero downstream consumers after the
+  former's edge from the centralizer theorem is removed. Restore them as
+  recorded leaves pending an accessible complete proof; they are not Phase-2
+  roots. The centralizer, infinite-order, and non-elementary free-subgroup
+  theorems remain locally provable from HG and the full Hamann/Canary ranges.
+- `ex-a-five-as-the-smallest-nonabelian-simple-group` and
+  `ex-psl-two-seven-and-a-low-rank-coincidence` currently use source assertions
+  as proof steps. They have zero consumers; either prove the finite claims from
+  earlier finite-group items or mark them recorded B leaves.
+- `ex-the-binary-icosahedral-cover-of-a-five` invokes Weibel's example as its
+  universal-central-extension proof. It has zero downstream consumers; until
+  the matrix presentation and universal property are checked locally, mark it
+  a recorded B leaf even after the Hopf-formula supplier closure lands.
+
+### 30.5 Phase-2-eligible repair pairs
+
+These four A/B pairs, and only these new GT pairs, are in Phase 2. Every A item
+is needed in the prerequisite closure of a published consumer. Every B item is
+planned-only enrichment with item-level zero published consumers.
+
+#### SC. Small-cancellation disc diagrams and torsion toolkit
+
+**A page** `small-cancellation-disc-diagrams-and-torsion-toolkit`
+
+**requires** `free-groups-and-presentations`,
+`free-products-and-amalgamation`, `hnn-extensions-and-brittons-lemma`
+
+**placement** immediately before the published
+`small-cancellation-and-dehn-algorithms` A page.
+
+1. `def-arc-reduction-and-combinatorial-curvature-of-a-disc-diagram`.
+2. `lem-internal-arcs-of-a-reduced-small-cancellation-diagram-are-pieces`.
+3. `lem-c-prime-one-sixth-interior-faces-have-at-least-seven-arcs`.
+4. `lem-euler-curvature-identity-for-an-arc-reduced-disc-diagram`.
+5. `lem-boundary-spur-or-at-most-three-shell-from-curvature`.
+6. `thm-greendlinger-shell-existence-from-the-curvature-count`.
+7. `def-minimal-cyclic-power-diagram-and-relator-root`.
+8. `lem-minimal-power-diagram-has-a-periodic-boundary-shell`.
+9. `thm-c-prime-one-sixth-torsion-elements-come-from-relator-roots`.
+
+SC-4 must print the Euler identity and account separately for boundary
+valence-one spurs; SC-5 may suppress a spur only because the outer word is
+freely reduced. SC-8 chooses a conjugate of minimum cyclic length and a
+minimum-area diagram for its least positive power; it must prove, rather than
+assume, that the shell overlaps force cyclic periodicity. SC-9 states
+“conjugate to a power of a root of a cyclic conjugate of a defining relator,”
+with symmetrisation and proper-power conventions explicit.
+
+**B page** `small-cancellation-disc-diagrams-and-torsion-toolkit-examples`,
+requiring only the A page: `ex-curvature-ledger-for-a-two-cell-diagram`,
+`ex-a-three-shell-after-arc-reduction`,
+`ex-relator-root-versus-proper-power`, and
+`cex-a-boundary-spur-when-free-reduction-is-omitted`. Each has zero published
+consumers.
+
+#### BR. Modular traces and Brauer-character independence
+
+**A page** `modular-traces-and-brauer-character-independence`
+
+**requires** `modular-representations-and-projective-covers`,
+`the-group-algebra-and-representations`, `chain-conditions-and-semisimple-modules`
+
+**placement** immediately before the published Brauer-character A page.
+
+1. `lem-a-finite-dimensional-algebra-separates-its-simple-modules`.
+2. `lem-modular-trace-functions-of-simple-modules-are-linearly-independent`.
+3. `lem-reduction-of-teichmuller-lifted-traces-recovers-modular-traces`.
+4. `thm-irreducible-brauer-characters-are-linearly-independent-on-p-regular-elements`.
+
+BR-1 is proved from the already published Wedderburn--Artin decomposition (or
+the finite-dimensional density corollary proved from it), not cited as an
+unproved Jacobson-density theorem. BR-2 isolates one simple at a time by an
+algebra element and an endomorphism of trace one. BR-3 states the splitting
+modular-system and Teichmüller-lift hypotheses exactly. BR-4 is the missing
+independence half; the published basis theorem retains its own spanning proof.
+
+**B page** `modular-traces-and-brauer-character-independence-examples`,
+requiring only the A page: `ex-modular-traces-for-a-cyclic-p-prime-group`,
+`ex-brauer-character-independence-for-s-three-in-characteristic-two`, and
+`cex-ordinary-traces-on-p-singular-elements-do-not-define-brauer-characters`.
+Each has zero published consumers.
+
+#### BG. Hall--Mal'cev coordinates and Bass--Guivarc'h growth
+
+**A page** `hall-malcev-coordinates-and-bass-guivarch-growth`
+
+**requires** `cayley-graphs-word-metrics-and-quasi-isometry`,
+`composition-series-and-solvable-groups`,
+`modules-over-a-pid-and-canonical-forms`
+
+**placement** immediately before the published geometric-actions A page.
+
+1. `lem-lower-central-quotients-of-finitely-generated-nilpotent-groups-are-finitely-generated-abelian`.
+2. `def-bass-guivarch-dimension`.
+3. `def-lower-central-generators-and-weighted-coordinate-length`.
+4. `lem-finite-lower-central-coordinate-systems-exist`.
+5. `lem-weighted-collection-in-lower-central-coordinates`.
+6. `lem-growth-is-unchanged-by-quotienting-a-finite-normal-subgroup`.
+7. `thm-last-lower-central-term-has-exact-weighted-distortion`.
+8. `lem-weighted-coordinate-boxes-give-matching-growth-bounds`.
+9. `thm-bass-guivarch-growth-degree-formula-with-proof`.
+
+The rank in BG-2 is the torsion-free rank of
+`gamma_i(G)/gamma_{i+1}(G)`, and the degree is
+`sum_i i rank(...)`. BG-4 first passes to a finite-index torsion-free
+nilpotent subgroup or explicitly quotients finite torsion; it may not silently
+assert unique integral Mal'cev coordinates for a group with torsion. BG-7
+proves both inequalities in the distortion exponent. BG-9 proves upper and
+lower polynomial bounds, so the word “growth” means equivalence class and not
+an unsupported exact asymptotic constant.
+
+**B page** `hall-malcev-coordinates-and-bass-guivarch-growth-examples`,
+requiring only the A page: `ex-bass-dimension-of-a-free-abelian-group`,
+`ex-bass-dimension-of-the-discrete-heisenberg-group`,
+`ex-central-distortion-in-the-discrete-heisenberg-group`,
+`ex-bass-dimension-of-unitriangular-four-by-four-integers`,
+`ex-hirsch-length-and-growth-degree-need-not-agree`, and
+`cex-counting-every-lower-central-generator-with-weight-one`. Each has zero
+published consumers.
+
+#### HG. Quantitative hyperbolic-geometry toolkit
+
+**A page** `quantitative-hyperbolic-geometry-toolkit`
+
+**requires** `cayley-graphs-word-metrics-and-quasi-isometry`,
+`geometric-actions-svarc-milnor-and-growth`,
+`small-cancellation-and-dehn-algorithms`, `free-groups-and-presentations`
+
+**placement** immediately before the published hyperbolic-spaces A page.
+
+1. `lem-geodesic-triangles-in-trees-are-tripods`.
+2. `lem-slim-triangles-imply-the-gromov-product-inequality`.
+3. `lem-the-gromov-product-inequality-implies-the-four-point-condition`.
+4. `lem-the-four-point-condition-implies-slim-triangles`.
+5. `lem-local-geodesics-in-a-hyperbolic-space-are-uniform-quasi-geodesics`.
+6. `thm-morse-stability-with-explicit-parameter-dependence`.
+7. `lem-a-quasi-isometry-of-geodesic-spaces-has-a-controlled-coarse-inverse`.
+8. `lem-hyperbolicity-is-transported-by-a-quasi-isometry`.
+9. `lem-short-loop-relators-give-a-finite-dehn-presentation`.
+10. `lem-linear-isoperimetry-implies-uniformly-thin-geodesic-bigons`.
+11. `lem-infinite-order-elements-have-positive-stable-translation-length`.
+12. `lem-axis-fellow-travelling-controls-the-centralizer`.
+13. `lem-asymptotic-gromov-sequences-form-an-equivalence-relation`.
+14. `lem-boundary-products-are-independent-of-representative-and-basepoint`.
+15. `lem-quasi-isometries-extend-to-boundary-homeomorphisms`.
+16. `lem-independent-loxodromics-have-disjoint-pole-neighbourhoods`.
+17. `lem-loxodromic-elements-have-north-south-boundary-dynamics`.
+18. `thm-quantitative-hyperbolic-geometry-toolkit`.
+
+HG-18 packages the preceding clauses with their constants and hypotheses so
+published agreement theorems can depend on one earlier result. Properness is
+used only for compact boundary statements; local finiteness is stated where a
+finite ball is counted. “Elementary” means finite or virtually cyclic. The
+centralizer conclusion is for finitely generated hyperbolic groups, not
+arbitrary groups acting on a hyperbolic space. The Dehn clause
+attaches every null loop of length at most `10 delta` and proves both finite
+presentability and the shortening property. The boundary clauses specify the
+Gromov-product convention and all additive constant changes.
+
+**B page** `quantitative-hyperbolic-geometry-toolkit-examples`, requiring only
+the A page: `ex-morse-stability-in-a-tree`,
+`ex-a-local-geodesic-constant-in-a-cayley-graph`,
+`ex-boundary-extension-of-a-tree-quasi-isometry`,
+`ex-ping-pong-for-two-loxodromics`, and
+`cex-properness-is-needed-for-the-compact-boundary-package`. Each has zero
+published consumers.
+
+### 30.6 Exact new-supplier consumer map
+
+“Transitive” below excludes the direct consumer. Home pages are printed even
+when all consumers lie on one page. Internal A items have no direct published
+consumer; their listed impact is reached through the later item of their new A
+page. There are no hidden consumers outside the sets printed here.
+
+#### SC consumer map
+
+SC-1 through SC-5 have zero direct published consumers and the complete
+transitive published impact is the following curvature set:
+
+- `small-cancellation-and-dehn-algorithms`: `lem-curvature-count-for-reduced-c-prime-one-sixth-diagrams`, `thm-greendlinger-lemma-for-c-prime-one-sixth-presentations`, `cor-finite-c-prime-one-sixth-presentations-have-solvable-word-problem`, `cor-linear-isoperimetric-bound-for-finite-c-prime-one-sixth-presentations`, `thm-dehn-algorithm-solves-the-word-problem`, `fs-greendlinger-lemma-applies-to-every-finitely-presented-group`;
+- its B page: `ex-a-greendlinger-cell-in-a-van-kampen-diagram`, `ex-a-dehn-reduction-sequence`.
+
+SC-6 directly supplies
+`lem-curvature-count-for-reduced-c-prime-one-sixth-diagrams`; its transitive
+impact is the preceding set minus that direct item. SC-7 and SC-8 have zero
+direct published consumers and transitively affect the torsion set below.
+SC-9 directly supplies `thm-torsion-theorem-for-c-prime-one-sixth-groups`; its
+complete transitive impact is:
+
+- `small-cancellation-and-dehn-algorithms`:
+  `cor-c-prime-one-sixth-with-no-proper-power-relators-is-torsion-free`,
+  `fs-no-proper-power-relators-alone-implies-torsion-free`;
+- its B page: `ex-a-torsion-free-small-cancellation-group`,
+  `cex-a-no-proper-power-presentation-with-torsion-outside-small-cancellation`.
+
+Every SC B item has zero direct and zero transitive published consumers.
+
+#### BR consumer map
+
+BR-1 through BR-3 have zero direct published consumers and transitively affect
+all 19 items below. BR-4 directly supplies
+`thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions`.
+Its complete transitive published impact is the same list with that direct item
+omitted:
+
+- `brauer-characters-and-decomposition-matrices`:
+  `cor-number-of-simple-kg-modules-equals-number-of-p-regular-conjugacy-classes`,
+  `def-decomposition-numbers-and-decomposition-matrix`,
+  `def-projective-indecomposable-characters-and-cartan-invariants`,
+  `lem-decomposition-numbers-are-nonnegative-integers`,
+  `thm-brauer-nesbitt-module-determination`, `thm-brauer-reciprocity`,
+  `thm-blocks-partition-ordinary-and-brauer-irreducible-characters`,
+  `prop-decomposition-matrix-is-block-diagonal-after-block-ordering`,
+  `thm-cartan-matrix-is-d-transpose-d`,
+  `rem-defect-groups-and-brauer-main-theorems`,
+  `fs-reduction-mod-p-of-an-ordinary-character-is-always-irreducible`,
+  `fs-modular-representations-are-determined-by-ordinary-characters`,
+  `fs-every-block-has-one-ordinary-and-one-brauer-irreducible-character`,
+  `fs-the-cartan-matrix-equals-the-decomposition-matrix`;
+- its B page: `ex-brauer-characters-of-a-p-group`,
+  `ex-decomposition-matrix-of-s-three-in-characteristic-two`,
+  `ex-a-block-with-one-ordinary-and-one-brauer-character`,
+  `ex-cartan-matrix-from-d-transpose-d`.
+
+Every BR B item has zero direct and zero transitive published consumers.
+
+#### BG consumer map
+
+BG-1 and BG-3 through BG-8 have zero direct published consumers and complete
+transitive impact on these four items:
+
+- `geometric-actions-svarc-milnor-and-growth`:
+  `def-homogeneous-dimension-of-a-finitely-generated-nilpotent-group`,
+  `rem-bass-guivarch-growth-degree-formula`,
+  `cor-finitely-generated-nilpotent-groups-have-polynomial-growth`;
+- its B page: `ex-growth-degree-of-the-discrete-heisenberg-group`.
+
+BG-2 directly supplies the published homogeneous-dimension definition; its
+transitive impact is the other three items. BG-9 directly supplies the
+published Bass--Guivarc'h agreement remark; its transitive impact is the
+corollary and Heisenberg example. Every BG B item has zero direct and zero
+transitive published consumers.
+
+#### HG consumer map
+
+HG-1 through HG-17 have zero direct published consumers and transitively
+affect the complete current 29-item set below through HG-18. HG-18 directly
+supplies these 11 published items on `hyperbolic-spaces-and-hyperbolic-groups`:
+`prop-cayley-trees-are-zero-hyperbolic`,
+`thm-slim-triangle-gromov-product-and-four-point-hyperbolicity-are-equivalent-up-to-constants`,
+`thm-morse-stability-of-quasi-geodesics`,
+`thm-hyperbolicity-is-invariant-under-quasi-isometry-for-geodesic-spaces`,
+`thm-hyperbolic-groups-admit-finite-dehn-presentations`,
+`thm-linear-isoperimetric-characterisation-of-hyperbolic-groups`,
+`thm-infinite-order-elements-of-hyperbolic-groups-are-undistorted`,
+`thm-centralizer-of-an-infinite-order-element-is-virtually-cyclic`,
+`thm-non-elementary-hyperbolic-groups-contain-a-rank-two-free-subgroup`,
+`lem-asymptoticity-is-an-equivalence-relation-on-gromov-sequences`, and
+`thm-boundary-topology-is-well-defined-and-quasi-isometry-invariant`.
+
+Its complete transitive impact is:
+
+- `hyperbolic-spaces-and-hyperbolic-groups`:
+  `prop-finite-and-free-groups-are-hyperbolic`,
+  `prop-free-abelian-groups-of-rank-at-least-two-are-not-hyperbolic`,
+  `thm-hyperbolic-group-definition-is-independent-of-finite-generating-set`,
+  `cor-hyperbolic-groups-have-solvable-word-problem`,
+  `thm-finite-c-prime-one-sixth-presentations-define-hyperbolic-groups`,
+  `cor-abelian-subgroups-of-hyperbolic-groups-are-virtually-cyclic`,
+  `thm-hyperbolic-groups-have-bounded-orders-of-finite-subgroups`,
+  `fs-hyperbolic-group-means-a-group-with-a-hyperbolic-plane-subgroup`,
+  `fs-the-same-delta-works-after-every-change-of-generating-set`,
+  `fs-every-abelian-group-is-hyperbolic`,
+  `fs-all-quasi-geodesics-in-all-metric-spaces-stay-close-to-geodesics`, and
+  `fs-the-boundary-definition-needs-no-properness-or-equivalence-check`;
+- its B page: `ex-a-tree-is-zero-hyperbolic`,
+  `ex-free-groups-and-their-cantor-boundaries`,
+  `ex-surface-groups-as-hyperbolic-groups`,
+  `ex-a-small-cancellation-hyperbolic-group`,
+  `cex-product-of-two-infinite-groups-need-not-be-hyperbolic`, and
+  `cex-z-squared-is-not-hyperbolic`.
+
+Every HG B item has zero direct and zero transitive published consumers.
+
+### 30.7 Group-owned low-degree (co)homology Phase-2 supplier
+
+The earlier three-HA-root proposal is withdrawn. HA-12
+`group-cohomology-as-a-derived-functor` is already a published, nonempty pair,
+so adding a draft theorem there is Phase 3 rather than pair-only Phase 2.
+HA-16 and HA-17 are empty Homological Algebra pairs whose live A pages still
+require B pages. None of those three proposals belongs to this audit's Phase 2,
+and the GT repairs below must not depend on HA-16 or HA-17.
+
+Insert one Group-Theory-owned pair immediately after GT-21 and before GT-22:
+
+- A page `group-homology-transfer-and-low-degree-exact-sequences`, title
+  **Group Homology Transfer and Low-Degree Exact Sequences**, category
+  `group-theory`, kind `A`, order `365.0721`, companion
+  `group-homology-transfer-and-low-degree-exact-sequences-examples`;
+- B page `group-homology-transfer-and-low-degree-exact-sequences-examples`,
+  title **Group Homology Transfer and Low-Degree Exact Sequences: Examples**,
+  category `group-theory`, kind `B`, order `365.0722`, requiring only its A
+  companion and serving as a dependency leaf.
+
+The A page requires exactly the following strictly earlier A pages:
+`chain-complexes-and-homology`, `group-cohomology-as-a-derived-functor`,
+`free-groups-and-presentations`, and
+`group-extensions-complements-and-schur-zassenhaus`. In particular it does
+not require GT-21: that published A page's live prerequisite is the empty
+HA-17 B page, so using GT-21 would inherit the defect this replacement is
+designed to remove. Author the new A items in this order:
+
+1. `def-finite-index-transfer-on-normalized-bar-chains` — fix left-module,
+   right-coset-representative, and Schreier-rewriting conventions and print the
+   finite coset-sum formula in every degree.
+2. `lem-bar-transfer-is-a-chain-map-and-choice-independent-up-to-chain-homotopy`
+   — check every face, including the end faces, and construct the comparison
+   homotopy for a changed transversal.
+3. `lem-corestriction-after-bar-transfer-is-index-multiplication-on-homology`
+   — identify the composite with the coset sum and prove it is chain-homotopic
+   to `[G:H]` times the identity.
+4. `thm-positive-degree-integral-homology-of-a-finite-group-is-annihilated-by-its-order`
+   — take `H=1`, use `H_n(1;Z)=0` for `n>0`, and conclude that multiplication
+   by `|G|` vanishes.
+5. `def-free-presentation-lyndon-bar-bicomplex-and-edge-maps` — for
+   `1 -> R -> F -> G -> 1`, define the first-quadrant bar bicomplex and identify
+   its degree-one edge maps with `R/[F,R] -> F_ab -> G_ab`.
+6. `lem-free-presentation-bicomplex-collapses-in-positive-middle-group-degree`
+   — prove `H_q(F;Z)=0` for `q>1`, identify
+   `H_1(R;Z)_G = R/[F,R]`, and track the filtration edge maps and signs.
+7. `thm-free-presentation-homology-five-term-sequence` — deduce naturally
+   `0 -> H_2(G;Z) -> R/[F,R] -> F_ab -> G_ab -> 0` with all displayed arrows
+   induced by the inclusion and quotient.
+8. `def-crossed-homomorphisms-principal-coboundaries-and-first-cohomology` —
+   for an abelian $G$-module $A$, define crossed homomorphisms, principal
+   crossed homomorphisms, and
+   $H^1_{\rm cr}(G,A)=Z^1_{\rm cr}(G,A)/B^1_{\rm cr}(G,A)$, and identify this
+   quotient directly with the degree-one inhomogeneous bar complex.
+9. `def-degree-one-restriction-inflation-and-quotient-action` — for
+   $1\to N\to G\to Q\to1$, print the crossed-homomorphism formulas for
+   restriction, inflation, and the $Q$-action on $H^1(N,A)$.
+10. `lem-degree-one-maps-and-quotient-action-are-well-defined` — check that
+    restriction and inflation preserve principal crossed homomorphisms, that
+    the conjugation action is independent of the lift in $G$, and that all
+    maps descend to the stated cohomology groups.
+11. `thm-degree-one-inflation-restriction-exact-sequence` — prove directly
+    from the printed crossed-homomorphism formulas that
+    $0\to H^1(Q,A^N)\to H^1(G,A)\to H^1(N,A)^Q$ is exact.
+12. `def-low-degree-transgression-for-a-group-extension` — for
+   `1 -> N -> G -> Q -> 1` and a `G`-module `A`, construct
+   `Tra:H^1(N,A)^Q -> H^2(Q,A^N)` from semidirect complements/pullback and
+   pushout, and also print the normalized-cocycle formula.
+13. `lem-transgression-kernel-is-the-image-of-restriction` — prove exactness at
+   `H^1(N,A)^Q` by extending a complement precisely when the transgressed
+   extension splits.
+14. `lem-kernel-of-degree-two-inflation-is-the-transgression-image` — prove
+    exactness at `H^2(Q,A^N)` using pullback to `G`, a splitting over `N`, and
+    the inverse complement construction.
+15. `thm-inflation-restriction-transgression-five-term-sequence` — combine
+    items 8--14, including the locally proved degree-one inflation--restriction
+    sequence to obtain, with the printed directions,
+    `0 -> H^1(Q,A^N) -> H^1(G,A) -> H^1(N,A)^Q -> H^2(Q,A^N) -> H^2(G,A)`.
+
+The B page contains only
+`ex-transfer-annihilation-for-a-cyclic-group`,
+`ex-free-presentation-five-term-sequence-for-a-cyclic-group`, and
+`ex-transgression-for-the-integral-heisenberg-extension`. Each is a leaf with
+zero direct and zero transitive published consumers.
+
+The old-root to new-root cutover is exact:
+
+| withdrawn HA supplier | new GT supplier | direct published consumer |
+|---|---|---|
+| `thm-five-term-exact-sequence-of-a-first-quadrant-homological-spectral-sequence` | `thm-free-presentation-homology-five-term-sequence` | `lem-five-term-homology-sequence-for-a-free-presentation` |
+| `thm-positive-degree-homology-of-a-finite-group-is-annihilated-by-its-order` | `thm-positive-degree-integral-homology-of-a-finite-group-is-annihilated-by-its-order` | `lem-positive-degree-integral-homology-of-a-finite-group-is-order-torsion` |
+| `thm-five-term-exact-sequence-in-group-cohomology-from-lhs` | `thm-inflation-restriction-transgression-five-term-sequence` | `thm-five-term-exact-sequence-as-extension-and-transgression-data` |
+
+Items 1--3 have zero direct published consumers and the same complete
+transitive published impact as item 4. Item 4's direct consumer is
+`lem-positive-degree-integral-homology-of-a-finite-group-is-order-torsion`;
+its complete additional transitive impact is, on the Schur A page,
+`lem-schur-multiplier-of-a-finite-group-is-finite`,
+`def-schur-covering-group-of-a-finite-group`,
+`thm-existence-of-schur-covering-groups-for-finite-groups`, and
+`fs-schur-covering-groups-are-unique-for-all-finite-groups`, and on its B page
+`cex-nonuniqueness-of-schur-covering-groups`.
+
+Items 5--6 have zero direct published consumers and the same complete
+transitive published impact as item 7. Item 7 directly supplies
+`lem-five-term-homology-sequence-for-a-free-presentation`. Its complete
+additional transitive impact is, on the Schur A page,
+`thm-hopf-formula-for-the-schur-multiplier`,
+`cor-hopf-formula-is-independent-of-the-free-presentation`,
+`prop-schur-multiplier-of-a-free-group-is-trivial`,
+`prop-schur-multiplier-of-a-cyclic-group-is-trivial`,
+`cor-kernel-of-the-universal-central-extension-is-the-schur-multiplier`,
+`prop-universal-central-extension-group-is-superperfect`,
+`cor-schur-multiplier-of-a-finitely-presented-group-is-finitely-generated`,
+`lem-schur-multiplier-of-a-finite-group-is-finite`,
+`def-schur-covering-group-of-a-finite-group`,
+`thm-existence-of-schur-covering-groups-for-finite-groups`,
+`fs-hopfs-formula-is-obviously-independent-of-the-presentation`,
+`fs-the-universal-coefficient-short-exact-sequence-splits-naturally`, and
+`fs-schur-covering-groups-are-unique-for-all-finite-groups`; on its B page,
+`ex-hopf-formula-from-a-one-relator-presentation`,
+`ex-the-binary-icosahedral-cover-of-a-five`,
+`ex-schur-multiplier-of-a-cyclic-group`, and
+`cex-nonuniqueness-of-schur-covering-groups`.
+
+Items 8--14 have zero direct published consumers and the same singleton
+transitive impact as item 15. Item 15 directly supplies
+`thm-five-term-exact-sequence-as-extension-and-transgression-data`, which has
+zero further published consumers. Thus all fifteen A items are Phase-2 eligible;
+there is no planned-only A item in this pair.
+
+Full authoritative proof routes were retrieved and read. Clara Loeh,
+*Group Cohomology* (complete 257-page author PDF),
+<https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf>,
+Definition 1.7.13,
+Theorem 1.7.15 and Corollary 1.7.16 on printed pp. 63--65 give the bar transfer,
+index-multiplication composite, and finite-group annihilation proof;
+§§3.2.1--3.2.4, especially Theorems 3.2.9--3.2.12 and 3.2.18 on printed
+pp. 118--132, give the filtered/double-complex construction, the group-extension
+spectral sequence, its naturality, and the complete free-presentation edge-map
+calculation. Karel Dekimpe, Manfred Hartl and Sarah Wauters,
+*A seven-term exact sequence for the cohomology of a group extension*,
+<https://arxiv.org/abs/1103.4052> (v2, complete full text), §§3--6 construct restriction,
+transgression and the two required exactness steps using semidirect complements,
+pullbacks and pushouts; §§9--10 identify the transgression with the low-degree
+spectral-sequence differential and print the normalized cocycle formulas.
+Weibel, *An Introduction to Homological Algebra*, complete Chapter 6,
+<https://math.mit.edu/~hrm/palestine/weibel/06-group_homology_and_cohomology.pdf>,
+Definition 6.4.1, Example 6.4.2, and Theorem 6.4.5 on printed pp. 174--175
+give crossed homomorphisms, principal ones, and the $H^1$ quotient;
+§§6.7.3 and 6.7.6--6.7.9 on printed pp. 189--191 give inflation,
+restriction, conjugation, and the quotient action; Theorem 6.5.8 and
+§§6.8.2--6.8.3 on printed pp. 195--196 independently control the annihilation
+theorem and both low-degree sequences. No source blocker remains for this
+pair.
+
+Remaining cross-category seams:
+
+1. The already published HA-12 derived-functor definition assumes Dependent
+   Choice and supplied injective-resolution data. Any GT-21--GT-23 theorem
+   identifying explicit cochains or factor sets with that derived theory must
+   inherit those hypotheses, or instead cite the proved bar-resolution
+   comparison with its exact hypotheses. No choice-free conclusion may be
+   inferred merely from a finite group or finite cochain degree.
+2. Algebra owns `chain-conditions-and-semisimple-modules`; it must expose the precise
+   finite-dimensional separation/density consequence used by BR-1, or approve
+   BR-1's derivation from its matrix-factor theorem. Representation Theory must
+   not mint a competing Brauer-character definition; GT-18/GT-19 retain
+   ownership of modular systems, Brauer characters, and decomposition maps.
+3. Algebraic Topology must replace the page edge
+   `simplicial-complexes-and-simplicial-homology` ->
+   `schur-multipliers-and-universal-central-extensions-examples` by the exact
+   earlier A-page supplier(s) it actually uses. A GT B page is never an
+   admissible cross-category prerequisite.
+4. Number Theory's published `primitive-roots-and-unit-groups-modulo-n` is an
+   existing adequate supplier, not a new Phase-2 root. Phase 3 moves that A-page
+   edge from
+   `frattini-subgroups-and-the-burnside-basis-theorem-examples.requires` to
+   `frattini-subgroups-and-the-burnside-basis-theorem.requires`, replaces the
+   latter's `sylow-theorems-and-nilpotent-groups-examples` edge by the Sylow A
+   page, and leaves the Frattini B page requiring only the Frattini A page. The
+   primitive-roots edge is needed directly at item level by
+   `ex-frattini-subgroup-of-a-cyclic-p-group`, through
+   `lem-order-of-a-power-in-a-finite-cyclic-group`. Its complete additional
+   transitive GT impact, all on the same Frattini B page, is
+   `cex-frattini-image-under-a-nonsurjective-homomorphism`,
+   `ex-hall-burnside-detects-a-nontrivial-coprime-automorphism`, and
+   `fs-the-frattini-subgroup-is-functorial-for-all-homomorphisms`. Because
+   both Number Theory and Sylow A pages are already published, the change is
+   Phase 3 and creates no supplier item or Phase-2 root.
+
+HA-12's discarded draft insertion and every HA-16/HA-17 item have zero GT
+Phase-2 role under this binding. Published GT-21 also has zero supplier role
+for the new pair, GT-22, and GT-23; its live HA-17-B prerequisite defect is
+reserved for Phase 3. HA ownership and any repair of HA's own page
+prerequisites remain outside the Group Theory audit.
+
+### 30.8 Authoritative full-text evidence and blockers
+
+- Cornelia Druţu and Michael Kapovich, *Geometric Group Theory*, complete
+  author-hosted manuscript,
+  <https://www.math.ucdavis.edu/~kapovich/EPR/kapovich_drutu.pdf>: Chapter 9,
+  especially Theorem 9.38 (Morse), Theorems 9.83--9.89 (boundary extension),
+  §§9.11--9.13 and Theorem 9.108/Proposition 9.109/Lemma 9.112 (hyperbolic
+  groups, linear filling, and Dehn presentations); §12.5, Definition 12.42,
+  Proposition 12.43, Lemma 12.44, Proposition 12.45 and Theorem 12.48 (the
+  complete Bass--Guivarc'h proof). The whole 585-page text was obtained and
+  the cited proof ranges read.
+- Matthias Hamann, *Geometric Group Theory*, complete author text,
+  <https://www.math.uni-hamburg.de/home/hamann/Lehre/GeoGrTh/GeoGrThEn.pdf>:
+  Proposition 5.2.5 and Theorem 5.2.6 prove undistortion and the virtually
+  cyclic centralizer; Theorems 5.3.7--5.3.8 prove the general (torsion-allowed)
+  boundary trichotomy and rank-two free-subgroup conclusion.
+- Richard Canary, *Anosov Representations: Informal Lecture Notes*, complete
+  author-hosted text, <https://websites.umich.edu/~canary/lecnotespublic.pdf>:
+  Proposition 4.3/Corollary 4.4 and Proposition 5.1 prove infinite cyclic
+  undistortion and north--south dynamics; Theorem 7.3 gives the ping-pong
+  proof. Its subgroup corollaries explicitly impose torsion-freeness, which is
+  why it is not used to certify the two finite-torsion claims isolated in
+  §30.4.
+- Clara Löh, *Geometric Group Theory: An Introduction*, complete author text,
+  <https://loeh.app.uni-regensburg.de/teaching/ggt_ws1415/lecture_notes_old.pdf>:
+  the growth and quasi-isometry sections were used as independent convention
+  control. Its Bass theorem is a statement with a reference, not the proof
+  source for BG, and this edition was not used for small cancellation.
+- Nicholas Touikan, *An Introduction to Combinatorial and Geometric Group
+  Theory*, complete author HTML, §3.5,
+  <https://ntouikan.ext.unb.ca/MATH6022/IntroCGGT/html_output/section-18.html>:
+  arc reduction, pieces, shells, and Proposition 3.5.5. This supports SC-1--SC-6.
+- Roger C. Lyndon and Paul E. Schupp, *Combinatorial Group Theory*, Chapter V,
+  §10, Theorem 10.1 and Lemma 10.2, Springer (1977/2001),
+  <https://doi.org/10.1007/978-3-642-61896-3>; a complete searchable scan was
+  retrieved from
+  <https://www.scribd.com/document/384118619/CombinatorialGroupTheory> and the
+  entire proof on pp. 281--282 was read. Lemma 10.2 proves the relator-power
+  piece criterion. The proof of Theorem 10.1 then chooses a shortest conjugate,
+  applies the Chapter V Greendlinger theorem to a least power, separates the
+  repeated-period and one-period cases, and obtains either a common relator root
+  or a shorter conjugate contradiction. Together with Touikan's complete
+  diagram/Greendlinger development, this closes SC-7--SC-9; the earlier source
+  blocker is resolved.
+- Peter Webb, *A Course in Finite Group Representation Theory*, complete
+  author-hosted text,
+  <https://www-users.cse.umn.edu/~webb/RepBook/RepBookLatex.pdf>, and the
+  complete Meier Brauer-character notes,
+  <https://users.math.msu.edu/users/meierfra/Classnotes/MTH912F04/913S05notes.pdf>,
+  §6.4, especially Lemma 6.4.3. The latter prints the separation-and-trace
+  proof of linear independence used by BR-1--BR-4.
+- Clara Löh, *Group Cohomology*, complete author text,
+  <https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf>,
+  and Weibel Chapter 6 full-text excerpt,
+  <https://math.mit.edu/~hrm/palestine/weibel/06-group_homology_and_cohomology.pdf>,
+  control the low-degree homology and order-annihilation seams. The new
+  Group-Theory-owned pair in §30.7 contains the proofs; HA-12/HA-16/HA-17 do
+  not supply Phase-2 items to this audit.
+- Stephen D. Smith, *CFSG---A User's Manual*, complete author-hosted text,
+  <https://homepages.math.uic.edu/~smiths/talkv.pdf>, states the component and
+  generalized-Fitting facts in §1 but does not provide the missing elementary
+  proof. Consequently those two published nominal proofs are blocked and must
+  be isolated as recorded leaves, as §30.4 requires.
+- Liebeck--Praeger--Saxl, “On the O'Nan--Scott theorem for finite primitive
+  permutation groups,” is the primary self-contained source cited in §GT-4.
+  The search index exposed part of §2's proof, but full retrieval returned an
+  access error. Under the full-text rule this does not license a local proof;
+  §30.4 therefore restores the published theorem and two-transitive
+  consequence to their intended recorded-leaf status.
+
+The inaccessible monograph citations in §§0--29 are corroborating
+bibliography only. They do not license a proof claim. In particular, the Jay
+Williams descriptive-set-theory paper currently cited by the published
+small-cancellation torsion item is not an acceptable proof source merely
+because it restates the classical theorem. The replacement proof source is the
+fully read Lyndon--Schupp range above.
+
+### 30.9 Final phase partition
+
+- **Phase 2 GT roots:** SC-6 and SC-9 with SC-1--SC-5/SC-7--SC-8 closure;
+  BR-4 with BR-1--BR-3 closure; BG-2 and BG-9 with BG-1/BG-3--BG-8 closure;
+  HG-18 with HG-1--HG-17 closure; and the three interface theorems with their
+  twelve-item internal closure on
+  `group-homology-transfer-and-low-degree-exact-sequences`. Publish all five
+  A/B pairs because build units are pairs, while preserving every B as a leaf.
+- **Phase 2 cross-category roots:** none. The superseded HA-12 insertion and
+  HA-16/HA-17 pairs have zero GT Phase-2 role.
+- **Planned-only enrichment:** exactly the 18 B-page items enumerated in §30.5
+  plus the three B items in §30.7. Every one has zero direct and zero
+  transitive published consumers. There is no planned-only A item.
+- **Phase 3 using existing suppliers:** all page-require rewrites in §30.2;
+  all item reorders and header/ledger reconciliation in §30.3; all recorded
+  isolation and local proof repairs in §30.4; the DC/supplied-resolution
+  hypothesis propagation in §30.7(4), including removal of GT-21 from the
+  GT-22/GT-23 prerequisite closure.
+
+Until the supplier roots land, the affected published consumers remain
+transitively blocked. The earlier claims “Forward references: NONE,” “no
+blocker,” “every theorem is locally proved,” and “no survey item is a dependency
+target” are historical and false for the live snapshot.
+
+### 30.10 Representation Theory reconciliation (2026-09-08)
+
+Representation Theory RG-14--RG-17 consume, but do not duplicate, Group
+Theory's modular interfaces. GT-18 retains modular systems, relative
+projectivity, vertices, and sources; GT-19 retains Brauer characters,
+decomposition maps and matrices, projective characters, and block idempotents.
+The Phase-2 supplier pair `modular-traces-and-brauer-character-independence`
+must precede the published GT-19 Brauer-character page. RG receives
+`thm-irreducible-brauer-characters-are-linearly-independent-on-p-regular-elements`
+only through the repaired GT-19 A page. This adds no RG-owned supplier and does
+not change the exact published impact cone in §30.
+
+### 30.11 Topology reconciliation (2026-09-08)
+
+Delete the page edge `cayley-graphs-word-metrics-and-quasi-isometry` ->
+`applications-of-the-fundamental-group-examples`. Its exact A-page
+requirements are `free-groups-and-presentations`, `metric-spaces`,
+`graphs-walks-and-connectivity`, `trees-forests-and-spanning-trees`,
+`semidirect-products-and-automorphism-groups`,
+`completeness-and-uniform-continuity`, and `limits-of-real-functions`.
+No Group Theory item uses the removed B page. This is a Phase-3 page repair
+using published A suppliers, with zero new supplier items and no Phase-2 root.

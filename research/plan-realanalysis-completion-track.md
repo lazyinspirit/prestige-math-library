@@ -938,3 +938,619 @@ The splice owes three things beyond the page entries themselves: the amendments 
 §5, applied by the orchestrator to files this track does not own; a `requires` list
 per page as given in §3; and a B companion per A page, since `validate-plan`'s
 `companion` check is a hard error.
+
+---
+
+## 9. Binding post-publication audit (2026-09-08)
+
+This section is the canonical Real Analysis binding.  It supersedes the stale
+pre-publication claims in the status banner, **Authority boundary**, R1, §1 and
+§8 above, and every conflicting unmet-dependency claim in the historical,
+read-only `plan-realanalysis-pages.md`.  The mathematical descriptions in
+§§2--7 remain useful provenance, but RC-1--RC-13 have been published and are no
+longer proposed supplier pairs.  This audit changes only this prose file;
+published pages and items remain immutable until Phase 3.
+
+### 9.1 Live census and phase classification
+
+The 2026-09-08 disk/spec census is exact:
+
+* `plan-spec.json` has 109 Real Analysis page rows: 54 A, 54 B, and the legacy P
+  page `formal-laurent-series-field`, containing 1,589 item memberships.
+* Disk has 106 Real Analysis pages and 1,614 published memberships (1,598
+  distinct published item ids).  There are no draft memberships, no unresolved
+  declared item dependencies, and no published-to-draft item edges.
+* There are 51 complete published A/B pairs.  The only absent page files are
+  `roots-and-rational-powers-examples`,
+  `countability-and-uncountability-examples`, and
+  `sequences-and-limits-examples`.  Their six intended items are already
+  published, but presently sit on their A pages.
+* All thirteen RC pairs described above are published.  Therefore the exact
+  **Phase-2-eligible unpublished supplier set is empty**, and the exact
+  **planned-only enrichment set is empty**.  No new item id is licensed by this
+  audit.  Everything below is a Phase-3 repair to already-published material or
+  an exact future `plan-spec.json` reconciliation.
+
+Phase 3 must create the three missing B page files, move the following
+memberships from A to B, and make each B require only its A companion:
+
+| B page | published items moved to it |
+|---|---|
+| `roots-and-rational-powers-examples` | `fs-negative-has-square-root`; `fs-rational-power-of-negative-base` |
+| `countability-and-uncountability-examples` | `fs-uncountable-contains-interval` |
+| `sequences-and-limits-examples` | `fs-bounded-implies-convergent`; `fs-limit-preserves-strict-inequality`; `fs-subsequence-convergence-implies-convergence` |
+
+These are page repairs, not Phase-2 roots.  Their item-exact published impact is:
+
+* `fs-negative-has-square-root`: direct and complete transitive published
+  impact, both on `roots-and-rational-powers`, is
+  `{fs-rational-power-of-negative-base}`.  Remove that edge and make the latter
+  refutation self-contained before moving both items to B.
+* `fs-rational-power-of-negative-base`, `fs-uncountable-contains-interval`,
+  `fs-limit-preserves-strict-inequality`, and
+  `fs-subsequence-convergence-implies-convergence`: **zero direct published
+  consumers and zero transitive published impact**, item by item.
+* `fs-bounded-implies-convergent` has six direct published consumers, grouped by
+  home: `equivalent-forms-of-completeness`:
+  `{fs-cesaro-converse}`; `equivalent-forms-of-completeness-examples`:
+  `{cex-irregular-summability-matrix, cex-stolz-cesaro-converse-fails,
+  ex-cesaro-means-of-alternating}`; `sequences-and-limits`:
+  `{fs-subsequence-convergence-implies-convergence,
+  rem-sequence-conventions}`.  Its complete 27-item transitive published impact
+  is: `equivalent-forms-of-completeness`:
+  `{fs-cesaro-converse, lem-of-sequence-basics, lem-bw-implies-archimedean,
+  lem-bw-implies-cauchy-complete, lem-mct-implies-archimedean,
+  lem-mct-implies-lub, rem-where-the-archimedean-hypothesis-is-needed,
+  thm-completeness-equivalences, fs-cauchy-complete-implies-lub,
+  fs-nested-intervals-implies-lub}`;
+  `equivalent-forms-of-completeness-examples`:
+  `{cex-irregular-summability-matrix, cex-stolz-cesaro-converse-fails,
+  ex-cesaro-means-of-alternating, ex-cauchy-complete-not-complete-field}`;
+  `modes-of-convergence-egorov-and-lusin`:
+  `{cor-a-measurable-function-on-a-finite-measure-subset-of-rn-agrees-off-a-small-set-with-a-continuous-function}`;
+  `sequences-and-limits`:
+  `{fs-subsequence-convergence-implies-convergence,
+  rem-sequence-conventions}`; `urysohn-lemma-and-tietze`:
+  `{lem-a-uniformly-approximable-real-valued-map-is-continuous,
+  thm-a-space-is-perfectly-normal-iff-it-is-normal-and-every-closed-set-is-a-zero-set,
+  thm-tietze-extension-theorem,
+  rem-the-choice-cost-of-urysohns-lemma-and-of-tietzes-theorem,
+  cor-tietze-for-unbounded-and-open-interval-valued-maps,
+  fs-a-continuous-real-function-on-any-subspace-of-a-normal-space-extends}`;
+  `urysohn-lemma-and-tietze-examples`:
+  `{ex-every-closed-subset-of-the-line-is-a-zero-set,
+  cex-a-continuous-function-on-a-non-closed-subspace-with-no-extension,
+  cex-tietze-fails-in-a-t1-space-that-is-not-normal,
+  ex-tietze-extension-from-a-closed-interval-of-the-line}`.  Before the item is
+  moved to B, remove all six direct dependency edges.  Each consumer must state
+  the false assertion it refutes locally and depend only on the corresponding
+  true A-page definitions/theorems.  The stable id remains unchanged.
+
+### 9.2 Recorded-not-proved quarantine and the DC rehome
+
+`extcheck --json` finds exactly two Real Analysis consequence items in the
+recorded/not-proved cone.
+
+1. `rem-continuum-hypothesis` directly cites recorded forcing/independence
+   remarks.  Phase 3 must remove every `external_refs` entry and every assertion
+   or load-bearing link saying CH is independent.  Retitle and rewrite it only
+   to define CH and record that this library does not decide it.  This is a
+   scope statement, not an independence theorem.
+2. `rem-integral-conventions-and-scope` directly cites recorded
+   `rem-ftc-absolutely-continuous` and
+   `rem-dominated-convergence-theorem`.  Remove both `external_refs` and use the
+   now-published proved A suppliers
+   `thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions`
+   and `thm-dominated-convergence`.  Put any reading-order cross-links in a
+   non-load-bearing Remarks section.
+
+The Real Analysis recorded item
+`rem-sine-period-arc-length-integrand-is-nonelementary` has zero direct and zero
+transitive published consumers.  It may remain isolated on its B page, but no
+future item or page may consume it.  After the two repairs above, Real Analysis
+has zero direct or transitive paths to recorded/not-proved material.
+
+The Foundations binding owns one compulsory Phase-3 rehome.  Move the published
+`def-dependent-choice` from `compactness-in-metric-spaces` to the Real Analysis
+A page `countability-and-uncountability`, immediately after
+`def-countable-choice`.  Replace its inapplicable real-valued `def-sequence`
+dependency and both body links by `def-function`; retain the stable id.  Then
+`thm-arzela-ascoli-for-real-ck` and `thm-perfect-set-uncountable-r` may add the
+exact dependency.  This definition is already published: it is not a Phase-2
+root.  The authoritative Foundations impact ledger gives 83 direct published
+consumers and a complete 3,522-item published closure over 297 page homes plus
+24 unhomed items, with serialization digest
+`088790f25754324deb44aa4c3b6d3f21ebf58a5864a5beeb9c43b52352eb7346`;
+the rehome changes neither set.
+
+### 9.3 Page-level B-leaf repair
+
+No Real Analysis A page currently requires a B page.  Nine Real Analysis B
+pages nevertheless have thirteen forbidden extra prerequisites.  Move each
+listed prerequisite to the A companion, then leave the B with exactly its A:
+
+| B page | prerequisites moved to A |
+|---|---|
+| `equivalent-forms-of-completeness-examples` | `the-field-of-fractions-and-localisation` |
+| `monotone-functions-and-discontinuities-examples` | `absolute-convergence-and-rearrangement` |
+| `mixed-partials-taylor-and-extrema-examples` | `the-exponential-function` |
+| `inverse-and-implicit-function-theorems-examples` | `sine-cosine-and-the-definition-of-pi` |
+| `fubini-and-change-of-variables-examples` | `the-exponential-function`; `sine-cosine-and-the-definition-of-pi` |
+| `the-inverse-function-theorem-completed-examples` | `sine-cosine-and-the-definition-of-pi`; `fundamental-trigonometric-identities` |
+| `improper-and-parameter-dependent-multiple-integrals-examples` | `further-trigonometric-identities-and-inverses` |
+| `picard-lindelof-and-first-order-odes-examples` | `darboux-lhopital-and-taylor`; `the-logarithm-and-general-powers` |
+| `the-gauge-integral-and-cousins-lemma-examples` | `improper-integrals`; `darboux-lhopital-and-taylor` |
+
+Eight external B pages also consume Real Analysis A pages directly.  Their
+owners must move these requirements to their own A companions:
+
+* Foundations `cardinal-arithmetic-and-cofinality-examples`:
+  `cantor-set-baire-and-measure-zero`.
+* Topology `subspaces-products-and-quotients-examples`:
+  `cantor-set-baire-and-measure-zero`, `limits-of-real-functions`;
+  `connectedness-examples`: `rn-as-a-normed-space`; `compactness-examples`:
+  `cantor-set-baire-and-measure-zero`; `the-fundamental-group-examples`:
+  `the-total-derivative`.
+* Measure Theory `product-measures-and-the-fubini-tonelli-theorems-examples`:
+  `further-trigonometric-identities-and-inverses`.
+* Complex Analysis `isolated-singularities-and-laurent-series-examples`:
+  `the-complex-exponential-and-eulers-formula`,
+  `sine-cosine-and-the-definition-of-pi`; and
+  `harmonic-functions-and-the-poisson-integral-examples`:
+  `the-complex-exponential-and-eulers-formula`.
+
+### 9.4 Published B-item suppliers: exact repair ledger
+
+There are 57 published Real Analysis B-homed supplier items, with 81 direct
+same-B consumer edges and 80 distinct published items in their within-page
+transitive closure.  Every edge below must be removed in Phase 3: rewrite the
+consumer self-contained from its companion A facts and local computation.
+Notation `D=C` means the direct and complete transitive sets are identical;
+otherwise both are displayed.  The page heading is the home of every item in
+that group.
+
+* `absolute-convergence-and-rearrangement-examples`:
+  `ex-alternating-harmonic-series` D=C
+  `{ex-abel-test-applied, ex-alternating-harmonic-rearranged-to-three-halves,
+  ex-riemann-rearrangement-to-a-prescribed-sum}`.
+* `bounded-variation-and-riemann-stieltjes-examples`:
+  `ex-step-integrator-evaluates-at-the-jump` D=C
+  `{ex-finite-step-integrator-weighted-jump-sum,
+  ex-unbounded-integrand-stieltjes-integrable}`.
+* `cantor-set-baire-and-measure-zero-examples`: `ex-cantor-set-in-ternary`
+  D=C `{cex-cantor-point-that-is-not-an-endpoint,
+  ex-cantor-function-values}`.
+* `constant-rank-submersions-and-regular-level-sets-examples`:
+  `ex-sphere-as-a-regular-level-set` D=C
+  `{ex-lagrange-multipliers-on-the-sphere}`;
+  `ex-graph-as-a-regular-level-set` D=C
+  `{cex-critical-value-can-have-a-smooth-level-set,
+  fs-a-critical-value-has-a-singular-level-set}`;
+  `ex-x-xy-has-nonconstant-rank-on-every-neighborhood-of-origin` D=C
+  `{fs-continuity-of-the-derivative-implies-constant-rank}`.
+* `continuity-ivt-evt-and-uniform-continuity-examples`:
+  `cex-dirichlet-is-nowhere-continuous` D=C
+  `{ex-x-times-dirichlet-is-continuous-exactly-at-zero}`;
+  `cex-one-over-x-is-not-uniformly-continuous-on-the-unit-interval` has
+  D `{cex-x-squared-is-not-uniformly-continuous-on-r}` and
+  C `{cex-x-squared-is-not-uniformly-continuous-on-r,
+  cex-product-of-uniformly-continuous-functions-need-not-be-uniformly-continuous}`;
+  `cex-x-squared-is-not-uniformly-continuous-on-r` D=C
+  `{cex-product-of-uniformly-continuous-functions-need-not-be-uniformly-continuous}`.
+* `convex-and-semicontinuous-functions-on-rn-examples`:
+  `ex-euclidean-norm-and-squared-norm-are-convex` D=C
+  `{fs-a-convex-function-is-differentiable}`;
+  `cex-convex-function-on-closed-convex-set-discontinuous-at-the-boundary`
+  D=C `{fs-a-convex-function-on-a-convex-set-is-continuous}`;
+  `ex-characteristic-functions-of-open-and-closed-sets-are-semicontinuous`
+  D=C `{fs-semicontinuity-implies-continuity-on-a-compact-set}`;
+  `cex-positive-semidefinite-hessian-without-strict-convexity` D=C
+  `{fs-a-positive-semidefinite-hessian-gives-strict-convexity}`;
+  `cex-strictly-convex-function-with-a-singular-hessian` D=C
+  `{fs-strict-convexity-gives-a-positive-definite-hessian}`.
+* `darboux-lhopital-and-taylor-examples`:
+  `ex-piecewise-polynomial-periodic-oscillator` D=C
+  `{cex-lhopital-converse, ex-differentiable-function-with-discontinuous-derivative,
+  ex-positive-derivative-at-zero-with-no-local-monotonicity}`.
+* `equivalent-forms-of-completeness-examples`:
+  `ex-rational-function-field-order` D=C
+  `{cex-q-not-dense-in-an-ordered-field}`;
+  `cex-evt-and-ivt-fail-over-a-non-complete-field` D=C
+  `{cex-rolle-fails-over-a-non-complete-field}`.
+* `improper-integrals-examples`: `ex-one-over-square-root-improper-integral`
+  D=C `{ex-rational-p-integrals-at-both-endpoints}`.
+* `limits-of-real-functions-examples`: `ex-distance-to-the-integers` D=C
+  `{cex-psi-of-one-over-x-has-no-limit-at-zero,
+  ex-x-times-psi-tends-to-zero,
+  rem-classical-oscillator-is-sine-of-one-over-x}`;
+  `cex-limit-differs-from-the-value` D=C
+  `{cex-composition-of-limits-fails}`;
+  `cex-dirichlet-has-no-limit-anywhere` D=C
+  `{ex-x-times-dirichlet-has-a-limit-only-at-zero}`.
+* `monotone-functions-and-discontinuities-examples`:
+  `ex-hamel-basis-additive-function` D=C
+  `{ex-bounded-with-no-local-extremum-and-nowhere-semicontinuous}`.
+* `picard-lindelof-and-first-order-odes-examples`:
+  `ex-quadratic-ode-finite-time-blowup` D=C
+  `{fs-a-local-ode-solution-exists-on-the-whole-domain-of-the-vector-field}`;
+  `cex-continuous-ode-with-nonunique-delayed-solutions` D=C
+  `{fs-continuity-of-the-right-hand-side-guarantees-unique-ode-solutions}`;
+  `cex-uniqueness-does-not-require-local-lipschitz-continuity` D=C
+  `{fs-local-lipschitz-continuity-is-necessary-for-ode-uniqueness}`.
+* `properties-of-the-integral-and-the-working-ftc-examples`:
+  `cex-an-integrable-function-with-no-primitive` D=C
+  `{fs-the-integral-function-is-always-a-primitive}`;
+  `cex-a-function-with-a-primitive-that-is-not-integrable` D=C
+  `{fs-integration-by-parts-needs-no-integrability-hypothesis}`.
+* `regular-surfaces-and-surface-integrals-examples`:
+  `cex-schwarz-lantern-polyhedral-areas-diverge` D=C
+  `{fs-surface-area-is-the-supremum-of-inscribed-polyhedral-areas}`.
+* `rn-as-a-normed-space-examples`:
+  `cex-mean-value-equality-fails-for-a-vector-valued-function` D=C
+  `{cex-the-mean-value-inequality-is-attained}`;
+  `ex-gamma-and-its-complement-computed-for-a-plane-series` D=C
+  `{fs-the-rearrangement-sums-of-a-non-absolutely-convergent-series-fill-the-space}`;
+  `fs-all-norms-on-any-real-vector-space-are-equivalent` D=C
+  `{fs-heine-borel-holds-in-every-normed-space}`.
+* `series-and-nonnegative-tests-examples`: `ex-harmonic-series-diverges`
+  D=C `{cex-comparison-needs-nonnegativity,
+  cex-limit-comparison-l-zero-one-directional,
+  ex-abel-dini-pair-for-the-harmonic-series, ex-telescoping-sum-computed}`.
+* `suprema-and-infima-examples`: `ex-sup-of-open-interval` D=C
+  `{cex-sup-not-attained, ex-sup-of-closed-interval,
+  ex-sup-of-sum-of-sets}`; `cex-unbounded-set-has-no-sup` D=C
+  `{cex-empty-set-has-no-sup}`.
+* `the-derivative-and-mean-value-theorems-examples`:
+  `ex-derivative-of-the-nth-root-by-the-inverse-rule` D=C
+  `{cex-differentiable-with-unbounded-derivative-is-not-lipschitz,
+  ex-mean-value-theorem-bounds-the-square-root-increment}`.
+* `the-divergence-theorem-and-classical-stokes-examples`:
+  `ex-the-closed-unit-box-is-an-elementary-solid-region` D=C
+  `{ex-a-u-shaped-prism-as-a-finite-gluing-of-three-boxes,
+  ex-the-boundary-flux-of-the-gradient-of-a-harmonic-function-vanishes,
+  ex-the-divergence-theorem-on-the-closed-unit-box}`;
+  `ex-the-closed-ball-is-an-elementary-solid-region-with-the-octant-presentation`
+  has D `{ex-flux-of-the-inverse-square-field-through-a-sphere-not-enclosing-the-origin,
+  ex-the-volume-of-a-closed-ball-from-the-outward-flux-of-the-position-field}`
+  and C equal to D plus
+  `fs-a-divergence-free-field-has-zero-outward-flux-through-every-closed-surface`;
+  `ex-flux-of-the-inverse-square-field-through-a-sphere-not-enclosing-the-origin`
+  D=C `{fs-a-divergence-free-field-has-zero-outward-flux-through-every-closed-surface}`;
+  `ex-flux-of-the-inverse-square-field-through-a-sphere-centred-at-the-origin`
+  D=C `{fs-a-divergence-free-field-has-zero-outward-flux-through-every-closed-surface}`;
+  `ex-the-mobius-band-presented-by-two-regular-patches` D=C
+  `{fs-a-finite-patch-presentation-can-always-be-oriented-compatibly}`.
+* `the-exponential-function-examples`: `ex-flat-exponential-function` D=C
+  `{cex-smooth-function-not-equal-to-its-maclaurin-series,
+  ex-smooth-compactly-supported-bump}`.
+* `the-gauge-integral-and-cousins-lemma-examples`:
+  `ex-dirichlet-function-is-henstock-kurzweil-integrable` D=C
+  `{fs-every-henstock-kurzweil-integrable-function-is-a-derivative,
+  fs-henstock-kurzweil-integrable-implies-riemann-integrable}`;
+  `ex-unbounded-derivative-evaluated-by-henstock-kurzweil` D=C
+  `{cex-henstock-kurzweil-integrability-is-not-absolute,
+  fs-every-derivative-is-riemann-integrable,
+  fs-henstock-kurzweil-integrable-functions-are-bounded}`.
+* `the-inverse-function-theorem-completed-examples`:
+  `cex-a-c-one-bijection-of-the-line-that-is-not-a-diffeomorphism` D=C
+  `{fs-a-c-one-bijection-has-a-c-one-inverse,
+  fs-an-open-c-one-map-has-invertible-derivative}`;
+  `cex-zero-derivative-on-a-disconnected-open-set-without-constancy` D=C
+  `{fs-zero-derivative-on-an-open-set-forces-constancy}`.
+* `the-real-gamma-and-beta-functions-examples`:
+  `ex-positive-non-log-convex-solution-of-gamma-functional-equation` D=C
+  `{fs-the-functional-equation-determines-gamma}`.
+* `the-riemann-integral-examples`:
+  `ex-thomae-is-riemann-integrable-with-integral-zero` D=C
+  `{cex-nonnegative-integrable-with-zero-integral-need-not-vanish}`;
+  `cex-dirichlet-is-not-riemann-integrable` D=C
+  `{cex-riemann-sums-along-one-sequence-of-tagged-partitions-do-not-suffice}`.
+* `the-riemann-integral-in-rn-and-jordan-content-examples`:
+  `ex-unit-box-volume-and-integral` D=C
+  `{cex-rational-points-in-unit-square-have-no-jordan-content}`;
+  `cex-compact-set-without-jordan-content` D=C
+  `{cex-bounded-open-set-with-nonnull-boundary,
+  ex-cantor-slab-has-content-zero}`.
+* `trigonometric-and-oscillatory-examples-in-one-variable-examples`:
+  `ex-x-squared-sine-of-one-over-x-squared` D=C
+  `{fs-a-differentiable-function-has-a-continuous-derivative}`;
+  `ex-sine-harmonics-pointwise-bounded-without-uniform-subsequence` D=C
+  `{fs-a-pointwise-bounded-sequence-of-continuous-functions-has-a-uniformly-convergent-subsequence}`;
+  `lem-topologists-sine-curve-is-connected` D=C
+  `{cex-topologists-sine-curve-connected-not-path-connected}`;
+  `ex-sine-period-arc-length-as-a-complete-elliptic-integral` D=C
+  `{rem-sine-period-arc-length-integrand-is-nonelementary}`.
+* `trigonometric-and-oscillatory-examples-in-several-variables-examples`:
+  `cex-circular-curve-defeats-vector-valued-mean-value-equality` D=C
+  `{fs-the-mean-value-equality-holds-for-vector-valued-maps}`.
+* `uniform-convergence-of-functions-examples`:
+  `cex-powers-on-the-unit-interval-converge-pointwise-not-uniformly` D=C
+  `{cex-dini-needs-a-continuous-limit}`.
+* `volumes-of-elementary-solids-and-solids-of-revolution-examples`:
+  `cex-compact-solid-without-jordan-volume` D=C
+  `{fs-every-compact-solid-has-a-volume}`.
+
+After these rewrites, every Real Analysis B item is a dependency leaf.  This
+ledger is distinct from the six-item missing-page ledger in §9.1; the latter
+also records consumers outside the destination B page.
+
+### 9.5 Forward order and load-bearing body links
+
+Twenty-five declared same-page forward edges need Phase-3 treatment.  Move
+nonlogical commentary to Remarks or after its target for the exact seven edges:
+`rem-where-the-archimedean-hypothesis-is-needed ->
+fs-nested-intervals-implies-lub`, the same remark `->
+fs-cauchy-complete-implies-lub`, `rem-classical-oscillator-is-sine-of-one-over-x
+-> ex-distance-to-the-integers`, `rem-sequence-conventions ->
+fs-bounded-implies-convergent`, `rem-strength-order-of-the-nonnegative-tests ->
+fs-universal-comparison-series`, `rem-sup-conventions ->
+fs-every-set-has-sup`, and `rem-r-native-topology-scope ->
+fs-closed-bounded-compact-without-completeness`.
+
+The exact eighteen forward `justified_by` edges are:
+`def-cantor-function -> thm-cantor-function-properties`;
+`def-formal-laurent-series -> lem-laurent-series-ring`, `->
+thm-laurent-series-field`, and `-> thm-laurent-ordered-field`;
+`def-support-and-compactly-supported-riemann-integral-in-rn ->
+lem-compactly-supported-riemann-integral-is-well-defined`;
+`def-function-limit -> lem-function-limit-unique`;
+`def-scalar-and-vector-line-integrals-along-piecewise-c1-paths ->
+lem-line-integrals-are-independent-of-the-piecewise-c1-partition`;
+`def-integer-power -> lem-power-laws`;
+`def-rational-power -> lem-rational-power-well-defined`;
+`def-sine-and-cosine-by-power-series ->
+lem-sine-and-cosine-series-converge-everywhere`;
+`def-infimum -> lem-sup-unique`;
+`def-complex-exponential ->
+lem-complex-exponential-series-converges-everywhere`;
+`def-real-exponential-function-and-e ->
+lem-exponential-series-has-infinite-radius`;
+`def-henstock-kurzweil-integral-on-a-compact-interval ->
+prop-henstock-kurzweil-integral-is-unique`;
+`def-real-gamma-function-by-the-euler-integral ->
+thm-real-gamma-euler-integral-convergence`;
+`def-real-beta-integral -> thm-real-beta-integral-convergence`;
+`def-riemann-integral-over-a-jordan-set ->
+lem-jordan-set-integral-well-defined`; and
+`def-classical-weierstrass-function ->
+thm-classical-weierstrass-series-converges-uniformly`.  Remove a forward
+justification when it is merely commentary.  Where convergence, uniqueness or
+well-definedness is genuinely constitutive, put a raw lemma first, stated
+without the not-yet-defined object, then the definition.  On
+`formal-laurent-series-field`, state and prove the coefficient operations and
+order facts before the final packaging definition, or remove its three
+nonlogical justification edges.  `def-infimum -> lem-sup-unique` is not a valid
+justification: define infimum by reflection from the already-defined supremum,
+then prove uniqueness.
+
+`depcheck --json` reports 93 Real Analysis `cited-not-in-deps` warnings.  The
+following is the exact disposition ledger.
+
+**Add an earlier-A dependency (29):**
+`cex-dirichlet-is-nowhere-continuous -> thm-sequential-criterion-for-continuity`;
+`cex-psi-of-one-over-x-has-no-limit-at-zero -> lem-limit-implies-local-boundedness`;
+`cex-the-one-norm-comes-from-no-inner-product -> rem-rn-conventions-and-scope`;
+`cor-bolzano-weierstrass-in-rn -> rem-compactness-choice-ledger-metric`;
+`cor-countably-many-discontinuities-integrable -> thm-cantor-set-properties`;
+`ex-cauchy-complete-not-complete-field -> fs-nested-intervals-implies-lub`;
+`fs-continuity-implies-uniform-continuity -> thm-heine-cantor-metric`;
+`fs-heine-borel-holds-in-every-normed-space -> thm-all-norms-on-rn-are-equivalent`;
+`lem-cauchy-complete-and-archimedean-imply-mct -> thm-laurent-cauchy-complete`;
+`lem-cauchy-complete-and-archimedean-imply-mct -> lem-laurent-non-archimedean`;
+`lem-real-and-metric-notions-agree -> thm-continuous-image-of-a-compact-space-is-compact`;
+`lem-real-and-metric-notions-agree -> thm-extreme-value-metric`;
+`lem-real-and-metric-notions-agree -> thm-heine-cantor-metric`;
+`lem-real-and-metric-notions-agree -> thm-heine-borel-characterisation-r`;
+`lem-real-and-metric-notions-agree -> thm-compact-iff-sequentially-compact-r`;
+`thm-algebra-of-function-limits -> thm-algebra-of-limits`;
+`thm-arzela-ascoli-for-real-ck -> def-countable-choice`;
+`thm-arzela-ascoli-for-real-ck -> def-dependent-choice`;
+`thm-cantor-function-properties -> def-monotone-sequence`;
+`thm-continuity-preimage-characterisation -> def-isometry-and-metric-embedding`;
+`thm-continuous-image-of-a-compact-set-r -> thm-continuous-image-of-a-compact-space-is-compact`;
+`thm-continuous-inverse -> thm-connected-subsets-of-r-are-intervals`;
+`thm-extreme-value-r -> thm-extreme-value-metric`;
+`thm-heine-cantor-r -> thm-heine-cantor-metric`;
+`thm-monotone-implies-integrable -> thm-monotone-with-prescribed-discontinuity-set`;
+`thm-monotonicity-of-the-integral -> fs-nonnegative-integrable-with-zero-integral-vanishes`;
+`thm-nonnegative-continuous-with-zero-integral-vanishes -> fs-nonnegative-integrable-with-zero-integral-vanishes`;
+`thm-perfect-set-uncountable-r -> def-dependent-choice`;
+`thm-sequential-criterion-for-function-limits -> lem-sequential-characterisation-of-closure-r`.
+For the B-homed consumers in this list, ensure the companion A reaches the
+supplier page.  Separately, remove or inline the one B-consumer/external-A link
+`cex-dirichlet-is-nowhere-continuous ->
+lem-sequential-characterisation-of-closure-r`: the companion A does not require
+`topology-of-r`, and this elementary closure witness needs no new page edge.
+
+**Add a same-page earlier dependency (18):**
+`cor-cauchy-product-absolute -> thm-dirichlet-rearrangement`;
+`cor-cesaro-matrix-is-regular -> thm-cesaro-mean-theorem`;
+`cor-continuous-extension-from-a-dense-subset-r -> cor-boundedness-theorem-r`;
+`cor-no-function-is-continuous-exactly-on-q -> thm-dirichlet-and-thomae-continuity-sets`;
+`cor-stolz-cesaro-zero-over-zero -> thm-stolz-cesaro`;
+`fs-continuity-implies-uniform-continuity -> thm-compactness-is-necessary-for-evt-and-uniform-continuity`;
+`fs-integrability-is-equivalent-to-a-nowhere-dense-discontinuity-set -> thm-lebesgue-criterion`;
+`fs-limit-equals-value -> thm-composition-of-function-limits`;
+`lem-bw-implies-cauchy-complete -> lem-bw-implies-archimedean`;
+`lem-function-limit-preserves-order -> lem-limit-is-local`;
+`lem-mct-implies-archimedean -> lem-cauchy-complete-and-archimedean-imply-mct`;
+`lem-mct-implies-lub -> lem-mct-implies-archimedean`;
+`lem-real-and-metric-notions-agree -> thm-continuous-image-of-a-compact-set-r`;
+`lem-real-and-metric-notions-agree -> thm-extreme-value-r`;
+`thm-algebra-of-function-limits -> thm-sequential-criterion-for-function-limits`;
+`thm-compact-null-is-content-zero -> lem-nondegenerate-interval-is-not-null`;
+`thm-mean-value-inequality -> thm-norm-inequality-for-the-vector-valued-integral`;
+`thm-riemann-series-theorem -> thm-dirichlet-rearrangement`.
+
+**Do not add a forward dependency (40):** move the cited contrast/roadmap to
+Remarks, remove it, or move the actual supplier before the consumer:
+`cor-boundedness-theorem-r -> thm-compactness-is-necessary-for-evt-and-uniform-continuity`;
+`cor-unconditional-iff-absolute-in-r -> rem-rearrangement-in-higher-dimensions`;
+`lem-additive-is-q-linear -> fs-additive-implies-linear`;
+`lem-bw-implies-archimedean -> fs-nested-intervals-implies-lub`;
+`lem-bw-implies-archimedean -> fs-cauchy-complete-implies-lub`;
+`lem-cauchy-complete-and-archimedean-imply-mct -> lem-mct-implies-archimedean`;
+`lem-content-zero-implies-null -> thm-compact-null-is-content-zero`;
+`lem-finite-interval-cover-total-length -> lem-nondegenerate-interval-is-not-null`;
+`lem-finite-interval-cover-total-length -> thm-cantor-set-properties`;
+`lem-finite-interval-cover-total-length -> thm-fat-cantor-set-has-positive-measure`;
+`lem-finite-interval-cover-total-length -> fs-null-implies-content-zero`;
+`lem-function-limit-preserves-order -> fs-function-limit-preserves-strict-inequality`;
+`lem-function-limit-unique -> fs-limit-unique-at-every-point-of-the-domain`;
+`lem-limit-implies-local-boundedness -> fs-limit-exists-implies-bounded-on-the-domain`;
+`lem-mct-implies-archimedean -> rem-where-the-archimedean-hypothesis-is-needed`;
+`lem-nth-term-test -> fs-nth-term-test-converse`;
+`lem-real-and-metric-notions-agree -> thm-heine-cantor-r`;
+`lem-sign-preservation-near-a-limit -> thm-algebra-of-function-limits`;
+`thm-abel-dini -> fs-universal-comparison-series`;
+`thm-algebra-of-function-limits -> rem-heine-criterion-choice-cost`;
+`thm-cesaro-mean-theorem -> fs-cesaro-converse`;
+`thm-completeness-equivalences -> fs-nested-intervals-implies-lub`;
+`thm-completeness-equivalences -> fs-cauchy-complete-implies-lub`;
+`thm-composition-of-function-limits -> fs-naive-composition-of-limits`;
+`thm-continuity-iff-oscillation-zero -> lem-oscillation-superlevel-sets-are-closed`;
+`thm-continuity-iff-oscillation-zero -> thm-discontinuity-set-is-f-sigma`;
+`thm-continuity-preimage-characterisation -> lem-real-and-metric-notions-agree`;
+`thm-continuous-image-of-a-compact-set-r -> lem-real-and-metric-notions-agree`;
+`thm-dirichlet-test -> thm-alternating-series-test`;
+`thm-double-series-fubini -> fs-iterated-double-sums-always-agree`;
+`thm-extreme-value-r -> lem-real-and-metric-notions-agree`;
+`thm-fermat-interior-extremum -> fs-vanishing-derivative-forbids-strict-increase`;
+`thm-grouping-of-series -> fs-grouping-can-be-undone`;
+`thm-infinite-product-criterion -> rem-sums-proved-to-exist-but-not-evaluated`;
+`thm-mean-value-inequality -> cor-vector-valued-ftc-and-lipschitz-bound`;
+`thm-mertens -> cor-cauchy-product-absolute`;
+`thm-mertens -> fs-cauchy-product-of-convergent-series-converges`;
+`thm-monotonicity-of-the-integral -> thm-nonnegative-continuous-with-zero-integral-vanishes`;
+`thm-sequential-criterion-for-function-limits -> rem-heine-criterion-choice-cost`;
+`thm-sequential-criterion-for-function-limits -> cor-sequential-criterion-for-nonexistence`.
+
+**Remove/inline four B targets:**
+`cex-indicator-of-a-fat-cantor-set-is-not-integrable ->
+ex-indicator-of-the-cantor-set-is-integrable-with-integral-zero`;
+`cex-limit-differs-from-the-value -> cex-composition-of-limits-fails`;
+`cex-nested-open-intervals-empty -> ex-nested-intervals-single-point`;
+`thm-intermediate-value -> cex-evt-and-ivt-fail-over-a-non-complete-field`.
+Also remove or move to a non-load-bearing Remarks paragraph the sole later-page
+edge `rem-riemann-stieltjes-conventions-and-scope -> def-real-power`.
+
+### 9.6 Membership and plan drift
+
+The exact 16 duplicate memberships must be removed from the A copy, preserving
+the B home.  Seven are duplicated between `approximation-and-compactness-in-ck`
+and its B:
+`cex-rudin-bounded-spikes-are-not-equicontinuous`,
+`cex-constant-functions-are-equicontinuous-not-pointwise-bounded`,
+`cex-noncompact-domain-breaks-arzela-ascoli`,
+`ex-bernstein-polynomials-of-the-square-function`,
+`ex-distance-functions-form-a-compact-family-in-c01`,
+`cex-even-polynomial-algebra-is-not-dense`, and
+`cex-separating-algebra-without-constants-is-not-dense`.  Nine are duplicated
+between `mixed-partials-taylor-and-extrema` and its B:
+`cex-peano-unequal-mixed-partials`,
+`cex-peano-surface-linewise-minimum-without-an-extremum`,
+`cex-smooth-linewise-minimum-without-an-extremum`,
+`cex-unique-critical-point-is-a-nonglobal-strict-local-minimum`,
+`ex-monkey-saddle`, `cex-zero-hessian-does-not-classify-a-critical-point`,
+`ex-second-order-multivariable-taylor-polynomial-computed`,
+`ex-lagrange-multiplier-on-an-affine-graph`, and
+`cex-lagrange-multiplier-rule-needs-a-regular-constraint`.
+
+Disk-but-not-plan memberships, excluding those duplicate A copies, are:
+`countability-and-uncountability`:
+`lem-nat-order-is-membership`, `lem-pigeonhole`, `cor-interval-uncountable`;
+`power-series-and-real-analytic-functions`:
+`def-taylor-and-maclaurin-series`,
+`thm-taylor-series-representation-by-remainder`;
+`the-exponential-function-examples`:
+`cex-smooth-function-not-equal-to-its-maclaurin-series`;
+`the-logarithm-and-general-powers`:
+`thm-euler-mascheroni-constant-and-harmonic-asymptotic`;
+`sine-cosine-and-the-definition-of-pi`:
+`def-radian-angle-by-unit-circle-arc-length`,
+`thm-analytic-sine-cosine-agree-with-right-triangle-ratios`;
+and `further-trigonometric-identities-and-inverses`:
+`thm-standard-maclaurin-expansions`.  Add these exact memberships to the plan.
+The sole plan-but-not-disk id is the nonexistent
+`ex-conway-base-13-function` on
+`monotone-functions-and-discontinuities-examples`; remove it from the plan and
+do not create it without a full authoritative proof source.
+
+Nineteen page titles differ between plan and disk.  At plan reconciliation copy
+the published titles exactly for:
+`approximation-and-compactness-in-ck` and its B;
+`cantor-set-baire-and-measure-zero` and its B;
+`countability-and-uncountability`; `formal-laurent-series-field`;
+`mixed-partials-taylor-and-extrema` and its B;
+`monotone-sequences-and-cauchy-completeness` and its B;
+`picard-lindelof-and-first-order-odes` and its B;
+`power-series-and-real-analytic-functions-examples`;
+`sine-cosine-and-the-definition-of-pi-examples`;
+`the-logarithm-and-general-powers-examples`;
+`the-total-derivative` and its B; and `topology-of-r` and its B.
+There are also 29 stale plan order values and, among plan-listed published
+items, 185 stale titles, 748 stale `deps` arrays and 17 stale `justified_by`
+arrays (zero kind drifts).  The exact deterministic amendment is to resync each
+corresponding page order and item field from the final Phase-3 published files,
+after applying §§9.1--9.5; copying the pre-repair dependency arrays would
+reintroduce the audited defects.
+
+### 9.7 Cross-category ownership seams
+
+The binding cross-category amendments are:
+
+1. **Foundations / Set Theory.** Apply the DC rehome and typing correction in
+   §9.2.  SET-6 must require `countability-and-uncountability`, not metric
+   compactness.  Move the Foundations B prerequisite listed in §9.3.  The
+   repaired Foundations continuum interface also adds the A item
+   `thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero` before its B,
+   moves `cantor-set-baire-and-measure-zero` to that A's prerequisites, and
+   repoints Topology's `ex-cardinal-functions-of-the-lower-limit-line` away from
+   the B example.  No Real Analysis file is edited for that ownership repair.
+2. **Measure Theory.** The HK/Lebesgue comparison remains MT-19-owned.  Repair
+   `rem-integral-conventions-and-scope` through the two proved MT A suppliers in
+   §9.2 and move the product-measure B prerequisite in §9.3 to its A.  Measure
+   Theory's published DC consumers retain the rehomed stable id.
+3. **Functional Analysis / PDE.** Add
+   `the-divergence-theorem-and-classical-stokes` to the Functional Analysis A
+   page `distributions-test-functions-and-differentiation`; its B item
+   `ex-distributional-laplacian-of-the-newtonian-kernel` uses
+   `cor-greens-second-identity-for-glued-elementary-solid-regions` only through
+   that A.  Existing PDE A seams remain:
+   `partial-differential-equations-and-characteristics` consumes
+   `picard-lindelof-and-first-order-odes`, the quasilinear interface consumes
+   `inverse-and-implicit-function-theorems`, and the harmonic interface consumes
+   `the-divergence-theorem-and-classical-stokes`.  Do not duplicate Euclidean
+   IFT, ODE, or Green identities in FA/PDE.
+4. **Differential Geometry.** Preserve the already-applied ownership split in
+   §5.6: DG-4 consumes RC-1/RC-2, DG-8 consumes RC-10, and DG-14 consumes
+   RC-8/RC-9.  Manifold forms and general Stokes remain DG-owned.
+5. **Topology and Complex Analysis.** Apply every B-to-A move in §9.3.  The
+   topology-owned cardinal-continuum cutover in item 1 is the only new supplier
+   interface; all cited Real Analysis suppliers are existing published A items.
+
+### 9.8 Sources, blockers, and validation contract
+
+No unfamiliar new theorem was introduced by this audit.  The mathematical
+proof inventory remains backed by the full texts and precise section locators
+in §7.  The DC typing and rehome are inherited from the authoritative full-text
+audit in `plan-set-theory-completion-track.md` §§7.2--7.3; its Morillon locator
+is the author PDF *The power of DMC*, p. 6.  No affected claim lacks
+authoritative full text, so there is no source blocker.  The nonexistent Conway
+base-13 plan row remains blocked and is removed rather than guessed.
+
+The Phase-3 acceptance check is exact: all three B files exist; every B page
+requires only its A; every B-homed item has reverse-dependency outdegree zero;
+the 16 duplicate memberships and 93 body-link warnings above are gone; all
+declared and justification edges point strictly backward to published A items;
+`extcheck` finds no Real Analysis consequence of a recorded/not-proved item;
+and `validate-plan`, `depcheck`, `fwdcheck`, `extcheck`, `rendercheck`, and
+`git diff --check` pass in scope.  The workflow remains paused throughout.
+
+### 9.9 Topology reconciliation (2026-09-08)
+
+Topology's published B-page prerequisites move to their A companions exactly
+as recorded in §9.3: the affected existing Real Analysis A suppliers are
+`cantor-set-baire-and-measure-zero`, `limits-of-real-functions`,
+`rn-as-a-normed-space`, and `the-total-derivative`. No Real Analysis item or
+page moves, no new supplier is created, and the seam has zero Phase-2 impact.

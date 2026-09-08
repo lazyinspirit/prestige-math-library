@@ -9525,3 +9525,716 @@ one pair above the planarity page" is superseded by GT-22 + GT-23 + CB-34.
 written. The four wave-1 harvests were committed at `b6678d4f`; the three new
 harvests are being written by subagents into `research/` and are research
 artifacts, not scaffold files.
+
+---
+
+# PART III — Combinatorics published-dependency and future-scaffold audit (2026-09-08)
+
+This part is the current authority for the Combinatorics material in this file.
+It supersedes every earlier statement that calls an already-published CB/GT pair
+new, unauthored, or empty, and it supersedes the old category-theory and
+cross-track interface claims identified below.  It is a repair contract only:
+published pages and items are immutable in this pass, and the exact changes to
+`research/plan-spec.json` are instructions for the later global splice, not
+changes made by this lane.
+
+## III.1 Corpus, checks, and binding rules
+
+The live corpus contains **49 published Combinatorics A/B pairs (98 pages)**,
+**1,468 displayed frontmatter memberships**, and **1,404 distinct referenced
+item ids**.  The canonical A-`items` plus B-`examples` inventory is **1,387
+items**; the other 17 distinct ids are A-page example links, exactly the stale
+memberships removed in §III.2 rather than duplicate homes.  The planned final pair
+`erdos-hajnal-for-the-e-graph-and-bird` / `erdos-hajnal-for-the-e-graph-and-bird-examples`
+at orders 441/442 has no library page and remains unpublished.  Direct inspection
+of the live item graph found:
+
+- no unresolved item dependency, dependency on a draft item, cross-page forward
+  item edge, or same-page forward item edge;
+- no published page requiring a missing or unpublished page;
+- complete page-prerequisite coverage for every cross-page item edge;
+- zero page consumers of every published Combinatorics B page; and
+- zero outside consumers of every item homed only on a Combinatorics B page.
+
+Accordingly every published B page is already a dependency leaf.  These rules
+are binding on all future rows:
+
+1. A B page requires its companion A page and any genuinely necessary earlier
+   A-page background, but no page or item outside it may consume that B page or a
+   B-only item.
+2. A cited fact is a dependency edge.  A `rem-` item with `proved_here: false`
+   may give orientation, but it may not support a proof-bearing item directly or
+   transitively.
+3. Every proof-bearing item must have all mathematical inputs as explicit
+   dependencies, and every supplier page must be strictly earlier in reading
+   order.  Proving a later corollary does not launder an unproved premise.
+4. Published content is read-only here.  Section III.4 records exact deferred
+   edits; none is permission to patch `library/` or `items/` in this pass.
+
+The pair-by-pair disposition is complete:
+
+| order | A/B pair (examples slug omitted) | published A/B items | disposition |
+|---:|---|---:|---|
+| 20 | `finite-counting-and-binomial-coefficients` | 26 / 14 | clear; metadata resynchronisation only |
+| 22 | `inclusion-exclusion-and-the-pigeonhole-principle` | 18 / 10 | clear; remove three stale spec memberships |
+| 191 | `chains-antichains-sperner-and-dilworth` | 30 / 8 | clear; remove two stale spec memberships |
+| 193 | `formal-power-series` | 22 / 9 | clear; metadata resynchronisation only |
+| 194.1 | `combinatorial-classes-and-the-symbolic-method` | 27 / 11 | clear; metadata resynchronisation only |
+| 195 | `linear-recurrences-and-rational-generating-functions` | 32 / 15 | clear; metadata resynchronisation only |
+| 197 | `lattice-paths-and-catalan-numbers` | 58 / 16 | clear; metadata resynchronisation only |
+| 198.1 | `permutation-statistics-inversions-and-eulerian-numbers` | 21 / 8 | clear; metadata resynchronisation only |
+| 199 | `set-partitions-stirling-numbers-and-exponential-generating-functions` | 21 / 13 | clear; metadata resynchronisation only |
+| 201 | `integer-partitions-and-the-twelvefold-way` | 19 / 15 | clear; remove two stale spec memberships |
+| 203 | `incidence-algebras-and-mobius-inversion` | 21 / 8 | clear; remove three stale spec memberships |
+| 205 | `counting-up-to-symmetry-burnside-and-polya` | 17 / 12 | clear; remove three stale spec memberships |
+| 207 | `graphs-walks-and-connectivity` | 33 / 8 | clear; remove four stale spec memberships |
+| 209 | `trees-forests-and-spanning-trees` | 27 / 12 | clear; metadata resynchronisation only |
+| 211 | `eulerian-and-hamiltonian-graphs` | 22 / 9 | clear; metadata resynchronisation only |
+| 213 | `matchings-covers-menger-and-network-flows` | 26 / 6 | clear; metadata resynchronisation only |
+| 215 | `graph-colouring` | 6 / 2 | clear; metadata resynchronisation only |
+| 217 | `ramsey-theory` | 21 / 8 | clear; metadata resynchronisation only |
+| 219 | `extremal-graph-theory` | 20 / 9 | clear; metadata resynchronisation only |
+| 220.2 | `finite-probability-spaces-and-random-variables` | 37 / 11 | clear; metadata resynchronisation only |
+| 221 | `finite-probability-and-the-probabilistic-method` | 28 / 6 | clear; metadata resynchronisation only |
+| 223 | `linear-algebra-methods-in-combinatorics` | 46 / 18 | clear; metadata resynchronisation only |
+| 225 | `block-designs-and-finite-projective-planes` | 24 / 7 | one recorded-source repair, §III.4.2 |
+| 227 | `algebraic-and-spectral-graph-theory` | 24 / 8 | clear; metadata resynchronisation only |
+| 357 | `plane-graphs-euler-and-the-five-colour-theorem` | 36 / 7 | add one missing spec membership and one item dependency, §III.4.1 |
+| 393 | `induced-subgraphs-and-hereditary-graph-classes` | 23 / 12 | clear; metadata resynchronisation only |
+| 395 | `erdos-hajnal-property-and-homogeneous-sets` | 14 / 8 | clear; metadata resynchronisation only |
+| 397 | `modules-substitution-and-prime-graphs` | 36 / 14 | clear; metadata resynchronisation only |
+| 399 | `regular-pairs-and-induced-counting` | 25 / 8 | clear; metadata resynchronisation only |
+| 401 | `sparse-restricted-subgraphs-and-rodl-nikiforov` | 26 / 11 | clear; metadata resynchronisation only |
+| 403 | `classical-and-loglog-erdos-hajnal-bounds` | 5 / 5 | two recorded-source repairs and reordering, §III.4.3 |
+| 405 | `polynomial-rodl-and-viral-equivalence` | 11 / 4 | clear; metadata resynchronisation only |
+| 407 | `blockades-combs-and-pattern-graphs` | 11 / 9 | clear; metadata resynchronisation only |
+| 409 | `pure-pairs-forests-and-path-antipath-classes` | 7 / 2 | clear; remove nine stale spec memberships across A/B |
+| 411 | `bull-free-graphs-and-the-erdos-hajnal-property` | 25 / 6 | three recorded-source repairs; one remains blocked, §III.4.4 |
+| 413 | `cographs-perfect-patterns-and-pure-pairs` | 21 / 5 | clear; metadata resynchronisation only |
+| 415 | `the-five-cycle-and-erdos-hajnal` | 9 / 4 | clear; metadata resynchronisation only |
+| 417 | `star-expansions-and-erdos-hajnal` | 16 / 5 | clear; metadata resynchronisation only |
+| 419 | `iterative-sparsification-and-the-five-vertex-path` | 22 / 4 | clear; metadata resynchronisation only |
+| 421 | `small-graph-erdos-hajnal-consequences` | 13 / 6 | transitively blocked by the strong-perfect input, §III.4.4 |
+| 423 | `iterative-restriction-and-comb-extraction-lemmas` | 5 / 4 | clear; metadata resynchronisation only |
+| 425 | `leaf-reducibility-and-wonderful-families` | 7 / 2 | transitively blocked by the strong-perfect input, §III.4.4 |
+| 427 | `generalized-niceness-and-reduction-outcomes` | 10 / 3 | clear; metadata resynchronisation only |
+| 429 | `from-generalized-niceness-to-erdos-hajnal` | 3 / 3 | clear; metadata resynchronisation only |
+| 431 | `property-star-and-comb-outcomes` | 8 / 4 | clear; metadata resynchronisation only |
+| 433 | `the-structural-criterion-for-property-star` | 10 / 4 | clear; metadata resynchronisation only |
+| 435 | `quotient-blockades-and-mixing-relations` | 7 / 4 | clear; metadata resynchronisation only |
+| 437 | `co-e-free-comb-structure` | 14 / 3 | clear; metadata resynchronisation only |
+| 439 | `co-bird-free-comb-structure` | 13 / 4 | clear; metadata resynchronisation only |
+
+“Clear” means that this audit found no dependency-interface or recorded-source
+defect, not that later exposition review is forbidden.
+
+## III.2 Exact `plan-spec.json` reconciliation owed by the global splice
+
+The spec has drifted from published frontmatter.  For all 98 published
+Combinatorics pages, copy each canonical live item title and `deps` array into
+the corresponding spec entry without changing the live item: this is an exact,
+deterministic resynchronisation of **121 item titles** and **344 dependency
+arrays**; there are **zero kind mismatches**.
+
+Make these nine exact page-membership repairs:
+
+1. `chains-antichains-sperner-and-dilworth`: remove
+   `fs-maximal-antichain-need-not-be-maximum` and
+   `fs-erdos-ko-rado-without-the-ground-set-bound`.
+2. `counting-up-to-symmetry-burnside-and-polya`: remove
+   `fs-distinct-groups-have-distinct-cycle-indices`,
+   `fs-cycle-index-determines-the-abstract-group`, and
+   `fs-pattern-inventory-specialises-to-the-plain-count-under-every-weight-assignment`.
+3. `graphs-walks-and-connectivity`: remove
+   `fs-degree-sequence-determines-a-simple-graph`,
+   `fs-all-even-degrees-force-one-cycle`,
+   `fs-vertex-and-edge-connectivity-always-agree`, and
+   `fs-a-shortest-walk-need-not-be-a-path`.
+4. `incidence-algebras-and-mobius-inversion`: remove
+   `fs-every-poset-has-an-incidence-algebra`,
+   `fs-mobius-depends-only-on-interval-cardinality`, and
+   `fs-classical-mobius-inversion-is-unrelated-to-inclusion-exclusion`.
+5. `inclusion-exclusion-and-the-pigeonhole-principle`: remove
+   `fs-inclusion-and-exclusion-for-three-sets-without-the-triple-term`,
+   `fs-a-bonferroni-truncation-is-exact`, and
+   `fs-the-erdos-szekeres-bound-can-be-lowered`.
+6. `integer-partitions-and-the-twelvefold-way`: remove
+   `fs-partitions-into-k-parts-are-counted-by-binomial-coefficients` and
+   `fs-conjugation-by-itself-carries-distinct-partitions-to-odd-partitions`.
+7. `plane-graphs-euler-and-the-five-colour-theorem`: add
+   `lem-plane-triangulation-is-connected` in its live position.
+8. `pure-pairs-forests-and-path-antipath-classes`: remove
+   `thm-erdos-hajnal-pach-pure-pair-theorem`,
+   `thm-forest-free-graphs-have-a-linear-anticomplete-pair-or-a-high-degree-vertex`,
+   `thm-forest-and-complement-free-graphs-have-the-strong-erdos-hajnal-property`,
+   `cor-forest-and-complement-free-graphs-have-the-erdos-hajnal-property`,
+   `thm-leaf-deletion-preserves-virality-of-a-finite-family`,
+   `thm-leaf-and-coleaf-deletion-preserves-virality-of-a-finite-family`, and
+   `cor-leaf-and-coleaf-deletion-preserves-the-erdos-hajnal-property`.
+9. `pure-pairs-forests-and-path-antipath-classes-examples`: remove
+   `ex-the-forest-theorem-specialized-to-the-four-vertex-path` and
+   `ex-the-leaf-coleaf-corollary-recovers-the-five-vertex-path-case-from-the-four-vertex-path-case`.
+
+Synchronise these **21 page titles** exactly to the live files (the value after
+the colon is the canonical title):
+
+- `bull-free-graphs-and-the-erdos-hajnal-property`: “Bull-Free Graphs and the
+  Erdős-Hajnal Property”; its examples page uses the same hyphenation plus
+  “— Examples”.
+- `cographs-perfect-patterns-and-pure-pairs-examples`: “Cographs, Perfect
+  Patterns and Pure Pairs - Examples”.
+- `combinatorial-classes-and-the-symbolic-method-examples`: “Combinatorial
+  Classes and the Symbolic Method: Examples and Counterexamples”.
+- `eulerian-and-hamiltonian-graphs`: “Eulerian and Hamiltonian Graphs”; its
+  examples page is “Eulerian and Hamiltonian Graphs: Examples and
+  Counterexamples”.
+- `extremal-graph-theory-examples`: “Extremal Graph Theory: Examples and False
+  Statements”.
+- `finite-counting-and-binomial-coefficients-examples`: “Finite Counting,
+  Factorials and Binomial Coefficients: Examples and Counterexamples”.
+- `formal-power-series-examples`: “Formal Power
+  Series: Examples and Counterexamples”.
+- `from-generalized-niceness-to-erdos-hajnal`: “From Generalized Niceness to
+  Erdős-Hajnal”; its examples page is “From Generalized Niceness to
+  Erdős-Hajnal — Examples”.
+- `generalized-niceness-and-reduction-outcomes-examples`: “Generalized Niceness
+  and Reduction Outcomes -- Examples”.
+- `inclusion-exclusion-and-the-pigeonhole-principle-examples`:
+  “Inclusion–Exclusion, the Pigeonhole Principle and Double Counting: Examples
+  and Counterexamples”.
+- `linear-recurrences-and-rational-generating-functions-examples`: “Examples:
+  Linear Recurrences and Rational Generating Functions”.
+- `permutation-statistics-inversions-and-eulerian-numbers-examples`:
+  “Permutation Statistics, Inversions and Eulerian Numbers: Examples and
+  Counterexamples”.
+- `small-graph-erdos-hajnal-consequences`: “Small-Graph Erdős-Hajnal
+  Consequences”; its examples page uses the same hyphenation plus “— Examples”.
+- `star-expansions-and-erdos-hajnal`: “Star Expansions and the Erdős-Hajnal
+  Property”; its examples page uses the same hyphenation plus “— Examples”.
+- `the-five-cycle-and-erdos-hajnal`: “The Five-Cycle and the Erdős-Hajnal
+  Property”; its examples page uses the same hyphenation plus “— Examples”.
+
+The grouped lines above name 21 page records: two bull, one cograph, one symbolic
+method, two Eulerian/Hamiltonian, and one each through permutation statistics,
+then two each for small-graph, star-expansion, and five-cycle.
+
+Finally insert the finite-character interface pair of §III.6 at 222.1/222.2 and
+the quantitative pair of §III.5 at 408.1/408.2, and move the
+published `classical-and-loglog-erdos-hajnal-bounds` A/B rows from 403/404 to
+408.3/408.4.  Nothing at 405--408 consumes those pages, so this creates no
+forward edge.  For rows 441/442, keep both item arrays empty and add no new
+field to the spec schema.  Their **blocked** state is a scaffold/build-frontier
+disposition, not a proposed `plan-spec.json` status value, until §III.4.4 is
+discharged.
+
+## III.3 Published B-page leaf audit
+
+All 49 published Combinatorics B pages have **zero direct page consumers and
+zero transitive page consumers**.  All items homed only on those B pages have
+**zero outside direct item consumers and zero outside transitive item
+consumers**.  No page-level cutover like the Category Theory repair is required.
+Future B rows named in §§III.5--III.7 inherit the same rule and may never be
+placed in an A-page `requires` list.
+
+## III.4 Exact deferred published-content repairs
+
+The recorded-source defects begin at exactly six published `rem-` suppliers:
+
+| recorded supplier | direct published consumer(s) |
+|---|---|
+| `rem-skolem-construction-produces-a-steiner-triple-system` | `thm-steiner-triple-systems-exist-exactly-when-v-congruent-one-or-three-mod-six` |
+| `rem-fox-sudakov-quantitative-density-theorem` | `ex-choosing-x-for-the-classical-erdos-hajnal-bound`; `thm-classical-erdos-hajnal-bound` |
+| `rem-loglog-quantitative-density-theorem` | `ex-choosing-x-for-the-loglog-erdos-hajnal-bound`; `thm-loglog-erdos-hajnal-bound` |
+| `rem-weak-perfect-graph-theorem-for-the-bull-route` | `thm-basic-bull-free-graphs-are-two-narrow` |
+| `rem-strong-perfect-graph-theorem-for-the-bull-route` | `thm-neighbourhood-or-antineighbourhood-of-a-vertex-in-a-basic-bull-free-graph-is-perfect` |
+| `rem-substituting-perfect-graphs-preserves-perfection-for-the-bull-route` | `thm-alpha-narrowness-is-preserved-under-substitution` |
+
+Their complete published closures are given in §§III.4.2--III.4.4.  These six
+sources account for all 19 Combinatorics consequences reported by `extcheck`;
+the plane-dual defect is separate because its supplier is proved locally.
+
+### III.4.1 Plane dual dependency
+
+`thm-plane-dual-exists-and-double-dual-recovers-primal` uses
+`def-plane-graph-face-and-boundary` in its statement and proof but omits it from
+`deps`.  When the published-content gate is lifted, add exactly that dependency
+to the item and to its spec entry.  No prose or proof change is needed.  This
+existing definition is the repaired supplier.  Its complete direct published
+consumer set after the repair is:
+
+`cex-a-wild-arc-drawing-is-not-a-plane-graph`;
+`cor-planar-graphs-have-no-kuratowski-subdivision`;
+`def-maximal-plane-and-maximally-planar-graph`;
+`def-plane-dual-multigraph`;
+`lem-alternating-kempe-paths-cannot-both-occur`;
+`lem-face-containment-under-plane-subgraphs`;
+`lem-plane-edge-face-incidence`;
+`lem-plane-graph-faces-are-finite-with-one-unbounded-face`;
+`lem-plane-triangulation-is-connected`;
+`prop-maximal-plane-triangulation-characterisation`;
+`thm-euler-formula-for-connected-plane-graphs`; and
+`thm-plane-dual-exists-and-double-dual-recovers-primal`.
+
+Its complete transitive published consumer closure is:
+
+`cex-a-wild-arc-drawing-is-not-a-plane-graph`;
+`cex-k-four-is-planar-but-not-three-colourable`;
+`cex-k-three-three-satisfies-the-planar-edge-bound`;
+`cor-euler-formula-for-disconnected-plane-graphs`;
+`cor-k-five-and-k-three-three-are-nonplanar`;
+`cor-planar-graph-has-low-degree-vertex`;
+`cor-planar-graphs-have-no-kuratowski-subdivision`;
+`cor-planar-simple-graph-edge-bound`;
+`cor-triangle-free-planar-edge-bound`;
+`def-maximal-plane-and-maximally-planar-graph`;
+`def-plane-dual-multigraph`;
+`ex-euler-formula-on-a-tree-cycle-and-k-four`;
+`ex-five-colouring-by-a-kempe-swap`;
+`ex-one-planar-graph-two-nonisomorphic-duals`;
+`ex-petersen-graph-nonplanar-by-kuratowski`;
+`lem-alternating-kempe-paths-cannot-both-occur`;
+`lem-edge-maximal-kuratowski-free-is-three-connected`;
+`lem-equal-plane-face-boundaries-force-a-cycle`;
+`lem-face-containment-under-plane-subgraphs`;
+`lem-plane-edge-face-incidence`;
+`lem-plane-face-handshake-by-girth`;
+`lem-plane-graph-faces-are-finite-with-one-unbounded-face`;
+`lem-plane-triangulation-is-connected`;
+`lem-three-connected-kuratowski-free-is-planar`;
+`prop-face-boundaries-in-three-connected-plane-graphs`;
+`prop-face-boundaries-in-two-connected-plane-graphs`;
+`prop-maximal-plane-triangulation-characterisation`;
+`prop-maximally-planar-edge-characterisation`;
+`prop-plane-forest-has-one-face`;
+`thm-euler-formula-for-connected-plane-graphs`;
+`thm-five-colour-theorem`;
+`thm-kuratowski-wagner-planarity-characterisation`;
+`thm-plane-dual-exists-and-double-dual-recovers-primal`; and
+`thm-six-colour-theorem-for-planar-graphs`.
+
+### III.4.2 Skolem construction
+
+The old §29.3 blocker is resolved.  Meszka's full 22-page design-theory lecture
+notes give the complete Skolem construction on printed pp. 9--10, including all
+blocks.  Before the published existence theorem on
+`block-designs-and-finite-projective-planes`, insert, in this order:
+
+1. `def-half-idempotent-commutative-quasigroup`;
+2. `lem-cyclic-even-set-carries-a-half-idempotent-commutative-quasigroup`;
+3. `thm-skolem-construction-produces-a-steiner-triple-system`.
+
+For $v=6k+1$, take $Q=\{0,\ldots,2k-1\}$, a half-idempotent commutative
+quasigroup, and $V=(Q\times\{1,2,3\})\cup\{\infty\}$.  The proof must check
+pair coverage for the vertical blocks
+`{(i,1),(i,2),(i,3)}` for $0\le i<k$, the three infinity blocks
+`{∞,(k+i,1),(i,2)}`, `{∞,(k+i,2),(i,3)}`,
+`{∞,(k+i,3),(i,1)}`, and, for $i<j$, the three cyclic layer blocks
+`{(i,1),(j,1),(i∘j,2)}` and its $1\to2\to3\to1$ rotations.  Replace the
+dependency of
+`thm-steiner-triple-systems-exist-exactly-when-v-congruent-one-or-three-mod-six`
+on `rem-skolem-construction-produces-a-steiner-triple-system` by the new theorem.
+The old remark may remain only as non-load-bearing history.
+
+The quasigroup-existence lemma is elementary and must be proved, not imported:
+start with the addition table of $\mathbb Z/(2k)$.  Its diagonal entries are
+$2i$, so each even residue occurs exactly twice, at $i$ and $i+k$.  Relabel the
+even output $2r$ by $r$ for $0\le r<k$, and relabel the odd outputs bijectively
+by $k,\ldots,2k-1$.  Output relabelling preserves the Latin and commutative
+properties and gives diagonal entries $r$ at both $r$ and $r+k$.  Thus every
+input used by the Skolem verification is local and proved.
+
+For the three new supplier items, the currently published consumer ledger is:
+
+| supplier | direct published consumers | full transitive published consumer closure |
+|---|---|---|
+| `def-half-idempotent-commutative-quasigroup` | zero (its immediate consumers are new repair items) | `thm-steiner-triple-systems-exist-exactly-when-v-congruent-one-or-three-mod-six` |
+| `lem-cyclic-even-set-carries-a-half-idempotent-commutative-quasigroup` | zero (its immediate consumer is a new repair item) | `thm-steiner-triple-systems-exist-exactly-when-v-congruent-one-or-three-mod-six` |
+| `thm-skolem-construction-produces-a-steiner-triple-system` | `thm-steiner-triple-systems-exist-exactly-when-v-congruent-one-or-three-mod-six` | same singleton |
+
+Sources checked as complete texts: A. Meszka, *Combinatorial Designs* lecture
+notes, pp. 4 and 9--10,
+`https://home.agh.edu.pl/~meszka/cd_lecturenotes.pdf` (full
+22-page text); R. Gardner, *Design Theory*, §1.3, the full six-page Skolem
+section,
+`https://faculty.etsu.edu/gardnerr/Design-Theory/notes-Design-Theory-LR2/Design-Theory-LR2-1-3.pdf`.
+
+### III.4.3 Quantitative induced density
+
+The two published remarks
+`rem-fox-sudakov-quantitative-density-theorem` and
+`rem-loglog-quantitative-density-theorem` currently support proof-bearing
+results.  Author the full proof chain in §III.5, then replace dependencies as
+follows:
+
+- `thm-classical-erdos-hajnal-bound`: replace the Fox--Sudakov remark with
+  `cor-fox-sudakov-quantitative-induced-density-bound`;
+- `ex-choosing-x-for-the-classical-erdos-hajnal-bound`: make the same
+  replacement;
+- `thm-loglog-erdos-hajnal-bound`: replace the log-log remark with
+  `thm-loglog-quantitative-induced-density-bound`;
+- `ex-choosing-x-for-the-loglog-erdos-hajnal-bound`: make the same replacement.
+
+The old remarks then remain orientation only.  Current published consumers are:
+
+| repaired supplier | direct published consumers | full transitive published consumer closure |
+|---|---|---|
+| `cor-fox-sudakov-quantitative-induced-density-bound` | `ex-choosing-x-for-the-classical-erdos-hajnal-bound`; `thm-classical-erdos-hajnal-bound` | `cor-the-loglog-bound-eventually-dominates-the-classical-bound`; `ex-choosing-x-for-the-classical-erdos-hajnal-bound`; `ex-p-three-free-graphs-have-much-larger-homogeneous-sets`; `thm-classical-erdos-hajnal-bound` |
+| `thm-loglog-quantitative-induced-density-bound` | `ex-choosing-x-for-the-loglog-erdos-hajnal-bound`; `thm-loglog-erdos-hajnal-bound` | `cor-the-loglog-bound-eventually-dominates-the-classical-bound`; `ex-choosing-x-for-the-loglog-erdos-hajnal-bound`; `ex-p-three-free-graphs-have-much-larger-homogeneous-sets`; `thm-loglog-erdos-hajnal-bound` |
+
+### III.4.4 Perfect-graph inputs on the bull route
+
+Two bounded repairs can be made on the published bull A page, strictly before
+their present consumers:
+
+- insert `thm-weak-perfect-graph-theorem`, proved by the bounded Lovász
+  argument already researched for GT-13, and replace the dependency of
+  `thm-basic-bull-free-graphs-are-two-narrow` on
+  `rem-weak-perfect-graph-theorem-for-the-bull-route`;
+- insert `thm-substitution-preserves-perfect-graphs`, proved by the standard
+  colouring/clique-number argument, and replace the dependency of
+  `thm-alpha-narrowness-is-preserved-under-substitution` on
+  `rem-substituting-perfect-graphs-preserves-perfection-for-the-bull-route`.
+
+Their exact published consumer ledgers are:
+
+| repaired supplier | direct published consumers | full transitive published consumer closure |
+|---|---|---|
+| `thm-weak-perfect-graph-theorem` | `thm-basic-bull-free-graphs-are-two-narrow` | `cor-bull-free-graphs-have-the-erdos-hajnal-property-with-exponent-one-quarter`; `cor-the-bull-graph-has-the-erdos-hajnal-property`; `cor-the-six-vertex-prime-h-graphs-have-the-erdos-hajnal-property`; `ex-a-six-vertex-witness-graph-makes-the-bird-criterion-explicit`; `ex-the-five-cycle-is-not-one-narrow`; `fs-two-narrow-implies-one-narrow`; `lem-the-e-graph-and-the-bird-graph-are-wonderful`; `thm-basic-bull-free-graphs-are-two-narrow`; `thm-bull-free-graphs-are-two-narrow`; `thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property` |
+| `thm-substitution-preserves-perfect-graphs` | `thm-alpha-narrowness-is-preserved-under-substitution` | `cor-bull-free-graphs-have-the-erdos-hajnal-property-with-exponent-one-quarter`; `cor-the-bull-graph-has-the-erdos-hajnal-property`; `cor-the-six-vertex-prime-h-graphs-have-the-erdos-hajnal-property`; `ex-a-six-vertex-witness-graph-makes-the-bird-criterion-explicit`; `ex-the-five-cycle-is-not-one-narrow`; `fs-two-narrow-implies-one-narrow`; `lem-the-e-graph-and-the-bird-graph-are-wonderful`; `thm-alpha-narrowness-is-preserved-under-substitution`; `thm-bull-free-graphs-are-two-narrow`; `thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property` |
+
+The third input is a genuine hard blocker.  Chudnovsky--Safra's full bull-free
+paper, Theorem 4.3, explicitly invokes the Strong Perfect Graph Theorem; it does
+not supply a bounded replacement.  The full Annals proof of SPGT is 178 pages,
+and GT-13 correctly denies it as a subject-scale theorem.  Therefore
+`thm-neighbourhood-or-antineighbourhood-of-a-vertex-in-a-basic-bull-free-graph-is-perfect`
+cannot be repaired within this scaffold.  The unrepaired supplier
+`rem-strong-perfect-graph-theorem-for-the-bull-route` has the direct published
+consumer
+`thm-neighbourhood-or-antineighbourhood-of-a-vertex-in-a-basic-bull-free-graph-is-perfect`;
+its full transitive published consumer closure is:
+
+`cor-bull-free-graphs-have-the-erdos-hajnal-property-with-exponent-one-quarter`;
+`cor-the-bull-graph-has-the-erdos-hajnal-property`;
+`cor-the-six-vertex-prime-h-graphs-have-the-erdos-hajnal-property`;
+`ex-a-six-vertex-witness-graph-makes-the-bird-criterion-explicit`;
+`ex-the-five-cycle-is-not-one-narrow`;
+`fs-two-narrow-implies-one-narrow`;
+`lem-the-e-graph-and-the-bird-graph-are-wonderful`;
+`thm-basic-bull-free-graphs-are-two-narrow`;
+`thm-bull-free-graphs-are-two-narrow`;
+`thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property`;
+`thm-neighbourhood-or-antineighbourhood-of-a-vertex-in-a-basic-bull-free-graph-is-perfect`.
+
+The unpublished 441/442 E-graph/Bird pair reaches this closure through
+`lem-the-e-graph-and-the-bird-graph-are-wonderful`.  It is frozen: do not author
+or splice it as buildable unless a separate, proved SPGT supplier is undertaken.
+Recording SPGT again does not discharge the blocker.
+
+Sources checked in full: Chudnovsky and Safra, *The Erdős--Hajnal conjecture for
+bull-free graphs*, JCTB 98 (2008), Theorem 4.3; Chudnovsky, Robertson, Seymour,
+and Thomas, *The strong perfect graph theorem*, Annals of Mathematics 164
+(2006), pp. 51--229.
+
+## III.5 New pair QID — quantitative induced density and the log-log step
+
+**Placement:** A at 408.1, B at 408.2, after
+`blockades-combs-and-pattern-graphs-examples`.  The A page requires only the A
+pages `induced-subgraphs-and-hereditary-graph-classes`,
+`regular-pairs-and-induced-counting`,
+`sparse-restricted-subgraphs-and-rodl-nikiforov`,
+`blockades-combs-and-pattern-graphs`,
+`the-logarithm-and-general-powers`, and
+`finite-counting-and-binomial-coefficients`.  The B page requires QID-A only and
+is a dependency leaf.
+
+**A slug:** `quantitative-induced-density-and-the-loglog-step`.
+
+**A items, in dependency order:**
+
+1. `def-induced-copy-density-and-homogeneous-restriction-parameter`;
+2. `def-labelled-blowup-and-good-induced-copy`;
+3. `lem-good-copy-extension-count`;
+4. `lem-few-induced-copies-exclude-a-fixed-labelled-blowup`;
+5. `lem-local-special-copy-trichotomy`;
+6. `lem-special-copy-trichotomy-produces-a-restricted-blockade`;
+7. `def-subreciprocal-function-and-ell-divisibility`;
+8. `lem-subreciprocal-functions-close-under-the-density-recursion`;
+9. `lem-ell-divisibility-amplifies-through-a-blockade`;
+10. `thm-quantitative-density-theorem-for-ell-divisive-graphs`;
+11. `cor-fox-sudakov-quantitative-induced-density-bound`;
+12. `thm-loglog-quantitative-induced-density-bound`.
+
+The mandatory item-dependency spine is $1\to2\to3\to4$, items 1 and 4 into
+5, items 3--5 into 6, $7\to8$, items 6--8 into 9, items 1, 7, and 9 into 10,
+and item 10 into each of 11 and 12.  Item 1 also cites the published
+`def-induced-copy-number` and `def-induced-embedding-and-induced-copy`; item 2
+cites `def-blockade-length-and-width` and
+`def-blockade-rainbow-induced-copy`.  The counting steps cite the published
+finite-counting lemmas they actually invoke, and the restriction step cites the
+published Rödl and induced-counting theorem items, not merely their page names.
+This makes item 10 transitively dependent on every item 1--9.  No QID proof item
+may cite either old quantitative `rem-`.
+
+Items 3--6 reconstruct Sections 3--4 of the source: the local special-copy
+trichotomy, extension count, blowup exclusion, and the restricted-blockade
+induction.  Items 7--10 reconstruct the subreciprocal-function and
+\(\ell\)-divisibility recursion of Section 5.  Items 11--12 are separate because
+they are the exact interfaces consumed by the two published bounds.  Neither may
+be proved by citing the old `rem-` items.
+
+**B slug:** `quantitative-induced-density-and-the-loglog-step-examples`.
+Its items are local numerical checks only:
+
+1. `ex-a-labelled-blowup-and-its-good-copies`;
+2. `ex-checking-the-subreciprocal-condition-for-the-quadratic-log-bound`;
+3. `ex-checking-the-subreciprocal-condition-for-the-loglog-bound`;
+4. `ex-comparing-the-two-quantitative-density-scales`.
+
+Each of QID-A items 1--10 has **zero currently published direct consumers**: its
+immediate consumers are new items on QID-A.  Because item 10 feeds both
+interfaces, the full transitive *published* consumer closure of each of items
+1--10 is exactly
+`cor-the-loglog-bound-eventually-dominates-the-classical-bound`,
+`ex-choosing-x-for-the-classical-erdos-hajnal-bound`,
+`ex-choosing-x-for-the-loglog-erdos-hajnal-bound`,
+`ex-p-three-free-graphs-have-much-larger-homogeneous-sets`,
+`thm-classical-erdos-hajnal-bound`, and
+`thm-loglog-erdos-hajnal-bound`.  The two interface items have the split,
+nonzero ledgers in §III.4.3.  The B items have zero outside direct or transitive
+consumers by construction.
+
+Primary source checked as a complete text: Bucić, Nguyen, Scott, and Seymour,
+*Induced subgraph density. I. A loglog step towards Erdős--Hajnal*, arXiv
+2301.10147v3, especially §§3--5, `https://arxiv.org/html/2301.10147`.
+
+## III.6 Superseded, continued, and reordered future CB work
+
+The following corrections replace the earlier “new pair” descriptions.  Each
+named B page requires only its companion A plus genuinely necessary earlier A
+background and is a leaf.  Unless a nonzero ledger is stated below, every new
+item in these future continuations has **zero currently published direct
+consumers and zero currently published transitive consumers**.
+
+- **Withdraw duplicate cores.** CB-15, CB-16, CB-6, CB-7, CB-8, CB-10, CB-13,
+  CB-12, and substantial parts of CB-14 are now published.  Do not mint a second
+  finite-counting, symbolic-method, recurrence, lattice-path, partition,
+  algebraic/spectral, probabilistic-method, or plane-graph spine.  Retain only
+  genuinely new continuation items after their published A-page prerequisites.
+- **CB-23 becomes** `polynomial-method-chevalley-warning-and-finite-field-kakeya`
+  (and its examples page), containing Chevalley--Warning, Erdős--Ginzburg--Ziv,
+  and Dvir's finite-field Kakeya theorem.  It requires the published
+  `linear-algebra-methods-in-combinatorics` A page and the appropriate published
+  finite-field A page.  The combinatorial Nullstellensatz, polynomial identity
+  lemma, Cauchy--Davenport, Alon--Füredi, multilinearisation, and the nonuniform
+  Frankl--Wilson theorem are already published and must not be duplicated.
+- CB-23's EGZ item is
+  `thm-erdos-ginzburg-ziv-via-chevalley-warning`.  If CB-33 retains its sumset
+  proof, that later item is
+  `thm-erdos-ginzburg-ziv-via-sumset-induction` and explicitly cites the first
+  in an agreement remark; neither page mints a second unqualified canonical id.
+- **Move Alon--Tarsi to GT-12**, on or after the list-colouring definitions.  Its
+  planar bipartite corollary moves to GT-23, after the plane-graph prerequisite.
+  No theorem may cite list colouring before GT-12 defines it.
+- **CB-24 becomes** `uniform-and-modular-intersection-theorems` (and examples):
+  uniform Ray--Chaudhuri--Wilson, modular Frankl--Wilson, and the distance-graph
+  application to Borsuk.  It requires the published linear-algebra methods page
+  and explicit earlier Euclidean and finite-field suppliers.  It must not repeat
+  the published nonuniform theorem.
+- **GT-7a is withdrawn as a duplicate.** Adjacency/Laplacian matrices,
+  Matrix--Tree, Binet--Cauchy, and the basic spectral-gap material already live
+  on `algebraic-and-spectral-graph-theory`.  GT-7b remains a continuation for
+  interlacing, Hoffman's bound, and strongly regular graphs.  The actual item id
+  is `thm-binet-cauchy-formula`; the obsolete promised
+  `thm-cauchy-binet-formula` must never be cited.
+- **GT-19 becomes** `triangle-removal-and-roths-theorem` (and examples), requiring
+  `regular-pairs-and-induced-counting`.  That published page already proves the
+  regularity, counting, removal, and induced-removal lemmas, and
+  `extremal-graph-theory` already proves Erdős--Stone--Simonovits; GT-19 mints
+  neither again.
+- **CB-22 species is source-complete, not blocked.** Use Yorgey's full
+  dissertation, Chapter 3 (206-page text), and the independent full treatment
+  in arXiv:1312.0542 §3.  It requires the published Category Theory A page
+  `categories-functors-and-natural-transformations`, never its examples page.
+  Sources: `https://www.cis.upenn.edu/~sweirich/papers/yorgey-thesis.pdf` and
+  `https://arxiv.org/abs/1312.0542`.
+
+### Additive-character correction and new interface pair
+
+The old §17.3.1 claim that Abstract Algebra would mint
+`def-character-of-a-finite-abelian-group` is false.  The live interface is the
+published A page `characters-and-the-orthogonality-relations`, whose characters
+are characters of complex representations.  Insert a small shared A/B interface
+at 222.1/222.2, before the earliest coding, quasirandomness, or Fourier consumer:
+
+- A `finite-abelian-characters-for-combinatorics` requires the A pages
+  `characters-and-the-orthogonality-relations`, `cyclic-groups-and-direct-products`,
+  `the-complex-exponential-and-eulers-formula`, and
+  `finite-counting-and-binomial-coefficients`.  In order it mints
+  `def-additive-character-of-a-finite-abelian-group`,
+  `lem-additive-characters-are-one-dimensional-complex-representations`, and
+  `lem-additive-character-orthogonality-from-representation-orthogonality`.
+- B `finite-abelian-characters-for-combinatorics-examples` requires only its A
+  companion, writes out the characters of $\mathbb Z/5\mathbb Z$, and is a leaf.
+
+The three A suppliers have **zero currently published direct consumers and zero
+currently published transitive consumers**.  CB-14c, CB-31, and CB-27 are later
+future consumers and must name the exact items they use.  The B items have zero
+outside consumers.  No future Combinatorics page cites the Abstract Algebra B
+page.
+
+At item level the definition cites `def-character-of-a-complex-representation`;
+the representation dictionary cites it and
+`thm-irreducible-representations-of-a-finite-abelian-group-over-a-splitting-field-are-one-dimensional`;
+the orthogonality lemma cites that dictionary and
+`thm-first-orthogonality-relation-for-irreducible-complex-characters`.  All three
+published inputs are strictly earlier than order 222.1.  Thus the local
+terminology bridge is proved rather than hidden in a notation convention.
+
+The repaired Abstract Algebra scaffold's
+`finite-averaging-and-character-theory-prerequisites` pair may be cited only for
+the particular proved lemmas it actually supplies; its existence is not a
+licence to cite the nonexistent old id.  Algebraic Geometry creates no new
+Combinatorics dependency: it owns classical algebraic geometry, while this track
+continues to own the already-published combinatorial Nullstellensatz and finite
+polynomial method.  Thus the cross-track direct and transitive published
+consumer counts introduced by the Algebraic Geometry reconciliation are both
+**zero**.
+
+The old future inventories also use the stale page id
+`cyclic-groups-and-orders`.  In every retained CB `requires` list, replace it
+with the live A-page id `cyclic-groups-and-direct-products`; never substitute
+the examples page.  This is a page-edge correction only and introduces no new
+item.  Apply the same deterministic repairs everywhere in retained §§22--25:
+
+| stale prerequisite id | live A-page id |
+|---|---|
+| `convexity-and-jensen` | `convexity` |
+| `the-axiom-of-choice-and-its-equivalents` | `order-zorn-and-the-axiom-of-choice` |
+| `the-natural-logarithm` | `the-logarithm-and-general-powers` |
+| `vector-spaces-and-linear-independence` | `linear-independence-bases-and-dimension` |
+
+The last page already requires the vector-space spine, so the replacement loses
+no prerequisite.  The old §27.2 build-frontier table is also obsolete:
+`inner-product-spaces-and-orthogonality`,
+`the-spectral-theorem-and-singular-value-decomposition`, and
+`algebraic-extensions-degree-and-finite-fields` are now populated and published,
+and `graph-colouring` has six live A items rather than four.  Retained future
+pairs cite those live A pages and never their B companions.
+
+## III.7 Recorded results that must remain non-load-bearing
+
+The following clauses supersede any earlier item list that derived a theorem or
+corollary from a merely recorded result:
+
+- **GT-15:** the grid theorem and Graph Minor Theorem may remain `rem-`
+  orientation only.  Remove the proposed proof-bearing corollaries that inherit
+  them, and do not restore those corollaries until a separate proved supplier
+  exists.  A full graph-minors proof is a subject-scale blocker.
+- **GT-22:** the Four Colour Theorem remains recorded only.  Any translation or
+  consequence that uses it is also a remark, not a proof-bearing item.
+- **GT-23:** Voigt's example and any conditional Grötzsch statement remain
+  recorded orientation unless a complete source-backed proof is scaffolded.
+  Crossing-lemma and Szemerédi--Trotter items may be proof-bearing only after
+  their full authoritative sources and complete prerequisite proofs are fixed.
+- **GT-24:** Tutte's 4-connected planar Hamiltonicity theorem remains recorded
+  and has no proof-bearing consumer.
+- **GT-17a:** the hard direction of Whitney's 2-isomorphism theorem remains
+  recorded and has no proof-bearing consumer.
+- **GT-20:** recorded automorphism results remain without proof-bearing
+  consumers.
+- The unproved clauses retained in CB-14/CB-24 are historical remarks only and
+  may not support later applications.
+
+Every supplier contemplated solely inside these still-future GT/CB pairs has
+**zero currently published direct consumers and zero currently published
+transitive consumers**.  The sole future pair known to reach a polluted
+published closure is 441/442; it is blocked explicitly in §III.4.4 rather than
+being allowed to inherit the defect.
+
+## III.8 Category Theory ownership and remaining blockers
+
+`research/plan-category-theory-track.md` is the sole authority for all CT/AB/MO
+material.  The CT-4--CT-6, AB-1--AB-3, and MO-1--MO-2 sections earlier in this
+combined file are historical and must not be spliced.  In particular, the old
+sentence saying accessible and locally presentable categories are deliberately
+not denied is reversed: they are denied because accessible category theory is a
+subject-scale theory relying on a hard theorem, not because a regular-cardinal
+definition is missing.  Nothing in Category Theory or Combinatorics depends on
+that denied material.
+
+Resolved old blockers: the Skolem block list (§III.4.2) and species sources
+(§III.6).  Remaining hard blockers are exactly:
+
+1. the Strong Perfect Graph Theorem on the bull route, with the frozen closure
+   and future pair stated in §III.4.4;
+2. any attempt to promote the Graph Minor/Grid, Four Colour, Whitney converse,
+   Tutte 4-connected planar, or other clauses in §III.7 without a complete
+   authoritative proof treatment; and
+3. Grötzsch/crossing/Szemerédi--Trotter until the full-text and proof-chain
+   conditions in §III.7 are satisfied.
+
+No inaccessible source is used to assert a new mathematical result in this
+audit.  Where a complete authoritative text was unavailable, the result was
+left non-load-bearing or blocked rather than guessed.
+
+## III.9 Validation snapshot
+
+The 2026-09-08 read-only validation used the live page and item frontmatter, not
+the stale spec memberships.  `node tools/depcheck.mjs` ended
+“OK — no cycles, all references resolve, no draft items on published pages”; its
+only Combinatorics cited-not-in-deps warning is the plane-dual defect in
+§III.4.1.  `node tools/extcheck.mjs --json` reports exactly **19** published
+Combinatorics consequences of recorded-not-proved material.  They are exhausted
+by the Skolem singleton, the two quantitative-density closures, and the
+perfect-graph/bull closure recorded in §III.4; there is no unclassified
+twentieth item.
+
+A separate traversal of the 98 live Combinatorics pages confirmed zero missing
+page prerequisite, zero cross-page forward item edge, zero same-page forward
+item edge, and the B-leaf facts in §III.3.  Comparing spec metadata with live
+frontmatter produced exactly the 344 dependency-array, 121 item-title, zero
+kind, 21 page-title, and nine page-membership discrepancies enumerated in
+§III.2.  `git diff --check -- research/plan-combinatorics-and-categories.md`
+passes.  This audit changed this scaffold only; the concurrently modified
+global spec and all published/generated files were left untouched.
+
+### Computability Theory reconciliation (2026-09-08)
+
+The published Computability A page `randomized-complexity-and-amplification`
+must directly require the published A page
+`linear-algebra-methods-in-combinatorics`; this supplies its finite-field and
+linear-algebra interface for Schwartz--Zippel and polynomial identity testing.
+The future Computability page `approximation-algorithms-and-gap-reductions`
+directly requires the published Combinatorics A pages
+`graphs-walks-and-connectivity`, `trees-forests-and-spanning-trees`, and
+`eulerian-and-hamiltonian-graphs` for its matching, spanning-tree, and
+Euler-tour arguments.
+
+No current published Combinatorics item consumes a planned Computability item,
+and these reverse planned/published seams create no Combinatorics Phase-2 root.
+
+### Lie Theory reconciliation (2026-09-08)
+
+Published Lie B item `ex-a2-regular-dominant-verma-embedding-poset` must stop
+using Combinatorics item `def-bruhat-order-on-the-symmetric-group`. The new
+Lie-owned Phase-2 pair `finite-weyl-invariants-bruhat-and-kostant-harmonics`
+supplies `def-bruhat-order-on-a-finite-weyl-group`; Phase 3 repoints the Lie
+example and removes the Combinatorics page edge. This is an outgoing existing-
+supplier edge removal, so it creates no planned Combinatorics supplier and no
+Combinatorics Phase-2 root.
+
+### Number Theory reconciliation (2026-09-08)
+
+Future CB-32 `sumset-calculus` is a planned consumer of NT-22 item
+`thm-minkowski-second-theorem-on-successive-minima`; its A page must require
+`minkowski-theory-and-number-field-class-groups` and its full-Freiman theorem
+must cite that exact item. This planned seam leaves NT-22 at zero published
+impact.
+
+For B-leaf discipline, move
+`primes-and-the-fundamental-theorem-of-arithmetic` from
+`chains-antichains-sperner-and-dilworth-examples` to its A companion, and move
+`congruences-and-the-chinese-remainder-theorem` from
+`incidence-algebras-and-mobius-inversion-examples` to its A companion. Each B
+page then requires only its A. These are Phase-3 page-edge repairs using
+published suppliers; no new Combinatorics supplier or Phase-2 root is created.

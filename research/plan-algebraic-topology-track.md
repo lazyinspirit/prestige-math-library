@@ -15,15 +15,20 @@ The whole block is placed immediately after
 
 ## 0. Summary for the orchestrator
 
-**Track `algebraic-topology`, run `subjects-02`. This scaffold is complete.**
-The live plan was re-read from disk: it has 894 page records, 244 with nonempty
-`items` arrays and 650 empty placeholders. The two usable low-homotopy pages are
-actually authored: `homotopy-and-homotopy-equivalence` has 22 items and
-`the-fundamental-group` has 6. The five covering-space/fundamental-group
-continuations named in the seam contract have empty inventories and are treated
-as prior planned suppliers, never as already established content.
+**Track `algebraic-topology`, run `subjects-02`. Dependency-audit repair in
+progress; the pre-audit claim that this scaffold was complete is withdrawn.**
+The repository was re-read on 2026-09-08.  The first five A/B pairs are now
+published (200 listed items in total); all 200 currently have `status:
+published`.  This differs from the dispatch snapshot, which reported 52
+draft-status items on page-status-published AT pages.  The drift is classified
+as a status change, not repaired here.  The remaining thirty original AT pages
+are empty plan placeholders.  The relevant covering-space pages, formerly
+described below as empty, are now published as well.  Published pages and items
+remain strictly read-only: §13 records their future repairs and gates.
 
-The scaffold proposes twenty A/B pairs.  Two anticipated large pages were
+The repaired scaffold proposes twenty-four A/B pairs: the original twenty,
+plus simplicial subdivision/approximation, spectra/stable homotopy, local
+coefficients, and simple homotopy/Whitehead torsion.  Two anticipated large pages were
 split before authoring: generalized cohomology from its complex-$K$/Bott
 prerequisite, and characteristic classes into bundle, Thom, real-class and
 complex-class constructions.
@@ -50,10 +55,14 @@ complex-class constructions.
 | `AT-18` | `leray-hirsch-thom-isomorphism-and-gysin-sequences` | Leray--Hirsch, Thom classes/isomorphism and Gysin maps |
 | `AT-19` | `stiefel-whitney-and-euler-classes-by-universal-constructions` | real projective-bundle and Thom constructions, uniqueness and universal rings |
 | `AT-20` | `chern-and-pontryagin-classes-by-splitting-and-complexification` | complex projective-bundle construction, splitting and real/complex comparison |
+| `AT-21` | `spectra-and-stable-homotopy-groups` | sequential prespectra, sphere spectra, stable groups and multiplicative spectrum data |
+| `AT-22` | `simple-homotopy-whitehead-groups-and-torsion` | elementary expansions, $K_1$, Whitehead groups and torsion |
+| `AT-23` | `local-coefficients-twisted-homology-and-duality` | fundamental groupoids, local systems, twisted cellular chains and twisted duality |
+| `AT-24` | `simplicial-subdivision-and-simplicial-approximation` | barycentric subdivision, mesh, stars, compact support and relative approximation |
 
 Every A page has its same-id `-examples` B companion, and every B page is a
-dependency leaf. The largest A inventory and all verified measurements are
-reported in §12 after being recomputed from this finished file.
+dependency leaf.  §12 withdraws the obsolete pre-audit counts and specifies
+the measurements that must be regenerated after the mandatory decompositions.
 
 ### Full texts and source corpus
 
@@ -63,8 +72,9 @@ The two full core treatments are Allen Hatcher, *Algebraic Topology*, Chapters
 and 18.906 notes, Davis--Kirk, Milnor--Stasheff, and the focused AHSS notes of
 Loizides and Ji provide independent graduate controls. Exact read ranges, URLs
 and the per-pair matrix are in §6; source-heading dispositions are in §7.
-Every one of the 568 proposed item rows now carries an inline source locator
-copied from those read ranges; no item is unattributed.
+Every original proposed item row carries an inline source locator copied from
+those read ranges.  The new supplier rows name their controlling full
+treatments; their per-row locators must be materialized at splice.
 
 ### Seams consumed
 
@@ -112,11 +122,17 @@ The forward-reference ledger is §11. The only genuine cross-track forwards are
 to the concurrent `AV` sheaf/Čech comparison interface and the concurrent `DT`
 Morse-theory statement that a smooth manifold has CW homotopy type. They are
 orientation-only except where the affected later track is itself the consumer.
-No theorem in this AT block uses an unbuilt later page as a proof premise.
+The repaired intended graph has no later-page proof premise.  The published
+comparison rows that currently lack AT-24 are recorded, without mutation, in
+§13.2.
 
-**Blockers: none.** Shell DNS was unavailable, so full PDFs were read through
-the web reader rather than downloaded locally; this did not prevent exact page
-and heading harvests. No permission prompt was raised.
+**Blockers:** AT-6 is gated on the HA-owned PID Kunneth repair pair now recorded
+in `research/plan-homological-algebra-track.md`; AT-9 needs the explicit
+chain-level Steenrod construction in §13; AT-13/14 are gated on AT-23; DT-17 is
+gated on AT-21 and DT-24 on AT-22.  AT-18--20 also need the exact base-category
+and infinite-cover repairs in §13.  A source citation is never treated as a
+dependency.  Full-text sources for the added pairs are identified below; they
+must pass the build-time full-text fetch/backing gate.
 
 ---
 
@@ -183,10 +199,17 @@ of the complex without forcing negative ordinary homology.
 
 ### 3.2 Reduced theories, empty spaces and pairs
 
-Unreduced singular homology has $H_0(\varnothing)=0$. Reduced homology is
-defined by the augmentation in nonnegative degrees, so
-$\widetilde H_n(\varnothing)=0$ under this track's convention; no exceptional
-$\widetilde H_{-1}(\varnothing)$ is used. Relative chains are
+Unreduced singular homology has $H_0(\varnothing)=0$.  The published singular
+theory uses the kernel-of-augmentation complex in nonnegative degrees, so
+$\widetilde H_n^{\rm sing}(\varnothing;G)=0$ in every degree.  The published
+simplicial page instead retains the augmented-complex extension
+$\widetilde H_{-1}^{\rm simp}(\varnothing;G)=G$.  Both are legitimate, but
+they are not the same extension at the empty complex.  Consequently every
+**reduced** simplicial--singular comparison must say either “$n\geq0$ for
+arbitrary $K$” or “all degrees for nonempty $K$.”  The published ordinary
+comparison is unaffected because both ordinary theories vanish in negative
+degrees.  No later argument may silently identify the two empty-object
+conventions. Relative chains are
 $C_*(X,A)=C_*(X)/C_*(A)$ for an actual subspace $A\subseteq X$, including
 $A=\varnothing$ and $A=X$. Quotient well-definedness and the two degenerate
 pairs are explicit obligations.
@@ -305,26 +328,30 @@ Each B page requires only its A companion and is a leaf.
 
 | pair | direct requirements of the A page |
 |---|---|
-| `AT-1` | `subspaces-products-and-quotients`, `free-modules-and-exact-sequences`, `chain-complexes-and-homology` |
-| `AT-2` | `AT-1`, `homotopy-and-homotopy-equivalence`, `chain-homotopy-and-the-homotopy-category` |
-| `AT-3` | `AT-2`, `long-exact-sequences-in-homology`, `compactness-in-metric-spaces` |
+| `AT-1` | `subspaces-products-and-quotients`, `compactness-in-metric-spaces`, `homotopy-and-homotopy-equivalence`, `free-modules-and-exact-sequences`, `chain-complexes-and-homology`, `chain-homotopy-and-the-homotopy-category` |
+| `AT-24` | `AT-1` |
+| `AT-2` | `AT-1`, `homotopy-and-homotopy-equivalence`, `tensor-products-of-modules`, `chain-complexes-and-homology`, `chain-homotopy-and-the-homotopy-category` |
+| `AT-3` | `AT-1`, `AT-2`, `AT-24`, `long-exact-sequences-in-homology`, `compactness-in-metric-spaces`, `the-diagram-lemmas-in-an-abelian-category` |
 | `AT-4` | `AT-1`, `AT-3`, `homotopy-and-homotopy-equivalence` |
 | `AT-5` | `AT-4`, `AT-3` |
-| `AT-6` | `AT-3`, `universal-coefficients-and-kunneth-theorems` |
+| `AT-6` | `AT-2`, `AT-3`, `AT-5`, `universal-coefficients-and-kunneth-theorems`, `kunneth-exactness-and-splittings-over-principal-ideal-domains` |
 | `AT-7` | `AT-6`, `AT-4` |
 | `AT-8` | `AT-3`, `AT-7` |
 | `AT-9` | `AT-7`, `AT-8` |
 | `AT-10` | `AT-4`, `the-fundamental-group`, `homotopy-and-homotopy-equivalence`, `mapping-cones-cylinders-and-chain-triangles` |
-| `AT-11` | `AT-10`, `covering-spaces-and-lifting`, `classification-of-covering-spaces` |
+| `AT-11` | `AT-10`, `covering-spaces-and-lifting`, `classification-of-covering-spaces`, `uniform-spaces`, `partitions-of-unity-and-paracompactness` |
 | `AT-12` | `AT-3`, `AT-4`, `AT-10`, `AT-11` |
-| `AT-13` | `AT-6`, `AT-9`--`AT-12`, `applications-of-the-fundamental-group` |
-| `AT-14` | `AT-6`, `AT-7`, `AT-11`, `spectral-sequences`, `double-complexes-exact-couples-and-convergence` |
+| `AT-21` | `AT-10`, `AT-12`, `subspaces-products-and-quotients`, `limits-and-colimits` |
+| `AT-23` | `AT-6`, `AT-8`, `AT-11`, `AT-12`, `categories-functors-and-natural-transformations`, `the-group-algebra-and-representations` |
+| `AT-13` | `AT-6`, `AT-9`--`AT-12`, `AT-23`, `applications-of-the-fundamental-group` |
+| `AT-14` | `AT-6`, `AT-7`, `AT-11`, `AT-13`, `AT-23`, `spectral-sequences`, `double-complexes-exact-couples-and-convergence` |
 | `AT-15` | `AT-11`, `AT-13`, `partitions-of-unity-and-paracompactness` |
-| `AT-16` | `AT-15`, `AT-7` |
+| `AT-16` | `AT-7`, `AT-15`, `AT-21` |
 | `AT-17` | `AT-4`, `AT-9`, `AT-16`, `spectral-sequences`, `double-complexes-exact-couples-and-convergence` |
 | `AT-18` | `AT-7`, `AT-8`, `AT-14`, `AT-15` |
 | `AT-19` | `AT-9`, `AT-18` |
-| `AT-20` | `AT-15`, `AT-18`, `AT-19` |
+| `AT-20` | `AT-15`, `AT-17`, `AT-18`, `AT-19` |
+| `AT-22` | `AT-4`, `AT-12`, `covering-spaces-and-lifting`, `classification-of-covering-spaces`, `the-fundamental-group`, `rings-subrings-and-integral-domains`, `modules-and-module-homomorphisms`, `free-modules-and-exact-sequences`, `the-group-algebra-and-representations`, `chain-homotopy-and-the-homotopy-category`, `mapping-cones-cylinders-and-chain-triangles` |
 
 The AT labels in this table are relative splice instructions; the future spec
 uses the A-page ids, not these labels.
@@ -421,6 +448,72 @@ cone vertex used by a contraction are supplied.
 **Forward references: NONE.**
 
 ---
+
+## AT-24 — `simplicial-subdivision-and-simplicial-approximation`
+
+**A page:** `simplicial-subdivision-and-simplicial-approximation`
+**B page:** `simplicial-subdivision-and-simplicial-approximation-examples`
+**Placement:** orders `366.0021`/`366.0022`, immediately after AT-1's B page
+**Requires:** `simplicial-complexes-and-simplicial-homology`
+
+This is the earlier supplier omitted by the published comparison and
+simplicial-approximation proofs.  “Barycentric subdivision” here means the
+order-complex construction on nonempty faces, not AT-3's subdivision operator
+on singular chains.  The two constructions agree on characteristic simplices
+only after the comparison item below proves that fact.
+
+### A-page items, in dependency order
+
+1. `def-face-poset-and-order-complex` — define finite chains in a poset and
+   their abstract order complex, including empty and zero-dimensional cases.
+2. `def-barycentric-subdivision-of-an-abstract-simplicial-complex` — vertices
+   are nonempty faces of $K$ and simplices are strict inclusion chains.
+3. `def-canonical-barycentric-realization-map` — send a face-vertex to the
+   barycenter of that face and extend affinely.
+4. `thm-barycentric-subdivision-realizes-homeomorphically` — prove simplex by
+   simplex that the canonical map $|\operatorname{sd}K|\to|K|$ is a
+   homeomorphism, and use the weak topology for arbitrary $K$ rather than a
+   finite-union shortcut.
+5. `def-oriented-simplicial-subdivision-chain-map` — sum the consistently
+   oriented top simplices of each subdivided simplex.
+6. `thm-simplicial-subdivision-is-a-chain-map-and-homology-isomorphism` —
+   cancel interior faces, construct the last-vertex simplicial approximation
+   after a chosen vertex order, and prove the two composites chain homotopic
+   to the identity; record the finite ordering choice.
+7. `lem-mesh-of-iterated-simplicial-barycentric-subdivision-tends-to-zero` —
+   for a finite Euclidean realization, prove the factor $n/(n+1)$ on each
+   positive-dimensional simplex.  This item must not cite the similarly named
+   singular-chain lemma as a definition of $\operatorname{sd}K$.
+8. `def-open-and-closed-stars-in-a-subdivision` — distinguish vertex stars in
+   the subdivided complex from the star/closure/link notation of AT-1.
+9. `lem-the-open-star-criterion-produces-a-simplicial-map` — subordinate
+   vertex-star choices span target simplices, including repeated image
+   vertices.
+10. `thm-relative-simplicial-approximation-after-subdivision` — for finite
+    simplicial pairs, approximate a continuous map by a simplicial map after
+    sufficiently many source subdivisions; preserve a subcomplex on which the
+    map is already simplicial after the compatible subdivision.  Print the
+    homotopy-of-pairs conclusion and the finite Lebesgue-number hypothesis.
+11. `lem-compact-subsets-of-an-arbitrary-simplicial-realization-meet-finitely-many-open-simplices`
+    — prove the weak-topology/closure-finite argument directly, hence compact
+    singular chains lie in a finite subcomplex.  No local-finiteness hypothesis
+    is allowed.
+12. `lem-two-finite-linear-subdivisions-have-a-common-simplicial-refinement`
+    — triangulate intersection cells compatibly in increasing face dimension;
+    this is the choice-independence input for continuous polyhedral maps.
+
+### B page — `simplicial-subdivision-and-simplicial-approximation-examples`
+
+- `ex-barycentric-subdivision-of-an-edge-and-triangle`;
+- `ex-the-subdivision-chain-of-an-oriented-two-simplex`;
+- `ex-a-relative-simplicial-approximation-fixed-on-the-endpoints`;
+- `ex-a-compact-set-in-an-infinite-non-locally-finite-realization-still-meets-finitely-many-cells`;
+- `cex-a-continuous-map-need-not-be-simplicial-before-subdivision`.
+
+Every B item depends only on A-page items and the B page requires only its A
+companion.  Full treatments: Hatcher §2.C, pp. 177--184, together with the
+Appendix CW-topology propositions pp. 519--529; Spanier, *Algebraic Topology*,
+Chapter 3 §§3--4, for subdivision and relative approximation.
 
 ## AT-2. Singular Chains and Singular Homology
 
@@ -1086,6 +1179,161 @@ stable suspension range.
 - May, *A Concise Course in Algebraic Topology*, Chapters 10--11 and 15,
   printed pp. 73--90 and 117--122.
 
+## AT-21 — `spectra-and-stable-homotopy-groups`
+
+**A page:** `spectra-and-stable-homotopy-groups`
+**B page:** `spectra-and-stable-homotopy-groups-examples`
+**Placement:** orders `366.0241`/`366.0242`, immediately after AT-12
+**Requires:** `subspaces-products-and-quotients`,
+`limits-and-colimits`, `higher-homotopy-groups-and-cofiber-sequences`,
+`hurewicz-whitehead-freudenthal-and-cw-approximation`
+
+This accepts DT's ownership request but repairs its interface.  It supplies
+sequential prespectra and stable groups used by stable Pontryagin--Thom; it does
+not pretend that levelwise homotopy is already the stable homotopy category,
+does not assert Brown representability, and does not compute positive stable
+stems.  AT-17's multiplicative AHSS is to be stated for a generalized theory
+equipped with external products; a ring spectrum is one source of such data,
+not a prerequisite for defining every generalized theory.
+
+### A-page items, in dependency order
+
+1. `def-compactly-generated-based-space-and-well-pointed-object` — fix the
+   convenient category used by loops, quotients and function spaces; the
+   basepoint inclusion is a cofibration when “well-pointed” is invoked.
+2. `def-smash-product-of-based-spaces` —
+   $X\wedge Y=X\times Y/(X\vee Y)$ with unit $S^0$.
+3. `prop-smash-product-is-associative-symmetric-and-unital-up-to-the-canonical-homeomorphisms`
+   — print the twist and associator used in spectrum multiplication.
+4. `def-sequential-prespectrum-spectrum-and-adjoint-structure-maps` — a
+   prespectrum has $\sigma_n:\Sigma E_n\to E_{n+1}$; an $\Omega$-spectrum has
+   weak-equivalence adjoints $E_n\to\Omega E_{n+1}$.  Do not call every
+   prespectrum a spectrum without announcing the convention.
+5. `def-suspension-prespectrum-and-sphere-prespectrum` — define
+   $(\Sigma^\infty X)_n=S^n\wedge X$ and $\mathbb S_n=S^n$, including the
+   structure-map identifications.
+6. `def-strict-map-and-structure-compatible-homotopy-of-sequential-prespectra`
+   — maps commute with structure maps; homotopies must do so coherently.
+7. `def-stable-homotopy-groups-of-a-sequential-prespectrum` — for
+   $k\in\mathbb Z$, set
+   $\pi_k(E)=\operatorname*{colim}_{n\gg0}\pi_{k+n}(E_n)$ using the adjoint
+   structure maps and the suspension homomorphism.
+8. `lem-the-stable-homotopy-colimit-is-independent-of-the-chosen-cofinal-tail`
+   — prove the canonical cofinality isomorphism, not just equality of symbols.
+9. `prop-maps-of-prespectra-induce-functorial-maps-on-stable-homotopy-groups`
+   — compatible homotopies induce the same map; define stable weak equivalence.
+10. `def-shift-and-suspension-of-a-sequential-prespectrum` — fix the indexing
+    and structure-map sign so $\pi_k(\Sigma E)\cong\pi_{k-1}(E)$.
+11. `def-stable-stem-of-the-sphere` —
+    $\pi_k^S=\operatorname*{colim}_n\pi_{k+n}(S^n)$, including $k<0$ via a
+    cofinal tail.
+12. `lem-freudenthal-identifies-the-eventual-suspension-system-for-spheres` —
+    print the isomorphism and epimorphism ranges.
+13. `prop-the-sphere-prespectrum-homotopy-groups-are-the-stable-stems` — check
+    the transition maps and the chosen suspension orientation.
+14. `def-pairing-and-unital-multiplication-of-sequential-prespectra` — maps
+    $E_p\wedge F_q\to G_{p+q}$ compatible with both structure maps; a ring
+    prespectrum has associative/unital multiplication, commutativity only when
+    separately imposed.
+15. `prop-a-ring-prespectrum-gives-a-graded-product-on-stable-homotopy-groups`
+    — derive the Koszul interchange sign and unit.
+16. `rem-positive-stable-stems-brown-representability-and-model-categorical-replacement-are-not-proved-here`.
+
+### B page — `spectra-and-stable-homotopy-groups-examples`
+
+- `ex-the-zero-stem-is-the-integers`;
+- `ex-stabilizing-a-map-between-spheres`;
+- `ex-suspension-prespectra-of-spheres-are-shifts`;
+- `cex-an-unstable-homotopy-class-need-not-yet-be-stable`.
+
+Use May, *A Concise Course*, Chapter 25 §§3,6--7, pp. 223--234, and Hatcher,
+*Spectral Sequences in Algebraic Topology*, Chapter 2 §1 “Spectra,” as the two
+full author treatments.  Adams Part III is an advanced control, not the sole
+proof source.  The B page requires only this A page.
+
+## AT-23 — `local-coefficients-twisted-homology-and-duality`
+
+**A page:** `local-coefficients-twisted-homology-and-duality`
+**B page:** `local-coefficients-twisted-homology-and-duality-examples`
+**Placement:** orders `366.0243`/`366.0244`, after AT-21 and before AT-13
+**Requires:** `singular-cohomology-and-coefficient-theorems`,
+`orientations-poincare-lefschetz-and-alexander-duality`,
+`fibrations-fiber-bundles-and-homotopy-exact-sequences`,
+`hurewicz-whitehead-freudenthal-and-cw-approximation`,
+`categories-functors-and-natural-transformations`,
+`the-group-algebra-and-representations`
+
+AT-13 and AT-14 currently use $H^*(X;\mathcal M)$ and
+$H_*(X;\mathcal M)$ without any earlier definition or computation theorem.
+This pair owns that missing interface.  Work componentwise on CW complexes;
+when the universal-cover model is used, fix a basepoint and the handedness
+below.  General arbitrary-space local systems are not smuggled through the CW
+model.
+
+### A-page items, in dependency order
+
+1. `def-fundamental-groupoid-of-a-space` — objects are points and arrows are
+   fixed-endpoint path-homotopy classes, with first-path-first composition
+   translated to categorical order.
+2. `prop-the-vertex-group-of-the-fundamental-groupoid-is-the-published-fundamental-group`
+   — check multiplication, inverse and induced functor conventions literally.
+3. `def-local-system-of-r-modules-and-its-pullback` — a covariant functor
+   $\Pi_1X\to R\text{-Mod}$, with natural transformations as morphisms.
+4. `thm-local-systems-on-a-connected-cw-complex-correspond-to-modules-over-its-group-ring`
+   — after a basepoint and transport choices, identify local systems with left
+   $R[\pi_1X]$-modules; changing choices gives the canonical conjugate
+   equivalence rather than literal equality.
+5. `def-right-group-ring-action-on-the-chains-of-a-universal-cover` — use
+   $c\cdot g=g^{-1}c$ for the published left deck action and record the
+   resulting boundary linearity.
+6. `def-singular-and-cellular-chain-complexes-with-local-coefficients` —
+   $C_*(\widetilde X;R)\otimes_{R[\pi]}M$, and the relative/cellular variants.
+7. `lem-twisted-boundaries-square-to-zero-and-are-independent-of-lift-bases`
+   — include basepoint, lift and orientation changes.
+8. `def-homology-and-cohomology-with-local-coefficients` — homology of item 6
+   and equivariant cochains $\phi$ satisfying
+   $\phi(c\mathbin{\cdot}g)=g^{-1}\phi(c)$, with
+   $\delta\phi=\phi\partial$.  Do not write an ill-typed module-Hom between the
+   right chain module and the left coefficient module.
+9. `prop-local-coefficient-homology-and-cohomology-are-functorial-for-a-map-with-a-coefficient-morphism`
+   — state covariance/contravariance and pullback directions exactly.
+10. `thm-cellular-chains-compute-homology-with-local-coefficients` — identify
+    the incidence entries as signed group elements, not ordinary integer
+    degrees.
+11. `thm-pair-long-exact-sequences-with-local-coefficients` — give both
+    homology and cohomology sequences and natural connectors.
+12. `thm-excision-and-mayer-vietoris-with-local-coefficients` — include the
+    restriction/pullback local systems on every subspace.
+13. `def-compactly-supported-cohomology-with-local-coefficients` — the
+    directed colimit over compact $K$ of $H^*(X,X-K;\mathcal M)$.
+14. `prop-the-manifold-orientation-system-is-a-local-system` — reconcile the
+    AT-8 transport convention with item 3.
+15. `thm-poincare-duality-with-the-orientation-local-system` — for an
+   $n$-manifold, print
+    $H_c^k(M;\mathcal M)\cong
+    H_{n-k}(M;\mathcal O_M\otimes_{\mathbb Z}\mathcal M)$ with diagonal
+    transport and the correct dual/right
+    action convention; recover AT-8's oriented theorem by trivializing
+    $\mathcal O_M$.
+16. `thm-poincare-lefschetz-duality-with-local-coefficients` — give the two
+    absolute/relative forms and the boundary-orientation restriction.
+17. `lem-fiber-transport-homology-and-cohomology-form-the-serre-local-systems`
+    — reconcile AT-11 monodromy with the groupoid definition.
+
+### B page — `local-coefficients-twisted-homology-and-duality-examples`
+
+- `ex-circle-homology-with-a-module-automorphism` — compute kernels and
+  cokernels of $1-T$;
+- `ex-sign-local-system-on-real-projective-space`;
+- `ex-the-orientation-system-of-the-mobius-band`;
+- `ex-twisted-poincare-duality-for-a-closed-nonorientable-surface`;
+- `cex-constant-coefficients-do-not-compute-a-nontrivial-monodromy-system`;
+- `cex-the-untwisted-e-two-page-misses-monodromy-in-a-mapping-torus`.
+
+Use Hatcher §3.H, pp. 327--336, including the published correction to Theorem
+3H.6, and Davis--Kirk Chapter 5 §§1--4 as independent full treatments.  The B
+page requires only its A companion.
+
 ## AT-13 — `obstruction-theory-postnikov-towers-and-classifying-spaces`
 
 **A page:** `obstruction-theory-postnikov-towers-and-classifying-spaces`
@@ -1493,6 +1741,88 @@ $c_1(\gamma^*)$ as positive; consumers must negate the generator or dualise.
 
 ---
 
+## AT-22 — `simple-homotopy-whitehead-groups-and-torsion`
+
+**A page:** `simple-homotopy-whitehead-groups-and-torsion`
+**B page:** `simple-homotopy-whitehead-groups-and-torsion-examples`
+**Placement:** orders `366.0401`/`366.0402`, after AT-20 and before the
+algebraic-geometry page at `366.041`
+**Requires:** `cw-complexes-and-cellular-homology`,
+`hurewicz-whitehead-freudenthal-and-cw-approximation`,
+`covering-spaces-and-lifting`, `classification-of-covering-spaces`,
+`the-fundamental-group`, `rings-subrings-and-integral-domains`,
+`modules-and-module-homomorphisms`, `free-modules-and-exact-sequences`,
+`the-group-algebra-and-representations`,
+`chain-homotopy-and-the-homotopy-category`,
+`mapping-cones-cylinders-and-chain-triangles`
+
+This is AT-owned algebraic simple-homotopy theory.  DT-24 retains handle
+complexes, Whitney realization and the smooth s-cobordism theorem.  The earlier
+DT proposal was too thin: field-valued matrix pages cannot define
+$K_1(\mathbb Z[\pi])$, and “acyclic” cannot replace “contractible” when torsion
+is defined by a chain contraction over a general group ring.
+
+### A-page items, in dependency order
+
+1. `def-elementary-expansion-and-collapse-of-finite-cw-complexes` — attach or
+   remove a cell pair in dimensions $n,n-1$ with a specified free face.
+2. `def-simple-homotopy-equivalence` — a finite composite of elementary
+   expansions/collapses and cellular isomorphisms; componentwise for finite CW
+   complexes.
+3. `def-stable-general-linear-group-and-elementary-subgroup-of-a-ring` — use
+   finite free **right** modules, block stabilization and elementary matrices
+   over an arbitrary unital, possibly noncommutative ring.
+4. `lem-the-stable-elementary-subgroup-is-normal-and-contains-the-commutator-subgroup`
+   — the matrix identities make the quotient abelian.
+5. `def-k-one-of-a-ring-and-the-whitehead-group-of-a-discrete-group` —
+   $K_1(R)=GL(R)/E(R)$ and
+   $\operatorname{Wh}(\pi)=K_1(\mathbb Z[\pi])/
+   \langle[\pm g]:g\in\pi\rangle$.
+6. `def-finite-based-free-chain-complex-and-its-contraction-torsion` — for a
+   finite contractible based complex, use $d+s:C_{\rm odd}\to C_{\rm even}$
+   with the declared parity and additive $K_1$ notation.
+7. `lem-contraction-torsion-is-independent-of-the-contracting-homotopy` —
+   compare two contractions by elementary block matrices.
+8. `lem-basis-change-and-direct-sum-formulas-for-chain-torsion` — print the
+   alternating basis-change signs and the based short-exact-sequence formula.
+9. `lem-elementary-basis-changes-orientations-and-deck-lift-changes-die-in-the-whitehead-group`
+   — distinguish $E(R)$ from the additional trivial units $\pm g$.
+10. `def-based-cellular-chain-complex-of-a-universal-cover` — fix a basepoint,
+    oriented ordered cells and one lift per cell, obtaining finite based free
+    right $\mathbb Z[\pi]$-modules.
+11. `lem-a-lifted-cellular-homotopy-equivalence-has-a-contractible-algebraic-mapping-cone`
+    — lift a cellular homotopy inverse and its homotopies equivariantly.  Mere
+    vanishing of ordinary or group-ring homology is not the premise.
+12. `def-whitehead-torsion-of-a-finite-cw-homotopy-equivalence` — take the
+    mapping-cone torsion after transporting the source group ring along the
+    induced $\pi_1$ isomorphism.
+13. `thm-whitehead-torsion-is-independent-of-cellular-approximation-basepaths-lifts-orientations-orders-and-contraction`
+    — all target groups and change-of-basepoint conjugations must be typed.
+14. `thm-composition-and-sum-formulas-for-whitehead-torsion` — in additive
+    notation print
+    $\tau(gf)=\tau(g)+g_*\tau(f)$ and the based-pair sum formula.
+15. `lem-an-elementary-expansion-has-zero-whitehead-torsion` — its relative
+    universal-cover complex is an elementary two-term complex.
+16. `thm-simple-homotopy-equivalences-have-zero-whitehead-torsion` — use
+    items 14--15 and cellular-isomorphism units.
+17. `lem-zero-torsion-is-realized-by-elementary-expansions-collapses-and-cellular-basis-moves`
+    — realize stabilized elementary matrices geometrically; this is the hard
+    converse and may not be hidden in the final theorem.
+18. `thm-a-finite-cw-homotopy-equivalence-is-simple-if-and-only-if-its-whitehead-torsion-vanishes`.
+
+### B page — `simple-homotopy-whitehead-groups-and-torsion-examples`
+
+- `ex-an-elementary-expansion-has-zero-whitehead-torsion`;
+- `ex-the-whitehead-group-of-the-trivial-group-is-zero`;
+- `ex-torsion-of-a-two-term-based-contractible-complex`;
+- `cex-ordinary-acyclicity-forgets-basis-and-group-ring-torsion`.
+
+Use Cohen, *A Course in Simple-Homotopy Theory*, Chapters 1--7, and Lück,
+*A Basic Introduction to Surgery Theory*, Chapter 2 §§2.1--2.3.  The B page
+requires only its A companion.  At splice, DT-24 must delete its duplicate
+`def-simple-homotopy-equivalence`, replace “acyclic” by “contractible” in the
+torsion-definition route, and consume items 5, 10--14 and 18 above.
+
 ## 6. Per-pair source matrix: full treatments actually read
 
 “Full treatment” here means that the cited range constructs and proves the
@@ -1723,10 +2053,12 @@ stable-homotopy, bordism, $KO$, Adams and Eilenberg--Moore entries remain.
 
 ## 11. Forward-reference and choice ledger
 
-- There are no within-track forward dependencies: every A page depends only on
-  prior page ids in the AT reading order or on existing/planned supplier pages.
-  The AT-14/AT-18 Gysin rows describe their transgression/multiplication class
-  without using the later name “Euler” as a premise; AT-19 later identifies it.
+- The intended page graph has no within-track forward dependencies: every A
+  page depends only on prior A pages in the repaired order or on an external
+  supplier.  The published item graph nevertheless has four recorded-not-proved
+  or forward `justified_by` edges; §13.2 records the gated repairs.  AT-14 and
+  AT-18 describe their transgression/multiplication class without using the
+  later name “Euler” as a premise; AT-19 later identifies it.
 - `AV` and `DT` references above are amendments/consumer interfaces, not proof
   premises. The track therefore does not wait on either concurrent scaffold.
 - Cell-attachment/CW-approximation, Milnor join and choices of bases/generators
@@ -1739,34 +2071,320 @@ stable-homotopy, bordism, $KO$, Adams and Eilenberg--Moore entries remain.
   recorded rather than prompting for network permission and did not block the
   source audit.
 
-## 12. Verified measurements
+## 12. Measurement status after the prerequisite audit
 
-The following figures are mechanically re-derived from this finished file, not
-copied from the dispatch:
+The old “568 final rows / 20 pairs / complete traceability” measurement is
+withdrawn.  It predates the four supplier pairs added here and the mandatory
+AT-6/AT-9 decompositions in §13.3.  It must not be copied into plan-spec.
+At splice time, regenerate distinct ids, duplicate ids, provenance locators,
+page sizes, leaf checks and the decomposition ratio from the amended file.
+The invariant that remains binding is: every mathematical row has statement
+and proof provenance, no `ai-generated` item is a dependency target, and each
+B page depends only on its A companion and has no consumers.
 
-- **Before:** 0 proposed item ids; this target file did not exist when the lane
-  began.
-- **After:** 568 distinct proposed item ids (568 mathematical-content
-  rows, with no duplicate id).
-- **Traceability completion:** before this pass, §7 named 231 of the 568 ids and
-  no item row carried an inline locator; after it, 568/568 item rows carry an
-  exact treatment-and-range locator. The unattributed set is empty.
-- **Included denominator:** 60 normalized canonical heading dispositions in §7.
-  This denominator counts a mathematical source heading once even when several
-  independent treatments repeat it; source-specific duplicates are evidence
-  for the matrix, not extra coverage units.
-- **Decomposition ratio:** **9.47×** = 568 / 60. The ratio is a result of
-  splitting the cited proofs and their boundary lemmas, not a quota; no row was
-  minted merely to raise it.
-- **Largest A page:** `simplicial-complexes-and-simplicial-homology` (`AT-1`)
-  with 30 items. No A page exceeds 60.
-- **Splits made:** the initially anticipated generalized/AHSS page was split
-  into AT-16 complex $K$/Bott and AT-17 generalized/AHSS; the anticipated
-  bundle/Thom/characteristic page was split into AT-15, AT-18, AT-19 and AT-20.
-  No theorem was dropped in either split.
-- **Independent full-source hosts:** 7 in the required matrix (Cornell,
-  Chicago, MIT OCW, Glasgow, Edinburgh, George Mason and Columbia), with Oxford
-  and Walton's independent host as additional checks.
-- **Component provenance:** every mathematical row has separate statement and
-  proof labels; only SCHEMA §3 values occur. There are zero `ai-generated`
-  statements and therefore zero generated dependency targets.
+## 13. Binding prerequisite-audit amendment (2026-09-08)
+
+This section supersedes conflicting “complete” language above.  It is the
+splice contract for Phases 2 and 3.  Phase 2 builds **all and only** the missing
+supplier-pair prerequisite closure.  Phase 3 may then repair consumers.  The
+ten published AT pages and all published items are read-only during this pass.
+
+### 13.1 Repository-state drift and read-only validation
+
+- The five published A/B pairs contain 200 listed AT items (30+9, 28+8,
+  30+9, 26+9, and 44+8).  All 200 now have `status: published`.  The earlier
+  dispatch count of 52 draft-status items on published pages is historical
+  drift: the audit classified the named set, but there are **zero** such draft
+  items in the current checkout and nothing was modified.
+- The original later thirty pages remain empty placeholders.  Several external
+  suppliers that the old prose called empty are now published; dependency
+  decisions below use current disk state rather than a concluded RESUME file.
+- The item precheck examined all 200 listed AT items; 146 proof-bearing items
+  were checked and none failed.  This validates packaging, not mathematical
+  prerequisite closure.  Every published B item is presently a dependency
+  leaf.
+
+### 13.2 Published-pair defects, preserved for gated Phase 3 repair
+
+| home page | exact defect | repair after suppliers publish |
+|---|---|---|
+| AT-1 A | `def-simplicial-chain-groups-and-boundary` names a boundary operator before `lem-simplicial-boundary-squares-to-zero`; `def-augmentation-and-reduced-simplicial-homology` names augmented homology before augmentation compatibility. | Put the alternating face map first, prove well-definedness and $\partial^2=0$ (and $\epsilon\partial=0$) next, then define the chain complex and its homology. Preserve the augmented convention $\widetilde H_{-1}(\varnothing)=\mathbb Z$. |
+| AT-2 A | `def-singular-chain-complex-of-a-pair` takes the quotient before its boundary-descends lemma; singular augmentation similarly precedes compatibility. | Move quotient-boundary well-definedness and augmentation compatibility ahead of the corresponding complex/homology definitions. Preserve the kernel convention, for which singular reduced homology of the empty space is zero in every degree. |
+| AT-3 A | `thm-simplicial-and-singular-homology-agree-for-simplicial-complexes` asserts the relative-skeletal direct-sum comparison and arbitrary-complex compact support without their premises. | Add direct dependencies on AT-24's common-subdivision/compact-support results and the published pair LES/naturality, excision, good-pair quotient, disjoint-union splitting, and sphere-homology results; spell out the finite-subcomplex passage. Ordinary comparison remains valid, including the empty complex; do not conflate the two reduced conventions. |
+| AT-4 A | `thm-relative-homology-of-consecutive-cw-skeleta` calls $H_n(X^n,X^{n-1};G)\cong\bigoplus G$ natural without orientations. | State the natural result with each cell's orientation module; obtain copies of $G$ only after choosing orientations, and record the sign change. |
+| AT-4 A | `prop-relative-cw-inclusions-are-cofibrations` assembles infinitely many cellwise extensions using “weak topology” without proving the needed product assertion. | Add the explicit disk-cylinder retraction and a closure-finite/product-with-$I$ weak-topology lemma, or cite a published relative-CW NDR/HEP theorem. Record ordinary choice over the cell set. |
+| AT-5 A | `lem-finite-simplicial-approximation-for-homology-comparison` uses $\operatorname{sd}^rK$, mesh, closed stars and a relative simplicial approximation theorem, but points only to AT-3's singular-chain subdivision lemma. | Depend directly on AT-24 and use its abstract barycentric subdivision, star criterion, mesh and relative theorem. |
+| AT-5 A | `def-local-degree-at-an-isolated-preimage` uses cyclic local homology groups and neighborhood independence before `lem-local-sphere-orientations-and-finite-puncture-excision`; `def-mayer-vietoris-connecting-class` is recorded as justified by its later independence lemma. | Move the local-homology lemma before local degree.  For Mayer--Vietoris, prove lift/representative independence before introducing the named homomorphism (or remove only the redundant later edge after the definition itself contains the complete proof). |
+| AT-1/AT-4/AT-5 A | Compact-support and cellwise proofs hide choices: one cell from each of an infinite family, one vertex in every component, or extensions for every cell. | Restrict choices to the finite support actually used whenever possible; otherwise state the ordinary-choice use.  No dependent-choice claim may be inferred from “choose successively.” |
+
+The A pages above are published and therefore are not edited now.  Their B
+companions remain leaves; their examples expose no additional supplier gap.
+
+### 13.3 Mandatory amendments to planned pairs
+
+1. **AT-6:** consume the repaired HA pair
+   `kunneth-exactness-and-splittings-over-principal-ideal-domains`.  Add A-owned
+   rows for degreewise split restriction, finitely generated
+   $\operatorname{Hom}/\operatorname{Ext}$ calculation, the specialized
+   Eilenberg--Zilber comparison, external cochain product, finite-free homology
+   chain models, product/dimension additivity, and cellular projective/lens
+   inputs.  The topological Künneth exact-sequence row depends on HA
+   `thm-pid-kunneth-exactness-for-free-chain-complexes`; its nonnatural
+   splitting row depends on HA `thm-pid-kunneth-short-exact-sequence-splits-nonnaturally`.
+2. **AT-9:** replace the informal “higher cup-$i$ products” premise by an
+   explicit $C_2$ free resolution and Steenrod diagonal, the acyclic-models
+   existence/uniqueness comparison, the exact cup-$i$ coboundary identity,
+   Cartan diagonal coherence, and separate chain-level proofs of the Adem and
+   odd-prime relations.  Print homological/cohomological grading and every
+   Koszul sign; do not cite the relation being proved.
+3. **AT-11:** require `uniform-spaces` for the chosen topological-group
+   convention and `partitions-of-unity-and-paracompactness` for numerable
+   bundles.  State exactly which bases are paracompact/numerable and where a
+   well-pointed or CW-type hypothesis is used.
+4. **AT-12:** print the relative Hurewicz connectivity range, basepoint and
+   component hypotheses, and the $\pi_1$-action/simple-connectivity condition.
+   Print both Blakers--Massey connectivity inputs and output.  State
+   Freudenthal for $n\ge1$ with its isomorphism and epimorphism ranges.
+5. **AT-13:** all coefficient systems come from AT-23.  Use arbitrary groups
+   only for $K(G,1)$ and abelian $A$ for $K(A,n)$ representing cohomology when
+   $n\ge1$.  Replace an unconditional $\Omega BG\simeq G$ by the correctly
+   based weak equivalence and list the well-pointed/CW-type hypotheses needed
+   to upgrade it.
+6. **AT-14:** require AT-23, fix left/right monodromy conventions, and identify
+   $E^2$ with homology/cohomology using the actual local system.  The relative
+   cell calculation must trivialize the fibration over disks, use excision,
+   and account for the attaching monodromy; the Wang sequence is not an
+   untwisted consequence unless the action is trivial.
+7. **AT-15:** replace its lone AT-14 edge by the exact AT-11, AT-13 and
+   partitions-of-unity suppliers.  State numerability/paracompactness for
+   classification and metrics, and distinguish finite-CW/compact-Hausdorff
+   results from arbitrary-base assertions.
+8. **AT-16/AT-17:** AT-16 requires AT-21 for based smash and its external
+   $K$-product.  AT-17's multiplicative AHSS is for a generalized theory with
+   a specified coherent external product; a ring prespectrum is an example,
+   not a hidden representability theorem.  Brown representability and a stable
+   model category remain out of scope.
+9. **AT-18/AT-20:** AT-18 requires AT-7, AT-8, AT-14 and AT-15, not AT-17.
+   Its finite-open induction proves only the finite/compact case; either
+   restrict the theorem or add a numerable local-to-global proof before using
+   universal $BO/BU$ bases.  AT-20 directly requires AT-17 because its rational
+   Chern-character proof uses the AHSS.
+10. **AT-19:** replace the false claim that fiberwise $-1$ is homotopic to the
+    identity in odd rank.  The valid $2e=0$ argument uses an
+    orientation-reversing bundle automorphism over the identity together with
+    naturality and the orientation-sign law.  State the base hypotheses behind
+    projective-bundle and universal-$BO$ applications.
+11. **AT-21/DT seam:** AT-21 owns sequential prespectra, stable groups, smash
+    and ring-prespectrum bookkeeping.  DT-17 owns geometric
+    Pontryagin--Thom and framed-bordism detection; DT-19 owns its Thom-space
+    detection argument and must cite AT-18/AT-19 as well as AT-21.  AT-21 does
+    not pretend to prove Brown representability or a stable homotopy category.
+12. **AT-22/DT seam:** AT-22 owns simple homotopy, noncommutative
+    $K_1(\mathbb Z[\pi])$, Whitehead groups and torsion.  DT-24 deletes its
+    duplicate simple-equivalence definition, uses a **contractible** based
+    mapping-cone complex rather than mere acyclicity, and consumes AT-22.
+    DT retains handles, Whitney realization and the smooth s-cobordism theorem.
+    In $\tau(gf)=\tau(g)+g_*\tau(f)$, type $g_*$ using the induced group-ring
+    isomorphism.
+
+### 13.4 Exact plan-spec page patch
+
+Add these A/B pages at the stated orders; each B `requires` array is the
+singleton containing its A id, and no page or item may require a B page:
+
+| A / B ids | orders | A `requires` (exact direct set) |
+|---|---:|---|
+| `simplicial-subdivision-and-simplicial-approximation` / `simplicial-subdivision-and-simplicial-approximation-examples` | 366.0021 / 366.0022 | `simplicial-complexes-and-simplicial-homology` |
+| `spectra-and-stable-homotopy-groups` / `spectra-and-stable-homotopy-groups-examples` | 366.0241 / 366.0242 | `higher-homotopy-groups-and-cofiber-sequences`; `hurewicz-whitehead-freudenthal-and-cw-approximation`; `subspaces-products-and-quotients`; `limits-and-colimits` |
+| `local-coefficients-twisted-homology-and-duality` / `local-coefficients-twisted-homology-and-duality-examples` | 366.0243 / 366.0244 | `singular-cohomology-and-coefficient-theorems`; `orientations-poincare-lefschetz-and-alexander-duality`; `fibrations-fiber-bundles-and-homotopy-exact-sequences`; `hurewicz-whitehead-freudenthal-and-cw-approximation`; `categories-functors-and-natural-transformations`; `the-group-algebra-and-representations` |
+| `simple-homotopy-whitehead-groups-and-torsion` / `simple-homotopy-whitehead-groups-and-torsion-examples` | 366.0401 / 366.0402 | `cw-complexes-and-cellular-homology`; `hurewicz-whitehead-freudenthal-and-cw-approximation`; `covering-spaces-and-lifting`; `classification-of-covering-spaces`; `the-fundamental-group`; `rings-subrings-and-integral-domains`; `modules-and-module-homomorphisms`; `free-modules-and-exact-sequences`; `the-group-algebra-and-representations`; `chain-homotopy-and-the-homotopy-category`; `mapping-cones-cylinders-and-chain-triangles` |
+
+Replace the A-page `requires` arrays for the complete AT order with the exact
+direct sets below.  A range such as AT-9--AT-12 means the four named A ids, not
+a synthetic range id.
+
+| pair | exact direct A suppliers |
+|---|---|
+| AT-1 `simplicial-complexes-and-simplicial-homology` | `subspaces-products-and-quotients`; `compactness-in-metric-spaces`; `homotopy-and-homotopy-equivalence`; `free-modules-and-exact-sequences`; `chain-complexes-and-homology`; `chain-homotopy-and-the-homotopy-category` |
+| AT-24 `simplicial-subdivision-and-simplicial-approximation` | `simplicial-complexes-and-simplicial-homology` |
+| AT-2 `singular-chains-and-singular-homology` | `simplicial-complexes-and-simplicial-homology`; `homotopy-and-homotopy-equivalence`; `tensor-products-of-modules`; `chain-complexes-and-homology`; `chain-homotopy-and-the-homotopy-category` |
+| AT-3 `relative-homology-excision-and-mayer-vietoris` | `simplicial-complexes-and-simplicial-homology`; `singular-chains-and-singular-homology`; `simplicial-subdivision-and-simplicial-approximation`; `long-exact-sequences-in-homology`; `compactness-in-metric-spaces`; `the-diagram-lemmas-in-an-abelian-category` |
+| AT-4 `cw-complexes-and-cellular-homology` | `simplicial-complexes-and-simplicial-homology`; `relative-homology-excision-and-mayer-vietoris`; `homotopy-and-homotopy-equivalence` |
+| AT-5 `homology-axioms-degree-and-classical-applications` | `relative-homology-excision-and-mayer-vietoris`; `cw-complexes-and-cellular-homology` |
+| AT-6 `singular-cohomology-and-coefficient-theorems` | `singular-chains-and-singular-homology`; `relative-homology-excision-and-mayer-vietoris`; `homology-axioms-degree-and-classical-applications`; `universal-coefficients-and-kunneth-theorems`; `kunneth-exactness-and-splittings-over-principal-ideal-domains` |
+| AT-7 `cup-cap-cross-products-and-cohomology-rings` | `cw-complexes-and-cellular-homology`; `singular-cohomology-and-coefficient-theorems` |
+| AT-8 `orientations-poincare-lefschetz-and-alexander-duality` | `relative-homology-excision-and-mayer-vietoris`; `cup-cap-cross-products-and-cohomology-rings` |
+| AT-9 `bocksteins-steenrod-squares-and-cohomology-operations` | `cup-cap-cross-products-and-cohomology-rings`; `orientations-poincare-lefschetz-and-alexander-duality` |
+| AT-10 `higher-homotopy-groups-and-cofiber-sequences` | `cw-complexes-and-cellular-homology`; `the-fundamental-group`; `homotopy-and-homotopy-equivalence`; `mapping-cones-cylinders-and-chain-triangles` |
+| AT-11 `fibrations-fiber-bundles-and-homotopy-exact-sequences` | `higher-homotopy-groups-and-cofiber-sequences`; `covering-spaces-and-lifting`; `classification-of-covering-spaces`; `uniform-spaces`; `partitions-of-unity-and-paracompactness` |
+| AT-12 `hurewicz-whitehead-freudenthal-and-cw-approximation` | `relative-homology-excision-and-mayer-vietoris`; `cw-complexes-and-cellular-homology`; `higher-homotopy-groups-and-cofiber-sequences`; `fibrations-fiber-bundles-and-homotopy-exact-sequences` |
+| AT-21 `spectra-and-stable-homotopy-groups` | `higher-homotopy-groups-and-cofiber-sequences`; `hurewicz-whitehead-freudenthal-and-cw-approximation`; `subspaces-products-and-quotients`; `limits-and-colimits` |
+| AT-23 `local-coefficients-twisted-homology-and-duality` | `singular-cohomology-and-coefficient-theorems`; `orientations-poincare-lefschetz-and-alexander-duality`; `fibrations-fiber-bundles-and-homotopy-exact-sequences`; `hurewicz-whitehead-freudenthal-and-cw-approximation`; `categories-functors-and-natural-transformations`; `the-group-algebra-and-representations` |
+| AT-13 `obstruction-theory-postnikov-towers-and-classifying-spaces` | `singular-cohomology-and-coefficient-theorems`; `bocksteins-steenrod-squares-and-cohomology-operations`; `higher-homotopy-groups-and-cofiber-sequences`; `fibrations-fiber-bundles-and-homotopy-exact-sequences`; `hurewicz-whitehead-freudenthal-and-cw-approximation`; `local-coefficients-twisted-homology-and-duality`; `applications-of-the-fundamental-group` |
+| AT-14 `the-serre-spectral-sequence-and-applications` | `singular-cohomology-and-coefficient-theorems`; `cup-cap-cross-products-and-cohomology-rings`; `fibrations-fiber-bundles-and-homotopy-exact-sequences`; `obstruction-theory-postnikov-towers-and-classifying-spaces`; `local-coefficients-twisted-homology-and-duality`; `spectral-sequences`; `double-complexes-exact-couples-and-convergence` |
+| AT-15 `topological-vector-bundles-and-grassmannian-classification` | `fibrations-fiber-bundles-and-homotopy-exact-sequences`; `obstruction-theory-postnikov-towers-and-classifying-spaces`; `partitions-of-unity-and-paracompactness` |
+| AT-16 `complex-topological-k-theory-and-bott-periodicity` | `cup-cap-cross-products-and-cohomology-rings`; `topological-vector-bundles-and-grassmannian-classification`; `spectra-and-stable-homotopy-groups` |
+| AT-17 `generalized-cohomology-and-the-atiyah-hirzebruch-spectral-sequence` | `cw-complexes-and-cellular-homology`; `bocksteins-steenrod-squares-and-cohomology-operations`; `complex-topological-k-theory-and-bott-periodicity`; `spectral-sequences`; `double-complexes-exact-couples-and-convergence` |
+| AT-18 `leray-hirsch-thom-isomorphism-and-gysin-sequences` | `cup-cap-cross-products-and-cohomology-rings`; `orientations-poincare-lefschetz-and-alexander-duality`; `the-serre-spectral-sequence-and-applications`; `topological-vector-bundles-and-grassmannian-classification` |
+| AT-19 `stiefel-whitney-and-euler-classes-by-universal-constructions` | `bocksteins-steenrod-squares-and-cohomology-operations`; `leray-hirsch-thom-isomorphism-and-gysin-sequences` |
+| AT-20 `chern-and-pontryagin-classes-by-splitting-and-complexification` | `topological-vector-bundles-and-grassmannian-classification`; `generalized-cohomology-and-the-atiyah-hirzebruch-spectral-sequence`; `leray-hirsch-thom-isomorphism-and-gysin-sequences`; `stiefel-whitney-and-euler-classes-by-universal-constructions` |
+| AT-22 `simple-homotopy-whitehead-groups-and-torsion` | the eleven direct suppliers printed in the new-page table above |
+
+### 13.5 Supplier-pair to consumer map
+
+The map distinguishes already-published consumers from planned consumers so
+Phase 2 does not silently repair Phase 3 material.
+
+**AT-24, direct published consumers.**
+
+- `lem-finite-simplicial-approximation-for-homology-comparison` — home
+  `homology-axioms-degree-and-classical-applications` (AT-5 A).
+- `thm-simplicial-and-singular-homology-agree-for-simplicial-complexes` — home
+  `relative-homology-excision-and-mayer-vietoris` (AT-3 A).
+
+**AT-24, transitively blocked published consumers (60).**
+
+- Home `homology-axioms-degree-and-classical-applications-examples`:
+  `cex-degree-is-not-defined-by-top-homology-for-self-maps-of-s-zero`,
+  `cex-degree-zero-does-not-imply-a-sphere-map-is-constant`,
+  `cex-finite-additivity-alone-does-not-prove-infinite-cw-uniqueness`,
+  `ex-degree-of-a-coordinate-reflection-on-a-sphere`,
+  `ex-degree-of-the-antipodal-map-in-low-dimensions`,
+  `ex-degree-of-the-circle-power-map`,
+  `ex-local-degrees-of-a-polynomial-map-on-the-riemann-sphere`, and
+  `ex-two-homology-theories-with-different-coefficient-groups`.
+- Home `relative-homology-excision-and-mayer-vietoris-examples`:
+  `cex-relative-homology-is-not-the-homology-of-the-set-difference`,
+  `ex-mayer-vietoris-computation-of-the-torus-first-homology`, and
+  `ex-relative-homology-of-a-disk-and-its-boundary`.
+- Home `cw-complexes-and-cellular-homology`:
+  `cor-a-cw-complex-with-no-cells-in-adjacent-dimensions-has-zero-cellular-boundary`,
+  `def-cellular-boundary-from-three-consecutive-skeleta`,
+  `def-cellular-homology`, `def-incidence-number-of-two-cw-cells`,
+  `def-oriented-cellular-chain-group`,
+  `lem-skeletal-homology-stabilizes-away-from-the-cell-dimension`,
+  `lem-the-cellular-boundary-squares-to-zero`,
+  `prop-cellular-maps-induce-cellular-chain-maps`,
+  `thm-cellular-boundary-is-the-incidence-degree-matrix`,
+  `thm-cellular-homology-computes-singular-homology`,
+  `thm-euler-poincare-formula-for-finite-cw-complexes`,
+  `thm-relative-cellular-homology-computes-relative-singular-homology`, and
+  `thm-relative-homology-of-consecutive-cw-skeleta`.
+- Home `homology-axioms-degree-and-classical-applications`:
+  `cor-a-fixed-point-free-sphere-map-has-antipodal-degree`,
+  `cor-a-group-acting-freely-on-a-positive-even-sphere-has-at-most-two-elements`,
+  `def-degree-of-a-self-map-of-an-oriented-sphere`,
+  `def-local-degree-at-an-isolated-preimage`,
+  `lem-a-map-of-nonzero-degree-between-spheres-is-surjective`,
+  `lem-additivity-and-compact-cell-support-control-the-infinite-cw-colimit`,
+  `lem-axiomatic-cellular-boundaries-are-integral-incidence-matrices-with-coefficients`,
+  `lem-coefficient-comparison-on-finite-cw-pairs`,
+  `lem-finite-cw-pairs-admit-finite-simplicial-homotopy-models`,
+  `lem-finite-dimensional-axiomatic-homology-has-finite-subcomplex-support`,
+  `lem-local-sphere-orientations-and-finite-puncture-excision`,
+  `lem-oriented-simplex-comparison-for-an-ordinary-homology-theory`,
+  `lem-sphere-endomorphisms-act-by-the-same-integer-in-every-ordinary-theory`,
+  `lem-subdivision-compatible-continuous-polyhedral-homology-comparison`,
+  `prop-degree-is-homotopy-invariant-and-multiplicative-under-composition`,
+  `prop-degree-of-identity-constant-reflection-and-antipodal-sphere-maps`,
+  `prop-every-integer-occurs-as-the-degree-of-a-sphere-map`,
+  `prop-suspension-preserves-sphere-map-degree`,
+  `thm-a-sphere-has-a-nowhere-zero-tangent-vector-field-iff-its-dimension-is-odd`,
+  `thm-brouwer-fixed-point-theorem`,
+  `thm-eilenberg-steenrod-uniqueness-on-all-cw-pairs`,
+  `thm-eilenberg-steenrod-uniqueness-on-finite-dimensional-cw-pairs`,
+  `thm-global-sphere-degree-is-the-sum-of-local-degrees`,
+  `thm-invariance-of-dimension-for-euclidean-spaces`,
+  `thm-no-nowhere-zero-tangent-vector-field-on-an-even-sphere`, and
+  `thm-no-retraction-from-a-disk-onto-its-boundary`.
+- Home `relative-homology-excision-and-mayer-vietoris`:
+  `cor-homology-of-spheres`.
+- Home `sublevel-deformation-and-the-handle-attachment-theorem` (published
+  Differential Topology A): `cor-relative-homology-of-a-single-handle-pair`
+  and `lem-relative-homology-of-the-standard-handle-pair`.
+- Home `cw-complexes-and-cellular-homology-examples`:
+  `ex-cellular-boundary-matrix-of-a-closed-orientable-surface`,
+  `ex-cellular-homology-and-ring-independent-groups-of-complex-projective-space`,
+  `ex-cellular-homology-of-a-lens-space`,
+  `ex-cellular-homology-of-an-infinite-dimensional-projective-space`,
+  `ex-cellular-homology-of-real-projective-space`, and
+  `ex-two-cw-structures-on-the-circle-have-the-same-euler-characteristic`.
+- Home `sublevel-deformation-and-the-handle-attachment-theorem-examples`
+  (published Differential Topology B):
+  `ex-relative-homology-of-a-handle-by-excision`.
+
+**Other new or repaired supplier pairs.**  None has a currently published
+consumer, hence none has a transitively blocked published consumer at this
+checkout.  Their planned direct consumers are:
+
+- HA `kunneth-exactness-and-splittings-over-principal-ideal-domains` -> AT-6
+  `thm-topological-kunneth-short-exact-sequence-for-homology` (exactness) and
+  `prop-the-homology-kunneth-sequence-splits-nonnaturally` (splitting), home
+  `singular-cohomology-and-coefficient-theorems`.  AT-6 examples and all later
+  cohomology/duality pages are transitively blocked until these direct rows are
+  repaired.
+- AT-21 -> AT-16 `def-external-product-in-complex-k-theory`, home
+  `complex-k-theory-bott-periodicity-and-the-chern-character`; DT-17
+  `thm-stable-pontryagin-thom-identifies-framed-bordism-with-stable-stems`,
+  home `framed-cobordism-and-the-pontryagin-thom-construction`; and DT-19
+  `lem-pontryagin-thom-converts-bordism-detection-to-a-thom-space-homotopy-problem`,
+  home `unoriented-bordism-and-stiefel-whitney-number-detection`.
+- AT-23 -> AT-13 `def-primary-cellular-obstruction-cochain`,
+  `thm-the-primary-obstruction-cochain-is-a-cocycle`,
+  `thm-vanishing-of-the-primary-obstruction-is-equivalent-to-extension-over-the-next-skeleton`,
+  and `def-postnikov-k-invariant`, home
+  `obstruction-theory-postnikov-towers-and-classifying-spaces`; AT-14
+  `def-fiber-homology-local-system-of-a-serre-fibration`,
+  `lem-the-first-serre-differential-is-the-cellular-boundary-with-local-coefficients`,
+  `thm-homological-serre-spectral-sequence`,
+  `thm-cohomological-serre-spectral-sequence`, and
+  `thm-wang-sequence-for-a-fibration-over-the-circle`, home
+  `serre-spectral-sequences-gysin-wang-and-applications`; and DT consumers of
+  the orientation system or universal-cover handle complex in DT-14/DT-24.
+- AT-22 -> DT-24's Whitehead-group, based universal-cover chain-complex,
+  mapping-cone torsion, invariance, composition/sum and vanishing-criterion
+  rows, home `whitehead-torsion-and-the-s-cobordism-theorem`.  DT-24's geometric
+  handle and Whitney rows are downstream consumers, not substitute suppliers.
+
+### 13.6 Source and convention controls
+
+The subdivision repair is controlled by Hatcher, *Algebraic Topology*,
+§2.1 and the simplicial-approximation appendix, together with Spanier's full
+simplicial treatment.  Local coefficients use Hatcher §3.H (including the
+author's correction to Theorem 3H.6) and Davis--Kirk Chapter 5.  Sequential
+spectra use May, *A Concise Course in Algebraic Topology*, Chapter 25, and
+Hatcher's author-hosted spectral-sequence notes, Chapter 2 §1.  Simple torsion
+uses Cohen, Chapters 1--7, checked against Lück Chapter 2.  These are full-text
+proof controls, not merely citations absent from dependency arrays: every
+mathematical premise they expose is represented by a supplier/item edge above.
+
+At splice, rerun the item precheck, dependency existence/direction check,
+B-leaf check, status/page agreement, duplicate-id scan, and `git diff --check`.
+
+### 13.7 Complex Analysis reconciliation (2026-09-08)
+
+Planned CA-RS-3 consumes the published A pages AT-4
+`cw-complexes-and-cellular-homology`, AT-7
+`cup-cap-cross-products-and-cohomology-rings`, and AT-8
+`orientations-poincare-lefschetz-and-alexander-duality`, including their
+repaired empty-object and sign conventions. These pages supply singular
+homology, the surface intersection form, and the fundamental class; Complex
+Analysis must not infer them from abstract chain-complex machinery.
+
+This is a planned-to-published seam only. It creates no new Algebraic Topology
+supplier, no direct or transitive published consumer, and no Phase-2 root.
+
+### 13.8 Group Theory reconciliation (2026-09-08)
+
+Replace the invalid requirement
+`simplicial-complexes-and-simplicial-homology` ->
+`schur-multipliers-and-universal-central-extensions-examples`. The exact
+direct A-page suppliers reached by the simplicial page's item dependencies are
+`chain-complexes-and-homology`,
+`chain-homotopy-and-the-homotopy-category`,
+`compactness-in-metric-spaces`, `connectedness`,
+`homotopy-and-homotopy-equivalence`, `metric-spaces`,
+`subspaces-products-and-quotients`, and
+`topological-spaces-and-continuity`. Use these A pages, subject to ordinary
+transitive-prerequisite minimization; never retain the GT B page. This is a
+page-edge repair using existing suppliers, not a new AT Phase-2 root.

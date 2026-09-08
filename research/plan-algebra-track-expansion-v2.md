@@ -1113,3 +1113,349 @@ independent complete treatments expose a genuine unowned layer. Perron--Frobeniu
 matrix manifolds, randomized linear algebra, pseudospectra, general matrix
 functions and infinite-dimensional operator theory remain explicit denials,
 not hidden forward references.
+
+---
+
+## 14. Binding live-state audit (2026-09-08)
+
+This section supersedes the 2026-08-28 build-state claims above. It does not
+change the mathematical scope of §§1--13. The canonical Linear Algebra prose
+owner is this file: unlike `plan-algebra-track.md`, it explicitly owns the
+`linear-algebra` expansion lane. The latter file is read-only cross-category
+evidence for this audit.
+
+All twenty-two Linear Algebra A/B pairs are now published: 44 pages and 749
+plan-listed items, with 749 item files present and published. The original
+thirteen pairs occupy orders 72--95 and 141; LA-14--LA-20 occupy
+107.001--107.004 and 168.001--168.010; LA-21 occupies
+288.000021--288.000022; and LA-22 occupies 288.000061--288.000062. Page
+frontmatter agrees with the live plan on id, kind, category, companion,
+requirements, item membership and item order. Item kind also agrees for all
+749 items. No Linear Algebra page or item is draft or missing.
+
+The dependency closure has no unresolved item id, cycle, A-page dependency on
+a B page, later-page prerequisite, direct dependency on a draft item, or direct
+or transitive route to `proved_here: false`, an id containing
+`not-proved-here`, or `deferred-set-theory-beyond-choice`. No item id has two
+Linear Algebra homes. Thus there is no new theorem supplier to build before a
+published Linear Algebra proof. The defects that remain are published-byte
+repairs and plan/frontmatter resynchronisation, recorded below for Phase 3.
+
+## 15. Phase-2 and planned-only supplier classification
+
+- **Phase-2-eligible unpublished supplier pairs:** zero.
+- **Phase-2-eligible unpublished supplier items:** zero.
+- **Planned-only enrichment pairs/items with zero published impact:** zero.
+- **New or repaired planned supplier items:** zero. Consequently their direct
+  published-consumer map and complete transitive published-consumer closure
+  are both the empty map; the required item-level zero-consumer declaration is
+  exact, not an omission.
+
+LA-14--LA-22 must no longer be described as proposed, unbuilt or Phase-2
+roots. They are published inputs. All repairs in §§16--18 are Phase-3 repairs
+to published consumers using already-published material; they must not be
+implemented while the workflow is paused.
+
+## 16. Exact Phase-3 proof-order repairs
+
+The live item graph has sixteen same-page forward edges once `justified_by` is
+treated as a real proof dependency. No new result is needed.
+
+Delete a non-load-bearing `justified_by` edge from each of these definition
+items. Its target proves a later property rather than the existence of the
+defined data:
+
+- `def-kernel-and-image-of-a-linear-map` ->
+  `thm-linear-kernel-image-and-injectivity`;
+- `def-vector-space-of-linear-maps` ->
+  `prop-linear-maps-form-a-vector-space`;
+- `def-invertible-matrix-and-general-linear-group` ->
+  `cor-general-linear-group-is-a-group`;
+- `def-cyclic-subspace-vector-and-vector-annihilator` ->
+  `prop-vector-annihilator-is-well-defined`;
+- `def-lanczos-process-as-hermitian-arnoldi` ->
+  `thm-hermitian-arnoldi-collapses-to-the-lanczos-three-term-recurrence`.
+
+For `def-conjugate-gradient-recurrence`, state the recurrence conditionally
+for the indices at which its displayed denominators are nonzero, then remove
+its forward `justified_by` edge. The later
+`prop-conjugate-gradient-denominators-are-positive-before-convergence` proves
+that the guard holds until convergence.
+
+For each remaining pair below, move and rewrite the existing theorem before
+the definition. The theorem must construct the indicated data directly, with
+no dependency on the later definition; the definition then names the proved
+construction:
+
+| theorem moved first | definition moved after it | construction proved without the definition |
+|---|---|---|
+| `thm-operator-determinant-is-basis-independent` | `def-determinant-of-a-linear-operator` | equality of coordinate-matrix determinants under change of ordered basis |
+| `thm-minimal-polynomial-is-well-defined-and-controls-annihilators` | `def-annihilator-ideal-and-minimal-polynomial-of-an-endomorphism` | the nonzero ideal `{p in F[x] : p(T)=0}` has a unique monic generator |
+| `prop-quotient-vector-space-operations-and-projection` | `def-quotient-vector-space-and-canonical-projection` | coset operations and the projection are independent of representatives |
+| `prop-induced-quotient-operator-is-well-defined` | `def-invariant-subspace-and-induced-quotient-operator` | `v+W -> T(v)+W` is independent of representatives when `T(W) subseteq W` |
+| `thm-sylvesters-law-of-inertia` | `def-definiteness-inertia-and-signature-data-over-the-reals` | diagonal sign counts are invariant under real congruence |
+| `thm-gram-inner-product-on-exterior-powers-is-positive-definite` | `def-gram-inner-product-on-kth-exterior-power` | the determinant formula defines a positive-definite inner product |
+| `thm-hodge-star-exists-uniquely-and-has-the-orthonormal-basis-formula` | `def-hodge-star-on-an-oriented-inner-product-space` | the unique operator satisfying the wedge/volume identity exists |
+| `thm-interior-product-is-adjoint-to-exterior-multiplication` | `def-interior-product-on-the-exterior-algebra` | the unique adjoint operator exists and obeys the contraction formula |
+| `prop-reduced-resolvent-identities-for-a-simple-eigenvalue` | `def-reduced-resolvent-or-group-inverse-at-a-simple-eigenvalue` | the complementary inverse exists uniquely and has the displayed identities |
+
+Finally move
+`thm-a-decomposable-wedge-is-nonzero-exactly-for-independent-vectors`
+before `cor-the-kth-exterior-power-vanishes-above-dimension`; the corollary has
+a direct forward `deps` edge to that theorem. Preserve all stable ids and
+rewrite any local prose made stale by these moves.
+
+## 17. Exact B-leaf and body-link repairs
+
+No outside item consumes a Linear Algebra B item. Nevertheless twelve B items
+currently supply seventeen later B items on the same companion page. Delete
+each edge below and make the consumer's counterexample or calculation local,
+using only its A-page theory and earlier A prerequisites. The supplier's direct
+published consumers and complete transitive published closure coincide exactly
+in every row:
+
+| B supplier | direct published consumers = complete transitive published closure (home page) |
+|---|---|
+| `ex-basis-of-the-eventually-zero-families` | `linear-independence-bases-and-dimension-examples`: `cex-independent-set-that-does-not-span`, `cex-proper-subspace-with-an-equinumerous-basis` |
+| `cex-spanning-set-that-is-not-independent` | `linear-independence-bases-and-dimension-examples`: `fs-union-of-two-independent-sets-is-independent` |
+| `cex-subset-closed-under-addition-but-not-scaling` | `vector-spaces-and-subspaces-examples`: `cex-subset-closed-under-scaling-but-not-addition` |
+| `ex-two-by-two-determinant-formula` | `determinants-of-matrices-over-a-commutative-ring-examples`: `cex-naive-quaternion-determinant-is-not-row-alternating`, `ex-integer-determinant-two-is-invertible-over-q-not-z`, `fs-determinant-is-additive-on-matrices` |
+| `ex-singular-value-decomposition-of-a-two-by-three-matrix` | `the-spectral-theorem-and-singular-value-decomposition-examples`: `ex-rank-one-svd-truncation` |
+| `ex-orientation-reversal-negates-the-hodge-star` | `exterior-powers-orientation-and-hodge-duality-examples`: `fs-an-inner-product-determines-an-orientation`, `fs-hodge-star-needs-only-the-vector-space-structure` |
+| `ex-complex-symmetric-nilpotent-matrix` | `the-spectral-theorem-and-singular-value-decomposition-examples`: `fs-complex-symmetric-matrices-are-unitarily-diagonalizable` |
+| `ex-quarter-turn-diagonalises-after-complexification` | `complexification-realification-and-real-structures-examples`: `fs-complexification-creates-a-real-eigenvector-whenever-it-creates-a-complex-one` |
+| `ex-canonical-embedding-of-r-n-into-c-n` | `complexification-realification-and-real-structures-examples`: `fs-complexification-doubles-finite-dimension` |
+| `cex-a-complex-linear-map-can-fail-to-preserve-a-chosen-real-form` | `complexification-realification-and-real-structures-examples`: `fs-every-complex-linear-operator-descends-to-every-chosen-real-form` |
+| `ex-quarter-turn-real-normal-form` | `the-spectral-theorem-and-singular-value-decomposition-examples`: `fs-nonnegative-quadratic-values-force-self-adjointness`, `fs-normal-operators-are-diagonalisable-over-the-base-field` |
+| `ex-polar-decomposition-of-a-singular-matrix` | `the-spectral-theorem-and-singular-value-decomposition-examples`: `fs-polar-isometry-is-unique-for-singular-operators` |
+
+After those deletions every B item is a dependency leaf. Separately,
+`ex-rayleigh-quotient-iteration-on-a-two-by-two-symmetric-matrix` cites
+`def-rayleigh-quotient-iteration` load-bearingly in proof step 2.1 but omits it
+from frontmatter. Add that A-item id to `deps`; this is the sole Linear
+Algebra `cited-not-in-deps` finding from the repository dependency checker.
+
+## 18. Published semantic reconciliation
+
+The current bytes were checked against all available Linear Algebra reader
+reports, not their stale pre-repair conclusions. Previously reported defects
+in diagonalisation, adjoints/Gram determinants, Jordan power ranks,
+generalised eigenspaces, Wilkinson shifting and the two-by-two Rayleigh example
+are already repaired in the published bodies. In particular, the Wilkinson
+item now proves tridiagonal preservation rather than unsupported local
+deflation, and the Rayleigh example explicitly treats the undefined `t=0`
+step. No remaining mathematical supplier gap or blocker was found. Phase 3
+must preserve those repaired bodies while applying §§16--17.
+
+## 19. Cross-category ownership and consumer seams
+
+The live plan has 39 direct page-level edges from other categories to a Linear
+Algebra A page. Grouped by Linear Algebra supplier, they are:
+
+| Linear Algebra A supplier | direct outside page consumers |
+|---|---|
+| `determinants-of-matrices-over-a-commutative-ring` | Category Theory `categories-functors-and-natural-transformations`; Combinatorics `algebraic-and-spectral-graph-theory`; Real Analysis `fubini-and-change-of-variables` |
+| `dual-spaces-bilinear-forms-and-inertia` | Abstract Algebra `solvability-by-radicals-and-kummer-theory`, `tensor-products-of-modules`; Differential Geometry `tangent-cotangent-and-the-differential`; Kazhdan--Lusztig Theory `soergel-intersection-forms-and-hodge-theory` (planned page, zero items) |
+| `eigenvalues-eigenvectors-and-the-characteristic-polynomial` | Abstract Algebra `algebraic-closure-embeddings-and-separability`; Combinatorics `block-designs-and-finite-projective-planes`, `linear-recurrences-and-rational-generating-functions` |
+| `exterior-powers-orientation-and-hodge-duality` | Algebraic Geometry `products-segre-and-veronese-embeddings-and-grassmannians`; Differential Geometry `manifolds-with-boundary-collars-and-orientations` |
+| `gaussian-elimination-and-row-reduction` | Combinatorics `linear-algebra-methods-in-combinatorics`; Real Analysis `fubini-and-change-of-variables` |
+| `inner-product-spaces-and-orthogonality` | Abstract Algebra `characters-and-the-orthogonality-relations`; Combinatorics `linear-algebra-methods-in-combinatorics`; Real Analysis `areas-of-elementary-plane-figures`, `constant-rank-submersions-and-regular-level-sets`, `regular-surfaces-and-surface-integrals` |
+| `linear-independence-bases-and-dimension` | Abstract Algebra `algebraic-extensions-degree-and-finite-fields`, `modules-and-module-homomorphisms`; Real Analysis `monotone-functions-and-discontinuities` |
+| `linear-maps-rank-nullity-and-quotient-spaces` | Category Theory `categories-functors-and-natural-transformations`; Real Analysis `constant-rank-submersions-and-regular-level-sets` |
+| `matrices-and-the-matrix-of-a-linear-map` | Abstract Algebra `the-group-algebra-and-representations`; Category Theory `categories-functors-and-natural-transformations`; Number Theory `positive-definite-binary-quadratic-forms-and-reduction` |
+| `the-determinant-of-a-linear-operator` | Abstract Algebra `free-modules-and-exact-sequences`; Differential Geometry `tangent-cotangent-and-the-differential`; Real Analysis `the-inverse-function-theorem-completed` |
+| `the-spectral-theorem-and-singular-value-decomposition` | Combinatorics `algebraic-and-spectral-graph-theory`; Computability Theory `expander-graphs-and-constraint-graphs`; PDE `partial-differential-equations-and-characteristics` |
+| `triangularisation-and-jordan-canonical-form` | Abstract Algebra `finite-fields-and-cyclotomic-extensions`, `modules-over-a-pid-and-canonical-forms`; Measure Theory `the-lp-spaces-holder-minkowski-and-riesz-fischer` |
+| `vector-spaces-and-subspaces` | Category Theory `categories-functors-and-natural-transformations`; Real Analysis `monotone-functions-and-discontinuities`, `uniform-convergence-of-functions` |
+
+The Computability seam named in its repaired scaffold belongs to Combinatorics,
+not to this category: published A page
+`linear-algebra-methods-in-combinatorics` already requires the Linear Algebra
+A pages `gaussian-elimination-and-row-reduction` and
+`inner-product-spaces-and-orthogonality`. Its published item
+`def-monomials-multidegree-and-total-degree` directly supplies the draft
+Computability items `def-polynomial-identity-testing` and
+`thm-schwartz-zippel-lemma`. Root must amend
+`randomized-complexity-and-amplification.requires` to include
+`linear-algebra-methods-in-combinatorics`. No Linear Algebra amendment or new
+supplier is warranted.
+
+## 20. Exact plan-spec amendments and validation gate
+
+Phase 3 must make the published-item repairs in §§16--17 and then copy the
+canonical published title, `deps`, and `justified_by` arrays into
+`research/plan-spec.json` for every id in §21. Do not blindly copy a forward or
+B-to-B edge: first apply §§16--17 to the item, then record the repaired array.
+There are 103 title drifts, 181 `deps` drifts and 15 `justified_by` drifts.
+There is no kind, membership, order, page-requirements or publication-status
+amendment.
+
+The full texts and locators in §13 remain adequate authoritative evidence for
+all affected mathematics: Axler chapters 1--9 (especially §§6C, 7E--7F and
+chapter 9), Hefferon's systems-through-canonical-form text and answer volume,
+Treil's duality/Jordan/spectral chapters, Driscoll--Braun chapters 1--3 and
+7--8, Cornell CS 4220's complete eighteen-note sequence, Cambridge Part IB's
+96 pages, Conrad's complete “Complexification” and “Exterior Powers” notes,
+Eliashberg Part I, and Greenbaum--Li--Overton's complete perturbation paper.
+All were available in full; no source-access blocker arose.
+
+After Phase 3, rerun the plan validator, renderer, dependency checker and a
+custom closure audit that includes both `deps` and `justified_by`. Acceptance
+requires: zero unresolved ids, zero cycles/forward item edges, zero B-item
+consumers, zero published-to-draft edges, zero direct/transitive recorded-only
+paths, zero body-link dependency omissions, and exact plan/frontmatter parity.
+
+## 21. Item-exact metadata resynchronisation ledger
+
+Only ids with at least one mismatch are listed. Counts are per home page;
+“zero” is explicit. This ledger is the exact amendment set, while §§16--17
+override the raw current arrays at the identified proof-order and B-leaf edges.
+
+- `vector-spaces-and-subspaces`:
+  title (2): `def-vector-space`, `lem-span-of-a-single-vector`;
+  deps (13): `lem-vector-space-elementary-consequences`, `def-linear-subspace`, `lem-linear-subspace-is-a-subgroup`, `lem-linear-subspace-criterion`, `lem-intersection-of-linear-subspaces`, `def-linear-combination-and-span`, `lem-span-is-the-set-of-linear-combinations`, `lem-span-monotone-and-idempotent`, `lem-span-of-a-single-vector`, `def-sum-of-linear-subspaces`, `lem-sum-is-span-of-union`, `def-internal-direct-sum`, `lem-direct-sum-criterion`;
+  justified_by (0): zero.
+- `vector-spaces-and-subspaces-examples`:
+  title (2): `ex-r-as-a-vector-space-over-q`, `fs-union-of-two-subspaces-is-a-subspace`;
+  deps (8): `ex-r-as-a-vector-space-over-q`, `ex-f-n-and-its-coordinate-subspaces`, `ex-sequence-space-and-eventually-zero-subspace`, `cex-subset-closed-under-addition-but-not-scaling`, `cex-subset-closed-under-scaling-but-not-addition`, `cex-pairwise-trivial-intersection-is-not-a-direct-sum`, `ex-sum-and-intersection-in-f-three`, `fs-union-of-two-subspaces-is-a-subspace`;
+  justified_by (0): zero.
+- `linear-independence-bases-and-dimension`:
+  title (12): `def-linear-independence`, `lem-independent-list-is-injective`, `lem-dependent-iff-a-vector-lies-in-the-span-of-the-others`, `lem-independence-has-finite-character`, `lem-adjoining-a-vector-outside-the-span`, `def-linear-basis`, `thm-unique-coordinates-with-respect-to-an-ordered-basis`, `thm-steinitz-exchange`, `cor-independent-set-is-no-larger-than-a-finite-spanning-set`, `thm-every-independent-set-extends-to-a-basis`, `lem-standard-basis-of-f-n`, `thm-dimension-formula`;
+  deps (20): `def-linear-independence`, `lem-independent-list-is-injective`, `lem-dependent-iff-a-vector-lies-in-the-span-of-the-others`, `lem-independence-has-finite-character`, `lem-adjoining-a-vector-outside-the-span`, `def-linear-basis`, `thm-unique-coordinates-with-respect-to-an-ordered-basis`, `lem-basis-iff-maximal-independent-iff-minimal-spanning`, `thm-steinitz-exchange`, `cor-independent-set-is-no-larger-than-a-finite-spanning-set`, `thm-any-two-finite-bases-have-the-same-size`, `def-dimension`, `thm-every-independent-set-extends-to-a-basis`, `cor-every-spanning-set-contains-a-basis`, `cor-every-vector-space-has-a-basis`, `lem-standard-basis-of-f-n`, `thm-dimension-of-a-linear-subspace`, `cor-a-linear-subspace-has-a-complement`, `thm-dimension-formula`, `cor-dimension-of-a-direct-sum`;
+  justified_by (0): zero.
+- `linear-independence-bases-and-dimension-examples`:
+  title (4): `ex-basis-of-the-eventually-zero-families`, `cex-independent-set-that-does-not-span`, `cex-proper-subspace-with-an-equinumerous-basis`, `cex-dimension-formula-fails-for-three-subspaces`;
+  deps (8): `ex-coordinates-depend-on-the-ordered-basis`, `ex-basis-of-the-eventually-zero-families`, `ex-hamel-basis-of-r-over-q`, `cex-independent-set-that-does-not-span`, `cex-spanning-set-that-is-not-independent`, `cex-proper-subspace-with-an-equinumerous-basis`, `cex-dimension-formula-fails-for-three-subspaces`, `fs-union-of-two-independent-sets-is-independent`;
+  justified_by (0): zero.
+- `linear-maps-rank-nullity-and-quotient-spaces`:
+  title (0): zero;
+  deps (0): zero;
+  justified_by (1): `def-kernel-and-image-of-a-linear-map -> [thm-linear-kernel-image-and-injectivity]`.
+- `linear-maps-rank-nullity-and-quotient-spaces-examples`:
+  title (0): zero;
+  deps (1): `ex-forward-shift-injective-not-surjective`;
+  justified_by (0): zero.
+- `matrices-and-the-matrix-of-a-linear-map`:
+  title (0): zero;
+  deps (6): `prop-transpose-laws`, `cor-dimensions-of-matrix-and-linear-map-spaces`, `thm-invertible-matrices-correspond-to-linear-isomorphisms`, `thm-similarity-is-an-equivalence-relation-and-models-basis-change`, `cor-trace-is-invariant-under-similarity`, `def-trace-of-an-endomorphism`;
+  justified_by (2): `def-vector-space-of-linear-maps -> [prop-linear-maps-form-a-vector-space]`, `def-invertible-matrix-and-general-linear-group -> [cor-general-linear-group-is-a-group]`.
+- `gaussian-elimination-and-row-reduction-examples`:
+  title (0): zero;
+  deps (1): `ex-row-echelon-form-is-not-unique-but-rref-is`;
+  justified_by (0): zero.
+- `the-determinant-of-a-linear-operator`:
+  title (13): `def-determinant-of-a-linear-operator`, `thm-operator-determinant-scales-every-alternating-top-form`, `thm-operator-determinant-is-multiplicative`, `cor-operator-determinant-by-row-reduction`, `thm-adjugate-identity-over-a-commutative-ring`, `cor-inverse-matrix-by-adjugate`, `lem-determinant-rank-one-update-over-a-commutative-ring`, `thm-adjugate-is-equivariant-under-similarity`, `def-coordinate-endomorphism-over-a-commutative-ring`, `thm-cramers-rule-over-a-commutative-ring`, `cor-cramers-rule-over-a-field`, `cor-operator-determinant-on-the-general-linear-group`, `thm-operator-adjugate-identity`;
+  deps (8): `thm-operator-determinant-is-multiplicative`, `thm-adjugate-identity-over-a-commutative-ring`, `lem-determinant-rank-one-update-over-a-commutative-ring`, `thm-adjugate-is-equivariant-under-similarity`, `thm-cramers-rule-over-a-commutative-ring`, `thm-operator-invertible-iff-determinant-nonzero`, `def-adjugate-of-a-linear-operator`, `thm-operator-adjugate-identity`;
+  justified_by (1): `def-determinant-of-a-linear-operator -> [thm-operator-determinant-is-basis-independent]`.
+- `the-determinant-of-a-linear-operator-examples`:
+  title (5): `ex-determinant-in-two-ordered-bases`, `ex-doubling-integers-has-nonunit-determinant`, `ex-four-by-four-determinant-by-cofactors-and-row-reduction`, `ex-three-by-three-inverse-by-adjugate`, `ex-cramers-rule-two-by-two-system`;
+  deps (1): `fs-a-square-matrix-over-a-commutative-ring-is-invertible-iff-its-determinant-is-nonzero`;
+  justified_by (0): zero.
+- `eigenvalues-eigenvectors-and-the-characteristic-polynomial`:
+  title (0): zero;
+  deps (6): `prop-eigenvalue-iff-shift-is-not-invertible`, `cor-positive-dimensional-operator-over-an-algebraically-closed-field-has-an-eigenvalue`, `def-algebraic-and-geometric-multiplicity-of-an-eigenvalue`, `thm-products-ab-and-ba-have-the-same-characteristic-polynomial`, `thm-spectral-mapping-for-polynomials`, `cor-inverse-of-an-invertible-operator-is-a-polynomial-in-the-operator`;
+  justified_by (0): zero.
+- `diagonalisation-and-the-minimal-polynomial`:
+  title (0): zero;
+  deps (13): `thm-minimal-polynomial-is-well-defined-and-controls-annihilators`, `lem-minimal-polynomial-is-invariant-under-field-extension`, `thm-roots-of-the-minimal-polynomial-are-eigenvalues-over-extension-fields`, `thm-minimal-and-characteristic-polynomials-have-the-same-irreducible-factors`, `prop-minimal-polynomial-of-an-invariant-restriction-divides-the-original`, `thm-primary-decomposition-for-an-endomorphism`, `cor-generalised-eigenspace-decomposition-for-a-split-minimal-polynomial`, `thm-diagonalisable-iff-characteristic-polynomial-splits-and-multiplicities-agree`, `thm-diagonalisable-iff-minimal-polynomial-splits-with-distinct-roots`, `cor-distinct-characteristic-roots-imply-diagonalisability`, `cor-idempotent-endomorphisms-are-diagonalisable-projections`, `thm-invariant-restrictions-of-diagonalisable-endomorphisms-are-diagonalisable`, `thm-simultaneous-diagonalisation-of-commuting-diagonalisable-endomorphisms`;
+  justified_by (1): `def-annihilator-ideal-and-minimal-polynomial-of-an-endomorphism -> [thm-minimal-polynomial-is-well-defined-and-controls-annihilators]`.
+- `diagonalisation-and-the-minimal-polynomial-examples`:
+  title (1): `ex-nilpotent-shift-and-its-single-primary-component`;
+  deps (2): `ex-simultaneous-diagonalisation-of-two-commuting-matrices`, `fs-the-characteristic-polynomial-determines-diagonalisability`;
+  justified_by (0): zero.
+- `triangularisation-and-jordan-canonical-form`:
+  title (29): `def-quotient-vector-space-and-canonical-projection`, `prop-quotient-vector-space-operations-and-projection`, `lem-quotient-basis-lifts-to-an-adapted-basis`, `thm-first-isomorphism-theorem-for-vector-spaces`, `prop-induced-quotient-operator-is-well-defined`, `prop-polynomial-calculus-on-restrictions-and-quotients`, `prop-characteristic-polynomial-factors-over-an-invariant-subspace`, `prop-complete-invariant-flags-and-upper-triangular-matrices`, `thm-triangularisation-splitting-criterion`, `thm-simultaneous-triangularisation-of-commuting-operators`, `thm-nilpotent-endomorphism-characterisations`, `lem-kernel-and-rank-sequences-of-powers`, `thm-stabilised-kernel-image-decomposition`, `def-jordan-block-and-jordan-string`, `lem-independent-initial-vectors-give-independent-jordan-strings`, `thm-power-ranks-determine-nilpotent-jordan-blocks`, `cor-nilpotent-similarity-classified-by-power-ranks`, `prop-generalised-eigenspaces-and-algebraic-multiplicity`, `thm-jordan-form-exists-iff-the-characteristic-polynomial-splits`, `cor-endomorphisms-over-an-algebraically-closed-field-have-jordan-form`, `thm-jordan-form-uniqueness-from-ranks-of-powers`, `cor-jordan-block-data-controls-eigenspaces-and-polynomials`, `thm-similarity-classification-by-jordan-canonical-form`, `def-cyclic-subspace-vector-and-vector-annihilator`, `prop-vector-annihilator-is-well-defined`, `thm-cyclic-subspace-power-basis-and-companion-matrix`, `lem-a-vector-realises-the-minimal-polynomial`, `thm-cyclic-vector-criterion-by-minimal-and-characteristic-polynomials`, `cor-the-commutant-of-a-cyclic-endomorphism-is-polynomial`;
+  deps (10): `prop-quotient-vector-space-operations-and-projection`, `thm-quotient-vector-space-universal-property`, `prop-induced-quotient-operator-is-well-defined`, `thm-triangularisation-splitting-criterion`, `thm-simultaneous-triangularisation-of-commuting-operators`, `def-nilpotent-endomorphism`, `thm-nilpotent-jordan-string-basis`, `thm-power-ranks-determine-nilpotent-jordan-blocks`, `prop-generalised-eigenspaces-and-algebraic-multiplicity`, `thm-cyclic-vector-criterion-by-minimal-and-characteristic-polynomials`;
+  justified_by (3): `def-quotient-vector-space-and-canonical-projection -> [prop-quotient-vector-space-operations-and-projection]`, `def-invariant-subspace-and-induced-quotient-operator -> [prop-induced-quotient-operator-is-well-defined]`, `def-cyclic-subspace-vector-and-vector-annihilator -> [prop-vector-annihilator-is-well-defined]`.
+- `triangularisation-and-jordan-canonical-form-examples`:
+  title (16): `ex-quotient-of-f-three-by-a-line-and-canonical-projection`, `ex-first-isomorphism-theorem-for-a-coordinate-map`, `ex-a-split-triangularisable-but-nondiagonalisable-operator`, `ex-building-a-jordan-string-basis-for-a-nilpotent-operator`, `ex-recovering-nilpotent-blocks-from-ranks-of-powers`, `ex-jordan-form-with-two-eigenvalues-from-power-ranks`, `ex-quarter-turn-jordan-form-after-scalar-extension`, `fs-every-endomorphism-is-triangularisable`, `fs-every-endomorphism-has-jordan-form-over-its-base-field`, `fs-equal-characteristic-and-minimal-polynomials-imply-similarity`, `fs-jordan-canonical-form-is-a-unique-matrix`, `fs-geometric-multiplicity-determines-jordan-block-sizes`, `ex-jordan-chevalley-decomposition-from-jordan-blocks`, `fs-every-endomorphism-has-a-commuting-diagonal-plus-nilpotent-decomposition`, `ex-a-cyclic-companion-operator`, `cex-the-identity-on-f-two-has-no-cyclic-vector`;
+  deps (2): `fs-every-endomorphism-has-a-commuting-diagonal-plus-nilpotent-decomposition`, `ex-a-cyclic-companion-operator`;
+  justified_by (0): zero.
+- `dual-spaces-bilinear-forms-and-inertia`:
+  title (0): zero;
+  deps (9): `thm-canonical-map-to-double-dual-is-surjective-iff-finite-dimensional`, `thm-symmetric-alternating-relations-by-characteristic`, `def-matrix-radicals-rank-and-nondegeneracy-of-a-bilinear-form`, `cor-rank-and-nondegeneracy-are-congruence-invariants`, `thm-polarization-bijection-in-characteristic-not-two`, `thm-alternating-forms-have-a-symplectic-normal-form`, `thm-sylvesters-law-of-inertia`, `lem-schur-complement-congruence-and-determinant`, `thm-sylvesters-criterion-for-positive-definiteness`;
+  justified_by (1): `def-definiteness-inertia-and-signature-data-over-the-reals -> [thm-sylvesters-law-of-inertia]`.
+- `dual-spaces-bilinear-forms-and-inertia-examples`:
+  title (0): zero;
+  deps (1): `ex-canonical-double-dual-map-for-polynomial-space-is-not-surjective`;
+  justified_by (0): zero.
+- `inner-product-spaces-and-orthogonality`:
+  title (0): zero;
+  deps (8): `thm-cauchy-schwarz-for-real-and-complex-inner-product-spaces`, `cor-triangle-inequality-for-inner-product-norm`, `thm-bessel-inequality-and-finite-parseval-identity`, `def-orthogonal-projection`, `thm-gram-determinant-detects-linear-independence`, `thm-matrix-of-the-adjoint-is-the-conjugate-transpose`, `thm-finite-dimensional-isometry-characterisations`, `cor-orthogonal-and-unitary-operators-form-groups-and-have-unit-determinant-modulus`;
+  justified_by (0): zero.
+- `inner-product-spaces-and-orthogonality-examples`:
+  title (1): `ex-gram-determinant-of-two-vectors`;
+  deps (0): zero;
+  justified_by (0): zero.
+- `the-spectral-theorem-and-singular-value-decomposition`:
+  title (5): `def-singular-values-of-an-endomorphism`, `thm-singular-value-decomposition`, `cor-rank-equals-number-of-nonzero-singular-values`, `def-operator-norm-on-a-finite-dimensional-inner-product-space`, `thm-operator-norm-is-the-largest-singular-value`;
+  deps (17): `prop-self-adjoint-and-normal-matrix-criteria-in-orthonormal-bases`, `thm-complex-spectral-theorem-for-normal-endomorphisms`, `thm-real-normal-endomorphism-classification`, `cor-real-spectral-theorem-for-self-adjoint-endomorphisms`, `def-semisimple-and-nilpotent-endomorphisms`, `thm-additive-jordan-chevalley-decomposition`, `prop-operator-positivity-agrees-with-form-positivity-over-the-reals`, `thm-non-negative-operator-characterisations`, `thm-non-negative-square-root-exists-and-is-unique`, `prop-non-negative-square-root-is-a-polynomial-in-the-operator`, `thm-singular-value-decomposition`, `thm-polar-decomposition`, `cor-operator-norm-submultiplicative-and-t-star-t-identity`, `thm-eckart-young-best-rank-k-approximation`, `thm-courant-fischer-min-max-principle`, `thm-cauchy-interlacing-for-self-adjoint-compressions`, `thm-weyl-inequalities-for-self-adjoint-sums`;
+  justified_by (0): zero.
+- `the-spectral-theorem-and-singular-value-decomposition-examples`:
+  title (0): zero;
+  deps (1): `fs-normal-operators-are-diagonalisable-over-the-base-field`;
+  justified_by (0): zero.
+- `complexification-realification-and-real-structures`:
+  title (0): zero;
+  deps (8): `def-complexification-of-a-real-linear-map`, `def-conjugation-and-real-structure-on-a-complex-vector-space`, `thm-universal-property-and-uniqueness-of-complexification`, `thm-complexification-preserves-kernels-images-rank-nullity-and-short-exact-sequences`, `thm-a-real-basis-complexifies-to-a-complex-basis`, `thm-fixed-points-of-a-conjugation-form-a-real-space-and-its-complexification-recovers-the-ambient-space`, `cor-real-forms-correspond-to-conjugations`, `thm-a-complex-linear-operator-comes-from-a-real-operator-exactly-when-it-commutes-with-the-chosen-conjugation`;
+  justified_by (0): zero.
+- `complexification-realification-and-real-structures-examples`:
+  title (0): zero;
+  deps (1): `fs-every-complex-vector-space-has-a-preferred-real-form`;
+  justified_by (0): zero.
+- `exterior-powers-orientation-and-hodge-duality`:
+  title (0): zero;
+  deps (9): `def-orientation-of-a-finite-dimensional-real-vector-space`, `thm-universal-property-and-uniqueness-of-exterior-powers`, `prop-basic-wedge-is-multilinear-and-alternating`, `thm-increasing-basis-wedges-form-a-basis`, `cor-dimension-of-the-kth-exterior-power`, `thm-gram-inner-product-on-exterior-powers-is-positive-definite`, `def-oriented-unit-volume-form`, `def-interior-product-on-the-exterior-algebra`, `thm-interior-product-is-adjoint-to-exterior-multiplication`;
+  justified_by (3): `def-gram-inner-product-on-kth-exterior-power -> [thm-gram-inner-product-on-exterior-powers-is-positive-definite]`, `def-hodge-star-on-an-oriented-inner-product-space -> [thm-hodge-star-exists-uniquely-and-has-the-orthonormal-basis-formula]`, `def-interior-product-on-the-exterior-algebra -> [thm-interior-product-is-adjoint-to-exterior-multiplication]`.
+- `exterior-powers-orientation-and-hodge-duality-examples`:
+  title (0): zero;
+  deps (2): `ex-orientation-reversal-negates-the-hodge-star`, `fs-the-exterior-power-is-a-canonical-subspace-of-the-tensor-power-over-every-field`;
+  justified_by (0): zero.
+- `matrix-norms-condition-numbers-and-numerical-stability`:
+  title (3): `thm-induced-matrix-norms-are-compatible-submultiplicative-and-normalized`, `def-frobenius-matrix-norm`, `lem-product-of-one-plus-deltas-gives-theta-n`;
+  deps (10): `def-induced-matrix-p-norm`, `def-frobenius-matrix-norm`, `thm-spectral-and-frobenius-norms-are-unitarily-invariant-with-singular-value-formulas-and-rank-comparison`, `thm-reciprocal-spectral-condition-number-is-the-relative-distance-to-singularity`, `thm-residual-to-forward-error-bounds-for-linear-systems`, `prop-explicit-formulas-for-normwise-and-componentwise-backward-error`, `def-standard-relative-floating-point-model-and-unit-roundoff`, `def-forward-and-backward-stability-for-a-problem-family`, `lem-product-of-one-plus-deltas-gives-theta-n`, `thm-normal-equations-square-the-spectral-condition-number`;
+  justified_by (0): zero.
+- `matrix-norms-condition-numbers-and-numerical-stability-examples`:
+  title (1): `ex-normal-equations-versus-qr-conditioning`;
+  deps (1): `ex-normal-equations-versus-qr-conditioning`;
+  justified_by (0): zero.
+- `direct-matrix-factorisations-lu-cholesky-and-qr`:
+  title (3): `thm-normalised-lu-and-ldu-factorisations-are-unique`, `thm-unpivoted-unit-lower-lu-exists-iff-leading-principal-minors-are-nonzero`, `thm-householder-qr-is-backward-stable-in-the-standard-floating-point-model`;
+  deps (0): zero;
+  justified_by (0): zero.
+- `the-moore-penrose-pseudoinverse-and-regularised-least-squares`:
+  title (0): zero;
+  deps (5): `thm-aa-plus-and-a-plus-a-are-orthogonal-projections-onto-the-image-spaces`, `prop-full-column-rank-pseudoinverse-formula`, `thm-a-plus-b-is-the-unique-minimum-norm-least-squares-solution`, `thm-least-squares-solutions-form-an-affine-kernel-translate-of-a-plus-b`, `thm-pseudoinversion-is-continuous-on-each-fixed-rank-stratum-and-discontinuous-at-rank-loss`;
+  justified_by (0): zero.
+- `the-moore-penrose-pseudoinverse-and-regularised-least-squares-examples`:
+  title (0): zero;
+  deps (1): `cex-pseudoinversion-is-discontinuous-at-a-rank-changing-diagonal-family`;
+  justified_by (0): zero.
+- `eigenvalue-iterations-and-the-qr-algorithm`:
+  title (3): `prop-hermitian-rayleigh-quotient-stationary-points-and-residual-gradient`, `thm-unshifted-qr-converges-under-separated-moduli-and-leading-minor-hypotheses`, `thm-wilkinson-shifted-symmetric-tridiagonal-qr-has-local-deflation-away-from-ties`;
+  deps (5): `def-eigenpair-residual-and-normwise-backward-error`, `thm-eigenpair-residual-realises-the-minimum-norm-backward-error`, `def-rayleigh-quotient-iteration`, `prop-rayleigh-quotient-and-residual-converge-along-hermitian-power-iteration`, `thm-hermitian-rayleigh-quotient-iteration-has-local-cubic-convergence`;
+  justified_by (0): zero.
+- `krylov-subspaces-arnoldi-and-gmres`:
+  title (2): `prop-krylov-subspace-is-the-polynomial-image-of-the-start-vector`, `thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization`;
+  deps (1): `thm-arnoldi-produces-an-orthonormal-krylov-basis-and-upper-hessenberg-factorization`;
+  justified_by (0): zero.
+- `krylov-subspaces-arnoldi-and-gmres-examples`:
+  title (1): `ex-matrix-free-gmres-for-a-sparse-operator`;
+  deps (0): zero;
+  justified_by (0): zero.
+- `matrix-differentiation-and-first-order-spectral-perturbation`:
+  title (0): zero;
+  deps (2): `prop-reduced-resolvent-identities-for-a-simple-eigenvalue`, `thm-directional-derivative-of-a-simple-positive-singular-value`;
+  justified_by (1): `def-reduced-resolvent-or-group-inverse-at-a-simple-eigenvalue -> [prop-reduced-resolvent-identities-for-a-simple-eigenvalue]`.
+- `conjugate-gradients-minres-and-preconditioning`:
+  title (0): zero;
+  deps (1): `def-left-right-and-symmetric-positive-definite-preconditioning`;
+  justified_by (2): `def-conjugate-gradient-recurrence -> [prop-conjugate-gradient-denominators-are-positive-before-convergence]`, `def-lanczos-process-as-hermitian-arnoldi -> [thm-hermitian-arnoldi-collapses-to-the-lanczos-three-term-recurrence]`.
+
+## 22. Probability Theory reconciliation (2026-09-08)
+
+Planned PT-9 consumes the already-published Linear Algebra theorem
+`thm-non-negative-square-root-exists-and-is-unique` through A page
+`the-spectral-theorem-and-singular-value-decomposition`; it must not use empty
+FA-19. This existing-published-supplier to planned-consumer seam creates no
+Linear Algebra Phase-2 root or published impact.

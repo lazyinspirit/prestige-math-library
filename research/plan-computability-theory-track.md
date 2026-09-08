@@ -1785,3 +1785,1554 @@ level one greater than the maximum level of its requirements.
 - The file contains no absolute order assignment, authored live item, plan
   mutation, TypeScript command, orchestration runbook, or request to repair a
   published article.
+
+## 44. Binding live-graph audit (2026-09-08)
+
+This section and §§45--52 supersede every conflicting inventory, dependency
+claim, collision claim, count, or readiness claim above.  The earlier material
+is retained as research history.  This audit used the live page files, all
+live item frontmatter, and `research/plan-spec.json` as read-only evidence; it
+does not authorize a mutation of any of them.
+
+The live Computability Theory block is orders 581--654: thirty-seven A/B
+pairs, of which thirty-three pairs have page files and four pairs are not yet
+built (`TC-32`, `TC-34`, `TC-35`, and `TC-36`).  All sixty-six existing page
+files say `status: published`.  Their 693 plan-listed item records split into
+407 published item files and 286 draft item files.  Thus a published page is
+not evidence that every item it lists is published.
+
+The exact item-status census is:
+
+| orders | A-page base id | A published/draft | B published/draft |
+|---:|---|---:|---:|
+| 581--582 | `formal-languages-encodings-and-decision-problems` | 10/8 | 0/4 |
+| 583--584 | `deterministic-finite-automata-and-regular-languages` | 16/0 | 3/0 |
+| 585--586 | `nondeterministic-finite-automata-and-subset-construction` | 4/11 | 0/3 |
+| 587--588 | `regular-expressions-and-kleenes-theorem` | 0/16 | 0/3 |
+| 589--590 | `myhill-nerode-theory-and-dfa-minimization` | 0/16 | 0/3 |
+| 591--592 | `context-free-grammars-and-normal-forms` | 20/0 | 3/0 |
+| 593--594 | `pushdown-automata-and-context-free-languages` | 0/17 | 0/3 |
+| 595--596 | `context-free-pumping-ogden-and-parsing` | 0/16 | 0/3 |
+| 597--598 | `turing-machines-configurations-and-computation` | 9/7 | 0/3 |
+| 599--600 | `robust-machine-models-and-universal-computation` | 8/8 | 0/3 |
+| 601--602 | `decidable-recognizable-and-enumerable-languages` | 4/11 | 0/3 |
+| 603--604 | `diagonalization-and-the-halting-problem` | 15/0 | 3/0 |
+| 605--606 | `computable-reductions-and-rices-theorem` | 0/16 | 0/3 |
+| 607--608 | `post-correspondence-and-language-undecidability` | 0/15 | 0/3 |
+| 609--610 | `primitive-recursive-and-partial-computable-functions` | 0/16 | 0/3 |
+| 611--612 | `acceptable-numberings-smn-and-the-recursion-theorem` | 0/16 | 0/3 |
+| 613--614 | `the-arithmetical-hierarchy-and-posts-theorem` | 18/0 | 3/0 |
+| 615--616 | `oracle-computability-the-jump-and-turing-degrees` | 23/0 | 3/0 |
+| 617--618 | `resource-bounds-and-machine-invariance` | 3/11 | 0/3 |
+| 619--620 | `p-np-conp-and-polynomial-reductions` | 17/0 | 3/0 |
+| 621--622 | `the-cook-levin-theorem` | 0/16 | 0/3 |
+| 623--624 | `classical-np-completeness-reductions` | 19/0 | 3/0 |
+| 625--626 | `space-complexity-savitch-and-tqbf` | 0/17 | 0/3 |
+| 627--628 | `time-and-space-hierarchy-theorems` | 20/0 | 3/0 |
+| 629--630 | `logarithmic-space-nl-and-reachability` | 19/0 | 3/0 |
+| 631--632 | `boolean-circuits-and-nonuniform-complexity` | 16/0 | 3/0 |
+| 633--634 | `the-polynomial-hierarchy-and-relativization` | 25/0 | 4/0 |
+| 635--636 | `randomized-complexity-and-amplification` | 0/17 | 0/3 |
+| 637--638 | `counting-complexity-and-sharpp` | 17/0 | 3/0 |
+| 639--640 | `interactive-proof-systems-and-public-coins` | 16/0 | 3/0 |
+| 641--642 | `arithmetization-and-the-sum-check-protocol` | 24/0 | 4/0 |
+| 643--644 | `the-ip-equals-pspace-theorem` | 0/0 | 0/0 |
+| 645--646 | `expander-graphs-and-constraint-graphs` | 31/0 | 4/0 |
+| 647--648 | `gap-amplification-and-assignment-testing` | 0/0 | 0/0 |
+| 649--650 | `alphabet-reduction-and-the-pcp-theorem` | 0/0 | 0/0 |
+| 651--652 | `approximation-algorithms-and-gap-reductions` | 0/0 | 0/0 |
+| 653--654 | `kolmogorov-complexity-and-algorithmic-randomness` | 22/0 | 3/0 |
+
+The exact graph checks have the following binding results.
+
+- No Computability A page requires a B page, and no Computability B page is a
+  prerequisite of any live page.  No outside item consumes an item whose only
+  home is a Computability B page.  All future B pages remain dependency
+  leaves: their only page requirement is their A companion and nothing may
+  depend on them.
+- No Computability item has a same-page or cross-page forward item edge.  The
+  four empty pairs occur only after their named A prerequisites.  Every A-page
+  prerequisite is an earlier A page.
+- No direct or transitive Computability item path reaches a
+  Recorded--Not-Proved-Here item or `deferred-set-theory-beyond-choice`.
+  Neither may be introduced during the repairs below.
+- No page or item outside Computability Theory currently has a direct edge to
+  a Computability page or item.  Published consumers found below are therefore
+  all on later Computability pages.
+- The only uncovered cross-page item interface is on
+  `randomized-complexity-and-amplification`: both
+  `def-polynomial-identity-testing` and `thm-schwartz-zippel-lemma` use
+  `def-monomials-multidegree-and-total-degree`, whose home is
+  `linear-algebra-methods-in-combinatorics`.  Add that A page to the former A
+  page's `requires` array.
+- `primitive-recursive-and-partial-computable-functions` requires the legacy
+  published page `construction-of-the-natural-numbers`.  Its page and items
+  exist on disk, but the live plan entry is the legacy `P`/empty-inventory
+  form.  Hydrate that plan entry from the published page and item frontmatter;
+  do not replace it with a new page or copy its mathematics locally.
+
+The live item-home scan also finds two duplicate A/B homes.  The exact plan
+amendment is to remove the A-page `examples` arrays from
+`space-complexity-savitch-and-tqbf` and
+`randomized-complexity-and-amplification`; retain the B companion homes.  The
+duplicated ids are respectively
+`ex-bounded-reachability-recursion-is-correct`, `ex-ap-equals-pspace`,
+`cex-savitch-stores-the-whole-configuration-graph`, and
+`ex-majority-error-bound-from-chebyshev`, `ex-pit-is-in-corp`,
+`cex-reusing-random-bits-amplifies-success`.
+
+## 45. Exact published-page defects and deferred repairs
+
+Published pages and item files are immutable during this audit.  The following
+are exact instructions for a later authorized repair.
+
+The semantic pass covered all thirty-three existing pairs by reconciling the
+current bytes with their independent reader records:
+
+| reader record | A-page bases checked |
+|---|---|
+| `frontier-24-reader-10.md` | `formal-languages-encodings-and-decision-problems`; `deterministic-finite-automata-and-regular-languages`; `context-free-grammars-and-normal-forms` |
+| `frontier-25-reader-10.md` | `nondeterministic-finite-automata-and-subset-construction`; `pushdown-automata-and-context-free-languages` |
+| `frontier-25-reader-11.md` | `turing-machines-configurations-and-computation` |
+| `frontier-26-reader-10.md` | `regular-expressions-and-kleenes-theorem`; `context-free-pumping-ogden-and-parsing` |
+| `frontier-26-reader-11.md` | `robust-machine-models-and-universal-computation` |
+| `frontier-27-reader-9.md` | `myhill-nerode-theory-and-dfa-minimization`; `decidable-recognizable-and-enumerable-languages` |
+| `frontier-27-reader-10.md` | `primitive-recursive-and-partial-computable-functions`; `resource-bounds-and-machine-invariance` |
+| `frontier-28-reader-11.md` | `diagonalization-and-the-halting-problem`; `p-np-conp-and-polynomial-reductions` |
+| `frontier-29-reader-18.md` | `computable-reductions-and-rices-theorem`; `the-cook-levin-theorem` |
+| `frontier-29-reader-19.md` | `space-complexity-savitch-and-tqbf`; `randomized-complexity-and-amplification` |
+| `frontier-30-reader-19.md` | `post-correspondence-and-language-undecidability`; `acceptable-numberings-smn-and-the-recursion-theorem` |
+| `frontier-30-reader-20.md` | `classical-np-completeness-reductions` |
+| `frontier-31a-reader-21.md` | `the-arithmetical-hierarchy-and-posts-theorem`; `time-and-space-hierarchy-theorems` |
+| `frontier-31a-reader-22.md` | `logarithmic-space-nl-and-reachability` |
+| `frontier-32-reader-1.md` | `boolean-circuits-and-nonuniform-complexity`; `counting-complexity-and-sharpp` |
+| `frontier-32-reader-2.md` | `interactive-proof-systems-and-public-coins`; `kolmogorov-complexity-and-algorithmic-randomness` |
+| `frontier-32-reader-19.md` | `oracle-computability-the-jump-and-turing-degrees` |
+| `frontier-33-reader-17.md` | `the-polynomial-hierarchy-and-relativization`; `expander-graphs-and-constraint-graphs` |
+| `frontier-33-reader-18.md` | `arithmetization-and-the-sum-check-protocol` |
+
+The initial circuit/counting failures in `frontier-32-reader-1.md` were
+reconciled against the later 2026-09-07 audit/judge-pass metadata in the
+current item files.  On current bytes, the DPDA construction below is the only
+remaining mathematical proof gap exposed by those records.
+
+### Deterministic pushdown complement closure
+
+On the published A page
+`pushdown-automata-and-context-free-languages`, the draft item
+`prop-deterministic-cfls-are-closed-under-complement` imports a "standard DPDA
+complementation construction" as fact F1.  State complementation is not valid
+until premature blocking and end-of-input behavior have been totalized.  Insert
+the following four A-page items, in this order, immediately before that
+proposition, and rewrite the proposition to depend on the fourth item instead
+of F1:
+
+1. `lem-simple-normal-form-for-dpdas-preserves-determinism-and-language` —
+   convert a DPDA to the simple endmarked normal form while preserving
+   determinism and its language.
+2. `def-dpda-dead-end-configuration-and-local-dead-end-triple` — define the
+   finitely detectable configurations/triples at which the next forced move is
+   unavailable.
+3. `lem-dead-end-free-dpda-reads-the-complete-endmarked-input` — prove that a
+   run with no dead end consumes the complete endmarked input.
+4. `lem-dpda-dead-end-totalization-is-deterministic-and-language-preserving`
+   — redirect every dead-end triple to a sink that consumes the remainder,
+   reads the endmarker, and empties the stack; verify determinism and language
+   preservation before swapping final and nonfinal states.
+
+This is the construction in Lewis--Papadimitriou, *Elements of the Theory of
+Computation*, 2nd ed., Theorem 3.7.1, printed pp. 160--161, in the
+[authoritative full text](https://home.cse.ust.hk/~lzhang/teach/3721/Elements_of_Theory_of_Computation_2ed_Lewis_Papadimitriou.pdf).
+Each inserted item has **0 direct published consumers** and **0 items in its
+transitive published consumer closure**: its immediate consumer is a draft
+item.  These four are planned-only repairs, not independent Phase-2 roots.
+
+The historical review report for
+`cex-unrestricted-diagonalization-respects-any-bound` identified an
+unsupported asymptotic-Theta assertion.  The current immutable item has
+already removed that assertion and now proves only the required greater-than-
+one-step conclusion.  No further repair is owed for that item.
+
+### Frontmatter-to-plan resynchronization
+
+For each of the 693 existing Computability inventory entries, later plan work
+must copy `title`, `kind`, and dependency arrays from the corresponding item
+frontmatter.  There are no kind mismatches, but there are 107 title mismatches
+and 55 dependency-array mismatches.  The exact affected ids are recorded in
+§51; no item file is to be rewritten merely to match the stale prose or plan.
+
+## 46. Binding replacement for `TC-32`: IP = PSPACE
+
+**A page** `the-ip-equals-pspace-theorem`
+
+**requires** `arithmetization-and-the-sum-check-protocol`,
+`space-complexity-savitch-and-tqbf`,
+`chebyshev-bounds-and-mertens-theorems`.
+
+The last edge supplies the already-published Bertrand bound used to choose a
+prime field of polynomial bit length.  Trial division in the resulting
+polynomial interval and elementary finite-field arithmetic must be proved in
+the item that uses them; no prime-number theorem or randomized prime search is
+assumed.
+
+The binding A inventory, in proof order, is:
+
+1. `def-qbf-arithmetization-operators`
+2. `lem-quantifier-polynomials-agree-on-booleans`
+3. `def-multilinearization-operator`
+4. `lem-multilinearization-preserves-boolean-values` — strengthen the
+   existing proposed contract to include the required degree bound.
+5. `lem-efficient-prime-field-for-a-polynomial-soundness-budget`
+6. `def-shamir-protocol-for-tqbf`
+7. `lem-honest-prover-maintains-the-claim-invariant`
+8. `lem-each-round-has-polynomial-communication` — include explicit degree,
+   message, round, and point-evaluation bounds.
+9. `lem-shamir-protocol-has-perfect-completeness`
+10. `lem-first-false-claim-survives-with-root-bound-probability`
+11. `lem-total-soundness-follows-by-union-bound`
+12. `lem-shamir-qbf-verifier-runs-in-polynomial-time`
+13. `thm-tqbf-has-a-polynomial-round-interactive-proof`
+14. `thm-pspace-is-contained-in-ip`
+15. `thm-ip-equals-pspace`
+16. `cor-ip-is-closed-under-complement`
+17. `thm-ip-can-be-given-perfect-completeness`
+18. `fs-ip-equals-pspace-needs-no-degree-reduction`
+19. `fs-the-verifier-trusts-the-final-field-value`
+
+**B page** `the-ip-equals-pspace-theorem-examples` requires only the A page and
+contains, in order, the new
+`ex-two-quantifier-qbf-arithmetization-transcript` followed by the preserved
+`ex-multilinearization-preserves-boolean-values`,
+`ex-ip-can-be-given-perfect-completeness`, and
+`cex-ip-equals-pspace-needs-no-degree-reduction`.  Every B item depends only
+on A items.
+
+## 47. Binding replacement for `TC-34`: gap amplification
+
+**A page** `gap-amplification-and-assignment-testing`
+
+**requires** `expander-graphs-and-constraint-graphs`,
+`the-cook-levin-theorem`, `randomized-complexity-and-amplification`,
+`algebraic-extensions-degree-and-finite-fields`.
+
+The old mixture of graph powering, assignment testing, and undeveloped code
+claims is not a proof of the reduction.  Replace it with this proof-ordered
+inventory:
+
+1. `def-gap-preserving-csp-reduction` — strengthen the existing proposed
+   definition to record completeness, gap, linear blowup, and uniformity.
+2. `lem-complete-linear-blowup-reductions-compose`
+3. `def-degree-reduction-by-expander-clouds`
+4. `lem-cloud-consistency-forces-near-constant-labels`
+5. `thm-degree-reduction-preserves-unsatisfaction`
+6. `def-constraint-graph-powering` — include the powered local-view alphabet,
+   constraints, and construction-time accounting.
+7. `lem-canonical-local-view-lift-preserves-perfect-satisfiability`
+8. `def-plurality-decoding-of-powered-local-views`
+9. `lem-lazy-walk-lengths-within-root-t-have-close-endpoint-laws`
+10. `lem-plurality-consistency-along-middle-walk-positions`
+11. `lem-expander-walk-violated-edge-collision-bound`
+12. `lem-overlap-controlled-union-lower-bound`
+13. `lem-powering-preserves-perfect-satisfiability`
+14. `lem-powering-amplifies-small-gaps` — prove the numerical Dinur powering
+    bound from items 8--12.
+15. `thm-gap-amplification-step` — include completeness, gap, alphabet, size,
+    arity, and uniform construction time.
+16. `def-explicit-constant-rate-constant-distance-code`
+17. `def-reed-solomon-outer-code-and-binary-linear-inner-code`
+18. `lem-reed-solomon-outer-code-has-constant-rate-and-distance`
+19. `lem-random-linear-inner-code-has-fewer-than-one-bad-codeword-in-expectation`
+20. `lem-conditional-expectation-constructs-the-inner-code-in-polynomial-time`
+21. `lem-concatenated-code-multiplies-rate-and-distance`
+22. `thm-explicit-code-construction-and-distance`
+23. `def-assignment-tester-and-rejection-ratio`
+24. `def-hadamard-linearity-constraint-system`
+25. `thm-linearity-test-rejects-proportionally-to-distance`
+26. `def-quadratic-consistency-test`
+27. `lem-quadratic-test-soundness`
+28. `lem-circuit-satisfaction-is-linear-quadratic-consistency`
+29. `thm-constant-query-assignment-tester`
+30. `lem-tester-size-and-construction-time-are-polynomial`
+31. `fs-repeating-constraints-amplifies-the-gap`
+
+The proof contract for items 8--15 is the full powering analysis: state the
+walk distribution, decoding rule, consistency event, collision/overlap loss,
+new alphabet and size, computability, and the numerical range of the amplified
+gap.  Items 17--22 use a constant-rate Reed--Solomon outer code over a
+power-of-two field and a deterministically constructed binary linear inner
+code.  The random inner-code calculation, its conditional-expectation
+derandomization, concatenated rate/distance product, and polynomial encoding
+time are all proved locally; the theorem must not import an unspecified
+"explicit good code."  The B page
+`gap-amplification-and-assignment-testing-examples` requires only its A page
+and contains the preserved leaf items
+`ex-degree-reduction-preserves-unsatisfaction`,
+`ex-tester-size-and-construction-time-are-polynomial`, and
+`cex-repeating-constraints-amplifies-the-gap`, plus the new
+`ex-plurality-decoding-of-powered-local-views`.  They give respectively the
+cloud calculation, tester-size calculation, repetition counterexample, and a
+numerical local-view/plurality calculation.
+
+## 48. Binding replacement for `TC-35`: alphabet reduction and PCP
+
+**A page** `alphabet-reduction-and-the-pcp-theorem`
+
+**requires** `gap-amplification-and-assignment-testing`,
+`arithmetization-and-the-sum-check-protocol`, `the-cook-levin-theorem`.
+
+The binding A inventory is:
+
+1. `def-pcp-verifier-randomness-query-and-proof-length`
+2. `def-pcp-class-with-completeness-and-soundness`
+3. `lem-two-query-pcps-and-constraint-graphs-are-equivalent`
+4. `def-walsh-hadamard-encoding-and-relative-distance`
+5. `lem-walsh-hadamard-code-has-distance-one-half`
+6. `lem-random-subsum-detects-a-nonzero-binary-vector`
+7. `def-quadratic-equation-instance-and-tensor-code-oracles`
+8. `lem-boolean-circuits-reduce-to-quadratic-equation-systems-with-a-fixed-input-prefix`
+9. `lem-blr-testing-supplies-nearby-linear-decoders`
+10. `lem-tensor-consistency-test-soundness`
+11. `lem-random-subsum-verifies-all-quadratic-equations-with-constant-error`
+12. `thm-constant-query-exponential-pcp-for-quadratic-equations`
+13. `def-pcp-of-proximity-and-concatenation-test`
+14. `lem-concatenation-test-enforces-a-shared-prefix`
+15. `thm-two-piece-pcp-of-proximity`
+16. `def-composition-with-an-assignment-tester`
+17. `lem-composition-preserves-perfect-completeness`
+18. `lem-composition-transfers-rejection-ratio`
+19. `thm-alphabet-reduction-step` — construct the binary clusters and prove
+    perfect completeness, soundness transfer, constant arity, linear blowup,
+    and uniformity.
+20. `lem-alphabet-reduction-controls-size-and-degree`
+21. `def-dinur-pcp-transformation`
+22. `lem-one-transformation-preserves-satisfiability`
+23. `lem-one-transformation-amplifies-gap`
+24. `lem-one-transformation-has-constant-factor-growth`
+25. `lem-logarithmically-many-iterations-reach-constant-gap`
+26. `thm-gap-csp-is-np-hard`
+27. `thm-pcp-theorem-np-equals-pcp-log-n-o-one`
+28. `thm-pcp-error-amplification`
+29. `fs-gap-amplification-alone-controls-alphabet`
+30. `fs-pcp-proofs-are-randomized-strings`
+
+Items 4--15 must prove the tests and proximity/concatenation interface rather
+than name them.  Items 16--20 must account for cluster size, constant arity,
+perfect completeness, soundness transfer, uniform construction time, and
+linear blowup.  Items 21--27 must display the double transformation and all
+iteration parameters.  The B page requires only this A page and contains the
+preserved leaf items `ex-composition-preserves-perfect-completeness`,
+`ex-pcp-error-amplification`, and
+`cex-gap-amplification-alone-controls-alphabet`, plus the new
+`ex-walsh-hadamard-encoding-and-testing`.  Every B item depends only on A
+items.
+
+## 49. Binding replacement for `TC-36`: approximation
+
+**A page** `approximation-algorithms-and-gap-reductions`
+
+**requires** `alphabet-reduction-and-the-pcp-theorem`,
+`classical-np-completeness-reductions`,
+`finite-counting-and-binomial-coefficients`,
+`graphs-walks-and-connectivity`, `trees-forests-and-spanning-trees`,
+`eulerian-and-hamiltonian-graphs`.
+
+The two added graph pages supply spanning-tree and Euler-tour machinery for
+the metric-TSP proof.  The binding A inventory is:
+
+1. `def-optimization-problem-and-approximation-ratio`
+2. `def-ptas-fptas-and-apx`
+3. `thm-maximal-matching-is-a-two-approximation-for-vertex-cover`
+4. `def-greedy-set-cover`
+5. `def-harmonic-number-for-set-cover-analysis`
+6. `lem-greedy-set-cover-charging-bound`
+7. `thm-greedy-set-cover-is-an-h-n-approximation`
+8. `thm-random-cut-has-expected-half-the-edges`
+9. `thm-conditional-expectation-derandomizes-max-cut-half-approximation`
+10. `def-metric-tsp`
+11. `lem-minimum-spanning-tree-cost-lower-bounds-metric-tsp`
+12. `lem-euler-double-tree-shortcutting-does-not-increase-cost`
+13. `thm-doubled-spanning-tree-is-a-two-approximation-for-metric-tsp`
+14. `def-gap-problem-and-gap-preserving-reduction`
+15. `lem-pcp-verifier-reduces-to-gap-max-three-sat`
+16. `thm-max-three-sat-has-no-ptas-unless-p-equals-np`
+17. `lem-gap-three-sat-reduces-to-gap-independent-set` — strengthen the
+    existing proposed contract by proving that the clause graph's independence
+    number equals the maximum number of simultaneously satisfiable clauses.
+18. `thm-independent-set-has-no-ptas-unless-p-equals-np`
+19. `def-l-reduction`
+20. `def-apx-hardness-and-apx-completeness`
+21. `lem-l-reductions-transfer-apx-hardness`
+22. `fs-exact-np-hardness-implies-no-constant-approximation`
+
+The PCP-to-Max-3SAT item must construct the constant-size local-predicate CNF,
+track the number of coins/queries/clauses, and prove both completeness and the
+gap; a bare appeal to Cook--Levin is insufficient.  The B page
+`approximation-algorithms-and-gap-reductions-examples` requires only the A
+page.  Preserve `ex-greedy-set-cover-charging-bound`,
+`ex-l-reductions-transfer-apx-hardness`, and
+`cex-exact-np-hardness-implies-no-constant-approximation`; add
+`ex-conditional-expectation-for-a-small-max-cut-instance` and
+`ex-double-tree-shortcutting-for-a-metric-tsp-instance`.  All five are leaf
+items depending only on A items.
+
+The algorithmic and hardness proofs above are supported by the complete
+Williamson--Shmoys text: greedy set cover §1.6 and Theorem 1.11 (printed
+pp. 24--26), metric TSP Lemma 2.10 and Theorems 2.11--2.12 (printed
+pp. 44--46), conditional expectation in Chapter 5 (printed pp. 105--109), and
+L-reductions Definition 16.4 and Theorems 16.5--16.6 (printed pp. 412--415),
+available as an [authoritative full text](https://www.designofapproxalgs.com/book.pdf).
+
+The `TC-32` contract was checked against Arora--Barak §8.5, Theorem 8.17 and
+Remark 8.19 (printed pp. 157--161).  The advanced PCP contracts in §§47--48
+were checked against §§18.4.1--18.4.3 (printed pp. 363--369), and
+§18.5/Definition 18.27, Lemmas 18.28--18.31, Claims 18.32--18.34, and
+Corollary 18.35 (printed pp. 369--379), in the [authoritative full
+text](https://theory.cs.princeton.edu/complexity/book.pdf).
+The code subchain in §47 uses the same full text's Definition 17.8 and Lemma
+17.9 (printed pp. 328--330), Reed--Solomon construction and distance proof in
+§17.5.2, and concatenation Definition 17.19 and Claim 17.20 (printed
+pp. 333--335), together with the fully proved conditional-expectation method
+from Williamson--Shmoys Chapter 5 cited above.  This closes the source's own
+warning that merely knowing a good code exists does not provide an efficient
+encoder.
+The original article's bibliographic endpoint is also the
+[Dinur institutional record](https://weizmann.esploro.exlibrisgroup.com/esploro/outputs/journalArticle/The-PCP-theorem-by-gap-amplification/993347066803596).
+
+## 50. Supplier classes, cross-category seams, and validation
+
+### Phase-2-eligible supplier closure
+
+There are 55 direct published-to-draft edges from 47 distinct published
+consumer items to 29 draft supplier roots.
+Closing their draft prerequisites produces exactly 55 Phase-2-eligible items
+on ten A pages.  §52 gives, for every one of the 55 items, the exact direct
+published consumers and the complete transitive published consumer closure,
+grouped by home page; it explicitly records zero direct consumers where
+appropriate.  This is the repair set that removes all current
+published-to-draft item edges.  A supplier with zero direct published
+consumers can still be Phase-2 eligible when it lies on a draft path to a
+published consumer.
+
+### Planned-only suppliers with zero published impact
+
+Every planned-only supplier id in §§45--49, whether preserved from the earlier
+unbuilt inventory or newly inserted, has **0 direct published consumers** and
+a **0-item complete transitive published consumer closure** in the current
+graph.  This applies individually to the four DPDA ids in §45 and all A-page
+ids in the following exact sets:
+
+- `TC-32`: `def-qbf-arithmetization-operators`,
+  `lem-quantifier-polynomials-agree-on-booleans`,
+  `def-multilinearization-operator`,
+  `lem-multilinearization-preserves-boolean-values`,
+  `lem-efficient-prime-field-for-a-polynomial-soundness-budget`,
+  `def-shamir-protocol-for-tqbf`,
+  `lem-honest-prover-maintains-the-claim-invariant`,
+  `lem-each-round-has-polynomial-communication`,
+  `lem-shamir-protocol-has-perfect-completeness`,
+  `lem-first-false-claim-survives-with-root-bound-probability`,
+  `lem-total-soundness-follows-by-union-bound`,
+  `lem-shamir-qbf-verifier-runs-in-polynomial-time`,
+  `thm-tqbf-has-a-polynomial-round-interactive-proof`,
+  `thm-pspace-is-contained-in-ip`, `thm-ip-equals-pspace`,
+  `cor-ip-is-closed-under-complement`,
+  `thm-ip-can-be-given-perfect-completeness`,
+  `fs-ip-equals-pspace-needs-no-degree-reduction`,
+  `fs-the-verifier-trusts-the-final-field-value`.
+- `TC-34`: `def-gap-preserving-csp-reduction`,
+  `lem-complete-linear-blowup-reductions-compose`,
+  `def-degree-reduction-by-expander-clouds`,
+  `lem-cloud-consistency-forces-near-constant-labels`,
+  `thm-degree-reduction-preserves-unsatisfaction`,
+  `def-constraint-graph-powering`,
+  `lem-canonical-local-view-lift-preserves-perfect-satisfiability`,
+  `def-plurality-decoding-of-powered-local-views`,
+  `lem-lazy-walk-lengths-within-root-t-have-close-endpoint-laws`,
+  `lem-plurality-consistency-along-middle-walk-positions`,
+  `lem-expander-walk-violated-edge-collision-bound`,
+  `lem-overlap-controlled-union-lower-bound`,
+  `lem-powering-preserves-perfect-satisfiability`,
+  `lem-powering-amplifies-small-gaps`, `thm-gap-amplification-step`,
+  `def-explicit-constant-rate-constant-distance-code`,
+  `def-reed-solomon-outer-code-and-binary-linear-inner-code`,
+  `lem-reed-solomon-outer-code-has-constant-rate-and-distance`,
+  `lem-random-linear-inner-code-has-fewer-than-one-bad-codeword-in-expectation`,
+  `lem-conditional-expectation-constructs-the-inner-code-in-polynomial-time`,
+  `lem-concatenated-code-multiplies-rate-and-distance`,
+  `thm-explicit-code-construction-and-distance`,
+  `def-assignment-tester-and-rejection-ratio`,
+  `def-hadamard-linearity-constraint-system`,
+  `thm-linearity-test-rejects-proportionally-to-distance`,
+  `def-quadratic-consistency-test`, `lem-quadratic-test-soundness`,
+  `lem-circuit-satisfaction-is-linear-quadratic-consistency`,
+  `thm-constant-query-assignment-tester`,
+  `lem-tester-size-and-construction-time-are-polynomial`,
+  `fs-repeating-constraints-amplifies-the-gap`.
+- `TC-35`: `def-pcp-verifier-randomness-query-and-proof-length`,
+  `def-pcp-class-with-completeness-and-soundness`,
+  `lem-two-query-pcps-and-constraint-graphs-are-equivalent`,
+  `def-walsh-hadamard-encoding-and-relative-distance`,
+  `lem-walsh-hadamard-code-has-distance-one-half`,
+  `lem-random-subsum-detects-a-nonzero-binary-vector`,
+  `def-quadratic-equation-instance-and-tensor-code-oracles`,
+  `lem-boolean-circuits-reduce-to-quadratic-equation-systems-with-a-fixed-input-prefix`,
+  `lem-blr-testing-supplies-nearby-linear-decoders`,
+  `lem-tensor-consistency-test-soundness`,
+  `lem-random-subsum-verifies-all-quadratic-equations-with-constant-error`,
+  `thm-constant-query-exponential-pcp-for-quadratic-equations`,
+  `def-pcp-of-proximity-and-concatenation-test`,
+  `lem-concatenation-test-enforces-a-shared-prefix`,
+  `thm-two-piece-pcp-of-proximity`,
+  `def-composition-with-an-assignment-tester`,
+  `lem-composition-preserves-perfect-completeness`,
+  `lem-composition-transfers-rejection-ratio`,
+  `thm-alphabet-reduction-step`,
+  `lem-alphabet-reduction-controls-size-and-degree`,
+  `def-dinur-pcp-transformation`,
+  `lem-one-transformation-preserves-satisfiability`,
+  `lem-one-transformation-amplifies-gap`,
+  `lem-one-transformation-has-constant-factor-growth`,
+  `lem-logarithmically-many-iterations-reach-constant-gap`,
+  `thm-gap-csp-is-np-hard`,
+  `thm-pcp-theorem-np-equals-pcp-log-n-o-one`,
+  `thm-pcp-error-amplification`,
+  `fs-gap-amplification-alone-controls-alphabet`,
+  `fs-pcp-proofs-are-randomized-strings`.
+- `TC-36`: `def-optimization-problem-and-approximation-ratio`,
+  `def-ptas-fptas-and-apx`,
+  `thm-maximal-matching-is-a-two-approximation-for-vertex-cover`,
+  `def-greedy-set-cover`, `def-harmonic-number-for-set-cover-analysis`,
+  `lem-greedy-set-cover-charging-bound`,
+  `thm-greedy-set-cover-is-an-h-n-approximation`,
+  `thm-random-cut-has-expected-half-the-edges`,
+  `thm-conditional-expectation-derandomizes-max-cut-half-approximation`,
+  `def-metric-tsp`,
+  `lem-minimum-spanning-tree-cost-lower-bounds-metric-tsp`,
+  `lem-euler-double-tree-shortcutting-does-not-increase-cost`,
+  `thm-doubled-spanning-tree-is-a-two-approximation-for-metric-tsp`,
+  `def-gap-problem-and-gap-preserving-reduction`,
+  `lem-pcp-verifier-reduces-to-gap-max-three-sat`,
+  `thm-max-three-sat-has-no-ptas-unless-p-equals-np`,
+  `lem-gap-three-sat-reduces-to-gap-independent-set`,
+  `thm-independent-set-has-no-ptas-unless-p-equals-np`, `def-l-reduction`,
+  `def-apx-hardness-and-apx-completeness`,
+  `lem-l-reductions-transfer-apx-hardness`,
+  `fs-exact-np-hardness-implies-no-constant-approximation`.
+
+The B-page items in §§46--49 are leaves, not suppliers, and likewise have zero
+published consumers.
+
+### Cross-category reconciliation
+
+- Category Theory has zero direct item edges and zero page-requirement edges
+  in either direction.  No Category Theory scaffold amendment is owed.
+- Foundations/Set Theory supplies only earlier published relations, functions,
+  ZFC, and the legacy natural-number construction.  No path reaches the
+  deferred beyond-choice page.  No Foundations/Set Theory scaffold amendment
+  is owed; only the central legacy-plan hydration in §44 is needed.
+- Abstract Algebra supplies polynomial and finite-field material;
+  Combinatorics supplies graphs, probability, counting, trees, and Euler
+  tours; Linear Algebra supplies spectral machinery.  The only omitted live
+  interface is the exact randomized-complexity edge recorded in §44.  The
+  unbuilt approximation page additionally needs the two graph edges in §49.
+- No currently repaired outside scaffold or published page consumes a
+  Computability item.  Therefore no reverse seam amendment is owed elsewhere.
+
+### Validation gates
+
+Before applying these instructions, rerun stable-id collision checks against
+all item files, aliases, the live plan, and all prose scaffolds: the assertion
+in §42 that every proposed id was new is stale.  Then require: unique item
+homes; A-only, strictly earlier page requirements; B-only companion
+requirements and zero B consumers; no published-to-draft item edge after the
+55-item Phase-2 closure; no forward item edge; no path to recorded/unproved or
+deferred-choice material; and exact equality between plan item metadata and
+item frontmatter for every existing id.  The read-only audit passed all of
+these structural checks except the expressly recorded metadata drift,
+duplicate homes, uncovered randomized-complexity page edge, legacy-plan
+hydration, and published-to-draft edges.
+
+## 51. Exact live-plan metadata resynchronization set
+
+The following generated inventory is binding for the current snapshot.  Each
+line gives a home page and the exact ids whose plan metadata must be replaced
+from item frontmatter.
+
+- `formal-languages-encodings-and-decision-problems`: dependency arrays (7) `def-language-concatenation-powers-and-kleene-star`, `lem-language-concatenation-is-associative`, `lem-reversal-is-an-involution-and-reverses-concatenation`, `lem-induced-word-map-has-the-free-extension-property`, `def-effective-binary-encoding-and-decoder`, `def-decision-search-and-function-problem`, `fs-a-language-is-a-set-of-symbols`; titles (0) .
+- `deterministic-finite-automata-and-regular-languages`: dependency arrays (2) `def-extended-dfa-transition-function`, `def-dfa-acceptance-and-recognized-language`; titles (0) .
+- `myhill-nerode-theory-and-dfa-minimization`: dependency arrays (2) `thm-myhill-nerode-characterization`, `thm-pumping-lemma-for-regular-languages`; titles (0) .
+- `context-free-grammars-and-normal-forms`: dependency arrays (0) ; titles (1) `def-language-generated-by-a-cfg`.
+- `context-free-grammars-and-normal-forms-examples`: dependency arrays (1) `ex-elimination-of-useless-symbols`; titles (3) `ex-elimination-of-useless-symbols`, `ex-cfl-closure-under-union-concatenation-star-and-homomorphism`, `cex-an-ambiguous-cfg-need-not-generate-an-inherently-ambiguous-language`.
+- `pushdown-automata-and-context-free-languages`: dependency arrays (1) `thm-pda-to-cfg-construction`; titles (0) .
+- `context-free-pumping-ogden-and-parsing`: dependency arrays (2) `thm-ogdens-lemma`, `fs-the-cfl-pumping-lemma-characterizes-cfls`; titles (0) .
+- `context-free-pumping-ogden-and-parsing-examples`: dependency arrays (1) `cex-the-cfl-pumping-lemma-characterizes-cfls`; titles (0) .
+- `turing-machines-configurations-and-computation`: dependency arrays (3) `def-nondeterministic-accepting-computation`, `prop-valid-computation-histories-are-decidable`, `lem-acceptance-is-configuration-reachability`; titles (0) .
+- `robust-machine-models-and-universal-computation`: dependency arrays (1) `lem-step-by-step-interpreter-for-machine-codes`; titles (0) .
+- `diagonalization-and-the-halting-problem`: dependency arrays (1) `thm-machine-acceptance-is-recognizable`; titles (0) .
+- `computable-reductions-and-rices-theorem`: dependency arrays (1) `thm-rice-shapiro-positive-information-direction`; titles (0) .
+- `computable-reductions-and-rices-theorem-examples`: dependency arrays (0) ; titles (1) `ex-many-one-reductions-transfer-decidability-and-recognizability`.
+- `post-correspondence-and-language-undecidability`: dependency arrays (1) `thm-proper-inclusions-in-the-chomsky-hierarchy`; titles (2) `def-chomsky-hierarchy`, `thm-proper-inclusions-in-the-chomsky-hierarchy`.
+- `post-correspondence-and-language-undecidability-examples`: dependency arrays (1) `ex-proper-inclusions-in-the-chomsky-hierarchy`; titles (0) .
+- `primitive-recursive-and-partial-computable-functions`: dependency arrays (3) `def-kleene-t-predicate-and-output-function`, `thm-partial-recursive-iff-turing-computable`, `thm-lambda-definable-iff-partial-recursive`; titles (0) .
+- `acceptable-numberings-smn-and-the-recursion-theorem`: dependency arrays (4) `def-universal-and-acceptable-numbering`, `thm-nonhalting-is-productive-and-halting-is-creative`, `thm-myhill-isomorphism-theorem-for-creative-sets`, `fs-program-indices-are-unique`; titles (0) .
+- `the-arithmetical-hierarchy-and-posts-theorem`: dependency arrays (1) `thm-halting-is-sigma-one-complete`; titles (0) .
+- `oracle-computability-the-jump-and-turing-degrees`: dependency arrays (3) `def-turing-jump`, `thm-every-oracle-is-strictly-below-its-jump`, `thm-relative-halting-is-oracle-ce-complete`; titles (23) `def-oracle-turing-machine`, `def-turing-reducibility-and-equivalence`, `lem-turing-reducibility-is-a-preorder`, `def-turing-degree-and-degree-order`, `lem-degree-order-is-representative-independent`, `def-tagged-join-of-oracles`, `thm-turing-degrees-form-an-upper-semilattice`, `def-turing-jump`, `lem-jump-is-well-defined-on-degrees`, `thm-every-oracle-is-strictly-below-its-jump`, `thm-jump-is-monotone`, `def-oracle-ce-completeness`, `thm-relative-halting-is-oracle-ce-complete`, `cor-finite-jumps-match-arithmetical-levels`, `def-truth-table-reduction`, `lem-total-oracle-functional-has-computable-use-bound`, `prop-truth-table-implies-turing-reduction`, `def-computably-dominated-oracle`, `lem-halting-oracle-is-not-computably-dominated`, `thm-computably-dominated-characterizes-truth-table-reducibility`, `thm-some-turing-reductions-are-not-truth-table-reductions`, `fs-an-oracle-machine-reads-the-infinite-oracle-at-once`, `fs-degree-join-is-set-union`.
+- `oracle-computability-the-jump-and-turing-degrees-examples`: dependency arrays (0) ; titles (3) `ex-degree-order-is-representative-independent`, `ex-some-turing-reductions-are-not-truth-table-reductions`, `cex-an-oracle-machine-reads-the-infinite-oracle-at-once`.
+- `resource-bounds-and-machine-invariance`: dependency arrays (3) `thm-universal-simulation-with-logarithmic-overhead`, `prop-polynomial-time-and-space-are-model-invariant`, `fs-model-invariance-means-equal-step-counts`; titles (1) `thm-universal-simulation-with-logarithmic-overhead`.
+- `resource-bounds-and-machine-invariance-examples`: dependency arrays (1) `cex-model-invariance-means-equal-step-counts`; titles (1) `cex-model-invariance-means-equal-step-counts`.
+- `the-cook-levin-theorem`: dependency arrays (0) ; titles (5) `def-local-tableau-window`, `lem-legal-tableaux-iff-all-local-windows-and-boundaries-are-legal`, `lem-cook-levin-formula-is-satisfiable-iff-acceptance-occurs`, `lem-cook-levin-map-is-polynomial-time`, `fs-cook-levin-enumerates-all-branches`.
+- `the-cook-levin-theorem-examples`: dependency arrays (1) `cex-cook-levin-enumerates-all-branches`; titles (0) .
+- `space-complexity-savitch-and-tqbf`: dependency arrays (2) `lem-space-bounded-machines-have-exponentially-many-configurations`, `thm-tqbf-is-pspace-complete`; titles (0) .
+- `time-and-space-hierarchy-theorems`: dependency arrays (1) `thm-read-only-workspace-space-hierarchy`; titles (0) .
+- `logarithmic-space-nl-and-reachability`: dependency arrays (0) ; titles (1) `lem-logspace-reductions-compose`.
+- `logarithmic-space-nl-and-reachability-examples`: dependency arrays (1) `cex-nl-equals-conl-follows-by-state-swapping`; titles (0) .
+- `boolean-circuits-and-nonuniform-complexity`: dependency arrays (1) `thm-undecidable-languages-exist-in-p-poly`; titles (1) `fs-shannon-counting-gives-an-explicit-hard-function`.
+- `the-polynomial-hierarchy-and-relativization`: dependency arrays (0) ; titles (25) `def-polynomial-hierarchy-levels`, `def-relativized-complexity-class`, `lem-ph-quantifier-block-closure`, `prop-np-and-conp-are-the-first-levels`, `lem-ph-circuit-matrix-final-block-encoding`, `thm-bounded-alternation-qbf-is-level-complete`, `lem-ph-adaptive-oracle-transcript-normal-form`, `thm-quantifier-and-oracle-characterizations-of-ph`, `prop-ph-containments-and-polynomial-space`, `lem-collapse-at-one-level-propagates`, `thm-sigma-k-equals-pi-k-implies-ph-collapse`, `cor-ph-complete-language-forces-collapse`, `lem-standard-containments-relativize`, `def-relativizing-proof-technique`, `lem-oracle-diagonalization-finite-extension`, `thm-an-oracle-separates-p-from-np`, `lem-polynomial-space-oracle-absorption`, `thm-an-oracle-collapses-p-and-np`, `cor-relativization-alone-cannot-resolve-p-versus-np`, `def-lowness-and-highness`, `prop-elementary-high-low-identities`, `def-promise-problem`, `def-promise-preserving-reduction`, `rem-oracle-and-promise-conventions-are-distinct`, `fs-relativized-separations-prove-unrelativized-separations`.
+- `the-polynomial-hierarchy-and-relativization-examples`: dependency arrays (0) ; titles (4) `ex-np-and-conp-are-the-first-levels`, `ex-relativization-alone-cannot-resolve-p-versus-np`, `cex-relativized-separations-prove-unrelativized-separations`, `ex-promise-oracle-off-promise-answers`.
+- `randomized-complexity-and-amplification`: dependency arrays (6) `thm-zpp-equals-rp-intersection-corp`, `lem-majority-error-bound-from-chebyshev`, `thm-adleman-bpp-is-contained-in-p-poly`, `thm-freivalds-matrix-product-verification`, `def-polynomial-identity-testing`, `thm-schwartz-zippel-lemma`; titles (1) `thm-freivalds-matrix-product-verification`.
+- `counting-complexity-and-sharpp`: dependency arrays (1) `def-p-with-a-sharpp-oracle`; titles (0) .
+- `expander-graphs-and-constraint-graphs`: dependency arrays (0) ; titles (31) `def-regular-multigraph-and-normalized-adjacency`, `lem-constant-vector-is-a-top-eigenvector`, `def-spectral-edge-and-vertex-expansion`, `thm-expander-mixing-lemma`, `lem-cheeger-indicator-and-positive-part-energy`, `lem-cheeger-sweep-and-layer-cake`, `thm-cheeger-inequalities-for-finite-regular-graphs`, `cor-expander-independent-sets-coloring-and-diameter`, `def-margulis-gabber-galil-graph`, `lem-margulis-family-is-constant-degree-and-neighbor-computable`, `def-finite-torus-fourier-transform`, `lem-finite-torus-fourier-orthogonality-and-affine-change`, `lem-fourier-analysis-of-margulis-adjacency`, `lem-margulis-diamond-weight-bound`, `thm-margulis-family-has-uniform-spectral-gap`, `lem-expander-size-adjustment-and-laziness`, `cor-explicit-polynomial-time-constant-degree-expanders-exist`, `def-constraint-graph-and-labeling-value`, `def-constraint-graph-regularization`, `lem-cloud-plurality-rounding`, `lem-regularization-preserves-value-quantitatively`, `lem-constraint-expander-overlay`, `def-graph-power-and-walk-constraint`, `lem-expander-walk-contraction`, `lem-expander-walk-restricted-operator`, `thm-expander-walk-hits-dense-bad-sets`, `prop-expander-walk-sampled-and-moving-sets`, `lem-expander-walk-bad-edge-return`, `prop-expander-walk-hits-bad-edges`, `def-gap-csp`, `fs-nonconstructive-expanders-suffice-for-uniform-reductions`.
+- `expander-graphs-and-constraint-graphs-examples`: dependency arrays (0) ; titles (4) `ex-expander-mixing-lemma`, `ex-expander-walk-hits-dense-bad-sets`, `cex-nonconstructive-expanders-suffice-for-uniform-reductions`, `ex-constraint-cloud-rounding-and-loop-counts`.
+- `kolmogorov-complexity-and-algorithmic-randomness`: dependency arrays (3) `lem-basic-conditional-complexity-inequalities`, `thm-symmetry-of-information-up-to-logarithmic-terms`, `thm-levin-schnorr-characterization`; titles (0) .
+
+## 52. Exact Phase-2 supplier-to-published-consumer map
+
+For each of the 55 Phase-2-eligible supplier items, this appendix records the
+exact direct published consumers and the complete distinct transitive
+published consumer closure.  Transitive reachability is allowed to pass
+through draft intermediates; results are grouped by the published consumer's
+home page.  A displayed zero is literal, not an omitted search result.
+
+#### `def-computable-program-transformer` (home: `acceptable-numberings-smn-and-the-recursion-theorem`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (3):
+- `oracle-computability-the-jump-and-turing-degrees` (2): `lem-halting-oracle-is-not-computably-dominated`, `thm-some-turing-reductions-are-not-truth-table-reductions`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (1): `ex-some-turing-reductions-are-not-truth-table-reductions`.
+
+#### `def-numbering-of-partial-computable-functions` (home: `acceptable-numberings-smn-and-the-recursion-theorem`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (42):
+- `kolmogorov-complexity-and-algorithmic-randomness` (4): `lem-universal-martin-lof-test-exists`, `thm-effective-dimension-is-liminf-prefix-complexity-rate`, `thm-invariance-for-prefix-complexity`, `thm-levin-schnorr-characterization`.
+- `kolmogorov-complexity-and-algorithmic-randomness-examples` (1): `ex-effective-dimension-is-liminf-prefix-complexity-rate`.
+- `oracle-computability-the-jump-and-turing-degrees` (23): `cor-finite-jumps-match-arithmetical-levels`, `def-computably-dominated-oracle`, `def-oracle-ce-completeness`, `def-oracle-turing-machine`, `def-tagged-join-of-oracles`, `def-truth-table-reduction`, `def-turing-degree-and-degree-order`, `def-turing-jump`, `def-turing-reducibility-and-equivalence`, `fs-an-oracle-machine-reads-the-infinite-oracle-at-once`, `fs-degree-join-is-set-union`, `lem-degree-order-is-representative-independent`, `lem-halting-oracle-is-not-computably-dominated`, `lem-jump-is-well-defined-on-degrees`, `lem-total-oracle-functional-has-computable-use-bound`, `lem-turing-reducibility-is-a-preorder`, `prop-truth-table-implies-turing-reduction`, `thm-computably-dominated-characterizes-truth-table-reducibility`, `thm-every-oracle-is-strictly-below-its-jump`, `thm-jump-is-monotone`, `thm-relative-halting-is-oracle-ce-complete`, `thm-some-turing-reductions-are-not-truth-table-reductions`, `thm-turing-degrees-form-an-upper-semilattice`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (3): `cex-an-oracle-machine-reads-the-infinite-oracle-at-once`, `ex-degree-order-is-representative-independent`, `ex-some-turing-reductions-are-not-truth-table-reductions`.
+- `the-arithmetical-hierarchy-and-posts-theorem` (9): `def-relative-computability-and-enumerability`, `fs-limit-computable-has-a-known-stabilization-stage`, `lem-diagonal-set-at-each-level`, `lem-oracle-computation-has-a-finite-query-witness`, `thm-arithmetical-hierarchy-is-strict`, `thm-halting-is-sigma-one-complete`, `thm-posts-theorem`, `thm-shoenfield-limit-lemma`, `thm-totality-is-pi-two-complete`.
+- `the-arithmetical-hierarchy-and-posts-theorem-examples` (2): `ex-shoenfield-limit-lemma`, `ex-sigma-one-sets-are-exactly-ce-sets`.
+
+#### `def-parameter-specialization-function` (home: `acceptable-numberings-smn-and-the-recursion-theorem`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (4):
+- `oracle-computability-the-jump-and-turing-degrees` (2): `lem-halting-oracle-is-not-computably-dominated`, `thm-some-turing-reductions-are-not-truth-table-reductions`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (1): `ex-some-turing-reductions-are-not-truth-table-reductions`.
+- `the-arithmetical-hierarchy-and-posts-theorem` (1): `thm-totality-is-pi-two-complete`.
+
+#### `def-universal-and-acceptable-numbering` (home: `acceptable-numberings-smn-and-the-recursion-theorem`)
+
+Direct published consumers (4): `def-relative-computability-and-enumerability`, `lem-universal-martin-lof-test-exists`, `thm-halting-is-sigma-one-complete`, `thm-invariance-for-prefix-complexity`.
+
+Complete transitive published consumer closure (42):
+- `kolmogorov-complexity-and-algorithmic-randomness` (4): `lem-universal-martin-lof-test-exists`, `thm-effective-dimension-is-liminf-prefix-complexity-rate`, `thm-invariance-for-prefix-complexity`, `thm-levin-schnorr-characterization`.
+- `kolmogorov-complexity-and-algorithmic-randomness-examples` (1): `ex-effective-dimension-is-liminf-prefix-complexity-rate`.
+- `oracle-computability-the-jump-and-turing-degrees` (23): `cor-finite-jumps-match-arithmetical-levels`, `def-computably-dominated-oracle`, `def-oracle-ce-completeness`, `def-oracle-turing-machine`, `def-tagged-join-of-oracles`, `def-truth-table-reduction`, `def-turing-degree-and-degree-order`, `def-turing-jump`, `def-turing-reducibility-and-equivalence`, `fs-an-oracle-machine-reads-the-infinite-oracle-at-once`, `fs-degree-join-is-set-union`, `lem-degree-order-is-representative-independent`, `lem-halting-oracle-is-not-computably-dominated`, `lem-jump-is-well-defined-on-degrees`, `lem-total-oracle-functional-has-computable-use-bound`, `lem-turing-reducibility-is-a-preorder`, `prop-truth-table-implies-turing-reduction`, `thm-computably-dominated-characterizes-truth-table-reducibility`, `thm-every-oracle-is-strictly-below-its-jump`, `thm-jump-is-monotone`, `thm-relative-halting-is-oracle-ce-complete`, `thm-some-turing-reductions-are-not-truth-table-reductions`, `thm-turing-degrees-form-an-upper-semilattice`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (3): `cex-an-oracle-machine-reads-the-infinite-oracle-at-once`, `ex-degree-order-is-representative-independent`, `ex-some-turing-reductions-are-not-truth-table-reductions`.
+- `the-arithmetical-hierarchy-and-posts-theorem` (9): `def-relative-computability-and-enumerability`, `fs-limit-computable-has-a-known-stabilization-stage`, `lem-diagonal-set-at-each-level`, `lem-oracle-computation-has-a-finite-query-witness`, `thm-arithmetical-hierarchy-is-strict`, `thm-halting-is-sigma-one-complete`, `thm-posts-theorem`, `thm-shoenfield-limit-lemma`, `thm-totality-is-pi-two-complete`.
+- `the-arithmetical-hierarchy-and-posts-theorem-examples` (2): `ex-shoenfield-limit-lemma`, `ex-sigma-one-sets-are-exactly-ce-sets`.
+
+#### `lem-self-reference-construction-from-smn` (home: `acceptable-numberings-smn-and-the-recursion-theorem`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (3):
+- `oracle-computability-the-jump-and-turing-degrees` (2): `lem-halting-oracle-is-not-computably-dominated`, `thm-some-turing-reductions-are-not-truth-table-reductions`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (1): `ex-some-turing-reductions-are-not-truth-table-reductions`.
+
+#### `thm-kleenes-second-recursion-theorem` (home: `acceptable-numberings-smn-and-the-recursion-theorem`)
+
+Direct published consumers (1): `lem-halting-oracle-is-not-computably-dominated`.
+
+Complete transitive published consumer closure (3):
+- `oracle-computability-the-jump-and-turing-degrees` (2): `lem-halting-oracle-is-not-computably-dominated`, `thm-some-turing-reductions-are-not-truth-table-reductions`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (1): `ex-some-turing-reductions-are-not-truth-table-reductions`.
+
+#### `thm-smn-parameter-theorem` (home: `acceptable-numberings-smn-and-the-recursion-theorem`)
+
+Direct published consumers (1): `thm-totality-is-pi-two-complete`.
+
+Complete transitive published consumer closure (4):
+- `oracle-computability-the-jump-and-turing-degrees` (2): `lem-halting-oracle-is-not-computably-dominated`, `thm-some-turing-reductions-are-not-truth-table-reductions`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (1): `ex-some-turing-reductions-are-not-truth-table-reductions`.
+- `the-arithmetical-hierarchy-and-posts-theorem` (1): `thm-totality-is-pi-two-complete`.
+
+#### `def-computable-many-one-reduction` (home: `computable-reductions-and-rices-theorem`)
+
+Direct published consumers (3): `def-arithmetical-level-completeness`, `def-oracle-ce-completeness`, `thm-totality-is-pi-two-complete`.
+
+Complete transitive published consumer closure (7):
+- `oracle-computability-the-jump-and-turing-degrees` (3): `cor-finite-jumps-match-arithmetical-levels`, `def-oracle-ce-completeness`, `thm-relative-halting-is-oracle-ce-complete`.
+- `the-arithmetical-hierarchy-and-posts-theorem` (3): `def-arithmetical-level-completeness`, `thm-halting-is-sigma-one-complete`, `thm-totality-is-pi-two-complete`.
+- `the-arithmetical-hierarchy-and-posts-theorem-examples` (1): `ex-sigma-one-sets-are-exactly-ce-sets`.
+
+#### `def-turing-reduction` (home: `computable-reductions-and-rices-theorem`)
+
+Direct published consumers (1): `def-relative-computability-and-enumerability`.
+
+Complete transitive published consumer closure (34):
+- `oracle-computability-the-jump-and-turing-degrees` (23): `cor-finite-jumps-match-arithmetical-levels`, `def-computably-dominated-oracle`, `def-oracle-ce-completeness`, `def-oracle-turing-machine`, `def-tagged-join-of-oracles`, `def-truth-table-reduction`, `def-turing-degree-and-degree-order`, `def-turing-jump`, `def-turing-reducibility-and-equivalence`, `fs-an-oracle-machine-reads-the-infinite-oracle-at-once`, `fs-degree-join-is-set-union`, `lem-degree-order-is-representative-independent`, `lem-halting-oracle-is-not-computably-dominated`, `lem-jump-is-well-defined-on-degrees`, `lem-total-oracle-functional-has-computable-use-bound`, `lem-turing-reducibility-is-a-preorder`, `prop-truth-table-implies-turing-reduction`, `thm-computably-dominated-characterizes-truth-table-reducibility`, `thm-every-oracle-is-strictly-below-its-jump`, `thm-jump-is-monotone`, `thm-relative-halting-is-oracle-ce-complete`, `thm-some-turing-reductions-are-not-truth-table-reductions`, `thm-turing-degrees-form-an-upper-semilattice`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (3): `cex-an-oracle-machine-reads-the-infinite-oracle-at-once`, `ex-degree-order-is-representative-independent`, `ex-some-turing-reductions-are-not-truth-table-reductions`.
+- `the-arithmetical-hierarchy-and-posts-theorem` (7): `def-relative-computability-and-enumerability`, `fs-limit-computable-has-a-known-stabilization-stage`, `lem-diagonal-set-at-each-level`, `lem-oracle-computation-has-a-finite-query-witness`, `thm-arithmetical-hierarchy-is-strict`, `thm-posts-theorem`, `thm-shoenfield-limit-lemma`.
+- `the-arithmetical-hierarchy-and-posts-theorem-examples` (1): `ex-shoenfield-limit-lemma`.
+
+#### `def-epsilon-closure-of-a-state-set` (home: `nondeterministic-finite-automata-and-subset-construction`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (3):
+- `nondeterministic-finite-automata-and-subset-construction` (3): `cor-dfas-and-nfas-recognize-the-same-languages`, `def-nfa-acceptance-and-recognized-language`, `thm-subset-construction-preserves-language`.
+
+#### `def-extended-nfa-transition` (home: `nondeterministic-finite-automata-and-subset-construction`)
+
+Direct published consumers (1): `def-nfa-acceptance-and-recognized-language`.
+
+Complete transitive published consumer closure (3):
+- `nondeterministic-finite-automata-and-subset-construction` (3): `cor-dfas-and-nfas-recognize-the-same-languages`, `def-nfa-acceptance-and-recognized-language`, `thm-subset-construction-preserves-language`.
+
+#### `def-subset-construction-dfa` (home: `nondeterministic-finite-automata-and-subset-construction`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (2):
+- `nondeterministic-finite-automata-and-subset-construction` (2): `cor-dfas-and-nfas-recognize-the-same-languages`, `thm-subset-construction-preserves-language`.
+
+#### `lem-subset-construction-state-invariant` (home: `nondeterministic-finite-automata-and-subset-construction`)
+
+Direct published consumers (1): `thm-subset-construction-preserves-language`.
+
+Complete transitive published consumer closure (2):
+- `nondeterministic-finite-automata-and-subset-construction` (2): `cor-dfas-and-nfas-recognize-the-same-languages`, `thm-subset-construction-preserves-language`.
+
+#### `prop-every-dfa-is-an-nfa` (home: `nondeterministic-finite-automata-and-subset-construction`)
+
+Direct published consumers (1): `cor-dfas-and-nfas-recognize-the-same-languages`.
+
+Complete transitive published consumer closure (1):
+- `nondeterministic-finite-automata-and-subset-construction` (1): `cor-dfas-and-nfas-recognize-the-same-languages`.
+
+#### `def-composition-and-primitive-recursion-schemes` (home: `primitive-recursive-and-partial-computable-functions`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (51):
+- `kolmogorov-complexity-and-algorithmic-randomness` (4): `lem-universal-martin-lof-test-exists`, `thm-effective-dimension-is-liminf-prefix-complexity-rate`, `thm-invariance-for-prefix-complexity`, `thm-levin-schnorr-characterization`.
+- `kolmogorov-complexity-and-algorithmic-randomness-examples` (1): `ex-effective-dimension-is-liminf-prefix-complexity-rate`.
+- `oracle-computability-the-jump-and-turing-degrees` (23): `cor-finite-jumps-match-arithmetical-levels`, `def-computably-dominated-oracle`, `def-oracle-ce-completeness`, `def-oracle-turing-machine`, `def-tagged-join-of-oracles`, `def-truth-table-reduction`, `def-turing-degree-and-degree-order`, `def-turing-jump`, `def-turing-reducibility-and-equivalence`, `fs-an-oracle-machine-reads-the-infinite-oracle-at-once`, `fs-degree-join-is-set-union`, `lem-degree-order-is-representative-independent`, `lem-halting-oracle-is-not-computably-dominated`, `lem-jump-is-well-defined-on-degrees`, `lem-total-oracle-functional-has-computable-use-bound`, `lem-turing-reducibility-is-a-preorder`, `prop-truth-table-implies-turing-reduction`, `thm-computably-dominated-characterizes-truth-table-reducibility`, `thm-every-oracle-is-strictly-below-its-jump`, `thm-jump-is-monotone`, `thm-relative-halting-is-oracle-ce-complete`, `thm-some-turing-reductions-are-not-truth-table-reductions`, `thm-turing-degrees-form-an-upper-semilattice`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (3): `cex-an-oracle-machine-reads-the-infinite-oracle-at-once`, `ex-degree-order-is-representative-independent`, `ex-some-turing-reductions-are-not-truth-table-reductions`.
+- `the-arithmetical-hierarchy-and-posts-theorem` (17): `cor-delta-one-sets-are-exactly-decidable`, `def-arithmetical-level-completeness`, `def-bounded-arithmetic-formula`, `def-relative-computability-and-enumerability`, `def-sigma-n-pi-n-and-delta-n-sets`, `fs-limit-computable-has-a-known-stabilization-stage`, `fs-sigma-n-and-pi-n-are-disjoint`, `lem-bounded-quantifiers-preserve-primitive-recursiveness`, `lem-diagonal-set-at-each-level`, `lem-oracle-computation-has-a-finite-query-witness`, `lem-prenex-normalization-preserves-level`, `thm-arithmetical-hierarchy-is-strict`, `thm-halting-is-sigma-one-complete`, `thm-posts-theorem`, `thm-shoenfield-limit-lemma`, `thm-sigma-one-sets-are-exactly-ce-sets`, `thm-totality-is-pi-two-complete`.
+- `the-arithmetical-hierarchy-and-posts-theorem-examples` (3): `cex-sigma-n-and-pi-n-are-disjoint`, `ex-shoenfield-limit-lemma`, `ex-sigma-one-sets-are-exactly-ce-sets`.
+
+#### `def-initial-arithmetic-functions` (home: `primitive-recursive-and-partial-computable-functions`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (51):
+- `kolmogorov-complexity-and-algorithmic-randomness` (4): `lem-universal-martin-lof-test-exists`, `thm-effective-dimension-is-liminf-prefix-complexity-rate`, `thm-invariance-for-prefix-complexity`, `thm-levin-schnorr-characterization`.
+- `kolmogorov-complexity-and-algorithmic-randomness-examples` (1): `ex-effective-dimension-is-liminf-prefix-complexity-rate`.
+- `oracle-computability-the-jump-and-turing-degrees` (23): `cor-finite-jumps-match-arithmetical-levels`, `def-computably-dominated-oracle`, `def-oracle-ce-completeness`, `def-oracle-turing-machine`, `def-tagged-join-of-oracles`, `def-truth-table-reduction`, `def-turing-degree-and-degree-order`, `def-turing-jump`, `def-turing-reducibility-and-equivalence`, `fs-an-oracle-machine-reads-the-infinite-oracle-at-once`, `fs-degree-join-is-set-union`, `lem-degree-order-is-representative-independent`, `lem-halting-oracle-is-not-computably-dominated`, `lem-jump-is-well-defined-on-degrees`, `lem-total-oracle-functional-has-computable-use-bound`, `lem-turing-reducibility-is-a-preorder`, `prop-truth-table-implies-turing-reduction`, `thm-computably-dominated-characterizes-truth-table-reducibility`, `thm-every-oracle-is-strictly-below-its-jump`, `thm-jump-is-monotone`, `thm-relative-halting-is-oracle-ce-complete`, `thm-some-turing-reductions-are-not-truth-table-reductions`, `thm-turing-degrees-form-an-upper-semilattice`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (3): `cex-an-oracle-machine-reads-the-infinite-oracle-at-once`, `ex-degree-order-is-representative-independent`, `ex-some-turing-reductions-are-not-truth-table-reductions`.
+- `the-arithmetical-hierarchy-and-posts-theorem` (17): `cor-delta-one-sets-are-exactly-decidable`, `def-arithmetical-level-completeness`, `def-bounded-arithmetic-formula`, `def-relative-computability-and-enumerability`, `def-sigma-n-pi-n-and-delta-n-sets`, `fs-limit-computable-has-a-known-stabilization-stage`, `fs-sigma-n-and-pi-n-are-disjoint`, `lem-bounded-quantifiers-preserve-primitive-recursiveness`, `lem-diagonal-set-at-each-level`, `lem-oracle-computation-has-a-finite-query-witness`, `lem-prenex-normalization-preserves-level`, `thm-arithmetical-hierarchy-is-strict`, `thm-halting-is-sigma-one-complete`, `thm-posts-theorem`, `thm-shoenfield-limit-lemma`, `thm-sigma-one-sets-are-exactly-ce-sets`, `thm-totality-is-pi-two-complete`.
+- `the-arithmetical-hierarchy-and-posts-theorem-examples` (3): `cex-sigma-n-and-pi-n-are-disjoint`, `ex-shoenfield-limit-lemma`, `ex-sigma-one-sets-are-exactly-ce-sets`.
+
+#### `def-kleene-t-predicate-and-output-function` (home: `primitive-recursive-and-partial-computable-functions`)
+
+Direct published consumers (1): `thm-totality-is-pi-two-complete`.
+
+Complete transitive published consumer closure (46):
+- `kolmogorov-complexity-and-algorithmic-randomness` (4): `lem-universal-martin-lof-test-exists`, `thm-effective-dimension-is-liminf-prefix-complexity-rate`, `thm-invariance-for-prefix-complexity`, `thm-levin-schnorr-characterization`.
+- `kolmogorov-complexity-and-algorithmic-randomness-examples` (1): `ex-effective-dimension-is-liminf-prefix-complexity-rate`.
+- `oracle-computability-the-jump-and-turing-degrees` (23): `cor-finite-jumps-match-arithmetical-levels`, `def-computably-dominated-oracle`, `def-oracle-ce-completeness`, `def-oracle-turing-machine`, `def-tagged-join-of-oracles`, `def-truth-table-reduction`, `def-turing-degree-and-degree-order`, `def-turing-jump`, `def-turing-reducibility-and-equivalence`, `fs-an-oracle-machine-reads-the-infinite-oracle-at-once`, `fs-degree-join-is-set-union`, `lem-degree-order-is-representative-independent`, `lem-halting-oracle-is-not-computably-dominated`, `lem-jump-is-well-defined-on-degrees`, `lem-total-oracle-functional-has-computable-use-bound`, `lem-turing-reducibility-is-a-preorder`, `prop-truth-table-implies-turing-reduction`, `thm-computably-dominated-characterizes-truth-table-reducibility`, `thm-every-oracle-is-strictly-below-its-jump`, `thm-jump-is-monotone`, `thm-relative-halting-is-oracle-ce-complete`, `thm-some-turing-reductions-are-not-truth-table-reductions`, `thm-turing-degrees-form-an-upper-semilattice`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (3): `cex-an-oracle-machine-reads-the-infinite-oracle-at-once`, `ex-degree-order-is-representative-independent`, `ex-some-turing-reductions-are-not-truth-table-reductions`.
+- `the-arithmetical-hierarchy-and-posts-theorem` (12): `cor-delta-one-sets-are-exactly-decidable`, `def-relative-computability-and-enumerability`, `fs-limit-computable-has-a-known-stabilization-stage`, `fs-sigma-n-and-pi-n-are-disjoint`, `lem-diagonal-set-at-each-level`, `lem-oracle-computation-has-a-finite-query-witness`, `thm-arithmetical-hierarchy-is-strict`, `thm-halting-is-sigma-one-complete`, `thm-posts-theorem`, `thm-shoenfield-limit-lemma`, `thm-sigma-one-sets-are-exactly-ce-sets`, `thm-totality-is-pi-two-complete`.
+- `the-arithmetical-hierarchy-and-posts-theorem-examples` (3): `cex-sigma-n-and-pi-n-are-disjoint`, `ex-shoenfield-limit-lemma`, `ex-sigma-one-sets-are-exactly-ce-sets`.
+
+#### `def-mu-minimization-and-partial-recursive-function` (home: `primitive-recursive-and-partial-computable-functions`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (46):
+- `kolmogorov-complexity-and-algorithmic-randomness` (4): `lem-universal-martin-lof-test-exists`, `thm-effective-dimension-is-liminf-prefix-complexity-rate`, `thm-invariance-for-prefix-complexity`, `thm-levin-schnorr-characterization`.
+- `kolmogorov-complexity-and-algorithmic-randomness-examples` (1): `ex-effective-dimension-is-liminf-prefix-complexity-rate`.
+- `oracle-computability-the-jump-and-turing-degrees` (23): `cor-finite-jumps-match-arithmetical-levels`, `def-computably-dominated-oracle`, `def-oracle-ce-completeness`, `def-oracle-turing-machine`, `def-tagged-join-of-oracles`, `def-truth-table-reduction`, `def-turing-degree-and-degree-order`, `def-turing-jump`, `def-turing-reducibility-and-equivalence`, `fs-an-oracle-machine-reads-the-infinite-oracle-at-once`, `fs-degree-join-is-set-union`, `lem-degree-order-is-representative-independent`, `lem-halting-oracle-is-not-computably-dominated`, `lem-jump-is-well-defined-on-degrees`, `lem-total-oracle-functional-has-computable-use-bound`, `lem-turing-reducibility-is-a-preorder`, `prop-truth-table-implies-turing-reduction`, `thm-computably-dominated-characterizes-truth-table-reducibility`, `thm-every-oracle-is-strictly-below-its-jump`, `thm-jump-is-monotone`, `thm-relative-halting-is-oracle-ce-complete`, `thm-some-turing-reductions-are-not-truth-table-reductions`, `thm-turing-degrees-form-an-upper-semilattice`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (3): `cex-an-oracle-machine-reads-the-infinite-oracle-at-once`, `ex-degree-order-is-representative-independent`, `ex-some-turing-reductions-are-not-truth-table-reductions`.
+- `the-arithmetical-hierarchy-and-posts-theorem` (12): `cor-delta-one-sets-are-exactly-decidable`, `def-relative-computability-and-enumerability`, `fs-limit-computable-has-a-known-stabilization-stage`, `fs-sigma-n-and-pi-n-are-disjoint`, `lem-diagonal-set-at-each-level`, `lem-oracle-computation-has-a-finite-query-witness`, `thm-arithmetical-hierarchy-is-strict`, `thm-halting-is-sigma-one-complete`, `thm-posts-theorem`, `thm-shoenfield-limit-lemma`, `thm-sigma-one-sets-are-exactly-ce-sets`, `thm-totality-is-pi-two-complete`.
+- `the-arithmetical-hierarchy-and-posts-theorem-examples` (3): `cex-sigma-n-and-pi-n-are-disjoint`, `ex-shoenfield-limit-lemma`, `ex-sigma-one-sets-are-exactly-ce-sets`.
+
+#### `def-natural-number-coding-of-finite-sequences` (home: `primitive-recursive-and-partial-computable-functions`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (46):
+- `kolmogorov-complexity-and-algorithmic-randomness` (4): `lem-universal-martin-lof-test-exists`, `thm-effective-dimension-is-liminf-prefix-complexity-rate`, `thm-invariance-for-prefix-complexity`, `thm-levin-schnorr-characterization`.
+- `kolmogorov-complexity-and-algorithmic-randomness-examples` (1): `ex-effective-dimension-is-liminf-prefix-complexity-rate`.
+- `oracle-computability-the-jump-and-turing-degrees` (23): `cor-finite-jumps-match-arithmetical-levels`, `def-computably-dominated-oracle`, `def-oracle-ce-completeness`, `def-oracle-turing-machine`, `def-tagged-join-of-oracles`, `def-truth-table-reduction`, `def-turing-degree-and-degree-order`, `def-turing-jump`, `def-turing-reducibility-and-equivalence`, `fs-an-oracle-machine-reads-the-infinite-oracle-at-once`, `fs-degree-join-is-set-union`, `lem-degree-order-is-representative-independent`, `lem-halting-oracle-is-not-computably-dominated`, `lem-jump-is-well-defined-on-degrees`, `lem-total-oracle-functional-has-computable-use-bound`, `lem-turing-reducibility-is-a-preorder`, `prop-truth-table-implies-turing-reduction`, `thm-computably-dominated-characterizes-truth-table-reducibility`, `thm-every-oracle-is-strictly-below-its-jump`, `thm-jump-is-monotone`, `thm-relative-halting-is-oracle-ce-complete`, `thm-some-turing-reductions-are-not-truth-table-reductions`, `thm-turing-degrees-form-an-upper-semilattice`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (3): `cex-an-oracle-machine-reads-the-infinite-oracle-at-once`, `ex-degree-order-is-representative-independent`, `ex-some-turing-reductions-are-not-truth-table-reductions`.
+- `the-arithmetical-hierarchy-and-posts-theorem` (12): `cor-delta-one-sets-are-exactly-decidable`, `def-relative-computability-and-enumerability`, `fs-limit-computable-has-a-known-stabilization-stage`, `fs-sigma-n-and-pi-n-are-disjoint`, `lem-diagonal-set-at-each-level`, `lem-oracle-computation-has-a-finite-query-witness`, `thm-arithmetical-hierarchy-is-strict`, `thm-halting-is-sigma-one-complete`, `thm-posts-theorem`, `thm-shoenfield-limit-lemma`, `thm-sigma-one-sets-are-exactly-ce-sets`, `thm-totality-is-pi-two-complete`.
+- `the-arithmetical-hierarchy-and-posts-theorem-examples` (3): `cex-sigma-n-and-pi-n-are-disjoint`, `ex-shoenfield-limit-lemma`, `ex-sigma-one-sets-are-exactly-ce-sets`.
+
+#### `def-primitive-recursive-function` (home: `primitive-recursive-and-partial-computable-functions`)
+
+Direct published consumers (2): `def-bounded-arithmetic-formula`, `lem-bounded-quantifiers-preserve-primitive-recursiveness`.
+
+Complete transitive published consumer closure (51):
+- `kolmogorov-complexity-and-algorithmic-randomness` (4): `lem-universal-martin-lof-test-exists`, `thm-effective-dimension-is-liminf-prefix-complexity-rate`, `thm-invariance-for-prefix-complexity`, `thm-levin-schnorr-characterization`.
+- `kolmogorov-complexity-and-algorithmic-randomness-examples` (1): `ex-effective-dimension-is-liminf-prefix-complexity-rate`.
+- `oracle-computability-the-jump-and-turing-degrees` (23): `cor-finite-jumps-match-arithmetical-levels`, `def-computably-dominated-oracle`, `def-oracle-ce-completeness`, `def-oracle-turing-machine`, `def-tagged-join-of-oracles`, `def-truth-table-reduction`, `def-turing-degree-and-degree-order`, `def-turing-jump`, `def-turing-reducibility-and-equivalence`, `fs-an-oracle-machine-reads-the-infinite-oracle-at-once`, `fs-degree-join-is-set-union`, `lem-degree-order-is-representative-independent`, `lem-halting-oracle-is-not-computably-dominated`, `lem-jump-is-well-defined-on-degrees`, `lem-total-oracle-functional-has-computable-use-bound`, `lem-turing-reducibility-is-a-preorder`, `prop-truth-table-implies-turing-reduction`, `thm-computably-dominated-characterizes-truth-table-reducibility`, `thm-every-oracle-is-strictly-below-its-jump`, `thm-jump-is-monotone`, `thm-relative-halting-is-oracle-ce-complete`, `thm-some-turing-reductions-are-not-truth-table-reductions`, `thm-turing-degrees-form-an-upper-semilattice`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (3): `cex-an-oracle-machine-reads-the-infinite-oracle-at-once`, `ex-degree-order-is-representative-independent`, `ex-some-turing-reductions-are-not-truth-table-reductions`.
+- `the-arithmetical-hierarchy-and-posts-theorem` (17): `cor-delta-one-sets-are-exactly-decidable`, `def-arithmetical-level-completeness`, `def-bounded-arithmetic-formula`, `def-relative-computability-and-enumerability`, `def-sigma-n-pi-n-and-delta-n-sets`, `fs-limit-computable-has-a-known-stabilization-stage`, `fs-sigma-n-and-pi-n-are-disjoint`, `lem-bounded-quantifiers-preserve-primitive-recursiveness`, `lem-diagonal-set-at-each-level`, `lem-oracle-computation-has-a-finite-query-witness`, `lem-prenex-normalization-preserves-level`, `thm-arithmetical-hierarchy-is-strict`, `thm-halting-is-sigma-one-complete`, `thm-posts-theorem`, `thm-shoenfield-limit-lemma`, `thm-sigma-one-sets-are-exactly-ce-sets`, `thm-totality-is-pi-two-complete`.
+- `the-arithmetical-hierarchy-and-posts-theorem-examples` (3): `cex-sigma-n-and-pi-n-are-disjoint`, `ex-shoenfield-limit-lemma`, `ex-sigma-one-sets-are-exactly-ce-sets`.
+
+#### `lem-turing-step-coding-is-primitive-recursive` (home: `primitive-recursive-and-partial-computable-functions`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (46):
+- `kolmogorov-complexity-and-algorithmic-randomness` (4): `lem-universal-martin-lof-test-exists`, `thm-effective-dimension-is-liminf-prefix-complexity-rate`, `thm-invariance-for-prefix-complexity`, `thm-levin-schnorr-characterization`.
+- `kolmogorov-complexity-and-algorithmic-randomness-examples` (1): `ex-effective-dimension-is-liminf-prefix-complexity-rate`.
+- `oracle-computability-the-jump-and-turing-degrees` (23): `cor-finite-jumps-match-arithmetical-levels`, `def-computably-dominated-oracle`, `def-oracle-ce-completeness`, `def-oracle-turing-machine`, `def-tagged-join-of-oracles`, `def-truth-table-reduction`, `def-turing-degree-and-degree-order`, `def-turing-jump`, `def-turing-reducibility-and-equivalence`, `fs-an-oracle-machine-reads-the-infinite-oracle-at-once`, `fs-degree-join-is-set-union`, `lem-degree-order-is-representative-independent`, `lem-halting-oracle-is-not-computably-dominated`, `lem-jump-is-well-defined-on-degrees`, `lem-total-oracle-functional-has-computable-use-bound`, `lem-turing-reducibility-is-a-preorder`, `prop-truth-table-implies-turing-reduction`, `thm-computably-dominated-characterizes-truth-table-reducibility`, `thm-every-oracle-is-strictly-below-its-jump`, `thm-jump-is-monotone`, `thm-relative-halting-is-oracle-ce-complete`, `thm-some-turing-reductions-are-not-truth-table-reductions`, `thm-turing-degrees-form-an-upper-semilattice`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (3): `cex-an-oracle-machine-reads-the-infinite-oracle-at-once`, `ex-degree-order-is-representative-independent`, `ex-some-turing-reductions-are-not-truth-table-reductions`.
+- `the-arithmetical-hierarchy-and-posts-theorem` (12): `cor-delta-one-sets-are-exactly-decidable`, `def-relative-computability-and-enumerability`, `fs-limit-computable-has-a-known-stabilization-stage`, `fs-sigma-n-and-pi-n-are-disjoint`, `lem-diagonal-set-at-each-level`, `lem-oracle-computation-has-a-finite-query-witness`, `thm-arithmetical-hierarchy-is-strict`, `thm-halting-is-sigma-one-complete`, `thm-posts-theorem`, `thm-shoenfield-limit-lemma`, `thm-sigma-one-sets-are-exactly-ce-sets`, `thm-totality-is-pi-two-complete`.
+- `the-arithmetical-hierarchy-and-posts-theorem-examples` (3): `cex-sigma-n-and-pi-n-are-disjoint`, `ex-shoenfield-limit-lemma`, `ex-sigma-one-sets-are-exactly-ce-sets`.
+
+#### `prop-basic-arithmetic-and-bounded-quantification-are-primitive-recursive` (home: `primitive-recursive-and-partial-computable-functions`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (46):
+- `kolmogorov-complexity-and-algorithmic-randomness` (4): `lem-universal-martin-lof-test-exists`, `thm-effective-dimension-is-liminf-prefix-complexity-rate`, `thm-invariance-for-prefix-complexity`, `thm-levin-schnorr-characterization`.
+- `kolmogorov-complexity-and-algorithmic-randomness-examples` (1): `ex-effective-dimension-is-liminf-prefix-complexity-rate`.
+- `oracle-computability-the-jump-and-turing-degrees` (23): `cor-finite-jumps-match-arithmetical-levels`, `def-computably-dominated-oracle`, `def-oracle-ce-completeness`, `def-oracle-turing-machine`, `def-tagged-join-of-oracles`, `def-truth-table-reduction`, `def-turing-degree-and-degree-order`, `def-turing-jump`, `def-turing-reducibility-and-equivalence`, `fs-an-oracle-machine-reads-the-infinite-oracle-at-once`, `fs-degree-join-is-set-union`, `lem-degree-order-is-representative-independent`, `lem-halting-oracle-is-not-computably-dominated`, `lem-jump-is-well-defined-on-degrees`, `lem-total-oracle-functional-has-computable-use-bound`, `lem-turing-reducibility-is-a-preorder`, `prop-truth-table-implies-turing-reduction`, `thm-computably-dominated-characterizes-truth-table-reducibility`, `thm-every-oracle-is-strictly-below-its-jump`, `thm-jump-is-monotone`, `thm-relative-halting-is-oracle-ce-complete`, `thm-some-turing-reductions-are-not-truth-table-reductions`, `thm-turing-degrees-form-an-upper-semilattice`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (3): `cex-an-oracle-machine-reads-the-infinite-oracle-at-once`, `ex-degree-order-is-representative-independent`, `ex-some-turing-reductions-are-not-truth-table-reductions`.
+- `the-arithmetical-hierarchy-and-posts-theorem` (12): `cor-delta-one-sets-are-exactly-decidable`, `def-relative-computability-and-enumerability`, `fs-limit-computable-has-a-known-stabilization-stage`, `fs-sigma-n-and-pi-n-are-disjoint`, `lem-diagonal-set-at-each-level`, `lem-oracle-computation-has-a-finite-query-witness`, `thm-arithmetical-hierarchy-is-strict`, `thm-halting-is-sigma-one-complete`, `thm-posts-theorem`, `thm-shoenfield-limit-lemma`, `thm-sigma-one-sets-are-exactly-ce-sets`, `thm-totality-is-pi-two-complete`.
+- `the-arithmetical-hierarchy-and-posts-theorem-examples` (3): `cex-sigma-n-and-pi-n-are-disjoint`, `ex-shoenfield-limit-lemma`, `ex-sigma-one-sets-are-exactly-ce-sets`.
+
+#### `thm-kleene-normal-form` (home: `primitive-recursive-and-partial-computable-functions`)
+
+Direct published consumers (1): `thm-sigma-one-sets-are-exactly-ce-sets`.
+
+Complete transitive published consumer closure (46):
+- `kolmogorov-complexity-and-algorithmic-randomness` (4): `lem-universal-martin-lof-test-exists`, `thm-effective-dimension-is-liminf-prefix-complexity-rate`, `thm-invariance-for-prefix-complexity`, `thm-levin-schnorr-characterization`.
+- `kolmogorov-complexity-and-algorithmic-randomness-examples` (1): `ex-effective-dimension-is-liminf-prefix-complexity-rate`.
+- `oracle-computability-the-jump-and-turing-degrees` (23): `cor-finite-jumps-match-arithmetical-levels`, `def-computably-dominated-oracle`, `def-oracle-ce-completeness`, `def-oracle-turing-machine`, `def-tagged-join-of-oracles`, `def-truth-table-reduction`, `def-turing-degree-and-degree-order`, `def-turing-jump`, `def-turing-reducibility-and-equivalence`, `fs-an-oracle-machine-reads-the-infinite-oracle-at-once`, `fs-degree-join-is-set-union`, `lem-degree-order-is-representative-independent`, `lem-halting-oracle-is-not-computably-dominated`, `lem-jump-is-well-defined-on-degrees`, `lem-total-oracle-functional-has-computable-use-bound`, `lem-turing-reducibility-is-a-preorder`, `prop-truth-table-implies-turing-reduction`, `thm-computably-dominated-characterizes-truth-table-reducibility`, `thm-every-oracle-is-strictly-below-its-jump`, `thm-jump-is-monotone`, `thm-relative-halting-is-oracle-ce-complete`, `thm-some-turing-reductions-are-not-truth-table-reductions`, `thm-turing-degrees-form-an-upper-semilattice`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (3): `cex-an-oracle-machine-reads-the-infinite-oracle-at-once`, `ex-degree-order-is-representative-independent`, `ex-some-turing-reductions-are-not-truth-table-reductions`.
+- `the-arithmetical-hierarchy-and-posts-theorem` (12): `cor-delta-one-sets-are-exactly-decidable`, `def-relative-computability-and-enumerability`, `fs-limit-computable-has-a-known-stabilization-stage`, `fs-sigma-n-and-pi-n-are-disjoint`, `lem-diagonal-set-at-each-level`, `lem-oracle-computation-has-a-finite-query-witness`, `thm-arithmetical-hierarchy-is-strict`, `thm-halting-is-sigma-one-complete`, `thm-posts-theorem`, `thm-shoenfield-limit-lemma`, `thm-sigma-one-sets-are-exactly-ce-sets`, `thm-totality-is-pi-two-complete`.
+- `the-arithmetical-hierarchy-and-posts-theorem-examples` (3): `cex-sigma-n-and-pi-n-are-disjoint`, `ex-shoenfield-limit-lemma`, `ex-sigma-one-sets-are-exactly-ce-sets`.
+
+#### `thm-partial-recursive-iff-turing-computable` (home: `primitive-recursive-and-partial-computable-functions`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (42):
+- `kolmogorov-complexity-and-algorithmic-randomness` (4): `lem-universal-martin-lof-test-exists`, `thm-effective-dimension-is-liminf-prefix-complexity-rate`, `thm-invariance-for-prefix-complexity`, `thm-levin-schnorr-characterization`.
+- `kolmogorov-complexity-and-algorithmic-randomness-examples` (1): `ex-effective-dimension-is-liminf-prefix-complexity-rate`.
+- `oracle-computability-the-jump-and-turing-degrees` (23): `cor-finite-jumps-match-arithmetical-levels`, `def-computably-dominated-oracle`, `def-oracle-ce-completeness`, `def-oracle-turing-machine`, `def-tagged-join-of-oracles`, `def-truth-table-reduction`, `def-turing-degree-and-degree-order`, `def-turing-jump`, `def-turing-reducibility-and-equivalence`, `fs-an-oracle-machine-reads-the-infinite-oracle-at-once`, `fs-degree-join-is-set-union`, `lem-degree-order-is-representative-independent`, `lem-halting-oracle-is-not-computably-dominated`, `lem-jump-is-well-defined-on-degrees`, `lem-total-oracle-functional-has-computable-use-bound`, `lem-turing-reducibility-is-a-preorder`, `prop-truth-table-implies-turing-reduction`, `thm-computably-dominated-characterizes-truth-table-reducibility`, `thm-every-oracle-is-strictly-below-its-jump`, `thm-jump-is-monotone`, `thm-relative-halting-is-oracle-ce-complete`, `thm-some-turing-reductions-are-not-truth-table-reductions`, `thm-turing-degrees-form-an-upper-semilattice`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (3): `cex-an-oracle-machine-reads-the-infinite-oracle-at-once`, `ex-degree-order-is-representative-independent`, `ex-some-turing-reductions-are-not-truth-table-reductions`.
+- `the-arithmetical-hierarchy-and-posts-theorem` (9): `def-relative-computability-and-enumerability`, `fs-limit-computable-has-a-known-stabilization-stage`, `lem-diagonal-set-at-each-level`, `lem-oracle-computation-has-a-finite-query-witness`, `thm-arithmetical-hierarchy-is-strict`, `thm-halting-is-sigma-one-complete`, `thm-posts-theorem`, `thm-shoenfield-limit-lemma`, `thm-totality-is-pi-two-complete`.
+- `the-arithmetical-hierarchy-and-posts-theorem-examples` (2): `ex-shoenfield-limit-lemma`, `ex-sigma-one-sets-are-exactly-ce-sets`.
+
+#### `thm-sequence-length-and-coordinate-functions-are-primitive-recursive` (home: `primitive-recursive-and-partial-computable-functions`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (46):
+- `kolmogorov-complexity-and-algorithmic-randomness` (4): `lem-universal-martin-lof-test-exists`, `thm-effective-dimension-is-liminf-prefix-complexity-rate`, `thm-invariance-for-prefix-complexity`, `thm-levin-schnorr-characterization`.
+- `kolmogorov-complexity-and-algorithmic-randomness-examples` (1): `ex-effective-dimension-is-liminf-prefix-complexity-rate`.
+- `oracle-computability-the-jump-and-turing-degrees` (23): `cor-finite-jumps-match-arithmetical-levels`, `def-computably-dominated-oracle`, `def-oracle-ce-completeness`, `def-oracle-turing-machine`, `def-tagged-join-of-oracles`, `def-truth-table-reduction`, `def-turing-degree-and-degree-order`, `def-turing-jump`, `def-turing-reducibility-and-equivalence`, `fs-an-oracle-machine-reads-the-infinite-oracle-at-once`, `fs-degree-join-is-set-union`, `lem-degree-order-is-representative-independent`, `lem-halting-oracle-is-not-computably-dominated`, `lem-jump-is-well-defined-on-degrees`, `lem-total-oracle-functional-has-computable-use-bound`, `lem-turing-reducibility-is-a-preorder`, `prop-truth-table-implies-turing-reduction`, `thm-computably-dominated-characterizes-truth-table-reducibility`, `thm-every-oracle-is-strictly-below-its-jump`, `thm-jump-is-monotone`, `thm-relative-halting-is-oracle-ce-complete`, `thm-some-turing-reductions-are-not-truth-table-reductions`, `thm-turing-degrees-form-an-upper-semilattice`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (3): `cex-an-oracle-machine-reads-the-infinite-oracle-at-once`, `ex-degree-order-is-representative-independent`, `ex-some-turing-reductions-are-not-truth-table-reductions`.
+- `the-arithmetical-hierarchy-and-posts-theorem` (12): `cor-delta-one-sets-are-exactly-decidable`, `def-relative-computability-and-enumerability`, `fs-limit-computable-has-a-known-stabilization-stage`, `fs-sigma-n-and-pi-n-are-disjoint`, `lem-diagonal-set-at-each-level`, `lem-oracle-computation-has-a-finite-query-witness`, `thm-arithmetical-hierarchy-is-strict`, `thm-halting-is-sigma-one-complete`, `thm-posts-theorem`, `thm-shoenfield-limit-lemma`, `thm-sigma-one-sets-are-exactly-ce-sets`, `thm-totality-is-pi-two-complete`.
+- `the-arithmetical-hierarchy-and-posts-theorem-examples` (3): `cex-sigma-n-and-pi-n-are-disjoint`, `ex-shoenfield-limit-lemma`, `ex-sigma-one-sets-are-exactly-ce-sets`.
+
+#### `def-pairwise-independent-hash-family` (home: `randomized-complexity-and-amplification`)
+
+Direct published consumers (1): `lem-hashing-commits-public-randomness`.
+
+Complete transitive published consumer closure (2):
+- `interactive-proof-systems-and-public-coins` (2): `lem-hashing-commits-public-randomness`, `thm-private-coin-ip-equals-public-coin-ip`.
+
+#### `def-probabilistic-polynomial-time-machine` (home: `randomized-complexity-and-amplification`)
+
+Direct published consumers (2): `def-interactive-proof-transcript-round-and-strategy`, `def-ip`.
+
+Complete transitive published consumer closure (32):
+- `arithmetization-and-the-sum-check-protocol` (8): `cor-sum-check-field-size-error-budget`, `def-sum-check-instance-and-protocol`, `fs-sum-check-computes-all-exponential-summands`, `lem-first-false-round-is-caught-by-root-bound`, `lem-sum-check-perfect-completeness`, `lem-sum-check-verifier-is-polynomial-time-given-point-evaluation`, `prop-arithmetized-formula-counting-sum`, `thm-sum-check-soundness`.
+- `arithmetization-and-the-sum-check-protocol-examples` (2): `cex-sum-check-computes-all-exponential-summands`, `ex-sum-check-three-variable-transcript`.
+- `counting-complexity-and-sharpp` (3): `cor-majority-sat-is-pp-complete`, `thm-pp-is-closed-under-complement`, `thm-pp-is-sign-testing-gap-p`.
+- `interactive-proof-systems-and-public-coins` (16): `def-completeness-and-soundness`, `def-graph-nonisomorphism-protocol`, `def-interactive-proof-transcript-round-and-strategy`, `def-ip`, `def-private-coin-public-coin-and-arthur-merlin-protocol`, `def-protocol-game-tree-and-value`, `fs-soundness-quantifies-only-over-honest-provers`, `fs-the-prover-must-run-in-polynomial-time`, `lem-hashing-commits-public-randomness`, `lem-optimal-prover-may-be-deterministic`, `lem-protocol-value-is-computable-in-polynomial-space`, `lem-sequential-repetition-amplifies-error`, `prop-np-is-contained-in-ip`, `thm-graph-nonisomorphism-is-in-ip`, `thm-ip-is-contained-in-pspace`, `thm-private-coin-ip-equals-public-coin-ip`.
+- `interactive-proof-systems-and-public-coins-examples` (3): `cex-soundness-quantifies-only-over-honest-provers`, `ex-graph-nonisomorphism-is-in-ip`, `ex-sequential-repetition-amplifies-error`.
+
+#### `def-rp-corp-zpp-bpp-and-pp` (home: `randomized-complexity-and-amplification`)
+
+Direct published consumers (1): `thm-pp-is-sign-testing-gap-p`.
+
+Complete transitive published consumer closure (3):
+- `counting-complexity-and-sharpp` (3): `cor-majority-sat-is-pp-complete`, `thm-pp-is-closed-under-complement`, `thm-pp-is-sign-testing-gap-p`.
+
+#### `lem-chernoff-bound-for-bernoulli-trials` (home: `randomized-complexity-and-amplification`)
+
+Direct published consumers (1): `lem-sequential-repetition-amplifies-error`.
+
+Complete transitive published consumer closure (4):
+- `interactive-proof-systems-and-public-coins` (2): `lem-sequential-repetition-amplifies-error`, `thm-graph-nonisomorphism-is-in-ip`.
+- `interactive-proof-systems-and-public-coins-examples` (2): `ex-graph-nonisomorphism-is-in-ip`, `ex-sequential-repetition-amplifies-error`.
+
+#### `thm-schwartz-zippel-lemma` (home: `randomized-complexity-and-amplification`)
+
+Direct published consumers (1): `rem-polynomial-identity-bounds-for-sum-check`.
+
+Complete transitive published consumer closure (1):
+- `arithmetization-and-the-sum-check-protocol` (1): `rem-polynomial-identity-bounds-for-sum-check`.
+
+#### `def-asymptotic-resource-comparison` (home: `resource-bounds-and-machine-invariance`)
+
+Direct published consumers (5): `def-dtime-ntime-dspace-and-nspace`, `def-read-only-input-workspace-classes`, `thm-deterministic-space-hierarchy`, `thm-deterministic-time-hierarchy`, `thm-read-only-workspace-space-hierarchy`.
+
+Complete transitive published consumer closure (122):
+- `boolean-circuits-and-nonuniform-complexity` (5): `def-ac-zero-nc-one-and-nc`, `prop-nc-one-is-contained-in-l-and-l-in-nc-two`, `thm-circuit-sat-is-np-complete`, `thm-p-is-contained-in-p-poly`, `thm-p-poly-equals-p-with-polynomial-advice`.
+- `boolean-circuits-and-nonuniform-complexity-examples` (1): `ex-p-poly-equals-p-with-polynomial-advice`.
+- `classical-np-completeness-reductions` (13): `cor-clique-is-np-complete`, `cor-hamiltonian-path-and-cycle-are-np-complete`, `cor-independent-set-and-vertex-cover-are-np-complete`, `def-reduction-gadget-and-interface-invariant`, `fs-gadget-correctness-needs-only-one-direction`, `thm-clique-independent-set-and-vertex-cover-are-polynomially-interreducible`, `thm-directed-reduces-to-undirected-hamiltonian-cycle`, `thm-subset-sum-reduces-to-partition`, `thm-three-sat-reduces-to-clique`, `thm-three-sat-reduces-to-directed-hamiltonian-cycle`, `thm-three-sat-reduces-to-subset-sum`, `thm-three-sat-reduces-to-three-colourability`, `thm-vertex-cover-reduces-to-set-cover`.
+- `classical-np-completeness-reductions-examples` (3): `cex-gadget-correctness-needs-only-one-direction`, `ex-clique-is-np-complete`, `ex-three-sat-reduces-to-three-colourability`.
+- `counting-complexity-and-sharpp` (6): `cor-majority-sat-is-pp-complete`, `def-p-with-a-sharpp-oracle`, `fs-every-many-one-reduction-is-parsimonious`, `lem-cook-levin-can-be-made-parsimonious`, `prop-np-is-contained-in-p-sharpp`, `thm-number-sat-is-sharpp-complete`.
+- `counting-complexity-and-sharpp-examples` (2): `ex-cook-levin-can-be-made-parsimonious`, `ex-np-is-contained-in-p-sharpp`.
+- `interactive-proof-systems-and-public-coins` (3): `lem-protocol-value-is-computable-in-polynomial-space`, `prop-np-is-contained-in-ip`, `thm-ip-is-contained-in-pspace`.
+- `logarithmic-space-nl-and-reachability` (17): `cor-nspace-is-closed-under-complement-above-logspace`, `def-l-and-nl`, `def-logspace-many-one-reduction`, `def-logspace-uniform-circuit-family`, `def-p-complete-under-logspace-reductions`, `def-read-only-input-logspace-machine`, `fs-nl-equals-conl-follows-by-state-swapping`, `lem-logspace-machines-have-polynomially-many-configurations`, `lem-logspace-reductions-compose`, `lem-nonreachability-has-an-inductive-counting-certificate`, `lem-polynomial-time-computations-have-logspace-uniform-circuits`, `lem-reachability-count-is-verifiable-in-nl`, `thm-circuit-value-is-p-complete`, `thm-directed-st-connectivity-is-nl-complete`, `thm-immerman-szelepcsenyi-nl-equals-conl`, `thm-nl-is-contained-in-dspace-log-squared-n`, `thm-read-only-input-savitch-simulation`.
+- `logarithmic-space-nl-and-reachability-examples` (3): `cex-nl-equals-conl-follows-by-state-swapping`, `ex-circuit-value-is-p-complete`, `ex-logspace-reductions-compose`.
+- `p-np-conp-and-polynomial-reductions` (17): `def-conp`, `def-exp-and-nexp`, `def-np-by-verifiers`, `def-np-hard-and-np-complete`, `def-p`, `def-polynomial-time-many-one-reduction`, `def-polynomially-balanced-verifier`, `def-search-version-of-an-np-relation`, `fs-np-complete-means-known-not-in-p`, `fs-np-means-not-polynomial`, `lem-polynomial-reductions-compose`, `prop-an-np-complete-language-in-p-implies-p-equals-np`, `prop-np-is-contained-in-pspace-and-pspace-in-exp`, `prop-p-is-contained-in-np-intersection-conp`, `thm-polynomial-reductions-transfer-p-np-and-conp-membership`, `thm-sat-search-reduces-to-sat-decision`, `thm-verifier-and-nondeterministic-definitions-of-np-agree`.
+- `p-np-conp-and-polynomial-reductions-examples` (3): `cex-np-means-not-polynomial`, `ex-np-is-contained-in-pspace-and-pspace-in-exp`, `ex-p-is-contained-in-np-intersection-conp`.
+- `resource-bounds-and-machine-invariance` (1): `def-dtime-ntime-dspace-and-nspace`.
+- `the-polynomial-hierarchy-and-relativization` (23): `cor-ph-complete-language-forces-collapse`, `cor-relativization-alone-cannot-resolve-p-versus-np`, `def-lowness-and-highness`, `def-polynomial-hierarchy-levels`, `def-relativized-complexity-class`, `def-relativizing-proof-technique`, `fs-relativized-separations-prove-unrelativized-separations`, `lem-collapse-at-one-level-propagates`, `lem-oracle-diagonalization-finite-extension`, `lem-ph-adaptive-oracle-transcript-normal-form`, `lem-ph-circuit-matrix-final-block-encoding`, `lem-ph-quantifier-block-closure`, `lem-polynomial-space-oracle-absorption`, `lem-standard-containments-relativize`, `prop-elementary-high-low-identities`, `prop-np-and-conp-are-the-first-levels`, `prop-ph-containments-and-polynomial-space`, `rem-oracle-and-promise-conventions-are-distinct`, `thm-an-oracle-collapses-p-and-np`, `thm-an-oracle-separates-p-from-np`, `thm-bounded-alternation-qbf-is-level-complete`, `thm-quantifier-and-oracle-characterizations-of-ph`, `thm-sigma-k-equals-pi-k-implies-ph-collapse`.
+- `the-polynomial-hierarchy-and-relativization-examples` (4): `cex-relativized-separations-prove-unrelativized-separations`, `ex-np-and-conp-are-the-first-levels`, `ex-promise-oracle-off-promise-answers`, `ex-relativization-alone-cannot-resolve-p-versus-np`.
+- `time-and-space-hierarchy-theorems` (18): `cor-l-is-properly-contained-in-pspace`, `cor-p-is-properly-contained-in-exp`, `def-efficient-universal-simulation-with-clock`, `def-read-only-input-workspace-classes`, `fs-unrestricted-diagonalization-respects-any-bound`, `lem-effective-enumeration-of-clocked-machines`, `lem-padding-transfers-time-bounds`, `lem-read-only-workspace-diagonal-machine-halts`, `lem-read-only-workspace-simulates-in-all-tapes-space`, `lem-read-only-workspace-universal-simulation`, `lem-space-bounded-universal-simulation`, `lem-space-diagonal-machine-halts`, `lem-time-diagonal-language-respects-its-budget`, `prop-hierarchy-theorems-do-not-separate-p-from-np`, `thm-deterministic-space-hierarchy`, `thm-deterministic-time-hierarchy`, `thm-nondeterministic-time-hierarchy`, `thm-read-only-workspace-space-hierarchy`.
+- `time-and-space-hierarchy-theorems-examples` (3): `cex-unrestricted-diagonalization-respects-any-bound`, `ex-hierarchy-theorems-do-not-separate-p-from-np`, `ex-time-diagonal-language-respects-its-budget`.
+
+#### `def-time-and-space-constructible-function` (home: `resource-bounds-and-machine-invariance`)
+
+Direct published consumers (6): `def-dtime-ntime-dspace-and-nspace`, `def-efficient-universal-simulation-with-clock`, `lem-space-bounded-universal-simulation`, `lem-space-diagonal-machine-halts`, `lem-time-diagonal-language-respects-its-budget`, `thm-nondeterministic-time-hierarchy`.
+
+Complete transitive published consumer closure (121):
+- `boolean-circuits-and-nonuniform-complexity` (5): `def-ac-zero-nc-one-and-nc`, `prop-nc-one-is-contained-in-l-and-l-in-nc-two`, `thm-circuit-sat-is-np-complete`, `thm-p-is-contained-in-p-poly`, `thm-p-poly-equals-p-with-polynomial-advice`.
+- `boolean-circuits-and-nonuniform-complexity-examples` (1): `ex-p-poly-equals-p-with-polynomial-advice`.
+- `classical-np-completeness-reductions` (13): `cor-clique-is-np-complete`, `cor-hamiltonian-path-and-cycle-are-np-complete`, `cor-independent-set-and-vertex-cover-are-np-complete`, `def-reduction-gadget-and-interface-invariant`, `fs-gadget-correctness-needs-only-one-direction`, `thm-clique-independent-set-and-vertex-cover-are-polynomially-interreducible`, `thm-directed-reduces-to-undirected-hamiltonian-cycle`, `thm-subset-sum-reduces-to-partition`, `thm-three-sat-reduces-to-clique`, `thm-three-sat-reduces-to-directed-hamiltonian-cycle`, `thm-three-sat-reduces-to-subset-sum`, `thm-three-sat-reduces-to-three-colourability`, `thm-vertex-cover-reduces-to-set-cover`.
+- `classical-np-completeness-reductions-examples` (3): `cex-gadget-correctness-needs-only-one-direction`, `ex-clique-is-np-complete`, `ex-three-sat-reduces-to-three-colourability`.
+- `counting-complexity-and-sharpp` (6): `cor-majority-sat-is-pp-complete`, `def-p-with-a-sharpp-oracle`, `fs-every-many-one-reduction-is-parsimonious`, `lem-cook-levin-can-be-made-parsimonious`, `prop-np-is-contained-in-p-sharpp`, `thm-number-sat-is-sharpp-complete`.
+- `counting-complexity-and-sharpp-examples` (2): `ex-cook-levin-can-be-made-parsimonious`, `ex-np-is-contained-in-p-sharpp`.
+- `interactive-proof-systems-and-public-coins` (3): `lem-protocol-value-is-computable-in-polynomial-space`, `prop-np-is-contained-in-ip`, `thm-ip-is-contained-in-pspace`.
+- `logarithmic-space-nl-and-reachability` (17): `cor-nspace-is-closed-under-complement-above-logspace`, `def-l-and-nl`, `def-logspace-many-one-reduction`, `def-logspace-uniform-circuit-family`, `def-p-complete-under-logspace-reductions`, `def-read-only-input-logspace-machine`, `fs-nl-equals-conl-follows-by-state-swapping`, `lem-logspace-machines-have-polynomially-many-configurations`, `lem-logspace-reductions-compose`, `lem-nonreachability-has-an-inductive-counting-certificate`, `lem-polynomial-time-computations-have-logspace-uniform-circuits`, `lem-reachability-count-is-verifiable-in-nl`, `thm-circuit-value-is-p-complete`, `thm-directed-st-connectivity-is-nl-complete`, `thm-immerman-szelepcsenyi-nl-equals-conl`, `thm-nl-is-contained-in-dspace-log-squared-n`, `thm-read-only-input-savitch-simulation`.
+- `logarithmic-space-nl-and-reachability-examples` (3): `cex-nl-equals-conl-follows-by-state-swapping`, `ex-circuit-value-is-p-complete`, `ex-logspace-reductions-compose`.
+- `p-np-conp-and-polynomial-reductions` (17): `def-conp`, `def-exp-and-nexp`, `def-np-by-verifiers`, `def-np-hard-and-np-complete`, `def-p`, `def-polynomial-time-many-one-reduction`, `def-polynomially-balanced-verifier`, `def-search-version-of-an-np-relation`, `fs-np-complete-means-known-not-in-p`, `fs-np-means-not-polynomial`, `lem-polynomial-reductions-compose`, `prop-an-np-complete-language-in-p-implies-p-equals-np`, `prop-np-is-contained-in-pspace-and-pspace-in-exp`, `prop-p-is-contained-in-np-intersection-conp`, `thm-polynomial-reductions-transfer-p-np-and-conp-membership`, `thm-sat-search-reduces-to-sat-decision`, `thm-verifier-and-nondeterministic-definitions-of-np-agree`.
+- `p-np-conp-and-polynomial-reductions-examples` (3): `cex-np-means-not-polynomial`, `ex-np-is-contained-in-pspace-and-pspace-in-exp`, `ex-p-is-contained-in-np-intersection-conp`.
+- `resource-bounds-and-machine-invariance` (1): `def-dtime-ntime-dspace-and-nspace`.
+- `the-polynomial-hierarchy-and-relativization` (23): `cor-ph-complete-language-forces-collapse`, `cor-relativization-alone-cannot-resolve-p-versus-np`, `def-lowness-and-highness`, `def-polynomial-hierarchy-levels`, `def-relativized-complexity-class`, `def-relativizing-proof-technique`, `fs-relativized-separations-prove-unrelativized-separations`, `lem-collapse-at-one-level-propagates`, `lem-oracle-diagonalization-finite-extension`, `lem-ph-adaptive-oracle-transcript-normal-form`, `lem-ph-circuit-matrix-final-block-encoding`, `lem-ph-quantifier-block-closure`, `lem-polynomial-space-oracle-absorption`, `lem-standard-containments-relativize`, `prop-elementary-high-low-identities`, `prop-np-and-conp-are-the-first-levels`, `prop-ph-containments-and-polynomial-space`, `rem-oracle-and-promise-conventions-are-distinct`, `thm-an-oracle-collapses-p-and-np`, `thm-an-oracle-separates-p-from-np`, `thm-bounded-alternation-qbf-is-level-complete`, `thm-quantifier-and-oracle-characterizations-of-ph`, `thm-sigma-k-equals-pi-k-implies-ph-collapse`.
+- `the-polynomial-hierarchy-and-relativization-examples` (4): `cex-relativized-separations-prove-unrelativized-separations`, `ex-np-and-conp-are-the-first-levels`, `ex-promise-oracle-off-promise-answers`, `ex-relativization-alone-cannot-resolve-p-versus-np`.
+- `time-and-space-hierarchy-theorems` (17): `cor-l-is-properly-contained-in-pspace`, `cor-p-is-properly-contained-in-exp`, `def-efficient-universal-simulation-with-clock`, `fs-unrestricted-diagonalization-respects-any-bound`, `lem-effective-enumeration-of-clocked-machines`, `lem-padding-transfers-time-bounds`, `lem-read-only-workspace-diagonal-machine-halts`, `lem-read-only-workspace-simulates-in-all-tapes-space`, `lem-read-only-workspace-universal-simulation`, `lem-space-bounded-universal-simulation`, `lem-space-diagonal-machine-halts`, `lem-time-diagonal-language-respects-its-budget`, `prop-hierarchy-theorems-do-not-separate-p-from-np`, `thm-deterministic-space-hierarchy`, `thm-deterministic-time-hierarchy`, `thm-nondeterministic-time-hierarchy`, `thm-read-only-workspace-space-hierarchy`.
+- `time-and-space-hierarchy-theorems-examples` (3): `cex-unrestricted-diagonalization-respects-any-bound`, `ex-hierarchy-theorems-do-not-separate-p-from-np`, `ex-time-diagonal-language-respects-its-budget`.
+
+#### `thm-stay-put-moves-can-be-eliminated` (home: `robust-machine-models-and-universal-computation`)
+
+Direct published consumers (1): `thm-multitape-machines-have-one-tape-simulations`.
+
+Complete transitive published consumer closure (5):
+- `diagonalization-and-the-halting-problem` (2): `fs-diagonalization-needs-literal-source-self-reading`, `thm-machine-acceptance-is-recognizable`.
+- `robust-machine-models-and-universal-computation` (3): `lem-multitape-simulation-has-quadratic-time-overhead`, `thm-existence-of-a-universal-turing-machine`, `thm-multitape-machines-have-one-tape-simulations`.
+
+#### `def-pspace-and-npspace` (home: `space-complexity-savitch-and-tqbf`)
+
+Direct published consumers (4): `cor-l-is-properly-contained-in-pspace`, `lem-polynomial-space-oracle-absorption`, `lem-protocol-value-is-computable-in-polynomial-space`, `prop-ph-containments-and-polynomial-space`.
+
+Complete transitive published consumer closure (12):
+- `interactive-proof-systems-and-public-coins` (2): `lem-protocol-value-is-computable-in-polynomial-space`, `thm-ip-is-contained-in-pspace`.
+- `the-polynomial-hierarchy-and-relativization` (7): `cor-ph-complete-language-forces-collapse`, `cor-relativization-alone-cannot-resolve-p-versus-np`, `fs-relativized-separations-prove-unrelativized-separations`, `lem-polynomial-space-oracle-absorption`, `lem-standard-containments-relativize`, `prop-ph-containments-and-polynomial-space`, `thm-an-oracle-collapses-p-and-np`.
+- `the-polynomial-hierarchy-and-relativization-examples` (2): `cex-relativized-separations-prove-unrelativized-separations`, `ex-relativization-alone-cannot-resolve-p-versus-np`.
+- `time-and-space-hierarchy-theorems` (1): `cor-l-is-properly-contained-in-pspace`.
+
+#### `def-quantified-boolean-formula-and-tqbf` (home: `space-complexity-savitch-and-tqbf`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (7):
+- `the-polynomial-hierarchy-and-relativization` (5): `cor-ph-complete-language-forces-collapse`, `cor-relativization-alone-cannot-resolve-p-versus-np`, `fs-relativized-separations-prove-unrelativized-separations`, `lem-polynomial-space-oracle-absorption`, `thm-an-oracle-collapses-p-and-np`.
+- `the-polynomial-hierarchy-and-relativization-examples` (2): `cex-relativized-separations-prove-unrelativized-separations`, `ex-relativization-alone-cannot-resolve-p-versus-np`.
+
+#### `def-reachable-configuration-formula` (home: `space-complexity-savitch-and-tqbf`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (7):
+- `the-polynomial-hierarchy-and-relativization` (5): `cor-ph-complete-language-forces-collapse`, `cor-relativization-alone-cannot-resolve-p-versus-np`, `fs-relativized-separations-prove-unrelativized-separations`, `lem-polynomial-space-oracle-absorption`, `thm-an-oracle-collapses-p-and-np`.
+- `the-polynomial-hierarchy-and-relativization-examples` (2): `cex-relativized-separations-prove-unrelativized-separations`, `ex-relativization-alone-cannot-resolve-p-versus-np`.
+
+#### `lem-quantifier-reuse-keeps-reachability-formulas-polynomial` (home: `space-complexity-savitch-and-tqbf`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (7):
+- `the-polynomial-hierarchy-and-relativization` (5): `cor-ph-complete-language-forces-collapse`, `cor-relativization-alone-cannot-resolve-p-versus-np`, `fs-relativized-separations-prove-unrelativized-separations`, `lem-polynomial-space-oracle-absorption`, `thm-an-oracle-collapses-p-and-np`.
+- `the-polynomial-hierarchy-and-relativization-examples` (2): `cex-relativized-separations-prove-unrelativized-separations`, `ex-relativization-alone-cannot-resolve-p-versus-np`.
+
+#### `lem-space-bounded-machines-have-exponentially-many-configurations` (home: `space-complexity-savitch-and-tqbf`)
+
+Direct published consumers (1): `lem-space-diagonal-machine-halts`.
+
+Complete transitive published consumer closure (9):
+- `the-polynomial-hierarchy-and-relativization` (5): `cor-ph-complete-language-forces-collapse`, `cor-relativization-alone-cannot-resolve-p-versus-np`, `fs-relativized-separations-prove-unrelativized-separations`, `lem-polynomial-space-oracle-absorption`, `thm-an-oracle-collapses-p-and-np`.
+- `the-polynomial-hierarchy-and-relativization-examples` (2): `cex-relativized-separations-prove-unrelativized-separations`, `ex-relativization-alone-cannot-resolve-p-versus-np`.
+- `time-and-space-hierarchy-theorems` (2): `lem-space-diagonal-machine-halts`, `thm-deterministic-space-hierarchy`.
+
+#### `prop-tqbf-is-in-pspace` (home: `space-complexity-savitch-and-tqbf`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (7):
+- `the-polynomial-hierarchy-and-relativization` (5): `cor-ph-complete-language-forces-collapse`, `cor-relativization-alone-cannot-resolve-p-versus-np`, `fs-relativized-separations-prove-unrelativized-separations`, `lem-polynomial-space-oracle-absorption`, `thm-an-oracle-collapses-p-and-np`.
+- `the-polynomial-hierarchy-and-relativization-examples` (2): `cex-relativized-separations-prove-unrelativized-separations`, `ex-relativization-alone-cannot-resolve-p-versus-np`.
+
+#### `thm-tqbf-is-pspace-complete` (home: `space-complexity-savitch-and-tqbf`)
+
+Direct published consumers (2): `cor-ph-complete-language-forces-collapse`, `lem-polynomial-space-oracle-absorption`.
+
+Complete transitive published consumer closure (7):
+- `the-polynomial-hierarchy-and-relativization` (5): `cor-ph-complete-language-forces-collapse`, `cor-relativization-alone-cannot-resolve-p-versus-np`, `fs-relativized-separations-prove-unrelativized-separations`, `lem-polynomial-space-oracle-absorption`, `thm-an-oracle-collapses-p-and-np`.
+- `the-polynomial-hierarchy-and-relativization-examples` (2): `cex-relativized-separations-prove-unrelativized-separations`, `ex-relativization-alone-cannot-resolve-p-versus-np`.
+
+#### `def-boolean-formula-cnf-and-sat` (home: `the-cook-levin-theorem`)
+
+Direct published consumers (2): `def-arithmetization-of-a-boolean-formula`, `def-number-sat`.
+
+Complete transitive published consumer closure (28):
+- `arithmetization-and-the-sum-check-protocol` (5): `def-arithmetization-of-a-boolean-formula`, `lem-arithmetization-agrees-on-boolean-inputs`, `lem-degree-under-arithmetized-quantifiers`, `lem-formula-arithmetization-degree-and-evaluation-cost`, `prop-arithmetized-formula-counting-sum`.
+- `boolean-circuits-and-nonuniform-complexity` (1): `thm-circuit-sat-is-np-complete`.
+- `classical-np-completeness-reductions` (7): `cor-clique-is-np-complete`, `cor-hamiltonian-path-and-cycle-are-np-complete`, `cor-independent-set-and-vertex-cover-are-np-complete`, `thm-three-sat-reduces-to-clique`, `thm-three-sat-reduces-to-directed-hamiltonian-cycle`, `thm-three-sat-reduces-to-subset-sum`, `thm-three-sat-reduces-to-three-colourability`.
+- `classical-np-completeness-reductions-examples` (2): `ex-clique-is-np-complete`, `ex-three-sat-reduces-to-three-colourability`.
+- `counting-complexity-and-sharpp` (10): `cor-majority-sat-is-pp-complete`, `def-majority-sat`, `def-number-sat`, `def-p-with-a-sharpp-oracle`, `fs-every-many-one-reduction-is-parsimonious`, `fs-sharpp-is-a-language-class`, `lem-cook-levin-can-be-made-parsimonious`, `prop-np-is-contained-in-p-sharpp`, `prop-number-sat-is-in-sharpp`, `thm-number-sat-is-sharpp-complete`.
+- `counting-complexity-and-sharpp-examples` (3): `cex-sharpp-is-a-language-class`, `ex-cook-levin-can-be-made-parsimonious`, `ex-np-is-contained-in-p-sharpp`.
+
+#### `def-bounded-computation-tableau` (home: `the-cook-levin-theorem`)
+
+Direct published consumers (1): `lem-cook-levin-can-be-made-parsimonious`.
+
+Complete transitive published consumer closure (17):
+- `boolean-circuits-and-nonuniform-complexity` (1): `thm-circuit-sat-is-np-complete`.
+- `classical-np-completeness-reductions` (7): `cor-clique-is-np-complete`, `cor-hamiltonian-path-and-cycle-are-np-complete`, `cor-independent-set-and-vertex-cover-are-np-complete`, `thm-three-sat-reduces-to-clique`, `thm-three-sat-reduces-to-directed-hamiltonian-cycle`, `thm-three-sat-reduces-to-subset-sum`, `thm-three-sat-reduces-to-three-colourability`.
+- `classical-np-completeness-reductions-examples` (2): `ex-clique-is-np-complete`, `ex-three-sat-reduces-to-three-colourability`.
+- `counting-complexity-and-sharpp` (5): `cor-majority-sat-is-pp-complete`, `def-p-with-a-sharpp-oracle`, `lem-cook-levin-can-be-made-parsimonious`, `prop-np-is-contained-in-p-sharpp`, `thm-number-sat-is-sharpp-complete`.
+- `counting-complexity-and-sharpp-examples` (2): `ex-cook-levin-can-be-made-parsimonious`, `ex-np-is-contained-in-p-sharpp`.
+
+#### `def-local-tableau-window` (home: `the-cook-levin-theorem`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (17):
+- `boolean-circuits-and-nonuniform-complexity` (1): `thm-circuit-sat-is-np-complete`.
+- `classical-np-completeness-reductions` (7): `cor-clique-is-np-complete`, `cor-hamiltonian-path-and-cycle-are-np-complete`, `cor-independent-set-and-vertex-cover-are-np-complete`, `thm-three-sat-reduces-to-clique`, `thm-three-sat-reduces-to-directed-hamiltonian-cycle`, `thm-three-sat-reduces-to-subset-sum`, `thm-three-sat-reduces-to-three-colourability`.
+- `classical-np-completeness-reductions-examples` (2): `ex-clique-is-np-complete`, `ex-three-sat-reduces-to-three-colourability`.
+- `counting-complexity-and-sharpp` (5): `cor-majority-sat-is-pp-complete`, `def-p-with-a-sharpp-oracle`, `lem-cook-levin-can-be-made-parsimonious`, `prop-np-is-contained-in-p-sharpp`, `thm-number-sat-is-sharpp-complete`.
+- `counting-complexity-and-sharpp-examples` (2): `ex-cook-levin-can-be-made-parsimonious`, `ex-np-is-contained-in-p-sharpp`.
+
+#### `def-tseitin-extension-variable` (home: `the-cook-levin-theorem`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (9):
+- `classical-np-completeness-reductions` (7): `cor-clique-is-np-complete`, `cor-hamiltonian-path-and-cycle-are-np-complete`, `cor-independent-set-and-vertex-cover-are-np-complete`, `thm-three-sat-reduces-to-clique`, `thm-three-sat-reduces-to-directed-hamiltonian-cycle`, `thm-three-sat-reduces-to-subset-sum`, `thm-three-sat-reduces-to-three-colourability`.
+- `classical-np-completeness-reductions-examples` (2): `ex-clique-is-np-complete`, `ex-three-sat-reduces-to-three-colourability`.
+
+#### `lem-cook-levin-formula-is-satisfiable-iff-acceptance-occurs` (home: `the-cook-levin-theorem`)
+
+Direct published consumers (1): `lem-cook-levin-can-be-made-parsimonious`.
+
+Complete transitive published consumer closure (17):
+- `boolean-circuits-and-nonuniform-complexity` (1): `thm-circuit-sat-is-np-complete`.
+- `classical-np-completeness-reductions` (7): `cor-clique-is-np-complete`, `cor-hamiltonian-path-and-cycle-are-np-complete`, `cor-independent-set-and-vertex-cover-are-np-complete`, `thm-three-sat-reduces-to-clique`, `thm-three-sat-reduces-to-directed-hamiltonian-cycle`, `thm-three-sat-reduces-to-subset-sum`, `thm-three-sat-reduces-to-three-colourability`.
+- `classical-np-completeness-reductions-examples` (2): `ex-clique-is-np-complete`, `ex-three-sat-reduces-to-three-colourability`.
+- `counting-complexity-and-sharpp` (5): `cor-majority-sat-is-pp-complete`, `def-p-with-a-sharpp-oracle`, `lem-cook-levin-can-be-made-parsimonious`, `prop-np-is-contained-in-p-sharpp`, `thm-number-sat-is-sharpp-complete`.
+- `counting-complexity-and-sharpp-examples` (2): `ex-cook-levin-can-be-made-parsimonious`, `ex-np-is-contained-in-p-sharpp`.
+
+#### `lem-cook-levin-map-is-polynomial-time` (home: `the-cook-levin-theorem`)
+
+Direct published consumers (1): `lem-cook-levin-can-be-made-parsimonious`.
+
+Complete transitive published consumer closure (17):
+- `boolean-circuits-and-nonuniform-complexity` (1): `thm-circuit-sat-is-np-complete`.
+- `classical-np-completeness-reductions` (7): `cor-clique-is-np-complete`, `cor-hamiltonian-path-and-cycle-are-np-complete`, `cor-independent-set-and-vertex-cover-are-np-complete`, `thm-three-sat-reduces-to-clique`, `thm-three-sat-reduces-to-directed-hamiltonian-cycle`, `thm-three-sat-reduces-to-subset-sum`, `thm-three-sat-reduces-to-three-colourability`.
+- `classical-np-completeness-reductions-examples` (2): `ex-clique-is-np-complete`, `ex-three-sat-reduces-to-three-colourability`.
+- `counting-complexity-and-sharpp` (5): `cor-majority-sat-is-pp-complete`, `def-p-with-a-sharpp-oracle`, `lem-cook-levin-can-be-made-parsimonious`, `prop-np-is-contained-in-p-sharpp`, `thm-number-sat-is-sharpp-complete`.
+- `counting-complexity-and-sharpp-examples` (2): `ex-cook-levin-can-be-made-parsimonious`, `ex-np-is-contained-in-p-sharpp`.
+
+#### `lem-exactly-one-symbol-constraints-have-polynomial-size` (home: `the-cook-levin-theorem`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (17):
+- `boolean-circuits-and-nonuniform-complexity` (1): `thm-circuit-sat-is-np-complete`.
+- `classical-np-completeness-reductions` (7): `cor-clique-is-np-complete`, `cor-hamiltonian-path-and-cycle-are-np-complete`, `cor-independent-set-and-vertex-cover-are-np-complete`, `thm-three-sat-reduces-to-clique`, `thm-three-sat-reduces-to-directed-hamiltonian-cycle`, `thm-three-sat-reduces-to-subset-sum`, `thm-three-sat-reduces-to-three-colourability`.
+- `classical-np-completeness-reductions-examples` (2): `ex-clique-is-np-complete`, `ex-three-sat-reduces-to-three-colourability`.
+- `counting-complexity-and-sharpp` (5): `cor-majority-sat-is-pp-complete`, `def-p-with-a-sharpp-oracle`, `lem-cook-levin-can-be-made-parsimonious`, `prop-np-is-contained-in-p-sharpp`, `thm-number-sat-is-sharpp-complete`.
+- `counting-complexity-and-sharpp-examples` (2): `ex-cook-levin-can-be-made-parsimonious`, `ex-np-is-contained-in-p-sharpp`.
+
+#### `lem-legal-tableaux-iff-all-local-windows-and-boundaries-are-legal` (home: `the-cook-levin-theorem`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (17):
+- `boolean-circuits-and-nonuniform-complexity` (1): `thm-circuit-sat-is-np-complete`.
+- `classical-np-completeness-reductions` (7): `cor-clique-is-np-complete`, `cor-hamiltonian-path-and-cycle-are-np-complete`, `cor-independent-set-and-vertex-cover-are-np-complete`, `thm-three-sat-reduces-to-clique`, `thm-three-sat-reduces-to-directed-hamiltonian-cycle`, `thm-three-sat-reduces-to-subset-sum`, `thm-three-sat-reduces-to-three-colourability`.
+- `classical-np-completeness-reductions-examples` (2): `ex-clique-is-np-complete`, `ex-three-sat-reduces-to-three-colourability`.
+- `counting-complexity-and-sharpp` (5): `cor-majority-sat-is-pp-complete`, `def-p-with-a-sharpp-oracle`, `lem-cook-levin-can-be-made-parsimonious`, `prop-np-is-contained-in-p-sharpp`, `thm-number-sat-is-sharpp-complete`.
+- `counting-complexity-and-sharpp-examples` (2): `ex-cook-levin-can-be-made-parsimonious`, `ex-np-is-contained-in-p-sharpp`.
+
+#### `lem-start-accept-and-transition-constraints-have-polynomial-size` (home: `the-cook-levin-theorem`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (17):
+- `boolean-circuits-and-nonuniform-complexity` (1): `thm-circuit-sat-is-np-complete`.
+- `classical-np-completeness-reductions` (7): `cor-clique-is-np-complete`, `cor-hamiltonian-path-and-cycle-are-np-complete`, `cor-independent-set-and-vertex-cover-are-np-complete`, `thm-three-sat-reduces-to-clique`, `thm-three-sat-reduces-to-directed-hamiltonian-cycle`, `thm-three-sat-reduces-to-subset-sum`, `thm-three-sat-reduces-to-three-colourability`.
+- `classical-np-completeness-reductions-examples` (2): `ex-clique-is-np-complete`, `ex-three-sat-reduces-to-three-colourability`.
+- `counting-complexity-and-sharpp` (5): `cor-majority-sat-is-pp-complete`, `def-p-with-a-sharpp-oracle`, `lem-cook-levin-can-be-made-parsimonious`, `prop-np-is-contained-in-p-sharpp`, `thm-number-sat-is-sharpp-complete`.
+- `counting-complexity-and-sharpp-examples` (2): `ex-cook-levin-can-be-made-parsimonious`, `ex-np-is-contained-in-p-sharpp`.
+
+#### `lem-tableau-cell-alphabet-is-constant` (home: `the-cook-levin-theorem`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (17):
+- `boolean-circuits-and-nonuniform-complexity` (1): `thm-circuit-sat-is-np-complete`.
+- `classical-np-completeness-reductions` (7): `cor-clique-is-np-complete`, `cor-hamiltonian-path-and-cycle-are-np-complete`, `cor-independent-set-and-vertex-cover-are-np-complete`, `thm-three-sat-reduces-to-clique`, `thm-three-sat-reduces-to-directed-hamiltonian-cycle`, `thm-three-sat-reduces-to-subset-sum`, `thm-three-sat-reduces-to-three-colourability`.
+- `classical-np-completeness-reductions-examples` (2): `ex-clique-is-np-complete`, `ex-three-sat-reduces-to-three-colourability`.
+- `counting-complexity-and-sharpp` (5): `cor-majority-sat-is-pp-complete`, `def-p-with-a-sharpp-oracle`, `lem-cook-levin-can-be-made-parsimonious`, `prop-np-is-contained-in-p-sharpp`, `thm-number-sat-is-sharpp-complete`.
+- `counting-complexity-and-sharpp-examples` (2): `ex-cook-levin-can-be-made-parsimonious`, `ex-np-is-contained-in-p-sharpp`.
+
+#### `lem-tseitin-transformation-is-linear-size-and-equisatisfiable` (home: `the-cook-levin-theorem`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (9):
+- `classical-np-completeness-reductions` (7): `cor-clique-is-np-complete`, `cor-hamiltonian-path-and-cycle-are-np-complete`, `cor-independent-set-and-vertex-cover-are-np-complete`, `thm-three-sat-reduces-to-clique`, `thm-three-sat-reduces-to-directed-hamiltonian-cycle`, `thm-three-sat-reduces-to-subset-sum`, `thm-three-sat-reduces-to-three-colourability`.
+- `classical-np-completeness-reductions-examples` (2): `ex-clique-is-np-complete`, `ex-three-sat-reduces-to-three-colourability`.
+
+#### `prop-sat-is-in-np` (home: `the-cook-levin-theorem`)
+
+Direct published consumers (0): **0**.
+
+Complete transitive published consumer closure (10):
+- `boolean-circuits-and-nonuniform-complexity` (1): `thm-circuit-sat-is-np-complete`.
+- `classical-np-completeness-reductions` (7): `cor-clique-is-np-complete`, `cor-hamiltonian-path-and-cycle-are-np-complete`, `cor-independent-set-and-vertex-cover-are-np-complete`, `thm-three-sat-reduces-to-clique`, `thm-three-sat-reduces-to-directed-hamiltonian-cycle`, `thm-three-sat-reduces-to-subset-sum`, `thm-three-sat-reduces-to-three-colourability`.
+- `classical-np-completeness-reductions-examples` (2): `ex-clique-is-np-complete`, `ex-three-sat-reduces-to-three-colourability`.
+
+#### `thm-cook-levin-sat-is-np-complete` (home: `the-cook-levin-theorem`)
+
+Direct published consumers (1): `thm-circuit-sat-is-np-complete`.
+
+Complete transitive published consumer closure (10):
+- `boolean-circuits-and-nonuniform-complexity` (1): `thm-circuit-sat-is-np-complete`.
+- `classical-np-completeness-reductions` (7): `cor-clique-is-np-complete`, `cor-hamiltonian-path-and-cycle-are-np-complete`, `cor-independent-set-and-vertex-cover-are-np-complete`, `thm-three-sat-reduces-to-clique`, `thm-three-sat-reduces-to-directed-hamiltonian-cycle`, `thm-three-sat-reduces-to-subset-sum`, `thm-three-sat-reduces-to-three-colourability`.
+- `classical-np-completeness-reductions-examples` (2): `ex-clique-is-np-complete`, `ex-three-sat-reduces-to-three-colourability`.
+
+#### `thm-three-sat-is-np-complete` (home: `the-cook-levin-theorem`)
+
+Direct published consumers (5): `cor-clique-is-np-complete`, `cor-hamiltonian-path-and-cycle-are-np-complete`, `thm-three-sat-reduces-to-clique`, `thm-three-sat-reduces-to-directed-hamiltonian-cycle`, `thm-three-sat-reduces-to-three-colourability`.
+
+Complete transitive published consumer closure (9):
+- `classical-np-completeness-reductions` (7): `cor-clique-is-np-complete`, `cor-hamiltonian-path-and-cycle-are-np-complete`, `cor-independent-set-and-vertex-cover-are-np-complete`, `thm-three-sat-reduces-to-clique`, `thm-three-sat-reduces-to-directed-hamiltonian-cycle`, `thm-three-sat-reduces-to-subset-sum`, `thm-three-sat-reduces-to-three-colourability`.
+- `classical-np-completeness-reductions-examples` (2): `ex-clique-is-np-complete`, `ex-three-sat-reduces-to-three-colourability`.
+
+#### `def-initial-accepting-and-rejecting-configurations` (home: `turing-machines-configurations-and-computation`)
+
+Direct published consumers (2): `def-halting-computation-and-divergence`, `def-nondeterministic-accepting-computation`.
+
+Complete transitive published consumer closure (253):
+- `arithmetization-and-the-sum-check-protocol` (8): `cor-sum-check-field-size-error-budget`, `def-sum-check-instance-and-protocol`, `fs-sum-check-computes-all-exponential-summands`, `lem-first-false-round-is-caught-by-root-bound`, `lem-sum-check-perfect-completeness`, `lem-sum-check-verifier-is-polynomial-time-given-point-evaluation`, `prop-arithmetized-formula-counting-sum`, `thm-sum-check-soundness`.
+- `arithmetization-and-the-sum-check-protocol-examples` (2): `cex-sum-check-computes-all-exponential-summands`, `ex-sum-check-three-variable-transcript`.
+- `boolean-circuits-and-nonuniform-complexity` (7): `def-ac-zero-nc-one-and-nc`, `fs-polynomial-size-implies-uniform-generation`, `prop-nc-one-is-contained-in-l-and-l-in-nc-two`, `thm-circuit-sat-is-np-complete`, `thm-p-is-contained-in-p-poly`, `thm-p-poly-equals-p-with-polynomial-advice`, `thm-undecidable-languages-exist-in-p-poly`.
+- `boolean-circuits-and-nonuniform-complexity-examples` (2): `cex-polynomial-size-implies-uniform-generation`, `ex-p-poly-equals-p-with-polynomial-advice`.
+- `classical-np-completeness-reductions` (14): `cor-clique-is-np-complete`, `cor-hamiltonian-path-and-cycle-are-np-complete`, `cor-independent-set-and-vertex-cover-are-np-complete`, `def-reduction-gadget-and-interface-invariant`, `fs-gadget-correctness-needs-only-one-direction`, `fs-pseudopolynomial-is-polynomial-in-bit-length`, `thm-clique-independent-set-and-vertex-cover-are-polynomially-interreducible`, `thm-directed-reduces-to-undirected-hamiltonian-cycle`, `thm-subset-sum-reduces-to-partition`, `thm-three-sat-reduces-to-clique`, `thm-three-sat-reduces-to-directed-hamiltonian-cycle`, `thm-three-sat-reduces-to-subset-sum`, `thm-three-sat-reduces-to-three-colourability`, `thm-vertex-cover-reduces-to-set-cover`.
+- `classical-np-completeness-reductions-examples` (3): `cex-gadget-correctness-needs-only-one-direction`, `ex-clique-is-np-complete`, `ex-three-sat-reduces-to-three-colourability`.
+- `counting-complexity-and-sharpp` (8): `cor-majority-sat-is-pp-complete`, `def-p-with-a-sharpp-oracle`, `fs-every-many-one-reduction-is-parsimonious`, `lem-cook-levin-can-be-made-parsimonious`, `prop-np-is-contained-in-p-sharpp`, `thm-number-sat-is-sharpp-complete`, `thm-pp-is-closed-under-complement`, `thm-pp-is-sign-testing-gap-p`.
+- `counting-complexity-and-sharpp-examples` (2): `ex-cook-levin-can-be-made-parsimonious`, `ex-np-is-contained-in-p-sharpp`.
+- `decidable-recognizable-and-enumerable-languages` (4): `def-computable-and-partial-computable-function`, `def-decidable-and-recognizable-language`, `prop-machine-descriptions-form-a-decidable-language`, `thm-decidable-iff-language-and-complement-are-recognizable`.
+- `diagonalization-and-the-halting-problem` (14): `cor-busy-beaver-is-not-computable`, `cor-nonhalting-is-not-recognizable`, `def-busy-beaver-function`, `def-halting-problem`, `fs-diagonalization-needs-literal-source-self-reading`, `fs-undecidable-means-no-instance-can-be-answered`, `lem-diagonal-self-application-machine`, `thm-an-unrecognizable-language-exists`, `thm-busy-beaver-dominates-every-total-computable-function`, `thm-halting-is-recognizable-and-undecidable`, `thm-machine-acceptance-is-recognizable`, `thm-machine-acceptance-is-undecidable`, `thm-machine-equivalence-is-undecidable`, `thm-totality-is-not-recognizable`.
+- `diagonalization-and-the-halting-problem-examples` (3): `cex-undecidable-means-no-instance-can-be-answered`, `ex-diagonal-self-application-machine`, `ex-machine-equivalence-is-undecidable`.
+- `interactive-proof-systems-and-public-coins` (16): `def-completeness-and-soundness`, `def-graph-nonisomorphism-protocol`, `def-interactive-proof-transcript-round-and-strategy`, `def-ip`, `def-private-coin-public-coin-and-arthur-merlin-protocol`, `def-protocol-game-tree-and-value`, `fs-soundness-quantifies-only-over-honest-provers`, `fs-the-prover-must-run-in-polynomial-time`, `lem-hashing-commits-public-randomness`, `lem-optimal-prover-may-be-deterministic`, `lem-protocol-value-is-computable-in-polynomial-space`, `lem-sequential-repetition-amplifies-error`, `prop-np-is-contained-in-ip`, `thm-graph-nonisomorphism-is-in-ip`, `thm-ip-is-contained-in-pspace`, `thm-private-coin-ip-equals-public-coin-ip`.
+- `interactive-proof-systems-and-public-coins-examples` (3): `cex-soundness-quantifies-only-over-honest-provers`, `ex-graph-nonisomorphism-is-in-ip`, `ex-sequential-repetition-amplifies-error`.
+- `kolmogorov-complexity-and-algorithmic-randomness` (21): `def-conditional-kolmogorov-complexity`, `def-description-machine-and-plain-kolmogorov-complexity`, `def-effective-hausdorff-dimension`, `def-effectively-open-set-in-cantor-space`, `def-incompressibility-method`, `def-martin-lof-test-and-random-sequence`, `def-optimal-description-machine`, `def-prefix-free-machine-and-prefix-complexity`, `fs-kolmogorov-complexity-is-an-absolute-integer`, `fs-normality-implies-algorithmic-randomness`, `lem-basic-conditional-complexity-inequalities`, `lem-most-strings-are-incompressible`, `lem-universal-martin-lof-test-exists`, `thm-effective-dimension-is-liminf-prefix-complexity-rate`, `thm-invariance-for-prefix-complexity`, `thm-invariance-theorem-for-plain-complexity`, `thm-kolmogorov-complexity-is-not-computable`, `thm-kraft-inequality`, `thm-levin-schnorr-characterization`, `thm-martin-lof-randomness-implies-computable-randomness`, `thm-symmetry-of-information-up-to-logarithmic-terms`.
+- `kolmogorov-complexity-and-algorithmic-randomness-examples` (3): `cex-kolmogorov-complexity-is-an-absolute-integer`, `ex-effective-dimension-is-liminf-prefix-complexity-rate`, `ex-most-strings-are-incompressible`.
+- `logarithmic-space-nl-and-reachability` (17): `cor-nspace-is-closed-under-complement-above-logspace`, `def-l-and-nl`, `def-logspace-many-one-reduction`, `def-logspace-uniform-circuit-family`, `def-p-complete-under-logspace-reductions`, `def-read-only-input-logspace-machine`, `fs-nl-equals-conl-follows-by-state-swapping`, `lem-logspace-machines-have-polynomially-many-configurations`, `lem-logspace-reductions-compose`, `lem-nonreachability-has-an-inductive-counting-certificate`, `lem-polynomial-time-computations-have-logspace-uniform-circuits`, `lem-reachability-count-is-verifiable-in-nl`, `thm-circuit-value-is-p-complete`, `thm-directed-st-connectivity-is-nl-complete`, `thm-immerman-szelepcsenyi-nl-equals-conl`, `thm-nl-is-contained-in-dspace-log-squared-n`, `thm-read-only-input-savitch-simulation`.
+- `logarithmic-space-nl-and-reachability-examples` (3): `cex-nl-equals-conl-follows-by-state-swapping`, `ex-circuit-value-is-p-complete`, `ex-logspace-reductions-compose`.
+- `oracle-computability-the-jump-and-turing-degrees` (23): `cor-finite-jumps-match-arithmetical-levels`, `def-computably-dominated-oracle`, `def-oracle-ce-completeness`, `def-oracle-turing-machine`, `def-tagged-join-of-oracles`, `def-truth-table-reduction`, `def-turing-degree-and-degree-order`, `def-turing-jump`, `def-turing-reducibility-and-equivalence`, `fs-an-oracle-machine-reads-the-infinite-oracle-at-once`, `fs-degree-join-is-set-union`, `lem-degree-order-is-representative-independent`, `lem-halting-oracle-is-not-computably-dominated`, `lem-jump-is-well-defined-on-degrees`, `lem-total-oracle-functional-has-computable-use-bound`, `lem-turing-reducibility-is-a-preorder`, `prop-truth-table-implies-turing-reduction`, `thm-computably-dominated-characterizes-truth-table-reducibility`, `thm-every-oracle-is-strictly-below-its-jump`, `thm-jump-is-monotone`, `thm-relative-halting-is-oracle-ce-complete`, `thm-some-turing-reductions-are-not-truth-table-reductions`, `thm-turing-degrees-form-an-upper-semilattice`.
+- `oracle-computability-the-jump-and-turing-degrees-examples` (3): `cex-an-oracle-machine-reads-the-infinite-oracle-at-once`, `ex-degree-order-is-representative-independent`, `ex-some-turing-reductions-are-not-truth-table-reductions`.
+- `p-np-conp-and-polynomial-reductions` (17): `def-conp`, `def-exp-and-nexp`, `def-np-by-verifiers`, `def-np-hard-and-np-complete`, `def-p`, `def-polynomial-time-many-one-reduction`, `def-polynomially-balanced-verifier`, `def-search-version-of-an-np-relation`, `fs-np-complete-means-known-not-in-p`, `fs-np-means-not-polynomial`, `lem-polynomial-reductions-compose`, `prop-an-np-complete-language-in-p-implies-p-equals-np`, `prop-np-is-contained-in-pspace-and-pspace-in-exp`, `prop-p-is-contained-in-np-intersection-conp`, `thm-polynomial-reductions-transfer-p-np-and-conp-membership`, `thm-sat-search-reduces-to-sat-decision`, `thm-verifier-and-nondeterministic-definitions-of-np-agree`.
+- `p-np-conp-and-polynomial-reductions-examples` (3): `cex-np-means-not-polynomial`, `ex-np-is-contained-in-pspace-and-pspace-in-exp`, `ex-p-is-contained-in-np-intersection-conp`.
+- `resource-bounds-and-machine-invariance` (3): `def-dtime-ntime-dspace-and-nspace`, `def-worst-case-time-and-space-complexity`, `lem-time-at-least-input-length-permits-complete-input-reading`.
+- `robust-machine-models-and-universal-computation` (4): `def-universal-turing-machine`, `lem-multitape-simulation-has-quadratic-time-overhead`, `thm-existence-of-a-universal-turing-machine`, `thm-multitape-machines-have-one-tape-simulations`.
+- `the-arithmetical-hierarchy-and-posts-theorem` (14): `cor-delta-one-sets-are-exactly-decidable`, `def-arithmetical-level-completeness`, `def-limit-computable-function`, `def-relative-computability-and-enumerability`, `fs-limit-computable-has-a-known-stabilization-stage`, `fs-sigma-n-and-pi-n-are-disjoint`, `lem-diagonal-set-at-each-level`, `lem-oracle-computation-has-a-finite-query-witness`, `thm-arithmetical-hierarchy-is-strict`, `thm-halting-is-sigma-one-complete`, `thm-posts-theorem`, `thm-shoenfield-limit-lemma`, `thm-sigma-one-sets-are-exactly-ce-sets`, `thm-totality-is-pi-two-complete`.
+- `the-arithmetical-hierarchy-and-posts-theorem-examples` (3): `cex-sigma-n-and-pi-n-are-disjoint`, `ex-shoenfield-limit-lemma`, `ex-sigma-one-sets-are-exactly-ce-sets`.
+- `the-polynomial-hierarchy-and-relativization` (23): `cor-ph-complete-language-forces-collapse`, `cor-relativization-alone-cannot-resolve-p-versus-np`, `def-lowness-and-highness`, `def-polynomial-hierarchy-levels`, `def-relativized-complexity-class`, `def-relativizing-proof-technique`, `fs-relativized-separations-prove-unrelativized-separations`, `lem-collapse-at-one-level-propagates`, `lem-oracle-diagonalization-finite-extension`, `lem-ph-adaptive-oracle-transcript-normal-form`, `lem-ph-circuit-matrix-final-block-encoding`, `lem-ph-quantifier-block-closure`, `lem-polynomial-space-oracle-absorption`, `lem-standard-containments-relativize`, `prop-elementary-high-low-identities`, `prop-np-and-conp-are-the-first-levels`, `prop-ph-containments-and-polynomial-space`, `rem-oracle-and-promise-conventions-are-distinct`, `thm-an-oracle-collapses-p-and-np`, `thm-an-oracle-separates-p-from-np`, `thm-bounded-alternation-qbf-is-level-complete`, `thm-quantifier-and-oracle-characterizations-of-ph`, `thm-sigma-k-equals-pi-k-implies-ph-collapse`.
+- `the-polynomial-hierarchy-and-relativization-examples` (4): `cex-relativized-separations-prove-unrelativized-separations`, `ex-np-and-conp-are-the-first-levels`, `ex-promise-oracle-off-promise-answers`, `ex-relativization-alone-cannot-resolve-p-versus-np`.
+- `time-and-space-hierarchy-theorems` (19): `cor-l-is-properly-contained-in-pspace`, `cor-p-is-properly-contained-in-exp`, `def-efficient-universal-simulation-with-clock`, `def-read-only-input-workspace-classes`, `fs-unrestricted-diagonalization-respects-any-bound`, `lem-effective-enumeration-of-clocked-machines`, `lem-padding-transfers-time-bounds`, `lem-read-only-workspace-diagonal-machine-halts`, `lem-read-only-workspace-simulates-in-all-tapes-space`, `lem-read-only-workspace-universal-simulation`, `lem-space-bounded-universal-simulation`, `lem-space-diagonal-machine-halts`, `lem-time-diagonal-language-respects-its-budget`, `prop-hierarchy-theorems-do-not-separate-p-from-np`, `thm-deterministic-space-hierarchy`, `thm-deterministic-time-hierarchy`, `thm-gap-and-union-theorems-for-complexity-bounds`, `thm-nondeterministic-time-hierarchy`, `thm-read-only-workspace-space-hierarchy`.
+- `time-and-space-hierarchy-theorems-examples` (3): `cex-unrestricted-diagonalization-respects-any-bound`, `ex-hierarchy-theorems-do-not-separate-p-from-np`, `ex-time-diagonal-language-respects-its-budget`.
+- `turing-machines-configurations-and-computation` (4): `def-halting-computation-and-divergence`, `def-language-recognized-and-decided`, `def-nondeterministic-accepting-computation`, `def-partial-function-computed-by-a-machine`.
+
+## 53. Binding Phase-2 pair repair (2026-09-08)
+
+This section supersedes only the Phase-2 classification in §50 and the
+heading/classification of §52.  It does not replace §52's item-exact consumer
+data: those 55 rows remain the immutable impact ledger for the current
+published-to-draft defects.  The owner's phase contract is stricter than the
+classification used there: **Phase 2 builds new A/B pairs only**.  A draft item
+listed on an already-published page cannot be published as Phase-2 work.
+Consequently all 55 old draft items in §52 are Phase-3 cleanup inputs, not
+Phase-2 suppliers.
+
+The cheapest adequate cutover uses five new A/B pairs and thirty A items.
+Twenty-nine A items replace the twenty-nine old roots having direct published
+consumers; one additional polynomial-time verifier/reduction definition is an
+internal prerequisite that prevents the final pair from consuming the broken
+published P/NP page.  The other twenty-six old §52 items are absorbed as proof
+machinery into those interfaces rather than copied as separate public items.
+The five pairs are necessary at the indicated cuts: the first three have
+same-page published consumers at orders 585, 597, and 599, while the last two
+must respectively precede the first published hierarchy consumer at 613 and
+the first published NP-completeness consumer at 623.  Combining across any of
+the first three cuts would either create a forward edge or re-mint the whole
+Turing-machine model.
+
+### 53.1 Machine-actionable page objects
+
+Every B page below requires only its A companion, has no consumer, and is a
+dependency leaf.  Every named A prerequisite is an earlier A page.  The
+decimal orders are unused in the 2026-09-08 live plan and leave the surrounding
+published orders stable.
+
+#### Finite-state transition and determinisation interfaces
+
+```yaml
+- order: 584.2
+  id: finite-automata-transition-and-determinisation-interfaces
+  title: Finite-Automata Transition and Determinisation Interfaces
+  kind: A
+  category: computability-theory
+  companion: finite-automata-transition-and-determinisation-interfaces-examples
+  requires: [deterministic-finite-automata-and-regular-languages]
+  items:
+    - def-epsilon-nfa-word-transition
+    - thm-subset-construction-reachability-invariant
+    - prop-deterministic-automata-are-special-nondeterministic-automata
+- order: 584.4
+  id: finite-automata-transition-and-determinisation-interfaces-examples
+  title: Finite-Automata Transition and Determinisation Interfaces — Examples
+  kind: B
+  category: computability-theory
+  requires: [finite-automata-transition-and-determinisation-interfaces]
+  items:
+    - ex-epsilon-closure-and-word-transition-on-a-three-state-nfa
+    - ex-subset-construction-for-an-epsilon-nfa
+    - cex-omitting-epsilon-closure-breaks-determinisation
+```
+
+Proof order is binding.  The first definition packages an epsilon-NFA, finite
+epsilon closure, and the recursively extended word transition in one typed
+interface.  The theorem constructs the subset DFA and proves by induction on
+word length that its state after a word is exactly the extended NFA state set.
+The proposition embeds a DFA by singleton transition sets and empty epsilon
+relation.  Thus no item depends on the later published NFA page.
+
+#### Turing-machine configuration boundary interface
+
+```yaml
+- order: 596.2
+  id: turing-machine-configuration-boundary-interface
+  title: Turing-Machine Configuration Boundary Interface
+  kind: A
+  category: computability-theory
+  companion: turing-machine-configuration-boundary-interface-examples
+  requires:
+    - formal-languages-encodings-and-decision-problems
+  items:
+    - def-turing-machine-initial-and-halting-configuration-interface
+- order: 596.4
+  id: turing-machine-configuration-boundary-interface-examples
+  title: Turing-Machine Configuration Boundary Interface — Examples
+  kind: B
+  category: computability-theory
+  requires: [turing-machine-configuration-boundary-interface]
+  items:
+    - ex-initial-configuration-on-empty-input
+    - ex-accepting-and-rejecting-configurations-are-machine-relative
+```
+
+The definition works directly with the explicit finite machine tuple, a
+finite-support right-infinite tape, and a state/head/tape configuration.  It
+defines the initial tape, initial configuration, and accepting, rejecting, and
+halting predicates together.  It does not cite the later
+`def-turing-machine-configuration`; Phase 3 makes that published definition an
+agreement/specialisation bridge to this interface.  Natural-number recursion
+is already in the A-prerequisite closure through
+`formal-languages-encodings-and-decision-problems`, so the legacy published
+`construction-of-the-natural-numbers` page is not a direct prerequisite.
+
+#### One-tape simulation normal forms
+
+```yaml
+- order: 598.2
+  id: one-tape-simulation-normal-forms
+  title: One-Tape Simulation Normal Forms
+  kind: A
+  category: computability-theory
+  companion: one-tape-simulation-normal-forms-examples
+  requires:
+    - turing-machine-configuration-boundary-interface
+    - turing-machines-configurations-and-computation
+  items:
+    - thm-stay-put-elimination-with-explicit-simulation-interface
+- order: 598.4
+  id: one-tape-simulation-normal-forms-examples
+  title: One-Tape Simulation Normal Forms — Examples
+  kind: B
+  category: computability-theory
+  requires: [one-tape-simulation-normal-forms]
+  items:
+    - ex-eliminating-a-stay-put-transition
+    - cex-deleting-stay-put-moves-does-not-preserve-computation
+```
+
+The theorem replaces each stay-put instruction by a move into a fresh marked
+state followed by the inverse head move, proves the two-step simulation
+invariant, and preserves accepting, rejecting, and divergent behaviours.  It
+uses only the already-published raw machine/configuration/one-step items on the
+Turing-machine A page and the earlier boundary interface; it does not consume
+the old draft stay-put theorem.
+
+#### Effective numberings, reductions, resources, and randomness
+
+```yaml
+- order: 612.2
+  id: effective-numberings-reductions-resources-and-randomness
+  title: Effective Numberings, Reductions, Resources, and Randomness
+  kind: A
+  category: computability-theory
+  companion: effective-numberings-reductions-resources-and-randomness-examples
+  requires:
+    - one-tape-simulation-normal-forms
+    - robust-machine-models-and-universal-computation
+    - diagonalization-and-the-halting-problem
+    - finite-probability-spaces-and-random-variables
+    - algebraic-extensions-degree-and-finite-fields
+    - linear-algebra-methods-in-combinatorics
+  items:
+    - def-uniform-asymptotic-time-space-comparison
+    - def-machine-time-and-space-constructibility
+    - def-primitive-recursive-functions-by-initial-functions-and-schemes
+    - def-kleene-computation-predicate-and-output-map
+    - thm-kleene-normal-form-for-the-fixed-machine-coding
+    - def-computable-many-one-reducibility-interface
+    - def-oracle-turing-reducibility-interface
+    - def-acceptable-numbering-with-universal-evaluation
+    - thm-smn-for-the-fixed-acceptable-numbering
+    - thm-kleene-fixed-point-theorem-for-program-indices
+    - def-polynomial-time-verifier-and-reduction-interface
+    - def-probabilistic-polynomial-time-machine-interface
+    - def-rp-corp-zpp-bpp-and-pp-classes
+    - def-pairwise-independent-hash-family-interface
+    - lem-chernoff-bound-for-independent-bernoulli-trials
+    - thm-schwartz-zippel-over-finite-fields
+- order: 612.4
+  id: effective-numberings-reductions-resources-and-randomness-examples
+  title: Effective Numberings, Reductions, Resources, and Randomness — Examples
+  kind: B
+  category: computability-theory
+  requires: [effective-numberings-reductions-resources-and-randomness]
+  items:
+    - ex-smn-specializes-a-two-argument-index
+    - ex-pairwise-independent-affine-hashing-over-a-prime-field
+    - ex-schwartz-zippel-for-a-bivariate-polynomial
+```
+
+The displayed order is proof order.  Items 1--2 fix big-O/little-o and
+time/space constructibility, including monotonicity and complete-input-reading
+guards.  Items 3--5 construct primitive recursion, sequence coding, the
+primitive-recursive step predicate, minimisation, normal form, and the
+partial-recursive/Turing-computable equivalence.  Items 6--7 define the two
+reduction interfaces with totality, direction, and oracle-query semantics.
+Items 8--10 use the fixed effective machine coding and published step-by-step
+interpreter to prove universality, s-m-n, and the fixed-point theorem; no old
+acceptable-numbering draft is cited.  Item 11 packages exactly the polynomial
+time, verifier, balance, and many-one notions needed by the next pair.  Items
+12--16 then define probabilistic polynomial time and its named classes, prove
+the finite pairwise-independent hashing and Chernoff interfaces, and prove
+Schwartz--Zippel by induction on the number of variables using the published
+monomial/degree and finite-field root bounds.  No P/NP, randomized-complexity,
+or acceptable-numbering page is used as a hidden supplier.  The natural-number
+coding input is already in the A-prerequisite closure through
+`diagonalization-and-the-halting-problem`; it therefore does not introduce a
+direct dependency on a legacy `P` page.
+
+#### SAT tableaux and quantified-space completeness
+
+```yaml
+- order: 620.2
+  id: sat-tableaux-and-quantified-space-completeness
+  title: SAT Tableaux and Quantified-Space Completeness
+  kind: A
+  category: computability-theory
+  companion: sat-tableaux-and-quantified-space-completeness-examples
+  requires:
+    - effective-numberings-reductions-resources-and-randomness
+    - turing-machines-configurations-and-computation
+  items:
+    - def-boolean-formulas-cnf-and-satisfiability-interface
+    - def-bounded-turing-computation-tableau-interface
+    - lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations
+    - lem-tableau-to-cnf-map-has-polynomial-size-and-time
+    - thm-cook-levin-sat-completeness-interface
+    - thm-three-sat-completeness-interface
+    - def-polynomial-space-and-nondeterministic-polynomial-space
+    - lem-space-bounded-machine-configuration-count
+    - thm-tqbf-pspace-completeness-interface
+- order: 620.4
+  id: sat-tableaux-and-quantified-space-completeness-examples
+  title: SAT Tableaux and Quantified-Space Completeness — Examples
+  kind: B
+  category: computability-theory
+  requires: [sat-tableaux-and-quantified-space-completeness]
+  items:
+    - ex-a-two-step-computation-tableau-and-its-local-clauses
+    - ex-tseitin-conversion-preserves-satisfiability
+    - ex-qbf-reachability-recursion-space-accounting
+```
+
+Items 1--6 give the full Cook--Levin interface: typed Boolean/CNF/SAT syntax,
+bounded tableaux, constant cell alphabet and local windows, start/accept/
+transition and exactly-one constraints, correctness, polynomial construction,
+Tseitin conversion, SAT membership, SAT hardness, and the standard
+equisatisfiable 3-CNF conversion.  Items 7--9 define PSPACE/NPSPACE and QBF,
+count space-bounded configurations, prove TQBF membership, and prove hardness
+by the quantifier-reusing reachability recursion with an explicit polynomial
+formula-size and workspace induction.  The proof never consumes the draft
+Cook--Levin or TQBF items on the two following published pages.
+
+### 53.2 Exact old-root cutover and published impact
+
+For an old §52 ID `x`, write `Impact(x)` for the **entire row already printed
+in §52**: its exact direct published consumer set and its complete distinct
+transitive published closure grouped by home page.  For a set `S`,
+`Impact(S)` is the set-theoretic union of those rows, deduplicated by item ID.
+This definition preserves the item-exact maps without copying thousands of
+consumer IDs and is mechanically checkable against the existing appendix.
+
+In the table below, the new item's direct published consumers are printed
+explicitly.  Its complete transitive published impact is exactly the union in
+the last column.  Every absorbed old ID not itself a direct root has direct
+published consumers zero in §52.  Thus the cutover neither adds nor loses a
+published consumer.
+
+| new Phase-2 A item | old §52 root/support interfaces replaced | exact direct published consumers after Phase 3 | complete transitive published impact |
+|---|---|---|---|
+| `def-epsilon-nfa-word-transition` | `def-epsilon-closure-of-a-state-set`; `def-extended-nfa-transition` | `def-nfa-acceptance-and-recognized-language` | `Impact` of the two old IDs |
+| `thm-subset-construction-reachability-invariant` | `def-subset-construction-dfa`; `lem-subset-construction-state-invariant` | `thm-subset-construction-preserves-language` | `Impact` of the two old IDs |
+| `prop-deterministic-automata-are-special-nondeterministic-automata` | `prop-every-dfa-is-an-nfa` | `cor-dfas-and-nfas-recognize-the-same-languages` | `Impact(prop-every-dfa-is-an-nfa)` |
+| `def-turing-machine-initial-and-halting-configuration-interface` | `def-initial-accepting-and-rejecting-configurations` | `def-halting-computation-and-divergence`; `def-nondeterministic-accepting-computation` | `Impact(def-initial-accepting-and-rejecting-configurations)` |
+| `thm-stay-put-elimination-with-explicit-simulation-interface` | `thm-stay-put-moves-can-be-eliminated` | `thm-multitape-machines-have-one-tape-simulations` | `Impact(thm-stay-put-moves-can-be-eliminated)` |
+| `def-uniform-asymptotic-time-space-comparison` | `def-asymptotic-resource-comparison` | `def-dtime-ntime-dspace-and-nspace`; `def-read-only-input-workspace-classes`; `thm-deterministic-space-hierarchy`; `thm-deterministic-time-hierarchy`; `thm-read-only-workspace-space-hierarchy` | `Impact(def-asymptotic-resource-comparison)` |
+| `def-machine-time-and-space-constructibility` | `def-time-and-space-constructible-function` | `def-dtime-ntime-dspace-and-nspace`; `def-efficient-universal-simulation-with-clock`; `lem-space-bounded-universal-simulation`; `lem-space-diagonal-machine-halts`; `lem-time-diagonal-language-respects-its-budget`; `thm-nondeterministic-time-hierarchy` | `Impact(def-time-and-space-constructible-function)` |
+| `def-primitive-recursive-functions-by-initial-functions-and-schemes` | `def-composition-and-primitive-recursion-schemes`; `def-initial-arithmetic-functions`; `def-primitive-recursive-function`; `prop-basic-arithmetic-and-bounded-quantification-are-primitive-recursive`; `thm-sequence-length-and-coordinate-functions-are-primitive-recursive` | `def-bounded-arithmetic-formula`; `lem-bounded-quantifiers-preserve-primitive-recursiveness` | `Impact` of the five old IDs |
+| `def-kleene-computation-predicate-and-output-map` | `def-kleene-t-predicate-and-output-function`; `def-natural-number-coding-of-finite-sequences`; `lem-turing-step-coding-is-primitive-recursive` | `thm-totality-is-pi-two-complete` | `Impact` of the three old IDs |
+| `thm-kleene-normal-form-for-the-fixed-machine-coding` | `def-mu-minimization-and-partial-recursive-function`; `thm-kleene-normal-form`; `thm-partial-recursive-iff-turing-computable` | `thm-sigma-one-sets-are-exactly-ce-sets` | `Impact` of the three old IDs |
+| `def-computable-many-one-reducibility-interface` | `def-computable-many-one-reduction` | `def-arithmetical-level-completeness`; `def-oracle-ce-completeness`; `thm-totality-is-pi-two-complete` | `Impact(def-computable-many-one-reduction)` |
+| `def-oracle-turing-reducibility-interface` | `def-turing-reduction` | `def-relative-computability-and-enumerability` | `Impact(def-turing-reduction)` |
+| `def-acceptable-numbering-with-universal-evaluation` | `def-numbering-of-partial-computable-functions`; `def-universal-and-acceptable-numbering` | `def-relative-computability-and-enumerability`; `lem-universal-martin-lof-test-exists`; `thm-halting-is-sigma-one-complete`; `thm-invariance-for-prefix-complexity` | `Impact` of the two old IDs |
+| `thm-smn-for-the-fixed-acceptable-numbering` | `def-parameter-specialization-function`; `thm-smn-parameter-theorem` | `thm-totality-is-pi-two-complete` | `Impact` of the two old IDs |
+| `thm-kleene-fixed-point-theorem-for-program-indices` | `def-computable-program-transformer`; `lem-self-reference-construction-from-smn`; `thm-kleenes-second-recursion-theorem` | `lem-halting-oracle-is-not-computably-dominated` | `Impact` of the three old IDs |
+| `def-polynomial-time-verifier-and-reduction-interface` | no old root; internal raw interface preventing a dependency on the broken P/NP page | zero | union of the impacts of the nine new SAT/space interfaces below, reached only through those new items |
+| `def-probabilistic-polynomial-time-machine-interface` | `def-probabilistic-polynomial-time-machine` | `def-interactive-proof-transcript-round-and-strategy`; `def-ip` | `Impact(def-probabilistic-polynomial-time-machine)` |
+| `def-rp-corp-zpp-bpp-and-pp-classes` | `def-rp-corp-zpp-bpp-and-pp` | `thm-pp-is-sign-testing-gap-p` | `Impact(def-rp-corp-zpp-bpp-and-pp)` |
+| `def-pairwise-independent-hash-family-interface` | `def-pairwise-independent-hash-family` | `lem-hashing-commits-public-randomness` | `Impact(def-pairwise-independent-hash-family)` |
+| `lem-chernoff-bound-for-independent-bernoulli-trials` | `lem-chernoff-bound-for-bernoulli-trials` | `lem-sequential-repetition-amplifies-error` | `Impact(lem-chernoff-bound-for-bernoulli-trials)` |
+| `thm-schwartz-zippel-over-finite-fields` | `thm-schwartz-zippel-lemma` | `rem-polynomial-identity-bounds-for-sum-check` | `Impact(thm-schwartz-zippel-lemma)` |
+| `def-boolean-formulas-cnf-and-satisfiability-interface` | `def-boolean-formula-cnf-and-sat` | `def-arithmetization-of-a-boolean-formula`; `def-number-sat` | `Impact(def-boolean-formula-cnf-and-sat)` |
+| `def-bounded-turing-computation-tableau-interface` | `def-bounded-computation-tableau`; `def-local-tableau-window` | `lem-cook-levin-can-be-made-parsimonious` | `Impact` of the two old IDs |
+| `lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations` | `lem-cook-levin-formula-is-satisfiable-iff-acceptance-occurs`; `lem-exactly-one-symbol-constraints-have-polynomial-size`; `lem-legal-tableaux-iff-all-local-windows-and-boundaries-are-legal`; `lem-start-accept-and-transition-constraints-have-polynomial-size`; `lem-tableau-cell-alphabet-is-constant` | `lem-cook-levin-can-be-made-parsimonious` | `Impact` of the five old IDs |
+| `lem-tableau-to-cnf-map-has-polynomial-size-and-time` | `def-tseitin-extension-variable`; `lem-cook-levin-map-is-polynomial-time`; `lem-tseitin-transformation-is-linear-size-and-equisatisfiable` | `lem-cook-levin-can-be-made-parsimonious` | `Impact` of the three old IDs |
+| `thm-cook-levin-sat-completeness-interface` | `prop-sat-is-in-np`; `thm-cook-levin-sat-is-np-complete` | `thm-circuit-sat-is-np-complete` | `Impact` of the two old IDs |
+| `thm-three-sat-completeness-interface` | `thm-three-sat-is-np-complete` | `cor-clique-is-np-complete`; `cor-hamiltonian-path-and-cycle-are-np-complete`; `thm-three-sat-reduces-to-clique`; `thm-three-sat-reduces-to-directed-hamiltonian-cycle`; `thm-three-sat-reduces-to-three-colourability` | `Impact(thm-three-sat-is-np-complete)` |
+| `def-polynomial-space-and-nondeterministic-polynomial-space` | `def-pspace-and-npspace` | `cor-l-is-properly-contained-in-pspace`; `lem-polynomial-space-oracle-absorption`; `lem-protocol-value-is-computable-in-polynomial-space`; `prop-ph-containments-and-polynomial-space` | `Impact(def-pspace-and-npspace)` |
+| `lem-space-bounded-machine-configuration-count` | `lem-space-bounded-machines-have-exponentially-many-configurations` | `lem-space-diagonal-machine-halts` | `Impact(lem-space-bounded-machines-have-exponentially-many-configurations)` |
+| `thm-tqbf-pspace-completeness-interface` | `def-quantified-boolean-formula-and-tqbf`; `def-reachable-configuration-formula`; `lem-quantifier-reuse-keeps-reachability-formulas-polynomial`; `prop-tqbf-is-in-pspace`; `thm-tqbf-is-pspace-complete` | `cor-ph-complete-language-forces-collapse`; `lem-polynomial-space-oracle-absorption` | `Impact` of the five old IDs |
+
+Every new B item in §53.1 has zero direct published consumers and zero
+transitive published impact.  The new internal
+`def-polynomial-time-verifier-and-reduction-interface` has no direct published
+consumer; its complete published impact is exactly the union stated in its
+row, reached through the new SAT/space A items.  These declarations cover
+every one of the thirty A and thirteen B items individually.
+
+### 53.3 Phase-3 published cleanup after the five pairs land
+
+Published files remain immutable in Phase 2.  In Phase 3:
+
+1. Repoint each direct edge printed in §52 from its old draft ID to the new ID
+   in §53.2.  This is an exact 55-edge cutover across the same 47 distinct
+   published consumers; support-only old IDs have no direct edge to repoint.
+2. Add only these A-page requirements, which make every affected published
+   consumer page reach its new supplier without any B prerequisite:
+   - `nondeterministic-finite-automata-and-subset-construction` ->
+     `finite-automata-transition-and-determinisation-interfaces`;
+   - `turing-machines-configurations-and-computation` ->
+     `turing-machine-configuration-boundary-interface`;
+   - `robust-machine-models-and-universal-computation` ->
+     `one-tape-simulation-normal-forms`;
+   - `the-arithmetical-hierarchy-and-posts-theorem`,
+     `resource-bounds-and-machine-invariance`, and
+     `randomized-complexity-and-amplification` ->
+     `effective-numberings-reductions-resources-and-randomness`;
+   - `the-cook-levin-theorem` and `space-complexity-savitch-and-tqbf` ->
+     `sat-tableaux-and-quantified-space-completeness`.
+   Existing later A-page closure carries these suppliers to every other direct
+   consumer home in §52.
+3. Treat all 55 old draft items and the remaining draft items depending on
+   them as cleanup of their ten already-published page inventories.  Do not
+   publish them in Phase 2 and do not retain a published dependency on them.
+   Phase 3 may retire an absorbed draft, rewrite it as an agreement item after
+   the new interface, or move genuinely additional material to a later new
+   pair, but it must not give an old draft and a new supplier duplicate homes.
+4. Only after that cutover, resynchronise the affected plan metadata from the
+   repaired published frontmatter.  The legacy hydration, duplicate A/B homes,
+   DPDA repair, and §51 metadata work remain the separate Phase-3 amendments
+   already specified in §§44--45.
+
+### 53.4 Source and validation gate
+
+No new mathematical result is introduced: §53 repackages exactly the proved
+interfaces already sourced in the original pair sections.  The authoritative
+full texts already obtained and read are Gallier, *Introduction to the Theory
+of Computation*, Chapters 2--6 and 8--14; Savage, *Models of Computation*,
+Chapters 2--5 and 8--10; Sipser, *Introduction to the Theory of Computation*,
+Chapters 1, 3--7; Zach/Open Logic, *Incompleteness and Computability*, Chapters
+2--6 and 9; and Arora--Barak, *Computational Complexity*, Chapters 1--4.  The
+complete authoritative endpoints are recorded in §38.  Their NFA induction,
+explicit machine simulation, normal-form/s-m-n recursion, Chernoff and
+Schwartz--Zippel arguments, Cook tableau construction, and quantified
+reachability proof cover every proof obligation above.  No source-access
+blocker remains for these five pairs.
+
+Before splice, check all ten page IDs and forty-three item IDs against the
+then-live plan, `library/`, `items/`, aliases, and all prose scaffolds.  Then
+validate the prospective page graph.  Acceptance requires: the five A orders
+and five B orders are unique; all five A prerequisite closures are strictly
+earlier and A-only; every B has the singleton A requirement and zero
+consumers; every §53.2 old ID occurs exactly once in the mapping and all 55
+old IDs are covered; no new item path reaches a draft, Recorded/Not-Proved,
+or `deferred-set-theory-beyond-choice` item; and the post-Phase-3 reverse
+closure of every new interface equals the corresponding `Impact` union from
+§52.

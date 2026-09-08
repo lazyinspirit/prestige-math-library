@@ -1071,7 +1071,7 @@ two functionals on arbitrary nonzero positive test functions before extending by
 positive and negative parts.  The empty group is excluded by the group axioms;
 $f=0$, empty support and non-$\sigma$-compact $G$ are handled explicitly.
 
-**B page:** `haar-measure-basic-models`
+**B page:** `haar-measure-existence-and-uniqueness-examples`
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -1117,7 +1117,7 @@ and Fubini, extend by density, then verify the involution.  Treat a discrete
 group (where $L^1$ is unital) separately from a nondiscrete group (where only an
 approximate identity is promised).
 
-**B page:** `modular-function-and-convolution-examples`
+**B page:** `the-modular-function-and-l1-group-algebras-examples`
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -1155,6 +1155,8 @@ pp. 289–299, and Appendix C §§C.1–C.5, pp. 340–365; Bekka and de la Harp
 | `thm-gns-construction-for-topological-groups` (theorem) | Every continuous positive-type $\varphi$ is a coefficient $\langle\pi_\varphi(g)\xi_\varphi,\xi_\varphi\rangle$ of a cyclic strongly continuous unitary representation. | Delivers the positive-function/representation bridge. | literature-derived | literature-derived |
 | `thm-uniqueness-of-the-cyclic-gns-representation` (theorem) | A cyclic realization of $\varphi$ is unique up to the unique unitary intertwiner carrying one cyclic vector to the other. | Makes the construction canonical up to equivalence. | literature-derived | literature-derived |
 | `cor-normalized-positive-type-functions-correspond-to-pointed-cyclic-representations` (corollary) | The condition $\varphi(e)=1$ corresponds exactly to a unit cyclic vector. | Supplies the normalized state space used in weak containment. | literature-derived | literature-derived |
+| `lem-dominated-positive-type-functions-give-positive-commutant-contractions` (lemma) | If $0\leq\psi\leq\varphi$ in the positive-type cone, the two GNS forms produce a unique positive contraction $T\in\pi_\varphi(G)'$ with $\psi(g)=\langle\pi_\varphi(g)T\xi_\varphi,\xi_\varphi\rangle$. | Supplies the Radon--Nikodym step needed for the extreme-point theorem without anticipating group $C^*$-algebras. | literature-derived | literature-derived |
+| `lem-nonscalar-positive-commutant-elements-split-a-normalized-positive-type-function` (lemma) | A nonscalar positive contraction in the cyclic GNS commutant yields a nontrivial convex decomposition of the normalized coefficient, while every convex decomposition yields such a contraction. | Proves both directions of the purity/irreducibility bridge. | literature-derived | literature-derived |
 | `thm-pure-positive-type-functions-correspond-to-irreducible-gns-representations` (theorem) | Extreme normalized positive-type functions are precisely those whose GNS representations are irreducible. | Connects convex geometry to the unitary dual. | literature-derived | literature-derived |
 
 **Hard proof plan.**  For Schur, apply the inherited spectral theorem to the
@@ -1163,9 +1165,15 @@ subspaces.  For GNS, quotient the finitely supported function space by the
 null space before completing, prove strong continuity first on the cyclic
 orbit, then extend by density.  The zero function yields the zero Hilbert space
 but is not normalized; the normalized theorem therefore always has a nonzero
-cyclic vector.
+cyclic vector.  For the final theorem, compare the two positive semidefinite
+forms on the algebraic cyclic span, represent the dominated form by a positive
+contraction, prove that it commutes with every translate, and use unitary
+Schur's lemma.  Conversely a nonscalar self-adjoint commutant element is
+affinely rescaled to a positive contraction and splits the coefficient.  This
+two-lemma route is required; “pure state iff irreducible GNS” may not be cited
+from the later group-$C^*$ page.
 
-**B page:** `positive-type-and-gns-examples`
+**B page:** `unitary-representations-positive-type-and-gns-examples`
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -1194,20 +1202,26 @@ Bekka–de la Harpe–Valette, Appendix A §A.5, pp. 306–307.
 | `def-haar-averaging-operator-on-hom-spaces` (definition) | Average a bounded operator $T:V\to W$ as $\int_K\sigma(k)T\pi(k)^{-1}\,dk$. | Builds equivariant projections and intertwiners. | literature-derived | not-applicable |
 | `lem-haar-averaging-projects-onto-the-intertwiner-space` (lemma) | Averaging is an idempotent contraction onto $\operatorname{Hom}_K(V,W)$. | Gives a reusable analytic projection. | literature-derived | literature-derived |
 | `lem-compact-convolution-operators-are-hilbert-schmidt` (lemma) | For $f\in L^2(K)$, convolution by $f$ on $L^2(K)$ is Hilbert–Schmidt and hence compact. | Supplies finite-dimensional spectral blocks for irreducibles. | literature-derived | literature-derived |
+| `lem-conjugation-orbits-of-finite-rank-operators-are-norm-continuous` (lemma) | If $\pi$ is strongly continuous and $T$ has finite rank, then $k\mapsto\pi(k)T\pi(k)^{-1}$ is norm-continuous. | Licenses a compact-operator-valued Haar integral without assuming norm continuity of $\pi$. | literature-derived | literature-derived |
+| `lem-a-rank-one-haar-average-is-a-nonzero-compact-intertwiner` (lemma) | Averaging the positive rank-one operator $\langle\,\cdot\,,\xi\rangle\xi$ over $K$ gives a nonzero positive compact operator commuting with an irreducible $\pi$. | Supplies the correct compact operator on an arbitrary irreducible representation. | literature-derived | literature-derived |
+| `lem-a-compact-scalar-identity-forces-finite-dimension` (lemma) | If $cI_{\mathcal H}$ is compact with $c\ne0$, then $\mathcal H$ is finite dimensional. | Closes the finite-dimensionality argument. | literature-derived | literature-derived |
 | `thm-continuous-irreducible-unitary-representations-of-compact-groups-are-finite-dimensional` (theorem) | Every irreducible continuous unitary representation of a compact group is finite dimensional. | Prevents hidden infinite-dimensional irreducible summands. | literature-derived | literature-derived |
 | `thm-schur-orthogonality-for-compact-groups` (theorem) | Matrix coefficients of inequivalent irreducibles are orthogonal, with the $1/\dim\pi$ normalization within one irreducible. | Provides the general compact-group orthogonality not owned by the finite or compact-Lie pages. | literature-derived | literature-derived |
 | `def-compact-group-isotypic-projection` (definition) | For irreducible $\sigma$, define $P_\sigma=d_\sigma\int_K\overline{\chi_\sigma(k)}\pi(k)\,dk$. | Creates explicit projections onto compact isotypic components. | literature-derived | not-applicable |
 | `thm-isotypic-projections-are-mutually-orthogonal-equivariant-projections` (theorem) | The $P_\sigma$ are bounded self-adjoint equivariant projections with pairwise orthogonal ranges. | Prepares the global Hilbert decomposition proved after Peter–Weyl. | literature-derived | literature-derived |
 
 **Hard proof plan.**  Separate finite-dimensional unitarization from the
-infinite-dimensional theorem.  Use an explicitly nonzero compact convolution
-operator inside an irreducible representation and the inherited compact
-spectral theorem to force a finite-dimensional invariant eigenspace.  Prove
+infinite-dimensional theorem.  Average a positive rank-one operator in the
+compact operators, apply unitary Schur to obtain a nonzero scalar identity,
+and conclude that the representation space is finite dimensional.  Integrated
+convolution operators in an arbitrary irreducible representation are **not**
+asserted compact; the Hilbert--Schmidt convolution lemma is reserved for the
+regular representation and RG-22.  Prove
 orthogonality by Haar averaging of rank-one operators, including inequivalent,
 equivalent and one-dimensional cases.  Do not claim that the isotypic
 projections sum to the identity until RG-22 proves density.
 
-**B page:** `compact-group-complete-reducibility-examples`
+**B page:** `complete-reducibility-for-compact-groups-examples`
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -1250,7 +1264,7 @@ representation and prove the orthogonal complement of all ranges is zero by
 testing coefficient functions.  No maximal torus, Weyl integration formula or
 Lie structure appears: those remain on the cited DG page.
 
-**B page:** `peter-weyl-models-beyond-compact-lie-groups`
+**B page:** `peter-weyl-theory-for-general-compact-groups-examples`
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -1296,7 +1310,7 @@ multiplication unitary for two equivalent measures.  When $H=G$, $G/H$ is one
 point and induction is $\sigma$; when $H=\{e\}$ it is the left regular
 representation; when $G/H$ has invariant measure the cocycle disappears.
 
-**B page:** `locally-compact-induction-models`
+**B page:** `induced-unitary-representations-of-locally-compact-groups-examples`
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -1339,7 +1353,7 @@ load-bearing; the page makes no theorem for arbitrary pathological orbit
 spaces.  For $H=G$ the base is one point; for $H=\{e\}$ the canonical system is
 the multiplication/translation system on $G$.
 
-**B page:** `systems-of-imprimitivity-examples`
+**B page:** `mackeys-imprimitivity-theorem-examples`
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -1389,7 +1403,7 @@ topology by coefficients for all groups, and mention the primitive-ideal model
 only with its exact injectivity hypothesis.  The zero representation is allowed
 in weak-containment comparisons but is not a point of $\widehat G$.
 
-**B page:** `unitary-dual-and-group-c-star-examples`
+**B page:** `group-c-star-algebras-and-the-fell-unitary-dual-examples`
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -1421,11 +1435,6 @@ pp. 242–260; Bekka–de la Harpe–Valette, Appendix F §F.5, pp. 413–417.
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
-| `def-measurable-field-of-separable-hilbert-spaces` (definition) | Define a measurable Hilbert field by a countable fundamental family and measurable inner products. | States the measurable structure needed before integrating fibers. | literature-derived | not-applicable |
-| `def-direct-integral-of-a-measurable-hilbert-field` (definition) | Form $\int_X^\oplus\mathcal H_x\,d\mu(x)$ from square-integrable measurable sections modulo almost-everywhere equality. | Constructs the ambient Hilbert space. | literature-derived | not-applicable |
-| `lem-direct-integral-norm-and-completeness` (lemma) | The fiberwise integral norm is well defined and the section quotient is complete. | Verifies that the construction really yields a Hilbert space. | literature-derived | literature-derived |
-| `def-measurable-and-decomposable-operator-fields` (definition) | Define measurable essentially bounded operator fields and their decomposable operators. | Introduces the operators that act fiberwise. | literature-derived | not-applicable |
-| `thm-the-commutant-of-diagonal-multiplication-is-the-algebra-of-decomposable-operators` (theorem) | On a standard direct integral, operators commuting with all diagonal multipliers are exactly decomposable operators. | Supplies the uniqueness mechanism for decompositions. | literature-derived | literature-derived |
 | `def-direct-integral-of-unitary-representations` (definition) | Define $\int_X^\oplus\pi_x\,d\mu(x)$ when the representation field is measurable. | States the representation-theoretic construction. | literature-derived | not-applicable |
 | `lem-a-measurable-direct-integral-of-unitary-representations-is-strongly-continuous` (lemma) | Under the source's countability hypotheses, fiberwise actions integrate to a strongly continuous unitary representation. | Closes the topology condition that measurability alone could miss. | literature-derived | literature-derived |
 | `def-factor-representation-and-primary-representation` (definition) | A representation is factorial/primary when the center of its generated von Neumann algebra is scalar. | Names the canonical pieces of central decomposition. | literature-derived | not-applicable |
@@ -1446,7 +1455,7 @@ assertion is restricted to the standard/separable/second-countable setting in
 which the cited disintegration theorem is valid; no global selector of
 irreducible representatives is asserted.
 
-**B page:** `direct-integral-and-type-i-examples`
+**B page:** `direct-integral-decomposition-and-type-i-groups-examples`
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -1493,7 +1502,7 @@ argument used to obtain Reiter functions are recorded in the choice ledger.
 Left Haar measure and left translates are used consistently, so nonunimodular
 amenable examples are not accidentally excluded.
 
-**B page:** `locally-compact-amenability-examples`
+**B page:** `amenability-reiter-nets-and-folner-conditions-examples`
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -1542,7 +1551,7 @@ eigenvalues to find exactly the complementary interval.  Treat $\nu=0$ and
 both endpoints separately; parameter identifications never erase the parity
 label.
 
-**B page:** `sl2-r-principal-and-complementary-series-calculations`
+**B page:** `sl2-r-principal-and-complementary-series-examples`
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -1589,7 +1598,7 @@ explicitly statement-only (`not-supplied`) and is never load-bearing; its full
 proof needs the later higher-rank machinery of the cited monograph. The
 $SL_2(\mathbb R)$ failure now cites the already preceding RG-28 supplier.
 
-**B page:** `property-t-examples-and-boundaries`
+**B page:** `kazhdans-property-t-and-spectral-gap-examples`
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -1637,7 +1646,7 @@ tempered classes by weak containment and compare with Lang's Plancherel
 formula.  No choice of an actual representative for every point of the dual is
 made.
 
-**B page:** `sl2-r-discrete-series-and-dual-calculations`
+**B page:** `sl2-r-discrete-series-and-unitary-dual-examples`
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -2066,8 +2075,8 @@ this crosswalk.
 | RG-25/H3 | Bekka–de la Harpe Ch. 1.C–1.D, unitary dual, weak containment and Fell topology | included | `def-unitary-dual-of-a-locally-compact-group`; `def-weak-containment-of-unitary-representations`; `thm-weak-containment-is-equivalent-to-kernel-inclusion`; `def-fell-topology-on-the-unitary-dual` |
 | RG-25/H4 | Bekka–de la Harpe Ch. 8, closure, compact dual, primitive ideals and abelian boundary | included | `lem-fell-closure-is-characterized-by-weak-containment`; `cor-the-unitary-dual-of-a-compact-group-is-fell-discrete`; `def-primitive-ideal-space-of-a-group-c-star-algebra`; `prop-the-unitary-dual-to-primitive-ideal-map-is-continuous-and-surjective`; `cor-the-abelian-group-c-star-algebra-recovers-pontryagin-duality` |
 | RG-25/H5 | Bekka–de la Harpe/Valette, group-$C^*$ and Fell examples | included | `ex-full-and-reduced-group-c-star-algebras-of-a-finite-group`; `ex-unitary-dual-and-full-group-c-star-algebra-of-the-integers`; `ex-fell-convergence-of-characters-of-the-real-line`; `cex-the-unitary-dual-need-not-be-hausdorff` |
-| RG-26/H1 | Bekka–de la Harpe Ch. 1.G, measurable Hilbert fields and direct integrals | included | `def-measurable-field-of-separable-hilbert-spaces`; `def-direct-integral-of-a-measurable-hilbert-field`; `lem-direct-integral-norm-and-completeness`; `def-measurable-and-decomposable-operator-fields` |
-| RG-26/H2 | Bekka–de la Harpe Ch. 1.H–1.I/Valette App. F.5, decomposable operators and representation fields | included | `thm-the-commutant-of-diagonal-multiplication-is-the-algebra-of-decomposable-operators`; `def-direct-integral-of-unitary-representations`; `lem-a-measurable-direct-integral-of-unitary-representations-is-strongly-continuous`; `def-factor-representation-and-primary-representation` |
+| RG-26/H1 | Bekka–de la Harpe Ch. 1.G, measurable Hilbert fields and direct integrals | external FA supplier | `measurable-hilbert-fields-and-direct-integral-operators`; RG retains only representation-specific rows |
+| RG-26/H2 | Bekka–de la Harpe Ch. 1.H–1.I/Valette App. F.5, decomposable operators and representation fields | split: generic operator field is external FA; representation field is included | `measurable-hilbert-fields-and-direct-integral-operators`; `def-direct-integral-of-unitary-representations`; `lem-a-measurable-direct-integral-of-unitary-representations-is-strongly-continuous`; `def-factor-representation-and-primary-representation` |
 | RG-26/H3 | Bekka–de la Harpe Ch. 6, central decomposition and type I criteria | included | `thm-central-decomposition-into-factor-representations`; `thm-essential-uniqueness-of-central-decomposition`; `def-type-i-factor-representation-and-type-i-group`; `thm-equivalent-characterizations-of-second-countable-type-i-groups` |
 | RG-26/H4 | Bekka–de la Harpe Chs. 6–8, type-I irreducible disintegration and non-type-I boundary | included | `thm-irreducible-direct-integral-decomposition-for-type-i-groups`; `thm-essential-uniqueness-of-type-i-irreducible-disintegration`; `thm-non-type-i-groups-have-nonsmooth-irreducible-decomposition`; `cor-compact-groups-are-type-i-and-direct-integrals-collapse-to-discrete-sums` |
 | RG-26/H5 | Bekka–de la Harpe/Valette, direct-integral and factor examples | included | `ex-direct-integral-of-characters-for-the-regular-representation-of-r`; `ex-compact-group-direct-integrals-are-atomic`; `ex-the-left-regular-factor-of-an-icc-discrete-group`; `cex-irreducible-multiplicity-data-is-not-canonical-outside-type-i` |
@@ -2195,3 +2204,332 @@ existence, GNS, imprimitivity and direct-integral uniqueness—not from adding
 unsourced corollaries.  §13 records the tempting material deliberately left
 unminted.  No item was dropped to meet the page-size ceiling, and no split was
 made.
+
+---
+
+## 15. Binding post-publication dependency and proof audit (2026-09-08)
+
+This section supersedes every conflicting readiness, measurement, placement,
+dependency, B-page id, and blocker statement in §§0--14.  Published pages and
+items were read as immutable evidence.  Nothing here authorises an edit to
+`library/`, `items/`, generated files, `research/plan-spec.json`, the workflow,
+or another category scaffold.
+
+### 15.1 Immutable census and status drift
+
+The canonical RG band has 30 A/B pairs in the live plan.  Exactly RG-1--RG-4
+are published: **4 A pages, 4 B pages, and 73/73 present published item
+files**.  The remaining 52 RG pages have empty plan inventories and no library
+files.  The 73 published roots have a 775-item transitive file-header closure;
+every member is published and none has `proof: not-supplied`,
+`proved_here: false`, or a Recorded/Not-Proved-Here body.  The closure is
+acyclic, has no declared item-order forward edge, and has no RG B-item consumed
+outside its own B page.  This syntactic fact does not discharge the two
+unlinked proof assumptions identified in §15.3.
+
+The current page graph has **29 forbidden B-as-supplier edges**, one from each
+RG A page after RG-1 to the preceding RG B page.  The first four A pages are
+published, so the first three repairs are Phase 3; the other 26 are corrected
+planned requirements.  RG-1 also has the unrelated published-to-draft edge to
+Lie RL-15 B, `the-weyl-kac-character-formula-examples`.  Its nine items have
+zero Lie-item dependencies.  Delete that edge without replacement.
+
+The §5 tables contain 549 RG-owned ids after the five RG-20/RG-21 additions and
+the five generic direct-integral rows transferred to Functional Analysis.
+Published drift is exact:
+
+- RG-2 published eight items absent from its old table:
+  `lem-induction-ideal-of-a-subgroup-family-is-an-ideal`,
+  `def-supersolvable-groups-and-monomial-characters`,
+  `lem-p-elementary-groups-are-supersolvable`,
+  `prop-faithful-irreducible-character-is-induced-from-a-proper-inertia-subgroup`,
+  `lem-nonabelian-supersolvable-group-has-a-noncentral-normal-abelian-subgroup`,
+  `lem-monomiality-lifts-along-a-quotient`,
+  `thm-finite-supersolvable-groups-are-monomial`, and
+  `lem-p-elementary-characters-are-induced-from-linear-characters`.  They are
+  the published proof of the elementary-group monomiality step; retain them.
+- RG-3 uses the already published external
+  `def-splitting-field-for-a-finite-group` and published the additional local
+  `lem-base-change-of-intertwiner-spaces`.  It did not duplicate the splitting
+  field definition.  The base-change lemma must be rehomed as specified in
+  §15.3.
+- RG-4 published
+  `lem-normal-isotypical-components-are-permuted-by-translation`,
+  `lem-inducing-an-irreducible-inertia-module-is-irreducible`,
+  `cor-clifford-ramification-squares-sum-to-inertia-index`,
+  `def-extension-of-an-irreducible-normal-subgroup-representation`, and
+  `lem-isotypical-evaluation-and-subspaces-of-multiplicity-spaces`.  The old
+  planned ids `lem-restriction-to-a-normal-subgroup-is-semisimple` and
+  `cex-normal-restriction-of-an-irreducible-need-not-be-irreducible` are
+  **revoked**: Maschke is cited directly for the first role, and the published
+  $S_3/A_3$ example contains the second role.  They must never be authored.
+- The 13 B ids printed in §§5 RG-18--RG-30 formerly disagreed with the stable
+  live companions.  They are corrected in place above to the live `-examples`
+  ids; no page rename is permitted.
+
+Seven published items have plan/header dependency drift: 13 header-only and
+four plan-only edges.  After the mathematical repairs below, copy the repaired
+file header exactly into the ledger, not conversely.  The exact rows are:
+
+| item | header-only now | plan-only now |
+|---|---|---|
+| `lem-artin-cyclic-permutation-relation` | `thm-transitivity-of-induction-for-finite-groups` | `thm-complex-representations-are-determined-by-their-characters` |
+| `thm-artin-induction-for-rational-characters` | `prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings` | none |
+| `cor-cyclic-fixed-points-detect-rational-representations` | `lem-cyclic-generator-class-functions-by-moebius-inversion`; `thm-transitivity-of-induction-for-finite-groups`; `thm-frobenius-formula-for-induced-characters` | none |
+| `ex-artin-permutation-relation-for-a5` | `thm-frobenius-formula-for-induced-characters` | none |
+| `thm-scalar-extension-of-an-irreducible-finite-group-representation` | `lem-base-change-of-intertwiner-spaces` | none |
+| `thm-schur-index-equals-division-algebra-index` | `lem-character-field-is-the-stabilizer-fixed-field`; `thm-scalar-extension-of-an-irreducible-finite-group-representation`; `def-splitting-field-for-a-finite-group` | `thm-absolute-irreducibility-via-the-endomorphism-division-algebra`; `lem-schur-index-is-independent-of-the-chosen-splitting-field` |
+| `thm-schur-index-as-minimal-realization-multiplicity` | `thm-scalar-extension-of-an-irreducible-finite-group-representation`; `cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order`; `thm-complex-representations-are-determined-by-their-characters` | `def-index-of-a-central-division-algebra` |
+
+### 15.2 Binding A/B page requirements
+
+Every B page requires **only its own A page**.  Every A page must use the
+following earlier A-page closure.  A range such as “RG-14--RG-16” below means
+the three displayed A ids, never their companions.  This table replaces all
+29 serial B edges and every `RL-n`/`FR-n` placeholder.
+
+| A page | binding `requires` |
+|---|---|
+| `artin-induction-and-rational-characters` | `the-group-algebra-and-representations`; `maschkes-theorem-and-complete-reducibility`; `characters-and-the-orthogonality-relations`; `induced-representations-and-frobenius-reciprocity` |
+| `brauer-induction-and-elementary-subgroups` | preceding Artin A; the same four abstract representation A pages; `semidirect-products-and-automorphism-groups`; `sylow-theorems-and-nilpotent-groups` |
+| new Galois-orbit supplier of §15.4 | `chain-conditions-and-semisimple-modules`; `the-galois-correspondence`; `tensor-products-of-modules`; `the-group-algebra-and-representations`; `maschkes-theorem-and-complete-reducibility` |
+| `schur-indices-and-fields-of-definition` | preceding Brauer A; the new Galois-orbit A; `field-extensions-and-the-complex-numbers`; `algebraic-extensions-degree-and-finite-fields`; `the-galois-correspondence`; `tensor-products-of-modules`; `chain-conditions-and-semisimple-modules` |
+| `clifford-theory-over-normal-subgroups` | the four abstract representation A pages; `normal-subgroups-and-quotient-groups`; `tensor-products-of-modules` |
+| `projective-extensions-and-the-little-group-method` | preceding Clifford A; `group-extensions-complements-and-schur-zassenhaus`; `normal-subgroups-and-quotient-groups` |
+| `monomial-characters-and-m-groups` | Brauer A; Clifford A; `induced-representations-and-frobenius-reciprocity` |
+| `frobenius-groups-and-the-normal-complement-theorem` | Clifford A; `characters-and-the-orthogonality-relations`; `induced-representations-and-frobenius-reciprocity`; `sylow-theorems-and-nilpotent-groups`; `normal-subgroups-and-quotient-groups` |
+| `young-diagrams-tableaux-and-permutation-modules` | `group-actions-and-cayleys-theorem`; `induced-representations-and-frobenius-reciprocity` |
+| `specht-modules-and-the-irreducibles-of-the-symmetric-group` | preceding Young-diagram A; `maschkes-theorem-and-complete-reducibility`; `characters-and-the-orthogonality-relations` |
+| `the-branching-rule-and-the-young-graph` | Young-diagram A; Specht A; `induced-representations-and-frobenius-reciprocity`; `tensor-products-of-modules` |
+| `the-hook-length-formula-and-rsk-correspondence` | Young-diagram A; Specht A; branching A |
+| `bruhat-decomposition-and-flags-over-finite-fields` | `group-actions-and-cayleys-theorem`; `induced-representations-and-frobenius-reciprocity`; `matrices-and-the-matrix-of-a-linear-map`; `determinants-of-matrices-over-a-commutative-ring`; `gaussian-elimination-and-row-reduction` |
+| `principal-series-representations-of-gl-n-over-a-finite-field` | Young-diagram, Specht, branching, hook/RSK, and Bruhat A pages; `induced-representations-and-frobenius-reciprocity`; `chain-conditions-and-semisimple-modules`; `polynomial-rings-and-roots`; `inverse-limits-and-noetherian-completion` |
+| `blocks-defect-groups-and-the-brauer-homomorphism` | `modular-representations-and-projective-covers`; `brauer-characters-and-decomposition-matrices` |
+| `vertices-sources-and-the-green-correspondence` | preceding blocks/defect A; `modular-representations-and-projective-covers` |
+| `brauers-first-main-theorem` | blocks/defect A; Green A; both modular Group Theory A pages |
+| `brauers-second-main-theorem` | blocks/defect A; Green A; Brauer First A; `brauer-characters-and-decomposition-matrices` |
+| `haar-measure-existence-and-uniqueness` | `compactness`; `partitions-of-unity-and-paracompactness`; `radon-measures-and-the-riesz-markov-kakutani-theorem`; `product-measures-and-the-fubini-tonelli-theorems` |
+| `the-modular-function-and-l1-group-algebras` | Haar A; `product-measures-and-the-fubini-tonelli-theorems`; `the-lp-spaces-holder-minkowski-and-riesz-fischer`; `banach-algebras-spectrum-and-holomorphic-functional-calculus` |
+| `unitary-representations-positive-type-and-gns` | Haar A; modular/$L^1$ A; `hilbert-space-geometry-and-riesz-representation`; `spectral-measures-and-borel-functional-calculus` |
+| `complete-reducibility-for-compact-groups` | Haar, modular/$L^1$, and GNS A pages; `banach-valued-integration-and-the-radon-nikodym-property`; both compact-operator A pages |
+| `peter-weyl-theory-for-general-compact-groups` | Haar through compact complete-reducibility A pages; `stone-weierstrass-general`; both compact-operator A pages |
+| `induced-unitary-representations-of-locally-compact-groups` | Haar, modular/$L^1$, and GNS A pages; `partitions-of-unity-and-paracompactness`; `radon-measures-and-the-riesz-markov-kakutani-theorem`; `the-radon-nikodym-theorem-and-lebesgue-decomposition`; `banach-valued-integration-and-the-radon-nikodym-property` |
+| `mackeys-imprimitivity-theorem` | GNS A; locally compact induction A; `spectral-measures-and-borel-functional-calculus`; the future FA measurable-Hilbert-field A in §15.6 |
+| `group-c-star-algebras-and-the-fell-unitary-dual` | modular/$L^1$ A; GNS A; Peter--Weyl A; `banach-algebras-spectrum-and-holomorphic-functional-calculus`; `gelfand-theory-and-commutative-c-star-algebras` |
+| `direct-integral-decomposition-and-type-i-groups` | GNS A; group-$C^*$ A; the future FA measurable-Hilbert-field A in §15.6 |
+| `amenability-reiter-nets-and-folner-conditions` | Haar, modular/$L^1$, and GNS A pages; group-$C^*$ A; `the-analytic-hahn-banach-theorem`; `geometric-hahn-banach-and-convex-separation`; `banach-alaoglu-goldstine-and-krein-milman` |
+| `sl2-r-principal-and-complementary-series` | locally compact induction A; Mackey A; group-$C^*$ A; `harish-chandra-isomorphism-casimir-and-central-characters`; `verma-modules-and-shapovalov-forms` |
+| `kazhdans-property-t-and-spectral-gap` | GNS A; group-$C^*$ A; locally compact amenability A; principal/complementary-series A |
+| `sl2-r-discrete-series-and-unitary-dual` | group-$C^*$ A; direct-integral/type-I A; principal/complementary-series A; `harish-chandra-isomorphism-casimir-and-central-characters`; `verma-modules-and-shapovalov-forms` |
+
+The Schur--Weyl rows on RG-10 use the double-centralizer and Specht arguments
+proved on RG-9/RG-10.  They do not consume a Lie B page or RL-15.  Lie owns the
+highest-weight interpretation of the $GL$ factor; the two statements are an
+agreement seam, not a dependency cycle.  Likewise RG-28/RG-30 need the
+published finite-$\mathfrak{sl}_2$/Verma/Casimir A interfaces named above, not
+the unrelated Weyl--Kac A or B page.
+
+### 15.3 Mandatory Phase-3 repairs to the eight published RG pages
+
+1. Apply the first four rows of §15.2.  In particular, remove the RL-15 B edge
+   from Artin, replace each of the other three preceding-B edges by the stated
+   A closure, and leave each published B page requiring only its companion.
+   No new supplier is created by the Lie-edge deletion.
+2. `def-rational-character-ring` may define the subgroup of the complex
+   character ring generated by complexifications.  Delete the unsupported word
+   “equivalently” before “the Grothendieck group ... viewed inside” unless
+   injectivity of complexification is proved locally.  This clarification has
+   no downstream change of the primary definition.
+3. `cex-rational-valued-character-need-not-be-defined-over-the-rationals`
+   currently invokes a later Schur-index computation without a dependency.
+   Keep it a B leaf and replace that forward appeal by the elementary rational
+   matrix proof: put an operator squaring to $-I$ into rational companion form;
+   an anticommuting second operator has square $(a^2+b^2)I$, which cannot be
+   $-I$ over $\mathbb Q$.  This proves that the faithful $Q_8$ character has no
+   two-dimensional rational model without citing RG-3.
+4. Rehome the existing stable item
+   `lem-base-change-of-intertwiner-spaces` from RG-3 to the RG-2 A page,
+   immediately before `cor-cyclotomic-field-splits-a-finite-group`, and add it
+   to that corollary's dependencies.  Its direct published consumers after
+   repair are that corollary,
+   `thm-scalar-extension-of-an-irreducible-finite-group-representation`,
+   `thm-absolute-irreducibility-via-the-endomorphism-division-algebra`,
+   `lem-schur-index-is-independent-of-the-chosen-splitting-field`, and
+   `thm-schur-index-equals-division-algebra-index`.  Its complete additional
+   transitive published impact is, on RG-3 A,
+   `lem-character-field-is-the-stabilizer-fixed-field`,
+   `def-schur-index-of-an-irreducible-character`,
+   `thm-character-of-an-irreducible-over-a-nonsplitting-field`,
+   `cor-schur-index-divides-the-representation-degree`, and
+   `thm-schur-index-as-minimal-realization-multiplicity`; and on RG-3 B,
+   `ex-galois-conjugate-characters-of-c3`,
+   `ex-quaternion-character-has-schur-index-two`, and
+   `ex-trivial-character-has-schur-index-one`.  This is an existing-supplier
+   Phase-3 reorder, not a Phase-2 root.
+5. `def-schur-index-of-an-irreducible-character` and
+   `thm-schur-index-as-minimal-realization-multiplicity` currently use Zheng
+   Proposition 4.3.2 as an unproved body assumption.  After §15.4 lands, add
+   its classification theorem to both headers and replace both source-only
+   assertions by that proved item.  Then apply the seven-row header/ledger
+   reconciliation in §15.1.
+
+No other published RG item needs a new mathematical supplier.  The remaining
+published proofs have exact hypotheses, directions, finite choices, and
+conventions; all their body links are already declared in file headers.
+
+### 15.4 The only Phase-2-eligible new RG supplier pair
+
+Insert the A page
+`galois-orbits-and-descent-of-simple-finite-group-modules` immediately after
+RG-2 and before RG-3.  Its B companion is
+`galois-orbits-and-descent-of-simple-finite-group-modules-examples`, requires
+only its A page, and is a dependency leaf.  The A page uses the exact
+requirements in §15.2 and contains, in proof order:
+
+1. `def-semilinear-galois-action-on-a-scalar-extended-algebra` -- define the
+   semilinear action on $E\otimes_F A$, its action on central idempotents, and
+   twisting of simple modules.
+2. `lem-galois-fixed-points-recover-a-finite-dimensional-scalar-extension` --
+   for finite Galois $E/F$, prove $E\otimes_F(E\otimes_FV)^\Gamma\cong
+   E\otimes_FV$ by a trace-dual basis; include algebra multiplication.
+3. `lem-galois-orbit-sums-of-split-central-idempotents-descend` -- in a split
+   semisimple $E$-algebra, the sum over a Galois orbit of primitive central
+   idempotents is fixed and descends to a central idempotent over $F$.
+4. `lem-a-descended-galois-orbit-idempotent-is-primitive` -- a nontrivial
+   central splitting over $F$ would base-change to a nontrivial Galois-stable
+   partition of one orbit; hence the descended block is simple Artinian and
+   has one simple-module isomorphism class.
+5. `thm-galois-orbits-classify-simple-modules-after-splitting-base-change` --
+   for a finite-dimensional semisimple $F$-algebra split by finite Galois
+   $E/F$, simple $F$-modules correspond bijectively to Galois orbits of simple
+   $E$-modules; scalar extension contains exactly that orbit with one common
+   positive multiplicity.  Specialize explicitly to $FG$ in characteristic
+   zero.
+
+The B page contains
+`ex-galois-descent-for-the-two-nontrivial-characters-of-c-three`,
+`ex-the-rational-simple-block-of-the-quaternion-group`, and
+`cex-a-galois-stable-character-need-not-have-schur-index-one`.  Each B item has
+zero direct and zero transitive published consumers.
+
+For A items 1--4, the direct published consumer set is empty; through item 5
+their complete published impact is the nine-item set below.  Item 5 directly
+supplies exactly
+`def-schur-index-of-an-irreducible-character` and
+`thm-schur-index-as-minimal-realization-multiplicity`.  Its complete transitive
+published impact, grouped by home page, is:
+
+- `schur-indices-and-fields-of-definition`: the two direct consumers,
+  `lem-schur-index-is-independent-of-the-chosen-splitting-field`,
+  `thm-character-of-an-irreducible-over-a-nonsplitting-field`,
+  `cor-schur-index-divides-the-representation-degree`, and
+  `thm-schur-index-equals-division-algebra-index`;
+- `schur-indices-and-fields-of-definition-examples`:
+  `ex-galois-conjugate-characters-of-c3`,
+  `ex-quaternion-character-has-schur-index-two`, and
+  `ex-trivial-character-has-schur-index-one`.
+
+Thus all five A items, and only these new RG items, are Phase-2 eligible.  The
+pair closes a real published proof dependency; it is not enrichment.
+
+### 15.5 Planned-only repairs and item-level zero-impact declaration
+
+All **487** unbuilt ids on RG-5--RG-30 (including the five RG-20/RG-21 items
+added above) have, individually, zero direct published consumers and zero
+transitive published impact.  None is Phase-2 eligible.  This quantified
+declaration applies separately to every table id.  Counts are RG-5 17, RG-6
+13, RG-7 32, RG-8 16, RG-9 18, RG-10 21, RG-11 25, RG-12 22, RG-13 27,
+RG-14 28, RG-15 10, RG-16 16, RG-17 14, RG-18 16, RG-19 19, RG-20 21,
+RG-21 18, RG-22 15, RG-23 16, RG-24 14, RG-25 21, RG-26 15, RG-27 18,
+RG-28 18, RG-29 18, and RG-30 19.  The two revoked RG-4 ids are not part of
+this inventory.
+
+The planned proof repairs are binding:
+
+- RG-20's purity theorem depends on its two new dominated-form/commutant
+  lemmas.  It may not cite pure-state theory from later RG-25.
+- RG-21's arbitrary-irrep finite-dimensionality theorem depends on its three
+  new rank-one averaging lemmas.  The old proposed argument using a compact
+  integrated convolution operator in an arbitrary irreducible representation
+  is invalid; only convolution on $L^2(K)$ is known Hilbert--Schmidt there.
+- RG-26's S-5 `proved_here: false` fallback is withdrawn.  RG-24 and RG-26 are
+  build-held until the generic FA supplier in §15.6 is published.  Once it is
+  available, every central/factor/type-I decomposition row must have a local
+  proof from that supplier and the full sources; no later item may cite a
+  recorded version.  Consequently RG-30 is also held until RG-26 is proved.
+- RG-29's higher-rank `thm-sl-n-r-has-property-t-for-n-at-least-three` may
+  remain a `not-supplied` orientation leaf only if it has zero consumers.  It
+  cannot justify any example, false statement, or later theorem.  The proved
+  property-(T) spine does not use it.
+
+### 15.6 Cross-category ownership and exact amendments owed
+
+1. **Group Theory/Brauer.**  GT-18 retains modular systems, relative
+   projectivity, vertices, and sources.  GT-19 retains Brauer characters,
+   decomposition maps/matrices, projective characters, and block idempotents.
+   The repaired Group Theory supplier
+   `modular-traces-and-brauer-character-independence` owns the missing proof of
+   Brauer-character linear independence and must be an A prerequisite of
+   `brauer-characters-and-decomposition-matrices`; RG receives it transitively.
+   RG-14--RG-17 own only Brauer homomorphisms/pairs, defect groups, Green
+   correspondence, and Brauer's First/Second Main Theorems.  They must not mint
+   a competing Brauer-character definition or independence theorem.
+2. **Lie.**  Remove
+   `the-weyl-kac-character-formula-examples` from published Artin A with no
+   replacement.  RG-28/RG-30 use the two published Lie A pages named in
+   §15.2; RG-10 is self-contained on the symmetric-group side of Schur--Weyl.
+   No RG theorem consumes RL-15 A or B.
+3. **Functional Analysis.**  Add a planned-only A/B pair owned by FA,
+   `measurable-hilbert-fields-and-direct-integral-operators` and its
+   `-examples` leaf, before RG-24.  Its A page must prove measurable Hilbert
+   fields from countable fundamental families, completeness of direct
+   integrals, measurable/decomposable operator fields, the commutant of
+   diagonal multiplication, and the spectral multiplicity model for abelian
+   von Neumann algebras, under standard/separable hypotheses.  Its direct
+   planned consumers are RG-24 and RG-26; it has zero direct and transitive
+   **published** consumers, so it is not Phase 2.  FA owns this generic
+   machinery; RG owns systems of imprimitivity and group factor/type-I
+   decomposition.
+4. **Fourier Analysis.**  Use the repaired stable seam: RG-18 precedes FR-15
+   characters and FR-16--FR-17 LCA Bochner/Pontryagin/Plancherel.  Later RG
+   pages cite FR-16/FR-17 only for abelian specializations.  Delete the obsolete
+   `FR-14`, `FR-15`, and `FR-n` placeholders in §§2/9 at splice time; do not
+   create a Haar theorem in Fourier Analysis.
+5. **Measure Theory/Topology.**  Haar consumes the proved AC-qualified
+   `thm-tychonoff` on the A page `compactness`, RMK/Radon measure, products,
+   and partitions of unity.  Homogeneous-space induction consumes the
+   Radon--Nikodym and paracompactness A pages.  No recorded choice-strength
+   remark is a dependency target; choice hypotheses are printed in the RG
+   statements that use them.
+6. **Differential Geometry.**  The compact-Lie Peter--Weyl page is a
+   specialization/agreement citation only.  RG-22 owns general compact
+   Hausdorff Peter--Weyl and consumes no maximal-torus or Weyl-integration
+   proof.
+
+### 15.7 Full-text evidence and validation contract
+
+The repair uses full texts already retrieved, with these load-bearing
+locators: Weizhe Zheng, *Lectures on Algebra* (2025), §3.8 pp.132--136 and
+Proposition 4.3.2 with Corollaries 4.3.3--4.3.4 pp.145--151, complete PDF
+<https://server.mcm.ac.cn/~zheng/algebra.pdf>, for Galois descent, simple
+blocks, orbit classification, and Schur multiplicity; Gábor Wiese, *Galois
+Representations*, §§2.2, 2.3, and 2.5 pp.26--40,
+<https://math.uni.lu/wiese/notes/GalRep.pdf>, for scalar extension and Schur
+indices; Wen-Wei Li, *Yanqi Lake Lectures on Algebra I*, Lemmas 14.3.3--14.3.4
+and Theorem 14.3.1 pp.161--165,
+<https://www.wwli.asia/downloads/YAlg1.pdf>, for the nonunital permutation
+subring/Banaschewski argument; Kowalski §5.4--§5.5 pp.230--242 and Vogan's
+complete 12-page compact harmonic-analysis note for the rank-one averaging and
+Peter--Weyl route; Bekka--de la Harpe--Valette Appendix C §§C.1--C.5
+pp.340--365 for the dominated positive-type/GNS commutant argument; and Bruhat,
+Part III Chapters 10--12 pp.91--126,
+<https://mathweb.tifr.res.in/Documents/Publications/Lectures/tifr14.pdf>, for
+measurable Hilbert fields and continuous sums.  No load-bearing claim in this
+repair rests on a search snippet or inaccessible preview.
+
+Before build, rerun plan validation, global page/item collision checks,
+published header/ledger equality, A-page ordering, published-to-draft and
+forward-edge scans, B-page and B-item consumer scans, body-link versus
+`deps`/`justified_by`, and direct/transitive Recorded/Not-Proved-Here closure
+from every RG item.  Any B supplier, unresolved placeholder, nonzero recorded
+closure, or missing full proof blocks the relevant pair.

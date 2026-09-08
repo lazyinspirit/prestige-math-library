@@ -1602,3 +1602,501 @@ and the agreement is discharged as a staged amendment to the published
 `def-locally-compact-metric-space` (`research/frontier-2-batch-1.notes.md` §3.7),
 to land in the same commit that publishes 255 — not before, and not as a forward
 reference from 255.**
+
+## Binding Complex Analysis reconciliation (2026-09-08)
+
+Topology owns the planned A/B pair
+`classification-of-compact-connected-surfaces` /
+`classification-of-compact-connected-surfaces-examples`. The A
+page has the exact direct requirements
+`smooth-manifolds-and-smooth-maps`,
+`simplicial-subdivision-and-simplicial-approximation`,
+`cw-complexes-and-cellular-homology`,
+`orientations-poincare-lefschetz-and-alexander-duality`, and
+`the-fundamental-group`. The B page requires only its A page and is a leaf.
+
+The A inventory, in proof order, is:
+
+1. `def-polygonal-schema-and-edge-pairing`;
+2. `lem-compact-surface-admits-a-finite-triangulation`;
+3. `lem-finite-triangulated-surface-reduces-to-a-one-polygon-schema`;
+4. `lem-polygonal-schema-reduction-moves`;
+5. `thm-polygonal-normal-form-for-compact-connected-surfaces`;
+6. `thm-classification-of-compact-connected-surfaces`;
+7. `cor-orientable-compact-surface-has-euler-characteristic-two-minus-two-g`;
+8. `cor-orientability-and-euler-characteristic-determine-a-compact-connected-surface`.
+
+The classification must prove finite triangulability, polygon reduction,
+orientable/nonorientable normal forms, and uniqueness; it may not cite a
+recorded classification theorem. Full-text proof controls are Gallier--Xu,
+*A Guide to the Classification Theorem for Compact Surfaces*, Chapters 3 and
+6 and Appendix E, and the published AT subdivision and duality suppliers.
+
+Every new A/B item has zero direct and zero transitive published consumers.
+Exact planned Complex Analysis consumers are
+`thm-topological-classification-compact-riemann-surfaces` and
+`def-genus-and-euler-characteristic-compact-riemann-surface` on CA-RS-1, and
+`thm-symplectic-homology-basis-compact-riemann-surface` on CA-RS-3. The pair is
+planned-only, not Phase-2 eligible. Order assignment waits for the full
+Topology audit and cannot precede any exact supplier above.
+
+## Binding Foundations/Set Theory reconciliation (2026-09-08)
+
+Rehome the published `def-dependent-choice` to the earlier A page
+`countability-and-uncountability`, after `def-countable-choice`, while
+preserving its stable ID. Topology's published DC consumers keep that ID; none
+may depend on the later metric-compactness page merely to access DC.
+
+The published B item `ex-the-cardinality-of-the-continuum` is an improper
+external supplier for published
+`ex-cardinal-functions-of-the-lower-limit-line`. Foundations must add the
+A-homed theorem
+`thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero` immediately before
+the companion page. In Phase 3 repoint the topology item to that theorem. Its
+complete published impact is the direct item plus
+`ex-countability-profile-of-the-lower-limit-plane`,
+`cex-lindelofness-is-not-productive-worked`, and
+`cex-separability-is-not-hereditary-worked`, all on
+`countability-axioms-and-cardinal-functions-examples`. This is a local A-item
+repair, not a new A/B pair.
+
+## Binding full-category Topology audit (2026-09-08)
+
+This section is the controlling general-Topology audit. It supersedes every
+older statement in this file that a listed page is unbuilt, that a displayed
+order is still merely prospective, that a recorded theorem can supply a proof,
+or that an examples page may carry an independent prerequisite. The historical
+`plan-topology-set-theory-track.md` remains the owner of its ST/EU/FG/HT rows;
+the exact amendments to it are receipts below, not edits made here.
+
+### 1. Frozen census and phase classification
+
+The audit census is **60 published Topology pages: 30 A pages and 30 B pages**.
+All 60 page files exist. The machine plan lists 922 distinct item IDs in the
+category; the page files list the same 922 distinct IDs in 927 memberships.
+The five excess memberships are exact A/B duplicates identified in §7. No
+Topology page or item in the machine plan is draft or missing.
+
+Consequently the **Phase-2 eligible Topology supplier set is empty**. The
+published defects below are reserved for Phase 3. The sole prose-only new pair,
+the compact-surface classification pair in §6, has zero published impact and is
+planned-only. A local repair to a published A item is never relabelled Phase 2.
+
+### 2. Binding page-level A/B repairs
+
+Every B page must require only its A companion. Move each following currently
+published extra prerequisite to the named companion A page, retaining it there
+only when its items use that input:
+
+| B page | extra prerequisite(s) to move to the A page |
+|---|---|
+| `subspaces-products-and-quotients-examples` | `cantor-set-baire-and-measure-zero`; `limits-of-real-functions` |
+| `connectedness-examples` | `rn-as-a-normed-space` |
+| `compactness-examples` | `cantor-set-baire-and-measure-zero` |
+| `separation-axioms-examples` | `ordinal-arithmetic` |
+| `countability-axioms-and-cardinal-functions-examples` | `the-topology-of-euclidean-space` |
+| `the-fundamental-group-examples` | `the-total-derivative` |
+| `classification-of-covering-spaces-examples` | `the-seifert-van-kampen-theorem` |
+
+This includes every Real Analysis input presently attached to a Topology B
+page. It does not move any item to Real Analysis and does not create a new
+supplier.
+
+Four owner-side page edges into Topology also violate the binding rule:
+
+1. Category Theory must move `uniform-spaces` from
+   `abelian-categories-examples.requires` to `abelian-categories.requires`.
+2. Differential Geometry must move `the-seifert-van-kampen-theorem` from
+   `distributions-integral-manifolds-and-the-frobenius-theorem-examples.requires`
+   to its A companion.
+3. Measure Theory must delete the placement-only edge
+   `sigma-algebras-and-borel-sets -> stone-weierstrass-general-examples`; no
+   item consumes that B page, so there is no replacement edge.
+4. Group Theory must delete
+   `cayley-graphs-word-metrics-and-quasi-isometry ->
+   applications-of-the-fundamental-group-examples`. Its repaired exact A-page
+   requirements are `free-groups-and-presentations`, `metric-spaces`,
+   `graphs-walks-and-connectivity`, `trees-forests-and-spanning-trees`,
+   `semidirect-products-and-automorphism-groups`,
+   `completeness-and-uniform-continuity`, and `limits-of-real-functions`.
+
+No other published page requires a Topology B page, and no Topology A page
+requires a Topology B page.
+
+### 3. Published B-item supplier repair ledger
+
+There are 27 published Topology B-homed supplier items and 34 direct published
+consumer edges. Every consumer is on the same B page; there is no outside-page
+item consumer. The exact direct and complete transitive published impacts are
+below. Where only one set is displayed, direct impact equals complete impact.
+Phase 3 must remove each dependency and make the consumer a direct computation
+from its A-page facts or a self-contained local construction. None is Phase 2.
+
+* `applications-of-the-fundamental-group-examples`:
+  `ex-hawaiian-earring-retracts-onto-each-circle` ->
+  `{fs-every-compact-path-connected-planar-set-has-a-universal-cover}`.
+* `compactness-examples`:
+  `ex-compactness-in-the-standard-topologies` ->
+  `{ex-one-point-compactifications-of-the-line-and-of-the-naturals}`.
+* `compactness-in-metric-spaces-examples`:
+  `ex-discrete-metric-compact-iff-finite` ->
+  `{cex-bounded-not-totally-bounded}`; and
+  `cex-totally-bounded-not-compact` ->
+  `{cex-evt-fails-without-compactness,
+  cex-heine-cantor-fails-without-compactness,
+  cex-open-cover-with-no-lebesgue-number}`.
+* `complete-metrizability-and-baire-examples`:
+  `fs-the-rational-numbers-form-a-baire-space` ->
+  `{fs-every-metrizable-space-is-cech-complete}`.
+* `completeness-and-uniform-continuity-examples`:
+  `ex-square-root-is-half-holder` ->
+  `{cex-uniform-bijection-with-non-uniform-inverse}`.
+* `countability-axioms-and-cardinal-functions-examples`:
+  `ex-cardinal-functions-of-the-lower-limit-line` has direct impact
+  `{cex-lindelofness-is-not-productive-worked,
+  ex-countability-profile-of-the-lower-limit-plane}` and complete impact that
+  additionally contains `cex-separability-is-not-hereditary-worked`;
+  `ex-countability-profile-of-the-lower-limit-plane` ->
+  `{cex-lindelofness-is-not-productive-worked,
+  cex-separability-is-not-hereditary-worked}`.
+* `covering-spaces-and-lifting-examples`:
+  `ex-trivial-coverings-and-discrete-fibre-products` ->
+  `{ex-pullback-over-an-evenly-covered-open-set-is-trivial}`;
+  `ex-real-line-mod-integer-translations-is-a-covering` has direct impact
+  `{ex-power-maps-on-real-line-mod-integers-are-finite-sheeted-coverings,
+  ex-the-unit-loop-in-real-line-mod-integers-is-essential}` and complete impact
+  that additionally contains `ex-the-hawaiian-earring-has-no-universal-cover`;
+  `ex-the-unit-loop-in-real-line-mod-integers-is-essential` ->
+  `{ex-the-hawaiian-earring-has-no-universal-cover}`.
+* `function-space-topologies-examples`:
+  `cex-the-pointwise-limit-of-continuous-functions-need-not-be-continuous` ->
+  `{ex-dini-on-the-unit-interval}`.
+* `homotopy-and-homotopy-equivalence-examples`:
+  `ex-intervals-and-euclidean-spaces-are-contractible` ->
+  `{ex-a-point-and-r-are-homotopy-equivalent-not-homeomorphic}`.
+* `metric-spaces-examples`: `ex-discrete-metric` ->
+  `{cex-sphere-is-not-the-boundary-of-the-ball}`; and
+  `ex-bounded-remetrisation-of-r` ->
+  `{cex-boundedness-is-not-topological}`.
+* `nets-and-filters-examples`:
+  `ex-finite-subset-net-for-unordered-real-summation` ->
+  `{thm-unordered-summability-of-real-families}`.
+* `partitions-of-unity-and-paracompactness-examples`:
+  `ex-omega-one-is-not-paracompact` ->
+  `{cex-paracompactness-is-not-open-hereditary}`.
+* `separation-axioms-examples`:
+  `ex-sierpinski-space-is-t0-normal-and-not-regular` ->
+  `{ex-the-particular-point-topology-in-the-separation-hierarchy}`.
+* `subspaces-products-and-quotients-examples`: `ex-rn-as-a-product` has direct
+  impact `{cex-projection-is-not-closed}` and complete impact that additionally
+  contains `cex-quotient-map-neither-open-nor-closed`;
+  `cex-projection-is-not-closed` ->
+  `{cex-quotient-map-neither-open-nor-closed}`;
+  `ex-circle-as-r-mod-z` ->
+  `{ex-cylinder-and-mobius-band-as-quotients,
+  ex-torus-as-a-quotient-of-the-square}`;
+  `ex-torus-as-a-quotient-of-the-square` ->
+  `{ex-cylinder-and-mobius-band-as-quotients}`; and `ex-sorgenfrey-plane` ->
+  `{cex-antidiagonal-of-the-sorgenfrey-plane}`.
+* `the-seifert-van-kampen-theorem-examples`:
+  `ex-fundamental-group-of-the-punctured-plane` ->
+  `{ex-fundamental-groups-of-once-and-twice-punctured-two-sphere}`.
+* `topological-spaces-and-continuity-examples`: `ex-cofinite-topology` ->
+  `{cex-sequential-limits-not-unique}`; and `ex-cocountable-topology-on-r` ->
+  `{cex-sequential-closure-strictly-inside-closure,
+  cex-sequentially-continuous-not-continuous}`.
+* `uniform-spaces-examples`:
+  `ex-r-and-open-interval-homeomorphic-not-uniformly-isomorphic` ->
+  `{fs-a-compatible-uniformity-is-unique}`.
+
+The HT-owner file must carry the rows above whose page descriptions it owns;
+this file records the complete category census but does not amend that file.
+
+### 4. Recorded-material cutover and complete proof machinery
+
+Eight `external_refs` edges on seven published items point to the deferred
+Set-Theory catalogue. Phase 3 must delete those edges from `thm-tychonoff`,
+`def-baire-space`, `thm-baire-category-locally-compact-hausdorff`,
+`rem-compactness-conventions-and-choice-ledger`,
+`rem-separation-axiom-conventions`, `thm-urysohn-lemma`, and
+`rem-the-choice-cost-of-urysohns-lemma-and-of-tietzes-theorem`. Delete every
+independence, equivalence, lower-bound, or optimal-choice assertion whose only
+witness is `rem-schechter-kelley-tychonoff`,
+`rem-baire-category-choice-strength`, or
+`rem-urysohn-lemma-not-a-zf-theorem`. The complete internal Tychonoff, Baire,
+and Urysohn proofs remain; their statements may say only that the written proof
+assumes the named choice principle, without asserting necessity. A definition
+such as `def-baire-space` has no mathematical reason to carry an independence
+reference.
+
+The two remaining recorded local results are proof-critical and must be
+retired:
+
+* Replace `rem-sigma-locally-finite-base-produces-compatible-normal-sequence`
+  by the proved A item
+  `lem-regular-sigma-locally-finite-basis-gives-a-uniform-coordinate-embedding`.
+  Under AC, write the basis as locally finite layers. For every open `W`, union
+  in layer `n` the basis members whose closures lie in `W`; local finiteness
+  commutes with closure, and regularity proves that these countably many unions
+  exhaust `W`. Thus closed sets are `G_delta`, the standard interlaced-union
+  argument separates two disjoint closed sets, and Urysohn functions produce,
+  for every `B` in layer `n`, a continuous
+  `f_(n,B): X -> [0,1/n]` positive exactly on `B`. Prove directly that
+  `d(x,y)=sup_(n,B)|f_(n,B)(x)-f_(n,B)(y)|` is a metric: the basis separates
+  points, finitely many locally active coordinates handle the first finitely
+  many layers, and the `1/n` tail is uniformly small. The same estimates prove
+  that its topology is the original topology. Repoint
+  `thm-nagata-smirnov-metrization` to this lemma and remove the recorded
+  remark from its dependencies.
+* Replace `rem-metric-spaces-have-sigma-discrete-bases` by two proved A items.
+  First, `lem-stone-countably-discrete-small-diameter-closed-cover` proves that
+  for every positive `epsilon`, a metric space is covered by countably many
+  discrete families of closed sets of diameter below `epsilon`: specialize
+  Bing's well-ordered-cover construction to the ball development, verify that
+  its least-cover-member strata are closed and discrete, and verify exhaustion.
+  Second, `lem-metric-spaces-have-sigma-discrete-bases` expands each discrete
+  closed family to a discrete open family of controlled diameter by distance
+  neighbourhoods, applies the construction at reciprocal scales, and proves
+  the resulting countable union is a basis. Repoint `thm-bing-metrization` to
+  the second lemma and remove the recorded remark.
+
+These are Phase-3 additions to the already-published A page
+`metrization-theorems`, not Phase-2 roots. Their exact published-consumer maps
+are:
+
+| repaired A supplier | direct published consumers | complete transitive published impact by home page |
+|---|---|---|
+| `lem-regular-sigma-locally-finite-basis-gives-a-uniform-coordinate-embedding` | `thm-nagata-smirnov-metrization` | `metrization-theorems`: `thm-nagata-smirnov-metrization`, `thm-bing-metrization`, `cor-urysohn-metrization`, `thm-smirnov-local-metrization`; `smooth-manifolds-and-smooth-maps`: `rem-manifold-conventions-and-the-role-of-second-countability`, `thm-topological-manifolds-are-metrizable-and-paracompact` |
+| `lem-stone-countably-discrete-small-diameter-closed-cover` | **zero direct published consumers** (its direct consumer is the new lemma in the next row) | `metrization-theorems`: `thm-bing-metrization` |
+| `lem-metric-spaces-have-sigma-discrete-bases` | `thm-bing-metrization` | `metrization-theorems`: `thm-bing-metrization` |
+
+After these cutovers no planned or published Topology proof has a direct or
+transitive load-bearing path to recorded-not-proved material or to
+`deferred-set-theory-beyond-choice`.
+
+### 5. Published proof order and body-link repairs reserved for Phase 3
+
+Fourteen same-page forward structural edges must be removed by the following
+local reorderings. A definition may introduce raw data before its properties
+are proved; it may not claim a not-yet-proved theorem as `justified_by`.
+
+1. Define the underlying set and declared topology in
+   `def-one-point-compactification`, delete its forward `justified_by`, and
+   prove `thm-one-point-compactification-properties` afterward.
+2. Move `rem-complete-metrizability-is-topological-not-metric` after
+   `fs-completeness-is-a-topological-property` and
+   `fs-cauchy-implies-convergent-in-every-metric-space`.
+3. Define the ordered-set construction in `def-the-long-line`, delete its
+   forward `justified_by`, and then prove
+   `thm-the-long-line-is-a-connected-linear-continuum`.
+4. Prove the raw candidate-cardinal existence statements
+   `lem-weight-is-well-defined`, `lem-density-is-well-defined`, and
+   `lem-character-is-well-defined` before the minimum-cardinal packaging in
+   `def-weight-density-and-character`; do the same with
+   `lem-lindelof-degree-is-well-defined` and
+   `lem-cellularity-is-well-defined` before
+   `def-lindelof-degree-and-cellularity`.
+5. Define the uniform-convergence topology directly, delete its forward
+   `justified_by`, then prove its agreement with
+   `lem-uniform-convergence-in-the-uniform-metric`.
+6. Split `def-based-loops-and-fundamental-group`: first define based loops,
+   path-homotopy classes, and the proposed operation; prove
+   `thm-fundamental-group-laws`; then permit later items to call the result a
+   group. Delete the definition's forward `justified_by`. Keep
+   `def-induced-homomorphism-on-fundamental-groups` after that theorem, delete
+   its forward `justified_by`, and prove
+   `thm-induced-fundamental-group-map-functoriality` afterward.
+7. Rewrite `lem-samuel-function-pseudometrics-and-coarsening` as the raw
+   pseudometric/gauge construction without Samuel notation or a dependency on
+   `def-samuel-uniformity`; prove it first, then use it to make the final
+   generated-uniformity packaging in `def-samuel-uniformity`.
+8. Move `def-uniformizable-space` before
+   `thm-compact-hausdorff-space-has-a-unique-compatible-uniformity`.
+
+Ten published prose links name items absent from the source item's dependency
+array. Repair them exactly as follows:
+
+* add the earlier A dependency `def-metric-convergence` to
+  `fs-equivalent-metrics-share-cauchy-sequences`;
+* add the same-page earlier dependencies
+  `cor-seifert-van-kampen-simply-connected-overlap` to
+  `lem-finite-circle-wedge-open-cover`, `def-dependent-choice` to
+  `thm-complete-and-totally-bounded-implies-compact`, and
+  `thm-complete-and-totally-bounded-implies-compact` to `thm-heine-borel-rn`
+  only if the linked statement is actually used in the proof; otherwise delete
+  the prose link;
+* convert the six forward, non-load-bearing roadmap/contrast links to Remarks
+  after their targets: `lem-metric-convergent-implies-cauchy` to
+  `fs-cauchy-implies-convergent-in-every-metric-space`,
+  `lem-simple-continued-fraction-convergents-and-cylinders` to
+  `thm-simple-continued-fractions-parametrise-the-irrationals`,
+  `thm-banach-fixed-point` to `cor-banach-error-estimates`, both links from
+  `thm-compact-subset-is-closed-and-bounded` to
+  `fs-closed-and-bounded-implies-compact-in-every-metric-space` and
+  `thm-heine-borel-rn`, and `thm-metric-compactness-equivalences` to
+  `rem-compactness-choice-ledger-metric`.
+
+No forward body link is licensed as proof evidence merely by being rendered.
+
+### 6. Complete compact-surface supplier pair
+
+Refine the earlier Complex Analysis receipt as follows. Insert the planned A/B
+pair only after every exact A supplier exists, and in particular after the
+published Differential Geometry A page `smooth-manifolds-and-smooth-maps`.
+The A page's exact direct requirements are now:
+
+`smooth-manifolds-and-smooth-maps`;
+`simplicial-subdivision-and-simplicial-approximation`;
+`cw-complexes-and-cellular-homology`;
+`orientations-poincare-lefschetz-and-alexander-duality`; and
+`the-fundamental-group`.
+
+The first requirement supplies `def-topological-manifold-without-boundary`, so
+Topology does not duplicate the manifold definition. The still-prose-only AT
+subdivision and orientation suppliers make this pair planned-only; do not
+assign an order that precedes either. The B page requires only its A page and is
+a dependency leaf.
+
+The binding A inventory, in proof order, is:
+
+1. `def-polygonal-schema-and-edge-pairing`;
+2. `lem-compact-surface-admits-a-finite-triangulation`;
+3. `lem-finite-triangulated-surface-reduces-to-a-one-polygon-schema`;
+4. `lem-polygonal-schema-reduction-moves`;
+5. `thm-polygonal-normal-form-for-compact-connected-surfaces`;
+6. `thm-classification-of-compact-connected-surfaces`;
+7. `cor-orientable-compact-surface-has-euler-characteristic-two-minus-two-g`;
+8. `cor-orientability-and-euler-characteristic-determine-a-compact-connected-surface`.
+
+Every theorem in this inventory is explicitly about compact connected
+2-manifolds without boundary. The proof must establish finite triangulability,
+one-polygon reduction, the orientable and nonorientable normal forms, and
+uniqueness; Euler characteristic alone is used only together with
+orientability.
+
+The binding B inventory is:
+
+1. `ex-sphere-polygonal-schema`;
+2. `ex-torus-polygonal-schema`;
+3. `ex-projective-plane-polygonal-schema`;
+4. `ex-klein-bottle-polygonal-schema`;
+5. `ex-genus-two-orientable-surface-polygonal-schema`;
+6. `cex-euler-characteristic-alone-does-not-classify-compact-surfaces`.
+
+Each of the eight A items and each of the six B items has **zero direct
+published consumers and zero transitive published impact**, item by item.
+Thus neither page is Phase-2 eligible. The exact planned-only consumers remain
+`thm-topological-classification-compact-riemann-surfaces` and
+`def-genus-and-euler-characteristic-compact-riemann-surface` on CA-RS-1, and
+`thm-symplectic-homology-basis-compact-riemann-surface` on CA-RS-3.
+
+### 7. Membership, metadata, and title drift
+
+Remove the A-page `examples` memberships for the following five IDs from
+`ascoli-arzela`, preserving their sole homes on
+`ascoli-arzela-examples`:
+`ex-ascoli-on-a-finite-discrete-domain`,
+`ex-compact-families-of-constant-maps`,
+`cex-boundedness-does-not-replace-pointwise-relative-compactness`,
+`ex-translated-tent-functions-converge-in-the-compact-open-topology`, and
+`ex-compact-affine-interpolation-family`. This makes the page-file membership
+count agree exactly with the machine plan and does not delete an item.
+
+Resync the two page titles whose only drift is punctuation:
+`the-seifert-van-kampen-theorem-examples` and
+`classification-of-covering-spaces-examples` use the published colon form,
+not the stale plan em dash.
+
+At audit time, the 922 plan-listed published items have 108 stale titles, 492
+stale `deps` arrays, eight stale `justified_by` arrays, and zero kind drifts.
+After applying §§2--5, copy the final published item metadata into the machine
+plan. Copying the pre-repair arrays would restore the audited defects. Preserve
+all stable IDs and all published statuses.
+
+### 8. Cross-category ownership receipts
+
+1. **Foundations / Set Theory.** Apply the rehome and typing correction in the
+   preceding Foundations reconciliation: `def-dependent-choice` is itself
+   published, moves to `countability-and-uncountability` immediately after
+   `def-countable-choice`, and uses `def-function`, not the real-valued
+   `def-sequence`. The Foundations owner ledger is authoritative for its exact
+   83 direct published consumers and full global closure. The exact 33 direct
+   Topology consumers are distributed by home page as follows:
+   `compactness` (4), `compactness-in-metric-spaces` (3),
+   `complete-metrizability-and-baire` (5),
+   `partitions-of-unity-and-paracompactness` (1),
+   `the-topology-of-euclidean-space` (1),
+   `tychonoff-embedding-and-stone-cech` (1),
+   `uniform-completeness-and-samuel-compactification` (2), `uniform-spaces`
+   (7), `urysohn-lemma-and-tietze` (8), and
+   `urysohn-lemma-and-tietze-examples` (1). Preserve the stable ID. Apply the
+   continuum A-supplier repair and four-item published impact already stated
+   above.
+2. **Real Analysis.** Apply the five A-side prerequisite transfers represented
+   in §2 by `cantor-set-baire-and-measure-zero`,
+   `limits-of-real-functions`, `rn-as-a-normed-space`, and
+   `the-total-derivative`; their B-page use is eliminated, not duplicated.
+3. **Probability.** Topology already publishes `def-polish-space` and its
+   adequate complete-metrizability machinery on
+   `complete-metrizability-and-baire`. Probability retains ownership of
+   `def-standard-borel-space` and must require that Topology A page; it must not
+   re-mint Polish spaces. No new Topology supplier is needed and the
+   standard-Borel seam has zero Topology Phase-2 roots.
+4. **Group Theory and Algebraic Topology.** Apply the Group Theory page-edge
+   replacement in §2. Group Theory continues to consume the published A pages
+   `metric-spaces`, `completeness-and-uniform-continuity`, and
+   `uniform-spaces`; it owns Cayley-graph and profinite-group theory. Algebraic
+   Topology owns `simplicial-subdivision-and-simplicial-approximation`, CW and
+   cellular homology, orientations/duality, and all HT rows in the historical
+   scaffold. It must complete those A suppliers before §6 is inserted. Its
+   exact owner-file receipts are: move `the-total-derivative` from HT-2 B to
+   HT-2 A; perform the HT-2 fundamental-group definition reorder in §5; remove
+   the B-item edges recorded in §3 on
+   `homotopy-and-homotopy-equivalence-examples`,
+   `covering-spaces-and-lifting-examples`,
+   `the-seifert-van-kampen-theorem-examples`, and
+   `applications-of-the-fundamental-group-examples`; move
+   `the-seifert-van-kampen-theorem` from HT-6 B to HT-6 A; and perform the HT-5
+   `lem-finite-circle-wedge-open-cover` body-link repair in §5. These are
+   amendments to `plan-topology-set-theory-track.md`, not edits by this audit.
+5. **Complex Analysis.** Apply the exact planned-only compact-surface consumer
+   edges in §6. Complex Analysis owns Riemann-surface structure and analytic
+   consequences; Topology owns only the boundaryless compact-surface
+   classification interface.
+6. **Category Theory, Differential Geometry, and Measure Theory.** Apply the
+   three owner-side B-page edge repairs in §2. No duplicate Topology theorem is
+   licensed as a workaround.
+
+### 9. Full-text sources, blockers, and validation contract
+
+The repaired metrization proof is controlled by the full text of Andreas
+Granath, *The Smirnov- and Bing--Nagata--Smirnov Metrization Theorems*,
+§§4.1--4.2, especially Lemmas 4.1.2--4.1.3 and Theorem 4.1.4 on printed
+pp. 25--27. Those pages prove the locally finite closure calculation,
+normality and `G_delta` separation, the bounded coordinate functions, and the
+uniform-sup-metric embedding used in §4. R. H. Bing,
+[*Metrization of Topological Spaces*](https://www.cambridge.org/core/services/aop-cambridge-core/content/view/48C1A50A9E249D05BD7054529F93BAA1/S0008414X00030923a.pdf/metrization-of-topological-spaces.pdf),
+Canadian Journal of Mathematics 3 (1951), Theorem 3 on pp. 178--179 and
+Theorem 9 on p. 182, supplies the discrete small-diameter closed-cover route
+and its expansion to a discrete open basis. Both full texts were retrieved and
+read; neither is merely a search-result abstract.
+
+The compact-surface proof is controlled by Gallier--Xu,
+[*A Guide to the Classification Theorem for Compact Surfaces*](https://cs.brynmawr.edu/~dxu/surfclassif.pdf),
+Chapter 2 (surface conventions), Chapter 3 (triangulations), Chapter 6,
+pp. 86--106 (polygonal reduction, normal forms, and uniqueness), and Appendix
+E, especially Theorem E.3 on p. 169 (triangulability). The complete PDF was
+retrieved and read.
+
+No affected mathematical claim lacks authoritative full text, so there is no
+source blocker. The only sequencing blocker is deliberate: the compact-surface
+pair cannot enter the machine plan until the two prose-only Algebraic Topology
+suppliers in §6 have complete A-page inventories and earlier orders.
+
+Validation must rerun the page/item census, stable-ID uniqueness, page-order
+and item-order closure, B-only-companion prerequisites, B-item leaf status,
+body-link closure, and the recorded/deferred transitive closure after Phase 3.
+The acceptance values for the repaired state are: 60 existing published pages
+plus the one planned-only pair; zero Phase-2 Topology roots; zero A-to-B page
+edges; zero outside-B consumers of B items; zero duplicate item memberships;
+and zero direct or transitive dependencies on recorded-not-proved material.

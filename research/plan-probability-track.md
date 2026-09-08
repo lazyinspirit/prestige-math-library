@@ -6,13 +6,477 @@ Prose scaffold, owner-commissioned 2026-08-13 (run `subjects-01`, track
 functional-analysis companion,
 `tempered-distributions-and-the-fourier-transform-examples`.
 
-> **STATUS: PROPOSED, NOT SPLICED.**  This commission writes prose only.  No
-> entry of `research/plan-spec.json`, `items/`, or `library/` is changed here;
-> no item is authored, proved, gated, or published.  Relative labels, not
-> absolute orders, are authoritative for this proposed block.
+> **STATUS: BINDING PROSE AUDIT; PT-1--PT-5 PUBLISHED, PT-6--PT-22
+> PLANNED.**  The 2026-09-08 amendment below is authoritative over stale
+> proposal/readiness language in the older scaffold.  Published pages and
+> items remain read-only; every repair to them is a Phase-3 instruction.
 
 This file is subordinate to `CLAUDE.md`, `SCHEMA.md`, and the seam contract.
-It is authoritative only for PT-1 through PT-22 and their examples companions.
+It is authoritative only for PT-1 through PT-22, their examples companions,
+and the standard-Borel A/B supplier pair added by §0A.4.
+
+---
+
+## 0A. Binding dependency audit amendment (2026-09-08)
+
+This is the canonical Probability Theory scaffold.  Sections 0 and 2--13
+below remain the historical source/proof design, but this section supersedes
+their obsolete claims that all pages are merely proposed, that the whole
+block follows a Functional Analysis B page, that predecessor pages are empty,
+that B pages may be chained as prerequisites, that the arbitrary-index
+extension supplied here costs only BPI, and that there are no blockers.
+`research/plan-spec.json` and all published files were inspected but not
+edited.
+
+### 0A.1 Live census and hard invariants
+
+The live plan has 44 Probability pages.  PT-1--PT-5 are ten published pages
+with 166 items: respectively A/B counts 30/11, 22/6, 21/8, 23/9, and 27/9
+(123 A items and 43 B items).  PT-6--PT-22 are 34 empty planned pages.  All
+134 published proof-bearing Probability items pass the scoped precheck.  Every
+declared direct item dependency resolves to a published item, and the complete
+transitive closure of all 166 published items contains zero
+`proved_here: false` items and zero unresolved items.
+
+These invariants are binding for every later build:
+
+1. No definition, theorem, proof, `deps`, `justified_by`, or load-bearing body
+   link may directly or transitively use a recorded-but-unproved or
+   not-proved-here claim.  An orientation sentence cannot launder such a claim.
+2. Every B page requires only its A companion.  No item may depend on a B item,
+   and no page or item may consume a B page or item.  Thus every B page is a
+   dependency leaf, not a bridge to the next pair.
+3. Every A input must be adequate, published at build time, and strictly
+   earlier.  A later or empty page supplies nothing.
+4. Phase 2 may add new A/B supplier pairs only.  Nothing placed on an already
+   published PT-1--PT-5 page is Phase-2 work.
+
+### 0A.2 Exact Phase-3 defects in published content
+
+The following are deferred edits to published content, not permission to
+change it during this audit.
+
+1. On `modes-of-convergence-for-random-variables`, move
+   `lem-almost-sure-convergence-event-is-measurable` before
+   `def-almost-sure-convergence-of-random-variables`; replace the lemma's
+   circular dependency on that definition by the adequate earlier inputs
+   `def-random-element-and-real-random-variable` and `def-real-limit`.  Retain
+   the definition's `justified_by` edge to the now-earlier lemma.  Also repair
+   the typo “real random. variable” in the lemma.
+2. On the same page, insert immediately before
+   `def-probability-convergence-metric` the new Phase-3 A item
+   `lem-bounded-expectation-distance-is-well-defined-and-characterizes-probability-convergence`.
+   It states the candidate formula
+   $D(X,Y)=E[1\wedge|X-Y|]$, proves representative-independence,
+   positive-definiteness on a.s. classes, symmetry and the triangle inequality,
+   and proves $D(X_n,X)\to0$ iff $X_n\to X$ in probability.  Its adequate
+   earlier dependencies are
+   `def-convergence-in-probability`,
+   `def-expectation-of-a-nonnegative-or-integrable-random-variable`,
+   `lem-expectation-is-independent-of-the-ae-representative`, and
+   `thm-nonnegative-integral-zero-iff-zero-almost-everywhere`.  Point
+   `def-probability-convergence-metric.justified_by` to this lemma.  Rewrite
+   `thm-probability-convergence-is-metrized-by-d-zero` as the immediate
+   corollary depending on the definition and the lemma.  Remove the present
+   definition/theorem two-cycle.
+3. Add
+   `def-expectation-of-a-nonnegative-or-integrable-random-variable` to the
+   declared `deps` of
+   `cor-expectation-agrees-with-the-finite-weighted-sum`; its statement already
+   uses that definition as a load-bearing body link.
+4. On `infinite-product-measures-and-kolmogorov-extension-examples`, remove the
+   two B-to-B edges.  Replace
+   `ex-canonical-random-walk-from-product-increments -> ex-infinite-coin-toss-space`
+   by direct A inputs `thm-countable-product-of-probability-spaces` and
+   `cor-coordinate-random-elements-on-a-countable-product-are-independent`.
+   Replace
+   `cex-a-noncylinder-path-functional-may-fail-measurability -> ex-uncountable-bernoulli-coordinate-process`
+   by direct A inputs
+   `thm-kolmogorov-extension-for-standard-borel-coordinate-spaces` and
+   `cor-canonical-process-realizes-consistent-finite-dimensional-laws`.
+5. Preserve `thm-doob-dynkin-factorization-for-real-random-variables` as a
+   Phase-3 local insertion on published PT-1, not Phase 2.  It is required by
+   the planned conditional-law factorization in PT-11.  The old planned
+   `def-probability-space-and-event` is retired as an exact duplicate of the
+   published Measure Theory item `def-probability-measure`, which already
+   defines probability spaces and events.  The absent PT-2 enrichment IDs
+   `cor-variance-adds-for-independent-square-integrable-sums`,
+   `ex-pairwise-independent-but-not-mutually-independent-events`,
+   `ex-infinitely-many-successes-in-independent-trials`, and
+   `ex-pairwise-independent-events-satisfy-the-frequency-law` are optional
+   Phase-3 local enrichment with zero published consumers, never Phase 2.
+   The absent `lem-random-series-convergence-is-a-tail-event` is retired:
+   its measurability and tail-invariance proof is already contained in the
+   published `def-almost-sure-convergence-of-a-random-series`.
+
+The published/scaffold drift is otherwise exact: PT-2 additionally published
+`cex-independent-events-need-not-be-closed-under-unions-of-overlapping-pairs`;
+PT-3 additionally published
+`lem-finite-coordinate-cylinder-sets-form-an-algebra`,
+`lem-countable-product-cylinder-premeasure-is-countably-additive`,
+`lem-finite-products-of-standard-borel-spaces-are-standard-borel`,
+`thm-borel-probability-measures-on-polish-spaces-are-inner-regular`, and
+`lem-cylinder-sigma-events-depend-on-countably-many-coordinates`; PT-5
+additionally published `def-symmetric-real-random-variable`,
+`lem-bounded-centered-convergent-series-have-summable-variances`,
+`lem-independent-copy-symmetrization-tail-bounds`,
+`thm-truncation-weak-law-for-independent-arrays`,
+`lem-vanishing-tail-control-implies-small-truncated-second-moment`,
+`lem-largest-summand-bound-for-symmetric-independent-variables`,
+`lem-levy-maximal-inequality-for-independent-tail-sums`,
+`lem-cauchy-in-probability-sequences-have-a-measurable-limit`,
+`thm-independent-series-probability-and-almost-sure-convergence-agree`,
+`cex-iid-cauchy-averages-have-no-deterministic-weak-centering`, and
+`ex-truncated-centering-weak-law-with-infinite-mean`.  These published IDs,
+not the older shorter inventories, are canonical.
+
+The live plan-spec dependency arrays also lag the published frontmatter on 21
+items.  Root must mirror the published files exactly with these amendments
+(all additions are already-published earlier items):
+
+* `thm-probability-law-and-distribution-function-correspondence`: add
+  `prop-measure-of-a-set-difference`,
+  `thm-continuity-from-below-for-measures`,
+  `thm-continuity-from-above-for-measures`, `prop-measure-monotonicity`.
+* `thm-change-of-variables-for-expectation`: add
+  `thm-increasing-simple-approximation-of-a-nonnegative-measurable-function`,
+  `thm-monotone-convergence-for-the-integral`,
+  `prop-the-nonnegative-integral-agrees-with-the-simple-integral`,
+  `def-integral-of-a-nonnegative-simple-function`,
+  `def-integrable-real-and-complex-functions-and-their-integrals`,
+  `thm-linearity-of-the-lebesgue-integral-on-l-one`, and
+  `prop-closure-properties-of-measurable-functions-used-by-the-integral`.
+* `cor-expectation-of-an-indicator-is-probability`: add
+  `prop-the-nonnegative-integral-agrees-with-the-simple-integral` and
+  `def-integral-of-a-nonnegative-simple-function`.
+* `lem-variance-and-covariance-identities-for-random-variables`: add
+  `thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces`.
+* `thm-normal-equations-for-best-affine-l2-prediction`: add
+  `thm-nonnegative-integral-zero-iff-zero-almost-everywhere`.
+* `ex-exponential-random-variable-from-its-tail` and
+  `ex-discrete-continuous-and-mixed-distribution-functions`: add
+  `def-countable-choice` to each.
+* `cex-a-random-variable-need-not-have-a-finite-expectation`: add
+  `def-integral-of-a-nonnegative-simple-function`,
+  `prop-the-nonnegative-integral-agrees-with-the-simple-integral`, and
+  `thm-monotone-convergence-for-the-integral`.
+* `thm-independent-random-elements-have-product-joint-law`: add
+  `def-product-sigma-algebra-and-finite-product-sigma-algebras`.
+* `thm-factorization-of-expectations-for-independent-variables`: add
+  `lem-measurable-functions-preserve-independence`,
+  `def-product-sigma-algebra-and-finite-product-sigma-algebras`, and
+  `thm-arithmetic-and-lattice-operations-preserve-measurability`.
+* `thm-pairwise-independent-borel-cantelli-frequency-law`: add
+  `prop-indicator-function-is-measurable-iff-its-set-is-measurable`,
+  `thm-arithmetic-and-lattice-operations-preserve-measurability`,
+  `cor-expectation-linearity-monotonicity-and-modulus-bound`, and
+  `lem-variance-and-covariance-identities-for-random-variables`; remove the
+  stale non-frontmatter entries `def-indicator-random-variable`,
+  `thm-event-independence-and-indicator-independence`, and
+  `cor-variance-adds-for-pairwise-independent-random-variables`.
+* `thm-kolmogorov-zero-one-law`: add
+  `def-tail-sigma-algebra-of-a-sequence` and
+  `lem-probability-measure-basic-identities`.
+* `cor-almost-sure-convergence-of-an-independent-series-is-a-zero-one-event`:
+  add `thm-arithmetic-and-lattice-operations-preserve-measurability`.
+* `ex-functions-of-disjoint-independent-coordinate-blocks`: add
+  `lem-measurable-functions-preserve-independence`.
+* `def-coordinate-maps-and-cylinder-sigma-algebra`: add
+  `def-generated-sigma-algebra`.
+* `def-consistent-family-of-finite-dimensional-distributions`: add
+  `def-coordinate-maps-and-cylinder-sigma-algebra`.
+* `lem-countable-product-cylinder-premeasure-is-countably-additive`: add
+  `def-product-measure-on-sigma-finite-spaces` and
+  `prop-sigma-finite-section-measure-functions-are-measurable`.
+* `cor-countable-independent-copies-exist`: add
+  `thm-countable-product-of-probability-spaces`.
+* `thm-kolmogorov-extension-for-standard-borel-coordinate-spaces`: add
+  `thm-compact-implies-the-other-compactness-forms`.
+* `ex-infinite-coin-toss-space`: add `def-countable-choice` and
+  `def-dependent-choice`.
+* `thm-almost-sure-convergence-implies-convergence-in-probability`: add
+  `def-random-element-and-real-random-variable`.
+
+After the Phase-3 body-link repair above, add
+`def-expectation-of-a-nonnegative-or-integrable-random-variable` to both the
+published frontmatter and plan-spec array for
+`cor-expectation-agrees-with-the-finite-weighted-sum`.
+
+### 0A.3 Exact page-requirement amendments
+
+For PT-1--PT-5, replace the current B-chain requirements by these exact A-page
+requirements.  Each row is the union needed by its A and B item inventories;
+each B itself continues to require only the A named in the row.
+
+| pair | exact A `requires` |
+|---|---|
+| PT-1 | `vector-spaces-and-subspaces`; `inner-product-spaces-and-orthogonality`; `finite-probability-spaces-and-random-variables`; `sigma-algebras-and-borel-sets`; `measures-and-their-basic-properties`; `lebesgue-stieltjes-measures-and-distribution-functions`; `measurable-functions-and-simple-approximation`; `the-lebesgue-integral-and-the-convergence-theorems`; `product-measures-and-the-fubini-tonelli-theorems`; `the-lp-spaces-holder-minkowski-and-riesz-fischer` |
+| PT-2 | `finite-probability-spaces-and-random-variables`; `sigma-algebras-and-borel-sets`; `measures-and-their-basic-properties`; `measurable-functions-and-simple-approximation`; `product-measures-and-the-fubini-tonelli-theorems`; `probability-spaces-random-variables-and-expectation` |
+| PT-3 | `relations-functions-and-quotients`; `countability-and-uncountability`; `metric-spaces`; `completeness-and-uniform-continuity`; `compactness-in-metric-spaces`; `compactness`; `complete-metrizability-and-baire`; `sigma-algebras-and-borel-sets`; `measures-and-their-basic-properties`; `outer-measure-and-the-caratheodory-extension-theorem`; `lebesgue-measure-on-euclidean-space`; `product-measures-and-the-fubini-tonelli-theorems`; `probability-spaces-random-variables-and-expectation`; `independence-borel-cantelli-and-zero-one-laws` |
+| PT-4 | `measures-and-their-basic-properties`; `the-lebesgue-integral-and-the-convergence-theorems`; `modes-of-convergence-egorov-and-lusin`; `the-lp-spaces-holder-minkowski-and-riesz-fischer`; `probability-spaces-random-variables-and-expectation`; `independence-borel-cantelli-and-zero-one-laws` |
+| PT-5 | `roots-and-rational-powers`; `series-and-nonnegative-tests`; `absolute-convergence-and-rearrangement`; `properties-of-the-integral-and-the-working-ftc`; `the-logarithm-and-general-powers`; `finite-probability-spaces-and-random-variables`; `measures-and-their-basic-properties`; `measurable-functions-and-simple-approximation`; `the-lebesgue-integral-and-the-convergence-theorems`; `product-measures-and-the-fubini-tonelli-theorems`; `the-lp-spaces-holder-minkowski-and-riesz-fischer`; `probability-spaces-random-variables-and-expectation`; `independence-borel-cantelli-and-zero-one-laws`; `infinite-product-measures-and-kolmogorov-extension`; `modes-of-convergence-for-random-variables` |
+
+For PT-6--PT-22, delete every sequential B predecessor.  Resolve the exact
+page IDs in each pair's `Requires` paragraph and §2, use only those earlier A
+pages, and keep every B at `[its A companion]`.  In particular the exact
+reserved cross-category IDs are
+`sigma-algebras-and-borel-sets`,
+`measures-and-their-basic-properties`,
+`measurable-functions-and-simple-approximation`,
+`the-lebesgue-integral-and-the-convergence-theorems`,
+`modes-of-convergence-egorov-and-lusin`,
+`product-measures-and-the-fubini-tonelli-theorems`,
+`the-radon-nikodym-theorem-and-lebesgue-decomposition`,
+`the-lp-spaces-holder-minkowski-and-riesz-fischer`,
+`radon-measures-and-the-riesz-markov-kakutani-theorem`,
+`the-ergodic-theorems-of-von-neumann-and-birkhoff`,
+`complete-metrizability-and-baire`,
+`continuous-functional-calculus-for-self-adjoint-and-normal-operators`, and
+`fourier-transform-convolution-and-approximate-identities`.  The Measure pages
+through MT-20 and the topology page are published.  Reconciled Measure Theory
+still marks MT-23 empty/planned, and reconciled Functional Analysis still
+marks FA-19 and FA-22 empty/planned and blocked; they supply nothing now and
+must never be cited through companions.  PT-17 therefore remains blocked on
+MT-23, and PT-8 remains blocked on FA-22.  PT-9 does **not** wait for FA-19:
+replace that stale requirement by the already-published Linear Algebra A page
+`the-spectral-theorem-and-singular-value-decomposition`, specifically
+`thm-non-negative-square-root-exists-and-is-unique` for its finite-dimensional
+covariance operator.
+
+The exact Probability-side A requirements for the empty pages are as follows;
+the named foreign A pages are added where their items are used.  This table
+supersedes the one-B-page chain in the live plan.
+
+| A page | exact `requires` |
+|---|---|
+| `strong-laws-of-large-numbers` | PT-1 A through PT-5 A; `the-lebesgue-integral-and-the-convergence-theorems`; `product-measures-and-the-fubini-tonelli-theorems`; `the-lp-spaces-holder-minkowski-and-riesz-fischer` |
+| `weak-convergence-tightness-and-representation` | PT-1 A, PT-3 A, PT-4 A; `metric-spaces`; `compactness-in-metric-spaces`; `complete-metrizability-and-baire`; `radon-measures-and-the-riesz-markov-kakutani-theorem` |
+| `characteristic-functions-inversion-and-continuity` | PT-1 A, PT-4 A, PT-7 A; `product-measures-and-the-fubini-tonelli-theorems`; `fourier-transform-convolution-and-approximate-identities` |
+| `central-limit-theorems` | PT-1 A through PT-8 A; `the-lebesgue-integral-and-the-convergence-theorems`; `product-measures-and-the-fubini-tonelli-theorems`; `the-lp-spaces-holder-minkowski-and-riesz-fischer`; `the-spectral-theorem-and-singular-value-decomposition`; `darboux-lhopital-and-taylor` |
+| `conditional-expectation` | PT-1 A, PT-4 A; `measurable-functions-and-simple-approximation`; `the-lebesgue-integral-and-the-convergence-theorems`; `modes-of-convergence-egorov-and-lusin`; `the-radon-nikodym-theorem-and-lebesgue-decomposition`; `the-lp-spaces-holder-minkowski-and-riesz-fischer` |
+| `conditional-distributions-and-regular-conditional-probability` | PT-1 A, PT-3 A, PT-7 A, PT-10 A; `standard-borel-real-codings-and-determining-classes`; `sigma-algebras-and-borel-sets`; `product-measures-and-the-fubini-tonelli-theorems`; `the-radon-nikodym-theorem-and-lebesgue-decomposition`; `complete-metrizability-and-baire` |
+| `discrete-time-martingales` | PT-1 A, PT-2 A, PT-10 A; `the-lebesgue-integral-and-the-convergence-theorems`; `modes-of-convergence-egorov-and-lusin`; `the-lp-spaces-holder-minkowski-and-riesz-fischer` |
+| `martingale-inequalities-and-convergence` | PT-4 A, PT-9 A, PT-10 A, PT-12 A; `the-lebesgue-integral-and-the-convergence-theorems`; `modes-of-convergence-egorov-and-lusin`; `the-lp-spaces-holder-minkowski-and-riesz-fischer` |
+| `stopping-times-and-optional-stopping` | PT-10 A, PT-12 A, PT-13 A |
+| `markov-kernels-and-markov-chains` | PT-3 A, PT-10 A, PT-11 A, PT-14 A; `product-measures-and-the-fubini-tonelli-theorems` |
+| `recurrence-transience-and-hitting-times-for-markov-chains` | PT-1 A, PT-2 A, PT-14 A, PT-15 A |
+| `stationary-markov-chains-and-ergodic-limits` | PT-6 A, PT-10 A through PT-16 A; `the-ergodic-theorems-of-von-neumann-and-birkhoff` |
+| `brownian-motion-construction-and-continuity` | PT-1 A through PT-3 A, PT-7 A, PT-9 A, PT-15 A; `product-measures-and-the-fubini-tonelli-theorems`; `complete-metrizability-and-baire`; `function-space-topologies` |
+| `brownian-motion-markov-properties-and-hitting-times` | PT-2 A, PT-7 A, PT-10 A, PT-11 A, PT-14 A, PT-15 A, PT-18 A |
+| `brownian-path-properties` | PT-2 A, PT-4 A, PT-18 A, PT-19 A; `the-lebesgue-integral-and-the-convergence-theorems`; `product-measures-and-the-fubini-tonelli-theorems`; `absolute-continuity-and-the-sharp-fundamental-theorem-of-calculus` |
+| `the-ito-integral-with-respect-to-brownian-motion` | PT-4 A, PT-10 A, PT-12 A through PT-14 A, PT-18 A through PT-20 A; `product-measures-and-the-fubini-tonelli-theorems`; `the-lp-spaces-holder-minkowski-and-riesz-fischer` |
+| `itos-formula-and-brownian-martingales` | PT-10 A, PT-13 A, PT-14 A, PT-18 A through PT-21 A; `mixed-partials-taylor-and-extrema`; `fubini-and-change-of-variables` |
+
+Here “PT-$m$ A through PT-$n$ A” is an exact inclusive list of the existing A
+page IDs in §0, never their B companions.  At authoring time minimize only an
+edge proved redundant by transitive A closure; do not add a new requirement.
+
+Remove the spurious published external requirements
+`dirichlet-kernel-localisation-and-pointwise-fourier-convergence ->
+itos-formula-and-brownian-martingales-examples` and
+`partial-differential-equations-and-characteristics ->
+itos-formula-and-brownian-martingales-examples`.  Neither published consumer
+has any Probability item dependency; the complete item-level impact is zero.
+
+### 0A.4 Missing standard-Borel proof machinery
+
+Insert a planned-only A/B pair after PT-7 and before PT-8.  Against the
+2026-09-08 plan its exact requested orders are 288.1101/288.1102; recompute
+them if that interval changes before splice:
+
+* A `standard-borel-real-codings-and-determining-classes`, requiring
+  `infinite-product-measures-and-kolmogorov-extension` and
+  `complete-metrizability-and-baire`, with this proof order:
+  `lem-hilbert-cube-has-a-bimeasurable-real-coding`;
+  `thm-standard-borel-spaces-admit-bimeasurable-real-codings`;
+  `cor-standard-borel-spaces-have-countable-generating-and-measure-determining-algebras`.
+* B `standard-borel-real-codings-and-determining-classes-examples`, requiring
+  only its A, with
+  `ex-countable-discrete-spaces-are-standard-borel`,
+  `ex-euclidean-borel-spaces-are-standard-borel`, and
+  `ex-borel-subspaces-of-polish-spaces-are-standard-borel`.  Every B item is a
+  leaf.
+
+Durrett Theorem 2.1.22 (pp. 53--54) supplies the explicit Hilbert-cube/digit
+coding route.  The proof must spell out the canonical-expansion convention,
+the Borel description of the code image, and measurability of the inverse;
+the book itself warns that its printed proof is light on those details.  The
+published topology embedding and Polish-$G_\delta$ theorems supply the needed
+Borel-image step.  Do not build PT-11 unless those details pass proof review.
+
+Before PT-11 item 8 add
+`lem-simultaneous-rational-conditional-distribution-function-versions` and
+`lem-rational-conditional-distribution-functions-produce-real-regular-kernels`.
+They must follow Durrett Theorem 4.1.17 (pp. 214--215): select conditional CDF
+versions only at rational cuts; discard one countable union of null sets;
+right-regularize by an infimum over rationals; invoke the proved
+CDF-to-measure correspondence; then use a pi--lambda argument for measurable
+kernel evaluation.  Pull the real kernel back through the earlier
+bimeasurable coding.  Before disintegration add
+`lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable`,
+using the Phase-3 Doob--Dynkin theorem and the countable determining algebra,
+as in Durrett Theorem 4.1.18 (p. 215).  The old sentence “choose versions on a
+countable algebra and extend” is not an adequate proof: arbitrary separately
+chosen versions do not automatically give countably additive sections.
+
+Retire both planned pathology remarks
+`rem-regular-conditional-probability-existence-boundary` and
+`rem-nonstandard-space-failure-of-regular-conditionals` as items.  Preserve
+only the non-load-bearing, unlinked scope sentence that PT-11 proves existence
+under its stated standard-Borel hypothesis and makes no claim beyond it.
+Likewise rewrite PT-6 item 13 to say only that the stated strong law contains
+no rate assertion, PT-8 item 11 to say only that the derivative lemma has no
+converse in this track, and PT-22 item 15 to say that Stratonovich integration
+and any conversion theorem are not developed.  These formulations record no
+unproved mathematical result.
+
+### 0A.5 Choice-strength correction and Foundations seam
+
+The supplied published countable-product proof explicitly assumes both
+`def-countable-choice` and `def-dependent-choice`; its actual upper bound is
+ZF + DC + $\mathsf{AC}_\omega$, not the stale “$\mathsf{AC}_\omega$ inherited
+from MT-3” row.  The published arbitrary-index standard-Borel theorem
+explicitly assumes full `def-axiom-of-choice` to select one Polish
+presentation for every coordinate and to fill inactive coordinates.  Its
+actual supplied upper bound is AC, not BPI.  Consequently PT-15's path-law
+route inherits DC + $\mathsf{AC}_\omega$, and PT-18's presently planned
+arbitrary-time-index Brownian construction inherits AC.  No lower bound or
+reverse implication is asserted.
+
+The Foundations-owned Phase-3 repair must rehome `def-dependent-choice` to
+`countability-and-uncountability` immediately after `def-countable-choice`,
+replace its inapplicable `def-sequence` dependency/body link by `def-function`,
+and reconcile the consumers below.  It must also remove the stronger
+`def-axiom-of-choice` dependency from the *definitions* of the weaker choice
+principles unless a statement genuinely assumes AC; descriptive comparison
+remarks are not hypotheses.  Probability may consume the axiom definitions
+but may not consume the recorded relative-consistency remarks in their
+bodies.  Until a proved implication item exists, a theorem using both DC and
+$\mathsf{AC}_\omega$ must state both rather than cite an unproved orientation
+claim that DC implies countable choice.
+
+Direct published Probability consumers of `def-dependent-choice` are
+`lem-countable-product-cylinder-premeasure-is-countably-additive`,
+`thm-countable-product-of-probability-spaces`,
+`cor-countable-independent-copies-exist`, and
+`ex-infinite-coin-toss-space` and
+`ex-iid-sequence-with-a-prescribed-law`.  Its complete transitive published
+Probability impact is:
+
+* `infinite-product-measures-and-kolmogorov-extension`:
+  `lem-countable-product-cylinder-premeasure-is-countably-additive`,
+  `thm-countable-product-of-probability-spaces`,
+  `cor-countable-independent-copies-exist`,
+  `cor-coordinate-random-elements-on-a-countable-product-are-independent`,
+  `rem-kolmogorov-extension-state-space-boundary`;
+* its B companion: `ex-iid-sequence-with-a-prescribed-law`,
+  `ex-infinite-coin-toss-space`,
+  `ex-independent-but-not-identically-distributed-coordinate-sequence`,
+  `ex-canonical-random-walk-from-product-increments`, and
+  `cex-modification-need-not-be-indistinguishable`;
+* `weak-laws-and-series-of-independent-random-variables-examples`:
+  `ex-weak-law-for-independent-nonidentical-variables`,
+  `ex-three-series-with-rare-large-jumps`,
+  `cex-sum-of-variances-condition-is-sufficient-not-necessary-without-further-hypotheses`,
+  `ex-weak-law-for-bernoulli-sample-means`,
+  `ex-rademacher-series-convergence-threshold`,
+  `ex-a-random-series-that-converges-conditionally-almost-surely`,
+  `cex-weak-law-can-fail-without-tail-control`,
+  `cex-iid-cauchy-averages-have-no-deterministic-weak-centering`, and
+  `ex-truncated-centering-weak-law-with-infinite-mean`.
+
+### 0A.6 Planned-supplier consumer ledger and phase classification
+
+There are **zero Phase-2 Probability supplier roots**: no published item
+depends on an unpublished Probability item.  The new standard-Borel A/B pair,
+all PT-6--PT-22 items (after the three PT-11 support insertions and two remark
+retirements), and their internal supplier edges are planned-only enrichment.
+For each individual item ID enumerated in those exact inventories, direct
+published consumers = **0** and complete transitive published consumer closure
+= **0**.  This is an item-level zero declaration; no future page-level edge is
+being counted as published impact.  The same 0/0 declaration applies
+individually to all six items in the new standard-Borel pair and to each of the
+three new PT-11 support lemmas.
+
+For the new Phase-3 metric supplier
+`lem-bounded-expectation-distance-is-well-defined-and-characterizes-probability-convergence`,
+the exact direct published consumers are
+`def-probability-convergence-metric` and
+`thm-probability-convergence-is-metrized-by-d-zero`; its complete transitive
+published closure is exactly those same two items, both on
+`modes-of-convergence-for-random-variables`.
+
+For repaired
+`lem-almost-sure-convergence-event-is-measurable`, the exact direct published
+consumers after cycle removal are
+`def-almost-sure-convergence-of-random-variables`,
+`thm-almost-sure-convergence-implies-convergence-in-probability`, and
+`thm-almost-sure-subsequence-from-convergence-in-probability`.  Its complete
+transitive published impact, grouped by home page, is:
+
+* `modes-of-convergence-for-random-variables`:
+  `def-almost-sure-convergence-of-random-variables`,
+  `thm-almost-sure-convergence-implies-convergence-in-probability`,
+  `thm-almost-sure-subsequence-from-convergence-in-probability`,
+  `thm-limits-in-probability-are-unique-almost-surely`,
+  `thm-dominated-convergence-in-lp`,
+  `thm-subsequence-characterization-of-convergence-in-probability`, and
+  `rem-complete-convergence-implication-diagram`;
+* its B companion: `cex-convergence-in-probability-need-not-be-almost-sure`,
+  `cex-almost-sure-convergence-need-not-imply-lp-convergence`,
+  `cex-lp-convergence-need-not-imply-almost-sure-convergence`,
+  `cex-almost-sure-convergence-does-not-imply-convergence-of-expectations`, and
+  `ex-a-probability-convergent-sequence-with-a-prescribed-fast-as-subsequence`;
+* `weak-laws-and-series-of-independent-random-variables`:
+  `def-almost-sure-convergence-of-a-random-series`,
+  `thm-kolmogorov-convergence-criterion`,
+  `lem-cauchy-in-probability-sequences-have-a-measurable-limit`,
+  `thm-independent-series-probability-and-almost-sure-convergence-agree`,
+  `cor-kolmogorov-two-series-sufficiency`,
+  `lem-symmetrization-for-independent-random-series`,
+  `lem-bounded-centered-convergent-series-have-summable-variances`,
+  `thm-kolmogorov-three-series-theorem`,
+  `lem-three-series-necessity-for-truncated-means-and-variances`,
+  `thm-kolmogorov-strong-law-under-summable-normalized-variances`,
+  `lem-independent-copy-symmetrization-tail-bounds`,
+  `thm-truncated-centering-criterion-for-an-iid-weak-law`, and
+  `cor-independent-nonidentical-finite-variance-strong-law`;
+* its B companion:
+  `cex-sum-of-variances-condition-is-sufficient-not-necessary-without-further-hypotheses`,
+  `ex-rademacher-series-convergence-threshold`,
+  `ex-a-random-series-that-converges-conditionally-almost-surely`,
+  `ex-three-series-with-rare-large-jumps`,
+  `cex-iid-cauchy-averages-have-no-deterministic-weak-centering`, and
+  `ex-truncated-centering-weak-law-with-infinite-mean`.
+
+The Phase-3 Doob--Dynkin insertion has direct published consumers = **0** and
+complete transitive published closure = **0**; its consumer is planned PT-11.
+Each optional absent PT-2 enrichment item listed in §0A.2 likewise has 0/0
+published impact.  The retired duplicate/absorbed IDs are not suppliers.
+
+### 0A.7 Cross-category ownership seams
+
+Measure Theory owns sigma-algebras, measures, measurable functions, Lebesgue
+integration, convergence in measure/a.e., finite products and Fubini--Tonelli,
+Radon--Nikodym, scalar $L^p$, Radon regularity, and the ergodic theorems.
+Probability owns laws, independence, infinite probability products,
+conditional expectation as the RN application, conditional kernels,
+martingales, Markov chains, Brownian motion, and Brownian Ito calculus.  The
+new standard-Borel coding pair uses topology's Polish/Hilbert-cube machinery
+but remains Probability-owned because it supplies Probability's existing
+`def-standard-borel-space` interface.  Functional Analysis owns finite-measure
+Fourier uniqueness and continuous functional calculus; Probability only
+specializes them.  Combinatorics owns the finite probability pages.  No seam
+is allowed to route through an examples companion.
+
+Authoritative full text inspected for the nonroutine repair: Rick Durrett,
+*Probability: Theory and Examples*, 5th ed., Theorem 2.1.22, pp. 53--54
+(standard-Borel/“nice” coding), and Theorems 4.1.17--4.1.18, pp. 214--215
+(rational conditional-CDF construction and factorization through the
+conditioning variable), from the complete author-hosted PDF recorded in
+§11.0.  PT-11 remains build-blocked until the digit-coding detail explicitly
+flagged in §0A.4 is proved and reviewed; no other mathematical blocker was
+found.
 
 ---
 
@@ -98,21 +562,22 @@ items is renamed or modified.
 probability identities and the direct limit implications are ZF once the
 underlying measures and random variables are given.  Results inherited from
 the measure track retain that track's stated cost.  The standard countable
-product, Radon--Nikodym conditional-expectation, regular-conditional-law,
-subsequence, and martingale-convergence constructions are labelled at most
-$\mathsf{AC}_\omega$ when they make countably many selections.  The Polish
-Prokhorov/Skorokhod and Brownian-continuity constructions are labelled
-$\mathsf{AC}_\omega$ for the proofs supplied.  The arbitrary-index
-Kolmogorov extension proof is labelled **BPI** because its compactness step
-uses the compact-Hausdorff product theorem from the ultrafilter lemma.  The
-scaffold does not assert reverse implications between these choice principles.
+product proof currently assumes both $\mathsf{AC}_\omega$ and DC.
+Radon--Nikodym conditional expectation, regular conditional laws,
+subsequence, and martingale-convergence constructions retain the exact upper
+bounds in §8.  The Polish Prokhorov/Skorokhod and Brownian-continuity
+constructions are labelled $\mathsf{AC}_\omega$ for the proofs supplied.  The
+published arbitrary-index Kolmogorov extension proof uses full AC, so the
+Brownian construction through that route inherits AC.  The scaffold asserts
+no reverse implications between choice principles.
 
 **Unresolved non-authored dependencies.**  The measure-theory and
 functional-analysis predecessors are finished prose scaffolds but are absent
 from the live `items` arrays.  Before this block is built, the exact pages
 named in §2 must be authored and their actual ids substituted for prose-level
-result references.  In particular PT-9 needs FA-19's positive-square-root
-theorem and PT-8 needs FA-22's finite-measure Fourier uniqueness theorem.  The
+result references.  In particular PT-8 needs FA-22's finite-measure Fourier
+uniqueness theorem.  PT-9 instead uses the published finite-dimensional
+Linear Algebra square-root theorem fixed in §0A.3.  The
 topology page `complete-metrizability-and-baire`,
 which owns the definition of Polish space, still has `items: []`; PT-3, PT-7,
 PT-11, and PT-18 must wait for that definition.  No probability item treats a
@@ -212,7 +677,7 @@ finished prose scaffolds, not live content.
 | `radon-measures-and-the-riesz-markov-kakutani-theorem` (MT-20) | **planned predecessor:** regularity/tightness inputs for Borel probabilities on Polish spaces |
 | `the-ergodic-theorems-of-von-neumann-and-birkhoff` (MT-23) | **planned predecessor:** the two ergodic theorems, cited rather than reproved for stationary sequences and Markov chains |
 | `complete-metrizability-and-baire` | **planned topology predecessor with `items: []`:** owns `def-polish-space`; probability must not re-mint it |
-| `continuous-functional-calculus-for-self-adjoint-and-normal-operators` (FA-19) | **planned predecessor:** `thm-positive-square-root`; PT-9 applies it to a finite-dimensional covariance operator and does not rebuild functional calculus |
+| `the-spectral-theorem-and-singular-value-decomposition` | **published Linear Algebra predecessor:** `thm-non-negative-square-root-exists-and-is-unique`; PT-9 applies it to a finite-dimensional covariance operator and does not wait for FA-19 |
 | `fourier-transform-convolution-and-approximate-identities` (FA-22) | **planned predecessor:** Fourier transform of finite complex measures and uniqueness; PT-8 fixes the sign/$2\pi$ translation for characteristic functions |
 
 The measure scaffold's suggested ids are not guaranteed final.  Thus a
@@ -263,8 +728,6 @@ The compact provenance code used throughout is:
 - **A/A** — literature-backed claim recast into a more explicit library
   construction, with both statement and proof marked `ai-altered`; the row
   names the direct verification and is never load-bearing;
-- **L/NS** — literature-derived statement; proof deliberately not supplied,
-  permitted only for a non-load-bearing historical or boundary remark.
 
 Unless a row says otherwise, every `def-` and convention `rem-` is L/NA and
 every `lem-`, `prop-`, `thm-`, and `cor-` is L/L.  Worked textbook examples
@@ -272,10 +735,9 @@ and counterexamples are L/L.  Thus both provenance components are specified
 for every row without repetitive prose.  This scaffold contains **no
 AI-generated mathematical statement**.  Any future editorial change to a
 statement is `ai-altered` and must be re-sourced.  Every item is planned with
-`proved_here: true` except the one explicitly marked L/NS boundary remark,
-which is `proved_here: false`, carries Durrett §4.1.3 as its external source,
-and is never a dependency.  L/NS items and all B-page items are forbidden
-dependency targets.
+`proved_here: true`.  Recorded-but-unproved claims are prose-only scope
+orientation, never items, dependencies, `justified_by` targets, or
+load-bearing links.  All B-page items are forbidden dependency targets.
 
 For a random element $X:(\Omega,\mathcal F,P)\to(S,\mathcal S)$, its law is
 $P_X=P\circ X^{-1}$.  Real-valued variables take values in $\mathbb R$, not
@@ -633,7 +1095,7 @@ Items:
 10. `thm-etemadi-strong-law-for-pairwise-independent-iid-variables` (theorem) — the iid $L^1$ strong law remains true under pairwise independence; prove it by truncation, the cubic subsequence, and interpolation.
 11. `cor-iid-strong-law-implies-the-weak-law` (corollary) — cite PT-4's a.s.-to-probability implication, not a second weak-law proof.
 12. `cor-birkhoff-strong-law-for-iid-coordinate-shifts` (corollary) — after MT-23 is authored, recover item 8 from Birkhoff applied to the Bernoulli shift; this is an agreement consequence, not the proof dependency of item 8.
-13. `rem-strong-law-does-not-assert-a-rate` (remark, L/NA) — ordinary a.s. convergence supplies no universal deterministic rate; PT-20's Brownian LIL is not imported backward.
+13. `rem-strong-law-does-not-assert-a-rate` (remark, L/NA) — the strong-law statements on this page contain no rate assertion; PT-20's Brownian LIL is not imported backward.
 14. `thm-finite-variance-logarithmic-rate-for-iid-sums` (theorem) — if the iid variables have mean $\mu$ and finite variance, then for every $\varepsilon>0$, $(S_n-n\mu)/(\sqrt n(\log n)^{1/2+\varepsilon})\to0$ a.s.; the proof applies PT-5's random-series criterion on geometric blocks and interpolates with the maximal inequality.
 
 **Hard proof and well-definedness plan.**  Item 6 expands the expectation as
@@ -744,7 +1206,7 @@ Items:
 8. `thm-levy-inversion-formula` (theorem) — for $a<b$ with no atoms at the endpoints, express $P(a<X<b)$ by the symmetric truncated integral of $(e^{-ita}-e^{-itb})\varphi_X(t)/(it)$ with the adopted endpoint convention.
 9. `cor-density-inversion-from-an-integrable-characteristic-function` (corollary) — if $\varphi\in L^1$, the law has bounded continuous density $(2\pi)^{-1}\int e^{-itx}\varphi(t)\,dt$.
 10. `lem-moments-give-derivatives-of-the-characteristic-function` (lemma) — if $E|X|^k<\infty$, then derivatives through order $k$ exist with $\varphi^{(j)}(t)=E[(iX)^je^{itX}]$.
-11. `rem-derivatives-at-zero-do-not-in-general-determine-the-law` (remark, L/NA) — moment determinacy needs additional hypotheses; no converse to item 10 is asserted.
+11. `rem-derivatives-at-zero-do-not-in-general-determine-the-law` (remark, L/NA) — item 10 is one-directional, and this track asserts no converse or moment-determinacy theorem.
 12. `thm-levy-continuity-theorem-forward-direction` (theorem) — weak convergence implies pointwise convergence of characteristic functions.
 13. `thm-tightness-from-characteristic-function-equicontinuity-at-zero` (theorem) — if a family $(\varphi_\alpha)$ is equicontinuous at zero, equivalently $\lim_{\delta\downarrow0}\sup_\alpha\sup_{|t|\le\delta}|1-\varphi_\alpha(t)|=0$, then the associated laws on $\mathbb R$ are tight, via a triangular smoothing kernel.
 14. `thm-levy-continuity-theorem-converse` (theorem) — if $\varphi_n(t)\to\varphi(t)$ pointwise and $\varphi$ is continuous at zero, then $\varphi$ is a characteristic function and the laws converge weakly to its unique law.
@@ -777,9 +1239,12 @@ not a synthetic “all directions determine everything” summary.
 
 **A page:** `central-limit-theorems`
 
-**Requires:** PT-1--PT-8; planned MT-8, MT-11, and MT-14; planned FA-19's
-positive square-root theorem (used only for covariance matrices); published
-Taylor expansion/exponential limits.  No Berry--Esseen estimate is assumed.
+**Requires:** PT-1--PT-8; MT-8, MT-11, and MT-14; the published Linear
+Algebra item `thm-non-negative-square-root-exists-and-is-unique` on
+`the-spectral-theorem-and-singular-value-decomposition` (used only for
+finite-dimensional covariance matrices); published Taylor
+expansion/exponential limits.  FA-19 is not a supplier.  No Berry--Esseen
+estimate is assumed.
 
 **Source backing read:** Durrett §§3.1 and 3.4.1--3.4.2, pp. 113--115 and
 143--156; Varadhan §3.6; Norris §§8 and 10, pp. 37--54; Aldous--Chewi
@@ -917,19 +1382,32 @@ Items:
 13. `cor-conditional-expectation-as-a-measurable-function-of-the-conditioning-variable` (corollary) — $E[f(X)\mid\sigma(Y)]=h(Y)$ with $h(y)=\int f(x)K(y,dx)$.
 14. `thm-conditional-density-formula` (theorem) — if the joint law has density $f_{X,Y}$ and the marginal density $f_Y(y)>0$, the normalized section is a conditional density; values on $\{f_Y=0\}$ may be filled by any fixed probability law measurably.
 15. `thm-bayes-formula-for-dominated-kernels` (theorem) — state posterior density as likelihood times prior divided by the positive marginal normalizer, with a measurable arbitrary definition where the normalizer vanishes.
-16. `rem-regular-conditional-probability-existence-boundary` (remark, L/NA) — arbitrary measurable spaces need not admit regular conditional probabilities; the standard-Borel hypothesis is not decorative.
+
+**Binding support insertions.**  Immediately before item 8 insert
+`lem-simultaneous-rational-conditional-distribution-function-versions` and
+`lem-rational-conditional-distribution-functions-produce-real-regular-kernels`.
+Immediately before item 12 insert
+`lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable`.
+Their dependencies and proof obligations are fixed in §0A.4; renumber the
+following display mechanically at build time.
+
+The A-page summary may say, without a link or item id, that the page proves
+existence under the stated standard-Borel hypothesis and makes no existence
+claim beyond that scope.
 
 **Hard proof and well-definedness plan.**  A separately chosen RN derivative
 for every measurable set need not be countably additive on any common
-full-measure set.  Item 8 therefore chooses versions on a countable
-generating algebra of the standard-Borel target, intersects only countably
-many full-measure sets, proves finite/countable consistency there, and extends
-each section to a probability measure.  Item 9 obtains one null set for all
-target events from the same countable determining class.  Disintegration
-states whether the kernel runs from $Y$ to $X$ and checks the rectangle
-identity before monotone-class extension.  Conditional densities are defined
-on zero-marginal fibres so that a genuine kernel, not a partially defined
-ratio, results.
+full-measure set.  The support lemmas therefore choose versions only for
+rational half-lines, enforce monotonicity on one common full-measure set,
+right-regularize them into distribution functions, invoke the proved
+CDF-to-measure correspondence, and extend the version identity by pi--lambda.
+The standard-Borel real coding from §0A.4 then transports the real kernels.
+Item 9 obtains one null set for all target events from the countable
+determining class.  Disintegration first factors the rational versions through
+$Y$ by the Phase-3 Doob--Dynkin theorem, states whether the kernel runs from
+$Y$ to $X$, and checks the rectangle identity before monotone-class
+extension.  Conditional densities are defined on zero-marginal fibres so that
+a genuine kernel, not a partially defined ratio, results.
 
 **B page:** `conditional-distributions-and-regular-conditional-probability-examples`
 
@@ -941,7 +1419,8 @@ ratio, results.
 6. `ex-a-deterministic-kernel-from-a-measurable-map` — $K(x,\cdot)=\delta_{g(x)}$.
 7. `cex-the-density-ratio-is-undefined-on-zero-marginal-fibres` — show why the filler convention is required.
 8. `cex-regular-conditional-laws-are-not-unique-on-null-conditioning-values`.
-9. `rem-nonstandard-space-failure-of-regular-conditionals` (remark, L/NS) — record the existence boundary from Durrett §4.1.3; do not reproduce or depend on a pathological-space counterexample.
+The B-page prose may repeat the unlinked scope sentence above, but it mints no
+pathology remark or recorded-not-proved item.
 
 ### PT-12 — Discrete-time martingales
 
@@ -1568,7 +2047,7 @@ Items:
 12. `cor-vector-levy-characterization` (corollary) — a continuous $d$-dimensional local martingale with $[M^i,M^j]_t=\delta_{ij}t$ is $d$-dimensional Brownian motion.
 13. `def-brownian-generator` (definition) — on $C^2$ test functions the Brownian generator is $Lf=\tfrac12\Delta f$.
 14. `thm-dynkin-formula-for-bounded-brownian-stopping` (theorem) — for $f\in C_c^2(\mathbb R^d)$ and a bounded stopping time $\tau$, $E_xf(B_\tau)=f(x)+E_x\int_0^\tau Lf(B_s)ds$.
-15. `rem-ito-versus-stratonovich-boundary` (remark, L/NA) — Stratonovich integration is not developed; record only the sourced conversion for sufficiently regular Brownian Ito integrands as a non-load-bearing convention note.
+15. `rem-ito-versus-stratonovich-boundary` (remark, L/NA) — Stratonovich integration and any Ito--Stratonovich conversion theorem are not developed or asserted on this page.
 16. `rem-general-semimartingale-calculus-is-outside-this-block` (remark, L/NA) — jumps, general local-martingale integrators, Girsanov, SDEs, Tanaka/local time, and stochastic differential geometry remain in the scope denials.
 17. `thm-brownian-filtration-martingale-representation` (theorem) — for the usual (completed and right-continuous) augmentation of the natural filtration of a Brownian motion, every cadlag local martingale $M$ has, up to indistinguishability, a representation $M_t=M_0+\int_0^tH_s\,dB_s$ with predictable $H$ and $\int_0^tH_s^2ds<\infty$ a.s. for every $t$.
 18. `cor-square-integrable-brownian-terminal-variables-have-ito-representations` (corollary) — for $\xi\in L^2(\mathcal F_T)$, there is a predictable $H$ with $E\int_0^TH_s^2ds<\infty$ and $\xi=E\xi+\int_0^TH_s\,dB_s$; $H$ is unique $dt\otimes dP$-a.e.
@@ -1712,8 +2191,8 @@ source proves that equivalence.
 |---|---|---|
 | PT-1 probability specialization, laws, CDF consequences, expectation identities, elementary inequalities | **ZF**, except inherited measure results | MT-6/MT-8/MT-14 retain their own ledgers; the probability specialization adds no choice |
 | PT-2 pi-system tests, factorization, both Borel--Cantelli lemmas, frequency law, zero--one law | **ZF** | the frequency subsequence uses the least index crossing $k^2$; no selected subsequence is needed |
-| PT-3 countable product measure | **$\mathsf{AC}_\omega$ inherited from MT-3** for the chosen Caratheodory implementation | cylinder consistency itself is ZF; the extension proof inherits MT-3's countable cover selections |
-| PT-3 arbitrary-index standard-Borel Kolmogorov extension | **BPI** is sufficient for the supplied compactness proof | compact-Hausdorff product compactness is taken from the published ultrafilter-lemma theorem; no converse is claimed |
+| PT-3 countable product measure | **DC + $\mathsf{AC}_\omega$** for the supplied published proof | the cylinder-premeasure lemma uses dependent recursive selections and separately cites countable choice; no unproved implication between the two axioms is used |
+| PT-3 arbitrary-index standard-Borel Kolmogorov extension | **AC** for the supplied published proof | AC chooses one Polish presentation in every coordinate and fills inactive coordinates; BPI is not the bound of the proof actually supplied |
 | PT-4 direct implications and probability metric | **ZF** | the a.s. subsequence selects the least admissible increasing index, removing apparent countable choice |
 | PT-5/6 weak laws, maximal inequality, three-series, strong laws | **ZF** given the input sequence and inherited integration/product results | truncation levels and subsequences are explicit/least-index; independent-copy symmetrization inherits PT-3's product-space cost |
 | PT-7 tightness of one Polish probability, Portmanteau, continuous mapping | **ZF** relative to the fixed complete metric and countable dense sequence | MT-20 regularity, if used instead, carries its $\mathsf{AC}_\omega$ cost |
@@ -1725,11 +2204,11 @@ source proves that equivalence.
 | PT-12 finite-time martingale algebra and Doob decomposition | **ZF** after conditional expectation exists | each time increment is given recursively; no infinite simultaneous version is selected |
 | PT-13 martingale inequalities, CLT, convergence, and UI characterizations | **ZF** after conditional expectation exists | rational upcrossing intervals, variance clocks, and Lindeberg truncations are explicit countable families; limits are unique |
 | PT-14 stopping and optional sampling | **ZF** after the martingale is given | truncation $\tau\wedge n$ is canonical; limiting theorems add no selection |
-| PT-15 Ionescu--Tulcea/path law | **$\mathsf{AC}_\omega$ inherited from the countable extension theorem** | finite iterated kernels are ZF; path-measure extension has PT-3's countable cost |
+| PT-15 Ionescu--Tulcea/path law | **DC + $\mathsf{AC}_\omega$ inherited from the supplied countable extension theorem** | finite iterated kernels are ZF; path-measure extension has PT-3's actual published proof cost |
 | PT-16 countable-chain recurrence/hitting theory | **ZF** | countable sums are nonnegative/explicit and stopping times are canonical |
 | PT-17 finite stationary-law existence | **ZF for the supplied finite-dimensional route** | the Cesaro sequence is explicit and a least rational-box subsequence construction can be used; no arbitrary product is selected |
 | PT-17 countable positive recurrence, convergence, ergodic theorem | **ZF** after the chain/path law is given; MT-23 results inherit **ZF** | MT-23's Birkhoff/maximal-ergodic proof is recorded as ZF in its scaffold |
-| PT-18 Brownian finite-dimensional construction | **BPI** through PT-3's arbitrary-index extension | an alternative countable-dyadic construction may lower the cost but is not the supplied proof |
+| PT-18 Brownian finite-dimensional construction | **AC** through PT-3's supplied arbitrary-index extension | an alternative countable-dyadic construction may lower the cost but is not the supplied proof |
 | PT-18 continuous modification and PT-19--PT-20 path theorems | **$\mathsf{AC}_\omega$** for the supplied construction | countable compact intervals, rational exponents, dyadic levels, and null-set intersections are used |
 | PT-21 Brownian Ito integral | **ZF after $L^2$ completeness**, with MT-14's inherited proof cost | completion uses limits uniquely determined in $L^2$; selecting a rapidly convergent approximation can be made by least indices from a supplied dense sequence |
 | PT-21 localization and PT-22 Ito calculus/representation | **ZF** after the integral/process and $L^2$ completeness are given | energy stopping times, closed-range approximation, truncation, and localization levels are canonical; no maximal family or arbitrary representative is selected |
@@ -1751,13 +2230,14 @@ Kolmogorov extension.  MT-13 now records that conditional expectation in
 PT-10 is the probability-space RN application.  None of these changes the
 measure pages' ownership or statements.
 
-**Functional analysis — applied 2026-08-14.**  FA-22's finite-measure Fourier transform now records
+**Functional analysis — partially applied 2026-08-14, corrected 2026-09-08.**  FA-22's planned finite-measure Fourier transform records
 the probability convention
 $\varphi_X(t)=\widehat{P_X}(-t/(2\pi))$.  PT-8 cites FA-22's uniqueness theorem
 instead of re-minting finite-measure Fourier uniqueness.  No FA theorem needs
-alteration.  FA-19's `thm-positive-square-root` is also a declared PT-9
-predecessor: PT-9 uses it only on a finite-dimensional covariance operator to
-construct possibly singular Gaussian laws.
+alteration, but FA-22 is empty and PT-8 remains blocked.  PT-9 instead cites
+the published Linear Algebra
+`thm-non-negative-square-root-exists-and-is-unique`; the empty FA-19 page is
+not a predecessor.
 
 **Combinatorics — applied 2026-08-14.**  The two finite probability pages now
 carry orientation, not dependencies: PT-1 proves that their weighted spaces,
@@ -1785,10 +2265,10 @@ not retroactively broaden PT-21's Brownian integral statement.
    MT-10--MT-14, MT-20, and MT-23 are absent from the live plan.  Their prose
    scaffold suggests ids but does not mint them.  The future builder must wait
    for the pages and substitute actual ids.
-2. **Functional analysis is proposed, not authored.**  FA-19's positive
-   square-root theorem must exist before the multivariate Gaussian construction
-   in PT-9, and FA-22's finite-measure Fourier transform and uniqueness theorem
-   must exist before PT-8 is built.
+2. **Functional analysis is partly unbuilt.**  FA-22's finite-measure Fourier
+   transform and uniqueness theorem must exist before PT-8 is built.  PT-9's
+   finite-dimensional covariance square root is already supplied by Linear
+   Algebra and does not wait for FA-19.
 3. **Polish space is planned but nonexistent.**  The topology page
    `complete-metrizability-and-baire` has `items: []`; PT-3's standard-Borel
    generality and PT-7/PT-11/PT-18 cannot be authored until its exact
@@ -2337,3 +2817,22 @@ No enrichment item crosses the §§4/§7 seam rulings.  Measure construction,
 integration, Radon--Nikodym, scalar $L^p$, ergodic theorems, Fourier analysis,
 finite probabilistic method, PDE boundary theory, and future stochastic-
 process topics remain citations or explicit deferrals.
+
+## Representation Theory / Functional Analysis reconciliation (2026-09-08)
+
+The planned A page `standard-borel-real-codings-and-determining-classes` now
+also supplies the planned FA page
+`measurable-hilbert-fields-and-direct-integral-operators`. This is a direct
+planned consumer only: every item on the standard-Borel pair still has zero
+direct and zero transitive published impact and remains outside Phase 2. The
+FA page must consume the proved bimeasurable coding and countable determining
+algebra; it may not reconstruct them from a bare “standard Borel” label.
+
+## Topology reconciliation (2026-09-08)
+
+Probability retains ownership of `def-standard-borel-space`, but its planned
+standard-Borel coding A page must require the published Topology A page
+`complete-metrizability-and-baire` and consume Topology's stable
+`def-polish-space`. It may not re-mint Polish spaces or use a Topology B page.
+This planned seam has zero published impact and creates no Topology Phase-2
+root.

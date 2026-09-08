@@ -4,13 +4,12 @@ Prose scaffold, owner-commissioned 2026-08-14. Prefix **RL**. This file is the
 only deliverable of the commission: it does not edit `research/plan-spec.json`,
 author an item, publish a page, run a content gate, or assign absolute orders.
 
-> **STATUS: PROSE SCAFFOLD ONLY.** The live Lie-theory pages at the intended
-> splice are planned objects with empty `items[]` arrays. The relative place is
-> immediately after
-> `real-forms-and-real-semisimple-lie-algebras-examples` and before the
-> differential-geometry symplectic block. A later build must first author the
-> cited DG and homological-algebra suppliers, then splice RL-1--RL-15 in the
-> reading order below.
+> **STATUS: CANONICAL LIE SCAFFOLD; 2026-09-08 BINDING AUDIT BELOW.** The live
+> plan has 30 Lie pages. RL-1--RL-4 (eight pages) are published with 138 items;
+> RL-5--RL-15 (22 pages) remain empty planned pages. The following section,
+> **2026-09-08 binding dependency audit**, is controlling wherever the older
+> commission narrative conflicts with the live census, proof order, Phase-2
+> eligibility, build holds, or B-leaf rules. Published files remain read-only.
 
 ## Summary for the orchestrator
 
@@ -23,8 +22,8 @@ $\mathfrak n$-cohomology theorem; Kac--Moody algebras; affine algebras;
 integrable Kac--Moody modules; and the Weyl--Kac formula. Labels are relative,
 not orders. Every B page is a dependency leaf.
 
-**Disk reconciliation.** All ten DG Lie-theory pairs inspected in the live plan
-have empty `items[]`; they are planned predecessors, not published facts.
+**Historical disk reconciliation (superseded by the binding audit).** At the
+time of the original commission the inspected DG Lie-theory pairs were empty.
 DG-32 formerly proposed Verma-module and character-formula ids even though the
 subjects-02 ownership table assigns that material to RL. S-3 is now applied:
 those ids are proposed only here, with the receipt recorded below. DG-32 remains owner of
@@ -55,10 +54,562 @@ of real reductive groups, analytic Harish--Chandra modules, Langlands
 classification, and Plancherel belong to RG. Kazhdan--Lusztig theory,
 Beilinson--Bernstein localisation as a theory, quantum groups, crystal/global
 bases, Virasoro/vertex algebras, and modular representation theory are denied
-for the specific prerequisite reasons below. **Blockers: none.**
+for the specific prerequisite reasons below. The current audit has one source
+blocker: the positive-root Verma-embedding specialization argument described in
+the binding section.
 
 This file is not normative: `SCHEMA.md`, `CLAUDE.md`, `LEVELS.md`,
 `ARCHITECTURE.md`, and `research/subjects-02-SEAMS.md` win wherever they differ.
+
+---
+
+## 2026-09-08 binding dependency audit
+
+This section is the canonical execution contract for Lie Theory. It supersedes
+the original census, the original `requires` table, the claims that there are
+no blockers, the former recorded-without-proof policy, every such inventory
+row, the old forward-reference table, and the old measurements. The remaining
+historical sections are useful as a source harvest and mathematical outline only.
+Neither it nor this audit changes a published file.
+
+### Live census and audit result
+
+The live plan contains 15 A/B pairs (30 pages). RL-1--RL-4 are published:
+
+| pair | A items | B items | state |
+|---|---:|---:|---|
+| RL-1 | 45 | 6 | published |
+| RL-2 | 17 | 6 | published |
+| RL-3 | 20 | 5 | published |
+| RL-4 | 31 | 8 | published |
+| RL-5--RL-15 | 0 | 0 | planned, no page file |
+
+Thus the published census is eight pages and 138 items. All 138 direct item
+references resolve to published items. The complete transitive closure of all
+138 items has zero Recorded/Not-Proved-Here hits, zero unpublished-item hits,
+and zero missing ids. All 113 proof-bearing items pass the focused precheck.
+All item-id wikilinks in published Lie bodies occur in `deps` or
+`justified_by`; there is no unrecorded load-bearing item link. The exceptions
+below are proof prose importing unnamed facts, not recorded-item closure hits.
+
+The original 21/17/14/17 A-page inventories drifted from the published
+45/17/20/31 inventories. The 24, 0, 6, and 14 added A items respectively are
+real published prerequisite decompositions and remain stable. RL-4 also has
+eight rather than six published B items. No published id is to be renamed or
+deleted.
+
+### Binding page order and B-leaf contract
+
+Every B page requires exactly its A companion. No A page, later B page, or
+item on another page may require a B page or a B item. Replace the live and
+future page requirements with the following A-only contract (transitive
+requirements need not be repeated):
+
+| page | binding `requires` | disposition |
+|---|---|---|
+| RL-1 A | after Phase 2, `finite-weyl-invariants-bruhat-and-kostant-harmonics` | remove the published-to-draft DG-34-B edge; use `[]` only during the pre-Phase-2 repair window |
+| RL-2 A | `harish-chandra-isomorphism-casimir-and-central-characters` | never RL-1 B; insert the four local-analysis items below before the determinant theorem in Phase 3 |
+| RL-3 A | `verma-modules-and-shapovalov-forms`, `harish-chandra-isomorphism-casimir-and-central-characters` | never RL-2 B |
+| RL-4 A | `homomorphisms-between-verma-modules-and-linkage`, `chain-complexes-and-homology` | never RL-3 B |
+| RL-5 A | `category-o-finiteness-duality-and-blocks`, `semisimple-lie-algebras-cohomology-and-levi-theory`, `projective-and-injective-resolutions`, `ext-and-balanced-resolutions`, `yoneda-extensions-and-homological-dimension` | build-held until every named A supplier is published |
+| RL-6 A | `homomorphisms-between-verma-modules-and-linkage`, `finite-weyl-invariants-bruhat-and-kostant-harmonics`, `chain-complexes-and-homology` | never RL-5 B |
+| RL-7 A | `harish-chandra-isomorphism-casimir-and-central-characters`, `verma-modules-and-shapovalov-forms`, `the-bgg-resolution` | never RL-6 B |
+| RL-8 A | `weyl-character-and-multiplicity-formulas`, `semisimple-lie-algebras-cohomology-and-levi-theory` | never RL-7 B; held while DG is unpublished |
+| RL-9 A | exact future AG-owned A suppliers for $G/B$, associated line bundles, coherent cohomology, projective-line fibres, and Serre duality | whole pair build-held; emit no item before suppliers exist |
+| RL-10 A | `harish-chandra-isomorphism-casimir-and-central-characters`, `verma-modules-and-shapovalov-forms`, `homomorphisms-between-verma-modules-and-linkage`, `category-o-finiteness-duality-and-blocks`, `projectives-standard-filtrations-and-bgg-reciprocity`, plus exact future localisation/$D$-module A suppliers | algebraic prefix may later split; Duflo landmarks remain non-items until a full proof route exists |
+| RL-11 A | `harish-chandra-isomorphism-casimir-and-central-characters`, `the-bgg-resolution`, `semisimple-lie-algebras-cohomology-and-levi-theory`, `derived-functors`, `ext-and-balanced-resolutions`, `spectral-sequences`, `double-complexes-exact-couples-and-convergence` | build-held until every A supplier is published |
+| RL-12 A | `harish-chandra-isomorphism-casimir-and-central-characters` | no B prerequisite |
+| RL-13 A | `kac-moody-algebras-from-generalized-cartan-matrices`, `semisimple-lie-algebras-cohomology-and-levi-theory`, `root-systems-dynkin-diagrams-and-cartan-killing-classification` | no RL-12 B prerequisite |
+| RL-14 A | `kac-moody-algebras-from-generalized-cartan-matrices`, `verma-modules-and-shapovalov-forms`, `root-systems-dynkin-diagrams-and-cartan-killing-classification` | no RL-13 B prerequisite |
+| RL-15 A | `kac-moody-algebras-from-generalized-cartan-matrices`, `integrable-highest-weight-kac-moody-modules` | no RL-14 B prerequisite |
+
+Apply the same rule to the new Phase-2 pair below: its B page requires only its
+companion and has no consumers. The published RL-3 B page must
+drop `permutation-statistics-inversions-and-eulerian-numbers`; its only reason
+for that edge is repaired by the Lie-owned Bruhat definition below.
+
+The exact current published-to-draft page defect is RL-1 A requiring
+`real-forms-and-real-semisimple-lie-algebras-examples`. That DG-34 B page has
+no live file/items. RL-1's published item graph is self-contained, so the
+Phase-3 amendment is `requires: []` until the earlier Phase-2 invariant A is
+published. This is the only such edge whose consumer is a published Lie page.
+Sequential RL-2-through-RL-15 requirements on preceding B pages are all
+invalid even when the B page happens to be published. There is also one
+incoming cross-category defect: published Representation Theory A page
+`artin-induction-and-rational-characters` requires draft RL-15 B
+`the-weyl-kac-character-formula-examples`. Its nine published items have zero
+Lie item dependencies, so root must remove that page edge rather than replace
+it. In total the live plan has 15 consumers of Lie B pages: the 14 sequential
+RL edges plus this Artin-induction edge.
+
+### Phase-2 eligible Lie-owned supplier pair
+
+Insert the new pair strictly before RL-1. Its stable page and item ids were
+collision-checked against `plan-spec.json`, `items/`, and the current scaffold.
+
+#### `finite-weyl-invariants-bruhat-and-kostant-harmonics`
+
+Its B companion is
+`finite-weyl-invariants-bruhat-and-kostant-harmonics-examples`. The A page
+has title “Finite Weyl Invariants, Bruhat Order, and Kostant Harmonics”, kind
+`A`, category `lie-theory`, and order `510.0002`; its B companion has the same
+title followed by “: Examples”, kind `B`, category `lie-theory`, and order
+`510.0004`. The A `requires` exactly
+`semisimple-lie-algebras-cohomology-and-levi-theory`,
+`cartan-subalgebras-and-root-space-decompositions`,
+`root-systems-dynkin-diagrams-and-cartan-killing-classification`, and
+`highest-weight-theory-for-complex-semisimple-lie-algebras`; never their B
+companions. The B `requires` exactly its A. Author in this order:
+
+1. `def-bruhat-order-on-a-finite-weyl-group` (subword/cover definition and
+   equivalence needed by the $A_2$ Verma example).
+2. `def-weyl-orbit-sum-in-a-group-algebra`.
+3. `lem-weyl-orbit-sums-form-a-basis-of-finite-weyl-invariants`.
+4. `lem-highest-weight-characters-are-unitriangular-in-weyl-orbit-sums`.
+5. `lem-finite-linear-group-invariant-polynomials-separate-orbits` (finite
+   product followed by Reynolds averaging, including the empty/stabilizer
+   cases).
+6. `def-weyl-discriminant-and-reflecting-hyperplane-arrangement`.
+7. `lem-weyl-anti-invariants-are-divisible-by-the-discriminant`.
+8. `lem-weyl-coinvariant-hilbert-series-has-order-w-dimension`.
+9. `thm-chevalley-shephard-todd-for-finite-weyl-groups`.
+10. `def-kostant-harmonic-subspace-of-the-symmetric-algebra`.
+11. `lem-kostant-harmonics-give-an-invariant-polynomial-complement`.
+12. `thm-kostant-harmonic-decomposition-of-the-symmetric-algebra`.
+13. `lem-filtered-freeness-lifts-from-associated-graded-algebras`.
+
+The B page may contain only
+`ex-s3-bruhat-order-and-inversion-sets`,
+`ex-a2-coinvariant-algebra-and-basic-invariants`, and
+`ex-sl2-kostant-harmonic-decomposition`; each has zero direct published
+consumers and zero transitive published impact.
+
+### Phase-3 local Shapovalov suppliers (not Phase 2)
+
+These items depend only on RL-2 items that already precede
+`thm-shapovalov-determinant-formula`. Place them after
+`def-shapovalov-determinant-on-a-weight-space` and before that theorem, in this
+order:
+
+1. `lem-shapovalov-determinant-factors-on-affine-root-hyperplanes`.
+2. `lem-determinant-vanishing-order-from-a-perfect-first-derivative-pairing`.
+3. `lem-generic-root-hyperplane-has-the-expected-simple-verma-radical`.
+4. `lem-transverse-shapovalov-pairing-is-perfect-on-the-generic-radical`.
+
+These four are local published-page repairs, not Phase-2 work: Phase 2 builds
+new A/B pairs only and RL-2 is already published. The official full text gives
+the factor, generic-radical, derivative-pairing, order-of-vanishing, and
+exponent steps separately. In Phase 3 rewrite
+`thm-shapovalov-determinant-formula` to consume all four lemmas and removes its
+unproved `[L1]` import.
+
+### Supplier-to-published-consumer map
+
+The following named closures are computed in the current published item graph.
+Each closure includes its direct published consumer. These lists are complete,
+not samples.
+
+**SD (19 items).** `verma-modules-and-shapovalov-forms`:
+`thm-shapovalov-determinant-formula`,
+`cor-verma-irreducibility-criterion-from-shapovalov-determinants`;
+`verma-modules-and-shapovalov-forms-examples`:
+`ex-sl2-reducible-and-generic-verma-modules`,
+`ex-finite-dimensional-sl2-quotient-of-a-verma-module`;
+`homomorphisms-between-verma-modules-and-linkage`:
+`thm-jantzen-sum-formula-for-a-verma-module`,
+`cor-generic-verma-modules-are-simple`,
+`thm-strong-linkage-principle-for-verma-modules`,
+`lem-verma-embedding-implies-strong-linkage`,
+`thm-bgg-verma-homomorphism-criterion`,
+`cor-antidominant-verma-modules-are-simple`;
+`homomorphisms-between-verma-modules-and-linkage-examples`:
+`ex-sl2-verma-embedding-chain`,
+`ex-a2-regular-dominant-verma-embedding-poset`,
+`cex-equal-central-character-does-not-give-every-verma-embedding-direction`;
+`category-o-finiteness-duality-and-blocks`:
+`lem-extensions-between-distinct-o-linkage-classes-split`,
+`thm-central-character-summands-split-into-linkage-blocks`,
+`cor-restricted-duality-preserves-linkage-blocks`;
+`category-o-finiteness-duality-and-blocks-examples`:
+`ex-the-regular-integral-sl2-block-of-category-o`,
+`ex-a-generic-sl2-block-is-semisimple`,
+`ex-a-singular-a2-central-character-summand`.
+
+For each of the four Shapovalov suppliers above, the direct published consumer
+set is `{thm-shapovalov-determinant-formula}` and the complete transitive
+published impact is SD. This declaration is item-specific for all four; the
+theorem records every load-bearing proof input rather than relying only on the
+last lemma's transitivity.
+
+**HC-EXT (32 items).** `harish-chandra-isomorphism-casimir-and-central-characters`:
+`lem-weyl-invariant-cartan-polynomials-extend-to-g-invariants`,
+`thm-symmetric-invariants-restrict-to-weyl-invariants`,
+`thm-harish-chandra-isomorphism-for-the-center`,
+`thm-enveloping-algebra-is-free-over-its-center`,
+`prop-harish-chandra-map-is-injective`,
+`cor-central-characters-are-dot-weyl-orbits`,
+`cor-the-center-is-a-polynomial-algebra-of-rank-many-generators`;
+RL-1 B: `ex-dot-conjugate-weights-have-the-same-central-character`,
+`cex-unshifted-weyl-orbits-do-not-classify-central-characters`,
+`ex-the-zero-weight-singular-central-character`,
+`ex-sl3-harish-chandra-center-generators`;
+RL-3 A: `prop-verma-composition-multiplicities-are-finite`,
+`thm-strong-linkage-principle-for-verma-modules`,
+`lem-verma-embedding-implies-strong-linkage`,
+`thm-bgg-verma-homomorphism-criterion`,
+`cor-antidominant-verma-modules-are-simple`;
+RL-3 B: `cex-equal-central-character-does-not-give-every-verma-embedding-direction`,
+`ex-sl2-verma-embedding-chain`,
+`ex-a2-regular-dominant-verma-embedding-poset`;
+RL-4 A: `lem-finite-dot-orbit-weight-spaces-detect-o-subquotients`,
+`thm-central-character-summands-split-into-linkage-blocks`,
+`prop-the-grothendieck-group-of-o-has-simple-and-standard-bases`,
+`thm-every-category-o-object-has-finite-length`,
+`cor-restricted-duality-preserves-linkage-blocks`,
+`lem-extensions-between-distinct-o-linkage-classes-split`,
+`prop-restricted-duality-is-an-exact-involution-on-category-o`,
+`lem-o-modules-split-across-separated-simple-classes`,
+`def-standard-and-costandard-objects-in-category-o`,
+`prop-costandard-objects-have-simple-socles`;
+RL-4 B: `ex-a-generic-sl2-block-is-semisimple`,
+`ex-a-singular-a2-central-character-summand`,
+`ex-the-regular-integral-sl2-block-of-category-o`.
+
+**HC-ORBIT (25 items).** This is HC-EXT with the RL-1 A prefix replaced by
+only `cor-central-characters-are-dot-weyl-orbits` and with the RL-1 B item
+`ex-sl3-harish-chandra-center-generators` omitted; all RL-3 and RL-4 groups
+listed in HC-EXT remain. **HC-POLY (2 items)** is
+`cor-the-center-is-a-polynomial-algebra-of-rank-many-generators` and RL-1 B
+`ex-sl3-harish-chandra-center-generators`. **HC-FREE (1 item)** is
+`thm-enveloping-algebra-is-free-over-its-center`. **BRUHAT (1 item)** is RL-3
+B `ex-a2-regular-dominant-verma-embedding-poset`.
+
+The item-specific map for the 13 invariant/Bruhat/harmonic A suppliers is:
+
+| supplier | direct published consumers | complete transitive published impact |
+|---|---|---|
+| `def-bruhat-order-on-a-finite-weyl-group` | `ex-a2-regular-dominant-verma-embedding-poset` | BRUHAT |
+| `def-weyl-orbit-sum-in-a-group-algebra` | zero | HC-EXT |
+| `lem-weyl-orbit-sums-form-a-basis-of-finite-weyl-invariants` | zero | HC-EXT |
+| `lem-highest-weight-characters-are-unitriangular-in-weyl-orbit-sums` | `lem-weyl-invariant-cartan-polynomials-extend-to-g-invariants` | HC-EXT |
+| `lem-finite-linear-group-invariant-polynomials-separate-orbits` | `cor-central-characters-are-dot-weyl-orbits` | HC-ORBIT |
+| `def-weyl-discriminant-and-reflecting-hyperplane-arrangement` | zero | HC-POLY |
+| `lem-weyl-anti-invariants-are-divisible-by-the-discriminant` | zero | HC-POLY |
+| `lem-weyl-coinvariant-hilbert-series-has-order-w-dimension` | zero | HC-POLY |
+| `thm-chevalley-shephard-todd-for-finite-weyl-groups` | `cor-the-center-is-a-polynomial-algebra-of-rank-many-generators` | HC-POLY |
+| `def-kostant-harmonic-subspace-of-the-symmetric-algebra` | zero | HC-FREE |
+| `lem-kostant-harmonics-give-an-invariant-polynomial-complement` | zero | HC-FREE |
+| `thm-kostant-harmonic-decomposition-of-the-symmetric-algebra` | `thm-enveloping-algebra-is-free-over-its-center` | HC-FREE |
+| `lem-filtered-freeness-lifts-from-associated-graded-algebras` | `thm-enveloping-algebra-is-free-over-its-center` | HC-FREE |
+
+The three invariant-pair B items have the exact zero/zero declarations given
+above. Therefore every new planned supplier is
+covered individually.
+
+### Cross-category Phase-2 roots and their published impact
+
+These are not Lie-owned duplicates. Root must reconcile them in the owning DG
+scaffold and schedule their A pages before the Lie Phase-3 consumer rewrite:
+
+For compact exactness, define **ROOT-70** as the following complete published
+Lie closure. RL-1 A:
+`thm-the-root-set-is-a-reduced-crystallographic-root-system`,
+`def-root-reflections-and-the-weyl-group-action`,
+`def-fundamental-weights-for-a-chosen-simple-root-system`,
+`thm-finite-dimensional-simple-modules-are-classified-by-dominant-highest-weights`,
+`lem-rho-shift-intertwines-the-dot-and-ordinary-weyl-actions`,
+`lem-weyl-invariant-cartan-polynomials-extend-to-g-invariants`,
+`thm-harish-chandra-isomorphism-for-the-center`,
+`thm-symmetric-invariants-restrict-to-weyl-invariants`,
+`prop-harish-chandra-map-is-injective`,
+`cor-central-characters-are-dot-weyl-orbits`,
+`cor-the-center-is-a-polynomial-algebra-of-rank-many-generators`,
+`thm-enveloping-algebra-is-free-over-its-center`; RL-1 B:
+`cex-unshifted-weyl-orbits-do-not-classify-central-characters`,
+`ex-the-zero-weight-singular-central-character`,
+`ex-dot-conjugate-weights-have-the-same-central-character`,
+`ex-sl3-harish-chandra-center-generators`; RL-2 A:
+`thm-shapovalov-determinant-formula`,
+`cor-verma-irreducibility-criterion-from-shapovalov-determinants`; RL-2 B:
+`ex-sl2-reducible-and-generic-verma-modules`,
+`ex-finite-dimensional-sl2-quotient-of-a-verma-module`; RL-3 A:
+`lem-simple-root-singular-vector-in-a-verma-module`,
+`thm-verma-embedding-for-an-arbitrary-positive-root`,
+`def-strong-linkage-order-on-weights`,
+`thm-jantzen-sum-formula-for-a-verma-module`,
+`prop-simple-reflection-embedding-of-verma-modules`,
+`thm-bgg-verma-homomorphism-criterion`,
+`thm-strong-linkage-principle-for-verma-modules`,
+`cor-antidominant-verma-modules-are-simple`,
+`cor-generic-verma-modules-are-simple`,
+`lem-verma-embedding-implies-strong-linkage`,
+`prop-verma-composition-multiplicities-are-finite`; RL-3 B:
+`ex-a2-regular-dominant-verma-embedding-poset`,
+`ex-a2-singular-dot-orbit-collapses`, `ex-sl2-verma-embedding-chain`,
+`cex-equal-central-character-does-not-give-every-verma-embedding-direction`;
+RL-4 A: `def-bgg-category-o`, `def-integral-weyl-group-of-a-weight`,
+`thm-central-character-summands-split-into-linkage-blocks`,
+`lem-integral-reflection-orbits-are-linkage-equivalence-classes`,
+`lem-finite-b-stable-generators-and-weight-flags-in-category-o`,
+`prop-equivalent-support-description-of-category-o`,
+`prop-verma-and-finite-dimensional-modules-lie-in-category-o`,
+`thm-category-o-is-abelian-and-extension-closed`,
+`lem-the-center-has-finite-dimensional-image-on-an-o-object`,
+`def-generalized-central-character-subcategory-of-o`,
+`prop-hom-spaces-in-category-o-are-finite-dimensional`,
+`prop-tensoring-with-a-finite-dimensional-module-preserves-category-o`,
+`cor-restricted-duality-preserves-linkage-blocks`,
+`lem-extensions-between-distinct-o-linkage-classes-split`,
+`lem-o-modules-admit-finite-highest-weight-filtrations-after-truncation`,
+`lem-n-plus-invariants-exist-in-every-nonzero-o-module`,
+`lem-finite-dot-orbit-weight-spaces-detect-o-subquotients`,
+`thm-every-category-o-object-has-finite-length`,
+`def-grothendieck-group-and-character-of-category-o`,
+`thm-simple-objects-of-category-o-are-highest-weight-modules`,
+`lem-generalized-central-character-submodules-are-direct-summands`,
+`prop-restricted-duality-is-an-exact-involution-on-category-o`,
+`lem-o-modules-split-across-separated-simple-classes`,
+`lem-verma-self-extensions-in-category-o-split`,
+`prop-the-grothendieck-group-of-o-has-simple-and-standard-bases`,
+`thm-category-o-decomposes-by-generalized-central-character`,
+`def-standard-and-costandard-objects-in-category-o`,
+`prop-costandard-objects-have-simple-socles`; RL-4 B:
+`ex-a-singular-a2-central-character-summand`,
+`cex-an-infinite-direct-sum-of-verma-modules-is-not-in-category-o`,
+`cex-a-weight-module-with-unbounded-upward-support-is-not-in-o`,
+`cex-category-o-is-not-extension-closed-in-all-g-modules`,
+`cex-tensor-products-of-two-verma-modules-need-not-lie-in-o`,
+`ex-the-regular-integral-sl2-block-of-category-o`, and
+`ex-a-generic-sl2-block-is-semisimple`.
+
+1. DG-30
+   `thm-cartan-subalgebras-of-a-complex-semisimple-lie-algebra-are-conjugate`
+   directly supplies published
+   `thm-cartan-subalgebras-are-conjugate-in-a-complex-semisimple-lie-algebra`.
+   Its complete published Lie impact is the exact 35-item set
+   `{thm-cartan-subalgebras-are-conjugate-in-a-complex-semisimple-lie-algebra,
+   lem-regular-semisimple-elements-form-a-dense-open-subset,
+   lem-an-invariant-polynomial-is-determined-by-its-cartan-restriction}` union
+   HC-EXT. This is an owning-DG
+   Phase-2 root, not planned-only Lie enrichment.
+2. DG-30
+   `thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system`
+   directly supplies published
+   `thm-the-root-set-is-a-reduced-crystallographic-root-system`. Its complete
+   published Lie impact is ROOT-70 exactly. The machine-recomputed closure
+   count, rather than the older estimate, is controlling.
+3. DG-32
+   `thm-highest-weight-classification-of-finite-dimensional-irreducible-representations`
+   directly supplies published
+   `thm-finite-dimensional-simple-modules-are-classified-by-dominant-highest-weights`.
+   Its complete published Lie impact is exactly that theorem union HC-EXT (33
+   items).
+
+The adequate DG proof chain for root (1) includes
+`thm-centralizer-of-a-regular-semisimple-element-is-a-cartan-subalgebra`; it
+has zero direct published consumers and the same 35-item transitive impact as
+root (1). The adequate DG proof chain for root (2) must include, strictly earlier,
+`thm-weyls-complete-reducibility`, `thm-root-sl-two-triple`,
+`thm-finite-dimensional-representations-of-sl-two`,
+`thm-root-string-property`, and
+`thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional`.
+Each of these five earlier supplier items has zero direct published consumers
+and complete transitive published impact ROOT-70; the final root-system theorem
+alone directly supplies the published Lie interface theorem.
+The adequate DG-32 chain for root (3) must include
+`lem-every-finite-dimensional-irreducible-representation-has-a-highest-weight-vector`,
+`lem-highest-weight-of-a-finite-dimensional-module-is-dominant-integral`,
+`lem-integrability-relations-for-a-dominant-highest-weight`,
+`def-dominant-integrable-highest-weight-cyclic-module`,
+`lem-pbw-shows-the-dominant-cyclic-highest-weight-generator-survives`,
+`lem-simple-root-integrability-bounds-the-dominant-cyclic-module`,
+`lem-a-dominant-cyclic-highest-weight-module-has-a-unique-simple-quotient`,
+`thm-finite-dimensionality-of-lambda-highest-weight-simple-modules-for-dominant-integral-lambda`,
+and `thm-simple-highest-weight-modules-are-classified-by-their-highest-weight`.
+Each of these nine earlier DG-32 supplier items has zero
+direct published consumers and the exact 33-item transitive impact of root (3);
+the final classification theorem alone directly supplies the published Lie
+interface. Phase 3 turns the three published Lie
+theorems into short compatibility/interface results using the DG suppliers; it
+does not retain hidden `[F]` facts or duplicate the DG proofs.
+
+### Exact Phase-3 published repairs
+
+1. In RL-1, move
+   `lem-the-casimir-element-is-independent-of-dual-bases` before
+   `def-quadratic-casimir-element`. State and prove basis-independence of the
+   canonical inverse-form tensor and its multiplication image without using
+   the definition. Its deps become
+   `def-killing-form-of-a-semisimple-lie-algebra`,
+   `prop-killing-form-is-invariant-and-nondegenerate-on-a-complex-semisimple-lie-algebra`,
+   and `def-universal-enveloping-algebra-as-a-tensor-quotient`. The definition
+   keeps `justified_by` pointing strictly backward to the lemma. Remove the
+   present two-node definition/lemma SCC. Its direct published consumers after
+   repair are `def-quadratic-casimir-element` and (retaining its current explicit
+   proof input) `prop-the-quadratic-casimir-element-is-central`; its complete
+   published impact is the definition plus the current 44-item downstream
+   closure, hence 45 Lie items.
+2. Move `prop-harish-chandra-map-is-injective` immediately after
+   `thm-harish-chandra-isomorphism-for-the-center`; its current dependency on
+   that theorem is a forward edge. No statement/id changes.
+3. Rewrite `lem-regular-elements-form-a-connected-dense-open-subset` and
+   `lem-regular-semisimple-elements-form-a-dense-open-subset` from the complete
+   regular-element/Cartan argument cited below. Delete the unnamed “standard
+   structure” and `[A1]` imports. The latter consumes the repaired DG Cartan
+   interface.
+4. Repoint the published Cartan, root-system, and finite-dimensional
+   highest-weight theorem items to the exact DG roots above and rewrite each as
+   a convention/interface corollary. Remove `[F1]`, `[F2]`, Lie's theorem,
+   unrecorded complete reducibility, and unrecorded root-string imports from
+   their bodies.
+5. Add the invariant supplier dependencies exactly as in the item-specific
+   table. Rewrite the extension lemma, dot-orbit corollary, polynomial-centre
+   corollary, and freeness theorem so no character-triangularity,
+   orbit-separation, CST, Kostant-harmonic, or filtered-lifting fact remains
+   unnamed.
+6. Insert the four local Shapovalov lemmas in RL-2 A strictly before
+   `thm-shapovalov-determinant-formula`, rewrite that theorem to use all four,
+   and remove `[L1]`. This is Phase 3 only; the published theorem remains
+   blocked until then.
+7. Repoint RL-3 B
+   `ex-a2-regular-dominant-verma-embedding-poset` from
+   `def-bruhat-order-on-the-symmetric-group` to
+   `def-bruhat-order-on-a-finite-weyl-group`, including the body link. Then the
+   B page requires only RL-3 A and is a page leaf.
+8. The published theorem
+   `thm-verma-embedding-for-an-arbitrary-positive-root` is blocked. Its proof
+   cites Etingof Theorem 15.11, whose general case says only “taking the limit.”
+   A candidate supplier id,
+   `lem-verma-singular-vector-specializes-from-the-generic-root-hyperplane`, is
+   reserved but is **not Phase-2 eligible and not a planned item** until an
+   authoritative full proof is obtained. If obtained, its direct published
+   consumer is the theorem and its complete impact is 10 items: RL-3 A that
+   theorem and `thm-bgg-verma-homomorphism-criterion`; RL-3 B
+   `ex-sl2-verma-embedding-chain`,
+   `ex-a2-regular-dominant-verma-embedding-poset`, and
+   `cex-equal-central-character-does-not-give-every-verma-embedding-direction`;
+   RL-4 A `thm-central-character-summands-split-into-linkage-blocks` and
+   `cor-restricted-duality-preserves-linkage-blocks`; RL-4 B the regular,
+   generic, and singular examples. Do not schedule the rewrite while blocked.
+
+### Recorded/not-proved elimination and future build holds
+
+The recorded catalogue is not a theorem source. No draft, future, or published
+Lie proof, well-definedness argument, `deps`, `justified_by`, or load-bearing
+body link may consume a Recorded/Not-Proved-Here item, directly or through
+another category. Source citation does not convert a result into a supplier.
+
+The following old inventory ids are revoked as planned items and retained only
+as prose target names: `thm-duflo-annihilator-theorem-for-verma-modules`,
+`lem-duflo-reduction-to-a-regular-integral-central-character`,
+`lem-localization-identifies-simple-modules-with-highest-weight-annihilators`,
+`thm-duflo-every-primitive-ideal-is-highest-weight`,
+`cor-kostants-theorem-feeds-borel-weil-bott`,
+`prop-the-loop-central-extension-is-universal-for-simple-g`,
+`thm-twisted-loop-central-extensions-give-the-twisted-affine-types`,
+`cex-an-integrable-module-outside-kac-moody-o-need-not-have-the-stated-decomposition`,
+`cex-weyl-kac-is-not-asserted-for-nonsymmetrizable-gcms`, and
+`cex-formal-character-equality-does-not-imply-q-series-convergence`. They must
+not enter `plan-spec.json`, and no later item may cite them. The last three are
+orientation sentences, not mathematical items. Universal/twisted loop and
+Duflo become items only after complete proof decompositions have strictly
+earlier proved suppliers.
+
+RL-9 is wholly build-held until the AG-owned geometry A pages are published;
+there is no recorded-without-proof emission. RL-10's Duflo/localisation portion is
+wholly build-held. Its purely algebraic prefix can be split into a separate A/B
+pair only after each item has a complete proof and no later item is allowed to
+depend on the held targets. RL-11's BWB bridge is prose orientation. The
+remaining RL-13--RL-15 proofs must be fully supplied before scheduling; the
+revoked orientation/counter-scope rows cannot serve as leaves that excuse a
+missing proof.
+
+### Planned-only inventory and exact zero-consumer declaration
+
+After the ten revocations above, every one of the 219 remaining ids individually
+enumerated in the RL-5--RL-15 A/B tables is planned-only: for **each such id**,
+the exact direct published consumer set is empty and the complete transitive
+published consumer closure is empty. This quantified declaration is item-level:
+it applies separately to each table id, not merely to its page. None is a
+Phase-2 root for a published consumer. RL-5 has 21 zero/zero ids; RL-6 17;
+RL-7 23; RL-8 22; RL-9 18; RL-10 16 after four revocations; RL-11 18 after one;
+RL-12 23; RL-13 21 after two; RL-14 21 after one; and RL-15 19 after two.
+The totals are 219 and zero published impact. The three new Phase-2-pair B items
+have their separate zero/zero declarations above.
+
+### Ownership and cross-category seams
+
+- DG owns complete reducibility, Cartan conjugacy, root-$\mathfrak{sl}_2$ and
+  root strings, the reduced crystallographic root-system theorem, and the
+  finite-dimensional highest-weight classification. Lie owns Verma modules,
+  category $\mathcal O$, Harish--Chandra centre consequences, finite-Weyl
+  invariant tools used by those consequences, and the finite-Weyl Bruhat
+  definition used by its Verma example.
+- HA owns complexes, resolutions, Ext/derived functors, exact couples, and
+  spectral-sequence convergence. Future Lie pages require exact HA A pages;
+  no HA B page is a supplier.
+- AG owns $G/B$, associated line bundles, coherent cohomology, Serre duality,
+  localisation, and $D$-modules. The old generic geometry placeholder must be replaced by
+  actual AG page ids only after those pages exist. No geometry claim is
+  laundered through a Lie orientation remark.
+- RG may consume algebraic Harish--Chandra-centre results but Lie consumes no
+  analytic RG result. Analytic globalisation and convergence remain RG-owned.
+- The published graph has zero Lie-to-Computation, Computation-to-Lie,
+  Lie-to-Linear-Algebra, and Linear-Algebra-to-Lie item edges. Therefore the
+  active Computability incoming Linear Algebra interface is disjoint from this
+  audit: Lie neither consumes it nor claims its Linear Algebra suppliers.
+- The old symmetric-group Bruhat dependency is the only Combinatorics seam and
+  is removed by the Lie-owned finite-Weyl definition. No other repaired
+  scaffold is overridden.
+- Published Representation Theory page `artin-induction-and-rational-characters`
+  has an accidental incoming edge from RL-15 B but no Lie item dependency.
+  Remove the page edge in the owning scaffold/central amendment. This is the
+  finite-group/Abstract-Algebra-side interface; it must not make a Lie examples
+  page into a supplier.
+
+### Authoritative full-text evidence and blocker
+
+- Pavel Etingof, MIT 18.757 complete notes,
+  <https://ocw.mit.edu/courses/18-757-representations-of-lie-groups-fall-2023/mit18_757_f23_lec_full.pdf>:
+  Exercise 8.15(iv)--(x), printed pp.45--47, gives the leading term,
+  affine-root-hyperplane factors, generic radical/submodule/quotient,
+  transverse perfect derivative pairing, vanishing order, and determinant
+  exponent used by the four Phase-3 Shapovalov lemmas. Sections 10--13,
+  especially Theorem 13.5 on printed pp.74--75 and its §§13.1--13.2 setup on
+  pp.71--74, give the finite reflection-invariant and Kostant harmonic/freeness
+  chain. This is full text, not a snippet.
+- Pavel Etingof, complete Lie groups/algebras notes,
+  <https://math.mit.edu/~etingof/lnlg.pdf>: §§18.1--18.2, printed pp.83--86
+  (Lemma 18.5, Proposition 18.6, Theorems 18.7 and 18.10), give the
+  regular-element/Cartan-conjugacy argument; §§24.2--24.3, printed pp.107--109
+  (Propositions 24.10/24.12, Lemmas 24.15/24.16, Theorem 24.17), give the
+  finite-dimensional highest-weight existence, dominance, integrability,
+  finite-dimensionality, and uniqueness chain.
+- The same official 18.757 notes, Theorem 15.11 on printed p.82, prove the
+  generic positive-root Verma embedding from the determinant but give the
+  arbitrary case only by the phrase “taking the limit.” No authoritative full
+  proof of that specialization was retrieved. This is a blocker, not
+  permission to record the claim or to infer it from the theorem statement.
+
+### Exact central amendments and validation contract
+
+Root must make, outside this file and in the appropriate phase, these exact
+amendments: insert the invariant/Bruhat/harmonics A/B pair in Phase 2; in
+Phase 3 add the four Shapovalov items to RL-2 A before their consumer; schedule the three
+DG-owned A roots first; apply the page `requires` matrix; remove every B-page
+consumer; remove the RL-15-B requirement from
+`artin-induction-and-rational-characters`; apply the eight Phase-3 published
+repairs; delete the ten revoked ids from any
+future central inventory; keep RL-9, the Duflo/localisation portion of RL-10,
+and the Verma-specialization repair on build hold. No stable published id or
+published file path changes.
+
+Before any build, re-run: plan validation; global item-id and page-id collision
+checks; direct and transitive Recorded/Not-Proved-Here closure from every Lie
+item; published-to-draft and forward-edge scans; B-page `requires` and B-item
+consumer scans; body-link versus `deps`/`justified_by`; and a scoped diff check.
+Any nonzero recorded closure, B consumer, unresolved id, or forward edge blocks
+the build.
 
 ---
 
@@ -203,7 +754,7 @@ where the cited source treats the central torus explicitly.
 | `compact-lie-groups-maximal-tori-and-peter-weyl-theory` (DG-33) | planned, empty | compact integration/Peter--Weyl. RL's character proofs are algebraic and do not invoke Haar integration. |
 | `real-forms-and-real-semisimple-lie-algebras` (DG-34) | planned, empty | real forms and Cartan decompositions; it is the physical splice anchor, not an analytic-representation supplier. |
 | HA-1 `chain-complexes-and-homology`, HA-5 `projective-and-injective-resolutions`, HA-6 `derived-functors`, HA-8 `ext-and-balanced-resolutions`, HA-9 `yoneda-extensions-and-homological-dimension`, HA-15/16 `spectral-sequences` / `double-complexes-exact-couples-and-convergence` | finished prose scaffolds, not live plan pages | complexes, resolutions, derived functors, Ext/Yoneda, and spectral-sequence engines. RL instantiates these in $\mathcal O$ and CE cohomology; it does not rebuild them. |
-| AV relative interfaces (future algebraic-geometry track) | not yet assigned live ids | quotients $G/B$, equivariant line bundles, coherent sheaf cohomology, smooth projective varieties, and Serre duality needed by RL-9. RL-9 states its geometry contract and cannot be built before those suppliers. |
+| AG interfaces (future algebraic-geometry pages) | not yet assigned live ids | quotients $G/B$, equivariant line bundles, coherent sheaf cohomology, smooth projective varieties, and Serre duality needed by RL-9. RL-9 cannot be built before those suppliers. |
 | RG relative labels | concurrent; file deliberately unread | unitary and analytic representations of real reductive groups. RL makes no RG result load-bearing. RL-1 supplies RG with the algebraic Harish--Chandra centre/infinitesimal-character interface. |
 
 The pages `lie-groups-invariant-fields-and-the-exponential-map` and
@@ -250,8 +801,8 @@ page and is a leaf; those trivial companion edges are omitted from the table.
 | RL-6 | RL-3; DG-31 Bruhat order; HA-1 and HA-5 |
 | RL-7 | RL-1, RL-2, RL-6; DG-31/DG-32 root strings and finite highest weights |
 | RL-8 | RL-7; DG-29 complete reducibility; DG-32 finite highest-weight classification |
-| RL-9 | DG-25/DG-26 group actions/homogeneous spaces; DG-31--DG-33; future AV geometry suppliers |
-| RL-10 | RL-1--RL-5; DG-27 PBW; future AV/localisation supplier for the `not-supplied` proof |
+| RL-9 | DG-25/DG-26 group actions/homogeneous spaces; DG-31--DG-33; future AG geometry suppliers; whole page held |
+| RL-10 | RL-1--RL-5; DG-27 PBW; future AG localisation suppliers; Duflo targets are not items |
 | RL-11 | DG-29 CE/Whitehead; RL-1 and RL-6; DG-31/DG-32; HA-6, HA-8, HA-15, HA-16 |
 | RL-12 | DG-27 enveloping/presentation language; DG-31 finite Cartan/Weyl interface |
 | RL-13 | RL-12; DG-29 invariant form; DG-30 highest-root notation |
@@ -340,7 +891,7 @@ triangular decomposition, and finite bases supplied by DG. PBW bases may use
 an explicitly supplied ordering of the finite positive roots; no arbitrary
 global basis choice is hidden. Projective covers in a finite linkage block are
 constructed from explicit finite tensor/projector data, not by selecting from
-a proper class. Borel--Weil--Bott inherits the foundations of the future AV
+a proper class. Borel--Weil--Bott inherits the foundations of the future AG
 supplier; its representation-theoretic deductions add no choice. Kac--Moody
 constructions start with a finite indexed GCM and the canonical free
 Lie-algebra quotient, so use no AC. Formal characters are coefficientwise
@@ -554,13 +1105,12 @@ Humphreys §24.4 independently checks the Steinberg formula.
 ## RL-9 — Borel--Weil and Borel--Weil--Bott
 
 **Build hold.** This A page is self-contained as a representation-theoretic
-scaffold, but cannot be authored before the future AV pages supply $G/B$ as a
+scaffold, but cannot be authored before the future AG pages supply $G/B$ as a
 smooth projective variety, associated equivariant line bundles, coherent
 cohomology, and Serre duality. The result is not dropped merely because that
-supplier is future. Under S-5 no AV supplier is commissioned now: every
-geometry-dependent Borel--Weil--Bott row remains a sourced, non-load-bearing
-leaf and must be emitted with `proved_here: false` until that interface is
-authored; no later RL proof may cite it as established. Full treatments: Rui lecture 1, pp.2--7 and Ng §§3--6,
+supplier is future. Every geometry-dependent Borel--Weil--Bott row is held and
+must not be emitted until that interface is authored; no later RL proof may
+cite it as established. Full treatments: Rui lecture 1, pp.2--7 and Ng §§3--6,
 pp.6--14; Lurie's complete pp.1--3 proof and Boxer--Pilloni §1.1.2--1.1.3,
 pp.2--6 are independent proof checks.
 
@@ -594,15 +1144,11 @@ pp.2--6 are independent proof checks.
 
 ## RL-10 — Primitive ideals and Duflo's theorem
 
-**A-page role.** Reach the classification statement through annihilators,
-central reductions, and highest-weight ideals, while being candid about the
-geometric depth of the proof. The final Duflo surjectivity theorem is supplied
-with a proof architecture but `not-supplied` proof: authoring its localisation
-argument would require the deliberately excluded Beilinson--Bernstein theory.
-Under S-5 no localisation/$\mathcal D$-module supplier is commissioned now;
-the localisation-dependent rows are sourced, non-load-bearing leaves with
-`proved_here: false` at build, and no later RL proof may cite them as
-established.
+**A-page role.** Develop only the algebraic annihilator and central-reduction
+prefix. Duflo surjectivity and its localisation architecture are prose targets,
+not planned items: authoring them requires exact earlier
+Beilinson--Bernstein/$\mathcal D$-module suppliers and a complete proof. No
+later RL proof may cite those targets as established.
 Full treatments: Duflo's original article, pp.107--120 and Stanciu §§2--7,
 pp.3--29; Etingof 18.757 §§18, 22, pp.92--95, 110--113 is an independent
 graduate treatment of the highest-weight/annihilator part.
@@ -616,13 +1162,9 @@ graduate treatment of the highest-weight/annihilator part.
 | `prop-a-primitive-ideal-determines-a-central-character` | Proposition: for semisimple $\mathfrak g$, $I\cap Z(U\mathfrak g)$ is the kernel of a central character. | Places every primitive ideal over an HC dot orbit. | literature-derived | ai-altered | E757 §18.1, pp.92--93; Stanciu §2, pp.3--5 |
 | `def-central-reduction-of-the-enveloping-algebra` | Definition: $U_\chi=U\mathfrak g/U\mathfrak g\ker\chi$. | Separates the fixed-infinitesimal-character problem. | literature-derived | not-applicable | E757 §18.1, p.93; Stanciu §2, pp.4--5 |
 | `prop-verma-annihilator-contains-the-central-character-ideal` | Proposition: $U\mathfrak g\ker\chi_\lambda\subseteq\operatorname{Ann}M(\lambda)\subseteq I(\lambda)$. | Establishes the unavoidable central part before equality. | literature-derived | ai-altered | E757 §18.1, pp.92--94; Duflo pp.108--110 |
-| `thm-duflo-annihilator-theorem-for-verma-modules` | Theorem: $\operatorname{Ann}M(\lambda)=U\mathfrak g\ker\chi_\lambda$. | Deep input relating highest-weight induction to the centre. | literature-derived | not-supplied | Duflo pp.107--120; E757 §18.1, pp.93--94 |
 | `def-associated-graded-variety-of-a-two-sided-ideal` | Definition: with PBW filtration, $\mathcal V(I)$ is the zero set of $\operatorname{gr}I\subset S(\mathfrak g)$. | Records the geometric invariant used by the full proof. | literature-derived | not-applicable | Stanciu §3, pp.5--9; Fadeev §§2.6--2.7, pp.22--24 |
 | `prop-associated-variety-of-a-primitive-ideal-is-conical-and-g-invariant` | Proposition: $\mathcal V(I)$ is a closed conical coadjoint-invariant subset of $\mathfrak g^*$. | Explains why nilpotent geometry enters Duflo/Joseph theory. | literature-derived | ai-altered | Stanciu §§3--4, pp.5--14; E757 §18.2, pp.94--95 |
-| `lem-duflo-reduction-to-a-regular-integral-central-character` | Lemma/proof architecture: translation and coherent-family arguments reduce the surjectivity problem to a regular integral infinitesimal character. | Names the first deep reduction without pretending to prove translation theory again. | literature-derived | not-supplied | Duflo pp.110--115; E757 §§22--25, pp.110--128 |
-| `lem-localization-identifies-simple-modules-with-highest-weight-annihilators` | Lemma/proof architecture: in the regular integral reduction, localisation and orbit/support analysis produce a highest-weight simple with the same annihilator. | Pinpoints the missing geometric engine. | literature-derived | not-supplied | Stanciu §§4--7, pp.9--29; Duflo pp.115--120 |
-| `thm-duflo-every-primitive-ideal-is-highest-weight` | Duflo theorem: every primitive ideal of $U(\mathfrak g)$ is $\operatorname{Ann}L(\lambda)$ for some $\lambda\in\mathfrak h^*$. | Requested classification/surjectivity statement. | literature-derived | not-supplied | Duflo pp.107--120; Stanciu §7, pp.26--29 |
-| `cor-primitive-ideals-are-partitioned-by-dot-orbit-central-character` | Corollary: every primitive ideal lies over a unique dot orbit under the HC isomorphism. | Connects Duflo back to RL-1 without claiming injectivity in $\lambda$. | literature-derived | ai-altered | Duflo theorem; RL-1 HC theorem |
+| `cor-primitive-ideals-are-partitioned-by-dot-orbit-central-character` | Corollary: every primitive ideal with the established central-character property lies over a unique dot orbit under the HC isomorphism. | Uses the earlier primitive-central-character proposition and RL-1 only; it does not consume Duflo. | literature-derived | ai-altered | E757 §18.1, pp.92--93; RL-1 HC theorem |
 | `rem-highest-weights-can-have-the-same-primitive-ideal` | Remark: $\lambda\mapsto\operatorname{Ann}L(\lambda)$ is generally not injective; classifying fibres requires Joseph/Kazhdan--Lusztig theory. | Prevents overstatement of Duflo as a bijection. | literature-derived | not-applicable | E757 §§18, 22, pp.92--95, 110--113 |
 
 **B companion — finite checks and hypothesis tests.**
@@ -662,7 +1204,6 @@ checks CE/Ext and reductive consequences.
 | `cor-kostant-cohomology-in-degrees-zero-and-top` | Corollary: degree zero is the highest-weight line and top degree is the $w_0\cdot\lambda$ line. | Checks both endpoints, including $\mathfrak n^+=0$. | literature-derived | ai-altered | Kostant theorem; Woit pp.4--5 |
 | `cor-kostant-euler-character-recovers-the-weyl-numerator` | Corollary: the alternating cohomology character is $\sum_w(-1)^{\ell(w)}e^{w\cdot\lambda}$. | Independent cohomological bridge to RL-7. | literature-derived | ai-altered | Woit pp.4--6; OWTU §3.5, pp.82--84 |
 | `prop-kostant-n-cohomology-and-the-bgg-resolution-give-the-same-euler-class` | Proposition: applying $\mathfrak n^+$-cohomology/Euler characteristic to the BGG resolution yields the same Weyl alternating sum. | Relates the two proof technologies without rebuilding a spectral sequence. | literature-derived | ai-altered | Woit pp.4--6; HA-15/HA-16; RL-6 |
-| `cor-kostants-theorem-feeds-borel-weil-bott` | Corollary/proof interface: relative Lie algebra cohomology on Bruhat cells supplies the weight/degree pattern in BWB. | Explains the geometry link while leaving sheaf machinery in AV/RL-9. | literature-derived | not-supplied | OWTU §3.5, pp.82--84; Woit pp.5--7 |
 
 **B companion — finite checks and hypothesis tests.**
 
@@ -732,7 +1273,6 @@ Kleshchev §§6--8, pp.77--115 and Perrin §§12, 14, pp.101--110, 121--126.
 | `lem-the-loop-residue-form-is-alternating` | Lemma: residue of an exact Laurent differential is zero, so $\omega(u,v)=-\omega(v,u)$. | First central-extension well-definedness check. | literature-derived | ai-altered | Kleshchev §7.1, pp.92--94; Perrin §12.1, pp.102--103 |
 | `lem-the-loop-residue-form-satisfies-the-lie-two-cocycle-identity` | Lemma: invariance of $(\ ,\ )$ and the residue product rule give the cyclic cocycle identity. | Second well-definedness check. | literature-derived | ai-altered | Kleshchev §7.1, pp.92--94; Perrin §12.1, pp.102--103 |
 | `def-untwisted-affine-central-extension` | Definition: $\widehat{L\mathfrak g}=L\mathfrak g\oplus\mathbb Cc$ with $[x_m,y_n]=[x,y]_{m+n}+m\delta_{m,-n}(x,y)c$. | Core affine bracket with all indices explicit. | literature-derived | not-applicable | Kleshchev §7.1, pp.91--95; Perrin §12.1, pp.101--104 |
-| `prop-the-loop-central-extension-is-universal-for-simple-g` | Proposition: this one-dimensional extension is the universal central extension of $L\mathfrak g$. | Explains why the central term is canonical up to form normalisation. | literature-derived | not-supplied | Kleshchev §7.1, pp.94--95; Perrin §12.1, pp.103--104 |
 | `def-degree-derivation-and-full-untwisted-affine-algebra` | Definition: adjoin $d$ with $[d,x\otimes t^m]=m x\otimes t^m$ and $[d,c]=0$. | Supplies energy grading and the full Cartan. | literature-derived | not-applicable | Kleshchev §7.2, pp.95--98; Perrin §12.1, pp.103--105 |
 | `prop-the-derived-affine-algebra-omits-only-the-degree-derivation` | Proposition: $[\widehat{\mathfrak g},\widehat{\mathfrak g}]=L\mathfrak g\oplus\mathbb Cc$. | Distinguishes full and derived conventions. | literature-derived | ai-altered | Kleshchev §7.2, pp.95--98; Perrin §12.1, pp.104--105 |
 | `def-null-root-central-coroot-and-affine-level` | Definition: $\delta$ vanishes on finite Cartan and $c$ but has $\delta(d)=1$; the level of weight $\Lambda$ is $\Lambda(c)$. | Names imaginary direction and representation parameter. | literature-derived | not-applicable | Kleshchev §6.1, pp.77--82; Perrin §12.2, pp.105--107 |
@@ -743,7 +1283,6 @@ Kleshchev §§6--8, pp.77--115 and Perrin §§12, 14, pp.101--110, 121--126.
 | `def-evaluation-module-at-nonzero-loop-parameter` | Definition: pull a finite-dimensional $\mathfrak g$-module back along $x\otimes f\mapsto f(a)x$, with $c$ acting zero. | Supplies an important level-zero module family. | literature-derived | not-applicable | Kleshchev §7.2, pp.96--98; Perrin §12.1, pp.103--105 |
 | `prop-evaluation-modules-have-level-zero-and-do-not-extend-canonically-over-d` | Proposition: the central cocycle vanishes under evaluation, while a compatible degree action is not canonical. | Marks exact limits of the construction. | literature-derived | ai-altered | Kleshchev §7.2, pp.96--98 |
 | `def-twisted-loop-algebra-from-a-diagram-automorphism` | Definition: take fixed points of the combined finite-order diagram automorphism and loop rotation. | Introduces twisted affine algebras without an analytic loop group. | literature-derived | not-applicable | Kleshchev §8, pp.99--115; Perrin §14, pp.121--126 |
-| `thm-twisted-loop-central-extensions-give-the-twisted-affine-types` | Theorem: after the residue extension and derivation, these fixed-point algebras realise the twisted affine GCMs (with the standard exceptional folding convention). | States the supported classification bridge. | literature-derived | not-supplied | Kleshchev §8, pp.99--115; Perrin §14, pp.121--126 |
 
 **B companion — finite checks and hypothesis tests.**
 
@@ -795,7 +1334,6 @@ Perrin §§10--11, pp.85--100.
 | `ex-simple-root-string-in-an-integrable-kac-moody-module` | Example: display the finite $i$-string and reflection symmetry. | Makes local nilpotence/Weyl invariance concrete. | literature-derived | ai-altered | Kleshchev §3.1--2, pp.37--49 |
 | `cex-a-kac-moody-verma-module-is-not-integrable-in-general` | Counterexample: $f_i$ acts without a terminal vector. | Separates highest weight from integrable. | literature-derived | ai-altered | Kleshchev §§9--10, pp.116--143 |
 | `cex-local-nilpotence-of-only-the-ei-does-not-imply-integrability` | Counterexample: a Verma module has locally nilpotent raising operators but not lowering operators. | Tests both halves of the definition. | ai-altered | ai-altered | Kleshchev §§9--10, pp.116--143 |
-| `cex-an-integrable-module-outside-kac-moody-o-need-not-have-the-stated-decomposition` | Counterexample/interface warning using unrestricted sums/support. | Enforces the $\mathcal O$ hypothesis in complete reducibility. | literature-derived | not-supplied | Kleshchev §10.4, pp.139--143 |
 
 ---
 
@@ -832,8 +1370,6 @@ pp.123--139 and Perrin §§10--11, pp.85--100.
 | `ex-real-and-imaginary-factors-in-the-affine-sl2-denominator` | Example: write the first factors for $\alpha+n\delta$, $-\alpha+(n+1)\delta$, and $n\delta$. | Makes root multiplicities visible. | literature-derived | ai-altered | Kleshchev §§6, 10, pp.77--90, 132--139 |
 | `ex-first-weight-layers-of-the-basic-affine-sl2-character` | Example: compute the first formal layers from the Weyl--Kac quotient. | Finite coefficient check at level one. | literature-derived | ai-altered | Kleshchev §§10--11, pp.127--154 |
 | `cex-using-multiplicity-one-for-imaginary-roots-gives-the-wrong-affine-denominator` | Counterexample in affine rank greater than one. | Tests the exponent $\mathrm{mult}\alpha$. | literature-derived | ai-altered | Kleshchev §§6, 10, pp.77--90, 132--139 |
-| `cex-weyl-kac-is-not-asserted-for-nonsymmetrizable-gcms` | Counter-scope example: the invariant-form/Casimir proof has no supplied input. | Enforces symmetrisability rather than inventing an extension. | literature-derived | not-supplied | Kleshchev §§2, 10, pp.26--36, 127--143 |
-| `cex-formal-character-equality-does-not-imply-q-series-convergence` | Counterexample/interface warning: coefficientwise products may have divergent numerical specialisations. | Keeps analytic statements out of RL. | literature-derived | not-supplied | Kleshchev §9.3, pp.123--126 |
 
 ---
 
@@ -972,10 +1508,10 @@ produced.
 | I44 | Lurie “Borel--Weil--Bott theorem” regular/singular cases | included | `lem-singular-dot-weights-have-zero-line-bundle-cohomology`, `lem-a-regular-weight-has-a-unique-dominant-dot-translate`, `thm-borel-weil-bott`, `ex-borel-weil-bott-on-p1-for-sl2`, `ex-the-sl2-singular-weight-has-no-cohomology`, `ex-an-sl3-weight-with-cohomology-in-degree-one` |
 | I45 | BP §1.1.2 canonical bundle/Serre duality check | included | `prop-the-canonical-line-bundle-of-g-over-b-has-weight-minus-two-rho`, `prop-borel-weil-bott-is-compatible-with-serre-duality`, `cor-borel-weil-bott-euler-character-is-the-weyl-character`, `ex-the-top-degree-bwb-case-and-serre-duality` |
 | I46 | E757 §18.1 “Primitive ideals” | included | `def-annihilator-ideal-of-a-lie-algebra-module`, `def-primitive-ideal-of-an-enveloping-algebra`, `prop-annihilators-of-simple-highest-weight-modules-are-primitive`, `prop-primitive-ideals-are-prime-in-the-noncommutative-sense`, `prop-a-primitive-ideal-determines-a-central-character`, `def-central-reduction-of-the-enveloping-algebra`, `prop-verma-annihilator-contains-the-central-character-ideal` |
-| I47 | Duflo annihilator theorem for Verma modules | included | `thm-duflo-annihilator-theorem-for-verma-modules`, `ex-primitive-ideals-of-usl2-at-a-generic-central-character`, `ex-annihilator-of-the-trivial-sl2-module` |
+| I47 | Duflo annihilator theorem for Verma modules | theorem held; examples retained | `ex-primitive-ideals-of-usl2-at-a-generic-central-character`, `ex-annihilator-of-the-trivial-sl2-module` |
 | I48 | Stanciu §3 associated varieties | included | `def-associated-graded-variety-of-a-two-sided-ideal`, `prop-associated-variety-of-a-primitive-ideal-is-conical-and-g-invariant`, `ex-associated-variety-of-a-finite-dimensional-simple-annihilator` |
-| I49 | Stanciu §§4--6 geometric reduction architecture | included | `lem-duflo-reduction-to-a-regular-integral-central-character`, `lem-localization-identifies-simple-modules-with-highest-weight-annihilators` |
-| I50 | Stanciu §7 / Duflo primitive-ideal theorem | included | `thm-duflo-every-primitive-ideal-is-highest-weight`, `cor-primitive-ideals-are-partitioned-by-dot-orbit-central-character`, `rem-highest-weights-can-have-the-same-primitive-ideal`, `cex-the-central-character-does-not-determine-the-primitive-ideal` |
+| I49 | Stanciu §§4--6 geometric reduction architecture | held | prose target only pending AG localization suppliers |
+| I50 | Stanciu §7 / Duflo primitive-ideal theorem | theorem held | `cor-primitive-ideals-are-partitioned-by-dot-orbit-central-character`, `rem-highest-weights-can-have-the-same-primitive-ideal`, `cex-the-central-character-does-not-determine-the-primitive-ideal` use only their earlier algebraic inputs |
 
 ---
 
@@ -987,24 +1523,24 @@ produced.
 | I52 | OWTU §3.2 Chevalley--Eilenberg cohomology as a representation tool | included | `prop-a-normalizer-acts-on-lie-algebra-cohomology` |
 | I53 | OWTU §3.3 “Casselman--Osborne theorem” | included | `lem-central-actions-on-nilradical-cohomology-factor-through-harish-chandra`, `thm-casselman-osborne-nilradical-cohomology-constraint` |
 | I54 | OWTU §3.4 “Kostant's theorem” / harmonic proof | included | `def-inversion-set-of-a-weyl-group-element`, `lem-extremal-weight-cochain-for-a-weyl-element-is-closed`, `lem-kostant-laplacian-is-scalar-on-weight-components`, `lem-each-kostant-extremal-harmonic-space-is-one-dimensional`, `thm-kostant-nilradical-cohomology-theorem`, `cor-kostant-cohomology-in-degrees-zero-and-top`, `ex-kostant-n-cohomology-for-sl2`, `ex-kostant-n-cohomology-for-the-trivial-sl3-module` |
-| I55 | OWTU §3.5 applications of Kostant cohomology / Woit BWB bridge | included | `cor-kostant-euler-character-recovers-the-weyl-numerator`, `prop-kostant-n-cohomology-and-the-bgg-resolution-give-the-same-euler-class`, `cor-kostants-theorem-feeds-borel-weil-bott`, `ex-degree-one-kostant-classes-correspond-to-simple-reflections`, `cex-whitehead-vanishing-does-not-apply-to-the-nilpotent-radical` |
+| I55 | OWTU §3.5 applications of Kostant cohomology / Woit BWB bridge | included/held | `cor-kostant-euler-character-recovers-the-weyl-numerator`, `prop-kostant-n-cohomology-and-the-bgg-resolution-give-the-same-euler-class`, `ex-degree-one-kostant-classes-correspond-to-simple-reflections`, `cex-whitehead-vanishing-does-not-apply-to-the-nilpotent-radical`; the BWB bridge is prose-only |
 | I56 | Klesh §1.2 “Generalized Cartan matrices” | included | `def-generalized-cartan-matrix` |
 | I57 | Klesh §1.3 “Realizations and the contragredient algebra” | included | `def-realization-of-a-generalized-cartan-matrix`, `prop-minimal-realizations-exist-and-are-unique-up-to-isomorphism`, `def-contragredient-lie-algebra-before-the-maximal-ideal-quotient`, `prop-contragredient-algebra-has-a-triangular-decomposition` |
 | I58 | Klesh §§1.4--1.5 Kac--Moody quotient and Serre relations | included | `lem-the-sum-of-triangularly-disjoint-graded-ideals-is-disjoint-from-h`, `def-kac-moody-algebra-associated-to-a-gcm`, `thm-serre-presentation-of-a-kac-moody-algebra`, `ex-rank-one-gcm-recovers-sl2`, `ex-the-a2-serre-relations` |
 | I59 | Klesh §§3.2,5 “Weyl group and roots” | included | `prop-kac-moody-root-spaces-are-finite-dimensional`, `def-simple-reflections-and-the-kac-moody-weyl-group`, `prop-the-weyl-group-preserves-roots-and-root-multiplicities`, `def-real-and-imaginary-kac-moody-roots`, `prop-real-root-spaces-are-one-dimensional-sl2-roots`, `cex-imaginary-root-spaces-need-not-have-multiplicity-one` |
 | I60 | Klesh §§2,4 symmetrisability and finite/affine/indefinite type | included | `def-symmetrizable-generalized-cartan-matrix`, `thm-invariant-bilinear-form-for-a-symmetrizable-kac-moody-algebra`, `thm-finite-affine-indefinite-trichotomy-for-indecomposable-gcms`, `prop-finite-type-kac-moody-algebras-recover-the-dg-semisimple-algebras`, `ex-the-affine-a1-gcm-has-singular-rank-one-realization-data`, `ex-a-symmetrizable-indefinite-rank-two-gcm` |
-| I61 | Klesh §7.1 “Central extensions of loop algebras” | included | `def-loop-algebra-of-a-simple-lie-algebra`, `def-residue-two-cocycle-on-a-loop-algebra`, `lem-the-loop-residue-form-is-alternating`, `lem-the-loop-residue-form-satisfies-the-lie-two-cocycle-identity`, `def-untwisted-affine-central-extension`, `prop-the-loop-central-extension-is-universal-for-simple-g`, `cex-the-residue-cocycle-depends-on-invariant-form-normalization` |
+| I61 | Klesh §7.1 “Central extensions of loop algebras” | included/held | `def-loop-algebra-of-a-simple-lie-algebra`, `def-residue-two-cocycle-on-a-loop-algebra`, `lem-the-loop-residue-form-is-alternating`, `lem-the-loop-residue-form-satisfies-the-lie-two-cocycle-identity`, `def-untwisted-affine-central-extension`, `cex-the-residue-cocycle-depends-on-invariant-form-normalization`; universality is prose-only until proved |
 | I62 | Klesh §7.2 derivation and loop representations | included | `def-degree-derivation-and-full-untwisted-affine-algebra`, `prop-the-derived-affine-algebra-omits-only-the-degree-derivation`, `def-evaluation-module-at-nonzero-loop-parameter`, `prop-evaluation-modules-have-level-zero-and-do-not-extend-canonically-over-d`, `ex-an-evaluation-module-for-affine-sl2` |
 | I63 | Klesh §6 “Affine root systems” | included | `def-null-root-central-coroot-and-affine-level`, `prop-roots-of-an-untwisted-affine-lie-algebra`, `lem-the-affine-simple-root-alpha-zero-is-delta-minus-the-highest-root`, `ex-affine-sl2-mode-brackets`, `ex-the-heisenberg-subalgebra-of-an-affine-lie-algebra`, `ex-the-affine-a1-simple-roots-and-gcm` |
 | I64 | Perrin §12 untwisted affine construction and affine Weyl group | included | `thm-loop-and-affine-gcm-presentations-are-isomorphic`, `prop-affine-weyl-group-is-a-coroot-lattice-semidir-product`, `cex-omitting-the-central-term-breaks-the-affine-gcm-bracket` |
-| I65 | Klesh §8 / Perrin §14 “Twisted affine algebras” | included | `def-twisted-loop-algebra-from-a-diagram-automorphism`, `thm-twisted-loop-central-extensions-give-the-twisted-affine-types` |
+| I65 | Klesh §8 / Perrin §14 “Twisted affine algebras” | deferred | twisted realization is prose-only until a complete proof decomposition exists |
 | I66 | Klesh §9 “Highest weight modules and category $\mathcal O$” | included | `def-kac-moody-category-o`, `def-kac-moody-verma-module`, `thm-universal-property-and-pbw-character-of-kac-moody-verma-modules`, `thm-kac-moody-verma-module-has-a-unique-simple-quotient` |
 | I67 | Klesh §10.1 “Integrable highest weight modules” | included | `def-integrable-kac-moody-module`, `lem-integrability-can-be-checked-on-simple-root-sl2-subalgebras`, `lem-dominance-is-necessary-for-an-integrable-highest-weight-module`, `lem-simple-root-power-relations-generate-the-integrable-quotient`, `thm-integrability-criterion-for-simple-highest-weight-kac-moody-modules`, `ex-integrable-highest-weight-modules-for-rank-one-gcm`, `cex-a-kac-moody-verma-module-is-not-integrable-in-general`, `cex-local-nilpotence-of-only-the-ei-does-not-imply-integrability` |
 | I68 | Klesh §3 integrable modules and Weyl action | included | `prop-integrable-weight-sets-and-multiplicities-are-weyl-invariant`, `prop-every-integrable-weight-is-weyl-conjugate-toward-the-dominant-chamber`, `ex-simple-root-string-in-an-integrable-kac-moody-module` |
-| I69 | Klesh §10.4 “Complete reducibility” | included | `lem-an-integrable-o-module-is-generated-by-dominant-maximal-weights`, `thm-complete-reducibility-of-integrable-kac-moody-o-modules`, `cor-tensor-products-of-integrable-highest-weight-modules-decompose`, `cex-an-integrable-module-outside-kac-moody-o-need-not-have-the-stated-decomposition` |
+| I69 | Klesh §10.4 “Complete reducibility” | included | `lem-an-integrable-o-module-is-generated-by-dominant-maximal-weights`, `thm-complete-reducibility-of-integrable-kac-moody-o-modules`, `cor-tensor-products-of-integrable-highest-weight-modules-decompose`; the outside-$\mathcal O$ warning is prose-only |
 | I70 | Klesh §11 “Integrable modules for affine algebras” | included | `prop-integrable-affine-highest-weights-have-nonnegative-integral-level`, `prop-level-zero-integrable-affine-highest-weight-simples-are-one-dimensional`, `ex-the-basic-level-one-weight-of-affine-sl2` |
-| I71 | Klesh §9.3 “Formal characters” | included | `def-kac-moody-formal-character-completion`, `rem-weyl-kac-products-are-formal-not-analytic-identities-here`, `cex-formal-character-equality-does-not-imply-q-series-convergence` |
-| I72 | Klesh §10.2 “Denominator identity” | included | `def-kac-moody-weyl-vector`, `def-kac-moody-denominator-product-with-root-multiplicities`, `lem-the-kac-moody-denominator-is-weyl-skew`, `lem-the-denominator-quotient-has-only-imaginary-cone-support`, `lem-casimir-norm-excludes-nonzero-denominator-corrections`, `thm-kac-moody-denominator-identity`, `cex-weyl-kac-is-not-asserted-for-nonsymmetrizable-gcms` |
+| I71 | Klesh §9.3 “Formal characters” | included | `def-kac-moody-formal-character-completion`, `rem-weyl-kac-products-are-formal-not-analytic-identities-here`; analytic convergence warning is prose-only |
+| I72 | Klesh §10.2 “Denominator identity” | included | `def-kac-moody-weyl-vector`, `def-kac-moody-denominator-product-with-root-multiplicities`, `lem-the-kac-moody-denominator-is-weyl-skew`, `lem-the-denominator-quotient-has-only-imaginary-cone-support`, `lem-casimir-norm-excludes-nonzero-denominator-corrections`, `thm-kac-moody-denominator-identity`; nonsymmetrisable scope denial is prose-only |
 | I73 | Klesh §10.3 “Weyl--Kac character formula” | included | `lem-the-shifted-integrable-character-numerator-is-weyl-skew`, `lem-only-the-highest-dot-orbit-can-occur-in-the-integrable-numerator`, `thm-weyl-kac-character-formula`, `def-generalized-kostant-partition-function`, `cor-kac-moody-kostant-multiplicity-formula`, `cor-weyl-kac-specializes-to-the-finite-weyl-character-formula`, `ex-finite-a1-specialization-of-weyl-kac` |
 | I74 | Perrin §11 “Casimir operator and character formula” | included | `lem-casimir-norm-excludes-nonzero-denominator-corrections`, `lem-only-the-highest-dot-orbit-can-occur-in-the-integrable-numerator` |
 | I75 | Klesh §§6,10 affine denominator specialisation | included | `prop-affine-denominator-separates-real-and-imaginary-root-factors`, `ex-real-and-imaginary-factors-in-the-affine-sl2-denominator`, `ex-first-weight-layers-of-the-basic-affine-sl2-character`, `cex-using-multiplicity-one-for-imaginary-roots-gives-the-wrong-affine-denominator` |
@@ -1024,12 +1560,12 @@ decomposition denominator.
 |---|---|
 | E755 §45 definition and sign formula for the Chevalley--Eilenberg differential | already-published at planned DG-29; RL-11 uses its signs verbatim and only adds `prop-lie-algebra-cohomology-is-derived-invariants`. |
 | E755 §48 Whitehead lemmas and semisimple-cohomology vanishing | already-published at planned DG-29; the commission expressly forbids re-minting Whitehead. |
-| E755 §51 Bruhat decomposition and geometry of the flag variety | deferred to the future AV suppliers named in RL-9. Only the representation-theoretic line-bundle interface is included; rebuilding varieties and sheaf cohomology here would violate ownership. |
+| E755 §51 Bruhat decomposition and geometry of the flag variety | deferred to the future AG suppliers named in RL-9. Only the representation-theoretic line-bundle interface is included; rebuilding varieties and sheaf cohomology here would violate ownership. |
 | E757 §8 Shapovalov-form construction outside the determinant named in I10 | inline in `thm-existence-and-uniqueness-of-the-shapovalov-form` and `prop-the-shapovalov-radical-is-the-maximal-submodule`; Liu is the item-level source, E757 is the independent proof check. |
 | E757 §13 harmonic-polynomial decomposition details | inline in `thm-enveloping-algebra-is-free-over-its-center`; individual harmonic-basis choices are proof machinery, not canonical representation-theory statements. |
 | E757 §20.3 BGG resolution statement | inline in `thm-bgg-resolution-of-a-finite-dimensional-simple-module`; Zhou/HumphO supply the decomposed proof, so a second theorem row would be transcription padding. |
 | E757 §21 Kazhdan--Lusztig conjecture/theorem and character formula | out-of-scope: a proof-quality treatment needs Hecke algebras plus geometric/Soergel or perverse-sheaf machinery not supplied by the library. It is not used by any RL dependency. |
-| E757 §§22,25 projective functors, Duflo involutions, and Kazhdan--Lusztig applications | inline only where they support `lem-duflo-reduction-to-a-regular-integral-central-character`; the cell/KL classification of fibres is out-of-scope for the same missing prerequisites as §21. |
+| E757 §§22,25 projective functors, Duflo involutions, and Kazhdan--Lusztig applications | held with the Duflo target; the cell/KL classification of fibres is out-of-scope for the same missing prerequisites as §21. |
 | E757 §27.1 Borel--Weil | inline in `thm-borel-weil`; it is a two-page independent check, while Rui/Ng provide the full geometric treatment. |
 | Sak §4 “Chevalley theorem” | inline in `thm-symmetric-invariants-restrict-to-weyl-invariants`; the general root/invariant setup belongs to DG-31. |
 | Sak §7 Schur--Weyl duality and symmetric-group calculations | inline in `def-schur-module-and-schur-polynomial-character`; the symmetric-group representation theory itself belongs to RG, while RL-8 retains only the $GL_r$ tensor consequence it needs. |
@@ -1046,11 +1582,11 @@ decomposition denominator.
 | Weber pp.1--4 second derivation of Kostant/dimension formulas | inline in `thm-kostant-weight-multiplicity-formula` and `lem-regularized-evaluation-of-the-weyl-character-quotient-at-one`. |
 | Sey §12.1 restriction from rational $GL(V)$ representations to $SL(V)$ | inline in `prop-determinant-twists-translate-glr-highest-weights`; the finite-dimensional classification itself remains DG-32's. |
 | Stembridge bi-alternant formula | inline in `lem-weyl-alternation-extracts-a-dominant-highest-weight-coefficient` and `thm-littlewood-richardson-tensor-product-rule`; RL-7 already owns the general Weyl alternant. |
-| Rui L1, Ng §§3--6, Lurie pp.1--3, and BP §§1.1.2--1.1.3 descriptions of quotient varieties, coherent cohomology, and Serre duality | deferred to AV as foundations, with only the exact representation statements and rank-one proof interfaces minted in RL-9. |
-| Duflo pp.110--120 and Stanciu §§4--7 localisation/D-module machinery | deferred as proof content, not theorem statement: `thm-duflo-every-primitive-ideal-is-highest-weight` is retained with proof `not-supplied`, and the exact missing engine is named by `lem-localization-identifies-simple-modules-with-highest-weight-annihilators`. |
+| Rui L1, Ng §§3--6, Lurie pp.1--3, and BP §§1.1.2--1.1.3 descriptions of quotient varieties, coherent cohomology, and Serre duality | deferred to AG as foundations; RL-9 is wholly held until the exact suppliers exist. |
+| Duflo pp.110--120 and Stanciu §§4--7 localisation/D-module machinery | held as prose-only targets. No theorem or bridge item is retained until the AG localisation machinery and a complete proof decomposition are earlier suppliers. |
 | E757 §18.2 Joseph's classification of primitive-ideal fibres/cells | out-of-scope: it consumes Kazhdan--Lusztig cells and associated-cycle theory absent from the library; Duflo surjectivity remains. |
 | OWTU §3.2 spectral-sequence constructions | inline via HA-15/HA-16 in `prop-kostant-n-cohomology-and-the-bgg-resolution-give-the-same-euler-class`; RL does not rebuild abstract spectral sequences. |
-| Woit's repetition of CE signs and Borel--Weil setup | already-published/deferred respectively at DG-29 and AV; its Kostant-to-BWB argument is retained only as `cor-kostants-theorem-feeds-borel-weil-bott`. |
+| Woit's repetition of CE signs and Borel--Weil setup | already-published/deferred respectively at DG-29 and AG; its Kostant-to-BWB discussion is prose orientation only. |
 | Klesh §1.1 elementary finite-dimensional Lie-algebra review | already-published across DG-27--DG-32 and outside the registry's counted read range. |
 | Klesh §4 and Perrin §8 detailed finite Dynkin tables | already-published at DG-31. Their finite/affine/indefinite criterion alone becomes `thm-finite-affine-indefinite-trichotomy-for-indecomposable-gcms`. |
 | Klesh §5 / Perrin §9 finite-type root-system repetitions | already-published at DG-31; only real-versus-imaginary Kac--Moody phenomena survive in RL-12. |
@@ -1096,9 +1632,9 @@ decomposition denominator.
    invariant-form rows must be authored before RL-1/RL-11; no id amendment is
    requested. RL's Casimir element is algebraic centre material, not a duplicate
    of DG-29's Casimir-operator proof of complete reducibility.
-4. **Future AV contract.** The algebraic-geometry track owes page ids for
+4. **Future AG contract.** The algebraic-geometry track owes page ids for
    $G/B$, associated equivariant line bundles, coherent sheaf cohomology, and
-   Serre duality. Once assigned, replace the descriptive AV interface in RL-9
+   Serre duality. Once assigned, replace the descriptive AG interface in RL-9
    with those exact page ids; do not move Borel--Weil--Bott out of RL.
 5. **Concurrent RG seam.** RG may consume RL-1's algebraic HC-centre and
    infinitesimal-character results. RL consumes no analytic RG theorem, so no
@@ -1113,8 +1649,8 @@ decomposition denominator.
 
 | consumer | future supplier that closes it | why the forward reference is retained |
 |---|---|---|
-| RL-9 Borel--Weil/Borel--Weil--Bott | future AV pages for the quotient variety $G/B$, equivariant line bundles, coherent/sheaf cohomology, projective-space fibres, and Serre duality | Geometry is essential to the requested theorem and belongs to AV under seam §4; dropping BWB to avoid a forward edge is forbidden. |
-| RL-10 geometric proof architecture for Duflo | future AV localisation/$D$-module pages if that track reaches them; otherwise the cited Duflo/Stanciu sources remain the explicit leaf interface | The theorem is a requested landmark, but its localisation proof is not used by later RL items and is therefore honestly retained as `not-supplied`. |
+| RL-9 Borel--Weil/Borel--Weil--Bott | future AG pages for the quotient variety $G/B$, equivariant line bundles, coherent/sheaf cohomology, projective-space fibres, and Serre duality | The whole page is held; a future supplier is never consumed as though already proved. |
+| RL-10 geometric proof architecture for Duflo | future AG localisation/$D$-module pages | Duflo remains a prose target, not an item or dependency, until the complete supplier route exists. |
 
 There is no forward reference to RG: analytic representation theory is outside
 RL, and no RL proof needs it. All other cross-track requirements point backward
@@ -1124,16 +1660,15 @@ inventories.
 ## Unresolved seams and build holds
 
 - There is no scaffold blocker. There are two future build holds: the ten DG
-  Lie pairs are still empty planned suppliers, and RL-9 awaits the named AV
+  Lie pairs are still empty planned suppliers, and RL-9 awaits the named AG
   suppliers. These are recorded rather than used as permission prompts.
-- Duflo's final theorem is retained at the depth honestly supported by this
-  track: its algebraic reductions are scaffolded, while the localisation step
-  and final proof are `not-supplied`. No later item depends on that theorem.
-- The universal loop-extension and twisted-affine realisation proofs are also
-  source-cited leaves with `not-supplied` proofs; all later untwisted character
-  theory depends only on the explicitly proved bracket/root construction.
+- Duflo's final theorem is a prose target only. The algebraic prefix may be
+  scaffolded separately; no later item depends on the held theorem.
+- Universal loop extension and twisted-affine realization are prose targets
+  only; later untwisted character theory depends only on the proved
+  bracket/root construction.
 - The source convention for Borel--Weil line bundles must be reconciled with
-  the future AV quotient convention at build time. The adopted
+  the future AG quotient convention at build time. The adopted
   $G\times_B\mathbb C_{-\lambda}$ convention is fixed above, so reconciliation
   is a sign translation, not an open mathematical choice.
 
@@ -1163,5 +1698,16 @@ The 4.28× ratio is a consequence of decomposing proof architecture, not a
 target filled with generated theorems. The 13 generated ids are finite B-page
 checks, finite counterexamples, or convention stress tests; none is an A-page
 statement or dependency target.
+
+## Representation Theory of Groups reconciliation (2026-09-08)
+
+Delete the accidental published page edge
+`artin-induction-and-rational-characters` ->
+`the-weyl-kac-character-formula-examples` with no replacement. The nine Artin
+items have zero Lie-item dependencies. RG-28 and RG-30 use only the published
+Lie A pages `harish-chandra-isomorphism-casimir-and-central-characters` and
+`verma-modules-and-shapovalov-forms`; they consume neither RL-15 A nor its B.
+RG-10's symmetric-group Schur--Weyl proof is an agreement seam, not a Lie
+dependency. These corrections create no new Lie Phase-2 supplier.
 
 ---

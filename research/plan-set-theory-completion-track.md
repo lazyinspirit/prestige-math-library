@@ -71,7 +71,19 @@ mathematics merely to control frontier selection.
 | SET-3 | `arithmetization-incompleteness-and-relative-consistency` | SET-2 |
 | SET-4 | `well-founded-relations-rank-and-the-cumulative-hierarchy` | published ordinals/transfinite recursion |
 | SET-5 | `reflection-absoluteness-and-elementary-submodels` | SET-2, SET-4 |
-| SET-6 | `weak-choice-principles-and-sierpinskis-theorem` | SET-4; published cardinal arithmetic, filters/ultrafilters, and metric compactness (for the already-homed DC interface) |
+| SET-6 | `weak-choice-principles-and-sierpinskis-theorem` | SET-4; published cardinal arithmetic, filters/ultrafilters and `countability-and-uncountability`; the new earlier `dependent-choice-and-the-complete-metric-baire-theorem` A page |
+
+**Dependent Choice rehome reconciliation (2026-09-08).** Before SET-6 is
+built, Phase 3 must rehome the already-published `def-dependent-choice` from
+`compactness-in-metric-spaces` to `countability-and-uncountability`, immediately
+after `def-countable-choice`. Replace its inapplicable `def-sequence`
+dependency and both matching body links with `def-function`: the former defines
+only real-valued sequences and cannot type a map from the naturals into an
+arbitrary set. This removes metric compactness from SET-6's prerequisite seam.
+The binding Phase-2 cut in §7.9 now places a clean, newly named total-relation
+DC interface before SET-6; SET-6 requires and cites that interface rather than
+defining DC again. The stable published `def-dependent-choice` rehome remains
+a Phase-3 consumer repair, not a prerequisite for Phase 2.
 | SET-7 | `boolean-algebras-stone-duality-and-the-prime-ideal-theorem` | SET-2; published compactness (whose closure contains filters/ultrafilters) |
 | SET-8 | `club-stationary-sets-and-pressing-down` | SET-1; published cardinal arithmetic/cofinality |
 | SET-9 | `set-theoretic-trees-delta-systems-and-diamond` | SET-8 |
@@ -86,8 +98,8 @@ mathematics merely to control frontier selection.
 | SET-18 | `permutation-models-and-transfer-to-zf` | SET-14, SET-6 |
 | SET-19 | `symmetric-extensions-and-basic-choice-failure-models` | SET-18, SET-12 |
 | SET-20 | `symmetric-collapse-and-ultrafilter-free-models` | SET-19, SET-15 |
-| SET-21 | `halpern-lauchli-and-bpi-without-choice` | SET-20 |
-| SET-22 | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | SET-21; published complete-metrizability/Baire page (whose closure includes compactness, Urysohn and paracompactness) |
+| SET-21 | `halpern-lauchli-and-bpi-without-choice` | SET-20; the new earlier `boolean-prime-ideal-theorem-in-the-basic-cohen-model` A page |
+| SET-22 | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | SET-21; the new earlier `dependent-choice-and-the-complete-metric-baire-theorem` A page |
 | SET-23 | `large-cardinals-measures-and-elementary-embeddings` | SET-5, SET-7, SET-8 |
 | SET-24 | `solovays-model-and-regularity-of-all-sets-of-reals` | SET-23, SET-20, SET-10 |
 | SET-25 | `shelahs-baire-property-model-and-inner-model-lower-bounds` | SET-24, SET-16 |
@@ -247,8 +259,10 @@ changes membership representatives and must precede transitive-model language.
 
 ## SET-6. Weak Choice Principles and Sierpiński's Theorem
 
-**Items.** `AC_omega`, choice for pairs, DC, multiple choice and DMC;
-implications AC => DC => `AC_omega`; BPI equivalent to the ultrafilter lemma
+**Items.** `AC_omega`, choice for pairs, multiple choice and DMC; the precise
+DC principle and its prescribed-start equivalence are cited from the earlier
+Phase-2 replacement page in §7.9 rather than redefined here; implications AC
+=> DC => `AC_omega`; BPI equivalent to the ultrafilter lemma
 is deferred to SET-7, where Boolean algebras exist; finite-character/Tukey
 forms; Dedekind-infinite versus
 having a countable subset; countable unions of countable sets; Hartogs bounds
@@ -706,3 +720,562 @@ Woodin-cardinal determinacy and `P_max`, saturated ideals, forcing geology,
 class-forcing preservation in general, infinitary model theory beyond compactness,
 and the full modern singular-cardinal program. None is needed as a hidden lemma
 for a promised item above.
+
+---
+
+# 7. Binding published audit and completion-track reconciliation (2026-09-08)
+
+This section supersedes any earlier sentence describing all 31 pairs as future
+work. This file is the canonical prose authority for the completion sequence,
+the replacements for `deferred-set-theory-beyond-choice`, and the Phase-3
+repairs below. `plan-topology-set-theory-track.md` remains historical design
+authority only for the published ST-1 `ordinal-arithmetic` and ST-2
+`cardinal-arithmetic-and-cofinality` pairs, subject to its 2026-09-08 binding
+amendment. Published Markdown is read-only evidence; `plan-spec.json` is the
+owner-amended machine plan.
+
+SET-1, SET-4, SET-6 and SET-8 and their B companions are now published;
+SET-2--3, SET-5, SET-7 and SET-9--31 remain planned. The older spine has six
+further published pairs (ZFC constructions; relations/functions/quotients;
+order/Zorn/choice; filters/ultrafilters; ordinal arithmetic; cardinal
+arithmetic/cofinality). Two legacy A pages also live in `library/foundations`:
+`construction-of-the-natural-numbers` (spec category `published`) and
+`ordinals-and-transfinite-recursion` (its registered B row is empty and has no
+live Markdown). The read-only audit covered 22 live pages, ten complete pairs,
+the two singleton A pages, and 402 live item/example memberships.
+
+## 7.1 Recorded-Not-Proved closure and prose defects
+
+The 402-item published Foundations graph has **zero direct and zero transitive**
+`deps`/`justified_by` paths to the 22 deferred catalogue items; zero published-
+to-draft dependencies; and zero cross-page forward dependencies. The only
+nonempty well-definedness fields are legitimate same-page forward justifiers:
+`def-filter-base -> lem-filter-base-generates`,
+`def-first-uncountable-ordinal ->
+thm-omega-one-is-the-least-uncountable-ordinal`, and
+`def-cofinality -> thm-cofinality-basics`.
+
+The prose scan nevertheless found three direct catalogue uses. These are
+defects, not exemptions:
+
+| published item | forbidden use | exact deferred repair |
+|---|---|---|
+| `def-well-order` | `external_refs: [rem-cohen-first-model]` plus the Dedekind-finite-model paragraph | remove the ref and paragraph; retain only the positive definition and locally proved well-order facts |
+| `def-ultrafilter` | `external_refs: [rem-feferman-no-free-ultrafilter-in-zf, rem-blass-model-without-ultrafilters]` plus both model paragraphs | remove both refs and both quoted conclusions; retain the definition and locally proved principal/free distinction |
+| `fs-every-ultrafilter-principal` | `external_refs` cites both `rem-blass-model-without-ultrafilters` and the Recorded-Not-Proved `rem-sierpinski-ultrafilter-not-measurable`; its remarks quote both | remove the entire `external_refs` field and both model/regularity paragraphs; its refutation already closes from `thm-ultrafilter-lemma` |
+
+Do not repoint these definitions to late SET-19/20 results: that would make the
+entire downstream library consume late consistency machinery. The later
+theorems remain separate destinations with zero current published consumers.
+
+The catalogue may not be laundered through another category or orientation
+ledger. The following non-catalogue-ID model claims are also exact deferred
+repairs:
+
+- `def-countable-choice`: delete both `external_refs` and its Cohen,
+  Feferman--Levy and DC-separation paragraphs; keep definitions and locally
+  proved implication directions.
+- `thm-ultrafilter-lemma`: delete the unproved claims that UFL is unprovable in
+  ZF and strictly weaker than AC; `rem-choice-strengths` remains the honest
+  proved upper-bound ledger.
+- `fs-transfinite-induction-needs-choice`: delete the unproved final DC
+  separation claims; the refutation itself is choice free.
+- `thm-countable-subsets-of-omega-one-are-bounded` and
+  `cex-omega-one-has-no-at-most-countable-cofinal-subset`: retain their explicit
+  `AC_omega` hypothesis but delete the unproved Feferman--Levy sharpness claim.
+  `rem-omega-one-and-the-cost-of-choice` may record only the positive cost of
+  the written proof.
+- `thm-omega-one-is-the-least-uncountable-ordinal`: remove the CH-independence
+  sentence; say only that no continuum comparison is proved.
+- `lem-omega-least-limit-ordinal`: replace consistency wording by the internal
+  implication that a limit ordinal supplies an inductive set, hence implies
+  Infinity over the remaining axioms.
+- `def-axiom-schema-of-separation`: replace “keeps the schema consistent” by
+  the internal fact that bounded separation blocks Russell's displayed
+  contradiction.
+
+No future item may use any of these claims through `deps`, `justified_by`,
+well-definedness, or a load-bearing forward reference. Section 4 is only a
+target specification.
+
+## 7.2 Page prerequisites, DC, and B-leaf repairs
+
+The owner must make these exact machine-plan amendments:
+
+1. Add `countability-and-uncountability` and
+   `linear-independence-bases-and-dimension` to
+   `ordinals-and-transfinite-recursion.requires`. The first supplies
+   `lem-nat-order-is-membership`, `lem-pigeonhole`, `def-countable-choice` and
+   the corrected DC home; the second supplies
+   `thm-every-independent-set-extends-to-a-basis` and
+   `cor-every-vector-space-has-a-basis`, all already consumed by the page.
+2. Preserve the commissioned `def-dependent-choice` repair: move it from
+   `compactness-in-metric-spaces` to `countability-and-uncountability`
+   immediately after `def-countable-choice`; replace its inapplicable
+   real-valued `def-sequence` dependency and both body links by `def-function`.
+   In SET-6, replace the prerequisite `compactness-in-metric-spaces` by
+   `countability-and-uncountability`. Do not add metric compactness to the
+   ordinal page.
+3. Move `cantor-set-baire-and-measure-zero` from the B page
+   `cardinal-arithmetic-and-cofinality-examples.requires` to its A companion;
+   the B must require only `cardinal-arithmetic-and-cofinality`.
+4. The B item `ex-the-cardinality-of-the-continuum` is consumed externally by
+   `ex-cardinal-functions-of-the-lower-limit-line`. Add the A supplier
+   `thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero` immediately
+   before the companion, using the same ZF bijection proof, and repoint only
+   that external topology dependency. The three local B consumers may remain.
+
+Every other published and planned Foundations B row requires only its A
+companion, and no other B-homed item is a dependency target outside its B.
+
+## 7.3 Exact supplier-consumer impact
+
+`def-dependent-choice` has 83 direct published consumers. The exact sorted set
+is: `cex-the-composition-of-two-absolutely-continuous-functions-need-not-be-absolutely-continuous`,
+`cor-a-compact-hausdorff-space-is-tychonoff`, `cor-bolzano-weierstrass-in-rn`,
+`cor-categories-of-models-for-algebraic-theories-are-complete-and-cocomplete`,
+`cor-countable-independent-copies-exist`,
+`cor-equicontinuous-bounded-sequence-has-a-uniformly-convergent-subsequence`,
+`cor-euclidean-compactness-equivalence-chart`,
+`cor-radical-ideals-as-intersections-of-minimal-primes-noetherian`,
+`cor-separated-uniformizable-iff-tychonoff`,
+`cor-tietze-for-unbounded-and-open-interval-valued-maps`,
+`cor-topological-groups-are-completely-regular`,
+`cor-urysohns-lemma-closes-the-separation-chain`,
+`def-multiple-and-dependent-multiple-choice`,
+`ex-change-of-variables-through-an-increasing-absolutely-continuous-map-with-a-positive-measure-flat-set`,
+`ex-distance-functions-form-a-compact-family-in-c01`,
+`ex-iid-sequence-with-a-prescribed-law`, `ex-infinite-coin-toss-space`,
+`ex-integration-by-parts-for-absolutely-continuous-functions`,
+`ex-the-metric-urysohn-function-costs-no-choice`,
+`lem-bounded-above-complexes-admit-projective-replacements`,
+`lem-bounded-below-complexes-admit-injective-replacements`,
+`lem-chain-rule-for-an-indefinite-integral-after-an-absolutely-continuous-composition`,
+`lem-compact-hausdorff-targets-embed-in-unit-cubes-under-dependent-choice`,
+`lem-countable-product-cylinder-premeasure-is-countably-additive`,
+`lem-dependent-choice-along-a-sequence-of-relations`,
+`lem-dependent-choice-riesz-separated-unit-sequence`,
+`lem-finitary-monad-algebras-have-coequalizers-under-dependent-choice`,
+`lem-finite-refining-small-diameter-covers-of-compact-metric-spaces`,
+`lem-noetherian-ring-maximal-element-annihilator-exists`,
+`lem-normal-sequences-of-entourages`,
+`lem-parameter-power-series-map-injective-by-dimension`,
+`lem-parameter-power-series-subring-makes-ring-finite`,
+`lem-samuel-uniformity-preserves-the-induced-topology-under-dependent-choice`,
+`lem-starting-point-free-dependent-choice`,
+`lem-totally-bounded-uniformities-equal-their-samuel-uniformity`,
+`lem-uniformizable-spaces-are-completely-regular`, `rem-choice-ledger`,
+`rem-compactness-choice-ledger-metric`,
+`rem-compactness-conventions-and-choice-ledger`,
+`rem-the-choice-cost-of-urysohns-lemma-and-of-tietzes-theorem`,
+`thm-a-bounded-above-complex-of-projectives-is-homotopically-projective`,
+`thm-a-bounded-below-complex-of-injectives-is-homotopically-injective`,
+`thm-a-finitary-monad-on-a-complete-cocomplete-locally-small-category-has-complete-and-cocomplete-algebras`,
+`thm-a-locally-compact-hausdorff-space-is-completely-regular`,
+`thm-a-space-is-perfectly-normal-iff-it-is-normal-and-every-closed-set-is-a-zero-set`,
+`thm-an-absolutely-continuous-function-with-zero-derivative-almost-everywhere-is-constant`,
+`thm-baire-category-for-complete-metric-spaces`,
+`thm-baire-category-locally-compact-hausdorff`,
+`thm-bounded-below-iff-injective-with-closed-range`,
+`thm-bounded-left-inverse-iff-range-is-complemented`,
+`thm-bounded-right-inverse-iff-kernel-is-complemented`,
+`thm-cantor-space-surjects-onto-every-nonempty-compact-metric-space`,
+`thm-cech-complete-spaces-are-baire`,
+`thm-change-of-variables-for-an-absolutely-continuous-map-under-an-absolutely-continuous-composition-hypothesis`,
+`thm-change-of-variables-for-an-increasing-absolutely-continuous-function`,
+`thm-choice-implies-dependent-implies-countable-choice`,
+`thm-closability-sequential-criterion`, `thm-compactness-variants-hierarchy`,
+`thm-complete-nakayama-lemma`,
+`thm-completely-metrizable-subspaces-of-metric-spaces-are-g-delta`,
+`thm-countable-product-of-probability-spaces`,
+`thm-countably-exceptional-differentiability-and-integrable-derivative-imply-absolute-continuity`,
+`thm-dependent-choice-detects-non-well-orders`,
+`thm-entourage-uniformities-are-generated-by-gauges`,
+`thm-every-nonempty-polish-space-is-a-continuous-image-of-baire-space`,
+`thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions`,
+`thm-horseshoe-lemma-for-projective-resolutions`,
+`thm-integration-by-parts-for-absolutely-continuous-functions`,
+`thm-lasker-noether-primary-decomposition`,
+`thm-lipschitz-characterisation-within-absolutely-continuous-functions`,
+`thm-metric-compactness-equivalences`,
+`thm-mini-vitali-fine-cover-characterisation-of-null-sets`,
+`thm-projective-comparison-map-exists`,
+`thm-projective-comparison-maps-are-unique-up-to-chain-homotopy`,
+`thm-sequentially-compact-implies-totally-bounded`,
+`thm-sokal-gliding-hump-uniform-boundedness`,
+`thm-subordinate-partitions-of-unity-exist`,
+`thm-three-definitions-of-uniform-space-are-equivalent`,
+`thm-tietze-extension-theorem`,
+`thm-total-variation-function-of-an-absolutely-continuous-function`,
+`thm-uniformizable-iff-completely-regular`, `thm-urysohn-lemma`, and
+`thm-vitali-covering-theorem-for-fine-covers-on-the-line`.
+
+Its complete transitive published closure is 3,522 items grouped over 297 page
+homes, plus 24 currently unhomed published items. Since the repair changes only
+the home and spelling of the definition dependency, no consumer edge changes.
+The exact closure is therefore the reverse `deps + justified_by` reachability
+set of the 83 IDs above; the sorted `page-id<TAB>item-id` serialization has
+SHA-256 `088790f25754324deb44aa4c3b6d3f21ebf58a5864a5beeb9c43b52352eb7346`.
+The root list, grouping rule, cardinalities and digest are the binding exact map
+without embedding a generated 3,522-row appendix in prose.
+
+The new continuum A theorem has the exact direct published consumer
+`ex-cardinal-functions-of-the-lower-limit-line`. Its complete published closure,
+all on `countability-axioms-and-cardinal-functions-examples`, is that item plus
+`ex-countability-profile-of-the-lower-limit-plane`,
+`cex-lindelofness-is-not-productive-worked`, and
+`cex-separability-is-not-hereditary-worked`.
+
+Exactly three deferred catalogue roots have a published non-catalogue YAML
+consumer. They are Phase-2 roots, though none of their consumers is Foundations-
+homed:
+
+| exact planned supplier | direct published consumers | complete published impact by home |
+|---|---|---|
+| `thm-basic-cohen-symmetric-model-satisfies-bpi-and-not-ac` (SET-21) | `rem-choice-strength-of-hahn-banach` | `the-analytic-hahn-banach-theorem`: that item; its B: `rem-hahn-banach-open-choice-questions` |
+| `thm-complete-metric-baire-is-equivalent-to-dependent-choice-over-zf` (SET-22) | `thm-banach-space-no-countably-infinite-hamel-basis`, `rem-general-complete-metric-baire-proof-would-overstate-the-choice-cost` | `finite-dimensional-normed-spaces-and-riesz-lemma`: those two; its B: `cex-polynomial-space-admits-no-complete-norm` |
+| `thm-suslin-hypothesis-is-independent-relative-to-zfc` (SET-17) | `rem-suslin-line-non-ccc-square-unverified` | `open-problems-and-research-frontier`: that item only |
+
+Every other deferred-target supplier has **zero direct and zero transitive
+published consumers**. Fix these exact planned IDs now:
+`thm-l-is-an-inner-model-of-zfc-and-gch`,
+`thm-relative-consistency-of-ac-and-not-ac-over-zf`,
+`thm-relative-independence-of-ch-and-gch-over-zfc`,
+`thm-arbitrary-set-gch-implies-choice-over-zf`,
+`thm-basic-cohen-model-has-an-infinite-dedekind-finite-set-of-reals`,
+`thm-fraenkel-socks-model-and-jech-sochor-transfer`,
+`thm-feferman-levy-model-has-singular-omega-one-and-a-countable-union-of-countable-reals`,
+`thm-feferman-model-has-no-free-ultrafilter-on-omega`,
+`thm-blass-model-has-only-principal-ultrafilters`,
+`thm-solovay-model-regularity-relative-to-an-inaccessible`,
+`thm-shelah-baire-property-model-and-inner-model-lower-bound`,
+`thm-gitik-model-has-all-uncountable-cardinals-singular`,
+`thm-urysohn-choice-strength-bounds-and-separations`,
+`thm-stone-paracompactness-choice-strength-bounds-and-separations`,
+`thm-tychonoff-product-forms-and-their-choice-strengths`,
+`thm-martins-axiom-relative-consistency-and-standard-consequences`,
+`thm-normal-moore-space-conjecture-consistency-bounds`,
+`thm-l-spaces-and-s-spaces-zfc-and-pfa-results`, and
+`thm-dowker-space-existence-and-size-results`.
+
+These zero-consumer items must not be wired into published definitions or
+orientation remarks merely to manufacture replacement links.
+
+## 7.4 Published metadata snapshot amendments
+
+For every registered published Foundations item, the owner must set the spec
+`deps` array to the current item-frontmatter `deps` array, preserving order.
+There are 149 such mismatches, grouped exactly as follows:
+
+| page | dependency-array replacements | title replacements |
+|---|---:|---:|
+| `the-zfc-axioms-and-basic-set-constructions` | 11 | 0 |
+| its B companion | 5 | 0 |
+| `relations-functions-and-quotients` | 16 | 4 |
+| its B companion | 8 | 0 |
+| `order-zorn-and-the-axiom-of-choice` | 10 | 0 |
+| its B companion | 8 | 0 |
+| `filters-and-ultrafilters` | 11 | 0 |
+| its B companion | 0 | 2 |
+| `ordinals-and-transfinite-recursion` | 14 | 0 |
+| `ordinal-arithmetic` | 20 | 0 |
+| its B companion | 8 | 1 |
+| `cardinal-arithmetic-and-cofinality` | 25 | 10 |
+| its B companion | 8 | 7 |
+| `formal-set-theoretic-syntax-structures-and-satisfaction` | 1 | 0 |
+| `well-founded-relations-rank-and-the-cumulative-hierarchy` | 4 | 0 |
+
+The 24 exact title-replacement IDs are
+`thm-reflexive-and-irreflexive-orders-correspond`,
+`cor-a-function-with-nonempty-domain-is-injective-exactly-when-it-has-a-left-inverse`,
+`def-product-of-an-indexed-family`, `prop-products-over-small-index-sets`,
+`ex-frechet-filter`, `ex-free-ultrafilter-on-naturals`,
+`ex-an-increasing-sequence-in-omega-one-has-a-countable-supremum`,
+`lem-cardinal-operations-are-well-defined`, `lem-cardinal-arithmetic-basic-laws`,
+`thm-cardinal-arithmetic-agrees-with-finite-counting`,
+`thm-cardinal-power-set-and-cantor`, `lem-successor-cardinal-exists`,
+`cor-the-aleph-and-beth-hierarchies-are-well-defined`, `thm-tarski-square`,
+`thm-cofinality-basics`, `thm-konig`, `cor-cofinality-of-a-cardinal-power`,
+`ex-cardinal-absorption-computed`, `ex-the-cardinality-of-the-continuum`,
+`ex-aleph-one-is-at-most-the-continuum`,
+`ex-a-singular-cardinal-of-uncountable-cofinality`, `ex-an-aleph-fixed-point`,
+`ex-the-beth-hierarchy-computed`, and
+`ex-counting-functions-and-subsets-of-the-continuum`.
+
+The dependency replacement is exact by value, not merely by count: the source
+of truth for each of the 149 values is that same ID's published frontmatter at
+the audit commit. This prevents copying a second stale array into prose.
+`construction-of-the-natural-numbers` remains a legacy empty spec inventory
+despite 34 live A items and five displayed example items. Do not silently
+change its category or breach the 30-item ceiling; the owner must grant an
+explicit legacy exception or split/register a companion before populating it.
+
+## 7.5 Cross-category ownership seams
+
+- Category Theory owns accessible/presentable categories and accessibility
+  machinery. SET-4's “accessible pointed graph” is only the membership-graph
+  notion. Its Grothendieck-universe items neither assert an inaccessible exists
+  nor supply a category-theoretic universe-change theorem.
+- Abstract Algebra owns rings, ideals, quotients and homomorphism algebra.
+  SET-7 defines Boolean algebras and Boolean ideals for Stone/BPI and must prove
+  its bridge explicitly; a commutative-ring prime-ideal theorem is not BPI.
+  Algebraic Geometry owns `Spec` and schemes; Stone spectrum is not scheme
+  spectrum.
+- `fs-ordinals-form-a-set` has exactly two direct and transitive published
+  consumers, both on
+  `reflective-subcategories-and-the-adjoint-functor-theorems-examples`:
+  `cex-a-category-that-is-not-well-powered` and
+  `cex-a-complete-category-whose-coseparating-sets-are-never-small`.
+  `fs-every-ultrafilter-principal` has exactly one direct/transitive consumer,
+  `ex-the-ultrafilter-monad-on-a-finite-set`, on
+  `monads-comonads-and-their-algebras-examples`. These suppliers are A-homed in
+  the canonical spec and therefore do not violate B-leaf discipline.
+- The real-analysis home of DC and the topology continuum repair are binding
+  interfaces. A missing A input must never be patched by adding it directly to
+  a Foundations B page.
+
+## 7.6 Full-text evidence and source blockers
+
+- S. Feferman, *Some applications of the notions of forcing and generic sets*,
+  Fundamenta Mathematicae 56 (1964/65), 325--345, DOI
+  `10.4064/fm-56-3-325-345`: the full publisher scan was recovered. Theorem
+  4.12 and proof, printed pp. 343--344, use finitely many generic-set parameters
+  and a tail-complement transform of the next generic set to contradict a
+  supposed nonprincipal prime ideal. This is the authoritative correction to
+  the invalid finite-bit-flip summary.
+- M. Morillon, *The power of DMC*, full author PDF, p. 6, records that DMC plus
+  countable choice for finite sets implies DC. The full Japanese note *On
+  dependent choice*, Definition and Propositions 6--7, PDF pp. 4--5, confirms
+  the finite-level formulation and prescribed-start equivalence. The published
+  SET-6 proof supplies the easy converse directions directly.
+- A. Blass, *A model without ultrafilters*, Bull. Acad. Polon. Sci. 25 (1977),
+  329--331: bibliographic identity and a later primary-author confirmation were
+  recovered, but no authoritative full text of the proof was accessible.
+  `thm-blass-model-has-only-principal-ultrafilters` remains **blocked**;
+  secondary summaries are not proof sources.
+- Andretta--Notaro, *Does DC imply AC_omega uniformly?*, JSL (2024), full
+  Cambridge PDF, §5.2, printed pp. 1560--1561, confirms the Feferman--Levy
+  consequence used for orientation but does not replace the required original
+  symmetric-model construction. SET-20 remains gated on full construction.
+
+## 7.7 Validation gate
+
+Before any remaining pair is authored, rerun spec validation; ID collision and
+ownership checks; direct/transitive deferred-catalogue closure over `deps` and
+`justified_by`; a prose-link scan for all 22 catalogue IDs; published-to-draft
+and forward-edge checks; A-prerequisite coverage; and B dependency-target
+checks. Any catalogue closure or external B target blocks publication.
+Relative-consistency items must separately type the antecedent, object theory,
+metatheory, semantic model construction and formal transfer.
+
+## 7.8 Topology reconciliation (2026-09-08)
+
+Topology's audit confirms that `def-dependent-choice` keeps its stable ID but
+moves to `countability-and-uncountability` after `def-countable-choice` and
+uses `def-function`. Its 33 direct Topology consumers remain part of the exact
+83-consumer global DC ledger. Foundations also owns
+`thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero`; it replaces the
+Topology B-example supplier for `ex-cardinal-functions-of-the-lower-limit-line`
+and its exact four-item Topology impact cone already recorded in §7.3.
+
+Topology must remove all eight `external_refs` to the recorded catalogue from
+seven published items and delete any sharp independence/lower-bound prose not
+proved in the library. The internal Tychonoff, Baire, and Urysohn proofs may
+state only their actual sufficient hypotheses. No catalogue item becomes a
+dependency, justification, or proof source.
+
+## 7.9 Phase-2 replacement cut for the SET-21/22 consumer roots (2026-09-08)
+
+This subsection is binding over the two Phase-2 classifications in §7.3.  The
+old SET-21 root reaches source-blocked SET-20, and the old SET-22 root reaches
+SET-21/20 while sharing a page with the unresolved `DMC < DC` assertion.  They
+are therefore **not** Phase-2 supplier roots.  The cheapest adequate cut is two
+new pairs, because the two interfaces have disjoint mathematics and forcing
+the Baire theorem through the Cohen-model proof would create a gratuitous
+dependency.  These pairs prove only the interfaces required by the published
+consumers and have no dependency, justification, or proof link to the recorded
+catalogue.
+
+### Exact machine-plan page objects
+
+The following four fractional orders and every page/item id below were unused
+before integration.  At the final validation pass, the shared live plan has
+1,616 pages and contains exactly these four empty shells; this audit did not
+edit `plan-spec.json`.  The DC pair is placed after SET-5 B (664) and before
+SET-6 A (665); the BPI pair is placed after SET-19 B (692) and before SET-20 A
+(693).
+
+```json
+[
+  {
+    "id": "boolean-prime-ideal-theorem-in-the-basic-cohen-model",
+    "title": "The Boolean Prime Ideal Theorem in the Basic Cohen Model",
+    "order": 692.1,
+    "kind": "A",
+    "category": "foundations",
+    "requires": ["symmetric-extensions-and-basic-choice-failure-models"],
+    "companion": "boolean-prime-ideal-theorem-in-the-basic-cohen-model-examples",
+    "items": []
+  },
+  {
+    "id": "boolean-prime-ideal-theorem-in-the-basic-cohen-model-examples",
+    "title": "The Boolean Prime Ideal Theorem in the Basic Cohen Model — Examples",
+    "order": 692.2,
+    "kind": "B",
+    "category": "foundations",
+    "requires": ["boolean-prime-ideal-theorem-in-the-basic-cohen-model"],
+    "companion": "boolean-prime-ideal-theorem-in-the-basic-cohen-model",
+    "items": []
+  },
+  {
+    "id": "dependent-choice-and-the-complete-metric-baire-theorem",
+    "title": "Dependent Choice and the Complete-Metric Baire Theorem",
+    "order": 664.1,
+    "kind": "A",
+    "category": "foundations",
+    "requires": [
+      "relations-functions-and-quotients",
+      "completeness-and-uniform-continuity"
+    ],
+    "companion": "dependent-choice-and-the-complete-metric-baire-theorem-examples",
+    "items": []
+  },
+  {
+    "id": "dependent-choice-and-the-complete-metric-baire-theorem-examples",
+    "title": "Dependent Choice and the Complete-Metric Baire Theorem — Examples",
+    "order": 664.2,
+    "kind": "B",
+    "category": "foundations",
+    "requires": ["dependent-choice-and-the-complete-metric-baire-theorem"],
+    "companion": "dependent-choice-and-the-complete-metric-baire-theorem",
+    "items": []
+  }
+]
+```
+
+The plan integration step has added only these four empty `items: []` shells.  The
+item ids in the next table are the binding hydration inventory for authorship,
+not pre-hydrated plan records.
+
+Both A prerequisite lists contain only strictly earlier A pages.  SET-19's
+closure supplies SET-7 Boolean algebra/BPI vocabulary, forcing and symmetric-
+model machinery, the failure of AC in the basic Cohen model, and SET-14's
+formal consistency transfer.  The DC/Baire page uses only the clean published
+relations/functions A page and `completeness-and-uniform-continuity`; it locally
+states the Baire and DC principles and proves both directions, so it has no
+edge to SET-6, SET-20/21/22, or the published
+`complete-metrizability-and-baire` page with its unrepaired Recorded
+orientation links.  Each B page has the singleton requirement consisting of
+its A companion and is a dependency leaf.
+
+### Exact item titles and proof order
+
+| order | id | kind | exact title | adequate earlier inputs |
+|---:|---|---|---|---|
+| 1 | `lem-basic-cohen-model-schema-of-continuity` | lemma | Schema of continuity in the basic Cohen model | SET-19 forcing automorphisms, finite supports, symmetry lemma and canonical Cohen names |
+| 2 | `cor-basic-cohen-model-finite-set-continuity` | corollary | Finite parameter sets admit disjoint clopen supports | preceding continuity lemma |
+| 3 | `lem-ordinal-definable-maximal-proper-ideal-in-the-basic-cohen-model` | lemma | A supported Boolean algebra has an ordinal-definable maximal proper ideal | SET-7 Boolean ideals and SET-19 finite-parameter HOD representation |
+| 4 | `lem-basic-cohen-continuity-forces-the-maximal-ideal-to-be-prime` | lemma | Continuity forces the supported maximal ideal to be prime | preceding corollary and maximal-ideal lemma |
+| 5 | `thm-basic-cohen-model-satisfies-bpi-and-fails-choice` | theorem | The basic Cohen model satisfies BPI and fails Choice | preceding primeness lemma plus SET-19's proved Dedekind-finite generic set |
+| 6 | `cor-relative-consistency-of-bpi-without-choice-over-zf` | corollary | Relative consistency of BPI without Choice over ZF | preceding semantic theorem plus SET-14's formal finite-fragment transfer through SET-19; explicitly prove `Con(ZF) -> Con(ZF+BPI+not AC)` rather than inferring it from a CTM |
+| B1 | `ex-continuity-contradiction-for-a-supported-boolean-algebra` | example | The finite Boolean expansion contradiction in the supported-ideal proof | companion A only; zero consumers |
+| 1 | `def-serial-relation-dependent-choice-principle-over-zf` | definition | The serial-relation Dependent Choice principle over ZF | published relation and function definitions only |
+| 2 | `lem-prescribed-start-and-starting-point-free-serial-choice-are-equivalent-in-zf` | lemma | Prescribed-start and starting-point-free serial choice are equivalent in ZF | preceding definition; use tagged finite paths for the prescribed start |
+| 3 | `def-complete-metric-baire-principle-over-zf` | definition | The complete-metric Baire principle over ZF | published metric-space and completeness definitions; locally define nowhere dense, meagre and Baire |
+| 4 | `lem-open-dense-and-closed-nowhere-dense-baire-forms-are-equivalent-in-zf` | lemma | Open-dense and closed-nowhere-dense Baire forms are equivalent in ZF | preceding Baire definition and indexed De Morgan laws from relations/functions closure |
+| 5 | `thm-serial-dependent-choice-implies-complete-metric-baire-over-zf` | theorem | Serial Dependent Choice implies the complete-metric Baire principle over ZF | preceding DC and Baire items; give the nested closed-ball construction locally |
+| 6 | `lem-discrete-sequence-spaces-are-complete-in-zf` | lemma | Discrete sequence spaces are complete in ZF | published completeness plus local Baire definition; define each limiting coordinate from the least stabilization stage, using no choice |
+| 7 | `lem-serial-relation-successor-sets-are-open-dense` | lemma | Successor-occurrence sets of a serial relation are open and dense | preceding discrete sequence-space lemma |
+| 8 | `thm-complete-metric-baire-principle-implies-dependent-choice-over-zf` | theorem | The complete-metric Baire principle implies Dependent Choice over ZF | preceding open-dense lemma and local starting-point equivalence; choose successors from the countable range by least indices |
+| 9 | `thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf` | theorem | Dependent Choice is equivalent to the complete-metric Baire principle over ZF | the two preceding implication theorems |
+| B1 | `ex-blair-sequence-space-for-a-serial-relation` | example | Blair's sequence space for a serial relation | companion A only; zero consumers |
+
+The Baire pair contains no DMC item or claim.  In particular, the unresolved
+strict `DMC < DC` assertion cannot enter this pair through prose, dependency,
+`justified_by`, or `external_refs`.
+
+### Old-root cutover and exact published impact
+
+- Old `thm-basic-cohen-symmetric-model-satisfies-bpi-and-not-ac` maps to
+  `thm-basic-cohen-model-satisfies-bpi-and-fails-choice` for the semantic model
+  statement and to `cor-relative-consistency-of-bpi-without-choice-over-zf`
+  for the published consistency wording.  In Phase 3,
+  `rem-choice-strength-of-hahn-banach` replaces both its dependency and body
+  link to `rem-halpern-levy-bpi-not-ac` by the new consistency corollary.  Its
+  exact direct published consumer is that remark; the complete published
+  closure is `the-analytic-hahn-banach-theorem`:
+  `rem-choice-strength-of-hahn-banach`, and its B companion:
+  `rem-hahn-banach-open-choice-questions`.
+- Old `thm-complete-metric-baire-is-equivalent-to-dependent-choice-over-zf`
+  maps to `thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf`.
+  In Phase 3, both `thm-banach-space-no-countably-infinite-hamel-basis` and
+  `rem-general-complete-metric-baire-proof-would-overstate-the-choice-cost`
+  replace their dependency/body links to `rem-baire-category-choice-strength`
+  by the new theorem.  The exact direct published consumers are those two
+  items.  The complete published closure is
+  `finite-dimensional-normed-spaces-and-riesz-lemma`: those two items, and its
+  B companion: `cex-polynomial-space-admits-no-complete-norm`.
+
+For the BPI pair, each of the first five A items has **zero direct published
+consumers** and the same two-item transitive published impact through the
+consistency corollary; the corollary has one direct published consumer and a
+two-item total published closure (one additional transitive consumer).  Its B
+item has zero direct and zero transitive published consumers.  For the Baire
+pair, each of the first eight A items has **zero direct published consumers**
+and the same three-item total published impact through the equivalence theorem;
+the equivalence theorem has two direct published consumers and a three-item
+total published closure (one additional transitive consumer).  Its B item has
+zero direct and zero transitive published consumers.
+
+After this cutover, the old SET-21 and SET-22 roots are planned-only/Phase-3
+cleanup, with zero published impact; they are not Phase-2 work.  SET-21 may
+retain its full Halpern--Läuchli enrichment and SET-22 may retain its supported
+Urysohn/Stone/Tychonoff/DMC program, but neither page may be used to unblock a
+published consumer.  SET-20's missing Blass full proof and SET-22's unresolved
+`DMC < DC` claim remain blockers only for those planned enrichment pages.
+
+The exact later-page prerequisite amendments are also binding, but are not
+part of the four-shell Phase-2 integration patch.  SET-6 is published and
+strictly read-only: its requirement/body cutover is Phase 3.  The exact target
+arrays are:
+
+```text
+SET-6.requires = [cardinal-arithmetic-and-cofinality,
+  filters-and-ultrafilters, countability-and-uncountability,
+  well-founded-relations-rank-and-the-cumulative-hierarchy,
+  dependent-choice-and-the-complete-metric-baire-theorem]
+SET-21.requires = [symmetric-collapse-and-ultrafilter-free-models,
+  boolean-prime-ideal-theorem-in-the-basic-cohen-model]
+SET-22.requires = [halpern-lauchli-and-bpi-without-choice,
+  dependent-choice-and-the-complete-metric-baire-theorem]
+```
+
+SET-6 then cites the new serial-DC definition/equivalence rather than minting
+another DC definition.  SET-21 retains SET-20 only for planned strict-
+separation enrichment.  SET-22 no longer requires the broad published
+`complete-metrizability-and-baire` page and retains SET-21 only for its planned
+non-Baire choice-strength rows.
+
+### Authoritative full-text basis and closure result
+
+- Miroslav Repický, *A proof of the independence of the Axiom of Choice from
+  the Boolean Prime Ideal Theorem*, CMUC 56 (2015), 543--546, full four-page
+  journal PDF, DOI `10.14712/1213-7243.2015.138`: Lemma 2 and Corollary 3 on
+  pp. 543--545 prove the continuity/support reductions; pp. 545--546 prove that
+  the supported maximal proper ideal is prime and hence prove BPI in the model.
+- Alessandro Andretta and Lorenzo Notaro, *Does DC imply AC_omega uniformly?*,
+  JSL 90 (2025), 1538--1562, full open-access publisher text, DOI
+  `10.1017/jsl.2024.33`: §3, Theorem 3.2 and Proposition 3.3 give the symmetric-
+  extension theorem, the exact first-Cohen-model system and its infinite
+  Dedekind-finite set.  These are the authoritative inputs already assigned to
+  SET-19.
+- Arnold W. Miller, *Axiom of Choice* course notes (15 February 2008), full
+  26-page University of Wisconsin PDF, Proposition 5.4, printed pp. 10--11,
+  proves in ZF both `DC -> Baire` and Blair's sequence-space converse, including
+  the complete discrete-product metric and the open dense successor sets.
+
+All three full texts were retrieved and the cited proof ranges inspected.  The
+two new A closures terminate in the earlier A pages named above and have
+**zero direct or transitive route** to `deferred-set-theory-beyond-choice` or
+any of its 22 items.  There is no full-text blocker for either replacement
+pair.

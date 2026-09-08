@@ -3958,3 +3958,627 @@ Every added row contains `provenance.statement`, `provenance.proof`, and a
 source/role rationale.  No added A item depends on a B item, no existing id was
 renumbered, no neighbour's definition was re-minted, and no file outside this
 track was changed by this pass.
+
+---
+
+## 11. Binding publication-state and dependency audit — 2026-09-08
+
+This section supersedes every conflicting placement, active-item, count,
+`requires`, and seam claim above.  Sections 4--10 remain the source-harvest and
+historical decomposition record; they are not authority to append omitted
+items to a published page.  The live corpus and the machine plan are read-only
+in this phase.  All amendments to a published page or item below are deferred
+until the publication gate is expressly lifted.
+
+### 11.1 Measured live state and binding graph rules
+
+The category has 36 published pages, forming 18 A/B pairs.  Their page files
+contain 767 memberships but only 753 unique item files: all 753 are published.
+The 14 duplicate memberships are the two seven-item B inventories repeated in
+the `examples` arrays of the CA-11 and CA-12 A pages.  The current plan has all
+753 unique items once, but differs from immutable item frontmatter in 187
+`deps` arrays and 104 titles; no kind differs.  Therefore the old claim that
+1,134 rows in this document are the active publication inventory is retired.
+Every row in §§4--10 whose id is absent from the current plan is an archival
+enrichment candidate, not a planned item.  A later enrichment commission must
+re-audit such a row against the then-current graph before activating it.
+
+The following rules are binding.
+
+1. A B page requires only its companion A page.  No other page may require a B
+   page.  An item outside a B page may not depend on an item homed only on that
+   B page.  Dependencies among examples on the same B page are permitted local
+   exposition and do not turn the B page into a supplier.
+2. Every dependency of a proof-bearing planned item must be either earlier on
+   its A page or on a strictly earlier required A-page closure.  Page order
+   alone is not a substitute for a `requires` edge.
+3. A cited boundary remark with `proved_here: false` is never a proof input.
+   The only such item in the 1,733-item transitive closure of this category is
+   `rem-mixed-characteristic-cohen-structure-boundary`; no item depends on it.
+   The closure has zero direct or transitive dependencies on any item of
+   `deferred-set-theory-beyond-choice`.
+4. After the A-for-B replacements in §11.3, every live item dependency has a
+   home on its own page or in the transitive closure of the page's declared
+   prerequisites, provided the Dependent-Choice rehome in §11.3 is performed.
+   No live Commutative Algebra item depends on a draft item, and no item outside
+   a Commutative Algebra B page depends on a Commutative-Algebra B-only item.
+
+### 11.2 Pair-by-pair published audit
+
+Here “clear” means that this dependency-interface audit found no further
+defect; it is not a promise that later mathematical review can never improve a
+proof.  Counts are the immutable live A/B item counts, not the superseded §10.5
+estimates.
+
+| pair | live A/B items | disposition |
+|---|---:|---|
+| CA-1 Noetherian rings and Hilbert basis | 39 / 12 | Clear after the incoming Abstract-Algebra A-for-B cutover and the Dependent-Choice seam repair in §11.3. |
+| CA-2 localisation of modules and support | 35 / 10 | Clear; replace its B-page predecessor by CA-1 A. |
+| CA-3 prime spectra and radicals | 44 / 12 | Clear; replace its B-page predecessor by CA-2 A. |
+| CA-4 Artinian rings and length | 12 / 6 | Clear; replace its B-page predecessor by CA-3 A. |
+| CA-5 associated primes and primary decomposition | 39 / 6 | Clear; replace its B-page predecessor by CA-4 A. |
+| CA-6 integral extensions and going up | 17 / 6 | Clear; replace its B-page predecessor by CA-5 A. |
+| CA-7 Noether normalisation and Nullstellensatz | 28 / 7 | Clear; replace its B-page predecessor by CA-6 A. |
+| CA-8 valuation rings and DVRs | 19 / 8 | Clear; replace its B-page predecessor by CA-7 A. |
+| CA-9 Dedekind domains and ideal classes | 33 / 9 | Clear; replace its B-page predecessor by CA-8 A. |
+| CA-10 Krull dimension and height | 37 / 7 | Clear; replace its B-page predecessor by CA-9 A. |
+| CA-11 Rees, Artin--Rees, and Hilbert--Samuel | 17 / 7 | Deferred published repair: remove the duplicated seven-item A-page `examples` array and perform the exact item reorder below; replace its B-page predecessor by CA-10 A. |
+| CA-12 flatness and faithful flatness | 15 / 7 | Deferred published repair: remove the duplicated seven-item A-page `examples` array; replace its B-page predecessor by CA-11 A. |
+| CA-13 inverse limits and completion | 21 / 7 | Clear; replace its B-page predecessor by CA-12 A. |
+| CA-14 Henselian rings and equicharacteristic Cohen structure | 39 / 9 | Clear; the mixed-characteristic remark remains non-load-bearing; replace its B-page predecessor by CA-13 A. |
+| CA-15 Zariski topology on spectra | 28 / 6 | Clear; replace its B-page predecessor by CA-14 A. |
+| CA-16 Koszul complexes and regular sequences | 51 / 12 | Clear; replace its B-page predecessor by CA-15 A. |
+| CA-17 depth and Cohen--Macaulay modules | 57 / 13 | Clear; replace its B-page predecessor by CA-16 A. |
+| CA-18 regular local rings and homological dimension | 60 / 18 | Clear; replace its B-page predecessor by CA-17 A; its Number-Theory consumer must likewise require CA-18 A. |
+
+The exact CA-11 order repair is to move
+`thm-dimension-and-parameters-for-modules` and then
+`thm-additivity-of-hilbert-samuel-multiplicity` immediately before
+`thm-hilbert-samuel-dimension-theorem`.  The latter theorem directly depends on
+both.  Neither moved theorem depends on it, so this closes the only same-page
+forward dependency without changing a statement or proof.
+
+For the two duplicate-home repairs, remove only these A-page `examples`
+arrays; retain the companion B pages and their order unchanged:
+
+- CA-11: `ex-hilbert-series-of-a-polynomial-ring`,
+  `ex-associated-graded-of-a-local-ring`, `ex-artin-rees-intersection`,
+  `ex-krull-intersection-in-a-local-domain`,
+  `ex-hilbert-samuel-polynomial-of-a-dvr`,
+  `ex-hilbert-samuel-multiplicity-of-a-plane-curve`, and
+  `ex-hilbert-samuel-finite-length-case`.
+- CA-12: `ex-polynomial-algebras-are-faithfully-flat`,
+  `ex-localisations-not-faithfully-flat`,
+  `ex-fraction-field-flat-not-projective`, `ex-flat-idempotent-quotient`,
+  `ex-nonflat-quotient-module`,
+  `ex-faithfully-flat-principal-open-cover`, and
+  `ex-finite-flat-module-over-a-local-ring`.
+
+### 11.3 Exact future `plan-spec.json` reconciliation
+
+No machine-plan edit is authorized here.  A later authorized splice must first
+resynchronize every existing Commutative Algebra plan item mechanically: keep
+the published page composition and item order, subject to the single CA-11
+reorder above, and replace each plan item's `title`, `kind`, and `deps` with its
+immutable item-frontmatter values.  This is the exact repair for the 187
+dependency and 104 title mismatches; the kind replacement is idempotent.
+
+Before that resynchronization can satisfy strict precedence, rehome the
+published item `def-dependent-choice` from
+`compactness-in-metric-spaces` (order 120) to
+`countability-and-uncountability` (order 18), immediately after the already
+published `def-countable-choice`.  At the same deferred repair, replace its
+inapplicable `def-sequence` dependency and the two matching body links:
+`def-sequence` defines only real-valued sequences and cannot type a function
+from the naturals into an arbitrary set.  Cite `def-function` instead and keep
+the displayed map as an ordinary function $\mathbb N\to X$.  Its remaining
+dependencies are available by order 18.  Add
+`countability-and-uncountability` to the `requires` of
+`noetherian-rings-and-hilbert-basis`; the entire later CA A-spine then inherits
+it.  This closes the four exact live forward edges
+
+- `lem-noetherian-ring-maximal-element-annihilator-exists` ->
+  `def-dependent-choice`,
+- `thm-lasker-noether-primary-decomposition` -> `def-dependent-choice`,
+- `cor-radical-ideals-as-intersections-of-minimal-primes-noetherian` ->
+  `def-dependent-choice`, and
+- `thm-complete-nakayama-lemma` -> `def-dependent-choice`.
+
+One upstream published item also needs a deferred metadata/content repair:
+`thm-equivalent-characterizations-of-noetherian-modules` uses Dependent Choice
+in proof step 2.1 while expressly declining to cite it.  After the rehome, add
+`def-dependent-choice` to that theorem's `deps` and replace the sentence saying
+it is “not cited as a forward dependency” by an ordinary labelled assumption.
+The theorem remains in its existing Abstract-Algebra home; no duplicate is
+minted here.
+
+Then replace these page-level edges.  The right-hand A page contains every
+proof-bearing supplier furnished by the B page's companion, and the post-change
+page graph gives every live item a complete earlier prerequisite closure.
+
+| consumer page | replace | with |
+|---|---|---|
+| `noetherian-rings-and-hilbert-basis` | `modules-over-a-pid-and-canonical-forms-examples` | `modules-over-a-pid-and-canonical-forms` |
+| `localisation-of-modules-and-support` | `noetherian-rings-and-hilbert-basis-examples` | `noetherian-rings-and-hilbert-basis` |
+| `prime-spectra-and-radicals` | `localisation-of-modules-and-support-examples` | `localisation-of-modules-and-support` |
+| `artinian-rings-and-length` | `prime-spectra-and-radicals-examples` | `prime-spectra-and-radicals` |
+| `associated-primes-and-primary-decomposition` | `artinian-rings-and-length-examples` | `artinian-rings-and-length` |
+| `integral-extensions-and-going-up` | `associated-primes-and-primary-decomposition-examples` | `associated-primes-and-primary-decomposition` |
+| `noether-normalisation-and-nullstellensatz` | `integral-extensions-and-going-up-examples` | `integral-extensions-and-going-up` |
+| `valuation-rings-and-discrete-valuation-rings` | `noether-normalisation-and-nullstellensatz-examples` | `noether-normalisation-and-nullstellensatz` |
+| `dedekind-domains-and-ideal-classes` | `valuation-rings-and-discrete-valuation-rings-examples` | `valuation-rings-and-discrete-valuation-rings` |
+| `krull-dimension-and-height-theorems` | `dedekind-domains-and-ideal-classes-examples` | `dedekind-domains-and-ideal-classes` |
+| `rees-modules-artin-rees-and-hilbert-samuel-theory` | `krull-dimension-and-height-theorems-examples` | `krull-dimension-and-height-theorems` |
+| `flatness-and-faithful-flatness` | `rees-modules-artin-rees-and-hilbert-samuel-theory-examples` | `rees-modules-artin-rees-and-hilbert-samuel-theory` |
+| `inverse-limits-and-noetherian-completion` | `flatness-and-faithful-flatness-examples` | `flatness-and-faithful-flatness` |
+| `henselian-rings-and-equicharacteristic-cohen-structure` | `inverse-limits-and-noetherian-completion-examples` | `inverse-limits-and-noetherian-completion` |
+| `zariski-topology-on-prime-spectra` | `henselian-rings-and-equicharacteristic-cohen-structure-examples` | `henselian-rings-and-equicharacteristic-cohen-structure` |
+| `koszul-complexes-and-regular-sequences` | `zariski-topology-on-prime-spectra-examples` | `zariski-topology-on-prime-spectra` |
+| `depth-and-cohen-macaulay-modules` | `koszul-complexes-and-regular-sequences-examples` | `koszul-complexes-and-regular-sequences` |
+| `regular-local-rings-and-homological-dimension` | `depth-and-cohen-macaulay-modules-examples` | `depth-and-cohen-macaulay-modules` |
+| `absolute-values-completions-and-p-adic-numbers` (number theory) | `regular-local-rings-and-homological-dimension-examples` | `regular-local-rings-and-homological-dimension` |
+
+Every B page keeps exactly `[companion A]` as its own `requires`.  The
+dependencies among examples within a single B page need no cutover; the scan
+found zero outside-page consumers of a Commutative-Algebra B-only item.
+
+### 11.4 New CA-owned prerequisites requested by Algebraic Geometry
+
+The three pairs proposed in the Algebraic Geometry audit are accepted at
+orders 366.0601--366.0604 and 366.0621--366.0622, but their provisional item
+lists were not sufficient proof contracts.  In particular, the normalization
+list duplicated the published integral-closure definition and omitted the
+polynomial-ring Japanese step; the Zariski Main list omitted the strongly
+transcendental reduction used by the algebraic theorem; and the resultant list
+called a projective homogeneous coordinate quotient Artinian although a
+zero-dimensional projective intersection has a one-dimensional homogeneous
+coordinate ring.  The following inventories replace those provisional lists.
+
+The full text checked for normalization and Zariski Main is the Stacks Project,
+tags [0BXR](https://stacks.math.columbia.edu/tag/0BXR),
+[032L](https://stacks.math.columbia.edu/tag/032L),
+[032N](https://stacks.math.columbia.edu/tag/032N),
+[032O](https://stacks.math.columbia.edu/tag/032O),
+[030M](https://stacks.math.columbia.edu/tag/030M),
+[00PI](https://stacks.math.columbia.edu/tag/00PI),
+[00Q9](https://stacks.math.columbia.edu/tag/00Q9), and
+[02LQ](https://stacks.math.columbia.edu/tag/02LQ).  The polynomial-extension
+proof at 032O explicitly leaves a field-theoretic containment to the reader,
+so that containment is a separate obligation below rather than an elision.
+For resultants and the projective common-root boundary, Milne, *Algebraic
+Geometry*, version 6.10,
+<https://www.jmilne.org/math/CourseNotes/AG.pdf>, §§6.37 and 7.27--7.28, was
+obtained in full and read;
+its own warning that the elementary Bézout proof has chosen multiplicities to
+fit the count is why the local-length and Hilbert-series bridges are separate
+items here.
+
+The later machine-plan splice must insert these exact page records; the item
+arrays are exactly the ordered inventories below.
+
+| order | id | title | kind / category | companion |
+|---:|---|---|---|---|
+| 366.0601 | `normalization-finiteness-for-affine-domains` | Normalization Finiteness for Affine Domains | A / commutative-algebra | `normalization-finiteness-for-affine-domains-examples` |
+| 366.0602 | `normalization-finiteness-for-affine-domains-examples` | Normalization Finiteness for Affine Domains — Examples | B / commutative-algebra | `normalization-finiteness-for-affine-domains` |
+| 366.0603 | `algebraic-zariski-main-for-quasi-finite-morphisms` | Algebraic Zariski Main for Quasi-Finite Morphisms | A / commutative-algebra | `algebraic-zariski-main-for-quasi-finite-morphisms-examples` |
+| 366.0604 | `algebraic-zariski-main-for-quasi-finite-morphisms-examples` | Algebraic Zariski Main for Quasi-Finite Morphisms — Examples | B / commutative-algebra | `algebraic-zariski-main-for-quasi-finite-morphisms` |
+| 366.0621 | `homogeneous-resultants-and-projective-intersection-length` | Homogeneous Resultants and Projective Intersection Length | A / commutative-algebra | `homogeneous-resultants-and-projective-intersection-length-examples` |
+| 366.0622 | `homogeneous-resultants-and-projective-intersection-length-examples` | Homogeneous Resultants and Projective Intersection Length — Examples | B / commutative-algebra | `homogeneous-resultants-and-projective-intersection-length` |
+
+#### CA-19. Normalization finiteness for affine domains
+
+- **Orders:** 366.0601 A, 366.0602 B.
+- **Page ids:** `normalization-finiteness-for-affine-domains` /
+  `normalization-finiteness-for-affine-domains-examples`.
+- **A requires:** `dedekind-domains-and-ideal-classes`,
+  `noether-normalisation-and-nullstellensatz`,
+  `algebraic-closure-embeddings-and-separability`, and
+  `affine-algebraic-sets-and-coordinate-rings` (A pages only).
+- **B requires:** `normalization-finiteness-for-affine-domains` only.
+
+A items, in strict proof order:
+
+1. `lem-integral-closure-unchanged-across-an-integral-intermediate-domain`:
+   for domains $A\subseteq B\subseteq L$ with $B$ integral over $A$, an
+   element of $L$ is integral over $A$ iff it is integral over $B$.  Cite
+   `def-integral-closure-and-integrally-closed-domain` and
+   `thm-transitivity-of-integrality`; do not mint the proposed duplicate
+   `def-integral-closure-in-field-extension`.
+2. `lem-finite-purely-inseparable-rational-extension-envelope`: if $K$ has
+   characteristic $p>0$ and $L/K(x_1,\ldots,x_d)$ is finite purely
+   inseparable, there are a finite purely inseparable $K'/K$ and $q=p^e$
+   with $L\subseteq K'(x_1^{1/q},\ldots,x_d^{1/q})$.  Prove the finite
+   generator and uniform-exponent steps from
+   `def-purely-inseparable-extension` and
+   `thm-purely-inseparable-extension-characterizations`.
+3. `lem-integral-closure-in-a-purely-inseparable-rational-envelope-is-finite`:
+   identify the integral closure of $K[x_1,\ldots,x_d]$ in the displayed
+   envelope as $K'[x_1^{1/q},\ldots,x_d^{1/q}]$; prove normality and exhibit
+   its finite monomial basis.  The integral closure in the subfield $L$ is a
+   submodule of this finite module and is finite because the polynomial ring is
+   Noetherian.
+4. `lem-normal-extension-separable-over-maximal-purely-inseparable-subextension`:
+   for a finite normal field extension $M/K$, construct the intermediate field
+   $M_{insep}$ with $M_{insep}/K$ purely inseparable and
+   $M/M_{insep}$ separable, including the characteristic-zero boundary
+   (Stacks 030M).  The opposite separable-closure decomposition does not by
+   itself supply this orientation.
+5. `thm-polynomial-algebras-over-fields-have-finite-integral-closures`:
+   for a finite extension of the fraction field of
+   $K[x_1,\ldots,x_d]$, first place it in a finite normal overextension.
+   Use the separable/purely-inseparable decomposition of that normal extension,
+   apply item 3 to its purely inseparable intermediate field, and then apply the
+   published `thm-finite-integral-closure-in-a-finite-separable-extension`;
+   use transitivity of module finiteness and take the original closure as a
+   submodule of the finite closure in the normal overfield.  Characteristic
+   zero is the separable case.
+6. `thm-integral-closure-finite-finite-type-domain-over-field`: apply
+   `cor-noether-normalisation-module-finiteness`, item 1, and item 5 to prove
+   that every finite-type domain over a field has module-finite normalization.
+7. `cor-affine-normalization-is-finite`: translate item 6 through affine
+   coordinate rings, without adding a projectivity or smoothness conclusion.
+8. `lem-finite-normalization-compatible-with-principal-opens`: cite
+   `thm-integrality-commutes-with-localisation` and localize a finite module;
+   state the canonical equality inside the localized fraction field.
+
+The B leaf contains, in this order,
+`ex-integral-closure-cusp-semigroup-affine-domain`,
+`ex-normalization-nodal-coordinate-domain`, and
+`ex-integral-closure-monomial-curve-t3-t4-t5`.  Each depends only on A items
+and earlier published algebra, never on another page's B item.
+
+| B item | exact local A dependencies |
+|---|---|
+| `ex-integral-closure-cusp-semigroup-affine-domain` | [`def-integral-closure-and-integrally-closed-domain`, `thm-integral-closure-finite-finite-type-domain-over-field`] |
+| `ex-normalization-nodal-coordinate-domain` | [`def-integral-closure-and-integrally-closed-domain`, `cor-affine-normalization-is-finite`] |
+| `ex-integral-closure-monomial-curve-t3-t4-t5` | [`def-integral-closure-and-integrally-closed-domain`, `thm-integral-closure-finite-finite-type-domain-over-field`] |
+
+#### CA-20. Algebraic Zariski Main for quasi-finite algebras
+
+- **Orders:** 366.0603 A, 366.0604 B.
+- **Page ids:** `algebraic-zariski-main-for-quasi-finite-morphisms` /
+  `algebraic-zariski-main-for-quasi-finite-morphisms-examples`.
+- **A requires:** `zariski-topology-on-prime-spectra`,
+  `integral-extensions-and-going-up`, and
+  `morphisms-local-rings-and-rational-maps-of-affine-varieties` (A pages only).
+- **B requires:** `algebraic-zariski-main-for-quasi-finite-morphisms` only.
+
+A items, in strict proof order:
+
+1. `def-quasi-finite-at-a-prime-for-finite-type-algebras`: for a finite-type
+   map $R\to S$ and $\mathfrak q\in\operatorname{Spec}S$, define
+   quasi-finiteness at $\mathfrak q$ by finiteness of the localized fibre
+   algebra over the residue field of
+   $\mathfrak p=\mathfrak q\cap R$; cite
+   `cor-residue-field-of-a-localisation-at-a-prime` and the published tensor
+   and localization interfaces.
+2. `lem-zmt-polynomial-relation-leading-coefficient-is-integral`: from a
+   relation $a_0+\cdots+a_nt^n=0$, prove $a_nt$ integral over the base by
+   writing its monic equation (Stacks 00PI, Lemma 10.123.1).
+3. `lem-zmt-one-variable-integral-correction`: combine the monic and
+   nonmonic one-variable correction steps of Stacks Lemmas 10.123.2--10.123.3;
+   expose the power of the leading coefficient that must be inverted.
+4. `def-strongly-transcendental-element`: give the annihilator-sensitive
+   definition over possibly nonreduced rings; ordinary transcendence is not an
+   adequate replacement.
+5. `lem-strong-transcendence-descends-to-minimal-prime-quotients`: cite the
+   minimal-prime and reduction results from CA-3/CA-5 and prove the quotient
+   statement of Stacks Lemma 10.123.8.
+6. `lem-strongly-transcendental-finite-one-variable-algebra-is-nowhere-quasi-finite`:
+   prove the domain case and then reduce the reduced-ring case through item 5
+   (Stacks Lemmas 10.123.9--10.123.10).
+7. `lem-zmt-one-generator-local-integrality`: for
+   $S=R[x]/I$ quasi-finite at $\mathfrak q$, construct
+   $g$ in the integral closure $S'$ of $R$ in $S$, with
+   $g\notin\mathfrak q$ and $S'_g\cong S_g$; items 2--6 are the required
+   reduction, not optional background.
+8. `thm-algebraic-zariski-main-localization`: induct on a finite algebra
+   generating list to obtain the same $S'_g\cong S_g$ conclusion for every
+   finite-type map quasi-finite at $\mathfrak q$ (Stacks 00Q9).
+9. `cor-quasi-finite-locus-open-finite-type-algebra`: use item 8 and the fact
+   that a finite algebra is quasi-finite to obtain the principal-open
+   neighbourhood in Stacks Lemma 10.123.13.
+10. `thm-quasi-finite-algebra-open-finite-factorization`: for a finite-type
+    quasi-finite algebra, construct a finite $R$-subalgebra
+    $S''\subseteq S'$ such that
+    $\operatorname{Spec}S\to\operatorname{Spec}S''$ is a homeomorphism onto
+    an open subset and the structure maps agree after localization there
+    (Stacks Lemma 10.123.14).  This is the algebraic factorization supplied to
+    AV-7; the open-immersion and gluing translation remains owned by Algebraic
+    Geometry.
+11. `cor-quasi-finite-algebra-is-source-locally-a-localization-of-a-finite-algebra`:
+    restate item 10 pointwise.  Do not use the overstrong provisional claim
+    that an arbitrary quasi-finite algebra becomes finite after one unspecified
+    localization of the base.
+
+The B leaf contains `ex-zariski-main-open-immersion-punctured-affine-line`,
+`ex-zariski-main-finite-morphism-factorization`, and
+`cex-quasi-finite-morphism-need-not-be-finite`, in that order.  The last
+example distinguishes the theorem's open finite factorization from a false
+global-finiteness converse.
+
+| B item | exact local A dependencies |
+|---|---|
+| `ex-zariski-main-open-immersion-punctured-affine-line` | [`def-quasi-finite-at-a-prime-for-finite-type-algebras`, `thm-quasi-finite-algebra-open-finite-factorization`] |
+| `ex-zariski-main-finite-morphism-factorization` | [`thm-algebraic-zariski-main-localization`, `thm-quasi-finite-algebra-open-finite-factorization`] |
+| `cex-quasi-finite-morphism-need-not-be-finite` | [`def-quasi-finite-at-a-prime-for-finite-type-algebras`, `cor-quasi-finite-algebra-is-source-locally-a-localization-of-a-finite-algebra`] |
+
+#### CA-21. Homogeneous resultants and projective intersection length
+
+- **Orders:** 366.0621 A, 366.0622 B.
+- **Page ids:** `homogeneous-resultants-and-projective-intersection-length` /
+  `homogeneous-resultants-and-projective-intersection-length-examples`.
+- **A requires:** `artinian-rings-and-length`,
+  `rees-modules-artin-rees-and-hilbert-samuel-theory`,
+  `koszul-complexes-and-regular-sequences`,
+  `projective-algebraic-sets-projective-morphisms-and-cones`,
+  `schemes-subschemes-and-morphisms-locally-of-finite-type`, and
+  `dimension-constructible-images-and-dimensions-of-fibres` (A pages only).
+- **B requires:**
+  `homogeneous-resultants-and-projective-intersection-length` only.
+
+A items, in strict proof order:
+
+1. `def-sylvester-resultant-of-binary-forms`: define the determinant for
+   positive-degree binary forms, including the zero-leading-coefficient
+   boundary after dehomogenization.
+2. `lem-binary-resultant-scaling-specialization-and-dehomogenization`: prove
+   bihomogeneity/scaling and compatibility with specialization; separate a
+   common root at infinity from a common affine root.
+3. `thm-binary-resultant-zero-iff-common-geometric-projective-root`: over an
+   arbitrary base field, vanishing means a common point of
+   \(\mathbf P^1\) after algebraic closure, not necessarily a rational point;
+   cite items 1--2 and the univariate common-root criterion.
+4. `lem-coprime-plane-forms-form-a-homogeneous-regular-sequence`: use
+   `thm-polynomial-ring-over-a-field-is-a-ufd` to show that two nonzero plane
+   forms with no common component form a regular sequence in
+   $k[x_0,x_1,x_2]$.
+5. `lem-complete-intersection-hilbert-series-two-plane-forms`: use the two
+   graded exact sequences for multiplication by forms of degrees $d,e$ to
+   derive
+   $(1-t^d)(1-t^e)/(1-t)^3$; cite item 4 and the published Hilbert-series
+   definitions.
+6. `cor-no-common-component-projective-plane-intersection-is-zero-dimensional`:
+   use item 4 and the projective-coordinate-ring dimension theorem to deduce
+   zero-dimensionality.  The constant Hilbert function from item 5 is a
+   compatible check, not a substitute for the dimension interface.  Do not
+   call the homogeneous coordinate quotient Artinian: it has Krull dimension
+   one.
+7. `def-total-length-of-a-zero-dimensional-projective-scheme`: define total
+   length by the finite-support local formula
+   \(\sum_x \operatorname{length}_{\mathcal O_x}(\mathcal O_x)
+   [\kappa(x):k]\); cite the Artinian local-product and length-additivity
+   results and the earlier scheme local-ring interface.
+8. `lem-eventual-hilbert-function-equals-zero-dimensional-projective-length`:
+   prove that the eventual constant value of the homogeneous coordinate
+   ring's Hilbert function equals the local sum in item 7, using a finite
+   standard-affine cover and graded localization.  This is the missing bridge
+   between the Hilbert-series computation and intrinsic local length; it may
+   not be replaced by an appeal to an as-yet-unbuilt coherent-sheaf theorem.
+9. `thm-projective-plane-complete-intersection-total-length`: combine items
+   5--8 to obtain total length $de$ for two plane forms of degrees $d,e$
+   with no common component.
+10. `cor-projective-plane-bezout-length-form`: state the algebraic length form
+    passed to AV-8, leaving invariance under choices of local curve equations
+    and the geometric curve formulation to that consumer.
+
+The B leaf contains `ex-binary-resultant-two-linear-forms`,
+`ex-resultant-detects-root-at-infinity`,
+`ex-hilbert-series-plane-complete-intersection`, and
+`ex-length-intersection-tangent-line-conic`, in that order.
+
+| B item | exact local A dependencies |
+|---|---|
+| `ex-binary-resultant-two-linear-forms` | [`def-sylvester-resultant-of-binary-forms`, `thm-binary-resultant-zero-iff-common-geometric-projective-root`] |
+| `ex-resultant-detects-root-at-infinity` | [`lem-binary-resultant-scaling-specialization-and-dehomogenization`, `thm-binary-resultant-zero-iff-common-geometric-projective-root`] |
+| `ex-hilbert-series-plane-complete-intersection` | [`lem-complete-intersection-hilbert-series-two-plane-forms`] |
+| `ex-length-intersection-tangent-line-conic` | [`def-total-length-of-a-zero-dimensional-projective-scheme`, `cor-projective-plane-bezout-length-form`] |
+
+### 11.5 Published-consumer closure for every new planned supplier
+
+The live item graph contains none of the 29 new A-item ids in §11.4 and no
+published item names any of them.  Consequently the complete current published
+impact map is:
+
+| new supplier A page | direct published consumers | transitive published consumer closure |
+|---|---:|---:|
+| `normalization-finiteness-for-affine-domains` | **0** | **0** |
+| `algebraic-zariski-main-for-quasi-finite-morphisms` | **0** | **0** |
+| `homogeneous-resultants-and-projective-intersection-length` | **0** | **0** |
+
+Their first consumers are planned, not published: the first two supply AV-7
+`normal-varieties-normalization-and-zariskis-main-theorem`, and the third
+supplies AV-8 `plane-curves-local-intersection-multiplicity-and-bezout`.
+Accordingly none of these pairs is independently in Phase 2 merely by being
+well scaffolded; build it only if the final prerequisite graph places its A
+page in the closure of a supplier required by a published consumer.
+
+### 11.6 Item-exact impact of the Dependent-Choice rehome
+
+`def-dependent-choice` is itself **published**.  Its four declared direct CA
+consumers are
+`lem-noetherian-ring-maximal-element-annihilator-exists`,
+`thm-lasker-noether-primary-decomposition`,
+`cor-radical-ideals-as-intersections-of-minimal-primes-noetherian`, and
+`thm-complete-nakayama-lemma`.  The first three are homed on CA-5 A and the
+fourth on CA-13 A.  Excluding those four roots, their complete distinct
+transitive published consumer closure has 139 items, grouped by home page as
+follows.
+
+- `associated-primes-and-primary-decomposition` (15):
+  `cor-associated-primes-empty-iff-module-zero-noetherian`,
+  `cor-support-is-union-of-closures-of-associated-primes`,
+  `lem-associated-primes-from-a-minimal-primary-decomposition`,
+  `lem-contraction-recovers-primary-component-after-localising-away-from-radical`,
+  `lem-localisation-of-a-primary-submodule`,
+  `lem-zero-divisor-annihilator-contained-in-associated-prime`,
+  `thm-existence-of-associated-primes`,
+  `thm-finiteness-of-associated-primes`,
+  `thm-first-uniqueness-theorem-primary-decomposition`,
+  `thm-isolated-primary-components-are-unique`,
+  `thm-minimal-support-primes-are-associated`,
+  `thm-primary-submodule-characterisations`,
+  `thm-prime-filtration-of-a-finite-module`,
+  `thm-second-uniqueness-theorem-primary-decomposition`, and
+  `thm-zero-divisors-on-a-module`.
+- `associated-primes-and-primary-decomposition-examples` (2):
+  `ex-embedded-component-varies-but-radical-does-not` and
+  `ex-primary-localisation-kills-a-component`.
+- `depth-and-cohen-macaulay-modules` (49):
+  `cor-cohen-macaulay-modules-have-no-embedded-associated-primes`,
+  `cor-cohen-macaulayness-localises`,
+  `cor-completion-preserves-cohen-macaulayness-two-directions`,
+  `cor-depth-as-first-nonzero-ext`,
+  `cor-depth-bounded-by-number-of-ideal-generators`,
+  `cor-depth-depends-only-on-radical`,
+  `cor-depth-lemma-unequal-depth-equalities`,
+  `cor-depth-of-a-finite-local-module-at-most-its-dimension`,
+  `cor-depth-zero-iff-ideal-contained-in-an-associated-prime`,
+  `cor-every-system-of-parameters-is-regular-in-a-cohen-macaulay-module`,
+  `cor-flat-local-cohen-macaulay-fibre-criterion`,
+  `cor-flat-local-depth-additivity`,
+  `cor-one-regular-system-of-parameters-implies-cohen-macaulay`,
+  `cor-polynomial-extension-preserves-cohen-macaulayness`,
+  `cor-regular-quotient-cohen-macaulay-equivalence`,
+  `cor-zero-dimensional-local-modules-are-cohen-macaulay`,
+  `lem-associated-prime-after-power-regular-quotient`,
+  `lem-associated-primes-of-cohen-macaulay-module-have-full-dimension`,
+  `lem-cohen-macaulay-parameter-first-element-regular`,
+  `lem-cohen-macaulay-parameter-sequence-induction`,
+  `lem-completion-reflects-depth`,
+  `lem-depth-at-a-prime-bounded-by-local-dimension`,
+  `lem-depth-bounded-by-associated-prime-quotient-dimension`,
+  `lem-depth-lemma-lower-bound-left`,
+  `lem-depth-lemma-lower-bound-middle`,
+  `lem-depth-lemma-lower-bound-right`,
+  `lem-depth-localisation-inequality`,
+  `lem-depth-quotient-by-regular-element`,
+  `lem-depth-radical-invariance-via-ext`,
+  `lem-koszul-depth-first-nonzero-cohomology`,
+  `lem-localisation-of-cohen-macaulay-module-depth-dimension-equality`,
+  `lem-maximal-regular-sequence-stops-at-associated-prime`,
+  `lem-maximal-regular-sequences-have-common-length-ext`,
+  `lem-polynomial-extension-depth-increases-by-one`,
+  `lem-regular-element-exists-by-prime-avoidance`,
+  `lem-regular-quotient-preserves-depth-dimension-gap`,
+  `thm-associated-primes-of-cohen-macaulay-modules`,
+  `thm-completion-preserves-cohen-macaulayness`,
+  `thm-depth-bounded-by-support-dimension`,
+  `thm-depth-equals-maximal-regular-sequence-length`,
+  `thm-depth-formula-for-flat-local-homomorphisms`, `thm-depth-lemma`,
+  `thm-depth-zero-associated-prime-criterion`,
+  `thm-koszul-characterisation-of-depth`,
+  `thm-localisation-of-cohen-macaulay-modules`,
+  `thm-parameters-and-regular-sequences-in-cohen-macaulay-modules`,
+  `thm-polynomial-extension-of-cohen-macaulay-rings`,
+  `thm-radical-localisation-and-regular-quotient-properties-of-depth`, and
+  `thm-regular-quotients-and-cohen-macaulayness`.
+- `depth-and-cohen-macaulay-modules-examples` (12):
+  `ex-cohen-macaulay-associated-primes-unmixed`,
+  `ex-cohen-macaulay-ring-with-zero-divisors`,
+  `ex-completion-depth-computation`, `ex-depth-lemma-three-inequalities`,
+  `ex-depth-of-a-hypersurface`, `ex-depth-of-a-union-of-planes`,
+  `ex-maximal-cohen-macaulay-module`, `ex-non-cohen-macaulay-local-ring`,
+  `ex-parameter-sequence-fails-in-a-non-cm-ring`,
+  `ex-parameter-sequence-regular-in-a-hypersurface`,
+  `ex-polynomial-rings-cohen-macaulay`, and
+  `ex-zero-dimensional-rings-cohen-macaulay`.
+- `henselian-rings-and-equicharacteristic-cohen-structure` (3):
+  `cor-complete-local-domain-finite-over-a-regular-power-series-ring`,
+  `lem-parameter-power-series-map-injective-by-dimension`, and
+  `lem-parameter-power-series-subring-makes-ring-finite`.
+- `inverse-limits-and-noetherian-completion` (1):
+  `thm-completion-preserves-dimension-and-hilbert-samuel-data`.
+- `krull-dimension-and-height-theorems` (4):
+  `cor-dimension-drops-under-a-parameter`,
+  `lem-parameter-dimension-drop-is-exact`,
+  `lem-parameter-ideal-equivalent-m-primary`, and
+  `thm-dimension-as-minimal-number-of-radical-generators`.
+- `krull-dimension-and-height-theorems-examples` (1):
+  `ex-system-of-parameters-not-a-minimal-generating-set`.
+- `rees-modules-artin-rees-and-hilbert-samuel-theory` (3):
+  `thm-dimension-and-parameters-for-modules`,
+  `thm-hilbert-samuel-dimension-theorem`, and
+  `thm-multiplicity-under-reduction-by-a-parameter`.
+- `regular-local-rings-and-homological-dimension` (36):
+  `cor-localisations-of-regular-local-rings-are-regular`,
+  `cor-regular-local-hilbert-samuel-multiplicity-one`,
+  `cor-regular-local-residue-field-projective-dimension-dimension`,
+  `cor-regular-local-ring-satisfies-r-one`,
+  `cor-regular-local-ring-satisfies-s-two`,
+  `cor-serre-normality-criterion-two-directions`,
+  `lem-auslander-buchsbaum-base-case-free-module`,
+  `lem-auslander-buchsbaum-first-syzygy-depth`,
+  `lem-auslander-buchsbaum-projective-dimension-one`,
+  `lem-depth-two-excludes-finite-punctured-extension`,
+  `lem-finite-residue-field-projective-dimension-forces-depth-equals-dimension`,
+  `lem-flat-local-ascent-of-regularity`, `lem-normal-domain-implies-r-one`,
+  `lem-normal-domain-implies-s-two`,
+  `lem-polynomial-local-regularity-fibre-step`,
+  `lem-positive-depth-ring-has-regular-minimal-generator`,
+  `lem-r-one-s-two-integral-element-membership`,
+  `lem-r-one-s-two-intersection-of-height-one-localisations`,
+  `lem-reduced-noetherian-total-fractions-and-normal-components`,
+  `lem-regular-local-domain-induction`,
+  `lem-regular-local-graded-surjection-has-zero-kernel`,
+  `lem-regular-local-parameter-is-nonzerodivisor`,
+  `lem-regular-local-quotient-by-parameter-is-regular`,
+  `lem-regular-local-regular-quotient-ideal-is-parameter-generated`,
+  `lem-regular-local-residue-field-koszul-resolution`,
+  `lem-serre-r-zero-s-one-characterises-reducedness`,
+  `thm-associated-graded-ring-of-a-regular-local-ring`,
+  `thm-auslander-buchsbaum-formula`,
+  `thm-auslander-buchsbaum-serre-regularity-criterion`,
+  `thm-completion-preserves-regular-local-rings`,
+  `thm-localisation-and-polynomial-extension-of-regular-rings`,
+  `thm-one-dimensional-regular-local-rings-are-dvrs`,
+  `thm-quotient-and-lifting-regularity-across-a-regular-element`,
+  `thm-regular-local-rings-are-domains-and-cohen-macaulay`,
+  `thm-regular-local-rings-are-normal`, and
+  `thm-serre-normality-criterion`.
+- `regular-local-rings-and-homological-dimension-examples` (13):
+  `ex-associated-graded-polynomial-map-singular-kernel`,
+  `ex-auslander-buchsbaum-first-syzygy`,
+  `ex-betti-numbers-from-a-koszul-resolution`,
+  `ex-betti-numbers-residue-field-regular-ring`,
+  `ex-completion-regularity-invariance`, `ex-cusp-local-ring-not-regular`,
+  `ex-dvrs-as-regular-local-rings`,
+  `ex-finite-regular-local-base-cohen-macaulay-freeness`,
+  `ex-formal-power-series-ring-regular`,
+  `ex-hypersurface-regularity-at-a-rational-point`,
+  `ex-localised-polynomial-ring-regular`,
+  `ex-regular-flat-local-map-with-singular-closed-fibre`, and
+  `ex-regular-local-ambient-cover-minimal-dimension`.
+
+### 11.8 Complex Analysis reconciliation (2026-09-08)
+
+Planned SC-3 consumes the canonical module and Noetherian interfaces. Planned
+SC-8 additionally consumes `localisation-of-modules-and-support` and
+`krull-dimension-and-height-theorems`; its pure-codimension-one proof must use
+Krull's principal ideal theorem rather than treating UFD as sufficient. The
+Puiseux item must include the analytic convergence/majorant step.
+
+All named Complex Analysis consumers are planned. These seams add zero direct
+and zero transitive published consumers to the commutative-algebra suppliers
+and create no new Phase-2 root.
+
+### 11.9 Number Theory reconciliation (2026-09-08)
+
+NT-22 consumes CA-9's proved ideal-class-group, invertible-fractional-ideal,
+Dedekind, and unique-ideal-factorisation interface, specifically
+`thm-unique-factorisation-of-ideals-in-dedekind-domains`. It must not use the
+separately recorded stronger ZF claim as proof. NT's p-adic page also replaces
+the CA-18 B-page requirement by the CA-18 A page. These are planned/existing
+consumer seams and add zero published consumers or Phase-2 roots to CA.
+
+### 11.10 Scheme Theory reconciliation (2026-09-08)
+
+Scheme AV-14--AV-26 use CA-6 for integrality, CA-8 for valuation/DVR
+machinery, CA-1/2 for Noetherian modules and localization, CA-11 for
+graded/Rees theory, and CA-9/10 only for their proved restricted divisor
+interfaces. CA-19 `normalization-finiteness-for-affine-domains` is a mandatory
+planned gate before AV-23. Scheme AV-17 proves generic freeness locally: this
+scaffold contains no generic-freeness supplier. Scheme also may not infer the
+regular-local UFD theorem from CA's proved normality result. All affected
+Scheme consumers are planned, so these seams add zero direct and zero
+transitive published impact and create no new CA Phase-2 root.

@@ -10,6 +10,13 @@ measure-theory page, `the-ergodic-theorems-of-von-neumann-and-birkhoff-examples`
 > no item is authored, proved, gated, or published.  Relative labels, not
 > absolute orders, are authoritative for the proposed block.
 
+> **AUDIT OVERRIDE (2026-09-08).**  Section 14 is the controlling repair
+> specification for prerequisite order, choice labels, added items, and
+> deferred findings on the already-published FA-1--FA-7 pairs.  It raises the
+> functional-analysis total from 25 to 30 A/B pairs.  Earlier counts, claims
+> that there are no blockers, and statements that source or dependency closure
+> is complete are historical and must not be used for authoring.
+
 This file is subordinate to `CLAUDE.md`, `SCHEMA.md`, and the seam contract.
 It is authoritative only for FA-1 through FA-25 and their examples companions.
 
@@ -1651,8 +1658,9 @@ Items:
     this track's $e^{-2\pi i x\cdot\xi}$ convention,
     $\varphi_X(t)=\widehat{\mathbb P_X}(-t/(2\pi))$; PT cites this dictionary
     rather than silently changing signs.
-17. `rem-riesz-thorin-supplied-by-measure-theory` (remark, R-6) — cite MT-17
-    `thm-riesz-thorin-interpolation`; no Riesz--Thorin theorem is minted in FA.
+17. `rem-riesz-thorin-supplied-by-measure-theory` (remark, R-6) — cite the
+    repaired stable `thm-riesz-thorin-interpolation` on MT-CA-1; no
+    Riesz--Thorin theorem is minted in FA.
 
 **Proof and well-definedness plan.**  The definition is on equivalence classes,
 so null-set invariance is explicit.  Every interchange of integrals names
@@ -1725,8 +1733,8 @@ from inversion/dense range, not merely from isometry.
 5. `ex-plancherel-for-an-interval-indicator` — derive a sinc-square integral without pointwise inversion abuse.
 6. `ex-poisson-summation-for-the-gaussian-and-theta-functional-equation`.
 7. `thm-heisenberg-uncertainty-inequality` — for Schwartz functions, with equality characterization by Gaussians; useful corollary, not a later dependency.
-8. `rem-hausdorff-young-and-interpolation` (remark, L/NS) — cite MT-17
-   `thm-riesz-thorin-interpolation` for the interpolation input; the remaining
+8. `rem-hausdorff-young-and-interpolation` (remark, L/NS) — cite the repaired
+   stable `thm-riesz-thorin-interpolation` on MT-CA-1 for the interpolation input; the remaining
    Hausdorff--Young/harmonic-analysis scope stays orientation only.
 
 ### FA-24 — Test functions, distributions, and differentiation
@@ -2186,8 +2194,9 @@ the named track. Entries marked **Applied** are now reconciliation receipts.
 
 The measure-theory RMK links, probability Fourier-normalization dictionary,
 PT-9 positive-square-root citation, topology Stone--Weierstrass supplier and
-the exact PDE orientations above are applied. R-6 assigns
-`thm-riesz-thorin-interpolation` to MT-17; FA cites it and does not mint it.
+the exact PDE orientations above are applied. R-6 assigns Riesz--Thorin to
+Measure Theory; the reconciled home of the repaired stable
+`thm-riesz-thorin-interpolation` is MT-CA-1. FA cites it and does not mint it.
 
 ### 10.4 Complex analysis and algebra
 
@@ -2862,3 +2871,672 @@ form methods.  The remaining non-included headings duplicate existing claims
 and are retained as independent proof or convention checks.  This is why the
 pass stops at 47 additions rather than manufacturing a differential-geometry
 benchmark ratio.
+
+---
+
+## 14. Prerequisite and published-content audit — 2026-09-08
+
+This section supersedes every conflicting readiness, count, placement,
+`Requires`, and source-closure claim above.  It follows a complete comparison
+of the current prose, the published FA-1--FA-7 pages and their item files, the
+current plan, related measure/topology/complex-analysis suppliers, and
+`frontier-34-fa-prereqs-batch-{1..9}.{notes.md,pages.json,coverage.json}`.
+Published pages and items are immutable in this repair.  The findings in
+§14.8 are therefore deferred instructions, not edits or claims that the live
+graph has already changed.
+
+### 14.1 Controlling order and exact plan-spec changes
+
+Keep the current FA-1--FA-25 page ids and relative order except for the six
+new functional-analysis pairs below.  Fractional orders are exact proposals
+against the 2026-09-08 plan and must be rechecked for collision at splice time.
+
+| order | page id | kind | exact page requirements |
+|---:|---|---|---|
+| 288.0541 | `norming-and-separation-under-hahn-banach` | A | `the-analytic-hahn-banach-theorem` |
+| 288.0542 | `norming-and-separation-under-hahn-banach-examples` | B | `norming-and-separation-under-hahn-banach` |
+| 288.0601 | `sequential-uniform-boundedness-with-countable-choice` | A | `dual-spaces-adjoint-operators-and-annihilators`, `norming-and-separation-under-hahn-banach` |
+| 288.0602 | `sequential-uniform-boundedness-with-countable-choice-examples` | B | `sequential-uniform-boundedness-with-countable-choice` |
+| 288.0603 | `locally-convex-spaces-and-continuous-separation` | A | `sequential-uniform-boundedness-with-countable-choice`, `subspaces-products-and-quotients`, `norming-and-separation-under-hahn-banach` |
+| 288.0604 | `locally-convex-spaces-and-continuous-separation-examples` | B | `locally-convex-spaces-and-continuous-separation` |
+| 288.0752 | `square-integrable-kernels-and-hilbert-schmidt-compactness` | A | `compact-operators-and-riesz-schauder-theory`, `orthonormal-bases-parseval-and-fourier-series`, `product-measures-and-the-fubini-tonelli-theorems`, `the-lp-spaces-holder-minkowski-and-riesz-fischer` |
+| 288.0754 | `square-integrable-kernels-and-hilbert-schmidt-compactness-examples` | B | `square-integrable-kernels-and-hilbert-schmidt-compactness` |
+| 288.0761 | `banach-space-differential-calculus-and-banach-manifolds` | A | `normed-and-banach-spaces`, `bounded-linear-operators-and-quotient-spaces`, `compact-operators-and-riesz-schauder-theory`, `completeness-and-uniform-continuity` |
+| 288.0762 | `banach-space-differential-calculus-and-banach-manifolds-examples` | B | `banach-space-differential-calculus-and-banach-manifolds` |
+| 288.0801 | `fredholm-determinants-and-the-lidskii-trace-formula` | A | `banach-algebras-spectrum-and-holomorphic-functional-calculus`, `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators`, `the-determinant-of-a-linear-operator`, `triangularisation-and-jordan-canonical-form` |
+| 288.0802 | `fredholm-determinants-and-the-lidskii-trace-formula-examples` | B | `fredholm-determinants-and-the-lidskii-trace-formula` |
+
+Make these existing-page requirement changes when, and only when, the named
+new suppliers have published nonempty inventories:
+
+1. `geometric-hahn-banach-and-convex-separation` additionally requires
+   `norming-and-separation-under-hahn-banach`.
+2. `weak-and-weak-star-topologies` replaces its direct duality-only start by
+   requirements on `locally-convex-spaces-and-continuous-separation`
+   and `nets-and-filters`; the earlier duality, relative-HB, and sequential-UB
+   pairs are then in its transitive closure.
+3. `banach-alaoglu-goldstine-and-krein-milman` continues to require the weak
+   topology A page and must use the new locally convex separation items for
+   its general locally convex conclusions.
+4. Move `ex-hilbert-schmidt-kernel-operator-is-compact-on-l-two` from
+   `compact-operators-and-riesz-schauder-theory-examples` to the new
+   square-integrable-kernels B page.  Do not add a B-to-B page edge, and do not
+   make FA-15 require FA-16.
+5. `fourier-transform-convolution-and-approximate-identities` additionally
+   requires the endpoint-interpolation A page specified in §14.6.
+6. Add `the-divergence-theorem-and-classical-stokes` to
+   `distributions-test-functions-and-differentiation` A.  Its Newtonian-kernel
+   B example then consumes that supplier through its own A page, preserving the
+   rule that every B page requires only its own A page.
+
+The Lidskii pair is a side branch between FA-17 and FA-18.  FA-18 does **not**
+require it: imposing a trace-theoretic prerequisite on Gelfand theory would be
+mathematically artificial.  The pathway may display the pair at its numerical
+position without creating a false logical edge.
+
+### 14.2 Norming and separation under the Hahn--Banach principle
+
+This pair is required to distinguish the abstract Hahn--Banach principle from
+the already-published Zorn implementation, which assumes full AC.  A URL or a
+choice-ledger remark is not a proof supplier.  Each result below assumes the
+principle introduced in item 1; it does not cite
+`thm-hahn-banach-dominated-extension`.
+
+**A page:** `norming-and-separation-under-hahn-banach`
+
+1. `def-hahn-banach-extension-principle-relative` — over ZF, state the real
+   dominated-extension assertion as an additional principle.
+2. `thm-relative-hahn-banach-dominated-extension` — unpack the principle for
+   a named subspace, sublinear majorant, and dominated real functional.
+3. `thm-relative-hahn-banach-norm-preserving-extension` — derive the real
+   norm-preserving form and then the complex form by realification; retain the
+   fixed scalar-linear convention.
+4. `cor-relative-hahn-banach-dual-norming` — for nonzero (x), obtain
+   $f(x)=\|x\|$ and $\|f\|=1$, hence dual separation and the dual norm
+   formula.
+5. `cor-relative-hahn-banach-bidual-isometry` — prove
+   $\|J_Xx\|=\|x\|$ from item 4.
+6. `thm-relative-hahn-banach-geometric-separation` — repeat the gauge argument
+   under the relative principle, including real parts for complex spaces and
+   the exact open/closed/compact hypotheses.
+
+**B page:** `norming-and-separation-under-hahn-banach-examples`
+
+1. `ex-relative-norming-in-a-finite-dimensional-space` — explicit norming in
+   a finite-dimensional model, noting that its displayed construction itself
+   needs no global choice principle.
+2. `ex-relative-separation-of-a-ball-and-an-exterior-point` — quantitative
+   separation obtained from item 4.
+
+Primary logical backing remains Luxemburg for BPI ⇒ HB and Pincus for the
+strict separations among weak choice principles; Teschl §4.2 and §5.1 and
+Brezis §§1.1--1.2 give complete analytic proofs of the consequences.  Until
+the Pincus full text is available to the authoring lane, the exact
+metamathematical non-implications stay non-load-bearing; this does not block
+the relative analytic pair itself.
+
+### 14.3 Sequential uniform boundedness and locally convex separation
+
+#### Sequential uniform boundedness with countable choice
+
+The existing Sokal item assumes both $\mathsf{AC}_\omega$ and DC and treats
+an arbitrary family.  It cannot justify the sharper countable-choice label on
+weakly convergent **sequences**.  The following independent sequence theorem
+does.
+
+**A page:** `sequential-uniform-boundedness-with-countable-choice`
+
+1. `lem-two-signs-detect-an-operator-increment` —
+   $\max(\|T(x+u)\|,\|T(x-u)\|)\ge\|Tu\|$.
+2. `thm-sequential-uniform-boundedness-under-countable-choice` — assuming
+   $\mathsf{AC}_\omega$, a pointwise bounded sequence in
+   $\mathcal B(X,Y)$, with $X$ Banach and $Y$ normed, is norm bounded.
+   Choose least indices with norm at least (4^n), use countable choice once
+   for near-norming unit vectors, then choose the better sign
+   deterministically at scale (3^{-n}).  The tail estimate is
+   (3^{-n}/2), giving a divergent orbit of size at least
+   $\frac16(4/3)^n$ if the norms were unbounded.
+
+**B page:** `sequential-uniform-boundedness-with-countable-choice-examples`
+
+1. `ex-sequential-uniform-boundedness-for-coordinate-partial-sums`.
+2. `cex-sequential-uniform-boundedness-needs-a-complete-domain` — on
+   (c_{00}) with the sup norm, (T_nx=nx_n).
+
+Sokal's complete five-page paper backs the gliding-hump idea; the
+independent-vector/deterministic-sign refinement must be labelled as the
+library's adaptation rather than attributed verbatim to Sokal.  FA-8's
+`thm-weakly-convergent-sequences-are-norm-bounded` must depend on item 2 and
+`cor-relative-hahn-banach-bidual-isometry`, not on the DC-bearing published
+family theorem.
+
+#### Locally convex spaces and continuous separation
+
+The norm-distance proof on FA-5 does not separate convex sets in an arbitrary
+locally convex space.  Krein--Milman, Bauer, and Milman's converse therefore
+need this pair rather than the metric theorem.
+
+**A page:** `locally-convex-spaces-and-continuous-separation`
+
+1. `def-topological-vector-space-for-local-convexity` — joint continuity of
+   addition and scalar multiplication; Hausdorffness is stated separately.
+2. `def-locally-convex-topological-vector-space` — a convex zero-neighborhood
+   base and the continuous real/complex scalar-linear dual.
+3. `lem-balanced-convex-zero-neighborhood-refinement` — symmetric, balanced,
+   convex, and closed refinements inside a prescribed zero-neighborhood.
+4. `lem-continuous-gauge-of-an-open-convex-zero-neighborhood` — absorption,
+   sublinearity, continuity, and the strict gauge sublevel; balancedness gives
+   a seminorm.
+5. `thm-locally-convex-open-convex-separation` — continuous separation under
+   the relative Hahn--Banach principle.
+6. `thm-locally-convex-continuous-dual-separates-points` — for Hausdorff
+   locally convex spaces, with real parts in the complex case.
+7. `thm-locally-convex-strict-separation` — a nonempty compact convex set and
+   a disjoint nonempty closed convex set have a strict uniform separating gap.
+8. `lem-locally-convex-closures-and-finite-compact-convex-hulls` — closure
+   preserves convexity and finite convex hulls of compact sets are compact.
+
+**B page:** `locally-convex-spaces-and-continuous-separation-examples`
+
+1. `ex-product-scalar-topology-is-locally-convex`.
+2. `ex-locally-convex-separation-by-a-coordinate`.
+3. `cex-convex-maximum-set-need-not-be-a-face` — (x^2) on ([-1,1]).
+
+Teschl §5.1, Bühler--Salamon §§3.1.1--3.1.2, and Hanche-Olsen's complete
+finite-compact-hull argument back these routes.  FA-9 must add
+`def-absolute-polar-in-a-normed-dual-pair` before polar compactness, and its
+definitions of extreme points/faces and all general locally convex theorems
+must cite this pair.
+
+### 14.4 Existing-pair inventory repairs before authoring
+
+All original mathematical conclusions remain.  Apply the following additions
+and reorderings to the inventories in §5; the batch manifests are evidence,
+not automatically approved replacements.
+
+- **FA-8:** use the 19-item batch-1 A inventory.  Do not duplicate
+  `def-weak-star-topology` or `thm-bipolar-closure-for-linear-subspaces`, now
+  published on FA-7.  Keep nets for closure, the explicit
+  $\sqrt n e_n\subset\ell^2$ weak-closure/nonsequential-closure example,
+  and the point-carrying unbounded weakly convergent net.  The preadjoint
+  converse must prove finite-coordinate factorization and boundedness.
+- **FA-9:** insert `def-absolute-polar-in-a-normed-dual-pair`; use §14.3's
+  locally convex separation for Krein--Milman/Bauer/Milman.  Bauer's maximum
+  set is an extremal compact set, not necessarily a convex face.  Probability
+  measures mean regular Borel probabilities on compact Hausdorff spaces and
+  require the published RMK hypotheses.
+- **FA-10:** insert
+  `lem-clarkson-inequalities-for-real-and-complex-lp` immediately before the
+  uniform-convexity corollary.  Eberlein--Šmulian is backed by the complete
+  Whitley proof recorded in §11.6.  The general James theorem remains blocked
+  until a complete proof, not only a theorem name, has been acquired.  The
+  Lomonosov item is the non-load-bearing remark
+  `rem-complex-bishop-phelps-for-general-convex-sets`.
+- **FA-11:** after the basis definitions insert
+  `lem-schauder-coefficient-space-is-banach`, then prove boundedness of partial
+  sums and coordinate functionals by bounded inverse; the old UBP-first route
+  is circular.  Before the charge integral insert
+  `lem-finite-range-sequences-are-uniformly-dense-in-ell-infinity`; before the
+  properness of the countably additive part insert
+  `thm-existence-of-a-shift-invariant-mean-on-bounded-sequences`.  A-page items
+  may not depend on the published B-page Banach-limit example.  Keep the exact
+  real cyclic James norm (closing term and factor (1/2)).
+- **FA-12:** insert, in use order,
+  `lem-bochner-integral-is-independent-of-simple-approximants`,
+  `lem-strong-measurability-is-closed-under-almost-everywhere-limits`,
+  `lem-vector-measure-variation-is-a-measure`,
+  `lem-bochner-density-variation-formula`,
+  `lem-summable-bochner-norm-errors-give-an-integrable-limit`, and
+  `lem-rnp-is-invariant-under-banach-isomorphism`.  Split both directions of
+  dentability/RNP, the interval-Lipschitz characterization, reflexive and
+  separable-dual RNP, and both Dunford--Pettis implications into explicit
+  lemmas if their proofs require them.  Teschl's row-limit argument does not
+  prove diagonal convergence; use the new a.e.-limit lemma.  Do not use the
+  later Hilbert page to prove `thm-reflexive-spaces-have-rnp`.
+- **FA-13:** insert `lem-inner-product-is-jointly-continuous` before extending
+  the pairing to completion.  Replace the colliding and inadequate planned id
+  `def-orthogonal-projection` by `def-hilbert-orthogonal-projection`; explicitly
+  record agreement with the already-published finite-dimensional definition.
+  `thm-double-orthogonal-complement-is-closure` is for a linear subspace (for
+  an arbitrary set use the closure of its span).  With sequential Cauchy
+  completeness, nearest-point selection and hence this proof of Hilbert Riesz
+  carry $\mathsf{AC}_\omega$; do not import the ZF result for the stronger
+  sigma-completeness definition.
+- **FA-14:** insert, in order,
+  `def-square-summable-family-on-an-arbitrary-index-set`,
+  `lem-square-summable-orthogonal-families-have-norm-convergent-finite-sums`,
+  `lem-l-two-with-the-integral-pairing-is-a-hilbert-space`,
+  `lem-finite-tori-are-compact-hausdorff-character-spaces`, and
+  `lem-continuous-periodic-functions-are-dense-in-l-p-of-finite-tori`.
+  Arbitrary sums are finite-subset nets; maximal bases use AC, while a supplied
+  dense sequence gives deterministic Gram--Schmidt.  Do not cite the later
+  fundamental-group circle page.
+- **FA-15:** add `lem-linear-combinations-of-compact-operators-are-compact`,
+  `lem-neumann-series-and-small-perturbations-of-bounded-inverses`,
+  `def-spectrum-and-resolvent-of-a-bounded-operator`, and
+  `lem-a-compact-remainder-estimate-forces-closed-range` in the batch-4 proof
+  order.  Norm closure of compact operators requires a Banach target.  Keep
+  weak-star rather than norm closure in the general transpose-range identity.
+  The Hilbert--Schmidt kernel example uses §14.5, never later FA-16.
+- **FA-16:** add `lem-singular-values-equal-approximation-numbers` before the
+  compactness criterion and
+  `lem-nuclear-series-characterizes-trace-norm` before the trace ideal.
+  State compactness via approximation numbers for arbitrary bounded Hilbert
+  operators; only after compactness is known identify them with singular
+  values.  Move items 12, 13, 15, and 16 of the old inventory to §14.5, import
+  them there, and move Lidskii to §14.5's later trace-formula pair.  Retain the
+  HS ideal theorem on FA-16 after importing the definition/basis independence.
+- **FA-17:** add `lem-submultiplicative-root-limit` before the spectral-radius
+  formula and `lem-admissible-cycle-around-a-compact-plane-set` before the
+  holomorphic calculus.  Complexification needs its norm, completeness, and
+  canonical-independence proofs; Banach-valued contour integration needs
+  construction and Bochner agreement.  The resolvent convention is
+  (R(z,a)=(z1-a)^{-1}), so its derivative is (-R(z,a)^2).
+- **FA-18:** use the 37-item batch-6 A inventory: in particular include the
+  closed-ideal Banach quotient, evaluation characters on (C(K)), the
+  exponential-growth lemma for GKZ, the exact dual-ball extreme-point lemma
+  for Banach--Stone, zero-set-filter machinery for Gelfand--Kolmogorov, and
+  Boolean-ultrafilter extension before Stone duality.  The published
+  ultrafilter lemma is an AC/Zorn implementation, not an established BPI-only
+  supplier.  Nagata, Gerlits--Nagy--Pytkeev, and Dugundji remain L/NS leaves.
+- **FA-19:** use the 26-item batch-6 order.  First prove
+  `lem-bounded-hilbert-operators-form-a-c-star-algebra`; place partial
+  isometries before polar decomposition; prove polynomial isometry and
+  spectral permanence before the continuous calculus; and isolate
+  `lem-two-dimensional-numerical-range-is-convex` before Toeplitz--Hausdorff.
+  Do not use the finite-dimensional projection definition for closed Hilbert
+  subspaces.
+- **FA-20:** add weak/strong additivity of orthogonal projections, the
+  positive-continuous-calculus-to-regular-PVM lemma, and multiplicity
+  preservation by intertwiners.  A PVM projection is explicitly a bounded
+  (P=P^*=P^2), not the finite-dimensional projection item.  Cyclicity uses
+  (T) and (T^*), and spectral multiplicity is fiber dimension, not
+  point-eigenspace dimension at non-atoms.
+- **FA-21:** add Laplace resolvents of a unitary group, resolvent-star-algebra
+  density in $C_0(\mathbb R)$, and the spectral form-domain/core lemma before
+  their consumers.  Min--max is for self-adjoint operators bounded below and
+  uses the form domain.  Rehome
+  `ex-momentum-operator-under-the-fourier-transform` from FA-21 B to FA-23 B;
+  this is preferable to duplicating a 13-item one-dimensional Fourier theory.
+  The earlier-Fourier-pair proposal is therefore rejected.
+- **FA-22/FA-23:** use the batch-8 inventories, including the Gaussian,
+  radial-majorant Lebesgue-point, complex-measure smoothing, Schwartz cutoff,
+  simultaneous (L^1/L^2) approximation, periodic uniqueness, and product /
+  convolution support lemmas.  Move the first three complex-
+  (L^p) interface items to §14.6 and import them.  Add the rehomed momentum
+  example after Plancherel and Schwartz differentiation are available.
+- **FA-24/FA-25:** use the complete batch-9 inventories and their local cutoff,
+  LF-topology, bounded-set, parameter-pairing, tensor, primitive, complex
+  (L^1)-representation, product-test-density, multiplier, and compact-
+  convolution helpers.  Use the unused stable id
+  `thm-unit-lattice-dirac-comb-is-fourier-invariant-in-tempered-distributions`;
+  the existing later `thm-dirac-comb-is-fourier-invariant` is neither the same
+  statement nor an earlier supplier.  Distribution pairings are bilinear,
+  without conjugation, and at least two factors are compactly supported in the
+  stated three-factor convolution associativity theorem.
+
+### 14.5 Square-integrable kernels and the Lidskii endpoint
+
+#### Square-integrable kernels and Hilbert--Schmidt compactness
+
+This pair is necessary because FA-15 B currently needs results first planned
+on later FA-16.  Rehoming only the example would hide the useful general
+kernel theorem; moving the minimal Hilbert--Schmidt core earlier gives a clean
+acyclic proof route.
+
+**A page:** `square-integrable-kernels-and-hilbert-schmidt-compactness`
+
+1. `def-hilbert-schmidt-operator` — moved from FA-16; arbitrary-index sums are
+   suprema of finite subsums.
+2. `thm-hilbert-schmidt-norm-is-basis-independent` — double Parseval and
+   justified nonnegative finite-supremum interchange, not SVD.
+3. `thm-hilbert-schmidt-operators-are-compact` — finite-coordinate truncations
+   converge in operator norm.
+4. `lem-product-rectangle-kernels-are-dense-in-product-l-two` — for the stated
+   sigma-finite product spaces, using finite-measure exhaustion and product
+   measurable-set approximation.
+5. `thm-l-two-kernels-give-hilbert-schmidt-operators` — well-definedness by
+   Fubini/Cauchy--Schwarz, exact HS norm, and separable-support reduction where
+   required.
+
+**B page:** `square-integrable-kernels-and-hilbert-schmidt-compactness-examples`
+
+1. `ex-square-integrable-separable-product-kernel`.
+2. `ex-square-integrable-kernel-without-continuous-representative`.
+3. `ex-square-integrable-kernel-finite-rank-truncations`.
+4. `ex-hilbert-schmidt-kernel-operator-is-compact-on-l-two` — moved from
+   FA-15 B's proof inventory; FA-15 B may display or link it only after this
+   companion is published.
+
+Teschl §§3.5--3.6 and Knapp II.3--II.5 back the operator statements.  John
+Roe, *Lectures on Analysis*, Propositions 13.5--13.6, pp. 67--68,
+<https://bpb-us-e1.wpmucdn.com/sites.psu.edu/dist/1/4020/files/2017/12/analysis-slides-278829v.pdf>,
+was retrieved in full and supplies the independent square-integrable-kernel,
+Hilbert--Schmidt norm, compactness, and converse-kernel route.  Combined with
+the earlier product-measure and simple-function density items, it closes the
+arbitrary sigma-finite rectangle-density step.  This pair and the FA-15
+example are no longer source-blocked.
+
+#### Fredholm determinants and the Lidskii trace formula
+
+Teschl refers elsewhere for general Lidskii and Knapp's cited section does not
+prove it.  The diagnostic proof in the batch notes incorrectly treats an
+invariant generalized-eigenspace span as reducing; the matrix
+$\begin{pmatrix}1&1\\0&0\end{pmatrix}$ disproves that step.  Lidskii is
+therefore moved out of FA-16.  A complete authoritative replacement proof has
+now been acquired and is specified below.
+
+**A page:** `fredholm-determinants-and-the-lidskii-trace-formula`
+
+1. `def-algebraic-multiplicity-for-compact-operators`.
+2. `lem-finite-rank-compressions-converge-in-trace-norm`.
+3. `lem-weyl-eigenvalue-singular-value-inequalities`.
+4. `def-fredholm-determinant` — trace-norm limit of finite-rank determinants.
+5. `lem-fredholm-determinant-trace-norm-continuity-and-growth`.
+6. `lem-fredholm-determinant-logarithmic-derivative`.
+7. `lem-fredholm-determinant-zeros-and-algebraic-multiplicities`.
+8. `lem-quasinilpotent-trace-class-operator-has-zero-trace`.
+9. `lem-generalized-eigenspace-trace-decomposition` — use invariant
+   quotient/compression arguments, never an unjustified orthogonal reduction.
+10. `thm-lidskii-for-trace-class-operators` — moved stable endpoint, with
+    algebraic multiplicity, absolute summability, and separable-support
+    reduction explicit.
+
+**B page:** `fredholm-determinants-and-the-lidskii-trace-formula-examples`
+
+1. `ex-fredholm-determinant-of-a-finite-rank-operator`.
+2. `ex-diagonal-trace-class-fredholm-determinant`.
+3. `ex-volterra-square-has-zero-trace`.
+4. `cex-invariant-subspace-need-not-reduce-an-operator`.
+
+Aleksey Kostenko, *Trace Ideals with Applications* (complete lecture notes),
+§§3.1--3.5 and especially §3.4, pp. 21--45,
+<https://users.fmf.uni-lj.si/kostenko/teach/IdealsNotes.pdf>, was retrieved in
+full and the proof range was read.  It develops the singular-value estimates,
+antisymmetric tensor powers, Weyl--Horn inequalities, trace-norm determinant
+continuity, zero multiplicities, Hadamard factorization, and the final Lidskii
+identity.  The author must follow that route and retain the invariant-subspace
+warning above.  This pair is no longer source-blocked.
+
+### 14.5A Banach calculus and manifolds required by published DT-4
+
+The completed Differential Topology audit found that its published Sard--Smale
+and universal-metric arguments use Banach implicit-function, split-submanifold,
+and nonlinear Fredholm machinery absent from FA-15.  Add the FA-owned A/B pair
+`banach-space-differential-calculus-and-banach-manifolds` /
+`banach-space-differential-calculus-and-banach-manifolds-examples` at
+288.0761/.0762.  Its A page requires the four A pages printed in §14.1; its B
+page requires only its own A page.
+
+The A inventory, in proof order, is:
+
+1. `def-frechet-derivative-between-banach-spaces`;
+2. `lem-the-frechet-derivative-is-unique`;
+3. `thm-chain-sum-product-and-composition-rules-for-banach-derivatives`;
+4. `def-c-k-map-between-banach-spaces`;
+5. `lem-banach-mean-value-estimate-on-a-convex-set`;
+6. `thm-inverse-function-theorem-for-banach-spaces`;
+7. `thm-implicit-function-theorem-for-banach-spaces`;
+8. `def-countable-base-banach-manifold-and-smooth-map`;
+9. `def-tangent-space-and-differential-on-a-banach-manifold`;
+10. `lem-banach-manifold-differentials-are-chart-independent`;
+11. `def-split-banach-submanifold`;
+12. `thm-regular-value-theorem-for-banach-manifolds`;
+13. `def-smooth-banach-vector-bundle-and-section`;
+14. `thm-a-transverse-banach-bundle-section-has-a-split-zero-submanifold`;
+15. `def-fredholm-map-between-banach-manifolds`;
+16. `lem-local-finite-dimensional-reduction-for-a-fredholm-map`;
+17. `prop-the-index-of-a-fredholm-map-is-locally-constant`;
+18. `rem-surjectivity-alone-does-not-give-a-banach-submanifold-without-a-split-kernel`.
+
+The B inventory is
+`ex-the-derivative-of-a-bounded-bilinear-map`,
+`ex-the-banach-inverse-theorem-for-a-small-lipschitz-perturbation-of-the-identity`,
+`ex-a-regular-level-set-in-a-banach-space`,
+`ex-a-projection-with-finite-dimensional-kernel-is-fredholm`, and
+`cex-a-closed-uncomplemented-subspace-is-not-a-split-banach-submanifold`.
+Use the Fréchet/operator-norm convention.  Inverse function is proved by
+contraction after derivative normalization; implicit and regular-value results
+require a complemented kernel; the Fredholm reduction splits finite-dimensional
+kernel and cokernel before solving the infinite-dimensional coordinate.  Full
+source and hypothesis details are controlled by Differential Topology §12.2,
+using Wang's complete *Banach Calculus* and Abbondandolo--Majer's complete §2.3.
+This pair is a Phase-2 root because published DT-4 consumes it.
+
+### 14.6 Cross-category endpoint interpolation repair
+
+The completed Measure Theory audit supersedes the combined 288.0341/.0342
+proposal above: it was impossible at that order because Hadamard three-lines is
+not available until Complex Analysis order 288.07811.
+
+Use MT-16c A/B `complex-lp-spaces-and-test-function-conventions` at
+288.0321/.0322 for the complex $L^p$, density, pairing, dual-norming,
+translation, and mollification interfaces.  Use MT-CA-1 A/B
+`complex-riesz-thorin-endpoint-interpolation` at
+288.078121/.078122 for analytic families and endpoint interpolation after
+`the-identity-theorem-and-the-open-mapping-theorem`.  The complete inventories,
+hypotheses, proof routes, sources, and stable-ID move are controlled by Measure
+Theory §0A.1.
+
+Move the staged complex-$L^p$ and interpolation helper IDs out of FA-22 exactly
+as specified by Measure Theory §0A.4.  FA-22 requires the two new **A pages**,
+never their examples companions.  Do not mint
+`thm-complex-riesz-thorin-with-infinite-target-endpoints`; after its gated
+Phase-3 repair, the stable `thm-riesz-thorin-interpolation` supplies that
+interface.  Until the stable theorem has an acyclic final home, FA and Fourier
+remain blocked from consuming it.
+
+### 14.7 Proof-order and convention gates not solved by page IDs
+
+1. A page in a `requires` closure is not a supplier until its inventory is
+   nonempty and the exact item statement/proof has been checked.  In
+   particular FA-12 and FA-13 remained empty in the audited run, so every
+   later Hilbert, Bochner, PVM, unbounded-operator, and distribution consumer
+   stays blocked.
+2. No A item may depend on a B-only example.  A B page may use a later result
+   only after rehoming the example or inserting an earlier A supplier; a
+   `forward_refs` label does not cure the edge.
+3. Keep the first-variable-linear Hilbert convention.  Thus Riesz is
+   conjugate-linear in its representing vector, rank-one operators are
+   $x\mapsto\langle x,v\rangle u$, and trace terms are
+   $\langle Te,e\rangle$.  Distribution duality remains bilinear.
+4. Keep the Fourier normalization
+   $\widehat f(\xi)=\int f(x)e^{-2\pi i x\cdot\xi}\,dx$; differentiation is
+   multiplication by $2\pi i\xi$, and momentum is
+   $\mathcal F^{-1}M_{2\pi\xi}\mathcal F$.
+5. Compactness of a bounded operator does not imply $0$ is an eigenvalue,
+   only that $0$ belongs to the spectrum in infinite dimension.  Strong
+   limits of compact operators need not be compact.  Failure of AP does not by
+   itself exhibit a specific nonapproximable endomorphism.
+6. An arbitrary $L^2$ kernel has no canonical diagonal.  The trace-by-
+   diagonal example must retain hypotheses such as continuity and positivity
+   that make the diagonal formula meaningful.
+7. Full-text absence remains a blocker for James's theorem and the RNP
+   equivalences.  Eberlein--Šmulian has the complete Whitley proof recorded in
+   §11.6.  The Lidskii and square-kernel prerequisite pairs now have the
+   complete proof sources recorded in §14.5.  Structural coverage and
+   source-list shape checks do not replace reading the proof.
+
+### 14.8 Exact deferred findings on published FA-1--FA-7 content
+
+These files are read-only.  Do not apply any repair below until every new
+supplier named by that repair is published; then repair through the normal
+authoring/review workflow.
+
+**P-1 — declared within-page forward edges.**  On
+`bounded-linear-operators-and-quotient-spaces`, both
+`lem-operator-norm-is-a-norm` and
+`lem-composition-operator-norm-inequality` declare a dependency on the later
+`def-space-of-bounded-linear-operators` (current positions 4 → 6 and
+5 → 6).  Future repair: move the definition immediately after
+`def-operator-norm`, before both lemmas; no statement change is needed.
+
+**P-2 — AC implementation presented downstream without inherited
+hypotheses.**  `thm-hahn-banach-dominated-extension` explicitly assumes AC via
+`thm-zorn`, but the statements of
+`thm-hahn-banach-norm-preserving-extension`,
+`thm-complex-hahn-banach-norm-preserving-extension`,
+`thm-dual-norms-every-vector`, `cor-dual-separates-points`,
+`cor-norm-recovered-from-the-dual-unit-ball`, and
+`thm-norm-preserving-extension-from-any-subspace` omit that inherited
+assumption.  The same unqualified route enters
+`thm-separation-of-an-open-convex-set-and-a-point`,
+`lem-transpose-is-bounded-and-has-the-same-norm`,
+`lem-elementary-kernel-range-annihilator-identities`, and
+`thm-canonical-bidual-map-is-an-isometry`.  In ordinary ZFC the mathematics is
+correct, but the library's explicit choice contracts are not.  Future repair,
+after §14.2 is published: rewire the relative claims to the corresponding
+relative-HB items, or state AC on any item intentionally retaining the Zorn
+implementation.  Re-audit every transitive consequence before weakening its
+choice label.
+
+**P-3 — published sequential UBP is too strong for the planned weak-sequence
+cost.**  `thm-sokal-gliding-hump-uniform-boundedness` assumes
+$\mathsf{AC}_\omega+\mathrm{DC}$ and handles an arbitrary family.  It does
+not prove an $\mathsf{AC}_\omega$-only claim.  Future repair, after §14.3 is
+published: the new FA-8 weak-sequence theorem cites
+`thm-sequential-uniform-boundedness-under-countable-choice`; leave the
+published general-family theorem at its honest stronger upper bound.
+
+**P-4 — extcheck's exact functional-analysis consequences.**  The current
+published checker reports direct recorded-not-proved dependence for
+`rem-choice-strength-of-hahn-banach`,
+`rem-general-complete-metric-baire-proof-would-overstate-the-choice-cost`,
+`rem-hahn-banach-open-choice-questions`, and
+`thm-banach-space-no-countably-infinite-hamel-basis`, and inherited dependence
+for `cex-polynomial-space-admits-no-complete-norm`.  The first three are
+orientation remarks and must remain non-load-bearing.  The theorem's proof is
+self-contained: its dependency on `rem-baire-category-choice-strength` is
+used only as commentary [L4], not as a proved lemma.  Future repair: remove
+that logical dependency and move the choice comparison to a non-load-bearing
+remark; the polynomial counterexample then loses the inherited extcheck path.
+Do not claim the extcheck warning is cleared before those published metadata
+changes actually land.
+
+**P-5 — published source/claim boundary.**
+`rem-choice-strength-of-hahn-banach` cites a recorded BPI/AC separation remark
+as if it completed the sharper HB classification.  Its prose also points to
+Pincus, but a reference is not a proved dependency.  Future repair: either
+keep all non-implications explicitly orientation-only or give them proved
+set-theoretic homes outside the analytic dependency graph.  No analytic
+theorem may depend on those remarks.
+
+The remaining published FA proof-bearing items were checked for their stated
+scalar fields, completeness assumptions, operator directions, quotient
+well-definedness, and Banach/Hilbert transpose conventions.  This audit found
+no additional statement-level mathematical defect requiring a published-file
+change.  That conclusion does not waive the exact P-1--P-5 metadata,
+choice-contract, and recorded-dependence defects above.
+
+### 14.9 Audit verdict
+
+The track remains build-gated on publishing the five new FA prerequisite pairs,
+the cross-category interpolation pair, and the empty FA-12/FA-13 supplier
+inventories in dependency order.  Complete proof acquisition for James's
+theorem and the RNP equivalences remains a content gate for those specific
+endpoints.  Eberlein--Šmulian, Lidskii, and the square-kernel pair are no
+longer source blockers.  Existing published content remains published and unchanged;
+P-1--P-5 are deferred repairs.  A green plan validator, dependency-array check,
+or coverage-shape check is necessary but not sufficient to lift a content gate.
+
+### 14.10 Complex Analysis reconciliation (2026-09-08)
+
+Planned CA-RS-H and SC-6 consume FA-13's Hilbert-space Riesz/projection
+interface; CA-RS-H, SC-6, and the other exact CA inventories in the Complex
+Analysis scaffold consume the specified FA weak-compactness interfaces; SC-6
+also consumes FA-21's densely-defined adjoint interface. Complex Analysis must
+not reconstruct these general functional-analytic results.
+
+All named CA consumers are planned. These edges add zero direct and zero
+transitive published consumers to the FA pairs and create no new Phase-2 root.
+
+### 14.11 Foundations/Set Theory reconciliation (2026-09-08)
+
+Two Set Theory completion items are Phase-2 suppliers for published FA items:
+
+| planned SET supplier | published FA direct consumer | complete published FA impact |
+|---|---|---|
+| `thm-basic-cohen-symmetric-model-satisfies-bpi-and-not-ac` (SET-21) | `rem-choice-strength-of-hahn-banach` | that item and `rem-hahn-banach-open-choice-questions` on its B companion |
+| `thm-complete-metric-baire-is-equivalent-to-dependent-choice-over-zf` (SET-22) | `thm-banach-space-no-countably-infinite-hamel-basis`; `rem-general-complete-metric-baire-proof-would-overstate-the-choice-cost` | those two items and `cex-polynomial-space-admits-no-complete-norm` on the B companion |
+
+Until the SET suppliers and their entire earlier prerequisite closure are
+published, the FA consumers remain untouched. In Phase 3, replace their
+recorded-not-proved edges by these proved suppliers. Neither FA page may quote
+the target catalogue as evidence.
+
+### 14.12 Probability Theory reconciliation (2026-09-08)
+
+Planned PT-8 remains build-held until FA-22 is populated and published; its
+empty page and B companion supply nothing. PT-9 must not wait for empty FA-19:
+its finite-dimensional covariance square root uses the already-published
+Linear Algebra theorem `thm-non-negative-square-root-exists-and-is-unique`.
+These are planned-consumer corrections and create no new FA Phase-2 root.
+
+### 14.13 Real Analysis reconciliation (2026-09-08)
+
+Add the published Real Analysis A page
+`the-divergence-theorem-and-classical-stokes` to the FA A page
+`distributions-test-functions-and-differentiation`. Its B example
+`ex-distributional-laplacian-of-the-newtonian-kernel` uses
+`cor-greens-second-identity-for-glued-elementary-solid-regions` only through
+that A. This is a Phase-3 page-edge repair using a published supplier and
+creates no FA Phase-2 root.
+
+### 14.14 Representation Theory reconciliation (2026-09-08)
+
+Add the planned-only FA pair
+`measurable-hilbert-fields-and-direct-integral-operators` /
+`measurable-hilbert-fields-and-direct-integral-operators-examples` after
+FA-20 and before Representation Theory RG-24. Its A page requires exactly
+`standard-borel-real-codings-and-determining-classes`,
+`measurable-functions-and-simple-approximation`,
+`the-lebesgue-integral-and-the-convergence-theorems`,
+`the-lp-spaces-holder-minkowski-and-riesz-fischer`,
+`hilbert-space-geometry-and-riesz-representation`,
+`orthonormal-bases-parseval-and-fourier-series`, and
+`spectral-measures-and-borel-functional-calculus`; never their B companions.
+All listed A pages must be populated and proved before this pair builds.
+
+Author these A items in order:
+
+1. `def-von-neumann-algebra-and-commutant` — fix the concrete unital
+   weak-operator-closed convention on a Hilbert space and define commutants.
+2. `def-measurable-hilbert-field-from-a-countable-fundamental-family` — over a
+   sigma-finite standard-Borel measure space, define the fibre field and its
+   countable fundamental sequence, including fibrewise density.
+3. `lem-measurable-sections-have-measurable-pointwise-inner-products` — prove
+   the fundamental-family criterion and closure under pointwise limits.
+4. `def-direct-integral-of-a-measurable-hilbert-field` — quotient
+   square-integrable measurable sections by a.e. equality and prove the inner
+   product is representative-independent.
+5. `thm-direct-integrals-of-measurable-hilbert-fields-are-hilbert-spaces` —
+   prove completeness by a summable-subsequence argument; state its exact
+   countable-choice cost and prove separability under the stated hypotheses.
+6. `def-measurable-and-decomposable-operator-fields` — define weak
+   measurability, essential boundedness, and the induced operator.
+7. `thm-measurable-essentially-bounded-operator-fields-act-decomposably` —
+   prove representative independence, boundedness, norm equality, and
+   adjoint/multiplication compatibility.
+8. `thm-decomposable-operators-are-the-commutant-of-diagonal-multiplication` —
+   prove both directions under the stated standard, sigma-finite, separable
+   hypotheses; fibrewise notation is not a proof of decomposability.
+9. `thm-spectral-multiplicity-model-for-separable-abelian-von-neumann-algebras`
+   — use FA-20's cyclic spectral representation and a countable orthogonal
+   cyclic decomposition, with the measurable multiplicity function and all
+   standard/separable hypotheses explicit.
+
+The B page requires only its A and contains the dependency leaves
+`ex-direct-integral-of-a-constant-hilbert-field`,
+`ex-multiplicity-two-diagonal-representation`, and
+`ex-a-measurable-two-dimensional-operator-field`.
+
+The A pair's only direct consumers are planned RG-24
+`mackeys-imprimitivity-theorem` and planned RG-26
+`direct-integral-decomposition-and-type-i-groups`; complete published impact is
+zero. Every A and B item therefore has zero direct and zero transitive
+published consumers and is not Phase-2 eligible. RG-24, RG-26, and RG-30 are
+build-held until this pair is proved. Bruhat, Part III Chapters 10--12,
+pp. 91--126, <https://mathweb.tifr.res.in/Documents/Publications/Lectures/tifr14.pdf>,
+is the full-text proof source; FA-20 supplies the modern spectral-measure
+interface. Missing measurable-selection, representative-independence,
+completeness, commutant, or multiplicity arguments block authoring.

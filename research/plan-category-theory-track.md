@@ -4368,3 +4368,334 @@ references**, no proposed-id collisions, and no page over the ceiling.
 repoints in §5.1 and the nine amendments in §11, and retains this document as the
 input to a later build cycle. That future cycle authors, checks and gates items;
 this commission does none of those things.
+
+---
+
+# PART II — published-dependency audit (2026-09-08)
+
+This part supersedes every statement above that calls `MA-1`--`MA-18`
+unauthored or future. All eighteen pairs have been published, as have the three
+earlier Category Theory pairs. This audit is a repair contract only. It does
+not authorise edits to `library/`, `items/`, generated artifacts, workflow
+state, or already-published content. The exact published-content repair in
+§II.5 remains deferred until the immutable-published gate is lifted.
+
+## II.1 Audited corpus and binding invariants
+
+The live corpus has **42 published Category Theory pages (21 A/B pairs), 1,095
+page memberships, and 1,095 distinct item files**. There are no duplicate
+homes. Of these items, 848 are proof-bearing and all 848 pass the normative
+precheck. Direct inspection of the live item graph found no unresolved item
+id, no dependency on a draft item, no cross-page forward dependency, and no
+item homed only on a B page that is consumed outside that B page. It did find
+three same-page forward edges in published ordering; §II.5 records their exact
+deferred repairs.
+
+For this audit the following rules are binding:
+
+1. A B page is a dependency leaf. It may contain local dependencies among its
+   own examples and may require earlier A-page background needed by those
+   examples, but no page or item outside it may consume the B page or a
+   B-only item.
+2. A published proof, definition, example, or false-statement refutation is
+   read-only here. Exact defects are recorded, not silently repaired.
+3. A cited fact is a dependency edge. Recorded-not-proved material may remain
+   as non-load-bearing orientation, but may not support a proof-bearing item or
+   any future planned item.
+4. `research/plan-spec.json` must describe the published frontmatter exactly.
+   Its current item titles, dependency arrays, and seven same-page sequences
+   have drifted from disk; §II.4 gives the deterministic repair.
+
+The pair-by-pair disposition is:
+
+| A/B pair | published A/B items | disposition |
+|---|---:|---|
+| `categories-functors-and-natural-transformations` | 60 / 25 | metadata resynchronisation only |
+| `universal-properties-and-the-yoneda-lemma` | 21 / 14 | metadata resynchronisation only |
+| `limits-and-colimits` | 46 / 17 | page-level B-leaf cutover; metadata resynchronisation |
+| `adjunctions-units-and-counits` | 51 / 10 | page-level B-leaf cutover; metadata resynchronisation |
+| `reflective-subcategories-and-the-adjoint-functor-theorems` | 44 / 9 | page-level B-leaf cutover; metadata resynchronisation |
+| `monads-comonads-and-their-algebras` | 59 / 14 | page-level B-leaf cutover; metadata resynchronisation |
+| `monadicity-and-becks-theorem` | 44 / 7 | page-level B-leaf cutover; metadata resynchronisation |
+| `ends-coends-and-weighted-limits` | 50 / 9 | page-level B-leaf cutover; metadata resynchronisation |
+| `kan-extensions-density-and-the-free-cocompletion` | 29 / 7 | page-level B-leaf cutover; metadata resynchronisation |
+| `preadditive-and-additive-categories-and-biproducts` | 60 / 8 | page-level B-leaf cutover; same-page order and metadata resynchronisation |
+| `abelian-categories` | 55 / 9 | page-level B-leaf cutover; same-page order and metadata resynchronisation |
+| `subobject-lattices-generators-and-the-grothendieck-axioms` | 54 / 8 | page-level B-leaf cutover; same-page order and metadata resynchronisation |
+| `exactness-and-the-member-calculus` | 49 / 9 | same-page order and metadata resynchronisation |
+| `the-diagram-lemmas-in-an-abelian-category` | 35 / 8 | one deferred recorded-material dependency repair; page-level B-leaf cutover; metadata resynchronisation |
+| `monoidal-categories-and-monoidal-functors` | 38 / 8 | page-level B-leaf cutover; same-page order and metadata resynchronisation |
+| `strictification-and-mac-lanes-coherence-theorem` | 22 / 6 | page-level B-leaf cutover; metadata resynchronisation |
+| `closed-monoidal-categories-and-the-internal-hom` | 33 / 6 | page-level B-leaf cutover; same-page order and metadata resynchronisation |
+| `braided-and-symmetric-monoidal-categories` | 29 / 7 | page-level B-leaf cutover; same-page order and metadata resynchronisation |
+| `duality-and-rigidity-in-monoidal-categories` | 37 / 7 | page-level B-leaf cutover; same-page order and metadata resynchronisation |
+| `enriched-categories` | 43 / 15 | page-level B-leaf cutover; metadata resynchronisation |
+| `tensor-and-fusion-categories` | 29 / 4 | metadata resynchronisation only |
+
+Here “clear” means that this audit found no dependency-interface defect. It is
+not a claim that later mathematical review can never improve the exposition.
+The complete authoritative texts and exact read ranges already recorded in
+§§10.0--10.3 remain the source basis. The unavailable Kelly 1964 and Borceux
+texts remain non-load-bearing: the published results use the full EGNO, Riehl,
+Kelly-book, Cruttwell, Freyd, and other accessible treatments identified there.
+No new mathematical claim in this part depends on an unavailable full text.
+
+## II.2 Exact page-level B-leaf cutover
+
+In `research/plan-spec.json`, replace the following 17 `requires` entries. Keep
+every other prerequisite on the consumer unchanged.
+
+| consumer A page | replace B page | with A page |
+|---|---|---|
+| `adjunctions-units-and-counits` | `limits-and-colimits-examples` | `limits-and-colimits` |
+| `reflective-subcategories-and-the-adjoint-functor-theorems` | `adjunctions-units-and-counits-examples` | `adjunctions-units-and-counits` |
+| `monads-comonads-and-their-algebras` | `reflective-subcategories-and-the-adjoint-functor-theorems-examples` | `reflective-subcategories-and-the-adjoint-functor-theorems` |
+| `monadicity-and-becks-theorem` | `monads-comonads-and-their-algebras-examples` | `monads-comonads-and-their-algebras` |
+| `ends-coends-and-weighted-limits` | `monadicity-and-becks-theorem-examples` | `monadicity-and-becks-theorem` |
+| `kan-extensions-density-and-the-free-cocompletion` | `ends-coends-and-weighted-limits-examples` | `ends-coends-and-weighted-limits` |
+| `preadditive-and-additive-categories-and-biproducts` | `kan-extensions-density-and-the-free-cocompletion-examples` | `kan-extensions-density-and-the-free-cocompletion` |
+| `abelian-categories` | `preadditive-and-additive-categories-and-biproducts-examples` | `preadditive-and-additive-categories-and-biproducts` |
+| `subobject-lattices-generators-and-the-grothendieck-axioms` | `abelian-categories-examples` | `abelian-categories` |
+| `the-diagram-lemmas-in-an-abelian-category` | `exactness-and-the-member-calculus-examples` | `exactness-and-the-member-calculus` |
+| `monoidal-categories-and-monoidal-functors` | `the-diagram-lemmas-in-an-abelian-category-examples` | `the-diagram-lemmas-in-an-abelian-category` |
+| `strictification-and-mac-lanes-coherence-theorem` | `monoidal-categories-and-monoidal-functors-examples` | `monoidal-categories-and-monoidal-functors` |
+| `closed-monoidal-categories-and-the-internal-hom` | `strictification-and-mac-lanes-coherence-theorem-examples` | `strictification-and-mac-lanes-coherence-theorem` |
+| `braided-and-symmetric-monoidal-categories` | `closed-monoidal-categories-and-the-internal-hom-examples` | `closed-monoidal-categories-and-the-internal-hom` |
+| `duality-and-rigidity-in-monoidal-categories` | `braided-and-symmetric-monoidal-categories-examples` | `braided-and-symmetric-monoidal-categories` |
+| `enriched-categories` | `duality-and-rigidity-in-monoidal-categories-examples` | `duality-and-rigidity-in-monoidal-categories` |
+| `tensor-and-fusion-categories` | `enriched-categories-examples` | `enriched-categories` |
+
+The replacement page in every row is strictly earlier than the consumer. No
+consumer uses an item on the removed B page, and substituting the A companion
+preserves every external item supplier in the consumer's prerequisite closure.
+After the cutover every one of the 21 Category Theory B pages has zero page
+consumers and zero outside item consumers. The additional prerequisites on
+`abelian-categories-examples` -- `uniform-spaces` and
+`localisation-of-modules-and-support` -- must remain because its own examples
+use them; they do not make that B page a supplier.
+
+## II.3 Completeness, order, and recorded-material closure
+
+There is no remaining future Category Theory inventory: all page and item ids
+scaffolded in this file are published. Consequently no new prerequisite pair
+is needed and there is no future Category Theory item to reorder. Every
+cross-page dependency is already strictly earlier. The three published
+same-page exceptions are:
+
+- `thm-the-subobject-inequalities-underlying-exactness` unnecessarily names
+  the following `def-exactness-at-a-node`, although neither its statement,
+  Facts & Assumptions, nor proof uses that definition;
+- `thm-the-kernel-row-and-cokernel-row-of-a-morphism-of-short-exact-sequences-are-exact-at-two-nodes-each`
+  directly uses the following
+  `thm-exactness-of-kernel-and-cokernel-sequences-under-endpoint-hypotheses`;
+- `thm-the-endomorphisms-of-the-unit-form-a-commutative-monoid` directly uses
+  the later `cor-the-two-unitors-agree-on-the-unit-object`.
+
+The final two are ordering defects, not missing mathematics. The first is a
+stale unused dependency. Their exact deferred cutovers are in §II.5.
+
+The only formal recorded-not-proved edge in the Category Theory item closure is
+
+`fs-the-diagram-lemmas-in-an-abelian-category-follow-from-the-module-case-by-the-embedding-theorem`
+-> `rem-the-freyd-mitchell-embedding-theorem`.
+
+It is a published defect and is repaired only as specified in §II.5. No future
+planned item depends directly or transitively on either id. The recorded remark
+has exactly one published direct consumer, the false statement above, and its
+complete transitive published consumer closure is that same singleton. The
+false statement itself has no published consumer. Thus the deferred repair has
+no downstream published impact beyond the item being edited.
+
+No new or repaired supplier A/B pair is introduced by this audit, so there is
+no supplier-pair consumer closure to build or publish. This is not an omitted
+ledger entry: the B-leaf changes are page-metadata cutovers between already
+published A/B pairs, and the sole content repair consumes only already
+published intrinsic diagram-lemma material.
+
+## II.4 Exact plan-spec resynchronisation
+
+The page memberships agree as sets: the spec and published pages each name the
+same 1,095 items. Apply these deterministic changes to the Category Theory rows
+only:
+
+1. For every existing Category Theory item entry, replace `title`, `kind`, and
+   `deps` with the exact values in that item's published frontmatter. This is
+   **195 dependency-array mismatches, 105 title mismatches, and zero kind
+   mismatches**. Preserve all other fields. After the deferred content repair
+   in §II.5, resynchronise that item's `deps` once more to the repaired file.
+2. Replace these eight page titles with their exact published page-frontmatter
+   values: `adjunctions-units-and-counits-examples` -> “Adjunctions Units and
+   Counits: Examples”; `monadicity-and-becks-theorem` -> “Monadicity and Beck's
+   Theorem”; `monadicity-and-becks-theorem-examples` -> “Monadicity and Beck's
+   Theorem — Examples”; and use a plain hyphen before “Examples” on
+   `braided-and-symmetric-monoidal-categories-examples`,
+   `closed-monoidal-categories-and-the-internal-hom-examples`,
+   `duality-and-rigidity-in-monoidal-categories-examples`,
+   `monoidal-categories-and-monoidal-functors-examples`, and
+   `strictification-and-mac-lanes-coherence-theorem-examples`.
+3. Preserve membership but make the seven following `items` arrays match the
+   published page order, subject to the additional strict-earlier repairs in
+   §II.5. The exact moves from current spec position to published position are:
+
+   - `abelian-categories`: move
+     `cex-an-exact-functor-need-not-be-faithful` 39 -> 48,
+     `cex-filtered-vector-spaces-form-an-additive-category-with-all-kernels-and-cokernels-that-is-not-abelian`
+     46 -> 49, and
+     `cex-torsion-free-abelian-groups-do-not-form-an-abelian-category` 47 -> 50.
+   - `preadditive-and-additive-categories-and-biproducts`: move
+     `cex-an-infinite-coproduct-need-not-agree-with-the-infinite-product` 29 ->
+     53, `cex-a-zero-kernel-does-not-force-monicity-in-a-merely-semiadditive-category`
+     39 -> 54, and
+     `cex-a-covariant-hom-functor-on-an-additive-category-need-not-preserve-cokernels`
+     49 -> 55.
+   - `subobject-lattices-generators-and-the-grothendieck-axioms`: move
+     `cex-a-subobject-lattice-need-not-be-distributive` 8 -> 46,
+     `cex-abelian-groups-do-not-satisfy-ab5-star` 36 -> 47, and
+     `cex-the-opposite-of-abelian-groups-does-not-satisfy-ab5` 38 -> 48.
+   - `exactness-and-the-member-calculus`: move
+     `fs-a-short-exact-sequence-splits-whenever-its-middle-object-is-isomorphic-to-the-biproduct-of-the-outer-two`
+     10 -> 40, `cex-the-members-of-an-object-do-not-form-a-group` 25 -> 41,
+     `cex-two-morphisms-agreeing-on-every-member-need-not-be-equal` 26 -> 42,
+     and
+     `cex-the-kernel-row-of-a-morphism-of-short-exact-sequences-need-not-be-short-exact`
+     35 -> 43.
+   - `closed-monoidal-categories-and-the-internal-hom`: move
+     `cex-a-monoidal-category-need-not-be-closed` 5 -> 28.
+   - `braided-and-symmetric-monoidal-categories`: move
+     `cex-the-braid-category-is-braided-but-not-symmetric` 18 -> 27,
+     `fs-every-diagram-built-from-the-associator-and-the-braiding-commutes` 22
+     -> 28, and
+     `fs-every-braided-monoidal-category-is-equivalent-to-a-strict-commutative-one`
+     27 -> 29.
+   - `duality-and-rigidity-in-monoidal-categories`: move
+     `cex-not-every-monoidal-category-is-rigid` 12 -> 30 and
+     `cex-left-and-right-duals-and-double-duals-need-not-collapse` 17 -> 31.
+
+The positions are one-based and refer to the present spec before any move; the
+authoritative result is the complete published frontmatter sequence, which
+avoids the ambiguity of applying several moves sequentially.
+
+## II.5 Exact deferred published-content and order repairs
+
+Do not apply these repairs until the published-content gate is lifted.
+
+First, on `exactness-and-the-member-calculus`:
+
+1. Remove `def-exactness-at-a-node` from the `deps` of
+   `thm-the-subobject-inequalities-underlying-exactness`. Preserve the theorem's
+   statement and proof: they establish the two subobject inequalities without
+   using the later definition. Resynchronise the same plan-spec dependency
+   array.
+2. Move
+   `thm-exactness-of-kernel-and-cokernel-sequences-under-endpoint-hypotheses`
+   immediately before
+   `thm-the-kernel-row-and-cokernel-row-of-a-morphism-of-short-exact-sequences-are-exact-at-two-nodes-each`
+   in both the published page and its plan-spec `items` array. In the current
+   published sequence this is a move from 32 -> 31.
+
+Second, on `monoidal-categories-and-monoidal-functors`, move
+`thm-the-endomorphisms-of-the-unit-form-a-commutative-monoid` from current
+published position 8 to immediately after
+`cor-the-two-unitors-agree-on-the-unit-object`, at final position 20 after the
+removal from position 8. Make the identical plan-spec move. This leaves the two
+unitor-determination theorems and their corollary strictly before the
+endomorphism theorem that uses the corollary.
+
+Third, in
+`fs-the-diagram-lemmas-in-an-abelian-category-follow-from-the-module-case-by-the-embedding-theorem`:
+
+1. Remove `rem-the-freyd-mitchell-embedding-theorem` from `deps`.
+2. Keep
+   `rem-why-the-diagram-lemmas-are-not-proved-by-the-embedding-theorem` and
+   `thm-the-connecting-morphism-exists-and-is-unique` as the two dependencies.
+3. Replace the current two-step refutation by a direct proof-method
+   refutation: the first dependency records that this library deliberately does
+   not take an embedding-theorem reduction, while the second constructs the
+   connecting morphism intrinsically in the arbitrary abelian category. Hence
+   the statement is false specifically as a description of **this page's**
+   proof route. Do not assert or use the recorded Freyd--Mitchell theorem.
+4. Preserve the stable id, kind, title, statement, sources, and published
+   status. Resynchronise the corresponding plan-spec `deps` to the resulting
+   two-element array.
+
+This retires the only proof-bearing Category Theory dependency on formally
+recorded-not-proved material and removes all three same-page forward edges
+without weakening or deleting any mathematical item.
+
+## II.6 Reconciliation with the repaired neighbouring scaffolds
+
+Ownership is now exact:
+
+- `research/plan-algebra-track.md` owns
+  `tensor-products-of-modules`. Its published natural associator, unitors,
+  symmetry, tensor--Hom adjunction, and right-exactness material supplies
+  `monoidal-categories-and-monoidal-functors` and
+  `closed-monoidal-categories-and-the-internal-hom` (and the latter's companion
+  examples). Category Theory does not duplicate that construction. The repaired
+  Abstract Algebra audit introduces no Category-Theory-owned prerequisite and
+  confirms that Category Theory is not a direct supplier to its 74 audited
+  pages.
+- The exact sets of new direct page edges between this track and the repaired
+  `research/plan-differential-geometry-track.md`,
+  `research/plan-differential-topology-track.md`,
+  `research/plan-fourier-analysis-track.md`,
+  `research/plan-functional-analysis-track.md`,
+  `research/plan-measure-theory-track.md`, and
+  `research/plan-pde-track.md` are all **empty**. Those tracks retain ownership
+  of their geometric, topological, analytic, measure-theoretic, and PDE
+  constructions; this track retains the general categorical definitions and
+  theorems. Inspection of the published item graph likewise found zero direct
+  item edges in either direction between Category Theory and those six
+  categories.
+
+The existing downstream page ownership outside those seven reconciled
+scaffolds remains unchanged: Homological Algebra consumes
+`abelian-categories`, `exactness-and-the-member-calculus`,
+`the-diagram-lemmas-in-an-abelian-category`, and the Grothendieck-category
+pages; Braid Groups consumes the braided/rigid/tensor pages; and the symmetric
+group representation-stability scaffold consumes
+`categories-functors-and-natural-transformations`. Every such edge already
+targets an A page.
+
+## II.7 Validation receipt
+
+- `node tools/depcheck.mjs` emits no warning or error for a Category Theory
+  page or item.
+- `node tools/extcheck.mjs` identifies exactly the one published edge in
+  §II.3 and no future Category Theory consumer.
+- Normative precheck over the 1,095 homed items checks 848 proof-bearing items:
+  **848 passed, 0 failed**.
+- An in-memory projection of the 17 B-leaf cutovers plus the exact metadata and
+  order resynchronisation and the three deferred item/order repairs has zero
+  Category Theory B-page consumers and zero same-page Category Theory forward
+  edges, and produces no Category Theory error under `tools/validate-plan.mjs`.
+  The whole projected plan is presently blocked by one unrelated dirty-worktree
+  error on
+  `category-o-finiteness-duality-and-blocks` ->
+  `noetherian-rings-and-hilbert-basis`; this audit neither caused nor edits that
+  other track's defect.
+
+No workflow state was changed and no published file was edited.
+
+## Foundations/Set Theory reconciliation (2026-09-08)
+
+The Foundations audit preserves `def-dependent-choice` as a published supplier
+but rehomes it to the earlier A page `countability-and-uncountability`, directly
+after `def-countable-choice`, and replaces its incorrect real-sequence input by
+`def-function`. Category Theory's published DC consumers retain the same
+supplier ID; no consumer edge changes and no new pair is required.
+
+The published Foundations items `fs-ordinals-form-a-set` and
+`fs-every-ultrafilter-principal` remain self-contained A-homed false-statement
+suppliers for their existing Category Theory example consumers. Their
+load-bearing proofs must not use the deferred Set Theory catalogue. This seam
+adds no Phase-2 root in Category Theory.
+
+## Topology reconciliation (2026-09-08)
+
+The earlier sentence retaining `uniform-spaces` on
+`abelian-categories-examples` is superseded. Move `uniform-spaces` to the
+published A page `abelian-categories`; the B page must require only its A.
+Its examples may use the Topology interface transitively through that A page,
+but the B page is never a supplier. This is a Phase-3 page-edge move using an
+existing published supplier and creates no Category Theory Phase-2 root.

@@ -4624,6 +4624,19 @@ remaining entries retain their original addressee.
    full Galois correspondence, both of which sit below `modules-over-a-pid-and-canonical-forms`
    and are therefore below the `commutative-algebra` anchor.
 
+   **RECONCILED 2026-09-08.** The Commutative Algebra audit exposed a live
+   dependency defect in the published
+   `thm-equivalent-characterizations-of-noetherian-modules`: proof step 2.1
+   uses `def-dependent-choice`, while the current `deps` omit it and the Facts
+   block says it is not cited. In Phase 3, after Foundations rehomes the
+   already-published `def-dependent-choice` to
+   `countability-and-uncountability` immediately after `def-countable-choice`,
+   add that item to the theorem's `deps` and replace the denial with an
+   ordinary labelled assumption. Do not mint a replacement theorem or use a
+   recorded-not-proved item. Commutative Algebra §11.3 records the four direct
+   CA consumers; its §11.6 and the central consumer--supplier ledger record the
+   complete 139-item transitive published impact.
+
 ### To `functional-analysis` (wave 2)
 
 6. The **finite-dimensional** spectral theorem, positive operators, the positive
@@ -4708,3 +4721,705 @@ remaining entries retain their original addressee.
     §II.12.b. No second locator was adjudicated by the reconciliation, so the
     builder must verify and record one before authoring rather than inventing a
     citation or silently dropping the results.
+
+---
+
+# PART III — published-dependency audit (2026-09-08)
+
+This part supersedes the dependency and choice-strength claims identified
+below. It is an audit and repair contract, not authority to alter published
+content. The 74 published `abstract-algebra` pages (37 A/B pairs), their 1,375
+unique published item files, the current plan spec, and the relevant cross-category
+suppliers were checked. Published page and item files remain immutable. The
+only immediate edits authorised by this part are future plan-spec edits and
+future, not-yet-published suppliers. Every amendment to a published item below
+is deferred until all of its named suppliers are published.
+
+## III.1 Binding graph rules and audit result
+
+1. A companion B page is a leaf. No later page `requires` a B page, and no item
+   outside a B page may depend on an item homed only on that B page. Dependencies
+   among examples on the same B page remain ordinary local exposition and do
+   not make the page a supplier.
+2. A citation in Facts & Assumptions or a proof is a dependency edge. A labelled
+   assumption that imports a reusable theorem is not an acceptable substitute
+   for an available or planned supplier.
+3. A definition may establish only its defining data and the genuinely
+   immediate well-definedness checks. Vector-space, inner-product, basis,
+   dimension, trace, and choice claims made in definition prose need the same
+   dependency support as theorem prose.
+4. `rem-brauers-cyclotomic-splitting-field-criterion-is-not-proved-here` and
+   `rem-kronecker-weber` are the only two unproved/deferred items among these
+   1,375 items. No proof-bearing abstract-algebra item depends on either. The
+   recorded-not-proved boundary is therefore closed.
+5. No published abstract-algebra item has a forward dependency or depends on a
+   draft item. No item outside an abstract-algebra B page depends on an item
+   homed only on such a B page. The page-level B edges listed in §III.3 are the
+   remaining leaf violations.
+
+The pair-by-pair disposition is:
+
+| orders | A/B pair | disposition |
+|---|---|---|
+| 24/25 | monoids, groups and subgroups | metadata resynchronisation only |
+| 32/33 | cosets and Lagrange | metadata resynchronisation only |
+| 34/35 | normal subgroups and quotients | metadata resynchronisation only |
+| 36/37 | homomorphisms and isomorphism theorems | clear |
+| 38/39 | cyclic groups and direct products | clear |
+| 40/41 | finite abelian groups | metadata resynchronisation only |
+| 42/43 | group actions and Cayley | metadata resynchronisation only |
+| 44/45 | symmetric groups and sign | one missing spec member; otherwise clear |
+| 46/47 | rings, subrings and domains | metadata resynchronisation; the old `def-field` warning is retired |
+| 48/49 | ideals and quotient rings | metadata resynchronisation only |
+| 50/51 | Euclidean domains, PIDs and UFDs | clear |
+| 52/53 | polynomial rings and roots | metadata resynchronisation only |
+| 53.2/53.4 | fractions and localisation | metadata resynchronisation only |
+| 54/55 | field extensions and complex numbers | metadata resynchronisation only |
+| 56/57 | splitting fields | metadata resynchronisation; one outbound B-page edge |
+| 58/59 | symmetric polynomials | metadata resynchronisation only |
+| 60/61 | free groups and presentations | 37 missing spec members; otherwise clear |
+| 62/63 | free products and amalgamation | metadata resynchronisation only |
+| 64/65 | conjugacy and simplicity in symmetric groups | metadata resynchronisation only |
+| 66/67 | composition series and solvable groups | metadata resynchronisation only |
+| 68/69 | semidirect products and automorphisms | metadata resynchronisation only |
+| 70/71 | Sylow and nilpotent groups | metadata resynchronisation; one outbound B-page edge |
+| 96/97 | algebraic extensions, degree and finite fields | metadata resynchronisation; one internal B-page edge |
+| 98/99 | algebraic closure, embeddings and separability | metadata plus choice-interface repair; one internal B-page edge |
+| 100/101 | Galois correspondence | metadata resynchronisation; one internal B-page edge |
+| 101.2/101.4 | finite fields and cyclotomy | metadata resynchronisation; duplicated B composition on disk; one internal B-page edge |
+| 101.6/101.8 | radicals and Kummer theory | metadata resynchronisation only |
+| 102/103 | modules and homomorphisms | metadata resynchronisation only |
+| 104/105 | free modules and exact sequences | metadata resynchronisation only |
+| 106/107 | tensor products | metadata resynchronisation only |
+| 108/109 | chain conditions and semisimple modules | metadata resynchronisation only |
+| 110/111 | PID modules and canonical forms | metadata resynchronisation; one outbound B-page edge |
+| 139/140 | fundamental theorem of algebra | metadata plus B-item reorder only |
+| 143/144 | group algebra and representations | metadata resynchronisation only |
+| 145/146 | Maschke and complete reducibility | substantive repairs M1–M4 below |
+| 147/148 | characters and orthogonality | substantive repairs C1–C11 below |
+| 149/150 | induction and Frobenius reciprocity | metadata resynchronisation; one outbound B-page edge |
+
+Here "clear" means that this audit found no dependency-interface defect; it is
+not a claim that future mathematical review can never strengthen the page.
+
+## III.2 Exact plan-spec composition and metadata reconciliation
+
+The current spec is not an exact account of the published files. The pages have
+1,394 memberships but only 1,375 unique item files because of the 19 duplicate
+memberships in §III.2(5). The spec has 1,337 unique members and omits the 38
+members listed below. Among those 1,337 common members, comparison with immutable
+frontmatter gives **337 `deps` mismatches, 71 `title` mismatches, and no `kind`
+mismatch**. The exact repair is
+mechanical: for every existing abstract-algebra member, replace the spec's
+`title`, `kind`, and `deps` by the values in that member's published
+frontmatter. Preserve page and item order except for the explicit composition
+changes below. This is resynchronisation, not a mathematical amendment.
+
+Apply these composition changes exactly:
+
+1. Add `def-finite-symmetric-group-and-permutation-notation` to the A-page
+   composition of `symmetric-groups-and-the-sign-homomorphism` at its published
+   disk position.
+2. Add the following 26 published members to
+   `free-groups-and-presentations`, in published disk order:
+   `prop-free-equivalence-is-an-equivalence-and-a-congruence`,
+   `def-word-quotient-model-of-the-free-group`,
+   `thm-word-quotient-model-is-a-group`,
+   `lem-formal-letters-act-by-permutations-on-reduced-words`,
+   `thm-normal-form-for-the-word-quotient-model`,
+   `thm-word-quotient-model-is-free`,
+   `cor-generators-embed-in-the-word-quotient`,
+   `cor-word-quotient-and-reduced-word-models-are-uniquely-isomorphic`,
+   `def-free-basis`, `thm-finite-free-bases-have-the-same-cardinality`,
+   `def-rank-of-a-finite-rank-free-group`,
+   `def-relators-relations-and-finite-presentations`,
+   `prop-normal-closure-is-products-of-conjugates`,
+   `prop-equality-of-words-in-a-presentation`, `thm-von-dyck`,
+   `cor-every-finite-group-is-finitely-presented`,
+   `def-abelianisation-of-a-group`, `def-free-abelian-group`,
+   `thm-abelianisation-of-a-free-group-is-free-abelian`,
+   `def-tietze-transformations`,
+   `prop-tietze-transformations-preserve-presented-groups`,
+   `thm-tietze-transformations-connect-finite-presentations`,
+   `def-cyclically-reduced-word`, `lem-cyclic-reduction-normal-form`,
+   `thm-free-groups-are-torsion-free`, and
+   `thm-conjugacy-of-cyclically-reduced-words`.
+3. Add the following 11 published members to
+   `free-groups-and-presentations-examples`, in published disk order:
+   `ex-free-group-on-the-empty-set`, `ex-free-group-on-one-generator`,
+   `ex-free-group-on-two-generators-is-not-abelian`,
+   `ex-presentation-of-a-finite-cyclic-group`,
+   `ex-presentation-of-a-dihedral-group`,
+   `ex-presentation-of-the-klein-four-group`,
+   `ex-presentation-of-z-squared`,
+   `ex-presentation-of-the-symmetric-group-on-three-letters`,
+   `cex-delete-only-relator-rewriting-misses-ba`,
+   `cex-delete-only-relator-rewriting-can-require-lengthening`, and
+   `cex-delete-only-relator-rewriting-is-order-dependent`.
+4. On `the-fundamental-theorem-of-algebra-examples`, move
+   `rem-artin-and-minimum-modulus-proofs-of-the-fundamental-theorem-of-algebra`
+   from the spec's last position to its published first position.
+5. The spec composition of `finite-fields-and-cyclotomic-extensions` is already
+   right. The published A page nevertheless repeats all 19 B items in an
+   `examples:` array. After the immutable-published gate is lifted, remove that
+   array from the A page only; do not move, copy, or change the B items. This
+   removes the 19 multiple-home warnings while leaving the B page intact.
+
+## III.3 Exact B-leaf `requires` cutover
+
+Replace these eight page-level edges. The right-hand A page contains every
+proof-bearing supplier used by the consumer; no item-dependency change is
+needed merely to perform this cutover.
+
+| consumer A page | replace B supplier | with A supplier |
+|---|---|---|
+| `algebraic-closure-embeddings-and-separability` | `algebraic-extensions-degree-and-finite-fields-examples` | `algebraic-extensions-degree-and-finite-fields` |
+| `the-galois-correspondence` | `algebraic-closure-embeddings-and-separability-examples` | `algebraic-closure-embeddings-and-separability` |
+| `finite-fields-and-cyclotomic-extensions` | `the-galois-correspondence-examples` | `the-galois-correspondence` |
+| `solvability-by-radicals-and-kummer-theory` | `finite-fields-and-cyclotomic-extensions-examples` | `finite-fields-and-cyclotomic-extensions` |
+| `primitive-roots-and-unit-groups-modulo-n` (number theory) | `splitting-fields-examples` | `splitting-fields` |
+| `frattini-subgroups-and-the-burnside-basis-theorem` (group theory) | `sylow-theorems-and-nilpotent-groups-examples` | `sylow-theorems-and-nilpotent-groups` |
+| `noetherian-rings-and-hilbert-basis` (commutative algebra) | `modules-over-a-pid-and-canonical-forms-examples` | `modules-over-a-pid-and-canonical-forms` |
+| `modular-representations-and-projective-covers` (group theory) | `induced-representations-and-frobenius-reciprocity-examples` | `induced-representations-and-frobenius-reciprocity` |
+
+After these replacements and the duplicate-home amendment of §III.2(5), all
+37 abstract-algebra B pages are leaves both at page level and outside-page item
+level.
+
+The cross-category supplier review found no other required edge change.
+Foundations supplies `thm-strong-induction` and the explicit Choice axioms;
+linear algebra supplies finite basis extension, idempotent projections, trace,
+tensor-product bases, and dual bases; group theory supplies kernel normality and
+normal-subgroup intersections; commutative algebra supplies integrality and
+finite field norm; and category theory is not a direct supplier to any of the
+74 pages. The four outbound A-for-B replacements in the lower half of the table
+are therefore the complete cross-category plan-spec change set for this audit.
+
+## III.4 New prerequisite pair before Maschke
+
+Insert the following future A/B pair between orders 144 and 145:
+
+- **144.2 A** `finite-averaging-and-character-theory-prerequisites`
+- **144.4 B** `finite-averaging-and-character-theory-prerequisites-examples`
+
+The A page has
+`requires: [the-group-algebra-and-representations,
+inner-product-spaces-and-orthogonality]`. Tensor products and the finite
+Galois/cyclotomic block are already transitive through RT-1, so listing them
+again would create redundant prerequisites. The B page requires only its A
+page and is a leaf. Change `maschkes-theorem-and-complete-reducibility` to
+require the new A page (the old RT-1 requirement is then transitive).
+
+The A page mints, in this order:
+
+1. `lem-characteristic-divisibility-and-invertibility-of-a-natural-scalar-in-a-field`:
+   for a field $k$ and positive $n$, $n\cdot1_k$ is invertible exactly when
+   $\operatorname{char}k\nmid n$; cite `lem-characteristic-and-additive-order`
+   and `def-field`.
+2. `lem-finite-dimensional-subspace-admits-a-linear-projection-without-choice`:
+   extend a basis of the subspace to a finite basis using
+   `thm-dimension-of-a-linear-subspace`, define the coordinate projection, and
+   state explicitly that no choice principle is used.
+3. `lem-trace-of-an-idempotent-is-the-dimension-of-its-image`: cite
+   `cor-idempotent-endomorphisms-are-diagonalisable-projections` and the
+   published trace definition.
+4. `lem-indicator-basis-for-invariant-functions-on-a-finite-orbit-partition`:
+   invariant functions form a vector space and the orbit indicators are a
+   basis. Its conjugation-action specialisation gives class functions and
+   conjugacy-class indicators.
+5. `lem-standard-hermitian-form-on-functions-on-a-nonempty-finite-set-is-an-inner-product`:
+   prove linearity in the first argument, conjugate symmetry, positivity and
+   definiteness for $|X|^{-1}\sum_{x\in X}f(x)\overline{h(x)}$.
+6. `lem-equality-case-for-a-finite-sum-of-unit-complex-numbers`: prove
+   $|z_1+\cdots+z_n|\le n$, with equality exactly when all $z_i$ agree, for
+   $n>0$ and $|z_i|=1$. A proof through
+   $n^2-|\sum z_i|^2=\sum_{i<j}|z_i-z_j|^2$ avoids an unintroduced choice of
+   arguments.
+7. `lem-conjugates-of-an-average-of-roots-of-unity-are-averages-of-roots-of-unity`:
+   put the roots in a finite cyclotomic splitting field, extend each embedding
+   to that normal field, and show that every conjugate of the average is the
+   corresponding average of roots of unity. Cite the published embedding,
+   normality and cyclotomic results.
+8. `lem-kernel-of-a-direct-sum-of-representations-is-the-intersection`.
+9. `lem-a-group-is-abelian-iff-every-conjugacy-class-is-a-singleton`.
+
+For the plan spec, all nine A members have `kind: lemma`; their exact direct
+dependency arrays are:
+
+| item | `deps` |
+|---|---|
+| `lem-characteristic-divisibility-and-invertibility-of-a-natural-scalar-in-a-field` | `[def-field, lem-characteristic-and-additive-order]` |
+| `lem-finite-dimensional-subspace-admits-a-linear-projection-without-choice` | `[def-linear-map, thm-dimension-of-a-linear-subspace]` |
+| `lem-trace-of-an-idempotent-is-the-dimension-of-its-image` | `[def-trace-of-an-endomorphism, cor-idempotent-endomorphisms-are-diagonalisable-projections]` |
+| `lem-indicator-basis-for-invariant-functions-on-a-finite-orbit-partition` | `[def-group-action, thm-orbits-partition-the-set, def-vector-space]` |
+| `lem-standard-hermitian-form-on-functions-on-a-nonempty-finite-set-is-an-inner-product` | `[def-inner-product-space, def-complex-conjugate-real-imaginary-part-and-modulus, def-sum-over-a-finite-index-set, lem-finite-sum-laws]` |
+| `lem-equality-case-for-a-finite-sum-of-unit-complex-numbers` | `[def-complex-conjugate-real-imaginary-part-and-modulus, def-sum-over-a-finite-index-set, lem-finite-sum-laws]` |
+| `lem-conjugates-of-an-average-of-roots-of-unity-are-averages-of-roots-of-unity` | `[def-roots-of-unity-in-a-field, thm-isomorphisms-extend-to-splitting-fields]` |
+| `lem-kernel-of-a-direct-sum-of-representations-is-the-intersection` | `[def-finite-dimensional-representation-of-a-group-over-a-field, def-kernel-and-image-of-group-homomorphism]` |
+| `lem-a-group-is-abelian-iff-every-conjugacy-class-is-a-singleton` | `[def-conjugacy-class-and-centralizer]` |
+
+The B page contains, in this order,
+`ex-coordinate-projection-onto-a-subspace-of-c-three`,
+`ex-conjugacy-class-indicator-basis-for-s-three`,
+`ex-standard-hermitian-inner-product-on-functions-on-a-three-point-set`, and
+`cex-unit-complex-sum-strict-with-distinct-summands`. None may be used as a
+supplier. The first three have `kind: example`, the last has
+`kind: counterexample`, and each has the corresponding A lemma as its sole
+direct dependency.
+
+**Combinatorics reconciliation (2026-09-08).** This pair supplies finite
+averaging and complex representation-character lemmas only. It does not mint
+`def-character-of-a-finite-abelian-group` or the additive-character interface
+needed by finite Fourier arguments. Combinatorics owns the separate
+`finite-abelian-characters-for-combinatorics` A/B pair at 222.1/222.2; its A
+page requires this track's published
+`characters-and-the-orthogonality-relations` plus the stated cyclic-group,
+complex-exponential, and finite-counting A pages. The three new A items have no
+published consumers, so that pair is not an independent Phase-2 root.
+
+## III.5 Deferred amendments to published Maschke items
+
+These amendments are gated on publication of §III.4.
+
+**M1.** In
+`thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order`,
+add the new characteristic/invertibility lemma and the choice-free projection
+lemma to `deps`. Replace [A1] and [A2] by cited Facts. This makes the averaging
+scalar and the initial projection explicit and preserves the theorem's exact
+hypotheses.
+
+**M2.** In
+`cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order`,
+add `thm-strong-induction` and `thm-dimension-formula` to `deps`. Replace [A1]
+by the strong-induction theorem, and cite the dimension formula for
+$\dim U<\dim V$ when $V=W\oplus U$ and $W\ne0$.
+
+**M3.** In
+`thm-augmentation-ideal-has-no-complement-when-char-k-divides-group-order`,
+add `lem-characteristic-and-additive-order` (or the new natural-scalar lemma if
+its biconditional includes the zero case) and replace [A1] by that cited fact.
+
+**M4.** In `lem-averaging-operator-projects-onto-the-fixed-subspace`, add
+`lem-trace-of-an-idempotent-is-the-dimension-of-its-image` and replace [A2] and
+the adapted-basis trace assertion by that result. This is also the supplier
+needed transitively by the intertwiner-dimension theorem.
+
+## III.6 Deferred amendments to published character items
+
+These amendments are likewise gated on publication of §III.4.
+
+**C1.** In `def-class-function-and-the-space-of-complex-class-functions`, add
+the orbit-indicator-basis lemma to `deps` and `justified_by`. Use its conjugation
+specialisation for the vector-space and representative-determination claims.
+
+**C2.** In `def-standard-inner-product-on-complex-class-functions`, add the
+finite-function Hermitian-form lemma to `deps` and `justified_by`. Keep the
+published convention: the form is Hermitian over $\mathbb C$ and linear in its
+first argument.
+
+**C3.** In `def-tensor-product-of-complex-representations`, add
+`thm-tensor-product-basis-from-bases`; it is the premise for the asserted finite
+dimension and product formula. In `def-dual-complex-representation`, add
+`thm-dual-family-is-a-basis-in-finite-dimension`; it is the premise for "the
+same degree".
+
+**C4.** In `prop-basic-value-properties-of-a-complex-character`, add the new
+unit-complex-sum equality lemma and replace [A5] by that citation. This is the
+exact complex-analysis lemma promised, but never supplied, by expansion
+§II.7.c.
+
+**C5.** In `thm-character-inner-product-computes-intertwiner-dimension`, add
+`prop-trace-is-linear` because proof step 1.2 invokes it directly. Preserve the
+linear-first direction
+$\langle\chi_V,\chi_W\rangle=\dim\operatorname{Hom}_G(W,V)$. The spec title
+currently reverses the Hom arguments; resynchronisation must use the published
+title and formula.
+
+**C6.** In
+`thm-irreducible-complex-characters-form-an-orthonormal-basis-of-the-class-functions`,
+add the orbit-indicator-basis lemma and replace [A1] by its conjugation-action
+specialisation.
+
+**C7.** In
+`thm-second-column-orthogonality-relation-for-irreducible-complex-characters`,
+add the orbit-indicator-basis lemma and the published conjugacy-class size
+theorem; replace [A1] by those citations. [A2] is the coefficient formula for
+an orthonormal basis and must either be proved inline from the linear-first
+inner-product axioms or cited from a new one-line finite-dimensional lemma.
+
+**C8.** In
+`thm-normal-subgroups-are-exactly-intersections-of-kernels-of-irreducible-complex-characters`,
+add the direct-sum-kernel lemma, `thm-image-subgroup-and-kernel-normal`, and
+`lem-intersection-of-normal-subgroups`; replace [A1] and [A2] by those Facts.
+
+**C9.** In
+`thm-a-finite-group-is-abelian-iff-all-its-irreducible-complex-characters-have-degree-one`,
+add `def-character-of-a-complex-representation` and the new singleton-conjugacy
+lemma; replace [A1] and [A2] by citations.
+
+**C10.** In
+`lem-an-algebraic-integer-average-of-roots-of-unity-is-zero-or-constant`, add
+the new unit-sum and conjugate-average lemmas, plus
+`thm-field-norm-and-trace-by-embeddings`,
+`cor-integral-elements-form-a-subring`, and
+`cor-rational-algebraic-integers-are-integers` (or an earlier exact
+minimal-polynomial constant-term lemma). Replace [A1] and [A2] and justify the
+uncited claim that the product of all conjugates is a nonzero integer: each
+conjugate is integral, their product is integral, and the norm/product formula
+makes it rational. Until this is done, treat this lemma and its consumers
+`thm-coprime-degree-and-conjugacy-class-size-force-a-zero-character-value`,
+`thm-a-prime-power-conjugacy-class-forces-a-proper-nontrivial-normal-subgroup`,
+and `thm-burnsides-p-a-q-b-theorem` as transitively awaiting repair. Their
+statements and the remaining proof steps need no change.
+
+**C11.** The expansion's bilinear-pairing proposal and old §II.13(2) are
+superseded. Do not remove `inner-product-spaces-and-orthogonality` from RT-3 and
+do not change the published pairing to a bilinear form over a splitting field.
+The published complex Hermitian, linear-first convention is coherent and is
+the convention used by the Hom-direction in C5.
+
+## III.7 Choice-strength correction and Galois amendment
+
+The BPIT claims in §II.11 describe an available sharper theorem, not what the
+published proofs establish. The published
+`thm-one-step-simultaneous-root-extension`,
+`thm-existence-of-algebraic-closures`, and
+`thm-algebraic-embedding-extension` explicitly use Zorn/full Choice. Record the
+implemented cost as **AC**. Banaschewski's BPIT construction remains a future
+strengthening, backed by the full text recorded in the Galois harvest; it may
+replace AC only after an earlier foundations supplier for the Boolean prime
+ideal/ultrafilter theorem and the actual construction are published. The
+countable-field choice-free claim is likewise aspirational unless a
+choice-free construction is present in the item graph.
+
+`thm-relative-automorphism-group-and-separable-degree-bound` has no choice
+hypothesis in its statement, but its present proof depends on
+`thm-algebraic-embedding-extension`, whose statement assumes Choice. This is a
+hidden transitive hypothesis. The binding published amendment is to add the
+inherited Choice hypothesis to the theorem statement and Facts. A later
+choice-free strengthening may instead insert, before GA-2, a finite lemma
+counting $F$-embeddings of a finite extension inside a finite splitting field
+and prove agreement with the closure-based `def-separable-degree`; that is an
+optional new result, not a prerequisite for making the current theorem honest.
+
+The remaining choice ledger survives with two corrections: representation
+theory is choice-free only after M1 uses the finite-dimensional projection
+lemma rather than the general AC complement theorem, and GA results that use
+the current closure/embedding-extension route inherit AC until the finite
+choice-free replacement just specified is published.
+
+## III.8 Supplier-to-published-consumer map
+
+This is the Phase-2/Phase-3 boundary for the one mandatory new pair in
+§III.4. "Direct" means that Phase 3 adds an edge from the published consumer
+to the named new supplier. "Transitive" is the complete reverse-dependency
+closure through currently published items at this audit snapshot, excluding
+the direct consumers themselves. A transitive consumer is blocked from a
+fully closed dependency certification, but normally needs no text edit once
+its direct supplier is repaired.
+
+### Direct consumers (11)
+
+| new A-page supplier | published direct consumer | home page |
+|---|---|---|
+| `lem-characteristic-divisibility-and-invertibility-of-a-natural-scalar-in-a-field` | `thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order` | `maschkes-theorem-and-complete-reducibility` |
+| same | `thm-augmentation-ideal-has-no-complement-when-char-k-divides-group-order` | `maschkes-theorem-and-complete-reducibility` |
+| `lem-finite-dimensional-subspace-admits-a-linear-projection-without-choice` | `thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order` | `maschkes-theorem-and-complete-reducibility` |
+| `lem-trace-of-an-idempotent-is-the-dimension-of-its-image` | `lem-averaging-operator-projects-onto-the-fixed-subspace` | `characters-and-the-orthogonality-relations` |
+| `lem-indicator-basis-for-invariant-functions-on-a-finite-orbit-partition` | `def-class-function-and-the-space-of-complex-class-functions` | `characters-and-the-orthogonality-relations` |
+| same | `thm-irreducible-complex-characters-form-an-orthonormal-basis-of-the-class-functions` | `characters-and-the-orthogonality-relations` |
+| same | `thm-second-column-orthogonality-relation-for-irreducible-complex-characters` | `characters-and-the-orthogonality-relations` |
+| `lem-standard-hermitian-form-on-functions-on-a-nonempty-finite-set-is-an-inner-product` | `def-standard-inner-product-on-complex-class-functions` | `characters-and-the-orthogonality-relations` |
+| `lem-equality-case-for-a-finite-sum-of-unit-complex-numbers` | `prop-basic-value-properties-of-a-complex-character` | `characters-and-the-orthogonality-relations` |
+| same | `lem-an-algebraic-integer-average-of-roots-of-unity-is-zero-or-constant` | `induced-representations-and-frobenius-reciprocity` |
+| `lem-conjugates-of-an-average-of-roots-of-unity-are-averages-of-roots-of-unity` | `lem-an-algebraic-integer-average-of-roots-of-unity-is-zero-or-constant` | `induced-representations-and-frobenius-reciprocity` |
+| `lem-kernel-of-a-direct-sum-of-representations-is-the-intersection` | `thm-normal-subgroups-are-exactly-intersections-of-kernels-of-irreducible-complex-characters` | `characters-and-the-orthogonality-relations` |
+| `lem-a-group-is-abelian-iff-every-conjugacy-class-is-a-singleton` | `thm-a-finite-group-is-abelian-iff-all-its-irreducible-complex-characters-have-degree-one` | `characters-and-the-orthogonality-relations` |
+
+There are 11 distinct direct consumer items; the table has 13 rows because two
+items each need two new lemmas. `def-tensor-product-of-complex-representations`,
+`def-dual-complex-representation`, and
+`thm-character-inner-product-computes-intertwiner-dimension` are Phase-3 direct
+repairs against already-published suppliers (C3 and C5), so they are not direct
+consumers of the new pair.
+
+### Transitive consumers (166), grouped by home page
+
+`abstract-algebra/maschkes-theorem-and-complete-reducibility` (8):
+`cor-an-element-of-finite-order-acts-diagonalisably-over-an-algebraically-closed-field-of-characteristic-zero`,
+`cor-finite-dimensional-representations-are-completely-reducible-when-char-k-does-not-divide-group-order`,
+`cor-group-algebra-is-not-semisimple-when-char-k-divides-group-order`,
+`cor-group-algebra-is-semisimple-when-char-k-does-not-divide-group-order`,
+`cor-sum-of-squares-formula-for-irreducible-degrees`,
+`thm-finitely-many-irreducibles-occur-in-the-regular-representation-with-multiplicity-equal-to-their-degree`,
+`thm-group-algebra-decomposes-as-a-product-of-matrix-algebras-over-an-algebraically-closed-field`,
+`thm-number-of-irreducible-representations-equals-the-number-of-conjugacy-classes-when-k-is-algebraically-closed-and-char-k-does-not-divide-group-order`.
+
+`abstract-algebra/maschkes-theorem-and-complete-reducibility-examples` (7):
+`ex-the-complex-group-algebra-of-s-three-is-c-times-c-times-m-two-c`,
+`ex-the-complex-group-algebra-of-z-mod-three-is-c-times-c-times-c`,
+`ex-the-complex-group-algebras-of-q-eight-and-dih-c-four-have-the-same-wedderburn-decomposition`,
+`ex-the-regular-representation-of-z-mod-four-over-c-splits-into-four-characters`,
+`fs-a-group-with-r-conjugacy-classes-has-an-irreducible-of-degree-r`,
+`fs-not-every-finite-dimensional-algebra-over-a-field-is-semisimple`,
+`fs-the-sum-of-the-irreducible-degrees-equals-the-group-order`.
+
+`abstract-algebra/characters-and-the-orthogonality-relations` (10):
+`cor-a-complex-character-is-irreducible-iff-its-self-inner-product-is-one`,
+`cor-multiplicity-of-an-irreducible-summand-is-a-character-inner-product`,
+`cor-the-character-table-is-square-and-invertible`,
+`cor-the-regular-character-gives-the-sum-of-squares-formula`,
+`cor-the-sum-of-squared-irreducible-character-values-at-g-is-the-centralizer-size`,
+`thm-character-inner-product-computes-intertwiner-dimension`,
+`thm-characters-of-direct-sums-tensor-products-and-duals`,
+`thm-complex-representations-are-determined-by-their-characters`,
+`thm-first-orthogonality-relation-for-irreducible-complex-characters`,
+`thm-kernel-of-a-complex-character-agrees-with-the-representation-kernel`.
+
+`abstract-algebra/characters-and-the-orthogonality-relations-examples` (14):
+`ex-decomposing-the-square-of-the-two-dimensional-s-three-character`,
+`ex-s-three-has-three-irreducible-complex-characters-of-degrees-one-one-and-two`,
+`ex-the-character-table-of-a-finite-cyclic-group-over-c`,
+`ex-the-character-table-of-a-four`, `ex-the-character-table-of-dih-c-four`,
+`ex-the-character-table-of-q-eight`,
+`ex-the-character-table-of-s-four-and-its-normal-subgroups`,
+`ex-the-character-table-of-s-three`,
+`ex-the-standard-representation-of-s-n-has-character-fixed-points-minus-one`,
+`fs-a-complex-character-of-a-finite-group-is-always-a-homomorphism`,
+`fs-distinct-irreducible-complex-characters-of-a-finite-group-have-distinct-degrees`,
+`fs-every-complex-class-function-with-self-inner-product-one-is-a-character`,
+`fs-every-value-of-an-irreducible-complex-character-is-real`,
+`fs-nonisomorphic-finite-groups-can-have-the-same-character-table`.
+
+`abstract-algebra/induced-representations-and-frobenius-reciprocity` (15):
+`cor-a-finite-group-with-an-irreducible-complex-character-of-degree-greater-than-one-is-nonabelian`,
+`cor-every-irreducible-complex-character-occurs-in-the-induction-of-an-irreducible-constituent-of-its-restriction`,
+`cor-frobenius-reciprocity-for-complex-characters`,
+`def-central-character-of-an-irreducible-complex-character`,
+`def-virtual-character-and-character-ring-of-a-finite-group`,
+`prop-class-sums-act-by-central-character-scalars`,
+`prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings`,
+`thm-a-prime-power-conjugacy-class-forces-a-proper-nontrivial-normal-subgroup`,
+`thm-burnsides-p-a-q-b-theorem`,
+`thm-central-characters-are-algebraic-integers`,
+`thm-coprime-conjugacy-class-size-forces-zero-character-or-scalar-action`,
+`thm-frobenius-formula-for-induced-characters`,
+`thm-mackeys-irreducibility-criterion-for-finite-groups`,
+`thm-the-degree-of-an-irreducible-complex-character-divides-the-group-order`,
+`thm-the-degree-of-an-irreducible-complex-character-divides-the-index-of-the-center`.
+
+`abstract-algebra/induced-representations-and-frobenius-reciprocity-examples` (9):
+`ex-c-four-shows-divisibility-of-irreducible-degrees-by-the-group-order-is-not-an-equivalence`,
+`ex-frobenius-reciprocity-for-the-two-preceding-s-three-inductions`,
+`ex-inducing-a-nontrivial-character-of-a-three-cycle-subgroup-of-s-three-gives-an-irreducible-degree-two-character`,
+`ex-inducing-the-trivial-character-of-a-subgroup-of-order-two-in-s-three-gives-one-plus-an-irreducible-degree-two-character`,
+`ex-restricting-that-degree-two-s-three-character-to-the-three-cycle-subgroup-gives-the-two-nontrivial-linear-characters`,
+`fs-an-induced-irreducible-complex-character-is-always-irreducible`,
+`fs-every-divisor-of-the-group-order-is-an-irreducible-character-degree`,
+`fs-induction-followed-by-restriction-is-the-identity-on-complex-representations`,
+`fs-restriction-of-an-irreducible-complex-representation-is-always-irreducible`.
+
+`group-theory/modular-representations-and-projective-covers` (2):
+`fs-maschkes-theorem-still-gives-semisimplicity-when-p-divides-the-group-order`,
+`rem-maschke-failure-in-defining-characteristic`.
+
+`group-theory/modular-representations-and-projective-covers-examples` (1):
+`cex-an-ordinary-irreducible-with-reducible-mod-p-reduction`.
+
+`group-theory/brauer-characters-and-decomposition-matrices` (15):
+`cor-number-of-simple-kg-modules-equals-number-of-p-regular-conjugacy-classes`,
+`def-decomposition-numbers-and-decomposition-matrix`,
+`def-projective-indecomposable-characters-and-cartan-invariants`,
+`fs-every-block-has-one-ordinary-and-one-brauer-irreducible-character`,
+`fs-modular-representations-are-determined-by-ordinary-characters`,
+`fs-reduction-mod-p-of-an-ordinary-character-is-always-irreducible`,
+`fs-the-cartan-matrix-equals-the-decomposition-matrix`,
+`lem-decomposition-numbers-are-nonnegative-integers`,
+`prop-decomposition-matrix-is-block-diagonal-after-block-ordering`,
+`rem-defect-groups-and-brauer-main-theorems`,
+`thm-blocks-partition-ordinary-and-brauer-irreducible-characters`,
+`thm-brauer-nesbitt-module-determination`, `thm-brauer-reciprocity`,
+`thm-cartan-matrix-is-d-transpose-d`,
+`thm-irreducible-brauer-characters-form-a-basis-of-p-regular-class-functions`.
+
+`group-theory/brauer-characters-and-decomposition-matrices-examples` (4):
+`ex-a-block-with-one-ordinary-and-one-brauer-character`,
+`ex-brauer-characters-of-a-p-group`,
+`ex-cartan-matrix-from-d-transpose-d`,
+`ex-decomposition-matrix-of-s-three-in-characteristic-two`.
+
+`number-theory/dirichlet-characters-l-functions-and-primes-in-progressions` (9):
+`cor-dirichlet-character-residue-class-indicator`,
+`lem-nonreal-dirichlet-l-nonzero-at-one`,
+`thm-dirichlet-character-orthogonality`,
+`thm-dirichlet-l-nonvanishing-line-one`,
+`thm-dirichlet-l-nonzero-at-one`,
+`thm-dirichlet-primes-arithmetic-progressions`,
+`thm-mertens-primes-arithmetic-progressions`,
+`thm-primes-residue-class-dirichlet-density`,
+`thm-product-dirichlet-l-nonvanishing-line-one`.
+
+`number-theory/dirichlet-characters-l-functions-and-primes-in-progressions-examples` (4):
+`cex-a-noncoprime-residue-class-has-no-dirichlet-conclusion`,
+`cex-dirichlet-density-does-not-mean-integer-natural-density`,
+`ex-dirichlet-character-orthogonality-table`,
+`ex-dirichlet-density-of-primes-in-a-small-progression`.
+
+`number-theory/classical-zero-free-region-and-the-prime-number-theorem` (2):
+`lem-dirichlet-character-chebyshev-laplace-transform`,
+`thm-prime-number-theorem-arithmetic-progressions`.
+
+`number-theory/classical-zero-free-region-and-the-prime-number-theorem-examples` (4):
+`cex-dirichlet-density-alone-does-not-give-a-counting-asymptotic`,
+`ex-newman-tauberian-prime-number-theorem`,
+`ex-prime-number-theorem-in-a-small-progression`,
+`rem-the-classical-zeta-region-is-not-a-uniform-dirichlet-l-region`.
+
+`number-theory/hilbert-symbols-and-the-quadratic-local-global-principle` (2):
+`lem-global-square-class-approximation`, `thm-hasse-minkowski-over-the-rationals`.
+
+`number-theory/hilbert-symbols-and-the-quadratic-local-global-principle-examples` (2):
+`cex-rational-isotropy-is-not-integral-representation`,
+`ex-hasse-minkowski-for-a-quaternary-form`.
+
+`representation-theory/artin-induction-and-rational-characters` (9):
+`cor-cyclic-fixed-points-detect-rational-representations`,
+`cor-cyclic-local-integrality-criterion`,
+`cor-rank-of-the-rational-representation-ring`,
+`def-cyclic-induction-subgroup`, `def-rational-character-ring`,
+`lem-artin-cyclic-permutation-relation`,
+`lem-cyclic-generator-class-functions-by-moebius-inversion`,
+`lem-induction-image-is-an-ideal-in-the-representation-ring`,
+`thm-artin-induction-for-rational-characters`.
+
+`representation-theory/artin-induction-and-rational-characters-examples` (4):
+`cex-rational-valued-character-need-not-be-defined-over-the-rationals`,
+`ex-artin-induction-for-a-cyclic-group`, `ex-artin-permutation-relation-for-a5`,
+`ex-cyclic-fixed-point-detection-for-s3`.
+
+`representation-theory/brauer-induction-and-elementary-subgroups` (13):
+`cor-cyclotomic-field-splits-a-finite-group`,
+`cor-elementary-local-integrality-criterion`,
+`cor-elementary-restriction-detects-generalized-characters`,
+`def-induction-ideal-of-a-family-of-subgroups`,
+`lem-banaschewski-prime-obstruction`,
+`lem-elementary-detection-at-a-fixed-element`,
+`lem-hyperelementary-permutation-subring-reduction`,
+`lem-induction-ideal-of-a-subgroup-family-is-an-ideal`,
+`lem-p-elementary-characters-are-induced-from-linear-characters`,
+`lem-p-primary-character-value-congruence`,
+`prop-faithful-irreducible-character-is-induced-from-a-proper-inertia-subgroup`,
+`thm-brauer-induction`, `thm-finite-supersolvable-groups-are-monomial`.
+
+`representation-theory/brauer-induction-and-elementary-subgroups-examples` (2):
+`cex-cyclic-subgroups-do-not-give-integral-induction-in-general`,
+`ex-brauer-induction-for-s3`.
+
+`representation-theory/clifford-theory-over-normal-subgroups` (13):
+`cor-clifford-ramification-squares-sum-to-inertia-index`,
+`cor-normal-subgroup-induction-irreducibility-criterion`,
+`def-clifford-ramification-index`,
+`def-conjugate-representation-and-inertia-group`,
+`lem-inducing-an-irreducible-inertia-module-is-irreducible`,
+`lem-induction-from-the-inertia-group-recovers-the-module`,
+`lem-isotypical-evaluation-and-subspaces-of-multiplicity-spaces`,
+`lem-normal-isotypical-component-is-inertia-stable`,
+`lem-normal-isotypical-components-are-permuted-by-translation`,
+`lem-normal-restriction-constituents-form-one-conjugacy-orbit`,
+`thm-clifford-correspondence`,
+`thm-clifford-homogeneous-restriction-formula`,
+`thm-gallagher-correspondence-for-an-extendible-character`.
+
+`representation-theory/clifford-theory-over-normal-subgroups-examples` (3):
+`ex-clifford-boundaries-n-equals-one-and-n-equals-g`,
+`ex-clifford-theory-for-s3-over-a3`,
+`ex-gallagher-correspondence-for-a-direct-product`.
+
+`representation-theory/schur-indices-and-fields-of-definition` (10):
+`cor-schur-index-divides-the-representation-degree`,
+`def-schur-index-of-an-irreducible-character`,
+`lem-character-field-is-the-stabilizer-fixed-field`,
+`lem-galois-conjugates-have-equal-scalar-extension-multiplicity`,
+`lem-schur-index-is-independent-of-the-chosen-splitting-field`,
+`thm-absolute-irreducibility-via-the-endomorphism-division-algebra`,
+`thm-character-of-an-irreducible-over-a-nonsplitting-field`,
+`thm-scalar-extension-of-an-irreducible-finite-group-representation`,
+`thm-schur-index-as-minimal-realization-multiplicity`,
+`thm-schur-index-equals-division-algebra-index`.
+
+`representation-theory/schur-indices-and-fields-of-definition-examples` (4):
+`ex-galois-conjugate-characters-of-c3`,
+`ex-quaternion-character-has-schur-index-two`,
+`ex-s3-is-split-over-the-rationals`, `ex-trivial-character-has-schur-index-one`.
+
+The direct and transitive lists are item lists, not page `requires` lists. They
+therefore do not license using any example item as a supplier. The mandatory
+Galois repair in §III.7 is a statement-hypothesis amendment using an already
+published supplier and creates no new supplier pair; its reverse closure is
+not part of the Phase-2 build set.
+
+## III.9 Retired historical warnings
+
+The `def-field` issue still marked OPEN in Part I is closed by the published
+2026-07-28 amendment: axiom (M) now states associativity and commutativity on
+all of $F$. It supports `lem-of-zero-mult` and the field-to-commutative-ring
+bridge in the required direction. Do not create another field definition or
+retain the countermodel as a current defect.
+
+Likewise, §II.13(4)'s count of seventeen understated pages is historical. The
+exact current reconciliation is §III.2; it replaces, rather than supplements,
+that count.
+
+## III.10 Validation receipt and acceptance gate
+
+At audit time, the read-only item precheck passed for all 1,375 abstract-algebra
+members. `depcheck` reported zero errors; `validate-plan` passed with redundant-
+prerequisite warnings; `extcheck` reported zero errors and only repository-wide
+warnings. The only `fwdcheck` error was an unrelated existing
+functional-analysis/complex-analysis edge. These tools do not compare spec
+metadata with immutable frontmatter, which is why the 408 metadata mismatches
+in §III.2 require a separate reconciliation.
+
+Acceptance for the future repair requires, in order: publish the supplier pair
+of §III.4; perform the
+deferred amendments M1–M4 and C1–C10 without changing theorem strength or
+convention; apply §III.2 and §III.3 to the spec; remove the duplicate A-page
+example array; then rerun precheck, dependency, forward, external-status,
+citation-faithfulness, prose, and plan validation. No B item may be introduced
+as a supplier during that work.
+
+## III.11 Complex Analysis reconciliation (2026-09-08)
+
+The future SC-3 cleanup must make its general module and Noetherian rows
+agreement bridges to the published algebra-owned pages
+`modules-and-module-homomorphisms` and
+`noetherian-rings-and-hilbert-basis`; it may not mint a second general module
+theory. These are existing-published-supplier to planned-consumer edges, with
+zero direct and zero transitive published impact and no Phase-2 root.
+
+## III.12 Number Theory reconciliation (2026-09-08)
+
+Published Number Theory page `primitive-roots-and-unit-groups-modulo-n` must
+require the A page `splitting-fields`, never its examples companion. This is a
+Phase-3 A-for-B page cutover using an existing published supplier; it creates
+no planned Algebra item and no Phase-2 root.
+
+## III.13 Group Theory reconciliation (2026-09-08)
+
+GT's Phase-2 pair `modular-traces-and-brauer-character-independence` consumes
+the published `chain-conditions-and-semisimple-modules` A page. Its lemma
+`lem-a-finite-dimensional-algebra-separates-its-simple-modules` must be derived
+from the proved Wedderburn--Artin matrix-factor decomposition, with the exact
+finite-dimensional separation consequence stated inline or as a local GT
+lemma. It may not cite an unproved Jacobson density theorem. This planned-
+consumer seam creates no new Algebra supplier and no published impact.
+
+## III.14 Scheme Theory reconciliation (2026-09-08)
+
+In Phase 3, Scheme AV-12 replaces its direct dependency on Complex Analysis
+`def-noetherian-ring-and-module` by the published Algebra definition
+`def-noetherian-ring` on `chain-conditions-and-semisimple-modules`. The Scheme
+definition `def-locally-noetherian-and-noetherian-scheme` is its only direct
+Scheme consumer and has zero further Scheme impact. This uses an existing
+published supplier, creates no Algebra Phase-2 root, and does not license
+Scheme Theory to duplicate Noetherian algebra.

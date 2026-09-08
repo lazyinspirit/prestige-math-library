@@ -2,21 +2,28 @@
 
 > **Scaffold only.** This file proposes future pages and items. It does not
 > author an item, alter `research/plan-spec.json`, assign absolute orders, or
-> publish anything. The block is placed after Fourier analysis's final
-> companion, `uncertainty-principles-for-fourier-analysis-examples`, which is
-> itself anchored after probability; every `PDE-n` below is a relative label whose absolute order is to be
-> computed only when a future build splices the track.
+> publish anything. The dependency-correct placement is interleaved: PDE-1
+> follows the elementary Fourier-series/probability prefix; PDE-2 through
+> PDE-14F follow the differential-geometry ODE supplier; Fourier analysis's
+> multiplier-through-uncertainty suffix then consumes PDE-11/PDE-14F; and
+> PDE-15 through PDE-26 resume after that suffix so PDE-19 can consume FR-8.
+> Every `PDE-n` below is a relative label; §10.1 records the exact current
+> `plan-spec` reconciliation rather than retaining the stale single-block claim.
 
 ## Summary for the orchestrator
 
-**Owned block.** Twenty-seven A/B pairs are scaffolded, in this dependency
+**Owned block.** Twenty-nine A/B pairs are scaffolded, in this dependency
 order. `PDE-14F` is the Fourier--Sobolev bridge inserted between the stable
-PDE-14 and PDE-15 labels:
+PDE-14 and PDE-15 labels; `PDE-2D` is the Euclidean integration supplier that
+must precede harmonic mean-value arguments; and `PDE-1CK` retires the recorded
+Cauchy--Kovalevskaya boundary before PDE-2 may cite that theorem:
 
 | relative label | A page | subject |
 |---|---|---|
 | PDE-1 | `partial-differential-equations-and-characteristics` | PDE vocabulary, principal symbols, second-order classification, linear transport |
-| PDE-2 | `quasilinear-characteristics-and-cauchy-kovalevskaya` | semilinear, quasilinear and fully nonlinear characteristics; Cauchy--Kovalevskaya as a sourced statement |
+| PDE-1CK | `analytic-majorants-and-the-cauchy-kovalevskaya-theorem` | coefficient majorants and a proved analytic Cauchy theorem |
+| PDE-2 | `quasilinear-characteristics-and-cauchy-kovalevskaya` | semilinear, quasilinear and fully nonlinear characteristics; application of the proved Cauchy--Kovalevskaya supplier |
+| PDE-2D | `euclidean-surface-measure-divergence-and-green-identities` | chart-independent hypersurface measure, the dimension-$n$ divergence theorem, and Green identities |
 | PDE-3 | `harmonic-functions-and-mean-values-in-rn` | harmonic functions, spherical and ball means, Weyl's lemma |
 | PDE-4 | `maximum-principles-harnack-and-liouville-in-rn` | maximum principles, Hopf, Harnack and Liouville |
 | PDE-5 | `fundamental-solutions-newtonian-potentials-and-green-functions` | the Laplace fundamental solution, Newtonian potentials, Green functions |
@@ -79,7 +86,7 @@ PDE-3--PDE-6 develop the dimension-independent real theory and avoid a second
 proof of those plane results.
 
 **Seams owed.** Differential geometry should record that its general Stokes
-theorem subsumes PDE-5's deliberately Euclidean divergence theorem and Green
+theorem subsumes PDE-2D's deliberately Euclidean divergence theorem and Green
 identities; it must not ask PDE to generalise them to manifolds. Functional
 analysis should keep its existing PDE amendment: FA-13 is the Riesz input for
 Lax--Milgram, FA-15 supplies the abstract Fredholm alternative, and FA-23--25
@@ -89,13 +96,19 @@ results as prerequisites. Complex analysis should link its plane harmonic
 pages to PDE-3--PDE-6 only by a dictionary remark; neither track changes the
 other's theorems.
 
-The differential-geometry scaffold was not yet present on disk when this lane
-closed. Its binding dispatch and `research/subjects-01-SEAMS.md` nevertheless
-assign general manifold Stokes to that track. The orchestrator must therefore
-reconcile the preceding subsumption note when that scaffold arrives; this is
-an open documentation seam, not a mathematical dependency or blocker.
+The differential-geometry scaffold and published RC-9
+`the-divergence-theorem-and-classical-stokes` are now present and were
+inspected. RC-9 proves divergence for finite gluings of elementary solids in
+$\mathbb R^3$ and Stokes for finitely patched $C^2$ surfaces; it does not prove
+the dimension-$n$ bounded-$C^1$-domain theorem needed by spherical means and
+space-time cones. DG-14 supplies general manifold Stokes only later. Neither
+removes PDE-2D's exact Euclidean obligation.
 
-**Forward references.** There are no load-bearing forward references from PDE.
+**Forward references.** The repaired scaffold has no load-bearing forward
+reference, but the current canonical graph is not yet repaired: it routes A
+pages through B companions and the two published CK remarks rest on an
+unproved record. Section 10 gives the exact replacement edges and staged
+supplier retirement.
 FR's citations to PDE-11/PDE-14 and to a future dispersive/Strichartz supplier
 are declared on the earlier FR scaffold; FR-8 is a predecessor consumed here.
 Every other cross-track requirement is a predecessor reservation named above. Orientation
@@ -156,12 +169,19 @@ inverse theorem proves the derivative formula and $C^1$ regularity of the
 inverse; the implicit theorem performs the block-map reduction. No enrichment
 amendment is owed.
 
-The vector-calculus warning is real. No published item proves the divergence
-theorem in $\mathbb R^n$ or the classical surface Stokes theorem. The published
-Green theorem expressly does not cover an arbitrary Jordan domain. PDE-5 thus
-builds only the Euclidean $C^1$-domain divergence/Green identities it needs,
-from MT-11 integration plus local graph charts and a partition of unity. The
-general differential-form theorem remains differential geometry's.
+The eight PDE pages for PDE-1 through PDE-4 (four A/B pairs) are also already
+published and were audited item by item against their plan-owned dependencies.
+Their stable item IDs are retained in §§PDE-1--PDE-4 and §12. The exact two
+proof defects, the recorded CK dependency and the later safe repair order are
+recorded in §10.2; no published file is modified by this scaffold audit.
+
+The vector-calculus warning remains real after RC-9 was published. Its
+three-dimensional finite-gluing divergence theorem does not cover arbitrary
+bounded $C^1$ domains in $\mathbb R^n$. PDE-2D therefore builds exactly the
+Euclidean dimension-$n$ surface-measure/divergence/Green package needed later,
+from MT-11 integration plus local graph charts and a partition of unity.
+PDE-5 cites it; general differential-form Stokes remains differential
+geometry's.
 
 ### 1.2 Planned predecessors are reservations, not published facts
 
@@ -284,7 +304,7 @@ non-load-bearing remark links to the B item.
 | Navier--Stokes, Euler, reaction--diffusion systems, nonlinear wave and nonlinear Schrödinger equations | `out-of-scope`: each is a substantial specialist theory, not a corollary of the general spine | dedicated subject tracks |
 | Microlocal analysis, pseudodifferential operators, propagation of singularities and scattering | `out-of-scope`: requires a new symbolic and cotangent-bundle calculus | microlocal/functional-analysis continuation |
 | Homogenisation, free boundaries, optimal transport, stochastic PDE and numerical PDE | `out-of-scope`: distinct graduate subjects with prerequisites not built here | dedicated tracks |
-| A proof of Cauchy--Kovalevskaya | `deferred` by the dispatch's “as a statement” instruction: the majorant-series argument needs a substantial analytic-power-series construction and nothing later depends on it | a dedicated analytic PDE item; PDE-2 records a precise `proved_here: false` source-cited remark |
+| A proof of Cauchy--Kovalevskaya | `included` in the dedicated PDE-1CK retirement pair because the published PDE-2 proof-boundary remark directly depends on the recorded-not-proved statement | PDE-1CK proves the majorant calculus, convergence, analytic coordinate reduction and full theorem before PDE-2 |
 
 ---
 
@@ -293,25 +313,26 @@ non-load-bearing remark links to the B item.
 The spine is intentionally asymmetric:
 
 ```text
-PDE-1 -> PDE-2
-  |        |
-  +-> PDE-3 -> PDE-4 -> PDE-5 -> PDE-6
-              |        |        |
-              +------> PDE-7 -> PDE-8
-                       |
-                       +------> PDE-9 -> PDE-10
+PDE-1 -> PDE-1CK -> PDE-2
+calculus/MT/partitions -> PDE-2D -> PDE-3 -> PDE-4 -> PDE-5 -> PDE-6
 
-MT/FA predecessors -> PDE-11 -> PDE-12 -> PDE-13 -> PDE-14 -> PDE-14F
-                                              |             |
-                                              |             +-> Fourier multiplier pages
-                                              +----------------> PDE-15 -> PDE-16 -> PDE-17
-                                                           |       |
-                                                           +-> PDE-18 -> PDE-19 -> PDE-20
+MT/FA kernel inputs -> PDE-7 -> PDE-8
+PDE-3 + PDE-2D ----------------> PDE-9 -> PDE-10
+PDE-2D -------------------------------> PDE-10
+
+MT/FA predecessors -> PDE-11 -> PDE-12 -> PDE-13 -> PDE-14 -> PDE-15 -> PDE-16 -> PDE-17
+FA Fourier/tempered inputs --------------------------> PDE-14F
+PDE-11 + PDE-14F ------------------------------------> Fourier multiplier pages
+PDE-15 + PDE-16 + PDE-17 ----------------------------> PDE-18 -> PDE-19 -> PDE-20
 
 FA weak compactness + PDE-14/15 -> PDE-21 -> PDE-22
 FA unbounded operators + PDE-16/17 -> PDE-23 -> PDE-24
 PDE-2 + comparison ideas -> PDE-25 -> PDE-26
 ```
+
+Every `PDE-n` or range in a `Requires` line denotes the named **A page only**.
+Each B page requires its own A companion and is otherwise a graph leaf; §10.1
+lists the current canonical B-consumer edges that must be removed.
 
 The arrows indicate load-bearing mathematical dependence, not merely reading
 order. Classical heat and wave formulae occur before Sobolev spaces so they can
@@ -359,7 +380,7 @@ Elliptic Boundary Value Problems in $N$ Dimensions,” pp. 263--323; Chapter 10
 June 2014, UC Davis.** Complete 242-page two-quarter notes:
 <https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf>. Read: Chapter 1
 §§1.1--1.13, pp. 1--18; Chapter 2 §§2.1--2.8, pp. 19--46; Chapter 3
-§§3.1--3.11, pp. 47--76; Chapter 4 §§4.1--4.13, pp. 91--118; Chapter 5
+§§3.1--3.11, pp. 47--76; Chapter 4 §§4.1--4.13 and Appendix 4.C, pp. 91--126; Chapter 5
 §§5.1--5.4, pp. 127--151; Chapter 6 §§6.1--6.5, pp. 177--187; Chapter 7
 §§7.1--7.5, pp. 211--222. Chapter 3 §3.3 is read only to verify the seam and
 is disposed `already-planned` to FA-24, not repeated here.
@@ -466,6 +487,24 @@ Mellon University, 2016.** Complete notes:
 <https://www.math.cmu.edu/~rcristof/pdf/Teaching/Spring2016/Cristoferi-Calculus_of_Variations-Lecture%20notes.pdf>.
 Read: Chapter 4 §§4.1--4.5 and Chapter 7.
 
+**[SID] Thomas C. Sideris, *Ordinary Differential Equations and Dynamical
+Systems*.** Complete author-hosted book text:
+<https://web.math.ucsb.edu/~sideris/pdffiles/BookPublishedComplete.pdf>.
+Read: Chapter 5 §§5.1--5.4, especially Theorem 5.7, for Fréchet calculus and
+the Banach-space implicit-function theorem proved by contraction. PDE-22 uses
+only the split finite-codomain submersion consequence and does not claim a
+general nonlinear-functional-analysis track.
+
+**[CKG] Tsogtgerel Gantumur, *The Cauchy--Kovalevskaya Theorem*, Math 580
+Lecture Notes 2, 2011.** Complete 17-page author-hosted notes:
+<https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf>.
+Read in full, especially §§1--5 and Theorem 18, for power-series calculus,
+coefficientwise majorants, the Goursat majorant equation, formal uniqueness,
+first-order systems, higher-order reduction and characteristic surfaces.
+Cross-checked against Giacomo Ageno's complete author-hosted *Part III:
+Analysis of Partial Differential Equations*, Chapter 2:
+<https://giacomoageno.github.io/LectureNotesAPDE.pdf>.
+
 **[EN] Klaus-Jochen Engel and Rainer Nagel, *One-Parameter Semigroups for
 Linear Evolution Equations*, Graduate Texts in Mathematics 194.** Complete
 author-hosted monograph:
@@ -510,8 +549,11 @@ track adopts the Slobodeckij definition because it can be built directly.
 **A page:** `partial-differential-equations-and-characteristics`  
 **B page:** `partial-differential-equations-and-characteristics-examples`  
 **Requires:** `the-total-derivative`, `mixed-partials-taylor-and-extrema`,
+`rn-as-a-normed-space`, `dual-spaces-bilinear-forms-and-inertia`,
 `inverse-and-implicit-function-theorems`, the published ODE existence/uniqueness
 and smooth-flow items, and finite-dimensional symmetric-matrix spectral theory.
+The currently planned probability companion is a sequencing artefact, is
+unpublished, supplies no PDE-1 item, and must not remain a prerequisite.
 
 The page first says what kind of object a PDE is and which parts survive a
 coordinate change. It then develops linear transport from the chain rule. The
@@ -523,7 +565,7 @@ claimed only under the hypotheses actually proved.
 1. `def-partial-differential-operator-order-and-solution` (definition; **L/NA**) — Define a scalar differential operator $F(x,(D^\alpha u)_{|\alpha|\le m})$, its order, classical solution and Cauchy/boundary data.
 2. `def-linear-semilinear-quasilinear-and-fully-nonlinear-pde` (definition; **L/NA**) — Distinguish linearity in all jets, linearity only in the top-order jet, and genuine nonlinearity in that jet, with no equation classified by typography alone.
 3. `def-principal-part-and-principal-symbol-of-a-scalar-pde` (definition; **L/NA**) — For a linear scalar operator define its homogeneous principal part and symbol $p_m(x,\xi)$; for a quasilinear operator freeze the lower jet first.
-4. `lem-principal-symbol-under-a-c-one-coordinate-change` (lemma; **L/A**) — Prove that the top-order symbol pulls back covectors and that all derivatives of the coordinate map below order $m$ enter only lower-order terms.
+4. `lem-principal-symbol-under-a-c-one-coordinate-change` (lemma; **L/A**) — Retain the published stable ID, whose “$C^1$” refers to dependence of the principal symbol on the first jet. The actual statement must, as the published item already does, assume a smooth coordinate change (or at least a $C^m$ diffeomorphism for an order-$m$ classical expansion); derivatives of the map of orders $2$ through $m$ enter only lower-order terms. A merely $C^1$ map does not license that expansion.
 5. `def-characteristic-covector-hypersurface-and-noncharacteristic-data` (definition; **L/NA**) — A nonzero covector is characteristic when the principal symbol vanishes; a $C^1$ level hypersurface is characteristic when its conormal is.
 6. `lem-characteristic-hypersurface-is-independent-of-defining-function` (lemma; **L/A**) — If $\psi=h\phi$ with $h\ne0$ on the surface, homogeneity gives $p_m(x,d\psi)=h^mp_m(x,d\phi)$.
 7. `def-elliptic-hyperbolic-and-parabolic-principal-symbols` (definition; **L/NA**) — Define ellipticity by definiteness/nonvanishing of the quadratic symbol, strict hyperbolicity relative to a time covector by real distinct roots, and parabolic space-time operators by a positive spatial symbol plus first-order time derivative.
@@ -534,12 +576,13 @@ claimed only under the hypotheses actually proved.
 12. `rem-limits-of-the-elliptic-parabolic-hyperbolic-trichotomy` (remark; **L/NA**) — Record that mixed type, systems, higher order and fully nonlinear equations do not admit this global three-name classification without extra structure.
 13. `def-linear-transport-equation-and-its-characteristic-flow` (definition; **L/NA**) — Define $a(x,t)\cdot D_xu+u_t+c(x,t)u=f(x,t)$ and the flow $X'=a(X,t)$.
 14. `lem-transport-equation-along-a-characteristic` (lemma; **L/A**) — The multivariable chain rule turns the PDE along $X$ into the scalar ODE $(u\circ X)'+c(u\circ X)=f$.
-15. `thm-homogeneous-linear-transport-by-the-flow` (theorem; **L/A**) — Where the flow map is a diffeomorphism, $u(x,t)=u_0(X(0;t,x))$ is the unique classical solution of $u_t+a\cdot Du=0$.
-16. `thm-inhomogeneous-linear-transport-formula` (theorem; **L/A**) — Solve the characteristic ODE with the integrating factor, including the zeroth-order coefficient and source.
-17. `def-noncharacteristic-first-order-cauchy-surface` (definition; **L/NA**) — Define transversality of the transport field to a parametrised initial hypersurface and compatibility of prescribed data.
-18. `thm-local-linear-transport-cauchy-problem` (theorem; **L/A**) — The flow-box/implicit-function argument gives a unique local $C^1$ solution from $C^1$ noncharacteristic data.
-19. `cor-support-propagates-along-transport-characteristics` (corollary; **L/A**) — For homogeneous transport, support is carried by the flow and cannot appear off characteristics.
-20. `rem-characteristics-are-covectors-before-they-are-curves` (remark; **L/NA**) — Reconcile characteristic hypersurfaces of higher-order operators with characteristic curves of a first-order flow.
+15. `lem-transport-characteristics-depend-c-one-on-initial-position` (lemma; **L/A**) — Verify the published ODE hypotheses and the variational equation giving $C^1$ dependence of the characteristic flow on its initial position; this is the supplier for every subsequent inverse-flow formula.
+16. `thm-homogeneous-linear-transport-by-the-flow` (theorem; **L/A**) — Where the flow map is a diffeomorphism, $u(x,t)=u_0(X(0;t,x))$ is the unique classical solution of $u_t+a\cdot Du=0$.
+17. `thm-inhomogeneous-linear-transport-formula` (theorem; **L/A**) — Solve the characteristic ODE with the integrating factor, including the zeroth-order coefficient and source.
+18. `def-noncharacteristic-first-order-cauchy-surface` (definition; **L/NA**) — Define transversality of the transport field to a parametrised initial hypersurface and compatibility of prescribed data.
+19. `thm-local-linear-transport-cauchy-problem` (theorem; **L/A**) — The flow-box/implicit-function argument gives a unique local $C^1$ solution from $C^1$ noncharacteristic data.
+20. `cor-support-propagates-along-transport-characteristics` (corollary; **L/A**) — For homogeneous transport, support is carried by the flow and cannot appear off characteristics.
+21. `rem-characteristics-are-covectors-before-they-are-curves` (remark; **L/NA**) — Reconcile characteristic hypersurfaces of higher-order operators with characteristic curves of a first-order flow.
 
 ### B-page companion
 
@@ -565,14 +608,77 @@ published chain and implicit-function theorems replacing recalled calculus.
 **Hard proof obligations.** Item 4 expands the coordinate chain rule far enough
 to isolate the homogeneous top-order term. Item 11 is deliberately a
 constant-coefficient linear-algebra theorem: it does not infer a variable-
-coefficient local normal form from pointwise diagonalisation. Item 18 proves
+coefficient local normal form from pointwise diagonalisation. Item 19 proves
 the parameter-to-flow map has invertible derivative exactly when the data
 surface is noncharacteristic, then invokes the published inverse theorem.
 
 **Well-definedness.** Items 4 and 6 make the principal symbol and characteristic
 hypersurface independent of coordinates and defining function. The inverse
-flow in items 15--18 is used only on an open set where it has been proved to be
+flow in items 15--19 is used only on an open set where it has been proved to be
 a single-valued $C^1$ map. No B-page example is a dependency target.
+
+---
+
+## PDE-1CK. Analytic Majorants and the Cauchy--Kovalevskaya Theorem
+
+**A page:** `analytic-majorants-and-the-cauchy-kovalevskaya-theorem`
+**B page:** `analytic-majorants-and-the-cauchy-kovalevskaya-theorem-examples`
+**Requires:** PDE-1 A;
+`power-series-and-real-analytic-functions`,
+`holomorphic-functions-of-several-variables`, and
+`holomorphic-inverse-and-weierstrass-preparation`; the published multi-index,
+multinomial and locally uniform power-series results. No recorded-not-proved
+item is a prerequisite.
+
+This pair is a required retirement program, not optional enrichment. The
+published PDE-2 item
+`rem-cauchy-kovalevskaya-theorem-for-a-noncharacteristic-analytic-cauchy-problem`
+records the theorem without proof, and the published
+`rem-cauchy-kovalevskaya-proof-boundary` depends directly on that recorded
+item. Neither may supply a proof or remain on a prerequisite path. PDE-1CK
+builds an independent proved theorem before PDE-2 is reconciled to it.
+
+### A-page items, in dependency order
+
+1. `def-coefficientwise-majorisation-of-multivariable-power-series` (definition; **L/NA**) — For formal vector power series at the origin define $F\ll G$ coefficientwise, requiring the majorant coefficients to be nonnegative and fixing componentwise and multi-index conventions.
+2. `lem-coefficient-majorisation-is-preserved-by-sums-products-composition-and-differentiation` (lemma; **L/A**) — Prove the precise coefficient inequalities used later, including the zero-constant-term hypothesis for composition and the factorial convention for derivatives.
+3. `lem-an-analytic-germ-has-a-rational-geometric-majorant` (lemma; **L/A**) — On a smaller polydisc, Cauchy/coefficient bounds majorise each component by $M/(1-(z_1+\cdots+z_N)/r)$ with explicit positive radius and coefficient bounds.
+4. `thm-real-analytic-inverse-and-implicit-function-theorems` (theorem; **L/A**) — Complexify the convergent real power series locally, apply the published several-complex-variable holomorphic inverse theorem, and restrict the conjugation-invariant inverse to the real slice; derive the implicit form by the standard block map.
+5. `lem-analytic-noncharacteristic-hypersurfaces-flatten-to-a-coordinate-hyperplane` (lemma; **L/A**) — Item 4 flattens an analytic defining function with nonzero differential and preserves analyticity of the transformed PDE; solve for the highest normal derivative exactly when the principal normal coefficient is nonzero.
+6. `lem-analytic-cauchy-data-reduce-to-zero-data-in-normal-form` (lemma; **L/A**) — Subtract the finite normal Taylor polynomial built from the prescribed analytic jets so the reduced equation has zero Cauchy data while retaining analytic coefficients.
+7. `lem-normal-form-pde-determines-a-unique-formal-taylor-series` (lemma; **L/A**) — Differentiate the equation recursively in the normal variable and show that lower normal-order coefficients determine the next coefficient; this proves formal and hence analytic uniqueness.
+8. `lem-a-positive-majorant-system-dominates-the-formal-cauchy-recursion` (lemma; **L/A**) — Replace every analytic coefficient by item 3's positive rational majorant and use item 2 to inductively dominate every coefficient produced in item 7.
+9. `lem-the-goursat-majorant-equation-has-a-convergent-positive-power-series-solution` (lemma; **L/A**) — Reduce the symmetric majorant system to the sourced scalar algebraic/ODE equation and use item 4 at its nonsingular origin to obtain a convergent solution with nonnegative coefficients.
+10. `thm-cauchy-kovalevskaya-for-first-order-analytic-systems-in-normal-form` (theorem; **L/A**) — Items 7--9 prove convergence, existence and analytic uniqueness for $\partial_tu=F(t,x,u,D_xu)$ with analytic zero or analytic reduced data in the sourced local class.
+11. `lem-higher-order-analytic-normal-form-reduces-to-a-first-order-system` (lemma; **L/A**) — Introduce all derivatives below the distinguished normal order, write their compatibility equations, and verify that the resulting first-order system uses only allowed jets and carries exactly the original $m$ Cauchy data.
+12. `thm-cauchy-kovalevskaya-for-a-noncharacteristic-analytic-cauchy-problem` (theorem; **L/A**) — Combine items 5--6 and 10--11: an analytic scalar $m$th-order equation solved for its highest noncharacteristic normal derivative, with analytic normal jets through order $m-1$, has a unique local analytic solution.
+13. `rem-cauchy-kovalevskaya-is-an-analytic-not-smooth-well-posedness-theorem` (remark; **L/NA**) — Record that the theorem neither extends to arbitrary smooth data nor asserts continuous dependence in a smooth topology; later characteristic and ill-posedness discussions must preserve this boundary.
+
+### B-page companion
+
+1. `ex-majorising-a-two-variable-analytic-germ-by-a-geometric-series` (example; **L/A**) — Compute a valid radius and coefficient bound for a polynomial-plus-rational germ.
+2. `ex-cauchy-kovalevskaya-for-an-analytic-transport-equation` (example; **L/A**) — Recover the locally analytic translated solution and compare it with PDE-1's characteristic formula.
+3. `ex-cauchy-kovalevskaya-for-a-second-order-normal-form` (example; **L/A**) — Convert a simple analytic second-order equation and its two data jets to the first-order system of item 11.
+4. `cex-smooth-nonanalytic-data-need-not-have-an-analytic-solution` (counterexample; **L/A**) — Restrict any proposed analytic solution to the initial hypersurface to show why analytic data are necessary for this conclusion.
+5. `cex-a-characteristic-analytic-surface-does-not-determine-the-normal-jet` (counterexample; **L/A**) — Give a first-order analytic equation whose characteristic initial surface admits nonunique or incompatible data.
+
+### Sources and proof architecture
+
+**Primary backing:** [CKG], read in full, §§1--5 and especially Theorem 18;
+[T] Chapter 2 §§1--2; Ageno Chapter 2. The Gantumur and Ageno files are
+complete author-hosted texts, not previews.
+
+**Hard proof obligations.** The coefficient recursion, its positive
+majorisation and convergence are separate proved steps; existence is not
+deduced from a formal series. Analytic uniqueness follows from item 7 and the
+identity of convergent Taylor series. Item 11 writes the actual system and
+checks that no derivative of forbidden normal order occurs. Item 5 proves the
+analytic, not merely $C^1$, coordinate reduction.
+
+**Well-definedness.** Majorisation is coefficientwise only after a centre,
+coordinates and factorial convention are fixed. All radii are shrunk finitely
+and explicitly. The final solution is a convergent germ on a nonempty
+neighbourhood, not a formal object. The B page is a leaf.
 
 ---
 
@@ -580,13 +686,15 @@ a single-valued $C^1$ map. No B-page example is a dependency target.
 
 **A page:** `quasilinear-characteristics-and-cauchy-kovalevskaya`  
 **B page:** `quasilinear-characteristics-and-cauchy-kovalevskaya-examples`  
-**Requires:** PDE-1; the published local existence, uniqueness and smooth
-dependence theorem for ODEs; `inverse-and-implicit-function-theorems`.
+**Requires:** PDE-1 A and PDE-1CK A; the published local existence, uniqueness and smooth
+dependence theorem for ODEs; `the-derivative-and-mean-value-theorems` and
+`inverse-and-implicit-function-theorems`.
 
 This page follows first-order solutions until their characteristic projection
 ceases to be invertible. It treats semilinear and quasilinear equations first,
 then the Lagrange--Charpit system for $F(x,u,Du)=0$. The analytic existence
-theorem is stated exactly and is not used later.
+theorem is supplied and proved earlier on PDE-1CK; the two existing remarks are
+reconciled to that theorem and are not proof suppliers themselves.
 
 ### A-page items, in dependency order
 
@@ -605,8 +713,8 @@ theorem is stated exactly and is not used later.
 13. `lem-charpit-contact-compatibility-is-preserved` (lemma; **L/A**) — Prove $dz-p\cdot dx=0$ remains valid along a compatible characteristic strip.
 14. `thm-local-fully-nonlinear-cauchy-problem-by-charpit` (theorem; **L/A**) — Under $C^2$ regularity and the noncharacteristic rank condition, invert the projected strip and obtain a local classical solution.
 15. `rem-characteristics-do-not-select-a-post-crossing-weak-solution` (remark; **L/NA**) — Explain that characteristic crossing creates the selection problem later resolved by viscosity or entropy inequalities.
-16. `rem-cauchy-kovalevskaya-theorem-for-a-noncharacteristic-analytic-cauchy-problem` (remark; **L/NS**, `proved_here: false`) — Faithfully state local existence and uniqueness of an analytic solution for an analytic $m$th-order PDE solved for the noncharacteristic normal derivative, with analytic normal-jet data through order $m-1$.
-17. `rem-cauchy-kovalevskaya-proof-boundary` (remark; **L/NA**) — Cite [T] Chapter 2 §§1--2 and [E] §4.6, record that the majorant-series proof is absent, and forbid item 16 as a dependency target.
+16. `rem-cauchy-kovalevskaya-theorem-for-a-noncharacteristic-analytic-cauchy-problem` (remark; **L/NA**) — Retain the published stable ID but, after PDE-1CK is published, replace its recorded external assertion by a cross-reference to `thm-cauchy-kovalevskaya-for-a-noncharacteristic-analytic-cauchy-problem`; preserve the exact analytic hypotheses and do not claim a smooth-data theorem.
+17. `rem-cauchy-kovalevskaya-proof-boundary` (remark; **L/NA**) — Retain the published stable ID but retire its direct dependency on the recorded item: cite PDE-1CK's proved theorem and explain that the former majorant-series boundary has been discharged locally.
 
 ### B-page companion
 
@@ -624,15 +732,16 @@ theorem is stated exactly and is not used later.
 **Primary backing:** [T], Chapter 1 §§2--4 and Chapter 2 §§1--2; [E], Chapter 3
 §§3.1--3.2; [KTH], semilinear/quasilinear sections. Burgers breakdown is also
 checked against [E] §3.4 “Introduction to Conservation Laws.” The exact
-Cauchy--Kovalevskaya wording follows [T] Chapter 2; [E]'s analytic theorem is
-the independent check.
+Cauchy--Kovalevskaya wording follows [T] Chapter 2; [CKG] and Ageno provide
+the proved majorant-series supplier on PDE-1CK.
 
 **Hard proof obligations.** Items 5--6 are separate because solving the ODEs is
 not yet proof that the projected graph satisfies the PDE. Items 12--13 compute
 both invariants of the Charpit system. Item 14 repeats the rank check rather
-than saying “invert characteristics.” Item 16 is the track's one authorised
-source-cited theorem statement without proof; its analytic class, normal form,
-data order and local uniqueness class must not be shortened.
+than saying “invert characteristics.” Items 16--17 are published compatibility
+remarks only after their direct dependency is changed from the recorded item
+to PDE-1CK's proved theorem; their analytic class, normal form, data order and
+local uniqueness class must not be shortened.
 
 **Well-definedness.** The solution in items 5 and 14 is defined only after the
 projection is locally inverted and independence from characteristic parameters
@@ -642,31 +751,91 @@ an assertion that a chosen envelope is differentiable.
 
 ---
 
+## PDE-2D. Euclidean Surface Measure, Divergence and Green Identities
+
+**A page:** `euclidean-surface-measure-divergence-and-green-identities`
+**B page:** `euclidean-surface-measure-divergence-and-green-identities-examples`
+**Requires:** MT-4, MT-8 and MT-11; `fubini-and-change-of-variables`,
+`the-fundamental-theorems-of-calculus`,
+`inner-product-spaces-and-orthogonality`, and
+`smooth-partitions-of-unity-and-exhaustions`. RC-9
+`the-divergence-theorem-and-classical-stokes` is a backward comparison for its
+three-dimensional finite-gluing case, and
+`regular-surfaces-and-surface-integrals` treats two-surfaces in
+$\mathbb R^3$; neither is a supplier of the dimension-$n$ theorem below.
+
+This pair is inserted before harmonic theory because the flux identity for
+spherical means is already a divergence-theorem argument. Delaying this
+machinery to the Green-function page made PDE-3 circular.
+
+### A-page items, in dependency order
+
+1. `def-bounded-c-one-domain-boundary-charts-and-outward-normal` (definition; **L/NA**) — Define a bounded $C^1$ domain by local graph charts and construct its continuous outward unit normal, with overlap signs fixed by the interior side.
+2. `def-surface-integral-on-a-compact-c-one-hypersurface` (definition; **L/NA**) — Define the graph density $\sqrt{\det(DX^TDX)}$ and patch local integrals with a finite smooth partition of unity.
+3. `lem-surface-integral-is-independent-of-c-one-boundary-charts` (lemma; **L/A**) — Tangential change of variables proves chart independence, refinement independence and additivity.
+4. `thm-divergence-theorem-for-bounded-c-one-euclidean-domains` (theorem; **L/A**) — For $F\in C^1(\overline\Omega;\mathbb R^d)$, $d\ge2$, prove $\int_\Omega\operatorname{div}F=\int_{\partial\Omega}F\cdot\nu$ by reducing graph patches to Fubini and the one-dimensional FTC.
+5. `def-bounded-piecewise-c-one-euclidean-domain` (definition; **L/NA**) — Define a bounded domain whose boundary is a finite union of oriented compact $C^1$ faces, with pairwise face intersections surface-null and a consistent outward normal off those edges; include punctured domains and truncated cones by explicit face presentations.
+6. `thm-divergence-theorem-for-bounded-piecewise-c-one-domains` (theorem; **L/A**) — Extend item 4 to item 5's class by a finite $C^1$ decomposition/face calculation; the surface-null edges contribute nothing and internal faces cancel with opposite normals. This is the exact version used on punctured domains and truncated space-time cones.
+7. `def-classical-normal-derivative` (definition; **L/NA**) — For a $C^1$ function near the boundary set $\partial_\nu u=Du\cdot\nu$; no Sobolev trace or conormal derivative is implied.
+8. `cor-first-green-identity-on-a-bounded-c-one-domain` (corollary; **L/A**) — $\int_\Omega(v\Delta u+Du\cdot Dv)=\int_{\partial\Omega}v\partial_\nu u$ for the displayed $C^2/C^1$ regularity.
+9. `cor-second-green-identity-on-a-bounded-c-one-domain` (corollary; **L/A**) — Subtract the two first identities, retaining the regularity and orientation conventions.
+10. `rem-euclidean-divergence-versus-classical-and-manifold-stokes` (remark; **L/NA**) — RC-9 covers a concrete $d=3$ finite-gluing class and DG-14 later subsumes item 4 by general Stokes; neither is used forward in this proof.
+
+### B-page companion
+
+1. `ex-surface-density-and-outward-normal-on-a-graph` (example; **L/A**) — Compute both sides of the graph formula and check the chosen normal against the interior side.
+2. `ex-divergence-theorem-on-a-ball-in-rn` (example; **L/A**) — Apply item 4 to radial and constant vector fields and recover the sphere/ball scaling relation.
+3. `ex-internal-face-cancellation-for-two-glued-regions` (example; **L/A**) — Verify item 6 on two boxes sharing one face.
+4. `cex-reversing-boundary-orientation-reverses-flux` (counterexample; **L/A**) — A constant-divergence radial field detects the sign error.
+5. `cex-a-corner-is-not-covered-by-the-single-c-one-chart-theorem` (counterexample; **L/A**) — A box is handled by items 5--6, not falsely described as a globally $C^1$-boundary domain.
+
+### Sources and proof architecture
+
+**Primary backing:** [H] §1.12; [T] Chapter 5 §1; the published RC-9 page for
+the narrower finite-gluing comparison. The full Hunter text states the
+bounded-$C^1$ Euclidean theorem in arbitrary dimension.
+
+**Hard proof obligations.** Item 3 precedes every use of boundary integration.
+Item 4 writes the local graph calculation and partition sum. Item 6 proves the
+edge sets are negligible for surface integration and cancels internal faces;
+“piecewise smooth” is not used without a definition.
+
+**Well-definedness.** Surface integrals and normals are chart-independent
+before they occur in a theorem. Every compact boundary has a finite atlas.
+The piecewise theorem is invoked only for a specified finite decomposition.
+
+---
+
 ## PDE-3. Harmonic Functions and Mean Values in $\mathbb R^n$
 
 **A page:** `harmonic-functions-and-mean-values-in-rn`  
 **B page:** `harmonic-functions-and-mean-values-in-rn-examples`  
-**Requires:** `mixed-partials-taylor-and-extrema`; MT-8, MT-11 and MT-15;
+**Requires:** PDE-2D; `mixed-partials-taylor-and-extrema`; MT-8, MT-11,
+MT-15 and MT-17;
 FA-24 for distributions; the published Euclidean topology and compactness
 pages. The plane-specific complex-analysis harmonic pages are not prerequisites
 for the real-variable proofs.
 
 ### A-page items, in dependency order
 
-1. `def-laplacian-poisson-equation-and-harmonic-function-in-rn` (definition; **L/NA**) — Define $\Delta$, classical harmonicity and $-\Delta u=f$ on an open subset of $\mathbb R^n$, separating $C^2$ from distributional solutions.
-2. `def-spherical-and-ball-averages` (definition; **L/NA**) — Define averages using MT-11's polar surface measure and Lebesgue volume, with translated/dilated spheres and balls.
+1. `def-distributional-harmonicity-and-poisson-equation-in-rn` (definition; **L/NA**) — Retain the published definition of classical and distributional harmonicity and of $-\Delta u=f$ on an open subset of $\mathbb R^n$; the test-function pairing comes from FA-24.
+2. `def-spherical-averages-and-local-ball-means-in-rn` (definition; **L/NA**) — Retain the published averages, using MT-11's polar surface measure, MT-17's ball-average operator and Lebesgue volume on translated/dilated spheres and balls.
 3. `lem-sphere-and-ball-measures-scale` (lemma; **L/A**) — Derive $|\partial B_r|=|S^{n-1}|r^{n-1}$ and $|B_r|=|S^{n-1}|r^n/n$ from polar coordinates.
 4. `lem-radial-derivative-of-a-spherical-average` (lemma; **L/A**) — For $u\in C^2$, prove $M_u'(r)=r\fint_{B_r}\Delta u/n$ by differentiation under the integral and polar-coordinate integration by parts.
 5. `thm-spherical-mean-value-property-for-harmonic-functions` (theorem; **L/A**) — A harmonic function equals its spherical average on every compactly contained ball.
 6. `cor-ball-mean-value-property-for-harmonic-functions` (corollary; **L/A**) — Integrate the spherical identity to obtain the ball identity.
-7. `thm-continuous-mean-value-functions-are-harmonic` (theorem; **L/A**) — If a continuous function has the ball mean property on every compactly contained ball, mollification makes it smooth and the small-ball expansion forces $\Delta u=0$.
-8. `cor-local-mean-value-property-is-enough` (corollary; **L/A**) — It suffices that each point have a radius below which all centred ball means agree.
-9. `lem-distributional-laplacian-commutes-with-mollification` (lemma; **L/A**) — On shrunken domains, $\Delta(T*\rho_\varepsilon)=(\Delta T)*\rho_\varepsilon$.
-10. `thm-weyl-lemma-for-the-laplacian` (theorem; **L/A**) — Every distribution $T$ with $\Delta T=0$ is induced by a unique smooth harmonic function.
-11. `cor-locally-integrable-weakly-harmonic-functions-are-smooth` (corollary; **L/A**) — An $L^1_{\rm loc}$ distributional solution has an a.e.-equal smooth harmonic representative.
-12. `lem-derivatives-of-harmonic-functions-are-harmonic` (lemma; **L/A**) — Classical derivatives commute with $\Delta$; after Weyl, all distributional derivatives are represented smoothly.
-13. `thm-uniform-limits-on-compacta-of-harmonic-functions-are-harmonic` (theorem; **L/A**) — Pass the mean identity to the locally uniform limit, then use the converse theorem.
-14. `rem-plane-harmonic-theory-is-owned-by-complex-analysis` (remark; **L/NA**) — The dimension-uniform PDE-3--PDE-6 theorems retain their stated $\mathbb R^n$ scope, including $n=2$.  Point to complex analysis CA-13/CA-14 and the CA-HM/CA-PT harmonic pages for the sharper holomorphic proofs of the disc Poisson kernel, plane subharmonic/Perron theory and conformal invariance; do not reproduce a plane-specific proof or restate those sharper results here.
+7. `def-radial-mollifier-family-in-rn` (definition; **L/NA**) — Retain the published unit-mass radial family with its support and scaling conventions.
+8. `lem-radial-mollification-fixes-local-mean-value-functions` (lemma; **L/A**) — Polar coordinates and the spherical mean identity show that a sufficiently small radial mollification fixes a local mean-value function.
+9. `thm-continuous-mean-value-functions-are-harmonic` (theorem; **L/A**) — If a continuous function has the ball mean property on every compactly contained ball, items 7--8 make it smooth and the small-ball expansion forces $\Delta u=0$.
+10. `cor-local-mean-value-property-is-enough` (corollary; **L/A**) — It suffices that each point have a radius below which all centred ball means agree.
+11. `lem-distributional-laplacian-commutes-with-mollification` (lemma; **L/A**) — On shrunken domains, $\Delta(T*\rho_\varepsilon)=(\Delta T)*\rho_\varepsilon$.
+12. `lem-zero-mass-radial-test-functions-are-compactly-supported-laplacians` (lemma; **L/A**) — If two radial mollifiers have the same integral, construct a compactly supported smooth radial $\psi$ with $\Delta\psi=\rho_1-\rho_2$, including smoothness at the origin.
+13. `lem-harmonic-distribution-mollifications-stabilise-locally` (lemma; **L/A**) — Convolve item 12 with a distribution annihilated by $\Delta$ to show that sufficiently small radial regularisations agree on each smaller ball and recover the original distribution in the test-function limit.
+14. `thm-weyl-lemma-for-the-laplacian` (theorem; **L/A**) — Every distribution $T$ with $\Delta T=0$ is induced by a unique smooth harmonic function.
+15. `cor-locally-integrable-weakly-harmonic-functions-are-smooth` (corollary; **L/A**) — An $L^1_{\rm loc}$ distributional solution has an a.e.-equal smooth harmonic representative.
+16. `lem-derivatives-of-harmonic-functions-are-harmonic` (lemma; **L/A**) — Classical derivatives commute with $\Delta$; after Weyl, all distributional derivatives are represented smoothly.
+17. `thm-uniform-limits-on-compacta-of-harmonic-functions-are-harmonic` (theorem; **L/A**) — Pass the mean identity to the locally uniform limit, then use the converse theorem.
+18. `rem-plane-harmonic-theory-is-owned-by-complex-analysis` (remark; **L/NA**) — The dimension-uniform PDE-3--PDE-6 theorems retain their stated $\mathbb R^n$ scope, including $n=2$. Point to complex analysis CA-13/CA-14 and the CA-HM/CA-PT harmonic pages for the sharper holomorphic proofs of the disc Poisson kernel, plane subharmonic/Perron theory and conformal invariance; do not reproduce a plane-specific proof or restate those sharper results here.
 
 ### B-page companion
 
@@ -683,13 +852,17 @@ for the real-variable proofs.
 formulas” and §2.2.3 “Properties of harmonic functions”; [T] Chapter 5 §1.
 Weyl's lemma is cross-checked in [H] §3.3 and FA-24's distribution treatment.
 
-**Hard proof obligations.** Item 4 is the only flux identity needed here and is
-proved directly from the polar formula; it does not presuppose PDE-5's general
-divergence theorem. Item 7 proves the $r^2\Delta u/(2(n+2))$ small-ball term,
-rather than asserting the converse by “Taylor.” In item 10 a radial mollifier
-has constant spherical averages; the mean property makes the regularisations
-agree on nested interior sets, producing one smooth representative rather than
-only a family depending on $\varepsilon$.
+**Hard proof obligations.** Item 4 cites PDE-2D's divergence theorem rather
+than silently replacing the spherical average of the radial Hessian by the
+full Laplacian. Items 12--13 are mandatory for the distributional form of
+Weyl's lemma: commutation with mollification alone proves only that the
+regularisations are harmonic, not that one smooth function represents the
+original distribution. Item 9 proves the
+$r^2\Delta u/(2(n+2))$ small-ball term rather than asserting the converse by
+“Taylor.” Item 12 solves the radial Poisson equation explicitly for the
+zero-mass difference of two mollifiers; item 13 uses that compactly supported
+solution and $\Delta T=0$ to make all sufficiently small regularisations agree
+on nested interiors, then passes to the test-function limit.
 
 **Well-definedness.** MT-11 defines the spherical measure used in item 2. Every
 average divides by a finite positive measure (item 3). The representative in
@@ -712,27 +885,33 @@ geometry items.
 2. `lem-strict-subharmonic-perturbation` (lemma; **L/A**) — $u_\varepsilon=u+\varepsilon|x|^2$ converts $\Delta u\ge0$ to a strict inequality on bounded sets.
 3. `thm-weak-maximum-principle-for-the-laplacian` (theorem; **L/A**) — A subharmonic $C^2(\Omega)\cap C(\overline\Omega)$ function on a bounded domain attains its maximum on the boundary.
 4. `cor-weak-minimum-principle-for-the-laplacian` (corollary; **L/A**) — Apply item 3 to $-u$.
-5. `thm-strong-maximum-principle-for-harmonic-functions` (theorem; **L/A**) — A harmonic function on a domain that attains an interior maximum or minimum is constant.
-6. `cor-uniqueness-for-the-classical-dirichlet-problem` (corollary; **L/A**) — Two continuous-up-to-boundary harmonic functions with equal boundary data agree.
-7. `lem-interior-sphere-barrier-for-the-laplacian` (lemma; **L/A**) — Construct the exponential/radial barrier on an annulus tangent to a boundary point.
-8. `thm-hopf-boundary-point-lemma-for-the-laplacian` (theorem; **L/A**) — Under an interior sphere condition and a strict nonconstant boundary maximum, the outward normal derivative is positive, with sign conventions explicit.
-9. `thm-harnack-inequality-on-a-ball` (theorem; **L/A**) — For nonnegative harmonic $u$ on $B_R$, compare $u(x)$ and $u(0)$ on $B_r$ with an explicit dimension/radius constant.
-10. `cor-harnack-inequality-on-compact-subsets` (corollary; **L/A**) — A finite chain of overlapping balls gives $\sup_Ku\le C(K,\Omega)\inf_Ku$ on compact connected subsets.
-11. `thm-harnack-convergence-principle` (theorem; **L/A**) — An increasing sequence of harmonic functions on a domain either diverges to $+\infty$ everywhere or converges locally uniformly to a harmonic function.
-12. `thm-liouville-theorem-for-bounded-harmonic-functions` (theorem; **L/A**) — A harmonic function on all of $\mathbb R^n$ bounded above or below is constant.
-13. `cor-positive-entire-harmonic-functions-are-constant` (corollary; **L/A**) — Shift/nonnegativity and Harnack give the one-sided Liouville form.
-14. `cor-removable-singularity-for-bounded-harmonic-functions` (corollary; **L/A**) — A harmonic function bounded near an isolated point extends harmonically across it for $n\ge2$.
-15. `rem-maximum-principles-need-domain-and-boundary-hypotheses` (remark; **L/NA**) — Separate bounded-domain weak maximum, connected-domain strong maximum and Hopf's geometric hypotheses.
+5. `lem-classical-subharmonic-mean-value-inequalities` (lemma; **L/A**) — Retain the published spherical and ball submean inequalities and their local converse, based on PDE-3's corrected radial derivative formula.
+6. `thm-strong-maximum-principle-for-classical-subharmonic-functions` (theorem; **L/A**) — Retain the published strong principle for $C^2$ subharmonic functions on a connected domain.
+7. `thm-strong-maximum-principle-for-harmonic-functions` (theorem; **L/A**) — A harmonic function on a domain that attains an interior maximum or minimum is constant.
+8. `cor-uniqueness-for-the-classical-dirichlet-problem` (corollary; **L/A**) — Two continuous-up-to-boundary harmonic functions with equal boundary data agree.
+9. `cor-poisson-supremum-estimate-from-a-quadratic-barrier` (corollary; **L/A**) — Retain the published strip-width supremum estimate for bounded Poisson data.
+10. `def-interior-sphere-condition-and-sphere-normal` (definition; **L/NA**) — Define a specified interior tangent ball and its outward sphere direction without assuming a global differentiable boundary.
+11. `lem-interior-sphere-barrier-for-the-laplacian` (lemma; **L/A**) — Construct the exponential/radial barrier on an annulus tangent to a boundary point.
+12. `thm-hopf-boundary-point-lemma-for-the-laplacian` (theorem; **L/A**) — Under an interior sphere condition and a strict nonconstant boundary maximum, the outward normal derivative is positive, with sign conventions explicit.
+13. `thm-harnack-inequality-on-a-ball` (theorem; **L/A**) — For nonnegative harmonic $u$ on $B_R$, compare $u(x)$ and $u(0)$ on $B_r$ with an explicit dimension/radius constant.
+14. `cor-harnack-inequality-on-compact-subsets` (corollary; **L/A**) — A finite chain of overlapping balls gives $\sup_Ku\le C(K,\Omega)\inf_Ku$ on arbitrary compact subsets of a connected domain.
+15. `thm-harnack-convergence-principle` (theorem; **L/A**) — An increasing sequence of harmonic functions on a domain either diverges to $+\infty$ everywhere or converges locally uniformly to a harmonic function.
+16. `lem-smooth-sphere-data-have-a-harmonic-replacement` (lemma; **L/A**) — Retain the published explicit ball Poisson integral for smooth sphere data, including normalization, boundary convergence and uniqueness; it is local PDE-4 machinery, not a dependency on PDE-6.
+17. `thm-liouville-theorem-for-bounded-harmonic-functions` (theorem; **L/A**) — A harmonic function on all of $\mathbb R^n$ bounded above or below is constant.
+18. `cor-positive-entire-harmonic-functions-are-constant` (corollary; **L/A**) — Shift/nonnegativity and Harnack give the one-sided Liouville form.
+19. `cor-removable-singularity-for-bounded-harmonic-functions` (corollary; **L/A**) — A harmonic function bounded near an isolated point extends harmonically across it for $n\ge2$.
+20. `rem-maximum-principles-need-domain-and-boundary-hypotheses` (remark; **L/NA**) — Separate bounded-domain weak maximum, connected-domain strong maximum and Hopf's geometric hypotheses.
 
 ### B-page companion
 
 1. `ex-harmonic-function-attaining-only-boundary-extrema` (example; **L/A**) — An affine function on a ball illustrates the weak principle and Hopf sign.
-2. `ex-harnack-constant-from-the-poisson-kernel-ratio` (example; **L/A**) — Compute the ball comparison constant using only the mean representation available on PDE-3.
+2. `ex-harnack-constant-from-the-poisson-kernel-ratio` (example; **L/A**) — Retain the published stable ID. Compute the ball comparison constant using PDE-4's earlier smooth-sphere-data harmonic-replacement kernel together with PDE-3 mean values; this is not a dependency on PDE-6's later general Poisson-representation page.
 3. `cex-maximum-principle-fails-for-superharmonic-maxima` (counterexample; **L/A**) — $-|x|^2$ distinguishes the sign direction.
 4. `cex-weak-maximum-principle-needs-boundedness-or-control-at-infinity` (counterexample; **L/A**) — A nonconstant entire harmonic affine function has no boundary on which to attain its supremum.
 5. `cex-hopf-lemma-needs-a-boundary-geometry-hypothesis` (counterexample; **L/A**) — A cusp-domain example has a boundary extremum with vanishing accessible normal derivative.
 6. `cex-liouville-needs-one-sided-boundedness` (counterexample; **L/A**) — Coordinate functions are nonconstant entire harmonic functions.
 7. `cex-unbounded-punctured-harmonic-singularity-is-not-removable` (counterexample; **L/A**) — The logarithmic/Newtonian radial solution supplies the sharp obstruction.
+8. `ex-subharmonic-quartic-and-harmonic-saddle` (example; **L/A**) — Retain the published check that $|x|^4$ is subharmonic below its constant harmonic boundary majorant and $x_1^2-x_2^2$ is a harmonic saddle.
 
 ### Sources and proof architecture
 
@@ -760,38 +939,32 @@ positivity first.
 
 **A page:** `fundamental-solutions-newtonian-potentials-and-green-functions`  
 **B page:** `fundamental-solutions-newtonian-potentials-and-green-functions-examples`  
-**Requires:** PDE-3--PDE-4; MT-8, MT-11 and MT-15; FA-24; the published
-change-of-variables and partition-of-unity machinery.
+**Requires:** PDE-2D--PDE-4; MT-8, MT-11 and MT-15; FA-24.
 
 ### A-page items, in dependency order
 
-1. `def-c-one-boundary-domain-outward-normal-and-surface-integral` (definition; **L/NA**) — Define a bounded $C^1$ domain by local graph charts, its continuous outward unit normal, chart surface density and boundary integral.
-2. `lem-surface-integral-is-independent-of-boundary-charts` (lemma; **L/A**) — Use tangential change of variables and a partition of unity to prove chart independence and additivity.
-3. `thm-divergence-theorem-for-bounded-c-one-euclidean-domains` (theorem; **L/A**) — For $F\in C^1(\overline\Omega;\mathbb R^n)$ prove $\int_\Omega\operatorname{div}F=\int_{\partial\Omega}F\cdot\nu$ by reducing graph patches to Fubini and the one-dimensional FTC.
-4. `cor-first-green-identity` (corollary; **L/A**) — $\int_\Omega(v\Delta u+Du\cdot Dv)=\int_{\partial\Omega}v\partial_\nu u$ for $C^2/C^1$ data.
-5. `cor-second-green-identity` (corollary; **L/A**) — Subtract the two first identities and state the required regularity.
-6. `def-fundamental-solution-of-a-constant-coefficient-operator` (definition; **L/NA**) — A distribution $E$ is fundamental for $L$ when $LE=\delta_0$; translation gives a pole at $y$.
-7. `def-laplace-fundamental-solution-with-positive-minus-laplacian-sign` (definition; **L/NA**) — Define $\Phi$ by the formula in §2.1, including $n=2$ and the harmless one-dimensional analogue in a remark.
-8. `lem-laplace-fundamental-solution-is-harmonic-off-its-pole` (lemma; **L/A**) — Direct radial differentiation proves $\Delta\Phi=0$ on $\mathbb R^n\setminus\{0\}$.
-9. `thm-minus-laplacian-of-the-fundamental-solution-is-dirac` (theorem; **L/A**) — Excise a small ball, apply item 3 and pass to the limit to prove $-\Delta\Phi=\delta_0$ distributionally.
-10. `def-newtonian-potential` (definition; **L/NA**) — For admissible $f$, define $Nf=\Phi*f$ only after absolute/local integrability of the singular kernel is established.
-11. `lem-newtonian-potential-is-well-defined-for-compactly-supported-bounded-data` (lemma; **L/A**) — Split near/far integrals and use polar coordinates.
-12. `thm-newtonian-potential-solves-poisson-distributionally` (theorem; **L/A**) — For $f\in C_c$ (and then $L^p$ in the stated range), $-\Delta(Nf)=f$ in $\mathcal D'$.
-13. `thm-newtonian-potential-for-holder-data-is-classical` (theorem; **L/A**) — If $f\in C_c^{0,\alpha}$, cancellation of $f(y)-f(x)$ yields $Nf\in C^2$ and the pointwise Poisson equation.
-14. `def-dirichlet-green-function-for-minus-laplacian` (definition; **L/NA**) — For each pole $y$, require $G_\Omega(\cdot,y)-\Phi(\cdot-y)$ harmonic, zero boundary values and the adopted sign.
-15. `lem-dirichlet-green-function-is-unique-and-positive` (lemma; **L/A**) — The maximum principle proves uniqueness and $G_\Omega>0$ off the pole when a Green function exists.
-16. `thm-green-function-symmetry` (theorem; **L/A**) — Apply the second Green identity on a twice-punctured domain and control both small-sphere limits to show $G(x,y)=G(y,x)$.
-17. `def-poisson-kernel-from-a-green-function` (definition; **L/NA**) — Define $P_\Omega(x,y)=-\partial_{\nu_y}G_\Omega(x,y)$ when the boundary regularity makes the derivative meaningful.
-18. `thm-green-representation-formula` (theorem; **L/A**) — For $u\in C^2(\Omega)\cap C^1(\overline\Omega)$, represent $u(x)$ by $G_\Omega(-\Delta u)$ and $P_\Omega u|_{\partial\Omega}$, with every sign checked.
-19. `cor-classical-dirichlet-and-poisson-problems-are-unique` (corollary; **L/A**) — Maximum/Green identities give uniqueness for Dirichlet data and uniqueness up to constants for compatible Neumann data.
-20. `rem-euclidean-divergence-versus-general-stokes` (remark; **L/NA**) — State that item 3 is the $n$-form Euclidean special case and record the later differential-geometry ownership.
+1. `def-fundamental-solution-of-a-constant-coefficient-operator` (definition; **L/NA**) — A distribution $E$ is fundamental for $L$ when $LE=\delta_0$; translation gives a pole at $y$.
+2. `def-laplace-fundamental-solution-with-positive-minus-laplacian-sign` (definition; **L/NA**) — Define $\Phi$ by the formula in §2.1, including $n=2$ and the harmless one-dimensional analogue in a remark.
+3. `lem-laplace-fundamental-solution-is-harmonic-off-its-pole` (lemma; **L/A**) — Direct radial differentiation proves $\Delta\Phi=0$ on $\mathbb R^n\setminus\{0\}$.
+4. `thm-minus-laplacian-of-the-fundamental-solution-is-dirac` (theorem; **L/A**) — Excise a small ball, apply PDE-2D's piecewise-$C^1$ divergence theorem and pass to the limit to prove $-\Delta\Phi=\delta_0$ distributionally.
+5. `def-newtonian-potential` (definition; **L/NA**) — For admissible $f$, define $Nf=\Phi*f$ only after absolute/local integrability of the singular kernel is established.
+6. `lem-newtonian-potential-is-well-defined-for-compactly-supported-bounded-data` (lemma; **L/A**) — Split near/far integrals and use polar coordinates.
+7. `thm-newtonian-potential-solves-poisson-distributionally` (theorem; **L/A**) — For $f\in C_c$ (and then $L^p$ in the stated range), $-\Delta(Nf)=f$ in $\mathcal D'$.
+8. `thm-newtonian-potential-for-holder-data-is-classical` (theorem; **L/A**) — If $f\in C_c^{0,\alpha}$, cancellation of $f(y)-f(x)$ yields $Nf\in C^2$ and the pointwise Poisson equation.
+9. `def-dirichlet-green-function-for-minus-laplacian` (definition; **L/NA**) — For each pole $y$, require $G_\Omega(\cdot,y)-\Phi(\cdot-y)$ harmonic, zero boundary values and the adopted sign.
+10. `lem-dirichlet-green-function-is-unique-and-positive` (lemma; **L/A**) — The maximum principle proves uniqueness and $G_\Omega>0$ off the pole when a Green function exists.
+11. `thm-green-function-symmetry` (theorem; **L/A**) — Apply the second Green identity on a twice-punctured domain and control both small-sphere limits to show $G(x,y)=G(y,x)$.
+12. `def-poisson-kernel-from-a-green-function` (definition; **L/NA**) — Define $P_\Omega(x,y)=-\partial_{\nu_y}G_\Omega(x,y)$ when the boundary regularity makes the derivative meaningful.
+13. `thm-green-representation-formula` (theorem; **L/A**) — For $u\in C^2(\Omega)\cap C^1(\overline\Omega)$, represent $u(x)$ by $G_\Omega(-\Delta u)$ and $P_\Omega u|_{\partial\Omega}$, with every sign checked.
+14. `cor-classical-dirichlet-and-poisson-problems-are-unique` (corollary; **L/A**) — Maximum/Green identities give uniqueness for Dirichlet data and uniqueness up to constants for compatible Neumann data.
+15. `rem-green-identities-come-from-the-euclidean-integration-pair` (remark; **L/NA**) — Record that every boundary integration here cites PDE-2D and that later manifold Stokes is orientation only.
 
 ### B-page companion
 
 1. `ex-flux-of-the-laplace-fundamental-solution` (example; **L/A**) — Compute the unit outward flux across every centred sphere.
 2. `ex-newtonian-potential-of-a-radial-density` (example; **L/A**) — Reduce the potential of a radial compactly supported source to one-dimensional integrals.
 3. `ex-newtons-shell-theorem-from-the-mean-property` (example; **L/A**) — Derive the outside-point potential of a uniform spherical shell for $n\ge3$.
-4. `cex-second-derivatives-of-the-fundamental-solution-are-not-locally-integrable-absolutely` (counterexample; **L/A**) — The $|x|^{-n}$ singularity explains the cancellation in item 13.
+4. `cex-second-derivatives-of-the-fundamental-solution-are-not-locally-integrable-absolutely` (counterexample; **L/A**) — The $|x|^{-n}$ singularity explains the cancellation in A item 8.
 5. `cex-green-functions-need-not-exist-with-the-naive-boundary-regularity` (counterexample; **L/A**) — Record a boundary-irregular domain as a warning, without using it on the spine.
 6. `cex-neumann-poisson-problem-needs-the-compatibility-condition` (counterexample; **L/A**) — Integrating $-\Delta u=f$ shows $\int_\Omega f=-\int_{\partial\Omega}g$ in the adopted normal convention.
 7. `ex-one-dimensional-green-function-on-an-interval` (example; **L/A**) — Compute the piecewise-affine kernel and verify symmetry and the derivative jump.
@@ -802,18 +975,18 @@ change-of-variables and partition-of-unity machinery.
 2.2.4; [T] Chapter 5 §§3--4. Surface integration and divergence are also
 checked against [H] §1.12, whose stated hypothesis is a bounded $C^1$ domain.
 
-**Hard proof obligations.** Items 1--3 are a local Euclidean construction, not
-a citation to the nonexistent published divergence theorem. Item 9 keeps the
-inner-boundary normal sign and the $n=2$ logarithmic limit separate. Item 13
+**Hard proof obligations.** PDE-2D, not this page, owns the dimension-$n$
+surface/divergence construction. Item 4 keeps the
+inner-boundary normal sign and the $n=2$ logarithmic limit separate. Item 8
 does not differentiate $\Phi$ twice under an absolutely convergent integral;
-it subtracts $f(x)$ and accounts for the small-sphere term. Item 16 excises
+it subtracts $f(x)$ and accounts for the small-sphere term. Item 11 excises
 both poles, a detail necessary for a valid Green-identity proof.
 
-**Well-definedness.** Item 2 makes the surface integral chart-independent;
-the orientation is fixed by the outward normal. Items 10--11 establish that
+**Well-definedness.** PDE-2D makes the surface integral chart-independent and
+fixes the outward orientation. The Newtonian-potential items establish that
 the convolution is independent of $L^p$ representatives. A Green function is
 defined only on domains for which the stated object exists; no global existence
-is hidden in the definition. Item 17 is used only when its normal derivative
+is hidden in the definition. Item 12 is used only when its normal derivative
 exists continuously or in an explicitly stated trace sense.
 
 ---
@@ -836,9 +1009,10 @@ exists continuously or in an explicitly stated trace sense.
 8. `cor-harmonic-cauchy-estimates-in-supremum-norm` (corollary; **L/A**) — Replace the $L^1$ norm by $|B_r|\sup|u|$ and state scale-invariant constants.
 9. `thm-harmonic-functions-are-real-analytic` (theorem; **L/A**) — Factorial derivative estimates make the Taylor series converge to $u$ on a smaller ball.
 10. `cor-unique-continuation-for-harmonic-functions` (corollary; **L/A**) — A harmonic function vanishing on a nonempty open subset of a domain vanishes everywhere.
-11. `thm-interior-estimate-for-poisson-equation-with-holder-data` (theorem; **L/A**) — Localise $u$ as Newtonian potential plus a harmonic remainder and bound the $C^{2,\alpha}$ norm on a smaller ball.
-12. `cor-interior-laplacian-gradient-estimate` (corollary; **L/A**) — Record the frequently used $\|Du\|_{L^\infty(B_{r/2})}\le C(r^{-1}\|u\|_\infty+r\|f\|_\infty)$ in the regularity class proved.
-13. `rem-two-dimensional-poisson-disc-theory-is-cited-not-repeated` (remark; **L/NA**) — Restrict items 1--6 to $n\ge3$ and point to complex analysis for the disc; items 7--12 remain valid for $n\ge2$ by the mean-value proof.
+11. `def-local-holder-and-c-two-alpha-norms-on-euclidean-balls` (definition; **L/NA**) — For real $0<\alpha<1$, define $[f]_{C^{0,\alpha}(B)}$ and the local/scaled $C^{2,\alpha}$ norms before any estimate uses that notation; PDE-19 later develops the full domain scale.
+12. `thm-interior-estimate-for-poisson-equation-with-holder-data` (theorem; **L/A**) — Localise $u$ as Newtonian potential plus a harmonic remainder and bound the $C^{2,\alpha}$ norm on a smaller ball.
+13. `cor-interior-laplacian-gradient-estimate` (corollary; **L/A**) — Record the frequently used $\|Du\|_{L^\infty(B_{r/2})}\le C(r^{-1}\|u\|_\infty+r\|f\|_\infty)$ in the regularity class proved.
+14. `rem-two-dimensional-poisson-disc-theory-is-cited-not-repeated` (remark; **L/NA**) — Restrict items 1--6 to $n\ge3$ and point to complex analysis for the disc; items 7--13 remain valid for $n\ge2$ by the mean-value proof.
 
 ### B-page companion
 
@@ -929,7 +1103,7 @@ operator, not by evaluating the singular kernel formula at $t=0$.
 
 **A page:** `heat-equation-maximum-principles-duhamel-and-smoothing`  
 **B page:** `heat-equation-maximum-principles-duhamel-and-smoothing-examples`  
-**Requires:** PDE-7; PDE-5 for Euclidean integration by parts; MT-8, MT-11;
+**Requires:** PDE-7; PDE-2D for Euclidean integration by parts; MT-8, MT-11;
 FA-12 for Bochner integration and FA-23 for Fourier analysis.
 
 ### A-page items, in dependency order
@@ -944,10 +1118,12 @@ FA-12 for Bochner integration and FA-23 for Fourier analysis.
 8. `thm-duhamel-principle-for-the-whole-space-heat-equation` (theorem; **L/A**) — The heat potential has zero initial data and solves $u_t-\Delta u=f$, first for smooth compact support and then in the mild class.
 9. `thm-inhomogeneous-heat-cauchy-formula` (theorem; **L/A**) — $u(t)=H_tu_0+\int_0^tH_{t-s}f(s)ds$, with uniqueness in the stated bounded/$L^p$ class.
 10. `thm-instantaneous-smoothing-of-lp-heat-flow` (theorem; **L/A**) — For $t>0$, $H_t f\in C^\infty$ and every spatial/time derivative has the scale estimate obtained on PDE-7.
-11. `cor-heat-semigroup-is-analytic-on-lp` (corollary; **L/A**) — For $1<p<\infty$, the multiplier/kernel estimates give a bounded analytic semigroup; PDE-24 later proves the abstract theorem.
-12. `thm-whole-space-heat-uniqueness-under-gaussian-growth` (theorem; **L/A**) — A classical zero-data solution with $|u(x,t)|\le Ce^{a|x|^2}$ on a sufficiently short strip vanishes; iterate to the stated time interval.
-13. `thm-backward-heat-solution-map-is-unbounded` (theorem; **L/A**) — On a bounded interval with homogeneous Dirichlet data, terminal-to-initial inversion multiplies the $k$th sine mode by $e^{k^2T}$ and is unbounded on $L^2$.
-14. `rem-backward-ill-posed-does-not-mean-universal-nonexistence` (remark; **L/NA**) — Some terminal data lie in the heat-semigroup range; the failure is continuity/stability and often surjectivity in the chosen data space.
+11. `def-complex-time-heat-kernel-on-a-proper-sector` (definition; **L/NA**) — For $|\arg z|<\theta<\pi/2$, fix the holomorphic branch and define $\Gamma_z(x)=(4\pi z)^{-n/2}e^{-|x|^2/(4z)}$; record its uniform $L^1$ bound on every smaller sector.
+12. `thm-complex-time-heat-operators-form-a-bounded-holomorphic-semigroup` (theorem; **L/A**) — Convolution by $\Gamma_z$ is a bounded operator on $L^p$, $1\le p\le\infty$, depends holomorphically on $z$ in operator norm on proper subsectors, and satisfies $H_zH_w=H_{z+w}$ whenever the parameters and sum remain in the sector.
+13. `rem-the-heat-operator-family-is-an-analytic-semigroup-in-the-later-abstract-language` (remark; **L/NA**) — Point to PDE-24's general definition; no undefined abstract “analytic semigroup” is used as a premise here.
+14. `thm-whole-space-heat-uniqueness-under-gaussian-growth` (theorem; **L/A**) — A classical zero-data solution with $|u(x,t)|\le Ce^{a|x|^2}$ on a sufficiently short strip vanishes; iterate to the stated time interval.
+15. `thm-backward-heat-solution-map-is-unbounded` (theorem; **L/A**) — On a bounded interval with homogeneous Dirichlet data, terminal-to-initial inversion multiplies the $k$th sine mode by $e^{k^2T}$ and is unbounded on $L^2$.
+16. `rem-backward-ill-posed-does-not-mean-universal-nonexistence` (remark; **L/NA**) — Some terminal data lie in the heat-semigroup range; the failure is continuity/stability and often surjectivity in the chosen data space.
 
 ### B-page companion
 
@@ -968,8 +1144,10 @@ FA-12 for Bochner integration and FA-23 for Fourier analysis.
 **Hard proof obligations.** The strong maximum theorem respects time direction:
 constancy propagates backward, not automatically into the future. Item 8
 differentiates a moving-endpoint integral and isolates $H_0f(t)=f(t)$. Item 12
-uses expanding-ball barriers; it does not assert unconditional whole-space
-uniqueness. Item 13 proves a norm-unbounded inverse, the precise Hadamard
+constructs the complex-time operator family directly; it does not use the
+later abstract analytic-semigroup theorem. Item 14 uses expanding-ball
+barriers and does not assert unconditional whole-space uniqueness. Item 15
+proves a norm-unbounded inverse, the precise Hadamard
 failure requested by “backward ill-posedness.”
 
 **Well-definedness.** Item 7 checks strong measurability and norm integrability
@@ -983,7 +1161,7 @@ unproved Tychonoff example is never a dependency target.
 
 **A page:** `wave-equation-representation-formulas`  
 **B page:** `wave-equation-representation-formulas-examples`  
-**Requires:** PDE-3, PDE-5 and MT-11; the published one-variable wave/ODE,
+**Requires:** PDE-3 and MT-11; the published one-variable wave/ODE,
 trigonometric and differentiation-under-integral items.
 
 ### A-page items, in dependency order
@@ -1036,7 +1214,7 @@ only where the homogeneous propagator is defined.
 
 **A page:** `wave-energy-finite-propagation-and-huygens`  
 **B page:** `wave-energy-finite-propagation-and-huygens-examples`  
-**Requires:** PDE-5 and PDE-9; MT-8/MT-11; the published differentiation and
+**Requires:** PDE-2D and PDE-9; MT-8/MT-11; the published differentiation and
 compactness pages.
 
 ### A-page items, in dependency order
@@ -1079,7 +1257,7 @@ failure by data supported strictly inside the relevant ball, not merely by
 observing a different-looking formula.
 
 **Well-definedness.** Energy integrals are finite under stated hypotheses.
-Cone bases and side surfaces are piecewise $C^1$, so PDE-5's divergence theorem
+Cone bases and side surfaces are piecewise $C^1$, so PDE-2D's divergence theorem
 applies piecewise and shared faces cancel. “Depends on” is formalised by item
 10, not used as an undefined physical phrase.
 
@@ -1108,11 +1286,11 @@ framework is cited and not redefined.
 11. `def-hk-and-hk-zero-notation` (definition; **L/NA**) — Set $H^k=W^{k,2}$ and reserve $H^k_0$ for the later closure definition; do not conflate it with pointwise boundary values.
 12. `thm-hk-is-a-hilbert-space` (theorem; **L/A**) — The derivative-sum inner product is well defined, positive and complete.
 13. `lem-weak-stability-of-sobolev-derivatives` (lemma; **L/A**) — If $u_j\to u$ and $D^\alpha u_j\to v$ in the appropriate local $L^p$ topologies, then $D^\alpha u=v$ weakly.
-14. `thm-sobolev-chain-rule-for-c-one-lipschitz-compositions` (theorem; **L/A**) — For $u\in W^{1,p}$ and $F\in C^1$ with bounded derivative, $F\circ u\in W^{1,p}_{\rm loc}$ and $D(F\circ u)=F'(u)Du$, with the global integrability condition stated.
-15. `cor-positive-negative-part-and-truncation-calculus-in-w-one-p` (corollary; **L/A**) — Identify gradients of $u^+$, $u^-$ and $\min\{M,\max\{-M,u\}\}$ a.e.
-16. `def-absolute-continuity-on-almost-every-coordinate-line` (definition; **L/NA**) — Define the ACL property using equivalence-class representatives and Fubini sections.
-17. `thm-acl-characterisation-of-w-one-p` (theorem; **L/A**) — For $1\le p<\infty$, construct an ACL representative whose line derivatives are the weak derivatives, and prove the converse.
-18. `cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives` (corollary; **L/A**) — On an interval, $u(x)=u(a)+\int_a^xu'$ for the unique continuous representative.
+14. `def-absolute-continuity-on-almost-every-coordinate-line` (definition; **L/NA**) — Define the ACL property using equivalence-class representatives and Fubini sections.
+15. `thm-acl-characterisation-of-w-one-p` (theorem; **L/A**) — For $1\le p<\infty$, construct an ACL representative whose line derivatives are the weak derivatives, and prove the converse.
+16. `cor-one-dimensional-w-one-p-functions-have-absolutely-continuous-representatives` (corollary; **L/A**) — On an interval, $u(x)=u(a)+\int_a^xu'$ for the unique continuous representative.
+17. `thm-sobolev-chain-rule-for-c-one-lipschitz-compositions` (theorem; **L/A**) — For $u\in W^{1,p}$ and $F\in C^1$ with bounded derivative, apply the one-dimensional absolutely-continuous chain rule on the ACL representative to prove $F\circ u\in W^{1,p}_{\rm loc}$ and $D(F\circ u)=F'(u)Du$, with the global integrability condition stated.
+18. `cor-positive-negative-part-and-truncation-calculus-in-w-one-p` (corollary; **L/A**) — Approximate the Lipschitz corner maps monotonically and use weak stability to identify gradients of $u^+$, $u^-$ and $\min\{M,\max\{-M,u\}\}$ a.e.
 19. `rem-weak-derivatives-are-distributional-derivatives-with-function-values` (remark; **L/NA**) — State the exact dictionary to FA-24 and explain why not every distributional derivative is represented by an $L^p$ function.
 
 ### B-page companion
@@ -1135,8 +1313,10 @@ independent full treatments.
 
 **Hard proof obligations.** Completeness is not inherited merely because each
 component lies in $L^p$; item 10 passes the defining weak identity to the limit.
-The chain rule is proved first for smooth approximations and Lipschitz $F$, then
-truncated; no pointwise derivative of an arbitrary representative is used.
+The chain rule is proved from the preceding ACL representative and the
+one-dimensional absolutely-continuous chain rule; it does not use PDE-12's
+later Meyers--Serrin theorem. Corner maps are obtained by a controlled smooth
+approximation plus weak stability; no pointwise derivative of an arbitrary representative is used.
 The ACL theorem uses Fubini's a.e. section conclusion with its exceptional-set
 quantifiers intact.
 
@@ -1166,7 +1346,7 @@ distance-to-closed-set and $C^1$ coordinate-change items.
 7. `lem-zero-extension-from-w-one-p-zero` (lemma; **L/A**) — Extension by zero maps $W^{1,p}_0(\Omega)$ isometrically in the derivative components into $W^{1,p}(\mathbb R^n)$.
 8. `def-sobolev-extension-domain-and-extension-operator` (definition; **L/NA**) — Define a bounded linear right inverse of restriction; equality to $u$ is a.e. on $\Omega$.
 9. `thm-wkp-extension-from-a-half-space` (theorem; **L/A**) — A finite linear combination of reflected values with matched normal moments gives a bounded extension for integer $k$, $1\le p\le\infty$.
-10. `lem-c-one-boundary-flattening-preserves-wkp-locally` (lemma; **L/A**) — For the regularity needed at order $k$, composition with a boundary chart and its inverse obeys a local Sobolev norm bound.
+10. `lem-c-k-boundary-flattening-preserves-wkp-locally` (lemma; **L/A**) — For integer $k\ge1$, a bi-Lipschitz $C^k$ boundary chart and inverse with bounded derivatives through order $k$ obey local $W^{k,p}$ composition bounds. The $k=1$ case needs only the Lipschitz/$C^1$ data actually used there; a bare $C^1$ chart is not advertised for arbitrary $k$.
 11. `thm-extension-theorem-for-bounded-smooth-domains` (theorem; **L/A**) — A finite boundary atlas, item 9 and a partition of unity give $E:W^{k,p}(\Omega)\to W^{k,p}(\mathbb R^n)$ with controlled support.
 12. `thm-smooth-up-to-the-boundary-density-on-smooth-domains` (theorem; **L/A**) — Extend, mollify and restrict to approximate by restrictions of $C_c^\infty(\mathbb R^n)$.
 13. `cor-sobolev-embeddings-transfer-from-rn-to-extension-domains` (corollary; **L/A**) — Any whole-space inequality stable under restriction holds with a domain-dependent extension constant.
@@ -1209,7 +1389,7 @@ closure; no boundary trace meaning is used before PDE-13.
 
 **A page:** `sobolev-traces-and-zero-boundary-values`  
 **B page:** `sobolev-traces-and-zero-boundary-values-examples`  
-**Requires:** PDE-11--PDE-12; PDE-5's surface measure; MT-11/MT-14; the
+**Requires:** PDE-2D and PDE-11--PDE-12; MT-11/MT-14; the
 published quotient and partition-of-unity pages.
 
 ### A-page items, in dependency order
@@ -1252,7 +1432,7 @@ flattened, extended by zero and approximated without a boundary jump. Items
 self-justifying.
 
 **Well-definedness.** The trace is an operator on equivalence classes, not a
-chosen pointwise restriction. Boundary $L^p$ uses PDE-5's chart-independent
+chosen pointwise restriction. Boundary $L^p$ uses PDE-2D's chart-independent
 surface measure. The quotient-by-constants issue of the fractional seminorm is
 removed by adding its $L^p$ norm. The right inverse proves the word “onto.”
 
@@ -1262,7 +1442,7 @@ removed by adding its $L^p$ norm. The right inverse proves the word “onto.”
 
 **A page:** `sobolev-poincare-and-morrey-inequalities`  
 **B page:** `sobolev-poincare-and-morrey-inequalities-examples`  
-**Requires:** PDE-11--PDE-13; MT-11, MT-14--MT-15 and MT-17; PDE-5's
+**Requires:** PDE-2D and PDE-11--PDE-13; MT-11, MT-14--MT-15 and MT-17;
 Euclidean integration tools.
 
 ### A-page items, in dependency order
@@ -1300,8 +1480,9 @@ Euclidean integration tools.
 Chapters 8--9. Endpoint checks also use [G] §1.6.
 
 **Hard proof obligations.** The $p=1$ proof is separated because the usual
-power/Hölder reduction starts above that endpoint. Mean-zero Poincaré uses a
-compactness or integral representation proof with connectedness visible.
+power/Hölder reduction starts above that endpoint. Mean-zero Poincaré uses the
+direct integral/ball-chain representation proof with connectedness visible; it
+does not invoke PDE-15's later compactness theorem.
 Morrey first constructs ball averages and proves they form a Cauchy family,
 then identifies the resulting representative a.e.; it never evaluates the
 original $L^p$ class.
@@ -1318,7 +1499,7 @@ domain; no universal domain constant is implied.
 **A page:** `bessel-potential-completions-and-real-order-sobolev-spaces`
 
 **B page:** `bessel-potential-completions-and-real-order-sobolev-spaces-examples`
-**Requires:** PDE-11 and PDE-14; FA-1 `normed-and-banach-spaces`; FA-23
+**Requires:** FA-1 `normed-and-banach-spaces`; FA-23
 `schwartz-space-and-the-plancherel-theorem`; FA-25
 `tempered-distributions-and-the-fourier-transform`. The companion requires the
 A page. No Fourier-multiplier page is a prerequisite.
@@ -1326,7 +1507,7 @@ A page. No Fourier-multiplier page is a prerequisite.
 ### A-page items, in dependency order
 
 1. `lem-japanese-bracket-powers-preserve-schwartz-space` (lemma; **L/A**) — For every $s\in\mathbb R$, multiplication by $\langle\xi\rangle^s=(1+|\xi|^2)^{s/2}$ and by its reciprocal maps $\mathcal S(\mathbb R^n)$ continuously to itself; prove the required polynomial derivative bounds.
-2. `def-bessel-potential-pre-hilbert-norm-on-schwartz-space` (definition; **L/NA**) — Set $\|u\|_{H^s}=\|\langle\xi\rangle^s\widehat u\|_2$ on $\mathcal S(\mathbb R^n)$, with the repository's fixed Fourier normalisation.
+2. `def-bessel-potential-pre-hilbert-norm-on-schwartz-space` (definition; **L/NA**) — Set $\|u\|_{H^s}=\|\langle\xi\rangle^s\widehat u\|_2$ on $\mathcal S(\mathbb R^n)$. Under the repository convention $\widehat{\partial_j u}=2\pi i\xi_j\widehat u$, this norm is equivalent, not generally equal, to both the derivative-sum $W^{k,2}$ norm and the $(I-\Delta)^{k/2}$ norm at integer order; FR-6 owns those comparisons.
 3. `lem-bessel-potential-norm-is-positive-definite` (lemma; **L/A**) — Plancherel and Fourier injectivity show that the preceding seminorm vanishes only at zero.
 4. `lem-weighted-fourier-images-of-schwartz-functions-are-dense-in-ltwo` (lemma; **L/A**) — Approximate in $L^2$ by compactly supported smooth functions and apply $\langle\xi\rangle^{-s}$ before inverse Fourier transformation.
 5. `def-real-order-bessel-potential-sobolev-space` (definition; **L/NA**) — Define $H^s(\mathbb R^n)$ as the norm completion of the preceding Schwartz pre-Hilbert space.
@@ -1437,7 +1618,7 @@ Lax--Milgram.
 13. `thm-existence-and-uniqueness-for-the-weak-dirichlet-poisson-problem` (theorem; **L/A**) — For $f\in H^{-1}$, there is a unique $u\in H^1_0$ solving $-\Delta u=f$ with the energy estimate.
 14. `thm-lax-milgram-solvability-for-coercive-divergence-form-equations` (theorem; **L/A**) — Under an explicit sign/smallness condition on lower-order terms, the general weak Dirichlet problem is uniquely solvable.
 15. `cor-inhomogeneous-weak-dirichlet-problem-by-a-trace-lifting` (corollary; **L/A**) — For boundary data in PDE-13's trace range, subtract a lifting and solve the resulting zero-trace problem.
-16. `lem-classical-solutions-satisfy-the-weak-formulation` (lemma; **L/A**) — PDE-5 integration by parts proves classical-to-weak consistency.
+16. `lem-classical-solutions-satisfy-the-weak-formulation` (lemma; **L/A**) — PDE-2D integration by parts proves classical-to-weak consistency.
 17. `cor-weak-solution-depends-continuously-on-data` (corollary; **L/A**) — Bound the difference of solutions by the $H^{-1}$ and lifting-data differences.
 
 ### B-page companion
@@ -1475,7 +1656,7 @@ real-valued; the complex case uses the real part only where explicitly stated.
 
 **A page:** `fredholm-elliptic-problems-and-the-elliptic-spectrum`  
 **B page:** `fredholm-elliptic-problems-and-the-elliptic-spectrum-examples`  
-**Requires:** PDE-15--PDE-16; FA-7, FA-10, FA-13 and FA-15--FA-16. The
+**Requires:** PDE-15--PDE-16; FA-7, FA-10, FA-13, FA-15--FA-16 and FA-21. The
 abstract Fredholm alternative and compact self-adjoint spectral theorem are
 cited, not restated.
 
@@ -1490,13 +1671,16 @@ cited, not restated.
 7. `thm-fredholm-alternative-for-weak-elliptic-dirichlet-problems` (theorem; **L/A**) — Either the homogeneous kernel is trivial and every datum has a unique solution, or solvability is exactly orthogonality to the finite-dimensional adjoint kernel.
 8. `cor-elliptic-kernel-and-cokernel-are-finite-dimensional` (corollary; **L/A**) — Inherit the abstract compact Fredholm conclusion.
 9. `cor-uniqueness-implies-existence-for-the-elliptic-dirichlet-problem` (corollary; **L/A**) — When both the operator and adjoint homogeneous problems have no obstruction, every $L^2$ datum is solvable.
-10. `def-symmetric-elliptic-dirichlet-operator-and-weak-eigenpair` (definition; **L/NA**) — Include coefficient symmetry, a real potential, homogeneous boundary condition and $a(u,v)=\lambda(u,v)_2$.
-11. `lem-symmetric-shifted-solution-operator-is-positive-and-self-adjoint` (lemma; **L/A**) — Verify these properties from the form, rather than assuming the differential expression is self-adjoint.
-12. `thm-discrete-spectrum-of-a-symmetric-elliptic-dirichlet-operator` (theorem; **L/A**) — FA-16 applied to $K_\mu$ gives real eigenvalues of finite multiplicity tending to $+\infty$ and an $L^2$ orthonormal eigenbasis.
-13. `thm-rayleigh-principle-for-the-first-dirichlet-eigenvalue` (theorem; **L/A**) — $\lambda_1=\min_{u\ne0}a(u,u)/\|u\|_2^2$, with positivity under coercivity.
-14. `thm-courant-fischer-minimax-for-elliptic-eigenvalues` (theorem; **L/A**) — Give the $k$-dimensional min--max formula with eigenvalues counted with multiplicity.
-15. `cor-poincare-constant-and-first-dirichlet-eigenvalue` (corollary; **L/A**) — For $-\Delta$, the optimal $L^2$ Poincaré constant is $\lambda_1^{-1/2}$.
-16. `rem-neumann-spectrum-and-the-constant-zero-mode` (remark; **L/NA**) — State the parallel mean-zero form: $\mu_1=0$ with constants on each connected component; no false positive first eigenvalue.
+10. `def-ltwo-operator-associated-with-a-symmetric-elliptic-form` (definition; **L/NA**) — Set $D(L)=\{u\in H^1_0:\exists f\in L^2,\ a(u,v)=(f,v)_2\ \forall v\in H^1_0\}$ and $Lu=f$; uniqueness of $f$ follows from density of $H^1_0$ in $L^2$.
+11. `lem-associated-elliptic-operator-is-densely-defined-symmetric-and-lower-bounded` (lemma; **L/A**) — Use test-function density and form symmetry to prove the three operator properties, distinguishing the form domain from $D(L)$.
+12. `thm-symmetric-elliptic-form-operator-is-self-adjoint-with-compact-resolvent` (theorem; **L/A**) — After a lower-bound shift, apply complex Lax--Milgram to the forms $a_\mu(u,v)\pm i(u,v)_2$; FA-21's $\operatorname{Ran}(L+\mu\pm i)=L^2$ criterion gives self-adjointness, and the real shifted inverse is the compact $L^2$ realisation of $K_\mu$.
+13. `def-symmetric-elliptic-weak-eigenpair` (definition; **L/NA**) — Include coefficient symmetry, a real potential, homogeneous boundary condition and $a(u,v)=\lambda(u,v)_2$, then identify this with $u\in D(L)$ and $Lu=\lambda u$.
+14. `lem-symmetric-shifted-solution-operator-is-positive-and-self-adjoint` (lemma; **L/A**) — Verify these properties from the form, rather than assuming the differential expression is self-adjoint.
+15. `thm-discrete-spectrum-of-a-symmetric-elliptic-dirichlet-operator` (theorem; **L/A**) — FA-16 applied to $K_\mu$ gives real eigenvalues of finite multiplicity tending to $+\infty$ and an $L^2$ orthonormal eigenbasis.
+16. `thm-rayleigh-principle-for-the-first-dirichlet-eigenvalue` (theorem; **L/A**) — $\lambda_1=\min_{u\ne0}a(u,u)/\|u\|_2^2$, with positivity under coercivity.
+17. `thm-courant-fischer-minimax-for-elliptic-eigenvalues` (theorem; **L/A**) — Give the $k$-dimensional min--max formula with eigenvalues counted with multiplicity.
+18. `cor-poincare-constant-and-first-dirichlet-eigenvalue` (corollary; **L/A**) — For $-\Delta$, the optimal $L^2$ Poincaré constant is $\lambda_1^{-1/2}$.
+19. `rem-neumann-spectrum-and-the-constant-zero-mode` (remark; **L/NA**) — State the parallel mean-zero form: $\mu_1=0$ with constants on each connected component; no false positive first eigenvalue.
 
 ### B-page companion
 
@@ -1504,8 +1688,8 @@ cited, not restated.
 2. `ex-neumann-laplacian-has-a-zero-constant-mode` (example; **L/A**) — Contrast the boundary condition and Poincaré subspace.
 3. `ex-shift-removes-a-negative-zero-order-obstruction` (example; **L/A**) — A constant potential shows how Gårding shifting works.
 4. `cex-elliptic-fredholm-solvability-can-fail-at-an-eigenvalue` (counterexample; **L/A**) — $(-\Delta-\lambda_k)u=f$ requires $f\perp$ the eigenspace.
-5. `cex-elliptic-eigenvalues-need-not-be-simple` (counterexample; **L/A**) — A square or ball has repeated eigenvalues; item 12 orders with multiplicity.
-6. `cex-nonsymmetric-elliptic-operators-need-not-have-an-orthonormal-eigenbasis` (counterexample; **L/A**) — A finite-dimensional form analogue prevents misuse of item 12.
+5. `cex-elliptic-eigenvalues-need-not-be-simple` (counterexample; **L/A**) — A square or ball has repeated eigenvalues; A item 15 orders with multiplicity.
+6. `cex-nonsymmetric-elliptic-operators-need-not-have-an-orthonormal-eigenbasis` (counterexample; **L/A**) — A finite-dimensional form analogue prevents misuse of A item 15.
 
 ### Sources and proof architecture
 
@@ -1519,6 +1703,8 @@ $L^2\to H^1_0$ estimate and the Rellich inclusion are composed. Item 7 names
 the adjoint kernel supplied by item 6. The eigenvalue theorem applies FA-16
 once to the compact shifted inverse and algebraically translates its nonzero
 eigenvalues; it does not build an eigenbasis by repeated arbitrary choices.
+Items 10--12 are mandatory because the later heat-semigroup pages need a
+self-adjoint unbounded operator, not merely a weak eigenpair notation.
 
 **Well-definedness.** $K_\mu$ is first a map into $H^1_0$ and then regarded on
 $L^2$ through the inclusion; those are distinct maps. Orthogonality is in
@@ -1531,35 +1717,36 @@ eigenvalue is repeated according to its finite eigenspace dimension.
 
 **A page:** `interior-and-boundary-sobolev-elliptic-regularity`  
 **B page:** `interior-and-boundary-sobolev-elliptic-regularity-examples`  
-**Requires:** PDE-11--PDE-17; MT-14--MT-15; FA-10; PDE-5's Green identities.
+**Requires:** PDE-2D and PDE-11--PDE-17; MT-14--MT-15; FA-10.
 
 ### A-page items, in dependency order
 
 1. `def-first-difference-quotient` (definition; **L/NA**) — Define $\delta_h^iu(x)=(u(x+he_i)-u(x))/h$ on the shrunken domain where both terms exist.
 2. `lem-difference-quotient-integration-by-parts` (lemma; **L/A**) — For compactly supported factors, $\int f\delta_h^ig=-\int g\delta_{-h}^if$.
-3. `thm-difference-quotient-characterisation-of-w-one-p` (theorem; **L/A**) — Uniform local $L^p$ bounds of difference quotients imply a weak derivative, and Sobolev functions satisfy the matching bounds.
-4. `thm-caccioppoli-inequality-for-weak-elliptic-solutions` (theorem; **L/A**) — Test with $\eta^2u$ to bound $Du$ on an inner ball by $u$ and the forcing on a larger ball.
-5. `lem-tangential-difference-quotient-test-function` (lemma; **L/A**) — Justify testing the weak equation with $-\delta_{-h}(\eta^2\delta_hu)$ and control every commutator.
-6. `thm-interior-h-two-regularity-for-divergence-form-equations` (theorem; **L/A**) — With $a^{ij}\in W^{1,\infty}_{\rm loc}$ and $f\in L^2_{\rm loc}$, weak $H^1$ solutions lie in $H^2_{\rm loc}$ with an interior estimate.
-7. `thm-interior-h-k-plus-two-elliptic-regularity` (theorem; **L/A**) — If coefficients have the stated $W^{k+1,\infty}$ regularity and $f\in H^k_{\rm loc}$, then $u\in H^{k+2}_{\rm loc}$.
-8. `cor-smooth-data-give-smooth-interior-solutions` (corollary; **L/A**) — Bootstrap item 7 on nested compact subsets.
-9. `lem-c-two-boundary-flattening-transforms-uniform-ellipticity` (lemma; **L/A**) — A $C^2$ graph chart preserves divergence form and quantitative ellipticity, with transformed coefficients written explicitly.
-10. `lem-tangential-h-two-estimate-near-a-flat-dirichlet-boundary` (lemma; **L/A**) — Zero trace permits tangential difference quotients without crossing the boundary.
-11. `lem-normal-second-derivative-recovered-from-the-elliptic-equation` (lemma; **L/A**) — Solve the transformed equation for $D_{nn}u$ using the positive normal coefficient and already controlled derivatives.
-12. `thm-global-h-two-dirichlet-regularity` (theorem; **L/A**) — On a bounded $C^2$ domain with Lipschitz coefficients, $f\in L^2$ and $u\in H^1_0$ imply $u\in H^2$ and $\|u\|_{H^2}\le C(\|f\|_2+\|u\|_2)$.
-13. `cor-global-h-two-estimate-without-the-ltwo-term-under-uniqueness` (corollary; **L/A**) — A contradiction/compactness argument removes $\|u\|_2$ when the homogeneous problem has trivial kernel.
-14. `thm-higher-order-boundary-regularity-for-dirichlet-problems` (theorem; **L/A**) — With $C^{k+2}$ boundary and coefficients/data of the stated order, obtain $H^{k+2}$ regularity up to the boundary.
-15. `cor-smooth-weak-dirichlet-solutions-are-classical` (corollary; **L/A**) — After enough Sobolev bootstrapping and embedding, the weak equation agrees pointwise with the classical one.
-16. `rem-regularity-estimates-do-not-create-boundary-compatibility` (remark; **L/NA**) — Higher regularity needs compatible traces/data; smooth coefficients alone are insufficient.
+3. `thm-difference-quotient-characterisation-of-w-one-p-for-p-greater-than-one` (theorem; **L/A**) — For $1<p<\infty$, uniform local $L^p$ bounds of difference quotients imply a weak derivative by reflexive weak compactness; for $1\le p<\infty$, Sobolev functions satisfy the matching forward bounds.
+4. `rem-the-p-one-difference-quotient-converse-leads-to-bv-not-w-one-one` (remark; **L/NA**) — At $p=1$ uniform difference-quotient bounds need only produce a bounded-variation derivative measure, so the converse in item 3 is not asserted there.
+5. `thm-caccioppoli-inequality-for-weak-elliptic-solutions` (theorem; **L/A**) — Test with $\eta^2u$ to bound $Du$ on an inner ball by $u$ and the forcing on a larger ball.
+6. `lem-tangential-difference-quotient-test-function` (lemma; **L/A**) — Justify testing the weak equation with $-\delta_{-h}(\eta^2\delta_hu)$ and control every commutator.
+7. `thm-interior-h-two-regularity-for-divergence-form-equations` (theorem; **L/A**) — With $a^{ij}\in W^{1,\infty}_{\rm loc}$ and $f\in L^2_{\rm loc}$, weak $H^1$ solutions lie in $H^2_{\rm loc}$ with an interior estimate.
+8. `thm-interior-h-k-plus-two-elliptic-regularity` (theorem; **L/A**) — If coefficients have the stated $W^{k+1,\infty}$ regularity and $f\in H^k_{\rm loc}$, then $u\in H^{k+2}_{\rm loc}$.
+9. `cor-smooth-data-give-smooth-interior-solutions` (corollary; **L/A**) — Bootstrap item 8 on nested compact subsets.
+10. `lem-c-two-boundary-flattening-transforms-uniform-ellipticity` (lemma; **L/A**) — A $C^2$ graph chart preserves divergence form and quantitative ellipticity, with transformed coefficients written explicitly.
+11. `lem-tangential-h-two-estimate-near-a-flat-dirichlet-boundary` (lemma; **L/A**) — Zero trace permits tangential difference quotients without crossing the boundary.
+12. `lem-normal-second-derivative-recovered-from-the-elliptic-equation` (lemma; **L/A**) — Solve the transformed equation for $D_{nn}u$ using the positive normal coefficient and already controlled derivatives.
+13. `thm-global-h-two-dirichlet-regularity` (theorem; **L/A**) — On a bounded $C^2$ domain with Lipschitz coefficients, $f\in L^2$ and $u\in H^1_0$ imply $u\in H^2$ and $\|u\|_{H^2}\le C(\|f\|_2+\|u\|_2)$.
+14. `cor-global-h-two-estimate-without-the-ltwo-term-under-uniqueness` (corollary; **L/A**) — A contradiction/compactness argument removes $\|u\|_2$ when the homogeneous problem has trivial kernel.
+15. `thm-higher-order-boundary-regularity-for-dirichlet-problems` (theorem; **L/A**) — With $C^{k+2}$ boundary and coefficients/data of the stated order, obtain $H^{k+2}$ regularity up to the boundary.
+16. `cor-smooth-weak-dirichlet-solutions-are-classical` (corollary; **L/A**) — After enough Sobolev bootstrapping and embedding, the weak equation agrees pointwise with the classical one.
+17. `rem-regularity-estimates-do-not-create-boundary-compatibility` (remark; **L/NA**) — Higher regularity needs compatible traces/data; smooth coefficients alone are insufficient.
 
 ### B-page companion
 
-1. `ex-poisson-equation-with-ltwo-data-gains-two-interior-derivatives` (example; **L/A**) — Apply item 6 to the constant-coefficient Laplacian.
+1. `ex-poisson-equation-with-ltwo-data-gains-two-interior-derivatives` (example; **L/A**) — Apply A item 7 to the constant-coefficient Laplacian.
 2. `ex-piecewise-smooth-coefficient-produces-limited-regularity` (example; **L/A**) — A one-dimensional flux-continuity solution loses a classical second derivative at a coefficient jump.
 3. `cex-interior-regularity-does-not-imply-boundary-regularity` (counterexample; **L/A**) — A harmonic function on a nonsmooth corner domain has a boundary singularity.
 4. `cex-boundary-h-two-regularity-needs-domain-regularity` (counterexample; **L/A**) — A reentrant sector supplies the standard singular exponent.
 5. `cex-h-two-estimate-needs-an-ltwo-kernel-term-without-injectivity` (counterexample; **L/A**) — A homogeneous eigenfunction defeats an estimate containing only $\|Lu\|_2$.
-6. `ex-bootstrapping-a-smooth-poisson-problem` (example; **L/A**) — Iterate item 7 and then use Sobolev embedding.
+6. `ex-bootstrapping-a-smooth-poisson-problem` (example; **L/A**) — Iterate A item 8 and then use Sobolev embedding.
 
 ### Sources and proof architecture
 
@@ -1569,7 +1756,7 @@ eigenvalue is repeated according to its finite eigenspace dimension.
 **Hard proof obligations.** The central proof is split into Caccioppoli,
 difference-quotient integration by parts, commutator control and weak-limit
 identification. At the boundary, tangential derivatives come first and the
-equation recovers only the last normal derivative. Item 13 identifies the
+equation recovers only the last normal derivative. Item 14 identifies the
 compactness theorem and homogeneous uniqueness used in the contradiction.
 
 **Well-definedness.** Difference quotients are only defined on shrunken sets;
@@ -1590,19 +1777,20 @@ Hölder-function definitions.
 
 ### A-page items, in dependency order
 
-1. `def-holder-spaces-c-k-alpha-and-their-scaled-norms` (definition; **L/NA**) — Define $C^{k,\alpha}(\Omega)$ and interior scaled norms, separating open-domain local and closure norms.
+1. `def-holder-spaces-c-k-alpha-and-their-scaled-norms` (definition; **L/NA**) — Extend PDE-6's ball-local notation to $C^{k,\alpha}(\Omega)$, boundary/closure spaces and interior scaled norms, separating open-domain local and closure norms.
 2. `thm-holder-spaces-on-bounded-domains-are-banach-spaces` (theorem; **L/A**) — A Cauchy sequence and each derivative converge uniformly and retain the Hölder estimate.
 3. `lem-cancellation-formula-for-second-derivatives-of-newtonian-potentials` (lemma; **L/A**) — Express $D_{ij}Nf$ by a principal-value/cancelled integral plus the local multiple of $f(x)$.
 4. `thm-interior-schauder-estimate-for-the-laplacian` (theorem; **L/A**) — If $-\Delta u=f\in C^{0,\alpha}$, then $\|u\|_{C^{2,\alpha}(B_r)}\le C(\|u\|_{C^0(B_R)}+\|f\|_{C^{0,\alpha}(B_R)})$ with scaling.
 5. `lem-freezing-coefficients-and-schauder-error-estimate` (lemma; **L/A**) — Freeze a uniformly elliptic nondivergence operator and make the coefficient oscillation absorbable on a small ball.
 6. `thm-interior-schauder-estimate-for-uniformly-elliptic-equations` (theorem; **L/A**) — For $a^{ij}\in C^{0,\alpha}$ and lower coefficients/data in their stated classes, obtain the local $C^{2,\alpha}$ estimate.
 7. `thm-boundary-schauder-estimate-for-the-dirichlet-problem` (theorem; **L/A**) — On a $C^{2,\alpha}$ boundary patch with compatible $C^{2,\alpha}$ data, flatten and estimate up to the boundary.
-8. `thm-global-schauder-estimate-and-classical-dirichlet-solvability` (theorem; **L/A**) — Combine the a priori estimate with the continuity method and a base Laplace problem, under an explicit maximum-principle injectivity hypothesis.
-9. `thm-global-w-two-p-estimate-for-the-laplacian-on-rn` (theorem; **L/A**) — Apply FR-8's generic $L^p$ Calderón--Zygmund theorem to the cancelled Newtonian-Hessian kernels from item 3, retaining the local multiple of $f$; this gives $\|D^2u\|_p\le C_p\|\Delta u\|_p$ for $u\in C_c^\infty$.
-10. `thm-interior-w-two-p-estimate-for-uniformly-elliptic-equations` (theorem; **L/A**) — Localise and freeze coefficients in the sourced VMO/continuous regime, with the precise hypothesis used by the proof.
-11. `thm-global-w-two-p-dirichlet-estimate` (theorem; **L/A**) — On a $C^{1,1}$ domain with coefficients of the stated regularity, bound $\|u\|_{W^{2,p}}$ by $\|Lu\|_p+\|u\|_p$.
-12. `cor-w-two-p-regularity-implies-classical-or-holder-regularity-when-p-is-large` (corollary; **L/A**) — Apply PDE-14's embedding with the exact exponent.
-13. `rem-schauder-and-sobolev-estimates-are-different-scales` (remark; **L/NA**) — Neither $C^{2,\alpha}$ nor $W^{2,p}$ is advertised as uniformly stronger without dimension/exponent hypotheses.
+8. `thm-global-schauder-regularity-for-the-weak-dirichlet-laplacian` (theorem; **L/A**) — On a bounded $C^{2,\alpha}$ domain, use PDE-16 weak existence, smooth approximation, the boundary estimate and compactness to prove that $f\in C^{0,\alpha}$ and compatible $g\in C^{2,\alpha}$ produce the unique $C^{2,\alpha}(\overline\Omega)$ Laplace solution. This supplies the onto base point for continuity rather than assuming it.
+9. `thm-global-schauder-estimate-and-classical-dirichlet-solvability` (theorem; **L/A**) — Combine the a priori estimate with the continuity method and item 8's Laplace base problem, under an explicit maximum-principle injectivity hypothesis.
+10. `thm-global-w-two-p-estimate-for-the-laplacian-on-rn` (theorem; **L/A**) — Apply FR-8's generic $L^p$ Calderón--Zygmund theorem to the cancelled Newtonian-Hessian kernels from item 3, retaining the local multiple of $f$; this gives $\|D^2u\|_p\le C_p\|\Delta u\|_p$ for $u\in C_c^\infty$.
+11. `thm-interior-w-two-p-estimate-for-uniformly-elliptic-equations` (theorem; **L/A**) — Localise and freeze coefficients in the sourced VMO/continuous regime, with the precise hypothesis used by the proof.
+12. `thm-global-w-two-p-dirichlet-estimate` (theorem; **L/A**) — On a $C^{1,1}$ domain with coefficients of the stated regularity, bound $\|u\|_{W^{2,p}}$ by $\|Lu\|_p+\|u\|_p$.
+13. `cor-w-two-p-regularity-implies-classical-or-holder-regularity-when-p-is-large` (corollary; **L/A**) — Apply PDE-14's embedding with the exact exponent.
+14. `rem-schauder-and-sobolev-estimates-are-different-scales` (remark; **L/NA**) — Neither $C^{2,\alpha}$ nor $W^{2,p}$ is advertised as uniformly stronger without dimension/exponent hypotheses.
 
 ### B-page companion
 
@@ -1626,7 +1814,7 @@ derives the elliptic estimates.
 **Hard proof obligations.** Item 3 retains the local $f(x)$ term. Schauder
 freezing quantifies the small coefficient oscillation before absorption.  The
 $L^2$ multiplier seed and the Newtonian-kernel cancellation verify the FR-8
-hypotheses before item 9 invokes its strict-$L^p$ theorem; no generic CZ proof
+hypotheses before item 10 invokes its strict-$L^p$ theorem; no generic CZ proof
 is duplicated here. Global boundary estimates state chart and coefficient
 regularity.
 
@@ -1652,7 +1840,7 @@ nonemptiness and preservation of the solution space.
 4. `cor-weak-comparison-and-uniqueness` (corollary; **L/A**) — Apply item 3 to the difference of a sub- and supersolution.
 5. `lem-caccioppoli-inequality-for-truncated-subsolutions` (lemma; **L/A**) — Test with $\eta^2(u-k)^+$ and retain level-set terms.
 6. `lem-sobolev-level-set-iteration-step` (lemma; **L/A**) — Combine Caccioppoli and Sobolev to relate nested superlevel measures.
-7. `thm-de-giorgi-local-boundedness` (theorem; **L/A**) — A weak subsolution with locally square-integrable data has an interior essential-supremum estimate in the sourced exponent regime.
+7. `thm-de-giorgi-local-boundedness-for-homogeneous-subsolutions` (theorem; **L/A**) — A homogeneous weak subsolution has the scale-correct interior essential-supremum estimate. The enrichment item `thm-de-giorgi-local-boundedness-with-scale-correct-forcing-term` extends this only for $f\in L^q_{\rm loc}$ with $q>n/2$; bare $L^2$ forcing is not enough in every dimension.
 8. `lem-de-giorgi-oscillation-reduction` (lemma; **L/A**) — On a smaller ball, either the upper or lower half-level set is small enough to reduce oscillation by a fixed factor.
 9. `thm-de-giorgi-nash-interior-holder-regularity` (theorem; **L/A**) — Weak solutions of uniformly elliptic divergence-form equations with bounded measurable principal coefficients have locally Hölder continuous representatives.
 10. `lem-moser-iteration-for-positive-supersolutions` (lemma; **L/A**) — Test powers/truncations and iterate reverse Hölder estimates without assuming the solution is bounded away from zero.
@@ -1694,7 +1882,7 @@ density; it is not inserted formally into a distributional equation.
 
 **A page:** `the-direct-method-and-euler-lagrange-equations`  
 **B page:** `the-direct-method-and-euler-lagrange-equations-examples`  
-**Requires:** PDE-14--PDE-16 and PDE-18; MT-8/MT-11/MT-14; FA-7--FA-10 and
+**Requires:** PDE-14--PDE-16 and PDE-18; MT-8/MT-11/MT-14; FA-5, FA-7--FA-10 and
 FA-12; the published convexity and multivariable Taylor pages.
 
 ### A-page items, in dependency order
@@ -1750,22 +1938,26 @@ defined on a.e. classes by proving integral invariance.
 
 **A page:** `constrained-variational-problems-and-variational-inequalities`  
 **B page:** `constrained-variational-problems-and-variational-inequalities-examples`  
-**Requires:** PDE-15--PDE-17 and PDE-21; FA-5, FA-7--FA-10 and FA-13.
+**Requires:** PDE-15--PDE-17 and PDE-21; FA-2, FA-5, FA-7--FA-10 and FA-13;
+the published Banach fixed-point theorem. The finite-dimensional implicit
+theorem published in real analysis is not a Banach-space supplier.
 
 ### A-page items, in dependency order
 
 1. `thm-direct-method-on-a-weakly-closed-constraint-set` (theorem; **L/A**) — Restate the direct method only as an application with nonemptiness and weak closure verified per constraint.
 2. `lem-strong-ltwo-compactness-preserves-unit-normalisation` (lemma; **L/A**) — Weak $H^1$ convergence plus Rellich gives $\|u\|_2=1$ in the limit.
-3. `thm-hilbert-space-lagrange-multiplier-rule-for-one-regular-constraint` (theorem; **L/A**) — If $DG(u)\ne0$, a constrained critical point satisfies $DI(u)=\lambda DG(u)$.
-4. `thm-finite-regular-constraint-lagrange-multiplier-rule` (theorem; **L/A**) — Surjectivity of the derivative of $G:X\to\mathbb R^m$ yields a multiplier vector.
-5. `thm-first-dirichlet-eigenfunction-by-constrained-minimisation` (theorem; **L/A**) — Minimise Dirichlet energy on the $L^2$ unit sphere and derive $-\Delta u=\lambda_1u$ weakly.
-6. `thm-higher-eigenvalues-by-orthogonality-constrained-minimisation` (theorem; **L/A**) — Minimise on the unit sphere orthogonal to the first eigenspaces and reconcile with PDE-17's min--max theorem.
-7. `def-closed-convex-obstacle-set-and-variational-inequality` (definition; **L/NA**) — For obstacle $\psi$ and trace data define $K=\{v:v\ge\psi\text{ a.e.}\}$ and $a(u,v-u)\ge F(v-u)$.
-8. `lem-the-obstacle-admissible-set-is-closed-convex-and-weakly-closed` (lemma; **L/A**) — Use a.e. subsequences/closed convexity with exact data compatibility.
-9. `thm-stampacchia-variational-inequality` (theorem; **L/A**) — A bounded coercive form on a nonempty closed convex Hilbert subset has a unique solution in the symmetric/strongly monotone setting stated.
-10. `thm-existence-and-uniqueness-for-the-obstacle-problem` (theorem; **L/A**) — Apply item 9 and identify the solution as the energy minimiser when the form is symmetric.
-11. `cor-obstacle-complementarity-in-distribution-form` (corollary; **L/A**) — Under regularity, $u\ge\psi$, $Lu-f\ge0$ and $(u-\psi)(Lu-f)=0$ in the precise measure/distribution sense supported by the hypotheses.
-12. `rem-pointwise-and-integral-constraints-have-different-regularity-tests` (remark; **L/NA**) — Do not apply the smooth equality-constraint multiplier theorem to a convex inequality set.
+3. `thm-banach-implicit-function-theorem-for-a-split-surjective-derivative` (theorem; **L/A**) — If $G:X\to\mathbb R^m$ is $C^1$ and $DG(u)$ is onto, use FA-2 to split $X=\ker DG(u)\oplus Y$ and [SID]'s contraction proof to parametrise the nearby level set over $\ker DG(u)$.
+4. `lem-regular-banach-constraint-directions-are-realised-by-level-set-curves` (lemma; **L/A**) — Every $h\in\ker DG(u)$ is the derivative at zero of a $C^1$ curve in $G^{-1}(G(u))$, by item 3. This is the missing step between constrained minimality and annihilation of the tangent kernel.
+5. `thm-hilbert-space-lagrange-multiplier-rule-for-one-regular-constraint` (theorem; **L/A**) — If $DG(u)\ne0$, a constrained critical point satisfies $DI(u)=\lambda DG(u)$.
+6. `thm-finite-regular-constraint-lagrange-multiplier-rule` (theorem; **L/A**) — Surjectivity of the derivative of $G:X\to\mathbb R^m$ yields a multiplier vector.
+7. `thm-first-dirichlet-eigenfunction-by-constrained-minimisation` (theorem; **L/A**) — Minimise Dirichlet energy on the $L^2$ unit sphere and derive $-\Delta u=\lambda_1u$ weakly.
+8. `thm-higher-eigenvalues-by-orthogonality-constrained-minimisation` (theorem; **L/A**) — Minimise on the unit sphere orthogonal to the first eigenspaces and reconcile with PDE-17's min--max theorem.
+9. `def-closed-convex-obstacle-set-and-variational-inequality` (definition; **L/NA**) — For obstacle $\psi$ and trace data define $K=\{v:v\ge\psi\text{ a.e.}\}$ and $a(u,v-u)\ge F(v-u)$.
+10. `lem-the-obstacle-admissible-set-is-closed-convex-and-weakly-closed` (lemma; **L/A**) — Use a.e. subsequences/closed convexity with exact data compatibility.
+11. `thm-stampacchia-variational-inequality` (theorem; **L/A**) — A bounded coercive form on a nonempty closed convex Hilbert subset has a unique solution in the symmetric/strongly monotone setting stated.
+12. `thm-existence-and-uniqueness-for-the-obstacle-problem` (theorem; **L/A**) — Apply item 11 and identify the solution as the energy minimiser when the form is symmetric.
+13. `cor-obstacle-complementarity-in-distribution-form` (corollary; **L/A**) — Under regularity, $u\ge\psi$, $Lu-f\ge0$ and $(u-\psi)(Lu-f)=0$ in the precise measure/distribution sense supported by the hypotheses.
+14. `rem-pointwise-and-integral-constraints-have-different-regularity-tests` (remark; **L/NA**) — Do not apply the smooth equality-constraint multiplier theorem to a convex inequality set.
 
 ### B-page companion
 
@@ -1788,7 +1980,8 @@ formulations.
 
 **Hard proof obligations.** The unit sphere's weak-closure failure is not
 ignored: Rellich supplies strong $L^2$ convergence. The multiplier theorem
-uses the implicit-function theorem on the regular constraint. The obstacle
+uses A items 3--4, not the published finite-dimensional implicit theorem, on
+the regular Banach-space constraint. The obstacle
 proof uses projection/strict convexity, not a fictitious differentiable
 multiplier field. The regularity hypothesis is also stress-tested by the
 published counterexample named above.
@@ -1804,8 +1997,9 @@ has supplied enough regularity for a pointwise product.
 
 **A page:** `strongly-continuous-semigroups-and-hille-yosida`  
 **B page:** `strongly-continuous-semigroups-and-hille-yosida-examples`  
-**Requires:** FA-1--FA-2, FA-6--FA-7, FA-10, FA-12 and FA-21; MT-8; the
-published Banach fixed-point and exponential-series results.
+**Requires:** FA-1--FA-2, FA-5--FA-7, FA-10, FA-12 and FA-21; MT-8;
+`stone-weierstrass-general`; the published Banach fixed-point and
+exponential-series results.
 
 ### A-page items, in dependency order
 
@@ -1829,6 +2023,7 @@ published Banach fixed-point and exponential-series results.
 18. `thm-well-posed-abstract-cauchy-problem-if-and-only-if-generation` (theorem; **L/A**) — State the exact continuous-dependence topology and equivalence.
 19. `thm-variation-of-constants-formula` (theorem; **L/A**) — $u(t)=T(t)x+\int_0^tT(t-s)f(s)ds$ is the unique mild solution; give hypotheses upgrading it to classical.
 20. `rem-semigroup-sign-and-generator-conventions` (remark; **L/NA**) — This track writes $u'=Au$ and heat uses $A=\Delta_D$; sources writing $u'+Bu=0$ use $B=-A$.
+21. `thm-uniqueness-of-the-scalar-laplace-transform-in-the-exponential-growth-class` (theorem; **L/A**) — If a continuous scalar function of exponential order has zero Laplace transform on a right half-line, it vanishes; shift the weight, convert moments by $x=e^{-t}$ and use polynomial density. This is the supplier for the enrichment lemma identifying semigroups from their resolvents.
 
 ### B-page companion
 
@@ -1876,11 +2071,13 @@ Banach-algebra holomorphic functional calculus.
 5. `thm-analytic-semigroup-smoothing-estimates` (theorem; **L/A**) — For $t>0$, $T(t)X\subset D(A^m)$ and $\|A^mT(t)\|\le C_mt^{-m}$.
 6. `cor-analytic-semigroups-are-operator-norm-differentiable-away-from-zero` (corollary; **L/A**) — $T'(t)=AT(t)$ for $t>0$, without claiming norm continuity at zero.
 7. `thm-self-adjoint-nonpositive-operators-generate-bounded-analytic-semigroups` (theorem; **L/A**) — Apply FA spectral calculus with sector angle and sign explicit.
-8. `cor-dirichlet-laplacian-generates-an-analytic-heat-semigroup` (corollary; **L/A**) — PDE-17 verifies self-adjointness/negativity; PDE-18/19 identify its smoothing domains under regularity.
-9. `thm-form-generated-sectorial-elliptic-semigroups` (theorem; **L/A**) — A closed sectorial coercive form gives an analytic semigroup for nonsymmetric elliptic operators in the stated Hilbert setting.
-10. `thm-maximal-classical-regularity-for-holder-continuous-forcing` (theorem; **L/A**) — For analytic $T$ and compatible data, the variation-of-constants solution is classical with quantified time regularity; no general maximal $L^p$ regularity is claimed.
-11. `cor-abstract-parabolic-smoothing` (corollary; **L/A**) — Positive time puts mild solutions into iterated generator domains, with source terms treated by their time regularity.
-12. `rem-real-banach-spaces-require-complexification-for-analyticity` (remark; **L/NA**) — Define the real result by restriction of a compatible complexification, not “complex-time holomorphic” over real scalars.
+8. `cor-dirichlet-laplacian-generates-an-analytic-heat-semigroup` (corollary; **L/A**) — PDE-17 verifies the self-adjoint nonpositive $L^2$ realisation. PDE-18/19 identify its first operator domain under boundary regularity; higher powers remain recursive operator domains unless the additional boundary compatibility needed for an $H^{2m}$ identification is proved.
+9. `def-closed-sectorial-form-and-its-associated-operator` (definition; **L/NA**) — On a dense Hilbert form domain define closedness in the shifted form norm, the sector-angle bound, and $D(A)=\{u:\exists f,\ a(u,v)=(-f,v)\ \forall v\}$ with the $e^{tA}$ sign convention.
+10. `lem-coercive-sectorial-form-resolvents-define-a-closed-m-sectorial-operator` (lemma; **L/A**) — Complex Lax--Milgram constructs the resolvent, proves the associated vector is unique, and gives density, closedness and the sectorial bound required by item 3.
+11. `thm-form-generated-sectorial-elliptic-semigroups` (theorem; **L/A**) — Items 9--10 and the sectorial generation theorem give an analytic semigroup for nonsymmetric elliptic operators in the stated Hilbert setting.
+12. `thm-classical-regularity-for-holder-continuous-forcing-under-compatibility` (theorem; **L/A**) — For analytic $T$ and compatible data, the variation-of-constants solution is classical with quantified time regularity; this is not mislabeled as general maximal $L^p$ regularity.
+13. `cor-abstract-parabolic-smoothing` (corollary; **L/A**) — Positive time puts mild solutions into iterated generator domains, with source terms treated by their time regularity.
+14. `rem-real-banach-spaces-require-complexification-for-analyticity` (remark; **L/NA**) — Define the real result by restriction of a compatible complexification, not “complex-time holomorphic” over real scalars.
 
 ### B-page companion
 
@@ -1939,15 +2136,16 @@ functions are mentioned only as orientation.
 10. `lem-doubling-variables-maximum-localisation` (lemma; **L/A**) — Penalised maxima of $u(x,t)-v(y,t)-|x-y|^2/(2\varepsilon)$ localise and force $|x-y|^2/\varepsilon\to0$ under bounded uniform continuity.
 11. `thm-comparison-for-first-order-hamilton-jacobi-equations` (theorem; **L/A**) — On a compact cylinder, or for bounded uniformly continuous solutions on $\mathbb R^n$, give explicit continuity and spatial Lipschitz hypotheses on $H$ under which subsolution initial data below supersolution initial data imply $u\le v$.
 12. `cor-uniqueness-of-bounded-uniformly-continuous-viscosity-solutions` (corollary; **L/A**) — Apply comparison in both directions, including preservation of the initial condition.
-13. `thm-perron-method-for-hamilton-jacobi-equations` (theorem; **L/A**) — Between a subsolution and supersolution barrier, the upper envelope of subsolutions has subsolution upper envelope and supersolution lower envelope; comparison makes it continuous and unique.
-14. `def-legendre-transform-of-a-hamiltonian` (definition; **L/NA**) — For convex $H(p)$ define $L(v)=\sup_p(p\cdot v-H(p))$ and cite the sibling convex-duality result for biconjugacy rather than re-proving it.
-15. `def-hopf-lax-operator` (definition; **L/NA**) — For convex superlinear $H$ and bounded uniformly continuous $u_0$, set $Q_tu_0(x)=\inf_y\{u_0(y)+tL((x-y)/t)\}$ for $t>0$, with $Q_0u_0=u_0$.
-16. `lem-hopf-lax-infima-localise` (lemma; **L/A**) — Superlinearity confines near-minimisers to a compact ball depending locally on $(x,t)$; continuity then gives attainment when the hypotheses warrant it.
-17. `thm-hopf-lax-dynamic-programming-semigroup` (theorem; **L/A**) — Convexity of $L$ gives $Q_{t+s}=Q_tQ_s$ and the corresponding short-time variational principle.
-18. `thm-hopf-lax-formula-solves-the-hamilton-jacobi-equation` (theorem; **L/A**) — $Q_tu_0$ is the unique bounded uniformly continuous viscosity solution, with the initial trace locally uniform as $t\downarrow0$.
-19. `thm-vanishing-viscosity-convergence-for-hamilton-jacobi-equations` (theorem; **L/A**) — Under comparison, equiboundedness and an equicontinuity estimate, solutions of $u_t^\varepsilon+H(x,t,Du^\varepsilon)=\varepsilon\Delta u^\varepsilon$ converge locally uniformly to the viscosity solution.
-20. `cor-finite-speed-of-dependence-for-lipschitz-hamiltonians` (corollary; **L/A**) — If $H$ is Lipschitz in momentum with constant $L$, comparison on cones shows that data outside $B(x,Lt)$ cannot affect $u(x,t)$.
-21. `rem-value-functions-and-hamilton-jacobi-bellman-equations` (remark; **L/NA**) — State the source-cited control interpretation and sign convention without developing admissible controls, measurable selection or dynamic programming for control systems.
+13. `lem-perron-envelope-failure-of-the-supersolution-test-allows-a-local-bump` (lemma; **L/A**) — If the lower envelope of the Perron supremum fails a supersolution test, raise a nearby subsolution by a strict local test-function bump while preserving the barriers, contradicting maximality.
+14. `thm-perron-method-for-hamilton-jacobi-equations` (theorem; **L/A**) — Between a subsolution and supersolution barrier, the upper envelope of subsolutions has subsolution upper envelope and, by item 13, supersolution lower envelope; comparison makes it continuous and unique.
+15. `def-legendre-transform-of-a-hamiltonian` (definition; **L/NA**) — For convex $H(p)$ define $L(v)=\sup_p(p\cdot v-H(p))$ and cite the sibling convex-duality result for biconjugacy rather than re-proving it.
+16. `def-hopf-lax-operator` (definition; **L/NA**) — For convex superlinear $H$ and bounded uniformly continuous $u_0$, set $Q_tu_0(x)=\inf_y\{u_0(y)+tL((x-y)/t)\}$ for $t>0$, with $Q_0u_0=u_0$.
+17. `lem-hopf-lax-infima-localise` (lemma; **L/A**) — Superlinearity confines near-minimisers to a compact ball depending locally on $(x,t)$; continuity then gives attainment when the hypotheses warrant it.
+18. `thm-hopf-lax-dynamic-programming-semigroup` (theorem; **L/A**) — Convexity of $L$ gives $Q_{t+s}=Q_tQ_s$ and the corresponding short-time variational principle.
+19. `thm-hopf-lax-formula-solves-the-hamilton-jacobi-equation` (theorem; **L/A**) — $Q_tu_0$ is the unique bounded uniformly continuous viscosity solution, with the initial trace locally uniform as $t\downarrow0$.
+20. `thm-vanishing-viscosity-convergence-for-hamilton-jacobi-equations` (theorem; **L/A**) — Under comparison, equiboundedness and an equicontinuity estimate, solutions of $u_t^\varepsilon+H(x,t,Du^\varepsilon)=\varepsilon\Delta u^\varepsilon$ converge locally uniformly to the viscosity solution.
+21. `cor-finite-speed-of-dependence-for-lipschitz-hamiltonians` (corollary; **L/A**) — If $H$ is Lipschitz in momentum with constant $L$, comparison on cones shows that data outside $B(x,Lt)$ cannot affect $u(x,t)$.
+22. `rem-value-functions-and-hamilton-jacobi-bellman-equations` (remark; **L/NA**) — State the source-cited control interpretation and sign convention without developing admissible controls, measurable selection or dynamic programming for control systems.
 
 ### B-page companion
 
@@ -1978,7 +2176,7 @@ convergent subsequence is not asserted without the stated compactness estimate.
 **Well-definedness.** Sub- and supersolutions are actual semicontinuous
 functions, not $L^p$ equivalence classes. The value of a test derivative is
 independent of adding a locally flat test function because only the contact
-jet enters. The Hopf--Lax infimum is an extended-real expression until item 16
+jet enters. The Hopf--Lax infimum is an extended-real expression until item 17
 proves finiteness and localisation. Half-relaxed limits include both the
 sequence index and the space--time point in the limsup/liminf.
 
@@ -1988,7 +2186,8 @@ sequence index and the space--time point in the limsup/liminf.
 
 **A page:** `scalar-conservation-laws-and-entropy-solutions`  
 **B page:** `scalar-conservation-laws-and-entropy-solutions-examples`  
-**Requires:** PDE-2, PDE-7--PDE-8 and PDE-25; MT-4, MT-7--MT-11; FA-24's
+**Requires:** PDE-2, PDE-7--PDE-8, PDE-15 and PDE-25; MT-4, MT-7--MT-11;
+MT-14--MT-15; FA-24's
 distributional framework; the published one-dimensional integration and
 convexity results.
 
@@ -2017,13 +2216,15 @@ wave interaction belong to later hyperbolic-systems work.
 12. `thm-kruzhkov-local-l1-contraction` (theorem; **L/A**) — For bounded entropy solutions and Lipschitz flux on their common range, the $L^1$ distance on a ball at time $t$ is controlled by the initial distance on the enlarged backward cone.
 13. `cor-uniqueness-comparison-and-order-preservation-for-entropy-solutions` (corollary; **L/A**) — Derive uniqueness, positive-part contraction and monotonicity from item 12.
 14. `cor-finite-propagation-for-scalar-conservation-laws` (corollary; **L/A**) — Compactly supported perturbations propagate no faster than $\sup|f'|$ on the relevant range.
-15. `thm-existence-of-bounded-kruzhkov-entropy-solutions` (theorem; **L/A**) — For $u_0\in L^1\cap L^\infty$ and sufficiently smooth flux, vanishing viscosity plus compactness produces an entropy solution attaining its initial trace.
-16. `def-self-similar-riemann-problem` (definition; **L/NA**) — Set two constant states and formulate solutions as functions of $x/t$ for $t>0$.
-17. `thm-riemann-solver-for-strictly-convex-scalar-flux` (theorem; **L/A**) — A decreasing jump gives the Rankine--Hugoniot shock and an increasing jump gives the centred rarefaction $(f')^{-1}(x/t)$, with constant outer states.
-18. `thm-oleinik-one-sided-entropy-condition` (theorem; **L/A**) — For uniformly convex one-dimensional flux, state the one-sided slope estimate and its equivalence to Kruzhkov admissibility in the bounded solution class covered by the source.
-19. `cor-lax-shock-inequalities-for-convex-scalar-laws` (corollary; **L/A**) — The chord slope lies between the characteristic speeds on the two sides of an admissible shock.
-20. `thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension` (theorem; **L/A**) — If a Lipschitz viscosity solution $U$ solves $U_t+f(U_x)=0$, then $u=U_x$ a.e. is the Kruzhkov solution; conversely an entropy solution has a normalised spatial primitive that is the viscosity solution, under the source's integrability hypotheses.
-21. `thm-entropy-solution-semigroup-on-l1` (theorem; **L/A**) — The solution operators form an order-preserving $L^1$ contraction semigroup on $L^1\cap L^\infty$, extended to $L^1$ when the flux normalisation permits.
+15. `lem-viscous-scalar-laws-contract-spatial-translates-in-lone` (lemma; **L/A**) — Parabolic Kato comparison gives $\|u^\varepsilon(\cdot+h,t)-u^\varepsilon(\cdot,t)\|_1\le\|u_0(\cdot+h)-u_0\|_1$, uniformly in $\varepsilon$; a companion estimate controls short time translates after smooth-data approximation.
+16. `lem-vanishing-viscosity-families-are-locally-precompact-in-lone` (lemma; **L/A**) — Combine the uniform range bound, item 15's space/time translation control and PDE-15's Fréchet--Kolmogorov criterion on compact cylinders. The energy estimate alone does not give strong compactness uniformly as $\varepsilon\downarrow0$.
+17. `thm-existence-of-bounded-kruzhkov-entropy-solutions` (theorem; **L/A**) — For $u_0\in L^1\cap L^\infty$ and sufficiently smooth flux, vanishing viscosity, item 16 and passage in every Kruzhkov inequality produce an entropy solution attaining its initial trace.
+18. `def-self-similar-riemann-problem` (definition; **L/NA**) — Set two constant states and formulate solutions as functions of $x/t$ for $t>0$.
+19. `thm-riemann-solver-for-strictly-convex-scalar-flux` (theorem; **L/A**) — A decreasing jump gives the Rankine--Hugoniot shock and an increasing jump gives the centred rarefaction $(f')^{-1}(x/t)$, with constant outer states.
+20. `thm-oleinik-one-sided-entropy-condition` (theorem; **L/A**) — For uniformly convex one-dimensional flux, state the one-sided slope estimate and its equivalence to Kruzhkov admissibility in the bounded solution class covered by the source.
+21. `cor-lax-shock-inequalities-for-convex-scalar-laws` (corollary; **L/A**) — The chord slope lies between the characteristic speeds on the two sides of an admissible shock.
+22. `thm-hamilton-jacobi-conservation-law-correspondence-in-one-dimension` (theorem; **L/A**) — If a Lipschitz viscosity solution $U$ solves $U_t+f(U_x)=0$, then $u=U_x$ a.e. is the Kruzhkov solution; conversely an entropy solution has a normalised spatial primitive that is the viscosity solution, under the source's integrability hypotheses.
+23. `thm-entropy-solution-semigroup-on-lone` (theorem; **L/A**) — The solution operators form an order-preserving $L^1$ contraction semigroup on $L^1\cap L^\infty$. Extension to all $L^1$ is asserted only when $f(0)=0$ and the flux is globally Lipschitz (or under the source's equivalent global-growth hypothesis), so $f(u)$ stays integrable along the approximation.
 
 ### B-page companion
 
@@ -2060,7 +2261,7 @@ pointwise assignment at $t=0$. Adding a constant to $q$ does not change its
 distributional divergence. Set $\operatorname{sgn}(0)=0$ in the displayed
 Kruzhkov flux (the product itself is independent of that convention). Strong
 traces are invoked only where they have been proved or are part of the
-piecewise-smooth hypothesis. A primitive in item 20 is fixed by an explicit
+piecewise-smooth hypothesis. A primitive in item 22 is fixed by an explicit
 base point or integrability normalisation.
 
 ---
@@ -2073,14 +2274,16 @@ The proposed A-page item counts are:
 
 | pairs | A-page counts |
 |---|---|
-| PDE-1--PDE-5 | 20, 17, 14, 15, 20 |
-| PDE-6--PDE-10 | 13, 14, 14, 14, 14 |
-| PDE-11--PDE-15 | 19, 14, 13, 15, 11 |
-| PDE-14F | 8 |
-| PDE-16--PDE-20 | 17, 16, 16, 16, 14 |
-| PDE-21--PDE-26 | 15, 12, 20, 12, 21, 21 |
+| PDE-1, PDE-1CK, PDE-2, PDE-2D | 21, 13, 17, 10 |
+| PDE-3--PDE-7 | 18, 20, 15, 14, 14 |
+| PDE-8--PDE-12 | 16, 14, 14, 19, 14 |
+| PDE-13, PDE-14, PDE-14F, PDE-15--PDE-17 | 13, 15, 8, 11, 17, 19 |
+| PDE-18--PDE-22 | 17, 14, 14, 15, 14 |
+| PDE-23--PDE-26 | 21, 14, 22, 23 |
 
-Thus the largest is 21, well below the 60-item split threshold. This is a
+Thus the largest base A page is 23, well below the 60-item split threshold.
+After the §12 overlay is inserted, the largest A page is PDE-26 with 30 items.
+This is a
 consequence of splitting at mathematical proof boundaries, not of omitting
 canonical material. Every B page is a leaf. A-page dependencies point only to
 published pages, predecessor scaffold reservations, or earlier PDE A pages;
@@ -2089,9 +2292,10 @@ orientation remarks alone may name later subjects.
 Every mathematical-content row carries the component shorthand of §2.4. The
 only generated statements are the explicitly **G/G**, directly checkable,
 non-load-bearing counterexamples on PDE-3B, PDE-25B and PDE-26B. Every spine
-theorem, definition and load-bearing lemma is literature-derived. The two
-**L/NS** items are the sourced Cauchy--Kovalevskaya statement and Tychonoff
-nonuniqueness; each is a leaf with `proved_here: false` and an exact source.
+theorem, definition and load-bearing lemma is literature-derived. The sole
+**L/NS** item is Tychonoff nonuniqueness, a leaf with `proved_here: false` and
+an exact source. Cauchy--Kovalevskaya is now proved on PDE-1CK; its two
+published PDE-2 remarks require the deferred reconciliation in §10.2.
 
 The future build must write each A-page summary as a mathematical development:
 starting objects, central theorem chain, endpoint and sharp boundary. It must
@@ -2107,20 +2311,21 @@ to audit across page boundaries.
 |---|---|---|
 | order and principal symbol of a differential operator | show lower-order changes do not alter the homogeneous principal part; distinguish a coordinate expression from invariant language | PDE-1 items 3--7 |
 | elliptic/parabolic/hyperbolic classification | fix the point, scalar real second-order operator and sign convention; do not classify arbitrary nonlinear equations by an eigenvalue slogan | PDE-1 items 8--12 and §2.2 |
-| characteristic parametrisation | prove reparametrisation invariance and local solvability of the characteristic ODE | PDE-1 items 13--19 |
+| characteristic parametrisation | prove reparametrisation invariance and local solvability of the characteristic ODE | PDE-1 items 13--20 |
+| analytic Cauchy theorem | define coefficientwise majorisation, prove formal recursion and convergence, and use an analytic rather than merely $C^1$ flattening map | PDE-1CK items 1--12 |
 | noncharacteristic Cauchy data | state transversality as an invertible Jacobian/normal coefficient and use the inverse-function theorem only with its actual hypotheses | PDE-2 items 2--8 |
 | characteristic graph reconstruction | prove the projected characteristic map is locally one-to-one before defining $u(x)$ | PDE-2 item 8 |
 | analytic Cauchy data in Cauchy--Kovalevskaya | specify a real-analytic germ and all normal derivatives through order $m-1$ on an analytic noncharacteristic hypersurface | PDE-2 item 16 |
-| spherical/ball averages | define surface measure and normalisation; show independence of rotations and integrability | PDE-3 items 4--5 and PDE-5 item 12 |
-| distributional harmonicity | cite FA-24's test-function pairing and prove local integrability before applying Weyl's lemma | PDE-3 items 12--13 |
-| Harnack chains | prove each compact chain has finitely many overlapping interior balls and track connectedness | PDE-4 items 9--11 |
+| spherical/ball averages | define surface measure and normalisation; show independence of rotations and integrability; justify the flux step by divergence | PDE-3 items 2--4 and PDE-2D item 4 |
+| distributional harmonicity | cite FA-24's test-function pairing and prove stabilization before applying Weyl's lemma | PDE-3 items 11--15 |
+| Harnack chains | prove each compact chain has finitely many overlapping interior balls and track connectedness | PDE-4 items 13--15 and the §12 finite-chain lemma |
 | fundamental solution | fix $-\Delta\Phi=\delta_0$ and interpret the singular identity only after local integrability and boundary-flux limits are proved | PDE-5 items 1--5 |
 | Newtonian potential and differentiation | state the data class giving absolute convergence; treat second derivatives as singular integrals rather than differentiating an inadmissible kernel | PDE-5 items 6--9; PDE-19 items 3 and 9, using FR-8 |
-| outward normal, surface integral and Green function | construct them for the stated $C^1$/$C^2$ domain, prove representative/normalisation independence and state symmetry only under self-adjoint hypotheses | PDE-5 items 12--20 |
+| outward normal, surface integral and Green function | construct the boundary objects for the stated $C^1$/piecewise-$C^1$ domain, then define the Green function and state symmetry only under self-adjoint hypotheses | PDE-2D items 1--9; PDE-5 items 9--13 |
 | Poisson representation | prove kernel normalisation and convergence to boundary data in the topology claimed | PDE-6 items 2--9 |
 | heat convolution | show the kernel/data convolution is finite in the named class and define $H_0$ as the identity, not by evaluating the singular formula | PDE-7 items 2--8 |
-| Duhamel integral | prove Bochner/measurable integrability and differentiate only under the regularity hypotheses | PDE-8 items 8--11 |
-| parabolic boundary and uniqueness | exclude the final-time face and state growth control for whole-space uniqueness | PDE-8 items 2--7 and 14 |
+| Duhamel integral | prove Bochner/measurable integrability and differentiate only under the regularity hypotheses | PDE-8 items 7--10 |
+| parabolic boundary and uniqueness | exclude the final-time face and state growth control for whole-space uniqueness | PDE-8 items 1--9 and 14 |
 | spherical wave means | define the zero-radius limit and separate odd/even dimension formulae | PDE-9 items 4--13 |
 | local wave energy | justify moving-boundary differentiation and the cone normal; finite propagation is a theorem, not support notation | PDE-10 items 3--10 |
 | weak derivative of an $L^p$ class | prove uniqueness a.e. and representative independence before writing $D^\alpha u$ | PDE-11 items 3--10 |
@@ -2133,18 +2338,18 @@ to audit across page boundaries.
 | $H^{-1}$ and weak boundary data | define dual pairing and lifting; never identify a general functional with an $L^2$ function | PDE-16 items 8--17 |
 | variational form and Lax--Milgram operator | establish integrability, conjugate-linearity convention, boundedness and coercivity before invoking Riesz/fixed point | PDE-16 items 1--14 |
 | shifted elliptic inverse | distinguish $L^2\to H^1_0$ solution map from its compact $L^2\to L^2$ composition | PDE-17 items 3--9 |
-| eigenfunctions/eigenspaces | normalize equivalence classes in $L^2$ and state multiplicity; do not choose a canonical vector in a multiple eigenspace | PDE-17 items 10--16 |
-| boundary flattening and higher regularity | state chart, coefficient and boundary regularity sufficient for each derivative order | PDE-18 items 8--16 |
+| eigenfunctions/eigenspaces | normalize equivalence classes in $L^2$ and state multiplicity; do not choose a canonical vector in a multiple eigenspace | PDE-17 items 13--18 |
+| boundary flattening and higher regularity | state chart, coefficient and boundary regularity sufficient for each derivative order | PDE-18 items 10--16 |
 | Hölder and elliptic $L^p$ norms | fix representatives for continuous classes; import FR-8's principal-value truncations and strict range $1<p<\infty$ before applying them to Newtonian Hessians | PDE-19 items 1--13; FR-8 |
 | weak maximum and weak Harnack | make positive/negative parts valid Sobolev test functions and distinguish essential from pointwise extrema | PDE-20 items 1--14 |
 | direct-method infimum and integral functional | prove properness, a finite competitor and representative invariance before selecting a minimizing sequence | PDE-21 items 1--12 |
-| constrained multiplier and obstacle reaction | prove weak closure and constraint regularity; express complementarity in duality unless stronger regularity is available | PDE-22 items 1--12 |
+| constrained multiplier and obstacle reaction | prove weak closure and Banach constraint regularity; express complementarity in duality unless stronger regularity is available | PDE-22 items 1--14 |
 | generator, resolvent and mild solution | use the one-sided derivative, prove the inverse is bounded and define the Bochner integral before differentiation | PDE-23 items 4--19 |
 | sectorial contour integral | fix the sign convention, sector and orientation; prove norm convergence and contour independence | PDE-24 items 1--6 |
-| viscosity envelopes and tests | keep USC/LSC functions distinct from a.e. classes; include space--time point and sequence index in half-relaxed limits | PDE-25 items 2--13 |
-| Hopf--Lax infimum | prove finiteness/localisation and specify whether the infimum is attained | PDE-25 items 14--18 |
+| viscosity envelopes and tests | keep USC/LSC functions distinct from a.e. classes; include space--time point and sequence index in half-relaxed limits | PDE-25 items 2--14 |
+| Hopf--Lax infimum | prove finiteness/localisation and specify whether the infimum is attained | PDE-25 items 15--20 |
 | weak conservation law and entropy flux | retain the initial term and strong $L^1_{\rm loc}$ trace; show the additive constant in $q$ is immaterial | PDE-26 items 1--10 |
-| shocks and Hamilton--Jacobi primitives | invoke strong traces only when available and normalise the a.e. spatial primitive | PDE-26 items 5--6 and 20 |
+| shocks and Hamilton--Jacobi primitives | invoke strong traces only when available and normalise the a.e. spatial primitive | PDE-26 items 5--6 and 22 |
 
 ## 8. Choice-strength ledger
 
@@ -2156,7 +2361,7 @@ ZF.
 | result or construction | choice strength planned here | reason |
 |---|---|---|
 | finite-dimensional classification, characteristics and explicit heat/wave/potential kernels (PDE-1--PDE-10) | ZF relative to ODE, integration and compactness predecessors | proofs use explicit formulae, finite covers and canonical Euclidean exhaustions |
-| Cauchy--Kovalevskaya statement | inherited from the cited theorem; no new choice claim | it is not proved here |
+| Cauchy--Kovalevskaya majorant proof (PDE-1CK) | ZF relative to the published finite-dimensional power-series and analytic inverse theorems | coefficient recursions and the positive rational majorant are explicit; no arbitrary family is selected |
 | Sobolev completeness, weak derivatives, mollification and half-space reflection (PDE-11--PDE-12) | ZF relative to $L^p$ completeness/Fubini | component limits and convolution are canonical |
 | Meyers--Serrin on arbitrary open sets | ZF in the proposed proof relative to the published locally finite partition | use rational balls and the least admissible mollifier scale with an explicit $2^{-j}$ error budget, avoiding an arbitrary sequence of choices |
 | finite-atlas extension and trace on a compact smooth boundary (PDE-12--PDE-13) | ZF relative to the published finite partition of unity | only finite choices occur after a finite subcover is supplied |
@@ -2192,7 +2397,7 @@ record the reconciliation in both origin and receiver:
    added to FA unless this ownership contract is deliberately amended.
 2. **`measure-theory`: keep its existing PDE seam and add a surface-measure
    dictionary note — applied.** MT-11's polar-coordinate measure underlies sphere means;
-   MT-14--MT-15 underlie $L^p$, convolution and approximation. PDE-5 locally
+   MT-14--MT-15 underlie $L^p$, convolution and approximation. PDE-2D locally
    constructs surface integration on a compact $C^1$ hypersurface from charts;
    a later GMT treatment should prove agreement with Hausdorff measure rather
    than ask either track to rename its construction.
@@ -2204,43 +2409,158 @@ record the reconciliation in both origin and receiver:
    logarithmic fundamental solution and compare its Poisson kernel with
    PDE-5--PDE-6; neither track claims the other's sharper proof or theorem.
 4. **`differential-geometry`: record subsumption, not a dependency reversal.**
-   General Stokes on manifolds later recovers PDE-5's Euclidean divergence
-   theorem and Green identities. PDE-5 must remain buildable first from charts,
-   boxes and partition of unity. Its scaffold did not yet exist at this lane's
-   final disk check, so this amendment follows the binding ownership entry in
-   `research/subjects-01-SEAMS.md` and the differential-geometry dispatch;
-   reconcile it against the eventual file before splice.
+   The inspected DG-14 general Stokes page later recovers PDE-2D's Euclidean
+   divergence theorem and Green identities. PDE-2D remains buildable first
+   from graph charts, boxes and partition of unity; RC-9's published
+   three-dimensional finite-gluing theorem is only a narrower comparison.
 5. **`calculus`: no enrichment amendment is owed.** Disk inspection found that
    `inverse-and-implicit-function-theorems` has only five items but does prove
    the finite-dimensional inverse and implicit theorems at the strength used
    here. The thin count is not itself a mathematical defect. The vector-
    calculus band does not contain an $n$-dimensional divergence theorem, which
-   is why PDE-5 builds exactly the Euclidean version it consumes.
+   is why PDE-2D builds exactly the Euclidean version later PDE pages consume.
 
 ## 10. Unresolved seams, forward references and blockers
 
-There is no blocking unresolved seam and no unresolved load-bearing forward
-reference. The following are build-time checks, not missing mathematics:
+The mathematical suppliers are now explicit, but canonical reconciliation is
+blocking: `plan-spec` still has every later A page consuming the previous B
+page, one Fourier page consumes PDE-14F B, PDE-14F consumes PDE-14 B, and two
+published PDE-3 proofs need suppliers not yet published. Published content is
+read-only during this audit. Apply the following changes in dependency order;
+do not repair the two items until the newly named suppliers are published.
 
-- The orchestrator must splice the whole block after `probability-theory` and
-  replace relative labels in `requires` with the final page ids/orders.
-- `research/plan-differential-geometry-track.md` was not yet present at the
-  final disk check. When it arrives, reconcile its general-Stokes page with
-  PDE-5's earlier Euclidean divergence theorem exactly as §9 specifies.
+### 10.1 Exact `plan-spec` page, order and edge reconciliation
+
+Add two pairs without renumbering existing pages:
+
+| order | kind | page | exact `requires` |
+|---:|:---:|---|---|
+| 458.0001 | A | `analytic-majorants-and-the-cauchy-kovalevskaya-theorem` | `partial-differential-equations-and-characteristics`; `power-series-and-real-analytic-functions`; `holomorphic-functions-of-several-variables`; `holomorphic-inverse-and-weierstrass-preparation` |
+| 458.0002 | B | `analytic-majorants-and-the-cauchy-kovalevskaya-theorem-examples` | its A page only |
+| 458.0021 | A | `euclidean-surface-measure-divergence-and-green-identities` | `lebesgue-measure-on-euclidean-space`; `the-lebesgue-integral-and-the-convergence-theorems`; `product-measures-and-the-fubini-tonelli-theorems`; `fubini-and-change-of-variables`; `the-fundamental-theorems-of-calculus`; `inner-product-spaces-and-orthogonality`; `smooth-partitions-of-unity-and-exhaustions` |
+| 458.0022 | B | `euclidean-surface-measure-divergence-and-green-identities-examples` | its A page only |
+
+Repair the four published A-page declarations as follows:
+
+- `partial-differential-equations-and-characteristics`: remove
+  `itos-formula-and-brownian-martingales-examples` (unpublished and not a
+  mathematical supplier); retain its ODE and spectral A-page requirements and
+  add `the-total-derivative`, `mixed-partials-taylor-and-extrema`,
+  `rn-as-a-normed-space`, `dual-spaces-bilinear-forms-and-inertia`, and
+  `inverse-and-implicit-function-theorems`.
+- `quasilinear-characteristics-and-cauchy-kovalevskaya`: replace
+  `partial-differential-equations-and-characteristics-examples` by its A page;
+  add `analytic-majorants-and-the-cauchy-kovalevskaya-theorem` and
+  `the-derivative-and-mean-value-theorems`; retain the ODE smooth-dependence
+  and inverse/implicit A pages.
+- `harmonic-functions-and-mean-values-in-rn`: remove
+  `quasilinear-characteristics-and-cauchy-kovalevskaya-examples`; add
+  `euclidean-surface-measure-divergence-and-green-identities`,
+  `mixed-partials-taylor-and-extrema`,
+  `the-lebesgue-integral-and-the-convergence-theorems`,
+  `product-measures-and-the-fubini-tonelli-theorems`,
+  `density-separability-and-convolution-in-lp`, and
+  `distributions-test-functions-and-differentiation`; retain
+  `the-maximal-function-and-lebesgue-differentiation` and retain
+  `the-divergence-theorem-and-classical-stokes` only because the current
+  published definition still imports its elementary Laplacian definition, not
+  as a divergence-theorem supplier.
+- `maximum-principles-harnack-and-liouville-in-rn`: replace
+  `harmonic-functions-and-mean-values-in-rn-examples` by its A page and add
+  `compactness-in-metric-spaces` and `connectedness` explicitly.
+
+Remove every remaining B-page consumer edge. The exact replacements are:
+
+| consumer | remove B prerequisite | add A prerequisite |
+|---|---|---|
+| `fundamental-solutions-newtonian-potentials-and-green-functions` | `maximum-principles-harnack-and-liouville-in-rn-examples` | `maximum-principles-harnack-and-liouville-in-rn` |
+| `poisson-problems-and-interior-harmonic-estimates` | `fundamental-solutions-newtonian-potentials-and-green-functions-examples` | `fundamental-solutions-newtonian-potentials-and-green-functions` |
+| `the-heat-kernel-and-the-cauchy-problem` | `poisson-problems-and-interior-harmonic-estimates-examples` | `poisson-problems-and-interior-harmonic-estimates` |
+| `heat-equation-maximum-principles-duhamel-and-smoothing` | `the-heat-kernel-and-the-cauchy-problem-examples` | `the-heat-kernel-and-the-cauchy-problem` |
+| `wave-equation-representation-formulas` | `heat-equation-maximum-principles-duhamel-and-smoothing-examples` | `heat-equation-maximum-principles-duhamel-and-smoothing` |
+| `wave-energy-finite-propagation-and-huygens` | `wave-equation-representation-formulas-examples` | `wave-equation-representation-formulas` |
+| `weak-derivatives-and-sobolev-spaces` | `wave-energy-finite-propagation-and-huygens-examples` | `wave-energy-finite-propagation-and-huygens` |
+| `smooth-approximation-and-sobolev-extension` | `weak-derivatives-and-sobolev-spaces-examples` | `weak-derivatives-and-sobolev-spaces` |
+| `sobolev-traces-and-zero-boundary-values` | `smooth-approximation-and-sobolev-extension-examples` | `smooth-approximation-and-sobolev-extension` |
+| `sobolev-poincare-and-morrey-inequalities` | `sobolev-traces-and-zero-boundary-values-examples` | `sobolev-traces-and-zero-boundary-values` |
+| `rellich-kondrachov-and-sobolev-compactness` | `sobolev-poincare-and-morrey-inequalities-examples` | `sobolev-poincare-and-morrey-inequalities` |
+| `lax-milgram-and-weak-elliptic-solutions` | `rellich-kondrachov-and-sobolev-compactness-examples` | `rellich-kondrachov-and-sobolev-compactness` |
+| `fredholm-elliptic-problems-and-the-elliptic-spectrum` | `lax-milgram-and-weak-elliptic-solutions-examples` | `lax-milgram-and-weak-elliptic-solutions` |
+| `interior-and-boundary-sobolev-elliptic-regularity` | `fredholm-elliptic-problems-and-the-elliptic-spectrum-examples` | `fredholm-elliptic-problems-and-the-elliptic-spectrum` |
+| `schauder-and-lp-elliptic-estimates` | `interior-and-boundary-sobolev-elliptic-regularity-examples` | `interior-and-boundary-sobolev-elliptic-regularity` |
+| `weak-elliptic-maximum-principles-and-holder-regularity` | `schauder-and-lp-elliptic-estimates-examples` | `schauder-and-lp-elliptic-estimates` |
+| `the-direct-method-and-euler-lagrange-equations` | `weak-elliptic-maximum-principles-and-holder-regularity-examples` | `weak-elliptic-maximum-principles-and-holder-regularity` |
+| `constrained-variational-problems-and-variational-inequalities` | `the-direct-method-and-euler-lagrange-equations-examples` | `the-direct-method-and-euler-lagrange-equations` |
+| `strongly-continuous-semigroups-and-hille-yosida` | `constrained-variational-problems-and-variational-inequalities-examples` | `constrained-variational-problems-and-variational-inequalities` |
+| `analytic-semigroups-and-linear-evolution-equations` | `strongly-continuous-semigroups-and-hille-yosida-examples` | `strongly-continuous-semigroups-and-hille-yosida` |
+| `hamilton-jacobi-equations-and-viscosity-solutions` | `analytic-semigroups-and-linear-evolution-equations-examples` | `analytic-semigroups-and-linear-evolution-equations` |
+| `scalar-conservation-laws-and-entropy-solutions` | `hamilton-jacobi-equations-and-viscosity-solutions-examples` | `hamilton-jacobi-equations-and-viscosity-solutions` |
+| `fourier-multipliers-and-sobolev-characterisations` | `bessel-potential-completions-and-real-order-sobolev-spaces-examples` | `bessel-potential-completions-and-real-order-sobolev-spaces` |
+
+Two B dependencies should be removed without an A replacement:
+
+- from `bessel-potential-completions-and-real-order-sobolev-spaces`, remove
+  both `weak-derivatives-and-sobolev-spaces` and
+  `sobolev-poincare-and-morrey-inequalities-examples`; PDE-14F's completion
+  construction needs FA-1, FA-23 and FA-25, not either integer-Sobolev page.
+  FR-6 later requires PDE-11 and PDE-14F separately for their comparison;
+- from `harmonic-functions-and-mean-values-in-rn`, the removed PDE-2 B edge
+  has no PDE-2 replacement because harmonic mean-value theory does not consume
+  characteristics.
+
+Every B page then has exactly its A companion as a prerequisite and has no
+consumer. This is the binding leaf invariant, not merely reading-order prose.
+
+### 10.2 Deferred amendments to published PDE items
+
+The eight published PDE pages and all their items remain read-only. Once the
+new suppliers have been published, make these exact content repairs:
+
+1. `lem-radial-derivative-of-a-spherical-average`: add
+   `thm-divergence-theorem-for-bounded-c-one-euclidean-domains`. Replace proof
+   step 1.2 by
+   $\int_{B_r(x)}\Delta u=\int_{\partial B_r(x)}Du\cdot\nu
+   =r^{n-1}\omega_{n-1}m'(r)$. The current radial differentiation plus polar
+   coordinates omits the angular Hessian/divergence cancellation and does not
+   prove the displayed equality. Its consumer
+   `lem-classical-subharmonic-mean-value-inequalities` is transitively blocked
+   until this repair.
+2. On `harmonic-functions-and-mean-values-in-rn`, publish
+   `lem-zero-mass-radial-test-functions-are-compactly-supported-laplacians`
+   and `lem-harmonic-distribution-mollifications-stabilise-locally` before
+   touching the theorem. Then amend `thm-weyl-lemma-for-the-laplacian` to
+   depend on the stabilization lemma (which in turn depends on the zero-mass
+   lemma and mollification commutation), remove its unused ball-mean and
+   mean-value-mollifier dependencies, and replace steps 2.1--3.1 by the proved
+   stabilization plus convergence in $\mathcal D'$. The present equality of
+   two double convolutions does not imply that $T*\rho_\varepsilon$ and
+   $T*\rho_\delta$ agree.
+3. After PDE-1CK is published, amend
+   `rem-cauchy-kovalevskaya-theorem-for-a-noncharacteristic-analytic-cauchy-problem`
+   to depend on PDE-1CK's proved theorem and remove its recorded external
+   dependency metadata. Amend `rem-cauchy-kovalevskaya-proof-boundary` to
+   depend directly on the same proved theorem rather than on the recorded
+   remark, and state that the former local proof boundary is retired. Preserve
+   both stable IDs and the full analytic claim.
+
+The published principal-symbol lemma needs no content repair: despite its
+historical “$C^1$” ID, its actual statement assumes a smooth coordinate change
+and proves dependence of the principal symbol on the first jet. Likewise the
+published Poisson-kernel-ratio example is not forward-dependent on PDE-6: it
+uses the earlier, published smooth-sphere-data harmonic replacement.
+
+### 10.3 Remaining build-time checks
+
 - PDE-24 must not build until FA-17 and the scalar complex contour pages are
-  authored; both are predecessor reservations, presently not published facts.
+  authored.
 - PDE-13's smooth-boundary surface measure and a future GMT Hausdorff-measure
-  construction need the agreement theorem described in §9, but neither is a
-  dependency of the other in this scaffold.  The receiving MT scaffold now
-  records that agreement obligation.
-- PDE-26 uses compactness in one sourced vanishing-viscosity route. A future
-  builder may use Kruzhkov's direct approximation route instead, but must not
-  add BV compactness unless the relevant BV theory has actually been built.
+  construction still need the agreement theorem described in §9.
+- PDE-26's vanishing-viscosity route must use the explicit translation
+  compactness lemmas; an energy estimate alone is not uniform compactness as
+  viscosity tends to zero.
 
-There is no permission, access or source blocker. Teschl's author manuscript
-was fully retrieved for this audit, although its landing page now records a
-temporary withdrawal during AMS print publication; [I], [H], [B] and the
-specialist full texts independently preserve the source basis.
+There is no permission, access or source blocker. The complete [CKG], Hunter,
+Sideris, Dyatlov and specialist source texts used in this audit were retrieved.
 
 ## 11. Canonical-coverage harvest
 
@@ -2293,7 +2613,7 @@ full-note/monograph corpus.
 | §3.2 *Characteristics*; characteristic ODE, local solution of noncharacteristic Cauchy data | `included` PDE-2 |
 | §3.3 *Introduction to Hamilton--Jacobi equations*; Hopf--Lax formula | `included` PDE-25 items 14--18 |
 | §3.4 *Conservation laws*; shocks, Rankine--Hugoniot, entropy, Riemann problems | `included` PDE-26 |
-| §4.6 *Power series*: §4.6.1 *Noncharacteristic surfaces*, §4.6.2 *Real analytic functions*, §4.6.3 *Cauchy--Kovalevskaya Theorem* | theorem statement `included` PDE-2 item 16; power-series/majorant proof `deferred` under the dispatch's statement-only boundary and PDE-2 item 17 |
+| §4.6 *Power series*: §4.6.1 *Noncharacteristic surfaces*, §4.6.2 *Real analytic functions*, §4.6.3 *Cauchy--Kovalevskaya Theorem* | full majorant proof `included` PDE-1CK; PDE-2 items 16--17 become compatibility remarks citing that proved supplier |
 | §5.1 *Hölder spaces* | `included` PDE-19 items 1--3 |
 | §5.2 *Sobolev spaces*; weak derivatives, $W^{k,p}$ completeness | `included` PDE-11 |
 | §5.3 *Approximation*; local/global smooth approximation | `included` PDE-12 items 1--7 |
@@ -2440,15 +2760,15 @@ read range.
 | 1.5 *Compactness* | `already-published` topology; function-space compactness `included` PDE-15 |
 | 1.6 *Averages* | `included` PDE-3 and PDE-20 |
 | 1.7 *Convolutions* and 1.9 *Mollifiers* | `already-planned` MT-15; Sobolev/PDE applications `included` PDE-7/PDE-12 |
-| 1.10 *Boundaries of open sets* | $C^1$/Lipschitz domain vocabulary `included` PDE-5/PDE-12--PDE-13 |
+| 1.10 *Boundaries of open sets* | $C^1$/Lipschitz domain vocabulary `included` PDE-2D/PDE-12--PDE-13 |
 | 1.11 *Change of variables* | `already-published` `fubini-and-change-of-variables` |
-| 1.12 *Divergence theorem* | `included` PDE-5 because disk inspection found no published $\mathbb R^n$ theorem |
+| 1.12 *Divergence theorem* | `included` PDE-2D because published RC-9 covers only its stated three-dimensional finite-gluing class |
 | 1.13 *Gronwall's inequality* | `already-published` ODE/inequality material; `inline` PDE-10/PDE-23 when used |
 | 2.1 *Mean value theorem* | `included` PDE-3 |
 | 2.2 *Derivative estimates and analyticity* | `included` PDE-6 |
 | 2.3 *Maximum principle* | `included` PDE-4 |
 | 2.4 *Harnack's inequality* | `included` PDE-4 |
-| 2.5 *Green's identities* | `included` PDE-5 |
+| 2.5 *Green's identities* | `included` PDE-2D and applied on PDE-5 |
 | 2.6 *Fundamental solution* | `included` PDE-5 |
 | 2.7 *The Newtonian potential* | `included` PDE-5 |
 | 2.8 *Singular integral operators*; principal values, $L^2$ estimate | the Hessian-of-potential identity and $L^2$ multiplier seed are `included` PDE-19; generic Calderón--Zygmund machinery is `already-planned` FR-8 |
@@ -2602,7 +2922,7 @@ potential methods are `deferred` to harmonic analysis; Lipschitz truncation is
 
 | Laugesen heading | disposition |
 |---|---|
-| 3.1 *Green's theorem, and integration by parts* | Euclidean $n$-dimensional version `included` PDE-5 |
+| 3.1 *Green's theorem, and integration by parts* | Euclidean $n$-dimensional version `included` PDE-2D |
 | 3.2 *Mollification and smoothing* | `included` PDE-12 |
 | 3.3 *Weak derivatives and Sobolev spaces* | `included` PDE-11 |
 | 3.4 *Approximating Sobolev functions by smooth functions* | `included` PDE-12 |
@@ -2985,7 +3305,8 @@ Passing mentions and publisher previews are excluded.
 | PDE-2 | [T] Ch. 1 §§2--4 and Ch. 2 §§1--2; [E] §§3.1--3.2, 4.6; [SO] §§2.1, 2.4; [KTH] complete notes |
 | PDE-3 | [H] §§2.1--2.2, 3.3--3.4; [E] §§2.2.2--2.2.3; [SO] §§4.1--4.3 |
 | PDE-4 | [H] §§2.3--2.4; [E] §2.2.3; [SO] §4.3; [Si] Lecture 13 |
-| PDE-5 | [H] §§1.10--1.12, 2.5--2.7; [E] §§2.2.1, 2.2.4; [SO] §§4.1--4.2 |
+| PDE-2D | [H] §§1.10--1.12, 2.5; [T] Chapter 5 §1; published RC-9 as a narrower comparison |
+| PDE-5 | [H] §§2.6--2.7; [E] §§2.2.1, 2.2.4; [SO] §§4.1--4.2 |
 | PDE-6 | [T] Ch. 5 §§3--6; [H] §§2.1--2.2, 2.6--2.7; [E] §§2.2.3--2.2.4; [SO] §§4.2--4.3 |
 | PDE-7 | [E] §§2.3.1--2.3.2; [T] Ch. 6 §§1--2; [SO] §§5.2--5.3; [PJ] §11.1.2 |
 | PDE-8 | [E] §§2.3.2--2.3.3; [T] Ch. 6 §§2--5; [SO] §5.3; [MITPDE] Lecture 5 |
@@ -3200,7 +3521,7 @@ page and the existing conceptual anchor after which the row belongs.
 | A / sharp trace | `lem-half-space-trace-has-the-fractional-slobodeckij-bound` (lemma) — For $1<p<\infty$, bound the $W^{1-1/p,p}$ boundary seminorm by the $W^{1,p}$ half-space norm. | **L**, S:[L] Ch. 3 traces; [S] V.2--V.3 | **A**, P:split tangential increments at their length scale | Isolates the hard estimate inside the sharp trace theorem. |
 | A / localisation | `lem-trace-commutes-with-smooth-boundary-cutoffs-and-charts` (lemma) — The trace of $\eta u$ is $(\eta\vert{}_{\partial\Omega})Tu$, and compatible chart traces agree on overlaps. | **L**, S:[L] Ch. 3 traces; [T] Ch. 9 §2 | **A**, P:verify on smooth functions then pass by density | Makes the global boundary operator well-defined. |
 | A / integration by parts | `thm-sobolev-gauss-green-formula-on-c-one-domains` (theorem) — For dual Sobolev exponents, express $\int_\Omega(uD_iv+vD_iu)$ as the trace product against $\nu_i$. | **L**, S:[H] §3.9; [L] Ch. 3 traces | **A**, P:smooth approximation and trace continuity | Supplies the weak boundary identity later variational pages invoke. |
-| A / normal derivative | `cor-classical-normal-derivative-agrees-with-the-boundary-flux-in-gauss-green` (corollary) — For smooth $u$, the weak flux term reduces to $\partial_\nu u$. | **L**, S:[T] Ch. 9 §2; [H] §3.9 | **A**, P:sum coordinate Gauss--Green identities | Links the trace formalism to PDE-5's classical convention. |
+| A / normal derivative | `cor-classical-normal-derivative-agrees-with-the-boundary-flux-in-gauss-green` (corollary) — For smooth $u$, the weak flux term reduces to $\partial_\nu u$. | **L**, S:[T] Ch. 9 §2; [H] §3.9 | **A**, P:sum coordinate Gauss--Green identities | Links the trace formalism to PDE-2D's classical convention. |
 | A / right inverse | `thm-trace-lifting-can-be-chosen-with-support-in-a-fixed-boundary-collar` (theorem) — On a bounded smooth domain, construct a bounded right inverse whose output is supported in a chosen collar after adjusting the norm constant. | **L**, S:[L] Ch. 3 traces; [S] V.3 | **A**, P:local half-space lifting, cutoff and finite patch | Records the localisation needed when reducing inhomogeneous data. |
 | A / trace kernel | `lem-zero-trace-functions-admit-boundary-cutoff-approximation` (lemma) — If $Tu=0$, cut $u$ off a shrinking boundary layer with error tending to zero in $W^{1,p}$. | **L**, S:[L] Ch. 3 traces; [H] §3.9 | **A**, P:Hardy/normal-line estimate in boundary charts | Exposes the hard inclusion $\ker T\subset W^{1,p}_0$. |
 | A / products | `cor-trace-of-a-smooth-multiplier-times-a-sobolev-function` (corollary) — $T(\eta u)=(\eta\vert{}_{\partial\Omega})Tu$ with the corresponding norm bound. | **L**, S:[T] Ch. 9 §2; [S] V.1 | **A**, P:localisation lemma | Adds the exact form used in boundary partitions of unity. |
@@ -3425,44 +3746,29 @@ page and the existing conceptual anchor after which the row belongs.
 
 ### 12.7 Enrichment report
 
-The verified pre-enrichment item count was **583 distinct proposed IDs**. The
-canonical source harvest in §11 contains **286 `included` disposition tags**,
-not 288: the dispatch's grep estimate was high by two. A whole-file grep gives
-287 only because §1 contains one prose use of the word `included` outside the
-harvest. The other §11 disposition-tag counts are **46 `inline`, 36
-`already-planned`, 8 `already-published`, 42 `deferred`, and 51
-`out-of-scope`**. Some harvest rows group multiple source subheadings, so these
-are auditable tag counts rather than a claim that every table row is one atomic
-heading.
+The old 583/270/845 arithmetic was stale. A structural recount of the checked-in
+pre-audit file found **589 base rows plus 266 overlay rows = 855 distinct IDs**.
+After this prerequisite audit there are **644 base rows plus the same 266
+overlay rows = 910 distinct IDs**, with no duplicate stable ID. The 55-row net
+increase includes the PDE-1CK and PDE-2D pairs, published-state rows absent from
+the old prose, and the new load-bearing lemmas; moving the five Euclidean
+integration rows out of PDE-5 is counted as a move/replacement rather than as
+deleted mathematics.
 
-This overlay added **270 literature-derived items**, for **853 proposed IDs
-immediately after enrichment**. The new-source harvest in §12.2 contributes **23 further
-`included`, 4 `inline`, 8 `already-planned`, 1 `already-published`, 1
-`deferred`, and 7 `out-of-scope` disposition tags**, so the honest
-expanded-corpus after-ratio is
-**853/(286+23) = 2.76×** (before: **583/286 = 2.04×**). Holding the original
-denominator fixed isolates the decomposition effect and gives **853/286 =
-2.98×**, but that is not presented as the expanded-corpus ratio. The additions
-comprise 80 items on PDE-1--PDE-10, 130 on PDE-11--PDE-20, and 60 on
-PDE-21--PDE-26. They come from the existing harvested treatments plus the fully
-read ranges of [SO], [Si] and [PJ] recorded in §§12.1--12.3. No publisher
-preview or table of contents alone backs an item.
+The former enrichment ratios are not restated because the denominator changed:
+[CKG] was read as a new complete source, and the CK source disposition changed
+from `deferred` to `included`. The §11/§12 tag tables remain an auditable source
+harvest, but a tag is not necessarily one atomic theorem. No publisher preview
+or table of contents alone backs an item. After overlay insertion PDE-26 has the
+largest A page at 30 rows, still below the 60-item ceiling.
 
-S-2 subsequently transferred eight generic Calderón--Zygmund rows to FR-8,
-leaving the current PDE scaffold at **845 proposed IDs**. No A page required splitting. After insertion, the largest A pages are PDE-11,
-PDE-25 and PDE-26 with 28 items each; all A pages remain well below the 60-item
-ceiling. At enrichment time no old ID was renumbered or removed; the later
-S-2 transfer removes only the eight settled duplicate proposals.
-
-The result intentionally stops at a 2.76× expanded-corpus ratio rather than
-approaching the differential-geometry 5.7× benchmark. Several PDE source
-headings already name whole theorem suites, but their remaining decompositions
-(full Wiener theory,
-rough-domain traces, systems, nonlinear elliptic theory, microlocal analysis,
-optimal control and dispersive estimates) require new prerequisites or belong
-across a seam; they are not cheap corollaries. In particular, no plane-specific
-Poisson/Perron theorem, general Fourier/distribution theorem, abstract spectral
-theorem, manifold Stokes theorem or conservation-law system result was minted.
+Several PDE source headings still name whole theorem suites, but further
+decomposition (full Wiener theory, rough-domain traces, systems, nonlinear
+elliptic theory, microlocal analysis, optimal control and dispersive estimates)
+requires new prerequisites or belongs across a seam. In particular, no
+plane-specific Poisson/Perron theorem, general Fourier/distribution theorem,
+abstract spectral theorem, manifold Stokes theorem or conservation-law system
+result was minted.
 
 Headings deliberately not further decomposed are exactly those marked
 `deferred` or `out-of-scope` in §§11 and 12.2. Simon Lectures 14--16 and 19 were
@@ -3472,3 +3778,34 @@ projects were likewise excluded; Oh's systems/dispersive material was excluded.
 The rejected Renardy--Rogers preview and unavailable publisher-only texts were
 not promoted to treatments. These omissions enforce generated-claim
 minimisation and the seam rulings rather than optimise a ratio.
+
+### 12.8 Complex Analysis reconciliation (2026-09-08)
+
+Planned CA-RS-H and SC-6 consume the PDE-11/12/15/17/18 interfaces for weak
+Sobolev derivatives, smooth approximation/extension, Rellich compactness,
+Fredholm elliptic theory, and interior/boundary elliptic regularity. The exact
+A-page requirements are recorded in the Complex Analysis scaffold. Complex
+Analysis must not replace them with an unsupported appeal to "elliptic
+regularity."
+
+All named consumers are planned. These seams add zero direct and zero
+transitive published consumers to the PDE pairs and create no new Phase-2
+root.
+
+### 12.9 Probability Theory reconciliation (2026-09-08)
+
+Remove the spurious published page requirement
+`partial-differential-equations-and-characteristics` ->
+`itos-formula-and-brownian-martingales-examples`. The PDE page has zero
+Probability item dependencies, so the complete item-level impact is zero. A
+future Probability B page is never a supplier; this Phase-3 page-edge deletion
+creates no PDE Phase-2 root.
+
+### 12.10 Real Analysis reconciliation (2026-09-08)
+
+Preserve these existing published-A seams: PDE characteristics consumes
+`picard-lindelof-and-first-order-odes`; the quasilinear interface consumes
+`inverse-and-implicit-function-theorems`; and the harmonic interface consumes
+`the-divergence-theorem-and-classical-stokes`. PDE must cite rather than
+duplicate Euclidean ODE, IFT, or Green identities. No new supplier or Phase-2
+root is introduced.

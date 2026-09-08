@@ -623,6 +623,50 @@ representatives and diagonalising); name AC in Facts, not silently.
 Forward references: NONE load-bearing. Mentions of independence go through
 `external_refs` (‡, exempt class).
 
+### Binding ST-1/ST-2 ownership amendment (2026-09-08)
+
+This file is now **historical** for future Set Theory. It remains the detailed
+design record for the already-published ST-1 `ordinal-arithmetic` and ST-2
+`cardinal-arithmetic-and-cofinality` pairs only. The canonical future sequence,
+deferred-target proof routes, axiom ledger and source gates are in
+`plan-set-theory-completion-track.md` §7. Where the two files disagree, that
+section controls.
+
+The “axiom-independence exemption” and all earlier instructions in this file to
+cite the deferred catalogue through `external_refs` are revoked. No Foundations proof,
+well-definedness justification, dependency or load-bearing forward reference
+may directly or transitively consume any item on
+`deferred-set-theory-beyond-choice`; orientation remarks cannot serve as
+proxies. In ST-1, `rem-omega-one-and-the-cost-of-choice` records only the
+positive `AC_omega` cost of the written boundedness proof; delete the
+Feferman--Levy separation assertions from the theorem and counterexample. In
+ST-2, retain only the ZF/ZFC cardinal-arithmetic bounds proved locally; delete
+CH/GCH independence prose until SET-12/15 proves and types it. The four
+ZF/ZFC-refutable false statements actually published remain valid because
+their refutations close from local arithmetic, not from the catalogue.
+
+The canonical Phase-3 binding amendments are also:
+
+1. Rehome `def-dependent-choice` from `compactness-in-metric-spaces` to
+   `countability-and-uncountability` immediately after `def-countable-choice`,
+   and replace its real-valued `def-sequence` dependency and both body links by
+   `def-function`.
+2. Add `countability-and-uncountability` and
+   `linear-independence-bases-and-dimension` to
+   `ordinals-and-transfinite-recursion.requires` so its published choice ledger
+   has complete earlier inputs.
+3. Move `cantor-set-baire-and-measure-zero` from ST-2's B prerequisites to its
+   A prerequisites. Add the A theorem
+   `thm-the-cardinality-of-the-continuum-is-two-to-aleph-zero` and repoint the
+   topology B consumer `ex-cardinal-functions-of-the-lower-limit-line` from the
+   ST-2 B example to that A theorem. Thus every B requires only its A companion
+   and remains a dependency leaf.
+
+Category Theory continues to own accessible/presentable categories; the
+set-theoretic phrase “accessible pointed graph” is unrelated. Abstract Algebra
+owns ring-theoretic ideals and Algebraic Geometry owns scheme spectra; ST/SET
+Boolean prime ideals and Stone spectra do not replace either interface.
+
 ## EU-1. The Topology of Euclidean Space  (spec order 257, topology)
 
 **Frontier-4 propagation, 2026-07-30.** The machine scaffold has **23 A-page
@@ -1185,3 +1229,32 @@ then, plain prose otherwise.
 - **HT-1…HT-7** wait on EU-1, FG-2, and (HT-4's dictionary only) the trig
   pages; the block is strictly chained internally.
 - Nothing here changes the CURRENT level-10 build.
+
+## Binding general-Topology reconciliation (2026-09-08)
+
+`research/plan-topology-track.md` remains authoritative for the full published
+Topology census. For the HT rows owned here, Phase 3 applies these exact
+amendments:
+
+- HT-2 B `the-fundamental-group-examples` requires only its A; move
+  `the-total-derivative` to the HT-2 A page.
+- HT-3 B `covering-spaces-and-lifting-examples` removes its three B-supplier
+  chains: `ex-trivial-coverings-and-discrete-fibre-products` ->
+  `ex-pullback-over-an-evenly-covered-open-set-is-trivial`;
+  `ex-real-line-mod-integer-translations-is-a-covering` -> the power-map and
+  unit-loop examples, transitively reaching the Hawaiian-earring example; and
+  `ex-the-unit-loop-in-real-line-mod-integers-is-essential` -> the
+  Hawaiian-earring example. Each consumer must compute directly from HT-3 A.
+- HT-5 B `the-seifert-van-kampen-theorem-examples` removes
+  `ex-fundamental-group-of-the-punctured-plane` ->
+  `ex-fundamental-groups-of-once-and-twice-punctured-two-sphere` by making the
+  latter a direct HT-5 A computation.
+- HT-6 B `classification-of-covering-spaces-examples` requires only its A;
+  move `the-seifert-van-kampen-theorem` to HT-6 A.
+- HT-7 B `applications-of-the-fundamental-group-examples` removes
+  `ex-hawaiian-earring-retracts-onto-each-circle` ->
+  `fs-every-compact-path-connected-planar-set-has-a-universal-cover`; prove the
+  false-statement witness directly from HT-7 A.
+
+No HT B item may remain a supplier. These are published Phase-3 repairs and
+create no Phase-2 root.

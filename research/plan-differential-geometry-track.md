@@ -14,12 +14,15 @@
 
 ## 0. Summary for the orchestrator
 
-**Complete.** This scaffold contains 37 A/B pairs (74 proposed pages) and
-2,059 unique proposed item ids after subjects-02 reconciliation. Every A page, including its `fs-` items, has at
+**Complete after dependency audit and cross-track reconciliation.** This scaffold contains 39 A/B pairs (78
+proposed pages), including the measurable-density bridge DG-17M inserted
+between degree and Riemannian geometry and the AT-facing Chern--Weil supplier
+DG-38 inserted after DG-37. Every A page, including its `fs-` items, has at
 most 55 items; every B page is a leaf with at most 12 items. Mechanical checks
 found no duplicate proposed id, no collision with an authored item id, no
-duplicate proposed page id, no collision with a live-plan page id, and no
-harvest disposition aimed at a nonexistent item.
+duplicate proposed page id, and no harvest disposition aimed at a nonexistent
+item. Existing page identities intentionally match the live plan; DG-17M's new
+page ids do not collide with it.
 
 ### Pairs scaffolded
 
@@ -42,6 +45,7 @@ harvest disposition aimed at a nonexistent item.
 | `DG-15` | De Rham complex, Poincaré lemma, homotopy invariance, and de Rham Mayer–Vietoris |
 | `DG-16` | AT-backed real singular interfaces, cover-small Mayer–Vietoris, smooth singular cochains, and smoothing comparison |
 | `DG-17` | De Rham theorem, compact-support top cohomology, degree, and integration pairing |
+| `DG-17M` | Measurable densities and the Radon measures defined by smooth positive densities |
 | `DG-18` | Riemannian metrics, length/distance/topology, volume, gradient, divergence, and the Hodge star |
 | `DG-19` | Connections, covariant derivatives, Levi–Civita, parallel transport, and holonomy seam |
 | `DG-20` | Geodesics, exponential/normal coordinates, variations, completeness, and Hopf–Rinow |
@@ -62,6 +66,7 @@ harvest disposition aimed at a nonexistent item.
 | `DG-35` | Symplectic foundations, compatible structures, Moser, Darboux, and Weinstein normal forms |
 | `DG-36` | Hamiltonian mechanics, Poisson algebra, variational/Legendre theory, and Liouville–Arnold |
 | `DG-37` | Hamiltonian actions, moment maps, coadjoint orbits, Noether, and regular symplectic reduction |
+| `DG-38` | Chern--Weil homomorphism, characteristic forms, transgression, and comparison with real characteristic classes |
 
 ### Full texts and research corpus obtained
 
@@ -88,8 +93,8 @@ The scaffold consumes published topology through homotopy and smooth-useful
 partitions of unity; published multivariable differentiation, Euclidean
 inverse/implicit theorems, Riemann/Jordan integration, Fubini/change of
 variables, and line integrals; published finite-dimensional multilinear,
-group, module, completeness, and fixed-point prerequisites used to build ODE
-theory (there is no published general ODE theorem); the finished
+group, module, completeness, fixed-point, and RC-10 Picard–Lindelöf
+prerequisites used to build smooth ODE dependence; the finished
 HA scaffold for **general** cochain/cohomology/LES machinery; and the finished
 MT scaffold for Lebesgue/Radon integration and recurrence. It never calls an
 empty planned page “published.”
@@ -114,8 +119,8 @@ machinery needed for de Rham, and DG-30 cites X-2 for Jordan--Chevalley under R-
    `covering-spaces-and-lifting` for their covering/globalization conclusions.
 4. DG-27 and all PBW consumers await `tensor-products-of-modules`; DG-11's
    finite-dimensional exterior algebra is self-contained and does not.
-5. DG-18/DG-22/DG-23/DG-33 await MT-11/MT-20 for measurable/Radon volume,
-   cut-locus nullity, polar integration, and Haar;
+5. DG-17M awaits MT-4/MT-8/MT-9/MT-11/MT-20 and then supplies measurable/Radon
+   volume to DG-18/DG-22/DG-23; DG-33 awaits RG-18 for Haar;
    only DG-36's optional recurrence corollary awaits MT-22.
 6. DG-33's Peter–Weyl half awaits the future Hilbert orthogonal-projection,
    orthonormal-basis, and compact/Hilbert–Schmidt operator pages; its finite-
@@ -138,9 +143,9 @@ machinery needed for de Rham, and DG-30 cites X-2 for Jordan--Chevalley under R-
 - Differentiable sphere theorems, Cheeger finiteness, soul theory, and full
   path-space Morse/index theory need a global-Riemannian sequel; the sourced
   classical comparison spine is retained.
-- General principal-connection/Chern–Weil/characteristic-class theory and
-  higher Chern–Gauss–Bonnet need their own bundle/cohomology block; this track
-  proves the classical surface theorem.
+- DG-38 now supplies the Chern--Weil/characteristic-form interface required by
+  Differential Topology. General principal-bundle gauge theory and higher
+  Chern--Gauss--Bonnet remain outside this scaffold.
 - Harish–Chandra modules, \((\mathfrak g,K)\)-modules, Plancherel, and
   Langlands classification require substantial noncompact representation and
   functional analysis; real-form structure itself is included.
@@ -261,11 +266,13 @@ These are scope denials, not gaps disguised as omissions.
    Riemannian sequel. Rauch, Riccati, Hessian/Laplacian and Bishop–Gromov
    comparison, Cartan–Hadamard, Bonnet–Myers, and Toponogov are retained:
    Datar and Eschenburg supply complete enough comparison spines for them.
-6. **General Chern–Weil theory, characteristic classes, principal-connection
-   theory, and the Chern–Gauss–Bonnet theorem in arbitrary even dimension**
-   form a separate advanced block. This track proves the classical
-   Gauss–Bonnet theorem for oriented Riemannian surfaces, including boundary,
-   and does not mislabel it as the higher-dimensional theorem.
+6. **DG-38 includes the finite-dimensional Chern--Weil interface** needed by
+   Differential Topology: invariant polynomials, characteristic forms,
+   transgression, and comparison with real characteristic classes. General
+   principal-bundle gauge theory and Chern--Gauss--Bonnet in arbitrary even
+   dimension remain separate. DG-24 proves the classical Gauss--Bonnet theorem
+   for oriented Riemannian surfaces, including boundary, and does not mislabel
+   it as the higher-dimensional theorem.
 7. **Real-form classification is not conflated with complex
    Cartan–Killing classification.** Because the dispatch assigns the whole
    abstract structure theory, the track builds a separate real-forms pair
@@ -406,34 +413,36 @@ shows the in-track spine that the orchestrator must preserve.
 | DG-7 | `whitney-embedding-tubular-neighbourhoods-and-approximation` | `whitney-embedding-tubular-neighbourhoods-and-approximation-examples` | DG-2, DG-5, DG-6 |
 | DG-8 | `euclidean-ordinary-differential-equations-with-smooth-dependence` | `euclidean-ordinary-differential-equations-with-smooth-dependence-examples` | — |
 | DG-9 | `vector-fields-flows-and-lie-derivatives` | `vector-fields-flows-and-lie-derivatives-examples` | DG-2–DG-5, DG-7, DG-8 |
-| DG-10 | `distributions-integral-manifolds-and-the-frobenius-theorem` | `distributions-and-foliations-examples` | DG-3–DG-5, DG-8, DG-9 |
-| DG-11 | `tensor-fields-exterior-algebra-and-differential-forms` | `tensor-fields-and-differential-forms-examples` | DG-3, DG-5 |
-| DG-12 | `the-exterior-derivative-and-cartan-calculus` | `exterior-calculus-computations-and-examples` | DG-9–DG-11 |
-| DG-13 | `manifolds-with-boundary-collars-and-orientations` | `boundary-and-orientation-examples` | DG-1–DG-6, DG-8–DG-12 |
-| DG-14 | `integration-of-forms-and-the-general-stokes-theorem` | `integration-and-stokes-examples` | DG-2, DG-4, DG-11–DG-13 |
-| DG-15 | `the-de-rham-complex-homotopy-and-mayer-vietoris` | `de-rham-cohomology-computations` | DG-2, DG-7, DG-11, DG-12, DG-14 |
-| DG-16 | `singular-cochains-mayer-vietoris-and-smooth-singular-comparison` | `singular-and-smooth-singular-cochain-examples` | DG-7, DG-13, DG-15; consumes AT-2/AT-3/AT-6 |
-| DG-17 | `the-de-rham-theorem-and-degree` | `de-rham-comparison-and-degree-examples` | DG-6, DG-7, DG-13–DG-16; consumes AT-6/AT-7/AT-8 |
-| DG-18 | `riemannian-metrics-length-distance-and-volume` | `riemannian-metric-and-volume-examples` | DG-2, DG-3, DG-5, DG-11–DG-14 |
-| DG-19 | `connections-levi-civita-and-parallel-transport` | `connections-and-parallel-transport-examples` | DG-2, DG-5, DG-8, DG-9, DG-11–DG-13, DG-18 |
-| DG-20 | `geodesics-the-exponential-map-completeness-and-hopf-rinow` | `geodesics-and-completeness-examples` | DG-8, DG-9, DG-18, DG-19 |
-| DG-21 | `riemann-curvature-and-riemannian-submanifolds` | `curvature-and-submanifold-examples` | DG-4, DG-5, DG-11, DG-18–DG-20 |
-| DG-22 | `jacobi-fields-conjugate-points-and-the-cut-locus` | `jacobi-field-and-cut-locus-examples` | DG-8, DG-19–DG-21 |
-| DG-23 | `riemannian-comparison-theorems` | `riemannian-comparison-examples` | DG-18–DG-22 |
-| DG-24 | `the-gauss-bonnet-theorem-for-riemannian-surfaces` | `gauss-bonnet-computations-and-examples` | DG-7, DG-13, DG-14, DG-18–DG-21 |
-| DG-25 | `lie-groups-invariant-fields-and-the-exponential-map` | `lie-groups-and-exponential-map-examples` | DG-3, DG-4, DG-8–DG-12, DG-19, DG-20 |
-| DG-26 | `lie-subgroups-actions-and-homogeneous-spaces` | `lie-subgroup-action-and-homogeneous-space-examples` | DG-7, DG-9, DG-10, DG-13, DG-20, DG-25 |
-| DG-27 | `lie-algebra-representations-enveloping-algebras-and-pbw` | `lie-algebra-representation-and-pbw-examples` | DG-11, DG-25 |
-| DG-28 | `solvable-and-nilpotent-lie-algebras` | `solvable-and-nilpotent-lie-algebra-examples` | DG-27 |
-| DG-29 | `semisimple-lie-algebras-cohomology-and-levi-theory` | `semisimple-and-levi-theory-examples` | DG-26–DG-28 |
-| DG-30 | `cartan-subalgebras-and-root-space-decompositions` | `cartan-subalgebra-and-root-space-examples` | DG-27–DG-29 |
-| DG-31 | `root-systems-dynkin-diagrams-and-cartan-killing-classification` | `root-system-and-dynkin-diagram-examples` | DG-27, DG-29, DG-30 |
-| DG-32 | `highest-weight-theory-for-complex-semisimple-lie-algebras` | `highest-weight-representation-examples` | DG-27, DG-29–DG-31; cites RL-2/RL-7 for rehomed material |
-| DG-33 | `compact-lie-groups-maximal-tori-and-peter-weyl-theory` | `compact-lie-group-and-representation-examples` | DG-18, DG-21, DG-25–DG-32 |
-| DG-34 | `real-forms-and-real-semisimple-lie-algebras` | `real-form-and-cartan-decomposition-examples` | DG-25–DG-33 |
-| DG-35 | `symplectic-manifolds-moser-stability-and-darboux-weinstein-theory` | `symplectic-foundations-and-normal-form-examples` | DG-2, DG-5, DG-7–DG-9, DG-11–DG-15, DG-18 |
-| DG-36 | `hamiltonian-mechanics-and-completely-integrable-systems` | `hamiltonian-mechanics-and-integrable-system-examples` | DG-8, DG-9, DG-12, DG-15, DG-18–DG-20, DG-35 |
-| DG-37 | `moment-maps-and-symplectic-reduction` | `moment-map-and-symplectic-reduction-examples` | DG-4, DG-26, DG-29, DG-33, DG-35, DG-36 |
+| DG-10 | `distributions-integral-manifolds-and-the-frobenius-theorem` | `distributions-integral-manifolds-and-the-frobenius-theorem-examples` | DG-3–DG-5, DG-8, DG-9 |
+| DG-11 | `tensor-fields-exterior-algebra-and-differential-forms` | `tensor-fields-exterior-algebra-and-differential-forms-examples` | DG-3, DG-5 |
+| DG-12 | `the-exterior-derivative-and-cartan-calculus` | `the-exterior-derivative-and-cartan-calculus-examples` | DG-9–DG-11; published line-integral page |
+| DG-13 | `manifolds-with-boundary-collars-and-orientations` | `manifolds-with-boundary-collars-and-orientations-examples` | DG-1–DG-6, DG-8–DG-12 |
+| DG-14 | `integration-of-forms-and-the-general-stokes-theorem` | `integration-of-forms-and-the-general-stokes-theorem-examples` | DG-2, DG-4, DG-11–DG-13 |
+| DG-15 | `the-de-rham-complex-homotopy-and-mayer-vietoris` | `the-de-rham-complex-homotopy-and-mayer-vietoris-examples` | DG-2, DG-7, DG-11, DG-12, DG-14 |
+| DG-16 | `singular-cochains-mayer-vietoris-and-smooth-singular-comparison` | `singular-cochains-mayer-vietoris-and-smooth-singular-comparison-examples` | DG-7, DG-13, DG-15; consumes AT-2/AT-3/AT-6 |
+| DG-17 | `the-de-rham-theorem-and-degree` | `the-de-rham-theorem-and-degree-examples` | DG-6, DG-7, DG-13–DG-16; consumes AT-6/AT-7/AT-8 |
+| DG-17M | `measurable-densities-and-radon-volume-on-manifolds` | `measurable-densities-and-radon-volume-on-manifolds-examples` | DG-2, DG-14; MT-4, MT-8, MT-9, MT-11, MT-20 |
+| DG-18 | `riemannian-metrics-length-distance-and-volume` | `riemannian-metrics-length-distance-and-volume-examples` | DG-2, DG-3, DG-5, DG-11–DG-14, DG-17M |
+| DG-19 | `connections-levi-civita-and-parallel-transport` | `connections-levi-civita-and-parallel-transport-examples` | DG-2, DG-5, DG-8, DG-9, DG-11–DG-13, DG-18 |
+| DG-20 | `geodesics-the-exponential-map-completeness-and-hopf-rinow` | `geodesics-the-exponential-map-completeness-and-hopf-rinow-examples` | DG-8, DG-9, DG-18, DG-19 |
+| DG-21 | `riemann-curvature-and-riemannian-submanifolds` | `riemann-curvature-and-riemannian-submanifolds-examples` | DG-4, DG-5, DG-11, DG-18–DG-20 |
+| DG-22 | `jacobi-fields-conjugate-points-and-the-cut-locus` | `jacobi-fields-conjugate-points-and-the-cut-locus-examples` | DG-8, DG-19–DG-21 |
+| DG-23 | `riemannian-comparison-theorems` | `riemannian-comparison-theorems-examples` | DG-18–DG-22 |
+| DG-24 | `the-gauss-bonnet-theorem-for-riemannian-surfaces` | `the-gauss-bonnet-theorem-for-riemannian-surfaces-examples` | DG-7, DG-13, DG-14, DG-18–DG-21 |
+| DG-25 | `lie-groups-invariant-fields-and-the-exponential-map` | `lie-groups-invariant-fields-and-the-exponential-map-examples` | DG-3, DG-4, DG-8–DG-12, DG-19, DG-20 |
+| DG-26 | `lie-subgroups-actions-and-homogeneous-spaces` | `lie-subgroups-actions-and-homogeneous-spaces-examples` | DG-7, DG-9, DG-10, DG-13, DG-20, DG-25 |
+| DG-27 | `lie-algebra-representations-enveloping-algebras-and-pbw` | `lie-algebra-representations-enveloping-algebras-and-pbw-examples` | DG-11, DG-25 |
+| DG-28 | `solvable-and-nilpotent-lie-algebras` | `solvable-and-nilpotent-lie-algebras-examples` | DG-27 |
+| DG-29 | `semisimple-lie-algebras-cohomology-and-levi-theory` | `semisimple-lie-algebras-cohomology-and-levi-theory-examples` | DG-26–DG-28 |
+| DG-30 | `cartan-subalgebras-and-root-space-decompositions` | `cartan-subalgebras-and-root-space-decompositions-examples` | DG-27–DG-29 |
+| DG-31 | `root-systems-dynkin-diagrams-and-cartan-killing-classification` | `root-systems-dynkin-diagrams-and-cartan-killing-classification-examples` | DG-27, DG-29, DG-30 |
+| DG-32 | `highest-weight-theory-for-complex-semisimple-lie-algebras` | `highest-weight-theory-for-complex-semisimple-lie-algebras-examples` | DG-27, DG-29–DG-31; cites RL-2/RL-7 for rehomed material |
+| DG-33 | `compact-lie-groups-maximal-tori-and-peter-weyl-theory` | `compact-lie-groups-maximal-tori-and-peter-weyl-theory-examples` | DG-18, DG-21, DG-25–DG-32; RG-18 Haar; Stone–Weierstrass and FA spine |
+| DG-34 | `real-forms-and-real-semisimple-lie-algebras` | `real-forms-and-real-semisimple-lie-algebras-examples` | DG-25–DG-33 |
+| DG-35 | `symplectic-manifolds-moser-stability-and-darboux-weinstein-theory` | `symplectic-manifolds-moser-stability-and-darboux-weinstein-theory-examples` | DG-2, DG-5, DG-7–DG-9, DG-11–DG-15, DG-18, DG-20; finite spectral theorem |
+| DG-36 | `hamiltonian-mechanics-and-completely-integrable-systems` | `hamiltonian-mechanics-and-completely-integrable-systems-examples` | DG-8, DG-9, DG-12, DG-15, DG-18–DG-20, DG-35 |
+| DG-37 | `moment-maps-and-symplectic-reduction` | `moment-maps-and-symplectic-reduction-examples` | DG-4, DG-26, DG-29, DG-33, DG-35, DG-36 |
+| DG-38 | `chern-weil-theory-and-characteristic-forms` | `chern-weil-theory-and-characteristic-forms-examples` | DG-12, DG-15, DG-19, DG-21, DG-25; AT vector-bundle and characteristic-class A pages |
 
 The two greenfield spines deliberately interleave where the mathematics says
 they must: DG-8 precedes flows rather than being assumed as “standard ODE,”
@@ -451,9 +460,11 @@ representation-theoretic proofs. No B page is a dependency target.
 **`requires`:** `topological-spaces-and-continuity`,
 `subspaces-products-and-quotients`, `connectedness`, `compactness`,
 `the-topology-of-euclidean-space`, `separation-axioms`,
-`urysohn-lemma-and-tietze`, `partitions-of-unity-and-paracompactness`,
-`countability-axioms-and-cardinal-functions`, `metrization-theorems`,
-`the-total-derivative`, `mixed-partials-taylor-and-extrema`
+`countability-axioms-and-cardinal-functions`, `the-total-derivative`, and
+`mixed-partials-taylor-and-extrema`. The general Urysohn, paracompactness,
+and metrization pages are intentionally not prerequisites: items 33–35 give
+the manifold-specific proofs needed here without their recorded-not-proved
+dependency cone.
 
 The first page separates three layers that are often collapsed: the
 topological manifold, an atlas of mutually compatible charts, and the maximal
@@ -582,13 +593,29 @@ needs for smooth partitions of unity.
     regularity shows this subfamily covers $M$; enumerating its compact
     closures gives a countable compact cover without selecting charts at the
     points of $M$.
-33. `thm-topological-manifolds-are-metrizable-and-paracompact` — **theorem**
-    `[LA]`. Locally compact Hausdorff gives regularity; second countability
-    gives Lindelöf under the published $\mathrm{AC}_\omega$ statement; the
-    published regular-Lindelöf theorem gives paracompactness. The alternate
-    Urysohn-metrization/Stone route and its stronger sufficient choice cost
-    are recorded but not used.
-34. `rem-manifold-conventions-and-the-role-of-second-countability` —
+33. `lem-a-topological-manifold-has-a-countable-topology-detecting-family-of-coordinate-bumps` —
+    **lemma** `[LA]`; enumerate coordinate balls whose closures lie in larger
+    chart balls. Euclidean radial cutoffs, extended by zero across the larger
+    ball boundary, give bounded continuous functions $f_n:M\to[0,1]$ that
+    separate points and detect every basic neighbourhood. The construction
+    uses the fixed countable basis from item 29, not a choice of one chart at
+    every point.
+34. `thm-a-topological-manifold-has-an-explicit-compatible-metric` —
+    **theorem** `[LA]`; with item 33's separating family set
+    $d(x,y)=\sum_{n\ge1}2^{-n}|f_n(x)-f_n(y)|$. Uniform convergence makes $d$
+    continuous, separation makes it a metric, and the neighbourhood-detection
+    property proves that its metric topology is exactly the manifold topology.
+35. `thm-topological-manifolds-are-metrizable-and-paracompact` — **theorem**
+    `[LA]`; item 34 supplies metrizability directly. For paracompactness,
+    refine item 32's countable precompact basis to a nested compact exhaustion
+    and, for a supplied open cover, take finite coordinate-ball refinements on
+    successive compact annuli. At every stage use the least finite subcover in
+    the fixed enumeration, so the countable construction adds no choice.
+    Alternating slightly larger annuli makes their union locally finite. This
+    manifold-specific proof avoids inheriting
+    recorded-not-proved model-theoretic remarks through either the general
+    Lindelöf/Urysohn/Nagata–Smirnov chain or a general metric-space theorem.
+36. `rem-manifold-conventions-and-the-role-of-second-countability` —
     **remark** `[LN]`. It quotes the adopted Lee/Merry convention, names the
     convention split, and points to the long-line witness on the companion.
 
@@ -649,9 +676,11 @@ needs for smooth partitions of unity.
   definition of a manifold,” 2.3 “Further examples of manifolds,” and 2.4
   “Maps between manifolds” (pp. 6–13).** Independent convention and examples
   control.
-- **Published topology pages 249, 255, 257, 267, 269, 273, and 275.** Items
-  29–33 quote their exact authored hypotheses; no textbook shorthand replaces
-  the published choice ledger.
+- **Published topology pages 249, 255, and 257.** Items 29–35 use their
+  local-compactness, compactness, Euclidean cutoff, and uniform-convergence
+  results. The explicit coordinate-bump metric and compact-annulus refinement prevent the
+  proof from inheriting unrelated recorded-not-proved model remarks through
+  the general metrization pages.
 
 ### Proof strategy and traps
 
@@ -662,21 +691,20 @@ new transition as a composite of already smooth transitions; smoothness is
 local. Item 18 repeats this argument for a map and is what licenses the phrase
 “one, hence every, chart.”
 
-Item 33 must follow the published topology exactly. The selected proof uses
-local compactness plus Hausdorffness for regularity, second countability plus
-the published $\mathrm{AC}_\omega$ theorem for Lindelöfness, and regular
-Lindelöf $\Rightarrow$ paracompact. It must not cite
-`thm-stone-metric-spaces-are-paracompact` first and then claim a weaker choice
-cost. Do not define a smooth structure as an arbitrary atlas, call chart
+Items 33–35 use one fixed countable family. For every $x\in U$, one coordinate
+bump is $1$ at $x$ and vanishes off $U$; this proves both separation and the
+nontrivial direction of topology compatibility for the series metric. Only
+after that, item 35 separately constructs a locally finite refinement on
+compact annuli; paracompactness is not imported from a recorded general
+metrization result. Do not define a smooth structure as an arbitrary atlas, call chart
 images “domains,” or infer smoothness of an inverse from bijectivity.
 
 **Well-definedness discharged:** maximal atlas (items 9–11), chart-independent
 $C^r$ regularity (18), restricted/product/disjoint-union smooth structures
-(13–16).
-**Choice:** items 1–15 and 17–32 are ZF relative to the supplied atlas and
-published topological facts. Item 16 is ZF for supplied countable bases and
-otherwise needs at most \(\mathrm{AC}_\omega\); item 33 inherits the same
-published \(\mathrm{AC}_\omega\)-sufficient hypothesis.
+(13–16), and topology compatibility of the explicit metric (33–35).
+**Choice:** items 1–15 and 17–35 are ZF relative to the supplied atlas,
+countable basis, and published topological facts. Item 16 is ZF for supplied
+countable bases and otherwise needs at most \(\mathrm{AC}_\omega\).
 **Forward references: NONE.**
 
 ---
@@ -1964,10 +1992,13 @@ Whitney-trick proof is not disguised as a short consequence of Sard.
     **corollary** `[LL]`.
 30. `thm-continuously-homotopic-smooth-maps-are-smoothly-homotopic` —
     **theorem** `[LA]`; reparameterize the continuous homotopy to be constant
-    on endpoint collars, extend it constantly to a continuous map on the
-    boundaryless manifold $M\times\mathbb R$, apply item 28 relative to the
-    two closed collar regions, and restrict to $M\times I$. No backward
-    citation to the not-yet-built boundary theory is used.
+    for $t\le 1/3$ and $t\ge2/3$, extend it constantly to a continuous map on
+    the boundaryless manifold $M\times\mathbb R$, and apply item 28 relative
+    to the genuinely interior closed collars $M\times(-\infty,1/4]$ and
+    $M\times[3/4,\infty)$, on open neighbourhoods of which the extended map
+    is smooth. Restrict to $M\times I$. The relative hypothesis is not
+    falsely asserted at the transition levels $1/3$ and $2/3$, and no
+    backward citation to the not-yet-built boundary theory is used.
 31. `cor-the-smooth-and-continuous-homotopy-categories-of-smooth-manifolds-have-the-same-morphism-sets` —
     **corollary** `[LL]`.
 32. `cor-a-continuous-map-from-a-closed-subset-extends-smoothly-exactly-when-it-has-a-continuous-extension-and-is-smooth-near-the-subset` —
@@ -2095,131 +2126,65 @@ versions belong to a later differential-topology sequel if needed.
 **B page id:** `euclidean-ordinary-differential-equations-with-smooth-dependence-examples`
 **`requires`:** `completeness-and-uniform-continuity`,
 `uniform-convergence-of-functions`, `properties-of-the-integral-and-the-working-ftc`,
-`the-total-derivative`,
-`mixed-partials-taylor-and-extrema`
+`the-total-derivative`, `mixed-partials-taylor-and-extrema`, and
+`picard-lindelof-and-first-order-odes`.
 
-**SEAM AMENDMENT (owner, 2026-08-19; from
-`research/plan-realanalysis-completion-track.md` §5.6).** Real analysis now
-carries **RC-10** `picard-lindelof-and-first-order-odes`, spliced strictly below
-this page: the IVP and its integral equation, Picard–Lindelöf with uniqueness,
-Picard iterates with error bounds, Grönwall, **continuous** dependence on initial
-values and parameters, the maximal continuation criterion, and Peano existence
-without uniqueness. Cite it; do not re-mint the local existence theorem.
-
-**Nothing here is dropped, and the division is the page's own title.** RC-10 stops
-at *continuous* dependence; **smooth** dependence — $C^k$ dependence of the flow on
-initial conditions and parameters, which is what flows, parallel transport and the
-exponential map actually need — is this page's and is untouched. The sentence
-below ("no local ODE theorem") is what changes: there now is one, and this page
-starts from it.
-
-The published library has Banach's fixed-point theorem and complete spaces of
-continuous functions, but no local ODE theorem. Flow, parallel transport,
-geodesic, Jacobi, and Hamiltonian arguments all need more than bare existence:
-they need uniqueness, maximal continuation, and smooth dependence on initial
-data and parameters. This pair supplies that analytic prerequisite once and
-for all, in Euclidean space, before any geometric page invokes it.
+Real analysis RC-10 supplies the IVP/integral-equation equivalence,
+Picard–Lindelöf existence and uniqueness, uniform local intervals, Grönwall,
+continuous dependence on initial values and parameters, maximal solutions and
+the compact-interior continuation criterion, and Peano existence. Those claims
+remain in the library through that explicit dependency and are not re-minted
+here. This page begins exactly where RC-10 stops: variational equations and
+$C^k$ dependence, together with the smooth fundamental theorem and the two
+completeness consequences needed by flows, parallel transport, geodesics,
+Jacobi fields, and Hamiltonian systems.
 
 ### A-page items, in dependency order
 
-**Comparison and the Picard operator**
+**Variational equations and smooth dependence**
 
-1. `def-solution-of-a-nonautonomous-first-order-system` — **definition**
-   `[LN]`. A $C^1$ curve $x:J\to U\subseteq\mathbb R^n$ solves
-   $\dot x=V(t,x)$ with $x(t_0)=x_0$ when the equation holds throughout its
-   interval domain.
-2. `def-autonomous-ordinary-differential-equation` — **definition** `[LN]`;
-   $V$ is independent of $t$.
-3. `lem-a-c1-vector-field-is-uniformly-lipschitz-on-a-compact-convex-box` —
-   **lemma** `[LL]`; bound the operator norm of $D_xV$ and use the vector
-   mean-value inequality.
-4. `lem-ode-comparison-inequality` — **lemma** `[LA]`. If an upper right
-   derivative satisfies the stated scalar differential inequality, comparison
-   with the scalar solution follows.
-5. `thm-gronwall-inequality-for-continuous-functions` — **theorem** `[LA]`.
-   Both constant- and variable-coefficient integral forms are proved.
-6. `cor-uniqueness-estimate-for-lipschitz-odes` — **corollary** `[LL]`:
-   $\lVert x(t)-y(t)\rVert\le e^{L|t-t_0|}\lVert x(t_0)-y(t_0)\rVert$.
-7. `prop-the-ode-initial-value-problem-is-equivalent-to-a-volterra-integral-equation` —
-   **proposition** `[LL]`; this uses the componentwise fundamental theorem of
-   calculus.
-8. `def-picard-operator-on-a-closed-curve-ball` — **definition** `[LN]`:
-   $(\mathcal Tx)(t)=x_0+\int_{t_0}^tV(s,x(s))\,ds$.
-9. `lem-the-closed-curve-ball-is-complete-in-the-sup-metric` — **lemma** `[LA]`.
-   It is a closed subspace of the finite product of the published complete
-   $C(K,\mathbb R)$ spaces.
-10. `lem-the-picard-operator-preserves-a-sufficiently-small-curve-ball` —
-    **lemma** `[LA]`; the time radius is chosen from the vector-field bound
-    and the spatial distance to the box boundary.
-11. `lem-the-picard-operator-is-a-contraction-for-short-time` — **lemma**
-    `[LL]`; contraction constant $Lh<1$.
-12. `thm-local-picard-lindelof-existence-and-uniqueness` — **theorem** `[LA]`.
-    Banach fixed point gives the unique local solution for a locally Lipschitz
-    right-hand side. LANDMARK.
-13. `thm-uniform-local-existence-for-nearby-initial-data` — **theorem** `[LA]`.
-    A single time interval and spatial box work for all initial points in a
-    smaller neighbourhood.
-14. `prop-picard-iteration-converges-with-an-explicit-error-bound` —
-    **proposition** `[LA]`; inherit the published Banach a priori and a
-    posteriori bounds.
-
-**Maximal solutions and continuation**
-
-15. `lem-uniqueness-glues-overlapping-ode-solutions` — **lemma** `[LL]`.
-16. `thm-existence-and-uniqueness-of-a-maximal-solution` — **theorem** `[LA]`.
-    The union of all compatible local solutions is a function on one maximal
-    open interval; no representative is chosen.
-17. `thm-ode-continuation-from-a-compact-interior-region` — **theorem** `[LA]`.
-    If $(t,x(t))$ remains in a compact subset of the ODE domain near a finite
-    endpoint, the solution extends beyond that endpoint.
-18. `cor-finite-maximal-time-forces-escape-from-every-compact-subset` —
-    **corollary** `[LL]`.
-19. `cor-a-bounded-vector-field-on-all-of-euclidean-space-is-complete` —
-    **corollary** `[LA]`; bounded speed prevents escape to infinity in finite
-    time.
-20. `cor-a-compactly-supported-smooth-euclidean-vector-field-is-complete` —
-    **corollary** `[LL]`.
-21. `cor-a-globally-lipschitz-vector-field-has-global-solutions` —
-    **corollary** `[LA]`; the Grönwall bound prevents finite-time blow-up.
-
-**Dependence on data and parameters**
-
-22. `thm-continuous-dependence-of-ode-solutions-on-initial-data` — **theorem**
-    `[LA]`; on a common compact time interval, the Grönwall estimate gives
-    quantitative dependence.
-23. `def-variational-equation-along-an-ode-solution` — **definition** `[LN]`:
+1. `def-autonomous-ordinary-differential-equation` — **definition** `[LN]`;
+   specialize RC-10's nonautonomous system to a right-hand side independent of
+   time.
+2. `def-variational-equation-along-an-ode-solution` — **definition** `[LN]`:
     $\dot A=D_xV(t,x(t))A$, $A(t_0)=I$.
-24. `lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval` —
+3. `lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval` —
     **lemma** `[LA]`; bounded coefficients on compact subintervals plus the
-    continuation theorem.
-25. `prop-a-fundamental-matrix-is-invertible` — **proposition** `[LA]`.
+    RC-10 continuation theorem.
+4. `prop-a-fundamental-matrix-is-invertible` — **proposition** `[LA]`.
     Solve the inverse equation or differentiate $B(t)A(t)$; zero determinant
     is not excluded by assertion.
-26. `thm-c1-dependence-of-solutions-on-initial-data` — **theorem** `[LA]`.
-    Difference quotients converge uniformly to item 23's solution.
-27. `thm-smooth-dependence-of-solutions-on-initial-data` — **theorem** `[LA]`.
+5. `thm-c1-dependence-of-solutions-on-initial-data` — **theorem** `[LA]`.
+    Difference quotients converge uniformly to item 2's solution, using
+    RC-10's common local interval and Grönwall estimate.
+6. `thm-smooth-dependence-of-solutions-on-initial-data` — **theorem** `[LA]`.
     Differentiate the integral equation inductively; at each order the new
     highest derivative solves an inhomogeneous linear ODE.
-28. `thm-smooth-dependence-of-ode-solutions-on-parameters` — **theorem** `[LA]`.
-    For $V(t,x,\lambda)$, adjoin $\dot\lambda=0$ and apply item 27; domain
+7. `thm-smooth-dependence-of-ode-solutions-on-parameters` — **theorem** `[LA]`.
+    For $V(t,x,\lambda)$, adjoin $\dot\lambda=0$ and apply item 6; domain
     openness and a common local interval are included in the statement.
-29. `thm-fundamental-theorem-for-autonomous-smooth-odes` — **theorem** `[LA]`.
+
+**Completeness and the smooth fundamental theorem**
+
+8. `cor-a-bounded-vector-field-on-all-of-euclidean-space-is-complete` —
+   **corollary** `[LA]`; bounded speed prevents escape to infinity, so
+   RC-10's compact-interior continuation criterion excludes a finite endpoint.
+9. `cor-a-compactly-supported-smooth-euclidean-vector-field-is-complete` —
+   **corollary** `[LL]`.
+10. `thm-fundamental-theorem-for-autonomous-smooth-odes` — **theorem** `[LA]`.
     Local existence, uniqueness, and smoothness of
     $(t,t_0,x_0)\mapsto x(t;t_0,x_0)$ are collected with their exact domain.
-30. `thm-fundamental-theorem-for-nonautonomous-smooth-odes` — **theorem**
-    `[LA]`. Adjoin the time variable $\dot s=1$ to reduce to item 29.
-31. `prop-the-maximal-solution-domain-is-open` — **proposition** `[LA]`. The
+11. `thm-fundamental-theorem-for-nonautonomous-smooth-odes` — **theorem**
+    `[LA]`. Adjoin the time variable $\dot s=1$ to reduce to item 10.
+12. `prop-the-maximal-solution-domain-is-open` — **proposition** `[LA]`. The
     set of triples $(t,t_0,x_0)$ on which the maximal solution exists is open,
     and the solution map is smooth there.
-32. `prop-solutions-compose-under-a-change-of-initial-time` — **proposition**
+13. `prop-solutions-compose-under-a-change-of-initial-time` — **proposition**
     `[LL]`: whenever both sides are defined,
     $x(t;s,x(s;t_0,x_0))=x(t;t_0,x_0)$.
 
 ### `fs-` items (A page)
 
-- `fs-continuity-of-the-vector-field-guarantees-unique-ode-solutions` —
-  **false statement** `[LL]`; $\dot x=\sqrt{|x|}$ has multiple solutions from
-  zero.
 - `fs-every-smooth-vector-field-on-euclidean-space-is-complete` — **false
   statement** `[LL]`; $\dot x=x^2$ blows up in finite time.
 - `fs-local-existence-at-each-initial-point-gives-one-uniform-time-interval-for-all-initial-points` —
@@ -2229,27 +2194,18 @@ for all, in Euclidean space, before any geometric page invokes it.
 - `fs-continuous-dependence-alone-implies-differentiable-dependence` —
   **false statement** `[LL]`; differentiability uses derivatives of the
   vector field and the variational equation.
-- `fs-the-picard-operator-is-a-contraction-on-every-time-interval` — **false
-  statement** `[LL]`; the short-time condition $Lh<1$ is essential.
 
 ### B page — `euclidean-ordinary-differential-equations-with-smooth-dependence-examples`
 
 1. `ex-a-constant-vector-field-and-translation-solutions` — **example** `[LL]`.
 2. `ex-a-linear-system-and-its-fundamental-matrix` — **example** `[LL]`.
 3. `ex-the-harmonic-oscillator-as-a-first-order-system` — **example** `[LL]`.
-4. `ex-logistic-growth-and-its-maximal-solution` — **example** `[LL]`.
-5. `ex-quadratic-growth-with-finite-time-blow-up` — **example** `[LL]`.
-6. `cex-nonuniqueness-for-a-holder-but-not-lipschitz-vector-field` —
-   **counterexample** `[LL]`; display the delayed-start family for
-   $\dot x=\sqrt{|x|}$.
-7. `ex-a-compactly-supported-vector-field-with-global-solutions` — **example**
+4. `ex-a-compactly-supported-vector-field-with-global-solutions` — **example**
    `[AA]`.
-8. `ex-smooth-dependence-in-an-ode-with-a-parameter` — **example** `[LL]`;
+5. `ex-smooth-dependence-in-an-ode-with-a-parameter` — **example** `[LL]`;
    solve $\dot x=\lambda x$ and compare with the variational equation.
-9. `ex-a-nonautonomous-equation-made-autonomous-by-adjoining-time` —
+6. `ex-a-nonautonomous-equation-made-autonomous-by-adjoining-time` —
    **example** `[LL]`.
-10. `cex-a-solution-escaping-every-compact-set-at-a-finite-endpoint` —
-    **counterexample** `[LL]`; use $x(t)=(1-t)^{-1}$.
 
 ### Sources and exact locators
 
@@ -2258,40 +2214,32 @@ for all, in Euclidean space, before any geometric page invokes it.
   (printed pp. 663–672): Theorem D.1 Fundamental Theorem for Autonomous
   ODEs, Theorem D.2 ODE Comparison, Theorem D.3 Existence, Theorem D.4
   Uniqueness, Theorem D.5 Smoothness, and Theorem D.6 Fundamental Theorem
-  for Nonautonomous ODEs.** Primary textbook proof for items 1–32. The later
+  for Nonautonomous ODEs.** Primary textbook proof for the variational and
+  smooth-dependence items above. The later
   heading “Simple Solution Techniques” is examples-only and is disposed to
   the B page.
 - **Hitchin, *Differentiable Manifolds*, Appendix §§10.2 “Existence of
   solutions of ordinary differential equations” and 10.3 “Smooth dependence”
   (pp. 88–92).** Independent concise proof using the contraction mapping
   theorem and parameter differentiation.
-- **Published analytic inputs:** `thm-banach-fixed-point`,
-  `cor-banach-error-estimates`, and `thm-c-k-complete-in-the-sup-metric` are
-  cited rather than re-minted.
+- **RC-10, `picard-lindelof-and-first-order-odes`.** Supplies all local
+  existence, uniqueness, Grönwall, continuous-dependence, maximal-solution,
+  and continuation inputs cited above.
 
 ### Proof strategy and traps
 
-The contraction is performed on a **closed curve ball** inside
-$C([t_0-h,t_0+h],\mathbb R^n)$, not on all continuous curves. One inequality
-keeps the Picard operator inside the spatial box and another gives $Lh<1$.
-These bounds must be chosen uniformly for item 13 before dependence on initial
-data can be discussed.
+The page does not infer differentiability from RC-10's continuous dependence.
+Item 5 proves convergence of difference quotients to the variational solution;
+item 6 then inducts through inhomogeneous variational equations. Item 4 proves
+invertibility by an inverse equation, rather than assuming a nonzero
+determinant. The bounded-field claim uses both bounded speed and RC-10's
+continuation criterion.
 
-For item 16, the maximal solution is a union of compatible functions, not a
-choice of one solution for every interval; uniqueness makes the union
-single-valued. Item 17 first obtains a convergent subsequence at times tending
-to the endpoint from compactness, restarts at the limit point, and uses
-uniqueness to glue. Smooth dependence is not inferred from Picard iterates
-without proof: item 26 controls difference quotients by the comparison theorem,
-and item 27 inducts through inhomogeneous variational equations.
-
-**Well-definedness discharged:** vector-valued integral equation (item 7),
-complete Picard domain (9), preservation/contraction bounds (10–12), maximal
-union (15–18), variational fundamental matrix (23–27), parameter augmentation
-(28), time augmentation (30), and the open maximal solution domain (31).
-**Choice:** ZF relative to the published Banach fixed-point theorem. The fixed
-point is unique, maximal solutions are unions, and no family of arbitrary
-solutions is selected.
+**Well-definedness discharged:** variational fundamental matrix (items 2–6),
+parameter augmentation (7), completeness (8–9), time augmentation (11), and
+the open maximal solution domain (12).
+**Choice:** inherited from RC-10; the new smooth-dependence arguments use no
+additional choice.
 **Forward references: NONE.**
 
 ---
@@ -2520,7 +2468,7 @@ boundary-tangent and inward/outward flow statements go to DG-13.
 ## DG-10. Distributions, Integral Manifolds, and the Frobenius Theorem
 
 **A page:** `distributions-integral-manifolds-and-the-frobenius-theorem`
-**B page:** `distributions-and-foliations-examples`
+**B page:** `distributions-integral-manifolds-and-the-frobenius-theorem-examples`
 **Requires:** DG-3, DG-4, DG-5, DG-8, DG-9, and published
 `inverse-and-implicit-function-theorems` (only its actual Euclidean inverse and
 implicit function theorems).
@@ -2651,7 +2599,7 @@ $d$.
 - `fs-frobenius-applies-to-any-variable-rank-family-of-subspaces` — **false
   statement** `[LL]`; singular distributions require a different theorem.
 
-### B page — `distributions-and-foliations-examples`
+### B page — `distributions-integral-manifolds-and-the-frobenius-theorem-examples`
 
 1. `ex-coordinate-plane-distribution-and-its-affine-leaves` — **example**
    `[LL]`.
@@ -2724,7 +2672,7 @@ theorem remain a named scope denial.
 ## DG-11. Tensor Fields, Exterior Algebra, and Differential Forms
 
 **A page:** `tensor-fields-exterior-algebra-and-differential-forms`
-**B page:** `tensor-fields-and-differential-forms-examples`
+**B page:** `tensor-fields-exterior-algebra-and-differential-forms-examples`
 **Requires:** DG-3 and DG-5; published
 `determinants-of-matrices-over-a-commutative-ring`,
 `dual-spaces-bilinear-forms-and-inertia`, and
@@ -2886,7 +2834,7 @@ mathematical statements and exterior-algebra proofs remain unchanged.
 - `fs-a-tensor-is-determined-by-its-values-on-diagonal-tuples-without-any-symmetry-hypothesis` —
   **false statement** `[LL]`.
 
-### B page — `tensor-fields-and-differential-forms-examples`
+### B page — `tensor-fields-exterior-algebra-and-differential-forms-examples`
 
 1. `ex-tensor-product-and-contraction-in-a-basis` — **example** `[LL]`.
 2. `ex-a-bilinear-form-as-a-type-zero-two-tensor` — **example** `[LL]`.
@@ -2964,8 +2912,9 @@ not re-minted here.
 ## DG-12. The Exterior Derivative and Cartan Calculus
 
 **A page:** `the-exterior-derivative-and-cartan-calculus`
-**B page:** `exterior-calculus-computations-and-examples`
-**Requires:** DG-9, DG-10, and DG-11.
+**B page:** `the-exterior-derivative-and-cartan-calculus-examples`
+**Requires:** DG-9, DG-10, DG-11, and published
+`line-integrals-and-the-gradient-theorem`.
 
 This pair constructs $d$ intrinsically and proves, rather than assumes, its
 coordinate independence. It then reconciles the flow definition of Lie
@@ -3089,16 +3038,16 @@ Frobenius appears only now, after all its symbols have meanings.
 - `fs-pullback-of-a-compactly-supported-form-is-always-compactly-supported` —
   **false statement** `[LL]`; this needs a proper map (or support control).
 
-### B page — `exterior-calculus-computations-and-examples`
+### B page — `the-exterior-derivative-and-cartan-calculus-examples`
 
 1. `ex-exterior-derivatives-of-coordinate-one-forms` — **example** `[LL]`.
 2. `ex-the-euclidean-area-form-is-closed` — **example** `[LL]`.
 3. `ex-the-angular-one-form-on-the-punctured-plane-is-closed` — **example**
    `[LA]`.
 4. `ex-the-angular-one-form-has-no-global-potential` — **example** `[LA]`;
-   record its local angle primitives here. Its nonexistence of a global
-   primitive is proved in DG-14 from the nonzero unit-circle period, and this
-   item carries that forward reference.
+   record its local angle primitives, compute its unit-circle line integral
+   as $2\pi$, and invoke the published gradient theorem to rule out a global
+   potential here. This leaf has no forward dependence on Stokes.
 5. `ex-curl-and-divergence-encoded-by-the-exterior-derivative` — **example**
    `[LA]`; uses Euclidean coordinates, with no metric-free identification
    claimed.
@@ -3170,7 +3119,7 @@ operators are DG-15; Maurer--Cartan equations appear in the Lie block.
 ## DG-13. Manifolds with Boundary, Collars, and Orientations
 
 **A page:** `manifolds-with-boundary-collars-and-orientations`
-**B page:** `boundary-and-orientation-examples`
+**B page:** `manifolds-with-boundary-collars-and-orientations-examples`
 **Requires:** DG-1–DG-6, DG-8–DG-12, and published
 `inverse-and-implicit-function-theorems`.
 
@@ -3388,7 +3337,7 @@ on topological invariance of domain.
 - `fs-the-boundary-orientation-is-given-by-inward-normal-first` — **false
   statement** `[LL]`; the adopted convention is outward-normal-first.
 
-### B page — `boundary-and-orientation-examples`
+### B page — `manifolds-with-boundary-collars-and-orientations-examples`
 
 1. `ex-the-closed-half-space-as-a-manifold-with-boundary` — **example**
    `[LL]`.
@@ -3482,7 +3431,7 @@ Stokes; Riemannian volume goes to DG-18; corners are a deliberate scope denial.
 ## DG-14. Integration of Forms and the General Stokes Theorem
 
 **A page:** `integration-of-forms-and-the-general-stokes-theorem`
-**B page:** `integration-and-stokes-examples`
+**B page:** `integration-of-forms-and-the-general-stokes-theorem-examples`
 **Requires:** DG-2, DG-4, and DG-11–DG-13; published
 `fubini-and-change-of-variables`, `the-riemann-integral-in-rn-and-jordan-content`,
 and `line-integrals-and-the-gradient-theorem`.
@@ -3665,7 +3614,7 @@ they already know.
 - `fs-a-smooth-density-is-the-same-thing-as-a-top-form-on-a-nonorientable-manifold` —
   **false statement** `[LL]`.
 
-### B page — `integration-and-stokes-examples`
+### B page — `integration-of-forms-and-the-general-stokes-theorem-examples`
 
 1. `ex-integrating-a-compactly-supported-form-in-two-overlapping-charts` —
    **example** `[LA]`; explicitly verifies partition independence.
@@ -3759,7 +3708,7 @@ uses Stokes on geodesic polygons but builds its own finite triangulation.
 ## DG-15. The de Rham Complex, Homotopy, Poincaré, and Mayer–Vietoris
 
 **A page:** `the-de-rham-complex-homotopy-and-mayer-vietoris`
-**B page:** `de-rham-cohomology-computations`
+**B page:** `the-de-rham-complex-homotopy-and-mayer-vietoris-examples`
 **Requires:** DG-2, DG-7, DG-11, DG-12, and DG-14; published
 `homotopy-and-homotopy-equivalence` and
 `the-fundamental-theorems-of-calculus`; homological-algebra pages
@@ -3899,7 +3848,7 @@ items. It never re-mints that machinery.
 - `fs-de-rham-cohomology-is-a-covariant-functor` — **false statement** `[LL]`;
   pullback reverses arrows.
 
-### B page — `de-rham-cohomology-computations`
+### B page — `the-de-rham-complex-homotopy-and-mayer-vietoris-examples`
 
 1. `ex-de-rham-cohomology-of-a-point` — **example** `[LL]`.
 2. `ex-de-rham-cohomology-of-euclidean-space` — **example** `[LL]`.
@@ -3986,7 +3935,7 @@ LES substitute is minted here.
 ## DG-16. Singular Cochains, Mayer–Vietoris, and Smooth Singular Comparison
 
 **A page:** `singular-cochains-mayer-vietoris-and-smooth-singular-comparison`
-**B page:** `singular-and-smooth-singular-cochain-examples`
+**B page:** `singular-cochains-mayer-vietoris-and-smooth-singular-comparison-examples`
 **Requires:** DG-7, DG-13, DG-15; AT-2 `singular-chains-and-singular-homology`,
 AT-3 `relative-homology-excision-and-mayer-vietoris`, and AT-6
 `singular-cohomology-and-coefficient-theorems`; published `free-modules-and-exact-sequences`
@@ -4143,7 +4092,7 @@ not propose a second subdivision or cover-small package.
   **false statement** `[LL]`; AT-3's chain-homotopy equivalence or items
   19–23 are required.
 
-### B page — `singular-and-smooth-singular-cochain-examples`
+### B page — `singular-cochains-mayer-vietoris-and-smooth-singular-comparison-examples`
 
 1. `ex-a-finite-chain-needing-different-subdivision-depths-on-its-simplices` —
    **example** `[AA]`.
@@ -4233,7 +4182,7 @@ must be authored first; no unnamed algebraic-topology result is assumed.
 ## DG-17. The de Rham Theorem, Compact-Support Top Cohomology, and Degree
 
 **A page:** `the-de-rham-theorem-and-degree`
-**B page:** `de-rham-comparison-and-degree-examples`
+**B page:** `the-de-rham-theorem-and-degree-examples`
 **Requires:** DG-6, DG-7, and DG-13–DG-16; AT-6
 `singular-cohomology-and-coefficient-theorems`, AT-7
 `cup-cap-cross-products-and-cohomology-rings`, and AT-8
@@ -4413,7 +4362,7 @@ Poincaré duality.
 - `fs-a-homotopy-between-proper-maps-is-automatically-a-proper-homotopy` —
   **false statement** `[LL]`.
 
-### B page — `de-rham-comparison-and-degree-examples`
+### B page — `the-de-rham-theorem-and-degree-examples`
 
 1. `ex-de-rham-integration-cochain-on-a-smooth-path` — **example** `[LL]`.
 2. `ex-chain-stokes-on-an-oriented-two-simplex` — **example** `[LA]`.
@@ -4501,11 +4450,116 @@ remain precise algebraic-topology deferrals.
 
 ---
 
+## DG-17M. Measurable Densities and Radon Volume on Manifolds
+
+**A page:** `measurable-densities-and-radon-volume-on-manifolds`
+**B page:** `measurable-densities-and-radon-volume-on-manifolds-examples`
+**Requires:** DG-2 and DG-14; `lebesgue-measure-on-euclidean-space`,
+`the-lebesgue-integral-and-the-convergence-theorems`,
+`the-lebesgue-and-riemann-integrals-compared`,
+`product-measures-and-the-fubini-tonelli-theorems`, and
+`radon-measures-and-the-riesz-markov-kakutani-theorem`.
+
+DG-14 integrates compactly supported smooth densities, but that functional
+alone does not license phrases such as “measurable set,” “metric-ball volume,”
+or “almost everywhere.” This bridge constructs the Borel measure before any
+Riemannian comparison theorem uses it. It uses MT-11's nonnegative $C^1$
+change-of-variables theorem; the published compact-support Riemann theorem is
+not silently upgraded to a measurable theorem.
+
+### A-page items in dependency order
+
+1. `def-borel-measurable-nonnegative-density-on-a-manifold` — **definition**
+   `[LN]`; in every smooth chart a density is represented by a nonnegative
+   Borel function, with the absolute-Jacobian transition law pointwise. No
+   “almost everywhere” quotient is formed before the measure exists.
+2. `lem-measurable-density-chart-integrals-agree-on-overlaps` — **lemma**
+   `[LA]`; MT-11's nonnegative $C^1$ change of variables proves equality on
+   every Borel overlap, including the value $+\infty$.
+3. `def-countable-chart-gluing-of-a-nonnegative-density-measure` —
+   **definition** `[LN]`; choose a countable locally finite chart refinement
+   and a subordinate smooth partition $(\varphi_i)$, and set
+   $\mu_\rho(A)=\sum_i\int_{\psi_i(A\cap U_i)}
+   (\varphi_i\rho)_i\,d\lambda^n$ for Borel $A$.
+4. `thm-chart-gluing-defines-a-countably-additive-borel-density-measure` —
+   **theorem** `[LA]`; nonnegative Tonelli/monotone convergence exchanges the
+   two countable sums, while local finiteness makes the pointwise partition
+   identity literal.
+5. `thm-density-measure-is-independent-of-the-chart-gluing` — **theorem**
+   `[LA]`; compare two constructions through their countable common
+   refinement and apply item 2 termwise. Thus the notation $\mu_\rho$ is
+   intrinsic, not dependent on an atlas or partition.
+6. `thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure` —
+   **theorem** `[LA]`; compact sets meet finitely many relevant chart pieces,
+   smooth coordinate coefficients are bounded there, and the supplied
+   second-countable-LCH regularity theorem upgrades the locally finite Borel
+   measure to a Radon measure. Its completion is named explicitly and is not
+   confused with the Borel sigma-algebra.
+7. `thm-density-measure-integration-agrees-with-smooth-density-integration` —
+   **theorem** `[LA]`; integration of nonnegative Borel functions is computed
+   chartwise by $\int f\rho$, and for compactly supported smooth $f$ this is
+   exactly DG-14's smooth-density integral. Signed and complex $L^1$
+   extensions cite the supplied Lebesgue integral.
+8. `cor-positive-density-measures-assign-positive-volume-to-nonempty-open-sets-and-metric-balls` —
+   **corollary** `[LA]`; a positive smooth density is bounded below on a
+   smaller coordinate ball. Hence every nonempty open set has positive
+   measure, and every ball for any topology-compatible metric is Borel and
+   has positive measure; relatively compact balls have finite measure.
+
+### `fs-` items (A page)
+
+- `fs-local-finiteness-means-finite-total-density-measure` — **false
+  statement** `[LL]`; Euclidean volume is locally finite but has infinite
+  total mass.
+- `fs-orientation-is-required-for-a-density-measure` — **false statement**
+  `[LL]`; the absolute-Jacobian transition law is precisely what removes the
+  orientation requirement.
+
+### B page — `measurable-densities-and-radon-volume-on-manifolds-examples`
+
+1. `ex-chart-gluing-recovers-euclidean-lebesgue-measure` — **example** `[LA]`.
+2. `ex-positive-weighted-volume-on-an-open-interval` — **example** `[LL]`.
+3. `ex-density-measure-in-two-overlapping-circle-charts` — **example** `[LA]`.
+4. `ex-density-measure-on-a-nonorientable-manifold` — **example** `[LA]`;
+   use the Riemannian density and no oriented atlas.
+5. `ex-zero-dimensional-density-measure-is-weighted-counting` — **example**
+   `[LL]`.
+6. `cex-a-smooth-density-can-have-infinite-total-mass` — **counterexample**
+   `[LL]`.
+7. `ex-borel-ball-volume-before-any-comparison-theorem` — **example** `[LL]`;
+   the ball is measurable because the metric induces the manifold topology,
+   not because Bishop–Gromov has already been proved.
+
+### Sources, proof strategy, and traps
+
+- **Folland, *Real Analysis*, Chs. 2–3, as harvested by MT-8/MT-11/MT-20.**
+  Supplies nonnegative integration, monotone convergence, Euclidean $C^1$
+  change of variables, and Radon regularity.
+- **Lee, *Introduction to Smooth Manifolds*, 2nd ed., Ch. 16 “Integration on
+  Manifolds.”** Supplies the density transition law and chartwise gluing
+  convention, reconciled with DG-14.
+
+The construction is made on Borel sets first. Completion comes only after
+$\mu_\rho$ exists. Independence is proved with a common refinement, not by
+declaring chart integrals coordinate-free. Positivity on open sets is a local
+coordinate estimate and does not use any later Riemannian comparison theorem.
+
+**Well-definedness discharged:** Borel chart representatives and overlap
+change of variables (items 1–2), countable additivity and gluing independence
+(3–5), Radon completion (6), and compatibility of measurable and smooth
+integration (7–8).
+**Choice:** inherits DG-2's countable locally finite refinement/partition
+ledger and MT's countable summation ledger; no family of arbitrary charts is
+selected.
+**Forward references: NONE.** The B page is a leaf.
+
+---
+
 ## DG-18. Riemannian Metrics, Length, Distance, and Volume
 
 **A page:** `riemannian-metrics-length-distance-and-volume`
-**B page:** `riemannian-metric-and-volume-examples`
-**Requires:** DG-2, DG-3, DG-5, DG-11–DG-14, and published
+**B page:** `riemannian-metrics-length-distance-and-volume-examples`
+**Requires:** DG-2, DG-3, DG-5, DG-11–DG-14, DG-17M, and published
 `compactness` and `line-integrals-and-the-gradient-theorem`.
 
 All metrics are positive definite. Pseudo-Riemannian terminology is kept out
@@ -4556,7 +4610,7 @@ induces and reconciles signed volume forms with orientation-free densities.
     subdivision and one-sided endpoint derivatives.
 16. `def-riemannian-speed-and-length` — **definition** `[LN]`:
     $L_g(\gamma)=\int_a^b|\dot\gamma(t)|_gdt$.
-17. `lem-riemannian-length-is-independent-of-piecewise-smooth-subdivision` —
+17. `lem-riemannian-length-is-independent-of-piecewise-c-one-subdivision` —
     **lemma** `[LL]`.
 18. `thm-riemannian-length-is-invariant-under-orientation-preserving-piecewise-c-one-reparametrization` —
     **theorem** `[LA]`; constant intervals are allowed in the monotone
@@ -4564,14 +4618,18 @@ induces and reconciles signed volume forms with orientation-free densities.
 19. `prop-length-is-additive-under-concatenation-and-invariant-under-reversal` —
     **proposition** `[LL]`.
 20. `lem-local-comparison-of-a-riemannian-metric-with-the-euclidean-metric` —
-    **lemma** `[LA]`. On a relatively compact coordinate neighbourhood there
-    are $0<c\le C$ with
+    **lemma** `[LA]`. If a compact set $K$ lies in one coordinate chart,
+    continuity of the smallest and largest eigenvalues gives $0<c\le C$ with
     $c|v|^2\le g_{ij}(x)v^iv^j\le C|v|^2$.
-21. `def-riemannian-distance-on-a-connected-manifold` — **definition** `[LN]`:
-    $d_g(p,q)=\inf L_g(\gamma)$ over piecewise smooth curves from $p$ to $q$.
-22. `lem-any-two-points-in-a-connected-smooth-manifold-can-be-joined-by-a-piecewise-smooth-curve` —
+    The neighbourhood form used later first chooses a coordinate ball whose
+    closure is compact and remains inside the chart; relative compactness by
+    itself does not put the closure in a single chart.
+21. `lem-any-two-points-in-a-connected-smooth-manifold-can-be-joined-by-a-piecewise-c-one-curve` —
     **lemma** `[LA]`; connected plus local path connectedness gives path
     connectedness, then finitely many chart segments smooth the path.
+22. `def-riemannian-distance-on-a-connected-manifold` — **definition** `[LN]`:
+    $d_g(p,q)=\inf L_g(\gamma)$ over the nonempty family of piecewise $C^1$
+    curves supplied by item 21.
 23. `thm-riemannian-distance-is-a-metric` — **theorem** `[LA]`; positivity
     uses item 20 on a coordinate ball separating distinct endpoints.
 24. `thm-the-riemannian-distance-topology-is-the-manifold-topology` —
@@ -4606,10 +4664,12 @@ induces and reconciles signed volume forms with orientation-free densities.
     **proposition** `[LA]`.
 35. `def-riemannian-volume-of-a-compactly-supported-smooth-density` —
     **definition** `[LN]`; cite DG-14.
-36. `rem-riemannian-volume-measure` — **remark** `[LN]`; the Radon measure
-    $\operatorname{vol}_g(A)=\int_A dV_g$ for measurable $A$, including
-    arbitrary metric balls, cites measure theory's chartwise Lebesgue/Radon
-    construction and is not used until DG-23.
+36. `prop-riemannian-volume-is-the-radon-measure-of-the-riemannian-density` —
+    **proposition** `[LL]`; apply DG-17M to $dV_g$ and write
+    $\operatorname{vol}_g(A)=\mu_{dV_g}(A)$ for Borel or completed-measurable
+    $A$. Metric balls are Borel because item 24 identifies the metric and
+    manifold topologies. This is a proved supplier for DG-22 and DG-23, not a
+    remark promising a future construction.
 37. `def-riemannian-divergence` — **definition** `[LN]`:
     $\mathcal L_XdV_g=(\operatorname{div}_gX)dV_g$; this is orientation
     independent because the density version agrees.
@@ -4653,7 +4713,7 @@ induces and reconciles signed volume forms with orientation-free densities.
 - `fs-the-hodge-star-is-defined-without-an-orientation` — **false statement**
   `[LL]` in the top-form convention used here.
 
-### B page — `riemannian-metric-and-volume-examples`
+### B page — `riemannian-metrics-length-distance-and-volume-examples`
 
 1. `ex-the-euclidean-metric-and-its-musical-maps` — **example** `[LL]`.
 2. `ex-the-round-metric-on-the-sphere-as-an-induced-metric` — **example**
@@ -4721,7 +4781,7 @@ metric-ball volume. Hodge analysis is owed to PDE.
 ## DG-19. Connections, Levi–Civita, and Parallel Transport
 
 **A page:** `connections-levi-civita-and-parallel-transport`
-**B page:** `connections-and-parallel-transport-examples`
+**B page:** `connections-levi-civita-and-parallel-transport-examples`
 **Requires:** DG-2, DG-5, DG-8, DG-9, DG-11–DG-13, and DG-18.
 
 Connections are first constructed on arbitrary smooth vector bundles; a
@@ -4873,7 +4933,7 @@ existence and uniqueness proved.
 - `fs-every-connection-on-a-riemannian-vector-bundle-is-metric-compatible` —
   **false statement** `[LL]`.
 
-### B page — `connections-and-parallel-transport-examples`
+### B page — `connections-levi-civita-and-parallel-transport-examples`
 
 1. `ex-the-flat-connection-on-a-trivial-vector-bundle` — **example** `[LL]`.
 2. `ex-a-connection-one-form-on-a-trivial-line-bundle` — **example** `[LL]`.
@@ -4942,7 +5002,7 @@ DG-21 defines its curvature; holonomy theory beyond the definition is deferred.
 ## DG-20. Geodesics, the Exponential Map, Completeness, and Hopf–Rinow
 
 **A page:** `geodesics-the-exponential-map-completeness-and-hopf-rinow`
-**B page:** `geodesics-and-completeness-examples`
+**B page:** `geodesics-the-exponential-map-completeness-and-hopf-rinow-examples`
 **Requires:** DG-8, DG-9, DG-18, and DG-19; published `compactness` and
 `completeness-and-uniform-continuity`.
 
@@ -4998,8 +5058,10 @@ by Gauss's lemma and Hopf–Rinow.
     `[LA]`: $g_{ij}(p)=\delta_{ij}$ for an orthonormal starting basis,
     $\Gamma^k{}_{ij}(p)=0$, and radial lines are geodesics.
 17. `thm-existence-of-geodesically-convex-neighborhoods` — **theorem** `[LA]`;
-    sufficiently small neighborhoods have a unique geodesic segment between
-    any two points that stays inside and varies smoothly with the endpoints.
+    sufficiently small neighborhoods have a unique **minimizing** geodesic
+    segment between any two points, that segment stays inside, and it varies
+    smoothly with the endpoints. Thus finite nonempty intersections of such
+    strongly convex neighborhoods are again strongly convex.
 18. `def-injectivity-radius-at-a-point-and-of-a-manifold` — **definition**
     `[LN]`; pointwise supremum of radii on which $\exp_p$ is diffeomorphic,
     global infimum over $p$.
@@ -5089,7 +5151,7 @@ by Gauss's lemma and Hopf–Rinow.
 - `fs-geodesic-completeness-means-the-manifold-is-compact` — **false
   statement** `[LL]`; Euclidean space is complete and noncompact.
 
-### B page — `geodesics-and-completeness-examples`
+### B page — `geodesics-the-exponential-map-completeness-and-hopf-rinow-examples`
 
 1. `ex-straight-lines-as-euclidean-geodesics` — **example** `[LL]`.
 2. `ex-great-circles-as-round-sphere-geodesics` — **example** `[LA]`.
@@ -5166,7 +5228,7 @@ builds their path-lifting argument locally in DG-23/Lie theory.
 ## DG-21. Curvature and Riemannian Submanifolds
 
 **A page:** `riemann-curvature-and-riemannian-submanifolds`
-**B page:** `curvature-and-submanifold-examples`
+**B page:** `riemann-curvature-and-riemannian-submanifolds-examples`
 **Requires:** DG-4, DG-5, DG-11, and DG-18–DG-20.
 
 The sign convention from §3.2 is repeated on the page before any identity.
@@ -5342,7 +5404,7 @@ explain which part of submanifold curvature is intrinsic.
 - `fs-zero-mean-curvature-implies-a-submanifold-is-totally-geodesic` — **false
   statement** `[LL]`; only the trace of $\mathrm{II}$ vanishes.
 
-### B page — `curvature-and-submanifold-examples`
+### B page — `riemann-curvature-and-riemannian-submanifolds-examples`
 
 1. `ex-euclidean-space-has-zero-curvature` — **example** `[LL]`.
 2. `ex-the-round-sphere-has-positive-constant-sectional-curvature` —
@@ -5382,8 +5444,9 @@ explain which part of submanifold curvature is intrinsic.
   and Thms. 13.1.10 and 13.2.1. The Yamabe theorem in §13.3 (Thm. 13.3.5 and
   Cor. 13.3.6) is `out-of-scope`: it requires nonlinear elliptic PDE.
 - **Merry, connection-curvature portions following Lecture 28.** Independent
-  vector-bundle curvature and structure-equation check; principal-connection
-  and Chern–Weil developments are deferred.
+  vector-bundle curvature and structure-equation check. DG-38 supplies the
+  needed Chern--Weil continuation from Bott and Milnor--Stasheff; general
+  principal-connection gauge theory remains deferred.
 
 ### Proof strategy and traps
 
@@ -5407,15 +5470,16 @@ ODE already supplied; they are ZF. The existence of the starting metric and
 connection retains the earlier DG-2 choice boundary, with no new choice here.
 **Forward references:** DG-22 linearizes geodesics to Jacobi fields; DG-23
 uses Ricci and sectional bounds in comparison; DG-24 integrates Gaussian
-curvature. Einstein geometry, Yamabe theory, and Chern–Weil theory are
-deferred; the algebraic Ricci–Weyl decomposition itself is included above.
+curvature; DG-38 later consumes curvature and Bianchi for Chern--Weil forms.
+Einstein and Yamabe theory remain deferred; the algebraic Ricci–Weyl
+decomposition itself is included above.
 
 ---
 
 ## DG-22. Jacobi Fields, Conjugate Points, and the Cut Locus
 
 **A page:** `jacobi-fields-conjugate-points-and-the-cut-locus`
-**B page:** `jacobi-field-and-cut-locus-examples`
+**B page:** `jacobi-fields-conjugate-points-and-the-cut-locus-examples`
 **Requires:** DG-8 and DG-19–DG-21; a second-order Jacobi equation is converted
 to the first-order Euclidean system supplied by DG-8 rather than citing an
 unavailable general second-order ODE page.
@@ -5571,7 +5635,7 @@ claims is silently asserted on an incomplete manifold.
 - `fs-nullity-of-the-cut-locus-follows-merely-because-it-has-empty-interior` —
   **false statement** `[LL]`; the radial graph/Fubini proof is required.
 
-### B page — `jacobi-field-and-cut-locus-examples`
+### B page — `jacobi-fields-conjugate-points-and-the-cut-locus-examples`
 
 1. `ex-jacobi-fields-in-euclidean-space` — **example** `[LL]`; $J(t)=A+tB$.
 2. `ex-jacobi-fields-in-constant-sectional-curvature` — **example** `[LA]`;
@@ -5643,7 +5707,7 @@ index theory remains deferred.
 ## DG-23. Riemannian Comparison Theorems
 
 **A page:** `riemannian-comparison-theorems`
-**B page:** `riemannian-comparison-examples`
+**B page:** `riemannian-comparison-theorems-examples`
 **Requires:** DG-18–DG-22; homological/topological page
 `covering-spaces-and-lifting`; measure-theory pages supplying Lebesgue/Radon
 integration, Fubini, and chartwise Riemannian volume.
@@ -5826,7 +5890,7 @@ later.
 - `fs-the-laplace-beltrami-definition-licenses-the-use-of-all-euclidean-harmonic-function-theory-on-manifolds` —
   **false statement** `[LL]`; analytic results require the PDE seam.
 
-### B page — `riemannian-comparison-examples`
+### B page — `riemannian-comparison-theorems-examples`
 
 1. `ex-model-jacobi-fields-in-positive-zero-and-negative-curvature` —
    **example** `[LL]`.
@@ -5907,7 +5971,7 @@ Riemannian volume must precede items 19–20/25 and 27–35 respectively.
 ## DG-24. The Gauss–Bonnet Theorem for Riemannian Surfaces
 
 **A page:** `the-gauss-bonnet-theorem-for-riemannian-surfaces`
-**B page:** `gauss-bonnet-computations-and-examples`
+**B page:** `the-gauss-bonnet-theorem-for-riemannian-surfaces-examples`
 **Requires:** DG-7, DG-13, DG-14, and DG-18–DG-21.
 
 This is the classical two-dimensional theorem, including smooth boundary and
@@ -5985,21 +6049,25 @@ denied theory.
     with boundary edges lying in $\partial M$.
 19. `def-geodesic-triangulation` — **definition** `[LN]`; its edges are
     geodesic segments except prescribed boundary arcs in the boundary case.
-20. `lem-a-compact-riemannian-surface-has-a-finite-strongly-convex-cover` —
-    **lemma** `[LA]`; the set of **all** strongly convex normal
-    neighbourhoods is a canonically specified open cover, and compactness
-    extracts a finite subcover. No family-wide choice of one neighbourhood at
-    every point is hidden in the proof.
-21. `lem-general-position-vertex-perturbation-for-a-finite-surface-cellulation` —
-    **lemma** `[LA]`; perturb the finite vertex data, relative to prescribed
-    boundary vertices, into general position inside a fixed finite strongly
-    convex cover. Edges are not perturbed after being made geodesic.
+20. `lem-a-compact-riemannian-surface-has-a-uniform-short-geodesic-radius` —
+    **lemma** `[LA]`; a finite strongly convex normal cover and its Lebesgue
+    number give $r>0$ such that every pair at distance below $3r$ lying in a
+    selected cover member has a unique minimizing segment there. Boundary
+    half-charts supply the corresponding collar statement with boundary arcs
+    retained as prescribed edges.
+21. `lem-a-finite-short-geodesic-network-gives-a-curvilinear-polygon-cellulation` —
+    **lemma** `[LA]`; choose a finite $r$-net (and a finite boundary net), join
+    the required nearby vertices by the unique short segments, perturb the
+    finite initial data into general position before joining, and add the
+    finitely many transverse intersection points as vertices. The resulting
+    embedded finite graph has disk faces subordinate to the convex cover.
+    This constructs the cellulation; it does not assume one.
 22. `thm-finite-geodesic-triangulation-of-a-compact-riemannian-surface` —
-    **theorem** `[LA]`; refine a finite cellulation subordinate to the convex
-    cover, perturb its finite vertex data as in item 21, and **then** reconnect
-    sufficiently close vertices by the unique short geodesics in the fixed
-    strongly convex charts before triangulating the polygonal cells. No
-    perturbation of already geodesic edges is claimed. LANDMARK.
+    **theorem** `[LA]`; apply item 21, then place a vertex in each convex
+    polygonal face and join it to the boundary vertices by unique short
+    geodesics, subdividing further if a face meets more than one convex chart.
+    Prescribed boundary arcs remain boundary edges. All choices are finite,
+    and no perturbation of already geodesic edges is claimed. LANDMARK.
 23. `def-euler-characteristic-of-a-finitely-triangulated-compact-surface` —
     **definition** `[LN]`: $\chi(M;\mathcal T)=V-E+F$.
 24. `lem-euler-characteristic-is-unchanged-by-edge-and-face-subdivision` —
@@ -6066,7 +6134,7 @@ denied theory.
 - `fs-classical-gauss-bonnet-by-itself-classifies-compact-surfaces` — **false
   statement** `[LL]`; classification is separate topology.
 
-### B page — `gauss-bonnet-computations-and-examples`
+### B page — `the-gauss-bonnet-theorem-for-riemannian-surfaces-examples`
 
 1. `ex-gauss-bonnet-for-a-euclidean-disk` — **example** `[LL]`; boundary
    geodesic curvature integrates to $2\pi$.
@@ -6105,6 +6173,14 @@ denied theory.
   Gauss–Bonnet). Datar Thm. 2.2.2, surface classification, is `deferred` for
   the specific reason that no classification result is needed for the
   curvature identity.
+- **Jost, *Riemannian Geometry and Geometric Analysis*, §2.3.A
+  “Triangulations,” especially Theorem 2.3.A.1 and its construction on pp.
+  31–39 (the theorem and its detailed proof are on pp. 37–39) of the complete
+  author-hosted text.** This is the full proof control
+  for items 20–22: obtain a uniform short-geodesic radius, choose finitely many
+  points, form a finite geodesic network with finitely many intersections, and
+  subdivide the resulting polygons. The boundary variant uses the collar
+  already supplied by DG-13.
 - **Lee, Ch. 8 Theorema Egregium and DG-21.** This is the independent
   intrinsic-curvature input ensuring $K$ is a metric invariant before it is
   integrated.
@@ -6117,9 +6193,11 @@ $k_gds=d\theta+\omega$ along the boundary. Stokes and Hopf's turning theorem
 therefore give the disk formula with exterior angles. This calculation fixes
 every sign before triangulation.
 
-Compactness gives a finite strongly convex cover. The scaffold perturbs finite
-vertex data first and only then joins nearby vertices by unique short
-geodesics. Summing local formulas over any resulting triangulation cancels
+Compactness gives a uniform short-geodesic scale and a finite net. The finite
+geodesic network is built before its disk faces are subdivided, so no
+unprovided “finite cellulation” enters the proof. Vertex data are perturbed
+first and only then joined by unique short geodesics. Summing local formulas
+over the resulting triangulation cancels
 each interior edge with the reverse orientation; the vertex angle sum leaves
 exactly $2\pi(V-E+F)$. Because this equals one fixed geometric integral,
 independence of the geodesic triangulation follows without a false finite-
@@ -6142,7 +6220,7 @@ and Chern–Gauss–Bonnet are not proved or used.
 ## DG-25. Lie Groups, Invariant Fields, and the Exponential Map
 
 **A page:** `lie-groups-invariant-fields-and-the-exponential-map`
-**B page:** `lie-groups-and-exponential-map-examples`
+**B page:** `lie-groups-invariant-fields-and-the-exponential-map-examples`
 **Requires:** DG-3, DG-4, DG-8–DG-12, DG-19–DG-20, and published
 group/matrix pages `monoids-groups-and-subgroups`,
 `matrices-and-the-matrix-of-a-linear-map`, and
@@ -6278,7 +6356,7 @@ later fundamental-field convention once.
 - `fs-differential-at-the-identity-determines-a-homomorphism-from-a-disconnected-lie-group` —
   **false statement** `[LL]`; component data remain.
 
-### B page — `lie-groups-and-exponential-map-examples`
+### B page — `lie-groups-invariant-fields-and-the-exponential-map-examples`
 
 1. `ex-the-additive-and-multiplicative-real-lie-groups` — **example** `[LL]`.
 2. `ex-general-and-special-linear-lie-groups` — **example** `[LA]`; compute
@@ -6350,7 +6428,7 @@ homogeneous spaces; DG-27 develops abstract representation/enveloping theory.
 ## DG-26. Lie Subgroups, Actions, and Homogeneous Spaces
 
 **A page:** `lie-subgroups-actions-and-homogeneous-spaces`
-**B page:** `lie-subgroup-action-and-homogeneous-space-examples`
+**B page:** `lie-subgroups-actions-and-homogeneous-spaces-examples`
 **Requires:** DG-7, DG-9–DG-10, DG-13, DG-20, and DG-25; published topology
 `subspaces-products-and-quotients`; planned topology
 `covering-spaces-and-lifting` for items 43–46 only.
@@ -6515,7 +6593,7 @@ consumed by symplectic reduction.
 - `fs-the-exp-tx-fundamental-field-convention-is-a-bracket-homomorphism-for-left-actions` —
   **false statement** `[LL]`; it is an antihomomorphism.
 
-### B page — `lie-subgroup-action-and-homogeneous-space-examples`
+### B page — `lie-subgroups-actions-and-homogeneous-spaces-examples`
 
 1. `ex-an-irrational-line-as-a-dense-immersed-lie-subgroup-of-a-torus` —
    **example** `[LA]`.
@@ -6588,7 +6666,7 @@ are ZF. Items 43–46 inherit the future covering-space choice ledger.
 ## DG-27. Lie Algebra Representations, Enveloping Algebras, and PBW
 
 **A page:** `lie-algebra-representations-enveloping-algebras-and-pbw`
-**B page:** `lie-algebra-representation-and-pbw-examples`
+**B page:** `lie-algebra-representations-enveloping-algebras-and-pbw-examples`
 **Requires:** DG-11 and DG-25; abstract-algebra pages
 `tensor-products-of-modules`, `modules-and-module-homomorphisms`,
 `free-modules-and-exact-sequences`, `rings-subrings-and-integral-domains`,
@@ -6733,7 +6811,7 @@ theoretic quotients and filtrations.
 - `fs-every-representation-of-a-lie-algebra-is-completely-reducible` — **false
   statement** `[LL]`; solvable examples have nonsplit invariant flags.
 
-### B page — `lie-algebra-representation-and-pbw-examples`
+### B page — `lie-algebra-representations-enveloping-algebras-and-pbw-examples`
 
 1. `ex-adjoint-and-trivial-lie-algebra-representations` — **example** `[LL]`.
 2. `ex-standard-representations-of-classical-matrix-lie-algebras` —
@@ -6799,7 +6877,7 @@ before items 15–38. The future build must substitute its final stable ids.
 ## DG-28. Solvable and Nilpotent Lie Algebras
 
 **A page:** `solvable-and-nilpotent-lie-algebras`
-**B page:** `solvable-and-nilpotent-lie-algebra-examples`
+**B page:** `solvable-and-nilpotent-lie-algebras-examples`
 **Requires:** DG-27; published finite-dimensional linear algebra
 `eigenvalues-eigenvectors-and-the-characteristic-polynomial`,
 `linear-maps-rank-nullity-and-quotient-spaces`.
@@ -6911,8 +6989,11 @@ inherit group-theoretic ids or definitions.
     this bridge definition is expanded and related to the Killing form in
     DG-29.
 36. `def-reductive-lie-algebra-by-semisimple-derived-algebra-and-center` —
-    **definition** `[LN]` in characteristic zero; equivalent formulations are
-    deferred until semisimplicity is developed.
+    **definition** `[LN]` in characteristic zero:
+    $\mathfrak g=Z(\mathfrak g)\oplus[\mathfrak g,\mathfrak g]$ with the
+    derived algebra semisimple. This is the convention used by all later
+    pages; its equivalence to “the radical equals the center” and to complete
+    reducibility of the adjoint representation is deferred until DG-29.
 
 ### `fs-` items (A page)
 
@@ -6930,7 +7011,7 @@ inherit group-theoretic ids or definitions.
   **false statement** `[LL]`; that set need not be a linear ideal in the
   asserted generality.
 
-### B page — `solvable-and-nilpotent-lie-algebra-examples`
+### B page — `solvable-and-nilpotent-lie-algebras-examples`
 
 1. `ex-abelian-lie-algebras-are-nilpotent-of-class-one` — **example** `[LL]`.
 2. `ex-the-heisenberg-lie-algebra-is-two-step-nilpotent` — **example** `[LL]`.
@@ -6999,7 +7080,7 @@ Levi decomposition, Ado, and integration of Lie algebras.
 ## DG-29. Semisimple Lie Algebras, Cohomology, Levi Theory, and Integration
 
 **A page:** `semisimple-lie-algebras-cohomology-and-levi-theory`
-**B page:** `semisimple-and-levi-theory-examples`
+**B page:** `semisimple-lie-algebras-cohomology-and-levi-theory-examples`
 **Requires:** DG-26–DG-28; HA pages `chain-complexes-and-homology` and
 `long-exact-sequences-in-homology`; planned topology
 `covering-spaces-and-lifting` for the simply connected/global integration
@@ -7157,7 +7238,7 @@ group integration statements are real.
 - `fs-isomorphic-lie-algebras-determine-isomorphic-connected-lie-groups` —
   **false statement** `[LL]`; global central quotients differ.
 
-### B page — `semisimple-and-levi-theory-examples`
+### B page — `semisimple-lie-algebras-cohomology-and-levi-theory-examples`
 
 1. `ex-killing-form-of-sl-two` — **example** `[LA]`.
 2. `ex-classical-simple-lie-algebras-and-their-killing-forms` — **example**
@@ -7239,7 +7320,7 @@ precede 34–40. These are not re-minted.
 ## DG-30. Cartan Subalgebras and Root-Space Decompositions
 
 **A page:** `cartan-subalgebras-and-root-space-decompositions`
-**B page:** `cartan-subalgebra-and-root-space-examples`
+**B page:** `cartan-subalgebras-and-root-space-decompositions-examples`
 **Requires:** DG-27–DG-29 and abstract algebra X-2
 `the-spectral-theorem-and-singular-value-decomposition`, which supplies the
 finite-dimensional additive Jordan--Chevalley decomposition. R-5 forbids the
@@ -7309,9 +7390,18 @@ subalgebra of an arbitrary Lie algebra is **nilpotent and self-normalizing**;
 19. `prop-bracket-of-opposite-root-spaces-is-the-root-line-in-the-cartan-subalgebra` —
     **proposition** `[LA]`:
     $[\mathfrak g_\alpha,\mathfrak g_{-\alpha}]=\mathbb C H_\alpha$.
-20. `prop-no-nonzero-multiple-of-a-root-beyond-sign-is-a-root` —
-    **proposition** `[LA]` after the $\mathfrak{sl}_2$ analysis; this proves
-    reducedness rather than assuming it.
+20. `lem-killing-length-of-a-root-is-nonzero` — **lemma** `[LA]`;
+    $B(H_\alpha,H_\alpha)=\alpha(H_\alpha)\ne0$. Choose
+    $x\in\mathfrak g_\alpha$ and $y\in\mathfrak g_{-\alpha}$ with
+    $B(x,y)=1$, so item 19 gives $[x,y]=H_\alpha$. If
+    $\alpha(H_\alpha)=0$, the three-dimensional subalgebra spanned by
+    $x,y,H_\alpha$ is solvable. Lie's theorem triangularizes its adjoint
+    action on $\mathfrak g$, and its derived element $H_\alpha$ therefore
+    acts nilpotently. But $H_\alpha\in\mathfrak h$ acts semisimply, so
+    $\operatorname{ad}H_\alpha=0$; the zero centre of semisimple
+    $\mathfrak g$ then forces $H_\alpha=0$, contradicting $\alpha\ne0$.
+    Thus the coroot denominator is proved before it is used; nondegeneracy of
+    $B|_{\mathfrak h}$ alone would not suffice over $\mathbb C$.
 
 **Root $\mathfrak{sl}_2$ theory and strings**
 
@@ -7338,7 +7428,9 @@ subalgebra of an arbitrary Lie algebra is **nilpotent and self-normalizing**;
     **theorem** `[LA]`; use the root-string $\mathfrak{sl}_2$ module and
     Killing pairing.
 27. `cor-the-only-scalar-multiples-of-a-root-that-are-roots-are-plus-or-minus-the-root` —
-    **corollary** `[LL]`; reconciles item 20 after its proof dependency.
+    **corollary** `[LA]`; apply the root-string $\mathfrak{sl}_2$ module to
+    prove reducedness here, after every required rank-one result, rather than
+    asserting it before the $\mathfrak{sl}_2$ analysis.
 28. `def-root-reflection-from-a-coroot` — **definition** `[LN]`:
     $s_\alpha(\lambda)=\lambda-\lambda(h_\alpha)\alpha$.
 29. `thm-root-reflections-preserve-the-root-set` — **theorem** `[LA]`; reverse
@@ -7386,7 +7478,7 @@ subalgebra of an arbitrary Lie algebra is **nilpotent and self-normalizing**;
 - `fs-the-root-space-decomposition-classifies-real-semisimple-lie-algebras-with-no-extra-data` —
   **false statement** `[LL]`; real forms are DG-34.
 
-### B page — `cartan-subalgebra-and-root-space-examples`
+### B page — `cartan-subalgebras-and-root-space-decompositions-examples`
 
 1. `ex-cartan-subalgebra-and-roots-of-sl-two` — **example** `[LA]`.
 2. `ex-diagonal-cartan-subalgebra-and-roots-of-sl-n` — **example** `[LA]`:
@@ -7401,7 +7493,7 @@ subalgebra of an arbitrary Lie algebra is **nilpotent and self-normalizing**;
 9. `cex-a-maximal-abelian-subalgebra-that-is-not-a-cartan-subalgebra-in-a-nonsemisimple-algebra` —
    **counterexample** `[LA]`.
 10. `cex-a-nonreduced-restricted-root-system-of-type-bc` — **counterexample**
-    `[LL]`; $BC_n$ is reserved for DG-34 and does not contradict item 31.
+    `[LL]`; $BC_n$ is reserved for DG-34 and does not contradict item 27.
 11. `ex-weyl-reflection-in-sl-two` — **example** `[LL]`.
 12. `ex-the-killing-form-identifies-roots-with-coroot-directions` —
     **example** `[LA]`.
@@ -7419,6 +7511,12 @@ subalgebra of an arbitrary Lie algebra is **nilpotent and self-normalizing**;
 - **Etingof, Lie algebra notes, sections on Cartan subalgebras, roots of
   semisimple Lie algebras, and $\mathfrak{sl}_2$ theory.** Independent proof
   source for items 9–31.
+- **Erdmann–Wildon, *Introduction to Lie Algebras*, Chapter 10, Lemmas 10.5
+  and 10.6 (pp. 97–100).** Full-text proof control for items 19–22. Lemma
+  10.5 proves the crucial nonzero root length by applying Lie's theorem to the
+  solvable span of $x,y,[x,y]$ under the contrary assumption; this occurs
+  before the coroot is normalized and before root strings are used. Lemma
+  10.6 identifies $[x,y]$ with the Killing-dual root line.
 - **Humphreys, *Introduction to Lie Algebras and Representation Theory*, Chs.
   7–10 (Cartan subalgebras, root-space decomposition, and root strings).**
   Standard statement control, subject to legal source availability at build
@@ -7453,7 +7551,7 @@ restricted roots separately.
 ## DG-31. Root Systems, Dynkin Diagrams, and Cartan–Killing Classification
 
 **A page:** `root-systems-dynkin-diagrams-and-cartan-killing-classification`
-**B page:** `root-system-and-dynkin-diagram-examples`
+**B page:** `root-systems-dynkin-diagrams-and-cartan-killing-classification-examples`
 **Requires:** DG-27, DG-29, and DG-30; published Euclidean inner-product and
 finite-graph/tree machinery.
 
@@ -7607,7 +7705,7 @@ classify global Lie groups; DG-33 adds the lattice data needed for that.
 - `fs-two-connected-lie-groups-with-the-same-dynkin-diagram-are-isomorphic` —
   **false statement** `[LL]`; global lattices differ.
 
-### B page — `root-system-and-dynkin-diagram-examples`
+### B page — `root-systems-dynkin-diagrams-and-cartan-killing-classification-examples`
 
 1. `ex-root-system-a-one` — **example** `[LL]`.
 2. `ex-root-systems-a-two-b-two-and-g-two` — **example** `[LA]`; draw roots,
@@ -7674,7 +7772,7 @@ DG-34 handles real forms and nonreduced restricted systems.
 ## DG-32. Highest-Weight Theory for Complex Semisimple Lie Algebras
 
 **A page:** `highest-weight-theory-for-complex-semisimple-lie-algebras`
-**B page:** `highest-weight-representation-examples`
+**B page:** `highest-weight-theory-for-complex-semisimple-lie-algebras-examples`
 **Requires:** DG-27, DG-29–DG-31. RL-2 and RL-7 are declared ownership
 citations for the rehomed Verma-module and character-formula superstructure;
 they are not load-bearing inputs to DG's finite-dimensional classification.
@@ -7734,42 +7832,68 @@ classification depend on them.
     `[LA]`:
     $f_i^{\langle\lambda,\alpha_i^\vee\rangle+1}v_\lambda=0$ in any finite-
     dimensional quotient.
-15. `thm-finite-dimensionality-of-lambda-highest-weight-simple-modules-for-dominant-integral-lambda` —
-    **theorem** `[LA]`; construct the cyclic module with the highest-weight and
-    simple-root integrability relations directly, then use the finite
-    Weyl-stable convex hull of weights to prove finite-dimensionality and take
-    its unique finite-dimensional simple constituent with the supplied highest
-    line. No Verma-module theorem is used.
-16. `thm-simple-highest-weight-modules-are-classified-by-their-highest-weight` —
+15. `def-dominant-integrable-highest-weight-cyclic-module` — **definition**
+    `[LN]`; for $m_i=\langle\lambda,\alpha_i^\vee\rangle$, define $W(\lambda)$
+    as the cyclic $U(\mathfrak g)$-module generated by $v_\lambda$ with
+    $\mathfrak n^+v_\lambda=0$,
+    $(h-\lambda(h))v_\lambda=0$, and
+    $f_i^{m_i+1}v_\lambda=0$ for every simple root.
+16. `lem-pbw-shows-the-dominant-cyclic-highest-weight-generator-survives` —
+    **lemma** `[LA]`; start with the PBW induced cyclic module, whose highest
+    generator is nonzero by triangular ordering, and quotient by the sum of
+    the submodules generated by $f_i^{m_i+1}v_\lambda$. Weight ordering and
+    the rank-one identity
+    $e_i f_i^r v=r(m_i-r+1)f_i^{r-1}v$ show that none of those submodules
+    meets the top weight line. Hence $v_\lambda$ survives and that line remains
+    one-dimensional. This nonzero claim is proved before the quotient is used.
+17. `lem-simple-root-integrability-bounds-the-dominant-cyclic-module` —
+    **lemma** `[LA]`; the rank-one commutation formulas propagate local
+    nilpotence of every $e_i,f_i$ from the defining relations. Simple
+    reflections therefore preserve the weight multiplicities. Every weight
+    lies in $\lambda-Q_+$, and so does every Weyl conjugate; the intersection
+    of these finitely many half-space cones is a bounded Weyl polytope.
+    Its intersection with the weight lattice is finite, and PBW makes each
+    weight space finite-dimensional. Hence $W(\lambda)$ is finite-dimensional.
+18. `lem-a-dominant-cyclic-highest-weight-module-has-a-unique-simple-quotient` —
+    **lemma** `[LA]`; every proper submodule misses the one-dimensional
+    highest-weight line, their sum is still proper, and quotienting by that
+    unique maximal proper submodule gives a nonzero simple module with highest
+    weight $\lambda$. “Choose a simple constituent” is not used as a hidden
+    existence or uniqueness argument.
+19. `thm-finite-dimensionality-of-lambda-highest-weight-simple-modules-for-dominant-integral-lambda` —
+    **theorem** `[LL]`; the unique simple quotient $V(\lambda)$ of items
+    15–18 is finite-dimensional and has the supplied highest line. No
+    Verma-module theorem is used.
+20. `thm-simple-highest-weight-modules-are-classified-by-their-highest-weight` —
     **theorem** `[LA]`; two finite-dimensional simple highest-weight modules
     for the fixed positive system are isomorphic iff their highest weights
-    agree. Prove this directly from the cyclic construction in item 15 and the
+    agree. Prove this directly from the cyclic construction in items 15–19 and the
     unique highest-weight line; RL-2 owns the stronger Verma-module universal
     statement.
-17. `thm-highest-weight-classification-of-finite-dimensional-irreducible-representations` —
+21. `thm-highest-weight-classification-of-finite-dimensional-irreducible-representations` —
     **theorem** `[LA]`. The finite-dimensional simple modules $V(\lambda)$
     with dominant integral $\lambda$ are exactly the irreducible
     $\mathfrak g$-modules, uniquely. LANDMARK.
-18. `cor-every-finite-dimensional-representation-is-a-direct-sum-of-highest-weight-modules` —
+22. `cor-every-finite-dimensional-representation-is-a-direct-sum-of-highest-weight-modules` —
     **corollary** `[LL]`; cite Weyl complete reducibility.
-19. `prop-highest-weight-of-the-dual-representation` — **proposition** `[LA]`:
+23. `prop-highest-weight-of-the-dual-representation` — **proposition** `[LA]`:
     $-w_0\lambda$.
-20. `prop-top-highest-weight-summand-in-a-tensor-product` — **proposition**
+24. `prop-top-highest-weight-summand-in-a-tensor-product` — **proposition**
     `[LA]`; for dominant integral weights \(\lambda,\mu\),
     \(v_\lambda\otimes v_\mu\) generates a unique summand
     \(V(\lambda+\mu)\) in \(V(\lambda)\otimes V(\mu)\), occurring with
     multiplicity one; every other irreducible summand has strictly lower
     highest weight.
-21. `prop-the-adjoint-representation-has-highest-weight-the-highest-root` —
+25. `prop-the-adjoint-representation-has-highest-weight-the-highest-root` —
     **proposition** `[LL]` for simple $\mathfrak g$.
 
 **Finite-dimensional boundary data**
 
-22. `def-weyl-vector-rho` — **definition** `[LN]`:
+26. `def-weyl-vector-rho` — **definition** `[LN]`:
     $\rho=\frac12\sum_{\alpha>0}\alpha=\sum_i\omega_i$.
-23. `prop-weyl-orbit-of-the-highest-weight-gives-extremal-weights-with-multiplicity-one` —
+27. `prop-weyl-orbit-of-the-highest-weight-gives-extremal-weights-with-multiplicity-one` —
     **proposition** `[LA]`.
-24. `rem-harish-chandra-isomorphism-and-category-o` — **remark** `[LN]`; RL-1
+28. `rem-harish-chandra-isomorphism-and-category-o` — **remark** `[LN]`; RL-1
     through RL-7 own central characters, the Harish--Chandra isomorphism,
     linkage, category $\mathcal O$, BGG resolutions, Verma modules, and the
     Weyl/Kostant character formulas. DG's finite-dimensional classification
@@ -7791,7 +7915,7 @@ classification depend on them.
   **false statement** `[LL]`; RL-7 works in the localized formal group algebra
   before proving cancellation to a finite character.
 
-### B page — `highest-weight-representation-examples`
+### B page — `highest-weight-theory-for-complex-semisimple-lie-algebras-examples`
 
 1. `ex-all-finite-dimensional-irreducible-sl-two-modules` — **example** `[LA]`;
    basis, weights, and raising/lowering coefficients.
@@ -7824,7 +7948,7 @@ classification depend on them.
   “Theorem of the Highest Weight,” 3 “Verma Modules,” 4 “Complete
   Reducibility,” and 6 “Weyl Character Formula.”** Primary textbook route.
   Named controls include Thms. 5.5 and 5.29. Section 5 “Harish–Chandra
-  Isomorphism” is rehomed to RL for the central-character reason in item 24;
+  Isomorphism” is rehomed to RL for the central-character reason in item 28;
   §7 parabolic subalgebras is inline only as a B-page orientation remark.
 - **Kirillov, *Introduction to Lie Groups and Lie Algebras*, Ch. IX
   §§9.1–9.7, especially Thms. 9.17 and 9.19.** Independent full lecture-text
@@ -7833,7 +7957,7 @@ classification depend on them.
 - **Etingof, Lie group/algebra notes, Lecture 24 §§24.1–24.3 and Lecture 25
   §§25.1 “Characters,” 25.3 “Weyl character formula,” and 25.4 “Proof of the
   Weyl character formula.”** Independent source routed to RL-7 for character
-  formulas. §25.2 “Category O” is routed to RL as in item 24.
+  formulas. §25.2 “Category O” is routed to RL as in item 28.
 - **Conrad–Landesman, *Compact Lie Groups*, §§27–28, especially §28
   “Examples and Fundamental Representations,” Thms. 28.2–28.4.** Independent
   compact-form control; the lattice integration issue is disposed to DG-33.
@@ -7841,17 +7965,17 @@ classification depend on them.
 ### Proof strategy and traps
 
 Restriction to every root $\mathfrak{sl}_2$ proves dominance is necessary.
-For sufficiency, impose the simple-root nilpotence relations on a cyclic
-highest-weight generator and use PBW ordering plus the finite Weyl-stable
-weight region to obtain a finite-dimensional module directly; complete
-reducibility and the one-dimensional highest line give the unique simple
-module. This closes DG's classification without consuming RL's Verma-module
-construction. RL-2 and RL-7 supply the cited infinite-dimensional and
-character-formula superstructure.
+For sufficiency, items 15–18 separate four facts that must not be bundled:
+the cyclic quotient is defined, PBW proves its generator survives, rank-one
+integrability plus the finite Weyl group proves finite-dimensionality, and the
+one-dimensional top line proves the unique simple quotient. This closes DG's
+classification without consuming RL's Verma-module construction. RL-2 and
+RL-7 supply the cited infinite-dimensional and character-formula
+superstructure.
 
 **Well-definedness discharged:** chosen Cartan/positive system and weight
 spaces (items 1–10), direct finite-dimensional uniqueness and integrability
-(11–21), and the retained finite-dimensional boundary data (22–24).
+(11–25), and the retained finite-dimensional boundary data (26–28).
 **Choice:** finite root/weight and finite-dimensional decomposition arguments
 are ZF.
 **Forward reference:** DG-33 states exactly which dominant weights integrate
@@ -7862,14 +7986,16 @@ to a given compact connected group using its character lattice.
 ## DG-33. Compact Lie Groups, Maximal Tori, and Peter–Weyl Theory
 
 **A page:** `compact-lie-groups-maximal-tori-and-peter-weyl-theory`
-**B page:** `compact-lie-group-and-representation-examples`
-**Requires:** DG-18, DG-21, DG-25–DG-32; measure page
-`radon-measures-and-the-riesz-markov-kakutani-theorem`; functional-analysis
-pages `hilbert-space-geometry-and-riesz-representation`, the orthonormal-basis
-page, and `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators`.
+**B page:** `compact-lie-groups-maximal-tori-and-peter-weyl-theory-examples`
+**Requires:** DG-18, DG-21, DG-25–DG-32;
+`haar-measure-existence-and-uniqueness`, `stone-weierstrass-general`, and
+functional-analysis pages `hilbert-space-geometry-and-riesz-representation`,
+`orthonormal-bases-parseval-and-fourier-series`, and
+`compact-self-adjoint-hilbert-schmidt-and-trace-class-operators`.
 
-Those measure/functional pages are finished scaffolds but not yet authored in
-the live plan. Haar and Peter–Weyl are therefore explicit build-time seams.
+Those representation/functional pages are finished scaffolds but not yet
+authored in the live plan. RG-18, rather than this page, owns Haar existence
+and uniqueness. Peter–Weyl remains an explicit build-time seam.
 The finite-dimensional maximal-torus and root-data theory does not wait for
 them except where averaging or $L^2(G)$ is expressly used.
 
@@ -7880,10 +8006,12 @@ them except where averaging or $L^2(G)$ is expressly used.
 1. `def-left-right-and-bi-invariant-borel-measure-on-a-lie-group` —
    **definition** `[LN]`; invariance is stated on Borel sets and equivalently
    on $C(G)$ integrals for a finite Radon measure.
-2. `thm-normalized-haar-measure-on-a-compact-lie-group` — **theorem** `[LA]`.
-   Every compact Lie group has a unique regular Borel probability measure
-   invariant under left translations; it is also right invariant and
-   inversion invariant. LANDMARK.
+2. `cor-normalized-haar-measure-on-a-compact-lie-group` — **corollary** `[LL]`.
+   Specialize RG-18's
+   `cor-normalized-haar-probability-on-a-compact-group`: every compact Lie
+   group has a unique regular Borel probability measure invariant under left
+   translations, and it is also right and inversion invariant. The existence
+   proof is cited, not re-minted. LANDMARK.
 3. `prop-integration-against-haar-is-invariant-under-translations-and-conjugation` —
    **proposition** `[LL]`.
 4. `def-continuous-and-unitary-representation-of-a-compact-lie-group` —
@@ -7900,114 +8028,137 @@ them except where averaging or $L^2(G)$ is expressly used.
    equivalent irreducibles.
 9. `cor-irreducible-characters-are-orthonormal-class-functions` —
    **corollary** `[LL]`.
+10. `prop-compact-lie-groups-admit-bi-invariant-riemannian-metrics` —
+    **proposition** `[LA]`; average any inner product on the Lie algebra over
+    the adjoint action using normalized Haar, then left-translate it. The
+    resulting metric is both left- and right-invariant. This supplies the
+    metric used in the maximal-torus and approximate-identity arguments
+    below rather than leaving an averaging construction implicit.
 
 **Tori and maximal tori**
 
-10. `def-torus-and-maximal-torus-in-a-compact-lie-group` — **definition**
+11. `def-torus-and-maximal-torus-in-a-compact-lie-group` — **definition**
     `[LN]`; a torus is a compact connected abelian Lie group.
-11. `thm-structure-of-a-compact-connected-abelian-lie-group` — **theorem**
+12. `thm-structure-of-a-compact-connected-abelian-lie-group` — **theorem**
     `[LA]`; $T\cong\mathfrak t/\Lambda\cong(S^1)^r$, where
     $\Lambda=\ker(\exp:\mathfrak t\to T)$ is a full lattice.
-12. `thm-maximal-tori-exist-in-compact-lie-groups` — **theorem** `[LA]`;
+13. `thm-maximal-tori-exist-in-compact-lie-groups` — **theorem** `[LA]`;
     maximality by dimension/closed connected abelian enlargement, not Zorn.
-13. `thm-every-element-of-a-compact-connected-lie-group-lies-in-a-maximal-torus` —
-    **theorem** `[LA]`; take the closure of its cyclic subgroup and extend its
-    identity component, treating the finite component explicitly.
-14. `thm-conjugacy-of-maximal-tori` — **theorem** `[LA]`; use a bi-invariant
+14. `thm-every-element-of-a-compact-connected-lie-group-lies-in-a-maximal-torus` —
+    **theorem** `[LA]`; item 10 and compact Hopf–Rinow join the identity to
+    $g$ by a minimizing geodesic. Geodesics through the identity of a
+    bi-invariant metric are one-parameter subgroups, so $g=\exp X$; the
+    closure of $\exp(\mathbb RX)$ is a compact connected abelian subgroup and
+    extends to a maximal torus. This also handles finite-order $g$, for which
+    merely taking the identity component of the cyclic closure would fail.
+15. `thm-conjugacy-of-maximal-tori` — **theorem** `[LA]`; use a bi-invariant
     metric and a minimizing geodesic/critical-point argument for the conjugation
     action. LANDMARK.
-15. `cor-every-compact-connected-abelian-subgroup-is-contained-in-a-maximal-torus` —
+16. `cor-every-compact-connected-abelian-subgroup-is-contained-in-a-maximal-torus` —
     **corollary** `[LA]`.
-16. `cor-rank-of-a-compact-connected-lie-group-is-well-defined` —
+17. `cor-rank-of-a-compact-connected-lie-group-is-well-defined` —
     **corollary** `[LL]`; common dimension of maximal tori.
-17. `def-weyl-group-of-a-compact-connected-lie-group` — **definition** `[LN]`:
+18. `def-weyl-group-of-a-compact-connected-lie-group` — **definition** `[LN]`:
     $W(G,T)=N_G(T)/T$.
-18. `thm-compact-group-weyl-group-is-finite` — **theorem** `[LA]`; its
+19. `thm-compact-group-weyl-group-is-finite` — **theorem** `[LA]`; its
     faithful action on $T$ or $\mathfrak t$ has discrete compact kernel
     quotient.
-19. `prop-conjugacy-classes-meet-a-fixed-maximal-torus-in-weyl-orbits` —
+20. `prop-conjugacy-classes-meet-a-fixed-maximal-torus-in-weyl-orbits` —
     **proposition** `[LA]`.
 
 **Roots, Weyl integration, and lattices**
 
-20. `def-roots-of-a-compact-connected-lie-group` — **definition** `[LN]`;
+21. `def-roots-of-a-compact-connected-lie-group` — **definition** `[LN]`;
     nonzero weights of $T$ on $\mathfrak g_\mathbb C$ under the adjoint
     representation.
-21. `thm-compact-group-roots-form-a-reduced-crystallographic-root-system-on-the-semisimple-part` —
+22. `thm-compact-group-roots-form-a-reduced-crystallographic-root-system-on-the-semisimple-part` —
     **theorem** `[LA]`; the central torus contributes the orthogonal zero-
     root directions and is kept separate.
-22. `thm-analytic-and-root-system-weyl-groups-agree` — **theorem** `[LA]`;
+23. `thm-analytic-and-root-system-weyl-groups-agree` — **theorem** `[LA]`;
     root $SU(2)$ subgroups produce reflections and chamber transitivity gives
     surjectivity.
-23. `def-weyl-jacobian-on-a-maximal-torus` — **definition** `[LN]`:
+24. `def-weyl-jacobian-on-a-maximal-torus` — **definition** `[LN]`:
     \[
       J(t)=\prod_{\alpha>0}|1-\alpha(t)^{-1}|^2.
     \]
     Because every root \(\alpha\) is an actual character of $T$, this is
     globally defined even when \(\alpha/2\notin X^*(T)\); it is
     $W$-invariant and independent of the positive system.
-24. `thm-weyl-integration-formula` — **theorem** `[LA]`. For continuous class
+25. `thm-weyl-integration-formula` — **theorem** `[LA]`. For continuous class
     functions (and the general conjugation-average version), integrate over
     $G$ as $|W|^{-1}$ times the maximal-torus integral weighted by $J$.
     LANDMARK.
-25. `def-character-and-cocharacter-lattices-of-a-torus` — **definition**
+26. `def-character-and-cocharacter-lattices-of-a-torus` — **definition**
     `[LN]`:
     $X^*(T)=\operatorname{Hom}(T,S^1)$ and
     $X_*(T)=\operatorname{Hom}(S^1,T)$ with their perfect integer pairing.
-26. `prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t` —
+27. `prop-differentiation-identifies-characters-with-the-integral-weight-lattice-of-t` —
     **proposition** `[LA]`; normalize $2\pi i$ once.
-27. `def-root-datum-of-a-compact-connected-lie-group` — **definition** `[LN]`:
+28. `def-root-datum-of-a-compact-connected-lie-group` — **definition** `[LN]`:
     $(X^*(T),\Phi,X_*(T),\Phi^\vee)$ with its perfect pairing.
-28. `prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group` —
+29. `prop-root-and-weight-lattice-sandwich-for-a-compact-semisimple-group` —
     **proposition** `[LA]`: $Q\subseteq X^*(T)\subseteq P$; the simply
     connected form has $X^*(T)=P$ and the adjoint form has $X^*(T)=Q$.
-29. `thm-compact-connected-semisimple-lie-groups-are-classified-up-to-isogeny-by-root-systems` —
+30. `thm-compact-connected-semisimple-lie-groups-are-classified-up-to-isogeny-by-root-systems` —
     **theorem** `[LA]`; “up to isogeny” is not deleted.
-30. `thm-compact-connected-lie-groups-are-classified-by-root-data` —
+31. `thm-compact-connected-lie-groups-are-classified-by-root-data` —
     **theorem** `[LA]`; isomorphism classes correspond to isomorphism classes
     of compact root data, including the central torus. LANDMARK.
-31. `prop-central-quotients-correspond-to-intermediate-character-lattices` —
+32. `prop-central-quotients-correspond-to-intermediate-character-lattices` —
     **proposition** `[LA]`; for a fixed semisimple Lie algebra, finite central
     quotients reverse the inclusion of allowed characters.
 
 **Peter–Weyl and compact highest weights**
 
-32. `def-left-and-right-regular-unitary-representations-on-l-two-of-a-compact-lie-group` —
+33. `def-left-and-right-regular-unitary-representations-on-l-two-of-a-compact-lie-group` —
     **definition** `[LN]`; Haar invariance makes them unitary.
-33. `def-convolution-operator-associated-to-a-continuous-function-on-a-compact-group` —
+34. `def-convolution-operator-associated-to-a-continuous-function-on-a-compact-group` —
     **definition** `[LN]`, with left/right convention fixed.
-34. `lem-continuous-convolution-operators-are-hilbert-schmidt-and-compact` —
+35. `lem-continuous-convolution-operators-are-hilbert-schmidt-and-compact` —
     **lemma** `[LA]`; their continuous kernel lies in $L^2(G\times G)$.
-35. `lem-compact-convolution-operators-decompose-into-finite-dimensional-invariant-subspaces` —
+36. `lem-compact-convolution-operators-decompose-into-finite-dimensional-invariant-subspaces` —
     **lemma** `[LA]`; apply the authored compact-operator spectral theory to
     suitable positive self-adjoint convolutions.
-36. `thm-peter-weyl-for-compact-lie-groups` — **theorem** `[LA]`. The matrix
+37. `lem-compact-lie-groups-admit-central-continuous-approximate-identities` —
+    **lemma** `[LA]`; choose nonnegative continuous bump functions supported
+    in shrinking bi-invariant metric balls, normalize by Haar, and average
+    over conjugation. Uniform continuity proves $f*k_n\to f$ uniformly for
+    every $f\in C(G)$. Normalization and support shrinkage are proved, not
+    assumed.
+38. `thm-peter-weyl-for-compact-lie-groups` — **theorem** `[LA]`. The matrix
     coefficients of finite-dimensional irreducible unitary representations
     form an orthogonal Hilbert basis of $L^2(G)$, with multiplicity equal to
     representation dimension. LANDMARK.
-37. `cor-matrix-coefficients-are-uniformly-dense-in-continuous-functions-on-a-compact-lie-group` —
-    **corollary** `[LA]`; use the self-adjoint point-separating algebra and
-    Stone–Weierstrass/approximate identities.
-38. `cor-finite-dimensional-unitary-representations-separate-points-of-a-compact-lie-group` —
+39. `cor-matrix-coefficients-are-uniformly-dense-in-continuous-functions-on-a-compact-lie-group` —
+    **corollary** `[LA]`; combine item 37 with the $L^2$ Peter–Weyl expansion:
+    approximate each kernel in $L^2$ by a finite matrix-coefficient sum and
+    use Cauchy–Schwarz to control the convolution error uniformly. The
+    self-adjoint-algebra/Stone–Weierstrass argument is then an independent
+    check, with `stone-weierstrass-general` named as a real dependency.
+40. `cor-finite-dimensional-unitary-representations-separate-points-of-a-compact-lie-group` —
     **corollary** `[LA]`.
-39. `cor-every-compact-lie-group-is-isomorphic-to-a-closed-matrix-lie-group` —
-    **corollary** `[LA]`; compactness plus finitely many separating
-    representations yields one faithful finite-dimensional representation.
-40. `thm-highest-weight-classification-for-a-compact-connected-lie-group` —
+41. `cor-every-compact-lie-group-is-isomorphic-to-a-closed-matrix-lie-group` —
+    **corollary** `[LA]`; use DG-26's no-small-subgroups neighbourhood $U$.
+    Item 40 gives, for each point of compact $G\setminus U$, a representation
+    nontrivial on a neighbourhood of that point; a finite subcover gives a
+    finite direct sum whose kernel is a subgroup contained in $U$, hence is
+    trivial. Compactness then makes its image closed. This is the missing
+    finite-faithfulness argument.
+42. `thm-highest-weight-classification-for-a-compact-connected-lie-group` —
     **theorem** `[LA]`. Irreducible finite-dimensional complex representations
     correspond exactly to dominant weights in the **actual character lattice**
     $X^*(T)$, not all of $P$. LANDMARK.
-41. `prop-differentiation-relates-compact-group-and-complexified-lie-algebra-highest-weights` —
+43. `prop-differentiation-relates-compact-group-and-complexified-lie-algebra-highest-weights` —
     **proposition** `[LA]`; a Lie-algebra module integrates iff its weights
     satisfy the group lattice condition.
-42. `thm-weyl-character-formula-for-compact-connected-lie-groups` —
+44. `thm-weyl-character-formula-for-compact-connected-lie-groups` —
     **theorem** `[LA]`; pull DG-32's formal formula to the simply connected
     cover of the derived group and evaluate it there. For
     \(\lambda\in X^*(T)\), prove independence of the chosen lift and descend
     the quotient to regular $t\in T$ before extending continuously across
     singular elements. Neither \(\rho\) nor each \(\alpha/2\) is assumed to
     be a character of the original non-simply-connected torus.
-43. `cor-representation-ring-has-the-dominant-character-basis` — **corollary**
+45. `cor-representation-ring-has-the-dominant-character-basis` — **corollary**
     `[LA]`; multiplication is tensor product and characters embed it in
     $\mathbb Z[X^*(T)]^W$.
 
@@ -8028,7 +8179,7 @@ them except where averaging or $L^2(G)$ is expressly used.
   **false statement** `[LL]`; the regular representation is generally
   infinite-dimensional.
 
-### B page — `compact-lie-group-and-representation-examples`
+### B page — `compact-lie-groups-maximal-tori-and-peter-weyl-theory-examples`
 
 1. `ex-normalized-haar-measure-on-a-torus` — **example** `[LL]`.
 2. `ex-maximal-tori-and-weyl-groups-of-u-n-and-su-n` — **example** `[LA]`.
@@ -8072,9 +8223,9 @@ them except where averaging or $L^2(G)$ is expressly used.
 
 ### Proof strategy and traps
 
-Construct Haar as a positive invariant functional on $C(G)$ and invoke
-MT-20's Riesz–Markov–Kakutani representation; uniqueness plus inversion makes
-it bi-invariant. Averaging gives invariant inner products. Maximal-torus
+Invoke RG-18's constructed and normalized Haar measure; this page does not
+repeat its positive-functional/Riesz–Markov proof. Averaging gives invariant
+inner products. Maximal-torus
 conjugacy uses compactness and the geometry of conjugation; root $SU(2)$
 subgroups identify the analytic Weyl group.
 
@@ -8084,25 +8235,27 @@ subspaces; an approximate identity proves density. Global classification
 retains $X^*(T)$ between $Q$ and $P$, so no root-system theorem is upgraded
 from isogeny to isomorphism.
 
-**Well-definedness discharged:** Radon convention/normalization and averaging
-(items 1–9), torus lattice/conjugacy/normalizer quotient (10–24), perfect
-character–cocharacter pairing and central quotients (25–31), Hilbert
-completion/convolution sides/multiplicities (32–39), and actual group lattice
-in highest weights (40–43).
-**Choice:** Haar inherits MT-20's $\mathrm{AC}_\omega$ sufficient boundary.
+**Well-definedness discharged:** Radon convention, normalization, averaging,
+and the bi-invariant metric (items 1–10), torus
+lattice/conjugacy/normalizer quotient (11–25), perfect
+character–cocharacter pairing and central quotients (26–32), Hilbert
+completion/convolution sides/multiplicities (33–41), and actual group lattice
+in highest weights (42–45).
+**Choice:** Haar inherits RG-18's measure-theoretic choice ledger.
 Peter–Weyl inherits the functional-analysis Hilbert projection/basis and
 compact-spectral ledgers (including their stated choice costs). Finite-
 dimensional root-data arguments add no choice.
-**Unresolved seams:** MT-20 and FA-13/FA-14/FA-16 must be authored before Haar
-and Peter–Weyl items; final stable page/id names must replace these scaffold
-references.
+**Unresolved seams:** RG-18 must be ordered and authored before this page, and
+the named Hilbert/orthonormal-basis/compact-operator pages must be authored
+before Peter–Weyl. All page and item ids above are already stable scaffold
+names.
 
 ---
 
 ## DG-34. Real Forms and Real Semisimple Lie Algebras
 
 **A page:** `real-forms-and-real-semisimple-lie-algebras`
-**B page:** `real-form-and-cartan-decomposition-examples`
+**B page:** `real-forms-and-real-semisimple-lie-algebras-examples`
 **Requires:** DG-25–DG-33 and planned covering machinery for global simply
 connected group forms.
 
@@ -8286,7 +8439,7 @@ noncompact data through Vogan (and equivalently Satake) diagrams.
 - `fs-global-cartan-and-iwasawa-decompositions-hold-for-every-nonlinear-cover-without-modified-k` —
   **false statement** `[LL]`; global group hypotheses matter.
 
-### B page — `real-form-and-cartan-decomposition-examples`
+### B page — `real-forms-and-real-semisimple-lie-algebras-examples`
 
 1. `ex-compact-and-split-real-forms-of-sl-two-c` — **example** `[LA]`:
    $\mathfrak{su}(2)$ and $\mathfrak{sl}_2(\mathbb R)$.
@@ -8359,9 +8512,11 @@ deferred.
 ## DG-35. Symplectic Manifolds, Moser Stability, and Darboux–Weinstein Theory
 
 **A page:** `symplectic-manifolds-moser-stability-and-darboux-weinstein-theory`
-**B page:** `symplectic-foundations-and-normal-form-examples`
-**Requires:** DG-2, DG-5, DG-7–DG-9, DG-11–DG-15, and DG-18; published
-`thm-alternating-forms-have-a-symplectic-normal-form`.
+**B page:** `symplectic-manifolds-moser-stability-and-darboux-weinstein-theory-examples`
+**Requires:** DG-2, DG-5, DG-7–DG-9, DG-11–DG-15, DG-18, and DG-20; published
+`dual-spaces-bilinear-forms-and-inertia` (specifically
+`thm-alternating-forms-have-a-symplectic-normal-form`); and
+`the-spectral-theorem-and-singular-value-decomposition`.
 
 The sign convention is §3.5: the tautological form is $\lambda$, the canonical
 cotangent symplectic form is $\omega=-d\lambda$, and later
@@ -8438,64 +8593,87 @@ globally, never formula by formula.
     $g_J(u,v)=\omega(u,Jv)$ is positive definite.
 22. `thm-compatible-complex-structures-exist-on-symplectic-vector-spaces` —
     **theorem** `[LA]`; use a symplectic basis or polar decomposition.
-23. `thm-every-symplectic-manifold-admits-a-compatible-almost-complex-structure` —
+23. `lem-positive-definite-bundle-endomorphisms-have-smooth-positive-square-roots` —
+    **lemma** `[LA]`; apply the finite-dimensional positive-square-root
+    theorem fibrewise. In a local trivialization, smoothness follows from the
+    implicit-function theorem for $S\mapsto S^2$: at a positive $S$, the
+    derivative $H\mapsto SH+HS$ is invertible by orthogonal diagonalization.
+    Uniqueness makes the local roots glue. Fibrewise existence alone is not
+    silently promoted to a smooth bundle map.
+24. `thm-every-symplectic-manifold-admits-a-compatible-almost-complex-structure` —
     **theorem** `[LA]`; start with a Riemannian metric, take the skew-adjoint
     operator $A$ defined by $\omega(u,v)=g(Au,v)$, and set
-    $J=(-A^2)^{-1/2}A$ smoothly.
-24. `def-compatible-almost-kahler-metric` — **definition** `[LN]`:
+    $J=(-A^2)^{-1/2}A$, with smoothness supplied by item 23.
+25. `def-compatible-almost-kahler-metric` — **definition** `[LN]`:
     $g(u,v)=\omega(u,Jv)$.
-25. `rem-compatible-almost-complex-structures-and-kahler-geometry` — **remark** `[LN]`; compatibility does
+26. `rem-compatible-almost-complex-structures-and-kahler-geometry` — **remark** `[LN]`; compatibility does
     not make $J$ integrable. Complex/Kähler geometry and the Newlander–Nirenberg
     theorem lie outside this track.
 
 **Moser's method and normal forms**
 
-26. `lem-moser-pullback-differentiation-equation` — **lemma** `[LA]`; for a
+27. `lem-moser-pullback-differentiation-equation` — **lemma** `[LA]`; for a
     time-dependent flow $\varphi_t$,
     $\frac d{dt}\varphi_t^*\omega_t=\varphi_t^*(\dot\omega_t+
     d\iota_{X_t}\omega_t)$ when $d\omega_t=0$.
-27. `thm-moser-stability-theorem` — **theorem** `[LA]`. On compact $M$, a
+28. `lem-smooth-parametric-primitives-for-a-smooth-exact-family-on-a-compact-manifold` —
+    **lemma** `[LA]`; if $\eta_t$ is a smooth family of exact $k$-forms, there
+    is a jointly smooth family $\sigma_t$ with $d\sigma_t=\eta_t$. By
+    compactness, DG-20's geodesically convex neighborhoods give a finite good
+    cover: finite nonempty intersections remain geodesically convex and
+    contract to a supplied point by their smoothly endpoint-dependent unique
+    geodesics. Fix that cover and a partition of unity, then run DG-15's local
+    Poincaré homotopy and Mayer–Vietoris correction operators in a fixed
+    finite order. Each operation is linear and continuous in the form
+    coefficients, hence preserves smooth dependence on $t$. This supplies a
+    parametric primitive without invoking the deferred Hodge theorem.
+29. `thm-moser-stability-theorem` — **theorem** `[LA]`. On compact $M$, a
     smooth family of symplectic forms with constant de Rham class is related
-    by an isotopy $\varphi_t$ with $\varphi_t^*\omega_t=\omega_0$. LANDMARK.
-28. `thm-compact-support-moser-stability-on-a-noncompact-manifold` —
+    by an isotopy $\varphi_t$ with $\varphi_t^*\omega_t=\omega_0$. Differentiate
+    the constant class, use item 28 for a smooth primitive of
+    $\dot\omega_t$, solve the Moser equation, and use compactness for the full
+    time-dependent flow. LANDMARK.
+30. `thm-compact-support-moser-stability-on-a-noncompact-manifold` —
     **theorem** `[LA]`; require primitives $\sigma_t$ of $\dot\omega_t$ with
     supports uniformly contained in one compact set, ensuring the vector-field
     flow exists for the whole interval.
-29. `thm-relative-moser-theorem` — **theorem** `[LA]`; if the forms agree
-    along a submanifold and their first-order difference has a relative
-    primitive, choose the isotopy fixed on that submanifold.
-30. `lem-relative-poincare-primitive-near-a-submanifold` — **lemma** `[LA]`;
+31. `lem-relative-poincare-primitive-near-a-submanifold` — **lemma** `[LA]`;
     use a tubular contraction and the de Rham homotopy operator, with vanishing
     on the submanifold proved.
-31. `thm-darboux-theorem` — **theorem** `[LA]`. Every symplectic form has
+32. `thm-relative-moser-theorem` — **theorem** `[LA]`; if the forms agree
+    along a submanifold and their first-order difference has the relative
+    primitive supplied by item 31, solve the Moser equation with a vector
+    field vanishing on that submanifold, so the isotopy is fixed there.
+33. `thm-darboux-theorem` — **theorem** `[LA]`. Every symplectic form has
     local coordinates with
     $\omega=\sum_i dq^i\wedge dp_i$. LANDMARK.
-32. `cor-symplectic-manifolds-have-no-local-invariants-beyond-dimension` —
+34. `cor-symplectic-manifolds-have-no-local-invariants-beyond-dimension` —
     **corollary** `[LL]`; explicitly local only.
-33. `def-symplectic-normal-bundle-of-a-symplectic-submanifold` — **definition**
+35. `def-symplectic-normal-bundle-of-a-symplectic-submanifold` — **definition**
     `[LN]`; the symplectic orthogonal complement of $TS$ in $TM|_S$.
-34. `thm-symplectic-neighborhood-theorem` — **theorem** `[LA]`; symplectic
+36. `thm-symplectic-neighborhood-theorem` — **theorem** `[LA]`; symplectic
     submanifolds with isomorphic symplectic normal bundles have
     symplectomorphic neighbourhood germs, under an isomorphism covering the
     supplied submanifold symplectomorphism.
-35. `def-canonical-symplectic-model-near-the-zero-section-of-t-star-l` —
+37. `def-canonical-symplectic-model-near-the-zero-section-of-t-star-l` —
     **definition** `[LN]`; the zero section is Lagrangian.
-36. `thm-weinstein-lagrangian-neighborhood-theorem` — **theorem** `[LA]`. A
+38. `thm-weinstein-lagrangian-neighborhood-theorem` — **theorem** `[LA]`. A
     neighbourhood of a Lagrangian $L$ is symplectomorphic, as a germ fixed on
     $L$, to a neighbourhood of the zero section in $(T^*L,-d\lambda)$.
     LANDMARK.
-37. `prop-lagrangian-neighborhood-germ-is-not-canonical` — **proposition**
+39. `prop-lagrangian-neighborhood-germ-is-not-canonical` — **proposition**
     `[LL]`; choices of tubular data/primitives change the symplectomorphism.
-38. `thm-local-normal-form-near-a-coisotropic-submanifold` — **theorem** `[LA]`;
-    the characteristic distribution is integrable and the germ is determined
-    by the presymplectic form under the stated bundle hypotheses. This supplies
-    only the regular local model needed for reduction.
-39. `prop-characteristic-distribution-of-a-coisotropic-submanifold-is-involutive` —
+40. `prop-characteristic-distribution-of-a-coisotropic-submanifold-is-involutive` —
     **proposition** `[LA]`; for
     $X,Y\in\Gamma((TC)^\omega)=\Gamma(\ker i^*\omega)$, the identity
     $d(i^*\omega)=0$ shows that \([X,Y]\) remains in
     \(\Gamma(\ker i^*\omega)\). The argument does not start with arbitrary
     tangent fields.
+41. `thm-local-normal-form-near-a-coisotropic-submanifold` — **theorem** `[LA]`;
+    item 40 supplies integrability of the characteristic distribution, and
+    the germ is determined by the presymplectic form under the stated bundle
+    hypotheses. This supplies only the regular local model needed for
+    reduction.
 
 ### `fs-` items (A page)
 
@@ -8511,7 +8689,7 @@ globally, never formula by formula.
 - `fs-darboux-theorem-makes-all-symplectic-manifolds-globally-symplectomorphic` —
   **false statement** `[LL]`.
 
-### B page — `symplectic-foundations-and-normal-form-examples`
+### B page — `symplectic-manifolds-moser-stability-and-darboux-weinstein-theory-examples`
 
 1. `ex-the-standard-symplectic-vector-space` — **example** `[LL]`.
 2. `ex-isotropic-coisotropic-and-lagrangian-coordinate-subspaces` —
@@ -8547,8 +8725,11 @@ globally, never formula by formula.
   and 5.1–5.3.** Independent full lecture-note treatment. Named controls are
   Props. 3.2 and 3.24; Thms. 4.28, 5.4 (Moser), 5.10 (Darboux), 5.12, 5.14
   (Lagrangian neighborhood), and 5.18.
-- **Meinrenken §§2.5–2.10.** Compatible complex structures are included in
-  items 21–25; polar-decomposition refinements are inline. The symplectic
+- **Meinrenken §§2.5–2.10 and the published page
+  `the-spectral-theorem-and-singular-value-decomposition`.** Compatible
+  complex structures are included in items 21–26; the latter page supplies
+  the fibrewise positive square root, while item 23 proves the additional
+  smooth-family assertion. The symplectic
   group, Lagrangian Grassmannian, and Maslov indices are deferred to
   symplectic topology because no later item depends on them.
 
@@ -8559,7 +8740,8 @@ explicit quotient checks. For $T^*Q$, the formula
 $\lambda_{\alpha_q}(v)=\alpha_q(d\pi v)$ is the coordinate-free
 well-definedness proof; coordinates only compute $-d\lambda$.
 
-Moser chooses $\sigma_t$ with $\dot\omega_t=d\sigma_t$ and solves
+Moser obtains a jointly smooth $\sigma_t$ with
+$\dot\omega_t=d\sigma_t$ from item 28 and solves
 $\iota_{X_t}\omega_t=-\sigma_t$. Compactness or uniform compact support gives
 the whole time-one flow. Darboux shrinks until the straight-line family from
 the constant form at a point stays nondegenerate. Weinstein uses a relative
@@ -8568,8 +8750,8 @@ data.
 
 **Well-definedness discharged:** symplectic complements/quotients and graph
 signs (items 1–8), top wedge/cotangent naturality/submanifold conditions
-(9–20), smooth compatible $J$ (21–25), primitive/flow support and relative
-fixing (26–30), and normal-bundle/germ independence (31–39).
+(9–20), smooth compatible $J$ (21–26), parametric primitives, flow support,
+and relative fixing (27–32), and normal-bundle/germ independence (33–41).
 **Choice:** linear algebra, local Moser, and compact-flow arguments are ZF.
 The compatible global almost-complex construction and any partitioned tubular
 data inherit DG-2's $\mathrm{AC}_\omega$ sufficient boundary; Moser itself
@@ -8582,7 +8764,7 @@ coordinates; DG-37 builds moment maps and reduction.
 ## DG-36. Hamiltonian Mechanics and Completely Integrable Systems
 
 **A page:** `hamiltonian-mechanics-and-completely-integrable-systems`
-**B page:** `hamiltonian-mechanics-and-integrable-system-examples`
+**B page:** `hamiltonian-mechanics-and-completely-integrable-systems-examples`
 **Requires:** DG-8–DG-9, DG-12, DG-15, DG-18–DG-20, and DG-35; measure page
 `measure-preserving-transformations-and-poincare-recurrence` only for item 29.
 
@@ -8748,7 +8930,7 @@ that choice.
   **false statement** `[LL]`; it is local near a regular compact connected
   fibre and monodromy can obstruct globalization.
 
-### B page — `hamiltonian-mechanics-and-integrable-system-examples`
+### B page — `hamiltonian-mechanics-and-completely-integrable-systems-examples`
 
 1. `ex-free-particle-hamiltonian-flow` — **example** `[LL]`.
 2. `ex-harmonic-oscillator-and-elliptic-phase-curves` — **example** `[LA]`.
@@ -8964,7 +9146,7 @@ action is \(g\cdot\alpha=\alpha\circ\operatorname{Ad}_{g^{-1}}\).
 - `fs-the-general-reduced-dimension-is-dim-m-minus-two-dim-g` — **false
   statement** `[LL]`; that is the zero-level formula when \(G_0=G\).
 
-### B page — `moment-map-and-symplectic-reduction-examples`
+### B page — `moment-maps-and-symplectic-reduction-examples`
 
 1. `ex-circle-rotation-on-complex-n-space-and-its-quadratic-moment-map` —
    **example** `[LA]`; signs are computed from \(\omega_0\).
@@ -9646,8 +9828,8 @@ with complete contents and focused proofs in 15, 25–28.
   spine)`. Merry's Zorn/filtered-limit smoothing sketch is not used.
 - Lecture 28 “Connections” and Lecture 37 “Riemannian Vector Bundles” →
   DG-19, including `included(def-connection-on-a-smooth-vector-bundle)` and
-  the induced bundle-connection items; later holonomy/characteristic-form
-  theory is `deferred(the advanced connections/Chern–Weil block denied in §2)`.
+  the induced bundle-connection items. Characteristic forms continue on DG-38;
+  full holonomy and principal-connection gauge theory remain deferred.
 
 **Hitchin, *Differentiable Manifolds*. Range read:** §§2–7 and Appendix
 §§10.1–10.5.
@@ -9670,7 +9852,7 @@ with complete contents and focused proofs in 15, 25–28.
   `included(thm-existence-and-uniqueness-of-the-exterior-derivative)`, and
   `included(thm-cartans-magic-formula)`; §6.6 “deRham cohomology” and its
   ring, pullback, homotopy, Euclidean and sphere results → DG-15 and
-  `de-rham-cohomology-computations`,
+  `the-de-rham-complex-homotopy-and-mayer-vietoris-examples`,
   including `included(def-de-rham-cohomology)` and
   `included(thm-de-rham-cohomology-of-spheres)`.
 - §7 “Integration,” §7.1 orientation and §7.2 Stokes → DG-13/DG-14,
@@ -9714,7 +9896,7 @@ Ch. 1 §§1.1–1.2; Ch. 2 §§2.1–2.3; Ch. 3 §§3.1–3.2, 3.4; Ch. 7 §7.1.
   `included(thm-fundamental-theorem-on-flows)` and
   `included(def-lie-derivative-of-a-tensor-field)`. §3.2 “Derivations of
   \(\Omega^\bullet(M)\)”: “Exterior derivative,” “Examples” → DG-12 and
-  `exterior-calculus-computations-and-examples`,
+  `the-exterior-derivative-and-cartan-calculus-examples`,
   including `included(thm-the-exterior-derivative-is-a-graded-derivation)`.
 - §3.4 “Integration on manifolds”: “Integration of 1-densities,”
   “Orientability and integration of differential forms,” and “Stokes'
@@ -9747,7 +9929,7 @@ Ch. 1 §§1.1–1.2; Ch. 2 §§2.1–2.3; Ch. 3 §§3.1–3.2, 3.4; Ch. 7 §7.1.
   `included(thm-general-stokes-theorem)`.
 - §5.3 “Lie Derivative”: “Cartan's Formula” →
   `included(thm-cartans-magic-formula)`; “Integration and Exactness” →
-  `integration-and-stokes-examples`
+  `integration-of-forms-and-the-general-stokes-theorem-examples`
   and DG-17 top compact-support items.
 - §6.1 “Poincare Lemma,” including homotopy operator/invariance → DG-15.
   §6.2 “Mayer–Vietoris Sequence”: “Long Exact Sequences” →
@@ -9847,7 +10029,7 @@ sheaf cohomology” (pp. 83–85; TOC lists p. 84).
 - §8 “deRham cohomology,” headings definition, homotopy invariance, and
   Mayer–Vietoris → DG-15. §9 computations, including named sphere, punctured
   Euclidean-space, and top-cohomology results →
-  `de-rham-cohomology-computations` and DG-17, including
+  `the-de-rham-complex-homotopy-and-mayer-vietoris-examples` and DG-17, including
   `included(thm-integration-is-an-isomorphism-on-top-compactly-supported-de-rham-cohomology)`.
 - §10 “deRham theorem,” headings “singular homology,” “singular cohomology,”
   “smooth simplices,” “de Rham homomorphism,” and “de Rham theorem” →
@@ -9875,7 +10057,7 @@ comparison. It does not define cohomology as
 - Ch. 3 “Definitions and Examples of Riemannian Metrics”: “Riemannian
   Metrics,” “Elementary Constructions Associated with Riemannian Metrics,”
   and “The Model Spaces of Riemannian Geometry” → DG-18 and
-  `riemannian-metric-and-volume-examples`, including
+  `riemannian-metrics-length-distance-and-volume-examples`, including
   `included(thm-every-smooth-manifold-admits-a-riemannian-metric)` and model
   Euclidean, sphere, hyperbolic, product and submanifold metrics.
 - Ch. 4 “Connections”: “Connections,” “Vector Fields Along Curves,” and
@@ -10191,7 +10373,7 @@ two- and three-dimensional example.
   `included(thm-cartans-closed-subgroup-theorem)`, and Lie II/III.
 - §§3.9 “Complex and real forms” and 3.10 “Example: \(so(3,\mathbb R)\),
   \(su(2)\), and \(sl(2,\mathbb C)\)” → DG-34 and
-  `real-form-and-cartan-decomposition-examples`, including
+  `real-forms-and-real-semisimple-lie-algebras-examples`, including
   `included(def-real-form-of-a-complex-lie-algebra)` and the \(A_1\) examples;
   these sections do not classify all real forms, so Knapp governs that claim.
 - §§4.1 “Basic definitions,” 4.2 “Operations on representations,” 4.3
@@ -10246,7 +10428,7 @@ two- and three-dimensional example.
   Verma modules,” 9.3 “Classification of irreducible finite-dimensional
   representations,” 9.5 “Characters and Weyl character formula,” 9.6
   “Representations of \(sl(n,\mathbb C)\),” and 9.7 “Proof of Theorem 9.19”
-  → DG-32/`highest-weight-representation-examples` for the finite-dimensional
+  → DG-32/`highest-weight-theory-for-complex-semisimple-lie-algebras-examples` for the finite-dimensional
   boundary, including
   `included(thm-highest-weight-classification-of-finite-dimensional-irreducible-representations)`;
   Verma modules and Weyl characters are `already-planned(RL-2/RL-7)`. §9.4 “Bernstein–Gelfand–
@@ -10518,7 +10700,7 @@ scope disposition.
   including `included(def-isotropic-coisotropic-symplectic-and-lagrangian-submanifolds)`,
   `included(prop-graph-of-a-one-form-is-lagrangian-iff-the-one-form-is-closed)`,
   and the conormal/graph examples on
-  `symplectic-foundations-and-normal-form-examples`. Lectures 4 generating
+  `symplectic-manifolds-moser-stability-and-darboux-weinstein-theory-examples`. Lectures 4 generating
   functions and 5
   billiards/recurrence → `deferred(generating-function and billiard dynamics
   are a sequel; recurrence itself cites MT-22 in DG-36)`.
@@ -10537,12 +10719,12 @@ scope disposition.
   “Observation from Linear Algebra,” 9.2 “Tubular Neighborhoods,” 9.3
   tangent space to symplectomorphisms, 9.4 fixed points →
   `included(thm-symplectic-neighborhood-theorem)` and
-  `symplectic-foundations-and-normal-form-examples`; the global
+  `symplectic-manifolds-moser-stability-and-darboux-weinstein-theory-examples`; the global
   symplectomorphism-group manifold is
   `out-of-scope(an infinite-dimensional manifold theory is absent)`.
 - Lectures 10–11 contact forms/dynamics →
   `out-of-scope(contact geometry is explicitly denied in §2)`. Lectures
-  12–13 compatible almost-complex structures/triples → DG-35 items 21–25;
+  12–13 compatible almost-complex structures/triples → DG-35 items 21–26;
   Lectures 14–17 Dolbeault, complex/Kähler/Hodge theory →
   `out-of-scope(complex-manifold and Hodge/PDE machinery is absent)`.
 - Lecture 18 §§18.1 “Hamiltonian and Symplectic Vector Fields,” 18.2
@@ -10567,7 +10749,7 @@ scope disposition.
   including `included(def-symplectic-and-hamiltonian-lie-group-action)`.
 - Lecture 22 §§22.1 “Moment and Comoment Maps,” 22.2 “Orbit Spaces,” 22.3
   “Preview of Reduction,” 22.4 “Classical Examples” → DG-37 and
-  `moment-map-and-symplectic-reduction-examples`,
+  `moment-maps-and-symplectic-reduction-examples`,
   including `included(def-moment-map-and-component-hamiltonian)` and the
   cotangent/coadjoint examples.
 - Lecture 23 §§23.1 “Statement,” 23.2 “Ingredients,” 23.3 “Proof of the
@@ -10596,7 +10778,7 @@ scope disposition.
 - §§2.1 “Symplectic vector spaces,” 2.2 subspaces, 2.3 symplectic bases, 2.4
   linear reduction → DG-35 items 1–8. §§2.5 compatible complex structures,
   2.6 symplectic group, 2.7 polar decomposition → DG-35 items 21–24 and
-  `symplectic-foundations-and-normal-form-examples`. §§2.8 Lagrangian
+  `symplectic-manifolds-moser-stability-and-darboux-weinstein-theory-examples`. §§2.8 Lagrangian
   Grassmannian, 2.9–2.10 Maslov indices →
   `deferred(the Maslov class/index needs a dedicated topology of the
   Lagrangian Grassmannian and is not load-bearing)`.
@@ -10621,7 +10803,7 @@ scope disposition.
   `included(thm-weinstein-lagrangian-neighborhood-theorem)`.
 - §§6.1 “Lagrangian submersions,” 6.2 “Action-angle coordinates,” 6.3
   “Completely integrable systems,” 6.4 “The spherical pendulum” → DG-36 and
-  `hamiltonian-mechanics-and-integrable-system-examples`; named Thm. 6.21 →
+  `hamiltonian-mechanics-and-completely-integrable-systems-examples`; named Thm. 6.21 →
   `included(thm-liouville-arnold-action-angle-theorem)`. Global spherical-
   pendulum monodromy → `inline(prop-period-lattice-monodromy-obstructs-global-action-angle-coordinates)`
   as an outlook, not a load-bearing proof.
@@ -10769,9 +10951,10 @@ ellipticity, harmonic representatives, and Hodge decomposition. Nothing in
 this scaffold asserts those analytic theorems in advance.
 
 Future dedicated sequels, rather than amendments to current tracks, are the
-proper homes for Chern–Weil/characteristic classes, complex and Kähler
-manifolds, Morse theory, nonfree/stratified symplectic reduction, and
-toric/equivariant symplectic geometry.
+proper homes for higher Chern--Gauss--Bonnet and gauge theory, complex and
+Kähler manifolds, Morse theory, nonfree/stratified symplectic reduction, and
+toric/equivariant symplectic geometry. DG-38 now owns the finite-dimensional
+Chern--Weil/characteristic-form interface.
 
 ---
 
@@ -10805,7 +10988,8 @@ toric/equivariant symplectic geometry.
 | DG-15–DG-17 | HA-1, HA-2, HA-4 stable cochain/cohomology/LES ids | de Rham algebraic arguments cannot be built before HA is authored |
 | DG-20, DG-23, DG-26, DG-29, DG-34 | `covering-spaces-and-lifting` | covering local isometries, Cartan–Hadamard's covering conclusion, universal covering Lie groups, and Lie II/III global forms remain conditional |
 | DG-27 onward | `tensor-products-of-modules` | tensor algebra, universal enveloping algebra, PBW, and representation-theory consumers wait for the abstract-algebra tensor construction |
-| DG-18, DG-22, DG-23, DG-33 | MT-11/MT-20 stable ids | measurable/Radon Riemannian volume, cut-locus nullity and polar integration, Bishop–Gromov measure statements, and Haar integration wait for the measure build |
+| DG-17M, then DG-18/DG-22/DG-23 | MT-4/MT-8/MT-9/MT-11/MT-20 stable ids | the new bridge constructs measurable/Radon density measures before Riemannian ball volume, cut-locus nullity, polar integration, or Bishop–Gromov uses them |
+| DG-33 | RG-18 `haar-measure-existence-and-uniqueness` | compact-group Haar is consumed from its owning representation-theory page rather than rebuilt here |
 | DG-36 | MT-22 stable recurrence ids | only the Poincaré-recurrence corollary waits; Hamiltonian mechanics does not |
 | DG-33 | future Hilbert geometry, orthonormal-basis, and compact-operator pages | Peter–Weyl and its representation-density corollaries wait; finite-dimensional compact Lie structure does not |
 | future Hodge sequel | PDE/functional-analysis elliptic machinery | Hodge decomposition and analytic Laplace–Beltrami theory are deliberately absent |
@@ -10831,7 +11015,7 @@ load-bearing only after its measure/functional-analysis seams resolve.
 
 The deliberate denials of §2 remain unresolved by design: Hodge/elliptic
 theory; pseudo-, Finsler, and sub-Riemannian geometry; geometric flows and
-minimal-surface theory; higher Chern–Gauss–Bonnet and Chern–Weil theory;
+minimal-surface theory; higher Chern–Gauss–Bonnet and general gauge theory;
 noncompact reductive representation theory; infinite-dimensional and
 Kac–Moody/super/quantum Lie theory; general Poisson/contact/complex/Kähler
 geometry; and Floer, gauge, toric, equivariant-cohomological, singular-
@@ -10849,3 +11033,440 @@ new quotient category. None is needed by an included theorem.
 commission were reachable. Every unresolved entry above is a future authored-
 page/stable-id dependency already owned by another track or an explicitly
 denied sequel; no permission or external-authority request was made.
+
+### 10.6 Exact canonical-plan reconciliation required by this audit
+
+The prose above is the mathematical source of truth; `research/plan-spec.json`
+was read-only in this lane. The orchestrator must make the following exact
+page/order/edge changes. Every B page must have the singleton `requires` array
+containing its own A page. In particular, remove the redundant
+`smooth-manifolds-and-smooth-maps` edge from
+`tangent-cotangent-and-the-differential-examples`, and remove the redundant
+`the-seifert-van-kampen-theorem` edge from
+`distributions-integral-manifolds-and-the-frobenius-theorem-examples`.
+
+Insert, without renumbering the established integer orders:
+
+- order `476.1`: A page `measurable-densities-and-radon-volume-on-manifolds`,
+  companion `measurable-densities-and-radon-volume-on-manifolds-examples`,
+  category `differential-geometry`, with the ten A-page ids printed in DG-17M
+  (eight ordinary items and two `fs-` items);
+- order `476.2`: its B companion, category `differential-geometry`, requiring
+  only the A page and containing DG-17M's seven example ids;
+- move RG-18 `haar-measure-existence-and-uniqueness` and its companion from
+  `510.065/510.066` to `506.1/506.2`, before DG-33 at order 507. Its A page
+  must require `the-lebesgue-integral-and-the-convergence-theorems`,
+  `product-measures-and-the-fubini-tonelli-theorems`,
+  `radon-measures-and-the-riesz-markov-kakutani-theorem`, `compactness`,
+  `separation-axioms`, and `partitions-of-unity-and-paracompactness`, not the
+  unrelated B-page placeholder `brauers-second-main-theorem-examples`.
+
+Set the changed A-page `requires` arrays to the following exact page ids (all
+other already-correct A arrays remain unchanged):
+
+- `smooth-manifolds-and-smooth-maps`:
+  `topological-spaces-and-continuity`, `subspaces-products-and-quotients`,
+  `connectedness`, `compactness`, `the-topology-of-euclidean-space`,
+  `separation-axioms`, `countability-axioms-and-cardinal-functions`,
+  `the-total-derivative`, and `mixed-partials-taylor-and-extrema`. Remove
+  `urysohn-lemma-and-tietze`, `partitions-of-unity-and-paracompactness`, and
+  `metrization-theorems`; DG-1's new direct proofs replace those routes.
+- `the-exterior-derivative-and-cartan-calculus`: add
+  `line-integrals-and-the-gradient-theorem` to its existing DG-9–DG-11 A-page
+  suppliers.
+- `the-de-rham-complex-homotopy-and-mayer-vietoris`:
+  `smooth-partitions-of-unity-and-exhaustions`,
+  `whitney-embedding-tubular-neighbourhoods-and-approximation`,
+  `tensor-fields-exterior-algebra-and-differential-forms`,
+  `the-exterior-derivative-and-cartan-calculus`,
+  `integration-of-forms-and-the-general-stokes-theorem`,
+  `homotopy-and-homotopy-equivalence`,
+  `the-fundamental-theorems-of-calculus`, `chain-complexes-and-homology`,
+  `chain-homotopy-and-the-homotopy-category`, and
+  `long-exact-sequences-in-homology`.
+- `singular-cochains-mayer-vietoris-and-smooth-singular-comparison`:
+  `whitney-embedding-tubular-neighbourhoods-and-approximation`,
+  `manifolds-with-boundary-collars-and-orientations`,
+  `the-de-rham-complex-homotopy-and-mayer-vietoris`,
+  `singular-chains-and-singular-homology`,
+  `relative-homology-excision-and-mayer-vietoris`,
+  `singular-cohomology-and-coefficient-theorems`,
+  `free-modules-and-exact-sequences`, `homotopy-and-homotopy-equivalence`,
+  `chain-complexes-and-homology`,
+  `chain-homotopy-and-the-homotopy-category`, and
+  `long-exact-sequences-in-homology`.
+- `the-de-rham-theorem-and-degree`: `sard-theorem-and-transversality`,
+  `whitney-embedding-tubular-neighbourhoods-and-approximation`,
+  `manifolds-with-boundary-collars-and-orientations`,
+  `integration-of-forms-and-the-general-stokes-theorem`,
+  `the-de-rham-complex-homotopy-and-mayer-vietoris`,
+  `singular-cochains-mayer-vietoris-and-smooth-singular-comparison`,
+  `singular-cohomology-and-coefficient-theorems`,
+  `cup-cap-cross-products-and-cohomology-rings`,
+  `orientations-poincare-lefschetz-and-alexander-duality`,
+  `chain-complexes-and-homology`,
+  `chain-homotopy-and-the-homotopy-category`,
+  `long-exact-sequences-in-homology`, and
+  `free-modules-and-exact-sequences`.
+- `measurable-densities-and-radon-volume-on-manifolds`:
+  `smooth-partitions-of-unity-and-exhaustions`,
+  `integration-of-forms-and-the-general-stokes-theorem`,
+  `lebesgue-measure-on-euclidean-space`,
+  `the-lebesgue-integral-and-the-convergence-theorems`,
+  `the-lebesgue-and-riemann-integrals-compared`,
+  `product-measures-and-the-fubini-tonelli-theorems`, and
+  `radon-measures-and-the-riesz-markov-kakutani-theorem`.
+- `riemannian-metrics-length-distance-and-volume`: add
+  `measurable-densities-and-radon-volume-on-manifolds` to its present A-page
+  suppliers; retain `compactness` and
+  `line-integrals-and-the-gradient-theorem`.
+- `geodesics-the-exponential-map-completeness-and-hopf-rinow`: its four DG
+  A-page suppliers plus `compactness` and
+  `completeness-and-uniform-continuity`.
+- `jacobi-fields-conjugate-points-and-the-cut-locus`: its DG-8 and DG-19–DG-21
+  A-page suppliers plus `product-measures-and-the-fubini-tonelli-theorems` and
+  `radon-measures-and-the-riesz-markov-kakutani-theorem`.
+- `riemannian-comparison-theorems`: its DG-18–DG-22 A-page suppliers plus
+  `covering-spaces-and-lifting`,
+  `product-measures-and-the-fubini-tonelli-theorems`, and
+  `radon-measures-and-the-riesz-markov-kakutani-theorem`.
+
+For orders 491–515, delete every inherited edge to the immediately preceding
+B page. Replace it with these exact A-page sets and named external suppliers:
+
+- `lie-groups-invariant-fields-and-the-exponential-map`: DG-3, DG-4,
+  DG-8–DG-12, DG-19, DG-20 A ids; `monoids-groups-and-subgroups`,
+  `matrices-and-the-matrix-of-a-linear-map`, and
+  `determinants-of-matrices-over-a-commutative-ring`.
+- `lie-subgroups-actions-and-homogeneous-spaces`: DG-7, DG-9, DG-10, DG-13,
+  DG-20, DG-25 A ids; `subspaces-products-and-quotients` and
+  `covering-spaces-and-lifting`.
+- `lie-algebra-representations-enveloping-algebras-and-pbw`: DG-11 and DG-25
+  A ids; `tensor-products-of-modules`, `modules-and-module-homomorphisms`,
+  `free-modules-and-exact-sequences`, `rings-subrings-and-integral-domains`,
+  and `ideals-and-quotient-rings`.
+- `solvable-and-nilpotent-lie-algebras`: DG-27 A id;
+  `eigenvalues-eigenvectors-and-the-characteristic-polynomial` and
+  `linear-maps-rank-nullity-and-quotient-spaces`.
+- `semisimple-lie-algebras-cohomology-and-levi-theory`: DG-26–DG-28 A ids;
+  `chain-complexes-and-homology`, `long-exact-sequences-in-homology`, and
+  `covering-spaces-and-lifting`.
+- `cartan-subalgebras-and-root-space-decompositions`: DG-27–DG-29 A ids and
+  `the-spectral-theorem-and-singular-value-decomposition`.
+- `root-systems-dynkin-diagrams-and-cartan-killing-classification`: DG-27,
+  DG-29, DG-30 A ids; `inner-product-spaces-and-orthogonality` and
+  `trees-forests-and-spanning-trees`.
+- `highest-weight-theory-for-complex-semisimple-lie-algebras`: DG-27 and
+  DG-29–DG-31 A ids. RL-2/RL-7 remain non-load-bearing ownership citations,
+  not `requires` edges.
+- `compact-lie-groups-maximal-tori-and-peter-weyl-theory`: DG-18, DG-21, and
+  DG-25–DG-32 A ids; `haar-measure-existence-and-uniqueness`,
+  `stone-weierstrass-general`, `hilbert-space-geometry-and-riesz-representation`,
+  `orthonormal-bases-parseval-and-fourier-series`, and
+  `compact-self-adjoint-hilbert-schmidt-and-trace-class-operators`.
+- `real-forms-and-real-semisimple-lie-algebras`: DG-25–DG-33 A ids and
+  `covering-spaces-and-lifting`.
+- `symplectic-manifolds-moser-stability-and-darboux-weinstein-theory`: DG-2,
+  DG-5, DG-7–DG-9, DG-11–DG-15, DG-18, DG-20 A ids and
+  `dual-spaces-bilinear-forms-and-inertia`, and
+  `the-spectral-theorem-and-singular-value-decomposition`.
+- `hamiltonian-mechanics-and-completely-integrable-systems`: DG-8, DG-9,
+  DG-12, DG-15, DG-18–DG-20, DG-35 A ids and
+  `measure-preserving-transformations-and-poincare-recurrence`.
+- `moment-maps-and-symplectic-reduction`: DG-4, DG-26, DG-29, DG-33, DG-35,
+  DG-36 A ids plus `subspaces-products-and-quotients` and `compactness`.
+
+Finally, in the planned item object `def-exactness-at-a-node`, remove
+`thm-the-subobject-inequalities-underlying-exactness` from `deps` and record it
+as `justified_by`, matching the published definition. The published theorem
+currently depends on that definition; leaving the theorem in the planned
+definition's `deps` creates a mixed plan/published cycle reached by DG-15.
+
+Two already-published downstream pages also use future DG B pages merely as
+order anchors. Replace those edges rather than turning B pages into suppliers:
+
+- `harish-chandra-isomorphism-casimir-and-central-characters`: replace
+  `real-forms-and-real-semisimple-lie-algebras-examples` by
+  `highest-weight-theory-for-complex-semisimple-lie-algebras`. Its subject is
+  the complex semisimple/highest-weight spine, not real-form examples.
+- `morse-critical-points-hessians-and-indices`: replace
+  `moment-maps-and-symplectic-reduction-examples` by the A pages
+  `tangent-cotangent-and-the-differential`,
+  `rank-theorems-and-embedded-submanifolds`,
+  `smooth-vector-bundles-and-sections`, `sard-theorem-and-transversality`,
+  `riemannian-metrics-length-distance-and-volume`, and
+  `connections-levi-civita-and-parallel-transport`, together with
+  `dual-spaces-bilinear-forms-and-inertia` and `compactness`. Moment maps are
+  not a prerequisite of Morse critical-point theory.
+
+### 10.7 Read-only published-DG audit amendment
+
+All fourteen currently published DG A/B pairs pass the repository's resolution,
+item-cycle, reading-order, declared-prerequisite-closure, and B-leaf checks.
+The source audit nevertheless exposes one mathematical proof defect and one
+recorded-not-proved dependency cone. Both must be repaired only when published
+items become writable:
+
+- `thm-continuously-homotopic-smooth-maps-are-smoothly-homotopic`, proof step
+  1.1, makes the reparameterized homotopy constant only on $t\le1/3$ and
+  $t\ge2/3$ but then calls the closed sets ending exactly at those transition
+  levels regions with smooth neighbourhoods. Replace the relative closed set
+  by $M\times(-\infty,1/4]\cup M\times[3/4,\infty)$ (or any strictly smaller
+  collars inside the plateaus), and make step 2.1 use that set. No dependency
+  or theorem-statement change is required.
+- `thm-topological-manifolds-are-metrizable-and-paracompact` inherits
+  recorded-not-proved `rem-feferman-levy-model`, `rem-cohen-first-model`, and
+  `rem-sigma-locally-finite-base-produces-compatible-normal-sequence` through
+  the general countable-choice and Nagata–Smirnov chains;
+  `rem-manifold-conventions-and-the-role-of-second-countability` inherits the
+  same cone through that theorem. Before repairing those published items, add
+  DG-1's new
+  `lem-a-topological-manifold-has-a-countable-topology-detecting-family-of-coordinate-bumps`
+  and `thm-a-topological-manifold-has-an-explicit-compatible-metric` before the
+  existing theorem. Reprove paracompactness there by the countable compact-
+  annulus refinement in DG-1 item 35, and replace the existing theorem's
+  Lindelöf/Urysohn/Nagata–Smirnov dependencies by those two suppliers plus
+  `thm-topological-manifolds-are-sigma-compact` and
+  `prop-topological-manifolds-are-locally-compact-and-locally-path-connected`.
+  The convention remark can then continue to depend on the repaired theorem.
+
+No other published DG item needs a dependency amendment on the evidence of
+the complete transitive audit. Published files remain strictly read-only.
+
+### 10.8 Cross-track addition: DG-38 Chern--Weil theory
+
+The repaired Differential Topology scaffold requires a differential-geometric
+Chern--Weil supplier before DT-31. Add this A/B pair after DG-37:
+
+- **516.1 A** `chern-weil-theory-and-characteristic-forms`
+- **516.2 B** `chern-weil-theory-and-characteristic-forms-examples`
+
+The A page requires only these earlier A pages:
+`connections-levi-civita-and-parallel-transport`,
+`riemann-curvature-and-riemannian-submanifolds`,
+`lie-groups-invariant-fields-and-the-exponential-map`,
+`the-exterior-derivative-and-cartan-calculus`,
+`the-de-rham-complex-homotopy-and-mayer-vietoris`,
+`topological-vector-bundles-and-grassmannian-classification`,
+`stiefel-whitney-and-euler-classes-by-universal-constructions`, and
+`chern-and-pontryagin-classes-by-splitting-and-complexification`. The B page
+requires only its A page and is a dependency leaf.
+
+The A inventory, in proof order, is:
+
+1. `def-invariant-polynomial-on-a-matrix-lie-algebra`;
+2. `def-evaluation-of-an-invariant-polynomial-on-curvature`;
+3. `lem-invariant-polynomials-annihilate-covariant-commutators`;
+4. `lem-an-invariant-polynomial-of-curvature-is-closed`;
+5. `def-the-chern-weil-homomorphism`;
+6. `lem-transgression-between-two-connections-is-exact`;
+7. `thm-chern-weil-homomorphism-is-independent-of-connection-and-natural`;
+8. `def-chern-pontryagin-and-euler-characteristic-forms`;
+9. `thm-chern-weil-forms-represent-the-at-characteristic-classes-over-the-reals`;
+10. `prop-chern-weil-forms-obey-direct-sum-and-pullback-formulas`;
+11. `rem-integral-torsion-is-not-detected-by-real-characteristic-forms`.
+
+The B inventory is
+`ex-curvature-and-first-chern-form-of-a-line-bundle`,
+`ex-flat-connections-have-vanishing-positive-degree-real-chern-weil-classes`,
+`ex-pontryagin-forms-from-a-real-connection`, and
+`cex-changing-a-connection-changes-the-form-but-not-its-de-rham-class`.
+
+Use symmetric multilinear Ad-invariant polynomials on matrix Lie algebras and
+the fixed wedge/matrix-order convention. Closedness cites DG-21's Bianchi
+identity. Independence and naturality use the explicit transgression for the
+one-parameter connection on $M\times I$. Chern forms are for complex bundles;
+Pontryagin forms use complexification of real bundles; the Pfaffian Euler form
+requires an oriented even-rank Euclidean bundle with a metric connection.
+Comparison with AT characteristic classes is over $\mathbb R$ and makes no
+integral-torsion claim. DG-21 retains ownership of bundle curvature and Bianchi;
+DG-38 must cite rather than duplicate them.
+
+Authoritative full-text controls are Bott, *Lectures on Characteristic Classes
+and Foliations*, §§2--5
+(`https://poisson.phc.dm.unipi.it/~lmigliorini/secondo_magistrale/gauge_theory/bott_foliations.pdf`),
+and Milnor--Stasheff, *Characteristic Classes*, Appendix C. DT-31 consumes the
+DG-38 A page; no currently published item consumes this new pair, so it is not
+an independent Phase-2 root.
+
+## 12. Complex Analysis reconciliation (2026-09-08)
+
+Planned SC-5 consumes DG-11
+`tensor-fields-exterior-algebra-and-differential-forms`, DG-12
+`the-exterior-derivative-and-cartan-calculus`, and DG-14
+`integration-of-forms-and-the-general-stokes-theorem`. Planned CA-RS-H consumes
+DG-11, DG-12, DG-14, and DG-18
+`riemannian-metrics-length-distance-and-volume`. Planned CA-RS-3 consumes
+DG-17 `the-de-rham-theorem-and-degree`.
+
+DG retains ownership of chart-independent forms, the exterior derivative,
+orientation, Stokes, Hodge star, and de Rham comparison. Complex Analysis owns
+only the complexified split `d = partial + dbar`. These planned edges add zero
+direct and zero transitive published consumers and no Phase-2 root.
+
+## 13. Lie Theory reconciliation (2026-09-08)
+
+DG-30 `cartan-subalgebras-and-root-space-decompositions` and DG-32
+`highest-weight-theory-for-complex-semisimple-lie-algebras` are now
+Phase-2-eligible supplier pairs for published Lie consumers. This supersedes
+the earlier blanket claim that no planned DG pair supplies a published item.
+The exact owning-item chains and published impact sets are:
+### Cross-category Phase-2 roots and their published impact
+
+These are not Lie-owned duplicates. Root must reconcile them in the owning DG
+scaffold and schedule their A pages before the Lie Phase-3 consumer rewrite:
+
+For compact exactness, define **ROOT-70** as the following complete published
+Lie closure. RL-1 A:
+`thm-the-root-set-is-a-reduced-crystallographic-root-system`,
+`def-root-reflections-and-the-weyl-group-action`,
+`def-fundamental-weights-for-a-chosen-simple-root-system`,
+`thm-finite-dimensional-simple-modules-are-classified-by-dominant-highest-weights`,
+`lem-rho-shift-intertwines-the-dot-and-ordinary-weyl-actions`,
+`lem-weyl-invariant-cartan-polynomials-extend-to-g-invariants`,
+`thm-harish-chandra-isomorphism-for-the-center`,
+`thm-symmetric-invariants-restrict-to-weyl-invariants`,
+`prop-harish-chandra-map-is-injective`,
+`cor-central-characters-are-dot-weyl-orbits`,
+`cor-the-center-is-a-polynomial-algebra-of-rank-many-generators`,
+`thm-enveloping-algebra-is-free-over-its-center`; RL-1 B:
+`cex-unshifted-weyl-orbits-do-not-classify-central-characters`,
+`ex-the-zero-weight-singular-central-character`,
+`ex-dot-conjugate-weights-have-the-same-central-character`,
+`ex-sl3-harish-chandra-center-generators`; RL-2 A:
+`thm-shapovalov-determinant-formula`,
+`cor-verma-irreducibility-criterion-from-shapovalov-determinants`; RL-2 B:
+`ex-sl2-reducible-and-generic-verma-modules`,
+`ex-finite-dimensional-sl2-quotient-of-a-verma-module`; RL-3 A:
+`lem-simple-root-singular-vector-in-a-verma-module`,
+`thm-verma-embedding-for-an-arbitrary-positive-root`,
+`def-strong-linkage-order-on-weights`,
+`thm-jantzen-sum-formula-for-a-verma-module`,
+`prop-simple-reflection-embedding-of-verma-modules`,
+`thm-bgg-verma-homomorphism-criterion`,
+`thm-strong-linkage-principle-for-verma-modules`,
+`cor-antidominant-verma-modules-are-simple`,
+`cor-generic-verma-modules-are-simple`,
+`lem-verma-embedding-implies-strong-linkage`,
+`prop-verma-composition-multiplicities-are-finite`; RL-3 B:
+`ex-a2-regular-dominant-verma-embedding-poset`,
+`ex-a2-singular-dot-orbit-collapses`, `ex-sl2-verma-embedding-chain`,
+`cex-equal-central-character-does-not-give-every-verma-embedding-direction`;
+RL-4 A: `def-bgg-category-o`, `def-integral-weyl-group-of-a-weight`,
+`thm-central-character-summands-split-into-linkage-blocks`,
+`lem-integral-reflection-orbits-are-linkage-equivalence-classes`,
+`lem-finite-b-stable-generators-and-weight-flags-in-category-o`,
+`prop-equivalent-support-description-of-category-o`,
+`prop-verma-and-finite-dimensional-modules-lie-in-category-o`,
+`thm-category-o-is-abelian-and-extension-closed`,
+`lem-the-center-has-finite-dimensional-image-on-an-o-object`,
+`def-generalized-central-character-subcategory-of-o`,
+`prop-hom-spaces-in-category-o-are-finite-dimensional`,
+`prop-tensoring-with-a-finite-dimensional-module-preserves-category-o`,
+`cor-restricted-duality-preserves-linkage-blocks`,
+`lem-extensions-between-distinct-o-linkage-classes-split`,
+`lem-o-modules-admit-finite-highest-weight-filtrations-after-truncation`,
+`lem-n-plus-invariants-exist-in-every-nonzero-o-module`,
+`lem-finite-dot-orbit-weight-spaces-detect-o-subquotients`,
+`thm-every-category-o-object-has-finite-length`,
+`def-grothendieck-group-and-character-of-category-o`,
+`thm-simple-objects-of-category-o-are-highest-weight-modules`,
+`lem-generalized-central-character-submodules-are-direct-summands`,
+`prop-restricted-duality-is-an-exact-involution-on-category-o`,
+`lem-o-modules-split-across-separated-simple-classes`,
+`lem-verma-self-extensions-in-category-o-split`,
+`prop-the-grothendieck-group-of-o-has-simple-and-standard-bases`,
+`thm-category-o-decomposes-by-generalized-central-character`,
+`def-standard-and-costandard-objects-in-category-o`,
+`prop-costandard-objects-have-simple-socles`; RL-4 B:
+`ex-a-singular-a2-central-character-summand`,
+`cex-an-infinite-direct-sum-of-verma-modules-is-not-in-category-o`,
+`cex-a-weight-module-with-unbounded-upward-support-is-not-in-o`,
+`cex-category-o-is-not-extension-closed-in-all-g-modules`,
+`cex-tensor-products-of-two-verma-modules-need-not-lie-in-o`,
+`ex-the-regular-integral-sl2-block-of-category-o`, and
+`ex-a-generic-sl2-block-is-semisimple`.
+
+1. DG-30
+   `thm-cartan-subalgebras-of-a-complex-semisimple-lie-algebra-are-conjugate`
+   directly supplies published
+   `thm-cartan-subalgebras-are-conjugate-in-a-complex-semisimple-lie-algebra`.
+   Its complete published Lie impact is the exact 35-item set
+   `{thm-cartan-subalgebras-are-conjugate-in-a-complex-semisimple-lie-algebra,
+   lem-regular-semisimple-elements-form-a-dense-open-subset,
+   lem-an-invariant-polynomial-is-determined-by-its-cartan-restriction}` union
+   HC-EXT. This is an owning-DG
+   Phase-2 root, not planned-only Lie enrichment.
+2. DG-30
+   `thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system`
+   directly supplies published
+   `thm-the-root-set-is-a-reduced-crystallographic-root-system`. Its complete
+   published Lie impact is ROOT-70 exactly. The machine-recomputed closure
+   count, rather than the older estimate, is controlling.
+3. DG-32
+   `thm-highest-weight-classification-of-finite-dimensional-irreducible-representations`
+   directly supplies published
+   `thm-finite-dimensional-simple-modules-are-classified-by-dominant-highest-weights`.
+   Its complete published Lie impact is exactly that theorem union HC-EXT (33
+   items).
+
+The adequate DG proof chain for root (1) includes
+`thm-centralizer-of-a-regular-semisimple-element-is-a-cartan-subalgebra`; it
+has zero direct published consumers and the same 35-item transitive impact as
+root (1). The adequate DG proof chain for root (2) must include, strictly earlier,
+`thm-weyls-complete-reducibility`, `thm-root-sl-two-triple`,
+`thm-finite-dimensional-representations-of-sl-two`,
+`thm-root-string-property`, and
+`thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional`.
+Each of these five earlier supplier items has zero direct published consumers
+and complete transitive published impact ROOT-70; the final root-system theorem
+alone directly supplies the published Lie interface theorem.
+The adequate DG-32 chain for root (3) must include
+`lem-every-finite-dimensional-irreducible-representation-has-a-highest-weight-vector`,
+`lem-highest-weight-of-a-finite-dimensional-module-is-dominant-integral`,
+`lem-integrability-relations-for-a-dominant-highest-weight`,
+`def-dominant-integrable-highest-weight-cyclic-module`,
+`lem-pbw-shows-the-dominant-cyclic-highest-weight-generator-survives`,
+`lem-simple-root-integrability-bounds-the-dominant-cyclic-module`,
+`lem-a-dominant-cyclic-highest-weight-module-has-a-unique-simple-quotient`,
+`thm-finite-dimensionality-of-lambda-highest-weight-simple-modules-for-dominant-integral-lambda`,
+and `thm-simple-highest-weight-modules-are-classified-by-their-highest-weight`.
+Each of these nine earlier DG-32 supplier items has zero
+direct published consumers and the exact 33-item transitive impact of root (3);
+the final classification theorem alone directly supplies the published Lie
+interface. Phase 3 turns the three published Lie
+theorems into short compatibility/interface results using the DG suppliers; it
+does not retain hidden `[F]` facts or duplicate the DG proofs.
+
+### Real Analysis reconciliation (2026-09-08)
+
+Preserve the existing owner split: DG-4 consumes RC-1/RC-2, DG-8 consumes
+RC-10, and DG-14 consumes RC-8/RC-9. Manifold differential forms and general
+Stokes remain DG-owned. These are planned-to-planned or existing-published
+seams already represented in the scaffold and create no additional Phase-2
+root.
+
+### Scheme Theory reconciliation (2026-09-08)
+
+Scheme AV-21 deletes its proposed fine-sheaf/de Rham comparison items.
+Differential Geometry retains ownership of de Rham complexes and the de Rham
+theorem; Scheme retains derived sheaf cohomology, Godement/flasque resolutions,
+Cech comparison, and Leray's acyclic-cover theorem. All consumers are planned,
+so this boundary has zero published impact and creates no DG Phase-2 root.
+
+### Representation Theory reconciliation (2026-09-08)
+
+DG-33's compact-Lie Peter--Weyl statement is a specialization/agreement
+interface. Representation Theory RG-22 owns the general compact-Hausdorff
+Peter--Weyl theorem and consumes no maximal-torus or Weyl-integration result
+from DG. Both consumers are planned, so the seam has zero published impact and
+creates no DG Phase-2 root.
+
+### Topology reconciliation (2026-09-08)
+
+Move `the-seifert-van-kampen-theorem` from
+`distributions-integral-manifolds-and-the-frobenius-theorem-examples` to its A
+companion `distributions-integral-manifolds-and-the-frobenius-theorem`; the B
+then requires only its A. This supersedes §10.6's instruction to delete the
+edge without recording its A-side home. The supplier is already published,
+so this is Phase 3 and creates no DG Phase-2 root.

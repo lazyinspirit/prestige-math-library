@@ -23,8 +23,9 @@ re-proving it. The last six pairs return to geometry through coherent sheaves,
 cohomology, divisors, smooth proper curves, Riemann--Roch, Serre duality, and
 blowups.
 
-There are **27 A/B pairs** (`AV-1`--`AV-26`, with the inserted prerequisite
-pair `AV-5a`). All mathematical-content rows
+There are **29 A/B pairs**: the historical 27 (`AV-1`--`AV-26`, with the
+inserted prerequisite pair `AV-5a`) plus the audit-inserted AG-P2-1 and
+AG-LIE-1 pairs. All mathematical-content rows
 state component provenance separately for statement and proof. Definitions and
 examples without a proof component use `not-applicable`; statements for which
 the future author must supply a proof use `literature-derived` or `ai-altered`
@@ -2334,18 +2335,835 @@ pair. No other blocker remains.
 
 ---
 
+## Binding publication-state and dependency audit (2026-09-08)
+
+This section supersedes every conflicting placement, `requires`, count, and
+consumer-seam sentence above for AV-1 through AV-8.  It records the state of
+the live corpus; it does **not** authorize an edit to a published page or item.
+The five live A/B pairs were audited item by item, as were the three empty
+planned pairs and the inserted AV-5a pair.  The machine plan remains unchanged
+in this phase.
+
+### Publication gate and measured defect
+
+The ten AG pages AV-1 through AV-5 are marked `published`, but the 29 items on
+the AV-1 pair (22 A, 7 B) and all 30 items on the AV-2 pair (23 A, 7 B) are
+still `draft`.  AV-3, AV-4, and AV-5 contain 32, 33, and 56 published items,
+respectively.  Page publication therefore cannot be used as evidence that an
+AV-1/AV-2 theorem is available.  In particular, the published AV-3--AV-5
+items contain the following **32 direct published-item -> draft-item edges**:
+
+| published home | published consumer | draft supplier |
+|---|---|---|
+| AV-3 A | `lem-standard-projective-opens-are-affine-spaces` | `def-affine-algebraic-set` |
+| AV-3 A | `def-projective-closure-affine-set` | `def-affine-algebraic-set` |
+| AV-3 A | `thm-ideal-projective-closure-saturation` | `thm-affine-nullstellensatz-correspondence` |
+| AV-3 A | `lem-projective-irreducibility-homogeneous-prime` | `thm-affine-nullstellensatz-correspondence` |
+| AV-3 A | `def-regular-function-projective-variety` | `def-function-field-variety` |
+| AV-3 A | `def-regular-function-projective-variety` | `def-regular-function-classical-variety` |
+| AV-3 A | `thm-global-regular-functions-projective-variety` | `thm-global-regular-functions-affine-variety-coordinate-ring` |
+| AV-3 A | `def-morphism-to-projective-space-homogeneous-coordinates` | `def-morphism-classical-varieties` |
+| AV-3 A | `lem-projective-variety-cone-irreducible` | `thm-affine-variety-prime-coordinate-ring` |
+| AV-4 A | `def-product-varieties-universal-property` | `def-affine-algebraic-set` |
+| AV-4 A | `thm-affine-variety-product-coordinate-ring` | `def-affine-variety-classical` |
+| AV-4 A | `thm-affine-variety-product-coordinate-ring` | `cor-affine-algebraic-set-coordinate-duality-complete` |
+| AV-4 A | `thm-affine-variety-product-coordinate-ring` | `thm-affine-algebraic-sets-coordinate-duality` |
+| AV-4 A | `thm-affine-variety-product-coordinate-ring` | `thm-affine-morphisms-coordinate-ring-anti-equivalence` |
+| AV-4 A | `thm-affine-variety-product-coordinate-ring` | `thm-affine-variety-prime-coordinate-ring` |
+| AV-4 A | `lem-fibre-as-base-change-to-point-classical` | `def-regular-map-image-and-fibre-classical` |
+| AV-5 A | `lem-classical-variety-noetherian-components` | `lem-algebraic-set-finite-irreducible-components` |
+| AV-5 A | `thm-affine-variety-dimension-coordinate-ring` | `thm-affine-nullstellensatz-correspondence` |
+| AV-5 A | `lem-general-variety-function-field-charts` | `thm-function-field-independent-affine-open` |
+| AV-5 A | `lem-general-variety-function-field-charts` | `lem-dominant-map-pullback-function-fields` |
+| AV-5 A | `cor-dimension-birational-invariant` | `thm-birational-equivalence-function-fields` |
+| AV-5 A | `thm-principal-subvariety-codimension-one` | `thm-affine-nullstellensatz-correspondence` |
+| AV-5 A | `lem-dimension-local-ring-codimension-closure` | `thm-local-ring-affine-variety-localization` |
+| AV-5 A | `lem-zero-dimensional-classical-variety-finite` | `thm-affine-nullstellensatz-correspondence` |
+| AV-5 A | `lem-dominant-affine-map-normalization-over-open` | `thm-coordinate-ring-principal-open` |
+| AV-5 A | `lem-dominant-affine-image-contains-principal-open` | `thm-affine-nullstellensatz-correspondence` |
+| AV-5 A | `def-fibre-dimension-at-point-classical` | `def-morphism-classical-varieties` |
+| AV-5 A | `def-fibre-dimension-at-point-classical` | `thm-affine-nullstellensatz-correspondence` |
+| AV-5 A | `lem-relative-projective-homogeneous-equations` | `thm-affine-nullstellensatz-correspondence` |
+| AV-5 A | `def-projective-morphism-classical` | `def-morphism-classical-varieties` |
+| AV-5 A | `def-module-finite-affine-classical-map` | `thm-affine-morphisms-coordinate-ring-anti-equivalence` |
+| AV-5 A | `cor-module-finite-affine-map-quasi-finite` | `thm-affine-nullstellensatz-correspondence` |
+
+No status flip is an acceptable repair.  Because all four AV-1/AV-2 pages are
+already marked `published`, none of their 59 draft items is eligible for Phase
+2.  Phase 2 instead builds the wholly new replacement pair specified below.
+Phase 3 then cuts every published consumer over to the replacement, rejudges
+it, and cleans up the stranded AV-1/AV-2 draft memberships.  B items remain
+leaves and are never suppliers.  Until that gate is met, all 32 edges above
+remain publication blockers.
+
+The transitive item closure of the five live pairs contains 736 item nodes and
+exactly the 59 draft AV-1/AV-2 items above.  One of those draft items,
+`thm-affine-algebraic-sets-coordinate-duality`, has proof provenance
+`not-supplied`; its published consumer may not inherit the claim through the
+later completion corollary.  The replacement therefore merges the announced
+theorem and completion corollary into one proved antiequivalence theorem.  The
+46 inherited `forward_refs` flags elsewhere in the closure are foundational
+orientation records, not logical dependencies.  The page-level path from
+AV-1 through the Chern/Pontryagin examples page is a placement accident and
+drags unrelated algebraic topology into the apparent closure; it is not a
+mathematical prerequisite.
+
+### Binding Phase-2 replacement pair
+
+This is the cheapest complete collision-free replacement: one new A/B pair,
+not two copies of the published AV-1/AV-2 pages. Its A page contains the
+39-item transitive closure actually used by published consumers after merging
+the unproved duality announcement with its completion, plus the five missing
+rational-map proof steps. The five unused old A items and all fourteen old B
+items are not copied. They remain Phase-3 cleanup material on their published
+homes.
+
+| field | binding value |
+|---|---|
+| A page id / title | `classical-affine-varieties-coordinate-rings-morphisms-and-rational-maps-interface` / *Classical affine varieties: coordinate rings, morphisms, and rational maps* |
+| A category / order | `algebraic-geometry` / **366.0403**, after AT-22 B and before published AV-1 |
+| A `requires` | `ideals-and-quotient-rings`, `the-field-of-fractions-and-localisation`, `prime-spectra-and-radicals`, `noether-normalisation-and-nullstellensatz` |
+| B page id / title | `classical-affine-varieties-coordinate-rings-morphisms-and-rational-maps-interface-examples` / *Classical affine varieties: coordinate rings, morphisms, and rational maps — examples* |
+| B category / order / `requires` | `algebraic-geometry` / **366.0404** / singleton `classical-affine-varieties-coordinate-rings-morphisms-and-rational-maps-interface` |
+| companions | reciprocal A/B ids above |
+| Phase class | **Phase-2 root**: it has 26 direct published consumers and a 105-item total published impact |
+
+All four A requirements are existing A pages and have orders below 366.0403.
+No A requirement names a B page. The B page contains the single leaf example
+listed below, and no page or item may depend on it. The A inventory order is
+binding; every internal dependency points to an earlier row. External item
+dependencies are taken only from the four declared A-page interfaces.
+Every A statement below is `literature-derived`; the sixteen definition rows
+have proof provenance `not-applicable` and the other twenty-eight rows have
+proof provenance `ai-altered`. The B example is `literature-derived` with
+proof provenance `not-applicable`.
+
+| # | exact A-item id | exact title and proof obligation |
+|---:|---|---|
+| 1 | `def-classical-affine-algebraic-set-with-empty-boundaries` | *Classical affine algebraic sets, including the empty boundaries*: define $V(S)$, $V(\varnothing)$, and $V(1)$. |
+| 2 | `lem-classical-zero-locus-ideal-radical-invariance` | *A classical zero locus depends only on the generated ideal and its radical*. |
+| 3 | `thm-classical-affine-zero-loci-form-zariski-closed-sets` | *Classical affine zero loci form the Zariski closed sets*: prove arbitrary intersections and finite unions. |
+| 4 | `def-classical-vanishing-ideal` | *The classical vanishing ideal*. |
+| 5 | `lem-classical-zero-locus-vanishing-ideal-galois-connection` | *Zero loci and vanishing ideals form a Galois connection*. |
+| 6 | `thm-classical-affine-nullstellensatz-correspondence` | *Classical affine algebraic sets correspond to radical ideals, and irreducible sets to prime ideals*: cite both exact Nullstellensatz directions and carry their choice strength. |
+| 7 | `def-classical-affine-variety-interface` | *A classical affine variety*: nonempty and irreducible over an algebraically closed field. |
+| 8 | `lem-classical-irreducible-space-open-intersection-criterion` | *Irreducibility is equivalent to the nonempty-open intersection criterion*. |
+| 9 | `lem-classical-affine-variety-nonempty-opens-dense` | *Every nonempty open of a classical affine variety is dense*. |
+| 10 | `def-classical-affine-coordinate-ring` | *The coordinate ring of a classical affine algebraic set*. |
+| 11 | `thm-classical-affine-variety-prime-coordinate-ring` | *A classical affine variety has a domain coordinate ring, and conversely*. |
+| 12 | `thm-classical-polynomial-functions-equal-coordinate-ring` | *Polynomial functions on an affine algebraic set are its coordinate ring*. |
+| 13 | `def-classical-principal-open` | *A principal open subset of a classical affine variety*. |
+| 14 | `lem-classical-principal-opens-form-affine-basis` | *Principal opens form a basis and multiply under intersection*. |
+| 15 | `thm-classical-principal-open-coordinate-ring-localization` | *Regular functions on a principal open are the principal localization*: include the empty-open case and the strong-Nullstellensatz clearing-denominators step. |
+| 16 | `lem-classical-affine-algebraic-set-finite-irreducible-components` | *A classical affine algebraic set has a unique finite irredundant decomposition*: cite the minimal-prime theorem and inherit its choice strength. |
+| 17 | `def-reduced-finitely-generated-k-algebra-interface` | *A reduced finitely generated $k$-algebra*. |
+| 18 | `lem-classical-affine-closed-points-are-maximal-ideals` | *Classical affine points are maximal ideals*: state algebraic closure and cite weak Nullstellensatz. |
+| 19 | `def-classical-regular-function-on-open-set` | *A regular function on an open subset of a classical affine variety*. |
+| 20 | `lem-classical-regular-functions-locality-and-gluing` | *Classical regular functions satisfy locality and unique gluing*. |
+| 21 | `thm-classical-affine-global-regular-functions-coordinate-ring` | *Global regular functions on a classical affine variety are its coordinate ring*. |
+| 22 | `def-classical-affine-variety-morphism` | *A morphism from an open subset of a classical affine variety to an affine variety*: use pullback of regular functions, so later gluing is well typed. |
+| 23 | `def-classical-regular-map-image-and-set-theoretic-fibre` | *Images and set-theoretic fibres of classical regular maps*: explicitly distinguish later scheme fibres. |
+| 24 | `lem-classical-morphism-inverse-image-of-closed-is-closed` | *A classical morphism pulls Zariski closed sets back to closed sets*: prove it from coordinate pullback, not from an undeclared continuity assertion. |
+| 25 | `thm-classical-affine-morphisms-coordinate-ring-antiequivalence` | *Classical affine morphisms are contravariantly equivalent to coordinate-ring homomorphisms*. |
+| 26 | `thm-classical-affine-algebraic-sets-reduced-algebras-antiequivalence` | *Classical affine algebraic sets and reduced finitely generated $k$-algebras are contravariantly equivalent*: prove objects and morphisms here; this single theorem replaces both the old unproved announcement and its completion corollary. |
+| 27 | `lem-classical-affine-morphisms-equal-on-dense-open` | *Affine-source morphisms agreeing on a dense open agree everywhere*. |
+| 28 | `def-classical-germ-and-local-ring` | *Germs and the local ring of a classical affine variety*. |
+| 29 | `thm-classical-affine-local-ring-is-localization` | *The classical affine local ring is localization at the point's maximal ideal*. |
+| 30 | `thm-classical-principal-open-is-affine-variety` | *Every nonempty principal open is a classical affine variety*: realize $D_X(f)$ by the graph equation $tf-1$ and identify its coordinate ring with $k[X]_f$. |
+| 31 | `def-classical-affine-open-subset` | *A classical affine open subset and its coordinate ring*: principal opens are the proved basis used in this interface. |
+| 32 | `def-classical-variety-function-field` | *The function field of an irreducible classical affine variety*. |
+| 33 | `thm-classical-function-field-independent-of-affine-open` | *The function field is independent of the chosen nonempty principal affine open*. |
+| 34 | `def-classical-rational-map` | *A rational map as an equivalence class of morphisms on nonempty opens*. |
+| 35 | `lem-classical-rational-map-equivalence-transitive` | *The rational-map relation is transitive*: use irreducibility to keep the common restriction nonempty. |
+| 36 | `def-classical-rational-map-domain-union` | *The candidate domain of a rational map*: define only the union of representative domains; assert neither gluing nor maximality here. |
+| 37 | `def-classical-dominant-morphism-and-rational-map` | *Dominant classical morphisms and rational maps*. |
+| 38 | `lem-classical-open-source-morphisms-equal-on-dense-open` | *Morphisms defined on an open source and agreeing on a dense open agree on their common domain*: use row 24 and irreducibility. |
+| 39 | `lem-classical-morphisms-glue-on-open-cover` | *Compatible classical morphisms to an affine target glue over an open cover*: glue coordinate functions by row 20 and verify the image equations locally. |
+| 40 | `thm-classical-rational-map-maximal-domain-affine-target` | *A rational map to an affine target has a unique maximal open domain*: apply rows 38--39 to the union in row 36. |
+| 41 | `lem-classical-dominant-map-pulls-back-function-fields` | *Dominant maps pull back function fields functorially*: use the proved maximal-domain theorem, not the bare union definition. |
+| 42 | `thm-classical-dominant-rational-maps-function-field-embeddings` | *Dominant rational maps to an affine variety correspond to field embeddings*: the reverse direction explicitly cites row 6 for “nondense image implies a nonzero vanishing function.” |
+| 43 | `def-classical-birational-equivalence` | *Birational maps and birational equivalence of classical varieties*. |
+| 44 | `thm-classical-birational-equivalence-iff-function-fields-isomorphic` | *Classical integral varieties are birational exactly when their function fields are isomorphic over $k$*. |
+
+The B inventory is exactly one item:
+`ex-classical-affine-line-coordinate-local-and-function-field-dictionary`,
+*The affine-line coordinate, local, and function-field dictionary*. It
+computes $k[\mathbf A^1]$, $k[t]_{(t-a)}$, $k(t)$, a principal open, and the
+corresponding morphism pullback. It is illustrative only and has zero direct
+or transitive consumers.
+
+The proof order adds exact logical edges absent from the old draft: row 30
+uses rows 11, 15, and 25; row 38 uses rows 9, 22, and 24; row 39 uses rows 20
+and 22; row 40 uses rows 34--36 and 38--39; row 41 uses rows 32--33, 37, and
+40; row 42 uses rows 6, 25, 33, 37, 40, and 41. Row 26 is proved and replaces
+both old duality ids, so no item directly or transitively consumes a
+recorded/not-proved result.
+
+**Authoritative full text.** The complete classical proofs and their
+hypotheses are in Milne, *Algebraic Geometry*, Ch. 2 §§a--m, Ch. 3 §§a--l,
+and Ch. 5 §§a--e ([author PDF](https://www.jmilne.org/math/CourseNotes/AG.pdf));
+Arapura, *Basic Algebraic Geometry*, Ch. 1 §§1.1--1.7 and Ch. 3 §§3.1--3.3
+([author PDF](https://www.math.purdue.edu/~arapura/preprints/algeom.pdf)); and
+Artin, MIT 18.721 notes, Ch. 2 §§2.2--2.7 and Ch. 3 §3.4
+([author PDF](https://math.mit.edu/classes/18.721/notes/ag-jan26-2022.pdf)).
+These are the same full texts already read for AV-1/AV-2; no search snippet or
+unavailable source supports the replacement.
+
+### Pair-by-pair mathematical repair ledger
+
+1. **AV-1 (published, Phase-3 cleanup/cutover only).**  Retain the classical convention that an
+   affine variety is nonempty and irreducible over an algebraically closed
+   base field.  Propagate the actual strength of the strong Nullstellensatz
+   into `thm-affine-nullstellensatz`,
+   `thm-affine-nullstellensatz-correspondence`,
+   `thm-affine-variety-prime-coordinate-ring`,
+   `thm-affine-algebraic-sets-coordinate-duality`, and every proof that uses
+   maximal ideals as rational points.  The finite-components route also
+   inherits the proof strength recorded by its minimal-prime supplier; do not
+   relabel that route as ZF.  Remove the Chern/Pontryagin page-level edge.
+
+2. **AV-2 (published, Phase-3 cleanup/cutover only).**  The present definition of the maximal
+   domain of a rational map asserts that locally represented morphisms glue,
+   but its only equality lemma is stated for whole affine varieties and the
+   text has not proved that principal opens are affine classical varieties.
+   Insert, in proof order,
+   `thm-principal-open-is-classical-affine-variety`,
+   `lem-compatible-classical-morphisms-glue-on-open-cover`,
+   `lem-morphisms-on-open-source-equal-on-dense-open`,
+   `thm-maximal-domain-rational-map-affine-target`, and
+   `lem-inverse-image-zariski-closed-under-classical-morphism`; make the
+   maximal-domain definition merely define the union and let the theorem
+   prove representability and maximality.  Add
+   `thm-affine-nullstellensatz-correspondence` to
+   `thm-rational-maps-to-affine-variety-function-field`: its reverse
+   direction uses “nondense image implies a nonzero vanishing function.”
+   State algebraic closure wherever that argument or the affine point/ring
+   anti-equivalence is used, and propagate the inherited choice annotation.
+
+3. **AV-3 (published, Phase-3 repair only).**  All nine direct AV-1/AV-2
+   status blockers are listed above.  In addition,
+   `thm-global-regular-functions-projective-variety` invokes
+   `thm-cayley-hamilton` without declaring it.  Add that dependency.  Keep the
+   theorem's nonempty integral/projective and algebraically closed hypotheses;
+   do not silently generalize its conclusion to arbitrary projective schemes.
+   The saturation and cone/prime arguments must cite the precise homogeneous
+   and affine Nullstellensatz directions they use.
+
+4. **AV-4 (published, Phase-3 repair only).**  Its seven direct status
+   blockers are listed above.  `thm-graph-closed-for-classical-variety-morphism`
+   currently cites only the projective product and Segre image, although the
+   proof uses continuity of a classical morphism and a closed diagonal.  Add
+   `lem-inverse-image-zariski-closed-under-classical-morphism` and a preceding
+   `lem-diagonal-projective-variety-closed` (proved from bihomogeneous
+   equations/Segre, with the relevant algebraically closed convention).
+   `cex-tensor-product-of-domains-not-domain` invokes the Chinese remainder
+   theorem but omits `thm-chinese-remainder-theorem-for-comaximal-ideals`.
+   Preserve the deliberate warning that the Zariski topology of a product is
+   generally finer than the product topology; the topology product page is
+   vocabulary, not a proof of equality.
+
+5. **AV-5 (published, Phase-3 repair only).**  Its sixteen direct status
+   blockers are listed above.  Keep algebraic closure explicit for every
+   classical closed-point/Nullstellensatz step and keep the
+   `dim(empty)=-infinity` convention.  The local-ring/codimension theorem must
+   use the stated irreducible-variety hypotheses and the correct direction of
+   the prime/irreducible-closed correspondence.  The fibre results must not
+   replace scheme-theoretic fibres by set-theoretic inverse images.
+   `cex-affine-intersection-bound-singular-ambient` invokes primitive-part
+   reduction/Gauss's lemma without declaring
+   `lem-gauss-lemma-over-a-ufd`; add it.
+
+6. **Published scheme supplier used by AV-5 and planned AV-6.**
+   `thm-affine-closed-immersions-quotient-rings` declares only closed
+   immersion, affine scheme, and affine anti-equivalence dependencies, but its
+   proof imports the ideal sheaf, the basic-open quotient calculation, and
+   affineness of the source.  Its converse direction is therefore not
+   supplied.  `thm-quasi-coherent-ideal-closed-subscheme-correspondence`
+   invokes that theorem in both directions and is not an independent repair.
+   Repair and rejudge the published scheme pair before either result supplies
+   AV-6; do not create a circular AG proof of the scheme theorem.
+
+7. **AV-5a (unpublished supplier pair).**  Replace the single
+   `lem-ag-standard-smooth-regular-geometric-fibres` proof route through a
+   separable residue field: a standard-smooth point over an imperfect field
+   can have a purely inseparable residue field.  Add
+   `lem-ag-standard-smooth-residue-cotangent-rank`, proved directly from the
+   standard presentation and conormal sequence.  Split
+   `lem-ag-geometric-regularity-field-tests` into
+   `lem-ag-geometric-regularity-finite-purely-inseparable-test`,
+   `lem-ag-geometric-regularity-finite-type-approximation`, and
+   `lem-ag-regularity-faithfully-flat-descent`; flatness descent alone does not
+   descend regularity.  Split the converse smooth-presentation proof into
+   `lem-ag-geometrically-regular-fibre-differentials-projective`,
+   `lem-ag-conormal-splitting-near-smooth-point`, and
+   `lem-ag-jacobian-minor-from-conormal-splitting`.  Retain the finite-**S**-
+   module local flatness criterion (Stacks tag 00MK); a criterion assuming
+   finiteness over the base or pre-existing base flatness is inadequate.
+   These seven named items replace two old items and add one new item, making
+   the A inventory 26 items; its 7-item B page
+   remains unchanged and a leaf.
+
+8. **AV-6 (unpublished).**  Replace the obsolete inventory by the audited
+   42-A/17-B manifest recorded in the AV-6 frontier amendment.  In particular,
+   own the dual-number tangent proof here, use AV-5a for product smoothness,
+   define the tangent cone as `Spec(gr_m O)` without discarding nilpotents,
+   and distinguish source-open generic smoothness from target-open generic
+   smoothness (the latter needs a smooth source).  Keep the constant cusp
+   family counterexample, the perfect-field residue-separability input to the
+   closed-point Jacobian criterion, and the characteristic-zero/general-linear-
+   system hypotheses in Bertini.  The B page contains examples/counterexamples
+   only and supplies no later proof.
+
+9. **AV-7 (unpublished).**  The live corpus has no proof that the integral
+   closure of a finite-type domain over a field is finite, and no algebraic
+   Zariski Main supplier.  The assertion above that existing commutative
+   algebra supplies normalization finiteness is withdrawn.  Add the two
+   supplier pairs below.  State the Zariski Main direction as: a quasi-finite
+   separated morphism of finite type factors as an open immersion followed by
+   a finite morphism; do not claim the converse without its own hypotheses.
+   Classical varieties are Noetherian, hence the needed quasi-compact and
+   quasi-separated hypotheses must be derived, not omitted.  Projectivity of
+   a normalized projective curve requires the later relative-projectivity
+   interface, which does not yet exist at AV-7.  Preserve
+   `cor-normalization-resolves-singularities-of-curves` by rehoming it to
+   `finite-proper-and-projective-morphisms` (or its first later consumer) after
+   “finite over projective is projective” is proved; AV-7 may conclude only the
+   already supplied finite birational normalization and nonsingularity.
+
+10. **AV-8 (unpublished).**  The available resultant theorem is only the
+    monic univariate statement and cannot supply common projective roots,
+    including roots at infinity.  Add the homogeneous-resultant supplier pair
+    below.  Bézout must distinguish local Artinian length, invariance under
+    local equations, finiteness/no common component, the global graded-length
+    computation, and the sum with residue degrees.  Require the Artinian-length
+    and Hilbert-series suppliers explicitly; do not infer them from a citation.
+
+The Stacks Project full text was checked for the AV-5a standard-smooth and
+geometric-regularity boundaries (tags 00T6, 00T7, 00TU, 00TV, 00MK, and 07EM)
+and for algebraic/geometric Zariski Main
+([00PI](https://stacks.math.columbia.edu/tag/00PI),
+[00Q9](https://stacks.math.columbia.edu/tag/00Q9),
+[03GS](https://stacks.math.columbia.edu/tag/03GS), and
+[02LQ](https://stacks.math.columbia.edu/tag/02LQ)).
+Tag 07EM is the decisive counterexample to a separable-residue proof at every
+standard-smooth point.  The Zariski Main sections show that the factorization
+is a chain of integral/finite-extension and quasi-finite-locus lemmas, not a
+one-line consequence of the current AG dependencies.  Normalization
+finiteness was checked against Stacks
+[Lemma 33.27.1, tag 0BXR](https://stacks.math.columbia.edu/tag/0BXR), with
+its algebraic proof interfaces at
+[tag 032L](https://stacks.math.columbia.edu/tag/032L) (finite separable
+extensions), [tag 032N](https://stacks.math.columbia.edu/tag/032N) (the purely
+inseparable reduction), and
+[tag 032O](https://stacks.math.columbia.edu/tag/032O) (polynomial extensions
+of Japanese rings).  These full texts supply the proposed reduction rather
+than an unsupported appeal to “finite-type normalization.”
+
+### New future supplier pairs
+
+Each B page below requires only its companion A page and is a dependency leaf.
+The completed Commutative Algebra audit §11.4 owns and supplies the exact full
+inventories, hypotheses, proof order, and source locators. Its 8/3, 11/3, and
+10/4 inventories supersede the thinner provisional lists formerly printed
+here: in particular, do not duplicate the published integral-closure
+definition, omit the purely-inseparable/Japanese normalization steps or the
+strongly-transcendental Zariski Main reduction, or call a zero-dimensional
+projective intersection's homogeneous coordinate ring Artinian.
+
+| proposed A / B page ids | canonical inventory | intended planned consumers |
+|---|---|---|
+| `normalization-finiteness-for-affine-domains` / `normalization-finiteness-for-affine-domains-examples` | Commutative Algebra §11.4, CA-19 (8 A / 3 B) | AV-7 A: normalization existence/finite morphism and chart gluing |
+| `algebraic-zariski-main-for-quasi-finite-morphisms` / `algebraic-zariski-main-for-quasi-finite-morphisms-examples` | Commutative Algebra §11.4, CA-20 (11 A / 3 B) | AV-7 A: classical Zariski Main and openness near quasi-finite points; AV-7 owns the classical gluing step |
+| `homogeneous-resultants-and-projective-intersection-length` / `homogeneous-resultants-and-projective-intersection-length-examples` | Commutative Algebra §11.4, CA-21 (10 A / 4 B) | AV-8 A: resultant items and the global graded/length steps of Bézout |
+
+The three new pairs have **no currently published consumers**; their consumers
+are the planned AV-7/AV-8 A items just identified. AV-5a likewise has no
+currently published consumer; planned AV-6 is its first consumer. Under the
+owner's “all and only” rule, none is an independent Phase-2 root. Build one in
+Phase 2 only if the final graph shows that it lies in the prerequisite closure
+of a supplier needed by a published consumer; otherwise leave it for a later
+frontier.
+
+**Combinatorics reconciliation (2026-09-08).** Algebraic Geometry introduces
+no Combinatorics supplier or consumer edge. The published combinatorial
+Nullstellensatz and finite polynomial method remain Combinatorics-owned; no AV
+page duplicates them, and neither of the new finite-character or quantitative
+induced-density pairs is an AV prerequisite.
+
+### Exact future `plan-spec.json` reconciliation
+
+No machine-plan edit is authorized in this phase.  A later authorized splice
+must make the following exact page-level changes.  “A only” is binding: no B
+page may occur in another page's `requires`; every B page requires its
+companion A, and nothing uses the B page.
+
+Insert these exact records (titles included so the splice does not invent
+metadata):
+
+| order | id | title | kind / category | companion |
+|---:|---|---|---|---|
+| 366.0601 | `normalization-finiteness-for-affine-domains` | Normalization Finiteness for Affine Domains | A / commutative-algebra | `normalization-finiteness-for-affine-domains-examples` |
+| 366.0602 | `normalization-finiteness-for-affine-domains-examples` | Normalization Finiteness for Affine Domains — Examples | B / commutative-algebra | `normalization-finiteness-for-affine-domains` |
+| 366.0603 | `algebraic-zariski-main-for-quasi-finite-morphisms` | Algebraic Zariski Main for Quasi-Finite Morphisms | A / commutative-algebra | `algebraic-zariski-main-for-quasi-finite-morphisms-examples` |
+| 366.0604 | `algebraic-zariski-main-for-quasi-finite-morphisms-examples` | Algebraic Zariski Main for Quasi-Finite Morphisms — Examples | B / commutative-algebra | `algebraic-zariski-main-for-quasi-finite-morphisms` |
+| 366.0621 | `homogeneous-resultants-and-projective-intersection-length` | Homogeneous Resultants and Projective Intersection Length | A / commutative-algebra | `homogeneous-resultants-and-projective-intersection-length-examples` |
+| 366.0622 | `homogeneous-resultants-and-projective-intersection-length-examples` | Homogeneous Resultants and Projective Intersection Length — Examples | B / commutative-algebra | `homogeneous-resultants-and-projective-intersection-length` |
+
+| page | future `requires` value |
+|---|---|
+| `affine-algebraic-sets-and-coordinate-rings` | [`noether-normalisation-and-nullstellensatz`] |
+| `affine-algebraic-sets-and-coordinate-rings-examples` | [`affine-algebraic-sets-and-coordinate-rings`] |
+| `morphisms-local-rings-and-rational-maps-of-affine-varieties` | [`affine-algebraic-sets-and-coordinate-rings`] |
+| `morphisms-local-rings-and-rational-maps-of-affine-varieties-examples` | [`morphisms-local-rings-and-rational-maps-of-affine-varieties`] |
+| `projective-algebraic-sets-projective-morphisms-and-cones` | [`morphisms-local-rings-and-rational-maps-of-affine-varieties`] |
+| `projective-algebraic-sets-projective-morphisms-and-cones-examples` | [`projective-algebraic-sets-projective-morphisms-and-cones`] |
+| `products-segre-and-veronese-embeddings-and-grassmannians` | [`projective-algebraic-sets-projective-morphisms-and-cones`, `exterior-powers-orientation-and-hodge-duality`] |
+| `products-segre-and-veronese-embeddings-and-grassmannians-examples` | [`products-segre-and-veronese-embeddings-and-grassmannians`] |
+| `dimension-constructible-images-and-dimensions-of-fibres` | [`products-segre-and-veronese-embeddings-and-grassmannians`, `schemes-subschemes-and-morphisms-locally-of-finite-type`, `zariski-topology-on-prime-spectra`] |
+| `dimension-constructible-images-and-dimensions-of-fibres-examples` | [`dimension-constructible-images-and-dimensions-of-fibres`] |
+| `algebraic-differentials-separability-and-smooth-local-presentations` | [`dimension-constructible-images-and-dimensions-of-fibres`, `regular-local-rings-and-homological-dimension`, `flatness-and-faithful-flatness`, `tor-flatness-and-global-dimension`, `algebraic-closure-embeddings-and-separability`] |
+| `algebraic-differentials-separability-and-smooth-local-presentations-examples` | [`algebraic-differentials-separability-and-smooth-local-presentations`] |
+| `zariski-tangent-spaces-regular-points-smoothness-and-bertini` | [`algebraic-differentials-separability-and-smooth-local-presentations`] |
+| `zariski-tangent-spaces-regular-points-smoothness-and-bertini-examples` | [`zariski-tangent-spaces-regular-points-smoothness-and-bertini`] |
+| `normalization-finiteness-for-affine-domains` (order 366.0601) | [`dedekind-domains-and-ideal-classes`, `noether-normalisation-and-nullstellensatz`, `algebraic-closure-embeddings-and-separability`, `affine-algebraic-sets-and-coordinate-rings`] |
+| `normalization-finiteness-for-affine-domains-examples` (order 366.0602) | [`normalization-finiteness-for-affine-domains`] |
+| `algebraic-zariski-main-for-quasi-finite-morphisms` (order 366.0603) | [`zariski-topology-on-prime-spectra`, `integral-extensions-and-going-up`, `morphisms-local-rings-and-rational-maps-of-affine-varieties`] |
+| `algebraic-zariski-main-for-quasi-finite-morphisms-examples` (order 366.0604) | [`algebraic-zariski-main-for-quasi-finite-morphisms`] |
+| `normal-varieties-normalization-and-zariskis-main-theorem` | [`zariski-tangent-spaces-regular-points-smoothness-and-bertini`, `normalization-finiteness-for-affine-domains`, `algebraic-zariski-main-for-quasi-finite-morphisms`] |
+| `normal-varieties-normalization-and-zariskis-main-theorem-examples` | [`normal-varieties-normalization-and-zariskis-main-theorem`] |
+| `homogeneous-resultants-and-projective-intersection-length` (order 366.0621) | [`artinian-rings-and-length`, `rees-modules-artin-rees-and-hilbert-samuel-theory`, `koszul-complexes-and-regular-sequences`, `projective-algebraic-sets-projective-morphisms-and-cones`, `schemes-subschemes-and-morphisms-locally-of-finite-type`, `dimension-constructible-images-and-dimensions-of-fibres`] |
+| `homogeneous-resultants-and-projective-intersection-length-examples` (order 366.0622) | [`homogeneous-resultants-and-projective-intersection-length`] |
+| `plane-curves-local-intersection-multiplicity-and-bezout` | [`normal-varieties-normalization-and-zariskis-main-theorem`, `homogeneous-resultants-and-projective-intersection-length`, `schemes-subschemes-and-morphisms-locally-of-finite-type`] |
+| `plane-curves-local-intersection-multiplicity-and-bezout-examples` | [`plane-curves-local-intersection-multiplicity-and-bezout`] |
+
+The decimal orders shown for the three inserted supplier pairs are unused in
+the audited plan and preserve A-before-B and supplier-before-consumer order.
+Add the five AV-2 items, the one
+AV-4 diagonal item, the seven AV-5a split items, the complete audited AV-6
+42/17 manifest, and the three canonical supplier inventories from Commutative
+Algebra §11.4 to the currently empty or repaired `items` arrays. Add the four citation dependencies named in the
+pair ledger to the affected existing items.  Preserve all existing mathematical
+statements not expressly split above.
+
+### Published-consumer map and historical impact partitions
+
+The following maps are computed from live item dependencies.  “Direct” means
+the consumer declares at least one item of the repaired pair; “transitive”
+means it reaches the pair only through another item.  Every named consumer is
+currently published.  Example-page homes are shown separately so Phase 3 can
+edit the correct page and item file.
+
+#### AV-1 draft-page impact partition (Phase 3 only)
+
+**Direct (17).**
+
+- `dimension-constructible-images-and-dimensions-of-fibres`: `cor-module-finite-affine-map-quasi-finite`, `def-fibre-dimension-at-point-classical`, `lem-classical-variety-noetherian-components`, `lem-dominant-affine-image-contains-principal-open`, `lem-dominant-affine-map-normalization-over-open`, `lem-relative-projective-homogeneous-equations`, `lem-zero-dimensional-classical-variety-finite`, `thm-affine-variety-dimension-coordinate-ring`, `thm-principal-subvariety-codimension-one`.
+- `products-segre-and-veronese-embeddings-and-grassmannians`: `def-product-varieties-universal-property`, `thm-affine-variety-product-coordinate-ring`.
+- `projective-algebraic-sets-projective-morphisms-and-cones`: `def-projective-closure-affine-set`, `lem-projective-irreducibility-homogeneous-prime`, `lem-projective-variety-cone-irreducible`, `lem-standard-projective-opens-are-affine-spaces`, `thm-ideal-projective-closure-saturation`.
+- `schemes-subschemes-and-morphisms-locally-of-finite-type`: `def-classical-algebraic-prevariety-regular-maps-and-varieties`.
+
+**Transitively blocked (88).**
+
+- `dimension-constructible-images-and-dimensions-of-fibres`: `cor-closed-family-irreducible-equal-dimensional-fibres`, `cor-dimension-affine-and-projective-space`, `cor-dimension-birational-invariant`, `cor-dimension-of-image-plus-generic-fibre`, `cor-dominant-morphism-image-contains-open`, `cor-maximal-chains-irreducible-variety-dimension`, `cor-projective-equations-dimension-bound`, `def-codimension-irreducible-subvariety`, `def-constructible-subset-variety`, `def-dimension-classical-variety`, `def-module-finite-affine-classical-map`, `def-projective-morphism-classical`, `def-quasi-finite-morphism-classical`, `lem-affine-cone-dimension-projective-variety`, `lem-affine-intersection-dimension-bound`, `lem-classical-point-cut-out-by-dimension-many-functions`, `lem-constructible-boolean-operations`, `lem-constructible-dense-contains-open`, `lem-dimension-local-ring-codimension-closure`, `lem-dimension-nonempty-open-subset`, `lem-general-variety-function-field-charts`, `lem-projective-dimension-linear-avoidance`, `lem-projective-hypersurface-dimension-drop`, `lem-variety-equations-dimension-bound`, `rem-equidimensionality-hypotheses`, `thm-chevalley-constructible-image-varieties`, `thm-classical-projective-projection-closed`, `thm-dimension-equals-transcendence-degree`, `thm-dimension-product-varieties`, `thm-dimension-theorem-intersection-projective`, `thm-dominant-equal-dimension-generically-finite`, `thm-fibre-dimension-lower-bound`, `thm-generic-fibre-dimension`, `thm-upper-semicontinuity-fibre-dimension-projective`.
+- `dimension-constructible-images-and-dimensions-of-fibres-examples`: `cex-affine-intersection-bound-singular-ambient`, `cex-dimension-empty-set-minus-infinity-needed`, `cex-finite-fibres-not-finite-morphism`, `cex-image-morphism-not-closed`, `ex-dimensions-coordinate-cross-components`, `ex-family-hyperbolas-degenerate-fibre`, `ex-fibre-dimension-jump`, `ex-fibres-hyperbola-projection`, `ex-intersection-two-projective-curves`, `ex-linear-system-fibre-dimension-rank-loci`.
+- `fibre-products-base-change-and-scheme-theoretic-fibres`: `thm-classical-product-agrees-scheme-product`.
+- `products-segre-and-veronese-embeddings-and-grassmannians`: `cor-grassmannian-smooth-irreducible-dimension`, `cor-homogeneous-polynomial-becomes-hyperplane-section`, `cor-projective-variety-product-exists`, `cor-segre-veronese-embedding`, `def-base-change-classical-varieties`, `def-incidence-correspondence-varieties`, `def-segre-map`, `def-veronese-map`, `lem-affine-product-topology-not-product-topology`, `lem-diagonal-affine-variety-cut-out-by-coordinate-differences`, `lem-fibre-as-base-change-to-point-classical`, `lem-grassmannian-standard-affine-charts`, `lem-incidence-locus-is-closed`, `lem-segre-map-well-defined-injective`, `lem-veronese-map-well-defined-closed-immersion`, `rem-products-need-scheme-fibre-products`, `thm-graph-closed-for-classical-variety-morphism`, `thm-multihomogeneous-map-to-projective-space`, `thm-plucker-image-closed`, `thm-segre-image-rank-one-minors`.
+- `products-segre-and-veronese-embeddings-and-grassmannians-examples`: `cex-tensor-product-of-domains-not-domain`, `cex-zariski-product-topology-too-coarse`, `ex-grassmannian-lines-in-projective-three-space`, `ex-incidence-point-hyperplane`, `ex-quadratic-veronese-conic`, `ex-segre-p1-times-p1-quadric`, `ex-segre-veronese-bidegree-two-three`.
+- `projective-algebraic-sets-projective-morphisms-and-cones`: `def-morphism-to-projective-space-homogeneous-coordinates`, `def-regular-function-projective-variety`, `lem-projective-closure-dense-affine-chart`, `lem-projective-coordinate-morphisms-well-defined`, `lem-projective-hypersurface-affine-pieces`, `lem-projective-regular-function-chart-compatibility`, `rem-projective-coordinate-ring-not-function-ring`, `thm-closed-projective-embedding-by-homogeneous-generators`, `thm-global-regular-functions-projective-variety`.
+- `projective-algebraic-sets-projective-morphisms-and-cones-examples`: `cex-naive-homogenization-adds-component`, `ex-affine-cone-over-conic`, `ex-morphism-projective-line-power-map`, `ex-projective-closure-parabola`, `ex-projective-conic-standard-charts`, `ex-projective-line-two-affine-charts`.
+- `schemes-subschemes-and-morphisms-locally-of-finite-type`: `thm-classical-varieties-equivalent-integral-separated-finite-type-schemes`.
+
+#### AV-2 draft-page impact partition (Phase 3 only)
+
+**Direct (11).**
+
+- `dimension-constructible-images-and-dimensions-of-fibres`: `cor-dimension-birational-invariant`, `def-fibre-dimension-at-point-classical`, `def-module-finite-affine-classical-map`, `def-projective-morphism-classical`, `lem-dimension-local-ring-codimension-closure`, `lem-general-variety-function-field-charts`.
+- `products-segre-and-veronese-embeddings-and-grassmannians`: `lem-fibre-as-base-change-to-point-classical`, `thm-affine-variety-product-coordinate-ring`.
+- `projective-algebraic-sets-projective-morphisms-and-cones`: `def-morphism-to-projective-space-homogeneous-coordinates`, `def-regular-function-projective-variety`, `thm-global-regular-functions-projective-variety`.
+
+**Transitively blocked (66).**
+
+- `dimension-constructible-images-and-dimensions-of-fibres`: `cor-closed-family-irreducible-equal-dimensional-fibres`, `cor-dimension-affine-and-projective-space`, `cor-dimension-of-image-plus-generic-fibre`, `cor-dominant-morphism-image-contains-open`, `cor-maximal-chains-irreducible-variety-dimension`, `cor-module-finite-affine-map-quasi-finite`, `cor-projective-equations-dimension-bound`, `def-quasi-finite-morphism-classical`, `lem-affine-cone-dimension-projective-variety`, `lem-affine-intersection-dimension-bound`, `lem-classical-point-cut-out-by-dimension-many-functions`, `lem-dimension-nonempty-open-subset`, `lem-dominant-affine-image-contains-principal-open`, `lem-dominant-affine-map-normalization-over-open`, `lem-projective-dimension-linear-avoidance`, `lem-projective-hypersurface-dimension-drop`, `lem-relative-projective-homogeneous-equations`, `lem-variety-equations-dimension-bound`, `rem-equidimensionality-hypotheses`, `thm-chevalley-constructible-image-varieties`, `thm-classical-projective-projection-closed`, `thm-dimension-equals-transcendence-degree`, `thm-dimension-product-varieties`, `thm-dimension-theorem-intersection-projective`, `thm-dominant-equal-dimension-generically-finite`, `thm-fibre-dimension-lower-bound`, `thm-generic-fibre-dimension`, `thm-upper-semicontinuity-fibre-dimension-projective`.
+- `dimension-constructible-images-and-dimensions-of-fibres-examples`: `cex-affine-intersection-bound-singular-ambient`, `cex-dimension-empty-set-minus-infinity-needed`, `cex-finite-fibres-not-finite-morphism`, `cex-image-morphism-not-closed`, `ex-dimensions-coordinate-cross-components`, `ex-family-hyperbolas-degenerate-fibre`, `ex-fibre-dimension-jump`, `ex-fibres-hyperbola-projection`, `ex-intersection-two-projective-curves`, `ex-linear-system-fibre-dimension-rank-loci`.
+- `fibre-products-base-change-and-scheme-theoretic-fibres`: `thm-classical-product-agrees-scheme-product`.
+- `products-segre-and-veronese-embeddings-and-grassmannians`: `cor-homogeneous-polynomial-becomes-hyperplane-section`, `cor-projective-variety-product-exists`, `cor-segre-veronese-embedding`, `def-base-change-classical-varieties`, `def-incidence-correspondence-varieties`, `def-segre-map`, `def-veronese-map`, `lem-affine-product-topology-not-product-topology`, `lem-diagonal-affine-variety-cut-out-by-coordinate-differences`, `lem-incidence-locus-is-closed`, `lem-segre-map-well-defined-injective`, `lem-veronese-map-well-defined-closed-immersion`, `rem-products-need-scheme-fibre-products`, `thm-graph-closed-for-classical-variety-morphism`, `thm-multihomogeneous-map-to-projective-space`, `thm-segre-image-rank-one-minors`.
+- `products-segre-and-veronese-embeddings-and-grassmannians-examples`: `cex-tensor-product-of-domains-not-domain`, `cex-zariski-product-topology-too-coarse`, `ex-incidence-point-hyperplane`, `ex-quadratic-veronese-conic`, `ex-segre-p1-times-p1-quadric`, `ex-segre-veronese-bidegree-two-three`.
+- `projective-algebraic-sets-projective-morphisms-and-cones`: `lem-projective-coordinate-morphisms-well-defined`, `lem-projective-regular-function-chart-compatibility`, `rem-projective-coordinate-ring-not-function-ring`.
+- `projective-algebraic-sets-projective-morphisms-and-cones-examples`: `ex-morphism-projective-line-power-map`.
+- `schemes-subschemes-and-morphisms-locally-of-finite-type`: `thm-classical-varieties-equivalent-integral-separated-finite-type-schemes`.
+
+#### AV-3 repaired supplier pair
+
+**Direct (12).**
+
+- `dimension-constructible-images-and-dimensions-of-fibres`: `cor-dimension-affine-and-projective-space`, `lem-affine-cone-dimension-projective-variety`, `lem-relative-projective-homogeneous-equations`.
+- `products-segre-and-veronese-embeddings-and-grassmannians`: `cor-homogeneous-polynomial-becomes-hyperplane-section`, `cor-projective-variety-product-exists`, `def-product-varieties-universal-property`, `def-segre-map`, `def-veronese-map`, `lem-veronese-map-well-defined-closed-immersion`, `thm-multihomogeneous-map-to-projective-space`, `thm-plucker-image-closed`, `thm-segre-image-rank-one-minors`.
+
+**Transitively blocked (39).**
+
+- `dimension-constructible-images-and-dimensions-of-fibres`: `cor-projective-equations-dimension-bound`, `def-projective-morphism-classical`, `lem-affine-intersection-dimension-bound`, `lem-projective-dimension-linear-avoidance`, `lem-projective-hypersurface-dimension-drop`, `rem-equidimensionality-hypotheses`, `thm-classical-projective-projection-closed`, `thm-dimension-product-varieties`, `thm-dimension-theorem-intersection-projective`, `thm-upper-semicontinuity-fibre-dimension-projective`.
+- `dimension-constructible-images-and-dimensions-of-fibres-examples`: `cex-affine-intersection-bound-singular-ambient`, `ex-dimensions-coordinate-cross-components`, `ex-family-hyperbolas-degenerate-fibre`, `ex-fibre-dimension-jump`, `ex-fibres-hyperbola-projection`, `ex-intersection-two-projective-curves`, `ex-linear-system-fibre-dimension-rank-loci`.
+- `fibre-products-base-change-and-scheme-theoretic-fibres`: `thm-classical-product-agrees-scheme-product`.
+- `products-segre-and-veronese-embeddings-and-grassmannians`: `cor-grassmannian-smooth-irreducible-dimension`, `cor-segre-veronese-embedding`, `def-base-change-classical-varieties`, `def-incidence-correspondence-varieties`, `lem-affine-product-topology-not-product-topology`, `lem-diagonal-affine-variety-cut-out-by-coordinate-differences`, `lem-fibre-as-base-change-to-point-classical`, `lem-grassmannian-standard-affine-charts`, `lem-incidence-locus-is-closed`, `lem-segre-map-well-defined-injective`, `rem-products-need-scheme-fibre-products`, `thm-affine-variety-product-coordinate-ring`, `thm-graph-closed-for-classical-variety-morphism`.
+- `products-segre-and-veronese-embeddings-and-grassmannians-examples`: `cex-tensor-product-of-domains-not-domain`, `cex-zariski-product-topology-too-coarse`, `ex-grassmannian-lines-in-projective-three-space`, `ex-incidence-point-hyperplane`, `ex-quadratic-veronese-conic`, `ex-segre-p1-times-p1-quadric`, `ex-segre-veronese-bidegree-two-three`.
+- `schemes-subschemes-and-morphisms-locally-of-finite-type`: `thm-classical-varieties-equivalent-integral-separated-finite-type-schemes`.
+
+#### AV-4 repaired supplier pair
+
+**Direct (4).**
+
+- `dimension-constructible-images-and-dimensions-of-fibres`: `lem-affine-intersection-dimension-bound`, `thm-dimension-product-varieties`.
+- `fibre-products-base-change-and-scheme-theoretic-fibres`: `thm-classical-product-agrees-scheme-product`.
+- `schemes-subschemes-and-morphisms-locally-of-finite-type`: `thm-classical-varieties-equivalent-integral-separated-finite-type-schemes`.
+
+**Transitively blocked (13).**
+
+- `dimension-constructible-images-and-dimensions-of-fibres`: `cor-projective-equations-dimension-bound`, `def-projective-morphism-classical`, `lem-affine-cone-dimension-projective-variety`, `lem-projective-dimension-linear-avoidance`, `lem-projective-hypersurface-dimension-drop`, `lem-relative-projective-homogeneous-equations`, `rem-equidimensionality-hypotheses`, `thm-classical-projective-projection-closed`, `thm-dimension-theorem-intersection-projective`, `thm-upper-semicontinuity-fibre-dimension-projective`.
+- `dimension-constructible-images-and-dimensions-of-fibres-examples`: `cex-affine-intersection-bound-singular-ambient`, `ex-intersection-two-projective-curves`, `ex-linear-system-fibre-dimension-rank-loci`.
+
+#### AV-5 repaired supplier pair
+
+There are no currently published direct or transitive consumers.  Its first
+planned consumer is AV-5a A.
+
+#### Published scheme-pair repair
+
+For `thm-affine-closed-immersions-quotient-rings`, current **direct** consumers
+are `lem-base-change-affine-morphisms`,
+`lem-base-change-open-closed-immersions`, and
+`lem-immersions-and-localizations-monomorphisms` on
+`fibre-products-base-change-and-scheme-theoretic-fibres`;
+`ex-graph-polynomial-map-closed-subscheme` on its examples page;
+`thm-quasi-coherent-ideal-closed-subscheme-correspondence` on
+`schemes-subschemes-and-morphisms-locally-of-finite-type`; and
+`cex-closed-subset-does-not-determine-closed-subscheme` plus
+`ex-closed-subscheme-double-origin-point` on that pair's examples page.
+The **transitively blocked** consumers are
+`def-scheme-theoretic-inverse-image-subscheme` and
+`lem-subscheme-intersection-fibre-product` on the fibre-products A page, and
+`thm-scheme-theoretic-image-quasi-compact-morphism` on the schemes A page.
+That last theorem is also the sole current direct consumer of
+`thm-quasi-coherent-ideal-closed-subscheme-correspondence`.
+
+### Replacement cutover map and exact published impact
+
+In Phase 3, replace every occurrence of an old root in the 32-edge table by
+the corresponding new root below. The same cutover applies to the additional
+published Scheme edge
+`def-classical-algebraic-prevariety-regular-maps-and-varieties ->
+def-affine-algebraic-set`. Two old duality dependencies collapse to one proved
+replacement; this is deliberate rather than an omitted edge.
+
+| old draft supplier root | new Phase-2 supplier root |
+|---|---|
+| `def-affine-algebraic-set` | `def-classical-affine-algebraic-set-with-empty-boundaries` |
+| `thm-affine-nullstellensatz-correspondence` | `thm-classical-affine-nullstellensatz-correspondence` |
+| `def-function-field-variety` | `def-classical-variety-function-field` |
+| `def-regular-function-classical-variety` | `def-classical-regular-function-on-open-set` |
+| `thm-global-regular-functions-affine-variety-coordinate-ring` | `thm-classical-affine-global-regular-functions-coordinate-ring` |
+| `def-morphism-classical-varieties` | `def-classical-affine-variety-morphism` |
+| `thm-affine-variety-prime-coordinate-ring` | `thm-classical-affine-variety-prime-coordinate-ring` |
+| `def-affine-variety-classical` | `def-classical-affine-variety-interface` |
+| `cor-affine-algebraic-set-coordinate-duality-complete` | `thm-classical-affine-algebraic-sets-reduced-algebras-antiequivalence` |
+| `thm-affine-algebraic-sets-coordinate-duality` | `thm-classical-affine-algebraic-sets-reduced-algebras-antiequivalence` |
+| `thm-affine-morphisms-coordinate-ring-anti-equivalence` | `thm-classical-affine-morphisms-coordinate-ring-antiequivalence` |
+| `def-regular-map-image-and-fibre-classical` | `def-classical-regular-map-image-and-set-theoretic-fibre` |
+| `lem-algebraic-set-finite-irreducible-components` | `lem-classical-affine-algebraic-set-finite-irreducible-components` |
+| `thm-function-field-independent-affine-open` | `thm-classical-function-field-independent-of-affine-open` |
+| `lem-dominant-map-pullback-function-fields` | `lem-classical-dominant-map-pulls-back-function-fields` |
+| `thm-birational-equivalence-function-fields` | `thm-classical-birational-equivalence-iff-function-fields-isomorphic` |
+| `thm-local-ring-affine-variety-localization` | `thm-classical-affine-local-ring-is-localization` |
+| `thm-coordinate-ring-principal-open` | `thm-classical-principal-open-coordinate-ring-localization` |
+
+The new pair's exact **direct published consumers (26)** are:
+
+- `projective-algebraic-sets-projective-morphisms-and-cones`:
+  `def-morphism-to-projective-space-homogeneous-coordinates`,
+  `def-projective-closure-affine-set`,
+  `def-regular-function-projective-variety`,
+  `lem-projective-irreducibility-homogeneous-prime`,
+  `lem-projective-variety-cone-irreducible`,
+  `lem-standard-projective-opens-are-affine-spaces`,
+  `thm-global-regular-functions-projective-variety`, and
+  `thm-ideal-projective-closure-saturation`;
+- `products-segre-and-veronese-embeddings-and-grassmannians`:
+  `def-product-varieties-universal-property`,
+  `lem-fibre-as-base-change-to-point-classical`, and
+  `thm-affine-variety-product-coordinate-ring`;
+- `dimension-constructible-images-and-dimensions-of-fibres`:
+  `cor-dimension-birational-invariant`,
+  `cor-module-finite-affine-map-quasi-finite`,
+  `def-fibre-dimension-at-point-classical`,
+  `def-module-finite-affine-classical-map`,
+  `def-projective-morphism-classical`,
+  `lem-classical-variety-noetherian-components`,
+  `lem-dimension-local-ring-codimension-closure`,
+  `lem-dominant-affine-image-contains-principal-open`,
+  `lem-dominant-affine-map-normalization-over-open`,
+  `lem-general-variety-function-field-charts`,
+  `lem-relative-projective-homogeneous-equations`,
+  `lem-zero-dimensional-classical-variety-finite`,
+  `thm-affine-variety-dimension-coordinate-ring`, and
+  `thm-principal-subvariety-codimension-one`; and
+- `schemes-subschemes-and-morphisms-locally-of-finite-type`:
+  `def-classical-algebraic-prevariety-regular-maps-and-varieties`.
+
+Its complete **transitively blocked published set (79)** is:
+
+- `projective-algebraic-sets-projective-morphisms-and-cones`:
+  `lem-projective-closure-dense-affine-chart`,
+  `lem-projective-coordinate-morphisms-well-defined`,
+  `lem-projective-hypersurface-affine-pieces`,
+  `lem-projective-regular-function-chart-compatibility`,
+  `rem-projective-coordinate-ring-not-function-ring`, and
+  `thm-closed-projective-embedding-by-homogeneous-generators`;
+- `projective-algebraic-sets-projective-morphisms-and-cones-examples`:
+  `cex-naive-homogenization-adds-component`, `ex-affine-cone-over-conic`,
+  `ex-morphism-projective-line-power-map`, `ex-projective-closure-parabola`,
+  `ex-projective-conic-standard-charts`, and
+  `ex-projective-line-two-affine-charts`;
+- `products-segre-and-veronese-embeddings-and-grassmannians`:
+  `cor-grassmannian-smooth-irreducible-dimension`,
+  `cor-homogeneous-polynomial-becomes-hyperplane-section`,
+  `cor-projective-variety-product-exists`, `cor-segre-veronese-embedding`,
+  `def-base-change-classical-varieties`,
+  `def-incidence-correspondence-varieties`, `def-segre-map`,
+  `def-veronese-map`, `lem-affine-product-topology-not-product-topology`,
+  `lem-diagonal-affine-variety-cut-out-by-coordinate-differences`,
+  `lem-grassmannian-standard-affine-charts`,
+  `lem-incidence-locus-is-closed`, `lem-segre-map-well-defined-injective`,
+  `lem-veronese-map-well-defined-closed-immersion`,
+  `rem-products-need-scheme-fibre-products`,
+  `thm-graph-closed-for-classical-variety-morphism`,
+  `thm-multihomogeneous-map-to-projective-space`,
+  `thm-plucker-image-closed`, and `thm-segre-image-rank-one-minors`;
+- `products-segre-and-veronese-embeddings-and-grassmannians-examples`:
+  `cex-tensor-product-of-domains-not-domain`,
+  `cex-zariski-product-topology-too-coarse`,
+  `ex-grassmannian-lines-in-projective-three-space`,
+  `ex-incidence-point-hyperplane`, `ex-quadratic-veronese-conic`,
+  `ex-segre-p1-times-p1-quadric`, and
+  `ex-segre-veronese-bidegree-two-three`;
+- `dimension-constructible-images-and-dimensions-of-fibres`:
+  `cor-closed-family-irreducible-equal-dimensional-fibres`,
+  `cor-dimension-affine-and-projective-space`,
+  `cor-dimension-of-image-plus-generic-fibre`,
+  `cor-dominant-morphism-image-contains-open`,
+  `cor-maximal-chains-irreducible-variety-dimension`,
+  `cor-projective-equations-dimension-bound`,
+  `def-codimension-irreducible-subvariety`,
+  `def-constructible-subset-variety`, `def-dimension-classical-variety`,
+  `def-quasi-finite-morphism-classical`,
+  `lem-affine-cone-dimension-projective-variety`,
+  `lem-affine-intersection-dimension-bound`,
+  `lem-classical-point-cut-out-by-dimension-many-functions`,
+  `lem-constructible-boolean-operations`,
+  `lem-constructible-dense-contains-open`,
+  `lem-dimension-nonempty-open-subset`,
+  `lem-projective-dimension-linear-avoidance`,
+  `lem-projective-hypersurface-dimension-drop`,
+  `lem-variety-equations-dimension-bound`, `rem-equidimensionality-hypotheses`,
+  `thm-chevalley-constructible-image-varieties`,
+  `thm-classical-projective-projection-closed`,
+  `thm-dimension-equals-transcendence-degree`,
+  `thm-dimension-product-varieties`,
+  `thm-dimension-theorem-intersection-projective`,
+  `thm-dominant-equal-dimension-generically-finite`,
+  `thm-fibre-dimension-lower-bound`, `thm-generic-fibre-dimension`, and
+  `thm-upper-semicontinuity-fibre-dimension-projective`;
+- `dimension-constructible-images-and-dimensions-of-fibres-examples`:
+  `cex-affine-intersection-bound-singular-ambient`,
+  `cex-dimension-empty-set-minus-infinity-needed`,
+  `cex-finite-fibres-not-finite-morphism`, `cex-image-morphism-not-closed`,
+  `ex-dimensions-coordinate-cross-components`,
+  `ex-family-hyperbolas-degenerate-fibre`, `ex-fibre-dimension-jump`,
+  `ex-fibres-hyperbola-projection`, `ex-intersection-two-projective-curves`,
+  and `ex-linear-system-fibre-dimension-rank-loci`;
+- `schemes-subschemes-and-morphisms-locally-of-finite-type`:
+  `thm-classical-varieties-equivalent-integral-separated-finite-type-schemes`;
+  and
+- `fibre-products-base-change-and-scheme-theoretic-fibres`:
+  `thm-classical-product-agrees-scheme-product`.
+
+Thus the distinct total published impact is **105 = 26 direct + 79
+transitive**. The one new B item has zero/zero impact. Internal prerequisite A
+items without a direct external edge enter Phase 2 only as this root's
+prerequisite closure, not as independent roots.
+
+### Phase-3 disposition of all 59 stranded draft items
+
+The forty old A items in the published-consumer prerequisite closure are
+Phase-3 cutover/cleanup items; consumers move to their new semantic
+counterparts above. The five old A items outside that closure have zero direct
+published consumers and are Phase-3 cleanup or later planned-content work:
+`def-quasi-affine-algebraic-set`,
+`cor-zariski-topology-cofinite-on-affine-line`,
+`rem-classical-affine-register-limit`, `def-residue-field-classical-point`,
+and `def-rational-function-regular-at-point`.
+
+All fourteen draft B items are also Phase-3 cleanup on published pages and
+never Phase-2 suppliers: `ex-affine-line-and-affine-space-coordinate-rings`,
+`ex-parabola-is-affine-line`, `ex-coordinate-cross-reducible`,
+`ex-punctured-affine-line-not-affine-closed-subset`,
+`cex-zariski-topology-not-hausdorff`,
+`cex-nilpotent-polynomial-data-invisible-to-zero-locus`,
+`ex-empty-affine-algebraic-set-unit-ideal`,
+`ex-polynomial-map-coordinate-pullback`,
+`ex-hyperbola-is-multiplicative-group-variety`,
+`ex-rational-parametrization-circle-conic`,
+`cex-rational-map-with-indeterminacy`,
+`cex-birational-does-not-imply-isomorphic`,
+`ex-local-ring-affine-line-at-origin`, and
+`cex-regular-bijection-not-isomorphism-cusp`.
+
+### Planned-only AG supplier for the two Lie A shells
+
+RL-9 cannot be bound merely to AV-22: Borel--Weil--Bott also needs the
+algebraic flag quotient, homogeneous line bundles, minimal-parabolic
+$\mathbf P^1$ fibrations, and higher-dimensional Serre duality, while AV-25
+deliberately proves duality only for curves. Add this one planned-only AG pair:
+
+| field | binding value |
+|---|---|
+| A page id / title | `smooth-projective-serre-duality-and-flag-variety-line-bundles` / *Smooth-projective Serre duality and flag-variety line bundles* |
+| A category / order | `algebraic-geometry` / **510.0161**, after RL-8 B and before RL-9 A |
+| A `requires` | `kahler-differentials-conormal-sequences-and-infinitesimal-lifting`, `quasi-coherent-and-coherent-sheaves-and-vector-bundles`, `proj-projective-schemes-twisting-sheaves-and-ampleness`, `sheaf-cohomology-cech-cohomology-and-comparison`, `cohomology-of-quasi-coherent-sheaves-on-affine-and-projective-schemes`, `ext-and-balanced-resolutions`, `derived-categories`, `spectral-sequences`, `lie-subgroups-actions-and-homogeneous-spaces`, `cartan-subalgebras-and-root-space-decompositions`, `root-systems-dynkin-diagrams-and-cartan-killing-classification` |
+| B page id / title | `smooth-projective-serre-duality-and-flag-variety-line-bundles-examples` / *Smooth-projective Serre duality and flag-variety line bundles — examples* |
+| B category / order / `requires` | `algebraic-geometry` / **510.0162** / singleton `smooth-projective-serre-duality-and-flag-variety-line-bundles` |
+| companions / phase | reciprocal; **planned-only**, with zero published consumers |
+
+Its exact 17-item A inventory, in proof order, is:
+
+All seventeen statements are `literature-derived`; definition rows 1, 8, and
+11 have proof provenance `not-applicable`, and the fourteen proof-bearing rows
+have proof provenance `ai-altered`. The three B examples are
+`literature-derived` with proof provenance `not-applicable`.
+
+1. `def-smooth-projective-dualizing-line-bundle-and-trace` — *The dualizing
+   line bundle and trace of a smooth projective variety*: define
+   $\omega_X=\bigwedge^{\dim X}\Omega^1_{X/k}$ and the normalized trace.
+2. `lem-projective-space-top-cohomology-residue-pairing` — *The top-cohomology
+   residue pairing on projective space*: construct the
+   perfect Laurent-monomial pairing on projective space.
+3. `thm-serre-duality-projective-space-twisting-sheaves` — *Serre duality for
+   twisting sheaves on projective space*: prove duality for
+   every $\mathcal O_{\mathbf P^n}(d)$ and every degree.
+4. `lem-coherent-sheaf-finite-twisted-locally-free-resolution-projective-space`
+   — *Coherent sheaves on projective space have finite twisted locally free
+   resolutions*: obtain the resolution with its Noetherian and regular
+   hypotheses explicit.
+5. `thm-serre-duality-projective-space-coherent-sheaves` — *Serre duality for
+   coherent sheaves on projective space*: extend the pairing
+   through finite resolutions and Ext.
+6. `lem-smooth-closed-subvariety-dualizing-line-bundle-adjunction` —
+   *Adjunction identifies the dualizing line bundle of a smooth closed
+   subvariety*: identify
+   the dualizing line bundle by the conormal determinant.
+7. `thm-serre-duality-smooth-projective-variety-locally-free-sheaves` —
+   *Serre duality for locally free sheaves on a smooth projective variety*:
+   prove
+   the functorial perfect pairing for finite locally free sheaves.
+8. `def-complex-semisimple-algebraic-group-borel-and-flag-variety` — *Complex
+   semisimple algebraic groups, Borel subgroups, and flag varieties*: fix
+   connected simply connected semisimple $G$, $B\supset T$, and $G/B$.
+9. `thm-semisimple-flag-variety-smooth-projective` — *A semisimple flag
+   variety is smooth and projective*: construct the quotient as
+   a smooth connected projective variety.
+10. `thm-flag-variety-bruhat-cell-decomposition` — *The Bruhat cells decompose
+    the flag variety*: prove the affine-cell
+    decomposition, including the dense big cell.
+11. `def-borel-character-equivariant-line-bundle` — *The equivariant line
+    bundle associated to a Borel character*: construct
+    $\mathcal L_\lambda=G\times_B\mathbf C_{-\lambda}$ and fix the sign.
+12. `thm-borel-characters-classify-equivariant-line-bundles-simply-connected`
+    — *Borel characters classify equivariant line bundles for simply
+    connected semisimple groups*: classify them by $X^*(T)$.
+13. `lem-flag-variety-canonical-bundle-weight-minus-two-rho` — *The canonical
+    bundle of $G/B$ has weight $-2\rho$*: prove
+    $\omega_{G/B}\cong\mathcal L_{-2\rho}$ in the fixed convention.
+14. `thm-minimal-parabolic-flag-projection-is-p1-bundle` — *A
+    minimal-parabolic flag projection is a projective-line bundle*: prove
+    $G/B\to G/P_\alpha$ has fibre $P_\alpha/B\cong\mathbf P^1$.
+15. `lem-flag-line-bundle-degree-on-minimal-parabolic-fibre` — *The degree of
+    a flag line bundle on a minimal-parabolic fibre is its signed coroot
+    pairing*: compute the
+    degree as the signed coroot pairing.
+16. `lem-minimal-parabolic-relative-canonical-line-bundle-root-weight` — *The
+    relative canonical bundle of a minimal-parabolic flag projection*:
+    identify the root-weight convention used in wall crossing.
+17. `thm-relative-p1-line-bundle-cohomology-shift` — *The relative
+    projective-line line-bundle cohomology shift*: prove the natural direct-
+    image and cohomology shift for a $\mathbf P^1$-bundle, using rows 2--7 and
+    the declared Leray supplier.
+
+The B leaf inventory is exactly
+`ex-sl2-flag-variety-line-bundles`, *Flag-variety line bundles for
+$\mathrm{SL}_2$*; `ex-sl3-two-minimal-parabolic-projections`, *The two
+minimal-parabolic projections for $\mathrm{SL}_3$*; and
+`ex-serre-duality-projective-space-twist-pairing`, *The projective-space twist
+pairing in Serre duality*. Each has zero direct and zero transitive published
+consumers.
+
+Bind the empty Lie A shells as follows; these are future `plan-spec.json`
+amendments, not edits in this audit:
+
+- `borel-weil-and-borel-weil-bott` A replaces its B-page prerequisite by the
+  two strictly earlier A pages
+  `tensor-product-multiplicities-and-littlewood-richardson` and
+  `smooth-projective-serre-duality-and-flag-variety-line-bundles`.
+- `primitive-ideals-and-duflo-theorem` A removes
+  `borel-weil-and-borel-weil-bott-examples` entirely and requires
+  exactly `harish-chandra-isomorphism-casimir-and-central-characters`,
+  `verma-modules-and-shapovalov-forms`,
+  `homomorphisms-between-verma-modules-and-linkage`,
+  `category-o-finiteness-duality-and-blocks`,
+  `projectives-standard-filtrations-and-bgg-reciprocity`,
+  `lie-algebra-representations-enveloping-algebras-and-pbw`, and
+  `classical-affine-varieties-coordinate-rings-morphisms-and-rational-maps-interface`.
+  The last page supplies the zero-set/associated-variety prefix. The Duflo
+  localization theorem remains a prose-only held target, so no nonexistent
+  $\mathcal D$-module supplier is asserted.
+
+The flag pair has one direct **planned** consumer, RL-9, and no published
+consumer. The classical affine replacement has RL-10 as an additional planned
+consumer, which does not change its 105-item published impact. Both Lie B
+pages remain singleton leaves.
+
+The flag and duality claims were checked against complete author/primary full
+text: Brion, *Lectures on the Geometry of Flag Varieties*, §§1.2--1.4 and
+§§2.1--2.2 ([author PDF](https://www-fourier.univ-grenoble-alpes.fr/~mbrion/lecturesrev.pdf));
+Lurie, *A Proof of the Borel--Weil--Bott Theorem*, complete pp. 1--3
+([author PDF](https://people.math.harvard.edu/~lurie/papers/bwb.pdf)); and the
+Stacks Project, *Duality for Schemes* §27, Lemmas 27.1--27.5 and Remark 27.6,
+tags 0FVV--0FW0
+([full chapter PDF](https://stacks.math.columbia.edu/download/duality.pdf)).
+The retrieved texts explicitly give smooth-proper dualizing sheaves, perfect
+pairings, the $G/B$ line-bundle classification, minimal-parabolic
+$\mathbf P^1$ reduction, and the relative cohomology shift. There is no source
+access blocker.
+
+This mapping is the execution contract: Phase 2 builds the new classical
+affine replacement pair (and only other independently eligible new roots from
+the central ledger), never the AV-1/AV-2 items. The flag pair is planned-only.
+Phase 3 performs the published cutovers in direct-first topological order,
+then rechecks the 79 transitively blocked items. No B-page item may be
+introduced as a shortcut supplier in either phase.
+
+---
+
 ## Verified measurements
 
-These figures were re-derived from this finished file; none is copied from the
-dispatch.
+These are the historical commission measurements before the binding
+replacement amendment above. They are retained to preserve the original
+crosswalk denominator. The effective amended totals follow the table.
 
 | measurement | verified result | counting rule |
 |---|---:|---|
 | file-state before this lane | 0 proposed items | `research/plan-algebraic-geometry-track.md` did not exist on disk or in the tracked tree at preflight. |
-| file-state after this lane | 1018 distinct proposed item ids | Count item-inventory rows whose first cell is an id beginning `def-`, `lem-`, `thm-`, `cor-`, `rem-`, `ex-`, or `cex-`; sort unique. There are 1018 rows and 1018 unique ids. |
+| original file-state after this lane | 1018 distinct proposed item ids | Count item-inventory rows in the original commission before the binding replacement amendment. |
 | A-page items | 769 | Same rule, restricted to A inventories. |
 | B-page dependency leaves | 249 | Same rule, restricted to B inventories. |
-| A/B pairs | 27 | Headings `AV-1` through `AV-26`, plus inserted `AV-5a`, with no duplicate. |
+| original A/B pairs | 27 | Headings `AV-1` through `AV-26`, plus inserted `AV-5a`, with no duplicate. |
 | included heading dispositions | 266 | Table rows matching an exact `[included]` disposition in the canonical crosswalk. Duplicate headings in non-harvest verification sources are not double-counted; every one of these 266 rows names at least one actual proposed id. |
 | decomposition ratio | **1018 / 266 = 3.83×** | Proposed item ids divided by included canonical heading dispositions. This denominator measures section-level source headings, not chapters and not repeated synonyms from every corroborating book. |
 | largest A page | **AV-23, 36 items** | Actual inventory-row count, not its prose declaration. |
@@ -2359,6 +3177,13 @@ dispatch.
 | crosswalk references to nonexistent proposed ids | 0 | Exact comparison of every backticked item id on an `[included]` row against the 990 inventory ids. |
 | AV label collisions elsewhere in `research/*.md` or `plan-spec.json` | 0 at verification time | Exact `AV-[0-9]+` heading/string scan, excluding this file. |
 
+The binding amendment adds **2 pairs and 65 ids**: AG-P2-1 has 44 A and 1 B;
+AG-LIE-1 has 17 A and 3 B. The effective prose contract is therefore **29
+pairs, 830 A items, 253 B leaves, and 1,083 total item ids**. The largest A
+inventory is now AG-P2-1 at 44, still below the 60-item ceiling. The new ids
+were checked separately for collision and do not alter the 266-heading
+historical source-crosswalk denominator.
+
 The ratio is not being used as a quota. Its 3.72× value comes from named proof
 splits: for example, Bézout separates local length, invariance, finiteness,
 global length, and local summation; sheafification separates the plus
@@ -2367,3 +3192,392 @@ Riemann--Roch separates point exact sequences, Euler-characteristic change,
 degree induction, vanishing, duality, and sharp applications. The deliberately
 not-decomposed ledger documents the headings for which another item would have
 been padding or a seam violation.
+
+## Binding Complex Analysis reconciliation (2026-09-08)
+
+CA-RS-2 is a planned consumer of AV-9
+`presheaves-sheaves-stalks-and-sheafification`, AV-10
+`sheaf-operations-exactness-ringed-spaces-and-module-pullback`, and AV-21
+`sheaf-cohomology-cech-cohomology-and-comparison`. AV-21's exact planned direct
+Complex Analysis consumers are
+`def-cech-cohomology-holomorphic-line-bundle-sections` and
+`thm-cech-dolbeault-comparison-for-line-bundles-on-compact-surfaces`.
+Complex Analysis specializes the general construction to holomorphic line
+bundles; it must not reconstruct sheafification, refinement independence, or
+the Cech-to-derived comparison.
+
+These are planned-to-planned seams. They add zero direct and zero transitive
+published consumers to AV-9, AV-10, or AV-21, and do not alter Phase-2
+eligibility.
+
+## Binding Lie Theory reconciliation (2026-09-08)
+
+Future RL-9 Borel--Weil--Bott and the localisation/D-module portion of RL-10
+remain build-held until Algebraic Geometry owns exact, fully proved A-page
+interfaces for `G/B`, associated equivariant line bundles, coherent sheaf
+cohomology, projective-line fibres, Serre duality, localisation, and
+D-modules. A descriptive placeholder or recorded theorem is not a dependency.
+No currently published Lie item consumes one of these future AG suppliers, so
+this hold adds zero direct and zero transitive published consumers and no new
+Phase-2 root at this checkout.
+
+## Binding Scheme Theory audit (2026-09-08)
+
+This is the canonical binding section for **Scheme Theory only**: AV-9
+through AV-26.  The original AV-9--AV-26 inventories and their source
+crosswalk remain historical evidence, while this section supersedes every
+conflicting count, placement, dependency, proof-provenance, and ownership
+sentence in them.  It does not supersede the preceding AV-1--AV-8 Algebraic
+Geometry binding, the Complex Analysis reconciliation, or the Lie Theory
+reconciliation.  Published pages, item files, generated files, and the
+machine plan remain read-only in this audit; every live repair below is a
+Phase-3 instruction.
+
+### Live census and hard dependency result
+
+The machine plan has 36 `scheme-theory` pages.  Ten are nonempty and
+published: the five A/B pairs AV-9--AV-13.  Their item counts are respectively
+29/9, 30/9, 28/9, 33/9, and 42/11: **162 A items, 47 B items, 209 total**.
+All 209 item files are published.  AV-14--AV-26 are 26 empty planned page
+slots.  The live inventories agree exactly with the historical tables for
+AV-9--AV-11.  AV-12 has four additional live A items:
+`def-classical-algebraic-prevariety-regular-maps-and-varieties`,
+`def-quasi-coherent-ideal-sheaf`,
+`def-quasi-compact-and-quasi-separated-morphism`, and
+`def-affine-overlap-separation-condition`.  AV-13 has these nineteen
+additional live items:
+`lem-fibre-product-open-restriction`,
+`lem-fibre-products-glue-over-open-covers`,
+`lem-tensor-ring-presentations-for-base-change`,
+`lem-field-valued-points-of-schemes`,
+`lem-scheme-fibre-stalk-quotient`,
+`lem-points-of-scheme-fibre-product-residue-tensors`,
+`lem-fibre-after-base-change`, `lem-geometric-fibre-choice-independent`,
+`def-scheme-theoretic-inverse-image-subscheme`,
+`lem-subscheme-intersection-fibre-product`,
+`lem-base-change-quasi-compact-morphisms`,
+`cor-base-change-finite-type-and-products`, `def-affine-morphism-schemes`,
+`lem-affineness-from-unit-generating-global-sections`,
+`lem-affine-morphism-local-on-target`,
+`lem-base-change-surjective-morphisms`,
+`lem-immersions-and-localizations-monomorphisms`,
+`cex-purely-inseparable-base-change-nonreduced`, and
+`ex-quadratic-cover-self-fibre-product`.  Those live inventories, not the
+shorter historical lists, govern Phase 3.
+
+The dependency/`justified_by` closure of the 209 items has **869 distinct
+items**.  Every target exists.  It contains **zero** `proved_here: false`
+items, zero `status: recorded` items, and zero items whose proof provenance is
+`not-supplied`.  No load-bearing body wikilink before a Remarks section is
+missing from logical metadata.  Consequently no current Scheme proof is
+licensed through a Recorded/Not-Proved catalogue.  This is a closure fact,
+not a claim that the live ordering is clean: the defects below still block a
+clean publication certificate.  No blanket ZF strength is claimed.  Proofs
+using the maximal-ideal theorem inherit its recorded ordinary choice/Zorn
+charge; the geometric pages must not silently relabel those arguments ZF.
+
+Exactly one live Scheme item directly consumes a nonpublished supplier:
+
+| published Scheme consumer | field | draft supplier | owner |
+|---|---|---|---|
+| `def-classical-algebraic-prevariety-regular-maps-and-varieties` | `deps` | `def-affine-algebraic-set` | AG AV-1 A, `affine-algebraic-sets-and-coordinate-rings` |
+
+Within Scheme Theory its complete published impact is the direct definition
+and the transitive consumer
+`thm-classical-varieties-equivalent-integral-separated-finite-type-schemes`
+on the same AV-12 A page. Globally, the draft root has four direct published
+consumers and a 105-item published closure; the preceding AG-P2-1 replacement
+map enumerates that closure by home page. Phase 2 builds AG-P2-1 without
+touching AV-1. Phase 3 then cuts AV-12 over to the replacement definition and
+rechecks these two Scheme items in order.
+
+### Binding Phase-3 repairs for the five published pairs
+
+1. **B pages are leaves.**  Each published B page must require its A
+   companion and nothing else, and no A page may require a B page.  Replace
+   the live A-page chain
+   `products-...-examples -> AV-9 A -> AV-9 B -> AV-10 A -> AV-10 B -> ...`
+   by A-only prerequisites.  In particular AV-9 A requires the A pages
+   `categories-functors-and-natural-transformations`, `limits-and-colimits`,
+   `topological-spaces-and-continuity`, and
+   `relations-functions-and-quotients`; AV-10 A requires AV-9 A plus the A
+   interfaces for abelian categories, exactness, tensor products, and local
+   rings; AV-11 A requires AV-10 A, the A page
+   `zariski-topology-on-prime-spectra`, and its localization/ring A
+   interfaces; AV-12 A requires AV-11 A plus the AG and Noetherian A
+   interfaces stated below; AV-13 A requires AV-12 A plus its tensor,
+   localization, algebraic-closure, and connectedness A interfaces.  Its B
+   companion alone requires AV-13 A.  Apply the same A-only rule to every
+   future pair.
+
+2. **Remove the stalk well-definedness cycle.**  The live edge
+   `def-stalk-of-presheaf.justified_by -> lem-germ-equivalence-relation` is
+   forward, while the lemma depends back on the definition.  In Phase 3,
+   define the stalk categorically as the filtered colimit without a
+   `justified_by`; mark the later concrete quotient description as a
+   non-load-bearing `forward_refs` illustration.  Rewrite the lemma's given
+   data directly in terms of neighbourhood-section pairs and replace its
+   dependency on `def-stalk-of-presheaf` by
+   `def-presheaf-on-topological-space`.  No new item is needed and the stable
+   IDs remain unchanged.
+
+3. **Repair the two remaining A-order edges.**  On AV-10 A, move
+   `def-ringed-space` and then `def-module-on-ringed-space` before
+   `thm-abelian-sheaves-form-abelian-category`.  The theorem may then retain
+   its exact live dependencies.  No consumer interface changes.
+
+4. **Make B items non-suppliers.**  These are the five exact live violations
+   and their repair contracts:
+
+   - remove `ex-sheaf-locally-constant-functions` from
+     `cex-constant-presheaf-not-sheaf-disconnected-open`; prove the
+     locally-constant-sheaf assertion directly from the AV-9 A sheaf and plus
+     construction;
+   - replace the dependency of
+     `cex-extension-by-zero-differs-direct-image` on
+     `ex-direct-image-open-immersion` by `def-direct-image-sheaf` and compute
+     the intersection formula in the counterexample;
+   - delete the unused dependency of
+     `cex-presheaf-cokernel-needs-sheafification` on
+     `cex-extension-by-zero-differs-direct-image`;
+   - delete the unnecessary dependency of
+     `ex-dual-numbers-one-point-nonreduced` on
+     `ex-spectrum-field-one-point`, retaining the direct prime-spectrum
+     computation; and
+   - rewrite `cex-scheme-not-determined-by-underlying-space` directly from
+     `def-affine-scheme-spectrum`, `def-dual-numbers-scheme`, and
+     `def-reduced-affine-scheme`, removing both B-example dependencies.
+
+   Their current published impact maps are exact: the locally-constant
+   example directly and transitively reaches only
+   `cex-constant-presheaf-not-sheaf-disconnected-open`; the direct-image
+   example directly reaches `cex-extension-by-zero-differs-direct-image` and
+   transitively also `cex-presheaf-cokernel-needs-sheafification`; the
+   extension-by-zero counterexample directly and transitively reaches only
+   that cokernel counterexample; the field-spectrum example directly reaches
+   `ex-dual-numbers-one-point-nonreduced` and
+   `cex-scheme-not-determined-by-underlying-space`, with no additional
+   transitive item; and the dual-numbers example directly and transitively
+   reaches only the underlying-space counterexample.  All are confined to
+   their stated B home pages.
+
+5. **Repair the Noetherian ownership seam.**  AV-12's
+   `def-locally-noetherian-and-noetherian-scheme` currently depends on
+   `def-noetherian-ring-and-module`, a published combined definition homed on
+   Complex Analysis's `holomorphic-inverse-and-weierstrass-preparation`.
+   Replace that dependency and its body link by the published Abstract
+   Algebra item `def-noetherian-ring`, homed on the A page
+   `chain-conditions-and-semisimple-modules`.  Delete the entire Complex
+   Analysis page requirement from AV-12.  The exact current Scheme impact of
+   the bad supplier is one direct consumer and zero further transitive Scheme
+   consumers.  This is a Phase-3 repair using an existing supplier, not a
+   Phase-2 root.
+
+6. **Synchronize item metadata, not the reverse.**  Apart from the intentional
+   Phase-3 changes in items 2, 4, and 5 above, amend the machine plan to the
+   live audited dependency sets by applying these exact deltas:
+
+| item | add to plan `deps` | remove from plan `deps` |
+|---|---|---|
+| `lem-morphisms-of-sheaves-determined-by-stalks` | `def-stalk-of-presheaf` | -- |
+| `thm-sheaf-morphism-isomorphism-stalkwise` | `def-stalk-of-presheaf` | `lem-morphisms-of-sheaves-determined-by-stalks` |
+| `thm-sheaves-as-local-homeomorphisms` | -- | `lem-morphisms-of-sheaves-determined-by-stalks` |
+| `ex-germs-of-continuous-functions` | `lem-germ-equivalence-relation` | -- |
+| `ex-empty-space-unique-sheaf-sections` | `def-topological-space` | -- |
+| `lem-direct-image-is-sheaf` | `def-sheaf-on-topological-space` | -- |
+| `thm-abelian-sheaves-form-abelian-category` | `def-ringed-space`, `def-module-on-ringed-space`, `thm-sheafification-preserves-stalks`, `thm-sheaf-morphism-isomorphism-stalkwise` | -- |
+| `thm-exactness-of-sheaves-stalkwise` | `def-kernel-cokernel-image-sheaves`, `thm-sheafification-preserves-stalks` | -- |
+| `def-pullback-module-ringed-spaces` | `def-presheaf-of-groups-rings-modules`, `thm-inverse-direct-image-adjunction` | -- |
+| `thm-pullback-pushforward-module-adjunction` | `thm-sheafification-universal-property` | -- |
+| `lem-pullback-modules-right-exact` | `lem-stalk-inverse-image-sheaf` | -- |
+| `ex-ringed-space-continuous-functions` | `def-local-ring` | -- |
+| `ex-pullback-free-module` | `thm-pullback-pushforward-module-adjunction` | -- |
+| `def-nonreduced-infinitesimal-thickening-affine` | `thm-prime-spectrum-of-a-quotient-bijection` | -- |
+| `cex-nonclosed-scheme-point-no-k-valued-coordinate` | `def-algebra-over-a-commutative-ring`, `thm-quotient-is-domain-iff-ideal-prime` | `def-closed-point-scheme` |
+| `lem-finite-type-local-on-source-and-target` | `cor-affine-scheme-quasi-compact` | -- |
+
+The current proof of `thm-affine-closed-immersions-quotient-rings` already
+uses Stacks Tag `01IN`, takes the global affine case at the distinguished open
+`D(1)`, and no longer makes the invalid inference that a sheaf epimorphism is
+surjective on global sections.  The older “published scheme-pair repair”
+paragraph above is therefore historical, not an outstanding Phase-2 task.
+Its seven direct and three additional transitive published consumers remain
+the exact regression set for Phase 3.
+
+### Binding repairs to the planned AV-14--AV-26 inventory
+
+The 542 historical planned IDs have no machine-plan homes yet.  One of them,
+`def-affine-morphism-schemes`, collides with the already published AV-13 A
+item and is deleted from AV-15; every later use cites the AV-13 supplier.
+After this deletion there is no planned/live ID collision.
+
+No `not-supplied` proof may be emitted as an item.  Apply these exact
+dispositions:
+
+- relocate `thm-affine-morphism-relative-spec-characterization` from AV-15
+  to AV-18 immediately after `thm-affine-quasi-coherent-equivalence`, change
+  its proof provenance to `ai-altered`, and prove the affine-local relative
+  Spec construction there;
+- relocate `def-smooth-relative-dimension-via-differentials` from AV-16 to
+  AV-17 after `thm-differentials-smooth-locally-free`; it is then a genuine
+  definition justified by the preceding smooth/flat finite-presentation
+  theorem, not a preview;
+- delete the zero-impact item `thm-properness-descent-fpqc`.  The track has no
+  effective fpqc descent construction and no later planned item consumes this
+  theorem; `thm-faithfully-flat-descent-vanishing` remains the strictly
+  smaller proved statement actually supported at AV-17;
+- delete the four zero-impact AV-23 previews `thm-riemann-hurwitz`,
+  `lem-unramified-cover-curves-genus-relation`,
+  `thm-high-degree-line-bundle-basepoint-free-preview`, and
+  `thm-high-degree-line-bundle-very-ample-preview`.  Their actual proofs have
+  the stable complete IDs `thm-riemann-hurwitz-complete`,
+  `cor-unramified-cover-curves-genus-complete`,
+  `thm-degree-two-g-line-bundle-basepoint-free`, and
+  `thm-degree-two-g-plus-one-line-bundle-very-ample` on AV-25; and
+- delete the zero-impact
+  `thm-resolution-plane-curves-by-point-blowups`.  AV-26 proves blowup and
+  strict-transform calculations but does not contain the termination
+  invariant for embedded resolution.  Keep
+  `rem-resolution-higher-dimension-not-claimed` and strengthen it to deny
+  curve-resolution as well; and
+- delete the zero-impact
+  `thm-canonical-map-nonhyperelliptic-curve` and its B counterexample
+  `cex-canonical-map-hyperelliptic-not-embedding`.  The available corpus does
+  not contain the Clifford/canonical-linear-system proof machinery needed for
+  the embedding alternative.  `def-hyperelliptic-curve` may remain as a
+  definition used by degree-two-cover examples, but it supplies no
+  canonical-map theorem.
+
+Add the following strictly earlier A-page proof machinery; all statements use
+the listed stable new IDs and `literature-derived`/`ai-altered` provenance:
+
+| placement | new supplier | exact role |
+|---|---|---|
+| AV-15 before `thm-proper-quasi-finite-is-finite` | `def-quasi-finite-at-point-and-morphism` | Define locally quasi-finite and quasi-finite, including finite type and quasi-compactness distinctions. |
+| AV-15 | `lem-quasi-finite-finite-fibre-characterization` | Under locally finite-type hypotheses, identify local quasi-finiteness with discrete/zero-dimensional fibres. |
+| AV-15 | `lem-algebraic-zariski-main-quasi-finite-localization` | Supply the finite-algebra localization lemma used in the algebraic Zariski Main proof. |
+| AV-15 | `thm-zariski-main-quasi-finite-factorization` | Prove a separated quasi-finite morphism factors as an open immersion followed by a finite morphism; `thm-proper-quasi-finite-is-finite` then follows by closedness of the proper open image. |
+| AV-17 before generic flatness | `lem-generic-freeness-finite-type-domain-algebra-module` | Prove the algebraic generic-freeness step rather than cite a nonexistent CA supplier. |
+| AV-22 before base change | `thm-proper-flat-coherent-cohomology-perfect-complex` | For proper `X -> Spec A`, Noetherian `A`, and coherent `A`-flat `F`, construct the bounded finite-projective complex computing all base changes. |
+
+Each of these six new supplier IDs has **zero direct published consumers and
+zero transitive published consumers** at this checkout; each is planned-only,
+not Phase-2 eligible.  Likewise, for each remaining ID individually in the
+amended AV-14--AV-26 A and B inventories, the direct published-consumer set
+and complete transitive published-consumer set are both empty.  This is an
+item-level zero declaration over the exact IDs enumerated in those tables,
+not a page-level approximation.  The sole two raw dependency hits from the
+historical 542-ID set were published AV-13 consumers of the colliding
+`def-affine-morphism-schemes`: `lem-affine-morphism-local-on-target` and
+`lem-base-change-affine-morphisms`, both on
+`fibre-products-base-change-and-scheme-theoretic-fibres`.  Deleting the
+duplicate assigns those consumers to the existing published AV-13 item and
+leaves no published-to-planned edge.
+
+Further binding hypotheses and relocations:
+
+- AV-17 owns and proves the generic-freeness lemma above.  Commutative Algebra
+  has no such repaired supplier, so “generic freeness by citation” is deleted.
+  State fibre-dimension local constancy as the function
+  `x |-> dim_x X_{f(x)}` under the exact flat, locally finite-presentation,
+  and locally Noetherian hypotheses; do not claim that empty and nonempty
+  fibres make a dimension function locally constant on the whole base.
+- AV-20 cites CA-8's
+  `thm-height-one-localisation-of-normal-noetherian-domain-is-dvr` for orders
+  in codimension one.  CA-9 supplies Dedekind fractional ideals only and must
+  not be inflated into general Krull-domain divisor theory.  Delete the claim
+  in `def-locally-factorial-scheme` that every regular locally Noetherian
+  scheme is locally factorial: the repaired CA scaffold proves normality of
+  regular local rings, not the regular-local-UFD theorem.
+- Move `def-degree-divisor-proper-curve`,
+  `thm-principal-divisor-degree-zero-proper-curve`,
+  `cor-degree-descends-picard-curve`, and
+  `def-divisor-support-positive-negative-parts` from AV-20 to AV-23, after
+  `def-algebraic-curve-over-field`.  Their curve hypothesis is then defined
+  strictly earlier.  Tighten `thm-cartier-divisors-mod-principal-to-picard`
+  to integral schemes (or explicitly assume every invertible sheaf has a
+  nonzero rational section).
+- AV-21 deletes `def-fine-sheaf`, `thm-fine-sheaves-acyclic-paracompact`,
+  `thm-abstract-de-rham-resolution-principle`,
+  `thm-cech-de-rham-comparison-interface`, and
+  `ex-good-cover-de-rham-interface`.  Differential Geometry owns de Rham
+  complexes and the de Rham theorem; Scheme Theory retains derived sheaf
+  cohomology, Godement/flasque resolutions, Cech comparison, and the Leray
+  acyclic-cover theorem it actually uses.
+- On AV-22 move `def-higher-direct-image-sheaf` before
+  `thm-affine-morphism-higher-direct-images-qc-vanish`.  State
+  `thm-cohomology-and-base-change` in the proper/Noetherian/coherent/flat form
+  supported by the new perfect-complex supplier, not as unrestricted base
+  change.
+- Before AV-23's function-field equivalence, construct normalization of an
+  integral locally finite-type scheme by gluing affine integral closures and
+  cite CA-19's `cor-affine-normalization-is-finite` and
+  `lem-finite-normalization-compatible-with-principal-opens`.  Narrow
+  `lem-normalization-lowers-arithmetic-genus-delta` and
+  `cor-plane-curve-geometric-genus-delta-correction` to integral finite-type
+  curves.  CA-19 does not supply normalization of an arbitrary reduced
+  nonintegral ring component-by-component, so the historical reduced claim is
+  not licensed.
+- On AV-19 formulate the homogeneous-ideal correspondence with the precise
+  saturation/irrelevant-torsion hypotheses.  On AV-26 define strict transform
+  as schematic closure and delete “dominant component” language for reducible
+  sources.
+
+After all binding deletions and additions, AV-14--AV-26 contains **534 exact
+planned IDs: 403 A items and 131 B leaves**.  Relocations do not change those
+totals.  The collision scan is over this amended set, not the historical 542.
+
+### Canonical A-only prerequisite spine and ownership seams
+
+Every entry below means the named **A** page; no B page is a prerequisite.
+AV-14 requires AV-12, AV-13, and CA-8
+`valuation-rings-and-discrete-valuation-rings`.  AV-15 requires AV-13, AV-14,
+CA-6 `integral-extensions-and-going-up`, and CA-8.  AV-16 requires AV-10--AV-13
+and the existing tensor/exactness/conormal-algebra A interfaces.  AV-17
+requires AV-13, AV-16, finite presentation, and the existing flat-module A
+interface, with generic freeness proved locally as above.  AV-18 requires
+AV-10--AV-13, AV-17, CA-1 `noetherian-rings-and-hilbert-basis`, and CA-2
+`localisation-of-modules-and-support`.  AV-19 requires AV-13, AV-15, AV-18,
+and CA-11 `rees-modules-artin-rees-and-hilbert-samuel-theory`.  AV-20 requires
+AV-18, AV-19, CA-8, CA-9 `dedekind-domains-and-ideal-classes`, and CA-10
+`krull-dimension-and-height-theorems`; it does not require classical AV-7.
+AV-21 requires AV-9, AV-10, and the Homological Algebra A pages for injective
+resolutions/right derived functors.  AV-22 requires AV-18, AV-19, AV-21,
+CA-11, and the relevant Homological Algebra A interfaces.  AV-23 requires
+AV-15--AV-22 and planned CA-19
+`normalization-finiteness-for-affine-domains`; this planned-to-planned seam is
+a build gate, not a citation licence.  AV-24 requires AV-20--AV-23.  AV-25
+requires AV-16 and AV-21--AV-24.  AV-26 requires AV-13, AV-15, AV-18--AV-20,
+and CA-11.  Each future B page requires only its A companion and has no
+consumer.
+
+The active Complex Analysis binding above has two planned AV-21 consumers and
+zero published impact. The Lie binding is now exact through AG-LIE-1 and has
+zero published impact. AG-P2-1 is the new-pair root closing the live AV-1
+cross-category publication blocker. The bad Complex Analysis Noetherian home is a Phase-3
+ownership repair using Abstract Algebra's published definition.  CA-19 is
+planned-only; until it is built, AV-23 and everything downstream through
+AV-26 remain planned-only and blocked.  None of these seams may be routed
+through a Recorded/Not-Proved remark.
+
+### Phase classification and authoritative full-text evidence
+
+There are **zero Scheme-owned Phase-2 roots**.  Phase 2 creates new A/B
+supplier pairs for published consumers only; it may not insert items into the
+ten published pages.  All live repairs above are Phase 3.  The six new
+supplier items and every other AV-14--AV-26 item are planned-only enrichment
+with zero published impact.
+
+The proof/hypothesis decisions above were checked against accessible complete
+Stacks Project text, not search snippets: Tag `01S5`, Definition 29.11.1 and
+Lemmas 29.11.2--29.11.7 (affine morphisms); Tags `03GT` and `02LS`, including
+the complete algebraic/global Zariski Main proofs and proper plus quasi-finite
+implies finite; Tag `0529`, Proposition 29.28.1 (generic flatness with exact
+hypotheses); Tags `035E` and `0BXQ`, especially Definition 29.55.1 and Lemma
+33.27.1 (normalization and finiteness over a field); Tag `00PD`, Lemma
+10.119.7 (the DVR equivalences); and Tag `07VJ`, Lemma 30.22.1 (the
+proper/Noetherian/coherent/flat perfect-complex base-change theorem).  These
+pages expose their proofs and dependency links in full.  The historical
+source corpus continues to supply the standard sheaf, divisor, curve,
+duality, and blowup proofs; the audit removes rather than blesses the claims
+for which that scaffold explicitly admitted no proof.

@@ -72,12 +72,10 @@ spaces, Thom isomorphism as a cohomological construction, and construction of
 Stiefel--Whitney, Chern, Pontryagin and Euler classes.  DT owns the geometric
 uses commissioned here.
 
-**Build blockers.**  All named differential-geometry predecessors currently
-have empty `items` arrays, so they are planned interfaces, not published facts.
-The concurrent algebraic-topology pair numbers were forbidden to this lane and
-are represented below by explicit `AT-n[...]` reconciliation tokens.  No DT
-item may build until the orchestrator replaces each token by the actual authored
-relative label and exact item ids.  This was recorded rather than prompting.
+**Historical build blockers, now reconciled by §12.** Named future suppliers
+remain planned interfaces rather than published facts. The former descriptive
+Algebraic Topology tokens have been replaced by the concrete audited A-page ids;
+§12.4 is the binding exact dependency table.
 
 ---
 
@@ -132,14 +130,14 @@ orders and not claims that AT content is authored:
 
 | token used here | AT-owned interface to resolve at splice | DT consumer |
 |---|---|---|
-| `AT-n[singular-homology]` | singular chains, relative homology, excision, long exact sequences, cellular homology and Euler characteristic invariance | DT-5--DT-10, DT-21--DT-24 |
-| `AT-n[cohomology-products]` | singular cohomology, cup/cap products, Kronecker pairing and Kunneth | DT-12, DT-14, DT-19--DT-20 |
-| `AT-n[poincare-duality]` | fundamental classes and integral/mod-2 Poincare--Lefschetz duality | DT-11--DT-14, DT-19--DT-20 |
-| `AT-n[thom-isomorphism]` | Thom class/isomorphism and Gysin maps in ordinary cohomology | DT-12, DT-16--DT-20 |
-| `AT-n[characteristic-classes]` | construction, naturality and Whitney-sum laws for Stiefel--Whitney, Chern, Pontryagin and Euler classes | DT-12, DT-19--DT-20, DT-28, DT-31--DT-32 |
-| `AT-n[classifying-spaces]` | Grassmannians, universal bundles and classifying maps | DT-16--DT-17, DT-19, DT-25, DT-28 |
-| `AT-n[homotopy-groups-and-stable-homotopy]` | homotopy groups, suspension/stabilisation and stable stems | DT-17--DT-18, DT-25--DT-26, DT-32 |
-| `AT-n[simple-homotopy]` | CW expansions/collapses and Whitehead group/torsion construction | DT-24 |
+| `singular-chains-and-singular-homology`, `relative-homology-excision-and-mayer-vietoris`, and `cw-complexes-and-cellular-homology` | singular chains, relative homology, excision, long exact sequences, cellular homology and Euler characteristic invariance | DT-5--DT-10, DT-21--DT-24 |
+| `singular-cohomology-and-coefficient-theorems` and `cup-cap-cross-products-and-cohomology-rings` | singular cohomology, cup/cap products, Kronecker pairing and Kunneth | DT-12, DT-14, DT-19--DT-20 |
+| `orientations-poincare-lefschetz-and-alexander-duality` | fundamental classes and integral/mod-2 Poincare--Lefschetz duality | DT-11--DT-14, DT-19--DT-20 |
+| `leray-hirsch-thom-isomorphism-and-gysin-sequences` | Thom class/isomorphism and Gysin maps in ordinary cohomology | DT-12, DT-16--DT-20 |
+| `stiefel-whitney-and-euler-classes-by-universal-constructions` and `chern-and-pontryagin-classes-by-splitting-and-complexification` | construction, naturality and Whitney-sum laws for Stiefel--Whitney, Chern, Pontryagin and Euler classes | DT-12, DT-19--DT-20, DT-28, DT-31--DT-32 |
+| `obstruction-theory-postnikov-towers-and-classifying-spaces` and `topological-vector-bundles-and-grassmannian-classification` | Grassmannians, universal bundles and classifying maps | DT-16--DT-17, DT-19, DT-25, DT-28 |
+| `spectra-and-stable-homotopy-groups` | homotopy groups, suspension/stabilisation and stable stems | DT-17--DT-18, DT-25--DT-26, DT-32 |
+| `simple-homotopy-whitehead-groups-and-torsion` | CW expansions/collapses and Whitehead group/torsion construction | DT-24 |
 
 **Amendment owed to AT.**  AT should orient its characteristic-class pages
 forward to DT-19/20/28/31/32 as applications, its Poincare-duality page to
@@ -275,9 +273,8 @@ This checkpoint was written before the ordered item ledger, comfortably before
   decisive choices are negative-gradient trajectories, negative-eigenvalue
   Morse index, residual genericity on noncompact manifolds, outward-normal-first
   boundaries, the explicit surgery index shift, and holonomy as germs.
-- The concurrent AT scaffold was not read.  All AT dependencies remain
-  descriptive `AT-n[...]` tokens, recorded as a splice blocker rather than
-  guessed or prompted for.
+- The original pass did not read the concurrent AT scaffold. The binding §12
+  reconciliation now uses its audited concrete supplier ids and conventions.
 - No generated theorem, proposition, definition, remark, example or
   counterexample was introduced.  The planned rows are literature-derived;
   B rows are standard source examples and remain dependency leaves.
@@ -478,7 +475,7 @@ early.
 
 **A page:** `sublevel-deformation-and-the-handle-attachment-theorem`
 
-**Requires:** DT-1--DT-4; DG collars/tubes/flows; `AT-n[singular-homology]`
+**Requires:** DT-1--DT-4; DG collars/tubes/flows; `singular-chains-and-singular-homology`, `relative-homology-excision-and-mayer-vietoris`, and `cw-complexes-and-cellular-homology`
 for the relative-homology corollary only.
 
 **Sources:** N §§2.1--2.2, pp. 23--45; C §§12.3--12.4, pp. 466--475;
@@ -602,7 +599,7 @@ applications.
 
 **A page:** `morse-inequalities-and-the-handle-chain-complex`
 
-**Requires:** DT-5--DT-7; `AT-n[singular-homology]` for relative/cellular
+**Requires:** DT-5--DT-7; `singular-chains-and-singular-homology`, `relative-homology-excision-and-mayer-vietoris`, and `cw-complexes-and-cellular-homology` for relative/cellular
 homology, Betti numbers and long exact sequences.
 
 **Sources:** N §2.3, pp. 46--53; C §12.5, pp. 476--482;
@@ -682,7 +679,7 @@ outward boundary orientation in item 14 must match DG exactly.
 
 **A page:** `morse-homology-continuation-and-comparison`
 
-**Requires:** DT-9; `AT-n[singular-homology]` for the final comparison;
+**Requires:** DT-9; `singular-chains-and-singular-homology`, `relative-homology-excision-and-mayer-vietoris`, and `cw-complexes-and-cellular-homology` for the final comparison;
 DG time-dependent flows/transversality.
 
 **Sources:** Audin--Damian §§3.3--3.5 and §§4.1, 4.6, 4.9, pp. 68--80,
@@ -724,7 +721,7 @@ comparison cites AT's construction and must wait for its exact relative label.
 **A page:** `oriented-and-mod-two-intersection-numbers`
 
 **Requires:** DG transversality, orientations, boundary and degree pages;
-`AT-n[poincare-duality]` only for the later algebraic identification, not for
+`orientations-poincare-lefschetz-and-alexander-duality` only for the later algebraic identification, not for
 the geometric definition.
 
 **Sources:** GP Ch. 2 §4, pp. 77--84 and Ch. 3 §3, pp. 107--118;
@@ -766,9 +763,9 @@ transversality.
 
 **A page:** `intersection-pairings-self-intersection-and-euler-classes`
 
-**Requires:** DT-11; DG tubes/orientations; `AT-n[cohomology-products]`,
-`AT-n[poincare-duality]`, `AT-n[thom-isomorphism]`, and
-`AT-n[characteristic-classes]`.
+**Requires:** DT-11; DG tubes/orientations; `singular-cohomology-and-coefficient-theorems` and `cup-cap-cross-products-and-cohomology-rings`,
+`orientations-poincare-lefschetz-and-alexander-duality`, `leray-hirsch-thom-isomorphism-and-gysin-sequences`, and
+`stiefel-whitney-and-euler-classes-by-universal-constructions` and `chern-and-pontryagin-classes-by-splitting-and-complexification`.
 
 **Sources:** C §§8.3--9.3, pp. 244--260; GP Ch. 3 §§3--4, pp. 107--131;
 Stanford Math 215B Lectures 14--16, pp. 43--52; MS Chs. 11--12, pp. 123--146.
@@ -813,7 +810,7 @@ Stanford Math 215B Lectures 16--17, pp. 49--55; H Ch. 5 §2, pp. 131--140.
 
 1. `def-euler-characteristic-of-a-compact-manifold` (definition) — $\chi(M)=\sum_i(-1)^i\dim H_i(M;\mathbb Q)$, with $\chi(\varnothing)=0$. **For:** fixes the invariant without reminting homology. **Prov:** [S: literature-derived; P: not-applicable].
 2. `prop-euler-characteristic-additivity-for-relative-finite-cell-decompositions` (proposition) — use the AT long exact sequence/cellular theory. **For:** justifies handle and boundary calculations. **Prov:** [S: literature-derived; P: literature-derived].
-3. `def-isolated-zero-and-local-index-of-a-vector-field` (definition) — in a local oriented/trivialised ball, take the degree of $X/\|X\|$ on the boundary sphere; use local orientation data or mod two as appropriate. **For:** defines the local contribution. **Prov:** [S: literature-derived; P: not-applicable].
+3. `def-isolated-zero-and-local-index-of-a-vector-field` (definition) — in a chart, use its induced tangent trivialisation and take the integer degree of $X/\|X\|$ on the boundary sphere; coordinate changes conjugate the local representative, so no ambient orientation is required. **For:** defines the local contribution. **Prov:** [S: literature-derived; P: not-applicable].
 4. `lem-vector-field-index-is-independent-of-chart-ball-and-trivialization` (lemma) — homotopy and degree invariance reconcile choices. **For:** makes item 3 intrinsic. **Prov:** [S: literature-derived; P: literature-derived].
 5. `def-nondegenerate-zero-of-a-vector-field` (definition) — $X(p)=0$ and $DX_p:T_pM\to T_pM$ is invertible in any local trivialisation. **For:** prepares the determinant formula. **Prov:** [S: literature-derived; P: not-applicable].
 6. `thm-index-of-a-nondegenerate-vector-field-zero` (theorem) — $\operatorname{ind}_pX=\operatorname{sign}\det(DX_p)$. **For:** makes computations finite. **Prov:** [S: literature-derived; P: literature-derived].
@@ -847,9 +844,11 @@ by handle cancellation; resolve that interface at build.
 
 **A page:** `fixed-point-index-and-the-lefschetz-theorem`
 
-**Requires:** DT-11--DT-13; DG degree/transversality; `AT-n[singular-homology]`,
-`AT-n[cohomology-products]` and `AT-n[poincare-duality]` for the algebraic
-trace formula.
+**Requires:** DT-11--DT-13; DG degree/transversality; `singular-chains-and-singular-homology`, `relative-homology-excision-and-mayer-vietoris`, and `cw-complexes-and-cellular-homology`,
+`singular-cohomology-and-coefficient-theorems`, `cup-cap-cross-products-and-cohomology-rings`,
+`orientations-poincare-lefschetz-and-alexander-duality`, and
+`local-coefficients-twisted-homology-and-duality` for the algebraic trace
+formula, including the nonorientable graph--diagonal argument.
 
 **Sources:** GP Ch. 3 §4, pp. 119--131; Stanford Math 215B Lecture 17,
 pp. 52--55; full [Lectures on Fixed Point Theory](https://www.dm.ufscar.br/profs/ebt/history/2006/files/fixed_point.pdf), Lecture II, pp. 12--23.
@@ -864,7 +863,7 @@ pp. 52--55; full [Lectures on Fixed Point Theory](https://www.dm.ufscar.br/profs
 8. `def-global-geometric-lefschetz-number` (definition) — for isolated fixed points on a closed manifold set $I(f)=\sum_x\operatorname{ind}_x(f)$. **For:** records the geometric invariant. **Prov:** [S: literature-derived; P: not-applicable].
 9. `def-algebraic-lefschetz-number` (definition) — $L(f)=\sum_i(-1)^i\operatorname{tr}(f_*:H_i(M;\mathbb Q)\to H_i(M;\mathbb Q))$. **For:** states the AT-owned homological target. **Prov:** [S: literature-derived; P: not-applicable].
 10. `thm-lefschetz-hopf-index-formula` (theorem) — for a smooth self-map of a closed manifold with isolated fixed points, $I(f)=L(f)$. **For:** identifies local geometry and global homology. **Prov:** [S: literature-derived; P: literature-derived].
-11. `lem-diagonal-class-expansion-gives-the-alternating-trace` (lemma) — the Poincare-dual diagonal and Kunneth pairing contract the graph class to the trace sum, with AT signs substituted. **For:** splits the proof of item 10. **Prov:** [S: literature-derived; P: literature-derived].
+11. `lem-diagonal-class-expansion-gives-the-alternating-trace` (lemma) — the Poincare-dual diagonal and Kunneth pairing contract the graph class to the trace sum, with AT signs substituted; on a nonorientable manifold use AT-23's orientation local system and twisted Poincare duality. **For:** splits the proof of item 10. **Prov:** [S: literature-derived; P: literature-derived].
 12. `cor-lefschetz-number-is-homotopy-invariant` (corollary) — induced homology maps agree under homotopy. **For:** extends the geometric count past transverse maps. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Guillemin--Pollack Ch. 3 §4, pp. 119--131; Stanford Lecture 17, pp. 52--55; *Lectures on Fixed Point Theory* Lecture II, pp. 12--23.
 13. `thm-lefschetz-fixed-point-theorem` (theorem) — if $L(f)\ne0$, then $f$ has a fixed point. **For:** is the existence consequence. **Prov:** [S: literature-derived; P: literature-derived].
 14. `cor-lefschetz-number-of-the-identity-is-the-euler-characteristic` (corollary) — $L(\operatorname{id})=\chi(M)$. **For:** links Lefschetz and Poincare--Hopf. **Prov:** [S: literature-derived; P: literature-derived].
@@ -910,7 +909,7 @@ electronic pp. 109--125.
 11. `lem-product-boundary-formula-for-oriented-manifolds` (lemma) — $\partial(W\times V)=(\partial W)\times V\sqcup(-1)^{\dim W}W\times\partial V$ with the repository convention. **For:** proves product well-definedness and signs. **Prov:** [S: literature-derived; P: literature-derived].
 12. `thm-cartesian-product-makes-bordism-a-graded-ring` (theorem) — products descend to classes, with point unit and graded commutativity. **For:** supplies characteristic-number multiplicativity. **Prov:** [S: literature-derived; P: literature-derived].
 13. `prop-boundaries-have-zero-stiefel-whitney-numbers` (proposition) — all tangent Stiefel--Whitney numbers of a closed boundary vanish, consuming AT class naturality and the boundary stable tangent identity. **For:** first obstruction to null-cobordism. **Prov:** [S: literature-derived; P: literature-derived].
-14. `prop-oriented-boundaries-have-zero-pontryagin-numbers-and-signature` (proposition) — Pontryagin numbers and the $4k$ signature vanish on oriented boundaries. **For:** prepares DT-19/20. **Prov:** [S: literature-derived; P: literature-derived].
+14. `prop-oriented-boundaries-have-zero-pontryagin-numbers` (proposition) — Pontryagin numbers vanish on oriented boundaries. **For:** prepares DT-19 without using signature before DT-20 defines it. **Prov:** [S: literature-derived; P: literature-derived].
 15. `rem-bordism-groups-here-are-geometric-not-generalized-homology-constructions` (remark) — Thom spectra and the generalized homology axioms remain AT-owned. **For:** enforces the seam. **Prov:** [S: literature-derived; P: not-applicable].
 
 **Hard-proof closure.**  Transitivity includes collars and smoothing.  Product
@@ -931,8 +930,8 @@ constructions but prove the geometric boundary application here.
 **A page:** `thom-spaces-normal-data-and-collapse-maps`
 
 **Requires:** DG vector bundles, tubes, transversality and approximation;
-`AT-n[thom-isomorphism]`, `AT-n[characteristic-classes]` and
-`AT-n[classifying-spaces]` for cohomological statements.
+`leray-hirsch-thom-isomorphism-and-gysin-sequences`, `stiefel-whitney-and-euler-classes-by-universal-constructions` and `chern-and-pontryagin-classes-by-splitting-and-complexification` and
+`obstruction-theory-postnikov-towers-and-classifying-spaces` and `topological-vector-bundles-and-grassmannian-classification` for cohomological statements.
 
 **Sources:** MS Ch. 18 §§18.1--18.4, pp. 205--218; MM Ch. III
 §§3.8--3.17, PDF pp. 24--29; F Lectures 2--3 and 10, pp. 15--28 and
@@ -972,7 +971,7 @@ applications are proved here.
 
 **A page:** `pontryagin-thom-and-framed-cobordism`
 
-**Requires:** DT-15--DT-16; DG tubes/transversality; `AT-n[homotopy-groups-and-stable-homotopy]`
+**Requires:** DT-15--DT-16; DG tubes/transversality; `spectra-and-stable-homotopy-groups`
 for the homotopy-group notation only.
 
 **Sources:** F Lectures 2--3, pp. 15--28; M Ch. 7, pp. 42--49;
@@ -1012,7 +1011,7 @@ AT interface, not a license to reconstruct stable homotopy groups.
 
 **A page:** `the-hopf-degree-theorem`
 
-**Requires:** DT-15--DT-17; DG degree; `AT-n[homotopy-groups-and-stable-homotopy]`
+**Requires:** DT-15--DT-17; DG degree; `spectra-and-stable-homotopy-groups`
 only for standard homotopy notation.
 
 **Sources:** F Lecture 2, pp. 20--24; M Ch. 8, pp. 50--51; GP Ch. 3
@@ -1050,9 +1049,9 @@ connectedness and closedness are all load-bearing.
 
 **A page:** `characteristic-numbers-and-cobordism-obstructions`
 
-**Requires:** DT-12, DT-15--DT-17; `AT-n[cohomology-products]`,
-`AT-n[poincare-duality]`, `AT-n[characteristic-classes]`,
-`AT-n[thom-isomorphism]`, and `AT-n[homotopy-groups-and-stable-homotopy]`.
+**Requires:** DT-12, DT-15--DT-17; `singular-cohomology-and-coefficient-theorems` and `cup-cap-cross-products-and-cohomology-rings`,
+`orientations-poincare-lefschetz-and-alexander-duality`, `stiefel-whitney-and-euler-classes-by-universal-constructions` and `chern-and-pontryagin-classes-by-splitting-and-complexification`,
+`leray-hirsch-thom-isomorphism-and-gysin-sequences`, and `spectra-and-stable-homotopy-groups`.
 
 **Sources:** MS Chs. 16--18, pp. 183--218 original pagination; F Lecture 1,
 pp. 12--13 and Lectures 7--10, pp. 55--91; TW §§9--18, pp. 15--34.
@@ -1089,8 +1088,8 @@ dependency-resolved rather than reproved ad hoc.  Item 11 is rational only.
 
 **A page:** `the-hirzebruch-signature-theorem`
 
-**Requires:** DT-12, DT-15, DT-19; `AT-n[cohomology-products]`,
-`AT-n[poincare-duality]` and `AT-n[characteristic-classes]`.
+**Requires:** DT-12, DT-15, DT-19; `singular-cohomology-and-coefficient-theorems` and `cup-cap-cross-products-and-cohomology-rings`,
+`orientations-poincare-lefschetz-and-alexander-duality` and `stiefel-whitney-and-euler-classes-by-universal-constructions` and `chern-and-pontryagin-classes-by-splitting-and-complexification`.
 
 **Sources:** MS Ch. 19, pp. 219--230 original pagination; F Lectures 11--12,
 pp. 92--105; TW §19, pp. 34--36; JL, complete lecture, PDF pp. 1--3.
@@ -1252,46 +1251,44 @@ needed at item 10, and simple connectivity at items 4, 8--10.
 
 **A page:** `whitehead-torsion-and-the-s-cobordism-theorem`
 
-**Requires:** DT-23; `AT-n[simple-homotopy]` for Whitehead group/torsion
-construction; AT local-coefficient cellular chains.
+**Requires:** DT-23; `simple-homotopy-whitehead-groups-and-torsion` for the
+Whitehead group, based universal-cover complexes, and torsion;
+`local-coefficients-twisted-homology-and-duality` for the universal-cover
+module convention.
 
-**S-5 non-load-bearing supplier note.** No simple-homotopy/Whitehead-group
-supplier is commissioned in this reconciliation. Until that AT interface is
-authored, every row whose proof consumes the Whitehead group or its torsion
-class is a sourced, non-load-bearing leaf with `proved_here: false`; the
-s-cobordism consequences may not be cited by later proofs as established.
-The rows remain so the interface can be discharged when its supplier exists.
+**Publication gate.** AT-22 and AT-23 are now fully scaffolded suppliers but
+remain unpublished. Every proof-bearing DT-24 row stays unbuildable until both
+A pages publish; no recorded or B-page item may substitute for them.
 
 **Sources:** Lück Ch. 1, pp. 1--22 and Ch. 2 §§2.1--2.3, pp. 23--37;
 Ranicki Ch. 8 §§8.1--8.2, electronic pp. 150--162; W §5.5,
 pp. 149--153 (geometric simply-connected specialization).
 
-1. `def-based-handle-chain-complex-over-the-fundamental-group-ring` (definition) — lift handles to the universal cover and choose orientations/paths to obtain a finite based free $\mathbb Z[\pi]$ complex. **For:** packages nonsimply-connected intersections. **Prov:** [S: literature-derived; P: not-applicable].
-2. `lem-h-cobordism-handle-complex-is-acyclic-over-the-group-ring` (lemma) — homotopy equivalence of the boundary inclusion gives vanishing lifted relative homology. **For:** makes torsion defined. **Prov:** [S: literature-derived; P: literature-derived].
-3. `def-whitehead-torsion-interface-for-a-finite-based-acyclic-complex` (definition) — consume AT's class in $\operatorname{Wh}(\pi)$ after quotienting elementary units. **For:** names the obstruction without reconstructing $K_1$. **Prov:** [S: literature-derived; P: not-applicable].
-4. `def-whitehead-torsion-of-an-h-cobordism` (definition) — $\tau(W,M_0)$ is the torsion of item 1's acyclic relative complex. **For:** attaches AT algebra to geometry. **Prov:** [S: literature-derived; P: not-applicable].
-5. `lem-handle-slides-and-cancelling-pair-creations-preserve-whitehead-torsion` (lemma) — they perform elementary basis changes and elementary expansions. **For:** proves presentation independence. **Prov:** [S: literature-derived; P: literature-derived].
-6. `thm-whitehead-torsion-of-an-h-cobordism-is-well-defined` (theorem) — changes of lifts, paths, orientations and handles alter the matrix only by the quotient units/elementary moves. **For:** makes item 4 intrinsic. **Prov:** [S: literature-derived; P: literature-derived].
-7. `lem-product-h-cobordisms-have-zero-whitehead-torsion` (lemma) — their relative handle complex is empty/simple. **For:** proves necessity in s-cobordism. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 1 and Ch. 2 §§2.1--2.3, pp. 1--37; Ranicki Ch. 8 §§8.1--8.2, pp. 150--162.
-8. `def-simple-homotopy-equivalence` (definition) — cite AT: a homotopy equivalence is simple iff its Whitehead torsion vanishes. **For:** explains the letter “s”. **Prov:** [S: literature-derived; P: not-applicable].
-9. `lem-vanishing-torsion-allows-algebraic-diagonalization-by-simple-handle-moves` (lemma) — after concentrating handles in adjacent indices, zero torsion reduces the group-ring matrix to identity via elementary operations. **For:** supplies the algebraic sufficiency step. **Prov:** [S: literature-derived; P: literature-derived].
-10. `lem-group-labelled-whitney-tricks-realize-the-diagonalized-handle-complex` (lemma) — matching group labels and high-dimensional Whitney disks remove surplus geometric intersections. **For:** supplies the geometric sufficiency step. **Prov:** [S: literature-derived; P: literature-derived].
-11. `thm-smooth-s-cobordism-theorem` (theorem) — for a connected smooth h-cobordism $W^{n+1}$ with $n\ge5$, $W$ is a product rel $M_0$ iff $\tau(W,M_0)=0$. **For:** is the nonsimply-connected refinement. **Prov:** [S: literature-derived; P: literature-derived].
-12. `cor-h-cobordism-theorem-when-the-whitehead-group-vanishes` (corollary) — if $\operatorname{Wh}(\pi_1M_0)=0$, every h-cobordism in the range is a product. **For:** recovers simply connected and other cases. **Prov:** [S: literature-derived; P: literature-derived].
-13. `prop-realization-of-whitehead-torsion-by-h-cobordisms` (proposition) — in the standard high-dimensional setting, prescribed torsion classes are realised by h-cobordisms. **For:** shows the obstruction is sharp. **Prov:** [S: literature-derived; P: literature-derived].
-14. `rem-torsion-from-the-opposite-boundary-involves-the-standard-involution-and-dimension-sign` (remark) — $\tau(W,M_1)$ is not naively the same element as $\tau(W,M_0)$. **For:** records the duality subtlety. **Prov:** [S: literature-derived; P: not-applicable].
-15. `rem-whitehead-group-construction-remains-at-owned` (remark) — DT proves the handle-geometric interpretation and theorem only. **For:** enforces the seam. **Prov:** [S: literature-derived; P: not-applicable].
+1. `def-based-handle-chain-complex-over-the-fundamental-group-ring` (definition) — identify the relative universal-cover cellular complex with the based handle complex, using AT-22/AT-23's right-module, lift, orientation, and path conventions. **For:** packages nonsimply-connected intersections without redefining the general universal-cover chain complex. **Prov:** [S: literature-derived; P: not-applicable].
+2. `lem-h-cobordism-handle-complex-is-contractible-over-the-group-ring` (lemma) — lift a homotopy inverse and its homotopies equivariantly to obtain an explicit chain contraction. Vanishing homology alone is not enough. **For:** meets AT-22's torsion premise. **Prov:** [S: literature-derived; P: literature-derived].
+3. `def-whitehead-torsion-of-an-h-cobordism` (definition) — $\tau(W,M_0)$ is AT-22's contraction torsion of item 1's contractible relative complex in $\operatorname{Wh}(\pi)$. **For:** attaches AT algebra to geometry. **Prov:** [S: literature-derived; P: not-applicable].
+4. `lem-handle-slides-and-cancelling-pair-creations-preserve-whitehead-torsion` (lemma) — they perform elementary basis changes and elementary expansions. **For:** proves presentation independence. **Prov:** [S: literature-derived; P: literature-derived].
+5. `thm-whitehead-torsion-of-an-h-cobordism-is-well-defined` (theorem) — changes of lifts, paths, orientations and handles alter the matrix only by the quotient units/elementary moves. **For:** makes item 3 intrinsic. **Prov:** [S: literature-derived; P: literature-derived].
+6. `lem-product-h-cobordisms-have-zero-whitehead-torsion` (lemma) — their relative handle complex is empty/simple. **For:** proves necessity in s-cobordism. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 1 and Ch. 2 §§2.1--2.3, pp. 1--37; Ranicki Ch. 8 §§8.1--8.2, pp. 150--162.
+7. `rem-simple-homotopy-and-the-vanishing-criterion-are-at-owned` (remark) — cite AT-22's definition and iff theorem; do not mint a second definition. **For:** explains the letter “s” while preserving ownership. **Prov:** [S: literature-derived; P: not-applicable].
+8. `lem-vanishing-torsion-allows-algebraic-diagonalization-by-simple-handle-moves` (lemma) — after concentrating handles in adjacent indices, zero torsion reduces the group-ring matrix to identity via elementary operations. **For:** supplies the algebraic sufficiency step. **Prov:** [S: literature-derived; P: literature-derived].
+9. `lem-group-labelled-whitney-tricks-realize-the-diagonalized-handle-complex` (lemma) — matching group labels and high-dimensional Whitney disks remove surplus geometric intersections. **For:** supplies the geometric sufficiency step. **Prov:** [S: literature-derived; P: literature-derived].
+10. `thm-smooth-s-cobordism-theorem` (theorem) — for a connected smooth h-cobordism $W^{n+1}$ with $n\ge5$, $W$ is a product rel $M_0$ iff $\tau(W,M_0)=0$. **For:** is the nonsimply-connected refinement. **Prov:** [S: literature-derived; P: literature-derived].
+11. `cor-h-cobordism-theorem-when-the-whitehead-group-vanishes` (corollary) — if $\operatorname{Wh}(\pi_1M_0)=0$, every h-cobordism in the range is a product. **For:** recovers simply connected and other cases. **Prov:** [S: literature-derived; P: literature-derived].
+12. `prop-realization-of-whitehead-torsion-by-h-cobordisms` (proposition) — in the standard high-dimensional setting, prescribed torsion classes are realised by h-cobordisms. **For:** shows the obstruction is sharp. **Prov:** [S: literature-derived; P: literature-derived].
+13. `rem-torsion-from-the-opposite-boundary-involves-the-standard-involution-and-dimension-sign` (remark) — $\tau(W,M_1)$ is not naively the same element as $\tau(W,M_0)$. **For:** records the duality subtlety. **Prov:** [S: literature-derived; P: not-applicable].
+14. `rem-whitehead-group-construction-remains-at-owned` (remark) — DT proves the handle-geometric interpretation and theorem only. **For:** enforces the seam. **Prov:** [S: literature-derived; P: not-applicable].
 
-**Hard-proof closure.**  Item 6 is the choice-independence proof.  Sufficiency
-again separates group-ring matrix reduction (item 9) from Whitney realization
-(item 10).  Exact torsion conventions and the opposite-end involution await the
-AT simple-homotopy page.
+**Hard-proof closure.** Item 5 is the choice-independence proof. Sufficiency
+separates group-ring matrix reduction (item 8) from Whitney realization
+(item 9). Exact torsion conventions and the opposite-end involution are
+consumed from AT-22.
 
 **B page:** `whitehead-torsion-and-the-s-cobordism-theorem-examples`
 
 1. `ex-simply-connected-h-cobordisms-have-zero-whitehead-obstruction` — $\operatorname{Wh}(1)=0$. **For:** recovers DT-23. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 1 and Ch. 2 §§2.1--2.3, pp. 1--37; Ranicki Ch. 8 §§8.1--8.2, pp. 150--162.
 2. `ex-a-group-ring-handle-matrix-and-its-torsion-class` — compute a finite toy acyclic complex. **For:** checks the definition interface. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 1 and Ch. 2 §§2.1--2.3, pp. 1--37; Ranicki Ch. 8 §§8.1--8.2, pp. 150--162.
-3. `ex-handle-slides-change-the-matrix-but-not-whitehead-torsion` — perform an elementary group-ring operation. **For:** verifies item 5. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 1 and Ch. 2 §§2.1--2.3, pp. 1--37; Ranicki Ch. 8 §§8.1--8.2, pp. 150--162.
+3. `ex-handle-slides-change-the-matrix-but-not-whitehead-torsion` — perform an elementary group-ring operation. **For:** verifies item 4. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 1 and Ch. 2 §§2.1--2.3, pp. 1--37; Ranicki Ch. 8 §§8.1--8.2, pp. 150--162.
 4. `cex-an-h-cobordism-with-nonzero-torsion-is-not-a-product` — use the realization theorem. **For:** shows h does not imply s. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 1 and Ch. 2 §§2.1--2.3, pp. 1--37; Ranicki Ch. 8 §§8.1--8.2, pp. 150--162.
 5. `cex-ordinary-acyclicity-over-z-does-not-detect-group-ring-torsion` — compare augmented and based complexes. **For:** motivates local coefficients. **Prov:** [S: literature-derived; P: literature-derived]. **Locator:** Lück Ch. 1 and Ch. 2 §§2.1--2.3, pp. 1--37; Ranicki Ch. 8 §§8.1--8.2, pp. 150--162.
 
@@ -1300,7 +1297,7 @@ AT simple-homotopy page.
 **A page:** `formal-immersions-and-the-smale-hirsch-theorem`
 
 **Requires:** DT-6 handle filtrations; DG immersion, vector-bundle and
-approximation foundations; `AT-n[classifying-spaces]` for bundle-monomorphism
+approximation foundations; `obstruction-theory-postnikov-towers-and-classifying-spaces` and `topological-vector-bundles-and-grassmannian-classification` for bundle-monomorphism
 classification examples.
 
 **Sources:** Ranicki Ch. 7 §7.4, electronic pp. 142--146; Francis,
@@ -1343,7 +1340,7 @@ used later.
 
 **A page:** `regular-homotopy-and-sphere-eversion`
 
-**Requires:** DT-25; `AT-n[homotopy-groups-and-stable-homotopy]` and
+**Requires:** DT-25; `spectra-and-stable-homotopy-groups` and
 classifying-space/Stiefel-manifold computations.
 
 **Sources:** Cohen, [“Immersions of Manifolds and Homotopy Theory”](https://math.stanford.edu/~ralph/immersions-final.pdf),
@@ -1421,8 +1418,8 @@ obstructions.
 
 **A page:** `characteristic-class-obstructions-to-immersions-and-embeddings`
 
-**Requires:** DT-16, DT-19, DT-25--DT-27; `AT-n[characteristic-classes]`
-and `AT-n[classifying-spaces]`.
+**Requires:** DT-16, DT-19, DT-25--DT-27; `stiefel-whitney-and-euler-classes-by-universal-constructions` and `chern-and-pontryagin-classes-by-splitting-and-complexification`
+and `obstruction-theory-postnikov-towers-and-classifying-spaces` and `topological-vector-bundles-and-grassmannian-classification`.
 
 **Sources:** Cohen, “Immersions of Manifolds and Homotopy Theory,” §§1--3.1,
 PDF pp. 4--13; C §7.2, pp. 226--232; Skopenkov §§1--2, article pp. 1--13;
@@ -1591,8 +1588,8 @@ stated in arbitrary codimension.
 **A page:** `exotic-smooth-structures-and-milnor-spheres`
 
 **Requires:** DT-15--DT-17, DT-20--DT-24, DT-28;
-`AT-n[characteristic-classes]`, `AT-n[classifying-spaces]`, and
-`AT-n[homotopy-groups-and-stable-homotopy]`.
+`stiefel-whitney-and-euler-classes-by-universal-constructions` and `chern-and-pontryagin-classes-by-splitting-and-complexification`, `obstruction-theory-postnikov-towers-and-classifying-spaces` and `topological-vector-bundles-and-grassmannian-classification`, and
+`spectra-and-stable-homotopy-groups`.
 
 **Sources:** MI full paper, Annals pp. 399--405; Northwestern Math 465,
 [*Milnor's Construction of Exotic 7-Spheres*](https://sites.math.northwestern.edu/jnf960/classes/mflds/18exotic7spheres2.pdf),
@@ -1783,7 +1780,7 @@ not cause duplicate items.
 | H073 | F Lecture 1, “Disjoint union and the abelian group structure” | included | `def-unoriented-and-oriented-bordism-groups`, `thm-disjoint-union-makes-bordism-classes-abelian-groups`, `prop-zero-dimensional-bordism-groups` |
 | H074 | F Lecture 2, “Cartesian product and ring structure” | included | `lem-product-boundary-formula-for-oriented-manifolds`, `thm-cartesian-product-makes-bordism-a-graded-ring` |
 | H075 | MS Ch. 17.1, “Smooth manifolds-with-boundary” | included | `thm-smooth-cobordism-is-an-equivalence-relation`, `prop-boundaries-have-zero-stiefel-whitney-numbers` |
-| H076 | MS Ch. 17.2, “Oriented cobordism” | included | `prop-oriented-boundaries-have-zero-pontryagin-numbers-and-signature`, `rem-bordism-groups-here-are-geometric-not-generalized-homology-constructions` |
+| H076 | MS Ch. 17.2, “Oriented cobordism” | included | `prop-oriented-boundaries-have-zero-pontryagin-numbers`, `rem-bordism-groups-here-are-geometric-not-generalized-homology-constructions` |
 | H077 | MS Ch. 18.1, “The Thom space of a Euclidean vector bundle” | included | `def-disk-bundle-sphere-bundle-and-thom-space`, `lem-thom-space-is-independent-of-the-bundle-metric-up-to-canonical-homeomorphism`, `prop-thom-space-of-a-trivial-rank-r-bundle-is-a-suspension-smash-product` |
 | H078 | MM Ch. III named result, “Thom space and suspension” | included | `rem-thom-space-empty-and-rank-zero-conventions`, `lem-stabilizing-a-normal-bundle-suspends-its-thom-space` |
 | H079 | MS Ch. 18.3, “Regular values and transversality” — normal-preimage application | included | `prop-transverse-preimage-carries-a-pulled-back-normal-structure`, `lem-based-homotopies-transverse-to-the-zero-section-give-normal-cobordisms` |
@@ -1828,8 +1825,8 @@ not cause duplicate items.
 | H113 | MH §7, “Cancellation in the middle dimensions” | included | `lem-handle-trading-concentrates-an-acyclic-simply-connected-presentation-in-two-adjacent-middle-indices`, `def-middle-handle-intersection-matrix-of-an-h-cobordism`, `lem-acyclicity-makes-the-simply-connected-middle-handle-matrix-unimodular` |
 | H114 | Lück named result, “Reducing the handlebody decomposition” | included | `lem-handle-slides-reduce-a-unimodular-middle-handle-matrix-to-the-identity`, `lem-whitney-trick-realizes-algebraic-middle-handle-cancellation-geometrically`, `lem-middle-handle-pairs-with-one-geometric-intersection-cancel` |
 | H115 | MH §9, “The h-cobordism theorem and applications” | included | `thm-critical-point-free-cobordism-is-a-product-relative-to-the-incoming-boundary`, `thm-smooth-simply-connected-h-cobordism-theorem`, `cor-high-dimensional-simply-connected-h-cobordant-manifolds-are-diffeomorphic` |
-| H116 | Lück Ch. 1, “Handlebody decompositions and Whitehead groups” | included | `def-based-handle-chain-complex-over-the-fundamental-group-ring`, `lem-h-cobordism-handle-complex-is-acyclic-over-the-group-ring` |
-| H117 | Lück §2.1, “The Whitehead group” | included | `def-whitehead-torsion-interface-for-a-finite-based-acyclic-complex`, `def-simple-homotopy-equivalence`, `rem-whitehead-group-construction-remains-at-owned` |
+| H116 | Lück Ch. 1, “Handlebody decompositions and Whitehead groups” | included | `def-based-handle-chain-complex-over-the-fundamental-group-ring`, `lem-h-cobordism-handle-complex-is-contractible-over-the-group-ring` |
+| H117 | Lück §2.1, “The Whitehead group” | consumed from AT-22 | `rem-simple-homotopy-and-the-vanishing-criterion-are-at-owned`, `rem-whitehead-group-construction-remains-at-owned` |
 | H118 | Lück §2.2, “Torsion of a finite based acyclic free complex” | included | `def-whitehead-torsion-of-an-h-cobordism`, `lem-handle-slides-and-cancelling-pair-creations-preserve-whitehead-torsion`, `thm-whitehead-torsion-of-an-h-cobordism-is-well-defined` |
 | H119 | Ranicki §8.2, “The h- and s-cobordism theorems” | included | `lem-vanishing-torsion-allows-algebraic-diagonalization-by-simple-handle-moves`, `lem-group-labelled-whitney-tricks-realize-the-diagonalized-handle-complex`, `thm-smooth-s-cobordism-theorem` |
 | H120 | Lück named result, “Realisation of Whitehead torsion” | included | `cor-h-cobordism-theorem-when-the-whitehead-group-vanishes`, `prop-realization-of-whitehead-torsion-by-h-cobordisms`, `rem-torsion-from-the-opposite-boundary-involves-the-standard-involution-and-dimension-sign` |
@@ -2001,10 +1998,10 @@ dispositions in §§6 and 9.6.
 
 ### 11.4 Build handoff and blockers recorded without prompting
 
-Before authoring any DT page, the orchestrator must replace every descriptive
-`AT-n[...]` token by the actual concurrent AT relative label and then exact
-authored item ids, and rerun the global item/page-id collision check including
-AT.  In particular, reconcile AT's cap-product order,
+The descriptive AT tokens have now been replaced by audited page ids. Before
+authoring, substitute the exact AT item ids required by each proof and rerun
+the global item/page-id collision check including AT. In particular, preserve
+AT's cap-product order,
 Pontryagin sign and Thom-class normalization before DT-12, DT-16--DT-20,
 DT-28 or DT-32 is built.  All named DG predecessors likewise still have empty
 live `items` arrays and must be authored first.
@@ -2019,3 +2016,483 @@ At build time preserve the hypotheses printed here: compact/closed versus
 proper noncompact, integral orientation versus mod two, residual versus open
 dense, $n\ge5$ boundary dimension for h-/s-cobordism, the smooth
 four-dimensional exclusions, and actual versus stable normal framings.
+
+---
+
+## 12. Binding dependency and published-content audit (2026-09-08)
+
+This section supersedes every unresolved-token, order, dependency, and blocker
+claim above.  It records a complete read-only audit of the five published DT
+A/B pairs and a prerequisite audit of all thirty-two planned pairs.  It does
+not alter a published page or item.  The canonical plan, generated artifacts,
+`library/`, and `items/` were read but not edited.
+
+### 12.1 Publication and leaf invariant
+
+An A page may require only earlier **A pages** that supply mathematics it
+actually uses.  A B page requires exactly its own A page.  No A page may use a
+B page as an order anchor, and no item may depend on a B-page example.  Thus
+every B page is a genuine dependency leaf.  Remove every inherited
+immediately-preceding-B edge in the DT block.  Empty planned pages may be
+reordered now; repairs to the five published pairs in §12.7 are deferred until
+every named supplier in that repair is published.
+
+The three `not-supplied` statements remain orientation leaves and must have no
+downstream consumer: DT-21's surgery-exact-sequence remark, DT-27's
+Haefliger--Weber remark, and DT-32's order-$28$ theorem.  In addition, change
+DT-32 item 7, `prop-homotopy-spheres-are-stably-parallelizable`, to
+`P: not-supplied` and keep it non-load-bearing: Kervaire--Milnor Theorem 3.1
+uses Bott periodicity and Adams's stable-homotopy results, neither of which is
+proved by the present AT scaffold.  The theorem is preserved, but no later
+DT-32 proof uses it.
+
+### 12.2 Exact additions owed to supplier tracks
+
+The published DT-4 page also invokes the Banach implicit-function theorem,
+split Banach submanifolds, and nonlinear Fredholm maps.  FA-15 supplies only
+the linear Fredholm theory, so add this prerequisite pair to functional
+analysis before any DT-4 repair.
+
+**FA-15a addition — `banach-space-differential-calculus-and-banach-manifolds`.**
+Use A page id/title `banach-space-differential-calculus-and-banach-manifolds`
+/ “Banach-Space Differential Calculus and Banach Manifolds” and B page
+id/title `banach-space-differential-calculus-and-banach-manifolds-examples` /
+“Banach-Space Differential Calculus and Banach Manifolds: Examples.”
+Place its A/B pages immediately after FA-15, at orders
+`288.0761`/`288.0762`.  Require `normed-and-banach-spaces`,
+`bounded-linear-operators-and-quotient-spaces`,
+`compact-operators-and-riesz-schauder-theory`, and
+`completeness-and-uniform-continuity`.  Its A-page inventory, in order, is:
+
+1. `def-frechet-derivative-between-banach-spaces`;
+2. `lem-the-frechet-derivative-is-unique`;
+3. `thm-chain-sum-product-and-composition-rules-for-banach-derivatives`;
+4. `def-c-k-map-between-banach-spaces`;
+5. `lem-banach-mean-value-estimate-on-a-convex-set`;
+6. `thm-inverse-function-theorem-for-banach-spaces`;
+7. `thm-implicit-function-theorem-for-banach-spaces`;
+8. `def-countable-base-banach-manifold-and-smooth-map`;
+9. `def-tangent-space-and-differential-on-a-banach-manifold`;
+10. `lem-banach-manifold-differentials-are-chart-independent`;
+11. `def-split-banach-submanifold`;
+12. `thm-regular-value-theorem-for-banach-manifolds`;
+13. `def-smooth-banach-vector-bundle-and-section`;
+14. `thm-a-transverse-banach-bundle-section-has-a-split-zero-submanifold`;
+15. `def-fredholm-map-between-banach-manifolds`;
+16. `lem-local-finite-dimensional-reduction-for-a-fredholm-map`;
+17. `prop-the-index-of-a-fredholm-map-is-locally-constant`;
+18. `rem-surjectivity-alone-does-not-give-a-banach-submanifold-without-a-split-kernel`.
+
+Its B inventory is
+`ex-the-derivative-of-a-bounded-bilinear-map`,
+`ex-the-banach-inverse-theorem-for-a-small-lipschitz-perturbation-of-the-identity`,
+`ex-a-regular-level-set-in-a-banach-space`,
+`ex-a-projection-with-finite-dimensional-kernel-is-fredholm`, and
+`cex-a-closed-uncomplemented-subspace-is-not-a-split-banach-submanifold`.
+Use the Fréchet (not merely Gâteaux) derivative and operator-norm $C^k$
+convention.  The inverse theorem is proved by contraction after normalizing
+the derivative to the identity; the implicit and regular-value theorems split
+off a complemented kernel.  For a transverse section, “transverse” means its
+vertical derivative is onto with split kernel.  The Fredholm reduction splits
+the finite-dimensional kernel and a finite-dimensional complement to the
+closed range, solves the infinite-dimensional coordinate by the implicit
+theorem, and leaves a finite-dimensional residual map.  These hypotheses must
+be printed, not hidden under “constant rank.”
+Use Wang, *Banach Calculus*, §§1--3 (complete author text at
+`https://www.math.ntu.edu.tw/~dragon/Lecture%20Notes/Banach%20Calculus%202012.pdf`),
+and the complete Abbondandolo--Majer, *Lectures on the Morse Complex for
+Infinite-Dimensional Manifolds*, §2.3 (especially Proposition 2.17 and
+Theorem 2.19), together with FA-15's linear Fredholm proofs.  This pair owns
+the general nonlinear definitions and local theorems; DT-4 owns only the
+Morse-trajectory application and the global Sard--Smale category argument.
+
+The former AT placeholder proposals are superseded by the completed Algebraic
+Topology audit §13. Use its full inventories, hypotheses, conventions, sources,
+and exact A-page requirements; do not retain the thinner provisional versions
+formerly printed here.
+
+- **AT-21** `spectra-and-stable-homotopy-groups` / companion remains at
+  366.0241/366.0242. Its A page additionally requires `limits-and-colimits`
+  and follows the exact four-page supplier set in AT §13.4. DT-17 and DT-19
+  consume its proved stable-homotopy interfaces.
+- **AT-22** `simple-homotopy-whitehead-groups-and-torsion` / companion moves
+  to 366.0401/366.0402, after AT-20 and before Algebraic Geometry at 366.041.
+  Orders 366.043/366.044 are occupied and must not be reused. Its exact eleven
+  A-page suppliers and eighteen-item A inventory are controlled by AT §§13.4
+  and 13.5. DT-24 consumes the Whitehead-group, universal-cover chain,
+  contractible mapping-cone, torsion-invariance, composition/sum, and vanishing
+  interfaces; it must not use mere acyclicity.
+- **AT-23** `local-coefficients-twisted-homology-and-duality` / companion at
+  366.0243/366.0244 supplies DT's orientation-system and universal-cover
+  handle-complex uses. Right universal-cover chains tensor with left modules;
+  cochain equivariance and the orientation-system tensor convention are
+  explicit.
+- **AT-24** `simplicial-subdivision-and-simplicial-approximation` / companion
+  at 366.0021/366.0022 is a Phase-2 root for two published AT consumers and
+  their 60-item published impact cone. DT-5's two published handle-homology
+  items lie in that transitive cone.
+
+Every companion B page requires only its A page and is a leaf. The promised
+Bott-vanishing content also lacks its differential-geometric
+supplier.  Add the following DG pair after DG-37 and before DT begins.
+
+**DG-38 addition — `chern-weil-theory-and-characteristic-forms`.**  Its A/B
+page ids/titles are `chern-weil-theory-and-characteristic-forms` /
+“Chern--Weil Theory and Characteristic Forms” and
+`chern-weil-theory-and-characteristic-forms-examples` / “Chern--Weil Theory
+and Characteristic Forms: Examples.”  Place them at orders `516.1`/`516.2`.
+This requires amending the DG plan's present scope-boundary text that defers
+general Chern--Weil theory.  Require
+`connections-levi-civita-and-parallel-transport`,
+`riemann-curvature-and-riemannian-submanifolds`,
+`lie-groups-invariant-fields-and-the-exponential-map`,
+`the-exterior-derivative-and-cartan-calculus`,
+`the-de-rham-complex-homotopy-and-mayer-vietoris`,
+`topological-vector-bundles-and-grassmannian-classification`,
+`stiefel-whitney-and-euler-classes-by-universal-constructions`, and
+`chern-and-pontryagin-classes-by-splitting-and-complexification`.  A-page
+inventory, in order:
+
+1. `def-invariant-polynomial-on-a-matrix-lie-algebra`;
+2. `def-evaluation-of-an-invariant-polynomial-on-curvature`;
+3. `lem-invariant-polynomials-annihilate-covariant-commutators`;
+4. `lem-an-invariant-polynomial-of-curvature-is-closed`;
+5. `def-the-chern-weil-homomorphism`;
+6. `lem-transgression-between-two-connections-is-exact`;
+7. `thm-chern-weil-homomorphism-is-independent-of-connection-and-natural`;
+8. `def-chern-pontryagin-and-euler-characteristic-forms`;
+9. `thm-chern-weil-forms-represent-the-at-characteristic-classes-over-the-reals`;
+10. `prop-chern-weil-forms-obey-direct-sum-and-pullback-formulas`;
+11. `rem-integral-torsion-is-not-detected-by-real-characteristic-forms`.
+
+Its B inventory is
+`ex-curvature-and-first-chern-form-of-a-line-bundle`,
+`ex-flat-connections-have-vanishing-positive-degree-real-chern-weil-classes`,
+`ex-pontryagin-forms-from-a-real-connection`, and
+`cex-changing-a-connection-changes-the-form-but-not-its-de-rham-class`.
+An invariant polynomial is a symmetric multilinear Ad-invariant polynomial
+on the relevant matrix Lie algebra; evaluation on curvature uses the fixed
+wedge/matrix-order convention.  Closedness follows from DG-21's Bianchi
+identity, and the one-parameter connection on $M\times I$ gives the explicit
+transgression formula and hence independence and naturality.  Chern forms use
+complex bundles, Pontryagin forms use complexification of real bundles, and
+the Pfaffian Euler form requires an oriented even-rank Euclidean bundle with a
+metric connection.  Every comparison with AT characteristic classes is over
+$\mathbb R$; no differential-form argument detects integral torsion.
+Use Bott, *Lectures on Characteristic Classes and Foliations*, §§2--5
+(complete author text at
+`https://poisson.phc.dm.unipi.it/~lmigliorini/secondo_magistrale/gauge_theory/bott_foliations.pdf`),
+and Milnor--Stasheff, Appendix C.  DT-31 consumes this page; it does not
+reconstruct Chern--Weil theory.  DG-21 already owns the definition of bundle
+curvature, its endomorphism-valued-two-form property, and the second Bianchi
+identity; DG-38 cites those items and must not mint duplicates.
+
+### 12.3 Exact DT reorder
+
+Keep DT-1 through DT-6 at orders 517--528.  Move the empty DT-11 and DT-12
+pairs ahead of DT-7 so intersection signs are available before the handle
+matrix is defined.  Use this exact order:
+
+| order | page |
+|---:|---|
+| 529/530 | `oriented-and-mod-two-intersection-numbers` / companion |
+| 531/532 | `intersection-pairings-self-intersection-and-euler-classes` / companion |
+| 533/534 | `handle-cancellation-slides-and-elementary-moves` / companion |
+| 535/536 | `morse-inequalities-and-the-handle-chain-complex` / companion |
+| 537/538 | `morse-trajectory-moduli-spaces-and-the-morse-differential` / companion |
+| 539/540 | `morse-homology-continuation-and-comparison` / companion |
+
+DT-13 onward retain orders 541--580.  Relative labels remain stable; only the
+six empty pair positions change.  This removes the DT-7-to-DT-11 forward edge
+without duplicating local intersection theory.
+
+### 12.4 Exact canonical-plan `requires` arrays
+
+Set every DT B page to `[its-own-A-page]`.  Set the A-page arrays below exactly
+as printed; names separated by semicolons are individual page ids.  These
+replace both the old descriptive tokens and all preceding-B anchors.
+
+| A page | exact `requires` |
+|---|---|
+| `morse-critical-points-hessians-and-indices` | `tangent-cotangent-and-the-differential`; `rank-theorems-and-embedded-submanifolds`; `smooth-vector-bundles-and-sections`; `sard-theorem-and-transversality`; `riemannian-metrics-length-distance-and-volume`; `connections-levi-civita-and-parallel-transport`; `dual-spaces-bilinear-forms-and-inertia`; `compactness` |
+| `morse-functions-critical-values-and-genericity` | `morse-critical-points-hessians-and-indices`; `smooth-partitions-of-unity-and-exhaustions`; `smooth-vector-bundles-and-sections`; `sard-theorem-and-transversality`; `whitney-embedding-tubular-neighbourhoods-and-approximation`; `function-space-topologies` |
+| `gradient-like-vector-fields-and-morse-trajectories` | `morse-critical-points-hessians-and-indices`; `morse-functions-critical-values-and-genericity`; `euclidean-ordinary-differential-equations-with-smooth-dependence`; `vector-fields-flows-and-lie-derivatives`; `riemannian-metrics-length-distance-and-volume`; `connections-levi-civita-and-parallel-transport` |
+| `stable-unstable-manifolds-and-morse-smale-transversality` | `gradient-like-vector-fields-and-morse-trajectories`; `sard-theorem-and-transversality`; `vector-fields-flows-and-lie-derivatives`; `connections-levi-civita-and-parallel-transport`; `complete-metrizability-and-baire`; `compact-operators-and-riesz-schauder-theory`; `banach-space-differential-calculus-and-banach-manifolds` |
+| `sublevel-deformation-and-the-handle-attachment-theorem` | `morse-critical-points-hessians-and-indices`; `gradient-like-vector-fields-and-morse-trajectories`; `smooth-partitions-of-unity-and-exhaustions`; `whitney-embedding-tubular-neighbourhoods-and-approximation`; `vector-fields-flows-and-lie-derivatives`; `manifolds-with-boundary-collars-and-orientations`; `singular-chains-and-singular-homology`; `relative-homology-excision-and-mayer-vietoris`; `cw-complexes-and-cellular-homology` |
+| `handle-decompositions-duality-and-rearrangement` | `morse-functions-critical-values-and-genericity`; `gradient-like-vector-fields-and-morse-trajectories`; `sublevel-deformation-and-the-handle-attachment-theorem`; `manifolds-with-boundary-collars-and-orientations`; `cw-complexes-and-cellular-homology` |
+| `oriented-and-mod-two-intersection-numbers` | `sard-theorem-and-transversality`; `whitney-embedding-tubular-neighbourhoods-and-approximation`; `manifolds-with-boundary-collars-and-orientations`; `integration-of-forms-and-the-general-stokes-theorem`; `the-de-rham-theorem-and-degree`; `orientations-poincare-lefschetz-and-alexander-duality` |
+| `intersection-pairings-self-intersection-and-euler-classes` | `oriented-and-mod-two-intersection-numbers`; `smooth-vector-bundles-and-sections`; `whitney-embedding-tubular-neighbourhoods-and-approximation`; `manifolds-with-boundary-collars-and-orientations`; `cup-cap-cross-products-and-cohomology-rings`; `orientations-poincare-lefschetz-and-alexander-duality`; `leray-hirsch-thom-isomorphism-and-gysin-sequences`; `stiefel-whitney-and-euler-classes-by-universal-constructions` |
+| `handle-cancellation-slides-and-elementary-moves` | `sublevel-deformation-and-the-handle-attachment-theorem`; `handle-decompositions-duality-and-rearrangement`; `oriented-and-mod-two-intersection-numbers`; `whitney-embedding-tubular-neighbourhoods-and-approximation`; `vector-fields-flows-and-lie-derivatives`; `manifolds-with-boundary-collars-and-orientations` |
+| `morse-inequalities-and-the-handle-chain-complex` | `sublevel-deformation-and-the-handle-attachment-theorem`; `handle-decompositions-duality-and-rearrangement`; `handle-cancellation-slides-and-elementary-moves`; `singular-chains-and-singular-homology`; `relative-homology-excision-and-mayer-vietoris`; `cw-complexes-and-cellular-homology`; `chain-complexes-and-homology` |
+| `morse-trajectory-moduli-spaces-and-the-morse-differential` | `gradient-like-vector-fields-and-morse-trajectories`; `stable-unstable-manifolds-and-morse-smale-transversality`; `connections-levi-civita-and-parallel-transport`; `manifolds-with-boundary-collars-and-orientations` |
+| `morse-homology-continuation-and-comparison` | `morse-trajectory-moduli-spaces-and-the-morse-differential`; `euclidean-ordinary-differential-equations-with-smooth-dependence`; `vector-fields-flows-and-lie-derivatives`; `sard-theorem-and-transversality`; `singular-chains-and-singular-homology`; `relative-homology-excision-and-mayer-vietoris`; `cw-complexes-and-cellular-homology` |
+| `vector-field-index-euler-characteristic-and-poincare-hopf` | `morse-critical-points-hessians-and-indices`; `morse-inequalities-and-the-handle-chain-complex`; `oriented-and-mod-two-intersection-numbers`; `intersection-pairings-self-intersection-and-euler-classes`; `vector-fields-flows-and-lie-derivatives`; `manifolds-with-boundary-collars-and-orientations`; `the-de-rham-theorem-and-degree`; `singular-chains-and-singular-homology`; `cw-complexes-and-cellular-homology`; `orientations-poincare-lefschetz-and-alexander-duality`; `obstruction-theory-postnikov-towers-and-classifying-spaces` |
+| `fixed-point-index-and-the-lefschetz-theorem` | `oriented-and-mod-two-intersection-numbers`; `intersection-pairings-self-intersection-and-euler-classes`; `vector-field-index-euler-characteristic-and-poincare-hopf`; `sard-theorem-and-transversality`; `the-de-rham-theorem-and-degree`; `singular-chains-and-singular-homology`; `singular-cohomology-and-coefficient-theorems`; `cup-cap-cross-products-and-cohomology-rings`; `orientations-poincare-lefschetz-and-alexander-duality`; `local-coefficients-twisted-homology-and-duality` |
+| `smooth-cobordism-relations-groups-and-rings` | `manifolds-with-boundary-collars-and-orientations`; `orientations-poincare-lefschetz-and-alexander-duality`; `stiefel-whitney-and-euler-classes-by-universal-constructions`; `chern-and-pontryagin-classes-by-splitting-and-complexification` |
+| `thom-spaces-normal-data-and-collapse-maps` | `smooth-vector-bundles-and-sections`; `sard-theorem-and-transversality`; `whitney-embedding-tubular-neighbourhoods-and-approximation`; `manifolds-with-boundary-collars-and-orientations`; `orientations-poincare-lefschetz-and-alexander-duality`; `topological-vector-bundles-and-grassmannian-classification`; `leray-hirsch-thom-isomorphism-and-gysin-sequences`; `stiefel-whitney-and-euler-classes-by-universal-constructions`; `chern-and-pontryagin-classes-by-splitting-and-complexification` |
+| `pontryagin-thom-and-framed-cobordism` | `smooth-cobordism-relations-groups-and-rings`; `thom-spaces-normal-data-and-collapse-maps`; `sard-theorem-and-transversality`; `whitney-embedding-tubular-neighbourhoods-and-approximation`; `higher-homotopy-groups-and-cofiber-sequences`; `hurewicz-whitehead-freudenthal-and-cw-approximation`; `spectra-and-stable-homotopy-groups` |
+| `the-hopf-degree-theorem` | `smooth-cobordism-relations-groups-and-rings`; `pontryagin-thom-and-framed-cobordism`; `the-de-rham-theorem-and-degree`; `higher-homotopy-groups-and-cofiber-sequences`; `hurewicz-whitehead-freudenthal-and-cw-approximation` |
+| `characteristic-numbers-and-cobordism-obstructions` | `intersection-pairings-self-intersection-and-euler-classes`; `smooth-cobordism-relations-groups-and-rings`; `thom-spaces-normal-data-and-collapse-maps`; `pontryagin-thom-and-framed-cobordism`; `cup-cap-cross-products-and-cohomology-rings`; `orientations-poincare-lefschetz-and-alexander-duality`; `bocksteins-steenrod-squares-and-cohomology-operations`; `topological-vector-bundles-and-grassmannian-classification`; `leray-hirsch-thom-isomorphism-and-gysin-sequences`; `stiefel-whitney-and-euler-classes-by-universal-constructions`; `chern-and-pontryagin-classes-by-splitting-and-complexification`; `spectra-and-stable-homotopy-groups` |
+| `the-hirzebruch-signature-theorem` | `intersection-pairings-self-intersection-and-euler-classes`; `smooth-cobordism-relations-groups-and-rings`; `characteristic-numbers-and-cobordism-obstructions`; `cup-cap-cross-products-and-cohomology-rings`; `orientations-poincare-lefschetz-and-alexander-duality`; `stiefel-whitney-and-euler-classes-by-universal-constructions`; `chern-and-pontryagin-classes-by-splitting-and-complexification` |
+| `smooth-surgery-traces-and-handle-trading` | `sublevel-deformation-and-the-handle-attachment-theorem`; `handle-decompositions-duality-and-rearrangement`; `handle-cancellation-slides-and-elementary-moves`; `oriented-and-mod-two-intersection-numbers`; `intersection-pairings-self-intersection-and-euler-classes`; `smooth-cobordism-relations-groups-and-rings`; `thom-spaces-normal-data-and-collapse-maps`; `whitney-embedding-tubular-neighbourhoods-and-approximation`; `relative-homology-excision-and-mayer-vietoris`; `orientations-poincare-lefschetz-and-alexander-duality`; `higher-homotopy-groups-and-cofiber-sequences`; `hurewicz-whitehead-freudenthal-and-cw-approximation`; `obstruction-theory-postnikov-towers-and-classifying-spaces`; `the-fundamental-group` |
+| `the-whitney-trick-and-surgery-below-the-middle-dimension` | `handle-cancellation-slides-and-elementary-moves`; `oriented-and-mod-two-intersection-numbers`; `smooth-surgery-traces-and-handle-trading`; `sard-theorem-and-transversality`; `whitney-embedding-tubular-neighbourhoods-and-approximation`; `relative-homology-excision-and-mayer-vietoris`; `orientations-poincare-lefschetz-and-alexander-duality`; `higher-homotopy-groups-and-cofiber-sequences`; `hurewicz-whitehead-freudenthal-and-cw-approximation`; `the-fundamental-group` |
+| `the-smooth-h-cobordism-theorem` | `handle-decompositions-duality-and-rearrangement`; `handle-cancellation-slides-and-elementary-moves`; `morse-inequalities-and-the-handle-chain-complex`; `oriented-and-mod-two-intersection-numbers`; `smooth-surgery-traces-and-handle-trading`; `the-whitney-trick-and-surgery-below-the-middle-dimension`; `relative-homology-excision-and-mayer-vietoris`; `cw-complexes-and-cellular-homology`; `orientations-poincare-lefschetz-and-alexander-duality`; `higher-homotopy-groups-and-cofiber-sequences`; `hurewicz-whitehead-freudenthal-and-cw-approximation`; `the-fundamental-group` |
+| `whitehead-torsion-and-the-s-cobordism-theorem` | `the-smooth-h-cobordism-theorem`; `simple-homotopy-whitehead-groups-and-torsion`; `local-coefficients-twisted-homology-and-duality` |
+| `formal-immersions-and-the-smale-hirsch-theorem` | `morse-functions-critical-values-and-genericity`; `sublevel-deformation-and-the-handle-attachment-theorem`; `handle-decompositions-duality-and-rearrangement`; `smooth-vector-bundles-and-sections`; `sard-theorem-and-transversality`; `whitney-embedding-tubular-neighbourhoods-and-approximation`; `obstruction-theory-postnikov-towers-and-classifying-spaces`; `topological-vector-bundles-and-grassmannian-classification` |
+| `regular-homotopy-and-sphere-eversion` | `formal-immersions-and-the-smale-hirsch-theorem`; `lie-groups-invariant-fields-and-the-exponential-map`; `covering-spaces-and-lifting`; `higher-homotopy-groups-and-cofiber-sequences`; `fibrations-fiber-bundles-and-homotopy-exact-sequences`; `hurewicz-whitehead-freudenthal-and-cw-approximation` |
+| `isotopy-extension-and-embedding-theory-beyond-whitney` | `formal-immersions-and-the-smale-hirsch-theorem`; `the-whitney-trick-and-surgery-below-the-middle-dimension`; `sard-theorem-and-transversality`; `whitney-embedding-tubular-neighbourhoods-and-approximation`; `vector-fields-flows-and-lie-derivatives` |
+| `characteristic-class-obstructions-to-immersions-and-embeddings` | `intersection-pairings-self-intersection-and-euler-classes`; `thom-spaces-normal-data-and-collapse-maps`; `characteristic-numbers-and-cobordism-obstructions`; `formal-immersions-and-the-smale-hirsch-theorem`; `isotopy-extension-and-embedding-theory-beyond-whitney`; `topological-vector-bundles-and-grassmannian-classification`; `stiefel-whitney-and-euler-classes-by-universal-constructions`; `chern-and-pontryagin-classes-by-splitting-and-complexification` |
+| `foliation-holonomy-and-the-holonomy-groupoid` | `distributions-integral-manifolds-and-the-frobenius-theorem`; `sard-theorem-and-transversality`; `vector-fields-flows-and-lie-derivatives`; `subspaces-products-and-quotients`; `covering-spaces-and-lifting`; `the-fundamental-group` |
+| `reeb-stability-and-global-foliation-constructions` | `foliation-holonomy-and-the-holonomy-groupoid`; `distributions-integral-manifolds-and-the-frobenius-theorem`; `manifolds-with-boundary-collars-and-orientations`; `covering-spaces-and-lifting`; `the-fundamental-group`; `singular-cohomology-and-coefficient-theorems` |
+| `codimension-one-foliations-and-secondary-classes` | `smooth-cobordism-relations-groups-and-rings`; `foliation-holonomy-and-the-holonomy-groupoid`; `reeb-stability-and-global-foliation-constructions`; `distributions-integral-manifolds-and-the-frobenius-theorem`; `tensor-fields-exterior-algebra-and-differential-forms`; `the-exterior-derivative-and-cartan-calculus`; `integration-of-forms-and-the-general-stokes-theorem`; `the-de-rham-complex-homotopy-and-mayer-vietoris`; `chern-weil-theory-and-characteristic-forms`; `the-fundamental-group`; `singular-cohomology-and-coefficient-theorems`; `cup-cap-cross-products-and-cohomology-rings`; `orientations-poincare-lefschetz-and-alexander-duality`; `stiefel-whitney-and-euler-classes-by-universal-constructions`; `chern-and-pontryagin-classes-by-splitting-and-complexification` |
+| `exotic-smooth-structures-and-milnor-spheres` | `intersection-pairings-self-intersection-and-euler-classes`; `smooth-cobordism-relations-groups-and-rings`; `thom-spaces-normal-data-and-collapse-maps`; `the-hirzebruch-signature-theorem`; `the-smooth-h-cobordism-theorem`; `fibrations-fiber-bundles-and-homotopy-exact-sequences`; `hurewicz-whitehead-freudenthal-and-cw-approximation`; `topological-vector-bundles-and-grassmannian-classification`; `leray-hirsch-thom-isomorphism-and-gysin-sequences`; `stiefel-whitney-and-euler-classes-by-universal-constructions`; `chern-and-pontryagin-classes-by-splitting-and-complexification` |
+
+### 12.5 Binding mathematical repairs to planned inventories
+
+Rows not named here retain their §7 statement, proof obligation, and sources.
+These amendments are mandatory before the affected empty A page is authored.
+
+- **DT-4:** consume FA's
+  `lem-local-finite-dimensional-reduction-for-a-fredholm-map`, then insert
+  before Sard--Smale
+  `lem-countable-locally-proper-restrictions-cover-a-fredholm-map-source` and
+  `lem-critical-values-on-each-proper-restriction-are-nowhere-dense`.
+  Sard--Smale must cite these three rather than assert local properness in one
+  sentence.  Insert
+  `lem-universal-metric-variations-annihilate-the-adjoint-cokernel`,
+  `lem-the-universal-trajectory-zero-set-is-a-banach-manifold`, and
+  `lem-a-regular-level-slice-makes-the-translation-quotient-smooth` before the
+  universal-projection lemma.  State the trajectory completions and decay
+  norms explicitly.  Freeness alone never proves a quotient is a manifold.
+  Before the present linearized-flow equivalence, insert
+  `thm-an-asymptotically-hyperbolic-first-order-operator-on-c-one-zero-is-fredholm`
+  (including its unstable-dimension index formula) and
+  `lem-the-adjoint-kernel-is-the-annihilator-of-the-stable-unstable-tangent-sum`.
+  Prove the first by the exponential dichotomies at both ends and the second
+  by the evaluation pairing; neither may remain a “standard theorem” hidden
+  inside one proof step.
+- **DT-7/DT-15:** DT-7 consumes earlier DT-11. DT-15 owns only
+  `prop-oriented-boundaries-have-zero-pontryagin-numbers`; signature has not
+  yet been defined there, and DT-20 item 5 proves its bordism invariance.
+- **DT-13/DT-14:** the integer local index uses a chart and its chart-induced
+  tangent trivialization; coordinate changes conjugate the local
+  representative, so no ambient orientation is required. For the
+  graph--diagonal proof on nonorientable manifolds, DT-14 consumes AT-23's
+  orientation local system and twisted Poincare duality. The Lefschetz--Hopf
+  theorem remains valid for every closed smooth manifold.
+- **DT-19:** add AT-9 as in §12.4.  The proof of Thom's unoriented bordism
+  detection theorem must explicitly use Thom-space cohomology operations and
+  the stable PT map; characteristic-class naturality alone is insufficient.
+- **DT-21:** in items 1--2 require $0\le p\le m-1$ and
+  $q=m-p\ge1$.  The dual sphere has dimension $q-1$ and the trace handle has
+  index $p+1$.  No $S^{-1}$ “surgery” is silently included.
+- **DT-22:** item 5 must print the inequalities it uses.  For complementary
+  transverse $A^a,B^b\subset X^m$, the clean-disk general-position form used
+  here assumes $a,b\le m-3$ (equivalently both codimensions are at least
+  three), in addition to a nullhomotopic Whitney circle and an extendible
+  Whitney framing.  State separately any handle-theoretic borderline supplied
+  by Milnor's stronger cancellation theorem.  Replace B item 2 by
+  `ex-oppositely-signed-intersections-of-two-three-manifolds-in-a-simply-connected-six-manifold`;
+  two surfaces in a six-manifold have expected intersection dimension $-2$
+  and cannot be the advertised transverse point-intersection example.
+- **DT-25:** fix one topology: use the weak/compact-open $C^\infty$ topology
+  on immersion and formal-immersion spaces for the stated weak-homotopy
+  equivalence.  State the relative parametric theorem for compact parameter
+  pairs.  Item 7 must cite DT-2's proper Morse exhaustion and prove the
+  no-top-index handle exhaustion for an open manifold; it does not follow from
+  DT-6 alone.
+- **DT-27:** split item 11 into
+  `lem-a-self-transverse-immersion-has-no-double-points-when-n-is-greater-than-two-m`
+  and
+  `cor-a-proper-injective-immersion-is-an-embedding`.  If a genericity
+  corollary is retained, restrict it to compact source (or state the precise
+  strong-topology proper-map space); “generic proper immersion” without a
+  topology is not a theorem.
+- **DT-28:** replace item 7 by
+  `lem-normal-pontryagin-class-is-the-rational-inverse-of-the-tangent-pontryagin-class`.
+  State $p(\nu_M)p(TM)=1$ in $H^*(M;\mathbb Q)$, or integrally modulo the
+  two-torsion qualification supplied by AT-20.  Orientation does not remove
+  the integral Whitney-product caveat.  Item 8 must use the same coefficient
+  qualification.
+- **DT-29:** strengthen item 12 to assume that the orbit distribution has
+  constant-rank intersection with $T\mathcal F$ and that
+  $d\pi(T\mathcal F)$ has constant rank; free proper leaf-preserving action
+  alone does not state enough to descend a regular foliation.  Insert
+  `thm-the-holonomy-groupoid-has-a-canonical-possibly-nonhausdorff-lie-groupoid-structure`
+  after item 9: its arrow charts come from compatible foliation-chart
+  transversals and its source and target maps are submersions.  Do not call it
+  étale; only a complete-transversal reduction is étale.
+- **DT-30:** state item 7 for a **closed** connected ambient manifold: a
+  transversely oriented codimension-one foliation with one compact leaf of
+  finite fundamental group has all leaves compact and is a fibration over
+  $S^1$ (the boundary/interval form is separate).  In item 10 replace
+  “monodromy transverse to the fibres” by “the suspension/base direction is
+  transverse to the fibres and its first-return map is the monodromy.”
+- **DT-31:** the headline promises Bott vanishing but §7 omits it.  Insert,
+  after the global-one-form definition,
+  `def-bott-partial-connection-on-the-normal-bundle-of-a-foliation`,
+  `lem-the-bott-partial-connection-is-well-defined-and-flat-in-leaf-directions`,
+  `lem-curvature-of-an-extending-bott-connection-lies-in-the-transverse-differential-ideal`,
+  and
+  `thm-bott-vanishing-for-real-pontryagin-monomials-of-a-codimension-q-foliation`.
+  The theorem says that a real Pontryagin monomial of total cohomological
+  degree greater than $2q$ vanishes; it makes no integral claim.  Cite DG-38's
+  Chern--Weil comparison and Bott §§6--7.  Also insert
+  `def-smooth-foliated-concordance` before item 8 and require a foliation on
+  $M\times I$ transverse to the slices with the prescribed endpoint
+  restrictions; the endpoint equality then follows because both inclusions
+  are homotopy inverses to projection.
+- **DT-24:** AT-22 now owns `def-simple-homotopy-equivalence`; DT-24 cites it
+  and does not mint a duplicate. Retain DT-24's geometric product-structure
+  bridge; algebraic Whitehead torsion remains wholly AT-owned.
+- **DT-32:** item 19 is not an adequate theorem statement while it says only
+  “source-normalized combination.”  Let $M$ be a closed oriented
+  $7$-manifold with $H_3(M;\mathbb Z)=H_4(M;\mathbb Z)=0$ and let $W$ be a
+  compact oriented $8$-manifold with oriented boundary $M$.  Define the
+  relative lift $\bar p_1(W)\in H^4(W,M;\mathbb Z)$ and its square
+  $q(W)=\langle\bar p_1(W)^2,[W,M]\rangle$.  Replace item 19 by
+  `thm-milnor-lambda-invariant-is-well-defined-modulo-seven`, with the exact
+  normalization from the cited full text (equivalently Milnor's residue of
+  $2q(W)-\sigma(W)$ modulo $7$, after reconciling his sign convention).
+  State that it is an oriented boundary-diffeomorphism invariant and changes
+  sign under orientation reversal.  Item 20 and its examples must perform
+  this exact modulo-seven arithmetic.  Do not substitute the later
+  Eells--Kuiper normalization without adding spin cobordism and its hypotheses.
+
+### 12.6 Pair-by-pair disposition
+
+| pairs | audit disposition |
+|---|---|
+| DT-1--DT-3 | mathematical spine retained; published ownership, quantitative-persistence, and choice-cost repairs are in §12.7 |
+| DT-4 | spine retained; Banach/Fredholm and quotient proof split strengthened in §12.5; published short proofs deferred in §12.7 |
+| DT-5--DT-6 | spine retained; exact singular/relative/cellular suppliers substituted |
+| DT-7 | retained after DT-11/12 reorder; no forward edge remains |
+| DT-8--DT-10 | retained; exact HA/AT and DG analytic suppliers substituted |
+| DT-11--DT-12 | retained and moved; integral, mod-two, orientation-local-system, cup/cap, Thom, and Euler interfaces now explicit |
+| DT-13--DT-14 | retained with orientation-local-system/local-index correction in §12.5 |
+| DT-15 | retained after removing the premature signature clause |
+| DT-16--DT-18 | retained; AT-21 closes stable notation and the fixed/stable PT distinction |
+| DT-19--DT-20 | retained; Steenrod/Thom detection and Pontryagin normalization are now hard dependencies |
+| DT-21--DT-24 | retained with surgery range printed and AT-22 replacing the S-5 waiver |
+| DT-25--DT-28 | retained with mapping-space topology, generic-properness, and rational Pontryagin corrections |
+| DT-29--DT-30 | retained with Lie-groupoid descent and exact global Reeb hypotheses |
+| DT-31 | retained; missing Bott vanishing and concordance definition restored through DG-38 |
+| DT-32 | Milnor construction retained; unnecessary DT-17/21/24/28 cone removed, exact invariant restored, deep classification leaves remain non-load-bearing |
+
+### 12.7 Deferred findings on the five immutable published pairs
+
+No repair in this subsection may be applied until all of its named future
+suppliers are published.  Once that gate opens, repair the pages and items
+together and rerun the complete transitive audit.
+
+1. **Published page prerequisites are order anchors, not mathematics.**
+   `morse-critical-points-hessians-and-indices` requires the unrelated future
+   B page `moment-maps-and-symplectic-reduction-examples`; the next four A
+   pages each require the preceding DT B page.  Replace all five by the exact
+   A arrays in §12.4.  The first, third, and fourth changes wait for
+   `riemannian-metrics-length-distance-and-volume` and
+   `connections-levi-civita-and-parallel-transport`, which are still empty.
+2. **DG-owned material was minted inside published DT pages.**  On
+   `morse-critical-points-hessians-and-indices`, remove
+   `def-riemannian-metric-symmetric-cotangent-connection-and-covariant-hessian`
+   and
+   `thm-a-riemannian-metric-has-a-unique-levi-civita-connection-on-the-cotangent-bundle`
+   from the page inventory after DG-18/19 publish.  Repoint
+   `lem-critical-hessian-agrees-with-the-levi-civita-hessian` to
+   `def-riemannian-gradient`, `def-levi-civita-connection`,
+   `thm-fundamental-theorem-of-riemannian-geometry`, and
+   `prop-gradient-hessian-and-divergence-connection-formulas`.  On
+   `gradient-like-vector-fields-and-morse-trajectories`, remove
+   `def-riemannian-gradient-of-a-smooth-function`; repoint all consumers to
+   DG-18's `def-riemannian-gradient` and
+   `prop-the-gradient-is-characterized-by-inner-products`.  The local
+   `lem-riemannian-gradient-vanishes-exactly-at-critical-points` may remain as
+   the short DT bridge.
+3. **The global stable/unstable parametrization is asserted, not proved.**
+   `thm-global-stable-and-unstable-manifolds-are-immersed-euclidean-spaces`
+   step 3.1 calls a “standard flow-exhaustion parametrization” and immediately
+   concludes that the increasing union is diffeomorphic to Euclidean space.
+   Add the explicit nested-disk compatibility and hitting-time
+   parametrization lemma (including smoothness across successive flow
+   collars) and make the theorem depend on it.  The local stable-disk theorem
+   alone does not prove the global diffeomorphism type.
+4. **Compact persistence is under-justified.**  In
+   `lem-compact-morse-critical-points-have-uniform-hessian-gaps`, proof step
+   4.1 infers existence and uniqueness of a zero merely from uniform
+   invertibility.  Add a quantitative inverse-function/Rouché-degree lemma:
+   choose a convex coordinate ball, keep $DF$ uniformly close to the fixed
+   invertible $DF(0)$ to obtain injectivity by the line-segment estimate, and
+   use a positive boundary lower bound plus degree to obtain a zero.  Then
+   make the statement print these stronger bounds.  The current conclusion is
+   standard, but its cited dependencies do not prove the step as written.
+5. **Countable construction costs are omitted.**
+   `thm-morse-functions-are-dense-by-relative-jet-transversality` chooses a
+   dependent sequence of shell perturbations in steps 1.1--3.1, while its
+   statement and dependencies name no choice principle.  Add the exact
+   `AC_omega`/DC hypothesis justified by the final supplier ledger (or replace
+   every choice by an explicit least element of fixed countable atlases and
+   rational parameter grids).  Propagate the same hypothesis to
+   `thm-morse-functions-form-a-residual-subset`,
+   `prop-proper-morse-exhaustions-exist-on-smooth-manifolds`, and their
+   downstream existence corollaries.  Likewise
+   `thm-relative-morse-smale-perturbation-of-a-gradient-like-field` step 3.1
+   chooses countably many immersion charts and a parameter outside a countable
+   union of null sets without stating the inherited choice/null-union
+   principle; repair its statement or make the enumeration constructive.
+6. **The published linearized-flow proof imports an unnamed Fredholm
+   theorem.**
+   `lem-morse-smale-transversality-is-equivalent-to-surjectivity-of-the-linearized-flow-operator`
+   step 2.1 invokes the “standard first-order Fredholm theorem” and its
+   adjoint solvability identification without a dependency.  Add and cite the
+   two exact DT-4 lemmas in §12.5; the current assertion cannot serve as their
+   proof.
+7. **The published Sard--Smale proof is not dependency-closed.**
+   `thm-sard-smale-residual-regular-values-for-fredholm-maps`, steps 1.1--2.1,
+   asserts Lyapunov--Schmidt reduction and countably many locally proper closed
+   restrictions although neither is a dependency and neither follows from
+   finite-dimensional Morse--Sard alone.  Depend on FA's local
+   finite-dimensional-reduction lemma and insert the two DT-4 category lemmas
+   in §12.5.  Do not treat the current three-sentence proof as a proof of
+   Sard--Smale.  Once the FA pair is published, remove DT-4's duplicate
+   `def-fredholm-maps-and-regular-values-on-countable-banach-manifolds` and
+   repoint its consumers to FA's
+   `def-fredholm-map-between-banach-manifolds` and regular-value theorem.
+8. **The universal metric proof is only a sketch and repeats the quotient
+   error the page warns against.**
+   `lem-universal-metric-trajectory-projection-is-fredholm` step 1.1 merely
+   asserts that metric variations span every cokernel; step 2.1 invokes an
+   unlisted Banach implicit-function theorem; step 3.1 concludes that the free
+   translation quotient is a Banach manifold from freeness alone.  Supply the
+   adjoint-cokernel calculation, Banach-section setup/implicit theorem, and
+   regular-level slice lemmas from §12.5.  Its current proof cannot support
+   `lem-baire-diagonal-passage-from-finite-regularity-to-smooth-metrics` or
+   `thm-morse-smale-metrics-are-residual-for-a-fixed-morse-function`.
+9. **Published DT-5 is mechanically clean but inherits the above cone.**  Its
+   handle theorem itself has the correct boundaryless, compact-band, regular
+   endpoint, one-critical-point, and index hypotheses.  Keep its statement.
+   Replace its B-anchor prerequisite and retain direct AT-2/AT-3/AT-4
+   suppliers as in §12.4.  Its explicit `AC_omega` annotations are the model
+   the earlier genericity pages should follow.
+
+The read-only checks found no unresolved ids, no draft dependency in the
+published DT closure, and no item cycle.  Those mechanical passes do not cure
+the proof and ownership defects above.
+
+### 12.8 Gates and source status
+
+- AT-2, AT-3, AT-4, HA-1, HA-2, HA-4, topology's covering/fundamental-group
+  pages, and the relevant finite-dimensional linear-algebra pages are already
+  published suppliers.
+- The new FA Banach-calculus pair, AT-6--AT-22, DG-18, DG-19, and the new
+  DG-38 are not all published.  Any
+  empty DT page whose exact array reaches one of them stays unbuildable.  A
+  published-page repair in §12.7 stays deferred until its complete supplier
+  closure is published.
+- Full text was available for every new repair used here: Kervaire--Milnor,
+  *Groups of Homotopy Spheres I*, especially §3; Bott, *Lectures on
+  Characteristic Classes and Foliations*, especially §§6--7; Milnor's complete
+  *On Manifolds Homeomorphic to the 7-Sphere*; Cohen's complete
+  *A Course in Simple-Homotopy Theory*; May/Adams for stable homotopy; Wang's
+  complete *Banach Calculus*; and Abbondandolo--Majer's complete lecture text.
+  The prior DT-30 one-treatment warning remains a source-depth warning, not a
+  missing-full-text blocker.

@@ -12,27 +12,365 @@ ownership and placement question.
 This file is NOT normative: `SCHEMA.md`, `CLAUDE.md`, `LEVELS.md` and
 `ARCHITECTURE.md` win wherever they differ.
 
-**AUTHORITY BOUNDARY.** This file is authoritative only for the 23 new A pages it
-defines, **MT-1 … MT-23**, and their 23 `-examples` companions. It says nothing
-about any existing page except through §"Amendments owed to other scaffolds",
-which is addressed to the orchestrator.
+**AUTHORITY BOUNDARY.** This file is authoritative for the Measure Theory prose
+scaffold, including MT-1 … MT-23, the inserted MT-21a/MT-21b pairs, and the two
+prerequisite pairs specified in §0A.  Published pages and items remain strictly
+read-only.  Every finding about one of them below is a deferred, gated repair for
+the orchestrator; it is not authority to mutate `library/` or `items/` now.
 
-**NO ABSOLUTE ORDERS.** Per SEAMS §0.2 this file numbers its pages **relative**
+**ORDERS.** Per SEAMS §0.2 the original scaffold numbers its pages **relative**
 (`MT-1`, `MT-2`, …) and quotes only page **ids** for everything it cites. Where
 an order appears below it is a *verified-from-disk reading of
-`research/plan-spec.json` on 2026-08-13*, given so the reader can check the
-placement argument, and it is stale the moment anything is spliced. Recompute
-from the spec; never quote an order from this prose.
+`research/plan-spec.json` on the stated audit date.  Section 0A additionally gives
+the exact decimal splice requested by the 2026-09-08 audit; recompute it from the
+spec if any intervening page has since been inserted.
+
+---
+
+## 0A. Binding prerequisite-audit amendment (2026-09-08)
+
+This section supersedes every incompatible placement, dependency, readiness and
+"no blocker" sentence later in this older scaffold.  The audit covered the full
+Measure Theory plan, all 42 published pages (MT-1--MT-21), all eight planned pages
+(MT-21a A/B, MT-21b A/B, MT-22 A/B and MT-23 A/B), their proof-bearing items, and
+the relevant topology, real-analysis, complex-analysis, functional-analysis,
+probability, Fourier, PDE and distribution-theory interfaces.  Published content
+was not changed.
+
+### 0A.1 Exact plan-spec additions and the corrected interpolation seam
+
+The proposal in `frontier-34-fa-prereqs-batch-8.notes.md` to put a combined
+complex-$L^p$/endpoint-interpolation pair at 288.0341/288.0342 is **not closed**.
+The published MT-16 closure contains elementary complex numbers and the complex
+exponential but not holomorphic-function theory or Hadamard's three-lines theorem;
+`thm-hadamard-three-lines` is on the later Complex Analysis page
+`the-identity-theorem-and-the-open-mapping-theorem` (288.07811).  Split the
+supplier into the following two A/B pairs.  The decimal orders are exact splice
+requests against the 2026-09-08 spec and must be recomputed if that interval has
+changed.
+
+#### MT-16c. Complex $L^p$ spaces and test-function conventions
+
+Add A `complex-lp-spaces-and-test-function-conventions`, order **288.0321**,
+category `measure-theory`, companion
+`complex-lp-spaces-and-test-function-conventions-examples`, with
+`requires: [the-duality-of-lp-and-lq]`.  Add its B companion at order
+**288.0322**, category `measure-theory`, with
+`requires: [complex-lp-spaces-and-test-function-conventions]`.  Change MT-17 A's
+direct requirement from `the-duality-of-lp-and-lq-examples` to this new A page.
+The Phase-2 A inventory, in proof order, is complete:
+
+1. `def-complex-lp-and-euclidean-test-function-conventions` — move this stable ID
+   from the staged FA-22 inventory; define complex-valued measurability by real
+   and imaginary parts, the modulus norm and a.e.-quotient, $C_c$, $C_0$ and
+   $C_c^\infty$ componentwise, and the $L^2$ pairing
+   $\langle f,g\rangle=\int f\overline g$, linear in the first variable.
+2. `thm-complex-holder-minkowski-and-the-quotient-norm` — reduce to the published
+   real inequalities for moduli and prove representative-independence.
+3. `thm-complex-lp-completeness-and-almost-everywhere-subsequences` — prove by
+   modulus/component reduction to the published real Riesz--Fischer and subsequence
+   results; do not invoke a later abstract Banach-space theorem.
+4. `thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p` —
+   finite-simple density on arbitrary measure spaces, and componentwise $C_c^\infty$
+   density on Euclidean Lebesgue spaces, only for $p<\infty$.
+5. `def-complex-l-two-inner-product` — define the pairing on a.e. classes and
+   point its `justified_by` to the next theorem.
+6. `thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz` — prove
+   representative-independence, positive-definiteness, Cauchy--Schwarz and its
+   equality case without invoking abstract inner-product-space theory.
+7. `lem-complex-lp-completeness-density-and-inner-product` — move this staged
+   stable ID from FA-22 as the compact interface corollary of items 3--6; its
+   omnibus title may not hide any of those dependencies.
+8. `lem-complex-lq-norm-from-finite-simple-dual-tests` — preserve the staged ID;
+   for sigma-finite
+   (more generally, where stated, semifinite) measure spaces, including $q=\infty$;
+   use the measurable phase/conjugation and finite-measure truncations explicitly.
+9. `lem-complex-translation-and-approximate-identity-interfaces` — move this
+   stable ID from staged FA-22 and prove it componentwise from MT-15.
+
+The B page is a leaf, and its complete inventory is:
+
+1. `ex-complex-phase-in-l-q-dual-norming` — on three equal atoms take values
+   $1,e^{2\pi i/3},e^{4\pi i/3}$; the conjugate phase exactly norms it in
+   $L^1$ against complex $L^\infty$ tests, while real-valued tests do not.
+2. `ex-complex-l-two-pairing-on-two-step-functions`.
+3. `ex-complex-mollification-by-components`.
+
+This early pair is the complex-$L^2$ supplier for MT-21a/MT-21b and FA-22.  It
+contains no interpolation theorem and has no Complex Analysis dependency.
+
+#### MT-CA-1. Complex endpoint interpolation
+
+Add A `complex-riesz-thorin-endpoint-interpolation`, order **288.078121**,
+category `measure-theory`, companion
+`complex-riesz-thorin-endpoint-interpolation-examples`, with
+`requires: [the-identity-theorem-and-the-open-mapping-theorem,
+complex-lp-spaces-and-test-function-conventions]`.  Add the B companion
+at order **288.078122**, category `measure-theory`, with
+`requires: [complex-riesz-thorin-endpoint-interpolation]`.  These pages lie after
+the three-lines supplier at 288.07811/.07812 and before the existing
+288.07813/.07814 winding-number pair.  The A inventory, in proof order, is
+complete:
+
+1. `lem-endpoint-interpolation-simple-analytic-families` — handle zero
+   coefficients, choose the complex phases, and record the exact boundary norms
+   $\|f\|_{p_\theta}^{p_\theta/p_i}$ and the analogous dual-test powers.
+2. `lem-riesz-thorin-bound-on-the-finite-simple-core` — on sigma-finite source
+   and target measure spaces, for $1\le p_0,p_1<\infty$,
+   $1\le q_0,q_1\le\infty$, and a complex-linear operator on finite simple
+   functions of finite-measure support satisfying compatible endpoint bounds,
+   prove the $p_\theta\to q_\theta$ estimate
+   $M_0^{1-\theta}M_1^\theta$ on that common core. If dual norm recovery at an
+   infinite target endpoint is stated beyond sigma-finiteness, print the needed
+   semifiniteness. Normalize the input and dual test, or retain the boundary
+   powers through Hadamard three-lines; never replace those powers by first
+   powers without normalization.
+3. `cor-complex-interpolation-extensions-agree-on-intersections` — the endpoint
+   extensions agree on the intersection, so the finite-simple operator determines
+   one compatible interpolated extension.
+4. `cor-l-one-l-infinity-and-l-two-bounds-interpolate-to-l-p-l-p-prime` — the
+   exact finite-simple-core $1\le p\le2$, $p'$ estimate consumed by
+   Hausdorff--Young; MT-16c density gives the unique extension in the Fourier
+   application. This subsumes the staged Fourier-only endpoint lemma rather than
+   duplicating it.
+
+Phase 3 then atomically moves the existing stable
+`thm-riesz-thorin-interpolation` from MT-17 onto this A page, immediately after
+item 2, and replaces its statement and proof by the bounded-extension theorem
+obtained from item 2 and MT-16c density/completeness. The stable theorem is not
+part of the Phase-2 manifest because its ID is already published; no duplicate
+ID or temporary forward dependency is permitted.
+
+The B page is a leaf, and its complete inventory is:
+
+1. `ex-endpoint-interpolation-for-a-finite-matrix`.
+2. `ex-hausdorff-young-endpoint-exponent-arithmetic`.
+3. `cex-finite-target-interpolation-does-not-state-an-infinite-endpoint`.
+4. `ex-interpolation-of-an-integral-averaging-operator`.
+
+Full-text backing was checked in Gerald Teschl, *Topics in Real and Functional
+Analysis*, Theorem 15.2 and Corollary 15.3 (all endpoints; the fetched full text is
+the PDF already recorded in FA batch 8 at
+`https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf`),
+and Richard Laugesen, *Linear Analysis and Partial Differential Equations Lecture
+Notes*, Appendix C, Theorem C.6 and Remark C.7 (complete proof and the
+semifinite-target caveat; `https://arxiv.org/pdf/0903.3845`).
+The proof must cite the published `thm-hadamard-three-lines`; a generic mention of
+the maximum-modulus principle is not an adequate dependency.
+
+### 0A.2 Published MT findings: exact, read-only, gated repairs
+
+The following are defects in published content.  They must stay unchanged during
+this audit and may be repaired only by an atomic future publication operation.
+
+1. **MT-4 undeclared statement dependency.**
+   `lem-elementary-sets-admit-compact-inner-and-open-outer-approximations` links
+   `def-metric-compactness` in its Statement/Facts but omits it from `deps`.
+   After confirming that definition's page is published in the prerequisite
+   closure, add it to `deps`; no proof text changes.
+2. **MT-11 same-page forward edge.**
+   `fs-measurable-sections-imply-product-measurability` currently precedes and
+   depends on `thm-iterated-section-measures-agree-on-product-measurable-sets`.
+   Move the false-statement item after that theorem (preferably after the positive
+   Fubini/section-measure block); preserve its statement and refutation.
+3. **MT-14 same-page forward edges.** Hölder, generalized Hölder and Minkowski
+   depend on the later
+   `prop-essential-supremum-is-attained-as-the-least-essential-bound`.  Move that
+   proposition to immediately after `def-l-infinity-on-a-measure-space`, before
+   the null-subspace and all three inequalities.  This is the exact repair of the
+   batch-8 MT-14 essential-supremum finding.
+4. **MT-17 Riesz--Thorin is materially invalid, not merely too weak.**  Its
+   published statement excludes $q_0=\infty$ and $q_1=\infty$, so it cannot supply
+   the $L^1\to L^\infty$ Fourier endpoint.  It defines neither complex $L^p$ nor
+   complex linearity, although its proof applies $T$ to complex analytic families.
+   Step 2.1 correctly computes
+   $\|f_{it}\|_{p_0}=\|f\|_{p_\theta}^{p_\theta/p_0}$, but step 3.1 replaces this
+   by $\|f\|_{p_\theta}$ without normalizing $f$; that displayed inequality is
+   false in general.  Finally, the strip argument uses holomorphicity and a
+   maximum-modulus/three-lines argument with no complex-analysis dependency.
+   Once both §0A.1 pairs are published, atomically move the stable theorem ID out
+   of MT-17 into MT-CA-1 after the new finite-simple-core lemma, replace its
+   statement and proof by the bounded-extension theorem described in §0A.1,
+   update its dependencies, and leave Marcinkiewicz interpolation on MT-17. Until then no
+   FA or Fourier proof may treat the published theorem as an endpoint or complex
+   interpolation supplier.
+
+Four `extcheck` warnings owned by Measure Theory also require explicit treatment:
+
+5. `fs-the-borel-hierarchy-closes-after-two-steps` depends on the recorded-only
+   `rem-the-borel-hierarchy-never-stabilizes`.  Its refutation therefore has no
+   proved strict-hierarchy supplier.  Gate repair on an earlier published
+   descriptive-set-theory theorem proving universal Borel sets and diagonal
+   strictness at every countable level (or an explicitly proved rank-$>2$ Borel
+   witness sufficient for this statement), then replace the recorded dependency.
+6. `rem-choice-costs-of-vitali-bernstein-and-free-ultrafilters` inherits the
+   unproved `rem-vitali-non-measurable-set`.  The local constructions prove the
+   advertised upper bounds, but the Solovay/Shelah lower-bound/independence clause
+   remains recorded, not proved.  After the set-theory/model suppliers publish,
+   split the construction and lower-bound clauses if necessary and cite the proved
+   suppliers; do not mark the present remark proved or weaken its claim.
+7. `rem-duality-as-a-dual-space-statement` inherits
+   `rem-the-p-equals-infinity-case-is-recorded-not-proved-here`, whose external
+   path reaches the unproved `rem-dual-of-l-infinity`.  Gate repair on the FA
+   Hahn--Banach machinery and an actual theorem that $(L^\infty)^*$ is generally
+   strictly larger than $L^1$; then replace the recorded boundary with those
+   proved suppliers.
+8. `rem-hausdorff-dimension-orients-the-weierstrass-graph` directly names the
+   unproved `rem-weierstrass-graph-hausdorff-dimension` as an external reference.
+   The current prose is honestly orientation-only and is not load-bearing.  Clear
+   the warning only after a proved graph-dimension theorem is published, or after
+   an owner-approved metadata mechanism distinguishes orientation links from proof
+   support; never promote the recorded remark to a theorem.
+
+The dependency scan otherwise found no missing item file, no undeclared
+prerequisite-page edge, no dependency cycle, and no cross-page consumer of an MT
+B-page item.  All B pages, published and planned, must remain leaves.
+
+### 0A.3 Required changes to planned MT-21a--MT-23
+
+- Add `complex-lp-spaces-and-test-function-conventions` to the direct
+  `requires` of MT-21a A and MT-21b A.  Their complex correlations,
+  eigenfunctions and $L^2$ pairings were otherwise undefined.  Their B pages
+  continue to require only their own A pages.
+- In MT-21b insert
+  `lem-product-rectangle-kernels-are-dense-in-complex-l-two` immediately before
+  the compact-kernel lemma.  Replace its current compact-operator items 4--7 by
+  the explicit sequence
+  `lem-square-integrable-kernels-define-bounded-compact-integral-operators`,
+  `lem-conjugate-transpose-kernels-give-adjoints`,
+  `lem-invariant-square-integrable-kernel-produces-a-compact-intertwiner`,
+  `lem-nonzero-compact-kernel-operators-yield-nonzero-positive-compact-k-star-k`,
+  `lem-nonzero-positive-compact-self-adjoint-operators-have-positive-finite-dimensional-eigenspaces`,
+  and `lem-compact-intertwiners-produce-finite-dimensional-invariant-subspaces`.
+  Rectangle-kernel density uses MT-11 and complex simple density; the adjoint is
+  proved from conjugate-transpose kernels and Fubini.  This makes the asserted
+  $K^*K$ route an actual inventory rather than hidden abstract FA.
+- Strengthen `def-chacon-three-cut-one-spacer-towers` to fix the normalization:
+  $h_0=1$, $h_{r+1}=3h_r+1$,
+  $h_r=(3^{r+1}-1)/2$, width $w_r=2/3^{r+1}$, tower measure
+  $1-3^{-(r+1)}$, and new-spacer measure $w_{r+1}$.  The limiting map is only
+  defined modulo a null set.  The B spacer-budget calculation must use these
+  numbers.  Katok--Thouvenot §5.2.3 pp.696--697 is one complete full-text route;
+  Sarig Problems 3.8--3.10 is exercises, not an independent complete proof.
+  **Content blocker:** obtain and read a second independent complete full-text
+  proof before MT-21b is publishable.
+- MT-22's compact-metric diagonal argument is not choice-free as written.  Add
+  `def-countable-choice` to its requirements and state AC$_\omega$ on
+  `lem-continuous-functions-on-a-compact-metric-space-have-a-countable-dense-family`,
+  `lem-borel-probability-sequences-on-compact-metric-spaces-have-integral-convergent-subsequences`
+  and `thm-krylov-bogolyubov-for-nonempty-compact-metric-spaces`.  The route avoids
+  BPI/full Tychonoff, but selecting finite nets and iterated subsequences does not
+  justify a ZF claim.
+- Generalize MT-22's doubling supplier before MT-23 uses every base.  Insert
+  `def-integer-base-map-on-the-circle`,
+  `prop-integer-base-map-preserves-lebesgue-measure`, and
+  `thm-integer-base-map-is-strongly-mixing` for every integer $b\ge2$, with
+  $b$-adic cylinders/generator proof; retain the stable doubling IDs as $b=2$
+  specializations.  Add the B leaf
+  `ex-base-three-cylinder-intervals-and-preimages`.
+- In MT-23 put
+  `def-canonical-base-b-expansion-and-normality` and
+  `lem-base-b-expansion-cylinders-match-orbits-away-from-terminating-endpoints`
+  before Borel normality.  Specify the nonterminating/canonical convention and
+  prove the countable exceptional endpoint set null.  This closes the present
+  leap from a base-2 system to simultaneous normality in all $b\ge2$.
+- Before the stated $L^p$ mean conclusion in MT-23 add
+  `lem-ergodic-averages-converge-in-l-p-on-finite-measure-spaces`: for $p=1$ use
+  the proved uniform-integrability/Vitali route; for $1<p<\infty$ truncate to
+  bounded functions, use dominated convergence there, and pass by the $L^p$
+  contraction and density.  Boundedness in $L^p$ alone is not uniform
+  integrability of the $p$th powers.
+
+### 0A.4 Cross-category supplier changes
+
+1. **Functional Analysis.** Delete the impossible combined 288.0341/.0342
+   proposal from FA §14.6.  Move the staged
+   `def-complex-lp-and-euclidean-test-function-conventions` and
+   `lem-complex-translation-and-approximate-identity-interfaces` to MT-16c;
+   retain the staged omnibus completeness/density/inner-product lemma as a
+   corollary after the explicit MT-16c obligations above.  Move the staged
+   `lem-complex-lq-norm-from-finite-simple-dual-tests`,
+   `lem-endpoint-interpolation-simple-analytic-families` and
+   `cor-complex-interpolation-extensions-agree-on-intersections` to their two
+   respective MT suppliers.  Do not mint the staged
+   `thm-complex-riesz-thorin-with-infinite-target-endpoints`; its mathematics is
+   split between the Phase-2 finite-simple-core lemma and the corrected stable
+   `thm-riesz-thorin-interpolation`, avoiding duplicate theorem IDs for one
+   interface. FA-22 must require
+   `complex-riesz-thorin-endpoint-interpolation` (which reaches MT-16c)
+   and must not duplicate those items.  Its interpolation remark cites the
+   repaired stable `thm-riesz-thorin-interpolation` only after the atomic move.
+2. **Fourier Analysis.** The Hausdorff--Young A page must require
+   `complex-riesz-thorin-endpoint-interpolation`; point its proof to
+   `cor-l-one-l-infinity-and-l-two-bounds-interpolate-to-l-p-l-p-prime` (or the
+   repaired stable theorem) and remove/subsume the staged duplicate
+   `lem-fourier-endpoint-interpolation-from-l-one-l-infinity-and-l-two`.
+   A direct three-lines requirement is redundant unless another Fourier item
+   genuinely uses three-lines.
+3. **Complex Analysis.** Its three-lines theorem remains the prerequisite; any
+   orientation remark about Riesz--Thorin must point forward to MT-CA-1 and must
+   not be used as a proof dependency by an earlier page.
+4. **Probability/PDE/distribution theory.** No new theorem is required.  Continue
+   to consume the real/complex $L^p$, Fubini, Radon--Nikodym and differentiation
+   interfaces through A pages; do not add a dependency on an MT B page.
+
+### 0A.5 Reverse-consumer ledger for the new/repaired pairs
+
+An exact-ID reverse search over all presently published `items/` gives the
+following complete published-consumer map.  “Semantic direct” means the item uses
+the interface in its mathematics even though the missing definition was never put
+in its dependency array.
+
+| supplier pair | currently published direct consumer item | current home page | transitively blocked published consumers |
+|---|---|---|---|
+| MT-16c complex $L^p$ | `thm-riesz-thorin-interpolation` (**semantic direct**, missing from its published deps) | `the-maximal-function-and-lebesgue-differentiation` | none |
+| MT-CA-1 endpoint interpolation | `thm-riesz-thorin-interpolation` (**semantic direct** to the new finite-simple-core lemma; moved here in Phase 3) | `the-maximal-function-and-lebesgue-differentiation` until the move | none |
+| MT-21a systems/mixing | none (pair is still planned) | none | none |
+| MT-21b Chacon/weak mixing | none (pair is still planned) | none | none |
+| MT-22 recurrence/base maps | none (pair is still planned) | none | none |
+| MT-23 ergodic theorems | none (pair is still planned) | none | none |
+
+The absence of a published endpoint consumer is not permission to omit the pair:
+the staged consumers are direct and blocked.  In FA batch 8, the MT-16c item IDs
+are directly consumed on `fourier-transform-convolution-and-approximate-identities`
+by `def-fourier-transform-on-l-one-of-rn`,
+`cor-convolution-approximate-identities-from-fourier-multipliers`,
+`thm-fourier-inversion-at-lebesgue-points-under-summability`,
+`thm-riemann-lebesgue`; and on
+`schwartz-space-and-the-plancherel-theorem` (including its B companion) by
+`def-schwartz-space-and-its-seminorms`, `lem-schwartz-space-is-dense-in-l-two`,
+`lem-simultaneous-smooth-approximation-in-l-one-and-l-two`,
+`thm-l-one-l-two-agreement-of-fourier-transform`, `thm-plancherel`,
+`ex-hermite-functions-as-fourier-eigenfunctions`, and
+`thm-heisenberg-uncertainty-inequality`.  Their item-level descendants are
+transitively blocked until MT-16c is published.  The late endpoint pair is directly
+consumed by FA's `rem-riesz-thorin-supplied-by-measure-theory` and
+`rem-hausdorff-young-and-interpolation`, and, after removal of its duplicate local
+lemma, by Fourier batch 11's
+`thm-hausdorff-young-for-periodic-fourier-coefficients` and
+`thm-hausdorff-young-for-the-euclidean-fourier-transform`, both on
+`fourier-multipliers-and-sobolev-characterisations`. Those staged pages must
+require the appropriate new MT A page; no item may depend on an example-page
+item.
+
+**Readiness after audit:** the published Riesz--Thorin repair and all four
+`extcheck` repairs are deliberately gated.  MT-21b is also blocked on a second
+complete proof.  Thus the older statements "unresolved forward references: none"
+and "blockers recorded: none" are superseded.
 
 ---
 
 ## 0. Summary for the orchestrator
 
-**Placement.** Anchor `stone-weierstrass-general-examples` (spec order 288),
-per SEAMS §3. The whole block appends after it, in relative order MT-1 … MT-23,
-each A page followed immediately by its `-examples` companion.
+**Placement.** The original MT-1--MT-23 block is anchored after
+`stone-weierstrass-general-examples` (spec order 288), with the later MT-21a and
+MT-21b insertions before MT-22.  The two audit suppliers are intentionally split:
+MT-16c is inserted at 288.0321/.0322, while MT-CA-1 must wait until after the
+Complex Analysis three-lines page at 288.07811/.07812.  See §0A.1; the block is
+therefore no longer contiguous.
 
-**What was scaffolded.** 23 A/B pairs — 46 pages. Every result in the owner's
+**What is scaffolded.** 27 A/B pairs — 54 pages: the original 23, MT-21a,
+MT-21b, and the two prerequisite pairs in §0A.1. Every result in the owner's
 remit list is placed, and `DEFERRED.md` §1 is discharged **in full but for four
 named rows**, listed in §7.
 
@@ -115,10 +453,9 @@ have the same shape — `functional-analysis` owns a piece of vocabulary that la
 *after* this track and that this track's own remit obliges it to state. §8 gives
 the recommended resolution, which costs no re-mint and no forward reference.
 
-**Unresolved forward references: none load-bearing.** The track is closed
-downwards; §6 lists the three orientation-only forward references it proposes.
-
-**Blockers recorded: none.**
+**Unresolved/gated work.** §0A supersedes the older closure claim: the published
+Riesz--Thorin theorem and four `extcheck` paths require gated repairs, and MT-21b
+needs a second independent complete proof before publication.
 
 **Two corrections to the dispatch, verified from disk** — both matter:
 
@@ -283,7 +620,7 @@ records exactly where the line falls.
 | 3 | **The Fourier transform, Fourier series, Plancherel, the Riemann–Lebesgue lemma, Paley–Wiener** | SEAMS §4: `functional-analysis`, and it lands above. | the `functional-analysis` block. **Consequence recorded**: `rem-riesz-fischer` on the ‡ catalogue asserts "$L^2$ is isomorphic to $\ell^2$ through Fourier coefficients"; MT-14 proves the completeness half and **not** the Fourier half, and §7 says so. |
 | 4 | **Sobolev spaces, weak derivatives, distributions** | SEAMS §4: `pde` and `functional-analysis`. | those tracks. |
 | 5 | **Kolmogorov's extension theorem and infinite product measures; conditional expectation; martingales; weak convergence of measures and tightness; characteristic functions; the CLT** | SEAMS §4: `probability-theory`. | that track. **Partial**: MT-11 builds **finite** products, which is exactly what the remit assigns and exactly what `probability-theory` will need as its base case. The countably infinite product on $\{0,1\}^{\mathbb{N}}$ is used by MT-22 as an *example* built by hand from Carathéodory, not as a general theorem — see §D8. |
-| 6 | **General complex interpolation beyond the Riesz–Thorin theorem** | R-6 assigns the exact Riesz–Thorin theorem to this track, with the special strip argument proved on MT-17; later interpolation scales still need the complex/functional-analysis blocks. | MT-17 now mints `thm-riesz-thorin-interpolation`; `complex-analysis` and `functional-analysis` cite it. Marcinkiewicz remains the independent real-variable companion. |
+| 6 | **General complex interpolation beyond the Riesz–Thorin theorem** | R-6 assigns Riesz--Thorin to Measure Theory, but §0A proves that its complex proof must come after Complex Analysis supplies Hadamard three-lines. Later interpolation scales still need the functional-analysis block. | MT-CA-1 owns the corrected stable `thm-riesz-thorin-interpolation`; Complex Analysis is its prerequisite and Functional/Fourier Analysis cite it. Marcinkiewicz remains the independent real-variable companion on MT-17. |
 | 7 | **Haar measure on a locally compact group** | needs topological groups, which the library does not build below the anchor. | a topological-groups page. MT-20 gives the representation theorem Haar measure is usually constructed with, so the remaining cost is the group structure alone; recorded so it is not rediscovered. |
 | 8 | **The Daniell integral; the Bourbaki functional approach; the Henstock–Kurzweil comparison** | `rem-henstock-kurzweil-vs-lebesgue` records the HK comparison as ‡ and `DEFERRED.md` §1 keeps it. The HK integral itself is in scope elsewhere and is not built here. | an HK-integral page. The Daniell route is a *different construction of the same object*; building it as well would double the track for no new theorem, and the library's own rule is that duplication across generality levels is intentional only where the proofs genuinely differ in tools. Recorded rather than silently omitted. |
 | 9 | **Geometric measure theory**: rectifiability, the area and coarea formulas, currents, the structure theorem | rests on Hausdorff measure *plus* Lipschitz analysis in $\mathbb{R}^n$ well beyond this track | a geometric-measure-theory track. **Partial**: MT-21 builds Hausdorff measure and dimension, $\mathcal{H}^0$ = counting, $\mathcal{H}^n = c_n\lambda_n$ on $\mathbb{R}^n$, and the dimension of the Cantor set. |
@@ -496,10 +833,10 @@ order 12).
 |---|---|---|---|
 | MT-1 | every σ-algebra generated by a family exists; π–λ; monotone class | **ZF** | intersections of a nonempty family, no selection anywhere |
 | MT-1 | $\lvert\mathcal{B}(\mathbb{R})\rvert = \mathfrak{c}$ | **AC$_\omega$** | the transfinite construction picks, at each countable stage, a countable sequence from a fixed countable-cofinal family. State the cost in the Statement, not in a footnote. |
-| MT-1 | an infinite σ-algebra is uncountable (in fact of size $\ge\mathfrak{c}$) | **ZF** | the standard atom argument builds an injection $2^{\mathbb{N}}\to\mathcal{A}$ from an explicitly constructed decreasing sequence; take care that the sequence is built by recursion from a *definable* choice, not by AC$_\omega$ |
+| MT-1 | an infinite σ-algebra is uncountable (in fact of size $\ge\mathfrak{c}$) | **AC$_\omega$** | this is the hypothesis of the published `thm-infinite-sigma-algebra-has-continuum-many-members`; selecting injections of every finite length and flattening their ranges is not a definable ZF choice |
 | MT-2 | monotonicity, subadditivity, continuity from below and above; completion | **ZF** | |
 | MT-2 | the first Borel–Cantelli lemma | **ZF** | it is countable subadditivity plus a tail estimate |
-| MT-3 | Carathéodory's theorem; the extension of a premeasure; uniqueness on a π-system | **ZF** | every "choose a cover with $\sum \le \mu^*(E)+\varepsilon$" is a choice from a family indexed by $\mathbb{N}$ — **this is exactly AC$_\omega$ unless the infimum is taken over a set with a canonical enumeration.** Route: state the covers as elements of a *set* and take a single countable sequence of covers via AC$_\omega$; **do not** claim ZF. Recorded here because it is the single most commonly mis-stated line in the subject. |
+| MT-3 | Carathéodory's theorem; the extension of a premeasure; uniqueness on a π-system | **AC$_\omega$** | every "choose a cover with $\sum \le \mu^*(E)+\varepsilon$" is a choice from a family indexed by $\mathbb{N}$. Route: state the covers as elements of a *set* and take a single countable sequence of covers via AC$_\omega$; **do not** claim ZF. Recorded here because it is the single most commonly mis-stated line in the subject. |
 | MT-3 | the outer measure induced by a premeasure is an outer measure | **AC$_\omega$**, as above | |
 | MT-4 | the length premeasure is countably additive on the algebra of boxes | **ZF** | Heine–Borel does the work; `thm-heine-borel-rn` is published and its own choice ledger is the one to inherit, not to re-derive |
 | MT-4 | outer and inner regularity of $\lambda_n$ | **AC$_\omega$** | one open set per $\varepsilon = 2^{-k}$ |
@@ -508,7 +845,7 @@ order 12).
 | MT-5 | every set of positive outer measure has a non-measurable subset | **AC** | |
 | MT-5 | a Bernstein set exists | **AC**, via a well-ordering of the perfect sets in type $\mathfrak{c}$ | `thm-well-ordering-theorem` (243) is the input |
 | MT-5 | ZF + DC does not prove a non-measurable set exists | ‡ | Solovay's model; **the inaccessible cardinal is part of the claim**, and Shelah showed it cannot be dropped for the measurability half. `rem-vitali-non-measurable-set` already states this correctly; MT-5 cites it and does not restate it loosely. |
-| MT-5 | a free ultrafilter on $\mathbb{N}$ is non-measurable | **BPI** for existence, then ZF for non-measurability | `rem-sierpinski-ultrafilter-not-measurable` is published; MT-5 may now *prove* the non-measurability half from Steinhaus, and cite the remark for the historical statement. See §7. |
+| MT-5 | a free ultrafilter on $\mathbb{N}$ is non-measurable | **BPI** for existence, then ZF for non-measurability | use the tail $0$--$1$ law and complement-swapping involution; Steinhaus proves Sierpiński's different null-set-sum theorem and is not this proof. `rem-sierpinski-ultrafilter-not-measurable` supplies historical orientation only. |
 | MT-7 | $\sup_k f_k$, $\limsup_k f_k$ measurable; simple approximation | **ZF** | the approximating simple functions are given by an explicit formula, not chosen |
 | MT-8 | MCT, Fatou, DCT | **ZF** | no selection; this is worth saying, because the *statements* are about sequences and the reflex is to assume a choice |
 | MT-10 | convergence in measure $\Rightarrow$ an a.e.-convergent subsequence | **AC$_\omega$** | choosing $n_k$ with $\mu(\lvert f_{n}-f\rvert>2^{-k})<2^{-k}$ for $n \ge n_k$; a least-index convention removes the choice, and MT-10 uses the least index so the item is **ZF** |
@@ -530,7 +867,8 @@ order 12).
 | MT-20 | Riesz–Markov–Kakutani | **AC$_\omega$** | Urysohn functions and partitions of unity are supplied by published theorems whose own choice ledgers apply — `rem-the-choice-cost-of-urysohns-lemma-and-of-tietzes-theorem` is published at 267 and is the one to inherit. **Urysohn's lemma is not a ZF theorem** (`DEFERRED.md` §3b, Läuchli/Tachtsis/Blass); this is not a detail we may skip. |
 | MT-21 | $\mathcal{H}^s$ is a metric outer measure; Borel sets are $\mathcal{H}^s$-measurable | **AC$_\omega$** | |
 | MT-22 | Poincaré recurrence | **ZF** | |
-| MT-22 | the product measure on $\{0,1\}^{\mathbb{N}}$ | **AC$_\omega$** + BPI | BPI via `thm-tychonoff`'s compactness of $\{0,1\}^{\mathbb{N}}$; but $\{0,1\}^{\mathbb{N}}$ is a *compact metric* space and its compactness is provable in ZF, so the item uses that route and the ledger says why |
+| MT-22 | the product measure on $\{0,1\}^{\mathbb{N}}$ | **AC$_\omega$** | the explicit compact-metric proof of compactness is ZF and avoids BPI; AC$_\omega$ remains inherited from MT-3's premeasure extension route |
+| MT-22 | compact-metric subsequence lemma and Krylov--Bogolyubov | **AC$_\omega$** | choosing finite nets/dense points and nested convergent subsequences; this avoids Banach--Alaoglu and BPI/full Tychonoff, not countable choice |
 | MT-23 | the maximal ergodic theorem and Birkhoff | **ZF** given the system | Garsia's proof is a finite manipulation plus MCT |
 | MT-23 | the $L^2$ decomposition built by hand | **ZF** | a minimising sequence indexed by $\mathbb{N}$ with the parallelogram law; the limit is unique, so no choice |
 | MT-23 | Weyl equidistribution for an irrational rotation | **ZF** | via unique ergodicity, proved directly |
@@ -750,10 +1088,11 @@ routed to that scaffolder explicitly.
   | 15 — distributions, $\bar\partial$ distributionally | "rows 1 and 6" | **re-point**: `functional-analysis` and a sheaf track. |
   | 17 — Looman–Menchoff | "the proof is a genuine piece of real-variable measure theory" | **unblocked in principle.** Flag for reconsideration at that track's step 2. Its CA-1 currently plans a `rem-` recording the theorem in the "this proof assumes continuous partials" form; that remark's scope wording must be re-checked either way. |
 
-  **Applied 2026-08-14 under R-6.** The earlier proposal that complex analysis
-  mint Riesz–Thorin is superseded. MT-17 mints
-  `thm-riesz-thorin-interpolation`; complex analysis cites it beside its
-  Hadamard three-lines theorem and does not mint a second interpolation item.
+  **Corrected 2026-09-08 under R-6.** Complex Analysis still does not mint a
+  second Riesz--Thorin theorem, but its Hadamard three-lines theorem must be an
+  earlier supplier, not a later orientation link.  MT-CA-1, placed immediately
+  after that Complex Analysis pair, owns the repaired stable
+  `thm-riesz-thorin-interpolation`; see §0A.1.
 
 **3. To `research/plan-probability-track.md` (`probability-theory`, wave 3, NEW).**
 
@@ -1205,7 +1544,7 @@ level.
 | 6.2 *The Dual of $L^p$* — **6.15** | `included` — MT-16. **Locator note: the duality theorem is 6.15, not 6.8**; 6.8 is the $L^1$/$L^\infty$ Hölder statement. |
 | 6.3 *Some Useful Inequalities* | `included` — MT-14 (Lyapunov interpolation) and MT-15 (Minkowski's integral inequality, Young's convolution inequality) |
 | 6.4 *Distribution Functions and Weak $L^p$* | `included` — MT-17's weak-type language and MT-11's layer cake |
-| 6.5 *Interpolation of $L^p$ Spaces* | `included` at MT-17: Marcinkiewicz is the real-variable theorem and R-6 assigns `thm-riesz-thorin-interpolation` here with its self-contained special strip argument. Complex and functional analysis cite it. |
+| 6.5 *Interpolation of $L^p$ Spaces* | `split`: Marcinkiewicz is included at MT-17; the complex Riesz--Thorin theorem is repaired and rehomed at MT-CA-1 after Hadamard three-lines.  The published claim of a self-contained special strip proof is invalid for the reasons in §0A.2. |
 | 7.1 *Positive Linear Functionals on $C_c(X)$* — **7.2 The Riesz Representation Theorem** | `included` — MT-20 |
 | 7.2 *Regularity and Approximation Theorems* — 7.5, 7.8 | `included` — MT-20's regularity theory and Radon-Lusin |
 | 7.3 *The Dual of $C_0(X)$* — **7.17** (a second Riesz representation theorem, $M(X)\cong C_0(X)^*$) | `included` — MT-20's bounded version, stated concretely without the words "dual space" (§8 seam 2) |
@@ -3289,8 +3628,9 @@ a.e. uniqueness, i.e. uniqueness in $L^q$, not of a function.
 
 ## MT-17. The Maximal Function and Lebesgue Differentiation
 
-`requires`: MT-14, MT-11, MT-4, MT-13, MT-15, `the-topology-of-euclidean-space`,
-`compactness-in-metric-spaces`
+`requires`: MT-14, MT-11, MT-4, MT-13, MT-15,
+`complex-lp-spaces-and-test-function-conventions`,
+`the-topology-of-euclidean-space`, `compactness-in-metric-spaces`
 
 **DEFS.** $L^1_{loc}(\mathbb{R}^n)$; the **averages**
 $A_rf(x) := \frac{1}{\lambda(B(x,r))}\int_{B(x,r)}f\,d\lambda$; the **centred
@@ -3318,14 +3658,12 @@ $(\infty,\infty)$ is of strong type $(p,p)$ for $1<p<\infty$) — proved by spli
 $f = f\mathbf{1}_{\{\lvert f\rvert>t/2\}}+f\mathbf{1}_{\{\lvert f\rvert\le t/2\}}$
 and integrating the distribution function with MT-11's layer-cake formula; hence
 $\lVert Mf\rVert_p\le C_{n,p}\lVert f\rVert_p$ for $1<p\le\infty$.
-**Riesz--Thorin interpolation** (`thm-riesz-thorin-interpolation`, **landmark**,
-R-6): if a linear operator has endpoint bounds
-$T:L^{p_0}\to L^{q_0}$ and $T:L^{p_1}\to L^{q_1}$, then it has the interpolated
-bound $\lVert T\rVert_{p_\theta\to q_\theta}\le
-M_0^{1-\theta}M_1^\theta$ for $0<\theta<1$, with the reciprocal-exponent
-relations and infinite-endpoint conventions explicit. The proof includes the
-finite-simple-function reduction and the special strip three-lines argument
-needed here, so no later complex-analysis theorem is a spine dependency.
+The currently published MT-17 inventory also contains
+`thm-riesz-thorin-interpolation`; it is the defective item catalogued in §0A.2,
+not a usable supplier.  In the future atomic repair, move that stable ID to
+MT-CA-1 and leave MT-17 with Marcinkiewicz interpolation.  Do not preserve the
+old finite-target statement, implicit-real/complex mismatch, or purported
+self-contained strip proof as an alternative theorem.
 **The Lebesgue
 differentiation theorem** (**landmark**): for $f\in L^1_{loc}(\mathbb{R}^n)$,
 $A_rf(x)\to f(x)$ as $r\to0^+$ for a.e. $x$ — proved by the standard three-step
@@ -3371,9 +3709,8 @@ author who treats it as obvious has skipped the only genuinely topological step 
 the page. (ii) The $5^n$ constant comes from the covering lemma and is not optimal;
 the item must not claim optimality (Tao's Remark on Melas's sharp constant is the
 source note). (iii) Marcinkiewicz here is the **real-variable** theorem between
-weak $(1,1)$ and $L^\infty$; R-6 separately assigns the exact Riesz--Thorin
-theorem to this page, using its self-contained special strip argument. Neither
-proof may be replaced by a forward citation. (iv) "For a.e. $x$"
+weak $(1,1)$ and $L^\infty$; complex Riesz--Thorin moves to MT-CA-1 and cites
+Hadamard three-lines.  The two proof routes remain distinct. (iv) "For a.e. $x$"
 in the Lebesgue-point theorem is one null set for the whole statement, obtained by
 countable union over rational constants — the order of quantifiers is the proof.
 
@@ -3812,7 +4149,8 @@ concept** from the current recurrence batch inventory; a future manifest splice
 must move, rather than copy, their statements, dependency arrays, source rows and
 proof strategies.
 
-`requires`: MT-1--MT-4, MT-7--MT-8, MT-14, MT-17; concretely the already-earlier
+`requires`: MT-1--MT-4, MT-7--MT-8, MT-14, MT-17, and
+`complex-lp-spaces-and-test-function-conventions`; concretely the already-earlier
 measure-space and measurable-map definitions, $\sigma$-finite $\pi$-system
 uniqueness, completion, simple approximation, monotone convergence, $L^p$ quotient
 and norm facts, finite-measure algebra approximation, and $L^2$ Cauchy--Schwarz.
@@ -3882,7 +4220,9 @@ intended earlier supplier for the retained false statement
 `fs-weak-mixing-implies-strong-mixing`; it is deliberately a proof obligation,
 not a claim that the currently missing Chacon item exists.
 
-`requires`: MT-21a A and B; MT-11's product measure/Fubini material; MT-14's
+`requires`: MT-21a A;
+`complex-lp-spaces-and-test-function-conventions`; MT-11's product
+measure/Fubini material; MT-14's
 Riesz--Fischer completeness and parallelogram law; the earlier Lebesgue measure and
 regularity pages; and the elementary finite-dimensional complex eigenvalue result.
 It must build the listed $L^2$ facts locally, before using them.  It may not depend
@@ -3897,51 +4237,56 @@ general theorem for an arbitrary probability algebra.  The absolute-Ces\`aro
 definition from MT-21a remains the library definition; the local criterion must
 prove its equivalence in this stated setting.
 
-**A inventory, in proof order (17 IDs).**
+**A inventory, in proof order (20 IDs).**
 
 1. `def-unitary-eigenfunction-for-a-probability-system`
 2. `lem-closed-l-two-subspaces-have-orthogonal-projections`
 3. `lem-hilbert-cesaro-averages-converge-to-the-fixed-subspace`
-4. `lem-square-integrable-kernels-define-bounded-compact-integral-operators`
-5. `lem-invariant-square-integrable-kernel-produces-a-compact-intertwiner`
-6. `lem-nonzero-positive-compact-operators-have-positive-finite-dimensional-eigenspaces`
-7. `lem-compact-intertwiners-produce-finite-dimensional-invariant-subspaces`
-8. `lem-nonzero-finite-dimensional-complex-invariant-subspaces-have-unitary-eigenvectors`
-9. `thm-weak-mixing-is-equivalent-to-absence-of-nonconstant-eigenfunctions`
-10. `def-chacon-three-cut-one-spacer-towers`
-11. `lem-chacon-partial-maps-extend-to-an-invertible-map-mod-null-sets`
-12. `lem-chacon-levels-approximate-measurable-sets`
-13. `thm-chacon-transformation-is-ergodic`
-14. `lem-chacon-eigenfunctions-are-constant`
-15. `lem-chacon-tower-height-correlations-obstruct-mixing`
-16. `thm-chacon-transformation-is-weakly-mixing-but-not-mixing`
-17. `fs-weak-mixing-implies-strong-mixing`
+4. `lem-product-rectangle-kernels-are-dense-in-complex-l-two`
+5. `lem-square-integrable-kernels-define-bounded-compact-integral-operators`
+6. `lem-conjugate-transpose-kernels-give-adjoints`
+7. `lem-invariant-square-integrable-kernel-produces-a-compact-intertwiner`
+8. `lem-nonzero-compact-kernel-operators-yield-nonzero-positive-compact-k-star-k`
+9. `lem-nonzero-positive-compact-self-adjoint-operators-have-positive-finite-dimensional-eigenspaces`
+10. `lem-compact-intertwiners-produce-finite-dimensional-invariant-subspaces`
+11. `lem-nonzero-finite-dimensional-complex-invariant-subspaces-have-unitary-eigenvectors`
+12. `thm-weak-mixing-is-equivalent-to-absence-of-nonconstant-eigenfunctions`
+13. `def-chacon-three-cut-one-spacer-towers`
+14. `lem-chacon-partial-maps-extend-to-an-invertible-map-mod-null-sets`
+15. `lem-chacon-levels-approximate-measurable-sets`
+16. `thm-chacon-transformation-is-ergodic`
+17. `lem-chacon-eigenfunctions-are-constant`
+18. `lem-chacon-tower-height-correlations-obstruct-mixing`
+19. `thm-chacon-transformation-is-weakly-mixing-but-not-mixing`
+20. `fs-weak-mixing-implies-strong-mixing`
 
-Items 2--8 are non-optional local closure, not decorative names.  Item 2 proves the
+Items 2--11 are non-optional local closure, not decorative names.  Item 2 proves the
 nearest-point/projection result for a **closed subspace of $L^2(\mu)$**, from
 Riesz--Fischer and the parallelogram-law minimizing-sequence argument.  Item 3 then
-identifies the Ces\`aro limit for a unitary pullback.  Item 4 proves, from the
-square-integrable kernel estimate and finite-rank-kernel approximation, that the
-relevant integral operator is bounded and compact; item 5 proves the intertwining
-identity.  A nonzero compact operator need not itself have a nonzero eigenvalue:
-item 6 must apply the compact self-adjoint argument to $K^*K$ and produce a positive
-nonzero finite-dimensional eigenspace.  Item 7 proves that this eigenspace is
-unitary-invariant, and item 8 supplies an eigenvector for the unitary restriction.
-Only after those steps may item 9 convert ``no nonconstant complex
-$L^2$ eigenfunction'' into the **absolute-Ces\`aro** definition in item 14 of
+identifies the Ces\`aro limit for a unitary pullback.  Item 4 supplies the
+otherwise missing rectangle-kernel density, and item 5 uses it with the
+square-integrable kernel estimate to prove that the relevant integral operator is
+bounded and compact; item 6 proves the adjoint formula and
+item 7 proves the intertwining identity.  A nonzero compact operator need not
+itself have a nonzero eigenvalue: item 8 constructs the nonzero positive compact
+$K^*K$, item 9 proves the positive self-adjoint eigenspace statement, item 10 proves
+that this eigenspace is unitary-invariant, and item 11 supplies an eigenvector for
+the unitary restriction.  Only after those steps may item 12 convert ``no
+nonconstant complex $L^2$ eigenfunction'' into the **absolute-Ces\`aro** definition in item 14 of
 MT-21a.  A proof that states only the usual non-absolute or product-ergodicity
 version has not supplied this interface.
 
-For items 9--15 use the three-cut, one-spacer rank-one construction on the unit
+For items 12--18 use the three-cut, one-spacer rank-one construction on the unit
 interval: $h_0=1$ and $h_{r+1}=3h_r+1$, hence
-$h_r=(3^{r+1}-1)/2$.  The partial level maps are compatible on the union of the
+$h_r=(3^{r+1}-1)/2$.  Fix width $w_r=2/3^{r+1}$, so the $r$th tower has measure
+$1-3^{-(r+1)}$ and the new spacer has measure $w_{r+1}$.  The partial level maps are compatible on the union of the
 towers; their domain and range complements have Lebesgue measure zero, so the
 result is an invertible probability-preserving transformation **modulo null sets**,
 not an everywhere-defined interval bijection.  Tower levels must approximate all
 measurable sets in measure before they are used for ergodicity or correlations.
 The eigenfunction argument must prove constancy, and the obstruction item must give
 a measurable set and a tower-height subsequence whose correlations do not tend to
-the product.  The final theorem depends on both, and item 17 depends on that final
+the product.  The final theorem depends on both, and item 20 depends on that final
 theorem rather than repeating or hiding the witness.
 
 **B inventory, in proof order.**
@@ -3952,7 +4297,7 @@ theorem rather than repeating or hiding the witness.
 
 The first checks $1,4,13$ (and the recurrence $h_{r+1}=3h_r+1$); the second checks
 that the discarded/spacer budget tends to zero in the chosen normalization; the
-third is the explicit correlation computation licensed by item 14.  None is a
+third is the explicit correlation computation licensed by item 18.  None is a
 substitute for the spectral proof or a recurrence theorem.
 
 **Source locators and boundaries.**  Sarig, *Lecture Notes on Ergodic Theory*,
@@ -3962,16 +4307,19 @@ Thouvenot, *Spectral Properties and Combinatorial Constructions in Ergodic Theor
 §5.2.3, printed pp.696--697 (PDF pp.48--49), gives the cutting-and-stacking and
 Theorem 5.12 proof paragraph.  These locators support the construction and the
 eigenfunction/correlation arguments; they do not erase the local proof interfaces
-in items 2--9.  The pair neither claims strong mixing nor invokes a later abstract
+in items 2--12.  The pair neither claims strong mixing nor invokes a later abstract
 spectral theorem.  Its source harvest and complete transitive dependency audit
-remain required before it is emitted as a manifest supplier.
+remain required before it is emitted as a manifest supplier.  In particular,
+Katok--Thouvenot is one complete proof, whereas Sarig presents Problems 3.8--3.10;
+a second independent complete full-text proof is a publication blocker.
 
 ---
 
 ## MT-22. Measure-Preserving Transformations and Poincaré Recurrence
 
 `requires`: MT-21a, MT-21b, MT-8, MT-2, MT-4, MT-17, MT-3, `compactness`,
-`the-topology-of-euclidean-space`, `sequences-and-limits`
+`countability-and-uncountability`, `the-topology-of-euclidean-space`,
+`sequences-and-limits`
 
 **Inventory boundary.**  MT-21a owns the 18 systems/mixing IDs above and MT-21b
 owns the Chacon witness and the stable
@@ -3981,7 +4329,7 @@ item 45 moves with the Chacon supplier; its B page retains its ten existing stab
 IDs in the exact order listed below.  The future manifest splice must move that
 material and leave the three A inventories disjoint.
 
-**A inventory, in proof order (30 retained stable IDs).**
+**A inventory, in proof order (33 stable/new IDs).**
 
 `lem-no-return-sets-have-null-preimage-towers`;
 `thm-poincare-recurrence-for-finite-measure-preserving-systems`;
@@ -3994,6 +4342,9 @@ material and leave the three A inventories disjoint.
 `prop-circle-rotations-preserve-lebesgue-measure`;
 `lem-irrational-circle-orbits-are-dense`;
 `thm-circle-rotation-is-ergodic-iff-angle-is-irrational`;
+`def-integer-base-map-on-the-circle`;
+`prop-integer-base-map-preserves-lebesgue-measure`;
+`thm-integer-base-map-is-strongly-mixing`;
 `prop-doubling-map-preserves-lebesgue-measure`;
 `thm-doubling-map-is-ergodic-for-lebesgue-measure`;
 `prop-doubling-map-is-strongly-mixing`;
@@ -4012,10 +4363,11 @@ material and leave the three A inventories disjoint.
 `fs-ergodicity-forces-every-orbit-dense`; and
 `fs-continuous-invariant-functions-characterize-measure-ergodicity`.
 
-**B inventory, in proof order (10 retained stable IDs).**
+**B inventory, in proof order (11 stable/new IDs).**
 
 `ex-rational-rotation-invariant-set`;
 `ex-doubling-dyadic-preimage-computation`;
+`ex-base-three-cylinder-intervals-and-preimages`;
 `ex-fair-coin-cylinder-measures-tabulated`;
 `ex-doubling-recurrence-to-a-dyadic-interval`;
 `ex-kac-mean-return-to-a-half-circle`;
@@ -4051,7 +4403,11 @@ space has at least one invariant Borel probability measure — proved by taking 
 weak-\* limit point of the Cesàro averages $\frac1n\sum_{k<n}\delta_{T^kx}$ **through
 a concrete diagonal-subsequence argument on a countable dense subset of $C(X)$
 supplied by the published `thm-real-stone-weierstrass-for-compact-metric-spaces`,
-not through Banach–Alaoglu** (§2 row 1). Without this theorem MT-23's unique-ergodicity
+not through Banach–Alaoglu** (§2 row 1).  This construction assumes
+AC$_\omega$: selecting finite nets/dense points and the nested diagonal
+subsequences is not choice-free.  That hypothesis is explicit on the two support
+lemmas and on Krylov--Bogolyubov.  The argument avoids BPI/full Tychonoff, not all
+choice. Without this theorem MT-23's unique-ergodicity
 statement is a claim about a possibly empty set, and the gap is easy to miss.
 *The three systems the track needs*, each with invariance and ergodicity proved:
 **the circle rotation** $R_\alpha x = x+\alpha \bmod 1$ preserves $\lambda$, and is
@@ -4066,6 +4422,12 @@ premeasure, and MT-3 extends it; the shift $\sigma$ preserves it and is **mixing
 hence ergodic. The premeasure step uses compactness of $\{0,1\}^{\mathbb{N}}$, and the
 item takes the **compact-metric** route rather than `thm-tychonoff`, so the cost is
 ZF rather than BPI (§4) — the ledger says why.
+
+Before specializing to doubling, define $D_b(x)=bx\bmod1$ for every integer
+$b\ge2$ and prove preservation and strong mixing from the $b$-adic generating
+intervals.  The stable doubling propositions are retained as the $b=2$
+specializations.  This general-base supplier is required by MT-23's simultaneous
+normal-number theorem; a base-2 proof cannot establish the claims for all bases.
 
 **FS.** Every measure-preserving transformation is invertible. An ergodic
 transformation is mixing. Poincaré recurrence holds on every measure space. The
@@ -4114,6 +4476,13 @@ $\{0,1\}^{\mathbb{N}}$.
 (well-definedness #36); the partial sums $S_nf:=\sum_{k<n}f\circ T^k$; the
 **invariant subspace** $M:=\{f\in L^2(\mu) : f\circ T=f\ \text{a.e.}\}$; **unique
 ergodicity**; **equidistribution mod 1**; a **normal number** to base $b$.
+Before normality, mint
+`def-canonical-base-b-expansion-and-normality`: use one fixed convention at the
+two expansions of a $b$-adic rational (take the non-eventually-$(b-1)$ expansion,
+equivalently the terminating expansion where it exists), and define block
+frequencies with that convention.  Then prove
+`lem-base-b-expansion-cylinders-match-orbits-away-from-terminating-endpoints`;
+the exceptional endpoints form an explicitly enumerated countable null set.
 
 **THMS.** $f\circ T$ and $A_nf$ are measurable and $\lVert A_nf\rVert_p\le
 \lVert f\rVert_p$ for every $p$ (well-definedness #36; trivial, and it is what the
@@ -4136,7 +4505,12 @@ $E\mapsto\int_Ef\,d\mu$ on $\mathcal{I}$ — `probability-theory` will recognise
 name it (§8 amendment 3f, a new seam). **The ergodic case** (**landmark**): if $T$ is
 ergodic and $\mu(X)<\infty$ then $A_nf\to\frac{1}{\mu(X)}\int f\,d\mu$ a.e. and in
 $L^1$ — the statement everything else cites. The $L^p$ mean ergodic theorem for
-$1\le p<\infty$, from Birkhoff plus Vitali.
+$1\le p<\infty$ is supplied by the preceding
+`lem-ergodic-averages-converge-in-l-p-on-finite-measure-spaces`: for $p=1$ use
+the proved uniform-integrability/Vitali argument; for $1<p<\infty$, first prove
+the assertion for bounded truncations by dominated convergence, then pass to
+$f$ by the $L^p$ contraction and density.  Merely observing that the averages
+are bounded in $L^p$ does not make their $p$th powers uniformly integrable.
 **Von Neumann's mean ergodic theorem in $L^2$** (**landmark**): $A_nf\to Pf$ in
 $L^2$, where $P$ is the orthogonal projection of $L^2(\mu)$ onto $M$.  It consumes
 MT-21b's locally proved closed-subspace projection and Hilbert-Ces\`aro interfaces
@@ -4154,9 +4528,10 @@ sandwich, **deliberately not through the Fourier-analytic Weyl criterion**, whic
 belongs to `functional-analysis` and lands above (the item records the alternative
 route and why it is not taken). **Borel's normal number theorem** (**landmark**):
 $\lambda$-a.e. $x\in[0,1]$ is normal to base $2$, and to every base $b\ge2$
-simultaneously — from Birkhoff applied to the doubling map (or the Bernoulli shift)
-and $f=\mathbf{1}_{[0,1/2)}$, then a countable intersection over digit blocks and
-bases. **The strong law for the Bernoulli shift**, stated concretely as the
+simultaneously — for each $b$, apply Birkhoff to MT-22's map $D_b$ and every
+$b$-adic block cylinder, use the expansion/cylinder lemma above, then take the
+countable intersection over digit blocks and bases.  The doubling map or fair-coin
+shift alone proves only the base-2 assertion. **The strong law for the Bernoulli shift**, stated concretely as the
 frequency statement, which `probability-theory` cites for the i.i.d. case (§8
 amendment 3d).
 
@@ -4196,3 +4571,61 @@ number (`ex-`, checkable).
 **Forward references**: none.
 
 ---
+
+## Complex Analysis reconciliation (2026-09-08)
+
+MT-16c `complex-lp-spaces-and-test-function-conventions` remains the unique
+general complex Lp supplier. Its exact planned Complex Analysis consumer homes
+are CA-HP-1, CA-HP-2, CA-QC-1, CA-RS-H, SC-6, and SC-7. Those pages must cite
+the MT definitions and complex integration conventions instead of
+reconstructing them.
+
+All these consumers are planned. They add zero direct and zero transitive
+published consumers to MT-16c and do not change its Phase-2 eligibility.
+
+## Foundations/Set Theory reconciliation (2026-09-08)
+
+The Foundations audit rehomes the already-published `def-dependent-choice` to
+the earlier A page `countability-and-uncountability`, after
+`def-countable-choice`, and corrects its input to `def-function`. Measure
+Theory's published DC consumers retain the same stable supplier ID, so this is
+a Phase-3 page/home correction, not a new Phase-2 supplier. No Measure Theory
+item may obtain a model-separation or sharp choice-strength claim from the
+Recorded-Not-Proved catalogue.
+
+## Probability Theory reconciliation (2026-09-08)
+
+Measure Theory retains ownership of sigma-algebras, measures, measurable
+functions, Lebesgue integration, convergence in measure/a.e., finite products,
+Fubini--Tonelli, Radon--Nikodym, scalar Lp, Radon regularity, and ergodic
+theorems. Probability specializes these interfaces. Planned PT-17 remains
+build-held until MT-23 is populated and published; an empty MT-23 page or its
+B companion supplies nothing. Probability's planned standard-Borel pair and
+PT-6--22 have zero published impact, so this seam creates no MT Phase-2 root.
+
+## Real Analysis reconciliation (2026-09-08)
+
+Phase 3 rewrites published Real Analysis
+`rem-integral-conventions-and-scope` to use the proved A suppliers
+`thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions` and
+`thm-dominated-convergence`, removing both recorded external references. Move
+`further-trigonometric-identities-and-inverses` from
+`product-measures-and-the-fubini-tonelli-theorems-examples` to its A companion;
+the B then requires only its A. These use published suppliers and create no MT
+Phase-2 root.
+
+## Representation Theory reconciliation (2026-09-08)
+
+Planned RG-18 Haar theory consumes MT-20 Radon/Riesz--Markov and MT-11 product
+measure; later homogeneous-space induction also consumes MT-13
+Radon--Nikodym. It uses only the A pages. Measure Theory retains ownership of
+those interfaces and Representation Theory owns Haar and quotient-group
+integration. All RG consumers are planned, so this seam adds zero direct and
+zero transitive published consumers to MT and creates no Phase-2 root.
+
+## Topology reconciliation (2026-09-08)
+
+Delete the placement-only page edge `sigma-algebras-and-borel-sets` ->
+`stone-weierstrass-general-examples`. No Measure Theory item consumes that
+Topology B page, so no replacement edge is required. This Phase-3 page repair
+has zero item-level impact and creates no MT Phase-2 root.

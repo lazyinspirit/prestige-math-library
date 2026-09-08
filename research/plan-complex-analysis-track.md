@@ -21,13 +21,15 @@ have been retained and reconciled. This enrichment adds CA-HM-1 (Green
 functions/harmonic measure), CA-PT-1 (logarithmic potential/capacity/Riesz),
 CA-HP-1 and CA-HP-2 (harmonic and analytic Hardy theory), CA-NV-1 and CA-NV-2
 (Nevanlinna theory), CA-EF-1 (elliptic functions), CA-MF-1 (level-one modular
-forms), CA-RS-1--CA-RS-4 (Riemann surfaces through uniformisation),
+forms), CA-RS-1--CA-RS-4 plus CA-RS-H (Riemann surfaces, Hodge theory, and
+uniformisation),
 CA-QC-1--CA-QC-3 (quasiconformal theory), and SC-5--SC-8
 ($\bar\partial$/Levi, kernels, and analytic hypersurfaces). All labels are
 relative; this commission performs no splice. The live CA-1 A/B inventory has
 41 immutable items; the 45 unauthored A inventories contain 709 proposed items
-in all, with a largest A page of 31. The 709 item ids and 19 enrichment page ids
-have no internal duplicate or exact collision with live item/page ids.
+in all, with a largest A page of 31. The binding §M supersedes these historical
+pre-audit counts with 20 complete enrichment pairs, 40 page ids, and 321 item
+ids, all collision-free at its validation checkout.
 
 **Disk reconciliation and stale claims corrected.** CA-1's A **and** companion
 pages are authored (28 and 13 items); CA-2 onward and SC-1 onward have empty
@@ -4952,7 +4954,7 @@ same mathematical range and do not need a separate source.
 | CA-HP-1 / CA-HP-2 | Axler--Bourdon--Ramey Ch. 6; Ryzhik Ch. 5; Garnett Chs. I--II/Srivastava §§2--3. |
 | CA-NV-1 / CA-NV-2 | Eremenko §§1--6; Goldberg--Ostrovskii selected Chs. 1,3,4. |
 | CA-EF-1 / CA-MF-1 | Ahlfors Ch. 7; Milne Chs. 2--4; McMullen 213a Ch. 5 / Stein--Shakarchi Chs. 9--10. |
-| CA-RS-1--CA-RS-4 | Looijenga Chs. 1--7; McMullen 213b Chs. 2--17; Schlag Chs. 4,8,10--11 and Lyubich Ch. 1 §5. |
+| CA-RS-1--CA-RS-4 and CA-RS-H | Looijenga Chs. 1--7; McMullen 213b Chs. 2--17, especially Theorem 9.12 and Chs. 16--17; Demailly Ch. VI §§1--5 for compact Dolbeault/Hodge theory; Schlag Chs. 4,8,10--11 and Lyubich Ch. 1 §5. |
 | CA-QC-1--CA-QC-3 | Bishop Chs. 1--3; Lyubich Ch. 1 §6 and Ch. 2 §§11--16; Ahlfors--Beurling (1950) §§4--7 for the primary removability/extremal-length check. |
 | SC-1--SC-4 | Lebl Chs. 1--2,6; Boas §§3.2.4--3.3.3; CIMAT §§3.3--3.6. |
 | SC-5--SC-8 | Lebl Chs. 4--6; Demailly Ch. VIII; CIMAT §§3.2,4.1--4.3; Błocki §1/Freitag Ch. I. |
@@ -5161,3 +5163,737 @@ not excuses to drop results.
 theorem, the Levi problem, Picard, boundary-zero Jensen/Hadamard, and the
 theta--Mellin zeta functional equation are no longer optional or deferred in
 this scaffold.
+
+---
+
+# Binding prerequisite and ownership audit (2026-09-08)
+
+This section supersedes every conflicting status, dependency, ordering,
+ownership, blocker, and ``future-build'' claim above.  It is the splice
+contract for the next two phases.  Phase 2 builds all and only missing
+supplier-pair closure required by an already-published consumer.  Phase 3 may
+repair published consumer metadata and exposition after those suppliers are
+published.  Published pages and items remain immutable during this audit.
+
+## A. Repository state and read-only evidence
+
+- Complex Analysis has **54 published pages**, namely the 27 original A/B
+  pairs CA-1--CA-23 and SC-1--SC-4, and **886 published items**.  Their A/B
+  counts are respectively 28+13, 29+11, 21+12, 17+8, 22+8, 25+10, 42+12,
+  21+9, 22+11, 16+11, 22+12, 23+10, 26+9, 31+9, 18+9, 18+9, 16+12, 20+8,
+  18+7, 22+11, 20+7, 22+12, 16+7, 32+12, 19+6, 27+11, and 27+10.  The old
+  claim that only CA-1 is authored is withdrawn.
+- The 20 enrichment pairs CA-HM-1, CA-PT-1, CA-HP-1/2, CA-NV-1/2, CA-EF-1,
+  CA-MF-1, CA-RS-1--4, CA-RS-H, CA-QC-1--3, and SC-5--8 remain prose-only and are not
+  in `plan-spec.json`.  No prose-only item is a present dependency target.
+- The page sets, page titles, memberships, item order, and item kinds agree
+  between `plan-spec.json` and the published files.  Published item metadata
+  has nevertheless drifted after authoring: **325 item `deps` arrays and 66
+  item titles differ** from the corresponding plan objects.  The exact future
+  resynchronisation is deterministic: for each of the 886 item objects on
+  these 54 pages, preserve `id`, `kind`, and array position and replace
+  `title` and `deps` by the values in that item's published front matter.
+  This is packaging repair only and must not be mistaken for the mathematical
+  page-closure repairs in C--D.
+- The item precheck examined all 886 files; 737 proof-bearing files were
+  checked and none failed.  The item graph has no unresolved CA item file and
+  no dependency edge to a later item.  No A page or A item consumes a B page
+  or a B-only item.  The 34 B-to-B item edges are local exposition within the
+  same companion and do not make a companion a supplier.
+- At page level, every CA page has **zero direct and zero transitive**
+  dependency on a `not-proved-here` page.  At item level, dependency traversal
+  from all 886 CA items reaches none of the 114 items homed on
+  `library/not-proved-here/`.  In particular it reaches neither
+  `deferred-set-theory-beyond-choice` nor recorded measure/functional/topology
+  material.  This zero-recorded invariant is binding for every later splice.
+- Six body links are absent from `deps`.  Only
+  `def-riemann-sphere-holomorphic-charts` ->
+  `def-isolated-singularity-types` is load-bearing and must be added in Phase
+  3.  The Pythagorean-identity link to the addition formula, the Gamma link to
+  Euler--Mascheroni, and the winding remark's link to retract injectivity are
+  explanatory only.  The two several-variable convention links are declared
+  `forward_refs` and are non-load-bearing.
+
+## B. Disposition of every published pair
+
+Here “clear” means no additional defect beyond the global plan/disk metadata
+resynchronisation just recorded.
+
+| pair (A page) | disposition |
+|---|---|
+| CA-1 `complex-differentiability-and-cauchy-riemann` | Phase-3 page edge to partitions/paracompactness; derivative uniqueness must precede naming the derivative. |
+| CA-2 `complex-power-series-and-analytic-functions` | clear. |
+| CA-3 `contour-integration` | the two rectifiable-integral definitions must follow the existence theorem, or be explicitly partial definitions until it is proved. |
+| CA-4 `goursat-and-cauchys-theorem-in-a-convex-domain` | clear. |
+| CA-5 `analyticity-liouville-and-morera` | clear. |
+| CA-6 `the-identity-theorem-and-the-open-mapping-theorem` | clear; this is the identity-principle supplier used below. |
+| CA-7 `the-winding-number-and-the-global-cauchy-theorem` | remove the non-well-definedness `justified_by` edge from the branch definition; existence remains the following theorem. |
+| CA-8 `isolated-singularities-and-laurent-series` | normalize B to its singleton A requirement. |
+| CA-9 `the-residue-theorem` | add the improper/parameter-dependent multiple-integral supplier so the Gaussian B example remains covered through its A. |
+| CA-10 `the-argument-principle-and-rouche` | add the published algebraic FTA supplier. |
+| CA-11 `the-riemann-sphere-and-mobius-transformations` | add the isolated-singularity item edge; move circline normalisation/existence before reflection is named. |
+| CA-12 `conformal-mapping-branches-and-the-schwarz-lemma` | clear. |
+| CA-13 `harmonic-functions-and-the-poisson-integral` | normalize B to its singleton A requirement. |
+| CA-14 `subharmonic-functions-and-the-dirichlet-problem` | repair the empty-dependency USC lemma and define Poisson modification only after independence/harmonicity is proved. |
+| CA-15 `normal-families-and-montels-theorem` | mathematically closed; its explicit full-AC charge is safe, though not weakest. |
+| CA-16 `the-riemann-mapping-theorem` | mathematically closed; preserve its explicit choice charge. |
+| CA-17 `simply-connected-plane-domains` | add `applications-of-the-fundamental-group`. |
+| CA-18 `infinite-products-and-weierstrass-factorisation` | clear. |
+| CA-19 `mittag-leffler-and-runges-theorem` | clear. |
+| CA-20 `analytic-continuation-and-monodromy` | clear. |
+| CA-21 `the-gamma-function` | directly require the real Gamma/Beta page; put raw convergence before both integral-defined functions. |
+| CA-22 `the-riemann-zeta-function` | the zeta convergence lemma already precedes its definition; discharge the three unlisted identity-principle assumptions. |
+| CA-23 `bloch-schottky-and-picard` | mathematically closed; preserve its explicit choice charge. |
+| SC-1 `holomorphic-functions-of-several-variables` | add CA-7 for the polydisc Cauchy and segment interfaces; remove the redundant later componentwise `justified_by` edge from the already self-justifying map/Jacobian definition. |
+| SC-2 `the-hartogs-phenomena` | clear. |
+| SC-3 `holomorphic-inverse-and-weierstrass-preparation` | add the module supplier; the published general Noetherian/module definitions are future bridge/agreement rows, not a license to duplicate commutative algebra. |
+| SC-4 `domains-of-holomorphy-and-pseudoconvexity` | clear. |
+
+## C. Exact Phase-3 page patch for the published block
+
+Replace the following A-page `requires` arrays by these exact direct sets.
+All unlisted A-page arrays stay unchanged.
+
+| A page | exact final direct `requires` |
+|---|---|
+| `complex-differentiability-and-cauchy-riemann` | `the-complex-exponential-and-eulers-formula`; `field-extensions-and-the-complex-numbers`; `mixed-partials-taylor-and-extrema`; `the-topology-of-euclidean-space`; `partitions-of-unity-and-paracompactness` |
+| `the-residue-theorem` | `convexity`; `isolated-singularities-and-laurent-series`; `improper-integrals`; `improper-and-parameter-dependent-multiple-integrals` |
+| `the-argument-principle-and-rouche` | `the-residue-theorem`; `the-fundamental-theorem-of-algebra` |
+| `simply-connected-plane-domains` | `the-riemann-mapping-theorem`; `the-fundamental-group`; `covering-spaces-and-lifting`; `the-fundamental-group-of-the-circle`; `applications-of-the-fundamental-group` |
+| `the-gamma-function` | `infinite-products-and-weierstrass-factorisation`; `the-residue-theorem`; `improper-integrals`; `analyticity-liouville-and-morera`; `product-measures-and-the-fubini-tonelli-theorems`; `the-real-gamma-and-beta-functions` |
+| `holomorphic-functions-of-several-variables` | `the-identity-theorem-and-the-open-mapping-theorem`; `goursat-and-cauchys-theorem-in-a-convex-domain`; `the-winding-number-and-the-global-cauchy-theorem`; `the-total-derivative`; `fubini-and-change-of-variables`; `rn-as-a-normed-space` |
+| `holomorphic-inverse-and-weierstrass-preparation` | `holomorphic-functions-of-several-variables`; `inverse-and-implicit-function-theorems`; `the-argument-principle-and-rouche`; `euclidean-domains-pids-and-unique-factorisation`; `the-field-of-fractions-and-localisation`; `constant-rank-submersions-and-regular-level-sets`; `modules-and-module-homomorphisms` |
+
+Replace the two exceptional companion arrays by the singleton companion rule:
+
+- `isolated-singularities-and-laurent-series-examples` requires only
+  `isolated-singularities-and-laurent-series`.
+- `harmonic-functions-and-the-poisson-integral-examples` requires only
+  `harmonic-functions-and-the-poisson-integral`.
+
+Projected closure through those singleton A pages covers every current B-item
+dependency.  Every other published B page already requires only its A page.
+No page may require a B page; this remains true after the patch.
+
+The exact closure witnesses for the seven A-page additions are:
+
+| published consumer item (home) | missing supplier item (home) |
+|---|---|
+| `thm-complex-exponential-is-entire-with-derivative-itself` (`complex-differentiability-and-cauchy-riemann`) | `lem-algebra-of-continuous-real-maps-on-a-space` (`partitions-of-unity-and-paracompactness`) |
+| `lem-holomorphic-difference-quotient-is-jointly-continuous` (`the-winding-number-and-the-global-cauchy-theorem`) | the same continuity-algebra lemma; inherited through CA-1 |
+| `ex-residue-evaluates-the-gaussian-cosine-integral-by-a-rectangle` (`the-residue-theorem-examples`) | `thm-gaussian-integral` (`improper-and-parameter-dependent-multiple-integrals`) |
+| `rem-fundamental-theorem-of-algebra-via-rouche` (`the-argument-principle-and-rouche`) | `thm-fundamental-theorem-of-algebra-exact-degree` (`the-fundamental-theorem-of-algebra`) |
+| `thm-rational-map-fibre-count-degree` (`the-riemann-sphere-and-mobius-transformations`) | the same exact-degree FTA item; inherited through CA-10 |
+| `cor-winding-number-classifies-loops-in-the-punctured-plane` (`simply-connected-plane-domains`) | `prop-retracts-inject-fundamental-groups` (`applications-of-the-fundamental-group`) |
+| `thm-cauchy-integral-formula-on-a-polydisc` (`holomorphic-functions-of-several-variables`) | CA-7's circle/winding interface |
+| `lem-locally-bounded-separately-holomorphic-functions-are-locally-lipschitz` (`holomorphic-functions-of-several-variables`) | CA-7's segment-integral interface |
+| `def-noetherian-ring-and-module`; `lem-finite-modules-over-noetherian-rings-are-noetherian` (`holomorphic-inverse-and-weierstrass-preparation`) | `def-left-and-right-modules`, `def-submodule`, `def-generated-cyclic-finitely-generated-and-free-modules`, and `def-quotient-module` on `modules-and-module-homomorphisms` (six item edges in all because the last two consumers share two suppliers) |
+
+These are repairs to existing published suppliers, not missing supplier pairs;
+they therefore belong to Phase 3 and do not create Phase-2 roots.
+
+## D. Exact Phase-3 item repairs
+
+1. On CA-1, state the raw difference-quotient limit predicate, prove
+   `lem-uniqueness-of-the-complex-derivative`, and only then name $f'(z_0)$,
+   holomorphic, and entire.  Preserve both stable IDs.
+2. On CA-3, either move
+   `thm-existence-of-complex-line-integrals-on-rectifiable-paths` before both
+   integral definitions, or make the definitions explicitly conditional on
+   existence and remove their `justified_by` fields.  The preferred proof
+   order is raw component Riemann--Stieltjes expressions, existence, complex
+   and absolute integrals.
+3. Remove `justified_by` from
+   `def-continuous-argument-and-holomorphic-logarithm-branches`: the definition
+   is meaningful without existence.  The following contour-lift theorem
+   remains its ordinary consumer.  Likewise remove the redundant
+   `justified_by` from `def-holomorphic-map-and-complex-jacobian`, whose body
+   already proves uniqueness; the componentwise theorem is a later
+   characterization.
+4. Split `def-circline-and-reflection` into the already meaningful circline
+   definition and a raw conjugate-by-a-normalizer construction.  Prove
+   normalizer existence and independence before naming the common reflection;
+   retain `thm-mobius-preserves-circlines-and-reflections` and both stable IDs.
+5. Replace the current canonical Poisson-modification definition by a raw
+   approximation-dependent function $P_{D,(\phi_n)}u$.  First prove the
+   decreasing harmonic limit exists, is approximation-independent,
+   subharmonic after pasting, and majorizes $u$; only then name $P_Du$.
+6. Move `lem-gamma-integral-converges-locally-uniformly` before
+   `def-euler-gamma-function` and remove the lemma's dependency on the latter;
+   it is a theorem about the displayed raw improper integral and depends on
+   `thm-real-gamma-euler-integral-convergence`.  Add
+   `lem-beta-integral-converges-locally-uniformly` before
+   `def-euler-beta-function`, proved by the endpoint majorants from
+   `thm-real-beta-integral-convergence`.  The Beta--Gamma identity is then a
+   consumer, not the convergence justification.
+7. Give
+   `lem-upper-semicontinuous-functions-are-borel-and-circle-integrals-are-defined`
+   the exact direct dependencies `def-semicontinuity`,
+   `thm-semicontinuous-evt`, `def-borel-sigma-algebra`,
+   `def-borel-sigma-algebra-on-the-extended-real-line`,
+   `thm-threshold-characterisations-of-real-and-extended-real-measurability`,
+   `cor-continuous-functions-are-borel-measurable`,
+   `thm-composition-with-borel-functions-preserves-measurability`,
+   `prop-closure-properties-of-measurable-functions-used-by-the-integral`, and
+   `def-nonnegative-lebesgue-integral`.  Define the possibly $-\infty$ average
+   as $M-\int(M-u)$ after the finite upper bound $M$ is proved; do not invoke
+   an unbuilt blanket “extended integral”.
+8. Add `def-isolated-singularity-types` directly to
+   `def-riemann-sphere-holomorphic-charts`.
+9. In `thm-dirichlet-eta-representation`, prove
+   $(x^{-s})'=-s x^{-s-1}$ locally from the displayed exponential/logarithm
+   formula and add `thm-identity-theorem-holomorphic-functions`.  Add that same
+   identity-theorem dependency to `thm-riemann-zeta-meromorphic-continuation`,
+   `thm-completed-riemann-zeta-functional-equation`, and
+   `thm-riemann-xi-is-entire-of-order-one`; in the first two, derive the
+   meromorphic identity principle by deleting the discrete pole set and
+   applying the holomorphic theorem.  No unproved “meromorphic identity
+   principle” may remain as `[A1]`.
+10. The full-AC dependencies on CA-15, CA-16, and CA-23 are adequate upper
+    bounds for their diagonal or extremal selections.  A later foundations
+    refinement may weaken individual uses to AC$_\omega$ or DC only after an
+    earlier proved supplier exists; it must not introduce a forward edge to a
+    later choice page.
+
+## E. Repaired planned enrichment and proof machinery
+
+All labels in this subsection name A pages; every corresponding `-examples`
+B page has the singleton A requirement and is a dependency leaf.  The exact
+direct A requirements below supersede the informal ranges above.
+
+| pair | exact direct A requirements after external suppliers exist |
+|---|---|
+| CA-HM-1 `green-functions-harmonic-measure-and-conformal-invariance` | `harmonic-functions-and-the-poisson-integral`; `subharmonic-functions-and-the-dirichlet-problem`; `the-riemann-mapping-theorem`; `the-lebesgue-integral-and-the-convergence-theorems`; `radon-measures-and-the-riesz-markov-kakutani-theorem`; `harmonic-functions-and-mean-values-in-rn`; `fundamental-solutions-newtonian-potentials-and-green-functions` |
+| CA-PT-1 `logarithmic-potential-capacity-and-riesz-decomposition` | `subharmonic-functions-and-the-dirichlet-problem`; CA-HM-1; `product-measures-and-the-fubini-tonelli-theorems`; `radon-measures-and-the-riesz-markov-kakutani-theorem`; `banach-alaoglu-goldstine-and-krein-milman`; `distributions-test-functions-and-differentiation`; `fundamental-solutions-newtonian-potentials-and-green-functions` |
+| CA-HP-1 `harmonic-hardy-classes-and-fatou-boundary-limits` | `harmonic-functions-and-the-poisson-integral`; CA-HM-1; `complex-lp-spaces-and-test-function-conventions`; `the-duality-of-lp-and-lq`; `density-separability-and-convolution-in-lp`; `the-maximal-function-and-lebesgue-differentiation`; `radon-measures-and-the-riesz-markov-kakutani-theorem`; `banach-alaoglu-goldstine-and-krein-milman`; `reflexivity-and-eberlein-smulian` |
+| CA-HP-2 `analytic-hardy-spaces-and-canonical-factorisation` | CA-HP-1; `the-argument-principle-and-rouche`; `infinite-products-and-weierstrass-factorisation`; `the-radon-nikodym-theorem-and-lebesgue-decomposition`; `complex-lp-spaces-and-test-function-conventions`; `orthonormal-bases-parseval-and-fourier-series` |
+| CA-NV-1 `jensen-theory-and-nevanlinnas-first-main-theorem` | `isolated-singularities-and-laurent-series`; `the-argument-principle-and-rouche`; `harmonic-functions-and-the-poisson-integral`; `the-lebesgue-integral-and-the-convergence-theorems` |
+| CA-NV-2 `nevanlinna-second-main-theorem-and-defects` | CA-NV-1; `measures-and-their-basic-properties`; `lebesgue-measure-on-euclidean-space` |
+| CA-EF-1 `elliptic-functions-and-complex-tori` | `the-winding-number-and-the-global-cauchy-theorem`; `isolated-singularities-and-laurent-series`; `the-argument-principle-and-rouche`; `infinite-products-and-weierstrass-factorisation`; CA-RS-1; `subspaces-products-and-quotients`; `covering-spaces-and-lifting` |
+| CA-MF-1 `level-one-modular-forms-and-the-j-invariant` | CA-EF-1; `the-argument-principle-and-rouche`; `infinite-products-and-weierstrass-factorisation`; `the-riemann-zeta-function`; CA-RS-1; `group-actions-and-cayleys-theorem`; `subspaces-products-and-quotients` |
+| CA-RS-1 `riemann-surfaces-branched-maps-and-differentials` | `the-riemann-sphere-and-mobius-transformations`; `analytic-continuation-and-monodromy`; `covering-spaces-and-lifting`; `classification-of-covering-spaces`; topology's new `classification-of-compact-connected-surfaces` A page |
+| CA-RS-H `hodge-theory-on-compact-riemann-surfaces` | CA-RS-1; SC-5; `tensor-fields-exterior-algebra-and-differential-forms`; `the-exterior-derivative-and-cartan-calculus`; `integration-of-forms-and-the-general-stokes-theorem`; `riemannian-metrics-length-distance-and-volume`; `complex-lp-spaces-and-test-function-conventions`; `hilbert-space-geometry-and-riesz-representation`; `reflexivity-and-eberlein-smulian`; `rellich-kondrachov-and-sobolev-compactness`; `fredholm-elliptic-problems-and-the-elliptic-spectrum`; `interior-and-boundary-sobolev-elliptic-regularity` |
+| CA-RS-2 `divisors-riemann-roch-and-duality` | CA-RS-1; CA-RS-H; `mittag-leffler-and-runges-theorem`; SC-5; `presheaves-sheaves-stalks-and-sheafification`; `sheaf-operations-exactness-ringed-spaces-and-module-pullback`; `sheaf-cohomology-cech-cohomology-and-comparison` |
+| CA-RS-3 `periods-jacobians-and-abel-jacobi-theory` | CA-RS-2; `cw-complexes-and-cellular-homology`; `cup-cap-cross-products-and-cohomology-rings`; `orientations-poincare-lefschetz-and-alexander-duality`; `the-de-rham-theorem-and-degree`; `hilbert-space-geometry-and-riesz-representation`; topology's compact-surface-classification page |
+| CA-RS-4 `hyperbolic-riemann-surfaces-and-uniformization` | CA-RS-1; CA-HM-1; `conformal-mapping-branches-and-the-schwarz-lemma`; `the-riemann-mapping-theorem`; `covering-spaces-and-lifting`; `classification-of-covering-spaces`; `harmonic-functions-and-mean-values-in-rn` |
+| CA-QC-1 `extremal-length-and-planar-quasiconformality` | `conformal-mapping-branches-and-the-schwarz-lemma`; `normal-families-and-montels-theorem`; CA-PT-1; `complex-lp-spaces-and-test-function-conventions`; `weak-derivatives-and-sobolev-spaces`; `smooth-approximation-and-sobolev-extension`; `harmonic-functions-and-mean-values-in-rn` |
+| CA-QC-2 `beltrami-equation-and-measurable-riemann-mapping` | CA-QC-1; `weak-and-weak-star-topologies`; `banach-alaoglu-goldstine-and-krein-milman`; `reflexivity-and-eberlein-smulian`; `weak-derivatives-and-sobolev-spaces`; `smooth-approximation-and-sobolev-extension` |
+| CA-QC-3 `quasisymmetry-welding-and-conformal-removability` | CA-QC-2; `the-riemann-mapping-theorem`; CA-PT-1; `hausdorff-measure-and-hausdorff-dimension` |
+| SC-5 `the-dbar-complex-and-integral-solutions` | `holomorphic-functions-of-several-variables`; `the-hartogs-phenomena`; `holomorphic-inverse-and-weierstrass-preparation`; `domains-of-holomorphy-and-pseudoconvexity`; `tensor-fields-exterior-algebra-and-differential-forms`; `the-exterior-derivative-and-cartan-calculus`; `integration-of-forms-and-the-general-stokes-theorem`; `distributions-test-functions-and-differentiation` |
+| SC-6 `hormander-estimates-and-the-levi-problem` | SC-5; `domains-of-holomorphy-and-pseudoconvexity`; `complex-lp-spaces-and-test-function-conventions`; `hilbert-space-geometry-and-riesz-representation`; `weak-and-weak-star-topologies`; `reflexivity-and-eberlein-smulian`; `unbounded-self-adjoint-operators-and-stones-theorem`; `weak-derivatives-and-sobolev-spaces`; `smooth-approximation-and-sobolev-extension` |
+| SC-7 `bergman-and-szego-kernels` | SC-5; SC-6; CA-HP-1; CA-HP-2; `complex-lp-spaces-and-test-function-conventions`; `hilbert-space-geometry-and-riesz-representation`; `orthonormal-bases-parseval-and-fourier-series` |
+| SC-8 `analytic-hypersurfaces-and-local-parametrisation` | `holomorphic-inverse-and-weierstrass-preparation`; SC-5; `modules-and-module-homomorphisms`; `noetherian-rings-and-hilbert-basis`; `localisation-of-modules-and-support`; `krull-dimension-and-height-theorems` |
+
+The new CA-RS-H pair is mandatory because SC-5's local Dolbeault lemma and a
+partition of unity do **not** prove finite-dimensional cohomology or Hodge
+decomposition.  Its A inventory, in proof order, is:
+
+1. Move the stable ID
+   `def-holomorphic-line-bundle-and-meromorphic-section-riemann-surface` here
+   from CA-RS-2, before it is used analytically.
+2. `def-hermitian-metric-and-ltwo-pairing-on-a-compact-riemann-surface`.
+3. `thm-chern-connection-of-a-hermitian-holomorphic-line-bundle` constructs
+   the unique metric connection with prescribed $(0,1)$ part.
+4. `def-maximal-dbar-operator-and-hilbert-adjoint-on-a-compact-riemann-surface`.
+5. `lem-dbar-adjoint-and-dolbeault-laplacian-local-formulas` proves in
+   particular that the line-bundle-valued Dolbeault Laplacian is elliptic.
+6. `thm-garding-estimate-for-the-dolbeault-laplacian-on-a-compact-riemann-surface`.
+7. `lem-dolbeault-green-operator-is-compact-on-the-orthogonal-complement-of-the-kernel`.
+8. `thm-dolbeault-laplacian-has-finite-dimensional-kernel-and-closed-range`.
+9. `thm-elliptic-regularity-for-dolbeault-harmonic-forms`.
+10. `thm-hodge-decomposition-for-dolbeault-forms-on-a-compact-riemann-surface`.
+11. `cor-dolbeault-cohomology-of-a-compact-riemann-surface-is-finite-dimensional`.
+12. `thm-harmonic-star-duality-for-line-bundle-valued-dolbeault-cohomology`
+    identifies $H^{0,1}(X,E)^*$ with
+    $H^{1,0}(X,E^*)=H^0(X,K\otimes E^*)$, with the conjugations forced by the
+    first-variable-linear inner product printed explicitly.
+
+Its B inventory is the flat torus harmonic representatives, the sphere's
+$H^{0,1}=0$, metric-independence of cohomology, a non-harmonic exact form, and
+the one-dimensional constant zero mode.  No B item is a dependency target.
+
+Additional mandatory rows in existing planned A inventories are:
+
+- CA-PT-1 adds
+  `lem-logarithmic-energy-of-a-zero-mass-signed-measure-is-nonnegative`, with
+  equality only for the zero measure in the finite-energy class, before
+  equilibrium-measure uniqueness.
+- CA-NV-2 adds
+  `thm-local-second-main-theorem-on-a-punctured-disc`, with its rescaling,
+  characteristic, and exceptional-radius error stated, before deriving great
+  Picard.  An entire-plane SMT alone does not prove the punctured-disc claim.
+- CA-RS-4 adds, before uniformization,
+  `lem-riemann-surface-structure-lifts-uniquely-to-a-covering-surface`,
+  `lem-deck-transformations-of-a-riemann-surface-cover-are-holomorphic`,
+  `lem-green-exhaustion-produces-a-nonconstant-bounded-holomorphic-function`,
+  and `lem-simply-connected-riemann-surface-parabolic-hyperbolic-alternative`.
+  CA-RS-2 is removed from CA-RS-4: Riemann--Roch is not a prerequisite for
+  the stated potential-theoretic uniformization proof.
+- Keep `def-cech-cohomology-holomorphic-line-bundle-sections` stable, but make
+  it a specialization/agreement bridge to AV-21's construction.  It must not
+  reconstruct general Čech cohomology or refinement independence.  The
+  comparison theorem then consumes AV-21's Leray/Čech comparison and SC-5's
+  Dolbeault resolution.
+- Move `def-holomorphic-line-bundle-and-meromorphic-section-riemann-surface`
+  from CA-RS-2 to CA-RS-H without changing its ID or statement scope.  This
+  avoids the otherwise circular attempt to prove line-bundle-valued Hodge
+  theory before the bundle has been defined.
+- Keep CA-RS-1's two classification IDs stable, but make their proofs
+  applications of the topology-owned classification pair.  Complex Analysis
+  contributes only the canonical orientation from holomorphic transition maps.
+- SC-8's pure-dimension proof invokes Krull's principal ideal theorem, and its
+  component proof invokes the Noetherian/UFD suppliers.  “UFD” alone is not a
+  proof of pure codimension one.  The Puiseux row must include the analytic
+  majorant/convergence step, not merely formal Newton--Puiseux.
+
+## F. Consumer map and Phase-2 boundary
+
+**Phase-2 roots for published Complex Analysis consumers: empty.**  Every
+published defect in B--D has an already-published supplier or is repaired by
+local proof order/inline proof.  Therefore this audit authorizes no new pair
+for Phase 2 and no consumer repair before Phase 3.
+
+Every proposed item on each of the 19 pre-existing enrichment pairs, and every
+item on the new CA-RS-H pair, has **zero direct published consumers and zero
+transitively blocked published consumers**, grouped by home page as follows:
+
+| planned home A/B pair | direct published consumers | transitive published impact |
+|---|---:|---:|
+| CA-HM-1; CA-PT-1; CA-HP-1; CA-HP-2 | 0 | 0 |
+| CA-NV-1; CA-NV-2; CA-EF-1; CA-MF-1 | 0 | 0 |
+| CA-RS-1; CA-RS-H; CA-RS-2; CA-RS-3; CA-RS-4 | 0 | 0 |
+| CA-QC-1; CA-QC-2; CA-QC-3 | 0 | 0 |
+| SC-5; SC-6; SC-7; SC-8 | 0 | 0 |
+
+This is an item-level statement as well as a page-level statement: none of
+their stable or newly proposed item IDs occurs in any published item's `deps`,
+`justified_by`, or load-bearing body link.  Thus all 20 pairs are
+**planned-only**, not Phase-2 eligible.
+
+For ownership clarity, the proposed topology pair
+`classification-of-compact-connected-surfaces` also has zero
+direct and zero transitive published consumers at this checkout.  Its exact
+planned direct consumers are
+`thm-topological-classification-compact-riemann-surfaces` and
+`def-genus-and-euler-characteristic-compact-riemann-surface` on CA-RS-1, and
+`thm-symplectic-homology-basis-compact-riemann-surface` on CA-RS-3.  CA-RS-H's
+direct planned consumers are
+`thm-finiteness-cohomology-compact-riemann-surface`,
+`thm-nondegeneracy-of-the-residue-pairing`, and
+`thm-serre-duality-compact-riemann-surfaces` on CA-RS-2.  AV-21's planned
+direct CA consumers are
+`def-cech-cohomology-holomorphic-line-bundle-sections` and
+`thm-cech-dolbeault-comparison-for-line-bundles-on-compact-surfaces` on
+CA-RS-2.  The MT complex-$L^p$ pair's
+planned direct CA homes are CA-HP-1/2, CA-QC-1, CA-RS-H, and SC-6/7.  None of
+these planned edges is permitted to pull a consumer into Phase 2.
+
+Consequently the exact `plan-spec.json` action in **Phase 2 is no change**.
+The exact Phase-3 action for already-published pages is the seven final A
+arrays and two B arrays in C plus the deterministic item-metadata
+resynchronisation in A.  The later enrichment splice adds the 20 A ids in E
+and their 20 `-examples` companions using the exact orders, titles,
+inventories, reciprocal companions, and requirements in binding §M.  Every
+external supplier now has a canonical earlier A-page object, so the former
+no-order hold is retired.
+
+## G. Cross-category amendments owed by the root audit
+
+Only the owning scaffold may enact these amendments; this audit records them
+without editing another file.
+
+1. **Topology:** add the A/B pair
+   `classification-of-compact-connected-surfaces` /
+   `classification-of-compact-connected-surfaces-examples`, with
+   exact direct requirements `simplicial-subdivision-and-simplicial-approximation`,
+   `cw-complexes-and-cellular-homology`,
+   `orientations-poincare-lefschetz-and-alexander-duality`, and
+   `the-fundamental-group`.  The A page must prove finite triangulability,
+   reduction to a one-polygon schema,
+   orientable/nonorientable normal forms, uniqueness by orientability and
+   Euler characteristic, and $\chi=2-2g$ in the orientable case.  Its B is a
+   singleton-requirement leaf.  DG's repaired scaffold already assigns compact
+   surface classification to topology, so CA-RS-1 consumes rather than owns it.
+2. **Algebraic Geometry:** record CA-RS-2 as a consumer of AV-9, AV-10, and
+   AV-21.  General sheaves, sheaf operations, Čech cohomology, refinement, and
+   Čech-to-derived comparison remain AV-owned.  CA owns holomorphic line
+   bundles, Dolbeault comparison, and Riemann-surface Riemann--Roch.
+3. **Algebraic Topology:** record CA-RS-3 as a consumer of AT-4, AT-7, and
+   AT-8, and of the repaired empty-object/sign conventions in AT.  HA chain
+   complexes alone cannot supply singular $H_1$, the surface intersection
+   form, or the fundamental class.
+4. **Differential Geometry:** record SC-5 as a consumer of DG-11, DG-12, and
+   DG-14, CA-RS-H as a consumer of DG-11/12/14/18, and CA-RS-3 as a consumer
+   of DG-17.  The decomposition $d=\partial+\bar\partial$ is CA-owned after
+   complexification, but chart-independent forms, $d$, orientation, Stokes,
+   the Hodge star, and de Rham comparison are not re-minted.
+5. **Measure Theory / Functional Analysis / PDE:** retain MT-16c
+   `complex-lp-spaces-and-test-function-conventions` as the unique complex
+   $L^p$ supplier.  The CA consumers are listed in F.  FA-13 supplies Hilbert
+   Riesz/projection, FA-21 supplies densely-defined adjoints, and PDE-11/12/15/
+   17/18 supply the local Sobolev, compactness, Fredholm, and regularity inputs
+   used by CA-RS-H and SC-6.  Those owners must record the incoming seams; CA
+   must not restate the general theories.
+6. **Fourier Analysis:** no new owner amendment is needed.  CA-HP-2 uses the
+   already-scaffolded Fourier-series uniqueness interface on
+   `orthonormal-bases-parseval-and-fourier-series`; later Fourier enrichment
+   may consume Hardy results but is not a prerequisite here.
+7. **Algebra / commutative algebra:** SC-3's future published cleanup must
+   turn its general module/Noetherian rows into agreement bridges to
+   `modules-and-module-homomorphisms` and
+   `noetherian-rings-and-hilbert-basis`.  SC-8 additionally consumes
+   `localisation-of-modules-and-support` and
+   `krull-dimension-and-height-theorems`.  No algebra theorem is rehomed.
+8. **Category Theory:** no additional amendment is required.  AV-9/10 already
+   own the categorical sheaf operations consumed through the AG seam.
+
+## H. Conventions, sources, validation, and blockers
+
+The following signs and directions are binding at authoring time: contours and
+boundary integrals use positive orientation; winding number is
+$(2\pi i)^{-1}\int dz/(z-a)$; residues are coefficients of $(z-a)^{-1}$;
+$d=\partial+\bar\partial$ with
+$\partial\bar\partial+\bar\partial\partial=0$; Čech differentials use
+$\sum_j(-1)^j$; Hilbert inner products are linear in the first variable;
+$a_i\cdot b_j=\delta_{ij}$ and $b_i\cdot a_j=-\delta_{ij}$; the complex
+Jacobian of $\mathbb C^m\to\mathbb C^n$ is $n\times m$; and the logarithmic
+potential signs remain $\Delta\int\log|z-w|\,d\mu=2\pi\mu$ and
+$U^\mu=-\int\log|z-w|\,d\mu$.  For positive Green functions,
+$D\subset\Omega$ gives $g_D\le g_\Omega$; on a shared boundary Borel set the
+harmonic-measure comparison is
+$\omega_D^z(E)\le\omega_\Omega^z(E)$.
+
+Full-text controls newly material to this amendment are:
+
+- Jean Gallier and Dianna Xu, *A Guide to the Classification Theorem for
+  Compact Surfaces*, Chapters 3 and 6 and Appendix E (finite triangulation,
+  polygonal normal form, classification, and triangulability), author PDF
+  <https://www.cis.upenn.edu/~jean/surfclassif-root.pdf>.  The retrieved PDF is
+  the full 186-page 2012 author text; the short `surfclass-n.pdf` preview is
+  not sufficient.
+- Curtis McMullen, *Riemann Surfaces*, Harvard Math 213b, Chapters 9 and
+  16--17, especially Theorem 9.12 and Theorem 17.1, pp. 82--89 and 146--158,
+  author PDF
+  <https://people.math.harvard.edu/~ctm/papers/home/text/class/harvard/213b/course/course.pdf>.
+- Jean-Pierre Demailly, *Complex Analytic and Differential Geometry*, Chapter
+  VI §§1--5 (elliptic operators, compact Green operator, harmonic forms and
+  Hodge isomorphism, including bundle-valued Dolbeault theory), author PDF
+  <https://www-fourier.univ-grenoble-alpes.fr/~demailly/manuscripts/agbook.pdf>.
+- Mikhail Lyubich, *Conformal Geometry and Dynamics*, Chapter 2
+  §§11--16, especially §§14.1--14.6 for the normalized measurable Riemann
+  mapping theorem, author PDF
+  <https://www.math.stonybrook.edu/~mlyubich/book.pdf>.
+- Jiří Lebl, *Tasty Bits of Several Complex Variables*, version 4.4,
+  §§4.1--4.6 and §§6.1--6.7, pp. 130--156 and 167--197, author full text
+  <https://www.jirka.org/scv/scv.pdf>.  Section 6.7 is the control for the
+  convergent, not merely formal, Puiseux step.
+- K. Chandrasekharan, *Lectures on the Riemann Zeta-Function*, Lectures
+  6 §§1--2 and 11--13, TIFR full text
+  <https://mathweb.tifr.res.in/Documents/Publications/Lectures/01.pdf>, controls
+  the Gamma/Beta convergence order and the eta/zeta continuation identities.
+- Christopher Bishop, *Quasiconformal Mappings*, Chapters 1--3, author notes
+  <https://www.math.stonybrook.edu/~bishop/classes/math627.S18/QC.pdf>, and
+  Lyubich §§14--16 jointly control modulus/ACL equivalence, MRMT, welding, and
+  removability.  A future claim beyond those read ranges is blocked until its
+  authoritative full proof is fetched.
+
+Scoped validation at this checkout: the published page/member/order comparison
+passed; the 886-file item precheck passed all 737 proof-bearing files; the
+item-order and B-supplier scans found no forbidden edge; the recorded-material
+closure scan returned zero; the singleton-B projection passed; and the 14
+page-closure misses are exactly the rows in C.  Repository-wide `extcheck`
+still reports 63 unrelated warnings, none in Complex Analysis.  CA
+`citecheck` hits are lexical false positives such as “transitivity” in Möbius
+prose, not absent citation fields.  Run `validate-plan`, the same scoped
+precheck, and `git diff --check` again after the future splice.
+
+**Current blockers:** none for the published Phase-3 repair and none for the
+future plan splice in §M.  Every direct supplier page required by the 20
+enrichment pairs now exists as a canonical earlier A-page object.  Publication
+of a pair remains gated on actually authored proof closure, but that is an
+authoring gate rather than a plan-integration blocker.
+
+## I. Number Theory reconciliation (2026-09-08)
+
+Published Number Theory page `arithmetic-functions-and-dirichlet-convolution`
+must require Complex Analysis A page `bloch-schottky-and-picard`, never its B
+companion. This Phase-3 page-edge cutover uses an existing published supplier
+and creates no planned Complex Analysis item or Phase-2 root.
+
+## J. Real Analysis reconciliation (2026-09-08)
+
+Move the trigonometric prerequisites from the published CA-8 and CA-13 B-page
+requirements to their A companions, then retain the singleton-A B rule already
+specified in §C. The moved published A suppliers are
+`the-complex-exponential-and-eulers-formula` and
+`sine-cosine-and-the-definition-of-pi` for CA-8, and the complex-exponential
+page for CA-13. This is a Phase-3 page-edge repair with no new CA supplier.
+
+## K. Scheme Theory reconciliation (2026-09-08)
+
+Delete `holomorphic-inverse-and-weierstrass-preparation` from published Scheme
+AV-12's page requirements and replace its item-level use of
+`def-noetherian-ring-and-module` by Algebra's published
+`def-noetherian-ring`. The bad Complex Analysis supplier has exactly one direct
+Scheme consumer, `def-locally-noetherian-and-noetherian-scheme`, and no further
+Scheme impact. Preserve the two planned AV-21 consumers already recorded in
+the Complex Analysis binding. These amendments create no Complex Analysis
+Phase-2 root.
+
+## L. Topology reconciliation (2026-09-08)
+
+The stable Topology supplier pair is
+`classification-of-compact-connected-surfaces` /
+`classification-of-compact-connected-surfaces-examples`. Its A page must
+follow `smooth-manifolds-and-smooth-maps`,
+`simplicial-subdivision-and-simplicial-approximation`,
+`cw-complexes-and-cellular-homology`,
+`orientations-poincare-lefschetz-and-alexander-duality`, and
+`the-fundamental-group`; its B is a leaf. It directly supplies only planned
+CA-RS-1 and CA-RS-3 items already enumerated in §C, with zero published
+impact. The pair remains build-held until the two prose-only Algebraic
+Topology suppliers are complete and earlier.
+
+## M. Binding machine-actionable enrichment splice (2026-09-08)
+
+This section supersedes the no-order and splice-blocker language in the
+earlier enrichment introduction and in §§F and H. Every external supplier in
+§E now has a canonical A-page object in the live plan. Orders 831--870 are
+unused and lie strictly after the current maximum order 830. The following is
+the exact future-plan splice. The requirements of each A page are exactly the
+direct set in §E, with every relative label there expanded to the A-page id in
+this table. No additional prerequisite may be inferred from the old prose.
+
+For every row, the B id is the A id followed by `-examples`; its exact title is
+the A title followed by `: Examples and Counterexamples`; the A and B
+`companion` fields point to one another; the B `requires` array is the
+singleton A id. Category is `complex-analysis` throughout.
+
+| label | A order | B order | A id | exact A title |
+|---|---:|---:|---|---|
+| CA-HM-1 | 831 | 832 | `green-functions-harmonic-measure-and-conformal-invariance` | Green Functions, Harmonic Measure, and Conformal Invariance |
+| CA-PT-1 | 833 | 834 | `logarithmic-potential-capacity-and-riesz-decomposition` | Logarithmic Potential, Capacity, and Riesz Decomposition |
+| CA-HP-1 | 835 | 836 | `harmonic-hardy-classes-and-fatou-boundary-limits` | Harmonic Hardy Classes and Fatou Boundary Limits |
+| CA-HP-2 | 837 | 838 | `analytic-hardy-spaces-and-canonical-factorisation` | Analytic Hardy Spaces and Canonical Factorisation |
+| CA-NV-1 | 839 | 840 | `jensen-theory-and-nevanlinnas-first-main-theorem` | Jensen Theory and Nevanlinna's First Main Theorem |
+| CA-NV-2 | 841 | 842 | `nevanlinna-second-main-theorem-and-defects` | Nevanlinna's Second Main Theorem and Defects |
+| CA-RS-1 | 843 | 844 | `riemann-surfaces-branched-maps-and-differentials` | Riemann Surfaces, Branched Maps, and Differentials |
+| CA-EF-1 | 845 | 846 | `elliptic-functions-and-complex-tori` | Elliptic Functions and Complex Tori |
+| CA-MF-1 | 847 | 848 | `level-one-modular-forms-and-the-j-invariant` | Level-One Modular Forms and the j-Invariant |
+| SC-5 | 849 | 850 | `the-dbar-complex-and-integral-solutions` | The Dolbeault Complex and Integral Solutions |
+| CA-RS-H | 851 | 852 | `hodge-theory-on-compact-riemann-surfaces` | Hodge Theory on Compact Riemann Surfaces |
+| CA-RS-2 | 853 | 854 | `divisors-riemann-roch-and-duality` | Divisors, Riemann--Roch, and Duality |
+| CA-RS-3 | 855 | 856 | `periods-jacobians-and-abel-jacobi-theory` | Periods, Jacobians, and Abel--Jacobi Theory |
+| CA-RS-4 | 857 | 858 | `hyperbolic-riemann-surfaces-and-uniformization` | Hyperbolic Riemann Surfaces and Uniformization |
+| CA-QC-1 | 859 | 860 | `extremal-length-and-planar-quasiconformality` | Extremal Length and Planar Quasiconformality |
+| CA-QC-2 | 861 | 862 | `beltrami-equation-and-measurable-riemann-mapping` | The Beltrami Equation and Measurable Riemann Mapping |
+| CA-QC-3 | 863 | 864 | `quasisymmetry-welding-and-conformal-removability` | Quasisymmetry, Welding, and Conformal Removability |
+| SC-6 | 865 | 866 | `hormander-estimates-and-the-levi-problem` | Hörmander Estimates and the Levi Problem |
+| SC-7 | 867 | 868 | `bergman-and-szego-kernels` | Bergman and Szegő Kernels |
+| SC-8 | 869 | 870 | `analytic-hypersurfaces-and-local-parametrisation` | Analytic Hypersurfaces and Local Parametrisation |
+
+### M.1 Exact A inventories and title rule
+
+The existing A inventory table under each of the nineteen original enrichment
+headings is binding in printed order. Its `kind` column expands as `def` ->
+`definition`, `thm` -> `theorem`, `lem` -> `lemma`, and `cor` -> `corollary`;
+its one-line-statement cell is the exact plan title. Apply these five changes,
+which are the only exceptions:
+
+1. CA-PT-1 inserts
+   `lem-logarithmic-energy-of-a-zero-mass-signed-measure-is-nonnegative`
+   (lemma; title “Zero-mass logarithmic energy is nonnegative, with equality
+   only for the zero measure”) immediately before equilibrium-measure
+   uniqueness.
+2. CA-NV-2 inserts `thm-local-second-main-theorem-on-a-punctured-disc`
+   (theorem; title “The local Second Main Theorem on a punctured disc”)
+   immediately before `cor-nevanlinna-picard-theorems`.
+3. Remove `def-holomorphic-line-bundle-and-meromorphic-section-riemann-surface`
+   from CA-RS-2 and place it first on CA-RS-H, preserving the exact title
+   “Holomorphic line bundles and meromorphic sections on a Riemann surface”.
+4. CA-RS-4 inserts, in this order before its uniformization theorem,
+   `lem-riemann-surface-structure-lifts-uniquely-to-a-covering-surface`,
+   `lem-deck-transformations-of-a-riemann-surface-cover-are-holomorphic`,
+   `lem-green-exhaustion-produces-a-nonconstant-bounded-holomorphic-function`,
+   and
+   `lem-simply-connected-riemann-surface-parabolic-hyperbolic-alternative`.
+   Their exact titles are obtained by replacing hyphens after the kind prefix
+   by spaces and capitalising the first word; no other normalization is made.
+5. CA-RS-H has this complete twelve-item A inventory in proof order:
+   `def-holomorphic-line-bundle-and-meromorphic-section-riemann-surface`;
+   `def-hermitian-metric-and-ltwo-pairing-on-a-compact-riemann-surface`;
+   `thm-chern-connection-of-a-hermitian-holomorphic-line-bundle`;
+   `def-maximal-dbar-operator-and-hilbert-adjoint-on-a-compact-riemann-surface`;
+   `lem-dbar-adjoint-and-dolbeault-laplacian-local-formulas`;
+   `thm-garding-estimate-for-the-dolbeault-laplacian-on-a-compact-riemann-surface`;
+   `lem-dolbeault-green-operator-is-compact-on-the-orthogonal-complement-of-the-kernel`;
+   `thm-dolbeault-laplacian-has-finite-dimensional-kernel-and-closed-range`;
+   `thm-elliptic-regularity-for-dolbeault-harmonic-forms`;
+   `thm-hodge-decomposition-for-dolbeault-forms-on-a-compact-riemann-surface`;
+   `cor-dolbeault-cohomology-of-a-compact-riemann-surface-is-finite-dimensional`;
+   `thm-harmonic-star-duality-for-line-bundle-valued-dolbeault-cohomology`.
+   For items 2--12 the exact plan title is obtained by the same mechanical
+   prefix-removal, hyphen-to-space, first-word-capitalisation rule.
+
+The final A-item counts in table order are respectively
+`10, 13, 7, 12, 7, 8, 10, 12, 12, 10, 12, 16, 9, 10, 11, 5, 8, 9, 9, 10`:
+exactly **200 distinct A item ids**.
+
+### M.2 Exact B inventories
+
+Every following list is in binding display order. Each B item has kind
+`example`, except an id beginning `cex-`, which has kind `counterexample`.
+Its exact plan title is obtained mechanically by removing that prefix,
+replacing hyphens by spaces, and capitalising the first word. This rule is
+part of the splice and leaves no editorial title choice.
+
+- CA-HM-1: `ex-harmonic-measure-disc-and-half-plane-densities`;
+  `ex-harmonic-measure-of-an-interval-in-the-upper-half-plane`;
+  `ex-green-function-annulus-by-series`;
+  `ex-green-function-disc-with-nonzero-pole`;
+  `ex-green-function-on-a-slit-domain-by-conformal-transport`;
+  `cex-green-function-pointwise-boundary-limit-at-an-irregular-puncture`.
+- CA-PT-1: `ex-logarithmic-capacity-of-disc-and-interval`;
+  `ex-equilibrium-measure-of-a-circle`; `ex-finite-and-countable-polar-sets`;
+  `ex-cantor-sets-with-zero-and-positive-capacity`;
+  `ex-riesz-measure-of-log-modulus-is-zero-divisor`;
+  `ex-green-function-from-an-equilibrium-measure`.
+- CA-HP-1: `ex-poisson-extension-of-an-indicator-arc`;
+  `ex-poisson-kernel-as-boundary-point-mass`;
+  `ex-radial-and-nontangential-approach-regions`;
+  `ex-poisson-lp-norm-contraction`;
+  `ex-boundary-data-with-no-limit-at-a-prescribed-point`;
+  `cex-harmonic-hardy-one-boundary-measure-need-not-have-l1-density`.
+- CA-HP-2: `ex-finite-and-infinite-blaschke-products`;
+  `ex-singular-inner-function-from-a-point-mass`;
+  `ex-outer-function-with-prescribed-positive-boundary-modulus`;
+  `cex-zero-sequence-with-divergent-blaschke-sum`;
+  `ex-factorisation-of-a-rational-inner-function`;
+  `ex-hardy-boundary-uniqueness`.
+- CA-NV-1: `ex-nevanlinna-characteristics-of-elementary-functions`;
+  `ex-nevanlinna-regularisation-when-f-zero-equals-a`;
+  `ex-poisson-jensen-with-a-repeated-zero`;
+  `ex-nevanlinna-characteristic-under-target-mobius-map`;
+  `ex-rational-degree-as-logarithmic-characteristic`.
+- CA-NV-2: `ex-nevanlinna-omitted-values-of-exponential`;
+  `ex-nevanlinna-deficiencies-of-elementary-functions`;
+  `ex-truncated-versus-full-nevanlinna-counting`;
+  `cex-nevanlinna-error-bound-without-exceptional-radii`;
+  `ex-sharpness-of-nevanlinna-q-minus-two`;
+  `ex-nevanlinna-and-normal-family-picard-proofs`.
+- CA-RS-1: `ex-basic-riemann-surface-atlases`;
+  `ex-nonsingular-algebraic-curve-charts`;
+  `ex-ramification-of-power-and-hyperelliptic-maps`;
+  `ex-coordinate-invariance-of-orders-and-residues`;
+  `ex-riemann-hurwitz-computations`.
+- CA-EF-1: `ex-square-and-hexagonal-complex-lattices`;
+  `ex-oriented-lattice-bases-and-sl2z`;
+  `ex-boundary-free-fundamental-parallelogram`;
+  `ex-weierstrass-p-at-half-periods`;
+  `ex-weierstrass-addition-and-duplication-formulas`;
+  `ex-weierstrass-sigma-simple-lattice-zeros`;
+  `cex-singular-weierstrass-cubic-when-discriminant-vanishes`.
+- CA-MF-1: `ex-standard-fundamental-domain-tessellation`;
+  `ex-modular-elliptic-points-and-stabilizers`;
+  `ex-fourier-coefficients-e4-e6-delta-and-j`;
+  `ex-odd-weight-level-one-modular-form-vanishing`;
+  `ex-j-invariants-of-square-and-hexagonal-tori`;
+  `ex-modular-lambda-slit-domain-map`;
+  `cex-e2-is-not-a-level-one-modular-form`.
+- CA-RS-H: `ex-flat-torus-dolbeault-harmonic-representatives`;
+  `ex-dolbeault-h-zero-one-of-the-riemann-sphere-vanishes`;
+  `ex-dolbeault-cohomology-is-independent-of-hermitian-metric`;
+  `ex-nonharmonic-exact-dbar-form`;
+  `ex-one-dimensional-constant-zero-mode-of-dolbeault-laplacian`.
+
+- CA-RS-2: `ex-divisors-on-sphere-and-complex-torus`;
+  `ex-canonical-divisor-of-a-hyperelliptic-surface`;
+  `ex-low-degree-riemann-roch-computations`;
+  `ex-principal-parts-obstruction-from-residue-pairing`;
+  `ex-linear-systems-on-the-riemann-sphere`.
+- CA-RS-3: `ex-period-lattice-of-a-complex-torus`;
+  `ex-symplectic-homology-basis-of-a-compact-surface`;
+  `ex-genus-two-period-matrix`;
+  `ex-abel-jacobi-base-point-cancellation-degree-zero-divisors`;
+  `ex-abel-theorem-principal-divisor-test`;
+  `ex-abel-image-inside-its-jacobian`.
+- CA-RS-4: `ex-poincare-disc-and-half-plane-distance-geodesics`;
+  `ex-annulus-and-punctured-disc-universal-covers`;
+  `ex-complex-torus-deck-transformation-group`;
+  `ex-cocompact-fuchsian-surface`;
+  `ex-three-simply-connected-riemann-surface-models-inequivalent`.
+- CA-QC-1: `ex-extremal-length-of-rectangle-and-annulus`;
+  `ex-punctured-disc-versus-finite-annulus-modulus`;
+  `ex-affine-quasiconformal-ellipse-map`;
+  `ex-radial-stretch-quasiconformal-map`;
+  `ex-quasiconformal-composition-dilatation-bound`;
+  `ex-modulus-obstruction-to-quasiconformal-equivalence`;
+  `ex-beltrami-coefficient-of-an-inverse-map`;
+  `cex-orientation-reversing-homeomorphism-is-quasiconformal`.
+- CA-QC-2: `ex-constant-beltrami-coefficient-affine-solution`;
+  `ex-piecewise-affine-beltrami-approximation`;
+  `ex-normalizing-a-beltrami-solution-by-a-mobius-map`;
+  `ex-pullback-of-a-measurable-ellipse-field`;
+  `cex-beltrami-solution-unique-without-three-point-normalization`.
+- CA-QC-3: `ex-quasisymmetric-power-map-on-the-circle`;
+  `ex-snowflake-quasicircle`; `ex-conformal-welding-of-the-round-circle`;
+  `ex-mobius-ambiguity-in-conformal-welding`;
+  `cex-every-compact-set-is-conformally-removable`;
+  `ex-single-point-conformal-removability`.
+- SC-5: `ex-dbar-on-elementary-functions-and-forms`;
+  `ex-cauchy-pompeiu-for-compactly-supported-function`;
+  `ex-bochner-martinelli-formula-on-a-ball`;
+  `ex-solving-a-polynomial-dbar-one-form`;
+  `cex-nonclosed-dbar-form-has-no-local-solution`;
+  `ex-dbar-cutoff-proof-of-hartogs-extension`.
+- SC-6: `ex-hormander-estimate-with-gaussian-weight`;
+  `ex-levi-form-of-the-unit-ball`;
+  `ex-explicit-dbar-solution-with-l2-estimate`;
+  `ex-strictly-psh-exhaustion-of-a-convex-domain`;
+  `ex-pseudoconvexity-of-a-hartogs-domain`;
+  `ex-first-cousin-gluing-on-a-pseudoconvex-domain`.
+- SC-7: `ex-bergman-kernel-from-orthonormal-monomials`;
+  `ex-disc-and-ball-bergman-reproducing-formulas`;
+  `ex-bergman-kernel-biholomorphic-transport`;
+  `ex-bergman-and-szego-normalizations-on-the-disc`;
+  `ex-unbounded-domain-with-trivial-bergman-space`;
+  `ex-polydisc-bergman-product-versus-distinguished-boundary-hardy-kernel`;
+  `ex-szego-kernel-smooth-boundary-limitation`;
+  `cex-ball-and-polydisc-are-biholomorphic`.
+- SC-8: `ex-node-cusp-and-crossing-hypersurface-germs`;
+  `ex-regular-complex-hyperplanes`;
+  `ex-nonreduced-equation-with-same-zero-set`;
+  `ex-finite-projection-and-branch-locus`;
+  `ex-puiseux-parametrisation-y-squared-equals-x-cubed`;
+  `ex-puiseux-parametrisation-y-squared-equals-x-fifth`;
+  `cex-arbitrary-analytic-sets-follow-from-hypersurface-proof`.
+
+These are exactly **121 distinct B item ids**. No B item is a dependency
+target.
+
+### M.3 Phase and source classification
+
+For each of the 321 planned item ids, direct currently published consumers are
+**0** and the complete transitive currently published consumer closure is
+**0**. Every pair is planned-only enrichment and is **not Phase-2 eligible**.
+The splice changes future plan structure only; all published Phase-3 changes
+in §§C--D remain unapplied.
+
+The full-text corpus and exact locators under “Full texts obtained”, the two
+heading-disposition sections, and the Pair-backing matrix remain binding.
+CA-RS-H is independently covered by McMullen, *Riemann Surfaces*, Theorem 9.12
+and Chapters 16--17, and Demailly, *Complex Analytic and Differential
+Geometry*, Chapter VI §§1--5, at the complete author-PDF endpoints in §H. Its
+five B items are elementary specialisations of that A-page theory and cannot
+be cited. No unfamiliar or unsupported theorem was added, and there is no
+full-text blocker.
+
+### M.4 Integration validation contract
+
+Before applying the splice, recheck all 40 page ids, all 321 item ids, and
+orders 831--870 against the then-live repository. Acceptance requires 20
+reciprocal A/B companion pairs, singleton B requirements, B reverse degree
+zero, adequate strictly earlier A-only direct requirements, and an acyclic
+prospective page graph. The A inventories must contain exactly 200 distinct
+ids and the B inventories exactly 121. No published page or item is modified
+by this future-plan integration.
