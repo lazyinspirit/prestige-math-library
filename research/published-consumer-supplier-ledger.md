@@ -343,6 +343,10 @@ in Phase 2. New earlier A/B pair
 `lem-uniform-filling-data-give-a-uniform-slimness-bound` to
 `lem-linear-isoperimetry-implies-uniformly-thin-geodesic-bigons` and
 `thm-quantitative-hyperbolic-geometry-toolkit`. All are planned/unpublished.
+HG-P is selected for `phase-2-hg-prerequisite` (one pair, one batch), whose
+planning and doctor checks passed on 2026-09-09. Selection is not proof or
+publication evidence; HG and published consumer repairs still wait on its
+accepted, published suppliers.
 Its 12-A/3-B prose inventory includes the ultralimit metric, full non-tree
 cone extraction, area-controlled disk construction, planar minsize inequality
 and uniform-constant proof. These are explicit future proof gates, not
@@ -350,8 +354,10 @@ already certified prerequisites. No published consumer is marked repaired
 by this deferral. Retain the complete HG consumer map below: its Phase-3
 repairs must wait for HG-P, then HG, in that order. HG-LOCAL-THRESHOLD is
 repaired in the preserved scaffold by Delta>=max(3,2*delta), with explicit
-vertex bracketing and based-subword shortening. Phase-2 census: 143 pairs;
-19 active and 124 queued. Receipt: `phase-2-escalation-repairs-2026-09-08.md`.
+vertex bracketing and based-subword shortening. Current Phase-2 census: 146
+pairs; 19 completed builds awaiting publication, one selected prerequisite
+pair, and 126 other obligations. Historical deferral receipt:
+`phase-2-escalation-repairs-2026-09-08.md`.
 
 ### Phase-2 completion checks for this ledger
 
@@ -16515,23 +16521,23 @@ Limitations: Bounded item-and-used-interface scan; not whole-library certificati
 
 This index retains the **2185 distinct published item IDs in the initial
 classification reference pool**, plus **5 newly identified published supplier
-items from U-C19** and **1 new 6c remark finding**, for **2191 indexed items**. It is not a census of defective items or a
+items from U-C19**, **1 new 6c remark finding**, and **1 Step-9 repaired definition**, for **2192 indexed items**. It is not a census of defective items or a
 claim that every supplier later cited by an audit is a defect candidate.
-The publication snapshot has 15014 items; 12823 are outside this expanded pool and
+The publication snapshot has 15014 items; 12822 are outside this expanded pool and
 still require census reconciliation. The initial extraction also contained
 787 planned, draft, absent or noncanonical IDs, not published targets.
 Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1704 | Evidence/role reconciliation incomplete; not a defect verdict. |
-| U-C | Unaudited and confirmed defective items | 6 | Confirmed mathematical or prerequisite defect; repair audit pending. |
-| A-R | Audited and repaired items | 71 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
+| U-P | Unaudited and potentially defective items | 1702 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-C | Unaudited and confirmed defective items | 5 | Confirmed mathematical or prerequisite defect; repair audit pending. |
+| A-R | Audited and repaired items | 74 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 127 | Recorded direct review and an unresolved item-specific repair. |
 
-283 further reference-pool items have bounded no-repair-needed dispositions
+284 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1908 items and the expanded reference pool contains 2191 unique items.
+1908 items and the expanded reference pool contains 2192 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -16590,6 +16596,17 @@ The separate page-header cutover obligations remain in their category sections.
 
 ### Bounded no-repair-needed dispositions
 
+Root review on 2026-09-09: the cube-map counterexample's full body and all nine
+declared supplier interfaces were read. Its smoothness follows by successive
+power derivatives; nonnegative cube roots and oddness give surjectivity;
+monotonicity gives injectivity; the interval inverse theorem gives openness;
+the chain rule at zero contradicts differentiability of the inverse. Domain,
+root-sign and limit-point hypotheses match. These finite arguments need no
+AC. The prior §9.4 entry inventories its use by two published false statements,
+not a defect in the counterexample. This review establishes no Phase-2 or
+Phase-3 repair need for this item; supplier proofs and the full transitive
+closure were not audited.
+
 Each row closes only its recorded scan or impact-review scope, not an
 independent transitive-closure audit. None is counted as repaired. The two
 original Noetherian follow-up rows retain their narrower scope; U-P300 rows
@@ -16599,6 +16616,7 @@ owner's scan policy.
 
 | Published item | Scope and evidence |
 |---|---|
+| `cex-a-c-one-bijection-of-the-line-that-is-not-a-diffeomorphism` | Root full-item/direct-interface review, 2026-09-09, described above. All nine declared suppliers are published and adequate for their uses. No repair or new prerequisite needed; the earlier §9.4 mention was supplier-only. No independent judge or full transitive audit. |
 | `thm-cesaro-mean-theorem` | U-P300 Sol 2: Free of defects within item/dependency-interface scan; no repair. Full findings, exact suppliers, sources and strategy in U-P300 scan evidence above. |
 | `thm-completeness-equivalences` | U-P300 Sol 2: Free of defects within item/dependency-interface scan; no repair. Full findings, exact suppliers, sources and strategy in U-P300 scan evidence above. |
 | `lem-transitive-subgroups-of-s-four-and-the-resolvent-action` | U-P300 Sol 1: Free of defects within item/dependency-interface scan; no repair. Full findings, exact suppliers, sources and strategy in U-P300 scan evidence above. |
@@ -17029,7 +17047,6 @@ The later U-P300 scan’s 19 findings have all completed repair audit (7 A-R, 12
 
 | Published item | Exact prerequisite debt at classification |
 |---|---|
-| `cex-evt-fails-on-the-open-interval-and-on-the-half-line` | 6c bounded impact review: final Remark falsely generalizes x^2 nonuniform continuity to an arbitrary unbounded closed set. On Z every function is uniformly continuous (delta=1). Main identity counterexample remains valid. Local repair: restrict the Remark to the displayed half-line [0,infinity), or R; no Phase-2 supplier needed. Repair audit pending. |
 | `rem-onan-scott-eight-type-and-five-type-conventions` | U-C19 additional supplier finding; LPS coarse III(a) contains HS/SD, while III(b) contains HC/CD/PA; the published remark puts HC/CD in the wrong branch. Exact convention repair is separate from proving the classification theorem. See uc19-astra-agent-2.md. |
 | `def-affine-almost-simple-diagonal-product-action-and-twisted-wreath-types` | U-C19 additional supplier finding; TW definition lacks the exact construction/hypotheses required by the cited LPS five-type theorem. Correct faithful top action, inducing homomorphism, function group and unique regular socle; unresolved Schreier-related classification proof boundary remains explicit. See uc19-astra-agent-2.md. |
 | `thm-diagram-area-agrees-with-algebraic-relator-area` | U-C19 additional supplier finding; Area equality inherits the incompatible whiskered-diagram model. Reconcile both directions and free cancellations after the toolkit labelled-diagram/existence/minimality suppliers publish. Prior adequate-interface prose is superseded by this specific finding. See uc19-astra-agent-1.md. |
@@ -17040,6 +17057,9 @@ The later U-P300 scan’s 19 findings have all completed repair audit (7 A-R, 12
 
 | Published item | Repair evidence and scope |
 |---|---|
+| `cex-evt-fails-on-the-open-interval-and-on-the-half-line` | Root repaired the final Remark on 2026-09-09 after reading the entire item, the current compactness-converse theorem and the x-squared counterexample. Replaced the false arbitrary-unbounded-closed-set claim with the displayed half-line: choose n>1/delta by existing published `thm-of-archimedean`; points n,n+1/n have gap below delta and square-value gap 2+1/n²>2. Added the integer-domain boundary and explained the identity's uniform continuity. Main EVT proof is unchanged and was directly reviewed. Existing ordered-field and Archimedean suppliers suffice; no Phase-2 supplier or Phase-3 repair remains for this finding. Targeted precheck/rendercheck and diff checks passed. Removed the obsolete judge stamp and recorded local verification, without a new judge or exhaustive dependency audit. |
+| `def-uniform-continuity-real` | Step-9 Remark repair, defect `phase-2-wave-1-impact-close-ac-001`, committed in `3a3ced783`. The extension Remark now explicitly assumes AC from published `def-axiom-of-choice` when invoking published `cor-continuous-extension-from-a-dense-subset-r`. The definition and uniform-implies-continuity argument remain choice-free. Root reread the complete item: the empty-domain boundary is locally immediate, since the closure of the empty set is empty and the empty function is its unique extension, with uniform continuity vacuous. No extra supplier or Phase-3 repair is needed for this finding. Terra accepted the current context at 2026-09-08T17:28:59.331Z in `phase-2-wave-1-judge.jsonl`; Step-9 closure/stamps passed. This is a new indexed repair target, not a claim of exhaustive transitive review. |
+| `cex-one-over-x-is-not-uniformly-continuous-on-the-unit-interval` | Step-9 Remark repair, defect `phase-2-wave-1-impact-close-ac-002`, committed in `3a3ced783`. The alternative extension argument now explicitly assumes AC. Direct epsilon–delta proof remains choice-free. Published suppliers `cor-continuous-extension-from-a-dense-subset-r`, `cor-boundedness-theorem-r`, and `def-axiom-of-choice` suffice; no Phase-2 supplier or Phase-3 repair remains for this finding. Terra accepted the current context at 2026-09-08T17:28:56.674Z in `phase-2-wave-1-judge.jsonl`; Step-9 closure/stamps passed. Root reread the complete item and reconciled the earlier §9.4 supplier-only mention; that mention is not a separate defect. This closes the identified Remark defect, not an exhaustive transitive audit. |
 | `fs-recursively-enumerable-trivial-words-form-a-decision-algorithm` | U-C19 Astra 2: A-R. See item-specific repair evidence above and uc19-astra-agent-2.md. |
 | `fs-onan-scott-is-the-classification-of-finite-simple-groups` | U-C19 Astra 2: A-R. See item-specific repair evidence above and uc19-astra-agent-2.md. |
 | `prop-two-transitive-groups-have-affine-or-almost-simple-socle-type` | U-C19 Astra 2: A-R. See item-specific repair evidence above and uc19-astra-agent-2.md. |
@@ -17116,7 +17136,6 @@ The later U-P300 scan’s 19 findings have all completed repair audit (7 A-R, 12
 
 | Published item | Existing evidence section / reconciliation locator |
 |---|---|
-| `cex-a-c-one-bijection-of-the-line-that-is-not-a-diffeomorphism` | 9.4 Published B-item suppliers: exact repair ledger |
 | `cex-a-category-that-is-not-well-powered` | 7.5 Cross-category ownership seams |
 | `cex-a-complete-category-whose-coseparating-sets-are-never-small` | 7.5 Cross-category ownership seams |
 | `cex-a-continuous-function-on-a-non-closed-subspace-with-no-extension` | 9.1 Live census and phase classification |
@@ -17194,7 +17213,6 @@ The later U-P300 scan’s 19 findings have all completed repair audit (7 A-R, 12
 | `cex-nonuniqueness-of-schur-covering-groups` | 30.7 Group-owned low-degree (co)homology Phase-2 supplier |
 | `cex-np-means-not-polynomial` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `cex-omega-one-has-no-at-most-countable-cofinal-subset` | 7.1 Recorded-Not-Proved closure and prose defects |
-| `cex-one-over-x-is-not-uniformly-continuous-on-the-unit-interval` | 9.4 Published B-item suppliers: exact repair ledger |
 | `cex-ordered-field-not-archimedean` | Step-3 scope intervention — actual suppliers versus page-wide debt |
 | `cex-paracompactness-is-not-open-hereditary` | Exact published B-supplier repair map |
 | `cex-peano-surface-linewise-minimum-without-an-extremum` | 9.6 Membership and plan drift |
@@ -18826,4 +18844,15 @@ The later U-P300 scan’s 19 findings have all completed repair audit (7 A-R, 12
 
 ## 6c post-6b impact review — 2026-09-09
 
-Root read all 13 current affected items and the changed extension, compactness-converse, localization and Greendlinger interfaces. Exact limited dispositions are in phase-2-wave-1-impact-6c.json. This is not an exhaustive proof audit or independent judgment. The new counterexample Remark defect is U-C above; it has no missing Phase-2 prerequisite. Two non-load-bearing extension Remarks (def-uniform-continuity-real and cex-one-over-x-is-not-uniformly-continuous-on-the-unit-interval) should explicitly carry the extension supplier’s AC qualification; the former also needs the trivial empty-domain branch if repeating the general statement. These are documentation/impact follow-ups, not confirmed defective main proofs or reasons to add AC to their choice-free arguments. No new Phase-2 pair is required.
+Follow-up after the local EVT counterexample repair: a repository body-link
+search found exactly three published referring items:
+`fs-evt-holds-on-every-bounded-domain`, `thm-extreme-value-r`, and
+`thm-compactness-is-necessary-for-evt-and-uniform-continuity`. Root read their
+complete current bodies and checked each reference to the repaired item.
+They use its unchanged nonattainment/unboundedness examples for orientation;
+none imports the incorrect arbitrary-closed-set uniform-continuity claim.
+No downstream repair or Phase-2 supplier was identified by this bounded
+impact check. Existing broader audit classifications are preserved; this is
+not a full dependency-closure audit of these three items.
+
+Root read all 13 current affected items and the changed extension, compactness-converse, localization and Greendlinger interfaces. Exact limited dispositions are in phase-2-wave-1-impact-6c.json. This is not an exhaustive proof audit or independent judgment. The counterexample Remark defect was subsequently repaired locally on 2026-09-09 and moved from U-C to A-R; its exact half-line proof and local checks are recorded above. The two extension-Remark follow-ups were repaired in Step 9 and passed fresh Terra judgments. Their exact defects, adequate published suppliers, and bounded A-R dispositions are in the classification index above. Root also checked the definition's empty-domain case: the empty function extends uniquely to the empty closure, and uniform continuity is vacuous. No repair adds AC to a choice-free main argument. No new Phase-2 pair is required.

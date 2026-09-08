@@ -1,6 +1,12 @@
 # Phase 2 A/B-pair build manifest
 
-Snapshot date: 2026-09-08.
+Snapshot date: 2026-09-09.
+
+Build checkpoint: `phase-2-wave-1` completed all engine stages and was committed
+as `3a3ced783`, then pushed to `origin/main`. Its 19 pairs remain draft pending
+owner publication. There are 127 other pair obligations. Next-run screening is
+recorded in `research/phase-2-next-run-screening-2026-09-09.md`; scheduling
+eligibility alone does not establish mathematical prerequisite closure.
 
 Current scope amendment: 19 pairs remain in `phase-2-wave-1`, in the same
 15 batches. The owner authorized deferring substantial prerequisite gaps.
@@ -90,7 +96,7 @@ change the active wave. The canonical ledger records their consumers.
 
 **Nineteen pairs remain selected in run `phase-2-wave-1`**, packed into fifteen
 batches. The HG deferral is an explicit owner-authorized scope amendment,
-not a scope waiver. The other 126 pair obligations are retained for later
+not a scope waiver. The other 127 pair obligations are retained for later
 dependency-ordered runs. Two waiting Functional Analysis pairs retain the
 full-text gates stated below; every added pair remains subject to the ordinary
 source and proof gates before publication.
@@ -105,13 +111,11 @@ needed for retirement. The exact distinction is recorded in
 This provisional inventory is neither a minimal-build claim nor a completed
 retirement plan.
 
-Execution checkpoint: at 10:44 UTC the engine resumed and completed Steps 3
-and 4; all fifteen Step-5 author batches are dispatched. The deliberately
-regenerated scope ledger retains its pinned
-baseline commit and owes exactly the 38 active pages listed below. No batch
-was renumbered, and no review verdict or runtime state was hand-edited.
-The new prerequisite is queued, not added to the active run. The normal
-Step-3/4 gates passed before authoring began.
+Execution checkpoint: all fifteen batches completed through `10-close-v2`.
+The controller exited normally at 17:49 UTC on 2026-09-08. Disk-recomputed
+status reports COMPLETE, with no workflow-owned blockers. All 38 selected
+pages remain subject to owner publication; completion does not license their
+use as published prerequisites. The deferred hyperbolic pair remains queued.
 
 No pair in this manifest may depend on a Recorded, Not Proved Here page or
 item. SET-20, SET-21, and SET-22 are now included as independently proved
@@ -193,7 +197,7 @@ supplier pair or its other outstanding consumers.
 | group-theory | D | selected: `phase-2-wave-1` | `small-cancellation-disc-diagrams-and-torsion-toolkit` |
 | group-theory | D | selected: `phase-2-wave-1` | `modular-traces-and-brauer-character-independence` |
 | group-theory | D | selected: `phase-2-wave-1` | `hall-malcev-coordinates-and-bass-guivarch-growth` |
-| group-theory | P | queued; full cone/filling/uniformity proof gates | `asymptotic-cones-and-the-sublinear-triangle-criterion` |
+| group-theory | P | selected: `phase-2-hg-prerequisite`; full cone/filling/uniformity proof gates | `asymptotic-cones-and-the-sublinear-triangle-criterion` |
 | group-theory | D | deferred from wave 1; waits for the cone/filling supplier | `quantitative-hyperbolic-geometry-toolkit` |
 | group-theory | D | selected: `phase-2-wave-1` | `group-homology-transfer-and-low-degree-exact-sequences` |
 | lie-theory | D | waiting | `finite-weyl-invariants-bruhat-and-kostant-harmonics` |
