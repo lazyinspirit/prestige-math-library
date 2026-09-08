@@ -2,7 +2,7 @@
 id: def-minimal-cyclic-power-diagram-and-relator-root
 kind: definition
 title: "Minimal cyclic power diagram and relator root"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sc-toolkit-symmetrised-relators-and-pieces, thm-sc-toolkit-van-kampen-existence, def-group-power, thm-well-ordering-principle]
 landmark: false
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

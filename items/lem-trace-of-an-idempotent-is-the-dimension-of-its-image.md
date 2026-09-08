@@ -2,7 +2,7 @@
 id: lem-trace-of-an-idempotent-is-the-dimension-of-its-image
 kind: lemma
 title: "The trace of an idempotent is its rank as a field scalar"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-wave-1
 deps: [def-trace-of-an-endomorphism, cor-idempotent-endomorphisms-are-diagonalisable-projections, thm-dimension-of-a-linear-subspace]
@@ -10,6 +10,7 @@ justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

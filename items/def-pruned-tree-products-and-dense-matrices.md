@@ -2,13 +2,14 @@
 id: def-pruned-tree-products-and-dense-matrices
 kind: definition
 title: "Finite products of pruned trees and dense matrices"
-status: draft
+status: published
 origin: pipeline
 deps: [def-set-theoretic-tree-and-levels]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

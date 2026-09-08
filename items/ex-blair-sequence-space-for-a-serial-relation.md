@@ -2,7 +2,7 @@
 id: ex-blair-sequence-space-for-a-serial-relation
 kind: example
 title: "Blair's sequence space for a serial relation"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-discrete-sequence-spaces-are-complete-in-zf, lem-serial-relation-successor-sets-are-open-dense, thm-complete-metric-baire-principle-implies-dependent-choice-over-zf]
 landmark: false
@@ -13,6 +13,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

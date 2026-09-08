@@ -10,9 +10,10 @@ sources:
     - title: Druţu–Kapovich, Geometric Group Theory (837-page edition)
       url: https://www.math.ucdavis.edu/~kapovich/EPR/ggt.pdf
       locator: Theorem 14.26 finite-kernel reduction, printed p.511; direct fiber-count proof
-status: draft
+status: published
 origin: pipeline
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-open-dense-and-closed-nowhere-dense-baire-forms-are-equivalent-in-zf
 kind: lemma
 title: "Open-dense and closed-nowhere-dense Baire forms are equivalent in ZF"
-status: draft
+status: published
 origin: pipeline
 deps: [def-complete-metric-baire-principle-over-zf, cor-distributive-and-de-morgan-laws-for-indexed-families, thm-metric-closure-characterisation, thm-metric-open-set-algebra, def-metric-interior-closure-boundary, def-metric-topology]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

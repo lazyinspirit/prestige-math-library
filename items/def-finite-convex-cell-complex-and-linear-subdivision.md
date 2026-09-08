@@ -2,7 +2,7 @@
 id: def-finite-convex-cell-complex-and-linear-subdivision
 kind: definition
 title: "Finite convex cell complex and linear subdivision"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-geometric-realization-of-an-abstract-simplicial-complex", "thm-heine-borel-rn", "lem-finite-simplicial-weak-topology-agrees-with-euclidean-topology"]
 justified_by: ["lem-intersections-of-finite-linear-complexes-form-a-convex-cell-complex"]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

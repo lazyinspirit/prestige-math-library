@@ -2,7 +2,7 @@
 id: ex-brauer-character-independence-for-s-three-in-characteristic-two
 kind: example
 title: "The Brauer table of S3 in characteristic two"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-irreducible-brauer-characters-are-linearly-independent-on-p-regular-elements, lem-modular-trace-depends-only-on-the-p-regular-part, def-lifted-modular-trace-on-p-regular-elements]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

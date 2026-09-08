@@ -2,13 +2,14 @@
 id: lem-bounded-borel-riemann-integrands-on-boxes-have-equal-lebesgue-integrals
 title: "Borel Darboux integrands in finite dimension"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-multidimensional-darboux-equals-riemann", "def-multidimensional-darboux-sums", "thm-lebesgue-measure-of-a-box-of-every-kind", "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null", "prop-order-and-scalar-rules-for-the-nonnegative-integral", "thm-linearity-of-the-lebesgue-integral-on-l-one", "def-integral-of-a-nonnegative-simple-function", "prop-the-nonnegative-integral-agrees-with-the-simple-integral"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

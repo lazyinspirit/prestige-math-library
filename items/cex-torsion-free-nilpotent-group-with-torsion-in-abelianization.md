@@ -6,6 +6,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: Druţu–Kapovich, Geometric Group Theory (837-page edition)
       url: https://www.math.ucdavis.edu/~kapovich/EPR/ggt.pdf
       locator: Remark 13.83(2), p.484
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["ex-bass-dimension-of-the-discrete-heisenberg-group", "lem-finite-lower-central-coordinate-systems-exist"]

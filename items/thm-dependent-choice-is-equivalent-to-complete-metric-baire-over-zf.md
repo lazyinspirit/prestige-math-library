@@ -2,7 +2,7 @@
 id: thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf
 kind: theorem
 title: "Dependent Choice is equivalent to the complete-metric Baire principle over ZF"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-serial-dependent-choice-implies-complete-metric-baire-over-zf, thm-complete-metric-baire-principle-implies-dependent-choice-over-zf]
 landmark: true
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
 sources:
   scraped: []

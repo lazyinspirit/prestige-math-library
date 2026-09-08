@@ -2,13 +2,14 @@
 id: lem-special-copy-trichotomy-produces-a-restricted-blockade
 kind: lemma
 title: "Special copy trichotomy produces a restricted blockade"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-good-copy-extension-count, lem-few-induced-copies-exclude-a-fixed-labelled-blowup, lem-local-special-copy-trichotomy, lem-qid-maximal-blowup-trichotomy, def-qid-restricted-blockade-with-empty-blocks, thm-logarithm-change-of-base, thm-real-power-laws, lem-integer-part]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

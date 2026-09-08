@@ -2,13 +2,14 @@
 id: lem-club-tree-coding-antichain-reflection
 kind: lemma
 title: "A club of correctly coded maximal-antichain restrictions"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-closure-points-on-regular-cardinals, lem-tree-predecessors-and-common-extensions, thm-small-intersections-of-clubs, thm-countable-subsets-of-omega-one-are-bounded, cor-cardinal-absorption, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

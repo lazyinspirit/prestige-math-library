@@ -1,7 +1,7 @@
 ---
 page: "galois-orbits-and-descent-of-simple-finite-group-modules-examples"
 title: "Galois Orbits and Descent of Simple Finite-Group Modules: Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-galois-descent-for-the-two-nontrivial-characters-of-c-three", "ex-the-rational-simple-block-of-the-quaternion-group", "cex-a-galois-stable-character-need-not-have-schur-index-one"]
 ---

@@ -2,7 +2,7 @@
 id: thm-complex-holder-minkowski-and-the-quotient-norm
 kind: theorem
 title: "Complex Holder, Minkowski, and the quotient norm"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps: [def-complex-lp-and-euclidean-test-function-conventions, lem-complex-conjugation-and-modulus-laws, thm-holder-inequality-for-integrals, thm-minkowski-inequality-for-integrals, thm-integral-triangle-inequality, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, thm-the-lebesgue-integral-respects-almost-everywhere-equality, prop-order-and-scalar-rules-for-the-nonnegative-integral, def-essential-supremum-with-respect-to-a-measure, thm-finite-and-countable-subadditivity-of-measures]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Reduce to real inequalities for moduli and prove quotient and endpoint assertions directly."
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

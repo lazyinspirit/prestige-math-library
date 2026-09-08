@@ -2,7 +2,7 @@
 id: thm-finite-simplicial-approximation-for-maps-of-pairs
 kind: theorem
 title: "Finite simplicial approximation for maps of pairs"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-barycentric-subdivision-realizes-homeomorphically", "lem-mesh-of-iterated-simplicial-barycentric-subdivision-tends-to-zero", "lem-the-open-star-criterion-produces-a-simplicial-map", "thm-lebesgue-number-lemma"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-low-degree-filtration-sequence-for-a-first-quadrant-bicomplex
 kind: lemma
 title: "The low-degree filtration sequence of a first-quadrant bicomplex"
-status: draft
+status: published
 origin: pipeline
 deps: [def-chain-complex-in-an-abelian-category, def-homology-object-of-a-chain-complex]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

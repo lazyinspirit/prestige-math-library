@@ -13,9 +13,10 @@ sources:
     - title: Michael Brussel, Finitely Generated Modules over a PID
       url: https://content-calpoly-edu.s3.amazonaws.com/math/1/images/FG%20Modules%20Over%20A%20PID.pdf
       locator: Theorem 1.0.1, p.3; Theorem 2.1.2, pp.4–5, Euclidean branch; section 3.2, p.8. Rank invariance via Hom(-,Q) is proved locally.
-status: draft
+status: published
 origin: pipeline
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

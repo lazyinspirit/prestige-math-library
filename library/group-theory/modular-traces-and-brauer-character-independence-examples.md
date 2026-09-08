@@ -1,7 +1,7 @@
 ---
 page: modular-traces-and-brauer-character-independence-examples
 title: "Modular Traces and Brauer-Character Independence: Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-modular-traces-for-a-cyclic-p-prime-group", "ex-brauer-character-independence-for-s-three-in-characteristic-two", "cex-ordinary-traces-on-p-singular-elements-do-not-define-brauer-characters"]
 ---

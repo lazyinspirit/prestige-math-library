@@ -2,13 +2,14 @@
 id: def-induced-copy-density-and-homogeneous-restriction-parameter
 kind: definition
 title: "Induced copy density and homogeneous restriction parameter"
-status: draft
+status: published
 origin: pipeline
 deps: [def-induced-copy-number, def-induced-embedding-and-induced-copy, def-edge-density-between-vertex-sets, thm-two-element-subsets-count, cor-cardinality-of-the-power-set]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

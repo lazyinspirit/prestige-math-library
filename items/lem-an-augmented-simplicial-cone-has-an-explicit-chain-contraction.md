@@ -2,7 +2,7 @@
 id: lem-an-augmented-simplicial-cone-has-an-explicit-chain-contraction
 kind: lemma
 title: "An augmented simplicial cone has an explicit chain contraction"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-simplicial-chain-groups-and-boundary", "def-augmentation-and-reduced-simplicial-homology", "def-contractible-complex", "def-abstract-simplicial-complex", "def-barycentric-subdivision-of-an-abstract-simplicial-complex"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -49,4 +50,3 @@ interpreting a repeated vertex as zero. Then $\partial h+h\partial=1$ in every d
 2.1 If $a=v_j$, then $h(s)=0$. In $h\partial s$ all terms except deletion of $v_j$ repeat $a$ and vanish. The remaining term is $(-1)^j[a,v_0,\ldots,\widehat v_j,\ldots,v_n]=s$, because moving $a$ back to position $j$ contributes another $(-1)^j$. In degree zero this says $\partial[a,v]+[a]=[v]$ for $v\ne a$, and $0+[a]=[a]$ for $v=a$. In degree $-1$, $\partial h(1)=\partial[a]=1$. Thus the identity holds on all generators and hence all chains. [F1, F2, step 1.1]
 
 3.1 The identity $1=\partial h+h\partial$ is a null homotopy of the identity, hence contractibility. A chain of faces of a nonempty full simplex can always be enlarged by the maximal face; thus its order complex, as defined in [[def-barycentric-subdivision-of-an-abstract-simplicial-complex]], is a cone with that face as specified apex, and the same calculation applies. [F3, step 2.1] ∎
-

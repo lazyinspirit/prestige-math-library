@@ -2,7 +2,7 @@
 id: lem-bounded-rational-tree-limit-extension
 kind: lemma
 title: "Rational bounds at countable limit levels"
-status: draft
+status: published
 origin: pipeline
 deps: [def-normal-splitting-set-theoretic-tree, lem-tree-predecessors-and-common-extensions, thm-rationals-countable, thm-product-of-countable, thm-rat-ordered-field, thm-recursion]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://karagila.org/files/set-theory-2017.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

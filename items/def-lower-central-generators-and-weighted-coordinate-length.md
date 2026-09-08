@@ -6,6 +6,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: Druţu–Kapovich, Geometric Group Theory (837-page edition)
       url: https://www.math.ucdavis.edu/~kapovich/EPR/ggt.pdf
       locator: Definitions 14.18–14.19 and Proposition 14.25, printed pp.504–505,510–511
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-lower-central-quotients-of-finitely-generated-nilpotent-groups-are-finitely-generated-abelian", "def-bass-guivarch-dimension", "def-word-length-with-respect-to-a-generating-set", "lem-hall-malcev-integer-abelian-structure-and-rank"]
 justified_by: ["lem-finite-lower-central-coordinate-systems-exist"]

@@ -2,7 +2,7 @@
 id: thm-complete-metric-baire-principle-implies-dependent-choice-over-zf
 kind: theorem
 title: "The complete-metric Baire principle implies Dependent Choice over ZF"
-status: draft
+status: published
 origin: pipeline
 deps: [def-complete-metric-baire-principle-over-zf, lem-discrete-sequence-spaces-are-complete-in-zf, lem-serial-relation-successor-sets-are-open-dense, lem-prescribed-start-and-starting-point-free-serial-choice-are-equivalent-in-zf, thm-well-ordering-principle, thm-recursion, def-axiom-schema-of-separation]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

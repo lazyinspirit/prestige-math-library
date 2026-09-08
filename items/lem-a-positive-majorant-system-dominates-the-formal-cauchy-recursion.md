@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: 'Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem'
       url: https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf
       locator: Gantumur, §4 equations (42)–(46), printed pp. 9–10. Origin values and the possibly nonzero initial trace are distinguished here.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["lem-coefficient-majorisation-is-preserved-by-sums-products-composition-and-differentiation", "lem-an-analytic-germ-has-a-rational-geometric-majorant", "lem-normal-form-pde-determines-a-unique-formal-taylor-series"]
@@ -44,4 +45,3 @@ Let $d,N\ge1$ and $u_t=F(t,x,u,D_xu)$ have zero data, with $F(0)=0$ and every or
 ## Source notes
 
 Gantumur, §4 equations (42)–(46), printed pp. 9–10. Origin values and the possibly nonzero initial trace are distinguished here.
-

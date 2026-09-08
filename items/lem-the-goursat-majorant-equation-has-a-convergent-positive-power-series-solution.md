@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: 'Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem'
       url: https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf
       locator: Gantumur, §4 equations (47)–(52) and Remark 19, printed p. 10.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["thm-real-analytic-inverse-and-implicit-function-theorems", "lem-analytic-ordinary-differential-systems-by-coefficient-majorants", "lem-a-positive-majorant-system-dominates-the-formal-cauchy-recursion"]
@@ -48,4 +49,3 @@ For integers $d,N\ge1$ and $M,r>0$, choose $0<\rho\le1$ with $a=1-dNM\rho/r>0$ a
 ## Source notes
 
 Gantumur, §4 equations (47)–(52) and Remark 19, printed p. 10.
-

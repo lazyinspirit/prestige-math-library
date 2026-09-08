@@ -2,7 +2,7 @@
 id: lem-standard-hermitian-form-on-functions-on-a-nonempty-finite-set-is-an-inner-product
 kind: lemma
 title: "The normalized Hermitian form on a finite function space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-wave-1
 deps: [def-inner-product-space, def-complex-conjugate-real-imaginary-part-and-modulus, def-sum-over-a-finite-index-set, lem-finite-sum-laws, def-finite-sum-in-a-commutative-monoid, lem-complex-conjugation-and-modulus-laws, thm-induction-principle]
@@ -10,6 +10,7 @@ justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

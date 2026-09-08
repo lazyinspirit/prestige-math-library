@@ -2,7 +2,7 @@
 id: thm-special-aronszajn-tree-construction
 kind: theorem
 title: "A special Aronszajn tree exists"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-bounded-rational-tree-limit-extension, def-aronszajn-suslin-and-special-tree, thm-transfinite-recursion, thm-countable-union-of-countable, thm-rationals-countable, def-normal-splitting-set-theoretic-tree, thm-rat-ordered-field, thm-product-of-countable, thm-countable-subsets-of-omega-one-are-bounded, def-axiom-of-choice]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://karagila.org/files/set-theory-2017.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
 justified_by: []
 forward_refs: []

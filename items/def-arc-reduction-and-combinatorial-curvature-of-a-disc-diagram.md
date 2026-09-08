@@ -2,7 +2,7 @@
 id: def-arc-reduction-and-combinatorial-curvature-of-a-disc-diagram
 kind: definition
 title: "Arc reduction and combinatorial curvature of a disc diagram"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sc-toolkit-labelled-planar-disc-diagram]
 landmark: false
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

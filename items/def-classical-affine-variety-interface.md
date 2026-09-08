@@ -2,13 +2,14 @@
 id: "def-classical-affine-variety-interface"
 kind: "definition"
 title: "A classical affine variety"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-classical-affine-zero-loci-form-zariski-closed-sets", "thm-classical-affine-nullstellensatz-correspondence"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

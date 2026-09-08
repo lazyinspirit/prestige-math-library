@@ -10,10 +10,11 @@ sources:
     - title: Weizhe Zheng, Lectures on Algebra (10 January 2025)
       url: https://server.mcm.ac.cn/~zheng/algebra.pdf
       locator: Theorem 3.8.1 and complete proof, pp.132–133
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

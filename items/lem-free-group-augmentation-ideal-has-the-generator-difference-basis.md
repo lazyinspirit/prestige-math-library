@@ -2,13 +2,15 @@
 id: lem-free-group-augmentation-ideal-has-the-generator-difference-basis
 kind: lemma
 title: "Generator differences form a basis of the free-group augmentation ideal"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-reduced-words-form-the-free-group, def-group-homology-as-a-derived-functor, def-projective-object, def-dependent-choice]
 provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-09
 sources:
   scraped: []
   references:

@@ -2,13 +2,14 @@
 id: lem-countable-henkin-syntax-coding
 kind: lemma
 title: "Canonical natural-number codes for countable Henkin syntax"
-status: draft
+status: published
 origin: pipeline
 deps: [def-set-signature-and-finite-syntax-strings, def-set-coded-terms-and-formulas, thm-n-cross-n-countable, thm-recursion, def-set-coded-formal-derivation]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

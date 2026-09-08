@@ -2,7 +2,7 @@
 id: def-sc-toolkit-symmetrised-relators-and-pieces
 kind: definition
 title: "Sc toolkit symmetrised relators and pieces"
-status: draft
+status: published
 origin: pipeline
 deps: [def-group-presentation, def-cyclically-reduced-word]
 landmark: false
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: simplicial-subdivision-and-simplicial-approximation-examples
 title: "Simplicial Subdivision and Simplicial Approximation: Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-barycentric-subdivision-of-an-edge-and-triangle", "ex-the-subdivision-chain-of-an-oriented-two-simplex", "ex-a-relative-simplicial-approximation-fixed-on-the-endpoints", "ex-a-compact-set-in-an-infinite-non-locally-finite-realization-still-meets-finitely-many-cells", "cex-a-continuous-map-need-not-be-simplicial-before-subdivision", "cex-ordinary-barycentric-subdivision-cannot-fix-a-nonconstant-simplicial-edge"]
 ---

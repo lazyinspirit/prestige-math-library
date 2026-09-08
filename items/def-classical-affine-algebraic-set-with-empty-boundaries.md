@@ -2,13 +2,14 @@
 id: "def-classical-affine-algebraic-set-with-empty-boundaries"
 kind: "definition"
 title: "Classical affine algebraic sets, including the empty boundaries"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-multivariate-polynomial-ring-by-iteration", "def-polynomial-evaluation-and-root", "def-algebraically-closed-field"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

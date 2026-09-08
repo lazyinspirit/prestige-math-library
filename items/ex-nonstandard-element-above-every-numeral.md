@@ -2,13 +2,14 @@
 id: ex-nonstandard-element-above-every-numeral
 kind: example
 title: "Compactness produces a genuinely nonstandard element"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-nonstandard-natural-number-model-exists]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

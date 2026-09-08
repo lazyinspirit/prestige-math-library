@@ -2,7 +2,7 @@
 id: lem-indicator-basis-for-invariant-functions-on-a-finite-orbit-partition
 kind: lemma
 title: "Orbit indicators form a basis of invariant functions"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-wave-1
 deps: [def-group-action, thm-orbits-partition-the-set, def-vector-space, def-finite-sum-in-a-commutative-monoid, def-linear-basis, def-conjugacy-class-and-centralizer]
@@ -10,6 +10,7 @@ justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

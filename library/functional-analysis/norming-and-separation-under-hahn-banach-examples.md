@@ -1,7 +1,7 @@
 ---
 page: "norming-and-separation-under-hahn-banach-examples"
 title: "Norming and Separation under Hahn–Banach: Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-relative-norming-in-a-finite-dimensional-space", "ex-relative-separation-of-a-ball-and-an-exterior-point"]
 ---

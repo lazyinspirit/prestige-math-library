@@ -2,13 +2,14 @@
 id: thm-set-language-first-order-soundness
 kind: theorem
 title: "Soundness for arbitrary set signatures"
-status: draft
+status: published
 origin: pipeline
 deps: [def-set-coded-formal-derivation, lem-formula-substitution-satisfaction, lem-satisfaction-coincidence, def-theories-models-and-semantic-consequence]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

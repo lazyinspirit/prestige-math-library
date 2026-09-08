@@ -2,12 +2,13 @@
 id: def-epsilon-nfa-word-transition
 kind: definition
 title: "Epsilon-NFAs, finite epsilon closure, and extended word transition"
-status: draft
+status: published
 origin: pipeline
 deps: [def-computation-alphabet-and-word-convention, def-power-set, def-indexed-union-and-intersection, def-finite-cardinality, thm-subset-of-a-finite-set, thm-recursion, thm-induction-principle, def-language-over-an-alphabet, def-cartesian-product, def-axiom-schema-of-separation]
 justified_by: []
 landmark: false
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

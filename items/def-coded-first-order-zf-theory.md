@@ -2,13 +2,14 @@
 id: def-coded-first-order-zf-theory
 kind: definition
 title: "The set of first-order ZF axiom sentences"
-status: draft
+status: published
 origin: pipeline
 deps: [def-language-of-set-theory, def-axiom-of-extensionality, def-axiom-schema-of-separation, def-axiom-of-pairing, def-axiom-of-union, def-axiom-of-power-set, def-axiom-schema-of-replacement, def-axiom-of-infinity, def-axiom-of-foundation, def-set-coded-terms-and-formulas, lem-countable-henkin-syntax-coding, def-free-variables-and-syntactic-substitution]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

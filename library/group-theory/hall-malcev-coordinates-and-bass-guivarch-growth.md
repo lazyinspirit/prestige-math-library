@@ -1,7 +1,7 @@
 ---
 page: "hall-malcev-coordinates-and-bass-guivarch-growth"
 title: "Hall–Mal’cev Coordinates and Bass–Guivarc’h Growth"
-status: "draft"
+status: published
 items: ["lem-hall-malcev-integer-abelian-structure-and-rank", "lem-hall-malcev-commutator-product-identities", "lem-hall-malcev-three-subgroup-containment", "lem-hall-malcev-lower-central-commutators-add-weights", "lem-lower-central-quotients-of-finitely-generated-nilpotent-groups-are-finitely-generated-abelian", "lem-hall-malcev-subgroups-of-finitely-generated-nilpotent-groups-are-finitely-generated", "lem-hall-malcev-torsion-is-a-finite-characteristic-subgroup", "lem-hall-malcev-upper-central-factors-are-torsion-free", "lem-hall-malcev-integral-coordinates-from-a-central-cyclic-refinement", "def-bass-guivarch-dimension", "def-lower-central-generators-and-weighted-coordinate-length", "lem-hall-malcev-finite-normal-quotients-preserve-lower-central-ranks", "lem-growth-is-unchanged-by-quotienting-a-finite-normal-subgroup", "lem-finite-lower-central-coordinate-systems-exist", "lem-hall-malcev-finite-collection-alphabets-include-torsion-carries", "lem-weighted-collection-in-lower-central-coordinates", "lem-hall-malcev-powers-in-the-last-central-term-have-short-words", "thm-last-lower-central-term-has-exact-weighted-distortion", "lem-weighted-coordinate-boxes-give-matching-growth-bounds", "thm-bass-guivarch-growth-degree-formula-with-proof"]
 examples: []
 ---

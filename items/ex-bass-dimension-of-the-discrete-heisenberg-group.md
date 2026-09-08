@@ -13,9 +13,10 @@ sources:
     - title: "Clara Löh, Geometric Group Theory, SS 2022"
       url: https://loeh.app.uni-regensburg.de/teaching/ggt_ss22/lecture_notes.pdf
       locator: "Theorem 5.3.6 and Example 5.3.7, printed p.140; general proof omitted"
-status: draft
+status: published
 origin: pipeline
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

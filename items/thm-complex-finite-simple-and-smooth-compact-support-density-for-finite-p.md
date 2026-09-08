@@ -2,7 +2,7 @@
 id: thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p
 kind: theorem
 title: "Complex finite-simple and smooth compact-support density for finite p"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps: [thm-complex-holder-minkowski-and-the-quotient-norm, thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-finite-p, thm-c-c-infinity-rn-is-dense-in-l-p-of-rn, thm-l-infinity-closure-of-c-c-rn-is-c-zero-rn, def-countable-choice]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Approximate each real component and prove both directions of the endpoint closure."
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

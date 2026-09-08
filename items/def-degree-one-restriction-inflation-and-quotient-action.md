@@ -2,7 +2,7 @@
 id: def-degree-one-restriction-inflation-and-quotient-action
 kind: definition
 title: "Degree-one restriction, inflation and quotient action"
-status: draft
+status: published
 origin: pipeline
 deps: [def-crossed-homomorphisms-principal-coboundaries-and-first-cohomology]
 justified_by: [lem-degree-one-maps-and-quotient-action-are-well-defined]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

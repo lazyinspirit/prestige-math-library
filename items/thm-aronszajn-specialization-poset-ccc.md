@@ -2,13 +2,14 @@
 id: thm-aronszajn-specialization-poset-ccc
 kind: theorem
 title: "Finite specialization of an Aronszajn tree is ccc"
-status: draft
+status: published
 origin: pipeline
 deps: [def-finite-aronszajn-specialization-poset, cor-indexed-omega-one-delta-system, lem-aronszajn-finite-petals-incomparability, thm-countable-union-of-countable, thm-product-of-countable, thm-well-ordering-theorem, def-poset-ccc-and-knaster-property, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

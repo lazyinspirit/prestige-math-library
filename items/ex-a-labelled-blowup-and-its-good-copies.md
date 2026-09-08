@@ -2,13 +2,14 @@
 id: ex-a-labelled-blowup-and-its-good-copies
 kind: example
 title: "A labelled blowup and its good copies"
-status: draft
+status: published
 origin: pipeline
 deps: [def-labelled-blowup-and-good-induced-copy, lem-good-copy-extension-count, thm-product-rule]
 provenance:
   statement: ai-generated
   proof: ai-generated
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

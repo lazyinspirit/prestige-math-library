@@ -2,12 +2,14 @@
 id: def-qid-restricted-blockade-with-empty-blocks
 kind: definition
 title: "Qid restricted blockade with empty blocks"
-status: draft
+status: published
 origin: pipeline
 deps: [def-blockade-length-and-width, def-directional-and-weak-sparsity-between-vertex-sets, def-complete-anticomplete-pure-and-x-sparse-blockades]
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  audited: 2026-09-09
 sources:
   references:
     - title: "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I"

@@ -6,6 +6,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: Hunter, Notes on Partial Differential Equations
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Hunter §§1.10.2–1.11, sphere element and Proposition 1.45, printed pp. 16–17, and §1.12 Theorem 1.46, printed p. 17 (PDF pp. 22–23). These radial-field instances are evaluated directly.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["thm-divergence-theorem-for-bounded-c-one-euclidean-domains", "lem-euclidean-chart-measure-agrees-with-polar-surface-measure"]
@@ -44,4 +45,3 @@ Assume $\mathrm{AC}_\omega$, $n\ge2$, and $R>0$. On $B_R(a)$, $F(x)=x-a$ gives $
 ## Source notes
 
 Hunter §§1.10.2–1.11, sphere element and Proposition 1.45, printed pp. 16–17, and §1.12 Theorem 1.46, printed p. 17 (PDF pp. 22–23). These radial-field instances are evaluated directly.
-

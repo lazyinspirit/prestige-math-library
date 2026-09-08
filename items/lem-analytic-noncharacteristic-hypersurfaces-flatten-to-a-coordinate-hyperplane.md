@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -18,7 +19,7 @@ sources:
     - title: 'Ageno, Part III: Analysis of Partial Differential Equations'
       url: https://giacomoageno.github.io/LectureNotesAPDE.pdf
       locator: Ageno §§2.3.1–2.3.2, Definitions 2.13–2.19, normal coordinates (2.7), and the transformed principal coefficient, PDF pp. 20–24. The normal derivative below includes the required multinomial weights absent from Definition 2.15.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["thm-real-analytic-inverse-and-implicit-function-theorems", "lem-principal-symbol-under-a-c-one-coordinate-change", "def-characteristic-covector-hypersurface-and-noncharacteristic-data", "thm-symmetry-of-higher-mixed-partials"]
@@ -51,4 +52,3 @@ Let $\phi$ be real analytic near $a\in\mathbb R^{d+1}$ with $\phi(a)=0$ and $d\p
 ## Source notes
 
 Gantumur, §5 equations (61)–(68), printed pp. 12–13. The linearization and analytic normal-line extensions are derived locally.
-

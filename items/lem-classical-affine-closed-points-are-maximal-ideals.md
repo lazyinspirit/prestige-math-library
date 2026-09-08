@@ -2,13 +2,14 @@
 id: "lem-classical-affine-closed-points-are-maximal-ideals"
 kind: "lemma"
 title: "Classical affine points are maximal ideals"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-classical-affine-nullstellensatz-correspondence", "def-classical-affine-coordinate-ring", "cor-weak-nullstellensatz-algebraically-closed-coordinate-form", "thm-correspondence-theorem-ideals", "lem-evaluation-ideal-is-maximal", "def-axiom-of-choice"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

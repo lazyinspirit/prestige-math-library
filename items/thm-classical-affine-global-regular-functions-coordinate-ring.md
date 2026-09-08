@@ -2,13 +2,14 @@
 id: "thm-classical-affine-global-regular-functions-coordinate-ring"
 kind: "theorem"
 title: "Global regular functions on a classical affine variety are its coordinate ring"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-classical-principal-open-coordinate-ring-localization", "def-classical-regular-function-on-open-set", "def-axiom-of-choice"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-finite-beth-iteration-above-a-cardinal
 kind: definition
 title: "Finite beth iteration above an infinite cardinal"
-status: draft
+status: published
 origin: pipeline
 deps: [def-aleph-and-beth-hierarchies, thm-recursion, thm-transfinite-recursion, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

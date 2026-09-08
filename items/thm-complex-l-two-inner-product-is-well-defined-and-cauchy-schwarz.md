@@ -2,7 +2,7 @@
 id: thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz
 kind: theorem
 title: "The complex $L^2$ pairing is well-defined and satisfies Cauchy–Schwarz"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps: [def-complex-l-two-inner-product, thm-complex-holder-minkowski-and-the-quotient-norm, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-the-lebesgue-integral-respects-almost-everywhere-equality, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, lem-complex-conjugation-and-modulus-laws, def-integrable-real-and-complex-functions-and-their-integrals]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Verify the form directly and expand the squared distance to a scalar multiple."
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

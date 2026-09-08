@@ -2,13 +2,14 @@
 id: cex-generalization-after-open-assumption
 kind: counterexample
 title: "The deduction theorem needs its free-variable restriction"
-status: draft
+status: published
 origin: pipeline
 deps: [def-set-coded-terms-and-formulas, thm-set-structure-satisfaction-recursion]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

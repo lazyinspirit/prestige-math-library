@@ -2,13 +2,14 @@
 id: "lem-classical-morphisms-glue-on-open-cover"
 kind: "lemma"
 title: "Compatible classical morphisms to an affine target glue over an open cover"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-classical-regular-functions-locality-and-gluing", "def-classical-affine-variety-morphism", "lem-classical-morphism-inverse-image-of-closed-is-closed"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

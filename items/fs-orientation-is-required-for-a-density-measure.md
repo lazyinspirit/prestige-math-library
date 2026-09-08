@@ -2,13 +2,14 @@
 id: fs-orientation-is-required-for-a-density-measure
 title: "False: density measures require an orientation"
 kind: false-statement
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure", "prop-every-smooth-manifold-admits-a-positive-smooth-density", "fs-a-smooth-density-is-the-same-thing-as-a-top-form-on-a-nonorientable-manifold", "def-oriented-smooth-manifold-and-oriented-chart"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

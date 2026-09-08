@@ -2,13 +2,14 @@
 id: lem-measurable-density-chart-integrals-agree-on-overlaps
 title: "Agreement of Borel overlap integrals"
 kind: lemma
-status: draft
+status: published
 origin: pipeline
 deps: ["def-borel-measurable-nonnegative-density-on-a-manifold", "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness", "thm-borel-sets-are-lebesgue-measurable", "thm-borel-sigma-algebra-of-a-subspace-is-the-trace", "thm-smooth-invariance-of-manifold-boundary", "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null", "cor-integral-over-a-null-set-vanishes"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

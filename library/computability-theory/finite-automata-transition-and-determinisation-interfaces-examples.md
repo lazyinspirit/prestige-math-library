@@ -1,7 +1,7 @@
 ---
 page: finite-automata-transition-and-determinisation-interfaces-examples
 title: "Finite-Automata Transition and Determinisation Interfaces: Examples"
-status: draft
+status: published
 items: []
 examples: [ex-epsilon-closure-and-word-transition-on-a-three-state-nfa, ex-subset-construction-for-an-epsilon-nfa, cex-omitting-epsilon-closure-breaks-determinisation]
 ---

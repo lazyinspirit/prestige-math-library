@@ -2,13 +2,14 @@
 id: def-borel-measurable-nonnegative-density-on-a-manifold
 title: "Pointwise Borel nonnegative densities"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-density-bundle-and-smooth-density", "def-borel-sigma-algebra", "def-extended-real-valued-measurable-function", "def-countable-choice", "def-topological-manifold-with-boundary", "def-smooth-manifold", "def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-relative-derived-subdivision-of-a-finite-simplicial-pair
 kind: definition
 title: "Relative derived subdivision of a finite simplicial pair"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-barycentric-face-chains-triangulate-a-geometric-simplex", "def-barycentric-subdivision-of-an-abstract-simplicial-complex"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -34,4 +35,3 @@ In Maunder 2.5.9 (pp.50–51), take the three triangles $012,023,234$ with all f
 ## Source locators
 
 2.5.7–2.5.8 pp.49–50.
-

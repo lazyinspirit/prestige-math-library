@@ -1,7 +1,7 @@
 ---
 page: finite-averaging-and-character-theory-prerequisites
 title: "Finite Averaging and Character-Theory Prerequisites"
-status: draft
+status: published
 requires: [the-group-algebra-and-representations, inner-product-spaces-and-orthogonality]
 items: [lem-characteristic-divisibility-and-invertibility-of-a-natural-scalar-in-a-field, lem-finite-dimensional-subspace-admits-a-linear-projection-without-choice, lem-trace-of-an-idempotent-is-the-dimension-of-its-image, lem-indicator-basis-for-invariant-functions-on-a-finite-orbit-partition, lem-standard-hermitian-form-on-functions-on-a-nonempty-finite-set-is-an-inner-product, lem-equality-case-for-a-finite-sum-of-unit-complex-numbers, lem-conjugates-of-an-average-of-roots-of-unity-are-averages-of-roots-of-unity, lem-kernel-of-a-direct-sum-of-representations-is-the-intersection, lem-a-group-is-abelian-iff-every-conjugacy-class-is-a-singleton]
 examples: []

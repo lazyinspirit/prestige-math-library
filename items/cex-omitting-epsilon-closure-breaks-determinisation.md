@@ -2,12 +2,13 @@
 id: cex-omitting-epsilon-closure-breaks-determinisation
 kind: counterexample
 title: "Dropping epsilon closure changes the accepted language"
-status: draft
+status: published
 origin: pipeline
 deps: [def-epsilon-nfa-word-transition, thm-subset-construction-reachability-invariant]
 justified_by: []
 landmark: false
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

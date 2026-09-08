@@ -2,13 +2,14 @@
 id: "lem-classical-affine-morphisms-equal-on-dense-open"
 kind: "lemma"
 title: "Affine-source morphisms agreeing on a dense open agree everywhere"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-classical-affine-variety-nonempty-opens-dense", "thm-classical-affine-global-regular-functions-coordinate-ring", "def-classical-affine-variety-morphism", "lem-classical-morphism-inverse-image-of-closed-is-closed", "def-axiom-of-choice"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

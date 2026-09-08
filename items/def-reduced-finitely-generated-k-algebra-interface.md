@@ -2,13 +2,14 @@
 id: "def-reduced-finitely-generated-k-algebra-interface"
 kind: "definition"
 title: "A reduced finitely generated $k$-algebra"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-nilradical-and-reduced-ring", "def-finite-type-and-module-finite-algebras"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

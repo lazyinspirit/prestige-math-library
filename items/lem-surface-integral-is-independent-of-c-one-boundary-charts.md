@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: Hunter, Notes on Partial Differential Equations
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Hunter, §1.10.2–1.10.3, printed pp. 15–16, Gram density and graph normal. Overlap independence is proved by the full determinant and Borel substitution calculation.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-surface-integral-on-a-compact-c-one-hypersurface", "thm-gram-determinant-detects-linear-independence", "thm-determinant-multiplicative", "thm-determinant-of-transpose", "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness", "thm-chain-rule-for-total-derivatives", "thm-monotone-convergence-for-the-integral"]
@@ -56,4 +57,3 @@ Assume $\mathrm{AC}_\omega$. Every regular chart density is continuous and stric
 ## Source notes
 
 Hunter, §1.10.2–1.10.3, printed pp. 15–16, Gram density and graph normal. Overlap independence is proved by the full determinant and Borel substitution calculation.
-

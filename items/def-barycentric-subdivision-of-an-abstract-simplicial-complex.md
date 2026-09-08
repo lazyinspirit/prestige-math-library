@@ -2,13 +2,14 @@
 id: def-barycentric-subdivision-of-an-abstract-simplicial-complex
 kind: definition
 title: "Barycentric subdivision of an abstract simplicial complex"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-face-poset-and-order-complex"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -28,4 +29,3 @@ A subcomplex $A\subseteq K$ gives $F(A)\subseteq F(K)$ with the induced order; h
 ## Source locators
 
 2.5.7–2.5.10, pp.49–52.
-

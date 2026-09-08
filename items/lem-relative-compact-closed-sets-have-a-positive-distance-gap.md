@@ -2,7 +2,7 @@
 id: lem-relative-compact-closed-sets-have-a-positive-distance-gap
 kind: lemma
 title: A compact set and a disjoint closed set have a positive norm-distance gap
-status: draft
+status: published
 origin: pipeline
 deps: [rem-real-and-complex-normed-space-convention, def-metric-compactness, def-metric-topology, lem-finite-choice, lem-finite-set-has-max]
 provenance:
@@ -17,6 +17,7 @@ sources:
 pipeline_run: phase-2-wave-1
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

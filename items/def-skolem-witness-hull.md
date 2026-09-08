@@ -2,13 +2,14 @@
 id: def-skolem-witness-hull
 kind: definition
 title: "Witness functions and their hulls"
-status: draft
+status: published
 origin: pipeline
 deps: [def-elementary-set-structure-embedding, thm-recursion, lem-satisfaction-coincidence, thm-set-structure-satisfaction-recursion]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

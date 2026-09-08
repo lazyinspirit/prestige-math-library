@@ -2,13 +2,14 @@
 id: ex-density-measure-on-a-nonorientable-manifold
 title: "Flat Mobius strip density measure"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure", "thm-density-measure-is-independent-of-the-chart-gluing", "fs-a-smooth-density-is-the-same-thing-as-a-top-form-on-a-nonorientable-manifold", "thm-lebesgue-measure-of-a-box-of-every-kind", "fs-orientation-is-required-for-a-density-measure"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

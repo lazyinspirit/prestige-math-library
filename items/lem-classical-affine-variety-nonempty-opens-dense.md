@@ -2,13 +2,14 @@
 id: "lem-classical-affine-variety-nonempty-opens-dense"
 kind: "lemma"
 title: "Every nonempty open of a classical affine variety is dense"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-classical-irreducible-space-open-intersection-criterion"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

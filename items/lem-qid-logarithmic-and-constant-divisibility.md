@@ -2,12 +2,14 @@
 id: lem-qid-logarithmic-and-constant-divisibility
 kind: lemma
 title: "Qid logarithmic and constant divisibility"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-special-copy-trichotomy-produces-a-restricted-blockade, def-subreciprocal-function-and-ell-divisibility, lem-subreciprocal-functions-close-under-the-density-recursion, thm-logarithm-derivative-and-integral, thm-natural-logarithm-laws, lem-integer-part, thm-logarithm-change-of-base]
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-09
 sources:
   references:
     - title: "Bucic, Nguyen, Scott and Seymour, Induced subgraph density I"

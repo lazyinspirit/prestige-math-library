@@ -2,13 +2,14 @@
 id: thm-first-order-sentence-deduction
 kind: theorem
 title: "Deduction theorem for sentence assumptions"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-derivation-finite-support-and-concatenation, lem-hilbert-propositional-and-equality-rules, def-set-coded-formal-derivation]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

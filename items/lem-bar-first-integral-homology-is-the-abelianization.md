@@ -2,7 +2,7 @@
 id: lem-bar-first-integral-homology-is-the-abelianization
 kind: lemma
 title: "First integral homology and conjugation coinvariants"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-diagonal-bar-coinvariants-compute-group-homology, def-normalized-bar-resolution]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

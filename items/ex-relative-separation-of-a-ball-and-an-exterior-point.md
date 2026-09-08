@@ -2,7 +2,7 @@
 id: ex-relative-separation-of-a-ball-and-an-exterior-point
 kind: example
 title: Quantitative separation of a norm ball from an exterior point
-status: draft
+status: published
 origin: pipeline
 deps: [cor-relative-hahn-banach-dual-norming, def-relative-normed-convexity-and-separation]
 provenance:
@@ -17,6 +17,7 @@ sources:
 pipeline_run: phase-2-wave-1
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

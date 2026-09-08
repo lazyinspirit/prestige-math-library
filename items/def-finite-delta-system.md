@@ -2,13 +2,14 @@
 id: "def-finite-delta-system"
 kind: "definition"
 title: "Delta systems and roots"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-intersection-of-a-set-and-binary-intersection"]
 provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: ex-relator-root-versus-proper-power
 kind: example
 title: "Relator root versus proper power"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sc-toolkit-symmetrised-relators-and-pieces, def-minimal-cyclic-power-diagram-and-relator-root]
 landmark: false
@@ -10,6 +10,8 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-09
 sources:
   references:
     - title: "Lipschutz (1964), \u00a76 common-root exception; cyclic-group example computed locally"

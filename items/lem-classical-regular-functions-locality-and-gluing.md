@@ -2,13 +2,14 @@
 id: "lem-classical-regular-functions-locality-and-gluing"
 kind: "lemma"
 title: "Classical regular functions satisfy locality and unique gluing"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-classical-regular-function-on-open-set"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

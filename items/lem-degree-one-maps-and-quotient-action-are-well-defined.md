@@ -2,7 +2,7 @@
 id: lem-degree-one-maps-and-quotient-action-are-well-defined
 kind: lemma
 title: "Degree-one maps and the quotient action are well-defined"
-status: draft
+status: published
 origin: pipeline
 deps: [def-degree-one-restriction-inflation-and-quotient-action]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-modular-trace-functions-of-simple-modules-are-linearly-independent
 kind: lemma
 title: "Trace functionals of split simple modules are independent"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-a-finite-dimensional-algebra-separates-its-simple-modules]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

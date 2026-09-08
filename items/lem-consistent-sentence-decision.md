@@ -2,12 +2,14 @@
 id: lem-consistent-sentence-decision
 kind: lemma
 title: "A consistent theory can decide one sentence"
-status: draft
+status: published
 origin: pipeline
 deps: [def-first-order-syntactic-consistency, thm-first-order-sentence-deduction, lem-hilbert-propositional-and-equality-rules]
 provenance:
   statement: ai-altered
   proof: ai-generated
+verification:
+  audited: 2026-09-09
 sources:
   references:
     - title: "Moschovakis, Lemma 1H.12(3)–(4), printed p38; local deduction proof."

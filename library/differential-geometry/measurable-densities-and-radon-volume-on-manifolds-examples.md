@@ -1,7 +1,7 @@
 ---
 page: measurable-densities-and-radon-volume-on-manifolds-examples
 title: "Measurable Densities and Radon Volume on Manifolds: Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-chart-gluing-recovers-euclidean-lebesgue-measure", "ex-positive-weighted-volume-on-an-open-interval", "ex-density-measure-in-two-overlapping-circle-charts", "ex-density-measure-on-a-nonorientable-manifold", "ex-zero-dimensional-density-measure-is-weighted-counting", "cex-a-smooth-density-can-have-infinite-total-mass", "ex-borel-ball-volume-before-any-comparison-theorem"]
 ---

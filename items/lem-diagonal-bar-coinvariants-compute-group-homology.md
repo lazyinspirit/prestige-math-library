@@ -2,7 +2,7 @@
 id: lem-diagonal-bar-coinvariants-compute-group-homology
 kind: lemma
 title: "Diagonal bar coinvariants compute group homology"
-status: draft
+status: published
 origin: pipeline
 deps: [def-group-homology-as-a-derived-functor, thm-the-bar-complex-is-a-free-resolution-of-the-trivial-module, thm-normalized-and-unnormalized-bar-complexes-are-chain-homotopy-equivalent, def-projective-object, def-dependent-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

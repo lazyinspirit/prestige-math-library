@@ -1,7 +1,7 @@
 ---
 page: "hall-malcev-coordinates-and-bass-guivarch-growth-examples"
 title: "Hall–Mal’cev Coordinates and Bass–Guivarc’h Growth: Examples"
-status: "draft"
+status: published
 items: ["ex-bass-dimension-of-a-free-abelian-group", "ex-bass-dimension-of-the-discrete-heisenberg-group", "ex-central-distortion-in-the-discrete-heisenberg-group", "ex-bass-dimension-of-unitriangular-four-by-four-integers", "ex-hirsch-length-and-growth-degree-need-not-agree", "cex-counting-every-lower-central-generator-with-weight-one", "cex-torsion-free-nilpotent-group-with-torsion-in-abelianization"]
 examples: []
 ---

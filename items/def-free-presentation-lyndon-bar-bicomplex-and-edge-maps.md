@@ -2,7 +2,7 @@
 id: def-free-presentation-lyndon-bar-bicomplex-and-edge-maps
 kind: definition
 title: "The free-presentation Lyndon bar bicomplex"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-diagonal-bar-coinvariants-compute-group-homology, lem-bar-first-integral-homology-is-the-abelianization, lem-low-degree-filtration-sequence-for-a-first-quadrant-bicomplex, def-group-presentation]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

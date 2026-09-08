@@ -2,7 +2,7 @@
 id: ex-conjugacy-class-indicator-basis-for-s-three
 kind: example
 title: "The three conjugacy-class indicators of the symmetric group S3"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-wave-1
 deps: [lem-indicator-basis-for-invariant-functions-on-a-finite-orbit-partition]
@@ -10,6 +10,7 @@ justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -6,6 +6,7 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: Hunter, Notes on Partial Differential Equations
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Hunter, §1.11 Theorem 1.44, printed p. 17 (PDF p. 23), for the substitution statement. The Darboux bridge and Radon-uniqueness proof below are local, and do not consume the defective published compact-support Lebesgue or measurable-C1 proofs.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["thm-indefinite-integral-of-a-nonnegative-function-is-a-measure", "cor-second-countable-lch-locally-finite-borel-measures-are-regular", "thm-rmk-uniqueness-among-radon-measures", "thm-monotone-convergence-for-the-integral", "thm-continuous-preimages-of-borel-sets-are-borel", "thm-arithmetic-and-lattice-operations-preserve-measurability", "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets", "thm-euclidean-heine-borel-pseudocompactness-and-extreme-values", "def-countable-choice", "cor-change-of-variables-for-compactly-supported-functions", "thm-continuous-on-a-rectangle-is-riemann-integrable", "thm-multidimensional-darboux-equals-riemann", "def-multidimensional-darboux-sums", "thm-lebesgue-measure-of-a-box-of-every-kind", "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null", "prop-order-and-scalar-rules-for-the-nonnegative-integral", "thm-linearity-of-the-lebesgue-integral-on-l-one"]
@@ -74,4 +75,3 @@ Assume $\mathrm{AC}_\omega$. Let $m\ge1$, let U,V be open subsets of $\mathbb R^
 ## Source notes
 
 Hunter, §1.11 Theorem 1.44, printed p. 17 (PDF p. 23), for the substitution statement. The Darboux bridge and Radon-uniqueness proof below are local, and do not consume the defective published compact-support Lebesgue or measurable-C1 proofs.
-

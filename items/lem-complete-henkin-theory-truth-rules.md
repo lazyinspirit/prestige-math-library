@@ -2,13 +2,14 @@
 id: lem-complete-henkin-theory-truth-rules
 kind: lemma
 title: "Boolean and witness closure of a complete Henkin theory"
-status: draft
+status: published
 origin: pipeline
 deps: [def-henkin-witness-extension, def-first-order-syntactic-consistency, lem-hilbert-propositional-and-equality-rules, lem-derivation-finite-support-and-concatenation]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

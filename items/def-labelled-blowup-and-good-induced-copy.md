@@ -2,13 +2,14 @@
 id: def-labelled-blowup-and-good-induced-copy
 kind: definition
 title: "Labelled blowup and good induced copy"
-status: draft
+status: published
 origin: pipeline
 deps: [def-induced-copy-density-and-homogeneous-restriction-parameter, def-blockade-length-and-width, def-directional-and-weak-sparsity-between-vertex-sets]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

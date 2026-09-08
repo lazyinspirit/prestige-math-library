@@ -2,13 +2,14 @@
 id: "lem-classical-zero-locus-ideal-radical-invariance"
 kind: "lemma"
 title: "A classical zero locus depends only on the generated ideal and its radical"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-classical-affine-algebraic-set-with-empty-boundaries", "thm-generated-ideal-description-in-a-commutative-ring", "def-radical-of-an-ideal"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

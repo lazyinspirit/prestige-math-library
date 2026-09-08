@@ -2,7 +2,7 @@
 id: ex-standard-hermitian-inner-product-on-functions-on-a-three-point-set
 kind: example
 title: "The normalized Hermitian form on three points"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-wave-1
 deps: [lem-standard-hermitian-form-on-functions-on-a-nonempty-finite-set-is-an-inner-product]
@@ -10,6 +10,7 @@ justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

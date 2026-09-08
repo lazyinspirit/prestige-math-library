@@ -1,7 +1,7 @@
 ---
 page: dependent-choice-and-the-complete-metric-baire-theorem-examples
 title: "Dependent Choice and the Complete-Metric Baire Theorem — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-blair-sequence-space-for-a-serial-relation]
 ---

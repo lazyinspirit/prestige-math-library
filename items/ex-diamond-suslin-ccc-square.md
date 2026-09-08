@@ -2,13 +2,14 @@
 id: ex-diamond-suslin-ccc-square
 kind: example
 title: "Under diamond, ccc fails to survive a square"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-diamond-constructs-normal-suslin-tree, thm-splitting-suslin-tree-poset-square-not-ccc, lem-finite-knaster-poset-products, def-poset-ccc-and-knaster-property, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

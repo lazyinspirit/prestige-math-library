@@ -2,13 +2,14 @@
 id: lem-proof-fresh-constant-elimination
 kind: lemma
 title: "Fresh constants may be eliminated from a finite proof"
-status: draft
+status: published
 origin: pipeline
 deps: [def-set-coded-formal-derivation, lem-fresh-bound-variable-renaming, lem-derivation-finite-support-and-concatenation]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

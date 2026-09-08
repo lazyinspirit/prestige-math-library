@@ -2,13 +2,14 @@
 id: "lem-classical-dominant-map-pulls-back-function-fields"
 kind: "lemma"
 title: "Dominant maps pull back function fields functorially"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-classical-variety-function-field", "thm-classical-function-field-independent-of-affine-open", "def-classical-dominant-morphism-and-rational-map", "thm-classical-rational-map-maximal-domain-affine-target", "thm-universal-property-of-the-field-of-fractions", "lem-classical-regular-functions-on-open-embed-in-function-field", "lem-classical-dominant-rational-maps-compose", "lem-classical-morphism-inverse-image-of-closed-is-closed", "def-axiom-of-choice", "thm-classical-polynomial-functions-equal-coordinate-ring", "thm-classical-affine-zero-loci-form-zariski-closed-sets"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

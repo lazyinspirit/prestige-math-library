@@ -2,13 +2,14 @@
 id: lem-cocountable-ultrafilter-on-uncountable-set
 kind: lemma
 title: "An ultrafilter containing all cocountable subsets"
-status: draft
+status: published
 origin: pipeline
 deps: [def-filter, thm-ultrafilter-lemma, thm-countable-union-of-countable, lem-subset-of-countable, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

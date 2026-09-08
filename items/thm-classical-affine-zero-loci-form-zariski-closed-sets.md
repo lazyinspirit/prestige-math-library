@@ -2,13 +2,14 @@
 id: "thm-classical-affine-zero-loci-form-zariski-closed-sets"
 kind: "theorem"
 title: "Classical affine zero loci form the Zariski closed sets"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-classical-affine-algebraic-set-with-empty-boundaries", "lem-classical-zero-locus-ideal-radical-invariance", "def-sum-and-product-of-ideals"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

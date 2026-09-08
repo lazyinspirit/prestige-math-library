@@ -2,13 +2,14 @@
 id: prop-diamond-implies-continuum-hypothesis
 kind: proposition
 title: "Diamond implies CH"
-status: draft
+status: published
 origin: pipeline
 deps: [def-diamond-on-omega-one, def-cardinal, thm-cantor-powerset, def-club-subsets-of-ordinals, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-set-coded-formal-derivation
 kind: definition
 title: "Formal proofs from sentence theories"
-status: draft
+status: published
 origin: pipeline
 deps: [def-set-coded-terms-and-formulas, def-theories-models-and-semantic-consequence, def-free-variables-and-syntactic-substitution]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

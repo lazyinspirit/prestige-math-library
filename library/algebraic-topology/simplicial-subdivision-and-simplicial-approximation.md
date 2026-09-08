@@ -1,7 +1,7 @@
 ---
 page: simplicial-subdivision-and-simplicial-approximation
 title: "Simplicial Subdivision and Simplicial Approximation"
-status: draft
+status: published
 items: ["def-face-poset-and-order-complex", "def-barycentric-subdivision-of-an-abstract-simplicial-complex", "def-canonical-barycentric-realization-map", "lem-finite-simplicial-weak-topology-agrees-with-euclidean-topology", "lem-barycentric-face-chains-triangulate-a-geometric-simplex", "thm-barycentric-subdivision-realizes-homeomorphically", "def-open-and-closed-stars-in-a-subdivision", "lem-compact-subsets-of-an-arbitrary-simplicial-realization-meet-finitely-many-open-simplices", "lem-an-augmented-simplicial-cone-has-an-explicit-chain-contraction", "lem-simplicial-chain-maps-carried-by-specified-cones-are-chain-homotopic", "def-oriented-simplicial-subdivision-chain-map", "lem-oriented-simplicial-subdivision-commutes-with-boundary", "lem-last-vertex-map-is-carried-by-original-simplices", "thm-simplicial-subdivision-is-a-chain-map-and-homology-isomorphism", "lem-mesh-of-iterated-simplicial-barycentric-subdivision-tends-to-zero", "lem-the-open-star-criterion-produces-a-simplicial-map", "thm-finite-simplicial-approximation-for-maps-of-pairs", "def-relative-derived-subdivision-of-a-finite-simplicial-pair", "lem-relative-derived-subdivision-makes-the-fixed-subcomplex-full", "lem-relative-subdivision-neighbourhood-adjustment", "thm-relative-simplicial-approximation-after-subdivision", "def-finite-convex-cell-complex-and-linear-subdivision", "lem-intersections-of-finite-linear-complexes-form-a-convex-cell-complex", "lem-finite-convex-cell-complexes-admit-compatible-triangulations", "lem-two-finite-linear-subdivisions-have-a-common-simplicial-refinement"]
 examples: []
 ---

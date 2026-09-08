@@ -2,12 +2,14 @@
 id: "def-classical-germ-and-local-ring"
 kind: "definition"
 title: "Germs and the local ring of a classical affine variety"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-classical-regular-function-on-open-set", "lem-classical-regular-functions-locality-and-gluing"]
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  audited: 2026-09-09
 sources:
   scraped: []
   references:

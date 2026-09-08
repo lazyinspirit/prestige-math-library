@@ -2,7 +2,7 @@
 id: ex-transgression-for-the-integral-heisenberg-extension
 kind: example
 title: "The Heisenberg transgression and its sign"
-status: draft
+status: published
 origin: pipeline
 deps: [def-low-degree-transgression-for-a-group-extension, lem-bar-two-cocycles-classify-abelian-kernel-extensions]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

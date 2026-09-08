@@ -2,7 +2,7 @@
 id: lem-complex-translation-and-approximate-identity-interfaces
 kind: lemma
 title: "Complex translation, convolution, approximate identities, and mollification"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps: [def-complex-lp-and-euclidean-test-function-conventions, thm-complex-holder-minkowski-and-the-quotient-norm, lem-complex-lp-completeness-density-and-inner-product, def-translation-of-a-function-on-rn, def-l-one-approximate-identity-on-rn, thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity, thm-young-convolution-inequality, thm-minkowski-integral-inequality, thm-l-one-approximate-identities-converge-in-l-p, thm-integral-triangle-inequality, lem-borel-representatives-make-the-convolution-integrand-borel-measurable, thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign, thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset, def-mollifier-family-generated-by-a-unit-mass-smooth-bump, def-countable-choice, thm-lebesgue-outer-measure-and-measurability-are-translation-invariant, thm-lebesgue-measure-under-dilations-and-reflections, thm-the-lebesgue-integral-respects-almost-everywhere-equality, thm-dominated-convergence, thm-completion-measurable-functions-have-base-measurable-representatives, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-heine-borel-rn, thm-heine-cantor-metric, thm-extreme-value-metric, thm-lebesgue-measure-of-a-box-of-every-kind]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Use real norm and measurability suppliers, then estimate the complex error by an absolute integral envelope."
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

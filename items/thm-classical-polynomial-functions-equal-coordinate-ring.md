@@ -2,13 +2,14 @@
 id: "thm-classical-polynomial-functions-equal-coordinate-ring"
 kind: "theorem"
 title: "Polynomial functions on an affine algebraic set are its coordinate ring"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-classical-affine-coordinate-ring", "thm-first-isomorphism-theorem-rings", "thm-universal-property-of-a-polynomial-ring"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

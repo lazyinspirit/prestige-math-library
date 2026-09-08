@@ -2,13 +2,14 @@
 id: ex-density-measure-in-two-overlapping-circle-charts
 title: "Circle overlap weights count each arc once"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-density-measure-is-independent-of-the-chart-gluing", "thm-density-measure-integration-agrees-with-smooth-density-integration", "thm-lebesgue-measure-of-a-box-of-every-kind"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

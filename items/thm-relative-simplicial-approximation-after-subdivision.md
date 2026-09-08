@@ -2,7 +2,7 @@
 id: thm-relative-simplicial-approximation-after-subdivision
 kind: theorem
 title: "Relative simplicial approximation after subdivision"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-relative-subdivision-neighbourhood-adjustment", "def-relative-derived-subdivision-of-a-finite-simplicial-pair", "lem-the-open-star-criterion-produces-a-simplicial-map", "thm-lebesgue-number-lemma", "lem-finite-simplicial-weak-topology-agrees-with-euclidean-topology"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: ex-comparing-the-two-quantitative-density-scales
 kind: example
 title: "Comparing the two quantitative density scales"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-fox-sudakov-quantitative-induced-density-bound, thm-loglog-quantitative-induced-density-bound, thm-logarithm-change-of-base, thm-natural-logarithm-laws]
 provenance:
   statement: ai-generated
   proof: ai-generated
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

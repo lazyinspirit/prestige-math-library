@@ -2,13 +2,14 @@
 id: thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure
 title: "Positive smooth densities give Radon volume"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-density-measure-is-independent-of-the-chart-gluing", "cor-second-countable-lch-locally-finite-borel-measures-are-regular", "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets", "def-radon-measure-on-an-lch-space", "thm-completion-of-a-measure-space", "prop-topological-manifolds-are-locally-compact-and-locally-path-connected", "def-completion-of-a-measure-space"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

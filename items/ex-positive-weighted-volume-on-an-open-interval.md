@@ -2,13 +2,14 @@
 id: ex-positive-weighted-volume-on-an-open-interval
 title: "Weighted interval volume"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-density-measure-integration-agrees-with-smooth-density-integration", "thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure", "thm-logarithm-derivative-and-integral", "thm-monotone-convergence-for-the-integral", "lem-bounded-borel-riemann-integrands-on-boxes-have-equal-lebesgue-integrals", "thm-density-measure-is-independent-of-the-chart-gluing", "cor-integral-over-a-null-set-vanishes", "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null", "thm-natural-logarithm-laws"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-relative-hahn-banach-geometric-separation
 kind: theorem
 title: Relative geometric Hahn–Banach with the exact open, closed, and compact hypotheses
-status: draft
+status: published
 origin: pipeline
 deps: [lem-relative-hahn-banach-separates-an-open-convex-set-from-a-point, lem-relative-compact-closed-sets-have-a-positive-distance-gap, def-relative-normed-convexity-and-separation, lem-sup-epsilon, thm-infimum-property]
 provenance:
@@ -17,6 +17,7 @@ sources:
 pipeline_run: phase-2-wave-1
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

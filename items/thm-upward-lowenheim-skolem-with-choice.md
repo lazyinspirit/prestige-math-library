@@ -2,12 +2,14 @@
 id: thm-upward-lowenheim-skolem-with-choice
 kind: theorem
 title: "Upward Löwenheim–Skolem, including elementary extensions"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-elementary-diagram-embedding, thm-well-ordered-language-henkin-completeness, thm-downward-lowenheim-skolem-with-parameters, def-axiom-of-choice, cor-cardinal-absorption]
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-09
 sources:
   references:
     - title: "Weiss–D’Mello, Theorem 6 proof p21, Theorem 9(2) and Exercise 15 p25; full elementary-diagram extension argument supplied locally."

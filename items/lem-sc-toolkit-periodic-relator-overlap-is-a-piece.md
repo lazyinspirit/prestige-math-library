@@ -2,7 +2,7 @@
 id: lem-sc-toolkit-periodic-relator-overlap-is-a-piece
 kind: lemma
 title: "Sc toolkit periodic relator overlap is a piece"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sc-toolkit-symmetrised-relators-and-pieces, lem-sc-toolkit-commuting-positive-words-have-a-common-root]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

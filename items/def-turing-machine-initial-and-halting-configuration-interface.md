@@ -2,12 +2,13 @@
 id: def-turing-machine-initial-and-halting-configuration-interface
 kind: definition
 title: "Initial tapes and machine-relative halting configurations"
-status: draft
+status: published
 origin: pipeline
 deps: [def-computation-alphabet-and-word-convention, def-function, def-the-set-of-functions-from-one-set-to-another, def-natural-numbers, def-finite-cardinality, thm-subset-of-a-finite-set, def-cartesian-product, def-axiom-schema-of-separation]
 justified_by: []
 landmark: false
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

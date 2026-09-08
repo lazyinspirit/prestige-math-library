@@ -2,13 +2,14 @@
 id: "def-set-theoretic-tree-and-levels"
 kind: "definition"
 title: "Set-theoretic trees, heights, levels, branches and antichains"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-well-order", "def-ordinal", "thm-mostowski-collapse"]
 provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,12 +2,14 @@
 id: lem-fresh-henkin-axiom-preserves-consistency
 kind: lemma
 title: "Adding one fresh witness preserves consistency"
-status: draft
+status: published
 origin: pipeline
 deps: [def-henkin-witness-extension, lem-proof-fresh-constant-elimination, thm-first-order-sentence-deduction, lem-consistent-sentence-decision, lem-hilbert-propositional-and-equality-rules]
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-09
 sources:
   references:
     - title: "Moschovakis, Lemma 1I.4 pp40–41 and Lemma 1H.12(5) p38; witness-implication variant proved locally."

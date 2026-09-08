@@ -2,7 +2,7 @@
 id: lem-conjugates-of-an-average-of-roots-of-unity-are-averages-of-roots-of-unity
 kind: lemma
 title: "Conjugates of an average of roots of unity"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-wave-1
 deps: [def-roots-of-unity-in-a-field, thm-isomorphisms-extend-to-splitting-fields, def-conjugate-elements-over-a-field, def-cyclotomic-extension, cor-every-complex-polynomial-splits-into-linear-factors, thm-finitely-generated-algebraic-extensions-are-finite, thm-finite-field-extensions-are-algebraic, prop-algebraic-splitting-extensions-are-normal, lem-an-isomorphism-extends-across-a-simple-root-adjunction, def-finite-sum-in-a-commutative-monoid, thm-induction-principle, def-normal-algebraic-extension]
@@ -10,6 +10,7 @@ justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

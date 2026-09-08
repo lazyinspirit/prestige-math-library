@@ -2,13 +2,14 @@
 id: thm-quantitative-density-theorem-for-ell-divisive-graphs
 kind: theorem
 title: "Quantitative density theorem for ell divisive graphs"
-status: draft
+status: published
 origin: pipeline
 deps: [def-induced-copy-density-and-homogeneous-restriction-parameter, def-subreciprocal-function-and-ell-divisibility, lem-ell-divisibility-amplifies-through-a-blockade, thm-real-power-laws, thm-logarithm-change-of-base, lem-subreciprocal-functions-close-under-the-density-recursion, def-qid-finite-density-recursion-profile]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

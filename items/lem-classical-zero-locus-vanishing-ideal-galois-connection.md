@@ -2,13 +2,14 @@
 id: "lem-classical-zero-locus-vanishing-ideal-galois-connection"
 kind: "lemma"
 title: "Zero loci and vanishing ideals form a Galois connection"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-classical-affine-algebraic-set-with-empty-boundaries", "lem-classical-zero-locus-ideal-radical-invariance", "def-classical-vanishing-ideal", "thm-classical-affine-zero-loci-form-zariski-closed-sets"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

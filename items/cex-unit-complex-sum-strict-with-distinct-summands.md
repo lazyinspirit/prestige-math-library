@@ -2,7 +2,7 @@
 id: cex-unit-complex-sum-strict-with-distinct-summands
 kind: counterexample
 title: "Distinct unit summands need not attain the sum bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-wave-1
 deps: [lem-equality-case-for-a-finite-sum-of-unit-complex-numbers]
@@ -10,6 +10,7 @@ justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

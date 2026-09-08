@@ -2,12 +2,13 @@
 id: thm-subset-construction-reachability-invariant
 kind: theorem
 title: "Subset construction and its exact reachability invariant"
-status: draft
+status: published
 origin: pipeline
 deps: [def-epsilon-nfa-word-transition, def-deterministic-finite-automaton, thm-existence-and-uniqueness-of-extended-dfa-transition, def-dfa-acceptance-and-recognized-language, cor-cardinality-of-the-power-set, thm-induction-principle]
 justified_by: []
 landmark: false
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

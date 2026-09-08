@@ -6,6 +6,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: 'Ageno, Part III: Analysis of Partial Differential Equations'
       url: https://giacomoageno.github.io/LectureNotesAPDE.pdf
       locator: Ageno, §2.4.1, PDF p. 28, nonanalytic Cauchy-data limitation; the flat-function witness and its derivatives are proved locally.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-real-analytic-germ-in-several-variables", "thm-cauchy-kovalevskaya-for-first-order-analytic-systems-in-normal-form", "thm-exponential-beats-every-polynomial", "thm-derivative-of-exponential", "thm-chain-rule", "thm-algebra-of-derivatives", "cor-exponential-reciprocal-and-positivity"]

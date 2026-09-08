@@ -2,7 +2,7 @@
 id: "ex-binary-tree-and-konig-branch"
 kind: "example"
 title: "The binary tree and a cofinal branch"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-konig-finite-level-tree"]
 provenance:
@@ -16,6 +16,7 @@ justified_by: []
 forward_refs: []
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-09
   precheck: "pass"
   judge:
     model: "gpt-5.6-terra"

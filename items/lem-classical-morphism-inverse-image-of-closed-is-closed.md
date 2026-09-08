@@ -2,13 +2,14 @@
 id: "lem-classical-morphism-inverse-image-of-closed-is-closed"
 kind: "lemma"
 title: "A classical morphism pulls Zariski closed sets back to closed sets"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-classical-affine-zero-loci-form-zariski-closed-sets", "def-classical-regular-function-on-open-set", "def-classical-affine-variety-morphism"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

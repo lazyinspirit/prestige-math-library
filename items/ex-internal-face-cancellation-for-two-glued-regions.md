@@ -6,6 +6,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: Hunter, Notes on Partial Differential Equations
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Hunter §1.12, discussion following Theorem 1.46, printed p. 18 (PDF p. 24). The faces and field calculation below make the finite-gluing instance explicit.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["thm-divergence-theorem-for-bounded-piecewise-c-one-domains"]
@@ -42,4 +43,3 @@ Assume $\mathrm{AC}_\omega$ and $n\ge2$. The boxes $Q_-=(-1,0)\times(0,1)^{n-1}$
 ## Source notes
 
 Hunter §1.12, discussion following Theorem 1.46, printed p. 18 (PDF p. 24). The faces and field calculation below make the finite-gluing instance explicit.
-

@@ -5,12 +5,14 @@ title: Geometric majorants for analytic germs
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  audited: 2026-09-09
 sources:
   references:
     - title: 'Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem'
       url: https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf
       locator: Gantumur, §3 equations (29)–(30), printed pp. 7–8; local proof uses polydisc Cauchy estimates.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-real-analytic-germ-in-several-variables", "lem-coefficient-majorisation-is-preserved-by-sums-products-composition-and-differentiation", "thm-cauchy-estimates-on-a-polydisc"]
@@ -37,4 +39,3 @@ For any finite family of analytic germs $f_j$ in $n\ge1$ variables at zero there
 ## Source notes
 
 Gantumur, §3 equations (29)–(30), printed pp. 7–8; local proof uses polydisc Cauchy estimates.
-

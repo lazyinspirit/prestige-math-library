@@ -6,6 +6,7 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: Hunter, Notes on Partial Differential Equations
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Hunter §1.10.2 and §1.12, printed pp. 15–18, for the surface convention and motivation only. The complete cube-cover and scaled-bump argument is local, as retained in research/phase-2-local-mathematical-repairs-2026-09-08.md, §PDE-2D.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["lem-surface-integral-is-independent-of-c-one-boundary-charts", "lem-closed-open-and-cubic-covers-give-the-same-lebesgue-outer-measure", "lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound", "thm-linear-change-of-variables-for-lebesgue-measure", "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant"]
@@ -52,4 +53,3 @@ Assume $\mathrm{AC}_\omega$ and $n\ge2$. Let E be a compact subset of finitely m
 ## Source notes
 
 Hunter §1.10.2 and §1.12, printed pp. 15–18, for the surface convention and motivation only. The complete cube-cover and scaled-bump argument is local, as retained in research/phase-2-local-mathematical-repairs-2026-09-08.md, §PDE-2D.
-

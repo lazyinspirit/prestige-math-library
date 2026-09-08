@@ -2,13 +2,14 @@
 id: "thm-classical-affine-variety-prime-coordinate-ring"
 kind: "theorem"
 title: "A classical affine variety has a domain coordinate ring, and conversely"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-classical-affine-nullstellensatz-correspondence", "def-classical-affine-variety-interface", "def-classical-affine-coordinate-ring", "thm-quotient-is-domain-iff-ideal-prime", "def-axiom-of-choice"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-prescribed-start-and-starting-point-free-serial-choice-are-equivalent-in-zf
 kind: lemma
 title: "Prescribed-start and starting-point-free serial choice are equivalent in ZF"
-status: draft
+status: published
 origin: pipeline
 deps: [def-serial-relation-dependent-choice-principle-over-zf, thm-induction-principle, thm-recursion, def-the-set-of-functions-from-one-set-to-another, def-axiom-schema-of-separation, def-axiom-schema-of-replacement, def-union-of-a-set-and-binary-union]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

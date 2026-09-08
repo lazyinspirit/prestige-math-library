@@ -13,10 +13,11 @@ sources:
     - title: Gábor Wiese, Galois Representations
       url: https://math.uni.lu/wiese/notes/GalRep.pdf
       locator: Corollary 2.5.10, p.40; Exercise 14, p.70
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

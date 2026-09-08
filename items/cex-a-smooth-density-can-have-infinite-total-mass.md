@@ -2,13 +2,14 @@
 id: cex-a-smooth-density-can-have-infinite-total-mass
 title: "A smooth positive density with infinite mass"
 kind: counterexample
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure", "thm-density-measure-is-independent-of-the-chart-gluing", "thm-lebesgue-measure-of-a-box-of-every-kind"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

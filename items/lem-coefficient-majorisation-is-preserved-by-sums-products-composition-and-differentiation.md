@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: 'Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem'
       url: https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf
       locator: Gantumur, §1 Exercise 3, printed p. 2; §3 equations (25), (28)–(30), pp. 7–8. The convolution and substitution arguments below provide the formal details.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-coefficientwise-majorisation-of-multivariable-power-series", "thm-power-series-define-holomorphic-functions-in-several-variables", "thm-geometric-series"]
@@ -50,4 +51,3 @@ For scalar formal series in finitely many variables, $f\ll F$ and $g\ll G$ imply
 ## Source notes
 
 Gantumur, §1 Exercise 3, printed p. 2; §3 equations (25), (28)–(30), pp. 7–8. The convolution and substitution arguments below provide the formal details.
-

@@ -2,12 +2,14 @@
 id: thm-elementary-ordinal-chain-union
 kind: theorem
 title: "Unions of nonempty elementary chains"
-status: draft
+status: published
 origin: pipeline
 deps: [def-elementary-set-structure-embedding, thm-structural-recursion-on-set-coded-syntax, thm-set-structure-satisfaction-recursion, def-term-denotation-in-a-set-structure, lem-satisfaction-coincidence]
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-09
 sources:
   references:
     - title: "Weiss–D’Mello, Fundamentals of Model Theory, Theorem 4 and complete proof, printed pp.16–18; ordinal-index extension described before the theorem."

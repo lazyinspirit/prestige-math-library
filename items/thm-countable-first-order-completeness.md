@@ -2,13 +2,14 @@
 id: thm-countable-first-order-completeness
 kind: theorem
 title: "Completeness for explicitly countable set languages"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-countable-lindenbaum-henkin-completion, thm-henkin-closed-term-truth-lemma, lem-consistent-sentence-decision, thm-set-language-first-order-soundness, lem-countable-henkin-syntax-coding, lem-satisfaction-coincidence]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

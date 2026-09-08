@@ -2,13 +2,14 @@
 id: "lem-classical-dominant-rational-maps-compose"
 kind: "lemma"
 title: "Dominant rational maps compose on nonempty open domains"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-classical-affine-variety-nonempty-opens-dense", "lem-classical-morphism-inverse-image-of-closed-is-closed", "lem-classical-rational-map-equivalence-transitive", "def-classical-dominant-morphism-and-rational-map", "lem-classical-open-source-morphisms-equal-on-dense-open", "thm-classical-rational-map-maximal-domain-affine-target"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

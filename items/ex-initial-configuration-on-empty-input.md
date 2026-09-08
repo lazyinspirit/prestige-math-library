@@ -2,12 +2,13 @@
 id: ex-initial-configuration-on-empty-input
 kind: example
 title: "The empty-input initial configuration"
-status: draft
+status: published
 origin: pipeline
 deps: [def-turing-machine-initial-and-halting-configuration-interface]
 justified_by: []
 landmark: false
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

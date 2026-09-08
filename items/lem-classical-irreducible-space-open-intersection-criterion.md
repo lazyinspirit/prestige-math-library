@@ -2,13 +2,14 @@
 id: "lem-classical-irreducible-space-open-intersection-criterion"
 kind: "lemma"
 title: "Irreducibility is equivalent to the nonempty-open intersection criterion"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-classical-affine-variety-interface"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-c-prime-one-sixth-torsion-elements-come-from-relator-roots
 kind: theorem
 title: "C prime one sixth torsion elements come from relator roots"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-minimal-power-diagram-has-a-periodic-boundary-shell, def-minimal-cyclic-power-diagram-and-relator-root]
 landmark: true
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

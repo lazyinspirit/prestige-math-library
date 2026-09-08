@@ -2,13 +2,14 @@
 id: "def-kappa-tree-and-tree-property"
 kind: "definition"
 title: "κ-trees and the tree property"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-set-theoretic-tree-and-levels", "def-cardinal", "def-cofinality"]
 provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-poset-ccc-and-knaster-property
 kind: definition
 title: "Compatibility, ccc and Knaster for posets"
-status: draft
+status: published
 origin: pipeline
 deps: [def-partial-order, def-countable, lem-tree-predecessors-and-common-extensions]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

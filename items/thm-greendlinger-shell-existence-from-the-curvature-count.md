@@ -2,7 +2,7 @@
 id: thm-greendlinger-shell-existence-from-the-curvature-count
 kind: theorem
 title: "Greendlinger shell existence from the curvature count"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-sc-toolkit-minimal-diagrams-and-cut-vertex-reduction, lem-boundary-spur-or-at-most-three-shell-from-curvature, lem-internal-arcs-of-a-reduced-small-cancellation-diagram-are-pieces]
 landmark: true
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

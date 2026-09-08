@@ -2,13 +2,14 @@
 id: cor-positive-density-measures-assign-positive-volume-to-nonempty-open-sets-and-metric-balls
 title: "Positive open-set and metric-ball volume"
 kind: corollary
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure", "thm-lebesgue-measure-of-a-box-of-every-kind", "def-metric-ball", "thm-density-measure-is-independent-of-the-chart-gluing"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

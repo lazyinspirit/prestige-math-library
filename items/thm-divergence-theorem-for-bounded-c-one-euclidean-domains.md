@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
       url: https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf
       locator: Oh §3.9, Proposition 3.23 and its complete local graph and partition proof, printed/PDF pp. 47–48.
       original_url: https://web.math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["lem-surface-integral-is-independent-of-c-one-boundary-charts", "lem-finite-ambient-partitions-for-euclidean-boundary-integration", "lem-local-graph-flux-from-fubini-and-the-fundamental-theorem", "thm-linearity-of-the-lebesgue-integral-on-l-one", "thm-algebra-of-derivatives", "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness"]
@@ -52,4 +53,3 @@ Assume $\mathrm{AC}_\omega$. For $n\ge2$, a bounded $C^1$ domain Omega and $F\in
 ## Source notes
 
 Hunter §1.12 Theorem 1.46, printed pp. 17–18; Oh §3.9 Proposition 3.23, printed/PDF pp. 47–48, for the local-to-global proof.
-

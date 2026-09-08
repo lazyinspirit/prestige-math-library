@@ -6,6 +6,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: 'Ageno, Part III: Analysis of Partial Differential Equations'
       url: https://giacomoageno.github.io/LectureNotesAPDE.pdf
       locator: Ageno, §2.4.1 Hadamard example, PDF pp. 28–29. The factor exp(-sqrt(k)) is a local strengthening making all fixed derivative seminorms tend to zero.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["thm-cauchy-kovalevskaya-for-a-noncharacteristic-analytic-cauchy-problem", "thm-exponential-beats-every-polynomial", "thm-sine-and-cosine-derivatives", "thm-derivative-of-exponential", "cor-trigonometric-parity-and-pythagorean-identity", "lem-exponential-series-has-infinite-radius", "lem-sine-and-cosine-series-converge-everywhere", "lem-coefficient-majorisation-is-preserved-by-sums-products-composition-and-differentiation"]

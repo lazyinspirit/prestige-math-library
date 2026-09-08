@@ -6,6 +6,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: Hunter, Notes on Partial Differential Equations
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Hunter §1.12, Theorem 1.46 and piecewise-boundary discussion, printed pp. 17–18 (PDF pp. 23–24). The hole orientation, cone presentation, and all three tip estimates are explicitly derived here, rather than attributed to an unstated rough-boundary theorem.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-bounded-piecewise-c-one-euclidean-domain", "thm-divergence-theorem-for-bounded-piecewise-c-one-domains", "lem-euclidean-chart-measure-agrees-with-polar-surface-measure", "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces"]
@@ -52,4 +53,3 @@ Assume $\mathrm{AC}_\omega$. Removing $\overline B_r(a)\subset\Omega$ from a bou
 ## Source notes
 
 Hunter §1.12, Theorem 1.46 and piecewise-boundary discussion, printed pp. 17–18 (PDF pp. 23–24). The hole orientation, cone presentation, and all three tip estimates are explicitly derived here, rather than attributed to an unstated rough-boundary theorem.
-

@@ -2,13 +2,14 @@
 id: cor-indexed-omega-one-delta-system
 kind: corollary
 title: "The indexed delta-system lemma"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-regular-uncountable-finite-delta-system, thm-countable-union-of-countable, thm-countable-subsets-of-omega-one-are-bounded, def-finite-delta-system, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

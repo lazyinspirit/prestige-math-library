@@ -2,13 +2,14 @@
 id: "def-classical-dominant-morphism-and-rational-map"
 kind: "definition"
 title: "Dominant classical morphisms and rational maps"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-classical-affine-variety-nonempty-opens-dense", "lem-classical-morphism-inverse-image-of-closed-is-closed", "def-classical-rational-map", "lem-classical-rational-map-equivalence-transitive"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

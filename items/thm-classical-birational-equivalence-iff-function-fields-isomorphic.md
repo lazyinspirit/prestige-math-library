@@ -2,13 +2,14 @@
 id: "thm-classical-birational-equivalence-iff-function-fields-isomorphic"
 kind: "theorem"
 title: "Classical integral varieties are birational exactly when their function fields are isomorphic over $k$"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-classical-function-field-independent-of-affine-open", "lem-classical-dominant-map-pulls-back-function-fields", "thm-classical-dominant-rational-maps-function-field-embeddings", "def-classical-birational-equivalence", "def-classical-integral-affine-atlas-and-chartwise-morphism", "lem-classical-integral-affine-charts-have-canonical-common-function-field", "lem-classical-open-source-morphisms-equal-on-dense-open", "lem-classical-principal-opens-form-affine-basis", "thm-classical-principal-open-is-affine-variety", "def-axiom-of-choice"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

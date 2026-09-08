@@ -2,7 +2,7 @@
 id: lem-serial-relation-successor-sets-are-open-dense
 kind: lemma
 title: "Successor-occurrence sets of a serial relation are open and dense"
-status: draft
+status: published
 origin: pipeline
 deps: [def-serial-relation-dependent-choice-principle-over-zf, lem-discrete-sequence-spaces-are-complete-in-zf, def-axiom-schema-of-separation, def-indexed-family, def-metric-interior-closure-boundary]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

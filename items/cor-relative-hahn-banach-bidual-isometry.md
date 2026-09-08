@@ -2,7 +2,7 @@
 id: cor-relative-hahn-banach-bidual-isometry
 kind: corollary
 title: Relative Hahn–Banach makes the canonical bidual map an isometry
-status: draft
+status: published
 origin: pipeline
 deps: [cor-relative-hahn-banach-dual-norming, lem-relative-bidual-evaluation-is-a-contraction]
 provenance:
@@ -17,6 +17,7 @@ sources:
 pipeline_run: phase-2-wave-1
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

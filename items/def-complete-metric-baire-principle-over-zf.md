@@ -2,7 +2,7 @@
 id: def-complete-metric-baire-principle-over-zf
 kind: definition
 title: "The complete-metric Baire principle over ZF"
-status: draft
+status: published
 origin: pipeline
 deps: [def-complete-metric-space, def-metric-interior-closure-boundary, def-indexed-family, def-indexed-union-and-intersection]
 landmark: false
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

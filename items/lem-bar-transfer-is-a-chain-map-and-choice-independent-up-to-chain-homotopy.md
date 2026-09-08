@@ -2,7 +2,7 @@
 id: lem-bar-transfer-is-a-chain-map-and-choice-independent-up-to-chain-homotopy
 kind: lemma
 title: "Bar transfer is a chain map independent of the transversal"
-status: draft
+status: published
 origin: pipeline
 deps: [def-finite-index-transfer-on-normalized-bar-chains]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: fs-categorical-first-order-zf
 kind: false-statement
 title: "FALSE: consistent first-order ZF has a unique model up to isomorphism"
-status: draft
+status: published
 origin: pipeline
 deps: [def-coded-first-order-zf-theory, lem-models-of-coded-zf-are-infinite, thm-countable-first-order-completeness, thm-upward-lowenheim-skolem-with-choice, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

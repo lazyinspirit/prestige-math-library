@@ -2,13 +2,14 @@
 id: thm-general-cardinal-erdos-rado
 kind: theorem
 title: "Erdős–Rado for arbitrary infinite cardinals and finite arity"
-status: draft
+status: published
 origin: pipeline
 deps: [def-finite-beth-iteration-above-a-cardinal, lem-erdos-rado-pattern-closure-and-end-homogeneity, cor-cardinal-absorption, thm-induction-principle, def-partition-arrow-notation, thm-cantor-powerset, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

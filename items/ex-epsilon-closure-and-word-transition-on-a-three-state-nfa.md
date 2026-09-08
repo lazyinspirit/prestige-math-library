@@ -2,12 +2,13 @@
 id: ex-epsilon-closure-and-word-transition-on-a-three-state-nfa
 kind: example
 title: "Epsilon closure and word transitions on three states"
-status: draft
+status: published
 origin: pipeline
 deps: [def-epsilon-nfa-word-transition]
 justified_by: []
 landmark: false
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

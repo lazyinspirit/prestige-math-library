@@ -2,7 +2,7 @@
 id: thm-complex-lp-completeness-and-almost-everywhere-subsequences
 kind: theorem
 title: "Complex Lp completeness and almost-everywhere subsequences"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps: [thm-complex-holder-minkowski-and-the-quotient-norm, thm-riesz-fischer-completeness-of-l-p, cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences, def-countable-choice, thm-finite-and-countable-subadditivity-of-measures]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Take real component limits and then two successive real subsequences."
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

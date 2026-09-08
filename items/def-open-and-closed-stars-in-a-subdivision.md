@@ -2,13 +2,14 @@
 id: def-open-and-closed-stars-in-a-subdivision
 kind: definition
 title: "Open and closed stars in a subdivision"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-barycentric-subdivision-of-an-abstract-simplicial-complex", "def-geometric-realization-of-an-abstract-simplicial-complex"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -30,4 +31,3 @@ On each simplex the condition $x_v>0$ is open, so the open star is weakly open. 
 ## Source locators
 
 2.C, p.178, star paragraph and Lemma 2C.2.
-

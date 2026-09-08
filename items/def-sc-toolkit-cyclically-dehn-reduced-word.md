@@ -2,7 +2,7 @@
 id: def-sc-toolkit-cyclically-dehn-reduced-word
 kind: definition
 title: "Cyclically Dehn-reduced words"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sc-toolkit-symmetrised-relators-and-pieces]
 landmark: false
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

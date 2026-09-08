@@ -2,7 +2,7 @@
 id: thm-free-presentation-homology-five-term-sequence
 kind: theorem
 title: "The free-presentation homology five-term sequence"
-status: draft
+status: published
 origin: pipeline
 deps: [def-free-presentation-lyndon-bar-bicomplex-and-edge-maps, lem-free-presentation-bicomplex-collapses-in-positive-middle-group-degree, lem-low-degree-filtration-sequence-for-a-first-quadrant-bicomplex]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

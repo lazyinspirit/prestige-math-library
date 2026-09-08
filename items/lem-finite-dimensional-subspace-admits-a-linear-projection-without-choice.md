@@ -2,7 +2,7 @@
 id: lem-finite-dimensional-subspace-admits-a-linear-projection-without-choice
 kind: lemma
 title: "Finite-dimensional subspaces admit projections without Choice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-wave-1
 deps: [def-linear-map, thm-dimension-of-a-linear-subspace]
@@ -10,6 +10,7 @@ justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,7 +2,7 @@
 id: lem-a-group-is-abelian-iff-every-conjugacy-class-is-a-singleton
 kind: lemma
 title: "A group is abelian exactly when its conjugacy classes are singletons"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-wave-1
 deps: [def-conjugacy-class-and-centralizer]
@@ -10,6 +10,7 @@ justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

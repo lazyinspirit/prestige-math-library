@@ -2,13 +2,14 @@
 id: thm-diamond-constructs-normal-suslin-tree
 kind: theorem
 title: "Diamond constructs a normal splitting Suslin tree"
-status: draft
+status: published
 origin: pipeline
 deps: [def-diamond-on-omega-one, lem-countable-tree-antichain-sealing, lem-club-tree-coding-antichain-reflection, lem-splitting-cofinal-branch-gives-antichain, thm-transfinite-recursion, thm-countable-union-of-countable, thm-zorn, thm-well-ordering-theorem, def-normal-splitting-set-theoretic-tree, def-aronszajn-suslin-and-special-tree, lem-tree-predecessors-and-common-extensions, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

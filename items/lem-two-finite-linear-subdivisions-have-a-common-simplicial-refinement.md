@@ -2,7 +2,7 @@
 id: lem-two-finite-linear-subdivisions-have-a-common-simplicial-refinement
 kind: lemma
 title: "Two finite linear subdivisions have a common simplicial refinement"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-finite-convex-cell-complexes-admit-compatible-triangulations", "lem-intersections-of-finite-linear-complexes-form-a-convex-cell-complex"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -43,4 +44,3 @@ Two finite linear simplicial subdivisions $K_1,K_2$ of a fixed finite Euclidean 
 1.1 Form the finite convex cell complex of all intersections $\sigma\cap\tau$, $\sigma\in K_1$, $\tau\in K_2$, and their faces. It covers the common polyhedron and every cell is contained in a simplex of each triangulation. [F1]
 
 2.1 Choose a compatible simplicial triangulation $T$ of that finite cell complex. Each simplex of $T$ lies in an intersection cell, hence in one simplex of $K_1$ and one of $K_2$, and $|T|$ is their common underlying set. These are exactly the conditions for a common linear refinement. If the set is empty take the empty complex; for points and lower-dimensional intersections the same cell triangulation applies. Only finitely many interior-point choices are required. [F2, step 1.1] ∎
-

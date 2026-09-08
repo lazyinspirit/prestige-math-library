@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: Hunter, Notes on Partial Differential Equations
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Hunter §1.11, Proposition 1.45 and its preceding sphere parametrization, printed pp. 16–17 (PDF pp. 22–23). The identification with the existing cone-defined measure is proved here.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["lem-surface-integral-is-independent-of-c-one-boundary-charts", "thm-polar-coordinates-formula-for-lebesgue-measure", "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness", "thm-monotone-convergence-for-the-integral"]
@@ -50,4 +51,3 @@ Assume $\mathrm{AC}_\omega$ and $n\ge2$. The chart surface measure on $S^{n-1}$ 
 ## Source notes
 
 Hunter §1.11, Proposition 1.45 and its preceding sphere parametrization, printed pp. 16–17 (PDF pp. 22–23). The identification with the existing cone-defined measure is proved here.
-

@@ -1,7 +1,7 @@
 ---
 page: "quantitative-induced-density-and-the-loglog-step-examples"
 title: "Quantitative Induced Density and the Log-Log Step: Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-a-labelled-blowup-and-its-good-copies", "ex-checking-the-subreciprocal-condition-for-the-quadratic-log-bound", "ex-checking-the-subreciprocal-condition-for-the-loglog-bound", "ex-comparing-the-two-quantitative-density-scales"]
 ---

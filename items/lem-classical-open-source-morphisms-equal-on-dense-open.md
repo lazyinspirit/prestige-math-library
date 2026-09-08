@@ -2,13 +2,14 @@
 id: "lem-classical-open-source-morphisms-equal-on-dense-open"
 kind: "lemma"
 title: "Morphisms defined on an open source and agreeing on a dense open agree on their common domain"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-classical-affine-variety-nonempty-opens-dense", "def-classical-affine-variety-morphism", "lem-classical-morphism-inverse-image-of-closed-is-closed"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

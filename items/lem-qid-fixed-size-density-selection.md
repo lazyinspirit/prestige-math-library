@@ -2,13 +2,14 @@
 id: lem-qid-fixed-size-density-selection
 kind: lemma
 title: "Qid fixed size density selection"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-double-counting, cor-the-averaging-principle, thm-binomial-closed-formula, thm-two-element-subsets-count, def-induced-copy-density-and-homogeneous-restriction-parameter]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

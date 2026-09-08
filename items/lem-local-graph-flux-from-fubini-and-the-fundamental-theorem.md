@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
       url: https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf
       locator: Oh §3.9, Proposition 3.23 and its complete local graph and partition proof, printed/PDF pp. 47–48.
       original_url: https://web.math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["lem-surface-integral-is-independent-of-c-one-boundary-charts", "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces", "thm-newton-leibniz-with-interior-derivative", "thm-differentiation-under-the-integral-sign", "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral", "thm-algebra-of-derivatives"]
@@ -54,4 +55,3 @@ Assume $\mathrm{AC}_\omega$. In a graph cylinder $Q\times(a,b)$ with $h\in C^1(Q
 ## Source notes
 
 Hunter §1.12, printed pp. 17–18; Oh §3.9, Proposition 3.23 graph calculation, printed/PDF pp. 47–48. The endpoint calculation below uses only classical FTC and Fubini.
-

@@ -2,7 +2,7 @@
 id: lem-countable-tree-antichain-sealing
 kind: lemma
 title: "Seal a maximal antichain at a countable limit level"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-countable-normal-tree-cofinal-branch, lem-tree-predecessors-and-common-extensions, def-normal-splitting-set-theoretic-tree]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://karagila.org/files/set-theory-2017.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

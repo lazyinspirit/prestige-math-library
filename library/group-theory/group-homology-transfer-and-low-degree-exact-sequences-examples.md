@@ -1,7 +1,7 @@
 ---
 page: group-homology-transfer-and-low-degree-exact-sequences-examples
 title: "Group Homology Transfer and Low-Degree Exact Sequences: Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-transfer-annihilation-for-a-cyclic-group", "ex-free-presentation-five-term-sequence-for-a-cyclic-group", "ex-transgression-for-the-integral-heisenberg-extension"]
 ---

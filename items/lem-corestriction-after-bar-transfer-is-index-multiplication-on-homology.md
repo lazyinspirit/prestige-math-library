@@ -2,7 +2,7 @@
 id: lem-corestriction-after-bar-transfer-is-index-multiplication-on-homology
 kind: lemma
 title: "Corestriction after transfer multiplies by the index"
-status: draft
+status: published
 origin: pipeline
 deps: [def-finite-index-transfer-on-normalized-bar-chains, lem-bar-transfer-is-a-chain-map-and-choice-independent-up-to-chain-homotopy]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

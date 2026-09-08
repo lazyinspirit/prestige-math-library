@@ -2,13 +2,14 @@
 id: "lem-classical-integral-affine-charts-have-canonical-common-function-field"
 kind: "lemma"
 title: "Compatible affine charts of an integral classical variety have one function field"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-classical-integral-affine-atlas-and-chartwise-morphism", "lem-classical-irreducible-space-open-intersection-criterion", "lem-classical-principal-opens-form-affine-basis", "thm-classical-principal-open-is-affine-variety", "thm-classical-function-field-independent-of-affine-open", "lem-classical-regular-functions-on-open-embed-in-function-field", "def-axiom-of-choice"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

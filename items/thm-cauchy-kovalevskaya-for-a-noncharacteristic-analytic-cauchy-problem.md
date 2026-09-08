@@ -5,6 +5,8 @@ title: Cauchy–Kovalevskaya on a noncharacteristic analytic hypersurface
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  audited: 2026-09-09
 sources:
   references:
     - title: 'Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem'
@@ -13,7 +15,7 @@ sources:
     - title: 'Ageno, Part III: Analysis of Partial Differential Equations'
       url: https://giacomoageno.github.io/LectureNotesAPDE.pdf
       locator: Ageno §2.3.2, Theorem 2.22, PDF p. 24; complete proof §2.3.3, PDF pp. 25–27. That source is quasilinear; the local implicit-branch extension is derived here.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["lem-analytic-noncharacteristic-hypersurfaces-flatten-to-a-coordinate-hyperplane", "lem-analytic-cauchy-data-reduce-to-zero-data-in-normal-form", "thm-cauchy-kovalevskaya-for-first-order-analytic-systems-in-normal-form", "lem-higher-order-analytic-normal-form-reduces-to-a-first-order-system", "lem-analytic-ordinary-differential-systems-by-coefficient-majorants"]

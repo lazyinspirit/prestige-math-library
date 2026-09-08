@@ -2,13 +2,14 @@
 id: lem-hilbert-propositional-and-equality-rules
 kind: lemma
 title: "Derived propositional, quantifier and equality rules"
-status: draft
+status: published
 origin: pipeline
 deps: [def-set-coded-formal-derivation]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

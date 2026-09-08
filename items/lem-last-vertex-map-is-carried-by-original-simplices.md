@@ -2,7 +2,7 @@
 id: lem-last-vertex-map-is-carried-by-original-simplices
 kind: lemma
 title: "Last vertex map is carried by original simplices"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-barycentric-subdivision-of-an-abstract-simplicial-complex", "def-simplicial-map-and-its-geometric-realization", "lem-induced-simplicial-chain-maps-commute-with-boundaries"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -45,4 +46,3 @@ Given a specified total order on $V(K)$, the **last-vertex map** $\lambda:\opera
 1.1 Each nonempty face is finite, so it has a unique greatest vertex. If $\sigma_0\subsetneq\cdots\subsetneq\sigma_q$ is a chain, every $\max\sigma_i$ lies in $\sigma_q$. Their set is therefore a face of $K$, proving simpliciality. If the entire chain lies over a face $\sigma$, all these vertices belong to $\sigma$, proving the carrier assertion. Repeated selected vertices are permitted for a simplicial map. [F1, F2]
 
 2.1 The induced chain map sends an oriented chain to its ordered list of selected vertices if distinct, and to zero otherwise. It commutes with the ordinary boundary by the induced-chain-map lemma. In degree zero each vertex is sent to a vertex, so both augmentations equal $1$; extending by the identity in degree $-1$ gives an augmented chain map. The empty complex gives the empty vertex map and identity only in degree $-1$. No existence of a total order on an arbitrary set is inferred: the order is supplied data. [F3, step 1.1] ∎
-

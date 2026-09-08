@@ -11,10 +11,11 @@ sources:
       url: https://server.mcm.ac.cn/~zheng/algebra.pdf
       locator: §3.2 Theorem 3.2.1, Remark 3.2.3; §3.3 Lemma 3.3.2 and Warning 3.3.3(1), pp.117–118; §3.8 Theorem
         3.8.1
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
 deps: ["lem-galois-orbit-sums-of-split-central-idempotents-descend", "thm-wedderburn-artin-theorem", "thm-simple-modules-over-semisimple-rings", "thm-uniqueness-of-wedderburn-artin-data", "thm-dimension-of-a-linear-subspace", "lem-galois-fixed-points-recover-a-finite-dimensional-scalar-extension"]
 ---

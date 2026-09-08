@@ -2,13 +2,14 @@
 id: def-nonstandard-natural-number-structure
 kind: definition
 title: "Nonstandard models of the complete natural-number theory"
-status: draft
+status: published
 origin: pipeline
 deps: [def-theories-models-and-semantic-consequence, thm-recursion, def-natural-numbers, thm-set-structure-satisfaction-recursion, lem-satisfaction-coincidence, def-term-denotation-in-a-set-structure]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

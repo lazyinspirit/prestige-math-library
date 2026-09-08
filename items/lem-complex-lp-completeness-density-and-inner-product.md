@@ -2,7 +2,7 @@
 id: lem-complex-lp-completeness-density-and-inner-product
 kind: lemma
 title: "Complex completeness, density, and inner product: the consumer interface"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps: [thm-complex-lp-completeness-and-almost-everywhere-subsequences, thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p, def-complex-l-two-inner-product, thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Apply the separate completeness, density and pairing theorems with their exact hypotheses."
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

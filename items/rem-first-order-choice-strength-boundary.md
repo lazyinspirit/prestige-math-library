@@ -2,13 +2,14 @@
 id: rem-first-order-choice-strength-boundary
 kind: remark
 title: "Choice ledger and arbitrary-language boundary"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-countable-first-order-completeness, thm-countable-first-order-compactness, thm-downward-lowenheim-skolem-with-parameters, thm-upward-lowenheim-skolem-with-choice]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

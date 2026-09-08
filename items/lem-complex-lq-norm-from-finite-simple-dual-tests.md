@@ -2,7 +2,7 @@
 id: lem-complex-lq-norm-from-finite-simple-dual-tests
 kind: lemma
 title: "Complex Lq norm recovery from finite simple dual tests"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps: [thm-complex-holder-minkowski-and-the-quotient-norm, thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p, def-finite-sigma-finite-and-semifinite-measures, def-conjugate-exponents, def-essential-supremum-with-respect-to-a-measure, thm-monotone-convergence-for-the-integral, thm-integral-triangle-inequality, lem-complex-conjugation-and-modulus-laws, thm-arithmetic-and-lattice-operations-preserve-measurability, thm-threshold-characterisations-of-real-and-extended-real-measurability, def-complex-lp-and-euclidean-test-function-conventions, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-finite-and-countable-subadditivity-of-measures]
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "Construct phase extremizers on bounded finite sets, approximate them by finite grids, and exhaust positive level sets."
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

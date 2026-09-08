@@ -2,13 +2,14 @@
 id: lem-subreciprocal-functions-close-under-the-density-recursion
 kind: lemma
 title: "Admissible parameters for the density recursion"
-status: draft
+status: published
 origin: pipeline
 deps: [def-subreciprocal-function-and-ell-divisibility, thm-logarithm-change-of-base, thm-real-power-laws, thm-natural-logarithm-laws, lem-integer-part]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

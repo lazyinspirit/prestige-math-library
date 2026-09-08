@@ -2,13 +2,14 @@
 id: "def-classical-rational-map-domain-union"
 kind: "definition"
 title: "The candidate domain of a rational map"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-classical-rational-map", "lem-classical-rational-map-equivalence-transitive"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

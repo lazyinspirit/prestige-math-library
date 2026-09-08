@@ -5,12 +5,14 @@ title: A box is not a C1-boundary domain
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-09
 sources:
   references:
     - title: Hunter, Notes on Partial Differential Equations
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Hunter Definition 1.35, printed pp. 13–14, and the piecewise-boundary comparison after Theorem 1.46, printed p. 18 (PDF pp. 19–20 and 24). The normal-limit contradiction is supplied here.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-bounded-c-one-domain-boundary-charts-and-outward-normal", "def-bounded-piecewise-c-one-euclidean-domain", "ex-internal-face-cancellation-for-two-glued-regions"]
@@ -37,4 +39,3 @@ The claim that every finite piecewise $C^1$ domain is a $C^1$-boundary domain is
 ## Source notes
 
 Hunter Definition 1.35, printed pp. 13–14, and the piecewise-boundary comparison after Theorem 1.46, printed p. 18 (PDF pp. 19–20 and 24). The normal-limit contradiction is supplied here.
-

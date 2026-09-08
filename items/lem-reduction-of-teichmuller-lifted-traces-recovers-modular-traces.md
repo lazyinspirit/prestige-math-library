@@ -2,7 +2,7 @@
 id: lem-reduction-of-teichmuller-lifted-traces-recovers-modular-traces
 kind: lemma
 title: "Reduction of lifted traces recovers modular traces"
-status: draft
+status: published
 origin: pipeline
 deps: [def-lifted-modular-trace-on-p-regular-elements]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

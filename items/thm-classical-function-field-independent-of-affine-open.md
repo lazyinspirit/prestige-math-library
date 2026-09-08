@@ -2,13 +2,14 @@
 id: "thm-classical-function-field-independent-of-affine-open"
 kind: "theorem"
 title: "The function field is independent of the chosen nonempty principal affine open"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-classical-principal-opens-form-affine-basis", "thm-classical-principal-open-coordinate-ring-localization", "thm-classical-principal-open-is-affine-variety", "def-classical-affine-open-subset", "def-classical-variety-function-field", "thm-universal-property-of-the-field-of-fractions", "lem-classical-regular-functions-on-open-embed-in-function-field", "def-axiom-of-choice"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

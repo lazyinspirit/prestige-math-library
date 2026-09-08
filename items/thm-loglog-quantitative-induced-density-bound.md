@@ -2,13 +2,14 @@
 id: thm-loglog-quantitative-induced-density-bound
 kind: theorem
 title: "Loglog quantitative induced density bound"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-quantitative-density-theorem-for-ell-divisive-graphs, lem-qid-logarithmic-and-constant-divisibility]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

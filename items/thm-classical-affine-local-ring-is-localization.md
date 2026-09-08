@@ -2,13 +2,14 @@
 id: "thm-classical-affine-local-ring-is-localization"
 kind: "theorem"
 title: "The classical affine local ring is localization at the point's maximal ideal"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-classical-principal-opens-form-affine-basis", "lem-classical-affine-closed-points-are-maximal-ideals", "def-classical-germ-and-local-ring", "thm-universal-property-of-localisation", "thm-localisation-at-a-prime-is-local", "prop-localisation-zero-equality-and-kernel-criteria", "thm-classical-polynomial-functions-equal-coordinate-ring", "def-axiom-of-choice"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-relative-hahn-banach-norm-preserving-extension
 kind: theorem
 title: Relative norm-preserving Hahn–Banach extension over the real and complex fields
-status: draft
+status: published
 origin: pipeline
 deps: [thm-relative-hahn-banach-dominated-extension, def-dual-space-of-a-normed-space, lem-real-part-determines-a-complex-linear-functional, def-linear-subspace]
 provenance:
@@ -17,6 +17,7 @@ sources:
 pipeline_run: phase-2-wave-1
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

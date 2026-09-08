@@ -2,13 +2,14 @@
 id: thm-countable-first-order-compactness
 kind: theorem
 title: "Compactness for explicitly countable languages"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-countable-first-order-completeness, lem-derivation-finite-support-and-concatenation, thm-set-language-first-order-soundness]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

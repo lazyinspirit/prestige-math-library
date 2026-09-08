@@ -2,13 +2,14 @@
 id: lem-ell-divisibility-amplifies-through-a-blockade
 kind: lemma
 title: "Ell divisibility amplifies through a blockade"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-special-copy-trichotomy-produces-a-restricted-blockade, def-subreciprocal-function-and-ell-divisibility, lem-subreciprocal-functions-close-under-the-density-recursion, def-qid-finite-density-recursion-profile, lem-qid-bipartite-density-trimming, lem-qid-fixed-size-density-selection, thm-two-element-subsets-count, def-induced-copy-number, lem-integer-part]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

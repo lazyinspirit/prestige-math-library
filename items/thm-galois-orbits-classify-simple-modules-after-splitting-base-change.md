@@ -14,10 +14,11 @@ sources:
     - title: Gábor Wiese, Galois Representations
       url: https://math.uni.lu/wiese/notes/GalRep.pdf
       locator: Lemma 2.2.9, Proposition 2.2.11 and Corollary 2.2.12, pp.29–30
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

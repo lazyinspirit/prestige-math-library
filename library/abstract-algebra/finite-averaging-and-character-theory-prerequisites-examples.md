@@ -1,7 +1,7 @@
 ---
 page: finite-averaging-and-character-theory-prerequisites-examples
 title: "Finite Averaging and Character-Theory Prerequisites: Examples"
-status: draft
+status: published
 requires: [finite-averaging-and-character-theory-prerequisites]
 items: []
 examples: [ex-coordinate-projection-onto-a-subspace-of-c-three, ex-conjugacy-class-indicator-basis-for-s-three, ex-standard-hermitian-inner-product-on-functions-on-a-three-point-set, cex-unit-complex-sum-strict-with-distinct-summands]

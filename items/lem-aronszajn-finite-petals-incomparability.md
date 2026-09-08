@@ -2,13 +2,14 @@
 id: lem-aronszajn-finite-petals-incomparability
 kind: lemma
 title: "Two finite disjoint petals can be made cross-incomparable"
-status: draft
+status: published
 origin: pipeline
 deps: [def-aronszajn-suslin-and-special-tree, lem-cocountable-ultrafilter-on-uncountable-set, lem-ultrafilter-prime, lem-tree-predecessors-and-common-extensions, thm-countable-union-of-countable, def-filter, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

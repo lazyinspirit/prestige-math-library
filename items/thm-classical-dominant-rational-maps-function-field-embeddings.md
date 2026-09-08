@@ -2,13 +2,14 @@
 id: "thm-classical-dominant-rational-maps-function-field-embeddings"
 kind: "theorem"
 title: "Dominant rational maps to an affine variety correspond to field embeddings"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-classical-affine-nullstellensatz-correspondence", "thm-classical-affine-morphisms-coordinate-ring-antiequivalence", "thm-classical-function-field-independent-of-affine-open", "def-classical-dominant-morphism-and-rational-map", "thm-classical-rational-map-maximal-domain-affine-target", "lem-classical-dominant-map-pulls-back-function-fields", "thm-classical-principal-open-is-affine-variety", "lem-classical-open-source-morphisms-equal-on-dense-open", "def-axiom-of-choice", "lem-classical-regular-functions-on-open-embed-in-function-field", "lem-classical-affine-variety-nonempty-opens-dense"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

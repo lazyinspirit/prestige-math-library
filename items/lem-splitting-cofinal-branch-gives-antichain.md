@@ -2,7 +2,7 @@
 id: lem-splitting-cofinal-branch-gives-antichain
 kind: lemma
 title: "Splitting turns an uncountable branch into an antichain"
-status: draft
+status: published
 origin: pipeline
 deps: [def-normal-splitting-set-theoretic-tree, lem-tree-predecessors-and-common-extensions, def-kappa-tree-and-tree-property, def-axiom-of-choice]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://karagila.org/files/set-theory-2017.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

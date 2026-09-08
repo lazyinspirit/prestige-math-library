@@ -2,7 +2,7 @@
 id: def-complex-l-two-inner-product
 kind: definition
 title: "The complex $L^2$ pairing on equivalence classes"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps: [def-complex-lp-and-euclidean-test-function-conventions, thm-complex-holder-minkowski-and-the-quotient-norm]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

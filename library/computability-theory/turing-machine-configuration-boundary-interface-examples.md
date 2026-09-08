@@ -1,7 +1,7 @@
 ---
 page: turing-machine-configuration-boundary-interface-examples
 title: "Turing-Machine Configuration Boundary Interface: Examples"
-status: draft
+status: published
 items: []
 examples: [ex-initial-configuration-on-empty-input, ex-accepting-and-rejecting-configurations-are-machine-relative]
 ---

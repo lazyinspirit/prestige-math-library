@@ -2,12 +2,14 @@
 id: "def-classical-integral-affine-atlas-and-chartwise-morphism"
 kind: "definition"
 title: "Integral classical varieties in the compatible affine-atlas register"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-classical-affine-variety-interface", "lem-classical-irreducible-space-open-intersection-criterion", "def-classical-regular-function-on-open-set", "lem-classical-regular-functions-locality-and-gluing", "def-classical-affine-variety-morphism", "lem-classical-morphism-inverse-image-of-closed-is-closed", "thm-classical-principal-open-is-affine-variety", "def-classical-affine-open-subset", "def-axiom-of-choice"]
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  audited: 2026-09-09
 sources:
   scraped: []
   references:

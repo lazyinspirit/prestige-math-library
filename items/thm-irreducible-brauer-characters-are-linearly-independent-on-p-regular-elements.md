@@ -2,7 +2,7 @@
 id: thm-irreducible-brauer-characters-are-linearly-independent-on-p-regular-elements
 kind: theorem
 title: "Irreducible Brauer characters are independent on p-regular elements"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-modular-trace-functions-of-simple-modules-are-linearly-independent, lem-modular-trace-depends-only-on-the-p-regular-part, lem-reduction-of-teichmuller-lifted-traces-recovers-modular-traces, def-discrete-valuation-ring]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

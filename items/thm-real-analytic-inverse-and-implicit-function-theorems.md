@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -18,7 +19,7 @@ sources:
     - title: 'Ageno, Part III: Analysis of Partial Differential Equations'
       url: https://giacomoageno.github.io/LectureNotesAPDE.pdf
       locator: Ageno §2.3.3, proof of Theorem 2.22, PDF pp. 25–27; independent comparison for the analytic reduction and majorant argument.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-real-analytic-germ-in-several-variables", "thm-power-series-define-holomorphic-functions-in-several-variables", "thm-holomorphic-inverse-function-theorem-several-variables", "cor-uniqueness-of-multivariable-power-series-coefficients", "thm-power-series-expansion-in-several-complex-variables"]
@@ -53,4 +54,3 @@ Let $f$ be a real analytic map between open subsets of $\mathbb R^n$, $n\ge1$. I
 ## Source notes
 
 Real inverse/implicit reduction used in Gantumur §5, printed p. 12. The local proof below derives the analytic assertion from the earlier holomorphic inverse theorem and power-series expansion.
-

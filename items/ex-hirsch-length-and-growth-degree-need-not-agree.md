@@ -10,9 +10,10 @@ sources:
     - title: Druţu–Kapovich, Geometric Group Theory (837-page edition)
       url: https://www.math.ucdavis.edu/~kapovich/EPR/ggt.pdf
       locator: Definition 13.46, p.474
-status: draft
+status: published
 origin: pipeline
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

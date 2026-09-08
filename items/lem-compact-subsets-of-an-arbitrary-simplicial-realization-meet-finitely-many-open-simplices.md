@@ -2,7 +2,7 @@
 id: lem-compact-subsets-of-an-arbitrary-simplicial-realization-meet-finitely-many-open-simplices
 kind: lemma
 title: "Compact subsets of an arbitrary simplicial realization meet finitely many open simplices"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-geometric-realization-of-an-abstract-simplicial-complex", "thm-closed-subspace-of-a-compact-space-is-compact", "def-countable-choice"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -47,4 +48,3 @@ Appendix Proposition A.1, p.520.
 2.1 A closed simplex $|\tau|$ has finitely many faces. Each retained point in it has a distinct support face contained in $\tau$, so it contains only finitely many $q_j$. Every subset of $Q=\{q_j:j\geq1\}$ consequently has finite closed trace on every simplex and is weakly closed in $|K|$. Thus $Q$ is closed in $C$ and its subspace topology is discrete. Closedness in compact $C$ makes $Q$ compact, whereas its singleton open cover has no finite subcover. This contradiction proves $J$ finite. [F2, F3, step 1.1]
 
 3.1 Include all faces of the finitely many simplices in $J$ to obtain a finite subcomplex containing $C$; if $C$ is empty use the vertex-free subcomplex. A continuous image of a compact simplex is compact because any open cover pulls back to an open cover with a finite subcover. A finite union of these images is compact, so the preceding conclusion applies to the entire family at once, including an empty family. [F3, step 2.1] ∎
-

@@ -2,13 +2,14 @@
 id: def-face-poset-and-order-complex
 kind: definition
 title: "Face poset and order complex"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-abstract-simplicial-complex", "def-partial-order"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -28,4 +29,3 @@ Inclusion is reflexive, antisymmetric and transitive, as required by [[def-parti
 ## Source locators
 
 2.5.10, pp.51–52 (face-chain description); general-poset formulation is an explicit abstraction of the face-chain construction, not a quotation.
-

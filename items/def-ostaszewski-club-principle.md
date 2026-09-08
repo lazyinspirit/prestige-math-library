@@ -2,13 +2,14 @@
 id: def-ostaszewski-club-principle
 kind: definition
 title: "The Ostaszewski club principle"
-status: draft
+status: published
 origin: pipeline
 deps: [def-club-filter-and-nonstationary-ideal, def-cofinal-subset-of-an-ordinal, def-first-uncountable-ordinal, def-axiom-of-choice, thm-recursion]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

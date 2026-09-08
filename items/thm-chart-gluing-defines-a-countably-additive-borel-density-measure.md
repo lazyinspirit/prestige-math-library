@@ -2,13 +2,14 @@
 id: thm-chart-gluing-defines-a-countably-additive-borel-density-measure
 title: "The glued set function is a Borel measure"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-chart-gluing-of-a-nonnegative-density-measure", "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure", "cor-beppo-levi-theorem"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

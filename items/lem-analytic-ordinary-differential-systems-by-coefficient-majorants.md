@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: 'Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem'
       url: https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf
       locator: Gantumur, §3 equations (26)–(34), printed pp. 7–8, Theorem 15. The autonomous augmentation and quadratic majorant below avoid the misnormalized scalar formula (18).
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["lem-coefficient-majorisation-is-preserved-by-sums-products-composition-and-differentiation", "lem-an-analytic-germ-has-a-rational-geometric-majorant", "thm-real-analytic-inverse-and-implicit-function-theorems", "thm-power-series-define-holomorphic-functions-in-several-variables"]
@@ -50,4 +51,3 @@ For an analytic map $H(t,v)$ near $(0,v_0)\in\mathbb R\times\mathbb R^N$, $N\ge1
 ## Source notes
 
 Gantumur, §3 equations (26)–(34), printed pp. 7–8, Theorem 15. The autonomous augmentation and quadratic majorant below avoid the misnormalized scalar formula (18).
-

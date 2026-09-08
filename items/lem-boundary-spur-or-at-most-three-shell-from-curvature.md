@@ -2,7 +2,7 @@
 id: lem-boundary-spur-or-at-most-three-shell-from-curvature
 kind: lemma
 title: "Boundary spur or at most three shell from curvature"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-sc-toolkit-minimal-diagrams-and-cut-vertex-reduction, lem-c-prime-one-sixth-interior-faces-have-at-least-seven-arcs, lem-euler-curvature-identity-for-an-arc-reduced-disc-diagram]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

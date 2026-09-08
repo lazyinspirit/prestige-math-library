@@ -6,6 +6,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: Hunter, Notes on Partial Differential Equations
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Hunter §1.12 Theorem 1.46, printed p. 17 (PDF p. 23), explicitly requires the outward normal. This sign counterexample is its ball specialization.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["thm-divergence-theorem-for-bounded-c-one-euclidean-domains", "ex-divergence-theorem-on-a-ball-in-rn"]
@@ -40,4 +41,3 @@ The claim that the divergence formula remains valid with the inward unit normal 
 ## Source notes
 
 Hunter §1.12 Theorem 1.46, printed p. 17 (PDF p. 23), explicitly requires the outward normal. This sign counterexample is its ball specialization.
-

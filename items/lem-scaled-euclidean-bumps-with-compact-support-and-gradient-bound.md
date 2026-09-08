@@ -6,6 +6,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
       url: https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf
       locator: Oh §3.9, Proposition 3.23 and its complete local graph and partition proof, printed/PDF pp. 47–48.
       original_url: https://web.math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-the-standard-smooth-step-function", "thm-chain-rule-for-total-derivatives", "thm-algebra-of-derivatives", "thm-linear-change-of-variables-for-lebesgue-measure", "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant", "thm-monotone-convergence-for-the-integral", "def-countable-choice"]
@@ -52,4 +53,3 @@ Assume $\mathrm{AC}_\omega$. For $n\ge1$ there is a fixed smooth $b:\mathbb R^n\
 ## Source notes
 
 Hunter, §1.9.1 Theorem 1.29 and Example 1.30, printed p. 12. The strict support margin and exact gradient scaling are computed locally.
-

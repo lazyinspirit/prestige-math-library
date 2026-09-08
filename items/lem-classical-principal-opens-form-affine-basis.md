@@ -2,13 +2,14 @@
 id: "lem-classical-principal-opens-form-affine-basis"
 kind: "lemma"
 title: "Principal opens form a basis and multiply under intersection"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-classical-affine-zero-loci-form-zariski-closed-sets", "def-classical-principal-open"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

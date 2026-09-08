@@ -2,7 +2,7 @@
 id: lem-prime-to-p-roots-lift-uniquely-in-a-complete-discrete-valuation-ring
 kind: lemma
 title: "Prime-to-p roots lift uniquely in a complete DVR"
-status: draft
+status: published
 origin: pipeline
 deps: [def-splitting-p-modular-system-for-a-finite-group, def-discrete-valuation-ring]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

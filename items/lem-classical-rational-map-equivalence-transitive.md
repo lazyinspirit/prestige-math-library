@@ -2,13 +2,14 @@
 id: "lem-classical-rational-map-equivalence-transitive"
 kind: "lemma"
 title: "The rational-map relation is transitive"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-classical-irreducible-space-open-intersection-criterion", "lem-classical-affine-variety-nonempty-opens-dense", "def-classical-rational-map"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

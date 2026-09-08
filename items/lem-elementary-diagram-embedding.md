@@ -2,13 +2,14 @@
 id: lem-elementary-diagram-embedding
 kind: lemma
 title: "Models of the elementary diagram yield elementary embeddings"
-status: draft
+status: published
 origin: pipeline
 deps: [def-elementary-diagram-of-set-structure, def-elementary-set-structure-embedding, lem-formula-substitution-satisfaction, lem-satisfaction-coincidence, thm-set-structure-satisfaction-recursion, thm-structural-recursion-on-set-coded-syntax, def-ordered-pair, thm-the-characterising-property-of-ordered-pairs, thm-foundation-excludes-membership-cycles]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

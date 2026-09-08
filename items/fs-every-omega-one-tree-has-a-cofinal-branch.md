@@ -2,12 +2,14 @@
 id: fs-every-omega-one-tree-has-a-cofinal-branch
 kind: false-statement
 title: "FALSE: every ω1-tree has a cofinal branch"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-special-aronszajn-tree-construction, def-kappa-tree-and-tree-property, def-aronszajn-suslin-and-special-tree, thm-countable-subsets-of-omega-one-are-bounded, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-09
 sources:
   references:
     - title: "Karagila, Axiomatic Set Theory, Theorem 9.2 and Exercise 9.4, printed p43; application of the local special-tree construction"

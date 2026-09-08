@@ -6,6 +6,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -18,7 +19,7 @@ sources:
     - title: 'Ageno, Part III: Analysis of Partial Differential Equations'
       url: https://giacomoageno.github.io/LectureNotesAPDE.pdf
       locator: Ageno §2.3.3, proof of Theorem 2.22, PDF pp. 25–27; independent comparison for the analytic reduction and majorant argument.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["thm-cauchy-kovalevskaya-for-first-order-analytic-systems-in-normal-form", "lem-coefficient-majorisation-is-preserved-by-sums-products-composition-and-differentiation", "thm-chain-rule-for-total-derivatives"]
@@ -47,4 +48,3 @@ For a fixed $a\in\mathbb R^d$ and analytic g near zero, the problem $u_t+a\cdot 
 ## Source notes
 
 Gantumur, §5 transport discussion following Exercise 24, printed p. 14; the constant-vector solution is computed locally.
-

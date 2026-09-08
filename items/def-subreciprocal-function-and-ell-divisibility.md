@@ -2,13 +2,14 @@
 id: def-subreciprocal-function-and-ell-divisibility
 kind: definition
 title: "Subreciprocal function and ell divisibility"
-status: draft
+status: published
 origin: pipeline
 deps: [def-induced-copy-density-and-homogeneous-restriction-parameter, def-qid-restricted-blockade-with-empty-blocks, def-logarithm-to-a-base, lem-integer-part]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

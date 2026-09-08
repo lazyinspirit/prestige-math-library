@@ -2,7 +2,7 @@
 id: ex-transfer-annihilation-for-a-cyclic-group
 kind: example
 title: "Integral homology of a finite cyclic group"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-positive-degree-integral-homology-of-a-finite-group-is-annihilated-by-its-order, def-group-homology-as-a-derived-functor, thm-projective-resolutions-of-the-same-object-are-homotopy-equivalent-over-that-object]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

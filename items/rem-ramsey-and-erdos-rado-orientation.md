@@ -2,13 +2,14 @@
 id: rem-ramsey-and-erdos-rado-orientation
 kind: remark
 title: "Ramsey and Erdős–Rado: exact orientation obligations"
-status: draft
+status: published
 origin: pipeline
 deps: [def-partition-arrow-notation, thm-infinite-ramsey-finite-colors, thm-general-cardinal-erdos-rado]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

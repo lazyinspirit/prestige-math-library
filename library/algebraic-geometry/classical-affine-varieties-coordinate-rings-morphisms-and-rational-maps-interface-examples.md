@@ -1,7 +1,7 @@
 ---
 page: "classical-affine-varieties-coordinate-rings-morphisms-and-rational-maps-interface-examples"
 title: "Classical Affine Varieties: Coordinate Rings, Morphisms, and Rational Maps — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-classical-affine-line-coordinate-local-and-function-field-dictionary"]
 ---

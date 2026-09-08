@@ -2,7 +2,7 @@
 id: lem-the-open-star-criterion-produces-a-simplicial-map
 kind: lemma
 title: "The open star criterion produces a simplicial map"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-open-and-closed-stars-in-a-subdivision", "def-simplicial-map-and-its-geometric-realization", "prop-a-finite-simplicial-complex-has-compact-hausdorff-realization", "thm-closed-subspace-of-a-compact-space-is-compact", "lem-finite-simplicial-weak-topology-agrees-with-euclidean-topology", "def-homotopy-relative-and-path-homotopy"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

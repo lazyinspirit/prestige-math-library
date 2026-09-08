@@ -2,13 +2,14 @@
 id: "def-classical-affine-open-subset"
 kind: "definition"
 title: "A classical affine open subset and its coordinate ring"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-classical-affine-variety-morphism", "thm-classical-affine-morphisms-coordinate-ring-antiequivalence", "thm-classical-principal-open-is-affine-variety", "def-axiom-of-choice"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

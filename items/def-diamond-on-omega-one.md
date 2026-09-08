@@ -2,12 +2,14 @@
 id: def-diamond-on-omega-one
 kind: definition
 title: "Diamond on ω1"
-status: draft
+status: published
 origin: pipeline
 deps: [def-club-subsets-of-ordinals, def-club-filter-and-nonstationary-ideal, def-first-uncountable-ordinal]
 provenance:
   statement: ai-altered
   proof: not-applicable
+verification:
+  audited: 2026-09-09
 sources:
   references:
     - title: "Karagila, Axiomatic Set Theory, Definition 9.7, printed p44"

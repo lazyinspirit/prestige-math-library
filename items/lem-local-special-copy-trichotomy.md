@@ -2,13 +2,14 @@
 id: lem-local-special-copy-trichotomy
 kind: lemma
 title: "Local special copy trichotomy"
-status: draft
+status: published
 origin: pipeline
 deps: [def-induced-copy-density-and-homogeneous-restriction-parameter, lem-few-induced-copies-exclude-a-fixed-labelled-blowup, thm-double-counting, thm-cardinality-of-a-set-of-functions, thm-real-power-laws]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: Hunter, Notes on Partial Differential Equations
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Hunter §2.5, immediately before Theorem 2.23, printed p. 32 (PDF p. 38).
-status: draft
+status: published
 origin: pipeline
 deps: ["def-bounded-c-one-domain-boundary-charts-and-outward-normal", "def-bounded-piecewise-c-one-euclidean-domain"]
 ---
@@ -27,4 +28,3 @@ For a bounded $C^1$ domain $\Omega$ and $u\in C^1(\overline\Omega)$, the classic
 ## Source notes
 
 Hunter §2.5, immediately before Theorem 2.23, printed p. 32 (PDF p. 38).
-

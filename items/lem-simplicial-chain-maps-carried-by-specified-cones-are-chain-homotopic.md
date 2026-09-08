@@ -2,7 +2,7 @@
 id: lem-simplicial-chain-maps-carried-by-specified-cones-are-chain-homotopic
 kind: lemma
 title: "Simplicial chain maps carried by specified cones are chain homotopic"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-an-augmented-simplicial-cone-has-an-explicit-chain-contraction", "def-chain-homotopy"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -45,4 +46,3 @@ Assign to each nonempty simplex $\sigma$ of $K$ a cone subcomplex $\Phi(\sigma)\
 2.1 Suppose $h$ is defined through degree $n-1$ with $\partial h+h\partial=f-g$ there. For an oriented $n$-simplex $s$ put $z=f(s)-g(s)-h(\partial s)$. The nesting of the carriers puts all summands in $C_n(\Phi(s))$. Since $f,g$ commute with boundary, $\partial z=(f-g)(\partial s)-\partial h(\partial s)=h\partial^2s=0$. Here $\partial^2=0$ is part of the given chain complexes. [step 1.1, given]
 
 3.1 Define $h_n(s)=c_s z$. The contraction identity gives $\partial h_n(s)=z-c_s\partial z=z$, so $\partial h_n(s)+h_{n-1}(\partial s)=f(s)-g(s)$. The formula is alternating in the original oriented representative: the boundary and $f,g$ are alternating, the already defined $h$ is linear, and $c_s$ depends only on the underlying face. It therefore defines a homomorphism without choosing orientations on all simplices. Induction defines all degrees, carried by $\Phi$, with the asserted identity; in degree $-1$ both maps are the identity on $\mathbb Z$, so their difference is zero. This is a chain homotopy by definition. [F1, F2, step 2.1] ∎
-

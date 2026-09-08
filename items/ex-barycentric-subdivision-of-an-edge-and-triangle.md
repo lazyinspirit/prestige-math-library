@@ -2,7 +2,7 @@
 id: ex-barycentric-subdivision-of-an-edge-and-triangle
 kind: example
 title: "Barycentric subdivision of an edge and triangle"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-barycentric-subdivision-of-an-abstract-simplicial-complex", "thm-barycentric-subdivision-realizes-homeomorphically"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -43,4 +44,3 @@ For the full edge on $\{a,b\}$, barycentric subdivision has three vertices and t
 1.1 The edge has nonempty faces $a,b,ab$, abbreviating braces. Its only length-two chains are $a<ab$ and $b<ab$, so the two subdivided edges meet at $b_{ab}=(a+b)/2$. There are three singleton chains and one empty chain. Thus its numbers of faces in dimensions $-1,0,1$ are $(1,3,2)$. [F1]
 
 2.1 The triangle has face labels $a,b,c,ab,ac,bc,abc$. The maximal chains are $a<ab<abc$, $b<ab<abc$, $a<ac<abc$, $c<ac<abc$, $b<bc<abc$, and $c<bc<abc$. The comparable pairs are six vertex-edge pairs, three vertex-triangle pairs, and three edge-triangle pairs, giving twelve edges. The seven singleton chains and one empty chain give face counts $(1,7,12,6)$. Barycenters place these six triangles inside the original triangle and the barycentric homeomorphism identifies their union with it. For a vertex-free complex there is only the empty chain, so the counts reduce to $(1,0,0,0)$. [F1, F2, step 1.1] ∎
-

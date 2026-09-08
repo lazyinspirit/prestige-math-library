@@ -2,7 +2,7 @@
 id: lem-relative-subdivision-neighbourhood-adjustment
 kind: lemma
 title: "Relative subdivision neighbourhood adjustment"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-relative-derived-subdivision-makes-the-fixed-subcomplex-full", "lem-the-open-star-criterion-produces-a-simplicial-map", "lem-mesh-of-iterated-simplicial-barycentric-subdivision-tends-to-zero"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -58,4 +59,3 @@ The homotopy from the identity to $h$ stays in each original simplex. The maximu
 5.1 Let $B_3$ be the induced subcomplex of $T_3$ on vertices outside $A$. No simplex of $T_3$ containing an $A$-vertex can meet $|B_2|$: its relative face-chain description has an $A$ base face and all outside barycenters lie on $T_2$ faces containing that base. Every point of such a simplex has a positive coordinate at some vertex of that base in $T_2$, whereas points of $|B_2|$ have all those coordinates zero. Consequently every $T_3$ simplex meeting $|B_2|$ is in $B_3$. For $r\geq3$ and a vertex $v\in|B_2|$, every $T_r$ simplex containing $v$ lies in a $T_3$ simplex meeting $|B_2|$, hence in $B_3$. Since $B_3$ is disjoint from $A$, its further relative subdivisions are ordinary barycentric subdivisions. Each such star has diameter at most $2m(\operatorname{sd}^{r-3}B_3)$, which tends to zero by the mesh estimate. [F1, F3, step 4.1]
 
 6.1 If $A$ is vertex-free then $B_1=T_1$, $T^+=T_1$ and $h=1$; the neighbourhood can be empty and the mesh estimate handles all stars. If $A=K$, then $T^+=K$, $h=1$, and $B_2$ is vertex-free, so only the near clause occurs. These constructions also cover a vertex-free $K$, with empty maps. [step 2.1, step 4.1, step 5.1] ∎
-

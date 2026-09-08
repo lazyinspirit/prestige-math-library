@@ -1,7 +1,7 @@
 ---
 page: "galois-orbits-and-descent-of-simple-finite-group-modules"
 title: "Galois Orbits and Descent of Simple Finite-Group Modules"
-status: "draft"
+status: published
 items: ["def-semilinear-galois-action-on-a-scalar-extended-algebra", "lem-galois-fixed-points-recover-a-finite-dimensional-scalar-extension", "lem-galois-orbit-sums-of-split-central-idempotents-descend", "lem-a-descended-galois-orbit-idempotent-is-primitive", "thm-galois-orbits-classify-simple-modules-after-splitting-base-change"]
 examples: []
 ---

@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -18,7 +19,7 @@ sources:
     - title: 'Ageno, Part III: Analysis of Partial Differential Equations'
       url: https://giacomoageno.github.io/LectureNotesAPDE.pdf
       locator: Ageno §2.3.3, proof of Theorem 2.22, PDF pp. 25–27; independent comparison for the analytic reduction and majorant argument.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["lem-analytic-cauchy-data-reduce-to-zero-data-in-normal-form", "lem-normal-form-pde-determines-a-unique-formal-taylor-series", "lem-a-positive-majorant-system-dominates-the-formal-cauchy-recursion", "lem-the-goursat-majorant-equation-has-a-convergent-positive-power-series-solution", "thm-power-series-define-holomorphic-functions-in-several-variables"]
@@ -55,4 +56,3 @@ Let $d,N\ge1$, let $g:\mathbb R^d\to\mathbb R^N$ be analytic near zero, and let 
 ## Source notes
 
 Gantumur, §4 Theorem 18, printed pp. 9–10; Corollary 20 proof, p. 11, for nonzero analytic data.
-

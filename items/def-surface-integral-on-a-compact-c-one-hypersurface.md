@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: Hunter, Notes on Partial Differential Equations
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Hunter, §1.10.2, printed p. 15 (PDF p. 21), Gram surface density and partition patching.
-status: draft
+status: published
 origin: pipeline
 deps: ["def-bounded-c-one-domain-boundary-charts-and-outward-normal", "lem-finite-ambient-partitions-for-euclidean-boundary-integration", "def-gram-matrix-and-gram-determinant", "def-nonnegative-lebesgue-integral"]
 justified_by: ["lem-surface-integral-is-independent-of-c-one-boundary-charts"]
@@ -30,4 +31,3 @@ For a nonnegative Borel f on S define $\int_S f\,dS=\sum_j\int_{V_j}(\chi_j f)(X
 ## Source notes
 
 Hunter, §1.10.2, printed p. 15 (PDF p. 21), Gram surface density and partition patching.
-

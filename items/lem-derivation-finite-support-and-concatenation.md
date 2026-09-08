@@ -2,13 +2,14 @@
 id: lem-derivation-finite-support-and-concatenation
 kind: lemma
 title: "Finite support, weakening, and composition of derivations"
-status: draft
+status: published
 origin: pipeline
 deps: [def-set-coded-formal-derivation, thm-induction-principle, def-first-order-syntactic-consistency]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

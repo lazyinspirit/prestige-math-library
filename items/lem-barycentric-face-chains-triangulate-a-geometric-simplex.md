@@ -2,7 +2,7 @@
 id: lem-barycentric-face-chains-triangulate-a-geometric-simplex
 kind: lemma
 title: "Barycentric face chains triangulate a geometric simplex"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-canonical-barycentric-realization-map", "lem-barycentric-coordinates-are-unique", "lem-finite-simplicial-weak-topology-agrees-with-euclidean-topology"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -45,4 +46,3 @@ For a finite geometric simplex $\sigma$, the convex hulls of barycenters along s
 1.2 For any strict chain $G_1\subsetneq\cdots\subsetneq G_s$, the vectors $b_{G_j}$ are linearly independent in barycentric coordinate space: in $\sum c_j b_{G_j}=0$, a coordinate in $G_s\setminus G_{s-1}$ gives $c_s/\#G_s=0$, and descending induction gives every $c_j=0$ (finish with any vertex of $G_1$). Hence they are affinely independent in the original simplex too, by uniqueness of its affine coordinates. [F1, F2]
 
 2.1 If a point is expressed in one of these chain simplices, delete zero weights. Its coordinate on the successive layers of the remaining chain is strictly decreasing, with consecutive differences equal to the corresponding positive weight divided by the face cardinality. Thus the positive-weight faces are exactly the level sets $F_j$ in the first step and the weights are exactly $w_j$. In two chain representations only common face labels can therefore carry positive weights. Conversely every convex combination of common labels belongs to both simplices. This proves precisely the intersection assertion and hence the triangulation. The empty simplex has no points; a one-vertex simplex has the sole weight $1$. [step 1.1, step 1.2] ∎
-

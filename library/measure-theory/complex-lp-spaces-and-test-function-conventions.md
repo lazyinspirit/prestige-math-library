@@ -1,7 +1,7 @@
 ---
 page: complex-lp-spaces-and-test-function-conventions
 title: "Complex Lp Spaces and Test-Function Conventions"
-status: draft
+status: published
 items: [def-complex-lp-and-euclidean-test-function-conventions, thm-complex-holder-minkowski-and-the-quotient-norm, thm-complex-lp-completeness-and-almost-everywhere-subsequences, thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p, def-complex-l-two-inner-product, thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz, lem-complex-lp-completeness-density-and-inner-product, lem-complex-lq-norm-from-finite-simple-dual-tests, lem-complex-translation-and-approximate-identity-interfaces]
 examples: []
 ---

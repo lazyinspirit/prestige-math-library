@@ -2,12 +2,14 @@
 id: thm-well-ordered-language-henkin-completeness
 kind: theorem
 title: "Well-ordered language completeness with a size bound"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-fresh-henkin-axiom-preserves-consistency, lem-consistent-sentence-decision, lem-derivation-finite-support-and-concatenation, thm-henkin-closed-term-truth-lemma, thm-transfinite-recursion, thm-well-ordering-theorem, cor-cardinal-absorption, def-axiom-of-choice, lem-proof-fresh-constant-elimination, thm-set-language-first-order-soundness]
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-09
 sources:
   references:
     - title: "Moschovakis, Lemmas 1I.4–1I.5 pp40–43 and Remark 1J.6 p46; full local cardinal-length adaptation, not a proof credited to the remark."

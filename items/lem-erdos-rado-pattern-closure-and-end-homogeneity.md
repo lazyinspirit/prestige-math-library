@@ -2,13 +2,14 @@
 id: lem-erdos-rado-pattern-closure-and-end-homogeneity
 kind: lemma
 title: "Pattern closure yields an end-homogeneous sequence"
-status: draft
+status: published
 origin: pipeline
 deps: [def-partition-arrow-notation, lem-cardinal-arithmetic-basic-laws, cor-cardinal-absorption, thm-regularity-of-the-alephs, thm-every-infinite-cardinal-is-an-aleph, thm-transfinite-recursion, thm-cantor-powerset, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-finite-support-poset-product
 kind: definition
 title: "Finite-support products"
-status: draft
+status: published
 origin: pipeline
 deps: [def-poset-ccc-and-knaster-property]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

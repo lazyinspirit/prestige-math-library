@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: 'Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem'
       url: https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf
       locator: Gantumur, §4 Theorem 18 proof, equations (41)–(43), printed p. 9; higher-order recursion is expanded locally.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["lem-coefficient-majorisation-is-preserved-by-sums-products-composition-and-differentiation", "lem-analytic-cauchy-data-reduce-to-zero-data-in-normal-form"]
@@ -44,4 +45,3 @@ For $m\ge1$ and analytic $F$ near zero, the scalar zero-data equation $\partial_
 ## Source notes
 
 Gantumur, §4 Theorem 18 proof, equations (41)–(43), printed p. 9; higher-order recursion is expanded locally.
-

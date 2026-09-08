@@ -2,13 +2,14 @@
 id: def-relative-normed-convexity-and-separation
 kind: definition
 title: Convex sets and continuous real-hyperplane separation in a normed space
-status: draft
+status: published
 origin: pipeline
 deps: [rem-real-and-complex-normed-space-convention, def-dual-space-of-a-normed-space, def-metric-topology]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

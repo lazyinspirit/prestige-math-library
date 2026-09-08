@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -18,7 +19,7 @@ sources:
     - title: 'Ageno, Part III: Analysis of Partial Differential Equations'
       url: https://giacomoageno.github.io/LectureNotesAPDE.pdf
       locator: Ageno §2.3.3, proof of Theorem 2.22, PDF pp. 25–27; independent comparison for the analytic reduction and majorant argument.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-real-analytic-germ-in-several-variables", "lem-coefficient-majorisation-is-preserved-by-sums-products-composition-and-differentiation", "thm-symmetry-of-higher-mixed-partials"]
@@ -45,4 +46,3 @@ Let $m\ge1$. Suppose $\partial_t^m u=F(t,x,(\partial_x^\alpha\partial_t^j u)_{|\
 ## Source notes
 
 Gantumur, §4 Corollary 20 proof, printed p. 11; the finite Taylor subtraction is computed locally.
-

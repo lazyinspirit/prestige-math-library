@@ -2,7 +2,7 @@
 id: ex-a-relative-simplicial-approximation-fixed-on-the-endpoints
 kind: example
 title: "A relative simplicial approximation fixed on the endpoints"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-relative-simplicial-approximation-after-subdivision", "lem-the-open-star-criterion-produces-a-simplicial-map"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -43,4 +44,3 @@ Relative theorem pp.39–42, interval specialization.
 1.1 The first source edge maps to the target vertex $0$ and the second to the target edge, so $g$ is simplicial. The two affine formulas agree at $1/2$, both giving $0$, and $|g|(0)=0$, $|g|(1)=1$. The target stars are $[0,1)$ and $(0,1]$. The source stars of $0,1/2,1$ are $[0,1/2)$, $(0,1)$, $(1/2,1]$; under $x^2$ they lie respectively in $[0,1)$, $[0,1)$, $(0,1]$. Thus this is even a star approximation to $f$. [F1]
 
 2.1 The explicit homotopy is $H(x,t)=(1-t)x^2+t|g|(x)$. It is continuous because its piecewise polynomial formulas agree at $x=1/2$; its values lie in $[0,1]$ as convex combinations. It satisfies $H(x,0)=x^2$, $H(x,1)=|g|(x)$ and $H(0,t)=0,H(1,t)=1$. At the midpoint, $f(1/2)=1/4$, $|g|(1/2)=0$, and $H(1/2,t)=(1-t)/4$, so fixing the endpoints does not mean fixing the entire interval. This explicitly realizes the relative theorem for the pair. [F2, step 1.1] ∎
-

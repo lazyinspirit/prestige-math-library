@@ -2,7 +2,7 @@
 id: lem-relative-derived-subdivision-makes-the-fixed-subcomplex-full
 kind: lemma
 title: "Relative derived subdivision makes the fixed subcomplex full"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-relative-derived-subdivision-of-a-finite-simplicial-pair"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -41,4 +42,3 @@ For finite $A\subseteq K$, $A$ is full in $D_A^rK$ for every $r\geq1$: the verti
 1.1 A simplex of $D_AK$ consists of a face $\alpha$ of $A$ and barycenters $b_{\sigma_1},\ldots,b_{\sigma_s}$ of nested faces outside $A$, strictly containing $\alpha$. The only vertices in $|A|$ are those of $\alpha$: a barycenter of $\sigma\notin A$ has support $\sigma$, so cannot lie in the subcomplex $A$. Thus the vertices in $A$ span precisely $\alpha$. [F1]
 
 2.1 For a point in that simplex with a positive coefficient at some $b_{\sigma_j}$, take the largest such face $\sigma_j$. All its vertex coordinates in the original simplex become positive, with no cancellation, so the original support contains $\sigma_j$. Such a point cannot belong to $|A|$, since that would put its support and every subface, including $\sigma_j$, in $A$. Conversely every point using only vertices of $\alpha$ lies in $|A|$. Therefore the intersection is exactly $|\alpha|$. The same argument applies with $K$ replaced by each $D_A^{r-1}K$. If $A$ is empty intersections are empty; if $A=K$, every simplex is already in $A$. [F1, step 1.1] ∎
-

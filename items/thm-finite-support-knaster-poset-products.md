@@ -2,13 +2,14 @@
 id: thm-finite-support-knaster-poset-products
 kind: theorem
 title: "Finite-support products of Knaster posets are Knaster"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-finite-knaster-poset-products, cor-indexed-omega-one-delta-system, def-finite-support-poset-product, def-poset-ccc-and-knaster-property, thm-well-ordering-theorem, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

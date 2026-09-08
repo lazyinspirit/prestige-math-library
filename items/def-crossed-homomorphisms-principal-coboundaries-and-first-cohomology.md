@@ -2,7 +2,7 @@
 id: def-crossed-homomorphisms-principal-coboundaries-and-first-cohomology
 kind: definition
 title: "Crossed homomorphisms and first cohomology"
-status: draft
+status: published
 origin: pipeline
 deps: [def-inhomogeneous-group-cochains, cor-normalized-cochains-compute-group-cohomology]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

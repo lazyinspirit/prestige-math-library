@@ -1,7 +1,7 @@
 ---
 page: group-homology-transfer-and-low-degree-exact-sequences
 title: "Group Homology Transfer and Low-Degree Exact Sequences"
-status: draft
+status: published
 items: ["lem-diagonal-bar-coinvariants-compute-group-homology", "def-finite-index-transfer-on-normalized-bar-chains", "lem-bar-transfer-is-a-chain-map-and-choice-independent-up-to-chain-homotopy", "lem-corestriction-after-bar-transfer-is-index-multiplication-on-homology", "thm-positive-degree-integral-homology-of-a-finite-group-is-annihilated-by-its-order", "lem-bar-first-integral-homology-is-the-abelianization", "lem-free-group-augmentation-ideal-has-the-generator-difference-basis", "lem-low-degree-filtration-sequence-for-a-first-quadrant-bicomplex", "def-free-presentation-lyndon-bar-bicomplex-and-edge-maps", "lem-free-presentation-bicomplex-collapses-in-positive-middle-group-degree", "thm-free-presentation-homology-five-term-sequence", "def-crossed-homomorphisms-principal-coboundaries-and-first-cohomology", "def-degree-one-restriction-inflation-and-quotient-action", "lem-degree-one-maps-and-quotient-action-are-well-defined", "thm-degree-one-inflation-restriction-exact-sequence", "lem-bar-two-cocycles-classify-abelian-kernel-extensions", "lem-pullback-and-coefficient-pushout-realize-bar-cohomology-maps", "def-low-degree-transgression-for-a-group-extension", "lem-transgression-kernel-is-the-image-of-restriction", "lem-kernel-of-degree-two-inflation-is-the-transgression-image", "thm-inflation-restriction-transgression-five-term-sequence"]
 examples: []
 ---

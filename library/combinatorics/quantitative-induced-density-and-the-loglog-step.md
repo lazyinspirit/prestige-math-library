@@ -1,7 +1,7 @@
 ---
 page: "quantitative-induced-density-and-the-loglog-step"
 title: "Quantitative Induced Density and the Log-Log Step"
-status: "draft"
+status: published
 items: ["def-induced-copy-density-and-homogeneous-restriction-parameter", "def-qid-restricted-blockade-with-empty-blocks", "def-labelled-blowup-and-good-induced-copy", "lem-good-copy-extension-count", "lem-few-induced-copies-exclude-a-fixed-labelled-blowup", "lem-qid-bipartite-density-trimming", "lem-qid-fixed-size-density-selection", "lem-local-special-copy-trichotomy", "lem-qid-maximal-blowup-trichotomy", "lem-special-copy-trichotomy-produces-a-restricted-blockade", "def-subreciprocal-function-and-ell-divisibility", "lem-subreciprocal-functions-close-under-the-density-recursion", "def-qid-finite-density-recursion-profile", "lem-qid-logarithmic-and-constant-divisibility", "lem-ell-divisibility-amplifies-through-a-blockade", "thm-quantitative-density-theorem-for-ell-divisive-graphs", "cor-fox-sudakov-quantitative-induced-density-bound", "thm-loglog-quantitative-induced-density-bound"]
 examples: []
 ---

@@ -2,13 +2,14 @@
 id: thm-downward-lowenheim-skolem-with-parameters
 kind: theorem
 title: "Downward Löwenheim–Skolem with parameters"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-skolem-hull-size-and-elementarity, cor-cardinal-absorption, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

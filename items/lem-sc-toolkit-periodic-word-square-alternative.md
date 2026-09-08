@@ -2,7 +2,7 @@
 id: lem-sc-toolkit-periodic-word-square-alternative
 kind: lemma
 title: "Periodic words: a relator root or Dehn-reduced powers"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sc-toolkit-cyclically-dehn-reduced-word, lem-sc-toolkit-periodic-relator-overlap-is-a-piece, def-sc-toolkit-symmetrised-relators-and-pieces]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

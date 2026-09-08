@@ -13,10 +13,11 @@ sources:
     - title: Gábor Wiese, Galois Representations
       url: https://math.uni.lu/wiese/notes/GalRep.pdf
       locator: Remark 2.4.2(ii), p.34; Exercise 14, p.70 (real quaternion example adapted to Q and Q(i))
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

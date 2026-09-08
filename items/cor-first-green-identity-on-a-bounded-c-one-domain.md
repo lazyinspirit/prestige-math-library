@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: Hunter, Notes on Partial Differential Equations
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Hunter §2.5, Theorem 2.23, equation (2.11) and its proof, printed p. 32 (PDF p. 38); the weaker C1 assumption on v follows from the displayed product computation.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["thm-divergence-theorem-for-bounded-c-one-euclidean-domains", "thm-divergence-theorem-for-bounded-piecewise-c-one-domains", "def-classical-normal-derivative", "thm-algebra-of-derivatives"]
@@ -46,4 +47,3 @@ Assume $\mathrm{AC}_\omega$. Let $\Omega\subset\mathbb R^n$, $n\ge2$, be a bound
 ## Source notes
 
 Hunter §2.5, Theorem 2.23, equation (2.11) and its proof, printed p. 32 (PDF p. 38); the weaker C1 assumption on v follows from the displayed product computation.
-

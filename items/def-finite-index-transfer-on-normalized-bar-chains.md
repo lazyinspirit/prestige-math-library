@@ -2,7 +2,7 @@
 id: def-finite-index-transfer-on-normalized-bar-chains
 kind: definition
 title: "Finite-index transfer on normalized bar chains"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-diagonal-bar-coinvariants-compute-group-homology, def-normalized-bar-resolution]
 justified_by: [lem-bar-transfer-is-a-chain-map-and-choice-independent-up-to-chain-homotopy]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-lifted-modular-trace-on-p-regular-elements
 kind: definition
 title: "Lifted modular trace on p-regular elements"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-prime-to-p-roots-lift-uniquely-in-a-complete-discrete-valuation-ring, def-splitting-p-modular-system-for-a-finite-group]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

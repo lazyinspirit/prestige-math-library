@@ -1,7 +1,7 @@
 ---
 page: "deduction-soundness-completeness-and-compactness"
 title: "Deduction, Soundness, Completeness, and Compactness"
-status: "draft"
+status: published
 items: ["def-set-coded-formal-derivation", "def-first-order-syntactic-consistency", "lem-derivation-finite-support-and-concatenation", "lem-hilbert-propositional-and-equality-rules", "thm-first-order-sentence-deduction", "thm-set-language-first-order-soundness", "lem-proof-fresh-constant-elimination", "lem-consistent-sentence-decision", "def-henkin-witness-extension", "lem-fresh-henkin-axiom-preserves-consistency", "lem-countable-henkin-syntax-coding", "thm-countable-lindenbaum-henkin-completion", "lem-complete-henkin-theory-truth-rules", "lem-henkin-term-equality-congruence", "def-henkin-closed-term-model", "thm-henkin-closed-term-truth-lemma", "thm-countable-first-order-completeness", "thm-countable-first-order-compactness", "def-elementary-set-structure-embedding", "thm-tarski-vaught-set-structure-test", "def-skolem-witness-hull", "lem-skolem-hull-size-and-elementarity", "thm-downward-lowenheim-skolem-with-parameters", "thm-elementary-ordinal-chain-union", "thm-well-ordered-language-henkin-completeness", "def-elementary-diagram-of-set-structure", "lem-elementary-diagram-embedding", "thm-upward-lowenheim-skolem-with-choice", "cor-arbitrarily-large-finite-models-give-infinite-model", "def-nonstandard-natural-number-structure", "thm-nonstandard-natural-number-model-exists", "cor-countable-los-vaught-test", "def-coded-first-order-zf-theory", "lem-models-of-coded-zf-are-infinite", "rem-first-order-choice-strength-boundary"]
 examples: []
 ---

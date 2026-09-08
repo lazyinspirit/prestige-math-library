@@ -2,7 +2,7 @@
 id: ex-modular-traces-for-a-cyclic-p-prime-group
 kind: example
 title: "A cyclic prime-to-p Brauer table"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-irreducible-brauer-characters-are-linearly-independent-on-p-regular-elements, def-lifted-modular-trace-on-p-regular-elements]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

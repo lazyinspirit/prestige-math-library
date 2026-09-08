@@ -1,7 +1,7 @@
 ---
 page: finite-automata-transition-and-determinisation-interfaces
 title: "Finite-Automata Transition and Determinisation Interfaces"
-status: draft
+status: published
 items: [def-epsilon-nfa-word-transition, thm-subset-construction-reachability-invariant, prop-deterministic-automata-are-special-nondeterministic-automata]
 examples: []
 ---

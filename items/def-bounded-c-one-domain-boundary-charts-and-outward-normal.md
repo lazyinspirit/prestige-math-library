@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: Hunter, Notes on Partial Differential Equations
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Hunter, §1.10 Definitions 1.34–1.35 and §1.10.3, printed pp. 13–16 (PDF pp. 19–22). Interior-up-to-boundary regularity is the local convention.
-status: draft
+status: published
 origin: pipeline
 deps: ["def-total-derivative-in-euclidean-space", "def-inner-product-space", "def-countable-choice"]
 justified_by: ["lem-surface-integral-is-independent-of-c-one-boundary-charts"]
@@ -30,4 +31,3 @@ The convention $F\in C^1(\overline\Omega)$ means F is continuously differentiabl
 ## Source notes
 
 Hunter, §1.10 Definitions 1.34–1.35 and §1.10.3, printed pp. 13–16 (PDF pp. 19–22). Interior-up-to-boundary regularity is the local convention.
-

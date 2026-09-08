@@ -2,7 +2,7 @@
 id: lem-equality-case-for-a-finite-sum-of-unit-complex-numbers
 kind: lemma
 title: "Equality in the unit-complex finite-sum bound"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-wave-1
 deps: [def-complex-conjugate-real-imaginary-part-and-modulus, def-sum-over-a-finite-index-set, lem-finite-sum-laws, def-finite-sum-in-a-commutative-monoid, lem-finite-sum-reindexing-and-fubini, lem-complex-conjugation-and-modulus-laws, thm-induction-principle, lem-of-square-monotone]
@@ -10,6 +10,7 @@ justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

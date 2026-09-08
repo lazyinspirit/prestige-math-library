@@ -2,13 +2,14 @@
 id: ex-zero-dimensional-density-measure-is-weighted-counting
 title: "Weighted counting in dimension zero"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["def-borel-measurable-nonnegative-density-on-a-manifold", "thm-density-measure-is-independent-of-the-chart-gluing", "thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

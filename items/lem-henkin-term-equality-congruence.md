@@ -2,13 +2,14 @@
 id: lem-henkin-term-equality-congruence
 kind: lemma
 title: "Provable equality is a congruence on closed terms"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-complete-henkin-theory-truth-rules, lem-hilbert-propositional-and-equality-rules]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

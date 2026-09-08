@@ -2,7 +2,7 @@
 id: lem-intersections-of-finite-linear-complexes-form-a-convex-cell-complex
 kind: lemma
 title: "Intersections of finite linear complexes form a convex cell complex"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-finite-convex-cell-complex-and-linear-subdivision"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -47,4 +48,3 @@ The face and interior assertions also hold for every nonempty bounded finite-ine
 3.1 Conversely, choose $x$ relatively interior to any nonempty exposed face $G$, using the finite-inequality argument with its added supporting equality. For any $y\in G$, extend slightly past $x$ away from $y$ inside $G$. Every original inequality active at $x$ must vanish at $y$, by the same nonnegative weighted-sum argument. Thus $G\subseteq F_x$, and the reverse inclusion was just proved. Consequently every face is obtained from an active subset of the finite inequalities, so there are finitely many faces. Intersections of faces are faces by adding their active equalities, and a face of a face is a face of $C$ by adding more equalities. A point is in the relative boundary exactly when at least one inequality not identically zero on $C$ is active: otherwise a relative ball lies in $C$; if one is active its nonconstant affine function has negative values arbitrarily nearby in $\operatorname{aff}C$. Thus proper faces cover exactly the relative boundary. [step 1.1, step 2.1]
 
 4.1 Let $C=\sigma\cap\tau$ and $D=\sigma^{\prime}\cap\tau^{\prime}$. In each original simplicial complex the intersections $\sigma\cap\sigma^{\prime}$ and $\tau\cap\tau^{\prime}$ are common faces. They are cut out by supporting affine equalities nonnegative on $\sigma$ and $\tau$, respectively. Restricting these equalities to $C$ shows $C\cap D$ is a face of $C$; reversing the roles proves it is a face of $D$. Now take arbitrary faces $F$ of $C$ and $G$ of $D$. First restrict to the common face $C\cap D$; intersections and transitivity of faces from the preceding step show $F\cap G$ is a face of $F$ and $G$. Including all faces therefore gives a finite complex. Every such cell is contained in its original $\sigma$ and $\tau$, and each point of the common polyhedron lies in at least one such intersection, proving refinement and equality of underlying sets. [F1, step 3.1] ∎
-

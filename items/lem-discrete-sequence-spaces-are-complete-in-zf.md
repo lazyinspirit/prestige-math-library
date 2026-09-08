@@ -2,7 +2,7 @@
 id: lem-discrete-sequence-spaces-are-complete-in-zf
 kind: lemma
 title: "Discrete sequence spaces are complete in ZF"
-status: draft
+status: published
 origin: pipeline
 deps: [def-the-set-of-functions-from-one-set-to-another, def-complete-metric-space, def-metric-ball, def-metric-topology, thm-well-ordering-principle, thm-induction-principle, cor-archimedean-reciprocal, def-axiom-schema-of-replacement, def-metric-space, def-cauchy-in-metric, def-metric-convergence]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: ex-chart-gluing-recovers-euclidean-lebesgue-measure
 title: "Euclidean volume from chart gluing"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-density-measure-is-independent-of-the-chart-gluing", "cor-lebesgue-sigma-algebra-is-the-completion-of-borel-lebesgue-measure", "thm-lebesgue-measure-of-a-box-of-every-kind"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

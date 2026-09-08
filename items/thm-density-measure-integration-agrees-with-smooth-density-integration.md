@@ -2,13 +2,14 @@
 id: thm-density-measure-integration-agrees-with-smooth-density-integration
 title: "Measurable integration extends smooth density integration"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-density-measure-is-independent-of-the-chart-gluing", "thm-a-positive-smooth-density-defines-a-locally-finite-radon-measure", "lem-bounded-borel-riemann-integrands-on-boxes-have-equal-lebesgue-integrals", "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function", "thm-monotone-convergence-for-the-integral", "thm-density-integration-is-defined-without-an-orientation", "lem-chart-supported-coefficients-have-well-defined-riemann-integrable-half-space-extensions", "def-integrable-real-and-complex-functions-and-their-integrals", "thm-the-lebesgue-integral-respects-almost-everywhere-equality", "def-integral-of-a-compactly-supported-smooth-density", "def-completion-of-a-measure-space", "thm-completion-of-a-measure-space", "cor-integral-over-a-null-set-vanishes", "def-countable-choice", "cor-additivity-of-the-nonnegative-lebesgue-integral", "prop-order-and-scalar-rules-for-the-nonnegative-integral"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

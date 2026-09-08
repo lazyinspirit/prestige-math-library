@@ -2,7 +2,7 @@
 id: lem-euler-curvature-identity-for-an-arc-reduced-disc-diagram
 kind: lemma
 title: "Euler curvature identity for an arc reduced disc diagram"
-status: draft
+status: published
 origin: pipeline
 deps: [def-arc-reduction-and-combinatorial-curvature-of-a-disc-diagram]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

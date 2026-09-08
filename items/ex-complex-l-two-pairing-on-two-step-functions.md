@@ -2,7 +2,7 @@
 id: ex-complex-l-two-pairing-on-two-step-functions
 kind: example
 title: "Two-step functions expose the $L^2$ conjugation convention"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps: [thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz, def-nonnegative-lebesgue-integral, thm-linearity-of-the-lebesgue-integral-on-l-one, def-countable-choice, thm-lebesgue-measure-of-a-box-of-every-kind, def-integral-of-a-nonnegative-simple-function]
@@ -13,6 +13,7 @@ generation:
   role: example
 proof_strategy: "Integrate the two disjoint constant pieces and compute both scalar placements."
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

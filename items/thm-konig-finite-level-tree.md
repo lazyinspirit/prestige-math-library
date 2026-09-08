@@ -2,7 +2,7 @@
 id: "thm-konig-finite-level-tree"
 kind: "theorem"
 title: "König’s lemma for finite levels"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-set-theoretic-tree-and-levels", "thm-recursion", "thm-well-ordering-theorem", "lem-tree-predecessors-and-common-extensions", "def-axiom-of-choice"]
 provenance:
@@ -16,6 +16,7 @@ justified_by: []
 forward_refs: []
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-09
   precheck: "pass"
   judge:
     model: "gpt-5.6-terra"

@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -18,7 +19,7 @@ sources:
     - title: 'Ageno, Part III: Analysis of Partial Differential Equations'
       url: https://giacomoageno.github.io/LectureNotesAPDE.pdf
       locator: Ageno §2.4.1, first bullet, PDF p. 28, datum 1/(1+x²).
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["lem-normal-form-pde-determines-a-unique-formal-taylor-series", "rem-cauchy-kovalevskaya-is-an-analytic-not-smooth-well-posedness-theorem", "thm-symmetry-of-higher-mixed-partials", "thm-geometric-series", "def-characteristic-covector-hypersurface-and-noncharacteristic-data"]
@@ -47,4 +48,3 @@ Analytic initial data alone do not guarantee time-analytic solvability of $u_t=u
 ## Source notes
 
 Gantumur, §4 Example 21, printed p. 11; Ageno §2.4.1, PDF p. 28, specifies the data 1/(1+x²).
-

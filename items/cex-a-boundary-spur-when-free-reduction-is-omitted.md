@@ -2,7 +2,7 @@
 id: cex-a-boundary-spur-when-free-reduction-is-omitted
 kind: counterexample
 title: "A boundary spur when free reduction is omitted"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sc-toolkit-labelled-planar-disc-diagram, def-arc-reduction-and-combinatorial-curvature-of-a-disc-diagram]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

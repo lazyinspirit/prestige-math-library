@@ -2,13 +2,14 @@
 id: cex-isomorphic-inclusion-need-not-be-elementary
 kind: counterexample
 title: "Isomorphism does not make an inclusion elementary"
-status: draft
+status: published
 origin: pipeline
 deps: [def-elementary-set-structure-embedding, thm-set-structure-satisfaction-recursion, lem-nat-nonzero-is-successor, lem-nat-order-add-compatible, lem-nat-trichotomy]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

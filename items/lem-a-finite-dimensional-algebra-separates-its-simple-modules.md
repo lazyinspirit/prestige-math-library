@@ -2,7 +2,7 @@
 id: lem-a-finite-dimensional-algebra-separates-its-simple-modules
 kind: lemma
 title: "A finite-dimensional algebra separates its split simple modules"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-schurs-lemma-for-modules, def-direct-sum-of-a-family-of-modules, def-linear-basis, cor-independent-set-is-no-larger-than-a-finite-spanning-set]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

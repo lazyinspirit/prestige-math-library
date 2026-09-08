@@ -2,12 +2,14 @@
 id: thm-tarski-vaught-set-structure-test
 kind: theorem
 title: "Tarski–Vaught witness test"
-status: draft
+status: published
 origin: pipeline
 deps: [def-elementary-set-structure-embedding, thm-set-structure-satisfaction-recursion, thm-structural-recursion-on-set-coded-syntax, def-term-denotation-in-a-set-structure, lem-satisfaction-coincidence]
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-09
 sources:
   references:
     - title: "Weiss–D’Mello, Fundamentals of Model Theory, Lemma 5 and complete proof, printed p.19."

@@ -6,6 +6,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: 'Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem'
       url: https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf
       locator: Gantumur, §3 Exercise 14, printed p. 8, supplies the geometric-majorant construction; this concrete polynomial perturbation and calculation are adapted locally.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-coefficientwise-majorisation-of-multivariable-power-series", "lem-an-analytic-germ-has-a-rational-geometric-majorant"]
@@ -40,4 +41,3 @@ For $f(x,y)=x^2+1/(1-x-y)$ at the origin, $r=1/2$ and $M=2$ give $f\ll2/(1-2x-2y
 ## Source notes
 
 Gantumur, §3 Exercise 14, printed p. 8, supplies the geometric-majorant construction; this concrete polynomial perturbation and calculation are adapted locally.
-

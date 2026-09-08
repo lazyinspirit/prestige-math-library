@@ -2,7 +2,7 @@
 id: "thm-regular-uncountable-finite-delta-system"
 kind: "theorem"
 title: "The finite delta-system lemma at a regular uncountable cardinal"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-finite-delta-system", "thm-cofinality-basics", "cor-cardinal-absorption", "thm-transfinite-recursion", "def-axiom-of-choice"]
 provenance:
@@ -16,6 +16,7 @@ justified_by: []
 forward_refs: []
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-09
   precheck: "pass"
   judge:
     model: "gpt-5.6-terra"

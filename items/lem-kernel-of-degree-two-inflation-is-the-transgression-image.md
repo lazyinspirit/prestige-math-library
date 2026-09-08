@@ -2,7 +2,7 @@
 id: lem-kernel-of-degree-two-inflation-is-the-transgression-image
 kind: lemma
 title: "The kernel of degree-two inflation is the transgression image"
-status: draft
+status: published
 origin: pipeline
 deps: [def-low-degree-transgression-for-a-group-extension, lem-pullback-and-coefficient-pushout-realize-bar-cohomology-maps, def-axiom-of-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

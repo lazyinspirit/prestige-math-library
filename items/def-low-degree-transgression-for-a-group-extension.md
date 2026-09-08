@@ -2,7 +2,7 @@
 id: def-low-degree-transgression-for-a-group-extension
 kind: definition
 title: "Low-degree transgression for a group extension"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-degree-one-maps-and-quotient-action-are-well-defined, lem-bar-two-cocycles-classify-abelian-kernel-extensions, lem-pullback-and-coefficient-pushout-realize-bar-cohomology-maps, def-axiom-of-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

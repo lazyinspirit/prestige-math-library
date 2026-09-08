@@ -2,13 +2,14 @@
 id: ex-checking-the-subreciprocal-condition-for-the-loglog-bound
 kind: example
 title: "Checking the subreciprocal condition for the loglog bound"
-status: draft
+status: published
 origin: pipeline
 deps: [def-subreciprocal-function-and-ell-divisibility, lem-qid-logarithmic-and-constant-divisibility, thm-loglog-quantitative-induced-density-bound, thm-logarithm-change-of-base]
 provenance:
   statement: ai-generated
   proof: ai-generated
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

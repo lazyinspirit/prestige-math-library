@@ -2,13 +2,14 @@
 id: cex-countable-levels-do-not-suffice-for-konig
 kind: counterexample
 title: "Countable levels do not suffice for König’s lemma"
-status: draft
+status: published
 origin: pipeline
 deps: [def-set-theoretic-tree-and-levels, thm-konig-finite-level-tree, thm-product-of-countable, lem-subset-of-countable, thm-well-ordering-principle]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

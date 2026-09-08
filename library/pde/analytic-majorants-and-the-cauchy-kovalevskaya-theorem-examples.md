@@ -1,7 +1,7 @@
 ---
 page: analytic-majorants-and-the-cauchy-kovalevskaya-theorem-examples
 title: 'Analytic Majorants and the Cauchy–Kovalevskaya Theorem: Examples'
-status: draft
+status: published
 items: []
 examples: ["ex-majorising-a-two-variable-analytic-germ-by-a-geometric-series", "ex-cauchy-kovalevskaya-for-an-analytic-transport-equation", "ex-cauchy-kovalevskaya-for-a-second-order-normal-form", "cex-smooth-nonanalytic-data-need-not-have-an-analytic-solution", "cex-a-characteristic-analytic-surface-does-not-determine-the-normal-jet", "cex-analytic-heat-data-can-have-divergent-time-taylor-series", "cex-analytic-elliptic-cauchy-solutions-lack-smooth-continuous-dependence"]
 ---

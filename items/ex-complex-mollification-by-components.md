@@ -2,7 +2,7 @@
 id: ex-complex-mollification-by-components
 kind: example
 title: "Mollification of a complex two-step function"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps: [lem-complex-translation-and-approximate-identity-interfaces, thm-complex-holder-minkowski-and-the-quotient-norm, def-countable-choice, thm-lebesgue-measure-of-a-box-of-every-kind, thm-finite-and-countable-subadditivity-of-measures, prop-order-and-scalar-rules-for-the-nonnegative-integral, def-integral-of-a-nonnegative-simple-function, prop-the-nonnegative-integral-agrees-with-the-simple-integral]
@@ -12,6 +12,8 @@ provenance:
 generation:
   role: example
 proof_strategy: "Compute interval integrals, localize the error to jump neighborhoods, and use continuity at zero for the infinity lower bound."
+verification:
+  audited: 2026-09-09
 sources:
   scraped: []
   references:

@@ -2,7 +2,7 @@
 id: ex-relative-norming-in-a-finite-dimensional-space
 kind: example
 title: An explicit norming functional for the finite-dimensional maximum norm
-status: draft
+status: published
 origin: pipeline
 deps: [def-dual-space-of-a-normed-space, rem-real-and-complex-normed-space-convention, lem-finite-set-has-max, thm-well-ordering-principle]
 provenance:
@@ -17,6 +17,7 @@ sources:
 pipeline_run: phase-2-wave-1
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

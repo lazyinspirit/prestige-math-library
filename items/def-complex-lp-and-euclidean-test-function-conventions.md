@@ -2,7 +2,7 @@
 id: def-complex-lp-and-euclidean-test-function-conventions
 kind: definition
 title: "Complex Lp classes and Euclidean test-function conventions"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps: [def-l-p-space-as-a-quotient-by-null-functions, def-essential-supremum-with-respect-to-a-measure, def-l-one-of-a-measure, def-complex-conjugate-real-imaginary-part-and-modulus, def-c-c-and-c-c-infinity-on-rn, def-c-zero-on-rn, def-ck-and-multi-index-notation-in-several-variables, thm-arithmetic-and-lattice-operations-preserve-measurability, thm-threshold-characterisations-of-real-and-extended-real-measurability, def-dirac-measure, prop-dirac-measure-is-a-probability-measure, prop-countable-subsets-of-rn-are-lebesgue-null, lem-q-and-irrationals-dense-r, thm-heine-borel-rn, def-countable-choice, def-integrable-real-and-complex-functions-and-their-integrals]
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

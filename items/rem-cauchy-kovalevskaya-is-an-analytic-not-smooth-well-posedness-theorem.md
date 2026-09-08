@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -18,7 +19,7 @@ sources:
     - title: 'Ageno, Part III: Analysis of Partial Differential Equations'
       url: https://giacomoageno.github.io/LectureNotesAPDE.pdf
       locator: Ageno §2.3.3, proof of Theorem 2.22, PDF pp. 25–27; independent comparison for the analytic reduction and majorant argument.
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-cauchy-kovalevskaya-for-a-noncharacteristic-analytic-cauchy-problem"]
 ---
@@ -30,4 +31,3 @@ deps: ["thm-cauchy-kovalevskaya-for-a-noncharacteristic-analytic-cauchy-problem"
 ## Source notes
 
 Gantumur, §4 Example 21 and §5 characteristic discussion, printed pp. 11–14; the analytic-germ theorem above fixes the local scope.
-

@@ -1,7 +1,7 @@
 ---
 page: dependent-choice-and-the-complete-metric-baire-theorem
 title: "Dependent Choice and the Complete-Metric Baire Theorem"
-status: draft
+status: published
 items: [def-serial-relation-dependent-choice-principle-over-zf, lem-prescribed-start-and-starting-point-free-serial-choice-are-equivalent-in-zf, def-complete-metric-baire-principle-over-zf, lem-open-dense-and-closed-nowhere-dense-baire-forms-are-equivalent-in-zf, thm-serial-dependent-choice-implies-complete-metric-baire-over-zf, lem-discrete-sequence-spaces-are-complete-in-zf, lem-serial-relation-successor-sets-are-open-dense, thm-complete-metric-baire-principle-implies-dependent-choice-over-zf, thm-dependent-choice-is-equivalent-to-complete-metric-baire-over-zf]
 examples: []
 ---

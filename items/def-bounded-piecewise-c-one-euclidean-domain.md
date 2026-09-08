@@ -6,6 +6,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: Hunter, Notes on Partial Differential Equations
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Hunter §1.12, printed p. 18, mentions the piecewise extension. The exact finite-face/null-edge class is the explicit local presentation retained in the batch design.
-status: draft
+status: published
 origin: pipeline
 deps: ["def-bounded-c-one-domain-boundary-charts-and-outward-normal", "lem-surface-integral-is-independent-of-c-one-boundary-charts"]
 ---
@@ -29,4 +30,3 @@ For a specified finite gluing also list the open pieces with disjoint interiors,
 ## Source notes
 
 Hunter §1.12, printed p. 18, mentions the piecewise extension. The exact finite-face/null-edge class is the explicit local presentation retained in the batch design.
-

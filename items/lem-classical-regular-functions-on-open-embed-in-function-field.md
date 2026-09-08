@@ -2,13 +2,14 @@
 id: "lem-classical-regular-functions-on-open-embed-in-function-field"
 kind: "lemma"
 title: "Regular functions on a nonempty open embed in the affine function field"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-classical-affine-variety-nonempty-opens-dense", "thm-classical-polynomial-functions-equal-coordinate-ring", "def-classical-regular-function-on-open-set", "lem-classical-regular-functions-locality-and-gluing", "def-classical-variety-function-field", "def-axiom-of-choice", "thm-classical-affine-zero-loci-form-zariski-closed-sets"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

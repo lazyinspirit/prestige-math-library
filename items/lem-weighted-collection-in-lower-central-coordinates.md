@@ -10,9 +10,10 @@ sources:
     - title: Druţu–Kapovich, Geometric Group Theory (837-page edition)
       url: https://www.math.ucdavis.edu/~kapovich/EPR/ggt.pdf
       locator: Lemma 14.21 and Proposition 14.25, pp.505–508,510–511; retain the last-layer conclusion only from part II
-status: draft
+status: published
 origin: pipeline
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

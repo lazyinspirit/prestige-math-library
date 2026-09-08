@@ -2,12 +2,14 @@
 id: "thm-classical-principal-open-is-affine-variety"
 kind: "theorem"
 title: "Every nonempty principal open is a classical affine variety"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-classical-affine-variety-prime-coordinate-ring", "thm-classical-principal-open-coordinate-ring-localization", "def-classical-affine-variety-morphism", "thm-classical-affine-morphisms-coordinate-ring-antiequivalence", "thm-universal-property-of-a-polynomial-ring", "thm-quotient-ring-universal-property", "thm-universal-property-of-localisation", "thm-classical-affine-nullstellensatz-correspondence", "lem-classical-morphism-inverse-image-of-closed-is-closed", "def-axiom-of-choice", "thm-classical-affine-global-regular-functions-coordinate-ring", "thm-classical-polynomial-functions-equal-coordinate-ring"]
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  audited: 2026-09-09
 sources:
   scraped: []
   references:

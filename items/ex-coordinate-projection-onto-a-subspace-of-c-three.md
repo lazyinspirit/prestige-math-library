@@ -2,7 +2,7 @@
 id: ex-coordinate-projection-onto-a-subspace-of-c-three
 kind: example
 title: "A coordinate projection in complex three-space"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-wave-1
 deps: [lem-finite-dimensional-subspace-admits-a-linear-projection-without-choice]
@@ -10,6 +10,7 @@ justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

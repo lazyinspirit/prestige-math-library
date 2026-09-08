@@ -1,7 +1,7 @@
 ---
 page: small-cancellation-disc-diagrams-and-torsion-toolkit-examples
 title: "Small-Cancellation Disc Diagrams and the Torsion Toolkit: Examples"
-status: draft
+status: published
 items: []
 examples: [ex-curvature-ledger-for-a-two-cell-diagram, ex-a-three-shell-after-arc-reduction, ex-relator-root-versus-proper-power, cex-a-boundary-spur-when-free-reduction-is-omitted]
 ---

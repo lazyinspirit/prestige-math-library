@@ -2,7 +2,7 @@
 id: ex-complex-phase-in-l-q-dual-norming
 kind: example
 title: "Conjugate phases norm a three-atom function"
-status: draft
+status: published
 origin: pipeline
 landmark: false
 deps: [lem-complex-lq-norm-from-finite-simple-dual-tests, lem-complex-conjugation-and-modulus-laws, def-integral-of-a-nonnegative-simple-function, def-integrable-real-and-complex-functions-and-their-integrals]
@@ -13,6 +13,7 @@ generation:
   role: example
 proof_strategy: "Compute the phase test and express any real test as a convex combination of eight sign vertices."
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

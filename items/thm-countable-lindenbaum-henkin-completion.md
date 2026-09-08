@@ -2,13 +2,14 @@
 id: thm-countable-lindenbaum-henkin-completion
 kind: theorem
 title: "Canonical countable Lindenbaum–Henkin construction"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-countable-henkin-syntax-coding, lem-fresh-henkin-axiom-preserves-consistency, lem-consistent-sentence-decision, lem-derivation-finite-support-and-concatenation, thm-recursion, lem-proof-fresh-constant-elimination]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

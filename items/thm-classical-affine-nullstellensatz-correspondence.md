@@ -2,13 +2,14 @@
 id: "thm-classical-affine-nullstellensatz-correspondence"
 kind: "theorem"
 title: "Classical affine algebraic sets correspond to radical ideals, and irreducible sets to prime ideals"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-classical-affine-zero-loci-form-zariski-closed-sets", "def-classical-vanishing-ideal", "lem-classical-zero-locus-vanishing-ideal-galois-connection", "cor-strong-nullstellensatz-two-inclusions", "cor-weak-nullstellensatz-algebraically-closed-coordinate-form", "def-prime-and-maximal-ideals", "thm-correspondence-theorem-ideals", "lem-radical-commutes-with-quotient-correspondence", "def-axiom-of-choice"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

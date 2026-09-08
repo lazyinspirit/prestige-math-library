@@ -2,7 +2,7 @@
 id: "ex-uncountable-delta-system-with-one-point-root"
 kind: "example"
 title: "An explicit uncountable delta system"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-finite-delta-system"]
 provenance:
@@ -16,6 +16,7 @@ justified_by: []
 forward_refs: []
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-09
   precheck: "pass"
   judge:
     model: "gpt-5.6-terra"

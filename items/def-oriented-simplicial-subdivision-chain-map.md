@@ -2,13 +2,14 @@
 id: def-oriented-simplicial-subdivision-chain-map
 kind: definition
 title: "Oriented simplicial subdivision operator"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-barycentric-subdivision-of-an-abstract-simplicial-complex", "def-simplicial-chain-groups-and-boundary", "lem-barycentric-face-chains-triangulate-a-geometric-simplex", "def-augmentation-and-reduced-simplicial-homology"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

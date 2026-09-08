@@ -2,7 +2,7 @@
 id: rem-halpern-lauchli-finite-tree-statement
 kind: remark
 title: "Halpern–Läuchli matrix statement and proof destination"
-status: draft
+status: published
 origin: pipeline
 deps: [def-pruned-tree-products-and-dense-matrices]
 provenance:
@@ -16,6 +16,10 @@ justified_by: []
 forward_refs: []
 proved_here: false
 verification:
+  sources_checked:
+    date: 2026-09-09
+    scope: citations
+    by: phase-2-wave-1-closure
   precheck: n/a
 external_dependency:
   source_url: "https://euclid.colorado.edu/~monkd/jech.pdf"

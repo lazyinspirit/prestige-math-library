@@ -2,7 +2,7 @@
 id: lem-free-presentation-bicomplex-collapses-in-positive-middle-group-degree
 kind: lemma
 title: "Free-presentation total homology and its degree-one edges"
-status: draft
+status: published
 origin: pipeline
 deps: [def-free-presentation-lyndon-bar-bicomplex-and-edge-maps, lem-free-group-augmentation-ideal-has-the-generator-difference-basis, lem-bar-first-integral-homology-is-the-abelianization, lem-low-degree-filtration-sequence-for-a-first-quadrant-bicomplex]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

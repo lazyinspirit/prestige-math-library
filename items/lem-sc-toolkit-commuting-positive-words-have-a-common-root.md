@@ -2,7 +2,7 @@
 id: lem-sc-toolkit-commuting-positive-words-have-a-common-root
 kind: lemma
 title: "Sc toolkit commuting positive words have a common root"
-status: draft
+status: published
 origin: pipeline
 deps: [def-alphabet-words-and-reduction]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

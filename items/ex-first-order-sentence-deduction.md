@@ -2,12 +2,14 @@
 id: ex-first-order-sentence-deduction
 kind: example
 title: "A two-premise formal deduction"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-first-order-sentence-deduction, def-set-coded-formal-derivation]
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-09
 sources:
   references:
     - title: "Moschovakis, axioms and rules §§1H.1–1H.2 pp34–35 and Theorem 1H.8 p37; explicit local instance."

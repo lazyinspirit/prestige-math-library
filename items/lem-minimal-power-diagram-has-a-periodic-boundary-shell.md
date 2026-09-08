@@ -2,7 +2,7 @@
 id: lem-minimal-power-diagram-has-a-periodic-boundary-shell
 kind: lemma
 title: "A shortest finite-order representative shares a word root with a relator"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-greendlinger-shell-existence-from-the-curvature-count, def-minimal-cyclic-power-diagram-and-relator-root, lem-sc-toolkit-periodic-word-square-alternative]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

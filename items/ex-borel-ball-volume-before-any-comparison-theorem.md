@@ -2,13 +2,14 @@
 id: ex-borel-ball-volume-before-any-comparison-theorem
 title: "Metric balls need no curvature comparison for measurability"
 kind: example
-status: draft
+status: published
 origin: pipeline
 deps: ["cor-positive-density-measures-assign-positive-volume-to-nonempty-open-sets-and-metric-balls", "ex-positive-weighted-volume-on-an-open-interval"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-relative-hahn-banach-dual-norming
 kind: corollary
 title: Relative dual norming, point separation, and recovery of the norm
-status: draft
+status: published
 origin: pipeline
 deps: [thm-relative-hahn-banach-norm-preserving-extension, lem-span-is-the-set-of-linear-combinations, def-metric-interior-closure-boundary, def-dual-space-of-a-normed-space]
 provenance:
@@ -17,6 +17,7 @@ sources:
 pipeline_run: phase-2-wave-1
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

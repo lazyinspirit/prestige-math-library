@@ -2,7 +2,7 @@
 id: ex-a-compact-set-in-an-infinite-non-locally-finite-realization-still-meets-finitely-many-cells
 kind: example
 title: "A compact set in an infinite non locally finite realization still meets finitely many cells"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-compact-subsets-of-an-arbitrary-simplicial-realization-meet-finitely-many-open-simplices", "def-open-and-closed-stars-in-a-subdivision"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

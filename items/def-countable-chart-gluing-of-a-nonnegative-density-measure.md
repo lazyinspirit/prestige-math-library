@@ -2,7 +2,7 @@
 id: def-countable-chart-gluing-of-a-nonnegative-density-measure
 title: "Countable partition construction of the Borel set function"
 kind: definition
-status: draft
+status: published
 origin: pipeline
 deps: ["def-borel-measurable-nonnegative-density-on-a-manifold", "cor-smooth-partitions-subordinate-to-a-countable-coordinate-cover", "thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary", "def-nonnegative-lebesgue-integral"]
 justified_by: ["thm-chart-gluing-defines-a-countably-additive-borel-density-measure", "thm-density-measure-is-independent-of-the-chart-gluing"]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

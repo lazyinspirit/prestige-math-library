@@ -2,13 +2,14 @@
 id: cor-arbitrarily-large-finite-models-give-infinite-model
 kind: corollary
 title: "Arbitrarily large finite models imply an infinite model"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-countable-first-order-compactness]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

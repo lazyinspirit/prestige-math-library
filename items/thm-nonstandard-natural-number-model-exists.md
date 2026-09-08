@@ -2,13 +2,14 @@
 id: thm-nonstandard-natural-number-model-exists
 kind: theorem
 title: "A countable nonstandard model has an element above all numerals"
-status: draft
+status: published
 origin: pipeline
 deps: [def-nonstandard-natural-number-structure, thm-countable-first-order-compactness, thm-countable-first-order-completeness]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: turing-machine-configuration-boundary-interface
 title: "Turing-Machine Configuration Boundary Interface"
-status: draft
+status: published
 items: [def-turing-machine-initial-and-halting-configuration-interface]
 examples: []
 ---

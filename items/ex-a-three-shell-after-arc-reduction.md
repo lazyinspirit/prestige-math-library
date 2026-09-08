@@ -2,7 +2,7 @@
 id: ex-a-three-shell-after-arc-reduction
 kind: example
 title: "A three shell after arc reduction"
-status: draft
+status: published
 origin: pipeline
 deps: [def-arc-reduction-and-combinatorial-curvature-of-a-disc-diagram, lem-boundary-spur-or-at-most-three-shell-from-curvature]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

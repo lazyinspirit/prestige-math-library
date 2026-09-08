@@ -2,13 +2,14 @@
 id: def-canonical-barycentric-realization-map
 kind: definition
 title: "Canonical barycentric realization map"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-barycentric-subdivision-of-an-abstract-simplicial-complex", "def-geometric-realization-of-an-abstract-simplicial-complex"]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -28,4 +29,3 @@ Here $t_i\geq0$, $\sum_i t_i=1$ and $\sigma_0\subsetneq\cdots\subsetneq\sigma_q$
 ## Source locators
 
 2.5.7–2.5.10, pp.49–52.
-

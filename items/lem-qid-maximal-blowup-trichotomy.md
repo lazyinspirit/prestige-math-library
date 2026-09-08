@@ -2,13 +2,14 @@
 id: lem-qid-maximal-blowup-trichotomy
 kind: lemma
 title: "Qid maximal blowup trichotomy"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-local-special-copy-trichotomy, lem-few-induced-copies-exclude-a-fixed-labelled-blowup, lem-good-copy-extension-count, lem-qid-bipartite-density-trimming, lem-qid-fixed-size-density-selection, thm-real-power-laws, lem-integer-part]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

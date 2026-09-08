@@ -2,13 +2,15 @@
 id: thm-degree-one-inflation-restriction-exact-sequence
 kind: theorem
 title: "Degree-one inflation–restriction is exact"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-degree-one-maps-and-quotient-action-are-well-defined]
 provenance:
   statement: literature-derived
   proof: ai-altered
 proof_strategy: direct
+verification:
+  audited: 2026-09-09
 sources:
   scraped: []
   references:

@@ -2,12 +2,14 @@
 id: lem-finite-knaster-poset-products
 kind: lemma
 title: "Finite products preserve Knaster"
-status: draft
+status: published
 origin: pipeline
 deps: [def-finite-support-poset-product, def-poset-ccc-and-knaster-property, thm-countable-union-of-countable, thm-well-ordering-theorem, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-09
 sources:
   references:
     - title: "Monk, Set theory following Jech (2024), Lemma 15.14, printed pp265–266; indexed thinning expanded locally"

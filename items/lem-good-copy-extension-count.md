@@ -2,13 +2,14 @@
 id: lem-good-copy-extension-count
 kind: lemma
 title: "Good copy extension count"
-status: draft
+status: published
 origin: pipeline
 deps: [def-labelled-blowup-and-good-induced-copy, thm-product-rule, thm-sum-rule, thm-subset-of-a-finite-set]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -6,6 +6,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -18,7 +19,7 @@ sources:
     - title: 'Ageno, Part III: Analysis of Partial Differential Equations'
       url: https://giacomoageno.github.io/LectureNotesAPDE.pdf
       locator: Ageno §2.3.3, proof of Theorem 2.22 Step 1, PDF p. 25; the wave instance is calculated locally.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["lem-higher-order-analytic-normal-form-reduces-to-a-first-order-system"]
@@ -43,4 +44,3 @@ For analytic g,h, the equation $u_{tt}=u_{xx}$ with data $u(0,x)=g(x)$, $u_t(0,x
 ## Source notes
 
 Gantumur, §4 Corollary 20 and equations (55)–(57), printed p. 11; scalar wave specialization computed locally.
-

@@ -2,13 +2,14 @@
 id: thm-density-measure-is-independent-of-the-chart-gluing
 title: "Intrinsic density measure and its chart restriction"
 kind: theorem
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-chart-gluing-defines-a-countably-additive-borel-density-measure", "lem-measurable-density-chart-integrals-agree-on-overlaps", "cor-beppo-levi-theorem", "def-borel-measurable-nonnegative-density-on-a-manifold"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

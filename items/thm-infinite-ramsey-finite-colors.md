@@ -2,13 +2,14 @@
 id: thm-infinite-ramsey-finite-colors
 kind: theorem
 title: "Infinite Ramsey theorem for fixed finite arity and colors"
-status: draft
+status: published
 origin: pipeline
 deps: [def-partition-arrow-notation, thm-recursion, thm-induction-principle, thm-well-ordering-theorem, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

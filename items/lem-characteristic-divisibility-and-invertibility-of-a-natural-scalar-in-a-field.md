@@ -2,7 +2,7 @@
 id: lem-characteristic-divisibility-and-invertibility-of-a-natural-scalar-in-a-field
 kind: lemma
 title: "Invertibility of a positive natural scalar in a field"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-wave-1
 deps: [def-field, lem-characteristic-and-additive-order]
@@ -10,6 +10,7 @@ justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

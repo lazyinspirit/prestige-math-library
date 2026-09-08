@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: Hunter, Notes on Partial Differential Equations
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Hunter §2.5, Theorem 2.23, equation (2.12) and proof, printed p. 32 (PDF p. 38).
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["cor-first-green-identity-on-a-bounded-c-one-domain"]
@@ -40,4 +41,3 @@ Assume $\mathrm{AC}_\omega$. For a bounded $C^1$ domain $\Omega\subset\mathbb R^
 ## Source notes
 
 Hunter §2.5, Theorem 2.23, equation (2.12) and proof, printed p. 32 (PDF p. 38).
-

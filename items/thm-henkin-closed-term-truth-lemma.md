@@ -2,12 +2,14 @@
 id: thm-henkin-closed-term-truth-lemma
 kind: theorem
 title: "Truth lemma for the term quotient"
-status: draft
+status: published
 origin: pipeline
 deps: [def-henkin-closed-term-model, lem-complete-henkin-theory-truth-rules, lem-formula-substitution-satisfaction, thm-structural-recursion-on-set-coded-syntax, lem-henkin-term-equality-congruence]
 provenance:
   statement: ai-altered
   proof: ai-altered
+verification:
+  audited: 2026-09-09
 sources:
   references:
     - title: "Moschovakis, Lemma 1I.5, pp41–43; full local free-variable constructor induction for the closed-term quotient."

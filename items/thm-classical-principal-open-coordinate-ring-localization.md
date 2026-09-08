@@ -2,13 +2,14 @@
 id: "thm-classical-principal-open-coordinate-ring-localization"
 kind: "theorem"
 title: "Regular functions on a principal open are the principal localization"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-classical-affine-nullstellensatz-correspondence", "thm-classical-polynomial-functions-equal-coordinate-ring", "lem-classical-principal-opens-form-affine-basis", "def-classical-regular-function-on-open-set", "lem-classical-regular-functions-locality-and-gluing", "def-principal-localisation", "thm-universal-property-of-localisation", "prop-localisation-zero-equality-and-kernel-criteria", "thm-generated-ideal-description-in-a-commutative-ring", "def-axiom-of-choice"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

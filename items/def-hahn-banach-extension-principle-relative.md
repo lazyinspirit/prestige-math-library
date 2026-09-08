@@ -2,13 +2,14 @@
 id: def-hahn-banach-extension-principle-relative
 kind: definition
 title: The real dominated-extension principle as an additional hypothesis over ZF
-status: draft
+status: published
 origin: pipeline
 deps: [def-sublinear-functional, def-linear-subspace, def-algebraic-dual-and-linear-functional]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

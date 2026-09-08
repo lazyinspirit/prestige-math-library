@@ -2,13 +2,14 @@
 id: "def-classical-rational-map"
 kind: "definition"
 title: "A rational map as an equivalence class of morphisms on nonempty opens"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-classical-affine-variety-nonempty-opens-dense", "def-classical-affine-variety-morphism"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

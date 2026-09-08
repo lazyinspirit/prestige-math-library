@@ -2,7 +2,7 @@
 id: lem-internal-arcs-of-a-reduced-small-cancellation-diagram-are-pieces
 kind: lemma
 title: "Internal arcs of a reduced small cancellation diagram are pieces"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sc-toolkit-symmetrised-relators-and-pieces, lem-sc-toolkit-minimal-diagrams-and-cut-vertex-reduction, def-arc-reduction-and-combinatorial-curvature-of-a-disc-diagram]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

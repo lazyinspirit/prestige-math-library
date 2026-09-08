@@ -2,7 +2,7 @@
 id: thm-inflation-restriction-transgression-five-term-sequence
 kind: theorem
 title: "The inflation–restriction–transgression five-term sequence"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-degree-one-inflation-restriction-exact-sequence, lem-transgression-kernel-is-the-image-of-restriction, lem-kernel-of-degree-two-inflation-is-the-transgression-image, def-axiom-of-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: "thm-classical-affine-algebraic-sets-reduced-algebras-antiequivalence"
 kind: "theorem"
 title: "Classical affine algebraic sets and reduced finitely generated $k$-algebras are contravariantly equivalent"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-classical-affine-nullstellensatz-correspondence", "def-classical-affine-coordinate-ring", "def-reduced-finitely-generated-k-algebra-interface", "lem-classical-affine-closed-points-are-maximal-ideals", "thm-classical-affine-morphisms-coordinate-ring-antiequivalence", "cor-reduced-quotient-by-the-nilradical", "def-finite-type-and-module-finite-algebras", "def-axiom-of-choice"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

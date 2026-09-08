@@ -2,7 +2,7 @@
 id: thm-serial-dependent-choice-implies-complete-metric-baire-over-zf
 kind: theorem
 title: "Serial Dependent Choice implies the complete-metric Baire principle over ZF"
-status: draft
+status: published
 origin: pipeline
 deps: [def-serial-relation-dependent-choice-principle-over-zf, lem-prescribed-start-and-starting-point-free-serial-choice-are-equivalent-in-zf, def-complete-metric-baire-principle-over-zf, lem-open-dense-and-closed-nowhere-dense-baire-forms-are-equivalent-in-zf, def-metric-ball, def-metric-topology, thm-metric-open-set-algebra, def-cauchy-in-metric, def-metric-convergence, cor-archimedean-reciprocal, thm-induction-principle, def-metric-space, def-complete-metric-space, def-axiom-schema-of-separation]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

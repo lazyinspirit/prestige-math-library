@@ -2,7 +2,7 @@
 id: lem-transgression-kernel-is-the-image-of-restriction
 kind: lemma
 title: "The kernel of transgression is the image of restriction"
-status: draft
+status: published
 origin: pipeline
 deps: [def-low-degree-transgression-for-a-group-extension, thm-degree-one-inflation-restriction-exact-sequence, lem-bar-two-cocycles-classify-abelian-kernel-extensions, def-axiom-of-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

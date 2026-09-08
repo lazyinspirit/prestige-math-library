@@ -2,13 +2,14 @@
 id: lem-models-of-coded-zf-are-infinite
 kind: lemma
 title: "Every set model of first-order ZF has infinitely many elements"
-status: draft
+status: published
 origin: pipeline
 deps: [def-coded-first-order-zf-theory, thm-set-structure-satisfaction-recursion, thm-recursion, thm-induction-principle, lem-pigeonhole, lem-nat-trichotomy]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

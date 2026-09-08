@@ -2,7 +2,7 @@
 id: lem-c-prime-one-sixth-interior-faces-have-at-least-seven-arcs
 kind: lemma
 title: "C prime one sixth interior faces have at least seven arcs"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-internal-arcs-of-a-reduced-small-cancellation-diagram-are-pieces]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

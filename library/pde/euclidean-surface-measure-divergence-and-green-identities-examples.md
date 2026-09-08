@@ -1,7 +1,7 @@
 ---
 page: euclidean-surface-measure-divergence-and-green-identities-examples
 title: 'Euclidean Surface Measure, Divergence, and Green Identities: Examples'
-status: draft
+status: published
 items: []
 examples: ["ex-surface-density-and-outward-normal-on-a-graph", "ex-divergence-theorem-on-a-ball-in-rn", "ex-internal-face-cancellation-for-two-glued-regions", "cex-reversing-boundary-orientation-reverses-flux", "cex-a-corner-is-not-covered-by-the-single-c-one-chart-theorem", "ex-punctured-domains-and-truncated-cones-with-explicit-faces"]
 ---

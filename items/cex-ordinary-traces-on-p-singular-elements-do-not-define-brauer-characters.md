@@ -2,7 +2,7 @@
 id: cex-ordinary-traces-on-p-singular-elements-do-not-define-brauer-characters
 kind: counterexample
 title: "Ordinary traces on p-singular elements are not determined by reduction"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-modular-trace-depends-only-on-the-p-regular-part, def-lifted-modular-trace-on-p-regular-elements]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: counterexample
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

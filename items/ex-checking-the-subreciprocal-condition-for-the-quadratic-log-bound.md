@@ -2,13 +2,14 @@
 id: ex-checking-the-subreciprocal-condition-for-the-quadratic-log-bound
 kind: example
 title: "Checking the subreciprocal condition for the quadratic log bound"
-status: draft
+status: published
 origin: pipeline
 deps: [def-subreciprocal-function-and-ell-divisibility, cor-fox-sudakov-quantitative-induced-density-bound, thm-logarithm-change-of-base]
 provenance:
   statement: ai-generated
   proof: ai-generated
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

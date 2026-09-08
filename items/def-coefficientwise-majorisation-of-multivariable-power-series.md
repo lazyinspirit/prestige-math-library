@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: 'Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem'
       url: https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf
       locator: Gantumur, §2 equation (12), printed p. 5; §3 equation (28), printed p. 7.
-status: draft
+status: published
 origin: pipeline
 deps: ["def-multivariable-power-series"]
 ---

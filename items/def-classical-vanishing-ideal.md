@@ -2,13 +2,14 @@
 id: "def-classical-vanishing-ideal"
 kind: "definition"
 title: "The classical vanishing ideal"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-classical-affine-algebraic-set-with-empty-boundaries", "lem-ideal-criterion-and-intersections"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

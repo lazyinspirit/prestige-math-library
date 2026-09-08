@@ -2,7 +2,7 @@
 id: lem-relative-hahn-banach-separates-an-open-convex-set-from-a-point
 kind: lemma
 title: Relative separation of an open convex set from an exterior point
-status: draft
+status: published
 origin: pipeline
 deps: [thm-relative-hahn-banach-dominated-extension, lem-relative-open-convex-gauge-properties, lem-real-part-determines-a-complex-linear-functional]
 provenance:
@@ -17,6 +17,7 @@ sources:
 pipeline_run: phase-2-wave-1
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

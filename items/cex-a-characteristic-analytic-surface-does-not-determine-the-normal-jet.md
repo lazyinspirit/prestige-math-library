@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: 'Gantumur, Math 580 Lecture Notes 2: The Cauchy-Kovalevskaya Theorem'
       url: https://www.math.mcgill.ca/gantumur/math580f11/downloads/notes2.pdf
       locator: Gantumur, §5 transport discussion after Exercise 24, printed p. 14.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-characteristic-covector-hypersurface-and-noncharacteristic-data", "thm-cauchy-kovalevskaya-for-a-noncharacteristic-analytic-cauchy-problem"]
@@ -40,4 +41,3 @@ Analytic Cauchy data on a characteristic analytic surface need not determine a u
 ## Source notes
 
 Gantumur, §5 transport discussion after Exercise 24, printed p. 14.
-

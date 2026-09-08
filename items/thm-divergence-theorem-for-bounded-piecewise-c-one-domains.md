@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: Hunter, Notes on Partial Differential Equations
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Hunter §1.12, printed p. 18, for the stated piecewise extension; the edge-error limit is proved locally under the exact finite presentation.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["def-bounded-piecewise-c-one-euclidean-domain", "lem-surface-null-edges-admit-small-gradient-cutoffs", "lem-finite-ambient-partitions-for-euclidean-boundary-integration", "lem-local-graph-flux-from-fubini-and-the-fundamental-theorem", "thm-dominated-convergence", "thm-algebra-of-derivatives", "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces", "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness", "prop-degenerate-boxes-and-coordinate-hyperplanes-are-lebesgue-null"]
@@ -58,4 +59,3 @@ Assume $\mathrm{AC}_\omega$. If Omega has the specified finite piecewise $C^1$ p
 ## Source notes
 
 Hunter §1.12, printed p. 18, for the stated piecewise extension; the edge-error limit is proved locally under the exact finite presentation.
-

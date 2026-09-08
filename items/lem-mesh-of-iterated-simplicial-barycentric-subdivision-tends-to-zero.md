@@ -2,7 +2,7 @@
 id: lem-mesh-of-iterated-simplicial-barycentric-subdivision-tends-to-zero
 kind: lemma
 title: "Mesh of iterated simplicial barycentric subdivision tends to zero"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-barycentric-face-chains-triangulate-a-geometric-simplex", "lem-finite-simplicial-weak-topology-agrees-with-euclidean-topology", "def-metric-bounded-diameter"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -49,4 +50,3 @@ Every nonempty vertex star has diameter at most $2m(K)$. Zero-dimensional and ve
 2.1 For nonempty nested faces $F\subsetneq G\subseteq\sigma$, $b_G=(\#F/\#G)b_F+(1-\#F/\#G)b_{G\setminus F}$. Thus $\|b_G-b_F\|\leq(1-\#F/\#G)\operatorname{diam}\sigma\leq n/(n+1)\operatorname{diam}\sigma$. Vertices of every subdivided simplex form such a chain, so the previous diameter calculation bounds its diameter by this factor. Iteration gives the asserted estimate. Since $0<n/(n+1)<1$, its powers tend to zero. Zero-dimensional simplices remain points. [F2, step 1.1]
 
 3.1 For any $x$ in the open or closed vertex star of $v$, some simplex contains both $x$ and $v$, so $\|x-v\|\leq m(K)$. For two points $x,y$ in that star, the triangle inequality gives $\|x-y\|\leq2m(K)$, and taking the supremum proves the star bound. Finite weak realization topology agrees with the Euclidean topology, so these estimates use a compatible metric. [F1, F3, step 1.1] ∎
-

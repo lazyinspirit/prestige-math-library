@@ -10,9 +10,10 @@ sources:
     - title: Druţu–Kapovich, Lectures on Geometric Group Theory (585-page draft)
       url: https://www.math.ucdavis.edu/~kapovich/EPR/kapovich_drutu.pdf
       locator: Exercise 10.30, p.282, specialized to n=4 and Z
-status: draft
+status: published
 origin: pipeline
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,13 +2,14 @@
 id: "def-classical-affine-variety-morphism"
 kind: "definition"
 title: "A morphism from an open subset of a classical affine variety to an affine variety"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-classical-regular-function-on-open-set", "lem-classical-regular-functions-locality-and-gluing"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

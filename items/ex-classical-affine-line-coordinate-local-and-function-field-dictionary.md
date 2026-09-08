@@ -2,13 +2,14 @@
 id: "ex-classical-affine-line-coordinate-local-and-function-field-dictionary"
 kind: "example"
 title: "The affine-line coordinate, local, and function-field dictionary"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-classical-affine-nullstellensatz-correspondence", "def-classical-affine-coordinate-ring", "thm-classical-principal-open-coordinate-ring-localization", "thm-classical-affine-morphisms-coordinate-ring-antiequivalence", "thm-classical-affine-local-ring-is-localization", "thm-classical-principal-open-is-affine-variety", "def-classical-variety-function-field", "thm-classical-function-field-independent-of-affine-open", "def-axiom-of-choice"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

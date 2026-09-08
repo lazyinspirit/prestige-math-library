@@ -2,7 +2,7 @@
 id: "cex-infinite-sets-delta-system-hypothesis"
 kind: "counterexample"
 title: "Finite sets cannot be replaced by arbitrary countable sets"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-finite-delta-system", "thm-regular-uncountable-finite-delta-system"]
 provenance:
@@ -16,6 +16,7 @@ justified_by: []
 forward_refs: []
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-09
   precheck: "pass"
   judge:
     model: "gpt-5.6-terra"

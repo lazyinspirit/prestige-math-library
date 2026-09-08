@@ -2,7 +2,7 @@
 id: lem-countable-normal-tree-cofinal-branch
 kind: lemma
 title: "Branches through countable normal trees of limit height"
-status: draft
+status: published
 origin: pipeline
 deps: [def-normal-splitting-set-theoretic-tree, thm-recursion, lem-tree-predecessors-and-common-extensions]
 provenance:
@@ -14,6 +14,7 @@ sources:
       url: https://karagila.org/files/set-theory-2017.pdf
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

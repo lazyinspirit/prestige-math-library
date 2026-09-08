@@ -2,7 +2,7 @@
 id: thm-simplicial-subdivision-is-a-chain-map-and-homology-isomorphism
 kind: theorem
 title: "Simplicial subdivision is a chain map and homology isomorphism"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-oriented-simplicial-subdivision-commutes-with-boundary", "lem-last-vertex-map-is-carried-by-original-simplices", "lem-simplicial-chain-maps-carried-by-specified-cones-are-chain-homotopic", "thm-chain-homotopic-maps-induce-the-same-map-on-homology"]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -49,4 +50,3 @@ For an abstract simplicial complex with a specified total order on its vertices,
 2.1 For a face chain $\eta=(\sigma_0<\cdots<\sigma_q)$ carry $S\lambda_\#$ and $1$ by $\operatorname{sd}\sigma_q$, a cone with apex $\sigma_q$. The identity lies there; $\lambda_\#\eta$ either vanishes or is a face of $\sigma_q$, whose subdivision lies there as well. Removing any chain vertex leaves the same or a smaller maximum, so the carriers are nested. The carried-homotopy lemma gives $S\lambda_\#\simeq1$. Its homotopies have $h_{-1}=0$, so restriction also gives ordinary chain homotopies. [F2, F3, step 1.1]
 
 3.1 Chain-homotopic maps induce equal homology maps, hence $H(\lambda_\#)H(S)=1$ and $H(S)H(\lambda_\#)=1$. These equations hold in every augmented degree and every ordinary degree. If $K$ has no vertices, both augmented degree $-1$ groups are $\mathbb Z$ and both maps are the identity. Any other vertex order produces another two-sided inverse $J$ to the same $H(S)$; then $J=JH(S)H(\lambda_\#)=H(\lambda_\#)$, proving independence. [F4, step 1.1, step 2.1] ∎
-

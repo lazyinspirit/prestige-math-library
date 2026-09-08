@@ -2,7 +2,7 @@
 id: thm-positive-degree-integral-homology-of-a-finite-group-is-annihilated-by-its-order
 kind: theorem
 title: "Positive integral homology is annihilated by the group order"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-corestriction-after-bar-transfer-is-index-multiplication-on-homology, lem-diagonal-bar-coinvariants-compute-group-homology]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

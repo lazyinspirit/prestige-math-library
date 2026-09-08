@@ -2,7 +2,7 @@
 id: lem-relative-bidual-evaluation-is-a-contraction
 kind: lemma
 title: Evaluation defines a bounded scalar-linear map into the bidual
-status: draft
+status: published
 origin: pipeline
 deps: [def-dual-space-of-a-normed-space, lem-operator-norm-is-a-norm]
 provenance:
@@ -17,6 +17,7 @@ sources:
 pipeline_run: phase-2-wave-1
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

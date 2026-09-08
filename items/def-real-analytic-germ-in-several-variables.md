@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -18,7 +19,7 @@ sources:
     - title: 'Ageno, Part III: Analysis of Partial Differential Equations'
       url: https://giacomoageno.github.io/LectureNotesAPDE.pdf
       locator: Ageno §2.3.3, proof of Theorem 2.22, PDF pp. 25–27; independent comparison for the analytic reduction and majorant argument.
-status: draft
+status: published
 origin: pipeline
 deps: ["def-multivariable-power-series", "def-real-analytic-function", "thm-power-series-define-holomorphic-functions-in-several-variables"]
 ---
@@ -32,4 +33,3 @@ The multi-index convention and absolute convergence are those of [[def-multivari
 ## Source notes
 
 Gantumur, §3, Definition 12 and equation (25), printed p. 7. Real restriction and finite-vector convention are spelled out locally.
-

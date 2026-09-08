@@ -2,12 +2,14 @@
 id: "thm-classical-rational-map-maximal-domain-affine-target"
 kind: "theorem"
 title: "A rational map to an affine target has a unique maximal open domain"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-classical-rational-map", "lem-classical-rational-map-equivalence-transitive", "def-classical-rational-map-domain-union", "lem-classical-open-source-morphisms-equal-on-dense-open", "lem-classical-morphisms-glue-on-open-cover"]
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  audited: 2026-09-09
 sources:
   scraped: []
   references:

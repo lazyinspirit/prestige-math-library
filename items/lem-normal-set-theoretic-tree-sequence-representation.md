@@ -2,7 +2,7 @@
 id: "lem-normal-set-theoretic-tree-sequence-representation"
 kind: "lemma"
 title: "Normal trees have faithful sequence representations"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-normal-splitting-set-theoretic-tree", "lem-tree-predecessors-and-common-extensions", "thm-transfinite-recursion", "thm-well-ordering-theorem", "def-axiom-of-choice"]
 provenance:
@@ -16,6 +16,7 @@ justified_by: []
 forward_refs: []
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-09
   precheck: "pass"
   judge:
     model: "gpt-5.6-terra"

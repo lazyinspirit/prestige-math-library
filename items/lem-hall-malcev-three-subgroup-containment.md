@@ -10,9 +10,10 @@ sources:
     - title: Druţu–Kapovich, Lectures on Geometric Group Theory (585-page draft)
       url: https://www.math.ucdavis.edu/~kapovich/EPR/kapovich_drutu.pdf
       locator: Lemmas 10.41, 10.43 and Corollary 10.44, printed p.286
-status: draft
+status: published
 origin: pipeline
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -2,12 +2,14 @@
 id: "def-classical-birational-equivalence"
 kind: "definition"
 title: "Birational maps and birational equivalence of classical varieties"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-classical-rational-map", "def-classical-dominant-morphism-and-rational-map", "lem-classical-dominant-map-pulls-back-function-fields", "def-classical-integral-affine-atlas-and-chartwise-morphism", "lem-classical-integral-affine-charts-have-canonical-common-function-field", "lem-classical-dominant-rational-maps-compose", "def-axiom-of-choice"]
 provenance:
   statement: literature-derived
   proof: not-applicable
+verification:
+  audited: 2026-09-09
 sources:
   scraped: []
   references:

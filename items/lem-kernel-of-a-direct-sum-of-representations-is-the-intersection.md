@@ -2,7 +2,7 @@
 id: lem-kernel-of-a-direct-sum-of-representations-is-the-intersection
 kind: lemma
 title: "The kernel of a finite direct sum is the intersection of the kernels"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-wave-1
 deps: [def-finite-dimensional-representation-of-a-group-over-a-field, def-kernel-and-image-of-group-homomorphism, def-direct-sum-of-a-family-of-modules]
@@ -10,6 +10,7 @@ justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

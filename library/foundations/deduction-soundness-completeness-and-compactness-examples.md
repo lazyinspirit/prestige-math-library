@@ -1,7 +1,7 @@
 ---
 page: "deduction-soundness-completeness-and-compactness-examples"
 title: "Deduction, Soundness, Completeness, and Compactness: Examples and Counterexamples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-first-order-sentence-deduction", "cex-generalization-after-open-assumption", "ex-seed-constant-for-empty-signature", "cex-isomorphic-inclusion-need-not-be-elementary", "ex-nonstandard-element-above-every-numeral", "fs-categorical-first-order-zf"]
 ---

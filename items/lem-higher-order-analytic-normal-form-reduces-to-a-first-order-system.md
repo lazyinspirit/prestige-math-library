@@ -6,6 +6,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -18,7 +19,7 @@ sources:
     - title: 'Ageno, Part III: Analysis of Partial Differential Equations'
       url: https://giacomoageno.github.io/LectureNotesAPDE.pdf
       locator: Ageno §2.3.3, proof of Theorem 2.22 Step 1, equations (2.11)–(2.13), PDF p. 25.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["lem-normal-form-pde-determines-a-unique-formal-taylor-series", "thm-cauchy-kovalevskaya-for-first-order-analytic-systems-in-normal-form", "thm-symmetry-of-higher-mixed-partials", "lem-analytic-ordinary-differential-systems-by-coefficient-majorants"]
@@ -55,4 +56,3 @@ When the scalar right side is affine in its highest-order jets, the displayed ve
 ## Source notes
 
 Gantumur, §4 Corollary 20 and proof, equations (53)–(57), printed p. 11. The compatibility recovery is proved by formal uniqueness below.
-

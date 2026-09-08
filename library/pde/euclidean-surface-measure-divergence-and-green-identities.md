@@ -1,7 +1,7 @@
 ---
 page: euclidean-surface-measure-divergence-and-green-identities
 title: Euclidean Surface Measure, Divergence, and Green Identities
-status: draft
+status: published
 items: ["def-bounded-c-one-domain-boundary-charts-and-outward-normal", "lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound", "lem-finite-ambient-partitions-for-euclidean-boundary-integration", "def-surface-integral-on-a-compact-c-one-hypersurface", "lem-c-one-change-of-variables-for-nonnegative-borel-functions-via-radon-uniqueness", "lem-surface-integral-is-independent-of-c-one-boundary-charts", "lem-local-graph-flux-from-fubini-and-the-fundamental-theorem", "thm-divergence-theorem-for-bounded-c-one-euclidean-domains", "def-bounded-piecewise-c-one-euclidean-domain", "lem-surface-null-edges-admit-small-gradient-cutoffs", "thm-divergence-theorem-for-bounded-piecewise-c-one-domains", "lem-euclidean-chart-measure-agrees-with-polar-surface-measure", "def-classical-normal-derivative", "cor-first-green-identity-on-a-bounded-c-one-domain", "cor-second-green-identity-on-a-bounded-c-one-domain", "rem-euclidean-divergence-versus-classical-and-manifold-stokes"]
 examples: []
 ---

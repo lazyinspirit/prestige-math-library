@@ -2,13 +2,14 @@
 id: "lem-classical-affine-algebraic-set-finite-irreducible-components"
 kind: "lemma"
 title: "A classical affine algebraic set has a unique finite irredundant decomposition"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-classical-affine-nullstellensatz-correspondence", "cor-finite-variable-polynomial-ring-noetherian", "cor-radical-ideal-has-finitely-many-minimal-primes-noetherian", "thm-noetherian-ring-ideal-characterisations", "thm-quotient-is-field-iff-ideal-maximal", "thm-classical-affine-zero-loci-form-zariski-closed-sets", "def-axiom-of-choice", "def-dependent-choice"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

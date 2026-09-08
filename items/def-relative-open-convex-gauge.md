@@ -2,13 +2,14 @@
 id: def-relative-open-convex-gauge
 kind: definition
 title: The finite gauge of an open convex neighbourhood of zero
-status: draft
+status: published
 origin: pipeline
 deps: [def-relative-normed-convexity-and-separation, thm-infimum-property]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

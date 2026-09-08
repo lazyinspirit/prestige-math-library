@@ -2,13 +2,14 @@
 id: ex-finite-specialization-compatibility
 kind: example
 title: "Agreement on overlap is insufficient for specialization compatibility"
-status: draft
+status: published
 origin: pipeline
 deps: [def-finite-aronszajn-specialization-poset]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

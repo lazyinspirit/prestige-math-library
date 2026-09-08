@@ -1,7 +1,7 @@
 ---
 page: complex-lp-spaces-and-test-function-conventions-examples
 title: "Complex Lp Spaces and Test-Function Conventions: Examples"
-status: draft
+status: published
 items: []
 examples: [ex-complex-phase-in-l-q-dual-norming, ex-complex-l-two-pairing-on-two-step-functions, ex-complex-mollification-by-components]
 ---

@@ -2,13 +2,14 @@
 id: def-jensen-square-sequence
 kind: definition
 title: "Jensen’s square principle with its order-type bound"
-status: draft
+status: published
 origin: pipeline
 deps: [def-club-subsets-of-ordinals, def-cardinal, def-axiom-of-choice, thm-regularity-of-the-alephs, cor-cardinal-absorption]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

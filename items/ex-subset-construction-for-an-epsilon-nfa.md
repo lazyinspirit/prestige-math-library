@@ -2,12 +2,13 @@
 id: ex-subset-construction-for-an-epsilon-nfa
 kind: example
 title: "A complete determinisation table for a three-state epsilon-NFA"
-status: draft
+status: published
 origin: pipeline
 deps: [def-epsilon-nfa-word-transition, thm-subset-construction-reachability-invariant, thm-induction-principle]
 justified_by: []
 landmark: false
 verification:
+  audited: 2026-09-09
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

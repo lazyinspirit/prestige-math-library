@@ -2,7 +2,7 @@
 id: lem-sc-toolkit-minimal-diagrams-and-cut-vertex-reduction
 kind: lemma
 title: "Sc toolkit minimal diagrams and cut vertex reduction"
-status: draft
+status: published
 origin: pipeline
 deps: [def-sc-toolkit-labelled-planar-disc-diagram, thm-sc-toolkit-van-kampen-existence, thm-well-ordering-principle]
 landmark: false
@@ -11,6 +11,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

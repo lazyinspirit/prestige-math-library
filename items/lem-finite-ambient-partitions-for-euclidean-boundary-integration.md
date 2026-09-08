@@ -5,6 +5,8 @@ title: Finite ambient partitions near compact sets
 provenance:
   statement: literature-derived
   proof: ai-altered
+verification:
+  audited: 2026-09-09
 sources:
   references:
     - title: Hunter, Notes on Partial Differential Equations
@@ -14,7 +16,7 @@ sources:
       url: https://math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf
       locator: Oh §3.9, Proposition 3.23 and its complete local graph and partition proof, printed/PDF pp. 47–48.
       original_url: https://web.math.berkeley.edu/~sjoh/pdfs/notes-math222a.pdf
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["lem-scaled-euclidean-bumps-with-compact-support-and-gradient-bound", "thm-heine-borel-rn", "thm-algebra-of-derivatives", "def-the-standard-smooth-step-function"]
@@ -45,4 +47,3 @@ Under the page measure convention, if a finite family of open sets $U_j\subset\m
 ## Source notes
 
 Hunter, §1.9.2 Theorem 1.31, printed pp. 12–13. A finite normalized-bump construction is supplied here.
-

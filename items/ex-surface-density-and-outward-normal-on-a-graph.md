@@ -6,6 +6,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
     - title: Hunter, Notes on Partial Differential Equations
       url: https://www.math.ucdavis.edu/~hunter/pdes/pde_notes.pdf
       locator: Hunter §1.10.3, graph surface element and Example 1.43, printed p. 16 (PDF p. 22). The affine numerical instance is computed here.
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 deps: ["lem-surface-integral-is-independent-of-c-one-boundary-charts"]

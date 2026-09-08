@@ -2,7 +2,7 @@
 id: lem-modular-trace-depends-only-on-the-p-regular-part
 kind: lemma
 title: "Modular trace depends only on the p-regular part"
-status: draft
+status: published
 origin: pipeline
 deps: [def-finite-dimensional-representation-of-a-group-over-a-field, thm-bezout-identity, def-linear-basis, cor-independent-set-is-no-larger-than-a-finite-spanning-set]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

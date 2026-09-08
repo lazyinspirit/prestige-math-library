@@ -2,7 +2,7 @@
 id: "lem-tree-predecessors-and-common-extensions"
 kind: "lemma"
 title: "Tree predecessors and compatibility"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-set-theoretic-tree-and-levels"]
 provenance:
@@ -16,6 +16,7 @@ justified_by: []
 forward_refs: []
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-09
   precheck: "pass"
   judge:
     model: "gpt-5.6-terra"

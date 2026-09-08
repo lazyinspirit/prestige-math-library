@@ -2,13 +2,14 @@
 id: lem-specialization-dense-domains-and-union
 kind: lemma
 title: "Dense domains and directed unions of specializing conditions"
-status: draft
+status: published
 origin: pipeline
 deps: [def-finite-aronszajn-specialization-poset, def-aronszajn-suslin-and-special-tree]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

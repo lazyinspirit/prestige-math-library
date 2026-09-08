@@ -2,13 +2,14 @@
 id: lem-skolem-hull-size-and-elementarity
 kind: lemma
 title: "Skolem hulls are small elementary substructures"
-status: draft
+status: published
 origin: pipeline
 deps: [def-skolem-witness-hull, thm-tarski-vaught-set-structure-test, thm-hessenberg, cor-cardinal-absorption, thm-well-ordering-theorem, def-axiom-of-choice, def-set-coded-terms-and-formulas]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

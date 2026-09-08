@@ -2,13 +2,14 @@
 id: "def-classical-affine-coordinate-ring"
 kind: "definition"
 title: "The coordinate ring of a classical affine algebraic set"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-classical-vanishing-ideal", "def-quotient-ring", "thm-quotient-ring-laws"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

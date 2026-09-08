@@ -2,13 +2,14 @@
 id: def-elementary-diagram-of-set-structure
 kind: definition
 title: "Elementary diagrams"
-status: draft
+status: published
 origin: pipeline
 deps: [def-elementary-set-structure-embedding, def-set-signature-and-finite-syntax-strings, thm-set-structure-satisfaction-recursion, lem-satisfaction-coincidence, def-theories-models-and-semantic-consequence]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-09
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

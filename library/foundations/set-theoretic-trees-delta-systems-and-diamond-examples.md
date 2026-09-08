@@ -1,7 +1,7 @@
 ---
 page: "set-theoretic-trees-delta-systems-and-diamond-examples"
 title: "Set-Theoretic Trees, Delta Systems, and Diamond: Examples and Counterexamples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-binary-tree-and-konig-branch", "cex-countable-levels-do-not-suffice-for-konig", "ex-uncountable-delta-system-with-one-point-root", "cex-infinite-sets-delta-system-hypothesis", "ex-finite-specialization-compatibility", "ex-diamond-suslin-ccc-square", "fs-every-omega-one-tree-has-a-cofinal-branch"]
 ---
