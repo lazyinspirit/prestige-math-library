@@ -748,7 +748,7 @@ test('a stderr naming no known URL and no page still refuses to guess', () => {
   rmSync(repo, { recursive: true, force: true });
 });
 
-test('Stage-1 scaffold-policy errors route to the owning Beta before advisory source work', async () => {
+test('Stage-1 policy and advisory source errors reach one shared repair writer', async () => {
   const repo = fixtureRepo();
   writeFileSync(join(repo, 'research', 'demo-batch-12.pages.json'), JSON.stringify([{
     id: 'schemes-page', kind: 'A', items: [{ id: 'def-bad-dependency', deps: ['def-missing'] }],
@@ -770,20 +770,22 @@ test('Stage-1 scaffold-policy errors route to the owning Beta before advisory so
   }), true);
   assert.equal(started.length, 1);
   assert.deepEqual(started[0].covers, ['12']);
-  assert.equal(started[0].label, 'scaffold-fix-1-b12');
+  assert.equal(started[0].label, 'scaffold-reconcile-1');
   assert.equal(started[0].job, 'scaffolding');
-  assert.equal(started[0].task, 'briefs/beta-scaffold-policy-fix.md');
+  assert.equal(started[0].brief, 'briefs/beta-scaffold-reconcile.md');
+  const packet = JSON.parse(readFileSync(join(repo, 'research/demo-scaffold-repair-1.json'), 'utf8'));
+  assert.deepEqual(packet.failures.map((x: any) => x.id), ['content-policy-scaffold', 'source-fetch-check']);
 
   started.length = 0;
   await s1.onGateFailure({
     ctx: { run: 'demo', repo }, executor, stage: s1, round: 1, failure,
   });
   assert.equal(started.length, 1, 'the primary policy repair must not be starved by an advisory');
-  assert.equal(started[0].label, 'scaffold-fix-1-b12');
+  assert.equal(started[0].label, 'scaffold-reconcile-1');
   rmSync(repo, { recursive: true, force: true });
 });
 
-test('primary coverage routes all coverage owners, deduplicates, and does not spend on policy advisories', async () => {
+test('coverage cannot starve policy advisories; one writer owns their shared plan', async () => {
   const repo = fixtureRepo();
   try {
     for (const [batch, id] of [[10, 'haar-page'], [16, 'determinacy-page'], [3, 'probability-page']] as const) {
@@ -805,27 +807,32 @@ test('primary coverage routes all coverage owners, deduplicates, and does not sp
         ],
       },
     });
-    assert.deepEqual(started.flatMap(p => p.covers).sort(), ['10', '16']);
+    assert.equal(started.length, 1, 'shared plan mutations must be serialized');
+    assert.deepEqual(started.flatMap(p => p.covers).sort(), ['10', '16', '3']);
     assert.ok(started.every(p => p.job === 'scaffolding'));
+    const packet = JSON.parse(readFileSync(join(repo, 'research/demo-scaffold-repair-1.json'), 'utf8'));
+    assert.deepEqual(packet.failures.map((x: any) => x.id), ['coverage-10', 'coverage-16', 'content-policy-scaffold']);
   } finally { rmSync(repo, { recursive: true, force: true }); }
 });
 
-test('an unrelated primary gate or an unknown coverage subject cannot select an arbitrary scaffold writer', () => {
+test('unknown subjects and structural failures get a serial investigation, not guessed batch ownership', () => {
   const repo = fixtureRepo();
   try {
     writeFileSync(join(repo, 'research', 'demo-batch-1.pages.json'), JSON.stringify([
       { id: 'known-page', kind: 'A', items: [] },
     ]));
+    const started: any[] = [];
     const args = {
       ctx: { run: 'demo', repo }, stage: {}, round: 1,
-      executor: { start: () => { throw Error('unexpected dispatch'); } },
+      executor: { start: (_s: any, p: any) => started.push(p) },
     };
     assert.equal(dispatchScaffoldRepairs({ ...args, failure: {
       id: 'manifest-integrity', advisory: [{ id: 'content-policy-scaffold', output: 'ERROR bad [known-page]: bad' }],
-    } }), false);
+    } }), true);
     assert.equal(dispatchScaffoldRepairs({ ...args, failure: {
       id: 'coverage-1', output: 'ERROR coverage-empty-harvest [unknown-page]: missing',
-    } }), false);
+    } }), true);
+    assert.ok(started.every(p => p.label === 'scaffold-reconcile-1'));
   } finally { rmSync(repo, { recursive: true, force: true }); }
 });
 

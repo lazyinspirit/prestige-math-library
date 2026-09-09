@@ -49,12 +49,12 @@ test('uncertainty escalates; owner acceptance is final and owner hold blocks', (
   const f = fixture();
   try {
     assert.throws(() => recordResolution(f.root, { run: 'demo', page: 'a', decision: 'repaired', confidence: .99, reason: 'uncertain' }), /100%/);
-    recordResolution(f.root, { run: 'demo', page: 'a', decision: 'escalate', reason: 'Need owner ruling' });
+    recordResolution(f.root, { run: 'demo', page: 'a', decision: 'escalate', confidence: undefined, reason: 'Need owner ruling' });
     assert.deepEqual(JSON.parse(check(f.root).stdout).escalated, ['a']);
-    recordResolution(f.root, { run: 'demo', page: 'a', decision: 'accept', owner: true, reason: 'Owner ruling' });
+    recordResolution(f.root, { run: 'demo', page: 'a', decision: 'accept', confidence: undefined, owner: true, reason: 'Owner ruling' });
     assert.equal(check(f.root).status, 0);
-    assert.throws(() => recordResolution(f.root, { run: 'demo', page: 'a', decision: 'escalate', reason: 'Agent disagrees' }), /owner decision is final/);
-    recordResolution(f.root, { run: 'demo', page: 'a', decision: 'hold', owner: true, reason: 'Wait for prerequisites' });
+    assert.throws(() => recordResolution(f.root, { run: 'demo', page: 'a', decision: 'escalate', confidence: undefined, reason: 'Agent disagrees' }), /owner decision is final/);
+    recordResolution(f.root, { run: 'demo', page: 'a', decision: 'hold', confidence: undefined, owner: true, reason: 'Wait for prerequisites' });
     assert.equal(check(f.root).status, 1);
   } finally { rmSync(f.root, { recursive: true, force: true }); }
 });

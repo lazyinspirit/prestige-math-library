@@ -15,6 +15,7 @@ import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
+import { spawnSync } from 'node:child_process';
 
 // In-tree: the repository is two levels up from this file. It was an absolute
 // path when the engine lived in its own repo.
@@ -60,7 +61,6 @@ test('every gate and command in the stage table passes flags its tool defines', 
 
 test('every brief and task file a stage will ask for exists', async (t) => {
   if (!existsSync(join(REPO, 'research'))) return t.skip('target repo not present');
-  const mod = await import('../stages/mathlib.mts');
   // THE NEWEST PLANNED RUN, not a hardcoded one. This pinned `frontier-14` and
   // so asserted that today's stage table resolves against a run planned before
   // half of it existed: when `1-drift` became a stage of its own it asked for
@@ -74,21 +74,13 @@ test('every brief and task file a stage will ask for exists', async (t) => {
     .sort((a, b) => (statSync(join(REPO, 'research', `${a}-scope-ledger.json`)).mtimeMs
       - statSync(join(REPO, 'research', `${b}-scope-ledger.json`)).mtimeMs));
   if (!runs.length) return t.skip('no planned run in the target repo');
-  const ctx = { run: runs.at(-1), repo: REPO };
-  const missing = [];
-  for (const st of mod.stages) {
-    for (const p of (st.plan?.(ctx, ['1', '2', '3', '4', '5', '6']) ?? [])) {
-      // brief/task may be an ARRAY of candidates; the run needs at least one.
-      for (const v of [p.brief, p.task]) {
-        if (!v) continue;
-        const cands = Array.isArray(v) ? v : [v];
-        if (!cands.some((c) => existsSync(join(REPO, c)))) {
-          missing.push(`${st.id}/${p.label} -> none of ${cands.join(' | ')}`);
-        }
-      }
-    }
-  }
-  assert.deepEqual(missing, [], `a stage would block on a missing file:\n  ${missing.join('\n  ')}`);
+  // Use the same read-only enumeration as doctor. Calling future plan hooks
+  // before their prerequisite artifacts exist invents recovery assignments
+  // and can write generated tasks. Dynamic repair tasks are checked at launch.
+  const result = spawnSync(process.execPath,
+    [join(REPO, 'tools/run-tasks.mjs'), '--run', runs.at(-1), '--check'],
+    { cwd: REPO, encoding: 'utf8' });
+  assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
 });
 
 test('doctor catches an invented flag — actually planted, not merely absent', async (t) => {

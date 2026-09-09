@@ -270,7 +270,7 @@ test('zero sources is a failure, never a pass', async () => {
 
 // ---------------------------------------------------------------- the wiring
 
-test('both scaffold-side joins gate on the stamp, and both repair mechanically', () => {
+test('both scaffold-side joins gate on the stamp and have a repair route', () => {
   const dir = mkdtempSync(join(tmpdir(), 'sfc-stage-'));
   mkdirSync(join(dir, 'research'));
   for (const b of ['1']) writeFileSync(join(dir, 'research', `demo-batch-${b}.pages.json`), '[]');
@@ -281,7 +281,7 @@ test('both scaffold-side joins gate on the stamp, and both repair mechanically',
     assert.ok(g, `${id} declares no source-fetch-check gate`);
     assert.ok(g.liveness, `${id}'s fetch gate has no liveness floor`);
     assert.ok(typeof st.onGateFailure === 'function', `${id} has no repair hook`);
-    assert.ok((st.maxFixRounds ?? 0) >= 1, `${id} has no repair budget`);
+    assert.ok((st.perItemFixBudget ?? st.maxFixRounds ?? 0) >= 1, `${id} has no repair budget`);
   }
   // 3-recheck also sweeps liveness at its join now
   const st3: any = stages.find((s: any) => s.id === '3-recheck');

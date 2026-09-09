@@ -192,8 +192,7 @@ export interface Stage {
    *  attracting repair, while its page-mates continue. The stage blocks only
    *  when every item the failing gate names is exhausted.
    *
-   *  Leave it unset to keep the original stage-wide `maxFixRounds` behaviour —
-   *  that is what every stage outside step 6 still does. */
+   *  Leave it unset to keep stage-wide `maxFixRounds` behaviour. */
   perItemFixBudget?: number;
   /** Repair every failure in this stage's battery in one ownership-aware wave. */
   batchRepairs?: boolean;
@@ -265,7 +264,7 @@ export interface StageState {
   enteredAt: string;
   gatesPassedAt: string | null;
   doneAt: string | null;
-  /** Repair rounds spent on a failing gate. Bounded by `Stage.maxFixRounds`. */
+  /** Repair-cycle identity. Bounded by maxFixRounds unless perItemFixBudget is set. */
   fixRounds: number;
   /** Set once the repair budget is spent, so the notice is given once. */
   repairExhaustedAt?: string | null;

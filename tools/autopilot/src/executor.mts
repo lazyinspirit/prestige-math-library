@@ -1622,7 +1622,7 @@ export class Executor {
     // PER-ITEM BUDGET, when the stage opts in. `fixRounds` is still stamped so
     // the report and the `retry` control keep working, but it no longer BOUNDS
     // the stage — the (gate, item) counters do. A stage without
-    // `perItemFixBudget` is unchanged, which is every stage outside step 6.
+    // `perItemFixBudget` is unchanged.
     const perItem = stage.perItemFixBudget ?? 0;
     const gateAttemptsBefore = perItem > 0
       ? structuredClone(this.state.data.gateAttempts ?? {})

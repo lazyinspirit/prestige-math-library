@@ -26,6 +26,8 @@ import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
 import { loadStep8JudgeEvidence } from '../../step8-evidence.mjs';
 import { repairGateBatch, repairFingerprint } from './step56-repairs.mts';
+import { dispatchScaffoldRepairs, scaffoldRepairFingerprint } from './step1-repairs.mts';
+export { dispatchScaffoldRepairs } from './step1-repairs.mts';
 
 // Version the composed Step-6 module independently. The executor watches both
 // files and re-imports this root when either changes; the query prevents Node's
@@ -703,46 +705,6 @@ export const dispatchSourceScouts = ({ ctx, executor, stage, round, stderr }: an
     });
   }
   return owed.length > 0;
-};
-
-/** Repair the primary scaffold failure class, once per owning batch.
- * Coverage failures must not spend their budget on unrelated policy advisories.
- * Ownership is mechanical; source and mathematical decisions remain the Beta's.
- */
-export const dispatchScaffoldRepairs = ({ ctx, executor, stage, round, failure }: any) => {
-  const coverage = /^coverage-\d+$/.test(String(failure?.id ?? ''));
-  if (!coverage && failure?.id !== 'content-policy-scaffold') return false;
-  const entries = [failure, ...(failure?.advisory ?? [])]
-    .filter((entry: any) => coverage
-      ? /^coverage-\d+$/.test(String(entry?.id ?? ''))
-      : entry?.id === 'content-policy-scaffold');
-  const subjects = new Set<string>();
-  for (const entry of entries) {
-    const text = String(entry.output ?? '') + '\n' + String(entry.stderr ?? '') + '\n' + String(entry.why ?? '');
-    for (const match of text.matchAll(/^ERROR\s+\S+\s+\[([a-z0-9-]+)\]:/gm)) subjects.add(match[1]);
-  }
-  if (!subjects.size) return false;
-
-  const owed = new Set<string>();
-  for (const batch of batches(ctx)) {
-    const path = join(R(ctx, 'research'), `${ctx.run}-batch-${batch}.pages.json`);
-    let pages: any[];
-    try { pages = JSON.parse(readFileSync(path, 'utf8')); } catch { continue; }
-    if (pages.some((page: any) => subjects.has(page.id)
-      || (page.items ?? []).some((item: any) => subjects.has(item.id)))) owed.add(String(batch));
-  }
-  for (const batch of owed) {
-    executor.start(stage, {
-      role: 'beta',
-      label: `scaffold-fix-${round}-b${batch}`,
-      job: 'scaffolding',
-      covers: [batch],
-      brief: 'briefs/beta-scaffold.md',
-      task: 'briefs/beta-scaffold-policy-fix.md',
-      timeout: 3600,
-    });
-  }
-  return owed.size > 0;
 };
 
 /** Scope loss is invisible to every gate that reads the current state.
@@ -1687,21 +1649,14 @@ export const stages = [
     // manifests the Betas actually scaffolded against.
     gates: (ctx) => [scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx, { requireDestination: true }), ...policyGates(ctx), planGate(), extGate(), urlGate(ctx), backingGate(ctx), fetchGate(ctx)],
 
-    // Failures at this join with a MECHANICAL_REPAIRS entry — the archive
-    // swap, the full-text stamp — are repaired by code, one round each; see
-    // the table above for why, and for why its strictness is the point. The
-    // first live firing of the swap round is what un-deadlocked this stage on
-    // frontier-15 (§3.11c). Two rounds, because the two repairs can be owed
-    // independently and each consumes one.
-    maxFixRounds: 2,
+    // Charge each gate/subject independently and send the complete battery to
+    // one shared writer. Source failures cannot starve prerequisite repair.
+    perItemFixBudget: 3,
+    batchRepairs: true,
+    repairFingerprint: scaffoldRepairFingerprint,
     onGateFailure: async (args: any) => {
-      // Resolve the primary coverage/policy class before unrelated advisories.
-      // A subsequent battery still checks every gate; no budget is enlarged.
       if (dispatchScaffoldRepairs(args)) return;
-      const repair = await mechanicalRepair(args);
-      if (repair.outcome === 'residual' && !dispatchSourceScouts({ ...args, stderr: repair.stderr })) {
-        throw new Error(`mechanical repair left residue and no scout could be routed: ${(repair.stderr ?? '').slice(0, 300)}`);
-      }
+      return { owner: { reason: 'No live scaffold repair assignment or no run manifests; restore the scoped inputs before repair.' } };
     },
   },
 

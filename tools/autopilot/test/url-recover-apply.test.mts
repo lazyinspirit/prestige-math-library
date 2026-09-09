@@ -127,17 +127,19 @@ test('url-sweep excludes declared-superseded originals from its probe queue', ()
 
 // ---------------------------------------------------------------- the hook
 
-test('stage 1 declares a mechanical repair round per repair class', () => {
+test('stage 1 budgets every gate and subject instead of two global rounds', () => {
   const s1: any = stages.find((s: any) => s.id === '1-scaffold');
-  // two repairs can be owed independently — the archive swap and the
-  // full-text stamp — and each consumes one round
-  assert.equal(s1.maxFixRounds, 2);
+  assert.equal(s1.maxFixRounds, undefined);
+  assert.equal(s1.perItemFixBudget, 3);
+  assert.equal(s1.batchRepairs, true);
+  assert.equal(typeof s1.repairFingerprint, 'function');
   assert.equal(typeof s1.onGateFailure, 'function');
 });
 
-test('the hook ignores every other gate failure', async () => {
+test('missing run inputs are an explicit owner hold, not an empty repair', async () => {
   const s1: any = stages.find((s: any) => s.id === '1-scaffold');
   // a ctx whose paths do not exist: if the hook acted, the spawn would fail
   // and the hook would throw. Returning quietly is the assertion.
-  await s1.onGateFailure({ ctx: { run: 'nope', repo: '/nonexistent' }, failure: { id: 'validate-plan', why: '' } });
+  const result = await s1.onGateFailure({ ctx: { run: 'nope', repo: '/nonexistent' }, failure: { id: 'validate-plan', why: '' } });
+  assert.match(result.owner.reason, /no run manifests/);
 });

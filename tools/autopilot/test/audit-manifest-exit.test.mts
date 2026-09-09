@@ -128,7 +128,7 @@ test('a large piped manifest flushes its terminal liveness summary', () => {
   const { root, file, repetitions } = largeOutputFixture();
   const r = runFixture(root, file);
   assert.equal(r.status, 0, `${r.stdout}${r.stderr}`);
-  assert.match(r.stdout + r.stderr,
+  assert.match((r.stdout + r.stderr).trimEnd(),
     new RegExp(`audit-manifest: ${repetitions} relationship\\(s\\) over 1 item\\(s\\) in 1 batch\\(es\\); 0 defect\\(s\\)$`));
   rmSync(root, { recursive: true, force: true });
 });

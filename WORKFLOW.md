@@ -316,17 +316,34 @@ cannot be waived by the stage definition.
 
 Failed dispatches stop at the stage/configured attempt limit (default config:
 three). Missing artifacts become bounded `stage-stalemate` repairs.
-Steps 5 and 6B repair all failures together, with three attempts per gate/item;
+Steps 1, 5 and 6B repair all failures together, with three attempts per gate/item;
 other stages use their declared budgets. Mechanical fixes run first, then
 non-overlapping Alpha groups, or one reviewer for unknown ownership.
 Identical failures after a repair that changed no relevant inputs stop further
 calls. Final checks remain mandatory.
 
-Step 1 routes the primary coverage or manifest-policy failure class to its
-owning batches, including advisories of that same class, with one writer per
-batch. Coverage failures cannot spend every repair round on unrelated policy
-advisories. Source recovery and complete mathematical contracts remain required;
-the router does not supply a source-drop decision or a sufficient verdict.
+Step 1 sends every live failure from the complete gate battery to one serial
+scaffold-reconciliation writer after initial and repair workers drain. Initial
+scaffolding remains parallel. Coverage, source and prerequisite failures each
+receive their own gate/subject budget; an exhausted primary cannot prevent a
+live advisory from receiving repair. The diagnostic global round number is not
+a cap. Legacy global rounds remain recorded; per-subject budgets start when a
+run adopts this mechanism. Ordinary operator retry semantics remain unchanged.
+
+The writer receives a durable `RUN-scaffold-repair-N.json` packet with live and
+exhausted subjects. Under `briefs/beta-scaffold-reconcile.md`, it may repair
+affected run scaffolds and reconcile shared prose, the canonical plan, Phase-2
+scope and published-consumer ledger. New prerequisite pairs must have complete
+designs and exact dependency mappings. Registering them does not authorize an
+outside-run build, a new frontier, dropping selected pairs, or changing the
+run's scope baseline. Such build-scope decisions remain explicit blockers.
+Published content, tools, engine controls and verdicts are outside this writer's
+authority. Step 3 still independently reviews the mathematics.
+
+Semantic input fingerprints stop repeated unchanged repairs. Recovery attempt
+logs, check timestamps and repair notes alone do not count as mathematical
+progress. Source recovery and complete alternative arguments remain required;
+the router supplies neither a source-drop decision nor a sufficient verdict.
 
 Step 6 artifact recovery repairs inputs with empty coverage; the split/collect
 tool must still run. Refuter recovery must match its exact frozen scope.

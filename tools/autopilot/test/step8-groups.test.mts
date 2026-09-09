@@ -219,7 +219,7 @@ test('Step 8 separates repair integrity, judge retries, and final closure', () =
   assert.ok(!close.gates(futureCtx).some((g: any) => g.id === 'level-coverage'),
     'the full audit receipt is not authored until Step 9');
   assert.deepEqual(final.gates(futureCtx).map((g: any) => g.id),
-    ['step8-guard', 'step8-published', 'step8-terminal-resolutions', 'judge-closure']);
+    ['frontier-dependency-ledger', 'step8-guard', 'step8-published', 'step8-terminal-resolutions', 'judge-closure']);
   assert.equal(final.onGateFailure, undefined, 'final currency cannot open a third repair/judge cycle');
   assert.ok(!preflight.terminalFixBudget && !close.terminalFixBudget,
     'non-judge repair rounds have separate budgets');

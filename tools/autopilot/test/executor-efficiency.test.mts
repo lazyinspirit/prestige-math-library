@@ -230,6 +230,32 @@ test('partial artifact recovery retains its budget even when content is unchange
   assert.equal(calls, 2);
 });
 
+test('per-subject repair ignores legacy global rounds and continues past an exhausted primary', async () => {
+  const fx = fixture();
+  const calls: any[] = [];
+  let content = 0;
+  const definitions = gatedStage(fx, [], { batchRepairs: true, perItemFixBudget: 3,
+    repairFingerprint: () => String(content),
+    onGateFailure: ({ failure }: any) => { calls.push(failure); } });
+  const { ex } = makeExecutor(fx, definitions);
+  const s = definitions[0];
+  ex.state.stage(s.id).fixRounds = 2;
+  const coverage = { id: 'coverage-10', ok: false,
+    output: 'ERROR missing-source [haar-page]: unresolved' };
+  for (let i = 0; i < 3; i++) {
+    content++;
+    assert.equal(await (ex as any).spendRepairRound(s, coverage, ex.ctx(), 'coverage'), 'spent');
+  }
+  content++;
+  const combined = { ...coverage, advisory: [{ id: 'content-policy-scaffold', ok: false,
+    output: 'ERROR batch-dependency-missing [thm-new-consumer]: needs supplier' }] };
+  assert.equal(await (ex as any).spendRepairRound(s, combined, ex.ctx(), 'both'), 'spent');
+  assert.deepEqual(calls[3].liveItems, []);
+  assert.deepEqual(calls[3].exhaustedItems, ['haar-page']);
+  assert.deepEqual(calls[3].advisory[0].liveItems, ['thm-new-consumer']);
+  assert.equal(ex.state.stage(s.id).fixRounds, 6, 'global round number is an identity, not a cap');
+});
+
 test('retry re-arms the repair loop, not just the lanes', () => {
   const fx = fixture();
   const { ex, notifications } = makeExecutor(fx, gatedStage(fx, [loggingGate(fx, 'g1')]));
