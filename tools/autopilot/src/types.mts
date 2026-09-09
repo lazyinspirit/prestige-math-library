@@ -174,6 +174,9 @@ export interface Stage {
    * can classify that round's failures at the next firing.
    */
   onGateFailure?: (args: { ctx: Ctx; failure: GateResult; executor: any; stage: Stage; round: number; prevRoundAt?: string | null }) => Promise<void | RepairReport> | void | RepairReport;
+  /** Report a gate failure or missing output for owner resolution; no repair dispatch or budget. */
+  onHold?: (args: { ctx: Ctx; failure: GateResult; stage: Stage }) =>
+    { owner: { reason: string } } | Promise<{ owner: { reason: string } }>;
   /** Repair rounds allowed before a failing gate becomes a hard blocker.
    * Infinity allows terminal adjudication instead of a numeric repair cap. */
   maxFixRounds?: number;

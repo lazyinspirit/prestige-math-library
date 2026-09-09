@@ -93,6 +93,9 @@ test('failed body fetch performs the initial attempt plus five retries and recor
     const result = JSON.parse(readFileSync(cov, 'utf8')).pages[0].sources[0];
     assert.equal(result.recovery_attempts.length, 6);
     assert.equal(result.fetch_verified, undefined);
+    const retry = spawn(process.execPath, [join(repo, 'tools/source-fetch-check.mjs'), '--coverage', cov, '--stamp'], { stdio: 'ignore' });
+    assert.equal(await new Promise((resolve, reject) => { retry.on('error', reject); retry.on('exit', resolve); }), 1);
+    assert.equal(requests, 6, 'another dispatch must not restart exhausted retrieval attempts');
   } finally {
     await new Promise((resolve) => server.close(resolve));
     rmSync(dir, { recursive: true, force: true });

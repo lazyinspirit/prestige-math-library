@@ -92,13 +92,10 @@ test('Step 5 authors and author recovery use Astra medium while Steps 6 and 7 re
     'the judge tool is not a Step-7 reader agent');
 });
 
-test('Step 1 scaffolders and scaffold repairers use Astra medium', () => {
+test('Step 1 scaffolders use Astra medium', () => {
   const scaffoldStage = stage('1-scaffold');
   const scaffold = scaffoldStage.plan(ctx, ['1'])[0];
   assert.equal(selected(scaffoldStage, scaffold), MODEL_PROFILE_NAMES.astraMedium);
-  assert.equal(selected(scaffoldStage, {
-    role: 'beta', job: 'scaffolding', label: 'policy-fix-1-b1',
-  }), MODEL_PROFILE_NAMES.astraMedium, 'Step 1 scaffold repairers use the same profile');
   assert.equal(selected(scaffoldStage, {
     role: 'beta', job: 'scouting', label: 'source-scout-1-b1',
   }), undefined, 'source scouting is not a Step 1 scaffolding dispatch');
@@ -162,13 +159,12 @@ test('the shared Step-5 authoring brief mandates authoritative web verification'
 
 test('the Step-1 scaffold brief mandates research and complete dependency closure', () => {
   const source = readFileSync(join(REPO, 'briefs/beta-scaffold.md'), 'utf8');
-  assert.match(source, /every piece of mathematics unfamiliar/i);
-  assert.match(source, /search the web/i);
-  assert.match(source, /authoritative sources/i);
-  assert.match(source, /complete transitive closure|actual transitive proof prerequisites/i);
-  assert.match(source, /no missing,[\s\S]*inadequate[\s\S]*dependency/i);
-  assert.match(source, /definition, lemma, or theorem/i);
-  assert.match(source, /prerequisite A\/B pair/i);
+  assert.match(source, /Search authoritative web sources for unfamiliar mathematics/i);
+  assert.match(source, /read complete relevant arguments/i);
+  assert.match(source, /actual transitive proof dependencies/i);
+  assert.match(source, /no missing, circular, forward or inadequate dependency/i);
+  assert.match(source, /local definition, lemma and proof strategy/i);
+  assert.match(source, /new prerequisite pairs/i);
   assert.match(source, /deferred-set-theory-beyond-choice/i);
 });
 

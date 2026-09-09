@@ -24,6 +24,10 @@ Executable tools and configuration determine current behavior.
 | `Handover-prompts/` | Historical instructions, not live state |
 | `.claude/` | Agent settings; local settings are ignored |
 
+Step 1 is drift review → scaffold construction → an owner-held final gate.
+Scaffolders record item readiness; unresolved findings do not trigger repair agents.
+See [WORKFLOW.md](WORKFLOW.md) for source recovery, reconciliation and controls.
+
 Verify active runs against their state directory and Git history.
 Historical `research/*RESUME.md` files are not current status.
 Change generators or templates instead of hand-editing generated run artifacts.

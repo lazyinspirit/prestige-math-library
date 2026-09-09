@@ -1,32 +1,11 @@
-# Alpha prerequisite-drift review
+# Step 1a — prerequisite drift review
 
-The task names the run, evidence, and report. Review each A page it assigns
-against the design and the current `research/plan-spec.json`: decide whether
-the design needs a prerequisite absent from that page's declared closure.
-Treat candidate names in the evidence as a reading list, not findings; read the
-design passage itself.
-
-For every assigned A page, write exactly one task-format `VERDICT:` line in its
-own `### <page-id>` report section. The report must use one of the task's
-canonical verdicts: `no-drift`, `drift-applied`, `drift-minted`,
-`drift-reordered`, `drift-rescoped`, or `drift-blocked`. Include the required
-page ids and orders exactly as the task specifies. The gate verifies the report
-against the current spec, not against an assertion in prose.
-
-Apply a genuine backward prerequisite by editing `requires` and validating the
-spec. Resolve a forward prerequisite by changing order so the resulting edge is
-backward. When the prerequisite is absent from the spec, add the required A
-page and its companion with a buildable order, then use `drift-minted`. If more
-than three pages must be minted, rescope to the prerequisite pairs instead;
-the replacement set may contain at most 27 pairs. `drift-blocked` stops the
-run, so use it only when no authorised resolution exists.
-
-Your writable scope is `research/plan-spec.json` and the task-named drift
-report. Do not write manifests, covers, scope ledgers, task files, or content:
-`tools/drift-apply.mjs` materialises minted and rescoped verdicts. Run
-
-```sh
-node tools/validate-plan.mjs research/plan-spec.json
-```
-
-after every spec edit. Do not request permissions.
+- Read the task, assigned prose designs, canonical plan and scope restrictions.
+- Review each assigned A page for prerequisites missing from its declared closure. Candidate names are a reading list, not findings.
+- Search authoritative web sources and read complete relevant arguments for unfamiliar mathematics.
+- Apply authorized backward edges and ordering corrections in `research/plan-spec.json`; validate after each edit.
+- Escalate unresolved mathematics, new pairs and scope changes to the owner. Describe exact prerequisites and proposed placement; do not rescope or mint without explicit authorization.
+- Write exactly one `VERDICT:` line under each task-required `### PAGE_ID`: `no-drift`, `drift-applied`, `drift-reordered` or `drift-blocked`, with the task's exact IDs/orders.
+- Use `drift-minted` or `drift-rescoped` only to record explicitly authorized, applied plan amendments.
+- Write only the plan and task-named report. The engine's mechanical stage materializes decisions; do not edit manifests, tasks, scope ledgers or content.
+- An unresolved decision holds the run for the owner. There is no automatic re-review.

@@ -11,7 +11,7 @@ export function sourceResolutionErrors(source) {
   if (r.decided_by !== 'step-1-scaffolder' || r.confidence !== 'certain') {
     errors.push('requires a fully confident Step 1 decision; otherwise escalate to owner');
   }
-  if (!text(r.reason) || !text(r.search_summary)) errors.push('missing open-web unavailability evidence');
+  if (!text(r.reason) || !text(r.search_summary)) errors.push('missing retrieval failure and search evidence');
   if (!Array.isArray(r.attempts) || r.attempts.length < 6
       || r.attempts.some((a) => !url(a?.url) || !text(a?.outcome) || !text(a?.at))) {
     errors.push('record the initial failure and five recovery retries, with URL, time and outcome');

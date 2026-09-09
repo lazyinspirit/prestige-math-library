@@ -215,7 +215,16 @@ elsewhere in `sources` cannot satisfy a literature-backed provenance claim.
 and a pipeline name reused non-contiguously — which would silently mean two
 groups rather than one.
 
-### A failing gate can dispatch its own repair
+### Step 1 holds; later stages may dispatch repairs
+
+Step 1 reviews drift, materializes authorized changes, and constructs scaffolds
+with Astra/medium batch workers. Item readiness and the complete gate battery
+must pass. Failures produce `research/RUN-step1-blockers.json` for owner/operator
+reconciliation; no automatic drift re-review or scaffold-repair writer runs.
+`tools/step1-decisions.mjs` binds readiness to current item/dependency content.
+Source retrieval allows the initial attempt plus five persistent recovery
+retries, then a complete confident alternative proof or owner escalation.
+See the root WORKFLOW.md for authority, reconciliation and migration.
 
 Steps 5 and 6B repair the complete battery failure set in one wave. Related
 findings go to one writer per Alpha group; an unscoped failure uses a serial
@@ -225,15 +234,8 @@ gate/carrier keeps three tries. A repeated failure with unchanged corpus,
 contracts and tooling stops after a no-op repair. The full battery verifies
 every completed wave, so no partial result clears a stage.
 
-`onGateFailure` and `fixRounds` existed from the start: declared in the types,
-called by the executor, implemented by no stage and read by nothing. A failing
-gate could therefore only ever hold. Two fatal defects needing a proof rewrite
-became a paragraph in a report instead of an authoring dispatch.
-
-At the Step-1 join, a primary scaffold-policy failure is routed to its owning
-Beta before advisory source work. This prevents a mixed gate battery from
-spending every bounded repair round on URL findings while leaving the original
-dependency defect untouched.
+Step 1 uses `onHold`, which writes a consolidated report without entering the
+repair loop or reading old repair budgets. Later stages retain `onGateFailure`.
 
 The hook also could not have worked as written — it fired only when the blocker
 *message* was new, and a gate that keeps failing the same way produces the same

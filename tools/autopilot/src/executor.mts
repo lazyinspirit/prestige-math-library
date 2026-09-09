@@ -681,7 +681,7 @@ export class Executor {
     // stampede and a lane of null verdicts.
     //
     // IT LIVES HERE, NOT IN THE FAN-OUT LOOP, for two reasons. The repair hooks
-    // (`dispatchSourceScouts`, `dispatchDriftRereview`) call `start` directly
+    // (`dispatchSourceScouts`) call `start` directly
     // and would otherwise keep stampeding. And the delay must not sit between
     // the `inflight` registration and the cap arithmetic that reads it: the
     // registration below is synchronous and already done, so a staggered spawn
@@ -1616,6 +1616,16 @@ export class Executor {
   }
 
   private async spendRepairRound(stage: Stage, failure: GateResult, ctx: Ctx, describe: string): Promise<'spent' | 'waiting' | 'preflight-blocked' | 'none'> {
+    if (stage.onHold) {
+      let reason: string;
+      try { reason = (await stage.onHold({ ctx, stage, failure })).owner.reason; }
+      catch (error: any) { reason = `hold report failed: ${error?.message ?? error}`; }
+      const message = `stage ${stage.id}: owner decision required — ${reason}`;
+      if (this.state.addBlocker(stage.id, message, `owner:${stage.id}`))
+        this.reporter.notify('owner-escalation', message);
+      this.state.save();
+      return 'waiting';
+    }
     const st = this.state.stage(stage.id);
     const maxRounds = stage.maxFixRounds ?? 0;
     if (!stage.onGateFailure) return 'none';

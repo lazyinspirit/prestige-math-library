@@ -1,68 +1,6 @@
 #!/usr/bin/env node
-// drift-review-check — gate the step-0 prerequisite-drift review.
-//
-//   node tools/drift-review-check.mjs --run <run>
-//
-// The drift review is an Alpha reading task: does any track design require a
-// prerequisite the spec's `requires` closure lacks? `autopilot plan` assembles
-// the evidence and writes the task; the engine dispatches it as the `drift`
-// unit of stage 1. THIS gate is what makes that node unable to be skipped —
-// it was written after the review was found to be a never-invoked node: the
-// task file existed, the plan output said "dispatched as the first audit
-// node", and nothing dispatched it or required its report.
-//
-// Fails when:
-//   - the report is missing (the review has not run),
-//   - any A page the run owes lacks exactly one well-formed VERDICT line,
-//   - a drift-applied/drift-blocked verdict names no edge,
-//   - any verdict is drift-blocked. This USED TO BE the routine disposition for
-//     a reading-order change or a prerequisite with no page id, both being the
-//     owner's alone. It is not any more (owner, 2026-08-24): the Alpha may mint
-//     a missing prerequisite, may reorder to close a forward edge, and above
-//     three mintings must rescope the run onto the dependencies instead. So a
-//     blocked verdict now means the Alpha declined authority it has, and the
-//     run still stops — the point of the stop has moved from "an owner must
-//     decide" to "nobody decided".
-//   - AN APPLIED EDGE IS NOT TRUE OF `plan-spec.json`, points forward, or leaves
-//     either page of an owed pair at or below 95% published same-category
-//     requires. Cross-category edges do not serialize category roots.
-//
-// THE LAST CLAUSE, AND WHY IT IS NOT OPTIONAL. This gate began as a pure prose
-// check over a stage whose whole purpose is to MUTATE THE PLAN, so it could
-// confirm that a review happened and say nothing about what it did. On
-// `frontier-16` the review read a design sentence saying CA-5 "cites the
-// canonical statement on `the-fundamental-theorem-of-algebra` once that
-// predecessor is authored", and turned that conditional future citation into a
-// hard `requires` edge. FTA is planned, unauthored, and deliberately out of
-// scope since frontier-15 because its route needs two unbuilt Galois pages.
-//
-// Nothing could see it. `validate-plan` passes, because the edge is backward
-// and a planned page with no item list has no dependencies to assert. This gate
-// passed, because the report's prose was well-formed. The effect was that the
-// page being scaffolded at that moment became unbuildable, and with it the
-// twenty-three pairs of the complex-analysis track that chain through it —
-// discovered only by re-running `frontier`, which nothing does after step 0.
-//
-// An edge that drops a page below the publication threshold is not a small
-// error: it is indistinguishable from a correct edge until buildability is
-// recomputed from disk.
-//
-// The verdict contract (written into the task template in
-// tools/autopilot/bin/autopilot.mts — change them together):
-//   ### <a-page-id>
-//   ...prose: what was read, what was found...
-//   VERDICT: no-drift
-//   VERDICT: drift-applied — added <page-id> (order <n>)[, ...]
-//   VERDICT: drift-minted — <page-id> (order <n>)[, ...]
-//   VERDICT: drift-reordered — <page-id> (order <old> -> <new>)[, ...]
-//   VERDICT: drift-rescoped — build <page-id> (order <n>)[, ...] instead
-//   VERDICT: drift-blocked — <the exact edge and why no authority reaches it>
-//
-// `drift-minted` and `drift-rescoped` are materialised by tools/drift-apply.mjs,
-// which the `1-drift` stage runs as its mechanical repair. Their named pages
-// MUST appear in the regenerated scope ledger. The ordinary unbuildable-edge
-// loop is not enough for a rescope: the citing page has no newly declared edge,
-// so an unapplied rescope can otherwise look buildable and let this gate pass.
+// Validate drift decisions before and after mechanical materialization.
+// --before-apply validates report/spec edits; the next stage enforces final scope/buildability.
 
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
 import { join } from 'node:path';
@@ -71,6 +9,7 @@ import { pageBuildability } from './buildability.mjs';
 const argv = process.argv.slice(2);
 const opt = (n) => { const i = argv.indexOf(`--${n}`); return i >= 0 && argv[i + 1] ? argv[i + 1] : null; };
 const run = opt('run');
+const beforeApply = argv.includes('--before-apply');
 if (!run) { console.error('usage: node tools/drift-review-check.mjs --run <run>'); process.exit(2); }
 
 const ledgerPath = `research/${run}-scope-ledger.json`;
@@ -162,14 +101,10 @@ const errors = [];
 let applied = 0;
 let edgesChecked = 0;
 
-// A mint/rescope verdict is a decision whose transition is owned by
-// drift-apply. Before that repair runs, each named target is absent from the
-// ledger and this deliberately fails the gate. After drift-apply regenerates
-// the manifests and ledger, the same report passes. Check this directly: a
-// rescope does not add an edge to the original citing page, so edge validation
-// cannot prove that the scope transition happened.
+// Scope amendments must exist in the plan before application and in the final ledger afterward.
 for (const id of mintedOrRescoped) {
-  if (!builtHere.has(id)) {
+  if (!pageById.has(id)) errors.push(`drift-check-unknown-page: ${id} named by a scope decision is absent from ${specPath}`);
+  if (!beforeApply && !builtHere.has(id)) {
     errors.push(`drift-check-not-materialised: ${id} is named by a drift-minted/drift-rescoped verdict but is absent from ${ledgerPath}`);
   }
 }
@@ -182,7 +117,7 @@ const idsWithOrder = (detail) =>
 // Check BOTH pages of every owed pair, not only the A pages for which the Alpha
 // writes report sections. A companion can carry independent prerequisites and
 // therefore has its own denominator.
-for (const id of owedPages) {
+for (const id of beforeApply ? [] : owedPages) {
   const page = pageById.get(id);
   if (!page) { errors.push(`drift-check-unknown-page: ${id} is owed but absent from ${specPath}`); continue; }
   const available = new Set(published);
@@ -282,9 +217,7 @@ for (const id of reviewedOwed) {
   }
   if (kind === 'drift-blocked') {
     errors.push(`drift-check-blocked: ${id} — ${detail.trim() || 'unspecified edge'} — `
-      + 'minting a missing prerequisite, reordering to close a forward edge, and rescoping onto '
-      + 'dependencies are all Alpha authority (owner, 2026-08-24). Use drift-minted, drift-reordered '
-      + 'or drift-rescoped; drift-blocked stops the run and is now a last resort, not a routine finding.');
+      + 'owner action required; no automatic re-review.');
   }
 }
 
@@ -292,6 +225,6 @@ if (errors.length) {
   for (const e of errors) console.error(`ERROR ${e}`);
   process.exit(1);
 }
-console.log(`drift-review-check: ${reviewedOwed.length} page(s) reviewed, ${applied} spec edit(s) applied, no blocked edges; `
+console.log(beforeApply ? `drift-review-check: ${reviewedOwed.length} page(s) reviewed; decisions valid, materialization and buildability pending` : `drift-review-check: ${reviewedOwed.length} page(s) reviewed, ${applied} spec edit(s) applied, no blocked edges; `
   + `${edgesChecked} same-category requires edge(s) checked, every owed A and B page strictly above 95% `
   + (allowInRunDependencies ? 'published-or-earlier-in-run' : 'published'));

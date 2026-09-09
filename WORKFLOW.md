@@ -75,8 +75,8 @@ refuses populated manifests. Use generators rather than editing their outputs;
 
 | Step | Stage IDs | Required result |
 |---|---|---|
-| 0 — plan | `1-drift`, `1-drift-apply` | Reviewed prerequisites and synchronized scope/tasks |
-| 1 — scaffold | `1-scaffold` | Source-backed manifests, coverage, and fetch evidence |
+| 1a — drift | `1-drift`, `1-drift-apply` | Reviewed prerequisites and mechanically synchronized scope/tasks |
+| 1b–c — scaffold and gate | `1-scaffold` | Current item-readiness records, reconciled scaffolds and full checks |
 | 2 — assign | `2-assign` | Disjoint Alpha groups covering every batch, at most three batches each |
 | 3a — scope | `3a-scope` | Sufficient scope or explicit owner approval for every pair |
 | 3b — audit | `3b-audit` | Current item decisions and final mechanical gates |
@@ -188,14 +188,15 @@ dependencies reach `deferred-set-theory-beyond-choice`, even transitively. That
 catalogue is a target ledger, never a supplier page.
 
 Source gates require harvest dispositions and verified active sources or
-documented Step 1 source-drop decisions. After an initial full-text failure,
-agents search the web autonomously and retry recovery five times. The fetch
-tool also retries failed bodies five times and records attempts. Genuine
-open-web absence permits an alternate proof, not removal of mathematics.
-Retain `source_resolution` evidence and complete per-item arguments with
-dependencies as specified in `briefs/beta-scaffold.md`. Only fully confident
-decisions pass; uncertainty escalates to the owner. Step 3 independently
-judges soundness, not availability of the original or a second treatment.
+documented Step-1 source drops. After an initial full-text retrieval failure,
+search alternate locations and retry at most five times. Stop on success;
+recorded attempts survive handoffs and repeated fetch-tool invocations.
+After exhaustion, construct complete alternative arguments with all required
+local dependencies, or escalate to the owner. Full mathematical confidence
+and genuine recovery evidence are required for a drop; it waives the original
+backing and any source-count shortfall, not results or dependency checks.
+Temporary outages do not establish permanent unavailability. Step 3
+independently judges the alternative, not the fetch receipt.
 Compressed-object PDF sources require `mutool` for an accurate page count;
 parser failure leaves them unstamped. A page-count pass does not establish
 that the cited chapter is present or has been read. Source fetching allows
@@ -238,6 +239,42 @@ Every confirmed fatal requires one compatible row in
 requires no open rows.
 
 ## Repairs and controls
+
+### Step 1: drift, construction, final gate
+
+- **1a — Sol/high Alpha:** read assigned prose and the canonical plan; apply authorized prerequisite/order corrections. New pairs, scope changes and unresolved mathematics require the owner. Write the drift report; do not edit manifests or scope records.
+- **Mechanical materialization:** `1-drift` checks report/spec decisions with `--before-apply`; `1-drift-apply` synchronizes approved changes and checks final scope/buildability. Failure holds; there is no automatic drift re-review.
+- **1b — Astra/medium Beta per batch:** construct items in prerequisite order, read authoritative sources for unfamiliar mathematics, supply complete local dependencies and source coverage, and record each item as `ready` or `escalated`. Keep unchanged ready items intact.
+- **Write boundaries:** Betas own batch manifests, coverage, notes, item-readiness records and consumer-batch dependency inputs. They do not edit published content, shared plans, verdicts or engine state. Cross-batch changes and new prerequisite pairs are escalated with exact designs and supplier chains.
+- **1c — owner/operator reconciliation:** resolve escalations and reconcile affected prose, the canonical plan, Phase-2 scope/counts, cross-batch records and `published-consumer-supplier-ledger.md`. Recording a future pair does not authorize adding it to this run or using it as a published supplier.
+- **Final engine gate:** require current readiness for every item plus scope, drift, coverage, manifest dependencies/policy, the merged cross-batch ledger, plan, external-reference and source checks. The complete failure set is written to `research/RUN-step1-blockers.json`; no repair agent is launched. After applied corrections, rerun gates without rebuilding unchanged scaffolds.
+
+Use `tools/step1-decisions.mjs`:
+
+```bash
+node tools/step1-decisions.mjs record --run RUN --item ID --decision ready --dependencies '["SUPPLIER_ID"]' --reason "Proof strategy, exact dependency checks and evidence"
+node tools/step1-decisions.mjs record --run RUN --item ID --decision escalated --dependencies '[]' --reason "Exact blocker and required owner action"
+node tools/step1-decisions.mjs check --run RUN
+```
+
+Only the owner or an explicitly authorized operator may use `--owner` to
+record readiness after resolving an escalation. Records bind to current item
+and transitive declared/examined dependency content. Changes invalidate the
+affected readiness; an escalation remains owner-controlled even after edits.
+These are construction records, not Step-3 approvals.
+
+Initial dispatch failures retain the configured three-attempt infrastructure
+limit and four-hour scaffold timeout. Gate failures and missing-output
+stalemates hold for intervention without mathematical repair budgets or
+fingerprint loops. Source recovery has its separate six-attempt total above.
+
+Existing stage IDs and scaffold files are preserved. Old worker results do not
+supply readiness records. A run returning to Step 1 needs explicit current
+records, not invented approvals or a bulk mathematical rebuild. Do not reset
+completed stages or regenerate live tasks merely to install this change.
+Already launched prompts do not change; coordinate any cutover with the owner.
+The new executor hold handler requires a controller restart before using this
+Step-1 flow; stage-file hot reload alone does not load executor changes.
 
 ### Step 3: scope, item audit, final gate
 
@@ -315,36 +352,12 @@ group starts. Deterministic launch errors restore repair budgets.
 Stages require gates or an explicit `gatesWaived` explanation; terminal gates
 cannot be waived by the stage definition.
 
-Failed dispatches stop at the stage/configured attempt limit (default config:
-three). Missing artifacts become bounded `stage-stalemate` repairs.
-Steps 1, 5 and 6B repair all failures together, with three attempts per gate/item;
-other stages use their declared budgets. Mechanical fixes run first, then
-non-overlapping Alpha groups, or one reviewer for unknown ownership.
-Identical failures after a repair that changed no relevant inputs stop further
-calls. Final checks remain mandatory.
-
-Step 1 sends every live failure from the complete gate battery to one serial
-scaffold-reconciliation writer after initial and repair workers drain. Initial
-scaffolding remains parallel. Coverage, source and prerequisite failures each
-receive their own gate/subject budget; an exhausted primary cannot prevent a
-live advisory from receiving repair. The diagnostic global round number is not
-a cap. Legacy global rounds remain recorded; per-subject budgets start when a
-run adopts this mechanism. Ordinary operator retry semantics remain unchanged.
-
-The writer receives a durable `RUN-scaffold-repair-N.json` packet with live and
-exhausted subjects. Under `briefs/beta-scaffold-reconcile.md`, it may repair
-affected run scaffolds and reconcile shared prose, the canonical plan, Phase-2
-scope and published-consumer ledger. New prerequisite pairs must have complete
-designs and exact dependency mappings. Registering them does not authorize an
-outside-run build, a new frontier, dropping selected pairs, or changing the
-run's scope baseline. Such build-scope decisions remain explicit blockers.
-Published content, tools, engine controls and verdicts are outside this writer's
-authority. Step 3 still independently reviews the mathematics.
-
-Semantic input fingerprints stop repeated unchanged repairs. Recovery attempt
-logs, check timestamps and repair notes alone do not count as mathematical
-progress. Source recovery and complete alternative arguments remain required;
-the router supplies neither a source-drop decision nor a sufficient verdict.
+Failed dispatches stop at the stage/configured attempt limit (default: three).
+Step 1 reports holds as described above. Steps 5 and 6B retain three repair
+attempts per gate/item: mechanical fixes first, then non-overlapping Alpha
+groups or one writer for unknown ownership. Their unchanged-input checks stop
+repeated ineffective repairs. Other stages use their declared budgets; final
+checks remain mandatory.
 
 Step 6 artifact recovery repairs inputs with empty coverage; the split/collect
 tool must still run. Refuter recovery must match its exact frozen scope.

@@ -37,10 +37,9 @@
 // STAMP MODE (`--stamp`) fetches every unstamped source and writes
 // `fetch_verified: {at, bytes, sha256_16, kind, pages?|text_chars?}` onto it.
 // Already-stamped sources are skipped, so re-runs are cheap and idempotent;
-// `--force` re-fetches. Failures are reported by name and leave the source
-// unstamped — exit 1 tells the calling Beta (or the stage repair hook) that
-// scouting is owed: an alternate URL for the SAME source, or the archive
-// fallback under url-sweep's convention (url <- snapshot, original_url kept).
+// `--force` re-fetches within the remaining recovery allowance. Failures are
+// reported by name; exhausted recovery requires a complete alternative proof
+// or owner escalation. Re-running the tool does not reset recorded attempts.
 //
 // CHECK MODE accepts a fetch stamp or a validated Step 1 source-drop record.
 // Drops preserve alternate arguments; they are not fetch or proof approval.
@@ -242,9 +241,13 @@ for (const file of coverages) {
       if (shape) { failures.push(`fetch-check-abstract-url: ${page.page}: ${source.url} — ${shape}`); continue; }
       if (!stampMode) { failures.push(`fetch-check-unstamped: ${page.page}: ${source.url}`); continue; }
       let got, cls;
-      // Initial fetch plus five retries. Scaffolders also search for mirrors,
-      // archives and alternate proofs; repeated failures alone justify no drop.
-      for (let attempt = 0; attempt <= 5; attempt++) {
+      // Preserve the six-attempt allowance across invocations and handoffs.
+      const attempted = source.recovery_attempts?.length ?? 0;
+      if (attempted >= 6) {
+        failures.push(`fetch-check-recovery-exhausted: ${page.page}: ${source.url} — construct a complete alternative proof or escalate to owner`);
+        continue;
+      }
+      for (let attempt = attempted; attempt < 6; attempt++) {
         got = await fetchFull(source.url);
         cls = got.error ? null : classify(source.url, got.finalUrl, got.buffer, got.contentType, source);
         (source.recovery_attempts ??= []).push({

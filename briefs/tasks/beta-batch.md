@@ -1,18 +1,7 @@
-> The dispatch supplies batch `<i>`. A generated task supplies its pages,
-prerequisites, and design locations.
+# Step 1 — batch `<i>`, `{{run}}`
 
-# Step 1 — scaffold batch `<i>`, `{{run}}`
-
-Read the generated task, batch manifest, coverage, notes, design sections, and
-current plan. Write only the batch manifest, coverage, and notes. The current
-plan controls a design conflict; record the conflict without inventing a
-compromise.
-
-Build every A/B pair to full source and dependency closure. Add every missing
-definition, lemma, or theorem that fits the pair. If closure requires a new
-A/B pair, record the complete proposed pair and leave the consumer blocked
-until an authorized writer adds it to the prose scaffold and plan.
-
-Run the batch coverage checklist, whole-run `manifest-deps`, manifest-only
-content policy, `validate-plan`, `extcheck`, URL liveness, source backing, and
-source fetch checks. Record every failure in the batch notes.
+- Read the generated batch task and follow `briefs/beta-scaffold.md`.
+- Write this batch's manifests, coverage, notes, readiness records and dependency inputs only.
+- Record every item as ready or escalated, one at a time; preserve completed work.
+- Leave shared-plan, new-pair and published-item findings in notes for owner reconciliation.
+- Run the specified checks and report exact remaining blockers.

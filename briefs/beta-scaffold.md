@@ -1,105 +1,31 @@
-# Scaffold contract
+# Step 1 — scaffold construction
 
-The task defines scope, writable files, outputs, and checks. Read it with
-`CLAUDE.md`, `SCHEMA.md`, `WORKFLOW.md`, the assigned designs, the current plan,
-and the owned evidence. Write only authorized files. Do not modify published
-content or request broader access.
-
-## Dependencies
-
-A scaffold is ready only when every claim can be proved from its hypotheses and
-earlier local results. Check page `requires` for structural closure and legal
-order. Audit the actual transitive proof prerequisites of every owned item
-through the plan, run manifests and published items, including `deps`,
-well-definedness obligations and load-bearing body references. Sharing a
-prerequisite page does not make every item on that page a proof dependency. For
-each actual dependency, verify its exact statement, hypotheses, direction,
-conventions, axiom strength, and use in the proposed proof. A resolving ID is
-not enough. There must be no missing, circular, forward, or inadequate
-dependency.
-
-During Phase 2, defects in published consumers being supplied by this frontier
-are Phase-3 debt, not blockers on their suppliers. Record those defects, exact
-planned suppliers and repair strategies in the published-consumer-supplier
-ledger; batch writers without ledger access record them in their owned notes
-for reconciliation. A published defect blocks an owned item only when its
-proposed proof actually uses the defective result or affected clause. Give the
-exact item path and mathematical use; then supply an adequate local proof or
-reroute to an adequate prerequisite. Do not assume that unused declared edges
-are harmless: justify their removal against the proof. Do not require a
-semantic audit of all co-resident published items to clear a supplier pair.
-This distinction never waives structural gates or the Foundations boundary below.
-
-Add every needed definition, lemma, or theorem in proof order. The owner
-authorizes new prerequisite A/B pairs when closure requires them. Add each pair
-to the authorized prose scaffold and plan. If those files are not writable,
-record its title, category, placement, prerequisites, and A/B item inventories
-as a fatal finding. The consumer remains blocked until the pair is added. Never
-drop or weaken useful mathematics to pass a check. Split an A page above the
-plan limit; never pad.
-Use stable, unused, correctly prefixed item IDs and explicit `deps` arrays,
-including `deps: []`.
-
-No Foundations page or item may directly or transitively reach
-`deferred-set-theory-beyond-choice` or any item recorded there through
-`requires`, `deps`, `justified_by`, or load-bearing `forward_refs`. The
-catalogue is a target ledger, never a supplier. `external_refs` may provide
-orientation only. Prove replacements from earlier local machinery. Every
-violation is fatal and unpublishable.
+- Read CLAUDE.md, SCHEMA.md, WORKFLOW.md, the assigned task/designs, current plan and batch evidence. The plan controls design conflicts; record the conflict.
+- Write only assigned manifests, coverage, notes, item-readiness records and consumer-batch dependency inputs. Do not edit published content, shared plans, engine state or verdicts.
+- Build each item once in prerequisite order. Preserve unchanged ready items. Record an outcome before moving to the next item.
+- Verify actual transitive proof dependencies, including implicit uses and well-definedness. Read the necessary statements and proofs; check hypotheses, direction, conventions and axiom strength. Allow no missing, circular, forward or inadequate dependency; page membership and publication status are not proof checks.
+- Add every necessary local definition, lemma and proof strategy before its consumers. Use stable unused IDs and explicit `deps` arrays. Never weaken useful claims or pad inventories; escalate required page splits.
+- Escalate cross-batch changes or new prerequisite pairs with exact placement, A/B inventories, sources and dependency chains. Do not change selected pairs or treat planned suppliers as published.
+- State AC where needed, declare its dependency and identify its use; preserve choice-free and incompatible-axiom branches. Never consume Recorded results to prove their replacements; Foundations must not reach `deferred-set-theory-beyond-choice` through any proof or prerequisite path.
+- Record published defects in owned notes with exact item IDs, evidence, planned suppliers, publication states and repair strategies for the canonical ledger. Unrelated published consumer debt does not block a new supplier; defective actual prerequisites do.
+- Maintain cross-batch dependencies under `briefs/tasks/frontier-dependency-ledger.md`.
 
 ## Sources
 
-Search the web for every piece of mathematics unfamiliar to you and verify it
-against authoritative sources before using or approving it. This includes
-definitions, results, dependencies, examples, counterexamples, proof routes,
-and scope decisions. Prefer primary papers, author-hosted books or notes, and
-official references. Read the complete relevant text. Abstracts, snippets,
-citations, and truncated passages are not full-text evidence.
+- Search authoritative web sources for unfamiliar mathematics and read complete relevant arguments. Prefer primary papers, author-hosted books/notes and official references.
+- Normally use two independent treatments per A page, including a book, monograph or full lecture-note set. Record URLs, exact locators and supported items.
+- Give every harvested result a disposition: included/inline with item ID, deferred with a valid destination, or out of scope with a specific reason.
+- Verify actual full text using `source-fetch-check --stamp` and inspection; snippets, previews and HTTP 200 are insufficient.
+- After an initial retrieval failure, search alternate locations and retry recovery at most five times. Stop on success. Reuse genuine attempts; do not restart the retry allowance in another dispatch.
+- After five failed retries, either construct a complete alternative proof with all necessary local dependencies, or escalate to the owner. Use accessible authoritative treatments when helpful. Do not claim an outage proves permanent unavailability.
+- Use an alternative only with full mathematical confidence. Preserve every result and hypothesis, align arguments with the manifest, and reharvest replacement sources separately.
+- Retain the original source and dispositions as history. A confident alternative requires `source_resolution`: `status: dropped`, `decided_by: step-1-scaffolder`, `confidence: certain`, `reason`, `search_summary`, `searches: [{query, outcome}]`, `attempts: [{url, at, outcome}]` (initial failure plus five retries), and `alternatives: [{item, argument, deps}]` for every included/inline result.
+- Otherwise set `source_resolution.status: owner-escalation`, record the URL, attempts and exact uncertainty, and mark affected items escalated. Continue other items.
+- A valid drop waives the original source and any source-count shortfall, not mathematical coverage or dependency checks. Never fabricate confidence or fetch evidence.
 
-Unless a documented drop below makes them unavailable, use at least two
-independent treatments per A page, including a textbook,
-monograph, or full lecture-note set. Record each source's URL, exact locator,
-relevant headings or named results, and support. Give every harvested result a
-disposition. Link included or inline results to item IDs; give deferred results
-a valid destination and out-of-scope results a specific reason.
+## Completion
 
-Verify every URL serves the complete relevant text, not merely HTTP 200 or a
-PDF-shaped file. Run `source-fetch-check --stamp`; inspect the actual text.
-After failure, search author/institutional copies and complete archives
-autonomously, retrying recovery five times after the initial failure. Record
-real attempts; do not invent failures or treat a temporary network outage as
-proof of open-web absence. Stop retrying once the text is recovered.
-Reuse recorded fetch attempts; five retries do not mean five agent dispatches.
-
-If the original is genuinely unavailable on the open web, find an alternate
-proof yourself or in accessible authoritative literature. Preserve every
-result, hypothesis and dependency; add needed lemmas. Read and reharvest any
-replacement treatment with its own locators. If you are not 100% confident in
-the alternative mathematics, set `source_resolution.status: owner-escalation`,
-keep the batch blocked, and report the URL, searches and exact uncertainty to
-the owner. Never manufacture confidence or a read/fetch stamp.
-
-Otherwise drop the original as proof backing, retaining its source record and
-result dispositions as history. Add `source_resolution` with:
-
-- `status: dropped`, `decided_by: step-1-scaffolder`, `confidence: certain`;
-- `reason`, `search_summary`, `searches: [{query, outcome}]`;
-- `attempts: [{url, at, outcome}]`: initial failure plus five recovery retries;
-- `alternatives: [{item, argument, deps}]`: a complete alternate argument for
-  every included/inline result, with exact earlier dependency IDs.
-
-Keep replacement URLs in separate active source records and align arguments
-and dependencies with the manifest. Do not invent headings or locators for
-unread text. Valid drops waive the unavailable original and any source-count
-shortfall, not scope, provenance, dependency or review checks. Step 3
-independently adjudicates these arguments.
-
-Record exact changes, evidence, dependency paths, checks, and blockers in the
-named artifact. Report only checks you ran. After a handoff or context reset,
-reread the current scaffold, dependencies, sources, and open obligations.
-
-# Frontier dependency bookkeeping
-
-Step-3 reviewers and subsequent scaffold repairers also follow
-`briefs/tasks/frontier-dependency-ledger.md`. Record and maintain cross-batch
-dependencies without changing other batches or expanding repair authority.
+- Record `ready` only when the item has a complete proof strategy and adequate met prerequisites; otherwise record `escalated`. Include examined dependency IDs and evidence in each record.
+- Use `node tools/step1-decisions.mjs record --run RUN --item ID --decision ready|escalated --dependencies JSON --reason TEXT`. Never use `--owner` or overwrite an escalation.
+- Run coverage, whole-run manifest dependencies/policy, plan, external-reference and source checks. Record actual results and unresolved findings in batch notes.
+- Owner/operator reconciliation and the full engine gate follow construction; neither a worker exit nor a readiness record is independent mathematical approval. Step 3 provides that review.

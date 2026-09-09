@@ -19,7 +19,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 
-import { stages, MECHANICAL_REPAIRS, dispatchDriftRereview } from '../stages/mathlib.mts';
+import { stages, MECHANICAL_REPAIRS } from '../stages/mathlib.mts';
 import { identityPlaceholders } from '../src/doctor.mts';
 
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
@@ -272,6 +272,10 @@ test('a rescope verdict fails until its named target is materialised in the scop
   const before = check(stale);
   assert.equal(before.status, 1);
   assert.match(before.stderr, /drift-check-not-materialised: delta-page/);
+  const preApply = spawnSync(process.execPath, [TOOL, '--run', 'demo', '--before-apply'],
+    { cwd: stale, encoding: 'utf8', timeout: 60_000 });
+  assert.equal(preApply.status, 0, preApply.stderr);
+  assert.match(preApply.stdout, /materialization and buildability pending/);
   rmSync(stale, { recursive: true, force: true });
 
   const applied = fixture([
@@ -534,45 +538,31 @@ test('1-drift materializes every accepted verdict mechanically, via drift-apply'
   const [plan] = apply.plan({ run: 'demo', repo: '/tmp' });
   assert.equal(plan.role, 'tool');
   assert.deepEqual(plan.argv, ['node', 'tools/drift-apply.mjs', '--run', 'demo']);
-  // Two rounds, two DIFFERENT repairs: materialise the decision, then — if a
-  // blocked verdict is what remains — send the stale report back to an Alpha.
-  assert.equal(drift.maxFixRounds, 2);
+  // A failing gate reports a hold; materialization is its own stage.
+  assert.equal(drift.maxFixRounds, undefined); // Holds have no repair budget.
 });
 
-// The deadlock this closes: a report failing the gate for a finding that is no
-// longer true, with nothing able to rewrite it. The review had returned exit 0,
-// so its unit stayed covered and no retry re-armed it.
-test('a blocked verdict re-dispatches the drift review; other residue does not', () => {
-  const started: any[] = [];
-  const executor = { start: (_s: any, d: any) => started.push(d) };
-  const args = { ctx: { run: 'demo', repo: '/tmp' }, executor, stage: {}, round: 2 };
+test('blocked drift reports hold without launching another Alpha', async () => {
+  const dir = fixture(PAGES, '### alpha-page\nVERDICT: no-drift\n');
+  try {
+    const drift: any = stages.find((s: any) => s.id === '1-drift');
+    const result = await drift.onHold({
+      ctx: { repo: dir, run: 'demo' }, stage: drift,
+      executor: { start: () => assert.fail('unexpected re-review') },
+      failure: { id: 'drift-review', output: 'ERROR drift-check-blocked: beta-page' },
+    });
+    assert.match(result.owner.reason, /step1-blockers.json/);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});
 
-  const gate = (output: string) => ({ id: 'drift-review', output });
-  assert.equal(dispatchDriftRereview({ ...args, failure: gate('ERROR drift-check-blocked: p — x') }), true);
-  assert.equal(started.length, 1);
-  assert.equal(started[0].role, 'alpha');
-  assert.equal(started[0].job, 'verification');
-  assert.deepEqual(started[0].covers, ['drift']);
-  assert.equal(started[0].brief, 'briefs/alpha-drift.md');
-  assert.equal(started[0].label, 'drift-review-2');
-
-  // A below-threshold page is NOT the Alpha's to fix by re-reading: publication
-  // state, not whether the target shares this run, decides the gate.
-  started.length = 0;
-  assert.equal(dispatchDriftRereview({ ...args, failure: gate('ERROR drift-check-unbuildable-edge: p requires q') }), false);
-  assert.equal(started.length, 0);
-
-  // It must also see a blocked verdict arriving as an ADVISORY gate rather than
-  // the primary failure, and must not fire on some other gate's output.
-  assert.equal(dispatchDriftRereview({
-    ...args,
-    failure: { id: 'url-liveness', output: 'dead', advisory: [gate('ERROR drift-check-blocked: p — x')] },
-  }), true);
-  started.length = 0;
-  assert.equal(dispatchDriftRereview({
-    ...args, failure: { id: 'url-liveness', output: 'ERROR drift-check-blocked: not from the drift gate' },
-  }), false);
-  assert.equal(started.length, 0);
+test('pre-apply validation still rejects blocked decisions', () => {
+  const dir = fixture(PAGES, '### alpha-page\nVERDICT: no-drift\n### beta-page\nVERDICT: drift-blocked — missing supplier\n');
+  try {
+    const result = spawnSync(process.execPath, [TOOL, '--run', 'demo', '--before-apply'],
+      { cwd: dir, encoding: 'utf8', timeout: 60_000 });
+    assert.equal(result.status, 1);
+    assert.match(result.stderr, /owner action required/);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
 });
 
 // The template defect that blocked stage 1 on frontier-15: an identity

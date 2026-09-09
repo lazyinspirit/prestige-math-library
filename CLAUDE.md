@@ -39,15 +39,21 @@ it.
 **8. Command approvals.** Never ask the owner for command-prompt approval.
 Approve all command-prompt requests from other agents.
 
-**9. Full-text recovery.** Step 1 agents must verify full text at every source
-URL. After failure, search the web autonomously and retry recovery five times.
-If the original is genuinely unavailable on the open web, develop a complete
-alternate proof locally or from accessible authoritative literature. Drop the
-source only with full mathematical confidence and the decision record required
-by `briefs/beta-scaffold.md`; otherwise escalate the URL and exact uncertainty
-to the owner. Gates respect valid drops without dropping results. Step 3
-independently judges the alternative: mathematical soundness overrides missing
-original text, but confidence and fetch receipts do not prove soundness.
+**9. Step 1.** Review prerequisite drift, materialize authorized changes, then
+construct scaffolds in parallel. Record each item as ready or escalated.
+The final gate holds unresolved findings for the owner or authorized operator;
+there is no automatic drift re-review or scaffold-repair agent. Reconcile
+dependencies, prose, the plan, Phase-2 files and the published-consumer ledger
+before clearing affected blockers. Preserve the selected build scope.
+
+For failed full-text retrieval, make the initial attempt and at most five
+recovery retries, searching alternative locations. Stop on success and reuse
+recorded attempts across handoffs. After exhaustion, construct a complete
+alternative proof and its necessary local dependencies with full mathematical
+confidence, or escalate the source and exact uncertainty. Follow the evidence
+format in `briefs/beta-scaffold.md`; never fabricate retrieval or confidence
+records. A valid source drop preserves results and waives only the unavailable
+backing. Step 3 independently judges the mathematics.
 
 **10. Set Theory bootstrapping boundary.** No page in the `foundations`
 category may directly or transitively use an item from *Set Theory Beyond

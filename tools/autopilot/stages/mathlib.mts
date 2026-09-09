@@ -27,8 +27,7 @@ import { loadStep3, scopeHash, itemHash, checkStep3 } from '../../step3-decision
 import { scopedGateOutput } from '../src/repair-evidence.mts';
 import { loadStep8JudgeEvidence } from '../../step8-evidence.mjs';
 import { repairGateBatch, repairFingerprint } from './step56-repairs.mts';
-import { dispatchScaffoldRepairs, scaffoldRepairFingerprint } from './step1-repairs.mts';
-export { dispatchScaffoldRepairs } from './step1-repairs.mts';
+import { holdStep1 } from './step1-hold.mts';
 
 // Version the composed Step-6 module independently. The executor watches both
 // files and re-imports this root when either changes; the query prevents Node's
@@ -606,44 +605,6 @@ export const dispatchEdgeAdjudication = ({ ctx, executor, stage, round }: any) =
     task: [`research/${ctx.run}-alpha-step4.task.md`],
     timeout: 3600,
   });
-};
-
-/**
- * Re-dispatch the drift review when its report is the thing that is stale.
- *
- * THE GAP THIS CLOSES. `drift-check-blocked` is read out of the report's
- * VERDICT lines, so a report can fail the gate for a finding that is no longer
- * true — the Alpha wrote it under narrower authority, or a scaffold has since
- * engineered around the edge. Nothing could rewrite it: the review had already
- * returned exit 0, so the unit stayed covered and no retry re-armed it, and
- * `drift-apply` only materialises decisions rather than making them. The run
- * stopped for a reason nobody needed to decide, which is the exact shape of
- * deadlock the 2026-08-24 rulings exist to remove.
- *
- * Deciding whether the edge is still real is judgment, so it goes back to an
- * Alpha. Deciding THAT it must be re-asked is a function of the gate output, so
- * it is here. The re-review reads the same task and brief; what has changed is
- * the report on disk, the spec, and — the usual case — the scaffolds.
- */
-export const dispatchDriftRereview = ({ ctx, executor, stage, round, failure }: any) => {
-  // KEYED OFF THE GATE, NOT THE REPAIR RESIDUE. `drift-apply` exits 0 when the
-  // report decided nothing it can materialise, which is exactly the blocked
-  // case — so `mechanicalRepair` reports 'clean', and a route hung off its
-  // residue would never fire. The honest question is what the GATE said.
-  const failing = [failure, ...(failure?.advisory ?? [])].filter((f: any) => f?.id);
-  const blocked = failing.some((f: any) => f.id === 'drift-review'
-    && /drift-check-blocked:/.test(String(f.output ?? '') + String(f.stderr ?? '')));
-  if (!blocked) return false;
-  executor.start(stage, {
-    role: 'alpha',
-    label: `drift-review-${round}`,
-    job: 'verification',
-    covers: ['drift'],
-    brief: 'briefs/alpha-drift.md',
-    task: [`research/${ctx.run}-alpha-step0-drift.task.md`],
-    timeout: 7200,
-  });
-  return true;
 };
 
 export const dispatchSourceScouts = ({ ctx, executor, stage, round, stderr }: any) => {
@@ -1506,24 +1467,7 @@ async function step3Failure({ ctx, executor, stage, failure }: any, phase: 'scop
 }
 
 export const stages = [
-  // ---------------------------------------------------------------------------
-  // WHY THE DRIFT REVIEW IS ITS OWN STAGE, AHEAD OF THE BETAS (owner rulings,
-  // 2026-08-24). It used to ride inside `1-scaffold` as the `drift` unit,
-  // finishing in ~15 minutes while the Betas ran for ~50. That was free while
-  // the review's only outputs were `requires` edits and a report. It stopped
-  // being free the moment the Alpha gained authority to MINT a missing
-  // prerequisite, REORDER to close a forward edge, and — above three
-  // mintings — RESCOPE the run onto its dependencies. Each of those changes
-  // WHICH PAGES THE RUN BUILDS, and a scope change discovered after ten Betas
-  // have scaffolded is a teardown of authored work: `drift-apply` refuses it,
-  // correctly, and the run would stop needing a person for the one class of
-  // decision these rulings were meant to automate.
-  //
-  // Ahead of the Betas the same decision costs one ~15-minute Alpha and
-  // nothing else. `batches()` reads the manifest directory, so a batch minted
-  // here simply exists when the scaffold stage computes its units — no
-  // signalling between the stages, and no cohort recomputed from a stale list.
-  // ---------------------------------------------------------------------------
+  // Drift review, mechanical materialization, then parallel construction and an owner-held gate.
   {
     id: '1-drift',
     label: 'step-0 prerequisite-drift review',
@@ -1541,23 +1485,10 @@ export const stages = [
       task: [`research/${ctx.run}-alpha-step0-drift.task.md`],
       timeout: 7200,
     }],
-    gates: (ctx: any) => [driftGate(ctx), planGate()],
-    // TWO ROUNDS, and they are different repairs. Round one materialises what
-    // the report already decided (`drift-apply`). If what remains is a BLOCKED
-    // verdict, the report itself is the stale artifact and the second round
-    // sends it back to an Alpha, which may now reorder, mint or rescope. A
-    // third round would re-ask an Alpha that has just answered.
-    maxFixRounds: 2,
-    onGateFailure: async (args: any) => {
-      const repair = await mechanicalRepair(args);
-      // A blocked verdict is never materialisable — the REPORT is the stale
-      // artifact — so this is asked regardless of how the repair went, and
-      // before the residue check, which cannot see a clean-exiting no-op.
-      if (dispatchDriftRereview(args)) return;
-      if (repair.outcome === 'residual') {
-        throw new Error(`drift decisions could not be materialised: ${(repair.stderr ?? '').slice(0, 300)}`);
-      }
-    },
+    gates: (ctx: any) => [
+      gate('drift-review', ['node', 'tools/drift-review-check.mjs', '--run', ctx.run, '--before-apply']), planGate(),
+    ],
+    onHold: holdStep1,
   },
   {
     id: '1-drift-apply',
@@ -1570,6 +1501,7 @@ export const stages = [
       argv: ['node', 'tools/drift-apply.mjs', '--run', ctx.run], timeout: 600,
     }],
     gates: (ctx: any) => [scopeGate(ctx), driftGate(ctx), planGate()],
+    onHold: holdStep1,
   },
   {
     id: '1-scaffold',
@@ -1577,22 +1509,6 @@ export const stages = [
     modelProfile: (plan: any) => plan.role === 'beta' && plan.job === 'scaffolding'
       ? MODEL_PROFILE_NAMES.astraMedium
       : undefined,
-    // Not pipelined: the stage after it is the assignment barrier. See the note
-    // above — a cohort computed before `2-assign` is computed from a fallback
-    // that the assignment exists to overrule.
-    //
-    // THE `drift` UNIT. `autopilot plan` writes the prerequisite-drift review
-    // task and its evidence file, and until 2026-08-16 nothing dispatched it:
-    // the plan output said "dispatched as the first audit node" and no stage
-    // owned the dispatch, no gate required the report — a never-invoked node,
-    // found only because frontier-15's step 0 surfaced real drift the review
-    // existed to catch. It rides in this stage because it is read-only on the
-    // designs and the spec, so it costs no wall-clock next to the 4-hour
-    // scaffold window, and `drift-review-check` makes it unable to be skipped:
-    // a missing report, an unreviewed page, or a blocked (owner-only) edge
-    // fails the stage. Coverage attributes results by their declared `covers`,
-    // so the mixed unit set is safe — the Alpha declares `drift`, each Beta
-    // declares its batch number.
     units: (ctx: any) => batches(ctx),
     // Anchored and exact ON PURPOSE: an unanchored `beta-batch-` also matches
     // `beta-fix-batch-3.result.json`, which belongs to a different stage.
@@ -1608,20 +1524,13 @@ export const stages = [
       task: [`research/${ctx.run}-beta-${u}.task.md`, `research/${ctx.run}-beta-batch.task.md`],
       timeout: 14400,
     })),
-    // `driftGate` stays on this stage as well as on `1-drift`. It is cheap, and
-    // it is the check that a scope change applied upstream is still true of the
-    // manifests the Betas actually scaffolded against.
-    gates: (ctx) => [scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx, { requireDestination: true }), ...policyGates(ctx), planGate(), extGate(), urlGate(ctx), backingGate(ctx), fetchGate(ctx)],
-
-    // Charge each gate/subject independently and send the complete battery to
-    // one shared writer. Source failures cannot starve prerequisite repair.
-    perItemFixBudget: 3,
-    batchRepairs: true,
-    repairFingerprint: scaffoldRepairFingerprint,
-    onGateFailure: async (args: any) => {
-      if (dispatchScaffoldRepairs(args)) return;
-      return { owner: { reason: 'No live scaffold repair assignment or no run manifests; restore the scoped inputs before repair.' } };
-    },
+    gates: (ctx) => [
+      gate('step1-readiness', ['node', 'tools/step1-decisions.mjs', 'check', '--run', ctx.run]),
+      gate('step1-dependency-ledger', ['node', 'tools/frontier-dependency-ledger.mjs', 'refresh', '--run', ctx.run, '--require-reviewed']),
+      scopeGate(ctx), driftGate(ctx), ...coverageGates(ctx, { requireDestination: true }),
+      ...policyGates(ctx), planGate(), extGate(), urlGate(ctx), backingGate(ctx), fetchGate(ctx),
+    ],
+    onHold: holdStep1,
   },
 
   // THE ORCHESTRATOR ROLE IS GONE (owner, 2026-08-16). Every judgment it used

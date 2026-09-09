@@ -49,6 +49,10 @@ that collide with existing IDs or aliases.
 | `proof_strategy` | Required when the body contains a proof-like section; see §3 |
 
 Use explicit `deps: []` in scaffold manifests when no prerequisites exist.
+Step-1 readiness is stored separately in `research/RUN-step1-ITEM_ID.json` by
+`tools/step1-decisions.mjs`: `ready` or `escalated`, evidence, examined dependency
+IDs and a current content hash. It is not an item verification or publication
+stamp. See WORKFLOW.md for owner resolution and the final gate.
 The renderer defaults missing lists to empty, missing ID to the filename stem,
 missing kind to remark, non-published status to draft, non-pipeline origin to
 session, and landmark to false. These fallbacks do not excuse invalid authoring.
