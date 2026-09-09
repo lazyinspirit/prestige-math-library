@@ -19,7 +19,7 @@ import { tmpdir } from 'node:os';
 
 import {
   stages,
-  dispatchScaffoldPolicyFixes,
+  dispatchScaffoldRepairs,
   dispatchSourceScouts,
   mechanicalRepair,
   MECHANICAL_REPAIRS,
@@ -765,12 +765,12 @@ test('Stage-1 scaffold-policy errors route to the owning Beta before advisory so
     }],
   };
 
-  assert.equal(dispatchScaffoldPolicyFixes({
+  assert.equal(dispatchScaffoldRepairs({
     ctx: { run: 'demo', repo }, executor, stage: s1, round: 1, failure,
   }), true);
   assert.equal(started.length, 1);
   assert.deepEqual(started[0].covers, ['12']);
-  assert.equal(started[0].label, 'policy-fix-1-b12');
+  assert.equal(started[0].label, 'scaffold-fix-1-b12');
   assert.equal(started[0].job, 'scaffolding');
   assert.equal(started[0].task, 'briefs/beta-scaffold-policy-fix.md');
 
@@ -779,8 +779,54 @@ test('Stage-1 scaffold-policy errors route to the owning Beta before advisory so
     ctx: { run: 'demo', repo }, executor, stage: s1, round: 1, failure,
   });
   assert.equal(started.length, 1, 'the primary policy repair must not be starved by an advisory');
-  assert.equal(started[0].label, 'policy-fix-1-b12');
+  assert.equal(started[0].label, 'scaffold-fix-1-b12');
   rmSync(repo, { recursive: true, force: true });
+});
+
+test('primary coverage routes all coverage owners, deduplicates, and does not spend on policy advisories', async () => {
+  const repo = fixtureRepo();
+  try {
+    for (const [batch, id] of [[10, 'haar-page'], [16, 'determinacy-page'], [3, 'probability-page']] as const) {
+      writeFileSync(join(repo, 'research', `demo-batch-${batch}.pages.json`), JSON.stringify([
+        { id, kind: 'A', items: [{ id: `thm-${id}`, deps: [] }] },
+      ]));
+    }
+    const started: any[] = [];
+    const s1: any = stages.find((stage: any) => stage.id === '1-scaffold');
+    await s1.onGateFailure({
+      ctx: { run: 'demo', repo }, stage: s1, round: 1,
+      executor: { start: (_s: any, plan: any) => started.push(plan) },
+      failure: {
+        id: 'coverage-10',
+        output: 'ERROR coverage-source-resolution [haar-page]: unread\nERROR coverage-empty-harvest [haar-page]: empty',
+        advisory: [
+          { id: 'coverage-16', output: 'ERROR coverage-undisposed [determinacy-page]: unresolved' },
+          { id: 'content-policy-scaffold', output: 'ERROR batch-dependency-missing [thm-probability-page]: missing' },
+        ],
+      },
+    });
+    assert.deepEqual(started.flatMap(p => p.covers).sort(), ['10', '16']);
+    assert.ok(started.every(p => p.job === 'scaffolding'));
+  } finally { rmSync(repo, { recursive: true, force: true }); }
+});
+
+test('an unrelated primary gate or an unknown coverage subject cannot select an arbitrary scaffold writer', () => {
+  const repo = fixtureRepo();
+  try {
+    writeFileSync(join(repo, 'research', 'demo-batch-1.pages.json'), JSON.stringify([
+      { id: 'known-page', kind: 'A', items: [] },
+    ]));
+    const args = {
+      ctx: { run: 'demo', repo }, stage: {}, round: 1,
+      executor: { start: () => { throw Error('unexpected dispatch'); } },
+    };
+    assert.equal(dispatchScaffoldRepairs({ ...args, failure: {
+      id: 'manifest-integrity', advisory: [{ id: 'content-policy-scaffold', output: 'ERROR bad [known-page]: bad' }],
+    } }), false);
+    assert.equal(dispatchScaffoldRepairs({ ...args, failure: {
+      id: 'coverage-1', output: 'ERROR coverage-empty-harvest [unknown-page]: missing',
+    } }), false);
+  } finally { rmSync(repo, { recursive: true, force: true }); }
 });
 
 // A MECHANICAL REPAIR KEYED TO AN ADVISORY GATE MUST STILL RUN. The battery

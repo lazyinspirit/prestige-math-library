@@ -1,7 +1,13 @@
-# Step 1 — scaffold-policy repair
+# Step 1 — scaffold repair
 
 Repair only reported subjects in `research/<run>-batch-<i>.pages.json` and its
 coverage and notes.
+
+Read the current batch findings and source-recovery notes. Repair incomplete
+coverage by reading the complete relevant sources, completing required
+contracts, and assigning honest result dispositions. Follow the scaffold
+contract's recovery and alternative-proof rules. Never turn an unresolved
+source or proof into a confident verdict merely to pass coverage.
 
 Treat dependency failures as mathematical defects. Add every needed definition,
 lemma, theorem, or backward dependency. Remove a dependency only when the exact

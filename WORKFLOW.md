@@ -322,6 +322,12 @@ non-overlapping Alpha groups, or one reviewer for unknown ownership.
 Identical failures after a repair that changed no relevant inputs stop further
 calls. Final checks remain mandatory.
 
+Step 1 routes the primary coverage or manifest-policy failure class to its
+owning batches, including advisories of that same class, with one writer per
+batch. Coverage failures cannot spend every repair round on unrelated policy
+advisories. Source recovery and complete mathematical contracts remain required;
+the router does not supply a source-drop decision or a sufficient verdict.
+
 Step 6 artifact recovery repairs inputs with empty coverage; the split/collect
 tool must still run. Refuter recovery must match its exact frozen scope.
 A repair hook reporting an external outage refunds its round and defaults to

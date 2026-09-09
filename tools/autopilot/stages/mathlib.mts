@@ -705,17 +705,17 @@ export const dispatchSourceScouts = ({ ctx, executor, stage, round, stderr }: an
   return owed.length > 0;
 };
 
-/** Route a Stage-1 manifest-policy failure back to the Beta that owns it.
- *
- * Content-policy reports item/page subjects, while the dispatch boundary is a
- * batch. Resolving that exact ownership from the manifests is mechanical; the
- * mathematical choice of adding a missing local premise or correcting an
- * invalid dependency remains the Beta's. This route runs before advisory
- * source repairs so the primary gate cannot be starved for every repair round.
+/** Repair the primary scaffold failure class, once per owning batch.
+ * Coverage failures must not spend their budget on unrelated policy advisories.
+ * Ownership is mechanical; source and mathematical decisions remain the Beta's.
  */
-export const dispatchScaffoldPolicyFixes = ({ ctx, executor, stage, round, failure }: any) => {
+export const dispatchScaffoldRepairs = ({ ctx, executor, stage, round, failure }: any) => {
+  const coverage = /^coverage-\d+$/.test(String(failure?.id ?? ''));
+  if (!coverage && failure?.id !== 'content-policy-scaffold') return false;
   const entries = [failure, ...(failure?.advisory ?? [])]
-    .filter((entry: any) => entry?.id === 'content-policy-scaffold');
+    .filter((entry: any) => coverage
+      ? /^coverage-\d+$/.test(String(entry?.id ?? ''))
+      : entry?.id === 'content-policy-scaffold');
   const subjects = new Set<string>();
   for (const entry of entries) {
     const text = String(entry.output ?? '') + '\n' + String(entry.stderr ?? '') + '\n' + String(entry.why ?? '');
@@ -734,7 +734,7 @@ export const dispatchScaffoldPolicyFixes = ({ ctx, executor, stage, round, failu
   for (const batch of owed) {
     executor.start(stage, {
       role: 'beta',
-      label: `policy-fix-${round}-b${batch}`,
+      label: `scaffold-fix-${round}-b${batch}`,
       job: 'scaffolding',
       covers: [batch],
       brief: 'briefs/beta-scaffold.md',
@@ -1695,12 +1695,9 @@ export const stages = [
     // independently and each consumes one.
     maxFixRounds: 2,
     onGateFailure: async (args: any) => {
-      // The primary scaffold-policy error is owned work, not an advisory. If
-      // source failures appear later in the same battery, spending every round
-      // on those advisories leaves the original dependency defect untouched.
-      // Repair it first; the next battery then routes or mechanically closes
-      // whatever source residue remains.
-      if (dispatchScaffoldPolicyFixes(args)) return;
+      // Resolve the primary coverage/policy class before unrelated advisories.
+      // A subsequent battery still checks every gate; no budget is enlarged.
+      if (dispatchScaffoldRepairs(args)) return;
       const repair = await mechanicalRepair(args);
       if (repair.outcome === 'residual' && !dispatchSourceScouts({ ...args, stderr: repair.stderr })) {
         throw new Error(`mechanical repair left residue and no scout could be routed: ${(repair.stderr ?? '').slice(0, 300)}`);
