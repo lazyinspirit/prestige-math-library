@@ -201,6 +201,14 @@ parser failure leaves them unstamped. A page-count pass does not establish
 that the cited chapter is present or has been read. Source fetching allows
 at least two seconds per address connection attempt, within its overall
 timeout, to avoid premature failures on reachable academic hosts.
+PDFs shorter than four pages require `short_document_reading` on the source:
+`scope: full-document`, full `sha256`, `pages`, printed `first_page` and
+`last_page`, `reviewed_by`, `reviewed_at` (YYYY-MM-DD), `publication`, and
+`completeness_evidence`. Read every page and verify the complete publication
+range, including its ending; never use this for an abstract or partial extract.
+The fetch tool binds the receipt to downloaded bytes and page count; check
+mode revalidates it. This records full-text availability, not a proof verdict;
+Step 3 still independently checks source use and mathematics.
 URL liveness reads decoded coverage strings and excludes `historical_*`
 snapshots, `checks`, `recovery_attempts`, and `source_resolution`; valid dropped sources are
 history, not live citations. Fetch/backing/coverage gates validate each drop;

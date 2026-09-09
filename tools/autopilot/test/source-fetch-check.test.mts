@@ -16,6 +16,7 @@ import { tmpdir } from 'node:os';
 import { execFile, spawnSync } from 'node:child_process';
 import { promisify } from 'node:util';
 import { createServer } from 'node:http';
+import { createHash } from 'node:crypto';
 import type { Server } from 'node:http';
 
 const execFileP = promisify(execFile);
@@ -62,6 +63,7 @@ before(async () => {
     if (req.url === '/compressed-short.pdf') { res.writeHead(200, { 'content-type': 'application/pdf' }); res.end(compressedShort); return; }
     if (req.url === '/notes.pdf') { res.writeHead(200, { 'content-type': 'application/pdf' }); res.end(fakePdf(12)); return; }
     if (req.url === '/abstract.pdf') { res.writeHead(200, { 'content-type': 'application/pdf' }); res.end(fakePdf(2)); return; }
+    if (req.url === '/short-paper.pdf') { res.writeHead(200, { 'content-type': 'application/pdf' }); res.end(fakePdf(3)); return; }
     if (req.url === '/article.html') { res.writeHead(200, { 'content-type': 'text/html' }); res.end(article); return; }
     if (req.url === '/notes.txt') { res.writeHead(200, { 'content-type': 'text/plain; charset=utf-8' }); res.end(plainText); return; }
     if (req.url === '/thin.html') { res.writeHead(200, { 'content-type': 'text/html' }); res.end('<html><body>Not found.</body></html>'); return; }
@@ -146,12 +148,57 @@ test('a substantive text/plain lecture note stamps as reader-visible full text',
   rmSync(dir, { recursive: true, force: true });
 });
 
-test('a 2-page PDF is an abstract, not a citable treatment', async () => {
+test('a short PDF without completeness evidence fails', async () => {
   const { dir, file } = coverage([`${base}/abstract.pdf`]);
   const r = await run(file, ['--stamp']);
   assert.equal(r.status, 1);
   assert.match(r.stderr, /fetch-check-not-full-text.*2 page\(s\)/);
   rmSync(dir, { recursive: true, force: true });
+});
+
+const shortReading = () => ({
+  scope: 'full-document', sha256: createHash('sha256').update(fakePdf(3)).digest('hex'),
+  pages: 3, first_page: 347, last_page: 349, reviewed_by: 'test reader',
+  reviewed_at: '2026-09-09', publication: 'Fixture journal, pages 347–349',
+  completeness_evidence: 'Fixture full publication range and ending inspected.',
+});
+
+test('a complete short paper requires current hash-bound reading evidence in both modes', async () => {
+  const { dir, file } = coverage([`${base}/short-paper.pdf`]);
+  try {
+    const cov = JSON.parse(readFileSync(file, 'utf8'));
+    cov.pages[0].sources[0].short_document_reading = shortReading();
+    writeFileSync(file, JSON.stringify(cov));
+    const stamped = await run(file, ['--stamp']);
+    assert.equal(stamped.status, 0, stamped.stderr);
+    const current = JSON.parse(readFileSync(file, 'utf8'));
+    assert.equal(current.pages[0].sources[0].fetch_verified.sha256, shortReading().sha256);
+    assert.equal((await run(file)).status, 0);
+    delete current.pages[0].sources[0].short_document_reading;
+    writeFileSync(file, JSON.stringify(current));
+    const check = await run(file);
+    assert.equal(check.status, 1);
+    assert.match(check.stderr, /fetch-check-short-document.*missing full-document/);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('stale, incomplete and mismatched short-paper receipts never stamp', async () => {
+  for (const change of [
+    { sha256: '0'.repeat(64) }, { pages: 2 }, { last_page: 350 },
+    { scope: 'selected-pages' }, { reviewed_by: '' }, { publication: '' },
+    { completeness_evidence: '' }, { reviewed_at: 'not-a-date' },
+  ]) {
+    const { dir, file } = coverage([`${base}/short-paper.pdf`]);
+    try {
+      const cov = JSON.parse(readFileSync(file, 'utf8'));
+      cov.pages[0].sources[0].short_document_reading = { ...shortReading(), ...change };
+      writeFileSync(file, JSON.stringify(cov));
+      const r = await run(file, ['--stamp']);
+      assert.equal(r.status, 1, JSON.stringify(change));
+      assert.match(r.stderr, /completeness unverified/);
+      assert.ok(!JSON.parse(readFileSync(file, 'utf8')).pages[0].sources[0].fetch_verified);
+    } finally { rmSync(dir, { recursive: true, force: true }); }
+  }
 });
 
 test('an arXiv /abs/ URL fails by shape, before any fetch, with the fix named', async () => {

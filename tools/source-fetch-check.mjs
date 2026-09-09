@@ -26,8 +26,9 @@
 //      (bot-wall.mjs — a Springer cookie-wall answers 200 with no
 //      mathematics in it).
 //   3. A PDF must carry the %PDF magic, a substantive size, and — when its
-//      page objects are countable — MORE THAN THREE PAGES: an abstract or
-//      front-matter extract is 1–3 pages, a citable treatment is not. Object-
+//      page objects are countable — at least four pages unless a complete
+//      short publication has a hash-bound reading receipt. Page count alone
+//      cannot distinguish a short paper from an abstract. Object-
 //      stream PDFs are counted with MuPDF (`mutool`), since a byte scan can
 //      expose only a fraction of their pages. Parser failure leaves them
 //      unstamped. Step-3 Alpha still checks the claimed source range.
@@ -66,7 +67,7 @@ const maxBytes = Number(option('--max-bytes') ?? 80 * 1024 * 1024);
 const MIN_PDF = 10 * 1024;
 const MIN_HTML_TEXT = 2 * 1024;
 const MIN_OTHER = 10 * 1024;
-const MIN_PDF_PAGES = 4;   // 1-3 countable pages is an abstract, not a treatment
+const MIN_PDF_PAGES = 4; // Shorter documents require explicit completeness evidence.
 
 if (!coverages.length) {
   console.error('usage: node tools/source-fetch-check.mjs --coverage <a,b,...> [--stamp] [--force] [--timeout-sec 90] [--max-bytes N]');
@@ -148,8 +149,27 @@ function pdfPageCount(buffer) {
   return null;
 }
 
+/** Reading evidence licenses completeness, never mathematical correctness.
+ * Bind it to the actual bytes and the complete printed publication range. */
+function shortDocumentError(source, pages, sha256) {
+  const r = source?.short_document_reading;
+  if (!r || r.scope !== 'full-document') return 'missing full-document reading receipt';
+  if (!/^[a-f0-9]{64}$/.test(r.sha256 ?? '') || r.sha256 !== sha256) return 'reading receipt does not match the document hash';
+  if (!Number.isInteger(pages) || pages < 1 || r.pages !== pages
+      || !Number.isInteger(r.first_page) || r.first_page < 1
+      || !Number.isInteger(r.last_page) || r.last_page - r.first_page + 1 !== pages) {
+    return 'reading receipt does not match the complete publication page range';
+  }
+  for (const key of ['reviewed_by', 'publication', 'completeness_evidence']) {
+    if (typeof r[key] !== 'string' || !r[key].trim()) return `reading receipt lacks ${key}`;
+  }
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(r.reviewed_at ?? '')
+      || !Number.isFinite(Date.parse(r.reviewed_at))) return 'reading receipt lacks a valid review date';
+  return null;
+}
+
 /** Classify a fetched body as full text, or say why it is not. */
-function classify(url, finalUrl, buffer, contentType = '') {
+function classify(url, finalUrl, buffer, contentType = '', source) {
   const wall = botWallReason(url, finalUrl ?? url);
   if (wall) return { fail: `bot wall: ${wall}` };
   const head = buffer.subarray(0, 8).toString('latin1');
@@ -159,7 +179,10 @@ function classify(url, finalUrl, buffer, contentType = '') {
     try { pages = pdfPageCount(buffer); }
     catch (err) { return { fail: err.message }; }
     if (pages !== null && pages < MIN_PDF_PAGES) {
-      return { fail: `PDF with ${pages} page(s) — an abstract or extract, not a citable treatment; find the full document` };
+      const sha256 = createHash('sha256').update(buffer).digest('hex');
+      const error = shortDocumentError(source, pages, sha256);
+      if (error) return { fail: `PDF with ${pages} page(s) — completeness unverified: ${error}; recover the full document or read and document the complete short publication` };
+      return { kind: 'pdf', detail: { pages, sha256 } };
     }
     return { kind: 'pdf', detail: { pages } };
   }
@@ -204,7 +227,17 @@ for (const file of coverages) {
         continue;
       }
       if (sourceDropped(source)) { dropped += 1; continue; }
-      if (source.fetch_verified && !force) { verified += 1; continue; }
+      if (source.fetch_verified && !force) {
+        const stamp = source.fetch_verified;
+        if (stamp.kind === 'pdf' && stamp.pages !== null && stamp.pages < MIN_PDF_PAGES) {
+          const error = shortDocumentError(source, stamp.pages, stamp.sha256);
+          if (error) {
+            failures.push(`fetch-check-short-document: ${page.page}: ${source.url} — ${error}`);
+            continue;
+          }
+        }
+        verified += 1; continue;
+      }
       const shape = abstractShape(source.url);
       if (shape) { failures.push(`fetch-check-abstract-url: ${page.page}: ${source.url} — ${shape}`); continue; }
       if (!stampMode) { failures.push(`fetch-check-unstamped: ${page.page}: ${source.url}`); continue; }
@@ -213,7 +246,7 @@ for (const file of coverages) {
       // archives and alternate proofs; repeated failures alone justify no drop.
       for (let attempt = 0; attempt <= 5; attempt++) {
         got = await fetchFull(source.url);
-        cls = got.error ? null : classify(source.url, got.finalUrl, got.buffer, got.contentType);
+        cls = got.error ? null : classify(source.url, got.finalUrl, got.buffer, got.contentType, source);
         (source.recovery_attempts ??= []).push({
           url: source.url, at: new Date().toISOString(), outcome: got.error ?? cls.fail ?? 'full-text body fetched',
         });
