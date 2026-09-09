@@ -20,7 +20,11 @@ receipts. Installation requires owner coordination and a fresh run; do not
 hot-install into the running frontier or copy old dispatch receipts.
 
 Validation: the complete autopilot suite finished with 639 passed, 0 failed,
-1 skipped. Tests cover author artifacts, local prerequisite insertion, task
+1 skipped. The skipped guard test was then replaced with a self-contained
+fixture: matching judge evidence passes, and an unsupported adjudication fails
+with exactly `judge-adjudication-no-rejection`. Its safety suite and type check
+were rerun: 10 passed, 0 failed, 0 skipped. The full suite has not been rerun
+after this test-only correction. Tests cover author artifacts, local prerequisite insertion, task
 generation, model profiles, revision isolation, review/closure routing, and
 Step 3 → Step 4 → Step 5 → Step 6 transitions. Type checking is included.
 Commands used:

@@ -127,36 +127,44 @@ test('Step-7 ledgers report malformed JSONL with its exact line', () => {
   assert.match(parsed.errors[0], /ledger\.jsonl:2: invalid JSON/);
 });
 
-test('the Step-7 guard rejects an adjudication that no judge rejection supports',
-  { skip: !existsLiveFrontierEvidence() }, () => {
-    const run = `step7-fabricated-${process.pid}`;
-    const adjudications = join(REPO, 'research', `${run}-adjudications.jsonl`);
-    try {
-      const live = readFileSync(join(REPO, 'research/frontier-18-judge-adjudications.jsonl'), 'utf8');
-      const fabricated = {
-        id: 'thm-fabricated-never-judged',
-        model: 'gpt-5.6-terra',
-        context_sha256: 'f'.repeat(64),
-        item_sha256: 'e'.repeat(64),
-        outcome: 'confirmed_fatal',
-      };
-      writeFileSync(adjudications, `${live.trimEnd()}\n${JSON.stringify(fabricated)}\n`);
-      const result = spawnSync(process.execPath, [
-        join(REPO, 'tools/step7-guard.mjs'),
-        '--touches', 'research/frontier-18-touches.json',
-        '--baseline', 'pre-step7',
-        '--judge-ledger', 'research/frontier-18-judge.jsonl',
-        '--adjudications', `research/${run}-adjudications.jsonl`,
-        '--scope', 'research/frontier-18-step7-scope.json',
-        '--published-repairs', 'research/frontier-18-step7-published-repairs.jsonl',
-        '--terminal-resolutions', 'research/frontier-18-step7-terminal-resolutions.jsonl',
-      ], { cwd: REPO, encoding: 'utf8', timeout: 120_000 });
-      assert.notEqual(result.status, 0);
-      assert.match(`${result.stdout}${result.stderr}`, /judge-adjudication-no-rejection/);
-    } finally {
-      rmSync(adjudications, { force: true });
-    }
-  });
+test('the Step-7 guard rejects an adjudication that no judge rejection supports', (t) => {
+  const root = mkdtempSync(join(tmpdir(), 'step7-evidence-guard-'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const decision = {
+    id: 'thm-fixture', model: 'gpt-5.6-terra',
+    context_sha256: 'a'.repeat(64), item_sha256: 'b'.repeat(64),
+    outcome: 'confirmed_fatal',
+  };
+  const touches = join(root, 'touches.json');
+  const judges = join(root, 'judge.jsonl');
+  const adjudications = join(root, 'adjudications.jsonl');
+  const scope = join(root, 'scope.json');
+  writeFileSync(touches, JSON.stringify({ snapshots: [
+    { label: 'pre-step7', hashes: { [decision.id]: 'b'.repeat(16) } },
+    { label: 'post-step7', hashes: { [decision.id]: 'b'.repeat(16) } },
+  ] }));
+  writeFileSync(scope, JSON.stringify({ run: `guard-fixture-${process.pid}`,
+    by_item: { [decision.id]: 'a' }, groups: [{ label: 'a' }] }));
+  writeFileSync(judges, `${JSON.stringify({ ...decision, keep: false })}\n`);
+  writeFileSync(adjudications, `${JSON.stringify(decision)}\n`);
+  const check = () => spawnSync(process.execPath, [
+    join(REPO, 'tools/step7-guard.mjs'), '--touches', touches,
+    '--baseline', 'pre-step7', '--against', 'post-step7',
+    '--judge-ledger', judges, '--adjudications', adjudications,
+    '--scope', scope, '--json',
+  ], { cwd: root, encoding: 'utf8', timeout: 30_000 });
+
+  const valid = check();
+  assert.equal(valid.status, 0, `${valid.stdout}${valid.stderr}`);
+  assert.deepEqual(JSON.parse(valid.stdout).errors, []);
+
+  const fabricated = { ...decision, id: 'thm-fabricated-never-judged' };
+  writeFileSync(adjudications, `${JSON.stringify(decision)}\n${JSON.stringify(fabricated)}\n`);
+  const invalid = check();
+  assert.equal(invalid.status, 1, `${invalid.stdout}${invalid.stderr}`);
+  assert.deepEqual(JSON.parse(invalid.stdout).errors.map(({ code, id }) => ({ code, id })),
+    [{ code: 'judge-adjudication-no-rejection', id: fabricated.id }]);
+});
 
 test('terminal intervention binds the exact unresolved item and completed Terra rejudge', () => {
   const root = mkdtempSync(join(tmpdir(), 'step7-terminal-'));
@@ -227,14 +235,3 @@ test('a frozen historical cutover is write-once and cannot bless later edits', (
   assert.match(`${second.stdout}${second.stderr}`, /changed after frozen Step-7 cutover/);
   assert.equal(readFileSync(receiptPath, 'utf8'), frozen, 'the evidence boundary remains immutable');
 });
-
-function existsLiveFrontierEvidence(): boolean {
-  return [
-    'research/frontier-18-touches.json',
-    'research/frontier-18-judge.jsonl',
-    'research/frontier-18-judge-adjudications.jsonl',
-    'research/frontier-18-step7-scope.json',
-  ].every((path) => {
-    try { readFileSync(join(REPO, path)); return true; } catch { return false; }
-  });
-}
