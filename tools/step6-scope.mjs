@@ -1034,6 +1034,7 @@ if (command === 'check') {
       catch (cause) { error('published-repair-invalid', cause.message); }
     }
     const step6Rows = publishedRows.filter((row) => row.found_at_stage === '6a-read');
+    const step6cRows = publishedRows.filter((row) => row.found_at_stage === '6c-cross');
     const expectedPublished = new Map(publishedBindings.map((binding) => [binding.target.obligation, binding]));
     let publishedClaims = [];
     if (existsSync(publishedClaimsPath)) {
@@ -1046,7 +1047,16 @@ if (command === 'check') {
       else claimById.set(claim.id, claim);
       const bindings = publishedBindings.filter((binding) => binding.target.id === claim.id
         && binding.target.pre_sha256 === claim.pre_sha256);
-      if (claim.version !== 1 || claim.run !== run || !bindings.some((binding) => binding.group === claim.group)) {
+      const path = R('items', `${claim.id}.md`);
+      const current = existsSync(path) ? itemHashGuard(readFileSync(path, 'utf8')) : null;
+      const gateRepairs = step6cRows.filter((row) => row.kind === 'repaired'
+        && row.id === claim.id && row.group === claim.group
+        && row.repair_owner_group === claim.group && row.pre_sha256 === claim.pre_sha256
+        && row.post_sha256 === current && row.repair_confidence === 1
+        && typeof row.defect === 'string' && row.defect.trim()
+        && typeof row.correction_basis === 'string' && row.correction_basis.trim());
+      if (claim.version !== 1 || claim.run !== run
+        || (!bindings.some((binding) => binding.group === claim.group) && gateRepairs.length !== 1)) {
         error('published-claim-extra', `${claim.id ?? '(missing id)'} is not owned by one exact repaired Step-6 finding`);
       }
     }
@@ -1073,6 +1083,18 @@ if (command === 'check') {
     }
     for (const [obligation, binding] of expectedPublished) if (!seenPublished.has(obligation)) {
       error('published-repair-missing', `[${binding.target.id}] ${obligation} repaired published mathematics but has no certification handoff row`);
+    }
+    for (const row of step6cRows) {
+      const claim = claimById.get(row.id);
+      const path = R('items', `${row.id}.md`);
+      const current = existsSync(path) ? itemHashGuard(readFileSync(path, 'utf8')) : null;
+      if (row.kind !== 'repaired' || !claim || row.group !== claim.group
+        || row.repair_owner_group !== claim.group || row.pre_sha256 !== claim.pre_sha256
+        || row.post_sha256 !== current || row.repair_confidence !== 1
+        || typeof row.defect !== 'string' || !row.defect.trim()
+        || typeof row.correction_basis !== 'string' || !row.correction_basis.trim()) {
+        error('published-repair-mismatch', `${row.id ?? '(missing id)'} has no exact current 6c published-repair receipt`);
+      }
     }
     for (const row of earlyRows) {
       if (ownableSubjects.has(row.subject) && !referenced.has(row.defect_id)) {

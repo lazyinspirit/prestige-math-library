@@ -388,7 +388,7 @@ test('split routes semantic manifest edits even when item and page bytes do not 
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
 
-test('a claimed published-dependency obligation survives withdrawal and downstream edge removal', () => {
+test('claimed 6a and 6c published repairs both survive final routing', () => {
   const fx = fixture();
   try {
     const published = 'thm-published-dependency';
@@ -428,13 +428,32 @@ test('a claimed published-dependency obligation survives withdrawal and downstre
       .replace('status: published', 'status: draft')
       + '\nCorrected published statement.\n';
     writeFileSync(join(fx.root, 'items', `${published}.md`), repairedText);
-    writeFileSync(join(fx.root, 'research', 'r-step8-published-repairs.jsonl'), `${JSON.stringify({
+    const gatePublished = 'lem-published-gate-repair';
+    const gatePreText = `---\nid: ${gatePublished}\nstatus: published\ndeps: []\n---\n## Statement\nStale impact wording.\n`;
+    writeFileSync(join(fx.root, 'items', `${gatePublished}.md`), gatePreText);
+    execFileSync(process.execPath, [join(REPO, 'tools', 'published-repairs.mjs'),
+      'claim', '--run', 'r', '--id', gatePublished, '--group', 'a', '--root', fx.root],
+    { cwd: fx.root, encoding: 'utf8' });
+    const gateClaim = readFileSync(join(fx.root, 'research', 'r-step6-published-claims.jsonl'), 'utf8')
+      .trim().split('\n').map((line) => JSON.parse(line)).find((row) => row.id === gatePublished);
+    const gatePostText = gatePreText.replace('Stale impact wording.', 'Corrected impact wording.');
+    writeFileSync(join(fx.root, 'items', `${gatePublished}.md`), gatePostText);
+    const handoffs = [{
       kind: 'repaired', id: published, group: 'a', repair_owner_group: 'a', found_via: 'lem-ordinary-item',
       found_at_stage: '6a-read', step6_obligation: 'reader:1:1',
       step6_defect_class: 'false-claim', pre_sha256: scope.reader_findings[0].pre_sha256,
       post_sha256: itemHashGuard(repairedText), defect: 'The published Statement was false.',
       correction_basis: 'The empty case gives the exact corrected boundary.',
-    })}\n`);
+    }, {
+      kind: 'repaired', id: gatePublished, group: 'a', repair_owner_group: 'a',
+      found_via: 'impact-audit', found_at_stage: '6c-cross',
+      pre_sha256: gateClaim.pre_sha256, post_sha256: itemHashGuard(gatePostText),
+      defect: 'The published impact wording was stale.',
+      correction_basis: 'The repaired supplier gives the exact corrected boundary.',
+      repair_confidence: 1,
+    }];
+    writeFileSync(join(fx.root, 'research', 'r-step8-published-repairs.jsonl'),
+      handoffs.map((row) => JSON.stringify(row)).join('\n') + '\n');
     writeFileSync(consumerPath, readFileSync(consumerPath, 'utf8')
       .replace(`deps: [${published}]`, 'deps: []'));
     fx.run('stamp', '--run', 'r');
