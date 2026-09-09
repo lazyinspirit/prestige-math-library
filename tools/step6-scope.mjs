@@ -1,6 +1,8 @@
 #!/usr/bin/env node
 // Compute and close Step 6 routing from disk.
+// Version 3 reviews authored content directly; version 2 validates historical evidence.
 //
+// Historical version-2 routes only:
 //   changed by reader                 -> group Alpha
 //   untouched, flagged by refuter     -> group Alpha
 //   untouched, no refuter finding     -> final gates
@@ -27,7 +29,7 @@ const ROOT = resolve(option('root', join(dirname(fileURLToPath(import.meta.url))
 const R = (...parts) => join(ROOT, ...parts);
 const fail = (message, code = 2) => { console.error(message); process.exit(code); };
 const run = option('run');
-if (!run) fail('usage: step6-scope.mjs hash|post-reader|split|collect|stamp|post-6b|check --run <run> [--batch N] [--label pre|post|post-6b] [--phase split|adjudicate|final]');
+if (!run) fail('usage: step6-scope.mjs prepare-direct|hash|stamp|post-6b|check --run <run> [--batch N] [--label pre-6b|post-6b] [--phase adjudicate|final]');
 
 const sha256 = (value) => createHash('sha256').update(value).digest('hex');
 const hashPath = (batch, label) => R('research', `${run}-step6-hash-${batch}-${label}.json`);
@@ -404,6 +406,52 @@ if (command === 'post-6b') {
   process.exit(0);
 }
 
+
+if (command === 'prepare-direct') {
+  const assignment = groups();
+  const manifests = manifestItems();
+  if (!Object.keys(manifests).length) fail('step6-scope: no batches to prepare', 1);
+  // Never convert a run whose independent review has already started.
+  for (const batch of Object.keys(manifests)) {
+    if (assignment.rows.filter((group) => group.covers.includes(batch)).length !== 1) {
+      fail(`batch ${batch} needs exactly one Alpha owner`, 1);
+    }
+    if (existsSync(scopePath(batch))) {
+      const scope = readJson(scopePath(batch), 'existing Step 6 scope');
+      if (scope.version !== 3) fail('Existing legacy Step 6 evidence requires owner migration; refusing to overwrite it', 1);
+    }
+  }
+  for (const batch of Object.keys(manifests)) {
+    if (existsSync(scopePath(batch))) continue; // frozen baseline survives retries
+    runChecked(selfCommand('hash', '--batch', batch, '--label', 'pre-6b'), 'authored baseline');
+    const baseline = readJson(hashPath(batch, 'pre-6b'), 'authored baseline');
+    writeFileSync(scopePath(batch), JSON.stringify({
+      version: 3, run, batch, group: assignment.byBatch[batch],
+      baseline_sha256: sha256(readFileSync(hashPath(batch, 'pre-6b'))),
+      items: baseline.manifest, pages: baseline.page_manifest,
+    }, null, 2) + '\n');
+  }
+  console.log('step6-scope: direct group review prepared');
+  process.exit(0);
+}
+
+// Current manifests include ad-hoc definitions/lemmas. Final checks instead use
+// the sealed post-6b inventory: later 6c changes belong to the unchanged edge audit.
+function directObligations(batch, scope, phase = 'adjudicate') {
+  const snapshot = phase === 'final'
+    ? readJson(hashPath(batch, 'post-6b'), 'post-6b inventory') : null;
+  const items = snapshot?.manifest ?? manifestItems()[batch] ?? [];
+  const pages = snapshot?.page_manifest ?? (manifestPages()[batch] ?? []).map((p) => p.id);
+  return [
+    ...new Set([...(scope.items ?? []), ...items]),
+    ...new Set([...(scope.pages ?? []), ...pages]),
+  ].map((id) => ({
+    obligation: `authored:${batch}:${id}`, id, batch, direct: true,
+    route: pages.includes(id) || (scope.pages ?? []).includes(id) ? 'page' : 'item',
+    added: !(scope.items ?? []).includes(id) && !(scope.pages ?? []).includes(id),
+  }));
+}
+
 if (command === 'pre-6b') {
   const batches = Object.keys(manifestItems());
   if (!batches.length) fail('step6-scope: no batches to stabilize', 1);
@@ -594,6 +642,7 @@ if (command === 'collect') {
 }
 
 function stabilizedObligations(batch, scope) {
+  if (scope.version === 3) return [];
   if (!existsSync(hashPath(batch, 'pre-6b'))) return [];
   const reader = readJson(hashPath(batch, 'post'), `batch ${batch} reader snapshot`);
   const stabilized = readJson(hashPath(batch, 'pre-6b'), `batch ${batch} stabilized snapshot`);
@@ -617,6 +666,7 @@ if (command === 'stamp') {
     const expected = new Map();
     for (const batch of group.covers) {
       const scope = readJson(scopePath(batch), `batch ${batch} scope`);
+      if (scope.version === 3) for (const target of directObligations(batch, scope)) expected.set(target.obligation, target);
       for (const target of stabilizedObligations(batch, scope)) expected.set(target.obligation, target);
       for (const id of scope.touched ?? []) expected.set(`touched:${batch}:${id}`, {
         obligation: `touched:${batch}:${id}`, id, batch, route: 'touched', added: (scope.added ?? []).includes(id),
@@ -664,6 +714,23 @@ if (command === 'check') {
     if (!existsSync(path)) { error('scope-batch-missing', `batch ${batch} has no scope file`); continue; }
     const scope = readJson(path, `batch ${batch} scope`);
     scopes[batch] = scope;
+    if (scope.version === 3) {
+      const baselinePath = hashPath(batch, 'pre-6b');
+      const baseline = readJson(baselinePath, 'authored baseline');
+      if (scope.run !== run || String(scope.batch) !== batch
+        || scope.group !== assignment.byBatch[batch]
+        || assignment.rows.filter((group) => group.covers.includes(batch)).length !== 1) error('scope-identity', `batch ${batch} has wrong identity or group`);
+      if (scope.baseline_sha256 !== sha256(readFileSync(baselinePath))
+        || !sameSet(scope.items ?? [], baseline.manifest ?? [])
+        || !sameSet(scope.pages ?? [], baseline.page_manifest ?? [])) error('scope-stale', `batch ${batch} authored baseline changed`);
+      for (const message of hashSnapshotErrors(baseline, batch, 'pre-6b')) error('hash-invalid', message);
+      if (phase !== 'final') {
+        for (const id of scope.items ?? []) if (!(manifests[batch] ?? []).includes(id)) error('scope-removal', `[${id}] authored item removed before 6c`);
+        if (!sameSet(scope.pages ?? [], (pages[batch] ?? []).map((p) => p.id))) error('scope-page-change', `batch ${batch} changed its page scope`);
+        for (const id of manifests[batch] ?? []) if (!(scope.items ?? []).includes(id) && !/^(def|lem)-/.test(id)) error('scope-addition', `[${id}] only local definitions and lemmas may be added at 6b`);
+      }
+      continue;
+    }
     const pre = readJson(hashPath(batch, 'pre'), `batch ${batch} pre-reader hash`);
     const post = readJson(hashPath(batch, 'post'), `batch ${batch} post-reader hash`);
     const derived = expectedSplit(pre, post);
@@ -787,6 +854,7 @@ if (command === 'check') {
       for (const batch of group.covers) {
         const scope = scopes[batch] ?? (existsSync(scopePath(batch)) ? readJson(scopePath(batch), `batch ${batch} scope`) : null);
         if (!scope) continue;
+        if (scope.version === 3) owed.push(...directObligations(batch, scope, phase));
         for (const id of scope.touched ?? []) owed.push({
           obligation: `touched:${batch}:${id}`, id, batch, route: 'touched', added: (scope.added ?? []).includes(id),
         });
@@ -826,7 +894,7 @@ if (command === 'check') {
           if (decision.route !== 'gate') error('decision-route', `${decision.obligation} must use route gate`);
           if (!groupSubjects.has(decision.id)) error('decision-route', `${decision.obligation} names ${decision.id} outside group ${group.label}`);
         }
-        const allowed = ['touched', 'page'].includes(decision.route)
+        const allowed = target?.direct ? ['accepted', 'repaired'] : ['touched', 'page'].includes(decision.route)
           ? ['accepted_repair', 'amended_repair', 'reverted_change', 'reviewed_no_defect']
           : ['confirmed_fatal', 'confirmed_nonfatal', 'false_positive'];
         if (decision.verdict === 'escalated'
@@ -836,12 +904,15 @@ if (command === 'check') {
         }
         if (!allowed.includes(decision.verdict)) error('decision-verdict', `${decision.obligation} has invalid verdict ${decision.verdict}`);
         if (typeof decision.evidence !== 'string' || !decision.evidence.trim()) error('decision-evidence', `${decision.obligation} has no evidence`);
+        const accepted = target?.direct && decision.verdict === 'accepted';
         const cleanChange = decision.verdict === 'reviewed_no_defect';
+        if (accepted && decision.defect_ids?.length !== 0) error('decision-ledger-refs', `${decision.obligation} accepted content must have empty defect_ids`);
+        if (target?.direct && decision.verdict === 'repaired' && decision.repair_confidence !== 1) error('repair-confidence', `${decision.obligation} needs an honest complete repair`);
         if (cleanChange && (!['metadata', 'audit_enrichment'].includes(decision.change_kind)
           || decision.defect_ids?.length !== 0)) {
           error('decision-clean-change', `${decision.obligation} needs metadata/audit_enrichment change_kind and empty defect_ids`);
         }
-        if (!Array.isArray(decision.defect_ids) || (!cleanChange && !decision.defect_ids.length) || !unique(decision.defect_ids)) {
+        if (!Array.isArray(decision.defect_ids) || (!cleanChange && !accepted && !decision.defect_ids.length) || !unique(decision.defect_ids)) {
           error('decision-ledger-refs', `${decision.obligation} needs one or more unique defect_ids`);
           continue;
         }
@@ -900,7 +971,7 @@ if (command === 'check') {
           && decisionRows.some((row) => row.disposition !== 'false-positive')) {
           error('ledger-disposition', `${decision.obligation} is false_positive but its row is not`);
         }
-        if (['accepted_repair', 'amended_repair'].includes(decision.verdict)
+        if (['accepted_repair', 'amended_repair', 'repaired'].includes(decision.verdict)
           && !decisionRows.some((row) => repaired.has(row.disposition))) {
           error('ledger-disposition', `${decision.obligation} accepts a repair but names no repaired defect row`);
         }
@@ -921,7 +992,8 @@ if (command === 'check') {
             || (pages[batch] ?? []).some((page) => page.id === decision.id));
           const live = subjectBatch ? liveFor(subjectBatch) : null;
           const currentValue = currentDecisionCarrier(decision, target, live);
-          if (currentValue === undefined) {
+          if (currentValue === undefined || (target?.direct
+            && !(target.route === 'page' ? currentValue?.file_sha256 : currentValue?.item_sha256))) {
             error('decision-subject-missing', `[${decision.id}] ${decision.obligation} has no current carrier`);
           } else {
             const currentSha = hashValue(currentValue);
@@ -929,7 +1001,7 @@ if (command === 'check') {
               || decision.subject_sha256 !== currentSha) {
               error('decision-stale', `[${decision.id}] ${decision.obligation} subject_sha256 does not match the current item, contract, manifest, or page carrier`);
             }
-            if (target && ['touched', 'page'].includes(target.route)) {
+            if (target && !target.direct && ['touched', 'page'].includes(target.route)) {
               const pre = readJson(hashPath(target.batch, target.stabilized ? 'post' : 'pre'), `batch ${target.batch} earlier hash`);
               const post = readJson(hashPath(target.batch, target.stabilized ? 'pre-6b' : 'post'), `batch ${target.batch} later hash`);
               const preRaw = target.route === 'page' ? pre.page_hashes?.[target.id] : pre.hashes?.[target.id];
@@ -1015,8 +1087,8 @@ if (command === 'check') {
     }
   }
 
-  const routedCount = Object.values(scopes).reduce((sum, scope) => sum + (scope.touched?.length ?? 0) + (scope.untouched?.length ?? 0), 0);
-  const adjudicatedCount = Object.values(scopes).reduce((sum, scope) => sum
+  const routedCount = Object.values(scopes).reduce((sum, scope) => sum + (scope.items?.length ?? 0) + (scope.touched?.length ?? 0) + (scope.untouched?.length ?? 0), 0);
+  const adjudicatedCount = Object.values(scopes).reduce((sum, scope) => sum + (scope.items?.length ?? 0) + (scope.pages?.length ?? 0)
     + (scope.touched?.length ?? 0) + (scope.pages_touched?.length ?? 0)
     + (scope.reader_findings?.length ?? 0)
     + (scope.refuter_findings?.length ?? 0), 0);

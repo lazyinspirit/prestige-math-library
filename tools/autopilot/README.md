@@ -123,65 +123,23 @@ pass to reject on byte-identical text from the lane that had just passed them.
 Nothing dispatches while a dispatch from another **group** is live. It is a hold,
 not a deadlock — seconds against stages that run for hours.
 
-### Overlap groups: units move on, gates do not
+### Stage barriers and Step 6
 
-Serial stages make the slowest unit of a stage the start time of every unit of
-the next. Authors run to six hours and readers to four, so on a seven-batch level
-the last author held five readers idle for most of an afternoon, for no reason
-anyone could name: batch 3's reader has nothing to learn from batch 5's author.
+The engine supports optional per-unit pipelines, but the active table uses
+whole-stage barriers. Step 5 passes its complete checks before Step 6B.
 
-A stage may declare `pipeline: '<name>'`. A **maximal run of consecutive stages**
-sharing that name is one group, and inside a group progression is **per unit**: a
-unit may be dispatched at stage k+1 once its own work is finished at stage k,
-while its siblings are still at stage k. The shipped table declares one:
+- `6b-prepare`: freeze authored item/page inventories and hashes.
+- `6b-adjudicate`: Astra / medium reviews authored content once, accepts or repairs, and escalates substantial unmet prerequisites that cannot be supplied locally.
+- Agents may fully author definitions/lemmas in assigned existing A pages; each needs a contract, declared dependencies, and its own decision.
+- Agents are impartial, consult authoritative sources for unfamiliar mathematics, and record every published defect in the canonical published-consumer ledger.
+- Do not repeat Step 3's scaffold/scope audit. Check authored arguments and concrete gaps; record high-risk review during the same read.
+- `6b-baseline`, `6c-edges`, `6c-cross`, and `6d-close` retain their snapshot, cross-batch, and closure protocols.
+- No 6A readers, refuters, split/collect workers, or their recovery dispatches remain.
+- Historical version-2 scopes remain verifiable. Direct scopes use version 3; preparation refuses to overwrite legacy evidence.
+- Group capacity is nine, with up to three batches per Alpha; shared-file stages stay serial. Step 7 readers and judges are unchanged.
 
-| group | stages | ends at |
-|---|---|---|
-| `read` | `5-author` → `6a-baseline` → `6a-read` → `6a-split` → `6a-refute` → `6a-collect` | the `6b-prepare` barrier |
-
-Everything else — `1-scaffold`, `2-assign`, all three touch snapshots, the
-splice, the cross-level audit, the judge sweep, step 8, step 9 and the report —
-declares no pipeline and is still strictly serial and whole-level. Those are the
-stages whose ordering *is* the guarantee (a baseline taken after the fact
-confirms instead of checking) or that write a ledger a neighbour would stale.
-
-Steps 1, 2, 3a and 3b are whole-frontier barriers. Step 2 assigns Alpha
-ownership after all scaffolds exist; Step 3a clears scope before any Step 3b
-item audit. Step 3b clears all decisions and final checks before the splice.
-
-The read group clears its complete Step-5 battery before `6b-prepare` freezes
-stabilized inputs. Independent 6B adjudication is a separate barrier, followed
-immediately by its final snapshot. Gate repairs therefore reach Alpha before
-its decisions are finalized. Original reader/refuter evidence stays frozen;
-the pre-6b comparison adds explicit obligations for later changes.
-
-Three things per-unit progression is **not** allowed to relax:
-
-- **Gates.** No gate is ever evaluated per unit. Every member stage's gates run
-  at the group exit, together, once, with the group drained — the level join.
-  That is the whole safety argument: a gate that quietly becomes per-batch when
-  it needed level scope reports success over a fraction of what it was asked to
-  check, and is indistinguishable from a gate that passed. Coverage keeps one
-  invocation per batch, while scaffold policy receives all batch manifests in
-  one invocation so legal same-run cross-batch dependencies resolve; both run
-  only at the drained level join, never at a per-unit transition. The price is
-  stated where it is paid: the full battery runs at the drained join before 6B.
-  Additional scoped author checks run before each reader baseline and preserve
-  author/reader overlap; they never replace the full level checks.
-- **Lane caps.** `concurrency` bounds a stage, and serially that bounds the lane
-  too because only one stage is live. Overlapping stages can share a lane,
-  so a pipelined stage must declare
-  `role`, and the group budgets that lane once.
-- **Current widths.** The configured run cap and all batch lanes are 27. Group
-  lanes are nine because each Alpha may own at most three batches;
-  the Step-7 mixed stage is ten (nine readers plus the sweep controller), and
-  the sweep independently runs at most 27 judge calls. Shared-file/barrier
-  stages stay at one.
-- **A dispatch that covers several units.** A group Alpha owns up to three
-  batches and its one result file declares coverage of all of them, so it may not
-  start until every batch it will claim is finished at the previous stage.
-  `cohort(ctx, unit)` says which units must advance together; the three
-  group-Alpha stages map it through `alphaGroups`.
+Pause engines before stage-table edits. Completed-stage order changes may
+require a controller restart; never erase evidence to force a migration.
 
 The prerequisite-drift review is followed by the mechanical
 `1-drift-apply` barrier. It rewrites manifests, the scope ledger, and generated
@@ -199,13 +157,6 @@ reused scope; this keeps later authoring, reading, judging, and final coverage
 non-vacuous while refusing partial reuse or plan erasure. Manifest policy also
 accepts explicit existing IDs only at their canonical same-page plan home;
 existing IDs claimed by another page remain fatal collisions.
-
-Step-6 refuter recovery validates both halves of the frozen routing contract:
-`opened`/`not_opened` must partition the exact `refuter_scope`, and every
-finding must name an opened carrier. A malformed report receives a generated,
-batch-pinned correction task even though the recovery dispatch deliberately
-declares empty coverage; the mechanical collector alone covers the batch after
-the corrected report passes.
 
 The item provenance gate accepts `sources.references` in either YAML block or
 flow form. It still searches only that references member, so an unrelated URL

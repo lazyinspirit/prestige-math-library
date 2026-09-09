@@ -72,6 +72,14 @@ infer arbitrary-index choice from finite choice or DC. Keep choice-free
 arguments choice-free. This authorization does not permit using recorded
 results as suppliers or bypassing the Foundations bootstrapping boundary.
 
+**Step 6.** Use direct group adjudication of authored items/pages; there are no
+6A readers or refuters. Do not repeat Step 3's scaffold/scope audit. Be impartial,
+state uncertainty honestly, and read authoritative sources for unfamiliar
+mathematics. Accept sound content or repair locally, fully authoring necessary
+definitions and lemmas in assigned existing A pages. Escalate substantial unmet
+prerequisites that cannot be supplied locally; never accept unresolved mathematics.
+Record every published defect in the canonical ledger. Preserve 6C/6D protocols.
+
 **12. Phase-3 repair ledger.** Throughout Phase 2, maintain
 `research/published-consumer-supplier-ledger.md` as the existing canonical
 record of published items needing Phase-3 proof, definition, dependency or

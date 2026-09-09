@@ -80,8 +80,8 @@ export async function repairGateBatch(args: any, deps: any) {
       'Repair confirmed defects and update their owning batch contracts, manifests, risk reviews and decision records together.',
       'For boundary/citation candidates, read each claim and record item-specific dispositions; never bulk-stamp template rows.',
       'Select applicable finite-smoke checks with assertion evidence when the liveness check finds an empty scope.',
-      'After 6a, preserve the frozen reader/refuter evidence. Changes since that evidence must receive amended decisions in 6b.',
-      'At 6b, maintain exact supplemental gate decisions and matching defect-ledger records under briefs/tasks/alpha-step6-gate.md.',
+      'At 6b, update authored-content decisions after repairs; include newly authored local definitions and lemmas. Preserve historical review evidence.',
+      'At 6b, maintain authored decisions and matching defect-ledger records under briefs/tasks/alpha-step6-gate.md; preserve supplemental decisions in historical scopes.',
       'Run focused checks for changed carriers. The engine runs the complete final battery.', '',
     ].join('\n'));
     executor.start(stage, { role: 'alpha', label: `gate-batch-${round}-${group ?? 'all'}`,

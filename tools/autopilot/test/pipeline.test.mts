@@ -459,16 +459,14 @@ test('a cohort that is not a function is refused', () => {
 // The shipped table: which stages overlap is an owner decision, so assert it
 // ---------------------------------------------------------------------------
 
-test('the mathlib table declares exactly one overlap group, over exactly these stages', async () => {
+test('the active mathlib table uses whole-stage barriers', async () => {
   const mod = await import('../stages/mathlib.mts');
   const byPipeline = new Map<string, string[]>();
   for (const s of mod.stages as any[]) {
     if (!s.pipeline) continue;
     byPipeline.set(s.pipeline, [...(byPipeline.get(s.pipeline) ?? []), s.id]);
   }
-  assert.deepEqual([...byPipeline.keys()].sort(), ['read']);
-  assert.deepEqual(byPipeline.get('read'), ['5-author', '6a-baseline', '6a-read',
-    '6a-split', '6a-refute', '6a-collect']);
+  assert.deepEqual([...byPipeline.keys()], []);
 });
 
 test('the do-not-relax stages are still barriers', async () => {
@@ -514,19 +512,18 @@ test('no pipeline group starts before the batch assignment it depends on', async
   }
 });
 
-test("the read group's join runs before the snapshot that closes the impact window", async () => {
+test("authoring and direct adjudication precede the impact snapshot", async () => {
   // `6b-baseline` is the `--to` endpoint of the 6c blast-radius diff, so it must
   // photograph text that already passed the group's gates. Stage order is what
   // guarantees it: no member of a group is done until the join is green, and the
   // snapshot stage is strictly later.
   const mod: any = await import('../stages/mathlib.mts');
   const ids = mod.stages.map((s: any) => s.id);
-  const readMembers = mod.stages.filter((s: any) => s.pipeline === 'read').map((s: any) => s.id);
-  const lastRead = Math.max(...readMembers.map((id: string) => ids.indexOf(id)));
-  assert.ok(ids.indexOf('6b-baseline') > lastRead,
-    'the post-6b snapshot must come after every member of the read group');
-  assert.equal(mod.stages[lastRead + 1].id, '6b-prepare');
-  assert.equal(mod.stages[lastRead + 2].id, '6b-adjudicate');
+  const author = ids.indexOf('5-author');
+  assert.equal(mod.stages[author + 1].id, '6b-prepare');
+  assert.ok(ids.indexOf('6b-baseline') > ids.indexOf('6b-adjudicate'));
+
+  assert.equal(mod.stages[author + 2].id, '6b-adjudicate');
   assert.equal(mod.stages[ids.indexOf('6b-adjudicate') + 1].id, '6b-baseline',
     'the final snapshot immediately follows gated independent adjudication');
 });

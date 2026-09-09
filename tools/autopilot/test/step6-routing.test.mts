@@ -1,4 +1,4 @@
-// Active Step 6: pipeline overlap, exact refuter coverage, routed decisions,
+// Direct Step 6 and historical reader/refuter evidence: decisions,
 // ledger ownership, and legacy-run cutover safety.
 
 import { test } from 'node:test';
@@ -73,124 +73,22 @@ test('6b escalation or sub-100% repair confidence holds any failed gate without 
   } finally { rmSync(root, { recursive: true, force: true }); }
 });
 
-test('the active stage table contains the rebuilt Step 6 in order', async () => {
+test('Step 6 has only direct group review and unchanged closure stages', async () => {
   const active = await import('../stages/mathlib.mts');
   const ids = active.stages.map((stage: any) => stage.id);
-  const expected = ['6a-baseline', '6a-read', '6a-split', '6a-refute', '6a-collect',
-    '6b-prepare', '6b-adjudicate', '6b-baseline', '6c-edges', '6c-cross', '6d-close'];
-  assert.deepEqual(ids.slice(ids.indexOf('6a-baseline'), ids.indexOf('6d-close') + 1), expected);
-});
-
-test('every per-batch stage overlaps and waits only for its own batch', () => {
-  for (const id of ['6a-baseline', '6a-read', '6a-split', '6a-refute', '6a-collect']) {
-    assert.equal(byId(id).pipeline, 'read', `${id} must stay in the read pipeline`);
-  }
-  for (const id of ['6a-baseline', '6a-split', '6a-refute', '6a-collect']) {
-    assert.deepEqual(byId(id).cohort({}, '2'), ['2'], `${id} must not wait on sibling batches`);
-  }
-  assert.deepEqual(byId('6b-adjudicate').cohort({}, '1'), ['1', '2']);
+  assert.deepEqual(ids.slice(ids.indexOf('6b-prepare'), ids.indexOf('6d-close') + 1),
+    ['6b-prepare', '6b-adjudicate', '6b-baseline', '6c-edges', '6c-cross', '6d-close']);
+  assert.equal(ids.some((id: string) => id.startsWith('6a-')), false);
+  assert.equal(active.stages.find((s: any) => s.id === '5-author').pipeline, undefined);
   assert.equal(byId('6b-adjudicate').pipeline, undefined);
-});
-
-test('refuter collection precedes Alpha and all outputs are gated', () => {
-  assert.ok(stages.indexOf(byId('6a-refute')) < stages.indexOf(byId('6a-collect')));
-  assert.ok(stages.indexOf(byId('6a-collect')) < stages.indexOf(byId('6b-adjudicate')));
-  const plan = byId('6a-refute').plan({ ...ordinaryCtx, run: 'r' }, ['2'])[0];
-  assert.equal(plan.role, 'refuter');
-  assert.equal(plan.outputSchema, 'briefs/schemas/refute-report.json');
-  assert.equal(plan.resultArtifact, 'research/r-refute-2.json');
-  assert.deepEqual(byId('6b-adjudicate').artifacts(ordinaryCtx, '1'),
-    ['research/future-run-alpha-a-6b.md', 'research/future-run-alpha-a-6b-decisions.json']);
-  const joinGates = byId('6b-adjudicate').gates({ run: 'r' }).map((item: any) => item.id);
-  assert.ok(joinGates.includes('step6-routing-adjudicate'));
-  const finalGates = byId('6c-cross').gates({ run: 'r' }).map((item: any) => item.id);
-  assert.ok(finalGates.includes('step6-routing-final'));
-  assert.ok(finalGates.includes('step6-ledger-valid'));
-  assert.ok(finalGates.includes('validate-plan'));
-  mkdirSync(join(ordinaryCtx.repo, 'research'), { recursive: true });
-  writeFileSync(join(ordinaryCtx.repo, 'research', 'r-batch-2.proof-contracts.json'), '{}\n');
-  writeFileSync(join(ordinaryCtx.repo, 'research', 'r-reader-findings-2.json'),
-    JSON.stringify({ batch: '2', findings: [] }));
-  const split = byId('6a-split').plan({ ...ordinaryCtx, run: 'r' }, ['2'])[0];
-  assert.deepEqual(split.argv,
-    ['node', 'tools/step6-scope.mjs', 'post-reader', '--run', 'r', '--batch', '2']);
-  const reconcile = byId('6b-baseline').plan({ ...ordinaryCtx, run: 'r' }, ['all'])[0];
-  assert.deepEqual(reconcile.argv,
-    ['node', 'tools/step6-scope.mjs', 'post-6b', '--run', 'r']);
-  assert.equal(byId('6d-close').artifacts({ ...ordinaryCtx, run: 'r' }, 'all'),
-    'research/r-step6-closure.json');
-});
-
-test('Step 6 always dispatches canonical prompts, never stale run-specific tasks', () => {
-  const reader = byId('6a-read').plan({ ...ordinaryCtx, run: 'r' }, ['2'])[0];
-  const alpha6b = byId('6b-adjudicate').plan({ ...ordinaryCtx, run: 'r' }, ['1'])[0];
-  const alpha6c = byId('6c-cross').plan({ ...ordinaryCtx, run: 'r' }, ['all'])[0];
-  assert.equal(reader.task, 'briefs/tasks/reader.md');
-  assert.equal(alpha6b.task, 'briefs/tasks/alpha-6b-routed.md');
-  assert.equal(alpha6c.task, 'briefs/tasks/alpha-6c-edges.md');
-});
-
-test('split routes invented carrier ids and wrong batch identity to reader recovery', async () => {
-  const root = mkdtempSync(join(tmpdir(), 'step6-reader-carrier-'));
-  try {
-    mkdirSync(join(root, 'research'), { recursive: true });
-    mkdirSync(join(root, 'items'), { recursive: true });
-    writeFileSync(join(root, 'research', 'r-batch-1.proof-contracts.json'), '{}\n');
-    writeFileSync(join(root, 'research', 'r-batch-1.pages.json'), JSON.stringify([
-      { id: 'assigned-page', items: [{ id: 'assigned-item' }] },
-    ]));
-    writeFileSync(join(root, 'research', 'r-reader-findings-1.json'), JSON.stringify({
-      batch: '1', coverage_note: 'One uneditable finding.',
-      findings: [{ id: 'R1-U1', subject_type: 'page', consumer_id: null,
-        location: 'assigned-page / assigned-item / deps', defect: 'ill-formed',
-        evidence: 'The dependency list is incomplete.', severity: 'nonfatal' }],
-    }));
-    const active = await import('../stages/mathlib.mts');
-    const splitStage: any = active.stages.find((stage: any) => stage.id === '6a-split');
-    const plan = splitStage.plan({ run: 'r', repo: root, dispatchDir: join(root, 'dispatch') }, ['1'])[0];
-    assert.equal(plan.role, 'reader');
-    assert.equal(plan.label, 'reader-recover-1');
-    assert.deepEqual(plan.covers, []);
-    assert.equal(plan.resultArtifact, 'research/r-reader-findings-1.json');
-
-    writeFileSync(join(root, 'research', 'r-reader-findings-1.json'), JSON.stringify({
-      batch: '23', findings: [], coverage_note: 'No open findings.',
-    }));
-    const wrongBatch = splitStage.plan({ run: 'r', repo: root,
-      dispatchDir: join(root, 'dispatch') }, ['1'])[0];
-    assert.equal(wrongBatch.role, 'reader');
-    assert.equal(wrongBatch.label, 'reader-recover-1');
-  } finally { rmSync(root, { recursive: true, force: true }); }
-});
-
-test('collect routes out-of-scope refuter findings to a batch-pinned recovery', async () => {
-  const root = mkdtempSync(join(tmpdir(), 'step6-refuter-carrier-'));
-  try {
-    mkdirSync(join(root, 'research'), { recursive: true });
-    writeFileSync(join(root, 'research', 'r-step6-scope-8.json'), JSON.stringify({
-      refuter_scope: ['assigned-item', 'assigned-page'],
-    }));
-    writeFileSync(join(root, 'research', 'r-refute-8.json'), JSON.stringify({
-      batch: '8',
-      opened: ['assigned-item', 'assigned-page'],
-      not_opened: [],
-      flagged: [{ id: 'reader-touched-item' }],
-      coverage_note: 'The exact frozen scope was opened.',
-    }));
-    const active = await import('../stages/mathlib.mts');
-    const collectStage: any = active.stages.find((stage: any) => stage.id === '6a-collect');
-    const plan = collectStage.plan({ run: 'r', repo: root,
-      dispatchDir: join(root, 'dispatch') }, ['8'])[0];
-    assert.equal(plan.role, 'refuter');
-    assert.equal(plan.label, 'refute-recover-8');
-    assert.deepEqual(plan.covers, []);
-    assert.equal(plan.task, 'research/r-refuter-recover-8.task.md');
-    assert.equal(plan.resultArtifact, 'research/r-refute-8.json');
-    const generated = readFileSync(join(root, plan.task), 'utf8');
-    assert.match(generated, /batch 8/);
-    assert.match(generated, /exactly its frozen `refuter_scope`/);
-    assert.equal(generated.includes('<i>'), false);
-  } finally { rmSync(root, { recursive: true, force: true }); }
+  assert.deepEqual(byId('6b-adjudicate').cohort({}, '1'), ['1', '2']);
+  const ctx = { ...ordinaryCtx, run: 'r' };
+  assert.equal(byId('6b-adjudicate').plan(ctx, ['1'])[0].task, 'briefs/tasks/alpha-6b-direct.md');
+  assert.equal(byId('6c-cross').plan(ctx, ['all'])[0].task, 'briefs/tasks/alpha-6c-edges.md');
+  assert.deepEqual(byId('6b-prepare').plan(ctx)[0].argv,
+    ['node', 'tools/step6-scope.mjs', 'prepare-direct', '--run', 'r']);
+  assert.ok(byId('6b-adjudicate').gates(ctx).some((g: any) => g.id === 'step6-routing-adjudicate'));
+  assert.ok(byId('6c-cross').gates(ctx).some((g: any) => g.id === 'step6-routing-final'));
 });
 
 test('gate repair dispatch embeds the canonical protocol in its generated task', async () => {
@@ -256,7 +154,7 @@ test('Frontier 18 receipt adopts completed legacy coverage without moving its cu
   const ctx = { run: 'frontier-18', repo: REPO,
     dispatchDir: join(REPO, 'research/frontier-18-dispatch'), config: { stateDir: legacyStateDir } };
   assert.equal(hasLegacyStep6Cutover(ctx), true);
-  for (const id of ['6a-baseline', '6a-split', '6a-refute', '6a-collect', '6c-edges', '6d-close']) {
+  for (const id of ['6c-edges', '6d-close']) {
     assert.deepEqual(byId(id).units(ctx), ['all'], `${id} must adopt completed legacy work`);
     assert.equal(byId(id).artifacts(ctx, 'all'), 'research/frontier-18-step6-cutover.json');
   }
@@ -271,14 +169,14 @@ test('Frontier 18 receipt adopts completed legacy coverage without moving its cu
     reporter: { notify() {}, event() {}, report() {} },
   });
   const after = executor.currentStage().stage?.id;
-  const introduced = new Set(['6a-baseline', '6a-split', '6a-refute', '6a-collect', '6c-edges', '6d-close']);
+  const introduced = new Set(['6c-edges', '6d-close']);
   assert.equal(after === undefined || !introduced.has(after), true,
     `adopting legacy Step 6 evidence must not move the archived ${stageBeforeCutoverCheck} run backward to ${after}`);
 });
 
 test('ordinary introduced stages never count the current 6c Alpha result as their own', () => {
   const ctx = { ...ordinaryCtx, run: 'future-run' };
-  for (const id of ['6a-baseline', '6a-split', '6a-refute', '6a-collect', '6c-edges', '6d-close']) {
+  for (const id of ['6c-edges', '6d-close']) {
     const pattern = byId(id).pattern(ctx);
     assert.ok(pattern instanceof RegExp);
     assert.equal(pattern.test('alpha-6c-lead.result.json'), false,
@@ -830,5 +728,77 @@ test('a missing pre-reader hash blocks split instead of guessing', () => {
     const result = fx.attempt('split', '--run', 'r', '--batch', '1');
     assert.notEqual(result.status, 0);
     assert.match(`${result.stdout}${result.stderr}`, /pre-reader hash.*missing/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('direct review closes without reader/refuter artifacts and requires every decision', () => {
+  const fx = fixture();
+  try {
+    rmSync(join(fx.root, 'research', 'r-reader-findings-1.json'));
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), '');
+    fx.run('prepare-direct', '--run', 'r');
+    const path = join(fx.root, 'research', 'r-alpha-a-6b-decisions.json');
+    const decisions = [...fx.ids, 'p'].map((id) => ({
+      obligation: `authored:1:${id}`, id, route: id === 'p' ? 'page' : 'item',
+      verdict: 'accepted', evidence: 'Read the authored argument and checked each inference.', defect_ids: [],
+    }));
+    writeFileSync(path, JSON.stringify({ version: 1, run: 'r', group: 'a', decisions }));
+    fx.run('stamp', '--run', 'r');
+    fx.run('check', '--run', 'r', '--phase', 'adjudicate');
+    const before = readFileSync(join(fx.root, 'research', 'r-step6-hash-1-pre-6b.json'), 'utf8');
+    fx.run('hash', '--run', 'r', '--batch', '1', '--label', 'post-6b');
+    fx.run('check', '--run', 'r', '--phase', 'final');
+    fx.run('prepare-direct', '--run', 'r');
+    assert.equal(readFileSync(join(fx.root, 'research', 'r-step6-hash-1-pre-6b.json'), 'utf8'), before);
+    const doc = JSON.parse(readFileSync(path, 'utf8'));
+    doc.decisions.pop();
+    writeFileSync(path, JSON.stringify(doc));
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /decision-missing/);
+    doc.decisions = decisions.map((d) => ({ ...d, verdict: 'escalated', evidence: 'Substantial missing supplier cannot be authored locally.' }));
+    writeFileSync(path, JSON.stringify(doc));
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /owner-escalation/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('direct review includes local lemmas and rejects stale or unaccounted repairs', () => {
+  const fx = fixture();
+  try {
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), '');
+    fx.run('prepare-direct', '--run', 'r');
+    const manifest = join(fx.root, 'research', 'r-batch-1.pages.json');
+    const pages = JSON.parse(readFileSync(manifest, 'utf8'));
+    pages[0].items.push('lem-local-supplier');
+    writeFileSync(manifest, JSON.stringify(pages));
+    writeFileSync(join(fx.root, 'items', 'lem-local-supplier.md'), 'A fully authored local lemma.');
+    const path = join(fx.root, 'research', 'r-alpha-a-6b-decisions.json');
+    const doc = { version: 1, run: 'r', group: 'a', decisions: [...fx.ids, 'p'].map((id) => ({
+      obligation: `authored:1:${id}`, id, route: id === 'p' ? 'page' : 'item',
+      verdict: 'accepted', evidence: 'Checked written proof.', defect_ids: [] as string[],
+    })) };
+    writeFileSync(path, JSON.stringify(doc));
+    fx.run('stamp', '--run', 'r');
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /lem-local-supplier.*did not decide/);
+    doc.decisions.push({ obligation: 'authored:1:lem-local-supplier', id: 'lem-local-supplier',
+      route: 'item', verdict: 'accepted', evidence: 'Proved local supplier independently of its consumer.', defect_ids: [] });
+    writeFileSync(path, JSON.stringify(doc));
+    fx.run('stamp', '--run', 'r');
+    fx.run('check', '--run', 'r', '--phase', 'adjudicate');
+    writeFileSync(join(fx.root, 'items', 'lem-local-supplier.md'), 'Changed after review.');
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /decision-stale/);
+    doc.decisions[0].verdict = 'repaired';
+    writeFileSync(path, JSON.stringify(doc));
+    fx.run('stamp', '--run', 'r');
+    assert.match(fx.attempt('check', '--run', 'r', '--phase', 'adjudicate').stderr, /repair-confidence|decision-ledger-refs/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('direct preparation refuses to overwrite historical Step 6 evidence', () => {
+  const fx = fixture();
+  try {
+    prepareSplit(fx);
+    const path = join(fx.root, 'research', 'r-step6-scope-1.json');
+    const before = readFileSync(path, 'utf8');
+    assert.match(fx.attempt('prepare-direct', '--run', 'r').stderr, /requires owner migration/);
+    assert.equal(readFileSync(path, 'utf8'), before);
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });

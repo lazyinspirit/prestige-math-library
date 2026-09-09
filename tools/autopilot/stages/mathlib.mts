@@ -34,7 +34,7 @@ import { holdStep1 } from './step1-hold.mts';
 // ESM cache from retaining the old Step-6 closures in a live controller.
 const STEP6_MODULE_URL = new URL('./mathlib.step6.mts', import.meta.url);
 const STEP6_MODULE_STAT = statSync(STEP6_MODULE_URL);
-const { hasLegacyStep6Cutover, step6Stages } = await import(
+const { step6Stages } = await import(
   `${STEP6_MODULE_URL.href}?v=${STEP6_MODULE_STAT.mtimeMs}:${STEP6_MODULE_STAT.size}`
 );
 
@@ -1767,10 +1767,6 @@ export const stages = [
     modelProfile: (plan: any) => plan.role === 'beta' && plan.job === 'authoring'
       ? ASTRA_MEDIUM
       : undefined,
-    // THE LARGEST WIN. A batch whose authoring is finished starts its reader
-    // while the other batches are still being written: authors run to six hours
-    // and readers to four, and serially the slowest author gated every reader.
-    pipeline: 'read',
     role: 'beta',
     units: batches,
     pattern: resultPattern('beta', '(?:author-batch-\\d+|author-recover-\\d+(?:-\\d+)?)'),
@@ -1816,200 +1812,12 @@ export const stages = [
     },
   },
 
-  // Step 6 includes artifact-owner recovery for incomplete author contracts
-  // and malformed reader findings; keep it inside the hot-reloaded table.
+  // Step 6 reviews authored content directly; Step 5 is a full barrier.
   ...step6Stages({
     gate, repoWide, contractGates, coverageGates, policyItemGate, urlGate,
     impactGate, batches, alphaGroups, alphaCohort, resultPattern, touchesPath,
     MECHANICAL_REPAIRS, mechanicalRepair, isEdgeDecision,
     dispatchSourceScouts,
-  }).map((entry: any) => {
-    if (entry.id === '6a-collect') {
-      const ordinaryPattern = resultPattern('tool', 'collect-\\d+(?:-recovered)?');
-      return {
-        ...entry,
-        pattern: (ctx: any) => hasLegacyStep6Cutover(ctx) ? entry.pattern(ctx) : ordinaryPattern,
-        plan: (ctx: any, pending: string[]) => {
-          if (hasLegacyStep6Cutover(ctx)) return entry.plan(ctx, pending);
-          return pending.map((unit: string) => {
-            const scopePath = join(ctx.repo, 'research',
-              `${ctx.run}-step6-scope-${unit}.json`);
-            let malformed = false;
-            try {
-              const scope = JSON.parse(readFileSync(scopePath, 'utf8'));
-              const report = JSON.parse(readFileSync(join(ctx.repo, 'research',
-                `${ctx.run}-refute-${unit}.json`), 'utf8'));
-              const expected = new Set((scope?.refuter_scope ?? []).map(String));
-              const opened = (report?.opened ?? []).map(String);
-              const notOpened = (report?.not_opened ?? []).map(String);
-              const actual = new Set([...opened, ...notOpened]);
-              const openedSet = new Set(opened);
-              malformed = !Array.isArray(report?.opened) || !Array.isArray(report?.not_opened)
-                || !Array.isArray(report?.flagged)
-                || expected.size !== actual.size
-                || [...expected].some((id) => !actual.has(id))
-                || notOpened.length > 0
-                || (report?.flagged ?? []).some((finding: any) =>
-                  typeof finding?.id !== 'string' || !openedSet.has(finding.id));
-            } catch { malformed = true; }
-            if (malformed) {
-              const recoveryTask = `research/${ctx.run}-refuter-recover-${unit}.task.md`;
-              const recoveryText = [
-                '# Step 6 refuter routing-artifact correction',
-                '',
-                `Correct research/${ctx.run}-refute-${unit}.json for batch ${unit}.`,
-                `Read research/${ctx.run}-step6-scope-${unit}.json and audit exactly its frozen \`refuter_scope\`.`,
-                `Set the top-level \`batch\` field to exactly "${unit}".`,
-                '\`opened\` must contain every frozen refuter-scope id exactly once; set \`not_opened\` to \`[]\`.',
-                'Preserve every genuine finding whose exact item or page id is in that frozen scope.',
-                'Remove findings on reader-touched or otherwise out-of-scope carriers; those are not refuter obligations.',
-                'Do not widen the scope to the whole manifest and do not edit library content or any other artifact.',
-                'Write the corrected schema-conforming JSON to the same named result artifact.',
-                '',
-              ].join('\n');
-              // Stage-table validation plans against deliberately incomplete
-              // synthetic repositories. A real recovery has the frozen scope;
-              // avoid making pure descriptor inspection create repo artifacts.
-              if (existsSync(scopePath)) {
-                writeFileSync(join(ctx.repo, recoveryTask), recoveryText);
-              }
-              return {
-                role: 'refuter', label: `refute-recover-${unit}`,
-                // Recovery repairs the input artifact. Only the following
-                // collect tool may cover this mechanical stage.
-                job: 'refutation', covers: [], brief: 'briefs/refuter.md',
-                task: recoveryTask,
-                outputSchema: 'briefs/schemas/refute-report.json',
-                resultArtifact: `research/${ctx.run}-refute-${unit}.json`,
-                timeout: 10800,
-              };
-            }
-            const dispatchDir = ctx.dispatchDir ?? join(ctx.repo, 'research', `${ctx.run}-dispatch`);
-            const recovered = existsSync(join(dispatchDir,
-              `refuter-refute-recover-${unit}.result.json`));
-            return {
-              role: 'tool', label: `collect-${unit}${recovered ? '-recovered' : ''}`,
-              job: 'bookkeeping-mechanical', covers: [unit],
-              argv: ['node', 'tools/step6-scope.mjs', 'collect', '--run', ctx.run,
-                '--batch', String(unit)],
-              timeout: 600,
-            };
-          });
-        },
-      };
-    }
-    if (entry.id !== '6a-split') return entry;
-    const ordinaryPattern = resultPattern('tool', 'split-\\d+(?:-(?:reader-)?recovered)?');
-    return {
-      ...entry,
-      pattern: (ctx: any) => hasLegacyStep6Cutover(ctx) ? entry.pattern(ctx) : ordinaryPattern,
-      plan: (ctx: any, pending: string[]) => {
-        if (hasLegacyStep6Cutover(ctx)) return entry.plan(ctx, pending);
-        return pending.map((unit: string) => {
-          const contract = join(ctx.repo, 'research', `${ctx.run}-batch-${unit}.proof-contracts.json`);
-          if (!existsSync(contract)) {
-            return {
-              role: 'beta', label: `author-recover-${unit}`,
-              // Preparation only: the split tool still owes this unit after
-              // the missing contract is restored.
-              job: 'authoring', covers: [], brief: 'briefs/authoring.md',
-              task: [`research/${ctx.run}-beta-${unit}-author.task.md`, `research/${ctx.run}-beta-author.task.md`],
-              timeout: 21600,
-            };
-          }
-          const findings = join(ctx.repo, 'research', `${ctx.run}-reader-findings-${unit}.json`);
-          let malformed = false;
-          try {
-            const report = JSON.parse(readFileSync(findings, 'utf8'));
-            const manifest = JSON.parse(readFileSync(join(ctx.repo, 'research',
-              `${ctx.run}-batch-${unit}.pages.json`), 'utf8'));
-            const assignedItems = new Set((Array.isArray(manifest) ? manifest : [])
-              .flatMap((page: any) => (page?.items ?? []).map((item: any) => String(item?.id ?? item))));
-            const assignedPages = new Set((Array.isArray(manifest) ? manifest : [])
-              .map((page: any) => String(page?.id ?? '')).filter(Boolean));
-            // The output schema proves only that these are strings. Routing
-            // needs carrier identities: invented obligation labels such as
-            // R3-U1 are neither a page nor an item, and sending them straight
-            // to the mechanical split only retries the same deterministic
-            // failure until its lane budget is exhausted.
-            const badCarrier = (finding: any) => {
-              if (typeof finding?.id !== 'string') return true;
-              if (finding.subject_type === 'in-flight-item') return !assignedItems.has(finding.id);
-              if (finding.subject_type === 'page') return !assignedPages.has(finding.id);
-              if (finding.subject_type === 'published-dependency') {
-                return !existsSync(join(ctx.repo, 'items', `${finding.id}.md`));
-              }
-              return true;
-            };
-            malformed = ![String(unit), `${ctx.run}-batch-${unit}`].includes(String(report?.batch))
-              || !Array.isArray(report?.findings) || report.findings.some(badCarrier);
-            const prePath = join(ctx.repo, 'research', `${ctx.run}-step6-hash-${unit}-pre.json`);
-            const postPath = join(ctx.repo, 'research', `${ctx.run}-step6-hash-${unit}-post.json`);
-            if (existsSync(prePath) && existsSync(postPath)) {
-              const pre = JSON.parse(readFileSync(prePath, 'utf8'));
-              const post = JSON.parse(readFileSync(postPath, 'utf8'));
-              const carrierChanged = (finding: any) => {
-                if (finding?.subject_type === 'in-flight-item') {
-                  return JSON.stringify(pre?.hashes?.[finding.id] ?? null)
-                    !== JSON.stringify(post?.hashes?.[finding.id] ?? null);
-                }
-                if (finding?.subject_type === 'page') {
-                  return JSON.stringify(pre?.page_hashes?.[finding.id] ?? null)
-                    !== JSON.stringify(post?.page_hashes?.[finding.id] ?? null);
-                }
-                return false;
-              };
-              malformed ||= report.findings.some(carrierChanged);
-            }
-          } catch { malformed = true; }
-          if (malformed) {
-            const recoveryTask = `research/${ctx.run}-reader-recover-${unit}.task.md`;
-            writeFileSync(join(ctx.repo, recoveryTask), [
-              '# Step 6 reader routing-artifact correction',
-              '',
-              `Correct research/${ctx.run}-reader-findings-${unit}.json for batch ${unit}.`,
-              `Set the top-level \`batch\` field to exactly "${unit}"; it identifies this batch, not the run number.`,
-              'Preserve every genuine uneditable finding and the existing reader report.',
-              'The finding `id` is NOT an obligation label or a newly invented finding key.',
-              'For `published-dependency`, `id` must be the exact published item id:',
-              'the filename stem under items/ for the carrier named by `location`.',
-              'For `in-flight-item` or `page`, `id` must likewise be the exact assigned carrier id.',
-              '`consumer_id` must be an assigned item whose dependency closure reaches that published id.',
-              'Remove a finding if its in-flight item or page changed since the pre-reader hash.',
-              'Compare the COMPLETE JSON fingerprint at pre.hashes[id] versus post.hashes[id]',
-              '(or pre.page_hashes[id] versus post.page_hashes[id]), not only item_sha256/file_sha256.',
-              'A changed contract_sha256 or manifest_sha256 also makes the carrier touched.',
-              'A touched carrier is already routed mechanically and cannot remain an open finding.',
-              'Write the corrected schema-conforming JSON to the same named result artifact.',
-              '',
-            ].join('\n'));
-            return {
-              role: 'reader', label: `reader-recover-${unit}`,
-              // Preparation only: repaired findings feed the split tool and
-              // do not themselves satisfy its coverage.
-              job: 'audit', covers: [], brief: 'briefs/reader.md',
-              task: recoveryTask, outputSchema: 'briefs/schemas/reader-findings.json',
-              resultArtifact: `research/${ctx.run}-reader-findings-${unit}.json`,
-              timeout: 14400,
-            };
-          }
-          const dispatchDir = ctx.dispatchDir ?? join(ctx.repo, 'research', `${ctx.run}-dispatch`);
-          const authorRecovered = existsSync(join(dispatchDir,
-            `beta-author-recover-${unit}.result.json`));
-          const readerRecovered = existsSync(join(dispatchDir,
-            `reader-reader-recover-${unit}.result.json`));
-          const suffix = readerRecovered && authorRecovered ? '-reader-recovered'
-            : authorRecovered || readerRecovered ? '-recovered' : '';
-          return {
-            role: 'tool', label: `split-${unit}${suffix}`,
-            job: 'bookkeeping-mechanical', covers: [unit],
-            argv: ['node', 'tools/step6-scope.mjs', 'post-reader', '--run', ctx.run,
-              '--batch', String(unit)],
-            timeout: 600,
-          };
-        });
-      },
-    };
   }),
 
   // The group partition, rendered BEFORE the sweep so the step-7 readers have

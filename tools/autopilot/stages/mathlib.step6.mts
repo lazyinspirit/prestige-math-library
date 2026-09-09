@@ -1,15 +1,12 @@
-// Active Step 6: independent readers, exact refuter coverage, routed Alpha
-// adjudication, cross-group edges, and final pre-judge closure.
+// Step 6: direct group review of authored content, cross-group audit, closure.
 
 import { inspectLegacyStep6Cutover } from '../../step6-cutover-lib.mjs';
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { repairGateBatch, repairFingerprint } from './step56-repairs.mts';
-import { authorInputs } from '../../author-check.mts';
 import { step6Escalations } from '../../step6-escalations.mjs';
 
-const TERRA_HIGH = MODEL_PROFILE_NAMES.terraHigh;
 const ASTRA_MEDIUM = MODEL_PROFILE_NAMES.astraMedium;
 
 /** A completed legacy run skips only stage ids introduced by this cutover.
@@ -42,27 +39,10 @@ export function step6Stages(d: any) {
   // dispatched and the closure artifact could never appear.
   const introducedPattern = (normal: RegExp) => (ctx: any) =>
     hasLegacyStep6Cutover(ctx) ? legacyResult : normal;
-  const introducedBatches = (ctx: any) => hasLegacyStep6Cutover(ctx) ? ['all'] : batches(ctx);
   const introducedArtifact = (ctx: any, normal: string) => hasLegacyStep6Cutover(ctx)
     ? `research/${ctx.run}-step6-cutover.json`
     : normal;
   const introducedPlan = (ctx: any, build: () => any[]) => hasLegacyStep6Cutover(ctx) ? [] : build();
-  const readerFindingsNeedRecovery = (ctx: any, unit: string) => {
-    const path = join(ctx.repo, 'research', `${ctx.run}-reader-findings-${unit}.json`);
-    try {
-      const report = JSON.parse(readFileSync(path, 'utf8'));
-      if (!Array.isArray(report?.findings)) return true;
-      // A published-dependency finding's id is the published item itself. A
-      // reader that invents an obligation-shaped id (frontier 21 batch 7)
-      // cannot be routed because no assigned consumer can reach that phantom.
-      return report.findings.some((finding: any) => finding?.subject_type === 'published-dependency'
-        && (typeof finding?.id !== 'string'
-          || !existsSync(join(ctx.repo, 'items', `${finding.id}.md`))));
-    } catch {
-      return true;
-    }
-  };
-  const solo = (_ctx: any, unit: string) => [String(unit)];
   const routingGate = (ctx: any, phase: 'adjudicate' | 'final') =>
     gate(`step6-routing-${phase}`,
       ['node', 'tools/step6-scope.mjs', 'check', '--run', ctx.run, '--phase', phase], {
@@ -231,174 +211,22 @@ export function step6Stages(d: any) {
 
   return [
     {
-      id: '6a-baseline',
-      label: 'per-batch pre-reader hash (mechanical)',
-      modelProfile: (plan: any) => plan.role === 'beta' ? ASTRA_MEDIUM : undefined,
-      pipeline: 'read',
-      role: 'tool',
-      units: introducedBatches,
-      pattern: introducedPattern(resultPattern('tool', 'hash-pre-\\d+(?:-[a-f0-9]+)?')),
-      labelFor: (unit: string) => `hash-pre-${unit}`,
-      artifacts: (ctx: any, unit: string) => introducedArtifact(ctx,
-        `research/${ctx.run}-step6-hash-${unit}-pre.json`),
-      concurrency: 27,
-      cohort: solo,
-      maxAttempts: 1,
-      plan: (ctx: any, pending: string[]) => introducedPlan(ctx, () => pending.map((unit) => {
-        const diagnostic = `research/${ctx.run}-author-check-${unit}.json`;
-        let suffix = '';
-        if (existsSync(join(ctx.repo, diagnostic))) {
-          const fingerprint = authorInputs(ctx.repo, ctx.run, unit).fingerprint;
-          suffix = `-${fingerprint.slice(0,12)}`;
-          const report = JSON.parse(readFileSync(join(ctx.repo, diagnostic), 'utf8'));
-          if (!report.ok && report.fingerprint === fingerprint) {
-            const task = `research/${ctx.run}-author-check-${unit}.task.md`;
-            writeFileSync(join(ctx.repo, task), `Repair batch ${unit} using every finding in ${diagnostic}. Work only on this batch's items, pages, manifest and contract. Preserve its scope. Run focused checks and explain any detector defect; do not edit tools.\n`);
-            return { role: 'beta', label: `author-check-repair-${unit}-${report.fingerprint.slice(0,12)}`,
-              job: 'authoring', covers: [unit], brief: 'briefs/authoring.md', task, timeout: 3600 };
-          }
-        }
-        return {
-          role: 'tool', label: `hash-pre-${unit}${suffix}`, job: 'bookkeeping-mechanical', covers: [unit],
-          argv: ['node', 'tools/step6-scope.mjs', 'hash', '--run', ctx.run,
-            '--batch', String(unit), '--label', 'pre', '--validate-author'],
-          timeout: 600,
-        };
-      })),
-      gatesWaived: 'The hash artifact is validated when split consumes it; a missing or malformed baseline makes split fail rather than guessing a route.',
-    },
-    {
-      id: '6a-read',
-      label: 'independent readers',
-      modelProfile: TERRA_HIGH,
-      pipeline: 'read',
-      role: 'reader',
-      units: batches,
-      pattern: resultPattern('reader', 'reader-\\d+'),
-      labelFor: (unit: string) => `reader-${unit}`,
-      artifacts: (ctx: any, unit: string) => {
-        const report = `research/${ctx.run}-reader-${unit}.md`;
-        return hasLegacyStep6Cutover(ctx)
-          ? report
-          : [report, `research/${ctx.run}-reader-findings-${unit}.json`];
-      },
-      concurrency: 27,
-      cohort: solo,
-      plan: (ctx: any, pending: string[]) => introducedPlan(ctx, () => pending.map((unit) => ({
-        role: 'reader', label: `reader-${unit}`, job: 'audit', covers: [unit],
-        brief: 'briefs/reader.md',
-        task: 'briefs/tasks/reader.md',
-        outputSchema: 'briefs/schemas/reader-findings.json',
-        resultArtifact: `research/${ctx.run}-reader-findings-${unit}.json`,
-        timeout: 14400,
-      }))),
-      gatesWaived: 'Readers may repair items. The full Step-5 battery clears the read-pipeline join before independent 6B adjudication and its reviewed closure battery.',
-    },
-    {
-      id: '6a-split',
-      label: 'compute touched and untouched items (mechanical)',
-      modelProfile: (plan: any) => plan.role === 'beta'
-        ? ASTRA_MEDIUM
-        : plan.role === 'reader' ? TERRA_HIGH : undefined,
-      pipeline: 'read',
-      role: 'tool',
-      units: introducedBatches,
-      pattern: introducedPattern(resultPattern('tool', 'split-\\d+(?:-recovered)?')),
-      labelFor: (unit: string) => `split-${unit}`,
-      artifacts: (ctx: any, unit: string) => introducedArtifact(ctx,
-        `research/${ctx.run}-step6-scope-${unit}.json`),
-      concurrency: 27,
-      cohort: solo,
-      plan: (ctx: any, pending: string[]) => introducedPlan(ctx, () => pending.map((unit) => {
-        const contract = join(ctx.repo, 'research', `${ctx.run}-batch-${unit}.proof-contracts.json`);
-        if (!existsSync(contract)) {
-          return {
-            role: 'beta', label: `author-recover-${unit}`,
-            job: 'authoring', covers: [], brief: 'briefs/authoring.md',
-            task: [`research/${ctx.run}-beta-${unit}-author.task.md`, `research/${ctx.run}-beta-author.task.md`],
-            timeout: 21600,
-          };
-        }
-        if (readerFindingsNeedRecovery(ctx, unit)) {
-          return {
-            role: 'reader', label: `reader-recover-${unit}`,
-            job: 'audit', covers: [], brief: 'briefs/reader.md',
-            task: 'briefs/tasks/reader.md', outputSchema: 'briefs/schemas/reader-findings.json',
-            resultArtifact: `research/${ctx.run}-reader-findings-${unit}.json`,
-            timeout: 14400,
-          };
-        }
-        const dispatchDir = ctx.dispatchDir ?? join(ctx.repo, 'research', `${ctx.run}-dispatch`);
-        const recovered = ['beta-author-recover', 'reader-reader-recover']
-          .some((prefix) => existsSync(join(dispatchDir, `${prefix}-${unit}.result.json`)));
-        return {
-          role: 'tool', label: `split-${unit}${recovered ? '-recovered' : ''}`,
-          job: 'bookkeeping-mechanical', covers: [unit],
-          argv: ['node', 'tools/step6-scope.mjs', 'post-reader', '--run', ctx.run,
-            '--batch', String(unit)],
-          timeout: 600,
-        };
-      })),
-      gatesWaived: 'Each batch owns a separate scope artifact; exact manifest partition and refuter closure are checked at the pipeline join.',
-    },
-    {
-      id: '6a-refute',
-      label: 'read-only refuters over untouched and high-risk items',
-      modelProfile: TERRA_HIGH,
-      pipeline: 'read',
-      role: 'refuter',
-      units: introducedBatches,
-      pattern: introducedPattern(resultPattern('refuter', 'refute-\\d+')),
-      labelFor: (unit: string) => `refute-${unit}`,
-      artifacts: (ctx: any, unit: string) => introducedArtifact(ctx,
-        `research/${ctx.run}-refute-${unit}.json`),
-      concurrency: 27,
-      cohort: solo,
-      plan: (ctx: any, pending: string[]) => introducedPlan(ctx, () => pending.map((unit) => ({
-        role: 'refuter', label: `refute-${unit}`, job: 'refutation', covers: [unit],
-        brief: 'briefs/refuter.md',
-        task: 'briefs/tasks/refuter-untouched.md',
-        outputSchema: 'briefs/schemas/refute-report.json',
-        resultArtifact: `research/${ctx.run}-refute-${unit}.json`,
-        timeout: 10800,
-      }))),
-      gatesWaived: 'The read-only result is schema-constrained at dispatch; the following mechanical collect stage verifies exact scope coverage before Alpha can start.',
-    },
-    {
-      id: '6a-collect',
-      label: 'validate refuter coverage and materialize obligations (mechanical)',
-      modelProfile: (plan: any) => plan.role === 'refuter' ? TERRA_HIGH : undefined,
-      pipeline: 'read',
-      role: 'tool',
-      units: introducedBatches,
-      pattern: introducedPattern(resultPattern('tool', 'collect-\\d+')),
-      labelFor: (unit: string) => `collect-${unit}`,
-      artifacts: (ctx: any, unit: string) => introducedArtifact(ctx,
-        `research/${ctx.run}-step6-scope-${unit}.json`),
-      concurrency: 27,
-      cohort: solo,
-      plan: (ctx: any, pending: string[]) => pending.map((unit) => ({
-        role: 'tool', label: `collect-${unit}`, job: 'bookkeeping-mechanical', covers: [unit],
-        argv: ['node', 'tools/step6-scope.mjs', 'collect', '--run', ctx.run, '--batch', String(unit)],
-        timeout: 600,
-      })),
-      gatesWaived: 'Collect exits nonzero unless opened and not_opened exactly partition the computed refuter scope and not_opened is empty; its successful result is the gate for this mechanical stage.',
-    },
-    {
       id: '6b-prepare',
-      label: 'freeze stabilized input for independent group adjudication',
+      label: 'freeze authored content for direct group review',
       units: () => ['all'],
       pattern: introducedPattern(resultPattern('tool', 'prepare-6b')),
       artifacts: (ctx: any) => hasLegacyStep6Cutover(ctx) ? `research/${ctx.run}-step6-cutover.json`
-        : batches(ctx).map((batch: string) => `research/${ctx.run}-step6-hash-${batch}-pre-6b.json`),
+        : batches(ctx).flatMap((batch: string) => [
+          `research/${ctx.run}-step6-hash-${batch}-pre-6b.json`,
+          `research/${ctx.run}-step6-scope-${batch}.json`]),
       concurrency: 1,
       plan: (ctx: any) => introducedPlan(ctx, () => [{ role: 'tool', label: 'prepare-6b', job: 'bookkeeping-mechanical', covers: ['all'],
-        argv: ['node', 'tools/step6-scope.mjs', 'pre-6b', '--run', ctx.run], timeout: 600 }]),
-      gatesWaived: 'Runs only after the complete read-pipeline battery clears. Its snapshots add explicit 6b obligations for subsequent gate repairs without replacing reader/refuter evidence.',
+        argv: ['node', 'tools/step6-scope.mjs', 'prepare-direct', '--run', ctx.run], timeout: 600 }]),
+      gatesWaived: 'Runs after Step 5 gates pass; freezes the complete authored inventory without reader or refuter artifacts.',
     },
     {
       id: '6b-adjudicate',
-      label: 'group Alpha adjudication of touched items and refuter findings',
+      label: 'group Alpha review of authored items and pages',
       role: 'alpha',
       modelProfile: (plan: any) => plan.role === 'alpha' ? ASTRA_MEDIUM : undefined,
       units: batches,
@@ -418,7 +246,7 @@ export function step6Stages(d: any) {
         .map((group: any) => ({
           role: 'alpha', label: `6b-${group.label}`, job: 'adjudication', covers: group.covers,
           brief: 'briefs/alpha-step6.md',
-          task: 'briefs/tasks/alpha-6b-routed.md',
+          task: 'briefs/tasks/alpha-6b-direct.md',
           timeout: 14400,
         })),
       gates: (ctx: any) => [

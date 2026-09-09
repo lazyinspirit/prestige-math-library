@@ -26,6 +26,9 @@ Executable tools and configuration determine current behavior.
 
 Step 1 is drift review → scaffold construction → an owner-held final gate.
 Scaffolders record item readiness; unresolved findings do not trigger repair agents.
+Step 6 reviews authored content directly through group adjudicators, without
+reader/refuter stages. Local definitions and lemmas may supply missing dependencies;
+the cross-batch audit and closure follow unchanged.
 See [WORKFLOW.md](WORKFLOW.md) for source recovery, reconciliation and controls.
 
 Verify active runs against their state directory and Git history.

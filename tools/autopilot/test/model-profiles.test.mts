@@ -50,7 +50,7 @@ test('registered owner profiles name the exact models, efforts, and windows', ()
   assert.equal(liveCompat.requestedEffort, 'high');
 });
 
-test('Step 5 authors and author recovery use Astra medium while Steps 6 and 7 retain Terra high', () => {
+test('Step 5 authors and Step 6B use Astra medium; Step 7 readers retain Terra high', () => {
   const authorStage = stage('5-author');
   const author = authorStage.plan(ctx, ['1'])[0];
   assert.equal(selected(authorStage, author), MODEL_PROFILE_NAMES.astraMedium);
@@ -64,24 +64,8 @@ test('Step 5 authors and author recovery use Astra medium while Steps 6 and 7 re
   assert.equal(astraMedium.model, 'gpt-6-astra');
   assert.equal(astraMedium.effort, 'medium');
 
-  const baselineStage = stage('6a-baseline');
-  assert.equal(selected(baselineStage, {
-    role: 'beta', job: 'authoring', label: 'author-check-repair-1-deadbeef',
-  }), MODEL_PROFILE_NAMES.astraMedium, 'pre-reader author-check repair uses the author profile');
-
-  const splitStage = stage('6a-split');
-  assert.equal(selected(splitStage, {
-    role: 'beta', job: 'authoring', label: 'author-recover-1',
-  }), MODEL_PROFILE_NAMES.astraMedium, 'missing-contract author recovery uses the author profile');
-  assert.equal(selected(splitStage, {
-    role: 'reader', job: 'audit', label: 'reader-recover-1',
-  }), MODEL_PROFILE_NAMES.terraHigh, 'reader recovery retains the reader profile');
-
-  const readStage = stage('6a-read');
-  assert.equal(selected(readStage, readStage.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.terraHigh);
-
-  const refuteStage = stage('6a-refute');
-  assert.equal(selected(refuteStage, refuteStage.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.terraHigh);
+  const adjudicate = stage('6b-adjudicate');
+  assert.equal(selected(adjudicate, adjudicate.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.astraMedium);
 
   const judgeStage = stage('7-judge');
   const plans = judgeStage.plan(ctx, judgeStage.units(ctx));

@@ -1,25 +1,9 @@
 # Step 6 gate repair
 
-The generated repair task defines your authority. A Step-6B batch envelope
-assigns every listed gate finding on your owned carriers in one wave. A single
-gate task (including Step 6C) assigns its primary gate and live ids; its advisory
-failures remain context only. Never revisit exhausted ids or another group's
-carriers. Reproduce the assigned checks on the current tree.
-
-For each live finding, repair a confirmed in-scope defect or document a
-false-positive with the governing rule and exact evidence. Update only records
-made stale by a confirmed repair. An unscoped mechanical failure may be fixed at
-its repository cause; do not invent an item or ledger row for it.
-
-When `risk-report` is primary, every live id needs an actual mathematical read
-and a complete, item-specific `risk_review` in its owning batch contract. Use
-scoped `--items` invocations while working. The generated task is already
-partitioned by Alpha group; do not inspect or write another group's carriers.
-A missing review is not itself a defect-ledger row, though a defect found during
-that review follows the normal repair and ledger protocol.
-
-At 6b, append one `route:"gate"` supplemental decision per concrete defect to
-the owning group's decisions file and its matching ledger row. At 6c, append the
-required `kind:"gate"` verdict and current carrier hash to
-`research/<run>-6c-verdicts.jsonl`; also record the changed item/page verdict.
-Extend prior retry artifacts and report the current gate result.
+- Read the generated task's live IDs and exact failures. Repair only assigned carriers; do not revisit exhausted IDs or other groups. Reproduce the named checks.
+- Apply `briefs/alpha-step6.md`: be impartial, consult authoritative sources for unfamiliar mathematics, and try fully authored local definitions/lemmas before escalating substantial unmet prerequisites.
+- Repair concrete defects or explain false positives with exact evidence. Update affected contracts, manifests, provenance, risk reviews, and decisions together. Do not invent mathematical defects for mechanical failures.
+- For a missing risk review, read the named item and record a specific `risk_review`; use scoped checks. This read alone does not warrant a defect row.
+- At 6B, update affected `authored` decisions, including local suppliers; attach each new defect row to its item's decision, without a duplicate gate decision. Historical version-2 scopes retain supplemental `gate:<defect-id>`, route `gate` decisions.
+- At 6C, retain the required `kind: "gate"` verdict and current carrier hash in `research/<run>-6c-verdicts.jsonl`, plus changed-item/page verdicts.
+- Record every defective published item in the canonical published-consumer ledger. Preserve prior retry evidence and report current checks and unresolved blockers.

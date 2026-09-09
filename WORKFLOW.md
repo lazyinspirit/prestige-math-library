@@ -81,9 +81,8 @@ refuses populated manifests. Use generators rather than editing their outputs;
 | 3a — scope | `3a-scope` | Sufficient scope or explicit owner approval for every pair |
 | 3b — audit | `3b-audit` | Current item decisions and final mechanical gates |
 | 4 — materialize | `4-splice`, `4-baseline` | Synchronized item inventory and pre-author snapshot |
-| 5 — author | `5-author` | All items/pages/contracts; full checks pass at the Step 6A join |
-| 6A — read | `6a-baseline`, `6a-read`, `6a-split`, `6a-refute`, `6a-collect` | Independent reading, refutation, and routed findings |
-| 6B–D — close | `6b-prepare`, `6b-adjudicate`, `6b-baseline`, `6c-edges`, `6c-cross`, `6d-close` | Group/cross-group resolution, impact evidence, Step 6 receipt |
+| 5 — author | `5-author` | All items/pages/contracts; full checks pass before Step 6B |
+| 6B–D — close | `6b-prepare`, `6b-adjudicate`, `6b-baseline`, `6c-edges`, `6c-cross`, `6d-close` | Direct authored-content review, cross-group resolution, impact evidence, Step 6 receipt |
 | 7 — judge | `7-scope`, `7-judge` | Frozen-text judgments and group reader digests |
 | 8 — repair | `8-baseline`, `8-scope`, `8-adjudicate`, `8-preflight`, `8-rejudge`, `8-close`, `8-final`, `8-freeze` | Authorized fatal repairs and current certification |
 | 9 — certify changes | `9-scope`, `9-scope-render`, `9-scope-freeze`, `9-changes-judge`, `9-close`, `9-changes-stamp`, `9-receipt` | Decline review, changed-content judgment, impact and coverage receipts |
@@ -104,27 +103,27 @@ web access, sessions, and output capture. Stage profiles override role defaults.
 | Step 6b adjudicators and their gate recovery | Astra / medium |
 | Step 8 adjudication | Sol / xhigh |
 | Step 8 final adjudication | Astra / medium |
-| Step 2 partition; Step 6 readers/refuters; Step 7 group readers; other Step 9/10 agents | Terra / high |
+| Step 2 partition; Step 7 group readers; other Step 9/10 agents | Terra / high |
 | Item judge | Terra / xhigh |
 
 Other dispatches use their role defaults; for example, unprofiled Beta uses
 Terra xhigh. Consult the stage-selected profile, not a role name alone.
 
-Step 6b accepts sound items, repairs only with 100% confidence, and otherwise
-records `escalated` in its group decisions for an owner hold. Unresolved
-escalations block closure and automatic gate repair. Adjudicators must search
-the web and read authoritative sources for unfamiliar mathematics, recording
-the relevant statements and checked hypotheses. Step 6c is unchanged.
+Step 6B uses Astra / medium to review authored items and pages directly.
+There are no Step 6A readers or refuters.
 
-Step 6b uses `reviewed_no_defect` for independently reviewed, sound metadata
-normalization or audit enrichment on touched/page routes. It requires exact
-change evidence, a `metadata` or `audit_enrichment` change kind, empty defect
-references, and a current carrier hash. It cannot close a reported defect or
-orphan an existing defect-ledger row.
+- Do not repeat Step 3's scaffold/scope audit; review actual authored arguments.
+- Be impartial and honest about understanding. Consult authoritative web sources for unfamiliar mathematics.
+- Accept sound content; repair defects locally. Fully author definitions and lemmas in assigned existing A pages when needed.
+- Escalate substantial prerequisites that cannot be supplied locally. Never accept unresolved mathematics; report source/understanding blockers honestly.
+- Record every published defect in the canonical published-consumer ledger.
+- Every item/page, including new local suppliers, needs an evidence-bearing `accepted`, `repaired`, or `escalated` decision. Acceptance needs no invented defect row.
+- 6C's cross-batch audit and 6D's closure remain unchanged.
+
 Rate limits do not authorize a model change; substitution requires an owner
 instruction.
 
-Betas own their batches; readers audit another batch; refuters are read-only.
+Betas author their batches. Group Alphas review assigned authored content.
 Group Alphas resolve assigned findings; Lead Alpha handles cross-group work
 and receipts. Judges return frozen-text verdicts. Tools own mechanical work.
 Every agent dispatch must declare a supported mathematical/review `job`.
@@ -162,20 +161,16 @@ gates or spending another repair round.
 Legacy results may use `coversMap`; when no result declares coverage, the
 coverage helper falls back to a result count. Artifact and gate checks still apply.
 
-Only this stage group overlaps by batch:
+Step 5 is a whole-run barrier. After its complete checks pass:
 
-- `5-author → 6a-baseline → 6a-read → 6a-split → 6a-refute → 6a-collect`
+`6b-prepare → 6b-adjudicate → 6b-baseline → 6c-edges → 6c-cross → 6d-close`
 
-A successor waits for its batch; group Alpha waits for its whole group.
-Whole-run gates wait for the pipeline to drain. Other stages are barriers.
-Before each reader baseline, the batch must pass precheck, render, provenance,
-and strict contract checks. Failures return together to its Beta.
-
-The complete Step 5 checks pass before `6b-prepare` freezes stabilized files.
-Step 6B reviews original findings plus `post-reader:<batch>:<id>` changes
-from join repairs; original review evidence is preserved.
-Refutation covers reader-untouched and high/critical-risk items.
-Group Alpha must supply item-specific `risk_review` for every high/critical item.
+Preparation freezes the authored inventory. Group review covers all authored
+items/pages and local definitions or lemmas added during repair. High/critical
+risk reviews are recorded during that same read. Mechanical checks enforce
+coverage, current hashes, dependency integrity, and defect accountability.
+Historical version-2 reader/refuter evidence remains verifiable; new runs use
+version-3 direct scopes. Preparation refuses to overwrite an existing legacy scope.
 
 Checks cover plan/scope/splice consistency, dependencies, forward/external
 references, rendering, prose, sources, pathways, provenance, contracts,
@@ -359,8 +354,7 @@ groups or one writer for unknown ownership. Their unchanged-input checks stop
 repeated ineffective repairs. Other stages use their declared budgets; final
 checks remain mandatory.
 
-Step 6 artifact recovery repairs inputs with empty coverage; the split/collect
-tool must still run. Refuter recovery must match its exact frozen scope.
+Step 6B recovery repairs live findings; it does not dispatch readers or refuters.
 A repair hook reporting an external outage refunds its round and defaults to
 20-minute backoff. This does not guarantee that every failed provider dispatch
 is recognized as an outage; inspect its result and log.
