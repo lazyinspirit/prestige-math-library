@@ -131,6 +131,9 @@ export interface Stage {
    * that has not happened.
    */
   cohort?: (ctx: Ctx, u: Unit) => Unit[];
+  /** Units sharing output files. Ready subsets may advance independently, but
+   * no subset may dispatch while another member has a live writer here. */
+  exclusiveCohort?: (ctx: Ctx, u: Unit) => Unit[];
   /** The units this stage owes. */
   units?: (ctx: Ctx) => Unit[];
   /** Which result files belong to this stage. Build it with `resultPattern`

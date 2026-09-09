@@ -90,6 +90,9 @@ export function validateStages(stages: Stage[], ctx: Ctx): SpecProblem[] {
     if (s.cohort !== undefined && typeof s.cohort !== 'function') {
       P(s.id, '`cohort` must be a function (ctx, unit) => units that must advance together');
     }
+    if (s.exclusiveCohort !== undefined && typeof s.exclusiveCohort !== 'function') {
+      P(s.id, '`exclusiveCohort` must be a function (ctx, unit) => units sharing outputs');
+    }
   }
 
   // THE GATE RULE.

@@ -181,6 +181,50 @@ test('a unit enters the next pipelined stage while a sibling is still in flight 
   release();
 });
 
+test('an earlier successful receipt cannot release a live author recovery', async () => {
+  const fx = fixture();
+  const ex = makeExecutor(fx, pipelinedStages(fx), { hang: true });
+  cover(fx, 'worker', 'a1', ['1']);
+  ex.inflight.set('s1:recovery', {
+    promise: new Promise(() => {}), startedAt: Date.now(),
+    meta: { stage: 's1', role: 'worker', label: 'recovery', covers: ['1'], attempt: 1 },
+  });
+  assert.deepEqual(ex.readyUnits(ex.stages[1], ex.stages[0], ex.ctx(), ['1']), []);
+  ex.inflight.clear();
+  ex.config.adoptCommand = "printf '%s\\n' '123 node dispatch --run testrun --role worker --label recovery --covers 1'";
+  ex.state.recordDispatchStart('s1:recovery', { stage: 's1', role: 'worker', label: 'recovery', covers: ['1'] });
+  assert.deepEqual(ex.readyUnits(ex.stages[1], ex.stages[0], ex.ctx(), ['1']), []);
+  ex.config.adoptCommand = false;
+  assert.deepEqual(ex.readyUnits(ex.stages[1], ex.stages[0], ex.ctx(), ['1']), ['1']);
+});
+
+test('partial reviewers sharing outputs serialize, including adopted writers', async () => {
+  for (const adopted of [false, true]) {
+    const fx = fixture();
+    const stages: any = pipelinedStages(fx);
+    stages[1].exclusiveCohort = () => ['1', '2'];
+    const ex = makeExecutor(fx, stages, { hang: true });
+    cover(fx, 'worker', 'a1', ['1']);
+    cover(fx, 'worker', 'a2', ['2']);
+    if (adopted) {
+      ex.config.adoptCommand = "printf '%s\\n' '123 node dispatch --run testrun --role checker --label b1 --covers 1'";
+    } else {
+      ex.inflight.set('s2:b1', {
+        promise: new Promise(() => {}), startedAt: Date.now(),
+        meta: { stage: 's2', role: 'checker', label: 'b1', covers: ['1'], attempt: 1 },
+      });
+    }
+    await ex.tick();
+    assert.equal(inflightAt(ex, 's2').some((d: any) => d.meta.covers.includes('2')), false);
+    cover(fx, 'checker', 'b1', ['1']);
+    ex.inflight.clear();
+    ex.config.adoptCommand = false;
+    await ex.tick();
+    assert.deepEqual(inflightAt(ex, 's2').map((d: any) => d.meta.covers), [['2']]);
+    assert.deepEqual(gateRuns(fx), [], 'full gates still wait for every reviewer');
+  }
+});
+
 test('artifact recovery starts while a sibling author is still in flight', async () => {
   // A successful process receipt without its required artifact is abandoned
   // work once that unit's process has drained. It must not wait behind an
@@ -459,14 +503,14 @@ test('a cohort that is not a function is refused', () => {
 // The shipped table: which stages overlap is an owner decision, so assert it
 // ---------------------------------------------------------------------------
 
-test('the active mathlib table uses whole-stage barriers', async () => {
+test('only authoring, preparation and direct review overlap in the active table', async () => {
   const mod = await import('../stages/mathlib.mts');
   const byPipeline = new Map<string, string[]>();
   for (const s of mod.stages as any[]) {
     if (!s.pipeline) continue;
     byPipeline.set(s.pipeline, [...(byPipeline.get(s.pipeline) ?? []), s.id]);
   }
-  assert.deepEqual([...byPipeline.keys()], []);
+  assert.deepEqual([...byPipeline], [['author-review', ['5-author', '6b-prepare', '6b-adjudicate']]]);
 });
 
 test('the do-not-relax stages are still barriers', async () => {
@@ -537,7 +581,7 @@ test('every pipelined stage in the shipped table names a dispatcher lane', async
   assert.deepEqual(validateStages(mod.stages as any, { run: 'frontier-14', repo, dispatchDir: '/tmp' }), []);
 });
 
-test('a group Alpha stage waits for the ASSIGNED group, not the positional fallback', async () => {
+test('partial Alpha writers serialize by the ASSIGNED group, not the positional fallback', async () => {
   // `cohort` must be the SAME grouping the plan fans out with, or the engine
   // waits for one set of batches and dispatches over another. At and after
   // `2-assign` that grouping is the assignment on disk, and it is deliberately
@@ -559,8 +603,8 @@ test('a group Alpha stage waits for the ASSIGNED group, not the positional fallb
   }));
   for (const id of ['6b-adjudicate']) {
     const st = mod.stages.find((s: any) => s.id === id);
-    assert.equal(typeof st.cohort, 'function', `${id} must declare a cohort`);
-    assert.deepEqual(st.cohort(ctx, '4'), ['1', '4'], `${id} cohort ignored the assignment`);
-    assert.deepEqual(st.cohort(ctx, '2'), ['2', '3', '5']);
+    assert.equal(typeof st.exclusiveCohort, 'function', `${id} must declare exclusive ownership`);
+    assert.deepEqual(st.exclusiveCohort(ctx, '4'), ['1', '4'], `${id} ownership ignored the assignment`);
+    assert.deepEqual(st.exclusiveCohort(ctx, '2'), ['2', '3', '5']);
   }
 });

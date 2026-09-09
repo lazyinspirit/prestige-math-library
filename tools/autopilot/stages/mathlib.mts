@@ -1413,7 +1413,7 @@ const resultPattern = (role: string, labelSource: string): RegExp =>
   new RegExp(`^${role}-(?:${role}-)?(?:${labelSource})\\.result\\.json$`);
 
 // ---------------------------------------------------------------------------
-// Only authoring and reading overlap. Step 3a and 3b are whole-frontier barriers:
+// Authoring, batch preparation and direct review overlap. Step 3a and 3b are whole-frontier barriers:
 // scope must clear before item auditing; all decisions and mechanical gates must
 // clear before the splice. Alpha ownership is assigned by 2-assign.
 // ---------------------------------------------------------------------------
@@ -1764,6 +1764,7 @@ export const stages = [
   {
     id: '5-author',
     label: 'authoring',
+    pipeline: 'author-review',
     modelProfile: (plan: any) => plan.role === 'beta' && plan.job === 'authoring'
       ? ASTRA_MEDIUM
       : undefined,
@@ -1812,7 +1813,7 @@ export const stages = [
     },
   },
 
-  // Step 6 reviews authored content directly; Step 5 is a full barrier.
+  // Step 6B reviews completed author batches; full gates guard the pipeline join.
   ...step6Stages({
     gate, repoWide, contractGates, coverageGates, policyItemGate, urlGate,
     impactGate, batches, alphaGroups, alphaCohort, resultPattern, touchesPath,

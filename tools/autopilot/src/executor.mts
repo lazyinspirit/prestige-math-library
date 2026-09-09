@@ -415,6 +415,14 @@ export class Executor {
   readyUnits(stage: Stage, prev: Stage | null, ctx: Ctx, candidates: Unit[]): Unit[] {
     if (!prev) return candidates;
     const done = this.unitsComplete(prev, ctx);
+    // A successful earlier receipt must not release a batch still being
+    // repaired by a live writer (including a writer adopted after restart).
+    for (const dispatch of this.inflight.values()) {
+      if (dispatch.meta.stage === prev.id) {
+        for (const unit of dispatch.meta.covers) done.delete(String(unit));
+      }
+    }
+    for (const unit of this.adoptedUnits(prev)) done.delete(String(unit));
     const owedPrev = new Set((prev.units ? prev.units(ctx) : []).map(String));
     return candidates.filter((u: Unit) => {
       const cohort = (stage.cohort ? stage.cohort(ctx, u) : [u]).map(String);
@@ -1156,7 +1164,8 @@ export class Executor {
           .filter((d: any) => d.meta.stage === s.id)
           .flatMap((d: any) => (d.meta.covers ?? []).map(String)));
         for (const unit of this.adoptedUnits(s)) active.add(String(unit));
-        const missing = owed.filter((u: string) => cov.has(u) && !complete.has(u) && !active.has(u));
+        const missing = owed.filter((u: string) => cov.has(u) && !complete.has(u) && !active.has(u)
+          && !(s.exclusiveCohort?.(ctx, u) ?? []).some((other) => active.has(String(other))));
         if (!missing.length) continue;
         const failure = { id: 'stage-stalemate', ok: false, units: missing,
           why: `unit(s) ${missing.join(', ')} covered but artifact-incomplete and no longer running` };
@@ -1228,7 +1237,8 @@ export class Executor {
         this.reporter.notify('adopted', `unit(s) ${news.join(', ')} are already covered by a live external dispatch; not starting a second`);
       }
     }
-    need = need.filter((u: any) => !runningUnits.has(u));
+    need = need.filter((u: any) => !runningUnits.has(u)
+      && !(stage.exclusiveCohort?.(ctx, u) ?? []).some((other) => runningUnits.has(String(other))));
 
     // Retry policy: a unit whose lane failed gets `maxAttempts` tries, then
     // becomes a blocker. Unbounded retry of a deterministically failing lane

@@ -213,24 +213,28 @@ export function step6Stages(d: any) {
     {
       id: '6b-prepare',
       label: 'freeze authored content for direct group review',
-      units: () => ['all'],
-      pattern: introducedPattern(resultPattern('tool', 'prepare-6b')),
-      artifacts: (ctx: any) => hasLegacyStep6Cutover(ctx) ? `research/${ctx.run}-step6-cutover.json`
-        : batches(ctx).flatMap((batch: string) => [
+      pipeline: 'author-review',
+      role: 'tool',
+      units: (ctx: any) => hasLegacyStep6Cutover(ctx) ? ['all'] : batches(ctx),
+      pattern: introducedPattern(resultPattern('tool', 'prepare-6b(?:-\\d+)?')),
+      artifacts: (ctx: any, batch: string) => hasLegacyStep6Cutover(ctx) ? `research/${ctx.run}-step6-cutover.json`
+        : [
           `research/${ctx.run}-step6-hash-${batch}-pre-6b.json`,
-          `research/${ctx.run}-step6-scope-${batch}.json`]),
+          `research/${ctx.run}-step6-scope-${batch}.json`],
       concurrency: 1,
-      plan: (ctx: any) => introducedPlan(ctx, () => [{ role: 'tool', label: 'prepare-6b', job: 'bookkeeping-mechanical', covers: ['all'],
-        argv: ['node', 'tools/step6-scope.mjs', 'prepare-direct', '--run', ctx.run], timeout: 600 }]),
-      gatesWaived: 'Runs after Step 5 gates pass; freezes the complete authored inventory without reader or refuter artifacts.',
+      plan: (ctx: any, pending: string[]) => introducedPlan(ctx, () => pending.map((batch) => ({
+        role: 'tool', label: `prepare-6b-${batch}`, job: 'bookkeeping-mechanical', covers: [batch],
+        argv: ['node', 'tools/step6-scope.mjs', 'prepare-direct', '--run', ctx.run, '--batch', batch], timeout: 600 }))),
+      gatesWaived: 'Freezes each completed, inactive author batch. All Step 5 and 6B gates remain mandatory at the pipeline join before the post-6B baseline.',
     },
     {
       id: '6b-adjudicate',
       label: 'group Alpha review of authored items and pages',
+      pipeline: 'author-review',
       role: 'alpha',
       modelProfile: (plan: any) => plan.role === 'alpha' ? ASTRA_MEDIUM : undefined,
       units: batches,
-      pattern: resultPattern('alpha', '6b-[a-z]+'),
+      pattern: resultPattern('alpha', '6b-[a-z]+(?:-\\d+)*'),
       artifacts: (ctx: any, unit: string) => {
         const group = alphaGroups(ctx).find((entry: any) => entry.covers.map(String).includes(String(unit)));
         if (!group) return null;
@@ -240,11 +244,12 @@ export function step6Stages(d: any) {
           : [report, `research/${ctx.run}-alpha-${group.label}-6b-decisions.json`];
       },
       concurrency: 9,
-      cohort: alphaCohort,
+      exclusiveCohort: alphaCohort,
       plan: (ctx: any, pending: string[]) => alphaGroups(ctx)
         .filter((group: any) => group.covers.some((unit: any) => pending.includes(String(unit))))
         .map((group: any) => ({
-          role: 'alpha', label: `6b-${group.label}`, job: 'adjudication', covers: group.covers,
+          role: 'alpha', label: `6b-${group.label}-${group.covers.filter((unit: any) => pending.includes(String(unit))).join('-')}`,
+          job: 'adjudication', covers: group.covers.filter((unit: any) => pending.includes(String(unit))),
           brief: 'briefs/alpha-step6.md',
           task: 'briefs/tasks/alpha-6b-direct.md',
           timeout: 14400,

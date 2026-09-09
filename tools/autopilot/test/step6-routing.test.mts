@@ -79,14 +79,19 @@ test('Step 6 has only direct group review and unchanged closure stages', async (
   assert.deepEqual(ids.slice(ids.indexOf('6b-prepare'), ids.indexOf('6d-close') + 1),
     ['6b-prepare', '6b-adjudicate', '6b-baseline', '6c-edges', '6c-cross', '6d-close']);
   assert.equal(ids.some((id: string) => id.startsWith('6a-')), false);
-  assert.equal(active.stages.find((s: any) => s.id === '5-author').pipeline, undefined);
-  assert.equal(byId('6b-adjudicate').pipeline, undefined);
-  assert.deepEqual(byId('6b-adjudicate').cohort({}, '1'), ['1', '2']);
+  assert.equal(active.stages.find((s: any) => s.id === '5-author').pipeline, 'author-review');
+  assert.equal(byId('6b-adjudicate').pipeline, 'author-review');
+  assert.equal(byId('6b-adjudicate').cohort, undefined);
+  assert.deepEqual(byId('6b-adjudicate').exclusiveCohort({}, '1'), ['1', '2']);
   const ctx = { ...ordinaryCtx, run: 'r' };
   assert.equal(byId('6b-adjudicate').plan(ctx, ['1'])[0].task, 'briefs/tasks/alpha-6b-direct.md');
   assert.equal(byId('6c-cross').plan(ctx, ['all'])[0].task, 'briefs/tasks/alpha-6c-edges.md');
-  assert.deepEqual(byId('6b-prepare').plan(ctx)[0].argv,
-    ['node', 'tools/step6-scope.mjs', 'prepare-direct', '--run', 'r']);
+  assert.deepEqual(byId('6b-prepare').plan(ctx, ['1'])[0].argv,
+    ['node', 'tools/step6-scope.mjs', 'prepare-direct', '--run', 'r', '--batch', '1']);
+  assert.deepEqual(byId('6b-adjudicate').plan(ctx, ['1'])[0].covers, ['1']);
+  assert.deepEqual(byId('6b-adjudicate').plan(ctx, ['2'])[0].covers, ['2']);
+  assert.notEqual(byId('6b-adjudicate').plan(ctx, ['1'])[0].label,
+    byId('6b-adjudicate').plan(ctx, ['2'])[0].label);
   assert.ok(byId('6b-adjudicate').gates(ctx).some((g: any) => g.id === 'step6-routing-adjudicate'));
   assert.ok(byId('6c-cross').gates(ctx).some((g: any) => g.id === 'step6-routing-final'));
 });
@@ -728,6 +733,20 @@ test('a missing pre-reader hash blocks split instead of guessing', () => {
     const result = fx.attempt('split', '--run', 'r', '--batch', '1');
     assert.notEqual(result.status, 0);
     assert.match(`${result.stdout}${result.stderr}`, /pre-reader hash.*missing/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+test('batch-local preparation leaves unrelated unfinished manifests untouched', () => {
+  const fx = fixture();
+  try {
+    writeFileSync(join(fx.root, 'research', 'r-batch-2.pages.json'), JSON.stringify({ pages: [{
+      id: 'unfinished', path: 'library/test/unfinished.md', items: [{ id: 'thm-unwritten', deps: [] }],
+    }] }));
+    fx.run('prepare-direct', '--run', 'r', '--batch', '1');
+    assert.equal(existsSync(join(fx.root, 'research', 'r-step6-scope-1.json')), true);
+    assert.equal(existsSync(join(fx.root, 'research', 'r-step6-scope-2.json')), false);
+    assert.equal(existsSync(join(fx.root, 'research', 'r-step6-hash-2-pre-6b.json')), false);
+    assert.match(fx.attempt('prepare-direct', '--run', 'r', '--batch', '999').stderr, /Unknown batch/);
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
 

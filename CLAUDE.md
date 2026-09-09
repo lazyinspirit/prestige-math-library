@@ -73,7 +73,9 @@ arguments choice-free. This authorization does not permit using recorded
 results as suppliers or bypassing the Foundations bootstrapping boundary.
 
 **Step 6.** Use direct group adjudication of authored items/pages; there are no
-6A readers or refuters. Do not repeat Step 3's scaffold/scope audit. Be impartial,
+6A readers or refuters. Completed author batches proceed independently to 6B;
+serialize reviewers sharing a group's outputs. Preserve all full-frontier
+Step 5/6B gates before the baseline and 6C/6D. Do not repeat Step 3's scaffold/scope audit. Be impartial,
 state uncertainty honestly, and read authoritative sources for unfamiliar
 mathematics. Accept sound content or repair locally, fully authoring necessary
 definitions and lemmas in assigned existing A pages. Escalate substantial unmet

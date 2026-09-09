@@ -161,9 +161,18 @@ gates or spending another repair round.
 Legacy results may use `coversMap`; when no result declares coverage, the
 coverage helper falls back to a result count. Artifact and gate checks still apply.
 
-Step 5 is a whole-run barrier. After its complete checks pass:
+Completed, inactive author batches enter Step 6B without waiting for other
+batches. These stages overlap per batch:
 
-`6b-prepare → 6b-adjudicate → 6b-baseline → 6c-edges → 6c-cross → 6d-close`
+`5-author → 6b-prepare → 6b-adjudicate`
+
+Preparation freezes one complete batch. Each group adjudicator receives only
+ready batches; writers within a group are serialized, including adopted jobs.
+Later subsets merge their reports and decisions without replacing earlier work.
+All Step 5 and 6B gates still run over the full frontier at the join, with no
+writers active. Only then does the whole-frontier sequence begin:
+
+`6b-baseline → 6c-edges → 6c-cross → 6d-close`
 
 Preparation freezes the authored inventory. Group review covers all authored
 items/pages and local definitions or lemmas added during repair. High/critical

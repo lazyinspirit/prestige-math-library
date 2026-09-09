@@ -411,8 +411,12 @@ if (command === 'prepare-direct') {
   const assignment = groups();
   const manifests = manifestItems();
   if (!Object.keys(manifests).length) fail('step6-scope: no batches to prepare', 1);
+  const selected = option('batch') ? [String(option('batch'))] : Object.keys(manifests);
+  for (const batch of selected) {
+    if (!Object.hasOwn(manifests, batch)) fail(`Unknown batch ${batch}`, 1);
+  }
   // Never convert a run whose independent review has already started.
-  for (const batch of Object.keys(manifests)) {
+  for (const batch of selected) {
     if (assignment.rows.filter((group) => group.covers.includes(batch)).length !== 1) {
       fail(`batch ${batch} needs exactly one Alpha owner`, 1);
     }
@@ -421,7 +425,7 @@ if (command === 'prepare-direct') {
       if (scope.version !== 3) fail('Existing legacy Step 6 evidence requires owner migration; refusing to overwrite it', 1);
     }
   }
-  for (const batch of Object.keys(manifests)) {
+  for (const batch of selected) {
     if (existsSync(scopePath(batch))) continue; // frozen baseline survives retries
     runChecked(selfCommand('hash', '--batch', batch, '--label', 'pre-6b'), 'authored baseline');
     const baseline = readJson(hashPath(batch, 'pre-6b'), 'authored baseline');
