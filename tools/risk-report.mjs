@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// risk-report.mjs — route structurally high-risk items to the Step-6 refuter.
+// risk-report.mjs — identify structurally high-risk items for Step-6B review.
 //
 //   node tools/risk-report.mjs research/level<n>-proof-contracts.json
 //   node tools/risk-report.mjs research/level<n>-proof-contracts.json --require-reviewed
@@ -22,51 +22,55 @@ const contractPath = argv.find((arg) => !arg.startsWith('--') && arg !== option(
 if (!contractPath) usage();
 
 const errors = [];
-let document;
-try {
-  document = JSON.parse(readFileSync(resolvePath(contractPath), 'utf8'));
-} catch (cause) {
-  errors.push({ code: 'contract-read', message: `${contractPath}: ${cause.message}` });
-  finish([]);
-}
-if (document?.version !== 1 || !Array.isArray(document?.scope) || typeof document?.contracts !== 'object') {
-  errors.push({ code: 'contract-shape', message: 'expected a version-1 proof contract with scope and contracts' });
-  finish([]);
-}
+main();
 
-const ids = requested ? document.scope.filter((id) => requested.includes(id)) : document.scope;
-for (const id of requested ?? []) if (!document.scope.includes(id)) errors.push({ code: 'selection-outside-scope', message: `${id} is outside the contract scope`, id });
+function main() {
+  let document;
+  try {
+    document = JSON.parse(readFileSync(resolvePath(contractPath), 'utf8'));
+  } catch (cause) {
+    errors.push({ code: 'contract-read', message: `${contractPath}: ${cause.message}` });
+    return finish([]);
+  }
+  if (document?.version !== 1 || !Array.isArray(document?.scope) || typeof document?.contracts !== 'object') {
+    errors.push({ code: 'contract-shape', message: 'expected a version-1 proof contract with scope and contracts' });
+    return finish([]);
+  }
 
-const findings = [];
-for (const id of ids) {
-  const path = join(REPO, 'items', `${id}.md`);
-  if (!existsSync(path)) {
-    errors.push({ code: 'item-missing', message: `items/${id}.md does not exist`, id });
-    continue;
+  const ids = requested ? document.scope.filter((id) => requested.includes(id)) : document.scope;
+  for (const id of requested ?? []) if (!document.scope.includes(id)) errors.push({ code: 'selection-outside-scope', message: `${id} is outside the contract scope`, id });
+
+  const findings = [];
+  for (const id of ids) {
+    const path = join(REPO, 'items', `${id}.md`);
+    if (!existsSync(path)) {
+      errors.push({ code: 'item-missing', message: `items/${id}.md does not exist`, id });
+      continue;
+    }
+    const source = readFileSync(path, 'utf8');
+    const item = parseItem(source);
+    const signals = score(item, document.contracts[id] ?? {});
+    const risk = signals.reduce((total, signal) => total + signal.points, 0);
+    const tier = risk >= 8 ? 'critical' : risk >= threshold ? 'high' : risk >= 3 ? 'moderate' : 'ordinary';
+    const review = document.contracts[id]?.risk_review ?? null;
+    const finding = {
+      id,
+      score: risk,
+      tier,
+      signals: signals.map(({ points, ...signal }) => ({ ...signal, points })),
+      required: tier === 'high' || tier === 'critical',
+      risk_review: review,
+      routing: tier === 'high' || tier === 'critical'
+        ? ['Step-6B Alpha reads every step and cited source and records a risk_review disposition']
+        : ['ordinary Step-6B authored-content review'],
+    };
+    if (finding.required && requireReviewed && !(review?.status === 'complete' && typeof review.reviewer === 'string' && review.reviewer.trim() && typeof review.notes === 'string' && review.notes.trim())) {
+      errors.push({ code: 'risk-review-missing', message: `${id} is ${tier} risk and lacks a complete Alpha risk_review`, id });
+    }
+    findings.push(finding);
   }
-  const source = readFileSync(path, 'utf8');
-  const item = parseItem(source);
-  const signals = score(item, document.contracts[id] ?? {});
-  const risk = signals.reduce((total, signal) => total + signal.points, 0);
-  const tier = risk >= 8 ? 'critical' : risk >= threshold ? 'high' : risk >= 3 ? 'moderate' : 'ordinary';
-  const review = document.contracts[id]?.risk_review ?? null;
-  const finding = {
-    id,
-    score: risk,
-    tier,
-    signals: signals.map(({ points, ...signal }) => ({ ...signal, points })),
-    required: tier === 'high' || tier === 'critical',
-    risk_review: review,
-    routing: tier === 'high' || tier === 'critical'
-      ? ['engine read-only refuter reads every step and cited source', 'Alpha records a risk_review disposition before Step 7']
-      : ['ordinary Step-6 reader coverage'],
-  };
-  if (finding.required && requireReviewed && !(review?.status === 'complete' && typeof review.reviewer === 'string' && review.reviewer.trim() && typeof review.notes === 'string' && review.notes.trim())) {
-    errors.push({ code: 'risk-review-missing', message: `${id} is ${tier} risk and lacks a complete Alpha risk_review`, id });
-  }
-  findings.push(finding);
+  finish(findings);
 }
-finish(findings);
 
 function score(item, contract) {
   const signals = [];
@@ -141,5 +145,6 @@ function finish(findings) {
     for (const error of errors) console.error(`ERROR ${error.code}${error.id ? ` [${error.id}]` : ''}: ${error.message}`);
     console.log(`risk-report: ${errors.length} error(s), ${findings.length} item(s) routed`);
   }
-  process.exit(errors.length ? 1 : 0);
+  // Let pending stdout/stderr writes drain, including multi-megabyte JSON.
+  process.exitCode = errors.length ? 1 : 0;
 }

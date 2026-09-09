@@ -185,6 +185,9 @@ Checks cover plan/scope/splice consistency, dependencies, forward/external
 references, rendering, prose, sources, pathways, provenance, contracts,
 finite smoke tests, risk, boundaries, citation fidelity, and evidence liveness.
 Passing structural checks or finite tests does not prove mathematics.
+Risk reports preserve complete piped JSON and failure exit codes; the process
+exits naturally after output drains. Risk routing targets the direct 6B Alpha,
+not retired reader/refuter stages.
 
 The Set Theory completion track has an additional bootstrap gate. Foundations
 pages fail validation if their declared page prerequisites or authored logical
