@@ -81,7 +81,7 @@ refuses populated manifests. Use generators rather than editing their outputs;
 | 3a — scope | `3a-scope` | Sufficient scope or explicit owner approval for every pair |
 | 3b — audit | `3b-audit` | Current item decisions and final mechanical gates |
 | 4 — materialize | `4-splice`, `4-baseline` | Synchronized item inventory and pre-author snapshot |
-| 5 — author | `5-author` | All items/pages/contracts; full checks pass before Step 6B |
+| 5 — author | `5-author` | Complete batches enter 6B; full checks pass at the author/review join before the 6B baseline |
 | 6B–D — close | `6b-prepare`, `6b-adjudicate`, `6b-baseline`, `6c-edges`, `6c-cross`, `6d-close` | Direct authored-content review, cross-group resolution, impact evidence, Step 6 receipt |
 | 7 — judge | `7-scope`, `7-judge` | Frozen-text judgments and group reader digests |
 | 8 — repair | `8-baseline`, `8-scope`, `8-adjudicate`, `8-preflight`, `8-rejudge`, `8-close`, `8-final`, `8-freeze` | Authorized fatal repairs and current certification |
