@@ -33,7 +33,7 @@ writers maintain these same rows immediately when dependencies change. Read-only
 reviewers report updates to the owning writer and do not write ledger files.
 Do not broaden mathematical edit authority to satisfy bookkeeping.
 
-The Step-3 recheck and Step-9 joins require an input for every batch and a review
+The Step-3b final gate and Step-9 join require an input for every batch and a review
 row for every declared cross-batch edge. An empty input is valid only when that
 consumer batch has no such dependencies.
 

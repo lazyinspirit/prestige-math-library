@@ -459,15 +459,14 @@ test('a cohort that is not a function is refused', () => {
 // The shipped table: which stages overlap is an owner decision, so assert it
 // ---------------------------------------------------------------------------
 
-test('the mathlib table declares exactly two overlap groups, over exactly these stages', async () => {
+test('the mathlib table declares exactly one overlap group, over exactly these stages', async () => {
   const mod = await import('../stages/mathlib.mts');
   const byPipeline = new Map<string, string[]>();
   for (const s of mod.stages as any[]) {
     if (!s.pipeline) continue;
     byPipeline.set(s.pipeline, [...(byPipeline.get(s.pipeline) ?? []), s.id]);
   }
-  assert.deepEqual([...byPipeline.keys()].sort(), ['read', 'scaffold']);
-  assert.deepEqual(byPipeline.get('scaffold'), ['3-review', '3-fix', '3-recheck']);
+  assert.deepEqual([...byPipeline.keys()].sort(), ['read']);
   assert.deepEqual(byPipeline.get('read'), ['5-author', '6a-baseline', '6a-read',
     '6a-split', '6a-refute', '6a-collect']);
 });
@@ -561,7 +560,7 @@ test('a group Alpha stage waits for the ASSIGNED group, not the positional fallb
   writeFileSync(join(repo, 'research', 'r-alpha-groups.json'), JSON.stringify({
     groups: [{ label: 'a', covers: ['1', '4'] }, { label: 'b', covers: ['2', '3', '5'] }],
   }));
-  for (const id of ['3-review', '3-recheck', '6b-adjudicate']) {
+  for (const id of ['6b-adjudicate']) {
     const st = mod.stages.find((s: any) => s.id === id);
     assert.equal(typeof st.cohort, 'function', `${id} must declare a cohort`);
     assert.deepEqual(st.cohort(ctx, '4'), ['1', '4'], `${id} cohort ignored the assignment`);

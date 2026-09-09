@@ -115,24 +115,11 @@ test('group Alpha resolves to Sol high', () => {
   assert.equal(row.provider_effort, 'high');
 });
 
-test('Step-3 review uses Sol high and final adjudication uses Astra medium', () => {
-  for (const id of ['3-review', '3-recheck']) {
-    const s = stage(id);
-    const plan = s.plan(ctx, ['1'])[0];
-    const profileName = selected(s, plan);
-    if (profileName) {
-      const profile = MODEL_PROFILES[profileName];
-      assert.equal(profile.model, id === '3-recheck' ? MODELS.astra.id : MODELS.sol.id, id);
-      assert.equal(profile.effort, id === '3-recheck' ? 'medium' : 'high', id);
-      continue;
-    }
-    const result = spawnSync('node', ['tools/dispatch.mjs',
-      '--role', plan.role, '--brief', plan.brief, '--label', `${id}-model-test`,
-      '--run', `${id}-model-test`, '--dry-run', '--json'], { cwd: REPO, encoding: 'utf8' });
-    assert.equal(result.status, 0, result.stderr);
-    const row = JSON.parse(result.stdout);
-    assert.equal(row.model, MODELS.sol.id, id);
-    assert.equal(row.requested_effort, 'high', id);
+test('Step-3 scope uses Sol high and item adjudication uses Astra medium', () => {
+  for (const [id, model, effort] of [['3a-scope', MODELS.sol.id, 'high'], ['3b-audit', MODELS.astra.id, 'medium']]) {
+    const profile = MODEL_PROFILES[stage(id).modelProfile];
+    assert.equal(profile.model, model);
+    assert.equal(profile.effort, effort);
   }
 });
 
@@ -173,7 +160,7 @@ test('the shared Step-5 authoring brief mandates authoritative web verification'
   assert.match(source, /authoritative sources/i);
 });
 
-test('the shared Step-1/3 scaffold brief mandates research and complete dependency closure', () => {
+test('the Step-1 scaffold brief mandates research and complete dependency closure', () => {
   const source = readFileSync(join(REPO, 'briefs/beta-scaffold.md'), 'utf8');
   assert.match(source, /every piece of mathematics unfamiliar/i);
   assert.match(source, /search the web/i);
@@ -185,10 +172,9 @@ test('the shared Step-1/3 scaffold brief mandates research and complete dependen
   assert.match(source, /deferred-set-theory-beyond-choice/i);
 });
 
-test('every Step-1/3 scaffold lane receives the shared scaffold brief', () => {
-  for (const id of ['1-scaffold', '3-review', '3-fix', '3-recheck']) {
-    const plans = stage(id).plan(ctx, ['1']);
-    assert.ok(plans.length, `${id} produced no plan`);
-    for (const plan of plans) assert.equal(plan.brief, 'briefs/beta-scaffold.md', `${id}/${plan.label}`);
-  }
+test('Step 1 retains its scaffold brief; Step 3 has separate scope and audit prompts', () => {
+  for (const plan of stage('1-scaffold').plan(ctx, ['1'])) assert.equal(plan.brief, 'briefs/beta-scaffold.md');
+  const code = readFileSync(join(REPO, 'tools/autopilot/stages/mathlib.mts'), 'utf8');
+  assert.match(code, /briefs\/step3-scope\.md/);
+  assert.match(code, /briefs\/step3-audit\.md/);
 });

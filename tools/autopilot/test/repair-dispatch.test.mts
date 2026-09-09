@@ -1,6 +1,7 @@
 // A repair dispatch is a dispatch: same input resolution, same identity rules.
+// Step-3 owner holds and decision recovery are covered by scaffold-final.test.mts.
 //
-// WHY. The 3-recheck repair loop's first live firing burned all three rounds
+// WHY. The 3b-audit repair loop's first live firing burned all three rounds
 // without launching a single agent: hook-started dispatches bypass the plan
 // loop where brief/task candidate arrays were resolved, so dispatch.mjs
 // received a comma-joined ARRAY as --task and died on its usage check —
@@ -70,7 +71,7 @@ test('resolveInput picks the first existing candidate, else names the last', () 
 test('a hook-started dispatch with no existing input becomes a blocker, not a spawn', () => {
   const repo = fixtureRepo();
   const ex = executorAt(repo);
-  const s3: any = stages.find((s: any) => s.id === '3-recheck');
+  const s3: any = stages.find((s: any) => s.id === '3b-audit');
   ex.start(s3, {
     role: 'beta', label: 'scaffold-fix-1-b9', job: 'scaffolding', covers: ['9'],
     brief: 'research/demo-absent-brief.md',
@@ -80,79 +81,6 @@ test('a hook-started dispatch with no existing input becomes a blocker, not a sp
   assert.equal(ex.inflight.size, 0, 'nothing may spawn on a missing input');
   assert.ok(ex.state.data.blockers.some((b: any) => /missing input file/.test(b.message)),
     'the miss must surface as a blocker');
-  rmSync(repo, { recursive: true, force: true });
-});
-
-test('Step 3 routes unresolved scaffolds to disjoint final adjudicators', async () => {
-  const repo = fixtureRepo();
-  // receipt: three insufficient pages across TWO batches
-  writeFileSync(join(repo, 'research', 'demo-scaffold-closure.json'), JSON.stringify({
-    insufficient: ['page-x', 'page-y', 'page-z'],
-    work: [],
-  }));
-  writeFileSync(join(repo, 'research', 'demo-scope-ledger.json'), JSON.stringify({
-    pages: [
-      { id: 'page-x', kind: 'A', batch: '4' },
-      { id: 'page-y', kind: 'A', batch: '4' },
-      { id: 'page-z', kind: 'A', batch: '6' },
-    ],
-  }));
-  const started: any[] = [];
-  const executor = { start: (_s: any, p: any) => started.push(p) };
-  writeFileSync(join(repo, 'research', 'demo-alpha-groups.json'), JSON.stringify([
-    { label: 'a', covers: ['4'] }, { label: 'b', covers: ['6'] },
-  ]));
-  const s3: any = stages.find((s: any) => s.id === '3-recheck');
-  await s3.onGateFailure({
-    ctx: { run: 'demo', repo }, executor, stage: s3, round: 1,
-    failure: { id: 'scaffold-verdicts', why: '' },
-  });
-  assert.equal(started.length, 2, 'two batches own the three pages');
-  assert.deepEqual(started.map((p) => p.covers).sort(), [['4'], ['6']]);
-  assert.ok(started.every(p => p.label.startsWith('scaffold-final-')));
-  for (const p of started) {
-    assert.equal(typeof p.task, 'string');
-    assert.equal(p.job, 'adjudication');
-    assert.equal(p.role, 'alpha-high');
-  }
-  rmSync(repo, { recursive: true, force: true });
-});
-
-test('legacy rechecks migrate to final adjudication after three rounds', async () => {
-  const repo = fixtureRepo();
-  const research = join(repo, 'research');
-  const dispatch = join(research, 'demo-dispatch');
-  mkdirSync(dispatch);
-  writeFileSync(join(research, 'demo-scaffold-closure.json'), JSON.stringify({
-    insufficient: ['page-x'], work: [],
-  }));
-  writeFileSync(join(research, 'demo-scope-ledger.json'), JSON.stringify({
-    pages: [{ id: 'page-x', kind: 'A', batch: '4' }],
-  }));
-  writeFileSync(join(research, 'demo-alpha-groups.json'), JSON.stringify([
-    { label: 'a', covers: ['4'], rationale: 'fixture' },
-  ]));
-  const verdict = join(research, 'demo-alpha-a-step3-verdicts.json');
-  const decisions = join(research, 'demo-alpha-a-scope-decisions.json');
-  const beta = join(dispatch, 'beta-scaffold-fix-1-b4.result.json');
-  const recheck = join(dispatch, 'alpha-high-scaffold-recheck-2-a.result.json');
-  for (const path of [verdict, decisions, beta, recheck]) writeFileSync(path, '{}\n');
-  utimesSync(verdict, new Date(1_000), new Date(1_000));
-  utimesSync(decisions, new Date(1_000), new Date(1_000));
-  utimesSync(beta, new Date(2_000), new Date(2_000));
-  utimesSync(recheck, new Date(3_000), new Date(3_000));
-
-  const started: any[] = [];
-  const executor = { start: (_s: any, p: any) => started.push(p) };
-  const s3: any = stages.find((s: any) => s.id === '3-recheck');
-  await s3.onGateFailure({
-    ctx: { run: 'demo', repo }, executor, stage: s3, round: 3,
-    failure: { id: 'scaffold-verdicts', why: '' },
-  });
-  assert.equal(started.length, 1);
-  assert.equal(started[0].role, 'alpha-high');
-  assert.match(started[0].label, /^scaffold-final-a-/);
-  assert.equal(s3.maxFixRounds, Infinity);
   rmSync(repo, { recursive: true, force: true });
 });
 
@@ -574,7 +502,7 @@ test('a prompt file carrying an identity placeholder blocks before any spawn', (
   const repo = fixtureRepo();
   writeFileSync(join(repo, 'research', 'demo-poisoned.task.md'), 'the grammar example says (order <n>)\n');
   const ex = executorAt(repo);
-  const s3: any = stages.find((s: any) => s.id === '3-recheck');
+  const s3: any = stages.find((s: any) => s.id === '3b-audit');
   ex.start(s3, {
     role: 'beta', label: 'scaffold-fix-1-b4', job: 'scaffolding', covers: ['4'],
     brief: 'research/demo-generic.task.md',
@@ -584,31 +512,6 @@ test('a prompt file carrying an identity placeholder blocks before any spawn', (
   assert.equal(ex.inflight.size, 0, 'a poisoned prompt must not spawn');
   assert.ok(ex.state.data.blockers.some((b: any) => b.message.includes('<n>') && b.message.includes('demo-poisoned')),
     'the blocker names the token and the file');
-  rmSync(repo, { recursive: true, force: true });
-});
-
-test('Step-3 source residue goes to its final adjudicator, not another Beta', async () => {
-  const repo = fixtureRepo();
-  // a coverage whose one source is unstamped and unfetchable -> the stamp
-  // repair leaves residue naming the page -> the hook routes a scout
-  writeFileSync(join(repo, 'research', 'demo-batch-2.pages.json'), '[]');
-  writeFileSync(join(repo, 'research', 'demo-batch-2.coverage.json'), JSON.stringify({
-    pages: [{ page: 'sylow-page', sources: [{ url: 'http://127.0.0.1:9/gone.pdf', title: 't', locator: 'l', contents: [] }] }],
-  }));
-  writeFileSync(join(repo, 'research', 'demo-scope-ledger.json'), JSON.stringify({
-    pages: [{ id: 'sylow-page', kind: 'A', batch: '2' }],
-  }));
-  const started: any[] = [];
-  const executor = { start: (_s: any, p: any) => started.push(p) };
-  const s3: any = stages.find((s: any) => s.id === '3-recheck');
-  await s3.onGateFailure({
-    ctx: { run: 'demo', repo }, executor, stage: s3, round: 2,
-    failure: { id: 'source-fetch-check', why: '' },
-  });
-  assert.equal(started.length, 1);
-  assert.match(started[0].label, /^scaffold-final-a-/);
-  assert.equal(started[0].job, 'adjudication');
-  assert.deepEqual(started[0].covers, ['2']);
   rmSync(repo, { recursive: true, force: true });
 });
 
@@ -671,33 +574,6 @@ test('the judge tools agree on the configured lineup', () => {
     const out = `${r.stdout}\n${r.stderr}`;
     assert.match(out, /terra/, `${tool} lost the Terra lineup`);
   }
-});
-
-test('the mechanical branch still short-circuits the Beta fan-out', async () => {
-  const repo = fixtureRepo();
-  // a url-liveness failure with an artifact whose dead rows all carry
-  // snapshots already applied -> repair tool exits 0 -> no Beta lanes
-  //
-  // The row is present rather than `rows: []` because an EMPTY sweep is now a
-  // hard failure (`backing-empty-liveness`) — a sweep over nothing is not a
-  // sweep. That combination cannot arise for real either: `url-sweep` carries
-  // its own liveness assertion of at least one URL collected, so it fails
-  // before its artifact could reach a repair empty. The property under test —
-  // a mechanical repair that succeeds must not fan out Betas — is unchanged.
-  writeFileSync(join(repo, 'research', 'demo-url-liveness.json'),
-    JSON.stringify({ rows: [{ url: 'https://example.org/live.pdf', ok: true }] }));
-  // the repair passes --coverage from the run's batch manifests
-  writeFileSync(join(repo, 'research', 'demo-batch-4.pages.json'), '[]');
-  writeFileSync(join(repo, 'research', 'demo-batch-4.coverage.json'), JSON.stringify({ pages: [] }));
-  const started: any[] = [];
-  const executor = { start: (_s: any, p: any) => started.push(p) };
-  const s3: any = stages.find((s: any) => s.id === '3-recheck');
-  await s3.onGateFailure({
-    ctx: { run: 'demo', repo }, executor, stage: s3, round: 1,
-    failure: { id: 'url-liveness', why: '' },
-  });
-  assert.equal(started.length, 0, 'a mechanical repair must not fan out Betas');
-  rmSync(repo, { recursive: true, force: true });
 });
 
 // A URL-LIVENESS FAILURE MUST BE ROUTABLE. On frontier-16 the stage-1 sweep

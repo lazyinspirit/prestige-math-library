@@ -90,7 +90,7 @@ function acquireAppendLock(timeoutMs = 30_000) {
   }
 }
 
-const STAGES = ['1-scaffold', '2-assign', '3-review', '3-fix', '3-recheck', '4-splice', '4-baseline',
+const STAGES = ['1-scaffold', '2-assign', '3a-scope', '3b-audit', '3-review', '3-fix', '3-recheck', '4-splice', '4-baseline',
   '5-author', '6a-read', '6b-adjudicate', '6b-baseline', '6c-cross', '7-judge', '8-baseline',
   '8-adjudicate', '8-rejudge', '9-scope', '9-receipt', '10-report',
   'A0', 'A1', 'A2', 'A3', 'A4', 'A6', 'A7', 'A8', 'A9', 'A10',

@@ -275,7 +275,7 @@ test('both scaffold-side joins gate on the stamp and have a repair route', () =>
   mkdirSync(join(dir, 'research'));
   for (const b of ['1']) writeFileSync(join(dir, 'research', `demo-batch-${b}.pages.json`), '[]');
   const ctx = { run: 'demo', repo: dir };
-  for (const id of ['1-scaffold', '3-recheck']) {
+  for (const id of ['1-scaffold', '3b-audit']) {
     const st: any = stages.find((s: any) => s.id === id);
     const g = st.gates(ctx).find((x: any) => x.id === 'source-fetch-check');
     assert.ok(g, `${id} declares no source-fetch-check gate`);
@@ -283,8 +283,8 @@ test('both scaffold-side joins gate on the stamp and have a repair route', () =>
     assert.ok(typeof st.onGateFailure === 'function', `${id} has no repair hook`);
     assert.ok((st.perItemFixBudget ?? st.maxFixRounds ?? 0) >= 1, `${id} has no repair budget`);
   }
-  // 3-recheck also sweeps liveness at its join now
-  const st3: any = stages.find((s: any) => s.id === '3-recheck');
-  assert.ok(st3.gates(ctx).some((x: any) => x.id === 'url-liveness'), '3-recheck lost the liveness sweep');
+  // 3b-audit also sweeps liveness at its join now
+  const st3: any = stages.find((s: any) => s.id === '3b-audit');
+  assert.ok(st3.gates(ctx).some((x: any) => x.id === 'url-liveness'), '3b-audit lost the liveness sweep');
   rmSync(dir, { recursive: true, force: true });
 });

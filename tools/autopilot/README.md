@@ -133,11 +133,10 @@ anyone could name: batch 3's reader has nothing to learn from batch 5's author.
 A stage may declare `pipeline: '<name>'`. A **maximal run of consecutive stages**
 sharing that name is one group, and inside a group progression is **per unit**: a
 unit may be dispatched at stage k+1 once its own work is finished at stage k,
-while its siblings are still at stage k. The shipped table declares two:
+while its siblings are still at stage k. The shipped table declares one:
 
 | group | stages | ends at |
 |---|---|---|
-| `scaffold` | `3-review` → `3-fix` → `3-recheck` | the `4-splice` barrier |
 | `read` | `5-author` → `6a-baseline` → `6a-read` → `6a-split` → `6a-refute` → `6a-collect` | the `6b-prepare` barrier |
 
 Everything else — `1-scaffold`, `2-assign`, all three touch snapshots, the
@@ -146,13 +145,9 @@ declares no pipeline and is still strictly serial and whole-level. Those are the
 stages whose ordering *is* the guarantee (a baseline taken after the fact
 confirms instead of checking) or that write a ledger a neighbour would stale.
 
-`1-scaffold` is deliberately outside the scaffold group even though it looks like
-its first member. A group-Alpha stage waits on a **cohort** — the batches that
-Alpha was assigned — and the assignment does not exist until `2-assign` writes
-it mid-run. Before that, `alphaGroups` returns a positional chunking that the
-assignment stage exists precisely to overrule, so a group spanning `1-scaffold →
-3-review` would hold each batch for the wrong siblings. `2-assign` also needs
-every batch's manifest to partition anything. The pipeline starts after it.
+Steps 1, 2, 3a and 3b are whole-frontier barriers. Step 2 assigns Alpha
+ownership after all scaffolds exist; Step 3a clears scope before any Step 3b
+item audit. Step 3b clears all decisions and final checks before the splice.
 
 The read group clears its complete Step-5 battery before `6b-prepare` freezes
 stabilized inputs. Independent 6B adjudication is a separate barrier, followed
@@ -174,8 +169,8 @@ Three things per-unit progression is **not** allowed to relax:
   Additional scoped author checks run before each reader baseline and preserve
   author/reader overlap; they never replace the full level checks.
 - **Lane caps.** `concurrency` bounds a stage, and serially that bounds the lane
-  too because only one stage is live. In a group it stops doing so: `3-review`
-  and `3-recheck` are both Alphas. A pipelined stage must therefore declare
+  too because only one stage is live. Overlapping stages can share a lane,
+  so a pipelined stage must declare
   `role`, and the group budgets that lane once.
 - **Current widths.** The configured run cap and all batch lanes are 27. Group
   lanes are nine because each Alpha may own at most three batches;
@@ -244,11 +239,12 @@ The hook also could not have worked as written — it fired only when the blocke
 *message* was new, and a gate that keeps failing the same way produces the same
 message every time. One round, then deadlock. It now fires whenever nothing is in
 flight and rounds remain, bounded by `maxFixRounds`; past the cap the gate still
-blocks and a person reads it. Step 3 instead uses Astra/medium final
-adjudication without a numeric repair cap: accept, repair with 100% confidence,
-or escalate to the owner. Owner decisions are final for the recorded scaffold.
-Unchanged unresolved final calls do not trigger another paid review. See
-WORKFLOW.md for the terminal decision command and retained integrity gates.
+blocks and a person reads it. Step 3a uses Sol/high scope review with owner
+resolution of insufficient scope. Step 3b uses Astra/medium item adjudication:
+accept, repair with 100% confidence, or escalate. Owner repairs go directly to
+the final mechanical gate. Missing decisions on unchanged inputs and mechanical
+residue hold without repeating a mathematical call. See WORKFLOW.md for
+commands, receipt invalidation and legacy-run handling.
 
 Gate output is repair evidence, so the engine retains it in full. Item-scoped
 repair accounting extracts every canonical subject from the complete failure,

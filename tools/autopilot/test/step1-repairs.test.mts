@@ -22,7 +22,7 @@ test('exhausted primary does not consume the assignment of a live advisory', () 
       executor: { start: (_s: any, p: any) => calls.push(p) },
       failure: { id: 'coverage-1', liveItems: [], exhaustedItems: ['page-one'], advisory: [
         { id: 'content-policy-scaffold', liveItems: ['thm-one'], exhaustedItems: ['thm-other'], output: 'all diagnostics' },
-        { id: 'foreign-gate', stage: '3-recheck', liveItems: ['thm-foreign'] },
+        { id: 'foreign-gate', stage: '3b-audit', liveItems: ['thm-foreign'] },
       ] } });
     assert.equal(started, true);
     assert.equal(calls.length, 1);

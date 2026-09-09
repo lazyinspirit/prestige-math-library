@@ -1,111 +1,194 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, symlinkSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
-import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
-import { recordResolution, readResolution } from '../../scaffold-resolution.mjs';
-import { stages, scaffoldFinalPlan } from '../stages/mathlib.mts';
+import { fileURLToPath } from 'node:url';
+import { join } from 'node:path';
+import { loadStep3, scopeHash, itemHash, recordStep3, checkStep3 } from '../../step3-decisions.mjs';
+import { stages, step3Plan } from '../stages/mathlib.mts';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
-import { Executor } from '../src/executor.mts';
-import { State, statePath } from '../src/state.mts';
-import { Reporter } from '../src/reporter.mts';
-import { makeExecAdapter } from '../src/adapters/exec.mts';
 
-const repoRoot = new URL('../../..', import.meta.url).pathname;
-function fixture() {
-  const root = mkdtempSync(join(tmpdir(), 'scaffold-final-'));
-  const dir = join(root, 'research'); mkdirSync(dir);
-  symlinkSync(join(repoRoot, 'briefs'), join(root, 'briefs'));
-  const pages = [{ id: 'a', kind: 'A', companion: 'b', items: [] },
-    { id: 'b', kind: 'B', companion: 'a', items: [] }];
-  const put = (file, data) => writeFileSync(join(dir, file), JSON.stringify(data));
+function fixture(t: any) {
+  const root = mkdtempSync(join(tmpdir(), 'step3-'));
+  mkdirSync(join(root, 'research')); mkdirSync(join(root, 'items'));
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  const put = (name: string, value: any) => writeFileSync(join(root, 'research', name), JSON.stringify(value));
+  const pages: any[] = [
+    { id: 'a', kind: 'A', companion: 'b', order: 1, requires: [], items: [
+      { id: 'lem-a', kind: 'lemma', statement: 'A', strategy: 'Proof A', deps: ['lem-published'] },
+      { id: 'thm-b', kind: 'theorem', statement: 'B', strategy: 'Proof B', deps: ['lem-a'] }] },
+    { id: 'b', kind: 'B', companion: 'a', order: 2, requires: ['a'], items: [
+      { id: 'ex-c', kind: 'example', statement: 'C', strategy: 'Compute C', deps: ['thm-b'] }] }];
+  const published = (text: string) => writeFileSync(join(root, 'items/lem-published.md'),
+    `---\nid: lem-published\nstatus: published\ndeps: []\n---\n${text}\n`);
+  published('Published proof');
   put('demo-batch-1.pages.json', pages);
   put('demo-batch-1.coverage.json', { pages: [{ page: 'a', sources: [] }] });
   put('plan-spec.json', { pages });
-  put('demo-alpha-a-step3-verdicts.json', [{ page: 'a', verdict: 'sufficient' }]);
   put('demo-alpha-groups.json', [{ label: 'a', covers: ['1'] }]);
-  put('demo-scope-ledger.json', { pages: [{ id: 'a', batch: '1' }] });
-  return { root, dir, put, ctx: { repo: root, run: 'demo' } };
+  const record = (input: any) => recordStep3(root, { run: 'demo', reason: 'Exact evidence', ...input });
+  const scope = () => record({ phase: 'scope', page: 'a', decision: 'sufficient' });
+  const audit = (item: string, options = {}) => record({ phase: 'item', item, decision: 'accept', confidence: 1, dependencies: [], ...options });
+  const check = (phase = 'final') => checkStep3(loadStep3(root, 'demo'), phase);
+  return { root, put, pages, published, record, scope, audit, check, ctx: { repo: root, run: 'demo' } };
 }
-const check = root => spawnSync(process.execPath, [join(repoRoot, 'tools/scaffold-verdicts.mjs'),
-  '--run', 'demo', '--require-final', '--json'], { cwd: root, encoding: 'utf8' });
 
-test('legacy sufficiency cannot bypass final adjudication; accept and repair close current bytes', () => {
-  const f = fixture();
-  try {
-    assert.equal(check(f.root).status, 1);
-    for (const decision of ['accept', 'repaired']) {
-      recordResolution(f.root, { run: 'demo', page: 'a', decision, confidence: 1, reason: 'checked' });
-      assert.equal(check(f.root).status, 0);
-    }
-    f.put('demo-batch-1.coverage.json', { pages: [{ page: 'a', sources: ['changed'] }] });
-    assert.equal(readResolution(f.root, 'demo', 'a'), null);
-    assert.equal(check(f.root).status, 1);
-  } finally { rmSync(f.root, { recursive: true, force: true }); }
+test('Step 3 is two barriers with the requested profiles, not a Beta loop', t => {
+  const f = fixture(t), pair = stages.filter(s => /^3[a-z]-/.test(s.id));
+  assert.deepEqual(pair.map(s => s.id), ['3a-scope', '3b-audit']);
+  assert.ok(!stages.some(s => ['3-review', '3-fix', '3-recheck'].includes(s.id)));
+  assert.ok(pair.every(s => !s.pipeline));
+  for (const [s, profile, phase] of [[pair[0], MODEL_PROFILE_NAMES.solHigh, 'scope'], [pair[1], MODEL_PROFILE_NAMES.astraMedium, 'final']] as any) {
+    assert.equal(s.modelProfile, profile);
+    const plan = step3Plan(f.ctx, { label: 'a', covers: ['1'] }, phase);
+    assert.equal(plan.profile, profile);
+    assert.ok(s.pattern.test(`${plan.role}-${plan.label}.result.json`));
+  }
 });
 
-test('uncertainty escalates; owner acceptance is final and owner hold blocks', () => {
-  const f = fixture();
-  try {
-    assert.throws(() => recordResolution(f.root, { run: 'demo', page: 'a', decision: 'repaired', confidence: .99, reason: 'uncertain' }), /100%/);
-    recordResolution(f.root, { run: 'demo', page: 'a', decision: 'escalate', confidence: undefined, reason: 'Need owner ruling' });
-    assert.deepEqual(JSON.parse(check(f.root).stdout).escalated, ['a']);
-    recordResolution(f.root, { run: 'demo', page: 'a', decision: 'accept', confidence: undefined, owner: true, reason: 'Owner ruling' });
-    assert.equal(check(f.root).status, 0);
-    assert.throws(() => recordResolution(f.root, { run: 'demo', page: 'a', decision: 'escalate', confidence: undefined, reason: 'Agent disagrees' }), /owner decision is final/);
-    recordResolution(f.root, { run: 'demo', page: 'a', decision: 'hold', confidence: undefined, owner: true, reason: 'Wait for prerequisites' });
-    assert.equal(check(f.root).status, 1);
-  } finally { rmSync(f.root, { recursive: true, force: true }); }
+test('scope is required; legacy sufficient pair verdicts cannot approve items', t => {
+  const f = fixture(t);
+  f.put('demo-scaffold-final-a.json', { decision: 'accept', confidence: 1 });
+  assert.equal(f.check('scope').closed, false);
+  assert.throws(() => f.audit('lem-a'), /3a must clear/);
+  f.scope();
+  assert.equal(f.check('scope').closed, true);
+  assert.equal(f.check().closed, false);
 });
 
-test('Step 3 has no numeric cap, uses Astra medium, and holds escalations without dispatch', async () => {
-  const f = fixture(); const s: any = stages.find(s => s.id === '3-recheck');
-  try {
-    assert.equal(s.maxFixRounds, Infinity);
-    assert.equal(s.modelProfile, MODEL_PROFILE_NAMES.astraMedium);
-    f.put('demo-scaffold-closure.json', { escalated: ['a'], insufficient: ['a'] });
-    const result = await s.onGateFailure({ ctx: f.ctx, stage: s, round: 100,
-      failure: { id: 'scaffold-verdicts' }, executor: { start: () => assert.fail('Escalation dispatched work') } });
-    assert.match(result.owner.reason, /a/);
-  } finally { rmSync(f.root, { recursive: true, force: true }); }
+test('insufficient scope requires owner action; merge/enrich do not mean proceed', t => {
+  const f = fixture(t);
+  f.record({ phase: 'scope', page: 'a', decision: 'insufficient' });
+  assert.equal(f.check('scope').work[0].owner, true);
+  assert.throws(() => f.scope(), /Only the owner/);
+  for (const decision of ['merge', 'enrich']) {
+    f.record({ phase: 'scope', page: 'a', decision, owner: true });
+    assert.equal(f.check('scope').closed, false);
+    assert.throws(() => f.scope(), /Only the owner/);
+  }
+  f.record({ phase: 'scope', page: 'a', decision: 'proceed', owner: true });
+  assert.equal(f.check('scope').closed, true);
 });
 
-test('finished final adjudication with unchanged unresolved inputs escalates instead of looping', async () => {
-  const f = fixture(); const s: any = stages.find(s => s.id === '3-recheck');
-  try {
-    const plan = scaffoldFinalPlan(f.ctx, { label: 'a', covers: ['1'] });
-    assert.equal(plan.profile, MODEL_PROFILE_NAMES.astraMedium);
-    mkdirSync(join(f.dir, 'demo-dispatch'));
-    f.put('demo-dispatch/finished.result.json', { label: plan.label, ok: true });
-    f.put('demo-scaffold-closure.json', { needs_final: ['a'], insufficient: ['a'] });
-    const result = await s.onGateFailure({ ctx: f.ctx, stage: s, round: 100,
-      failure: { id: 'scaffold-verdicts' }, executor: { start: () => assert.fail('Repeated dispatch') } });
-    assert.match(result.owner.reason, /did not close/);
-    assert.match(readFileSync(join(f.root, plan.task), 'utf8'), /100% confident/);
-  } finally { rmSync(f.root, { recursive: true, force: true }); }
+test('every A/B item needs a decision; uncertainty escalates; owner repair bypasses rejudge', t => {
+  const f = fixture(t); f.scope();
+  assert.throws(() => f.audit('lem-a', { confidence: .99 }), /100%/);
+  assert.throws(() => f.audit('lem-a', { dependencies: undefined }), /examined dependency/);
+  f.audit('lem-a', { decision: 'escalate', confidence: undefined });
+  assert.throws(() => f.audit('lem-a'), /owner must resolve/);
+  f.record({ phase: 'item', item: 'lem-a', owner: true, decision: 'repaired', dependencies: ['lem-published'] });
+  assert.throws(() => f.audit('lem-a'), /owner must resolve/);
+  f.audit('thm-b', { decision: 'repaired' });
+  assert.equal(f.check().accepted, 2);
+  assert.equal(f.check().closed, false);
+  f.audit('ex-c'); assert.equal(f.check().closed, true);
 });
 
-test('executor refunds owner-hold rounds, launches nothing, and accepts a later decision', async () => {
-  const f = fixture();
-  try {
-    const stateDir = join(f.root, '.autopilot'); mkdirSync(stateDir);
-    const state = new State(statePath(stateDir)).init('demo');
-    const config: any = { repo: f.root, stateDir, run: 'demo', argv: ['true'], dispatchDir: f.dir };
-    const ex = new Executor({ config, stages: [], state,
-      reporter: new Reporter({ dir: stateDir, intervalMs: 60000 }),
-      adapter: makeExecAdapter({ argv: ['true'], cwd: f.root }) });
-    let calls = 0;
-    const stage: any = { id: 'test-final', maxFixRounds: Infinity,
-      onGateFailure: () => { calls++; return { owner: { reason: 'uncertain' } }; } };
-    state.stage(stage.id).fixRounds = 99;
-    const failure: any = { id: 'test', output: 'blocked' };
-    assert.equal(await (ex as any).spendRepairRound(stage, failure, f.ctx, 'test'), 'waiting');
-    assert.equal(state.stage(stage.id).fixRounds, 99);
-    assert.equal(calls, 1);
-    assert.ok(state.data.blockers.some(b => b.key === 'owner:test-final'));
-    stage.onGateFailure = () => {};
-    assert.equal(await (ex as any).spendRepairRound(stage, failure, f.ctx, 'test'), 'spent');
-    assert.equal(state.stage(stage.id).fixRounds, 100);
-  } finally { rmSync(f.root, { recursive: true, force: true }); }
+test('proof changes invalidate the item and its consumers but not scope', t => {
+  const f = fixture(t); f.scope();
+  for (const id of ['lem-a', 'thm-b', 'ex-c']) f.audit(id);
+  const before = scopeHash(loadStep3(f.root, 'demo'), 'a');
+  f.pages[0].items[0].strategy = 'New proof'; f.put('demo-batch-1.pages.json', f.pages);
+  assert.equal(scopeHash(loadStep3(f.root, 'demo'), 'a'), before);
+  assert.equal(f.check().accepted, 0);
+});
+
+test('published and implicit dependency changes invalidate decisions', t => {
+  const f = fixture(t); f.scope();
+  const path = join(f.root, 'items/lem-implicit.md');
+  writeFileSync(path, '---\nid: lem-implicit\ndeps: []\n---\nFirst proof');
+  f.audit('ex-c', { dependencies: ['lem-implicit'] });
+  const before = itemHash(loadStep3(f.root, 'demo'), 'ex-c', ['lem-implicit']);
+  writeFileSync(path, '---\nid: lem-implicit\ndeps: []\n---\nChanged proof');
+  assert.notEqual(itemHash(loadStep3(f.root, 'demo'), 'ex-c', ['lem-implicit']), before);
+  assert.equal(f.check().accepted, 0);
+  f.audit('lem-a'); f.published('Changed supplier'); assert.equal(f.check().accepted, 0);
+});
+
+test('claim changes invalidate scope; shared plan registration alone does not', t => {
+  const f = fixture(t);
+  f.record({ phase: 'scope', page: 'a', owner: true, decision: 'proceed' });
+  f.put('plan-spec.json', { pages: f.pages }); assert.equal(f.check('scope').closed, true);
+  f.pages[0].items[0].statement = 'New claim'; f.put('demo-batch-1.pages.json', f.pages);
+  assert.equal(f.check('scope').closed, false);
+});
+
+test('changed evidence cannot let an adjudicator bypass an escalation', t => {
+  const f = fixture(t); f.scope();
+  f.audit('lem-a', { decision: 'escalate', confidence: undefined });
+  f.published('New dependency evidence');
+  assert.throws(() => f.audit('lem-a'), /owner must resolve/);
+  assert.equal(f.check().work.find((w: any) => w.item === 'lem-a').owner, true);
+});
+
+test('missing prerequisites can be escalated and forged receipt identities fail closed', t => {
+  const f = fixture(t); f.scope();
+  f.pages[0].items[0].deps.push('lem-missing'); f.put('demo-batch-1.pages.json', f.pages);
+  f.audit('lem-a', { decision: 'escalate', confidence: undefined, dependencies: ['lem-missing'] });
+  assert.equal(f.check().work.find((w: any) => w.item === 'lem-a').owner, true);
+  const row = f.audit('thm-b');
+  f.put('demo-step3b-review-thm-b.json', { ...row, target: 'wrong' });
+  assert.throws(() => f.check(), /receipt identity/);
+});
+
+test('final gate retains mechanical and cross-batch checks', t => {
+  const f = fixture(t), s: any = stages.find(s => s.id === '3b-audit');
+  const ids = s.gates(f.ctx).map((g: any) => g.id);
+  for (const id of ['step3-items', 'validate-plan', 'manifest-deps', 'scope-decisions', 'url-liveness', 'frontier-dependency-ledger'])
+    assert.ok(ids.includes(id), `${id} missing`);
+  assert.ok(ids.some((id: string) => /coverage/.test(id)));
+  assert.ok(ids.some((id: string) => /policy/.test(id)));
+});
+
+test('fresh missing decisions dispatch only the owning groups', async t => {
+  const f = fixture(t), started: any[] = [];
+  const scope: any = stages.find(s => s.id === '3a-scope');
+  const args = { ctx: f.ctx, stage: scope, failure: { id: 'step3-scope' },
+    executor: { start: (_s: any, plan: any) => started.push(plan) } };
+  await scope.onGateFailure(args);
+  assert.equal(started.length, 1);
+  assert.deepEqual(started[0].covers, ['1']);
+  assert.equal(started[0].profile, MODEL_PROFILE_NAMES.solHigh);
+  f.scope(); started.length = 0;
+  const audit: any = stages.find(s => s.id === '3b-audit');
+  await audit.onGateFailure({ ...args, stage: audit });
+  assert.equal(started.length, 1);
+  assert.equal(started[0].profile, MODEL_PROFILE_NAMES.astraMedium);
+});
+
+test('the CLI records scope and returns nonzero until every item clears', t => {
+  const f = fixture(t);
+  const tool = fileURLToPath(new URL('../../step3-decisions.mjs', import.meta.url));
+  const run = (...args: string[]) => spawnSync(process.execPath, [tool, ...args, '--run', 'demo'],
+    { cwd: f.root, encoding: 'utf8' });
+  assert.equal(run('check', '--phase', 'scope').status, 1);
+  const r = run('record-scope', '--page', 'a', '--decision', 'sufficient', '--reason', 'Scope evidence');
+  assert.equal(r.status, 0, r.stderr);
+  assert.equal(run('check', '--phase', 'scope').status, 0);
+  assert.equal(run('check', '--phase', 'final').status, 1);
+  for (const id of ['lem-a', 'thm-b', 'ex-c']) f.audit(id);
+  assert.equal(run('check', '--phase', 'final').status, 0);
+});
+
+test('escalations, unchanged incomplete audits and final mechanical failures never loop', async t => {
+  const f = fixture(t); f.scope();
+  const s: any = stages.find(s => s.id === '3b-audit');
+  const args = { ctx: f.ctx, stage: s, failure: { id: 'step3-items' }, executor: { start: () => assert.fail('Unexpected dispatch') } };
+  f.audit('lem-a', { decision: 'escalate', confidence: undefined });
+  assert.match((await s.onGateFailure(args)).owner.reason, /lem-a/);
+  f.record({ phase: 'item', item: 'lem-a', owner: true, decision: 'repaired', dependencies: [] });
+  const plan = step3Plan(f.ctx, { label: 'a', covers: ['1'] }, 'final');
+  mkdirSync(join(f.root, 'research/demo-dispatch'));
+  f.put('demo-dispatch/done.result.json', { label: plan.label });
+  assert.match((await s.onGateFailure(args)).owner.reason, /unchanged inputs/);
+  f.audit('thm-b'); f.audit('ex-c');
+  assert.match((await s.onGateFailure({ ...args, failure: { id: 'source-fetch-check' } })).owner.reason, /mechanical gate/);
+});
+
+test('prompts require concise scope decisions and impartial sequential dependency audits', () => {
+  const base = new URL('../../../briefs/', import.meta.url);
+  assert.match(readFileSync(new URL('step3-scope.md', base), 'utf8'), /owner alone decides/);
+  const audit = readFileSync(new URL('step3-audit.md', base), 'utf8');
+  for (const re of [/one item at a time/, /unbiased/, /honest/, /authoritative web sources/, /published and planned/, /cross-batch/, /100% confidence/, /Owner-repaired items go directly/]) assert.match(audit, re);
 });

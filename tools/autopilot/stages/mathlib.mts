@@ -23,6 +23,7 @@ import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { itemHashGuard, shortHash } from '../../item-hash.mjs';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
+import { loadStep3, scopeHash, itemHash, checkStep3 } from '../../step3-decisions.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
 import { loadStep8JudgeEvidence } from '../../step8-evidence.mjs';
 import { repairGateBatch, repairFingerprint } from './step56-repairs.mts';
@@ -776,7 +777,6 @@ const cutoverPath = (ctx) => `research/${ctx.run}-step8-cutover.json`;
 const step9ChangesPath = (ctx) => `research/${ctx.run}-step9-changes.json`;
 const step9ChangesScopePath = (ctx) => `research/${ctx.run}-step9-changes.pages.json`;
 const step9ClosurePath = (ctx) => `research/${ctx.run}-step9-judge-closure.json`;
-const scaffoldPath = (ctx) => `research/${ctx.run}-scaffold-closure.json`;
 const step9ScopeDeltaPath = (ctx) => `research/${ctx.run}-step9-scope-delta.json`;
 const step9ScopeReviewPath = (ctx) => `research/${ctx.run}-alpha-step9-review.md`;
 const step9ScopeRegisterPath = (ctx) => `research/${ctx.run}-alpha-step9.md`;
@@ -814,13 +814,6 @@ function writeStep9GateEnvelope({ ctx, stage, round, failures, mechanicalStderr 
 const step9ScopePrepared = (ctx): boolean => existsSync(R(ctx, step9ScopeDeltaPath(ctx)))
   && alphaGroups(ctx).every((group) => existsSync(R(ctx,
     `research/${ctx.run}-alpha-${group.label}-scope-decisions.json`)));
-
-/** The step-3 closure receipt, or null before the gate has ever run. */
-function readScaffold(ctx): { insufficient: string[]; missing_verdict: string[]; closed: boolean } | null {
-  const p = R(ctx, scaffoldPath(ctx));
-  if (!existsSync(p)) return null;
-  try { return JSON.parse(readFileSync(p, 'utf8')); } catch { return null; }
-}
 
 /** The closure receipt the judge gate writes, or null before it has ever run.
  *  Read fresh every time — it is rewritten by each gate run, and a cached copy
@@ -1425,29 +1418,6 @@ const levelCoverageGate = (ctx) => gate('level-coverage', ['node', 'tools/level-
   liveness: { pattern: /level-coverage: (\d+) item/.source, min: 1, unit: 'items' },
 });
 
-/**
- * The step-3 closure predicate — the scaffold half of the self-correcting loop.
- *
- * Step 3 asks whether each pair is deep enough to author. Alpha answers
- * `sufficient` or `insufficient` per pair; a Beta repairs; Alpha re-checks. That
- * ran once each, in a line, and the re-check's conclusion changed nothing —
- * whatever it said, step 4 spliced. A scaffold still insufficient advanced
- * exactly like one that was not, which is how a pair published with no
- * orbit–stabiliser theorem.
- *
- * `review` requires every A page to HAVE a verdict; `sufficient` requires every
- * verdict to BE sufficient, and is what the re-check gates on so the loop
- * cannot exit while a pair is still thin.
- */
-const scaffoldGate = (ctx, { requireSufficient = false } = {}) =>
-  gate('scaffold-verdicts', ['node', 'tools/scaffold-verdicts.mjs',
-    '--run', ctx.run,
-    ...(requireSufficient ? ['--require-sufficient', '--require-final'] : []),
-    '--out', scaffoldPath(ctx),
-  ], {
-    liveness: { pattern: /(\d+)\/(?:\d+) A page\(s\) reviewed/.source, min: 1, unit: 'reviewed pairs' },
-  });
-
 /** Blast radius, `pre-author -> post-6b`. Both endpoints are load-bearing:
  *  a baseline taken after authoring makes the diff empty by construction
  *  (hence `4-baseline` before step 5), and without an explicit `--to` the
@@ -1482,63 +1452,57 @@ const resultPattern = (role: string, labelSource: string): RegExp =>
   new RegExp(`^${role}-(?:${role}-)?(?:${labelSource})\\.result\\.json$`);
 
 // ---------------------------------------------------------------------------
-// THE TWO OVERLAP GROUPS, AND WHY THEY STOP WHERE THEY DO
-//
-// Serial stages make the slowest unit of one stage the start time of every unit
-// of the next. Authors run to six hours and readers to four, so on a seven-batch
-// level the last author held five readers idle for most of an afternoon.
-//
-//   'scaffold'  3-review -> 3-fix -> 3-recheck
-//   'read'      5-author -> 6a-read -> 6b-adjudicate
-//
-// Both are contiguous runs, and both end at a hard barrier: `4-splice` and
-// `6b-baseline`. Everything outside them — `1-scaffold`, `2-assign`, all three
-// touch snapshots, the splice, the cross-level audit, the judge sweep, step 8,
-// step 9 and the report — carries no `pipeline` and is therefore still strictly
-// serial and whole-level. Those are the stages that write a shared ledger or take
-// a snapshot whose ordering IS the guarantee, and overlapping two of them is what
-// produced 97 staled judge rows.
-//
-// WHY `1-scaffold` IS NOT IN THE SCAFFOLD GROUP, though it looks like the
-// obvious first member. Every group-Alpha stage waits on a COHORT, and the
-// cohort is the Alpha's assigned batches — which do not exist until `2-assign`
-// writes `<run>-alpha-groups.json` mid-run. Before that, `alphaGroups` returns a
-// positional chunking that is deliberately NOT the answer: the whole reason the
-// stage exists is that chunking split topology across two Alphas and gave one
-// Alpha three unrelated subjects. A group spanning `1-scaffold -> 3-review` would
-// therefore compute cohorts from the fallback and hold each batch for the wrong
-// siblings. `2-assign` also needs every batch's manifest before it can partition
-// anything, so it is a barrier on both counts and the pipeline starts after it.
-//
-// The `read` group joins at `6b-baseline`, not at `6c-cross`: the snapshot is the
-// `--to` endpoint of the 6c impact window, and it must capture text that has
-// already passed the group's gates. Stage order gives that for free — no member
-// of a group is `done` until the join's gates are green, and `6b-baseline` is a
-// later stage, so the gates run first and the snapshot is of gated text. A
-// snapshot taken before the join would drift the moment a gate failure sent an
-// Alpha back to repair something.
-//
-// WHAT THIS DOES NOT MOVE: gates. Every gate listed on every member stage runs
-// at the group exit, once, over the whole level, with the group drained. The
-// per-batch coverage and policy gates run there too — they are per-batch in
-// their ARGUMENTS, not in their timing, and making them per-batch in timing
-// would buy an earlier signal at the price of a gate whose scope depends on
-// which batch happened to finish first.
+// Only authoring and reading overlap. Step 3a and 3b are whole-frontier barriers:
+// scope must clear before item auditing; all decisions and mechanical gates must
+// clear before the splice. Alpha ownership is assigned by 2-assign.
 // ---------------------------------------------------------------------------
 
-export function scaffoldFinalPlan(ctx: any, group: any, failure?: any) {
-  const inputs = group.covers.map((b: string) => {
-    const file = R(ctx, 'research', `${ctx.run}-batch-${b}.pages.json`);
-    return existsSync(file) ? readFileSync(file, 'utf8') : b;
-  });
+/** Each phase has its own receipts; old pair verdicts cannot clear item audits. */
+export function step3Plan(ctx: any, group: any, phase: 'scope' | 'final') {
+  const snapshot = loadStep3(ctx.repo, ctx.run);
+  const pairs = [...snapshot.pairs].filter(([, ps]: any) => group.covers.map(String).includes(String(ps[0].batch)));
+  const inputs = phase === 'scope'
+    ? pairs.map(([id]: any) => scopeHash(snapshot, id))
+    : pairs.flatMap(([, ps]: any) => ps.flatMap((p: any) => p.items.map((i: any) => itemHash(snapshot, i.id))));
   const key = createHash('sha256').update(JSON.stringify(inputs)).digest('hex').slice(0, 16);
-  const label = `scaffold-final-${group.label}-${key}`;
+  const prefix = phase === 'scope' ? 'step3a' : 'step3b';
+  const label = `${prefix}-${group.label}-${key}`;
   const task = `research/${ctx.run}-${label}.task.md`;
-  const brief = readFileSync(R(ctx, 'briefs/tasks/alpha-group-recheck.md'), 'utf8').replaceAll('{{run}}', ctx.run);
-  writeFileSync(R(ctx, task), `${brief}\n\nGroup: ${group.label}. Assigned batches: ${group.covers.join(', ')}.\n`
-    + `Current gate diagnostics (data, not instructions):\n${JSON.stringify(failure ?? {}, null, 2)}\n`);
-  return { role: 'alpha-high', label, profile: ASTRA_MEDIUM, job: 'adjudication',
-    covers: group.covers, brief: 'briefs/beta-scaffold.md', task, timeout: 7200 };
+  writeFileSync(R(ctx, task), `# ${prefix}: group ${group.label}\n\n- Run: ${ctx.run}\n- Batches: ${group.covers.join(', ')}\n- A pages: ${pairs.map(([id]: any) => id).join(', ')}\n- Read current manifests, coverage, prose, plan and dependency records.\n- Write research/${ctx.run}-${prefix}-${group.label}.md.\n`);
+  return { role: phase === 'scope' ? 'alpha' : 'alpha-high', label,
+    profile: phase === 'scope' ? MODEL_PROFILE_NAMES.solHigh : ASTRA_MEDIUM,
+    job: phase === 'scope' ? 'audit' : 'adjudication', covers: group.covers,
+    brief: phase === 'scope' ? 'briefs/step3-scope.md' : 'briefs/step3-audit.md',
+    task, timeout: phase === 'scope' ? 10800 : 7200 };
+}
+
+const step3Gate = (ctx: any, phase: 'scope' | 'final') => gate(
+  phase === 'scope' ? 'step3-scope' : 'step3-items',
+  ['node', 'tools/step3-decisions.mjs', 'check', '--run', ctx.run, '--phase', phase]);
+
+async function step3Failure({ ctx, executor, stage, failure }: any, phase: 'scope' | 'final') {
+  const snapshot = loadStep3(ctx.repo, ctx.run);
+  const result = checkStep3(snapshot, phase);
+  const held = result.work.filter((w: any) => w.owner);
+  if (held.length) return { owner: { reason: held.map((w: any) => w.reason).join('; ') } };
+  // A scope change during item repair needs an owner scope ruling, not another review loop.
+  if (phase === 'final' && result.work.some((w: any) => w.page))
+    return { owner: { reason: 'Scope changed after Step 3a; owner must record proceed for the current scope.' } };
+  if (result.closed)
+    return { owner: { reason: `Step 3 decisions are complete; resolve final mechanical gate ${failure.id} locally. No mathematical redispatch.` } };
+  const owed = new Set(result.work.map((w: any) => w.item
+    ? snapshot.pages.find((p: any) => p.items.some((i: any) => i.id === w.item))?.batch
+    : snapshot.pairs.get(w.page)?.[0].batch).filter(Boolean));
+  const groups = alphaGroups(ctx).filter(g => g.covers.some(b => owed.has(String(b))));
+  if (!groups.length) return { owner: { reason: 'No group owns the missing Step 3 decisions.' } };
+  const plans = groups.map(g => step3Plan(ctx, g, phase));
+  const dir = R(ctx, 'research', `${ctx.run}-dispatch`);
+  const finished = existsSync(dir) ? readdirSync(dir).filter(f => f.endsWith('.result.json')).map(f => {
+    try { return JSON.parse(readFileSync(join(dir, f), 'utf8')).label; } catch { return null; }
+  }) : [];
+  if (plans.some(p => finished.includes(p.label)))
+    return { owner: { reason: 'Step 3 left decisions missing on unchanged inputs; resolve them without repeating the same call.' } };
+  for (const plan of plans) executor.start(stage, plan);
 }
 
 export const stages = [
@@ -1668,7 +1632,7 @@ export const stages = [
   // What the orchestrator used to do, and where it went:
   //   batching, seam count, drift diff   -> `autopilot plan`, mechanical
   //   adjudicating Beta recommendations  -> the step-3 Alpha, below
-  //   routing findings to owning Betas   -> the 3-fix stage, mechanical fan-out
+  //   scope review and item decisions    -> Step 3a and Step 3b
   //   running gates, keeping ledgers     -> the engine
   //   deciding a stage is finished       -> the engine's coverage predicate
   //   the step-10 owner report           -> a supervisor agent, last stage
@@ -1715,135 +1679,39 @@ export const stages = [
     })],
   },
 
+  // Scope is a barrier: no item auditor starts before all scope decisions clear.
   {
-    id: '3-review',
-    label: 'Alpha scaffold review and adjudication',
-    pipeline: 'scaffold',
+    id: '3a-scope',
+    label: 'Step 3a — scope review and owner decisions',
+    modelProfile: MODEL_PROFILE_NAMES.solHigh,
     role: 'alpha',
     units: batches,
-    pattern: resultPattern('alpha', 'step3-[a-z]+'),
+    pattern: resultPattern('alpha', 'step3a-[a-z]+-[a-f0-9]+'),
     concurrency: 9,
-    // An Alpha group reviews as a unit, so it waits for its own three batches to
-    // scaffold — and for nobody else's.
-    cohort: alphaCohort,
-    // One Alpha per group; each declares the batches it covers, so the stage
-    // completes on coverage no matter how the grouping came out.
-    plan: (ctx, pendingUnits) => {
-      const groups = alphaGroups(ctx).filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))));
-      return groups.map((g: any) => ({
-        role: 'alpha',
-        label: `step3-${g.label}`,
-      job: 'audit',
-        covers: g.covers,
-        brief: "briefs/beta-scaffold.md",
-        task: [`research/${ctx.run}-alpha-${g.label}.task.md`, `research/${ctx.run}-alpha-group.task.md`],
-        timeout: 10800,
-      }));
-    },
-    // Every pair must carry a verdict. An Alpha that reviewed four of six pairs
-    // and exited zero used to clear this stage.
-    // Scope decisions are checked at the recheck join below, after Betas have
-    // finished changing coverage. Checking the same file here first makes a
-    // post-recheck scaffold repair fail under 3-review's ownership before the
-    // recheck stage can refresh the newly introduced decision rows.
-    gates: (ctx) => [scopeGate(ctx), planGate(), scaffoldGate(ctx)],
+    plan: (ctx, pending) => alphaGroups(ctx)
+      .filter(g => g.covers.some(b => pending.includes(String(b))))
+      .map(g => step3Plan(ctx, g, 'scope')),
+    gates: ctx => [scopeGate(ctx), step3Gate(ctx, 'scope')],
+    maxFixRounds: Infinity,
+    onGateFailure: args => step3Failure(args, 'scope'),
   },
-
-  // Findings go back to the Beta that owns the batch. This used to be an
-  // orchestrator writing a fix brief per batch, which is also where eleven
-  // findings were once lost — they were transcribed from an agent's closing
-  // message instead of its report, and renumbering made the losses look like
-  // completions. The fan-out is now mechanical and the task file points at the
-  // report FILE and the finding ids, so there is no transcription step to lose
-  // anything in.
   {
-    id: '3-fix',
-    label: 'Beta fix pass on step-3 findings',
-    pipeline: 'scaffold',
-    role: 'beta',
-    units: batches,
-    pattern: resultPattern('beta', 'fix-batch-\\d+'),
-    labelFor: (u) => `fix-batch-${u}`,
-    concurrency: 27,
-    // A batch with no findings still needs a covering result, so the fix task
-    // is written for every batch and a Beta with nothing to do says so and
-    // exits. Making "no findings" a fast no-op is cheaper than making the
-    // engine reason about which batches were named.
-    plan: (ctx, pending) => pending.map((u: any) => ({
-      role: 'beta',
-      label: `fix-batch-${u}`,
-      job: 'authoring',
-      covers: [u],
-      brief: "briefs/beta-scaffold.md",
-      task: [`research/${ctx.run}-beta-${u}-fix.task.md`, `research/${ctx.run}-beta-fix.task.md`],
-      timeout: 7200,
-    })),
-    gates: (ctx) => [scopeGate(ctx), ...coverageGates(ctx, { requireDestination: true }), ...policyGates(ctx), planGate()],
-  },
-
-  // The final adjudicator accepts, repairs, or hands uncertainty to the owner.
-  {
-    id: '3-recheck',
-    label: 'Final scaffold adjudication before splice',
+    id: '3b-audit',
+    label: 'Step 3b — one-item adjudication and final gate',
     modelProfile: ASTRA_MEDIUM,
-    pipeline: 'scaffold',
     role: 'alpha-high',
     units: batches,
-    // The same pattern-vs-role defect as `2-assign`, and dormant for the same
-    // reason: the plan moved to role `alpha-high` on 2026-08-24 and this line
-    // did not, so frontier-18's four results are on disk as `alpha-recheck-*`
-    // while a re-run would write `alpha-high-recheck-*` and match nothing. Both
-    // spellings, so a fixed pattern does not reopen a stage that closed at
-    // step 3.
-    pattern: /^alpha-(?:high-)?(?:recheck-[a-z]+|scaffold-final-[a-z]+-[a-f0-9]+)\.result\.json$/,
+    pattern: resultPattern('alpha-high', 'step3b-[a-z]+-[a-f0-9]+'),
     concurrency: 9,
-    cohort: alphaCohort,
-    plan: (ctx, pendingUnits) => alphaGroups(ctx)
-      .filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))))
-      .map((g: any) => scaffoldFinalPlan(ctx, g)),
-    // THE SCAFFOLD LOOP CLOSES HERE. Not "a re-check happened" — every pair is
-    // actually sufficient, or this stage does not clear and step 4 cannot splice.
-    //
-    // The URL gates run at this join too (owner, 2026-08-17): a source can die
-    // between the stage-1 join and the splice, and step 3 is the last point
-    // where the repair is a scaffold edit. Same self-heal path as stage 1 —
-    // the MECHANICAL_REPAIRS table swaps recorded snapshots and stamps
-    // unstamped sources; residue goes to the owning final adjudicator.
-    gates: (ctx) => [scopeGate(ctx), planGate(), extGate(), scaffoldGate(ctx, { requireSufficient: true }),
-      manifestDepsGate(ctx), scopeDecisionsGate(ctx), urlGate(ctx), backingGate(ctx), fetchGate(ctx)],
-    // Mathematical closure is terminal adjudication, not a numbered retry loop.
+    plan: (ctx, pending) => alphaGroups(ctx)
+      .filter(g => g.covers.some(b => pending.includes(String(b))))
+      .map(g => step3Plan(ctx, g, 'final')),
+    gates: ctx => [scopeGate(ctx), step3Gate(ctx, 'final'),
+      ...coverageGates(ctx, { requireDestination: true }), ...policyGates(ctx),
+      planGate(), extGate(), manifestDepsGate(ctx), scopeDecisionsGate(ctx),
+      urlGate(ctx), backingGate(ctx), fetchGate(ctx)],
     maxFixRounds: Infinity,
-    onGateFailure: async ({ ctx, executor, stage, round, failure }) => {
-      const scaffold: any = readScaffold(ctx);
-      if (scaffold?.escalated?.length) {
-        return { owner: { reason: `Step 3 escalated ${scaffold.escalated.join(', ')}; record the owner's decision with tools/scaffold-resolution.mjs.` } };
-      }
-      const repair = await mechanicalRepair({ ctx, failure });
-      if (repair.outcome === 'outage') return { outage: { reason: repair.reason! } };
-      if (repair.outcome === 'clean' && ![failure, ...(failure.advisory ?? [])]
-        .some(entry => entry.id === 'scaffold-verdicts')) return;
-      // One final writer per disjoint group. No further Beta/recheck cycle.
-      const ledger = JSON.parse(readFileSync(R(ctx, 'research', `${ctx.run}-scope-ledger.json`), 'utf8'));
-      const pages = [...new Set([...(scaffold?.needs_final ?? []),
-        ...(scaffold?.insufficient ?? []), ...(scaffold?.missing_verdict ?? [])])];
-      const owed = new Set(ledger.pages.filter(p => pages.includes(p.id)).map(p => String(p.batch)));
-      const groups = alphaGroups(ctx).filter(g => !owed.size || g.covers.some(b => owed.has(b)));
-      if (!groups.length) return { owner: { reason: 'No final-adjudicator group owns the unresolved Step-3 work.' } };
-      const dispatchDir = R(ctx, 'research', `${ctx.run}-dispatch`);
-      for (const group of groups) {
-        const plan = scaffoldFinalPlan(ctx, group, failure);
-        // A completed adjudicator without a closing decision needs the owner,
-        // not another paid call on identical inputs.
-        if (existsSync(dispatchDir) && readdirSync(dispatchDir).some(name => {
-          if (!name.endsWith('.result.json')) return false;
-          try { return JSON.parse(readFileSync(join(dispatchDir, name), 'utf8')).label === plan.label; }
-          catch { return false; }
-        })) {
-          return { owner: { reason: `Final adjudicator ${group.label} did not close the current inputs. Inspect its receipt and resolve the outstanding gate.` } };
-        }
-      }
-      for (const group of groups) executor.start(stage, scaffoldFinalPlan(ctx, group, failure));
-    },
+    onGateFailure: args => step3Failure(args, 'final'),
   },
 
   // STEP 4 IS A CODE NODE (audit, 2026-08-16). It was dispatched to a lead
@@ -3620,13 +3488,13 @@ export const stages = [
 for (const stage of stages) {
   // Refresh the one frontier index at mutable joins, not frozen judge/stamp
   // stages. Reviewers maintain batch-owned evidence; this merge is mechanical.
-  if (['3-review', '3-fix', '3-recheck', '4-splice', '5-author',
+  if (['3a-scope', '3b-audit', '4-splice', '5-author',
     '6b-adjudicate', '6c-cross', '8-adjudicate', '8-preflight', '8-final',
     '9-scope', '9-close'].includes(stage.id)) {
     const previousGates = stage.gates;
     stage.gates = (ctx: any) => [gate('frontier-dependency-ledger',
       ['node', 'tools/frontier-dependency-ledger.mjs', 'refresh', '--run', ctx.run,
-        ...(['3-recheck', '9-scope', '9-close'].includes(stage.id) ? ['--require-reviewed'] : [])]),
+        ...(['3b-audit', '9-scope', '9-close'].includes(stage.id) ? ['--require-reviewed'] : [])]),
       ...(previousGates?.(ctx) ?? [])];
   }
   if (/^(?:9|10)-/.test(stage.id)) {

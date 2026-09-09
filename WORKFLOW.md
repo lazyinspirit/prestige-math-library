@@ -78,7 +78,8 @@ refuses populated manifests. Use generators rather than editing their outputs;
 | 0 — plan | `1-drift`, `1-drift-apply` | Reviewed prerequisites and synchronized scope/tasks |
 | 1 — scaffold | `1-scaffold` | Source-backed manifests, coverage, and fetch evidence |
 | 2 — assign | `2-assign` | Disjoint Alpha groups covering every batch, at most three batches each |
-| 3 — review | `3-review`, `3-fix`, `3-recheck` | Sufficient verdict for every pair |
+| 3a — scope | `3a-scope` | Sufficient scope or explicit owner approval for every pair |
+| 3b — audit | `3b-audit` | Current item decisions and final mechanical gates |
 | 4 — materialize | `4-splice`, `4-baseline` | Synchronized item inventory and pre-author snapshot |
 | 5 — author | `5-author` | All items/pages/contracts; full checks pass at the Step 6A join |
 | 6A — read | `6a-baseline`, `6a-read`, `6a-split`, `6a-refute`, `6a-collect` | Independent reading, refutation, and routed findings |
@@ -98,8 +99,8 @@ web access, sessions, and output capture. Stage profiles override role defaults.
 |---|---|
 | Step 1 scaffolding; Step 9 `step9-lead` | Astra / medium |
 | Step 5 authors and author recovery | Astra / medium |
-| Step 3 initial reviewers; Group Alpha (`alpha`) | Sol / high |
-| Step 3 final adjudicators and their gate recovery | Astra / medium |
+| Step 3a scope reviewers; Group Alpha (`alpha`) | Sol / high |
+| Step 3b item adjudicators | Astra / medium |
 | Step 6b adjudicators and their gate recovery | Astra / medium |
 | Step 8 adjudication | Sol / xhigh |
 | Step 8 final adjudication | Astra / medium |
@@ -161,9 +162,8 @@ gates or spending another repair round.
 Legacy results may use `coversMap`; when no result declares coverage, the
 coverage helper falls back to a result count. Artifact and gate checks still apply.
 
-Only these stage groups overlap by batch:
+Only this stage group overlaps by batch:
 
-- `3-review → 3-fix → 3-recheck`
 - `5-author → 6a-baseline → 6a-read → 6a-split → 6a-refute → 6a-collect`
 
 A successor waits for its batch; group Alpha waits for its whole group.
@@ -239,34 +239,35 @@ requires no open rows.
 
 ## Repairs and controls
 
-### Step-3 final decisions
+### Step 3: scope, item audit, final gate
 
-After the initial review and Beta fix, the final adjudicator accepts the
-scaffold, repairs it itself, or escalates to the owner. Repair is permitted
-only with 100% confidence in its ability to resolve the defect; otherwise it
-must escalate. There is no three-round mathematical repair cap and no return
-to a Beta/recheck loop. An unresolved final call on unchanged scaffold inputs
-also holds for the owner instead of buying another call.
+- **3a — Sol/high group Alpha:** review each pair's scope against its prose design and source coverage. Record sufficient or insufficient. Insufficient scope stops for the owner; reviewers cannot enrich, merge or override an escalation.
+- **Owner:** decide to proceed, merge pairs or enrich scaffolds. Apply amendments to manifests, coverage, prose, plan and scope records, then record proceed for the resulting pair. All pairs must clear 3a before 3b starts.
+- **3b — Astra/medium group Alpha:** audit one item at a time in prerequisite order. Accept, repair locally with 100% confidence, or escalate. Be unbiased, acknowledge uncertainty, and read authoritative sources for unfamiliar mathematics. Examine actual published, planned and frontier dependencies, including implicit uses; maintain cross-batch records.
+- **Owner:** resolve escalated items. Record an applied repair; otherwise hold. An adjudicator cannot replace an escalation, even after inputs change.
+- **Final gate — engine:** require current decisions for all items plus dependency, scope, policy, coverage, source, plan and frontier-ledger checks. Accepted, locally repaired and owner-repaired items receive no further mathematical adjudication on unchanged inputs. Mechanical failures hold for local resolution, not another review loop.
 
-Terminal decisions are recorded with `tools/scaffold-resolution.mjs` and bind
-to the current A/B manifests, pair coverage and corresponding plan entries.
-Legacy sufficient verdicts alone do not close the final gate. Changed inputs
-require a current decision. Source, dependency, scope and integrity gates still
-run; terminal decisions do not waive them or authorize published-proof edits.
+Use `tools/step3-decisions.mjs`. Scope receipts bind the pair's claims and
+inventory; item receipts bind the item and transitive declared/examined
+dependencies. Changed content invalidates affected approvals. Owner decisions
+remain owner-controlled. Hashing records currency, not mathematical adequacy.
 
-The owner's recorded decision overrides the adjudicator and is final for those
-inputs. Only the owner or an explicitly instructed operator may use `--owner`:
+Only the owner or an explicitly authorized operator may use `--owner`:
 
 ```bash
-node tools/scaffold-resolution.mjs record --run RUN --page A_PAGE --owner --decision accept --reason "Owner ruling"
-node tools/scaffold-resolution.mjs record --run RUN --page A_PAGE --owner --decision repaired --reason "Owner-directed repair applied"
-node tools/scaffold-resolution.mjs record --run RUN --page A_PAGE --owner --decision hold --reason "Decision still pending"
+node tools/step3-decisions.mjs record-scope --run RUN --page A_ID --owner --decision merge --reason "Owner merger decision; amendments pending"
+node tools/step3-decisions.mjs record-scope --run RUN --page A_ID --owner --decision enrich --reason "Owner enrichment decision; amendments pending"
+node tools/step3-decisions.mjs record-scope --run RUN --page A_ID --owner --decision proceed --reason "Owner approval of current scope"
+node tools/step3-decisions.mjs record-item --run RUN --item ITEM_ID --owner --decision repaired --dependencies '["SUPPLIER_ID"]' --reason "Applied repair and evidence"
+node tools/step3-decisions.mjs record-item --run RUN --item ITEM_ID --owner --decision hold --dependencies '[]' --reason "Unresolved issue"
+node tools/step3-decisions.mjs check --run RUN --phase final
 ```
 
-Escalation holds Step 3 without more mathematical dispatches until an owner
-decision or changed evidence resolves it. Provider/launch retry limits and all
-other stages' budgets are unchanged. The final task is generated from the
-current canonical template, not a stale run-specific recheck prompt.
+Active stages use `briefs/step3-scope.md` and `briefs/step3-audit.md`, not old
+run-specific recheck prompts. Historical `3-review/3-fix/3-recheck` results and
+`scaffold-resolution.mjs` receipts do not satisfy the new gates. A paused run
+entering these stages requires new scope and item decisions; upgrading code does
+not authorize resuming it. Launch/provider retry limits and other stages are unchanged.
 
 ### Phase-2 supplier boundary
 
@@ -278,8 +279,8 @@ must identify the owned item, actual dependency path, and affected premise;
 unlinked proof uses and well-definedness obligations count too. Reroute or
 prove those premises locally when possible. Never accept a defective actual
 supplier, waive the Foundations boundary, or replace independent verdicts with
-a graph traversal. Apply this rule through the Step-3 prompts and normal recheck,
-not by editing an insufficient verdict to sufficient.
+a graph traversal. Apply this rule through Step 3b and owner decisions; never
+rewrite an escalation as an adjudicator acceptance.
 
 ```bash
 autopilot pause --state-dir .autopilot/RUN
