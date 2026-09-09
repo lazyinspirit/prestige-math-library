@@ -20,6 +20,10 @@ fully understand the item and its dependencies. Never claim understanding you
 do not have. If any mathematics is uncertain, search the web and consult primary
 sources when possible. Repair the item only after resolving that uncertainty.
 
+Every workflow agent must be honest about its mathematical understanding.
+Whenever unsure, search the web and read authoritative sources before deciding.
+Report unresolved uncertainty; never invent proof completion or source reading.
+
 **5. Context continuity.** Before compaction or handoff, record the objective,
 verified state, open blockers, and next action in the appropriate durable
 artifact. After resuming, verify that record against disk. Never store
@@ -72,13 +76,25 @@ infer arbitrary-index choice from finite choice or DC. Keep choice-free
 arguments choice-free. This authorization does not permit using recorded
 results as suppliers or bypassing the Foundations bootstrapping boundary.
 
-**Step 6.** Use direct group adjudication of authored items/pages; there are no
-6A readers or refuters. Do not repeat Step 3's scaffold/scope audit. Be impartial,
+**Step 3.** Group authors audit scaffolds, repair local gaps, then author every
+assigned item and A/B page. They may add necessary definitions and lemmas to
+assigned existing A pages before consumers. Escalate substantial unmet
+prerequisites and unresolved mathematics to the owner. Report potentially
+defective published items with exact evidence for the canonical ledger.
+Do not drop claims, add pairs, override owner decisions or edit published items.
+Record complete authored arguments/contracts before closing item decisions.
+Step 4 retains mechanical plan splicing and its post-author snapshot; take the
+pre-author baseline before Step 3 authors start.
+
+**Step 5.** Use direct group adjudication of authored items/pages in 5a, then
+cross-group reconciliation and closure in 5b. Do not repeat Step 3's scaffold
+audit. Be impartial,
 state uncertainty honestly, and read authoritative sources for unfamiliar
 mathematics. Accept sound content or repair locally, fully authoring necessary
 definitions and lemmas in assigned existing A pages. Escalate substantial unmet
 prerequisites that cannot be supplied locally; never accept unresolved mathematics.
-Record every published defect in the canonical ledger. Preserve 6C/6D protocols.
+Record every published defect in the canonical ledger. Preserve cross-group
+dependency, impact and exact-hash closure checks.
 
 **12. Phase-3 repair ledger.** Throughout Phase 2, maintain
 `research/published-consumer-supplier-ledger.md` as the existing canonical

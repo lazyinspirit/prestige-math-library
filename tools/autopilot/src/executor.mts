@@ -140,7 +140,7 @@ export class Executor {
     // No dispatch has spawned yet, so the first one owes no wait.
     this.nextSpawnAt = 0;
     // EVENT-DRIVEN RE-VERIFICATION. A blocked stage's battery used to re-run
-    // every tick against unchanged inputs: frontier-15 ran the 7-judge battery
+    // every tick against unchanged inputs: frontier-15 ran the 6-judge battery
     // 29 times during one account outage, re-probing archive.org each pass.
     // `stateVersion` counts state-changing events (a dispatch ends, a repair
     // round runs, a control command lands, adoption reconciles); a battery
@@ -336,7 +336,7 @@ export class Executor {
     // This line used to read `Boolean(stage.gates) && stage.gates(ctx).length > 0`,
     // so a stage whose gate list came back empty — declared `() => []`, or built
     // from a batch list that happened to be empty — was recorded as "gates
-    // passed". `10-report` declared exactly that, which is why frontier-14
+    // passed". `9-report` declared exactly that, which is why frontier-14
     // finished with its receipt gate red, two unrepaired fatal defects and
     // sixteen unread rejections: the terminal stage had no way to say no.
     //
@@ -696,7 +696,7 @@ export class Executor {
     // explicitly: they drive stub adapters where there is nothing to pace, and
     // real sleeps there buy nothing but a slower suite.
     //
-    // 2s -> 3s ON EVIDENCE, not taste. frontier-18's step 5 dispatched all ten
+    // 2s -> 3s ON EVIDENCE, not taste. frontier-18's step 3 dispatched all ten
     // authors inside one millisecond — 05:29:51.794, .802, .805 — and every one
     // came back `API Error: 529 Overloaded`. Two full rounds of ten Sol[1m]
     // lanes were lost to a simultaneous boot before a single token of authoring
@@ -923,7 +923,7 @@ export class Executor {
         for (const [stageId, st] of Object.entries<any>(this.state.data.stages)) {
           if (st.doneAt) continue;
           const stage = this.stages.find((candidate: Stage) => candidate.id === stageId);
-          // Step 8's one paid Terra rejudge is a lifetime ceiling. `retry` is
+          // Step 7's one paid Terra rejudge is a lifetime ceiling. `retry` is
           // still useful after the owner/session resolves the terminal blocker:
           // it invalidates the battery cache and re-runs the gates, but it may
           // not quietly buy another paid context.
@@ -1048,11 +1048,11 @@ export class Executor {
     // so the engine would enter the next stage and start agents on top of live
     // work from the previous one.
     //
-    // On frontier-14 that was not theoretical. `7-judge`'s sweep was still
-    // running when `8-adjudicate` dispatched its Alpha. Every step-8 repair moved
+    // On frontier-14 that was not theoretical. `6-judge`'s sweep was still
+    // running when `7-adjudicate` dispatched its Alpha. Every step-7 repair moved
     // a pair's context hash, which re-armed the sweep on the item's untouched
     // page-mates; the ledger grew from 676 rows to 773 DURING adjudication, 26 of
-    // 29 fresh rejections were on items step 8 never touched, and 8 items flipped
+    // 29 fresh rejections were on items step 7 never touched, and 8 items flipped
     // pass to reject on byte-identical text from the same lane that had just
     // passed them. The engine manufactured the noise it then had to adjudicate.
     //
@@ -1210,7 +1210,7 @@ export class Executor {
       .filter((d: any) => d.meta.stage === stage.id)
       .flatMap((d: any) => d.meta.covers.map(String)));
     // Adoption must be scoped to THIS stage. A live dispatch covering unit 7
-    // for stage 6b says nothing about whether unit 7 is covered for stage 6a —
+    // for stage 5a says nothing about whether unit 7 is covered for stage preliminary —
     // and treating it as coverage blocked a reader re-run behind an adjudicator
     // that was already working on the same batch. Match the live label against
     // the stage's own result pattern.
@@ -1376,10 +1376,10 @@ export class Executor {
       // something that could change its verdict happened: a state event
       // (dispatch end, repair round, control command, adoption), a new or
       // changed result file from an EXTERNAL process, or an expired backoff
-      // clock. frontier-15 ran the 7-judge battery 29 times against unchanged
+      // clock. frontier-15 ran the 6-judge battery 29 times against unchanged
       // inputs during one account outage, re-probing archive.org each pass.
       // There is deliberately no clock-only backstop. Frontier-18 spent five
-      // hours re-running the same 22-gate Step-8 battery every 20 quiet ticks;
+      // hours re-running the same 22-gate Step-7 battery every 20 quiet ticks;
       // deterministic tools over unchanged bytes cannot produce a new answer.
       // A hand edit is re-armed by `autopilot retry`, and every engine-owned
       // mutation below already bumps state or the dispatch-dir fingerprint.
@@ -1416,7 +1416,7 @@ export class Executor {
         // alone keeps its authority — but the remaining gates now run in an
         // ADVISORY pass so one battery names every failure it can reach. On
         // frontier-15, defect-ledger and risk-report failed at the same
-        // 8-adjudicate join and were discovered SERIALLY: two repair
+        // 7-adjudicate join and were discovered SERIALLY: two repair
         // round-trips and an engine restart where one battery could have named
         // both. Advisory results feed the event log, a notify, and
         // `failure.advisory` for hooks; they never pass a stage and never
@@ -1447,7 +1447,7 @@ export class Executor {
         // `fixRounds` was initialised and never read. So the only thing a
         // failing gate could ever do was hold. On frontier-14 that meant two
         // confirmed-fatal proofs became a paragraph in a markdown report
-        // instead of an authoring dispatch, and the run went to step 10 with
+        // instead of an authoring dispatch, and the run went to step 9 with
         // them open.
         //
         // The hook also could not have worked as written: it fired only when
@@ -1530,7 +1530,7 @@ export class Executor {
    *
    * A hook that returns `{ outage }` gets its round REFUNDED and a clock set
    * instead. During the terra account limit on frontier-15, every judge
-   * re-sweep was a guaranteed null yet each consumed a round, and 7-judge
+   * re-sweep was a guaranteed null yet each consumed a round, and 6-judge
    * exhausted on work that could never have succeeded — the budget bounds
    * divergence, and an outage is not divergence. Both round-spending sites
    * (the gate-failure branch and the stalemate branch) go through here, so
@@ -1572,7 +1572,7 @@ export class Executor {
     return [...ids];
   }
 
-  /** `gateAttempts` key. Step 6b and 6c are separate reviews, so neither may
+  /** `gateAttempts` key. Step 5a and 5b are separate reviews, so neither may
    * spend the other's allowance for the same gate and subject. */
   private static attemptKey(stageId: string, gateId: string, item: string): string {
     return `${stageId}\u0000${gateId}\u0000${item}`;

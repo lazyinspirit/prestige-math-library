@@ -9,7 +9,7 @@ const REPO = process.env.AUTOPILOT_TEST_REPO ?? new URL('../../..', import.meta.
 const TOOL = join(REPO, 'tools', 'scope-decisions.mjs');
 const run = (root: string, args: string[]) => spawnSync(process.execPath, [TOOL, ...args, '--root', root], { encoding: 'utf8' });
 
-test('Step 3 decisions are exact and legacy Step 9 runs fall back to full review', () => {
+test('Step 3 decisions are exact and legacy Step 8 runs fall back to full review', () => {
   const root = mkdtempSync(join(tmpdir(), 'scope-decisions-'));
   const research = join(root, 'research');
   mkdirSync(research);
@@ -25,8 +25,8 @@ test('Step 3 decisions are exact and legacy Step 9 runs fall back to full review
   try {
     let result = run(root, ['prepare', '--run', 'demo']);
     assert.equal(result.status, 0, result.stderr);
-    assert.equal(JSON.parse(readFileSync(join(research, 'demo-step9-scope-delta.json'), 'utf8')).pending_count, 1,
-      'a run without Step 3 receipts receives a full Step 9 review');
+    assert.equal(JSON.parse(readFileSync(join(research, 'demo-step8-scope-delta.json'), 'utf8')).pending_count, 1,
+      'a run without Step 3 receipts receives a full Step 8 review');
 
     const receiptPath = join(research, 'demo-alpha-a-scope-decisions.json');
     assert.ok(readFileSync(receiptPath, 'utf8'), 'prepare refreshes group receipts after writing the delta');
@@ -39,7 +39,7 @@ test('Step 3 decisions are exact and legacy Step 9 runs fall back to full review
 
     result = run(root, ['delta', '--run', 'demo']);
     assert.equal(result.status, 0, result.stderr);
-    assert.equal(JSON.parse(readFileSync(join(research, 'demo-step9-scope-delta.json'), 'utf8')).pending_count, 0,
+    assert.equal(JSON.parse(readFileSync(join(research, 'demo-step8-scope-delta.json'), 'utf8')).pending_count, 0,
       'an exact unchanged Step 3 decision is not re-spent');
 
     const coverage = JSON.parse(readFileSync(join(research, 'demo-batch-1.coverage.json'), 'utf8'));
@@ -47,7 +47,7 @@ test('Step 3 decisions are exact and legacy Step 9 runs fall back to full review
     writeFileSync(join(research, 'demo-batch-1.coverage.json'), JSON.stringify(coverage));
     result = run(root, ['delta', '--run', 'demo']);
     assert.equal(result.status, 0, result.stderr);
-    assert.equal(JSON.parse(readFileSync(join(research, 'demo-step9-scope-delta.json'), 'utf8')).pending_count, 1,
+    assert.equal(JSON.parse(readFileSync(join(research, 'demo-step8-scope-delta.json'), 'utf8')).pending_count, 1,
       'a changed decline cannot reuse the old decision');
   } finally { rmSync(root, { recursive: true, force: true }); }
 });

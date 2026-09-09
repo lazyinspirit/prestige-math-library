@@ -20,7 +20,7 @@ import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { JUDGE_LINEUPS, DEFAULT_LINEUP, KNOWN_JUDGES } from './models.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
-import { parseTerminalResolutions, terminalResolutionIsCurrent } from './step8-terminal-resolution.mjs';
+import { parseTerminalResolutions, terminalResolutionIsCurrent } from './step7-terminal-resolution.mjs';
 import { buildCurrentContextHashes } from './context-hash-pool.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
@@ -42,7 +42,7 @@ const templatePath = option('--template');
 // --judge-only: the JUDGE CLOSURE half of this gate, on its own.
 //
 // The full gate needs a merged contract, a spine receipt and a completed audit
-// receipt, none of which exist at step 7 or step 8 — so the only place it could
+// receipt, none of which exist at step 6 or step 7 — so the only place it could
 // run was the very end of a build, which is exactly where frontier-14 found it
 // red with nothing left to do about it. Judge closure is answerable much
 // earlier: it needs the manifests, the ledger and the items on disk.
@@ -52,12 +52,12 @@ const templatePath = option('--template');
 // exact-hash adjudication matching) and a second implementation of it would
 // drift from this one and then disagree with it at 3am.
 const judgeOnly = argv.includes('--judge-only');
-// Step 7 runs before any adjudication exists, so an unadjudicated rejection is
+// Step 6 runs before any adjudication exists, so an unadjudicated rejection is
 // the expected state there, not a defect. It is a hard error everywhere else.
 const allowUnadjudicated = argv.includes('--allow-unadjudicated');
-// Step 8 repairs items, and a repaired item's text no longer matches the verdict
+// Step 7 repairs items, and a repaired item's text no longer matches the verdict
 // that condemned it — so it correctly has no current configured-model set. That is the rejudge
-// stage's input, not step 8's failure. Allowed only there; by the rejudge gate
+// stage's input, not step 7's failure. Allowed only there; by the rejudge gate
 // and every gate after it, an item with no current configured-model set is a hole.
 const allowPendingRejudge = argv.includes('--allow-pending-rejudge');
 const outPath = option('--out');
@@ -189,12 +189,12 @@ for (const file of batchFiles) {
   }
 }
 scope.sort();
-// The Step-8 terminal ledger is shared by run items and published dependencies
+// The Step-7 terminal ledger is shared by run items and published dependencies
 // repaired while reading them. A valid published-item resolution has no bearing
-// on this manifest's coverage and is closed by `step8-scope published`; treating
+// on this manifest's coverage and is closed by `step7-scope published`; treating
 // it as an error here would make the two legitimate closure routes poison each
 // other. Shape/dispatch/currency remain hard-gated by
-// `step8-terminal-resolution check`, while only ids in `scope` can contribute
+// `step7-terminal-resolution check`, while only ids in `scope` can contribute
 // to the coverage calculation below.
 let judgeScope = scope;
 if (judgeTargetsPath) {
@@ -364,12 +364,12 @@ const judgeOutcomeKey = (id, model, context) => `${id}\u0000${model}\u0000${cont
 if (judgeAdjudicationsPath) {
   if (!existsSync(resolvePath(judgeAdjudicationsPath))) {
     // An ABSENT ledger is an empty set of decisions, not a defect: at the
-    // step-7 exit no adjudication exists yet by construction — step 8 writes
+    // step-6 exit no adjudication exists yet by construction — step 7 writes
     // the first row — and hard-erroring here blocked frontier-15's sweep
     // with 784 verdicts on disk and nothing wrong. Every rejection still
     // reports as unadjudicated below, which is the real predicate, and
-    // --allow-unadjudicated is what distinguishes the step-7 gate from the
-    // closure gates that come after step 8. A file that EXISTS but cannot be
+    // --allow-unadjudicated is what distinguishes the step-6 gate from the
+    // closure gates that come after step 7. A file that EXISTS but cannot be
     // parsed stays a hard error — that is a broken ledger, not an empty one.
     warn('judge-adjudications-absent', `${judgeAdjudicationsPath} not yet written — zero adjudications assumed`);
   } else {
@@ -387,7 +387,7 @@ if (judgeAdjudicationsPath) {
       // SHAPE against the configured lineup makes a retired lane's rows
       // unwritable, which contradicts the standing rule that they stay
       // append-only evidence — and it cannot be repaired by the agent that hit
-      // it. frontier-18 step 8: `step8-scope` handed group d the five
+      // it. frontier-18 step 7: `step7-scope` handed group d the five
       // gpt-5.4 rejections still current on their frozen context, the
       // Alpha adjudicated all five correctly, and every row came back malformed.
       // Three repair rounds burned on rows no Alpha could have written any other
@@ -401,8 +401,8 @@ if (judgeAdjudicationsPath) {
         continue;
       }
       // R1 (owner, 2026-08-03): the text state the decision was made against.
-      // tools/step8-guard.mjs matches a confirmed_fatal row against it to decide
-      // whether a step-8 edit was licensed; without it a fatal row would license
+      // tools/step7-guard.mjs matches a confirmed_fatal row against it to decide
+      // whether a step-7 edit was licensed; without it a fatal row would license
       // every edit forever and a nonfatal polish could not be distinguished from
       // a fatal repair. Forward-looking: ledgers written before R1 do not carry
       // it, and their levels are published rather than re-gated.
@@ -411,7 +411,7 @@ if (judgeAdjudicationsPath) {
           `${judgeAdjudicationsPath}:${index + 1}: ${record.id} (${record.outcome}) needs item_sha256 in the ` +
           'GUARD form — the full sha256 of the item text with the WHOLE `verification:` block excluded ' +
           '(tools/item-hash.mjs `itemHashGuard`), as at adjudication time. That is the form ' +
-          'tools/step8-guard.mjs matches against a touchlog baseline. It is NOT the judge-ledger form: an ' +
+          'tools/step7-guard.mjs matches against a touchlog baseline. It is NOT the judge-ledger form: an ' +
           'item_sha256 on a verdict row excludes only the two-space-indented `judge:` sub-block ' +
           '(`itemHashJudge`), and the two never agree on the same file', record.id);
         continue;
@@ -463,12 +463,12 @@ if (verifyCurrent && judgePath) {
 // reading coverage; A7 supplies current rejudge evidence only for actual repairs.
 // Legacy rows predating item_sha256 fall back to (a) alone, which is strict.
 // The three closure sets, named so a later stage can act on them mechanically.
-// frontier-14's step 8 named its 23 rejudge targets in a markdown table, and the
+// frontier-14's step 7 named its 23 rejudge targets in a markdown table, and the
 // rejudge never ran: nothing downstream could read a table. A machine-readable
 // receipt is what turns "these need rejudging" into a dispatch.
 const needsRejudge = [];      // no current configured-model verdict — repaired, or never judged
 const unadjudicated = [];     // current rejection, no exact-hash Alpha outcome
-const unadjudicatedRows = []; // exact (id, model, context) work units for Step 8
+const unadjudicatedRows = []; // exact (id, model, context) work units for Step 7
 const openFatal = [];         // Alpha confirmed fatal against the text on disk
 const openFatalRows = [];     // exact current confirmed-fatal tuples for repair routing
 const judgeCoverage = [];
@@ -543,7 +543,7 @@ for (const id of judgePath ? judgeScope : []) {
       if (!outcome) {
         if (!unadjudicated.includes(id)) unadjudicated.push(id);
         unadjudicatedRows.push({ id, model, context_sha256: hash });
-        // Step 7 has not adjudicated anything yet; everywhere else this is a
+        // Step 6 has not adjudicated anything yet; everywhere else this is a
         // rejection nobody has read, which is not the same as a rejection
         // somebody decided was harmless.
         (allowUnadjudicated ? warn : error)('judge-adjudication-missing', `${id}: current ${model} rejection has no exact Alpha outcome for context ${hash}`, id);
@@ -572,7 +572,7 @@ if (outPath) {
     verified_against_current_context: verifyCurrent,
     scope: judgeScope.length,
     verdicts_complete: judgeCoverage.length,
-    // Legacy field retained while historical Step-10 receipts remain readable.
+    // Legacy field retained while historical Step-9 receipts remain readable.
     pairs_complete: judgeCoverage.length,
     terminal_resolved: terminalResolved.sort((a, b) => a.id.localeCompare(b.id)),
     needs_rejudge: needsRejudge.sort(),
@@ -622,8 +622,8 @@ else {
 process.exit(errors.length ? 1 : 0);
 
 function usage() {
-  console.error('usage: node tools/level-coverage.mjs --contracts <contracts.json> --judge-ledger <judge.jsonl> [--judge-adjudications <adjudications.jsonl>] [--terminal-resolutions <step8.jsonl>] [--audit --judge-targets <repair-targets.json>] --spine-receipt <spine.json> (--audit-receipt <receipt.json> | --template <receipt.json>) [--verify-current-context] research/level<n>-batch-*.pages.json [--json]');
+  console.error('usage: node tools/level-coverage.mjs --contracts <contracts.json> --judge-ledger <judge.jsonl> [--judge-adjudications <adjudications.jsonl>] [--terminal-resolutions <step7.jsonl>] [--audit --judge-targets <repair-targets.json>] --spine-receipt <spine.json> (--audit-receipt <receipt.json> | --template <receipt.json>) [--verify-current-context] research/level<n>-batch-*.pages.json [--json]');
   console.error('       judge closure alone (steps 7, 8, rejudge):');
-  console.error('       node tools/level-coverage.mjs --judge-only --verify-current-context --judge-ledger <judge.jsonl> [--judge-adjudications <adj.jsonl>] [--terminal-resolutions <step8.jsonl>] [--allow-unadjudicated] [--allow-pending-rejudge] [--out <closure.json>] research/<run>-batch-*.pages.json');
+  console.error('       node tools/level-coverage.mjs --judge-only --verify-current-context --judge-ledger <judge.jsonl> [--judge-adjudications <adj.jsonl>] [--terminal-resolutions <step7.jsonl>] [--allow-unadjudicated] [--allow-pending-rejudge] [--out <closure.json>] research/<run>-batch-*.pages.json');
   process.exit(2);
 }

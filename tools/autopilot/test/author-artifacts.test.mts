@@ -6,7 +6,7 @@ import { join } from 'node:path';
 
 import { authorArtifacts, stages } from '../stages/mathlib.mts';
 
-test('Step 5 requires every manifest-declared page and item, not only a contract', () => {
+test('Step 3 requires every manifest-declared page and item, not only a contract', () => {
   const root = mkdtempSync(join(tmpdir(), 'author-artifacts-'));
   try {
     mkdirSync(join(root, 'research'), { recursive: true });
@@ -31,7 +31,7 @@ test('Step 5 requires every manifest-declared page and item, not only a contract
       'items/ex-third.md',
     ];
     assert.deepEqual(authorArtifacts({ run: 'r', repo: root }, '1'), expected);
-    const author = stages.find((stage: any) => stage.id === '5-author') as any;
+    const author = stages.find((stage: any) => stage.id === '3b-author') as any;
     assert.deepEqual(author.artifacts({ run: 'r', repo: root }, '1'), expected);
   } finally {
     rmSync(root, { recursive: true, force: true });

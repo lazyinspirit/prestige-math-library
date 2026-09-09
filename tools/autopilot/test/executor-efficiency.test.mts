@@ -1,7 +1,7 @@
 // The event-driven battery, the advisory report-all pass, adoption
 // reconciliation, keyed blockers, and the stage-table hot reload.
 //
-// WHY, all from frontier-15's first end-to-end drive: the 7-judge battery ran
+// WHY, all from frontier-15's first end-to-end drive: the 6-judge battery ran
 // 29 times against unchanged inputs during one account outage (re-probing
 // archive.org each pass); defect-ledger and risk-report failed at the same
 // join and were discovered SERIALLY across two repair round-trips and a
@@ -273,7 +273,7 @@ test('retry re-arms the repair loop, not just the lanes', () => {
   assert.ok(notifications.some((n) => n.kind === 'retry-armed' && /repair rounds re-armed on 1 stage/.test(n.message)));
 });
 
-test('retry cannot reopen a terminal Step 8 repair budget', () => {
+test('retry cannot reopen a terminal Step 7 repair budget', () => {
   const fx = fixture();
   const stages = gatedStage(fx, [loggingGate(fx, 'g1')], {
     maxFixRounds: 2,

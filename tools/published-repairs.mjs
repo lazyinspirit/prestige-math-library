@@ -16,8 +16,8 @@ const opt = (name) => {
 const run = opt('run');
 const root = resolve(opt('root') ?? '.');
 const R = (...parts) => join(root, ...parts);
-const repairsPath = R('research', `${run}-step8-published-repairs.jsonl`);
-const claimsPath = R('research', `${run}-step6-published-claims.jsonl`);
+const repairsPath = R('research', `${run}-step7-published-repairs.jsonl`);
+const claimsPath = R('research', `${run}-step5-published-claims.jsonl`);
 const lockPath = R('research', `${run}-published-repairs.lock`);
 const wait = new Int32Array(new SharedArrayBuffer(4));
 
@@ -86,18 +86,18 @@ try {
     const incoming = Array.isArray(raw) ? raw : [raw];
     const existing = rows(repairsPath);
     const claims = rows(claimsPath);
-    const key = (row) => row.found_at_stage === '6a-read'
-      ? `step6:${row.step6_obligation}` : `step8:${row.kind}:${row.group}:${row.id}:${row.found_via}`;
+    const key = (row) => row.found_at_stage === '5a-adjudicate'
+      ? `step5:${row.step5_obligation}` : `step7:${row.kind}:${row.group}:${row.id}:${row.found_via}`;
     const keys = new Set(existing.map(key));
     for (const row of incoming) {
       if (!row || !['repaired', 'escalated'].includes(row.kind) || typeof row.id !== 'string'
         || typeof row.group !== 'string' || typeof row.found_via !== 'string') {
         throw new Error('each row requires kind repaired|escalated, id, group, and found_via');
       }
-      if (['6a-read', '6c-cross'].includes(row.found_at_stage)) {
+      if (['5a-adjudicate', '5b-cross'].includes(row.found_at_stage)) {
         const claim = claims.find((candidate) => candidate.id === row.id);
         if (!claim || row.repair_owner_group !== claim.group || row.pre_sha256 !== claim.pre_sha256) {
-          throw new Error(`${row.id} Step-6 receipt does not match its pre-edit ownership claim`);
+          throw new Error(`${row.id} Step-5 receipt does not match its pre-edit ownership claim`);
         }
       }
       const rowKey = key(row);

@@ -13,7 +13,7 @@ const beforeApply = argv.includes('--before-apply');
 if (!run) { console.error('usage: node tools/drift-review-check.mjs --run <run>'); process.exit(2); }
 
 const ledgerPath = `research/${run}-scope-ledger.json`;
-const reportPath = `research/${run}-alpha-step0-drift.md`;
+const reportPath = `research/${run}-alpha-step1-drift.md`;
 
 if (!existsSync(ledgerPath)) {
   console.error(`ERROR drift-check-no-ledger: ${ledgerPath} does not exist — run \`autopilot plan\``);

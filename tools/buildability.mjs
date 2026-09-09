@@ -1,4 +1,4 @@
-// The permanent page-buildability predicate shared by Step 0 and Stage 1.
+// The permanent page-buildability predicate shared by Planning and Stage 1.
 // A page with no same-category dependencies is vacuously fully published.
 // Otherwise the published share must be STRICTLY greater than 95%; exactly 95%
 // fails. Cross-category citation edges do not serialize category frontiers.

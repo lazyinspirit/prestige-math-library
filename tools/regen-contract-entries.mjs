@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Regenerate the `citations` and `derivations` of named proof-contract entries
 // from the current on-disk item text, preserving every other key (boundary,
-// risk_review, ...). Used at step 6 after Alpha repairs change Facts or steps.
+// risk_review, ...). Used at step 5 after Alpha repairs change Facts or steps.
 //
 //   node tools/regen-contract-entries.mjs <batch-contract.json> <id> [id ...]
 //

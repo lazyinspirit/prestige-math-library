@@ -13,7 +13,7 @@
 //
 // The one genuinely cognitive thing step 4 encountered was a `requires`
 // disagreement between a batch manifest and the plan. That is not spliceable
-// until an Alpha adjudicates it. Ordinary mode records a refusal; Step 6 may
+// until an Alpha adjudicates it. Ordinary mode records a refusal; Step 5 may
 // pass --accept-requires only after its exact adjudication gate has closed.
 //
 //   node tools/splice-plan.mjs --run <run> --batch <i> [--dry-run]
@@ -24,9 +24,9 @@
 // Idempotent: a page whose items are already spliced and identical is left
 // alone. A page whose items are already spliced and DIFFERENT is a hard error,
 // never a silent overwrite — unless `--update` says the difference is a
-// licensed in-flight change (a 6b/6c Alpha added or deleted an item in the
+// licensed in-flight change (a 5a/5b Alpha added or deleted an item in the
 // batch manifest) and the plan should follow it, loudly. `--accept-requires`
-// also reconciles the manifest's exact page prerequisite set after Step 6 has
+// also reconciles the manifest's exact page prerequisite set after Step 5 has
 // adjudicated that metadata carrier.
 //
 // `--verify` exists because the judge sweep expands its `--pages` into item
@@ -36,6 +36,23 @@
 // fails on any divergence, so the drift is loud before the sweep spends.
 
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
+import { loadStep3, checkStep3 } from './step3-decisions.mjs';
+
+// Step 3 group authors may insert local A-page definitions/lemmas. Existing
+// inventory must survive in order; current complete author decisions license
+// only these additions, never deletion, rehoming or a new pair.
+function authoredLocalAdditions(page, have, want) {
+  if (page.kind !== 'A') return false;
+  const old = new Set(have.map(idOf));
+  const retained = want.filter(i => old.has(idOf(i))).map(idOf);
+  if (JSON.stringify(retained) !== JSON.stringify(have.map(idOf))) return false;
+  const added = want.filter(i => !old.has(idOf(i)));
+  if (!added.length || added.some(i => !['definition', 'lemma'].includes(i.kind))) return false;
+  // Every new supplier must actually feed another item on this owned page.
+  if (added.some(i => !want.some(c => c.id !== i.id && (c.deps ?? []).includes(i.id)))) return false;
+  try { return checkStep3(loadStep3(process.cwd(), run), 'final').closed; }
+  catch { return false; }
+}
 
 
 const argv = process.argv.slice(2);
@@ -263,7 +280,7 @@ for (const b of batchList) {
         const changed = want.filter((w, k) => stable(w) !== stable(have[k])).map(idOf);
         console.log(`splice-plan: REFRESHING ${page.id} — same ids, ${changed.length} item object(s) changed: ${changed.join(', ')}`);
         itemsChanged = true;
-      } else if (!sameItems && update) {
+      } else if (!sameItems && (update || authoredLocalAdditions(page, have, want))) {
         // A licensed in-flight change: the manifest is the batch-level truth and
         // the plan follows it — loudly, with the delta on the record.
         const wantIds = want.map(idOf);

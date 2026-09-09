@@ -214,7 +214,7 @@ export async function doctor({ repo, run, stagesPath, config = {} as any }: { re
   //
   // A disposition and its ledger row are one act, and a run that confirmed fatal
   // defects while writing no rows has a ledger that is quietly not being kept —
-  // discovered, if at all, at step 10 when the rows can no longer be written
+  // discovered, if at all, at step 9 when the rows can no longer be written
   // from memory. `defect-ledger stats --coverage` computes the holes; the filter
   // to `run` is what makes it usable as a check.
   //

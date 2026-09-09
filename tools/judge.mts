@@ -216,6 +216,10 @@ Treat cited library items as correct, but reject an inaccurate restatement or an
 Library conventions:
 ${conventions}
 
+Be honest about your mathematical understanding. If unsure, search the web and
+read authoritative sources before deciding. State unresolved uncertainty in
+your verdict; never invent source reading or accept an argument you cannot verify.
+
 Return one minified JSON object and nothing else: {"keep":true|false,"reason":"specific finding or concise acceptance note"}. The reason must be at most 280 characters.`;
 
   const blocks = [
@@ -289,6 +293,7 @@ const runCodex = (model: string, prompt: string, timeoutMs: number): Promise<Cod
   const args = [
     'exec', '--ephemeral', '--model', model,
     '-c', 'model_reasoning_effort="xhigh"',
+    '-c', 'tools.web_search=true',
     '-c', `model_context_window=${JUDGE_CONTEXT_WINDOW}`,
     '-c', 'model_auto_compact_token_limit=200000',
     '-c', 'model_auto_compact_token_limit_scope="total"',

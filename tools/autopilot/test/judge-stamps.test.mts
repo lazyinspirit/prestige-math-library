@@ -1,11 +1,11 @@
 // apply-judge-stamps: the build route's stamp/verify contract, and the two
 // defects the frontier-15 publish surfaced.
 //
-// WHY. frontier-15 fully closed at 10-commit with every gate green and 0 of
+// WHY. frontier-15 fully closed at 9-commit with every gate green and 0 of
 // 398 items carrying `verification.judge` — no stage owned the stamping act,
 // and when the owner ran the tool by hand it first refused the ledger (retired
 // Terra rows made a third lane under the exactly-two check) and then stamped
-// nothing (clause-(a)-only currency read every step-9-moved pair as unjudged).
+// nothing (clause-(a)-only currency read every step-8-moved pair as unjudged).
 // The owner rewrote both (2026-08-17); these tests lock the rewrite, the
 // `--verify` gate mode built on it, and the `${current}` ReferenceError the
 // rewrite left in the audit-targeted evidence block.

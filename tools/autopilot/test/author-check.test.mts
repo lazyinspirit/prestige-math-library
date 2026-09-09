@@ -5,7 +5,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { checkAuthor, authorInputs } from '../../author-check.mts';
 
-test('author diagnostics retain all failures and detect changed inputs without a 6A stage', async () => {
+test('author diagnostics retain all failures and detect changed inputs without a preliminary stage', async () => {
   const repo = mkdtempSync(join(tmpdir(), 'author-check-'));
   try {
     for (const dir of ['research','items','library/test','tools']) mkdirSync(join(repo, dir), { recursive: true });

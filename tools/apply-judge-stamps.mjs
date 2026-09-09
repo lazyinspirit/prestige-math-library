@@ -5,7 +5,7 @@
 //   node tools/apply-judge-stamps.mjs --ledger research/audit/wave0-judge.jsonl \
 //     --manifests research/audit/wave0-a.pages.json,... [--apply] [--report out.json]
 //
-// `--verify` is the engine's GATE mode (the `judge-stamps` gate at 10-close):
+// `--verify` is the engine's GATE mode (the `judge-stamps` gate at 9-close):
 // change nothing, exit 1 unless the frontmatter already carries every stamp the
 // ledger licenses — and no pass block the current verdicts contradict. At
 // closure `level-coverage --verify-current-context` has already passed, so an
@@ -59,7 +59,7 @@ import { tsxLoader } from './paths.mjs';
 import { itemHashJudge } from './item-hash.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
 import { JUDGE_LINEUPS, DEFAULT_LINEUP } from './models.mjs';
-import { parseTerminalResolutions, terminalResolutionIsCurrent } from './step8-terminal-resolution.mjs';
+import { parseTerminalResolutions, terminalResolutionIsCurrent } from './step7-terminal-resolution.mjs';
 
 const argv = process.argv.slice(2);
 const value = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : ''; };
@@ -74,7 +74,7 @@ const verify = argv.includes('--verify');
 const ordinaryScopes = [manifestsArg, itemsArg, targetedReceiptPath].filter(Boolean);
 if (!ledgerPath || ordinaryScopes.length !== 1
   || (verify && (apply || targetedReceiptPath))) {
-  console.error('usage: node tools/apply-judge-stamps.mjs --ledger <judge.jsonl> (--manifests <a.pages.json,...> | --items <item-a,item-b> | --audit-targeted-rejudges <targeted-rejudge-receipt.json>) [--terminal-resolutions <step8.jsonl>] [--verify] [--apply] [--report <out.json>]');
+  console.error('usage: node tools/apply-judge-stamps.mjs --ledger <judge.jsonl> (--manifests <a.pages.json,...> | --items <item-a,item-b> | --audit-targeted-rejudges <targeted-rejudge-receipt.json>) [--terminal-resolutions <step7.jsonl>] [--verify] [--apply] [--report <out.json>]');
   process.exit(2);
 }
 
@@ -286,7 +286,7 @@ for (const id of ids) {
   // Currency is tools/judge-currency.mjs, the predicate level-coverage.mjs and
   // judge-sweep.mjs already share: a verdict is current against the CURRENT pair
   // context, or against byte-identical text of that item (owner, 2026-08-06).
-  // This tool read clause (a) alone, so on a level where any step-9 repair moved
+  // This tool read clause (a) alone, so on a level where any step-8 repair moved
   // a page's pair context every untouched page-mate stamped as unjudged — 0 of
   // 398 on frontier-15, while the receipt gate read all 398 as covered. Three
   // readings of one rule was the defect judge-currency.mjs was written to end.

@@ -1,4 +1,4 @@
-# Step 9 — whole-level receipts, `{{run}}`
+# Step 8 — whole-level receipts, `{{run}}`
 
 Before writing receipts, reconcile every proof-bearing manifest item against its
 owning batch contract, including reused items. For missing entries, read the full
@@ -16,7 +16,7 @@ Generate `research/{{run}}-audit-coverage.json` with
 item-specific `plan_reconciliation` reason for every authored dependency delta.
 
 Run `level-coverage` with the contracts, judge ledger, adjudications,
-`--terminal-resolutions research/{{run}}-step8-terminal-resolutions.jsonl`,
+`--terminal-resolutions research/{{run}}-step7-terminal-resolutions.jsonl`,
 `--verify-current-context`, spine receipt, audit receipt, and all run manifests.
 Use the same complete scope when generating templates. Terminal resolutions are
 required evidence, not missing judge verdicts. Do not alter a receipt to conceal a

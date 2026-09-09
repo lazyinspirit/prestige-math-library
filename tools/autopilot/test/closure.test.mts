@@ -27,15 +27,15 @@ const base = (over: any = {}) => ({
 // --------------------------------------------------------------------------
 
 test('a terminal stage with an empty gate list is refused', () => {
-  const problems = validateStages([base({ id: '10-report', gates: () => [] })] as any, CTX);
+  const problems = validateStages([base({ id: '9-report', gates: () => [] })] as any, CTX);
   assert.ok(problems.length, 'a gateless terminal stage must not be accepted');
   assert.match(problems[0].message, /empty list|no `gates`/);
 });
 
 test('the terminal stage may not waive its gates, however good the reason', () => {
   const problems = validateStages([
-    base({ id: '9-x' }),
-    base({ id: '10-report', gates: undefined, gatesWaived: 'the report agent checks everything itself, honestly' }),
+    base({ id: '8-x' }),
+    base({ id: '9-report', gates: undefined, gatesWaived: 'the report agent checks everything itself, honestly' }),
   ] as any, CTX);
   assert.ok(problems.some((p) => /TERMINAL/.test(p.message)),
     `expected the terminal-stage rule to fire, got ${JSON.stringify(problems)}`);
@@ -71,9 +71,9 @@ test('the real mathlib table validates', async () => {
 
 test('every post-judge mathematical window ends at an exact closure boundary', async () => {
   // Requiring the same expensive closure gate on every mechanical/documentary
-  // stage made 8-scope repeat Step 7 over unchanged bytes and made 8-close ask
-  // for a Step-9 audit receipt that did not exist. Pin the safety property
-  // instead: every stage that can alter Step-8 mathematics is closed before the
+  // stage made 7-scope repeat Step 6 over unchanged bytes and made 7-close ask
+  // for a Step-8 audit receipt that did not exist. Pin the safety property
+  // instead: every stage that can alter Step-7 mathematics is closed before the
   // next window, and documentary finalisation is followed by one hard currency
   // stage with no repair hook capable of opening a fourth cycle.
   const mod = await import('../stages/mathlib.mts');
@@ -84,26 +84,26 @@ test('every post-judge mathematical window ends at an exact closure boundary', a
   const gateIds = (id: string) => (stage(id).gates?.(ctx) ?? []).map((gate: any) => gate.id);
   const closureArgv = (id: string) => (stage(id).gates?.(ctx) ?? [])
     .find((candidate: any) => candidate.id === 'judge-closure')?.argv ?? [];
-  assert.ok(gateIds('7-judge').includes('judge-closure'));
-  assert.ok(!gateIds('8-scope').includes('judge-closure'), 'unchanged Step-7 bytes are not rescanned at scope render');
-  for (const id of ['8-adjudicate', '8-preflight', '8-rejudge']) {
+  assert.ok(gateIds('6-judge').includes('judge-closure'));
+  assert.ok(!gateIds('7-scope').includes('judge-closure'), 'unchanged Step-6 bytes are not rescanned at scope render');
+  for (const id of ['7-adjudicate', '7-preflight', '7-rejudge']) {
     assert.ok(gateIds(id).includes('judge-closure'), `${id} must close its mathematical window`);
   }
-  assert.ok(!gateIds('8-close').includes('level-coverage'), 'Step-9 Alpha audit receipt is not available yet');
-  assert.deepEqual(gateIds('8-final'),
-    ['frontier-dependency-ledger', 'step8-guard', 'step8-published', 'step8-terminal-resolutions', 'judge-closure']);
-  assert.equal(stage('8-final').onGateFailure, undefined, 'final currency cannot trigger another repair/rejudge cycle');
-  assert.ok(stages.indexOf(stage('8-close')) < stages.indexOf(stage('8-final')));
-  assert.ok(stages.indexOf(stage('8-final')) < stages.indexOf(stage('8-freeze')));
+  assert.ok(!gateIds('7-close').includes('level-coverage'), 'Step-8 Alpha audit receipt is not available yet');
+  assert.deepEqual(gateIds('7-final'),
+    ['frontier-dependency-ledger', 'step7-guard', 'step7-published', 'step7-terminal-resolutions', 'judge-closure']);
+  assert.equal(stage('7-final').onGateFailure, undefined, 'final currency cannot trigger another repair/rejudge cycle');
+  assert.ok(stages.indexOf(stage('7-close')) < stages.indexOf(stage('7-final')));
+  assert.ok(stages.indexOf(stage('7-final')) < stages.indexOf(stage('7-freeze')));
 
-  for (const id of ['7-judge', '8-adjudicate', '8-preflight', '8-rejudge', '8-final',
-    '9-scope', '9-changes-judge', '9-close', '10-readiness-v2']) {
+  for (const id of ['6-judge', '7-adjudicate', '7-preflight', '7-rejudge', '7-final',
+    '8-scope', '8-changes-judge', '8-close', '9-readiness-v2']) {
     assert.ok(!closureArgv(id).includes('--judge-session-run'), `${id} must certify current item evidence, not chat identity`);
   }
 
   // Later mathematical change stages retain direct closure until final
   // readiness seals the tree; reporting/commit stages may then reuse that seal.
-  for (const id of ['9-scope', '9-changes-judge', '9-close', '9-changes-stamp', '9-receipt', '10-contract-close', '10-readiness-v2']) {
+  for (const id of ['8-scope', '8-changes-judge', '8-close', '8-changes-stamp', '8-receipt', '9-contract-close', '9-readiness-v2']) {
     const ids = gateIds(id);
     assert.ok(ids.includes('judge-closure') || ids.includes('level-coverage'), `${id} lacks direct closure`);
   }
@@ -114,7 +114,7 @@ test('final readiness runs whole-level closure once and terminal close verifies 
   const repo = process.env.AUTOPILOT_TEST_REPO ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
   const ctx: any = { run: 'frontier-14', repo };
   const stage = (id: string): any => mod.stages.find((candidate: any) => candidate.id === id);
-  const readinessGates = stage('10-readiness-v2').gates(ctx);
+  const readinessGates = stage('9-readiness-v2').gates(ctx);
   const levelCoverage = readinessGates.find((gate: any) => gate.id === 'level-coverage');
   assert.ok(levelCoverage, 'final readiness owns the complete level scan');
   assert.ok(levelCoverage.argv.includes('--verify-current-context'),
@@ -123,7 +123,7 @@ test('final readiness runs whole-level closure once and terminal close verifies 
     'final readiness must not repeat the judge-only subset of level coverage');
   assert.ok(readinessGates.some((gate: any) => gate.id === 'publication-readiness'));
 
-  const closeGates = stage('10-close-v2').gates(ctx).map((gate: any) => gate.id);
+  const closeGates = stage('9-close-v2').gates(ctx).map((gate: any) => gate.id);
   assert.ok(closeGates.includes('report-integrity'), 'terminal close must reject protected-tree changes');
   assert.ok(closeGates.includes('publication-readiness'), 'terminal close must verify the sealed readiness receipt');
   assert.ok(closeGates.includes('tree-clean'), 'terminal close must verify the committed tree');
@@ -217,7 +217,7 @@ test('the repair loop stops at the cap instead of spending forever', async () =>
 // --------------------------------------------------------------------------
 
 test('the closure receipt names the work, so a later stage can dispatch from it', () => {
-  // frontier-14's step 8 named its 23 rejudge targets in a markdown table. The
+  // frontier-14's step 7 named its 23 rejudge targets in a markdown table. The
   // rejudge never ran, because nothing downstream can read a table.
   const repo = process.env.AUTOPILOT_TEST_REPO ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
   if (!existsSync(join(repo, 'tools/level-coverage.mjs'))) return;

@@ -8,7 +8,7 @@ import { spawnSync } from 'node:child_process';
 const REPO = join(import.meta.dirname, '..', '..', '..');
 const TOOL = join(REPO, 'tools', 'published-repairs.mjs');
 
-test('one published item has one pre-edit Step-6 repair owner', () => {
+test('one published item has one pre-edit Step-5 repair owner', () => {
   const root = mkdtempSync(join(tmpdir(), 'published-repair-'));
   try {
     mkdirSync(join(root, 'research'));
@@ -21,7 +21,7 @@ test('one published item has one pre-edit Step-6 repair owner', () => {
     const competing = claim('b');
     assert.equal(competing.status, 3);
     assert.match(competing.stderr, /owned by group a/);
-    const claims = readFileSync(join(root, 'research', 'r-step6-published-claims.jsonl'), 'utf8')
+    const claims = readFileSync(join(root, 'research', 'r-step5-published-claims.jsonl'), 'utf8')
       .trim().split('\n').map((line) => JSON.parse(line));
     assert.equal(claims.length, 1);
     assert.equal(claims[0].group, 'a');
@@ -29,7 +29,7 @@ test('one published item has one pre-edit Step-6 repair owner', () => {
     const rowPath = join(root, 'row.json');
     writeFileSync(rowPath, JSON.stringify({
       kind: 'repaired', id: 'thm-published', group: 'b', repair_owner_group: 'a',
-      found_via: 'consumer-b', found_at_stage: '6a-read', step6_obligation: 'reader:2:1',
+      found_via: 'consumer-b', found_at_stage: '5a-adjudicate', step5_obligation: 'reader:2:1',
       pre_sha256: claims[0].pre_sha256,
     }));
     const append = spawnSync(process.execPath,

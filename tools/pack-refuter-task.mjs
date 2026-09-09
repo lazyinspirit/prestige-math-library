@@ -25,7 +25,7 @@ if (!run || !label || !out || !contractPath || !ids.length) {
   console.error('usage: --run <name> --label <name> --contracts <file> --items <id> --out <file> [--allow-multi]');
   process.exit(2);
 }
-// ONE item per dispatch. Measured on frontier-15: 7-item packs died
+// ONE item per dispatch. Measured on frontier-15: 6-item packs died
 // `finish_reason: length` with no report 5 times in 6; at 3 items 40 of 92
 // items still could not fit a reading in the output budget; a single item
 // (31 KB task) ran to exit 0 comfortably. A refuter that runs out of output

@@ -39,7 +39,7 @@ test('finite-smoke reports its coverage, not only a bare check count', (t) => {
 test('the url gate declares a liveness floor', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  const st = mod.stages.find((s: any) => s.id === '6c-cross');
+  const st = mod.stages.find((s: any) => s.id === '5b-cross');
   const g = st.gates(ctx).find((x: any) => x.id === 'url-liveness');
   assert.ok(g.liveness, 'zero collected URLs prints "0/0 live" and exits 0');
 });

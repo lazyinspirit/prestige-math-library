@@ -22,7 +22,7 @@
 //
 // `snap` records a full mathematical sha256 and a narrower public-interface
 // sha256 per items/*.md. Take one after EVERY stage that can modify items:
-// authoring, step-7 fixes, each step-8 batch audit, step-9 Alpha (the final
+// authoring, step-6 fixes, each step-7 batch audit, step-8 Alpha (the final
 // whole-level audit; the separate seam stage was removed 2026-07-28). The
 // interface hashes feed tools/impact-audit.mjs's downstream-consumer receipt.
 // `report` counts, per id, the snapshot-to-snapshot transitions whose hash
@@ -47,7 +47,7 @@ const load = () =>
   existsSync(ledgerPath) ? JSON.parse(readFileSync(ledgerPath, "utf8")) : { snapshots: [], seeded: [] };
 
 // Hash everything that a REPAIR would change, and nothing a STAMP would. That
-// normalization now lives in tools/item-hash.mjs, because tools/step8-guard.mjs
+// normalization now lives in tools/item-hash.mjs, because tools/step7-guard.mjs
 // must answer "did the mathematics change?" identically — see that file for why
 // the `verification:` block is excluded and everything else is kept.
 
@@ -92,9 +92,9 @@ if (cmd === "snap") {
   // A LABEL IS A KEY, SO A DUPLICATE SILENTLY MOVES A BASELINE.
   //
   // Every consumer resolves a label to ONE snapshot — `impact-audit --from/--to`
-  // and `step8-guard --baseline` both do — and with two rows carrying the same
-  // label the later one wins. On frontier-17 a step-8 recovery Alpha re-used
-  // `pre-step8` after 47 of the 48 repairs had landed, and `step8-guard` went
+  // and `step7-guard --baseline` both do — and with two rows carrying the same
+  // label the later one wins. On frontier-17 a step-7 recovery Alpha re-used
+  // `pre-step7` after 47 of the 48 repairs had landed, and `step7-guard` went
   // from reporting "48 changed, 48/48 licensed" to "1 changed, 1/1 licensed".
   // No unlicensed edit existed — that was verified against the original
   // baseline before the duplicate was written — but the guard could no longer
@@ -103,7 +103,7 @@ if (cmd === "snap") {
   // until now, with a live instance behind it.
   //
   // A hard refusal rather than an auto-suffix: the caller asked for a name that
-  // already means something, and quietly renaming it to `pre-step8-2` leaves
+  // already means something, and quietly renaming it to `pre-step7-2` leaves
   // both the caller and every later reader guessing which one their tool
   // resolved. Choosing the new name is a decision, not a default.
   const prior = (led.snapshots ?? []).filter((s) => s.label === label).at(-1);
@@ -117,7 +117,7 @@ if (cmd === "snap") {
       process.exit(0);
     }
     die(`snapshot label "${label}" already exists (recorded ${prior.at}). A label is a key: ` +
-        `impact-audit and step8-guard resolve one label to one snapshot, and a second row with ` +
+        `impact-audit and step7-guard resolve one label to one snapshot, and a second row with ` +
         `this name would silently move their baseline forward past the edits it is meant to ` +
         `bound. Choose a distinct label — round-qualify it, e.g. "${label}-round-2".`);
   }

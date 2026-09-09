@@ -47,8 +47,8 @@ const asJson = process.argv.includes('--json');
 const quiet = process.argv.includes('--quiet');
 // --pending-audit-ok: demote `published-unaudited` to a warning. This is allowed
 // only in bounded pre-certification windows: audit A4 (tools/gates.mjs), or
-// autopilot Step 6c after its final routing gate has validated the exact,
-// hash-bound published-repair handoff to Step 8. A material repair loses its
+// autopilot Step 5b after its final routing gate has validated the exact,
+// hash-bound published-repair handoff to Step 7. A material repair loses its
 // obsolete `audited` stamp, and the no-self-certification rule means only the
 // later independent reading may replace it. Everywhere else — including the
 // certification closure, where an EMPTY published-unaudited class is the

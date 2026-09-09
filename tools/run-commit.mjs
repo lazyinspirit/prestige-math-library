@@ -7,7 +7,7 @@
 //
 // Owner directive (2026-08-17): the workflow fully closes a run on the MAIN
 // branch — no worktrees, no feature branches — and committing the run's
-// working tree is the engine's job at 10-commit, so a `git clean` or a fresh
+// working tree is the engine's job at 9-commit, so a `git clean` or a fresh
 // clone can no longer lose sixteen page files and eighteen items that existed
 // only on disk (frontier-15 caveat 18). PUSH and `status: published` remain
 // owner acts: this tool refuses to push, and it never touches a status field.
@@ -68,7 +68,7 @@ if (receiptPath) {
   previousReceipt = existsSync(receiptPath) ? readFileSync(receiptPath) : null;
   mkdirSync(dirname(receiptPath), { recursive: true });
   writeFileSync(receiptPath, `${JSON.stringify({
-    role: 'tool', label: 'close-step10-v2', run, covers: ['all'], ok: true,
+    role: 'tool', label: 'close-step9-v2', run, covers: ['all'], ok: true,
     written_by: 'run-commit', ended_at: new Date().toISOString(),
   }, null, 2)}\n`);
   dirty = git('status', '--porcelain').split('\n').filter(Boolean);

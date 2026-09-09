@@ -13,7 +13,7 @@
 // A part is anchored to a LIST OF PAGES, never to a dependency level, because a
 // level is the longest prerequisite chain in the group and inserting one page
 // renumbers everything above it. A page list cannot drift that way; it can only
-// be incomplete, which is what this checks. `pathway-sync.mjs` at step 10 is
+// be incomplete, which is what this checks. `pathway-sync.mjs` at step 9 is
 // what keeps it from getting there.
 //
 // HARD ERRORS

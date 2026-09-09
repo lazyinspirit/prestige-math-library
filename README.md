@@ -26,9 +26,11 @@ Executable tools and configuration determine current behavior.
 
 Step 1 is drift review → scaffold construction → an owner-held final gate.
 Scaffolders record item readiness; unresolved findings do not trigger repair agents.
-Step 6 reviews authored content directly through group adjudicators, without
-reader/refuter stages. Local definitions and lemmas may supply missing dependencies;
-the cross-batch audit and closure follow unchanged.
+Step 3 group authors audit scaffolds, repair local gaps and author all content.
+They may supply local definitions/lemmas; substantial prerequisites and potential
+published defects go to the owner. Step 4 splices the plan and snapshots content.
+Step 5a reviews authored content; Step 5b reconciles dependencies and closes it.
+Every agent must acknowledge uncertainty and consult authoritative sources when unsure.
 See [WORKFLOW.md](WORKFLOW.md) for source recovery, reconciliation and controls.
 
 Verify active runs against their state directory and Git history.

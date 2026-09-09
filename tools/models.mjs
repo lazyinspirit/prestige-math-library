@@ -33,7 +33,7 @@ export const MODEL_PROFILE_NAMES = Object.freeze({
 });
 
 // Controllers started before the 2026-09-05 lane change retain this literal
-// profile name in memory for Step-6 refuters and Step-7 group readers. Keep it
+// profile name in memory for Step-5 refuters and Step-6 group readers. Keep it
 // resolvable at the new high effort until those live runs terminate; fresh
 // controllers select `terraHigh` directly from their stage definitions.
 const LIVE_TERRA_XHIGH_COMPAT = 'gpt-5.6-terra-xhigh';

@@ -470,18 +470,18 @@ test('the active mathlib table uses whole-stage barriers', async () => {
 });
 
 test('the do-not-relax stages are still barriers', async () => {
-  // The snapshots, the splice, the cross-level audit, the judge sweep, step 8,
-  // step 9 and the report. `4-baseline`, `6b-baseline` and `8-baseline` exist
+  // The snapshots, the splice, the cross-level audit, the judge sweep, step 7,
+  // step 8 and the report. `4-baseline`, `5a-baseline` and `7-baseline` exist
   // BECAUSE a stage boundary is the only place their ordering can be guaranteed;
-  // `6c-cross` edits items and would stale a verdict cast beside it — 97 rows,
+  // `5b-cross` edits items and would stale a verdict cast beside it — 97 rows,
   // once. `1-scaffold` and `2-assign` are here for a different reason: see the
   // cohort test below.
   const mod = await import('../stages/mathlib.mts');
-  const serial = ['1-scaffold', '2-assign', '4-splice', '4-baseline', '6b-baseline',
-    '6c-cross', '6d-close', '7-judge', '8-baseline', '8-adjudicate', '8-rejudge',
-    '9-scope', '9-scope-render', '9-scope-freeze', '9-changes-judge', '9-close', '9-changes-stamp', '9-receipt', '10-contract-close', '10-snapshot-v2',
-    '10-pathway-sync-v2', '10-pathway-seed-v2', '10-pathway-author-v2',
-    '10-stamps-v2', '10-readiness-v2', '10-evidence-v2', '10-owner-report-v2', '10-close-v2'];
+  const serial = ['1-scaffold', '2-assign', '4-splice', '4-baseline', '5a-baseline',
+    '5b-cross', '5b-close', '6-judge', '7-baseline', '7-adjudicate', '7-rejudge',
+    '8-scope', '8-scope-render', '8-scope-freeze', '8-changes-judge', '8-close', '8-changes-stamp', '8-receipt', '9-contract-close', '9-snapshot-v2',
+    '9-pathway-sync-v2', '9-pathway-seed-v2', '9-pathway-author-v2',
+    '9-stamps-v2', '9-readiness-v2', '9-evidence-v2', '9-owner-report-v2', '9-close-v2'];
   for (const id of serial) {
     const st: any = (mod.stages as any[]).find((s) => s.id === id);
     assert.ok(st, `${id} is missing from the table`);
@@ -513,18 +513,20 @@ test('no pipeline group starts before the batch assignment it depends on', async
 });
 
 test("authoring and direct adjudication precede the impact snapshot", async () => {
-  // `6b-baseline` is the `--to` endpoint of the 6c blast-radius diff, so it must
+  // `5a-baseline` is the `--to` endpoint of the 5b blast-radius diff, so it must
   // photograph text that already passed the group's gates. Stage order is what
   // guarantees it: no member of a group is done until the join is green, and the
   // snapshot stage is strictly later.
   const mod: any = await import('../stages/mathlib.mts');
   const ids = mod.stages.map((s: any) => s.id);
-  const author = ids.indexOf('5-author');
-  assert.equal(mod.stages[author + 1].id, '6b-prepare');
-  assert.ok(ids.indexOf('6b-baseline') > ids.indexOf('6b-adjudicate'));
+  const author = ids.indexOf('3b-author');
+  assert.equal(mod.stages[author + 1].id, '4-splice');
+  assert.equal(mod.stages[author + 2].id, '4-baseline');
+  assert.equal(mod.stages[author + 3].id, '5a-prepare');
+  assert.ok(ids.indexOf('5a-baseline') > ids.indexOf('5a-adjudicate'));
 
-  assert.equal(mod.stages[author + 2].id, '6b-adjudicate');
-  assert.equal(mod.stages[ids.indexOf('6b-adjudicate') + 1].id, '6b-baseline',
+  assert.equal(mod.stages[author + 4].id, '5a-adjudicate');
+  assert.equal(mod.stages[ids.indexOf('5a-adjudicate') + 1].id, '5a-baseline',
     'the final snapshot immediately follows gated independent adjudication');
 });
 
@@ -557,7 +559,7 @@ test('a group Alpha stage waits for the ASSIGNED group, not the positional fallb
   writeFileSync(join(repo, 'research', 'r-alpha-groups.json'), JSON.stringify({
     groups: [{ label: 'a', covers: ['1', '4'] }, { label: 'b', covers: ['2', '3', '5'] }],
   }));
-  for (const id of ['6b-adjudicate']) {
+  for (const id of ['5a-adjudicate']) {
     const st = mod.stages.find((s: any) => s.id === id);
     assert.equal(typeof st.cohort, 'function', `${id} must declare a cohort`);
     assert.deepEqual(st.cohort(ctx, '4'), ['1', '4'], `${id} cohort ignored the assignment`);

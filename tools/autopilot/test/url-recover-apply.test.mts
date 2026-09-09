@@ -127,19 +127,23 @@ test('url-sweep excludes declared-superseded originals from its probe queue', ()
 
 // ---------------------------------------------------------------- the hook
 
-test('stage 1 budgets every gate and subject instead of two global rounds', () => {
+test('stage 1 holds the final gate without an automatic repair loop', () => {
   const s1: any = stages.find((s: any) => s.id === '1-scaffold');
   assert.equal(s1.maxFixRounds, undefined);
-  assert.equal(s1.perItemFixBudget, 3);
-  assert.equal(s1.batchRepairs, true);
-  assert.equal(typeof s1.repairFingerprint, 'function');
-  assert.equal(typeof s1.onGateFailure, 'function');
+  assert.equal(s1.perItemFixBudget, undefined);
+  assert.equal(s1.batchRepairs, undefined);
+  assert.equal(s1.onGateFailure, undefined);
+  assert.equal(typeof s1.onHold, 'function');
 });
 
-test('missing run inputs are an explicit owner hold, not an empty repair', async () => {
+test('missing run inputs are recorded in the owner-held gate report', async t => {
   const s1: any = stages.find((s: any) => s.id === '1-scaffold');
-  // a ctx whose paths do not exist: if the hook acted, the spawn would fail
-  // and the hook would throw. Returning quietly is the assertion.
-  const result = await s1.onGateFailure({ ctx: { run: 'nope', repo: '/nonexistent' }, failure: { id: 'validate-plan', why: '' } });
-  assert.match(result.owner.reason, /no run manifests/);
+  const repo = mkdtempSync(join(tmpdir(), 'source-owner-hold-'));
+  mkdirSync(join(repo, 'research'));
+  t.after(() => rmSync(repo, { recursive: true, force: true }));
+  const result = await s1.onHold({ ctx: { run: 'nope', repo }, stage: s1,
+    failure: { id: 'validate-plan', why: 'no run manifests' } });
+  assert.match(result.owner.reason, /held/);
+  const report = JSON.parse(readFileSync(join(repo, 'research/nope-step1-blockers.json'), 'utf8'));
+  assert.equal(report.failures[0].why, 'no run manifests');
 });

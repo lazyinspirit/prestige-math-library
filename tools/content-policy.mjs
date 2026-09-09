@@ -20,9 +20,9 @@ import { referenceUrls } from './content-policy-lib.mjs';
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
 const asJson = argv.includes('--json');
-// Step 0 needs to reject an over-cap or malformed manifest *before* authoring.
+// Planning needs to reject an over-cap or malformed manifest *before* authoring.
 // The normal policy additionally verifies the corresponding item files after
-// Step 5.  Keeping these modes explicit prevents expected missing draft files
+// Step 3.  Keeping these modes explicit prevents expected missing draft files
 // from being misreported as a failed pre-authoring gate.
 const manifestOnly = argv.includes('--manifest-only');
 // `--manifest-only --audit` is the AUDIT's A0 shape. It exists because the two
@@ -347,7 +347,7 @@ if (!manifestOnly) for (const id of scope) {
   // enforce something broader than the rule behind it. A detector wider than
   // its rule has no honest disposition: an Alpha may not narrow it and may not
   // rewrite correct mathematics to satisfy it, so every firing of this class
-  // stopped the run for a person. It blocked `5-author` for three repair rounds.
+  // stopped the run for a person. It blocked `3b-author` for three repair rounds.
   for (const match of item.body.matchAll(/\\iota\s*\(/g)) {
     const at = item.body.slice(match.index, match.index + 24).replace(/\s+/g, ' ');
     error('notation-iota-applied',

@@ -22,7 +22,7 @@ import { writeCommand } from '../src/control.mts';
 
 // The engine refuses a stage that can neither pass nor fail (`src/spec.mts`),
 // and a TERMINAL stage may not waive its gates at all — that rule exists because
-// frontier-14's `10-report` declared `gates: () => []` and the last stage of the
+// frontier-14's `9-report` declared `gates: () => []` and the last stage of the
 // pipeline therefore could not fail.
 //
 // Fixtures obey it like any other spec. A single-stage fixture is its own
@@ -282,7 +282,7 @@ test('no stage dispatches while another stage still has work in flight', async (
   //
   // The engine used to dispatch the current stage regardless of what was still
   // running elsewhere, because only the GATE block waited for in-flight work to
-  // drain. On frontier-14 that put step 8's adjudicating Alpha on top of step
+  // drain. On frontier-14 that put step 7's adjudicating Alpha on top of step
   // 7's still-running judge sweep: every repair moved a pair's context hash and
   // re-armed the sweep on untouched page-mates, the ledger grew by 97 rows
   // mid-adjudication, and 8 items flipped pass to reject on byte-identical text.
@@ -362,7 +362,7 @@ test('a stage is not done when a unit\'s artifact is missing, however the result
 });
 
 test('adoption is scoped to the stage — a later stage\'s agent does not cover an earlier one', async () => {
-  // A 6b adjudicator running with --covers 7 blocked a 6a reader re-run for
+  // A 5a adjudicator running with --covers 7 blocked a preliminary reader re-run for
   // batch 7, because adoption matched only the unit and not the stage.
   const fx = fixture();
   const ex = makeExecutor(fx, makeStages({ units: ['1'] }), {

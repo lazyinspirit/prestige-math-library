@@ -18,7 +18,7 @@ const argvOf = (g: any): string[] => (typeof g.argv === 'function' ? g.argv() : 
 test('the post-authoring stages run content-policy in item mode', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['5-author', '6c-cross']) {
+  for (const id of ['3b-author', '5b-cross']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const full = st.gates(ctx).filter((g: any) =>
       argvOf(g).includes('tools/content-policy.mjs') && !argvOf(g).includes('--manifest-only'));
@@ -36,7 +36,7 @@ test('the post-authoring stages run content-policy in item mode', async () => {
 test('the scaffold stages keep manifest mode — item files do not exist yet', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['1-scaffold', '3b-audit']) {
+  for (const id of ['1-scaffold']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const wrong = st.gates(ctx).filter((g: any) =>
       argvOf(g).includes('tools/content-policy.mjs') && !argvOf(g).includes('--manifest-only'));
@@ -49,7 +49,7 @@ test('the scaffold stages keep manifest mode — item files do not exist yet', a
 test('scaffold policy resolves same-run cross-batch dependencies at the level join', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['1-scaffold', '3b-audit']) {
+  for (const id of ['1-scaffold', '3b-author']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const policy = st.gates(ctx).filter((g: any) =>
       argvOf(g).includes('tools/content-policy.mjs') && argvOf(g).includes('--manifest-only'));
@@ -64,7 +64,7 @@ test('scaffold policy resolves same-run cross-batch dependencies at the level jo
 test('both scaffold closure joins enforce the recorded-not-proved boundary', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['1-scaffold', '3b-audit']) {
+  for (const id of ['1-scaffold', '3b-author']) {
     const st = mod.stages.find((s: any) => s.id === id);
     assert.ok(st.gates(ctx).some((g: any) => g.id === 'extcheck'),
       `${id} does not run extcheck before accepting a scaffold`);

@@ -2,7 +2,7 @@
 //
 // WHY. During the terra account limit on frontier-15 (2026-08-17), every
 // judge-closure re-sweep was a guaranteed null — "You've hit your session
-// limit · resets 12pm" — yet each re-sweep consumed one of 7-judge's two
+// limit · resets 12pm" — yet each re-sweep consumed one of 6-judge's two
 // repair rounds. The stage exhausted on work that could never have succeeded
 // and a person performed a stop → rounds-reset → restart to recover it. The
 // budget exists to stop a NON-CONVERGING repair; an outage says nothing about
@@ -161,9 +161,9 @@ test('the budget still exhausts on genuine failures', async () => {
   rmSync(repo, { recursive: true, force: true });
 });
 
-// ------------------------------------------- the async lane: 8-rejudge's hook
+// ------------------------------------------- the async lane: 7-rejudge's hook
 
-test('8-rejudge reports the previous round\'s outage instead of re-dispatching into it', async () => {
+test('7-rejudge reports the previous round\'s outage instead of re-dispatching into it', async () => {
   const repo = fixtureRepo();
   const ctx: any = { repo, run: 'demo' };
   const cut = '2026-08-17T03:00:00.000Z';
@@ -173,7 +173,7 @@ test('8-rejudge reports the previous round\'s outage instead of re-dispatching i
   }));
   const started: any[] = [];
   const executor = { start: (_s: any, p: any) => started.push(p) };
-  const s8: any = stages.find((s: any) => s.id === '8-rejudge');
+  const s8: any = stages.find((s: any) => s.id === '7-rejudge');
 
   // the previous round's sweep produced only outage nulls -> report, no dispatch
   writeLedger(repo, [{ id: 'thm-x', model: 'm', keep: null, reason: SESSION_LIMIT, at: after }]);

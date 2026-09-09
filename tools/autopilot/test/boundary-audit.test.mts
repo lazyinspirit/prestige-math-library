@@ -65,7 +65,7 @@ test('a checked row crediting a proof step that does not exist is a candidate', 
 
 test('the stage table fails on templates, not only on contradictions', async () => {
   const mod = await import('../stages/mathlib.mts');
-  const st = mod.stages.find((s: any) => s.id === '5-author');
+  const st = mod.stages.find((s: any) => s.id === '3b-author');
   const g = st.gates({ run: 'frontier-14', repo: REPO }).find((x: any) => x.id === 'boundary-audit');
   const argv: string[] = typeof g.argv === 'function' ? g.argv() : g.argv;
   assert.ok(argv.includes('--fail-on-template'),

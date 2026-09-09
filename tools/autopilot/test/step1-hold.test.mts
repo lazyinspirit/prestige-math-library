@@ -29,7 +29,7 @@ test('the owner hold consolidates failures, excludes foreign stages, and never s
     executor: { start: () => assert.fail('unexpected dispatch') },
     failure: { id: 'coverage-1', output: 'missing result', advisory: [
       { id: 'source-fetch-check', output: 'unread' },
-      { id: 'foreign', stage: '3b-audit', output: 'not ours' },
+      { id: 'foreign', stage: '3b-author', output: 'not ours' },
     ] } });
   assert.match(result.owner.reason, /step1-blockers.json/);
   const report = JSON.parse(readFileSync(join(repo, 'research/demo-step1-blockers.json'), 'utf8'));

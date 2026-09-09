@@ -3,7 +3,7 @@
 //
 // WHY. judge-sweep expands `--pages` via plan-spec.json, spliced once at step
 // 4; level-coverage computes closure from the batch manifests. briefs/alpha.md
-// licenses 6b/6c Alphas to add or delete in-flight items. An item added to a
+// licenses 5a/5b Alphas to add or delete in-flight items. An item added to a
 // manifest after step 4 therefore either escapes the sweep entirely or
 // hard-stops closure at a stage with no repair hook — silently divergent
 // scopes, caught only after the sweep has spent. splice-plan --verify makes
@@ -87,18 +87,18 @@ test('--verify flags a dep on an UNBUILT page missing from requires, and only th
 });
 
 test('--verify fails naming the page and the divergent ids', () => {
-  const dir = fixture(['lem-a', 'thm-b', 'lem-added-at-6b'], ['lem-a', 'thm-b']);
+  const dir = fixture(['lem-a', 'thm-b', 'lem-added-at-5a'], ['lem-a', 'thm-b']);
   const r = run(dir, ['--run', 'r9', '--verify']);
   assert.equal(r.status, 1, 'divergent scopes must fail, not pass');
   assert.match(r.stderr, /demo-page/);
-  assert.match(r.stderr, /lem-added-at-6b/);
+  assert.match(r.stderr, /lem-added-at-5a/);
 });
 
 test('--update applies a licensed manifest change to the plan, loudly', () => {
-  const dir = fixture(['lem-a', 'thm-b', 'lem-added-at-6b'], ['lem-a', 'thm-b']);
+  const dir = fixture(['lem-a', 'thm-b', 'lem-added-at-5a'], ['lem-a', 'thm-b']);
   const r = run(dir, ['--run', 'r9', '--batch', '1', '--update']);
   assert.equal(r.status, 0, r.stderr);
-  assert.match(r.stdout, /\+ lem-added-at-6b/);
+  assert.match(r.stdout, /\+ lem-added-at-5a/);
   const spec = JSON.parse(readFileSync(join(dir, 'research', 'plan-spec.json'), 'utf8'));
   assert.equal(spec.pages[0].items.length, 3);
   const again = run(dir, ['--run', 'r9', '--verify']);
@@ -134,7 +134,7 @@ test('an empty manifest cannot reuse a plan inventory with missing item files', 
   assert.deepEqual(manifest[0].items, [], 'partial reuse must never rewrite the manifest');
 });
 
-test('Step 6 reconciliation copies an adjudicated manifest requires change exactly', () => {
+test('Step 5 reconciliation copies an adjudicated manifest requires change exactly', () => {
   const dir = fixture(['lem-a'], ['lem-a']);
   const manifestPath = join(dir, 'research', 'r9-batch-1.pages.json');
   const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
@@ -158,7 +158,7 @@ test('Step 6 reconciliation copies an adjudicated manifest requires change exact
   writeFileSync(manifestPath, JSON.stringify(manifest));
   assert.equal(run(dir, ['--run', 'r9', '--batch', '1', '--update', '--accept-requires']).status, 0);
   spec = JSON.parse(readFileSync(join(dir, 'research', 'plan-spec.json'), 'utf8'));
-  assert.deepEqual(spec.pages[0].requires, [], 'Step 6 reconciliation also removes stale plan-only requires');
+  assert.deepEqual(spec.pages[0].requires, [], 'Step 5 reconciliation also removes stale plan-only requires');
 });
 
 test('--update rejects a duplicate introduced by the projected manifest before writing', () => {
@@ -182,7 +182,7 @@ test('--update rejects a duplicate introduced by the projected manifest before w
 });
 
 test('a changed manifest without --update stays a hard error', () => {
-  const dir = fixture(['lem-a', 'thm-b', 'lem-added-at-6b'], ['lem-a', 'thm-b']);
+  const dir = fixture(['lem-a', 'thm-b', 'lem-added-at-5a'], ['lem-a', 'thm-b']);
   const r = run(dir, ['--run', 'r9', '--batch', '1']);
   assert.equal(r.status, 1, 'the step-4 anti-drift guard must survive the new flags');
 });
@@ -190,7 +190,7 @@ test('a changed manifest without --update stays a hard error', () => {
 test('every repo-wide gate point verifies the two scopes agree', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['5-author', '6c-cross', '9-scope', '10-readiness-v2']) {
+  for (const id of ['5b-cross', '8-scope', '9-readiness-v2']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const hit = st.gates(ctx).some((g: any) => {
       const argv = typeof g.argv === 'function' ? g.argv() : g.argv;

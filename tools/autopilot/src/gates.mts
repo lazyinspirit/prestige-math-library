@@ -67,7 +67,7 @@ export async function runGate(gate: Gate, { cwd, env = {}, signal, logger = () =
   });
 
   const out = `${res.stdout}${res.stderr}`;
-  // The complete output is repair input, not display text. Step 6 derives the
+  // The complete output is repair input, not display text. Step 5 derives the
   // per-item repair scope from every canonical `ERROR ... [<id>]` line. Keeping
   // only a tail silently turns one level-wide failure into serial waves: the
   // first id survives through `why`, a handful survive in the tail, and every

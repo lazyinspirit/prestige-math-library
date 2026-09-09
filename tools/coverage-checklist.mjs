@@ -32,7 +32,7 @@
 // result the source itself contains cannot be satisfied by inventing anything.
 //
 // This gate checks structure, not honesty: it cannot fetch the source and
-// confirm the harvest is faithful. That reading is Alpha's at Step 6, and the
+// confirm the harvest is faithful. That reading is Alpha's at Step 5, and the
 // checklist is what gives Alpha something specific to check against.
 
 import { readFileSync, existsSync, readdirSync } from 'node:fs';
@@ -254,7 +254,7 @@ for (const path of files) {
       // no destination and nothing on disk recorded where they went; four
       // declines rested on destination claims FALSE of disk (the Snake Lemma
       // deferred to "the later homological-algebra development" while
-      // published at an EARLIER order), and the Craven hole reached step 9
+      // published at an EARLIER order), and the Craven hole reached step 8
       // when this check would have caught it at step 2. `out-of-scope` stays
       // reason-only — a subject the library has not reached has no
       // destination by definition.

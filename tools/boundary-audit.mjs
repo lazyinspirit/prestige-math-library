@@ -285,7 +285,7 @@ const contradicted = [];
 const upheld = [];
 for (const r of rows) {
   const text = itemText(r.id);
-  if (text === null) continue;            // not authored yet — step 5 has not run
+  if (text === null) continue;            // not authored yet — step 3 has not run
   if (r.status === 'checked') {
     // A `checked` row is a claim that somebody verified the case, usually
     // crediting a proof step. The mechanical half of that claim is checkable:
