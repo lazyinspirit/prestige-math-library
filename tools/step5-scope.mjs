@@ -161,7 +161,9 @@ function manifestMetadata(batch) {
     const items = (page.items ?? []).map((item) => typeof item === 'string' ? { id: item } : item);
     for (const item of items) if (item?.id) itemRows.set(String(item.id), canonical({
       ...item,
-      __step5_page_id: pageId,
+      // This private hash-schema key predates step renumbering. Changing it
+      // would invalidate unchanged historical manifest carriers, not content.
+      __step6_page_id: pageId,
     }));
     const { items: _items, ...pageFields } = page;
     pageRows.set(pageId, {

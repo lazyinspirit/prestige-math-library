@@ -21,6 +21,8 @@ test('only structured identities change; mathematical evidence and hashes surviv
   assert.equal(selectedInput('batch-17.cross-batch-dependencies.json'), true);
   assert.equal(selectedInput('dispatch/alpha-6b-a.result.json'), false);
   assert.equal(selectedInput('alpha-6b.task.md'), false);
+  const history = { risk_review: { gate_reviews: [{ run: 'old', stage: '6b-adjudicate' }] } };
+  assert.deepEqual(migrateJson(history, 'old', 'new'), history);
 });
 function fixture(t) {
   const root = fs.mkdtempSync(path.join(os.tmpdir(), 'checkpoint-migration-'));
@@ -44,7 +46,7 @@ function fixture(t) {
   write('research/old-step6-scope-1.json', { version: 3, run: 'old', batch: '1', baseline_sha256: 'before' });
   write('research/old-step6-hash-1-pre-6b.json', { run: 'old', label: 'pre-6b', hashes: {} });
   write('research/old-alpha-a-6b-decisions.json', { run: 'old', decisions: [], evidence: 'Historical 6B read.' });
-  const invoke = (mode, run = 'new') => spawnSync(process.execPath, [cli, mode, '--run', run, '--source', 'old'], { cwd: root, encoding: 'utf8' });
+  const invoke = (mode, run = 'new', flags = []) => spawnSync(process.execPath, [cli, mode, '--run', run, '--source', 'old', ...flags], { cwd: root, encoding: 'utf8' });
   return { root, write, read, invoke };
 }
 test('export and migration preserve source evidence and create no model receipt', t => {
@@ -67,4 +69,23 @@ test('export refuses active sources and unsuccessful original review', t => {
   f.write('.autopilot/old/state.json', { paused: true, dispatches: {} });
   f.write('research/origin-dispatch/alpha-6b-a.result.json', { run: 'origin', role: 'alpha', ok: false, covers: ['1'] });
   assert.notEqual(f.invoke('export', 'old').status, 0);
+});
+test('failed preparation resumes only unchanged derived evidence before runtime exists', t => {
+  const f = fixture(t);
+  assert.equal(f.invoke('export', 'old').status, 0);
+  f.write('tools/step5-scope.mjs', 'process.exit(1);');
+  assert.notEqual(f.invoke('prepare').status, 0);
+  assert.equal(fs.existsSync(path.join(f.root, '.autopilot/new')), false);
+  f.write('tools/step5-scope.mjs', 'process.exit(0);');
+  const r = f.invoke('prepare', 'new', ['--resume-preparation']);
+  assert.equal(r.status, 0, r.stderr);
+  assert.equal(f.invoke('verify').status, 0);
+});
+test('partial preparation refuses overwritten evidence', t => {
+  const f = fixture(t);
+  assert.equal(f.invoke('export', 'old').status, 0);
+  f.write('tools/step5-scope.mjs', 'process.exit(1);');
+  assert.notEqual(f.invoke('prepare').status, 0);
+  f.write('research/new-alpha-a-5a-decisions.json', { run: 'new', decisions: ['tampered'] });
+  assert.notEqual(f.invoke('prepare', 'new', ['--resume-preparation']).status, 0);
 });

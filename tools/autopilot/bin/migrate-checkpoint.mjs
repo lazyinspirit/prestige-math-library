@@ -73,7 +73,8 @@ if (mode === 'export') {
 } else if (mode === 'prepare') {
   if (!safe(source) || source === run) throw Error('Need a distinct source run');
   inactive(source);
-  if (fs.existsSync(R(`.autopilot/${run}`)) || fs.readdirSync(R('research')).some(f => f.startsWith(`${run}-`))) throw Error('Target namespace already exists');
+  const resume = args.includes('--resume-preparation');
+  if (fs.existsSync(R(`.autopilot/${run}`)) || (!resume && fs.readdirSync(R('research')).some(f => f.startsWith(`${run}-`)))) throw Error('Target namespace already exists');
   const exportPath = `research/${source}-migration-export.json`, exported = json(exportPath);
   if (exported.version !== 1 || exported.run !== source || exported.checks?.[0]?.exit_code !== 0 || !exported.review_receipts?.length) throw Error('Invalid source export');
   verifyFiles(exported.files);
@@ -101,9 +102,21 @@ if (mode === 'export') {
   }
   const importedDefects = exported.defects.map(row => ({ ...migrateJson(row, source, run, defectMap),
     imported_from: { run: source, defect_id: row.defect_id, row_sha256: sha(JSON.stringify(row)) } }));
-  for (const [file, text] of outputs) put(file, text);
-  put(`research/${run}-import-defects.json`, importedDefects);
-  checked(['tools/defect-ledger.mjs', 'append', '--file', `research/${run}-import-defects.json`]);
+  const defectFile = `research/${run}-import-defects.json`;
+  const expected = new Map([...outputs, [defectFile, body(importedDefects)]]);
+  // A failed validation may leave prepared evidence but never engine state.
+  // Resume only byte-identical derived output, never overwritten repairs.
+  for (const file of fs.readdirSync(R('research')).filter(f => f.startsWith(`${run}-`))) {
+    const p = `research/${file}`;
+    if (!resume || !expected.has(p) || fs.readFileSync(R(p), 'utf8') !== expected.get(p)) throw Error(`Unexpected or changed partial preparation: ${p}`);
+  }
+  for (const row of importedDefects) if (liveDefects.has(row.defect_id)
+    && JSON.stringify(liveDefects.get(row.defect_id)) !== JSON.stringify(row)) throw Error(`Imported defect collision: ${row.defect_id}`);
+  for (const [file, text] of expected) if (!fs.existsSync(R(file))) put(file, text);
+  if (importedDefects.some(row => !liveDefects.has(row.defect_id))) {
+    if (importedDefects.some(row => liveDefects.has(row.defect_id))) throw Error('Partial defect append needs operator reconciliation');
+    checked(['tools/defect-ledger.mjs', 'append', '--file', defectFile]);
+  }
   // Current tooling verifies every imported decision before writing fresh state.
   checked(['tools/step5-scope.mjs', 'check', '--run', run, '--phase', 'adjudicate']);
   const hashes = Object.fromEntries([...outputs].map(([file]) => [file, sha(fs.readFileSync(R(file)))]));

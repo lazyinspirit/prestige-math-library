@@ -16,6 +16,9 @@ export function migrateSuffix(suffix) {
     .replace(/-(pre|post)-6b(?=\.json$)/, '-$1-5a');
 }
 export function migrateJson(value, source, target, defects = {}, key = '') {
+  // These nested records describe the original read, not the new run's
+  // ownership. Their attribution and mathematical contract hashes stay exact.
+  if (['risk_review', 'gate_reviews', 'template_review', 'imported_from', 'prior_handoffs'].includes(key)) return structuredClone(value);
   if (Array.isArray(value)) return value.map(v => migrateJson(v, source, target, defects, key));
   if (value && typeof value === 'object') return Object.fromEntries(Object.entries(value).map(([k, v]) => [
     k === 'step6_obligation' ? 'step5_obligation' : k === 'step6_defect_class' ? 'step5_defect_class' : k,

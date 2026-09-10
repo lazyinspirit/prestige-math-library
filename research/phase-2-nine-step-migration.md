@@ -27,12 +27,20 @@ quoted YAML parsing, piped risk output, boundary-review bindings, detector holds
 and run-local repair reports. The new whole-frontier authoring barrier replaces
 the old author/reviewer overlap; generic live-writer protections remain.
 
-Next: finish regression tests, commit/install the integrated workflow, import
-the checkpoint into fresh run `phase-2-nine-step-25`, run doctor and full gates,
-then supervise fresh cross-group closure and remaining canonical stages.
+Installed integration commits: `ecd51b7ec`, `51f1ca89d`. The new checkpoint is
+prepared under `phase-2-nine-step-25`; translated routing passes 760 items and
+784 review obligations. All mathematical content remains unchanged.
+Next: doctor, full current gates, fresh cross-group closure and remaining stages.
 Original state and execution receipts must not be renumbered or adopted.
 
 Integration regression result: 648 TypeScript workflow tests passed, zero failed
 or skipped, including type checking. Three checkpoint migration tests passed.
 The source snapshot also contains the published-repair append guard for both
 reader and cross-group repairs; preserve the matching live edit during merge.
+
+Cutover checks found that renumbering changed a private manifest hash-schema
+key. Restoring its version-stable spelling preserves actual old carrier hashes.
+Nested historical risk/gate review attribution also remains original rather
+than being rewritten as a new run's work. No restamping of imported decisions
+was needed. Partial preparation can resume only when every existing derived
+artifact matches the expected bytes and source evidence remains unchanged.
