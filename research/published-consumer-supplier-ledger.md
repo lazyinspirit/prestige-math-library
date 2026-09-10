@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1434, U-C 16, A-R 187, A-P 165. The
+Current classifications: U-P 1434, U-C 16, A-R 187, A-P 166. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -74,10 +74,24 @@ almost-everywhere existence domain. In
 `thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound`,
 proof 1.1 selects Borel representatives through an exact published supplier
 that assumes countable choice, which the target omits. The live Fourier draft
-uses the newer complex convolution interface under explicit countable choice
-and is mathematically independent of these two proofs; its redundant draft
-edges do not repair the published items. Exact refreshed hashes and repair
-paths are in the same audit file.
+does not directly use either proof for its displayed Tonelli calculation; its
+redundant draft edges do not repair the published items. Exact refreshed hashes
+and repair paths are in the same audit file.
+
+The deeper load-bearing read found one additional A-P item:
+`lem-complex-translation-and-approximate-identity-interfaces`. Its proof 1.2
+uses `thm-young-convolution-inequality` to establish the a.e.-defined complex
+`L^1`-by-`L^p` convolution and measurability. Young is already A-P for missing
+Borel/product-measurability, Tonelli/translation interfaces and zero-norm
+endpoint cases; this is the exact branch used, so the black-box application is
+not repaired merely because the complex wrapper itself states countable
+choice. For finite `p`, repair locally with its already-declared Minkowski
+integral supplier applied to the jointly Borel absolute envelope and translation
+isometry; handle infinity with a bounded Borel representative. The current
+`L^1`-by-`L^1` Fourier draft already contains the Tonelli envelope and can
+instead obtain Borel representatives/reflection directly under its stated
+countable choice. This is a local authoring obligation, with no new Phase-2
+pair. The existing Young A-P evidence is extended rather than duplicated.
 
 ## Locally convex published-prerequisite audit — 2026-09-11
 
@@ -27679,11 +27693,11 @@ This index retains the **2185 distinct published item IDs in the initial
 classification reference pool**, plus **5 newly identified published supplier
 items from U-C19**, **1 new 6c remark finding**, **1 Step-9 repaired definition**,
 **3 HG-P published prerequisite repairs**, **1 diagram-boundary consumer finding**,
-and **16 subsequent frontier-supervision findings**, plus **135 UC34 supplier findings**, plus **4 newly indexed Step3b Tor findings**, plus **2 Step3b real-integrability findings**, plus **2 recovered HG continuity repair rows**, plus **1 resolution-dependent Tor definition repair**, plus **1 sequence-space proof-interface candidate**, plus **2 Green-correspondence prerequisite findings**, plus **1 Cayley-tree proof finding**, plus **3 cohomology extension-map findings**, plus **1 Doob–Dynkin choice finding**, plus **1 finite-dimensional cohomology duality finding**, plus **11 locally convex prerequisite audit additions**, plus **10 scalar-topology audit additions**, plus **6 Fourier-support prerequisite audit additions**, for **2392 indexed items**. It is not a census of defective items or a
+and **16 subsequent frontier-supervision findings**, plus **135 UC34 supplier findings**, plus **4 newly indexed Step3b Tor findings**, plus **2 Step3b real-integrability findings**, plus **2 recovered HG continuity repair rows**, plus **1 resolution-dependent Tor definition repair**, plus **1 sequence-space proof-interface candidate**, plus **2 Green-correspondence prerequisite findings**, plus **1 Cayley-tree proof finding**, plus **3 cohomology extension-map findings**, plus **1 Doob–Dynkin choice finding**, plus **1 finite-dimensional cohomology duality finding**, plus **11 locally convex prerequisite audit additions**, plus **10 scalar-topology audit additions**, plus **7 Fourier-support prerequisite audit additions**, for **2393 indexed items**. It is not a census of defective items or a
 claim that every supplier later cited by an audit is a defect candidate.
 The publication census, checked 2026-09-10 from item front matter, has
-**15930 published items**. All 2392 indexed IDs are published;
-**13538 published items remain outside this index** and require census
+**15930 published items**. All 2393 indexed IDs are published;
+**13537 published items remain outside this index** and require census
 reconciliation. This is a status census, not a mathematical audit of those
 outside-index items.
 The initial extraction also contained
@@ -27695,11 +27709,11 @@ Supplier mappings and subsequent item-specific findings remain above.
 | U-P | Unaudited and potentially defective items | 1434 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 16 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 165 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 166 | Recorded direct review and an unresolved item-specific repair. |
 
 590 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1802 items and the expanded reference pool contains 2392 unique items.
+1803 items and the expanded reference pool contains 2393 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28405,6 +28419,7 @@ owner's scan policy.
 | `thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals` | Fourier support audit 2026-09-11: proof 3.1 proves only the upper norm bound, then asserts compactly supported phase approximation without construction or error/norm control. Repair from the published unit-simple-test variation formula and regular compact/open approximation, with pairwise-disjoint LCH cutoffs or repaired Radon `C_c` density; explicitly propagate DC from the cutoff contract and repair the two supplier findings below. No new Phase-2 pair. Exact clauses and hashes: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `lem-positive-c-zero-functionals-have-finite-regular-representing-measures` | Fourier support closure audit 2026-09-11: proof 1.1 silently uses the DC-qualified LCH cutoff. Proof 3.1 also omits the compact tightness core needed for all-Borel inner regularity; an open complement in noncompact `X` need not have compact complement. Add DC/exact cutoff use and prove the compact-core/outer-regularity argument. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-c-c-is-dense-in-l-p-for-radon-measures` | Fourier support closure audit 2026-09-11: proof 2.1 invokes `lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set`, whose contract assumes DC, while this theorem states no DC. Add and declare DC or give a choice-free cutoff construction. This affects the general LCH RMK repair path; live Fourier Euclidean density instead uses its explicit distance cutoff under stated countable choice. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `lem-complex-translation-and-approximate-identity-interfaces` | Fourier Step-3B load-bearing supplier audit 2026-09-11: proof 1.2 derives complex `L^1`-by-`L^p` convolution existence, norm and measurability by black-box use of the already-defective Young theorem in its exact affected branch. For finite `p`, use the declared jointly Borel envelope, translation isometry and Minkowski integral inequality; handle infinity with an essentially bounded Borel representative. The current L1 Fourier product draft can instead replay its own Tonelli envelope and direct reflection under stated CC. No new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `lem-euclidean-balls-have-positive-finite-lebesgue-measure` | Fourier support audit 2026-09-11: steps 2.1--3.1 infer measurability from containment between measurable cubes and use `lambda(B)` before the domain claim; the inference is invalid. First use published Euclidean-metric, metric-ball-openness and Borel-to-Lebesgue interfaces under the target's stated countable choice, then apply the sound cube bounds. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-total-variation-is-a-measure` | Fourier support audit 2026-09-11: proof 1.2 chooses partitions for every disjoint piece and then takes a sum of suprema without near-maximality or a valid selection. Repair choice-free via finitely many near-max partitions for each finite partial sum, published finite choice and the nonnegative-series supremum; handle infinite variations by arbitrary finite thresholds. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences` | Fourier support audit 2026-09-11: proof 1.1 directly applies `thm-riesz-fischer-completeness-of-l-p`, whose representative-subsequence clause explicitly assumes countable choice, but the corollary has no such hypothesis. State/declare countable choice and identify the inherited representative selection. The complex-Lp consumer already carries CC. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
@@ -28508,7 +28523,7 @@ owner's scan policy.
 | `thm-l-one-approximate-identities-converge-in-l-p` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound` | Personal monitoring audit 2026-09-08, reconfirmed by Fourier Step-3B 2026-09-11: proof 1.1 chooses Borel representatives of completed-Lebesgue classes without the countable choice required by `thm-completion-measurable-functions-have-base-measurable-representatives`. Add the assumption/supplier, retain the product-measurability and Tonelli envelope, and use the repaired conditional representative-independence lemma. Live Fourier bypasses this proof via the newer complex interface under CC. Exact refreshed evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-smooth-partitions-of-unity-exist-on-manifolds` | Open findings from the bump-consumer audit — 2026-09-08  See also Batch 9 Step 6B supplier reread — 2026-09-10. |
-| `thm-young-convolution-inequality` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
+| `thm-young-convolution-inequality` | Personal monitoring audit 2026-09-08, load-bearing use reconfirmed in Fourier Step-3B 2026-09-11: the `L^1`-by-`L^p` branch used by the complex convolution wrapper still inherits the missing Borel/product-measurability, Tonelli and translation proof interfaces; finite-r powers also require zero-norm cases first. Repair from Borel representatives, Tonelli/translation and the existing Minkowski route. No new Phase-2 pair. Exact refreshed evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 
 | `cex-gauss-sum-sign-is-not-canonical-without-conventions` | Number Theory §17; structural B-leaf audit only; current deps to ex-gauss-sum-for-chi-four verified. Existing strategy retained; no Phase-2 supplier. |
 | `cex-independent-set-that-does-not-span` | Linear Algebra §17; structural B-leaf audit only; current deps to ex-basis-of-the-eventually-zero-families verified. Existing strategy retained; no Phase-2 supplier. |

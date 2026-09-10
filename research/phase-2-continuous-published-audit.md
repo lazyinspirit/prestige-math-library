@@ -88,6 +88,19 @@ gaps are unchanged; evidence was refreshed without a duplicate or class move.
 The live draft uses the newer complex convolution interface under explicit
 countable choice, so no mathematical authoring blocker remains from them.
 
+The deeper supplier read found that the newer
+`lem-complex-translation-and-approximate-identity-interfaces` itself applies
+the already-A-P Young theorem in its affected `L^1`-by-`L^p` branch. It is newly
+A-P. The present L1 Fourier product draft can discharge its own need by the
+Tonelli envelope it already writes, together with direct Borel-representative
+and reflection clauses under countable choice; no new Phase-2 pair is needed.
+Young's existing A-P evidence was extended without another row.
+
+Post-load-bearing-follow-up index, mechanically recounted and
+cross-class-deduplicated: 2,393 unique published IDs; U-P 1,434, U-C 16, A-R
+187, A-P 166 and 590 bounded clears. Every indexed ID resolves to a current
+published item.
+
 ## Next target
 
 1. Reconcile any further exact next-20 or Fourier published-interface issues
@@ -96,7 +109,7 @@ countable choice, so no mathematical authoring blocker remains from them.
    an actual published proof or a selected repair path; keep general LCH debt
    distinct from the explicit Euclidean Fourier path.
 3. Continue through original next-20 batches by actual prerequisite pressure,
-   then sample published items outside the existing 2,392-ID reference pool.
+   then sample published items outside the existing 2,393-ID reference pool.
 
-No exhaustive discovery claim is authorized while 13,538 published items
+No exhaustive discovery claim is authorized while 13,537 published items
 remain outside the index and dependency interfaces remain unaudited.

@@ -242,3 +242,39 @@ under that assumption. Its Facts/Proof do not use the two defective old items,
 although both still appear redundantly in the draft dependency array. Removing
 those draft-only edges makes the bypass exact; no live mathematical authoring
 prerequisite is uncovered here.
+
+## Load-bearing complex-convolution supplier follow-up
+
+Further inspection of that newer interface changes the last sentence's scope.
+`lem-complex-translation-and-approximate-identity-interfaces` (current SHA-256
+`924ce2c97492fb3ce3213504d08dd2404d46b6421ffda0489f433f23b1b354ee`;
+empty aliases) was outside the classification index. Its proof 1.2 obtains the
+a.e.-defined `L^1`-by-`L^p` convolution, envelope norm bound and component
+measurability by applying `thm-young-convolution-inequality` as F4. That Young
+item is already A-P: its proof 2.1 invokes undeclared product measurability,
+Tonelli and translation invariance, and the finite-`r` algebra does not dispose
+of zero norms before powers such as `||f||^(r-p)`. These defects occur in the
+branch that the complex interface actually uses. The complex interface's local
+Borel and countable-choice declarations do not repair a black-box application
+of Young's defective proof.
+
+The complex interface is therefore newly A-P and the existing Young row is
+extended, with no duplicate. A complete local repair is available from its
+already-declared suppliers. For finite `p`, apply
+`thm-minkowski-integral-inequality` to the jointly Borel envelope
+`F(x,y)=|K(y)||f(x-y)|`; translation isometry makes the integral of the section
+norms equal `||K||_1||f||_p`. For `p=infinity`, replace an essentially bounded
+Borel representative on its Borel null excess set and use the direct pointwise
+bound. Obtain measurable component section integrals by finite-measure
+truncation and Tonelli/Fubini (or use Young only after its own repair). This
+proves the exact F1 convolution contract under the countable choice already
+stated by the complex item. No new Phase-2 pair is needed.
+
+This defect is load-bearing for a draft that cites the complex interface for
+convolution existence. For the current `L^1`-by-`L^1` Fourier product theorem,
+however, its own Step 1.1 already writes the full Borel/Tonelli absolute
+envelope. It can bypass the defective clause by obtaining Borel representatives
+directly from the published completion-representative theorem under its stated
+countable choice and proving representative independence with explicit
+reflection. Thus this is a concrete local authoring obligation, not an
+unavailable mathematical prerequisite.
