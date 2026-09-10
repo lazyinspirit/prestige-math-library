@@ -1,0 +1,11 @@
+# Localized signed-tree weak (1,1) repair
+
+The existing signed-tree item now states and proves the precise weighted estimate behind Lacey7.11. For every finite plus tree with designated top J, every |epsilon_s|<=1, every measurable complex input integrable against w_J=(1+|x-c(J)|/|J|)^−20, and every lambda>0, the output level set has measure at most C/lambda times the weighted input integral. Coefficient convergence is explicit. This preserves the original localized weak(1,1) claim while replacing its undefined placeholders with the exact quantifiers. Root was notified before authoring this statement clarification for scope reconciliation.
+
+Read the full Lacey section7.2 passage containing7.11 and the ensuing square-function bootstrap. Lacey invokes Calderon–Zygmund theory at7.11; the local proof supplies it. Fully read the packet definition, Plancherel, complex L2 pairing, almost-everywhere Lebesgue-point theorem and monotone integral convergence used directly.
+
+Modulation by the top-frequency center controls packet derivatives at their own spatial scale. Summing a spatial lattice and dyadic scales gives uniform kernel size and y-derivative bounds. Strict-plus frequency disjointness and the same-scale Gram lattice bound give uniform L2 synthesis/analysis; the permitted top member is handled as one additional rank-one term. The proof constructs the maximal dyadic bad intervals, proves their average and measure bounds via differentiation, and estimates good and cancellative bad parts explicitly. Splitting the original weighted input on3J and its complement yields the exact localization: the far input has a summable L1 output by direct packet tails, even if the input is not globally L1.
+
+The unused ball-maximal supplier was replaced by the existing differentiation and pairing/MCT suppliers. Batch5 statement, dependencies, proof plan and strict contract are synchronized. No new items, source attempts, backing waivers, shared plan edits or owner receipts. The Hunt distribution argument remains unfinished and is not accepted by this supplier repair.
+
+Checks: explicit-path canonical precheck, renderer, strict selected-item contract and batch5 content-policy27/27 pass. These are local mechanical checks, not independent mathematical review.
