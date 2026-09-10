@@ -28038,11 +28038,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,481 unique
+subsequently reconciled published IDs. It currently contains **2,490 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,481 indexed IDs are published; **13,449 published items remain outside this
+2,490 indexed IDs are published; **13,440 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28056,9 +28056,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 189 | Recorded direct review and an unresolved item-specific repair. |
 
-680 further reference-pool items have bounded no-repair-needed dispositions
+689 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,801 items and the expanded reference pool contains 2,481 unique items.
+1,801 items and the expanded reference pool contains 2,490 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28845,6 +28845,15 @@ owner's scan policy.
 | `lem-complex-polynomial-growth-and-minimum-modulus` | Active Killing/FTA supplier audit 2026-09-11: complete lemma read. Leading-term domination outside a large square, finite polynomial continuity and compact extreme value give a global modulus minimizer. The outer-square comparison is correctly strict. No repair or new pair in this exact clause. Exact hash/scope/dedup: `research/phase-2-next-20-published-killing-algebraic-suppliers-audit.md`. |
 | `lem-dalembert-minimum-modulus-descent` | Active Killing/FTA supplier audit 2026-09-11: complete lemma read. The chosen unit direction makes the first nonzero translated term decrease squared modulus; the displayed estimate holds for every positive `t` below one fixed open bound, hence for arbitrarily small `t`. Naming an additional neighbourhood-radius bound would be optional exposition, not a proof gap. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-killing-algebraic-suppliers-audit.md`. |
 | `thm-fundamental-theorem-of-algebra-minimum-modulus-proof` | Active Killing-supplier audit 2026-09-11: complete two-step theorem and both complete direct suppliers read. Global minimum plus arbitrary-small local descent forces the minimum value to vanish, supplying a complex root. This is the exact finite spectrum clause used in the draft Killing proof. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-killing-algebraic-suppliers-audit.md`. |
+| `lem-bounded-real-ultralimits-and-free-tail-extension` | Active HG cone/minsize audit 2026-09-11: complete item read. Deterministic ultrafilter-guided interval bisection gives bounded-real limits; uniqueness, algebra, order, large-set changes and ordinary-limit agreement are proved. AC is used only to extend the cofinite filter to a free ultrafilter; supplied-ultrafilter calculus uses no new choice. The rational reciprocal supplement is valid. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-cone-minsize-audit.md`. |
+| `lem-rescaled-ultradistance-is-a-quotient-metric` | Active HG cone/minsize audit 2026-09-11: complete item read. Bounded rescaled distance sequences define a finite pseudometric, zero distance is transitive, and the two-coordinate comparison proves representative independence and metric separation on the quotient. Large-set bounded representatives are handled by basepoint replacement. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-cone-minsize-audit.md`. |
+| `lem-geodesic-segments-have-isometric-ultralimits` | Active HG cone/minsize audit 2026-09-11: complete item read. Bounded origins, finite/infinite endpoint parameters and clamping give an isometric interval/ray/line containing every admissible represented side point; AC is explicit for side/origin families. The final pairwise construction makes the cone geodesic. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-cone-minsize-audit.md`. |
+| `lem-triangle-extrema-and-real-tree-tripod-rules` | Active HG cone/minsize audit 2026-09-11: complete item read. Deterministically enumerated finite grids and nested boxes attain extrema without countable choice. Unique arcs, tripods and zero slimness are correctly equivalent, and nearest-point projection gives the common-tail/equal-line rules used by the cone proofs. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-cone-minsize-audit.md`. |
+| `lem-tree-cones-give-uniform-two-side-control` | Active HG cone/minsize audit 2026-09-11: complete contradiction proof read. Rescaling violating side pairs retains finite-Hausdorff limit sides with one point at distance one; their endpoint limits exhaust segment, common-origin-ray and line cases, all impossible in a real tree. AC covers the countable selections. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-cone-minsize-audit.md`. |
+| `thm-all-asymptotic-cones-are-trees-implies-uniform-slimness` | Active HG cone/minsize audit 2026-09-11: complete theorem read. Its finite/infinite distance-ratio split uses represented half-sides and real-tree tail rules to contradict a retained distance-one gap; the infinite case's clamped negative half-ray is controlled by maximal slimness. Empty space and all AC selections are explicit. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-cone-minsize-audit.md`. |
+| `lem-sublinear-minsize-makes-every-cone-geodesic-a-limit-geodesic` | Active HG cone/minsize audit 2026-09-11: complete item read. Above/below-threshold bounds make scaled minsize vanish; minimizing triples coalesce, and distance additivity forces every arbitrary cone-segment point onto the prescribed side limit. Isometric parameters give equality and uniqueness. AC is explicit. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-cone-minsize-audit.md`. |
+| `thm-sublinear-triangle-minsize-implies-hyperbolicity` | Active HG cone/minsize audit 2026-09-11: complete theorem read. For arbitrary basepoints/scales, sublinear minsize coalesces each represented triangle to a tripod in its uniquely geodesic cone; the all-tree-cones theorem then yields a finite uniform slimness constant. The free ultrafilter and representative selections are under stated AC. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-cone-minsize-audit.md`. |
+| `lem-coarse-triangle-minsize-is-bounded-by-square-root-area` | Active HG cone/minsize audit 2026-09-11: complete item read. The third-side affine barrier correctly retains the loss `h=m/2-r`; crossing gives the square-root bound, with nonpositive and zero cases explicit. Hausdorff approximation of the three continuous sides costs exactly `2e` by a limiting argument. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-cone-minsize-audit.md`. |
 
 
 ### A-P — Audited items pending Phase 3 repair

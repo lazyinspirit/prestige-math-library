@@ -508,6 +508,18 @@ remains draft. Counts are now 2,481 unique published IDs: U-P 1,410, U-C 15,
 A-R 187, A-P 189 and 680 bounded clears; 13,449 remain outside the index.
 Evidence: `research/phase-2-next-20-published-killing-algebraic-suppliers-audit.md`.
 
+The active HG cone/minsize chain adds nine bounded clears after complete body
+reads: bounded-real ultralimits, the rescaled quotient metric, represented
+geodesic limits, triangle extrema/tree rules, tree-cone two-side control, the
+all-tree-cones uniform-slimness theorem, sublinear side identification, the
+sublinear hyperbolicity theorem and the coarse square-root minsize estimate.
+The exact finite/infinite endpoint and distance-ratio cases, third-side edge
+loss, zero/empty cases and AC-qualified countable selections are covered. This
+bounded pass does not re-audit the deeper planar filling construction. Counts
+are now 2,490 unique published IDs: U-P 1,410, U-C 15, A-R 187, A-P 189 and 689
+bounded clears; 13,440 remain outside the index. Evidence:
+`research/phase-2-next-20-published-hg-cone-minsize-audit.md`.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
@@ -518,5 +530,5 @@ Evidence: `research/phase-2-next-20-published-killing-algebraic-suppliers-audit.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,449 published items
+No exhaustive discovery claim is authorized while 13,440 published items
 remain outside the index and dependency interfaces remain unaudited.
