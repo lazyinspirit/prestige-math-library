@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1420, U-C 16, A-R 187, A-P 167. The
+Current classifications: U-P 1417, U-C 15, A-R 187, A-P 168. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -168,6 +168,24 @@ maps preserving independence and the expectation definition. Exact hashes and
 scope are in
 `phase-2-next-20-published-characteristic-function-prerequisite-audit.md`.
 No new Phase-2 pair or published edit is required.
+
+The original-next-20 Levy-inversion supplier batch moves the existing
+`thm-continuous-implies-integrable` finding from U-C to A-P after reading the
+complete target and its exact Heine--Cantor interface. Fact L3 and proof step
+2.1 use `thm-heine-cantor-r`, whose proof explicitly spends countable choice,
+but the consumer states no choice hypothesis. Its remark acknowledges the cost
+without repairing the theorem contract. Add CC, or retain the choice-free
+conclusion by using all admissible oscillation balls, a finite compactness
+subcover and a minimum radius before applying the Riemann criterion. The live
+sine-integral item assumes full Choice, so AC implies CC discharges this use
+locally and no authoring prerequisite is unavailable.
+
+The complete published proofs of `thm-ftc-second-part`,
+`thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral`
+and `thm-chain-rule` are coherent in the exact calculus and
+Riemann-to-Lebesgue clauses used by the same path. They move from U-P to bounded
+clear. Exact hashes, alias searches, proof clauses and audit limits are in
+`phase-2-next-20-published-levy-inversion-prerequisite-audit.md`.
 
 ## Locally convex published-prerequisite audit — 2026-09-11
 
@@ -27850,6 +27868,9 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `thm-ftc-second-part` | Original-next-20 Levy-inversion prerequisite audit, 2026-09-11: full target and exact mean-value/Darboux interfaces read. Applying MVT to an arbitrary fixed interval yields universally quantified lower/upper inequalities, so the proof sums without selecting tags; telescoping and Darboux integrability give the endpoint formula. U-P to bounded clear. Exact aliases, hash and scope: `research/phase-2-next-20-published-levy-inversion-prerequisite-audit.md`. |
+| `thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral` | Original-next-20 Levy-inversion prerequisite audit, 2026-09-11: full target and exact envelope/completeness interfaces read. Explicit CC supplies the Borel envelopes; zero integral makes them equal a.e., completeness transfers measurability, finite-interval domination gives integrability, and a.e. equality gives equality of integrals. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-levy-inversion-prerequisite-audit.md`. |
+| `thm-chain-rule` | Original-next-20 Levy-inversion prerequisite audit, 2026-09-11: full target and Caratheodory interfaces read. The two increment factorizations, continuous composition and product give the composite factor with the correct value, without division or an omitted case. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-levy-inversion-prerequisite-audit.md`. |
 | `thm-gaussian-integral` | Fourier Gaussian supplier audit, 2026-09-11: full target and its three immediate proof lemmas read. The finite positive tail comparison, product-square exhaustion, injective half-annulus polar calculation, content-zero recombination, shrinking inner-disc estimate and positive square-root selection are coherent in the used scope. U-P to bounded clear; no published edit or new Phase-2 pair. Exact hashes and audit limits: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `lem-gaussian-integral-is-finite-and-positive` | Fourier Gaussian supplier audit, 2026-09-11: full proof read; the reciprocal-quadratic tail bound, reflected negative tail, positive compact middle and mixed-improper recombination establish a finite positive integral. New bounded-clear census entry; no published edit or new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `lem-gaussian-square-is-the-plane-gaussian-integral` | Fourier Gaussian supplier audit, 2026-09-11: full proof read; product integration on symmetric squares and compact-Jordan exhaustion give the square identity. New bounded-clear census entry; no published edit or new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
@@ -28516,6 +28537,7 @@ owner's scan policy.
 | `lem-complex-translation-and-approximate-identity-interfaces` | Fourier Step-3B load-bearing supplier audit 2026-09-11: proof 1.2 derives complex `L^1`-by-`L^p` convolution existence, norm and measurability by black-box use of the already-defective Young theorem in its exact affected branch. For finite `p`, use the declared jointly Borel envelope, translation isometry and Minkowski integral inequality; handle infinity with an essentially bounded Borel representative. The current L1 Fourier product draft can instead replay its own Tonelli envelope and direct reflection under stated CC. No new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-differentiation-under-the-integral-sign` | Fourier Gaussian supplier audit 2026-09-11 promotes the existing U-P row: proof 3.1 proves convergence along every supplied increment sequence, then concludes an epsilon-delta derivative through the exact Heine-converse direction whose published contract spends countable choice; the theorem states no CC. Its a.e. derivative is also integrated without a defined measurable representative on the exceptional set. Add CC, apply the real criterion to real/imaginary parts, and define the derivative as zero on one stated null set (or supply an equivalent representative). The live Gaussian draft already has CC and pointwise differentiability everywhere. No new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-factorization-of-expectations-for-independent-variables` | Original-next-20 characteristic-function prerequisite audit 2026-09-11 promotes the existing U-P row: the nonnegative clause writes a finite extended product without handling one zero and one infinite expectation, while canonical `0*(+infinity)` is undefined. State the mixed case separately or prove the zero-factor case before using the defined positive extended product. The integrable clause is sound and is the exact bounded sine/cosine branch used by the live author. No new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
+| `thm-continuous-implies-integrable` | Original-next-20 Levy-inversion prerequisite audit 2026-09-11 promotes the existing U-C row after full-target and exact used-interface review. L3/step 2.1 invoke `thm-heine-cantor-r`, whose proof explicitly spends CC, while the consumer states no choice hypothesis; its final remark acknowledges but does not repair the contract. Add CC or use all admissible oscillation balls, a finite compactness subcover, a minimum radius and `thm-riemann-criterion`. The live sine lemma assumes AC and can discharge CC locally. Existing published suppliers suffice; no new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-levy-inversion-prerequisite-audit.md`; earlier Step3b-d evidence retained. |
 | `lem-euclidean-balls-have-positive-finite-lebesgue-measure` | Fourier support audit 2026-09-11: steps 2.1--3.1 infer measurability from containment between measurable cubes and use `lambda(B)` before the domain claim; the inference is invalid. First use published Euclidean-metric, metric-ball-openness and Borel-to-Lebesgue interfaces under the target's stated countable choice, then apply the sound cube bounds. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-total-variation-is-a-measure` | Fourier support audit 2026-09-11: proof 1.2 chooses partitions for every disjoint piece and then takes a sum of suprema without near-maximality or a valid selection. Repair choice-free via finitely many near-max partitions for each finite partial sum, published finite choice and the nonnegative-series supremum; handle infinite variations by arbitrary finite thresholds. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences` | Fourier support audit 2026-09-11: proof 1.1 directly applies `thm-riesz-fischer-completeness-of-l-p`, whose representative-subsequence clause explicitly assumes countable choice, but the corollary has no such hypothesis. State/declare countable choice and identify the inherited representative selection. The complex-Lp consumer already carries CC. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
@@ -28710,7 +28732,6 @@ The historical U-P300 scan’s 19 findings completed repair audit (7 A-R, 12 A-P
 |---|---|
 
 
-| `thm-continuous-implies-integrable` | Step3b-d 2026-09-10: confirmed inherited countable-choice assumption omitted from statement/deps when using published thm-heine-cantor-r; final remarks acknowledge cost but do not repair contract. Exact proof steps and bounded source/interface audit: research/phase-2-catchup-24-step3b-d.md, Published assumption debt. Root repair audit pending. Preserve choice-free conclusion using all eligible oscillation balls, finite Heine–Borel subcover, minimum radius and thm-riemann-criterion; retain exceptional-interval estimates in finite-discontinuity case. Existing published suppliers suffice; no new Phase2 pair established. |
 | `thm-finitely-many-discontinuities-integrable` | Step3b-d 2026-09-10: confirmed inherited countable-choice assumption omitted from statement/deps when using published thm-heine-cantor-r; final remarks acknowledge cost but do not repair contract. Exact proof steps and bounded source/interface audit: research/phase-2-catchup-24-step3b-d.md, Published assumption debt. Root repair audit pending. Preserve choice-free conclusion using all eligible oscillation balls, finite Heine–Borel subcover, minimum radius and thm-riemann-criterion; retain exceptional-interval estimates in finite-discontinuity case. Existing published suppliers suffice; no new Phase2 pair established. |
 
 ### A-R — Audited and repaired items
@@ -30007,7 +30028,6 @@ mathematical repairs. Evidence:
 | `thm-bounded-below-iff-injective-with-closed-range` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-bounded-below-iff-transpose-is-surjective` | norming-and-separation-under-hahn-banach |
 | `thm-bounded-left-inverse-iff-range-is-complemented` | Early-repair direct-consumer inventory — 2026-09-08 |
-| `thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral` | Exact direct impact-review queue |
 | `thm-bounded-right-inverse-iff-kernel-is-complemented` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-brauer-induction` | Transitive consumers (166), grouped by home page |
 | `thm-brauer-nesbitt-module-determination` | Transitive consumers (166), grouped by home page |
@@ -30034,7 +30054,6 @@ mathematical repairs. Evidence:
 | `thm-central-character-summands-split-into-linkage-blocks` | Supplier-to-published-consumer map |
 | `thm-central-characters-are-algebraic-integers` | Transitive consumers (166), grouped by home page |
 | `thm-centralizer-of-an-infinite-order-element-is-virtually-cyclic` | HG consumer map |
-| `thm-chain-rule` | Strictly supported smooth bump |
 | `thm-change-of-variables-for-an-absolutely-continuous-map-under-an-absolutely-continuous-composition-hypothesis` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-change-of-variables-for-an-increasing-absolutely-continuous-function` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-character-inner-product-computes-intertwiner-dimension` | Transitive consumers (166), grouped by home page |
@@ -30128,7 +30147,6 @@ mathematical repairs. Evidence:
 | `thm-folner-criterion-for-amenability` | 30.3 Published item-order and metadata repairs (Phase 3) |
 | `thm-forest-free-graphs-have-a-linear-anticomplete-pair-or-a-high-degree-vertex` | Expansion audit: published orphan suppliers |
 | `thm-frobenius-formula-for-induced-characters` | Transitive consumers (166), grouped by home page |
-| `thm-ftc-second-part` | Published Marcinkiewicz interpolation: local repair, no new pair |
 | `thm-fundamental-groups-from-different-maximal-trees-are-isomorphic` | 30.3 Published item-order and metadata repairs (Phase 3) |
 | `thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-gallagher-correspondence-for-an-extendible-character` | Transitive consumers (166), grouped by home page |

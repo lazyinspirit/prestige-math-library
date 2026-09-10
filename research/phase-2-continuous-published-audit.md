@@ -165,13 +165,28 @@ Post-characteristic-function target index: 2,398 unique published IDs; U-P
 confirms 2,398 unique rows with no cross-class duplicate; every indexed ID
 resolves to a current published item.
 
+The original-next-20 Levy-inversion batch promotes the existing U-C row
+`thm-continuous-implies-integrable` to A-P after a full-target and exact
+used-interface read. The target uses the CC-bearing real Heine--Cantor proof
+without stating CC. Its live sine-integral consumer assumes full AC, so the
+local use can explicitly discharge the inherited contract. The second FTC,
+the CC-qualified bounded Riemann/Lebesgue bridge and the real chain rule move
+from U-P to bounded clear. Exact evidence:
+`research/phase-2-next-20-published-levy-inversion-prerequisite-audit.md`.
+
+Post-Levy-inversion target index: 2,398 unique published IDs; U-P 1,417, U-C
+15, A-R 187, A-P 168 and 611 bounded clears. Mechanical recount confirms no
+within-class or cross-class duplicate; all 2,398 indexed IDs resolve to current
+published items. The current published census is 15,930, leaving 13,532 outside
+the index.
+
 ## Next target
 
-1. Reconcile any further exact next-20 or Fourier published-interface issues
+1. Audit `lem-finite-rectangle-unions-form-a-generating-algebra` and
+   `thm-completion-measurable-functions-have-base-measurable-representatives`,
+   the exact published inputs to the active complex-L2 rectangle-density path.
+2. Reconcile any further exact next-20 or Fourier published-interface issues
    reported by the root worker without auditing draft readiness.
-2. Continue the regular-measure/RMK direct supplier chain only where it affects
-   an actual published proof or a selected repair path; keep general LCH debt
-   distinct from the explicit Euclidean Fourier path.
 3. Continue through original next-20 batches by actual prerequisite pressure,
    then sample published items outside the existing 2,398-ID reference pool.
 
