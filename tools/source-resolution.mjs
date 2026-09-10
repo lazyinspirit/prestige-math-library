@@ -8,8 +8,8 @@ export function sourceResolutionErrors(source) {
   const errors = [];
   if (!url(source.url)) errors.push('missing original source URL');
   if (r.status !== 'dropped') errors.push('owner escalation or unresolved source');
-  if (r.decided_by !== 'step-1-scaffolder' || r.confidence !== 'certain') {
-    errors.push('requires a fully confident Step 1 decision; otherwise escalate to owner');
+  if (!['step-1-scaffolder', 'owner'].includes(r.decided_by) || r.confidence !== 'certain') {
+    errors.push('requires a fully confident scaffolder or owner decision; otherwise escalate to owner');
   }
   if (!text(r.reason) || !text(r.search_summary)) errors.push('missing retrieval failure and search evidence');
   if (!Array.isArray(r.attempts) || r.attempts.length < 6

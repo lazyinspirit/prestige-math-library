@@ -110,7 +110,10 @@ repairs retain their assigned scope.
 After an initial full-text retrieval failure, search alternatives and retry at
 most five times. Stop on success and reuse recorded attempts. After exhaustion,
 give a complete alternative local proof and prerequisites with justified
-confidence, or escalate. A source drop waives unavailable backing, never results.
+confidence, or escalate. The owner may resolve an escalated source with the
+same complete alternative-proof and exhausted-retrieval evidence, recorded as
+`decided_by: owner`; do not attribute that decision to the original scaffolder.
+A source drop waives unavailable backing, never results.
 Temporary outages do not establish permanent unavailability. Preserve genuine
 fetch, URL and source-backing evidence; a PDF page count does not establish reading.
 URL sweeps that fail only with transport errors wait for network recovery;

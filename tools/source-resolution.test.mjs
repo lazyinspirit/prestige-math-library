@@ -33,6 +33,17 @@ test('documented drops preserve results without pretending to fetch the original
   assert.equal(s.fetch_verified, undefined);
 });
 
+test('an owner can resolve an escalated source with the same complete evidence', () => {
+  const s = source();
+  s.source_resolution.decided_by = 'owner';
+  assert.equal(sourceDropped(s), true);
+  s.source_resolution.alternatives = [];
+  assert.equal(sourceDropped(s), false);
+  s.source_resolution = source().source_resolution;
+  s.source_resolution.decided_by = 'unknown';
+  assert.equal(sourceDropped(s), false);
+});
+
 test('insufficient retries, uncertainty, absent searches and orphan results fail closed', () => {
   for (const change of [
     (r) => { r.attempts.pop(); },
