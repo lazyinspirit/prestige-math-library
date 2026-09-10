@@ -34,13 +34,50 @@ Doctor passed all 35 stages, 412 command flags and 41 task/brief files.
 Controller 62050 started at 2026-09-10 05:29:25 UTC. The genuine checkpoint
 import and all 39 full-frontier gates passed, followed by the post-review
 baseline and edge index. Step `5b-cross` launched at 05:30:38 UTC;
-worker 63206 is verified Sol/high. Current index: six cross-batch edges,
+worker 63206 (verified Sol/high) completed its review at about 05:49 UTC.
+Current index: six cross-batch edges,
 zero forward references, zero post-review changes. The index was regenerated
 after synchronizing the hash-schema key in both producers; the stale initial
 760-change list was a detector-schema mismatch, not changed mathematics.
-No old execution receipt was adopted. Next: supervise this audit, exact Step 5b
-closure and remaining stages; stop at frontier completion without another frontier.
+No old execution receipt was adopted. Next: resolve final-gate blockers, then
+supervise exact Step 5b closure and remaining stages; stop at frontier completion
+without another frontier.
 Original state and execution receipts must not be renumbered or adopted.
+
+### Final-gate supervision, 2026-09-10 05:59 UTC
+
+The completed reviewer accepted all six cross-batch interfaces. Four gate rows
+confirm historical defects already repaired; they are not newly discovered defects.
+The final battery stopped on an imported deferred published reflection-degree
+dependency finding. Engine worker 68742, Sol/high, owns
+`5b-gate-step5-routing-final-1`; do not race its item/ledger edits. The controller
+was temporarily paused while the operator inspected the blockers; verify live
+state before steering it.
+
+Root reconciled batch 15's Balogh alternative-proof direct dependencies with
+the authored theorem and manifest. The former list is preserved as
+`scaffold_deps`; all ten remain in the current transitive dependency closure.
+No mathematical content, source-reading receipt or approval was changed.
+`coverage-checklist` passes both pages and 176 harvested results without errors
+or warnings. The two Marker source archive swaps were already applied by the
+engine; the fresh URL sweep passes all 88 live URLs and 91 citation decisions.
+The controller was resumed at 05:59 UTC and still owns the active repair.
+
+The impact receipt is still pending, not waived: 716 changed interfaces consist
+of 711 additions and five existing published carriers (metric continuity theorem,
+definition and separate-continuity counterexample; van Kampen boundary-label
+and curvature lemmas). Its 5,483 affected IDs are candidates, not defect totals.
+Historical HG receipts `phase-2-hg-prerequisite-impact.json` and
+`phase-2-hg-prerequisite-impact-6c.json` overlap 4,829 candidates; 4,786 match the
+HG post-6b mathematical snapshot hash. The other 654 lack those receipts.
+This is a mechanical scouting count, not impact approval: validate the exact
+changed-source interfaces, consumer uses and current hashes before reusing
+historical evidence. The original pre-author baseline must remain intact.
+The lead task template now explicitly assigns both impact receipts, including
+empty-window attribution and current-hash reconciliation of historical evidence.
+Previously the task mentioned impact only in the legacy merge-import paragraph,
+so a completed edge audit could omit both receipts and fail the final battery.
+Narrow gate-repair scope is unchanged.
 
 Integration regression result: 648 TypeScript workflow tests passed, zero failed
 or skipped, including type checking. Five checkpoint migration tests passed;

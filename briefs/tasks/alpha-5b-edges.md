@@ -26,6 +26,19 @@ pre-existing removal before deciding it; a page addition, removal, or
 reading-order change is an owner blocker unless the active task explicitly
 grants that authority.
 
+For the full lead audit, close both impact windows with `tools/impact-audit.mjs`:
+
+- `--touches research/<run>-touches.json --from pre-author --to post-5a --receipt research/<run>-impact.json`
+- `--touches research/<run>-touches.json --from post-5a --current --receipt research/<run>-impact-5b.json`
+
+Record a reviewer even for an empty window. For every affected item, record
+the exact changed supplier, consumed clause and justified disposition. Reuse
+historical review evidence only after checking its attribution, current hashes
+and coverage of the current interface changes; never copy approvals blindly.
+Preserve the original baseline. Record unresolved findings and published debt
+honestly; do not clear the receipt with generic notes. A narrowly assigned gate
+repair covers only its primary blocker, not unrelated impact candidates.
+
 Write `research/<run>-alpha-5b.md` with the evidence, disposition, edits, and
 remaining blocker for each computed obligation. The closure gates rederive
 edges, validate verdict currency and ledger ownership, and run the Step-5 gate

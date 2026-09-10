@@ -94,6 +94,11 @@ Snapshot order is pre-author before Step 3b, post-author in Step 4, post-5a afte
 group review, and post-step7 after repair. Impact checks include authoring changes.
 Maintain consumer inputs under briefs/tasks/frontier-dependency-ledger.md; the
 engine merges them at mutable joins. Graph/hash checks do not certify proofs.
+The Step 5b lead owns both impact receipts: pre-author to post-5a, and post-5a
+to current content. Empty windows still need reviewer attribution. Historical
+reviews may supply evidence only after current hash and interface reconciliation;
+never reset a baseline or bulk-approve candidates to close a gate. Narrow gate
+repairs retain their assigned scope.
 
 After an initial full-text retrieval failure, search alternatives and retry at
 most five times. Stop on success and reuse recorded attempts. After exhaustion,
