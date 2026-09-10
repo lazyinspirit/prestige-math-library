@@ -463,6 +463,17 @@ existing A-P row stays open and the classification counts do not change. The
 exact hashes, clauses and author receipt are mapped in
 `research/phase-2-next-20-published-killing-form-prerequisite-audit.md`.
 
+The connection-author compact-section concern is a bounded clear, not a
+published defect. The complete chart-bump proof constructs a compact closed
+set containing the support, and the vector-bundle definition together with the
+published frame/trivialization equivalence supplies the local-frame existence
+used in proof 1.1. These are correct implicit uses of adequate published
+suppliers; explicit dependency edges would only improve exposition. The one
+existing U-P row moves to the bounded-clear table. Counts are now 2,473 unique
+published IDs: U-P 1,410, U-C 15, A-R 187, A-P 189 and 672 bounded clears;
+13,457 published items remain outside the index. Evidence:
+`research/phase-2-next-20-published-compact-section-extension-audit.md`.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface

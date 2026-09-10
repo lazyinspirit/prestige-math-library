@@ -28051,14 +28051,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1411 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1410 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 15 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 189 | Recorded direct review and an unresolved item-specific repair. |
 
-671 further reference-pool items have bounded no-repair-needed dispositions
+672 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,802 items and the expanded reference pool contains 2,473 unique items.
+1,801 items and the expanded reference pool contains 2,473 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28836,6 +28836,7 @@ owner's scan policy.
 | `def-coarsely-dense-subset-and-quasi-isometry` | Active HG quasi-isometry audit: full definition read. Coarse density, coarse inverse and quasi-isometry clauses are consistently quantified; the empty-space convention avoids undefined point-to-empty-set distance. No repair in this used scope. Exact hash/evidence: research/phase-2-next-20-published-quasi-isometry-characterization-audit.md. |
 | `def-coarse-lipschitz-map-and-quasi-isometric-embedding` | Active HG quasi-isometry audit: full definition read. The upper coarse-Lipschitz and two-sided quasi-isometric-embedding constants are coherent and supply the exact estimates used in the audited characterization. No repair in this used scope. Exact hash/evidence: research/phase-2-next-20-published-quasi-isometry-characterization-audit.md. |
 | `def-bounded-distance-between-maps` | Active HG quasi-isometry audit: full definition read. Its uniform nonnegative distance bound has the correct common domain and supplies both quasi-inverse closeness estimates used in the audited characterization. No repair in this used scope. Exact hash/evidence: research/phase-2-next-20-published-quasi-isometry-characterization-audit.md. |
+| `lem-every-vector-in-a-fibre-extends-to-a-compactly-supported-smooth-section` | Connection-author handoff reconciliation 2026-09-11: full target, four declared dependencies, full chart-bump proof and local-frame existence interfaces read. Chart-bump proofs 3.1--5.1 construct a compact closed `K` and prove the support lies in it, so compactness is a correct use of the complete published supplier despite the short Statement omitting that adjective. Vector-bundle local triviality plus the frame/trivialization proposition adequately supplies proof 1.1's local frame. Adding direct edges would improve exposition but is not repair debt under the adequate-implicit-supplier rule. No live blocker or new pair. Exact hashes/clauses/dedup: `research/phase-2-next-20-published-compact-section-extension-audit.md`. |
 
 
 ### A-P — Audited items pending Phase 3 repair
@@ -29986,7 +29987,6 @@ mathematical repairs. Evidence:
 | `lem-elementary-duality-formula-for-nonnegative-l-p-functions` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `lem-elementary-kernel-range-annihilator-identities` | norming-and-separation-under-hahn-banach |
 | `lem-equal-plane-face-boundaries-force-a-cycle` | Scaffold III.4.1 — plane dual dependency |
-| `lem-every-vector-in-a-fibre-extends-to-a-compactly-supported-smooth-section` | Open findings from the bump-consumer audit — 2026-09-08 |
 | `lem-expander-size-adjustment-and-laziness` | 51. Exact live-plan metadata resynchronization set |
 | `lem-expander-walk-bad-edge-return` | 51. Exact live-plan metadata resynchronization set |
 | `lem-expander-walk-contraction` | 51. Exact live-plan metadata resynchronization set |
