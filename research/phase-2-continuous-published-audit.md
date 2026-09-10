@@ -341,15 +341,27 @@ Post-Radon target counts: 2,451 unique published IDs; U-P 1,405, U-C 15, A-R
 187, A-P 178 and 666 bounded clears. The current census leaves 13,479 published
 IDs outside the index.
 
+The adjacent HG quasi-inverse supplier is newly A-P for a narrow proof-label
+error: proof 2.1 says "upper inequality" while its correct displayed chain uses
+the lower quasi-isometric-embedding inequality. The calculation and conclusion
+remain sound. The complete coarse-map, quasi-isometry and bounded-distance
+definitions receive three bounded-clear dispositions in their used scope.
+Updated evidence remains in
+`research/phase-2-next-20-published-quasi-isometry-characterization-audit.md`.
+
+Post-adjacent-HG counts: 2,455 unique published IDs; U-P 1,405, U-C 15, A-R
+187, A-P 179 and 669 bounded clears. The current census leaves 13,475 published
+IDs outside the index.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
    issues reported by the root worker, prioritizing items actually consumed by
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
-   then audit bounded samples of published items outside the 2,451-ID index.
+   then audit bounded samples of published items outside the 2,455-ID index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,479 published items
+No exhaustive discovery claim is authorized while 13,475 published items
 remain outside the index and dependency interfaces remain unaudited.

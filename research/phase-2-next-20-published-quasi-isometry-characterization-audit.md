@@ -1,10 +1,10 @@
 # Published quasi-isometry characterization audit — 2026-09-11
 
 This bounded audit follows the active HG author handoff. It covers the complete
-current target, both declared dependencies, the exact definition of a
-quasi-isometric embedding, and direct published consumers. It is not a full
-audit of the quasi-isometry page or transitive HG closure. No published item
-was edited.
+current target, both declared dependencies, the exact definitions of a
+quasi-isometric embedding and bounded distance, and direct published consumers.
+It is not a full audit of the quasi-isometry page or transitive HG closure. No
+published item was edited.
 
 ## Target and deduplication
 
@@ -64,6 +64,26 @@ is the proposed local repair.
 
 ## Impact and disposition
 
+The adjacent supplier
+`thm-a-quasi-isometric-embedding-with-coarsely-dense-image-admits-a-quasi-inverse`,
+SHA-256
+`cf2186080f5bf06a1581fbb6481a47cd736e6c31ef03e822e9b3c38d0730c193`,
+has a separate narrow wording defect. In proof 2.1 the first displayed chain
+uses the **lower** quasi-isometric-embedding bound for `f` to obtain an upper
+coarse-Lipschitz bound for `g`, but the prose calls it the "upper inequality
+for `f`." The display, rearrangement and remainder of the proof are correct;
+replace "upper" with "lower." This is newly A-P because the printed proof
+attribution is false, but it creates no mathematical blocker and needs no new
+supplier.
+
+The complete definitions
+`def-coarsely-dense-subset-and-quasi-isometry`,
+`def-coarse-lipschitz-map-and-quasi-isometric-embedding`, and
+`def-bounded-distance-between-maps` were also read. Their quantified clauses,
+empty-space convention and constant domains are coherent in the exact uses
+above. They receive bounded no-repair-needed dispositions; this does not
+certify their transitive dependencies or all consumers.
+
 The direct published consumer
 `thm-two-metric-spaces-are-quasi-isometric-exactly-when-they-contain-bilipschitz-equivalent-separated-nets`
 uses both directions of the characterization. It is an impact-review candidate,
@@ -72,5 +92,6 @@ repair above. The active HG draft consumer writes the same lower-bound estimate
 locally and therefore is not blocked. Existing published definitions suffice;
 no new Phase-2 pair is identified.
 
-Disposition: newly A-P, one new indexed ID, with no duplicate and no exhaustive
-consumer or transitive-closure claim.
+Disposition: the characterization and adjacent supplier are newly A-P; the
+three exact definitions are newly bounded clear. Five new indexed IDs are added
+with no duplicate and no exhaustive consumer or transitive-closure claim.
