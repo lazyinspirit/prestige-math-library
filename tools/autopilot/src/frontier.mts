@@ -1,4 +1,4 @@
-// Step 0, mechanically: what is buildable, how it batches, and what the plan
+// Planning, mechanically: what is buildable, how it batches, and what the plan
 // and the design docs disagree about.
 //
 // All three of these were done by hand at the start of the last run. All three

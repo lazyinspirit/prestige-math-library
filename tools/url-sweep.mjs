@@ -21,7 +21,7 @@
 // THREE THINGS THAT MADE IT A BUILD GATE.
 //
 // 1. `--coverage`. The original reads URLs out of `items/<id>.md`, which do not
-//    exist until step 5. Scaffold-time source URLs live in `coverage.json`, so
+//    exist until step 3. Scaffold-time source URLs live in `coverage.json`, so
 //    without this the gate could not run at the only step where acting on a dead
 //    source still costs a scaffold edit instead of a rewrite.
 //
@@ -142,7 +142,7 @@ for (const coverage of coverages) {
         // The mirror case: a source reverted to its recovered ORIGIN keeps the
         // archive snapshot as fallback provenance. Neither is the reader-facing
         // citation twice over — probing the parked snapshot re-fails the gate
-        // on archive.org weather (a 503 held stage 6c for half an hour while
+        // on archive.org weather (a 503 held stage 5b for half an hour while
         // the citation itself was live).
         if (source?.archived_fallback?.snapshot && source.archived_fallback.snapshot !== source.url) {
           try { superseded.add(new URL(source.archived_fallback.snapshot).href); } catch { /* not a URL */ }

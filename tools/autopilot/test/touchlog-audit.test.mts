@@ -6,7 +6,7 @@
 // noise burying the four real signals. A refutation event is now a distinct
 // (id, item_sha256) rejection; the live positive control collapsed the set
 // from 30 to exactly the two twice-rejected-version items plus the two
-// refuted-then-repaired ones the step-10 report had identified by hand.
+// refuted-then-repaired ones the step-9 report had identified by hand.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mkdtempSync, mkdirSync, writeFileSync } from 'node:fs';

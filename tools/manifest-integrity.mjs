@@ -62,7 +62,7 @@ const manifestPages = () => {
 const current = manifestPages();
 
 if (write) {
-  // The ledger is the step-0 baseline the gate compares against. Overwriting
+  // The ledger is the planning baseline the gate compares against. Overwriting
   // it re-baselines the anti-scope-loss check to whatever the manifests NOW
   // say — a degraded manifest set would be confirmed, not caught. Once, and
   // --force is the deliberate, on-the-record re-baseline.
@@ -109,7 +109,7 @@ if (asJson) {
     console.log(`\nSCOPE LOSS — ${missing.length} page(s) left the run without a disposition:`);
     for (const m of missing) console.log(`  ${m.id}  (${m.kind}, batched at ${m.batch})`);
     console.log('\nA page may move between batches or be split into new pages. It may not vanish.');
-    console.log('If it was genuinely dropped, that is an owner decision and belongs in the step-10 report,');
+    console.log('If it was genuinely dropped, that is an owner decision and belongs in the step-9 report,');
     console.log('not in a silent manifest edit.');
   }
   if (added.length) {

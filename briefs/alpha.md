@@ -1,7 +1,7 @@
 # Alpha
 
 For Step 3 onward, follow `briefs/tasks/frontier-dependency-ledger.md` within
-your write scope. Step 9's lead must refresh and read the unified frontier ledger.
+your write scope. Step 8's lead must refresh and read the unified frontier ledger.
 
 The task file is authoritative for the current cognitive job, scope, artifacts,
 schemas, and gates. Read it with [README.md](../README.md),
@@ -28,9 +28,9 @@ path rather than repairing it yourself.
 Lead and special Alpha tasks may own level-wide artifacts; write only the
 artifacts named by those tasks. Never rename an established item id. Do not
 write judge verdicts or stamps. Published content, scope changes, deletion,
-and reading-order changes require the exact task-authorised protocol. Step-8
+and reading-order changes require the exact task-authorised protocol. Step-7
 adjudicators may add fully proved missing-dependency lemmas and register them
-on their owned pages under the Step-8 task's explicit exception; otherwise
+on their owned pages under the Step-7 task's explicit exception; otherwise
 report the issue without changing it.
 
 ## Review and repair standard
@@ -56,7 +56,7 @@ its prior `verification.judge` record.
 
 Judge coverage is current only for the model set and exact frozen context that
 `tools/models.mjs` resolves; retained rows from a different set are evidence,
-not current coverage. In a Step-8 adjudication, only a `confirmed_fatal`
+not current coverage. In a Step-7 adjudication, only a `confirmed_fatal`
 outcome for the exact assigned rejection licenses a content repair.
 `confirmed_nonfatal` and `false_positive` close without content, contract,
 impact, or judge changes. The task controls the durable cycle limit and any

@@ -4,7 +4,7 @@
 // A page-level `sufficient` verdict does not say which deferred or out-of-scope
 // rows were actually checked.  This tool gives each decline a stable identity
 // and binds its decision to both the exact coverage row and the relevant page
-// closure.  Step 9 can then review only decisions whose mathematical context
+// closure.  Step 8 can then review only decisions whose mathematical context
 // changed.  Runs created before this receipt existed safely fall back to a full
 // review because every row is pending.
 
@@ -169,9 +169,9 @@ function writeDelta() {
   const rows = current.map((row) => ({ ...row, prior_decision: exact(old.get(row.decline_id), row) ? old.get(row.decline_id).decision : null,
     prior_evidence: exact(old.get(row.decline_id), row) ? old.get(row.decline_id).evidence : '' }));
   const pending = rows.filter((row) => !row.prior_decision);
-  const out = resolve(value('--out') || join(research, `${run}-step9-scope-delta.json`));
+  const out = resolve(value('--out') || join(research, `${run}-step8-scope-delta.json`));
   writeFileSync(out, `${JSON.stringify({ version: 1, run, total_declines: rows.length, pending_count: pending.length, rows }, null, 2)}\n`);
-  console.log(`scope-decisions: Step 9 delta has ${pending.length}/${rows.length} decision(s) requiring review`);
+  console.log(`scope-decisions: Step 8 delta has ${pending.length}/${rows.length} decision(s) requiring review`);
 }
 
 if (command === 'prepare') {
@@ -220,7 +220,7 @@ if (command === 'check') {
   process.exit(errors.length ? 1 : 0);
 }
 
-const deltaPath = join(research, `${run}-step9-scope-delta.json`);
+const deltaPath = join(research, `${run}-step8-scope-delta.json`);
 const delta = existsSync(deltaPath) ? readJson(deltaPath) : { rows: [] };
 const { current, recorded, errors } = validate();
 if (errors.length) die(`cannot render with ${errors.length} invalid current decision(s); run check`);
@@ -228,11 +228,11 @@ const currentById = new Map(current.map((row) => [row.decline_id, row]));
 const decisionById = new Map(recorded.map((row) => [row.decline_id, row]));
 const reviewed = new Set((delta.rows ?? []).filter((row) => !row.prior_decision).map((row) => row.decline_id));
 const historicalOverturns = (delta.rows ?? []).filter((row) => reviewed.has(row.decline_id) && !currentById.has(row.decline_id));
-const lines = [`# Step 9 scope-denial decision register — ${run}`, '',
+const lines = [`# Step 8 scope-denial decision register — ${run}`, '',
   `- Current declines: ${current.length}`,
-  `- Decisions re-examined in Step 9: ${reviewed.size}`,
-  `- Overturned in Step 9: ${historicalOverturns.length}`, '',
-  '| Batch | Page | Result | Verdict | Step 9 review | Evidence |',
+  `- Decisions re-examined in Step 8: ${reviewed.size}`,
+  `- Overturned in Step 8: ${historicalOverturns.length}`, '',
+  '| Batch | Page | Result | Verdict | Step 8 review | Evidence |',
   '|---:|---|---|---|---|---|'];
 const cell = (text) => String(text ?? '').replaceAll('|', '\\|').replaceAll('\n', ' ');
 for (const row of current) {
@@ -240,8 +240,8 @@ for (const row of current) {
   lines.push(`| ${cell(row.batch)} | ${cell(row.page)} | ${cell(row.name)} | ${cell(decision.decision)} | ${reviewed.has(row.decline_id) ? 'reviewed' : 'carried exact decision'} | ${cell(decision.evidence)} |`);
 }
 for (const row of historicalOverturns) lines.push(`| ${cell(row.batch)} | ${cell(row.page)} | ${cell(row.name)} | overturned | reviewed | Coverage row removed or changed to an included disposition; see the updated coverage and authored artifacts. |`);
-const notesPath = join(research, `${run}-alpha-step9-review.md`);
+const notesPath = join(research, `${run}-alpha-step8-review.md`);
 if (existsSync(notesPath)) lines.push('', '## Alpha review notes', '', readFileSync(notesPath, 'utf8').trim());
-const out = resolve(value('--out') || join(research, `${run}-alpha-step9.md`));
+const out = resolve(value('--out') || join(research, `${run}-alpha-step8.md`));
 writeFileSync(out, `${lines.join('\n').trim()}\n`);
 console.log(`scope-decisions: rendered ${current.length + historicalOverturns.length} decision row(s) to ${out}`);

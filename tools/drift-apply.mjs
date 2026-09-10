@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// drift-apply — materialise what the step-0 drift review DECIDED.
+// drift-apply — materialise what the Step 1 drift review DECIDED.
 //
 //   node tools/drift-apply.mjs --run <run>
 //
@@ -59,7 +59,7 @@ const maxPairs = Number(opt('max-pairs') ?? 27);
 const MINT_RESCOPE_THRESHOLD = 3;
 const dryRun = has('dry-run');
 
-const reportPath = `research/${run}-alpha-step0-drift.md`;
+const reportPath = `research/${run}-alpha-step1-drift.md`;
 if (!existsSync(reportPath)) {
   console.error(`ERROR drift-apply-no-report: ${reportPath} — nothing to apply`);
   process.exit(1);

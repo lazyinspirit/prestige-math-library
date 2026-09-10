@@ -22,7 +22,7 @@
 //                   nobody in this run is auditing.
 //
 // Until 2026-08-16 this file contained no `process.exit(1)` at all: it printed
-// `missing-source: 3` and exited 0, so the 6c gate that runs it could only ever
+// `missing-source: 3` and exited 0, so the 5b gate that runs it could only ever
 // pass. A gate that cannot fail is decorative, and the engine reads exit codes,
 // not prose. The summary line at the end is what the gate's liveness probe
 // reads, so a run over an empty or mis-selected manifest set cannot pass as a

@@ -10,5 +10,5 @@ A published correction requiring a debatable restatement, new result, deletion,
 or reading-order change is an owner blocker.
 
 Return a dispatch report with the gate id, each finding, disposition, evidence,
-edit, rerun result, and unresolved blocker. This Step-5 repair route has no
-Step-6 group or lead artifact.
+edit, rerun result, and unresolved blocker. This Step-3 repair route has no
+Step-5 group or lead artifact.

@@ -1,4 +1,4 @@
-// Step 10 must classify the active singleton judge directly. The old reporter
+// Step 9 must classify the active singleton judge directly. The old reporter
 // destructured two models, so a complete Terra verdict was silently reported
 // as incomplete after the owner retired Terra from the judge lineup.
 import { test } from 'node:test';

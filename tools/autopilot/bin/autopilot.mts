@@ -4,7 +4,7 @@
 //   autopilot frontier [--categories a,b]      complete future schedule
 //   autopilot frontier --next                  all-category >95%-published next set
 //   autopilot plan --run <name> --pairs a,b    step 0: batch, manifest, drift-check
-//   autopilot start --run <name> [--detach]    run steps 1..10 with nobody in the loop
+//   autopilot start --run <name> [--detach]    run steps 1..9 with nobody in the loop
 //   autopilot status                           current state, human-readable
 //   autopilot pause | resume | stop | report
 //   autopilot retry [--unit N]
@@ -12,7 +12,7 @@
 // The daily shape this is built for:
 //   cd <repo> && autopilot frontier            # see what is buildable
 //   autopilot plan --run frontier-15 --pairs …  # step 0, mechanical
-//   autopilot start --run frontier-15 --detach  # steps 1..10, autonomous
+//   autopilot start --run frontier-15 --detach  # steps 1..9, autonomous
 //   autopilot status                            # any time, from anywhere
 
 import { readFileSync, writeFileSync, existsSync, mkdirSync, appendFileSync, rmSync, openSync, closeSync, readdirSync } from 'node:fs';
@@ -22,6 +22,7 @@ import { fileURLToPath } from 'node:url';
 import { dirname } from 'node:path';
 
 import { State, statePath } from '../src/state.mts';
+import { assertWorkflowRevision } from '../src/workflow-revision.mts';
 import { Reporter, renderStatus } from '../src/reporter.mts';
 import { Executor } from '../src/executor.mts';
 import { makeExecAdapter } from '../src/adapters/exec.mts';
@@ -66,7 +67,7 @@ function loadConfig(): Config {
       // needed its own copy of every brief, and those copies diverged: this repo
       // carried a 409-line canonical Alpha brief covering steps 3/4/6/8 and a
       // 115-line per-run one covering step 3 only, and five stages dispatched
-      // the step-3 one to Alphas doing steps 8, 9 and 10.
+      // the step-3 one to Alphas doing steps 7, 8 and 9.
       '--var', 'run={run}', '--var', 'i={unit}', '--var', 'output={artifact}'],
     concurrency: 5,
     maxAttempts: 2,
@@ -123,7 +124,7 @@ function writeDriftArtifacts(run: string, pages: string[], allowInRunDependencie
   const evidence = driftEvidence(repo, pages);
   const evPath = join(repo, 'research', `${run}-drift-evidence.json`);
   writeFileSync(evPath, JSON.stringify(evidence, null, 2) + '\n');
-  const taskPath = join(repo, 'research', `${run}-alpha-step0-drift.task.md`);
+  const taskPath = join(repo, 'research', `${run}-alpha-step1-drift.task.md`);
   writeFileSync(taskPath, [
     `# Step 1a — prerequisite drift, ${run}`,
     '',
@@ -135,7 +136,7 @@ function writeDriftArtifacts(run: string, pages: string[], allowInRunDependencie
     allowInRunDependencies
       ? '- This run counts published or lower-order in-run prerequisites as available.'
       : '- Only published prerequisites count as available.',
-    `- Write research/${run}-alpha-step0-drift.md with one section per assigned A page.`,
+    `- Write research/${run}-alpha-step1-drift.md with one section per assigned A page.`,
     '- Use exactly one verdict per section, with concrete IDs and numeric orders:',
     '  - `### PAGE_ID` followed by evidence and `VERDICT: no-drift`.',
     '  - `VERDICT: drift-applied — added PAGE_ID (order N)`.',
@@ -169,13 +170,18 @@ async function buildExecutor(run?: string) {
   const stagesPath = resolve(config.stages);
   const mod = await import(stagesPath);
   // The executor hot-reloads the table and its sibling stage modules at tick
-  // boundaries (validated first, refused on problems). mathlib.step6.mts is a
+  // boundaries (validated first, refused on problems). mathlib.step5.mts is a
   // composed part of the table, not a separately restart-bound configuration.
   (config as any).stagesPath = stagesPath;
   config.stagesWatch = readdirSync(dirname(stagesPath))
     .filter((name) => name.endsWith('.mts'))
     .map((name) => join(dirname(stagesPath), name));
-  const state = new State(statePath(config.stateDir)).init(config.run);
+  const state = new State(statePath(config.stateDir));
+  const hasResults = existsSync(config.dispatchDir)
+    && readdirSync(config.dispatchDir).some(name => name.endsWith('.result.json'));
+  assertWorkflowRevision(state.data, mod.workflowRevision, hasResults);
+  if (mod.workflowRevision) state.data.workflowRevision = mod.workflowRevision;
+  state.init(config.run);
   const reporter = new Reporter({ dir: config.stateDir, intervalMs: config.reportIntervalMin * 60 * 1000 });
   const adapter = makeExecAdapter({ argv: config.argv, cwd: repo, logger: (m) => reporter.event('exec', { command: m }) });
   // The abort signal is deliberately NOT wired to SIGTERM.
@@ -311,7 +317,7 @@ switch (cmd) {
     // stderr refusal — so a `plan --force` re-scope rewrote every manifest,
     // left the ledger owing pages the run no longer builds, and reported
     // success. The scope gate would then have blocked stage 1 hours later,
-    // over a step-0 defect this line was in a position to name immediately.
+    // over a planning defect this line was in a position to name immediately.
     {
       const { spawnSync } = await import('node:child_process');
       const ledgerArgs = ['tools/manifest-integrity.mjs', '--run', run, '--write-ledger'];

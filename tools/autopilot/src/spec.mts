@@ -1,6 +1,6 @@
 // Stage-spec validation — the checks that must happen before a run starts.
 //
-// WHY THIS FILE EXISTS. frontier-14 reached the end of step 10 with two
+// WHY THIS FILE EXISTS. frontier-14 reached the end of step 9 with two
 // confirmed-fatal defects unrepaired, sixteen judge rejections nobody had read,
 // and the workflow's own receipt gate red. No gate failed, because the terminal
 // stage declared `gates: () => []` and the engine reads an empty gate list as a
@@ -13,7 +13,7 @@
 // A model wrote a report saying the level was not publishable, the engine marked
 // the run done, and both were correct about their own half.
 //
-// The lesson is not "remember to add gates to step 10". It is that a stage with
+// The lesson is not "remember to add gates to step 9". It is that a stage with
 // no gate is a stage that cannot fail, and that should not be something a spec
 // can say by accident. It now has to be said on purpose, with a reason, and the
 // terminal stage may not say it at all.

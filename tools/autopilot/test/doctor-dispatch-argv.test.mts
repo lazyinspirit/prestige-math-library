@@ -19,7 +19,12 @@ import { doctor } from '../src/doctor.mts';
 
 const HERE = dirname(fileURLToPath(import.meta.url));
 const REPO = resolve(HERE, '..', '..', '..');
-const STAGES = join(HERE, '..', 'stages', 'mathlib.mts');
+// This suite tests argv validation, not every historical run's stage inputs.
+const STAGES = 'data:text/javascript,' + encodeURIComponent(`
+  export const stages = [{ id: 'fixture', label: 'fixture', units: () => ['one'],
+    pattern: /^fixture$/, plan: () => [],
+    gates: () => [{ id: 'fixture', argv: ['node', '--version'] }] }];
+`);
 
 const GOOD_ARGV = ['node', 'tools/dispatch.mjs', '--role', '{role}', '--attempt', '{attempt}'];
 

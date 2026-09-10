@@ -293,6 +293,7 @@ export interface Blocker {
 }
 
 export interface StateData {
+  workflowRevision?: string;
   version: number;
   run: string | null;
   startedAt: string | null;

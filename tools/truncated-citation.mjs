@@ -5,7 +5,7 @@
 // Why this exists: `citation-fidelity.mjs` flags quotes that do NOT appear in the
 // cited item, and fact lines that WIDEN what they cite. A truncated citation does
 // neither — the words are verbatim and they claim less, not more — so it passes
-// every existing screen while licensing nothing. On frontier-14 a step-6a reader
+// every existing screen while licensing nothing. On frontier-14 a step-5a reader
 // found 15 of them by hand in one batch; a hand-read sample of a defect class
 // ships as if it were the whole class, so the class gets a detector.
 //

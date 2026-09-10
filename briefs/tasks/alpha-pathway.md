@@ -1,4 +1,4 @@
-# Step 10 — pathway closure, `{{run}}`
+# Step 9 — pathway closure, `{{run}}`
 
 Read `research/{{run}}-pathway.json` and
 `research/{{run}}-pathway-closure.json`. For every pending receipt row, rewrite

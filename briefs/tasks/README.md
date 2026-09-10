@@ -1,16 +1,15 @@
 # Task templates
 
 `tools/run-tasks.mjs` renders every Markdown file here except this README to
-`research/<run>-<template>.task.md`; `tools/step8-scope.mjs` separately composes
-the Step 7/8 group tasks. The live stage table is the selection authority.
+`research/<run>-<template>.task.md`; `tools/step7-scope.mjs` separately composes
+the Step 6/7 group tasks. The live stage table is the selection authority.
 
 Templates contain only stage-specific inputs, write authority, required output,
 and focused gate work. Role-wide conduct and mathematical standards belong in
 the dispatched role brief; run-specific page data belongs in generated tasks,
 batch manifests, scope receipts, and the plan.
 
-Step 1 and Step 3 share `briefs/beta-scaffold.md`; the filename is retained for
-compatibility, but the brief applies to Beta and Alpha scaffold roles.
+Step 1 uses `briefs/beta-scaffold.md`; Step 3 authors use `briefs/group-author.md`.
 
 `run-tasks.mjs` replaces only these placeholders:
 

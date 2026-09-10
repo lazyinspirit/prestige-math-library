@@ -113,7 +113,7 @@ test('no stage pattern matches another stage\'s dispatches', async (t) => {
     for (const n of names) {
       // A later result cannot exist before this serial stage first closes. The
       // dangerous collision is a stage counting an EARLIER result, which is
-      // exactly how 6d counted 6c-lead and became undispatchable on frontier 19.
+      // exactly how 5b counted 5b-lead and became undispatchable on frontier 19.
       if ((order.get(n.stage) as number) < (order.get(st.id) as number)
           && patternFor(st, ctx).test(n.file)) {
         problems.push(`${st.id} would count ${n.stage}'s "${n.file}" as its own`);

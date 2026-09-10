@@ -36,7 +36,7 @@ function fixture(t: any) {
 
 test('Step 3 is two barriers with the requested profiles, not a Beta loop', t => {
   const f = fixture(t), pair = stages.filter(s => /^3[a-z]-/.test(s.id));
-  assert.deepEqual(pair.map(s => s.id), ['3a-scope', '3b-audit']);
+  assert.deepEqual(pair.map(s => s.id), ['3a-scope', '3b-author']);
   assert.ok(!stages.some(s => ['3-review', '3-fix', '3-recheck'].includes(s.id)));
   assert.ok(pair.every(s => !s.pipeline));
   for (const [s, profile, phase] of [[pair[0], MODEL_PROFILE_NAMES.solHigh, 'scope'], [pair[1], MODEL_PROFILE_NAMES.astraMedium, 'final']] as any) {
@@ -133,10 +133,12 @@ test('missing prerequisites can be escalated and forged receipt identities fail 
 });
 
 test('final gate retains mechanical and cross-batch checks', t => {
-  const f = fixture(t), s: any = stages.find(s => s.id === '3b-audit');
+  const f = fixture(t), s: any = stages.find(s => s.id === '3b-author');
   const ids = s.gates(f.ctx).map((g: any) => g.id);
-  for (const id of ['step3-items', 'validate-plan', 'manifest-deps', 'scope-decisions', 'url-liveness', 'frontier-dependency-ledger'])
+  for (const id of ['step3-items', 'manifest-deps', 'scope-decisions', 'url-liveness', 'frontier-dependency-ledger', 'proof-contract', 'rendercheck'])
     assert.ok(ids.includes(id), `${id} missing`);
+  assert.ok(!ids.includes('splice-verify'), 'the author barrier precedes the splice');
+  assert.ok(stages.find(s => s.id === '4-splice').gates(f.ctx).some(g => g.id === 'validate-plan'));
   assert.ok(ids.some((id: string) => /coverage/.test(id)));
   assert.ok(ids.some((id: string) => /policy/.test(id)));
 });
@@ -151,7 +153,7 @@ test('fresh missing decisions dispatch only the owning groups', async t => {
   assert.deepEqual(started[0].covers, ['1']);
   assert.equal(started[0].profile, MODEL_PROFILE_NAMES.solHigh);
   f.scope(); started.length = 0;
-  const audit: any = stages.find(s => s.id === '3b-audit');
+  const audit: any = stages.find(s => s.id === '3b-author');
   await audit.onGateFailure({ ...args, stage: audit });
   assert.equal(started.length, 1);
   assert.equal(started[0].profile, MODEL_PROFILE_NAMES.astraMedium);
@@ -173,7 +175,7 @@ test('the CLI records scope and returns nonzero until every item clears', t => {
 
 test('escalations, unchanged incomplete audits and final mechanical failures never loop', async t => {
   const f = fixture(t); f.scope();
-  const s: any = stages.find(s => s.id === '3b-audit');
+  const s: any = stages.find(s => s.id === '3b-author');
   const args = { ctx: f.ctx, stage: s, failure: { id: 'step3-items' }, executor: { start: () => assert.fail('Unexpected dispatch') } };
   f.audit('lem-a', { decision: 'escalate', confidence: undefined });
   assert.match((await s.onGateFailure(args)).owner.reason, /lem-a/);
@@ -189,6 +191,6 @@ test('escalations, unchanged incomplete audits and final mechanical failures nev
 test('prompts require concise scope decisions and impartial sequential dependency audits', () => {
   const base = new URL('../../../briefs/', import.meta.url);
   assert.match(readFileSync(new URL('step3-scope.md', base), 'utf8'), /owner alone decides/);
-  const audit = readFileSync(new URL('step3-audit.md', base), 'utf8');
-  for (const re of [/one item at a time/, /unbiased/, /honest/, /authoritative web sources/, /published and planned/, /cross-batch/, /100% confidence/, /Owner-repaired items go directly/]) assert.match(audit, re);
+  const audit = readFileSync(new URL('group-author.md', base), 'utf8');
+  for (const re of [/one item\s+at a time/, /impartial/, /honest/, /authoritative sources/, /published item/, /cross-batch/, /confidence 1/, /still needs authored content/]) assert.match(audit, re);
 });

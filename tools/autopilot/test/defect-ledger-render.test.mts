@@ -24,7 +24,7 @@ const TOOL = join(REPO, 'tools', 'defect-ledger.mjs');
 const ROW = (id: string) => ({
   defect_id: id, run: 'demo-run', at: '2026-08-16', class: 'accuracy',
   subclass: 'invalid-inference', severity: 'fatal', location: 'proof-step',
-  subject: 'thm-demo', caught_at_stage: '6b-adjudicate', caught_by_role: 'group-alpha',
+  subject: 'thm-demo', caught_at_stage: '5a-adjudicate', caught_by_role: 'group-alpha',
   disposition: 'fixed', adjudication_ref: [{ item_sha256: 'a'.repeat(64) }],
 });
 

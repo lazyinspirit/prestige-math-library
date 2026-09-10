@@ -2,7 +2,7 @@
 //
 // WHY. tools/audit-manifest.mjs classified every declared relationship and
 // printed `missing-source: 3` — and then exited 0, because the file contained
-// no `process.exit(1)` path at all. It is the 6c scope-checklist gate, and the
+// no `process.exit(1)` path at all. It is the 5b scope-checklist gate, and the
 // engine reads exit codes, not prose, so a batch manifest naming items that do
 // not exist passed the checklist that exists to catch exactly that.
 //
@@ -154,7 +154,7 @@ test('--json without --output keeps stdout a pure JSON document', () => {
 
 test('the mathlib stage declares a liveness probe on the audit-manifest gate', async () => {
   const { stages } = await import('../stages/mathlib.mts');
-  const stage: any = stages.find((entry: any) => entry.id === '6c-cross');
+  const stage: any = stages.find((entry: any) => entry.id === '5b-cross');
   const gate = stage.gates({ run: 'r', repo: REPO }).find((entry: any) => entry.id === 'audit-manifest');
-  assert.equal(gate?.liveness?.min, 1, 'the 6c audit-manifest gate must carry a liveness probe');
+  assert.equal(gate?.liveness?.min, 1, 'the 5b audit-manifest gate must carry a liveness probe');
 });

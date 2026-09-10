@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// risk-report.mjs — identify structurally high-risk items for Step-6B review.
+// risk-report.mjs — identify structurally high-risk items for Step-5a review.
 //
 //   node tools/risk-report.mjs research/level<n>-proof-contracts.json
 //   node tools/risk-report.mjs research/level<n>-proof-contracts.json --require-reviewed
@@ -61,8 +61,8 @@ function main() {
       required: tier === 'high' || tier === 'critical',
       risk_review: review,
       routing: tier === 'high' || tier === 'critical'
-        ? ['Step-6B Alpha reads every step and cited source and records a risk_review disposition']
-        : ['ordinary Step-6B authored-content review'],
+        ? ['Step-5a Alpha reads every step and cited source and records a risk_review disposition']
+        : ['ordinary Step-5a authored-content review'],
     };
     if (finding.required && requireReviewed && !(review?.status === 'complete' && typeof review.reviewer === 'string' && review.reviewer.trim() && typeof review.notes === 'string' && review.notes.trim())) {
       errors.push({ code: 'risk-review-missing', message: `${id} is ${tier} risk and lacks a complete Alpha risk_review`, id });

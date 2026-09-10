@@ -3,7 +3,7 @@
 // than the item they cite actually says.
 //
 // WHY THIS EXISTS. This is the largest confirmed-fatal class the library has:
-// ten of twenty-five step-8 rows on frontier-13, and the majority of step-6
+// ten of twenty-five step-7 rows on frontier-13, and the majority of step-5
 // findings. The shape never varies — the fact line restates a cited Statement
 // slightly wider than it is, and a numbered step then leans on the wider
 // version. Examples that reached disk:
@@ -138,7 +138,7 @@ const boundDropped = (quote, rest) => {
 // theorems of the form "for every f there exists S" are faithfully restated as
 // "every f has an S". Distinguishing a real flip from a faithful reading of a
 // forall-exists statement needs the quantifier PREFIX, which these heuristics
-// cannot recover from prose. Left to the step-6 reader, who can.
+// cannot recover from prose. Left to the step-5 reader, who can.
 
 const WIDENING = [arityWidened, boundDropped];
 

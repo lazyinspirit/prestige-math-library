@@ -1,5 +1,5 @@
 #!/usr/bin/env node
-// Mechanical contract for Step 10's pathway-prose closer.
+// Mechanical contract for Step 9's pathway-prose closer.
 //
 // `pathway-sync` decides placement, not prose. This receipt turns each brief it
 // says gained material into an exact obligation: Lead Alpha rewrites that
@@ -9,7 +9,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { REPO } from './paths.mjs';
-import { sha256 } from './step10-lib.mjs';
+import { sha256 } from './step9-lib.mjs';
 
 const argv = process.argv.slice(2);
 const command = argv[0];

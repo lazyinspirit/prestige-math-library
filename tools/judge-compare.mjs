@@ -1,4 +1,4 @@
-// Summarize the configured session-judge ledger for the Step-10 owner report.
+// Summarize the configured session-judge ledger for the Step-9 owner report.
 // The ledger keeps every verdict, while the agreement section compares the
 // latest usable verdict for each item/model after any targeted re-judging. A
 // later null on the same prompt cannot erase an earlier complete verdict; a
@@ -19,7 +19,7 @@ if (!ledger || (adjudicationsFlag >= 0 && !adjudicationsPath)) {
 // The lineup is resolved, never assumed; `lineup` is emitted so a saved report
 // says which configured models it actually compared.
 // THE COPY THAT USED TO LIVE HERE IS WHY tools/models.mjs EXISTS. The
-// frontier-15 step-10 report was computed BY HAND because this table missed the
+// frontier-15 step-9 report was computed BY HAND because this table missed the
 // 2026-08-17 lane switch that judge.mts, judge-sweep.mjs, level-coverage.mjs and
 // run-wave.mjs all carried — the reporting tool was the one tool that could not
 // read the run it reports on. It now imports the registry, so it cannot fall

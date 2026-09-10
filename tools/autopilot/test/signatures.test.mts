@@ -2,7 +2,7 @@
 // flag written from memory rather than read from the tool.
 //
 // Six invocations were checked by hand on the first real run and FOUR were
-// wrong — step8-guard, judge-sweep, merge-proof-contracts and touchlog all took
+// wrong — step7-guard, judge-sweep, merge-proof-contracts and touchlog all took
 // a `--run` or flag form that does not exist. Each would have failed hours into
 // an unattended build, in a stage nobody was watching.
 //
@@ -13,7 +13,7 @@
 
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { readFileSync, existsSync, readdirSync, statSync } from 'node:fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync, statSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { spawnSync } from 'node:child_process';
 
@@ -59,28 +59,24 @@ test('every gate and command in the stage table passes flags its tool defines', 
   assert.deepEqual(problems, [], `invented flags:\n  ${problems.join('\n  ')}`);
 });
 
-test('every brief and task file a stage will ask for exists', async (t) => {
-  if (!existsSync(join(REPO, 'research'))) return t.skip('target repo not present');
-  // THE NEWEST PLANNED RUN, not a hardcoded one. This pinned `frontier-14` and
-  // so asserted that today's stage table resolves against a run planned before
-  // half of it existed: when `1-drift` became a stage of its own it asked for
-  // `frontier-14-alpha-step0-drift.task.md`, a file that run never had, and the
-  // test failed for the age of its fixture rather than for a defect. A run's
-  // task files are written by `plan`, so the newest scope ledger names a run
-  // whose files a current stage table may fairly be checked against.
-  const runs = readdirSync(join(REPO, 'research'))
-    .map((f) => /^(.+)-scope-ledger\.json$/.exec(f)?.[1])
-    .filter(Boolean)
-    .sort((a, b) => (statSync(join(REPO, 'research', `${a}-scope-ledger.json`)).mtimeMs
-      - statSync(join(REPO, 'research', `${b}-scope-ledger.json`)).mtimeMs));
-  if (!runs.length) return t.skip('no planned run in the target repo');
-  // Use the same read-only enumeration as doctor. Calling future plan hooks
-  // before their prerequisite artifacts exist invents recovery assignments
-  // and can write generated tasks. Dynamic repair tasks are checked at launch.
-  const result = spawnSync(process.execPath,
-    [join(REPO, 'tools/run-tasks.mjs'), '--run', runs.at(-1), '--check'],
-    { cwd: REPO, encoding: 'utf8' });
-  assert.equal(result.status, 0, `${result.stdout}\n${result.stderr}`);
+
+test('newly generated tasks cover every current stage, including the composed review module', t => {
+  const run = `workflow-task-test-${process.pid}`;
+  t.after(() => {
+    for (const name of readdirSync(join(REPO, 'research')).filter(n => n.startsWith(run + '-')))
+      rmSync(join(REPO, 'research', name), { force: true });
+  });
+  writeFileSync(join(REPO, 'research', `${run}-batch-1.pages.json`), JSON.stringify([
+    { id: 'fixture-a', kind: 'A', companion: 'fixture-b', category: 'algebra', title: 'Fixture', order: 1, requires: [], items: [] },
+    { id: 'fixture-b', kind: 'B', companion: 'fixture-a', category: 'algebra', title: 'Fixture examples', order: 2, requires: ['fixture-a'], items: [] },
+  ]));
+  for (const flags of [[], ['--check']]) {
+    const result = spawnSync(process.execPath, [join(REPO, 'tools/run-tasks.mjs'), '--run', run, ...flags],
+      { cwd: REPO, encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stdout + result.stderr);
+  }
+  assert.ok(existsSync(join(REPO, 'research', `${run}-alpha-5a-direct.task.md`)));
+  assert.ok(existsSync(join(REPO, 'research', `${run}-alpha-step7.task.md`)));
 });
 
 test('doctor catches an invented flag — actually planted, not merely absent', async (t) => {

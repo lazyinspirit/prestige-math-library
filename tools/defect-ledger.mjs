@@ -3,10 +3,10 @@
 //
 // WHY THIS EXISTS. The pipeline's defect history lived in 28 append-only
 // adjudication ledgers (structured, but stage-blind: 7 of 3,920 rows carry a
-// stage), a dozen step-10 reports (rich, prose-only), reader/Alpha reports
+// stage), a dozen step-9 reports (rich, prose-only), reader/Alpha reports
 // with per-run numbering schemes, PREVENTIONS.md, 17 tool headers, and an
 // out-of-repo memory dir. Nothing could answer "what recurs", "what leaked
-// past step 6", or "which detector has ever actually been the catcher" — and
+// past step 5", or "which detector has ever actually been the catcher" — and
 // the one hand-maintained aggregate (BUILD-AUDIT-INDEX.md) was wrong by ~6x
 // on its own headline total (70 claimed; 412 counted). A row per defect turns
 // every one of those questions into a query, and the generated view cannot
@@ -49,8 +49,8 @@ import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
-const STEP6_SCOPE_TOOL = fileURLToPath(new URL('./step6-scope.mjs', import.meta.url));
-const STEP6_CLOSE_TOOL = fileURLToPath(new URL('./step6-close.mjs', import.meta.url));
+const STEP5_SCOPE_TOOL = fileURLToPath(new URL('./step5-scope.mjs', import.meta.url));
+const STEP5_CLOSE_TOOL = fileURLToPath(new URL('./step5-close.mjs', import.meta.url));
 
 const argv = process.argv.slice(2);
 const cmd = argv[0];
@@ -64,7 +64,7 @@ const ledgerPath = opt('ledger', 'research/defect-ledger.jsonl');
 const lockPath = `${ledgerPath}.append-lock`;
 const lockWait = new Int32Array(new SharedArrayBuffer(4));
 
-/** Serialize the append and generated-view refresh. Step 6 group Alphas write
+/** Serialize the append and generated-view refresh. Step 5 group Alphas write
  * concurrently; without one transaction, two unique-id checks can race and a
  * slower renderer can publish a view that predates a completed append. */
 function acquireAppendLock(timeoutMs = 30_000) {
@@ -90,11 +90,16 @@ function acquireAppendLock(timeoutMs = 30_000) {
   }
 }
 
-const STAGES = ['1-scaffold', '2-assign', '3a-scope', '3b-audit', '3-review', '3-fix', '3-recheck', '4-splice', '4-baseline',
-  '5-author', '6a-read', '6b-adjudicate', '6b-baseline', '6c-cross', '7-judge', '8-baseline',
-  '8-adjudicate', '8-rejudge', '9-scope', '9-receipt', '10-report',
+const STAGES = ['1-scaffold', '2-assign', '3a-scope', '3-baseline', '3b-author', '4-splice', '4-baseline',
+  '5a-prepare', '5a-adjudicate', '5a-baseline', '5b-edges', '5b-cross', '5b-close', '6-judge', '7-baseline',
+  '7-adjudicate', '7-rejudge', '8-scope', '8-receipt', '9-report',
   'A0', 'A1', 'A2', 'A3', 'A4', 'A6', 'A7', 'A8', 'A9', 'A10',
-  'owner', 'escaped-to-publication', 'post-publication', 'unknown'];
+  'owner', 'escaped-to-publication', 'post-publication', 'unknown',
+  // Historical rows keep their original stage identity; these are not active
+  // engine aliases and never supply dispatch coverage for the new workflow.
+  '3b-audit', '3-review', '3-fix', '3-recheck', '5-author', '6a-read',
+  '6b-adjudicate', '6b-baseline', '6c-cross', '7-judge', '8-baseline',
+  '8-adjudicate', '8-rejudge', '9-scope', '9-receipt', '10-report'];
 const ENUMS = {
   class: ['accuracy', 'richness', 'breaking-runtime', 'silent-runtime'],
   subclass: [
@@ -108,10 +113,10 @@ const ENUMS = {
     'false-or-overstrong-title', 'missing-hypothesis', 'missing-choice-scope',
     'invalid-witness', 'false-boundary-disposition', 'arithmetic-error',
     'undefined-notation', 'ill-typed-claim', 'ill-typed-construction',
-    // Current Step-6 rows distinguish frontmatter schema failures from later
+    // Current Step-5 rows distinguish frontmatter schema failures from later
     // contract drift, because the carrier defect is in the item metadata.
     'frontmatter-schema',
-    // Legacy Step-6 spellings still present in current ledgers.
+    // Legacy Step-5 spellings still present in current ledgers.
     'false-claim', 'ill-formed', 'false-computation', 'contract-mismatch',
     'overstrong-title-or-statement', 'invalid-refutation', 'missing-map',
     'missing-case', 'unlicensed-inference', 'unsupported-inference',
@@ -140,11 +145,11 @@ const OPTIONAL_ENUMS = {
   should_have_caught: STAGES,
   repair_cost: ['none', 'inline-fix', 'repair+rejudge', 'rewrite', 'rescope',
     'blocker', 'tool-change', 'run-restart', 'contract-sync',
-    // Step-6 rows recorded before the narrower `rescope` name stabilized.
+    // Step-5 rows recorded before the narrower `rescope` name stabilized.
     'narrow-statement'],
 };
-const CURRENT_STEP6_LOCATION_EXACT = new Set([
-  // Current Step-6 evidence names section labels and contract loci directly.
+const CURRENT_STEP5_LOCATION_EXACT = new Set([
+  // Current Step-5 evidence names section labels and contract loci directly.
   'Definition',
   'Statement',
   'Remark',
@@ -158,7 +163,7 @@ const CURRENT_STEP6_LOCATION_EXACT = new Set([
   // manifest-only carrier changes that left the item mathematics intact.
   'manifest',
 ]);
-const CURRENT_STEP6_LOCATION_RE = [
+const CURRENT_STEP5_LOCATION_RE = [
   /^proof-step \d+(?:\.\d+)*$/,
   /^proof-steps \d+(?:\.\d+)*-\d+(?:\.\d+)*$/,
   /^verification step \d+(?:\.\d+)*$/,
@@ -213,8 +218,8 @@ function locationAllowed(row, {
   allowFrontier29ValidateOnly = true,
 } = {}) {
   if (ENUMS.location.includes(row.location)) return true;
-  if (CURRENT_STEP6_LOCATION_EXACT.has(row.location)) return true;
-  if (CURRENT_STEP6_LOCATION_RE.some((re) => re.test(row.location))) return true;
+  if (CURRENT_STEP5_LOCATION_EXACT.has(row.location)) return true;
+  if (CURRENT_STEP5_LOCATION_RE.some((re) => re.test(row.location))) return true;
   if (allowFrontier29ValidateOnly
     && row.run === 'frontier-29'
     && FRONTIER29_VALIDATE_ONLY_LOCATION_EXACT.has(row.location)) return true;
@@ -448,8 +453,8 @@ if (cmd === 'stats') {
     for (const dir of ['research', 'research/audit']) {
       if (!existsSync(dir)) continue;
       for (const f of readdirSync(dir).filter((x) => x.endsWith('-judge-adjudications.jsonl')
-        || x.endsWith('-step8-alert-decisions.jsonl'))) {
-        const run = f.replace(/-(?:judge-adjudications|step8-alert-decisions)\.jsonl$/, '');
+        || x.endsWith('-step7-alert-decisions.jsonl'))) {
+        const run = f.replace(/-(?:judge-adjudications|step7-alert-decisions)\.jsonl$/, '');
         const fatal = readFileSync(join(dir, f), 'utf8').split('\n')
           .filter((l) => l.includes('"confirmed_fatal"')).length;
         if (fatal) fatalByRun.set(run, (fatalByRun.get(run) ?? 0) + fatal);
@@ -510,7 +515,7 @@ if (cmd === 'check') {
     }
   }
 
-  // Step-7 reader warnings may independently license fatal repairs. They use
+  // Step-6 reader warnings may independently license fatal repairs. They use
   // alert ids rather than judge tuples, but carry the same one-defect/one-row
   // obligation and exact pre-edit item guard.
   if (readerDecisionsPath && existsSync(readerDecisionsPath)) {
@@ -539,23 +544,23 @@ if (cmd === 'check') {
     errs.push(`render-stale: ${viewPath} was generated from ${stamped} but ${ledgerPath} is now ${actual} — run \`node tools/defect-ledger.mjs render\``);
   }
 
-  // (c) step-6 liveness: the 6b reports are the rows with no other mechanical
+  // (c) step-5 liveness: the 5a reports are the rows with no other mechanical
   // source (78% of frontier-14's fatals lived only in prose). Without this
   // clause the gate is satisfiable by mirroring the adjudication ledger.
-  const has6b = existsSync('research') && readdirSync('research').some((f) =>
-    f.startsWith(`${run}-alpha-`) && f.endsWith('-6b.md'));
-  if (has6b && !mine.some((r) => ['6a-read', '6b-adjudicate', '6c-cross'].includes(r.caught_at_stage))) {
-    errs.push('a 6b report exists but no ledger row is caught at 6a/6b/6c — the step-6 body is the part no other artifact holds');
+  const has5a = existsSync('research') && readdirSync('research').some((f) =>
+    f.startsWith(`${run}-alpha-`) && f.endsWith('-5a.md'));
+  if (has5a && !mine.some((r) => ['5a-adjudicate', '5b-cross'].includes(r.caught_at_stage))) {
+    errs.push('a 5a report exists but no ledger row is caught at preliminary/5a/5b — the step-5 body is the part no other artifact holds');
   }
 
   // (d) open-defect agreement with the closure receipt. FATAL rows only in the
   // ledger→closure direction: the closure receipt's namespace is unrepaired
   // fatal PROOF defects, and a nonfatal row deliberately left open — B41 on
-  // frontier-15 was a 503-ing archive snapshot whose 6b Alpha correctly
+  // frontier-15 was a 503-ing archive snapshot whose 5a Alpha correctly
   // recorded "re-sweep before publish; re-source only if still dead when the
   // archive is demonstrably healthy" — is legitimate ledger state with no
   // business in that receipt. The first version compared every open row and
-  // spent a step-8 repair round on the false positive. The reverse direction
+  // spent a step-7 repair round on the false positive. The reverse direction
   // is unconditional as before, and clause (e) is the terminal backstop that
   // keeps a nonfatal open row from surviving to publication.
   if (closurePath && existsSync(closurePath)) {
@@ -572,7 +577,7 @@ if (cmd === 'check') {
   }
 
   // (e) the terminal stage may not end with ANY open row, whatever its
-  // severity. `--no-open` is passed by the terminal 10-close gate alone: step 9 owns
+  // severity. `--no-open` is passed by the terminal 9-close gate alone: step 8 owns
   // sweeping the run's open rows (closing each whose recorded condition is
   // met, with evidence), so a row still open here is unfinished work the
   // owner must see, not a waivable detail.
@@ -582,31 +587,31 @@ if (cmd === 'check') {
     }
   }
 
-  // (f) New Step-6 runs carry exact routed decisions, not a fatal-count proxy.
+  // (f) New Step-5 runs carry exact routed decisions, not a fatal-count proxy.
   // Re-run their mechanical closure here so a later ledger edit cannot break
-  // obligation ownership after Step 6 passed. Historical runs with no decision
+  // obligation ownership after Step 5 passed. Historical runs with no decision
   // artifacts retain their evidence and are not retroactively failed.
   {
     let inResearch = [];
     try { inResearch = readdirSync('research'); } catch { /* no research dir: nothing to cross-check */ }
-    const decisionFiles = inResearch.filter((x) => x.startsWith(`${run}-alpha-`) && x.endsWith('-6b-decisions.json'));
-    const reportFiles = inResearch.filter((x) => x.startsWith(`${run}-alpha-`) && x.endsWith('-6b.md'));
+    const decisionFiles = inResearch.filter((x) => x.startsWith(`${run}-alpha-`) && x.endsWith('-5a-decisions.json'));
+    const reportFiles = inResearch.filter((x) => x.startsWith(`${run}-alpha-`) && x.endsWith('-5a.md'));
     if (decisionFiles.length) {
       for (const rf of reportFiles) {
-        const sibling = rf.replace(/-6b\.md$/, '-6b-decisions.json');
+        const sibling = rf.replace(/-5a\.md$/, '-5a-decisions.json');
         if (!decisionFiles.includes(sibling)) {
-          errs.push(`${rf} has no ${sibling} — every routed Step-6 group needs exact decisions`);
+          errs.push(`${rf} has no ${sibling} — every routed Step-5 group needs exact decisions`);
         }
       }
-      const frozenPath = join('research', `${run}-step6-closure.json`);
+      const frozenPath = join('research', `${run}-step5-closure.json`);
       const closure = spawnSync(process.execPath,
         existsSync(frozenPath)
-          ? [STEP6_CLOSE_TOOL, 'verify', '--root', process.cwd(), '--run', run]
-          : [STEP6_SCOPE_TOOL, 'check', '--root', process.cwd(), '--run', run, '--phase', 'final'],
+          ? [STEP5_CLOSE_TOOL, 'verify', '--root', process.cwd(), '--run', run]
+          : [STEP5_SCOPE_TOOL, 'check', '--root', process.cwd(), '--run', run, '--phase', 'final'],
         { encoding: 'utf8', timeout: 120_000 });
-      if (closure.status !== 0) errs.push(`Step-6 routed decisions or frozen closure no longer close:\n${closure.stderr || closure.stdout}`);
+      if (closure.status !== 0) errs.push(`Step-5 routed decisions or frozen closure no longer close:\n${closure.stderr || closure.stdout}`);
     } else if (reportFiles.length) {
-      console.log(`note: ${reportFiles.length} 6b report(s) predate exact -6b-decisions.json routing; retained as historical evidence`);
+      console.log(`note: ${reportFiles.length} 5a report(s) predate exact -5a-decisions.json routing; retained as historical evidence`);
     }
   }
 

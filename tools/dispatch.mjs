@@ -35,66 +35,32 @@ const ROLES = Object.freeze({
   // does instead: it asserts from memory.
   // One Beta or reader owns one batch. The run ceiling is 27 A/B pairs, hence
   // at most 27 batches; neither lane should add an artificial second wave.
-  beta:         { ...lane('agentic'), sandbox: 'workspace-write', cap: 27, web: true, why: 'one per batch, scaffolds and authors; full 27-batch run width' },
-  reader:       { ...lane('agentic'), sandbox: 'workspace-write', cap: 27, web: true, why: 'independent step-6 audit of a foreign batch; full 27-batch run width' },
+  beta:         { ...lane('agentic'), sandbox: 'workspace-write', cap: 27, web: true, why: 'batch scaffolding and scoped later repairs; full 27-batch run width' },
+  reader:       { ...lane('agentic'), sandbox: 'workspace-write', cap: 27, web: true, why: 'independent step-5 audit of a foreign batch; full 27-batch run width' },
   // `web: true` is a required capability. A Codex lane
   // without `tools.web_search` does not fail, it asserts from memory (the failure
   // this file records for the build lanes before 2026-08-11). The flag records
   // which lanes must not lose it — Alpha's step-3 criterion 2
-  // is source faithfulness, and step 6 has it probe an AI-generated claim for
+  // is source faithfulness, and step 5 has it probe an AI-generated claim for
   // counterexamples, both source work rather than recall — and because the Codex
   // return path reads it as a real switch.
   //
-  // CAP RAISED 1 -> 3 (owner, 2026-08-14): GROUP ALPHAS. One Alpha per at most
-  // THREE Beta batches at step 3 and steps 6a/6b, so no single agent reads a
-  // whole level's proofs (frontier-12 was 454 items for one Alpha). The old
-  // cap of 1 enforced a step-4 invariant at every stage; its `why` said so.
-  //
-  // The mutual-exclusion guarantee is NOT deleted, it is relocated to an
-  // ownership contract, exactly as `scaffolder` does below. A group Alpha at
-  // step 3 edits no batch file at all and writes one namespaced report; at
-  // step 6 it owns its own group's batches and no sibling's. The LEAD Alpha
-  // alone performs step 4 propagation into the shared `research/plan-*.md`
-  // prose scaffolds, step 6c cross-batch/cross-level citation audit, and step 8
-  // judge adjudication — one prose writer, one global citation reader, one
-  // exact-hash adjudication ledger. Those three stages stay single-agent by
-  // rule, and the rule is in LEVELS.md, not in this number.
-  //
-  // Nine group lanes cover the full 27-batch ceiling while retaining the
-  // <=3-batches-per-Alpha attention bound. Lead-Alpha stages still declare one
-  // unit and remain serial; this number is throughput, not shared-file safety.
+  // Nine disjoint groups own at most three batches each. Shared-file stages
+  // remain serial; lane capacity does not authorize overlapping writes.
   alpha:        { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'high', cap: 9, web: true, why: 'Sol-high group Alpha, <=3 batches each; nine groups cover the 27-batch ceiling' },
-  // TWO NARROWER ALPHA ROLES (owner, 2026-08-24). Effort and model are ROLE
-  // properties, so a stage that wants either to differ needs its own role —
-  // exactly as `mechanic` has been a separate role at `medium` since 2026-08-14
-  // for the same reason.
-  //
-  // THIS DOES NOT DOUBLE STEP-3 CONCURRENCY, which was the thing to check before
-  // splitting `3-recheck` off the shared `alpha` budget. A run has N groups (9
-  // here) and a group is in review OR fix OR recheck at any instant, never two.
-  // The real peak across those stages is the group count whatever the roles are.
-  //
-  // `alpha-assign` — `2-assign` only. The one lane whose output is fully
-  // machine-checkable (`alpha-groups.mjs`, nine properties), which is why it may
-  // run a model nothing else runs. No web: partitioning reads the manifests, not
-  // the literature.
+  // Assignment is validated mechanically. All roles retain source access.
   'alpha-assign': { ...lane('partition'), sandbox: 'workspace-write', effort: 'high', cap: 1, why: 'batch partition for the group Alphas; output fully validated by alpha-groups.mjs' },
-  // `alpha-high` — `3-recheck` and `10-pathway-author-v2`. Same model as
-  // `alpha`, one tier down. Owner's call on 3-recheck against my advice: it is
-  // the gate on scaffold richness and `scaffold-verdicts` checks that verdicts
-  // resolve, not that a fix was mathematically adequate. Recorded, not argued.
-  'alpha-high':   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: 9, web: true, why: 'scaffold recheck and pathway prose; one lane per group at step 3' },
-  // The final owner report interprets a mechanically reconciled local evidence
-  // packet.  It neither repairs nor researches; disabling web removes a costly
-  // source of irrelevant context while the read-only sandbox and structured
-  // response preserve the final readiness receipt.
-  'alpha-report': { ...lane('agentic'), sandbox: 'read-only', effort: 'xhigh', cap: 1, web: false, requiresTask: true, why: 'Step-10 interpretation of reconciled local evidence; read-only so final readiness remains current through close-out' },
-  // `alpha-adjudicate` — step 8 ONLY (owner, 2026-08-24). The active
+  // Step 3 selects Astra-medium for this group-author lane; later stages
+  // select their own explicit profile when reusing it for pathway prose.
+  'alpha-high':   { ...lane('agentic'), sandbox: 'workspace-write', effort: 'high', cap: 9, web: true, why: 'group authoring and pathway prose; stage-selected model profile' },
+  // Final reporting is read-only; source uncertainty still requires research.
+  'alpha-report': { ...lane('agentic'), sandbox: 'read-only', effort: 'xhigh', cap: 1, web: true, requiresTask: true, why: 'Step-9 interpretation of reconciled local evidence; read-only so final readiness remains current through close-out' },
+  // `alpha-adjudicate` — step 7 ONLY (owner, 2026-08-24). The active
   // adjudication lane is Sol; the registry keeps the model choice centralized
   // so an exhausted provider lane can be changed once without stranding every
   // later repair and adjudication stage.
   //
-  // Step 8 is partitioned by the same group assignment, so this cap tracks the
+  // Step 7 is partitioned by the same group assignment, so this cap tracks the
   // nine group-Alpha lanes. A lower value would silently serialize disjoint
   // adjudication groups behind an otherwise legal partition.
   //
@@ -105,24 +71,24 @@ const ROLES = Object.freeze({
   // rows for different items do not race; two Alphas rewriting the same file
   // would, which is why the task file says append and never rewrite.
   //
-  // Step 8 is the sharpest role in the build: a `false_positive` adjudication
+  // Step 7 is the sharpest role in the build: a `false_positive` adjudication
   // silently discards a real defect and no later gate re-examines it. It keeps
   // the highest effort supported by the active adjudication lane.
-  'alpha-adjudicate': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: 9, web: true, why: 'step-8 fatal-only adjudication, one Sol lane per group Alpha' },
-  // `final-adjudicator` — the independent Step-8 close after the owning group
+  'alpha-adjudicate': { ...lane('adjudication'), sandbox: 'workspace-write', effort: 'xhigh', cap: 9, web: true, why: 'step-7 fatal-only adjudication, one Sol lane per group Alpha' },
+  // `final-adjudicator` — the independent Step-7 close after the owning group
   // Alpha's initial repair receives a rejecting Terra rejudge. It is
   // intentionally a fresh Astra conversation rather than a
   // resume of the Alpha: independence is the point of the escalation. Medium
   // reasoning and web search are both owner requirements; the task queue and
   // terminal-resolution recorder make its one-item-at-a-time discipline
   // mechanical rather than aspirational.
-  'final-adjudicator': { ...lane('finalAdjudication'), sandbox: 'workspace-write', effort: 'medium', cap: 9, web: true, requiresTask: true, why: 'Step-8 final adjudication after the one paid Terra rejudge; one independent Astra-medium agent per affected group, with authoritative web verification' },
-  // `alpha-group-read` — the step-7 pass that reads a group's A/B pairs while the
-  // judges are still sweeping (owner, 2026-08-25). Step 7 applies the Terra
+  'final-adjudicator': { ...lane('finalAdjudication'), sandbox: 'workspace-write', effort: 'medium', cap: 9, web: true, requiresTask: true, why: 'Step-7 final adjudication after the one paid Terra rejudge; one independent Astra-medium agent per affected group, with authoritative web verification' },
+  // `alpha-group-read` — the step-6 pass that reads a group's A/B pairs while the
+  // judges are still sweeping (owner, 2026-08-25). Step 6 applies the Terra
   // high profile; the durable digest hands its findings to a fresh Sol xhigh
-  // adjudicator at Step 8.
+  // adjudicator at Step 7.
   //
-  // READ-ONLY IS THE POINT, NOT A PRECAUTION. Step 7 judges a frozen text; an
+  // READ-ONLY IS THE POINT, NOT A PRECAUTION. Step 6 judges a frozen text; an
   // edit landing mid-sweep voids verdicts already cast against the old bytes and
   // leaves a level judged in two states with nothing on disk saying so. `--sandbox
   // read-only` on codex is a kernel guarantee, not an instruction the model could
@@ -131,15 +97,12 @@ const ROLES = Object.freeze({
   // dispatcher writes the file, so a role that cannot write still produces one a
   // gate can read.
   //
-  // No web: everything it reads is on disk, and a source lookup belongs to the
-  // Beta that authored the page, not to a reader of it.
   // `alpha-group-read` — a rejection-blind whole-group read while the judges
-  // sweep frozen text. Its schema-constrained digest is the Step-8 handoff; the
+  // sweep frozen text. Its schema-constrained digest is the Step-7 handoff; the
   // later Sol adjudicator starts fresh rather than replaying a long transcript.
   //
-  // No web: everything it reads is on disk. Sourcing belongs to the Beta that
-  // authored the page, not to a reader of it.
-  'alpha-group-read': { ...lane('agentic'), sandbox: 'read-only', effort: 'high', cap: 9, why: 'Terra-high step-7 whole-group read; one read-only lane per group, handed to step 8 by compact digest' },
+  // Read-only readers also consult authoritative web sources when unsure.
+  'alpha-group-read': { ...lane('agentic'), sandbox: 'read-only', effort: 'high', cap: 9, why: 'Terra-high step-6 whole-group read; one read-only lane per group, handed to step 7 by compact digest' },
   // `effort: 'high'` (owner, 2026-08-24) — the thinking level for this lane.
   refuter:      { ...lane('secondary'), sandbox: 'read-only', effort: 'high', cap: 27, why: 'one independent read-only refuter per batch; returns evidence, never edits' },
 
@@ -177,8 +140,8 @@ const ROLES = Object.freeze({
   //
   // TWO THINGS THIS LANE MAY NEVER DO, and both are load-bearing:
   //
-  // 1. **Author mathematical content.** Item authoring stays on Step 5's
-  //    explicitly selected `beta` authoring profile; this mechanical role must
+  // 1. **Author mathematical content.** Item authoring stays on Step 3's
+  //    explicitly selected group-author profile; this mechanical role must
   //    not become an author.
   // 2. **Produce anything its judge lane will later judge.** A model reviewing
   //    its own output is self-agreement, not corroboration.
@@ -187,9 +150,9 @@ const ROLES = Object.freeze({
   // mathematical decision, it is not this lane's.
   mechanic:     { ...lane('agentic'), sandbox: 'workspace-write', effort: 'medium', cap: 4, why: 'bookkeeping after the judgment is made; never authors, never judged by its own lane' },
 
-  // THE STEP-10 VISUAL LANE IS GONE (owner, 2026-08-23). `sigma` (read-only
+  // THE STEP-9 VISUAL LANE IS GONE (owner, 2026-08-23). `sigma` (read-only
   // render adjudicator) and `tau` (repairer scoped to exact Sigma findings)
-  // were removed with the whole `10-render-*`/`10-sigma-*`/`10-tau-*` chain.
+  // were removed with the whole `9-render-*`/`9-sigma-*`/`9-tau-*` chain.
   // What it cost per run was two full-corpus screenshot captures and two
   // whole-level adjudications of every A/B page; what it bought on frontier-17
   // was three findings that Tau closed as `no-change-required` because the
@@ -237,13 +200,13 @@ const profileName = option('--profile');
 // A CODEX_HOME that OUTLIVES the dispatch, so the conversation can be resumed.
 // Every other lane gets a throwaway home deleted on exit — deliberately, because
 // a long-lived shared home was once corrupted and bricked every codex call. A
-// role that names one here opts out of that for exactly one reason: step 8 must
-// re-enter step 7's conversation. Per-group and per-run, so no two lanes share
+// role that names one here opts out of that for exactly one reason: step 7 must
+// re-enter step 6's conversation. Per-group and per-run, so no two lanes share
 // one; kept out of the repository so it never reaches git status, and out of
 // /tmp so codex can lay down its PATH helpers without warning.
 const sessionHomeArg = option('--session-home');
 // Resume this conversation instead of starting a new one. The id comes from the
-// step-7 result record, never from `--last`: group Alphas run at once, so
+// step-6 result record, never from `--last`: group Alphas run at once, so
 // "most recent" is whichever happened to finish last, which is not a group.
 const resumeSession = option('--resume-session');
 const timeoutSec = Number(option('--timeout') ?? 7200);
@@ -343,7 +306,12 @@ if (taskPath) {
 }
 
 const resolvedBrief = pathResolve(resolveFile(briefPath));
-if (resolvedBrief === join(REPO, 'briefs/authoring.md')) {
+prompt += `\n\n## Mathematical honesty\n\nBe honest about your understanding of the mathematics. If unsure, search the web
+and consult authoritative sources, reading the complete relevant argument.
+Report unresolved uncertainty and potentially defective published items to the
+owner with exact evidence. Never invent confidence, source reading or proof
+completion. This rule applies to every workflow role, including reviewers.\n`;
+if (resolvedBrief === join(REPO, 'briefs/group-author.md')) {
   prompt += `\n\n## Context continuity\n\nRead complete relevant source passages in bounded chunks; truncated output is incomplete
 evidence. Prefer current owned files; avoid historical runs and dispatch logs.
 After each item, checkpoint in the assigned notes: IDs, exact claim/conventions,
@@ -518,9 +486,9 @@ const codexHome = process.env.CODEX_HOME ?? join(homedir(), '.codex');
 
 // RESUMING A SESSION INTO A DIFFERENT SANDBOX (owner, 2026-08-25).
 //
-// A group Alpha reads its pairs at step 7 and adjudicates them at step 8, and it
+// A group Alpha reads its pairs at step 6 and adjudicates them at step 7, and it
 // must be the SAME agent — the point of reading early is to hold the mathematics
-// in context before the objections arrive. But step 7 judges a frozen text, so
+// in context before the objections arrive. But step 6 judges a frozen text, so
 // the reading half must be read-only, and the adjudicating half must be able to
 // repair. One `codex exec` cannot be both: `--sandbox` is fixed for the life of
 // the process.
@@ -552,7 +520,7 @@ const buildCodexResume = (sessionHome) => [
     '-c', `model_reasoning_effort="${spec.effort ?? 'xhigh'}"`,
     '-c', `model_context_window=${spec.contextWindow}`,
     ...compactionArgs,
-    ...(spec.web ? ['-c', 'tools.web_search=true'] : []),
+    '-c', 'tools.web_search=true',
     ...imagePaths.flatMap((image) => ['--image', resolveFile(image)]),
     ...(outputSchemaPath ? ['--output-schema', resolveFile(outputSchemaPath)] : []),
     ...(resultArtifactPath ? ['--output-last-message', lastMessagePath] : []),
@@ -585,7 +553,7 @@ const buildCodex = (temporaryHome) => [
     // search cannot do provenance determination, and would fall back to
     // `established-knowledge` waivers instead — wave 2 produced eight of those,
     // seven of which evaporated once someone with a working fetch looked.
-    ...(spec.web ? ['-c', 'tools.web_search=true'] : []),
+    '-c', 'tools.web_search=true',
     '--sandbox', spec.sandbox,
     ...imagePaths.flatMap((image) => ['--image', resolveFile(image)]),
     ...(outputSchemaPath ? ['--output-schema', resolveFile(outputSchemaPath)] : []),
@@ -804,7 +772,7 @@ if (temporaryHome) { try { rmSync(temporaryHome, { recursive: true, force: true 
 // model—materialises the schema-constrained final response. This keeps such a
 // role unable to edit the evidence it is judging while still giving the next
 // gate a durable JSON receipt. A missing or malformed final message turns the
-// dispatch red. No role routes here today: the step-10 visual lane was the last
+// dispatch red. No role routes here today: the step-9 visual lane was the last
 // user and was deleted on 2026-08-23. The path stays because `--result-artifact`
 // is generic, engine-level plumbing with its own test coverage.
 if (resultArtifactPath && result.code === 0 && !result.timedOut) {

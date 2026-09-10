@@ -1,4 +1,4 @@
-// The step-0 drift review must be dispatchable and its gate must be able to
+// The Step 1 drift review must be dispatchable and its gate must be able to
 // fail.
 //
 // WHY. `autopilot plan` wrote the drift-review task file and printed
@@ -57,7 +57,7 @@ function fixture(ledgerPages: any[] | null, report: string | null,
       JSON.stringify({ run: 'demo', allow_in_run_dependencies: allowInRunDependencies, pages: ledgerPages }, null, 2));
   }
   if (report !== null) {
-    writeFileSync(join(dir, 'research', 'demo-alpha-step0-drift.md'), report);
+    writeFileSync(join(dir, 'research', 'demo-alpha-step1-drift.md'), report);
   }
   writeFileSync(join(dir, 'research', 'plan-spec.json'), JSON.stringify({ pages: specPages }, null, 2));
   mkdirSync(join(dir, 'library', 'demo'), { recursive: true });
@@ -373,7 +373,7 @@ test('ordinary applied edges and reorders materialize instead of becoming a no-o
   writeFileSync(join(dir, 'research', 'demo-batch-1.pages.json'), JSON.stringify([
     { ...a, order: 10, requires: [] }, b,
   ], null, 2));
-  writeFileSync(join(dir, 'research', 'demo-alpha-step0-drift.md'), [
+  writeFileSync(join(dir, 'research', 'demo-alpha-step1-drift.md'), [
     '### alpha-page',
     'VERDICT: drift-applied — added gamma-page (order 5)',
   ].join('\n'));
@@ -402,7 +402,7 @@ test('same-scope drift sync preserves saved Beta items and batch identity', () =
     { ...a, order: 10, requires: [], items: [{ id: 'saved-item', kind: 'definition', deps: [] }] },
     b,
   ], null, 2));
-  writeFileSync(join(dir, 'research', 'demo-alpha-step0-drift.md'), [
+  writeFileSync(join(dir, 'research', 'demo-alpha-step1-drift.md'), [
     '### alpha-page',
     'VERDICT: drift-applied — added gamma-page (order 5)',
   ].join('\n'));
@@ -446,7 +446,7 @@ test('scope-changing drift still refuses saved Beta work', () => {
   writeFileSync(join(dir, 'research', 'demo-batch-1.pages.json'), JSON.stringify([
     { ...pages[0], items: [{ id: 'saved-item' }] }, pages[1],
   ], null, 2));
-  writeFileSync(join(dir, 'research', 'demo-alpha-step0-drift.md'), [
+  writeFileSync(join(dir, 'research', 'demo-alpha-step1-drift.md'), [
     '### alpha-page',
     'VERDICT: drift-minted — added delta-page (order 5)',
   ].join('\n'));
@@ -474,7 +474,7 @@ test('drift materialization preserves the in-run dependency opt-in', () => {
   };
   writeFileSync(join(dir, 'research', 'plan-spec.json'), JSON.stringify({ pages: [a, b] }, null, 2));
   writeFileSync(join(dir, 'research', 'demo-batch-1.pages.json'), JSON.stringify([a, b], null, 2));
-  writeFileSync(join(dir, 'research', 'demo-alpha-step0-drift.md'), '### alpha-page\nVERDICT: no-drift\n');
+  writeFileSync(join(dir, 'research', 'demo-alpha-step1-drift.md'), '### alpha-page\nVERDICT: no-drift\n');
   writeFileSync(join(dir, 'research', 'demo-scope-ledger.json'), JSON.stringify({
     run: 'demo', allow_in_run_dependencies: true, pages: [
       { id: a.id, kind: a.kind, batch: '1' }, { id: b.id, kind: b.kind, batch: '1' },

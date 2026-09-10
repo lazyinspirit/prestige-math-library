@@ -3,7 +3,7 @@
 // WHY THIS FILE EXISTS. `packBatches` and `writeManifests` used to live only in
 // `tools/autopilot/src/frontier.mts`, reachable from `autopilot plan` and from
 // nothing else. `tools/drift-apply.mjs` needs exactly the same two functions to
-// materialise a page the step-0 drift review minted, and a `.mjs` tool cannot
+// materialise a page the Step 1 drift review minted, and a `.mjs` tool cannot
 // import a `.mts` module without the TypeScript loader the engine installs for
 // itself. The realistic alternative was a second implementation in drift-apply,
 // which is how two batchers drift apart and produce two different packings of
@@ -137,10 +137,10 @@ export function syncManifestsPreservingItems(repo, run) {
   return written;
 }
 
-/** Write the step-0 batch manifests, with empty item lists for the Betas.
+/** Write the planning batch manifests, with empty item lists for the Betas.
  *
  *  REFUSES to overwrite a manifest that already carries items. `plan` is a
- *  step-0 command; re-running it mid-run against a scaffolded run would reset
+ *  planning command; re-running it mid-run against a scaffolded run would reset
  *  every Beta's item list to [] — and the scope ledger regenerated in the same
  *  command would then CONFIRM the emptied manifests, so the anti-scope-loss
  *  gate could not see the loss it was built for. Scaffolded state is torn down

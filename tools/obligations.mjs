@@ -11,14 +11,14 @@
 //
 // WHY. frontier-15 ended with 141 items lacking independent refuter coverage
 // because the chartered lane was quota-locked until 2026-08-20 — and that debt
-// existed only as caveat PROSE in the step-10 report. Nothing tracked it,
+// existed only as caveat PROSE in the step-9 report. Nothing tracked it,
 // nothing would re-dispatch group b's eight ready task files when the lane
 // recovered. The same lesson the closure receipts taught twice: an obligation
 // recorded in prose is an obligation forgotten; an id row with an unblock
 // condition is work the engine can pick back up.
 //
 // Tiers: a `block` row holds the terminal gate until closed or owner-accepted;
-// a `report` row is surfaced at the pause and never blocks (the step-10 report
+// a `report` row is surfaced at the pause and never blocks (the step-9 report
 // called the refuter re-run OPTIONAL, and the render check belongs to the
 // owner's publish routine). Rows live in research/<run>-obligations.jsonl,
 // append-only for adds; close/accept UPDATE THE ROW IN PLACE — one obligation,

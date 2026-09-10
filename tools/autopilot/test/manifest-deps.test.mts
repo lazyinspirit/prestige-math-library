@@ -44,7 +44,7 @@ test('missing manifest deps are normalized mechanically while malformed deps rem
 test('scaffold joins gate explicit deps and route omissions to the mechanical repair', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'demo', repo: REPO };
-  for (const stageId of ['1-scaffold', '3b-audit', '9-close', '9-receipt']) {
+  for (const stageId of ['1-scaffold', '3b-author', '8-close', '8-receipt']) {
     const stage: any = mod.stages.find((candidate: any) => candidate.id === stageId);
     assert.ok(stage.gates(ctx).some((gate: any) => gate.id === 'manifest-deps'));
   }

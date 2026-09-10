@@ -189,7 +189,7 @@ outside facts and proof-like sections.
 Proofs must establish their claims; examples need calculations and
 counterexamples need witnesses. Format checks, matching quotations, contracts,
 and finite tests do not establish mathematical validity.
-[The authoring brief](briefs/authoring.md) gives compact examples.
+[The authoring brief](briefs/content-repair.md) gives compact examples.
 
 ## 4. Page composition
 
@@ -277,7 +277,7 @@ item it replaces.
 Update the loader, validators, renderer consumers, tests, and affected content
 together when changing fields or their meanings. Preserve link resolution.
 Unknown fields may be ignored by the renderer but are not a supported extension
-mechanism. `tools/step9-changes.mjs` compares `itemHashGuard` hashes with the
-post-Step-8 snapshot: the whole `verification` block is excluded, but other
+mechanism. `tools/step8-changes.mjs` compares `itemHashGuard` hashes with the
+post-Step-7 snapshot: the whole `verification` block is excluded, but other
 frontmatter and body changes count. Judge attestations use their own hash rules
 in `tools/item-hash.mjs`. Do not treat metadata edits as automatically harmless.
