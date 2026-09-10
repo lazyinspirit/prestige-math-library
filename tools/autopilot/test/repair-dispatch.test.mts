@@ -52,6 +52,18 @@ function executorAt(repo: string) {
   return new Executor({ config, stages, adapter, state, reporter });
 }
 
+test('URL transport failure preserves source coverage instead of reharvesting', async () => {
+  const repo = fixtureRepo();
+  try {
+    writeFileSync(join(repo, 'research', 'demo-url-liveness.json'), JSON.stringify({ rows: [
+      { url: 'https://example.org/notes.pdf', ok: false, status: 0, error: 'curl: (56) Recv failure: Connection reset by peer' },
+    ] }));
+    const result = await mechanicalRepair({ ctx: { repo, run: 'demo' }, failure: { id: 'url-liveness' } });
+    assert.equal(result.outcome, 'outage');
+    assert.match(result.reason ?? '', /preserve reviewed sources/);
+  } finally { rmSync(repo, { recursive: true, force: true }); }
+});
+
 test('resolveInput picks the first existing candidate, else names the last', () => {
   const repo = fixtureRepo();
   const ex = executorAt(repo);

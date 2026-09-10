@@ -106,6 +106,8 @@ give a complete alternative local proof and prerequisites with justified
 confidence, or escalate. A source drop waives unavailable backing, never results.
 Temporary outages do not establish permanent unavailability. Preserve genuine
 fetch, URL and source-backing evidence; a PDF page count does not establish reading.
+URL sweeps that fail only with transport errors wait for network recovery;
+they do not retire reviewed sources or dispatch reharvesting workers.
 Compressed PDFs require mutool. Documents under four pages require the complete
 short_document_reading receipt specified by the fetch tool and scaffold brief.
 

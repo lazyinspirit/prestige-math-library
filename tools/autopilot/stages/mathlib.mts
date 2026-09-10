@@ -510,6 +510,19 @@ export const mechanicalRepair = async ({ ctx, failure, excludeGateIds = [] }: an
   const handled = failing.filter((f: any) => !excluded.has(String(f.id)) && MECHANICAL_REPAIRS[f.id]);
   if (!handled.length) return { outcome: 'unhandled' };
 
+  // A failed transport request is not evidence that a reviewed source is gone.
+  // Do not retire its coverage or launch a reharvest after the gate's retry.
+  if (handled.some((f: any) => f.id === 'url-liveness')) {
+    const path = R(ctx, 'research', `${ctx.run}-url-liveness.json`);
+    if (existsSync(path)) {
+      const dead = (JSON.parse(readFileSync(path, 'utf8')).rows ?? []).filter((r: any) => !r.ok);
+      if (dead.length && dead.every((r: any) => r.status === 0 &&
+        /curl: \((6|7|16|18|28|35|52|56)\)|ECONNRESET|ETIMEDOUT|EAI_AGAIN|socket hang up/i.test(r.error ?? ''))) {
+        return { outcome: 'outage', reason: `URL transport failure; preserve reviewed sources: ${dead.map((r: any) => r.url).join(', ')}` };
+      }
+    }
+  }
+
   const { spawnSync } = await import('node:child_process');
   const residues: string[] = [];
   const handledIds: string[] = [];
