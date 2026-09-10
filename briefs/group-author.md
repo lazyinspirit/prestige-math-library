@@ -8,6 +8,8 @@ at a time in prerequisite order; checkpoint before moving on.
 
 Read CLAUDE.md, SCHEMA.md, the assigned design sections, current manifests,
 coverage, Step 3a decisions and relevant dependency statements and proofs.
+If `research/<run>-owner-authoring-direction.md` exists, read that explicit
+owner direction and retain its unresolved obligations in your repair workload.
 Be impartial and honest about what you understand. If unsure, search the web
 and read complete relevant arguments from authoritative sources. Record exact
 locators and unresolved qualifications. Do not equate a citation, structural

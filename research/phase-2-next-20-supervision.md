@@ -253,3 +253,12 @@ Sol committed the latest deduplicated ledger reconciliation asb3e0d0155:
 2392unique IDs, no duplicate rows, U-P1434/U-C16/A-R187/A-P165/bounded590.
 Its exact path review confirms Fourier’s CC-explicit Euclidean density route
 does not use the defective general-LCH/DC route. No live blocker from it.
+
+
+## Owner direction: author all22 now in one frontier —16:18 UTC
+
+The owner repeatedly directs immediate authoring and rejects further consolidation engineering. All22 constitute one frontier (`phase-2-frontier-22.json`); the two existing run names are execution partitions. The uncommitted fresh-import implementation was removed entirely. No new controller, migration, stage table or dispatch receipt was installed.
+
+Both controllers were briefly paused only for new dispatches; the Fourier author continued writing throughout. Both are resumed. Under the owner's explicit author-now direction, the operator used the engine's skip control on completed `1-scaffold` for original20, retained every101 ready/442 held item record and all source attempts, and recorded scope `proceed` for each of the20 pairs. The operator skips the redundant `3a-scope` review under that owner scope direction. This does not approve any item or discard any claim/source obligation. The engine has entered `2-assign` (actual assignment dispatch started16:18:38.665UTC); after assignment it must take its real pre-author snapshot and dispatch group authors. Normal authored-content/source and all later mathematical review gates remain.
+
+The original20 author handoff is `phase-2-next-20-owner-authoring-direction.md`; the group-author brief reads this optional owner instruction. Fourier work remains with its existing author, preserving files and decisions. Do not duplicate those items. Monitor actual author coverage, resolve cross-partition prerequisites as one frontier, and do not report all22 actively authored until both executions show the corresponding live author coverage.

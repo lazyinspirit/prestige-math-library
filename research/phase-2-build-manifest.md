@@ -2,27 +2,29 @@
 
 Snapshot date: 2026-09-11 (Australia/Sydney).
 
-Original run: `phase-2-next-20`, state `.autopilot/phase-2-next-20`.
-Supplemental run: `phase-2-fourier-support-2`, state `.autopilot/phase-2-fourier-support-2`.
-The owner retains all20 original pairs and authorizes at most5 additional
-existing Phase2 pairs with no substantial unmet prerequisite chain.
-Admitted additions: **FA22 Fourier transform/convolution** and **FA23 Schwartz/Plancherel**.
-Three slots remain unused. The25-pair expansion proposal is superseded.
-Programme: **147 pairs =44 published +20 original selected +2 added selected
-+81 waiting**. Original run:40 pages/14 batches, Step1 held at543 items
-(101 current ready records,442 escalations). Supplemental run:4 pages/1 batch,
-with FA22 before FA23. Admission evidence: `phase-2-five-cap-admission.md`
-and its exact published-interface census JSON. No original pair was removed.
-The supplemental run passed Step1 (57/57 ready;8/8 source fetches verified),
-completed assignment/scope/baseline and entered Step3 authoring at15:47 UTC.
-Independent author/review gates remain.
-The RL14 chamber gap is resolved by three local supporting items; finite-Weyl
-and large-cardinal prerequisite gaps, source exceptions and other local
-proof work are not claimed resolved by these two additions.
-Locally convex batch2 now has13/13 ready construction records after source
-and used-prerequisite reconciliation. See
-`phase-2-next-20-local-convex-readiness-resolution.md`.
-Build completion leaves new content draft pending owner publication.
+Active frontier: **all22 selected A/B pairs**, recorded in
+`phase-2-frontier-22.json`. The existing run names are execution partitions of
+that one frontier: `phase-2-next-20` owns the original20 and
+`phase-2-fourier-support-2` owns the2 Fourier pairs. They share prerequisite
+and completion scope; the Fourier pairs do not replace any original pair.
+
+The owner now explicitly directs authoring all22 immediately. The original
+run advances from its completed scaffolds to assignment/authoring under that
+direction; its101 ready and442 held item records remain unchanged evidence.
+Open findings transfer as explicit author repair obligations. The owner has
+recorded proceed for all20 current pair scopes. No proof approval or source
+retrieval evidence is manufactured. See
+`phase-2-next-20-owner-authoring-direction.md`.
+The existing Fourier author continues; its57-item scaffold passed Step1 with
+8/8 verified source fetches. All authored-content and independent review gates
+remain binding, and frontier completion requires closing all22 pairs.
+
+Programme: **147 pairs =44 published +22 selected in this frontier +81 waiting**.
+Only FA22 Fourier transform/convolution and FA23 Schwartz/Plancherel were
+added under the at-most-five cap; three slots remain unused. The25-pair
+expansion proposal is superseded. No pair or result was dropped.
+Admission evidence: `phase-2-five-cap-admission.md` and its exact
+published-interface census. New content remains draft pending publication.
 
 Local prerequisite resolution: `phase-2-next-20-affine-level-local-resolution.md`.
 The affine propositions and example remain binding; no loop-algebra pair is added.
@@ -74,10 +76,9 @@ with configuration-space bounds. Both obligations are binding in
 change the active wave. The canonical ledger records their consumers.
 
 The first 19 pairs and the subsequent 25-pair run are published: 44 pairs
-in total. The owner authorized all 20 currently eligible Phase 2 pairs in
-`phase-2-next-20`; two additional Fourier pairs are selected under the five-pair
-cap, leaving81 pairs waiting. Source and proof
-gates remain mandatory.
+in total. The owner authorizes one22-pair frontier: the original20 plus the two Fourier
+pairs selected under the five-pair cap, leaving81 pairs waiting. Source and
+proof completion gates remain mandatory.
 
 Nine of the twelve published-page edges that caused the earlier expansion
 are stale placement/B-page declarations, exposing seven apparent direct roots
@@ -117,12 +118,12 @@ supplier pair or its other outstanding consumers.
 | computability-theory | D | published | `finite-automata-transition-and-determinisation-interfaces` |
 | computability-theory | D | published | `turing-machine-configuration-boundary-interface` |
 | computability-theory | D | published | `one-tape-simulation-normal-forms` |
-| computability-theory | D | selected: `phase-2-next-20` | `effective-numberings-reductions-resources-and-randomness` |
+| computability-theory | D | selected: frontier22 | `effective-numberings-reductions-resources-and-randomness` |
 | computability-theory | D | waiting | `sat-tableaux-and-quantified-space-completeness` |
 | computability-theory | D | waiting | `nondeterministic-recursive-padding-and-time-separation` |
 | differential-geometry | P | published | `measurable-densities-and-radon-volume-on-manifolds` |
 | differential-geometry | D | published | `riemannian-metrics-length-distance-and-volume` |
-| differential-geometry | D | selected: `phase-2-next-20` | `connections-levi-civita-and-parallel-transport` |
+| differential-geometry | D | selected: frontier22 | `connections-levi-civita-and-parallel-transport` |
 | differential-geometry | P | waiting | `geodesics-the-exponential-map-completeness-and-hopf-rinow` |
 | differential-geometry | P | waiting | `lie-groups-invariant-fields-and-the-exponential-map` |
 | differential-geometry | P | waiting | `lie-subgroups-actions-and-homogeneous-spaces` |
@@ -132,11 +133,11 @@ supplier pair or its other outstanding consumers.
 | differential-geometry | D | waiting | `cartan-subalgebras-and-root-space-decompositions` |
 | differential-geometry | P | waiting | `root-systems-dynkin-diagrams-and-cartan-killing-classification` |
 | differential-geometry | D | waiting | `highest-weight-theory-for-complex-semisimple-lie-algebras` |
-| fourier-analysis | D | selected: `phase-2-next-20` | `kolmogorov-block-construction-and-almost-everywhere-divergence` |
-| fourier-analysis | D | selected: `phase-2-next-20` | `carleson-hunt-time-frequency-theorem` |
+| fourier-analysis | D | selected: frontier22 | `kolmogorov-block-construction-and-almost-everywhere-divergence` |
+| fourier-analysis | D | selected: frontier22 | `carleson-hunt-time-frequency-theorem` |
 | functional-analysis | D | published | `norming-and-separation-under-hahn-banach` |
 | functional-analysis | P | published | `sequential-uniform-boundedness-with-countable-choice` |
-| functional-analysis | P | selected: `phase-2-next-20` | `locally-convex-spaces-and-continuous-separation` |
+| functional-analysis | P | selected: frontier22 | `locally-convex-spaces-and-continuous-separation` |
 | functional-analysis | P | waiting | `weak-and-weak-star-topologies` |
 | functional-analysis | P | waiting | `banach-alaoglu-goldstine-and-krein-milman` |
 | functional-analysis | P | waiting; James full-text gate | `reflexivity-and-eberlein-smulian` |
@@ -152,17 +153,17 @@ supplier pair or its other outstanding consumers.
 | functional-analysis | P | waiting | `continuous-functional-calculus-for-self-adjoint-and-normal-operators` |
 | functional-analysis | P | waiting | `spectral-measures-and-borel-functional-calculus` |
 | functional-analysis | P | waiting | `unbounded-self-adjoint-operators-and-stones-theorem` |
-| functional-analysis | P | selected (support-2) | `fourier-transform-convolution-and-approximate-identities` |
-| functional-analysis | P | selected (support-2) | `schwartz-space-and-the-plancherel-theorem` |
+| functional-analysis | P | selected: frontier22 | `fourier-transform-convolution-and-approximate-identities` |
+| functional-analysis | P | selected: frontier22 | `schwartz-space-and-the-plancherel-theorem` |
 | foundations | P | published | `deduction-soundness-completeness-and-compactness` |
 | foundations | P | published | `arithmetization-incompleteness-and-relative-consistency` |
 | foundations | P | published | `reflection-absoluteness-and-elementary-submodels` |
 | foundations | D | published | `dependent-choice-and-the-complete-metric-baire-theorem` |
 | foundations | P | published | `boolean-algebras-stone-duality-and-the-prime-ideal-theorem` |
 | foundations | P | published | `set-theoretic-trees-delta-systems-and-diamond` |
-| foundations | P | selected: `phase-2-next-20` | `the-constructible-hierarchy-and-inner-models` |
+| foundations | P | selected: frontier22 | `the-constructible-hierarchy-and-inner-models` |
 | foundations | P | waiting | `condensation-gch-and-diamond-in-l` |
-| foundations | P | selected: `phase-2-next-20` | `forcing-orders-names-and-generic-extensions` |
+| foundations | P | selected: frontier22 | `forcing-orders-names-and-generic-extensions` |
 | foundations | P | waiting | `the-forcing-theorem-and-formal-consistency-transfer` |
 | foundations | P | waiting | `preservation-cohen-forcing-and-the-continuum` |
 | foundations | P | waiting | `finite-support-iterations-and-martins-axiom` |
@@ -174,9 +175,9 @@ supplier pair or its other outstanding consumers.
 | group-theory | D | published | `modular-traces-and-brauer-character-independence` |
 | group-theory | D | published | `hall-malcev-coordinates-and-bass-guivarch-growth` |
 | group-theory | P | published | `asymptotic-cones-and-the-sublinear-triangle-criterion` |
-| group-theory | D | selected: `phase-2-next-20` | `quantitative-hyperbolic-geometry-toolkit` |
+| group-theory | D | selected: frontier22 | `quantitative-hyperbolic-geometry-toolkit` |
 | group-theory | D | published | `group-homology-transfer-and-low-degree-exact-sequences` |
-| lie-theory | D | selected: `phase-2-next-20` | `finite-weyl-invariants-bruhat-and-kostant-harmonics` |
+| lie-theory | D | selected: frontier22 | `finite-weyl-invariants-bruhat-and-kostant-harmonics` |
 | measure-theory | D | published | `complex-lp-spaces-and-test-function-conventions` |
 | measure-theory | D | published | `complex-riesz-thorin-endpoint-interpolation` |
 | pde | D | published | `analytic-majorants-and-the-cauchy-kovalevskaya-theorem` |
@@ -201,12 +202,12 @@ queued after the active first wave; none belongs to its frozen scope.
 | algebraic-topology | P | queued after wave 1 | `the-serre-spectral-sequence-and-applications` |
 | algebraic-topology | P | queued after wave 1 | `obstruction-theory-postnikov-towers-and-classifying-spaces` |
 | algebraic-topology | P | queued after wave 1 | `hurewicz-whitehead-freudenthal-and-cw-approximation` |
-| algebraic-topology | P | selected: `phase-2-next-20` | `fibrations-fiber-bundles-and-homotopy-exact-sequences` |
+| algebraic-topology | P | selected: frontier22 | `fibrations-fiber-bundles-and-homotopy-exact-sequences` |
 | algebraic-topology | P | published | `higher-homotopy-groups-and-cofiber-sequences` |
 | algebraic-topology | P | queued after wave 1 | `bocksteins-steenrod-squares-and-cohomology-operations` |
 | algebraic-topology | P | queued after wave 1 | `orientations-poincare-lefschetz-and-alexander-duality` |
 | algebraic-topology | P | queued after wave 1 | `cup-cap-cross-products-and-cohomology-rings` |
-| algebraic-topology | P | selected: `phase-2-next-20` | `singular-cohomology-and-coefficient-theorems` |
+| algebraic-topology | P | selected: frontier22 | `singular-cohomology-and-coefficient-theorems` |
 | differential-geometry | D | queued after wave 1 | `moment-maps-and-symplectic-reduction` |
 | differential-geometry | P | queued after wave 1 | `compact-lie-groups-maximal-tori-and-peter-weyl-theory` |
 | differential-geometry | P | queued after wave 1 | `symplectic-manifolds-moser-stability-and-darboux-weinstein-theory` |
@@ -219,15 +220,15 @@ queued after the active first wave; none belongs to its frozen scope.
 | homological-algebra | D | published | `kunneth-exactness-and-splittings-over-principal-ideal-domains` |
 | homological-algebra | D | published | `tor-flatness-and-global-dimension` |
 | homological-algebra | D | queued after wave 1 | `grothendieck-spectral-sequences-and-computations` |
-| homological-algebra | P | selected: `phase-2-next-20` | `double-complexes-exact-couples-and-convergence` |
+| homological-algebra | P | selected: frontier22 | `double-complexes-exact-couples-and-convergence` |
 | homological-algebra | P | published | `spectral-sequences` |
 | lie-theory | D | queued after wave 1 | `the-weyl-kac-character-formula` |
 | lie-theory | P | published | `kac-moody-algebras-from-generalized-cartan-matrices` |
-| lie-theory | P | selected: `phase-2-next-20` | `integrable-highest-weight-kac-moody-modules` |
+| lie-theory | P | selected: frontier22 | `integrable-highest-weight-kac-moody-modules` |
 | measure-theory | P | queued after wave 1 | `measure-preserving-transformations-and-poincare-recurrence` |
 | measure-theory | P | waiting general stationary-process prerequisite; PT-6 uses local ergodic specialization | `the-ergodic-theorems-of-von-neumann-and-birkhoff` |
 | measure-theory | P | published | `measure-preserving-systems-and-mixing-criteria` |
-| measure-theory | P | selected: `phase-2-next-20` | `weak-mixing-and-the-chacon-transformation` |
+| measure-theory | P | selected: frontier22 | `weak-mixing-and-the-chacon-transformation` |
 | probability | D | queued after wave 1 | `itos-formula-and-brownian-martingales` |
 | probability | P | published | `conditional-expectation` |
 | probability | P | queued after wave 1 | `martingale-inequalities-and-convergence` |
@@ -236,13 +237,13 @@ queued after the active first wave; none belongs to its frozen scope.
 | probability | P | queued after wave 1 | `brownian-motion-markov-properties-and-hitting-times` |
 | probability | P | queued after wave 1 | `brownian-path-properties` |
 | probability | P | queued after wave 1 | `the-ito-integral-with-respect-to-brownian-motion` |
-| probability | P | selected: `phase-2-next-20` | `discrete-time-martingales` |
+| probability | P | selected: frontier22 | `discrete-time-martingales` |
 | probability | P | published | `weak-convergence-tightness-and-representation` |
-| probability | P | selected: `phase-2-next-20` | `conditional-distributions-and-regular-conditional-probability` |
+| probability | P | selected: frontier22 | `conditional-distributions-and-regular-conditional-probability` |
 | probability | P | queued after wave 1 | `markov-kernels-and-markov-chains` |
 | probability | P | queued after wave 1 | `central-limit-theorems` |
 | probability | P | published | `strong-laws-of-large-numbers` |
-| probability | P | selected: `phase-2-next-20` | `characteristic-functions-inversion-and-continuity` |
+| probability | P | selected: frontier22 | `characteristic-functions-inversion-and-continuity` |
 | probability | P | published | `standard-borel-real-codings-and-determining-classes` |
 | representation-theory | P | published | `haar-measure-existence-and-uniqueness` |
 
@@ -255,13 +256,13 @@ clearance: the SET-20 Blass proof and SET-22 disputed DMC clause remain gates.
 
 | category | role | current state | A page id |
 |---|---:|---|---|
-| differential-geometry | P | selected: `phase-2-next-20` | `singular-cochains-mayer-vietoris-and-smooth-singular-comparison` |
+| differential-geometry | P | selected: frontier22 | `singular-cochains-mayer-vietoris-and-smooth-singular-comparison` |
 | differential-geometry | R | retirement queue; proof/source gates apply | `the-de-rham-theorem-and-degree` |
 | foundations | R | published | `borel-analytic-sets-perfect-sets-and-determinacy` |
 | foundations | R | retirement queue; proof/source gates apply | `symmetric-collapse-and-ultrafilter-free-models` |
 | foundations | R | retirement queue; proof/source gates apply | `halpern-lauchli-and-bpi-without-choice` |
 | foundations | R | retirement queue; proof/source gates apply | `choice-strength-in-baire-urysohn-stone-and-tychonoff` |
-| foundations | R | selected: `phase-2-next-20` | `large-cardinals-measures-and-elementary-embeddings` |
+| foundations | R | selected: frontier22 | `large-cardinals-measures-and-elementary-embeddings` |
 | foundations | R | retirement queue; proof/source gates apply | `solovays-model-and-regularity-of-all-sets-of-reals` |
 | foundations | R | retirement queue; proof/source gates apply | `shelahs-baire-property-model-and-inner-model-lower-bounds` |
 | foundations | R | retirement queue; proof/source gates apply | `prikry-forcing-and-gitiks-singular-cardinal-model` |
@@ -279,7 +280,7 @@ prerequisite graph, not through an invented recorded-result import.
 | category | role | current state | A page id |
 |---|---:|---|---|
 | representation-theory | R | published | `blocks-defect-groups-and-the-brauer-homomorphism` |
-| representation-theory | R | selected: `phase-2-next-20` | `vertices-sources-and-the-green-correspondence` |
+| representation-theory | R | selected: frontier22 | `vertices-sources-and-the-green-correspondence` |
 | representation-theory | R | queued; proof/source gates apply | `brauers-first-main-theorem` |
 | representation-theory | R | queued; proof/source gates apply | `brauers-second-main-theorem` |
 | algebraic-topology | P | queued; proof/source gates apply | `spectra-and-stable-homotopy-groups` |
