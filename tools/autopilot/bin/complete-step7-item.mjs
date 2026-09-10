@@ -20,6 +20,15 @@ export function scopedIntegrityErrors(report, id) {
   return report.errors.filter(error => !error.id || error.id === id);
 }
 
+export function requiresOwningContract(source, created) {
+  const frontmatter = source.split(/^---\s*$/m)[1] ?? '';
+  const inherited = !created && /^status:\s*["']?published["']?\s*$/m.test(frontmatter);
+  const definition = /^kind:\s*["']?definition["']?\s*$/m.test(frontmatter)
+    && /^\s+proof:\s*["']?not-applicable["']?\s*$/m.test(frontmatter)
+    && !/^## Proof\b/m.test(source);
+  return !inherited && !definition;
+}
+
 function main() {
   const args = process.argv.slice(2);
   const option = flag => args[args.indexOf(flag) + 1];
@@ -94,9 +103,8 @@ function main() {
       // Owned contract only: concurrent groups need not have finished theirs.
       const manifests = Object.keys(scope.by_item ?? {}).includes(id)
         ? (owningContractFiles(prefix, id)) : [];
-      const inheritedPublished = /^status:\s*published\s*$/m.test(readFileSync(`items/${id}.md`, 'utf8'))
-        && !report.created.includes(id);
-      if (!published && !inheritedPublished && !manifests.length)
+      if (!published && !manifests.length
+        && requiresOwningContract(readFileSync(`items/${id}.md`, 'utf8'), report.created.includes(id)))
         throw new Error(`${id}: owning proof contract not found`);
       for (const contract of manifests)
         execute(['tools/proof-contract.mjs', contract, '--strict', '--items', id]);

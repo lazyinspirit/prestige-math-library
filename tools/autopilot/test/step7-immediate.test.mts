@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mergeCycleReceipts, cycleCounts } from '../../step7-rejudge-cycle.mjs';
-import { itemVerdict, scopedIntegrityErrors, contractContainsItem } from '../bin/complete-step7-item.mjs';
+import { itemVerdict, scopedIntegrityErrors, contractContainsItem, requiresOwningContract } from '../bin/complete-step7-item.mjs';
 import { stages } from '../stages/mathlib.mts';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -14,6 +14,14 @@ const cycle = (id: string, item: string, completed_at: string | null = null) =>
 test('dependency mentions do not make a contract own the item', () => {
   assert.equal(contractContainsItem({scope:['consumer'],contracts:{consumer:{deps:['supplier']}}},'supplier'),false);
   assert.equal(contractContainsItem({scope:['supplier']},'supplier'),true);
+});
+test('contract requirement respects quoted metadata and proof-free definitions', () => {
+  const definition='---\nkind: "definition"\nstatus: "draft"\nprovenance:\n  proof: "not-applicable"\n---\n## Definition\nText';
+  assert.equal(requiresOwningContract(definition,true),false);
+  assert.equal(requiresOwningContract(definition+'\n## Proof\nArgument',true),true);
+  const published='---\nkind: theorem\nstatus: "published"\n---\n## Proof\nArgument';
+  assert.equal(requiresOwningContract(published,false),false);
+  assert.equal(requiresOwningContract(published,true),true);
 });
 
 test('concurrent item reservations retain both paid cycles', () => {

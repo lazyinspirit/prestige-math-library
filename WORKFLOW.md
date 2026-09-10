@@ -155,7 +155,8 @@ hook launches the tool, judge and final adjudicator outside the Alpha sandbox.
 Request/response files and normal dispatch records preserve ownership and errors.
 Inherited published items need not acquire a new-batch proof contract merely
 to enter the handoff; their licence, precheck and final published-repair checks
-remain mandatory. New authored items require their owning contract.
+remain mandatory. New proof-bearing items require their owning contract;
+definitions explicitly marked proof-not-applicable need no new proof contract.
 Contract ownership comes from its explicit `scope`, never textual dependency mentions.
 After fixing an infrastructure failure, the operator may queue a `resume-group`
 request for a stopped owning group; it retains completed decisions and resumes
