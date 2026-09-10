@@ -81,6 +81,13 @@ cross-class-deduplicated: 2,392 unique published IDs; U-P 1,434, U-C 16, A-R
 moved to A-P, and one A-P was extended. Every indexed ID resolves to a current
 published item.
 
+The subsequent Fourier Step-3B convolution handoff reconfirmed the existing
+A-P rows for representative-independent convolution and L1 convolution
+existence. Their reflection/existence and Borel-representative countable-choice
+gaps are unchanged; evidence was refreshed without a duplicate or class move.
+The live draft uses the newer complex convolution interface under explicit
+countable choice, so no mathematical authoring blocker remains from them.
+
 ## Next target
 
 1. Reconcile any further exact next-20 or Fourier published-interface issues

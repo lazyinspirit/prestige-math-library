@@ -65,6 +65,20 @@ repair strategies, supplier states and audit limits are in
 one existing U-P row moves to A-P, and one existing A-P row is extended; no
 duplicate row is introduced. Published files remain unchanged.
 
+Step-3B convolution authoring reconfirmed two existing A-P records, without a
+new ID or class move. In
+`lem-convolution-is-independent-of-the-chosen-borel-representatives`, the set
+`x-N_f` needs reflection as well as translation invariance, and the proof only
+shows equality when the absolute integrals exist while asserting an
+almost-everywhere existence domain. In
+`thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound`,
+proof 1.1 selects Borel representatives through an exact published supplier
+that assumes countable choice, which the target omits. The live Fourier draft
+uses the newer complex convolution interface under explicit countable choice
+and is mathematically independent of these two proofs; its redundant draft
+edges do not repair the published items. Exact refreshed hashes and repair
+paths are in the same audit file.
+
 ## Locally convex published-prerequisite audit — 2026-09-11
 
 The complete current `def-algebraic-dual-and-linear-functional` defines a
@@ -28484,7 +28498,7 @@ owner's scan policy.
 | `lem-a-countable-coordinate-ball-cover-has-a-countable-locally-finite-shrinking` | Open findings from the bump-consumer audit — 2026-09-08  See also Batch 9 Step 6B supplier reread — 2026-09-10. |
 | `lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets` | Null preservation: newly identified repair target |
 | `lem-compactly-supported-continuous-functions-are-translation-continuous-in-l-p` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
-| `lem-convolution-is-independent-of-the-chosen-borel-representatives` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
+| `lem-convolution-is-independent-of-the-chosen-borel-representatives` | Personal monitoring audit 2026-09-08, reconfirmed by Fourier Step-3B 2026-09-11: proof 1.1 needs reflection as well as translation to make `x-N_f` null; the published reflection route carries countable choice, absent from the target. Proof 2.1 is only conditional on absolute-integral existence, while 3.1 asserts an a.e. domain without proving it. Split conditional representative independence from later Tonelli existence, or prove the envelope locally and expose choice. Exact refreshed evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `lem-every-open-cover-of-a-manifold-has-a-countable-cover-by-relatively-compact-coordinate-balls-subordinate-to-it` | Open findings from the bump-consumer audit — 2026-09-08 |
 | `prop-indicator-function-is-measurable-iff-its-set-is-measurable` | Nonmeasurable-set counterexample: missing witness supply |
 | `rem-noetherian-conventions-and-choice` | Noetherian direct-consumer follow-up — early-repair impact |
@@ -28492,7 +28506,7 @@ owner's scan policy.
 | `thm-continuous-mean-value-functions-are-harmonic` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-existence-of-associated-primes` | Noetherian direct-consumer follow-up — early-repair impact |
 | `thm-l-one-approximate-identities-converge-in-l-p` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
-| `thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
+| `thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound` | Personal monitoring audit 2026-09-08, reconfirmed by Fourier Step-3B 2026-09-11: proof 1.1 chooses Borel representatives of completed-Lebesgue classes without the countable choice required by `thm-completion-measurable-functions-have-base-measurable-representatives`. Add the assumption/supplier, retain the product-measurability and Tonelli envelope, and use the repaired conditional representative-independence lemma. Live Fourier bypasses this proof via the newer complex interface under CC. Exact refreshed evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-smooth-partitions-of-unity-exist-on-manifolds` | Open findings from the bump-consumer audit — 2026-09-08  See also Batch 9 Step 6B supplier reread — 2026-09-10. |
 | `thm-young-convolution-inequality` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 

@@ -197,3 +197,48 @@ Both density theorems state countable choice, and the last lemma constructs its
 cutoff from distance to the complement, Euclidean Heine--Borel and the extreme
 value theorem. It does not use general LCH Urysohn/DC. Thus no live Fourier
 authoring obligation remains from this finding.
+
+## Step-3B convolution-authoring follow-up
+
+The authoring handoff reported two more published concerns. Exact-ID, empty
+alias, mechanism and supplier searches show that both already have one A-P row
+and detailed proof evidence in the canonical ledger. This follow-up extends
+those records and introduces no classification.
+
+`lem-convolution-is-independent-of-the-chosen-borel-representatives`
+(current SHA-256
+`c4b52d97fe0342e3685d71ba023723226ca7099313cdff530d17892974070a8b`)
+still has both recorded gaps. In proof 1.1,
+`x-N_f=x+(-N_f)` requires reflection as well as the cited translation
+invariance. The published reflection supplier
+`thm-lebesgue-measure-under-dilations-and-reflections` states countable choice,
+which the target does not. Proof 2.1 establishes representative independence
+only whenever an absolute integral exists, while proof 3.1 asserts an
+almost-everywhere domain without proving that existence. Repair either by
+stating the conditional equality only and leaving a.e. existence to the later
+convolution theorem, or give the Tonelli absolute-envelope proof locally;
+expose the exact reflection/choice contract in either route. Existing A-P
+remains open; no new Phase-2 pair.
+
+`thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound`
+(current SHA-256
+`e6a6897435f68f93f7eaf450712a4962123d6b98c614ae24f0b3fe52dcadaa50`)
+also retains its recorded A-P finding. Proof 1.1 chooses Borel representatives
+of completed-Lebesgue classes, but the published base-measurable-representative
+supplier explicitly assumes countable choice and is neither declared nor
+satisfied. Translation invariance itself is published choice-free; the defect
+is the representative-existence contract, not a missing redundant edge to
+translation. Add countable choice and
+`thm-completion-measurable-functions-have-base-measurable-representatives`,
+then keep the current Borel product/Tonelli absolute-envelope calculation and
+use the repaired conditional representative-independence clause. Existing
+Tonelli/Fubini suppliers are published. No new Phase-2 pair.
+
+The live draft Fourier convolution theorem states countable choice and proves
+the convolution interface through the newer published
+`lem-complex-translation-and-approximate-identity-interfaces`, whose proof
+supplies Borel representatives, reflection and representative independence
+under that assumption. Its Facts/Proof do not use the two defective old items,
+although both still appear redundantly in the draft dependency array. Removing
+those draft-only edges makes the bypass exact; no live mathematical authoring
+prerequisite is uncovered here.
