@@ -379,15 +379,28 @@ Post-Killing-impact counts: 2,458 unique published IDs; U-P 1,403, U-C 15, A-R
 two existing rows. The current census leaves 13,472 published IDs outside the
 index.
 
+The next root-chain pass adds three A-P items. The root-space bracket
+proposition uses the affected decomposition's exhaustiveness; the Killing-dual
+definition uses the affected nondegenerate Cartan restriction; and the
+opposite-root bracket proposition uses both and omits the derivation of a
+nonzero opposite-root pairing needed for its whole-line clause. Global
+nondegeneracy, the repaired decomposition and orthogonality supply that local
+derivation. This final proposition is the exact published input to the already
+A-P root-system theorem. No additional pair is needed.
+
+Post-root-chain counts: 2,461 unique published IDs; U-P 1,403, U-C 15, A-R 187,
+A-P 187 and 669 bounded clears. The current census leaves 13,469 published IDs
+outside the index.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
    issues reported by the root worker, prioritizing items actually consumed by
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
-   then audit bounded samples of published items outside the 2,458-ID index.
+   then audit bounded samples of published items outside the 2,461-ID index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,472 published items
+No exhaustive discovery claim is authorized while 13,469 published items
 remain outside the index and dependency interfaces remain unaudited.

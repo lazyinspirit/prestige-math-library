@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1403, U-C 15, A-R 187, A-P 184. The
+Current classifications: U-P 1403, U-C 15, A-R 187, A-P 187. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -72,6 +72,15 @@ to A-P: the definition and basis-independence lemma form a forward
 nondegenerate form to obtain dual bases. Reorder and prove the canonical
 inverse-form tensor lemma before the definition. The planned DG structure chain
 remains the repair route; no additional pair is identified.
+
+Three further exact root-chain consumers are newly A-P. The root-space bracket
+proposition uses the affected decomposition's exhaustive weight-space clause;
+the Killing-dual definition uses the affected nondegenerate Cartan restriction;
+and the opposite-root bracket proposition uses both, then selects a nonzero
+opposite-root pairing without deriving it. Global nondegeneracy, the repaired
+decomposition and orthogonality give that missing derivation. This last item is
+the exact published input of the already-A-P root-system theorem. No additional
+Phase-2 pair is identified.
 
 ## Set-theory and collar handoff reconciliation — 2026-09-11
 
@@ -27950,11 +27959,11 @@ No new Phase2 pair; source barriers are not waived.
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,458 unique
+subsequently reconciled published IDs. It currently contains **2,461 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,458 indexed IDs are published; **13,472 published items remain outside this
+2,461 indexed IDs are published; **13,469 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -27966,11 +27975,11 @@ Supplier mappings and subsequent item-specific findings remain above.
 | U-P | Unaudited and potentially defective items | 1403 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 15 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 184 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 187 | Recorded direct review and an unresolved item-specific repair. |
 
 669 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,789 items and the expanded reference pool contains 2,458 unique items.
+1,792 items and the expanded reference pool contains 2,461 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28761,6 +28770,9 @@ owner's scan policy.
 | `prop-killing-form-pairs-only-opposite-root-spaces` | Finite-Weyl/Kostant impact audit 2026-09-11: proof 1.1's invariance calculation correctly gives orthogonality of nonopposite root spaces, but proof 3.1 uses both the unsupported full root decomposition and affected global Killing nondegeneracy to infer nondegeneracy on the Cartan subalgebra. Repair those two suppliers; retain the sound displayed calculation. No new Phase-2 pair beyond the planned DG chain. Exact hash/scope: `research/phase-2-next-20-published-killing-form-prerequisite-audit.md`. |
 | `def-quadratic-casimir-element` | Finite-Weyl/Kostant impact audit 2026-09-11 promotes the existing U-P row. The definition uses the affected Killing nondegeneracy clause to choose dual bases and points forward through `justified_by` to the basis-independence lemma, which depends back on this definition. First repair the nondegenerate form, then move/prove the canonical inverse-form tensor lemma before defining its multiplication image as the Casimir. This is the already mapped two-item SCC, now exact A-P. Exact hash/scope: `research/phase-2-next-20-published-killing-form-prerequisite-audit.md`. |
 | `lem-the-casimir-element-is-independent-of-dual-bases` | Finite-Weyl/Kostant impact audit 2026-09-11 promotes the existing U-P row. Its inverse-form tensor argument is sound after Killing nondegeneracy, but the lemma depends on the Casimir definition whose `justified_by` points forward to this lemma. Move the lemma first and state the tensor/multiplication image independently, then let the later definition cite it. Exact hash/scope: `research/phase-2-next-20-published-killing-form-prerequisite-audit.md`. |
+| `prop-root-space-brackets-add-their-roots` | Finite-Weyl/Kostant root-chain audit 2026-09-11: proof 1.1's derivation/Jacobi calculation is sound, but proof 2.1 uses the exact affected exhaustiveness clause of the unsupported root decomposition to identify the resulting weight space and make all other weights zero. Repairing that decomposition closes this proof. No additional pair. Exact hash/scope: `research/phase-2-next-20-published-killing-form-prerequisite-audit.md`. |
+| `def-killing-dual-vector-attached-to-a-root` | Finite-Weyl/Kostant root-chain audit 2026-09-11: the unique vector `H_alpha` is defined through the exact affected nondegenerate restriction of the Killing form to the Cartan subalgebra. Repair the Killing and opposite-root pairing suppliers, after which finite-dimensional duality gives the stated vector. No additional pair. Exact hash/scope: `research/phase-2-next-20-published-killing-form-prerequisite-audit.md`. |
+| `prop-opposite-root-spaces-bracket-to-the-killing-dual-line` | Finite-Weyl/Kostant root-chain audit 2026-09-11: proofs 1.1--2.1 need the affected root decomposition and Cartan nondegeneracy. Proof 3.1 additionally chooses `x,y` with nonzero Killing pairing without deriving existence. From a nonzero root vector, apply global nondegeneracy, decompose a witness, and use root-space orthogonality to obtain a nonzero opposite-root component; also derive `H_alpha != 0` from `alpha != 0`. This proves the whole-line clause. It is the exact input to the already-A-P root-system theorem. No additional pair. Exact hash/scope: `research/phase-2-next-20-published-killing-form-prerequisite-audit.md`. |
 | `cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings` | Active HG handoff audit 2026-09-11: under the library definition a quasi-isometry is a coarse Lipschitz map with a coarse Lipschitz quasi-inverse. Proof 2.1 proves coarse density from `f g` close to the identity, but omits the required lower bound making `f` a quasi-isometric embedding. If `g f` is `D`-close and `g` has coarse constants `A >= 1,B`, then `d_X(x,x') <= 2D+A d_Y(fx,fx')+B`; rearrange and combine with `f`'s upper bound. The live HG consumer supplies this locally, so it is not blocked. Existing definitions suffice; no new Phase-2 pair. Exact hash/source/impact/scope: `research/phase-2-next-20-published-quasi-isometry-characterization-audit.md`. |
 | `thm-a-quasi-isometric-embedding-with-coarsely-dense-image-admits-a-quasi-inverse` | Active HG adjacent-supplier audit 2026-09-11: proof 2.1 says the "upper inequality for `f`" gives its first displayed chain, but that chain uses the lower quasi-isometric-embedding inequality to derive an upper coarse-Lipschitz bound for `g`. Replace "upper" with "lower." The displayed estimates, AC-qualified selector, quasi-inverse bounds and theorem are otherwise sound, so no consumer blocker or new supplier is created. Exact hash/scope: `research/phase-2-next-20-published-quasi-isometry-characterization-audit.md`. |
 | `thm-two-metric-spaces-are-quasi-isometric-exactly-when-they-contain-bilipschitz-equivalent-separated-nets` | Active HG direct-consumer audit 2026-09-11: proof 1.1 invokes the exact affected converse of the quasi-isometry characterization without reproducing its missing coarse-inverse lower-bound estimate. The same step writes `d(x,A)` after obtaining a maximal separated set but before proving `A` nonempty; point-to-set distance is undefined for the empty set, including the unhandled `X=empty` case. Insert the elementary lower-bound proof, handle empty spaces, and otherwise prove maximal `A` nonempty before using distance, or state the quantified net argument directly. The remaining positive-coefficient and bilipschitz/net calculations are sound. Existing suppliers suffice; no new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-quasi-isometry-characterization-audit.md`. |

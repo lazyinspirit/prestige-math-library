@@ -98,9 +98,41 @@ The active draft Kostant harmonic definition also needs the nondegenerate form,
 but draft readiness does not create a published classification row. No new
 Phase-2 pair beyond the already planned DG structure chain is identified.
 
+The next three published root-chain items were also read because they feed the
+already-A-P root-system theorem.
+
+`prop-root-space-brackets-add-their-roots`, SHA-256
+`58aae8fcdf9a5b6656f8325f7d5f17d9262f984a004476339c6742ab6ef32459`,
+has a sound Jacobi/derivation calculation in proof 1.1. Proof 2.1 uses the exact
+affected exhaustiveness clause of the root decomposition to identify the
+weight and make every other weight space zero. It is newly A-P through that
+load-bearing branch; repairing the decomposition closes this proof without a
+new argument.
+
+`def-killing-dual-vector-attached-to-a-root`, SHA-256
+`7d64c5eac3700fd2cabb034b8c9eee93217fc54062760db3222a353160c08ec1`,
+is newly A-P because its unique `H_alpha` is defined through the exact affected
+nondegenerate restriction of the Killing form to the Cartan subalgebra. Once
+the Killing and opposite-root pairing suppliers are repaired, finite-dimensional
+duality supplies the stated unique vector.
+
+`prop-opposite-root-spaces-bracket-to-the-killing-dual-line`, SHA-256
+`b262c7fcbcb24f2a8a8caa35f53b2e1e8bf502e916efbde31da276a245700eba`,
+is newly A-P through those same exact branches. Proofs 1.1--2.1 correctly show
+the displayed bracket identity after the root decomposition and nondegenerate
+Cartan restriction are available. Proof 3.1 additionally says to choose
+`x,y` with `B(x,y) != 0`, but the current opposite-root proposition does not
+prove such a pair exists. Derive it by taking nonzero `x in g_alpha`, applying
+global Killing nondegeneracy, decomposing a pairing witness into root-space
+components, and using the proved orthogonality to retain a nonzero
+`g_{-alpha}` component. Also note that `H_alpha != 0` because `alpha != 0` and
+the Cartan restriction is nondegenerate. This proves that the bracket image is
+the whole line. The item is the exact published input used in step 1.1 of the
+already-A-P root-system theorem.
+
 ## Disposition and limits
 
-The existing Killing-form proposition row remains A-P. This follow-up adds two
-new A-P IDs and moves the two existing Casimir U-P rows to A-P. No duplicate is
-introduced, and no claim is made that all implicit Lie-theory dependencies or
-all downstream uses have been audited.
+The existing Killing-form proposition row remains A-P. The impact follow-ups
+add five new A-P IDs and move the two existing Casimir U-P rows to A-P. No
+duplicate is introduced, and no claim is made that all implicit Lie-theory
+dependencies or all downstream uses have been audited.
