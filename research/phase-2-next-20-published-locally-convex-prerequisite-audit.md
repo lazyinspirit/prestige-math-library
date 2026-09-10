@@ -5,7 +5,7 @@ Date: 2026-09-11. Scope: the published clauses actually used by the original
 and dependency-interface audit, not an independent judgment, a draft-readiness
 decision, or a transitive closure certification. No published item was edited.
 
-## Confirmed defect
+## Implicit supplier reconciliation — bounded clear
 
 `def-algebraic-dual-and-linear-functional` (current SHA-256
 `7af2c0369ebd6f3c4055f77c2c169651f7cc6bec9f009d3ab0a813eeb81bf353`)
@@ -21,10 +21,13 @@ The exact earlier published supplier is `lem-restriction-of-scalars`, claim 1
 (current SHA-256
 `95811067b059da1ce32c2ac672ba5116725a7bc8c54bcbffc6b5bc5948979b67`),
 whose proof checks the five vector-space axioms for the field acting on itself.
-Repair the published definition by declaring that supplier and citing its first
-claim at the construction. The new locally convex definition can declare and
-use the same supplier locally until Phase 3 repairs the published item. No new
-Phase-2 pair is needed. Classification: U-C pending complete repair audit.
+whose first claim supplies the construction completely. Under the canonical
+classification rule that a correct implicit use of an adequate published
+supplier is clear rather than a metadata-only defect, the missing direct edge
+does not establish repair debt. An explicit dependency/citation would improve
+the interface, and the new locally convex definition may declare it locally,
+but no published repair or Phase-2 pair is required. Classification: bounded
+no-repair-needed within this exact construction/dependency-interface scope.
 
 ## Bounded clears
 

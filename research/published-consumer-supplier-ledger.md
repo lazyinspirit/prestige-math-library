@@ -14,13 +14,15 @@ The complete current `def-algebraic-dual-and-linear-functional` defines a
 linear functional as a linear map into the field `F`, “where F is regarded as a
 vector space over itself,” and then forms `L(V,F)`. Its only dependencies are
 `def-linear-map` and `def-vector-space-of-linear-maps`; both require their
-source and target already to be vector spaces and neither proves the required
-field-as-vector-space structure. The missing result is not in their dependency
-closure. Exact earlier published supplier: `lem-restriction-of-scalars`, claim
-1, which checks the five vector-space axioms for `F` acting on itself. Repair by
-declaring and citing that supplier at the construction. No Phase-2 pair is
-needed. This is a confirmed definition/dependency defect, newly classified U-C
-pending complete repair audit; the published file remains unchanged.
+source and target already to be vector spaces. Exact earlier published
+`lem-restriction-of-scalars`, claim 1, checks the five vector-space axioms for
+`F` acting on itself and supplies the construction completely. Under the
+canonical rule that a correct implicit use of an adequate published supplier is
+clear rather than a metadata-only defect, the missing direct edge does not
+establish repair debt. The item is a bounded clear; an explicit edge would be
+optional interface cleanup. No Phase-2 pair is needed and the published file
+remains unchanged. This corrects this section's initial U-C classification while
+retaining the audit history.
 
 The compact-image, compact-Hausdorff, finite-product, Euclidean Heine-Borel,
 product-universal-property, relative Hahn-Banach, restriction-of-scalars,
@@ -32,6 +34,29 @@ were reconfirmed without duplicate rows. Exact hashes, clause evidence and
 audit limits are in
 `phase-2-next-20-published-locally-convex-prerequisite-audit.md`. This focused
 audit does not certify unused clauses or transitive closures.
+
+## Scalar metric/topology prerequisite audit — 2026-09-11
+
+`def-metric-topology` uses “neighbourhood” for only an open set containing the
+point. The later canonical `def-neighbourhood-top` explicitly defines an
+unqualified neighbourhood to be any set containing an open set around the
+point, and reserves “open neighbourhood” for the narrower notion. Reading the
+two published interfaces together therefore gives conflicting definitions of
+the same unqualified term. Repair the metric item by writing “open
+neighbourhood,” or state only that metric balls form a neighbourhood base under
+the canonical definition. Its metric-open family remains a genuine topology;
+this is a terminology/interface defect, not a false construction. The new TVS
+scaffold explicitly uses `def-neighbourhood-top`, so it is not blocked. No
+Phase-2 pair is needed. Newly classified U-C pending complete repair audit.
+
+Full current real/complex scalar construction and operation interfaces were
+also read. Correct implicit uses of finite choice in
+`thm-metric-open-set-algebra` and of the standard metric-subspace construction
+in `def-complex-metric-convergence-and-continuity` are bounded clears under the
+same canonical rule, not dependency defects. Seven other used scalar items have
+bounded receipts. Exact hashes and limits are in
+`phase-2-next-20-published-scalar-topology-audit.md`; unused clauses and
+transitive closures are not certified.
 
 ## Finite-dimensional cohomology duality choice interface — 2026-09-11
 
@@ -27583,11 +27608,11 @@ This index retains the **2185 distinct published item IDs in the initial
 classification reference pool**, plus **5 newly identified published supplier
 items from U-C19**, **1 new 6c remark finding**, **1 Step-9 repaired definition**,
 **3 HG-P published prerequisite repairs**, **1 diagram-boundary consumer finding**,
-and **16 subsequent frontier-supervision findings**, plus **135 UC34 supplier findings**, plus **4 newly indexed Step3b Tor findings**, plus **2 Step3b real-integrability findings**, plus **2 recovered HG continuity repair rows**, plus **1 resolution-dependent Tor definition repair**, plus **1 sequence-space proof-interface candidate**, plus **2 Green-correspondence prerequisite findings**, plus **1 Cayley-tree proof finding**, plus **3 cohomology extension-map findings**, plus **1 Doob–Dynkin choice finding**, plus **1 finite-dimensional cohomology duality finding**, plus **11 locally convex prerequisite audit additions**, for **2376 indexed items**. It is not a census of defective items or a
+and **16 subsequent frontier-supervision findings**, plus **135 UC34 supplier findings**, plus **4 newly indexed Step3b Tor findings**, plus **2 Step3b real-integrability findings**, plus **2 recovered HG continuity repair rows**, plus **1 resolution-dependent Tor definition repair**, plus **1 sequence-space proof-interface candidate**, plus **2 Green-correspondence prerequisite findings**, plus **1 Cayley-tree proof finding**, plus **3 cohomology extension-map findings**, plus **1 Doob–Dynkin choice finding**, plus **1 finite-dimensional cohomology duality finding**, plus **11 locally convex prerequisite audit additions**, plus **10 scalar-topology audit additions**, for **2386 indexed items**. It is not a census of defective items or a
 claim that every supplier later cited by an audit is a defect candidate.
 The publication census, checked 2026-09-10 from item front matter, has
-**15930 published items**. All 2376 indexed IDs are published;
-**13554 published items remain outside this index** and require census
+**15930 published items**. All 2386 indexed IDs are published;
+**13544 published items remain outside this index** and require census
 reconciliation. This is a status census, not a mathematical audit of those
 outside-index items.
 The initial extraction also contained
@@ -27601,9 +27626,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 158 | Recorded direct review and an unresolved item-specific repair. |
 
-580 further reference-pool items have bounded no-repair-needed dispositions
+590 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1796 items and the expanded reference pool contains 2376 unique items.
+1796 items and the expanded reference pool contains 2386 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28290,6 +28315,16 @@ owner's scan policy.
 | `lem-restriction-of-scalars` | Next-20 batch-2 actual-prerequisite audit: full current proof read. Claim 1 checks the field-as-vector-space structure and the remaining clauses correctly restrict a common-field action. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
 | `thm-infimum-property` | Next-20 batch-2 actual-prerequisite audit: full current proof read. Reflection and completeness establish the precise nonempty bounded-below infimum used by the gauge construction. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
 | `thm-closure-characterisation-top` | Next-20 batch-2 actual-prerequisite audit: full current proof read. The neighbourhood characterization supplies the convex-closure argument without an extra separation or choice assumption. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
+| `def-algebraic-dual-and-linear-functional` | Next-20 batch-2 reconciliation: field-as-vector-space structure is used implicitly and is completely supplied by earlier published `lem-restriction-of-scalars`, claim 1. Correct implicit use is clear under the canonical rule; an explicit edge is optional cleanup, not repair debt. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
+| `thm-metric-open-set-algebra` | Scalar-topology audit: proof 1.3's finite radius selection is correctly supplied by published `lem-finite-choice`; a missing explicit edge alone is not repair debt. The finite-intersection/topology clause is sound in this scope. Exact hash/evidence: research/phase-2-next-20-published-scalar-topology-audit.md. |
+| `def-complex-metric-convergence-and-continuity` | Scalar-topology audit: the mentioned restricted metric on a subset is the correct implicit use of published `def-isometry-and-metric-embedding`; the ambient complex metric and subset convention are sound in this scope. Exact hash/evidence: research/phase-2-next-20-published-scalar-topology-audit.md. |
+| `def-vector-space` | Scalar-topology audit: full current definition read; five scalar-action axioms and additive abelian-group structure are correctly stated, with no topology or choice assumption. Exact hash/evidence: research/phase-2-next-20-published-scalar-topology-audit.md. |
+| `lem-real-line-is-a-metric-space` | Scalar-topology audit: full current proof read; absolute value supplies the real metric and its balls are the stated intervals. No repair in the used usual-real-topology scope. Exact hash/evidence: research/phase-2-next-20-published-scalar-topology-audit.md. |
+| `def-complex-numbers-and-arithmetic` | Scalar-topology audit: full quotient construction read; the real embedding and imaginary-unit definitions are supplied by the paired field theorem. No repair in the used complex-field scope. Exact hash/evidence: research/phase-2-next-20-published-scalar-topology-audit.md. |
+| `thm-complex-numbers-form-a-field` | Scalar-topology audit: full current proof read; irreducible quotient, coordinate formulas and inverse formula supply the complex scalar field. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-scalar-topology-audit.md. |
+| `thm-reals-ordered-field` | Scalar-topology audit: full current proof read; representative independence, trichotomy and field-operation compatibility supply the ordered real scalar field. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-scalar-topology-audit.md. |
+| `def-complex-conjugate-real-imaginary-part-and-modulus` | Scalar-topology audit: full current definition read; unique coordinates and real square roots make the modulus construction well defined. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-scalar-topology-audit.md. |
+| `lem-complex-conjugation-and-modulus-laws` | Scalar-topology audit: full current proof read; definite, multiplicative and subadditive modulus clauses support the local joint scalar-operation estimates. Unused automorphism terminology is outside this bounded clear. Exact hash/evidence: research/phase-2-next-20-published-scalar-topology-audit.md. |
 
 
 ### A-P — Audited items pending Phase 3 repair
@@ -28464,7 +28499,7 @@ owner's scan policy.
 
 | Published item | Exact prerequisite debt at classification |
 |---|---|
-| `def-algebraic-dual-and-linear-functional` | Next-20 batch-2 published-interface audit: definition forms `L(V,F)` while merely saying `F` is regarded as a vector space over itself; neither declared dependency proves that structure. Add exact earlier published `lem-restriction-of-scalars`, claim 1. No Phase-2 pair; U-C pending complete repair audit. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
+| `def-metric-topology` | Scalar-topology audit: unqualified neighbourhood is defined as only an open set containing the point, conflicting with later canonical `def-neighbourhood-top`, where neighbourhoods need not be open. Rewrite as “open neighbourhood” or state the ball-base fact. Metric topology itself remains sound; no Phase-2 pair. Exact hash/evidence: research/phase-2-next-20-published-scalar-topology-audit.md. |
 | `cor-cohomology-over-a-field-is-dual-to-homology-for-finite-dimensional-complexes` | Batch8/root2026-09-11: finite-dimensional statement invokes choice-bearing general UCT/injectivity without assumptions. Local finite-basis evaluation proof can repair it; no new Phase2 supplier. See Finite-dimensional cohomology duality choice interface. |
 | `thm-doob-dynkin-lemma` | Batch3/root full target reading 2026-09-11: rational Borel lifts selected simultaneously without a choice contract. Existing def-countable-choice or def-axiom-of-choice suffices; no new pair. See Doob–Dynkin choice-interface finding. |
 | `thm-the-cohomology-universal-coefficient-sequence-splits-nonnaturally` | Batch8 2026-09-11 confirmed extension-map well-definedness/choice-contract debt; exact local earlier HA suppliers and repair identity recorded in Cohomology extension-map prerequisite findings and phase-2-next-20-batch-8.notes.md. New topological supplier is scaffolded/escalated, never a forward repair premise. No new Phase 2 pair. |

@@ -23,11 +23,12 @@ progress and next targets. Published content is read-only in this role.
 
 Evidence: `research/phase-2-next-20-published-locally-convex-prerequisite-audit.md`.
 
-One confirmed published definition/dependency defect was found in
-`def-algebraic-dual-and-linear-functional`: its construction needs the theorem
-that a field is a vector space over itself, absent from its dependency closure.
-The exact earlier published supplier is `lem-restriction-of-scalars`, claim 1.
-No Phase-2 pair is required. The finding is U-C pending repair audit.
+`def-algebraic-dual-and-linear-functional` implicitly uses the theorem that a
+field is a vector space over itself. Exact earlier published
+`lem-restriction-of-scalars`, claim 1, supplies it completely. The canonical
+classification rule treats a correct implicit use of an adequate published
+supplier as clear rather than a metadata-only defect, so the item has a bounded
+no-repair-needed disposition; an explicit edge is optional interface cleanup.
 
 The compact-image, compact-Hausdorff, finite-product, Euclidean Heine-Borel,
 product-universal-property, relative Hahn-Banach, restriction-of-scalars,
@@ -35,9 +36,23 @@ infimum and closure clauses actually used by the batch were reread. Thirteen
 items received bounded no-repair-needed dispositions, including three moved
 from U-P. This does not certify their unused clauses or transitive closures.
 
-Post-batch canonical index: 2,376 unique published IDs; U-P 1,435, U-C 16,
-A-R 187, A-P 158, and 580 bounded clears. Mechanical recount and cross-class
-deduplication are required after every later ledger edit.
+The scalar-topology follow-up found one confirmed terminology/interface defect:
+`def-metric-topology` calls only open sets containing a point neighbourhoods,
+while the later canonical `def-neighbourhood-top` includes all supersets of
+open sets. The new scaffold explicitly uses the later definition, so this does
+not block it. Correct implicit finite-choice and metric-subspace uses were
+cleared under the rule above. Evidence:
+`research/phase-2-next-20-published-scalar-topology-audit.md`.
+
+Post-scalar-batch canonical index: 2,386 unique published IDs; U-P 1,435,
+U-C 16, A-R 187, A-P 158, and 590 bounded clears. Mechanical recount and
+cross-class deduplication are required after every later ledger edit.
+
+For every future candidate, search the entire ledger by exact ID, aliases,
+defect mechanism and supplier IDs. A correct implicit use of an adequate
+published supplier is clear; missing redundant direct edges alone are not
+repair debt. A distinct defect on an indexed item extends its existing evidence
+and retains one classification row.
 
 ## Next target
 
@@ -48,5 +63,5 @@ deduplication are required after every later ledger edit.
 3. Continue through original next-20 batches by actual prerequisite pressure,
    then sample published items outside the existing 2,376-ID reference pool.
 
-No exhaustive discovery claim is authorized while 13,554 published items
+No exhaustive discovery claim is authorized while 13,544 published items
 remain outside the index and dependency interfaces remain unaudited.
