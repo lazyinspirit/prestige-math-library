@@ -326,15 +326,30 @@ Post-HG target counts: 2,449 unique published IDs; U-P 1,405, U-C 15, A-R 187,
 A-P 176 and 666 bounded clears. The current census leaves 13,481 published IDs
 outside the index.
 
+The group-c second-countable Radon-regularity candidate led to two new A-P
+items after its exact general supplier was read. The general sigma-compact-open
+regularity theorem silently chooses relatively compact neighborhoods at
+countably many exhaustion stages and countably many summable-error open
+approximants. The second-countable corollary's basis refinement can be expanded
+choice-free, but its subsequent direct call to that theorem inherits the
+unstated countable-choice contract. Add `AC_omega`, or supply a complete
+choice-free replacement for the relevant proof. Current AC-qualified author
+paths are not blocked. Evidence:
+`research/phase-2-next-20-published-radon-regularity-choice-audit.md`.
+
+Post-Radon target counts: 2,451 unique published IDs; U-P 1,405, U-C 15, A-R
+187, A-P 178 and 666 bounded clears. The current census leaves 13,479 published
+IDs outside the index.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
    issues reported by the root worker, prioritizing items actually consumed by
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
-   then audit bounded samples of published items outside the 2,449-ID index.
+   then audit bounded samples of published items outside the 2,451-ID index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,481 published items
+No exhaustive discovery claim is authorized while 13,479 published items
 remain outside the index and dependency interfaces remain unaudited.
