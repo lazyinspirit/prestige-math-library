@@ -211,6 +211,30 @@ within-class or cross-class duplicate; all 2,427 indexed IDs resolve to current
 published items. The current published census is 15,930, leaving 13,503 outside
 the index.
 
+The batch 12 computed-function and one-step-interpreter interfaces have no
+published defect in the audited scope. The exact halt/diverge convention,
+machine/configuration parse, malformed output, halting fixed point, unique
+nonhalting successor, clamped tape step and canonical trimming are coherent.
+Three U-P rows move to bounded clear and four fully read direct interfaces enter
+that census. Exact evidence:
+`research/phase-2-next-20-published-machine-interpreter-prerequisite-audit.md`.
+
+Post-machine-interface target index: 2,431 unique published IDs; U-P 1,407,
+U-C 15, A-R 187, A-P 169 and 653 bounded clears. Mechanical recount confirms
+no within-class or cross-class duplicate; all 2,431 indexed IDs resolve to
+current published items. The current published census is 15,930, leaving
+13,499 outside the index.
+
+The Fourier author's final eight published concerns all match existing single
+A-P records and introduce no class move or duplicate: the two convolution
+items, Euclidean-ball measurability, total-variation countable additivity,
+density/AC inheritance, Lp subsequence/CC inheritance, Riesz--Thorin
+normalization, and the complex `C_0` lower norm. The HG author's right-increment
+example extends the existing single U-C record for
+`thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree`:
+the edge `a -> ab` makes the printed quotient `aba^(-1)`, while the correct
+right increment is `a^(-1)ab=b`. No counts change for these reconciliations.
+
 ## Next target
 
 1. Audit batch 12's published machine-code and step-by-step interpreter

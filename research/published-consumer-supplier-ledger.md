@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1410, U-C 15, A-R 187, A-P 169. The
+Current classifications: U-P 1407, U-C 15, A-R 187, A-P 169. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -218,6 +218,18 @@ proof are coherent. Two other U-P items move to bounded clear, nineteen fully
 read items enter that census, and the already-clear EVT and chain rule are
 reconfirmed without duplicate rows. Exact hashes, alias searches and clause
 limits are in `phase-2-next-20-published-chernoff-prerequisite-audit.md`.
+
+The batch 12 machine-interface audit clears the published computed-partial-
+function definition and one-step interpreter in their active uses. The former
+matches the authored halt-with-encoded-output on the domain and divergence off
+the domain. The latter parses one fixed machine/configuration pair syntax,
+returns a halting configuration unchanged, computes the unique successor for a
+nonhalting configuration, and returns a distinct empty malformed output. Its
+machine encoding, decoder, finite-support configuration and clamped one-step
+interfaces are coherent. Three U-P rows move to bounded clear and four fully
+read items enter that census; the repaired halting-history and already-clear
+function definitions are reconfirmed only. Exact hashes and clause limits are
+in `phase-2-next-20-published-machine-interpreter-prerequisite-audit.md`.
 
 ## Locally convex published-prerequisite audit — 2026-09-11
 
@@ -27900,6 +27912,13 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-partial-function-computed-by-a-machine` | Original-next-20 batch 12 machine-interface audit, 2026-09-11: full definition read. Exact encoded output is required on the mathematical domain and divergence off it, while malformed strings outside the input-code image are intentionally unconstrained. This matches the active numerical wrappers. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-machine-interpreter-prerequisite-audit.md`. |
+| `lem-step-by-step-interpreter-for-machine-codes` | Original-next-20 batch 12 machine-interface audit, 2026-09-11: full proof read. The fixed parser validates the machine/configuration code, returns halting configurations unchanged, computes the unique nonhalting successor including left clamp and canonical tape trimming, and returns a distinct empty word when malformed. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-machine-interpreter-prerequisite-audit.md`. |
+| `def-effective-binary-encoding-and-decoder` | Original-next-20 batch 12 machine-interface audit, 2026-09-11: full definition read. Injection, total decode with an external malformed token, and optional prefix-freeness are consistently separated. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-machine-interpreter-prerequisite-audit.md`. |
+| `def-effective-encoding-of-turing-machines` | Original-next-20 batch 12 machine-interface audit, 2026-09-11: full definition read. The normalized finite table, arity header, self-delimiting blocks and shape checks define one injective prefix-free machine syntax with total malformed-code decode. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-machine-interpreter-prerequisite-audit.md`. |
+| `lem-machine-encoding-is-injective-and-decodable` | Original-next-20 batch 12 machine-interface audit, 2026-09-11: full proof read. Tuple-code equality recovers every machine parameter/transition, and the parser returns that unique machine or malformed. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-machine-interpreter-prerequisite-audit.md`. |
+| `def-turing-machine-configuration` | Original-next-20 batch 12 machine-interface audit, 2026-09-11: full definition read. State, natural head and finite-support tape are explicit; the finite maximum includes the scanned cell even when blank. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-machine-interpreter-prerequisite-audit.md`. |
+| `def-one-step-configuration-relation` | Original-next-20 batch 12 machine-interface audit, 2026-09-11: full definition read. A nonhalting transition updates exactly the state, scanned cell and head, with the left boundary clamped and finite support preserved. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-machine-interpreter-prerequisite-audit.md`. |
 | `def-real-exponential-function-and-e` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: the all-real convergence supplier makes the power-series definition total and gives `exp(0)=1`. U-P to bounded clear in the used scope. Exact hash: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
 | `thm-continuous-inverse` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: full target read. Strict monotonicity, interval image and the monotone interval-image criterion prove inverse continuity, with the decreasing case reduced by negation. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
 | `thm-expectation-of-products-of-independent-random-variables` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: joint attained-value grouping, mutual-independence factorization and finite Fubini prove the product formula, including the empty family. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
@@ -28783,7 +28802,7 @@ owner's scan policy.
 | `thm-the-cohomology-universal-coefficient-sequence-splits-nonnaturally` | Batch8 2026-09-11 confirmed extension-map well-definedness/choice-contract debt; exact local earlier HA suppliers and repair identity recorded in Cohomology extension-map prerequisite findings and phase-2-next-20-batch-8.notes.md. New topological supplier is scaffolded/escalated, never a forward repair premise. No new Phase 2 pair. |
 | `thm-universal-coefficient-theorem-for-cohomology-over-a-pid` | Batch8 2026-09-11 confirmed extension-map well-definedness/choice-contract debt; exact local earlier HA suppliers and repair identity recorded in Cohomology extension-map prerequisite findings and phase-2-next-20-batch-8.notes.md. New topological supplier is scaffolded/escalated, never a forward repair premise. No new Phase 2 pair. |
 | `lem-the-cohomology-universal-coefficient-extension-map` | Batch8 2026-09-11 confirmed extension-map well-definedness/choice-contract debt; exact local earlier HA suppliers and repair identity recorded in Cohomology extension-map prerequisite findings and phase-2-next-20-batch-8.notes.md. New topological supplier is scaffolded/escalated, never a forward repair premise. No new Phase 2 pair. |
-| `thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree` | New confirmed wrong quotient order in cycle labels; actual normal-form proof requires v^(-1)w. Existing published suppliers suffice; no Phase 2 pair. Root full target read. See Hyperbolic and finite-Weyl scaffold audit findings — 2026-09-11 and batch6/10 reports. |
+| `thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree` | Confirmed wrong quotient order in cycle labels; actual right-edge increment is `g_j^(-1)g_(j+1)`, whose ordered product telescopes. Proof 1.2 instead uses `g_(j+1)g_j^(-1)`: on the edge `a -> ab` this is `aba^(-1)`, a reduced length-three word rather than the basis letter `b`. Existing `thm-reduced-words-form-the-free-group` and `def-cayley-graph` suffice; no Phase 2 pair. Root full target read; exact author reconfirmation: research/phase-2-next-20-step3b-d.md. See also Hyperbolic and finite-Weyl scaffold audit findings — 2026-09-11 and batch6/10 reports. |
 | `def-relative-projectivity` | Batch11/root 2026-09-11: explicit AC basis paragraph lacks direct def-axiom-of-choice dependency. Published supplier exists; preserve stated assumption. Confirmed declaration defect, repair audit pending; no Phase 2 pair. See Green-correspondence prerequisite findings and phase-2-next-20-batch-11.notes.md. |
 | `def-c-zero-and-ell-infinity` | REOPENED2026-09-10: Step3b-b full actual definition reading, confirmed by root: complex scalar triangle inequality and homogeneity have no declared complex convention/modulus supplier. Prior LUB repair remains valid. Add earlier published rem-real-and-complex-normed-space-convention and lem-complex-conjugation-and-modulus-laws, preserve choice-free construction, then targeted checks and canonical sync. No unpublished Phase2 supplier. Live sequential counterexample repaired locally; source report research/phase-2-catchup-24-step3b-b.md. |
 | `lem-normalizing-a-locally-finite-positive-smooth-family` | UC34 supplier reconciliation 2026-09-09: Astra1 DG review and root full target/partition-definition reading: conclusion calls closed supports an open cover for subordination, without openness; actual definition requires an open cover and locally finite SUPPORTS, not merely cozero sets. Confirmed contract/interface wording gap pending full repair audit. Repair by requiring locally finite supports, proving support equality after positive normalization, sum1 and 0<=phi<=1, and state subordination only for a supplied open cover containing supports. Exact suppliers already published: local finite smooth sums, partition definition, reciprocal/composition; no Phase2 pair identified. DG15 imports only valid normalization/support calculations, not faulty stronger terminology. Report research/phase-2-catchup-24-owner-step3-dg-astra.md. |
@@ -29105,7 +29124,6 @@ mathematical repairs. Evidence:
 | `def-description-machine-and-plain-kolmogorov-complexity` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-dfa-acceptance-and-recognized-language` | 51. Exact live-plan metadata resynchronization set |
 | `def-dimension-classical-variety` | AV-1 draft-page impact partition (Phase 3 only) |
-| `def-effective-binary-encoding-and-decoder` | 51. Exact live-plan metadata resynchronization set |
 | `def-effective-hausdorff-dimension` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-effectively-open-set-in-cantor-space` | Existing configuration-interface impact; UC-73 Astra 4 item 15 additionally flags the asserted fair-coin measure construction for review. Candidate only, not a completed audit: inspect published countable-product measure supplier and propagate actual AC/CC use. |
 | `def-exp-and-nexp` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
@@ -29163,7 +29181,6 @@ mathematical repairs. Evidence:
 | `def-p` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-p-complete-under-logspace-reductions` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-p-with-a-sharpp-oracle` | 51. Exact live-plan metadata resynchronization set |
-| `def-partial-function-computed-by-a-machine` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-plane-dual-multigraph` | Scaffold III.4.1 — plane dual dependency |
 | `def-plane-graph-face-and-boundary` | Scaffold III.4.1 — plane dual dependency |
 | `def-polar-surface-measure-on-the-unit-sphere` | Continuing personal audit: exact examination pool and AT-24 contracts |
@@ -29873,7 +29890,6 @@ mathematical repairs. Evidence:
 | `lem-sphere-endomorphisms-act-by-the-same-integer-in-every-ordinary-theory` | Continuing personal audit: exact examination pool and AT-24 contracts |
 | `lem-standard-containments-relativize` | 51. Exact live-plan metadata resynchronization set |
 | `lem-starting-point-free-dependent-choice` | Early-repair direct-consumer inventory — 2026-09-08 |
-| `lem-step-by-step-interpreter-for-machine-codes` | 51. Exact live-plan metadata resynchronization set |
 | `lem-subdivision-compatible-continuous-polyhedral-homology-comparison` | 13.5 Supplier-pair to consumer map |
 | `lem-subscheme-intersection-fibre-product` | Published scheme-pair repair |
 | `lem-successor-cardinal-exists` | 7.4 Published metadata snapshot amendments |
