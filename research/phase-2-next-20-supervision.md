@@ -16,3 +16,12 @@ At 13:43 UTC, 1-drift is running with one observed drift-review worker.
 Next: monitor drift completion, scaffold dispatch and published-defect evidence. Keep run operations here and mathematical
 published-defect findings in the canonical ledger. Never clear unresolved
 mathematics or discard claims to force a transition.
+
+13:54 UTC supervision: engine remains in 1-drift, first attempt, one live
+Sol/high worker, no recorded blocker or retry. Latest observed work reads
+the retained hyperbolic-toolkit scaffold/coverage. No intervention warranted.
+Published audit evidence is in the sequence-space and metric-choice audit
+receipts; canonical ledger records two newly confirmed ancillary/interface
+assumption defects, one new potential c0 proof-interface concern, and three
+bounded clear dispositions. Published content untouched. Next: await drift
+report and handle exact findings before scaffold construction.
