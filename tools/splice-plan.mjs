@@ -36,6 +36,7 @@
 // fails on any divergence, so the drift is loud before the sweep spends.
 
 import { readFileSync, writeFileSync, existsSync, readdirSync } from 'node:fs';
+import { split, yaml } from './pathway-lib.mjs';
 
 
 const argv = process.argv.slice(2);
@@ -121,11 +122,12 @@ if (verify) {
       try { files = readdirSync(`library/${cat}`).filter((x) => x.endsWith('.md')); } catch { continue; }
       for (const file of files) {
         const text = readFileSync(`library/${cat}/${file}`, 'utf8');
-        const pageId = /^page:\s*(\S+)/m.exec(text)?.[1];
-        const items = /^items:\s*\[([\s\S]*?)\]/m.exec(text)?.[1] ?? '';
+        const frontmatter = yaml().parse(split(text).fm) ?? {};
+        const pageId = frontmatter.page;
+        const items = frontmatter.items ?? [];
         if (!pageId) continue;
         onDiskPages.add(pageId);
-        for (const i of items.split(',').map((s) => s.trim()).filter(Boolean)) {
+        for (const i of items.map(idOf).filter(Boolean)) {
           if (!ownerOf.has(i)) ownerOf.set(i, pageId);
         }
       }

@@ -372,8 +372,8 @@ Task generation omits the unreachable initial drift task for imported runs.
 Legacy reader/refuter envelope checksums are rebound to translated containers;
 original source checksums and mathematical carriers remain unchanged.
 
-The merged stage table begins with a machine-verified import checkpoint and
-reruns all canonical Step 5 and 6B gates over the combined frontier before
+The merged stage table begins with a machine-verified import checkpoint, then
+an owned repair join reruns all canonical Step 5 and 6B gates over the combined frontier before
 the canonical 6B baseline, 6C, 6D and every later stage. Source
 item hashes, original artifact hashes, imported envelope hashes and defect
 records are bound by the import record. Composite impact baselines preserve
@@ -382,6 +382,11 @@ Only container identities/checksums change during import, not mathematical
 carriers or original review attribution. Fresh combined6C checks and closure
 remain required before Step 7. The existing guarded 6C-to-Step-8 protocol
 does not waive earlier import gates; a merge supplies no verification stamp.
+Separating import verification from the repair join preserves source evidence
+while allowing genuine later repairs to merged copies. The join uses the
+canonical Astra/medium 6B repair hook and budgets, with no gate waiver.
+Splice verification parses page YAML, so quoted published page/item IDs are
+recognized as existing suppliers rather than unbuilt prerequisites.
 If preparation or verification fails, keep the target stopped and reconcile
 the exact diagnostics. Source runs remain available and must stay paused.
 

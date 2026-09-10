@@ -73,7 +73,7 @@ test('--verify flags a dep on an UNBUILT page missing from requires, and only th
   // thm-published lives on a page ON DISK: order licenses it, requires does not.
   mkdirSync(join(dir, 'library', 'algebra'), { recursive: true });
   writeFileSync(join(dir, 'library', 'algebra', 'published-page.md'),
-    '---\npage: published-page\nitems: [thm-published]\n---\n');
+    '---\npage: "published-page"\nitems:\n  - "thm-published"\n---\n');
   const v = run(dir, ['--run', 'r9', '--verify']);
   assert.equal(v.status, 1);
   assert.match(v.stderr, /thm-future.*UNBUILT page future-page/);
