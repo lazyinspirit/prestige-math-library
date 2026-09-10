@@ -1706,9 +1706,11 @@ transform interacts with them.
 
 **A page:** `schwartz-space-and-the-plancherel-theorem`
 
-**Requires:** FA-13–FA-14, FA-22; planned predecessors MT-8, MT-11, MT-14,
-MT-15; published multivariable differential notation and smooth cutoff
-functions.
+**Requires:** FA-22 and the published complex Lp, density/mollification,
+Euclidean calculus, bounded extension and elementary topology interfaces
+listed in `phase-2-five-cap-admission.json`. The seminorm-metric proof is
+local; Plancherel uses L2 completeness and dense extension. No general
+Hilbert-basis, spectral-measure or Stone theorem is a proof prerequisite.
 
 **Source backing read:** Teschl §§14.1 and 14.5, pp. 379–388 and 404–411
 (*The Fourier transform on $L^1$ and $L^2$*; *Tempered distributions*);
@@ -3491,6 +3493,32 @@ Until the SET suppliers and their entire earlier prerequisite closure are
 published, the FA consumers remain untouched. In Phase 3, replace their
 recorded-not-proved edges by these proved suppliers. Neither FA page may quote
 the target catalogue as evidence.
+
+### 14.11A Bounded Fourier prerequisite admission (2026-09-11)
+
+Owner authorizes at most five additional Phase2 pairs, without substantial
+unmet prerequisites of their own. Admit FA22 and FA23 only, retaining their
+full A/B inventories and the rehomed momentum example. Canonical FA22
+requires now names published actual supplier homes rather than the obsolete
+serial FA21 spectral-theory edge. FA23 depends on FA22; its other actual
+inputs are in that published closure. This is an admission decision, not
+proof-readiness certification. Detailed evidence: `phase-2-five-cap-admission.md`.
+
+Add on FA23 A, after Plancherel and before B consumers,
+`lem-real-ltwo-multipliers-and-unitary-transport`: define the multiplication
+domain/adjoint test and explicit multiplier exponential, prove self-adjointness,
+strong continuity and the generator domain directly by truncation/DCT/Fatou,
+then transport through a specified unitary. This supplies the entire momentum
+example without general unbounded Borel calculus or Stone's theorem.
+
+Hermite completeness uses the Gaussian-moment uniqueness proof and finite
+orthogonal partial sums; no harmonic-oscillator spectral theorem or arbitrary
+Hilbert-basis theorem is imported. Gaussian, radial-majorant Lebesgue-point,
+simultaneous approximation and periodic uniqueness lemmas remain binding.
+The first three complex-Lp items in the historical batch8 are already published
+on their corrected home and must be imported, not reminted. The historical
+interpolation warnings must be updated against the now-published endpoint
+interpolation pair; no new Riesz–Thorin theorem is needed.
 
 ### 14.12 Probability Theory reconciliation (2026-09-08)
 

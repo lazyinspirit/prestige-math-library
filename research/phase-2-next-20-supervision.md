@@ -115,3 +115,16 @@ large-cardinal preparation/PMEA placement, source evidence and prerequisite audi
 Next: obtain scope/source exceptions, plan the authorized dependency work using
 the engine without overlapping original pair ownership, and continue exact
 local proof reconciliation. Engine must remain held until readiness is real.
+
+Owner steering: introduce at most5 additional existing Phase2 pairs, ensuring
+no substantial unmet prerequisite chain of their own. Root admits onlyFA22
+andFA23, with detailed actual-interface and local proof receipt in
+phase-2-five-cap-admission.md. All58 external identities in retained inventory
+are published; complete inventories/momentum amendment read. Removed obsolete
+FA21 serial prerequisite from the canonical plan; local metric/completion,
+Gaussian-moment Hermite and explicit multiplier proofs replace the unbuilt
+spectral/Hilbert dependency chain without discarding any commissioned claims.
+Full canonical plan validation passes. Supplemental engine planning is
+phase-2-fourier-support-2,4 pages/1 batch, lower-order in-run dependency explicit.
+Original20 held intact. Three expansion slots unused. Original17-source
+retry exception remains unanswered; new scope authorization does not waive it.

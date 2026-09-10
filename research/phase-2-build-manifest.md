@@ -2,19 +2,20 @@
 
 Snapshot date: 2026-09-11 (Australia/Sydney).
 
-Active run: `phase-2-next-20`, state `.autopilot/phase-2-next-20`.
-The owner authorized building all 20 pairs presented as buildable, supervising
-the engine through completion, resolving blockers and inefficiency, recording
-potential published-item defects in the canonical ledger, and keeping Phase 2 current.
-Scope: **20 pairs / 40 pages / 14 batches**. Programme: **147 pairs = 44 published
-+ 20 selected + 83 waiting**. Planning and doctor checks pass; Step 1 drift and materialization passed after root resolved the affine-level
-interface locally. All 14 scaffold batches finished; the engine is held at Step 1 readiness.
-Scaffolds contain 540 items (84 recorded ready, 456 escalated;
-current-hash validation remains required). All twenty pairs remain selected.
-Actual item audits found missing Fourier and Lie prerequisites despite the
-initial page-level eligibility. The expanded prerequisite proposal (25 additional pairs:16 Fourier-track
-and9 Lie-track) and17 bounded source-recovery requests are pending owner
-approval; large-cardinal interface placement also requires reconciliation. No additional pair is authorized or launched.
+Original run: `phase-2-next-20`, state `.autopilot/phase-2-next-20`.
+Supplemental run: `phase-2-fourier-support-2`, state `.autopilot/phase-2-fourier-support-2`.
+The owner retains all20 original pairs and authorizes at most5 additional
+existing Phase2 pairs with no substantial unmet prerequisite chain.
+Admitted additions: **FA22 Fourier transform/convolution** and **FA23 Schwartz/Plancherel**.
+Three slots remain unused. The25-pair expansion proposal is superseded.
+Programme: **147 pairs =44 published +20 original selected +2 added selected
++81 waiting**. Original run:40 pages/14 batches, Step1 held at540 items
+(84 ready records,456 escalations). Supplemental run:4 pages/1 batch,
+with FA22 before FA23. Admission evidence: `phase-2-five-cap-admission.md`
+and its exact published-interface census JSON. No original pair was removed.
+The supplemental plan validates; the full source/author/review gates remain.
+Lie and large-cardinal prerequisite gaps, source exceptions and other local
+proof work are not claimed resolved by these two additions.
 Build completion leaves new content draft pending owner publication.
 
 Local prerequisite resolution: `phase-2-next-20-affine-level-local-resolution.md`.
@@ -68,7 +69,8 @@ change the active wave. The canonical ledger records their consumers.
 
 The first 19 pairs and the subsequent 25-pair run are published: 44 pairs
 in total. The owner authorized all 20 currently eligible Phase 2 pairs in
-`phase-2-next-20`; 83 remaining pairs await prerequisites. Source and proof
+`phase-2-next-20`; two additional Fourier pairs are selected under the five-pair
+cap, leaving81 pairs waiting. Source and proof
 gates remain mandatory.
 
 Nine of the twelve published-page edges that caused the earlier expansion
@@ -144,8 +146,8 @@ supplier pair or its other outstanding consumers.
 | functional-analysis | P | waiting | `continuous-functional-calculus-for-self-adjoint-and-normal-operators` |
 | functional-analysis | P | waiting | `spectral-measures-and-borel-functional-calculus` |
 | functional-analysis | P | waiting | `unbounded-self-adjoint-operators-and-stones-theorem` |
-| functional-analysis | P | waiting | `fourier-transform-convolution-and-approximate-identities` |
-| functional-analysis | P | waiting | `schwartz-space-and-the-plancherel-theorem` |
+| functional-analysis | P | selected (support-2) | `fourier-transform-convolution-and-approximate-identities` |
+| functional-analysis | P | selected (support-2) | `schwartz-space-and-the-plancherel-theorem` |
 | foundations | P | published | `deduction-soundness-completeness-and-compactness` |
 | foundations | P | published | `arithmetization-incompleteness-and-relative-consistency` |
 | foundations | P | published | `reflection-absoluteness-and-elementary-submodels` |

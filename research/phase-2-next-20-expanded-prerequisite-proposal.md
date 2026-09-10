@@ -1,6 +1,11 @@
-# Expanded prerequisite scope for owner review
+# Superseded25-pair prerequisite proposal
 
-This supersedes the nine-pair Lie-only proposal after all scaffold reports finished.
+The owner subsequently authorized at most5 additional pairs. This25-pair
+proposal is superseded and must not be executed. The current admission is
+FA22/FA23 only; see phase-2-five-cap-admission.md. The17-URL recovery exception
+was not answered by the scope authorization and remains unapproved.
+
+Historical proposal following the scaffold reports:
 Retain all original20 pairs. The declared prerequisite closure below contains
 25 additional unbuilt pairs and two already-selected pairs. This is the conservative current
 plan closure, not a proof that every declared edge is mathematically indispensable.
