@@ -11,18 +11,1568 @@
       "mapping-cones-cylinders-and-chain-triangles",
       "long-exact-sequences-in-homology"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-homological-double-complex",
+        "kind": "definition",
+        "title": "Homological double complex",
+        "statement": "In an abelian category, a homological double complex is a family C[p,q] with horizontal differential of degree (-1,0), vertical differential of degree (0,-1), dh squared = dv squared = 0, and dh dv + dv dh = 0. Morphisms preserve bidegrees and commute with both differentials. First quadrant means C[p,q]=0 unless p,q>=0.",
+        "deps": [
+          "def-chain-complex-in-an-abelian-category"
+        ],
+        "strategy": "Specify every square with its source C[p,q] and target C[p-1,q-1]. The two row/column square-zero conditions are additional axioms, not consequences of anticommutation. No infinite sum is part of this definition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 1; Stacks 12.18 convention translated"
+      },
+      {
+        "id": "rem-commuting-versus-anticommuting-double-complex-conventions",
+        "kind": "remark",
+        "title": "Commuting versus anticommuting double complex conventions",
+        "statement": "A commuting convention (dh dv=dv dh) becomes the present anticommuting convention by replacing dv at (p,q) with (-1)^p dv. Then total differential is dh+(-1)^p dv before translation and dh+dv after translation.",
+        "deps": [
+          "def-homological-double-complex"
+        ],
+        "strategy": "Compute the two composites to (p-1,q-1): their factors are (-1)^p and (-1)^(p-1), so they cancel. The twist is its own inverse; morphisms unchanged. Do not apply this sign a second time to an already anticommuting double complex.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "Stacks 12.25.1; Weibel 5.6"
+      },
+      {
+        "id": "def-direct-sum-total-complex-of-a-double-complex",
+        "kind": "definition",
+        "title": "Direct sum total complex of a double complex",
+        "statement": "If the indicated countable coproducts exist, set Tot-sum(C)[n]=coproduct over p+q=n of C[p,q]. Its degree -1 arrow restricts on C[p,q] to the sum of the horizontal and vertical arrows followed by the corresponding target injections.",
+        "deps": [
+          "def-homological-double-complex",
+          "def-products-and-coproducts"
+        ],
+        "strategy": "Use the coproduct universal property to define a map out of the source sum; each individual summand has only two output components. No infinite sum of morphisms is taken. The following lemma proves the chain condition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 3; total-complex construction",
+        "justified_by": [
+          "lem-the-total-differential-squares-to-zero"
+        ]
+      },
+      {
+        "id": "lem-the-total-differential-squares-to-zero",
+        "kind": "lemma",
+        "title": "The total differential squares to zero",
+        "statement": "The arrow d=dh+dv on the direct-sum totalisation satisfies d[n-1] d[n]=0.",
+        "deps": [
+          "def-direct-sum-total-complex-of-a-double-complex"
+        ],
+        "strategy": "Precompose with every coproduct injection. The composite has components dh^2, dh dv+dv dh, and dv^2; all vanish by the double-complex axioms. Equality of maps out of a coproduct is tested on its injections. This proves the assertion without exactness of infinite coproducts.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 4; expansion of the total differential",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-product-total-complex-of-a-double-complex",
+        "kind": "definition",
+        "title": "Product total complex of a double complex",
+        "statement": "If the diagonal products exist, Tot-product(C)[n]=product over p+q=n of C[p,q]. The (a,b) coordinate of d[n] is dh composed with projection to C[a+1,b] plus dv composed with projection to C[a,b+1], where a+b=n-1. These arrows form a chain complex.",
+        "deps": [
+          "def-homological-double-complex",
+          "def-products-and-coproducts"
+        ],
+        "strategy": "The universal property of a product defines the arrow into it from the indicated finite coordinate sums. Compose d twice and then each projection: the resulting expression is dh^2, dh dv+dv dh, dv^2 on the three possible source positions, all zero. Thus the product arrow squares to zero directly, without a finite-support assumption.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 5; product universal property"
+      },
+      {
+        "id": "prop-sum-and-product-totalisations-agree-on-finite-diagonal-double-complexes",
+        "kind": "proposition",
+        "title": "Sum and product totalisations agree on finite diagonal double complexes",
+        "statement": "If each diagonal has only finitely many nonzero objects, the canonical diagonal map Tot-sum(C) -> Tot-product(C) is an isomorphism of chain complexes.",
+        "deps": [
+          "def-direct-sum-total-complex-of-a-double-complex",
+          "lem-the-total-differential-squares-to-zero",
+          "def-product-total-complex-of-a-double-complex",
+          "def-additive-category"
+        ],
+        "strategy": "Discard zero factors using the universal properties. A finite family in an additive category has a biproduct, so the map with identity diagonal entries and zero off-diagonal entries is invertible. Its squares with d commute componentwise, since both differentials use the same two arrows. Degreewise inverse maps therefore commute with d as well.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 6; finite biproduct identity",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-countable-sequence-groups-and-tail-filtrations",
+        "kind": "lemma",
+        "title": "Countable sequence groups and tail filtrations",
+        "statement": "For the abelian group k=Z/2, P=k^N and S=k^(N) are respectively the product group and its subgroup of finite-support sequences. S -> P is injective and not surjective; S is countable and P is not. With tails T_m consisting of sequences zero at indices <m, both are separated, S/T_m S=P/T_m P=k^m, and completion of S is P. P is complete.",
+        "deps": [
+          "lem-abelian-group-model-for-spectral-sequence-computations"
+        ],
+        "strategy": "Coordinate addition gives P an abelian group; finite supports are closed under addition, giving S. The product universal property is coordinate evaluation, and maps out of S are the finite sums of their component maps. Encode a finite-support binary sequence by the nonnegative integer sum 2^j x_j; uniqueness follows by considering the largest differing index and the geometric-sum identity. Conversely successive division by 2 enumerates S. Any enumeration of P misses the sequence whose jth coordinate differs from the jth coordinate of its jth term, proving uncountability. The constant-one sequence is not in S. Intersections of the tails are zero since each coordinate eventually vanishes. Compatible initial segments have a unique full sequence; this proves both completion assertions by explicit inverse maps and requires no choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "Local expansion for HA-16 infinite-diagonal examples and completeness warning; Weibel 5.4.5",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-sum-and-product-totalisations-can-differ-on-infinite-diagonals",
+        "kind": "counterexample",
+        "title": "Sum and product totalisations can differ on infinite diagonals",
+        "statement": "Direct-sum and product totalisations need not be isomorphic, even with zero differentials: take C[j,-j]=Z/2 for j>=0 and zero elsewhere.",
+        "deps": [
+          "def-direct-sum-total-complex-of-a-double-complex",
+          "lem-the-total-differential-squares-to-zero",
+          "def-product-total-complex-of-a-double-complex",
+          "lem-countable-sequence-groups-and-tail-filtrations"
+        ],
+        "strategy": "This is a double complex with all arrows zero. The two total complexes are concentrated in degree 0 with groups S and P of the preceding lemma. Countability versus uncountability rules out even an abstract isomorphism, not merely surjectivity of the canonical comparison.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 7; infinite-diagonal witness",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-row-and-column-filtrations-of-a-first-quadrant-double-complex",
+        "kind": "definition",
+        "title": "Row and column filtrations of a first quadrant double complex",
+        "statement": "For a first-quadrant double complex, define the column filtration F^col_s Tot_n by summands with horizontal index p<=s; define row filtration F^row_s Tot_n by summands with vertical index q<=s. Both vanish for s<0 and equal Tot_n for s>=n (Tot_n=0 for n<0).",
+        "deps": [
+          "def-direct-sum-total-complex-of-a-double-complex",
+          "lem-the-total-differential-squares-to-zero",
+          "prop-sum-and-product-totalisations-agree-on-finite-diagonal-double-complexes",
+          "def-filtered-chain-complex"
+        ],
+        "strategy": "The horizontal and vertical arrows preserve the two increasing cutoffs. Finite biproduct injections identify the specified partial sums as subobjects. Thus they are filtered subcomplexes. In column coordinates E0[p,q]=C[p,q], d0=dv; in row spectral coordinates E0[p,q]=C[q,p], d0=dh. The spectral first coordinate always denotes filtration degree.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "Weibel 5.6.1\u20132; Stacks 12.25 filtration formulas"
+      },
+      {
+        "id": "thm-the-row-filtration-spectral-sequence-of-a-first-quadrant-double-complex",
+        "kind": "theorem",
+        "title": "The row filtration spectral sequence of a first quadrant double complex",
+        "statement": "For the row filtration above, E1[p,q]=H^h_q(C[*,p]), d1 induced by dv, and E2[p,q]=H^v_p(H^h_q C). The sequence has differential bidegree (-r,r-1) and E-infinity[p,q] is gr^row_p H[p+q](Tot C), with the finite image filtration.",
+        "deps": [
+          "def-row-and-column-filtrations-of-a-first-quadrant-double-complex",
+          "thm-the-next-page-is-the-homology-of-the-current-page",
+          "thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology",
+          "def-induced-filtration-on-homology"
+        ],
+        "strategy": "Modulo Frow[p-1], only row p remains, and d0 is its horizontal differential. Anticommutation sends horizontal cycles to cycles and boundaries to boundaries (with a minus sign on boundary representatives), so dv induces d1. Its square is zero by dv^2=0; taking its homology gives the displayed E2. Apply the existing finite-filtration construction in each degree, with bounds -1 and n. The image filtration, not H(Frow_p Tot) itself, is the target filtration.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "Weibel 5.6.2; Stacks 12.25.1\u20133",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-the-column-filtration-spectral-sequence-of-a-first-quadrant-double-complex",
+        "kind": "theorem",
+        "title": "The column filtration spectral sequence of a first quadrant double complex",
+        "statement": "For the column filtration, E1[p,q]=H^v_q(C[p,*]), d1 induced by dh, E2[p,q]=H^h_p(H^v_q C), and E-infinity[p,q]=gr^col_p H[p+q](Tot C) with its finite image filtration.",
+        "deps": [
+          "def-row-and-column-filtrations-of-a-first-quadrant-double-complex",
+          "thm-the-next-page-is-the-homology-of-the-current-page",
+          "thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology",
+          "def-induced-filtration-on-homology"
+        ],
+        "strategy": "Use the partial sums with horizontal index <=p. The quotient by the previous column cutoff has differential dv. Anticommutation makes dh preserve cycles and boundaries and its induced square is zero. Identify d1 using the formula [x] -> [dx] for the filtered differential; it is exactly dh with no extra sign. The same finite bounds prove convergence as for rows.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "Weibel 5.6.1; Stacks 12.25.1\u20133",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-the-two-double-complex-spectral-sequences-have-the-same-abutment-but-not-the-same-pages",
+        "kind": "proposition",
+        "title": "The two double complex spectral sequences have the same abutment but not the same pages",
+        "statement": "The two first-quadrant spectral sequences have the same unfiltered target H(Tot C), but their filtrations and early pages can differ.",
+        "deps": [
+          "thm-the-row-filtration-spectral-sequence-of-a-first-quadrant-double-complex",
+          "thm-the-column-filtration-spectral-sequence-of-a-first-quadrant-double-complex",
+          "lem-abelian-group-model-for-spectral-sequence-computations"
+        ],
+        "strategy": "Both targets come from the same total complex. For inequivalence take C[1,0]=C[0,0]=Z/2, dh identity, all other terms/arrows zero. Column E1 has two nonzero entries with an isomorphism d1; row E1 is zero because the only row is acyclic. Both E2 pages and total homology are zero. Record positions explicitly rather than merely exchanging names of the two spectral indices.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 11; explicit two-term witness",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-acyclic-assembly-lemma-for-a-first-quadrant-double-complex",
+        "kind": "theorem",
+        "title": "Acyclic assembly lemma for a first quadrant double complex",
+        "statement": "For a first-quadrant double complex whose columns have zero homology for q>0, the natural projection Tot C -> (H^v_0(C[p,*]), induced dh) is a quasi-isomorphism. The row version holds with p>0 and H^h_0. In particular fully acyclic columns or fully acyclic rows give acyclic total complex.",
+        "deps": [
+          "thm-the-row-filtration-spectral-sequence-of-a-first-quadrant-double-complex",
+          "thm-the-column-filtration-spectral-sequence-of-a-first-quadrant-double-complex",
+          "def-edge-homomorphisms-of-a-first-quadrant-spectral-sequence"
+        ],
+        "strategy": "Define the projection on total degree n from C[n,0] to its vertical H0 and kill all q>0 summands. The q=1 differential becomes a vertical boundary, so this is a chain map. Column E1 is confined to q=0; E2 is the edge-complex homology. All r>=2 arrows vanish for support reasons. In total degree n the finite homology filtration has only its p=n quotient nonzero, so the edge map is an isomorphism. Use the same quotient representative to identify this edge map with the displayed projection, rather than assuming the isomorphism is induced by it. Swap dh,dv for the row assertion. For augmented exact columns, identify H0 with the supplied augmentation target; do not assert nonzero survivors for wholly exact columns.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 12; Stacks 12.25.4 with homological projection direction",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-exact-couple",
+        "kind": "definition",
+        "title": "Exact couple",
+        "statement": "A homologically graded exact couple consists of bigraded objects D,E and maps i:D[p,q]->D[p+1,q-1], j:D[p,q]->E[p,q], k:E[p,q]->D[p-1,q], exact at all three vertices. More generally a couple at page r has deg j=(1-r,r-1), while deg i and deg k remain (1,-1),(-1,0). A morphism is a degree-zero pair commuting with i,j,k.",
+        "deps": [
+          "def-abelian-category",
+          "def-homology-object-of-a-chain-complex"
+        ],
+        "strategy": "Print the three conditions im i=ker j, im j=ker k, im k=ker i with the shifted indices. Treat graded objects as indexed families; do not assume existence or exactness of an infinite direct sum. This initial couple generates E1, not E0.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "Weibel 5.9.1\u20132; Stacks 12.21.1 and variant 12.21.5"
+      },
+      {
+        "id": "def-differential-associated-to-an-exact-couple",
+        "kind": "definition",
+        "title": "Differential associated to an exact couple",
+        "statement": "The differential of an exact couple is d=j k. In a page-r couple it has bidegree (-r,r-1).",
+        "deps": [
+          "def-exact-couple"
+        ],
+        "strategy": "Compose the displayed k and j at their actual indices. The next lemma supplies square-zero before homology is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 14",
+        "justified_by": [
+          "lem-the-exact-couple-differential-squares-to-zero"
+        ]
+      },
+      {
+        "id": "lem-the-exact-couple-differential-squares-to-zero",
+        "kind": "lemma",
+        "title": "The exact couple differential squares to zero",
+        "statement": "The associated exact-couple differential satisfies d squared=0.",
+        "deps": [
+          "def-differential-associated-to-an-exact-couple"
+        ],
+        "strategy": "Exactness at E gives k j=0. Associativity then gives (j k)(j k)=j(k j)k=0 at every bidegree.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "Weibel 5.9.1; Stacks 12.21.2",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-derived-exact-couple",
+        "kind": "definition",
+        "title": "Derived exact couple",
+        "statement": "For a page-r exact couple, define D-prime[p,q]=im(i:D[p-1,q+1]->D[p,q]), E-prime=ker d/im d. Put i-prime=i restricted, j-prime(i x)=[j x], k-prime([e])=k e for d-cycles e. The degrees of i-prime,k-prime stay fixed and deg j-prime=(-r,r).",
+        "deps": [
+          "def-exact-couple",
+          "lem-the-exact-couple-differential-squares-to-zero",
+          "lem-spectral-sequence-subquotient-and-local-lifting-calculus"
+        ],
+        "strategy": "This is a provisional quotient construction, certified by the next lemma. The expression i x labels a local preimage, not a chosen section of i. Check ker d maps by k into ker j=im i; j takes any preimage into ker d because k j=0. The degree shift in j-prime comes from solving one i-preimage.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "Weibel 5.9.1; Stacks 12.21.2",
+        "justified_by": [
+          "lem-the-derived-couple-maps-are-well-defined"
+        ]
+      },
+      {
+        "id": "lem-the-derived-couple-maps-are-well-defined",
+        "kind": "lemma",
+        "title": "The derived couple maps are well defined",
+        "statement": "All three maps in the derived couple are well defined in every abelian category and independent of local preimages and representatives.",
+        "deps": [
+          "def-derived-exact-couple",
+          "lem-spectral-sequence-subquotient-and-local-lifting-calculus"
+        ],
+        "strategy": "i maps im i into im i. If i x=i y, exactness gives x-y=k z after an epic pullback; hence j x-j y=j k z is a d-boundary. Also d(j x)=j k j x=0, so j-prime descends to E-prime. For e a d-cycle, j k e=0 places k e in im i. Replacing e by e+d z changes k e by k j k z=0. These give factorisations through images and cokernels by the local lifting calculus, with uniqueness tested on the epic quotient maps. No global section or AC is needed.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "Weibel 5.9.1; complete local well-definedness argument",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-the-derived-couple-is-exact",
+        "kind": "theorem",
+        "title": "The derived couple is exact",
+        "statement": "The derived couple is exact at each of its three vertices.",
+        "deps": [
+          "lem-the-derived-couple-maps-are-well-defined",
+          "lem-spectral-sequence-subquotient-and-local-lifting-calculus"
+        ],
+        "strategy": "Suppress shifts only during the following typed local chase. At D-prime before j-prime: j-prime(i x)=0 means j x=j k e; thus x-k e=i y, and i x=i^2 y, giving ker j-prime=im i-prime. At E-prime: k-prime[e]=0 implies k e=0, hence e=j x and [e]=j-prime(i x); reverse inclusion follows k j=0. At D-prime before i-prime: a=i x with i a=0 gives a=k e; since j a=j i x=0, d e=0, and k-prime[e]=a. Reverse inclusion is i k=0. Every lift is after an epic pullback and descends by the preceding lemma and local calculus, so these are subobject equalities in an arbitrary abelian category.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 18; fills omitted chase in Stacks 12.21.2",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-an-exact-couple-generates-a-spectral-sequence",
+        "kind": "theorem",
+        "title": "An exact couple generates a spectral sequence",
+        "statement": "Iterating derived couples starting from the initial homological exact couple gives a spectral sequence starting at E1=E with d-r of degree (-r,r-1). For r>=1, its canonical subquotient of E1 is k^{-1}(im i^(r-1))/j(ker i^(r-1)), with indices restored in each map.",
+        "deps": [
+          "thm-the-derived-couple-is-exact",
+          "def-homological-spectral-sequence",
+          "lem-spectral-sequence-subquotient-and-local-lifting-calculus"
+        ],
+        "strategy": "Use induction: well-definedness and exactness allow the next derivation, and its E is precisely the homology of the preceding E. D-r[p,q]=im(D1[p-r+1,q+r-1]->D1[p,q]); solving an i-preimage shifts j by (-1,+1) each time. For the subquotient formula, a class survives one more differential precisely when k e=i^(r-1)x and j x lies in the current boundary image; subtract k of a boundary witness from x to put k e in im i^r. Boundaries added at this step are exactly j(ker i^r), by the same lifting and kernel calculation. At r=1 the denominator is j(ker identity)=0 and numerator all E. These inclusion-induced identifications define the page transitions; no abutment is asserted for an arbitrary exact couple.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "Weibel 5.9.1 exercise and 5.9.2; Stacks 12.21.3\u20134",
+        "proof_strategy": "direct",
+        "landmark": true
+      },
+      {
+        "id": "thm-a-filtered-complex-produces-an-exact-couple",
+        "kind": "theorem",
+        "title": "A filtered complex produces an exact couple",
+        "statement": "For an increasingly filtered chain complex, D1[p,q]=H[p+q](F_p C), E1[p,q]=H[p+q](F_p C/F_(p-1) C), inclusion i, quotient j, and connecting k form an exact couple of the declared initial degrees.",
+        "deps": [
+          "def-exact-couple",
+          "def-filtered-chain-complex",
+          "thm-long-exact-sequence-in-homology"
+        ],
+        "strategy": "Use each short exact sequence 0 -> F_(p-1)C -> F_p C -> gr_p C -> 0. The connecting map lowers total degree by one and lands at filtration p-1, hence degree (-1,0). Inclusion has degree (1,-1), quotient has degree (0,0). The long exact sequence gives all three image-kernel equalities. Keep this a family of exact triangles, avoiding countable sum exactness assumptions.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "Weibel 5.9.3; direct LES route",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-the-exact-couple-and-subquotient-constructions-of-the-filtered-complex-spectral-sequence-agree",
+        "kind": "proposition",
+        "title": "The exact couple and subquotient constructions of the filtered complex spectral sequence agree",
+        "statement": "For a filtered complex, the exact-couple construction agrees naturally, from E1 onward, with its existing filtered-subquotient spectral sequence. The identification preserves bidegrees, differential signs, and next-page isomorphisms; the subquotient construction alone additionally has E0.",
+        "deps": [
+          "thm-an-exact-couple-generates-a-spectral-sequence",
+          "thm-a-filtered-complex-produces-an-exact-couple",
+          "def-r-page-of-the-spectral-sequence-of-a-filtered-complex",
+          "lem-the-filtered-differential-induces-d-r-on-the-r-page",
+          "thm-the-next-page-is-the-homology-of-the-current-page",
+          "prop-elementwise-formula-for-the-connecting-map-in-module-categories",
+          "lem-spectral-sequence-subquotient-and-local-lifting-calculus"
+        ],
+        "strategy": "At E1 identify both with homology of gr_p C. Write A-r[p,n]=F_p C_n intersect d^{-1}(F_(p-r)C_(n-1)). A class represented by c in gr_p is in k^{-1}(im i^(r-1)) exactly when d c differs from a chain in F_(p-r) by a boundary d b with b in F_(p-1); replace c by c-b. The denominator j(ker i^(r-1)) consists of differentials of chains in F_(p+r-1) whose differential lies in F_p, modulo lower filtration. Thus the page is A-r/(A-(r-1)[p-1]+d A-(r-1)[p+r-1]). Its differential is [c]->[d c] on both sides because the LES uses lift then differential with positive sign. Epic-local representatives justify these equations categorically. The inclusion/correction maps used for the next page are the same quotient maps, giving transition compatibility and naturality.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "Weibel 5.9.4; checked against current A-r convention",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "def-regular-spectral-sequence",
+        "kind": "definition",
+        "title": "Regular spectral sequence",
+        "statement": "For this HA-16 design, call a spectral sequence two-sided regular if at each bidegree all incoming and outgoing differentials vanish for sufficiently large r. The design term regular means this two-sided condition here; the existing spectral-sequences page and Stacks use regular for outgoing vanishing alone and coregular for incoming vanishing. Whenever a source criterion requires only outgoing regularity, state that weaker hypothesis explicitly.",
+        "deps": [
+          "def-homological-spectral-sequence",
+          "prop-degree-reasons-force-stabilization-in-a-bounded-region"
+        ],
+        "strategy": "Record the terminology conflict prominently, never silently identify the two definitions. Both vanishings give canonical pointwise stationarity via the specified next-page isomorphisms. First quadrant implies both by endpoint bounds r>p for outgoing and r>q+1 for incoming.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 22 versus Stacks 12.24.7 and current supplier terminology"
+      },
+      {
+        "id": "def-weak-convergence-of-a-spectral-sequence",
+        "kind": "definition",
+        "title": "Weak convergence of a spectral sequence",
+        "statement": "Weak convergence to a filtered family H means specified identifications E-infinity[p,q] = F_p H[p+q]/F_(p-1) H[p+q]. For filtered-complex spectral sequences these must be induced by actual cycles and boundaries. No separatedness, exhaustiveness, or completeness follows from these identifications.",
+        "deps": [
+          "def-abutment-to-a-filtered-object",
+          "def-limiting-cycles-boundaries-and-e-infinity"
+        ],
+        "strategy": "Define the limiting page using existing nested-cycle and boundary subobjects, when their limits exist, or stationary pages. State that the new term extends the finite-filtration abutment convention of the prerequisite page; it does not declare the target itself equal to E-infinity.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 23; Stacks 12.24.9"
+      },
+      {
+        "id": "def-strong-convergence-of-a-spectral-sequence",
+        "kind": "definition",
+        "title": "Strong convergence of a spectral sequence",
+        "statement": "Strong convergence here means weak convergence, two-sided regularity in the stated HA-16 convention, an exhaustive and separated target filtration, and an isomorphism H_n -> inverse limit as p tends to minus infinity of H_n/F_p H_n. Infinite limits are required to exist. For decreasing filtrations reverse the index direction.",
+        "deps": [
+          "def-regular-spectral-sequence",
+          "def-weak-convergence-of-a-spectral-sequence",
+          "def-exhaustive-separated-bounded-and-finite-filtration",
+          "def-limit-and-colimit-of-a-diagram"
+        ],
+        "strategy": "List all conditions separately and retain the given abutment identifications. The inverse limit is understood by its universal property; for modules it is the group of compatible residue classes. Finite filtrations are automatically complete because the inverse system is eventually constant. Source regularity terminology is not uniform, as explained immediately before.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 24; Stacks 12.24.9"
+      },
+      {
+        "id": "thm-a-first-quadrant-filtered-complex-spectral-sequence-converges-to-filtered-homology",
+        "kind": "theorem",
+        "title": "A first quadrant filtered complex spectral sequence converges to filtered homology",
+        "statement": "An exhaustive first-quadrant filtered chain complex with degreewise finite filtration has a pointwise stationary spectral sequence strongly converging to its homology with the induced finite image filtration. In the normalized case F_(-1)C=0 and F_n C_n=C_n, F_(-1)H_n=0 and F_n H_n=H_n.",
+        "deps": [
+          "def-strong-convergence-of-a-spectral-sequence",
+          "thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology",
+          "def-induced-filtration-on-homology"
+        ],
+        "strategy": "Invoke the finite convergence theorem with its actual numerator proof involving bounds in degrees n-1 and n+1. The target filtration is finite by its image definition. Finite support on adjacent diagonals kills both incident differentials eventually. Inverse quotients are constant equal to H_n after passing below the lower finite bound, proving completeness; the upper and lower endpoints give exhaustiveness and separation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 25; Stacks 12.24.11",
+        "proof_strategy": "direct",
+        "landmark": true
+      },
+      {
+        "id": "def-lim-one-obstruction-to-completeness",
+        "kind": "definition",
+        "title": "Lim one obstruction to completeness",
+        "statement": "For a countable tower of abelian groups M_0 <- M_1 <- ... with transition u_m, define Delta on product M_m by Delta(x)_m=x_m-u_m(x_(m+1)). Define lim M=ker Delta and lim-one M=coker Delta. For the tower F_(-m) A of a filtered abelian group, lim-one records the obstruction to surjectivity of A -> lim A/F_(-m)A, via the subsequent elementary exact sequence.",
+        "deps": [
+          "lem-abelian-group-model-for-spectral-sequence-computations",
+          "def-exhaustive-separated-bounded-and-finite-filtration"
+        ],
+        "strategy": "Coordinate operations give the product group and Delta a homomorphism; cokernels are quotient groups. The compatible-tuple description proves lim=ker Delta by direct substitution. Do not claim an unproved identification with arbitrary higher derived functors or that this is the obstruction for every unrelated tower. The coefficient-ring version uses the same coordinate formulas for modules.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 27; countable cokernel convention preceding its consumer"
+      },
+      {
+        "id": "lem-countable-tower-completion-obstruction-exact-sequence",
+        "kind": "lemma",
+        "title": "Countable tower completion obstruction exact sequence",
+        "statement": "For a descending sequence G_m of subgroups of an abelian group A, assume AC. There is a natural exact sequence 0 -> intersection G_m -> A -> lim A/G_m -> lim-one G_m -> 0. Hence a separated filtration is complete exactly when its associated lim-one G_m vanishes.",
+        "deps": [
+          "def-lim-one-obstruction-to-completeness",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Given compatible cosets c_m choose a representative a_m in each coset using AC. Then a_m-a_(m+1) lies in G_m; its class modulo Delta(product G_m) is independent of these choices. It vanishes iff corrections g_m make a_m-g_m a constant a, which is exactly membership in the image of A. Any sequence b_m in G_m arises this way: set a_0=0 and a_(m+1)=a_m-b_m; the cosets form a compatible family. The kernel at A is the intersection. These formulas prove all exactness claims and naturality directly. Only countable representative selection uses AC; recursive finite sums and kernels do not.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "Local countable Delta proof; precise meaning of the HA-16 lim-one obstruction",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-complete-exhaustive-filtered-complex-convergence-criterion",
+        "kind": "theorem",
+        "title": "Complete exhaustive filtered complex convergence criterion",
+        "statement": "For a chain complex of modules with complete exhaustive increasing filtration, assume AC and eventual vanishing of each outgoing spectral-sequence differential (source regularity). The complete-convergence criterion asserts weak convergence to homology. If in addition the spectral sequence is bounded above on each total-degree diagonal, it converges with exhaustive, separated, complete induced homology filtration; incoming regularity then follows, giving strong convergence in the HA-16 convention. An unconditional completeness-implies-convergence statement is excluded.",
+        "deps": [
+          "def-weak-convergence-of-a-spectral-sequence",
+          "def-strong-convergence-of-a-spectral-sequence",
+          "def-lim-one-obstruction-to-completeness",
+          "lem-countable-tower-completion-obstruction-exact-sequence",
+          "def-filtered-chain-complex",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "ESCALATED PROOF ROUTE, NOT A COMPLETE PROOF: retain both parts of the criterion. Weibel 5.5.10 uses Boardman obstruction groups Q_p=lim-one of the approximate-cycle towers, the exact obstruction comparison in 5.5.8, and lim_p Q_p=0 from 5.5.9. The latter invokes double-tower derived-limit interchange proved at 5.8.7 using the later Grothendieck spectral sequence. That is a prohibited forward/circular supplier here. The elementary completion lemma just added does not prove this interchange or the Milnor homology sequence. Required local lemmas and exact placement are proposed in batch notes; no reference to a planned HA-17 supplier enters deps. AC must cover product-surjectivity and coherent tower lifts if that route is supplied. The finite theorem is independently proved and is not a replacement for this claim.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "Weibel 5.5.8\u201310 and 5.8.7; forward-route audit",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-failure-of-separatedness-or-completeness-can-destroy-the-claimed-abutment",
+        "kind": "proposition",
+        "title": "Failure of separatedness or completeness can destroy the claimed abutment",
+        "statement": "Failure of separatedness or completeness can invalidate recovery of the claimed target from the limiting page. Nonseparated filtrations can hide nonzero homology completely. A separated incomplete filtered complex can have E1=0 but nonzero homology. Equal associated-graded objects also need not distinguish an object from its completion.",
+        "deps": [
+          "lem-countable-sequence-groups-and-tail-filtrations",
+          "def-r-page-of-the-spectral-sequence-of-a-filtered-complex",
+          "def-weak-convergence-of-a-spectral-sequence",
+          "def-strong-convergence-of-a-spectral-sequence",
+          "lem-abelian-group-model-for-spectral-sequence-computations"
+        ],
+        "strategy": "First, put A=Z/2 in degree 0 with F_p A=A for every integer p: gr=0, every page is zero, H0=A. Second, use the inclusion S -> P in degrees 1 -> 0, where S,P have tail filtration F_(-m)=T_m and F_p=whole for p>=0. Both chain filtrations are separated and exhaustive; the source S is incomplete. On every nonzero associated-graded level the differential is identity k->k, so E1=0. H0=P/S is nonzero since the constant-one sequence has infinite support. Its induced filtration is all H0 at every level, since any sequence differs from a tail by a finite prefix. Finally the zero-differential complexes S[0] and P[0] have identical associated-graded pages and distinct targets. None is used as a counterexample to a theorem whose completeness/target separation hypotheses it satisfies.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 28; explicit local failures",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "lem-finite-and-complete-filtered-isomorphism-lifting",
+        "kind": "lemma",
+        "title": "Finite and complete filtered isomorphism lifting",
+        "statement": "A filtration-preserving map with isomorphisms on all associated-graded pieces is an isomorphism of filtered objects when both filtrations are finite. The same holds for exhaustive separated complete increasing filtrations of modules (with their compatible-residue interpretation of completeness). The complete case need not have a uniform bound on its filtration.",
+        "deps": [
+          "lem-spectral-sequence-subquotient-and-local-lifting-calculus",
+          "def-strong-convergence-of-a-spectral-sequence"
+        ],
+        "strategy": "For finite filtrations, prove the short-five argument directly: to lift an element of the middle target, first lift its quotient class, subtract the image and lift the remainder in the subobject; injectivity is tested first on the quotient and then on the subobject. In an abelian category perform these lifts after epic pullbacks. Induct along the finite filtration. For complete modules, fix k<p: finite induction gives F_p A/F_k A -> F_p B/F_k B an isomorphism. As k tends to minus infinity, completeness identifies F_p A with lim_k F_p A/F_k A: a compatible family in these subquotients is a compatible family in A/F_k A, and its unique limit lies in F_p A because its residue in A/F_p A is zero. This also proves injectivity; same for B. Inverse maps of the finite isomorphisms commute by uniqueness, so they define an inverse on the limits without choosing representatives. Thus f restricts to an isomorphism on every F_p. Exhaustiveness makes f globally onto, and every kernel element lies in some F_p where injectivity holds. No AC is needed in this inverse-isomorphism route.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 comparison lifting requirement; local complete proof",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-spectral-sequence-comparison-theorem",
+        "kind": "theorem",
+        "title": "Spectral sequence comparison theorem",
+        "statement": "A morphism of spectral sequences together with compatible filtered target maps, which is an isomorphism on one entire page and has the stated strong convergence on both sides, induces isomorphisms on the associated-graded targets. The target maps are isomorphisms for finite filtrations, or for exhaustive separated complete module filtrations. An abstract page isomorphism without target-map compatibility asserts no target isomorphism.",
+        "deps": [
+          "def-strong-convergence-of-a-spectral-sequence",
+          "lem-finite-and-complete-filtered-isomorphism-lifting",
+          "def-morphism-of-spectral-sequences",
+          "def-homology-object-of-a-chain-complex"
+        ],
+        "strategy": "An isomorphism of complexes gives an isomorphism on kernels and images by its explicit inverse, hence on homology. Induct through the specified page transitions. Two-sided regularity gives an isomorphism at the stationary page in each position. Conjugate by the abutment identifications to obtain the graded target map. Apply the immediately preceding lifting lemma, using its actual finite or complete hypotheses. No convergence theorem for complexes is used here: strong abutment data are hypotheses.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 29; comparison with target data",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cor-quasi-isomorphism-criterion-from-a-filtered-map",
+        "kind": "corollary",
+        "title": "Quasi isomorphism criterion from a filtered map",
+        "statement": "A filtered chain map inducing quasi-isomorphisms on all associated-graded complexes is a quasi-isomorphism whenever both filtered-complex spectral sequences strongly converge to their actual homology with target filtrations satisfying the preceding finite or complete lifting hypotheses. Degreewise finite filtrations give this conclusion unconditionally.",
+        "deps": [
+          "thm-spectral-sequence-comparison-theorem",
+          "thm-a-first-quadrant-filtered-complex-spectral-sequence-converges-to-filtered-homology",
+          "def-filtered-chain-map",
+          "prop-a-filtered-chain-map-induces-a-morphism-of-spectral-sequences",
+          "def-quasi-isomorphism"
+        ],
+        "strategy": "Associated-graded quasi-isomorphisms say exactly that E1 maps are isomorphisms. Filtered-map functoriality supplies the morphism of sequences and target homology maps, compatible with the canonical abutment identifications. Apply comparison in every total degree. For the finite case invoke the independent finite convergence theorem; the unresolved general complete-convergence criterion is not silently used to establish the convergence premise.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 30; conditional and finite branches",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-five-term-exact-sequence-of-a-first-quadrant-cohomological-spectral-sequence",
+        "kind": "theorem",
+        "title": "Five term exact sequence of a first quadrant cohomological spectral sequence",
+        "statement": "For a first-quadrant cohomological spectral sequence from page 2 with abutment H and normalized finite filtration F^0 H^n=H^n, F^(n+1) H^n=0, there is an exact sequence 0 -> E2[1,0] -> H1 -> E2[0,1] --d2--> E2[2,0] -> H2. The displayed H1,H2 denote H^1,H^2.",
+        "deps": [
+          "def-cohomological-spectral-sequence",
+          "def-edge-homomorphisms-of-a-first-quadrant-spectral-sequence",
+          "lem-spectral-sequence-subquotient-and-local-lifting-calculus"
+        ],
+        "strategy": "All differentials incident with (1,0) vanish, so E2[1,0]=Einf[1,0]=F1 H1. At (0,1), the only possible nonzero differential is outgoing d2 to (2,0), giving ker d2=Einf[0,1]=H1/F1 H1. At (2,0), only that incoming d2 occurs, giving coker d2=Einf[2,0]=F2 H2 as a subobject of H2. Compose the filtration injections/projections with these identities. This proves exactness at every indicated middle object and injectivity of the first map; no surjectivity onto H2 is asserted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 31; direct degree and filtration calculation",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "thm-five-term-exact-sequence-of-a-first-quadrant-homological-spectral-sequence",
+        "kind": "theorem",
+        "title": "Five term exact sequence of a first quadrant homological spectral sequence",
+        "statement": "For a first-quadrant homological spectral sequence from page 2, with finite abutment filtration F_(-1)H_n=0 and F_nH_n=H_n, the sequence H2 -> E2[2,0] --d2--> E2[0,1] -> H1 -> E2[1,0] -> 0 is exact.",
+        "deps": [
+          "def-homological-spectral-sequence",
+          "def-edge-homomorphisms-of-a-first-quadrant-spectral-sequence",
+          "lem-spectral-sequence-subquotient-and-local-lifting-calculus"
+        ],
+        "strategy": "At (1,0), all differentials vanish and the stable term is H1/F0 H1. At (0,1), the only nonzero possibility is incoming d2 from (2,0); its cokernel is Einf[0,1]=F0 H1. At (2,0), no incoming maps are possible and the only outgoing one is d2; its kernel is Einf[2,0]=H2/F1 H2, so the map from H2 surjects onto this kernel. These three descriptions give the full exact sequence in the printed direction. It is not obtained by retaining the cohomological arrows and merely lowering indices.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 32; Weibel Exercise 5.1.3",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-collapse-with-projective-associated-graded-pieces-splits-the-finite-filtration-noncanonically",
+        "kind": "proposition",
+        "title": "Collapse with projective associated graded pieces splits the finite filtration noncanonically",
+        "statement": "If a module has a finite filtration whose associated-graded pieces are projective, it is noncanonically isomorphic to their finite direct sum. In particular a collapsed convergent spectral sequence with finite projective graded pieces has no unresolved existence-of-splitting extension problem, though no canonical splitting follows.",
+        "deps": [
+          "def-projective-module",
+          "def-weak-convergence-of-a-spectral-sequence",
+          "def-exhaustive-separated-bounded-and-finite-filtration"
+        ],
+        "strategy": "For each short exact sequence 0 -> F_(p-1)H -> F_p H -> gr_p H -> 0, projectivity lifts the identity on gr_p H to a section. The map (a,b)->a+s(b) is bijective: quotient determines b, then a. Induct through the finite list of stages, starting at the zero subobject. Only finitely many sections are selected; no arbitrary-index AC and no projective-free equivalence is invoked. Even Z/2-vector-space splittings depend on the chosen section, illustrating noncanonicity.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 33; finite projective lifting proof",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences",
+        "kind": "proposition",
+        "title": "A map of exact couples induces a map of spectral sequences",
+        "statement": "A morphism of graded exact couples induces a morphism of their derived couples and therefore of their spectral sequences, respecting every page transition and bidegree.",
+        "deps": [
+          "thm-an-exact-couple-generates-a-spectral-sequence",
+          "def-morphism-of-spectral-sequences",
+          "lem-spectral-sequence-subquotient-and-local-lifting-calculus"
+        ],
+        "strategy": "For a commuting pair (u,v), u sends im i into im i-bar and v commutes with d=j k, so induces a map on E-prime. For j-prime evaluate on i x: v[j x]=[j-bar u x]=j-bar-prime(i-bar u x). For k-prime evaluate a cycle representative: u k e=k-bar v e. Restriction compatibility for i-prime is immediate from the i square. Quotient uniqueness makes these equalities independent of representatives. Iterate; identities and composition remain so by uniqueness.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "Weibel 5.9.2; Stacks 12.21.1 morphism clause",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "prop-short-exact-sequences-of-filtered-complexes-give-compatible-exact-couples",
+        "kind": "proposition",
+        "title": "Short exact sequences of filtered complexes give compatible exact couples",
+        "statement": "For a short exact sequence 0 -> A -> B -> C -> 0 of filtered complexes with strict degreewise filtration maps, so 0 -> F_p A_n -> F_p B_n -> F_p C_n -> 0 is exact for every p,n, the associated graded sequences are short exact, and the induced morphisms between their filtered-complex exact couples commute with i,j,k. No short exact sequence of homology D/E terms is claimed.",
+        "deps": [
+          "thm-a-filtered-complex-produces-an-exact-couple",
+          "prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences",
+          "def-filtered-chain-map",
+          "thm-naturality-of-the-homology-connecting-morphism",
+          "lem-spectral-sequence-subquotient-and-local-lifting-calculus"
+        ],
+        "strategy": "Strictness means alpha(F_p A)=alpha(A) intersect F_p B and beta(F_p B)=F_p C; together with underlying exactness this gives the filtered-piece short exact sequences. The quotient rows 0 -> gr_p A -> gr_p B -> gr_p C -> 0 are exact by lifting a gr-kernel and adjusting by a lower-filtration lift; use epic pullbacks in an abelian category. Naturality of the LES connecting maps for F_(p-1)->F_p->gr_p gives the k squares; inclusion and quotient give the i,j squares. Apply the preceding morphism result for all derived couples. Explicitly distinguish these compatible morphisms/long exact homology ladders from a generally false termwise short exact sequence of exact couples.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 item 35; strictness and naturality",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "fs-the-two-spectral-sequences-of-a-double-complex-have-identical-e-one-pages",
+        "kind": "false-statement",
+        "title": "The two spectral sequences of a double complex have identical e one pages",
+        "statement": "False: the two spectral sequences of every double complex have identical E1 pages.",
+        "deps": [
+          "prop-the-two-double-complex-spectral-sequences-have-the-same-abutment-but-not-the-same-pages"
+        ],
+        "strategy": "Use the two-term horizontal identity double complex from the earlier same-abutment proposition: column E1 has two Z/2 terms; row E1 is zero.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 false statement 1",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "fs-direct-sum-and-product-totalisations-are-always-isomorphic",
+        "kind": "false-statement",
+        "title": "Direct sum and product totalisations are always isomorphic",
+        "statement": "False: direct-sum and product totalisations are always isomorphic.",
+        "deps": [
+          "cex-sum-and-product-totalisations-can-differ-on-infinite-diagonals"
+        ],
+        "strategy": "Use the zero-differential infinite diagonal C[j,-j]=Z/2: one total degree is countable S, the other uncountable P, so no abstract isomorphism exists.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 false statement 2",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "fs-every-exact-couple-is-a-long-exact-sequence-with-no-extra-grading-data",
+        "kind": "false-statement",
+        "title": "Every exact couple is a long exact sequence with no extra grading data",
+        "statement": "False: an ungraded long exact sequence, with no additional degree data, determines the specified homological exact-couple spectral sequence.",
+        "deps": [
+          "def-exact-couple",
+          "lem-abelian-group-model-for-spectral-sequence-computations"
+        ],
+        "strategy": "An ungraded exact triangle permits D=Z, E=Z/2, i multiplication by 2, j reduction, k=0, by its three image-kernel equalities. This nonzero D concentrated in a single bidegree cannot have the prescribed i-degree (1,-1), since its required target component is zero. Thus an ungraded exact triangle is not automatically the required bigraded object. An ordinary long exact sequence also supplies no repeated D-identification unless that extra structure is given; state this precise type failure instead of suggesting exactness itself has disappeared.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 false statement 3",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "fs-first-quadrant-support-alone-identifies-the-abutment-without-a-filtration",
+        "kind": "false-statement",
+        "title": "First quadrant support alone identifies the abutment without a filtration",
+        "statement": "False: first-quadrant support by itself determines a target and its abutment without any target filtration data.",
+        "deps": [
+          "def-homological-spectral-sequence",
+          "lem-abelian-group-model-for-spectral-sequence-computations",
+          "cex-isomorphic-associated-graded-objects-need-not-give-isomorphic-filtered-objects"
+        ],
+        "strategy": "The identically zero spectral sequence has first-quadrant support. Without abutment data it singles out no H at all. More concretely, Z/4 and Z/2 direct-sum Z/2 carry two-step filtrations with the same graded pieces Z/2,Z/2 and may be assigned the same stationary page supported in positions (0,1),(1,0). They are nonisomorphic because the first has an element of order 4 and the second has exponent 2. The filtration/extension information cannot be inferred from support.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 false statement 4",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "fs-an-isomorphism-on-e-infinity-automatically-gives-an-isomorphism-of-unfiltered-targets",
+        "kind": "false-statement",
+        "title": "An isomorphism on e infinity automatically gives an isomorphism of unfiltered targets",
+        "statement": "False: an isomorphism on E-infinity automatically makes compatible unfiltered target maps isomorphisms without finite or complete separated filtration hypotheses.",
+        "deps": [
+          "lem-countable-sequence-groups-and-tail-filtrations",
+          "def-r-page-of-the-spectral-sequence-of-a-filtered-complex",
+          "thm-spectral-sequence-comparison-theorem"
+        ],
+        "strategy": "Use the inclusion S -> P with the tail filtrations from the sequence-group lemma, as a map of complexes concentrated in degree zero. All associated-graded maps and all stationary page maps are identity on k. The map on H0 is the nonsurjective inclusion S -> P. Source filtration is separated and exhaustive but incomplete; this identifies exactly the missing lifting hypothesis.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 false statement 5",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "fs-exhaustive-filtration-implies-separated-and-complete-filtration",
+        "kind": "false-statement",
+        "title": "Exhaustive filtration implies separated and complete filtration",
+        "statement": "False: an exhaustive filtration is automatically separated and complete.",
+        "deps": [
+          "lem-countable-sequence-groups-and-tail-filtrations",
+          "def-strong-convergence-of-a-spectral-sequence",
+          "lem-abelian-group-model-for-spectral-sequence-computations"
+        ],
+        "strategy": "For separation, take nonzero A=Z/2 with F_p A=A for all integers: union is A and intersection is A. Its completion is zero, so the completion map is not an isomorphism either. To separate the two defects further, S with tail filtration is exhaustive and separated but incomplete, with completion P.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 false statement 6",
+        "proof_strategy": "direct"
+      }
+    ]
   },
   {
     "order": 365.068,
     "id": "double-complexes-exact-couples-and-convergence-examples",
     "kind": "B",
     "category": "homological-algebra",
-    "title": "Double Complexes Exact Couples and Convergence — Examples",
+    "title": "Double Complexes Exact Couples and Convergence \u2014 Examples",
     "companion": "double-complexes-exact-couples-and-convergence",
     "requires": [
       "double-complexes-exact-couples-and-convergence"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-the-two-spectral-sequences-of-a-two-by-two-double-complex",
+        "kind": "example",
+        "title": "The two spectral sequences of a two by two double complex",
+        "statement": "Compute both spectral sequences of the two-by-two complex C[1,1]=C[0,1]=C[1,0]=C[0,0]=Z/2, dh identity on the top row and zero on the bottom row, dv zero everywhere.",
+        "deps": [
+          "thm-the-row-filtration-spectral-sequence-of-a-first-quadrant-double-complex",
+          "thm-the-column-filtration-spectral-sequence-of-a-first-quadrant-double-complex",
+          "lem-abelian-group-model-for-spectral-sequence-computations"
+        ],
+        "strategy": "Anticommutation is immediate as dv=0. Column E1 is the four original terms; its d1 kills the top row, leaving E2 at (0,0),(1,0), both k. Row E1 has the horizontal homology of each row: k at spectral (0,0),(0,1), zero top row; d1=0. Both sequences are stationary from E2. Directly Tot_2=k maps isomorphically onto the C[0,1] summand in Tot_1=k+k, and Tot_1 -> Tot_0 is zero, so H0=k,H1=k,H2=0. The two H1 filtration positions differ (column p=1 versus row p=0), reconciling the different E-infinity positions with the same target.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 B example 1",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-acyclic-assembly-with-exact-columns",
+        "kind": "example",
+        "title": "Acyclic assembly with exact columns",
+        "statement": "An explicit first-quadrant double complex with exact columns has acyclic total complex: take k=Z/2 in all four two-by-two positions, vertical maps identity, and horizontal maps zero.",
+        "deps": [
+          "thm-acyclic-assembly-lemma-for-a-first-quadrant-double-complex",
+          "lem-abelian-group-model-for-spectral-sequence-computations"
+        ],
+        "strategy": "Every column k -> k is exact, so the assembly lemma applies with no surviving vertical H0. Directly Tot_2=k maps to the C[1,0] summand of Tot_1, and Tot_1 maps onto Tot_0 by identity on C[0,1]; the kernel of the latter is exactly that image. The other homology groups vanish, matching the spectral calculation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 B example 2",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-the-exact-couple-of-a-two-step-filtration",
+        "kind": "example",
+        "title": "The exact couple of a two step filtration",
+        "statement": "For C concentrated in degree 0 with C0=Z/4, F_p=0 for p<0, F0=2Z/4, and F_p=C for p>=1, compute its exact couple.",
+        "deps": [
+          "thm-a-filtered-complex-produces-an-exact-couple",
+          "lem-abelian-group-model-for-spectral-sequence-computations"
+        ],
+        "strategy": "Only total degree zero terms D1[p,-p] occur: zero for p<0, Z/2 at p=0, Z/4 for p>=1. The i arrow from p=0 to p=1 is subgroup inclusion, then identities. E1 has Z/2 at (0,0) and (1,-1); j is respectively identity and quotient. All connecting k maps are zero because C has no degree -1 homology. Check exactness at p=0, p=1, and the constant tails separately. This is a finite filtered example, not a first-quadrant spectral sequence: retain its negative complementary coordinate.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 B example 3",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-deriving-an-exact-couple-once",
+        "kind": "example",
+        "title": "Deriving an exact couple once",
+        "statement": "Derive once the exact couple in the preceding two-step Z/4 filtration.",
+        "deps": [
+          "ex-the-exact-couple-of-a-two-step-filtration",
+          "def-derived-exact-couple",
+          "thm-the-derived-couple-is-exact"
+        ],
+        "strategy": "All d1 vanish, so E2=E1. D2[p,-p]=im(D1[p-1,1-p]->D1[p,-p]): it is zero for p<=0, 2Z/4 at p=1, and Z/4 at p>=2. j2 maps D2[1,-1] isomorphically to E2[0,0]; D2[2,-2] -> E2[1,-1] is reduction modulo 2; other targets vanish. i2 is the inclusion of 2Z/4 at p=1 and then identities; k2=0. Check exactness at the two transition indices; this displays the changed degree of j explicitly.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 B example 4",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-a-first-quadrant-five-term-exact-sequence",
+        "kind": "example",
+        "title": "A first quadrant five term exact sequence",
+        "statement": "A first-quadrant cohomological spectral sequence can have nonzero d2 in its five-term sequence. Let C^1=k a + k b, C^2=k c, d a=0,d b=c, with filtration weights a=1,b=0,c=2 and F^p spanned by weights >=p.",
+        "deps": [
+          "thm-five-term-exact-sequence-of-a-first-quadrant-cohomological-spectral-sequence",
+          "thm-the-cohomological-filtered-complex-construction",
+          "lem-abelian-group-model-for-spectral-sequence-computations"
+        ],
+        "strategy": "d preserves the decreasing filtration and d squared=0. E0 has entries k at (1,0),(0,1),(2,0); d0,d1 vanish. On E2, d2[b]=[c] is identity k -> k, while a survives. H1=k a,H2=0, with F1 H1=H1. The five-term sequence is 0 -> k --identity--> k --zero--> k --identity--> k -> 0; verify images and kernels at all positions. This explicitly checks the transgression direction and nonzero map instead of quoting a mnemonic.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 B example 5",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-sum-and-product-totalisations-on-an-infinite-diagonal",
+        "kind": "counterexample",
+        "title": "Sum and product totalisations on an infinite diagonal",
+        "statement": "Compute the two totalisations of the infinite zero-differential diagonal C[j,-j]=Z/2 for j>=0.",
+        "deps": [
+          "cex-sum-and-product-totalisations-can-differ-on-infinite-diagonals",
+          "lem-countable-sequence-groups-and-tail-filtrations",
+          "def-homology-object-of-a-chain-complex"
+        ],
+        "strategy": "Tot-sum is S in degree 0 and Tot-product is P in degree 0; all other degrees vanish. Their homology is therefore S and P. The canonical comparison misses the constant-one sequence. Countability and diagonalisation from the A-page lemma show they are not abstractly isomorphic either. Explain that this example has infinite diagonals and is outside first-quadrant finite-convergence hypotheses.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 B counterexample 6",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "cex-an-exhaustive-nonseparated-filtration-with-the-wrong-naive-abutment",
+        "kind": "counterexample",
+        "title": "An exhaustive nonseparated filtration with the wrong naive abutment",
+        "statement": "An exhaustive nonseparated filtration can have zero pages and nonzero actual homology; the inclusion of finite-support sequences into all sequences gives a separated but incomplete chain-level variant.",
+        "deps": [
+          "prop-failure-of-separatedness-or-completeness-can-destroy-the-claimed-abutment",
+          "lem-abelian-group-model-for-spectral-sequence-computations"
+        ],
+        "strategy": "For C0=k and all F_p C0=k, every graded quotient and every page is zero while H0=k; the limiting page only equals the zero graded object of the nonseparated target. Then spell out S -> P with tail filtration from the A proposition: gr differentials are identities, E1=0, H0=P/S contains the nonzero constant-one coset, and every induced filtration piece on H0 equals the whole group by removal of a finite prefix. Record why neither construction contradicts the finite or complete convergence theorems.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 B counterexample 7",
+        "proof_strategy": "direct"
+      },
+      {
+        "id": "ex-a-filtered-quasi-isomorphism-detected-on-associated-graded-complexes",
+        "kind": "example",
+        "title": "A filtered quasi isomorphism detected on associated graded complexes",
+        "statement": "A filtered projection onto k[0] can be detected as a quasi-isomorphism on associated graded complexes. Take C1=k a, C0=k b+k c, d a=b, with F0 C spanned by c in degree zero, F1 C=C, and lower/upper constant tails; give D=k c[0] its weight-zero filtration.",
+        "deps": [
+          "cor-quasi-isomorphism-criterion-from-a-filtered-map",
+          "lem-abelian-group-model-for-spectral-sequence-computations"
+        ],
+        "strategy": "The projection kills a,b and fixes c. On gr0 it is identity k[0]; on gr1 its source is the acyclic two-term identity k a -> k b and its target is zero. It is therefore a quasi-isomorphism on every graded complex. Both filtrations are finite, so the finite branch of the filtered-map criterion applies. Directly H1(C)=0 and H0(C)=k[c], and the projection induces identity, providing an independent calculation.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Weibel, An Introduction to Homological Algebra, Chapter 5",
+              "url": "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
+            },
+            {
+              "title": "The Stacks Project, Homological Algebra",
+              "url": "https://stacks.math.columbia.edu/download/homology.pdf"
+            }
+          ]
+        },
+        "source_locators": "HA-16 B example 8",
+        "proof_strategy": "direct"
+      }
+    ]
   }
 ]

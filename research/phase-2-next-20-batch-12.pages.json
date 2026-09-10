@@ -14,7 +14,461 @@
       "algebraic-extensions-degree-and-finite-fields",
       "linear-algebra-methods-in-combinatorics"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-uniform-asymptotic-time-space-comparison",
+        "kind": "definition",
+        "title": "Uniform asymptotic time space comparison",
+        "statement": "For nonnegative functions f,g on N, f=O(g) means there exist C>0,N with f(n)<=C g(n) for all n>=N; f=o(g) means for each epsilon>0 some N works with f(n)<=epsilon g(n). Write O_M when C,N may depend on the fixed finite description M but not on input or clock. Fix finite-alphabet, finitely many right-infinite clamped tapes, transition-count time, and the sum of visited cells as space. Resource bounds used after reading the whole input obey a stated n+1 lower guard; read-only input space, if used, is separately labelled.",
+        "deps": [
+          "def-natural-numbers",
+          "def-multitape-and-nondeterministic-machines"
+        ],
+        "strategy": "Give all quantifiers, including uniformity across inputs of equal length and no uniformity across machine descriptions. Define run cost directly for a finite run, maximum over inputs only when every run halts; do not import resource-class or efficient-simulator assertions. The visited set on each tape is an initial segment, even for an empty input; initialized but unvisited input is paid separately by n. The finite maximum exists by induction on the finite input set. No AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Arora\u2013Barak \u00a7\u00a71.2\u20131.3; local explicit uniform-constant and small-input conventions",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-machine-time-and-space-constructibility",
+        "kind": "definition",
+        "title": "Machine time and space constructibility",
+        "statement": "Fix nondecreasing integer-valued t,s with t(n),s(n)>=n+1 for the complete-input-reading model. Time constructible means a fixed deterministic multitape transducer, on unary 1^n, produces canonical bin(t(n)) and halts in O(t(n)) steps. Space constructible means such a transducer outputs bin(s(n)) using O(s(n)) visited cells. Exact-clock constructibility means a machine halting at exactly t(n) transitions and is a separately stated stronger interface; no equality of these definitions is assumed. Constructor workspace W_t(n) remains explicit.",
+        "deps": [
+          "def-uniform-asymptotic-time-space-comparison"
+        ],
+        "strategy": "Define canonical binary numerals (0 or a word starting with 1), empty unary input and start/halting conventions. A constructor must read the input completely; its O(n+1) scan is absorbed by the guard. When a later proof invokes an external clock b, do not charge or infer constructor workspace; when b=t(n) is constructed, add O(t(n)) time and W_t(n) space. Finite exceptional lengths can be hardwired only after exhibiting the finite branch. No claim that every monotone computable bound is constructible.",
+        "sources": {
+          "references": [
+            {
+              "title": "Arora\u2013Barak Chapter 3 constructibility conventions, adapted contract; complete source reading pending",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-clocked-universal-simulation-with-time-and-space-bounds",
+        "kind": "theorem",
+        "title": "Clocked universal simulation with time and space bounds",
+        "statement": "There exist two distinct fixed finite-alphabet multitape interpreters U_time and U_space for coded deterministic finite-tape machines. On valid (M,x,bin(b)) each reproduces acceptance or rejection attained in at most b simulated transitions, and rejects at expiry. Every malformed input halts rejecting. Put n=|<M,x>| (including its self-delimiting syntax) and S=sum of simulated visited cells. For each fixed M, U_time costs O_M(n+b log(b+2)) transitions and U_space uses O_M(n+S+log(b+2)) visited cells, including decoder and clock storage. b=0 and b=1 are included. No fast-time bound is asserted for U_space and no linear-S bound for U_time.",
+        "deps": [
+          "def-machine-time-and-space-constructibility",
+          "def-effective-encoding-of-turing-machines",
+          "lem-machine-encoding-is-injective-and-decodable",
+          "def-multitape-and-nondeterministic-machines",
+          "def-turing-machine-initial-and-halting-configuration-interface",
+          "def-one-step-configuration-relation"
+        ],
+        "strategy": "First extend the numeric machine tuple by a tape count k and a lexicographic table on k-tuples; validate total table size and ranges without expanding nonexistent huge tables on malformed descriptions. For valid fixed M all description constants are fixed. Decode x and bin(b); clock length O(log(b+2)) is absorbed in b log(b+2) for b>=1, and is constant at b=0. Preserve the input in O_M(n) cells. TIME: build the full two-sided geometric buffer simulation of Appendix 1.A with the scanned symbol in a home block and complementary left/right zones of capacities 2^i (use a separate integral-capacity base zone to avoid a half-cell). Delete buffer placeholders to read the simulated tape. Store program-dependent tuples as fixed-width binary blocks on fixed tracks. On a move, find the first nonempty donor zone, redistribute in order through scratch space and restore half-full lower zones; reverse symmetrically. Prove the empty/half/full and complementary-capacity invariant, order preservation, and the charging lemma: after resetting lower zones, reaching level i again requires Omega(2^i) net moves, unless a higher reset intervenes and is charged to that reset. Each redistribution costs O_M(2^i), so b transitions cost O_M(b log(b+2)); input is accessed lazily beyond the O_M(n) preload, avoiding a log(n) charge per short simulation. A tagged left boundary suppresses a virtual left move at cell zero. Fold two-sided physical tracks into two tracks on semi-infinite tapes with constant overhead, and replace physical stay-put actions by paired moves with delayed halting. A binary countdown scanned/reset per simulated step costs O(log(b+2)) each; check halting before expiry and again after the bth transition. SPACE: a different machine maintains only the current finite configuration, constant-width cell blocks for fixed M, head markers and table; scanning updates it in place using O_M(n+S) cells plus binary clock O(log(b+2)). Scratch copies are at most a constant multiple of this extent; no history or buffer allocation. Check start, malformed, expiry and output outcomes separately. Constructor costs, if requested, are added separately.",
+        "sources": {
+          "references": [
+            {
+              "title": "Arora\u2013Barak Appendix 1.A, printed pp.35\u201338, time simulation only; space argument is a separate local construction",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-primitive-recursive-functions-by-initial-functions-and-schemes",
+        "kind": "definition",
+        "title": "Primitive recursive functions by initial functions and schemes",
+        "statement": "PR is the least arity-indexed class of total functions N^k->N containing zero, successor and projections, closed under composition and primitive recursion f(a,0)=g(a), f(a,y+1)=h(a,y,f(a,y)). Nullary constants and empty parameter tuples are allowed. A predicate is PR exactly when its 0/1 characteristic function is PR.",
+        "deps": [
+          "def-natural-numbers",
+          "thm-recursion"
+        ],
+        "strategy": "Construct the class as functions admitting finite derivation trees from the schemes. For fixed a, apply natural-number recursion to the state (y,z) with successor (y+1,h(a,y,z)); projection gives existence and uniqueness of f. Induct on derivations to show totality. Parameter dependence is a uniquely specified graph, not a choice of recursion solutions. No minimization or Turing equivalence is assumed.",
+        "sources": {
+          "references": [
+            {
+              "title": "Gallier \u00a71.7\u2013\u00a71.8 (recovery edition); local parameter-recursion construction",
+              "url": "https://www.cis.upenn.edu/~cis5110/notes/tcbook-comp.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-fixed-coding-primitive-recursive-arithmetic-and-sequences",
+        "kind": "lemma",
+        "title": "Fixed coding primitive recursive arithmetic and sequences",
+        "statement": "Addition, multiplication, truncated subtraction, comparisons, bounded sums/products, bounded search, exponentiation, and the following finite-list operations are PR. Pair(a,b)=2^a(2b+1), empty list=0, cons(a,z)=Pair(a,z); head and tail are zero at zero and otherwise the 2-adic valuation and odd-part decoder. Length, coordinate (zero beyond length), append, concatenation and bounded list predicates are PR.",
+        "deps": [
+          "def-primitive-recursive-functions-by-initial-functions-and-schemes",
+          "thm-induction-principle"
+        ],
+        "strategy": "Give primitive recursions for predecessor and truncated subtraction, then equality via zero tests; products/sums of characteristic values give bounded quantifiers. Bounded least search keeps first success with sentinel B+1. For z>0, valuation is largest a<=z with 2^a dividing z; divisibility uses bounded q<=z; quotient is bounded search. tail(z)<z because (z/2^a-1)/2<z, so iterate tail exactly z times by primitive recursion and sum positivity tests to obtain length. coordinate(z,i)=head(tail iterated i times); all-zero out-of-range convention is total. Reverse by length-bounded cons accumulation; append is reverse/cons/reverse, and concatenate is a bounded fold. Finite word coding is this list coding restricted to a finite alphabet; canonical binary numerals and the fixed tuple parser are bounded scans of a coded word, never an appeal that a computable function must be PR. Every bounded loop is translated into primitive recursion.",
+        "sources": {
+          "references": [
+            {
+              "title": "Gallier \u00a7\u00a71.7\u20131.8, Proposition 1.5\u20131.8 and \u00a72.1 coding; local cons coding replaces prime-sequence coding",
+              "url": "https://www.cis.upenn.edu/~cis5110/notes/tcbook-comp.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-kleene-computation-predicate-and-output-map",
+        "kind": "definition",
+        "title": "Kleene computation predicate and output map",
+        "statement": "Use the preceding list code for all histories and word data, but retain the published literal machine-code syntax. Index e denotes the e-th binary word in length-lex order (zero-based); malformed words denote a nowhere-defined function. Numeric input is canonical binary, with bits 0,1 represented by machine letters 1,2. Valid programs for numeric functions have s>=2. A terminal tape outputs the maximal initial word over {1,2}; it is accepted as a numerical output only if its bit word is canonical. A run halting with invalid output denotes undefined, implemented by an explicit looping wrapper. For arity k, encode inputs as the published self-delimiting tuple of canonical numerals. T_k(e,a,z) means z is a nonempty list of valid consecutive configurations starting on that tuple and ending at its first halt with canonical numerical output. U(z) extracts that value, and is 0 if z has no valid final output.",
+        "deps": [
+          "lem-fixed-coding-primitive-recursive-arithmetic-and-sequences",
+          "def-effective-encoding-of-turing-machines",
+          "def-turing-machine-configuration",
+          "def-one-step-configuration-relation",
+          "def-partial-function-computed-by-a-machine",
+          "lem-finite-tuples-admit-effective-prefix-free-encodings"
+        ],
+        "strategy": "Fully specify numerical encodings of each configuration (q,h,finite tape list) and canonical trailing-blank trimming through max(head,last nonblank). T includes the finite-table validity checks, initial-tape checks, nonhalting requirement before the last configuration, unique step relation including clamped zero, and canonical final output check. On invalid input return false; U is total with fallback zero. k is fixed for T_k; tuple-length and canonicality are bounded checks. This definition makes no unproved assertion of PR; the next lemma supplies that property. Empty output is not zero; the single bit 0 is zero.",
+        "sources": {
+          "references": [
+            {
+              "title": "Gallier \u00a72.3, adapted from register configurations to the published machine syntax",
+              "url": "https://www.cis.upenn.edu/~cis5110/notes/tcbook-comp.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-fixed-machine-history-predicate-is-primitive-recursive",
+        "kind": "lemma",
+        "title": "Fixed machine history predicate is primitive recursive",
+        "statement": "For each fixed k, T_k and U just defined are primitive recursive. T_k(e,a,z) holds exactly when z codes a terminating numeric computation of program e on a, and all witnesses for fixed e,a yield the same U(z).",
+        "deps": [
+          "def-kleene-computation-predicate-and-output-map",
+          "lem-fixed-coding-primitive-recursive-arithmetic-and-sequences",
+          "thm-induction-principle"
+        ],
+        "strategy": "Decode the word indexed by e by binary expansion of e+1 with its leading 1 removed; compute length by bounded logarithm. Validity of machine headers, table entries and configuration lists uses the preceding bounded operations. Every step test compares finite coordinates through the larger of the two encoded tape lengths; all other cells are blank. Re-encoding and trimming are PR bounded folds; no iteration for an unknown halting time occurs in T. Quantify over the explicit history length for adjacent tests. U scans the final finite tape to its first non-bit symbol and performs a Horner fold of the canonical numeral. Determinism gives equality of all configurations at a common time by induction, and absence of a successor from halt forces equal terminal times; hence U agrees on all witnesses. Conversely a real finite halting run has a list code by finite cons recursion.",
+        "sources": {
+          "references": [
+            {
+              "title": "Gallier \u00a72.3, Comp and End construction; explicit local Turing-history adaptation",
+              "url": "https://www.cis.upenn.edu/~cis5110/notes/tcbook-comp.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-kleene-normal-form-for-the-fixed-machine-coding",
+        "kind": "theorem",
+        "title": "Kleene normal form for the fixed machine coding",
+        "statement": "For every fixed arity k, the numeric function of index e is phi_e(a)=U(mu z T_k(e,a,z)), with undefined value when no witness exists. The partial recursive functions, generated from initial functions by composition, primitive recursion and unbounded minimization, are exactly the partial functions computed by Turing machines under these numeric encodings. Minimization of a partial g requires g(a,j) defined and nonzero for every j<z and g(a,z)=0.",
+        "deps": [
+          "lem-fixed-machine-history-predicate-is-primitive-recursive",
+          "def-primitive-recursive-functions-by-initial-functions-and-schemes",
+          "lem-step-by-step-interpreter-for-machine-codes"
+        ],
+        "strategy": "For the forward normal-form formula, least-witness search on the total T predicate diverges exactly when there is no valid output run; witness uniqueness gives the correct value. Structural recursion compiles initial functions and composition into tape routines. Primitive recursion saves the original parameters, a loop index and previous value; divergence in any required subcall propagates. For minimization run g(a,0),g(a,1),... sequentially; do not dovetail past an undefined smaller value. Each subroutine is a finite transition-table macro with tagged states and disjoint scratch alphabet; copying canonical numerals and erasing scratch are explicit sweeps. Conversely the normal form is partial recursive because T,U are PR and mu is a generating scheme; it covers all Turing functions after the numeric output wrapper. This avoids importing old RAM equivalence or old normal-form results.",
+        "sources": {
+          "references": [
+            {
+              "title": "Gallier \u00a72.3, Proposition 2.5 and \u00a71.9; machine-specific proof supplied locally",
+              "url": "https://www.cis.upenn.edu/~cis5110/notes/tcbook-comp.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-computable-many-one-reducibility-interface",
+        "kind": "definition",
+        "title": "Computable many one reducibility interface",
+        "statement": "For A,B subsets of N, A<=_m B means there is a total computable f:N->N such that n in A iff f(n) in B for every n. For oracle X, A<=_m^X B means the same with f total X-computable: a finite machine may ask membership of a canonical numeral in X and receives its bit answer in one query transition. For languages L,K over fixed finite alphabets, L<=_m K instead uses a total string-valued computable map. A numeric reduction is equivalent to a string reduction on canonical numeral inputs whose outputs on those inputs are required to be canonical. No unrestricted image-language equivalence is asserted.",
+        "deps": [
+          "thm-kleene-normal-form-for-the-fixed-machine-coding",
+          "def-partial-function-computed-by-a-machine"
+        ],
+        "strategy": "Direction is from the problem being solved to the oracle/target problem. Prove reflexivity with identity and transitivity with composition, preserving totality. For the encoding bridge, a numeric machine reads bin(n), runs f and emits bin(f(n)); it may emit bin(0) on malformed strings because no bridge condition is imposed there. Conversely parse a canonical-output string map and decode its numeral to get a total N-to-N map. A reduction of full numeral-image languages must additionally reject malformed-input membership appropriately; this may need a fixed no-output witness and is not silently equivalent. Relativization preserves this reasoning while oracle membership itself is not assumed computable. The query convention is defined here so the next oracle-reduction definition is not a forward premise.",
+        "sources": {
+          "references": [
+            {
+              "title": "Patey chapter 5, Definitions 4.1 and 5.2, pp.87\u201389 (design locator, independently unread)",
+              "url": "https://ludovicpatey.com/courses/comp-thy-2023/cr11-en.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-oracle-turing-reducibility-interface",
+        "kind": "definition",
+        "title": "Oracle turing reducibility interface",
+        "statement": "An oracle X subset of N answers a query written as a canonical binary numeral by its membership bit; malformed queries receive 0 by convention. A<=_T B means a deterministic oracle machine with oracle B halts on every n and outputs the characteristic bit of A. Queries may be adaptive and both yes and no answers are usable. Fix relative partial computability and X-c.e. sets by oracle computation and acceptance; membership deciders always halt.",
+        "deps": [
+          "def-computable-many-one-reducibility-interface",
+          "def-multitape-and-nondeterministic-machines"
+        ],
+        "strategy": "Give a query tape, two answer states and a designated query transition, leaving ordinary transition counts and charged writing time explicit. Fix either decoded-number or canonical-numeral sets once. Simulate a B-query via the total C-decider for B to prove transitivity; each individual terminating computation makes finitely many queries, so composition terminates without a computable uniform query bound. A many-one map followed by one membership query proves <=m implies <=T. Do not identify an oracle recognizer with a total characteristic decider.",
+        "sources": {
+          "references": [
+            {
+              "title": "Patey chapter 5, relative-computability interfaces; full text pending",
+              "url": "https://ludovicpatey.com/courses/comp-thy-2023/cr11-en.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-acceptable-numbering-with-universal-evaluation",
+        "kind": "definition",
+        "title": "Acceptable numbering with universal evaluation",
+        "statement": "A numbering lists all unary partial computable functions phi_e under the fixed numeral and tuple encodings. It is acceptable when evaluation (e,x)->phi_e(x) is partial computable and there is a total computable composition compiler c with phi_c(e,d)=phi_e composed with phi_d. The fixed machine numbering, assigning malformed programs the empty partial function, has these properties. Arity-k notation means unary evaluation on the fixed tuple encoding.",
+        "deps": [
+          "thm-kleene-normal-form-for-the-fixed-machine-coding",
+          "lem-step-by-step-interpreter-for-machine-codes",
+          "def-kleene-computation-predicate-and-output-map"
+        ],
+        "strategy": "Universality: decode the index and simulate steps, normalize output, loop on malformed program or invalid terminal numeral; the history characterization fixes exact agreement. Exhaustivity follows from finite machine codes, including a canonical wrapper for numeric input/output. For c(e,d), output a literal finite transition table which stores e,d as constants, runs the evaluator on d,x, then on e and its result. Expand each stored word as a finite chain of write states, use disjoint renamed interpreter states and fixed tape tracks, then encode the table in the published format; the map from e,d to its finite word/index is total computable by list scans. If a component diverges, the composite does. No s-m-n or recursion theorem is used to prove this compiler exists; compiler syntax is the construction. This accepts Gallier\u2019s composition-based definition; the next theorem supplies specialization.",
+        "sources": {
+          "references": [
+            {
+              "title": "Gallier \u00a73.1, acceptable indexing and universal/composition interfaces",
+              "url": "https://www.cis.upenn.edu/~cis5110/notes/tcbook-comp.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-smn-for-the-fixed-acceptable-numbering",
+        "kind": "theorem",
+        "title": "Smn for the fixed acceptable numbering",
+        "statement": "For each m,n>=1 there is a total computable s_m_n(e,a_1,...,a_m) such that phi_s_m_n(e,a)(y_1,...,y_n)=phi_e(a_1,...,a_m,y_1,...,y_n), with equality of domains and values. The compiler is also uniform in the finite positive arities and encoded parameter tuple.",
+        "deps": [
+          "def-acceptable-numbering-with-universal-evaluation",
+          "lem-fixed-coding-primitive-recursive-arithmetic-and-sequences"
+        ],
+        "strategy": "Construct the finite prepend routine: validate/decode its n-argument input, emit the published tuple encoding with m stored canonical parameter numerals before the n variables, then invoke the fixed evaluator on literal e. Expand hardwired numeral bits into finite write states; indices are length-lex codes of the output tables. Code generation always halts even for a divergent e. For a valid input the evaluator receives exactly the specified combined tuple; divergence and invalid-output normalization agree with phi_e. Encode any fixed arities in the generated program, not a nonuniform existence argument. No oracle or program text introspection.",
+        "sources": {
+          "references": [
+            {
+              "title": "Gallier Theorem 3.1 and its complete composition argument, pp.68\u201369 of recovery edition",
+              "url": "https://www.cis.upenn.edu/~cis5110/notes/tcbook-comp.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-kleene-fixed-point-theorem-for-program-indices",
+        "kind": "theorem",
+        "title": "Kleene fixed point theorem for program indices",
+        "statement": "For every total computable F:N->N there is e with phi_e=phi_F(e) as partial functions. An index e can be obtained effectively from an index of F on the promise that F is total; this asserts extensional equality, not e=F(e).",
+        "deps": [
+          "thm-smn-for-the-fixed-acceptable-numbering",
+          "def-acceptable-numbering-with-universal-evaluation"
+        ],
+        "strategy": "Write s(z,x) for binary-to-unary specialization. Let q be an index of the binary partial function H(z,y)=phi_F(s(z,z))(y); a literal program computes s(z,z), applies the given F program, then evaluates. Let e=s(q,q). For every y, phi_e(y)=H(q,y)=phi_F(s(q,q))(y)=phi_F(e)(y), including simultaneous divergence. q is produced by the compiler with F\u2019s index hardwired, so the index transformation is effective; totality ensures F(e) is defined. Do not assume F terminates uniformly within any time bound.",
+        "sources": {
+          "references": [
+            {
+              "title": "Gallier \u00a75.1, Theorem 5.1; specialization proof route",
+              "url": "https://www.cis.upenn.edu/~cis5110/notes/tcbook-comp.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-polynomial-time-verifier-and-reduction-interface",
+        "kind": "definition",
+        "title": "Polynomial time verifier and reduction interface",
+        "statement": "Polynomial time means worst-case all-input multitape time <=C(n+1)^k for fixed C,k. A polynomially balanced verifier relation R(x,w) is decided in time polynomial in |x|+|w| and has an explicit witness guard |w|<=p(|x|); its language is {x:exists w, |w|<=p(|x|) and R(x,w)}. A polynomial many-one reduction of binary languages is a total transducer f with x in L iff f(x) in K, and polynomial time/output length. Define P and the verifier presentation of NP at this interface without asserting P=NP or a completeness theorem.",
+        "deps": [
+          "def-uniform-asymptotic-time-space-comparison",
+          "def-multitape-and-nondeterministic-machines",
+          "def-partial-function-computed-by-a-machine"
+        ],
+        "strategy": "Explain input/pair encoding size and why an output tape prints only O(time+input length) symbols. Prove polynomial reduction composition by substituting the first polynomial output-length bound in the second polynomial time. Fix the guard even if the underlying predicate accepts longer witnesses. If fixed-length certificates are desired, encode the actual length and pad inside a larger explicit polynomial; validity prevents padding from changing membership. No SAT, Cook\u2013Levin or old P/NP page is consumed.",
+        "sources": {
+          "references": [
+            {
+              "title": "Arora\u2013Barak \u00a7\u00a72.1\u20132.2 verifier/reduction definitions; source reading incomplete",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-probabilistic-polynomial-time-machine-interface",
+        "kind": "definition",
+        "title": "Probabilistic polynomial time machine interface",
+        "statement": "A PTM is a fixed multitape machine with two total transition tables; each transition selects a fresh independent unbiased bit. It is polynomial time if every random branch on input x halts within p(|x|), for one fixed integer polynomial bound. Equivalently supply a uniform random word r in {0,1}^{p(|x|)} to a deterministic simulator; unused suffix bits are ignored. Space/time refer to the computation, not to the finite probability space itself.",
+        "deps": [
+          "def-polynomial-time-verifier-and-reduction-interface",
+          "def-independence-of-finite-random-variables"
+        ],
+        "strategy": "Construct the finite sample space of all p(n)-bit strings with atom mass 2^-p(n). Each prefix of length j occurs on exactly 2^(p(n)-j) strings; this proves the fair independent bit semantics even when stopping time depends on earlier bits. Prove simulator/branch agreement by induction. Define acceptance probability by summing atom masses. Do not assume expected polynomial time implies an all-branch bound.",
+        "sources": {
+          "references": [
+            {
+              "title": "Arora\u2013Barak \u00a77.1, Definitions 7.1 and 7.4",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-rp-corp-zpp-bpp-and-pp-classes",
+        "kind": "definition",
+        "title": "Rp corp zpp bpp and pp classes",
+        "statement": "For a polynomial all-branch PTM, RP has acceptance probability zero off L and at least 1/2 on L; coRP has probability one on L and at most 1/2 off L; BPP has at least 2/3 on L and at most 1/3 off L; PP has strictly more than 1/2 on L and at most 1/2 off L. ZPP is zero-error expected polynomial time, equivalently a polynomial-time PTM with outputs yes/no/unknown, never wrong and with unknown probability at most 1/2 on every input. ZPP=RP intersect coRP.",
+        "deps": [
+          "def-probabilistic-polynomial-time-machine-interface",
+          "thm-markov-inequality"
+        ],
+        "strategy": "For ZPP define expected runtime by the sum over finite halting bit prefixes (nonnegative series), or sum of survival probabilities; no infinite product probability space is required. Repeat the bounded unknown procedure with independent fresh blocks: unknown after j attempts <=2^-j, so expected cost <=2p(n), halting probability one, and no erroneous output. Conversely truncate an expected <=p(n) zero-error procedure at 2p(n) steps; Markov from the elementary survival sum gives unknown <=1/2. For RP and coRP run both: an RP acceptance certifies yes, a coRP rejection certifies no, otherwise unknown; appropriate input-side success probability >=1/2. A ZPP unknown procedure gives RP by treating unknown as no and coRP by treating unknown as yes. Preserve strict PP majority and do not invoke amplification to identify PP with BPP.",
+        "sources": {
+          "references": [
+            {
+              "title": "Arora\u2013Barak \u00a77.3; local finite-prefix expectation convention",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-pairwise-independent-hash-family-interface",
+        "kind": "definition",
+        "title": "Pairwise independent hash family interface",
+        "statement": "For finite sets D,R with R nonempty and a finite nonempty seed set K, a uniformly seeded family (h_k:D->R) is pairwise independent if each h_k(x) is uniform and for distinct x,y and all a,b in R the probability of (h_k(x),h_k(y))=(a,b) is 1/|R|^2. Seeds may give repeated functions. This is stronger than merely bounding collision probabilities. For a finite field F, h_(a,b)(x)=ax+b with uniform (a,b) in F^2 is such a family, allowing a=0.",
+        "deps": [
+          "def-field",
+          "def-independence-of-finite-random-variables"
+        ],
+        "strategy": "Define the probability by exact finite seed counts, including |D|<=1 where the marginal requirement remains necessary. For distinct x,y, solve a=(u-v)/(x-y), b=u-ax for each prescribed output pair. Verify existence and uniqueness using field inverses and cancellation, hence exactly one of |F|^2 seeds. For one input and desired output choose each a and uniquely b, giving |F| seeds and uniformity. This proof must live on A before B or other consumers. No assumption that a is nonzero, and no inference of three-wise independence.",
+        "sources": {
+          "references": [
+            {
+              "title": "Aspnes pairwise-independence/hash-family treatment, complete locator/reading pending; explicit local affine proof",
+              "url": "https://cs.yale.edu/homes/aspnes/classes/469/notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-chernoff-bound-for-independent-bernoulli-trials",
+        "kind": "lemma",
+        "title": "Chernoff bound for independent bernoulli trials",
+        "statement": "For mutually independent Bernoulli(p_i) variables X_1,...,X_N on a finite probability space, S=sum X_i and mu=sum p_i, for delta>=0, P(S>=(1+delta)mu)<=exp(-mu((1+delta)log(1+delta)-delta)). For 0<=delta<1, P(S<=(1-delta)mu)<=exp(-mu(delta+(1-delta)log(1-delta))). Consequently for 0<=delta<=1 the upper tail is <=exp(-mu delta^2/3), the lower tail <=exp(-mu delta^2/2), and the two-sided deviation <=2exp(-mu delta^2/3). At delta=1 the lower formula is interpreted as exp(-mu); mu=0 and N=0 are handled directly. Also for N>0, t>=0, P(|S-mu|>=t)<=2exp(-2t^2/N).",
+        "deps": [
+          "def-bernoulli-and-binomial-random-variables",
+          "thm-expectation-of-products-of-independent-random-variables",
+          "thm-markov-inequality",
+          "def-real-exponential-function-and-e",
+          "def-natural-logarithm"
+        ],
+        "strategy": "Prove transformed variables remain independent by finite preimage summation. Then E exp(lambda S)=product(1+p_i(exp(lambda)-1))<=exp(mu(exp(lambda)-1)) using 1+u<=exp(u). Apply Markov to exp(lambda S), lambda>0 for the upper tail; minimize at log(1+delta). Use lambda<0 with reversed threshold for the lower tail and minimize at log(1-delta). Derive the elementary logarithm inequalities explicitly by derivatives/integration: upper rate >=delta^2/3 on [0,1], lower rate >=delta^2/2. At delta=1 use P(S=0)=product(1-p_i)<=exp(-mu), including p_i=1; at mu=0 each Xi vanishes almost surely, so weak threshold bounds remain valid. For additive bounds, let g(lambda)=log E exp(lambda(X-p)). Directly differentiate its two-term expression: g(0)=gprime(0)=0 and gsecond=q_lambda(1-q_lambda)<=1/4. Integrate twice to get g(lambda)<=lambda^2/8 for either sign. Product independence and Markov with lambda=4t/N give each exp(-2t^2/N) tail. State mutual, not pairwise, independence. All calculus/exponential laws used need earlier declared suppliers before acceptance.",
+        "sources": {
+          "references": [
+            {
+              "title": "Aspnes \u00a7\u00a75.2.1\u20135.2.4 and H.2.2; additive centered-mgf argument is local",
+              "url": "https://cs.yale.edu/homes/aspnes/classes/469/notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-schwartz-zippel-over-finite-fields",
+        "kind": "theorem",
+        "title": "Schwartz zippel over finite fields",
+        "statement": "Let F be a finite field, m>=1 and f in F[x_1,...,x_m] a nonzero formal polynomial of total degree d. For a nonempty subset A of F and independent uniform a_i in A, P(f(a_1,...,a_m)=0)<=min(1,d/|A|). In particular A=F gives d/|F|. Nonzero constant polynomials have probability zero; a nonzero formal polynomial may induce the zero function on F^m when d is large.",
+        "deps": [
+          "def-monomials-multidegree-and-total-degree",
+          "thm-root-bound-for-polynomials-over-a-domain",
+          "def-field",
+          "thm-induction-principle"
+        ],
+        "strategy": "Use counts on A^m, so probability is the integer zero count divided by |A|^m. For m=1 apply the domain root bound; establish the field-to-domain fact by multiplying ab=0 with a inverse. For m>1 write f=sum_(j=0)^r g_j x_m^j with g_r nonzero. The monomial expansion gives deg(g_r)<=d-r. By induction at most (d-r)|A|^(m-2) base tuples kill g_r (use min with the number of base tuples if this exceeds it). Each remaining base tuple yields a nonzero univariate polynomial of degree r and at most r roots. Count at most bad*|A|+r|A|^(m-1)<=d|A|^(m-1), or use the trivial probability bound if d>=|A|. Do not apply the root bound to zero specializations or substitute degree-in-one-variable for total degree. At r=0 the same induction works; at d=0 handle the constant directly. No use of the old Schwartz\u2013Zippel or recorded identity-test item.",
+        "sources": {
+          "references": [
+            {
+              "title": "Arora\u2013Barak Appendix A, Lemma A.25, PDF p.475; nonempty-subset extension by the same counting proof",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      }
+    ]
   },
   {
     "order": 612.4,
@@ -26,6 +480,83 @@
     "requires": [
       "effective-numberings-reductions-resources-and-randomness"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-smn-specializes-a-two-argument-index",
+        "kind": "example",
+        "title": "Smn specializes a two argument index",
+        "statement": "Let e be the explicitly compiled index for f(a,y)=a+y. Then q=s_1_1(e,3) computes y->3+y, in particular phi_q(0)=3 and phi_q(4)=7.",
+        "deps": [
+          "thm-smn-for-the-fixed-acceptable-numbering",
+          "lem-fixed-coding-primitive-recursive-arithmetic-and-sequences"
+        ],
+        "strategy": "Use the primitive-recursive addition routine and its earlier compilation; the index e is its literal finite table, not an invented decimal index. The s-m-n identity specializes the first argument. Display canonical input/output numerals 0->11 and 100->111; show the stored parameter 11 appears in the generated prepend routine. This is a leaf example.",
+        "sources": {
+          "references": [
+            {
+              "title": "Gallier Theorem 3.1; local worked specialization",
+              "url": "https://www.cis.upenn.edu/~cis5110/notes/tcbook-comp.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-pairwise-independent-affine-hashing-over-a-prime-field",
+        "kind": "example",
+        "title": "Pairwise independent affine hashing over a prime field",
+        "statement": "Over F_5 the 25 seeds (a,b) in F_5^2 give h(x)=ax+b. At distinct inputs 1,3 and prescribed outputs 2,4 the unique seed is (1,1). Every ordered output pair occurs once, so the two values are independent uniform. The family is not three-wise independent: h(2)=2h(1)-h(0).",
+        "deps": [
+          "def-pairwise-independent-hash-family-interface"
+        ],
+        "strategy": "Calculate a=(4-2)/(3-1)=1 and b=2-1=1 mod 5. For any outputs at 1,3 use the same invertible 2 difference; count one seed out of 25. For the failure, h(0)=0 and h(1)=0 force a=b=0, so h(2)=1 is impossible although three independent uniform values would give probability 1/125. Retain zero slope seeds.",
+        "sources": {
+          "references": [
+            {
+              "title": "Local finite-field affine-hashing calculation",
+              "url": "https://cs.yale.edu/homes/aspnes/classes/469/notes.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-schwartz-zippel-for-a-bivariate-polynomial",
+        "kind": "example",
+        "title": "Schwartz zippel for a bivariate polynomial",
+        "statement": "For f(X,Y)=XY-1 over F_5, total degree is 2 and exactly four of 25 pairs are roots: (1,1),(2,3),(3,2),(4,4). Thus the actual zero probability is 4/25, below the Schwartz\u2013Zippel bound 2/5.",
+        "deps": [
+          "thm-schwartz-zippel-over-finite-fields"
+        ],
+        "strategy": "For X=0 no Y gives a root. Each nonzero X has precisely one inverse Y; list the four inverses modulo 5 and divide by 25. Compare 4/25<10/25=2/5. Uniform independence of both coordinates is essential; the theorem gives an upper bound, not equality.",
+        "sources": {
+          "references": [
+            {
+              "title": "Local example of Arora\u2013Barak Appendix A Lemma A.25",
+              "url": "https://theory.cs.princeton.edu/complexity/book.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
   }
 ]

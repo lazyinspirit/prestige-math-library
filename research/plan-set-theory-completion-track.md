@@ -100,7 +100,7 @@ a Phase-3 consumer repair, not a prerequisite for Phase 2.
 | SET-20 | `symmetric-collapse-and-ultrafilter-free-models` | SET-19, SET-15 |
 | SET-21 | `halpern-lauchli-and-bpi-without-choice` | SET-20; the new earlier `boolean-prime-ideal-theorem-in-the-basic-cohen-model` A page |
 | SET-22 | `choice-strength-in-baire-urysohn-stone-and-tychonoff` | SET-21; the new earlier `dependent-choice-and-the-complete-metric-baire-theorem` A page |
-| SET-23 | `large-cardinals-measures-and-elementary-embeddings` | SET-5, SET-7, SET-8 |
+| SET-23 | `large-cardinals-measures-and-elementary-embeddings` | SET-5, SET-7, SET-8, SET-9 |
 | SET-24 | `solovays-model-and-regularity-of-all-sets-of-reals` | SET-23, SET-20, SET-10 |
 | SET-25 | `shelahs-baire-property-model-and-inner-model-lower-bounds` | SET-24, SET-16 |
 | SET-26 | `prikry-forcing-and-gitiks-singular-cardinal-model` | SET-23, SET-20 |
@@ -770,6 +770,14 @@ dated status remarks, not fake theorems.
 # IV. Large cardinals, regularity, forcing axioms, and topology
 
 ## SET-23. Large Cardinals, Measures, and Elementary Embeddings
+
+2026-09-11 actual-interface reconciliation: SET-9 supplies the kappa-tree
+and partition-arrow definitions used in the weak-compactness and Henkin
+arguments. This existing published prerequisite is explicit in the plan.
+The ultrapower critical-point lemma also uses the earlier local inaccessible
+rank-size bound; ultraproduct/Scott definitions name their following
+well-definedness lemmas. These declaration fixes do not clear the outstanding
+preparation/PMEA placement or mathematical/source escalations.
 
 **Items.** Inaccessible, Mahlo, weakly compact, measurable, strongly compact
 and supercompact cardinals; implication diagram; normal measures and ultrapowers;

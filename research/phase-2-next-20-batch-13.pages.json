@@ -9,7 +9,412 @@
     "requires": [
       "reflection-absoluteness-and-elementary-submodels"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "lem-finite-tuple-satisfaction-is-absolute",
+        "kind": "lemma",
+        "title": "Finite-tuple satisfaction is absolute",
+        "deps": [
+          "thm-set-structure-satisfaction-recursion",
+          "lem-satisfaction-coincidence",
+          "thm-ordinals-and-omega-are-absolute-in-transitive-models",
+          "thm-structural-recursion-on-set-coded-syntax"
+        ],
+        "statement": "ZF. For a nonempty set A in a transitive ZF model N, truth of coded membership formulas in (A,in), with finite tuples from A, is absolute between N and the ambient universe. No assertion that N contains every infinite assignment A^omega. Empty A is handled separately when defining Def.",
+        "proof_strategy": "Use finite assignments covering all variable indices occurring in a formula and its subformulas, extended by a fixed element only when comparing with existing infinite-assignment satisfaction. Coincidence removes the arbitrary extension. All finite tuples from A are in N by finite Pairing/Union and N has the actual omega. Induct externally on formula complexity: atoms use actual membership, Boolean cases agree, existential witnesses range over exactly the same A. Finite truth tables exist by internal recursion and have unique external values. This gives agreement for every code, without claiming equality of the two A^omega sets.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke \u00a75.1 pp13\u201314 and \u00a75.4 p16; Marks Exercise 20.1 p86",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-definable-subsets-of-a-membership-structure",
+        "kind": "definition",
+        "title": "Definable subsets of a membership structure",
+        "deps": [
+          "lem-finite-tuple-satisfaction-is-absolute"
+        ],
+        "statement": "ZF. Def(A) consists of subsets of A defined by one membership formula with a finite parameter tuple from A. Define Def(empty)={empty}. Parameters are allowed; no satisfaction predicate for V is asserted.",
+        "proof_strategy": "For nonempty A use the set of formula codes and finite tuples. Separation defines the subset associated to a code/tuple; Replacement collects the resulting sets. Their collection is a subset of P(A). At A=empty its sole subset is explicitly included, without invoking an empty first-order structure.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke \u00a75.1 pp13\u201314; Marks \u00a720 p86",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-def-operation-is-absolute",
+        "kind": "lemma",
+        "title": "Absoluteness of the definable power-set operation",
+        "deps": [
+          "def-definable-subsets-of-a-membership-structure",
+          "lem-finite-tuple-satisfaction-is-absolute"
+        ],
+        "statement": "For A in a transitive ZF model N, Def^N(A)=Def(A). In particular every externally definable subset of A using parameters from A belongs to N. This is not absoluteness of the full power set.",
+        "proof_strategy": "Each external formula code and finite tuple lies in N. Internal Separation constructs its defining subset. Finite-tuple satisfaction identifies this internal subset with the external one. Conversely every internal witness code/tuple is an actual witness. Replacement in N assembles the same set of subsets. For empty A both sides are {empty}.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke \u00a75.4 p16; Marks Exercise 20.1 and Lemma 20.7 pp86\u201388",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-constructible-hierarchy-and-constructible-rank",
+        "kind": "definition",
+        "title": "The constructible hierarchy and constructible rank",
+        "deps": [
+          "def-definable-subsets-of-a-membership-structure",
+          "thm-transfinite-recursion"
+        ],
+        "statement": "ZF. L_0=empty, L_(alpha+1)=Def(L_alpha), L_lambda=union_(beta<lambda)L_beta at nonzero limits, L=union_(alpha in Ord)L_alpha. For x in L put rho_L(x)=least alpha with x in L_(alpha+1). The symbols denote uniformly definable classes.",
+        "proof_strategy": "On each ordinal interval use transfinite recursion, totalizing malformed histories with empty. Unique successor sets and Replacement/Union at limits give histories; uniqueness gives agreement on overlaps. The first stage containing an x cannot be zero or a limit, so rho_L is defined uniquely. No assertion that L is a set and no AC use.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke Definitions 5.2,5.4 p14; Marks Definition 20.2 p86",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-constructible-levels-transitivity-ordinals-and-rank",
+        "kind": "proposition",
+        "title": "Transitivity, growth, ordinals and rank in L",
+        "deps": [
+          "def-constructible-hierarchy-and-constructible-rank",
+          "thm-ordinals-and-omega-are-absolute-in-transitive-models",
+          "prop-cumulative-hierarchy-transitivity-and-growth"
+        ],
+        "statement": "ZF. L_alpha is transitive; alpha<=beta implies L_alpha subset L_beta; L_alpha subset V_alpha; L_alpha intersect Ord=alpha; L_alpha and alpha belong to L_(alpha+1); x in L_alpha iff rho_L(x)<alpha. Thus L is transitive and contains every ordinal.",
+        "proof_strategy": "If A is transitive, each a in A is defined over A by membership in parameter a, so A subset Def(A); every member of Def(A) is a subset of A, which proves transitivity of Def(A). Induct, taking unions at limits. Ordinalhood is bounded and absolute over nonempty transitive levels: the ordinals of L_beta define beta as a subset of L_beta; handle beta=0 explicitly. No ordinal >=beta+1 is a subset of L_beta. The formula x=x defines the entire level as a member of its successor. Inclusion in V follows by Def(A) subset P(A); the least-stage definition gives the rank equivalence.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke Lemmas 5.1,5.3,5.5,5.6(a) pp14\u201315; Marks Lemma 20.3 pp86\u201387",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-finite-reflection-along-constructible-levels",
+        "kind": "lemma",
+        "title": "Finite reflection along constructible levels",
+        "deps": [
+          "prop-constructible-levels-transitivity-ordinals-and-rank",
+          "thm-montague-levy-finite-reflection"
+        ],
+        "statement": "ZF. For each fixed finite formula family and ordinal bound there is a larger nonzero limit beta at which that family agrees between L_beta and L. This is a scheme, before any assertion L models ZF.",
+        "proof_strategy": "Apply precisely the published general definable-class clause with W=L and W_alpha=L_alpha. Uniform definability comes from recursion and monotonicity/continuity/exhaustion from the preceding item. The source proof bounds least witness stages over sets of tuples in ambient ZF and iterates the bound omega times. It does not use Replacement inside L, class truth, or Choice.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke Lemma 5.3 and proof of Theorem 5.7 pp14\u201315; published finite-reflection general clause",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-constructible-universe-basic-axioms",
+        "kind": "theorem",
+        "title": "Elementary ZF axioms inside L",
+        "deps": [
+          "prop-constructible-levels-transitivity-ordinals-and-rank"
+        ],
+        "statement": "In ambient ZF, L satisfies Extensionality, Foundation, Empty Set, Pairing, Union and Infinity, each interpreted by relativization.",
+        "proof_strategy": "Transitivity gives Extensionality. Ambient Foundation on nonempty x in L provides a member disjoint from x, which lies in L by transitivity. Empty is in L_1. Put finitely many parameters in one level; x=a or x=b defines {a,b}; exists y in a (x in y) defines union a, using level transitivity. These subsets belong to the successor. Omega belongs to L_(omega+1), and actual empty and successor witnesses are in L. No internal Power Set or Replacement is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke Theorem 5.7 p15; Marks Lemma 20.5 p87",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-separation-in-the-constructible-universe",
+        "kind": "theorem",
+        "title": "Separation in the constructible universe",
+        "deps": [
+          "lem-finite-reflection-along-constructible-levels",
+          "def-definable-subsets-of-a-membership-structure"
+        ],
+        "statement": "For every fixed formula phi and a,parameters in L, the set {x in a: phi^L(x,parameters)} belongs to L. Ambient theory ZF.",
+        "proof_strategy": "Choose a reflecting level containing a and all parameters, closing the chosen finite formula list under subformulas. Transitivity puts all x in a in that level. The desired subset is defined there by x in a and phi, so it belongs to Def of that level. This is a separate proof for each formula and requires no uniform truth for L.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke Theorem 5.7 p15; Marks Lemma 20.5 p87",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-internal-power-set-in-the-constructible-universe",
+        "kind": "theorem",
+        "title": "Internal Power Set in L",
+        "deps": [
+          "thm-separation-in-the-constructible-universe",
+          "prop-constructible-levels-transitivity-ordinals-and-rank"
+        ],
+        "statement": "ZF. For every a in L, P(a) intersect L is a set belonging to L and is the power set of a as computed in L.",
+        "proof_strategy": "In V use Separation on P(a) with the definable predicate x in L. Ambient Replacement collects rho_L(b) for this set of b; choose beta greater than every collected rank and with a in L_beta. Every constructible subset of a lies in L_beta. This level itself belongs to L. Internal Separation, now proved, applied to L_beta with the bounded predicate b subset a produces exactly P(a) intersect L. Distinguish bounding in V from performing Separation in L.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke Theorem 5.7 p15; Marks Lemma 20.5 p87",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-replacement-in-the-constructible-universe",
+        "kind": "theorem",
+        "title": "Replacement in L",
+        "deps": [
+          "thm-separation-in-the-constructible-universe",
+          "prop-constructible-levels-transitivity-ordinals-and-rank",
+          "lem-finite-reflection-along-constructible-levels"
+        ],
+        "statement": "For each fixed formula defining in L a function on a in L, its image is an element of L. This proves the Replacement scheme in ambient ZF.",
+        "proof_strategy": "The relativized formula is an ambient functional formula on the actual set a. Replacement in V gives its image Y, all of whose elements belong to L, without yet asserting Y in L. Ambient Replacement of their constructible ranks gives a level containing Y as a subset. Use Separation inside L on this level with exists x in a phi^L(x,y) to recover Y. Alternatively reflect phi above the same bound and take Def. No replacement in L is presumed.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke Theorem 5.7 p15 (local expansion of omitted Replacement case); Marks Lemma 20.5 p87",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-constructibility-is-absolute-and-l-is-minimal",
+        "kind": "theorem",
+        "title": "Absoluteness, idempotence and minimality of L",
+        "deps": [
+          "lem-def-operation-is-absolute",
+          "thm-constructible-universe-basic-axioms",
+          "thm-internal-power-set-in-the-constructible-universe",
+          "thm-replacement-in-the-constructible-universe"
+        ],
+        "statement": "ZF. For a transitive model N of ZF and alpha in Ord intersect N, (L_alpha)^N=L_alpha. For transitive class inner models containing all ordinals, L^N=L subset N. In particular L^L=L and L satisfies V=L.",
+        "proof_strategy": "External ordinal induction identifies the internally existing hierarchy history at every alpha in N. Zero and union stages agree by transitivity; the successor is the proved Def absoluteness. A set model gives only levels below its ordinal height. For a class inner model containing all ordinals, take the class union. The preceding three theorem dependencies together with Separation establish ZF in L, so N=L is now licensed; do not apply the model hypothesis earlier.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke Theorem 5.8 and following paragraph p16; Marks Lemma 20.7 and Corollary 20.8 pp87\u201388",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-canonical-well-order-of-finite-definition-codes",
+        "kind": "lemma",
+        "title": "Well-ordering finite definition codes",
+        "deps": [
+          "def-definable-subsets-of-a-membership-structure",
+          "thm-transfinite-induction"
+        ],
+        "statement": "ZF. Given a well-order of A and a fixed natural-number coding of membership formulas with finite arity, formula code followed by lexicographic parameter order well-orders the valid definition codes over A. Every definable subset has a least code.",
+        "proof_strategy": "For a fixed arity n prove lexicographic well-ordering of A^n by induction on n, minimizing coordinates successively; for n=0 use the singleton empty tuple. First minimize the formula natural number, then the parameter tuple of that fixed arity. Every nonempty fibre of the decoding function has a least code. No choice of representatives is needed because least codes are unique. Handle A=empty with its designated code for empty.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke Lemma 5.10 and Exercise 5.11 p17",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-canonical-definable-global-well-order-of-l",
+        "kind": "theorem",
+        "title": "The canonical definable global well-order of L",
+        "deps": [
+          "lem-canonical-well-order-of-finite-definition-codes",
+          "def-constructible-hierarchy-and-constructible-rank",
+          "prop-constructible-levels-transitivity-ordinals-and-rank",
+          "thm-constructibility-is-absolute-and-l-is-minimal"
+        ],
+        "statement": "ZF. There is a parameter-free definable setlike class well-order <_L of L whose restrictions to levels cohere as initial segments. The same construction in L gives its internal canonical well-order.",
+        "proof_strategy": "Recursively well-order each L_alpha. Keep the old level first in its old order, then order newly added subsets by their least formula/parameter codes over the old level. At limits take the union of the orders. A nonempty subset has an element, so bound by the level of that element and minimize in that initial segment; its minimum is global. Every predecessor segment is contained in a level, hence a set. First-order set-history recursion gives a single definition. Absoluteness of Def and uniqueness of each stage identifies the construction inside L; fixed finite lexicographic orders avoid an infinite-lex-order error.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke Theorem 5.9 proof pp17\u201318; Marks Theorem 20.9 and Exercise 20.10 p88",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-constructible-universe-satisfies-choice",
+        "kind": "theorem",
+        "title": "The constructible universe satisfies AC",
+        "deps": [
+          "thm-canonical-definable-global-well-order-of-l",
+          "thm-replacement-in-the-constructible-universe",
+          "thm-separation-in-the-constructible-universe",
+          "def-axiom-of-choice"
+        ],
+        "statement": "ZF proves AC relativized to L. Ambient AC is not assumed; def-axiom-of-choice supplies the conclusion contract only.",
+        "proof_strategy": "For a family a in L of nonempty sets, transitivity makes each member actually nonempty and contained in L. Assign each its unique <_L least element. The internal definable relation and Replacement in L construct the graph; Pairing and Union already hold there. Its values belong to their respective sets, proving precisely the choice-function axiom inside L. Explicitly distinguish the cited axiom definition from an ambient assumption.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke Theorem 5.9 pp17\u201318; Marks Theorem 20.9 p88",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-ordinal-definability-and-hod",
+        "kind": "definition",
+        "title": "Ordinal definability and HOD",
+        "deps": [
+          "lem-finite-tuple-satisfaction-is-absolute",
+          "def-cumulative-hierarchy-stages",
+          "prop-transitive-closure-minimality",
+          "thm-montague-levy-finite-reflection"
+        ],
+        "statement": "ZF. OD is the class of x uniquely definable over some (V_theta,in) from finitely many ordinals below theta. HOD={x:TC({x}) subset OD}. This agrees, formula by formula, with ambient ordinal definability.",
+        "proof_strategy": "Use the uniform set-satisfaction predicate for V_theta, making OD first-order definable. If x is ambiently uniquely defined by a fixed formula with ordinal parameters, reflect that formula and uniqueness to a level containing x and the parameters. Conversely a particular code, theta and ordinal tuple defining x over V_theta give an ambient definition from these ordinal parameters (a natural-number code is an ordinal). Use the existing precise hierarchy definition for V_theta: transitivity and closure under power sets alone do not characterize V_theta.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila, Axiomatic Set Theory \u00a78.4 Definition 8.33\u20138.35 and Theorem 8.34, printed p42",
+              "url": "https://karagila.org/files/set-theory-2017.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-hod-is-an-inner-model-containing-l",
+        "kind": "theorem",
+        "title": "HOD as an inner model and comparison with L",
+        "deps": [
+          "def-ordinal-definability-and-hod",
+          "thm-constructibility-is-absolute-and-l-is-minimal",
+          "lem-canonical-well-order-of-finite-definition-codes",
+          "def-axiom-of-choice"
+        ],
+        "statement": "ZF. HOD is a transitive class containing all ordinals and satisfying ZFC, and L subset HOD. No assertion HOD=L, HOD^HOD=HOD, or absoluteness of HOD across inner models.",
+        "proof_strategy": "TC closure gives transitivity, and every ordinal and its members are OD. Prove closure of OD under each fixed definable operation with finitely many OD parameters by composing their unique ordinal definitions. Pairing, Union and Infinity then lie in HOD. For Separation with a,parameters in HOD, the HOD-relativized formula defines an OD subset of a; its members and descendants are already OD. P(a) intersect HOD is ambiently a set and OD from a; each member is HOD, so the set is HOD. For a functional HOD formula on a, ambient Replacement gives image; it is OD from the OD parameters and all its members are HOD. A least-code order on triples (theta,formula,ordinal tuple), ordered first by an ordinal bound then length and lexicographically, is definable and setlike; its restriction to OD is a well-order. On a HOD family, the least-element graph is OD and hereditary OD by finite set closure, yielding internal AC without assuming AC in V. Now apply L minimality to HOD. Full local proof of the exercises, especially code-order definability and internal AC, must be audited before ready.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila \u00a78.4 Exercises 8.37\u20138.38 p42; local exercise solution and Geschke minimality p16",
+              "url": "https://karagila.org/files/set-theory-2017.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-constructible-inner-model-semantic-and-formal-schema",
+        "kind": "theorem",
+        "title": "Semantic and formal inner-model theorem for L",
+        "deps": [
+          "thm-constructibility-is-absolute-and-l-is-minimal",
+          "thm-constructible-universe-satisfies-choice",
+          "thm-relativization-and-set-satisfaction"
+        ],
+        "statement": "For every fixed axiom sigma of ZFC+V=L, ZF proves sigma^L. For every transitive set model M of ZF, its internal constructible class L^M, regarded externally as a set with membership, satisfies ZFC+V=L and has the same ordinals as M. No assertion that such M exists, and no arithmetized Con-transfer claim here.",
+        "proof_strategy": "Collect the established axiom-by-axiom derivations: each uses finitely many ZF instances and is a syntactic derivation of the displayed relativization. For the semantic statement perform this construction inside M and use satisfaction/relativization agreement for each fixed standard formula; external Separation on M forms L^M. Transitivity and equality of hierarchy stages below the height give the ordinal assertion. A proof-theoretic Con-transfer theorem requires the effective proof-reduction machinery assigned to SET-12/SET-3 and is not inferred from existence of a CTM.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke \u00a75.3\u20135.5 pp15\u201318; Marks Lemmas 20.5,20.7 and Theorem 20.9 pp87\u201388",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      }
+    ]
   },
   {
     "order": 676,
@@ -21,7 +426,76 @@
     "requires": [
       "the-constructible-hierarchy-and-inner-models"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-first-constructible-levels",
+        "kind": "example",
+        "title": "The first constructible levels",
+        "deps": [
+          "prop-constructible-levels-transitivity-ordinals-and-rank",
+          "def-definable-subsets-of-a-membership-structure"
+        ],
+        "statement": "L_0=empty; L_1={empty}; L_2={empty,{empty}}; L_3=P(L_2); for n<omega, L_n=V_n, hence L_omega=V_omega.",
+        "proof_strategy": "List all subsets at the first three stages. Every subset of a finite set has a finite list of elements, and the disjunction x=a_1 or ... or x=a_k defines it with parameters; use false for empty. Thus Def(A)=P(A) for finite A. Finite induction and the union clauses give the claimed equality, without claiming Def(A)=P(A) for infinite A.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke Lemma 5.6(b) p15",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-canonical-l-well-order-first-stages",
+        "kind": "example",
+        "title": "Computing the canonical order at the first levels",
+        "deps": [
+          "thm-canonical-definable-global-well-order-of-l",
+          "ex-first-constructible-levels"
+        ],
+        "statement": "The canonical order places empty first and {empty} second. At the next stage all old elements precede newly added subsets, with the latter compared by their least definition codes; the comparison depends on the fixed formula enumeration.",
+        "proof_strategy": "Compute L_1 and L_2 from the preceding example. At L_3 the two new sets are {{empty}} and {empty,{empty}}; display their defining formulas x={empty} and x=x over L_2. Their first available formulas in the chosen enumeration, followed by least parameter tuples, determine their relative position. Do not assert a code-independent order of these two.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke Theorem 5.9 proof pp17\u201318",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-definable-subsets-of-omega-are-not-all-subsets",
+        "kind": "example",
+        "title": "Def(omega) is countable while P(omega) is not",
+        "deps": [
+          "def-definable-subsets-of-a-membership-structure"
+        ],
+        "statement": "ZF. Def(omega) has an explicit surjective enumeration by omega, whereas no sequence lists every subset of omega.",
+        "proof_strategy": "Code formulas and finite natural-number parameter tuples by elementary finite-word natural encodings (give the encoding in the proof). Decode malformed codes to empty. Every definable subset occurs. For a purported enumeration f of P(omega), the set {n:n notin f(n)} differs at n from f(n). This concrete diagonal argument uses no choice and no source countability claim for arbitrary A.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke Lemma 5.1(4) specialized to canonically enumerated omega; local diagonal verification",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      }
+    ]
   },
   {
     "order": 679,
@@ -34,7 +508,310 @@
       "reflection-absoluteness-and-elementary-submodels",
       "boolean-algebras-stone-duality-and-the-prime-ideal-theorem"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-dense-open-sets-and-model-generic-filters",
+        "kind": "definition",
+        "title": "Dense open sets and generic filters over a model",
+        "deps": [
+          "def-forcing-preorder-compatibility-and-filter",
+          "thm-ordinals-and-omega-are-absolute-in-transitive-models"
+        ],
+        "statement": "ZF. Use the existing nonempty preorder and upward-closed internally downward-directed filter convention. Open means downward closed. For a transitive ZF model M containing P and its order, a filter G subset P is M-generic if it meets every dense D subset P belonging to M. Countability is external and not part of the definition.",
+        "proof_strategy": "Density and compatibility quantify only over P, so transitivity makes internal and external readings agree. D downward-closure={q:exists d in D q<=d} is dense open when D dense; a filter meeting this closure meets D by upward closure. This proves equivalence with meeting all ground-model dense open sets. No largest condition, generic in M, maximal antichain, or Choice is assumed.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila Forcing Definitions 1.2,1.7,1.9 and Exercise 1.10 pp2\u20134",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-rasiowa-sikorski-with-explicit-choice",
+        "kind": "theorem",
+        "title": "Rasiowa\u2013Sikorski with its choice use exposed",
+        "deps": [
+          "def-dense-open-sets-and-model-generic-filters",
+          "def-axiom-of-choice",
+          "thm-transfinite-recursion"
+        ],
+        "statement": "ZFC. For a nonempty forcing preorder P, a sequence (D_n) of dense subsets, and p in P, a filter G containing p meets each D_n. If an enumeration of P is supplied, the same conclusion has a ZF proof without AC.",
+        "proof_strategy": "For the ZFC branch apply AC to the indexed nonempty sets {q in D_n:q<=r}, (n,r) in omega cross P; explain reindexing from the family formulation if identical sets repeat. The resulting set function chooses the next refinement. Recurse p_0=p, p_(n+1)<=p_n in D_n. Set G={q:exists n p_n<=q}. Reflexivity gives nonemptiness, transitivity gives upward closure, and max of two indices gives an internal common refinement. For the enumerated-P branch replace the choice function by the least enumeration index satisfying the same property. No arbitrary-index choice enters that branch.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila Theorem 1.14 and Corollary 1.15 p4; Marks Lemma 24.6 p99",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-generics-exist-over-countable-transitive-models",
+        "kind": "corollary",
+        "title": "Generics over countable transitive models in ZF",
+        "deps": [
+          "def-dense-open-sets-and-model-generic-filters",
+          "thm-transfinite-recursion"
+        ],
+        "statement": "ZF. Given an external enumeration of a transitive set model M of ZF, P and its order in M, and p in P, an M-generic filter through p exists. Existence of M is an assumption.",
+        "proof_strategy": "Use the enumeration of M to enumerate its dense subsets of P, replacing non-dense entries with P, so no subfamily selection is required. Since P subset M and is nonempty, obtain an enumeration of P by retaining entries in P and replacing the others with p. Choose at each step the least index of a condition below the current one in the next dense set. Recursion and upward closure prove the filter properties exactly as in the explicit construction; this duplicates the elementary argument rather than consuming the AC branch. Internally countable is not substituted for the supplied external enumeration.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila Theorem 1.14 and Corollary 1.15 p4; local least-code ZF refinement",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-forcing-names-and-name-rank",
+        "kind": "definition",
+        "title": "Forcing names and their rank",
+        "deps": [
+          "def-forcing-preorder-compatibility-and-filter",
+          "thm-transfinite-recursion",
+          "thm-recursion-on-well-founded-setlike-relations"
+        ],
+        "statement": "ZF. A P-name is a set of ordered pairs (sigma,p) with p in P and sigma a P-name. Equivalently N_0=empty, N_(alpha+1)=P(N_alpha cross P), N_lambda=union_(beta<lambda)N_beta. Name rank is sup{rank_P(sigma)+1:(sigma,p) in tau}. Use name first, condition second.",
+        "proof_strategy": "Recursion constructs the increasing name hierarchy as sets at every ordinal. A hereditary pair decomposition is tested on the finite descendant closure, so it defines a class. Each subname has smaller ambient membership rank (Kuratowski coding makes it lie along a finite descending membership chain). Thus the subname relation is setlike and well-founded; recursion constructs rank_P. Induction identifies tau in N_alpha iff rank_P(tau)<alpha. Conditions themselves need not have small membership rank; distinguish the two ranks.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Marks Definition 24.1 p97; Karagila Definition 2.1 p6 (pair coordinates reversed here)",
+              "url": "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-forcing-names-and-name-ranks-are-absolute",
+        "kind": "lemma",
+        "title": "Absoluteness of names and their ranks",
+        "deps": [
+          "def-forcing-names-and-name-rank",
+          "thm-ordinals-and-omega-are-absolute-in-transitive-models",
+          "lem-bounded-definitions-of-basic-set-operations"
+        ],
+        "statement": "If M is a transitive ZF model containing P, its names are exactly the actual P-names that belong to M, and rank_P agrees for these names. Equality of internal and external name-stage power sets is not asserted.",
+        "proof_strategy": "For tau in M every decoded pair, its name coordinate and condition coordinate belongs to M. Induct on ambient rank of tau: the hereditary pair test therefore agrees for all descendants. Prove in both models the recursive subname characterization of names, using internal Replacement to bound the ranks of the set of subnames for its converse. Induct again to identify the suprema defining name rank; the predecessor set and ordinal successors/unions are actual. Never infer equality of entire N_alpha from equality of name membership.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Marks Definition 24.1 and following absoluteness paragraph p97",
+              "url": "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-forcing-name-valuation-and-generic-extension",
+        "kind": "definition",
+        "title": "Valuation of names and M[G]",
+        "deps": [
+          "lem-forcing-names-and-name-ranks-are-absolute",
+          "thm-recursion-on-well-founded-setlike-relations"
+        ],
+        "statement": "For any G subset P, val_G(tau)={val_G(sigma):(sigma,p) in tau for some p in G}. For transitive set M containing P define M[G]={val_G(tau):tau in M is a P-name}. No ZF-model assertion for M[G] is part of the definition.",
+        "proof_strategy": "The setlike well-founded subname relation licenses recursion with parameter G. Replacement forms each set of selected predecessor values and the image of the set of names in M. Uniqueness on descendant cones ensures uniform definability. If G is external to M the valuation is performed externally; no claim the valuation function belongs to M.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila Definitions 2.5,2.8 pp6\u20137; Marks Definition 24.2 p97",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-check-names-and-the-canonical-generic-name",
+        "kind": "definition",
+        "title": "Check names without a largest condition",
+        "deps": [
+          "def-forcing-name-valuation-and-generic-extension",
+          "thm-recursion-on-well-founded-setlike-relations"
+        ],
+        "statement": "For nonempty P define check(x)={(check(y),p):y in x,p in P}, and dot G={(check(p),p):p in P}. These are names, and they belong to a transitive ZF ground model when their parameters do. For a largest condition the usual top-only check names have identical values under filters.",
+        "proof_strategy": "Membership recursion gives check(x); Replacement and the set product with P give each value. Induct that every resulting value is a name. Construction within M agrees by uniqueness and bounded pair/union operations. Dot G is a set of name-condition pairs in M by Replacement. This all-conditions convention avoids silently adjoining a top or making check values depend on a top absent from G.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila Definitions 2.2,2.4 p6; Marks proof of Lemma 24.3 p98; local no-top variant",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-check-name-evaluation-and-generic-reconstruction",
+        "kind": "theorem",
+        "title": "Check-name evaluation and reconstruction of G",
+        "deps": [
+          "def-check-names-and-the-canonical-generic-name"
+        ],
+        "statement": "For every nonempty G subset P, check(x)_G=x and (dot G)_G=G. In particular M subset M[G] and G in M[G] when M is a transitive ZF model containing P. The inclusion need not be elementary.",
+        "proof_strategy": "Membership induction gives every check(y) its intended value. Nonemptiness of G supplies a condition for every y in x in the all-conditions name, giving both inclusions. Evaluating dot G then yields exactly its condition labels in G. The names belong to M by their preceding internal construction. An empty G would make every valuation empty, so exclude it explicitly.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila Exercises 2.6\u20132.7 and Proposition 2.9 pp6\u20137; Marks Lemma 24.3 p98",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-generic-extension-transitivity-and-rank-bound",
+        "kind": "theorem",
+        "title": "Transitivity and a valuation rank bound",
+        "deps": [
+          "def-forcing-name-valuation-and-generic-extension",
+          "def-membership-rank-of-a-set"
+        ],
+        "statement": "For transitive ZF ground model M and G subset P, M[G] is transitive, and rank(val_G(tau))<=rank_P(tau) for every name tau. The no-new-ordinals model theorem remains SET-14 scope.",
+        "proof_strategy": "If y in val_G(tau) with tau in M, y is val_G(sigma) for a subname sigma in M by transitivity through its pair coding; hence y in M[G]. For the bound induct on the subname relation. Each contributing value has rank <=rank_P(sigma), so its successor rank is <=rank_P(sigma)+1<=rank_P(tau); take the supremum. Empty values satisfy the empty-supremum case. No forcing theorem or axioms of M[G] are used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila Proposition 2.9 p7; Marks Lemma 24.3 p98",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-names-for-pairs-functions-and-ordinals",
+        "kind": "lemma",
+        "title": "Names for pairs, functions and ordinals",
+        "deps": [
+          "thm-check-name-evaluation-and-generic-reconstruction",
+          "thm-generic-extension-transitivity-and-rank-bound"
+        ],
+        "statement": "For any nonempty G subset P, set names S(T)=T cross P satisfy S(T)_G={tau_G:tau in T}. Iterating this operation produces Kuratowski pair names; a ground-model indexed family of names produces a graph name for a function on the checked domain. For every ground ordinal alpha, check(alpha)_G=alpha.",
+        "proof_strategy": "Evaluate S(T) directly, using G nonempty. Set pairName(s,t)=S({S({s}),S({s,t})}); its value is {{s_G},{s_G,t_G}}. For a ground set I and a family (tau_i) in M form S({pairName(check(i),tau_i):i in I}); its value is exactly {(i,(tau_i)_G):i in I}, so it is a function, with uniqueness from the unique indexed assignment. Replacement in M forms the name. Ordinal names are the check construction, and arbitrary ordinal-valued names are not presumed checked syntactically. This does not claim every external family of values has a name in M.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila Definition 2.3 p6 and Exercises 2.6\u20132.7; explicit graph verification",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-boolean-valued-name-semantics",
+        "kind": "definition",
+        "title": "Boolean-valued semantics for names",
+        "deps": [
+          "def-forcing-names-and-name-rank",
+          "def-complete-boolean-algebra-and-regular-open-sets",
+          "thm-recursion-on-well-founded-setlike-relations"
+        ],
+        "statement": "ZF. For a complete set Boolean algebra B with 0!=1, use B-valued names (zero coefficients allowed). Define ||s in t||=join_(u,b in t)(b meet ||s=u||); ||s=t|| is the meet of ||s subset t|| and ||t subset s||, with ||s subset t||=meet_(u,b in s)(not b or ||u in t||). Boolean connectives use Boolean operations; existential quantifiers use the join of all attained values, as a subset of B. This is formula-by-formula class semantics, not a truth theorem or a uniform truth predicate for V.",
+        "proof_strategy": "Well-definedness is proved in the next lemma, declared as justified_by during authoring. Distinguish B as coefficient algebra from the forcing order B minus {0}; the latter is nonempty only under 0!=1. The joins indexed by a name are set-indexed. The existential clause separates the attained values inside B, not a purported set of all names. Do not import the forcing theorem to define these values.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke Definition 6.27 and recursion discussion pp26\u201327",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-boolean-valued-semantics-is-well-defined",
+        "kind": "lemma",
+        "title": "Well-definedness of Boolean-valued semantics",
+        "deps": [
+          "def-boolean-valued-name-semantics",
+          "def-forcing-names-and-name-rank",
+          "thm-recursion-on-well-founded-setlike-relations"
+        ],
+        "statement": "The atomic Boolean value recursions and every fixed finite formula interpretation have unique values in B, definable from B and their name parameters. Internal completeness means completeness for subsets in the ground model when the construction is performed there.",
+        "proof_strategy": "For a pair of names restrict to the product of their descendant closures and its coordinate-swapped copy; this is a set. Order rank pairs by coordinatewise nonincrease with one strict decrease; a nonempty set has a member with minimal first rank and then minimal second rank, so the relation is well-founded. At each pair define membership and both subset values from lower pairs, then equality from the subset values at the current pair. Compatible restrictions give global definability, avoiding the non-setlike relation on all names of lower rank pairs. Induct on the fixed formula: once the matrix value is definable, Separation on B collects precisely values attained by some name; completeness gives its supremum. No choice of witnesses, mixing lemma, forcing truth, or satisfaction for arbitrary formulas in V is inferred.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke Definition 6.27 and paragraph following it pp26\u201327; local set-cone repair to recursion explanation",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-atomless-generics-are-not-ground-model-elements",
+        "kind": "proposition",
+        "title": "Atomless generic filters are not in the ground model",
+        "deps": [
+          "def-dense-open-sets-and-model-generic-filters"
+        ],
+        "statement": "If M is a transitive ZF model, P in M is atomless (each condition has two incompatible stronger conditions), and G is M-generic, then G notin M. Atomlessness is necessary for this conclusion.",
+        "proof_strategy": "Suppose G in M. Separation in M forms D=P minus G. If p notin G, p itself witnesses density below p. If p in G, split p into incompatible q,r; internal directedness prevents both belonging to G, so one is in D below p. Thus D is dense and belongs to M, but G does not meet D, contradicting genericity. Atomless splitting is pointwise existential and uses no choice function.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila Theorem 1.13 p4; Marks discussion after Lemma 24.6 p99",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      }
+    ]
   },
   {
     "order": 680,
@@ -46,6 +823,77 @@
     "requires": [
       "forcing-orders-names-and-generic-extensions"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-cohen-name-valuation-and-dense-set-meeting",
+        "kind": "example",
+        "title": "Cohen-name valuation and dense-set meeting",
+        "deps": [
+          "lem-names-for-pairs-functions-and-ordinals",
+          "def-dense-open-sets-and-model-generic-filters"
+        ],
+        "statement": "For P=2^(<omega) ordered by extension and M-generic G, c=union G is a total binary sequence. Its graph is the value of the name consisting of (pairName(check(n),check(i)),s) whenever n<length(s) and s(n)=i. It differs from every binary sequence in M.",
+        "proof_strategy": "Internal directedness forces any two strings in G to agree on their common domain. For every n the set of strings of length >n is dense and belongs to M, so c is total. Evaluation of the displayed name gives exactly each bit-pair appearing in a string in G. For f in (2^omega)^M, the set D_f of strings disagreeing with f at some coordinate is in M and dense: extend a string at its next coordinate with the opposite bit. Genericity yields a disagreement, so c notin M. No forcing theorem or cardinal-preservation assertion is used.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila end of Chapter 1 p5 and Definition 2.3 p6; Marks Cohen example p99",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-a-generic-filter-belongs-to-the-ground-model",
+        "kind": "false-statement",
+        "title": "A generic filter belongs to its ground model",
+        "deps": [
+          "prop-atomless-generics-are-not-ground-model-elements",
+          "cor-generics-exist-over-countable-transitive-models",
+          "ex-cohen-name-valuation-and-dense-set-meeting"
+        ],
+        "statement": "False claim, conditional on a given externally countable transitive ZF model M: every generic filter constructed using a forcing in M belongs to M.",
+        "proof_strategy": "Take binary-string Cohen forcing in M. Every string splits by appending 0 and 1, so the preorder is atomless. The countable-model existence theorem supplies a generic G externally; the atomless theorem proves G notin M. Also state the boundary example P={1}: its unique filter {1} lies in M and meets every dense set. Hence do not replace the false claim by the equally unqualified claim that all forcing generics are new.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Karagila Theorems 1.13\u20131.14 p4; one-point forcing boundary",
+              "url": "https://karagila.org/files/Forcing-2023.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-boolean-valued-one-bit-name",
+        "kind": "example",
+        "title": "A one-bit Boolean-valued name",
+        "deps": [
+          "lem-boolean-valued-semantics-is-well-defined",
+          "thm-check-name-evaluation-and-generic-reconstruction"
+        ],
+        "statement": "In the Boolean algebra P({0,1}), take b={0}, e=empty name and t={(e,b)}. Then ||e in t||=b, ||t=empty||=not b, and ||t=t||=1. Evaluation by the principal ultrafilter at 0 gives {empty}; at 1 it gives empty.",
+        "proof_strategy": "The empty meets defining ||e=e|| have value 1. The membership join has sole term b meet 1=b. Equality with empty reduces to not b, since ||e in empty||=0. For self-equality the sole implication is not b or b=1. Each principal filter selects exactly coefficients containing its chosen point; evaluate t directly. This verifies only these finite computations and does not presume a general Boolean truth theorem.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Geschke Definition 6.27 pp26\u201327; local finite Boolean calculation",
+              "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf"
+            }
+          ]
+        }
+      }
+    ]
   }
 ]

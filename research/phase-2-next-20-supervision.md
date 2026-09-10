@@ -42,3 +42,59 @@ No mathematical scaffold readiness or independent review claimed yet.
 at three-second intervals. State 1-scaffold, no blockers. Next: inspect batch
 readiness/source recovery/escalations as they arrive; root remains responsible
 for shared Phase 2 and published-defect reconciliation.
+
+Infrastructure finding: all 14 scaffold worker session policies explicitly
+record network_access=false; batch11 burned six fetch attempts per source
+on sandbox EAI_AGAIN despite successful web-tool reading. Dispatcher now
+passes sandbox_workspace_write.network_access=true only to workspace-write
+roles with web=true, on fresh and resumed launches. Official config reference
+verified; 11 focused dispatch tests pass, including mock process argv for both
+launch paths and unchanged non-source/read-only policies. Current workers
+retain old policy and are allowed to finish; future dispatches receive fix.
+Do not erase source attempts. Batch11 has also escalated an inherited draft
+Mackey supplier and a missing concrete example locator; these need distinct
+mathematical/ownership resolution. Its published findings await root ledger
+reconciliation.
+
+14:26–14:32 UTC checkpoint: all fourteen scaffold dispatches completed. The
+engine holds 1-scaffold at the step1-readiness gate (14:25:04 UTC); no worker
+is in flight. This is a mathematical/source hold, not an engine stall.
+The original20 remain selected. Missing actual prerequisites include FA22/23
+for characteristic functions/Carleson and the Lie spine proposed in
+phase-2-next-20-proposed-lie-prerequisite-spine.md. Owner question for the nine
+additional Lie pairs is pending; no scope expansion has been launched.
+Large-cardinal preparation/PMEA placement and complete spectral convergence
+also need substantive reconciliation. Existing draft items on published
+spectral-sequence/Boolean-algebra/blocks pages are publication mismatches,
+not established mathematical defects or permission to publish. Exact IDs
+and audit boundaries remain in batch7/13/11 notes.
+
+Root reconciled the published findings into the canonical ledger, including
+Green choice interfaces, Cayley edge orientation, four finite-Weyl consumers,
+three cohomological extension-map interfaces and Doob–Dynkin choice selection.
+Existing interpolation, partitions and simulator findings were cross-linked
+without duplicate classification rows. Index checked: 2364 unique rows,
+U-P1438/U-C14/A-R187/A-P158 plus567 bounded clears. No published items changed.
+
+Exact-URL historical byte/hash receipts recovered for23 source occurrences
+across completed batches (7 earlier +16 now), recorded in source-fetch-reuse.
+Original attempts and source_resolution history remain. No new fetch attempts,
+source-reading claims or readiness approvals were created by receipt reuse.
+Sources lacking actual byte/hash receipts were not promoted from old
+web-only stamps. Current-source source_resolution= dropped alternatives are
+left intact. Future network-enabled dispatch fix is committed9d9186ac0.
+
+14:38 UTC local reconciliation: updated Green-family and RL14 generation/string
+prose; added existing SET9 page prerequisite and three SET23 declaration fixes.
+Canonical plan validation and batch14 manifest policy pass. Step1 check remains
+540 items/84 ready/456 held. The Green worked-example attribution was replaced
+with a concrete generated S3/characteristic2 leaf and exact trace proof, retaining
+its original item ID/purpose. See local-reconciliation receipt; no readiness
+escalation is cleared. Git diff whitespace check passes.
+
+Further Fourier prerequisite assessment: declared closure includes sixteen
+empty FA pairs plus selected Locally Convex Spaces, and two already-authored
+draft prerequisite pairs (relative Hahn–Banach and complex Riesz–Thorin).
+This is a page-level closure, not yet a certified minimum actual proof spine.
+Do not confuse their draft publication state with a need to reauthor them,
+and do not launch the full closure under the pending nine-pair Lie proposal.

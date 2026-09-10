@@ -12,7 +12,237 @@
       "orthonormal-bases-parseval-and-fourier-series",
       "measures-and-their-basic-properties"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-kolmogorov-analytic-partial-sum-maximal-function",
+        "kind": "definition",
+        "title": "Kolmogorov analytic partial sum maximal function",
+        "deps": [
+          "def-period-one-fourier-coefficients-partial-sums-and-convolution"
+        ],
+        "statement": "On T=R/Z with measure dx, for P=sum(k=0..d) a_k exp(2 pi i k x), put A_n P=sum(k=0..min(n,d)) a_k e_k and A_*^d P=max(0<=n<=d)|A_n P|. An analytic polynomial has no negative frequencies.",
+        "proof_plan": "Finite sums are continuous. Their finite absolute maximum is continuous; coefficients are unique by integrating products of characters. This definition neither asserts a maximal inequality nor changes symmetric S_N.",
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "4.2.1; convention adaptation"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Source fetch verification unresolved. Finite definition and direct prerequisite read; no dependency on the recorded maximal operator."
+      },
+      {
+        "id": "lem-kolmogorov-simultaneous-phase-approximation",
+        "kind": "lemma",
+        "title": "Kolmogorov simultaneous phase approximation",
+        "deps": [
+          "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "thm-fejer-uniform-convergence-for-continuous-periodic-functions"
+        ],
+        "statement": "If 1,x_1,...,x_r are Q-linearly independent, then for any unimodular z_j and epsilon>0, some positive integer L has |e_L(x_j)-z_j|<epsilon for all j.",
+        "proof_plan": "Proposed local proof: use a product of nonnegative continuous one-variable bumps supported in the prescribed arcs. Approximate each uniformly by Fejer polynomials and multiply; constant coefficient is the product of the positive integrals. Average each nonconstant character along m(x_1,...,x_r), m=1..M: geometric sums tend to zero by rational independence. Uniform approximation transfers the positive limiting average to the bump product, so one positive m hits all arcs. This avoids assuming multidimensional Fourier inversion.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Lemma 4.2.2, printed pp.255–256"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Full transitive audit of the Fejer uniform-convergence supplier and finite product approximation remains outstanding; source stamp failed. Do not treat this proposed strategy as a proved Kronecker theorem."
+      },
+      {
+        "id": "lem-kolmogorov-atomic-kernel-maxima",
+        "kind": "lemma",
+        "title": "Kolmogorov atomic kernel maxima",
+        "deps": [
+          "lem-kolmogorov-simultaneous-phase-approximation",
+          "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel",
+          "prop-countable-subsets-of-rn-are-lebesgue-null",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. For arbitrarily large n there are t_j in ((j-1)/n,j/n), with 1,t_1,...,t_n Q-independent, such that B_L(x)=n^(-1)sum_j D_L(x-t_j) has sup(L>=1)|B_L(x)|>=c log n almost everywhere, for an absolute c>0.",
+        "proof_plan": "Choose each t_j outside the rational span of previous choices, using countability and positive interval measure. For x outside span_Q(1,t_1,...,t_n), the differences and 1 are independent. Apply the phase lemma with target i exp(-pi i(x-t_j)) sign(sin(pi(x-t_j))). Each sine numerator then has the sign of its denominator and magnitude >1/2. The near-uniform spacing bounds the reciprocal-distance sum below by c n log n, including the end intervals. Define B_L as a finite average, avoiding an unprovided general convolution-of-measures theorem. AC is a sufficient hypothesis for choosing the family used at subsequent stages; finite choice alone suffices for fixed n.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Lemma 4.2.3, printed pp.256–258"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Necessary published countability/null-set proof closure has not been fully audited; no current byte stamp. Retained exact local phase supplier; source’s rational linear span is not called a field.",
+        "axiom_use": "Sufficient AC hypothesis covers inherited countable-choice measure/complex-Lp/density interfaces. Finite tile selections can use a fixed ordering. Missing analytic suppliers remain escalated; this axiom declaration does not supply them."
+      },
+      {
+        "id": "lem-kolmogorov-block-polynomial-with-large-partial-sums",
+        "kind": "lemma",
+        "title": "Kolmogorov block polynomial with large partial sums",
+        "deps": [
+          "def-kolmogorov-analytic-partial-sum-maximal-function",
+          "lem-kolmogorov-atomic-kernel-maxima",
+          "lem-fejer-kernel-is-a-positive-approximate-identity",
+          "thm-continuity-from-below-for-measures",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. For each H>0 and 0<eta<1 there is an analytic polynomial P with ||P||_1=1 and m{A_*P>H}>1-eta. Also retain the stronger source interface: a nonnegative symmetric polynomial g, ||g||_1=1, with m{sup_N|S_N g|>H}>1-eta.",
+        "proof_plan": "Choose n with c log n>4H+4. Continuity from below selects a finite maximal cutoff R outside an exceptional set <eta. Set g=n^(-1)sum_j F_M(x-t_j); positivity and integral one are exact. For fixed R, the Fejer multiplier 1-|k|/(M+1) makes all S_r g uniformly close to B_r, r<=R. For d=degree(g), put P=e_d g: its spectrum is [0,2d] and norm stays one. Identity S_r g=e_{-d}(A_{d+r}P-A_{d-r-1}P), with A_{-1}=0, shows max|A P|>=max|S g|/2. Preserve the nonnegative symmetric clause for the published recorded-result replacement; the analytic clause alone would not replace it.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Lemmas 4.2.3–4.2.4, printed pp.256–259; analytic conversion is local"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Source arguments inspected, but transitive prerequisites and independent treatment remain incomplete. This strengthens the design interface to retain the actual published nonnegative symmetric contract; no Recorded result is a dependency."
+      },
+      {
+        "id": "lem-separated-frequency-blocks-do-not-disturb-earlier-partial-sum-maxima",
+        "kind": "lemma",
+        "title": "Separated frequency blocks do not disturb earlier partial sum maxima",
+        "deps": [
+          "def-kolmogorov-analytic-partial-sum-maximal-function",
+          "def-period-one-fourier-coefficients-partial-sums-and-convolution"
+        ],
+        "statement": "For an analytic polynomial P supported in [0,d], Q=e_m P is supported in [m,m+d] and A_{m+r}Q=e_m A_r P. If earlier polynomials have degree <m, Q does not alter their earlier partial sums. The design additionally demands that frequency translation make completed Q uniformly small on earlier good sets.",
+        "proof_plan": "The frequency support and partial-sum identity follow coefficient by coefficient, with m larger than all earlier degrees. The additional design clause is NOT established: |e_m P|=|P| for every m, so translation cannot reduce completed magnitude. Proposed repair keeps the useful separation identity and obtains completed-block control independently from amplitude scaling plus summability of integrals (or Markov with explicitly budgeted exceptional sets). Owner must reconcile the false clause; do not certify the stated full design claim.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "FR-4K design item 3 versus Grafakos 4.2.7–4.2.13"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Mathematical escalation: the magnitude-smallness clause attributed to frequency translation is false without an independent smallness hypothesis. P=1 witnesses that no shift makes it <1/2 on a nonempty set."
+      },
+      {
+        "id": "lem-kolmogorov-gliding-hump-series-converges-in-lone",
+        "kind": "lemma",
+        "title": "Kolmogorov gliding hump series converges in lone",
+        "deps": [
+          "lem-kolmogorov-block-polynomial-with-large-partial-sums",
+          "lem-separated-frequency-blocks-do-not-disturb-earlier-partial-sum-maxima",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+          "thm-monotone-convergence-for-the-integral",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. Choose analytic blocks P_j with norm one and large internal maxima, summable a_j>0, disjoint increasing positive frequency intervals for Q_j=a_j e_{m_j}P_j, and summable exceptional measures, so sum Q_j converges in L1(T).",
+        "proof_plan": "After repair of SH, take a_j=2^(-j), heights j/a_j and eta_j=2^(-j). Use AC to select countably many block polynomials; choose m_j by least integers beyond previous supports. Sum ||Q_j||_1<=1; MCT on sum |Q_j| gives a finite a.e. dominating function and a complex integrable pointwise sum, with L1 tail <=sum_{k>j}a_k. Alternatively use the published complex completeness theorem, retaining its choice hypothesis. No Parseval is needed.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Grafakos 4.2.7–4.2.10, printed pp.259–260; proposed separated adaptation"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Blocked by SH’s unresolved false clause, incomplete proof-closure audit, and sources. Do not assume the absent Fourier Parseval/Riesz-Fischer page."
+      },
+      {
+        "id": "lem-kolmogorov-block-maxima-diverge-off-a-null-limsup-set",
+        "kind": "lemma",
+        "title": "Kolmogorov block maxima diverge off a null limsup set",
+        "deps": [
+          "lem-kolmogorov-gliding-hump-series-converges-in-lone",
+          "lem-kolmogorov-block-polynomial-with-large-partial-sums",
+          "lem-separated-frequency-blocks-do-not-disturb-earlier-partial-sum-maxima",
+          "thm-first-borel-cantelli",
+          "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC and the preceding block construction. Off a null set, the symmetric partial sums of its L1 limit are unbounded.",
+        "proof_plan": "First prove coefficient identification: |hat(f-sum_{j<=J}Q_j)(k)|<=||f-sum Q_j||_1. Disjoint supports identify every coefficient and show later blocks vanish at a current internal cutoff. Earlier blocks contribute sum_{i<j}Q_i(x), bounded by sum_i|Q_i(x)|<infinity a.e. Borel-Cantelli for bad block sets gives internal maxima >=j eventually. Thus |S_{m_j+r_j} f|>=j-sum_i|Q_i| tends to infinity along cutoffs. All frequencies of f are nonnegative, so the one-sided cutoffs equal symmetric ones.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "FR-4K boundary obligation; compare Grafakos 4.2.11–4.2.13"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Conditional strategy is explicit, but GL/SH remain escalated; Borel-Cantelli’s full transitive proof closure remains unaudited. Source stamp failed."
+      },
+      {
+        "id": "thm-kolmogorov-lone-fourier-series-diverges-almost-everywhere",
+        "kind": "theorem",
+        "title": "Kolmogorov lone fourier series diverges almost everywhere",
+        "deps": [
+          "lem-kolmogorov-gliding-hump-series-converges-in-lone",
+          "lem-kolmogorov-block-maxima-diverge-off-a-null-limsup-set",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. There exists a complex-valued f in L1(T) with sup_N |S_N f(x)|=infinity for almost every x, using normalized measure and e_k(x)=exp(2 pi i kx).",
+        "proof_plan": "Take the L1 limit constructed in GL and apply AE after its coefficient identification. Claim a.e. unbounded symmetric sums; do not claim divergence everywhere or silently require a real-valued analytic limit. A real-valued witness would require its own extraction/construction if added.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "Theorem 4.2.1, printed pp.255–261"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Actual GL -> AE proof path remains escalated, hence the existence theorem is not ready. No use of recorded Kolmogorov remarks."
+      }
+    ]
   },
   {
     "order": 288.14017,
@@ -24,7 +254,66 @@
     "requires": [
       "kolmogorov-block-construction-and-almost-everywhere-divergence"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-one-finite-kolmogorov-frequency-block",
+        "kind": "example",
+        "title": "One finite kolmogorov frequency block",
+        "deps": [
+          "def-kolmogorov-analytic-partial-sum-maximal-function"
+        ],
+        "statement": "For P=1+e_1 and m=5, Q=e_5P=e_5+e_6 has support {5,6}; A_4Q=0, A_5Q=e_5, A_6Q=Q, and |Q|=|P|.",
+        "proof_plan": "Expand the two coefficients and compute cutoffs directly. This is a finite indexing example, not a large-maximal-height witness and not evidence for the disputed smallness clause.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "FR-4K finite indexing convention"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Finite calculation complete, but source-backed page remains escalated; no claim that this polynomial satisfies arbitrary block height.",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-summable-exceptional-measures-in-the-kolmogorov-induction",
+        "kind": "example",
+        "title": "Summable exceptional measures in the kolmogorov induction",
+        "deps": [
+          "thm-first-borel-cantelli"
+        ],
+        "statement": "If m(E_j)<=2^(-j) for j>=1, then m(limsup E_j)=0.",
+        "proof_plan": "The geometric sum is one; apply the measure version of Borel-Cantelli. Independence is unnecessary. For a direct check m(union_{j>=J}E_j)<=2^(1-J), hence the limsup has measure zero.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Grafakos, Classical Fourier Analysis, third edition",
+              "url": "https://www.math.stonybrook.edu/~bishop/classes/math638.F20/Grafakos_Classical_Fourier_Analysis.pdf",
+              "locator": "FR-4K exceptional-set leaf"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Source gate unresolved. Direct Borel-Cantelli proof read, but transitive supplier audit incomplete.",
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
   },
   {
     "order": 288.140175,
@@ -38,7 +327,428 @@
       "schwartz-space-and-the-plancherel-theorem",
       "the-maximal-function-and-lebesgue-differentiation"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "def-carleson-operator-and-measurable-linearisation",
+        "kind": "definition",
+        "title": "Carleson operator and measurable linearisation",
+        "deps": [
+          "def-fourier-transform-on-l-one-of-rn",
+          "def-schwartz-space-and-its-seminorms"
+        ],
+        "statement": "For Schwartz f on R with hat f(xi)=integral f(x)e^(-2 pi i x xi)dx, set C_R f(x)=sup_a |integral_{-infinity}^a hat f(xi)e^(2 pi i x xi) dxi|. A finite rational cutoff maximum is linearised by a measurable selector a(x), with a measurable unimodular testing phase when dualising.",
+        "proof_plan": "Continuity in cutoff makes the rational supremum equal to the full supremum for Schwartz input. Enumerate rationals, break finite-maximizer ties by least index; selector sets are Borel since the integrals are continuous. Extend beyond Schwartz only after uniform estimates. Include the phase when converting an absolute pairing estimate into a positive test.",
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lacey, Carleson’s Theorem: Proof, Complements, Variations",
+              "url": "https://arxiv.org/pdf/math/0307008",
+              "locator": "Sections 1–2, equations 1.3, 2.7"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Both named external definitions are planned but absent on disk. Measurable extension to arbitrary Lp is not supplied by the definition."
+      },
+      {
+        "id": "def-carleson-tiles-wave-packets-and-tile-order",
+        "kind": "definition",
+        "title": "Carleson tiles wave packets and tile order",
+        "deps": [
+          "def-schwartz-space-and-its-seminorms",
+          "thm-fourier-inversion-on-schwartz-space"
+        ],
+        "statement": "A tile s=I_s x omega_s consists of half-open dyadic intervals with |I_s||omega_s|=1. Write omega_s- and omega_s+ for its halves. For fixed Schwartz phi with smooth Fourier support strictly inside a small neighborhood of zero, set phi_s=Mod_{c(omega_s-)} Tr_{c(I_s)} Dil^2_{|I_s|} phi. Set s<=t when I_s subset I_t and omega_t subset omega_s. A tree lies below a designated top.",
+        "proof_plan": "Choose a nonzero smooth compactly supported Fourier bump and obtain phi by Schwartz inversion. L2 normalization uses |I|^(-1/2); frequency support lies in the lower half. Inclusion proves reflexivity, antisymmetry and transitivity. Define +trees by upper halves containing the top frequency and -trees by lower halves. No claim that arbitrary packets are orthogonal.",
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lacey, Carleson’s Theorem: Proof, Complements, Variations",
+              "url": "https://arxiv.org/pdf/math/0307008",
+              "locator": "Sections 2–3"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Schwartz inversion, its normalization, and bump existence suppliers are unbuilt/unreviewed. The dyadic order alone is elementary; full packet definition not ready."
+      },
+      {
+        "id": "lem-wave-packet-model-dominates-the-linearised-carleson-operator",
+        "kind": "lemma",
+        "title": "Wave packet model dominates the linearised carleson operator",
+        "deps": [
+          "def-carleson-operator-and-measurable-linearisation",
+          "def-carleson-tiles-wave-packets-and-tile-order",
+          "thm-plancherel",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. Uniform bounds for all finite linearised tile sums, uniformly in translated/dilated grids, imply the corresponding continuous Carleson bounds on Schwartz input.",
+        "proof_plan": "Required proof: establish the bounded fixed-scale packet averaging operator; average in translation and modulation to obtain the half-line projection up to a computed nonzero factor, then average logarithmic dilation to eliminate grid dependence. Pass through finite truncations with uniform estimates before exhaustion. Check negative-frequency projection and selector orientation after the 2 pi conversion.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lacey, Carleson’s Theorem: Proof, Complements, Variations",
+              "url": "https://arxiv.org/pdf/math/0307008",
+              "locator": "Proposition 2.12 through Lemma 2.18"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "No complete local averaging/limiting proof audited; thm-plancherel has no item file. The model estimate is not itself the continuous theorem.",
+        "axiom_use": "Sufficient AC hypothesis covers inherited countable-choice measure/complex-Lp/density interfaces. Finite tile selections can use a fixed ordering. Missing analytic suppliers remain escalated; this axiom declaration does not supply them."
+      },
+      {
+        "id": "def-density-size-and-tree-count-for-carleson-tiles",
+        "kind": "definition",
+        "title": "Density size and tree count for carleson tiles",
+        "deps": [
+          "def-carleson-tiles-wave-packets-and-tile-order",
+          "def-carleson-operator-and-measurable-linearisation"
+        ],
+        "statement": "For finite S, testing set E and selector N, define chi_I(x)=|I|^(-1)(1+|x-c(I)|/|I|)^(-kappa), kappa large. Density is sup over s in S and t>=s of integral_{E intersect {N in omega_t}} chi_{I_t}. Size is sup over +trees T subset S of (|I_T|^(-1)sum_{s in T}|<f,phi_s>|^2)^(1/2). A displayed forest has count=sum_T |I_T|.",
+        "proof_plan": "Fix kappa, admissible tops and +tree convention explicitly. Use ancestor supremum in density to control spatial tails; unnormalised chi would introduce the wrong length factor. Count belongs to a specified tree decomposition, not a unique intrinsic decomposition.",
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lacey, Carleson’s Theorem: Proof, Complements, Variations",
+              "url": "https://arxiv.org/pdf/math/0307008",
+              "locator": "Section 3, equations 3.4–3.10"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Depends on unready packet/selector definitions; exact ancestor convention must stay aligned with selection proofs."
+      },
+      {
+        "id": "lem-carleson-density-selection",
+        "kind": "lemma",
+        "title": "Carleson density selection",
+        "deps": [
+          "def-density-size-and-tree-count-for-carleson-tiles",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. A finite S of density delta>0 decomposes into trees plus a remainder of density <=delta/2, with sum of top lengths <=C delta^(-1)|E|.",
+        "proof_plan": "Select maximal density witnesses; partition tails into dyadic annuli. For witnesses of tail depth k, disjoint selection on enlarged intervals yields a packing cost O(2^(-ck)delta^(-1)|E|). Sum over k, with kappa large. Prove finite stopping and preserve the ancestor density convention; empty and zero-density families need no selection.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lacey, Carleson’s Theorem: Proof, Complements, Variations",
+              "url": "https://arxiv.org/pdf/math/0307008",
+              "locator": "Lemma 3.6; section 4"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Complete tail-enlargement packing argument not locally verified; do not mark the lemma ready from this outline.",
+        "axiom_use": "Sufficient AC hypothesis covers inherited countable-choice measure/complex-Lp/density interfaces. Finite tile selections can use a fixed ordering. Missing analytic suppliers remain escalated; this axiom declaration does not supply them."
+      },
+      {
+        "id": "lem-carleson-size-selection",
+        "kind": "lemma",
+        "title": "Carleson size selection",
+        "deps": [
+          "def-density-size-and-tree-count-for-carleson-tiles",
+          "def-carleson-tiles-wave-packets-and-tile-order",
+          "thm-plancherel",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. For a finite family of size sigma>0, choose trees with total top length <=C sigma^(-2)||f||_2^2, leaving size <=sigma/2.",
+        "proof_plan": "Greedily select large-energy +trees with the source frequency tie-break, then remove their full trees. Prove strong disjointness of selected +trees. Expand ||sum <f,phi_s>phi_s||_2^2; equal-frequency terms use spatial decay, nested-frequency terms use strong disjointness and decay outside earlier tops. Pair with f to obtain the packing estimate.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lacey, Carleson’s Theorem: Proof, Complements, Variations",
+              "url": "https://arxiv.org/pdf/math/0307008",
+              "locator": "Lemma 3.9; section 5"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Missing Plancherel prerequisite and unfinished almost-orthogonality audit. Published finite Bessel alone is inadequate: these packets need not be orthonormal.",
+        "axiom_use": "Sufficient AC hypothesis covers inherited countable-choice measure/complex-Lp/density interfaces. Finite tile selections can use a fixed ordering. Missing analytic suppliers remain escalated; this axiom declaration does not supply them."
+      },
+      {
+        "id": "lem-carleson-single-tree-estimate",
+        "kind": "lemma",
+        "title": "Carleson single tree estimate",
+        "deps": [
+          "def-density-size-and-tree-count-for-carleson-tiles",
+          "def-carleson-tiles-wave-packets-and-tile-order",
+          "cor-centered-hardy-littlewood-maximal-operator-is-l-p-bounded",
+          "thm-plancherel",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. For a finite tree T the absolute bilinear tile contribution is <=C density(T) size(T)|I_T|, for |g|<=1_E.",
+        "proof_plan": "Partition R into maximal dyadic J with 3J containing no tree time interval. Sum small-tile tails geometrically. For large tiles show the selector support in J has measure <=C density |J| via an ancestor tile. The -tree is estimated directly; for +trees demodulate, identify the truncated sum with a frequency cutoff of the full packet sum, dominate by smooth maximal averages, and use L2 maximal boundedness and packet energy.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lacey, Carleson’s Theorem: Proof, Complements, Variations",
+              "url": "https://arxiv.org/pdf/math/0307008",
+              "locator": "Lemma 3.11; section 6"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Precise smooth-frequency cutoff/maximal comparison and packet energy proof not fully audited; unavailable Plancherel. Published maximal theorem closure also requires a choice audit.",
+        "axiom_use": "Sufficient AC hypothesis covers inherited countable-choice measure/complex-Lp/density interfaces. Finite tile selections can use a fixed ordering. Missing analytic suppliers remain escalated; this axiom declaration does not supply them."
+      },
+      {
+        "id": "lem-carleson-forest-summation-gives-restricted-weak-ltwo",
+        "kind": "lemma",
+        "title": "Carleson forest summation gives restricted weak ltwo",
+        "deps": [
+          "lem-carleson-density-selection",
+          "lem-carleson-size-selection",
+          "lem-carleson-single-tree-estimate",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. For every finite linearised tile family, |<C_{S,N} f,g>|<=C||f||_2 |E|^(1/2) for |g|<=1_E; constants do not depend on S or N.",
+        "proof_plan": "Normalize ||f||_2=1 and |E| in (1/2,1] using dyadic dilation. Alternate density and size selections; each level has count <=C2^(2n), density <=C min(1,2^(-2n)), and size <=C2^(-n). Tree estimates give level contribution <=C min(2^n,2^(-n)); sum over integers. Undo normalization, retain testing phase, and derive weak L2 via level-set testing. No strong L2 conclusion here.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lacey, Carleson’s Theorem: Proof, Complements, Variations",
+              "url": "https://arxiv.org/pdf/math/0307008",
+              "locator": "Section 3, equations 3.13–3.16"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "All three core selection/tree suppliers are escalated. Verify the simultaneous decomposition rather than multiplying unrelated independent bounds.",
+        "axiom_use": "Sufficient AC hypothesis covers inherited countable-choice measure/complex-Lp/density interfaces. Finite tile selections can use a fixed ordering. Missing analytic suppliers remain escalated; this axiom declaration does not supply them."
+      },
+      {
+        "id": "lem-carleson-signed-tree-weak-one-one-estimate",
+        "kind": "lemma",
+        "title": "Carleson signed tree weak one one estimate",
+        "deps": [
+          "def-carleson-tiles-wave-packets-and-tile-order",
+          "thm-plancherel",
+          "thm-hardy-littlewood-maximal-inequality-for-balls",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. For finite +tree T and arbitrary signs, the signed packet projection has the localized weak (1,1) estimate needed in Lacey (7.11), uniformly in the signs and T.",
+        "proof_plan": "Necessary local supplier: prove kernel size and first-variable/second-variable smoothness from packet decay and separated frequency scales; prove its L2 bound from almost-orthogonality; then carry out the localized Calderon-Zygmund decomposition to obtain the weighted tail norm in (7.11). State the exact tail weight and localization before use. This is a proof obligation, not an appeal to later FR-8.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lacey, Carleson’s Theorem: Proof, Complements, Variations",
+              "url": "https://arxiv.org/pdf/math/0307008",
+              "locator": "Section 7.2, equation 7.11"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Substantial unmet localized CZ estimate: exact weighted statement and complete proof still need verification. Proposed local placement is before HU on this A page; escalate a split if local proof cannot fit, never cite later FR-8.",
+        "axiom_use": "Sufficient AC hypothesis covers inherited countable-choice measure/complex-Lp/density interfaces. Finite tile selections can use a fixed ordering. Missing analytic suppliers remain escalated; this axiom declaration does not supply them."
+      },
+      {
+        "id": "lem-hunt-exceptional-set-and-distribution-estimates",
+        "kind": "lemma",
+        "title": "Hunt exceptional set and distribution estimates",
+        "deps": [
+          "lem-carleson-forest-summation-gives-restricted-weak-ltwo",
+          "lem-carleson-signed-tree-weak-one-one-estimate",
+          "lem-carleson-density-selection",
+          "lem-carleson-size-selection",
+          "lem-carleson-single-tree-estimate",
+          "thm-hardy-littlewood-maximal-inequality-for-balls",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. For measurable E,F of finite positive measure, a major subset F-prime subset F of measure >=|F|/2 satisfies a uniform finite-model pairing estimate C min(|E|,|F|)(1+|log(|E|/|F|)|), sufficient for restricted weak (p,p) bounds for every 1<p<infinity.",
+        "proof_plan": "Normalize |E| near one. For small |F|, use F-prime=F and density count including |F|. For large |F| remove {M1_E>C/|F|}; use weak (1,1) to lose at most half of F, sum inside-exceptional tiles by tails, and use size <=C/|F| outside. Derive the outside-size bound using SW, random signs and the subtree square-function distribution bootstrap in 7.10–7.16. Check general testing phases and complex indicators, then extract restricted weak estimates.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lacey, Carleson’s Theorem: Proof, Complements, Variations",
+              "url": "https://arxiv.org/pdf/math/0307008",
+              "locator": "Section 7.1–7.2, Proposition 7.1, Lemma 7.10"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Source is an outline at the CZ input; SW and finite-sign square-function comparison require complete arguments. Do not substitute ordinary interpolation for this step.",
+        "axiom_use": "Sufficient AC hypothesis covers inherited countable-choice measure/complex-Lp/density interfaces. Finite tile selections can use a fixed ordering. Missing analytic suppliers remain escalated; this axiom declaration does not supply them."
+      },
+      {
+        "id": "lem-carleson-restricted-weak-interpolation",
+        "kind": "lemma",
+        "title": "Carleson restricted weak interpolation",
+        "deps": [
+          "lem-hunt-exceptional-set-and-distribution-estimates",
+          "thm-layer-cake-formula-for-l-p-powers",
+          "def-sublinear-operator-weak-and-strong-type-p-q",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. If the uniformly linearised finite model operators are restricted weak type (r,r) and (s,s), with 1<r<p<s<infinity, they are strong type (p,p), uniformly in the selector and finite family.",
+        "proof_plan": "Prove the restricted-type interpolation theorem needed here using simple-function level decompositions and distribution estimates, including complex phases and extension by density. Choose r and s straddling the requested p. The published weak-(1,1)/strong-infinity Marcinkiewicz theorem has the wrong hypotheses and is not a dependency.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lacey, Carleson’s Theorem: Proof, Complements, Variations",
+              "url": "https://arxiv.org/pdf/math/0307008",
+              "locator": "Lacey section 7 opening interpolation step"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "New local interpolation supplier required; full proof not completed. Riesz-Thorin for linear strong endpoints would also not discharge restricted weak hypotheses.",
+        "axiom_use": "Sufficient AC hypothesis covers inherited countable-choice measure/complex-Lp/density interfaces. Finite tile selections can use a fixed ordering. Missing analytic suppliers remain escalated; this axiom declaration does not supply them."
+      },
+      {
+        "id": "thm-carleson-maximal-operator-is-strong-ltwo",
+        "kind": "theorem",
+        "title": "Carleson maximal operator is strong ltwo",
+        "deps": [
+          "lem-wave-packet-model-dominates-the-linearised-carleson-operator",
+          "lem-carleson-forest-summation-gives-restricted-weak-ltwo",
+          "lem-hunt-exceptional-set-and-distribution-estimates",
+          "lem-carleson-restricted-weak-interpolation",
+          "thm-plancherel",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. The one-sided real-line Carleson maximal operator extends boundedly to complex L2(R).",
+        "proof_plan": "Apply IN with r<2<s to uniform finite linearised operators after HU. Transfer model bounds by MO. Extend from Schwartz using density and maximal control, constructing a measurable representative through countable cutoffs. AC is a sufficient assumption for the inherited completeness/density selections; no minimal-strength claim.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lacey, Carleson’s Theorem: Proof, Complements, Variations",
+              "url": "https://arxiv.org/pdf/math/0307008",
+              "locator": "Lacey section 7; Remark 8.7"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Reordered after HU and IN to avoid the false weak-L2-to-strong-L2 implication. Missing external Plancherel and incomplete local Hunt/interpolation/transfer proofs block readiness.",
+        "axiom_use": "Sufficient AC hypothesis covers inherited countable-choice measure/complex-Lp/density interfaces. Finite tile selections can use a fixed ordering. Missing analytic suppliers remain escalated; this axiom declaration does not supply them."
+      },
+      {
+        "id": "lem-carleson-real-line-to-torus-transfer",
+        "kind": "lemma",
+        "title": "Carleson real line to torus transfer",
+        "deps": [
+          "def-carleson-operator-and-measurable-linearisation",
+          "lem-wave-packet-model-dominates-the-linearised-carleson-operator",
+          "lem-hunt-exceptional-set-and-distribution-estimates",
+          "lem-carleson-restricted-weak-interpolation",
+          "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "thm-fourier-inversion-on-schwartz-space",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. Uniform real-line Carleson Lp bounds for 1<p<infinity imply the symmetric Fourier partial-sum maximal Lp bound on T with normalized Haar measure.",
+        "proof_plan": "Required local transfer: apply the real-line estimate to a trigonometric polynomial times a slowly varying Schwartz cutoff. At half-integer cutoffs, isolate each lattice frequency away from the cutoff boundary; control leakage as dilation tends to infinity. Integrate over many periods and divide by their number before passing to the limit. First fix a finite set of integer cutoffs; then exhaust it monotonically and use polynomial density. Track the two one-sided projections producing symmetric sums.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Fremlin, Measure Theory, volume 2",
+              "url": "https://www1.essex.ac.uk/maths/people/fremlin/chap28.pdf",
+              "locator": "Fremlin section 286 torus conclusion; exact sublemma still to locate"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Complete periodisation argument and exact source locator not yet verified. This is an explicit missing proof obligation, not a named de Leeuw theorem used without proof.",
+        "axiom_use": "Sufficient AC hypothesis covers inherited countable-choice measure/complex-Lp/density interfaces. Finite tile selections can use a fixed ordering. Missing analytic suppliers remain escalated; this axiom declaration does not supply them."
+      },
+      {
+        "id": "thm-carleson-hunt-maximal-inequality-on-the-torus",
+        "kind": "theorem",
+        "title": "Carleson hunt maximal inequality on the torus",
+        "deps": [
+          "lem-hunt-exceptional-set-and-distribution-estimates",
+          "lem-carleson-restricted-weak-interpolation",
+          "lem-wave-packet-model-dominates-the-linearised-carleson-operator",
+          "lem-carleson-real-line-to-torus-transfer",
+          "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "def-axiom-of-choice"
+        ],
+        "statement": "Assume AC. For every 1<p<infinity, ||sup_{N>=0}|S_N f|||_{Lp(T)}<=C_p||f||_{Lp(T)} for all complex f in Lp(T), with normalized measure.",
+        "proof_plan": "Use HU and IN for the chosen finite p, MO for the real-line estimate, and PE for symmetric torus sums. Extend polynomial estimates in Lp and use countably many continuous coefficient functionals to identify each finite S_N. Preserve strict lower endpoint and do not assert an L-infinity bound. This A page ends at the maximal estimate; published FR-5 owns the convergence implication.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lacey, Carleson’s Theorem: Proof, Complements, Variations",
+              "url": "https://arxiv.org/pdf/math/0307008",
+              "locator": "Lacey section 7; Fremlin section 286"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "PE, IN and HU remain escalated; the missing real-line Fourier prerequisite is actual proof debt. Do not import recorded Carleson-Hunt or published conditional FR-5 results into this proof.",
+        "axiom_use": "Sufficient AC hypothesis covers inherited countable-choice measure/complex-Lp/density interfaces. Finite tile selections can use a fixed ordering. Missing analytic suppliers remain escalated; this axiom declaration does not supply them."
+      }
+    ]
   },
   {
     "order": 288.1401775,
@@ -50,6 +760,91 @@
     "requires": [
       "carleson-hunt-time-frequency-theorem"
     ],
-    "items": []
+    "items": [
+      {
+        "id": "ex-two-comparable-and-two-incomparable-carleson-tiles",
+        "kind": "example",
+        "title": "Two comparable and two incomparable carleson tiles",
+        "deps": [
+          "def-carleson-tiles-wave-packets-and-tile-order"
+        ],
+        "statement": "Tiles s=[0,1)x[0,1) and t=[0,2)x[0,1/2) satisfy s<=t. Tiles u=[0,1)x[0,1) and v=[1,2)x[0,1) are incomparable.",
+        "proof_plan": "Check each rectangle has area one. Check time containment and reversed frequency containment for s,t. Neither half-open time interval of u,v contains the other. The example uses only the interval-order clause, not wave-packet orthogonality.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lacey, Carleson’s Theorem: Proof, Complements, Variations",
+              "url": "https://arxiv.org/pdf/math/0307008",
+              "locator": "Lacey sections 2–3, tile-order convention"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Elementary verification complete, but the combined supplying tile definition remains escalated.",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-balancing-density-and-size-levels-in-the-carleson-sum",
+        "kind": "example",
+        "title": "Balancing density and size levels in the carleson sum",
+        "deps": [],
+        "statement": "The two-sided series sum(n in Z) min(2^n,2^(-n)) equals 3.",
+        "proof_plan": "The n=0 term is 1. For positive n the sum of 2^(-n) is 1 by the finite geometric identity and its limit; negative n contributes the same 1. This is only the numerical summation, not a proof that a forest satisfies the level estimates.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lacey, Carleson’s Theorem: Proof, Complements, Variations",
+              "url": "https://arxiv.org/pdf/math/0307008",
+              "locator": "Lacey section 3, equation 3.16"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Finite geometric argument understood; source verification remains unresolved. No escalated forest theorem is assumed in this arithmetic leaf.",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "rem-carleson-hunt-does-not-include-the-lone-endpoint",
+        "kind": "remark",
+        "title": "Carleson hunt does not include the lone endpoint",
+        "deps": [
+          "thm-kolmogorov-lone-fourier-series-diverges-almost-everywhere",
+          "thm-carleson-hunt-maximal-inequality-on-the-torus",
+          "def-axiom-of-choice"
+        ],
+        "statement": "The all-L1 endpoint is excluded by the proposed earlier Kolmogorov unboundedness theorem; this is an orientation leaf, not a new maximal theorem.",
+        "proof_plan": "Once KT is proved, its witness shows the symmetric maximal operator need not be finite a.e. on L1. Do not use this remark as a supplier and do not consume the recorded Kolmogorov item.",
+        "proof_strategy": "not-applicable",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Lacey, Carleson’s Theorem: Proof, Complements, Variations",
+              "url": "https://arxiv.org/pdf/math/0307008",
+              "locator": "Boundary of Lacey section 7"
+            }
+          ]
+        },
+        "construction_status": "escalated",
+        "unresolved_obligations": "Both theorem suppliers remain escalated. This cross-pair mention stays in the same batch; the B page’s plan requires only its own A page, so operator reconciliation of any additional logical page edge is required."
+      }
+    ]
   }
 ]

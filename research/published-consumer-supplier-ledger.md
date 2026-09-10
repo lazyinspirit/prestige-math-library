@@ -4,9 +4,151 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1441, U-C 8, A-R 187, A-P 154. The
+Current classifications: U-P 1438, U-C 14, A-R 187, A-P 158. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Doob–Dynkin choice-interface finding — 2026-09-11
+
+Batch 3 read the complete published theorem and reported its proof step 2.1;
+root independently read the whole current target. `thm-doob-dynkin-lemma`
+simultaneously chooses a Borel lift A_q for every rational threshold, but
+neither its statement nor its dependencies declares countable choice.
+This is a confirmed proof assumption defect, classified U-C pending a full
+repair audit, not a counterexample to factorization. The rational-intersection
+construction supplies the right-continuity needed in step 3.1; monotonicity
+alone would not suffice, but that is not a second defect here.
+
+Repair with existing `def-countable-choice` (or explicitly stronger
+`def-axiom-of-choice`), retaining the choice-free forward implication and
+identifying the countable selection; alternatively give a fully justified
+choice-free construction. No new Phase 2 pair is needed. Actual new consumers
+are the regular-conditional-kernel factorization lemma, standard-Borel
+disintegration and measurable-conditioning corollary in batch 3. These are
+escalated scaffolds, not published repair evidence. See
+`phase-2-next-20-batch-3.notes.md`, Published defect handoff. No published file
+was changed; this is not an independent repair judgment.
+
+## Reconfirmed actual prerequisite findings — 2026-09-11
+
+Batch 5 confirms the existing Marcinkiewicz interpolation entry: the arbitrary
+measure-space Tonelli invocation and missing tail-integrability estimate
+affect the actual new single-tree estimate through the Hardy–Littlewood
+strong-Lp corollary. The existing simple-function/MCT repair preserves arbitrary
+measure spaces; the new Fourier scaffolds are not proofs of that repair.
+Batch 9 confirms the existing coordinate-ball cover, locally finite shrinking
+and smooth partition-of-unity choice-contract entries at the exact selections
+listed in its Published actual-prerequisite debt section. They affect general
+connection existence, not the metric-supplied Koszul construction. Batch 12
+confirms the existing `def-efficient-universal-simulation-with-clock` joint
+time/space proof gap; its replacement theorem remains escalated. Existing
+classifications remain unchanged and no duplicate index rows are created.
+
+## Green-correspondence prerequisite findings — 2026-09-11
+
+Source evidence: `phase-2-next-20-batch-11.notes.md`, Published findings and
+its exact prerequisite hashes. Root read the complete two target files and
+confirmed their current published status; no item edited and no independent
+judgment claimed.
+
+- `def-relative-projectivity` — U-C, newly indexed. Its H=1 paragraph explicitly
+  assumes AC to choose an arbitrary-dimensional basis, but the declared deps
+  omit `def-axiom-of-choice`. The exact supplier is already published. Repair
+  that declaration while retaining the assumption and finite-dimensional
+  distinction. No Phase 2 supplier or pair is required. This is a confirmed
+  declaration defect, not a false relative-projectivity definition.
+- `thm-krull-schmidt-for-finite-dimensional-kg-modules` — U-P, newly indexed
+  from the existing chain-condition impact list. Its L1 invokes
+  `thm-composition-series-iff-noetherian-and-artinian` without exposing that
+  supplier's converse DC assumption. This is a potential inherited-interface
+  concern; finite-dimensional length and Fitting stabilization have direct
+  bounded-dimension proofs. Recommended audit/repair route: write that finite
+  dimension induction and stabilization explicitly, retaining choice-free
+  scope; alternatively qualify the exact stronger supplier use with AC and
+  `def-axiom-of-choice`. No pending Phase 2 supplier. Do not infer a false
+  Krull–Schmidt theorem or a whole-closure audit from this finding.
+
+## Hyperbolic and finite-Weyl scaffold audit findings — 2026-09-11
+
+These are focused prerequisite audits by the named scaffold workers, serially
+reconciled by root. They are not independent judge verdicts or full closure
+audits. Published bytes remain unchanged. Exact source reading and strategies:
+`phase-2-next-20-batch-6.notes.md` and `phase-2-next-20-batch-10.notes.md`.
+
+- `thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree`
+  — new U-C. Root also read the complete target. Proof 1.2 uses
+  g_(j+1)g_j^(-1) for right-multiplication edges {g,gs}; the required label is
+  g_j^(-1)g_(j+1). The edge a→ab produces aba^(-1) under the printed formula,
+  not the basis letter b. Repair the oriented labels and ordered telescoping,
+  then use published `thm-reduced-words-form-the-free-group` and
+  `thm-normal-form-for-the-word-quotient-model`; no Phase 2 supplier needed.
+  The new `lem-hg-toolkit-free-cayley-tree-from-reduced-words` is scaffolded/ready,
+  not authored or published, and does not close this defect.
+- `thm-the-root-set-is-a-reduced-crystallographic-root-system` — U-P→A-P.
+  The batch10 full-target review found unsupplied rank-one complete
+  reducibility/classification in 2.1/3.1; proportional roots also require a
+  separate Cartan-zero-weight case. Exact planned/unbuilt DG suppliers:
+  `thm-weyls-complete-reducibility`, `thm-finite-dimensional-representations-of-sl-two`,
+  `thm-root-sl-two-triple`, `thm-root-string-property`, and
+  `thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system`.
+  Prove the rank-one/root-system chain before the published consumer cutover.
+- `thm-finite-dimensional-simple-modules-are-classified-by-dominant-highest-weights`
+  — U-P→A-P. F1/F2 and 3.1 assume unique simple highest-weight existence and
+  finite dimension for dominant labels; the three declared definitions do not
+  prove them. Required planned/unbuilt DG-32 supplier:
+  `thm-highest-weight-classification-of-finite-dimensional-irreducible-representations`,
+  with its highest-vector, integrability, PBW survival, finite-dimensionality
+  and unique-quotient lemmas. Preserve the finite-type hypotheses.
+- `lem-weyl-invariant-cartan-polynomials-extend-to-g-invariants` — U-P→A-P.
+  F2/2.1 import unitriangular characters. Exact selected supplier
+  `lem-highest-weight-characters-are-unitriangular-in-weyl-orbit-sums` is now
+  scaffolded/escalated and unpublished, pending the DG highest-weight chain.
+  Repair with that supplier, degreewise polarization and dominant-lattice
+  density after prerequisites are proved; no circular use by its new supplier.
+- `thm-enveloping-algebra-is-free-over-its-center` — U-P→A-P. F1/2.1–3.1 import
+  harmonic separation and filtered lifting. Exact selected suppliers:
+  `thm-kostant-harmonic-decomposition-of-the-symmetric-algebra`
+  (scaffolded/escalated) and
+  `lem-filtered-freeness-lifts-from-associated-graded-algebras`
+  (scaffolded/ready), both unpublished. Use PBW symmetrization and those
+  suppliers; give specified lifts or declare AC for simultaneous choices.
+  The new filtered lemma is not blocked by this consumer's debt.
+
+Source routes for the Lie repairs: Etingof 18.757 complete notes §§12–13
+and Björner–Brenti §§1.3–1.4, 2.2, with the precise limitations in batch10's
+report. No complete reading of the unresolved regular-sequence or harmonic
+complement proof is asserted. The pending DG prerequisite build is a separate
+execution decision; these published defects remain open regardless of it.
+
+## Cohomology extension-map prerequisite findings — 2026-09-11
+
+Batch8 full written-interface audit and source comparison:
+`phase-2-next-20-batch-8.notes.md`, Published defects. These are three newly
+indexed U-C targets, pending repair audit; no published content changed and
+no independent judgment claimed.
+
+`lem-the-cohomology-universal-coefficient-extension-map`: proof 2.1 omits
+well-definedness under changing psi by a map restricted from Z_(n-1). With a
+cycle projection pi, the required identity is
+(psi+g|B)d-psi d = delta(g pi_(n-1)); the converse restricts a primitive to Z.
+Arbitrary-rank freeness/projectivity and the balanced Ext invocation also need
+an explicit AC/supplied-resolution contract. Existing published suppliers:
+`lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces`,
+`thm-free-modules-are-projective-with-choice-boundary`, `def-axiom-of-choice`,
+and `def-ext-via-a-projective-resolution-of-the-first-variable`, or an explicit
+balanced-Ext system. Repair the earlier HA argument locally using these
+interfaces. The selected `lem-singular-uct-extension-from-cycle-projections`
+is scaffolded/escalated, not published, and must not become a forward premise
+of the earlier HA lemma. Source actually read by batch8: Miller §27,
+Theorem 27.1 full proof, printed pp.73–75, especially p.74's extension Z→C.
+
+`thm-universal-coefficient-theorem-for-cohomology-over-a-pid` and
+`thm-the-cohomology-universal-coefficient-sequence-splits-nonnaturally` use that
+extension map and inherit the actual well-definedness gap. They state AC but
+omit direct `def-axiom-of-choice` dependencies. Repair the supplier, propagate
+the exact contracts and then recheck quotient/splitting formulas. No new
+Phase 2 prerequisite pair is needed. The selected topological UCT strategy
+supplies its own correct extension map and does not assume these defects away.
 
 ## Published boundary-label repair — 2026-09-10
 
@@ -27397,11 +27539,11 @@ This index retains the **2185 distinct published item IDs in the initial
 classification reference pool**, plus **5 newly identified published supplier
 items from U-C19**, **1 new 6c remark finding**, **1 Step-9 repaired definition**,
 **3 HG-P published prerequisite repairs**, **1 diagram-boundary consumer finding**,
-and **16 subsequent frontier-supervision findings**, plus **135 UC34 supplier findings**, plus **4 newly indexed Step3b Tor findings**, plus **2 Step3b real-integrability findings**, plus **2 recovered HG continuity repair rows**, plus **1 resolution-dependent Tor definition repair**, plus **1 sequence-space proof-interface candidate**, for **2357 indexed items**. It is not a census of defective items or a
+and **16 subsequent frontier-supervision findings**, plus **135 UC34 supplier findings**, plus **4 newly indexed Step3b Tor findings**, plus **2 Step3b real-integrability findings**, plus **2 recovered HG continuity repair rows**, plus **1 resolution-dependent Tor definition repair**, plus **1 sequence-space proof-interface candidate**, plus **2 Green-correspondence prerequisite findings**, plus **1 Cayley-tree proof finding**, plus **3 cohomology extension-map findings**, plus **1 Doob–Dynkin choice finding**, for **2364 indexed items**. It is not a census of defective items or a
 claim that every supplier later cited by an audit is a defect candidate.
 The publication census, checked 2026-09-10 from item front matter, has
-**15930 published items**. All 2357 indexed IDs are published;
-**13573 published items remain outside this index** and require census
+**15930 published items**. All 2364 indexed IDs are published;
+**13566 published items remain outside this index** and require census
 reconciliation. This is a status census, not a mathematical audit of those
 outside-index items.
 The initial extraction also contained
@@ -27410,14 +27552,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1441 | Evidence/role reconciliation incomplete; not a defect verdict. |
-| U-C | Unaudited and confirmed defective items | 8 | Confirmed mathematical or prerequisite defect; repair audit pending. |
+| U-P | Unaudited and potentially defective items | 1438 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-C | Unaudited and confirmed defective items | 14 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 154 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 158 | Recorded direct review and an unresolved item-specific repair. |
 
 567 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1790 items and the expanded reference pool contains 2357 unique items.
+1797 items and the expanded reference pool contains 2364 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28097,6 +28239,10 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `thm-enveloping-algebra-is-free-over-its-center` | Batch10 full-target audit: harmonic decomposition and filtered lifting premises; exact selected suppliers respectively scaffolded/escalated and scaffolded/ready, unpublished. See Hyperbolic and finite-Weyl scaffold audit findings — 2026-09-11 and batch6/10 reports. |
+| `lem-weyl-invariant-cartan-polynomials-extend-to-g-invariants` | Batch10 full-target audit: unitriangular character premise; exact selected supplier scaffolded/escalated, unpublished. See Hyperbolic and finite-Weyl scaffold audit findings — 2026-09-11 and batch6/10 reports. |
+| `thm-finite-dimensional-simple-modules-are-classified-by-dominant-highest-weights` | Batch10 full-target audit: highest-weight existence/finite-dimensionality assumed in F1/F2; exact DG32 classification and nine local suppliers planned/unbuilt. See Hyperbolic and finite-Weyl scaffold audit findings — 2026-09-11 and batch6/10 reports. |
+| `thm-the-root-set-is-a-reduced-crystallographic-root-system` | Batch10 full-target audit: unsupplied sl2/root-string chain and proportional-root case; exact DG29/30 suppliers planned/unbuilt. See Hyperbolic and finite-Weyl scaffold audit findings — 2026-09-11 and batch6/10 reports. |
 | `lem-complete-remetrisation` | Root 2026-09-11 full target/used-interface audit: L3/L8 omit supplier CC qualifications; replace converse use in 2.5 by the supplied reciprocal-sequence contradiction and restrict fact rows to valid directions. Existing published suppliers suffice, no Phase 2 pair. Evidence: research/phase-2-next-20-published-remetrisation-audit.md. |
 | `lem-open-subspace-complete-remetrisation` | Root 2026-09-11 full target/all three direct suppliers read: stale F3 equivalence plus unwritten metric compatibility/denominator/Cauchy-limit arguments in 4.1–5.1. Complete local distance-reciprocal estimates recorded; existing published metric/real suppliers suffice, no Phase 2 pair. Evidence: research/phase-2-next-20-published-remetrisation-audit.md. |
 | `cex-strict-contraction-without-a-fixed-point` | Root 2026-09-10 full target/choice-supplier review: L2 and proof 1.1 use sequentially closed implies closed without supplier CC qualification. Replace with explicit radius (1-x)/2 for x<1, then published closed-implies-complete claim 2. No pending Phase 2 supplier; actual counterexample remains sound. Evidence: research/phase-2-next-20-published-metric-choice-audit.md. |
@@ -28261,6 +28407,12 @@ owner's scan policy.
 
 | Published item | Exact prerequisite debt at classification |
 |---|---|
+| `thm-doob-dynkin-lemma` | Batch3/root full target reading 2026-09-11: rational Borel lifts selected simultaneously without a choice contract. Existing def-countable-choice or def-axiom-of-choice suffices; no new pair. See Doob–Dynkin choice-interface finding. |
+| `thm-the-cohomology-universal-coefficient-sequence-splits-nonnaturally` | Batch8 2026-09-11 confirmed extension-map well-definedness/choice-contract debt; exact local earlier HA suppliers and repair identity recorded in Cohomology extension-map prerequisite findings and phase-2-next-20-batch-8.notes.md. New topological supplier is scaffolded/escalated, never a forward repair premise. No new Phase 2 pair. |
+| `thm-universal-coefficient-theorem-for-cohomology-over-a-pid` | Batch8 2026-09-11 confirmed extension-map well-definedness/choice-contract debt; exact local earlier HA suppliers and repair identity recorded in Cohomology extension-map prerequisite findings and phase-2-next-20-batch-8.notes.md. New topological supplier is scaffolded/escalated, never a forward repair premise. No new Phase 2 pair. |
+| `lem-the-cohomology-universal-coefficient-extension-map` | Batch8 2026-09-11 confirmed extension-map well-definedness/choice-contract debt; exact local earlier HA suppliers and repair identity recorded in Cohomology extension-map prerequisite findings and phase-2-next-20-batch-8.notes.md. New topological supplier is scaffolded/escalated, never a forward repair premise. No new Phase 2 pair. |
+| `thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree` | New confirmed wrong quotient order in cycle labels; actual normal-form proof requires v^(-1)w. Existing published suppliers suffice; no Phase 2 pair. Root full target read. See Hyperbolic and finite-Weyl scaffold audit findings — 2026-09-11 and batch6/10 reports. |
+| `def-relative-projectivity` | Batch11/root 2026-09-11: explicit AC basis paragraph lacks direct def-axiom-of-choice dependency. Published supplier exists; preserve stated assumption. Confirmed declaration defect, repair audit pending; no Phase 2 pair. See Green-correspondence prerequisite findings and phase-2-next-20-batch-11.notes.md. |
 | `def-c-zero-and-ell-infinity` | REOPENED2026-09-10: Step3b-b full actual definition reading, confirmed by root: complex scalar triangle inequality and homogeneity have no declared complex convention/modulus supplier. Prior LUB repair remains valid. Add earlier published rem-real-and-complex-normed-space-convention and lem-complex-conjugation-and-modulus-laws, preserve choice-free construction, then targeted checks and canonical sync. No unpublished Phase2 supplier. Live sequential counterexample repaired locally; source report research/phase-2-catchup-24-step3b-b.md. |
 | `lem-normalizing-a-locally-finite-positive-smooth-family` | UC34 supplier reconciliation 2026-09-09: Astra1 DG review and root full target/partition-definition reading: conclusion calls closed supports an open cover for subordination, without openness; actual definition requires an open cover and locally finite SUPPORTS, not merely cozero sets. Confirmed contract/interface wording gap pending full repair audit. Repair by requiring locally finite supports, proving support equality after positive normalization, sum1 and 0<=phi<=1, and state subordination only for a supplied open cover containing supports. Exact suppliers already published: local finite smooth sums, partition definition, reciprocal/composition; no Phase2 pair identified. DG15 imports only valid normalization/support calculations, not faulty stronger terminology. Report research/phase-2-catchup-24-owner-step3-dg-astra.md. |
 | `thm-weak-whitney-proper-embedding-theorem` | UC34 supplier reconciliation 2026-09-09: Root read complete target: L1/step1.1 now consumes repaired finite-dimensional embedding, whose statement explicitly assumes CC, but weak Whitney statement/deps omit it. Generic-projection/null-image route also needs a separate exact interface audit; adding CC alone is not a claimed full repair. DG15 and both repaired manifold-Whitney consumers now use the earlier arbitrary finite-dimensional embedding directly, not this stronger dimension bound. No new Phase2 prerequisite established. |
@@ -28495,6 +28647,7 @@ mathematical repairs. Evidence:
 
 | Published item | Existing evidence section / reconciliation locator |
 |---|---|
+| `thm-krull-schmidt-for-finite-dimensional-kg-modules` | Batch11/root 2026-09-11: potential inherited DC mismatch in finite-length supplier L1. Audit bounded-dimension argument before inferring defect; explicit dimension induction/Fitting stabilization can avoid choice. Existing chain-condition theorem and AC interface published; no new Phase 2 pair. See Green-correspondence prerequisite findings and phase-2-next-20-batch-11.notes.md. |
 | `ex-c0-is-a-banach-space` | Root 2026-09-10 potential proof-interface concern: 3.1 infers closedness from an already supplied convergent sequence; exact ZF bridge absent. Direct given-Cauchy-sequence proof via published ex-ell-infinity-is-a-banach-space and existing epsilon/2 estimate avoids the inference. No pending Phase 2 supplier identified; bounded audit, no false-theorem verdict. Evidence: research/phase-2-next-20-published-sequence-space-audit.md. |
 | `thm-singular-homology-satisfies-homotopy-exactness-and-excision` | UC34 supplier reconciliation 2026-09-09: Astra2 bounded AT10 review: proof1.3 double-mapping-cylinder collapse relative to V lacks written relative homotopies/exact supplier in inspected argument. Incomplete audit candidate, NOT confirmed fatal; refined live degree bridge instead uses elementary S0 augmentation/finite-sum and n0 suspension clauses. No newPhase2 supplier established. Dedicated audit needed; report research/phase-2-catchup-24-owner-step3-at-astra.md. |
 | `thm-euclidean-inverse-function-theorem` | UC34 supplier reconciliation 2026-09-09: Direction-specific impact candidate only after thm-complete-subspace-iff-closed repair: inspect whether complete-implies-closed (CC), closed-implies-complete (ZF), or supplied-sequence clause is used. Not a confirmed defect or semantic audit. Receipt research/uc34-2026-09-09-complete-subspace-astra-3.md; no Phase2 prerequisite identified. |
@@ -29385,7 +29538,6 @@ mathematical repairs. Evidence:
 | `lem-verma-embedding-implies-strong-linkage` | Supplier-to-published-consumer map |
 | `lem-verma-self-extensions-in-category-o-split` | Cross-category Phase-2 roots and their published impact |
 | `lem-veronese-map-well-defined-closed-immersion` | AV-1 draft-page impact partition (Phase 3 only) |
-| `lem-weyl-invariant-cartan-polynomials-extend-to-g-invariants` | Supplier-to-published-consumer map |
 | `prop-an-np-complete-language-in-p-implies-p-equals-np` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `prop-arithmetized-formula-counting-sum` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `prop-basic-value-properties-of-a-complex-character` | finite-averaging-and-character-theory-prerequisites |
@@ -29677,7 +29829,6 @@ mathematical repairs. Evidence:
 | `thm-eilenberg-steenrod-uniqueness-on-all-cw-pairs` | Continuing personal audit: exact examination pool and AT-24 contracts |
 | `thm-eilenberg-steenrod-uniqueness-on-finite-dimensional-cw-pairs` | Continuing personal audit: exact examination pool and AT-24 contracts |
 | `thm-entourage-uniformities-are-generated-by-gauges` | Early-repair direct-consumer inventory — 2026-09-08 |
-| `thm-enveloping-algebra-is-free-over-its-center` | Supplier-to-published-consumer map |
 | `thm-euler-formula-for-connected-plane-graphs` | Scaffold III.4.1 — plane dual dependency |
 | `thm-euler-mascheroni-constant-and-harmonic-asymptotic` | 9.6 Membership and plan drift |
 | `thm-euler-poincare-formula-for-finite-cw-complexes` | Continuing personal audit: exact examination pool and AT-24 contracts |
@@ -29696,7 +29847,6 @@ mathematical repairs. Evidence:
 | `thm-fermat-interior-extremum` | 9.5 Forward order and load-bearing body links |
 | `thm-fibre-dimension-lower-bound` | AV-1 draft-page impact partition (Phase 3 only) |
 | `thm-finite-c-prime-one-sixth-presentations-define-hyperbolic-groups` | HG consumer map |
-| `thm-finite-dimensional-simple-modules-are-classified-by-dominant-highest-weights` | Cross-category Phase-2 roots and their published impact |
 | `thm-finite-measure-l-r-includes-into-l-p-for-p-less-r` | Published Marcinkiewicz interpolation: local repair, no new pair |
 | `thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces` | 0A.2 Exact Phase-3 defects in published content |
 | `thm-finite-supersolvable-groups-are-monomial` | Transitive consumers (166), grouped by home page |
@@ -29907,7 +30057,6 @@ mathematical repairs. Evidence:
 | `thm-the-degree-of-an-irreducible-complex-character-divides-the-group-order` | Transitive consumers (166), grouped by home page |
 | `thm-the-degree-of-an-irreducible-complex-character-divides-the-index-of-the-center` | Transitive consumers (166), grouped by home page |
 | `thm-the-l-p-distance-for-zero-less-p-less-one-is-a-complete-translation-invariant-metric` | Exact direct impact-review queue |
-| `thm-the-root-set-is-a-reduced-crystallographic-root-system` | Cross-category Phase-2 roots and their published impact |
 | `thm-three-definitions-of-uniform-space-are-equivalent` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-three-sat-reduces-to-subset-sum` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `thm-tietze-extension-theorem` | Early-repair direct-consumer inventory — 2026-09-08 |

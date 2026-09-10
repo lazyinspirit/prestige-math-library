@@ -1271,9 +1271,9 @@ Craven, thesis Chapter 2 §§2.1–2.3, printed pp. 18–25.
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
-| `def-green-exceptional-intersection-families` (definition) | For $H\ge N_G(P)$, define the source's subgroup families measuring intersections $P\cap{}^gP$ outside $H$. | States exactly which smaller vertices are discarded. | literature-derived | not-applicable |
+| `def-green-exceptional-intersection-families` (definition) | For $H\ge N_G(P)$, define the source's subgroup families measuring intersections $P\cap{}^gP$ outside $H$. | States exactly which vertices are excluded up to the specified conjugacy; restriction errors need not have smaller order. | literature-derived | not-applicable |
 | `lem-green-mackey-intersections-force-proper-vertices` (lemma) | Mackey summands indexed outside $H$ are relatively projective for subgroups in the exceptional families. | Controls all error summands. | literature-derived | literature-derived |
-| `lem-green-restriction-has-one-distinguished-summand` (lemma) | An indecomposable $kG$-module with vertex $P$ restricts to $H$ with exactly one indecomposable summand of vertex $P$; the others have exceptional smaller vertices. | Constructs the Green correspondent in one direction. | literature-derived | literature-derived |
+| `lem-green-restriction-has-one-distinguished-summand` (lemma) | An indecomposable $kG$-module with vertex $P$ restricts to $H$ with exactly one indecomposable summand of vertex $P$; the others have vertices in the restriction exceptional family, excluded from the distinguished class up to H-conjugacy; their order need not be smaller. | Constructs the Green correspondent in one direction. | literature-derived | literature-derived |
 | `lem-green-induction-has-one-distinguished-summand` (lemma) | Conversely, induction of an indecomposable $kH$-module of vertex $P$ has exactly one $P$-vertex summand. | Constructs the inverse direction. | literature-derived | literature-derived |
 | `lem-green-distinguished-summands-are-mutually-inverse` (lemma) | The two distinguished-summand assignments undo one another up to isomorphism. | Establishes bijectivity, not merely existence. | literature-derived | literature-derived |
 | `thm-green-correspondence-with-exceptional-families` (theorem) | The assignments give the full bijection between the source-specified classes of indecomposable modules for $G$ and $H$. | States Green correspondence with its actual hypotheses. | literature-derived | literature-derived |
@@ -1292,7 +1292,7 @@ result was located in their ranges.
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
-| `ex-green-restriction-summand-with-the-same-vertex` (example) | Work Lassueur–Farrell's explicit distinguished-summand example. | Shows how the unique summand is selected. | literature-derived | literature-derived |
+| `ex-green-restriction-summand-with-the-same-vertex` (example) | Work the explicit characteristic-2 trivial module of $S_3$, restricted to $H=P=\langle(12)\rangle$; compute traces of indices 3, 6 and 2 to identify both vertices and the sole summand. | Shows how the unique summand is selected. | ai-generated | ai-generated |
 | `ex-green-correspondence-for-a-trivial-intersection-subgroup` (example) | Work Saunders's TI-subgroup specialization. | Gives a case where the exceptional families simplify visibly. | literature-derived | literature-derived |
 | `ex-green-correspondence-identity-boundaries` (example) | Verify $P=1$ and $H=G$ under the normalizer hypothesis. | Closes the degenerate cases without weakening the hypothesis. | literature-derived | literature-derived |
 
