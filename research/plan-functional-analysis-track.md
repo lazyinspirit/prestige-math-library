@@ -3049,7 +3049,8 @@ need this pair rather than the metric theorem.
 1. `def-topological-vector-space-for-local-convexity` — joint continuity of
    addition and scalar multiplication; Hausdorffness is stated separately.
 2. `def-locally-convex-topological-vector-space` — a convex zero-neighborhood
-   base and the continuous real/complex scalar-linear dual.
+   base and the continuous real/complex scalar-linear dual. Explicitly use
+   `lem-restriction-of-scalars` claim 1 for the scalar-field vector space.
 3. `lem-balanced-convex-zero-neighborhood-refinement` — symmetric, balanced,
    convex, and closed refinements inside a prescribed zero-neighborhood.
 4. `lem-continuous-gauge-of-an-open-convex-zero-neighborhood` — absorption,
@@ -3062,7 +3063,8 @@ need this pair rather than the metric theorem.
 7. `thm-locally-convex-strict-separation` — a nonempty compact convex set and
    a disjoint nonempty closed convex set have a strict uniform separating gap.
 8. `lem-locally-convex-closures-and-finite-compact-convex-hulls` — closure
-   preserves convexity and finite convex hulls of compact sets are compact.
+   preserves convexity; the convex hull of finitely many compact convex sets
+   is compact (including finite point hulls).
 
 **B page:** `locally-convex-spaces-and-continuous-separation-examples`
 
@@ -3070,8 +3072,10 @@ need this pair rather than the metric theorem.
 2. `ex-locally-convex-separation-by-a-coordinate`.
 3. `cex-convex-maximum-set-need-not-be-a-face` — (x^2) on ([-1,1]).
 
-Teschl §5.1, Bühler--Salamon §§3.1.1--3.1.2, and Hanche-Olsen's complete
-finite-compact-hull argument back these routes.  FA-9 must add
+Teschl §5.1 and Bühler--Salamon §§3.1.1--3.1.2 back these routes.
+For the current run, complete local arguments replace the Hanche-Olsen backing
+after its recorded retrieval budget was exhausted; all mathematical results
+are retained. See `phase-2-next-20-local-convex-source-resolution.md`.  FA-9 must add
 `def-absolute-polar-in-a-normed-dual-pair` before polar compactness, and its
 definitions of extreme points/faces and all general locally convex theorems
 must cite this pair.

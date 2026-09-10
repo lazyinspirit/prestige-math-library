@@ -17,6 +17,9 @@ The supplemental plan validates; the full source/author/review gates remain.
 The RL14 chamber gap is resolved by three local supporting items; finite-Weyl
 and large-cardinal prerequisite gaps, source exceptions and other local
 proof work are not claimed resolved by these two additions.
+Locally convex batch2 source evidence is now resolved by complete local
+alternatives; its prerequisite audit remains held. See
+`phase-2-next-20-local-convex-source-resolution.md`.
 Build completion leaves new content draft pending owner publication.
 
 Local prerequisite resolution: `phase-2-next-20-affine-level-local-resolution.md`.

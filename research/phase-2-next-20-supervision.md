@@ -155,3 +155,25 @@ It confirms no omitted substantial prerequisite under the local metric,
 Gaussian-moment, finite-orthogonal-sum and explicit multiplier arguments.
 No scope expansion, plan edit or owner hold requested by that review.
 This is prerequisite admission evidence, not authored-proof approval.
+
+Continuous supervision resumed at the owner’s request. Separate agent
+`/root/published_defect_audit` runs gpt-5.6-sol at high reasoning and owns
+canonical ledger writes while active. It audits actual published interfaces,
+then broader published content; findings must be deduplicated against the
+entire ledger and unique classification index. Owner explicitly reiterated
+no duplicate findings; auditor instructed to reconcile changes before commits.
+Root owns engine intervention and scaffold/plan reconciliation.
+
+At15:25:57 UTC the supplemental Fourier run remained in1-scaffold with an
+observed live batch1 and no blocker. Original20 remains held,543items/88ready.
+Root resolved batch2’s exhausted Hanche-Olsen backing with four complete
+local alternative arguments, preserving all six attempts and original web
+reading evidence. Source checker:2/3fetch-verified,3/3resolved,one documented
+drop. No result was removed and no retry budget reset. Added an explicit
+restriction-of-scalars claim1 supplier to the local continuous-dual definition
+following the auditor’s interface finding; published files remain unchanged.
+Corrected controlling prose to say finitely many compact CONVEX sets, not
+arbitrary compact sets. Pair readiness stays held for the remaining closure
+review. Receipt:phase-2-next-20-local-convex-source-resolution.md.
+Next: continue exact locally-convex prerequisite review and remaining original
+blockers; inspect Fourier worker progress at the next ten-minute checkpoint.
