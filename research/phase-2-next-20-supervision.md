@@ -283,10 +283,15 @@ The original source PDF re-download at16:27:22 matched prior4572986byte SHA-pref
 Author g completed at16:48:55.399UTC and released batch12. Root then installed the fully authored16-step simulator proof and exact citation/derivation/boundary contract, preserving the item's statement. Root updated its manifest proof provenance/strategy, source reading receipt and page descriptions; archived the prior unresolved draft/decision. Explicit item precheck/render pass, content-policy22/22 and strict contracts22/22 pass. Current owner repaired decision closes the time-proof escalation; batch12 has22/22 current item decisions and current scope. No independent review or publication claim. Gallier/Aspnes source dispositions and external harvesting remain held. Root did not edit the batch until its worker ended.
 
 
-### Supervision checkpoint —17:03 UTC
+### Supervision checkpoint —17:01 UTC
 
 Fourier author completed57/57. Engine author closure wrongly reran scaffold ID mint checks before Step4; fixed stage to retain whole-run manifest-deps and actual item content-policy, with5 passing regression tests and57/57 actual policy pass (57f785e78). Retry passed that gate. Subsequent whole-repo depcheck encountered a valid Unicode escape in another live author page title; root normalized that single title to literal Unicode. Other transient missing draft supplier files can occur while the original authors are writing; do not manufacture supplier stubs or weaken publication checks. Six original author groups remain live; b and g completed.
 
 Root read the complete Chernoff draft and all13 direct dependency files. Resolved Aspnes unavailable-backing hold through its complete seven-step local proof, preserving six failed retrievals, searches and earlier escalation in source_resolution_history. All multiplicative/additive claims and boundaries retained. Log uses only derivative clause. Sol independently confirmed actual MVT/finite-probability used paths are choice-free (18a88d978); derivative alias collision is unrelated ledger debt. Coverage now has only2 Gallier source errors. No full original-source reading or independent judge claim.
 
 Refreshed Carleson owner scope after authorized explicit AC propagation and nonzero packet normalization; same pairs/claims. This removes the global Step3 recording block for all other live authors.
+
+
+### Gallier source alternative resolution —2026-09-10T17:01:49.687241+00:00
+
+Root read all six complete alternative item arguments, the full history predicate/coding definition and direct published recursion, induction and interpreter suppliers. The explicit PR arithmetic and bounded list tests, exact first-halting-history normal form, strict partial compilation, finite specialization and s(q,q) proof resolve the remaining Gallier backing hold without dropping any claim. Original six failures/searches and earlier escalation retained in source_resolution_history. No complete original or recovery-edition reading is claimed. This is operator source closure, with independent mathematical review still required.
