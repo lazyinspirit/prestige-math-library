@@ -43,7 +43,7 @@ import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { itemHashGuard, itemHashJudge, shortHash } from './item-hash.mjs';
 import { parseTerminalResolutions } from './step7-terminal-resolution.mjs';
-import { loadStep7JudgeEvidence, rejectionKey } from './step7-evidence.mjs';
+import { loadStep7JudgeEvidence, rejectionKey, isFrozenStep5CrossRepair } from './step7-evidence.mjs';
 import { permittedNewLemmas } from './step7-new-lemmas.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
@@ -276,6 +276,20 @@ if (publishedRepairsPath && existsSync(resolvePath(publishedRepairsPath))) {
       error('published-repair-group',
         `${publishedRepairsPath}:${index + 1}: group ${record.group} is not a group in ${scopePath}`, record.id);
       continue;
+    }
+    if (record.found_at_stage === '5b-cross') {
+      let inherited = false;
+      try {
+        inherited = isFrozenStep5CrossRepair(record, {
+          run: scope.run,
+          closure: JSON.parse(readFileSync(resolvePath(`research/${scope.run}-step5-closure.json`), 'utf8')),
+          claimsText: readFileSync(resolvePath(`research/${scope.run}-step5-published-claims.jsonl`), 'utf8'),
+          baselineHash: baseline.hashes?.[record.id], currentHash: now[record.id],
+        });
+      } catch { /* Missing or malformed frozen evidence fails below. */ }
+      if (!inherited) error('published-repair-step5-provenance',
+        `${publishedRepairsPath}:${index + 1}: inherited cross-group repair must match frozen Step-5 claims and unchanged pre-Step-7 content`, record.id);
+      continue; // Historical evidence grants no licence for a later edit.
     }
     if (!runItems.has(record.found_via) || scope.by_item?.[record.found_via] !== String(record.group)) {
       error('published-repair-provenance',

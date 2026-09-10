@@ -16,11 +16,29 @@ import {
   fundedPreflightIsFresh,
   seedInitialFatalContexts,
 } from '../../step7-rejudge-cycle.mjs';
-import { readJsonlStrict, rejectionKey, step7AlertId } from '../../step7-evidence.mjs';
+import { readJsonlStrict, rejectionKey, step7AlertId, isFrozenStep5CrossRepair } from '../../step7-evidence.mjs';
 import { terminalEvidence } from '../../step7-terminal-resolution.mjs';
 
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
+
+test('inherited Step-5 cross repairs require frozen claims and cannot license new edits', () => {
+  const record = { kind: 'repaired', found_at_stage: '5b-cross', id: 'thm-published',
+    group: 'a', pre_sha256: 'a'.repeat(64), post_sha256: 'b'.repeat(64) };
+  const claimsText = JSON.stringify({ run: 'demo', id: record.id, group: 'a', pre_sha256: record.pre_sha256 }) + '\n';
+  const context = { run: 'demo', baselineHash: 'b'.repeat(16), currentHash: 'b'.repeat(16), claimsText,
+    closure: { version: 2, run: 'demo', status: 'closed', artifacts: {
+      'research/demo-step5-published-claims.jsonl': createHash('sha256').update(claimsText).digest('hex'),
+    } } };
+  assert.equal(isFrozenStep5CrossRepair(record, context), true);
+  assert.equal(isFrozenStep5CrossRepair(record, { ...context, currentHash: 'c'.repeat(16) }), false);
+  assert.equal(isFrozenStep5CrossRepair(record, { ...context, baselineHash: 'c'.repeat(16) }), false);
+  assert.equal(isFrozenStep5CrossRepair(record, { ...context, claimsText: claimsText + '\n' }), false);
+  assert.equal(isFrozenStep5CrossRepair({ ...record, group: 'b' }, context), false);
+  assert.equal(isFrozenStep5CrossRepair({ ...record, pre_sha256: 'c'.repeat(64) }, context), false);
+  assert.equal(isFrozenStep5CrossRepair({ ...record, found_at_stage: '7-adjudicate' }, context), false);
+  assert.equal(isFrozenStep5CrossRepair(record, { ...context, run: 'other' }), false);
+});
 
 test('the Step-7 paid budget permits exactly one Terra rejudge per repaired item', () => {
   const receipt = {

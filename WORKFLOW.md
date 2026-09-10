@@ -160,6 +160,10 @@ to enter the handoff; their licence, precheck and final published-repair checks
 remain mandatory. New proof-bearing items require their owning contract;
 definitions explicitly marked proof-not-applicable need no new proof contract.
 Contract ownership comes from its explicit `scope`, never textual dependency mentions.
+Inherited Step-5 cross-group published repairs retain their original provenance.
+The Step-7 guard requires their claim file to match the frozen Step-5 receipt
+and their repaired content to remain unchanged from the Step-7 baseline; this
+recognition grants no licence for a new edit or exemption from later certification.
 After fixing an infrastructure failure, the operator may queue a `resume-group`
 request for a stopped owning group; it retains completed decisions and resumes
 owed handoffs. It must not overlap a live writer for that group.

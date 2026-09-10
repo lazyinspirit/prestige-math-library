@@ -19,6 +19,22 @@ export const ADJUDICATION_OUTCOMES = new Set([
 export const rejectionKey = (row) =>
   `${String(row?.id ?? '')}\u0000${String(row?.model ?? '')}\u0000${String(row?.context_sha256 ?? '')}`;
 
+// Recognize an unchanged inherited repair, never license a Step-7 edit.
+export function isFrozenStep5CrossRepair(record, { run, closure, claimsText, baselineHash, currentHash }) {
+  if (record?.kind !== 'repaired' || record.found_at_stage !== '5b-cross'
+    || closure?.version !== 2 || closure.run !== run || closure.status !== 'closed'
+    || !/^[a-f0-9]{64}$/.test(record.post_sha256 ?? '')
+    || baselineHash !== record.post_sha256.slice(0, 16)
+    || currentHash !== baselineHash || typeof claimsText !== 'string') return false;
+  const path = `research/${run}-step5-published-claims.jsonl`;
+  if (closure.artifacts?.[path] !== createHash('sha256').update(claimsText).digest('hex')) return false;
+  try {
+    return claimsText.split(/\r?\n/).filter(Boolean).map(line => JSON.parse(line)).some(claim =>
+      claim.run === run && claim.id === record.id && String(claim.group) === String(record.group)
+      && /^[a-f0-9]{64}$/.test(record.pre_sha256 ?? '') && claim.pre_sha256 === record.pre_sha256);
+  } catch { return false; }
+}
+
 export function readJsonlStrict(path, { allowMissing = true } = {}) {
   const rows = [];
   const errors = [];
