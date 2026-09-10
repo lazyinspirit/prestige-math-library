@@ -38,7 +38,7 @@ export function buildMapping(sources) {
 }
 
 export function remapObligation(value, batchMap) {
-  return value.replace(/\b(reader|refuter|post-reader|post-refuter|authored|authored-page):(\d+):/g,
+  return value.replace(/\b(reader|refuter|post-reader|post-refuter|authored|authored-page|touched|page):(\d+):/g,
     (all, role, batch) => batchMap[batch] ? `${role}:${batchMap[batch]}:` : all);
 }
 

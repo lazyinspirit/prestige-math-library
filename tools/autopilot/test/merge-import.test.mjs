@@ -19,6 +19,8 @@ test('remaps only structural identities, never mathematics or source evidence', 
   assert.deepEqual(remapJson({ batch: 1, ordinal: 1 }, m, 'new'), { batch: 17, ordinal: 1 });
   assert.deepEqual(remapJson({ obligation: 'gate:x', step6_obligation: 'authored:1:thm-x' }, m, 'new', { x: 'new-x' }),
     { obligation: 'gate:new-x', step6_obligation: 'authored:17:thm-x' });
+  for (const role of ['touched', 'page']) assert.equal(
+    remapJson({ obligation: `${role}:1:id` }, m, 'new').obligation, `${role}:17:id`);
 });
 test('composite baseline retains earlier owned changes and missing-new-item evidence', () => {
   const first = { label: 'pre-author', at: 'later', hashes: { x: 'late', y: 'kept', z: 'created' } };

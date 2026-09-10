@@ -368,6 +368,9 @@ Preparation creates namespaced artifacts and a run-local `config.json` with
 only `run` and `stages`. Other configuration, including models and limits,
 still comes from the global configuration. All controls/status calls use
 the new state directory; an explicit conflicting run name is rejected.
+Task generation omits the unreachable initial drift task for imported runs.
+Legacy reader/refuter envelope checksums are rebound to translated containers;
+original source checksums and mathematical carriers remain unchanged.
 
 The merged stage table begins with a machine-verified import checkpoint and
 reruns all canonical Step 5 and 6B gates over the combined frontier before

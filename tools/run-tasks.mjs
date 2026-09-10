@@ -186,8 +186,15 @@ function stageSources() {
 function stageTaskGroups() {
   const src = stageSources();
   const groups = [];
+  const importPath = R('research', `${run}-merge-import.json`);
+  const continuation = existsSync(importPath) && readJson(importPath).run === run
+    && readJson(importPath).authorized_entry === 'post-6b';
   for (const m of src.matchAll(/task:\s*(\[[^\]]*\]|`[^`]*`|'[^']*'|"[^"]*")/g)) {
     const cands = [...m[1].matchAll(/`([^`]*)`|'([^']*)'|"([^"]*)"/g)].map((x) => x[1] ?? x[2] ?? x[3]);
+    // Checkpoint imports never dispatch drift. Its task is generated only by
+    // initial planning, not by the generic templates; do not invent a new
+    // pre-author task merely to satisfy static scanning of the canonical table.
+    if (continuation && cands.every(c => c.endsWith('-alpha-step0-drift.task.md'))) continue;
     if (cands.length) groups.push(cands);
   }
   return groups;

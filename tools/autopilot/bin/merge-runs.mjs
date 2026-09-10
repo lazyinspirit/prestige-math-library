@@ -121,6 +121,16 @@ if (mode === 'verify') {
     const match = file.match(/-step6-scope-(\d+)\.json$/);
     if (!match) continue;
     const scope = JSON.parse(content);
+    if (scope.version === 2) {
+      for (const [field, suffix] of [['reader_report_sha256', `reader-findings-${match[1]}.json`],
+        ['refuter_report_sha256', `refute-${match[1]}.json`]]) {
+        const translated = outputs.get(`research/${run}-${suffix}`);
+        if (!translated) throw new Error(`Missing imported report ${suffix}`);
+        scope[field] = sha(translated);
+      }
+      outputs.set(file, doc(scope));
+      continue;
+    }
     if (scope.version !== 3) continue;
     const baseline = outputs.get(`research/${run}-step6-hash-${match[1]}-pre-6b.json`);
     if (!baseline) throw new Error(`Missing imported baseline for ${file}`);

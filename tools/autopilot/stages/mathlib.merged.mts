@@ -4,9 +4,7 @@ import canonical from './mathlib.mts';
 const verify = (ctx: any) => ['node', 'tools/autopilot/bin/merge-runs.mjs', 'verify', '--run', ctx.run];
 const first = canonical.stages.findIndex(stage => stage.id === '6b-baseline');
 if (first < 0) throw new Error('canonical post-6B continuation is missing');
-export default {
-  ...canonical,
-  stages: [{
+export const stages = [{
     id: '6b-import',
     label: 'verify owner-authorized imported 6B checkpoints',
     units: () => ['all'],
@@ -20,5 +18,6 @@ export default {
         const stage = canonical.stages.find(stage => stage.id === id)!;
         return stage.gates!(ctx).map(gate => ({ ...gate, id: `import-${id}-${gate.id}` }));
       })],
-  }, ...canonical.stages.slice(first)],
-};
+  }, ...canonical.stages.slice(first)];
+export const { batches, alphaGroups } = canonical;
+export default { stages, batches, alphaGroups };
