@@ -1,0 +1,13 @@
+---
+page: "effective-numberings-reductions-resources-and-randomness"
+title: "Effective Numberings, Reductions, Resources, and Randomness"
+status: "draft"
+items: ["def-uniform-asymptotic-time-space-comparison", "def-machine-time-and-space-constructibility", "thm-clocked-universal-simulation-with-time-and-space-bounds", "def-primitive-recursive-functions-by-initial-functions-and-schemes", "lem-fixed-coding-primitive-recursive-arithmetic-and-sequences", "def-kleene-computation-predicate-and-output-map", "lem-fixed-machine-history-predicate-is-primitive-recursive", "thm-kleene-normal-form-for-the-fixed-machine-coding", "def-computable-many-one-reducibility-interface", "def-oracle-turing-reducibility-interface", "def-acceptable-numbering-with-universal-evaluation", "thm-smn-for-the-fixed-acceptable-numbering", "thm-kleene-fixed-point-theorem-for-program-indices", "def-polynomial-time-verifier-and-reduction-interface", "def-probabilistic-polynomial-time-machine-interface", "def-rp-corp-zpp-bpp-and-pp-classes", "def-pairwise-independent-hash-family-interface", "lem-chernoff-bound-for-independent-bernoulli-trials", "thm-schwartz-zippel-over-finite-fields"]
+examples: []
+---
+
+This page fixes the interfaces needed to pass from literal finite programs to numerical computability and from finite random computations to complexity classes. Resource comparisons specify which constants may depend on a program and distinguish an external clock from the work needed to construct one. The universal-simulation theorem constructs a time-efficient buffered interpreter and a separate interpreter that stores only the current configuration, with explicit clock, initialization and boundary accounting.
+
+The independent numbering development gives primitive-recursive list arithmetic, a fully specified finite-history predicate, normal form, reductions, a literal specialization compiler and the program fixed-point theorem. Tuple words, canonical numerals and program indices are distinct encodings, and every compilation preserves partial domains as well as values. The numbering development uses explicit finite program constructions.
+
+The probabilistic development counts finite bit strings. Expected-time zero-error computation uses survival probabilities and a declared nonnegative-series foundation. Affine hashing is proved on this A page before its example. The tail estimates require mutual independence; pairwise independence alone is not substituted. Schwartz–Zippel counts zeros of formal polynomials and explicitly permits a high-degree nonzero polynomial to vanish everywhere as a function. The companion calculations specialize one program and examine two concrete constructions over the field with five elements.

@@ -1,7 +1,7 @@
 # Local time-simulation argument for the owner-held clocked interpreter
 
 Target: `thm-clocked-universal-simulation-with-time-and-space-bounds`, batch12.
-Status: operator's proposed complete time construction, ready for incorporation and independent author/reviewer checking. This note does not change the authored item, its escalation, or the worker-owned contracts. The separate space construction remains separate. No new pair or unavailable mathematical supplier is required by this argument.
+Status: incorporated by root after author g finished at16:48:55UTC. The complete time and separate space constructions are now authored in the existing item, with16 numbered proof steps and a full proof contract. Explicit precheck/rendering, batch22-item content policy and all22 strict proof contracts pass; the owner item decision is repaired and all22 batch12 item decisions are current. Independent review remains required. Source-backing/harvest holds for the batch remain separate. No new pair or supplier ID was added.
 
 Reading: root read the full current target, all six declared direct dependencies, and Arora–Barak Appendix1.A, printed35–38, through its final proof. The source's geometric-buffer construction is the starting point; the integral base, reset-count argument, lazy input, fixed interpreter encoding and clamped-tape compilation below give explicit local details. Reading does not certify the entire transitive dependency closure.
 
@@ -64,4 +64,4 @@ The total valid-input time is O_M(n+log(b+2)+b log(b+2))=O_M(n+b log(b+2)); the 
 
 ## Integration boundary
 
-The formulas above can be authored inline in the existing theorem, without changing its statement or adding a pair. Update the actual proof contract from the incorporated proof, run explicit item checks, and only then resolve the owner-held Step3 item decision. Source fetching and complete source harvesting for the other batch12 obligations remain separate. No current status or independent review is asserted by this research note.
+The formulas above are now authored inline in the existing theorem; its statement is unchanged. The actual proof adds an explicit four-step two-symbol spacing copy so the initial conversion itself uses only left/right moves. Its numerical step labels follow the checker's dependency layers. A bounded implementation check exercised10,680 transitions and checked centre/order/complementary occupancy/reset counts; this supplements the proof and is not independent review or an asymptotic certificate. Prior item/contract/escalation evidence is archived in phase-2-next-20-clocked-simulation-prior-author-escalation.json. Source fetching and complete harvesting for the other batch12 obligations remain separate.
