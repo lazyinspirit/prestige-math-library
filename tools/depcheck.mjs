@@ -82,12 +82,14 @@ function split(src) {
  *  silently loads as "eta X"; `\i` `\l` `\s` are invalid, so the whole file
  *  fails to parse and the renderer — which swallows a malformed item so one bad
  *  file cannot take the site down — drops the item from the library entirely,
- *  with every other gate still green. Every TeX backslash must be doubled. */
+ *  with every other gate still green. Every TeX backslash must be doubled.
+ *  Numeric Unicode escapes are intentional YAML text and remain allowed. */
 function badEscapes(fm, file) {
   for (const line of fm.split(/\r?\n/)) {
     const m = line.match(/^([A-Za-z_]+):[ \t]*"((?:[^"\\]|\\.)*)"[ \t]*$/);
     if (!m) continue;
-    const stray = [...m[2].matchAll(/\\(.)/g)].filter((e) => !'\\"'.includes(e[1]));
+    const stray = [...m[2].matchAll(/\\(.)/g)].filter((e) =>
+      !'\\"'.includes(e[1]) && !/^(?:u[0-9a-fA-F]{4}|U[0-9a-fA-F]{8}|x[0-9a-fA-F]{2})/.test(m[2].slice(e.index + 1)));
     for (const e of stray)
       err('yaml-escape', `${file}: ${m[1]} contains "\\${e[1]}" inside a double-quoted scalar — double the backslash ("\\\\${e[1]}")`);
   }

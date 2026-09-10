@@ -240,7 +240,10 @@ round. Restart adoption includes recorded recovery workers with empty `covers`:
 they add no primary coverage but hold the whole-stage gate until they exit.
 Infrastructure retries are bounded; unchanged mathematical failures hold.
 Step 5 budgets three repairs per gate/item, mechanical fixes first, then disjoint
-groups or a serial writer. Recognized outages can refund a round with 20-minute
+groups or a serial writer. Failures naming only carriers outside the run hold for
+their actual owners; warning inventories do not establish repair ownership.
+Depcheck accepts numeric Unicode escapes in quoted YAML while still detecting
+undoubled TeX backslashes. Recognized outages can refund a round with 20-minute
 backoff. Doctor checks commands/tasks, not mathematical correctness or quotas.
 
 Frontier selection requires strictly more than 95% of each page's same-category

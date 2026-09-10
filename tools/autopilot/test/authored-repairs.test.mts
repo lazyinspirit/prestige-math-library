@@ -48,3 +48,23 @@ test('a repair wave gives one group every overlapping gate and disjoint groups s
     assert.equal(plans[0].label,'gate-batch-2-all','ambiguous ownership needs one serial writer');
   } finally { rmSync(repo, { recursive: true, force: true }); }
 });
+
+test('foreign depcheck errors do not dispatch repair on owned warning subjects', async () => {
+  const repo = mkdtempSync(join(tmpdir(), 'step56-foreign-'));
+  try {
+    mkdirSync(join(repo, 'research'));
+    writeFileSync(join(repo, 'research/r-batch-1.pages.json'), JSON.stringify([
+      { id: 'owned-page', items: [{ id: 'thm-owned' }] },
+    ]));
+    let started = 0;
+    const result = await repairGateBatch({ ctx: { repo, run: 'r' }, stage: { id: '5a-adjudicate' }, round: 1,
+      failure: { id: 'depcheck', liveItems: ['thm-owned', 'thm-foreign'], output:
+        '1 WARNING(s):\n  [orphan] items/thm-owned.md: no home\n\n1 ERROR(s):\n  [b-only] items/thm-foreign.md: depends on ex-foreign\n' },
+      executor: { start() { started++; } } },
+      { alphaGroups: () => [{ label: 'a', covers: ['1'] }], MECHANICAL_REPAIRS: {} });
+    assert.equal(started, 0);
+    assert.match(result?.owner?.reason ?? '', /outside this run/);
+    assert.match(result?.owner?.reason ?? '', /thm-foreign/);
+    assert.doesNotMatch(result?.owner?.reason ?? '', /thm-owned/);
+  } finally { rmSync(repo, { recursive: true, force: true }); }
+});
