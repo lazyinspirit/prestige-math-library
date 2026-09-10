@@ -1,3 +1,17 @@
+# Phase 2 next 20 — batch 5 current repair evidence
+
+The complete Kolmogorov and Carleson local arguments are now authored. The Carleson repairs supply the packet flat-function construction, averaged model reconstruction, size selection, single-tree estimate, forest stopping, localized signed-tree weak(1,1), Hunt square-function bootstrap and major subset, restricted weak interpolation, strong-L2 extension, normalized torus transfer and final all-p theorem. Exact argument evidence is in the `phase-2-next-20-carleson-*-local-proof.md` files and current item contracts. All original results and normalized conventions are retained. No new items or pairs were added by these repairs.
+
+The Kolmogorov unavailable-source backing was owner-resolved using the complete hashed eight-item alternative; all six retrieval failures and the prior resolution remain archived in coverage. Fremlin still has its six retained failures and its exact earlier partial-reading statement; full current alternative evidence is in `phase-2-next-20-carleson-source-alternative-review.json`. That artifact proposes backing disposition only and does not itself waive the source or record an owner verdict. Actual mathematical/source receipts remain with the root and engine.
+
+The arbitrary-measure Marcinkiewicz proof debt remains real but its Euclidean Lebesgue specialization under AC/countable choice and sigma-finiteness is valid, so it does not block the single-tree proof. Fourier suppliers belong to the shared frontier and have actual authored interfaces; historical claims below that they were absent do not describe the current files.
+
+Full batch5 strict contracts27/27, explicit precheck23 proof-bearing items out of27 scoped items, and content policy27/27 pass. These are mechanical/local-author checks, not independent mathematical adjudication. Current pages describe the completed local arguments while retaining draft status.
+
+## Historical Step 1 construction record
+
+The following is preserved as the original construction/source-attempt history. Its item statuses, missing-proof lists and proposed prerequisites are superseded by the current item files, proof contracts, repair evidence and engine receipts; they are not current blockers by themselves.
+
 # Phase 2 next 20 — beta batch 5 construction evidence
 
 Status: ESCALATED; 27 outcomes, zero ready. This is construction evidence, not independent mathematical approval. Owner/operator reconciliation and the full engine gate remain necessary; Step 3 supplies independent review. No published content, selected pair, shared plan, engine state or verdict was edited by this worker.
