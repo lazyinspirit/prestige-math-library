@@ -56,15 +56,51 @@ Three current published items directly declare the proposition:
 - `prop-killing-form-pairs-only-opposite-root-spaces`
 - `def-quadratic-casimir-element`
 
-The second uses nondegeneracy in proof 3.1 to prove nondegeneracy on the Cartan
-subalgebra; the third needs it to choose dual bases. These are bounded impact
-candidates, not three newly confirmed defects. The active draft Kostant
-harmonic definition also needs the nondegenerate form, but draft readiness does
-not change the published classification. No new Phase-2 pair beyond the
-already planned DG repair chain is identified.
+All three were then read at the exact used clauses. The following four
+item-specific dispositions result.
+
+`thm-root-space-decomposition-relative-to-a-cartan-subalgebra`, SHA-256
+`12ecd2166d3741e380653adc0bf2f50bcc5ae4cdabe6c2aa8169cf80a0bf1b64`,
+is newly A-P for an independent supplier gap. Its sole dependency is the
+Killing-form proposition, which supplies neither fact used in proofs 1.1--2.1:
+that the adjoint operators of the Cartan subalgebra commute and are
+simultaneously diagonalizable, and that their common zero eigenspace is exactly
+the Cartan subalgebra. The first is substantial semisimple/Cartan structure.
+For the second, self-normalizing gives the centralizer containment only after
+the Cartan convention and its abelianness have been supplied. No current item
+defines that convention or proves these facts. Etingof §27.2 states the root
+decomposition as a separate proposition; it is not an elementary consequence
+of Killing nondegeneracy alone. Repair from the planned earlier DG Cartan/root
+decomposition chain or include the complete structure argument locally.
+
+`prop-killing-form-pairs-only-opposite-root-spaces`, SHA-256
+`e5676843a11f16ec39e1457cb2bfdd7c976800c2c2b24d753e35956e4a7144f9`,
+is newly A-P through two exact affected branches. Proof 1.1 correctly derives
+orthogonality from invariance. Proof 3.1 then needs both the unsupported full
+root decomposition and the unproved global nondegeneracy of the Killing form
+to conclude nondegeneracy on the Cartan subalgebra. Repair those two suppliers;
+the displayed orthogonality calculation itself needs no change.
+
+`def-quadratic-casimir-element`, SHA-256
+`45b576ec0eaa0513d1f628915c46e65e7a1f9ce21accc5964dd67419ba95b49f`,
+and `lem-the-casimir-element-is-independent-of-dual-bases`, SHA-256
+`1efd71b8963bf50437c4c3a952132fe5f0e6225b86607674b77b7100bf473b62`,
+each already had one U-P census row under the broad Lie Phase-3 repair map.
+Both move to A-P. The definition uses the affected nondegeneracy clause to
+choose dual bases and points forward through `justified_by` to the lemma; the
+lemma depends back on the definition. Move and prove the basis-independence
+lemma first using the nondegenerate bilinear form and the canonical inverse-form
+tensor, then define the multiplication image as the Casimir. This breaks the
+two-item cycle and makes the definition well founded after the Killing-form
+repair. The lemma's tensor argument is otherwise mathematically sound.
+
+The active draft Kostant harmonic definition also needs the nondegenerate form,
+but draft readiness does not create a published classification row. No new
+Phase-2 pair beyond the already planned DG structure chain is identified.
 
 ## Disposition and limits
 
-The existing single U-P row moves to A-P. This is one promotion, with no new
-ID, no duplicate, and no claim that all implicit Lie-theory dependencies or
+The existing Killing-form proposition row remains A-P. This follow-up adds two
+new A-P IDs and moves the two existing Casimir U-P rows to A-P. No duplicate is
+introduced, and no claim is made that all implicit Lie-theory dependencies or
 all downstream uses have been audited.

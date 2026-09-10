@@ -364,15 +364,30 @@ Post-separated-net counts: 2,456 unique published IDs; U-P 1,405, U-C 15, A-R
 187, A-P 180 and 669 bounded clears. The current census leaves 13,474 published
 IDs outside the index.
 
+The exact Killing-form impact follow-up adds A-P rows for the unsupported
+root-space decomposition and the opposite-root pairing proposition that uses
+it together with global nondegeneracy. The root-space theorem's sole dependency
+is the Killing-form proposition and does not supply Cartan simultaneous
+diagonalization or the centralizer identity. Existing U-P rows for the Casimir
+definition and basis-independence lemma move to A-P because they form a forward
+justification/dependency cycle; the definition also first needs repaired
+Killing nondegeneracy for dual bases. The intended DG structure chain remains
+the repair route. Updated exact evidence is in the Killing-form audit file.
+
+Post-Killing-impact counts: 2,458 unique published IDs; U-P 1,403, U-C 15, A-R
+187, A-P 184 and 669 bounded clears. This follow-up adds two IDs and promotes
+two existing rows. The current census leaves 13,472 published IDs outside the
+index.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
    issues reported by the root worker, prioritizing items actually consumed by
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
-   then audit bounded samples of published items outside the 2,456-ID index.
+   then audit bounded samples of published items outside the 2,458-ID index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,474 published items
+No exhaustive discovery claim is authorized while 13,472 published items
 remain outside the index and dependency interfaces remain unaudited.

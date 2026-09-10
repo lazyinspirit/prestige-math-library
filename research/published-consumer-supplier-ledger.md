@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1405, U-C 15, A-R 187, A-P 180. The
+Current classifications: U-P 1403, U-C 15, A-R 187, A-P 184. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -61,6 +61,17 @@ declare it. Three direct published consumers are bounded impact candidates,
 not automatically defective rows. Exact hash, source, consumer IDs and audit
 limits are in `phase-2-next-20-published-killing-form-prerequisite-audit.md`.
 No new index ID or Phase-2 pair is introduced.
+
+The exact impact follow-up adds two A-P items. The root-space decomposition
+assumes simultaneous diagonalizability and the Cartan-centralizer identity,
+although its sole dependency is the Killing-form proposition. The
+opposite-root pairing proposition uses that unsupported decomposition and the
+affected Killing nondegeneracy clause. Two existing Casimir U-P rows also move
+to A-P: the definition and basis-independence lemma form a forward
+`justified_by`/dependency cycle, and the definition first needs the repaired
+nondegenerate form to obtain dual bases. Reorder and prove the canonical
+inverse-form tensor lemma before the definition. The planned DG structure chain
+remains the repair route; no additional pair is identified.
 
 ## Set-theory and collar handoff reconciliation — 2026-09-11
 
@@ -27939,11 +27950,11 @@ No new Phase2 pair; source barriers are not waived.
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,456 unique
+subsequently reconciled published IDs. It currently contains **2,458 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,456 indexed IDs are published; **13,474 published items remain outside this
+2,458 indexed IDs are published; **13,472 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -27952,14 +27963,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1405 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1403 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 15 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 180 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 184 | Recorded direct review and an unresolved item-specific repair. |
 
 669 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,787 items and the expanded reference pool contains 2,456 unique items.
+1,789 items and the expanded reference pool contains 2,458 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28746,6 +28757,10 @@ owner's scan policy.
 | `prop-word-metric-balls-are-finite-exactly-when-the-generating-set-is-finite` | Original-next-20 author-handoff reconciliation 2026-09-11 consolidates two historical matching judge reports and the current handoff. Proof 2.1 says every element of `S union S^(-1)` has length one, false for the identity when it belongs to `S`. Replace this by length at most one; the open radius-two containment and theorem follow, and the finite-generator direction is unaffected. Existing word-length suppliers suffice; no new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-author-handoff-reconciliation.md`. |
 | `thm-collar-neighborhood-theorem` | Boundary/interior topology handoff reconciliation 2026-09-11: after the full target, collar definition and all five declared suppliers were read, proof 2.1 still has no proof or supplier for the load-bearing passage from local collar embeddings to a smooth positive variable width on which the flow map is globally injective with open image. Adapt the earlier published flowout theorem's local defining functions, monotonicity, locally finite positive width and collision argument to the one-sided boundary semiflow, then use local-diffeomorphism openness and rescale the variable strip. Existing published mathematics appears sufficient; no new Phase-2 pair. The live finite-push topology proof does not use this theorem. Exact hash/source/scope: `research/phase-2-next-20-published-set-theory-collar-reconciliation.md`. |
 | `prop-killing-form-is-invariant-and-nondegenerate-on-a-complex-semisimple-lie-algebra` | Original-next-20 finite-Weyl/Kostant prerequisite audit 2026-09-11 promotes the existing U-P row. Proof 1.1 establishes invariance, but proof 2.1 derives nondegeneracy solely by naming Cartan's semisimplicity criterion. Its only declared dependency is the trace-form definition, and no published item proves that load-bearing criterion. Supply and declare the planned earlier DG29 Cartan-criterion/nondegeneracy chain or a complete local proof. Three direct published consumers are bounded impact candidates; no new Phase-2 pair beyond the existing planned repair chain. Exact hash/source/search/scope: `research/phase-2-next-20-published-killing-form-prerequisite-audit.md`; retain the broader Lie Phase-3 repair mapping above. |
+| `thm-root-space-decomposition-relative-to-a-cartan-subalgebra` | Finite-Weyl/Kostant impact audit 2026-09-11: the sole dependency is the Killing-form proposition, but proofs 1.1--2.1 assume the Cartan adjoint operators commute and are simultaneously diagonalizable and that their common zero eigenspace is exactly the Cartan subalgebra. These are substantial Cartan/semisimple structure facts, not supplied by Killing nondegeneracy. Supply the planned earlier DG Cartan/root-decomposition chain or a complete local proof. Exact hash/source/scope: `research/phase-2-next-20-published-killing-form-prerequisite-audit.md`. |
+| `prop-killing-form-pairs-only-opposite-root-spaces` | Finite-Weyl/Kostant impact audit 2026-09-11: proof 1.1's invariance calculation correctly gives orthogonality of nonopposite root spaces, but proof 3.1 uses both the unsupported full root decomposition and affected global Killing nondegeneracy to infer nondegeneracy on the Cartan subalgebra. Repair those two suppliers; retain the sound displayed calculation. No new Phase-2 pair beyond the planned DG chain. Exact hash/scope: `research/phase-2-next-20-published-killing-form-prerequisite-audit.md`. |
+| `def-quadratic-casimir-element` | Finite-Weyl/Kostant impact audit 2026-09-11 promotes the existing U-P row. The definition uses the affected Killing nondegeneracy clause to choose dual bases and points forward through `justified_by` to the basis-independence lemma, which depends back on this definition. First repair the nondegenerate form, then move/prove the canonical inverse-form tensor lemma before defining its multiplication image as the Casimir. This is the already mapped two-item SCC, now exact A-P. Exact hash/scope: `research/phase-2-next-20-published-killing-form-prerequisite-audit.md`. |
+| `lem-the-casimir-element-is-independent-of-dual-bases` | Finite-Weyl/Kostant impact audit 2026-09-11 promotes the existing U-P row. Its inverse-form tensor argument is sound after Killing nondegeneracy, but the lemma depends on the Casimir definition whose `justified_by` points forward to this lemma. Move the lemma first and state the tensor/multiplication image independently, then let the later definition cite it. Exact hash/scope: `research/phase-2-next-20-published-killing-form-prerequisite-audit.md`. |
 | `cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings` | Active HG handoff audit 2026-09-11: under the library definition a quasi-isometry is a coarse Lipschitz map with a coarse Lipschitz quasi-inverse. Proof 2.1 proves coarse density from `f g` close to the identity, but omits the required lower bound making `f` a quasi-isometric embedding. If `g f` is `D`-close and `g` has coarse constants `A >= 1,B`, then `d_X(x,x') <= 2D+A d_Y(fx,fx')+B`; rearrange and combine with `f`'s upper bound. The live HG consumer supplies this locally, so it is not blocked. Existing definitions suffice; no new Phase-2 pair. Exact hash/source/impact/scope: `research/phase-2-next-20-published-quasi-isometry-characterization-audit.md`. |
 | `thm-a-quasi-isometric-embedding-with-coarsely-dense-image-admits-a-quasi-inverse` | Active HG adjacent-supplier audit 2026-09-11: proof 2.1 says the "upper inequality for `f`" gives its first displayed chain, but that chain uses the lower quasi-isometric-embedding inequality to derive an upper coarse-Lipschitz bound for `g`. Replace "upper" with "lower." The displayed estimates, AC-qualified selector, quasi-inverse bounds and theorem are otherwise sound, so no consumer blocker or new supplier is created. Exact hash/scope: `research/phase-2-next-20-published-quasi-isometry-characterization-audit.md`. |
 | `thm-two-metric-spaces-are-quasi-isometric-exactly-when-they-contain-bilipschitz-equivalent-separated-nets` | Active HG direct-consumer audit 2026-09-11: proof 1.1 invokes the exact affected converse of the quasi-isometry characterization without reproducing its missing coarse-inverse lower-bound estimate. The same step writes `d(x,A)` after obtaining a maximal separated set but before proving `A` nonempty; point-to-set distance is undefined for the empty set, including the unhandled `X=empty` case. Insert the elementary lower-bound proof, handle empty spaces, and otherwise prove maximal `A` nonempty before using distance, or state the quantified net argument directly. The remaining positive-coefficient and bilipschitz/net calculations are sound. Existing suppliers suffice; no new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-quasi-isometry-characterization-audit.md`. |
@@ -29333,7 +29348,6 @@ mathematical repairs. Evidence:
 | `def-promise-preserving-reduction` | 51. Exact live-plan metadata resynchronization set |
 | `def-promise-problem` | 51. Exact live-plan metadata resynchronization set |
 | `def-protocol-game-tree-and-value` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
-| `def-quadratic-casimir-element` | Exact Phase-3 published repairs |
 | `def-quasi-finite-morphism-classical` | AV-1 draft-page impact partition (Phase 3 only) |
 | `def-radial-mollifier-family-in-rn` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `def-radian-angle-by-unit-circle-arc-length` | 9.6 Membership and plan drift |
@@ -30031,7 +30045,6 @@ mathematical repairs. Evidence:
 | `lem-sum-check-perfect-completeness` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `lem-sum-check-verifier-is-polynomial-time-given-point-evaluation` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `lem-symmetrization-for-independent-random-series` | 0A.6 Planned-supplier consumer ledger and phase classification |
-| `lem-the-casimir-element-is-independent-of-dual-bases` | Exact Phase-3 published repairs |
 | `lem-the-cellular-boundary-squares-to-zero` | Continuing personal audit: exact examination pool and AT-24 contracts |
 | `lem-the-center-has-finite-dimensional-image-on-an-o-object` | Cross-category Phase-2 roots and their published impact |
 | `lem-the-e-graph-and-the-bird-graph-are-wonderful` | Recorded-material path classification — 2026-09-08 |
