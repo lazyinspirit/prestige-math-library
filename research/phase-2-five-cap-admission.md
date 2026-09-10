@@ -123,3 +123,12 @@ admission rather than quietly consuming a sixth pair or certifying a gap.
 The other three slots are reserved, not selected. In particular, do not
 admit the root-system/highest-weight pairs merely because they supply needed
 results: their own rank-one/semisimple prerequisite closure is still unresolved.
+
+## Independent prerequisite review
+
+The engine's `phase-2-fourier-support-2-alpha-step1-drift.md` independently
+checks the complete retained inventories, current58 supplier hashes/homes,
+source routes and local momentum/Hermite arguments. It returns no-drift
+for both admitted pairs, with no omitted substantial prerequisite and no
+requested additional pair. This supports admission under the owner's cap;
+authoring and independent proof judgment still remain.
