@@ -86,12 +86,31 @@ certify their transitive dependencies or all consumers.
 
 The direct published consumer
 `thm-two-metric-spaces-are-quasi-isometric-exactly-when-they-contain-bilipschitz-equivalent-separated-nets`
-uses both directions of the characterization. It is an impact-review candidate,
-not automatically a second defect: the missing estimate has the elementary
-repair above. The active HG draft consumer writes the same lower-bound estimate
-locally and therefore is not blocked. Existing published definitions suffice;
-no new Phase-2 pair is identified.
+was then read in full, SHA-256
+`b80b7aaf3db967613edee15b90fd8c575315eb6925c3c0774643e5e555da360b`.
+Proof 1.1 uses the exact affected converse of the characterization to obtain a
+quasi-isometric embedding from an abstract coarse-inverse quasi-isometry, but
+does not reproduce the missing lower-bound estimate. It therefore inherits
+that exact proof obligation.
 
-Disposition: the characterization and adjacent supplier are newly A-P; the
-three exact definitions are newly bounded clear. Five new indexed IDs are added
-with no duplicate and no exhaustive consumer or transitive-closure claim.
+The same step has a separate definedness gap. It starts the maximal separated
+set argument with the empty set in its Zorn poset, obtains a maximal `A`, and
+then writes `d(x,A)`. Published `def-metric-bounded-diameter` defines
+point-to-set distance only when the set is nonempty. If `X` is nonempty,
+maximality does imply `A` is nonempty, but the proof does not state that before
+using the partial notation; if `X` is empty, `A` is empty and the expression is
+undefined. Handle the empty-space case first, then show a maximal separated set
+is nonempty, or use the quantified net condition directly: if no `a in A`
+lies within the desired radius of `x`, adjoining `x` preserves separation.
+After these repairs, the positive coefficient
+`L^(-1)-C/(2LC+1)` and the bilipschitz/net estimates in proof 2.1 are sound.
+
+This direct consumer is newly A-P for these two exact gaps. The active HG draft
+consumer writes the coarse-inverse lower-bound estimate locally and therefore
+is not blocked. Existing published definitions suffice; no new Phase-2 pair is
+identified.
+
+Disposition: the characterization, adjacent supplier and separated-net theorem
+are newly A-P; the three exact definitions are newly bounded clear. Six new
+indexed IDs are added with no duplicate and no exhaustive consumer or
+transitive-closure claim.

@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1405, U-C 15, A-R 187, A-P 179. The
+Current classifications: U-P 1405, U-C 15, A-R 187, A-P 180. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -42,6 +42,10 @@ The adjacent quasi-inverse supplier is also newly A-P for the narrow false
 label "upper inequality" where its displayed proof correctly uses the lower
 inequality. Its mathematics is otherwise sound. The three exact coarse-map,
 quasi-isometry and bounded-distance definitions are new bounded clears.
+The characterization's direct separated-net consumer is newly A-P because it
+uses the exact affected converse without the missing estimate. Its Zorn step
+also writes point-to-set distance before proving the maximal set nonempty and
+therefore uses undefined notation in the empty-space case.
 Exact source, consumer and audit limits are in
 `phase-2-next-20-published-quasi-isometry-characterization-audit.md`.
 
@@ -27935,11 +27939,11 @@ No new Phase2 pair; source barriers are not waived.
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,455 unique
+subsequently reconciled published IDs. It currently contains **2,456 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,455 indexed IDs are published; **13,475 published items remain outside this
+2,456 indexed IDs are published; **13,474 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -27951,11 +27955,11 @@ Supplier mappings and subsequent item-specific findings remain above.
 | U-P | Unaudited and potentially defective items | 1405 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 15 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 179 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 180 | Recorded direct review and an unresolved item-specific repair. |
 
 669 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,786 items and the expanded reference pool contains 2,455 unique items.
+1,787 items and the expanded reference pool contains 2,456 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28744,6 +28748,7 @@ owner's scan policy.
 | `prop-killing-form-is-invariant-and-nondegenerate-on-a-complex-semisimple-lie-algebra` | Original-next-20 finite-Weyl/Kostant prerequisite audit 2026-09-11 promotes the existing U-P row. Proof 1.1 establishes invariance, but proof 2.1 derives nondegeneracy solely by naming Cartan's semisimplicity criterion. Its only declared dependency is the trace-form definition, and no published item proves that load-bearing criterion. Supply and declare the planned earlier DG29 Cartan-criterion/nondegeneracy chain or a complete local proof. Three direct published consumers are bounded impact candidates; no new Phase-2 pair beyond the existing planned repair chain. Exact hash/source/search/scope: `research/phase-2-next-20-published-killing-form-prerequisite-audit.md`; retain the broader Lie Phase-3 repair mapping above. |
 | `cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings` | Active HG handoff audit 2026-09-11: under the library definition a quasi-isometry is a coarse Lipschitz map with a coarse Lipschitz quasi-inverse. Proof 2.1 proves coarse density from `f g` close to the identity, but omits the required lower bound making `f` a quasi-isometric embedding. If `g f` is `D`-close and `g` has coarse constants `A >= 1,B`, then `d_X(x,x') <= 2D+A d_Y(fx,fx')+B`; rearrange and combine with `f`'s upper bound. The live HG consumer supplies this locally, so it is not blocked. Existing definitions suffice; no new Phase-2 pair. Exact hash/source/impact/scope: `research/phase-2-next-20-published-quasi-isometry-characterization-audit.md`. |
 | `thm-a-quasi-isometric-embedding-with-coarsely-dense-image-admits-a-quasi-inverse` | Active HG adjacent-supplier audit 2026-09-11: proof 2.1 says the "upper inequality for `f`" gives its first displayed chain, but that chain uses the lower quasi-isometric-embedding inequality to derive an upper coarse-Lipschitz bound for `g`. Replace "upper" with "lower." The displayed estimates, AC-qualified selector, quasi-inverse bounds and theorem are otherwise sound, so no consumer blocker or new supplier is created. Exact hash/scope: `research/phase-2-next-20-published-quasi-isometry-characterization-audit.md`. |
+| `thm-two-metric-spaces-are-quasi-isometric-exactly-when-they-contain-bilipschitz-equivalent-separated-nets` | Active HG direct-consumer audit 2026-09-11: proof 1.1 invokes the exact affected converse of the quasi-isometry characterization without reproducing its missing coarse-inverse lower-bound estimate. The same step writes `d(x,A)` after obtaining a maximal separated set but before proving `A` nonempty; point-to-set distance is undefined for the empty set, including the unhandled `X=empty` case. Insert the elementary lower-bound proof, handle empty spaces, and otherwise prove maximal `A` nonempty before using distance, or state the quantified net argument directly. The remaining positive-coefficient and bilipschitz/net calculations are sound. Existing suppliers suffice; no new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-quasi-isometry-characterization-audit.md`. |
 | `thm-locally-finite-borel-measures-are-regular-when-open-sets-are-sigma-compact` | Original-next-20 group-c follow-up 2026-09-11: the theorem states no choice hypothesis, but proof 2.1 selects relatively compact neighborhoods at every stage of a countable compact exhaustion and proofs 3.1/5.1 select summably accurate open approximants for a countable family. Add and declare published `def-countable-choice`, or replace both selection mechanisms with a supplied choice-free construction. Subsequent inequalities are sound; no new Phase-2 pair. Exact hash/clauses/impact: `research/phase-2-next-20-published-radon-regularity-choice-audit.md`. |
 | `cor-second-countable-lch-locally-finite-borel-measures-are-regular` | Original-next-20 group-c follow-up 2026-09-11: proof 1.1's compressed relatively compact countable-basis refinement has a choice-free all-eligible-basis-members expansion, but proof 2.1 invokes the preceding countable-choice-dependent general regularity theorem while stating no choice hypothesis. Add and declare `AC_omega`, or replace the call with a complete choice-free second-countable regularity proof; the basis expansion alone is insufficient. Three direct published consumers remain impact candidates. No live AC-qualified author path is blocked and no new Phase-2 pair is needed. Exact hash/scope: `research/phase-2-next-20-published-radon-regularity-choice-audit.md`. |
 | `thm-rmk-uniqueness-among-radon-measures` | Fourier Step 5A 2026-09-11, independently reconciled by the continuous auditor: full two-step proof read. Step 1.1 invokes published `lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set`, whose Statement assumes Dependent Choice, but target Statement/Given omit DC. Add and declare published `def-dependent-choice` and identify its cutoff use; retain the sound compact/open/Borel comparison. No new Phase-2 supplier or pair. Pending Phase 3; the live AC-qualified measure uniqueness consumer meets this hypothesis. Exact target/supplier hashes and dedup scope: `research/phase-2-next-20-published-author-handoff-reconciliation.md`; originating handoff: `research/phase-2-fourier-support-2-alpha-a-5a.md`. |

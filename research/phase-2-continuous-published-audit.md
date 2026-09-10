@@ -353,15 +353,26 @@ Post-adjacent-HG counts: 2,455 unique published IDs; U-P 1,405, U-C 15, A-R
 187, A-P 179 and 669 bounded clears. The current census leaves 13,475 published
 IDs outside the index.
 
+The characterization's direct separated-net consumer is also newly A-P after a
+full read. It uses the exact affected converse without reproducing the missing
+lower bound. Its maximal-separated-set step also writes point-to-set distance
+before establishing that the set is nonempty, leaving the empty-space case
+undefined. Both repairs are elementary and use existing definitions; the live
+HG path is unaffected. Evidence remains in the quasi-isometry audit file.
+
+Post-separated-net counts: 2,456 unique published IDs; U-P 1,405, U-C 15, A-R
+187, A-P 180 and 669 bounded clears. The current census leaves 13,474 published
+IDs outside the index.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
    issues reported by the root worker, prioritizing items actually consumed by
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
-   then audit bounded samples of published items outside the 2,455-ID index.
+   then audit bounded samples of published items outside the 2,456-ID index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,475 published items
+No exhaustive discovery claim is authorized while 13,474 published items
 remain outside the index and dependency interfaces remain unaudited.
