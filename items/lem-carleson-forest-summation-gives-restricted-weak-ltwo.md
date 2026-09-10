@@ -52,4 +52,4 @@ Assume AC. For every finite linearised tile family, $|\langle C_{S,N}f,g\rangle|
 
 ## Scratch
 
-This argument completely supplies the joint stopping and summation step. Its mathematical acceptance remains held by the incomplete single-tree supplier F3. Size-selection F2 now has a complete local strict-witness and packet-packing proof awaiting ordinary mathematical review. The single-tree statement is used here without representing its proof as completed. No Carleson maximal theorem or source-backing hold is cleared by this conditional derivation alone.
+The joint stopping and summation proof and both formerly incomplete suppliers now have full local authored arguments. The size-selection and single-tree repairs await ordinary mathematical review and root decision reconciliation; this file does not itself claim those reviews or a source disposition. Other Carleson maximal-theorem prerequisites remain separate holds.

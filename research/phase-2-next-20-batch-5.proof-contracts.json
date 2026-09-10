@@ -1887,6 +1887,273 @@
           "evidence": "The Statement asserts no converse; no necessity claim is used in step 6.1."
         }
       ]
+    },
+    "lem-carleson-single-tree-estimate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-density-size-and-tree-count-for-carleson-tiles",
+          "source_section": "Definition",
+          "quote": "Assume [[def-axiom-of-choice]] as inherited from the packet and real-line analytic conventions. Use the tiles, plus trees, fixed packets and finite model of [[def-carleson-tiles-wave-packets-and-tile-order]], and a measurable selector $N:\\mathbb R\\to\\mathbb R$ as in [[def-carleson-operator-and-measurable-linearisation]]. Fix $f\\in L^2(\\mathbb R)$, a measurable testing set E of finite measure, and the integer $\\kappa=20$. Put\n$$\\chi_I(x)=|I|^{-1}\\bigl(1+|x-c(I)|/|I|\\bigr)^{-\\kappa}.$$\nFor a tile s and a finite tile set S, define\n$$\\operatorname{dens}_{E,N}(s)=\\sup_{t\\ge s}\\int_{E\\cap\\{x:N(x)\\in\\omega_t\\}}\\chi_{I_t}(x)\\,dx,\\qquad\\operatorname{dens}_{E,N}(S)=\\sup_{s\\in S}\\operatorname{dens}_{E,N}(s).$$\nThe supremum over t ranges over all tiles above s, including s, not just members of S. The integral tests the whole frequency interval $\\omega_t$. Every integrand is nonnegative measurable. Substitution $u=(x-c(I))/|I|$ and the antiderivative of $(1+u)^{-20}$ on $[0,\\infty)$ give $\\int\\chi_I=2/19$, so densities are finite and between zero and $2/19$. For empty S define density zero; for null E every integral is zero. Null modifications of N or E leave each integral, and hence its supremum, unchanged.\n\nDefine\n$$\\operatorname{size}_f(S)=\\sup_{(T,t)}\\left(\\frac1{|I_t|}\\sum_{s\\in T}|\\langle f,\\phi_s\\rangle|^2\\right)^{1/2},$$\nwhere the supremum ranges over nonempty plus subtrees $T\\subseteq S$ with designated top t. In particular singleton trees with their own tile as top are allowed. Empty S has size zero. This supremum is finite: if $\\ell=\\min_{s\\in S}|I_s|>0$, each candidate top has length at least ell and the numerator is at most the finite sum over S of the finite squared coefficients. Size zero is equivalent to every coefficient being zero: the forward implication follows from singleton trees and the reverse from the displayed sum. The pairing depends only on the $L^2$ class of f.\n\nA displayed **forest** is a finite family of disjoint tile subcollections, each equipped with a designated top and forming a tree. Its count is $\\sum_T|I_T|$, where $I_T$ means its designated top interval. This counts top lengths with multiplicity even when intervals overlap. The empty forest has count zero. A different assignment of tops may change the count; no intrinsic count is attached to a tile set without a forest or an explicit existence assertion about such a decomposition. Restricting S can only decrease density and size, because it restricts the families in their suprema. No selection estimate is part of these definitions.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-carleson-tiles-wave-packets-and-tile-order",
+          "source_section": "Definition",
+          "quote": "Assume [[def-axiom-of-choice]] for the countable-choice Fourier suppliers. A **dyadic interval** is $[j2^k,(j+1)2^k)$ with $j,k\\in\\mathbb Z$; its length is positive. A **tile** is $s=I_s\\times\\omega_s$ with both intervals dyadic and $|I_s||\\omega_s|=1$. Their centers are denoted c. Write $\\omega_{s,-}$ and $\\omega_{s,+}$ for the left and right half-open halves. The midpoint belongs only to the right half.\n\nHere is an explicit nonzero packet convention. Define $\\rho(t)=\\exp(-1/t)$ for $t>0$ and $\\rho(t)=0$ for $t\\le0$. Here is the complete smoothness justification. Put $P_0(u)=1$ and recursively $P_{k+1}(u)=u^2(P_k(u)-P_k'(u))$. The exponential derivative, chain rule and product/quotient rules ([[thm-derivative-of-exponential]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]]) show on $t>0$ that the kth derivative is $P_k(1/t)\\exp(-1/t)$. For each polynomial P and each integer r>=0, $t^{-r}P(1/t)\\exp(-1/t)\\to0$ as $t\\downarrow0$: expand P into finitely many monomials, put u=1/t, and apply [[thm-exponential-beats-every-polynomial]] with parameter one and [[cor-exponential-reciprocal-and-positivity]]. Extend each displayed kth-derivative formula by zero on $t\\le0$. Each extension is continuous at zero (r=0); its difference quotient at zero tends to zero (r=1), so its derivative there equals the next extension's value. On the two open half-lines differentiation already gives the next extension. Induction therefore proves $\\rho\\in C^\\infty(\\mathbb R)$ and $\\rho^{(k)}(0)=0$ for every k. Positivity of the exponential makes $\\rho(t)>0$ exactly when $t>0$. Set $a=1/9$, $b=1/8$ and\n$$\\psi(\\xi)=\\frac{\\rho(b^2-\\xi^2)}{\\rho(b^2-\\xi^2)+\\rho(\\xi^2-a^2)}.$$\nThe denominator is positive: for $|\\xi|\\le a$ its first term is positive, for $|\\xi|\\ge b$ its second term is positive, and between a and b both are positive. Thus $\\psi$ is smooth, $0\\le\\psi\\le1$, equals one on $[-a,a]$ and vanishes outside $[-b,b]$. Every derivative is bounded on its compact support, so it is Schwartz under [[def-schwartz-space-and-its-seminorms]]. Define $\\phi(x)=\\widehat\\psi(-x)$. The transform theorem [[thm-fourier-transform-maps-schwartz-space-continuously-to-itself]] makes this Schwartz, and [[thm-fourier-inversion-on-schwartz-space]] gives $\\widehat\\phi=\\psi$. In detail inversion applied to $\\psi$ says $\\int\\widehat\\psi(y)e^{2\\pi iy\\xi}\\,dy=\\psi(\\xi)$; changing $y=-x$ gives the claimed transform. All integrals are absolute by [[lem-schwartz-functions-and-all-derivatives-are-integrable]]. In particular $\\phi$ is not zero. No unspecified zero packet is allowed.\n\nUse $\\operatorname{Tr}_y h(x)=h(x-y)$, $\\operatorname{Mod}_\\xi h(x)=e^{2\\pi i\\xi x}h(x)$ and $\\operatorname{Dil}^2_\\ell h(x)=\\ell^{-1/2}h(x/\\ell)$ for $\\ell>0$. Define\n$$\\phi_s(x)=|I_s|^{-1/2}e^{2\\pi i c(\\omega_{s,-})x}\\phi\\bigl((x-c(I_s))/|I_s|\\bigr).$$\nThe translation, modulation and dilation laws [[thm-fourier-translation-modulation-dilation-and-reflection-laws]] give\n$$\\widehat{\\phi_s}(\\xi)=|I_s|^{1/2}e^{-2\\pi i c(I_s)(\\xi-c(\\omega_{s,-}))}\\psi\\bigl(|I_s|(\\xi-c(\\omega_{s,-}))\\bigr).$$\nIts support lies strictly inside $\\omega_{s,-}$, since its half-width is $1/(8|I_s|)$ whereas that half-interval has half-width $1/(4|I_s|)$. For every integer M there is a finite constant $C_M$ with $|\\phi_s(x)|\\le C_M|I_s|^{-1/2}(1+|x-c(I_s)|/|I_s|)^{-M}$, directly from the Schwartz seminorms. The pairing is $\\langle f,h\\rangle=\\int f\\overline h$, linear in f. The fixed packet is not assumed to have norm one; its fixed norm and seminorms enter constants.\n\nSet $s\\le t$ when $I_s\\subseteq I_t$ and $\\omega_t\\subseteq\\omega_s$. This is a partial order: reflexivity and transitivity follow from inclusions, and mutual comparability gives equality of both intervals. A finite **tree** is a set T with a designated top tile t such that $s\\le t$ for every $s\\in T$; the top need not belong to T and is part of the data. A **plus tree** has, in addition, $\\omega_t\\subseteq\\omega_{s,+}$ for every $s\\in T\\setminus\\{t\\}$. The top alone is allowed. Empty trees have no contribution; any assigned top is retained only when a forest count is explicitly specified. For a finite tile set S, a measurable selector $N:\\mathbb R\\to\\mathbb R$ and $f\\in L^2$, define the finite model\n$$C_{S,N}f(x)=\\sum_{s\\in S}\\langle f,\\phi_s\\rangle\\mathbf1_{\\omega_{s,+}}(N(x))\\phi_s(x).$$\nThe coefficients exist by Cauchy–Schwarz [[thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz]] and Schwartz integrability. Each summand is measurable, the sum is finite and for fixed S,N it is linear in f. Its testing form for $|g|\\le\\mathbf1_E$, $m(E)<\\infty$, is the sum of $\\langle f,\\phi_s\\rangle\\langle\\mathbf1_{\\omega_{s,+}}(N)\\phi_s,g\\rangle$; these integrals exist since the packets are integrable and g is bounded. These definitions do not assert orthogonality of overlapping packets.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-plancherel",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. Fourier transformation on Schwartz space extends uniquely to a surjective complex-linear isometry $\\mathcal F_2:L^2(\\mathbb R^n;\\mathbb C)\\to L^2(\\mathbb R^n;\\mathbb C)$. It preserves the first-variable-linear inner product, and hence is unitary.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "cor-centered-hardy-littlewood-maximal-operator-is-l-p-bounded",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Countable Choice ([[def-countable-choice]]).\n\nLet $1<p<\\infty$. Then there is a constant $C_{n,p}$ such that every\n$f\\in L^p(\\mathbb{R}^n)$ satisfies\n$$\\|Mf\\|_p\\le C_{n,p}\\|f\\|_p.$$\nBy comparison, the same is true for the uncentered maximal function.",
+          "uses": [
+            "1.2",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "source_section": "Statement",
+          "quote": "On every measure space the pairing $\\langle f,g\\rangle=\\int f\\overline g$ on complex $L^2$ is representative-independent, linear in the first variable, conjugate-linear in the second, conjugate symmetric and positive definite, with $\\langle f,f\\rangle=\\|f\\|_2^2$. Moreover,\n$$|\\langle f,g\\rangle|\\le\\|f\\|_2\\|g\\|_2.$$\nIf $g\\ne0$ as a class, equality holds iff $f=cg$ a.e. for some $c\\in\\mathbb C$. If $g=0$, equality holds for every $f$.\n\nFor each finite $m\\ge0$, the same conclusions hold on tuples $F=(f_j)_{j<m}$, with pairing $B(F,G)=\\sum_{j<m}\\langle f_j,g_j\\rangle$ and $\\|F\\|^2=\\sum_{j<m}\\|f_j\\|_2^2$. For $G\\ne0$, equality means $f_j=cg_j$ a.e. for every $j$, with one common scalar $c$.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "cor-schwartz-convolution-and-product-transform-laws",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. If $f,g\\in\\mathcal S$, their pointwise product and their everywhere-defined convolution are Schwartz functions, and\n$$\\mathcal F(f*g)=\\widehat f\\widehat g,\\qquad\\mathcal F(fg)=\\widehat f*\\widehat g.$$",
+          "uses": [
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-fourier-inversion-on-schwartz-space",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For every $f\\in\\mathcal S(\\mathbb R^n)$ and every $x\\in\\mathbb R^n$,\n$$f(x)=\\int_{\\mathbb R^n}\\widehat f(\\xi)e^{2\\pi ix\\cdot\\xi}\\,d\\xi.$$\nThe integral is absolutely convergent.",
+          "uses": [
+            "3.3"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "4.1",
+            "4.2",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "The proof establishes the stronger sum of absolute tile contributions. Choose complex numbers $\\varepsilon_s$ of modulus one so that $\\varepsilon_sa_s\\langle\\mathbf1_{\\omega_{s,+}}(N)\\phi_s,g\\rangle$ is nonnegative real, taking $\\varepsilon_s=1$ for a zero product. Finite sesquilinearity bounds that sum by $\\int_E|\\sum_s\\varepsilon_sa_s\\mathbf1_{\\omega_{s,+}}(N(x))\\phi_s(x)|dx$. Write $b_s=\\varepsilon_sa_s$. Empty T and sigma=0 give zero. If delta=0, exponent20 packet decay bounds the integral of $|\\phi_s|$ on $E\\cap N^{-1}(\\omega_{s,+})$ by $C\\sqrt{|I_s|}\\delta=0$ for each s, so all contributions vanish. Hence assume delta,sigma>0. Singletons give $|b_s|\\le\\sigma\\sqrt{|I_s|}$. A possible member s=t contributes at most $C\\sigma L\\int_{E\\cap N^{-1}(\\omega_t)}\\chi_{J_0}\\le C\\sigma\\delta L$, by packet decay with exponent20. Remove this one member. Each remaining tile has its top frequency contained in exactly one half of its frequency interval. Split them into the strict plus and strict minus trees according as that half is right or left, retaining the same top t and the bounds delta,sigma.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "given"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "We record a kernel bound. If $K_r$ satisfies $|K_r(z)|\\le C r^{-1}(1+|z|/r)^{-20}$ and h is Schwartz, then for every interval J of length j<=r and every x,y in J, $|(K_r*h)(x)|\\le C Mh(y)$. Indeed $|x-y|\\le r$ makes the displayed weight at x comparable to that at y. On $|z-y|<r$ its integral against |h| is bounded by twice the centered average times a constant. On the annulus $2^nr\\le|z-y|<2^{n+1}r$, it is at most $C2^{-19n}Mh(y)$, using the centered interval of radius $2^{n+1}r$. The geometric sum proves the bound uniformly in x,y,r.",
+          "inputs": [
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "For either nonempty strict subtree U, partition the line into maximal dyadic intervals J such that 3J contains no $I_s$, s in U; 3J denotes the concentric interval of triple length. Such intervals cover the line: all sufficiently small dyadic intervals have this property because U is finite with positive minimum spatial length, and sufficiently large ancestors of any fixed interval fail it because their triples eventually contain every fixed bounded interval. The property passes to dyadic subintervals since their triples lie in the larger triple; maximal good intervals are therefore disjoint and cover every point. They form a countable family $\\mathcal J$. If j=|J| and $J^p$ is its dyadic parent, maximality supplies an $s'\\in U$ with $I_{s'}\\subseteq3J^p$. Since this latter interval has length6j, dyadic lengths imply $|I_{s'}|\\le4j$. In particular $\\operatorname{dist}(J,J_0)\\le6j$. If j>=L and J meets $J_0$, or if j>=L+dist(J,J_0) when they are disjoint, then $J_0\\subseteq3J$, contradicting goodness. Consequently intervals with dist(J,J_0)<L have j<2L and lie in a fixed concentric enlargement of $J_0$; their total length is at most CL. When d=dist(J,J_0)>=L, one has $d/6\\le j<d+L\\le2d$.",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "step": "2.2",
+          "claim": "For the strict plus subtree put $H=\\sum_{s\\in U}b_s\\phi_s$, a Schwartz function. Then $\\|H\\|_2\\le C\\sigma\\sqrt L$. Here are the needed orthogonality details. Lower frequency halves at unequal scales are disjoint: if nested, the full smaller frequency interval lies in the larger lower half, whereas the common top lies in its upper half. Plancherel kills those Gram entries. At equal frequency and spatial scale l, packet decay gives $|\\langle\\phi_s,\\phi_{s'}\\rangle|\\le C(1+|c(I_s)-c(I_{s'})|/l)^{-20}$: extract the center-distance factor from the product of exponent40 decay bounds by the triangle inequality, and integrate the remaining normalized exponent20 weight, whose integral is2/19. The row and column sums over the length-l spatial lattice are bounded by $C\\sum_{n\\in\\mathbb Z}(1+|n|)^{-20}$. Using $2|b_sb_{s'}|\\le|b_s|^2+|b_{s'}|^2$ proves $\\|H\\|_2^2\\le C\\sum_s|b_s|^2\\le C\\sigma^2L$, the last bound being the defining plus-tree size inequality.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "On each J split the signed tile sum into small tiles $|I_s|\\le4j$ and large tiles $|I_s|\\ge8j$. These are all the possibilities because lengths are dyadic. The integral of the absolute small sum is at most $$C\\sigma\\delta\\sum_{s\\in U:\\,|I_s|\\le4j}|I_s|\\bigl(1+\\operatorname{dist}(I_s,J)/|I_s|\\bigr)^{-20}.$$ To see this for each tile of length l, exponent40 packet decay and the singleton bound give $|b_s\\phi_s(x)|\\le C\\sigma l\\chi_{I_s}(x)(1+|x-c(I_s)|/l)^{-20}$. Take the supremum of the last factor on J and integrate over $E\\cap N^{-1}(\\omega_{s,+})$, a subset of the full-frequency set controlled by delta. At a fixed scale l, there is at most one possible frequency for each spatial interval, the unique ancestor of the top frequency of length1/l. The spatial intervals thus form a subset of the length-l dyadic lattice inside $J_0$. If l<=j, goodness and aligned dyadic endpoints put these intervals outside 3J, at distance at least j from J. Summing the displayed weights over that lattice gives at most $Cl\\sum_{n\\ge j/l}(1+n)^{-20}\\le Cj(l/j)^{20}$ by integral comparison. For l=2j or4j, the full lattice sum is at most Cl<=Cj, with no separation needed. Summing dyadic l<=4j bounds the displayed spatial sum by Cj.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3.2",
+          "step": "3.2",
+          "claim": "Let $G_J=E\\cap J\\cap\\bigcup_{s\\in U:\\,|I_s|\\ge8j}N^{-1}(\\omega_{s,+})$, the support of the large sum on E. Then $m(G_J)\\le C\\delta j$. If there is no large tile the claim is immediate. Otherwise 8j<=L. For the witness s' in step 2.1, let v have spatial interval the dyadic ancestor of $I_{s'}$ of length4j and frequency the dyadic ancestor of the top frequency of length1/(4j). Then v is a tile above s', so its weighted density integral is at most delta. The center of its spatial interval is within Cj of J, because $I_{s'}\\subseteq3J^p$ and its ancestor has length4j. Hence $\\chi_{I_v}\\ge c/j$ on J for an absolute c>0. Every large tile frequency is contained in $\\omega_v$, since its length is at most1/(8j) and it also contains the top frequency. This gives $G_J\\subseteq E\\cap J\\cap N^{-1}(\\omega_v)$ and proves the measure bound. Moreover 8j<=L and the witness geometry in step 2.1 place all such J in one fixed enlargement of $J_0$. Thus their total length is at most CL and $\\sum_Jm(G_J)\\le C\\delta L$. The use of 4j for the density witness is essential: the witness in 3 times the parent need not have length at most j.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-3.3",
+          "step": "3.3",
+          "claim": "We construct exact smooth scale projections for this plus subtree. For each dyadic r<=L, let $\\Omega_r=[\\alpha_r,\\alpha_r+1/r)$ be the unique dyadic ancestor of the top frequency of length1/r. Set $\\Theta(v)=\\psi((v-1/2)/5)$. The exact plateau a=1/9 and support b=1/8 in F2 give $\\Theta=1$ on [0,1] and $\\Theta=0$ outside [-1/8,9/8]. Its inverse Fourier transform is $k(x)=5e^{\\pi ix}\\phi(5x)$, as follows by substituting $v=5u+1/2$ in the absolutely convergent inverse integral. Thus the inverse transform of $\\Theta(r(\\xi-\\alpha_r))$ is $K_r(x)=r^{-1}e^{2\\pi i\\alpha_rx}k(x/r)$, bounded by $Cr^{-1}(1+|x|/r)^{-20}$. For any member with $|I_s|\\ge r$, its Fourier support lies in $\\Omega_r$, so this multiplier is one on its support. If $|I_s|<r$, its full frequency is a proper ancestor of $\\Omega_r$ and its lower packet support is separated from its upper half by at least $1/(8|I_s|)\\ge1/(4r)$. Since the top, hence $\\Omega_r$, lies in that upper half, the enlargement of $\\Omega_r$ by1/(8r) on each side misses that packet support. The multiplier is therefore zero there. By F6 and F7, $$K_r*H=\\sum_{s\\in U:\\,|I_s|\\ge r}b_s\\phi_s$$ everywhere, not merely as an unspecified truncation estimate.",
+          "inputs": [
+            "F2",
+            "F6",
+            "F7",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "The small terms sum to at most $C\\sigma\\delta L$ over all J. For dist(J,J_0)<L this follows from the Cj bound and the total-length bound in step 2.1. For d=dist(J,J_0)>=L, each scale l<=L has total spatial length at most L, so its contribution to the spatial sum of step 3.1 is at most $L(1+d/l)^{-20}$. Summing the dyadic scales gives $CL(L/d)^{20}$. For $2^kL\\le d<2^{k+1}L$, step 2.1 gives $j\\ge2^kL/6$ and j<2^{k+2}L. The disjoint J in this shell lie in an interval of length $C2^kL$, so their number is bounded by an absolute constant. Summing $CL2^{-20k}$ for k>=0 completes the estimate. Countable sums of these nonnegative integrals are justified by F8 applied to finite unions of the disjoint J.",
+          "inputs": [
+            "F8",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-4.2",
+          "step": "4.2",
+          "claim": "For each x, the upper frequency halves of a strict plus tree form a nested family, with all tiles at a fixed spatial scale having the same frequency. If N(x) belongs to an upper half, it belongs to all the larger upper halves in this family. Thus the activated spatial scales form an initial segment of the scales present in U. Let tau(x) be their largest spatial length, setting it to zero when none is active. Every strict member has length at most L/2, so 2tau(x)<=L whenever tau(x)>0. On J, if tau(x)>=8j, the large sum equals the scale block $8j\\le|I_s|\\le\\tau(x)$, which by step 3.3 is $((K_{8j}-K_{2\\tau(x)})*H)(x)$. If tau(x)<8j the large sum is zero. Both kernel scales are at least j. Step 1.2 therefore bounds the magnitude of the large sum, for x in E intersect J, by $C\\mathbf1_{G_J}(x)\\inf_{y\\in J}MH(y)$. Denote that infimum by q_J; it is an ordinary fixed nonnegative number, not a measurability assertion about uncountably selected points. By F4 and step 3.2, $$\\sum_Jm(G_J)q_J^2\\le C\\delta\\sum_Jj q_J^2\\le C\\delta\\int_{\\mathbb R}(MH)^2\\le C\\delta\\|H\\|_2^2.$$ The middle inequality holds because $MH(y)\\ge q_J$ on each disjoint J. Countable sums are again obtained from F8; alternatively the inequalities first hold for any finite subfamily.",
+          "inputs": [
+            "F2",
+            "F4",
+            "F8",
+            "step 1.2",
+            "step 3.2",
+            "step 3.3"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "step": "5.1",
+          "claim": "For the strict minus subtree, upper frequency halves at unequal scales are disjoint. If two were nested, the full smaller interval would lie in the larger upper half, but the top frequency is required to lie in its lower half. At a fixed x, the selector N(x) therefore activates at most one spatial scale. At that scale, $|b_s\\phi_s(x)|\\le C\\sigma(1+|x-c(I_s)|/|I_s|)^{-20}$ and the sum over the spatial lattice is at most $C\\sigma$, uniformly in x. The large sum on J consequently has magnitude at most $C\\sigma\\mathbf1_{G_J}$ on E. Its integrals sum to $C\\sigma\\delta L$ by step 3.2. Together with step 4.1 this proves the bound for the minus subtree.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 4.1",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "step-6.1",
+          "step": "6.1",
+          "claim": "Cauchy–Schwarz on the disjoint union of the $G_J$, first for finite subfamilies and then by F8, bounds the total integral of the large plus sum by $C(\\sum_Jm(G_J))^{1/2}(\\sum_Jm(G_J)q_J^2)^{1/2}\\le C\\delta\\sqrt L\\|H\\|_2\\le C\\delta\\sigma L$. Combine this with the small contribution from step 4.1, the minus contribution from step 5.1 and the possible top contribution from step 1.1. This proves the stronger absolute sum and hence the stated absolute bilinear bound. All selector and testing-set boundary conventions are half-open and were respected in the frequency inclusions; null modifications leave the integrals unchanged. AC is inherited through F9; the only new choices were finite phase choices and explicitly defined dyadic ancestors. The maximal estimate is used solely on Lebesgue measure on the line, with its valid countable-choice and sigma-finite specialization.",
+          "inputs": [
+            "F5",
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 4.1",
+            "step 3.2",
+            "step 5.1",
+            "step 2.2",
+            "step 4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 treats empty trees and step 3.2 treats empty large-scale sets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats sigma=0, delta=0 and zero phase products; step 4.2 treats no active frequency."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 handles the top as a singleton separately, leaving only strict plus/minus members."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 constructs the complementary partition for every finite nonempty subtree, and step 3.2 allows a witness as large as4|J|."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 3.3 and 4.2 prove the exact multiplier on every packet support and respect half-open selector halves."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 6.1 identifies inherited AC; step 2.1 explicitly defines the countable dyadic partition and its witnesses."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Statement is a one-way upper bound; step 6.1 proves the stronger absolute sum."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Statement asserts no converse; step 1.1 handles zero cases without claiming a characterization of nonzero contributions."
+        }
+      ]
     }
   }
 }
