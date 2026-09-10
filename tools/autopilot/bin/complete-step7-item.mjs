@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 // Deterministic, item-local Step-7 handoff. The owning Alpha awaits this
 // command and releases its group files to the final adjudicator until it exits.
-import { existsSync, readFileSync, writeFileSync, mkdirSync, rmdirSync } from 'node:fs';
+import { existsSync, readFileSync, writeFileSync, mkdirSync, rmdirSync, renameSync } from 'node:fs';
 import { resolve } from 'node:path';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -39,6 +39,24 @@ function main() {
   const scope = json(`${prefix}-step7-scope.json`);
   const published = rows(`${prefix}-step7-published-repairs.jsonl`).find(row => row.id === id && row.group === group);
   if (scope.by_item?.[id] !== group && !published) throw new Error(`${id}: not owned by ${group}`);
+  if (!args.includes('--execute') && !args.includes('--check-only')) {
+    // A sandboxed Alpha only submits and waits. The controller launches all
+    // model subprocesses outside that sandbox, retaining dispatch ownership.
+    const key = createHash('sha256').update(`${run}:${id}:${group}:${process.pid}:${Date.now()}`).digest('hex').slice(0,24);
+    const requestPath = `${prefix}-step7-handoff-request-${key}.json`;
+    writeFileSync(`${requestPath}.tmp`, JSON.stringify({run,id,group,key}));
+    renameSync(`${requestPath}.tmp`, requestPath);
+    const response = `${prefix}-step7-handoff-response-${key}.json`;
+    console.log(`${id}: handed to the controller; awaiting item-local completion`);
+    const until = Date.now() + 43200000;
+    while (!existsSync(response)) {
+      if (Date.now() >= until) throw new Error(`${id}: handoff timed out; inspect ${requestPath}, do not repeat payment`);
+      Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, 1000);
+    }
+    const result = json(response);
+    if (!result.ok) throw new Error(result.error);
+    console.log(`${id}: engine handoff completed`); return;
+  }
   const lock = `${prefix}-step7-handoff-${group}.lock`;
   mkdirSync(lock); // No concurrent owner or FA handoff within a group.
   try {
@@ -142,5 +160,15 @@ function owningContractFiles(prefix, id) {
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  try { main(); } catch (error) { console.error(error.stack); process.exitCode = 1; }
+  let failure = null;
+  try { main(); } catch (error) { failure = error; console.error(error.stack); process.exitCode = 1; }
+  const args = process.argv.slice(2);
+  if (args.includes('--execute') && args.includes('--request-key')) {
+    const run = args[args.indexOf('--run')+1], key = args[args.indexOf('--request-key')+1];
+    if (/^[a-zA-Z0-9._-]+$/.test(run) && /^[a-f0-9]{24}$/.test(key)) {
+      const path = `research/${run}-step7-handoff-response-${key}.json`;
+      writeFileSync(`${path}.tmp`, JSON.stringify({ok:!failure,error:failure?.message ?? null,at:new Date().toISOString()}));
+      renameSync(`${path}.tmp`,path);
+    }
+  }
 }

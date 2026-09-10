@@ -152,6 +152,8 @@ export interface Stage {
   maxAttempts?: number;
   fallbackCount?: number;
   plan?: (ctx: Ctx, pending: Unit[]) => Plan[];
+  /** Dispatch ready item handoffs while the owning stage's workers wait. */
+  onProgress?: (args: { ctx: Ctx; executor: any; stage: Stage }) => void | Promise<void>;
   gates?: (ctx: Ctx) => Gate[];
   /** Why this stage needs no gate, and what checks it instead. A stage with no
    *  gate cannot fail; saying so has to be deliberate. The terminal stage may

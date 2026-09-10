@@ -1086,6 +1086,17 @@ export class Executor {
     }
     this._barrierFor = undefined;
 
+    for (const member of group) {
+      if (this.state.data.stages[member.id]?.skipped) continue;
+      try { await member.onProgress?.({ ctx, executor: this, stage: member }); }
+      catch (error: any) {
+        const message = `${member.id}: item handoff failed: ${error.message}`;
+        if (this.state.addBlocker(member.id, message, 'item-handoff'))
+          this.reporter.notify('blocked', message, { stage: member.id });
+        return 'blocked';
+      }
+    }
+
     // ONE LANE CAP FOR THE WHOLE GROUP.
     //
     // `concurrency` mirrors the dispatcher's per-role lane cap. Serially that is

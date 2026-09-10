@@ -150,6 +150,12 @@ repeat unchanged attempts. Per-item licence, precheck and contract checks run
 before spending; whole-run preflight/closure remain mandatory joins. Concurrent
 handoffs reserve the shared one-rejudge budget under short receipt locks.
 An interrupted handoff resumes existing evidence, never spends a second call.
+The sandboxed Alpha writes an item request and waits; the controller's progress
+hook launches the tool, judge and final adjudicator outside the Alpha sandbox.
+Request/response files and normal dispatch records preserve ownership and errors.
+After fixing an infrastructure failure, the operator may queue a `resume-group`
+request for a stopped owning group; it retains completed decisions and resumes
+owed handoffs. It must not overlap a live writer for that group.
 
 Step 8 reviews scope and post-repair changes, closes impact and applies current
 stamps through the tool. Step 9 requires contracts, ledger, pathways, readiness

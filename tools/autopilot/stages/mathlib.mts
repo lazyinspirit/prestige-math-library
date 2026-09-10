@@ -2072,6 +2072,35 @@ export const stages = [
     cohort: alphaCohort,
     pattern: resultPattern('alpha-adjudicate', 'step7-[a-z]+'),
     concurrency: 9,
+    onProgress: ({ ctx, executor, stage }) => {
+      const directory = R(ctx, 'research');
+      const prefix = `${ctx.run}-step7-handoff-request-`;
+      for (const name of readdirSync(directory).filter(name => name.startsWith(prefix) && name.endsWith('.json'))) {
+        const path = join(directory, name);
+        const request = JSON.parse(readFileSync(path, 'utf8'));
+        if (request.run !== ctx.run || !/^[a-z0-9-]+$/.test(request.id ?? '')
+          || !/^[a-z]+$/.test(request.group ?? '') || !/^[a-f0-9]{24}$/.test(request.key ?? ''))
+          throw new Error(`invalid Step-7 handoff request: ${path}`);
+        if (existsSync(R(ctx, `research/${ctx.run}-step7-handoff-response-${request.key}.json`))) continue;
+        const label = `step7-item-${request.key}`;
+        if (executor.state.data.dispatches[`${stage.id}:${label}`]) continue;
+        if (request.kind === 'resume-group') {
+          if (!alphaGroups(ctx).some((group: any) => group.label === request.group))
+            throw new Error(`unknown handoff recovery group ${request.group}`);
+          executor.start(stage, {
+            role: 'alpha-adjudicate', label, job: 'adjudication', covers: [], timeout: 21600,
+            brief: 'briefs/alpha.md', task: [`research/${ctx.run}-alpha-${request.group}-step7.task.md`],
+          });
+          continue;
+        }
+        executor.start(stage, {
+          role: 'tool', label, job: 'judgement', covers: [], timeout: 43200,
+          argv: ['node', 'tools/autopilot/bin/complete-step7-item.mjs', '--run', ctx.run,
+            '--id', request.id, '--group', request.group, '--state-dir', ctx.config.stateDir ?? `.autopilot/${ctx.run}`,
+            '--execute', '--request-key', request.key],
+        });
+      }
+    },
     plan: (ctx, pendingUnits) => alphaGroups(ctx)
       .filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))))
       .map((g: any) => ({
