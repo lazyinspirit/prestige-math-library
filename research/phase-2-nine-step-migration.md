@@ -32,9 +32,14 @@ prepared under `phase-2-nine-step-25`; translated routing passes 760 items and
 784 review obligations. All mathematical content remains unchanged.
 Doctor passed all 35 stages, 412 command flags and 41 task/brief files.
 Controller 62050 started at 2026-09-10 05:29:25 UTC. The genuine checkpoint
-import stage cleared and `5a-import-join` is running 39 mandatory gates.
-No old execution receipt was adopted. Next: fresh Step 5b closure and the
-remaining canonical stages; stop at frontier completion without starting another.
+import and all 39 full-frontier gates passed, followed by the post-review
+baseline and edge index. Step `5b-cross` launched at 05:30:38 UTC;
+worker 63206 is verified Sol/high. Current index: six cross-batch edges,
+zero forward references, zero post-review changes. The index was regenerated
+after synchronizing the hash-schema key in both producers; the stale initial
+760-change list was a detector-schema mismatch, not changed mathematics.
+No old execution receipt was adopted. Next: supervise this audit, exact Step 5b
+closure and remaining stages; stop at frontier completion without another frontier.
 Original state and execution receipts must not be renumbered or adopted.
 
 Integration regression result: 648 TypeScript workflow tests passed, zero failed

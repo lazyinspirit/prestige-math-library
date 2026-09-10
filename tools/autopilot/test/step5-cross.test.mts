@@ -59,6 +59,21 @@ function fixture(edge = false) {
   return { root, run, carrier };
 }
 
+test('scope snapshots and cross-group carriers share the historical hash schema', () => {
+  const fx = fixture();
+  try {
+    for (const batch of ['1', '2']) {
+      const result = spawnSync(process.execPath, [join(REPO, 'tools/step5-scope.mjs'),
+        'hash', '--run', 'r', '--batch', batch, '--label', 'post-5a', '--root', fx.root],
+      { cwd: REPO, encoding: 'utf8' });
+      assert.equal(result.status, 0, result.stderr);
+    }
+    assert.equal(fx.run('list').status, 0);
+    const list = JSON.parse(readFileSync(join(fx.root, 'research/r-cross-group-edges.json'), 'utf8'));
+    assert.deepEqual(list.changes, []);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
 test('5b lists same-group cross-batch edges and closes an exact current verdict', () => {
   const fx = fixture(true);
   try {
