@@ -4,9 +4,22 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1406, U-C 15, A-R 187, A-P 174. The
+Current classifications: U-P 1405, U-C 15, A-R 187, A-P 175. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Killing-form prerequisite audit — 2026-09-11
+
+`prop-killing-form-is-invariant-and-nondegenerate-on-a-complex-semisimple-lie-algebra`
+moves from its single U-P row to A-P after a complete target and used-interface
+read. Invariance is proved, but proof 2.1 obtains nondegeneracy solely by naming
+Cartan's semisimplicity criterion. Its only dependency is the trace-form
+definition, and no published item proves the criterion. Supply the planned
+earlier DG29 Cartan-criterion chain or give the full argument locally, then
+declare it. Three direct published consumers are bounded impact candidates,
+not automatically defective rows. Exact hash, source, consumer IDs and audit
+limits are in `phase-2-next-20-published-killing-form-prerequisite-audit.md`.
+No new index ID or Phase-2 pair is introduced.
 
 ## Set-theory and collar handoff reconciliation — 2026-09-11
 
@@ -27898,10 +27911,10 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1406 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1405 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 15 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 174 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 175 | Recorded direct review and an unresolved item-specific repair. |
 
 666 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
@@ -28688,6 +28701,7 @@ owner's scan policy.
 | `lem-binomial-theorem-over-complex-numbers` | Original-next-20 author-handoff reconciliation 2026-09-11: proof 1.1 falsely calls the `n=0` right side an empty sum; it is the one term `k=0`, equal to one by `binom(0,0)=1` and both zeroth powers. Compute that term explicitly. The stated identity and the induction route remain sound; generic finite-monoid sums are an adequate implicit published interface. Existing suppliers suffice; no new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-author-handoff-reconciliation.md`. |
 | `prop-word-metric-balls-are-finite-exactly-when-the-generating-set-is-finite` | Original-next-20 author-handoff reconciliation 2026-09-11 consolidates two historical matching judge reports and the current handoff. Proof 2.1 says every element of `S union S^(-1)` has length one, false for the identity when it belongs to `S`. Replace this by length at most one; the open radius-two containment and theorem follow, and the finite-generator direction is unaffected. Existing word-length suppliers suffice; no new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-author-handoff-reconciliation.md`. |
 | `thm-collar-neighborhood-theorem` | Boundary/interior topology handoff reconciliation 2026-09-11: after the full target, collar definition and all five declared suppliers were read, proof 2.1 still has no proof or supplier for the load-bearing passage from local collar embeddings to a smooth positive variable width on which the flow map is globally injective with open image. Adapt the earlier published flowout theorem's local defining functions, monotonicity, locally finite positive width and collision argument to the one-sided boundary semiflow, then use local-diffeomorphism openness and rescale the variable strip. Existing published mathematics appears sufficient; no new Phase-2 pair. The live finite-push topology proof does not use this theorem. Exact hash/source/scope: `research/phase-2-next-20-published-set-theory-collar-reconciliation.md`. |
+| `prop-killing-form-is-invariant-and-nondegenerate-on-a-complex-semisimple-lie-algebra` | Original-next-20 finite-Weyl/Kostant prerequisite audit 2026-09-11 promotes the existing U-P row. Proof 1.1 establishes invariance, but proof 2.1 derives nondegeneracy solely by naming Cartan's semisimplicity criterion. Its only declared dependency is the trace-form definition, and no published item proves that load-bearing criterion. Supply and declare the planned earlier DG29 Cartan-criterion/nondegeneracy chain or a complete local proof. Three direct published consumers are bounded impact candidates; no new Phase-2 pair beyond the existing planned repair chain. Exact hash/source/search/scope: `research/phase-2-next-20-published-killing-form-prerequisite-audit.md`; retain the broader Lie Phase-3 repair mapping above. |
 | `thm-rmk-uniqueness-among-radon-measures` | Fourier Step 5A 2026-09-11, independently reconciled by the continuous auditor: full two-step proof read. Step 1.1 invokes published `lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set`, whose Statement assumes Dependent Choice, but target Statement/Given omit DC. Add and declare published `def-dependent-choice` and identify its cutoff use; retain the sound compact/open/Borel comparison. No new Phase-2 supplier or pair. Pending Phase 3; the live AC-qualified measure uniqueness consumer meets this hypothesis. Exact target/supplier hashes and dedup scope: `research/phase-2-next-20-published-author-handoff-reconciliation.md`; originating handoff: `research/phase-2-fourier-support-2-alpha-a-5a.md`. |
 | `thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals` | Fourier support audit 2026-09-11: proof 3.1 proves only the upper norm bound, then asserts compactly supported phase approximation without construction or error/norm control. Repair from the published unit-simple-test variation formula and regular compact/open approximation, with pairwise-disjoint LCH cutoffs or repaired Radon `C_c` density; explicitly propagate DC from the cutoff contract and repair the two supplier findings below. No new Phase-2 pair. Exact clauses and hashes: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `lem-positive-c-zero-functionals-have-finite-regular-representing-measures` | Fourier support closure audit 2026-09-11: proof 1.1 silently uses the DC-qualified LCH cutoff. Proof 3.1 also omits the compact tightness core needed for all-Borel inner regularity; an open complement in noncompact `X` need not have compact complement. Add DC/exact cutoff use and prove the compact-core/outer-regularity argument. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
@@ -30021,7 +30035,6 @@ mathematical repairs. Evidence:
 | `prop-hom-spaces-in-category-o-are-finite-dimensional` | Cross-category Phase-2 roots and their published impact |
 | `prop-identity-maps-and-composites-of-smooth-maps-are-smooth` | Manifold compact-set bump follow-up |
 | `prop-induction-and-restriction-satisfy-the-projection-formula-on-character-rings` | Transitive consumers (166), grouped by home page |
-| `prop-killing-form-is-invariant-and-nondegenerate-on-a-complex-semisimple-lie-algebra` | Exact Phase-3 published repairs |
 | `prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets` | Nonmeasurable-set counterexample: missing witness supply |
 | `prop-machine-descriptions-form-a-decidable-language` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `prop-maximal-plane-triangulation-characterisation` | Scaffold III.4.1 — plane dual dependency |

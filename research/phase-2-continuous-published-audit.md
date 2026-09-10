@@ -299,6 +299,20 @@ Post-reconciliation target index: 2,448 unique published IDs; U-P 1,406, U-C
 within-class or cross-class duplicate, and all indexed IDs resolve to published
 items. The current census leaves 13,482 published IDs outside the index.
 
+The finite-Weyl/Kostant handoff promotes the existing U-P row
+`prop-killing-form-is-invariant-and-nondegenerate-on-a-complex-semisimple-lie-algebra`
+to A-P. Its invariance calculation is sound, but nondegeneracy is obtained only
+by naming Cartan's semisimplicity criterion; the sole declared dependency is the
+trace-form definition and no published item proves the criterion. The planned
+DG29 structure chain or a full local proof must be supplied. Three direct
+published consumers remain impact candidates rather than newly classified
+defects. Evidence:
+`research/phase-2-next-20-published-killing-form-prerequisite-audit.md`.
+
+Post-Killing-form target counts: 2,448 unique published IDs; U-P 1,405, U-C 15,
+A-R 187, A-P 175 and 666 bounded clears. This is one existing-row promotion,
+so the indexed total and outside-census count do not change.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
