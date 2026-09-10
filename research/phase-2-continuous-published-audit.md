@@ -474,6 +474,17 @@ published IDs: U-P 1,410, U-C 15, A-R 187, A-P 189 and 672 bounded clears;
 13,457 published items remain outside the index. Evidence:
 `research/phase-2-next-20-published-compact-section-extension-audit.md`.
 
+The active connection supplier pass adds two new bounded-clear census items.
+The linear matrix-ODE lemma is sound on its declared first-order-IVP scope,
+whose definition fixes positive state dimension; the live draft correctly
+handles rank zero separately. Its constant coefficient extension, two-sided
+Gronwall bounds and compact-interior continuation prove global existence and
+uniqueness. The compact-interior extension lemma's subsequence, first-exit and
+local-gluing argument is also sound in the exact used clause. Counts are now
+2,475 unique published IDs: U-P 1,410, U-C 15, A-R 187, A-P 189 and 674 bounded
+clears; 13,455 published items remain outside the index. Evidence:
+`research/phase-2-next-20-published-linear-matrix-ode-audit.md`.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
@@ -484,5 +495,5 @@ published IDs: U-P 1,410, U-C 15, A-R 187, A-P 189 and 672 bounded clears;
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,457 published items
+No exhaustive discovery claim is authorized while 13,455 published items
 remain outside the index and dependency interfaces remain unaudited.
