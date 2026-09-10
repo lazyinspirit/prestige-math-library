@@ -14,8 +14,11 @@ Replace ITEM and GROUP with the exact owned IDs. Await the command before
 editing another item or shared group file. It checks the repair, runs the one
 Terra rejudge, and immediately dispatches Astra/medium final adjudication on a
 rejection. Other groups continue independently. Do not make another Sol repair
-after the rejudge. On failure, preserve the evidence and report the blocker;
-never buy another judge call. Unchanged false-positive/nonfatal items need no
+after the rejudge. A preflight-only contract or ledger failure may be corrected
+locally within the existing repair licence, then handed off again; no judge
+budget was spent. For a model failure or unresolved mathematics, preserve the
+evidence and report the blocker; never buy another judge call.
+Unchanged false-positive/nonfatal items need no
 handoff. Inspect related items first only when necessary.
 
 On resuming an interrupted group, read its report and existing exact decisions;

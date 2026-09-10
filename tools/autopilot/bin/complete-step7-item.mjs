@@ -71,11 +71,15 @@ function main() {
   try {
     const execute = (argv, capture = false) => {
       const result = spawnSync(process.execPath, argv, {
-        cwd: root, encoding: 'utf8', stdio: capture ? 'pipe' : 'inherit',
+        cwd: root, encoding: 'utf8', stdio: 'pipe',
         maxBuffer: 32 * 1024 * 1024, timeout: 43200000,
       });
       if (result.error) throw result.error;
-      if (!capture && result.status !== 0) throw new Error(`${argv[0]} exited ${result.status}`);
+      if (!capture) {
+        if (result.stdout) process.stdout.write(result.stdout);
+        if (result.stderr) process.stderr.write(result.stderr);
+        if (result.status !== 0) throw new Error(`${argv[0]} exited ${result.status}:\n${String(result.stderr || result.stdout).slice(-6000)}`);
+      }
       return result;
     };
     let hashes = currentHashes(root, id);
