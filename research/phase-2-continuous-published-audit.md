@@ -485,6 +485,16 @@ local-gluing argument is also sound in the exact used clause. Counts are now
 clears; 13,455 published items remain outside the index. Evidence:
 `research/phase-2-next-20-published-linear-matrix-ode-audit.md`.
 
+The active connection mesh supplier `thm-lebesgue-number-lemma` also receives
+a bounded clear after its full proof and exact interfaces were read. It handles
+empty and whole-cover-member cases before taking distances to complements;
+the finite maximum of complement distances is continuous and positive, so its
+positive compact minimum is the required number. This consolidates an older
+clear comparison mention, creates one classification row, and introduces no
+choice or live blocker. Counts are now 2,476 unique published IDs: U-P 1,410,
+U-C 15, A-R 187, A-P 189 and 675 bounded clears; 13,454 remain outside the
+index. Evidence: `research/phase-2-next-20-published-lebesgue-number-audit.md`.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
@@ -495,5 +505,5 @@ clears; 13,455 published items remain outside the index. Evidence:
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,455 published items
+No exhaustive discovery claim is authorized while 13,454 published items
 remain outside the index and dependency interfaces remain unaudited.

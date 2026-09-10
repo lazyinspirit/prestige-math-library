@@ -28038,11 +28038,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,475 unique
+subsequently reconciled published IDs. It currently contains **2,476 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,475 indexed IDs are published; **13,455 published items remain outside this
+2,476 indexed IDs are published; **13,454 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28056,9 +28056,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 189 | Recorded direct review and an unresolved item-specific repair. |
 
-674 further reference-pool items have bounded no-repair-needed dispositions
+675 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,801 items and the expanded reference pool contains 2,475 unique items.
+1,801 items and the expanded reference pool contains 2,476 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28839,6 +28839,7 @@ owner's scan policy.
 | `lem-every-vector-in-a-fibre-extends-to-a-compactly-supported-smooth-section` | Connection-author handoff reconciliation 2026-09-11: full target, four declared dependencies, full chart-bump proof and local-frame existence interfaces read. Chart-bump proofs 3.1--5.1 construct a compact closed `K` and prove the support lies in it, so compactness is a correct use of the complete published supplier despite the short Statement omitting that adjective. Vector-bundle local triviality plus the frame/trivialization proposition adequately supplies proof 1.1's local frame. Adding direct edges would improve exposition but is not repair debt under the adequate-implicit-supplier rule. No live blocker or new pair. Exact hashes/clauses/dedup: `research/phase-2-next-20-published-compact-section-extension-audit.md`. |
 | `lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval` | Active connection-supplier audit 2026-09-11: full lemma and its continuation/Gronwall interfaces read. The declared first-order-IVP definition fixes positive state dimension, so the short Statement's failure to repeat `n>=1` is optional exposition; the live draft invokes this lemma only for positive rank and separately handles rank zero. Constant coefficient extension, two-sided Gronwall bounds, compact-interior continuation and local uniqueness prove the exact published clause. Four direct published consumers remain in the same positive-dimensional variational-system scope or are explicitly two-dimensional. No repair or new pair. Exact hashes/clauses/dedup: `research/phase-2-next-20-published-linear-matrix-ode-audit.md`. |
 | `lem-ode-extension-from-a-compact-interior-region` | Active connection-supplier continuation audit 2026-09-11: full statement, proof and exact Picard, gluing and vector-integral interfaces read. Compactness yields an interior endpoint-state subsequence; the compact-cylinder field bound and first-exit estimate control the whole tail; local existence and uniqueness glue the endpoint solution. The sequence is supplied by the hypothesis, so no choice sequence is constructed. No repair or new pair in this used scope. Exact hashes/clauses/dedup: `research/phase-2-next-20-published-linear-matrix-ode-audit.md`. |
+| `thm-lebesgue-number-lemma` | Active connection-supplier audit 2026-09-11: complete theorem and exact compactness, distance-to-complement, diameter and extreme-value clauses read. Empty-space and whole-cover-member cases are separated before complements are used. The finite maximum of complement distances is positive pointwise and attains a positive minimum; a set of smaller diameter lies in the corresponding cover member. Only finite choices occur. This consolidates the historical clear comparison mention under its single alias and supplies the live compact-interval mesh exactly. No repair or new pair. Exact hashes/clauses/dedup: `research/phase-2-next-20-published-lebesgue-number-audit.md`. |
 
 
 ### A-P — Audited items pending Phase 3 repair
