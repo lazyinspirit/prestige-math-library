@@ -2085,11 +2085,12 @@ export const stages = [
         const label = `step7-item-${request.key}`;
         if (executor.state.data.dispatches[`${stage.id}:${label}`]) continue;
         if (request.kind === 'resume-group') {
-          if (!alphaGroups(ctx).some((group: any) => group.label === request.group))
+          const g = alphaGroups(ctx).find((group: any) => group.label === request.group);
+          if (!g)
             throw new Error(`unknown handoff recovery group ${request.group}`);
           executor.start(stage, {
             role: 'alpha-adjudicate', label, job: 'adjudication', covers: [], timeout: 21600,
-            brief: 'briefs/alpha.md', task: [`research/${ctx.run}-alpha-${request.group}-step7.task.md`],
+            brief: 'briefs/alpha.md', task: [`research/${ctx.run}-alpha-${g.label}-step7.task.md`],
           });
           continue;
         }
