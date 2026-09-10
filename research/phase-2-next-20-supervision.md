@@ -128,3 +128,20 @@ Full canonical plan validation passes. Supplemental engine planning is
 phase-2-fourier-support-2,4 pages/1 batch, lower-order in-run dependency explicit.
 Original20 held intact. Three expansion slots unused. Original17-source
 retry exception remains unanswered; new scope authorization does not waive it.
+
+RL14 chamber resolution: root read the exact published GCM root-sign and
+Weyl-automorphism proofs and Kleshchev3.3.1–3.3.3/3.4.1(i)–(iii), then added
+three local supporting items and proved the full wall stabilizer formula.
+Removed only RL14's unused finite-DG root-system page edge. No extra pair.
+The new three records and original held proposition are ready for independent
+Step3 judgment. Twenty-one prior ready items have identical mathematical
+contracts to69384a341; their hashes were reconciled for the removed page
+metadata, preserving previous reasons and archived records. Current original
+run has543 items,88 current ready,455 escalated. Canonical plan validates.
+
+Supplemental run started at15:05:19.560 UTC, PID1070206, exact state
+.autopilot/phase-2-fourier-support-2. At15:10:44 UTC it remains in first drift
+review with a live observed worker and no blockers; no intervention warranted.
+The additional field-cohomology choice-interface finding from batch8 is now
+in the published ledger, preserving the local finite-basis repair strategy
+and distinguishing its new unrestricted scaffold from a published repair.

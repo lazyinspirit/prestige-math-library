@@ -9,12 +9,13 @@ existing Phase2 pairs with no substantial unmet prerequisite chain.
 Admitted additions: **FA22 Fourier transform/convolution** and **FA23 Schwartz/Plancherel**.
 Three slots remain unused. The25-pair expansion proposal is superseded.
 Programme: **147 pairs =44 published +20 original selected +2 added selected
-+81 waiting**. Original run:40 pages/14 batches, Step1 held at540 items
-(84 ready records,456 escalations). Supplemental run:4 pages/1 batch,
++81 waiting**. Original run:40 pages/14 batches, Step1 held at543 items
+(88 current ready records,455 escalations). Supplemental run:4 pages/1 batch,
 with FA22 before FA23. Admission evidence: `phase-2-five-cap-admission.md`
 and its exact published-interface census JSON. No original pair was removed.
 The supplemental plan validates; the full source/author/review gates remain.
-Lie and large-cardinal prerequisite gaps, source exceptions and other local
+The RL14 chamber gap is resolved by three local supporting items; finite-Weyl
+and large-cardinal prerequisite gaps, source exceptions and other local
 proof work are not claimed resolved by these two additions.
 Build completion leaves new content draft pending owner publication.
 

@@ -4,9 +4,28 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1438, U-C 14, A-R 187, A-P 158. The
+Current classifications: U-P 1438, U-C 15, A-R 187, A-P 158. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Finite-dimensional cohomology duality choice interface — 2026-09-11
+
+Batch8 reported, and root read the complete current published target
+`cor-cohomology-over-a-field-is-dual-to-homology-for-finite-dimensional-complexes`.
+Its entire proof invokes the general UCT and injectivity of every field-module
+without propagating their choice assumptions. The finite-dimensional statement
+is not refuted: extend linear functionals using finite bases in the two
+relevant chain degrees to prove surjectivity and identify coboundaries with
+functionals vanishing on cycles. That finite argument avoids arbitrary-rank
+injectivity and needs no new Phase2 pair. Alternatively explicitly declare
+the inherited AC assumption and dependency, after repairing the already
+recorded UCT interface. Class U-C pending complete repair audit.
+
+The new unrestricted field-cohomology duality theorem in batch8 is an
+escalated scaffold and is not a published repair supplier for this earlier
+finite-dimensional item. Source evidence: exact existing proof and batch8
+Published defects item3; no fresh external-source reading or independent
+judgment is claimed. No published item changed.
 
 ## Doob–Dynkin choice-interface finding — 2026-09-11
 
@@ -27539,11 +27558,11 @@ This index retains the **2185 distinct published item IDs in the initial
 classification reference pool**, plus **5 newly identified published supplier
 items from U-C19**, **1 new 6c remark finding**, **1 Step-9 repaired definition**,
 **3 HG-P published prerequisite repairs**, **1 diagram-boundary consumer finding**,
-and **16 subsequent frontier-supervision findings**, plus **135 UC34 supplier findings**, plus **4 newly indexed Step3b Tor findings**, plus **2 Step3b real-integrability findings**, plus **2 recovered HG continuity repair rows**, plus **1 resolution-dependent Tor definition repair**, plus **1 sequence-space proof-interface candidate**, plus **2 Green-correspondence prerequisite findings**, plus **1 Cayley-tree proof finding**, plus **3 cohomology extension-map findings**, plus **1 Doob–Dynkin choice finding**, for **2364 indexed items**. It is not a census of defective items or a
+and **16 subsequent frontier-supervision findings**, plus **135 UC34 supplier findings**, plus **4 newly indexed Step3b Tor findings**, plus **2 Step3b real-integrability findings**, plus **2 recovered HG continuity repair rows**, plus **1 resolution-dependent Tor definition repair**, plus **1 sequence-space proof-interface candidate**, plus **2 Green-correspondence prerequisite findings**, plus **1 Cayley-tree proof finding**, plus **3 cohomology extension-map findings**, plus **1 Doob–Dynkin choice finding**, plus **1 finite-dimensional cohomology duality finding**, for **2365 indexed items**. It is not a census of defective items or a
 claim that every supplier later cited by an audit is a defect candidate.
 The publication census, checked 2026-09-10 from item front matter, has
-**15930 published items**. All 2364 indexed IDs are published;
-**13566 published items remain outside this index** and require census
+**15930 published items**. All 2365 indexed IDs are published;
+**13565 published items remain outside this index** and require census
 reconciliation. This is a status census, not a mathematical audit of those
 outside-index items.
 The initial extraction also contained
@@ -27553,13 +27572,13 @@ Supplier mappings and subsequent item-specific findings remain above.
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
 | U-P | Unaudited and potentially defective items | 1438 | Evidence/role reconciliation incomplete; not a defect verdict. |
-| U-C | Unaudited and confirmed defective items | 14 | Confirmed mathematical or prerequisite defect; repair audit pending. |
+| U-C | Unaudited and confirmed defective items | 15 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 158 | Recorded direct review and an unresolved item-specific repair. |
 
 567 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1797 items and the expanded reference pool contains 2364 unique items.
+1798 items and the expanded reference pool contains 2365 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28407,6 +28426,7 @@ owner's scan policy.
 
 | Published item | Exact prerequisite debt at classification |
 |---|---|
+| `cor-cohomology-over-a-field-is-dual-to-homology-for-finite-dimensional-complexes` | Batch8/root2026-09-11: finite-dimensional statement invokes choice-bearing general UCT/injectivity without assumptions. Local finite-basis evaluation proof can repair it; no new Phase2 supplier. See Finite-dimensional cohomology duality choice interface. |
 | `thm-doob-dynkin-lemma` | Batch3/root full target reading 2026-09-11: rational Borel lifts selected simultaneously without a choice contract. Existing def-countable-choice or def-axiom-of-choice suffices; no new pair. See Doob–Dynkin choice-interface finding. |
 | `thm-the-cohomology-universal-coefficient-sequence-splits-nonnaturally` | Batch8 2026-09-11 confirmed extension-map well-definedness/choice-contract debt; exact local earlier HA suppliers and repair identity recorded in Cohomology extension-map prerequisite findings and phase-2-next-20-batch-8.notes.md. New topological supplier is scaffolded/escalated, never a forward repair premise. No new Phase 2 pair. |
 | `thm-universal-coefficient-theorem-for-cohomology-over-a-pid` | Batch8 2026-09-11 confirmed extension-map well-definedness/choice-contract debt; exact local earlier HA suppliers and repair identity recorded in Cohomology extension-map prerequisite findings and phase-2-next-20-batch-8.notes.md. New topological supplier is scaffolded/escalated, never a forward repair premise. No new Phase 2 pair. |
