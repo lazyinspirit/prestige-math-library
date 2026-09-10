@@ -1,0 +1,9 @@
+# Carleson size selection: local proof repair
+
+The complete existing lemma now proves the selected-tree count and residual half-size bound for the exact local packet and designated-top conventions. The statement is unchanged. Added the existing complex L2 Cauchy–Schwarz dependency and synchronized the batch5 manifest and strict contract.
+
+Read Lacey, arXiv math/0307008, section5 pp15–18, including the selection, strong disjointness and Bessel reduction. The source leaves its estimates5.7–5.8 to the reader; the local proof supplies both. Fully read the local packet and size definitions, Plancherel body, and the complex L2 pairing supplier. No new source attempt or source disposition was made.
+
+The top-member convention needs an explicit adjustment absent from the informal scaffold. Doubling the top spatial interval and taking its upper frequency half makes every witness strict, losing a factor two in its squared normalized energy. Select the minimum frequency center among the finite strict witnesses above sigma²/8, removing full trees. Monotone centers force nested-frequency interactions outside the earlier entire top. Pairwise disjointness of the interacting smaller spatial intervals, the directly integrated Schwartz convolution bound, and an explicit sum of the two boundary tails at each dyadic scale give the off-diagonal bound. Equal-frequency interactions use an explicitly summable lattice matrix. Finite synthesis and Cauchy–Schwarz finish the count. All selections are finite; inherited AC is identified.
+
+Checks: explicit-path precheck passes in canonical form; renderer passes; strict selected-item contract passes; batch5 content policy27/27 passes. These are local mechanical checks, not an independent mathematical verdict. Root owns decision receipts. The forest and other Carleson consumers retain their single-tree and other analytic holds; this repair does not waive Fremlin backing or prove the Carleson theorem.
