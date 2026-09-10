@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1413, U-C 15, A-R 187, A-P 168. The
+Current classifications: U-P 1410, U-C 15, A-R 187, A-P 169. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -202,6 +202,22 @@ exact uses. Four existing U-P rows move to bounded clear and ten fully read
 items enter the bounded-clear census. Exact hashes, proof receipts and audit
 limits are in
 `phase-2-next-20-published-rectangle-density-prerequisite-audit.md`.
+
+The finite-space Chernoff prerequisite audit finds one genuine published alias
+collision. `thm-algebra-of-derivatives` lists `thm-product-rule` as an alias,
+but that string is the exact ID of the separate published finite-cardinality
+product theorem. Remove or rename the derivative alias. The derivative proof
+itself is sound, and the live consumer names its exact ID, so the collision is
+not a live authoring blocker.
+
+The exact mean-value path is choice-free: Cauchy MVT uses Rolle, and Rolle uses
+the real EVT's compact-image/order-supremum proof rather than a sequential/CC
+route. Finite expectation factorization and Markov use only finite sums. The
+elementary exponential, logarithm and derivative clauses used by the same
+proof are coherent. Two other U-P items move to bounded clear, nineteen fully
+read items enter that census, and the already-clear EVT and chain rule are
+reconfirmed without duplicate rows. Exact hashes, alias searches and clause
+limits are in `phase-2-next-20-published-chernoff-prerequisite-audit.md`.
 
 ## Locally convex published-prerequisite audit — 2026-09-11
 
@@ -27884,6 +27900,27 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-real-exponential-function-and-e` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: the all-real convergence supplier makes the power-series definition total and gives `exp(0)=1`. U-P to bounded clear in the used scope. Exact hash: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `thm-continuous-inverse` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: full target read. Strict monotonicity, interval image and the monotone interval-image criterion prove inverse continuity, with the decreasing case reduced by negation. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `thm-expectation-of-products-of-independent-random-variables` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: joint attained-value grouping, mutual-independence factorization and finite Fubini prove the product formula, including the empty family. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `thm-markov-inequality` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: the pointwise weak-threshold bound, finite expectation monotonicity and positive division give the exact finite-space Markov clause. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `cor-mean-value-theorem` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: substituting the identity into Cauchy MVT gives the equation, and the exact Rolle/real-EVT path is choice-free. Neither listed alias collides with a classification ID. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `thm-cauchy-mean-value` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: its auxiliary linear combination has equal endpoint values and Rolle yields the product-form conclusion without division or choice. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `thm-rolle` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: attained extrema give an interior extremum or force the constant case; only finite witnesses are used. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `thm-derivative-of-exponential` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: termwise differentiation and factorial cancellation give `exp'=exp`, and infinite radius licenses iteration. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `thm-exponential-is-strictly-increasing` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: the choice-free MVT chain and exponential positivity give strict increase; the power series gives continuity. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `thm-logarithm-derivative-and-integral` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: full target read; in the used clause, inverse differentiation and exponential positivity give `log'(x)=1/x`. The coherent integral clause is not needed by this consumer. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `thm-exponential-addition-formula` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: the all-radius Cauchy product and binomial coefficient identity give the coefficient series for `exp(x+y)`. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `cor-exponential-reciprocal-and-positivity` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: addition at `x,-x`, the square at `x/2` and nonzero-square positivity prove both clauses. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `def-natural-logarithm` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: the published exponential bijection makes the inverse on positive reals well defined. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `thm-derivative-of-an-inverse` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: full proof read. The reciprocal increment factor proves the nonzero-derivative case; the identity derivative excludes differentiability at a zero derivative. Its alias does not collide. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `def-bernoulli-and-binomial-random-variables` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: the Bernoulli probabilities, independent finite sum and empty-sum convention are coherent, including deterministic endpoints. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `lem-expectation-by-distribution` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: partitioning a finite outcome space into attained-value fibres and reindexing the finite sum gives the formula. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `def-independence-of-finite-random-variables` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: the attained-value definition covers every nonempty subfamily and explicitly handles empty and singleton families. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `lem-finite-sum-reindexing-and-fubini` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: enumeration independence, disjoint concatenation and row/column enumeration prove all finite reindexing clauses. Its exact `thm-product-rule` edge correctly names the cardinal theorem. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `thm-product-rule` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: slicing proves finite binary products and induction proves indexed finite products, including the computed empty product. The theorem is sound; the alias collision belongs to the derivative theorem. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `thm-expectation-monotonicity-and-bounds` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: nonnegative finite weights preserve order and constant expectations give the min/max bounds. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
+| `lem-indicator-expectation-and-products` | Original-next-20 Chernoff prerequisite audit, 2026-09-11: direct finite expansion proves indicator expectation, intersection products and finite event counts, including empty conventions. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
 | `lem-finite-rectangle-unions-form-a-generating-algebra` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: the complete target and product-set interfaces were read. Its measurable Boolean product atoms form a finite disjoint partition jointly refining any finite rectangle family, which supplies union, complement and difference closure despite terse step-2 wording. U-P to bounded clear under the correct implicit-use rule. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
 | `thm-completion-measurable-functions-have-base-measurable-representatives` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Explicit CC licenses the countable family of base-measurable level-set cores; their null errors have null union, and the base-measurable limsup equals the completed-measurable function off it. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
 | `lem-finite-measure-sets-are-approximable-by-a-generating-algebra` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Complement closure and countable-union closure follow from a finite initial union, finitely many algebra approximants, continuity from below and subadditivity. New bounded-clear census entry; finite choice is a correct implicit adequate use. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
@@ -28568,6 +28605,7 @@ owner's scan policy.
 | `thm-differentiation-under-the-integral-sign` | Fourier Gaussian supplier audit 2026-09-11 promotes the existing U-P row: proof 3.1 proves convergence along every supplied increment sequence, then concludes an epsilon-delta derivative through the exact Heine-converse direction whose published contract spends countable choice; the theorem states no CC. Its a.e. derivative is also integrated without a defined measurable representative on the exceptional set. Add CC, apply the real criterion to real/imaginary parts, and define the derivative as zero on one stated null set (or supply an equivalent representative). The live Gaussian draft already has CC and pointwise differentiability everywhere. No new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-factorization-of-expectations-for-independent-variables` | Original-next-20 characteristic-function prerequisite audit 2026-09-11 promotes the existing U-P row: the nonnegative clause writes a finite extended product without handling one zero and one infinite expectation, while canonical `0*(+infinity)` is undefined. State the mixed case separately or prove the zero-factor case before using the defined positive extended product. The integrable clause is sound and is the exact bounded sine/cosine branch used by the live author. No new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
 | `thm-continuous-implies-integrable` | Original-next-20 Levy-inversion prerequisite audit 2026-09-11 promotes the existing U-C row after full-target and exact used-interface review. L3/step 2.1 invoke `thm-heine-cantor-r`, whose proof explicitly spends CC, while the consumer states no choice hypothesis; its final remark acknowledges but does not repair the contract. Add CC or use all admissible oscillation balls, a finite compactness subcover, a minimum radius and `thm-riemann-criterion`. The live sine lemma assumes AC and can discharge CC locally. Existing published suppliers suffice; no new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-levy-inversion-prerequisite-audit.md`; earlier Step3b-d evidence retained. |
+| `thm-algebra-of-derivatives` | Original-next-20 Chernoff prerequisite audit 2026-09-11 promotes the sole U-P row: its alias `thm-product-rule` collides with the exact ID of the published finite-cardinality Cartesian-product theorem, creating an ambiguous/wrong-type lookup interface. Remove the alias or replace it with an unused derivative-specific name. The Caratheodory-factor proofs of all four derivative rules are sound and choice-free, and the live consumer cites the exact derivative-algebra ID. No new Phase-2 pair. Exact hashes/alias search: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
 | `lem-euclidean-balls-have-positive-finite-lebesgue-measure` | Fourier support audit 2026-09-11: steps 2.1--3.1 infer measurability from containment between measurable cubes and use `lambda(B)` before the domain claim; the inference is invalid. First use published Euclidean-metric, metric-ball-openness and Borel-to-Lebesgue interfaces under the target's stated countable choice, then apply the sound cube bounds. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-total-variation-is-a-measure` | Fourier support audit 2026-09-11: proof 1.2 chooses partitions for every disjoint piece and then takes a sum of suprema without near-maximality or a valid selection. Repair choice-free via finitely many near-max partitions for each finite partial sum, published finite choice and the nonnegative-series supremum; handle infinite variations by arbitrary finite thresholds. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences` | Fourier support audit 2026-09-11: proof 1.1 directly applies `thm-riesz-fischer-completeness-of-l-p`, whose representative-subsequence clause explicitly assumes countable choice, but the corollary has no such hypothesis. State/declare countable choice and identify the inherited representative selection. The complex-Lp consumer already carries CC. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
@@ -29152,7 +29190,6 @@ mathematical repairs. Evidence:
 | `def-rayleigh-quotient-iteration` | 17. Exact B-leaf and body-link repairs |
 | `def-read-only-input-logspace-machine` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-real-beta-integral` | 9.5 Forward order and load-bearing body links |
-| `def-real-exponential-function-and-e` | 9.5 Forward order and load-bearing body links |
 | `def-real-gamma-function-by-the-euler-integral` | 9.5 Forward order and load-bearing body links |
 | `def-real-limit` | 0A.2 Exact Phase-3 defects in published content |
 | `def-real-power` | 9.5 Forward order and load-bearing body links |
@@ -30019,7 +30056,6 @@ mathematical repairs. Evidence:
 | `thm-a-sphere-has-a-nowhere-zero-tangent-vector-field-iff-its-dimension-is-odd` | Continuing personal audit: exact examination pool and AT-24 contracts |
 | `thm-absolute-irreducibility-via-the-endomorphism-division-algebra` | Transitive consumers (166), grouped by home page |
 | `thm-affine-closed-immersions-quotient-rings` | Published scheme-pair repair |
-| `thm-algebra-of-derivatives` | Manifold compact-set bump follow-up |
 | `thm-all-norms-on-rn-are-equivalent` | 9.5 Forward order and load-bearing body links |
 | `thm-almost-sure-convergence-implies-convergence-in-probability` | 0A.2 Exact Phase-3 defects in published content |
 | `thm-almost-sure-subsequence-from-convergence-in-probability` | 0A.6 Planned-supplier consumer ledger and phase classification |
@@ -30116,7 +30152,6 @@ mathematical repairs. Evidence:
 | `thm-continuity-from-above-for-measures` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-continuity-from-below-for-measures` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-continuity-iff-oscillation-zero` | 9.5 Forward order and load-bearing body links |
-| `thm-continuous-inverse` | 9.5 Forward order and load-bearing body links |
 | `thm-coprime-conjugacy-class-size-forces-zero-character-or-scalar-action` | Transitive consumers (166), grouped by home page |
 | `thm-countable-product-of-probability-spaces` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-countable-subsets-of-omega-one-are-bounded` | 7.1 Recorded-Not-Proved closure and prose defects |

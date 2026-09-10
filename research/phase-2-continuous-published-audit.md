@@ -195,6 +195,22 @@ no within-class or cross-class duplicate; all 2,408 indexed IDs resolve to
 current published items. The current published census is 15,930, leaving
 13,522 outside the index.
 
+The active finite-space Chernoff path revealed one published alias defect:
+`thm-algebra-of-derivatives` aliases itself as `thm-product-rule`, which is the
+exact ID of the separate finite-cardinality product theorem. It moves U-P to
+A-P; its mathematical proof remains sound and the live consumer uses its exact
+ID. The mean-value chain through Rolle and real EVT is choice-free. The finite
+expectation/Markov and elementary exponential/logarithm clauses are coherent.
+Two U-P targets move to bounded clear and nineteen fully read IDs enter that
+census. Evidence:
+`research/phase-2-next-20-published-chernoff-prerequisite-audit.md`.
+
+Post-Chernoff target index: 2,427 unique published IDs; U-P 1,410, U-C 15,
+A-R 187, A-P 169 and 646 bounded clears. Mechanical recount confirms no
+within-class or cross-class duplicate; all 2,427 indexed IDs resolve to current
+published items. The current published census is 15,930, leaving 13,503 outside
+the index.
+
 ## Next target
 
 1. Audit batch 12's published machine-code and step-by-step interpreter
