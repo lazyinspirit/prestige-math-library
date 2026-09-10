@@ -1,5 +1,17 @@
 # Phase 2: nine-step migration
 
+Current handoff, 2026-09-10: both impact gates now pass. The 5,483-row receipt
+reconciles 666 current reviews, 4,764 unchanged historical consumers, 41 recorded
+subsequent repairs, two preserved debts and ten CW interface mappings. The
+post-5a window separately covers ten unchanged consumers of the circle repair.
+No new broad audit or scaffold is required. The owner explicitly directed
+moving to Step 6 judging; the engine is resumed for closure and judging.
+An unnecessary reharvest worker (81410) was stopped before rebuilding content:
+the failing Vivaldi URL was a connection reset and returned HTTP 200 on the
+operator's next request. Commit `68fea4956` routes such transport-only failures
+to outage waiting, not source retirement/reharvesting; all 37 dispatch tests pass.
+Current ledger totals: U-P1449, U-C8, A-R186, A-P150. No new pairs or publication.
+
 Owner request: install the local workflow rewrite, carry forward Step 6 fixes,
 retire the old engine and finish the existing 25 pairs. No new frontier or
 publication is authorized. Published-proof pool repairs remain suspended.
@@ -49,10 +61,18 @@ Original state and execution receipts must not be renumbered or adopted.
 The completed reviewer accepted all six cross-batch interfaces. Four gate rows
 confirm historical defects already repaired; they are not newly discovered defects.
 The final battery stopped on an imported deferred published reflection-degree
-dependency finding. Engine worker 68742, Sol/high, owns
-`5b-gate-step5-routing-final-1`; do not race its item/ledger edits. The controller
-was temporarily paused while the operator inspected the blockers; verify live
-state before steering it.
+dependency finding. Worker 68742, Sol/high, completed
+`5b-gate-step5-routing-final-1` successfully at 06:16:56 UTC. It replaced the
+undeclared circle calculation with published cellular-homology suppliers and
+synchronized the plan, ledger and six-row published-repair handoff. The repaired
+mathematical guard is `dba1c0250e69bfbe953e0cdeca9c4eaafd856349fcfcab9ecc303ec36e0e4b99`.
+Root removed the obsolete September 7 audit/judge stamps and reconciled the
+composite gate binding without changing that mathematical guard or verdict.
+Routing and cross-group checks pass. The gate battery observed the temporary
+binding mismatch before reconciliation and launched worker 77943, Sol/high,
+`5b-gate-cross-group-edges-3` at 06:18:48 UTC; it should reproduce the now-passing
+gate and finish without another mathematical repair. Verify live ownership.
+The controller is running. Impact receipts remain pending; Step 6 has not begun.
 
 Root reconciled batch 15's Balogh alternative-proof direct dependencies with
 the authored theorem and manifest. The former list is preserved as
@@ -62,6 +82,10 @@ No mathematical content, source-reading receipt or approval was changed.
 or warnings. The two Marker source archive swaps were already applied by the
 engine; the fresh URL sweep passes all 88 live URLs and 91 citation decisions.
 The controller was resumed at 05:59 UTC and still owns the active repair.
+The engine later recovered the Shach determinacy URL as well. Its next full
+battery passed routing, all 17 coverage files and the structural/content gates.
+Root's bounded gate-handoff prompt fix is commit `65e0e873f`; explicit lead
+impact-receipt ownership is commit `9a3171723`. Neither was pushed.
 
 The impact receipt is still pending, not waived: 716 changed interfaces consist
 of 711 additions and five existing published carriers (metric continuity theorem,
