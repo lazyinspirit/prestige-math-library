@@ -276,15 +276,38 @@ A-R 187, A-P 173 and 664 bounded clears. Mechanical recount must confirm no
 within-class or cross-class duplicate and that all indexed IDs remain
 published. The current census leaves 13,485 published IDs outside the index.
 
+The original group-h and topology-owner handoffs are now reconciled. The five
+Boolean definitions named by a published page remain draft, so their page/status
+mismatch is workflow composition evidence and does not create published-item
+rows. `thm-fodor-pressing-down` and
+`prop-basic-stationary-set-calculus` enter the bounded-clear census: both
+explicitly state ZFC, and their explicit avoiding-club choices are correct
+implicit uses of adequate published AC and club interfaces. Missing direct AC
+edges alone are optional metadata.
+
+`thm-collar-neighborhood-theorem` is newly A-P after all five declared
+suppliers were read. Proof 2.1 omits the load-bearing collision and smooth
+positive-width construction needed to turn local flow collars into one
+globally injective variable strip with open image. The earlier published
+flowout theorem supplies a repair pattern that can be adapted to the one-sided
+boundary flow, so no new Phase-2 pair is identified. The live finite inward-push
+topology proof does not use this theorem. Exact evidence:
+`research/phase-2-next-20-published-set-theory-collar-reconciliation.md`.
+
+Post-reconciliation target index: 2,448 unique published IDs; U-P 1,406, U-C
+15, A-R 187, A-P 174 and 666 bounded clears. Mechanical recount confirms no
+within-class or cross-class duplicate, and all indexed IDs resolve to published
+items. The current census leaves 13,482 published IDs outside the index.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
    issues reported by the root worker, prioritizing items actually consumed by
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
-   then audit bounded samples of published items outside the 2,445-ID index.
+   then audit bounded samples of published items outside the 2,448-ID index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,485 published items
+No exhaustive discovery claim is authorized while 13,482 published items
 remain outside the index and dependency interfaces remain unaudited.

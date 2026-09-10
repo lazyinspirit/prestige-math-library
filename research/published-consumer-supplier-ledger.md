@@ -4,9 +4,35 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1406, U-C 15, A-R 187, A-P 173. The
+Current classifications: U-P 1406, U-C 15, A-R 187, A-P 174. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Set-theory and collar handoff reconciliation — 2026-09-11
+
+The two set-theory handoff targets are bounded clears under the canonical
+correct-implicit-use rule. `thm-fodor-pressing-down` and
+`prop-basic-stationary-set-calculus` both explicitly state their results in
+ZFC, and their proofs explicitly spend the resulting AC to select avoiding
+clubs. Published `def-axiom-of-choice` and the exact stationary/club suppliers
+are adequate. Missing direct AC edges alone are optional declaration cleanup,
+not repair debt.
+
+The five Boolean-definition files named by the published Stone-duality page
+remain draft. That page/status mismatch is workflow composition evidence; no
+draft ID enters this published-item index and no mathematical defect is inferred.
+
+`thm-collar-neighborhood-theorem` is newly A-P after the target, collar
+definition and all five declared suppliers were read. Proof 2.1 asserts that a
+locally finite family of local flow collars admits a smooth positive width on
+which the flow map is globally injective with open image, but gives neither the
+collision/shrinking construction nor a supplier for it. Repair can adapt the
+published flowout theorem's monotone local-defining-function and smooth-width
+argument to the one-sided boundary semiflow. Existing published mathematics
+appears sufficient; no new Phase-2 pair is identified. The live finite
+inward-push topology proof does not use the collar theorem and is not blocked.
+Exact hashes, clauses, source cross-check and audit limits are in
+`phase-2-next-20-published-set-theory-collar-reconciliation.md`.
 
 ## Fourier support published-prerequisite reconciliation — 2026-09-11
 
@@ -27859,11 +27885,11 @@ No new Phase2 pair; source barriers are not waived.
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,445 unique
+subsequently reconciled published IDs. It currently contains **2,448 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,445 indexed IDs are published; **13,485 published items remain outside this
+2,448 indexed IDs are published; **13,482 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -27875,11 +27901,11 @@ Supplier mappings and subsequent item-specific findings remain above.
 | U-P | Unaudited and potentially defective items | 1406 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 15 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 173 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 174 | Recorded direct review and an unresolved item-specific repair. |
 
-664 further reference-pool items have bounded no-repair-needed dispositions
+666 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,781 items and the expanded reference pool contains 2,445 unique items.
+1,782 items and the expanded reference pool contains 2,448 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28650,6 +28676,8 @@ owner's scan policy.
 | `thm-reals-ordered-field` | Scalar-topology audit: full current proof read; representative independence, trichotomy and field-operation compatibility supply the ordered real scalar field. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-scalar-topology-audit.md. |
 | `def-complex-conjugate-real-imaginary-part-and-modulus` | Scalar-topology audit: full current definition read; unique coordinates and real square roots make the modulus construction well defined. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-scalar-topology-audit.md. |
 | `lem-complex-conjugation-and-modulus-laws` | Scalar-topology audit: full current proof read; definite, multiplicative and subadditive modulus clauses support the local joint scalar-operation estimates. Unused automorphism terminology is outside this bounded clear. Exact hash/evidence: research/phase-2-next-20-published-scalar-topology-audit.md. |
+| `thm-fodor-pressing-down` | Original-next-20 group-h reconciliation: the Statement explicitly assumes ZFC and proof 1.1 explicitly identifies its AC selection of one avoiding club per fibre. Published `def-axiom-of-choice`, the club/nonstationary definition and diagonal-intersection theorem adequately supply the exact use; a missing direct AC edge alone is optional metadata. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-set-theory-collar-reconciliation.md. |
+| `prop-basic-stationary-set-calculus` | Original-next-20 group-h reconciliation: the Statement explicitly assumes ZFC. Proof 2.1's avoiding-club selection is the exact small-completeness argument already stated under ZFC in published `def-club-filter-and-nonstationary-ideal`; the small-intersection supplier is published. A missing direct AC edge alone is optional metadata. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-set-theory-collar-reconciliation.md. |
 
 
 ### A-P — Audited items pending Phase 3 repair
@@ -28659,6 +28687,7 @@ owner's scan policy.
 | `thm-marcinkiewicz-interpolation-for-weak-one-one-and-strong-infinity` | Original-next-20 author-handoff reconciliation 2026-09-11 moves the existing U-P row after full-target review. Proof 4.1 applies the published sigma-finite Tonelli theorem on an arbitrary measure space without its hypothesis; retain the earlier tail-integrability and a.e.-endpoint repairs. The live maximal corollary specializes to Lebesgue `R^n` under CC, where the published sigma-finiteness proposition validates this exact Tonelli use, so there is no additional Carleson blocker. The general theorem can use the recorded simple-function/MCT repair. Existing published suppliers suffice; no new Phase-2 pair. Exact hash, clauses and specialization: `research/phase-2-next-20-published-author-handoff-reconciliation.md`; earlier evidence retained in Published Marcinkiewicz interpolation: local repair, no new pair. |
 | `lem-binomial-theorem-over-complex-numbers` | Original-next-20 author-handoff reconciliation 2026-09-11: proof 1.1 falsely calls the `n=0` right side an empty sum; it is the one term `k=0`, equal to one by `binom(0,0)=1` and both zeroth powers. Compute that term explicitly. The stated identity and the induction route remain sound; generic finite-monoid sums are an adequate implicit published interface. Existing suppliers suffice; no new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-author-handoff-reconciliation.md`. |
 | `prop-word-metric-balls-are-finite-exactly-when-the-generating-set-is-finite` | Original-next-20 author-handoff reconciliation 2026-09-11 consolidates two historical matching judge reports and the current handoff. Proof 2.1 says every element of `S union S^(-1)` has length one, false for the identity when it belongs to `S`. Replace this by length at most one; the open radius-two containment and theorem follow, and the finite-generator direction is unaffected. Existing word-length suppliers suffice; no new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-author-handoff-reconciliation.md`. |
+| `thm-collar-neighborhood-theorem` | Boundary/interior topology handoff reconciliation 2026-09-11: after the full target, collar definition and all five declared suppliers were read, proof 2.1 still has no proof or supplier for the load-bearing passage from local collar embeddings to a smooth positive variable width on which the flow map is globally injective with open image. Adapt the earlier published flowout theorem's local defining functions, monotonicity, locally finite positive width and collision argument to the one-sided boundary semiflow, then use local-diffeomorphism openness and rescale the variable strip. Existing published mathematics appears sufficient; no new Phase-2 pair. The live finite-push topology proof does not use this theorem. Exact hash/source/scope: `research/phase-2-next-20-published-set-theory-collar-reconciliation.md`. |
 | `thm-rmk-uniqueness-among-radon-measures` | Fourier Step 5A 2026-09-11, independently reconciled by the continuous auditor: full two-step proof read. Step 1.1 invokes published `lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set`, whose Statement assumes Dependent Choice, but target Statement/Given omit DC. Add and declare published `def-dependent-choice` and identify its cutoff use; retain the sound compact/open/Borel comparison. No new Phase-2 supplier or pair. Pending Phase 3; the live AC-qualified measure uniqueness consumer meets this hypothesis. Exact target/supplier hashes and dedup scope: `research/phase-2-next-20-published-author-handoff-reconciliation.md`; originating handoff: `research/phase-2-fourier-support-2-alpha-a-5a.md`. |
 | `thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals` | Fourier support audit 2026-09-11: proof 3.1 proves only the upper norm bound, then asserts compactly supported phase approximation without construction or error/norm control. Repair from the published unit-simple-test variation formula and regular compact/open approximation, with pairwise-disjoint LCH cutoffs or repaired Radon `C_c` density; explicitly propagate DC from the cutoff contract and repair the two supplier findings below. No new Phase-2 pair. Exact clauses and hashes: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `lem-positive-c-zero-functionals-have-finite-regular-representing-measures` | Fourier support closure audit 2026-09-11: proof 1.1 silently uses the DC-qualified LCH cutoff. Proof 3.1 also omits the compact tightness core needed for all-Borel inner regularity; an open complement in noncompact `X` need not have compact complement. Add DC/exact cutoff use and prove the compact-core/outer-regularity argument. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
