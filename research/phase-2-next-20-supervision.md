@@ -225,3 +225,12 @@ Step1 gates passed, assignment finished15:41:40.828, and3a-scope dispatch
 step3a-a-2ab2ab76fd361b8d is live. Zero blockers. No operator retry/transition
 was injected; engine advanced normally. Keep supervision on the author baseline,
 actual author dispatch and subsequent gate outcomes.
+
+Connections local reconciliation: the torsion-free/curvature-free false claim
+now has an intrinsic commutator definition, full tensoriality calculation and
+explicit conformal-plane witness within the same item; no DG-21 forward use.
+General connection existence now explicitly assumes full AC for the actual
+partition/frame selections. Two exact holds resolved, but their decisions
+remain escalated for source-reading/remaining prerequisite review. Original
+count remains543/101ready/442held. Receipt:connection-local-resolution.md
+with the current run prefix. No source retry, published edit or extra pair.

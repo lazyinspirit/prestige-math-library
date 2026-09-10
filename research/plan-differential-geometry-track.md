@@ -5132,6 +5132,17 @@ existence and uniqueness proved.
 - `fs-every-affine-connection-is-the-levi-civita-connection-of-a-riemannian-metric` —
   **false statement** `[LL]`; torsion alone is already an obstruction.
 - `fs-torsion-free-means-curvature-free` — **false statement** `[LL]`.
+  Define the affine commutator R(X,Y)Z locally inside this item and prove
+  its C-infinity trilinearity before the conformal-plane witness. For
+  g=exp(2x^2)(dx^2+dy^2), R(partial_x,partial_y)partial_y=-2partial_x
+  while the Christoffels are symmetric. This local refutation uses no
+  forward DG-21 theorem and leaves the full curvature development there.
+
+The general connection-existence item explicitly assumes full AC for the
+published partition construction’s arbitrary indexed choices and local
+frames/bump data. It does not certify that construction under AC_omega.
+Statements about an already given connection do not inherit this existence
+assumption. See `phase-2-next-20-connection-local-resolution.md`.
 - `fs-every-connection-on-a-riemannian-vector-bundle-is-metric-compatible` —
   **false statement** `[LL]`.
 
