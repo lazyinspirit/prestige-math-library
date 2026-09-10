@@ -1,0 +1,5 @@
+# Strong L2 maximal extension
+
+The existing theorem Statement is unchanged. Hunt restricted weak bounds at3/2 and3, the explicit restricted weak interpolation lemma, and averaged reconstruction give the Schwartz strong L2 bound. The pointwise difference inequality for the cutoff supremum then gives an L2 Lipschitz estimate. Schwartz density and complex L2 completeness construct the unique continuous bounded extension, independently of approximation. Nonnegativity, absolute homogeneity and subadditivity are checked by almost-everywhere subsequences. The exact countable-choice use for each fixed input is identified.
+
+Fully read the new reconstruction/Hunt/interpolation bodies, the cutoff definition, Schwartz-L2 density and complex completeness/density interface. Replaced unused forest/Plancherel edges with the exact cutoff, density and completeness suppliers; no statement or inventory change. Manifest and strict contract synchronized. Explicit canonical precheck, strict1/1 and renderer pass. Ordinary mathematical review and root receipts remain separate.
