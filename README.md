@@ -33,6 +33,9 @@ See [WORKFLOW.md](WORKFLOW.md) for source recovery, reconciliation and controls.
 
 Verify active runs against their state directory and Git history.
 Historical `research/*RESUME.md` files are not current status.
+Owner-authorized post-6B merges use the verified checkpoint-import procedure
+in WORKFLOW.md; merged runs rerun the full Step 5/6B gates and combined
+6C/6D before judgment.
 Change generators or templates instead of hand-editing generated run artifacts.
 
 ## Commands

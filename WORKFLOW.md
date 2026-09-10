@@ -349,6 +349,39 @@ To restart, stop the controller, verify it exited, then issue `resume` and
 consumed before sending retry: control.json holds one command, not a queue.
 Controller locking rejects duplicate starts.
 
+### Owner-authorized post-6B run merge
+
+Merge only after every source run has completed6B and is paused with no
+unfinished dispatches. `merge-runs.mjs` refuses active sources and existing
+targets. It checks current source routing and any frozen Step6 closure,
+maps disjoint batches/groups, preserves original source evidence and imports
+exact pending published-repair handoffs. It never creates model-success
+receipts or marks unexecuted stages passed.
+
+```bash
+node tools/autopilot/bin/merge-runs.mjs prepare --run NEW --sources OLD1,OLD2
+node tools/autopilot/bin/merge-runs.mjs verify --run NEW
+autopilot start --run NEW --state-dir .autopilot/NEW --detach
+```
+
+Preparation creates namespaced artifacts and a run-local `config.json` with
+only `run` and `stages`. Other configuration, including models and limits,
+still comes from the global configuration. All controls/status calls use
+the new state directory; an explicit conflicting run name is rejected.
+
+The merged stage table begins with a machine-verified import checkpoint and
+reruns all canonical Step 5 and 6B gates over the combined frontier before
+the canonical 6B baseline, 6C, 6D and every later stage. Source
+item hashes, original artifact hashes, imported envelope hashes and defect
+records are bound by the import record. Composite impact baselines preserve
+each source's earlier owned changes; the original snapshots remain intact.
+Only container identities/checksums change during import, not mathematical
+carriers or original review attribution. Fresh combined6C checks and closure
+remain required before Step 7. The existing guarded 6C-to-Step-8 protocol
+does not waive earlier import gates; a merge supplies no verification stamp.
+If preparation or verification fails, keep the target stopped and reconcile
+the exact diagnostics. Source runs remain available and must stay paused.
+
 Stage files hot-reload after validation; completed stage order cannot change.
 Configuration and imported model-registry changes require a controller restart.
 Prompts already supplied to agents do not change; task-template edits require

@@ -76,6 +76,20 @@ function loadConfig(): Config {
     coversMap: {},
   };
   if (existsSync(CONFIG_PATH)) Object.assign(base, JSON.parse(readFileSync(CONFIG_PATH, 'utf8')));
+  // A checkpoint continuation may select a run-local stage table without
+  // changing other live runs or the global model/concurrency configuration.
+  const localConfigPath = join(stateDir, 'config.json');
+  if (existsSync(localConfigPath)) {
+    const local = JSON.parse(readFileSync(localConfigPath, 'utf8'));
+    if (!local || Object.keys(local).some(key => !['run', 'stages'].includes(key)))
+      throw new Error(`unsupported run-local configuration: ${localConfigPath}`);
+    if (typeof local.run !== 'string' || typeof local.stages !== 'string')
+      throw new Error(`run-local configuration needs run and stages: ${localConfigPath}`);
+    if (opt('run') && opt('run') !== local.run)
+      throw new Error(`--run does not match run-local configuration: ${localConfigPath}`);
+    base.run = local.run;
+    base.stages = resolve(repo, local.stages);
+  }
   base.repo = repo;
   base.stateDir = stateDir;
   return base;
