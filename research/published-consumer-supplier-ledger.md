@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1407, U-C 15, A-R 187, A-P 169. The
+Current classifications: U-P 1406, U-C 15, A-R 187, A-P 173. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -230,6 +230,26 @@ interfaces are coherent. Three U-P rows move to bounded clear and four fully
 read items enter that census; the repaired halting-history and already-clear
 function definitions are reconfirmed only. Exact hashes and clause limits are
 in `phase-2-next-20-published-machine-interpreter-prerequisite-audit.md`.
+
+The next author-handoff reconciliation moves the existing Marcinkiewicz
+interpolation row from U-P to A-P after a complete target read. Its theorem is
+stated for arbitrary measure spaces, but proof 4.1 invokes the published
+sigma-finite Tonelli theorem without a sigma-finiteness hypothesis. The exact
+live single-tree path specializes it to Lebesgue measure on `R^n`; the maximal
+corollary assumes countable choice, under which the published Lebesgue-measure
+proposition supplies sigma-finiteness. That specialization is sound under the
+correct-implicit-use rule and adds no Carleson blocker beyond the draft's other
+explicit gaps.
+
+Two previously unindexed published proof-step defects enter A-P. The complex
+binomial proof calls its one-term `n=0` right side an empty sum; compute the
+`k=0` term from the binomial boundary value and zeroth powers. The word-metric
+ball proof says every generator and inverse has length exactly one, although
+an identity contained in the generating set has length zero; length at most one
+proves the required radius-two containment. Both statements remain true and
+existing published suppliers suffice. Exact hashes, prior-report deduplication,
+used clauses and limitations are in
+`phase-2-next-20-published-author-handoff-reconciliation.md`.
 
 ## Locally convex published-prerequisite audit — 2026-09-11
 
@@ -27827,31 +27847,28 @@ No new Phase2 pair; source barriers are not waived.
 <!-- phase3-classification-index:start -->
 ## Item classification index — 2026-09-08
 
-This index retains the **2185 distinct published item IDs in the initial
-classification reference pool**, plus **5 newly identified published supplier
-items from U-C19**, **1 new 6c remark finding**, **1 Step-9 repaired definition**,
-**3 HG-P published prerequisite repairs**, **1 diagram-boundary consumer finding**,
-and **16 subsequent frontier-supervision findings**, plus **135 UC34 supplier findings**, plus **4 newly indexed Step3b Tor findings**, plus **2 Step3b real-integrability findings**, plus **2 recovered HG continuity repair rows**, plus **1 resolution-dependent Tor definition repair**, plus **1 sequence-space proof-interface candidate**, plus **2 Green-correspondence prerequisite findings**, plus **1 Cayley-tree proof finding**, plus **3 cohomology extension-map findings**, plus **1 Doob–Dynkin choice finding**, plus **1 finite-dimensional cohomology duality finding**, plus **11 locally convex prerequisite audit additions**, plus **10 scalar-topology audit additions**, plus **7 Fourier-support prerequisite audit additions**, plus **3 Gaussian-supplier audit additions**, plus **2 radial-measure audit additions**, for **2398 indexed items**. It is not a census of defective items or a
-claim that every supplier later cited by an audit is a defect candidate.
-The publication census, checked 2026-09-10 from item front matter, has
-**15930 published items**. All 2398 indexed IDs are published;
-**13532 published items remain outside this index** and require census
-reconciliation. This is a status census, not a mathematical audit of those
-outside-index items.
+This index retains the initial 2,185-ID classification reference pool and all
+subsequently reconciled published IDs. It currently contains **2,434 unique
+published items**. It is not a census of defective items or a claim that every
+supplier later cited by an audit is a defect candidate. The publication census,
+checked 2026-09-10 from item front matter, has **15,930 published items**. All
+2,434 indexed IDs are published; **13,496 published items remain outside this
+index** and require census reconciliation. This is a status census, not a
+mathematical audit of those outside-index items.
 The initial extraction also contained
 787 planned, draft, absent or noncanonical IDs, not published targets.
 Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1420 | Evidence/role reconciliation incomplete; not a defect verdict. |
-| U-C | Unaudited and confirmed defective items | 16 | Confirmed mathematical or prerequisite defect; repair audit pending. |
+| U-P | Unaudited and potentially defective items | 1406 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-C | Unaudited and confirmed defective items | 15 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 167 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 173 | Recorded direct review and an unresolved item-specific repair. |
 
-608 further reference-pool items have bounded no-repair-needed dispositions
+653 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1790 items and the expanded reference pool contains 2398 unique items.
+1,781 items and the expanded reference pool contains 2,434 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28617,6 +28634,10 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `thm-marcinkiewicz-interpolation-for-weak-one-one-and-strong-infinity` | Original-next-20 author-handoff reconciliation 2026-09-11 moves the existing U-P row after full-target review. Proof 4.1 applies the published sigma-finite Tonelli theorem on an arbitrary measure space without its hypothesis; retain the earlier tail-integrability and a.e.-endpoint repairs. The live maximal corollary specializes to Lebesgue `R^n` under CC, where the published sigma-finiteness proposition validates this exact Tonelli use, so there is no additional Carleson blocker. The general theorem can use the recorded simple-function/MCT repair. Existing published suppliers suffice; no new Phase-2 pair. Exact hash, clauses and specialization: `research/phase-2-next-20-published-author-handoff-reconciliation.md`; earlier evidence retained in Published Marcinkiewicz interpolation: local repair, no new pair. |
+| `lem-binomial-theorem-over-complex-numbers` | Original-next-20 author-handoff reconciliation 2026-09-11: proof 1.1 falsely calls the `n=0` right side an empty sum; it is the one term `k=0`, equal to one by `binom(0,0)=1` and both zeroth powers. Compute that term explicitly. The stated identity and the induction route remain sound; generic finite-monoid sums are an adequate implicit published interface. Existing suppliers suffice; no new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-author-handoff-reconciliation.md`. |
+| `prop-word-metric-balls-are-finite-exactly-when-the-generating-set-is-finite` | Original-next-20 author-handoff reconciliation 2026-09-11 consolidates two historical matching judge reports and the current handoff. Proof 2.1 says every element of `S union S^(-1)` has length one, false for the identity when it belongs to `S`. Replace this by length at most one; the open radius-two containment and theorem follow, and the finite-generator direction is unaffected. Existing word-length suppliers suffice; no new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-author-handoff-reconciliation.md`. |
+| `thm-rmk-uniqueness-among-radon-measures` | Fourier Step 5A 2026-09-11, independently reconciled by the continuous auditor: full two-step proof read. Step 1.1 invokes published `lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set`, whose Statement assumes Dependent Choice, but target Statement/Given omit DC. Add and declare published `def-dependent-choice` and identify its cutoff use; retain the sound compact/open/Borel comparison. No new Phase-2 supplier or pair. Pending Phase 3; the live AC-qualified measure uniqueness consumer meets this hypothesis. Exact target/supplier hashes and dedup scope: `research/phase-2-next-20-published-author-handoff-reconciliation.md`; originating handoff: `research/phase-2-fourier-support-2-alpha-a-5a.md`. |
 | `thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals` | Fourier support audit 2026-09-11: proof 3.1 proves only the upper norm bound, then asserts compactly supported phase approximation without construction or error/norm control. Repair from the published unit-simple-test variation formula and regular compact/open approximation, with pairwise-disjoint LCH cutoffs or repaired Radon `C_c` density; explicitly propagate DC from the cutoff contract and repair the two supplier findings below. No new Phase-2 pair. Exact clauses and hashes: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `lem-positive-c-zero-functionals-have-finite-regular-representing-measures` | Fourier support closure audit 2026-09-11: proof 1.1 silently uses the DC-qualified LCH cutoff. Proof 3.1 also omits the compact tightness core needed for all-Borel inner regularity; an open complement in noncompact `X` need not have compact complement. Add DC/exact cutoff use and prove the compact-core/outer-regularity argument. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-c-c-is-dense-in-l-p-for-radon-measures` | Fourier support closure audit 2026-09-11: proof 2.1 invokes `lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set`, whose contract assumes DC, while this theorem states no DC. Add and declare DC or give a choice-free cutoff construction. This affects the general LCH RMK repair path; live Fourier Euclidean density instead uses its explicit distance cutoff under stated countable choice. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
@@ -30297,7 +30318,6 @@ mathematical repairs. Evidence:
 | `thm-machine-acceptance-is-undecidable` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `thm-machine-equivalence-is-undecidable` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `thm-mackeys-irreducibility-criterion-for-finite-groups` | Transitive consumers (166), grouped by home page |
-| `thm-marcinkiewicz-interpolation-for-weak-one-one-and-strong-infinity` | Published Marcinkiewicz interpolation: local repair, no new pair |
 | `thm-margulis-family-has-uniform-spectral-gap` | 51. Exact live-plan metadata resynchronization set |
 | `thm-martin-lof-randomness-implies-computable-randomness` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `thm-maschkes-theorem-for-finite-groups-over-fields-whose-characteristic-does-not-divide-the-group-order` | finite-averaging-and-character-theory-prerequisites |
@@ -30510,3 +30530,7 @@ Assigned review: `phase-2-catchup-24`, `6b-d-9`. These are confirmations of exis
 These published Phase-3 repairs remain open; no new Phase-2 supplier is required.
 
 The Riemannian-metric consumer supplies its countable-choice construction locally. That argument does not repair the published vector-bundle theorem or close its A-P finding.
+
+## Fourier Step 5A: published RMK uniqueness — 2026-09-11
+
+`thm-rmk-uniqueness-among-radon-measures`, SHA-256 `c15056e9f2a4465edd321aa73d8248e34110ef79b2a8b7f13227708dd3c23462`. Fourier Step 5A 2026-09-11: full two-step proof read. Step 1.1 invokes published `lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set`, whose Statement assumes Dependent Choice, but target Statement/Given omit DC. Add and declare published `def-dependent-choice` and identify its cutoff use; retain the sound compact/open/Borel comparison. No new Phase-2 supplier or pair. Pending Phase 3; the live AC-qualified measure uniqueness consumer meets this hypothesis. Exact target/supplier hashes and dedup scope: `research/phase-2-next-20-published-author-handoff-reconciliation.md`; originating handoff: `research/phase-2-fourier-support-2-alpha-a-5a.md`. Classification: newly A-P after exact-ID and supplier/mechanism search; no published edit. Bounded defect-focused review, not a whole-closure audit.

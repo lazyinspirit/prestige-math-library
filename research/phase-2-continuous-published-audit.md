@@ -235,15 +235,42 @@ example extends the existing single U-C record for
 the edge `a -> ab` makes the printed quotient `aba^(-1)`, while the correct
 right increment is `a^(-1)ab=b`. No counts change for these reconciliations.
 
+The next original-author handoff moves the already-recorded Marcinkiewicz
+interpolation item from U-P to A-P: its arbitrary-measure statement invokes the
+sigma-finite Tonelli theorem. On the actual Carleson maximal path, however, the
+CC-qualified corollary specializes to Lebesgue `R^n`, whose sigma-finiteness is
+already published. The exact specialization is sound, so this defect adds no
+live single-tree blocker. Two new A-P rows record the false `n=0` empty-sum
+sentence in the complex binomial proof and the false exact-length-one sentence
+for an identity included in a generating set; both have immediate repairs from
+existing published clauses. Evidence:
+`research/phase-2-next-20-published-author-handoff-reconciliation.md`.
+
+Post-handoff target index: 2,434 unique published IDs; U-P 1,406, U-C 15,
+A-R 187, A-P 173 and 653 bounded clears. Mechanical recount confirms no
+within-class or cross-class duplicate; all indexed IDs resolve to current
+published items. The current published census is 15,930, leaving 13,496 outside
+the index.
+
+The Fourier Step-5A independent review adds one exact A-P item:
+`thm-rmk-uniqueness-among-radon-measures` invokes the explicitly DC-qualified
+LCH cutoff in proof 1.1 without assuming DC. Add and declare DC, or replace the
+cutoff in the required scope. The live finite-measure Fourier uniqueness
+corollary assumes full AC and therefore discharges this inherited contract; no
+live prerequisite or new Phase-2 pair is missing. Exact target/supplier hashes
+and dedup scope are in
+`research/phase-2-next-20-published-author-handoff-reconciliation.md`; the
+originating handoff is `research/phase-2-fourier-support-2-alpha-a-5a.md`.
+
 ## Next target
 
-1. Audit batch 12's published machine-code and step-by-step interpreter
-   interfaces, prioritizing the simulator-time author hold only if it reaches a
-   published statement or proof.
-2. Reconcile any further exact next-20 or Fourier published-interface issues
-   reported by the root worker without auditing draft readiness.
-3. Continue through original next-20 batches by actual prerequisite pressure,
-   then sample published items outside the existing 2,398-ID reference pool.
+1. Reconcile any further exact original-next-20 or Fourier published-interface
+   issues reported by the root worker, prioritizing items actually consumed by
+   current independent review.
+2. Continue through original-next-20 prerequisites by load-bearing proof clause,
+   then audit bounded samples of published items outside the 2,434-ID index.
+3. Preserve the correct-implicit-use rule and consolidate any historical judge
+   report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,532 published items
+No exhaustive discovery claim is authorized while 13,496 published items
 remain outside the index and dependency interfaces remain unaudited.
