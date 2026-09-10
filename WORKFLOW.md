@@ -153,6 +153,9 @@ An interrupted handoff resumes existing evidence, never spends a second call.
 The sandboxed Alpha writes an item request and waits; the controller's progress
 hook launches the tool, judge and final adjudicator outside the Alpha sandbox.
 Request/response files and normal dispatch records preserve ownership and errors.
+Inherited published items need not acquire a new-batch proof contract merely
+to enter the handoff; their licence, precheck and final published-repair checks
+remain mandatory. New authored items require their owning contract.
 After fixing an infrastructure failure, the operator may queue a `resume-group`
 request for a stopped owning group; it retains completed decisions and resumes
 owed handoffs. It must not overlap a live writer for that group.

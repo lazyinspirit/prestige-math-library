@@ -94,7 +94,10 @@ function main() {
       // Owned contract only: concurrent groups need not have finished theirs.
       const manifests = Object.keys(scope.by_item ?? {}).includes(id)
         ? (owningContractFiles(prefix, id)) : [];
-      if (!published && !manifests.length) throw new Error(`${id}: owning proof contract not found`);
+      const inheritedPublished = /^status:\s*published\s*$/m.test(readFileSync(`items/${id}.md`, 'utf8'))
+        && !report.created.includes(id);
+      if (!published && !inheritedPublished && !manifests.length)
+        throw new Error(`${id}: owning proof contract not found`);
       for (const contract of manifests)
         execute(['tools/proof-contract.mjs', contract, '--strict', '--items', id]);
       if (args.includes('--check-only')) {
