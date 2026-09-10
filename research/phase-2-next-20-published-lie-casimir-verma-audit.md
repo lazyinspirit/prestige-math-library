@@ -1,0 +1,113 @@
+# Published Casimir and Verma-chain audit — 2026-09-11
+
+This bounded audit follows the finite-Weyl/Killing-form supplier pass. It reads
+the complete current Casimir-eigenvalue proposition, its central-action input,
+the two previously omitted Verma-chain descendants of that proposition, the
+omitted sl2 example, and the published PBW interfaces actually needed below.
+It is not a full audit of the Harish-Chandra, category O or Verma-module pages.
+No published item was edited.
+
+## Deduplication and closure correction
+
+Exact-ID, alias, mechanism and supplier-ID searches found no classification
+row for any of these five targets:
+
+- `lem-central-action-on-a-cyclic-highest-weight-module-is-scalar`
+- `prop-casimir-eigenvalue-on-a-highest-weight-module`
+- `lem-every-verma-module-contains-a-simple-verma-submodule`
+- `thm-verma-homomorphism-spaces-have-dimension-at-most-one`
+- `ex-sl2-casimir-and-its-highest-weight-eigenvalue`
+
+The canonical ledger's machine-described `ROOT-70` impact set omitted the last
+four even though the current published dependency graph contains the exact
+paths
+
+`root-system theorem -> Casimir eigenvalue -> simple Verma submodule -> Verma
+Hom bound`
+
+and
+
+`root-system theorem -> Casimir eigenvalue -> sl2 Casimir example`.
+
+A fresh reverse-dependency traversal of published front matter gives 74 items,
+including the root theorem. The ledger therefore renames the set `ROOT-74` and
+adds exactly these four IDs. This corrects an impact map; it does not classify
+all four as independently defective.
+
+## Correct implicit PBW use
+
+`lem-central-action-on-a-cyclic-highest-weight-module-is-scalar`, SHA-256
+`ad1d3bbe30c1db59677f863eead46586a1ad38d224447ece104f03d4b2a4421a`,
+has a true statement. Proof 1.1 abbreviates the reason that a vector of weight
+lambda killed by the positive nilpotent subalgebra lies in the line generated
+by the cyclic highest vector. The exact argument is already supplied by the
+published PBW interfaces: the universal property gives a surjection from the
+Verma module onto the cyclic module; the PBW model and the published Verma
+weight-cone proposition give a one-dimensional top weight space. Equivalently,
+triangular PBW writes every vector as a sum of negative-root monomials applied
+to the generator, and only the scalar monomial retains weight lambda. Thus
+`zv=cv`, and centrality propagates this equality to every `uv` exactly as proof
+2.1 states.
+
+Under the canonical rule that a clear correct implicit use of an adequate
+published supplier is not dependency debt, this item receives a bounded-clear
+disposition. An explicit PBW citation would be useful exposition only.
+
+## Exact Casimir use and impact candidates
+
+`prop-casimir-eigenvalue-on-a-highest-weight-module`, SHA-256
+`bd5fb4e63dbf55fa98d93ff11b4f44372297cb1f7c61c15d0e250c6bb7a56322`,
+was read completely. Once its already-A-P Killing, root-decomposition,
+opposite-pairing and root-system suppliers are repaired, its calculation is
+sound: Cartan and opposite-root dual bases give
+`C=sum h_j h^j + sum_(alpha>0)(e_alpha f_alpha+f_alpha e_alpha)`;
+the positive root vector kills the highest vector; the bracket is `H_alpha`;
+and `sum_(alpha>0) lambda(H_alpha)=2(lambda,rho)`. The central-action lemma
+above supplies scalar action. No independent proof defect is identified.
+The item is a U-P exact impact candidate because it directly consumes the
+affected suppliers and must be revalidated after their Phase-3 repairs.
+
+`ex-sl2-casimir-and-its-highest-weight-eigenvalue`, SHA-256
+`57f5e9c52b6618f0b4304dcdf4e1a2a7a7b886018e20e07d2421cd3b58e7af38`, is
+likewise a U-P impact candidate. Its direct matrix calculation is correct for
+the displayed basis:
+`B(h,h)=8`, `B(e,f)=4`, hence
+`C=h^2/8+(ef+fe)/4`, and the induced form gives the scalar
+`lambda(lambda+2)/8`. It uses the affected Casimir proposition only for that
+last general-to-rank-one specialization.
+
+`thm-verma-homomorphism-spaces-have-dimension-at-most-one`, SHA-256
+`1ff57648bb3bedb729e6f8a656d922fe8329c1921ad77de1bc2e205bb234a85d`, is a
+U-P impact candidate through the exact simple-Verma-submodule input. Its
+restriction argument is otherwise sound: proportionality on a nonzero simple
+Verma submodule and injectivity of any nonzero difference force global
+proportionality.
+
+## Actual Verma proof and axiom gap
+
+`lem-every-verma-module-contains-a-simple-verma-submodule`, SHA-256
+`9613c1ca9378625be27d4055b1d7213477f9b5f39cbe02caafea7f5a1e852a46`,
+is newly A-P. Proof 1.1 says to "repeatedly choose" a proper submodule and a
+singular vector to obtain an infinite descending chain. That is a dependent
+recursive choice, while neither the statement nor dependencies declare any
+choice principle. This is an actual proof/axiom gap, not a missing direct edge
+for an otherwise supplied use.
+
+The theorem needs no new Phase-2 supplier and admits a choice-free local
+repair. Proof 2.1 identifies a finite set of possible positive-lattice
+differences beta from
+`2(lambda+rho,beta)=(beta,beta)`: it is the intersection of a lattice with a
+fixed sphere for the positive-definite root-space form. Let its cardinality be
+N. Under the contrary assumption, perform only N+1 successive existential
+choices, justified by ordinary finite induction, obtaining strictly increasing
+heights among N+1 members of that finite set. This finite contradiction avoids
+an infinite sequence and any DC assumption. The singular-vector, Verma
+injectivity, Casimir and weight-cone suppliers already published are adequate
+after their independently recorded repairs.
+
+## Limits
+
+The closure recomputation is mechanical front-matter evidence. The
+mathematical audit here is confined to the five complete targets and their
+actually used clauses. Other members of `ROOT-74` retain their existing
+classifications and require their own item-level review.

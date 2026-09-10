@@ -10894,9 +10894,10 @@ covered individually.
 These are not Lie-owned duplicates. Root must reconcile them in the owning DG
 scaffold and schedule their A pages before the Lie Phase-3 consumer rewrite:
 
-For compact exactness, define **ROOT-70** as the following complete published
+For compact exactness, define **ROOT-74** as the following complete published
 Lie closure. RL-1 A:
 `thm-the-root-set-is-a-reduced-crystallographic-root-system`,
+`prop-casimir-eigenvalue-on-a-highest-weight-module`,
 `def-root-reflections-and-the-weyl-group-action`,
 `def-fundamental-weights-for-a-chosen-simple-root-system`,
 `thm-finite-dimensional-simple-modules-are-classified-by-dominant-highest-weights`,
@@ -10909,6 +10910,7 @@ Lie closure. RL-1 A:
 `cor-the-center-is-a-polynomial-algebra-of-rank-many-generators`,
 `thm-enveloping-algebra-is-free-over-its-center`; RL-1 B:
 `cex-unshifted-weyl-orbits-do-not-classify-central-characters`,
+`ex-sl2-casimir-and-its-highest-weight-eigenvalue`,
 `ex-the-zero-weight-singular-central-character`,
 `ex-dot-conjugate-weights-have-the-same-central-character`,
 `ex-sl3-harish-chandra-center-generators`; RL-2 A:
@@ -10926,6 +10928,8 @@ Lie closure. RL-1 A:
 `cor-antidominant-verma-modules-are-simple`,
 `cor-generic-verma-modules-are-simple`,
 `lem-verma-embedding-implies-strong-linkage`,
+`lem-every-verma-module-contains-a-simple-verma-submodule`,
+`thm-verma-homomorphism-spaces-have-dimension-at-most-one`,
 `prop-verma-composition-multiplicities-are-finite`; RL-3 B:
 `ex-a2-regular-dominant-verma-embedding-poset`,
 `ex-a2-singular-dot-orbit-collapses`, `ex-sl2-verma-embedding-chain`,
@@ -10979,7 +10983,7 @@ RL-4 A: `def-bgg-category-o`, `def-integral-weyl-group-of-a-weight`,
    `thm-roots-of-a-complex-semisimple-lie-algebra-form-a-reduced-crystallographic-root-system`
    directly supplies published
    `thm-the-root-set-is-a-reduced-crystallographic-root-system`. Its complete
-   published Lie impact is ROOT-70 exactly. The machine-recomputed closure
+   published Lie impact is ROOT-74 exactly. The machine-recomputed closure
    count, rather than the older estimate, is controlling.
 3. DG-32
    `thm-highest-weight-classification-of-finite-dimensional-irreducible-representations`
@@ -10997,7 +11001,7 @@ root (1). The adequate DG proof chain for root (2) must include, strictly earlie
 `thm-root-string-property`, and
 `thm-root-spaces-of-a-complex-semisimple-lie-algebra-are-one-dimensional`.
 Each of these five earlier supplier items has zero direct published consumers
-and complete transitive published impact ROOT-70; the final root-system theorem
+and complete transitive published impact ROOT-74; the final root-system theorem
 alone directly supplies the published Lie interface theorem.
 The adequate DG-32 chain for root (3) must include
 `lem-every-finite-dimensional-irreducible-representation-has-a-highest-weight-vector`,
@@ -27955,15 +27959,47 @@ Current index: U-P 1451, U-C 8, A-R 181, A-P 151; 562 bounded clear,
 2353 unique IDs. Unrelated mathematical/source blockers remain.
 No new Phase2 pair; source barriers are not waived.
 
+## Casimir and Verma-chain follow-up — 2026-09-11
+
+A current published reverse-dependency traversal corrects the finite-Weyl/root
+impact map from `ROOT-70` to `ROOT-74`. The four omitted items are
+`prop-casimir-eigenvalue-on-a-highest-weight-module`,
+`ex-sl2-casimir-and-its-highest-weight-eigenvalue`,
+`lem-every-verma-module-contains-a-simple-verma-submodule`, and
+`thm-verma-homomorphism-spaces-have-dimension-at-most-one`. They lie on the
+exact Casimir-to-Verma paths recorded in
+`research/phase-2-next-20-published-lie-casimir-verma-audit.md`; this closure
+correction is not a claim that all four have independent defects.
+
+The central-action lemma is a bounded clear under the correct-implicit-use
+rule. Its abbreviated one-dimensional-top-weight step is exactly supplied by
+the published Verma universal property, PBW model and weight-cone proposition;
+centrality then propagates the scalar from the generator. The Casimir
+eigenvalue proposition's displayed computation is also sound once its already
+A-P root/Killing suppliers are repaired, and the sl2 example's direct matrix
+normalization is correct. These last two remain U-P impact candidates through
+their exact affected dependency path.
+
+`lem-every-verma-module-contains-a-simple-verma-submodule` is newly A-P for an
+independent axiom/proof gap: proof 1.1 recursively chooses an infinite chain
+without any choice hypothesis. Repair choice-free by first taking the finite
+set of positive-lattice solutions to its Casimir sphere equation and then
+performing only one more than that many finite existential steps. The resulting
+strictly increasing heights contradict finiteness. Its Hom-space theorem is a
+U-P exact impact candidate; the restriction/injectivity proof is otherwise
+sound. Existing published suppliers suffice after their separately recorded
+repairs, so no new Phase-2 pair is needed. This five-item pass is bounded and
+does not certify the remaining root closure.
+
 <!-- phase3-classification-index:start -->
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,461 unique
+subsequently reconciled published IDs. It currently contains **2,466 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,461 indexed IDs are published; **13,469 published items remain outside this
+2,466 indexed IDs are published; **13,464 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -27972,12 +28008,12 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1403 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1406 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 15 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 187 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 188 | Recorded direct review and an unresolved item-specific repair. |
 
-669 further reference-pool items have bounded no-repair-needed dispositions
+670 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
 1,792 items and the expanded reference pool contains 2,461 unique items.
 
@@ -28040,6 +28076,7 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `lem-central-action-on-a-cyclic-highest-weight-module-is-scalar` | Finite-Weyl/Casimir follow-up 2026-09-11: full item and exact PBW interfaces read. Proof 1.1 abbreviates one-dimensionality of the top weight in a cyclic highest-weight module, but the published Verma universal property, PBW model and weight-cone proposition supply it exactly; proof 2.1 then correctly propagates scalar action from the cyclic generator. Correct implicit use of adequate published suppliers is clear, so an explicit edge is optional exposition rather than repair debt. Exact hashes/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `thm-extension-of-a-bounded-map-from-a-dense-subspace` | Fourier Step-5A functional-interface audit, 2026-09-11: full target read. Explicit CC selects an approximating sequence at each fixed point; target completeness, the Lipschitz bound and unique limits make the extension well defined, linear and unique. The same least operator-norm bound passes to the extension, including the zero case. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`. |
 | `thm-complex-stone-weierstrass-self-adjoint` | Fourier Step-5A functional-interface audit, 2026-09-11: full theorem and direct real spine read. Self-adjointness puts real/imaginary parts in the algebra; real density or the unique-common-zero ideal transfers componentwise, with the empty and unital cases explicit. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`. |
 | `lem-real-part-of-a-self-adjoint-complex-function-algebra` | Fourier Step-5A functional-interface audit, 2026-09-11: full proof read. Real and imaginary parts remain continuous algebra members, one separates any pair separated complexly, and their simultaneous vanishing is equivalent to complex vanishing. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`. |
@@ -28761,6 +28798,7 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `lem-every-verma-module-contains-a-simple-verma-submodule` | Finite-Weyl/Verma-chain audit 2026-09-11: proof 1.1 obtains an infinite descending chain by repeatedly choosing a proper submodule and singular vector, but states no choice hypothesis. Avoid DC by first bounding the finite set of positive-lattice solutions to the Casimir sphere equation and constructing only one more than that many successive proper embedded Vermas by finite induction; strictly increasing heights then contradict finiteness. Existing published singular-vector, injectivity, Casimir and weight-cone suppliers suffice after their separately recorded repairs. No new Phase-2 pair. Exact hash/path/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `thm-marcinkiewicz-interpolation-for-weak-one-one-and-strong-infinity` | Original-next-20 author-handoff reconciliation 2026-09-11 moves the existing U-P row after full-target review. Proof 4.1 applies the published sigma-finite Tonelli theorem on an arbitrary measure space without its hypothesis; retain the earlier tail-integrability and a.e.-endpoint repairs. The live maximal corollary specializes to Lebesgue `R^n` under CC, where the published sigma-finiteness proposition validates this exact Tonelli use, so there is no additional Carleson blocker. The general theorem can use the recorded simple-function/MCT repair. Existing published suppliers suffice; no new Phase-2 pair. Exact hash, clauses and specialization: `research/phase-2-next-20-published-author-handoff-reconciliation.md`; earlier evidence retained in Published Marcinkiewicz interpolation: local repair, no new pair. |
 | `lem-binomial-theorem-over-complex-numbers` | Original-next-20 author-handoff reconciliation 2026-09-11: proof 1.1 falsely calls the `n=0` right side an empty sum; it is the one term `k=0`, equal to one by `binom(0,0)=1` and both zeroth powers. Compute that term explicitly. The stated identity and the induction route remain sound; generic finite-monoid sums are an adequate implicit published interface. Existing suppliers suffice; no new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-author-handoff-reconciliation.md`. |
 | `prop-word-metric-balls-are-finite-exactly-when-the-generating-set-is-finite` | Original-next-20 author-handoff reconciliation 2026-09-11 consolidates two historical matching judge reports and the current handoff. Proof 2.1 says every element of `S union S^(-1)` has length one, false for the identity when it belongs to `S`. Replace this by length at most one; the open radius-two containment and theorem follow, and the finite-generator direction is unaffected. Existing word-length suppliers suffice; no new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-author-handoff-reconciliation.md`. |
@@ -29199,6 +29237,9 @@ mathematical repairs. Evidence:
 
 | Published item | Existing evidence section / reconciliation locator |
 |---|---|
+| `prop-casimir-eigenvalue-on-a-highest-weight-module` | Finite-Weyl/Casimir follow-up 2026-09-11: exact impact candidate through direct use of the already-A-P Killing, root-decomposition, opposite-pairing and root-system clauses. Its full displayed dual-basis, bracket and rho calculation is sound once those suppliers are repaired; no independent defect identified. This item was one of four omitted from the prior published root closure, now corrected to ROOT-74. Exact hash/path/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
+| `ex-sl2-casimir-and-its-highest-weight-eigenvalue` | Finite-Weyl/Casimir follow-up 2026-09-11: exact impact candidate through the Casimir-eigenvalue proposition. Its direct `sl2` Killing-form values, dual basis, Casimir normalization and eigenvalue arithmetic are sound in the inspected scope. Revalidate after upstream root/Killing repairs; no independent defect identified. Exact hash/path/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
+| `thm-verma-homomorphism-spaces-have-dimension-at-most-one` | Finite-Weyl/Verma-chain follow-up 2026-09-11: exact impact candidate through the newly A-P simple-Verma-submodule lemma. The theorem's own restriction, proportionality and injectivity argument is sound in the inspected scope. Revalidate after its supplier's finite-induction repair. This was one of four omitted IDs in the corrected ROOT-74 closure. Exact hash/path/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `thm-krull-schmidt-for-finite-dimensional-kg-modules` | Batch11/root 2026-09-11: potential inherited DC mismatch in finite-length supplier L1. Audit bounded-dimension argument before inferring defect; explicit dimension induction/Fitting stabilization can avoid choice. Existing chain-condition theorem and AC interface published; no new Phase 2 pair. See Green-correspondence prerequisite findings and phase-2-next-20-batch-11.notes.md. |
 | `ex-c0-is-a-banach-space` | Root 2026-09-10 potential proof-interface concern: 3.1 infers closedness from an already supplied convergent sequence; exact ZF bridge absent. Direct given-Cauchy-sequence proof via published ex-ell-infinity-is-a-banach-space and existing epsilon/2 estimate avoids the inference. No pending Phase 2 supplier identified; bounded audit, no false-theorem verdict. Evidence: research/phase-2-next-20-published-sequence-space-audit.md. |
 | `thm-singular-homology-satisfies-homotopy-exactness-and-excision` | UC34 supplier reconciliation 2026-09-09: Astra2 bounded AT10 review: proof1.3 double-mapping-cylinder collapse relative to V lacks written relative homotopies/exact supplier in inspected argument. Incomplete audit candidate, NOT confirmed fatal; refined live degree bridge instead uses elementary S0 augmentation/finite-sum and n0 suspension clauses. No newPhase2 supplier established. Dedicated audit needed; report research/phase-2-catchup-24-owner-step3-at-astra.md. |

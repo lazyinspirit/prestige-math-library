@@ -393,6 +393,24 @@ Post-root-chain counts: 2,461 unique published IDs; U-P 1,403, U-C 15, A-R 187,
 A-P 187 and 669 bounded clears. The current census leaves 13,469 published IDs
 outside the index.
 
+The adjacent Casimir/Verma pass corrects the mechanically described root impact
+closure from 70 to 74 items. The missing IDs are the Casimir-eigenvalue
+proposition, its sl2 example, the simple-Verma-submodule lemma and the Verma
+Hom-space theorem. The central-action lemma receives a bounded clear: its
+abbreviated top-weight-line assertion is a correct implicit use of the
+published Verma universal property, PBW model and weight-cone theorem. The
+Casimir proposition, example and Hom theorem are U-P exact impact candidates;
+their own inspected calculations are sound, but they use affected suppliers.
+The simple-Verma-submodule lemma is A-P because it constructs an infinite
+descending chain by repeated dependent selection without a choice hypothesis.
+Repair choice-free by constructing only one more than the finite number of
+solutions to its Casimir sphere equation. Evidence:
+`research/phase-2-next-20-published-lie-casimir-verma-audit.md`.
+
+Post-Casimir/Verma counts: 2,466 unique published IDs; U-P 1,406, U-C 15,
+A-R 187, A-P 188 and 670 bounded clears. The current census leaves 13,464
+published IDs outside the index.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
