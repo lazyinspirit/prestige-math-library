@@ -313,15 +313,28 @@ Post-Killing-form target counts: 2,448 unique published IDs; U-P 1,405, U-C 15,
 A-R 187, A-P 175 and 666 bounded clears. This is one existing-row promotion,
 so the indexed total and outside-census count do not change.
 
+The active HG handoff adds one A-P item:
+`cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings`.
+Its converse proves coarse density from a supplied quasi-inverse but omits the
+lower distance bound required for a quasi-isometric embedding. The elementary
+triangle estimate through `g f` repairs it using the already published
+definitions. The live HG consumer includes that calculation locally and is not
+blocked. Evidence:
+`research/phase-2-next-20-published-quasi-isometry-characterization-audit.md`.
+
+Post-HG target counts: 2,449 unique published IDs; U-P 1,405, U-C 15, A-R 187,
+A-P 176 and 666 bounded clears. The current census leaves 13,481 published IDs
+outside the index.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
    issues reported by the root worker, prioritizing items actually consumed by
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
-   then audit bounded samples of published items outside the 2,448-ID index.
+   then audit bounded samples of published items outside the 2,449-ID index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,482 published items
+No exhaustive discovery claim is authorized while 13,481 published items
 remain outside the index and dependency interfaces remain unaudited.

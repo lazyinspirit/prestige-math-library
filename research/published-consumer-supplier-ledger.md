@@ -4,9 +4,22 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1405, U-C 15, A-R 187, A-P 175. The
+Current classifications: U-P 1405, U-C 15, A-R 187, A-P 176. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Quasi-isometry characterization audit — 2026-09-11
+
+`cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings`
+is newly A-P. Under the library's definition, a quasi-isometry is a coarse
+Lipschitz map with a coarse Lipschitz quasi-inverse. Proof 2.1 proves coarse
+density but omits the quasi-isometric lower bound. If `g f` is within `D` of
+the identity and `g` has coarse constants `A >= 1,B`, the missing estimate is
+`d_X(x,x') <= 2D+A d_Y(fx,fx')+B`. Combine its rearrangement with the supplied
+upper bound for `f`. The live HG consumer gives this argument locally and is
+not blocked. Existing published definitions suffice; no new pair is needed.
+Exact source, consumer and audit limits are in
+`phase-2-next-20-published-quasi-isometry-characterization-audit.md`.
 
 ## Killing-form prerequisite audit — 2026-09-11
 
@@ -27898,11 +27911,11 @@ No new Phase2 pair; source barriers are not waived.
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,448 unique
+subsequently reconciled published IDs. It currently contains **2,449 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,448 indexed IDs are published; **13,482 published items remain outside this
+2,449 indexed IDs are published; **13,481 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -27914,11 +27927,11 @@ Supplier mappings and subsequent item-specific findings remain above.
 | U-P | Unaudited and potentially defective items | 1405 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 15 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 175 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 176 | Recorded direct review and an unresolved item-specific repair. |
 
 666 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,782 items and the expanded reference pool contains 2,448 unique items.
+1,783 items and the expanded reference pool contains 2,449 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28702,6 +28715,7 @@ owner's scan policy.
 | `prop-word-metric-balls-are-finite-exactly-when-the-generating-set-is-finite` | Original-next-20 author-handoff reconciliation 2026-09-11 consolidates two historical matching judge reports and the current handoff. Proof 2.1 says every element of `S union S^(-1)` has length one, false for the identity when it belongs to `S`. Replace this by length at most one; the open radius-two containment and theorem follow, and the finite-generator direction is unaffected. Existing word-length suppliers suffice; no new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-author-handoff-reconciliation.md`. |
 | `thm-collar-neighborhood-theorem` | Boundary/interior topology handoff reconciliation 2026-09-11: after the full target, collar definition and all five declared suppliers were read, proof 2.1 still has no proof or supplier for the load-bearing passage from local collar embeddings to a smooth positive variable width on which the flow map is globally injective with open image. Adapt the earlier published flowout theorem's local defining functions, monotonicity, locally finite positive width and collision argument to the one-sided boundary semiflow, then use local-diffeomorphism openness and rescale the variable strip. Existing published mathematics appears sufficient; no new Phase-2 pair. The live finite-push topology proof does not use this theorem. Exact hash/source/scope: `research/phase-2-next-20-published-set-theory-collar-reconciliation.md`. |
 | `prop-killing-form-is-invariant-and-nondegenerate-on-a-complex-semisimple-lie-algebra` | Original-next-20 finite-Weyl/Kostant prerequisite audit 2026-09-11 promotes the existing U-P row. Proof 1.1 establishes invariance, but proof 2.1 derives nondegeneracy solely by naming Cartan's semisimplicity criterion. Its only declared dependency is the trace-form definition, and no published item proves that load-bearing criterion. Supply and declare the planned earlier DG29 Cartan-criterion/nondegeneracy chain or a complete local proof. Three direct published consumers are bounded impact candidates; no new Phase-2 pair beyond the existing planned repair chain. Exact hash/source/search/scope: `research/phase-2-next-20-published-killing-form-prerequisite-audit.md`; retain the broader Lie Phase-3 repair mapping above. |
+| `cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings` | Active HG handoff audit 2026-09-11: under the library definition a quasi-isometry is a coarse Lipschitz map with a coarse Lipschitz quasi-inverse. Proof 2.1 proves coarse density from `f g` close to the identity, but omits the required lower bound making `f` a quasi-isometric embedding. If `g f` is `D`-close and `g` has coarse constants `A >= 1,B`, then `d_X(x,x') <= 2D+A d_Y(fx,fx')+B`; rearrange and combine with `f`'s upper bound. The live HG consumer supplies this locally, so it is not blocked. Existing definitions suffice; no new Phase-2 pair. Exact hash/source/impact/scope: `research/phase-2-next-20-published-quasi-isometry-characterization-audit.md`. |
 | `thm-rmk-uniqueness-among-radon-measures` | Fourier Step 5A 2026-09-11, independently reconciled by the continuous auditor: full two-step proof read. Step 1.1 invokes published `lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set`, whose Statement assumes Dependent Choice, but target Statement/Given omit DC. Add and declare published `def-dependent-choice` and identify its cutoff use; retain the sound compact/open/Borel comparison. No new Phase-2 supplier or pair. Pending Phase 3; the live AC-qualified measure uniqueness consumer meets this hypothesis. Exact target/supplier hashes and dedup scope: `research/phase-2-next-20-published-author-handoff-reconciliation.md`; originating handoff: `research/phase-2-fourier-support-2-alpha-a-5a.md`. |
 | `thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals` | Fourier support audit 2026-09-11: proof 3.1 proves only the upper norm bound, then asserts compactly supported phase approximation without construction or error/norm control. Repair from the published unit-simple-test variation formula and regular compact/open approximation, with pairwise-disjoint LCH cutoffs or repaired Radon `C_c` density; explicitly propagate DC from the cutoff contract and repair the two supplier findings below. No new Phase-2 pair. Exact clauses and hashes: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `lem-positive-c-zero-functionals-have-finite-regular-representing-measures` | Fourier support closure audit 2026-09-11: proof 1.1 silently uses the DC-qualified LCH cutoff. Proof 3.1 also omits the compact tightness core needed for all-Borel inner regularity; an open complement in noncompact `X` need not have compact complement. Add DC/exact cutoff use and prove the compact-core/outer-regularity argument. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
