@@ -15,6 +15,8 @@ import { mkdtempSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
+import { createHash } from 'node:crypto';
+import { itemHashGuard } from '../../item-hash.mjs';
 
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
@@ -24,6 +26,42 @@ const contractsWith = (rows: object) => {
   writeFileSync(p, JSON.stringify({ contracts: rows }));
   return p;
 };
+
+test('template reviews bind item and row, reject boilerplate, and do not hide bad step citations', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'ba-reviewed-'));
+  const records: any = {};
+  const reasons = [
+    'The identity matrix calculation explicitly evaluates its sole diagonal entry.',
+    'For the empty indexing family the displayed union has no members by definition.',
+    'The scalar homomorphism sends the multiplicative identity to the specified unit.',
+  ];
+  for (let i = 0; i < 3; i++) {
+    const id = `thm-boundary-fixture-${i}`;
+    const text = `---\nid: ${id}\n---\n## Statement\nA fixture claim.\n## Proof\n1.1 The displayed value equals the unit. [given]\n`;
+    writeFileSync(join(dir, `${id}.md`), text);
+    const row: any = { case: 'one', status: 'checked', evidence: `Step 1.1 covers $x=${i}$.` };
+    row.template_review = { upheld: true, by: 'fixture-reviewer', reason: reasons[i],
+      item_sha256: itemHashGuard(text), row_sha256: createHash('sha256').update(JSON.stringify({
+        case: row.case, status: row.status, text: row.evidence,
+      })).digest('hex') };
+    records[id] = { boundaries: [row] };
+  }
+  const file = join(dir, 'contracts.json');
+  const check = () => { writeFileSync(file, JSON.stringify({ contracts: records }));
+    return run([file, '--items-dir', dir, '--json', '--fail-on-template', '--fail-on-contradicted']); };
+  let result = check();
+  assert.equal(result.status, 0, result.stdout + result.stderr);
+  assert.equal(JSON.parse(result.stdout).summary.template_clusters_upheld_by_review, 1);
+  const rows: any[] = Object.values(records).map((r: any) => r.boundaries[0]);
+  rows[0].template_review.item_sha256 = 'stale';
+  assert.equal(check().status, 1, 'stale proof must reopen review');
+  rows[0].template_review.item_sha256 = itemHashGuard(`---\nid: thm-boundary-fixture-0\n---\n## Statement\nA fixture claim.\n## Proof\n1.1 The displayed value equals the unit. [given]\n`);
+  rows[0].evidence = 'Step 9.9 covers $x=0$.';
+  rows[0].template_review.row_sha256 = createHash('sha256').update(JSON.stringify({ case: 'one', status: 'checked', text: rows[0].evidence })).digest('hex');
+  assert.ok(JSON.parse(check().stdout).contradicted.length > 0, 'review must not hide nonexistent proof steps');
+  for (const row of rows) row.template_review.reason = 'All the necessary cases have been examined and are completely correct.';
+  assert.ok(JSON.parse(check().stdout).templates.length > 0, 'generic copied reviews must remain candidates');
+});
 
 const run = (args: string[]) => spawnSync(process.execPath,
   [join(REPO, 'tools', 'boundary-audit.mjs'), ...args],

@@ -30,6 +30,18 @@ export async function repairGateBatch(args: any, deps: any) {
   const { ctx, failure, executor, stage, round } = args;
   let failures = [failure, ...(failure.advisory ?? [])]
     .filter((entry) => !entry.liveItems || entry.liveItems.length);
+  // A completed mathematical read may identify a detector defect. Do not
+  // spend another content-repair round on that tool's unchanged diagnostics.
+  const ledgerPath = join(ctx.repo, 'research', 'defect-ledger.jsonl');
+  if (existsSync(ledgerPath)) {
+    const gateTools = new Set((stage.gates?.(ctx) ?? [])
+      .filter((gate: any) => failures.some((f: any) => gate.id === f.id || gate.id.endsWith(`-${f.id}`)))
+      .flatMap((gate: any) => Array.isArray(gate.argv) ? gate.argv.filter((arg: any) => typeof arg === 'string' && arg.startsWith('tools/')) : []));
+    const holds = readFileSync(ledgerPath, 'utf8').split(/\r?\n/).filter(Boolean).map(line => JSON.parse(line))
+      .filter(row => row.run === ctx.run && row.disposition === 'open' && row.location === 'tool-code' && gateTools.has(row.subject));
+    if (holds.length) return { owner: { reason: holds.map(row =>
+      `${row.defect_id}: ${row.subject} requires tool-owner repair; ${row.subclass_note ?? row.required_authority ?? 'see defect ledger'}`).join('\n') } };
+  }
   const mechanical = failures.filter((entry) => deps.MECHANICAL_REPAIRS[entry.id]);
   if (mechanical.length) {
     const result = await deps.mechanicalRepair({ ctx,
@@ -69,6 +81,7 @@ export async function repairGateBatch(args: any, deps: any) {
     writeFileSync(join(ctx.repo, task), [
       '# Step 5/6 gate repair batch', '',
       `Stage: ${stage.id}. Evidence: ${evidence}. Group: ${group ?? 'all (serial writer)'}.`,
+      `Write your report to research/${ctx.run}-${stage.id}-gate-review-${round}-${group ?? 'all'}.md. Briefs and task templates are read-only.`,
       `Assigned carriers: ${JSON.stringify(assigned)}.`,
       'Read every failure in the evidence file. Adjudicate all findings on your assigned carriers in one pass.',
       'Exhausted ids are excluded from repair even when mentioned in the diagnostic output.',
@@ -81,7 +94,7 @@ export async function repairGateBatch(args: any, deps: any) {
       'For boundary/citation candidates, read each claim and record item-specific dispositions; never bulk-stamp template rows.',
       'Select applicable finite-smoke checks with assertion evidence when the liveness check finds an empty scope.',
       'At 6b, update authored-content decisions after repairs; include newly authored local definitions and lemmas. Preserve historical review evidence.',
-      'At 6b, maintain authored decisions and matching defect-ledger records under briefs/tasks/alpha-step6-gate.md; preserve supplemental decisions in historical scopes.',
+      'At 6b, follow the protocol in briefs/tasks/alpha-step6-gate.md to maintain authored decisions and matching defect-ledger records; do not edit that template. Preserve supplemental decisions in historical scopes.',
       'Run focused checks for changed carriers. The engine runs the complete final battery.', '',
     ].join('\n'));
     executor.start(stage, { role: 'alpha', label: `gate-batch-${round}-${group ?? 'all'}`,

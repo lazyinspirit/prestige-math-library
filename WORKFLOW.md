@@ -185,6 +185,16 @@ Checks cover plan/scope/splice consistency, dependencies, forward/external
 references, rendering, prose, sources, pathways, provenance, contracts,
 finite smoke tests, risk, boundaries, citation fidelity, and evidence liveness.
 Passing structural checks or finite tests does not prove mathematics.
+Boundary template candidates may be upheld with `template_review` containing
+`upheld: true`, reviewer `by`, an item-specific `reason` of at least40 characters,
+`item_sha256` from `itemHashGuard`, and `row_sha256` of the JSON object
+`{case, status, text}`, where text is the row's reason or evidence. The audit
+reports these separately; stale bindings and repeated review boilerplate still
+fail. Missing proof steps and empty announcement-only steps remain errors.
+
+Gate-repair workers write run-local reports; shared briefs remain read-only.
+An open tool-code defect naming a failing gate's tool holds for the operator,
+instead of launching another content-repair pass on that detector.
 Risk reports preserve complete piped JSON and failure exit codes; the process
 exits naturally after output drains. Risk routing targets the direct 6B Alpha,
 not retired reader/refuter stages.

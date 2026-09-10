@@ -45,6 +45,8 @@
 
 import { readFileSync, existsSync } from 'node:fs';
 import { join } from 'node:path';
+import { createHash } from 'node:crypto';
+import { itemHashGuard } from './item-hash.mjs';
 
 const argv = process.argv.slice(2);
 const flag = (name, fallback = null) => {
@@ -246,7 +248,7 @@ for (const file of files) {
   }
   for (const [id, entry] of Object.entries(contracts)) {
     for (const b of entry?.boundaries ?? []) {
-      rows.push({ file, id, case: b.case, status: b.status, text: b.reason ?? b.evidence ?? '', reviewed: b.reviewed });
+      rows.push({ file, id, case: b.case, status: b.status, text: b.reason ?? b.evidence ?? '', reviewed: b.reviewed, template_review: b.template_review });
     }
   }
 }
@@ -261,6 +263,28 @@ if (!rows.length) {
 // reused not_applicable — frontier-14's three fatal-concealing rows were all
 // marked `checked`, a status this signal used to skip entirely.
 const clusters = new Map();
+const rowHash = r => createHash('sha256').update(JSON.stringify({
+  case: r.case, status: r.status, text: r.text,
+})).digest('hex');
+// Normalization can erase a genuine step-specific mathematical distinction.
+// A reviewer may uphold that candidate, but only for the exact item and row.
+// Reused review boilerplate is still a candidate, not an escape hatch.
+const reviewReasons = new Map();
+for (const r of rows) {
+  const reason = r.template_review?.reason;
+  if (typeof reason !== 'string') continue;
+  const key = normalise(reason, r.id, titleOf(itemText(r.id)));
+  if (!reviewReasons.has(key)) reviewReasons.set(key, new Set());
+  reviewReasons.get(key).add(r.id);
+}
+const templateReviewed = r => {
+  const v = r.template_review, text = itemText(r.id);
+  return v?.upheld === true && typeof v.by === 'string' && v.by.trim().length > 0
+    && typeof v.reason === 'string' && v.reason.trim().length >= 40
+    && text !== null && v.item_sha256 === itemHashGuard(text)
+    && v.row_sha256 === rowHash(r)
+    && (reviewReasons.get(normalise(v.reason, r.id, titleOf(text)))?.size ?? 0) < minCluster;
+};
 for (const r of rows) {
   if (r.status !== 'not_applicable' && r.status !== 'checked') continue;
   const key = `${r.status}|${normalise(r.text, r.id, titleOf(itemText(r.id)))}`;
@@ -268,7 +292,7 @@ for (const r of rows) {
   if (!clusters.has(key)) clusters.set(key, []);
   clusters.get(key).push(r);
 }
-const templates = [...clusters.entries()]
+const templateCandidates = [...clusters.entries()]
   .filter(([, members]) => members.length >= minCluster)
   .map(([key, members]) => ({
     status: members[0].status,
@@ -277,8 +301,12 @@ const templates = [...clusters.entries()]
     normalised: key.slice(key.indexOf('|') + 1),
     items: [...new Set(members.map((m) => m.id))],
     cases: [...new Set(members.map((m) => m.case))].sort(),
+    reviewed_members: members.filter(templateReviewed).length,
+    rows: members.map(r => ({ id: r.id, case: r.case, text: r.text, row_sha256: rowHash(r) })),
   }))
   .sort((a, b) => b.members - a.members);
+const templates = templateCandidates.filter(t => t.reviewed_members < t.members);
+const reviewedTemplates = templateCandidates.filter(t => t.reviewed_members === t.members);
 
 // Signal 2 — contradicted dispositions.
 const contradicted = [];
@@ -349,11 +377,12 @@ const summary = {
   rows_in_template_clusters: templates.reduce((n, t) => n + t.members, 0),
   contradicted_candidates: contradicted.length,
   upheld_by_review: upheld.length,
+  template_clusters_upheld_by_review: reviewedTemplates.length,
   items_not_yet_authored: [...new Set(rows.map((r) => r.id))].filter((id) => itemText(id) === null).length,
 };
 
 if (asJson) {
-  console.log(JSON.stringify({ summary, templates, contradicted, upheld }, null, 2));
+  console.log(JSON.stringify({ summary, templates, reviewed_templates: reviewedTemplates, contradicted, upheld }, null, 2));
 } else {
   console.log(`boundary-audit: ${summary.boundary_rows} rows over ${summary.contracts_scanned} contract file(s); ` +
     `${summary.not_applicable_rows} marked not_applicable`);
@@ -385,6 +414,7 @@ if (asJson) {
   } else {
     console.log('\nCONTRADICTED DISPOSITIONS — none found by the three detectors.');
   }
+  if (reviewedTemplates.length) console.log(`\nTEMPLATE CANDIDATES UPHELD — ${reviewedTemplates.length} cluster(s), every row bound to current item text and specific review evidence.`);
   if (upheld.length) {
     console.log(`\nUPHELD BY REVIEW — ${upheld.length} row(s) an Alpha read and kept, with reasons on the record:`);
     for (const u of upheld) console.log(`  ${u.id}  [${u.case}]  by ${u.by}: ${String(u.reason).slice(0, 120)}`);

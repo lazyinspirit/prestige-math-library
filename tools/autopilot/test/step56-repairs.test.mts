@@ -5,6 +5,23 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { repairGateBatch } from '../stages/step56-repairs.mts';
 
+test('an open defect in the failing detector holds instead of redispatching content repair', async () => {
+  const repo = mkdtempSync(join(tmpdir(), 'step56-tool-hold-'));
+  try {
+    mkdirSync(join(repo, 'research'));
+    writeFileSync(join(repo, 'research', 'defect-ledger.jsonl'), JSON.stringify({
+      defect_id: 'detector-bug', run: 'r', disposition: 'open', location: 'tool-code',
+      subject: 'tools/boundary-audit.mjs', subclass_note: 'Review normalization collision',
+    }) + '\n');
+    let started = 0;
+    const result = await repairGateBatch({ ctx: { repo, run: 'r' }, round: 2,
+      stage: { id: '6b-import-join', gates: () => [{ id: 'import-5-author-boundary-audit', argv: ['node', 'tools/boundary-audit.mjs'] }] },
+      failure: { id: 'boundary-audit' }, executor: { start() { started++; } } }, {});
+    assert.equal(started, 0);
+    assert.match(result?.owner?.reason ?? '', /detector-bug/);
+  } finally { rmSync(repo, { recursive: true, force: true }); }
+});
+
 test('a repair wave gives one group every overlapping gate and disjoint groups separate writers', async () => {
   const repo = mkdtempSync(join(tmpdir(), 'step56-repair-'));
   try {
