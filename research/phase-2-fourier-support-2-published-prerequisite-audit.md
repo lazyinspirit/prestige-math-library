@@ -278,3 +278,64 @@ directly from the published completion-representative theorem under its stated
 countable choice and proving representative independence with explicit
 reflection. Thus this is a concrete local authoring obligation, not an
 unavailable mathematical prerequisite.
+
+## Gaussian-transform supplier follow-up
+
+Before disposition, the whole canonical ledger was searched for the exact
+target ID, its empty alias list, the sequential-limit and null-set derivative
+mechanisms, and the supplier IDs `thm-dominated-convergence`,
+`thm-sequential-criterion-for-function-limits`,
+`rem-heine-criterion-choice-cost` and `def-countable-choice`. The target had one
+U-P impact row and no prior confirmed defect record, so that row moves to A-P;
+no duplicate is introduced.
+
+### `thm-differentiation-under-the-integral-sign`
+
+Current SHA-256:
+`89f4a2a089262eeeb2a0ec7d0c97b07614b482c44fce1eb571cf480b7870da8f`.
+Proof 1.1 fixes an arbitrary sequence of nonzero increments `h_n -> 0`, and
+steps 2.1--3.1 correctly use the complex mean-value estimate and dominated
+convergence to prove convergence of the corresponding difference quotients.
+The last sentence then says that this sequential convergence makes `F`
+differentiable. This is the converse, sequence-to-epsilon-delta direction of
+the Heine criterion. The published and previously audited
+`thm-sequential-criterion-for-function-limits` explicitly invokes countable
+choice for that direction, as documented again by
+`rem-heine-criterion-choice-cost`; the differentiation theorem neither assumes
+nor declares countable choice. For the complex quotient, apply the real
+criterion to real and imaginary parts under the same assumption.
+
+The statement has a second well-definedness gap under the same item. Hypothesis
+2 assumes `t |-> f(x,t)` is differentiable only for almost every `x`, but
+hypothesis 3, hypothesis 4 and the conclusion treat `partial_t f(x,t)` as an
+everywhere-defined measurable function and integrate it. No value is assigned
+on the exceptional set. A complete repair states one measurable null set `N`,
+requires differentiability for every `x` outside `N`, defines the derivative to
+be zero on `N` (or supplies a measurable representative agreeing with the
+derivative off `N`), and adds `def-countable-choice` plus the sequential
+criterion. Dominated convergence itself is adequate for the sequence handed to
+it. Classification: A-P; no new Phase-2 pair.
+
+The live Gaussian-transform draft already assumes countable choice, and its
+specific exponential integrand is differentiable for every spatial point. It
+can therefore discharge both gaps locally by naming its CC hypothesis at F4
+and using the everywhere-defined derivative. This is a published-contract
+defect but not an unavailable authoring prerequisite.
+
+### Bounded Gaussian evaluation receipt
+
+The following current files were read in full:
+
+| Item | SHA-256 | Bounded conclusion |
+|---|---|---|
+| `lem-gaussian-integral-is-finite-and-positive` | `7ef463c5a9906ce6ab48892a10738f93e5aab04413f47c60a1ad2e5a2224ca79` | The `x^-2` tail comparison, reflected negative tail, compact-middle positivity and mixed-improper recombination prove a finite positive value. |
+| `lem-gaussian-square-is-the-plane-gaussian-integral` | `98a694dd8387aba83236cd61a66692ac72aa73553ee4c8a1479fadfc6239896a` | Product integration on symmetric squares and the compact Jordan exhaustion give the square of the one-dimensional limit. |
+| `lem-plane-gaussian-integral-in-polar-coordinates` | `4e24e5cc1291500195eddd1a3009065d51be8c4b4fb7262e485cd16763c63c46` | Splitting into upper/lower half-annuli gives injective positive-radius polar charts; the overlap circles/radial segments have content zero, and the inner-disc error tends to zero before the disc exhaustion tends to the plane. |
+| `thm-gaussian-integral` | `452a312708264d603c610ec1b5ef078060b3a727c532bff7e37f7f31ca54bfc9` | The preceding identities give a positive `I` with `I^2=pi`, so uniqueness of the nonnegative square root gives `I=sqrt(pi)`. |
+
+The relevant exhaustion, compact-Jordan change-of-variables, product-integral,
+improper substitution, exponential/FTC and content-zero interfaces were checked
+at their exact used clauses. No defect was identified in this bounded path.
+`thm-gaussian-integral` moves from U-P to bounded clear, and the other three
+items are new bounded-clear census entries. This is not a certification of
+unused supplier clauses or full transitive closures.

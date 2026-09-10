@@ -101,6 +101,26 @@ cross-class-deduplicated: 2,393 unique published IDs; U-P 1,434, U-C 16, A-R
 187, A-P 166 and 590 bounded clears. Every indexed ID resolves to a current
 published item.
 
+The Gaussian-transform follow-up promoted the existing U-P row
+`thm-differentiation-under-the-integral-sign` to A-P. Its final
+sequence-to-function-limit inference spends countable choice according to the
+library's explicit Heine criterion, but the theorem has no CC hypothesis. Its
+almost-everywhere derivative is also integrated without a defined measurable
+representative on the exceptional set. Adding CC and an explicit zero-on-null
+representative repairs both interfaces. The live Gaussian draft already states
+CC and has pointwise differentiability everywhere, so it can discharge the
+published gap locally; no new Phase-2 pair is needed.
+
+The Gaussian integral theorem and its three immediate published proof lemmas
+were read in full and received bounded clear dispositions in the used scope.
+The theorem moves from U-P, and the three lemmas are new census entries. This
+does not certify their full transitive closures.
+
+Post-Gaussian-follow-up target index: 2,396 unique published IDs; U-P 1,432,
+U-C 16, A-R 187, A-P 167 and 594 bounded clears. Mechanical recount confirms
+2,396 unique rows with no cross-class duplicate; every indexed ID resolves to
+a current published item.
+
 ## Next target
 
 1. Reconcile any further exact next-20 or Fourier published-interface issues
@@ -109,7 +129,7 @@ published item.
    an actual published proof or a selected repair path; keep general LCH debt
    distinct from the explicit Euclidean Fourier path.
 3. Continue through original next-20 batches by actual prerequisite pressure,
-   then sample published items outside the existing 2,393-ID reference pool.
+   then sample published items outside the existing 2,396-ID reference pool.
 
-No exhaustive discovery claim is authorized while 13,537 published items
+No exhaustive discovery claim is authorized while 13,534 published items
 remain outside the index and dependency interfaces remain unaudited.

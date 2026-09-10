@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1434, U-C 16, A-R 187, A-P 166. The
+Current classifications: U-P 1432, U-C 16, A-R 187, A-P 167. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -92,6 +92,29 @@ isometry; handle infinity with a bounded Borel representative. The current
 instead obtain Borel representatives/reflection directly under its stated
 countable choice. This is a local authoring obligation, with no new Phase-2
 pair. The existing Young A-P evidence is extended rather than duplicated.
+
+The Gaussian-transform supplier read promotes the existing U-P row
+`thm-differentiation-under-the-integral-sign` to A-P. Its proof 3.1 proves
+convergence of the complex difference quotient along an arbitrary sequence of
+increments and then concludes differentiability. The library's own Heine
+criterion records countable choice in precisely this sequence-to-function-limit
+direction, but the differentiation theorem states no choice hypothesis. The
+statement also writes and integrates `partial_t f` everywhere after assuming
+differentiability only almost everywhere, without choosing a measurable
+null-set representative. Add countable choice and apply the sequential
+criterion to the real and imaginary parts, and state one exceptional null set
+with the derivative defined as zero there (or supply an equivalent measurable
+representative). The live Gaussian draft already assumes countable choice and
+its concrete integrand is differentiable for every `x`, so it can discharge
+both obligations locally and needs no new Phase-2 pair.
+
+The published Gaussian evaluation and its three immediate proof lemmas were
+also read in full. The tail comparison, square exhaustion, two injective polar
+half-annuli, content-zero recombination, shrinking inner-disc bound and positive
+square-root selection are coherent in the used scope. `thm-gaussian-integral`
+moves from U-P to bounded clear; its three immediate lemmas are new bounded
+clear census entries. This receipt does not certify the unused clauses or full
+transitive closures of their suppliers.
 
 ## Locally convex published-prerequisite audit — 2026-09-11
 
@@ -27693,11 +27716,11 @@ This index retains the **2185 distinct published item IDs in the initial
 classification reference pool**, plus **5 newly identified published supplier
 items from U-C19**, **1 new 6c remark finding**, **1 Step-9 repaired definition**,
 **3 HG-P published prerequisite repairs**, **1 diagram-boundary consumer finding**,
-and **16 subsequent frontier-supervision findings**, plus **135 UC34 supplier findings**, plus **4 newly indexed Step3b Tor findings**, plus **2 Step3b real-integrability findings**, plus **2 recovered HG continuity repair rows**, plus **1 resolution-dependent Tor definition repair**, plus **1 sequence-space proof-interface candidate**, plus **2 Green-correspondence prerequisite findings**, plus **1 Cayley-tree proof finding**, plus **3 cohomology extension-map findings**, plus **1 Doob–Dynkin choice finding**, plus **1 finite-dimensional cohomology duality finding**, plus **11 locally convex prerequisite audit additions**, plus **10 scalar-topology audit additions**, plus **7 Fourier-support prerequisite audit additions**, for **2393 indexed items**. It is not a census of defective items or a
+and **16 subsequent frontier-supervision findings**, plus **135 UC34 supplier findings**, plus **4 newly indexed Step3b Tor findings**, plus **2 Step3b real-integrability findings**, plus **2 recovered HG continuity repair rows**, plus **1 resolution-dependent Tor definition repair**, plus **1 sequence-space proof-interface candidate**, plus **2 Green-correspondence prerequisite findings**, plus **1 Cayley-tree proof finding**, plus **3 cohomology extension-map findings**, plus **1 Doob–Dynkin choice finding**, plus **1 finite-dimensional cohomology duality finding**, plus **11 locally convex prerequisite audit additions**, plus **10 scalar-topology audit additions**, plus **7 Fourier-support prerequisite audit additions**, plus **3 Gaussian-supplier audit additions**, for **2396 indexed items**. It is not a census of defective items or a
 claim that every supplier later cited by an audit is a defect candidate.
 The publication census, checked 2026-09-10 from item front matter, has
-**15930 published items**. All 2393 indexed IDs are published;
-**13537 published items remain outside this index** and require census
+**15930 published items**. All 2396 indexed IDs are published;
+**13534 published items remain outside this index** and require census
 reconciliation. This is a status census, not a mathematical audit of those
 outside-index items.
 The initial extraction also contained
@@ -27706,14 +27729,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1434 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1432 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 16 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 166 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 167 | Recorded direct review and an unresolved item-specific repair. |
 
-590 further reference-pool items have bounded no-repair-needed dispositions
+594 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1803 items and the expanded reference pool contains 2393 unique items.
+1802 items and the expanded reference pool contains 2396 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -27774,6 +27797,10 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `thm-gaussian-integral` | Fourier Gaussian supplier audit, 2026-09-11: full target and its three immediate proof lemmas read. The finite positive tail comparison, product-square exhaustion, injective half-annulus polar calculation, content-zero recombination, shrinking inner-disc estimate and positive square-root selection are coherent in the used scope. U-P to bounded clear; no published edit or new Phase-2 pair. Exact hashes and audit limits: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `lem-gaussian-integral-is-finite-and-positive` | Fourier Gaussian supplier audit, 2026-09-11: full proof read; the reciprocal-quadratic tail bound, reflected negative tail, positive compact middle and mixed-improper recombination establish a finite positive integral. New bounded-clear census entry; no published edit or new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `lem-gaussian-square-is-the-plane-gaussian-integral` | Fourier Gaussian supplier audit, 2026-09-11: full proof read; product integration on symmetric squares and compact-Jordan exhaustion give the square identity. New bounded-clear census entry; no published edit or new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `lem-plane-gaussian-integral-in-polar-coordinates` | Fourier Gaussian supplier audit, 2026-09-11: full proof read; positive-radius upper/lower polar charts are injective, overlaps have content zero, and the inner-disc and outer exhaustion limits yield pi. New bounded-clear census entry; no published edit or new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-weak-global-dimension-is-detected-by-tor-and-is-left-right-symmetric` | Root bounded dependency review, 2026-09-09 15:46 UTC: full target and opposite-ring/weak-dimension definitions read; flat-dimension criterion, balance and tensor interfaces checked. Existing DC and supplied resolutions suffice, including the zero-ring case. No published edit or new prerequisite. Exact supplier IDs and current acceptance hashes are in phase-2-catchup-24-cyclic-tor-root-repair.md and the item review JSON. U-P to bounded clear; not a repair, independent judgment or whole-library certification. |
 
 Root review on 2026-09-09: read the complete polynomial-bump primitive
@@ -28420,6 +28447,7 @@ owner's scan policy.
 | `lem-positive-c-zero-functionals-have-finite-regular-representing-measures` | Fourier support closure audit 2026-09-11: proof 1.1 silently uses the DC-qualified LCH cutoff. Proof 3.1 also omits the compact tightness core needed for all-Borel inner regularity; an open complement in noncompact `X` need not have compact complement. Add DC/exact cutoff use and prove the compact-core/outer-regularity argument. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-c-c-is-dense-in-l-p-for-radon-measures` | Fourier support closure audit 2026-09-11: proof 2.1 invokes `lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set`, whose contract assumes DC, while this theorem states no DC. Add and declare DC or give a choice-free cutoff construction. This affects the general LCH RMK repair path; live Fourier Euclidean density instead uses its explicit distance cutoff under stated countable choice. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `lem-complex-translation-and-approximate-identity-interfaces` | Fourier Step-3B load-bearing supplier audit 2026-09-11: proof 1.2 derives complex `L^1`-by-`L^p` convolution existence, norm and measurability by black-box use of the already-defective Young theorem in its exact affected branch. For finite `p`, use the declared jointly Borel envelope, translation isometry and Minkowski integral inequality; handle infinity with an essentially bounded Borel representative. The current L1 Fourier product draft can instead replay its own Tonelli envelope and direct reflection under stated CC. No new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `thm-differentiation-under-the-integral-sign` | Fourier Gaussian supplier audit 2026-09-11 promotes the existing U-P row: proof 3.1 proves convergence along every supplied increment sequence, then concludes an epsilon-delta derivative through the exact Heine-converse direction whose published contract spends countable choice; the theorem states no CC. Its a.e. derivative is also integrated without a defined measurable representative on the exceptional set. Add CC, apply the real criterion to real/imaginary parts, and define the derivative as zero on one stated null set (or supply an equivalent representative). The live Gaussian draft already has CC and pointwise differentiability everywhere. No new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `lem-euclidean-balls-have-positive-finite-lebesgue-measure` | Fourier support audit 2026-09-11: steps 2.1--3.1 infer measurability from containment between measurable cubes and use `lambda(B)` before the domain claim; the inference is invalid. First use published Euclidean-metric, metric-ball-openness and Borel-to-Lebesgue interfaces under the target's stated countable choice, then apply the sound cube bounds. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-total-variation-is-a-measure` | Fourier support audit 2026-09-11: proof 1.2 chooses partitions for every disjoint piece and then takes a sum of suprema without near-maximality or a valid selection. Repair choice-free via finitely many near-max partitions for each finite partial sum, published finite choice and the nonnegative-series supremum; handle infinite variations by arbitrary finite thresholds. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences` | Fourier support audit 2026-09-11: proof 1.1 directly applies `thm-riesz-fischer-completeness-of-l-p`, whose representative-subsequence clause explicitly assumes countable choice, but the corollary has no such hypothesis. State/declare countable choice and identify the inherited representative selection. The complex-Lp consumer already carries CC. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
@@ -29991,7 +30019,6 @@ mathematical repairs. Evidence:
 | `thm-depth-lemma` | Item-exact impact of the Dependent Choice rehome |
 | `thm-depth-zero-associated-prime-criterion` | Item-exact impact of the Dependent Choice rehome |
 | `thm-derivations-of-smooth-functions-are-smooth-vector-fields` | Open findings from the bump-consumer audit — 2026-09-08 |
-| `thm-differentiation-under-the-integral-sign` | euclidean-surface-measure-divergence-and-green-identities |
 | `thm-dimension-equals-transcendence-degree` | AV-1 draft-page impact partition (Phase 3 only) |
 | `thm-dimension-product-varieties` | AV-1 draft-page impact partition (Phase 3 only) |
 | `thm-dimension-theorem-intersection-projective` | AV-1 draft-page impact partition (Phase 3 only) |
@@ -30047,7 +30074,6 @@ mathematical repairs. Evidence:
 | `thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-gallagher-correspondence-for-an-extendible-character` | Transitive consumers (166), grouped by home page |
 | `thm-gap-and-union-theorems-for-complexity-bounds` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
-| `thm-gaussian-integral` | Existing published suppliers consumed by published Complex Analysis |
 | `thm-generalized-fitting-subgroup-contains-its-centralizer` | 30.4 Recorded-result isolation and other Phase-3 repairs |
 | `thm-generic-fibre-dimension` | AV-1 draft-page impact partition (Phase 3 only) |
 | `thm-geometric-hahn-banach-for-subspaces` | norming-and-separation-under-hahn-banach |
