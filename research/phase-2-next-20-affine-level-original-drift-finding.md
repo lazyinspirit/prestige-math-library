@@ -1,0 +1,9 @@
+# Historical finding before local resolution
+
+### integrable-highest-weight-kac-moody-modules
+
+The general integrability and category-O arguments are supported by the declared roots `kac-moody-algebras-from-generalized-cartan-matrices` (order 510.023), `verma-modules-and-shapovalov-forms` (order 510.003), and `root-systems-dynkin-diagrams-and-cartan-killing-classification` (order 503). However, the RL-14 design (`plan-representation-theory-lie-track.md`, lines 1353–1392) also requires two affine statements about the numerical level \(\Lambda(c)\), and explicitly says that this “connects RL-13 level.” The canonical owner of the central element, degree derivation, null root, and affine level is `affine-lie-algebras-and-loop-central-extensions` (order 510.025), specifically `def-null-root-central-coroot-and-affine-level`. Kleshchev's complete construction likewise introduces the central element and affine Cartan before defining level and proving the nonnegative-integral and level-zero results (Kleshchev, *Infinite Dimensional Lie Algebras*, §§7.1–7.4 and §§8.5–8.6, pp. 95–98 and 113–117: https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf).
+
+Adding that edge is mathematically backward, but the supplier is unpublished and absent from this run, whose ledger has `allow_in_run_dependencies: false`; applying it would therefore make RL-14 unbuildable and would require an owner-authorized scope amendment. Proposed placement: build the existing RL-13 A/B pair at order 510.025 before RL-14 at order 510.027, then add the edge. The alternative owner decision is to move or remove RL-14's two affine-level items; silently redefining RL-13's owned interface locally would duplicate ownership.
+VERDICT: drift-blocked — add `affine-lie-algebras-and-loop-central-extensions` (order 510.025) before `integrable-highest-weight-kac-moody-modules` (order 510.027), with owner-authorized rescope or remove/move the two affine-level claims
+

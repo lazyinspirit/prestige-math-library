@@ -7,8 +7,12 @@ The owner authorized building all 20 pairs presented as buildable, supervising
 the engine through completion, resolving blockers and inefficiency, recording
 potential published-item defects in the canonical ledger, and keeping Phase 2 current.
 Scope: **20 pairs / 40 pages / 14 batches**. Programme: **147 pairs = 44 published
-+ 20 selected + 83 waiting**. Planning and doctor checks pass; Step 1 prerequisite-drift review is running.
++ 20 selected + 83 waiting**. Planning and doctor checks pass; Step 1 drift review found an affine-level interface gap; root resolved it
+with a local RL-14 central-coroot lemma, preserving all twenty pairs.
 Build completion leaves new content draft pending owner publication.
+
+Local prerequisite resolution: `phase-2-next-20-affine-level-local-resolution.md`.
+The affine propositions and example remain binding; no loop-algebra pair is added.
 
 Current supervision: `phase-2-next-20-supervision.md`.
 Historical checkpoints and decisions: `phase-2-prior-run-history-through-2026-09-10.md`.

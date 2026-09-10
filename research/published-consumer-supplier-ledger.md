@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1445, U-C 8, A-R 187, A-P 152. The
+Current classifications: U-P 1443, U-C 8, A-R 187, A-P 152. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -27410,14 +27410,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1445 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1443 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 8 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 152 | Recorded direct review and an unresolved item-specific repair. |
 
-565 further reference-pool items have bounded no-repair-needed dispositions
+567 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1792 items and the expanded reference pool contains 2357 unique items.
+1790 items and the expanded reference pool contains 2357 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -27525,6 +27525,8 @@ owner's scan policy.
 
 | Published item | Scope and evidence |
 |---|---|
+| `fs-cauchy-implies-convergent-in-every-metric-space` | Root 2026-09-10 bounded choice-impact clear: complete target read; explicit reciprocal sequence witnesses incompleteness without sequence selection, and the interval completion uses only published closed-implies-complete claim 2. No repair for this concern; full transitive closure not certified. Evidence: research/phase-2-next-20-published-metric-choice-audit.md. |
+| `cex-contraction-on-an-incomplete-space` | Root 2026-09-10 bounded choice-impact clear: complete target read; explicit reciprocal sequence witnesses incompleteness without sequence selection, and the interval completion uses only published closed-implies-complete claim 2. No repair for this concern; full transitive closure not certified. Evidence: research/phase-2-next-20-published-metric-choice-audit.md. |
 | `cex-completeness-is-not-topological` | Root 2026-09-10 bounded choice-impact clear: full target and repaired complete-subspace supplier read; explicit reciprocal Cauchy sequence and missing-zero argument need only the supplied-sequence clause, no CC-dependent converse. No repair or full transitive audit. Evidence: research/phase-2-next-20-published-metric-choice-audit.md. |
 | `thm-function-space-is-complete-for-a-complete-target` | Root 2026-09-10 bounded choice-propagation review: full target, uniform-limit theorem, uniform-metric and bounded-remetrisation proofs read; completeness supplier already fully read. L7 uses only choice-free claim 2; L6 closedness is proved by a direct epsilon/3 argument, not sequential closure. Unique pointwise limits require no choice. Clear for this impact concern; remaining transitive suppliers not certified. Evidence: research/phase-2-next-20-published-sequence-space-audit.md. |
 | `lem-closed-subspace-of-a-banach-space-is-banach` | Root 2026-09-10 full item and all three direct supplier texts: uses only choice-free claim 2 of thm-complete-subspace-iff-closed; no converse use. Bounded clear, no repair or whole-closure certification. Evidence: research/phase-2-next-20-published-sequence-space-audit.md. |
@@ -28500,11 +28502,9 @@ mathematical repairs. Evidence:
 | `lem-near-identity-c-one-maps-sandwich-cubes` | UC34 supplier reconciliation 2026-09-09: Direction-specific impact candidate only after thm-complete-subspace-iff-closed repair: inspect whether complete-implies-closed (CC), closed-implies-complete (ZF), or supplied-sequence clause is used. Not a confirmed defect or semantic audit. Receipt research/uc34-2026-09-09-complete-subspace-astra-3.md; no Phase2 prerequisite identified. |
 | `lem-complete-remetrisation` | UC34 supplier reconciliation 2026-09-09: Direction-specific impact candidate only after thm-complete-subspace-iff-closed repair: inspect whether complete-implies-closed (CC), closed-implies-complete (ZF), or supplied-sequence clause is used. Not a confirmed defect or semantic audit. Receipt research/uc34-2026-09-09-complete-subspace-astra-3.md; no Phase2 prerequisite identified. |
 | `fs-strict-contraction-has-a-fixed-point` | UC34 supplier reconciliation 2026-09-09: Direction-specific impact candidate only after thm-complete-subspace-iff-closed repair: inspect whether complete-implies-closed (CC), closed-implies-complete (ZF), or supplied-sequence clause is used. Not a confirmed defect or semantic audit. Receipt research/uc34-2026-09-09-complete-subspace-astra-3.md; no Phase2 prerequisite identified. |
-| `fs-cauchy-implies-convergent-in-every-metric-space` | UC34 supplier reconciliation 2026-09-09: Direction-specific impact candidate only after thm-complete-subspace-iff-closed repair: inspect whether complete-implies-closed (CC), closed-implies-complete (ZF), or supplied-sequence clause is used. Not a confirmed defect or semantic audit. Receipt research/uc34-2026-09-09-complete-subspace-astra-3.md; no Phase2 prerequisite identified. |
 | `ex-tangent-homeomorphism-between-bounded-and-unbounded-spaces` | UC34 supplier reconciliation 2026-09-09: Direction-specific impact candidate only after thm-complete-subspace-iff-closed repair: inspect whether complete-implies-closed (CC), closed-implies-complete (ZF), or supplied-sequence clause is used. Not a confirmed defect or semantic audit. Receipt research/uc34-2026-09-09-complete-subspace-astra-3.md; no Phase2 prerequisite identified. |
 | `ex-banach-fixed-point-for-square-roots` | UC34 supplier reconciliation 2026-09-09: Direction-specific impact candidate only after thm-complete-subspace-iff-closed repair: inspect whether complete-implies-closed (CC), closed-implies-complete (ZF), or supplied-sequence clause is used. Not a confirmed defect or semantic audit. Receipt research/uc34-2026-09-09-complete-subspace-astra-3.md; no Phase2 prerequisite identified. |
 | `cor-open-closed-and-g-delta-subspaces-of-completely-metrizable-spaces` | UC34 supplier reconciliation 2026-09-09: Direction-specific impact candidate only after thm-complete-subspace-iff-closed repair: inspect whether complete-implies-closed (CC), closed-implies-complete (ZF), or supplied-sequence clause is used. Not a confirmed defect or semantic audit. Receipt research/uc34-2026-09-09-complete-subspace-astra-3.md; no Phase2 prerequisite identified. |
-| `cex-contraction-on-an-incomplete-space` | UC34 supplier reconciliation 2026-09-09: Direction-specific impact candidate only after thm-complete-subspace-iff-closed repair: inspect whether complete-implies-closed (CC), closed-implies-complete (ZF), or supplied-sequence clause is used. Not a confirmed defect or semantic audit. Receipt research/uc34-2026-09-09-complete-subspace-astra-3.md; no Phase2 prerequisite identified. |
 | `cex-cantor-intersection-needs-vanishing-diameters` | UC34 supplier reconciliation 2026-09-09: Direction-specific impact candidate only after thm-complete-subspace-iff-closed repair: inspect whether complete-implies-closed (CC), closed-implies-complete (ZF), or supplied-sequence clause is used. Not a confirmed defect or semantic audit. Receipt research/uc34-2026-09-09-complete-subspace-astra-3.md; no Phase2 prerequisite identified. |
 | `thm-morse-functions-form-a-residual-subset` | UC34 supplier reconciliation 2026-09-09: Declared-edge impact candidate only after choice-bearing smoothing repair; inspect actual clause and any independent explicit proof before disposition. Suppliers: thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function. Exact scan research/uc34-2026-09-09-smoothing-impact.json (15,416 frontmatters, not semantic audits). |
 | `prop-proper-morse-exhaustions-exist-on-smooth-manifolds` | UC34 supplier reconciliation 2026-09-09: Declared-edge impact candidate only after choice-bearing smoothing repair; inspect actual clause and any independent explicit proof before disposition. Suppliers: thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function. Exact scan research/uc34-2026-09-09-smoothing-impact.json (15,416 frontmatters, not semantic audits). |

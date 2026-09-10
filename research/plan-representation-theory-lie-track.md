@@ -1361,6 +1361,19 @@ Perrin §§10--11, pp.85--100. The category-O and Verma-module definitions now
 belong to RL-12, which needs them for its Serre-presentation proof. Reuse those
 exact definitions here; retain the character and simple-quotient theorems below.
 
+
+**Intrinsic affine-level interface (2026-09-11).** RL-14 proves its two
+original affine-level propositions and the basic level-one example from the
+GCM realization already published on RL-12. Use the primitive positive
+transpose-null vector, not RL-13's unbuilt loop presentation. The new local
+central-coroot lemma precedes both propositions; its full proof, the trace
+argument and the rank-one zero-level argument are in
+`phase-2-next-20-affine-level-local-resolution.md`. RL-13 retains its distinct
+loop/degree/null-root definitions and comparison theorem. Its future
+loop/GCM comparison must explicitly identify the central generator with the
+same primitive coroot combination; no loop normalization is silently assumed
+by RL-14. Preserve all original A/B claims. No pair or page edge is added.
+
 | id | kind and mathematical content | for / dependency role | statement provenance | proof provenance | source locator |
 |---|---|---|---|---|---|
 | `thm-universal-property-and-pbw-character-of-kac-moody-verma-modules` | Theorem: $M_A(\lambda)$ is universal highest weight and has character $e^\lambda\prod_{\alpha>0}(1-e^{-\alpha})^{-\mathrm{mult}\alpha}$. | Extends RL-2 with root multiplicities. | literature-derived | ai-altered | Kleshchev §9.2, pp.118--123; Perrin §10.1, pp.86--89 |
@@ -1375,8 +1388,9 @@ exact definitions here; retain the character and simple-quotient theorems below.
 | `lem-an-integrable-o-module-is-generated-by-dominant-maximal-weights` | Lemma: maximal support weights are dominant and their generated submodules are integrable highest-weight quotients. | Starts complete reducibility. | literature-derived | ai-altered | Kleshchev §10.4, pp.139--142; Perrin §10.2, pp.91--92 |
 | `thm-complete-reducibility-of-integrable-kac-moody-o-modules` | Theorem: an integrable object in Kac--Moody $\mathcal O$ is a direct sum of $L_A(\lambda)$ for dominant integral $\lambda$. | Infinite-dimensional analogue within the stated support category. | literature-derived | ai-altered | Kleshchev §10.4, pp.139--143; Perrin §10.2, pp.91--92 |
 | `cor-tensor-products-of-integrable-highest-weight-modules-decompose` | Corollary: $L_A(\lambda)\otimes L_A(\mu)$ is integrable and decomposes into dominant highest-weight simples with finite weightwise multiplicities. | Extends tensor decomposition without claiming a closed LR rule. | literature-derived | ai-altered | Kleshchev §10.4, pp.139--143; Perrin §10.2, pp.91--92 |
-| `prop-integrable-affine-highest-weights-have-nonnegative-integral-level` | Proposition: for affine type, dominant integral $\Lambda$ has level $\Lambda(c)\in\mathbb Z_{\ge0}$; positive-level simples are infinite dimensional. | Connects RL-13 level to highest-weight integrability. | literature-derived | ai-altered | Kleshchev §11, pp.144--154; Perrin §12, pp.101--110 |
-| `prop-level-zero-integrable-affine-highest-weight-simples-are-one-dimensional` | Proposition: an irreducible integrable affine highest-weight module of level zero is trivial on the derived algebra. | Handles the degenerate level endpoint distinctly from evaluation modules. | literature-derived | ai-altered | Kleshchev §11, pp.144--154 |
+| `lem-affine-central-coroot-from-the-transpose-null-ray` | Lemma: for an indecomposable affine GCM in the row-coroot convention, the unique primitive positive integer vector $b\in\ker A^t$ defines a nonzero central derived element $c_A=\sum_i b_i h_i$; a cyclic highest-weight module has scalar central action $\lambda(c_A)$. | Prove rational null-vector/primitive normalization, generator commutators and scalar action locally from published RL-12. Defines intrinsic GCM level, not a loop cocycle or degree derivation. | literature-derived | ai-altered | Kleshchev §6.1, p.77; §11.1, p.144; complete local proof in phase-2-next-20-affine-level-local-resolution.md |
+| `prop-integrable-affine-highest-weights-have-nonnegative-integral-level` | Proposition: for affine type, dominant integral $\Lambda$ has level $\Lambda(c)\in\mathbb Z_{\ge0}$; positive-level simples are infinite dimensional. | Use the preceding intrinsic central-coroot lemma; prove integrality by positive integer labels and positive-level infinite dimension by the finite trace of a commutator. No RL-13 or later character-formula premise. | literature-derived | ai-altered | Kleshchev §11, pp.144--154; Perrin §12, pp.101--110 |
+| `prop-level-zero-integrable-affine-highest-weight-simples-are-one-dimensional` | Proposition: an irreducible integrable affine highest-weight module of level zero is trivial on the derived algebra. | Zero level forces every simple-coroot label to vanish; local rank-one integrability makes every lowering generator kill the highest vector, so its line is the whole module. Complementary Cartan scalars may remain nonzero. No RL-13 or later character-formula premise. | literature-derived | ai-altered | Kleshchev §11, pp.144--154 |
 
 **B companion — finite checks and hypothesis tests.**
 

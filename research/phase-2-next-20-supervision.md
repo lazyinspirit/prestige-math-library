@@ -25,3 +25,14 @@ receipts; canonical ledger records two newly confirmed ancillary/interface
 assumption defects, one new potential c0 proof-interface concern, and three
 bounded clear dispositions. Published content untouched. Next: await drift
 report and handle exact findings before scaffold construction.
+
+2026-09-11 local time / 2026-09-10 UTC: first drift review held on the
+RL-14 affine-level interface. Root resolved it locally using the published
+GCM realization/affine trichotomy, a new same-A central-coroot lemma, finite
+trace and rank-one proofs. Full proof and actual source reading are recorded
+in phase-2-next-20-affine-level-local-resolution.md; original finding preserved.
+All 20 pairs and all original claims retained; no published content changed.
+Binding RL-14 prose, canonical Phase 2 metadata, manifest and drift decision
+reconciled. Drift-before-apply and plan validation pass. Engine retry requested
+to rerun its gate and perform mechanical materialization/scaffold dispatch.
+No mathematical scaffold readiness or independent review claimed yet.

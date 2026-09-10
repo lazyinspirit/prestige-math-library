@@ -36,3 +36,16 @@ for this concern; not counted repaired or certified for full closure.
 - `cex-completeness-is-not-topological`: `d68eb39c46d3518918ab3ccbc3ad7b23e875bda0f8f6686605efe8382dcc7f36`.
 - `thm-metric-sequential-closure`: `62e3d5e677498884d5b9fe3b7d50626407fd7fda89f56586c73b89f35119ef43`.
 - `thm-complete-subspace-iff-closed`: `78e7f1f02b7575403a2717cbd530fd9da4ed16a31397d2124331394f235e891e`.
+
+## Two additional bounded clears
+
+Read complete fs-cauchy-implies-convergent-in-every-metric-space and
+cex-contraction-on-an-incomplete-space. Both give x_k=1/(k+2) explicitly,
+prove its real convergence to zero, and use uniqueness to exclude an internal
+limit. The former's missing-endpoint remark is justified by its supplied
+sequence; the latter only cites closed-implies-complete for [0,1]. Thus neither
+needs the CC-dependent converse for its recorded impact concern. No repair,
+no new supplier, no tests or full transitive-proof certification.
+
+- `fs-cauchy-implies-convergent-in-every-metric-space`: `3ca46934654282033949b3c517728f21e6ee13d632affe257616869fd383a743`.
+- `cex-contraction-on-an-incomplete-space`: `2bee8e3aa51ae355f963e65dd77b1809b0f620bd7e2917e14fa4cf0360966820`.
