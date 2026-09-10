@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1428, U-C 16, A-R 187, A-P 166. The
+Current classifications: U-P 1420, U-C 16, A-R 187, A-P 167. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -146,6 +146,28 @@ Tonelli, Fubini and linear change move U-P to bounded clear; the other two are
 new bounded-clear census entries. The live radial-majorant draft also repairs
 the already-A-P Euclidean-ball lemma locally by proving ball measurability
 before using its valid cube bounds.
+
+The original-next-20 characteristic-function prerequisite batch promotes
+`thm-factorization-of-expectations-for-independent-variables` from U-P to A-P.
+Its nonnegative clause asserts a finite product of extended expectations without
+handling a zero factor together with an infinite factor, although the canonical
+extended-real convention leaves `0*(+infinity)` undefined. With one identically
+zero factor and one independent nonnegative infinite-expectation factor, the
+left side is zero and the printed right side is undefined. Repair the clause
+casewise, proving zero when any expectation is zero and using the ordinary
+extended product when all factors are positive, or state the mixed case
+separately. The integrable clause is sound and is the only clause used by the
+live characteristic-function proof for its bounded sine/cosine factors, so no
+live authoring prerequisite is missing.
+
+Seven adjacent expectation and independence interfaces move from U-P to
+bounded clear after full-body and used-clause review: expectation change of
+variables, the real/complex integrability definition, integral linearity,
+dominated convergence, the finite independent joint-law theorem, measurable
+maps preserving independence and the expectation definition. Exact hashes and
+scope are in
+`phase-2-next-20-published-characteristic-function-prerequisite-audit.md`.
+No new Phase-2 pair or published edit is required.
 
 ## Locally convex published-prerequisite audit — 2026-09-11
 
@@ -27760,14 +27782,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1428 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1420 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 16 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 166 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 167 | Recorded direct review and an unresolved item-specific repair. |
 
-601 further reference-pool items have bounded no-repair-needed dispositions
+608 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1797 items and the expanded reference pool contains 2398 unique items.
+1790 items and the expanded reference pool contains 2398 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -27839,6 +27861,13 @@ The separate page-header cutover obligations remain in their category sections.
 | `thm-linear-change-of-variables-for-lebesgue-measure` | Fourier radial-summability measure audit, 2026-09-11: full target/used clauses read. Under explicit CC, elementary factors give the invertible determinant scale, Borel-plus-null decomposition covers completed measurable sets, and singular images lie in a null subspace. U-P to bounded clear. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-borel-sets-are-lebesgue-measurable` | Fourier radial-summability measure audit, 2026-09-11: full target read. Under explicit CC, the Lebesgue sigma-algebra contains half-open boxes and hence their generated Euclidean Borel sigma-algebra. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `def-lebesgue-point-and-lebesgue-set` | Fourier radial-summability measure audit, 2026-09-11: full definition read. Representative-relative values and the existential class-level Lebesgue set are coherent under the stated CC convention; the live radial lemma uses a specified value. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `thm-change-of-variables-for-expectation` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: simple-law identity plus MCT proves the nonnegative formula, and absolute integrability with real/imaginary decomposition proves the signed and complex formulas. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
+| `def-integrable-real-and-complex-functions-and-their-integrals` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: full definition read. Positive/negative parts avoid undefined infinity subtraction, and finite modulus integral correctly types complex integrability. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
+| `thm-linearity-of-the-lebesgue-integral-on-l-one` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: full proof read. Finite positive/negative parts prove real additivity and homogeneity, followed by valid real/imaginary recombination. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
+| `thm-dominated-convergence` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: full proof read. One measurable exceptional null set, reverse Fatou and the integral triangle inequality prove the complex `L^1` and integral conclusions. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
+| `thm-independent-random-elements-have-product-joint-law` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: full proof read. Tuple measurability, rectangle factorization and finite product-measure uniqueness identify the joint law. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
+| `lem-measurable-functions-preserve-independence` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: full proof read. Pullback of every finite measurable rectangle is exactly the original independence criterion. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
+| `def-expectation-of-a-nonnegative-or-integrable-random-variable` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: full definition read. Extended expectation is confined to nonnegative variables; signed and complex expectations require integrability, avoiding infinity subtraction. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
 | `thm-weak-global-dimension-is-detected-by-tor-and-is-left-right-symmetric` | Root bounded dependency review, 2026-09-09 15:46 UTC: full target and opposite-ring/weak-dimension definitions read; flat-dimension criterion, balance and tensor interfaces checked. Existing DC and supplied resolutions suffice, including the zero-ring case. No published edit or new prerequisite. Exact supplier IDs and current acceptance hashes are in phase-2-catchup-24-cyclic-tor-root-repair.md and the item review JSON. U-P to bounded clear; not a repair, independent judgment or whole-library certification. |
 
 Root review on 2026-09-09: read the complete polynomial-bump primitive
@@ -28486,6 +28515,7 @@ owner's scan policy.
 | `thm-c-c-is-dense-in-l-p-for-radon-measures` | Fourier support closure audit 2026-09-11: proof 2.1 invokes `lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set`, whose contract assumes DC, while this theorem states no DC. Add and declare DC or give a choice-free cutoff construction. This affects the general LCH RMK repair path; live Fourier Euclidean density instead uses its explicit distance cutoff under stated countable choice. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `lem-complex-translation-and-approximate-identity-interfaces` | Fourier Step-3B load-bearing supplier audit 2026-09-11: proof 1.2 derives complex `L^1`-by-`L^p` convolution existence, norm and measurability by black-box use of the already-defective Young theorem in its exact affected branch. For finite `p`, use the declared jointly Borel envelope, translation isometry and Minkowski integral inequality; handle infinity with an essentially bounded Borel representative. The current L1 Fourier product draft can instead replay its own Tonelli envelope and direct reflection under stated CC. No new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-differentiation-under-the-integral-sign` | Fourier Gaussian supplier audit 2026-09-11 promotes the existing U-P row: proof 3.1 proves convergence along every supplied increment sequence, then concludes an epsilon-delta derivative through the exact Heine-converse direction whose published contract spends countable choice; the theorem states no CC. Its a.e. derivative is also integrated without a defined measurable representative on the exceptional set. Add CC, apply the real criterion to real/imaginary parts, and define the derivative as zero on one stated null set (or supply an equivalent representative). The live Gaussian draft already has CC and pointwise differentiability everywhere. No new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `thm-factorization-of-expectations-for-independent-variables` | Original-next-20 characteristic-function prerequisite audit 2026-09-11 promotes the existing U-P row: the nonnegative clause writes a finite extended product without handling one zero and one infinite expectation, while canonical `0*(+infinity)` is undefined. State the mixed case separately or prove the zero-factor case before using the defined positive extended product. The integrable clause is sound and is the exact bounded sine/cosine branch used by the live author. No new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
 | `lem-euclidean-balls-have-positive-finite-lebesgue-measure` | Fourier support audit 2026-09-11: steps 2.1--3.1 infer measurability from containment between measurable cubes and use `lambda(B)` before the domain claim; the inference is invalid. First use published Euclidean-metric, metric-ball-openness and Borel-to-Lebesgue interfaces under the target's stated countable choice, then apply the sound cube bounds. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-total-variation-is-a-measure` | Fourier support audit 2026-09-11: proof 1.2 chooses partitions for every disjoint piece and then takes a sum of suprema without near-maximality or a valid selection. Repair choice-free via finitely many near-max partitions for each finite partial sum, published finite choice and the nonnegative-series supremum; handle infinite variations by arbitrary finite thresholds. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences` | Fourier support audit 2026-09-11: proof 1.1 directly applies `thm-riesz-fischer-completeness-of-l-p`, whose representative-subsequence clause explicitly assumes countable choice, but the corollary has no such hypothesis. State/declare countable choice and identify the inherited representative selection. The complex-Lp consumer already carries CC. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
@@ -28990,7 +29020,6 @@ mathematical repairs. Evidence:
 | `def-effective-hausdorff-dimension` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-effectively-open-set-in-cantor-space` | Existing configuration-interface impact; UC-73 Astra 4 item 15 additionally flags the asserted fair-coin measure construction for review. Candidate only, not a completed audit: inspect published countable-product measure supplier and propagate actual AC/CC use. |
 | `def-exp-and-nexp` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
-| `def-expectation-of-a-nonnegative-or-integrable-random-variable` | 0A.2 Exact Phase-3 defects in published content |
 | `def-extended-dfa-transition-function` | 51. Exact live-plan metadata resynchronization set |
 | `def-extended-real-valued-measurable-function` | Measurable-function closure |
 | `def-finite-sigma-finite-and-semifinite-measures` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
@@ -29012,7 +29041,6 @@ mathematical repairs. Evidence:
 | `def-incompressibility-method` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-indicator-random-variable` | 0A.2 Exact Phase-3 defects in published content |
 | `def-induction-ideal-of-a-family-of-subgroups` | Transitive consumers (166), grouped by home page |
-| `def-integrable-real-and-complex-functions-and-their-integrals` | Exact direct impact-review queue |
 | `def-integral-of-a-nonnegative-simple-function` | 0A.2 Exact Phase-3 defects in published content |
 | `def-integral-over-a-measurable-set` | Exact direct impact-review queue |
 | `def-integral-weyl-group-of-a-weight` | Cross-category Phase-2 roots and their published impact |
@@ -29667,7 +29695,6 @@ mathematical repairs. Evidence:
 | `lem-margulis-family-is-constant-degree-and-neighbor-computable` | 51. Exact live-plan metadata resynchronization set |
 | `lem-maximal-regular-sequence-stops-at-associated-prime` | Item-exact impact of the Dependent Choice rehome |
 | `lem-maximal-regular-sequences-have-common-length-ext` | Item-exact impact of the Dependent Choice rehome |
-| `lem-measurable-functions-preserve-independence` | 0A.2 Exact Phase-3 defects in published content |
 | `lem-morse-trajectories-have-positive-energy-drop` | riemannian-metrics-length-distance-and-volume and |
 | `lem-most-strings-are-incompressible` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `lem-multitape-simulation-has-quadratic-time-overhead` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
@@ -30010,7 +30037,6 @@ mathematical repairs. Evidence:
 | `thm-chain-rule` | Strictly supported smooth bump |
 | `thm-change-of-variables-for-an-absolutely-continuous-map-under-an-absolutely-continuous-composition-hypothesis` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-change-of-variables-for-an-increasing-absolutely-continuous-function` | Early-repair direct-consumer inventory — 2026-09-08 |
-| `thm-change-of-variables-for-expectation` | Exact direct impact-review queue |
 | `thm-character-inner-product-computes-intertwiner-dimension` | Transitive consumers (166), grouped by home page |
 | `thm-character-of-an-irreducible-over-a-nonsplitting-field` | Transitive consumers (166), grouped by home page |
 | `thm-characters-of-direct-sums-tensor-products-and-duals` | Transitive consumers (166), grouped by home page |
@@ -30067,7 +30093,6 @@ mathematical repairs. Evidence:
 | `thm-dirichlet-primes-arithmetic-progressions` | Transitive consumers (166), grouped by home page |
 | `thm-discontinuity-set-is-f-sigma` | 9.5 Forward order and load-bearing body links |
 | `thm-dominant-equal-dimension-generically-finite` | AV-1 draft-page impact partition (Phase 3 only) |
-| `thm-dominated-convergence` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-dominated-convergence-in-lp` | 0A.6 Planned-supplier consumer ledger and phase classification |
 | `thm-dual-norms-every-vector` | norming-and-separation-under-hahn-banach |
 | `thm-dual-of-a-closed-subspace-is-a-dual-quotient` | norming-and-separation-under-hahn-banach |
@@ -30088,7 +30113,6 @@ mathematical repairs. Evidence:
 | `thm-existence-of-schur-covering-groups-for-finite-groups` | 30.7 Group-owned low-degree (co)homology Phase-2 supplier |
 | `thm-expander-mixing-lemma` | 51. Exact live-plan metadata resynchronization set |
 | `thm-expander-walk-hits-dense-bad-sets` | 51. Exact live-plan metadata resynchronization set |
-| `thm-factorization-of-expectations-for-independent-variables` | 0A.2 Exact Phase-3 defects in published content |
 | `thm-fatou-lemma` | Exact direct impact-review queue |
 | `thm-fermat-interior-extremum` | 9.5 Forward order and load-bearing body links |
 | `thm-fibre-dimension-lower-bound` | AV-1 draft-page impact partition (Phase 3 only) |
@@ -30132,7 +30156,6 @@ mathematical repairs. Evidence:
 | `thm-hyperbolicity-is-invariant-under-quasi-isometry-for-geodesic-spaces` | HG consumer map |
 | `thm-immerman-szelepcsenyi-nl-equals-conl` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `thm-increasing-simple-approximation-of-a-nonnegative-measurable-function` | Exact direct impact-review queue |
-| `thm-independent-random-elements-have-product-joint-law` | 0A.2 Exact Phase-3 defects in published content |
 | `thm-independent-series-probability-and-almost-sure-convergence-agree` | 0A.2 Exact Phase-3 defects in published content |
 | `thm-infinite-order-elements-of-hyperbolic-groups-are-undistorted` | HG consumer map |
 | `thm-integration-against-a-density` | Exact direct impact-review queue |
@@ -30166,7 +30189,6 @@ mathematical repairs. Evidence:
 | `thm-levin-schnorr-characterization` | 51. Exact live-plan metadata resynchronization set |
 | `thm-limits-in-probability-are-unique-almost-surely` | 0A.6 Planned-supplier consumer ledger and phase classification |
 | `thm-linear-isoperimetric-characterisation-of-hyperbolic-groups` | HG consumer map |
-| `thm-linearity-of-the-lebesgue-integral-on-l-one` | Exact direct impact-review queue |
 | `thm-liouville-theorem-for-bounded-harmonic-functions` | euclidean-surface-measure-divergence-and-green-identities |
 | `thm-lipschitz-characterisation-within-absolutely-continuous-functions` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-lipschitz-images-of-null-sets-in-rn-are-null` | Null preservation: newly identified repair target |

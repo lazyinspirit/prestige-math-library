@@ -150,6 +150,21 @@ U-C 16, A-R 187, A-P 166 and 601 bounded clears. Mechanical recount confirms
 2,398 unique rows with no cross-class duplicate; every indexed ID resolves to
 a current published item.
 
+The original-next-20 characteristic-function batch promotes the existing U-P
+row `thm-factorization-of-expectations-for-independent-variables` to A-P. Its
+nonnegative extended-product formula is undefined when one expectation is zero
+and another is infinite under the library's canonical arithmetic. The
+integrable bounded-factor clause used by the live characteristic-function proof
+is sound, so no authoring blocker remains. Seven adjacent expectation,
+integration and independence interfaces move from U-P to bounded clear. Exact
+evidence:
+`research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`.
+
+Post-characteristic-function target index: 2,398 unique published IDs; U-P
+1,420, U-C 16, A-R 187, A-P 167 and 608 bounded clears. Mechanical recount
+confirms 2,398 unique rows with no cross-class duplicate; every indexed ID
+resolves to a current published item.
+
 ## Next target
 
 1. Reconcile any further exact next-20 or Fourier published-interface issues
