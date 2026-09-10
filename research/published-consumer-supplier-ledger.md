@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1448, U-C 8, A-R 187, A-P 151. The
+Current classifications: U-P 1447, U-C 8, A-R 187, A-P 151. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -27410,14 +27410,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1448 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1447 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 8 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 151 | Recorded direct review and an unresolved item-specific repair. |
 
-563 further reference-pool items have bounded no-repair-needed dispositions
+564 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1794 items and the expanded reference pool contains 2357 unique items.
+1793 items and the expanded reference pool contains 2357 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -27525,6 +27525,7 @@ owner's scan policy.
 
 | Published item | Scope and evidence |
 |---|---|
+| `thm-function-space-is-complete-for-a-complete-target` | Root 2026-09-10 bounded choice-propagation review: full target, uniform-limit theorem, uniform-metric and bounded-remetrisation proofs read; completeness supplier already fully read. L7 uses only choice-free claim 2; L6 closedness is proved by a direct epsilon/3 argument, not sequential closure. Unique pointwise limits require no choice. Clear for this impact concern; remaining transitive suppliers not certified. Evidence: research/phase-2-next-20-published-sequence-space-audit.md. |
 | `lem-closed-subspace-of-a-banach-space-is-banach` | Root 2026-09-10 full item and all three direct supplier texts: uses only choice-free claim 2 of thm-complete-subspace-iff-closed; no converse use. Bounded clear, no repair or whole-closure certification. Evidence: research/phase-2-next-20-published-sequence-space-audit.md. |
 | `thm-flat-dimension-at-most-n-iff-higher-tor-vanishes` | Astra/medium 3 audit, root reconciled 2026-09-09: Full actual proof plus five declared and one correct earlier implicit supplier checked; DC/supplied resolutions already explicit, all syzygy and n=0 cases sound; only stale canonical metadata needs alignment, not a published proof repair. See UC34 receipt above and research/uc34-2026-09-09-tor-impact-astra-3.md. |
 | `thm-a-right-module-is-flat-exactly-when-tor-one-with-every-left-module-vanishes` | Astra/medium 3 audit, root reconciled 2026-09-09: Actual DC/supplied-data statement and arbitrary-ring quotient/H0/left-LES proof are sound; five direct supplier proofs and order checked; unchanged bytes, no repair needed. See UC34 receipt above and research/uc34-2026-09-09-tor-impact-astra-3.md. |
@@ -28490,7 +28491,6 @@ mathematical repairs. Evidence:
 |---|---|
 | `ex-c0-is-a-banach-space` | Root 2026-09-10 potential proof-interface concern: 3.1 infers closedness from an already supplied convergent sequence; exact ZF bridge absent. Direct given-Cauchy-sequence proof via published ex-ell-infinity-is-a-banach-space and existing epsilon/2 estimate avoids the inference. No pending Phase 2 supplier identified; bounded audit, no false-theorem verdict. Evidence: research/phase-2-next-20-published-sequence-space-audit.md. |
 | `thm-singular-homology-satisfies-homotopy-exactness-and-excision` | UC34 supplier reconciliation 2026-09-09: Astra2 bounded AT10 review: proof1.3 double-mapping-cylinder collapse relative to V lacks written relative homotopies/exact supplier in inspected argument. Incomplete audit candidate, NOT confirmed fatal; refined live degree bridge instead uses elementary S0 augmentation/finite-sum and n0 suspension clauses. No newPhase2 supplier established. Dedicated audit needed; report research/phase-2-catchup-24-owner-step3-at-astra.md. |
-| `thm-function-space-is-complete-for-a-complete-target` | UC34 supplier reconciliation 2026-09-09: Direction-specific impact candidate only after thm-complete-subspace-iff-closed repair: inspect whether complete-implies-closed (CC), closed-implies-complete (ZF), or supplied-sequence clause is used. Not a confirmed defect or semantic audit. Receipt research/uc34-2026-09-09-complete-subspace-astra-3.md; no Phase2 prerequisite identified. |
 | `thm-euclidean-inverse-function-theorem` | UC34 supplier reconciliation 2026-09-09: Direction-specific impact candidate only after thm-complete-subspace-iff-closed repair: inspect whether complete-implies-closed (CC), closed-implies-complete (ZF), or supplied-sequence clause is used. Not a confirmed defect or semantic audit. Receipt research/uc34-2026-09-09-complete-subspace-astra-3.md; no Phase2 prerequisite identified. |
 | `rem-complete-metrizability-is-the-topological-shadow` | UC34 supplier reconciliation 2026-09-09: Direction-specific impact candidate only after thm-complete-subspace-iff-closed repair: inspect whether complete-implies-closed (CC), closed-implies-complete (ZF), or supplied-sequence clause is used. Not a confirmed defect or semantic audit. Receipt research/uc34-2026-09-09-complete-subspace-astra-3.md; no Phase2 prerequisite identified. |
 | `prop-picard-iteration-converges-with-explicit-error-bounds` | UC34 supplier reconciliation 2026-09-09: Direction-specific impact candidate only after thm-complete-subspace-iff-closed repair: inspect whether complete-implies-closed (CC), closed-implies-complete (ZF), or supplied-sequence clause is used. Not a confirmed defect or semantic audit. Receipt research/uc34-2026-09-09-complete-subspace-astra-3.md; no Phase2 prerequisite identified. |

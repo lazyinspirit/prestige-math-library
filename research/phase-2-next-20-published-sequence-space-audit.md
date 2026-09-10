@@ -66,3 +66,18 @@ complex-convention definition debt.
 | `thm-complete-subspace-iff-closed` | `78e7f1f02b7575403a2717cbd530fd9da4ed16a31397d2124331394f235e891e` |
 | `def-countable-choice` | `f2eae5f2bbc369965aa20105bd55319557a4b74781d9a26c9122ca03a76c3183` |
 | `def-c-zero-and-ell-infinity` | `6f2ea3b04dd31677a703be9ff89707897636454b260a13cc6a4d6c93b713030c` |
+
+## Uniform function-space completeness: bounded clear
+
+Full target, uniform-limit theorem, uniform-metric lemma and bounded-remetrisation
+lemma read; complete-subspace supplier was read above. L7 invokes only its
+choice-free claim 2. L6 uses uniform-limit theorem claim 3, whose full proof
+works directly with one epsilon approximation, not sequence manufacture.
+The target uses unique pointwise limits and pointwise instantiation of indices,
+not a chosen family of witnesses. U-P → bounded clear for this specific
+choice-propagation concern; no repair or complete transitive-interface audit.
+
+- `thm-function-space-is-complete-for-a-complete-target`: `d31b38cf5bfc73306bc4ce49d15b6891e27626440f94b3722d112718272dd3f4`.
+- `thm-uniform-limit-theorem`: `0c5d32dbfc7e4a12985bfc730906491dcb5cc169b83682b89e0b4271e534fa8f`.
+- `lem-uniform-metric-on-a-function-space`: `f9e93407e2bf9c0480285cf62ccc80365c6203d8f3d78501ba1e6795c4b0c6d7`.
+- `lem-bounded-remetrisation`: `47a4cd125245ab4b40eb49f7905836cb52247dce3518f2dbcaf817bb0a608283`.
