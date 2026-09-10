@@ -155,6 +155,9 @@ hook launches the tool, judge and final adjudicator outside the Alpha sandbox.
 Request/response files and normal dispatch records preserve ownership and errors.
 Failed preflight responses include the exact diagnostic so the owning Alpha can
 correct licensed metadata before retrying; failed model calls remain held.
+Repair routing extracts subjects from each failing gate separately. Dependency
+error sections exclude warning inventories; contract errors must not hide other
+gates' published-audit or forward-reference failures.
 Inherited published items need not acquire a new-batch proof contract merely
 to enter the handoff; their licence, precheck and final published-repair checks
 remain mandatory. New proof-bearing items require their owning contract;

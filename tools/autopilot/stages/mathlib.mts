@@ -912,8 +912,12 @@ function readPublishedClosure(ctx): ReturnType<typeof readClosure> {
 }
 
 /** Item ids printed by the standard `ERROR code [item-id]:` gate grammar. */
-function itemsFromGateFailure(failure: any): string[] {
+export function itemsFromGateFailure(failure: any): string[] {
   let text = `${failure?.output ?? ''}\n${failure?.why ?? ''}`;
+  // Dependency reports put warnings and the whole inventory before this
+  // section. Only the error section names repair subjects.
+  const section = text.match(/^\s*\d+ ERROR\(s\):\s*$/m);
+  if (section?.index !== undefined) text = text.slice(section.index);
   // Risk reports list every passing item before their ERROR records. Those
   // inventory rows are context, not repair subjects.
   const errors = text.split(/\r?\n/).filter((line) => /^\s*ERROR\b/.test(line));
@@ -2331,12 +2335,9 @@ export const stages = [
       if (!failures.length) return;
       refreshStep7Scope(ctx);
       const closure = failures.some((entry: any) => entry.id === 'judge-closure') ? readClosure(ctx) : null;
-      const routeEvidence = {
-        output: `${failures.map((entry: any) => `${entry.output ?? ''}\n${entry.why ?? ''}`).join('\n')}\n${mechanical.stderr ?? ''}`,
-        why: '',
-      };
       const named = [...new Set([
-        ...itemsFromGateFailure(routeEvidence),
+        ...failures.flatMap(itemsFromGateFailure),
+        ...itemsFromGateFailure({ output: mechanical.stderr ?? '' }),
         ...(closure?.unadjudicated ?? []),
         ...(closure?.open_fatal ?? []),
       ])];
@@ -2559,10 +2560,10 @@ export const stages = [
         && !mechanical.handledIds?.includes(entry.id));
       if (!failures.length) return;
       refreshStep7Scope(ctx);
-      const named = itemsFromGateFailure({
-        output: `${failures.map((entry: any) => `${entry.output ?? ''}\n${entry.why ?? ''}`).join('\n')}\n${mechanical.stderr ?? ''}`,
-        why: '',
-      });
+      const named = [...new Set([
+        ...failures.flatMap(itemsFromGateFailure),
+        ...itemsFromGateFailure({ output: mechanical.stderr ?? '' }),
+      ])];
       // Final closure never turns an unscoped detector message into four
       // duplicated whole-group reviews. One focused reviewer diagnoses the
       // residue; exact item failures still go to their owning conversation.
