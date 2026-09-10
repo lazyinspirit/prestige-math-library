@@ -160,6 +160,7 @@ gates, then fresh Step 5b reconciliation and closure before judgment. The origin
 pre-author impact baseline survives. Repairs retain normal budgets and ownership.
 The private manifest hash-schema key is version-stable across step renumbering;
 stage names are not a reason to invalidate unchanged reviewed mathematics.
+Scope snapshots and cross-group carriers use that same schema.
 If preparation stops at validation before state creation, fix the tool and use
 `--resume-preparation`. It requires byte-identical derived files and unchanged
 source evidence; it cannot overwrite repairs or reuse an active target.

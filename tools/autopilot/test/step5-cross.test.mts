@@ -43,7 +43,7 @@ function fixture(edge = false) {
       hashes: { [id]: {
         item_sha256: sha(readFileSync(join(root, 'items', `${id}.md`)),),
         contract_sha256: hashValue(contract),
-        manifest_sha256: hashValue({ id, __step5_page_id: page }),
+        manifest_sha256: hashValue({ id, __step6_page_id: page }),
       } },
       page_manifest: [page], page_hashes: { [page]: {
         file_sha256: sha(readFileSync(join(root, 'library/test', `${page}.md`)),),

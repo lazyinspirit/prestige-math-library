@@ -73,7 +73,8 @@ function ownership() {
         const id = it.id;
         batchOf.set(id, m[1]);
         batchItems.push(id);
-        batchItemRows.push({ id, metadata: { ...it, __step5_page_id: String(p.id) } });
+        // Match step5-scope's version-stable carrier schema, including history.
+        batchItemRows.push({ id, metadata: { ...it, __step6_page_id: String(p.id) } });
       }
     }
     itemsByBatch.set(m[1], batchItems);

@@ -30,11 +30,16 @@ the old author/reviewer overlap; generic live-writer protections remain.
 Installed integration commits: `ecd51b7ec`, `51f1ca89d`. The new checkpoint is
 prepared under `phase-2-nine-step-25`; translated routing passes 760 items and
 784 review obligations. All mathematical content remains unchanged.
-Next: doctor, full current gates, fresh cross-group closure and remaining stages.
+Doctor passed all 35 stages, 412 command flags and 41 task/brief files.
+Controller 62050 started at 2026-09-10 05:29:25 UTC. The genuine checkpoint
+import stage cleared and `5a-import-join` is running 39 mandatory gates.
+No old execution receipt was adopted. Next: fresh Step 5b closure and the
+remaining canonical stages; stop at frontier completion without starting another.
 Original state and execution receipts must not be renumbered or adopted.
 
 Integration regression result: 648 TypeScript workflow tests passed, zero failed
-or skipped, including type checking. Three checkpoint migration tests passed.
+or skipped, including type checking. Five checkpoint migration tests passed;
+32 routing/type-check tests passed after the cutover corrections.
 The source snapshot also contains the published-repair append guard for both
 reader and cross-group repairs; preserve the matching live edit during merge.
 
