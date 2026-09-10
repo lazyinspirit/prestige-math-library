@@ -84,7 +84,7 @@ Sources lacking actual byte/hash receipts were not promoted from old
 web-only stamps. Current-source source_resolution= dropped alternatives are
 left intact. Future network-enabled dispatch fix is committed9d9186ac0.
 
-14:38 UTC local reconciliation: updated Green-family and RL14 generation/string
+Subsequent local reconciliation (before the14:35:43 UTC clock check): updated Green-family and RL14 generation/string
 prose; added existing SET9 page prerequisite and three SET23 declaration fixes.
 Canonical plan validation and batch14 manifest policy pass. Step1 check remains
 540 items/84 ready/456 held. The Green worked-example attribution was replaced
@@ -92,9 +92,26 @@ with a concrete generated S3/characteristic2 leaf and exact trace proof, retaini
 its original item ID/purpose. See local-reconciliation receipt; no readiness
 escalation is cleared. Git diff whitespace check passes.
 
-Further Fourier prerequisite assessment: declared closure includes sixteen
-empty FA pairs plus selected Locally Convex Spaces, and two already-authored
-draft prerequisite pairs (relative Hahn–Banach and complex Riesz–Thorin).
-This is a page-level closure, not yet a certified minimum actual proof spine.
-Do not confuse their draft publication state with a need to reauthor them,
-and do not launch the full closure under the pending nine-pair Lie proposal.
+Further Fourier prerequisite assessment: the correctly parsed declared closure
+contains sixteen empty FA pairs plus selected Locally Convex Spaces. Relative
+Hahn–Banach and complex Riesz–Thorin are published; an exploratory regex
+initially failed to strip their quoted page IDs. That provisional status claim
+is corrected here against their actual page/item files before any action.
+This remains a page-level closure, not yet a certified minimum actual proof
+spine. Do not launch it under the pending nine-pair Lie proposal.
+
+14:35:43 UTC clock checkpoint: the nine-pair-only question is superseded by the complete reviewable
+expanded-prerequisite-proposal:25 additional pairs in the current declared
+Fourier/Lie closure, plus one recovery request for each of17 exhausted original
+URLs after the demonstrated network fix. Both approvals remain pending.
+Original20 remain selected; no expanded run or extra fetch launched.
+Root also corrected the impossible Kolmogorov modulation-smallness clause
+with exact coefficient identities and independent summable amplitudes, preserving
+the ultimate divergence contract. Seven touched Step1 decisions are explicitly
+owner-held/escalated with prior records preserved; no mathematics was bulk-cleared.
+Remaining substantive holds include finite Weyl/Kostant prerequisites, general
+Weyl chamber/stabilizers, full Carleson estimates, complete spectral convergence,
+large-cardinal preparation/PMEA placement, source evidence and prerequisite audits.
+Next: obtain scope/source exceptions, plan the authorized dependency work using
+the engine without overlapping original pair ownership, and continue exact
+local proof reconciliation. Engine must remain held until readiness is real.

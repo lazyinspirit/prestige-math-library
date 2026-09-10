@@ -34,3 +34,23 @@ Original scaffold is preserved in green-example-original-scaffold.json.
 This is an explicit alternative example, not a claim that Farrell contains it.
 Page source, inherited prerequisite and independent-review holds remain;
 no whole-closure readiness is claimed.
+
+## Kolmogorov modulation correction
+
+The design claimed a frequency shift makes a completed polynomial uniformly
+small. This is false: modulation has modulus one (the constant polynomial1
+is already a counterexample). Root supplies the exact finite coefficient
+identities and independent scalar-amplitude bound in the same SH lemma.
+The intended separation and ultimate almost-everywhere divergence target
+are retained. The original false scaffold is preserved separately.
+
+For a_j=2^(-j), norm-one blocks and summable exceptional measures, MCT
+bounds the pointwise sum of completed absolute block magnitudes almost
+everywhere. At an internal cutoff, later blocks have zero coefficients and
+earlier completed blocks contribute at most that finite sum. Heights j/a_j
+and Borel–Cantelli therefore give the lower bound j minus that fixed finite
+sum, conditional on the still-unproved full block supplier. L1 coefficient
+continuity identifies cutoffs of the limit. Uniform smallness on all earlier
+good sets is unnecessary; summability provides exactly the needed control.
+The source and full prerequisite audit remain held, so no ready decision is
+created by this finite-identity correction.

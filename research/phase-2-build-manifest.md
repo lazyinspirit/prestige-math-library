@@ -12,9 +12,9 @@ interface locally. All 14 scaffold batches finished; the engine is held at Step 
 Scaffolds contain 540 items (84 recorded ready, 456 escalated;
 current-hash validation remains required). All twenty pairs remain selected.
 Actual item audits found missing Fourier and Lie prerequisites despite the
-initial page-level eligibility. The nine-pair Lie expansion proposal is pending
-owner approval; Fourier prerequisites and large-cardinal interface placement
-also require reconciliation. No additional pair is authorized or launched.
+initial page-level eligibility. The expanded prerequisite proposal (25 additional pairs:16 Fourier-track
+and9 Lie-track) and17 bounded source-recovery requests are pending owner
+approval; large-cardinal interface placement also requires reconciliation. No additional pair is authorized or launched.
 Build completion leaves new content draft pending owner publication.
 
 Local prerequisite resolution: `phase-2-next-20-affine-level-local-resolution.md`.
