@@ -125,6 +125,9 @@ Stale bindings, repeated review boilerplate and nonexistent proof steps fail.
 The detector reports upheld candidates separately, not as mathematical approvals.
 
 Gate-repair workers write run-local reports; shared briefs are read-only.
+They preserve completed lead reviews, update only affected findings and evidence,
+and finish after the named checks pass. The engine owns the full battery rerun;
+repair workers do not restart unrelated edge or migration audits.
 An open tool-code defect naming a failing detector holds for operator repair,
 instead of triggering another content-repair pass. Risk reports drain piped
 output before exiting and retain failure exit codes.
