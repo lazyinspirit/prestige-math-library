@@ -484,6 +484,12 @@ const boundedOutput = () => {
 
 const codexHome = process.env.CODEX_HOME ?? join(homedir(), '.codex');
 
+// Source-writing roles run PDF fetchers as shell commands. Web search alone
+// does not enable shell networking, and isolated homes inherit no config.
+// Keep filesystem restrictions and read-only/non-source roles unchanged.
+const sourceNetworkArgs = spec.sandbox === 'workspace-write' && spec.web === true
+  ? ['-c', 'sandbox_workspace_write.network_access=true'] : [];
+
 // RESUMING A SESSION INTO A DIFFERENT SANDBOX (owner, 2026-08-25).
 //
 // A group Alpha reads its pairs at step 6 and adjudicates them at step 7, and it
@@ -517,6 +523,7 @@ const buildCodexResume = (sessionHome) => [
     '--model', spec.model,
     ...(spec.provider !== 'openai' ? ['-c', `model_provider="${spec.provider}"`] : []),
     '-c', `sandbox_mode="${spec.sandbox}"`,
+    ...sourceNetworkArgs,
     '-c', `model_reasoning_effort="${spec.effort ?? 'xhigh'}"`,
     '-c', `model_context_window=${spec.contextWindow}`,
     ...compactionArgs,
@@ -555,6 +562,7 @@ const buildCodex = (temporaryHome) => [
     // seven of which evaporated once someone with a working fetch looked.
     '-c', 'tools.web_search=true',
     '--sandbox', spec.sandbox,
+    ...sourceNetworkArgs,
     ...imagePaths.flatMap((image) => ['--image', resolveFile(image)]),
     ...(outputSchemaPath ? ['--output-schema', resolveFile(outputSchemaPath)] : []),
     ...(resultArtifactPath ? ['--output-last-message', lastMessagePath] : []),

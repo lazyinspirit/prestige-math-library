@@ -110,6 +110,12 @@ URL sweeps that fail only with transport errors wait for network recovery;
 they do not retire reviewed sources or dispatch reharvesting workers.
 Compressed PDFs require mutool. Documents under four pages require the complete
 short_document_reading receipt specified by the fetch tool and scaffold brief.
+The dispatcher explicitly enables shell network access for workspace-write
+roles assigned web research, including resumed sessions; isolated worker homes
+do not inherit that setting. Web search availability alone does not enable PDF
+downloads. Read-only and non-source roles retain their existing restrictions.
+After repairing a worker-network configuration fault, recover fetch evidence
+without erasing prior attempts or treating that fault as unavailable literature.
 
 Foundations must never consume Recorded catalogue results directly or transitively,
 including well-definedness and load-bearing forward references. Declare AC and its
