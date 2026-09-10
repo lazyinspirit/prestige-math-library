@@ -167,6 +167,7 @@ if (mode === 'verify') {
     note: 'Imported historical review, not new author/adjudicator executions. Fresh combined baseline,6C,6D and all later stages required.' };
   fs.writeFileSync(R(recordPath), doc(record), { flag: 'wx' });
   fs.mkdirSync(R('.autopilot', run));
+  fs.mkdirSync(R('research', `${run}-dispatch`));
   fs.writeFileSync(R('.autopilot', run, 'config.json'), doc({ run, stages: 'tools/autopilot/stages/mathlib.merged.mts' }), { flag: 'wx' });
   checked(['tools/run-tasks.mjs', '--run', run]);
   checked(['tools/frontier-dependency-ledger.mjs', 'refresh', '--run', run]);

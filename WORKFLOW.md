@@ -364,7 +364,7 @@ node tools/autopilot/bin/merge-runs.mjs verify --run NEW
 autopilot start --run NEW --state-dir .autopilot/NEW --detach
 ```
 
-Preparation creates namespaced artifacts and a run-local `config.json` with
+Preparation creates namespaced artifacts, the tool receipt directory, and a run-local `config.json` with
 only `run` and `stages`. Other configuration, including models and limits,
 still comes from the global configuration. All controls/status calls use
 the new state directory; an explicit conflicting run name is rejected.
