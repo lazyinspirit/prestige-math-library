@@ -164,6 +164,10 @@ Inherited Step-5 cross-group published repairs retain their original provenance.
 The Step-7 guard requires their claim file to match the frozen Step-5 receipt
 and their repaired content to remain unchanged from the Step-7 baseline; this
 recognition grants no licence for a new edit or exemption from later certification.
+If a later supplier repair makes an immediate final-adjudication receipt stale,
+the adjudication-stage closure sends it to an independent final adjudicator for
+current-context review. It never buys a second consumer rejudge or substitutes
+a group Alpha's decision for final adjudication.
 After fixing an infrastructure failure, the operator may queue a `resume-group`
 request for a stopped owning group; it retains completed decisions and resumes
 owed handoffs. It must not overlap a live writer for that group.

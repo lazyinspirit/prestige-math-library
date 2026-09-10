@@ -363,6 +363,28 @@ test('Step-7 rejudge blocks exhausted owed items without stranding eligible page
   rmSync(repo, { recursive: true, force: true });
 });
 
+test('adjudication closure sends stale immediate terminal receipts to FA, not Sol or another judge', async () => {
+  const repo = fixtureRepoWithGroups();
+  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
+    unadjudicated: ['thm-demo-x'], needs_rejudge: [], open_fatal: [], closed: false,
+  }));
+  const started: any[] = [];
+  const s: any = stage('7-adjudicate');
+  await s.onGateFailure({
+    ctx: { run: 'demo', repo, config: { stateDir: '.autopilot/demo' } },
+    executor: { start: (_s: any, plan: any) => started.push(plan) }, stage: s, round: 2,
+    failure: { id: 'judge-closure', output: 'ERROR terminal-resolution-stale [thm-demo-x]: changed pair context' },
+  });
+  assert.equal(started.length, 1);
+  assert.equal(started[0].role, 'final-adjudicator');
+  const queue = JSON.parse(readFileSync(join(repo,
+    'research/demo-step7-fa-a-7-adjudicate-round-2.json'), 'utf8'));
+  assert.equal(queue.stage, '7-rejudge', 'the existing terminal evidence protocol is preserved');
+  assert.deepEqual(queue.items.map((x: any) => x.id), ['thm-demo-x']);
+  assert.equal(queue.dispatch_label, started[0].label);
+  rmSync(repo, { recursive: true, force: true });
+});
+
 test('Step-7 sends every rejected Terra rejudge directly to one ordered Astra-medium FA per group', async () => {
   const repo = fixtureRepoWithGroups();
   writeFileSync(join(repo, 'research', 'demo-step7-scope.json'), JSON.stringify({

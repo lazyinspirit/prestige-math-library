@@ -955,14 +955,15 @@ function writeFrozenFile(path: string, body: string): void {
 function writeFinalAdjudicatorTask(ctx: any, stage: any, round: number, group: string,
   assignments: Array<{ id: string; scope: Step7RepairScope; owner: string | null }>): string {
   const ordered = [...assignments].sort((a, b) => a.id.localeCompare(b.id));
-  const dispatchLabel = `step7-fa-${group}-round-${round}`;
+  const dispatchLabel = stage.id === '7-rejudge'
+    ? `step7-fa-${group}-round-${round}` : `step7-fa-${group}-${stage.id}-round-${round}`;
   const queueRel = `research/${ctx.run}-${dispatchLabel}.json`;
   const taskRel = `research/${ctx.run}-${dispatchLabel}.task.md`;
   const stateDir = ctx.config?.stateDir ?? '.autopilot';
   const queue = {
     version: 1,
     run: ctx.run,
-    stage: stage.id,
+    stage: '7-rejudge',
     group,
     round,
     dispatch_label: dispatchLabel,
@@ -1022,7 +1023,8 @@ function startFinalAdjudicators(ctx: any, executor: any, stage: any, round: numb
     const task = writeFinalAdjudicatorTask(ctx, stage, round, group, owned);
     executor.start(stage, {
       role: 'final-adjudicator',
-      label: `step7-fa-${group}-round-${round}`,
+      label: stage.id === '7-rejudge'
+        ? `step7-fa-${group}-round-${round}` : `step7-fa-${group}-${stage.id}-round-${round}`,
       job: 'adjudication',
       covers: [],
       brief: 'briefs/final-adjudicator.md',
@@ -2206,6 +2208,15 @@ export const stages = [
         return;
       }
       const closure = readClosure(ctx);
+      // Immediate FA receipts can become stale when a later supplier repair
+      // changes their context. Only an independent FA can renew that judgment.
+      const staleTerminalIds = [...new Set(failures.flatMap((entry: any) =>
+        [...`${entry.output ?? ''}\n${entry.why ?? ''}`.matchAll(/terminal-resolution-stale \[([a-z0-9-]+)\]/g)]
+          .map(match => match[1])))];
+      if (staleTerminalIds.length) {
+        startFinalAdjudicators(ctx, executor, stage, round, staleTerminalIds);
+        return; // Other unfinished decisions are routed after this queue drains.
+      }
       if (failure.id === 'judge-closure' && (closure?.unadjudicated?.length ?? 0) > 0) {
         refreshStep7Scope(ctx);
         // A group Alpha can miss rejection rows even though its stage result
