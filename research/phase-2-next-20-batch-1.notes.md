@@ -1,3 +1,7 @@
+# Current operator source reconciliation
+
+Root has resolved S1 by waiving only unavailable KT/Creutz backing using seven complete local arguments, and resolved S2 after independently reading Varju’s complete general-eigenfunction proof for the matching normalized Chacon construction. Coverage preserves all prior failures/resolutions and the new mirror HTML stamp. Exact evidence is in `phase-2-next-20-chacon-source-alternative-review.json` and `phase-2-next-20-chacon-varju-source-review.json`. No claim or ordinary mathematical review is waived. Prior construction-stage notes below remain historical evidence, including the formerly open S1/S2 findings; they do not describe current source status.
+
 # Step 1 — beta batch 1 — phase-2-next-20
 
 Owned pair: `weak-mixing-and-the-chacon-transformation` / `weak-mixing-and-the-chacon-transformation-examples`. Construction only; no independent mathematical approval or engine gate clearance. No published content, shared plan, verdict or engine state was edited.
