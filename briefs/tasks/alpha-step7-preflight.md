@@ -1,9 +1,14 @@
 # Step 7 — targeted repair-integrity review, `{{run}}`
 
-The generated repair envelope above is authoritative. It supplies every failed
-gate with full output, the exact live ids and rejection tuples, and each id's
+The generated repair envelope is authoritative. It supplies unresolved
+diagnostics, exact live ids and rejection tuples, and each id's
 run or published scope. Work only on `assigned_items`, using the live tuples
 and retained fatal repair licences as evidence. Rerun focused checks where supported.
+
+Inspect only the named finding and the item/dependency text needed to resolve it.
+Do not repeat whole-group reading, settled adjudication, or upheld boundary
+reviews. Cited suppliers are context, not additional repair targets. Original
+reports are retained in `full_evidence`; open only relevant sections if needed.
 
 Resolve every assigned finding in this pass, keeping the existing mathematics
 and detail except where an exact fatal licence requires correction. A serial

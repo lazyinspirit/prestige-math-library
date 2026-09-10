@@ -912,20 +912,50 @@ function readPublishedClosure(ctx): ReturnType<typeof readClosure> {
 }
 
 /** Item ids printed by the standard `ERROR code [item-id]:` gate grammar. */
-export function itemsFromGateFailure(failure: any): string[] {
-  let text = `${failure?.output ?? ''}\n${failure?.why ?? ''}`;
+export function repairGateOutput(failure: any): string {
+  let text = String(failure?.output ?? '');
+  if (failure?.id === 'boundary-audit') {
+    if (text.trim().startsWith('{')) {
+      const report = JSON.parse(text);
+      // Only unresolved candidates. Reviewed/upheld rows remain in the full
+      // evidence artifact, never in a repair assignment.
+      return [
+        ...(report.templates ?? []).flatMap((cluster: any) =>
+          (cluster.rows ?? []).map((row: any) =>
+            `ERROR boundary-template [${row.id}]: ${JSON.stringify(row)}`)),
+        ...(report.contradicted ?? []).map((row: any) =>
+          `ERROR boundary-contradicted [${row.id}]: ${JSON.stringify(row)}`),
+      ].join('\n');
+    }
+    // Preserve compatibility with reports already captured by a live run.
+    text = text.split(/^TEMPLATE CANDIDATES UPHELD|^UPHELD BY REVIEW/m)[0];
+  }
   // Dependency reports put warnings and the whole inventory before this
   // section. Only the error section names repair subjects.
   const section = text.match(/^\s*\d+ ERROR\(s\):\s*$/m);
   if (section?.index !== undefined) text = text.slice(section.index);
   // Risk reports list every passing item before their ERROR records. Those
   // inventory rows are context, not repair subjects.
-  const errors = text.split(/\r?\n/).filter((line) => /^\s*ERROR\b/.test(line));
-  if (errors.length) text = errors.join('\n');
+  if (/^\s*ERROR\b/m.test(text)) {
+    const records = text.split(/(?=^(?:ERROR|WARN(?:ING)?|ORDINARY|MODERATE|HIGH|CRITICAL)\b)/m);
+    text = records.filter(record => /^\s*ERROR\b/.test(record)).join('');
+  }
+  return text.trim();
+}
+
+export function itemsFromGateFailure(failure: any): string[] {
+  const text = repairGateOutput(failure) || String(failure?.why ?? '');
   const grammar = '[a-z][a-z0-9]*(?:-[a-z0-9]+){2,}';
   const itemGrammar = '(?:def|lem|thm|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)+';
   const itemSummaryIds = [...text.matchAll(/^\s*items:\s*(.*)$/gmi)]
     .flatMap((m) => [...m[1].matchAll(new RegExp(itemGrammar, 'g'))].map((hit) => hit[0]));
+  const subjects = text.split('\n').flatMap(line => {
+    // A cited supplier is context, not the subject of this diagnostic.
+    const primary = /^\s*(?:ERROR|FAIL)\b[^\n]*?\[([a-z][a-z0-9-]+)\]/.exec(line)?.[1]
+      ?? /^\s*\[[a-z0-9-]+\]\s+items\/([a-z][a-z0-9-]+)\.md:/.exec(line)?.[1];
+    return primary && new RegExp(`^${itemGrammar}$`).test(primary) ? [primary] : [];
+  });
+  if (subjects.length) return [...new Set(subjects)];
   return [...new Set([
     ...[...text.matchAll(new RegExp(`\\[(${grammar})\\]`, 'g'))].map((m) => m[1]),
     ...[...text.matchAll(new RegExp(`\\\`(${grammar})\\\``, 'g'))].map((m) => m[1]),
@@ -1150,7 +1180,7 @@ function writeStep7RepairEnvelope({ ctx, stage, round, group, mode, failures, me
       id: String(entry.id),
       stage: entry.stage ?? stage.id,
       why: String(entry.why ?? ''),
-      output: scopedGateOutput(String(entry.output ?? ''), assignedIds, knownIds),
+      output: scopedGateOutput(repairGateOutput(entry), assignedIds, knownIds),
       named_ids: itemsFromGateFailure(entry).filter((id: string) => assignedIds.has(id)),
     })),
     mechanical_residue: String(mechanicalStderr ?? ''),
@@ -1326,7 +1356,7 @@ const contractGates = (ctx, { reviewed = false }: { reviewed?: boolean } = {}) =
     // frontier-13 two false template rows each hid a fatal defect, and on
     // frontier-14 three did — three times out of three that anyone looked.
     gate('boundary-audit', ['node', 'tools/boundary-audit.mjs', merged,
-      '--fail-on-contradicted', '--fail-on-template']),
+      '--fail-on-contradicted', '--fail-on-template', '--json']),
     gate('citation-fidelity', ['node', 'tools/citation-fidelity.mjs', merged, '--fail-on-missing-quote']),
     // The gate that checks the gates. finite-smoke once reported "0 error(s), 0
     // check(s)" for most of a run: a green tick over an empty scope.
@@ -2354,9 +2384,7 @@ export const stages = [
           ? (g
             ? [`research/${ctx.run}-alpha-${g}-step7-recovery.task.md`, 'briefs/tasks/alpha-step7-closure-recovery.md']
             : 'briefs/tasks/alpha-step7-closure-recovery.md')
-          : (g
-            ? [`research/${ctx.run}-alpha-${g}-step7-preflight.task.md`, 'briefs/tasks/alpha-step7-preflight.md']
-            : 'briefs/tasks/alpha-step7-preflight.md');
+          : 'briefs/tasks/alpha-step7-preflight.md';
         const envelopeTask = writeStep7RepairEnvelope({
           ctx, stage, round, group: g, mode: 'preflight', failures,
           mechanicalStderr: mechanical.stderr, named, task: baseTask,

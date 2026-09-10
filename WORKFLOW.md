@@ -158,6 +158,11 @@ correct licensed metadata before retrying; failed model calls remain held.
 Repair routing extracts subjects from each failing gate separately. Dependency
 error sections exclude warning inventories; contract errors must not hide other
 gates' published-audit or forward-reference failures.
+Boundary routing uses complete JSON diagnostics, assigns only unresolved
+template/contradiction records, and excludes upheld reviews. Cited suppliers
+remain diagnostic context, not repair targets. Repair envelopes retain full
+reports in a separate evidence artifact; prompts contain only relevant failures
+and the focused repair brief, never the old whole-group reading assignment.
 Inherited published items need not acquire a new-batch proof contract merely
 to enter the handoff; their licence, precheck and final published-repair checks
 remain mandatory. New proof-bearing items require their owning contract;
