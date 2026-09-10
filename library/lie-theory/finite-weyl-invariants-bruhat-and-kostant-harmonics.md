@@ -19,6 +19,8 @@ items:
   - lem-reflection-basic-invariants-form-a-regular-sequence
   - lem-weyl-coinvariant-hilbert-series-has-order-w-dimension
   - thm-chevalley-shephard-todd-for-finite-weyl-groups
+  - def-finite-semisimple-lie-algebra-and-symmetric-adjoint-action
+  - lem-finite-lie-engel-trace-criterion-and-killing-nondegeneracy
   - def-kostant-harmonic-subspace-of-the-symmetric-algebra
   - lem-kostant-harmonics-give-an-invariant-polynomial-complement
   - lem-local-chevalley-restriction-for-kostant-freeness
@@ -31,6 +33,6 @@ For a finite complex reflection group, Reynolds averaging first gives orbit sepa
 
 The finite-Weyl specialization of this argument is independent of a classification or a Coxeter presentation. The final filtered-freeness lemma applies to a specified graded basis and specified lifts; its proof is a finite descent in filtration degree.
 
-The finite root-system section proves the simple-root and lattice conventions locally, derives strong exchange from root sign changes, and proves both Bruhat descriptions by a saturated-chain lifting argument. Closed-chamber representatives and wall stabilizers index the orbit-sum basis; the discriminant generates the anti-invariants. The general highest-weight character and Kostant harmonic arguments remain incomplete: they require the finite semisimple Lie algebra chain, including Killing nondegeneracy and a justified harmonic complement. These are not supplied by the finite-reflection invariant theorem. In particular, Kostant harmonics in the symmetric algebra of a Lie algebra must be distinguished from the finite coinvariant algebra of its Cartan reflection representation.
+The finite root-system section proves the simple-root and lattice conventions locally, derives strong exchange from root sign changes, and proves both Bruhat descriptions by a saturated-chain lifting argument. Closed-chamber representatives and wall stabilizers index the orbit-sum basis; the discriminant generates the anti-invariants. The general highest-weight character and Kostant harmonic arguments remain incomplete: they require the finite semisimple Lie algebra chain, and a justified harmonic complement. A local Engel and trace-interpolation argument now proves Killing nondegeneracy, and the harmonic definition proves its exact Fischer annihilator interface. These are not supplied by the finite-reflection invariant theorem. In particular, Kostant harmonics in the symmetric algebra of a Lie algebra must be distinguished from the finite coinvariant algebra of its Cartan reflection representation.
 
 The companion gives complete direct calculations for S3 Bruhat order, the A2 coinvariant quotient and the sl2 harmonic decomposition. These special cases do not assert the unresolved general results.

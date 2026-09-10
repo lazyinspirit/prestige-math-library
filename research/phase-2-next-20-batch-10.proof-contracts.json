@@ -40,7 +40,10 @@
     "lem-weyl-orbit-sums-form-a-basis-of-finite-weyl-invariants",
     "def-weyl-discriminant-and-reflecting-hyperplane-arrangement",
     "lem-weyl-anti-invariants-are-divisible-by-the-discriminant",
-    "def-bruhat-order-on-a-finite-weyl-group"
+    "def-bruhat-order-on-a-finite-weyl-group",
+    "def-finite-semisimple-lie-algebra-and-symmetric-adjoint-action",
+    "lem-finite-lie-engel-trace-criterion-and-killing-nondegeneracy",
+    "def-kostant-harmonic-subspace-of-the-symmetric-algebra"
   ],
   "contracts": {
     "lem-filtered-freeness-lifts-from-associated-graded-algebras": {
@@ -4780,6 +4783,322 @@
           "case": "iff-reverse",
           "status": "checked",
           "evidence": "Step2.2 uses exact one-step deletions to give a reduced subword in every reduced expression, proving expression independence."
+        }
+      ]
+    },
+    "def-finite-semisimple-lie-algebra-and-symmetric-adjoint-action": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition allows the zero semisimple algebra and gives S=C, I=0 explicitly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition gives S0=C and a zero Killing form only on the zero algebra without asserting nondegeneracy before the next lemma."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits one-dimensional Lie algebras, while its semisimplicity condition excludes a nonzero abelian algebra."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition uses the no-solvable-ideal convention, not an assumed nondegenerate trace form."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition begins the derived series at D0=g and the invariant ideal at strictly positive degree."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses only finite basis choices and invertible linear substitutions."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves direct implications and defines its conventions; it does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves direct implications and defines its conventions; it does not assert a biconditional."
+        }
+      ]
+    },
+    "lem-finite-lie-engel-trace-criterion-and-killing-nondegeneracy": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-primary-decomposition-for-an-endomorphism",
+          "source_section": "Statement",
+          "quote": "Let $T:V\\to V$ be an endomorphism of a finite-dimensional vector space over $F$, and factor its minimal polynomial in the UFD $F[x]$ as\n\n$$\\mu_T=\\prod_{i<r}q_i^{e_i},$$\n\nwhere the $q_i$ are distinct monic irreducibles and $e_i\\ge1$. Then the subspaces $V_i:=\\ker q_i(T)^{e_i}$ are $T$-invariant and\n\n$$V=\\bigoplus_{i<r}V_i.$$\n\nMoreover, the minimal polynomial of $T|_{V_i}$ is exactly $q_i^{e_i}$. If $V=0$, then $r=0$ and this is the empty direct sum.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-chinese-remainder-theorem-for-comaximal-ideals",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring and let $I_1,\\ldots,I_r$ be pairwise comaximal ideals, where $r\\ge1$. Then the canonical map\n$$ R\\longrightarrow \\prod_{i=1}^r R/I_i,\\qquad x\\longmapsto(x+I_1,\\ldots,x+I_r) $$\nis surjective, its kernel is $\\bigcap_{i=1}^r I_i$, and\n$$ \\bigcap_{i=1}^r I_i=\\prod_{i=1}^r I_i. $$\nEquivalently,\n$$ R/\\prod_{i=1}^r I_i\\cong\\prod_{i=1}^r R/I_i. $$",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-fundamental-theorem-of-algebra-minimum-modulus-proof",
+          "source_section": "Statement",
+          "quote": "Every nonconstant complex polynomial has a complex root. The conventions and prerequisite facts used below are recorded in [[lem-complex-polynomial-growth-and-minimum-modulus]], [[lem-dalembert-minimum-modulus-descent]].",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "If $a^q=0$ on $V$, the commuting operators of left and right multiplication by $a$ on $\\operatorname{End}(V)$ give $$ (\\operatorname{ad}_a)^m(T)=\\sum_{j=0}^m(-1)^j\\binom mj a^{m-j}Ta^j.$$ For $m\\ge2q-1$ every summand is zero. Hence $\\operatorname{ad}_a$ is nilpotent on any invariant subspace or quotient, in particular on a quotient of subalgebras stable under its action.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "For a finite-dimensional Lie algebra $\\mathfrak g$, trace cyclicity proves symmetry of $B$. Jacobi and trace cyclicity also give $$B([x,y],z)=\\operatorname{tr}([\\operatorname{ad}_x,\\operatorname{ad}_y]\\operatorname{ad}_z)=\\operatorname{tr}(\\operatorname{ad}_x[\\operatorname{ad}_y,\\operatorname{ad}_z])=B(x,[y,z]).$$ Consequently its radical $J=\\{x:B(x,\\mathfrak g)=0\\}$ is an ideal: $B([a,x],y)=-B(x,[a,y])=0$ for $x\\in J$.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "We record a finite spectral construction. By F3 and F1, an operator $x$ on a nonzero $V$ has a direct-sum decomposition $V=\\bigoplus_\\lambda V_\\lambda$ with $x|_{V_\\lambda}=\\lambda\\operatorname{id}+n_\\lambda$, each $n_\\lambda$ nilpotent. Define $b$ to act on $V_\\lambda$ by the scalar $\\overline\\lambda$. For a map in $\\operatorname{Hom}(V_\\mu,V_\\lambda)$, $\\operatorname{ad}_x$ equals $(\\lambda-\\mu)\\operatorname{id}$ plus the difference of commuting nilpotent left and right actions. Its nilpotent part has exponent at most $N=2\\dim V$, by the same binomial expansion as in step 1.1. For every distinct difference $a=\\lambda-\\mu$, F2 supplies a polynomial $R(z)$ with $R(z)\\equiv\\overline a\\pmod{(z-a)^N}$. These ideals are pairwise comaximal: distinct linear factors generate the unit ideal, and expanding a sufficiently high power of such a unit expression proves the same for their $N$th powers. Therefore $R(\\operatorname{ad}_x)$ acts on this Hom space by $\\overline\\lambda-\\overline\\mu$, exactly $\\operatorname{ad}_b$. The difference zero is among the interpolation nodes, so $R(0)=0$. Thus $$\\operatorname{ad}_b=R(\\operatorname{ad}_x),\\qquad R(0)=0.$$ Also $\\operatorname{tr}(bx)=\\sum_\\lambda(\\dim V_\\lambda)|\\lambda|^2$, since each nilpotent block has trace zero.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "step 1.1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "Prove the common-zero-vector assertion by induction on $\\dim L$, for all finite-dimensional nonzero representation spaces on which every operator is nilpotent. The zero algebra is immediate. Choose a proper subalgebra $H\\subset L$ of maximal dimension. For $a\\in H$, step 1.1 makes its adjoint action on $L/H$ nilpotent. Its image is a Lie algebra of dimension at most $\\dim H<\\dim L$, so the induction hypothesis gives a nonzero coset $x+H$ annihilated by every $a\\in H$. Hence $[H,x]\\subseteq H$, and $H+\\mathbb Cx$ is a subalgebra strictly containing $H$. Maximality forces $L=H+\\mathbb Cx$ and makes $H$ a codimension-one ideal.",
+          "inputs": [
+            "step 1.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The induction hypothesis applied to $H$ on $V$ makes $K=\\{v:Hv=0\\}$ nonzero. It is $x$-invariant because for $a\\in H$, $a(xv)=x(av)+[a,x]v=0$. The nilpotent restriction of $x$ to $K$ has a nonzero kernel: take the last nonzero vector in the finite power string of any nonzero vector of $K$. This vector is killed by both $x$ and $H$, hence by $L$, completing the induction. Apply the same common-vector result to successive quotients of $V$ to obtain a finite invariant flag with zero action on each one-dimensional quotient. Lifting a basis of that flag gives strict upper triangularity. A product of $\\dim V$ strictly upper triangular operators is zero; expanding iterated brackets into products shows this algebra, and every subalgebra of it, is solvable (indeed nilpotent).",
+          "inputs": [
+            "step 2.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "step": "3.2",
+          "claim": "Now suppose the trace-zero hypothesis holds and fix $x\\in[L,L]$. Use the operator $b$ and polynomial $R$ from step 2.1. Write $x=\\sum_j[y_j,z_j]$ with $y_j,z_j\\in L$, a finite sum by the definition of the derived subspace. Cyclicity of finite matrix trace gives $$\\operatorname{tr}(bx)=\\sum_j\\operatorname{tr}([b,y_j]z_j)=\\sum_j\\operatorname{tr}(R(\\operatorname{ad}_x)(y_j)z_j)=0.$$ Indeed $[L,L]$ is an ideal by Jacobi, and $R(0)=0$ implies $R(\\operatorname{ad}_x)(y_j)\\in[L,L]$, so each last trace vanishes by the hypothesis. Step 2.1 now gives a sum of nonnegative real numbers $\\sum_\\lambda(\\dim V_\\lambda)|\\lambda|^2=0$. Each $\\lambda$ is zero, so $x$ is nilpotent on $V$.",
+          "inputs": [
+            "step 2.1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Thus every element of $[L,L]$ is a nilpotent operator. Step 3.1 makes this derived algebra solvable. If its derived series vanishes after $m$ steps, that of $L$ vanishes after $m+1$, proving the trace criterion. If $V=0$, then $L=0$ and the same conclusion is immediate without spectral decomposition.",
+          "inputs": [
+            "step 3.1",
+            "step 3.2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Suppose $\\mathfrak g$ is semisimple. For $x,y\\in J$, the adjoint actions preserve $J$ and act by zero on $\\mathfrak g/J$. Computing trace in a basis extending one of $J$ gives $B_J(x,y)=B_{\\mathfrak g}(x,y)=0$. Thus $L=\\operatorname{ad}_J(J)\\subseteq\\operatorname{End}(J)$ satisfies step 4.1's trace hypothesis and is solvable. Its kernel in $J$ is the center, which is abelian; explicitly, if $D^mL=0$ then $D^mJ$ lies in that center and $D^{m+1}J=0$. Hence $J$ is a solvable ideal of $\\mathfrak g$ and is zero by semisimplicity. This proves nondegeneracy. For $\\mathfrak g=0$ the unique form has zero radical. Every induction, basis, polynomial interpolation and eigenvalue factorization above is finite; no algebraic closure or arbitrary-index selection is taken, so no AC is used.",
+          "inputs": [
+            "step 4.1",
+            "step 1.2",
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step4.1 treats V=0 separately from the nonzero spectral and common-vector constructions;5.1 treats g=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step2.1 includes zero spectral differences and forces R(0)=0;4.1 includes L=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps2.2–3.1 include a codimension-one ideal H=0 and one-dimensional representation spaces."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step2.1 uses generalized eigenspaces and repeated polynomial congruences, so x need not be diagonalizable; only its auxiliary b is scalar on each block."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step2.1 chooses N=2 dimV to kill all Hom-block nilpotent parts, including zero differences and singleton spectra."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step5.1 records finite inductions, bases, root factorizations and CRT interpolation; no algebraic closure choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item proves direct implications and defines its conventions; it does not assert a biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item proves direct implications and defines its conventions; it does not assert a biconditional."
+        }
+      ]
+    },
+    "def-kostant-harmonic-subspace-of-the-symmetric-algebra": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-finite-semisimple-lie-algebra-and-symmetric-adjoint-action",
+          "source_section": "Definition",
+          "quote": "A finite-dimensional complex **Lie algebra** is a finite-dimensional complex vector space $\\mathfrak g$ with a complex bilinear bracket satisfying $[x,x]=0$ and $[x,[y,z]]+[y,[z,x]]+[z,[x,y]]=0$. A subspace $I$ is an ideal if $[\\mathfrak g,I]\\subseteq I$. Put $D^0\\mathfrak g=\\mathfrak g$ and $D^{j+1}\\mathfrak g=[D^j\\mathfrak g,D^j\\mathfrak g]$, where a bracket of subspaces means the span of all indicated brackets. The algebra is **solvable** if some $D^j\\mathfrak g=0$, and **semisimple** if it has no nonzero solvable ideal. The zero algebra is semisimple. The operator $\\operatorname{ad}_x(y)=[x,y]$ satisfies $[\\operatorname{ad}_x,\\operatorname{ad}_y]=\\operatorname{ad}_{[x,y]}$ by Jacobi. Its **Killing form** is $B(x,y)=\\operatorname{tr}_{\\mathfrak g}(\\operatorname{ad}_x\\operatorname{ad}_y)$; its nondegeneracy in the semisimple case is proved in the next lemma, not assumed here.\n\nThe symmetric algebra $S(\\mathfrak g)$ is the commutative algebra generated linearly by $\\mathfrak g$. Concretely, a finite vector-space basis $e_1,\\ldots,e_n$ identifies it with the polynomial algebra $\\mathbb C[e_1,\\ldots,e_n]$ of [[def-polynomial-ring-over-a-commutative-ring]]. A change of basis induces an invertible linear substitution, so these descriptions identify canonically by their values on $\\mathfrak g$. Its grading $S=\\bigoplus_{d\\ge0}S_d$ has $S_0=\\mathbb C$. Each $\\operatorname{ad}_x$ extends uniquely to a derivation of $S$ by the product rule, and the Lie identities continue to hold because derivations are determined by their values on generators. Define $S^{\\mathfrak g}=\\{p:\\operatorname{ad}_x p=0\\text{ for every }x\\in\\mathfrak g\\}$ and $S^{\\mathfrak g}_+=\\bigoplus_{d>0}(S^{\\mathfrak g}\\cap S_d)$. The invariant ideal $I=S S^{\\mathfrak g}_+$ consists of finite sums of products with positive-degree homogeneous invariants; it is graded and stable under all adjoint derivations. In dimension zero, $S=S^{\\mathfrak g}=\\mathbb C$ and $I=0$. Only finite basis choices occur in these conventions.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-finite-lie-engel-trace-criterion-and-killing-nondegeneracy",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a finite-dimensional complex vector space. If a Lie subalgebra $L\\subseteq\\operatorname{End}(V)$ consists entirely of nilpotent operators and $V\\ne0$, it has a common nonzero annihilated vector; it admits a basis in which all its operators are strictly upper triangular. If instead $L$ satisfies $\\operatorname{tr}_V(xy)=0$ for all $x\\in[L,L]$, $y\\in L$, then $L$ is solvable.\n\nFor every finite-dimensional complex semisimple Lie algebra, the Killing form $B$ is symmetric, invariant and nondegenerate. All these assertions are choice-free, including the zero Lie algebra.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "The derivations $D_x,D_y$ commute because their commutator is a derivation vanishing on each linear generator. Hence the polynomial assignment $p\\mapsto D_p$ is well-defined. Choose a basis $e_1,\\ldots,e_n$ and its $B$-dual basis $f_1,\\ldots,f_n$. For multi-indices $a,b$ of total degree $d$, the product rule gives $$(D_{e^a}f^b)(0)=\\begin{cases}\\prod_i a_i!&a=b,\\\\0&a\\ne b.\\end{cases}$$ Both monomial lists are bases of $S_d$, so the pairing is nondegenerate in both variables. It is symmetric: on products of linear generators its value is the sum over all bijections of the products of the corresponding $B$-pairings, unchanged on interchanging the two products by symmetry of $B$. This also verifies that degree zero has the usual nondegenerate scalar product.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For homogeneous $p,q,h$ with $\\deg p+\\deg q=\\deg h$, commuting constant-coefficient differentiation gives $(pq,h)_B=(q,D_p h)_B$. If $h\\in S_d$ is harmonic, it therefore pairs to zero with every degree-$d$ product of a positive invariant and any polynomial, hence with $I_d$. Conversely if it annihilates $I_d$, fix a homogeneous invariant $p$ of degree $k>0$. If $k>d$ then $D_ph=0$ by degree; if $k\\le d$, the displayed identity and nondegeneracy on $S_{d-k}$ force $D_p h=0$. This proves $\\mathcal H_d=I_d^\\perp$ exactly. Homogeneous decomposition also shows that testing every such $p$ is equivalent to testing every positive-degree invariant and that $\\mathcal H$ is graded.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "On a generator $y$, invariance of $B$ gives $[\\operatorname{ad}_z,D_x](y)=-B(x,[z,y])=B([z,x],y)$. Both sides are derivations, so $[\\operatorname{ad}_z,D_x]=D_{[z,x]}$ on $S$. The commutator product rule extends this to $[\\operatorname{ad}_z,D_p]=D_{\\operatorname{ad}_z p}$ for every polynomial $p$. For invariant $p$ the commutator is zero; hence $D_p h=0$ implies $D_p(\\operatorname{ad}_z h)=0$. This proves adjoint stability of $\\mathcal H$. Constants are harmonic, $I_0=0$, and in dimension zero $S=\\mathcal H=\\mathbb C$ with $I=0$. No complementary-subspace conclusion has been used, and all chosen dual bases are finite.",
+          "inputs": [
+            "step 1.1",
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step3.1 treats the zero Lie algebra with S=H=C and I=0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps1.1 and3.1 include scalar degree zero and I0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step1.1 includes one-dimensional degree spaces and the factorial 0!=1 in the dual-monomial calculation."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition explicitly separates the not-yet-proved complement assertion from perfect complex bilinear nondegeneracy;2.1 proves only the annihilator identity."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step2.1 treats differential degree k>d separately, and k=d via the degree-zero perfect pairing."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step3.1 invokes only finite Killing-dual bases; no family of degreewise complements is selected."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step2.1 proves harmonic polynomials annihilate each degree-d product in I."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step2.1 uses perfectness in degree d-k to prove annihilation of I forces every invariant differential operator to vanish."
         }
       ]
     }
