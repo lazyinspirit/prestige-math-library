@@ -156,10 +156,13 @@ function main() {
 }
 
 import { readdirSync } from 'node:fs';
+export function contractContainsItem(document, id) {
+  return Array.isArray(document?.scope) && document.scope.includes(id);
+}
 function owningContractFiles(prefix, id) {
   return readdirSync('research').filter(name => name.startsWith(prefix.slice('research/'.length) + '-batch-')
     && name.endsWith('.proof-contracts.json')).map(name => `research/${name}`)
-    .filter(path => readFileSync(path, 'utf8').includes(`"${id}"`));
+    .filter(path => contractContainsItem(JSON.parse(readFileSync(path, 'utf8')), id));
 }
 
 if (process.argv[1] && resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {

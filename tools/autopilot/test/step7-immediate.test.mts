@@ -1,7 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { mergeCycleReceipts, cycleCounts } from '../../step7-rejudge-cycle.mjs';
-import { itemVerdict, scopedIntegrityErrors } from '../bin/complete-step7-item.mjs';
+import { itemVerdict, scopedIntegrityErrors, contractContainsItem } from '../bin/complete-step7-item.mjs';
 import { stages } from '../stages/mathlib.mts';
 import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
@@ -10,6 +10,11 @@ import { join } from 'node:path';
 const receipt = (cycles: any[]) => ({run:'test', cycles, initial_fatal_contexts:{}});
 const cycle = (id: string, item: string, completed_at: string | null = null) =>
   ({cycle_id:id,kind:'repair',items:[item],completed_at});
+
+test('dependency mentions do not make a contract own the item', () => {
+  assert.equal(contractContainsItem({scope:['consumer'],contracts:{consumer:{deps:['supplier']}}},'supplier'),false);
+  assert.equal(contractContainsItem({scope:['supplier']},'supplier'),true);
+});
 
 test('concurrent item reservations retain both paid cycles', () => {
   const a=receipt([cycle('a','one')]), b=receipt([cycle('b','two')]);
