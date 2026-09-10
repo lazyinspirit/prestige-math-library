@@ -251,6 +251,17 @@ existing published suppliers suffice. Exact hashes, prior-report deduplication,
 used clauses and limitations are in
 `phase-2-next-20-published-author-handoff-reconciliation.md`.
 
+The Fourier Step-5A functional-interface pass adds eleven bounded-clear census
+entries. The dense-subspace extension explicitly assumes CC and has a
+well-defined, linear, norm-preserving completion argument; the operator-norm
+least-bound clause is an adequate implicit published interface. The complete
+real-to-complex Stone--Weierstrass spine handles empty spaces, common zeros,
+finite compact-cover sweeps and real/imaginary approximation. The convolution-
+support theorem proves pointwise zero on the relevant neighbourhood and does
+not use the affected branch of its separately A-P convolution-existence edge.
+Exact IDs, hashes and used-clause limits are in
+`phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`.
+
 ## Locally convex published-prerequisite audit — 2026-09-11
 
 The complete current `def-algebraic-dual-and-linear-functional` defines a
@@ -27848,11 +27859,11 @@ No new Phase2 pair; source barriers are not waived.
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,434 unique
+subsequently reconciled published IDs. It currently contains **2,445 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,434 indexed IDs are published; **13,496 published items remain outside this
+2,445 indexed IDs are published; **13,485 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -27866,9 +27877,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 173 | Recorded direct review and an unresolved item-specific repair. |
 
-653 further reference-pool items have bounded no-repair-needed dispositions
+664 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,781 items and the expanded reference pool contains 2,434 unique items.
+1,781 items and the expanded reference pool contains 2,445 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -27929,6 +27940,17 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `thm-extension-of-a-bounded-map-from-a-dense-subspace` | Fourier Step-5A functional-interface audit, 2026-09-11: full target read. Explicit CC selects an approximating sequence at each fixed point; target completeness, the Lipschitz bound and unique limits make the extension well defined, linear and unique. The same least operator-norm bound passes to the extension, including the zero case. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`. |
+| `thm-complex-stone-weierstrass-self-adjoint` | Fourier Step-5A functional-interface audit, 2026-09-11: full theorem and direct real spine read. Self-adjointness puts real/imaginary parts in the algebra; real density or the unique-common-zero ideal transfers componentwise, with the empty and unital cases explicit. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`. |
+| `lem-real-part-of-a-self-adjoint-complex-function-algebra` | Fourier Step-5A functional-interface audit, 2026-09-11: full proof read. Real and imaginary parts remain continuous algebra members, one separates any pair separated complexly, and their simultaneous vanishing is equivalent to complex vanishing. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`. |
+| `thm-real-stone-weierstrass-dichotomy-for-separating-algebras` | Fourier Step-5A functional-interface audit, 2026-09-11: full proof read. Point separation gives at most one common zero; unitization plus real Stone--Weierstrass, compact reciprocal approximation and evaluation at the common zero prove the two alternatives. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`. |
+| `lem-nowhere-vanishing-algebras-approximate-the-constant-one` | Fourier Step-5A functional-interface audit, 2026-09-11: all-admissible nonzero sets give a finite compactness subcover, their finite sum of squares has positive minimum, and polynomial reciprocal approximation yields one. No point-indexed choice is used. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`. |
+| `thm-real-stone-weierstrass-general` | Fourier Step-5A functional-interface audit, 2026-09-11: full proof and lattice suppliers read. The uniform closure is a unital separating real vector lattice, lattice Stone--Weierstrass makes it dense, and its closedness gives equality. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`. |
+| `lem-uniform-closure-of-a-general-real-function-algebra-is-a-lattice` | Fourier Step-5A functional-interface audit, 2026-09-11: full proof read. Controlled approximants preserve products; zero-constant polynomial approximation to absolute value puts absolute values and hence maxima/minima in the uniform closure. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`. |
+| `thm-lattice-stone-weierstrass` | Fourier Step-5A functional-interface audit, 2026-09-11: full proof read. Affine two-point interpolation supplies duplication and the two finite compact-cover sweeps give a uniform approximant; empty space is handled separately. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`. |
+| `lem-two-point-interpolation-for-a-separating-real-function-lattice` | Fourier Step-5A functional-interface audit, 2026-09-11: the separating function's nonzero value difference supports the exact affine interpolation, and unital vector-space closure retains it in the lattice. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`. |
+| `lem-two-compact-cover-sweeps-for-function-lattices` | Fourier Step-5A functional-interface audit, 2026-09-11: the proof forms all admissible functions before each finite compactness extraction, then uses a finite maximum and finite minimum to obtain the two-sided bound. No arbitrary family selection is used. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`. |
+| `thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset` | Fourier Step-5A functional-interface audit, 2026-09-11: outside the closed support sumset, the integrand is pointwise zero throughout one neighbourhood, so the actual-function convolution exists there and vanishes. The listed A-P general convolution-existence theorem is unused in this clause. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`. |
 | `def-partial-function-computed-by-a-machine` | Original-next-20 batch 12 machine-interface audit, 2026-09-11: full definition read. Exact encoded output is required on the mathematical domain and divergence off it, while malformed strings outside the input-code image are intentionally unconstrained. This matches the active numerical wrappers. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-machine-interpreter-prerequisite-audit.md`. |
 | `lem-step-by-step-interpreter-for-machine-codes` | Original-next-20 batch 12 machine-interface audit, 2026-09-11: full proof read. The fixed parser validates the machine/configuration code, returns halting configurations unchanged, computes the unique nonhalting successor including left clamp and canonical tape trimming, and returns a distinct empty word when malformed. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-machine-interpreter-prerequisite-audit.md`. |
 | `def-effective-binary-encoding-and-decoder` | Original-next-20 batch 12 machine-interface audit, 2026-09-11: full definition read. Injection, total decode with an external malformed token, and optional prefix-freeness are consistently separated. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-machine-interpreter-prerequisite-audit.md`. |

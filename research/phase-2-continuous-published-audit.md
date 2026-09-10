@@ -262,15 +262,29 @@ and dedup scope are in
 `research/phase-2-next-20-published-author-handoff-reconciliation.md`; the
 originating handoff is `research/phase-2-fourier-support-2-alpha-a-5a.md`.
 
+A bounded follow-up clears eleven previously unindexed published items across
+three actual Step-5A branches: dense-subspace extension, the complete real-to-
+complex Stone--Weierstrass spine, and convolution support. Explicit CC covers
+sequence approximation in the extension theorem; the compact-cover lattice
+arguments use all admissible functions and finite subcovers; and pointwise zero
+proves the support inclusion without invoking the A-P general convolution-
+existence branch. Evidence:
+`research/phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`.
+
+Post-functional-interface index: 2,445 unique published IDs; U-P 1,406, U-C 15,
+A-R 187, A-P 173 and 664 bounded clears. Mechanical recount must confirm no
+within-class or cross-class duplicate and that all indexed IDs remain
+published. The current census leaves 13,485 published IDs outside the index.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
    issues reported by the root worker, prioritizing items actually consumed by
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
-   then audit bounded samples of published items outside the 2,434-ID index.
+   then audit bounded samples of published items outside the 2,445-ID index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,496 published items
+No exhaustive discovery claim is authorized while 13,485 published items
 remain outside the index and dependency interfaces remain unaudited.
