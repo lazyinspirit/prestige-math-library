@@ -437,6 +437,21 @@ Post-finite-Weyl-convention counts: 2,472 unique published IDs; U-P 1,411,
 U-C 15, A-R 187, A-P 188 and 671 bounded clears. The current census leaves
 13,458 published IDs outside the index.
 
+The connection-author partition report reconfirms three existing A-P rows and
+adds one distinct A-P target:
+`thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary`. Although its
+statement has `AC_omega`, the proof does not construct/cite the required
+boundary half-ball cover and shrinking, inherits the defective boundaryless
+choice route, and states its result through a partition definition whose exact
+domain excludes boundary manifolds. Extend the definition and use the explicit
+all-eligible-half-ball/countable annulus/countable bump construction. The live
+full-AC connection proof already supplies this locally, so it is not blocked.
+Evidence: `research/phase-2-next-20-published-boundary-partition-audit.md`.
+
+Post-boundary-partition counts: 2,473 unique published IDs; U-P 1,411, U-C 15,
+A-R 187, A-P 189 and 671 bounded clears. The current census leaves 13,457
+published IDs outside the index.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface

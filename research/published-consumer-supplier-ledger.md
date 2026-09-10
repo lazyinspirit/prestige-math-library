@@ -28016,15 +28016,33 @@ the displayed conjugation calculation. No independent defect was found in
 these four items. Evidence and current hashes are in the same bounded Lie
 audit file.
 
+## Boundary partition follow-up — 2026-09-11
+
+The connection-author report reconfirms the existing A-P cover, shrinking and
+boundaryless partition findings; their rows and counts are unchanged. The
+distinct published
+`thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary` is newly A-P
+after a full target/used-interface read. Its own statement does assume
+`AC_omega`, but proofs 1.1--2.1 neither construct nor cite the boundary
+half-ball cover/shrinking needed to support that sufficiency claim and inherit
+the defective boundaryless choice route. Its conclusion also targets a
+partition definition whose precise domain is a boundaryless smooth manifold,
+leaving the boundary object's output convention unresolved. Repair by extending
+the definition's domain and running the all-eligible-half-ball, countable
+annulus and countable bump construction under `AC_omega`. Existing published
+interfaces suffice and the live full-AC connection proof gives the needed local
+argument, so no new pair or current blocker results. Exact evidence:
+`research/phase-2-next-20-published-boundary-partition-audit.md`.
+
 <!-- phase3-classification-index:start -->
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,472 unique
+subsequently reconciled published IDs. It currently contains **2,473 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,472 indexed IDs are published; **13,458 published items remain outside this
+2,473 indexed IDs are published; **13,457 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28036,11 +28054,11 @@ Supplier mappings and subsequent item-specific findings remain above.
 | U-P | Unaudited and potentially defective items | 1411 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 15 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 188 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 189 | Recorded direct review and an unresolved item-specific repair. |
 
 671 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,801 items and the expanded reference pool contains 2,472 unique items.
+1,802 items and the expanded reference pool contains 2,473 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28824,6 +28842,7 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary` | Connection-author partition reconciliation 2026-09-11: the statement explicitly assumes `AC_omega`, but proofs 1.1--2.1 do not construct or cite a boundary half-ball cover/shrinking and inherit the already-A-P boundaryless selection route while asserting the same choice bound. The conclusion also uses a partition definition whose exact domain is a boundaryless smooth manifold. Extend that definition to boundary objects, repair the upstream cover/shrinking/partition contracts, and give the all-eligible-half-ball plus countable annular/bump selection under `AC_omega`. Existing suppliers suffice; the live full-AC connection proof supplies its argument locally, so no new pair/current blocker. Exact hash/clauses/dedup: `research/phase-2-next-20-published-boundary-partition-audit.md`. |
 | `lem-every-verma-module-contains-a-simple-verma-submodule` | Finite-Weyl/Verma-chain audit 2026-09-11: proof 1.1 obtains an infinite descending chain by repeatedly choosing a proper submodule and singular vector, but states no choice hypothesis. Avoid DC by first bounding the finite set of positive-lattice solutions to the Casimir sphere equation and constructing only one more than that many successive proper embedded Vermas by finite induction; strictly increasing heights then contradict finiteness. Existing published singular-vector, injectivity, Casimir and weight-cone suppliers suffice after their separately recorded repairs. No new Phase-2 pair. Exact hash/path/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `thm-marcinkiewicz-interpolation-for-weak-one-one-and-strong-infinity` | Original-next-20 author-handoff reconciliation 2026-09-11 moves the existing U-P row after full-target review. Proof 4.1 applies the published sigma-finite Tonelli theorem on an arbitrary measure space without its hypothesis; retain the earlier tail-integrability and a.e.-endpoint repairs. The live maximal corollary specializes to Lebesgue `R^n` under CC, where the published sigma-finiteness proposition validates this exact Tonelli use, so there is no additional Carleson blocker. The general theorem can use the recorded simple-function/MCT repair. Existing published suppliers suffice; no new Phase-2 pair. Exact hash, clauses and specialization: `research/phase-2-next-20-published-author-handoff-reconciliation.md`; earlier evidence retained in Published Marcinkiewicz interpolation: local repair, no new pair. |
 | `lem-binomial-theorem-over-complex-numbers` | Original-next-20 author-handoff reconciliation 2026-09-11: proof 1.1 falsely calls the `n=0` right side an empty sum; it is the one term `k=0`, equal to one by `binom(0,0)=1` and both zeroth powers. Compute that term explicitly. The stated identity and the induction route remain sound; generic finite-monoid sums are an adequate implicit published interface. Existing suppliers suffice; no new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-author-handoff-reconciliation.md`. |
