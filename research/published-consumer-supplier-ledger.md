@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1417, U-C 15, A-R 187, A-P 168. The
+Current classifications: U-P 1413, U-C 15, A-R 187, A-P 168. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -186,6 +186,22 @@ and `thm-chain-rule` are coherent in the exact calculus and
 Riemann-to-Lebesgue clauses used by the same path. They move from U-P to bounded
 clear. Exact hashes, alias searches, proof clauses and audit limits are in
 `phase-2-next-20-published-levy-inversion-prerequisite-audit.md`.
+
+The active complex-L2 rectangle-density path has no uncovered published defect
+in the audited scope. The finite-rectangle algebra's Boolean-atom construction
+supplies its terse finite complement/difference step, and the finite-measure
+generating-algebra argument uses only finite choice after one tail cutoff. The
+completion representative theorem explicitly assumes countable choice and
+uses it for its countable family of base-measurable cores. The live consumer
+assumes full Choice and explicitly passes through AC implies CC.
+
+The real and complex simple-density clauses, dyadic approximations, complex
+quotient norm, L2 pairing, Holder, Minkowski, integral triangle inequality,
+zero-integral criterion and a.e.-equality interface were read through their
+exact uses. Four existing U-P rows move to bounded clear and ten fully read
+items enter the bounded-clear census. Exact hashes, proof receipts and audit
+limits are in
+`phase-2-next-20-published-rectangle-density-prerequisite-audit.md`.
 
 ## Locally convex published-prerequisite audit — 2026-09-11
 
@@ -27868,6 +27884,20 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `lem-finite-rectangle-unions-form-a-generating-algebra` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: the complete target and product-set interfaces were read. Its measurable Boolean product atoms form a finite disjoint partition jointly refining any finite rectangle family, which supplies union, complement and difference closure despite terse step-2 wording. U-P to bounded clear under the correct implicit-use rule. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
+| `thm-completion-measurable-functions-have-base-measurable-representatives` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Explicit CC licenses the countable family of base-measurable level-set cores; their null errors have null union, and the base-measurable limsup equals the completed-measurable function off it. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
+| `lem-finite-measure-sets-are-approximable-by-a-generating-algebra` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Complement closure and countable-union closure follow from a finite initial union, finitely many algebra approximants, continuity from below and subadditivity. New bounded-clear census entry; finite choice is a correct implicit adequate use. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
+| `thm-complex-finite-simple-and-smooth-compact-support-density-for-finite-p` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full target read, with bounded disposition for the used arbitrary-measure finite-simple clause. Approximate real and imaginary components separately, recombine under component norm bounds, and use the union of their finite-measure nonzero sets. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
+| `thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. A.e. independence, linear-first-variable convention, quadratic Cauchy--Schwarz expansion, zero case and finite-tuple common-scalar equality are coherent. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
+| `thm-simple-functions-with-finite-measure-support-are-dense-in-l-p-for-finite-p` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. The supplied dominated simple sequence, threshold cutoff, finite-support measure bound and DCT majorant establish the finite-p density clause. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
+| `thm-complex-holder-minkowski-and-the-quotient-norm` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Modulus reduction, endpoint essential bounds, representative independence and quotient definiteness supply the exact complex norm and Holder clauses. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
+| `cor-measurable-functions-admit-dominated-simple-approximations` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Explicit positive/negative dyadic sequences recombine into finite real simple functions dominated by the modulus and converging also at either extended-real infinity. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
+| `thm-nonnegative-measurable-functions-admit-increasing-simple-approximations` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. The explicit dyadic truncations are measurable, increasing, dominated, pointwise convergent including at infinity, and uniformly convergent under a finite bound. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
+| `thm-nonnegative-integral-zero-iff-zero-almost-everywhere` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Threshold null sets prove the forward direction and every simple minorant is null-supported in the reverse direction. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
+| `thm-holder-inequality-for-integrals` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Zero norms are separated before normalization; real Young proves strict exponents and least essential bounds prove both endpoints. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
+| `thm-minkowski-inequality-for-integrals` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Integrability is established before Holder, the zero norm is separated before division, and one/infinity endpoints are direct. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
+| `thm-integral-triangle-inequality` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Real order bounds and the nonzero-integral phase `conj(I)/|I|` establish the real and complex cases with the zero case separate. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
+| `thm-the-lebesgue-integral-respects-almost-everywhere-equality` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Null support proves equality of all indefinite integrals, and positive/negative tests for both components prove the converse. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
 | `thm-ftc-second-part` | Original-next-20 Levy-inversion prerequisite audit, 2026-09-11: full target and exact mean-value/Darboux interfaces read. Applying MVT to an arbitrary fixed interval yields universally quantified lower/upper inequalities, so the proof sums without selecting tags; telescoping and Darboux integrability give the endpoint formula. U-P to bounded clear. Exact aliases, hash and scope: `research/phase-2-next-20-published-levy-inversion-prerequisite-audit.md`. |
 | `thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral` | Original-next-20 Levy-inversion prerequisite audit, 2026-09-11: full target and exact envelope/completeness interfaces read. Explicit CC supplies the Borel envelopes; zero integral makes them equal a.e., completeness transfers measurability, finite-interval domination gives integrability, and a.e. equality gives equality of integrals. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-levy-inversion-prerequisite-audit.md`. |
 | `thm-chain-rule` | Original-next-20 Levy-inversion prerequisite audit, 2026-09-11: full target and Caratheodory interfaces read. The two increment factorizations, continuous composition and product give the composite factor with the correct value, without division or an omitted case. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-levy-inversion-prerequisite-audit.md`. |
@@ -29669,7 +29699,6 @@ mathematical repairs. Evidence:
 | `lem-finite-measure-uniqueness-on-a-pi-system` | Completed-measurable change of variables |
 | `lem-finite-modules-over-noetherian-rings-are-noetherian` | Existing published suppliers consumed by published Complex Analysis |
 | `lem-finite-products-of-standard-borel-spaces-are-standard-borel` | 0A.2 Exact Phase-3 defects in published content |
-| `lem-finite-rectangle-unions-form-a-generating-algebra` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `lem-finite-refining-small-diameter-covers-of-compact-metric-spaces` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `lem-finite-residue-field-projective-dimension-forces-depth-equals-dimension` | Item-exact impact of the Dependent Choice rehome |
 | `lem-finite-simplicial-approximation-for-homology-comparison` | 13.5 Supplier-pair to consumer map |
@@ -30077,7 +30106,6 @@ mathematical repairs. Evidence:
 | `thm-closed-projective-embedding-by-homogeneous-generators` | AV-1 draft-page impact partition (Phase 3 only) |
 | `thm-cofinality-basics` | 7.1 Recorded-Not-Proved closure and prose defects |
 | `thm-compactness-variants-hierarchy` | Early-repair direct-consumer inventory — 2026-09-08 |
-| `thm-completion-measurable-functions-have-base-measurable-representatives` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-completion-of-a-measure-space` | Nonmeasurable-set counterexample: missing witness supply |
 | `thm-completion-preserves-regular-local-rings` | Item-exact impact of the Dependent Choice rehome |
 | `thm-complex-exponential-is-entire-with-derivative-itself` | Existing published suppliers consumed by published Complex Analysis |
@@ -30246,8 +30274,6 @@ mathematical repairs. Evidence:
 | `thm-non-elementary-hyperbolic-groups-contain-a-rank-two-free-subgroup` | HG consumer map |
 | `thm-non-negative-square-root-exists-and-is-unique` | 0A.3 Exact page-requirement amendments |
 | `thm-nonnegative-continuous-with-zero-integral-vanishes` | 9.5 Forward order and load-bearing body links |
-| `thm-nonnegative-integral-zero-iff-zero-almost-everywhere` | 0A.2 Exact Phase-3 defects in published content |
-| `thm-nonnegative-measurable-functions-admit-increasing-simple-approximations` | Published Marcinkiewicz interpolation: local repair, no new pair |
 | `thm-norm-inequality-for-the-vector-valued-integral` | 9.5 Forward order and load-bearing body links |
 | `thm-norm-preserving-extension-from-any-subspace` | norming-and-separation-under-hahn-banach |
 | `thm-normal-equations-for-best-affine-l2-prediction` | 0A.2 Exact Phase-3 defects in published content |

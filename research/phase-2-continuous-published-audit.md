@@ -180,11 +180,26 @@ within-class or cross-class duplicate; all 2,398 indexed IDs resolve to current
 published items. The current published census is 15,930, leaving 13,532 outside
 the index.
 
+The active complex-L2 rectangle-density chain has no uncovered published
+defect in the audited scope. Four existing U-P targets move to bounded clear
+and ten fully read items enter the bounded-clear census. The rectangle
+Boolean-atom argument supplies its compressed finite set-algebra step; the
+completion representative theorem explicitly carries CC; and the real/complex
+simple-density, quotient-norm, pairing and exact integral inequalities are
+coherent in their used clauses. The live consumer assumes AC. Exact evidence:
+`research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`.
+
+Post-rectangle-density target index: 2,408 unique published IDs; U-P 1,413,
+U-C 15, A-R 187, A-P 168 and 625 bounded clears. Mechanical recount confirms
+no within-class or cross-class duplicate; all 2,408 indexed IDs resolve to
+current published items. The current published census is 15,930, leaving
+13,522 outside the index.
+
 ## Next target
 
-1. Audit `lem-finite-rectangle-unions-form-a-generating-algebra` and
-   `thm-completion-measurable-functions-have-base-measurable-representatives`,
-   the exact published inputs to the active complex-L2 rectangle-density path.
+1. Audit batch 12's published machine-code and step-by-step interpreter
+   interfaces, prioritizing the simulator-time author hold only if it reaches a
+   published statement or proof.
 2. Reconcile any further exact next-20 or Fourier published-interface issues
    reported by the root worker without auditing draft readiness.
 3. Continue through original next-20 batches by actual prerequisite pressure,
