@@ -107,6 +107,12 @@ Successful final adjudication freezes the result and proceeds to Step 8.
 record of published items needing Phase-3 proof, definition, dependency or
 page-header repairs. Record each finding promptly with exact item/page IDs,
 evidence, required repair, supplying prerequisites and status.
+Keep this ledger limited to published-item defects and their audit evidence.
+Do not add engine status, dispatches, queues, retries, pause/resume history,
+recording conflicts, workflow hashes, handovers, or draft-only implementation
+notes. Put those in the run record. Link supporting audit evidence instead of
+copying operational transcripts. Update an existing defect entry only when its
+mathematical finding, supplier mapping, repair strategy or audit status changes.
 For each target, identify the exact Phase-2 supplier items and their current
 build/publication states, and record a recommended proof strategy with source
 evidence. During monitoring intervals, audit additional published items and

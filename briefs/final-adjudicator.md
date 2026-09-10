@@ -12,6 +12,10 @@ Alpha's conversation. Read
 `CLAUDE.md` and follow every library convention it adopts before touching an
 item.
 
+The published-defect ledger is for published mathematical findings, suppliers,
+repair strategies and audit status only. Keep dispatches, queue/hash conflicts,
+recording completion and engine history in run evidence, never in that ledger.
+
 Your task file is a dependency-first queue for one Alpha group. Process it
 strictly **one item at a time**. Do not begin substantive review of item N+1
 until item N has either been accepted or independently repaired, checked, and
