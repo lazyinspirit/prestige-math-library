@@ -9,13 +9,17 @@ that one frontier: `phase-2-next-20` owns the original20 and
 and completion scope; the Fourier pairs do not replace any original pair.
 
 The owner directs authoring all22 immediately. All22 received live author
-coverage at16:21 UTC. At17:39 UTC, three original author groups continue; the
-locally convex, computability, hyperbolic, Chacon/Kolmogorov/Carleson, set-theory and Fourier author passes have finished. Some passes retain explicit incomplete arguments. The
-computability time-simulator escalation is repaired and its two unavailable
-source obligations are resolved by complete local alternatives. Fourier's
-57 items cleared final author gates, the engine completed its plan splice and
-post-author snapshot, and independent group review started17:07 UTC. Review gates subsequently passed and the engine entered cross-group reconciliation by17:37 UTC.
-Root and the delegated Astra agent have resolved five hyperbolic proof holds, bringing that pair to31/36 completed arguments. Neither execution partition is paused. Original101 ready/442 held scaffold
+coverage at16:21 UTC. At18:10 UTC, the original topology author continues;
+the other original author passes and Fourier authoring have finished, with
+remaining mathematical and source obligations retained explicitly. Current
+closed authoring decisions include Chacon/ergodic24/24, probability and
+martingales81/81, hyperbolic toolkit36/36, convergence batch55/55 and
+computability22/22. Closed authoring decisions are not independent review.
+Laver-function existence is repaired; preparation and PMEA remain incomplete.
+Carleson and finite-Weyl repairs continue within the selected existing pages.
+Fourier's57 items passed author gates and Step4 splicing, then independent
+Step5a review; Step5b reconciliation is resolving its recorded workflow findings.
+Neither execution partition is paused. Original101 ready/442 held scaffold
 records remain historical evidence; current authored decisions track repairs.
 Scope approval does not approve proofs. All independent review gates remain,
 and frontier completion requires closing all22 pairs. See
