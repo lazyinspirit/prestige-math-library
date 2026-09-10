@@ -452,6 +452,17 @@ Post-boundary-partition counts: 2,473 unique published IDs; U-P 1,411, U-C 15,
 A-R 187, A-P 189 and 671 bounded clears. The current census leaves 13,457
 published IDs outside the index.
 
+The finite-Weyl repair now has an exact local draft replacement for the open
+Killing-form nondegeneracy defect. Draft
+`def-finite-semisimple-lie-algebra-and-symmetric-adjoint-action` fixes the
+conventions, and draft
+`lem-finite-lie-engel-trace-criterion-and-killing-nondegeneracy` gives a full
+finite Engel, trace-solvability and Killing-radical proof without any choice
+principle. Both items remain unpublished and await owner review, so the
+existing A-P row stays open and the classification counts do not change. The
+exact hashes, clauses and author receipt are mapped in
+`research/phase-2-next-20-published-killing-form-prerequisite-audit.md`.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
@@ -462,5 +473,5 @@ published IDs outside the index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,469 published items
+No exhaustive discovery claim is authorized while 13,457 published items
 remain outside the index and dependency interfaces remain unaudited.

@@ -98,6 +98,39 @@ The active draft Kostant harmonic definition also needs the nondegenerate form,
 but draft readiness does not create a published classification row. No new
 Phase-2 pair beyond the already planned DG structure chain is identified.
 
+## Exact draft supplier update — 2026-09-11
+
+The finite-Weyl author has now supplied the exact nondegeneracy branch locally
+on the existing A page. The draft definition
+`def-finite-semisimple-lie-algebra-and-symmetric-adjoint-action`, current
+SHA-256
+`12b20b36612501ab31c8f198719f075440f25a660b1cebe177cccf6ae2302025`,
+states the finite-dimensional Lie, solvable, semisimple, trace-form and
+symmetric-adjoint conventions without assuming nondegeneracy. The draft lemma
+`lem-finite-lie-engel-trace-criterion-and-killing-nondegeneracy`, current
+SHA-256
+`60cc07a6881e99ec4d969f8a7a576d9d9e24f97d8f616527e9e7c8216ff38b50`,
+then proves symmetry, invariance and the exact nondegeneracy conclusion used by
+the published target.
+
+The complete draft proof was read for this mapping. It proves Engel's common-
+kernel and strict-triangular forms by finite-dimensional induction; constructs
+the conjugate-spectrum operator by primary decomposition and finite Hermite
+interpolation; derives the trace solvability criterion; and applies it to the
+Killing radical, whose adjoint action is zero on the ambient quotient. The
+radical is thereby a solvable ideal and vanishes by the stated semisimplicity
+convention. Every selection is finite and no AC is used. The exact author/source
+and local-check record is
+`research/phase-2-next-20-finite-weyl-killing-repair-receipt.md`, SHA-256
+`50af3157881e131592f067eaf7d96fcc28d8670aee998183eafc46cb3e5d9445` at this
+audit.
+
+Both supplying items remain draft and have not received owner review or
+publication. They therefore sharpen the existing repair mapping but do not
+close or reclassify the published Killing proposition. Phase 3 should replace
+its unsupported proof 2.1 by the accepted/published lemma (or the same full
+argument), with the definition strictly earlier. No new page pair is needed.
+
 The next three published root-chain items were also read because they feed the
 already-A-P root-system theorem.
 
