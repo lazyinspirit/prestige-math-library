@@ -1,0 +1,1394 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-pid-submodules-of-free-modules-are-free-with-choice",
+    "lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces",
+    "lem-pid-tensor-two-term-pieces-have-the-kunneth-kernel-and-cokernel",
+    "thm-pid-kunneth-exactness-from-cycle-boundary-presentations",
+    "thm-pid-kunneth-splitting-from-cycle-boundary-presentations",
+    "ex-pid-polynomial-ring-kunneth-tor-class",
+    "ex-pid-kunneth-over-a-field-has-no-tor-correction"
+  ],
+  "scope_note": "Seven new Step-5 Kunneth items. The 49 Tor items are already published and this dispatch is page-release-only for that pair; their existing proofs and publication evidence are read-only, not reauthored or recertified here.",
+  "contracts": {
+    "lem-pid-submodules-of-free-modules-are-free-with-choice": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-principal-ideal-domain",
+          "source_section": "Definition",
+          "quote": "An integral domain $R$ is a **principal ideal domain** (PID) if every ideal\n$I\\mathrel{\\trianglelefteq}R$ is principal: there is an $a\\in R$ with $I=(a)$.\n\nThe domain hypothesis is part of the term. A ring in which all ideals are\nprincipal but which has zero divisors is not called a PID here.",
+          "uses": [
+            "2.1",
+            "3.2"
+          ],
+          "use": "Step 2.1 uses principality after proving J_a is an ideal; step 3.2 uses absence of zero divisors on r_a rho_a."
+        },
+        {
+          "fact": "F2",
+          "source": "def-free-module-on-a-set-and-standard-basis",
+          "source_section": "Definition",
+          "quote": "For a unital ring $R$ and a set $X$, the **free left $R$-module on $X$** is\n$$R^{(X)}:=\\bigoplus_{x\\in X}R.$$\nFor $x\\in X$, the **standard basis vector** $e_x$ has coordinate $1_R$ at $x$ and zero elsewhere. Every element has a unique expression\n$$\\sum_{x\\in F}r_xe_x$$\nwith $F\\subseteq X$ finite. The map $x\\mapsto e_x$ is the standard basis inclusion.\n\nMore generally, a family $(b_x)_{x\\in X}$ is a **basis** of a module $M$ when every element of $M$ is uniquely a finite $R$-linear combination of the $b_x$ ([[def-generated-cyclic-finitely-generated-and-free-modules]]). For $X=\\varnothing$, $R^{(X)}=0$ and its empty family is a basis.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ],
+          "use": "Finite-support basis expansions define p_a, give greatest support indices, and characterize the final basis."
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "2.1"
+          ],
+          "use": "Select the explicitly nonempty generator/lift pair sets."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-well-ordering-theorem",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice ([[def-axiom-of-choice]]). Then **every set $X$ can\nbe well ordered**: there is a relation on $X$ making it a well-ordered set\n([[def-well-order]]).\n\nThe Axiom of Choice is used only inside [[thm-zorn]], and nowhere else in the\nargument below.",
+          "uses": [
+            "1.1"
+          ],
+          "use": "The given AC assumption licenses a well-order of the supplied basis index set."
+        },
+        {
+          "fact": "F5",
+          "source": "thm-transfinite-induction",
+          "source_section": "Statement",
+          "quote": "Let $(W, <)$ be a well-order ([[def-well-order]]) and let $S \\subseteq W$\nsatisfy the following: for every $a \\in W$, if $W_{<a} \\subseteq S$ then\n$a \\in S$ ([[def-initial-segment]]). Then $S = W$.\n\nIn property form: if a property $P$ of elements of $W$ satisfies \"whenever\n$P(x)$ holds for every $x < a$, it holds at $a$\", then $P(a)$ holds for every\n$a \\in W$.\n\n**This is a theorem of ZF.** No form of the Axiom of Choice is used. Choice is\nperfectly available at this point in the library, since Zorn's lemma is proved\nfrom it on the previous page; the claim made here is about this proof, which\nnever invokes it.",
+          "uses": [
+            "4.1"
+          ],
+          "use": "The closure hypothesis is proved in step 3.1 before applying transfinite induction in step 4.1."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "A well-ordered basis defines linear coordinate projections and initial-segment submodules.",
+          "inputs": [
+            "A supplied basis of F",
+            "AC",
+            "N is a submodule of F",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Each coordinate image is an ideal; AC selects a nonzero generator and a lift at every nonzero image.",
+          "inputs": [
+            "p_a is linear",
+            "N intersect F_{<=a} is a submodule",
+            "R is a PID",
+            "S is the set of indices with J_a nonzero",
+            "1.1",
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Subtracting a multiple of u_a reduces an element to a strictly earlier finite-support stage, proving the induction closure condition.",
+          "inputs": [
+            "x in N intersect F_{<=a}",
+            "Spanning is assumed at every index below a",
+            "The a coordinate of u_a generates J_a",
+            "The reduced vector is zero or has a greatest support index below a",
+            "1.1",
+            "2.1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-3.2",
+          "step": "3.2",
+          "claim": "Every finite relation among the u_a has zero coefficients, by the greatest nonzero coordinate and the domain property.",
+          "inputs": [
+            "Finite support of the relation",
+            "p_a(u_a)=rho_a is nonzero",
+            "u_b has zero a coordinate when b<a",
+            "R has no zero divisors",
+            "1.1",
+            "2.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "Transfinite induction proves spanning of N, including limit initial segments.",
+          "inputs": [
+            "The closure condition established at step 3.1",
+            "Every nonzero vector has finite support with a greatest index",
+            "3.1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "step": "5.1",
+          "claim": "The spanning independent family is a basis; zero and rank-one cases give the empty basis or a single ideal generator.",
+          "inputs": [
+            "Spanning",
+            "Linear independence",
+            "N=0 implies every coordinate image is zero",
+            "4.1",
+            "3.2",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 5.1: empty ambient basis forces F=N=0 and the constructed basis is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 5.1: zero coordinate ideals require no lift, and N=0 has empty basis."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1: rank-one ambient module gives the zero ideal or a single nonzero ideal generator."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 treats a zero reduced vector as an empty sum; step 5.1 treats N=0."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the empty predecessor set at the least index; step 4.1 covers limit cuts by finite support."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1: AC well-orders the basis and selects only from the explicitly nonempty generator/lift pair sets."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way submodule-freeness assertion; it asserts no equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The statement is a one-way submodule-freeness assertion; it asserts no equivalence."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b-batch-5",
+        "notes": "Proof 1.1–5.1 handles arbitrary rank by a well-order, AC selection from nonempty generator/lift pairs, and greatest finite support. The induction hypothesis is checked before use and includes limit cuts; independence uses the domain property. Empty basis, zero submodule and rank one are covered. Garrett §6, Theorem 6.0.1 pp.177–178 was read in full and supports the construction. No finite-generation reduction is assumed. Read every current proof step and the matching contract derivations, citations and boundary dispositions. No unresolved mathematical risk; this is local 6B review, not a judge or publication stamp."
+      }
+    },
+    "lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-cycle-boundary-short-exact-sequences-for-a-free-complex-over-a-pid",
+          "source_section": "Statement",
+          "quote": "For every chain complex $C$, the differential and quotient maps give exact sequences $0\\to Z_nC\\to C_n\\xrightarrow{d_n}B_{n-1}C\\to0$ and $0\\to B_nC\\to Z_nC\\to H_nC\\to0$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ],
+          "use": "Its two exact sequences provide the differential surjection and free homology presentation; d squared zero places boundaries in cycles."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pid-submodules-of-free-modules-are-free-with-choice",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. If $R$ is a commutative principal ideal domain, $F$ is a free $R$-module on an arbitrary set, and $N\\subseteq F$ is a submodule, then $N$ is free.",
+          "uses": [
+            "1.1"
+          ],
+          "use": "Apply to the actual submodules Z_nC and B_nC of the free term C_n under the same PID/AC hypotheses."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-free-modules-are-projective-with-choice-boundary",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Every free module is projective. More precisely, if $F$ has basis $(e_x)_{x\\in X}$, a lift of a map $F\\to M$ through a surjection $E\\to M$ is obtained by choosing one preimage of each basis value. For finite $X$, finite choice suffices and no form of AC is needed; for $X=\\varnothing$, the lift is the unique map from $0$.",
+          "uses": [
+            "2.1"
+          ],
+          "use": "Lift the identity of the free module B_{n-1}C through the differential surjection."
+        },
+        {
+          "fact": "F4",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "2.1"
+          ],
+          "use": "Select one of the existing sections in every degree, including the unique zero-domain section."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Cycles and boundaries are free submodules and give length-one free presentations of homology.",
+          "inputs": [
+            "C_n is free over the PID R",
+            "d_n d_{n+1}=0",
+            "AC",
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "There is a simultaneous family of sections s_n, with the unique zero-domain section at n=0.",
+          "inputs": [
+            "C_n surjects onto the free module B_{n-1}C",
+            "Lift the identity of B_{n-1}C",
+            "AC for the family of nonempty sets of sections",
+            "1.1",
+            "F1",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "The maps u_n(z,b)=z+s_n(b) and v_n(c)=(c-s_n(d_nc),d_nc) are linear inverse maps.",
+          "inputs": [
+            "d_n s_n=id",
+            "d_n z=0",
+            "z in Z_nC and b in B_{n-1}C",
+            "2.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "The differential in these coordinates is (z,b) mapped to (b,0), identifying the direct sum of the two-term pieces as a chain complex.",
+          "inputs": [
+            "d_n u_n(z,b)=b",
+            "d_{n-1}b=0",
+            "Only pieces p=n and p=n-1 occur in degree n",
+            "3.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "step": "5.1",
+          "claim": "Inclusion and corestricted differential give the canonical degreewise split short exact sequence, also for D and zero terms.",
+          "inputs": [
+            "d_C kills cycles",
+            "d_C squared is zero",
+            "ker d_n=Z_nC and im d_n=B_{n-1}C",
+            "The sections exist degreewise, not necessarily as chain maps",
+            "2.1",
+            "4.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 4.1: a degree contains only its two specified pieces, with negative-index pieces zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 5.1: all maps and identities apply to the zero complex."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1: degree one consists of Z_1C and B_0C with differential into Z_0C."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1: B_{-1}C=0 uses the unique zero-domain section; step 3.1 still gives inverse maps."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 5.1 cover n=0 explicitly; there is no upper degree bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1: every section set is nonempty by free projectivity before AC selects all sections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 computes u_n v_n(c)=c."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 computes v_n u_n(z,b)=(z,b)."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b-batch-5",
+        "notes": "Cycles and boundaries are actual submodules of C_n, so the preceding arbitrary-rank lemma applies under AC. Free projectivity supplies each differential section before AC selects the family. The displayed inverse maps and differential (z,b)->(b,0) give the chain decomposition with two summands per degree. The canonical cycle sequence is only degreewise split, never claimed split as complexes or at B_p->Z_p. Zero and degree-zero cases are explicit. Read every current proof step and the matching contract derivations, citations and boundary dispositions. No unresolved mathematical risk; this is local 6B review, not a judge or publication stamp."
+      }
+    },
+    "lem-pid-tensor-two-term-pieces-have-the-kunneth-kernel-and-cokernel": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $R$ be a commutative PID and $C$ a nonnegative chain complex of free $R$-modules of arbitrary rank. Set $Z_nC=\\ker d_n$, $B_nC=\\operatorname{im}d_{n+1}$, and $B_{-1}C=0$. Cycles and boundaries are free. There are sections $s_n:B_{n-1}C\\to C_n$ of the differential corestricted to its image, giving\n$$C_n\\cong Z_nC\\oplus B_{n-1}C,\\qquad c\\longmapsto(c-s_n(d_nc),d_nc).$$\nIn these coordinates the differential is $(z,b)\\mapsto(b,0)$, with $b$ included in $Z_{n-1}C$. Consequently $C$ is isomorphic to the direct sum of the two-term free complexes $B_pC\\hookrightarrow Z_pC$ in degrees $p+1,p$.\n\nLet $Z(C)_n=Z_nC$ and $A(C)_n=B_{n-1}C$, both with zero differential. There is a canonical degreewise split short exact sequence of complexes\n$$0\\longrightarrow Z(C)\\xrightarrow{\\iota}C\\xrightarrow{\\rho}A(C)\\longrightarrow0,\\qquad \\rho_n=d_n:C_n\\to B_{n-1}C.$$\nThe same assertions apply to any such complex $D$. No splitting of $B_pC\\hookrightarrow Z_pC$ is asserted.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.1"
+          ],
+          "use": "Use its canonical cycle sequence, sections and free presentations for C and D; all are nonnegative free PID complexes under AC."
+        },
+        {
+          "fact": "F2",
+          "source": "def-tensor-product-total-complex-of-chain-complexes",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a ring, $P$ a chain complex of right $R$-modules and $Q$ a chain complex of left $R$-modules. Define $(P\\otimes_RQ)_n=\\bigoplus_{p+q=n}P_p\\otimes_RQ_q$, the direct sum over the degree-$n$ diagonal, and $d(p\\otimes q)=d_Pp\\otimes q+(-1)^pp\\otimes d_Qq$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ],
+          "use": "The finite-diagonal, commutative PID situation has compatible right/left modules; use the exact Koszul formula in the chain-map, homology, and connecting calculations."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-the-tensor-total-differential-is-well-defined-and-squares-to-zero",
+          "source_section": "Statement",
+          "quote": "Let $P$ be a chain complex of right $R$-modules and $Q$ a chain complex of left $R$-modules.  On the finite-diagonal total module $\\operatorname{Tot}(P\\otimes_RQ)$, the formula $d(p\\otimes q)=d_Pp\\otimes q+(-1)^pp\\otimes d_Qq$ is balanced and satisfies $d^2=0$.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "3.1"
+          ],
+          "use": "The finite-diagonal, commutative PID situation has compatible right/left modules; use the exact Koszul formula in the chain-map, homology, and connecting calculations."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-tensor-products-commute-with-arbitrary-direct-sums",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring, let $(M_i)_{i\\in I}$ be any family of $R$-modules, and let $N$ be an $R$-module. The homomorphism induced by the coordinate inclusions is a natural $R$-module isomorphism\n\n$$\\Phi:\\bigoplus_{i\\in I}(M_i\\otimes_RN)\\longrightarrow\\left(\\bigoplus_{i\\in I}M_i\\right)\\otimes_RN,$$\n\n$$\\Phi\\bigl(\\jmath_i(m\\otimes n)\\bigr)=\\jmath_i(m)\\otimes n.$$\n\nThe same holds with the direct sum in the second variable: there is a natural $R$-module isomorphism\n\n$$\\Phi':\\bigoplus_{i\\in I}(N\\otimes_RM_i)\\longrightarrow N\\otimes_R\\left(\\bigoplus_{i\\in I}M_i\\right),\\qquad \\Phi'\\bigl(\\jmath_i(n\\otimes m)\\bigr)=n\\otimes\\jmath_i(m).$$\n\nThe assertion includes $I=\\varnothing$, when both sides are zero.",
+          "uses": [
+            "1.2",
+            "1.3"
+          ],
+          "use": "Use only the commutative-ring direct-sum isomorphisms to tensor split degrees and expand a free module into copies of D."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-long-exact-sequence-in-homology",
+          "source_section": "Statement",
+          "quote": "Let\n$$0\\to A_\\bullet\\to B_\\bullet\\to C_\\bullet\\to0$$\nbe a short exact sequence of complexes in an abelian category. Then there is an\nexact sequence\n$$\\cdots\\to H_n(A)\\to H_n(B)\\to H_n(C)\\xrightarrow{\\partial_n}H_{n-1}(A)\\to H_{n-1}(B)\\to H_{n-1}(C)\\to\\cdots.$$",
+          "uses": [
+            "3.1",
+            "5.1"
+          ],
+          "use": "The short exact sequence of complexes is established in step 1.2; apply its LES and lift-boundary definition to that sequence."
+        },
+        {
+          "fact": "F5",
+          "source": "def-balanced-tor-bifunctor",
+          "source_section": "Definition",
+          "quote": "Assume Dependent Choice (DC), as in [[def-dependent-choice]], and work with\nsupplied projective resolutions of the modules under consideration. For a\nright $R$-module $N$, a left $R$-module $M$, and $i\\geq0$, define\n$\\operatorname{Tor}_i^R(N,M)$ to be either $H_i(N\\otimes_RP_\\bullet)$ for a\nprojective resolution of $M$ or $H_i(Q_\\bullet\\otimes_RM)$ for a projective\nresolution of $N$, identified by\n[[thm-left-and-right-projective-constructions-of-tor-are-naturally-isomorphic]].\nOn module maps use the well-defined homology maps from\n[[prop-each-tor-construction-is-covariant-in-both-variables]]. The natural\ncoherent identifications of\n[[prop-the-tor-balance-isomorphism-is-natural-and-coherent-under-change-of-resolutions]]\nmake this a covariant bifunctor up to canonical change-of-resolution\nisomorphism, not literal equality between different resolution complexes.\n\nDC licenses the comparison maps and homotopies in those suppliers. Existence\nof projective resolutions for arbitrary modules is a separate prerequisite,\nnot a consequence asserted here of DC. When such existence and a system of\nresolutions have separately been supplied, this gives the usual Tor bifunctor\non the corresponding module categories. Without DC, homology of a specified\ntensor-resolution complex is still defined; claiming the balanced bifunctor\nthen requires explicit comparison and coherence data instead of silently\ninvoking the DC-bearing theorems.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ],
+          "use": "Step 1.1 proves DC and supplies both resolutions; step 2.2 computes degree-one homology of the first-variable resolution."
+        },
+        {
+          "fact": "F6",
+          "source": "thm-right-exactness-of-tensor-products",
+          "source_section": "Statement",
+          "quote": "Let $R$ be a commutative ring, let\n\n$$A\\xrightarrow{f}B\\xrightarrow{g}C\\longrightarrow0$$\n\nbe an exact sequence of $R$-modules, and let $N$ be an $R$-module. Then\n\n$$A\\otimes_RN\\xrightarrow{f\\otimes1}B\\otimes_RN\\xrightarrow{g\\otimes1}C\\otimes_RN\\longrightarrow0$$\n\nis exact. Thus tensoring preserves cokernels and surjections, but no injectivity at the left is asserted.",
+          "uses": [
+            "2.2"
+          ],
+          "use": "The short free presentation is exact and R is commutative, so its tensor cokernel is the claimed tensor of homology modules."
+        },
+        {
+          "fact": "F7",
+          "source": "lem-the-kunneth-tor-map",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $R$ be a PID and $C,D$ complexes of free $R$-modules with finite diagonals. For every $n\\in\\mathbb Z$, the cycle-boundary presentations induce a natural surjection\n$$\\pi_n:H_n(C\\otimes_RD)\\longrightarrow\\bigoplus_{p+q=n-1}\\operatorname{Tor}_1^R(H_pC,H_qD).$$",
+          "uses": [
+            "5.1"
+          ],
+          "use": "Statement supplies the named natural quotient; equality of maps is checked against its proof steps 1.1–5.1, specifically corestriction in 5.1, using identical rho and free presentations."
+        },
+        {
+          "fact": "F8",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1",
+            "1.3"
+          ],
+          "use": "Select successors from nonempty fibers for DC; the finite preimages in the coordinate homology calculation also exist under AC."
+        },
+        {
+          "fact": "F9",
+          "source": "thm-recursion",
+          "source_section": "Statement",
+          "quote": "Let $(N,0,\\sigma)$ be a Peano system ([[def-peano-system]]), in particular the natural numbers $\\mathbb{N}$ ([[def-natural-numbers]]). For any set $A$, any element $a \\in A$, and any function $f : A \\to A$, there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$.",
+          "uses": [
+            "1.1"
+          ],
+          "use": "Apply recursion to the selected successor self-map and prescribed initial point."
+        },
+        {
+          "fact": "F10",
+          "source": "def-dependent-choice",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $R \\subseteq X \\times X$ be a binary relation on $X$.\nCall $R$ **entire on $X$** when\n\n$$\\text{for every } x \\in X \\text{ there is } y \\in X \\text{ with } x \\mathbin{R} y .$$\n\nThe **Axiom of Dependent Choice**, written $\\mathrm{DC}$, is the following\nstatement.\n\n> For every nonempty set $X$, every relation $R$ entire on $X$, and every\n> $a \\in X$, there is a function $x : \\mathbb{N} \\to X$ ([[def-function]],\n> [[def-natural-numbers]]) with\n> $$x_0 = a \\qquad \\text{and} \\qquad x_n \\mathbin{R} x_{n+1} \\ \\text{ for every } n \\in \\mathbb{N}.$$\n\nHere a sequence in $X$ means a function from $\\mathbb{N}$ to $X$, not necessarily\na real-valued sequence. As everywhere in this library $\\mathbb{N}$ contains $0$, and the sequence is\nindexed from $0$; the term $x_0$ is the prescribed starting point $a$ and every\nlater term is related to its predecessor.\n\n**What DC adds to what came before.** [[def-choice-function]] and\n[[def-axiom-of-choice]] select one element from each member of a family that is\nfixed in advance, and [[def-countable-choice]] does the same for a family indexed\nby $\\mathbb{N}$. In both, the family is given before any selection is made. DC is\nthe principle needed when the $n$-th set to select from is not known until the\nfirst $n$ selections have been made: here the admissible values of $x_{n+1}$ are\nexactly the $R$-successors of $x_n$, so the family being chosen from is built\nalong the choosing. That is precisely the situation $\\mathrm{AC}_\\omega$ does not\ncover, and it is why a construction \"pick $x_{n+1}$ depending on $x_n$, for every\n$n$ at once\" is not licensed by countable choice.\n\n**The starting point may be dropped.** The formally weaker statement obtained by\ndeleting the clause $x_0 = a$ — for every nonempty $X$ and every entire $R$ there\nis a sequence with $x_n \\mathbin{R} x_{n+1}$ for all $n$ — is an immediate\nconsequence of the form above, since $X$ is nonempty and any of its elements may\nbe taken as $a$. The reverse derivation is standard and is not needed anywhere in\nthis library, so it is not carried out; every use below prescribes $x_0$.\n\n**$R$ need not be an order and the terms need not be distinct.** What DC delivers\nis a sequence, that is a function $\\mathbb{N} \\to X$, not a chain in the\norder-theoretic sense ([[def-chain]]). The relation may be symmetric, and the\nsequence may repeat a value or be constant; all that is asserted is\n$x_n \\mathbin{R} x_{n+1}$ at every index.",
+          "uses": [
+            "1.1"
+          ],
+          "use": "The recursive sequence satisfies the exact prescribed-point DC definition."
+        },
+        {
+          "fact": "F11",
+          "source": "thm-free-modules-are-projective-with-choice-boundary",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Every free module is projective. More precisely, if $F$ has basis $(e_x)_{x\\in X}$, a lift of a map $F\\to M$ through a surjection $E\\to M$ is obtained by choosing one preimage of each basis value. For finite $X$, finite choice suffices and no form of AC is needed; for $X=\\varnothing$, the lift is the unique map from $0$.",
+          "uses": [
+            "1.1"
+          ],
+          "use": "The actual length-one free presentations from F1 become projective resolutions under the stated AC hypothesis."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "AC yields DC by a successor selector and recursion; the homology presentations are supplied projective resolutions for balanced Tor.",
+          "inputs": [
+            "Every successor fiber of the entire relation is nonempty",
+            "A prescribed initial point a in S",
+            "AC",
+            "Free presentations for H_rC and H_qD",
+            "F5",
+            "F10",
+            "F1",
+            "F11",
+            "F8",
+            "F9"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "Tensoring the degreewise split cycle sequence and summing finite diagonals gives a short exact sequence of complexes X,T,Y.",
+          "inputs": [
+            "C_p is Z_pC direct-sum B_{p-1}C",
+            "Inclusion and projection split each tensor degree",
+            "rho d_C=0",
+            "Koszul signs on the D terms match",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1.3",
+          "step": "1.3",
+          "claim": "For free U placed in degree p, the canonical map U tensor H_qD to H_{p+q}(U tensor D) is an isomorphism.",
+          "inputs": [
+            "A basis of U",
+            "The differential in each coordinate is (-1)^p d_D",
+            "Every tuple has finite support",
+            "A boundary tuple admits finitely many preimages",
+            "F3",
+            "F2",
+            "F8"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "The homology groups of X and Y are the displayed diagonal sums, with the p=0 Y summand zero.",
+          "inputs": [
+            "Z_pC and B_{p-1}C are free",
+            "Differentials preserve the p index",
+            "B_{-1}C=0",
+            "F1",
+            "1.3"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "step": "2.2",
+          "claim": "The inclusion tensor map has kernel Tor_1(H_rC,H_qD) and cokernel H_rC tensor H_qD.",
+          "inputs": [
+            "P_1=B_rC and P_0=Z_rC form a projective resolution of H_rC",
+            "P_2=0",
+            "The augmentation is z mapped to its homology class",
+            "R is commutative",
+            "F5",
+            "1.1",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "The connecting map sends b tensor [y] to the included b tensor [y] with positive sign.",
+          "inputs": [
+            "d_D y=0",
+            "d_C s_p(b)=b",
+            "The connecting map is computed by lifting a cycle and taking its boundary",
+            "Every homology class is a finite sum of these representatives",
+            "F4",
+            "F1",
+            "F2",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "Reindexing r=p-1 identifies ker partial_n and coker partial_{n+1} with the Tor and tensor sums, including zero and endpoint cases.",
+          "inputs": [
+            "The p=0 source summand is zero",
+            "The connecting map acts componentwise",
+            "No component is mixed with another",
+            "If H_rC=0 its inclusion B_rC to Z_rC is the identity",
+            "3.1",
+            "2.2",
+            "2.1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "step": "5.1",
+          "claim": "The quotient is the established corestricted H(rho tensor 1), and the cokernel injection sends [z] tensor [w] to [z tensor w].",
+          "inputs": [
+            "Exactness of the homology LES",
+            "The same canonical rho, positive connecting map and free presentations occur in the earlier quotient construction",
+            "The canonical free-tensor homology isomorphism uses cycle representatives",
+            "F7",
+            "F4",
+            "1.2",
+            "1.3",
+            "2.2",
+            "4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1: the Tor sum at n=0 is empty, since p=0 contributes the zero B_{-1}C summand."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1: H_qD=0 gives zero tensor modules; H_rC=0 makes the presentation inclusion the identity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1: at n=1 the kernel is exactly Tor_1(H_0C,H_0D)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.3: the empty free basis yields zero coordinate sums and the same homology isomorphism."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 remove p=0 in Y and account for the n=0 lower endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 proves successor fibers nonempty before applying AC and supplies actual resolutions; step 1.2 chooses existing sections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.3: a tensor cycle is coordinatewise a cycle and a tensor boundary has boundary coordinates."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.3: finite tuples of cycles are cycles, and finite tuples of boundaries lift coordinatewise to boundaries."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b-batch-5",
+        "notes": "Proof 1.1 derives DC from AC and recursion and makes the actual free presentations projective on both sides. Degreewise splitting makes the tensor sequence exact. Finite-support coordinate homology justifies both edge identifications. Lifting b tensor [y] with y a cycle gives positive connecting sign; reindex r=p-1 yields precisely Tor1 in degree n-1 and tensor cokernel in degree n. The read published Tor-map proof uses the identical rho and corestriction, so 5.1 identifies actual arrows. Neither tensor injectivity of boundaries nor freeness of homology is assumed. Empty degree-zero Tor and vanishing homology are handled. Read every current proof step and the matching contract derivations, citations and boundary dispositions. No unresolved mathematical risk; this is local 6B review, not a judge or publication stamp."
+      }
+    },
+    "thm-pid-kunneth-exactness-from-cycle-boundary-presentations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-pid-tensor-two-term-pieces-have-the-kunneth-kernel-and-cokernel",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $R$ be a commutative PID and $C,D$ nonnegative complexes of free $R$-modules of arbitrary rank. Tensor complexes use direct-sum totalization and\n$$d(c\\otimes y)=d_Cc\\otimes y+(-1)^p c\\otimes d_Dy\\quad(c\\in C_p).$$\nPut $Z(C)_p=Z_pC$ and $A(C)_p=B_{p-1}C$ with zero differentials, where $B_{-1}C=0$. Set $X=Z(C)\\otimes_RD$, $T=C\\otimes_RD$, $Y=A(C)\\otimes_RD$. The canonical sequence $0\\to X\\to T\\xrightarrow{\\rho\\otimes1}Y\\to0$ is exact.\n\nUnder the canonical identifications\n$$H_nX\\cong\\bigoplus_{p+q=n}Z_pC\\otimes_RH_qD,\\qquad H_nY\\cong\\bigoplus_{p+q=n}B_{p-1}C\\otimes_RH_qD,$$\nthe connecting map $\\partial_n:H_nY\\to H_{n-1}X$ is the sum of inclusion-induced maps $B_{p-1}C\\otimes H_qD\\to Z_{p-1}C\\otimes H_qD$, with positive sign. Consequently\n$$\\ker\\partial_n\\cong\\bigoplus_{r+q=n-1}\\operatorname{Tor}_1^R(H_rC,H_qD),\\qquad \\operatorname{coker}\\partial_{n+1}\\cong\\bigoplus_{p+q=n}H_pC\\otimes_RH_qD.$$\nThe corestricted map $H_n(\\rho\\otimes1)$ followed by this kernel identification is the established Tor quotient. The induced map from the displayed cokernel sends $[z]\\otimes[w]$ to $[z\\otimes w]$. All indices in sums are nonnegative; empty sums are zero.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1"
+          ],
+          "use": "Its explicit LES, kernel/cokernel descriptions and actual map identification establish exactness; its canonical construction is preserved by chain maps."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-the-kunneth-cross-product-map-is-well-defined-and-natural",
+          "source_section": "Statement",
+          "quote": "Let $R$ be commutative and let $C,D$ be chain complexes of $R$-modules. Then\n$[x]\\otimes[y]\\mapsto[x\\otimes y]$ defines a natural map\n$\\bigoplus_{p+q=n}H_pC\\otimes_RH_qD\\to H_n(C\\otimes_RD)$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ],
+          "use": "The cokernel map on cycle representatives is exactly this well-defined cross product; its naturality square also follows on elementary generators."
+        },
+        {
+          "fact": "F3",
+          "source": "lem-the-kunneth-tor-map",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $R$ be a PID and $C,D$ complexes of free $R$-modules with finite diagonals. For every $n\\in\\mathbb Z$, the cycle-boundary presentations induce a natural surjection\n$$\\pi_n:H_n(C\\otimes_RD)\\longrightarrow\\bigoplus_{p+q=n-1}\\operatorname{Tor}_1^R(H_pC,H_qD).$$",
+          "uses": [
+            "2.1",
+            "2.2"
+          ],
+          "use": "Identify the quotient with the existing map using F1; the induced map of the same presentations gives its natural Tor comparison."
+        },
+        {
+          "fact": "F4",
+          "source": "cor-the-long-exact-homology-sequence-is-natural",
+          "source_section": "Statement",
+          "quote": "A morphism of short exact sequences of complexes induces a morphism between the\nassociated long exact homology sequences.",
+          "uses": [
+            "1.2"
+          ],
+          "use": "Apply only after constructing the morphism of canonical short exact tensor sequences in step 1.2."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "The map from coker partial_{n+1} to H_nT is well defined and injective.",
+          "inputs": [
+            "The LES gives ker u=im partial_{n+1}",
+            "u maps H_nX to H_nT",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "Maps of C and D induce a morphism of canonical short exact tensor sequences and their LES.",
+          "inputs": [
+            "f and g are chain maps",
+            "rho prime composed with f equals A(f) composed with rho",
+            "Cycles and boundaries are preserved",
+            "F4",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "The resulting kernel/cokernel short exact sequence has exactly the stated cross product and Tor quotient as arrows.",
+          "inputs": [
+            "im v=ker partial_n",
+            "ker v=im u",
+            "The explicit identifications and map formulas in F1",
+            "F1",
+            "F2",
+            "F3",
+            "1.1"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "step": "2.2",
+          "claim": "Both end-term identifications are compatible with maps in C and D, proving naturality of the particular arrows.",
+          "inputs": [
+            "Restrictions of f form a map of the actual length-one resolutions",
+            "H_qg is the coefficient map",
+            "The cokernel identification sends z tensor [w] to [z] tensor [w]",
+            "F3",
+            "1.2",
+            "F2",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Degree zero gives a cross-product isomorphism; degree one has Tor_1(H_0C,H_0D); zero complexes and all finite diagonals are covered.",
+          "inputs": [
+            "All indices are nonnegative",
+            "For fixed n there are finitely many pairs p+q=n",
+            "The exactness just proved",
+            "2.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1: n=0 has empty Tor sum and alpha_0 is an isomorphism."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1: one zero complex gives the zero exact sequence."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 identifies the sole degree-one Tor summand."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 prove kernel/cokernel exactness also for zero maps and zero modules."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 covers degree zero and explains that finite diagonals impose no upper endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC; step 2.2 uses the already supplied presentations and no new selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1: u(x)=0 implies x is in im partial_{n+1}; step 2.1 gives ker beta contained in im alpha."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1: x in im partial_{n+1} implies u(x)=0; step 2.1 gives im alpha contained in ker beta."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b-batch-5",
+        "notes": "Proof 1.1 and 2.1 extract the short exact sequence from the verified LES kernel and cokernel, identifying alpha on cycles and beta with the established quotient. The chain-map identity rho prime f=A(f)rho gives a genuine ladder. Restrictions on cycles/boundaries form maps of the supplied resolutions, proving the particular Tor naturality square, not just abstract group isomorphisms. Nonnegative finite diagonals cover n=0, n=1, zero complexes and unbounded degree. Read every current proof step and the matching contract derivations, citations and boundary dispositions. No unresolved mathematical risk; this is local 6B review, not a judge or publication stamp."
+      }
+    },
+    "thm-pid-kunneth-splitting-from-cycle-boundary-presentations": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-pid-kunneth-exactness-from-cycle-boundary-presentations",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $R$ be a commutative PID and $C,D$ nonnegative chain complexes of free $R$-modules of arbitrary rank. Use the direct-sum tensor total complex with $d(c\\otimes w)=d_Cc\\otimes w+(-1)^p c\\otimes d_Dw$ for $c\\in C_p$. For every $n\\geq0$ there is a short exact sequence, natural in chain maps of both complexes,\n$$0\\longrightarrow\\bigoplus_{p+q=n}H_pC\\otimes_RH_qD\\xrightarrow{\\alpha_n}H_n(C\\otimes_RD)\\xrightarrow{\\beta_n}\\bigoplus_{p+q=n-1}\\operatorname{Tor}_1^R(H_pC,H_qD)\\longrightarrow0.$$\nHere $\\alpha_n([z]\\otimes[w])=[z\\otimes w]$, and $\\beta_n$ is the established cycle-boundary Tor quotient. All indices in the sums are nonnegative; an empty sum is zero. Naturality concerns this exact sequence, without a choice of section.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1",
+            "7.1"
+          ],
+          "use": "Use exactness, the formula for alpha, beta alpha=0, and beta surjectivity under the same AC/PID/free hypotheses."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $R$ be a commutative PID and $C$ a nonnegative chain complex of free $R$-modules of arbitrary rank. Set $Z_nC=\\ker d_n$, $B_nC=\\operatorname{im}d_{n+1}$, and $B_{-1}C=0$. Cycles and boundaries are free. There are sections $s_n:B_{n-1}C\\to C_n$ of the differential corestricted to its image, giving\n$$C_n\\cong Z_nC\\oplus B_{n-1}C,\\qquad c\\longmapsto(c-s_n(d_nc),d_nc).$$\nIn these coordinates the differential is $(z,b)\\mapsto(b,0)$, with $b$ included in $Z_{n-1}C$. Consequently $C$ is isomorphic to the direct sum of the two-term free complexes $B_pC\\hookrightarrow Z_pC$ in degrees $p+1,p$.\n\nLet $Z(C)_n=Z_nC$ and $A(C)_n=B_{n-1}C$, both with zero differential. There is a canonical degreewise split short exact sequence of complexes\n$$0\\longrightarrow Z(C)\\xrightarrow{\\iota}C\\xrightarrow{\\rho}A(C)\\longrightarrow0,\\qquad \\rho_n=d_n:C_n\\to B_{n-1}C.$$\nThe same assertions apply to any such complex $D$. No splitting of $B_pC\\hookrightarrow Z_pC$ is asserted.",
+          "uses": [
+            "1.1"
+          ],
+          "use": "Use its explicit cycle retractions, which fix cycles and exist under the given hypotheses."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-a-chain-map-induces-a-well-defined-map-on-homology",
+          "source_section": "Statement",
+          "quote": "Let $f:C_\\bullet\\to D_\\bullet$ be a chain map. For every $n\\in\\mathbb Z$ there\nis a unique morphism\n$$H_n(f):H_n(C)\\to H_n(D)$$\nsuch that the quotient maps from cycles to homology commute with $Z_n(f)$.",
+          "uses": [
+            "3.1"
+          ],
+          "use": "The map Pi is proved balanced and a chain map before applying the homology-map theorem."
+        },
+        {
+          "fact": "F4",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "Every family of nonempty sets has a choice function",
+          "uses": [
+            "1.1"
+          ],
+          "use": "Choose the degreewise sections for both complexes; no assertion of natural choices is made."
+        },
+        {
+          "fact": "F5",
+          "source": "def-tensor-product-total-complex-of-chain-complexes",
+          "source_section": "Definition",
+          "quote": "Let $R$ be a ring, $P$ a chain complex of right $R$-modules and $Q$ a chain complex of left $R$-modules. Define $(P\\otimes_RQ)_n=\\bigoplus_{p+q=n}P_p\\otimes_RQ_q$, the direct sum over the degree-$n$ diagonal, and $d(p\\otimes q)=d_Pp\\otimes q+(-1)^pp\\otimes d_Qq$.",
+          "uses": [
+            "2.1"
+          ],
+          "use": "Use its differential formula to prove Pi kills every boundary by the two pi d=0 identities."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Chosen cycle retractions followed by homology quotients define chain maps pi_C and pi_D.",
+          "inputs": [
+            "AC for degreewise sections",
+            "A boundary is a cycle and its homology class is zero",
+            "The targets H(C) and H(D) have zero differentials",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "The bilinear balanced tensor formula defines a chain map Pi to H(C) tensor H(D).",
+          "inputs": [
+            "pi_C and pi_D are linear",
+            "pi_C d_C=0 and pi_D d_D=0",
+            "The Koszul tensor differential",
+            "1.1",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Pi induces r_n with r_n alpha_n=id, without any freeness requirement on the target homology modules.",
+          "inputs": [
+            "The target has zero differential",
+            "Cycle retractions fix z and w",
+            "Elementary tensors of homology classes generate K_n",
+            "F3",
+            "1.1",
+            "2.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "The restriction of beta_n to ker r_n is injective.",
+          "inputs": [
+            "ker beta_n=im alpha_n",
+            "r_n alpha_n=id",
+            "x in ker r_n and beta_n x=0",
+            "F1",
+            "3.1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "step": "5.1",
+          "claim": "The restriction is onto and its unique inverse s_n is linear.",
+          "inputs": [
+            "beta_n is onto",
+            "beta_n alpha_n=0",
+            "r_n alpha_n=id",
+            "Injectivity of the restriction",
+            "For a lift x use x-alpha_n r_n x",
+            "F1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "id": "step-6.1",
+          "step": "6.1",
+          "claim": "beta_n s_n=id and s_n beta_n=id-alpha_n r_n; the displayed direct-sum maps are inverse.",
+          "inputs": [
+            "s_n is inverse to beta_n restricted to ker r_n",
+            "r_n s_n=0",
+            "beta_n alpha_n=0",
+            "r_n alpha_n=id",
+            "3.1",
+            "5.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-7.1",
+          "step": "7.1",
+          "claim": "Zero Tor quotient gives the unique zero-domain section; the construction retains its choices without asserting their naturality.",
+          "inputs": [
+            "At n=0 the Tor sum is empty",
+            "The two composite identities hold also on zero modules",
+            "The chosen retractions need not commute with chain maps",
+            "1.1",
+            "6.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 7.1: n=0 has empty Tor sum and the unique map from zero is the section."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 7.1 includes zero complex, zero K_n and zero Q_n."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 7.1 explicitly includes degree one; step 6.1 gives both identities there."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Steps 6.1 and 7.1 show that Q_n=0 gives alpha_n r_n=id."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 7.1 covers degree zero; the statement ranges over every n>=0 with finite diagonals."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the existing nonempty section sets and AC; step 5.1 constructs a unique inverse without selecting lifts simultaneously."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 6.1 computes beta_n s_n=id and the composite on K_n direct-sum Q_n."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 6.1 computes s_n beta_n=id-alpha_n r_n and the composite on H_n(C tensor D)."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b-batch-5",
+        "notes": "The chosen cycle retractions followed by homology quotients are chain maps because boundaries are cycles with zero class. Their balanced tensor map kills the Koszul differential and induces r alpha=1 even when homology is not free. Beta restricted to ker r is bijective; its unique linear inverse gives the section and both identities beta s=1 and s beta=1-alpha r. This proves splitting without selecting representatives anew or claiming natural choices. Zero quotient/degree zero and zero tensor term cases are checked. The construction matches tom Dieck 11.10.1 p.299. Read every current proof step and the matching contract derivations, citations and boundary dispositions. No unresolved mathematical risk; this is local 6B review, not a judge or publication stamp."
+      }
+    },
+    "ex-pid-polynomial-ring-kunneth-tor-class": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-polynomial-degree-of-a-product-over-a-domain",
+          "source_section": "Statement",
+          "quote": "If $R$ is an integral domain and $f,g\\in R[x]$ are nonzero, then $fg\\ne0$ and\n\n$$ \\deg(fg)=\\deg f+\\deg g,\\qquad \\operatorname{lc}(fg)=\\operatorname{lc}(f)\\operatorname{lc}(g). $$",
+          "uses": [
+            "1.1"
+          ],
+          "use": "The field is a domain; degree additivity proves k[t] a domain and t a nonunit."
+        },
+        {
+          "fact": "F2",
+          "source": "thm-polynomial-division-algorithm-over-a-field",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field, let $f\\in F[x]$, and let $0\\ne g\\in F[x]$. There are unique polynomials $q,r\\in F[x]$ such that\n\n$$ f=qg+r,\\qquad r=0\\ \\text{or}\\ \\deg r<\\deg g. $$\n\nThe statement includes $f=0$ and nonzero constant divisors.",
+          "uses": [
+            "1.1"
+          ],
+          "use": "Degree and polynomial division establish the Euclidean property of k[t]."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-euclidean-domain-is-a-pid",
+          "source_section": "Statement",
+          "quote": "Every Euclidean domain is a principal ideal domain.",
+          "uses": [
+            "1.1"
+          ],
+          "use": "Apply after the Euclidean-domain hypotheses are proved, obtaining the required PID."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-pid-kunneth-exactness-from-cycle-boundary-presentations",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $R$ be a commutative PID and $C,D$ nonnegative chain complexes of free $R$-modules of arbitrary rank. Use the direct-sum tensor total complex with $d(c\\otimes w)=d_Cc\\otimes w+(-1)^p c\\otimes d_Dw$ for $c\\in C_p$. For every $n\\geq0$ there is a short exact sequence, natural in chain maps of both complexes,\n$$0\\longrightarrow\\bigoplus_{p+q=n}H_pC\\otimes_RH_qD\\xrightarrow{\\alpha_n}H_n(C\\otimes_RD)\\xrightarrow{\\beta_n}\\bigoplus_{p+q=n-1}\\operatorname{Tor}_1^R(H_pC,H_qD)\\longrightarrow0.$$\nHere $\\alpha_n([z]\\otimes[w])=[z\\otimes w]$, and $\\beta_n$ is the established cycle-boundary Tor quotient. All indices in the sums are nonnegative; an empty sum is zero. Naturality concerns this exact sequence, without a choice of section.",
+          "uses": [
+            "1.2",
+            "4.1"
+          ],
+          "use": "Use the stated tensor sign convention and the natural sequence for the now verified finite free PID complexes."
+        },
+        {
+          "fact": "F5",
+          "source": "thm-pid-kunneth-splitting-from-cycle-boundary-presentations",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $R$ be a commutative PID and $C,D$ nonnegative complexes of arbitrary-rank free $R$-modules, with direct-sum tensor totalization and Koszul differential. For every $n\\geq0$, the Tor quotient $\\beta_n$ in the natural PID Kunneth sequence admits an $R$-linear section\n$$s_n:\\bigoplus_{p+q=n-1}\\operatorname{Tor}_1^R(H_pC,H_qD)\\longrightarrow H_n(C\\otimes_RD),\\qquad \\beta_ns_n=1.$$\nSpecifically, chosen degreewise cycle retractions determine a retraction $r_n$ of the cross product $\\alpha_n$, and a section satisfying $s_n\\beta_n=1-\\alpha_nr_n$. This asserts existence after choices, with no claim of a natural choice of section.",
+          "uses": [
+            "4.1"
+          ],
+          "use": "The explicitly calculated section is a concrete instance of existence under these same hypotheses."
+        },
+        {
+          "fact": "F6",
+          "source": "def-balanced-tor-bifunctor",
+          "source_section": "Definition",
+          "quote": "Assume Dependent Choice (DC), as in [[def-dependent-choice]], and work with\nsupplied projective resolutions of the modules under consideration. For a\nright $R$-module $N$, a left $R$-module $M$, and $i\\geq0$, define\n$\\operatorname{Tor}_i^R(N,M)$ to be either $H_i(N\\otimes_RP_\\bullet)$ for a\nprojective resolution of $M$ or $H_i(Q_\\bullet\\otimes_RM)$ for a projective\nresolution of $N$, identified by\n[[thm-left-and-right-projective-constructions-of-tor-are-naturally-isomorphic]].\nOn module maps use the well-defined homology maps from\n[[prop-each-tor-construction-is-covariant-in-both-variables]]. The natural\ncoherent identifications of\n[[prop-the-tor-balance-isomorphism-is-natural-and-coherent-under-change-of-resolutions]]\nmake this a covariant bifunctor up to canonical change-of-resolution\nisomorphism, not literal equality between different resolution complexes.\n\nDC licenses the comparison maps and homotopies in those suppliers. Existence\nof projective resolutions for arbitrary modules is a separate prerequisite,\nnot a consequence asserted here of DC. When such existence and a system of\nresolutions have separately been supplied, this gives the usual Tor bifunctor\non the corresponding module categories. Without DC, homology of a specified\ntensor-resolution complex is still defined; claiming the balanced bifunctor\nthen requires explicit comparison and coherence data instead of silently\ninvoking the DC-bearing theorems.",
+          "uses": [
+            "2.2"
+          ],
+          "use": "Compute Tor using the actual two-term resolution with degree-two term zero and tensor differential zero."
+        },
+        {
+          "fact": "F7",
+          "source": "lem-pid-tensor-two-term-pieces-have-the-kunneth-kernel-and-cokernel",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $R$ be a commutative PID and $C,D$ nonnegative complexes of free $R$-modules of arbitrary rank. Tensor complexes use direct-sum totalization and\n$$d(c\\otimes y)=d_Cc\\otimes y+(-1)^p c\\otimes d_Dy\\quad(c\\in C_p).$$\nPut $Z(C)_p=Z_pC$ and $A(C)_p=B_{p-1}C$ with zero differentials, where $B_{-1}C=0$. Set $X=Z(C)\\otimes_RD$, $T=C\\otimes_RD$, $Y=A(C)\\otimes_RD$. The canonical sequence $0\\to X\\to T\\xrightarrow{\\rho\\otimes1}Y\\to0$ is exact.\n\nUnder the canonical identifications\n$$H_nX\\cong\\bigoplus_{p+q=n}Z_pC\\otimes_RH_qD,\\qquad H_nY\\cong\\bigoplus_{p+q=n}B_{p-1}C\\otimes_RH_qD,$$\nthe connecting map $\\partial_n:H_nY\\to H_{n-1}X$ is the sum of inclusion-induced maps $B_{p-1}C\\otimes H_qD\\to Z_{p-1}C\\otimes H_qD$, with positive sign. Consequently\n$$\\ker\\partial_n\\cong\\bigoplus_{r+q=n-1}\\operatorname{Tor}_1^R(H_rC,H_qD),\\qquad \\operatorname{coker}\\partial_{n+1}\\cong\\bigoplus_{p+q=n}H_pC\\otimes_RH_qD.$$\nThe corestricted map $H_n(\\rho\\otimes1)$ followed by this kernel identification is the established Tor quotient. The induced map from the displayed cokernel sends $[z]\\otimes[w]$ to $[z\\otimes w]$. All indices in sums are nonnegative; empty sums are zero.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ],
+          "use": "Its proof step 1.1 supplies AC=>DC; its statement identifies the quotient as H(rho tensor 1), so tracking u-v computes the existing quotient."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "k[t] is a PID with t a nonzero nonunit; C and D have only H_0=R/(t).",
+          "inputs": [
+            "k is a field",
+            "Degree additivity for nonzero products",
+            "Polynomial division by nonzero polynomials",
+            "The input differential is multiplication by t",
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "The total complex has d_1=(t,t), d_2=(-t,t), and d_1d_2=0.",
+          "inputs": [
+            "The ordered basis (u,v)=(e_1 tensor f_0,e_0 tensor f_1)",
+            "The Koszul differential",
+            "h=e_1 tensor f_1 and w=e_0 tensor f_0",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "The total homology is R/(t) in degrees zero and one and zero elsewhere.",
+          "inputs": [
+            "t is not a zero divisor",
+            "im d_1=tRw",
+            "ker d_1=R(u-v)",
+            "im d_2=tR(u-v)",
+            "d_2 is injective",
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "id": "step-2.2",
+          "step": "2.2",
+          "claim": "The supplied multiplication-by-t resolution computes Tor_1=R/(t), with the degree-one R identified with B_0C by 1 mapped to te_0.",
+          "inputs": [
+            "The resolution is exact and free",
+            "Its tensor differential with R/(t) is zero",
+            "AC licenses the balanced interpretation",
+            "Multiplication by t is injective",
+            "F6",
+            "F7",
+            "1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "The cycle u-v maps under the canonical Tor quotient to the nonzero positive generator, also in characteristic two.",
+          "inputs": [
+            "rho_1(e_1)=te_0 and rho_0=0",
+            "The degree-one cycle u-v",
+            "The resolution identification in step 2.2",
+            "1 is not in (t)",
+            "2.2",
+            "1.2",
+            "2.1",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "The degree-one section is [a] mapped to [a(u-v)]; degree-zero cross product sends the tensor generator to [w].",
+          "inputs": [
+            "Only H_0C and H_0D are nonzero",
+            "The quotient maps [u-v] to [1]",
+            "Balancing identifies [a] tensor [b] with [ab] tensor [1]",
+            "F4",
+            "2.1",
+            "F5",
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 gives zero homology outside degrees zero and one, including absent chain terms."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves H_2=0 by injectivity of multiplication by t."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 tracks [u-v] to the nonzero unit class [1] in R/(t)."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies the sign calculation in characteristic two; the statement excludes the zero ring by requiring a field."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 compute degrees 0,1,2 and all absent higher or negative degrees."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC for the balanced interface; step 2.2 uses the explicit finite resolution and the AC/DC supplier. No basis is selected for this rank-one calculation."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1: d_1(a,b)=0 implies a+b=0 by domain cancellation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 2.1: a+b=0 gives d_1(a,b)=t(a+b)=0; step 4.1 verifies the inverse of the Tor quotient."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b-batch-5",
+        "notes": "Degree and division suppliers make k[t] a PID and t a nonzero nonunit. In basis (u,v), d1=(t,t) and d2=(-t,t), giving H0=H1=R/(t), H2=0. The actual rho sends u-v to te0 tensor [f0], hence the positive generator under the stated presentation identification. Characteristic two is valid. [a]->[a(u-v)] is a well-defined inverse quotient and the degree-zero tensor map is verified. Read every current proof step and the matching contract derivations, citations and boundary dispositions. No unresolved mathematical risk; this is local 6B review, not a judge or publication stamp."
+      }
+    },
+    "ex-pid-kunneth-over-a-field-has-no-tor-correction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-pid-kunneth-exactness-from-cycle-boundary-presentations",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $R$ be a commutative PID and $C,D$ nonnegative chain complexes of free $R$-modules of arbitrary rank. Use the direct-sum tensor total complex with $d(c\\otimes w)=d_Cc\\otimes w+(-1)^p c\\otimes d_Dw$ for $c\\in C_p$. For every $n\\geq0$ there is a short exact sequence, natural in chain maps of both complexes,\n$$0\\longrightarrow\\bigoplus_{p+q=n}H_pC\\otimes_RH_qD\\xrightarrow{\\alpha_n}H_n(C\\otimes_RD)\\xrightarrow{\\beta_n}\\bigoplus_{p+q=n-1}\\operatorname{Tor}_1^R(H_pC,H_qD)\\longrightarrow0.$$\nHere $\\alpha_n([z]\\otimes[w])=[z\\otimes w]$, and $\\beta_n$ is the established cycle-boundary Tor quotient. All indices in the sums are nonnegative; an empty sum is zero. Naturality concerns this exact sequence, without a choice of section.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ],
+          "use": "A field is shown to be a PID; the complexes are explicitly free and nonnegative. Use exactness and naturality after establishing zero Tor."
+        },
+        {
+          "fact": "F2",
+          "source": "prop-modules-over-a-field-are-projective-flat-and-injective",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice.\nEvery module over a field $k$ is free, hence projective",
+          "uses": [
+            "1.2"
+          ],
+          "use": "Only the AC-qualified free/projective clauses supply identity projective resolutions; injectivity and flatness are not used."
+        },
+        {
+          "fact": "F3",
+          "source": "def-balanced-tor-bifunctor",
+          "source_section": "Definition",
+          "quote": "Assume Dependent Choice (DC), as in [[def-dependent-choice]], and work with\nsupplied projective resolutions of the modules under consideration. For a\nright $R$-module $N$, a left $R$-module $M$, and $i\\geq0$, define\n$\\operatorname{Tor}_i^R(N,M)$ to be either $H_i(N\\otimes_RP_\\bullet)$ for a\nprojective resolution of $M$ or $H_i(Q_\\bullet\\otimes_RM)$ for a projective\nresolution of $N$, identified by\n[[thm-left-and-right-projective-constructions-of-tor-are-naturally-isomorphic]].\nOn module maps use the well-defined homology maps from\n[[prop-each-tor-construction-is-covariant-in-both-variables]]. The natural\ncoherent identifications of\n[[prop-the-tor-balance-isomorphism-is-natural-and-coherent-under-change-of-resolutions]]\nmake this a covariant bifunctor up to canonical change-of-resolution\nisomorphism, not literal equality between different resolution complexes.\n\nDC licenses the comparison maps and homotopies in those suppliers. Existence\nof projective resolutions for arbitrary modules is a separate prerequisite,\nnot a consequence asserted here of DC. When such existence and a system of\nresolutions have separately been supplied, this gives the usual Tor bifunctor\non the corresponding module categories. Without DC, homology of a specified\ntensor-resolution complex is still defined; claiming the balanced bifunctor\nthen requires explicit comparison and coherence data instead of silently\ninvoking the DC-bearing theorems.",
+          "uses": [
+            "1.2"
+          ],
+          "use": "Interpret positive homology of the supplied degree-zero resolutions as balanced Tor."
+        },
+        {
+          "fact": "F4",
+          "source": "lem-pid-tensor-two-term-pieces-have-the-kunneth-kernel-and-cokernel",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $R$ be a commutative PID and $C,D$ nonnegative complexes of free $R$-modules of arbitrary rank. Tensor complexes use direct-sum totalization and\n$$d(c\\otimes y)=d_Cc\\otimes y+(-1)^p c\\otimes d_Dy\\quad(c\\in C_p).$$\nPut $Z(C)_p=Z_pC$ and $A(C)_p=B_{p-1}C$ with zero differentials, where $B_{-1}C=0$. Set $X=Z(C)\\otimes_RD$, $T=C\\otimes_RD$, $Y=A(C)\\otimes_RD$. The canonical sequence $0\\to X\\to T\\xrightarrow{\\rho\\otimes1}Y\\to0$ is exact.\n\nUnder the canonical identifications\n$$H_nX\\cong\\bigoplus_{p+q=n}Z_pC\\otimes_RH_qD,\\qquad H_nY\\cong\\bigoplus_{p+q=n}B_{p-1}C\\otimes_RH_qD,$$\nthe connecting map $\\partial_n:H_nY\\to H_{n-1}X$ is the sum of inclusion-induced maps $B_{p-1}C\\otimes H_qD\\to Z_{p-1}C\\otimes H_qD$, with positive sign. Consequently\n$$\\ker\\partial_n\\cong\\bigoplus_{r+q=n-1}\\operatorname{Tor}_1^R(H_rC,H_qD),\\qquad \\operatorname{coker}\\partial_{n+1}\\cong\\bigoplus_{p+q=n}H_pC\\otimes_RH_qD.$$\nThe corestricted map $H_n(\\rho\\otimes1)$ followed by this kernel identification is the established Tor quotient. The induced map from the displayed cokernel sends $[z]\\otimes[w]$ to $[z\\otimes w]$. All indices in sums are nonnegative; empty sums are zero.",
+          "uses": [
+            "1.2"
+          ],
+          "use": "The local proof step 1.1 supplies the earlier AC=>DC justification for balanced notation; no later weak-choice result is used."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "k is a PID and all four displayed tensor generators have zero differential.",
+          "inputs": [
+            "k is a field",
+            "Any nonzero ideal contains an invertible element",
+            "The factor differentials vanish",
+            "The complexes have only degrees zero and one",
+            "F1"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "Every positive Tor group of two k-modules vanishes by identity projective resolutions.",
+          "inputs": [
+            "AC makes all k-modules projective",
+            "The identity-augmentation resolutions are concentrated in degree zero",
+            "AC licenses DC for balanced Tor",
+            "F2",
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Scalar-product inverse maps prove the four tensors are bases, and zero differentials make them homology bases.",
+          "inputs": [
+            "The four displayed one-dimensional tensor factors",
+            "Balancing combines scalar coefficients",
+            "The degree-one terms are a direct sum of two bidegrees",
+            "1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "The cross product is bijective; its inverse on the four basis vectors is given by the corresponding tensors of homology classes.",
+          "inputs": [
+            "Kunneth exactness",
+            "Every Tor summand is zero",
+            "The explicit homology bases",
+            "Both composites fix each basis vector",
+            "F1",
+            "2.1",
+            "1.2"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "The inverse cross product is natural because alpha prime inverse composed with h equals k_* composed with alpha inverse.",
+          "inputs": [
+            "h alpha=alpha prime k_*",
+            "Both alpha maps are invertible",
+            "F1",
+            "3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1: n=0 has an empty Tor sum; all absent degree terms are zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1: every differential is zero, every element is a cycle, and the boundary module is zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 lists the two degree-one basis images and the single vanishing Tor_1(k,k) summand."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 proves vanishing also for U=0 or V=0; all four specified field factors are nonzero since k is a field."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1, 2.1 and 3.1 cover degrees 0,1,2 and vanishing outside the displayed support."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 invokes AC for projectivity of arbitrary field modules and the earlier AC/DC calculation; the displayed one-element bases need no choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1: inverse after cross product fixes all tensor-of-classes basis elements."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1: cross product after inverse fixes all four tensor-homology basis elements."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-c-6b-batch-5",
+        "notes": "The field is a PID and the four tensor generators are actual bases by scalar-product inverse maps. Zero differentials give the displayed homology. Only the AC-qualified free/projective clauses of the read field supplier are consumed; identity resolutions give positive Tor zero, with DC supplied by the local kernel lemma. Exactness makes the canonical cross product bijective for all complexes in scope, and inversion of its naturality square proves a natural inverse without choosing a complement. Read every current proof step and the matching contract derivations, citations and boundary dispositions. No unresolved mathematical risk; this is local 6B review, not a judge or publication stamp."
+      }
+    }
+  }
+}

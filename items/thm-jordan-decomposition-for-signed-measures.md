@@ -7,12 +7,17 @@ origin: session
 landmark: true
 provenance:
   statement: literature-derived
-  proof: ai-generated
-deps: [def-measure, def-mutually-singular-measures, thm-hahn-decomposition-for-signed-measures]
+  proof: ai-altered
+deps: [def-measure, def-mutually-singular-measures, thm-hahn-decomposition-for-signed-measures, def-positive-negative-and-null-sets-for-a-signed-measure, def-signed-measure, def-axiom-of-choice]
 proof_strategy: direct
 verification:
-  audited: 2026-08-30
   precheck: pass
+  verified:
+    model: "gpt-6-astra"
+    verdict: pass
+    date: 2026-09-09
+    scope: "Owner-authorized local defect repair; no independent judge or owner audit"
+    delegated_by: owner
 sources:
   references:
     - title: "John K. Hunter, Measure Theory, Theorem 6.21"
@@ -23,19 +28,24 @@ sources:
 
 ## Statement
 
-Let $\nu$ be a signed measure on $(X,\mathcal A)$. Then there exist positive
-measures $\nu^+,\nu^-:(X,\mathcal A)\to[0,+\infty]$ such that
+Assume the Axiom of Choice. Let $\nu$ be a signed measure on $(X,\mathcal A)$. Then there exist positive
+measures $\nu^+,\nu^-:(X,\mathcal A)\to[0,+\infty]$, at least one finite on $X$, such that
 $$\nu=\nu^+-\nu^-,$$
 and $\nu^+\perp \nu^-$.
 
 These measures are unique: if $\nu=\mu-\eta$ with positive measures
 $\mu\perp\eta$, then $\mu=\nu^+$ and $\eta=\nu^-$.
 
+The following conditional assertion is choice-free: if a Hahn partition
+$X=P\sqcup N$ is supplied, the formulas $\nu^+(E)=\nu(E\cap P)$ and
+$\nu^-(E)=-\nu(E\cap N)$ construct these unique measures. Comparing
+two supplied mutually singular positive decompositions also requires no AC.
+
 ## Facts & Assumptions
 
-**Given:** A signed measure $\nu$ on $(X,\mathcal A)$.
+**Given:** A signed measure $\nu$ on $(X,\mathcal A)$ ([[def-signed-measure]]). Assume AC for the general existence assertion ([[def-axiom-of-choice]]); for the conditional assertion a Hahn partition is supplied.
 
-[L1] Hahn decomposition gives measurable sets $P,N$ with $P\sqcup N=X$, $P$
+[L1] Under AC, Hahn decomposition gives measurable sets $P,N$ with $P\sqcup N=X$, $P$
 positive, and $N$ negative, unique up to null sets. ([[thm-hahn-decomposition-for-signed-measures]])
 
 [L2] Mutual singularity means that the two set functions vanish on measurable
@@ -48,30 +58,10 @@ sigma-algebra. ([[def-measure]])
 
 **Proof technique:** direct.
 
-1.1 Choose a Hahn decomposition $X=P\sqcup N$ from [L1]. Define [L1, L3]
-$$\nu^+(A):=\nu(A\cap P),\qquad \nu^-(A):=-\nu(A\cap N)\qquad(A\in\mathcal A).$$
-Because $P$ is positive and $N$ is negative, these values lie in
-$[0,+\infty]$. Their countable additivity is inherited from that of $\nu$, so
-[L3] makes $\nu^+$ and $\nu^-$ positive measures. Also
-$$\nu(A)=\nu(A\cap P)+\nu(A\cap N)=\nu^+(A)-\nu^-(A)$$
-for every measurable $A$.
+1.1 For the general existence assertion, obtain a Hahn partition from [L1]; this invokes AC through the Hahn theorem's optimizing choices and its positive-subset lemma. For the conditional assertion start with the supplied partition instead. Define $\nu^+(E)=\nu(E\cap P)$ and $\nu^-(E)=-\nu(E\cap N)$. The signs follow from [[def-positive-negative-and-null-sets-for-a-signed-measure]], and countable additivity and the empty-set value follow from those of $\nu$, so these are positive measures by [L3]. [given, L1, L3]
 
-2.1 The defining pieces in step 1.1 also show mutual singularity: every [L1, L2, step 1.1]
-measurable subset of $N$ has $\nu^+$-value $0$, and every measurable subset of
-$P$ has $\nu^-$-value $0$. Thus [L2] gives $\nu^+\perp\nu^-$.
+2.1 At least one of $\nu^+(X)=\nu(P)$ and $\nu^-(X)=-\nu(N)$ is finite, since otherwise $\nu$ would take both infinite signs. By positivity the same side is finite on every measurable $E$. Thus the difference is always defined, and finite additivity gives $\nu(E)=\nu^+(E)-\nu^-(E)$. The defining formulas give $\nu^+(N)=\nu^-(P)=0$, hence mutual singularity by [L2]. [step 1.1, L2, algebra]
 
-2.2 Suppose $\nu=\mu-\eta$ with positive measures $\mu\perp\eta$. By [L2], [L1, L2, step 1.1]
-choose $P',N'$ with $P'\sqcup N'=X$, $\mu$ vanishing on subsets of $N'$, and
-$\eta$ vanishing on subsets of $P'$. Then every measurable subset of $P'$ has
-$\nu$-value $\mu(E)\ge0$, so $P'$ is positive, and every measurable subset of
-$N'$ has $\nu$-value $-\eta(E)\le0$, so $N'$ is negative. Hence $(P',N')$ is a
-Hahn decomposition, so [L1] makes $P\triangle P'$ null.
+3.1 Suppose $\nu=\mu-\eta$ with positive mutually singular measures, with the displayed difference defined on every measurable set. Take one witnessing partition $P',N'$ from [L2]. On subsets of $P'$ one has $\nu=\mu\ge0$, and on subsets of $N'$ one has $\nu=-\eta\le0$. Thus this is another Hahn partition. A measurable subset of $P\setminus P'$ lies in positive $P$ and negative $N'$, so has value zero; the same holds on $P'\setminus P$. Splitting between these differences shows they are null sets. This comparison uses only the supplied partitions, not Hahn existence or further AC. [step 2.1, L2, algebra]
 
-3.1 Because $\mu$ vanishes on subsets of $N'$ and null subsets of $P'$ have [L1, L2, step 1.1, step 2.2]
-$\mu$-value $0$ as well, step 2.2 gives
-$$\mu(A)=\mu(A\cap P')=\nu(A\cap P')=\nu(A\cap P)=\nu^+(A).$$
-The same argument on $N'$ gives $\eta(A)=-\nu(A\cap N)=\nu^-(A)$. Thus the
-Jordan decomposition is unique.
-
-4.1 Steps 1.1, 2.1, and 3.1 prove existence, mutual singularity, and [step 1.1, step 2.1, step 3.1] ∎
-uniqueness.
+4.1 For every measurable $E$, $\mu(E)=\mu(E\cap P')=\nu(E\cap P')=\nu(E\cap P)=\nu^+(E)$: the first equality uses vanishing on $N'$, and the middle change of sets discards only the null differences from step 3.1. Similarly $\eta(E)=-\nu(E\cap N)=\nu^-(E)$. There is no subtraction of two infinite quantities. Hence the parts are unique; steps 1.1–4.1 also prove the choice-free conditional assertion because AC was used only to obtain the initial arbitrary Hahn partition. [step 1.1, step 3.1, algebra] ∎

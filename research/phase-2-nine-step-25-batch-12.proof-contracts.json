@@ -1,0 +1,1015 @@
+{
+  "version": 1,
+  "scope": [
+    "def-stay-put-one-tape-machine-and-run-interface",
+    "lem-stay-put-right-left-macro-simulation",
+    "thm-stay-put-elimination-with-explicit-simulation-interface",
+    "ex-eliminating-a-stay-put-transition",
+    "cex-deleting-stay-put-moves-does-not-preserve-computation"
+  ],
+  "contracts": {
+    "def-stay-put-one-tape-machine-and-run-interface": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-deterministic-one-tape-turing-machine",
+          "source_section": "Definition",
+          "quote": "A **deterministic one-tape Turing machine with designated accept and reject\nstates** is a tuple\n$$ M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta) $$\nsuch that:\n\n- $Q$ is a finite set of states.\n- $\\Sigma$ is a finite input alphabet.\n- $\\Gamma$ is a finite tape alphabet with $\\Sigma\\subseteq\\Gamma\\setminus\\{\\sqcup\\}$.\n- $\\sqcup\\in\\Gamma$ is the blank symbol.\n- $q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\in Q$ are pairwise distinct.\n- $\\delta$ is a function\n  $$ \\delta:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma\\to Q\\times\\Gamma\\times\\{L,R\\}. $$\n\nThus whenever the machine is in a nonhalting state $q$ and scans a symbol\n$a\\in\\Gamma$, the value\n$$ \\delta(q,a)=(q',b,D) $$\nspecifies exactly one next state $q'$, exactly one symbol $b$ to write in the\ncurrently scanned cell, and exactly one head move $D\\in\\{L,R\\}$.\n\nThe intended tape is right-infinite and indexed by the natural numbers\n([[def-computation-alphabet-and-word-convention]], [[def-function]]); the tape\ncontents, configurations, and one-step dynamics are fixed in the next items.",
+          "uses": [
+            "3.1",
+            "7.1"
+          ],
+          "use_explanation": "The base tuple has a finite state set, finite alphabets and a total nonhalting transition function ([[def-deterministic-one-tape-turing-machine]])."
+        },
+        {
+          "fact": "F2",
+          "source": "def-one-step-configuration-relation",
+          "source_section": "Definition",
+          "quote": "Fix a deterministic one-tape Turing machine\n$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$.\nLet $C=(q,h,t)$ and $C'=(q',h',t')$ be configurations of $M$.\n\nWe say that **$C'$ follows $C$ in one step**, and write\n$$ C\\vdash_M C', $$\nwhen $q\\notin\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\}$ and, writing\n$$ \\delta(q,t(h))=(p,b,D), $$\none has:\n\n- $q'=p$,\n- $t'(h)=b$,\n- $t'(i)=t(i)$ for every $i\\ne h$,\n- if $D=R$, then $h'=h+1$,\n- if $D=L$ and $h>0$, then $h'=h-1$,\n- if $D=L$ and $h=0$, then $h'=0$.\n\nSo one step changes only the scanned tape cell, updates the state, and moves\nthe head one cell right or one cell left, except that the left boundary clamps\nthe head at cell $0$.",
+          "uses": [
+            "3.1"
+          ],
+          "use_explanation": "Ordinary one-step dynamics write only at the current cell and clamp a left move at zero ([[def-one-step-configuration-relation]])."
+        },
+        {
+          "fact": "F3",
+          "source": "def-turing-machine-initial-and-halting-configuration-interface",
+          "source_section": "Definition",
+          "quote": "A **raw Turing-machine tuple** is\n$$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta),$$\nwhere $Q,\\Sigma,\\Gamma$ are finite sets, $\\sqcup\\in\\Gamma$ is the blank symbol, $\\Sigma\\subseteq\\Gamma\\setminus\\{\\sqcup\\}$, the three designated states $q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\in Q$ are pairwise distinct, and\n$$\\delta:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma\\longrightarrow Q\\times\\Gamma\\times\\{\\mathsf L,\\mathsf R\\}$$\nis a total function. The direction tags $\\mathsf L,\\mathsf R$ are distinct. There are no transition entries at halting states.\n\nA **tape** for this tuple is a function $t:\\mathbb N\\to\\Gamma$ with finite support\n$$\\operatorname{supp}(t)=\\{i\\in\\mathbb N:t(i)\\ne\\sqcup\\}.$$\nWrite $\\mathcal T_M$ for the set of these tapes. A **configuration** is a triple $C=(q,h,t)\\in Q\\times\\mathbb N\\times\\mathcal T_M$. The tape has cells $0,1,2,\\ldots$. The left-boundary convention leaves a left-moving head at zero when it is already at zero; at a positive cell it moves to its predecessor. Right movement increases the cell number by one. No permanent end marker is imposed.\n\nFor an input word $w:m\\to\\Sigma$ in the convention of [[def-computation-alphabet-and-word-convention]], define\n$$t_w(i)=\\begin{cases}w(i),&i<m,\\\\\\sqcup,&i\\ge m,\\end{cases}\\qquad I_M(w)=(q_0,0,t_w).$$\nThus the initial head scans the first input cell for nonempty input, and cell zero for empty input. In both cases it is a valid tape coordinate.\n\nRelative to $M$, a configuration $(q,h,t)$ is **accepting** iff $q=q_{\\mathrm{acc}}$, **rejecting** iff $q=q_{\\mathrm{rej}}$, and **halting** iff $q\\in\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\}$. It is **nonhalting** otherwise. These are predicates on configurations, not claims that configurations are reachable. The initial configuration is always nonhalting.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "7.1"
+          ],
+          "use_explanation": "Finite-support tapes, their configuration product, and the displayed input/halting formulas are defined from $Q,\\Gamma,\\sqcup$ and the designated states ([[def-turing-machine-initial-and-halting-configuration-interface]])."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-subset-of-a-finite-set",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite set ([[def-countable]]) and let $B \\subseteq A$. Then:\n\n1. $B$ is finite;\n2. $\\lvert B\\rvert \\le \\lvert A\\rvert$ ([[def-finite-cardinality]]);\n3. $\\lvert B\\rvert = \\lvert A\\rvert$ if and only if $B = A$;\n4. every injection $f : A \\to A$ is a bijection, and every surjection\n   $f : A \\to A$ is a bijection.\n\nClause 3 is the finite form of the Dedekind statement: a finite set is not\nequinumerous with a proper subset of itself. Clause 4 is its working form, and\n**finiteness is exactly the hypothesis that fails in general**: the successor map\nis an injection of $\\mathbb{N}$ into itself that is not surjective, which is the\nfalse statement recorded on this page's companion.",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "A subset of a finite set is finite ([[thm-subset-of-a-finite-set]])."
+        },
+        {
+          "fact": "F5",
+          "source": "thm-recursion",
+          "source_section": "Statement",
+          "quote": "Let $(N,0,\\sigma)$ be a Peano system ([[def-peano-system]]), in particular the natural numbers $\\mathbb{N}$ ([[def-natural-numbers]]). For any set $A$, any element $a \\in A$, and any function $f : A \\to A$, there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$.",
+          "uses": [
+            "4.1"
+          ],
+          "use_explanation": "A total self-map of a set, with a specified starting element, has a unique recursively iterated sequence on the naturals ([[thm-recursion]])."
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "5.1",
+            "6.1"
+          ],
+          "use_explanation": "A property true at zero and preserved by successor holds on all naturals ([[thm-induction-principle]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "def-stay-put-one-tape-machine-and-run-interface-1.1",
+          "step": "1.1",
+          "claim": "The tape/configuration collections are sets and the update graph defines a total function.",
+          "inputs": [
+            "F3",
+            "t: N to Gamma; h in N; b in Gamma; fixed Q,Gamma,blank; update graph split at j=h"
+          ]
+        },
+        {
+          "id": "def-stay-put-one-tape-machine-and-run-interface-2.1",
+          "step": "2.1",
+          "claim": "The updated support is a subset of the finite set F union {h}, hence finite.",
+          "inputs": [
+            "F4",
+            "1.1",
+            "F3",
+            "F=supp(t) finite; e:n to F bijective when h is absent; new image h is fresh"
+          ]
+        },
+        {
+          "id": "def-stay-put-one-tape-machine-and-run-interface-3.1",
+          "step": "3.1",
+          "claim": "There is exactly one successor in the configuration set at every nonhalting state and none at halting states.",
+          "inputs": [
+            "F1",
+            "F2",
+            "1.1",
+            "2.1",
+            "delta total on nonhalting pairs; D is exactly one of L,R,S; valid tape update"
+          ]
+        },
+        {
+          "id": "def-stay-put-one-tape-machine-and-run-interface-4.1",
+          "step": "4.1",
+          "claim": "Recursion on the total identity-extended successor constructs the unique ambient sequence u.",
+          "inputs": [
+            "F5",
+            "3.1",
+            "A=C_M is a set; C in A; T maps A to A and is identity only at halting states"
+          ]
+        },
+        {
+          "id": "def-stay-put-one-tape-machine-and-run-interface-5.1",
+          "step": "5.1",
+          "claim": "A nonempty natural index set has a least element; the first halting time exists if any halt occurs.",
+          "inputs": [
+            "4.1",
+            "F6",
+            "B nonempty; one witness b in B; finite initial list 0,...,b; ambient u from step 4.1"
+          ]
+        },
+        {
+          "id": "def-stay-put-one-tape-machine-and-run-interface-6.1",
+          "step": "6.1",
+          "claim": "Truncation at first halt or the entire nonhalting sequence is the unique maximal run, with disjoint exhaustive outcomes.",
+          "inputs": [
+            "3.1",
+            "4.1",
+            "5.1",
+            "F6",
+            "u(0)=C; u(i+1)=T(u(i)); first halt t if it exists; deterministic genuine successor"
+          ]
+        },
+        {
+          "id": "def-stay-put-one-tape-machine-and-run-interface-7.1",
+          "step": "7.1",
+          "claim": "Every initial tape is valid with support m; empty/one-symbol inputs and zero-step halting starts have the stated behavior.",
+          "inputs": [
+            "F1",
+            "F3",
+            "6.1",
+            "w:m to Sigma; blank excluded from Sigma; pairwise distinct start/accept/reject states"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 7.1 constructs the wholly blank tape for empty input; step 2.1 covers empty support."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 7.1 gives the zero-transition run for an already-halting start; step 3.1 includes head zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 7.1 gives support {0} for input length one; step 2.1 extends the empty enumeration by one point."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 7.1 permits empty Sigma and singleton blank-only Gamma; the Definition excludes empty/one-state Q by three distinct designated states."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 uses the left clamp at zero and positive predecessor; the Definition has no right endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses one finite enumeration; step 5.1 takes one witness in a fixed nonempty B. Neither is a family of choices; recursion in step 4.1 determines every successor."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 6.1 proves that a first halting index gives the finite run and absence of one gives an infinite run."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 6.1 proves any finite maximal run must end at the first halt and no infinite run can pass it; accepting/rejecting predicates are exact equalities in the Definition."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-12",
+        "notes": "Accepted after reading Verification 1.1–7.1. The tape/update graphs are sets; the updated support lies in F union {h}, with finite adjunction proved explicitly. Total nonhalting delta gives a unique successor. Recursion applies to the total identity extension on the configuration set, with a specified start; the artificial tail is excluded from genuine runs. The bounded induction supplies the least halting index and deterministic prefix induction proves uniqueness and exhaustive disjoint outcomes. Empty input, empty Sigma, blank-only Gamma, head zero and already-halting starts are covered. All six declared supplier statements were checked; no AC is used."
+      }
+    },
+    "lem-stay-put-right-left-macro-simulation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stay-put-one-tape-machine-and-run-interface",
+          "source_section": "Definition",
+          "quote": "A **stay-put one-tape machine** is a tuple $M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$ with all the finite-set, alphabet and pairwise-distinct designated-state conditions of [[def-deterministic-one-tape-turing-machine]], except that the total transition function is\n$$\\delta:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma\\longrightarrow Q\\times\\Gamma\\times\\{L,R,S\\}.$$\nThe three direction tags are distinct. There are no transition entries at either halting state.\n\nA tape is a function $t:\\mathbb N\\to\\Gamma$ with finite support $\\{j:t(j)\\ne\\sqcup\\}$. Write $\\mathcal T$ for the set of tapes and $\\mathcal C_M=Q\\times\\mathbb N\\times\\mathcal T$. For $b\\in\\Gamma$ put $t[h:=b](h)=b$ and $t[h:=b](j)=t(j)$ for $j\\ne h$. From a nonhalting $C=(q,h,t)$, if $\\delta(q,t(h))=(p,b,D)$, its successor is\n$$C'=(p,H_D(h),t[h:=b]),\\qquad H_R(h)=h+1,\\quad H_S(h)=h,\\quad H_L(h)=\\begin{cases}0&h=0,\\\\h-1&h>0.\\end{cases}$$\nHere $h-1$ means the predecessor of a positive natural. This extends [[def-one-step-configuration-relation]]. Write $C\\vdash_M C'$ for exactly these steps; no halting configuration has a successor.\n\nFor a word $w:m\\to\\Sigma$, set $t_w(j)=w(j)$ when $j<m$ and $t_w(j)=\\sqcup$ otherwise, and $I_M(w)=(q_0,0,t_w)$. Accepting means $q=q_{\\mathrm{acc}}$, rejecting means $q=q_{\\mathrm{rej}}$, and halting means either equality. These are the formulas of [[def-turing-machine-initial-and-halting-configuration-interface]], now for the extended tuple.\n\nA **maximal run from $C$** is either a sequence $C_0,\\ldots,C_t$ with $C_0=C$, each $C_i\\vdash_M C_{i+1}$ for $i<t$, and $C_t$ halting, or an infinite sequence $(C_i)_{i\\in\\mathbb N}$ starting at $C$ with each consecutive pair a genuine step. A finite run accepts or rejects according to its last state; an infinite run **diverges**. There is exactly one maximal run from every configuration, as verified below. To recognize a language means to accept exactly its inputs; to decide it additionally means to halt on every input.",
+          "uses": [
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1"
+          ],
+          "use_explanation": "The extended interface gives a unique successor at each nonhalting configuration, none at halting ones, and the three head/write clauses ([[def-stay-put-one-tape-machine-and-run-interface]])."
+        },
+        {
+          "fact": "F2",
+          "source": "def-one-step-configuration-relation",
+          "source_section": "Definition",
+          "quote": "Fix a deterministic one-tape Turing machine\n$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$.\nLet $C=(q,h,t)$ and $C'=(q',h',t')$ be configurations of $M$.\n\nWe say that **$C'$ follows $C$ in one step**, and write\n$$ C\\vdash_M C', $$\nwhen $q\\notin\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\}$ and, writing\n$$ \\delta(q,t(h))=(p,b,D), $$\none has:\n\n- $q'=p$,\n- $t'(h)=b$,\n- $t'(i)=t(i)$ for every $i\\ne h$,\n- if $D=R$, then $h'=h+1$,\n- if $D=L$ and $h>0$, then $h'=h-1$,\n- if $D=L$ and $h=0$, then $h'=0$.\n\nSo one step changes only the scanned tape cell, updates the state, and moves\nthe head one cell right or one cell left, except that the left boundary clamps\nthe head at cell $0$.",
+          "uses": [
+            "4.1",
+            "4.2"
+          ],
+          "use_explanation": "Ordinary steps write at the scanned cell, move right by successor, and left by predecessor at a positive cell or by the zero clamp ([[def-one-step-configuration-relation]])."
+        },
+        {
+          "fact": "F3",
+          "source": "def-finite-cardinality",
+          "source_section": "Definition",
+          "quote": "Throughout this page $\\mathbb{N}$ is the set of von Neumann naturals\n([[def-natural-numbers]]): $0 = \\varnothing$, $\\sigma(n) = n \\cup \\{n\\}$, and\n$n = \\{\\, m \\in \\mathbb{N} : m < n \\,\\}$ is itself the set of its predecessors,\nthe order being the additive order of [[def-nat-order]] identified with\nmembership in [[lem-nat-order-is-membership]]. Write $A \\approx B$ when a\nbijection $A \\to B$ exists ([[def-equinumerous]],\n[[def-injection-surjection-bijection]]). A set $A$ is **finite** when\n$A \\approx n$ for some $n \\in \\mathbb{N}$ ([[def-countable]]).\n\n**Definition.** Let $A$ be a finite set. Then there is **exactly one**\n$n \\in \\mathbb{N}$ with $A \\approx n$, and we write\n\n$$\\lvert A\\rvert := \\text{that } n,$$\n\nthe **cardinality**, or number of elements, of $A$. The notation $\\lvert A\\rvert$\nis defined for finite $A$ only, and its value is a natural number.\n\n**Why exactly one, which is the whole content of the definition.** At least one\nsuch $n$ exists: that is literally what \"$A$ is finite\" says. At most one exists:\nif $A \\approx n$ and $A \\approx m$ with $n, m \\in \\mathbb{N}$, then $n \\approx A$,\nbecause the inverse of a bijection is a bijection, and hence $n \\approx m$,\nbecause a composition of bijections is a bijection\n([[def-injection-surjection-bijection]]); and $n \\approx m$ forces $n = m$ by\nclaim 3 of [[lem-pigeonhole]]. So $\\lvert A\\rvert$ names a single natural number\nand not a family of choices.\n\n**Four consequences, proved here because everything on this page uses them.**\n\n**(a) $\\lvert n\\rvert = n$ for every $n \\in \\mathbb{N}$.** The identity map\n$\\mathrm{id}_n$ is a bijection $n \\to n$, so $n \\approx n$; thus $n$ is finite and\nthe unique natural equinumerous with it is $n$ itself.\n\n**(b) $\\lvert\\varnothing\\rvert = 0$, and a finite $A$ satisfies\n$\\lvert A\\rvert = 0$ if and only if $A = \\varnothing$.** Since $0 = \\varnothing$,\npart (a) gives $\\lvert\\varnothing\\rvert = 0$. Conversely, if $\\lvert A\\rvert = 0$\nthen there is a bijection $f : A \\to \\varnothing$; were some $a \\in A$, the value\n$f(a)$ would be an element of $\\varnothing$, and $\\varnothing$ has none, so\n$A = \\varnothing$.\n\n**(c) Transport along a bijection.** If $A$ is finite and $f : A \\to B$ is a\nbijection, then $B$ is finite and $\\lvert B\\rvert = \\lvert A\\rvert$. Indeed\n$B \\approx A$ through $f^{-1}$ and $A \\approx \\lvert A\\rvert$, so\n$B \\approx \\lvert A\\rvert$ by transitivity.\n\n**(d) Equality of cardinalities is equinumerosity.** For finite $A$ and $B$:\n$\\lvert A\\rvert = \\lvert B\\rvert$ if and only if $A \\approx B$. If the\ncardinalities agree then $A \\approx \\lvert A\\rvert = \\lvert B\\rvert \\approx B$;\nconversely $A \\approx B$ gives $\\lvert B\\rvert = \\lvert A\\rvert$ by (c).",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "Finiteness means admitting a bijection with a natural initial segment ([[def-finite-cardinality]])."
+        },
+        {
+          "fact": "F4",
+          "source": "def-cartesian-product",
+          "source_section": "Definition",
+          "quote": "Let $A$ and $B$ be sets. By\n[[lem-ordered-pairs-lie-in-the-double-power-set]] every ordered pair $(a,b)$ with\n$a \\in A$ and $b \\in B$ is an element of $\\mathcal{P}(\\mathcal{P}(A \\cup B))$, so\n[[def-axiom-schema-of-separation]] applied inside that set produces the\n**Cartesian product**\n\n$$A \\times B := \\{\\, z \\in \\mathcal{P}(\\mathcal{P}(A \\cup B)) : \\exists a \\in A\\ \\exists b \\in B\\ z = (a,b) \\,\\}.$$\n\nIts elements are exactly the ordered pairs $(a,b)$ ([[def-ordered-pair]]) with\n$a \\in A$ and $b \\in B$: no such pair is lost, because each such pair lies in\nthe ambient set being separated. Thus $z \\in A \\times B$ holds if and only if\n$z = (a,b)$ for some $a \\in A$ and some $b \\in B$.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "The product $A\\times B$ is a set of exactly the pairs with coordinates in $A,B$ ([[def-cartesian-product]])."
+        },
+        {
+          "fact": "F5",
+          "source": "thm-the-characterising-property-of-ordered-pairs",
+          "source_section": "Statement",
+          "quote": "For all sets $a$, $b$, $c$, $d$: $(a,b) = (c,d)$ if and only if $a = c$ and\n$b = d$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ],
+          "use_explanation": "Ordered pairs are equal exactly when both coordinates are equal ([[thm-the-characterising-property-of-ordered-pairs]])."
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1"
+          ],
+          "use_explanation": "Induction holds for properties of naturals ([[thm-induction-principle]])."
+        },
+        {
+          "fact": "F7",
+          "source": "thm-omega-is-peano-system",
+          "source_section": "Statement",
+          "quote": "The triple $(\\mathbb{N}, 0, \\sigma) = (\\omega, \\varnothing, {\\cdot}^{+})$ satisfies the three Peano axioms ([[def-peano-system]]): (P1) $\\sigma(n) \\neq 0$ for all $n$; (P2) $\\sigma$ is injective; (P3) induction. Hence a Peano system exists.",
+          "uses": [
+            "1.1",
+            "4.2"
+          ],
+          "use_explanation": "Natural successor is injective and never zero ([[thm-omega-is-peano-system]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "lem-stay-put-right-left-macro-simulation-1.1",
+          "step": "1.1",
+          "claim": "The tagged state product is a set with disjoint copies and distinct designated states.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F7",
+            "Q a set; tags 0 and 1; pairwise distinct original designated states"
+          ]
+        },
+        {
+          "id": "lem-stay-put-right-left-macro-simulation-2.1",
+          "step": "2.1",
+          "claim": "The tagged state product is finite by adjoining two fresh points per enumerated original state.",
+          "inputs": [
+            "F3",
+            "1.1",
+            "F6",
+            "e:n to Q bijective; empty initial product; adjunction extends a bijection at its new last index"
+          ]
+        },
+        {
+          "id": "lem-stay-put-right-left-macro-simulation-3.1",
+          "step": "3.1",
+          "claim": "The transition clauses define a legal total ordinary machine exactly on its nonhalting pairs.",
+          "inputs": [
+            "F1",
+            "1.1",
+            "2.1",
+            "original delta; unmarked nonhalting q; all marked p including marked accept/reject"
+          ]
+        },
+        {
+          "id": "lem-stay-put-right-left-macro-simulation-4.1",
+          "step": "4.1",
+          "claim": "An L/R step has a one-step next-unmarked simulation with equal tape and head, also at the clamp.",
+          "inputs": [
+            "F1",
+            "F2",
+            "3.1",
+            "C=(q,h,t) nonhalting; delta(q,t(h))=(p,b,D); D in {L,R}"
+          ]
+        },
+        {
+          "id": "lem-stay-put-right-left-macro-simulation-4.2",
+          "step": "4.2",
+          "claim": "An S step has exactly two simulator steps, no halting interior, unchanged neighbor and equal final head/tape.",
+          "inputs": [
+            "F7",
+            "F1",
+            "F2",
+            "1.1",
+            "3.1",
+            "D=S; u=t[h:=b]; arbitrary c=u(h+1); positive successor h+1; possible original halting p"
+          ]
+        },
+        {
+          "id": "lem-stay-put-right-left-macro-simulation-5.1",
+          "step": "5.1",
+          "claim": "Every next-unmarked segment is one of the calculated segments; no such segment starts at an unmarked halt.",
+          "inputs": [
+            "F5",
+            "4.1",
+            "4.2",
+            "F1",
+            "3.1",
+            "unmarked start E(q,h,t); original entry either absent at a halt or uniquely L,R,S"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 starts the enumeration proof at the empty tagged set; step 4.2 applies to an entirely blank tape."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 4.1 and 4.2 explicitly compute L at zero and the S macro head trace 0,1,0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 gives a segment of exactly one transition for L/R; step 2.1 supplies singleton adjunction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.2 permits blank-only tapes and a halting original target; step 3.1 keeps its marked copy nonhalting."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.2 returns left only from the positive successor h+1, including h=0; no right endpoint is present in the Statement."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses a single finite enumeration of the fixed Q; the product and transitions are explicit, so no indexed choice is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 4.1 and 4.2 expand every genuine original step to its next-unmarked segment."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 5.1 exhausts the original directions and all next-unmarked simulator segments, excluding halting starts."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-12",
+        "notes": "Accepted after reading Proof 1.1–5.1. Cartesian-product and ordered-pair suppliers justify disjoint tags and designated-state distinctness. The append-two enumeration induction establishes finite control without Choice. The table covers exactly unmarked nonhalting states and every marked state, including marked accepting/rejecting targets. L/R steps match literally. For S, writing at h then preserving the arbitrary scanned symbol at h+1 returns from a positive successor to h with the entire updated tape unchanged, including h=0. Unique outgoing transitions prove the next-unmarked converse. Checkoway printed slide 9, PDF p.18, gives the same macro; local arguments check the additional hypotheses."
+      }
+    },
+    "thm-stay-put-elimination-with-explicit-simulation-interface": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stay-put-one-tape-machine-and-run-interface",
+          "source_section": "Definition",
+          "quote": "A **stay-put one-tape machine** is a tuple $M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$ with all the finite-set, alphabet and pairwise-distinct designated-state conditions of [[def-deterministic-one-tape-turing-machine]], except that the total transition function is\n$$\\delta:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma\\longrightarrow Q\\times\\Gamma\\times\\{L,R,S\\}.$$\nThe three direction tags are distinct. There are no transition entries at either halting state.\n\nA tape is a function $t:\\mathbb N\\to\\Gamma$ with finite support $\\{j:t(j)\\ne\\sqcup\\}$. Write $\\mathcal T$ for the set of tapes and $\\mathcal C_M=Q\\times\\mathbb N\\times\\mathcal T$. For $b\\in\\Gamma$ put $t[h:=b](h)=b$ and $t[h:=b](j)=t(j)$ for $j\\ne h$. From a nonhalting $C=(q,h,t)$, if $\\delta(q,t(h))=(p,b,D)$, its successor is\n$$C'=(p,H_D(h),t[h:=b]),\\qquad H_R(h)=h+1,\\quad H_S(h)=h,\\quad H_L(h)=\\begin{cases}0&h=0,\\\\h-1&h>0.\\end{cases}$$\nHere $h-1$ means the predecessor of a positive natural. This extends [[def-one-step-configuration-relation]]. Write $C\\vdash_M C'$ for exactly these steps; no halting configuration has a successor.\n\nFor a word $w:m\\to\\Sigma$, set $t_w(j)=w(j)$ when $j<m$ and $t_w(j)=\\sqcup$ otherwise, and $I_M(w)=(q_0,0,t_w)$. Accepting means $q=q_{\\mathrm{acc}}$, rejecting means $q=q_{\\mathrm{rej}}$, and halting means either equality. These are the formulas of [[def-turing-machine-initial-and-halting-configuration-interface]], now for the extended tuple.\n\nA **maximal run from $C$** is either a sequence $C_0,\\ldots,C_t$ with $C_0=C$, each $C_i\\vdash_M C_{i+1}$ for $i<t$, and $C_t$ halting, or an infinite sequence $(C_i)_{i\\in\\mathbb N}$ starting at $C$ with each consecutive pair a genuine step. A finite run accepts or rejects according to its last state; an infinite run **diverges**. There is exactly one maximal run from every configuration, as verified below. To recognize a language means to accept exactly its inputs; to decide it additionally means to halt on every input.",
+          "uses": [
+            "1.1",
+            "4.1",
+            "4.2",
+            "5.1",
+            "6.1"
+          ],
+          "use_explanation": "The machine/run interface gives a unique maximal run, ending at the first halt or continuing infinitely, and fixes initial tapes and the two halting predicates ([[def-stay-put-one-tape-machine-and-run-interface]])."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-stay-put-right-left-macro-simulation",
+          "source_section": "Statement",
+          "quote": "For every stay-put machine $M$ of [[def-stay-put-one-tape-machine-and-run-interface]], there is an ordinary machine $N$ with state set $Q\\times\\{0,1\\}$, the same $\\Sigma,\\Gamma,\\sqcup$, and designated states $(q_0,0),(q_{\\mathrm{acc}},0),(q_{\\mathrm{rej}},0)$. Call tag zero **unmarked** and tag one **marked**. Put $E(q,h,t)=((q,0),h,t)$.\n\nIts complete transition table is as follows. For every nonhalting $q\\in Q$ and $a\\in\\Gamma$, if $\\delta(q,a)=(p,b,D)$, set\n$$\\delta_N((q,0),a)=\\begin{cases}((p,0),b,D)&D\\in\\{L,R\\},\\\\((p,1),b,R)&D=S.\\end{cases}$$\nFor every $p\\in Q$ and $c\\in\\Gamma$, including original halting states $p$, set\n$$\\delta_N((p,1),c)=((p,0),c,L).$$\nThere are no other entries.\n\nEach genuine $M$ step $C\\vdash_M C'$ corresponds to exactly the segment from $E(C)$ to the next unmarked configuration of $N$: one step for $L/R$, two for $S$. In the latter case, if $C=(q,h,t)$ and $\\delta(q,t(h))=(p,b,S)$, the sole interior configuration is $((p,1),h+1,t[h:=b])$, and it is nonhalting. Conversely every segment from an unmarked configuration to the next unmarked configuration arises in this way. An unmarked halting configuration has no such segment.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "4.1",
+            "4.2",
+            "6.1"
+          ],
+          "use_explanation": "Each original step expands to its unique next-unmarked segment of length one or two, preserving head and tape at its end; every interior configuration is marked and nonhalting ([[lem-stay-put-right-left-macro-simulation]])."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-recursion",
+          "source_section": "Statement",
+          "quote": "Let $(N,0,\\sigma)$ be a Peano system ([[def-peano-system]]), in particular the natural numbers $\\mathbb{N}$ ([[def-natural-numbers]]). For any set $A$, any element $a \\in A$, and any function $f : A \\to A$, there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$.",
+          "uses": [
+            "1.1"
+          ],
+          "use_explanation": "A total self-map of a set with a specified start has a unique sequence of iterates ([[thm-recursion]])."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2"
+          ],
+          "use_explanation": "A property with a base case and successor step holds on the naturals ([[thm-induction-principle]])."
+        },
+        {
+          "fact": "F5",
+          "source": "def-nat-addition",
+          "source_section": "Definition",
+          "quote": "**Addition** $+ : \\mathbb{N} \\times \\mathbb{N} \\to \\mathbb{N}$ is defined by\nrecursion on the second argument: for each fixed $m \\in \\mathbb{N}$,\n\n$$m + 0 = m, \\qquad m + \\sigma(n) = \\sigma(m + n).$$",
+          "uses": [
+            "2.2",
+            "3.1"
+          ],
+          "use_explanation": "Addition satisfies $a+0=a$ and $a+\\sigma(b)=\\sigma(a+b)$ ([[def-nat-addition]]); also $\\sigma(a)+b=\\sigma(a+b)$ ([[lem-nat-add-successor-left]]) and $0+b=b$ ([[lem-nat-add-identity]])."
+        },
+        {
+          "fact": "F5",
+          "source": "lem-nat-add-successor-left",
+          "source_section": "Statement",
+          "quote": "For all $m, n \\in \\mathbb{N}$: $\\sigma(m) + n = \\sigma(m + n)$. (The recursion defines addition on the second argument; this is the matching law for adding on the first.)",
+          "uses": [
+            "2.2",
+            "3.1"
+          ],
+          "use_explanation": "Addition satisfies $a+0=a$ and $a+\\sigma(b)=\\sigma(a+b)$ ([[def-nat-addition]]); also $\\sigma(a)+b=\\sigma(a+b)$ ([[lem-nat-add-successor-left]]) and $0+b=b$ ([[lem-nat-add-identity]])."
+        },
+        {
+          "fact": "F5",
+          "source": "lem-nat-add-identity",
+          "source_section": "Statement",
+          "quote": "For all $n \\in \\mathbb{N}$: $0 + n = n$. The right identity $n + 0 = n$ is definitional, so together with this law $0$ is a two-sided identity for addition.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ],
+          "use_explanation": "Addition satisfies $a+0=a$ and $a+\\sigma(b)=\\sigma(a+b)$ ([[def-nat-addition]]); also $\\sigma(a)+b=\\sigma(a+b)$ ([[lem-nat-add-successor-left]]) and $0+b=b$ ([[lem-nat-add-identity]])."
+        },
+        {
+          "fact": "F6",
+          "source": "def-nat-order",
+          "source_section": "Definition",
+          "quote": "For $m, n \\in \\mathbb{N}$, define the **order** by\n\n$$m \\le n \\iff \\exists k \\in \\mathbb{N}\\ (m + k = n),$$\n\nand the **strict order** by $m < n \\iff (m \\le n \\text{ and } m \\neq n)$, using\naddition ([[def-nat-addition]]).",
+          "uses": [
+            "3.1",
+            "3.2",
+            "4.2"
+          ],
+          "use_explanation": "The relation $a\\le b$ means $a+d=b$ for some natural $d$, and $a<b$ additionally means $a\\ne b$ ([[def-nat-order]]); it is a linear order ([[thm-nat-linear-order]])."
+        },
+        {
+          "fact": "F6",
+          "source": "thm-nat-linear-order",
+          "source_section": "Statement",
+          "quote": "The relation $\\le$ on $\\mathbb{N}$, where $m \\le n \\iff \\exists k\\ (m + k = n)$ ([[def-nat-order]]), is a linear (total) order: reflexive, antisymmetric, transitive, and total.",
+          "uses": [
+            "3.1",
+            "3.2",
+            "4.2"
+          ],
+          "use_explanation": "The relation $a\\le b$ means $a+d=b$ for some natural $d$, and $a<b$ additionally means $a\\ne b$ ([[def-nat-order]]); it is a linear order ([[thm-nat-linear-order]])."
+        },
+        {
+          "fact": "F7",
+          "source": "lem-nat-order-add-compatible",
+          "source_section": "Statement",
+          "quote": "For all $m, n, k \\in \\mathbb{N}$: $m \\le n \\iff m + k \\le n + k$; and $m < n \\iff m + k < n + k$ ([[def-nat-order]]).",
+          "uses": [
+            "3.1"
+          ],
+          "use_explanation": "Adding a fixed natural preserves and reflects both weak and strict order ([[lem-nat-order-add-compatible]])."
+        },
+        {
+          "fact": "F8",
+          "source": "lem-nat-discrete",
+          "source_section": "Statement",
+          "quote": "For all $m, n \\in \\mathbb{N}$: $m < n \\iff \\sigma(m) \\le n$ ([[def-nat-order]]). Consequently there is no $k$ with $n < k < \\sigma(n)$: the successor $\\sigma(n)$ is the immediate successor of $n$.",
+          "uses": [
+            "3.2",
+            "4.2"
+          ],
+          "use_explanation": "$a<b$ iff $a+1\\le b$, and no natural lies strictly between $a$ and $a+1$ ([[lem-nat-discrete]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "thm-stay-put-elimination-with-explicit-simulation-interface-1.1",
+          "step": "1.1",
+          "claim": "A total map on configuration/counter triples gives the run and exact S count; N has its own unique maximal run.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F2",
+            "C in C_M; counters initially 0,0; increment k by one or two and s by zero or one; identity only after halt"
+          ]
+        },
+        {
+          "id": "thm-stay-put-elimination-with-explicit-simulation-interface-2.1",
+          "step": "2.1",
+          "claim": "The simulator reaches E(C_i) at each boundary k_i via consistent nonhalting macro interiors.",
+          "inputs": [
+            "F2",
+            "1.1",
+            "F4",
+            "base E(C_0); original step at each nonfinal reached index; unique one/two-step macro"
+          ]
+        },
+        {
+          "id": "thm-stay-put-elimination-with-explicit-simulation-interface-2.2",
+          "step": "2.2",
+          "claim": "The exact boundary equation is k_i=i+s_i.",
+          "inputs": [
+            "F5",
+            "1.1",
+            "F4",
+            "k_0=s_0=0; L/R retains s and increments k once; S increments s once and k twice"
+          ]
+        },
+        {
+          "id": "thm-stay-put-elimination-with-explicit-simulation-interface-3.1",
+          "step": "3.1",
+          "claim": "The bounds 0<=s_i<=i and i<=k_i<=i+i hold at every reached index.",
+          "inputs": [
+            "F6",
+            "F7",
+            "F5",
+            "2.2",
+            "F4",
+            "counter recurrence; k_i=i+s_i; inductive bound s_i<=i; add-one order preservation"
+          ]
+        },
+        {
+          "id": "thm-stay-put-elimination-with-explicit-simulation-interface-3.2",
+          "step": "3.2",
+          "claim": "The first i half-open macro segments partition [0,k_i); each contains only its boundary and possible S interior.",
+          "inputs": [
+            "F8",
+            "F2",
+            "1.1",
+            "2.1",
+            "F4",
+            "F6",
+            "k_0=0; k_(i+1) is successor or double successor of k_i; discreteness of natural order"
+          ]
+        },
+        {
+          "id": "thm-stay-put-elimination-with-explicit-simulation-interface-4.1",
+          "step": "4.1",
+          "claim": "A halt at t expands to the first simulator halt at k_t=t+s_t with the same outcome, tape and head.",
+          "inputs": [
+            "F1",
+            "F2",
+            "2.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "original nonhalting at i<t; halting at t; all simulator times before k_t covered by partition"
+          ]
+        },
+        {
+          "id": "thm-stay-put-elimination-with-explicit-simulation-interface-4.2",
+          "step": "4.2",
+          "claim": "An infinite original run forces an infinite genuine simulator run.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "F8",
+            "2.1",
+            "3.1",
+            "3.2",
+            "original indices all natural; fixed simulator time j; j<j+1<=k_(j+1); compatible finite expansions"
+          ]
+        },
+        {
+          "id": "thm-stay-put-elimination-with-explicit-simulation-interface-5.1",
+          "step": "5.1",
+          "claim": "Acceptance, rejection and divergence are preserved in reverse as well as forward.",
+          "inputs": [
+            "4.2",
+            "4.1",
+            "F1",
+            "exhaustive three original outcomes; finite outcome preservation; infinite outcome preservation"
+          ]
+        },
+        {
+          "id": "thm-stay-put-elimination-with-explicit-simulation-interface-6.1",
+          "step": "6.1",
+          "claim": "Initial embeddings give equal accepted languages, preservation of decision and output, and both model-class inclusions.",
+          "inputs": [
+            "5.1",
+            "4.1",
+            "F1",
+            "F2",
+            "w any finite input including empty; same alphabets and blank; output is fixed function of halting tape/head; ordinary model has no S"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 6.1 proves initial embedding for the empty word and a wholly blank tape."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 give k_0=s_0=0; step 4.1 includes a zero-step already-halting start."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.2 give k_1=1 for L/R and k_1=2 for S; step 3.2 identifies their possible times."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.2 handles infinite runs; step 6.1 handles the no-S subcase; the Statement allows arbitrary starts including halts."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 applies the proven macro at every head, including zero; step 4.1 includes the final transition and excludes the post-halt tail."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs a total deterministic map on a fixed product set with specified start; no choice of transitions or outputs occurs."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 4.1 and 4.2 prove original acceptance/rejection/divergence implies the corresponding simulator outcome; step 6.1 gives the extended-to-ordinary class inclusion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 5.1 proves all three reverse outcome implications; step 6.1 gives the ordinary-to-extended class inclusion."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-12",
+        "notes": "Accepted after reading Proof 1.1–6.1 and all eleven declared supplier statements. Recursion is applied to a total configuration/counter self-map; only genuine indices contribute. Both successor laws give k_i=i+s_i. Induction proves s_i<=i and the left-addition bound using the actually cited right-addition order compatibility. The half-open segment partition uses natural discreteness and covers every time before k_i. For divergence, k_(j+1)>=j+1 covers any simulator time j by a finite nonhalting expansion. The first-halt proof excludes all earlier boundary/interior halts, including t=0. Exhaustive original outcomes give the three converse implications. Initial embedding, both language inclusions and any fixed tape/head output function follow. Recurrent configurations are explicitly allowed; no AC or unproved simulation premise is used."
+      }
+    },
+    "ex-eliminating-a-stay-put-transition": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stay-put-one-tape-machine-and-run-interface",
+          "source_section": "Definition",
+          "quote": "A **stay-put one-tape machine** is a tuple $M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$ with all the finite-set, alphabet and pairwise-distinct designated-state conditions of [[def-deterministic-one-tape-turing-machine]], except that the total transition function is\n$$\\delta:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma\\longrightarrow Q\\times\\Gamma\\times\\{L,R,S\\}.$$\nThe three direction tags are distinct. There are no transition entries at either halting state.\n\nA tape is a function $t:\\mathbb N\\to\\Gamma$ with finite support $\\{j:t(j)\\ne\\sqcup\\}$. Write $\\mathcal T$ for the set of tapes and $\\mathcal C_M=Q\\times\\mathbb N\\times\\mathcal T$. For $b\\in\\Gamma$ put $t[h:=b](h)=b$ and $t[h:=b](j)=t(j)$ for $j\\ne h$. From a nonhalting $C=(q,h,t)$, if $\\delta(q,t(h))=(p,b,D)$, its successor is\n$$C'=(p,H_D(h),t[h:=b]),\\qquad H_R(h)=h+1,\\quad H_S(h)=h,\\quad H_L(h)=\\begin{cases}0&h=0,\\\\h-1&h>0.\\end{cases}$$\nHere $h-1$ means the predecessor of a positive natural. This extends [[def-one-step-configuration-relation]]. Write $C\\vdash_M C'$ for exactly these steps; no halting configuration has a successor.\n\nFor a word $w:m\\to\\Sigma$, set $t_w(j)=w(j)$ when $j<m$ and $t_w(j)=\\sqcup$ otherwise, and $I_M(w)=(q_0,0,t_w)$. Accepting means $q=q_{\\mathrm{acc}}$, rejecting means $q=q_{\\mathrm{rej}}$, and halting means either equality. These are the formulas of [[def-turing-machine-initial-and-halting-configuration-interface]], now for the extended tuple.\n\nA **maximal run from $C$** is either a sequence $C_0,\\ldots,C_t$ with $C_0=C$, each $C_i\\vdash_M C_{i+1}$ for $i<t$, and $C_t$ halting, or an infinite sequence $(C_i)_{i\\in\\mathbb N}$ starting at $C$ with each consecutive pair a genuine step. A finite run accepts or rejects according to its last state; an infinite run **diverges**. There is exactly one maximal run from every configuration, as verified below. To recognize a language means to accept exactly its inputs; to decide it additionally means to halt on every input.",
+          "uses": [
+            "1.1",
+            "2.2",
+            "3.1",
+            "3.2",
+            "4.1"
+          ],
+          "use_explanation": "The stay-put interface fixes totality on nonhalting pairs, initial tapes, writes, head moves and the halting predicates ([[def-stay-put-one-tape-machine-and-run-interface]])."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-stay-put-right-left-macro-simulation",
+          "source_section": "Statement",
+          "quote": "For every stay-put machine $M$ of [[def-stay-put-one-tape-machine-and-run-interface]], there is an ordinary machine $N$ with state set $Q\\times\\{0,1\\}$, the same $\\Sigma,\\Gamma,\\sqcup$, and designated states $(q_0,0),(q_{\\mathrm{acc}},0),(q_{\\mathrm{rej}},0)$. Call tag zero **unmarked** and tag one **marked**. Put $E(q,h,t)=((q,0),h,t)$.\n\nIts complete transition table is as follows. For every nonhalting $q\\in Q$ and $a\\in\\Gamma$, if $\\delta(q,a)=(p,b,D)$, set\n$$\\delta_N((q,0),a)=\\begin{cases}((p,0),b,D)&D\\in\\{L,R\\},\\\\((p,1),b,R)&D=S.\\end{cases}$$\nFor every $p\\in Q$ and $c\\in\\Gamma$, including original halting states $p$, set\n$$\\delta_N((p,1),c)=((p,0),c,L).$$\nThere are no other entries.\n\nEach genuine $M$ step $C\\vdash_M C'$ corresponds to exactly the segment from $E(C)$ to the next unmarked configuration of $N$: one step for $L/R$, two for $S$. In the latter case, if $C=(q,h,t)$ and $\\delta(q,t(h))=(p,b,S)$, the sole interior configuration is $((p,1),h+1,t[h:=b])$, and it is nonhalting. Conversely every segment from an unmarked configuration to the next unmarked configuration arises in this way. An unmarked halting configuration has no such segment.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ],
+          "use_explanation": "The ordinary simulator uses tagged states, replaces an $S$ entry by a right move into a marked target, and returns left while preserving the scanned symbol; only the unmarked designated states halt ([[lem-stay-put-right-left-macro-simulation]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "ex-eliminating-a-stay-put-transition-1.1",
+          "step": "1.1",
+          "claim": "The two-entry three-state original is a legal stay-put machine.",
+          "inputs": [
+            "F1",
+            "Q={q0,qacc,qrej}; Sigma={a}; Gamma={a,blank}; both q0 entries displayed"
+          ]
+        },
+        {
+          "id": "ex-eliminating-a-stay-put-transition-2.1",
+          "step": "2.1",
+          "claim": "The simulator has exactly the two specified unmarked entries and six marked entries.",
+          "inputs": [
+            "F2",
+            "1.1",
+            "original two-entry table; three original states; two symbols; tagged macro formula"
+          ]
+        },
+        {
+          "id": "ex-eliminating-a-stay-put-transition-2.2",
+          "step": "2.2",
+          "claim": "On a the original accepts at zero after exactly one step with tape unchanged.",
+          "inputs": [
+            "F1",
+            "1.1",
+            "t(0)=a; t(j)=blank for j>=1; original (q0,a) entry"
+          ]
+        },
+        {
+          "id": "ex-eliminating-a-stay-put-transition-3.1",
+          "step": "3.1",
+          "claim": "On a the simulator accepts after exactly two steps with head trace 0,1,0 and unchanged whole tape.",
+          "inputs": [
+            "F1",
+            "F2",
+            "2.1",
+            "2.2",
+            "initial ((q0,0),0,t); t(1)=blank; marked accepting copy is nonhalting"
+          ]
+        },
+        {
+          "id": "ex-eliminating-a-stay-put-transition-3.2",
+          "step": "3.2",
+          "claim": "On empty input the original/simulator times remain one/two with entirely blank tapes.",
+          "inputs": [
+            "F1",
+            "F2",
+            "2.1",
+            "t_epsilon(j)=blank for every j; explicit blank entries"
+          ]
+        },
+        {
+          "id": "ex-eliminating-a-stay-put-transition-4.1",
+          "step": "4.1",
+          "claim": "On the aa tape the return rewrites the nonblank neighbor as a and preserves the tape.",
+          "inputs": [
+            "F1",
+            "F2",
+            "2.1",
+            "u(0)=u(1)=a; u(j)=blank for j>=2; marked a return entry"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.2 calculates both runs on the empty input and checks the empty support."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 3.1 calculate head positions starting at zero; the return is from one to zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 calculates input length one and exact original halting time one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.2 uses an all-blank tape; step 3.1 checks the marked accepting target remains nonhalting."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 gives the head trace 0,1,0; step 4.1 checks a nonblank right neighbor at this endpoint."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 specifies the entire finite machine; step 2.1 specifies every simulator entry without selecting any family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example calculates a specified machine and its simulator on specified tapes; it states no biconditional."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This example calculates a specified machine and its simulator on specified tapes; it states no biconditional."
+        }
+      ]
+    },
+    "cex-deleting-stay-put-moves-does-not-preserve-computation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-stay-put-one-tape-machine-and-run-interface",
+          "source_section": "Definition",
+          "quote": "A **stay-put one-tape machine** is a tuple $M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta)$ with all the finite-set, alphabet and pairwise-distinct designated-state conditions of [[def-deterministic-one-tape-turing-machine]], except that the total transition function is\n$$\\delta:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma\\longrightarrow Q\\times\\Gamma\\times\\{L,R,S\\}.$$\nThe three direction tags are distinct. There are no transition entries at either halting state.\n\nA tape is a function $t:\\mathbb N\\to\\Gamma$ with finite support $\\{j:t(j)\\ne\\sqcup\\}$. Write $\\mathcal T$ for the set of tapes and $\\mathcal C_M=Q\\times\\mathbb N\\times\\mathcal T$. For $b\\in\\Gamma$ put $t[h:=b](h)=b$ and $t[h:=b](j)=t(j)$ for $j\\ne h$. From a nonhalting $C=(q,h,t)$, if $\\delta(q,t(h))=(p,b,D)$, its successor is\n$$C'=(p,H_D(h),t[h:=b]),\\qquad H_R(h)=h+1,\\quad H_S(h)=h,\\quad H_L(h)=\\begin{cases}0&h=0,\\\\h-1&h>0.\\end{cases}$$\nHere $h-1$ means the predecessor of a positive natural. This extends [[def-one-step-configuration-relation]]. Write $C\\vdash_M C'$ for exactly these steps; no halting configuration has a successor.\n\nFor a word $w:m\\to\\Sigma$, set $t_w(j)=w(j)$ when $j<m$ and $t_w(j)=\\sqcup$ otherwise, and $I_M(w)=(q_0,0,t_w)$. Accepting means $q=q_{\\mathrm{acc}}$, rejecting means $q=q_{\\mathrm{rej}}$, and halting means either equality. These are the formulas of [[def-turing-machine-initial-and-halting-configuration-interface]], now for the extended tuple.\n\nA **maximal run from $C$** is either a sequence $C_0,\\ldots,C_t$ with $C_0=C$, each $C_i\\vdash_M C_{i+1}$ for $i<t$, and $C_t$ halting, or an infinite sequence $(C_i)_{i\\in\\mathbb N}$ starting at $C$ with each consecutive pair a genuine step. A finite run accepts or rejects according to its last state; an infinite run **diverges**. There is exactly one maximal run from every configuration, as verified below. To recognize a language means to accept exactly its inputs; to decide it additionally means to halt on every input.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1"
+          ],
+          "use_explanation": "The library model requires a total transition function exactly on nonhalting state-symbol pairs, uses the specified input tape, fixes the head on $S$, and clamps a left move at zero ([[def-stay-put-one-tape-machine-and-run-interface]])."
+        },
+        {
+          "fact": "F2",
+          "source": "lem-stay-put-right-left-macro-simulation",
+          "source_section": "Statement",
+          "quote": "For every stay-put machine $M$ of [[def-stay-put-one-tape-machine-and-run-interface]], there is an ordinary machine $N$ with state set $Q\\times\\{0,1\\}$, the same $\\Sigma,\\Gamma,\\sqcup$, and designated states $(q_0,0),(q_{\\mathrm{acc}},0),(q_{\\mathrm{rej}},0)$. Call tag zero **unmarked** and tag one **marked**. Put $E(q,h,t)=((q,0),h,t)$.\n\nIts complete transition table is as follows. For every nonhalting $q\\in Q$ and $a\\in\\Gamma$, if $\\delta(q,a)=(p,b,D)$, set\n$$\\delta_N((q,0),a)=\\begin{cases}((p,0),b,D)&D\\in\\{L,R\\},\\\\((p,1),b,R)&D=S.\\end{cases}$$\nFor every $p\\in Q$ and $c\\in\\Gamma$, including original halting states $p$, set\n$$\\delta_N((p,1),c)=((p,0),c,L).$$\nThere are no other entries.\n\nEach genuine $M$ step $C\\vdash_M C'$ corresponds to exactly the segment from $E(C)$ to the next unmarked configuration of $N$: one step for $L/R$, two for $S$. In the latter case, if $C=(q,h,t)$ and $\\delta(q,t(h))=(p,b,S)$, the sole interior configuration is $((p,1),h+1,t[h:=b])$, and it is nonhalting. Conversely every segment from an unmarked configuration to the next unmarked configuration arises in this way. An unmarked halting configuration has no such segment.",
+          "uses": [
+            "4.1"
+          ],
+          "use_explanation": "The correct simulation replaces $S$ by right then left through a nonhalting marked state, preserving the neighbor and returning to the original head ([[lem-stay-put-right-left-macro-simulation]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "cex-deleting-stay-put-moves-does-not-preserve-computation-1.1",
+          "step": "1.1",
+          "claim": "The legal deletion witness accepts empty input in one stay-put step.",
+          "inputs": [
+            "F1",
+            "two q0 entries target qacc with S; wholly blank initial tape; three distinct states"
+          ]
+        },
+        {
+          "id": "cex-deleting-stay-put-moves-does-not-preserve-computation-1.2",
+          "step": "1.2",
+          "claim": "The four-entry replacement witness and its S-to-R replacement are both legal total machines.",
+          "inputs": [
+            "F1",
+            "Q={q0,p,qacc,qrej}; four displayed nonhalting pairs; sole S at (q0,a)"
+          ]
+        },
+        {
+          "id": "cex-deleting-stay-put-moves-does-not-preserve-computation-2.1",
+          "step": "2.1",
+          "claim": "Deleting entries violates totality; under the hypothetical missing-entry rejection rule it changes acceptance to rejection.",
+          "inputs": [
+            "F1",
+            "1.1",
+            "delete both S entries of first witness; required pair (q0,blank); empty input"
+          ]
+        },
+        {
+          "id": "cex-deleting-stay-put-moves-does-not-preserve-computation-2.2",
+          "step": "2.2",
+          "claim": "The original four-entry machine accepts input a after two transitions.",
+          "inputs": [
+            "F1",
+            "1.2",
+            "t(0)=a; t(j)=blank for j>=1; S keeps p at zero then accepting p,a entry"
+          ]
+        },
+        {
+          "id": "cex-deleting-stay-put-moves-does-not-preserve-computation-3.1",
+          "step": "3.1",
+          "claim": "The replacement rejects a after two transitions, so its accepted language differs.",
+          "inputs": [
+            "F1",
+            "1.2",
+            "2.2",
+            "changed R moves p to cell one; t(1)=blank; rejecting p,blank entry"
+          ]
+        },
+        {
+          "id": "cex-deleting-stay-put-moves-does-not-preserve-computation-4.1",
+          "step": "4.1",
+          "claim": "Left then right at zero ends at one, whereas the correct macro returns to zero.",
+          "inputs": [
+            "F2",
+            "F1",
+            "blank tape; clamped H_L(0)=0; H_R(0)=1; fresh nonhalting intermediate state"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 2.1 use empty input and the empty deleted transition table."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 has immediate rejection under the hypothetical convention; step 4.1 computes moves from cell zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 3.1 use the one-letter word a; step 1.1 accepts empty input after one transition."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 separates the invalid empty table from the hypothetical partial-table convention; step 1.2 checks the valid total replacement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 calculates the clamped-left failure 0,0,1 and the correct 0,1,0 return."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 list every entry of fixed finite witness machines; the witnesses require no arbitrary selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This counterexample refutes universal preservation claims with fixed witnesses; it states no biconditional requiring this direction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This counterexample refutes universal preservation claims with fixed witnesses; it states no biconditional requiring this direction."
+        }
+      ]
+    }
+  },
+  "source_readings": [
+    {
+      "url": "https://checkoway.net/teaching/cs301/2018-spring/slides/Lecture-16-tm-variants.pdf",
+      "locator": "Printed slides 2–10; PDF pp.2–19, complete relevant text (lines 4–162), reread 2026-09-10.",
+      "excerpt": "will move right and then back left.",
+      "excerpt_locator": "Printed slide 9; PDF pp.17–18, immediately before the marked-state transition construction.",
+      "uses": [
+        {
+          "item": "def-stay-put-one-tape-machine-and-run-interface",
+          "location": "Definition; Verification steps 1.1–7.1",
+          "use": "Slide 3 motivates the extra direction; the local proof independently establishes the extended configuration/run interface with the explicitly different halting domain."
+        },
+        {
+          "item": "lem-stay-put-right-left-macro-simulation",
+          "location": "Statement and Proof steps 1.1–5.1",
+          "use": "Slide 9 gives marked target states and symbol-preserving return transitions; the proof verifies finiteness, totality, whole-tape equality, positive return coordinate and both segment directions."
+        },
+        {
+          "item": "thm-stay-put-elimination-with-explicit-simulation-interface",
+          "location": "Proof steps 1.1–6.1",
+          "use": "Slides 8–10 give the two inclusions and three outcomes; the local proof supplies counters, partition, exact time bounds and explicit converse outcomes."
+        },
+        {
+          "item": "ex-eliminating-a-stay-put-transition",
+          "location": "Verification steps 1.1–4.1",
+          "use": "Local generated finite instance of the slide 9 macro, with every transition and tape calculation displayed."
+        },
+        {
+          "item": "cex-deleting-stay-put-moves-does-not-preserve-computation",
+          "location": "Counterexample steps 1.1–4.1",
+          "use": "Local generated witnesses test the slide 9–10 construction; no witness is attributed to the source."
+        }
+      ]
+    },
+    {
+      "url": "https://cs.brown.edu/people/jsavage/book/pdfs/ModelsOfComputation_Chapter5.pdf",
+      "locator": "Section 5.1, Definition 5.1.1 and all discussion before 5.1.1; printed pp.210–211, PDF pp.2–3 (lines 25–90), reread 2026-09-10.",
+      "excerpt": "A TM cannot exit from h.",
+      "excerpt_locator": "Definition 5.1.1, printed p.210.",
+      "use": "Independent finite-control, input, outcome and tape-output context. Source-convention sections in the five items explain its separate write/move commands, single accepting halt and abnormal left-edge termination. No exact macro, clamped boundary theorem or local witness is inferred from this source; numbered proofs use the declared local suppliers."
+    }
+  ]
+}

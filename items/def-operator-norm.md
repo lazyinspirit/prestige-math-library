@@ -7,13 +7,18 @@ origin: session
 provenance:
   statement: literature-derived
   proof: not-applicable
-deps: [def-bounded-linear-operator]
+deps: [def-bounded-linear-operator, cor-cauchy-reals-lub-complete]
 justified_by: []
 aliases: []
 landmark: false
 verification:
-  audited: 2026-09-01
   precheck: n/a
+  verified:
+    model: codex
+    verdict: pass
+    date: 2026-09-09
+    scope: owner-authorized local definition repair; no independent judge
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -32,8 +37,12 @@ $T:X\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The
 
 $$\|T\| := \sup\{\|Tx\| : x \in X,\ \|x\| \le 1\}.$$
 
-This supremum is finite because every bound $C$ for $T$ also bounds the set on
-the right by $C$.
+The set on the right contains $0$ and every bound $C$ for $T$ bounds it
+above. Thus its finite real supremum exists by the proved least-upper-bound
+property of the library's real field ([[cor-cauchy-reals-lub-complete]]).
+In particular every number strictly below the supremum is exceeded by a
+member of this set; otherwise it would be a smaller upper bound. No choice
+principle is used for this assertion.
 
 The same number is the least bound of $T$:
 

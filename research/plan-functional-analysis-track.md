@@ -1,5 +1,21 @@
 # Functional analysis track — Banach and Hilbert spaces, operators, spectra, Fourier analysis, and distributions
 
+## Binding UC34 repair reconciliation — 2026-09-09
+
+`cor-transpose-preserves-invertibility` now proves both directions directly
+under HB and DC, using the published relative norming/extension interface
+and bounded inverse theorem. It does not consume pending closed-range or
+onto criteria. The canonical dual-spaces page now directly requires the
+earlier `norming-and-separation-under-hahn-banach` page. Preserve these
+explicit assumptions in consumers. No new pair; exact proof and checks are
+recorded in `published-consumer-supplier-ledger.md`.
+
+Step-3's missing real-completeness clauses in published `def-operator-norm`
+and `def-c-zero-and-ell-infinity` are now repaired using the earlier proved
+`cor-cauchy-reals-lub-complete`. Norm existence is justified for a nonempty
+bounded real set; no extra choice is introduced. Batch2's explicit local
+completeness edges remain valid and need not be removed.
+
 Prose scaffold, owner-commissioned 2026-08-13 (run `subjects-01`, track
 `functional-analysis`, wave 2).  Seam authority:
 `research/subjects-01-SEAMS.md`.  This scaffold is designed to follow the last
@@ -324,7 +340,7 @@ Items, in dependency order:
 4. `lem-vector-operations-are-continuous-in-a-normed-space` (lemma) — addition and scalar multiplication are jointly continuous.
 5. `def-linear-isometry-and-isometric-isomorphism` (definition) — distinguish an isometric embedding from a surjective isometry.
 6. `def-normed-subspace` (definition) — a linear subspace with the restricted norm.
-7. `lem-complete-subspace-is-closed` (lemma) — a complete subspace of a normed space is closed; under sequential completeness and topological closure, the standard approximating-sequence proof is labelled $\mathsf{AC}_\omega$.
+7. `lem-complete-subspace-is-closed` (lemma) — under explicit $\mathsf{AC}_\omega$, a complete normed subspace is closed. Use claim1 of the earlier metric complete-subspace theorem with the identical restricted metric; choice supplies an approximating sequence for each fixed closure point, not a family of sequences for all points. The separate closed-implies-complete direction remains choice-free.
 8. `lem-closed-subspace-of-a-banach-space-is-banach` (lemma) — close the converse under completeness of the ambient space.
 9. `def-product-norms-on-finitely-many-normed-spaces` (definition) — max, sum, and Euclidean product norms.
 10. `lem-finite-product-norms-are-equivalent` (lemma) — prove the explicit inequalities, not by finite-dimensional norm equivalence.
@@ -445,7 +461,7 @@ Items:
 1. `thm-coordinate-map-for-a-finite-dimensional-normed-space` (theorem) — every algebraic basis induces a topological isomorphism with $\mathbb K^n$.
 2. `thm-all-norms-on-a-finite-dimensional-complex-space-are-equivalent` (theorem) — complex extension and agreement with the published real theorem.
 3. `cor-finite-dimensional-normed-spaces-are-banach` (corollary).
-4. `cor-finite-dimensional-subspaces-are-closed` (corollary).
+4. `cor-finite-dimensional-subspaces-are-closed` (corollary) — repaired in ZF using a supplied finite ordered basis, explicit realification, finite rational tuple enumeration, least-index adherence approximants, and the preceding finite-dimensional completeness result. The zero subspace is handled directly. Do not use the general complete-subspace-closedness theorem's CC-bearing route; exact receipt: `uc34-2026-09-09-finite-closedness-astra-3.md`.
 5. `cor-linear-maps-with-finite-dimensional-domain-are-bounded` (corollary).
 6. `thm-locally-compact-normed-space-iff-finite-dimensional` (theorem) — the reverse direction will use Riesz's lemma.
 7. `lem-riesz-lemma` (lemma) — for proper closed $M\subset X$ and $0<\alpha<1$, find $x$ with $\|x\|=1$ and $\operatorname{dist}(x,M)>\alpha$.
@@ -453,7 +469,7 @@ Items:
 9. `thm-closed-unit-ball-compact-iff-finite-dimensional` (theorem) — the infinite-dimensional direction is ZF: a finite $\alpha$-net supplied by assumed compactness has finite-dimensional span, contradicted by one application of Riesz's lemma.
 10. `cor-infinite-dimensional-closed-unit-ball-is-not-compact` (corollary) — discharge the already-listed DEFERRED §0 result without reusing a deferred id.
 11. `cor-identity-on-an-infinite-dimensional-normed-space-is-not-compact` (corollary) — later cited by FA-15.
-12. `thm-banach-space-no-countably-infinite-hamel-basis` (theorem) — a countable Hamel basis gives an explicit countable dense rational span, so use the ZF separable-complete Baire theorem and audit the exact formulation against Howard–Tachtsis.
+12. `thm-banach-space-no-countably-infinite-hamel-basis` (theorem) — the repaired published ZF proof realifies a complex basis, uniformly codes finite rational words, proves each finite span closed by least rational approximants and finite-dimensional completeness, and runs a total least-ball recursion. No Recorded or general Baire supplier, countable-union choice, or CC-bearing complete-subspace-closedness theorem is used. Exact receipt: `uc34-2026-09-09-hamel-zf-repair-astra-3.md`.
 13. `rem-general-complete-metric-baire-proof-would-overstate-the-choice-cost` (remark, L/NA) — record why invoking the unrestricted DC-equivalent Baire theorem would be foundationally non-sharp here.
 14. `def-kuratowski-distance-map` (definition) — for a nonempty metric space $(M,d)$ and basepoint $o$, set $K_o(x)=[d(x,\cdot)-d(o,\cdot)]\in C_b(M)$; boundedness follows from $|d(x,z)-d(o,z)|\le d(x,o)$ and does not require $M$ itself to be bounded.
 15. `thm-kuratowski-distance-map-is-an-isometry` (theorem) — prove both triangle-inequality bounds and explain why subtracting the basepoint distance is essential on an unbounded space.
@@ -3006,6 +3022,12 @@ does.
 1. `ex-sequential-uniform-boundedness-for-coordinate-partial-sums`.
 2. `cex-sequential-uniform-boundedness-needs-a-complete-domain` — on
    (c_{00}) with the sup norm, (T_nx=nx_n).
+   Use the earlier `rem-real-and-complex-normed-space-convention` and
+   `lem-complex-conjugation-and-modulus-laws` explicitly for complex scalars;
+   the zero-based finite-support and reciprocal-truncation argument is
+   choice-free. These interfaces do not follow from the real-only norm
+   definition. Current full contract is synchronized from batch2 after
+   Step3b-b's one-item audit and local declaration repair.
 
 Sokal's complete five-page paper backs the gliding-hump idea; the
 independent-vector/deterministic-sign refinement must be labelled as the
@@ -3402,20 +3424,22 @@ published: the new FA-8 weak-sequence theorem cites
 `thm-sequential-uniform-boundedness-under-countable-choice`; leave the
 published general-family theorem at its honest stronger upper bound.
 
-**P-4 — extcheck's exact functional-analysis consequences.**  The current
-published checker reports direct recorded-not-proved dependence for
+**P-4 — recorded-result replacement and the repaired Hamel theorem.**
+The earlier published checker reported direct recorded-not-proved dependence for
 `rem-choice-strength-of-hahn-banach`,
 `rem-general-complete-metric-baire-proof-would-overstate-the-choice-cost`,
 `rem-hahn-banach-open-choice-questions`, and
 `thm-banach-space-no-countably-infinite-hamel-basis`, and inherited dependence
 for `cex-polynomial-space-admits-no-complete-norm`.  The first three are
-orientation remarks and must remain non-load-bearing.  The theorem's proof is
-self-contained: its dependency on `rem-baire-category-choice-strength` is
-used only as commentary [L4], not as a proved lemma.  Future repair: remove
-that logical dependency and move the choice comparison to a non-load-bearing
-remark; the polynomial counterexample then loses the inherited extcheck path.
-Do not claim the extcheck warning is cleared before those published metadata
-changes actually land.
+orientation remarks and must remain non-load-bearing. The Hamel theorem is
+now locally repaired, not merely relinked: its former closedness supplier
+also inherited CC. The current proof supplies choice-free finite-span
+closedness and deterministic separable Baire directly, with all thirteen
+dependencies already published. Its Recorded link is removed. The polynomial
+counterexample needs no SET-22 supplier and remains unchanged; its existing
+bounded no-repair receipt is not reclassified as a repair. These two items
+must not be assigned the stronger general DC/Baire equivalence as prerequisites.
+The general choice-comparison remark remains separate future SET-22 work.
 
 **P-5 — published source/claim boundary.**
 `rem-choice-strength-of-hahn-banach` cites a recorded BPI/AC separation remark
@@ -3461,7 +3485,7 @@ Two Set Theory completion items are Phase-2 suppliers for published FA items:
 | planned SET supplier | published FA direct consumer | complete published FA impact |
 |---|---|---|
 | `thm-basic-cohen-symmetric-model-satisfies-bpi-and-not-ac` (SET-21) | `rem-choice-strength-of-hahn-banach` | that item and `rem-hahn-banach-open-choice-questions` on its B companion |
-| `thm-complete-metric-baire-is-equivalent-to-dependent-choice-over-zf` (SET-22) | `thm-banach-space-no-countably-infinite-hamel-basis`; `rem-general-complete-metric-baire-proof-would-overstate-the-choice-cost` | those two items and `cex-polynomial-space-admits-no-complete-norm` on the B companion |
+| `thm-complete-metric-baire-is-equivalent-to-dependent-choice-over-zf` (SET-22) | `rem-general-complete-metric-baire-proof-would-overstate-the-choice-cost` | General choice-comparison remark only. The repaired ZF Hamel theorem and its unchanged polynomial counterexample do not consume this supplier. |
 
 Until the SET suppliers and their entire earlier prerequisite closure are
 published, the FA consumers remain untouched. In Phase 3, replace their
@@ -3544,3 +3568,10 @@ pp. 91--126, <https://mathweb.tifr.res.in/Documents/Publications/Lectures/tifr14
 is the full-text proof source; FA-20 supplies the modern spectral-measure
 interface. Missing measurable-selection, representative-independence,
 completeness, commutant, or multiplicity arguments block authoring.
+# Step-5 dependency synchronization, 2026-09-09
+
+Completed batch1's interpolation items now explicitly declare their
+exponential, logarithm, real-power, integer-part, Archimedean and nonnegative
+integral suppliers. The canonical plan matches the authored manifest;
+see `phase-2-catchup-24-step5-dependency-reconciliation.md`. No pair is added
+and authored drafts still await Step6. Existing published consumer debt remains.

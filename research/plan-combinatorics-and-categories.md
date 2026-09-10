@@ -9902,6 +9902,12 @@ Their exact published consumer ledgers are:
 | `thm-weak-perfect-graph-theorem` | `thm-basic-bull-free-graphs-are-two-narrow` | `cor-bull-free-graphs-have-the-erdos-hajnal-property-with-exponent-one-quarter`; `cor-the-bull-graph-has-the-erdos-hajnal-property`; `cor-the-six-vertex-prime-h-graphs-have-the-erdos-hajnal-property`; `ex-a-six-vertex-witness-graph-makes-the-bird-criterion-explicit`; `ex-the-five-cycle-is-not-one-narrow`; `fs-two-narrow-implies-one-narrow`; `lem-the-e-graph-and-the-bird-graph-are-wonderful`; `thm-basic-bull-free-graphs-are-two-narrow`; `thm-bull-free-graphs-are-two-narrow`; `thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property` |
 | `thm-substitution-preserves-perfect-graphs` | `thm-alpha-narrowness-is-preserved-under-substitution` | `cor-bull-free-graphs-have-the-erdos-hajnal-property-with-exponent-one-quarter`; `cor-the-bull-graph-has-the-erdos-hajnal-property`; `cor-the-six-vertex-prime-h-graphs-have-the-erdos-hajnal-property`; `ex-a-six-vertex-witness-graph-makes-the-bird-criterion-explicit`; `ex-the-five-cycle-is-not-one-narrow`; `fs-two-narrow-implies-one-narrow`; `lem-the-e-graph-and-the-bird-graph-are-wonderful`; `thm-alpha-narrowness-is-preserved-under-substitution`; `thm-bull-free-graphs-are-two-narrow`; `thm-every-graph-on-at-most-five-vertices-has-the-erdos-hajnal-property` |
 
+The quarter-power corollary's empty-graph branch is repaired as of 2026-09-09:
+use the empty stable set and the published zero-base positive-power convention;
+apply the narrow-graph supplier only to nonempty graphs. This local repair
+does not discharge the perfect-graph retirement obligations; the published
+consumer remains A-P in the canonical ledger.
+
 The third input is a genuine hard blocker.  Chudnovsky--Safra's full bull-free
 paper, Theorem 4.3, explicitly invokes the Strong Perfect Graph Theorem; it does
 not supply a bounded replacement.  The full Annals proof of SPGT is 178 pages,
@@ -10244,6 +10250,30 @@ page then requires only its A. These are Phase-3 page-edge repairs using
 published suppliers; no new Combinatorics supplier or Phase-2 root is created.
 
 ## III.10 Orphan proof routes and retirement gate (2026-09-08)
+
+**UC34 correction, 2026-09-09.** Source Figure 1 was visually checked in
+the current NSS arXiv:2307.06455 PDF, p.2. The published left six-vertex
+definition gives the net, not the source H graph; its complement therefore
+also misidentifies the right graph. Correct left vertices are a,b,c,d,e,f
+with edges ab,bc,ad,bd,be,de,ef; the right graph is the complement. Repair
+both definitions and re-audit their two examples before consumer cutover.
+For this corrected left graph, delete leaf f and co-leaf b: the results
+are a diamond with a leaf (false-twin quotient paw) and P4 plus an isolated
+vertex. Prove their EH property by substitution from small graphs, then use
+the still-pending corrected leaf/co-leaf virality theorem and complement
+invariance. Do not use the old bull-deletion argument or infer EH for the
+net from the H theorem. The bull's existential EH corollary can likewise use
+leaf/co-leaf deletions giving a paw and P3 plus an isolated vertex; this
+does not supply its separate exponent-one-quarter/two-narrow claims. The
+substantial ordered-to-unordered virality proof remains in this existing
+scope. Exact findings, IDs and version-sensitive sources are in the ledger.
+
+The two graph definitions and both examples have since been repaired and
+locally checked. The legacy left-example ID is retained for stable links,
+but its title/proof now give the actual leaf/co-leaf deletions and explicitly
+reject the old bull-deletion claim. Their canonical titles/dependencies and
+strategies are synchronized. The EH corollary is still A-P; these finite
+graph repairs do not supply the pending virality theorem.
 
 The page-inventory removals in III.2 did not remove the two published orphan
 supplier files or their incoming proof edges. Neither orphan is an adequate

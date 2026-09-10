@@ -5,12 +5,17 @@ title: "Affine, almost simple, diagonal, product action, and twisted wreath type
 status: published
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
-deps: [def-imprimitive-wreath-product-of-permutation-groups, def-regular-actions, def-almost-simple-finite-group, prop-unique-abelian-minimal-normal-subgroup-gives-affine-type]
+deps: [def-imprimitive-wreath-product-of-permutation-groups, def-regular-actions, def-almost-simple-finite-group, prop-unique-abelian-minimal-normal-subgroup-gives-affine-type, def-external-semidirect-product, thm-external-semidirect-product-is-a-group]
 verification:
-  audited: 2026-08-27
   precheck: n/a
+  verified:
+    model: gpt-6-astra
+    verdict: pass
+    date: 2026-09-09
+    scope: "Owner-authorized local TW definition and construction audit; source and actual algebra interfaces read; no independent judgment or classification-proof certification."
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -42,6 +47,42 @@ the five coarse O'Nan-Scott types used on this page are:
   coordinates and the wreath product has its product action. If
   $(h_1,\ldots,h_\ell;k)\in H^\ell\rtimes K$, its product action is
   $$(\delta_1,\ldots,\delta_\ell)\longmapsto(\delta_{k^{-1}(1)}h_{k^{-1}(1)},\ldots,\delta_{k^{-1}(\ell)}h_{k^{-1}(\ell)}).$$
-- **Twisted wreath type:** the socle is again regular and nonabelian, but the
-  regular action is built from a twisted wreath product rather than from an
-  abelian vector-space action.
+- **Twisted wreath type:** $G$ is permutation equivalent to the following
+  group on $B$, and this action is primitive. Take a finite nonabelian simple
+  group $T$, a faithful transitive permutation group $P\le S_k$, $k\ge2$,
+  its point stabilizer $Q=P_1$, and a homomorphism
+  $\varphi:Q\to\operatorname{Aut}(T)$ whose image contains
+  $\operatorname{Inn}(T)$. With automorphisms composed as left operators, set
+  $$B=\{f:P\to T: f(xq)=\varphi(q)^{-1}(f(x))\text{ for every }x\in P,q\in Q\}.$$
+  Multiplication in $B$ is pointwise. Define
+  $$\alpha_p(f)(x)=f(p^{-1}x).$$
+  The twisted wreath product is $B\rtimes_\alpha P$, with the convention of
+  [[def-external-semidirect-product]], acting on $B$ by
+  $$(b,p)\cdot c=b\alpha_p(c).$$
+  Its socle is the unique minimal normal subgroup $B\cong T^k$, acting
+  regularly; its degree is $|T|^k$. Primitivity is a required condition on
+  these data, not a consequence of transitivity of $P$ alone.
+
+The function construction is well defined: specifying values on one
+representative of each of the $k$ cosets $xQ$ determines a unique function,
+because $\varphi(q_1q_2)^{-1}=\varphi(q_2)^{-1}\varphi(q_1)^{-1}$.
+Evaluation there identifies the pointwise group with $T^k$. The maps
+$\alpha_p$ preserve its defining condition and satisfy
+$\alpha_p\alpha_r=\alpha_{pr}$, so
+[[thm-external-semidirect-product-is-a-group]] applies and the displayed
+permutation formula respects multiplication. These are finite choices.
+
+For the socle assertion, the normal subgroups of $T^k$ are products of its
+factors: commutating an element of a normal subgroup with one factor isolates
+that coordinate, and simplicity and the trivial centre of $T$ then give the
+entire factor whenever its projection is nontrivial. The transitive action
+of $P$ on the factors makes $B$ minimal normal. If an element $(b,p)$
+centralizes $B$, then $\alpha_p$ is an inner automorphism of $B$ and hence
+fixes every factor. Faithfulness of $P$ forces $p=1$, and then $b$ is central
+in $B$, so $b=1$. Any distinct minimal normal subgroup would centralize $B$
+(their commutator lies in their trivial intersection). Therefore no such
+subgroup exists.
+
+These conventions implement LPS Section 1, type III(c), using left actions.
+Defining these types does not prove that every finite primitive group belongs
+to one of them, nor that a proof of that classification avoids CFSG.

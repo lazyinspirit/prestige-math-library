@@ -1,0 +1,11 @@
+# Step 5A — authored-content review
+
+- Work on your dispatched group, one item at a time. Read each batch manifest, `research/<run>-step5-scope-<i>.json`, current authored items and A/B pages, contracts, and dependencies needed to verify the arguments.
+- Follow `briefs/alpha-step5.md`. Do not repeat Step 3's scope, scaffold, or source-inventory audit. Review actual authored mathematics and concrete gaps; prior approval does not establish that the authored text is sound.
+- For every item and page, write one decision with `obligation: "authored:<batch>:<id>"`, its exact `id`, route `item` or `page`, verdict `accepted`, `repaired`, or `escalated`, nonempty `evidence`, and `defect_ids`.
+- Use `accepted` for sound content, with `defect_ids: []`. Use `repaired` after a justified local repair, with closed, uniquely owned defect-ledger references and `repair_confidence: 1`. Use `escalated` for substantial unmet prerequisites that cannot be closed locally; keep the defect open and explain the required owner decision. Never clear another escalation without owner resolution.
+- Create and fully author local definitions/lemmas to close missing dependencies. Add them to the owned manifest, contract, and existing A page; order suppliers before consumers. Give every new item its own `authored` decision and evidence explaining its role. Do not add pages or pairs.
+- For HIGH/CRITICAL items, record specific complete `risk_review` entries in the owning contract during this same read, not a second audit. Leave unresolved risks open. Run owned risk checks with `--require-reviewed` before finishing.
+- Record published defects in the canonical published-consumer ledger, including defects that do not block this batch. A newly available supplier does not repair a published proof.
+- Write `research/<run>-alpha-<g>-5a.md` with edits, source evidence, local suppliers, required shared-plan amendments, published findings, checks, and blockers.
+- Write `research/<run>-alpha-<g>-5a-decisions.json` as `{version:1,run,group,decisions}`. Preserve supplemental gate decisions. The engine stamps current content, manifest, and contract hashes and rejects missing or stale decisions.

@@ -13,11 +13,12 @@ landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
+  verified:
+    model: codex
     verdict: pass
-    date: 2026-07-31
-  audited: 2026-07-31
+    date: 2026-09-09
+    scope: owner-authorized local defect repair; no independent judge
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -48,8 +49,8 @@ Every regular Lindelöf space is normal.
 
 1.1 Let $\mathcal V$ be the family of all open $V\subseteq X$ satisfying $\overline V\subseteq X\setminus B$. For every $a\in A$, [L1] supplies a member of $\mathcal V$ containing $a$, so $\mathcal V\cup\{X\setminus A\}$ is an open cover of $X$. [L1]
 
-2.1 By Lindelöfness, an at most countable subfamily $\mathcal W\subseteq\mathcal V$ covers $A$. [F1, step 1.1]
+2.1 By Lindelöfness, an at most countable subfamily of $\mathcal V$ covers $A$. Interchanging $A$ and $B$ gives an at most countable family of open sets covering $B$, each with closure disjoint from $A$. List these families as $(U_n)_{n\ge0}$ and $(V_n)_{n\ge0}$, padding a finite family with empty sets. The countable-listing convention is part of [F1]. Only two subcovers and their listings are selected; no axiom of choice is needed. [F1, step 1.1]
 
-3.1 Put $U=\bigcup\mathcal W$ and $W=X\setminus\bigcup_{V\in\mathcal W}\overline V$. Then $U,W$ are open, $A\subseteq U$, $B\subseteq W$, and $U\cap W=\varnothing$. [step 1.1, step 2.1]
+3.1 Set $U=\bigcup_{n\ge0}(U_n\setminus\bigcup_{i\le n}\overline{V_i})$ and $W=\bigcup_{n\ge0}(V_n\setminus\bigcup_{i\le n}\overline{U_i})$. Each summand is open because it removes only finitely many closed sets from an open set. Every point of $A$ lies in some $U_n$ and in none of the $\overline{V_i}$, so $A\subseteq U$. Similarly $B\subseteq W$. [step 2.1]
 
-4.1 Thus $X$ is normal. [F2, step 3.1] ∎
+4.1 A point in the $n$th summand of $U$ and the $m$th summand of $W$ is impossible: if $m\le n$, the first summand excludes $\overline{V_m}$; if $n\le m$, the second excludes $\overline{U_n}$. Thus $U\cap W=\varnothing$, and these open sets prove normality, including empty $A$ or $B$. [F2, step 3.1] ∎

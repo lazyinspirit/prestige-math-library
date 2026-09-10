@@ -4,16 +4,18 @@ title: "Riemann-integrable half-space extensions of chart coefficients"
 kind: lemma
 status: published
 origin: pipeline
-deps: ["def-compactly-supported-differential-form", "cor-smooth-functions-and-tensor-fields-extend-locally-across-the-boundary", "lem-smooth-extension-from-a-closed-neighbourhood", "thm-lebesgue-criterion-in-rn", "def-null-and-content-zero-in-rn", "cor-archimedean-reciprocal", "lem-compactly-supported-riemann-integral-is-well-defined"]
+deps: ["def-compactly-supported-differential-form", "def-smooth-function-on-a-relatively-open-subset-of-a-half-space", "lem-compactness-of-a-subspace-is-ambient", "thm-compact-subset-of-a-hausdorff-space-is-closed", "thm-lebesgue-criterion-in-rn", "def-null-and-content-zero-in-rn", "cor-archimedean-reciprocal", "lem-compactly-supported-riemann-integral-is-well-defined"]
 provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  precheck: pass
+  verified:
+    model: Codex
+    verdict: repaired-and-locally-checked
+    date: 2026-09-09
+    scope: "Owner-authorized local half-space proof and unnecessary choice-bearing extension removal; local checks only"
+    delegated_by: owner
 sources:
   references:
     - title: "Lee integration of forms pp.402–404; explicit Riemann justification from cited published items"
@@ -28,9 +30,9 @@ Let $n\geq1$, $H^n=\{x\in\mathbb R^n:x_n\geq0\}$, and let $U$ be relatively open
 
 [F1] [[def-compactly-supported-differential-form]]: Let $M$ be a smooth manifold, possibly with boundary, and $k\geq0$. For $\omega\in\Omega^k(M)$ define $$\operatorname{supp}\omega=\overline{\{p\in M:\omega_p\neq0\}}^{\,M},\qquad \Omega_c^k(M)=\{\omega\in\Omega^k(M):\operatorname{supp}\omega\text{ is compact}\}.$$ The closure and compactness are in $M$, including its genuine boundary. Zero is the intrinsic zero of each exterior-power fiber, so this definition is independent of trivialization. The zero form has empty support.
 
-[F2] [[cor-smooth-functions-and-tensor-fields-extend-locally-across-the-boundary]]: Every smooth function or tensor field on a manifold with boundary extends smoothly across each boundary point to some neighbourhood in its double; the extension is not canonical.
+[F2] [[def-smooth-function-on-a-relatively-open-subset-of-a-half-space]]: Near each point of $U$, the function agrees on $U$ with a smooth function on a Euclidean-open neighbourhood. In particular it is continuous on $U$ and smooth on its Euclidean interior. No double or simultaneous selection of extensions is needed.
 
-[F3] [[lem-smooth-extension-from-a-closed-neighbourhood]]: Let $C$ be a closed subset of a smooth manifold $M$, let $U\subseteq M$ be open with $C\subseteq U$, and let $f:U\to \mathbb R$ be smooth. Then there exists a smooth function $F:M\to \mathbb R$ such that $F=f$ on an open neighbourhood of $C$ and $\operatorname{supp}(F)\subseteq U$.
+[F3] Compactness can be read using ambient open covers ([[lem-compactness-of-a-subspace-is-ambient]]); a compact subset of a Hausdorff space is closed ([[thm-compact-subset-of-a-hausdorff-space-is-closed]]). The induced topology on $K$ is the same whether inherited from $U$, $H^n$, or $\mathbb R^n$.
 
 [F4] [[thm-lebesgue-criterion-in-rn]]: A bounded real function on a closed nondegenerate rectangle in $\mathbb R^m$, $m\ge1$, is Riemann integrable if and only if its discontinuity set is null.
 
@@ -44,12 +46,12 @@ Let $n\geq1$, $H^n=\{x\in\mathbb R^n:x_n\geq0\}$, and let $U$ be relatively open
 
 **Given:** The objects and hypotheses in the statement above.
 
-1.1 By compact support, $f$ vanishes on $U\setminus K$ and is bounded on $K$. A point at an artificial edge of $U$ lies outside the closed Euclidean compact set $K$; a neighborhood missing $K$ has zero extended coefficient. Inside $U$ the coefficient is smooth up to the genuine face. Thus $\widetilde f$ is smooth off that face and supported in $K$. This includes $f=0$. [F1, F2]
+1.1 The support convention [F1] for functions, regarded as zero-forms, gives $f=0$ on $U\setminus K$. By [F3], $K$ is compact and closed in $\mathbb R^n$. Continuity from [F2] makes the sets $\{x\in K:|f(x)|<j\}$, for positive integers $j$, an open cover of $K$. A finite subcover bounds $|f|$ on $K$, hence bounds $\widetilde f$ everywhere. Off $K$, the extension is locally zero. At a point of $U$ with $x_n>0$, relative openness supplies a Euclidean neighbourhood contained in $U$, on which the extension is smooth by [F2]. Points with $x_n<0$ are outside $K$. Thus $\widetilde f$ is smooth away from the genuine face, and its support lies in the closed compact set $K$. Empty $K$ gives the identically zero function. [F1, F2, F3]
 
-1.2 Auxiliary extensions can be constructed near $K$: choose finitely many extension neighborhoods, smooth Euclidean bump functions supported there and positive on smaller neighborhoods covering $K$, and divide by their sum near $K$. The weighted extensions agree with $f$ on the half-space near $K$. Cut off on a smaller neighborhood of $K$ to obtain a compactly supported smooth Euclidean function there. The cutoff is one near $K$; its restriction to the half-space, extended by zero at artificial edges, is $f$. Such cutoffs follow by applying the closed-neighborhood extension lemma to the constant function one and, if needed, composing with a smooth nonnegative function. [F2, F3]
+1.2 The increasing open cubes $(-j,j)^n$ cover $K$, so [F3] gives $R>0$ with $K\subset(-R,R)^n$. Divide each of the first $n-1$ intervals $[-R,R]$ into $m$ equal pieces of length $\delta=2R/m$. Over every resulting face cell take its product with $[-\delta/2,\delta/2]$. These are $m^{n-1}$ closed $n$-cubes covering $[-R,R]^n\cap\{x_n=0\}$, of total volume $m^{n-1}\delta^n=(2R)^n/m$. By [F6] this is arbitrarily small, proving content zero. For $n=1$ use the one interval $[-\delta/2,\delta/2]$. This construction uses only finite covers for each prescribed error. [F3, F5, F6]
 
-1.3 Choose $R>0$ so $K\subset(-R,R)^n$. Partition the first $n-1$ coordinates of $[-R,R]^{n-1}$ into at most $(2R/\delta+2)^{n-1}$ cells of side at most $\delta$. Center a closed cube of side $2\delta$ on each face cell. They cover the face in the bounding cube and have total volume at most $2^n(2R+2\delta)^{n-1}\delta$. This tends to zero; reciprocal integers give arbitrarily small $\delta$. For $n=1$ this is a single interval of length $2\delta$. [F5, F6]
+2.1 The defining rule for $\widetilde f$ uses only $f$ on $U$ and zero elsewhere. Local Euclidean extensions in [F2] are used only to check smoothness at a fixed point. Two choices agree on $U$ wherever both are being used, so they cannot change this rule. In particular, when any auxiliary extension is restricted back to the given coefficient and then extended by zero as stated, it produces exactly $\widetilde f$. There is no assertion that arbitrary auxiliary values outside $H^n$ have the same integral. [given, F2, step 1.1]
 
-2.1 The discontinuities of $\widetilde f$ in $[-R,R]^n$ lie in that content-zero, hence null, face. Boundedness and the null-discontinuity criterion imply Riemann integrability. The criterion is used in its sufficient direction only. [F4, step 1.1, step 1.3]
+2.2 The discontinuities of $\widetilde f$ in $[-R,R]^n$ lie in that content-zero, hence null, face. Boundedness and the null-discontinuity criterion imply Riemann integrability. Only the sufficient direction of [F4] is used: its proof uses compactness and finite covers, not the countable-choice step in its converse. No countable choice or general smooth-cutoff existence is used here. [F4, F5, step 1.1, step 1.2]
 
-3.1 The compact-support integral lemma makes the value independent of any larger bounding rectangle. Every auxiliary extension after restriction to $H^n$ gives the same zero-extended function, hence the same integral. With an interior chart there is no genuine face, so the artificial-edge argument proves smoothness everywhere. [F7, step 1.1, step 1.2, step 2.1] ∎
+3.1 The compact-support integral lemma makes the value independent of any larger bounding rectangle. Every auxiliary extension after restriction to $H^n$ gives the same zero-extended function, hence the same integral. With an interior chart there is no genuine face, so the artificial-edge argument proves smoothness everywhere. [F7, step 1.1, step 2.1, step 2.2] ∎

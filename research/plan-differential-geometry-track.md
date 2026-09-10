@@ -1,5 +1,16 @@
 # Differential geometry track — smooth manifolds, geometry, Lie theory, and symplectic geometry
 
+## Binding UC34 repair reconciliation — 2026-09-09
+
+The published bundle-metric theorem remains pending repair of the published
+coordinate-cover, shrinking and partition choice contracts. State AC and
+its exact selections. A partition may be indexed by a refinement: assign
+each refinement member to an original trivializing set, extend weighted
+local metrics by zero using their closed supports, and sum locally finitely.
+Do not assume the original cover indexing. All needed suppliers are already
+published; no new Phase-2 pair. Exact IDs and strategy are in the consumer
+ledger. Shared page membership alone does not block unrelated future items.
+
 > **Commission:** `subjects-01`, `differential-geometry` scaffolder lane
 > **Owner:** this file is the sole writable artifact of the lane.
 > **Placement contract (owner-authorised 2026-08-14):** this track is anchored
@@ -816,18 +827,26 @@ stronger AC+DC cost of the published general topological partition theorem.
 **Smooth separation, extension, and proper functions**
 
 18. `thm-smooth-urysohn-lemma-for-a-closed-set-in-an-open-set` — **theorem**
-    `[LA]`. If $A\subseteq U$, with $A$ closed and $U$ open, a locally finite
+    `[LA]`. Assume countable choice. If $A\subseteq U$, with $A$ closed and $U$ open, a locally finite
     chart-bump construction gives smooth $\rho:M\to[0,1]$ equal to one on a
     neighbourhood of $A$ and with $\operatorname{supp}\rho\subseteq U$.
     Compact support is asserted only when $A$ has a compact neighbourhood in
-    $U$.
+    $U$. The repaired published proof selects admissible coordinate tuples,
+    finite annular covers and bumps with countable choice, then groups their
+    locally finite closed supports. It does not consume the pending general
+    partition-theorem repair. No compact containment of arbitrary closed $A$
+    is assumed.
 19. `cor-smooth-functions-separate-points-from-closed-sets` — **corollary**
     `[LA]`.
 20. `lem-smooth-extension-from-a-closed-neighbourhood` — **lemma** `[LA]`.
     If $f$ is smooth on an open neighbourhood of closed $A$ and
     $\rho$ is supported there, then $\rho f$, extended by zero, is a global
     smooth function; the product vanishes on a neighbourhood of every point
-    outside the original domain.
+    outside the original domain. With a supplied cutoff the construction is
+    choice-free; obtaining a cutoff equal to one near $A$ uses the repaired
+    Urysohn theorem under explicit countable choice. Paste on $U$ and
+    $M\setminus\operatorname{supp}\rho$; closedness of the support proves
+    containment of the extension's support, not merely pointwise vanishing.
 21. `thm-smooth-functions-defined-locally-can-be-glued-by-a-partition-of-unity` —
     **theorem** `[LA]`. For vector-valued functions into a fixed finite-
     dimensional vector space, $f=\sum_i\varphi_if_i$ is smooth and has any
@@ -840,10 +859,14 @@ stronger AC+DC cost of the published general topological partition theorem.
     DG-1's countable relatively compact chart cover and take nested finite
     unions with closures; the interior-containment adjustment is explicit.
 24. `thm-every-smooth-manifold-admits-a-smooth-proper-exhaustion-function` —
-    **theorem** `[LA]`. Choose smooth cutoffs $\rho_j$ equal to one on $K_j$
+    **theorem** `[LA]`. Assume countable choice. Construct the compact
+    exhaustion from all admissible coordinate tuples, countable basis
+    witnesses and least nesting indices, without importing the pending
+    cover/exhaustion repairs. Choose smooth cutoffs $\rho_j$ equal to one on $K_j$
     and supported in $\operatorname{int}K_{j+1}$, and form
     \(F=\sum_{j\ge1}(1-\rho_j)\). This sum is locally finite because every
-    point lies in some \(K_N\), after which all summands vanish there; outside
+    point has a neighbourhood inside some \(\operatorname{int}K_N\), on which
+    every summand with index at least $N$ vanishes identically; outside
     \(K_N\), its first $N-1$ summands equal one, so $F\ge N-1$. Hence its
     sublevel sets lie in compact exhaustion stages and $F$ is proper.
     LANDMARK.
@@ -1924,11 +1947,25 @@ Whitney-trick proof is not disguised as a short consequence of Sard.
    **lemma** `[LA]`; this is a bookkeeping lemma, not a map to an
    infinite-dimensional ambient space.
 3. `lem-a-smooth-exhaustion-separates-the-locally-finite-chart-bands` —
-   **lemma** `[LA]`. It combines even and odd chart bands into finitely many
-   Euclidean coordinate blocks and one proper coordinate.
+   **lemma** `[LA]`. Compact-band maps may have different target dimensions;
+   they cannot simply be concatenated into a fixed finite-dimensional target.
+   Its published assumption/interface audit remains separate from item 4's
+   now-complete local replacement.
 4. `thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space` —
-   **theorem** `[LA]`; item 3 proves the noncompact case without a compactness
-   assumption.
+   **theorem** `[LA]`; assume countable choice. The repaired published proof
+   supplies a proper embedding $(G,\rho)$ with bounded
+   $G:M\to\mathbb R^{4(2n+1)}$ and smooth nonnegative proper exhaustion
+   $\rho$. It constructs the countable atlas from eligible chart tuples,
+   proves lower-dimensional image nullity directly by rational cube grids,
+   and uses secant/tangent parameters to project maps that are injective and
+   immersive only on a compact band. This is not a silent generalization of
+   the later global-embedding projection lemma. CC selects whole finite band
+   lists and finite projection certificates. Four disjoint colour families
+   give bounded locally finite sums; equality of $\rho$ places points in one
+   common compact band. Compact sublevels prove properness and a closed-ball
+   argument proves inverse continuity. No defective atlas-null, generic
+   projection, partition or preceding band theorem is consumed. Exact
+   26-supplier receipt: `uc34-2026-09-09-manifold-whitney-followups-astra-1.md`.
 5. `prop-a-proper-injective-immersion-is-a-smooth-embedding` — **proposition**
    `[LL]`; a proper continuous map from a locally compact Hausdorff space to a
    Hausdorff space is closed.
@@ -1966,11 +2003,27 @@ Whitney-trick proof is not disguised as a short consequence of Sard.
     **lemma** `[LA]`; its derivative identifies tangent and normal summands
     with the ambient tangent space.
 16. `lem-variable-radius-injectivity-for-normal-addition` — **lemma** `[LA]`.
-    There is a positive continuous, then smooth, function $\delta:S\to(0,\infty)$
-    such that $E$ is injective on $\{(p,v):\lVert v\rVert<\delta(p)\}$.
+    Under explicit countable choice, there is a positive smooth
+    $\delta:S\to(0,\infty)$ such that $E$ is injective on
+    $\{(p,v):\lVert v\rVert<\delta(p)\}$. Cap eligible local-diffeomorphism
+    radii before taking their supremum, prove endpoint invertibility by
+    smaller neighborhoods and the 1-Lipschitz radius estimate. For the
+    smooth minorant use repaired proper exhaustion $\rho$, positive minima
+    on compact sublevels, and explicitly supported one-variable step bumps
+    $\psi_n(t)=\sigma(t-n+1)\sigma(n+1-t)$, $n\ge0$.
+    Normalize their weighted locally finite sum; it is positive and at most
+    a quarter of the continuous radius. This proves the smooth minorant
+    rather than assuming a partition theorem or later Whitney approximation.
+    CC covers the exhaustion and the existing normal-bundle manifold interface.
 17. `thm-euclidean-tubular-neighbourhood-theorem` — **theorem** `[LA]`.
-    Normal addition gives a diffeomorphism from a variable-radius normal
-    neighbourhood onto an open neighbourhood of $S$ in Euclidean space.
+    Under explicit countable choice, normal addition gives a diffeomorphism
+    from a smooth variable-radius normal neighbourhood onto an open
+    neighbourhood of $S$. Use the particular radius constructed in item 16,
+    whose proved bound is $\delta\le r/4$. For each tube point choose a
+    smaller eligible radius between its vector length and $r(p)$; this proves
+    local invertibility there, independently of global injectivity. Open
+    image and agreement of local smooth inverses finish the proof. No
+    general partition theorem or arbitrary cover-indexed radius choice remains.
 18. `cor-a-closed-euclidean-submanifold-has-a-smooth-neighbourhood-retraction` —
     **corollary** `[LL]`; project to the zero-section base through the inverse
     tubular chart.
@@ -1978,14 +2031,19 @@ Whitney-trick proof is not disguised as a short consequence of Sard.
     **proposition** `[LA]`; for a compact submanifold a uniform radius is
     available, while a noncompact one generally needs a variable radius.
 20. `thm-tubular-neighbourhood-theorem-in-a-smooth-ambient-manifold` —
-    **theorem** `[LA]`. Use the earlier proper closed embedding
+    **theorem** `[LA]`. Assume countable choice. Use the earlier proper closed embedding
     \(j:M\hookrightarrow\mathbb R^N\), the Euclidean tube/retraction of
     \(j(M)\), and a bundle metric identifying \(TM|_S/TS\) with the
     orthogonal complement of \(TS\) in \(TM|_S\). The map
     \((p,v)\mapsto j^{-1}r(j(p)+d j_pv)\) has invertible differential along
-    the zero section; apply the inverse theorem and shrink by a positive
-    smooth radius. Thus no connection, exponential map, or unconstructed
-    local addition is assumed. LANDMARK.
+    the zero section. Define capped local inverse radii by suprema, prove
+    continuity and invertibility on the supremum domains, then require both
+    fibre norm and Euclidean image displacement to be less than one quarter
+    of the radius. A collision places both vectors in one injective domain.
+    The resulting open zero-section neighbourhood transfers to the quotient
+    normal bundle. No smooth radius selection, connection, exponential map,
+    or unconstructed local addition is assumed. Published repair receipt:
+    `research/uc34-2026-09-09-general-ambient-tube-astra-1.md`. LANDMARK.
 21. `cor-every-closed-embedded-submanifold-has-a-smooth-neighbourhood-retraction` —
     **corollary** `[LL]`.
 22. `prop-two-tubular-neighbourhood-germs-are-isomorphic-near-the-zero-section` —
@@ -1998,21 +2056,40 @@ Whitney-trick proof is not disguised as a short consequence of Sard.
     **definition** `[LN]`; $\varepsilon:M\to(0,\infty)$ allows pointwise
     control on noncompact domains.
 24. `thm-whitney-approximation-for-euclidean-valued-maps` — **theorem** `[LA]`.
-    If $F:M\to\mathbb R^k$ is continuous and $\varepsilon>0$ is continuous,
+    Assume countable choice. If $F:M\to\mathbb R^k$ is continuous and $\varepsilon>0$ is continuous,
     there is smooth $\widetilde F$ with
-    $\lVert\widetilde F(p)-F(p)\rVert<\varepsilon(p)$ everywhere.
+    $\lVert\widetilde F(p)-F(p)\rVert<\varepsilon(p)$ everywhere. The published
+    local annular bump proof retains the sample attached to each refinement
+    index; it does not use the pending partition-theorem or coordinate-cover
+    corollary repairs.
 25. `thm-relative-whitney-approximation-for-euclidean-valued-maps` —
-    **theorem** `[LA]`. If $F$ is smooth on a neighbourhood of a closed set
+    **theorem** `[LA]`. Assume countable choice. If $F$ is smooth on a neighbourhood of a closed set
     $A$, the approximation can equal $F$ on a smaller neighbourhood of $A$.
+    With the repaired Urysohn cutoff $\chi$ supported in the smooth locus
+    and absolute approximation $Q$, use $\chi F+(1-\chi)Q$. Prove smoothness
+    on that locus and off $\operatorname{supp}\chi$, and bound the error by
+    $\lVert Q-F\rVert$. This works for noncompact closed $A$ and does not
+    use the separate closed-neighbourhood extension lemma.
 26. `lem-a-fine-euclidean-approximation-lands-in-a-prescribed-tubular-neighbourhood` —
-    **lemma** `[LA]`; pull the variable tube radius back along $F$ and choose
-    the error function below it.
+    **lemma** `[LA]`; for the supplied open tube $U$, use error $1$ if its
+    complement is empty, otherwise $\min(1,\operatorname{dist}(F(p),U^c)/2)$.
+    Positivity and continuity follow from the earlier distance lemma. This
+    choice-free construction does not assume existence of a tube or embedding.
 27. `thm-whitney-approximation-for-manifold-valued-maps` — **theorem** `[LA]`.
-    Embed the target, approximate in Euclidean space, and retract through a
-    tube; the result is smooth and homotopic to the original map.
+    Assume countable choice. Use the repaired arbitrary finite-dimensional
+    proper embedding, prove an open tube/retraction locally by the capped
+    continuous-radius argument, and approximate in Euclidean space. A capped
+    distance-to-complement error gives whole-ball containment for the joint
+    straight-line retraction homotopy. No dimension-optimal weak Whitney,
+    ambient tubular, partition or smooth-radius supplier is consumed.
 28. `thm-relative-whitney-approximation-for-manifold-valued-maps` —
-    **theorem** `[LA]`; preserve the map near a closed set on which it is
-    already smooth.
+    **theorem** `[LA]`; assume countable choice. Reuse the explicitly proved
+    embedding and tube data from item 27's proof before its approximation
+    step, then apply the repaired relative Euclidean theorem. Preserve the
+    map on an open neighbourhood of an arbitrary closed set where it was
+    already smooth, with a homotopy fixed on that same neighbourhood. The
+    whole-ball error bound makes every segment stay in the tube; no compact
+    containment of the closed set is required.
 29. `cor-every-continuous-map-between-smooth-manifolds-is-homotopic-to-a-smooth-map` —
     **corollary** `[LL]`.
 30. `thm-continuously-homotopic-smooth-maps-are-smoothly-homotopic` —
@@ -3513,14 +3590,20 @@ they already know.
    \(\varepsilon(p)\in\{\pm1\}\); define its chart integral as
    \(\varepsilon(p)f(p)\).
 4. `lem-chart-supported-coefficients-have-well-defined-riemann-integrable-half-space-extensions` —
-   **lemma** `[LA]`. Extension by zero is smooth across artificial chart
+   **lemma** `[LA]`. Use the local half-space smoothness definition, not
+   global extension or doubling. Compactness makes the support Euclidean
+   closed; extension by zero is smooth across artificial chart
    edges. Across the genuine face $x^n=0$ it need not be continuous, but it
    is bounded and its discontinuity set lies in the coordinate hyperplane.
    Prove that hyperplane null inline by an elementary cube-thickening cover,
    using `def-null-and-content-zero-in-rn` and
    `cor-archimedean-reciprocal`; then `thm-lebesgue-criterion-in-rn` makes the
-   extension Riemann integrable. Any two smooth Euclidean extensions agree on
-   $\mathbb H^n$, so their half-space integrals agree.
+   extension Riemann integrable. Only the criterion's sufficient direction
+   is used; its converse's countable-choice step is irrelevant. Auxiliary
+   extensions are first restricted back to the prescribed coefficient and
+   then zero-extended; arbitrary values outside the half-space are not
+   asserted to have equal integrals. This repaired published route is
+   choice-free and needs no Phase-2 supplier.
 5. `thm-oriented-chart-integrals-are-coordinate-independent` — **theorem**
    `[LA]`; the top-form transformation law and the published compact-support
    change-of-variables theorem cancel the positive Jacobian determinant in
@@ -3805,8 +3888,73 @@ items. It never re-mints that machinery.
 18. `thm-de-rham-cohomology-is-smooth-homotopy-invariant` — **theorem**
     `[LA]`; a smooth homotopy equivalence induces inverse cohomology maps.
 19. `cor-de-rham-cohomology-is-continuous-homotopy-invariant-on-smooth-manifolds` —
-    **corollary** `[LA]`; cite DG-7's endpoint-relative smoothing theorem,
-    rather than treating a merely continuous homotopy as differentiable.
+    **corollary** `[LA]`; assume countable choice, declaring
+    `def-countable-choice`, and prove endpoint-relative smoothing locally
+    rather than treating a continuous homotopy as differentiable. Use earlier
+    the repaired `thm-every-smooth-manifold-embeds-in-some-finite-dimensional-euclidean-space`,
+    `def-normal-addition-map-for-a-euclidean-submanifold` and
+    `lem-normal-addition-is-a-local-diffeomorphism-along-the-zero-section`,
+    `thm-whitney-approximation-for-euclidean-valued-maps`,
+    `thm-smooth-partitions-of-unity-exist-on-manifolds` and its subordinate
+    partition definition, not the
+    relative Whitney theorems or the fine-tubular-radius lemma.
+    For a continuous $F:P\to N$ smooth on an open $V$ containing closed $A$,
+    properly embed $N$ by the proved $j=(G,\rho)$ under the same CC. No
+    dimension-optimal weak Whitney or generic-projection theorem is used.
+    Prove tube existence locally, avoiding the
+    defective smooth-radius supplier. For $S=j(N)$ define
+    $V_a(p)=\{(q,v):|q-p|<a,\ |v|<a\}$ in its orthogonal normal bundle and
+    $h(p)=\sup\{0<a\le1:E|_{V_a(p)}\text{ is a diffeomorphism onto its image}\}$.
+    Local invertibility makes this set nonempty; it is bounded before taking
+    its supremum. Downward closure and a larger eligible radius for each
+    $a<h(p)$ prove injectivity and local invertibility on $V_{h(p)}(p)$.
+    The inclusions $V_a(q)\subset V_{h(p)}(p)$ for
+    $0<a<h(p)-|p-q|$ give $|h(p)-h(q)|\le|p-q|$. Thus $h$ is positive
+    continuous. On $\Omega=\{|v|<h(p)/2\}$, equality of normal additions
+    and $h(q)\le h(p)$ give $|p-q|<h(p)$; both pairs lie in the same
+    injectivity neighborhood. Hence $E|_\Omega$ is an injective local
+    diffeomorphism onto an open $U$. Its local inverses agree smoothly.
+    Compose that inverse with the smooth bundle projection for the retraction
+    $r:U\to S$. No smooth minorant or global tubular-existence result is
+    consumed; the normal-bundle interface is used under the existing CC.
+    If $U^c\ne\varnothing$ set
+    $e(p)=\min(1,\operatorname{dist}(jF(p),U^c)/2)$; otherwise set $e=1$.
+    The distance is finite and 1-Lipschitz, positive at points in $U$, so
+    $e$ is a finite positive continuous error function whose balls lie in $U$.
+    Approximate $jF$ absolutely by smooth $Q$ with error less than $e$.
+    Construct the cutoff from the actual refinement-indexed partition for
+    $\{V,P\setminus A\}$: assign a support to $V$ when possible and to
+    $P\setminus A$ otherwise, and sum the $V$-assigned functions to get
+    $\chi$. Both grouped sums are locally finite and smooth. A grouped
+    union of closed supports is closed, since locally it is a finite union;
+    hence $\operatorname{supp}\chi\subseteq V$, and the other grouped
+    support union is closed and disjoint from $A$. On its complement
+    $\chi=1$. This proves the required cutoff without using the published
+    Urysohn proof's unproved two-function grouping. Set
+    $R=\chi jF+(1-\chi)Q$. On $V$ this is smooth, and outside the support
+    it agrees locally with $Q$; thus it is globally smooth, equals $jF$ near
+    $A$ and has error at most $(1-\chi)\|Q-jF\|<e$.
+    Retraction of $R$ gives the smooth replacement, and retraction of the
+    straight segment from $jF$ to $R$ gives a continuous homotopy rel $A$.
+    For endpoint smoothing take $P=M\times\mathbb R$ and slow the supplied
+    homotopy by $\lambda(t)=\sigma(3t-1)$. Use the closed collars
+    $t\le1/4$ and $t\ge3/4$, inside the open constant regions $t<1/3$
+    and $t>2/3$. Restrict the resulting smooth map to $M\times[0,1]$;
+    both exact endpoints and smooth endpoint neighbourhoods are retained.
+    No compact containment of these generally noncompact collars is assumed.
+    With $A=\varnothing$ the same construction supplies smooth representatives
+    of arbitrary continuous maps. Compose their continuous homotopies with
+    those of an equivalence, smooth the two composite-to-identity homotopies
+    by the endpoint construction, and obtain inverse de Rham algebra maps.
+    Independence of smooth representative follows in the same way. Countable
+    choice covers the approximation/partition/tubular selections. For the
+    countable cover use all admissible coordinate-ball tuples, not an arbitrary
+    selection at every point; select countably many representatives. Take
+    exhaustion indices least, and use countable choice on the nonempty sets
+    of finite annulus subcovers and bump functions. Flatten those finite lists
+    and normalize as in the partition construction. The empty
+    manifold cases are immediate. This uses the boundaryless target convention
+    of this page, as in Lee Theorems 6.21 and 6.26, pp.136–137 and 141.
 20. `def-radial-contraction-of-a-star-shaped-domain` — **definition** `[LN]`:
     $F_t(x)=tx$ after translating the star centre to zero.
 21. `thm-poincare-lemma-for-differential-forms-on-star-shaped-domains` —
@@ -4602,7 +4750,14 @@ induces and reconciles signed volume forms with orientation-free densities.
    `[LL]`; the matrix $(g_{ij})$ is smooth, symmetric, and positive definite,
    and transforms tensorially.
 3. `thm-every-smooth-manifold-admits-a-riemannian-metric` — **theorem** `[LL]`;
-   cite DG-5's bundle-metric theorem and do not repeat its partition proof.
+   use DG-5's bundle-metric construction with explicit countable selections:
+   all eligible chart/frame tuples, a countable basis subcover, least-index
+   exhaustion, finite annular covers and a countable bump family. Normalize
+   and extend weighted local metrics by zero using closed support containment.
+   Include half-space charts for boundary and the empty/rank-zero cases.
+   No point-indexed AC, dependent choice or closed-cover subordination claim
+   supplies this argument. The same selection details supply the de Rham
+   Mayer–Vietoris partition route in the preceding pair.
 4. `def-pullback-riemannian-metric` — **definition** `[LN]`:
    $(F^*h)_p(v,w)=h_{F(p)}(dF_pv,dF_pw)$.
 5. `prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions` —
@@ -4688,7 +4843,10 @@ induces and reconciles signed volume forms with orientation-free densities.
 34. `prop-the-riemannian-volume-form-is-the-unique-positive-unit-top-form` —
     **proposition** `[LA]`.
 35. `def-riemannian-volume-of-a-compactly-supported-smooth-density` —
-    **definition** `[LN]`; cite DG-14.
+    **definition** `[LN]`; assume countable choice and declare
+    `def-countable-choice`. Use DG-14's intrinsic density integral, whose
+    chart-partition selection has this explicit hypothesis. This construction
+    does not assert choice-free integral existence.
 36. `prop-riemannian-volume-is-the-radon-measure-of-the-riemannian-density` —
     **proposition** `[LL]`; apply DG-17M to $dV_g$ and write
     $\operatorname{vol}_g(A)=\mu_{dV_g}(A)$ for Borel or completed-measurable
@@ -4702,10 +4860,19 @@ induces and reconciles signed volume forms with orientation-free densities.
     `[LA]`:
     $\operatorname{div}_gX=|g|^{-1/2}\partial_i(|g|^{1/2}X^i)$.
 39. `thm-riemannian-divergence-theorem` — **theorem** `[LA]`. On an oriented
-    manifold with boundary,
+    manifold with boundary of dimension $n\ge1$, assume countable choice
+    $\mathrm{AC}_\omega$ and declare `def-countable-choice`. Then
     $\int_M\operatorname{div}_gX\,dV_g=
     \int_{\partial M}g(X,\nu)\,dV_{\partial g}$ for compact support, with
-    outward unit normal $\nu$.
+    outward unit normal $\nu$ and outward-normal-first boundary orientation.
+    This assumption is inherited precisely at the global Stokes/partition-
+    localization step from `thm-general-stokes-theorem` and
+    `thm-divergence-theorem-relative-to-a-volume-form`. The local normalized
+    gradient construction of the normal and the pointwise contraction
+    identity introduce no additional choice. Preserve empty boundary, zero
+    field, arbitrary smooth fields on compact $M$, and the dimension-one
+    signed boundary zero-form convention. This is a sufficient hypothesis
+    of the used suppliers, not a claim that compact-support Stokes needs it.
 40. `def-riemannian-hodge-star` — **definition** `[LN]`; the unique map
     $*: \bigwedge^kT^*M\to\bigwedge^{n-k}T^*M$ satisfying
     $\alpha\wedge *\beta=\langle\alpha,\beta\rangle_gdV_g$ on an oriented
@@ -4715,8 +4882,13 @@ induces and reconciles signed volume forms with orientation-free densities.
 42. `prop-hodge-star-squared-sign` — **proposition** `[LL]`:
     $*^2=(-1)^{k(n-k)}$ on $k$-forms in the positive-definite convention.
 43. `prop-riemannian-inner-product-of-compactly-supported-forms` —
-    **proposition** `[LL]`:
+    **proposition** `[LL]`; on an oriented Riemannian manifold, assume
+    countable choice and declare `def-countable-choice`:
     $(\alpha,\beta)=\int_M\alpha\wedge *\beta$ is positive definite.
+    Choice is inherited precisely at density integration's chart partition,
+    not in pointwise Hodge-star algebra. The Radon-volume consumer already
+    assumes countable choice; retain it. No orientation is imposed on density
+    integration itself, only on this top-form expression.
 44. `rem-the-codifferential-and-hodge-theory` — **remark** `[LN]`; the
     formal formula for $\delta$ may be recorded for orientation, but adjoints,
     $\Delta=d\delta+\delta d$, harmonic theory, and Hodge decomposition belong
@@ -4755,7 +4927,10 @@ induces and reconciles signed volume forms with orientation-free densities.
 10. `ex-hodge-star-on-euclidean-three-space` — **example** `[LL]`.
 11. `ex-divergence-in-polar-coordinates` — **example** `[LA]`.
 12. `cex-a-degenerate-pullback-metric-under-a-constant-map` —
-    **counterexample** `[LL]`.
+    **counterexample** `[LL]`. For dimension n>0 the constant pullback is
+    zero and fails positive definiteness exactly for nonempty source. Keep
+    the empty source explicitly: its zero tensor is vacuously Riemannian.
+    The map R→R, x↦0 is the concrete counterexample, without choice.
 
 ### Sources and exact locators
 
@@ -4785,9 +4960,11 @@ the metric and manifold topologies; neither is inferred from Hopf–Rinow, which
 has not yet been proved.
 
 The volume density is primary on a nonorientable manifold. The signed volume
-form arises only after an orientation is supplied. All integrals on this page
-are compactly supported smooth integrals from DG-14; arbitrary metric-ball
-volumes wait for the measure seam.
+form arises only after an orientation is supplied. Compactly supported smooth
+integrals from DG-14 supply the initial functional. The current scaffold also
+constructs its Radon measure extension and chart density formula, with the
+measure-theoretic choice assumptions explicit. Metric-ball volume therefore
+has a measure supplier here; later geometric volume estimates remain later.
 
 **Well-definedness discharged:** metric tensor and pullback positivity (items
 1–14), subdivision/reparametrization and finite path distance (15–30), density
@@ -4795,8 +4972,8 @@ and oriented form transformation laws (31–39), and uniqueness/sign of the
 Hodge star (40–44).
 **Choice:** pointwise and local metric arguments are ZF. Metric existence and
 global volume integration inherit DG-2/DG-5's $\mathrm{AC}_\omega$ sufficient
-hypothesis. The measurable volume extension inherits measure theory and is
-not charged prematurely.
+hypothesis. The measurable volume extension inherits its stated measure-theory
+assumptions in the current scaffold; do not silently label it choice-free.
 **Forward references:** DG-19 constructs Levi–Civita and parallel transport;
 DG-20 proves minimizing geodesic and completeness theorems; DG-23 first uses
 metric-ball volume. Hodge analysis is owed to PDE.
@@ -7793,6 +7970,26 @@ by dominant integral weights; DG-33 adds compact-group lattices/root data;
 DG-34 handles real forms and nonreduced restricted systems.
 
 ---
+
+### Finite-type supplier reconciliation — 2026-09-09
+
+RL-12 now supplies its finite-type existence argument locally; it does not
+consume DG-31's unpublished `thm-serre-presentation-theorem`.
+`lem-finite-type-kac-moody-roots-descend-to-simple-roots` uses positivity
+of the symmetrized Cartan matrix to lower the height of each positive
+nonsimple root. Weyl symmetry then identifies every root with a simple
+root; a positive-definite lattice bound makes the root set finite.
+`lem-nonsingular-indecomposable-kac-moody-algebras-are-simple` uses the
+maximal-ideal quotient and connected Cartan diagram to propagate a nonzero
+ideal through all generators. Distinct components commute, yielding the
+finite direct sum. Both arguments use earlier RL-12 contracts, not finite
+Dynkin classification. Preserve the complex field, row-coroot convention,
+and both Serre families. The final comparison identifies the same
+Serre-presentation model generator by generator; it does not assume the
+classification theorem. See Kleshchev Proposition 4.3.2 (pp63–64) and
+Proposition 1.4.8(i) (pp19–20). The local contracts await Step-3 review.
+DG-31 remains a future Phase-2 pair for its own classification programme;
+no pair is added to the original 24-pair run.
 
 ## DG-32. Highest-Weight Theory for Complex Semisimple Lie Algebras
 
@@ -11495,3 +11692,11 @@ companion `distributions-integral-manifolds-and-the-frobenius-theorem`; the B
 then requires only its A. This supersedes §10.6's instruction to delete the
 edge without recording its A-side home. The supplier is already published,
 so this is Phase 3 and creates no DG Phase-2 root.
+# Step-5 dependency synchronization, 2026-09-09
+
+Completed batch9 explicitly declares twelve additional proof inputs across
+eleven items: exterior-derivative derivation/pullback rules, de Rham pullback
+and Mayer–Vietoris interfaces, tensor-product universal property/basis, and
+the interior-derivative Newton–Leibniz theorem for curve-length calculations.
+The canonical plan matches its authored manifest. No new pair or published
+repair; see `phase-2-catchup-24-step5-dependency-reconciliation.md`.

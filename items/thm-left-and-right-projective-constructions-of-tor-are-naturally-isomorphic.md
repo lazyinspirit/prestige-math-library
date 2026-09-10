@@ -4,7 +4,7 @@ title: "The left and right projective constructions of Tor are naturally isomorp
 kind: theorem
 status: published
 origin: pipeline
-deps: ["def-tor-by-resolving-the-left-module", "def-tor-by-resolving-the-right-module", "lem-the-rows-of-the-augmented-tensor-double-complex-are-exact", "lem-the-columns-of-the-augmented-tensor-double-complex-are-exact", "def-tensor-double-complex-of-two-projective-resolutions", "thm-projective-comparison-map-exists", "thm-projective-comparison-maps-are-unique-up-to-chain-homotopy", "thm-long-exact-sequence-in-homology"]
+deps: ["def-tor-by-resolving-the-left-module", "def-tor-by-resolving-the-right-module", "lem-the-rows-of-the-augmented-tensor-double-complex-are-exact", "lem-the-columns-of-the-augmented-tensor-double-complex-are-exact", "def-tensor-double-complex-of-two-projective-resolutions", "thm-projective-comparison-map-exists", "thm-projective-comparison-maps-are-unique-up-to-chain-homotopy", "thm-long-exact-sequence-in-homology", "def-dependent-choice"]
 proof_strategy: direct
 sources:
   references:
@@ -14,13 +14,22 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  audited: 2026-09-06
   precheck: pass
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-10
+  verified:
+    model: codex
+    verdict: pass
+    date: 2026-09-09
+    scope: owner-authorized local DC dependency-interface repair; no independent judge
+    delegated_by: owner
 ---
 
 ## Statement
 
-Assume the Axiom of Dependent Choice. For every right $R$-module $N$ and left
+Assume the Axiom of Dependent Choice ([[def-dependent-choice]]). For every right $R$-module $N$ and left
 $R$-module $M$ with supplied projective resolutions $Q_\bullet\to N$ and
 $P_\bullet\to M$, there is a natural isomorphism
 $H_i(N\otimes_RP_\bullet)\cong H_i(Q_\bullet\otimes_RM)$.

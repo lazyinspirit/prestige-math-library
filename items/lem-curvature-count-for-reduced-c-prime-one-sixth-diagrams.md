@@ -6,14 +6,24 @@ status: published
 origin: session
 provenance:
   statement: literature-derived
-  proof: ai-generated
+  proof: ai-altered
 deps: [def-small-cancellation-conditions-c-lambda-and-c-prime-lambda,
        def-reduced-van-kampen-diagram,
-       def-van-kampen-diagram-boundary-label-and-area]
+       def-van-kampen-diagram-boundary-label-and-area,
+       def-sc-toolkit-symmetrised-relators-and-pieces,
+       def-sc-toolkit-labelled-planar-disc-diagram,
+       def-arc-reduction-and-combinatorial-curvature-of-a-disc-diagram,
+       lem-sc-toolkit-minimal-diagrams-and-cut-vertex-reduction,
+       lem-boundary-spur-or-at-most-three-shell-from-curvature]
 proof_strategy: "direct"
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: Codex
+    verdict: locally-repaired
+    date: 2026-09-10
+    scope: "Replaced the external shell-existence premise with the earlier published arbitrary-diagram curvature theorem after checking its full proof and exact conventions. Local checks only; no independent judgment or whole-closure certification."
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -40,22 +50,28 @@ boundary is a concatenation of at most three maximal internal arcs.
 
 **Given:** A reduced van Kampen diagram $D$ with at least one $2$-cell over a symmetrised $C'(1/6)$ presentation, with freely reduced nontrivial outer boundary word.
 
-[L0] A nondegenerate van Kampen diagram is a finite combinatorial $2$-complex whose underlying space is a closed disc ([[def-van-kampen-diagram-boundary-label-and-area]]).
+[L0] A van Kampen diagram is a finite connected simply connected planar combinatorial $2$-complex. It need not be a closed disc: maximal disc subdiagrams may be joined at cut vertices or by graph parts ([[def-van-kampen-diagram-boundary-label-and-area]]).
 
 [F1] The relator set satisfies the strict metric condition $C'(1/6)$ ([[def-small-cancellation-conditions-c-lambda-and-c-prime-lambda]]).
 
 [L1] The diagram is reduced in the sense that no cancellable adjacent face pair occurs ([[def-reduced-van-kampen-diagram]]).
 
-[F2] Under Section 3.5's standing $C'(1/6)$ hypothesis, Touikan first observes that internal arcs of a reduced diagram are labelled by pieces and that every internal face of its arc reduction has at least seven sides; Definition 3.5.3 defines an $i$-shell, and Proposition 3.5.5 states that an arc-reduced disc diagram contains an $i$-shell for some $1\le i\le3$. Independently, Abgrall--Munro Lemma 2.12 states the general Greendlinger form that every nontrivial reduced $C'(1/6)$ disc diagram has $3$-shells and/or boundary spurs.
+[F2] The published toolkit uses the same finite planar, connected, simply connected diagrams and occurrence-counted boundary walks. Its pieces are common nonempty initial segments of distinct full symmetrised words; equal rotations are not distinct words. ([[def-sc-toolkit-labelled-planar-disc-diagram]], [[def-sc-toolkit-symmetrised-relators-and-pieces]])
+
+[F3] Arc reduction suppresses degree-two vertices while retaining literal word lengths and incidence multiplicities; a whole circle retains one marked vertex. ([[def-arc-reduction-and-combinatorial-curvature-of-a-disc-diagram]])
+
+[F4] Every non-point reduced $C'(1/6)$ diagram has a boundary spur or an exposed face with one exterior arc and at most three internal arcs. A one-face disc is a zero-shell. A nonsingular multi-face disc has at least two distinct such shells, allowing a choice whose exterior arc avoids any prescribed boundary point internally. For an end disc block use its attachment vertex, so the arc is contiguous in the full outer walk. This is the arbitrary-given-diagram conclusion proved by the local curvature argument, not merely existence of another diagram for the same word. ([[lem-boundary-spur-or-at-most-three-shell-from-curvature]])
+
+[F5] The disc and bridge blocks of a diagram form a finite tree. An end bridge has a spur tip; an end disc meets the remainder at only its attachment vertex. ([[lem-sc-toolkit-minimal-diagrams-and-cut-vertex-reduction]])
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 If $D$ has exactly one $2$-cell, that face has empty inner boundary and is therefore a shell with zero internal arcs. Hence assume that $D$ has at least two faces. [L0, given]
+1.1 Interpret $D$ with the toolkit conventions. For a fixed prefix $p$, a literal word has a unique suffix after $p$, so the distinct pairs $(r,u)$ and $(s,v)$ in the original piece definition are distinct exactly when $r\ne s$. Thus the piece conditions agree. Reversing one face orientation across a shared edge also identifies the two definitions of a cancellable face pair. The diagrams and their outer walks are identical, not replacements by minimum-area diagrams. If the symmetrised set contains the empty word, discard it: it labels no polygonal face and contains no nonempty piece, so this changes none of the hypotheses on $D$. [F1, F2, L0, L1]
 
-2.1 Collapse every maximal arc of $D$---boundary arcs as well as internal arcs---by suppressing its valence-$2$ internal vertices. The resulting diagram $\overline D$ is an arc-reduced combinatorial disc with the same faces and face incidences. Removing subdivisions neither creates a cancellable face pair nor changes which face-boundary portions are internal or external. [L0, L1, step 1.1, construct]
+2.1 Choose an end disc block using [F5]. If the block tree has just one block, it is a disc because $D$ has a face. Otherwise a finite tree has at least two ends, as seen from the endpoints of a longest simple path. An end bridge gives a spur, whose incoming and outgoing boundary occurrences are inverse. Freely reducedness excludes such a pair unless it straddles the chosen start of the literal boundary word. Only the spur at that starting vertex can do this, so there is at most one end bridge. Some other end is therefore a disc block. This argument permits a whisker at the starting vertex; freely reduced does not mean cyclically reduced. [given, F5, step 1.1]
 
-3.1 Every internal edge of $\overline D$ represents a maximal internal arc of $D$. By reducedness, the two incident face occurrences do not cancel, so [F2] identifies the arc label as a piece. If $f$ is an interior face, these piece-arcs cover $\partial f$; [F1] makes each one shorter than $|\partial f|/6$, so $f$ has at least seven sides. This is exactly the arc-reduced $C'(1/6)$ setup preceding the proposition cited in [F2]. [F1, F2, L1, step 2.1, algebra]
+3.1 Apply [F3] and [F4] to this block, keeping the original word lengths. The block has the same face words and cancellation condition as in $D$, hence the same strict piece bounds. A one-face block is a zero-shell. For a multi-face block, [F4] supplies a shell with at most three internal arcs whose exterior arc avoids its attachment vertex internally. If the block is all of $D$, mark the boundary word's starting vertex instead and use the same two-shell argument. No minimum-area replacement is made. [F1, F3, F4, F5, step 1.1, step 2.1]
 
-4.1 Apply the Touikan proposition cited in [F2] to $\overline D$. It gives a boundary face whose inner boundary consists of $i$ internal arcs for some $1\le i\le3$. Expanding the suppressed valence-$2$ vertices turns those $i$ edges back into the same $i$ maximal internal arcs of $D$, without changing the face or its outer boundary. Together with the one-face case in step 1.1, this proves the claim. [F2, step 1.1, step 2.1, step 3.1] ∎
+4.1 Expand the suppressed vertices. The selected face remains the same face of $D$; its exterior arc is contiguous in the full outer walk by the attachment qualification in [F4]. Other blocks attach only at the selected block's attachment vertex, not along an edge, so its internal arcs remain internal arcs of $D$. That vertex is not internal to any such arc. Expansion therefore gives at most three maximal internal arcs of $D$, as required. In the zero-shell case the full face circuit is the contiguous excursion at the attachment. [F3, F4, F5, step 3.1] ∎

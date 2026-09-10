@@ -6,14 +6,19 @@ status: published
 origin: session
 provenance:
   statement: ai-altered
-  proof: ai-generated
-deps: [lem-smooth-extension-from-a-closed-neighbourhood]
+  proof: ai-altered
+deps: [def-continuity-real, prop-smooth-maps-are-continuous, def-ck-and-multi-index-notation-in-several-variables]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-30
+  verified:
+    model: Codex
+    verdict: repaired-and-locally-checked
+    date: 2026-09-09
+    scope: "Owner-authorized explicit refutation and necessity-claim repair; local checks only"
+    delegated_by: owner
   precheck: pass
 sources:
   scraped: []
@@ -32,16 +37,18 @@ sources:
 
 ## Facts & Assumptions
 
-**Given:** The open set $(0,\infty)\subseteq \mathbb R$ and the smooth function $f(x)=1$ on it.
+**Given:** The closed set $C=\{1\}\subseteq\mathbb R$, the open set $U=(0,\infty)$ containing it, and the smooth function $f(x)=1$ on $U$.
 
-[L1] Smooth extension requires a cutoff supported away from the boundary of the original open set ([[lem-smooth-extension-from-a-closed-neighbourhood]]).
+[L1] Smooth maps are continuous ([[prop-smooth-maps-are-continuous]]).
+
+[L2] Continuity at zero requires the epsilon-delta condition ([[def-continuity-real]]). A constant function is smooth because its positive-order derivatives vanish ([[def-ck-and-multi-index-notation-in-several-variables]]).
 
 ## Refutation
 
 **Proof technique:** direct.
 
-1.1 The naive zero extension is $F(x):=1$ for $x>0$ and $F(x):=0$ for $x\le 0$. [given]
+1.1 The set $C$ is closed: its complement is the union of the open intervals $(-\infty,1)$ and $(1,\infty)$. Thus $C\subseteq U$ and the constant smooth function $f$ satisfy the claim's hypotheses. Its prescribed zero extension is $F(x):=1$ for $x>0$ and $F(x):=0$ for $x\le 0$. [given, L2]
 
-2.1 This function has a jump at $0$, so it is not smooth. [step 1.1]
+2.1 Take $\varepsilon=1/2$. For every $\delta>0$, the point $x=\delta/2$ satisfies $|x|<\delta$ and $|F(x)-F(0)|=1$. Hence $F$ is not continuous at zero by [L2], so it is not smooth by [L1]. [L1, L2, step 1.1]
 
-3.1 Therefore the cutoff in [L1] is genuinely necessary. [L1, step 2.1] ∎
+3.1 Therefore extension by zero is not always smooth, even when the original open set contains the specified closed set. This does not deny the existence of another smooth extension: the constant function one on all of $\mathbb R$ already extends this $f$. No assertion that cutoffs are necessary for every extension, and no choice principle, is used. [step 1.1, step 2.1] ∎

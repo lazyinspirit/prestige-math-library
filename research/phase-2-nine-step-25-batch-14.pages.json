@@ -1,0 +1,1572 @@
+[
+  {
+    "order": 659,
+    "id": "arithmetization-incompleteness-and-relative-consistency",
+    "kind": "A",
+    "category": "foundations",
+    "title": "Arithmetization, Incompleteness, and Relative Consistency",
+    "companion": "arithmetization-incompleteness-and-relative-consistency-examples",
+    "requires": [
+      "deduction-soundness-completeness-and-compactness",
+      "the-arithmetical-hierarchy-and-posts-theorem"
+    ],
+    "items": [
+      {
+        "id": "def-robinson-q-and-peano-arithmetic",
+        "kind": "definition",
+        "title": "Robinson arithmetic, PA, and numeral conventions",
+        "deps": [
+          "def-set-coded-formal-derivation"
+        ],
+        "statement": "Q has the universal closures of Sx\u22600, Sx=Sy\u2192x=y, x\u22600\u2192\u2203y x=Sy, x+0=x, x+Sy=S(x+y), x\u00b70=0, x\u00b7Sy=x\u00b7y+x. PA adds full formula induction with parameters. Numeral n is S iterated n times on 0. Define x\u2264y by \u2203z(z+x=y), and x<y by x\u2264y and x\u2260y.",
+        "strategy": "List every axiom with primitive negation/conjunction/existential expansions and least-fresh-variable substitution. No induction schema belongs to Q. The order convention matters because Q does not prove addition commutative.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "\u00a74B.5 pp147 and \u00a74B pp145\u2013149; Avigad \u00a74.3 pp90\u201391"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "def-effective-theory-and-certified-godel-numbering",
+        "kind": "definition",
+        "title": "Effective theories and certified numerical proof codes",
+        "deps": [
+          "def-bounded-arithmetic-formula",
+          "def-set-coded-formal-derivation"
+        ],
+        "statement": "Fix an effectively presented finite-arity countable signature with primitive-recursive symbol/arity tests. An effective axiom presentation is \u2203w E(a,w) with primitive-recursive E, a finite computation certificate for enumeration if necessary. A proof includes an E-certificate for every nonlogical axiom occurrence. Encode each token, annotation and finite list numerically; invalid codes have specified default values. For a binary word w set c(w)=1^{|w|}0w. With bin(0)=0 and otherwise canonical binary numerals, encode (a0,...,a{k-1}) by the natural number with binary word 1 1^k 0 c(bin(a0))...c(bin(a{k-1})). The empty code is 2. Invalid numerical words have validity false and length/entries zero; out-of-range coordinates return zero. These operations, fixed-arity encoding, append and finite histories are supplied by the following local lemma.",
+        "strategy": "The primitive-recursive class, all arities including nullary zero, parameter recursion and totality come from the published bounded-arithmetic definition, not A609. The initial 1 prevents leading-zero ambiguity. The unary length and payload lengths make parsing deterministic; the following lemma proves injectivity, primitive-recursive validity and operations. Each certified proof is a coded finite list and each nonlogical axiom carries its finite E-witness. A c.e. enumeration certificate records a finite transition history, not a decision oracle.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "\u00a74A.2\u20134A.9 pp140\u2013144; c.e. certificate variant is local"
+          }
+        ],
+        "justified_by": [
+          "lem-certified-syntax-coding-operations-are-primitive-recursive"
+        ],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-certified-syntax-coding-operations-are-primitive-recursive",
+        "kind": "lemma",
+        "title": "Primitive-recursive sentinel coding for certified syntax",
+        "deps": [
+          "def-effective-theory-and-certified-godel-numbering",
+          "def-bounded-arithmetic-formula",
+          "lem-bounded-quantifiers-preserve-primitive-recursiveness"
+        ],
+        "statement": "In ZF, the specified sentinel sequence coding is injective. Its validity predicate, total length and coordinate functions (zero on invalid inputs or out-of-range coordinates), append and concatenation operations, and each fixed-arity encoder are primitive recursive. Fixed finite-state numerical recursions and recursions recording their finite histories are primitive recursive. No A609, choice axiom, unbounded minimization, universal PR evaluator or general Turing/PR equivalence is assumed.",
+        "strategy": "Arithmetic closure is proved from the published initial-function/recursion definition. Addition and multiplication use a+0=a, a+S n=S(a+n), a\u00b70=0 and a\u00b7S n=a\u00b7n+a. Define pred(0)=0, pred(S n)=n; truncated subtraction sub(a,0)=a and sub(a,S n)=pred(sub(a,n)); zero test z(0)=1,z(S n)=0. Equality is z(sub(a,b)+sub(b,a)), and a\u2264b is z(sub(a,b)). Boolean conjunction/product and complement 1\u2212r give all finite tests; a case split is rg+(1\u2212r)h. Bounded sums/products start at 0/1 and append one term. These are explicit primitive recursions. For a 0\u20131 predicate r, the least j<N satisfying r(j), or N if none, equals \u03a3_{j<N} \u03a0_{i\u2264j}(1\u2212r(i)); hence bounded minimization with any PR bound is PR. Exponentiation pow(b,0)=1,pow(b,S n)=b\u00b7pow(b,n). For d>0 the quotient of a by d is \u03a3_{q=1}^a [dq\u2264a], and the remainder is a\u2212d\u00b7quotient; set both to zero for d=0. The natural-number division property follows directly by maximality and (q+1)d>a.\n\nA fixed tuple of state registers can be stored by iterating P(u,v)=(u+v)^2+u. For fixed sum t its codes lie in [t\u00b2,t\u00b2+t], before the next interval [(t+1)\u00b2,...], and within it the u coordinate is distinct. Thus P is injective, and u,v\u2264P(u,v) for every pair. Its range test and inverse coordinates, returning zero off-range, are bounded searches u,v\u2264code. Therefore a simultaneous update of a fixed finite number of registers with PR coordinate updates reduces to one ordinary primitive recursion; no prior sequence-coding or loop theorem is used here. Updates may have arbitrarily large values; only the number of iterations must have a PR bound.\n\nFor s>0 its binary width is ell(s)=1+\u03a3_{j=1}^s [2^j\u2264s], and ell(0)=1. The jth left-to-right bit, for j<ell(s), is rem(quot(s,2^{ell(s)-1-j}),2); elsewhere use zero. Horner iteration v\u21a62v+b evaluates a payload. All are PR by the preceding formulas; powers of two increase and eventually exceed s by induction, so these formulas give the canonical binary word without a logarithm oracle.\n\nThe parser first checks s>0 and leading bit 1. Starting at position 1 it counts the consecutive 1s before the first 0; that 0 must exist, and its count k is the list length. Starting just after it, repeat k block parses. At a block start p, find the first following zero with bounded search below ell(s). Let m be its distance from p; require m\u22651, the delimiter to exist, and m payload bits to fit after it. Require either m=1 or the first payload bit to be 1 (canonical numerals, with 0 permitted only as a one-bit payload). Horner evaluation gives that entry. Advance p by 2m+1. After exactly k blocks require p=ell(s). All position calculations are total, bounded-search failure sets a persistent invalid flag, and later iterations in invalid state do nothing. Counters, position, flag and the requested coordinate form finitely many registers; perform at most ell(s)+1 iterations per scan/block and at most ell(s)+1 block iterations. Nested bounded loops are compositions of the fixed-state recursion just proved. Thus validity, length and entries are PR, with an explicit final validity check resetting outputs to zero. The empty code 2 has k=0 and succeeds with no payload. Conversely deterministic delimiter lengths recover the unique original list, proving injectivity and correctness; no appeal to effective prefix coding is needed.\n\nFor construction keep a word as its value v together with its width L. Concatenating a width-M word of value w sends (v,L) to (v\u00b72^M+w,L+M). Start the header at (2^{k+2}\u22122,k+2), which is precisely 1 1^k 0, including k=0. For an entry a of width m=ell(a), its block has width 2m+1 and value (2^m\u22121)\u00b72^{m+1}+a. Iteratively concatenate these blocks; fixed-arity encoding is PR. For append or concatenation, use the validated input length(s) as the iteration bound, read each entry and add a block under the enlarged header. Default invalid inputs to the empty code 2. These definitions give PR operations and their intended effect by induction on the number of copied entries.\n\nA numerical recursion that needs previous entries stores the entire current list code as its one state. If its initial value and next-value map are PR, combine next-value computation with the PR append operation, then invoke ordinary parameter recursion. Reading the last coordinate returns the requested output. This proves the needed history/course-of-values closure without a universal PR evaluation claim. For syntax operations every fixed-signature scanning instruction and each specified finite certificate transition is a combination of these arithmetic, list, case and iteration operations; the existing syntax lemma must still state its own bounds and correctness invariants.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Klaus Sutner, Primitive Recursion",
+            "url": "https://www.cs.cmu.edu/~cdm/resources/00-primrec.pdf",
+            "locator": "Printed slides 13\u201338, 42\u201359; bounded-search exercise supplied by the local formula"
+          },
+          {
+            "title": "Klaus Sutner, Coding Functions",
+            "url": "https://www.cs.cmu.edu/~cdm/resources/02-coding.pdf",
+            "locator": "Printed slides 9\u201335; coding/state recursion framework, with the sentinel variant proved locally"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-q-numeral-calculation-and-bounded-cases",
+        "kind": "lemma",
+        "title": "Q calculates numerals and finite bounded cases",
+        "deps": [
+          "def-robinson-q-and-peano-arithmetic"
+        ],
+        "statement": "Q decides each true or false closed arithmetic atomic formula; for every external n it proves x\u2264n\u2192(x=0\u2228\u2026\u2228x=n) and x\u2264n\u2228n+1\u2264x. It decides every closed bounded formula. These are metatheoretic schemes, not induction in Q.",
+        "strategy": "External induction on n using predecessor axiom and successor injectivity proves the two order schemes for left-addend witnesses. Reduce closed terms using addition/multiplication recursion; use finite disjunction expansion for bounded quantifiers and Boolean induction, including zero bounds.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "Lemmas 4B.6\u20134B.10, p147"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-godel-beta-coding-and-q-remainder",
+        "kind": "lemma",
+        "title": "Beta coding and arithmetic sequence witnesses",
+        "deps": [
+          "def-robinson-q-and-peano-arithmetic",
+          "lem-q-numeral-calculation-and-bounded-cases"
+        ],
+        "statement": "For \u03b2(b,c,i)=the remainder of b modulo 1+(i+1)c, every finite natural-number sequence has a \u03b2-code. Remainder and \u03b2 admit numeralwise unique-value representations in Q. PA proves existence of codes for finite sequences and extension by one further coordinate.",
+        "strategy": "Prove division by positive d by induction; prove Bezout by the Euclidean descent and the finite CRT by combining two congruences with Bezout coefficients (all these elementary arithmetic arguments are included here, not silent number-theory imports). Given a0,\u2026,an choose j>max(n+1,a0,\u2026,an) and c=j!: moduli 1+(i+1)c are pairwise coprime. A common prime divisor would divide (i-k)c, hence i-k, hence c, contradicting divisor of 1+(i+1)c. CRT supplies b. For Q use a remainder graph with bounded q,r and the finite numeral case lemma; for PA formalize division, Euclid and finite CRT by induction, permitting a new c when a coordinate is appended.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "1E.4\u20131E.6 pp19\u201320; 4B.8 p147; local PA extension argument"
+          },
+          {
+            "title": "Avigad, Computability and Incompleteness (2007)",
+            "url": "https://www.andrew.cmu.edu/user/avigad/Teaching/candi_notes.pdf",
+            "locator": "\u00a74.3 Lemmas 4.3.4 and Theorem 4.3.7, pp93\u201396; Moschovakis Lemma 4B.8 p147"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "def-numeralwise-representability-and-arithmetic-sigma-one",
+        "kind": "definition",
+        "title": "Numeralwise representation and arithmetic complexity",
+        "deps": [
+          "def-robinson-q-and-peano-arithmetic"
+        ],
+        "statement": "F represents total f in Q when for every external tuple n, Q proves \u2200y(F(n,y)\u2194y=f(n)). A relation is numeralwise expressed when Q proves each true numeral instance and negates each false one. Bounded arithmetic formulas quantify only below arithmetic terms; arithmetic \u03a31 formulas are existential closures of bounded formulas, up to the explicitly stated base-theory equivalence.",
+        "strategy": "Separate unique output at standard numeral inputs from the stronger PA theorem \u2200x\u2203!y F(x,y); separate arithmetic bounded quantifiers from set-theoretic \u03940.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "Definition 4B.1 pp145\u2013146 and \u00a74C.11 p154"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-primitive-recursive-numeralwise-representability",
+        "kind": "theorem",
+        "title": "Primitive-recursive functions are representable in Q",
+        "deps": [
+          "def-effective-theory-and-certified-godel-numbering",
+          "lem-q-numeral-calculation-and-bounded-cases",
+          "lem-godel-beta-coding-and-q-remainder",
+          "def-numeralwise-representability-and-arithmetic-sigma-one"
+        ],
+        "statement": "Every primitive-recursive function has a numeralwise unique-value representing formula in Q, and every primitive-recursive relation has positive and negative numeral proofs. The constructions can be chosen with PA-provable totality, uniqueness, and \u03a31 graph definitions.",
+        "strategy": "Induct on the construction of f. Base graphs are arithmetic equations; composition existentially binds intermediate values. For recursion use \u03b2-coded histories. Strengthen intermediate graphs by choosing the least candidate output so that agreement with a numeral forces any output to equal it even for nonnumeral inputs; finite order cases prove this property in Q. Require initial value, all successor equations through t, and final value at t (correct the displayed variable errors in Moschovakis 4B.12). External induction through a numeral t proves existence and unique final output. PA proves history existence by induction and the \u03b2-extension lemma; collecting finitely many witnesses gives \u03a31 closure under bounded universal quantification. For f(0,x)=g(x), f(St,x)=h(t,f(t,x),x), use \u2203b,c[\u2203u(G(x,u)\u2227B(b,c,0,u)) \u2227 \u2200i<t \u2203u,v(B(b,c,i,u)\u2227B(b,c,Si,v)\u2227H(i,u,x,v)) \u2227 B(b,c,t,y)], with G,H and B replaced by least-output-strengthened graphs. At each external numeral stage, the strengthened B graph forces every occurrence of a coordinate to agree with its computed numeral. The initial and successor clauses then force the terminal coordinate. The PA totality proof uses internally unique \u03b2 values. For each external numeral r, the finite order cases prove uniformly in x that F*(x,r) implies every F*(x,y) has y=r: below r use the least-output clause at r, above r use the least-output clause at y, and equality is immediate. Thus no functionality of an arbitrary nonstandard history code is assumed. With numeral recursion input t, instantiate each of the finitely many successor clauses: G fixes the initial numeral; strengthened B transfers that value between occurrences; H fixes the next numeral; repeat through t, including t=0. Numeral beta codes give existence. The arithmetic complexity assertion uses PA equivalence explicitly: PA proves totality and uniqueness of each raw graph by the construction induction, hence proves it equivalent to its least-output strengthening. PA also proves its negation equivalent to existence of a different output. Starting with bounded beta graphs, replace earlier graphs and their negations by these positive existential forms and collect the finitely many witnesses under each bounded universal quantifier. This yields PA-provably equivalent syntactic Sigma1 formulas while retaining the strengthened graphs for Q numeral representation. The review obligation is discharged in research/phase-2-catchup-24-alpha-g-recheck.md; PA equivalence is not claimed to be Q equivalence.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "Lemmas 4B.3\u20134B.4, 4B.11\u20134B.12 and Theorem 4B.13, pp146\u2013148; Proposition 4C.12 p155"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-primitive-recursive-syntax-and-proof-checking",
+        "kind": "lemma",
+        "title": "Primitive-recursive syntax and certified proof checking",
+        "deps": [
+          "def-effective-theory-and-certified-godel-numbering",
+          "lem-certified-syntax-coding-operations-are-primitive-recursive"
+        ],
+        "statement": "Term/formula recognition, free-variable and free-for tests, capture-free substitution, numeral formation, negation, and checking a certified derivation are primitive recursive for the fixed encoding.",
+        "strategy": "Scan decoded words with bounded stacks and bounded truth tables for tautology instances; calculate formula data in increasing syntax size, retaining finite histories. Rename bound variables above the largest index in the input before substitution. Check all six logical schemes and all three rules, including the existential-elimination eigenvariable restriction. Check every premise index is earlier; axiom certificates are checked by E, not by deciding \u2203w E(a,w). Invalid inputs return 0/false. Prove all scanning loops bounded by numerical input or explicitly constructed primitive-recursive bounds. The local sentinel-code lemma supplies all numerical primitives, fixed-state iteration and history-list updates; no A609 theorem is assumed.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "Lemma 4A.3 pp140\u2013141 and Lemma 4A.9 p144"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "def-effective-interpretation-and-proof-translation",
+        "kind": "definition",
+        "title": "Interpretations with proof-translation data",
+        "deps": [
+          "def-set-coded-formal-derivation",
+          "def-effective-theory-and-certified-godel-numbering",
+          "lem-primitive-recursive-syntax-and-proof-checking"
+        ],
+        "statement": "An interpretation of a sentence theory S in T specifies a definable nonempty domain D, an equivalence E on D, E-invariant relations, and E-invariant functional graphs total and single-valued modulo E on D. T proves these obligations and every translated S axiom. Translate terms by domain-valued witnesses, commute with Boolean operations, and relativize quantifiers to D. The proof translation of an open formula phi is G_FV(phi) -> phi^I, with G_V the conjunction of D(v) for v in V; sentences retain phi^I. Effective data fixes separate effective signatures, axiom-certificate predicates and sentinel codings for S and T and supplies interpretation formulas and certificates uniformly effectively. Formalized data additionally specifies total primitive-recursive guarded-formula and proof maps t,r, chosen arithmetic representations and B proofs of totality, uniqueness and uniform certified-proof correctness. A supplied contradiction-conversion block and its appending map are separately verified in B.",
+        "strategy": "Use one target domain variable per source variable and fresh auxiliary variables. Interpretation formulas have only designated free variables; parameters are fixed target constants. Define V_x(z):=D(z) and E(x,z). For a function application existentially bind argument values and conjoin its graph and D(z); nullary graphs cover constants. Translate atomic relations and equality through existential term values. Commute with negation and conjunction; translate exists x phi as exists x(D(x) and phi^I), expanding universal quantification through primitive syntax. The empty guard is a provable Boolean tautology. Interpretation data requires nonemptiness, E-equivalence, congruence, graph totality/uniqueness and translated sentence axioms, not logical theorem preservation. The next lemma proves substitution and all six axiom and three rule cases with free-variable guards. Identity equality on a definable subdomain is a special case. No quotient representatives or AC are needed. Effectiveness alone does not imply a base-verifiable primitive-recursive proof map. FA terminal repair: distinguish arbitrary set-signature interpretations from the two numerical layers. Fix guard order and fresh-variable choices, reject malformed certified proofs, set t=0 on nonformulas, and state correctness using explicit total functional graphs. Do not infer B verification from external primitive recursiveness or standard-numeral correctness.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "Definition 4C.1 pp150\u2013151, strengthened local domain/quotient interface"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-interpretation-translates-finite-derivations",
+        "kind": "lemma",
+        "title": "Interpretation transports derivations and inconsistency",
+        "deps": [
+          "def-effective-interpretation-and-proof-translation",
+          "def-set-coded-formal-derivation",
+          "thm-first-order-sentence-deduction",
+          "lem-hilbert-propositional-and-equality-rules",
+          "lem-derivation-finite-support-and-concatenation"
+        ],
+        "statement": "For every S-derivation of a formula phi, the interpretation constructs a T-derivation of G_FV(phi) -> phi^I. For sentences this gives a T-derivation of phi^I; a source contradiction gives a T-contradiction. Thus external Con(T) implies Con(S). Effective certificate data makes the translation effective. If a base B verifies a total map from S-contradiction certificates to T-contradiction certificates, B proves Con(T) -> Con(S).",
+        "strategy": "Work in ZF with the fixed six-scheme/three-rule calculus. This local syntactic adaptation preserves sentence-consistency transport without semantic completeness or assuming logical theorem preservation as data. Use the published derived quantifier rules and open-discharge freshness clause, then assemble finite annotated proof blocks.\n\n### Interpretation data and local structural inductions\n\nUse one domain variable for each source variable, a domain formula D, an\nequivalence E on D, relations invariant under E on D, and function graphs\ntotal and single-valued modulo E on D and invariant under equivalent inputs.\nT proves these obligations and the translations of the source sentence\naxioms. These are data, not an assumption of logical theorem preservation.\nChoose auxiliary variables fresh from the finite expressions being handled.\n\nDefine the term-value relation V_t(z) with output restricted to D:\nfor a variable x use D(z) and E(x,z); for a function application existentially\nquantify the argument values and use its graph. The nullary case is the\nconstant graph. Translate atomic relations/equalities by existentially\nquantifying their term values and applying the interpreted relation/E.\nCommute with negation/conjunction and translate existential quantification\nas exists x (D(x) and phi^I). All variables other than the designated domain\nvariables in the interpretation formulas must be bound or fixed constants.\n\nUnder the guard on the free input variables, induction on t proves existence\nof a value, uniqueness modulo E, and invariance under E-equivalent inputs.\nThe variable case uses reflexivity/symmetry/transitivity of E on D. At a\nfunction node, finitely many argument witnesses come from the induction;\ntotality supplies the output, and argument congruence plus graph uniqueness\ncompares any two outputs. Existence uses only finitely many existential\nintroductions/eliminations, not an infinite choice function.\n\nInduction on formulas then proves invariance under E-equivalent free-variable\nassignments: atomic cases use those value comparisons and relation congruence;\nnegation and conjunction use propositional rules; an existential witness\ncan be retained when changing the other free variables, so both directions\nfollow by existential monotonicity and fresh-variable elimination.\n\nThe simultaneous term/formula substitution induction gives, for free-for t,\nunder the guard on FV(phi) minus x together with FV(t),\n\n    (phi[t/x])^I <-> exists z (V_t(z) and phi^I[z/x]).\n\nHere z is fresh. Atomic cases substitute the value relations recursively.\nFor conjunction, two values can be identified modulo E and formula\ninvariance transports both conjuncts to one witness. For negation, values\nexist and every value gives the same truth value by invariance; hence\nnegating the existential value formula equals existence of a value satisfying\nthe negated formula. This is the necessary uniqueness step; existential\nquantification does not simply commute with negation. For quantifiers,\nrename their binders away from t,z and use existential monotonicity and\nfresh-variable elimination to commute the independent witnesses. If x is\nabsent, the same equivalence follows by value existence. Every operation\nuses the published syntactic rules, not semantic completeness.\n\n### Guard removal and six axiom cases\n\nLet G_V be the conjunction of D(v) for the finite free-variable set V.\nIf T proves G_(V union {x}) -> A and x is absent from A and G_V, Boolean\ncommutation gives D(x) -> (G_V -> A). Restricted existential elimination\ngives (exists x D(x)) -> (G_V -> A). Apply domain nonemptiness to remove\nthat guard. Repeating this removes every surplus free-variable guard.\nAn empty guard is a fixed provable Boolean tautology.\n\n1. Boolean tautologies remain tautologies after substituting translated\n   formulas for their propositional atoms; add the guard by weakening.\n2. Universal instantiation: under the needed input guard, obtain a value\n   of t. The relativized universal premise gives phi^I at that value.\n   The substitution equivalence gives the translated conclusion. Remove\n   surplus guards; if x never occurs in phi this is simply A -> A.\n3. Distribution: from forall x(D(x) -> (A -> B)) and A, infer\n   forall x(D(x) -> B), since x is absent from A. This is the target\n   distribution axiom after Boolean rearrangement and generalization.\n4. Existential introduction: substitution provides a value of t with\n   phi^I at that value, hence exists x(D(x) and phi^I). Again remove\n   any guard not in the actual source axiom's free-variable set.\n5. Reflexivity: the term has a value; E is reflexive on its values, so\n   the interpreted t=t follows. A variable outside D is never asserted\n   E-reflexive without its free-variable guard.\n6. Equality substitution: choose values of s and t. Interpreted equality\n   makes them E-equivalent. Formula invariance transfers the substituted\n   formula between them; the substitution equivalences recover the exact\n   two interpreted formulas. Discharge the interpreted equality premise\n   and remove surplus guards. All witnesses are fresh.\n\nThese finite derivations can be written with temporary open assumptions\nonly using variables absent from those assumptions for generalization or\nexistential elimination. The published open-discharge clause then applies.\nEquivalently all steps can be expressed as Boolean implication templates.\n\n### Three rule cases and consistency\n\nMaintain T proves G_FV(phi) -> phi^I for every source line phi.\nSource sentence assumptions use their supplied target proofs directly.\n\n- MP: enlarge both premise guards to their finite union, apply MP to the\n  translated formulas, then remove variables absent from the conclusion.\n- Generalization in x: let G omit x. From the transformed premise obtain\n  G -> (D(x) -> phi^I), adding a vacuous D(x) guard if necessary.\n  Generalize x and use distribution, since x is absent from G, to get\n  G -> forall x(D(x) -> phi^I). Expanding the primitive syntax and using the published quantified\n  double-negation rule gives the relativized universal conclusion.\n- Restricted existential elimination: x is absent from psi. Rewrite the\n  transformed implication as (D(x) and phi^I) -> (G -> psi^I), where G\n  contains the remaining free-variable guards and omits x. Eliminate x,\n  which is absent from G -> psi^I, then commute the implication to obtain\n  G -> ((exists x(D(x) and phi^I)) -> psi^I). Remove surplus guards.\n\nThe fixed source contradiction is exists v0 not(v0=v0). Its translation\nis refutable in T by guarded E-reflexivity and the term-value argument.\nIt has no free variables, so a translated source contradiction proof gives\nits unguarded translation; explosion then gives T's fixed contradiction.\nThis proves external consistency transport without changing the calculus.\n\nFor each finite source proof only finitely many interpretation-obligation\nand source-axiom certificates are needed; finite selection and concatenation\nare justified in ZF by the read finite-support lemma. Effective certificate\ndata gives an effective translation through these explicit templates.\nDo not infer a PA-verifiable primitive-recursive map merely from that fact.\nThe formalized claim retains its separate hypothesis that B verifies a total\nmap from S-contradiction certificates to T-contradiction certificates; quantify\nover codes and contrapose that verified implication inside B.\n",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Freiburg, Course Notes for Set Theory and Independence Proofs (2024)",
+            "url": "https://home.mathematik.uni-freiburg.de/maxwell/coursenotes-settheoryandindependenceproofs.pdf",
+            "locator": "Lemma 3.5.12 p54; Moschovakis Definition 4C.1 p150; full proof-map refinement local"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "def-arithmetic-provability-and-consistency",
+        "kind": "definition",
+        "title": "The standard certified provability predicate",
+        "deps": [
+          "thm-primitive-recursive-numeralwise-representability",
+          "lem-primitive-recursive-syntax-and-proof-checking"
+        ],
+        "statement": "Prf_T(p,a) is the chosen arithmetic representation of certified T-proof checking (proof code first); Prov_T(a):=\u2203p Prf_T(p,a). Con(T):=\u00acProv_T(code(\u22a5)), for the fixed contradictory sentence of the appropriate signature. This arithmetical formula differs from the external assertion that T has no finite proof of contradiction.",
+        "strategy": "Retain the Q-numeralwise proof-checking representation from the preceding theorem and fix its PA-provably equivalent syntactic Sigma1 form by coded computations, together with the finite PA proofs of that equivalence. Here Sigma1 for the chosen predicate means PA-Sigma1 as explicitly allowed in def-numeralwise-representability-and-arithmetic-sigma-one. State PA-verifiable transformations; never infer Q equivalence from PA equivalence. For arithmetic use 0=1 interchangeably with the fixed bottom only after exhibiting proof translations. Arbitrary numeralwise correct predicates are not automatically eligible for second incompleteness.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "Definition 4A.8 p144; Definition 4C.6 p152; Proposition 4C.13 p155"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-arithmetic-diagonal-lemma",
+        "kind": "theorem",
+        "title": "The syntactic diagonal lemma",
+        "deps": [
+          "thm-primitive-recursive-numeralwise-representability",
+          "lem-primitive-recursive-syntax-and-proof-checking"
+        ],
+        "statement": "For every formula \u03c8(v) of an effective signature extending arithmetic and T extending Q, there is a sentence \u03b8 with Q (in that signature) proving \u03b8\u2194\u03c8(code \u03b8). The construction is effective; no consistency or soundness assumption is required.",
+        "strategy": "Let d(e) code substitution of numeral e into the designated variable of formula e. Represent d by D. Choose fresh y and let \u03b7(x)=\u2203y(D(x,y)\u2227\u03c8(y)), \u03b8=\u03b7(code \u03b7). The numeralwise uniqueness theorem identifies its sole output as code \u03b8; existential introduction and elimination give both implications. Expand all abbreviations and avoid treating d as an unlicensed function symbol.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "4B.14 p149, complete fixed-point proof"
+          },
+          {
+            "title": "Avigad, Computability and Incompleteness (2007)",
+            "url": "https://www.andrew.cmu.edu/user/avigad/Teaching/candi_notes.pdf",
+            "locator": "Lemma 4.5.1 and complete proof, pp108\u2013109"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-first-incompleteness-with-explicit-soundness",
+        "kind": "theorem",
+        "title": "G\u00f6del sentence with separated consistency assumptions",
+        "deps": [
+          "thm-arithmetic-diagonal-lemma",
+          "def-arithmetic-provability-and-consistency",
+          "lem-q-numeral-calculation-and-bounded-cases"
+        ],
+        "statement": "For an effective T extending Q, choose G\u2194\u00acProv_T(code G). If T is consistent, T does not prove G and G is true in standard arithmetic. If T is \u03c9-consistent (in particular if sound), T does not prove \u00acG.",
+        "strategy": "A proof of G gives a positive numeral proof of its proof code and hence Prov G, contradicting G. Under consistency each standard proof-code instance is refutable in Q. A proof of \u00acG would prove existence of such a proof code while refuting each numeral instance, violating \u03c9-consistency. State \u03c9-consistency in the contract; do not claim consistency alone rules out \u00acG.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "4A.10 pp144\u2013145 and 4B.14 p149; local consistency/omega-consistency separation"
+          },
+          {
+            "title": "Avigad, Computability and Incompleteness (2007)",
+            "url": "https://www.andrew.cmu.edu/user/avigad/Teaching/candi_notes.pdf",
+            "locator": "Theorem 4.6.1 and proof, pp110\u2013111"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-rosser-incompleteness-for-effective-theories",
+        "kind": "theorem",
+        "title": "Rosser incompleteness from consistency",
+        "deps": [
+          "thm-arithmetic-diagonal-lemma",
+          "def-arithmetic-provability-and-consistency",
+          "lem-q-numeral-calculation-and-bounded-cases",
+          "lem-interpretation-translates-finite-derivations"
+        ],
+        "statement": "Every consistent effective theory extending Q is incomplete. The result also holds for a theory with an effective interpretation of Q, using proof predicates for translated sentences.",
+        "strategy": "Choose R\u2194\u2200p(Prf_T(p,code R)\u2192\u2203q\u2264p Prf_T(q,code \u00acR)). If T proves R with code m, consistency and finite negative numeral checking refute every candidate q\u2264m, hence refute R. If T proves \u00acR with code n, consistency rules out each proof code p\u2264n; for p>n the code n witnesses the consequent. The two bounded cases give a Q proof of R, contradiction. For interpretations use translated Proof/Refute predicates, keeping R itself an arithmetic sentence before translation.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "Theorem 4C.4, complete proof pp151\u2013152"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-pa-uniform-bounded-truth-proof-certificates",
+        "kind": "lemma",
+        "title": "PA verifies proof certificates for bounded arithmetic truth",
+        "deps": [
+          "lem-q-numeral-calculation-and-bounded-cases",
+          "lem-godel-beta-coding-and-q-remainder",
+          "thm-primitive-recursive-numeralwise-representability",
+          "lem-primitive-recursive-syntax-and-proof-checking",
+          "def-arithmetic-provability-and-consistency"
+        ],
+        "statement": "For each fixed bounded arithmetic formula \u03b4(x), PA proves that \u03b4(x) yields a certified Q-proof of \u03b4(numeral x), and \u00ac\u03b4(x) yields a certified Q-proof of its negation. Therefore for each fixed \u03a31 sentence \u03c3, PA proves \u03c3\u2192Prov_Q(code \u03c3).",
+        "strategy": "Build primitive-recursive proof constructors simultaneously for true and false cases. Atomic term evaluation uses recursive numeral addition and multiplication proofs; inequality uses successor injectivity. Boolean constructors splice proofs and tautologies. Bounded existential truth uses the least successful witness and introduction; bounded universal truth concatenates proofs for every value and uses the finite case theorem; their false cases reverse these operations. PA induction on the numerical bound verifies the list construction and premise indices. Fixed formula complexity is external; numerical induction is internal. For \u03a31 append existential introductions to the bounded witness proof. This supplies the work omitted by Avigad rather than postulating derivability conditions. The concluding Q-certificate assertion applies to a syntactic Sigma1 sentence (existential closure of a bounded formula). For a formula only PA-provably equivalent to that sentence, first obtain the Q-proof of the syntactic form, then embed it into the target extending PA and append the fixed PA equivalence proof there; do not claim a Q-proof of the equivalent formula.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "Proposition 4C.13(2), proof pp155\u2013156, with all bounded constructor cases supplied locally"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-hilbert-bernays-lob-derivability-conditions",
+        "kind": "theorem",
+        "title": "Derivability conditions for the chosen proof predicate",
+        "deps": [
+          "lem-pa-uniform-bounded-truth-proof-certificates",
+          "def-arithmetic-provability-and-consistency",
+          "lem-primitive-recursive-syntax-and-proof-checking",
+          "lem-interpretation-translates-finite-derivations"
+        ],
+        "statement": "For the standard certified predicate of an effective T extending PA (or an effective interpreted PA copy), D1: T\u22a2\u03c6 implies T\u22a2Prov_T(code \u03c6); D2: T proves Prov_T(code(\u03c6\u2192\u03c8))\u2192(Prov_T(code \u03c6)\u2192Prov_T(code \u03c8)); D3: T proves Prov_T(code \u03c6)\u2192Prov_T(code Prov_T(code \u03c6)).",
+        "strategy": "D1 inserts the actual finite proof certificate and a numeral verification. D2 uses the PA-verifiable primitive-recursive operation concatenating two proofs, shifting references and appending MP. For D3 write chi=Prov_T(code phi), and use the fixed PA proof chi iff sigma, with sigma syntactic Sigma1. PA proves sigma implies Prov_Q(code sigma) by the preceding certificate lemma. Embed those Q certificates into T and append the fixed T-proof of sigma implies chi; the PA-verifiable concatenation operation therefore gives sigma implies Prov_T(code chi). Combining with chi implies sigma proves D3. No Q proof of chi iff sigma is asserted or needed. For interpreted arithmetic explicitly transport these proof constructors and require the PA interpretation/axiom-proof map to be verifiable there. Do not apply to an arbitrary nonstandard presentation merely correct on standard numerals.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "4C.12\u20134C.13 pp154\u2013156; local bounded-certificate constructors supply omitted details"
+          },
+          {
+            "title": "Avigad, Computability and Incompleteness (2007)",
+            "url": "https://www.andrew.cmu.edu/user/avigad/Teaching/candi_notes.pdf",
+            "locator": "\u00a74.7 pp113\u2013115 conditions 1\u20133 (source omits verification); local verification backed by Moschovakis Proposition 4C.13"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-lob-from-derivability-conditions",
+        "kind": "theorem",
+        "title": "L\u00f6b theorem",
+        "deps": [
+          "thm-arithmetic-diagonal-lemma",
+          "thm-hilbert-bernays-lob-derivability-conditions",
+          "lem-interpretation-translates-finite-derivations"
+        ],
+        "statement": "For T extending Q, or with an effective interpreted Q copy supporting the diagonal construction, with a standard provability predicate satisfying D1\u2013D3, if T proves Prov_T(code \u03c6)\u2192\u03c6, then T proves \u03c6.",
+        "strategy": "Take \u03b8\u2194(Prov \u03b8\u2192\u03c6). D1 and D2 give Prov \u03b8\u2192Prov(Prov \u03b8\u2192\u03c6); D3 and D2 give Prov \u03b8\u2192Prov \u03c6. The assumed reflection instance gives Prov \u03b8\u2192\u03c6, hence \u03b8. D1 gives Prov \u03b8, then \u03c6. This proof precedes second incompleteness and uses no consistency hypothesis.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "4C.9\u20134C.10 pp153\u2013154; local direct D1\u2013D3 proof, not the source's second-incompleteness route"
+          },
+          {
+            "title": "Avigad, Computability and Incompleteness (2007)",
+            "url": "https://www.andrew.cmu.edu/user/avigad/Teaching/candi_notes.pdf",
+            "locator": "Theorem 4.8.1, pp115\u2013116, complete formal derivation"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-second-incompleteness-for-standard-provability",
+        "kind": "theorem",
+        "title": "Second incompleteness for standard provability",
+        "deps": [
+          "thm-lob-from-derivability-conditions",
+          "def-arithmetic-provability-and-consistency",
+          "thm-hilbert-bernays-lob-derivability-conditions"
+        ],
+        "statement": "If T is consistent and satisfies the preceding arithmetic and derivability hypotheses (including the interpreted version), T does not prove its displayed Con(T). The theorem requires the chosen proof predicate and verified arithmetic interpretation, not mere numeralwise correctness.",
+        "strategy": "Con(T) is equivalent in T to Prov_T(code \u22a5)\u2192\u22a5; L\u00f6b would turn its provability into a proof of \u22a5. The particular axiom presentation and predicate are part of the theorem.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "4C.8\u20134C.13 pp153\u2013156; local derivation from the preceding direct Lob theorem"
+          },
+          {
+            "title": "Avigad, Computability and Incompleteness (2007)",
+            "url": "https://www.andrew.cmu.edu/user/avigad/Teaching/candi_notes.pdf",
+            "locator": "Theorems 4.7.1\u20134.7.2 pp114\u2013115 and Theorem 4.8.1 p116"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-tarski-arithmetic-truth-undefinability",
+        "kind": "theorem",
+        "title": "Arithmetic truth is not arithmetically definable",
+        "deps": [
+          "thm-arithmetic-diagonal-lemma",
+          "def-robinson-q-and-peano-arithmetic",
+          "thm-set-language-first-order-soundness"
+        ],
+        "statement": "No arithmetic formula defines the set of codes of all sentences true in the standard natural-number structure. More generally no consistent extension of Q has a formula Tr satisfying all its own-language T-biconditionals.",
+        "strategy": "For a purported Tr, diagonalize \u00acTr. In standard arithmetic soundness of Q makes the fixed-point biconditional true, contradicting the truth-definition biconditional. For a consistent theory the two proved biconditionals already contradict each other. Verify the standard arithmetic structure satisfies the seven Q axioms; this makes no appeal to its own truth predicate.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "4A.4\u20134A.5 pp142\u2013143 and 4B.14 p149; local syntactic version"
+          },
+          {
+            "title": "Avigad, Computability and Incompleteness (2007)",
+            "url": "https://www.andrew.cmu.edu/user/avigad/Teaching/candi_notes.pdf",
+            "locator": "Theorem 4.9.5 and complete proof, p118"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-explicit-definitions-give-conservative-extensions",
+        "kind": "theorem",
+        "title": "Explicit definitions are conservative",
+        "deps": [
+          "def-first-order-syntactic-consistency",
+          "def-effective-interpretation-and-proof-translation",
+          "lem-interpretation-translates-finite-derivations"
+        ],
+        "statement": "Adding relation symbols by explicit defining formulas, and functions by formulas T proves uniquely total, is conservative over T in its original language. It is equiconsistent with T.",
+        "strategy": "Use the full target domain D(x):=x=x and actual equality E(x,y):=x=y. Interpret each old symbol by itself and each new symbol by its defining old-language relation or uniquely total graph. Eliminate graph occurrences with fresh variables. Under this interpretation every free-variable guard is a theorem. For each old term t prove V_t(z) iff z=t by structural induction; equality substitution and unique totality discharge the witnesses. Induction on old formulas then proves phi^I iff phi using the published quantifier monotonicity and renaming rules. Thus identity on the old language means provable equivalence, not literal equality of the witness-expanded syntax. Translate a proof of an old sentence through the guarded interpretation lemma, remove its vacuous guard and use this equivalence to obtain the original sentence in T. The defining axioms translate to theorems by the same graph equations and their stipulated existence/uniqueness proofs. Fixed contradiction gives one consistency direction; inclusion of T gives the converse. Only finitely many definition certificates occur in a finite proof, so finite proof assembly suffices in ZF; no AC or completeness is used.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "\u00a74C.1 interpretation framework; conservative extension already defined in published def-first-order-syntactic-consistency"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-zf-arithmetic-interpretation-and-effective-axioms",
+        "kind": "lemma",
+        "title": "ZF has an effective standard arithmetic interpretation",
+        "deps": [
+          "def-robinson-q-and-peano-arithmetic",
+          "def-effective-interpretation-and-proof-translation",
+          "lem-primitive-recursive-syntax-and-proof-checking",
+          "def-coded-first-order-zf-theory",
+          "thm-recursion",
+          "thm-induction-principle",
+          "thm-hilbert-bernays-lob-derivability-conditions"
+        ],
+        "statement": "ZF and ZFC have effective axiom presentations and an interpretation of PA on \u03c9 with von Neumann zero/successor and recursively defined addition/multiplication. Their standard proof predicates satisfy the preceding formalization requirements.",
+        "strategy": "Use the published coded ZF schema serialization exactly, including implication-only Power Set and von Neumann Infinity. Syntactic parsing gives a primitive-recursive schema enumerator/certificates. Define addition and multiplication by recursion on \u03c9 and verify seven Q axioms. Separation forms the induction set for every translated formula, and \u03c9 induction proves the PA induction schema. Supply uniform formula-to-schema-instance and proof translations. AC is only an additional encoded sentence for ZFC, not needed to interpret PA. Verify the interpreted primitive-recursive proof constructors in PA on \u03c9, then apply the derivability-conditions theorem; this supplies second incompleteness for ZF, ZFC and their finite effective extensions.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "Proposition 4C.3 p150 (statement only); local proof via earlier \u03c9 recursion and induction"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-model-existence-versus-syntactic-consistency",
+        "kind": "theorem",
+        "title": "Models and consistency for countable theories",
+        "deps": [
+          "thm-countable-first-order-completeness",
+          "thm-set-language-first-order-soundness",
+          "def-arithmetic-provability-and-consistency"
+        ],
+        "statement": "In external ZF, an explicitly countable sentence theory is consistent iff it has a nonempty set model, and iff it has an at most countable set model. For an effective presentation the external consistency assertion agrees with truth in standard \u03c9 of its certified Con formula. No transitivity or external well-foundedness follows.",
+        "strategy": "First reduce to the sublanguage consisting of symbols occurring in the explicitly countable theory: code each occurrence by its theory-sentence index and token position, and assign each occurring symbol its least occurrence code. This gives an explicit injection into omega without countable choice, including the empty-theory case. Consistency is preserved on restriction because any proof in the smaller signature is also a proof in the original signature. Apply published countable completeness in this explicitly countable sublanguage. Choose one element of the nonempty model, interpret every unused constant and function by that element (constant functions of the prescribed arities), and every unused relation by the empty relation. Reduct invariance of satisfaction shows the expansion satisfies the original theory and has the same at most countable carrier. Conversely apply published soundness. Numerical certification equivalence converts each actual finite derivation for an effective presentation. The Henkin quotient relation need not be actual membership and internal naturals need not be standard.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "\u00a73 pp8\u20139 and \u00a75.1 p13, model/consistency conventions"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "def-countable-transitive-model-and-fragment-transfer",
+        "kind": "definition",
+        "title": "Transitive models and finite-fragment transfer data",
+        "deps": [
+          "def-theories-models-and-semantic-consequence",
+          "def-relativization-to-a-definable-class",
+          "def-coded-first-order-zf-theory"
+        ],
+        "statement": "TM(\u0393) means a nonempty transitive set M with the real restricted membership relation satisfies \u0393; CTM adds an injection M\u2192\u03c9. A fragment transfer specifies, for each finite target fragment \u0394, a finite source fragment \u0393 and a theorem converting each suitable TM/CTM of \u0393 into a set model of \u0394. Countability is external to the model.",
+        "strategy": "Define transitive explicitly by \u2200x\u2208M\u2200y\u2208x(y\u2208M). Fragment source, auxiliary axioms, parameter restrictions and metatheory are part of the data. The assertion \u0393\u2282ZF is syntactic. Do not quantify a universe truth predicate or assume a full CTM from consistency.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "\u00a74 pp10\u201312, especially paragraph before Lemma 4.1 and Corollary 4.6"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-transitive-zf-models-have-correct-proof-codes",
+        "kind": "lemma",
+        "title": "Transitive ZF models have standard arithmetic and proof codes",
+        "deps": [
+          "def-countable-transitive-model-and-fragment-transfer",
+          "lem-zf-arithmetic-interpretation-and-effective-axioms",
+          "lem-primitive-recursive-syntax-and-proof-checking"
+        ],
+        "statement": "A transitive set model of ZF has the real \u03c9, natural arithmetic and all finite natural-number syntax/proof codes. For each fixed effective arithmetic predicate its truth on those codes agrees with the ambient universe. If it models ZFC, it also satisfies the standard Con(ZFC).",
+        "strategy": "External induction fixes every finite ordinal. Its internal \u03c9 is a transitive ordinal with only zero/successor elements, no largest element, and is nonzero: this excludes an extra ordinal \u2265real \u03c9 and proves equality. Arithmetic recursion agrees by uniqueness; formula induction then gives arithmetic absoluteness since all quantifiers range over the same \u03c9. Soundness in the ambient universe gives absence of an actual ZFC proof of contradiction, then arithmetic absoluteness transfers the Con sentence inside M.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "\u00a75.1 pp12\u201313 (standard versus internal codes); local restricted arithmetic proof, not later general rank absoluteness"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-consistency-does-not-supply-a-transitive-zfc-model",
+        "kind": "theorem",
+        "title": "The transitive-model consistency-strength gap",
+        "deps": [
+          "lem-transitive-zf-models-have-correct-proof-codes",
+          "thm-second-incompleteness-for-standard-provability",
+          "thm-model-existence-versus-syntactic-consistency",
+          "lem-zf-arithmetic-interpretation-and-effective-axioms",
+          "thm-first-order-sentence-deduction"
+        ],
+        "statement": "Let S=ZFC+Con(ZFC). Assuming externally Con(S), ZFC does not prove Con(ZFC)\u2192TM(ZFC). Moreover S+\u00acTM(ZFC) is consistent and has a set model. Thus consistency is not a valid replacement for a transitive-model hypothesis.",
+        "strategy": "ZF proves TM(ZFC)\u2192Con(S): a transitive ZFC model satisfies Con(ZFC) by proof-code correctness, hence is a model of S, and soundness applies. If S proved TM(ZFC), it would prove Con(S), contrary to second incompleteness for S. Deduction gives consistency of S+\u00acTM(ZFC), and countable completeness gives the relative countermodel. State the stronger external hypothesis Con(S) explicitly; do not claim Con(ZFC) alone proves this countermodel exists.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "4C.8 p153, second-incompleteness background; transitive-model application proved locally"
+          },
+          {
+            "title": "Avigad, Computability and Incompleteness (2007)",
+            "url": "https://www.andrew.cmu.edu/user/avigad/Teaching/candi_notes.pdf",
+            "locator": "\u00a74.7 second incompleteness; local application using the transitive-proof-code lemma"
+          },
+          {
+            "title": "Andrew Marks, Set Theory lecture notes",
+            "url": "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf",
+            "locator": "Exercise 18.15, consistency versus well-founded models, p79"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-finite-fragment-relative-consistency-transfer",
+        "kind": "theorem",
+        "title": "Finite-fragment model transfer proves relative consistency",
+        "deps": [
+          "def-countable-transitive-model-and-fragment-transfer",
+          "thm-model-existence-versus-syntactic-consistency",
+          "lem-derivation-finite-support-and-concatenation"
+        ],
+        "statement": "Let T extend enough ZF to formalize set-model soundness and U be an explicitly countable sentence theory. Suppose for every external finite \u0394\u2282U there is finite \u0393 and T-proofs of existence of a suitable TM/CTM of \u0393 and of its conversion to a set model of \u0394. Then external Con(T) implies Con(U).",
+        "strategy": "Assume an actual U-refutation p; extract its finite axiom support \u0394. The two stipulated T-proofs imply a set model of \u0394 exists. Formal soundness for the fixed proof p gives its impossibility in T, so T is inconsistent. Only this finite support is needed. This is a metatheorem/scheme; it is not the internal uniform sentence \u2200finite \u0394\u2203\u0393 without further proof generation. Reflection is later supplied by SET-5, not assumed as a forward dependency here.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "\u00a74 paragraph preceding Lemma 4.1 pp10\u201311, corrected explicit formalization hypotheses"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-formal-relative-consistency-from-verified-proof-reduction",
+        "kind": "theorem",
+        "title": "Formal consistency transfer from a verified reduction",
+        "deps": [
+          "thm-finite-fragment-relative-consistency-transfer",
+          "lem-interpretation-translates-finite-derivations",
+          "def-arithmetic-provability-and-consistency"
+        ],
+        "statement": "If an arithmetic base B verifies a total code map r and \u2200p(Prf_U(p,\u22a5)\u2192Prf_T(r(p),\u22a5)), then B proves Con(T)\u2192Con(U). For finite-fragment/reflection applications, the maps extracting support, producing source fragments, and compiling reflection/transfer/soundness proofs must be supplied and verified to obtain such r.",
+        "strategy": "Quantify over p, apply the correctness implication, and use Con(T) to exclude its consequent. Account separately for totality of r in B. Package the earlier finite-fragment argument into r only when its source/target axiom certificate maps and schema-proof constructors have actually been checked in B. No claim that a bare semantic CTM theorem automatically supplies these maps.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Freiburg, Course Notes for Set Theory and Independence Proofs (2024)",
+            "url": "https://home.mathematik.uni-freiburg.de/maxwell/coursenotes-settheoryandindependenceproofs.pdf",
+            "locator": "Lemma 3.5.12 p54; formal proof-map refinement of its finite derivation argument"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "rem-semantic-ctm-versus-formal-relative-consistency",
+        "kind": "remark",
+        "title": "Two distinct outputs of a consistency construction",
+        "deps": [
+          "def-countable-transitive-model-and-fragment-transfer",
+          "thm-finite-fragment-relative-consistency-transfer",
+          "thm-formal-relative-consistency-from-verified-proof-reduction",
+          "thm-consistency-does-not-supply-a-transitive-zfc-model"
+        ],
+        "statement": "A semantic theorem CTM(T)\u2192CTM(U) and a formal theorem B\u22a2Con(T)\u2192Con(U) have different hypotheses and outputs. Later constructions must cite the appropriate finite-fragment theorem and verified proof-reduction theorem, recording their actual instantiations.",
+        "strategy": "Explain the required fragment map, finite source theory, external/internal countability, and proof generator. Keep this a methodological interface; the preceding theorems supply the mathematical claims.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "\u00a74 pp10\u201312, finite-fragment discussion"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      }
+    ]
+  },
+  {
+    "order": 660,
+    "id": "arithmetization-incompleteness-and-relative-consistency-examples",
+    "kind": "B",
+    "category": "foundations",
+    "title": "Arithmetization, Incompleteness, and Relative Consistency: Examples and Counterexamples",
+    "companion": "arithmetization-incompleteness-and-relative-consistency",
+    "requires": [
+      "arithmetization-incompleteness-and-relative-consistency"
+    ],
+    "items": [
+      {
+        "id": "ex-godel-diagonal-substitution-calculation",
+        "kind": "example",
+        "title": "A diagonal substitution worked symbolically",
+        "deps": [
+          "thm-arithmetic-diagonal-lemma"
+        ],
+        "statement": "For \u03b7(x)=\u2203y(D(x,y)\u2227\u03c8(y)), e=code \u03b7, calculate d(e)=code \u03b7(e) and \u03b8=\u03b7(e); Q proves \u03b8\u2194\u03c8(code \u03b8).",
+        "strategy": "Track the formula, its natural-number code, and its numeral as three different objects; expand the unique-output argument in both directions.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "4B.14 p149; local tautological substitution instance"
+          },
+          {
+            "title": "Avigad, Computability and Incompleteness (2007)",
+            "url": "https://www.andrew.cmu.edu/user/avigad/Teaching/candi_notes.pdf",
+            "locator": "Lemma 4.5.1 proof p109"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-consistent-theory-with-an-internal-false-proof",
+        "kind": "example",
+        "title": "A consistent theory can believe it has a proof of contradiction",
+        "deps": [
+          "thm-second-incompleteness-for-standard-provability",
+          "thm-model-existence-versus-syntactic-consistency",
+          "thm-first-order-sentence-deduction",
+          "def-robinson-q-and-peano-arithmetic"
+        ],
+        "statement": "If PA is consistent then PA+\u00acCon(PA) is consistent and has a model; every such model has a nonstandard code it regards as a PA-refutation.",
+        "strategy": "If the extension were inconsistent deduction would give PA\u22a2Con(PA), contrary to G2. Each standard alleged proof fails its finite check; hence the model witness is nonstandard. Do not call the model externally sound.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "4C.8 p153; local deduction/completeness application"
+          },
+          {
+            "title": "Avigad, Computability and Incompleteness (2007)",
+            "url": "https://www.andrew.cmu.edu/user/avigad/Teaching/candi_notes.pdf",
+            "locator": "\u00a74.7 pp114\u2013115, local application"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-explicit-function-definition-is-conservative",
+        "kind": "example",
+        "title": "A uniquely defined function adds no old-language theorems",
+        "deps": [
+          "thm-explicit-definitions-give-conservative-extensions",
+          "def-robinson-q-and-peano-arithmetic"
+        ],
+        "statement": "Adding f(x)=x+x to PA is conservative, whereas adding a constant c with \u2200n-standard(c>n) is not a single explicit definition.",
+        "strategy": "Eliminate f recursively by its graph y=x+x. Explain why an infinite family of numeral inequalities is a collection of new axioms, not a defining equation; do not claim this particular collection is nonconservative.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "\u00a74C.1 interpretation framework, local worked instance"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "fs-con-zfc-implies-a-transitive-model-of-zfc",
+        "kind": "false-statement",
+        "title": "Consistency does not justify a transitive ZFC model",
+        "deps": [
+          "thm-consistency-does-not-supply-a-transitive-zfc-model"
+        ],
+        "statement": "False proposed implication inside ZFC: Con(ZFC)\u2192TM(ZFC). Assuming externally Con(ZFC+Con(ZFC)), there is a set model of ZFC+Con(ZFC)+\u00acTM(ZFC). The external hypothesis is part of the countermodel contract.",
+        "strategy": "Apply the A-page relative countermodel theorem, keeping its metatheoretic consistency premise. Contrast the adequate ordinary-model conclusion from completeness. Countability does not cure the gap.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Moschovakis, Lecture Notes in Logic (2014)",
+            "url": "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf",
+            "locator": "4C.8 p153, background only; exact countermodel supplied by the local strength-gap theorem"
+          },
+          {
+            "title": "Avigad, Computability and Incompleteness (2007)",
+            "url": "https://www.andrew.cmu.edu/user/avigad/Teaching/candi_notes.pdf",
+            "locator": "\u00a74.7 second incompleteness, applied by the owned strength-gap theorem"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-finite-proof-support-in-relative-consistency",
+        "kind": "example",
+        "title": "A hypothetical refutation selects one finite target fragment",
+        "deps": [
+          "thm-finite-fragment-relative-consistency-transfer",
+          "thm-formal-relative-consistency-from-verified-proof-reduction"
+        ],
+        "statement": "A refutation with k axiom lines uses only their finite set \u0394; the source fragment and compiled proof depend on \u0394, not on all axioms simultaneously.",
+        "strategy": "Trace p\u2192\u0394\u2192\u0393\u2192source-model proof\u2192target-model proof\u2192T-refutation, and list which arrows need uniform B-verification for an internal Con implication.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "\u00a74 pp10\u201311 finite-fragment transfer paragraph"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      }
+    ]
+  },
+  {
+    "order": 663,
+    "id": "reflection-absoluteness-and-elementary-submodels",
+    "kind": "A",
+    "category": "foundations",
+    "title": "Reflection, Absoluteness, and Elementary Submodels",
+    "companion": "reflection-absoluteness-and-elementary-submodels-examples",
+    "requires": [
+      "deduction-soundness-completeness-and-compactness",
+      "well-founded-relations-rank-and-the-cumulative-hierarchy"
+    ],
+    "items": [
+      {
+        "id": "def-set-theoretic-levy-hierarchy-and-absoluteness",
+        "kind": "definition",
+        "title": "The L\u00e9vy hierarchy and absoluteness",
+        "deps": [
+          "def-set-coded-terms-and-formulas",
+          "def-relativization-to-a-definable-class"
+        ],
+        "statement": "Set-theoretic \u03940 formulas use bounded membership quantifiers only. Define \u03a30=\u03a00=\u03940, then \u03a3(n+1)/\u03a0(n+1) by existential/universal unbounded quantification over the opposite level, positive Boolean combinations and bounded quantification; allow equivalent formulas only over a named theory such as ZF. \u0394n means both a \u03a3n and \u03a0n definition modulo that theory. Absoluteness for M\u2286N means agreement on all parameter tuples in M.",
+        "strategy": "Give the simultaneous syntactic closure clauses, duality under negation and constants for empty Boolean cases. Arithmetic \u03a31 is a different hierarchy. For definable classes relativization is a separate formula for each external formula, not a uniform truth predicate.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Andrew Marks, Set Theory lecture notes",
+            "url": "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf",
+            "locator": "Definition 18.8, Levy hierarchy, p76"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-delta-zero-absoluteness-for-transitive-sets",
+        "kind": "theorem",
+        "title": "Bounded formulas are absolute for transitive sets",
+        "deps": [
+          "def-set-theoretic-levy-hierarchy-and-absoluteness",
+          "thm-structural-recursion-on-set-coded-syntax"
+        ],
+        "statement": "If M\u2286N are nonempty transitive sets, every \u03940 formula is absolute between them for parameters in M. The same holds schematically for definable transitive classes. No set-theoretic axioms need hold inside M or N.",
+        "strategy": "Atomic membership/equality are actual relations; negation and conjunction preserve agreement. A quantifier bounded by a\u2208M ranges over exactly the same actual elements in both structures because M is transitive. Prove both directions, with parameter restriction to the smaller structure.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Freiburg, Course Notes for Set Theory and Independence Proofs (2024)",
+            "url": "https://home.mathematik.uni-freiburg.de/maxwell/coursenotes-settheoryandindependenceproofs.pdf",
+            "locator": "Proposition 3.5.5, p51"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-bounded-definitions-of-basic-set-operations",
+        "kind": "lemma",
+        "title": "Absolute basic set operations and relations",
+        "deps": [
+          "thm-delta-zero-absoluteness-for-transitive-sets"
+        ],
+        "statement": "Graphs for empty set, subset, pairing, singleton, union, intersection (empty intersection convention \u2205), difference, ordered pairs, products, relation domain/range, functionhood, evaluation and injection are \u03940 after explicit bounded expansions. Their values agree whenever present in the smaller transitive structure.",
+        "strategy": "Write bounded graph formulas; bind possible pair coordinates inside double unions of a supplied pair/set. Eliminate union abbreviations through bounded graph formulas. Distinguish graph absoluteness from existence/closure of the operation inside an arbitrary transitive set; no Power Set absoluteness claim.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Freiburg, Course Notes for Set Theory and Independence Proofs (2024)",
+            "url": "https://home.mathematik.uni-freiburg.de/maxwell/coursenotes-settheoryandindependenceproofs.pdf",
+            "locator": "Propositions 3.5.6/3.5.8 and Lemma 3.5.7 pp51\u201352"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-ordinals-and-omega-are-absolute-in-transitive-models",
+        "kind": "theorem",
+        "title": "Ordinals and omega in transitive models",
+        "deps": [
+          "thm-delta-zero-absoluteness-for-transitive-sets",
+          "lem-bounded-definitions-of-basic-set-operations",
+          "def-ordinal"
+        ],
+        "statement": "In ambient ZF, ordinalhood is absolute for transitive sets containing the parameter. Transitive models of ZF have exactly the actual \u03c9 and correct finite ordinals. A transitive model\u2019s ordinals form an initial segment of the ambient ordinals.",
+        "strategy": "Use the bounded formula transitive and membership-linear; ambient Foundation makes it a well-order. Characterize \u03c9 as a NONZERO limit ordinal every element of which is zero or a successor. Include nonzero explicitly (the Freiburg displayed shorthand otherwise also accepts 0). Transitivity and external induction identify finite ordinals and rule out extra elements.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Freiburg, Course Notes for Set Theory and Independence Proofs (2024)",
+            "url": "https://home.mathematik.uni-freiburg.de/maxwell/coursenotes-settheoryandindependenceproofs.pdf",
+            "locator": "\u00a73.5 final ordinal/omega examples, p55"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-rank-and-hierarchy-membership-absoluteness",
+        "kind": "theorem",
+        "title": "Ranks agree and hierarchy membership is absolute",
+        "deps": [
+          "thm-ordinals-and-omega-are-absolute-in-transitive-models",
+          "lem-bounded-definitions-of-basic-set-operations",
+          "def-membership-rank-of-a-set",
+          "thm-membership-rank-and-hierarchy-levels"
+        ],
+        "statement": "If M\u2286N are transitive models of ZF and x\u2208M, rank^M(x)=rank^N(x). For \u03b1\u2208Ord\u2229M, (V_\u03b1)^M=M\u2229(V_\u03b1)^N. This does not assert equality of internal power sets or of the two hierarchy-stage sets.",
+        "strategy": "External membership induction on x: M contains every member y of x; the two rank recursions have identical predecessor values and ordinal suprema. Thus ranks agree. Apply the rank characterization of x\u2208V_\u03b1 in both models, for x\u2208M. Both models must supply the internal rank recursion; graph absoluteness alone does not supply its existence.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "\u00a73 end pp9\u201310, hierarchy-membership absoluteness; local explicit rank induction"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-levy-sigma-one-existential-normal-form",
+        "kind": "lemma",
+        "title": "Sigma-one formulas admit existential bounded matrices",
+        "deps": [
+          "def-set-theoretic-levy-hierarchy-and-absoluteness",
+          "prop-minimum-rank-selection-and-collection",
+          "lem-bounded-definitions-of-basic-set-operations"
+        ],
+        "statement": "Over ZF, each \u03a31 formula in the bounded-closure convention is equivalent to an existential block followed by a \u03940 matrix.",
+        "strategy": "Induct over construction. Combine existential witnesses into finite tuples; Boolean disjunction uses a finite tag and conjunction pairs witnesses. For bounded \u2200x\u2208a\u2203y \u03b4, Collection gives a witness set b; rewrite as \u2203b\u2200x\u2208a\u2203y\u2208b \u03b4. Matrix remains bounded. Bounded existential is immediate. Record use of Collection/Replacement and do not assert this equivalence over every weak theory.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Andrew Marks, Set Theory lecture notes",
+            "url": "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf",
+            "locator": "Exercise 18.9, bounded quantifier closure, p76"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-sigma-one-upward-and-pi-one-downward-absoluteness",
+        "kind": "theorem",
+        "title": "Sigma-one truth goes upward",
+        "deps": [
+          "thm-delta-zero-absoluteness-for-transitive-sets",
+          "lem-levy-sigma-one-existential-normal-form"
+        ],
+        "statement": "For transitive M\u2286N, a formula literally \u2203x1\u2026\u2203xk \u03b4 with \u03940 matrix transfers truth from M to N; its \u03a01 dual transfers downward. For ZF-equivalent \u03a31/\u03a01 formulas require both structures to satisfy ZF (or the exact equivalence axioms).",
+        "strategy": "Retain the witnesses in M\u2286N and apply \u03940 agreement to the tuple; contrapose for \u03a01. The normal-form dependency is used only for the bounded-closure convention and carries its stated axiom requirement.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Andrew Marks, Set Theory lecture notes",
+            "url": "https://math.berkeley.edu/~marks/notes/set_theory_notes_4.pdf",
+            "locator": "Proposition 18.13, upward and downward absoluteness, p78"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-finite-formula-witness-criterion",
+        "kind": "lemma",
+        "title": "A finite witness criterion for reflection",
+        "deps": [
+          "def-set-theoretic-levy-hierarchy-and-absoluteness",
+          "thm-structural-recursion-on-set-coded-syntax"
+        ],
+        "statement": "For a finite subformula-closed family \u03a6 and nonempty C\u2286D with actual membership, all \u03a6 formulas agree between C,D iff every existential subformula true in D with parameters in C has a witness in C satisfying its matrix in D. Class forms are schemes.",
+        "strategy": "Induct on each formula; atomic relations restrict automatically, Boolean cases preserve equivalence, and the existential case uses precisely the stated witness condition. For necessity first transfer the existential, select its C witness, then transfer the matrix. No full elementary submodel of V is postulated.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Freiburg, Course Notes for Set Theory and Independence Proofs (2024)",
+            "url": "https://home.mathematik.uni-freiburg.de/maxwell/coursenotes-settheoryandindependenceproofs.pdf",
+            "locator": "Proposition 3.5.9 pp52\u201353; Geschke Lemma 4.1 p10"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-finite-formula-witness-rank-bounds",
+        "kind": "lemma",
+        "title": "Least witness ranks give choice-free bounds",
+        "deps": [
+          "lem-finite-formula-witness-criterion",
+          "prop-minimum-rank-selection-and-collection",
+          "thm-membership-rank-and-hierarchy-levels"
+        ],
+        "statement": "For each fixed finite formula family and each ordinal \u03b1, a definable ordinal b(\u03b1)>\u03b1 bounds ranks of witnesses for all true existential instances whose parameters lie in V_\u03b1. A version applies to any definable increasing continuous exhaustive hierarchy of sets.",
+        "strategy": "For each parameter tuple minimize a witness rank (or first hierarchy level containing a witness), using 0 when no witness exists. Replacement collects the ordinal values over the set of finite parameter tuples; take a successor bound. Choose bounds rather than witnesses, so no AC. Each formula is fixed externally; no truth predicate for all formulas is invoked.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "Theorem 4.3 proof pp10\u201311"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-montague-levy-finite-reflection",
+        "kind": "theorem",
+        "title": "Montague\u2013L\u00e9vy reflection for a finite formula family",
+        "deps": [
+          "lem-finite-formula-witness-rank-bounds",
+          "lem-finite-formula-witness-criterion",
+          "def-cumulative-hierarchy-stages",
+          "prop-cumulative-hierarchy-transitivity-and-growth",
+          "thm-recursion"
+        ],
+        "statement": "In ZF, for each fixed finite family \u03a6 of formulas and every ordinal \u03b1 there is \u03b2>\u03b1 such that \u03a6 is absolute between V_\u03b2 and V, on all tuples from V_\u03b2. More generally replace V_\u03b3 by an increasing continuous definable hierarchy W_\u03b3 exhausting a definable class W.",
+        "strategy": "Close \u03a6 under subformulas, start above \u03b1, iterate the definable bound b along \u03c9, and let \u03b2 be the supremum. Any finite tuple in the union lies at one stage, whose required witnesses lie in the next stage. Continuity and the finite witness criterion give reflection. Specify Infinity/Replacement for the sequence, Union for its supremum, Separation/Replacement for rank bounds, Power Set for V stages and Foundation for exhaustion. No AC or full truth predicate.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "Theorem 4.3, complete proof pp10\u201311; Freiburg Theorem 3.5.10 pp53\u201354"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "cor-transitive-models-of-each-finite-zf-fragment",
+        "kind": "corollary",
+        "title": "Transitive models of fixed finite axiom fragments",
+        "deps": [
+          "thm-montague-levy-finite-reflection",
+          "def-coded-first-order-zf-theory",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For every fixed external finite \u0393\u2282ZF, ZF proves that some V_\u03b2 satisfies \u0393, with \u03b2 above any specified ordinal bound. In ZFC the analogous scheme holds for finite \u0393\u2282ZFC. This is not a single theorem asserting a model of every internally coded finite fragment.",
+        "strategy": "Reflect the finitely many axiom formulas and conjoin their theorems in the ambient theory. Use a bound above \u03c9 when infinite models are needed. No circular use of consistency and no simultaneous all-formula reflection. The ZF-fragment branch uses no AC. In the ZFC-fragment branch, the ambient AC sentence from def-axiom-of-choice is used exactly when it occurs among the reflected axioms; the reflection construction itself remains choice-free. This branch is a ZFC theorem scheme, not a ZF assertion that the Choice axiom holds.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "Theorem 4.3 application p11"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-collapse-of-elementary-membership-submodels",
+        "kind": "theorem",
+        "title": "Collapse of elementary membership submodels",
+        "deps": [
+          "def-elementary-set-structure-embedding",
+          "thm-mostowski-collapse-for-extensional-relations",
+          "prop-isomorphism-invariance-of-satisfaction"
+        ],
+        "statement": "Let M be a set, (M,\u2208) satisfy Extensionality, and X\u227a(M,\u2208). In ambient ZF the restricted membership on X is well-founded and extensional, so X has a unique transitive collapse Xbar; the inverse collapse is an elementary embedding Xbar\u2192M.",
+        "strategy": "Foundation gives external well-foundedness on every subset X, not merely internal Foundation in an arbitrary (M,E). If a\u2260b in X, Extensionality in M and elementarity supply a distinguishing member in X, proving restricted extensionality. Mostowski gives the set collapse and isomorphism invariance transfers formulas. Countability is preserved by the bijection.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "Theorem 4.5 and Corollary 4.6 pp11\u201312"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "lem-collapse-fixes-transitive-parts-and-orders-ordinals",
+        "kind": "lemma",
+        "title": "What the collapse fixes",
+        "deps": [
+          "thm-collapse-of-elementary-membership-submodels",
+          "def-ordinal"
+        ],
+        "statement": "For a collapse \u03c0:X\u2192Xbar of actual membership, \u03c0 is the identity on every transitive subset A\u2286X. For \u03b1\u2208X an actual ordinal, \u03c0(\u03b1) is the order type of X\u2229\u03b1; if X\u2229\u03b1 is transitive it equals that intersection.",
+        "strategy": "Membership induction fixes each a\u2208A because all its predecessors are in A. Restrict the collapse equation to the well-ordered set X\u2229\u03b1; its range is an ordinal and the restriction is its order isomorphism. Do not replace X\u2229\u03b1 by \u03b1 unless \u03b1\u2286X.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "Exercise 4.7 p12, with complete local induction and ordinal calculation"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "thm-countable-elementary-submodels-and-transitive-collapses",
+        "kind": "theorem",
+        "title": "Countable elementary submodels and their collapses",
+        "deps": [
+          "thm-collapse-of-elementary-membership-submodels",
+          "thm-downward-lowenheim-skolem-with-parameters",
+          "def-axiom-of-choice"
+        ],
+        "statement": "In ZFC an infinite set membership structure M satisfying Extensionality has, for every at most countable A\u2286M, a countable elementary submodel X containing A, and X has a countable transitive collapse.",
+        "strategy": "Apply downward LS with \u03ba=aleph0 and countable membership language, then the collapse theorem. AC is used to select the Skolem witnesses/enumerations as in the supplier; the collapse itself is choice-free. If A\u2208M and the intention is to retain A as one parameter, use {A} rather than silently demanding A\u2286X.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "Theorem 4.4 and Corollary 4.6 pp11\u201312"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "cor-countable-transitive-models-of-fixed-zfc-fragments",
+        "kind": "corollary",
+        "title": "Countable transitive models of fixed finite fragments",
+        "deps": [
+          "cor-transitive-models-of-each-finite-zf-fragment",
+          "thm-countable-elementary-submodels-and-transitive-collapses",
+          "def-axiom-of-choice"
+        ],
+        "statement": "For every fixed finite \u0393\u2282ZFC, ZFC proves existence of a countable transitive model of \u0393. The same construction under ambient AC works for fixed finite \u0393\u2282ZF.",
+        "strategy": "Enlarge \u0393 by Extensionality, reflect above \u03c9 so V_\u03b2 is infinite, take a countable elementary submodel, and collapse. Transfer \u0393 via the isomorphism. Neither internal Foundation alone nor arbitrary countable model existence replaces external well-foundedness.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "Corollary 4.6 pp11\u201312"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "cor-elementary-membership-chains-and-collapse-compatibility",
+        "kind": "corollary",
+        "title": "Elementary chains and compatible collapses",
+        "deps": [
+          "thm-elementary-ordinal-chain-union",
+          "thm-collapse-of-elementary-membership-submodels"
+        ],
+        "statement": "For a nonempty set-ordinal elementary chain of actual membership structures satisfying Extensionality, its union is an elementary extension of each stage and has a transitive collapse. The stage-to-union embeddings conjugate through their collapses to coherent elementary embeddings; these need not be literal subset inclusions between the transitive collapses.",
+        "strategy": "Apply the published union theorem with the membership signature. For collapse maps \u03c0\u03b1 and \u03c0 define j\u03b1=\u03c0\u2218inclusion\u2218\u03c0\u03b1^{-1}; isomorphism invariance gives elementarity, and cancellation gives coherence. Do not assert that collapsing commutes with plain unions of the resulting carriers.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "\u00a74 elementary-submodel and collapse interface pp10\u201312; chain union supplied by published SET-2 theorem"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "rem-condensation-requires-additional-constructible-structure",
+        "kind": "remark",
+        "title": "Condensation interface",
+        "deps": [
+          "lem-collapse-fixes-transitive-parts-and-orders-ordinals",
+          "thm-collapse-of-elementary-membership-submodels"
+        ],
+        "statement": "A collapse determines the order type of the submodel\u2019s ordinals. Identifying its entire transitive image with a constructible level requires the additional condensation argument on the constructible-hierarchy page.",
+        "strategy": "Export the proved collapse and ordinal interfaces only. Do not state L-condensation as proved here or use it to justify reflection. The destination is the-constructible-hierarchy-and-inner-models.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "\u00a74 Exercise 4.7 p12; \u00a75 constructibility boundary p13"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "rem-shoenfield-absoluteness-scope-orientation",
+        "kind": "remark",
+        "title": "Shoenfield orientation and hierarchy conventions",
+        "deps": [
+          "def-set-theoretic-levy-hierarchy-and-absoluteness",
+          "thm-sigma-one-upward-and-pi-one-downward-absoluteness"
+        ],
+        "statement": "The projective hierarchy of formulas about reals and the set-theoretic L\u00e9vy hierarchy use different quantifiers. A reference to Shoenfield absoluteness is not an application of the \u03a31 upward theorem of this page.",
+        "strategy": "Orientation only: do not import or assert an unproved Shoenfield theorem as a supplier. Record that its proof needs additional descriptive-set-theoretic coding/absoluteness machinery; none of the owned proofs uses it. Preserve the design orientation without creating a load-bearing catalogue reference.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": [
+          {
+            "title": "Moshe Kamensky, Set Theory lecture notes",
+            "url": "https://mkamensky.github.io/teaching/2012f/set-theory/notes.pdf",
+            "locator": "\u00a75.2 Definition 5.2.3 and Remark 5.2.4 p46; Theorem 5.2.8 and proof sketch p47, orientation only"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      }
+    ]
+  },
+  {
+    "order": 664,
+    "id": "reflection-absoluteness-and-elementary-submodels-examples",
+    "kind": "B",
+    "category": "foundations",
+    "title": "Reflection, Absoluteness, and Elementary Submodels: Examples and Counterexamples",
+    "companion": "reflection-absoluteness-and-elementary-submodels",
+    "requires": [
+      "reflection-absoluteness-and-elementary-submodels"
+    ],
+    "items": [
+      {
+        "id": "ex-bounded-set-formulas-and-witness-direction",
+        "kind": "example",
+        "title": "Bounded formulas and the direction of absoluteness",
+        "deps": [
+          "thm-delta-zero-absoluteness-for-transitive-sets",
+          "thm-sigma-one-upward-and-pi-one-downward-absoluteness",
+          "lem-bounded-definitions-of-basic-set-operations"
+        ],
+        "statement": "Write bounded formulas for x\u2286y, z={x,y}, and f:a\u2192b injective; contrast existence of an injection, whose witness may be absent from a smaller transitive model.",
+        "strategy": "Show the graph quantifiers explicitly. Upward transfer keeps an existing witness; downward transfer of existence is not supplied by \u03940 matrix agreement.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Freiburg, Course Notes for Set Theory and Independence Proofs (2024)",
+            "url": "https://home.mathematik.uni-freiburg.de/maxwell/coursenotes-settheoryandindependenceproofs.pdf",
+            "locator": "Propositions 3.5.6/3.5.8 pp51\u201352"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-internal-power-set-can-miss-an-external-subset",
+        "kind": "example",
+        "title": "Power sets need not agree across transitive models",
+        "deps": [
+          "thm-rank-and-hierarchy-membership-absoluteness",
+          "lem-bounded-definitions-of-basic-set-operations",
+          "thm-ordinals-and-omega-are-absolute-in-transitive-models"
+        ],
+        "statement": "If M is a countable transitive model of ZF, externally P(\u03c9)^M is countable and omits a subset of \u03c9. Thus rank and hierarchy membership absoluteness do not imply equality of internal power sets.",
+        "strategy": "Given an external enumeration of M, diagonalize against its subsets of \u03c9 (replace nonsubset entries by \u2205). The resulting real is not in M. This is conditional on the model hypothesis, not an assertion ZF proves such M exists.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Freiburg, Course Notes for Set Theory and Independence Proofs (2024)",
+            "url": "https://home.mathematik.uni-freiburg.de/maxwell/coursenotes-settheoryandindependenceproofs.pdf",
+            "locator": "\u00a73.5 distinction between bounded operation graphs and unbounded power-set quantification, local diagonal example"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-reflection-of-two-formulas-with-parameters",
+        "kind": "example",
+        "title": "Reflecting a finite family with parameters",
+        "deps": [
+          "thm-montague-levy-finite-reflection",
+          "cor-transitive-models-of-each-finite-zf-fragment"
+        ],
+        "statement": "For fixed formulas \u03c6(x),\u03c8(x,y) and parameter set a, one can choose \u03b2 with a\u2208V_\u03b2 and both formulas absolute on tuples from V_\u03b2.",
+        "strategy": "Begin above rank(a)+1 and close the family under all subformulas before forming witness bounds. Show why simply selecting witnesses for the two displayed formulas alone is insufficient.",
+        "axiom_base": "ZF",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "Theorem 4.3 pp10\u201311"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "fs-a-countable-elementary-submodel-is-a-transitive-subset",
+        "kind": "false-statement",
+        "title": "A countable elementary submodel need not be transitive",
+        "deps": [
+          "thm-countable-elementary-submodels-and-transitive-collapses",
+          "lem-collapse-fixes-transitive-parts-and-orders-ordinals",
+          "def-axiom-of-choice",
+          "thm-hartogs"
+        ],
+        "statement": "False statement: every countable elementary submodel of a transitive set is transitive. In ZFC take \u03b8 with \u03c91\u2208V_\u03b8, choose countable X\u227aV_\u03b8 containing \u03c91; then X is not transitive.",
+        "strategy": "Hartogs supplies an uncountable ordinal \u03c91; choose \u03b8 large enough that V_\u03b8 is infinite and satisfies Extensionality. Downward LS supplies X with \u03c91 as a parameter. If X were transitive, \u03c91\u2286X, contradicting countability. The collapse sends \u03c91 to the countable order type of X\u2229\u03c91; X\u2229\u03c91 need not be replaced by \u03c91.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "\u00a74 Theorem 4.4 and Exercise 4.7 pp11\u201312, local counterexample"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      },
+      {
+        "id": "ex-collapse-chain-maps-need-not-be-inclusions",
+        "kind": "example",
+        "title": "Transporting an elementary-chain map through collapse",
+        "deps": [
+          "cor-elementary-membership-chains-and-collapse-compatibility",
+          "lem-collapse-fixes-transitive-parts-and-orders-ordinals",
+          "thm-countable-elementary-submodels-and-transitive-collapses",
+          "thm-hartogs",
+          "def-axiom-of-choice"
+        ],
+        "statement": "The formula j\u03b1\u03b2=\u03c0\u03b2\u2218inclusion\u2218\u03c0\u03b1^{-1} is the correct map between collapsed stages; equality with inclusion is an additional property. In ZFC, a countable elementary X containing the Hartogs ordinal of omega inside V_(kappa+omega) supplies a map moving its collapsed ordinal to kappa.",
+        "strategy": "Check j\u03b2\u03b3 j\u03b1\u03b2=j\u03b1\u03b3 by cancelling inverse maps. Compute its action on a named ordinal as the corresponding order-type embedding. Do not claim it is automatically a literal subset inclusion.",
+        "axiom_base": "ZFC",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": [
+          {
+            "title": "Geschke, Models of Set Theory",
+            "url": "https://www.math.uni-hamburg.de/home/geschke/teaching/ModelsSetTheory.pdf",
+            "locator": "\u00a74 collapse interface pp11\u201312; published chain theorem"
+          }
+        ],
+        "justified_by": [],
+        "forward_refs": []
+      }
+    ]
+  }
+]

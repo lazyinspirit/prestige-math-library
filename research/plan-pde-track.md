@@ -1,5 +1,16 @@
 # Partial differential equations track — prose scaffold for `subjects-01`
 
+## Binding UC34 repair reconciliation — 2026-09-09
+
+The divergence theorem, chart/polar surface-measure agreement and boundary
+chart independence on `euclidean-surface-measure-divergence-and-green-identities`
+are now published. Harmonic removable-singularity, Liouville and strong
+principle consumers still need Phase-3 repairs of their radial-average,
+sphere-scaling and mean-value suppliers plus propagation of their choice
+assumptions. Publication of these interfaces does not repair those proofs
+automatically. No new pair is needed; use the exact consumer/supplier paths
+and current states in `published-consumer-supplier-ledger.md`.
+
 > **Scaffold only.** This file proposes future pages and items. It does not
 > author an item, alter `research/plan-spec.json`, assign absolute orders, or
 > publish anything. The dependency-correct placement is interleaved: PDE-1

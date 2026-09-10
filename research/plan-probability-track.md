@@ -1080,11 +1080,31 @@ the published real-series machinery.
 
 **Requires:** PT-1--PT-5; planned MT-8, MT-11, and MT-14.  PT-5's
 variance criterion and Kronecker lemma are the load-bearing series route.
+The Cauchy example also requires the already published
+`further-trigonometric-identities-and-inverses` page for its inverse-tangent
+antiderivative and limits; this earlier edge is registered in the canonical plan.
+Item 12's Birkhoff agreement proof is supplied locally by the maximal
+inequality and ergodic probability theorem below. It requires the earlier
+`measure-preserving-systems-and-mixing-criteria` pair, already in this run,
+not the unbuilt full MT-23 programme. Preserve the agreement result and
+its independent ergodic argument; the IID strong law is not its premise.
 
 **Source backing read:** Durrett §§2.3--2.5, pp. 67--90; Varadhan §§3.3 and
 3.5; Norris §§9.2--9.3 and §10, pp. 39--54; Roch Note 5 §§1.4.1--1.4.2.
-Norris's Birkhoff proof is used only as an agreement route after MT-23
-exists; the independent proof is complete without ergodic theory.
+Durrett Lemma 6.2.2 and Theorem 6.2.1, complete proofs pp.335–337, supply
+the local maximal-inequality route. The independent IID proof remains
+complete without ergodic theory.
+
+Binding local reassessment, 2026-09-09: all six AC-qualified independent-copy
+consumers on this pair declare `def-countable-choice`, `def-dependent-choice`
+and earlier `thm-recursion`. Their proofs restrict AC to the countable family
+for CC; for a serial relation on a set, AC selects a successor function and
+ordinary recursion iterates it from the prescribed initial point, proving DC.
+No later weak-choice implication is imported. Supplied-sequence strong laws
+retain their choice-free clauses. The earlier published convergence criterion
+now proves its full L2 conclusion by Fatou without representative selection;
+its formerly defective clause is no longer pending, although this pair uses
+only its almost-sure conclusion.
 
 Items:
 
@@ -1097,14 +1117,34 @@ Items:
 7. `lem-cesaro-limit-of-truncated-means` (lemma) — $n^{-1}\sum_{k\le n}EY_k\to EX_1$ by DCT and Cesaro averaging.
 8. `thm-kolmogorov-iid-l1-strong-law` (theorem) — iid $X_n$ with $E|X_1|<\infty$ satisfy $S_n/n\to EX_1$ a.s.
 9. `thm-integrability-is-necessary-for-an-iid-finite-mean-strong-law` (theorem) — if $S_n/n$ converges a.s. to a finite limit for iid $X_n$, then $E|X_1|<\infty$ and the limit is $EX_1$.
-10. `thm-etemadi-strong-law-for-pairwise-independent-iid-variables` (theorem) — the iid $L^1$ strong law remains true under pairwise independence; prove it by truncation, the cubic subsequence, and interpolation.
+10. `thm-etemadi-strong-law-for-pairwise-independent-iid-variables` (theorem) — the iid $L^1$ strong law remains true under pairwise independence; use truncation, geometric subsequences $\lfloor(1+1/r)^j\rfloor$, and monotonicity interpolation. The variance summability estimate does not justify the old cubic-subsequence recipe.
 11. `cor-iid-strong-law-implies-the-weak-law` (corollary) — cite PT-4's a.s.-to-probability implication, not a second weak-law proof.
-12. `cor-birkhoff-strong-law-for-iid-coordinate-shifts` (corollary) — after MT-23 is authored, recover item 8 from Birkhoff applied to the Bernoulli shift; this is an agreement consequence, not the proof dependency of item 8.
+12. Before `cor-birkhoff-strong-law-for-iid-coordinate-shifts`, prove
+`lem-finite-probability-maximal-ergodic-inequality` and
+`thm-birkhoff-ergodic-probability-case-for-strong-laws`. For the maximal
+lemma, with S_k the partial sums and M_N=max(0,S_1,...,S_N), prove
+f 1_{M_N>0} >= M_N-M_N composed with T on the whole space; integrate by
+invariance, then use dominated convergence for the increasing positivity
+sets. For the ergodic theorem center f, set D={limsup A_n f>epsilon},
+prove exact invariance by the shifted-average identity, and apply the
+maximal lemma to (f-epsilon)1_D. Ergodicity and the centered integral rule
+out P(D)=1. Repeat for -f and countably many epsilon, then use bounded
+truncation and integral contraction for L1 convergence. No conditional
+expectation, recurrence theorem or IID strong law is used in this proof.
+The corollary proves cylinder shift invariance and puts every strictly
+invariant event in the coordinate tail sigma-algebra; zero-one gives
+ergodicity. Apply the local theorem to the first coordinate. State AC for
+the product construction. The full nonergodic and sigma-finite MT-23
+programme remains a separate future obligation, not a premise here.
 13. `rem-strong-law-does-not-assert-a-rate` (remark, L/NA) — the strong-law statements on this page contain no rate assertion; PT-20's Brownian LIL is not imported backward.
 14. `thm-finite-variance-logarithmic-rate-for-iid-sums` (theorem) — if the iid variables have mean $\mu$ and finite variance, then for every $\varepsilon>0$, $(S_n-n\mu)/(\sqrt n(\log n)^{1/2+\varepsilon})\to0$ a.s.; the proof applies PT-5's random-series criterion on geometric blocks and interpolates with the maximal inequality.
 
-**Hard proof and well-definedness plan.**  Item 6 expands the expectation as
-annular integrals/sums and changes the order only under Tonelli.  Item 8 first
+**Hard proof and well-definedness plan.** Item 6 expands the expectation as
+nonnegative sums and uses `thm-monotone-convergence-for-the-integral` on their
+increasing finite partial sums to exchange sum and expectation; the theorem
+`thm-monotone-convergence` for bounded real sequences alone does not supply
+this step. The resulting pointwise estimate gives the stated constant
+$2\mathbb E|X_1|$, including integer truncation endpoints. Item 8 first
 replaces $X_n$ by $Y_n$ using Borel--Cantelli, then applies PT-5's variance
 criterion to $(Y_n-EY_n)/n$ and Kronecker; the centering limit is item 7.
 Necessity uses $X_n/n\to0$ and the independent Borel--Cantelli lemma to force
@@ -1124,7 +1164,41 @@ independence is available.
 
 ### PT-7 — Weak convergence, tightness, and representation
 
+Binding local-prerequisite amendment, 2026-09-09: add the existing planned
+IDs `lem-normal-density-has-total-mass-one` and
+`def-standard-normal-and-normal-laws` at the end of this A inventory,
+before its B examples. They are rehomed from PT-9, not duplicated. This
+retains the Gaussian example in the owner's original 24-pair run.
+The A page also requires `improper-and-parameter-dependent-multiple-integrals`,
+`the-lebesgue-and-riemann-integrals-compared`, and
+`the-lebesgue-integral-and-the-convergence-theorems`.
+
+The normalization lemma assumes AC and obtains countable choice by applying
+it directly to the countably indexed nonempty family; the later SET-6
+implication theorem is not a prerequisite. On [-n,n],
+ordinary substitution x=sqrt(2)t reduces exp(-x²/2) to the published
+improper Gaussian integral; compact comparison and monotone convergence
+give Lebesgue mass sqrt(2pi), then scalar normalization gives one. Declare
+the exact Gaussian, substitution, continuous-integrability, compact-comparison,
+monotone-convergence, exponential, Borel-measurability, square-root, scalar
+integral and choice interfaces in the canonical contract. No later manifold
+integration or characteristic-function result is used.
+
+The definition constructs the Borel density measure and uses the preceding
+mass-one lemma. Define N(m,sigma²) as its affine pushforward, prove affine
+Borel measurability and use the earlier probability-law lemma; sigma=0 gives
+the Dirac measure directly. The Gaussian convergence example uses bounded
+tests/DCT on this one probability space. Durrett Example1.6.11 p.34 fixes
+the convention; root read its full text and Theorem1.6.9's proof. The local
+normalizing calculation is supplied explicitly rather than credited to that
+example's omitted integration exercise. Exact contracts and source receipts
+are in batch 3. Independent Step-3 review remains required.
+
 **A page:** `weak-convergence-tightness-and-representation`
+
+The empirical-law application also requires PT-6's IID strong law. This is
+an actual same-run prerequisite in `phase-2-catchup-24`, not a published
+supplier; build and review its proof before using it.
 
 **Requires:** PT-1, PT-3, PT-4; published metric/compactness pages; planned
 MT-20 regularity and topology's `def-polish-space`.  The page cannot be built
@@ -1177,9 +1251,9 @@ completeness is used to identify the point limit.
 **B page:** `weak-convergence-tightness-and-representation-examples`
 
 1. `ex-dirac-laws-converge-weakly-exactly-when-their-points-converge`.
-2. `ex-uniform-laws-on-expanding-finite-grids-converge-to-uniform-zero-one` — a Riemann-sum computation.
+2. `ex-uniform-laws-on-expanding-finite-grids-converge-to-uniform-zero-one` — assume AC for the countable-choice hypotheses of the published Lebesgue-box and Heine–Cantor suppliers. Give the finite-grid probability and step-function integral calculations explicitly, then use uniform continuity and the real integral triangle bound. The endpoint zero is null. No Riemann/Lebesgue comparison theorem or new Phase2 supplier is needed.
 3. `ex-tightness-from-a-uniform-moment-bound` — Markov plus compact balls in $\mathbb R^d$, with the finite-dimensional compactness hypothesis explicit.
-4. `ex-weak-convergence-of-gaussian-laws-by-parameters` — use densities or PT-8 only after it is available; not a PT-7 dependency.
+4. `ex-weak-convergence-of-gaussian-laws-by-parameters` — assume AC for the local normal-law construction; on its standard-normal probability space affine images converge pointwise, so bounded tests converge by DCT. No PT-8/PT-9 dependency.
 5. `ex-quantile-coupling-on-the-real-line` — the elementary Skorokhod construction via generalized inverses.
 6. `cex-pointwise-cdf-convergence-at-a-jump-is-not-required` — explain the continuity-point clause.
 7. `cex-bounded-continuous-cannot-be-replaced-by-all-bounded-measurable-functions` — Dirac masses approaching a point and a singleton indicator.
@@ -1258,8 +1332,12 @@ in §11.
 
 Items:
 
-1. `lem-normal-density-has-total-mass-one` (lemma) — derive the Gaussian integral from the published two-dimensional change-of-variables/Fubini machinery.
-2. `def-standard-normal-and-normal-laws` (definition) — after item 1, $N(0,1)$ is the law with density $(2\pi)^{-1/2}e^{-x^2/2}$ and $N(m,\sigma^2)$ is its affine image, with the degenerate $\sigma=0$ convention stated.
+The following two interfaces are supplied earlier on PT-7, not defined again
+here: `lem-normal-density-has-total-mass-one` and
+`def-standard-normal-and-normal-laws`. Their 2026-09-09 rehoming preserves
+the PT-7 Gaussian example within the original 24-pair run. PT-9 already
+requires PT-7. Use the published normalizing/affine-law clauses once built;
+the characteristic-function and moment arguments remain on this page.
 3. `lem-characteristic-function-of-a-normal-law` (lemma) — $\exp(imt-\sigma^2t^2/2)$.
 4. `lem-second-order-characteristic-function-expansion` (lemma) — if $EX=0$ and $EX^2=\sigma^2<\infty$, then $\varphi_X(t)=1-\sigma^2t^2/2+o(t^2)$.
 5. `thm-lindeberg-levy-iid-central-limit-theorem` (theorem) — for iid mean-$\mu$, variance-$0<\sigma^2<\infty$ variables, $(S_n-n\mu)/(\sigma\sqrt n)\Rightarrow N(0,1)$.
@@ -1298,6 +1376,18 @@ zero has been verified.
 7. `cex-feller-negligibility-cannot-be-removed-from-the-converse` — one normal variable carries the row sum.
 
 ### PT-10 — Conditional expectation
+
+Binding Step-3 inventory amendment, 2026-09-09: insert
+`lem-absolute-real-powers-are-convex` immediately before conditional Lp
+contraction. Prove p=1 by the triangle inequality; for p>1 derive
+convexity/monotonicity of u^p on u>0 from its derivatives, extend continuously
+to zero, and combine |tx+(1-t)y|<=t|x|+(1-t)|y| with these two facts.
+The finite Borel function and exact real-power, derivative, continuity,
+triangle and Borel interfaces are in the synchronized canonical contract.
+Conditional Cauchy–Schwarz declares rational density. The unbounded-factor
+example constructs its weighted Dirac probability law and proves its
+geometric moments; total variance uses the explicit four-atom law.
+No unproved Bernoulli shorthand or future convexity result is a premise.
 
 **A page:** `conditional-expectation`
 
@@ -2099,7 +2189,8 @@ order is circular unless deliberately broken:
 - PT-5 proves the necessity half of three-series by direct symmetrization, not
   by the later CLT.
 - PT-6 proves the iid $L^1$ strong law by truncation and random series; its
-  Birkhoff proof is only a later agreement consequence once MT-23 exists.
+  separate Birkhoff agreement proof uses the locally proved maximal lemma
+  and ergodic probability theorem, not the IID proof or future MT-23.
 - PT-7 proves Slutsky/continuous mapping at the right generality; PT-4's real
   Slutsky theorem has its own direct proof and does not cite PT-7.
 - PT-18 constructs Brownian motion by Kolmogorov extension and continuity,
@@ -2110,7 +2201,7 @@ items.  They never enter `deps` or `justified_by`:
 
 | earlier item | later page | purpose |
 |---|---|---|
-| PT-7 B `ex-weak-convergence-of-gaussian-laws-by-parameters` | PT-8 `cor-characteristic-function-criterion-for-weak-convergence` and PT-9 `lem-characteristic-function-of-a-normal-law` | notes that characteristic functions later give a second computation |
+| PT-7 B `ex-weak-convergence-of-gaussian-laws-by-parameters` | PT-8 `cor-characteristic-function-criterion-for-weak-convergence` and PT-9 `lem-characteristic-function-of-a-normal-law` | optional later second computation only; proof uses the PT-7 normal-law construction and DCT |
 | PT-18 B `ex-brownian-bridge-from-brownian-motion` | a future empirical-process track | names, but does not invoke, the later invariance-principle role |
 | PT-21 B `ex-integral-of-brownian-motion-against-itself-preview` | PT-22 `cor-brownian-square-martingale` | flags that Ito's formula will compute the integral; PT-21 does not use it |
 | PT-20 `rem-quadratic-variation-depends-on-the-approximating-partitions-without-regularity` | a future semimartingale track | identifies the boundary of the deterministic-mesh construction |
@@ -2841,3 +2932,13 @@ standard-Borel coding A page must require the published Topology A page
 `def-polish-space`. It may not re-mint Polish spaces or use a Topology B page.
 This planned seam has zero published impact and creates no Topology Phase-2
 root.
+# Step-5 dependency synchronization, 2026-09-09
+
+Completed batches3–4 now have their explicit dependency arrays synchronized
+with the canonical plan: measure continuity, compactness/countability,
+measurable limits, conditional-class algebra, finite-law and integration
+suppliers are declared at their actual uses. The CDF-equivalence proof removes
+its unused law-construction edge and uses measure continuity directly. See
+`phase-2-catchup-24-step5-dependency-reconciliation.md` and the completed
+manifests/contracts for exact mappings. No new pair or published-proof repair;
+the authored drafts still await Step6 and publication.

@@ -1,5 +1,21 @@
 # Group theory track: finite, combinatorial, geometric, profinite, and cohomological group theory
 
+## Binding UC34 repair reconciliation — 2026-09-09
+
+Hall–Malcev/Bass–Guivarc'h A is published at order 302.0022, before
+geometric-actions A302.003. The nilpotent polynomial-growth corollary keeps
+its original home and uses the proved growth bound, not the recorded remark;
+add the backward Hall–Malcev page requirement. No rehome or new pair is needed.
+The twisted-wreath definition now requires faithful permutation action and
+compatible function-group/semidirect-product formulas; it makes no general
+classification claim. General van Kampen and area proofs remain Phase-3
+debt: the published small-cancellation toolkit's cyclically reduced contract
+is not a substitute for general literal-word folding/peeling. HG word-problem
+and centralizer consumers still await the scoped deferred geometry chain.
+The torsion-abelian branch can be proved locally using uniformly bounded
+finite subgroups; retain its exact strategy in the consumer ledger, not a new
+pair. Exact item states and source evidence are in that ledger.
+
 Run `subjects-01`, track `group-theory`, wave 2. Owner commission 2026-08-13:
 *amend and expand the prose scaffolds to enrich future mathematical content*.
 
@@ -838,9 +854,10 @@ groups.
 12. `lem-product-action-wreath-products-are-primitive-under-the-standard-hypotheses` —
     **lemma** `[LL]` with those hypotheses printed.
 13. `rem-onan-scott-eight-type-and-five-type-conventions` — **remark** `[LN]`:
-    modern eight-type refinements subdivide the diagonal/product/twisted cases;
-    this library uses the five coarse landscape because no later item needs
-    the finer labels.
+    preserve the exact LPS correspondence: I=HA, II=AS, III(a)=SD/HS,
+    III(b)=PA/CD/HC, III(c)=TW. In particular HC/CD are product-action
+    cases, not simple-diagonal cases. This terminology repair does not
+    discharge the separate classification or twisted-wreath proof obligations.
 14. `thm-onan-scott-classification-of-finite-primitive-groups` — **theorem**
     `[LL]` proof obligation: every finite primitive permutation group falls
     into the stated socle types. U-C19 found the published proof assumes its
@@ -1232,7 +1249,12 @@ specified.
 
 **page id** `small-cancellation-and-dehn-algorithms`  
 **`requires`** `decision-problems-for-finitely-presented-groups`,
-`hnn-extensions-and-brittons-lemma`
+`small-cancellation-disc-diagrams-and-torsion-toolkit`,
+`the-fundamental-group-of-the-circle`
+
+The published circle theorem supplies the graph-cycle obstruction in the
+locally repaired boundary-label proof. Canonical A/B orders are295.1/295.2,
+after that supplier; the other group-theory pages retain their orders.
 
 Small cancellation is included because it supplies a deep but locally
 buildable island of positive algorithmic theory. The page follows the classical
@@ -1253,9 +1275,17 @@ lemma to Dehn's algorithm.
    **definition** `[LN]`, with strict versus weak inequalities explicit.
 6. `def-small-cancellation-condition-t-q` — **definition** `[LN]`.
 7. `lem-c-prime-lambda-implies-c-lambda` — **lemma** `[LL]`.
-8. `def-van-kampen-diagram-boundary-label-and-area` — **definition** `[LN]`.
+8. `def-van-kampen-diagram-boundary-label-and-area` — **definition** `[LN]`:
+   finite connected simply connected planar complexes; allow trees, bridges
+   and cut vertices. Define a based outer occurrence walk and literal word;
+   only nonsingular diagrams must be topological discs. Relators need not be
+   symmetrised; face words may be cyclic conjugates or inverses.
 9. `lem-boundary-label-of-a-van-kampen-diagram-is-null-in-the-presented-group` —
-   **lemma** `[LL]`.
+   **lemma** `[LL]`: locally repaired2026-09-10. Prove free-edge existence
+   and an explicit deformation retract, including monogons. Induct on faces
+   for every closed edge walk; the published circle theorem excludes cycles
+   in the graph base case, and leaf cancellation includes a leaf basepoint.
+   No external free-face or later toolkit theorem is assumed.
 10. `thm-van-kampen-lemma` — **theorem** `[LL]`, both directions, connecting
     null words and finite planar diagrams.
 11. `thm-diagram-area-agrees-with-algebraic-relator-area` — **theorem** `[LA]`,
@@ -1263,8 +1293,10 @@ lemma to Dehn's algorithm.
 12. `def-reduced-van-kampen-diagram` — **definition** `[LN]`.
 13. `lem-minimal-area-diagrams-are-reduced` — **lemma** `[LL]`.
 14. `lem-curvature-count-for-reduced-c-prime-one-sixth-diagrams` — **lemma**
-    `[LA]`, the Euler-characteristic accounting isolated from the group
-    conclusion.
+    `[LA]`, now repaired using the earlier published SC-5 curvature and
+    end-block interface. Retain the same given diagram and account for a
+    possible basepoint whisker in a freely reduced, not cyclically reduced,
+    boundary word. No external shell-existence premise remains.
 15. `thm-greendlinger-lemma-for-c-prime-one-sixth-presentations` — **theorem**
     `[LL]`: a nontrivial reduced null word contains more than half of a relator.
     LANDMARK.
@@ -2410,7 +2442,10 @@ lattices is kept separate from ordinary characters.
 `ex-projective-cover-of-the-trivial-module-for-a-p-group` `[LL]` ·
 `ex-reducing-an-integral-lattice-for-s-three` `[LL]` ·
 `ex-relative-projectivity-detected-by-higmans-criterion` `[LL]` ·
-`cex-an-ordinary-irreducible-with-reducible-mod-p-reduction` `[LL]`.
+`cex-an-ordinary-irreducible-with-reducible-mod-p-reduction` `[LL]`: use the
+same complete splitting system as the preceding S3 lattice example and reduce
+modulo its maximal ideal (1-zeta_3), not (3). Prove characteristic-zero
+irreducibility by coordinate differences and the reduced invariant line directly.
 
 ### Sources and exact locators
 
@@ -3488,7 +3523,7 @@ page requirements.
 | `subgroups-of-free-groups-and-schreier-rewriting` | `free-groups-and-presentations`; `group-actions-and-cayleys-theorem`; `free-products-and-amalgamation` |
 | `hnn-extensions-and-brittons-lemma` | preceding subgroup A page; `free-products-and-amalgamation` |
 | `decision-problems-for-finitely-presented-groups` | `free-groups-and-presentations`; preceding subgroup A page; `free-products-and-amalgamation` |
-| `small-cancellation-and-dehn-algorithms` | preceding decision A page; preceding HNN A page; `small-cancellation-disc-diagrams-and-torsion-toolkit` |
+| `small-cancellation-and-dehn-algorithms` | preceding decision A page; `small-cancellation-disc-diagrams-and-torsion-toolkit`; published `the-fundamental-group-of-the-circle` (A/B orders295.1/295.2) |
 | `group-extensions-complements-and-schur-zassenhaus` | `semidirect-products-and-automorphism-groups`; `sylow-theorems-and-nilpotent-groups` |
 | `modular-representations-and-projective-covers` | `induced-representations-and-frobenius-reciprocity`; `modules-over-a-pid-and-canonical-forms`; `chain-conditions-and-semisimple-modules`; `valuation-rings-and-discrete-valuation-rings`; `inverse-limits-and-noetherian-completion`; `the-group-algebra-and-representations`; `maschkes-theorem-and-complete-reducibility` |
 | `brauer-characters-and-decomposition-matrices` | preceding modular-representation A page; `characters-and-the-orthogonality-relations`; `modular-traces-and-brauer-character-independence` |
@@ -3687,8 +3722,12 @@ using symmetrisation. This exact linear interface supplies the published
 Dehn-presentation definition; the current draft and owning contract carry it.
 
 SC-4 must print the Euler identity and account separately for boundary
-valence-one spurs; SC-5 may suppress a spur only because the outer word is
-freely reduced. Before SC-8, include
+valence-one spurs. A freely reduced linear boundary word may still have one
+spur at its starting vertex: its inverse pair straddles the word's ends.
+For the older curvature consumer, the finite block tree therefore has at
+most one end bridge; choose an end disc block and a shell avoiding its
+attachment. For a single disc use the word basepoint as the marked point.
+Do not silently strengthen free reduction to cyclic reduction. Before SC-8, include
 `def-sc-toolkit-cyclically-dehn-reduced-word` and
 `lem-sc-toolkit-periodic-word-square-alternative`, with the commuting-word
 and periodic-piece lemmas already added to the wave-1 scaffold. Use the
@@ -3837,7 +3876,7 @@ proved and accepted. The old cone-extraction sentence is not a proof.
 
 A `asymptotic-cones-and-the-sublinear-triangle-criterion`, order 302.00405;
 B the same ID plus `-examples`, order 302.0041, requiring only A.
-Category: group-theory. A requires `filters-and-ultrafilters`,
+Category: group-theory. A requires `compactness`, `filters-and-ultrafilters`,
 `cayley-graphs-word-metrics-and-quasi-isometry`,
 `small-cancellation-and-dehn-algorithms`, and `free-groups-and-presentations`.
 It does not require HG, its published hyperbolicity consumers, or any recorded
@@ -3845,20 +3884,52 @@ result. State AC where used and identify each selected family inside proofs.
 
 Binding inventory (proof order; every intermediate result is proved here):
 
+HG-P repair amendment, 2026-09-09: include
+`lem-finite-polygonal-disk-and-collar-surgery` before the singular-diagram
+construction. Prove its finite polygonal separation, finite PL disk extension
+with prescribed boundary parameters, and collar claims locally; no recorded
+Jordan theorem or later plane-graph result may supply them. Normalize the fold
+inside two genuine polygonal disks made by a positive-width exterior notch;
+do not use an abstract slit-annulus disk or ambient coordinate extension.
+Folds must deform the complement continuously
+and treat loops through distinct temporary midpoints. Track occupied edge sides
+and characteristic-polygon occurrences explicitly: bigon deletion must preserve
+the literal outside walk and every retained face walk, and face peeling must
+use a retraction fixing all repeated retained boundary occurrences.
+For controlled thickening,
+use compatible vertex-disk/band/face-cap subdivisions with 4d/8/4k triangles.
+The revised exported bound is 16E+4I+4, hence
+20(L+1)(Area(w)+|w|+1). This is a proposed proof route subject to final
+adjudication, not a waiver or a new frontier.
+
 1. `def-rescaled-ultralimit-and-asymptotic-cone`: fix a nonprincipal
    ultrafilter, basepoints and positive scales tending to zero; use sequences
    at bounded rescaled distance, identify zero ultradistance and prove the
    quotient metric. Construct the tail filter and extend it using the
    published ultrafilter lemma; construct bounded real ultralimits by nested
-   intervals. Do not import the B-page Frechet-filter example.
+   intervals. The supplied-ultrafilter calculation uses the choice-free LUB
+   route through the repaired `thm-reals-cauchy-complete`: unique least
+   height/denominator/shifted-numerator selections replace simultaneous
+   arbitrary rational choices. This uses earlier published arithmetic,
+   natural well-ordering and Separation, not the later countability page.
+   In reciprocal-sequence estimates use a non-strict middle comparison
+   when the numerator can vanish, and take the maximum of the Cauchy and
+   away-from-zero indices. The accepted scaffold supplies this argument
+   locally; published `lem-null-maximal` now has the same correction.
+   Do not import the B-page Frechet-filter example.
 2. `lem-geodesic-segments-have-isometric-ultralimits`: parameterize chosen
-   segments by distance, truncate consistently and pass distance identities
-   to ultralimits. Handle endpoints escaping to infinity as rays or lines;
+   segments by original distance on [-alpha_n,beta_n], set a_n=lambda_n alpha_n
+   and b_n=lambda_n beta_n, and evaluate gamma_n(clamp(t,-a_n,b_n)/lambda_n).
+   Pass the scaled distance identity to ultralimits and prove every represented
+   side point is captured using the interval-projection inequality.
+   Handle endpoints escaping to infinity as rays or lines;
    record AC for choosing representative geodesics.
 3. `def-real-tree-tripods-and-geodesic-triangle-minsize`: define real trees,
    slimness and minsize locally, including the perimeter-bounded supremum.
    Do not import later HG definitions. Prove the equivalence between unique
    arcs and tripod triangles, and the elementary ray/line uniqueness rules.
+   Supply the interval path-separation argument locally when deriving
+   uniqueness of arcs; do not assume that interface from a later tree result.
 4. `lem-tree-cones-give-uniform-two-side-control`: under the hypothesis that
    every basepoint/scaling cone for one fixed free ultrafilter is a real tree,
    prove a uniform bound M*d(y,z) on the Hausdorff distance of [x,y],[x,z]
@@ -4024,8 +4095,11 @@ curvature repair impact is the following set:
 - its B page: `ex-a-greendlinger-cell-in-a-van-kampen-diagram`, `ex-a-dehn-reduction-sequence`.
 
 SC-5 `lem-boundary-spur-or-at-most-three-shell-from-curvature` directly supplies
-`lem-curvature-count-for-reduced-c-prime-one-sixth-diagrams`; its transitive
-impact includes the preceding set. The arbitrary-given-diagram Greendlinger
+`lem-curvature-count-for-reduced-c-prime-one-sixth-diagrams`; this consumer was
+locally repaired on 2026-09-10 and its plan now declares the published toolkit
+page at order71.0142 before its home at71.015. Its transitive impact includes
+the preceding set, whose individual proof debts are not automatically closed.
+The arbitrary-given-diagram Greendlinger
 consumer also needs SC-2, including self-incidence. SC-6 concerns a null word
 and a minimum diagram, so it is not a substitute for this stronger contract.
 SC-7 and SC-8 have zero
@@ -4569,7 +4643,7 @@ Authoritative full proof: [Rotman, Chapter 12, pp418–447](https://math.uchicag
    Proof obligation: Compile the halting recognizer into separate write/left/right instructions, a two-sided blank tape and one designated stop. Give the finite compiler and both simulation directions, not an appeal to the Church–Turing thesis. Reject branches loop. Rotman pp420–428.
 
 2. `def-boone-machine-semigroup-and-augmented-configurations`: Define a finite positive semigroup presentation with one-state-letter transition relations F_i q_a G_i = H_i q_b K_i, including blank extension and stopping cleanup; define its augmented valid configurations.
-   Suppliers: `lem-normalized-fixed-halting-machine-for-boone-simulation`.
+   Suppliers: `lem-normalized-fixed-halting-machine-for-boone-simulation`, `def-computation-alphabet-and-word-convention`, `def-equivalence-relation`, `def-semigroup-and-monoid`.
    Proof obligation: List write, internal/end left/right moves with marker h. Cleanup is q0 s=q0, s q0 h=q0 h, h q0 h=q. Permit empty right tape in cleanup configurations; q is a terminal sink. Reclassify h as a tape letter. State words, contextual replacements and symmetric derivations explicitly. Rotman pp426–430.
 
 3. `lem-boone-semigroup-histories-detect-halting`: For the encoded initial word C(w), C(w)=q in the finite semigroup exactly when the fixed machine stops on w.
@@ -4605,7 +4679,7 @@ Authoritative full proof: [Rotman, Chapter 12, pp418–447](https://math.uchicag
    Proof obligation: Prove each rule associated subgroup intersects <x> trivially, using its free basis, the state free factor and tape Britton normal form. Then prove the rule-length comparison rather than assuming equal history lengths. Rotman Lemma12.14 and start of12.15.
 
 11. `lem-boone-positive-history-reconstruction`: Assume AC. If a special positive word Sigma satisfies L Sigma R=q with auxiliary L,R, then Sigma*=q in the positive semigroup.
-   Suppliers: `lem-boone-commutator-extracts-an-auxiliary-history`, `lem-boone-reduced-auxiliary-words-have-no-rule-pinches`, `lem-boone-positive-history-pushing`, `def-axiom-of-choice`.
+   Suppliers: `lem-boone-commutator-extracts-an-auxiliary-history`, `lem-boone-reduced-auxiliary-words-have-no-rule-pinches`, `lem-boone-positive-history-pushing`, `def-axiom-of-choice`, `lem-boone-base-groups-and-associated-free-bases`, `thm-normal-form-for-free-products`, `thm-brittons-lemma`. The final three edges were made explicit during Step5 authoring and synchronized into the canonical plan; the supplier remains draft pending review and publication.
    Proof obligation: Induct on the common reduced rule length. At zero length free-product normal form forces the terminal state and empty tapes. A central rule pinch locates the exact F_i,G_i prefixes/suffixes. Prove all positivity tests: a wrong surviving tape sign forces x into <x^2>, impossible by tape Britton. Use x-inversion symmetry and handle BOTH rule orientations, empty remainders and cancellation at replacement interfaces. Remove one rule letter on each side and apply induction. Rotman Lemma12.15 pp443–447; this full induction is mandatory, not a named simulation principle.
 
 12. `thm-boone-special-word-equivalence`: Assume AC. For every special positive word Sigma, W(Sigma)=1 in B if and only if Sigma*=q in the finite semigroup.

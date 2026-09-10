@@ -1,0 +1,57 @@
+{
+  "status": "integrated local prerequisite contracts; pending Step-3 review",
+  "page": "strong-laws-of-large-numbers",
+  "replaces_external_item_dependency": "thm-birkhoff-ergodic-theorem",
+  "requires_current_run_page": "measure-preserving-systems-and-mixing-criteria",
+  "items": [
+    {
+      "id": "lem-finite-probability-maximal-ergodic-inequality",
+      "kind": "lemma",
+      "title": "The maximal ergodic inequality on a probability space",
+      "statement": "Let T preserve a probability measure P and let f be an integrable real-valued measurable function. Write S_k f=sum_{j=0}^{k-1} f composed with T^j, M_N=max(0,S_1 f,...,S_N f), and E_N={M_N>0}. Then integral_{E_N} f dP>=0. The same inequality holds on E={sup_{k>=1} S_k f>0}.",
+      "deps": [
+        "def-measure-preserving-transformation-and-system",
+        "thm-integrals-are-invariant-under-measure-preserving-maps",
+        "thm-arithmetic-and-lattice-operations-preserve-measurability",
+        "thm-linearity-of-the-lebesgue-integral-on-l-one",
+        "thm-integral-triangle-inequality",
+        "thm-dominated-convergence",
+        "prop-order-and-scalar-rules-for-the-nonnegative-integral"
+      ],
+      "strategy": "For each k<=N, S_k f=f+(S_{k-1} f) composed with T, with S_0=0. Thus f+M_N composed with T>=S_k f. On E_N this gives f>=M_N-M_N composed with T. Outside E_N, M_N=0 and M_N composed with T>=0, hence pointwise f 1_{E_N}>=M_N-M_N composed with T on the whole space. All expressions are measurable and integrable: 0<=M_N<=sum_{j<N}|f| composed with T^j, and integral invariance bounds its integral by N integral|f|. Integrate the pointwise inequality; invariance cancels the two M_N integrals. Since E_N increases to E and |f 1_{E_N}|<=|f|, dominated convergence gives the infinite-horizon inequality. No recurrence theorem, conditional expectation, Hilbert-space theorem or independence argument is used.",
+      "proof_strategy": "direct",
+      "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+      "sources": {"references": [{"title": "Durrett, Probability: Theory and Examples, 5th ed., Lemma 6.2.2, printed p.335; complete proof read", "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"}]}
+    },
+    {
+      "id": "thm-birkhoff-ergodic-probability-case-for-strong-laws",
+      "kind": "theorem",
+      "title": "Birkhoff's theorem for an ergodic probability system",
+      "statement": "If T is an ergodic measure-preserving transformation of a probability space and f is an integrable real-valued measurable function, then A_n f=n^-1 sum_{j=0}^{n-1} f composed with T^j converges almost surely and in L1 to the constant integral f dP. No invertibility assumption is required.",
+      "deps": [
+        "lem-finite-probability-maximal-ergodic-inequality",
+        "def-ergodic-measure-preserving-system",
+        "thm-integrals-are-invariant-under-measure-preserving-maps",
+        "thm-arithmetic-and-lattice-operations-preserve-measurability",
+        "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+        "thm-linearity-of-the-lebesgue-integral-on-l-one",
+        "thm-integral-triangle-inequality",
+        "thm-dominated-convergence",
+        "thm-finite-and-countable-subadditivity-of-measures"
+      ],
+      "strategy": "Put c=integral f and h=f-c. The measurable extended-real L=limsup_n A_n h is exactly T-invariant: A_n h(Tx)=((n+1)/n) A_{n+1}h(x)-h(x)/n. Removing a finite initial term, multiplying by positive scalars tending to one, and subtracting a sequence tending to zero preserve extended-real limsup; this follows by comparing eventual upper bounds and subsequences approaching the limsup, with the same comparisons at either infinity. Therefore D={L>epsilon} is strictly invariant for each epsilon>0. Set g=(h-epsilon)1_D. Invariance gives S_n g=1_D(S_n h-n epsilon), so {sup_n S_n g>0}=D: outside D all sums vanish, while inside D the defining strict limsup inequality supplies a positive sum. The preceding maximal lemma gives integral_D(h-epsilon)>=0. Ergodicity makes P(D) either zero or one. If it were one, that integral would be integral h-epsilon=-epsilon, a contradiction. Hence P(D)=0. Apply this for epsilon=1/m and for -h, and use countable subadditivity to obtain limsup A_n h<=0<=liminf A_n h almost surely. For L1 convergence let f_K=f 1_{|f|<=K}. Its averages converge almost surely to c_K=integral f_K by the result just proved and are bounded by K, so dominated convergence gives integral|A_n f_K-c_K|->0. Integral invariance and the triangle inequality yield integral|A_n f-c|<=2 integral|f-f_K|+integral|A_n f_K-c_K|. The first term tends to zero with K by dominated convergence, uniformly in n; then let n tend to infinity. This proves both conclusions using the local maximal lemma, not the IID strong law, so the agreement corollary is not circular. The function in the hypothesis is finite-valued; no subtraction of infinite values or choice of a representative is hidden.",
+      "proof_strategy": "direct",
+      "provenance": {"statement": "literature-derived", "proof": "ai-altered"},
+      "sources": {"references": [{"title": "Durrett, Probability: Theory and Examples, 5th ed., Theorem 6.2.1 and its complete proof, printed pp.335–337; ergodic specialization proved without conditional expectation", "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"}]}
+    }
+  ],
+  "consumer_dependencies": [
+    "thm-birkhoff-ergodic-probability-case-for-strong-laws",
+    "cor-countable-independent-copies-exist",
+    "thm-kolmogorov-zero-one-law",
+    "thm-measure-preservation-on-a-generating-pi-system",
+    "def-ergodic-measure-preserving-system",
+    "def-axiom-of-choice"
+  ],
+  "consumer_strategy": "Assume AC for the published countable-product construction (covering its CC and DC hypotheses). On the canonical countable product of the common real law, the left shift is measurable because the pullback of each coordinate cylinder is the shifted cylinder. Cylinder probabilities are unchanged, since every finite joint law is the same product of the common law; the generating-pi-system theorem then proves measure preservation on the whole product sigma-algebra. For a strictly invariant measurable event E, E=T^-n E for every n. The inverse image T^-n E is measurable with respect to coordinates n,n+1,..., since this holds for cylinders and the class of events whose inverse image is tail-coordinate-measurable is a sigma-algebra. Thus E is a tail event. Kolmogorov zero-one gives P(E) in {0,1}, which is exactly the local definition of ergodicity; no mod-null representative is needed for this definition. Apply the independently proved local ergodic probability theorem to the first coordinate to obtain almost-sure and L1 convergence of its averages to the common mean. This is the Birkhoff route required by the design, not an appeal to the independent IID strong law. The general nonergodic/sigma-finite MT-23 theorem and its remaining programme stay in the future plan and are not consumed here."
+}

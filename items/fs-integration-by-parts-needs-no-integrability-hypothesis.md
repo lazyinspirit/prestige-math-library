@@ -5,7 +5,7 @@ title: "FALSE: if $u$ and $v$ are differentiable on $[a,b]$ then $\\int_a^b uv' 
 status: published
 origin: session
 provenance:
-  statement: ai-generated
+  statement: ai-altered
   proof: ai-generated
 deps: [thm-integration-by-parts, cex-a-function-with-a-primitive-that-is-not-integrable, thm-continuous-implies-integrable, cor-differentiable-implies-continuous, thm-algebra-of-derivatives, lem-derivative-of-a-power, def-derivative, def-darboux-sums, def-darboux-integral, def-bounded-set, def-continuity-real, def-canonical-natural, lem-of-naturals-positive, thm-of-archimedean, def-integer-power, def-interval, def-ordered-field, def-complete-ordered-field]
 justified_by: []
@@ -14,10 +14,12 @@ landmark: false
 short: "FALSE: parts without integrability"
 proof_strategy: direct
 verification:
-  judge:
-    model: z-ai/glm-5.2
+  verified:
+    model: gpt-6-astra
     verdict: pass
-    date: 2026-07-28
+    date: 2026-09-09
+    scope: "Local provenance correction and full-item/direct-interface review; proof unchanged, no independent judgment or transitive certification."
+    delegated_by: owner
   precheck: pass
   audited: 2026-07-29
 sources:

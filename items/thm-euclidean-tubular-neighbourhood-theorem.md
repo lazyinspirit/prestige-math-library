@@ -6,18 +6,23 @@ status: published
 origin: session
 provenance:
   statement: literature-derived
-  proof: ai-generated
+  proof: ai-altered
 deps: [def-normal-addition-map-for-a-euclidean-submanifold,
        lem-normal-addition-is-a-local-diffeomorphism-along-the-zero-section,
        lem-variable-radius-injectivity-for-normal-addition,
-       thm-smooth-partitions-of-unity-exist-on-manifolds]
+       def-countable-choice]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: gpt-6-astra
+    verdict: locally-repaired
+    date: 2026-09-10
+    scope: owner-authorized-local-smooth-tube-and-choice-contract-repair
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -29,7 +34,7 @@ sources:
 
 ## Statement
 
-Let $S\subseteq\mathbb R^m$ be an embedded smooth submanifold. Then there is a
+Assume countable choice $\mathrm{AC}_\omega$. Let $S\subseteq\mathbb R^m$ be an embedded smooth submanifold. Then there is a
 positive smooth function $\delta:S\to(0,\infty)$ such that the restricted
 normal addition map
 $$E:\Omega_\delta\to\mathbb R^m,\qquad \Omega_\delta:=\{(p,v)\in N^\perp S:\|v\|<\delta(p)\},$$
@@ -38,25 +43,35 @@ tubular neighbourhood in $\mathbb R^m$.
 
 ## Facts & Assumptions
 
-**Given:** An embedded smooth submanifold $S\subseteq\mathbb R^m$.
+**Given:** Countable choice and an embedded smooth submanifold $S\subseteq\mathbb R^m$.
 
 [L1] The model map in this statement is the normal addition map ([[def-normal-addition-map-for-a-euclidean-submanifold]]).
 
-[L2] Normal addition is a local diffeomorphism along the zero section and is injective on a sufficiently small smooth variable-radius neighbourhood ([[lem-normal-addition-is-a-local-diffeomorphism-along-the-zero-section]], [[lem-variable-radius-injectivity-for-normal-addition]]).
+[L2] Normal addition is a local diffeomorphism along the zero section ([[lem-normal-addition-is-a-local-diffeomorphism-along-the-zero-section]]).
 
-[L3] Smooth partitions of unity exist on manifolds ([[thm-smooth-partitions-of-unity-exist-on-manifolds]]).
+[L3] Under countable choice, the construction in [[lem-variable-radius-injectivity-for-normal-addition]] produces a positive smooth injectivity radius. More precisely, for its capped local-diffeomorphism supremum $r(p)$, proof steps 4.1–6.1 construct a smooth $\delta$ with $0<\delta(p)\le r(p)/4$. We use this particular constructed radius, not an arbitrary radius on which the map happens to be injective.
+
+[A1] Countable choice is [[def-countable-choice]]. It covers the normal-bundle manifold interface underlying [L1, L2] and the proper-exhaustion construction used to obtain the smooth radius in [L3].
 
 ## Proof
 **Proof technique:** direct.
 
 1.1 If $S=\varnothing$, take the unique function $\delta:S\to(0,\infty)$. Then $\Omega_\delta=\varnothing$, and $E$ is a diffeomorphism from the empty manifold onto the open neighbourhood $\varnothing$ of $S$. Hence assume $S\ne\varnothing$. [L1, given]
 
-2.1 Let $W$ be the union of all normal-bundle neighbourhoods on which [L2] makes $E$ a local diffeomorphism. It is open and contains the zero section. By shrinking bundle trivializations around their base points, choose an open cover $(U_i)$ of $S$ and numbers $r_i>0$ such that $$\{(p,v):p\in U_i,\ \|v\|<r_i\}\subseteq W.$$ By [L3], choose a locally finite smooth partition $(\phi_i)$ subordinate to this cover. [L2, L3, step 1.1, choose]
+2.1 For $p\in S$ and $a>0$ set $$V_a(p)=\{(q,v)\in N^\perp S:\|q-p\|<a,\ \|v\|<a\},\qquad A_p=\{a\in(0,1]:E|_{V_a(p)}\text{ is a diffeomorphism onto its image}\}.$$ The normal bundle has its induced topology in $\mathbb R^m\times\mathbb R^m$, so these open sets form a neighbourhood basis at $(p,0)$. Thus [L2] makes $A_p$ nonempty, and it is bounded above by one. Put $r(p)=\sup A_p\in(0,1]$. For every $0<a<r(p)$ some $b\in A_p$ satisfies $a<b$, and restricting its diffeomorphism to $V_a(p)$ proves $a\in A_p$. This is the same capped function as in [L3]. [L1, L2, step 1.1, construct]
 
-3.1 Define $$r(p):=\left(\sum_i\frac{\phi_i(p)}{r_i}\right)^{-1}.$$ The locally finite sum is smooth and positive. At each $p$, the finite nonempty set $I(p):=\{i:\phi_i(p)>0\}$ has an index $i_0$ with $r_{i_0}=\max_{i\in I(p)}r_i$. Since $$r(p)\le r_{i_0}$$ and $p\in\operatorname{supp}(\phi_{i_0})\subseteq U_{i_0}$, the whole fibre ball $\|v\|<r(p)$ over $p$ lies in $W$. [L3, step 2.1, algebra]
+3.1 Take the positive smooth $\delta$ specifically constructed in [L3]. Its stated proof bound gives $\delta(p)\le r(p)/4$ and its injectivity conclusion gives injectivity of $E$ on $\Omega_\delta$. The construction uses compact sublevel minima of $r$ and explicit locally finite one-variable bumps composed with a smooth proper exhaustion; no manifold partition or additional radius selection is invoked here. [A1, L3, step 2.1, choose]
 
-4.1 Let $\delta_0:S\to(0,\infty)$ be the positive smooth injectivity radius supplied by [L2], and put $$\delta(p):=\frac{\delta_0(p)r(p)}{\delta_0(p)+r(p)}.$$ This function is positive and smooth, with $\delta<\delta_0$ and $\delta<r$. [L2, step 3.1, construct, algebra]
+4.1 Local invertibility on the entire tube needs a separate argument. If $(p,v)\in\Omega_\delta$, then $\|v\|<\delta(p)\le r(p)/4<r(p)$. Choose a real $a$ strictly between $\|v\|$ and $r(p)$, for example their arithmetic mean. By step 2.1, $E|_{V_a(p)}$ is a diffeomorphism, and $(p,v)\in V_a(p)$. Hence $E$ is a local diffeomorphism at every point of $\Omega_\delta$. This follows from the quantitative radius bound and the eligible neighbourhoods, not from injectivity alone. [step 2.1, step 3.1, algebra]
 
-5.1 The set $\Omega_\delta$ is open in $N^\perp S$ because $(p,v)\mapsto\|v\|-\delta(p)$ is continuous. Since $\delta<r$, step 3.1 gives $\Omega_\delta\subseteq W$, so $E$ is a local diffeomorphism at every point of $\Omega_\delta$. Since $\delta<\delta_0$, [L2] also makes $E$ injective on $\Omega_\delta$. [L2, step 3.1, step 4.1]
+5.1 The set $\Omega_\delta$ is open in the normal bundle: its defining inequality is the strict negativity of the continuous function $(p,v)\mapsto\|v\|-\delta(p)$. Here the vector coordinate, bundle projection and positive smooth $\delta$ are continuous. Thus the neighbourhoods from step 4.1 can be intersected with $\Omega_\delta$ to give local diffeomorphisms for the restricted map, which is injective by step 3.1. [L1, step 3.1, step 4.1]
 
 6.1 A local diffeomorphism is open. Hence $U:=E(\Omega_\delta)$ is open and contains $S$ because $E(p,0)=p$. The injective local diffeomorphism $E:\Omega_\delta\to U$ is a homeomorphism, and its local smooth inverses agree and assemble to a smooth global inverse. Thus $E$ is the required diffeomorphism. Together with the empty case in step 1.1, this proves the theorem. [L1, step 1.1, step 5.1] ∎
+
+## Remarks
+
+The radius is smooth, not merely continuous. No completeness, compactness, or
+positive-dimensional hypothesis on $S$ is imposed. Once the normal-bundle
+manifold data and the particular smooth radius constructed in the cited lemma
+are supplied, the remaining tube and inverse construction requires no further
+choice.

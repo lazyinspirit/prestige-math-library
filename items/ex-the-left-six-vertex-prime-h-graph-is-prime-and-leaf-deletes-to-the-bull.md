@@ -1,20 +1,25 @@
 ---
 id: ex-the-left-six-vertex-prime-h-graph-is-prime-and-leaf-deletes-to-the-bull
 kind: example
-title: "The left six-vertex prime $\\mathcal H$-graph is prime, and deleting any pendant leaf gives the bull"
+title: "The left six-vertex prime $\\mathcal H$-graph: primeness and leaf/co-leaf deletions"
 status: published
 origin: session
 provenance:
-  statement: literature-derived
-  proof: ai-generated
+  statement: ai-altered
+  proof: ai-altered
 deps: [def-left-six-vertex-prime-h-graph, def-prime-graph, def-module-of-a-graph, def-bull-graph]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: gpt-6-astra
+    verdict: pass
+    date: 2026-09-09
+    scope: "Owner-authorized graph-identity and finite-proof repair; exhaustive module check and targeted precheck/rendercheck; no independent judgment."
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -27,28 +32,58 @@ pipeline_run: null
 
 ## Example
 
-The left six-vertex prime $\mathcal H$-graph is prime, and deleting any of its
-three leaves produces the bull graph.
+The left six-vertex prime $\mathcal H$-graph $L$ is prime. Its leaves are
+$c,f$, and $b$ is its unique co-leaf, meaning a vertex of degree
+$|V(L)|-2=4$. Deleting $f$ leaves a diamond with a pendant leaf at $b$;
+deleting $b$ leaves the path $a-d-e-f$ and isolated vertex $c$.
+Deleting either leaf does **not** give the bull.
 
 ## Facts & Assumptions
 
-**Given:** The left six-vertex prime $\mathcal H$-graph on triangle vertices
-$t_1,t_2,t_3$ and leaves $\ell_1,\ell_2,\ell_3$.
+**Given:** The graph $L$ with vertices $a,b,c,d,e,f$ and edges
+$ab,bc,ad,bd,be,de,ef$ from [[def-left-six-vertex-prime-h-graph]].
 
 [L1] A graph is prime exactly when it has no nontrivial module
 ([[def-prime-graph]], [[def-module-of-a-graph]]).
 
-[L2] The bull is a triangle with leaves attached to two distinct triangle
-vertices ([[def-bull-graph]]).
+[L2] The bull has five edges ([[def-bull-graph]]).
+
+[F1] The neighbourhoods computed from the given edge set are
+$$N(a)=\{b,d\},\quad N(b)=\{a,c,d,e\},\quad N(c)=\{b\},\quad N(d)=\{a,b,e\},\quad N(e)=\{b,d,f\},\quad N(f)=\{e\}.$$
 
 ## Verification
 
 **Proof technique:** direct finite check.
 
-1.1 Deleting any leaf gives the bull. For instance, after deleting $\ell_1$ the triangle $t_1t_2t_3$ remains, with leaves $\ell_2$ at $t_2$ and $\ell_3$ at $t_3$; by [L2] this is the bull. The same argument works for deleting $\ell_2$ or $\ell_3$. [L2, given]
+1.1 By [F1], exactly $c,f$ have degree one and exactly $b$ has degree four. Deleting $f$ leaves edges $ab,bc,ad,bd,be,de$: on $a,b,d,e$ these form a complete graph minus $ae$, with $c$ attached only to $b$. Deleting $b$ leaves exactly $ad,de,ef$ and isolated $c$. Deleting either leaf removes one of the seven edges, leaving six, so neither resulting graph is the five-edge bull. [given, F1, L2]
 
-1.2 To check primeness, let $M$ be a nontrivial module. First, $M$ cannot contain two leaves: if it contains $\ell_i,\ell_j$ and omits one support, that support sees its own leaf but not the other; if it contains both supports as well, then either the remaining triangle vertex or the remaining leaf splits the set. Hence $M$ contains at most one leaf. [given, algebra]
+1.2 If a module $M$ contains a set $S$ and a vertex outside $S$ has both a neighbour and a nonneighbour in $S$, that vertex must also belong to $M$. Otherwise it would violate the defining uniform outside adjacency of a module. Thus such vertices can be forced into $M$ successively. [L1]
 
-2.1 Now $M$ cannot contain one leaf together with another vertex. If $\ell_i,t_i\in M$, then another triangle vertex is adjacent to $t_i$ but not to $\ell_i$. If $\ell_i\in M$ and $t_i\notin M$, then any other vertex of $M$ is either another leaf, excluded by step 1.2, or some $t_j$ with $j\ne i$, and then $\ell_j$ is outside $M$ and adjacent to $t_j$ but not to $\ell_i$. Therefore a module containing a leaf must be the singleton $\{\ell_i\}$. [step 1.2, given]
+2.1 The following table covers every unordered pair of vertices. Starting from the pair in the first column, append the vertices in the second column from left to right. At each append, [F1] shows that the new vertex has a neighbour and a nonneighbour in the set already obtained. Consequently step 1.2 forces all six vertices into every module containing the initial pair. [F1, step 1.2]
 
-3.1 Consequently a nontrivial module contains no leaves, so it is a subset of $\{t_1,t_2,t_3\}$ with at least two vertices. But if $t_i,t_j\in M$, then the outside leaf $\ell_i$ is adjacent to $t_i$ and not to $t_j$, so $M$ is not a module. This contradiction shows that no nontrivial module exists. By [L1], the graph is prime. [step 2.1, L1, given] ∎
+| Initial pair | Successive forced vertices |
+|---|---|
+| $a,b$ | $c,d,e,f$ |
+| $a,c$ | $d,e,f,b$ |
+| $a,d$ | $e,f,b,c$ |
+| $a,e$ | $f,b,c,d$ |
+| $a,f$ | $b,c,d,e$ |
+| $b,c$ | $a,d,e,f$ |
+| $b,d$ | $c,a,e,f$ |
+| $b,e$ | $a,c,d,f$ |
+| $b,f$ | $a,c,d,e$ |
+| $c,d$ | $a,e,f,b$ |
+| $c,e$ | $d,a,f,b$ |
+| $c,f$ | $b,a,d,e$ |
+| $d,e$ | $a,f,b,c$ |
+| $d,f$ | $a,b,c,e$ |
+| $e,f$ | $b,a,c,d$ |
+
+3.1 Every set with at least two vertices contains one of those pairs, so step 2.1 excludes every proper module of size at least two. By [L1], $L$ is prime. Together with step 1.1 this proves all the stated claims. [L1, step 1.1, step 2.1] ∎
+
+## Remarks
+
+The stable item ID retains its earlier bull-deletion wording for link
+compatibility. That claim concerned the superseded net interpretation of
+the left graph. The title, statement and verification above concern the
+actual Nguyen–Scott–Seymour Figure 1 graph.

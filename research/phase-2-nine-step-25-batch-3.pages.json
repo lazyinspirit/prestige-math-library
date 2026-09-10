@@ -1,0 +1,1674 @@
+[
+  {
+    "order": 288.107,
+    "id": "strong-laws-of-large-numbers",
+    "kind": "A",
+    "category": "probability",
+    "title": "Strong Laws of Large Numbers",
+    "companion": "strong-laws-of-large-numbers-examples",
+    "requires": [
+      "probability-spaces-random-variables-and-expectation",
+      "independence-borel-cantelli-and-zero-one-laws",
+      "infinite-product-measures-and-kolmogorov-extension",
+      "modes-of-convergence-for-random-variables",
+      "weak-laws-and-series-of-independent-random-variables",
+      "the-lebesgue-integral-and-the-convergence-theorems",
+      "product-measures-and-the-fubini-tonelli-theorems",
+      "the-lp-spaces-holder-minkowski-and-riesz-fischer",
+      "measure-preserving-systems-and-mixing-criteria",
+      "further-trigonometric-identities-and-inverses"
+    ],
+    "items": [
+      {
+        "id": "def-strong-law-of-large-numbers-for-a-sequence",
+        "kind": "definition",
+        "title": "Strong law of large numbers for a sequence",
+        "statement": "Let $(X_n)_{n\\ge1}$ be integrable real random variables on one probability space, with $S_n=\\sum_{k=1}^nX_k$. The **centered strong law** means $(S_n-\\mathbb ES_n)/n\\to0$ almost surely. If the variables have a common law, their finite expectations equal $\\mu=\\mathbb EX_1$, so this is equivalent to $S_n/n\\to\\mu$ almost surely. Independence is not part of this definition.",
+        "deps": [
+          "def-partial-sums-and-sample-means",
+          "def-almost-sure-convergence-of-random-variables",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable"
+        ],
+        "strategy": "Separate existence of each mean from the IID common-mean specialization.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "cor-kolmogorov-strong-law-for-independent-uniformly-bounded-variances",
+        "kind": "corollary",
+        "title": "Kolmogorov strong law for independent uniformly bounded variances",
+        "statement": "Independent square-integrable real $(X_n)_{n\\ge1}$ with $C=\\sup_n\\operatorname{Var}(X_n)<\\infty$ satisfy $(S_n-\\mathbb ES_n)/n\\to0$ almost surely.",
+        "deps": [
+          "thm-kolmogorov-strong-law-under-summable-normalized-variances",
+          "def-strong-law-of-large-numbers-for-a-sequence",
+          "thm-integral-test-for-series"
+        ],
+        "strategy": "Use b_n=n and bound the variance series by C sum n^-2 (for n>=2, n^-2<=1/(n-1)-1/n, so finite partial sums are bounded). Apply the almost-sure clause of the published normalized-variance strong law. The current convergence-criterion proof explicitly constructs its conull Cauchy event and measurable path limit, then proves its L2 clause by Fatou; neither clause uses abstract completeness or choice. Kronecker gives the normalization.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-iid-finite-variance-strong-law",
+        "kind": "corollary",
+        "title": "Iid finite variance strong law",
+        "statement": "IID square-integrable real variables satisfy $S_n/n\\to\\mathbb EX_1$ almost surely.",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "cor-kolmogorov-strong-law-for-independent-uniformly-bounded-variances"
+        ],
+        "strategy": "Identical distributions give the same variance and expectation; use the bounded-variance law.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-tail-sum-integrability-equivalence",
+        "kind": "lemma",
+        "title": "Tail sum integrability equivalence",
+        "statement": "For a measurable $X:\\Omega\\to[0,\\infty]$ on a probability space, $\\sum_{n\\ge1}\\mathbb P(X>n)\\le\\mathbb EX\\le1+\\sum_{n\\ge1}\\mathbb P(X>n)$. Thus $\\mathbb EX<\\infty$ if and only if the tail series is finite.",
+        "deps": [
+          "cor-layer-cake-formulas-for-random-variables",
+          "thm-monotone-convergence",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "strategy": "For every t in [0,infinity], sum_{n>=1}1_{t>n}<=t<=1+sum_{n>=1}1_{t>n}, including integer t and infinity. Apply this pointwise to X. Increasing finite sums of the indicator functions and the integral monotone-convergence theorem identify the integral of the sum with sum P(X>n). Integral monotonicity and integral of 1 equal to 1 give both inequalities. This direct proof avoids using the extended-valued clause of the published layer-cake corollary, whose stated supplier is finite-valued.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-iid-linear-truncation-occurs-only-finitely-often",
+        "kind": "lemma",
+        "title": "Iid linear truncation occurs only finitely often",
+        "statement": "For identically distributed integrable real $(X_n)$, put $Y_n=X_n\\mathbf1_{\\{|X_n|\\le n\\}}$. Almost surely $Y_n=X_n$ for all sufficiently large $n$. Consequently $n^{-1}\\sum_{k=1}^n(X_k-Y_k)\\to0$. Independence is unnecessary.",
+        "deps": [
+          "def-truncation-at-a-fixed-level",
+          "lem-tail-sum-integrability-equivalence",
+          "cor-first-borel-cantelli-lemma-for-events"
+        ],
+        "strategy": "Sum P(|X_n|>n) using the common law and the tail lemma, then BC1. Finite changes of sums divided by n vanish.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-summability-of-truncated-normalized-variances",
+        "kind": "lemma",
+        "title": "Summability of truncated normalized variances",
+        "statement": "For identically distributed integrable real $(X_n)$ and $Y_n=X_n\\mathbf1_{\\{|X_n|\\le n\\}}$, $\\sum_{n\\ge1}\\operatorname{Var}(Y_n)/n^2\\le2\\mathbb E|X_1|<\\infty$. No independence is required.",
+        "deps": [
+          "def-truncation-at-a-fixed-level",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "thm-change-of-variables-for-expectation",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-integral-test-for-series",
+          "lem-integer-part"
+        ],
+        "strategy": "Var(Y_n)<=E Y_n^2. Interchange the nonnegative series and expectation by thm-monotone-convergence-for-the-integral applied to the increasing finite sums of the nonnegative measurable functions t²1_{t≤n}/n² (not the monotone-real-sequence theorem). Use lem-integer-part to define m=ceil(t)=-floor(-t), so m-1<t<=m. For t<=1, t^2 sum n^-2<=2t. For t>1, sum_{n>=m} n^-2<=1/m^2+1/m<=2/t. Integrate t^2 sum_{n>=max(1,ceil(t))} n^-2 against the law of |X_1|. This includes integer endpoints correctly.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-cesaro-limit-of-truncated-means",
+        "kind": "lemma",
+        "title": "Cesaro limit of truncated means",
+        "statement": "For identically distributed integrable real $(X_n)$, with $Y_k=X_k\\mathbf1_{\\{|X_k|\\le k\\}}$, one has $n^{-1}\\sum_{k=1}^n\\mathbb EY_k\\to\\mathbb EX_1$.",
+        "deps": [
+          "thm-dominated-convergence",
+          "thm-change-of-variables-for-expectation",
+          "thm-cesaro-mean-theorem",
+          "def-truncation-at-a-fixed-level"
+        ],
+        "strategy": "Transport to the fixed law of X_1; domination by |X_1| gives convergence of individual truncated means; apply deterministic Cesaro averaging.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-kolmogorov-iid-l1-strong-law",
+        "kind": "theorem",
+        "title": "Kolmogorov iid l1 strong law",
+        "statement": "For IID real $(X_n)_{n\\ge1}$ with $\\mathbb E|X_1|<\\infty$, $S_n/n\\to\\mu=\\mathbb EX_1$ almost surely.",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "lem-iid-linear-truncation-occurs-only-finitely-often",
+          "lem-summability-of-truncated-normalized-variances",
+          "lem-cesaro-limit-of-truncated-means",
+          "lem-measurable-functions-preserve-independence",
+          "thm-kolmogorov-strong-law-under-summable-normalized-variances"
+        ],
+        "strategy": "Truncate at index n, preserve mutual independence by measurable transformations, apply the published normalized-variance strong law to bounded Y_n using the preceding summability lemma, add the Cesaro means and remove finitely many truncation errors. No ergodic theorem or pairwise random-series convergence is used. The current published convergence criterion proves its almost-sure and L2 clauses choice-free by a canonical Cauchy event and Fatou; only its almost-sure clause and Kronecker are needed here.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Roch, Note 5, Theorems 5.8–5.9, printed pp. 5–6 (mutual independence specialization only)",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes5.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-integrability-is-necessary-for-an-iid-finite-mean-strong-law",
+        "kind": "theorem",
+        "title": "Integrability is necessary for an iid finite mean strong law",
+        "statement": "If IID real $(X_n)$ have $S_n/n$ converging almost surely to a finite, possibly random, limit $L$, then $\\mathbb E|X_1|<\\infty$ and $L=\\mathbb EX_1$ almost surely.",
+        "deps": [
+          "def-identically-distributed-and-iid-random-variables",
+          "cor-second-borel-cantelli-lemma-under-pairwise-independence",
+          "lem-tail-sum-integrability-equivalence",
+          "thm-kolmogorov-iid-l1-strong-law"
+        ],
+        "strategy": "X_n/n=S_n/n-((n-1)/n) S_{n-1}/(n-1)->0. Thus {|X_n|>n} occurs finitely often. The contrapositive of BC2 forces summable common-law tails; the tail lemma gives L1, and the preceding law identifies the limit. Do not assume the initial finite limit is constant.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Theorem 2.3.8 and §2.4",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-etemadi-strong-law-for-pairwise-independent-iid-variables",
+        "kind": "theorem",
+        "title": "Etemadi strong law for pairwise independent iid variables",
+        "statement": "Pairwise independent, identically distributed integrable real $(X_n)$ satisfy $S_n/n\\to\\mathbb EX_1$ almost surely.",
+        "deps": [
+          "def-pairwise-independence",
+          "lem-iid-linear-truncation-occurs-only-finitely-often",
+          "lem-summability-of-truncated-normalized-variances",
+          "lem-cesaro-limit-of-truncated-means",
+          "cor-chebyshev-inequality-for-random-variables",
+          "cor-covariance-vanishes-under-independence",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "lem-measurable-functions-preserve-independence",
+          "cor-first-borel-cantelli-lemma-for-events",
+          "thm-monotone-convergence",
+          "lem-integer-part",
+          "def-integer-power",
+          "thm-geometric-series"
+        ],
+        "strategy": "Split into positive and negative parts. For each alpha=1+1/r, use def-integer-power and lem-integer-part to set k_j=floor(alpha^j). For all sufficiently large j, k_j>=alpha^j/2; hence, by nonnegative summation, the coefficient of Var(Y_m) in sum_j Var(T_{k_j})/k_j^2 is at most 4 sum_{j:alpha^j>=m}alpha^(-2j)<=C_alpha m^-2, where thm-geometric-series evaluates the geometric tail (the finitely many initial j are absorbed in C_alpha). Thus the variance series is finite. Pairwise independence suffices for variance addition. Chebyshev and BC1 give subsequence convergence. Monotonicity of nonnegative T_n bounds liminf and limsup by mu/alpha and alpha mu. Intersect the countably many full-measure events and let r increase. The design cubic subsequence is not justified by this L1 estimate; geometric subsequences are the verified correction.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Theorem 2.4.1, Lemmas 2.4.2–2.4.4 and complete proof, pp. 76–78",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-iid-strong-law-implies-the-weak-law",
+        "kind": "corollary",
+        "title": "Iid strong law implies the weak law",
+        "statement": "For IID integrable real variables, $S_n/n\\to\\mathbb EX_1$ in probability.",
+        "deps": [
+          "thm-kolmogorov-iid-l1-strong-law",
+          "thm-almost-sure-convergence-implies-convergence-in-probability"
+        ],
+        "strategy": "Apply the published implication to the real sample means.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-finite-probability-maximal-ergodic-inequality",
+        "kind": "lemma",
+        "title": "The maximal ergodic inequality on a probability space",
+        "statement": "Let $T$ preserve a probability measure $P$, and let $f$ be integrable, real-valued and measurable. Put $S_kf=\\sum_{j=0}^{k-1}f\\circ T^j$, $M_N=\\max(0,S_1f,\\ldots,S_Nf)$ and $E_N=\\{M_N>0\\}$ for $N\\ge1$. Then $\\int_{E_N}f\\,dP\\ge0$, and also $\\int_E f\\,dP\\ge0$ for $E=\\{\\sup_{k\\ge1}S_kf>0\\}$.",
+        "deps": [
+          "def-measure-preserving-transformation-and-system",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality",
+          "thm-dominated-convergence",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral"
+        ],
+        "strategy": "For each k<=N, S_k f=f+(S_{k-1} f) composed with T, with S_0=0. Thus f+M_N composed with T>=S_k f. On E_N this gives f>=M_N-M_N composed with T. Outside E_N, M_N=0 and M_N composed with T>=0, hence pointwise f 1_{E_N}>=M_N-M_N composed with T on the whole space. All expressions are measurable and integrable: 0<=M_N<=sum_{j<N}|f| composed with T^j, and integral invariance bounds its integral by N integral|f|. Integrate the pointwise inequality; invariance cancels the two M_N integrals. Since E_N increases to E and |f 1_{E_N}|<=|f|, dominated convergence gives the infinite-horizon inequality. No recurrence theorem, conditional expectation, Hilbert-space theorem or independence argument is used.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., Lemma 6.2.2, printed p.335; complete proof read",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-birkhoff-ergodic-probability-case-for-strong-laws",
+        "kind": "theorem",
+        "title": "Birkhoff's theorem for an ergodic probability system",
+        "statement": "If $T$ is an ergodic measure-preserving transformation of a probability space and $f$ is an integrable real-valued measurable function, then, for $n\\ge1$, the averages $A_nf=n^{-1}\\sum_{j=0}^{n-1}f\\circ T^j$ satisfy $A_nf\\to c=\\int f\\,dP$ almost surely and in $L^1$. Invertibility is not required.",
+        "deps": [
+          "lem-finite-probability-maximal-ergodic-inequality",
+          "def-ergodic-measure-preserving-system",
+          "thm-integrals-are-invariant-under-measure-preserving-maps",
+          "thm-arithmetic-and-lattice-operations-preserve-measurability",
+          "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality",
+          "thm-dominated-convergence",
+          "thm-finite-and-countable-subadditivity-of-measures"
+        ],
+        "strategy": "Put c=integral f and h=f-c. The measurable extended-real L=limsup_n A_n h is exactly T-invariant: A_n h(Tx)=((n+1)/n) A_{n+1}h(x)-h(x)/n. Removing a finite initial term, multiplying by positive scalars tending to one, and subtracting a sequence tending to zero preserve extended-real limsup; this follows by comparing eventual upper bounds and subsequences approaching the limsup, with the same comparisons at either infinity. Therefore D={L>epsilon} is strictly invariant for each epsilon>0. Set g=(h-epsilon)1_D. Invariance gives S_n g=1_D(S_n h-n epsilon), so {sup_n S_n g>0}=D: outside D all sums vanish, while inside D the defining strict limsup inequality supplies a positive sum. The preceding maximal lemma gives integral_D(h-epsilon)>=0. Ergodicity makes P(D) either zero or one. If it were one, that integral would be integral h-epsilon=-epsilon, a contradiction. Hence P(D)=0. Apply this for epsilon=1/m and for -h, and use countable subadditivity to obtain limsup A_n h<=0<=liminf A_n h almost surely. For L1 convergence let f_K=f 1_{|f|<=K}. Its averages converge almost surely to c_K=integral f_K by the result just proved and are bounded by K, so dominated convergence gives integral|A_n f_K-c_K|->0. Integral invariance and the triangle inequality yield integral|A_n f-c|<=2 integral|f-f_K|+integral|A_n f_K-c_K|. The first term tends to zero with K by dominated convergence, uniformly in n; then let n tend to infinity. This proves both conclusions using the local maximal lemma, not the IID strong law, so the agreement corollary is not circular. The function in the hypothesis is finite-valued; no subtraction of infinite values or choice of a representative is hidden.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, 5th ed., Theorem 6.2.1 and its complete proof, printed pp.335–337; ergodic specialization proved without conditional expectation",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-birkhoff-strong-law-for-iid-coordinate-shifts",
+        "kind": "corollary",
+        "title": "Birkhoff strong law for iid coordinate shifts",
+        "statement": "Assume AC. On the canonical countable product of an integrable real probability law, the left shift is measure preserving and ergodic. Its coordinate averages converge almost surely and in $L^1$ to the common mean by the ergodic theorem.",
+        "deps": [
+          "thm-birkhoff-ergodic-probability-case-for-strong-laws",
+          "thm-countable-product-of-probability-spaces",
+          "cor-coordinate-random-elements-on-a-countable-product-are-independent",
+          "thm-kolmogorov-zero-one-law",
+          "thm-measure-preservation-on-a-generating-pi-system",
+          "def-ergodic-measure-preserving-system",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-recursion"
+        ],
+        "strategy": "Assume AC for the published canonical countable-product construction (covering its CC and DC hypotheses). Apply thm-countable-product-of-probability-spaces to the constant sequence of the common real law, and use cor-coordinate-random-elements-on-a-countable-product-are-independent for the exact coordinate-law interface. On coordinates x_0,x_1,..., the left shift is measurable because the pullback of each coordinate cylinder is the shifted cylinder. Cylinder probabilities are unchanged, since every finite joint law is the same product of the common law; the generating-pi-system theorem then proves measure preservation on the whole product sigma-algebra. For a strictly invariant measurable event E, E=T^-n E for every n. The inverse image T^-n E is measurable with respect to coordinates n,n+1,..., since this holds for cylinders and the class of events whose inverse image is tail-coordinate-measurable is a sigma-algebra. Thus E is a tail event. Kolmogorov zero-one gives P(E) in {0,1}, which is exactly the local definition of ergodicity; no mod-null representative is needed for this definition. Apply the independently proved local ergodic probability theorem to the zeroth coordinate to obtain almost-sure and L1 convergence of (x_0+...+x_{n-1})/n to the common mean. This is the Birkhoff route required by the design, not an appeal to the independent IID strong law. The general nonergodic/sigma-finite MT-23 theorem and its remaining programme stay in the future plan and are not consumed here. Local choice bridge: restriction of AC to the prescribed countable family gives def-countable-choice. For any serial relation R on a nonempty set A and prescribed a0, AC selects s(a) in {b:a R b} simultaneously for every a∈A. The earlier thm-recursion constructs a_{n+1}=s(a_n) from a0, proving precisely def-dependent-choice. Thus the canonical-product supplier's CC and DC assumptions hold; no later weak-choice theorem is cited.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Examples 6.1.4–6.1.5 pp.332–333; Theorem 6.2.1, Lemma 6.2.2 and Example 6.2.3, pp.335–337",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "rem-strong-law-does-not-assert-a-rate",
+        "kind": "remark",
+        "title": "Strong law does not assert a rate",
+        "statement": "The conclusion of [[thm-kolmogorov-iid-l1-strong-law]] is almost-sure convergence of sample means. It specifies no numerical rate of decay of the error. The finite-variance logarithmic-rate theorem requires an additional second-moment assumption; neither that assumption nor a law of the iterated logarithm is implicit in the $L^1$ law.",
+        "deps": [
+          "thm-kolmogorov-iid-l1-strong-law"
+        ],
+        "strategy": "Do not import the LIL or an implicit rate into L1 conclusions.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-finite-variance-logarithmic-rate-for-iid-sums",
+        "kind": "theorem",
+        "title": "Finite variance logarithmic rate for iid sums",
+        "statement": "If IID real variables have mean $\\mu$ and finite variance v, then for every $\\varepsilon>0$, $(S_n-n\\mu)/(\\sqrt n(\\log n)^{1/2+\\varepsilon})\\to0$ almost surely, with the displayed normalization used for $n\\ge2$.",
+        "deps": [
+          "thm-kolmogorov-strong-law-under-summable-normalized-variances",
+          "def-integer-power",
+          "def-real-power",
+          "thm-natural-logarithm-laws",
+          "thm-real-power-laws",
+          "thm-real-power-continuity-and-derivatives",
+          "thm-p-series-real-exponents",
+          "thm-direct-comparison-test"
+        ],
+        "strategy": "Apply the general almost-sure clause of thm-kolmogorov-strong-law-under-summable-normalized-variances. Put q=1/2+epsilon, b_n=sqrt(n)(log n)^q for n>=2 and b_1=b_2. Logarithm order and positive-power laws make these positive nondecreasing normalizers divergent. On each dyadic block 2^k<=n<2^(k+1), the sum of 1/[n(log n)^(1+2epsilon)] is at most (log 2)^(-1-2epsilon)k^(-1-2epsilon). The p-series bound controls all finite partial sums, so the normalized variance series is finite. The current published theorem already contains this sound dyadic proof; there is no outstanding rate or L2 defect in that supplier.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Theorem 2.5.11, p. 87; Roch, Theorem 5.9, pp. 5–6",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            },
+            {
+              "title": "Roch, Note 5, Theorems 5.8–5.9, printed pp. 5–6 (mutual independence specialization only)",
+              "url": "https://people.math.wisc.edu/~roch/grad-prob/gradprob-notes5.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.108,
+    "id": "strong-laws-of-large-numbers-examples",
+    "kind": "B",
+    "category": "probability",
+    "title": "Strong Laws of Large Numbers — Examples",
+    "companion": "strong-laws-of-large-numbers",
+    "requires": [
+      "strong-laws-of-large-numbers"
+    ],
+    "items": [
+      {
+        "id": "ex-almost-sure-frequency-of-heads",
+        "kind": "example",
+        "title": "Almost sure frequency of heads",
+        "statement": "Assume AC and $0\\le p\\le1$. On the countable product of the law $P(\\{1\\})=p$, $P(\\{0\\})=1-p$, the proportion of the first n coordinates $x_0,\\ldots,x_{n-1}$ that equal one converges almost surely to p.",
+        "deps": [
+          "thm-countable-product-of-probability-spaces",
+          "cor-coordinate-random-elements-on-a-countable-product-are-independent",
+          "cor-iid-finite-variance-strong-law",
+          "def-axiom-of-choice",
+          "def-probability-measure",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-recursion"
+        ],
+        "strategy": "The displayed two-atom law is a probability measure. Its finite expectation sums give E X=p and E X^2=p, hence Var(X)=p(1-p), including p=0,1. Apply the canonical countable-product theorem and its exact coordinate-independence corollary. Reindex the canonical coordinates by Y_n(x)=x_{n-1} for n>=1, then apply the finite-variance law to count the ones among x_0,...,x_{n-1}. Local choice bridge: restriction of AC to the prescribed countable family gives def-countable-choice. For any serial relation R on a nonempty set A and prescribed a0, AC selects s(a) in {b:a R b} simultaneously for every a∈A. The earlier thm-recursion constructs a_{n+1}=s(a_n) from a0, proving precisely def-dependent-choice. Thus the canonical-product supplier's CC and DC assumptions hold; no later weak-choice theorem is cited.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-strong-law-for-empirical-indicator-averages",
+        "kind": "example",
+        "title": "Strong law for empirical indicator averages",
+        "statement": "For IID random elements $(X_n)$ and a fixed measurable A, $n^{-1}\\sum_{k\\le n}\\mathbf1_A(X_k)\\to P(X_1\\in A)$ almost surely. A single conull event works for any specified countable class of sets A.",
+        "deps": [
+          "lem-measurable-functions-preserve-independence",
+          "cor-expectation-of-an-indicator-is-probability",
+          "thm-kolmogorov-iid-l1-strong-law",
+          "thm-finite-and-countable-subadditivity-of-measures"
+        ],
+        "strategy": "Apply the strong law to bounded indicators and intersect countably many events; no simultaneous claim over every measurable set.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-strong-law-estimator-of-an-integrable-mean",
+        "kind": "example",
+        "title": "Strong law estimator of an integrable mean",
+        "statement": "Assume AC. The probability law with $F(x)=0$ for $x<1$ and $F(x)=1-x^{-3/2}$ for $x\\ge1$ has density $\\rho(x)=(3/2)x^{-5/2}\\mathbf1_{[1,\\infty)}(x)$, mean 3 and infinite second moment. The sample means of IID copies converge almost surely to 3.",
+        "deps": [
+          "thm-kolmogorov-iid-l1-strong-law",
+          "cor-countable-independent-copies-exist",
+          "thm-probability-law-and-distribution-function-correspondence",
+          "cor-layer-cake-formulas-for-random-variables",
+          "thm-layer-cake-formula-for-l-p-powers",
+          "def-real-power",
+          "thm-real-power-continuity-and-derivatives",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "def-dependent-choice",
+          "thm-recursion"
+        ],
+        "strategy": "The real-power calculus shows F is nondecreasing, right-continuous, with limits 0 and 1, so the probability-law/CDF correspondence realizes it (its derivative on (1,infinity) is the stated density). Its tail is P(X>t)=1 for 0<=t<1 and t^(-3/2) for t>=1. Layer cake gives E X=1+integral_1^infinity t^(-3/2)dt=3, while the L-p layer-cake formula gives E X^2=1+2 integral_1^infinity t^(-1/2)dt=infinity, using the real-power antiderivatives. AC supplies the countable product (and its CC use); apply the IID L1 law, not a variance result. Integral-interface closure: each displayed density and moment integrand is continuous on every compact subinterval of its support. Continuous integrability and the second FTC evaluate its proper Riemann integrals; the bounded Riemann/Lebesgue agreement theorem (under the already assumed AC, hence countable choice) identifies those with Lebesgue integrals. Increasing compact truncations and MCT give the full nonnegative integrals, including divergent moments. The indefinite-integral theorem first makes the density integral a measure. The computed interval increments and total mass one identify it with the CDF law by finite-measure pi-system uniqueness; differentiability of a CDF alone is not used as a density theorem. In particular on [1,R], integrate (3/2)t^(-5/2), t^(-3/2), and t^(-1/2) using primitives -t^(-3/2), -2t^(-1/2), and 2t^(1/2). The singleton endpoint has Lebesgue measure zero, and the interval identities therefore also hold for half-open intervals. Local choice bridge: restriction of AC to the prescribed countable family gives def-countable-choice. For any serial relation R on a nonempty set A and prescribed a0, AC selects s(a) in {b:a R b} simultaneously for every a∈A. The earlier thm-recursion constructs a_{n+1}=s(a_n) from a0, proving precisely def-dependent-choice. Thus the independent-copy supplier's CC and DC assumptions hold; no later weak-choice theorem is cited.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-nonidentical-strong-law-under-summable-normalized-variances",
+        "kind": "example",
+        "title": "Nonidentical strong law under summable normalized variances",
+        "statement": "Assume AC. Let $(\\epsilon_n)$ be independent copies of $P(\\epsilon=1)=P(\\epsilon=-1)=1/2$, and set $X_n=n^{1/4}\\epsilon_n$. Then $S_n/n\\to0$ almost surely although $\\operatorname{Var}(X_n)=\\sqrt n$ is unbounded.",
+        "deps": [
+          "cor-countable-independent-copies-exist",
+          "thm-kolmogorov-strong-law-under-summable-normalized-variances",
+          "def-probability-measure",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable",
+          "lem-variance-and-covariance-identities-for-random-variables",
+          "def-real-power",
+          "thm-real-power-laws",
+          "thm-p-series-real-exponents",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-recursion"
+        ],
+        "strategy": "The displayed two-point law is a probability measure, and its finite sums give E eps_n=0, E eps_n^2=1, and Var(eps_n)=1. The real-power laws then give E X_n=0 and Var(X_n)=n^(1/2), so Var(X_n)/n^2=n^(-3/2); the real p-series theorem proves summability. Use only the general almost-sure conclusion of the normalized-variance supplier. AC supplies the independent copies; its unused L2 clause is not used here. Local choice bridge: restriction of AC to the prescribed countable family gives def-countable-choice. For any serial relation R on a nonempty set A and prescribed a0, AC selects s(a) in {b:a R b} simultaneously for every a∈A. The earlier thm-recursion constructs a_{n+1}=s(a_n) from a0, proving precisely def-dependent-choice. Thus the independent-copy supplier's CC and DC assumptions hold; no later weak-choice theorem is cited.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-weak-law-does-not-imply-strong-law",
+        "kind": "counterexample",
+        "title": "Weak law does not imply strong law",
+        "statement": "A weak sample-mean law need not be a centered strong law. Assuming AC, there are integrable real $(X_n)$ with $S_n/n\\to0$ in probability but $(S_n-\\mathbb ES_n)/n$ not tending to zero almost surely.",
+        "deps": [
+          "cor-countable-independent-copies-exist",
+          "cor-second-borel-cantelli-lemma-under-pairwise-independence",
+          "def-convergence-in-probability",
+          "def-strong-law-of-large-numbers-for-a-sequence",
+          "def-axiom-of-choice",
+          "lem-measurable-functions-preserve-independence",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-countable-choice",
+          "def-dependent-choice",
+          "thm-recursion"
+        ],
+        "strategy": "On ((0,1),B,Lebesgue), let U(u)=u; thm-lebesgue-measure-of-a-box-of-every-kind gives P(U<=t)=t for 0<t<1. Construct IID copies U_n using the independent-copy supplier and set B_n=1_{U_n<=1/(n+1)}. Measurable coordinate transformations preserve independence. Let B_0=0 and X_n=n B_n-(n-1)B_{n-1}. Then S_n/n=B_n and E S_n/n=1/(n+1)->0. BC2 gives B_n=1 infinitely often and also B_n=0 infinitely often. Thus no almost-sure convergence. The summands X_n need not be independent; the rare events are independent. The bare B_n sequence alone would only refute a convergence-mode implication, not a sample-mean law. Local choice bridge: restriction of AC to the prescribed countable family gives def-countable-choice. For any serial relation R on a nonempty set A and prescribed a0, AC selects s(a) in {b:a R b} simultaneously for every a∈A. The earlier thm-recursion constructs a_{n+1}=s(a_n) from a0, proving precisely def-dependent-choice. Thus the independent-copy supplier's CC and DC assumptions hold; no later weak-choice theorem is cited.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-iid-strong-law-fails-at-infinite-absolute-mean",
+        "kind": "counterexample",
+        "title": "Iid strong law fails at infinite absolute mean",
+        "statement": "Assume AC. IID standard Cauchy variables have standard Cauchy sample means for every positive n. Their averages cannot converge in probability to a finite constant, and cannot converge almost surely to any finite random limit. Here the standard Cauchy law has CDF $F(x)=1/2+\\arctan(x)/\\pi$.",
+        "deps": [
+          "cor-countable-independent-copies-exist",
+          "thm-integrability-is-necessary-for-an-iid-finite-mean-strong-law",
+          "thm-independent-random-elements-have-product-joint-law",
+          "thm-tonelli-theorem-for-sigma-finite-product-spaces",
+          "thm-change-of-variables-for-expectation",
+          "thm-probability-law-and-distribution-function-correspondence",
+          "thm-principal-inverse-tangent-calculus",
+          "thm-substitution-for-improper-integrals",
+          "thm-logarithm-derivative-and-integral",
+          "thm-natural-logarithm-laws",
+          "def-countable-choice",
+          "def-axiom-of-choice",
+          "thm-ftc-second-part",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "thm-measure-uniqueness-on-a-sigma-finite-pi-system",
+          "def-dependent-choice",
+          "thm-recursion",
+          "def-principal-inverse-tangent",
+          "thm-lebesgue-measure-of-a-box-of-every-kind"
+        ],
+        "strategy": "The inverse-tangent calculus makes F(x)=1/2+atan(x)/pi a CDF; the probability-law/CDF correspondence realizes the standard Cauchy law with density f_1(x)=1/[pi(1+x^2)]. The logarithm primitive gives integral |x|f_1(x)dx=infinity, so the necessity theorem rules out any finite almost-sure sample-mean limit. For scale densities f_a, the product joint-law theorem, Tonelli, and improper-integral substitution reduce the sum law to f_a*f_b. With q=x^2+b^2-a^2 and H=q^2+4a^2x^2=(x^2+(a+b)^2)(x^2+(a-b)^2), partial fractions give, for H>0, 1/[(y^2+a^2)((y-x)^2+b^2)]=(Ay+B)/(y^2+a^2)+[-A(y-x)+D]/((y-x)^2+b^2), A=2x/H, B=q/H, D=(x^2+a^2-b^2)/H. On [-R,R], the logarithmic terms have joint limit zero and the inverse-tangent terms give pi(B/a+D/b)=pi(a+b)/(ab(x^2+(a+b)^2)). The only H=0 case is x=0,a=b; this singleton is Lebesgue-null and is not needed for the a.e. density identity. Thus f_a*f_b=f_(a+b) almost everywhere. Induction and scaling make every sample mean standard Cauchy, whose every finite-center neighborhood has probability below one, so it cannot converge in probability to a finite constant. AC supplies the product construction and its CC use. Integral-interface closure: each displayed density and moment integrand is continuous on every compact subinterval of its support. Continuous integrability and the second FTC evaluate its proper Riemann integrals; the bounded Riemann/Lebesgue agreement theorem (under the already assumed AC, hence countable choice) identifies those with Lebesgue integrals. Increasing compact truncations and MCT give the full nonnegative integrals, including divergent moments. The indefinite-integral theorem first makes the density integral a measure. The computed interval increments and total mass one identify it with the CDF law by finite-measure pi-system uniqueness; differentiability of a CDF alone is not used as a density theorem. For each a>0, the primitive of f_a is atan(x/a)/pi; its limits give total mass one. For the moment on [0,R], the primitive of x/(pi(1+x^2)) is log(1+x^2)/(2pi), tending to infinity. Apply the compact integral-agreement bridge to the rational convolution integrand before taking R to infinity; cancellation of logarithmic terms is done on the finite interval, never by subtracting infinite integrals. To justify the sum-density interface without assuming a change-of-variables theorem for arbitrary measurable functions, first test a finite interval (u,v]: the product law and Tonelli give integral f_a(y) integral_(u-y)^(v-y) f_b(z) dz dy. For each fixed y, the compact continuous-integral substitution z=x-y, justified by FTC, changes the inner integral to integral_u^v f_b(x-y) dx. Tonelli then gives the convolution density on that interval; finite-measure pi-system uniqueness extends equality to all Borel sets. The positive scaling of a Cauchy law is likewise verified on intervals by its inverse-tangent CDF and then by uniqueness. Local choice bridge: restriction of AC to the prescribed countable family gives def-countable-choice. For any serial relation R on a nonempty set A and prescribed a0, AC selects s(a) in {b:a R b} simultaneously for every a∈A. The earlier thm-recursion constructs a_{n+1}=s(a_n) from a0, proving precisely def-dependent-choice. Thus the independent-copy supplier's CC and DC assumptions hold; no later weak-choice theorem is cited.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Example 2.2.15 p.65 and Theorem 2.3.8 pp.70–71; convolution evaluated locally without characteristic functions",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-identical-distribution-without-independence-can-defeat-the-mean-law",
+        "kind": "counterexample",
+        "title": "Identical distribution without independence can defeat the mean law",
+        "statement": "Identical integrable marginals alone do not imply the strong mean law: on $\\{0,1\\}$ with equal masses, set $X(\\omega)=\\omega$ and $X_n=X$ for every n.",
+        "deps": [
+          "def-strong-law-of-large-numbers-for-a-sequence",
+          "def-probability-measure",
+          "def-expectation-of-a-nonnegative-or-integrable-random-variable"
+        ],
+        "strategy": "The displayed two-atom assignment is a probability measure and its finite expectation sum gives E X=1/2. Since every X_n=X, S_n/n=X, whose deviation from 1/2 has absolute value 1/2 on both atoms. Marginals are identical but coordinates are dependent.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.109,
+    "id": "weak-convergence-tightness-and-representation",
+    "kind": "A",
+    "category": "probability",
+    "title": "Weak Convergence Tightness and Representation",
+    "companion": "weak-convergence-tightness-and-representation-examples",
+    "requires": [
+      "probability-spaces-random-variables-and-expectation",
+      "infinite-product-measures-and-kolmogorov-extension",
+      "modes-of-convergence-for-random-variables",
+      "metric-spaces",
+      "compactness-in-metric-spaces",
+      "complete-metrizability-and-baire",
+      "radon-measures-and-the-riesz-markov-kakutani-theorem",
+      "strong-laws-of-large-numbers",
+      "improper-and-parameter-dependent-multiple-integrals",
+      "the-lebesgue-and-riemann-integrals-compared",
+      "the-lebesgue-integral-and-the-convergence-theorems"
+    ],
+    "items": [
+      {
+        "id": "def-borel-probability-law-on-a-polish-space",
+        "kind": "definition",
+        "title": "Borel probability law on a polish space",
+        "statement": "Let S be Polish in the sense of [[def-polish-space]]. A **Borel probability law on S** is a countably additive measure on $\\mathcal B(S)$ with total mass one. Here $\\mathcal B(S)$ is [[def-borel-sigma-algebra]] and probability measure means [[def-probability-measure]]. A compatible complete metric may be fixed for a construction; it is not additional data in the law. The empty space admits no such law, since its measure must be both zero and one.",
+        "deps": [
+          "def-polish-space",
+          "def-probability-measure",
+          "def-borel-sigma-algebra"
+        ],
+        "strategy": "Reuse the topological definition of Polish. An empty space carries no probability law.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, §2, p. 3",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-weak-convergence-of-borel-probability-measures",
+        "kind": "definition",
+        "title": "Weak convergence of borel probability measures",
+        "statement": "For Borel probability measures $\\mu_n,\\mu$ on a metric space S, write $\\mu_n\\Rightarrow\\mu$ if $\\int f\\,d\\mu_n\\to\\int f\\,d\\mu$ for every bounded continuous real function f on S. Continuity is [[def-metric-continuity]]. Such f is Borel measurable (inverse images of open sets are open) and $\\int|f|\\,d\\mu\\le\\|f\\|_\\infty\\mu(S)<\\infty$, so the integrals are finite in [[def-integrable-real-and-complex-functions-and-their-integrals]]. No completeness or coupling is required.",
+        "deps": [
+          "def-probability-measure",
+          "def-borel-sigma-algebra",
+          "def-metric-continuity",
+          "def-integrable-real-and-complex-functions-and-their-integrals"
+        ],
+        "strategy": "Bounded Borel functions are integrable for probability measures. The definition also applies beyond Polish spaces.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, Definition 3.1, pp. 6–7",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-convergence-in-distribution-of-random-elements",
+        "kind": "definition",
+        "title": "Convergence in distribution of random elements",
+        "statement": "Random elements $X_n,X$ with values in the same metric space **converge in distribution**, written $X_n\\Rightarrow X$, if their laws from [[def-law-or-distribution-of-a-random-element]] satisfy $P_{X_n}\\Rightarrow P_X$ in [[def-weak-convergence-of-borel-probability-measures]]. They may be defined on different probability spaces. The definition specifies only their marginal laws.",
+        "deps": [
+          "def-law-or-distribution-of-a-random-element",
+          "def-weak-convergence-of-borel-probability-measures"
+        ],
+        "strategy": "Use pushforward laws, without choosing a coupling.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, Definition 3.1 applied to laws",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-portmanteau-theorem",
+        "kind": "theorem",
+        "title": "Portmanteau theorem",
+        "statement": "For Borel probabilities $\\mu_n,\\mu$ on a metric space S, the following are equivalent: (i) $\\mu_n\\Rightarrow\\mu$; (ii) integrals converge for all bounded uniformly continuous real tests; (iii) $\\limsup_n\\mu_n(F)\\le\\mu(F)$ for every closed F; (iv) $\\liminf_n\\mu_n(G)\\ge\\mu(G)$ for every open G; (v) $\\mu_n(A)\\to\\mu(A)$ for every Borel A with $\\mu(\\partial A)=0$.",
+        "deps": [
+          "def-weak-convergence-of-borel-probability-measures",
+          "lem-distance-to-set-is-lipschitz",
+          "thm-dominated-convergence",
+          "thm-continuity-from-above-for-measures",
+          "thm-dynkin-pi-lambda",
+          "thm-change-of-variables-for-expectation"
+        ],
+        "strategy": "Use f_m=(1-m d(x,F))_+ for nonempty closed F, handle F=empty separately, then complements and interior/closure sandwich. For continuity sets=>tests, partition the bounded range of f into intervals whose endpoints have zero f_*mu mass, bound f by finite simple functions with uniform error. Finitely many endpoints suffice; countably many atoms are excluded by finite measure. No compactness or Skorokhod used.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, Theorem 3.2, pp. 7–9",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-real-cdf-and-bounded-continuous-definitions-agree",
+        "kind": "lemma",
+        "title": "Real cdf and bounded continuous definitions agree",
+        "statement": "For real random variables, the CDF continuity-point definition of convergence in distribution agrees with weak convergence of their laws.",
+        "deps": [
+          "thm-portmanteau-theorem",
+          "def-convergence-in-distribution-for-real-random-variables",
+          "thm-continuity-from-above-for-measures",
+          "thm-continuity-from-below-for-measures",
+          "thm-heine-borel-rn"
+        ],
+        "strategy": "Weak convergence gives convergence on (-infinity,t] at nonatoms. Conversely partition a bounded interval at continuity points, control both tails using CDFs there, and approximate each bounded continuous test uniformly on that interval.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Theorem 3.2.9, pp. 119–120",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-weak-limits-are-unique",
+        "kind": "corollary",
+        "title": "Weak limits are unique",
+        "statement": "Bounded continuous real tests determine Borel probability measures on any metric space. In particular, weak limits are unique.",
+        "deps": [
+          "thm-portmanteau-theorem",
+          "thm-dynkin-pi-lambda"
+        ],
+        "strategy": "Equal test integrals give equal closed-set masses by distance approximations; closed sets form a pi-system generating Borel sets. Use finite-measure uniqueness.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, Theorem 4.1, definiteness argument, pp. 9–10",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-continuous-mapping-theorem",
+        "kind": "theorem",
+        "title": "Continuous mapping theorem",
+        "statement": "Let S,T be metric spaces, $g:S\\to T$ measurable, and $\\mu_n\\Rightarrow\\mu$. If the discontinuity set $D_g$ is $\\mu$-null, then $g_*\\mu_n\\Rightarrow g_*\\mu$. Consequently $X_n\\Rightarrow X$ implies $g(X_n)\\Rightarrow g(X)$ whenever $P_X(D_g)=0$.",
+        "deps": [
+          "thm-portmanteau-theorem",
+          "lem-laws-commute-with-measurable-maps",
+          "def-metric-continuity"
+        ],
+        "strategy": "For closed F in T, closure(g^-1 F) is contained in g^-1 F union D_g. Apply the closed-set bound. Prove D_g is Borel via local oscillation: continuity set is intersection over r of the open set of points having a neighborhood with image diameter<1/r.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, Theorem 3.2; local closed-preimage argument",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-converging-together-lemma",
+        "kind": "theorem",
+        "title": "Converging together lemma",
+        "statement": "Let $X_n$ and $Y_n$ be Borel-measurable random elements with values in a metric space $S$, on the same probability space for each $n$, and let $X$ be an $S$-valued Borel-measurable random element. Suppose $d(X_n,Y_n)$ is measurable and $P(d(X_n,Y_n)>\\varepsilon)\\to0$ for every $\\varepsilon$>0. If $X_n\\Rightarrow X$, then $Y_n\\Rightarrow X$.",
+        "deps": [
+          "thm-portmanteau-theorem",
+          "thm-continuity-from-above-for-measures",
+          "def-convergence-in-probability",
+          "lem-distance-to-set-is-lipschitz"
+        ],
+        "strategy": "For closed F, P(Y_n in F)<=P(X_n in {d(x,F)<=epsilon})+P(d(X_n,Y_n)>epsilon). Apply portmanteau to the closed enlargement and decrease epsilon to zero. No unproved product weak convergence needed.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, Theorem 3.2 and closed-neighborhood argument",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-tight-family-of-probability-measures",
+        "kind": "definition",
+        "title": "Tight family of probability measures",
+        "statement": "A family $\\mathcal A$ of Borel probabilities on a metric space S is **tight** if, for every $\\varepsilon>0$, there is a compact $K\\subseteq S$ such that $\\mu(S\\setminus K)<\\varepsilon$ for every $\\mu\\in\\mathcal A$. One K must work for the whole family. Compactness is [[def-metric-compactness]]. The empty family is tight, witnessed by the empty compact set.",
+        "deps": [
+          "def-metric-compactness",
+          "def-probability-measure"
+        ],
+        "strategy": "Use one compact set for the entire family.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, Definition 5.1, p. 14",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "def-relative-sequential-compactness-for-weak-convergence",
+        "kind": "definition",
+        "title": "Relative sequential compactness for weak convergence",
+        "statement": "A family $\\mathcal A$ of Borel probabilities on a metric space is **relatively sequentially compact for weak convergence** if every sequence from $\\mathcal A$ has a subsequence converging weakly to a Borel probability on the same state space. The limit need not belong to $\\mathcal A$. Weak convergence means [[def-weak-convergence-of-borel-probability-measures]].",
+        "deps": [
+          "def-weak-convergence-of-borel-probability-measures"
+        ],
+        "strategy": "Distinguish relative sequential compactness from compactness of the family itself.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, Theorem 5.2, p. 14 (closure of the family)",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "thm-every-borel-probability-on-a-polish-space-is-tight",
+        "kind": "theorem",
+        "title": "Every borel probability on a polish space is tight",
+        "statement": "Assume AC. Every Borel probability on a Polish space S is tight.",
+        "deps": [
+          "def-borel-probability-law-on-a-polish-space",
+          "def-tight-family-of-probability-measures",
+          "thm-borel-probability-measures-on-polish-spaces-are-inner-regular",
+          "def-axiom-of-choice",
+          "thm-continuity-from-below-for-measures",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-complete-and-totally-bounded-implies-compact"
+        ],
+        "strategy": "Apply the published inner-regularity theorem to the whole space. Also display its complete-metric finite-net proof: intersect finite unions of closed balls with summable probability losses, then completeness plus total boundedness. Propagate its countable-choice hypothesis via the authorized AC assumption.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, Theorem 2.6, pp. 5–6",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-countable-uniformly-dense-tests-on-a-compact-metric-space",
+        "kind": "lemma",
+        "title": "Countable uniformly dense tests on a compact metric space",
+        "statement": "Assume AC. For a compact metric K, $C(K;\\mathbb R)$ has a countable uniformly dense subset in the supremum norm.",
+        "deps": [
+          "def-metric-compactness",
+          "def-totally-bounded",
+          "lem-distance-to-set-is-lipschitz",
+          "thm-compact-implies-complete-and-totally-bounded",
+          "def-axiom-of-choice",
+          "thm-heine-cantor-metric"
+        ],
+        "strategy": "Choose finite 1/m-nets. With a fixed countable dense union D, use finite minima of rational constants plus integer multiples of d(x,a), clipped at rational bounds. Uniform continuity on K allows Lipschitz inf-envelope approximation of any continuous f, then approximate finitely many coefficients and centers. Prove both approximation inequalities explicitly; constant functions cover a singleton and K=empty separately. Detailed estimate: given |f|<=M and tolerance eta, choose delta for oscillation<eta and an integer L with L delta>2M. Then g(x)=inf_y[f(y)+L d(x,y)] satisfies f(x)-eta<=g(x)<=f(x). Replace the infimum by a minimum over a sufficiently fine finite net and replace each f(a) by a rational within eta. The net error is <=eta+L times its mesh, uniformly in x; make both small. Clip at rational bounds containing f(K). The countable collection of all such finite rational formulas on the fixed D is dense.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, Proposition 5.3, pp. 15–16; explicit countable-test replacement for its Alaoglu step",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-probability-laws-on-a-compact-metric-space-have-weakly-convergent-subsequences",
+        "kind": "lemma",
+        "title": "Probability laws on a compact metric space have weakly convergent subsequences",
+        "statement": "Assume AC. Every sequence of Borel probability laws on a compact metric K has a subsequence converging weakly to a Borel probability on K.",
+        "deps": [
+          "lem-countable-uniformly-dense-tests-on-a-compact-metric-space",
+          "def-weak-convergence-of-borel-probability-measures",
+          "thm-rmk-positive-functional-is-integration-against-its-representing-measure",
+          "thm-bolzano-weierstrass",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Diagonalize bounded integrals on the countable dense tests. Uniform approximation extends the limits to a positive linear functional L on C(K) with L(1)=1. Apply the published positive RMK representation on compact Hausdorff K, where C_c(K)=C(K), to obtain a probability measure. This avoids using Banach-Alaoglu or confusing compactness with sequential compactness. RMK uniqueness is not needed: any representing probability measure is an adequate subsequential limit.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, Proposition 5.3 and §6; diagonal replacement for compact-case functional argument",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-prokhorov-tightness-theorem-on-polish-spaces",
+        "kind": "theorem",
+        "title": "Prokhorov tightness theorem on polish spaces",
+        "statement": "Assume AC. A family $\\mathcal A$ of Borel probabilities on a Polish space S is tight if and only if it is relatively sequentially compact for weak convergence.",
+        "deps": [
+          "def-tight-family-of-probability-measures",
+          "def-relative-sequential-compactness-for-weak-convergence",
+          "thm-every-borel-probability-on-a-polish-space-is-tight",
+          "lem-probability-laws-on-a-compact-metric-space-have-weakly-convergent-subsequences",
+          "thm-portmanteau-theorem",
+          "thm-hilbert-cube-universal-for-separable-metrizable-spaces",
+          "thm-complete-and-totally-bounded-implies-compact",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "thm-continuity-from-below-for-measures",
+          "def-axiom-of-choice",
+          "lem-standard-complete-metric-on-a-countable-product"
+        ],
+        "strategy": "Forward: embed S homeomorphically into the Hilbert cube H, extract a subsequence of pushed laws by the compact-law lemma, and take compact K_m in S with uniform loss<1/m. Portmanteau gives limit mass one on E=union_m image(K_m), a Borel subset of image(S). Define mu(B)=nu(E intersect image(B)); image(B) is Borel relative to image(S), hence E intersect image(B) is Borel in H. For closed F in S, choose closed Z in H with Z intersect image(S)=image(F); then mu_n(F)=nu_n(Z), and nu(Z)=mu(F). Portmanteau proves convergence. Reverse: for any countable open cover U_i and epsilon>0, failure of a uniform finite initial cover gives mu_n(union_{i<=n} U_i)<=1-epsilon. Extract a weak limit and use open bounds for each fixed initial union, contradicting continuity from below. Apply this uniform-cover fact to dense balls at each scale, take finite CLOSED ball unions and intersect; summable losses and complete total boundedness yield a common compact K. AC supplies selections; no local compactness of S is assumed. For the Hilbert cube, the published weighted countable-product metric is complete; finite rational meshes on finitely many coordinates and a small geometric tail prove total boundedness. Thus the compact-law lemma applies without invoking an undeclared Tychonoff theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, Theorem 5.2, Proposition 5.3, Lemma 5.4, pp. 14–18",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-weakly-convergent-sequences-are-tight",
+        "kind": "corollary",
+        "title": "Weakly convergent sequences are tight",
+        "statement": "Assume AC. If $\\mu_n\\Rightarrow\\mu$ on a Polish space, then $\\{\\mu,\\mu_1,\\mu_2,\\ldots\\}$ is tight.",
+        "deps": [
+          "thm-prokhorov-tightness-theorem-on-polish-spaces",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Any sequence selected from this set has a constant subsequence or a subsequence whose indices tend to infinity, and thus a weak limit. Apply Prokhorov.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cor-tightness-extracts-a-weakly-convergent-subsequence",
+        "kind": "corollary",
+        "title": "Tightness extracts a weakly convergent subsequence",
+        "statement": "Assume AC. A tight sequence of Borel probability laws on a Polish S has a subsequence converging weakly to a Borel probability on that same S.",
+        "deps": [
+          "thm-prokhorov-tightness-theorem-on-polish-spaces",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Use the forward implication; mass stays one.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-levy-prokhorov-metric",
+        "kind": "definition",
+        "title": "Levy prokhorov metric",
+        "statement": "For Borel probabilities $\\mu$,$\\nu$ on a metric space S, put $F^{[\\varepsilon]}=\\{x:d(x,F)\\le\\varepsilon\\}$ for nonempty closed F, and $\\varnothing^{[\\varepsilon]}=\\varnothing$. Define $\\pi(\\mu,\\nu)$ as the infimum of $\\varepsilon$>0 such that, for every closed F, both $\\mu(F)\\le\\nu(F^{[\\varepsilon]})+\\varepsilon$ and $\\nu(F)\\le\\mu(F^{[\\varepsilon]})+\\varepsilon$. The admissible set contains every $\\varepsilon$>=1 and is bounded below by zero, so its real infimum exists by [[thm-infimum-property]]. Enlargements are closed because distance to a nonempty set is continuous. [[lem-distance-to-set-is-lipschitz]] The metric assertion is proved in the following lemma.",
+        "deps": [
+          "def-probability-measure",
+          "def-metric-bounded-diameter",
+          "thm-infimum-property",
+          "lem-distance-to-set-is-lipschitz"
+        ],
+        "strategy": "The admissible set contains every epsilon>=1, and is bounded below by zero. Fix CLOSED enlargements and closed test sets as in the design; the metric lemma proves equivalence to the standard open-enlargement Borel-set convention by arbitrarily small epsilon slack.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, §4, pp. 9–10 (open-enlargement convention; equivalence must be proved locally)",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-levy-prokhorov-distance-is-a-metric",
+        "kind": "lemma",
+        "title": "Levy prokhorov distance is a metric",
+        "statement": "The closed-set definition of $\\pi$ is a metric on Borel probabilities on any metric space, and $0\\le\\pi\\le1$. It equals the infimum obtained by testing all Borel B and using open enlargements $B^\\varepsilon=\\{x:d(x,B)<\\varepsilon\\}$, with empty enlargement empty.",
+        "deps": [
+          "def-levy-prokhorov-metric",
+          "thm-continuity-from-above-for-measures",
+          "thm-dynkin-pi-lambda",
+          "lem-distance-to-set-is-lipschitz"
+        ],
+        "strategy": "Symmetry and self-distance are immediate. For triangle use (F^[a])^[b] subset F^[a+b], with all these sets closed. Infimum zero gives agreement on every closed F by continuity from above, then Borel uniqueness. For equivalence, B subset closure(B) and closure(B)^[a] subset B^(a+delta); conversely closed enlargement contains open enlargement. Let delta decrease to zero. This uses no compact-inner regularity in non-Polish spaces.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, Theorem 4.1, pp. 9–10",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-countable-boundary-null-partitions-of-a-separable-metric-space",
+        "kind": "lemma",
+        "title": "Countable boundary null partitions of a separable metric space",
+        "statement": "Assume AC. For a separable metric S with Borel probability $\\mu$, there are countable refining Borel partitions $\\mathcal P_k$ for $k\\ge1$, all of whose nonempty atoms have diameter at most $2^{-k}$ and $\\mu$-null boundary. Together these partitions generate $\\mathcal B(S)$.",
+        "deps": [
+          "def-separable-space",
+          "def-metric-ball",
+          "thm-finite-and-countable-subadditivity-of-measures",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Choose a countable dense set. For each center and scale choose a radius in a fixed interval avoiding the countably many radii with positive-measure spheres; the balls cover S. Disjointize by subtracting earlier balls and refine finitely many levels. Each atom boundary lies in a finite union of selected sphere boundaries; each level countable. Any open set is the union of the atoms whose diameter is small enough and that contain its points. Empty atoms are discarded. AC covers all countable choices of radii and atom representatives.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, Lemma 4.3, pp. 10–11; refining-partition consequence",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-levy-prokhorov-metric-metrizes-weak-convergence",
+        "kind": "theorem",
+        "title": "Levy prokhorov metric metrizes weak convergence",
+        "statement": "Assume AC. For Borel probabilities on a separable metric space, $\\pi(\\mu_n,\\mu)\\to0$ if and only if $\\mu_n\\Rightarrow\\mu$. Completeness is not required.",
+        "deps": [
+          "lem-levy-prokhorov-distance-is-a-metric",
+          "lem-countable-boundary-null-partitions-of-a-separable-metric-space",
+          "thm-portmanteau-theorem",
+          "thm-continuity-from-below-for-measures",
+          "def-axiom-of-choice",
+          "thm-continuity-from-above-for-measures"
+        ],
+        "strategy": "Metric convergence gives closed-set bounds via shrinking enlargements. Conversely take finitely many small boundary-null balls covering mu-mass>1-delta. Their finitely many unions have converging masses; for any Borel B take the union of the selected balls meeting B. It lies in B^epsilon and covers B except for the small-mass complement. Both inequalities follow with total error<=3delta, delta<epsilon/3. Use slack to match closed-neighborhood convention.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, Theorem 4.2 and Lemma 4.3, pp. 10–12",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-interval-realization-from-refining-small-diameter-partitions",
+        "kind": "lemma",
+        "title": "Interval realization from refining small diameter partitions",
+        "statement": "Assume AC. Let S be nonempty, complete and separable, and let $(\\mathcal P_k)$ be countable refining Borel partitions with nonempty atoms of diameter at most $2^{-k}$. Fix orders on each family of children. Every Borel probability $\\sigma$ on S is the law of a measurable $T_\\sigma:(0,1)\\to S$ under Borel Lebesgue probability, obtained by nested interval allocation.",
+        "deps": [
+          "lem-countable-boundary-null-partitions-of-a-separable-metric-space",
+          "cor-weak-limits-are-unique",
+          "thm-dominated-convergence",
+          "def-complete-metric-space",
+          "def-axiom-of-choice",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "prop-countable-subsets-of-rn-are-lebesgue-null",
+          "def-countable-choice"
+        ],
+        "strategy": "Allocate half-open intervals of lengths sigma(A) inside each parent interval in a fixed child ordering, discarding the countable set of all endpoints. Select a representative x_A from each nonempty atom. For any remaining u, selected atoms are nested and representatives are Cauchy, so completeness yields T_sigma(u); use a fixed base point on the endpoint set. Measurability follows as a pointwise limit of countably valued measurable maps: preimages of closed F are expressed using d(x_A,F) and countable operations. For each bounded Lipschitz f, the integral of the representative map equals sum sigma(A)f(x_A) and differs from integral f dsigma by at most Lip(f)2^-k. DCT identifies the law of T_sigma with sigma; distance test functions determine closed-set masses. Do NOT assert that nested half-open atoms intersect or that the limit belongs to its atom. Work on ((0,1), B((0,1)), Lebesgue): the box theorem gives each allocated interval its prescribed length and total mass one; the countable-null-set proposition removes all endpoints. The assumed AC supplies CC by restricting a choice function to the given countably indexed family. Endpoint sets and intervals are Borel; their nullity therefore holds for the Borel restriction without completing the probability space.",
+        "sources": {
+          "references": [
+            {
+              "title": "Advanced Probability, Theorem 5.29, pp. 65–67; representative-limit repair of the nonclosed-atom intersection step",
+              "url": "https://www.mat.univie.ac.at/~mathias/Advanced_Probability.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-skorokhod-representation-on-polish-spaces",
+        "kind": "theorem",
+        "title": "Skorokhod representation on polish spaces",
+        "statement": "Assume AC. If $\\mu_n\\Rightarrow\\mu$ on a Polish S, there are random elements $Y_n,Y$ on $((0,1),\\mathcal B((0,1)),\\lambda)$ with laws $\\mu_n,\\mu$ and $Y_n\\to Y$ almost surely.",
+        "deps": [
+          "lem-countable-boundary-null-partitions-of-a-separable-metric-space",
+          "lem-interval-realization-from-refining-small-diameter-partitions",
+          "thm-portmanteau-theorem",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Choose partitions with mu-null boundaries and a compatible complete metric. Realize all laws with identical atom order and representatives. Every fixed atom mass converges; each of its interval endpoints is a finite sum within its parent plus the parent endpoint, so endpoints converge inductively down any fixed finite address. For u outside the countable collection of limit endpoints, every fixed-level chosen atom for mu_n eventually equals the mu atom. The two representative limits lie in that atom's closure, giving distance<=2^-k. Intersect the exceptional null sets for countably many laws and levels. Completeness is essential to construct the limits.",
+        "sources": {
+          "references": [
+            {
+              "title": "Advanced Probability, Theorem 5.29, pp. 65–67, repaired as in the preceding lemma",
+              "url": "https://www.mat.univie.ac.at/~mathias/Advanced_Probability.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "rem-skorokhod-representation-does-not-couple-the-original-variables",
+        "kind": "remark",
+        "title": "Skorokhod representation does not couple the original variables",
+        "statement": "[[thm-skorokhod-representation-on-polish-spaces]] constructs new random elements with the prescribed marginal laws. It gives almost-sure convergence on that new probability space. It does not assert almost-sure convergence of any originally given variables, and it does not preserve their joint distribution.",
+        "deps": [
+          "thm-skorokhod-representation-on-polish-spaces"
+        ],
+        "strategy": "State the coupling warning explicitly.",
+        "sources": {
+          "references": [
+            {
+              "title": "Advanced Probability, Theorem 5.29",
+              "url": "https://www.mat.univie.ac.at/~mathias/Advanced_Probability.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-countable-compactly-supported-tests-determine-euclidean-weak-convergence",
+        "kind": "lemma",
+        "title": "Countable compactly supported tests determine euclidean weak convergence",
+        "statement": "For each finite $d\\ge1$ there is a countable uniformly dense subset $\\mathcal D$ of $C_c(\\mathbb R^d;\\mathbb R)$ containing nonnegative compact cutoffs $\\chi_m\\uparrow1$. If Borel probabilities $\\mu_n,\\mu$ have $\\int h\\,d\\mu_n\\to\\int h\\,d\\mu$ for every $h\\in\\mathcal D$, then $\\mu_n\\Rightarrow\\mu$.",
+        "deps": [
+          "def-weak-convergence-of-borel-probability-measures",
+          "thm-portmanteau-theorem",
+          "thm-heine-borel-rn",
+          "thm-monotone-convergence-for-the-integral"
+        ],
+        "strategy": "Use compactly supported piecewise multilinear functions on rational rectangular grids with rational vertex values that are zero at every boundary vertex of an integer cube, and extend them by zero. Face interpolation then makes the extension continuous. Given f in C_c, choose a cube whose boundary misses supp(f); uniform continuity, a finite rational grid, and rational approximation of the zero boundary values give uniform density. Include rational piecewise-multilinear cutoffs chi_m equal to one on [-m,m]^d and zero outside [-m-1,m+1]^d. Test convergence for a cutoff of mu-integral near one bounds the mass outside its support uniformly for late n. Approximate a bounded continuous test times a larger cutoff in C_c; the remaining integrals are bounded by the small tails. No assertion that C_b(R^d) is norm separable. Uniform continuity on the selected Euclidean cube follows directly from compactness by a finite ball cover; the grid and rational approximants are chosen finitely for each tolerance, so no arbitrary selection principle is used. The nonnegative cutoffs increase pointwise to 1, so integral monotone convergence gives integral chi_m dmu increasing to 1; convergence of a bounded numerical sequence alone would not identify that limit.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, compact-test approximation in Proposition 5.3 and tightness transfer; explicit Euclidean construction",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-empirical-measures-of-iid-euclidean-samples-converge-weakly",
+        "kind": "theorem",
+        "title": "Empirical measures of iid euclidean samples converge weakly",
+        "statement": "For IID $\\mathbb R^d$-valued samples $(X_i)$ with common law $\\mu$ and finite $d\\ge1$, the empirical probabilities $\\widehat\\mu_n=n^{-1}\\sum_{i=1}^n\\delta_{X_i}$ converge weakly to $\\mu$ almost surely on one common event.",
+        "deps": [
+          "thm-kolmogorov-iid-l1-strong-law",
+          "lem-countable-compactly-supported-tests-determine-euclidean-weak-convergence",
+          "lem-measurable-functions-preserve-independence",
+          "thm-change-of-variables-for-expectation",
+          "thm-finite-and-countable-subadditivity-of-measures"
+        ],
+        "strategy": "Apply the strong law to each member of the countable C_c class, intersect full-measure events, then use its determining property. The owned manifest declares strong-laws-of-large-numbers as a backward prerequisite (288.107 < 288.109). The current canonical plan contains that same backward prerequisite. The SLLN dependency supplies the countably many test-average limits and is retained.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, strong law Theorem 2.5.10 plus countable-test argument",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-normal-density-has-total-mass-one",
+        "kind": "lemma",
+        "title": "The standard normal density has total mass one",
+        "statement": "Assume AC. The function $\\phi(x)=e^{-x^2/2}/\\sqrt{2\\pi}$ is positive and Borel measurable on $\\mathbb R$, with Lebesgue integral one.",
+        "deps": [
+          "thm-gaussian-integral",
+          "thm-substitution",
+          "thm-continuous-implies-integrable",
+          "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral",
+          "thm-monotone-convergence-for-the-integral",
+          "thm-exponential-definition-equivalence",
+          "thm-derivative-of-exponential",
+          "cor-continuous-functions-are-borel-measurable",
+          "thm-of-square-roots",
+          "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "strategy": "Use exp positivity and differentiability to obtain a positive continuous Borel function. On [-n,n], ordinary one-variable substitution t=x/sqrt(2), with constant derivative 1/sqrt(2), gives integral exp(-x^2/2) dx = sqrt(2) integral from -n/sqrt(2) to n/sqrt(2) exp(-t^2) dt. The compact Riemann/Lebesgue comparison applies because the functions are continuous, bounded and Riemann integrable; AC supplies its explicitly required countable choice by applying AC directly to the countably indexed family of nonempty sets; repeated sets reuse their selected member. Monotone convergence of the nonnegative truncations to R gives the Lebesgue integral as the limit of those compact integrals. The earlier Gaussian integral, proved as an improper Riemann integral, makes the limit sqrt(2)*sqrt(pi)=sqrt(2*pi); square-root uniqueness proves the last equality. Homogeneity gives mass one. This uses no later multidimensional Borel/Radon bridge, characteristic function, or normal-law theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Example 1.6.11, p.34; local normalization from the earlier published Gaussian integral",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-standard-normal-and-normal-laws",
+        "kind": "definition",
+        "title": "Standard normal and normal laws",
+        "statement": "Assume AC. Define $\\gamma(E)=\\int_E e^{-x^2/2}/\\sqrt{2\\pi}\\,dx$ for Borel E in $\\mathbb R$. By [[lem-normal-density-has-total-mass-one]] and [[thm-indefinite-integral-of-a-nonnegative-function-is-a-measure]], gamma is a probability measure; denote it $N(0,1)$. For $m\\in\\mathbb R$ and $\\sigma\\ge0$, define $N(m,\\sigma^2)$ as the law of $x\\mapsto m+\\sigma x$ on $(\\mathbb R,\\mathcal B,\\gamma)$. This affine map is continuous: for $\\sigma$>0 choose $\\delta$=$\\varepsilon$/$\\sigma$, and for $\\sigma$=0 it is constant. Its inverse images of opens are open, so it is Borel measurable. [[lem-law-of-a-random-element-is-a-probability-measure]] makes its pushforward a probability. When $\\sigma$=0, the preimage of E is all of R if m belongs to E and empty otherwise, so $N(m,0)=\\delta_m$ in [[def-dirac-measure]].",
+        "deps": [
+          "lem-normal-density-has-total-mass-one",
+          "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure",
+          "def-probability-measure",
+          "def-law-or-distribution-of-a-random-element",
+          "lem-law-of-a-random-element-is-a-probability-measure",
+          "cor-continuous-functions-are-borel-measurable",
+          "def-dirac-measure",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "The preceding positive Borel density induces a measure by the published indefinite-integral theorem, and its computed total mass is one. Every affine map is continuous by the epsilon-delta estimate |(m+sigma*x)-(m+sigma*y)|=sigma*|x-y| (constant case separate), hence Borel measurable. Its pushforward is a probability measure by the published law lemma. When sigma=0 its inverse image of E is all R if m belongs to E and empty otherwise, exactly delta_m. These definitions precede every Gaussian example; no characteristic-function theorem, variance computation or unproved multivariate construction is consumed.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Probability: Theory and Examples, Example 1.6.11, p.34; local normalization from the earlier published Gaussian integral",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        }
+      }
+    ]
+  },
+  {
+    "order": 288.11,
+    "id": "weak-convergence-tightness-and-representation-examples",
+    "kind": "B",
+    "category": "probability",
+    "title": "Weak Convergence Tightness and Representation — Examples",
+    "companion": "weak-convergence-tightness-and-representation",
+    "requires": [
+      "weak-convergence-tightness-and-representation"
+    ],
+    "items": [
+      {
+        "id": "ex-dirac-laws-converge-weakly-exactly-when-their-points-converge",
+        "kind": "example",
+        "title": "Dirac laws converge weakly exactly when their points converge",
+        "statement": "On a metric space S, $\\delta_{x_n}\\Rightarrow\\delta_x$ if and only if $x_n\\to x$. For example, on the real line $\\delta_{1/(n+1)}\\Rightarrow\\delta_0$.",
+        "deps": [
+          "def-weak-convergence-of-borel-probability-measures",
+          "thm-portmanteau-theorem"
+        ],
+        "strategy": "Forward test min(1,d(.,x)); reverse use continuity of each test.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, §9, Dirac embedding",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-uniform-laws-on-expanding-finite-grids-converge-to-uniform-zero-one",
+        "kind": "example",
+        "title": "Uniform laws on expanding finite grids converge to uniform zero one",
+        "statement": "Assume AC. For $n\\ge1$, the laws $\\mu_n=n^{-1}\\sum_{k=1}^n\\delta_{k/n}$ converge weakly to Lebesgue probability on [0,1].",
+        "deps": [
+          "def-weak-convergence-of-borel-probability-measures",
+          "thm-heine-cantor-r",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "def-axiom-of-choice",
+          "def-countable-choice",
+          "prop-the-nonnegative-integral-agrees-with-the-simple-integral",
+          "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "thm-integral-triangle-inequality"
+        ],
+        "strategy": "AC supplies countable choice by restricting its selection function to a countably indexed family; this is the inherited assumption used by Heine-Cantor and the Lebesgue-box theorem. Let lambda be Lebesgue measure restricted to [0,1], of total mass one. The grid law assigns each k/n mass 1/n; countable additivity follows by summing the membership indicators of its finitely many atoms. For bounded continuous real f, put s_n(x)=f(k/n) on ((k-1)/n,k/n] and s_n(0)=f(0). The singleton {0} is null and each interval has mass 1/n, so the simple integral gives integral s_n dlambda = n^-1 sum f(k/n) = integral f dmu_n. Uniform continuity makes |s_n-f| uniformly less than any prescribed epsilon for sufficiently large n. Linearity, the real integral triangle inequality and monotonicity bound the absolute integral difference by epsilon times lambda([0,1])=epsilon. This proves weak convergence directly, without a Riemann/Lebesgue identification theorem. No arbitrary choice is used by the finite grid calculation itself.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §3.2.1, weak convergence examples; elementary Riemann sum specialization",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-tightness-from-a-uniform-moment-bound",
+        "kind": "example",
+        "title": "Tightness from a uniform moment bound",
+        "statement": "For a family $\\mathcal A$ of probability laws on $\\mathbb R^d$ with finite $d\\ge1$, if $p>0$ and $\\sup_{\\mu\\in\\mathcal A}\\int\\|x\\|^p\\,d\\mu\\le C<\\infty$, then the family is tight.",
+        "deps": [
+          "def-tight-family-of-probability-measures",
+          "cor-markov-inequality-for-random-variables",
+          "thm-heine-borel-rn",
+          "lem-metrics-on-rn",
+          "def-real-power",
+          "thm-real-power-laws",
+          "thm-real-power-continuity-and-derivatives"
+        ],
+        "strategy": "lem-metrics-on-rn identifies ||x|| as the Euclidean distance to zero. For R>0, the real-power laws identify {|x|>R} with {||x||^p>R^p}; Markov gives mass at most C/R^p. Closed Euclidean balls are compact by Heine--Borel, so choosing R with C/R^p<epsilon proves tightness.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Theorem 3.2.14, p. 123",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-weak-convergence-of-gaussian-laws-by-parameters",
+        "kind": "example",
+        "title": "Weak convergence of gaussian laws by parameters",
+        "statement": "Assume AC. If $m_n\\to m$ and $\\sigma_n\\ge0$ with $\\sigma_n\\to\\sigma\\ge0$, then $N(m_n,\\sigma_n^2)\\Rightarrow N(m,\\sigma^2)$, including $N(m,0)=\\delta_m$.",
+        "deps": [
+          "def-weak-convergence-of-borel-probability-measures",
+          "thm-dominated-convergence",
+          "thm-change-of-variables-for-expectation",
+          "def-standard-normal-and-normal-laws",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "On the explicitly constructed standard-normal probability space let Z(x)=x. The affine variables m_n+sigma_n*Z tend pointwise to m+sigma*Z, including sigma=0. Continuous bounded test functions therefore converge pointwise and have one integrable constant bound; DCT and the published change-of-variables-for-expectation identity prove weak convergence of their laws. No characteristic-function or future supplier.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §3.2, bounded continuous test criterion",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-quantile-coupling-on-the-real-line",
+        "kind": "example",
+        "title": "Quantile coupling on the real line",
+        "statement": "Assume AC. If real probability laws $\\mu_n\\Rightarrow\\mu$ have CDFs $F_n$,F and generalized inverses $Q_n(u)=\\inf\\{x:F_n(x)\\ge u\\}$, $Q(u)=\\inf\\{x:F(x)\\ge u\\}$ for 0<$u<1$, then on Borel Lebesgue probability (0,1), $Q_n$ and Q have those laws and $Q_n\\to Q$ almost surely.",
+        "deps": [
+          "thm-probability-law-and-distribution-function-correspondence",
+          "thm-portmanteau-theorem",
+          "thm-froda",
+          "thm-lebesgue-measure-of-a-box-of-every-kind",
+          "prop-countable-subsets-of-rn-are-lebesgue-null",
+          "def-countable-choice",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "thm-lebesgue-measure-of-a-box-of-every-kind makes U(u)=u uniform on the displayed Lebesgue interval. At each continuity point u of Q, choose continuity points a<Q(u)<b so F(a)<u<F(b), making Q_n(u) lie in (a,b] eventually. If Q(u) equals an endpoint, choose a,b on either side using continuity of Q at u. FRODA makes the discontinuity set of Q countable, and prop-countable-subsets-of-rn makes it Lebesgue-null; omit u=0,1. Generalized-inverse measurability and its CDF are checked. AC declares the countable-choice use in the cited correspondence/FRODA machinery.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, Theorem 3.2.8, pp. 118–119",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-pointwise-cdf-convergence-at-a-jump-is-not-required",
+        "kind": "counterexample",
+        "title": "Pointwise cdf convergence at a jump is not required",
+        "statement": "Weak convergence does not require CDF convergence at a jump of the limiting CDF. For $n\\ge 1$, the witness is $\\mu_n=\\delta_{1/n}$, with $\\mu=\\delta_0$ on the real line.",
+        "deps": [
+          "def-weak-convergence-of-borel-probability-measures",
+          "def-cumulative-distribution-function-of-a-random-variable"
+        ],
+        "strategy": "For n>=1 construct X_n(*)=1/n and X(*)=0 on the singleton probability space, check measurability and their point-mass laws, and define F_n=F_X_n and F=F_X. Evaluate point-mass integrals and use continuity at zero for weak convergence. Compute the right-closed CDFs and their mismatch at the limiting jump zero.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §3.2.1, continuity-point convention",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-bounded-continuous-cannot-be-replaced-by-all-bounded-measurable-functions",
+        "kind": "counterexample",
+        "title": "Bounded continuous cannot be replaced by all bounded measurable functions",
+        "statement": "Weak convergence need not give convergence of integrals for all bounded Borel tests. Take $\\mu_n=\\delta_{1/n}$, $\\mu=\\delta_0$, and $h=\\mathbf1_{\\{0\\}}$ on the real line.",
+        "deps": [
+          "def-weak-convergence-of-borel-probability-measures"
+        ],
+        "strategy": "Evaluate the indicator exactly.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, Definition 3.1; Dirac test example",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-a-nontight-sequence-with-no-probability-law-subsequence-limit",
+        "kind": "counterexample",
+        "title": "A nontight sequence with no probability law subsequence limit",
+        "statement": "The laws $\\mu_n=\\delta_n$ on the real line form a nontight sequence with no subsequence converging weakly to a probability law on the real line.",
+        "deps": [
+          "def-tight-family-of-probability-measures",
+          "thm-portmanteau-theorem",
+          "thm-continuity-from-below-for-measures",
+          "thm-compact-subset-is-closed-and-bounded"
+        ],
+        "strategy": "thm-compact-subset-is-closed-and-bounded makes every compact K in R bounded, so it misses all sufficiently large n and delta_n(K)=0 eventually. If a subsequence converged, portmanteau on (-m,m) would force limit mass zero there for every m and therefore total mass zero by continuity from below.",
+        "sources": {
+          "references": [
+            {
+              "title": "van Gaans, example after Theorem 5.2, p. 18; Dirac variant",
+              "url": "https://pub.math.leidenuniv.nl/~gaansowvan/jancol1.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "cex-boundedness-of-first-moments-alone-does-not-give-uniform-integrability",
+        "kind": "counterexample",
+        "title": "Boundedness of first moments alone does not give uniform integrability",
+        "statement": "There are nonnegative variables $X_n$ on one probability space with $P(X_n=n)=1/n$, $P(X_n=0)=1-1/n$. They have $\\mathbb E|X_n|=1$ and tight laws converging weakly to $\\delta_0$, but are not uniformly integrable.",
+        "deps": [
+          "def-uniformly-integrable-family",
+          "def-weak-convergence-of-borel-probability-measures",
+          "def-tight-family-of-probability-measures",
+          "cor-markov-inequality-for-random-variables",
+          "thm-heine-borel-rn"
+        ],
+        "strategy": "For n>K, E[|X_n|1_{|X_n|>K}]=1. Weak test difference is bounded by 2||f||/n. Since E|X_n|=1, cor-markov-inequality-for-random-variables gives P(|X_n|>R)<=1/R uniformly, so the laws are tight.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §3.2, weak convergence versus moment convergence; explicit two-point construction",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "ex-empirical-laws-of-a-finite-valued-iid-sample",
+        "kind": "example",
+        "title": "Empirical laws of a finite valued iid sample",
+        "statement": "For IID samples with law $\\mu=\\sum_{j=1}^mp_j\\delta_{a_j}$ on distinct points $a_1,\\ldots,a_m\\in\\mathbb R^d$, where $p_j\\ge0$ and $\\sum_jp_j=1$, the empirical laws converge weakly almost surely. On outcomes whose samples all lie in this finite set, weak convergence is equivalent to convergence of all atom frequencies to $p_j$.",
+        "deps": [
+          "thm-empirical-measures-of-iid-euclidean-samples-converge-weakly",
+          "def-weak-convergence-of-borel-probability-measures",
+          "thm-finite-and-countable-subadditivity-of-measures"
+        ],
+        "strategy": "Intersect finitely many indicator frequency events, then express any integral as a finite sum; conversely choose bounded continuous functions isolating each distinct atom.",
+        "sources": {
+          "references": [
+            {
+              "title": "Durrett, §§2.4–2.5, pp. 76–87",
+              "url": "https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  }
+]

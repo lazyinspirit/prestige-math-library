@@ -860,20 +860,25 @@ argument independently proves it.
 `brauer-characters-and-decomposition-matrices`, including its primitive
 central block idempotents and block partition.  None is repeated.
 
+**Current inventory:** 37 A items and 4 B items, in the exact current batch-10 proof order below; the 13 local helpers are retained inside RG-14, not moved to a new pair.
+
 **Source backing read:** José Martínez, *Modular Representation Theory of
 Finite Groups*, Lectures 2–4, printed pp. 9–28; Markus Jacobsen, thesis,
 Chapter 1 §1, pp. 2–8 and Chapter 2 §2, pp. 12–19; Deniz Yılmaz et al.,
-§2, pp. 2–3; John-Paul Saunders, §5, printed pp. 37–45.
+§2, pp. 2–3; John-Paul Saunders, §5, printed pp. 37–45. For the bounded retention-to-core repair, Webb’s complete Theorem 5.2.1 (pp.76–77), §11.6 vertex/source and Green proof (pp.209–213), and Theorem 12.3.3/Corollary 12.3.4 (pp.235–237) were read. The full source receipt and typed local proofs are in `research/phase-2-catchup-24-local-block-vertex-retention.md`. This is proposed recheck evidence, not independent acceptance of the pair.
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
 | `def-block-bimodule-for-the-double-group` (definition) | For a block idempotent $b$, regard $kGb$ as a $k[G\times G]$-module via left and right multiplication. | Connects blocks to inherited vertex theory. | literature-derived | not-applicable |
 | `lem-group-algebra-bimodule-is-induced-from-the-diagonal` (lemma) | The regular bimodule $kG$ is induced from the diagonal subgroup $\Delta G$. | Bounds vertices of its block summands. | literature-derived | literature-derived |
+| `lem-relative-projectivity-mackey-intersections-for-finite-modules` (lemma) | For finite groups, restriction of an induced module decomposes by subgroup double cosets over any field; if indecomposable M is relatively H-projective, a vertex of M is conjugate into H. | Earlier local proof helper; see the current bounded scaffold contract. | literature-derived | ai-altered |
 | `thm-block-bimodule-has-a-diagonal-vertex` (theorem) | A vertex of the indecomposable block bimodule is conjugate to $\Delta D$ for a $p$-subgroup $D\le G$. | Produces the representation-theoretic defect group. | literature-derived | literature-derived |
 | `def-defect-group-and-numerical-defect-of-a-block` (definition) | $D$ is the subgroup from a diagonal vertex and $|D|=p^d$ defines numerical defect $d$. | Fixes group versus number terminology. | literature-derived | not-applicable |
 | `thm-defect-groups-of-a-block-are-conjugate` (theorem) | All defect groups of a block are $G$-conjugate. | Makes “the defect groups” well defined up to the correct equivalence. | literature-derived | literature-derived |
+| `lem-block-relative-trace-characterizes-diagonal-projectivity` (lemma) | For central b and H<=G, kGb is relatively Delta H-projective iff b=Tr_H^G(a) for some a in (kGb)^H; defect groups are minimal p-subgroups satisfying this equality. | Earlier local proof helper; see the current bounded scaffold contract. | literature-derived | ai-altered |
 | `thm-vertices-of-modules-in-a-block-lie-in-a-defect-group` (theorem) | Every indecomposable module in $b$ has a vertex conjugate into a defect group of $b$. | Relates inherited module vertices to block defect. | literature-derived | literature-derived |
 | `prop-principal-block-has-sylow-defect` (proposition) | The principal block has a Sylow $p$-subgroup as defect group. | Gives the fundamental full-defect case. | literature-derived | literature-derived |
+| `lem-projective-simple-symmetric-block-is-a-matrix-algebra` (lemma) | Let $k$ be a splitting field, $G$ finite, and $B=kGb$ for a primitive central block idempotent. If a simple left $B$-module is projective, then $B$ is a full matrix algebra over $k$ and that simple is its unique simple module. | Supplies the nontrivial simple-projective-to-simple-block implication needed by defect zero. | literature-derived | ai-altered |
 | `thm-defect-zero-blocks-are-simple-algebras` (theorem) | A defect-zero block has the source's simple/projective structure, and conversely. | Identifies the semisimple extreme. | literature-derived | literature-derived |
 | `def-brauer-homomorphism-for-a-p-subgroup` (definition) | $\operatorname{Br}_P:(kG)^P\to kC_G(P)$ projects a $P$-fixed group-algebra element onto terms centralizing $P$. | Introduces the local map used by Brauer pairs. | literature-derived | not-applicable |
 | `thm-brauer-homomorphism-is-multiplicative` (theorem) | The projection is an algebra homomorphism on $(kG)^P$. | Makes images of idempotents idempotent. | literature-derived | literature-derived |
@@ -881,14 +886,24 @@ Chapter 1 §1, pp. 2–8 and Chapter 2 §2, pp. 12–19; Deniz Yılmaz et al.,
 | `def-relative-brauer-homomorphism` (definition) | For $Q\trianglelefteq P$, define $\operatorname{Br}_{P/Q}$ on the appropriate centralizer-fixed algebra. | Permits passage along normal subgroup chains. | literature-derived | not-applicable |
 | `lem-relative-brauer-homomorphisms-are-transitive` (lemma) | The relative maps compose to the full Brauer map for nested normal steps. | Powers the unique-subpair proof. | literature-derived | literature-derived |
 | `prop-central-idempotents-under-the-brauer-homomorphism` (proposition) | The image of a central block idempotent decomposes into the precisely compatible local block idempotents. | Connects blocks to local pairs. | literature-derived | literature-derived |
+| `lem-brauer-kernel-and-relative-trace-support` (lemma) | For a p-subgroup P, ker Br_P is the sum of Tr_Q^P((kG)^Q) for Q<P. If Br_P(Tr_H^G(a)) is nonzero, then P is conjugate into H. | Earlier local proof helper; see the current bounded scaffold contract. | literature-derived | ai-altered |
+| `lem-block-centre-locality-and-trace-ideal-sums` (lemma) | The centre of a finite-dimensional indecomposable block algebra is local. If its identity is a sum of elements from finitely many ideals, one ideal contains the identity. | Earlier local proof helper; see the current bounded scaffold contract. | literature-derived | ai-altered |
 | `thm-defect-groups-are-maximal-brauer-support` (theorem) | $D$ is a defect group of $b$ iff $\operatorname{Br}_D(b)\ne0$ and $D$ is maximal with that property. | Gives the local characterization used by both main theorems. | literature-derived | literature-derived |
+| `lem-finite-dimensional-algebras-admit-primitive-idempotent-decompositions` (lemma) | Every idempotent in a finite-dimensional unital k-algebra is a finite sum of pairwise orthogonal primitive idempotents; in particular this holds for the identity and for an idempotent regarded in a larger fixed algebra. | Provides the finite fixed-algebra decompositions used to witness Brauer-pair inclusion. | literature-derived | ai-altered |
 | `def-brauer-pair-for-a-block` (definition) | A $b$-Brauer pair is $(P,e)$ with $P$ a $p$-subgroup and $e$ a block of $kC_G(P)$ satisfying $\operatorname{Br}_P(b)e=e$. | Packages subgroup and local block data. | literature-derived | not-applicable |
 | `def-normal-inclusion-of-brauer-pairs` (definition) | Define $(Q,f)\trianglelefteq(P,e)$ through the relative Brauer map when $Q\trianglelefteq P$. | Starts the partial order without confusing it with mere membership. | literature-derived | not-applicable |
+| `lem-brauer-maps-kill-nontrivial-idempotent-orbit-sums` (lemma) | For Q normal P, a nontrivial P-orbit of primitive central idempotents in kC_G(Q) has orbit sum annihilated by Br_{P/Q}. | Earlier local proof helper; see the current bounded scaffold contract. | literature-derived | ai-altered |
 | `thm-unique-normal-subpair-below-a-brauer-pair` (theorem) | For normal $Q\trianglelefteq P$, there is a unique compatible block $f$ below $(P,e)$. | Gives one-step descent. | literature-derived | literature-derived |
-| `thm-brauer-pair-order-is-independent-of-the-normal-chain` (theorem) | Iterated normal descent gives a well-defined inclusion relation for arbitrary subgroups. | Proves the poset construction does not depend on a chain choice. | literature-derived | literature-derived |
+| `lem-brauer-images-of-primitive-idempotent-decompositions` (lemma) | For a p-subgroup R, the nonzero Brauer images of a primitive decomposition of 1 in $(kG)^R$ form a primitive decomposition of 1 in $kC_G(R). More generally, if Q is contained in P and i is primitive in $(kG)^P$, then the nonzero images under Br_Q of a primitive decomposition of i in $(kG)^Q$ form a primitive decomposition of Br_Q(i). | Supplies the fixed-algebra idempotent interface needed by all six Brauer-pair order criteria. | literature-derived | ai-altered |
+| `thm-brauer-pair-order-is-independent-of-the-normal-chain` (theorem) | For Q<=P, six equivalent criteria are retained: chain-defined inclusion; primitive i in A_P and j in A_Q with j<=i and nonzero respective block products; a finite normal pair chain; every top-associated primitive i has b_Q(i)f nonzero; some such i has b_Q(i)f=b_Q(i) nonzero; some such i has b_Q(i)f nonzero. This is a conjugation-stable partial order. | Proves normal-chain independence and the full primitive-idempotent interface. | literature-derived | ai-altered |
 | `thm-every-brauer-pair-determines-a-unique-global-block` (theorem) | A local pair belongs to a unique block of $kG$. | Allows local data to identify its ambient block. | literature-derived | literature-derived |
+| `lem-finite-dimensional-commutative-algebras-decompose-into-local-factors` (lemma) | Every finite-dimensional commutative unital k-algebra is a finite product of local k-algebras. For every ideal I, its quotient is the product of the corresponding factor quotients, with each nonzero factor quotient local. | Provides the general-field local-factor proof required before lifting commutative quotient idempotents. | literature-derived | ai-altered |
+| `lem-idempotents-lift-through-finite-commutative-algebra-quotients` (lemma) | For a finite-dimensional commutative k-algebra A and any ideal I, every idempotent of A/I lifts to an idempotent of A. | Earlier local proof helper; see the current bounded scaffold contract. | literature-derived | ai-altered |
 | `thm-maximal-brauer-pairs-exist-and-are-conjugate` (theorem) | Maximal $b$-Brauer pairs exist and form one $G$-conjugacy class. | Supplies the local object used in Brauer First. | literature-derived | literature-derived |
 | `thm-maximal-brauer-pairs-detect-defect-groups` (theorem) | $(D,e)$ is maximal exactly when $D$ is a defect group of $b$. | Reconciles the diagonal-vertex and Brauer-map definitions. | literature-derived | literature-derived |
+| `lem-restriction-to-a-containing-p-subgroup-retains-a-vertex` (lemma) | Let H be finite and k a field of characteristic p. Let M be a nonzero indecomposable finite-dimensional kH-module with vertex Q and source S at Q, and suppose Q≤R≤H with R a p-subgroup. Then Res_R^H M has a nonzero indecomposable direct summand U for which Q itself is a vertex. | Supplies the retained diagonal vertex after restricting the block bimodule to P times P. | literature-derived | ai-altered |
+| `lem-transitive-p-group-permutation-modules-have-point-stabilizer-vertices` (lemma) | Let k be any field of characteristic p, R a finite p-group, and L≤R. Then the transitive permutation kR-module k[R/L] is indecomposable and has vertex L. | Identifies the vertices of the double-coset permutation summands used in the Sylow-intersection calculation. | literature-derived | ai-altered |
+| `lem-block-defect-is-an-intersection-of-two-sylow-subgroups` (lemma) | If D is a defect group and P is a Sylow p-subgroup containing D, then D=P intersection gPg^{-1} for some g in C_G(D). | Earlier local proof helper; see the current bounded scaffold contract. | literature-derived | ai-altered |
 | `cor-normal-p-core-lies-in-every-block-defect-group` (corollary) | $O_p(G)$ is contained in every defect group. | Records the normal-core consequence. | literature-derived | literature-derived |
 | `cor-block-defect-groups-are-p-radical` (corollary) | A defect group satisfies $D=O_p(N_G(D))$. | Provides the normalizer property used on RG-16. | literature-derived | literature-derived |
 
@@ -900,12 +915,346 @@ and prove normal-chain independence before calling it an order.  Finally show
 that maximal support, maximal Brauer pairs and diagonal vertices select the
 same conjugacy class.
 
+**Primitive-image and all-six-criteria local proof repair (2026-09-09; proposed, not accepted).**
+
+The complete local argument below supplements the normal-subpair construction. It works over any residue field of characteristic p. AKO IV pp.169–183, especially the entire Theorem 2.10 and Proposition 2.14 proofs, were read from the author-hosted 240-page PDF (SHA256 `417c1a21f8fa059c4fb4861614b5423d66b86ca6cb94e6e57f1eaf8f1a273734`). Its algebraic-closure-dependent background is replaced here by elementary arbitrary-field proofs. Park Corollary 1.37 and BKY Theorem 2.2 corroborate the criteria but do not themselves supply the lifting and arbitrary-descent proofs. Exact source receipts are in `research/phase-2-catchup-24-local-brauer-idempotent-images.md`.
+
+Put A_R=(kG)^R and B_R=kC_G(R), and write b_R=Br_R.
+
+First prove the following general fact inside this item, not by a later
+commutative-algebra supplier. If phi:A onto B is a unital homomorphism of
+finite-dimensional k-algebras, every idempotent y of B lifts to an idempotent
+of A. The cases y=0,1 use 0,1. Otherwise choose x above y. Linear dependence
+of 1,x,...,x^dim(A) gives a nonzero polynomial m with m(x)=0. Since
+m(y)=m(0)(1-y)+m(1)y=0 and both y and 1-y are nonzero, multiplication by
+these two idempotents gives m(0)=m(1)=0. Write
+m(T)=g(T)(T-1)^s, where s>=1 is maximal; then g(1) is nonzero and g(0)=0.
+Polynomial Bezout gives u*g+v*(T-1)^s=1. For q=u*g,
+q(q-1)=-u*v*m, q(0)=0, q(1)=1. Consequently q(x) is an idempotent lifting
+q(y)=y. Evaluation is legitimate in a noncommutative algebra because
+powers of one element commute and k is central. No division by 2 occurs.
+
+For an idempotent e of A, the restriction eAe onto phi(e)Bphi(e) is
+surjective: phi(eae)=phi(e)phi(a)phi(e). Its identity is e and its kernel is
+e(ker phi)e. Apply the same polynomial proof in this finite-dimensional
+corner, interpreting scalar constants as multiples of e. If e is primitive
+and its nonzero image were not primitive, a nontrivial idempotent in the
+image corner would lift to u in eAe, with u neither 0 nor e. But
+e=u+(e-u) is a nontrivial orthogonal decomposition, contradiction. Thus
+primitive idempotents have zero or primitive images under every such
+surjection. Conversely, lifting and then finitely decomposing any primitive
+target idempotent gives a primitive lift: exactly one summand survives.
+
+Orthogonality and sums are preserved by phi; deleting zero summands thus
+gives a primitive decomposition of the image. The coefficient Brauer map
+A_R onto B_R is surjective since it fixes B_R, and is multiplicative by
+the preceding theorem. Apply the general fact first to a decomposition of
+1 in A_R, then to a primitive decomposition of i in A_Q. Primitivity of
+a summand j<=i in iA_Qi equals primitivity in A_Q, since jA_Qj is the same
+corner in either algebra. Empty surviving families represent zero. This
+proves both retained clauses without asserting that b_Q(i) itself is
+primitive when i was only primitive in A_P.
+
+Exact dependencies: retain the existing Brauer definition, multiplicativity,
+and finite primitive-decomposition lemma; add
+`thm-bezout-identity-for-polynomials`, an earlier published result on
+polynomial-rings-and-roots. Finite linear dependence and the displayed
+polynomial calculation are proved here, not imported from the field-extension
+minimal-polynomial theorem (whose irreducibility hypothesis is inapplicable).
+
+**`thm-brauer-pair-order-is-independent-of-the-normal-chain`**
+
+**Elementary interfaces, proved locally**
+
+If h is primitive and f central idempotent, h=fh+(1-f)h implies fh=0 or h.
+Distinct blocks are orthogonal: a nonzero product is a central idempotent
+below both and hence equals both. A primitive decomposition of 1 in A_P
+provides at least one i with b_P(i)e nonzero, since the corresponding sum
+is e. Such i has b_P(i)e=b_P(i). For Q<=P, b_P(i) nonzero implies b_Q(i)
+nonzero by C_G(P) subset C_G(Q); this does not assert a relative map on
+all of B_Q when Q is not normal.
+
+The needed primitive-corner nilpotence assertion also has a direct proof
+over arbitrary k. Let C=iA_Pi with i primitive, and c in C. For sufficiently
+large n the kernels and images of left multiplication L_c^n stabilize.
+Their intersection is zero: c^n x in the kernel implies c^(2n)x=0,
+so x is in ker L_c^n and c^n x=0. Rank-nullity gives
+C=ker L_c^n direct-sum im L_c^n. Both are right C-submodules, so the
+projection onto either is left multiplication by its value at i, an
+idempotent. Primitivity forces one summand zero. Hence c is nilpotent or
+L_c is bijective. In the latter case cx=i for some x; injectivity applied
+to c(xc-i)=0 gives xc=i, so c is a unit. Every element of any proper
+two-sided ideal of C is therefore nilpotent. We need no radical theorem
+and make no claim that an arbitrary Brauer kernel is nilpotent.
+
+For Q<=P and N=N_P(Q), coefficient counting gives the exact identity
+
+    b_Q(Tr_Q^P(a)) = Tr_Q^N(b_Q(a))  (a in A_Q).
+
+Indeed Q acts on the cosets P/Q indexing the trace. At a basis element
+of C_G(Q), coefficients of summands indexed by one Q-orbit are equal.
+Non-singleton orbit sizes are divisible by p; fixed cosets are exactly
+N/Q. Those remaining summands give the displayed identity, using
+conjugation equivariance of b_Q. In particular the two image spaces are
+equal because b_Q is onto B_Q. For x,y in A_P the finite sum also gives
+x Tr_Q^P(a)y=Tr_Q^P(xay), including the corner case x=y=i.
+
+**Strong association and its compatibility, without assuming transitivity**
+
+Define an auxiliary relation (Q,f) preceq (P,e) to mean Q<=P and that
+every primitive i of A_P with b_P(i)e nonzero satisfies
+b_Q(i)f=b_Q(i) nonzero. This is not a redefinition of the commissioned
+chain order; equality with that order will be proved.
+
+There is at most one such f: choose an associated i; orthogonal blocks
+cannot both support its nonzero b_Q(i). More generally, if
+(Q,f) preceq (P,e), (S,d) preceq (P,e), and
+(S,d') preceq (Q,f), then d=d'. Choose associated i of A_P and decompose
+i into primitive j's in A_Q. Some j has b_Q(j)f nonzero, and consequently
+b_S(j)d'=b_S(j) nonzero. Since j<=i, multiplication by b_S(j) shows
+b_S(i)d' nonzero. But b_S(i) is supported on d, forcing d'=d. This
+compatibility argument uses no transitivity or arbitrary-subgroup existence.
+
+**Normal inclusions**
+
+If Q is normal in P, the earlier normal-subpair theorem supplies the
+unique P-stable block f with Br_(P/Q)(f)e=e. The restriction
+b_Q:A_P onto (B_Q)^P is surjective: every element of (B_Q)^P already lies
+in A_P and is fixed by b_Q. Hence, by the preceding general finite-algebra
+image proof, b_Q(i) is primitive in (B_Q)^P for primitive i in A_P whenever
+nonzero. The block f is central in this fixed algebra. Applying the relative
+Brauer map to b_Q(i)f gives b_P(i)Br_(P/Q)(f)=b_P(i), which is nonzero for
+associated i. Thus b_Q(i)f=b_Q(i). This proves strong association in the
+normal case. Its uniqueness proves the converse normal characterization.
+It is essential here to use primitivity in the **fixed target algebra**;
+b_Q(i) need not be primitive in B_Q.
+
+**Arbitrary subgroup existence: the missing normalizer/trace argument**
+
+Induct on [P:Q]. The equality and normal cases are settled. For a proper
+nonnormal Q let N=N_P(Q). One has Q<N<P: Q acting on P/Q has [N:Q]
+fixed cosets, and fixed-point congruence modulo p gives p dividing [N:Q].
+For every Q<R<=P induction supplies a unique e_R with
+(R,e_R) preceq (P,e), including e_P=e. Compatibility proved above, with
+the induction hypothesis at the smaller interval [T:R], shows
+(R,e_R) preceq (T,e_T) whenever Q<R<=T<=P. Normal descent from N gives
+f with (Q,f) preceq (N,e_N). For Q<R<=N, induction at [R:Q] and the
+same compatibility argument show (Q,f) preceq (R,e_R). In particular f
+is N-stable and Br_(R/Q)(f)e_R=e_R for all these R.
+
+Fix any primitive i associated to (P,e), and put z=b_Q(i)(1-f).
+This is an N-fixed idempotent of B_Q. For Q<R<=N, compatibility at R
+gives b_R(i)e_R=b_R(i), hence Br_(R/Q)(z)=0. The space of all such z is
+
+    (B_Q)^N intersect intersection_(Q<R<=N) ker Br_(R/Q)
+      = Tr_Q^N(B_Q) = b_Q(Tr_Q^P(A_Q)).
+
+For the first equality use the N-permuted basis C_G(Q). An N-orbit
+with stabilizer S>Q contributes a nonzero coefficient at an S-fixed
+basis element, and is detected by Br_(S/Q); different basis orbits cannot
+cancel that coordinate. Orbits with stabilizer exactly Q have no R-fixed
+elements for any R>Q and are killed by every displayed map. Their orbit
+sums are precisely Tr_Q^N of basis elements: the multiplicity for any
+larger stabilizer is [S:Q], zero in k. This proves the equality in both
+directions. The second equality is the coset trace identity already proved.
+
+Since z=b_Q(i)z b_Q(i), the corner trace identity puts z in b_Q(J), where
+J=Tr_Q^P(iA_Qi). This is a two-sided ideal of C=iA_Pi, by the finite trace
+identity. It is proper: b_P kills Tr_Q^P(A_Q) for Q<P, whereas b_P(i)
+is nonzero. Every element of J is nilpotent by the explicit Fitting
+argument, so every element of b_Q(J) is nilpotent. Thus the idempotent z
+is zero. This proves strong association for every top-associated i,
+completing existence and uniqueness without a chain-association assumption.
+
+Transitivity now follows from compatibility: for (S,d) preceq (Q,f)
+preceq (P,e), take the unique strong lower block d' at S beneath (P,e);
+compatibility gives d=d'. Reflexivity follows from primitive-image support,
+and antisymmetry from subgroup equality and uniqueness. Conjugation
+equivariance transports primitive decompositions and all displayed equations.
+
+**Chain identification and all six retained criteria**
+
+Every normal pair inclusion is strong by the normal case, hence every
+normal chain is strong by transitivity. Conversely, iterate strict
+normalizers inside P to refine Q<=P to a finite chain of normal subgroup
+inclusions. Take the unique strong lower block under (P,e) at each group.
+Compatibility and the normal characterization make adjacent pairs normal;
+the bottom block is f precisely when (Q,f) is strong. This proves the
+chain order well-defined and equal to the auxiliary relation; for normal
+endpoints any chain collapses to the unique direct normal inclusion.
+
+Consequently (i) iff (iii), and (i) implies (iv) and (v); the latter uses
+existence of an associated top primitive. Both (iv) and (v) imply (vi).
+For (vi), let f' be the unique strong lower block, and use its defining
+equation on the witnessing i. Nonzero b_Q(i)f then gives a nonzero product
+ff', so f=f', proving (i). To prove (vi) implies (ii), decompose its i
+in A_Q; some primitive summand j has b_Q(j)f nonzero, and ij=j=ji.
+Conversely (ii) implies (vi), since multiplying b_Q(i)f by b_Q(j)
+gives b_Q(j)f nonzero. Thus all six, including the universal criterion,
+are proved, with no dropped conclusion.
+
+Exact dependency additions to the existing order theorem:
+`lem-brauer-kernel-and-relative-trace-support`,
+`lem-brauer-homomorphism-is-conjugation-equivariant`, and
+`def-relative-brauer-homomorphism`. Retain existing normal-subpair,
+relative-transitivity, finite-decomposition, primitive-image and p-group
+fixed-point dependencies. All are earlier locally or published earlier;
+corner nilpotence and the trace image identity are expanded inside this
+proof. No later commutative lifting lemma or global-block theorem is used.
+
+
+**Retained two-Sylow and normal-core proof routes.** The earlier local module-Mackey helper proves its tensor isomorphism over any field, finite indecomposable extraction, induction transitivity and vertex containment; ordinary-character Mackey is not a substitute. The following full local arguments replace the unsupported fixed-Q restriction inference. The permutation proof uses the published earlier `lem-augmentation-ideal-of-a-finite-p-group-algebra-is-nilpotent`, whose arbitrary-field contract also applies to P times P. No full later Green correspondence, Brauer First, or primitive-image lifting is assumed.
+
+**`lem-restriction-to-a-containing-p-subgroup-retains-a-vertex`.**
+
+Exact typed contract: H is finite, k is a field of characteristic p, M is a
+nonzero indecomposable finite-dimensional kH-module, Q is a vertex of M,
+S is a source at Q, and Q is contained in a p-subgroup R of H. Then
+Res_R^H M has a nonzero indecomposable direct summand U for which Q itself
+is a vertex. No uniqueness of U and no full Green correspondence is claimed.
+
+1. The source S cannot be relatively E-projective for any E properly
+   contained in Q. Otherwise induction transitivity and
+   M divides Ind_Q^H S make M relatively E-projective, contrary to Q being
+   a vertex. In particular S, viewed as a kQ-module, has full vertex Q.
+
+2. Decompose Res_R^H M as a finite direct sum of indecomposables U_j.
+   Further restriction to Q contains the indecomposable source S.
+   Krull–Schmidt therefore supplies one summand U=U_j with
+   S divides Res_Q^R U. This does not assert that all U_j retain Q.
+
+3. Because M divides Ind_Q^H S, the selected U divides
+   Res_R^H Ind_Q^H S. The first Mackey application expresses this module
+   as a finite sum of modules induced to R from
+   L_h=R intersect hQh^{-1}, h in R\H/Q. Extraction gives one h for which
+   U is relatively L_h-projective. Each L_h is a p-group and
+   its order is at most the order of Q. There is no claim that L_h is
+   R-conjugate into Q.
+
+4. Among the finitely many subgroups of L_h relative to which U is
+   projective, choose an inclusion-minimal T. This is a vertex of U by
+   definition: a proper subgroup of T would also lie in L_h. In particular
+   T is a p-subgroup and |T| is at most |L_h|, hence at most |Q|.
+   Higman's counit supplies the finite module W=Res_T^R U such that
+   U divides Ind_T^R W.
+
+5. Restrict the last split inclusion to Q. By step 2, S divides
+   Res_Q^R Ind_T^R W. The second Mackey application and indecomposable
+   extraction give an r in Q\R/T such that S is relatively
+   E=Q intersect rTr^{-1}-projective as a kQ-module. Step 1 forces E=Q.
+   Thus Q is contained in rTr^{-1}.
+
+6. The order inequalities now read |Q| at most |T| at most |Q|.
+   Therefore Q=rTr^{-1}. Vertices are conjugate within the ambient group
+   R, so Q itself is a vertex of U. Concretely, inner conjugation by r
+   identifies a kR-module with its conjugate by v maps to rv; conjugating
+   a split induction witness preserves relative projectivity and its
+   minimality. No new summand produced by an outside-H conjugation is
+   required. This proves exactly the stated conclusion.
+
+All selected representative sets, decompositions, subgroups and witnesses
+are finite in number. The argument introduces no infinite-choice premise.
+It also works for a general intermediate subgroup R, but there is no need
+to broaden the commissioned p-subgroup contract.
+
+**`lem-transitive-p-group-permutation-modules-have-point-stabilizer-vertices`.**
+
+Let R be a finite p-group, L a subgroup, and k any field of characteristic p.
+Put V=k[R/L] with its usual left permutation basis. Here is a full proof
+preserving that arbitrary-field contract.
+
+First, if W is any nonzero finite-dimensional kR-module, augmentation-ideal
+nilpotence gives a largest j with I_R^j W nonzero. Any nonzero vector there
+is killed by I_R, hence fixed by every element of R. On the other hand V^R
+has dimension one: invariance means coefficients are constant on the one
+transitive R-orbit R/L. A decomposition into two nonzero submodules would
+give two nonzero fixed subspaces in direct sum, impossible. Thus V is
+indecomposable. It is relatively L-projective since V=Ind_L^R k.
+
+It remains to exclude every proper T<L. Suppose Higman's criterion gave
+identity=Tr_T^R(alpha), with alpha a kT-endomorphism of V. Let e be the
+basis vector L and let lambda extract its coefficient. For a left coset
+rT define c(rT)=lambda(r alpha(r^{-1}e)). This is independent of its
+representative: replacing r by rt and using T-linearity of alpha cancels
+t and t^{-1}. For l in L, both le=e and lambda(lv)=lambda(v), so
+c(lrT)=c(rT). Therefore the identity's diagonal coefficient at e equals
+the sum over L-orbits on R/T of the constant orbit value times orbit size.
+
+The orbit of rT has size [L:L intersect rTr^{-1}]. Since |T|<|L|,
+this is a positive power of p for every r, hence zero in k. The trace's
+diagonal coefficient is consequently zero, while identity has coefficient
+one. This contradiction excludes every proper T<L, making L a vertex
+by its defining minimality. There is no need to assert that an arbitrary
+previously chosen vertex is literally contained in L.
+
+**`lem-block-defect-is-an-intersection-of-two-sylow-subgroups`.**
+
+Assume the earlier block-bimodule theorem: B=kGb is an indecomposable
+k[G times G]-module with vertex Delta D. Its action on the group basis of
+kG is (a,b).g=ag b^{-1}. Let P be any Sylow p-subgroup of G containing D.
+Retention, with H=G times G and R=P times P, supplies an indecomposable
+summand U of Res_R B with vertex Delta D.
+
+The central idempotent b makes B a direct summand of kG, and restriction
+preserves that splitting. The R-orbits of the group basis G are the double
+cosets PgP. The stabilizer of g is exactly
+
+$L_g=\{(a,b)\in P\times P:a=gbg^{-1}\}=\{(a,g^{-1}ag):a\in P\cap gPg^{-1}\}.$
+
+Thus Res_R kG is the finite direct sum, over g in P\G/P, of the
+permutation modules k[R/L_g]. The preceding lemma says each is
+indecomposable with vertex L_g. By Krull–Schmidt, U is isomorphic to one
+of these summands. Vertex conjugacy inside R gives r,s in P such that
+
+$\Delta D=(r,s)L_g(r,s)^{-1}.$
+
+The first projection of this equality is
+D=r(P intersect gPg^{-1})r^{-1}. For each d in D, the fact that (d,d)
+lies in its right-hand side gives a= r^{-1}dr and b=s^{-1}ds satisfying
+a=gbg^{-1}. Consequently
+d=(rgs^{-1})d(rgs^{-1})^{-1}. Set h=rgs^{-1}. This proves h belongs to
+C_G(D), with no change in the subgroup D. Since r,s belong to P,
+
+$D=P\cap rgPg^{-1}r^{-1}=P\cap hPh^{-1}.$
+
+The important correction to loose scaffold wording is that L_g is a
+twisted diagonal; the displayed conjugacy and h=rgs^{-1} establish the
+centralizer claim directly. No assertion that L_g is already a P-times-P
+conjugate of the untwisted diagonal of its first projection is needed.
+
+**`cor-normal-p-core-lies-in-every-block-defect-group`.**
+
+For a finite group K, define O_p(K) as the product of its normal
+p-subgroups. There are finitely many subgroups; the product of two normal
+p-subgroups is normal and has p-power order by the elementary product-order
+formula. Hence this finite product is the largest normal p-subgroup.
+
+If N is normal and a p-subgroup of K and P is Sylow, NP is a p-subgroup
+containing P, so NP=P. Thus O_p(K) is contained in every Sylow p-subgroup.
+Apply this with K=G and intersect the two Sylow subgroups in the preceding
+lemma to obtain O_p(G) contained in D.
+
+**`cor-block-defect-groups-are-p-radical`.**
+
+Put N=N_G(D). Since D is a p-subgroup of N, choose a Sylow p-subgroup T
+of N containing D. Extend T to a Sylow p-subgroup P of G, using Sylow
+containment. Then P intersect N=T: it is a p-subgroup of N containing
+the Sylow subgroup T. The two-Sylow theorem supplies h in C_G(D), hence
+in N, with D=P intersect hPh^{-1}. Intersecting this identity with N gives
+
+$D=(P\cap N)\cap h(P\cap N)h^{-1}=T\cap hTh^{-1}.$
+
+Both T and hTh^{-1} are Sylow subgroups of N, so O_p(N) is contained in
+D by the preceding elementary normal-core argument. Conversely D is
+normal in its normalizer and is a p-group, so D is contained in O_p(N).
+This proves equality, without Brauer First or another block of N.
+
 **B page:** `blocks-defect-groups-and-the-brauer-homomorphism-examples`
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
 | `ex-defect-and-brauer-pairs-for-a4-in-characteristic-three` (example) | Work Jacobsen's block and pair calculation for $A_4$ at $p=3$. | Tests maximal support in a nontrivial group. | literature-derived | literature-derived |
-| `ex-brauer-pair-branching-for-c3-semidirect-c4-in-characteristic-two` (example) | Work Jacobsen's explicit pair-poset example. | Shows why pair membership is not itself the order relation. | literature-derived | literature-derived |
+| `ex-brauer-pair-branching-for-c3-semidirect-d8-in-characteristic-two` (example) | Work Jacobsen's pair-poset example for $C_3\rtimes D_8$ at $p=2$; the legacy C4-labelled ID has been corrected to the actual D8 group. | Shows why pair membership is not itself the order relation. | literature-derived | literature-derived |
 | `ex-blocks-and-defect-groups-of-s3` (example) | Calculate the source's blocks and their defect groups at the indicated primes. | Checks principal, full and zero defect behavior. | literature-derived | literature-derived |
 | `ex-defect-zero-and-p-group-boundaries` (example) | Verify the defect-zero extreme and the unique full-defect block of a $p$-group within the source results. | Closes the two endpoint cases. | literature-derived | literature-derived |
 
@@ -1044,9 +1393,14 @@ a table.
 regularity, product measures and monotone convergence; the topology pages on
 locally compact Hausdorff spaces, compactness and partitions of unity.
 
-**Source backing read:** Emmanuel Kowalski, *Representation Theory*, Chapter 5
-§5.2, pp. 212–225; Ion Colojoară and Aurelian Gheondea, *Lectures on
-Representations of Locally Compact Groups*, Chapter 2 §§1–2, pp. 31–48.
+**Current source backing:** Knapp, *Advanced Real Analysis*, VI §2,
+pp.225–230; Pedersen, *The existence and uniqueness of the Haar integral*,
+definitions/almost-additivity p.2, existence p.3 and second uniqueness proof
+with Remark 2 pp.4–5; Kowalski, *Representation Theory*, §5.2 pp.212–214.
+The proposed Colojoară–Gheondea Ch.2 §§1–2 pp.31–48 source was not recovered
+and must not be described as read. Its original record and recovery attempts
+remain in batch-10 coverage, with a documented alternative-proof drop.
+All results are retained; Step 3 independently reviews the alternatives.
 
 | item id (kind) | statement | what it is for | statement provenance | proof provenance |
 |---|---|---|---|---|
@@ -1054,8 +1408,9 @@ Representations of Locally Compact Groups*, Chapter 2 §§1–2, pp. 31–48.
 | `lem-translations-preserve-compactly-supported-continuous-functions` (lemma) | Left and right translation preserve $C_c(G)$, and translation varies continuously in the inductive-limit estimates used below. | Makes invariance and approximation well defined. | literature-derived | literature-derived |
 | `def-haar-covering-ratio-of-test-functions` (definition) | For nonzero nonnegative $f,\phi\in C_c(G)$, define the normalized covering/translate ratio used in the von Neumann–Kakutani construction. | Introduces the finite approximants without presupposing measure. | literature-derived | not-applicable |
 | `lem-haar-covering-ratios-are-finite-and-positive` (lemma) | Compactness gives finite translating covers and hence finite positive ratios for nonzero test functions. | Closes the nonempty and zero-denominator cases in the construction. | literature-derived | literature-derived |
-| `lem-normalized-approximate-haar-functionals-are-positive-and-invariant-in-the-limit` (lemma) | The normalized ratio functionals are positive, normalized on a fixed test function, and asymptotically left invariant on each prescribed finite family. | Produces the finite constraints for compactness. | literature-derived | literature-derived |
-| `lem-haar-candidate-sets-have-the-finite-intersection-property` (lemma) | Candidate values in the product of compact intervals satisfy every finite collection of positivity, additivity and invariance constraints. | Isolates the compactness step in Haar existence. | literature-derived | literature-derived |
+| `lem-normalized-approximate-haar-functionals-are-positive-and-invariant-in-the-limit` (lemma) | Covering-ratio functionals are positive, homogeneous, normalized and exactly left invariant, with fixed coordinate bounds. | Bounds the approximants; does not assert additivity. | literature-derived | ai-altered |
+| `lem-haar-covering-functionals-are-asymptotically-additive` (lemma) | Under AC, sufficiently small supports make the normalized additivity error arbitrarily small. | Split finite covers using cutoff-regularized ratios; choose error parameters before the support. | literature-derived | ai-altered |
+| `lem-haar-candidate-sets-have-the-finite-intersection-property` (lemma) | Under AC the closed sets of small-support approximants have the finite intersection property; their common points satisfy exact additivity and invariance. | Tychonoff applies to closures, not purported exactly additive finite approximants. | literature-derived | ai-altered |
 | `thm-existence-of-a-left-haar-integral` (theorem) | Every locally compact Hausdorff group has a nonzero positive left-invariant functional on $C_c(G)$. | Establishes Haar existence with the actual Tychonoff-strength step visible. | literature-derived | literature-derived |
 | `cor-existence-of-left-and-right-haar-measures` (corollary) | Riesz representation gives a left Haar measure, and inversion gives a right Haar measure. | Passes from the functional theorem to measures and both handednesses. | literature-derived | literature-derived |
 | `lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets` (lemma) | A Haar measure has full support, is locally finite and assigns finite measure to compact sets. | Supplies the nondegeneracy facts used by convolution and quotient integration. | literature-derived | literature-derived |
@@ -1070,6 +1425,26 @@ and Riesz representation supplies the Radon measure.  For uniqueness, compare
 two functionals on arbitrary nonzero positive test functions before extending by
 positive and negative parts.  The empty group is excluded by the group axioms;
 $f=0$, empty support and non-$\sigma$-compact $G$ are handled explicitly.
+
+**Local dependency closure — 2026-09-09.** The following exact contracts
+supply continuous-kernel interchange and the compact-product interface. AC
+is explicit; no global product-measure or Radon–Nikodym theorem is used.
+
+- `lem-compactly-supported-kernels-admit-commuting-radon-integrals` — Assume AC, including the DC used by LCH cutoffs. For LCH X,Y and positive real-linear C_c functionals I,J, every real F in C_c(X times Y) has compactly supported continuous partial integrals and I_x J_y F=J_y I_x F. Complex kernels follow by real and imaginary parts. Dependencies: `def-compact-support-c-c-and-c-zero-on-an-lch-space`, `lem-finite-lch-partition-of-unity-near-a-compact-set`, `lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set`, `lem-positive-linear-functionals-on-c-c-are-monotone`, `thm-compactness-under-continuous-maps`, `def-axiom-of-choice`.
+
+  Proof strategy: Let K_X,K_Y be the compact projections of supp F; if either is empty F=0. Choose compactly supported cutoffs 0<=c_X,c_Y<=1 equal to one on these projections. For fixed y_0, continuity on the compact K_X gives a neighbourhood V of y_0 with sup_x |F(x,y)-F(x,y_0)|<epsilon for y in V: take finitely many continuity rectangles covering K_X and intersect their parameter neighbourhoods; outside K_X both functions vanish. Cover L_Y=supp c_Y by finitely many such V_j with chosen centres y_j. Use the published finite partition lemma on L_Y, obtaining nonnegative psi_j supported in V_j with sum psi_j=1 on L_Y. Define G(x,y)=c_Y(y) sum_j psi_j(y)F(x,y_j). Then G is a finite tensor sum with support in K_X times L_Y, and |F-G|<=epsilon c_X(x)c_Y(y) everywhere: F=c_Y F, the convex-combination estimate holds on L_Y, and outside K_X or L_Y both sides vanish. Partial integrals exist since each section is in C_c. Their continuity follows directly from the same uniform section estimate and positivity, e.g. |I(F_y)-I(F_y0)|<=epsilon I(c_X); their supports lie in K_Y or K_X. Thus no undeclared uniform-limit theorem is needed. The two iterated integrals of G agree by linearity on its finite tensor sum. Apply positivity to the error bound in either order to obtain |I J F-J I F|<=2 epsilon I(c_X)J(c_Y); arbitrariness of epsilon proves equality, including when a cutoff integral is zero. AC covers precisely the inherited cutoff and partition selections; all new covers are finite. No measure-product theorem, Stone–Weierstrass or sigma-compactness is used.
+
+- `lem-haar-integral-comparison-inequality` — Assume AC for the cutoff/partition route. If I,J are nonzero positive left-invariant functionals on C_c(G), then I(f)<=(f:g)I(g) for nonnegative f and nonzero nonnegative g. For f in C_c(G;R) and nonzero nonnegative symmetric u in C_c(G), one has |I(f)J(u)-I(u)J(f)|<=I(u) sup_{z in supp u} J(|R_z f-f|), where R_z f(y)=f(yz). For fixed f this supremum becomes arbitrarily small when supp u lies in a sufficiently small identity neighbourhood. Dependencies: `lem-haar-covering-ratios-are-finite-and-positive`, `lem-haar-measure-is-positive-on-nonempty-open-sets-and-finite-on-compact-sets`, `lem-translations-preserve-compactly-supported-continuous-functions`, `lem-compactly-supported-kernels-admit-commuting-radon-integrals`, `lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set`, `lem-positive-linear-functionals-on-c-c-are-monotone`, `def-axiom-of-choice`.
+
+  Proof strategy: Apply I to every finite translate cover of f by g and take the coefficient-sum infimum. For the sharp inequality, the kernel F(x,y)=f(x)u(x^{-1}y) is continuous with compact support contained in supp f times (supp f)(supp u). First integrate y by left invariance to obtain I(f)J(u). Interchange the compact kernel, and then substitute x=yz using left invariance of I. Symmetry gives u(z^{-1})=u(z), so the result is J_y I_z f(yz)u(z). The transformed kernel also has compact support, contained in (supp f)(supp u)^{-1} times supp u, and the local interchange lemma applies again. Subtract I(u)J(f), apply positivity first to |R_z f-f| and then to u, obtaining the estimate. For a fixed compact identity neighbourhood V, all R_z f-f with z in V have support in one compact K by the translation lemma. Choose c=1 on K with compact support. Its uniform translation estimate and |J(h)|<=J(|h|)<=||h||_infinity J(c) imply J(|R_z f-f|)->0 as z->e. If J(c)=0 the bound is already zero. Given a smaller symmetric identity neighbourhood W, choose a cutoff v with v(e)=1 and supp v subset W, using a precompact intermediate neighbourhood; set u(z)=v(z)v(z^{-1}). Then u is symmetric, nonzero and supported in W, and I(u),J(u)>0 by the earlier positivity lemma. This proves the exact estimate without a right-invariance assumption or global Fubini theorem.
+
+- `thm-uniqueness-of-left-haar-measure-up-to-scale` — Assume AC for the preceding cutoff/partition proof. Any two left Haar measures on a locally compact Hausdorff group are positive scalar multiples on all Borel sets. Dependencies: `lem-haar-integral-comparison-inequality`, `thm-rmk-uniqueness-among-radon-measures`, `def-axiom-of-choice`.
+
+  Proof strategy: Let I,J be their C_c integrals and choose one nonzero nonnegative f_0; both I(f_0),J(f_0) are positive. For any nonnegative f and epsilon>0 choose the same symmetric u so the comparison errors for f and f_0 are at most epsilon. Dividing by I(u)>0 gives |I(f)J(u)/I(u)-J(f)|<=epsilon and |I(f_0)J(u)/I(u)-J(f_0)|<=epsilon. Multiply and subtract to get |I(f_0)J(f)-I(f)J(f_0)|<=epsilon (I(f_0)+I(f)). Hence the expression is zero. Positive/negative parts give J=cI on real C_c with c=J(f_0)/I(f_0)>0. RMK uniqueness identifies the measures on every Borel set, including infinite values. No limit subnet or countable exhaustion is required; AC supplies the inherited cutoffs/partitions, while each epsilon argument makes only finitely many selections.
+
+- `ex-haar-measure-on-an-infinite-product-of-compact-groups` — Assume AC. Any set-indexed product of compact Hausdorff groups has a unique normalized Radon Haar probability. Its projection onto each finite subproduct has that subproduct's normalized Haar probability, and these finite marginals determine the original Radon probability uniquely. This concerns the full Borel sigma algebra, not merely the cylinder sigma algebra. Dependencies: `cor-normalized-haar-probability-on-a-compact-group`, `thm-tychonoff`, `thm-rmk-uniqueness-among-radon-measures`, `def-radon-measure-on-an-lch-space`, `thm-product-universal-property`, `thm-compactness-under-continuous-maps`, `def-axiom-of-choice`.
+
+  Proof strategy: Tychonoff under AC makes the product compact; coordinatewise group operations are continuous by the product universal property, and distinct coordinates separate points, so it is Hausdorff. Apply the local normalized Haar theorem to the entire product. For a finite-coordinate projection pi_F, the pushforward nu(B)=mu(pi_F^{-1}B) is a Borel probability. On a compact space the given outer regularity makes a finite Radon measure inner regular on every Borel set by taking closed complements of approximating open supersets of its complement. For Borel B in the finite subproduct, approximate pi_F^{-1}B by compact K. The compact pi_F(K) lies in B and has nu(pi_F K)>=mu(K), proving inner regularity of nu on Borel sets. Complements give outer regularity too; thus nu is Radon. Lift a finite-product translation using identity elements in all other coordinates, so left invariance of mu proves left invariance of nu. Local uniqueness identifies the finite marginal. Finally, for h continuous on the whole compact product and epsilon>0, take finitely many basic cylinder neighbourhoods covering the product on each of which h oscillates by less than epsilon. Let F contain all their specified coordinates. Points agreeing on F then lie together in one chosen neighbourhood, so their h values differ by less than epsilon. Fill the remaining coordinates by the group identities, obtaining a continuous section s_F and the cylinder h composed with s_F composed with pi_F uniformly within epsilon of h. Equal finite marginals therefore give equal integrals of all continuous h, by the probability error bound, and RMK uniqueness gives equality on all Borel sets. The empty coordinate family gives the one-point group. No equality of product and Borel sigma algebras and no arbitrary product-measure existence theorem is assumed.
 
 **B page:** `haar-measure-existence-and-uniqueness-examples`
 
@@ -1869,7 +2244,7 @@ counted as coverage merely because a second treatment repeats it.
 | [Oi, *Representation Theory of Finite Groups of Lie Type*](https://masaooi.github.io/DL.pdf) | §2.3, pp. 10–12 | principal representations of $GL_2(\mathbb F_q)$, split and nonsplit rank-two cases: RG-13/H1,H5.  It is a scope check, not a second general-$n$ treatment. |
 | [Martínez, *Modular Representation Theory of Finite Groups*](https://www.uv.es/jomimar8/pdfs/course%20notes.pdf) | Lectures 2–4, printed pp. 9–28 | blocks/idempotents; numerical defect and height; Brauer map; block induction; First Main Theorem: RG-14/H1–H3; RG-16/H1–H3.  Already-owned and peripheral headings are in §13. |
 | [Jacobsen, thesis](https://www.math.ku.dk/bibliotek/arkivet/phd-theses/phd14mwj.pdf) | Chapter 1 §1, pp. 2–8; Chapter 2 §2, pp. 12–19 | algebra decomposition; Brauer pairs; unique subpairs; pair order; maximal pairs and defect groups; explicit pair examples: RG-14/H3–H5. |
-| [Boltje–Kessar–Yılmaz, §2](https://yilmazdeniz.bilkent.edu.tr/wp-content/uploads/BKY1.pdf) | §2, pp. 2–3 | unique subpairs, equivalent inclusion criteria, maximal Brauer pairs/defect groups: RG-14/H4.  Arbitrary-field fusion/Galois extensions are in §13. |
+| [Boltje–Karagüzel–Yılmaz, §2](https://yilmazdeniz.bilkent.edu.tr/papers/fusion-systems-pjm.pdf) | §2, pp. 2–3 | unique subpairs, equivalent inclusion criteria, maximal Brauer pairs/defect groups: RG-14/H4.  Arbitrary-field fusion/Galois extensions are in §13. |
 | [Saunders, *Modular Representation Theory*](https://jpsaunders.uk/ModRep/NotesWebsite.pdf) | §4, printed pp. 22–37; §5, printed pp. 37–45 | relative projectivity and inherited vertices; Green correspondence proof; blocks/defects; block induction; First; Brauer–Green compatibility: RG-14/H1,H2,H5; RG-15/H1–H3,H5; RG-16/H1,H4,H5. |
 | [Lassueur–Farrell, Chapter 7](https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload2.pdf) | §§27–29, printed/PDF pp. 2–12 | relative projectivity and inherited vertices/sources; Green correspondence and its proof; worked distinguished summand: RG-15/H1–H4. |
 | [Craven, thesis](https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf) | Chapter 1 §§1.1–1.6, printed pp. 1–17 (PDF pp. 8–24); Chapter 2 §§2.1–2.5, printed pp. 18–30 (PDF pp. 25–37) | blocks, Brauer correspondence, p-sections/generalized decomposition numbers; relative projectivity, Green, Nagao and Second: RG-15/H2,H3; RG-16/H2–H5; RG-17/H1–H5.  Third Main Theorem is in §13. |
@@ -2015,11 +2390,11 @@ this crosswalk.
 | RG-13/H3 | Losev §§2.2–2.3, generic Hecke algebra and deformation setup | included | `def-generic-type-a-hecke-algebra`; `thm-standard-basis-of-the-generic-type-a-hecke-algebra`; `prop-group-algebra-and-finite-field-specializations-of-the-generic-hecke-algebra`; `lem-semisimplicity-and-trace-form-for-the-finite-spherical-hecke-algebra`; `lem-lifting-idempotents-in-complete-deformation-algebras` |
 | RG-13/H4 | Taylor/Losev, Tits deformation and principal-series constituents | included | `thm-tits-deformation-for-the-type-a-hecke-algebra`; `cor-type-a-finite-hecke-algebra-is-noncanonically-isomorphic-to-csn`; `thm-spherical-principal-series-constituents-of-gl-n-fq`; `thm-general-finite-principal-series-endomorphism-algebra`; `cor-constituents-of-general-principal-series-for-finite-gl-n` |
 | RG-13/H5 | Losev/Oi, rank-two and parameter-boundary calculations | included | `ex-two-dimensional-hecke-algebra-for-gl2-fq`; `ex-trivial-and-steinberg-splitting-on-p1-fq`; `ex-regular-and-singular-torus-characters-in-gl3-fq`; `ex-q-equals-two-torus-boundary`; `rem-tits-isomorphism-is-noncanonical` |
-| RG-14/H1 | Saunders §5, block bimodules, diagonal vertices and defect groups | included | `def-block-bimodule-for-the-double-group`; `lem-group-algebra-bimodule-is-induced-from-the-diagonal`; `thm-block-bimodule-has-a-diagonal-vertex`; `def-defect-group-and-numerical-defect-of-a-block`; `thm-defect-groups-of-a-block-are-conjugate`; `thm-vertices-of-modules-in-a-block-lie-in-a-defect-group` |
-| RG-14/H2 | Martínez Lectures 3–4, defect extremes and the Brauer map | included | `prop-principal-block-has-sylow-defect`; `thm-defect-zero-blocks-are-simple-algebras`; `def-brauer-homomorphism-for-a-p-subgroup`; `thm-brauer-homomorphism-is-multiplicative`; `lem-brauer-homomorphism-is-conjugation-equivariant`; `def-relative-brauer-homomorphism` |
-| RG-14/H3 | Jacobsen §2, relative maps, support and Brauer pairs | included | `lem-relative-brauer-homomorphisms-are-transitive`; `prop-central-idempotents-under-the-brauer-homomorphism`; `thm-defect-groups-are-maximal-brauer-support`; `def-brauer-pair-for-a-block`; `def-normal-inclusion-of-brauer-pairs`; `thm-unique-normal-subpair-below-a-brauer-pair` |
-| RG-14/H4 | Jacobsen/BKY §2, Brauer-pair order and maximal pairs | included | `thm-brauer-pair-order-is-independent-of-the-normal-chain`; `thm-every-brauer-pair-determines-a-unique-global-block`; `thm-maximal-brauer-pairs-exist-and-are-conjugate`; `thm-maximal-brauer-pairs-detect-defect-groups`; `cor-normal-p-core-lies-in-every-block-defect-group` |
-| RG-14/H5 | Jacobsen/Saunders, defect consequences and examples | included | `cor-block-defect-groups-are-p-radical`; `ex-defect-and-brauer-pairs-for-a4-in-characteristic-three`; `ex-brauer-pair-branching-for-c3-semidirect-c4-in-characteristic-two`; `ex-blocks-and-defect-groups-of-s3`; `ex-defect-zero-and-p-group-boundaries` |
+| RG-14/H1 | Saunders §5; Webb §§11.6,12.3–12.4; block bimodules, local Mackey, diagonal projectivity and defect extremes | included | `def-block-bimodule-for-the-double-group`; `lem-group-algebra-bimodule-is-induced-from-the-diagonal`; `lem-relative-projectivity-mackey-intersections-for-finite-modules`; `thm-block-bimodule-has-a-diagonal-vertex`; `def-defect-group-and-numerical-defect-of-a-block`; `thm-defect-groups-of-a-block-are-conjugate`; `lem-block-relative-trace-characterizes-diagonal-projectivity`; `thm-vertices-of-modules-in-a-block-lie-in-a-defect-group`; `prop-principal-block-has-sylow-defect`; `lem-projective-simple-symmetric-block-is-a-matrix-algebra`; `thm-defect-zero-blocks-are-simple-algebras` |
+| RG-14/H2 | Martínez Lectures 3–4; full and relative Brauer maps and central idempotents | included | `def-brauer-homomorphism-for-a-p-subgroup`; `thm-brauer-homomorphism-is-multiplicative`; `lem-brauer-homomorphism-is-conjugation-equivariant`; `def-relative-brauer-homomorphism`; `lem-relative-brauer-homomorphisms-are-transitive`; `prop-central-idempotents-under-the-brauer-homomorphism` |
+| RG-14/H3 | Jacobsen §2; trace support, centre locality, primitive decompositions and normal subpairs | included | `lem-brauer-kernel-and-relative-trace-support`; `lem-block-centre-locality-and-trace-ideal-sums`; `thm-defect-groups-are-maximal-brauer-support`; `lem-finite-dimensional-algebras-admit-primitive-idempotent-decompositions`; `def-brauer-pair-for-a-block`; `def-normal-inclusion-of-brauer-pairs`; `lem-brauer-maps-kill-nontrivial-idempotent-orbit-sums`; `thm-unique-normal-subpair-below-a-brauer-pair` |
+| RG-14/H4 | Jacobsen/BKY §2 and complete AKO IV Theorem 2.10/Proposition 2.14; local polynomial lifting, normalizer-trace association, six criteria and maximal pairs (pending recheck) | included | `lem-brauer-images-of-primitive-idempotent-decompositions`; `thm-brauer-pair-order-is-independent-of-the-normal-chain`; `thm-every-brauer-pair-determines-a-unique-global-block`; `lem-finite-dimensional-commutative-algebras-decompose-into-local-factors`; `lem-idempotents-lift-through-finite-commutative-algebra-quotients`; `thm-maximal-brauer-pairs-exist-and-are-conjugate`; `thm-maximal-brauer-pairs-detect-defect-groups` |
+| RG-14/H5 | Webb Theorem12.3.3/Corollary12.3.4; complete local retention/permutation/two-Sylow/core proofs; Jacobsen/Saunders examples | included | `lem-restriction-to-a-containing-p-subgroup-retains-a-vertex`; `lem-transitive-p-group-permutation-modules-have-point-stabilizer-vertices`; `lem-block-defect-is-an-intersection-of-two-sylow-subgroups`; `cor-normal-p-core-lies-in-every-block-defect-group`; `cor-block-defect-groups-are-p-radical`; `ex-defect-and-brauer-pairs-for-a4-in-characteristic-three`; `ex-brauer-pair-branching-for-c3-semidirect-d8-in-characteristic-two`; `ex-blocks-and-defect-groups-of-s3`; `ex-defect-zero-and-p-group-boundaries` |
 | RG-15/H1 | Saunders §4, exceptional intersection families | included | `def-green-exceptional-intersection-families`; `lem-green-mackey-intersections-force-proper-vertices` |
 | RG-15/H2 | Lassueur–Farrell §29, restriction and induction distinguished summands | included | `lem-green-restriction-has-one-distinguished-summand`; `lem-green-induction-has-one-distinguished-summand` |
 | RG-15/H3 | Saunders Lemmas 4.35–4.38 and Theorem 4.34, Green correspondence | included | `lem-green-distinguished-summands-are-mutually-inverse`; `thm-green-correspondence-with-exceptional-families` |
@@ -2143,7 +2518,7 @@ commissioned route.
 | Martínez Lecture 2 §2.1, Brauer graph and block orthogonality | deferred | GT-19 owns the block partition/decomposition-matrix material, and ordinary/generalized orthogonality may not be re-minted here. |
 | Martínez Lecture 3, numerical height and Min–Max refinements | out-of-scope | Height theory is not required for defect groups, Brauer pairs, Green correspondence or the two main theorems; the numerical-defect convention alone is retained. |
 | Jacobsen after Definition 2.27, fusion systems and saturation | deferred | Fusion systems are a successor group-theory subject and not needed to define/order Brauer pairs. |
-| Boltje–Kessar–Yılmaz §§3–6, Galois/fusion theory over arbitrary fields | deferred | RG inherits the split modular system from GT-18/GT-19; arbitrary-field descent is a different coefficient-field program. |
+| Boltje–Karagüzel–Yılmaz §§3–6, Galois/fusion theory over arbitrary fields | deferred | RG inherits the split modular system from GT-18/GT-19; arbitrary-field descent is a different coefficient-field program. |
 | Saunders §4, relative projectivity, Higman's criterion, vertex/source existence | deferred | Exact GT-18 ids are listed in §6; these results are inherited and expressly forbidden to re-mint. |
 | Saunders Theorem 4.39, summand detection | out-of-scope | The note states the result but sends the proof to Alperin; the two complete open Green proofs read do not need it, so it is not sold as proof-backed decomposition. |
 | Saunders §5, block partition and decomposition matrices | deferred | Exact GT-19 items own these definitions and block diagonalization. |
@@ -2533,3 +2908,9 @@ forward-edge scans, B-page and B-item consumer scans, body-link versus
 `deps`/`justified_by`, and direct/transitive Recorded/Not-Proved-Here closure
 from every RG item.  Any B supplier, unresolved placeholder, nonzero recorded
 closure, or missing full proof blocks the relevant pair.
+# Step-5 dependency synchronization, 2026-09-09
+
+The completed maximal-Brauer-pair proof explicitly declares
+`thm-brauer-pair-order-is-independent-of-the-normal-chain` for its order
+interface. The canonical plan now matches batch10's authored manifest.
+No new prerequisite pair or published-proof repair; the draft awaits Step6.

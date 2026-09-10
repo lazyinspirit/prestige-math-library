@@ -1,0 +1,8 @@
+---
+page: "asymptotic-cones-and-the-sublinear-triangle-criterion"
+title: "Asymptotic Cones and the Sublinear Triangle Criterion"
+status: "draft"
+items: ["def-rescaled-ultralimit-and-asymptotic-cone", "lem-bounded-real-ultralimits-and-free-tail-extension", "lem-rescaled-ultradistance-is-a-quotient-metric", "def-geodesic-rays-and-lines", "lem-geodesic-segments-have-isometric-ultralimits", "def-real-tree-tripods-and-geodesic-triangle-minsize", "lem-triangle-extrema-and-real-tree-tripod-rules", "lem-tree-cones-give-uniform-two-side-control", "thm-all-asymptotic-cones-are-trees-implies-uniform-slimness", "lem-sublinear-minsize-makes-every-cone-geodesic-a-limit-geodesic", "thm-sublinear-triangle-minsize-implies-hyperbolicity", "def-bounded-edge-coarse-triangular-filling", "def-singular-planar-labelled-relator-diagram", "lem-finite-polygonal-disk-and-collar-surgery", "lem-relator-expressions-give-controlled-singular-planar-diagrams", "lem-singular-planar-diagrams-have-controlled-coarse-disk-thickenings", "lem-relator-disks-give-area-controlled-coarse-fillings", "lem-polygonal-boundary-crossing-for-affine-disk-maps", "lem-coarse-triangle-minsize-is-bounded-by-square-root-area", "thm-linear-relator-area-implies-slim-geodesic-triangles", "lem-point-wedges-preserve-a-common-triangle-minsize-bound", "lem-uniform-filling-data-give-a-uniform-slimness-bound"]
+---
+
+We construct rescaled ultralimits and prove the sublinear triangle-minsize criterion with its choice and compactness hypotheses explicit. A local polygonal surgery argument converts algebraic relator area into bounded-edge disk fillings, leading to the square-root minsize estimate and a uniform slimness bound for fixed filling constants.

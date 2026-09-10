@@ -6,8 +6,8 @@ status: published
 origin: session
 provenance:
   statement: literature-derived
-  proof: ai-generated
-deps: [def-the-quotient-of-an-object-by-a-subobject, thm-the-quotient-is-independent-of-the-representing-monomorphism, thm-first-isomorphism-theorem-in-an-abelian-category, cor-equalizers-are-monic-and-coequalizers-are-epic]
+  proof: ai-altered
+deps: [def-the-quotient-of-an-object-by-a-subobject, thm-the-quotient-is-independent-of-the-representing-monomorphism, thm-first-isomorphism-theorem-in-an-abelian-category, cor-equalizers-are-monic-and-coequalizers-are-epic, thm-every-monomorphism-is-the-kernel-of-its-cokernel]
 justified_by: []
 aliases: []
 landmark: false
@@ -40,12 +40,16 @@ $$(A/C)/(B/C)\;\cong\;A/B.$$
 
 [L3] Every coequalizer, hence every cokernel, is epic ([[cor-equalizers-are-monic-and-coequalizers-are-epic]]).
 
+[L4] Every monomorphism in an abelian category is a kernel of its cokernel ([[thm-every-monomorphism-is-the-kernel-of-its-cokernel]]).
+
 ## Proof
 
 **Proof technique:** direct.
 
 1.1 Let $q_C:A\to A/C$ and $q_B:A\to A/B$ be the quotient maps from [L1]. Since $q_Bbc=0$, the morphism $q_B$ kills $C$, so the universal property of $q_C$ gives a unique map $\overline q:A/C\to A/B$ with $\overline q\,q_C=q_B$. [L1]
 
-1.2 The composite $q_C b:B\to A/C$ kills $C$, since $q_C b c=q_C(bc)=0$. Conversely, if $h:X\to B$ satisfies $q_C b h=0$, then $b h$ is killed by $q_C$, so the cokernel property of $q_C$ makes $b h$ factor through $b c$. Because $b$ is monic, $h$ factors through $c$. Thus $c:C\to B$ is a kernel of $q_C b$, and [L2] identifies the image of $q_C b$ with $B/C$. Let $\widetilde b:B/C\to A/C$ be the corresponding monic image inclusion. Then $\overline q\,\widetilde b=0$, because $\overline q q_C b=q_B b=0$. [L1, L2]
+1.2 The composite $bc$ is monic: equality $bcu=bcv$ implies $cu=cv$ and then $u=v$. By [L4], $bc$ is therefore a kernel of its cokernel $q_C$. If $h:X\to B$ satisfies $q_Cbh=0$, there is a unique $t:X\to C$ with $bct=bh$. Monicity of $b$ gives $ct=h$, and monicity of $c$ gives uniqueness. Since $q_Cbc=0$, this proves that $c$ is a kernel of $q_Cb$. [given, L1, L4]
 
-2.1 If $r:A/C\to Y$ satisfies $r\widetilde b=0$, then $r q_C b=0$, so $r q_C$ kills $B$. Since $q_B$ is the cokernel of $B\to A$, there is a unique $s:A/B\to Y$ with $s q_B=r q_C$. Using $q_B=\overline q\,q_C$ and the epicity of $q_C$ from [L3], one gets $s\overline q=r$. Thus $\overline q$ is the cokernel of $\widetilde b$, so by [L1] the quotient $(A/C)/(B/C)$ is canonically $A/B$. [L1, L3, step 1.1, step 1.2] ∎
+2.1 Let $p:B\to B/C$ be the cokernel of $c$. By [L2], the canonical image factorization of $q_Cb$ gives a monomorphism $\widetilde b:B/C\to A/C$ satisfying $\widetilde b p=q_Cb$. Since $p$ is epic by [L3] and $\overline q\widetilde b p=q_Bb=0$, we have $\overline q\widetilde b=0$. [L1, L2, L3, step 1.1, step 1.2]
+
+3.1 If $r:A/C\to Y$ satisfies $r\widetilde b=0$, then $rq_Cb=r\widetilde b p=0$. The cokernel property of $q_B$ gives a unique $s:A/B\to Y$ with $sq_B=rq_C$. Since $q_B=\overline q q_C$ and $q_C$ is epic, $s\overline q=r$. Conversely, any $s$ satisfying this last equality satisfies $sq_B=rq_C$, proving uniqueness. Thus $\overline q$ is a cokernel of $\widetilde b$, and [L1] identifies $(A/C)/(B/C)$ canonically with $A/B$. [L1, L3, step 1.1, step 2.1] ∎

@@ -7,24 +7,30 @@ origin: session
 provenance:
   statement: ai-altered
   proof: ai-generated
-deps: [def-banach-space, cor-finite-dimensional-subspaces-are-closed,
-       def-linear-basis, def-dimension, def-countable, thm-rationals-countable,
-       rem-baire-category-choice-strength, lem-countable-iff-surjection-from-n,
-       thm-well-ordering-principle]
+deps: [def-banach-space, cor-finite-dimensional-normed-spaces-are-banach,
+       def-linear-basis, def-countable, thm-rationals-countable,
+       thm-n-cross-n-countable, lem-q-and-irrationals-dense-r,
+       thm-recursion, thm-well-ordering-principle,
+       cor-archimedean-reciprocal, lem-geometric-sequence-null,
+       rem-real-and-complex-normed-space-convention,
+       thm-complex-numbers-are-the-real-coordinate-plane]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-04
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-04
+  verified:
+    model: gpt-6-astra
+    verdict: locally-repaired
+    date: 2026-09-09
+    scope: owner-authorized-local-ZF-proof-and-dependency-repair
+    delegated_by: owner
 sources:
   scraped: []
   references:
+    - title: "Alan Sokal, Mathematics 3103, Handout 7 (2012–2013), Theorem 7.3 and footnote 4, pp. 3–5"
+      url: "https://www.ucl.ac.uk/~ucahad0/3103_handout_7.pdf"
     - title: "Paul Howard and Eleftherios Tachtsis, On infinite-dimensional Banach spaces and weak forms of the axiom of choice"
       url: "https://commons.emich.edu/fac_sch2017/127/"
     - title: "Christopher Heil, A Basis Theory Primer"
@@ -39,41 +45,54 @@ has no countably infinite Hamel basis. Equivalently, there is no sequence
 $(b_n)_{n\in\mathbb N}$ of pairwise distinct vectors whose image is a basis of
 $X$ in the sense of [[def-linear-basis]].
 
+This holds in ZF, without any choice axiom. Here countably infinite means
+equinumerous with $\mathbb N$ ([[def-countable]]).
+
 ## Facts & Assumptions
 
 **Given:** A Banach space $X$ and, for contradiction, a sequence $(b_n)_{n\in\mathbb N}$ of pairwise distinct vectors whose image is a Hamel basis of $X$.
 
 [L1] A Banach space is complete for its norm metric ([[def-banach-space]]).
 
-[L2] Finite-dimensional normed subspaces are closed ([[cor-finite-dimensional-subspaces-are-closed]]).
+[L2] A normed space supplied with an ordered basis of finite length is complete ([[cor-finite-dimensional-normed-spaces-are-banach]]). We prove the needed closedness locally, rather than manufacture a sequence in an arbitrary subspace.
 
-[L3] $\mathbb Q$ is countably infinite ([[thm-rationals-countable]], [[def-countable]]).
+[L3] There is an enumeration $q:\mathbb N\to\mathbb Q$ ([[thm-rationals-countable]]), and rational numbers, identified with their real images, approximate every real number ([[lem-q-and-irrationals-dense-r]], clause 1).
 
-[L4] The choice-strength ledger records that the separable complete-metric Baire theorem is available in ZF, while the unrestricted complete-metric theorem is strictly stronger ([[rem-baire-category-choice-strength]]).
+[L4] There is a fixed bijection $p:\mathbb N\times\mathbb N\to\mathbb N$, explicitly $p(a,b)=2^a(2b+1)-1$ ([[thm-n-cross-n-countable]]).
 
-[L5] A nonempty countable set is a surjective image of $\mathbb N$, and every nonempty subset of $\mathbb N$ has a least element ([[lem-countable-iff-surjection-from-n]], [[thm-well-ordering-principle]]).
+[L5] Every nonempty subset of $\mathbb N$ has a least element ([[thm-well-ordering-principle]]). A supplied total function $f:S\to S$ and starting point determine a sequence by recursion ([[thm-recursion]]); stage-dependent rules are encoded on states containing the stage.
+
+[L6] For every $\eta>0$ there is an integer $k\ge1$ with $1/k<\eta$ ([[cor-archimedean-reciprocal]]); also $(1/2)^n\to0$ ([[lem-geometric-sequence-null]], clause 1).
+
+[L7] A complex normed space has the same complete metric on restriction to real scalars ([[rem-real-and-complex-normed-space-convention]]). Every complex scalar uniquely has the form $a+ib$ with $a,b\in\mathbb R$ ([[thm-complex-numbers-are-the-real-coordinate-plane]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Let $Q_{\mathbb K}:=\mathbb Q$ in the real case and $Q_{\mathbb K}:=\{a+ib:a,b\in\mathbb Q\}$ in the complex case. In either case $Q_{\mathbb K}$ is countable by [L3], and it is dense in $\mathbb K$. Let $D\subseteq X$ be the set of all finite $Q_{\mathbb K}$-linear combinations of the basis vectors $b_n$. Coding a finite combination by the finite list of its indices together with its coefficient list gives an explicit surjection from a countable set onto $D$, so $D$ is countable. Also $0\in D$, so $D$ is nonempty. [L3, construct]
+1.1 Fix $p$ and $q$ from [L3, L4]. Encode a finite word $(a_0,\ldots,a_{\ell-1})$ of naturals by $p(\ell,c_\ell)$, where $c_0=0$ and $c_{j+1}=p(c_j,a_j)$. To decode any natural, invert its outer pair to obtain $(\ell,c)$, and invert the inner pair $\ell$ times, recovering the symbols in reverse order. If the final residue is not zero, return the empty word; otherwise return the recovered word. These are uniform finite recursions: one may retain the remaining length, current residue and recovered finite list as the state and stop changing the state when the remaining length is zero. Thus [L5] defines the decoder, and decoding an encoded word returns that word by induction and injectivity of $p$. We have a total surjection from $\mathbb N$ onto all finite words, without choosing separate enumerations for each length. [L3, L4, L5, construct]
 
-1.2 For $N\in\mathbb N$ put $$F_N:=\operatorname{span}_{\mathbb R}\{b_0,\dots,b_N\}$$ in the real case, and $$F_N:=\operatorname{span}_{\mathbb R}\{b_0,ib_0,\dots,b_N,ib_N\}$$ in the complex case. In either case $F_N$ is finite-dimensional over $\mathbb R$. It is proper: in the real case $b_{N+1}\notin F_N$ by linear independence of the basis image, and in the complex case a real-linear relation expressing $b_{N+1}$ in terms of $b_0,ib_0,\dots,b_N,ib_N$ would be the same as a complex-linear relation expressing $b_{N+1}$ in terms of $b_0,\dots,b_N$. Thus [L2] makes every $F_N$ closed. Also $X=\bigcup_{N\in\mathbb N}F_N$, because every vector uses only finitely many basis vectors, and in the complex case every complex coefficient splits into real and imaginary parts. [L2, given, algebra]
+1.2 In the real case let $e_j=b_j$. In the complex case let $e_{2j}=b_j$ and $e_{2j+1}=ib_j$, and regard $X$ as a real normed space. In either case $(e_j)$ is a real Hamel basis: in the complex case a finite real relation groups into a complex relation among the $b_j$, forcing both real coefficients for each $b_j$ to vanish, and spanning follows by splitting each complex coefficient into real and imaginary parts. Completeness is unchanged. [given, L7, algebra]
 
-1.3 Every proper linear subspace of a normed space has empty interior. Indeed, if $W\subsetneq X$ were a linear subspace containing some ball $B(x,r)$, then $B(0,r)\subseteq W$ because $W$ is closed under subtraction, and for any $y\in X\setminus\{0\}$ the vector $(r/(2\|y\|))y$ would lie in $B(0,r)\subseteq W$, forcing $y=(2\|y\|/r)\,(r/(2\|y\|))y\in W$; also $0\in W$. So $W=X$, contradiction. [given, algebra, assume-contra]
+2.1 Interpret a decoded symbol $p(j,t)$ as the term $q(t)e_j$, and interpret a decoded word as the sum of its terms, the empty word giving zero. Step 1.1 now defines a total function $d:\mathbb N\to X$ whose image $D$ is exactly the finite rational span of $(e_j)$. In particular $0\in D$. For each fixed $N$, the same decoder, with symbols having $j>N$ contributing zero, defines $d_N:\mathbb N\to F_N$, where $F_N=\operatorname{span}_{\mathbb R}\{e_0,\ldots,e_N\}$; its image is exactly the rational span of this finite list. [step 1.1, step 1.2, L3, L4, construct]
 
-2.1 By [L5], fix a surjection $d:\mathbb N\to D$. [step 1.1, L5, choose]
+3.1 For any finite expression $v=\sum_{j<\ell}\lambda_j e_{n_j}$ and $\varepsilon>0$, if $\ell=0$ then $v=0\in D$. Otherwise put $\delta=\varepsilon/(2\ell(1+\sum_{j<\ell}\|e_{n_j}\|))>0$ and let $t_j$ be the least natural with $|\lambda_j-q(t_j)|<\delta$. Such an index exists by [L3]; [L5] determines it. The triangle inequality gives $\left\|v-\sum_{j<\ell}q(t_j)e_{n_j}\right\|\le\delta\sum_{j<\ell}\|e_{n_j}\|<\varepsilon.$ Consequently $D$ is dense in $X$, and using only indices at most $N$ shows that $d_N[\mathbb N]$ is dense in $F_N$. Only the displayed finite representation of the fixed vector is used, not a selection of representations for a family of vectors. [step 1.2, step 2.1, L3, L5, algebra]
 
-2.2 $D$ is dense in $X$. Indeed, let $x=\sum_{j=0}^m \lambda_j b_{n_j}\in X$ and let $\varepsilon>0$. Choose $q_j\in Q_{\mathbb K}$ with $|\lambda_j-q_j|<\varepsilon/(2(m+1)(1+\sum_{j=0}^m\|b_{n_j}\|))$. Then $$\left\|x-\sum_{j=0}^m q_j b_{n_j}\right\| \le \sum_{j=0}^m |\lambda_j-q_j|\,\|b_{n_j}\|<\varepsilon.$$ So every vector of $X$ lies in the closure of $D$. [step 1.1, algebra, choose]
+3.2 Each $F_N$ is proper since $e_{N+1}\notin F_N$ by real independence. Also $X=\bigcup_N F_N$, because every vector has a finite expression in the $e_j$ and a finite list of natural indices has an upper bound. [step 1.2, step 2.1, algebra]
 
-3.1 We now run the separable-complete Baire argument inside the open unit ball $U_0:=\{x:\|x\|<1\}$. Because $F_0$ is closed with empty interior, the set $U_0\setminus F_0$ is nonempty and open. By step 2.2, the set $$A_0:=\{m\in\mathbb N:d(m)\in U_0\setminus F_0\}$$ is nonempty, so [L5] gives its least element $m_0$. Put $x_0:=d(m_0)$. Since $U_0\setminus F_0$ is open at $x_0$, the set $$B_0:=\left\{k\in\mathbb N_{\ge1}:\overline B\left(x_0,\frac1k\right)\subseteq U_0\setminus F_0\right\}$$ is nonempty; let $k_0$ be its least element and set $r_0:=1/k_0$. Then $\overline B(x_0,r_0)\subseteq U_0\setminus F_0$. [step 2.1, step 2.2, step 1.3, L5, choose, construct]
+4.1 Fix $N$ and a point $z$ in the ambient closure of $F_N$, meaning every ball around $z$ meets $F_N$. For each $k\in\mathbb N$, some $u\in F_N$ satisfies $\|z-u\|<1/(2(k+1))$, and density from step 3.1 gives some $d_N(j)$ with $\|u-d_N(j)\|<1/(2(k+1))$. Hence the set of $j$ with $\|z-d_N(j)\|<1/(k+1)$ is nonempty. Define $j(k)$ to be its least member and $u_k=d_N(j(k))$. This defines one sequence outright by [L5]; no countable choice is used. The reciprocal estimate [L6] and the triangle inequality give $u_k\to z$ in $X$ and show $(u_k)$ is Cauchy in $F_N$. [step 3.1, L5, L6, construct]
 
-3.2 Inductively, if closed balls $\overline B(x_n,r_n)\subseteq U_0\setminus F_n$ have been chosen with $\overline B(x_n,r_n)\subseteq B(x_{n-1},r_{n-1}/2)$ for $n\ge1$, then $B(x_n,r_n/2)\setminus F_{n+1}$ is a nonempty open set. By step 2.2, the set $$A_{n+1}:=\{m\in\mathbb N:d(m)\in B(x_n,r_n/2)\setminus F_{n+1}\}$$ is nonempty, so [L5] gives its least element $m_{n+1}$. Put $x_{n+1}:=d(m_{n+1})$. Since $B(x_n,r_n/2)\setminus F_{n+1}$ is open at $x_{n+1}$, the set $$B_{n+1}:=\left\{k\in\mathbb N_{\ge1}:\frac1k<\frac{r_n}2\text{ and }\overline B\left(x_{n+1},\frac1k\right)\subseteq B(x_n,r_n/2)\setminus F_{n+1}\right\}$$ is nonempty; let $k_{n+1}$ be its least element and set $r_{n+1}:=1/k_{n+1}$. Then $$\overline B(x_{n+1},r_{n+1})\subseteq B(x_n,r_n/2)\setminus F_{n+1}\subseteq \overline B(x_n,r_n),$$ and $r_{n+1}<r_n/2$. Hence $r_n\le r_0/2^n$ for every $n$, so $r_n\to0$. [step 2.1, step 2.2, step 1.3, L5, choose, construct]
+5.1 The displayed list $(e_0,\ldots,e_N)$ is an ordered real basis of $F_N$ by step 1.2, so [L2] supplies a limit $y\in F_N$ of this already constructed Cauchy sequence. Then $\|z-y\|\le\|z-u_k\|+\|u_k-y\|\to0$, whence $z=y\in F_N$. Therefore $F_N$ is closed: if a point outside it had no disjoint ball, it would belong to its closure, contrary to what we just proved. This argument uses completeness only on the specific sequence from step 4.1. [step 1.2, step 4.1, L2, algebra]
 
-4.1 For $m>n$, the inclusion from step 3.2 gives $x_m\in B(x_n,r_n/2)$, so $\|x_m-x_n\|<r_n/2$. Hence $(x_n)$ is Cauchy. Since $X$ is Banach, [L1] gives $x_n\to x$ for some $x\in X$. Each $\overline B(x_n,r_n)$ is closed and contains all later $x_m$, so it contains the limit $x$; therefore $x\in \overline B(x_n,r_n)\subseteq X\setminus F_n$ for every $n$. [L1, step 3.1, step 3.2]
+6.1 Every proper real linear subspace has empty interior. Indeed, if it contains $B(v,r)$ then $v$ belongs to it, and subtraction gives $B(0,r)$ inside it. For any nonzero $w\in X$, the vector $rw/(2\|w\|)$ belongs to that ball, and real scalar multiplication then puts $w$ in the subspace too; zero already belongs to it. Thus the subspace would be $X$. In particular each $F_N$ is closed with empty interior. [step 5.1, step 3.2, algebra]
 
-5.1 Step 4.1 contradicts $X=\bigcup_N F_N$ from step 1.2. Therefore no countably infinite Hamel basis exists. The foundational point recorded in [L4] is that the proof used only a fixed countable dense set, with both the recurring point selections and the ball radii chosen canonically from $\mathbb N$, and not the unrestricted complete-metric Baire theorem. [L4, step 1.2, step 4.1, discharge-contradiction] ∎
+7.1 Write $B(v,r)=\{w:\|w-v\|<r\}$ and $\overline B(v,r)=\{w:\|w-v\|\le r\}$, and put $U_0=B(0,1)$. Balls are open by the triangle inequality. By step 6.1, $U_0\setminus F_0$ is nonempty and open. Let $m_0$ be the least index with $d(m_0)\in U_0\setminus F_0$. Openness gives a radius $\rho>0$ about this point inside that set; [L6] gives an integer $k$ with $1/k<\rho$. Therefore there is a least positive integer $k_0$ with $\overline B(d(m_0),1/k_0)\subseteq U_0\setminus F_0$. [step 3.1, step 6.1, L5, L6, construct]
+
+8.1 Let $S$ be the set of triples $(n,m,k)\in\mathbb N^3$ with $k\ge1$ and $\overline B(d(m),1/k)\subseteq U_0\setminus F_n$. For any such triple the set $O=B(d(m),1/(2k))\setminus F_{n+1}$ is nonempty and open. Let $m'$ be the least index with $d(m')\in O$, and $k'$ the least positive integer with $1/k'<1/(2k)$ and $\overline B(d(m'),1/k')\subseteq O$. Density, openness and [L6] prove these sets of indices nonempty. The resulting triple $(n+1,m',k')$ belongs to $S$, so these formulas define a total function $S\to S$. Apply [L5] with initial state $(0,m_0,k_0)$ to obtain states $(n,m_n,k_n)$ for every $n$. Put $x_n=d(m_n)$ and $r_n=1/k_n$. Then $\overline B(x_{n+1},r_{n+1})\subseteq B(x_n,r_n/2)\setminus F_{n+1}\subseteq\overline B(x_n,r_n),\qquad r_{n+1}<r_n/2.$ Thus $r_n\le r_0(1/2)^n\to0$. Every recurring selection was the minimum of a specified subset of $\mathbb N$. [step 3.1, step 6.1, step 7.1, L5, L6, construct]
+
+9.1 For $m>n$, nesting gives $x_m\in B(x_n,r_n/2)$, so $(x_n)$ is Cauchy. By [L1] it converges to some $x\in X$. For fixed $n$ and all $m>n$, $\|x-x_n\|\le\|x-x_m\|+\|x_m-x_n\|\le\|x-x_m\|+r_n.$ Letting $m\to\infty$ gives $\|x-x_n\|\le r_n$. Therefore $x\in\overline B(x_n,r_n)\subseteq X\setminus F_n$ for every $n$. We used only the already constructed centers, not a choice of points from arbitrary closed sets. [L1, step 7.1, step 8.1, algebra]
+
+10.1 Step 9.1 contradicts $X=\bigcup_N F_N$ from step 3.2. Therefore the supposed countably infinite Hamel basis cannot exist. All sequences used above were defined by uniform coding, least indices, or recursion on a supplied function, so the proof requires no choice axiom. [step 3.2, step 9.1, discharge-contradiction] ∎
 
 ## Remarks
 

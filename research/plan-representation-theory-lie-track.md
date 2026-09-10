@@ -118,7 +118,7 @@ requirements need not be repeated):
 | RL-9 A | exact future AG-owned A suppliers for $G/B$, associated line bundles, coherent cohomology, projective-line fibres, and Serre duality | whole pair build-held; emit no item before suppliers exist |
 | RL-10 A | `harish-chandra-isomorphism-casimir-and-central-characters`, `verma-modules-and-shapovalov-forms`, `homomorphisms-between-verma-modules-and-linkage`, `category-o-finiteness-duality-and-blocks`, `projectives-standard-filtrations-and-bgg-reciprocity`, plus exact future localisation/$D$-module A suppliers | algebraic prefix may later split; Duflo landmarks remain non-items until a full proof route exists |
 | RL-11 A | `harish-chandra-isomorphism-casimir-and-central-characters`, `the-bgg-resolution`, `semisimple-lie-algebras-cohomology-and-levi-theory`, `derived-functors`, `ext-and-balanced-resolutions`, `spectral-sequences`, `double-complexes-exact-couples-and-convergence` | build-held until every A supplier is published |
-| RL-12 A | `harish-chandra-isomorphism-casimir-and-central-characters` | no B prerequisite |
+| RL-12 A | `harish-chandra-isomorphism-casimir-and-central-characters`, `the-topology-of-euclidean-space` | tensor-quotient definition and extreme-value interface only; no B prerequisite |
 | RL-13 A | `kac-moody-algebras-from-generalized-cartan-matrices`, `semisimple-lie-algebras-cohomology-and-levi-theory`, `root-systems-dynkin-diagrams-and-cartan-killing-classification` | no RL-12 B prerequisite |
 | RL-14 A | `kac-moody-algebras-from-generalized-cartan-matrices`, `verma-modules-and-shapovalov-forms`, `root-systems-dynkin-diagrams-and-cartan-killing-classification` | no RL-13 B prerequisite |
 | RL-15 A | `kac-moody-algebras-from-generalized-cartan-matrices`, `integrable-highest-weight-kac-moody-modules` | no RL-14 B prerequisite |
@@ -133,6 +133,15 @@ The exact current published-to-draft page defect is RL-1 A requiring
 no live file/items. RL-1's published item graph is self-contained, so the
 Phase-3 amendment is `requires: []` until the earlier Phase-2 invariant A is
 published. This is the only such edge whose consumer is a published Lie page.
+
+Root applied that interim RL-1 `requires: []` repair on 2026-09-09 to unblock
+the live RL-12 structural audit. RL-12 retains its real tensor-quotient
+definition dependency on RL-1: five owned items use it, so deleting that edge
+as wholly unused would be incorrect. RL-12 now directly requires the earlier
+Euclidean topology A page for its strict-linear-alternative extreme-value
+argument. Whole-plan validation passes. This page-edge repair does not close
+the separate Harish–Chandra proof debts or claim the waiting invariant
+supplier is published. Reconcile the current manifest at the batch-11 handoff.
 Sequential RL-2-through-RL-15 requirements on preceding B pages are all
 invalid even when the B page happens to be published. There is also one
 incoming cross-category defect: published Representation Theory A page
@@ -1220,6 +1229,12 @@ checks CE/Ext and reductive consequences.
 
 ## RL-12 — Kac--Moody algebras from generalised Cartan matrices
 
+Keep the action algebra explicit in the Verma construction: category O applies
+to M_A as a g(A)-module. The unquotiented Mtilde is a module for the universal
+contragredient algebra, with analogous weight finiteness; do not infer that its
+action descends to g(A). This is the batch11 direct6B definition repair and
+adds no supplier or pair.
+
 **A-page role.** Restart only where finite-dimensional DG structure theory no
 longer applies: construct a contragredient algebra from a finite generalised
 Cartan matrix, quotient by the maximal triangularly disjoint ideal, state the
@@ -1259,7 +1274,9 @@ quotient's Weyl symmetry must be proved directly from its relations.
 | `def-real-and-imaginary-kac-moody-roots` | Definition: real roots are $W\Pi$; all other roots are imaginary, with positive/negative sign inherited from $Q^+$. | Names the genuinely new root phenomenon. | literature-derived | not-applicable | Kleshchev §5.2, pp.70--73; Perrin §9.2, pp.81--84 |
 | `prop-real-root-spaces-are-one-dimensional-sl2-roots` | Proposition: each real root has multiplicity one and an associated $\mathfrak{sl}_2$ triple. | Supplies rank-one integrability arguments in RL-14. | literature-derived | ai-altered | Kleshchev §5.2, pp.70--74; Perrin §9.2, pp.81--84 |
 | `thm-finite-affine-indefinite-trichotomy-for-indecomposable-gcms` | Theorem: an indecomposable GCM is of finite, affine, or indefinite type according to the sign behaviour of its symmetrisation/positive vectors. | Locates the affine pair without repeating finite Dynkin classification. | literature-derived | ai-altered | Kleshchev §4, pp.50--67; Perrin §8, pp.63--78 |
-| `prop-finite-type-kac-moody-algebras-recover-the-dg-semisimple-algebras` | Proposition: finite-type $A$ gives the finite-dimensional semisimple algebra classified by DG-31. | Closes the interface and prevents duplicate finite theory. | literature-derived | ai-altered | Kleshchev §§1.5, 4, pp.20--25, 50--67; DG-31 |
+| `lem-finite-type-kac-moody-roots-descend-to-simple-roots` | Positive-definite root-height descent identifies every root with a simple root under Weyl symmetry; bounded lattice coordinates give finitely many roots and finite-dimensionality. | Local finite-type existence, without Dynkin classification. | literature-derived | ai-altered | Kleshchev Proposition 4.3.2, pp.63--64; local height/lattice proof |
+| `lem-nonsingular-indecomposable-kac-moody-algebras-are-simple` | The maximal-ideal quotient forces a nonzero ideal to meet the Cartan; nonsingularity and connectedness propagate it through all generators. | Local simplicity; disconnected components give a direct sum. | literature-derived | ai-altered | Kleshchev Proposition 1.4.8(i), pp.19--20 |
+| `prop-finite-type-kac-moody-algebras-recover-the-dg-semisimple-algebras` | Finite-type $A$ gives a finite-dimensional direct sum of simple complex Lie algebras with based Cartan matrix $A$, agreeing generatorwise with the DG-31 Serre-presentation model. | Uses the preceding local lemmas and local Serre presentation, not the unbuilt classification theorem. | literature-derived | ai-altered | Kleshchev Propositions 1.4.8(i), 4.3.2; local component decomposition |
 
 **B companion — finite checks and hypothesis tests.**
 
@@ -1273,6 +1290,26 @@ quotient's Weyl symmetry must be proved directly from its relations.
 | `cex-imaginary-root-spaces-need-not-have-multiplicity-one` | Counterexample in affine type: multiples of $\delta$ have rank-sized multiplicity. | Shows the real-root theorem cannot be extended. | literature-derived | ai-altered | Kleshchev §§5--6, pp.68--90 |
 
 ---
+
+### Finite-type supplier reconciliation — 2026-09-09
+
+RL-12 now supplies its finite-type existence argument locally; it does not
+consume DG-31's unpublished `thm-serre-presentation-theorem`.
+`lem-finite-type-kac-moody-roots-descend-to-simple-roots` uses positivity
+of the symmetrized Cartan matrix to lower the height of each positive
+nonsimple root. Weyl symmetry then identifies every root with a simple
+root; a positive-definite lattice bound makes the root set finite.
+`lem-nonsingular-indecomposable-kac-moody-algebras-are-simple` uses the
+maximal-ideal quotient and connected Cartan diagram to propagate a nonzero
+ideal through all generators. Distinct components commute, yielding the
+finite direct sum. Both arguments use earlier RL-12 contracts, not finite
+Dynkin classification. Preserve the complex field, row-coroot convention,
+and both Serre families. The final comparison identifies the same
+Serre-presentation model generator by generator; it does not assume the
+classification theorem. See Kleshchev Proposition 4.3.2 (pp63–64) and
+Proposition 1.4.8(i) (pp19–20). The local contracts await Step-3 review.
+DG-31 remains a future Phase-2 pair for its own classification programme;
+no pair is added to the original 24-pair run.
 
 ## RL-13 — Affine Lie algebras and loop central extensions
 

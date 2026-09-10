@@ -5,19 +5,20 @@ title: "The right six-vertex prime $\\mathcal H$-graph"
 status: published
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
 deps: [def-left-six-vertex-prime-h-graph, def-graph-isomorphism-and-complement]
 justified_by: []
 aliases: []
 landmark: false
 verification:
-  audited: 2026-09-01
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
+  verified:
+    model: gpt-6-astra
     verdict: pass
-    date: 2026-08-31
+    date: 2026-09-09
+    scope: "Owner-authorized graph-identity repair; complement edge set checked against repaired left graph and NSS Figure 1; targeted rendercheck; no independent judgment."
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -32,5 +33,17 @@ pipeline_run: null
 
 The **right six-vertex prime $\mathcal H$-graph** is the complement of the left
 six-vertex prime $\mathcal H$-graph on the same labelled vertex set
-$\{t_1,t_2,t_3,\ell_1,\ell_2,\ell_3\}$
+$\{a,b,c,d,e,f\}$
 ([[def-left-six-vertex-prime-h-graph]], [[def-graph-isomorphism-and-complement]]).
+Explicitly, its edges are
+$$\{ac,ae,af,bf,cd,ce,cf,df\}.$$
+The degrees in the order $a,b,c,d,e,f$ are $3,1,4,2,2,4$.
+
+This complement is isomorphic to the right drawing in Nguyen–Scott–Seymour,
+Figure 1; the shared labels here are inherited from the left graph and are
+not the positions in the right drawing.
+
+## Remarks
+
+The earlier interpretation as the complement of the triangle-with-three-leaves
+net is superseded together with the corrected left-graph definition.

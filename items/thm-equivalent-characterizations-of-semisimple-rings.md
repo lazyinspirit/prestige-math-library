@@ -7,18 +7,19 @@ origin: session
 provenance:
   statement: literature-derived
   proof: ai-altered
-deps: [def-semisimple-ring, thm-equivalent-characterizations-of-semisimple-modules, thm-submodules-and-quotients-of-semisimple-modules, cor-every-module-is-a-quotient-of-a-free-module, def-split-short-exact-sequence, thm-splitting-lemma-for-modules, def-projective-module, thm-projective-module-characterizations]
+deps: [def-semisimple-ring, thm-equivalent-characterizations-of-semisimple-modules, thm-submodules-and-quotients-of-semisimple-modules, cor-every-module-is-a-quotient-of-a-free-module, def-split-short-exact-sequence, thm-splitting-lemma-for-modules, def-projective-module, thm-projective-module-characterizations, def-axiom-of-choice]
 justified_by: []
 aliases: []
 landmark: true
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: "deepseek-v4-pro + claude-sonnet-5"
-    verdict: pass
-    date: 2026-08-17
-  audited: 2026-08-17
+  verified:
+    model: gpt-6-astra
+    verdict: certify
+    date: 2026-09-09
+    scope: owner-authorized-local-choice-contract-repair
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -51,12 +52,23 @@ Assuming the Axiom of Choice, for a unital ring $R$ the following are equivalent
 
 [L8] Assuming the Axiom of Choice, a module is semisimple if and only if every submodule has a complementary submodule. ([[thm-equivalent-characterizations-of-semisimple-modules]]).
 
+[L9] Assume [[def-axiom-of-choice]]. Its actual use here is the AC-qualified
+semisimple complement and submodule/quotient results [L8] and [L2], whose
+proofs use Zorn's lemma. The canonical free cover [L3] and the
+splitting/projectivity equivalence in clauses 1–2 of [L7] are choice-free.
+
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 If ${}_RR$ is semisimple, every free left module, being a direct sum of copies of $R$, is semisimple; every module is a quotient of a free module, so every left module is semisimple. [L1, L2, L3, L4, L5, L6, L7, L8, given, algebra]
+1.1 If ${}_RR$ is semisimple, fix a decomposition $R=\bigoplus_{j\in J}S_j$ into simple left submodules. In the free module $R^{(X)}$, put a copy of each $S_j$ in each coordinate $x\in X$. These simple submodules sum directly: any element has finite coordinate support and in each coordinate a finite decomposition in the $S_j$, uniquely. Thus $R^{(X)}$ is semisimple. Every left module is a quotient of such a free module by [L3], hence is semisimple by the AC-qualified [L2]. [L1, L2, L3, L9, given, algebra]
 
-2.1 If every left module is semisimple, [L8] gives every submodule a complement, and the splitting lemma makes every short exact sequence split. Conversely, if every short exact sequence splits, the projective criterion makes every module projective; if every module is projective, each quotient map splits, so [L8] makes every module semisimple. [L5, L7, L8, step 1.1, given, algebra]
+2.1 If every left module is semisimple, [L8] under [L9] gives every submodule a complement, and [L5] makes every short exact sequence split. If every short exact sequence splits, clauses 1–2 of [L7] make every module projective. If every module is projective, apply those same clauses to every quotient map $M\to M/U$; its splitting gives a complement to $U$ by [L5], so [L8] under [L9] makes every module semisimple. [L5, L7, L8, L9, step 1.1, given, algebra]
 
 3.1 Applying the universal module condition to the left regular module recovers the first condition, and every clause is left-handed as asserted. This proves the stated claim. [step 2.1, given, algebra] ∎
+
+## Remarks
+
+These are left-module characterizations. Applying them to right modules
+requires a separately justified opposite-ring or left/right semisimplicity
+interface; injectivity is not an additional conclusion of this statement.

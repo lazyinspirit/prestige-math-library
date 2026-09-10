@@ -1,0 +1,439 @@
+[
+  {
+    "order": 610.1,
+    "id": "boone-machine-simulation-and-fixed-presentation-undecidability",
+    "title": "Boone Machine Simulation and Fixed-Presentation Undecidability",
+    "kind": "A",
+    "category": "group-theory",
+    "companion": "boone-machine-simulation-and-fixed-presentation-undecidability-examples",
+    "requires": [
+      "diagonalization-and-the-halting-problem",
+      "turing-machines-configurations-and-computation",
+      "turing-machine-configuration-boundary-interface",
+      "decision-problems-for-finitely-presented-groups",
+      "free-groups-and-presentations",
+      "free-products-and-amalgamation",
+      "hnn-extensions-and-brittons-lemma",
+      "relations-functions-and-quotients"
+    ],
+    "items": [
+      {
+        "id": "lem-normalized-fixed-halting-machine-for-boone-simulation",
+        "kind": "lemma",
+        "title": "Normalized fixed halting machine for boone simulation",
+        "statement": "Fix the published deterministic one-tape recognizer R of HALT_TM. There is a finite deterministic two-sided blank-tape machine T whose instructions separately write without moving, move left, or move right, with one stopping state q_stop and a fixed effective input map v, such that T started in q_start scanning v(w) stops exactly when R accepts w. Every nonstopping state/symbol pair has exactly one instruction. Thus the single T has an undecidable stopping language. Put v(epsilon)=blank and v(w)=w otherwise (input symbols exclude blank).",
+        "deps": [
+          "thm-halting-is-recognizable-and-undecidable",
+          "def-deterministic-one-tape-turing-machine",
+          "def-turing-machine-initial-and-halting-configuration-interface"
+        ],
+        "strategy": "Compile a finite table, not an informal change of computational model. Use a dotted copy of each tape symbol to mark original cell zero. A new start state dots the scanned symbol without moving, including the blank for empty input, then enters the simulated start state. For each original entry delta(p,a)=(p2,b,D) and each dotted/undotted version of a, first write the corresponding version of b and enter a fresh intermediate state. That state makes the indicated move and enters p2; at a dotted cell a left move is replaced by a no-op write, implementing the clamp. Rename accepting p2 to q_stop; rename rejecting p2 to a loop state with a no-op write on every symbol. Complete unreachable intermediate/symbol cases by a loop so no other terminal state exists. The dotted symbol is preserved under writes, never copied, and only appears at original zero; cells left of it remain unused. After initialization each original step is exactly two normalized instructions, and conversely every reached intermediate instruction returns to its designated simulated state. Induct on this invariant to prove both halting directions and divergence. The finite visited interval grows by blanks on demand, giving Rotman finite instantaneous descriptions on a two-sided tape. The fixed map v needs only a scan for empty input. If the stopping language were decidable, this map followed by that decider would decide HALT_TM. All compiler states and letters are indexed finite products of the original finite table, so the compiler and input map are literal finite word procedures. ZF suffices; no AC or recursive/computable-equivalence theorem.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.420–425, definitions of quadruple/basic move, Exercise 12.11",
+              "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-boone-machine-semigroup-and-augmented-configurations",
+        "kind": "definition",
+        "title": "Boone machine semigroup and augmented configurations",
+        "statement": "For T of the preceding lemma let S be its finite tape alphabet (blank s0), Q its finite states (stop q0), and take distinct new symbols h,q. On A=S disjoint-union Q disjoint-union {h,q}, form the nonempty-word semigroup A+ modulo finite contextual symmetric derivations of these relations: write q_a s_j=q_b s_k; internal right q_a s_j s_beta=s_j q_b s_beta; end right q_a s_j h=s_j q_b s0 h; internal left s_beta q_a s_j=q_b s_beta s_j; end left h q_a s_j=h q_b s0 s_j, for each applicable T instruction and every s_beta in S. Add q0 s=q0, s q0 h=q0 h (s in S), and h q0 h=q. Augmented configurations are q, or h U q_a V h with U,V in S*, with V nonempty unless q_a=q0. The initial word is C(w)=h q_start v(w) h. Reclassify h as a tape letter only for the subsequent algebraic presentation: all relations then have form F_i q_a G_i=H_i q_b K_i with tape contexts in (S union {h})*, possibly empty, and a single state letter on each side.",
+        "deps": [
+          "lem-normalized-fixed-halting-machine-for-boone-simulation",
+          "def-computation-alphabet-and-word-convention",
+          "def-equivalence-relation",
+          "def-semigroup-and-monoid"
+        ],
+        "strategy": "State that contextual replacement allows arbitrary possibly empty left/right contexts but no inverse tape symbols; both sides of every relation are nonempty. Finite paths define a reflexive, symmetric, transitive relation. Prefixing and suffixing an entire path proves this is a congruence; concatenation of classes is well-defined and associative, so the quotient is the promised semigroup. This verification belongs here before using semigroup equality. The extra symbol q is a state symbol distinct from q0 and has no forward rule. Keep the machine alphabet S separate from S union {h}: stopping erasure ranges over S, never over h. The augmented set contains nonstopping configurations with a scanned cell and stopping configurations with zero or more right-tape letters; it is not the old nonempty-right-tape set. List all five instruction relation families, including the often-missed write family. The finite transition table and finite S make the relation list finite.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.426–427, associated semigroup presentation",
+              "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-boone-semigroup-histories-detect-halting",
+        "kind": "lemma",
+        "title": "Boone semigroup histories detect halting",
+        "statement": "For the encoded initial word C(w), C(w)=q in the finite semigroup exactly when the fixed machine stops on w.",
+        "deps": [
+          "def-boone-machine-semigroup-and-augmented-configurations"
+        ],
+        "strategy": "Check each of the eight relation families in each direction. A nonstopping state has one scanned symbol, and the next symbol on the moved side determines exactly one internal or end rule; write uses its unique table entry. For q0 and nonempty V, the only forward rule erases its first symbol. For q0,V empty,U nonempty, the only forward rule erases the last symbol of U. For U,V empty the only rule is h q0 h->q; q has no successor. Inverse cleanup inserts a tape symbol immediately after q0, or immediately before q0 when V is empty, or replaces q by h q0 h. Inverse transition rules restore a nonempty scanned right segment; inverse end rules restore the unique outside h. Every intermediate word remains augmented. Choose a shortest undirected derivation C(w)=z0,...,zn=q; its last edge points forward. A leftward edge followed by a rightward edge is a valley z_(j-1)<-z_j->z_(j+1); determinism makes the endpoints equal, so delete the detour, contradicting shortest length. Thus no edge points backward. Before the first q0 this is an ordinary T computation; after it the right length then left length then terminal cleanup decrease to q. Conversely any stopping computation has this finite cleanup. No arbitrary semigroup word is assumed valid, and reverse cleanup is not discarded.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.427–428, Lemmas 12.3–12.4 (corrected augmented invariant)",
+              "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-fixed-finite-semigroup-has-undecidable-terminal-equality",
+        "kind": "theorem",
+        "title": "Fixed finite semigroup has undecidable terminal equality",
+        "statement": "There is one fixed finite positive presentation with one-state-letter relations for which equality of encoded initial words to q is undecidable.",
+        "deps": [
+          "lem-normalized-fixed-halting-machine-for-boone-simulation",
+          "lem-boone-semigroup-histories-detect-halting"
+        ],
+        "strategy": "Fix R, its compiled T, and the finite relation list once. The input map C(w) is computed by adding the two markers and state symbol to v(w). A decider for equality of these words to the single terminal q would, by the previous iff, decide HALT_TM. This also rules out unrestricted terminal equality and unrestricted word equality in that one semigroup. It does not require closure theorems for recursive languages.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.428–430, Theorem 12.5 and Corollary 12.6",
+              "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "def-boone-group-presentation-and-special-word",
+        "kind": "definition",
+        "title": "Boone group presentation and special word",
+        "statement": "Let Sbar=S union {h} and Qbar=Q union {q}. Define the finite group B on Sbar,Qbar,{r_i:i in I},x,t,k with relations x s=s x^2; r_i s=s x r_i x; r_i^-1 F_i# q_a G_i r_i=H_i# q_b K_i; t r_i=r_i t, t x=x t; k r_i=r_i k, k x=x k, k(q^-1 t q)=(q^-1 t q)k. All s range over Sbar. Sharp is the free-word involution sending s^epsilon to s^-epsilon in the SAME order, hence (UV)#=U#V#; it is not group inversion and is not asserted to act on the semigroup quotient. A special word is Sigma=X# q_j Y with X,Y positive tape words, possibly empty; define Sigma*=X q_j Y and W(Sigma)=k Sigma^-1 t Sigma k^-1 Sigma^-1 t^-1 Sigma.",
+        "deps": [
+          "def-boone-machine-semigroup-and-augmented-configurations",
+          "def-recursive-and-finite-group-presentations"
+        ],
+        "strategy": "Disjointly tag all generator alphabets; add no unintended relators. Convert displayed equations to relators in the free group quotient of the finite-presentation definition. Sharp is well-defined on freely reduced tape words since it carries cancellation pairs to cancellation pairs. It is an automorphism of the free tape group, not a claim that inverting only the tape letters is an automorphism of the Boone group. Empty contexts have sharp and inverse equal to the empty word. Use the finite clause of def-recursive-and-finite-group-presentations only; its recursive-enumeration clause and the old recorded undecidability remark are unused.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.430–431, sharp notation and Boone presentation",
+              "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "not-applicable"
+        }
+      },
+      {
+        "id": "lem-boone-base-groups-and-associated-free-bases",
+        "kind": "lemma",
+        "title": "Boone base groups and associated free bases",
+        "statement": "Assume AC. Let H=<x,Sbar | s^-1 x s=x^2 for s in Sbar>, let F(Qbar) be the free state group, and put G0=H*F(Qbar). The infinite cyclic <x> embeds in H. In G0 the subgroups A_i=<F_i# q_a G_i, s x (s in Sbar)> and B_i=<H_i# q_b K_i, s x^-1 (s in Sbar)> are free on exactly the displayed bases, and their indicated basis correspondence is an isomorphism. There is a tape-group involution theta(x)=x^-1, theta(s)=s.",
+        "deps": [
+          "def-boone-group-presentation-and-special-word",
+          "thm-reduced-words-form-the-free-group",
+          "thm-normal-form-for-free-products",
+          "thm-brittons-lemma",
+          "cor-the-base-group-embeds-in-its-hnn-extension",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "First establish the finite multiple-stable-letter version of local single-letter Britton inside this proof: adjoin letters successively, using base injectivity at each stage. Induct on the number of letters to prove that a word equal to an element of the original base either has no stable letters or has a pinch over its original associated subgroup. For the newest-letter pinch, a lower-letter block representing an original-base subgroup element either already contains a lower pinch or contains no lower stable letters; this gives the induction. The transversal normal-form construction with one pair of transversals per letter also gives preservation of the full stable-letter sequence during normalization of a reduced word. Apply this to <x>, free of rank one (nonzero integer powers are nonempty reduced words), with maps x^n->x^(2n). The resulting finite tower is H. Next take the free product G0, NOT a group with q_j^-1 x q_j=x. The retraction rho:H->F(Sbar), x->1, s->s, sends the generators sx (and sx^-1) to the free basis Sbar; every nontrivial reduced word in these generators remains nontrivial, so each is a free basis. The automorphism of H*F(Qbar) fixing H and all other states and sending q_a to F_i# q_a G_i has inverse q_a->(F_i#)^-1 q_a G_i^-1. It carries the free product <q_a>*<sx> to A_i; similarly for B_i and sx^-1. This proves freeness, not merely generation, and licenses the basis isomorphism. Theta preserves s^-1 x s=x^2 after inversion and squares to the identity. AC is used only to choose right-coset transversals for the HNN normal forms. Ordinary reduced free-product words require no extra choice.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.438–440, Lemma 12.11 and Corollary 12.12 (corrected free factor)",
+              "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-boone-hnn-tower-and-auxiliary-subgroups",
+        "kind": "lemma",
+        "title": "Boone hnn tower and auxiliary subgroups",
+        "statement": "Assume AC. Adjoining the rule letters to G0 gives an embedded HNN tower G2, and C=<x,r_i> is free on its displayed generators. Adjoin t by the identity isomorphism of the actual subgroup C to get G3, then k by the identity isomorphism of the actual subgroup D=<x,r_i,q^-1 t q> of G3 to obtain exactly B, with all bases embedded. These are the specified associated subgroups; no assertion about the full centralizers or a free basis for D is made.",
+        "deps": [
+          "lem-boone-base-groups-and-associated-free-bases",
+          "thm-hnn-normal-form-theorem",
+          "thm-brittons-lemma",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "With G0 and A_i,B_i proved, construct G2=<G0,r_i | r_i^-1 a r_i=phi_i(a)> as a finite succession of injective HNN extensions. Algebraically r_i^-1(sx)r_i=sx^-1 is equivalent to r_i s=s x r_i x, so this is exactly the rule-letter base of B. For the auxiliary group C=<x,r_i>, prove freeness before any later use: extend rho:G0->F(Sbar union Qbar) by x->1; its restriction to each A_i/B_i is injective by the twisted free bases, hence A_i intersect <x>=B_i intersect <x>={1}. A freely reduced word in x,r_i has no nontrivial rule pinch; finite multiple-letter Britton makes it nontrivial. This argument is established here and can be cited in the later dedicated no-pinches lemma. Adjoin t centralizing the actual subgroup C by its identity automorphism to obtain G3. In G3 define D=<C,q^-1 t q> as the actual subgroup generated by these elements, without asserting that its displayed generators form a free basis. Its two edge maps for the k-extension are the identity inclusion of this actual subgroup, hence injective without a presentation for D. Adjoin k centralizing D. Finite generating sets suffice for all centralizer relators because commutation extends to products and inverses. This yields exactly B and all base embeddings. Translate local stable letter u c u^-1=phi(c) to u=r_i^-1 or s^-1 when necessary. Assume AC throughout.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.438–440, Lemma 12.11",
+              "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+            },
+            {
+              "title": "Stephen G. Simpson, A Slick Proof, Definition 1, p.1 (independent HNN convention cross-check)",
+              "url": "https://sgslogic.net/t20/logic/seminar/050517.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-boone-positive-history-pushing",
+        "kind": "lemma",
+        "title": "Boone positive history pushing",
+        "statement": "Assume AC. A positive semigroup history Sigma*=q implies Sigma=L q R for words L,R on x,r_i; consequently W(Sigma)=1 in B.",
+        "deps": [
+          "def-boone-group-presentation-and-special-word",
+          "lem-boone-hnn-tower-and-auxiliary-subgroups",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "For positive V of length m put d=2^m-1. Induction from x s=s x^2 and r_i s=s x r_i x gives r_i V=V x^d r_i x^d and r_i^-1 V=V x^-d r_i^-1 x^-d. For positive U of length n put e=2^n-1; read U# as the inverse of the positive reversed U and use the preceding identities to get U# r_i=x^e r_i x^e U# and U# r_i^-1=x^-e r_i^-1 x^-e U#. Include m=n=0. In a contextual forward replacement U F_i q_a G_i V->U H_i q_b K_i V, the new starred word equals (x^-e r_i^-1 x^-e) times the old starred word times (x^d r_i x^d); the reverse replacement uses the opposite signed factors. Thus a finite symmetric history gives Sigma=L q R with L,R words in x,r_i. t commutes with L and R, k with R, and k with q^-1 t q, so expand W(Sigma) and cancel to 1. No embedding theorem is used for the elementary identity, although the declared tower supplies the ambient group and inherited AC contract.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.432–433, Lemma 12.10 and sufficiency proof",
+              "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-boone-commutator-extracts-an-auxiliary-history",
+        "kind": "lemma",
+        "title": "Boone commutator extracts an auxiliary history",
+        "statement": "Assume AC. If W(Sigma)=1, then L Sigma R=q in the rule-letter base group for auxiliary words L,R.",
+        "deps": [
+          "lem-boone-hnn-tower-and-auxiliary-subgroups",
+          "thm-brittons-lemma",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Set g=Sigma^-1 t Sigma in G3. Britton at the two k letters of W(Sigma) gives g in D (g is not identity, since Sigma is in G2 and the word has one t). Express g^-1 as R0(q^-1 t^e1 q)R1 ... (q^-1 t^en q)Rn with Rj auxiliary; minimize n. The relation Sigma^-1 t Sigma g^-1=1 must have a t pinch. If it uses the first t, e1=-1 and Sigma R0 q^-1 is an auxiliary element R, so R^-1 Sigma R0=q in G2. Otherwise a pinch between t^ej and t^e(j+1) has e(j+1)=-ej and q Rj q^-1 in C. Centralization by t cancels that pair for ej=+1 and ej=-1 alike, reducing n by two, contradiction. n=0 is excluded by Britton. Freely reduce the resulting auxiliary words. All equalities of coefficients are in embedded G2, not just in B.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.440–441, Lemma 12.13",
+              "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-boone-reduced-auxiliary-words-have-no-rule-pinches",
+        "kind": "lemma",
+        "title": "Boone reduced auxiliary words have no rule pinches",
+        "statement": "Assume AC. Freely reduced auxiliary words contain no rule-letter HNN pinch with a nonzero intermediate power of x; reduced normal-form comparisons match the rule-letter lengths in L Sigma R=q.",
+        "deps": [
+          "lem-boone-base-groups-and-associated-free-bases",
+          "lem-boone-hnn-tower-and-auxiliary-subgroups",
+          "thm-hnn-normal-form-theorem",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Repeat or invoke the earlier proved intersection test A_i intersect <x>=B_i intersect <x>={1}, giving its independent tape normal-form verification: a reduced basis word involving the twisted state generator cannot equal a tape word by the free-product automorphism; a reduced word in sx (or sx^-1) maps under x->1 to the same nonempty reduced s word, so cannot equal x^m. Freely reduced auxiliary words therefore have no rule pinch: an inverse matching rule pair separated only by x^m would require m=0, contradicting free reduction. Hence L X# q_j and q R^-1 Y^-1 are reduced as multiple-rule HNN words. Applying the earlier finite multiple-letter normal form, equality preserves their stable-letter sequences and in particular their lengths; alternatively peel matching interface pinches in the product with the inverse until both end. If one side ran out first, reduced-word nontriviality would contradict equality to a base element. This proves the common length used in reconstruction.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.442–444, Lemma 12.14 and reduced-length comparison",
+              "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "lem-boone-positive-history-reconstruction",
+        "kind": "lemma",
+        "title": "Boone positive history reconstruction",
+        "statement": "Assume AC. If a special positive word Sigma satisfies L Sigma R=q with auxiliary L,R, then Sigma*=q in the positive semigroup.",
+        "deps": [
+          "lem-boone-commutator-extracts-an-auxiliary-history",
+          "lem-boone-reduced-auxiliary-words-have-no-rule-pinches",
+          "lem-boone-positive-history-pushing",
+          "def-axiom-of-choice",
+          "lem-boone-base-groups-and-associated-free-bases",
+          "thm-normal-form-for-free-products",
+          "thm-brittons-lemma"
+        ],
+        "strategy": "Give the complete induction of Rotman Lemma 12.15, internally in its stronger form: X,Y may be freely reduced signed tape words; from reduced auxiliary L X# q_j Y R=q conclude X,Y are positive and X q_j Y=q in the semigroup. Normalize L,R freely; the previous lemma compares their common number p of rule letters. For p=0, H*F(Qbar) normal form gives q_j=q and x^m X#=1=Y x^n. Tape retraction then X=Y=empty, and infinite order gives m=n=0. For p>0 there is a central pinch r_i^epsilon (x^m X# q_j Y x^n) r_i^-epsilon; no other pinch is possible in the two reduced comparison words. For epsilon=-1 its coefficient is in A_i. Use a reduced expression in the free basis of A_i, or minimize its twisted-state occurrences; a state pinch away from q_j would cancel inverse occurrences and contradict minimality. Therefore q_j=q_a and the coefficient is u (F_i# q_a G_i) v with u,v in <sx>. Compare the state syllables to obtain x^m X#=u F_i# and Y x^n=G_i v. Show exactly X=X1 F_i, Y=G_i Y1 as freely spelled words: in x^n v^-1 G_i^-1 Y=1 a surviving initial negative tape letter of reduced G_i^-1 Y could only pinch with the last positive s in v^-1, leaving s x s^-1, which requires x in <x^2>, impossible. The left equation inverted gives the mirrored test. Include an empty reduced remainder separately. This also shows X1# ends negative and Y1 starts positive when nonempty. Conjugation sends u,v through the basis map, which equals theta on tape words, so replacing the central pinch gives (L3 x^-m) X1# H_i# q_b K_i Y1 (x^-n L4)=q, with at most p-1 rule letters on either side. The replacement tape words are freely reduced: the new contexts are positive and the tested surviving endpoint signs prevent cancellation at their interfaces. Freely reduce auxiliary words and reapply length comparison, then use induction. It makes X1 H_i and K_i Y1 positive, whence X,Y are positive, and supplies the required single semigroup replacement followed by equality to q. For epsilon=+1 the coefficient is in B_i: apply theta to its tape equations to turn sx^-1 into sx, leaving tape strings and the terminal-sign tests unchanged and negating m,n. Interchange (F_i,q_a,G_i) with (H_i,q_b,K_i), use the inverse basis map, and obtain (L3 x^-m) X1# F_i# q_a G_i Y1 (x^-n L4)=q; the same interface and shorter-length arguments apply. This is the reverse semigroup replacement, not an assumed reversible machine step. Do not omit either sign, empty prefixes/suffixes, or the stronger signed-word induction. The theorem exported remains the specified positive-special-word implication.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.443–447, Lemma 12.15",
+              "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-boone-special-word-equivalence",
+        "kind": "theorem",
+        "title": "Boone special word equivalence",
+        "statement": "Assume AC. For every special positive word Sigma, W(Sigma)=1 in B if and only if Sigma*=q in the finite semigroup.",
+        "deps": [
+          "lem-boone-positive-history-pushing",
+          "lem-boone-commutator-extracts-an-auxiliary-history",
+          "lem-boone-positive-history-reconstruction",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "For positive special Sigma, a semigroup history gives W(Sigma)=1 by pushing. Conversely W(Sigma)=1 gives an auxiliary equation in G2 by extraction, and reconstruction gives Sigma*=q. The stronger internal signed induction is only a proof device; the iff is asserted only on the positive special-word domain. All inherited group normal-form assumptions are stated as AC.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, p.431, Lemma 12.7; pp.432–447, both proof directions",
+              "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      },
+      {
+        "id": "thm-novikov-boone-undecidability-of-the-word-problem",
+        "kind": "theorem",
+        "title": "Novikov boone undecidability of the word problem",
+        "statement": "Assume AC. There exists one finitely presented group whose word problem in its fixed finite presentation is undecidable.",
+        "deps": [
+          "thm-fixed-finite-semigroup-has-undecidable-terminal-equality",
+          "def-boone-group-presentation-and-special-word",
+          "thm-boone-special-word-equivalence",
+          "def-word-problem-for-a-fixed-finite-presentation",
+          "def-axiom-of-choice"
+        ],
+        "strategy": "Fix the recognizer, compiler, positive semigroup and B once. For arbitrary binary w compute v(w), C(w)=h q_start v(w) h, Sigma(w)=h^-1 q_start v(w) h and its explicitly written commutator W(Sigma(w)); input length only changes these words, never the finite presentation. A Turing-machine decider of the fixed group word problem, composed with this finite-symbol transducer, would decide HALT_TM by the proved semigroup and group iff statements. The transducer consists of finitely many copying/reversal/sign-change scans; it uses no Church–Turing thesis. Assume AC as inherited from the HNN normal-form argument. No Higman embedding, recursive/computable equivalence theorem, source theorem used as an axiom, or recorded result.",
+        "sources": {
+          "references": [
+            {
+              "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, p.431, Theorem 12.8",
+              "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+            },
+            {
+              "title": "Stephen G. Simpson, A Slick Proof, Theorem 8, p.4 (independent fixed-presentation quantifier cross-check)",
+              "url": "https://sgslogic.net/t20/logic/seminar/050517.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        }
+      }
+    ]
+  },
+  {
+    "order": 610.2,
+    "id": "boone-machine-simulation-and-fixed-presentation-undecidability-examples",
+    "title": "Boone Machine Simulation and Fixed-Presentation Undecidability — Examples",
+    "kind": "B",
+    "category": "group-theory",
+    "companion": "boone-machine-simulation-and-fixed-presentation-undecidability",
+    "requires": [
+      "boone-machine-simulation-and-fixed-presentation-undecidability"
+    ],
+    "items": [
+      {
+        "id": "ex-boone-sharp-is-not-word-inversion",
+        "kind": "example",
+        "title": "Boone sharp is not word inversion",
+        "statement": "For distinct tape letters a,b compute (ab)#=a^-1 b^-1, whereas (ab)^-1=b^-1 a^-1.",
+        "deps": [
+          "def-boone-group-presentation-and-special-word"
+        ],
+        "strategy": "Work with distinct formal tape letters a,b: (ab)#=a^-1 b^-1 whereas (ab)^-1=b^-1 a^-1. These are different spellings and different freely reduced words in F({a,b}). Do not infer different elements in an arbitrary presented quotient without a separate argument; spelling alone is the intended warning.",
+        "sources": {
+          "references": [
+            {
+              "title": "Rotman, Chapter 12, pp.430–431",
+              "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-boone-halting-cleanup-through-an-empty-right-tape",
+        "kind": "example",
+        "title": "Boone halting cleanup through an empty right tape",
+        "statement": "For tape symbols a,b, including when they coincide, the augmented stopping configuration h a q0 b h has cleanup h a q0 b h -> h a q0 h -> h q0 h -> q. The middle two words have empty right tape.",
+        "deps": [
+          "def-boone-machine-semigroup-and-augmented-configurations"
+        ],
+        "strategy": "Identify in order the rule q0 b=q0, the rule a q0 h=q0 h, and the rule h q0 h=q. All intermediate words have one state letter, and only the terminal q loses the two h markers. This directly refutes the proposed nonempty-right-tape invariant; it does not assert that this particular stopping configuration is reached on an input.",
+        "sources": {
+          "references": [
+            {
+              "title": "Rotman, Chapter 12, p.427, cleanup relations",
+              "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "ex-fixed-boone-undecidability-implies-uniform-undecidability",
+        "kind": "example",
+        "title": "Fixed boone undecidability implies uniform undecidability",
+        "statement": "Assume AC. There is no Turing-machine algorithm which, on every finite presentation P and every word w in its generators, decides whether w=1 in P. This follows by fixing the single Boone presentation supplied by the A-page theorem.",
+        "deps": [
+          "thm-novikov-boone-undecidability-of-the-word-problem"
+        ],
+        "strategy": "Given a proposed uniform decider U(P,w), build a fixed-input-wrapper decider D(w)=U(P_B,w) with the finite presentation P_B hard-coded. The theorem rules out D. This is specialization, not a claim that varying presentations caused the original undecidability.",
+        "sources": {
+          "references": [
+            {
+              "title": "Rotman, Chapter 12, p.431, Theorem 12.8",
+              "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+            }
+          ]
+        },
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "generation": {
+          "role": "example"
+        }
+      }
+    ]
+  }
+]

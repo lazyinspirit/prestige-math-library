@@ -1192,7 +1192,10 @@ ground the Steenrod axioms; computations remain dependency-leaf examples.
 **A page:** `higher-homotopy-groups-and-cofiber-sequences`
 **B page:** `higher-homotopy-groups-and-cofiber-sequences-examples`
 **Requires:** `homotopy-and-homotopy-equivalence`, `the-fundamental-group`,
-`cw-complexes-and-cellular-homology`
+`cw-complexes-and-cellular-homology`, `mapping-cones-cylinders-and-chain-triangles`,
+`simplicial-subdivision-and-simplicial-approximation`,
+`homology-axioms-degree-and-classical-applications`,
+`inner-product-spaces-and-orthogonality`
 
 This pair begins exactly at the authored topology interface: homotopies are
 continuous maps $X\times I\to Y$, relative homotopies fix the specified subset
@@ -1201,32 +1204,51 @@ It generalises those notions; it does not redefine them.
 
 ### A-page items, in dependency order
 
-- `def-higher-homotopy-group-by-based-cubes` — **definition** — $\pi_n(X,x_0)$ is the set of maps $(I^n,\partial I^n)\to(X,x_0)$ modulo based homotopy, for $n\ge1$. For: provides representatives with explicit faces and includes the authored $n=1$ convention. **Provenance:** statement `literature-derived`; proof `not-applicable`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `lem-cubical-concatenation-is-well-defined-on-higher-homotopy-classes` — **lemma** — reparametrisation and pasted homotopies show independence of representatives. For: closes the group operation. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `thm-higher-homotopy-classes-form-groups-and-are-abelian-above-degree-one` — **theorem** — concatenation gives a group for $n\ge1$, and the Eckmann--Hilton interchange makes it abelian for $n\ge2$. For: the fundamental algebraic structure. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `prop-cubical-and-spherical-models-of-higher-homotopy-agree` — **proposition** — quotienting $\partial I^n$ identifies based classes with $[S^n,X]_*$, including orientation of the generator. For: switches between proof and calculation models. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant` — **proposition** — based maps induce homomorphisms respecting identities, composition and based homotopy. For: extends the authored $\pi_1$ functoriality theorem. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `def-relative-homotopy-group` — **definition** — $\pi_n(X,A,x_0)$ uses maps $(I^n,\partial I^n,J^{n-1})\to(X,A,x_0)$, with the $n=1$ pointed-set exception stated. For: pairs, connectivity and Hurewicz. **Provenance:** statement `literature-derived`; proof `not-applicable`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `lem-relative-homotopy-operations-are-well-defined-in-their-valid-degrees` — **lemma** — concatenation gives groups for $n\ge2$ and abelian groups for $n\ge3$. For: prevents a false group assertion in the low-degree tail. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `thm-long-exact-sequence-of-relative-homotopy-groups` — **theorem** — $\cdots\to\pi_n(A)\to\pi_n(X)\to\pi_n(X,A)\to\pi_{n-1}(A)\to\cdots$ is exact, with pointed-set exactness at the end. For: the main homotopy calculation spine. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `def-cofibration-and-homotopy-extension-property` — **definition** — $i:A\to X$ is a cofibration when every homotopy on $A$ extending a map on $X$ extends across $X\times I$. For: controlled quotients and relative homotopies. **Provenance:** statement `literature-derived`; proof `not-applicable`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `prop-cofibrations-are-characterized-by-a-retraction-of-the-mapping-cylinder-strip` — **proposition** — the HEP is equivalent to retracting $X\times I\cup A\times I$ in the standard cylinder. For: usable recognition criterion. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `def-mapping-cylinder-and-mapping-cone` — **definition** — $M_f$ factors $f$ as a cofibration followed by a deformation equivalence and $C_f=M_f/X$. For: turns arbitrary maps into cofiber sequences. **Provenance:** statement `literature-derived`; proof `not-applicable`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `thm-mapping-cylinder-factorization` — **theorem** — $X\hookrightarrow M_f\to Y$ has the claimed cofibration and deformation-retraction properties, naturally up to homotopy. For: validates the replacement. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `def-reduced-cone-suspension-and-cofiber-sequence` — **definition** — for well-pointed based spaces, $CX$, $\Sigma X$ and $X\to Y\to C_f\to\Sigma X$ use reduced quotients. For: exact Puppe iteration. **Provenance:** statement `literature-derived`; proof `not-applicable`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `thm-puppe-sequence-is-exact-after-mapping-into-a-based-space` — **theorem** — applying $[-,Z]_*$ to the iterated cofiber sequence gives an exact sequence of pointed sets/groups. For: cohomology representability and obstruction calculations. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `prop-loop-suspension-adjunction-on-based-homotopy-classes` — **proposition** — $[\Sigma X,Y]_*\cong[X,\Omega Y]_*$ naturally under the compactly generated convention. For: relates homotopy groups and spectra. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `cor-higher-homotopy-groups-are-iterated-loop-components` — **corollary** — $\pi_n(X)\cong\pi_0(\Omega^nX)$, with the group structure matching concatenation. For: fibration and spectrum calculations. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `def-n-connected-space-and-n-connected-map` — **definition** — vanishing of homotopy groups through $n$ and relative vanishing through $n$, with $(-1)$-connected meaning nonempty and $0$-connected meaning path connected. For: exact low-degree hypotheses in later theorems. **Provenance:** statement `literature-derived`; proof `not-applicable`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
+Current inventory: **34 A / six B**, preserving all prior31A/6B claims; three earlier local point-set helpers close the original pair without a new pair. Canonical synchronization and independent recheck remain pending.
+
+- `def-compactly-generated-conventions-for-based-homotopy` — **definition** — Define WH by closed images of compact Hausdorff test maps, kification by their inverse-image closed-set tests, CG by kX=X, and CGWH by both properties. Define k-products and the mapping space C(Y,Z)=kC_0(Y,Z), where C_0 has subbasis {f:f(u(K))⊆O} for compact Hausdorff K, continuous u:K→Y, and open O⊆Z; for WH Y this is the compact-Hausdorff-subspace compact-open convention of May and Strickland. Based mapping spaces use kified subspace topology. Do not identify compactness alone with Hausdorffness. Cubical homotopy groups retain their definition for arbitrary spaces; categorical constructions use CGWH. **Provenance:** statement `ai-altered`; proof `not-applicable`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 5 §§1–2, pp.39–41; N. P. Strickland, The category of CGWH spaces, Definitions1.1–1.2 and2.8, pp.1,4; May p39 explicitly uses compact Hausdorff convention.
+- `lem-kification-compact-tests-and-finite-constructions` — **lemma** — Kification preserves exactly the maps from compact Hausdorff spaces, is idempotent, and has the CG-source mapping property. Finite k-products are categorical products; ordinary quotients, finite disjoint unions and closed subspaces of CG spaces are CG. Products of closed inclusions are closed inclusions. Finite clopen decompositions commute with kification. For CG X, the ordinary cylinder X×I is CG, and kification preserves cubical maps and their relative homotopies. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** N. P. Strickland, The category of CGWH spaces, Sections1–2, Lemma1.8 through Proposition2.6 and closed-subspace part of Lemma2.26, pp.2–3,7.
+- `lem-compact-test-exponential-law-and-products-of-quotients` — **lemma** — For all CG spaces X,Y,Z, with compact-Hausdorff-test mapping topology and k-products, currying gives natural bijections of continuous maps X×_k Y→Z and X→C(Y,Z), and natural homeomorphisms C(X×_k Y,Z)≅C(X,C(Y,Z)). Products of quotient maps of CG spaces are quotient maps for k-products, using the fibrewise relation (x,y)~(x′,y′) iff q(x)=q(x′) and y=y′. No weak Hausdorff assumption is required. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** N. P. Strickland, The category of CGWH spaces, Propositions2.11–2.12 and2.17–2.20, pp.4–6; corrected map domains.
+- `lem-weak-hausdorff-diagonals-and-closed-quotients` — **lemma** — For CG X, weak Hausdorffness is equivalent to the diagonal being closed in X×_k X. For an ordinary quotient q:X→Q of a CG space, Q is CGWH exactly when its fibre equivalence relation is closed in X×_k X. Compact Hausdorff test images in a WH space are closed compact Hausdorff subspaces. WH passes to subspaces and kification; finite k-products, finite coproducts, closed subspaces and compact-test mapping spaces with WH target are CGWH. Based mapping and loop subspaces are CGWH when the target is CGWH. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** N. P. Strickland, The category of CGWH spaces, Lemma1.4, Proposition2.14, Corollaries2.15–2.16 and2.21, Proposition2.24, pp.1–2,6–7.
+- `lem-compact-generation-preserves-the-cylinder-and-closed-pushouts` — **lemma** — Kification preserves maps from compact Hausdorff spaces and cubical relative homotopy classes. For CGWH X its ordinary product with I is CGWH. If A→X is a closed inclusion of CGWH spaces and f:A→Y is continuous with Y CGWH, the ordinary pushout X∪_A Y is CGWH, Y embeds as a closed subspace, and the square is a pullback. This supplies the cylinder, reduced-track, cone and suspension quotients used here. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 5 §§1–2 pp.39–40; N. P. Strickland, The category of CGWH spaces, Proposition2.35, pp.9–10, full relation formula and continuation visually read; prior proofs supplied by local helpers.
+- `lem-interval-exponential-law-and-quotient-homotopies` — **lemma** — For the compact interval I and any target Y, compact-open currying identifies continuous X×I→Y with continuous X→C(I,Y). This descends to based and kified conventions. Products of quotient maps with I are quotient; quotients and cylinder homotopies used here are consequently compatible. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 5 §2 pp.40–41; interval specialization with local proof; N. P. Strickland, The category of CGWH spaces, Propositions2.6,2.11–2.12,2.17–2.20,2.24; interval-specialized ordinary proof supplied locally.
+- `def-higher-homotopy-group-by-based-cubes` — **definition** — For n≥1 use maps (I^n,∂I^n)→(X,x0) modulo homotopies fixed on the boundary; π0 is separately the pointed set of path components. The product traverses the first representative first in coordinate 1. **Provenance:** statement `ai-altered`; proof `not-applicable`. **Source locator:** Hatcher, Algebraic Topology, Chapter 4, §4.1, Definitions and Basic Constructions, pp.340–346.
+- `lem-cubical-concatenation-is-well-defined-on-higher-homotopy-classes` — **lemma** — Pasting along coordinate 1 defines a representative-independent product. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** Hatcher, Algebraic Topology, Chapter 4, §4.1, Definitions and Basic Constructions, pp.340–346.
+- `thm-higher-homotopy-classes-form-groups-and-are-abelian-above-degree-one` — **theorem** — The cubical operation makes πn a group for n≥1 and an abelian group for n≥2. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** Hatcher, Algebraic Topology, Chapter 4, §4.1, Definitions and Basic Constructions, pp.340–346.
+- `prop-cubical-and-spherical-models-of-higher-homotopy-agree` — **proposition** — For n≥1 an oriented identification I^n/∂I^n≅S^n gives πn(X,x0)≅[S^n,X]*; the pinch operation agrees with concatenation. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** Hatcher, Algebraic Topology, Chapter 4, §4.1, Definitions and Basic Constructions, pp.340–346.
+- `prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant` — **proposition** — Based maps induce homomorphisms, preserve identities and composition, and based homotopies induce equal maps; based homotopy equivalences induce isomorphisms. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** Hatcher, Algebraic Topology, Chapter 4, §4.1, Definitions and Basic Constructions, pp.340–346.
+- `def-relative-homotopy-group` — **definition** — Let F=I^(n−1)×{0} and J be the union of the other faces. Relative classes are maps (I^n,∂I^n,J)→(X,A,x0), with homotopies preserving that triple. For n=1 these are paths from a variable point of A to x0; π1(X,A,x0) is only a pointed set, and relative π0 is not defined. **Provenance:** statement `ai-altered`; proof `not-applicable`. **Source locator:** Hatcher, Algebraic Topology, Chapter 4, §4.1, Definitions and Basic Constructions, pp.340–346.
+- `lem-relative-cubical-disk-model-and-compression` — **lemma** — The quotient of the cubical triple by J is the based disk-boundary triple. A disk representative is relatively null exactly when it deforms into A while its whole boundary stays fixed. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** Hatcher, Algebraic Topology, Chapter 4, §4.1, Definitions and Basic Constructions, pp.340–346.
+- `lem-relative-homotopy-operations-are-well-defined-in-their-valid-degrees` — **lemma** — Relative πn is a group for n≥2 and abelian for n≥3. Restricting to F defines ∂:πn(X,A)→π(n−1)(A); it is a homomorphism for n≥2. Maps and homotopies of triples act functorially. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** Hatcher, Algebraic Topology, Chapter 4, §4.1, Definitions and Basic Constructions, pp.340–346.
+- `thm-long-exact-sequence-of-relative-homotopy-groups` — **theorem** — For every based pair the natural relative homotopy sequence is exact through π1(X,A)→π0(A)→π0(X). Exactness means image equals inverse image of the distinguished point. No terminal surjection onto all components of X is asserted. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** Hatcher, Algebraic Topology, Chapter 4, §4.1, Definitions and Basic Constructions, pp.340–346.
+- `def-cofibration-and-homotopy-extension-property` — **definition** — Define unbased HEP for a map i:A→X using all targets and all compatible initial maps and homotopies. Define based HEP separately; well-pointed means the basepoint inclusion is an unbased cofibration. **Provenance:** statement `ai-altered`; proof `not-applicable`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 6 §1 p.43; Chapter 8 §3 p.58.
+- `prop-cofibrations-are-characterized-by-a-retraction-of-the-mapping-cylinder-strip` — **proposition** — For a general map i, HEP is equivalent to a retraction of the canonical map X∪i(A×I)→X×I. For a closed inclusion it is equivalent to a retraction onto X×{0}∪A×I. In CGWH, either unbased or based HEP forces the map to be a closed embedding; the based version uses the reduced strip and reduced cylinder. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 6 §2 p.44.
+- `def-mapping-cylinder-and-mapping-cone` — **definition** — For f:X→Y put Mf=(Y disjoint-union X×I)/((x,0)~f(x)), j(x)=[x,1], r([x,s])=f(x), r(y)=y, and unreduced Cf=Mf/j(X). Use distinct notation for the reduced version later. **Provenance:** statement `ai-altered`; proof `not-applicable`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 6 §3 p.45; Chapter 8 §4 p.59.
+- `thm-mapping-cylinder-factorization` — **theorem** — The factorization f=rj has j a cofibration and Y a strong deformation retract of Mf; it is natural for strictly commuting squares. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 6 §3 p.45.
+- `lem-pushouts-and-products-preserve-the-cofibrations-used-here` — **lemma** — In the stated CGWH category, pushouts preserve cofibrations and k-products with arbitrary CGWH spaces preserve HEP. The product pair (X×Y,X×B union A×Y) of two closed cofibration pairs is a cofibration pair. This includes the finite endpoint, disk-cylinder and well-pointed reduced-cylinder boundary constructions used here. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 6 §1 pp.43–44 and §4 p.45; Chapter 8 §3 p.58.
+- `def-reduced-cone-suspension-and-cofiber-sequence` — **definition** — For well-pointed based spaces define CX=X×I/(X×{1} union {x0}×I), ΣX=CX/X, and reduced Cf=Y∪f CX. Define f,i,q and the iterated cofiber sequence with next map −Σf, where minus reverses the suspension parameter. Reduced cylinders also collapse the basepoint track. **Provenance:** statement `ai-altered`; proof `not-applicable`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 8 §§2–4 pp.57–60.
+- `lem-cofiber-of-a-based-cofibration-is-equivalent-to-the-quotient` — **lemma** — For a based cofibration A→X in the stated category, the canonical map Ci→X/A is a based homotopy equivalence. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 8 §4 first lemma p.60.
+- `lem-iterated-cofibers-rotate-with-suspension-reflection` — **lemma** — The cofiber of Y→Cf is based homotopy equivalent to ΣX; the next map agrees up to based homotopy with −Σf. Suspension commutes with cone formation with the coordinate interchange explicitly accounted for. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 8 §4 second lemma and preceding diagram p.60.
+- `lem-suspension-homotopy-classes-have-natural-group-structures` — **lemma** — For based X,Z the set [ΣX,Z]* is a group under pinching the suspension parameter; [Σ²X,Z]* is abelian. Precomposition by suspended maps is a homomorphism. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 8 §2 p.58.
+- `thm-puppe-sequence-is-exact-after-mapping-into-a-based-space` — **theorem** — For a based map f of well-pointed spaces, applying [−,Z]* to its Puppe sequence is exact as pointed sets. The suspended portion has group structures and from double suspensions these are abelian; specify which arrows are group homomorphisms. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 8 §4 theorem pp.59–60.
+- `prop-loop-suspension-adjunction-on-based-homotopy-classes` — **proposition** — Naturally [ΣX,Y]*≅[X,ΩY]* with ΩY the kified compact-open based loop space. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 8 §2 pp.57–58.
+- `cor-higher-homotopy-groups-are-iterated-loop-components` — **corollary** — πn(X,x0)≅π0(Ω^nX) for n≥1, with the operation on components induced by coordinatewise loop concatenation. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 9 §1 p.65.
+- `prop-higher-homotopy-basepoint-transport-and-moving-homotopies` — **proposition** — A path γ from x0 to x1 induces transport βγ:πn(X,x1)→πn(X,x0) by a radial shell; inverse and concatenation laws hold. For H:f≃g with basepoint track γ, f*=βγ g*. In degree one βγ([a])=[γ*a*reverse(γ)]. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** Hatcher, Algebraic Topology, Chapter 4, §4.1, Definitions and Basic Constructions, pp.340–346.
+- `def-n-connected-space-and-n-connected-map` — **definition** — A (−1)-connected space is nonempty; for n≥0 require nonemptiness, path connectedness and vanishing πi for 1≤i≤n at every basepoint. A map is 0-connected when surjective on path components; for n≥1 require this and vanishing πi(Mf,X,x) for every x∈X and 1≤i≤n. A (−1)-connected map imposes no condition. Do not omit target components not meeting the source. **Provenance:** statement `ai-altered`; proof `not-applicable`. **Source locator:** Hatcher, Algebraic Topology, Chapter 4, §4.1 p.346; mapping-cylinder formulation.
+- `lem-finite-cw-basepoints-have-explicit-homotopy-extension` — **lemma** — The inclusion of a vertex in a finite CW complex is a cofibration. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 6 §4 p.45, applied to finite cell attachments.
+- `thm-lower-dimensional-sphere-maps-are-based-nullhomotopic` — **theorem** — For integers 0<=k<r and r>=1, every continuous based map (S^k,a)->(S^r,b) is homotopic to the constant b map through maps fixing a. For k=0 this states that every point of S^r can be joined to b. No arbitrary choice assumption is needed. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 9 section 4, printed p67, complete lower-sphere lemma proof.
+- `lem-based-sphere-maps-have-finite-affine-bubble-normal-forms` — **lemma** — For r>=1, represent the based sphere by R^r union {infinity} and a based source map by (I^r,boundary I^r). Every such map is based homotopic to a map constant at infinity off finitely many disjoint closed parallelepipeds in the interior, and on each parallelepiped has the form x -> Q_R(A_j(x-c_j)), with A_j invertible and Q_R(v)=v/(1-||v||_infinity/R) for ||v||_infinity<R, infinity otherwise. Empty finite families are allowed. No infinite choice is used. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Hatcher, Algebraic Topology, Hatcher §2.C finite approximation and Proposition 2.30/Example 2.31 pp136–137 as ingredients; local explicit double-cube and radial-collapse construction.
+- `lem-finite-affine-bubbles-represent-signed-cubical-sums` — **lemma** — In the preceding normal form, the based homotopy class is the sum of one identity generator for each positive-determinant A_j and one inverse generator for each negative-determinant A_j. The sum is the cubical first-coordinate group operation, including r=1. All homotopies fix the boundary. No infinite choice is used. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Hatcher, Algebraic Topology, Local expansion of Hatcher Example 2.31 pp136–137 using finite affine charts and explicit cubical group laws; Gram–Schmidt is a published supplier.
+- `thm-based-sphere-maps-are-classified-by-geometric-degree` — **theorem** — For each r>=1, degree gives an isomorphism pi_r(S^r,b) -> Z, taking the identity to +1 and cubical concatenation, equivalently the oriented pinch operation, to addition. Consequently two continuous based sphere self-maps are homotopic through based maps exactly when their degrees agree. No infinite choice assumption is needed. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** Hatcher, Algebraic Topology, Hatcher degree properties p134 and Proposition 2.30/Example 2.31 pp136–137; local signed-bubble proof supplies the converse.
 
 ### B page — `higher-homotopy-groups-and-cofiber-sequences-examples`
 
-- `ex-higher-homotopy-groups-of-a-product` — **example** — coordinate projections give $\pi_n(X\times Y)\cong\pi_n(X)\times\pi_n(Y)$. For: finite representative check. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `ex-relative-homotopy-of-a-disk-boundary-pair` — **example** — the LES identifies its first nonzero relative group. For: Hurewicz input. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `ex-mapping-cone-of-a-degree-d-circle-map` — **example** — computes cellular homology and the first homotopy consequence. For: cofiber calculation with torsion. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `ex-cofiber-sequence-of-a-wedge-summand-inclusion` — **example** — pinching identifies the quotient and Puppe maps. For: exactness check. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `cex-unbased-homotopic-based-maps-need-not-induce-the-same-based-homotopy-map-without-basepoint-transport` — **counterexample** — the change is conjugation in degree one. For: keeps based homotopy hypotheses explicit. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
-- `cex-an-arbitrary-subspace-inclusion-need-not-be-a-cofibration` — **counterexample** — a source-standard non-NDR inclusion fails HEP. For: shows why quotient homotopies need cofibration. **Provenance:** statement `literature-derived`; proof `ai-altered`. **Source locator:** May, *A Concise Course in Algebraic Topology*, Chs. 6, 8 and 9, pp. 43--48, 57--72.
+- `ex-higher-homotopy-groups-of-a-product` — **example** — For all n≥1, πn(X×Y,(x0,y0))≅πn(X,x0)×πn(Y,y0); also the pointed component sets correspond. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** Hatcher, Algebraic Topology, Chapter 4, §4.1 Proposition 4.2 p.343, finite-product specialization.
+- `ex-relative-homotopy-of-a-disk-boundary-pair` — **example** — For m≥2, πk(D^m,S^(m−1),x0)=0 for 1≤k<m and πm(D^m,S^(m−1),x0)≅Z, generated by the oriented characteristic disk. For m=1 the relative π1 is a two-element pointed set, not Z. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** Hatcher, Algebraic Topology, Chapter 4, §4.1 Example 4.4 p.345; sphere calculation requires pending suppliers.
+- `ex-mapping-cone-of-a-degree-d-circle-map` — **example** — For integer d and the based map [t]↦[dt] on R/Z, the mapping cone has H0=Z, H1=Z/dZ, H2=ker(d:Z→Z), and no higher homology. Its π1 is Z/dZ; d=0 gives π1=Z and H2=Z, and d=±1 gives trivial π1 and reduced homology. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 4 §5 p.38 cone attachment argument; local cellular calculation; Hatcher, Algebraic Topology, Example 2.32, §2.2, Example 2.32, p.137.
+- `ex-cofiber-sequence-of-a-wedge-summand-inclusion` — **example** — For well-pointed based U,V the inclusion U→U∨V is a cofibration with quotient V; its Puppe connecting map V→ΣU is based nullhomotopic. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 8 §4 p.60 quotient lemma, wedge specialization.
+- `cex-unbased-homotopic-based-maps-need-not-induce-the-same-based-homotopy-map-without-basepoint-transport` — **counterexample** — There exist based maps of the two-circle wedge that are freely homotopic but induce different endomorphisms of π1. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** Hatcher, Algebraic Topology, Chapter 4, §4.1 pp.341–342 basepoint action, finite wedge witness.
+- `cex-an-arbitrary-subspace-inclusion-need-not-be-a-cofibration` — **counterexample** — For X={0} union {1/n:n≥1}⊂R, the closed inclusion {0}→X is not a cofibration. **Provenance:** statement `ai-altered`; proof `ai-altered`. **Source locator:** May, A Concise Course in Algebraic Topology, Chapter 6 §2 p.44 retraction criterion; explicit local witness.
 
 ### Sources and exact locators
 
@@ -1235,6 +1257,365 @@ It generalises those notions; it does not redefine them.
 - May, *A Concise Course in Algebraic Topology*, Chapters 6, 8 and 9,
   “Cofibrations,” “Based cofibrations and cofiber sequences,” and “Higher
   homotopy groups,” printed pp. 43--48 and 57--72.
+
+### AT-10 scaffold reconciliation — 2026-09-09
+
+The earlier sphere-repair inventory was 31 A and six B items; the current point-set closure has 34 A and six B, with canonical synchronization owned by root. Add the
+backward requirement `simplicial-subdivision-and-simplicial-approximation`.
+No new pair or run-scope expansion is needed for the lower-sphere supplier.
+
+`thm-lower-dimensional-sphere-maps-are-based-nullhomotopic`: For integers 0<=k<r and r>=1, every continuous based map (S^k,a)->(S^r,b) is homotopic to the constant b map through maps fixing a. For k=0 this states that every point of S^r can be joined to b. No arbitrary choice assumption is needed. Exact prerequisites: `thm-finite-simplicial-approximation-for-maps-of-pairs`, `def-euclidean-spheres-and-closed-balls`, `def-homotopy-relative-and-path-homotopy`, `lem-straight-line-homotopies-are-continuous`. Source: May Chapter 9 §4 p67, complete lemma proof read at https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf .
+
+Complete local proof: Use the finite triangulation of S^d obtained from the boundary of the cross-polytope in R^(d+1): faces are convex hulls of subsets of signed coordinate vectors containing no opposite pair. Its realization is {x:sum_j |x_j|=1}. Radial normalization x/||x||_2 is a homeomorphism to S^d with inverse y/(sum_j |y_j|); both denominators are positive. Its vertices include e_1. For an arbitrary basepoint a, an orthogonal reflection carries e_1 to a: for a!=e_1 reflect across the hyperplane normal to e_1-a, using v -> v-2<v,e_1-a>(e_1-a)/||e_1-a||^2; use identity when a=e_1. Thus both basepoints can be vertices without an unproved triangulation theorem. This includes d=0, whose polytope boundary is two points.
+Apply the published finite approximation theorem to the pair (K,{a})->(L,{b}). Its pair homotopy fixes a pointwise since the target subcomplex {b} has just one point; subdivision preserves that vertex. The resulting simplicial map has image in the k-skeleton of the r-dimensional target triangulation. Since k<r, the radial image p of the barycenter of any top-dimensional target face is omitted and differs from b. In S^r minus {p}, stereographic coordinates are q(x)=(x-<x,p>p)/(1-<x,p>) in p-perp, with inverse v -> (2v+(||v||^2-1)p)/(||v||^2+1). Direct substitution verifies the inverse identities and nonzero denominators; finite-dimensional arithmetic gives continuity. Contract in these coordinates by (v,t)->(1-t)v+t q(b), a continuous straight-line homotopy fixing q(b). Pull back, postcompose the simplicial approximation, and concatenate with the based approximation homotopy, using the two closed half-interval pieces. This proves the claim including k=0 and fixes the prescribed basepoint throughout. Only finitely many vertex choices are made.
+
+The disk-boundary example now has a local degree supplier. Include the
+backward page requirement `homology-axioms-degree-and-classical-applications`
+for the published degree invariant and finite-fibre formula. The three new
+contracts below prove the converse locally, without a new pair or later
+Hurewicz, Freudenthal or Pontryagin–Thom theorem. Current inventory after point-set closure: 34 A and
+six B items, all original claims retained and pending independent review.
+
+- `lem-based-sphere-maps-have-finite-affine-bubble-normal-forms` — For r>=1, represent the based sphere by R^r union {infinity} and a based source map by (I^r,boundary I^r). Every such map is based homotopic to a map constant at infinity off finitely many disjoint closed parallelepipeds in the interior, and on each parallelepiped has the form x -> Q_R(A_j(x-c_j)), with A_j invertible and Q_R(v)=v/(1-||v||_infinity/R) for ||v||_infinity<R, infinity otherwise. Empty finite families are allowed. No infinite choice is used. Dependencies: `thm-finite-simplicial-approximation-for-maps-of-pairs`, `prop-cubical-and-spherical-models-of-higher-homotopy-agree`, `thm-quotient-universal-property`, `lem-continuity-is-local-and-pastes`, `def-euclidean-spheres-and-closed-balls`. Source: Hatcher §2.C finite approximation and Proposition 2.30/Example 2.31 pp136–137 as ingredients; local explicit double-cube and radial-collapse construction.
+
+  Proof strategy: Build a finite target triangulation by doubling [-1,1]^r along its boundary: triangulate the boundary by ordering the free coordinates on each face, then cone that common boundary triangulation to a distinct centre in each copy. This is a finite simplicial complex. Map the first copy to {||v||_infinity<=1} by identity and the second copy by x -> x/||x||_infinity^2, sending its centre to infinity. The formulas match on the common boundary and give inverse radial formulas; thus the double is R^r union infinity. Compose with the explicit stereographic homeomorphism to S^r if desired. The second centre is the basepoint vertex. Triangulate I^r with its boundary a subcomplex, and apply finite simplicial approximation to the pair with that singleton target. The resulting homotopy fixes the entire boundary because its image stays in the singleton. Choose p in the interior of one r-simplex in the first copy. A small closed coordinate cube p+[-R,R]^r lies inside that simplex. Each source simplex mapping onto it has an affine isomorphism to it; all other source simplices miss its interior. Its inverse cubes are disjoint closed parallelepipeds strictly inside the interiors of their source simplices and of I^r. Postcompose first with translation v -> v-p, via translation by -tp (fixing infinity), and then with Q_R. The latter is based homotopic to identity by Q_{R,t}(v)=v/(1-t||v||_infinity/R) when t||v||_infinity<R and infinity otherwise, for 0<=t<=1. Verify continuity at the moving boundary by divergence of the norm as the denominator tends to zero; at infinity, every finite output has norm at least the input norm, uniformly in t. Translation also extends jointly continuously at infinity. The composed map has exactly the stated affine bubbles and is infinity elsewhere. If no simplex maps onto the chosen target simplex, the result is constant. Only finite choices and explicit Euclidean formulas are used.
+
+- `lem-finite-affine-bubbles-represent-signed-cubical-sums` — In the preceding normal form, the based homotopy class is the sum of one identity generator for each positive-determinant A_j and one inverse generator for each negative-determinant A_j. The sum is the cubical first-coordinate group operation, including r=1. All homotopies fix the boundary. No infinite choice is used. Dependencies: `lem-based-sphere-maps-have-finite-affine-bubble-normal-forms`, `thm-higher-homotopy-classes-form-groups-and-are-abelian-above-degree-one`, `lem-cubical-concatenation-is-well-defined-on-higher-homotopy-classes`, `prop-cubical-and-spherical-models-of-higher-homotopy-agree`, `thm-gram-schmidt-orthonormalisation`, `lem-continuity-is-local-and-pastes`. Source: Local expansion of Hatcher Example 2.31 pp136–137 using finite affine charts and explicit cubical group laws; Gram–Schmidt is a published supplier.
+
+  Proof strategy: First verify the needed matrix path, not an arbitrary sphere-homeomorphism isotopy theorem. Gram–Schmidt on the columns gives A=QR with R upper triangular and positive diagonal. Interpolate R to the identity through upper-triangular matrices with positive diagonal. A special orthogonal matrix can be reduced to identity by finitely many rotations in coordinate planes: at each step rotate its first remaining unit column to the first remaining coordinate vector, then repeat in the orthogonal complement; the last one-dimensional entry is +1 by determinant. Each rotation is connected to identity by its angle parameter. If det Q<0, apply this to QJ where J reflects the first coordinate, yielding a path to J instead. For r=1 use the positive or negative scalar interpolation directly. These paths and their inverses are continuous and have bounded matrix entries on [0,1], by the finite rotation and triangular formulas. Now shrink the radius of bubble j from R to a sufficiently small epsilon_j. This homotopy stays inside its original parallelepiped. Along its matrix path replace the bubble by Q_epsilon_j(A_j(t)(x-c_j)); the inverse bound ensures all supports stay in a chosen private ball inside that parallelepiped. The boundary of every support maps to infinity, so extension by infinity is jointly continuous, by the same denominator estimate as in the preceding lemma. The result is a positive or reflected standard coordinate-cube bubble. Move its centre a sufficiently small distance in its private ball so all first coordinates become distinct; choose them successively avoiding the finitely many previous coordinates. Shrink radii again until all supports lie in disjoint first-coordinate slabs. The map is now exactly a concatenation of these slab maps, with constant slabs inserted where necessary; the existing reparametrization lemma removes constant intervals. Within each slab, move the centre to its midpoint while keeping a small support cube inside the slab, then expand the support rectangle to the full slab using positive coordinate scalings. At the endpoint its boundary maps to infinity and its interior maps homeomorphically to R^r. After the affine slab reparametrization this is the fixed quotient homeomorphism I^r/boundary -> S^r representing the identity generator, or its first-coordinate reflection, which is the group inverse by the cubical inverse formula. The formula is continuous also during expansion to the slab boundary since the radial output diverges there. Thus the original map is the stated signed sum. This proves the required cancellation by group inverse laws and does not assume geometric cancellation, smooth approximation, isotopy extension or Hopf classification.
+
+- `thm-based-sphere-maps-are-classified-by-geometric-degree` — For each r>=1, degree gives an isomorphism pi_r(S^r,b) -> Z, taking the identity to +1 and cubical concatenation, equivalently the oriented pinch operation, to addition. Consequently two continuous based sphere self-maps are homotopic through based maps exactly when their degrees agree. No infinite choice assumption is needed. Dependencies: `lem-finite-affine-bubbles-represent-signed-cubical-sums`, `def-degree-of-a-self-map-of-an-oriented-sphere`, `prop-degree-is-homotopy-invariant-and-multiplicative-under-composition`, `prop-degree-of-identity-constant-reflection-and-antipodal-sphere-maps`, `thm-global-sphere-degree-is-the-sum-of-local-degrees`, `thm-higher-homotopy-classes-form-groups-and-are-abelian-above-degree-one`, `prop-cubical-and-spherical-models-of-higher-homotopy-agree`, `lem-finite-cw-basepoints-have-explicit-homotopy-extension`, `cor-suspension-isomorphism-in-reduced-singular-homology`. Source: Hatcher degree properties p134 and Proposition 2.30/Example 2.31 pp136–137; local signed-bubble proof supplies the converse; Proposition 2.33 p137; May Chapter6 pp43–46 for finite HEP.
+
+  Proof strategy: Finite well-pointedness/suspension/reflection bridge (AT10-FINAL-SPHERE-HEP): use the earlier local lem-finite-cw-basepoints-have-explicit-homotopy-extension, not prop-relative-cw-inclusions-are-cofibrations. Each S^j has a finite CW structure with any specified point b as a vertex: radially identify the boundary of the finite cross-polytope in R^(j+1) with the unit sphere, then carry its vertex e_1 to b by the identity if b=e_1 and otherwise the explicit orthogonal map H_b(x)=x-2<x,e_1-b>(e_1-b)/||e_1-b||^2. This gives the finite structure by transporting its finitely many characteristic maps. The local finite HEP lemma therefore makes the inclusion {b}->S^j a cofibration. For any particular self-map g:S^j->S^j choose a source point a and target point g(a); both spheres are well-pointed, and g is based between these choices. Apply cor-suspension-isomorphism-in-reduced-singular-homology to the TWO-APEX UNREDUCED suspension, not the reduced suspension convention of the cofiber sequence. Its natural isomorphism s gives s (Sigma g)_*=g_* s. With the same underlying sphere in source and target, its Mayer-Vietoris construction is independent of the auxiliary basepoint: it uses the fixed cone cover and projection of its intersection to the sphere. Thus s is the same generator identification on both sides. Since j>=1 the reduced groups here are top unreduced groups, so injectivity of s gives deg(Sigma g)=deg(g). Replacing the chosen generator by its negative does not alter a self-map degree. For the circle base case use S^0={p,q}, not CW excision for two closed arcs. The point and finite-disjoint-sum clauses of thm-singular-homology-satisfies-dimension-and-arbitrary-additivity identify H_0(S^0;Z)=Z[p] direct-sum Z[q]. The augmentation in def-zero-simplex-augmentation-and-reduced-singular-homology sends (a,b) to a+b, so reduced H_0 is generated by [p]-[q]. The swap tau interchanges the two point generators and acts by -1 on this kernel. Both points are vertices of the finite zero-dimensional CW structure, so the local finite HEP lemma discharges the well-pointed hypothesis also for S^0. Apply the already declared suspension corollary at n=0, with source basepoint p and target q: the same basepoint-independent cone-cover connecting map identifies H_1(Sigma S^0;Z) with reduced H_0(S^0;Z), and naturality makes (Sigma tau)_* multiplication by -1. Under the displayed suspension homeomorphism Sigma tau is a coordinate reflection of S^1, so that reflection has degree -1. Iterate the positive-dimensional suspension calculation a finite j-1 times. Under [x,t]->(sqrt(1-t^2)x,t), -1<=t<=1, the suspension of a coordinate reflection is that same coordinate reflection in the next sphere. This quotient map is a homeomorphism, and the displayed identity is literal. Other coordinate reflections are conjugate by coordinate permutations; multiplicativity cancels the degree of the conjugating homeomorphism with that of its inverse. Hence every reflection used in a negative bubble has degree -1 in every dimension. The identity fixes the chosen top generator. A constant sphere self-map factors through a point, whose positive-dimensional homology is zero by the point clause of thm-singular-homology-satisfies-dimension-and-arbitrary-additivity, so its degree is zero. No clause of the published reflection proposition is imported. Only the elementary point and finite-sum clauses of the dimension/additivity supplier are used, not its CW-excision/structural-axiom packaging. No general CW HEP, infinite selection, Hurewicz or later degree classification enters this bridge. The two local lemmas express every class as k times the identity generator, where k is the signed bubble count. For the normalized representative, zero in R^r has exactly one preimage at each bubble centre. On a neighbourhood of each centre the map is a positive radial homeomorphism composed with identity or the first-coordinate reflection. Its local degree is therefore +1 or -1, as follows from the published global/local orientation comparison applied to the corresponding whole-sphere identity/reflection and the explicit local radial homotopy. The published finite-fibre formula gives global degree k; the empty-bubble case has degree zero. Degree is homotopy invariant, so k is determined by the original class. Conversely all integers occur as repeated concatenations of identity or inverse, and the same finite-fibre computation gives their stated degrees. Thus equality of degrees is exactly equality of classes, and the group operation adds their integer coefficients. Choosing the source quotient homeomorphism to agree with the target sphere identification makes its generator the identity; orient both by that same identification, so its degree is +1 regardless of the coordinate chart's orientation relative to any prior convention. The pinch map is precisely cubical concatenation under the quotient model. Nothing uses Hurewicz, Freudenthal, a later Pontryagin–Thom theorem or an unproved converse to homotopy invariance.
+
+### AT10 bounded point-set proof closure — 2026-09-09
+
+Root authorized batch-8 pages/coverage/notes and AT10 prose only, preserving
+all 31 A and six B claims within the original pair. Canonical plan, ledger,
+engine and acceptance stamps remain root-owned. The following supplies the
+previously missing arguments; it is proposed recheck material, not independent
+acceptance of the whole pair. Three earlier local helpers give 34 A / six B.
+
+Full authoritative reading: N. P. Strickland, *The category of CGWH spaces*,
+19 August 2009, all 23 pages including the final references, recovered from
+https://www.math.ksu.edu/~dav/diffeos/StricklandCGHWSpaces.pdf . PDF SHA-256
+`321dec7234dcaf6da5bcc053f69427abf732aa45c447ba8c8ef77c8ed0557817`;
+local PDF `/tmp/uc34-strickland-cgwh.pdf`, complete text `.txt`. Browser
+screenshots timed out, so rendered local pages 9 and 10 were visually read:
+the complete four-component relation in Proposition 2.35 and its proof
+continuation are recovered. Also reread May Chapter 5 pp.39–41 completely
+from the full institutional book, including his convention that “compact”
+means compact Hausdorff. In this repository compactness alone does NOT imply
+Hausdorffness, so the new mapping-space definition states the compact
+Hausdorff test convention explicitly. For interval domains it is the usual
+compact-open topology without any change.
+
+Source corrections, not imported conclusions: Strickland Lemma 1.4's two
+distinct points belong to the image L, not the domain K; several map-domain
+labels in Proposition 2.12 must be C(Y,Z), not C(X,Y). Proposition 2.35's
+relation is closed in the SQUARED disjoint union, not the unsquared union.
+Proposition 2.40's displayed (X×Z)/(Y×Z)=(X/Y)×Z is false if the slash
+collapses the entire Y×Z to one point (take X=Y a point, Z two points).
+Use only the explicitly fibrewise relation of Propositions 2.17 and 2.20.
+The later ultrafilter, transfinite/filtered-colimit and speculative examples
+were read for source completeness but are not suppliers of this finite
+point-set package. No arbitrary-choice principle is introduced: tube covers
+are indexed by all admissible open rectangles and only finite witnesses are
+extracted.
+
+Published direct proofs actually read: `thm-product-universal-property`
+(only its choice-free continuity clauses), `thm-quotient-universal-property`,
+`thm-finite-products-of-compact-spaces`,
+`thm-compactness-under-continuous-maps`,
+`thm-closed-subspace-of-a-compact-space-is-compact`,
+`thm-compact-subset-of-a-hausdorff-space-is-closed`,
+`thm-a-compact-hausdorff-space-is-regular-and-normal`,
+`lem-tube-lemma-for-a-compact-factor`, and
+`cor-heine-borel-in-the-product-topology`; compact/Hausdorff and homotopy
+definitions were read as well. Their homes are earlier: compactness order255,
+Hausdorff-via-diagonal263, products/quotients251, all in the existing required
+page closure before AT10 order366.019. The similarly named metric-only
+continuous-image theorem was inspected and deliberately not used.
+
+### lem-kification-compact-tests-and-finite-constructions
+
+For any space X, define kX by declaring F closed exactly when u^{-1}F is
+closed for every continuous compact Hausdorff test u:K→X. These sets form
+a topology's closed sets: preimages commute with arbitrary intersections
+and finite unions. Original closed sets are included. Every original test
+K→X is continuous to kX by definition; the reverse follows by composing
+with kX→X. Thus tests are unchanged, k(kX)=kX, and a map from any CG space
+T to X is continuous exactly when it is continuous to kX: pull a k-closed
+set back along every compact test of T. The same test calculation proves
+functoriality. A compact Hausdorff space is CG because its identity is a test.
+
+The k-product k(X×Y) has the categorical product property for CG sources
+by that lifting criterion and the ordinary product property. Its finite
+associativity and symmetry homeomorphisms follow by the mutually inverse
+coordinate maps and that property. An ordinary quotient of a CG space is
+CG: its quotient map lifts to k of the quotient, so the inverse image of
+every k-closed set is closed; quotient finality then makes the set closed.
+Finite disjoint unions are CG by testing each summand. Closed subspaces of
+a CG space are CG: for A closed in X and F k-closed in A, any u:K→X has
+compact Hausdorff closed domain u^{-1}A; testing there makes u^{-1}F closed
+in u^{-1}A and hence in K, so F is closed in X and therefore A. Products
+with a closed inclusion are closed inclusions in CG: the ordinary product
+subspace identification followed by the CG mapping criterion gives the
+embedding, and its image is the inverse image of a closed set under a
+projection. Finite clopen decompositions are respected by kification, since
+each compact test splits into finitely many compact Hausdorff clopen pieces;
+hence k-products distribute over finite disjoint unions.
+
+Here is the full cylinder proof, with no quotient assumption. Let X be CG
+and F k-closed in the ordinary X×I. At (x,t) outside F, its vertical section
+F_x is closed in I by the test s↦(x,s). Choose a closed interval neighbourhood
+J of t in I disjoint from F_x. Put V={y in X:({y}×J) intersect F is empty}.
+For any test u:K→X, the preimage of F under u×id_J is closed in the compact
+Hausdorff K×J. Its projection on K is compact and closed, and is precisely
+K minus u^{-1}V. Thus V is k-open, hence open in X. The rectangle
+V×int_I(J) contains (x,t) and misses F. Therefore F is ordinary closed,
+so X×I is already CG. Endpoints use relative intervals in I. Finite iteration
+gives the same result for cubes. Tests from cubes and their cylinder homotopies
+are therefore unchanged by kification, including prescribed boundary values.
+
+### lem-compact-test-exponential-law-and-products-of-quotients
+
+For CG spaces Y,Z let C_0(Y,Z) be the continuous maps with subbasis
+W(u,K,O)={f:f(u(K)) subset O}, where K is compact Hausdorff, u:K→Y is
+continuous, and O is open in Z; put C(Y,Z)=kC_0(Y,Z). This definition makes
+sense even when Y,Z are not WH, which is needed before quotient separation
+has been proved. It agrees with May's compact-Hausdorff convention on WH
+domains once their compact images are shown Hausdorff below.
+
+Evaluation Y×_k C(Y,Z)→Z is continuous by compact tests. A test with
+components v:K→Y and w:K→C(Y,Z) has composite a↦w(a)(v(a)). If this value
+at a lies in open O, continuity of w(a)∘v and compact Hausdorff regularity
+give a closed neighbourhood L of a in K with w(a)(v(L)) subset O. The set
+N=w^{-1}W(v|_L,L,O) is an open neighbourhood of a. On N intersect int(L),
+the evaluation lies in O. Thus the test composite is continuous.
+
+Conversely, for continuous g:X×_k Y→Z its transpose f(x)(y)=g(x,y)
+has continuous values by the slice maps. To show f:X→C_0(Y,Z) continuous,
+test by v:L→X compact Hausdorff. For a subbasic W(u,K,O), the preimage
+under f∘v consists of b with g(v(b),u(K)) subset O. The map L×K→X×_k Y
+is continuous by the product property. The tube lemma in L×K says precisely
+that this preimage is open. Hence f is continuous by the compact-test
+criterion for X, and lifts to C(Y,Z). Conversely uncurrying is composition
+with evaluation. These inverse assignments are natural. Their induced
+mapping-space bijection is a homeomorphism: evaluate twice to obtain the
+continuous uncurried map for currying, and curry the evaluation of
+C(X×_k Y,Z) twice for its inverse. Finite product associativity, established
+above, supplies the coordinate reassociation. This avoids a future categorical
+adjunction or unproved cartesian-closed theorem.
+
+For a quotient q:X→Q of CG spaces and a CG space Y, let P be the ordinary
+quotient of X×_k Y by (x,y)~(x',y') iff q(x)=q(x') and y=y'. It is CG by
+the preceding lemma. There is a continuous bijection P→Q×_k Y. Transpose
+the quotient map X×_k Y→P; its transpose X→C(Y,P) is constant on q-fibres,
+so factors continuously through Q by the ordinary quotient property.
+Uncurrying gives the inverse Q×_k Y→P. Thus q×id_Y is quotient. Composition
+gives q×r quotient for two quotient maps. The relation is fibrewise; no
+whole-subset collapse is substituted. This proof uses CG targets that need
+not yet be WH, so it is not circular with the next separation lemma.
+
+### lem-weak-hausdorff-diagonals-and-closed-quotients
+
+If X is WH, points are closed. For a test u:K→X, its image L is compact
+and closed, and u:K→L is closed: every closed subset of K is compact
+Hausdorff and has closed image by WH. For distinct a,b in L their fibres
+are disjoint closed subsets of compact Hausdorff K. Separate them by open
+U,V. Then L minus u(K minus U) and L minus u(K minus V) are disjoint open
+neighbourhoods of a,b. Thus L is Hausdorff. This also proves that the
+compact-Hausdorff-test mapping subbasis equals the subbasis over compact
+Hausdorff subspaces when the domain is WH. WH passes to subspaces by the
+same closed-image test, and to kification because tests are unchanged and
+the topology is finer.
+
+For CG X, WH is equivalent to Delta_X being closed in X×_k X. In the forward
+direction test the diagonal by (v,w):K→X×_k X. At a with v(a) unequal w(a),
+choose a closed neighbourhood L of a in K whose v-image avoids the closed
+point w(a). WH makes v(L) closed. Then int(L) intersect w^{-1}(X minus v(L))
+is a neighbourhood of a avoiding the equality set, proving it closed. In
+the reverse direction, for tests u:K→X and v:L→X the equalizer subset
+E={(a,b):u(a)=v(b)} of K×L is closed, hence compact. Its projection onto L
+is compact and closed and equals v^{-1}(u(K)). Thus u(K) is k-closed in X,
+hence closed. This is WH. Products of WH CG spaces are WH because equality
+is the intersection of the inverse images of the two factor diagonals.
+Finite coproducts are WH because each test splits into compact Hausdorff
+clopen preimages. Closed subspaces remain CGWH by the preceding lemma.
+
+If q:X→Q is an ordinary quotient of a CG space, Q is CG and q×q is a
+quotient of k-products by the preceding exponential lemma. Therefore Q is
+WH exactly when (q×q)^{-1}Delta_Q is closed in X×_k X. This is the required
+closed-equivalence-relation criterion, not merely ordinary quotient finality.
+Finally C(X,Y) is WH for CG X and CGWH Y: evaluation at each x is continuous,
+and its diagonal is the intersection over x of the inverse images of Delta_Y
+under the paired evaluations. The based mapping subspace and based loop
+space are closed subspaces (endpoint/basepoint evaluation equals the closed
+singleton), hence CGWH with their kified subspace topology.
+
+### lem-compact-generation-preserves-the-cylinder-and-closed-pushouts
+
+The compact-test and cylinder conclusions are the first helper, with WH
+preserved by the third. For the closed pushout let A be a closed subspace
+of CGWH X and f:A→Y continuous with Y CGWH. Put S=X disjoint-union Y and
+P=(X minus A) disjoint-union Y as a set, and give P the quotient topology
+of q:S→P, identity off A and f on A. The equivalence relation on S has
+four clopen components in S×_k S:
+on X×_k X it is Delta_X union E_f, with
+E_f={(a,a') in A×A:f(a)=f(a')}; on X×_k Y it is the graph
+G_f={(a,y):f(a)=y}; on Y×_k X it is the transpose graph; on Y×_k Y it
+is Delta_Y. E_f and G_f are closed by the WH diagonal criterion, first
+in the relevant products with A and then in those with X because A is
+closed. This finite union is exactly the equivalence relation, hence closed.
+The quotient criterion proves P is CGWH. Its ordinary quotient universal
+property gives the pushout in both Top and CGWH.
+
+The map j:Y→P is injective; for F closed in Y,
+q^{-1}(j(F))=f^{-1}(F) disjoint-union F is closed in S, so j is a closed
+embedding. The pushout square is also a pullback: its underlying pullback
+is A, and a continuous map into X×_k Y landing in that set has continuous
+X-component landing in A, hence factors continuously through the subspace A.
+For any closed D in X disjoint from A, its image in P is also a closed
+embedded copy, since it is saturated and closed and the same holds for each
+of its closed subsets. These embedding clauses give the free cylinder end
+and the based cone boundary their actual inherited topology.
+
+Apply this to cylinder attachments along X×{0}, and to collapsing the closed
+basepoint track and cone end. WH implies the basepoint is closed, so the
+union of each finite list of collapsed tracks is closed. Repeated ordinary
+quotients are legitimate, but their products are justified by the preceding
+fibrewise quotient theorem, not by Strickland's erroneous whole-collapse
+formula. This establishes the actual cylinder, reduced-cylinder, cone,
+suspension and closed-cofiber point-set interfaces without dropping claims.
+
+### lem-interval-exponential-law-and-quotient-homotopies
+
+For arbitrary topological X,Y (no CG or WH assumed), the interval compact-open
+currying bijection is continuous on maps. Evaluation C(I,Y)×I→Y is continuous:
+at (f,t) mapping into open O choose a compact interval neighbourhood J of t
+with f(J) subset O; W(J,O)×int_I(J) maps into O. For a continuous
+H:X×I→Y, the preimage of W(K,O) under its transpose is open by the tube
+lemma applied to H^{-1}(O) and the compact K subset I. Conversely compose
+with evaluation. For an arbitrary quotient q:X→Q and a fibre-constant
+continuous map X×I→Y, transpose, factor through q, then uncurry; this gives
+continuity on Q×I. To infer quotient finality, apply this to the characteristic
+map of any subset U of Q×I into the two-point Sierpinski space with opens
+empty,{1},{0,1}: continuity is precisely openness of U. Hence q×id_I is an
+ordinary quotient, for arbitrary spaces.
+
+For CG spaces, X×I is already CG by the first helper, and maps X→C_0(I,Y)
+lift to its kification. Endpoint and basepoint restrictions are closed in
+the WH case by the third helper, and in general remain the specified kified
+subspaces with the CG mapping property. Apply the same argument with X×I
+as parameter to handle homotopies of maps. All transposes preserve the
+specified constant endpoints and basepoint track, so the based adjunction
+descends to based homotopy classes. This retains the original arbitrary-Y
+ordinary statement separately from the CGWH categorical statement.
+
+### prop-cofibrations-are-characterized-by-a-retraction-of-the-mapping-cylinder-strip
+
+For a CGWH map i:A→X, form R=X union_i(A×I) using the closed attachment
+A×{0}→A×I; the closed-pushout lemma proves R is CGWH. There is a canonical
+c:R→X×I, identity on the bottom and (a,t)↦(i(a),t) on the strip. Universal
+HEP with target R gives s:X×I→R with sc=id_R. Conversely a retraction s,
+followed by the map R→Z induced by any compatible initial map and homotopy,
+gives the required extension. The quotient-times-interval and closed-pushout
+results give the actual topologies, not just the underlying sets.
+
+A split monomorphism c between CGWH spaces is a closed embedding: s
+restricts to its inverse on the image, and that image is the equalizer of
+cs and identity, closed by the WH diagonal criterion. The endpoint A×{1}
+is a closed embedded copy of A in R: it is disjoint from the attaching end,
+and every closed subset has closed saturated image under the quotient.
+Its image under c is i(A)×{1}, so i is a closed embedding whenever HEP
+holds. For such an inclusion the ordinary closed-pasting topology identifies
+R with X×{0} union A×I, giving the stated strip version.
+
+For based HEP use reduced cylinders and the reduced strip, collapsing the
+basepoint track. These are CGWH by the closed-pushout lemma. The same
+universal test supplies a split monomorphism into the reduced cylinder,
+and hence a closed embedding. Endpoint copies of A and X are still closed
+embeddings: for a closed endpoint subset F its saturation is F itself if it
+misses the basepoint, and F union the collapsed track otherwise. Thus the
+based version also forces i to be a closed embedding. No conversion of
+based HEP into unbased HEP is presumed. In either convention a target map
+constant on all prescribed basepoint tracks descends by the quotient property.
+
+### thm-mapping-cylinder-factorization
+
+The ordinary mapping cylinder is CGWH by closed attachment. Its free end
+j:X→Mf is a closed embedding by the disjoint-end clause. Retract heights
+by s↦(1-t)s and keep Y fixed; quotient×I proves continuity and gives the
+strong deformation retraction and rj=f. For the HEP, the given initial
+map on Mf and prescribed homotopy on its free end specify compatible data
+on the bottom and two vertical sides of a square in coordinates (s,t):
+bottom is the initial map, side s=1 is the prescribed homotopy, side s=0
+is the constant initial value at f(x). Keep Y constant in t. The explicit
+retraction of the square onto these three sides is
+lambda=1/max(1-t/2,2|s-1/2|),
+(s,t)↦(1/2+lambda(s-1/2), 2+lambda(t-2)).
+Its denominator is at least 1/2; the formula lands on the bottom or a
+vertical side and fixes all three sides. Compose the pasted data with it
+and descend by quotient×I. This gives HEP for every target. All formulas
+commute with a strictly commuting square of maps, proving naturality.
+They are constant on the basepoint track when the data are based, so the
+same proof handles reduced mapping cylinders. Interchanging the two vertical
+sides also proves that X→CX at height zero is a based cofibration: use the
+prescribed homotopy at zero and the constant cone-tip value at one.
+
+### lem-pushouts-and-products-preserve-the-cofibrations-used-here
+
+Work with the stated CGWH spaces and k-products. A cofibration is a closed
+embedding by the strip lemma, so its pushout exists as an ordinary CGWH
+closed pushout. For HEP extend first on X along A→X, using the homotopy
+already supplied on the other summand, then glue; product with I preserves
+this pushout by the quotient-product theorem. Products with any CGWH space
+preserve HEP by currying the test data into the CGWH mapping space and
+applying the original HEP, then uncurrying. This is equivalently the strip
+retraction tensored with identity, using the proved product/quotient topology.
+
+For the finite product-pair boundary claim give the full elementary numerical
+construction rather than assert a radial retraction for a general X. For a
+closed cofibration A→X choose its strip retraction r. Put
+h(x,t)=r_1(x,t) and u(x)=max_{t in I}(t-r_2(x,t)). The maximum exists and
+lies in I, since the t=0 value is zero. It is continuous: for fixed x and
+epsilon>0, continuity of (x,t)↦t-r_2(x,t) and a finite tube cover of I give
+a neighbourhood V of x on which its values differ from those at x by less
+than epsilon uniformly in t; taking maxima preserves this bound. Index the
+cover by all admissible rectangles, extracting only finitely many. We have
+u(a)=0 and h(a,t)=a on A. If u(x)=0 then r_2(x,t)≥t>0 for t>0, so
+r_1(x,t) lies in A; its limit at zero is x and A is closed, hence x lies
+in A. If u(x)<1 then r_2(x,1)>0, so h(x,1) lies in A.
+
+Given such data (u,h) for (X,A) and (v,j) for (Y,B), put w=min(u,v).
+When v≥u and v>0 set H(x,y,t)=(h(x,t),j(y,tu/v)); when u≥v and u>0
+set H(x,y,t)=(h(x,tv/u),j(y,t)); if u=v=0 set H=(x,y). The formulas
+agree where u=v>0, fix the union X×B union A×Y, and at t=1 land in
+that union when w<1. Continuity at u=v=0 follows from the tube lemma:
+at a fixed point of h or j, each neighbourhood contains every value of
+that homotopy for nearby input, uniformly over its compact time parameter;
+the ratios always lie in I. Thus (w,H) is actual neighbourhood deformation
+data for the product pair, not just a label for missing machinery.
+
+Any such data (w,H) give a strip retraction explicitly:
+R(z,t)=(H(z,t/w(z)),0) when 0≤t≤w(z) and w(z)>0;
+R(z,t)=(H(z,1),t-w(z)) when t≥w(z), including w=0.
+The pieces agree at t=w>0. A positive second coordinate forces w<1, so
+the first coordinate is in the specified subspace. At w=0 the subspace is
+pointwise fixed, and compact-time tube control proves continuity also at
+(z,0). The formula fixes the bottom and the whole subspace strip, so gives
+HEP by the preceding criterion. Apply this to endpoint/basepoint cofibrations
+to obtain the finite cylinder-boundary and product-pair cases. For the disk
+boundary an explicit primitive strip retraction is also available:
+lambda=1/max(1-t/2,||x||),
+(x,t)↦(lambda x,2+lambda(t-2)) on D^n×I.
+It fixes D^n×{0} union S^{n-1}×I, including n=0 with empty boundary.
+Reduced versions descend by collapsing the common basepoint track: their
+based data and these fixed-subspace constructions are constant on that
+track. This uses exactly the strip-to-neighbourhood-data and product-data
+clauses of May Chapter6 §4 pp.45–46, with all continuity details supplied;
+it is not an assumption of an unproved general NDR classification theorem.
 
 ## AT-11 — `fibrations-fiber-bundles-and-homotopy-exact-sequences`
 
@@ -2264,7 +2645,7 @@ ten published AT pages and all published items are read-only during this pass.
 | AT-2 A | `def-singular-chain-complex-of-a-pair` takes the quotient before its boundary-descends lemma; singular augmentation similarly precedes compatibility. | Move quotient-boundary well-definedness and augmentation compatibility ahead of the corresponding complex/homology definitions. Preserve the kernel convention, for which singular reduced homology of the empty space is zero in every degree. |
 | AT-3 A | `thm-simplicial-and-singular-homology-agree-for-simplicial-complexes` asserts the relative-skeletal direct-sum comparison and arbitrary-complex compact support without their premises. | Add direct dependencies on AT-24's common-subdivision/compact-support results and the published pair LES/naturality, excision, good-pair quotient, disjoint-union splitting, and sphere-homology results; spell out the finite-subcomplex passage. Ordinary comparison remains valid, including the empty complex; do not conflate the two reduced conventions. |
 | AT-4 A | `thm-relative-homology-of-consecutive-cw-skeleta` calls $H_n(X^n,X^{n-1};G)\cong\bigoplus G$ natural without orientations. | State the natural result with each cell's orientation module; obtain copies of $G$ only after choosing orientations, and record the sign change. |
-| AT-4 A | `prop-relative-cw-inclusions-are-cofibrations` assembles infinitely many cellwise extensions using “weak topology” without proving the needed product assertion. | Add the explicit disk-cylinder retraction and a closure-finite/product-with-$I$ weak-topology lemma, or cite a published relative-CW NDR/HEP theorem. Record ordinary choice over the cell set. |
+| AT-4 A | `prop-relative-cw-inclusions-are-cofibrations` formerly omitted full-cylinder retraction and infinite-stage continuity. | Repaired 2026-09-10, A-R: fixed radial retraction, deterministic skeletal recursion, and the earlier exponential law with compact metric domain $I$ and arbitrary target prove quotient-cylinder gluing and final continuity through $X\to C(I,Y)$. No choice or unpublished AT10 supplier is needed. Page prerequisite `function-space-topologies` added. Receipt: `research/uc34-2026-09-09-general-cw-hep-astra-2.md`. |
 | AT-5 A | `lem-finite-simplicial-approximation-for-homology-comparison` uses abstract subdivision and stars but cites the singular-chain mesh lemma. | Use AT-24's abstract subdivision, finite realization, mesh and open-star interfaces. Retain a local constrained-star proof for maps of pairs. The relative theorem requiring an already-simplicial restriction is not a direct substitute. |
 | AT-5 A | `lem-subdivision-compatible-continuous-polyhedral-homology-comparison`, Step 2.1, uses common refinement without declaring its supplier. | After Phase 2 publishes AT-24, cite `lem-two-finite-linear-subdivisions-have-a-common-simplicial-refinement`; keep the scope to finite linear subdivisions. Repair its approximation/comparison suppliers separately. |
 | AT-5 A | `def-local-degree-at-an-isolated-preimage` uses cyclic local homology groups and neighborhood independence before `lem-local-sphere-orientations-and-finite-puncture-excision`; `def-mayer-vietoris-connecting-class` is recorded as justified by its later independence lemma. | Move the local-homology lemma before local degree.  For Mayer--Vietoris, prove lift/representative independence before introducing the named homomorphism (or remove only the redundant later edge after the definition itself contains the complete proof). |
@@ -2544,3 +2925,9 @@ direct A-page suppliers reached by the simplicial page's item dependencies are
 `topological-spaces-and-continuity`. Use these A pages, subject to ordinary
 transitive-prerequisite minimization; never retain the GT B page. This is a
 page-edge repair using existing suppliers, not a new AT Phase-2 root.
+# Step-5 dependency synchronization, 2026-09-09
+
+Completed batch8's arbitrary-subspace/cofibration counterexample explicitly
+declares `thm-intermediate-value`. The canonical plan matches its authored
+manifest; this earlier published supplier adds no pair or published repair.
+See `phase-2-catchup-24-step5-dependency-reconciliation.md`.

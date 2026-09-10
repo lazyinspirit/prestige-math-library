@@ -6,7 +6,7 @@ status: published
 origin: session
 provenance:
   statement: ai-altered
-  proof: ai-generated
+  proof: ai-altered
 deps: [def-vector-valued-functions-limits-and-continuity, thm-componentwise-limits-and-continuity, def-metric-continuity, thm-metric-continuity-characterisations, thm-algebra-of-continuous-functions, lem-metrics-on-rn, lem-p-norms-are-norms-and-induce-the-published-metrics, def-p-norms-on-rn, def-norm-and-normed-space, def-metric-convergence, def-sequence, cor-archimedean-reciprocal, def-canonical-natural, lem-of-naturals-positive, def-euclidean-inner-product, thm-componentwise-convergence-and-completeness, lem-standard-basis-of-f-n, def-continuity-real, lem-real-and-metric-notions-agree, thm-of-square-roots, def-integer-power, lem-of-inverse-positive, def-metric-space, lem-real-line-is-a-metric-space]
 justified_by: []
 aliases: []
@@ -15,11 +15,12 @@ cx_machine_verified: false
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
-    verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+  verified:
+    model: Codex
+    verdict: locally-reconciled
+    date: 2026-09-10
+    scope: "Final-adjudicator local repair: L1 now cites proof step 1.5 and derives the pointwise implication explicitly; step 3.2 directly verifies nonconvergence to zero. Terminal evidence is recorded separately; this is not a judge pass stamp."
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -64,7 +65,9 @@ not an informal plane.
 
 [A1] The refuted claim, at this $g$: separate continuity everywhere implies continuity as a map $(\mathbb{R}^{2},d_2) \to (\mathbb{R},d_{\mathbb{R}})$.
 
-[L1] Continuity of a real-valued function on a metric space, and the sequential characterisation: $g$ is continuous at $q$ if and only if $g(p^{(k)}) \to g(q)$ whenever $p^{(k)} \to q$ ([[def-vector-valued-functions-limits-and-continuity]], [[def-metric-continuity]], [[thm-metric-continuity-characterisations]] clauses (a) and (d), [[def-metric-space]], [[lem-real-line-is-a-metric-space]]).
+[L1] A real-valued function on a metric space that is continuous at $q$ preserves every sequence converging to $q$: if $p^{(k)} \to q$, then $g(p^{(k)}) \to g(q)$ ([[def-vector-valued-functions-limits-and-continuity]], [[def-metric-continuity]], [[thm-metric-continuity-characterisations]] proof step 1.5, [[def-metric-space]], [[lem-real-line-is-a-metric-space]]).
+
+For completeness, the pointwise implication in [L1] follows directly from the definitions: given a real $\varepsilon>0$, continuity at $q$ supplies a real $\delta>0$ such that $d(p,q)<\delta$ implies $|g(p)-g(q)|<\varepsilon$. Convergence $p^{(k)}\to q$ supplies $K$ with $d(p^{(k)},q)<\delta$ for all $k\ge K$, using the rational-to-real tolerance agreement in [[def-metric-convergence]]. Hence $|g(p^{(k)})-g(q)|<\varepsilon$ for all $k\ge K$. This proves the pointwise implication without assuming continuity elsewhere or any choice principle.
 
 [L2] Convergence in $(\mathbb{R}^{2},d_2)$ is componentwise ([[thm-componentwise-convergence-and-completeness]] clause 1, [[def-metric-convergence]], [[lem-p-norms-are-norms-and-induce-the-published-metrics]], [[def-p-norms-on-rn]], [[lem-standard-basis-of-f-n]]).
 
@@ -90,9 +93,9 @@ not an informal plane.
 
 3.1 So $g$ is continuous in each variable separately at every point of $\mathbb{R}^{2}$. [step 1.1, step 1.2, step 2.1]
 
-3.2 So the constant sequence $\bigl(g(p^{(k)})\bigr)$ converges to $1/\iota(2)$, while $g(0) = 0$ and $1/\iota(2) \ne 0$ because $\iota(2) > 0$. [step 2.2, L4]
+3.2 So the constant sequence $\bigl(g(p^{(k)})\bigr)$ converges to $1/\iota(2)$, while $g(0) = 0$ and $1/\iota(2) \ne 0$ because $\iota(2) > 0$. More directly, this sequence cannot converge to $g(0)=0$: its distance from $0$ is always $1/\iota(2)$, so the convergence test fails at the positive rational tolerance $1/\iota(4)$. [step 2.2, L4]
 
-4.1 By the sequential characterisation of continuity, $g$ is not continuous at $0$: the sequence $p^{(k)} \to 0$ has $g(p^{(k)}) \not\to g(0)$. [step 1.3, step 2.2, step 3.2, L1]
+4.1 By the contrapositive of the fact that continuity preserves convergent sequences, $g$ is not continuous at $0$: the sequence $p^{(k)} \to 0$ has $g(p^{(k)}) \not\to g(0)$. [step 1.3, step 2.2, step 3.2, L1]
 
 5.1 Steps 3.1 and 4.1 together refute [A1]: $g$ is separately continuous everywhere and is not continuous at the origin. [step 3.1, step 4.1, A1] ∎
 

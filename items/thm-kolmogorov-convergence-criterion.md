@@ -4,23 +4,25 @@ title: "Kolmogorov convergence criterion"
 kind: theorem
 status: published
 origin: pipeline
-deps: ["thm-kolmogorov-maximal-inequality", "def-almost-sure-convergence-of-a-random-series", "thm-series-cauchy-criterion", "thm-continuity-from-below-for-measures", "thm-continuity-from-above-for-measures", "lem-variance-and-covariance-identities-for-random-variables", "thm-riesz-fischer-completeness-of-l-p", "thm-lp-convergence-implies-convergence-in-probability", "thm-almost-sure-convergence-implies-convergence-in-probability", "thm-limits-in-probability-are-unique-almost-surely"]
+deps: [thm-kolmogorov-maximal-inequality, def-almost-sure-convergence-of-a-random-series, thm-series-cauchy-criterion, thm-continuity-from-below-for-measures, thm-continuity-from-above-for-measures, lem-variance-and-covariance-identities-for-random-variables, thm-fatou-lemma, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-the-lebesgue-integral-respects-almost-everywhere-equality, thm-finite-and-countable-subadditivity-of-measures, def-convergence-in-lp-for-random-variables]
 provenance:
   statement: ai-altered
   proof: ai-generated
 verification:
-  audited: 2026-09-07
-  judge:
-    model: "gpt-5.6-terra"
-    verdict: pass
-    date: 2026-09-07
+  precheck: pass
+  verified:
+    model: gpt-6-astra
+    verdict: certify
+    date: 2026-09-09
+    scope: owner-authorized-local-fatou-and-choice-contract-repair
+    delegated_by: owner
 sources:
   references:
     - title: "Theorem 2.5.6, pp. 84\u201385"
       url: https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf
-    - title: "Theorem 3.10, pp. 65\u201366; L2 strengthening uses published completeness"
+    - title: "Theorem 3.10, pp. 65\u201366; L2 strengthening is proved locally by Fatou"
       url: https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf
-proof_strategy: "Maximal inequality bounds the supremum of each tail by the variance tail. For w_m=sup_{i,j>=m}|S_i-S_j| use its monotonicity and rational tolerances to obtain one a.s. Cauchy event. L2 completeness supplies an L2 limit; uniqueness of probability limits identifies it."
+proof_strategy: "Maximal inequality and monotone tail oscillations give one measurable probability-one Cauchy event. Apply Fatou to the supplied partial sums restricted to that event, first for square integrability of its limit and then for the L2 tail bound; no representative choice or abstract L2 completeness is used."
 ---
 
 ## Statement
@@ -41,13 +43,13 @@ For independent centered square-integrable real random variables $(X_n)_{n\ge1}$
 
 [F6] [[lem-variance-and-covariance-identities-for-random-variables]]: Let $X,Y$ be square-integrable real random variables on one probability space. Then $\operatorname{Var}(X)=\mathbb E[X^2]-\mathbb E[X]^2,$ $\operatorname{Cov}(X,Y)=\mathbb E[XY]-\mathbb E[X]\mathbb E[Y].$ Moreover, covariance is symmetric and bilinear on finite linear combinations. On finite full-power-set probability spaces these formulas reduce to the published finite identities.
 
-[F7] [[thm-riesz-fischer-completeness-of-l-p]]: Let $(X,\mathcal A,\mu)$ be a measure space and let $1\le p\le\infty$. Then $L^p(\mu)$, with the norm of thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space, is complete. Equivalently, the metric induced by that norm is a complete metric in the sense of def-complete-metric-space. Moreover, if a sequence in $L^p(\mu)$ converges in norm, then some subsequence admits measurable representatives converging almost everywhere in the sense of def-convergence-almost-everywhere-relative-to-a-measure.
+[F7] Fatou's lemma holds for supplied nonnegative measurable functions ([[thm-fatou-lemma]]); the nonnegative integral is monotone ([[prop-order-and-scalar-rules-for-the-nonnegative-integral]]).
 
-[F8] [[thm-lp-convergence-implies-convergence-in-probability]]: Let $1\le p<\infty$. If $X_n\to X$ in $L^p$, then $X_n\to X$ in probability.
+[F8] Integrable functions equal almost everywhere have equal integrals ([[thm-the-lebesgue-integral-respects-almost-everywhere-equality]]).
 
-[F9] [[thm-almost-sure-convergence-implies-convergence-in-probability]]: If $X_n\to X$ almost surely, then $X_n\to X$ in probability.
+[F9] A supplied countable union of measurable null sets is null ([[thm-finite-and-countable-subadditivity-of-measures]]).
 
-[F10] [[thm-limits-in-probability-are-unique-almost-surely]]: If $X_n\to X$ and $X_n\to Y$ in probability, then $X=Y$ almost surely.
+[F10] For square-integrable real random variables, $L^2$ convergence means $\mathbb E|S_n-S|^2\to0$ ([[def-convergence-in-lp-for-random-variables]]).
 
 ## Proof
 
@@ -55,8 +57,16 @@ For independent centered square-integrable real random variables $(X_n)_{n\ge1}$
 
 1.1 Write $S_0=0$, $S_n=\sum_{k=1}^nX_k$, and $v_m=\sum_{k>m}\operatorname{Var}(X_k)$. Applying the maximal inequality to each block $X_{m+1},\ldots,X_N$ and then continuity from below gives $\mathbb P(\sup_{j\ge m}|S_j-S_m|>t)\le v_m/t^2$ for $t>0$. The strict supremum event is the increasing union of finite strict maximum events, each bounded by the corresponding non-strict estimate. [F1, F4, given]
 
-1.2 For $n>m$, the same variance expansion used in the maximal inequality gives $\mathbb E|S_n-S_m|^2=\sum_{k=m+1}^n\operatorname{Var}(X_k)\le v_m\to0$. Hence the classes of $S_n$ are Cauchy in $L^2$; completeness gives an $L^2$ limit class with a finite measurable representative $T_0$. Set $T=\operatorname{Re}T_0$. This is a finite measurable real variable, and $|S_n-T|\le|S_n-T_0|$ pointwise, so $S_n\to T$ in $L^2$ even if completeness was formulated over complex scalars. [F1, F6, F7, given]
+1.2 For $n>m\ge0$, the variance identity in the maximal inequality gives $\mathbb E|S_n-S_m|^2=\sum_{k=m+1}^n\operatorname{Var}(X_k)\le v_m$, where $v_m\to0$ and $v_0<\infty$. In particular all supplied partial sums are square-integrable. [F1, F6, given]
 
-2.1 Let $w_m=\sup_{i,j\ge m}|S_i-S_j|$. Its strict level events are countable unions of measurable events and decrease with $m$. Since $w_m\le2\sup_{j\ge m}|S_j-S_m|$, continuity from above gives $\mathbb P(\bigcap_m\{w_m>2/r\})=0$ for every integer $r\ge1$. Outside the union of these null events, for each $r$ some $m$ has $w_m\le2/r$; this is the real Cauchy condition. Completeness supplies a finite limit, extended measurably by zero as in the series definition. [F5, F3, F2, step 1.1]
+2.1 Let $w_m=\sup_{i,j\ge m}|S_i-S_j|$. Its strict level events are countable unions of measurable events and decrease with $m$. Since $w_m\le2\sup_{j\ge m}|S_j-S_m|$, continuity from above gives $\mathbb P(\bigcap_m\{w_m>2/r\})=0$ for every integer $r\ge1$. By [F9], the complement $C$ of the union of these null events is measurable and has probability one. On $C$, for each $r$ some $m$ has $w_m\le2/r$; this is the real Cauchy condition. Let $S$ be its finite pointwise limit on $C$ and zero off $C$. The measurable functions $U_n=\mathbf1_C S_n$ converge everywhere to $S$, which is measurable by the construction in [F2]. [F5, F3, F2, F9, step 1.1]
 
-3.1 The $L^2$ convergence gives convergence in probability to $T$, and the almost-sure convergence gives convergence in probability to the limit $S$ from the Cauchy event. Uniqueness gives $S=T$ almost surely. These arguments allow all variances to vanish and finite tails to be identically zero. [F8, F9, F10, step 2.1, step 1.2] ∎
+3.1 Fatou applied to $|U_n|^2$ and monotonicity give $\mathbb E|S|^2\le\liminf_n\mathbb E|U_n|^2\le v_0<\infty$, so $S$ is square-integrable. For fixed $m$, the functions $|U_n-U_m|^2$ converge everywhere to $|S-U_m|^2$, and $|U_n-U_m|^2=\mathbf1_C|S_n-S_m|^2$. Fatou and step 1.2 therefore give $\mathbb E|S-U_m|^2\le v_m$. Since $S_m,U_m,S$ are square-integrable, both squared differences with $S$ are integrable (use $|a-b|^2\le2|a|^2+2|b|^2$); they agree almost everywhere. Thus [F8] gives $\mathbb E|S-S_m|^2=\mathbb E|S-U_m|^2\le v_m\to0$. By [F10] this is convergence in $L^2$ to the very same $S$ as the almost-sure limit. Zero variances and identically zero tails are included. [F7, F8, F10, step 1.2, step 2.1] ∎
+
+## Remarks
+
+No Choice assumption is required by this proof. The random variables and
+their partial sums are already supplied as measurable functions; the conull
+set and limit are explicitly defined. Abstract completeness for a sequence
+of $L^2$ equivalence classes may require countable choice of representatives,
+but that theorem is not used here.

@@ -9,13 +9,18 @@ provenance:
   proof: ai-generated
 generation:
   role: counterexample
-deps: [lem-smooth-extension-from-a-closed-neighbourhood]
+deps: [def-continuity-real, prop-smooth-maps-are-continuous, def-ck-and-multi-index-notation-in-several-variables]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-08-30
+  verified:
+    model: Codex
+    verdict: repaired-and-locally-checked
+    date: 2026-09-09
+    scope: "Owner-authorized explicit counterexample and necessity-claim repair; local checks only"
+    delegated_by: owner
   precheck: pass
 sources:
   scraped: []
@@ -36,14 +41,16 @@ Any smooth function on an open set extends smoothly to the ambient manifold by s
 
 **Given:** The open set $(0,\infty)\subseteq \mathbb R$ and the smooth function $f(x)=1$ on it.
 
-[L1] Smooth extension works only after the support is kept away from the boundary by a cutoff ([[lem-smooth-extension-from-a-closed-neighbourhood]]).
+[L1] Smooth maps are continuous ([[prop-smooth-maps-are-continuous]]).
+
+[L2] Continuity at zero requires the epsilon-delta condition ([[def-continuity-real]]). Constant functions are smooth: all positive-order coordinate derivatives vanish ([[def-ck-and-multi-index-notation-in-several-variables]]).
 
 ## Counterexample
 
 **Proof technique:** direct.
 
-1.1 The naive zero extension is the step function $F(x):=1$ for $x>0$ and $F(x):=0$ for $x\le 0$. [given]
+1.1 The constant function $f=1$ is smooth on the open set $(0,\infty)$ by [L2]. Its prescribed zero extension is $F(x):=1$ for $x>0$ and $F(x):=0$ for $x\le 0$. [given, L2]
 
-2.1 The function $F$ is not continuous at $0$, so it is not smooth. [step 1.1]
+2.1 For $\varepsilon=1/2$ and every $\delta>0$, put $x=\delta/2$. Then $|x|<\delta$ but $|F(x)-F(0)|=1$. Thus $F$ is not continuous at zero by [L2], and cannot be smooth by [L1]. [L1, L2, step 1.1]
 
-3.1 Hence the hypothesis singled out in [L1] is essential. [L1, step 2.1] ∎
+3.1 This refutes the universal zero-extension claim. It does not assert that every smooth zero extension requires a cutoff or support separated from the boundary; the counterexample proves only that the recipe fails in general. No choice principle or existence-of-cutoff theorem is used. [step 1.1, step 2.1] ∎

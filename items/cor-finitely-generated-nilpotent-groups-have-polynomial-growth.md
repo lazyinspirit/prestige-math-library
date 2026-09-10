@@ -6,18 +6,19 @@ status: published
 origin: session
 provenance:
   statement: literature-derived
-  proof: ai-generated
-deps: [def-polynomial-subexponential-exponential-and-intermediate-growth, rem-bass-guivarch-growth-degree-formula]
+  proof: ai-altered
+deps: [def-polynomial-subexponential-exponential-and-intermediate-growth, thm-bass-guivarch-growth-degree-formula-with-proof, def-bass-guivarch-dimension, def-growth-comparison-and-growth-type]
 justified_by: []
 aliases: []
 proof_strategy: direct
 verification:
-  audited: 2026-08-26
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
+  verified:
+    model: gpt-6-astra
     verdict: pass
-    date: 2026-08-26
+    date: 2026-09-09
+    scope: "Owner-authorized local proof and direct supplier-interface audit; targeted precheck/rendercheck passed; no independent judgment."
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -36,14 +37,22 @@ Every finitely generated nilpotent group has polynomial growth.
 
 **Given:** A finitely generated nilpotent group $G$.
 
-[A1] Bass-Guivarch says that $\beta_{G,S}(n) \simeq n^{D(G)}$ for every finite generating set $S$.
+[L1] For every finite generating set $S$, the proved Bass–Guivarc'h bound gives
+$\beta_{G,S}(n)\le C_S n^{D(G)}$ for all integers $n\ge1$, where $C_S>0$
+([[thm-bass-guivarch-growth-degree-formula-with-proof]]). Here
+$D(G)=\sum_i i r_i$ is a nonnegative integer, including $D(G)=0$ for finite
+groups ([[def-bass-guivarch-dimension]]).
 
 [L2] Polynomial growth means that $\beta_G \preccurlyeq n^d$ for some integer $d \ge 0$ ([[def-polynomial-subexponential-exponential-and-intermediate-growth]]).
+
+[F1] The comparison $f\preccurlyeq g$ means that some integer $C\ge1$
+satisfies $f(n)\le Cg(Cn+C)+C$ for every $n\ge0$
+([[def-growth-comparison-and-growth-type]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 By [A1], the growth function of $G$ is equivalent to the polynomial $n^{D(G)}$. In particular it is bounded above, in the growth-comparison sense, by a polynomial. [A1]
+1.1 Fix a finite generating set $S$ and put $d=D(G)$. Choose an integer $C\ge\max(1,C_S)$. For $n\ge1$, [L1] gives $\beta_{G,S}(n)\le C_Sn^d\le C(Cn+C)^d+C$. At $n=0$, the word ball consists of the identity, so the same inequality holds. Thus $\beta_{G,S}\preccurlyeq n^d$ by [F1]; for $d=0$ use the constant polynomial $1$. [L1, F1, algebra]
 
 2.1 Therefore [L2] makes $G$ a group of polynomial growth. [L2, step 1.1] ∎

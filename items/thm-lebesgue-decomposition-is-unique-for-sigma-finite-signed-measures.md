@@ -6,11 +6,16 @@ status: published
 origin: session
 provenance:
   statement: literature-derived
-  proof: ai-generated
-deps: [def-measure-concentrated-on-a-measurable-set, thm-absolutely-continuous-and-singular-with-respect-to-the-same-positive-measure-implies-zero, thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures]
+  proof: ai-altered
+deps: [def-measure-concentrated-on-a-measurable-set, def-absolutely-continuous-with-respect-to-a-positive-measure, def-mutually-singular-measures]
 proof_strategy: direct
 verification:
-  audited: 2026-08-31
+  verified:
+    model: gpt-6-astra
+    verdict: pass
+    date: 2026-09-09
+    scope: owner-authorized local defect repair; no independent judge
+    delegated_by: owner
   precheck: pass
 sources:
   references:
@@ -22,7 +27,7 @@ sources:
 
 ## Statement
 
-Let $\mu$ be a positive measure and let $\nu$ be a signed measure satisfying the common finite-exhaustion hypothesis of [[thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures]]. If
+Let $\mu$ be a positive measure and let $\nu$ be a signed measure on the same measurable space. No choice or sigma-finiteness assumption is needed for uniqueness. If
 $$\nu=\nu_a+\nu_s=\widetilde\nu_a+\widetilde\nu_s,$$
 with $\nu_a,\widetilde\nu_a\ll\mu$ and $\nu_s,\widetilde\nu_s\perp\mu$, then
 $$\nu_a=\widetilde\nu_a,\qquad \nu_s=\widetilde\nu_s.$$
@@ -31,16 +36,16 @@ $$\nu_a=\widetilde\nu_a,\qquad \nu_s=\widetilde\nu_s.$$
 
 **Given:** Two Lebesgue decompositions of the same signed measure $\nu$ relative to a positive measure $\mu$.
 
-[L1] A measure concentrated on a $\mu$-null set is singular with respect to $\mu$. ([[def-measure-concentrated-on-a-measurable-set]])
+[L1] Singularity provides a measurable $\mu$-null carrier; concentration means vanishing on every measurable subset of its complement. ([[def-mutually-singular-measures]], [[def-measure-concentrated-on-a-measurable-set]])
 
-[L2] A signed or complex measure that is both absolutely continuous and singular with respect to $\mu$ is zero. ([[thm-absolutely-continuous-and-singular-with-respect-to-the-same-positive-measure-implies-zero]])
+[L2] An absolutely continuous measure vanishes on every measurable $\mu$-null set. ([[def-absolutely-continuous-with-respect-to-a-positive-measure]])
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Subtract the two decompositions to obtain $$\nu_a-\widetilde\nu_a=\widetilde\nu_s-\nu_s.$$ The left-hand side is absolutely continuous with respect to $\mu$, because differences of absolutely continuous measures are again absolutely continuous. [given, algebra]
+1.1 Choose measurable $\mu$-null carriers $N_1,N_2$ for $\nu_s,\widetilde\nu_s$, respectively. These are just two existential witnesses, so no choice axiom is needed. Let $N=N_1\cup N_2$, again measurable and $\mu$-null. Both singular parts vanish on every measurable subset of $X\setminus N$, and both absolutely continuous parts vanish on every measurable subset of $N$. [L1, L2, given, choose]
 
-1.2 Choose $\mu$-null sets $N$ and $\widetilde N$ on which $\nu_s$ and $\widetilde\nu_s$ are concentrated. Then $\widetilde\nu_s-\nu_s$ is concentrated on $N\cup\widetilde N$, which is still $\mu$-null, so [L1] makes the right-hand side singular with respect to $\mu$. [given, L1, choose]
+2.1 For every measurable $E$, evaluate each given decomposition on $E\setminus N$. It gives $\nu(E\setminus N)=\nu_a(E\setminus N)=\widetilde\nu_a(E\setminus N)$. As both absolutely continuous parts vanish on $E\cap N$, additivity yields $\nu_a(E)=\nu(E\setminus N)=\widetilde\nu_a(E)$. No difference of infinite values occurs. [step 1.1, given, algebra]
 
-2.1 The common difference in steps 1.1 and 1.2 is therefore both absolutely continuous and singular with respect to $\mu$, so [L2] forces $\nu_a-\widetilde\nu_a=0$. Substituting back into the decomposition identity gives $\nu_s-\widetilde\nu_s=0$ as well. [step 1.1, step 1.2, L2] ∎
+3.1 Similarly, evaluating on $E\cap N$ gives $\nu(E\cap N)=\nu_s(E\cap N)=\widetilde\nu_s(E\cap N)$. Both singular parts vanish on $E\setminus N$, so $\nu_s(E)=\nu(E\cap N)=\widetilde\nu_s(E)$. Since $E$ was arbitrary, both components are unique. [step 1.1, given, algebra] ∎

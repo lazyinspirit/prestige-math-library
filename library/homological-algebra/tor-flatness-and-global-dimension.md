@@ -6,4 +6,6 @@ items: [def-tensor-product-total-complex-of-chain-complexes, lem-the-tensor-tota
 examples: [fs-tor-takes-two-left-modules-over-an-arbitrary-ring, fs-the-two-tor-constructions-are-equal-by-definition, fs-flat-modules-have-projective-dimension-zero, fs-tor-one-vanishes-only-when-one-module-is-projective, fs-tor-is-symmetric-over-every-noncommutative-ring, fs-tor-one-of-r-mod-i-and-m-is-always-the-i-torsion-submodule-of-m]
 ---
 
-This draft develops the stated conventions and boundary cases in manifest order.
+Tensor complexes first distinguish right and left modules and fix the Koszul differential. Projective resolutions in either variable then give naturally identified Tor groups, using the stated Dependent Choice and supplied-resolution hypotheses for comparison maps. Long exact sequences turn Tor vanishing into flatness criteria, while explicit cyclic resolutions calculate torsion.
+
+The dimension results separate flat dimension, weak global dimension and projective global dimension. Each result retains its own choice assumptions: arbitrary bases and general resolution-existence arguments use the Axiom of Choice, while calculations on specified finite resolutions have their stated conditional scope. The examples and false statements test handedness, the distinction between flatness and projectivity, and the failure of an unjustified symmetry or ideal-torsion formula.

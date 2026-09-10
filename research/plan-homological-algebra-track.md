@@ -1,5 +1,20 @@
 # Homological algebra track: complexes, derived functors, Ext, Tor, and spectral sequences
 
+## Binding UC34 repair reconciliation — 2026-09-09
+
+The published arbitrary-ring projective-flat and Tor-zero items now use
+explicit balanced tensor maps, not commutative-only suppliers. Torsion-free
+abelian flatness uses finite relation witnesses and finite-free subgroups,
+not an unsupported filtered-colimit assertion. Their exact published edges
+are synchronized in `plan-spec.json`.
+The published `thm-kunneth-theorem-for-free-complexes-over-a-pid` and
+`thm-the-kunneth-sequence-splits-nonnaturally` are repaired locally from the
+published Tor-map construction, homology LES, right exactness and cycle
+retractions. Assume AC explicitly and propagate it to consumers. They no
+longer await HA-11a publication or reordering. Retain HA-11a's independent
+interfaces and its prohibition on using these consumer theorems as shortcuts.
+Exact proofs, checks and hashes: `published-consumer-supplier-ledger.md`.
+
 Run `subjects-01`, track `homological-algebra`, wave 2. Owner commission
 2026-08-13: *amend and expand the prose scaffolds to enrich future mathematical
 content*.
@@ -275,6 +290,16 @@ $d_r^{p,q}:E_r^{p,q}\to E_r^{p+r,q-r+1}$. A filtered-complex sequence begins
 at $E^0$; a double-complex sequence may be named from $E^1$. The page always
 prints the differential's bidegree, so a convention cannot be inferred from a
 subscript alone.
+
+The page-convention counterexample compares Vitolo's generic exact-couple
+iteration (initial term F_0) with Weibel's filtration-normalized homology
+exact couple (initial term E^1): F_n corresponds to E^(n+1), with the
+differential degree shifted accordingly. For the trivially filtered identity
+complex Z -> Z, the generic homology-couple sequence is zero from F_0,
+while the filtered sequence has nonzero E^0 and zero E^1. Verify the zero
+triangle locally; general exact-couple theory remains in HA-16. Vitolo's
+separate filtered-complex normalization agrees with Weibel and is not claimed
+to differ. Merely deleting E^0 while retaining the page1 label is insufficient.
 
 Following the Stacks Project's warning that the literature is inconsistent,
 three assertions are kept distinct:
@@ -2037,9 +2062,38 @@ the same Tor bifunctor, and then makes precise the slogan that Tor detects
 torsion and flatness. Noncommutative handedness is printed in every definition.
 Under R-1 it cites MOD-3's `def-flat-and-faithfully-flat-modules-and-ring-maps`
 (scaffolded 2026-08-15 in place of the promised `def-flat-module`; it defines
-flat and faithfully flat modules and ring maps in one item) and MOD-3's
-`thm-projective-modules-are-flat`; it does not mint or re-prove either
-module-level fact.
+flat and faithfully flat modules and ring maps in one item). For arbitrary
+handed rings the published release additionally contains
+`def-left-and-right-flat-modules-over-an-arbitrary-ring` and
+`lem-projective-modules-are-flat-over-an-arbitrary-ring`, placed before the
+augmented-row/column arguments. The latter proves its tensor/free-summand
+interface directly using balanced maps; a commutative-only tensor supplier
+does not establish the arbitrary-ring claim.
+
+**Binding release reconciliation, 2026-09-09.** This is a page-release-only
+pair with the existing **41 A / 8 B** inventory. The numbered thematic list
+below retains its historical 33 labels and six false statements; the two
+additional published arbitrary-handed items just named are part of the
+controlling 41-item inventory, not a new expansion. No future enrichment is
+deleted or promoted by this reconciliation. Current proof receipts are
+`uc34-2026-09-09-tor-followups-astra-3.md` and
+`uc34-2026-09-09-tor-followups-astra-2.md`; the old unresolved Tor findings in
+batch-5 notes are historical where those receipts record the local repairs,
+not evidence that the entire batch has cleared its independent gates.
+
+Comparison-map existence, homotopy comparison, covariance, coherent balance,
+both natural LES interfaces, dimension shifting and balanced symmetry assume
+**DC with supplied projective resolutions**, declaring `def-dependent-choice`.
+DC is not a proof of enough projectives or a choice of one resolution for
+every object. Fixed supplied complexes, compatible lifts/ladders and their
+elementary tensor/homology calculations retain their conditional choice-free
+clauses. Where a consumer assumes **AC** for arbitrary bases, short-resolution
+existence or semisimple structure, declare `def-axiom-of-choice` and identify
+that use. If it also invokes the DC-qualified balanced interface, prove the
+implication locally: AC selects a successor function for a serial relation
+on a set, and earlier `thm-recursion` iterates it from the prescribed initial
+point. Do not cite the later A665 weak-choice theorem. Do not import HA-11's
+later arbitrary-PID freeness theorem into HA-10.
 
 ### A-page items, in dependency order
 
@@ -2061,18 +2115,25 @@ module-level fact.
    **proposition** `[LA]`, naturally in both variables, by tensor right
    exactness.
 6. `prop-each-tor-construction-is-covariant-in-both-variables` —
-   **proposition** `[LA]`.
+   **proposition** `[LA]`. DC-qualified comparison lifts and tensor homotopies
+   prove independence, identities and composition for supplied resolutions.
 7. `prop-positive-tor-vanishes-when-the-resolved-variable-is-projective` —
-   **proposition** `[LA]`.
+   **proposition** `[LA]`. For every supplied resolution, split its syzygy
+   surjections only through degree i+1, using the projective lifting property.
+   Tensor the resulting finite retraction identities to exhibit each degree-i
+   cycle as a boundary. This proves both tensor hands without AC/DC or a
+   comparison theorem. Declare `def-projective-module` and
+   `thm-universal-property-of-module-tensor-products`; the identity resolution
+   alone does not justify the arbitrary-resolution claim.
 
 **Balance before spectral sequences**
 
 8. `def-tensor-double-complex-of-two-projective-resolutions` — **definition**
    `[LN]`. $K_{p,q}=Q_p(N)\otimes_RP_q(M)$ in the first quadrant.
 9. `rem-projective-modules-are-flat-is-supplied-by-mod-three` — **remark**
-   `[LN]`, citing MOD-3 `def-flat-and-faithfully-flat-modules-and-ring-maps`
-   and its `thm-projective-modules-are-flat`; this page uses the fact and does
-   not re-prove it.
+   `[LN]`. Retain the published remark; the actual arbitrary-handed proof
+   interface is the additional local definition/lemma above, not an unchecked
+   use of MOD-3's commutative-only clauses.
 10. `lem-the-rows-of-the-augmented-tensor-double-complex-are-exact` —
     **lemma** `[LA]`, because every $Q_p(N)$ is flat as a right module.
 11. `lem-the-columns-of-the-augmented-tensor-double-complex-are-exact` —
@@ -2081,16 +2142,25 @@ module-level fact.
     **theorem** `[LA]`. Apply the finite-diagonal acyclic-assembly lemmas from
     `HA-8` to the two edge augmentations. LANDMARK.
 13. `prop-the-tor-balance-isomorphism-is-natural-and-coherent-under-change-of-resolutions` —
-    **proposition** `[LA]`.
+    **proposition** `[LA]`. Under DC, compare the two augmentations and
+    prove identity/composition and natural change-of-resolution squares.
 14. `def-balanced-tor-bifunctor` — **definition** `[LN]`.
     $\operatorname{Tor}^R_n(N,M)$ is licensed only after items 12–13.
 
 **Exact sequences, flatness, and torsion**
 
 15. `thm-long-exact-tor-sequence-in-the-left-module-variable` — **theorem**
-    `[LA]`.
+    `[LA]`. Under DC use the projective horseshoe and the actual compatible
+    middle-map construction in
+    `lem-the-left-derived-connecting-map-is-independent-of-the-horseshoe-resolution-and-lifts`,
+    then homology-connecting naturality; conditional uniqueness of a supplied
+    ladder alone is not a construction of that ladder.
 16. `thm-long-exact-tor-sequence-in-the-right-module-variable` — **theorem**
-    `[LA]`, obtained via balance; both sequences display handedness.
+    `[LA]`. Tensor a fixed left projective resolution with the right-module
+    short exact sequence; its flat terms give a short exact sequence of
+    complexes and the homology LES. DC licenses natural comparison and the
+    balanced interpretation, not this fixed-complex exactness calculation.
+    Both sequences display handedness.
 17. `prop-tor-dimension-shifting` — **proposition** `[LA]`, in either variable.
 18. `thm-a-left-module-is-flat-exactly-when-tor-one-with-every-right-module-vanishes` —
     **theorem** `[LA]`. Equivalent also to vanishing of all positive Tor.
@@ -2098,26 +2168,53 @@ module-level fact.
     **theorem** `[LA]`.
 20. `cor-a-short-exact-sequence-stays-exact-after-tensoring-exactly-when-its-tor-boundary-obstruction-vanishes` —
     **corollary** `[LA]`, stated for a fixed coefficient module and the exact
-    segment, not as a global flatness assertion.
+    segment under the LES's DC/data contract. The boundary map must vanish;
+    its Tor domain need not vanish. Inference from a supplied exact tail is
+    choice-free, not a global flatness assertion.
 21. `thm-tor-one-of-a-cyclic-abelian-group-detects-n-torsion` — **theorem**
     `[LA]`. $\operatorname{Tor}^{\mathbb Z}_1(\mathbb Z/n,M)\cong
-    M[n]=\{m:nm=0\}$ naturally.
+    M[n]=\{m:nm=0\}$ naturally. The explicit two-term right-resolution
+    computation is choice-free. For the balanced interpretation assume AC,
+    obtain DC by successor selection and earlier natural-number recursion,
+    and invoke the published comparison/coherence results for supplied
+    resolutions. Do not infer resolution existence from DC. Propagate this
+    choice/data distinction to the cyclic theorem and its examples.
 22. `thm-tor-of-two-cyclic-abelian-groups` — **theorem** `[LA]`.
+    Inherit AC for balanced Tor from the repaired cyclic supplier. Retain
+    the choice-free arithmetic: for g=gcd(m,n), the map [t]↦[(n/g)t]
+    identifies Z/g with the kernel in Z/n. Congruence reduction, Bézout and
+    integer cancellation prove surjectivity/injectivity, including g=1.
     $\operatorname{Tor}^{\mathbb Z}_1(\mathbb Z/m,\mathbb Z/n)
     \cong\mathbb Z/\gcd(m,n)$ and higher Tor vanishes.
 23. `thm-higher-tor-over-the-integers-vanishes` — **theorem** `[LA]`, because
-    every abelian group has projective dimension at most one.
+    under AC every abelian group has a length-one projective resolution.
+    Its proof supplies the arbitrary-rank integer subgroup argument locally:
+    well-order a basis, use positive integer coordinate generators, choose
+    their lifts simultaneously, prove spanning by well-ordered induction and
+    independence at the greatest nonzero coordinate. The canonical free cover
+    and AC free projectivity finish existence. For an already supplied short
+    resolution the vanishing homology calculation is choice-free. The earlier
+    HA-9 `lem-subgroups-of-free-abelian-groups-are-free` and
+    `thm-the-integers-have-global-dimension-one` now also have full local
+    integer/choice proofs; this HA-10 proof does not require the later HA-11
+    general-PID theorem.
 24. `prop-torsion-free-abelian-groups-are-flat` — **proposition** `[LA]`, using
-    the PID theorem supplied by abstract algebra; the converse also holds over
-    $\mathbb Z$.
+    a choice-free finite-rank integer subgroup proof, a maximal independent
+    sublist of a finite generating list with denominators cleared, and finite
+    tensor-relation witnesses. No arbitrary-rank freeness or invariant-factor
+    choice is hidden. The converse also holds over $\mathbb Z$.
 25. `thm-over-a-pid-flat-is-equivalent-to-torsion-free` — **theorem** `[LA]`.
+    The repaired direct ideal-test proof is independent of item 24 and of
+    unsupported filtered-colimit or arbitrary-rank subgroup arguments.
 
 **Symmetry and dimensions**
 
 26. `thm-tor-symmetry-over-a-commutative-ring` — **theorem** `[LA]`.
     $\operatorname{Tor}^R_n(M,N)\cong\operatorname{Tor}^R_n(N,M)$ naturally,
-    induced from the tensor symmetry with the graded sign; it is not stated for
-    arbitrary noncommutative rings.
+    under DC and supplied resolutions. The published proof flips one resolved
+    factor past a degree-zero module, so the termwise swap has no Koszul sign;
+    a two-complex graded twist instead has the usual sign. It is not stated
+    for arbitrary noncommutative rings.
 27. `def-flat-dimension-of-a-module` — **definition** `[LN]`. Least length of
     a flat resolution, or $\infty$.
 28. `thm-flat-dimension-at-most-n-iff-higher-tor-vanishes` — **theorem** `[LA]`.
@@ -2134,10 +2231,18 @@ module-level fact.
     $R$-module $M$. No corresponding equality with global dimension is
     asserted.
 32. `prop-semisimple-rings-have-vanishing-positive-tor-and-ext` —
-    **proposition** `[LA]`, citing the stable semisimple-module equivalences
-    required from `chain-conditions-and-semisimple-modules`.
+    **proposition** `[LA]`, under AC. Prove the right-module bridge by
+    opposite matrix factors in Wedderburn–Artin (and handle the zero ring),
+    apply the left semisimple characterization to both rings, then deduce
+    injectivity from split exact sequences. Identity resolutions give positive
+    Tor and both-sided Ext vanishing. Merely citing a left-only characterization
+    cannot supply the right or injectivity conclusions. The identity-complex
+    calculation alone remains choice-free relative to supplied projectivity.
 33. `prop-the-integers-have-weak-and-global-dimension-one` — **proposition**
-    `[LA]`, combining `HA-9` and items 23–25.
+    `[LA]`, under AC, using item 23's short resolutions for upper bounds.
+    Tensor multiplication by $n>1$ with $\mathbb Z/n$ to prove nonflatness
+    and nonprojectivity directly and choice-free. All four left/right values
+    are one; no undeclared nonzero Tor/Ext premise supplies the lower bounds.
 
 ### `fs-` items (A page)
 
@@ -2147,25 +2252,53 @@ module-level fact.
 - `fs-the-two-tor-constructions-are-equal-by-definition` — **false statement**
   `[LN]`; balance is Theorem 12.
 - `fs-flat-modules-have-projective-dimension-zero` — **false statement** `[LN]`;
-  flat need not imply projective.
+  $\mathbb Q$ is choice-free flat but nonprojective: divisibility gives
+  $\operatorname{Hom}(\mathbb Q,\mathbb Z)=0$, so a hypothetical section
+  of its canonical free cover has every coordinate zero. No general theorem
+  that projective abelian groups are free is needed.
 - `fs-tor-one-vanishes-only-when-one-module-is-projective` — **false statement**
-  `[LN]`; flatness is the correct condition.
+  `[LN]`; use the proved nonprojective factors $\mathbb Q$ and $\mathbb Z/2$.
+  The explicit rank-one cyclic resolution tensored with $\mathbb Q$ computes
+  zero first homology choice-free; AC supplies the other resolution and the
+  DC-qualified balanced interpretation.
 - `fs-tor-is-symmetric-over-every-noncommutative-ring` — **false statement**
   `[LN]`; handedness makes the expression ill-typed.
 - `fs-tor-one-of-r-mod-i-and-m-is-always-the-i-torsion-submodule-of-m` —
   **false statement** `[LN]`; in general it is the kernel of
-  $I\otimes_RM\to M$, and the cyclic-$\mathbb Z$ formula needs its hypotheses.
+  $I\otimes_RM\to M$ with the appropriate LES hypotheses. Preserve the
+  concrete $R=k[x,y]$, $I=(x,y)$, $M=k$ counterexample: prove the finite
+  resolution with maps $(-y,x)$ and $(x,y)$ exact by coefficients, identify
+  its tensor differential as zero, and obtain $\operatorname{Tor}_1=k^2$,
+  not the $I$-annihilator $k$. Prove $I/I^2$ has basis $x,y$ directly.
+  The fixed finite calculation is choice-free; DC licenses balanced notation.
 
 ### B page — `tor-flatness-and-global-dimension-examples`
 
-`ex-tor-of-two-cyclic-groups-from-a-two-term-resolution` `[AA]` ·
-`ex-tor-detects-n-torsion` `[AA]` ·
+`ex-tor-of-two-cyclic-groups-from-a-two-term-resolution` `[AA]` (AC for
+balanced comparison; explicit choice-free [t]_6↦[3t]_18 kernel isomorphism) ·
+`ex-tor-detects-n-torsion` `[AA]` (AC for balanced comparison; choice-free
+kernel 0,3,6,9 and explicit Z/4→Z/12 map [t]↦[3t]) ·
 `ex-a-flat-nonprojective-module` `[LL]` ·
 `ex-localization-is-flat-and-has-vanishing-positive-tor` `[LL]` ·
 `ex-the-tensor-double-complex-in-low-degrees` `[AA]` ·
-`ex-tor-symmetry-over-a-commutative-ring` `[AA]` ·
+`ex-tor-symmetry-over-a-commutative-ring` `[AA]` (AC for balanced symmetry,
+DC obtained by successor iteration; cyclic kernels {0,3} and {0,2} are
+identified by the unique nonzero-element map, with explicit cyclic suppliers) ·
 `cex-a-noncommutative-handedness-error-in-tor` `[AN]` ·
 `ex-weak-dimension-and-global-dimension-for-a-field-and-the-integers` `[AA]`.
+
+The eight existing B items are retained. The flat-nonprojective example uses
+the proved choice-free $\mathbb Q$ counterinstance above. The localization
+example is specifically $\mathbb Z[1/2]$: embed its fractions into $\mathbb Q$,
+deduce choice-free flatness, and factor the differentials of any supplied
+resolution through their images to prove every positive homology group
+vanishes after tensoring. AC is needed for its general resolution-existence
+and balanced-interface clause, not that conditional calculation. The field
+and integer dimension example assumes AC for arbitrary vector-space bases
+and integer resolutions, cites the earlier basis and free-projectivity
+suppliers rather than HA-11, and retains its choice-free supplied-finite-basis
+clause. These repairs do not enlarge the B inventory or erase the other
+cyclic, double-complex, symmetry and handedness examples.
 
 ### Sources and exact locators
 
@@ -2378,12 +2511,48 @@ finite diagonal, all displayed indices are nonnegative, and an empty sum is
 zero. `Tor` means the balanced $\operatorname{Tor}^R_1$ in the order fixed by
 HA-10 (the PID is commutative, so the displayed symmetry is legitimate).
 
+Binding Step-3 amendment, 2026-09-09: the first numbered item below is the
+local arbitrary-rank PID prerequisite. The decomposition lemma uses it
+instead of the published cycle/boundary-freeness lemma. The inventory has
+5 A and 2 B items, matching batch 5. Garrett §6 Theorem 6.0.1 and Goel
+Chapter 8 footnote 2 supply the complete source proofs in batch-5 coverage;
+both new full texts are genuinely fetch-verified. The separate published
+PID-submodule finding and item-specific Tor repair receipts remain in the
+ledger; this local replacement itself does not repair published items.
+AC licenses the earlier DC-qualified Tor comparison interface by the local
+successor-selector/ordinary-recursion argument specified in HA-10, never by
+a forward citation to A665. All other future exactness/splitting clauses below
+are retained.
+
+Step-5 dependency reconciliation (2026-09-09): the tensor kernel/cokernel
+lemma explicitly declares `def-dependent-choice`, `thm-recursion`, and
+`thm-free-modules-are-projective-with-choice-boundary` for its local AC-to-DC
+argument and supplied projective presentations. The splitting theorem declares
+`def-tensor-product-total-complex-of-chain-complexes` for its chain-map check.
+Both examples declare the tensor kernel/cokernel lemma for the actual balanced
+Tor identification. These six edges are synchronized with the canonical plan
+and authored manifest; no new pair or later supplier is introduced. The seven
+new items are authored drafts awaiting Step 6, not published replacements.
+
 ### A-page items, in dependency order
 
-1. `lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces` —
+1. `lem-pid-submodules-of-free-modules-are-free-with-choice` — **lemma** `[LA]`.
+   **Dependencies:** `def-principal-ideal-domain`,
+   `def-free-module-on-a-set-and-standard-basis`, `def-axiom-of-choice`,
+   `thm-well-ordering-theorem`, `thm-transfinite-induction`.
+   Assume AC; well-order the supplied basis and filter by initial segments.
+   Each nonzero coordinate ideal is principal; AC chooses a generator and
+   its lift simultaneously for every nonzero stage. Well-ordered induction
+   eliminates the greatest coordinate of each finite-support element to
+   prove spanning; the greatest nonzero coordinate in a finite relation
+   proves independence. Limit stages are unions. This arbitrary-rank local
+   supplier precedes its decomposition consumer and does not invoke the
+   older published arbitrary-PID freeness theorem.
+
+2. `lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces` —
    **lemma** `[LA]`.
    **Dependencies:**
-   `lem-boundaries-and-cycles-in-a-free-complex-over-a-pid-are-free`,
+   `lem-pid-submodules-of-free-modules-are-free-with-choice`,
    `thm-free-modules-are-projective-with-choice-boundary`,
    `lem-cycle-boundary-short-exact-sequences-for-a-free-complex-over-a-pid`.
    For every $n$, choose a section of the epimorphism
@@ -2396,7 +2565,7 @@ HA-10 (the PID is commutative, so the displayed symmetry is legitimate).
    $D$). The lemma must not claim that $B_nC$ is a direct summand of $Z_nC$:
    that is neither needed nor generally true.
 
-2. `lem-pid-tensor-two-term-pieces-have-the-kunneth-kernel-and-cokernel` —
+3. `lem-pid-tensor-two-term-pieces-have-the-kunneth-kernel-and-cokernel` —
    **lemma** `[LA]`.
    **Dependencies:**
    `lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces`,
@@ -2413,7 +2582,7 @@ HA-10 (the PID is commutative, so the displayed symmetry is legitimate).
    the cycle-tensor cross product; do not identify an abstract isomorphic map
    as the existing interface without this check.
 
-3. `thm-pid-kunneth-exactness-from-cycle-boundary-presentations` —
+4. `thm-pid-kunneth-exactness-from-cycle-boundary-presentations` —
    **theorem** `[LA]`.
    **Dependencies:**
    `lem-pid-tensor-two-term-pieces-have-the-kunneth-kernel-and-cokernel`,
@@ -2428,14 +2597,14 @@ HA-10 (the PID is commutative, so the displayed symmetry is legitimate).
    \]
    The left arrow is $[z]\otimes[w]\mapsto[z\otimes w]$ and the right arrow
    is the established Tor quotient. Prove exactness by the kernel/cokernel
-   calculation in item 2, including the identification of the kernel of that
+   calculation in item 3, including the identification of the kernel of that
    quotient with the image of this particular cross product. The proof may not
    appeal to `thm-kunneth-theorem-for-free-complexes-over-a-pid`, since that
    would leave the required local proof interface unbuilt. Naturality is in
    chain maps of both complexes; it belongs to this exact sequence, not to a
    subsequently chosen decomposition.
 
-4. `thm-pid-kunneth-splitting-from-cycle-boundary-presentations` —
+5. `thm-pid-kunneth-splitting-from-cycle-boundary-presentations` —
    **theorem** `[LA]`.
    **Dependencies:**
    `thm-pid-kunneth-exactness-from-cycle-boundary-presentations`,
@@ -2445,7 +2614,7 @@ HA-10 (the PID is commutative, so the displayed symmetry is legitimate).
    $\pi_C:C\to H(C)$ and $\pi_D:D\to H(D)$ by passing a projected cycle to
    its homology class. The induced map on $H_n(C\otimes_RD)$ retracts the
    tensor cross-product injection. Its kernel therefore maps isomorphically to
-   the Tor quotient of item 3, whose inverse supplies an $R$-linear section.
+   the Tor quotient of item 4, whose inverse supplies an $R$-linear section.
    Check both composites explicitly. The section depends on the chosen
    retractions, so this theorem asserts existence after choices and no natural
    choice. It does **not** claim that no natural splitting can exist in every
@@ -2479,7 +2648,7 @@ HA-10 (the PID is commutative, so the displayed symmetry is legitimate).
    identify it with its homology class. Since every field module is flat,
    every Tor quotient is zero and the cross-product map is the resulting
    natural isomorphism. This example must distinguish the natural isomorphism
-   caused by vanishing Tor from the noncanonical splitting in item 4.
+   caused by vanishing Tor from the noncanonical splitting in item 5.
 
 ### Sources and exact locators
 
@@ -3073,6 +3242,121 @@ functors in the bounded settings where the replacement theorem is available.
 `ex-derived-hom-of-cyclic-abelian-groups` `[AA]` ·
 `cex-an-unbounded-complex-of-projectives-that-is-not-k-projective` `[LL]`.
 
+#### Retained Tor harvest enrichment — 2026-09-09
+
+Destination record for the six unresolved catchup Tor harvest rows, not an
+assertion that these additions are already in the published text. Existing
+`derived-categories-examples` (365.064) retains the following six proposed
+literature-derived computational examples, in the displayed order after its
+current nine items. This is future enrichment of an existing pair, not a new
+live pair, current-run item, or prerequisite. Root owns authoritative plan
+and scope reconciliation. All ordinary Tor/Ext interpretations inherit AC
+when arbitrary resolutions are required; explicit supplied-complex homology
+calculations themselves use no choice. B results are not upstream suppliers.
+
+1. **`ex-derived-tensor-with-a-fraction-field-quotient`.** For every
+   commutative domain R with fraction field F and every R-module B,
+   Tor_1^R(F/R,B) is naturally the torsion submodule of B. Include R=Z,
+   giving Tor_1^Z(Q/Z,B)=torsion(B). Use
+   `thm-localisation-of-modules-is-exact`,
+   `thm-localisation-of-modules-is-tensor-product`, the Tor LES and
+   `prop-homology-of-the-derived-tensor-product-is-tor`: tensor
+   0→R→F→F/R→0, use flatness of F, and identify its kernel with the
+   elements killed by a nonzero denominator. No filtered-colimit theorem
+   for Tor is assumed. Source: Weibel 3.1.3 and Exercise 3.1.2, pp.67–68.
+2. **`ex-periodic-derived-tensor-over-integer-quotient-rings`.** For
+   R=Z/m, positive d dividing positive m, and left R-module B, retain
+   Tor_0^R(Z/d,B)=B/dB; in positive odd degree retain
+   ker(d:B→B)/(m/d)B; in positive even degree retain
+   ker(m/d:B→B)/dB. Alternate multiplication by d and m/d on copies
+   of R, ending with d:R→R→Z/d. Verify exactness by integer divisibility
+   before tensoring. Include d=1,d=m, and m=1. These are computations
+   from a supplied periodic free resolution, not the different periodic
+   group-ring resolution for a cyclic group. Source: Weibel 3.1.6, p.67.
+3. **`ex-derived-tensor-of-a-principal-right-quotient`.** For arbitrary
+   unital R and r∈R let K={a∈R:ra=0}, a right ideal. For every left
+   module B, Tor_0(R/rR,B)=B/rB. If K=0, Tor_1=ker(r:B→B) and
+   Tor_n=0 for n≥2. Without the regularity assumption retain
+   0→Tor_2(R/rR,B)→K⊗_R B→ker(r:B→B)→Tor_1(R/rR,B)→0,
+   whose middle arrow is a⊗b↦ab, and
+   Tor_n(R/rR,B)≅Tor_{n−2}(K,B) for n≥3. Break the exact sequence
+   0→K→R→R→R/rR→0 at rR and apply the right-variable LES twice;
+   do not call K projective. Tensor right exactness here is proved directly
+   with balanced additive quotients, not the commutative-only theorem:
+   (E/L)⊗B≅(E⊗B)/image(L⊗B), with inverses given by coset tensors.
+   These are abelian groups absent additional outer actions. Source:
+   Weibel 3.1.7 and Exercise 3.1.1, p.68 (visual formula recovery).
+4. **`ex-tor-one-of-right-and-left-ideal-quotients`.** For every unital R,
+   right ideal I and left ideal J, Tor_1^R(R/I,R/J)≅(I∩J)/IJ as
+   abelian groups; for two-sided I=J this is I/I². Here IJ denotes the
+   additive subgroup generated by products ij. The balanced quotient
+   formula identifies I⊗R/J with I/IJ. Tensor 0→I→R→R/I→0 and
+   identify the kernel of I/IJ→R/J. This supplies the complete calculation
+   without a commutative assumption. Source: Weibel Exercise 3.1.3, p.68.
+5. **`ex-homological-dimension-bounds-in-exact-sequences`.** Under AC,
+   for any unital R and an exact sequence 0→A→B→C→0 of modules on
+   one fixed side, pd B≤max(pd A,pd C), with equality unless
+   pd C=pd A+1; id B≤max(id A,id C), with equality unless
+   id A=id C+1; fd B≤max(fd A,fd C), with equality unless
+   fd C=fd A+1. Use extended dimensions with infinity+1=infinity;
+   the exceptional case therefore includes both endpoint dimensions infinite.
+   Proof: the Ext LES in each variable, and Tor LES for fd, give the middle
+   upper bounds. For pd/fd, if the middle dimension b is strictly below the
+   maximum of endpoint dimensions a,c, then the LES tail gives c≤a+1.
+   If a,c are finite, the reverse LES tail gives a≤max(b,c−1), forcing
+   c=a+1. If precisely one endpoint were infinite and b finite, the same
+   tail vanishing would force that endpoint finite, a contradiction. If b
+   is infinite equality is automatic. Reverse the endpoint roles for id.
+   Degree-zero/projective/injective/flat cases use the degree-one criteria,
+   not a negative-degree Ext group. Interpret these as explicit derived
+   triangle/LES computations, preserving the complete source inequalities.
+   Sources: Weibel Exercise 4.1.2, p.95; dimension criteria 4.1.6–4.1.10.
+6. **`ex-projective-dimension-of-sums-and-restricted-projectives`.** Under
+   AC, pd_R(⊕_i A_i)=sup_i pd_R A_i, with pd(0)=0 and empty
+   supremum 0; an S-projective right module P under a unital map R→S
+   satisfies pd_R P≤pd_R S; if right global dimension is infinite, some
+   right module has infinite projective dimension. Give left versions over
+   opposite rings. For a finite bound d, take the direct sum of length-d
+   projective resolutions; sums are exact by finite support and projective
+   under AC by simultaneous lifts. Summands supply the reverse bound via
+   the Ext-vanishing criterion. P is a summand of a free S-module, proving
+   the restriction assertion. For the last claim, either an infinite-
+   dimensional witness already exists or, for each integer d, select a
+   module of projective dimension >d and take their sum. Collection in ZF
+   first gathers a set of candidate witnesses; countable choice follows
+   from AC. This avoids a purported choice function on a proper class.
+   Sources: Weibel Exercise 4.1.3, p.95 and published projective/Ext criteria.
+
+All six example statements have `provenance.statement: literature-derived`
+and proposed `provenance.proof: ai-altered`; they are not AI-generated
+theorems or load-bearing B suppliers. Together they take future B from nine
+to fifteen items; the 60-item A inventory does not grow. Source full texts:
+https://math.mit.edu/~hrm/palestine/weibel/03-tor_and_ext.pdf and
+https://math.mit.edu/~hrm/palestine/weibel/04-homological_dimension.pdf .
+The exact arbitrary-ring tensor/ideal and finite-presentation arguments
+retained in CA18 below are future A proof clauses, not forward dependencies
+of these earlier B examples; each example uses the local quotient argument
+and existing earlier Tor/Ext interfaces specified here.
+
+**Sharifi 3.5.11 retained on A.** Existing `derived-categories` (365.063)
+owns the flat-resolution computation through
+`lem-bounded-above-flat-tensor-complexes-preserve-quasi-isomorphisms`,
+`def-derived-tensor-product-in-the-bounded-above-setting`, and
+`prop-homology-of-the-derived-tensor-product-is-tor`. Explicitly include the
+module-resolution corollary in the latter's future prose/authoring contract:
+for supplied nonnegative homological flat F→M and projective P→N,
+H_n(N⊗F)=Tor_n(N,M), and the sided dual holds. Reindex to nonpositive
+cochains. Both arrows from P⊗F to N⊗F and P⊗M are quasi-isomorphisms
+by the flat-tensor lemma. Finite diagonals give the result; no assertion
+about arbitrary unbounded K-flat complexes is added. Resolution comparison
+uses the actual published DC/supplied-data contracts, or AC for the ordinary
+existence formulation. Source: Sharifi Remark 3.5.11 and Proposition 3.3.8,
+https://math.ucla.edu/~sharifi/homalg.pdf , printed pp.68–69,76 (97-page
+current PDF). The left-derived proof needs **right** exact tensor despite
+the source's printed “left exact” slip. Weibel 3.2.8, pp.71–72, gives the
+independent dimension-shifting proof. This records an explicit application
+of existing A machinery, not a new item or current-run prerequisite.
+
 ### Sources and exact locators
 
 - **Weibel §§10.3 “Localization and the Calculus of Fractions”, 10.4 “The
@@ -3108,6 +3392,24 @@ replacement data.
 
 **page id** `spectral-sequences` *(planned id kept)*  
 **`requires`** `chain-complexes-and-homology`
+
+Binding Step-3 inventory amendment, 2026-09-09: 44 A and 7 B items.
+Prepend `lem-spectral-sequence-subquotient-and-local-lifting-calculus`:
+prove normality of monics/epics from the abelian axiom, stability of an
+epimorphism under pullback, nested quotient and sum/intersection identities,
+modularity, quotient descent, and equality after an epic cover. These are
+finite categorical constructions, not an element-lifting choice assumption.
+Its exact dependencies are `def-abelian-category`,
+`prop-the-kernel-of-a-monomorphism-is-zero-and-the-cokernel-of-an-epimorphism-is-zero`,
+and `prop-the-cokernel-of-a-zero-morphism-out-of-the-zero-object-is-an-isomorphism`.
+Insert `lem-abelian-group-model-for-spectral-sequence-computations` before
+the first filtered-group counterexample: construct finite biproducts,
+subgroup kernels, coset cokernels and the coimage/image isomorphism directly;
+prove the Z/2 and Z/4 computations using integer division, without choosing
+a representative function. Declare the abelian-category, group-homomorphism,
+integer ordered-ring, modular-arithmetic, equivalence-relation and integer
+division interfaces exactly as in the synchronized canonical inventory.
+Stacks 12.5 supplies the axiom checklist; the local model proof verifies it.
 
 A spectral sequence is introduced as controlled bookkeeping for a filtration,
 not as a grid of groups that eventually “becomes” homology. The construction
@@ -3697,7 +3999,7 @@ property; an element computation may be added only in a module example.
 | 32 | projective/injective/global dimension | least resolution length is independent of the displayed resolution via syzygy and Ext-vanishing criteria | `HA-9` items 26–37 |
 | 33 | tensor total complex | balanced tensor representatives respect the differential and the Koszul sign makes $d^2=0$ | `HA-10` items 1–2 |
 | 34 | balanced Tor notation | exact rows/columns give the two edge quasi-isomorphisms; comparison is natural and coherent | `HA-10` items 8–14 |
-| 35 | Tor symmetry | the tensor twist is a chain map only with the graded sign; commutativity/bimodule typing is present | `HA-10` item 26 |
+| 35 | Tor symmetry | a two-complex twist has the graded sign; the published one-resolved-factor/degree-zero swap has sign one; commutativity/bimodule typing is present | `HA-10` item 26 |
 | 36 | UCT edge maps | cycle and coefficient representatives descend; the Tor/Ext obstruction maps are natural | `HA-11` items 6–8, 11–13 |
 | 37 | UCT/Künneth splitting | existence of a splitting is proved separately and explicitly nonnatural | `HA-11` items 9–10, 14, 21 |
 | 38 | Künneth cross product | cycles tensor to cycles; changing either representative changes the tensor by a total boundary | `HA-11` items 17–20 |
@@ -3757,10 +4059,11 @@ already-published result inherits that result's stronger recorded boundary.
 | maps of derived functors once object-resolution data are supplied | ZF relative to objectwise comparison existence | independence makes the induced map uniquely specified; no class-sized selection of comparison maps is needed |
 | change-of-resolution natural isomorphism | ZF relative to two supplied data and objectwise comparison existence | homotopy uniqueness forces the components and cocycle laws |
 | effacement/universality for one object and degree | ZF | compare two effacements using a finite biproduct; no family of effacements is selected globally |
-| Ext/Tor balance by a first-quadrant double complex | ZF relative to supplied resolutions | all diagonals are finite and acyclic assembly uses finite exact-sequence induction |
+| fixed Ext/Tor balance by a first-quadrant double complex | ZF relative to supplied resolutions | finite diagonals give the edge quasi-isomorphisms; natural/coherent changes and balanced bifunctor notation additionally use DC or supplied comparison/homotopy data |
 | Baer sum and Yoneda splice | ZF | only finite pullbacks, pushouts and biproducts occur |
 | set of extension classes | ZF in the licensed locally small setting | comparison with set-valued derived Ext avoids selecting representatives |
-| projective/global dimension one of $\mathbb Z$, higher-Tor vanishing over $\mathbb Z$, and the PID torsion-free/flat theorem | inherits the abstract-algebra AC boundary | the standard proof uses that submodules of free modules over a PID are free; the scaffold never labels that step ZF without the source's foundation qualification |
+| projective/global dimension one of $\mathbb Z$ and general higher-Tor vanishing over $\mathbb Z$ | AC for arbitrary-rank integer freeness and free projectivity | earlier/local integer-coordinate proofs give short resolutions; a supplied short-resolution calculation and the explicit Z/n lower-bound obstruction are choice-free; no later HA-11 PID or A665 implication is used |
+| torsion-free abelian groups are flat; general PID flat/torsion-free equivalence | choice-free finite-witness integer route; direct ideal-test PID route | the integer proof establishes its finite-rank freeness locally; the PID proof does not use filtered colimits or arbitrary-rank submodule freeness |
 | UCT/Künneth natural short exact sequences | ZF relative to the cited PID submodule theorem | no splitting is needed for exactness |
 | UCT/Künneth splitting over a PID | AC in general; finite choice in finite-rank cases | choosing bases/complements or sections is why the splitting is nonnatural; the statement must inherit the abstract-algebra choice boundary |
 | one splitting in every degree of a countable family of already split sequences | countable choice in general, or supplied splittings | each fixed degree is an ordinary existential statement; a simultaneous graded family is a separate countable selection and never implies compatibility with differentials |
@@ -4492,7 +4795,7 @@ number is governed by its containing section's disposition above.
 | Tor handedness | Commutative-ring texts suppress left/right modules | For arbitrary $R$, first input right and second input left: $\operatorname{Tor}^R_n(N,M)$. Symmetry is stated only over a commutative ring or with suitable bimodule structure. |
 | double-complex sign | Some sources demand $d_hd_v=d_vd_h$ and insert a sign in totalisation; others demand anticommutation | The library's double complexes anticommute and totalize with $d_h+d_v$. When importing a commuting convention, multiply one differential by the standard degree sign. |
 | sum versus product totalization | Bounded sources use “the total complex” because diagonals are finite; unbounded sources distinguish $\oplus$ and $\prod$ | Both are defined on `HA-16`; they are identified only for finite diagonals. Ext/Tor balance is first quadrant, so the ambiguity is absent there. |
-| spectral-sequence starting page | Weibel/Rotman/Stacks differ between $E^0$, $E^1$, and $E_1$ conventions | Filtered complexes start at $E^0=\operatorname{gr}C$ and $E^1=H(\operatorname{gr}C)$. Every theorem prints the bidegree and page of its displayed term. |
+| spectral-sequence starting page | Generic exact-couple iteration can label its initial term F_0 (Vitolo Appendix B p33), while the filtration-normalized homology couple starts at E^1 (Weibel 5.9.3–4). Do not assert an unsupported disagreement among Weibel, Rotman and Stacks. | Filtered complexes start at $E^0=\operatorname{gr}C$ and $E^1=H(\operatorname{gr}C)$. State the F_n/E^(n+1) dictionary and corresponding degree shift; every theorem prints its page and bidegree. |
 | spectral differential | Homological and cohomological sources reverse arrows and superscript/subscript placement | §3.3 fixes $(-r,r-1)$ homologically and $(r,1-r)$ cohomologically. No result is copied without reindexing. |
 | convergence | Weibel distinguishes convergence conditions; the Stacks Project explicitly warns terminology is inconsistent; some prose uses $E_r\Rightarrow H$ loosely | Stabilization, weak abutment to $\operatorname{gr}H$, and strong convergence are three definitions. A theorem must name the filtration, completeness/separatedness, and extension problem. |
 | triangulated rotation sign | Equivalent axiom systems move a minus sign between rotation, shift, and cone maps | Left rotation ends in $-f[1]$. Cone calculations and long exact Hom are authored against that convention once. |
@@ -5065,3 +5368,12 @@ this is not approval of those scaffolds or publication of mathematics.
 At their final splice, rerun identity/dependency/frontier-discovery checks on
 the combined inventory. Details are in `homological-algebra-enrichment/review.md`.
 No change of scope may hide an essential theorem or an unresolved dependency.
+# Step-5 spectral-sequence synchronization, 2026-09-09
+
+Completed batch6's thirteen explicit dependency additions, associated-graded
+well-definedness backlink and generated-leaf provenance are synchronized with
+the canonical plan. Its three authored clauses explicitly cover filtration-
+lowering E1, existence-qualified mapping at infinity and regular/coregular
+stabilization; no unbounded abutment theorem is imported. See
+`phase-2-catchup-24-step5-dependency-reconciliation.md` for the bounded metadata
+handoff. Authored drafts still await Step6; no published proof is repaired.

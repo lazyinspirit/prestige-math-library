@@ -1,22 +1,22 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ 1f15a02d15c4 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ ff2a5ca1d837 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 7778 |
-| now mechanically prevented | 264 |
+| defects caught before publication | 7927 |
+| now mechanically prevented | 269 |
 | escaped to publication | 1 |
 | still open | 27 |
 
 ## frontier-11 — 4 row(s)
 
-| subclass | 3-review | 4-baseline | 7-judge | post-publication |
+| subclass | 4-baseline | post-publication | 3-review | 7-judge |
 |---|---|---|---|---|
-| other | 1 |  | 1 | 1 |
-| gate-wrong-signature |  | 1 |  |  |
+| other |  | 1 | 1 | 1 |
+| gate-wrong-signature | 1 |  |  |  |
 
 ## frontier-12 — 8 row(s)
 
@@ -28,33 +28,33 @@
 
 ## frontier-13 — 54 row(s)
 
-| subclass | 3-fix | 6b-adjudicate | 7-judge | 8-adjudicate | 9-scope | 9-receipt | 10-report | unknown |
+| subclass | unknown | 3-fix | 6b-adjudicate | 7-judge | 8-adjudicate | 9-scope | 9-receipt | 10-report |
 |---|---|---|---|---|---|---|---|---|
-| citation-inflated |  |  |  | 7 |  |  |  | 3 |
-| false-or-overstrong-statement |  |  |  | 6 |  |  |  | 2 |
-| other | 1 | 4 |  |  |  |  |  | 2 |
-| invalid-inference |  |  |  | 1 |  |  |  | 4 |
-| gate-vacuous |  |  |  | 1 |  | 4 |  |  |
-| false-or-overstrong-title |  |  |  | 2 |  |  |  | 1 |
-| missing-hypothesis |  |  |  | 1 |  |  |  | 1 |
-| citation-missing |  |  |  | 1 |  |  |  | 1 |
-| citation-misattributed |  |  |  |  |  |  |  | 2 |
-| false-decline |  |  |  |  | 2 |  |  |  |
-| invalid-witness |  |  |  | 1 |  |  |  |  |
-| arithmetic-error |  |  |  | 1 |  |  |  |  |
-| ill-typed-construction |  |  |  | 1 |  |  |  |  |
-| false-boundary-disposition |  |  |  |  |  |  |  | 1 |
-| deferral-without-destination |  |  |  |  |  |  |  | 1 |
-| stage-unowned |  |  |  |  |  |  | 1 |  |
-| liveness-false-positive |  |  | 1 |  |  |  |  |  |
-| dispatch-lost |  | 1 |  |  |  |  |  |  |
+| citation-inflated | 3 |  |  |  | 7 |  |  |  |
+| false-or-overstrong-statement | 2 |  |  |  | 6 |  |  |  |
+| other | 2 | 1 | 4 |  |  |  |  |  |
+| invalid-inference | 4 |  |  |  | 1 |  |  |  |
+| gate-vacuous |  |  |  |  | 1 |  | 4 |  |
+| false-or-overstrong-title | 1 |  |  |  | 2 |  |  |  |
+| missing-hypothesis | 1 |  |  |  | 1 |  |  |  |
+| citation-missing | 1 |  |  |  | 1 |  |  |  |
+| citation-misattributed | 2 |  |  |  |  |  |  |  |
+| false-decline |  |  |  |  |  | 2 |  |  |
+| invalid-witness |  |  |  |  | 1 |  |  |  |
+| arithmetic-error |  |  |  |  | 1 |  |  |  |
+| ill-typed-construction |  |  |  |  | 1 |  |  |  |
+| false-boundary-disposition | 1 |  |  |  |  |  |  |  |
+| deferral-without-destination | 1 |  |  |  |  |  |  |  |
+| stage-unowned |  |  |  |  |  |  |  | 1 |
+| liveness-false-positive |  |  |  | 1 |  |  |  |  |
+| dispatch-lost |  |  | 1 |  |  |  |  |  |
 
 ## frontier-14 — 438 row(s)
 
-| subclass | 1-scaffold | 3-review | 4-splice | 6a-read | 6b-adjudicate | 6c-cross | 7-judge | 8-adjudicate | 9-scope | 9-receipt |
+| subclass | 1-scaffold | 4-splice | 3-review | 6a-read | 6b-adjudicate | 6c-cross | 7-judge | 8-adjudicate | 9-scope | 9-receipt |
 |---|---|---|---|---|---|---|---|---|---|---|
 | citation-missing |  |  |  | 37 | 1 |  |  | 120 |  |  |
-| other |  | 1 |  |  | 31 | 3 | 2 | 1 |  |  |
+| other |  |  | 1 |  | 31 | 3 | 2 | 1 |  |  |
 | citation-inflated |  |  |  | 17 | 5 |  |  | 10 |  |  |
 | missing-choice-scope |  |  |  | 23 | 2 |  |  | 7 |  |  |
 | citation-misattributed |  |  |  | 17 | 4 |  |  | 3 |  |  |
@@ -74,7 +74,7 @@
 | deferral-without-destination |  |  |  |  |  |  |  |  | 3 |  |
 | citation-corrupted |  |  |  |  |  | 2 |  |  |  |  |
 | artifact-overwritten |  |  |  | 1 |  |  |  | 1 |  |  |
-| dispatch-lost |  |  | 1 |  | 1 |  |  |  |  |  |
+| dispatch-lost |  | 1 |  |  | 1 |  |  |  |  |  |
 | gate-wrong-signature | 1 |  |  |  |  | 1 |  |  |  |  |
 | arithmetic-error |  |  |  | 1 |  |  |  |  |  |  |
 | thin-harvest |  |  |  |  | 1 |  |  |  |  |  |
@@ -82,7 +82,7 @@
 | scheduler-race |  |  |  |  |  |  |  | 1 |  |  |
 | stage-unowned |  |  |  |  |  |  |  |  |  | 1 |
 | read-only-role-asked-to-write |  |  |  |  | 1 |  |  |  |  |  |
-| scope-loss |  |  | 1 |  |  |  |  |  |  |  |
+| scope-loss |  | 1 |  |  |  |  |  |  |  |  |
 
 ## frontier-15 — 91 row(s)
 
@@ -596,6 +596,74 @@
 | missing-map |  |  |  | 1 |
 | unsupported-inference |  |  |  | 1 |
 
+## phase-2-catchup-24 — 14 row(s)
+
+| subclass | 6b-adjudicate |
+|---|---|
+| contract-mismatch | 2 |
+| invalid-witness | 2 |
+| false-or-overstrong-statement | 2 |
+| risk-review | 2 |
+| invalid-inference | 1 |
+| citation-missing | 1 |
+| other | 1 |
+| ill-typed-construction | 1 |
+| ill-typed-claim | 1 |
+| citation-inaccurate | 1 |
+
+## phase-2-hg-prerequisite — 7 row(s)
+
+| subclass | 6a-read | 6b-adjudicate | 6c-cross |
+|---|---|---|---|
+| missing-hypothesis | 1 | 1 |  |
+| invalid-inference |  |  | 2 |
+| ill-typed-construction |  | 1 |  |
+| missing-choice-scope |  |  | 1 |
+| false-or-overstrong-statement |  |  | 1 |
+
+## phase-2-merged-25 — 23 row(s)
+
+| subclass | 6a-read | 6b-adjudicate | 6c-cross |
+|---|---|---|---|
+| invalid-inference |  | 1 | 2 |
+| false-or-overstrong-statement |  | 2 | 1 |
+| contract-mismatch |  | 2 |  |
+| invalid-witness |  | 2 |  |
+| other |  | 2 |  |
+| ill-typed-construction |  | 2 |  |
+| risk-review |  | 2 |  |
+| missing-hypothesis | 1 | 1 |  |
+| citation-missing |  | 1 |  |
+| ill-typed-claim |  | 1 |  |
+| citation-inaccurate |  | 1 |  |
+| missing-choice-scope |  |  | 1 |
+| false-boundary-disposition |  | 1 |  |
+
+## phase-2-nine-step-25 — 105 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross | 6-judge | 7-adjudicate |
+|---|---|---|---|---|
+| ill-typed-construction | 2 |  | 10 | 6 |
+| citation-inflated |  |  | 2 | 13 |
+| citation-inaccurate | 1 |  | 1 | 11 |
+| citation-missing | 1 | 1 |  | 10 |
+| missing-hypothesis | 2 |  | 2 | 6 |
+| false-or-overstrong-statement | 2 | 1 | 2 |  |
+| false-or-overstrong-title |  |  | 1 | 4 |
+| invalid-inference | 1 | 2 |  | 1 |
+| invalid-witness | 2 |  |  | 2 |
+| ill-typed-claim | 1 |  | 1 | 2 |
+| contract-mismatch | 2 |  |  |  |
+| other | 2 |  |  |  |
+| risk-review | 2 |  |  |  |
+| undefined-notation |  |  |  | 2 |
+| missing-case |  |  | 1 | 1 |
+| missing-choice-scope |  | 1 |  |  |
+| false-boundary-disposition | 1 |  |  |  |
+| ill-formed |  |  |  | 1 |
+| citation-misattributed |  |  |  | 1 |
+| citation-truncated |  |  |  | 1 |
+
 ## phase-2-wave-1 — 74 row(s)
 
 | subclass | 3-review | 3-recheck | 6a-read | 6b-adjudicate | 7-judge | 8-adjudicate | 9-receipt |
@@ -626,7 +694,7 @@
 
 ## ra-enrich-01 — 2 row(s)
 
-| subclass | 8-rejudge | unknown |
+| subclass | unknown | 8-rejudge |
 |---|---|---|
 | other | 1 | 1 |
 

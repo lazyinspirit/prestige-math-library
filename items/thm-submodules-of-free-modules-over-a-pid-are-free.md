@@ -4,7 +4,7 @@ title: "A submodule of an arbitrary-rank free module over a PID is free"
 kind: theorem
 status: published
 origin: pipeline
-deps: ["def-principal-ideal-domain", "cor-every-vector-space-has-a-basis", "thm-free-modules-are-projective-with-choice-boundary"]
+deps: ["def-principal-ideal-domain", "def-free-module-on-a-set-and-standard-basis", "def-axiom-of-choice", "thm-well-ordering-theorem", "thm-transfinite-induction"]
 proof_strategy: direct
 sources:
   references:
@@ -14,12 +14,13 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
-  audited: 2026-09-06
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
+  verified:
+    model: codex
     verdict: pass
-    date: 2026-09-06
+    date: 2026-09-09
+    scope: owner-authorized local PID submodule proof/interface repair; no independent judge
+    delegated_by: owner
 ---
 
 ## Statement
@@ -27,12 +28,28 @@ verification:
 Assume the Axiom of Choice. If $R$ is a PID, $F$ is a free $R$-module, and
 $N\subseteq F$, then $N$ is free (with no finite-rank assumption on $F$).
 
+## Facts & Assumptions
+
+**Given:** a basis $(e_a)_{a\in W}$ of $F$, a submodule $N\subseteq F$, and AC.
+
+[L1] A PID is a domain and every ideal is principal ([[def-principal-ideal-domain]]).
+
+[L2] Basis expansions are unique and have finite support ([[def-free-module-on-a-set-and-standard-basis]]).
+
+[L3] AC permits simultaneous selections from a set-indexed family of nonempty sets ([[def-axiom-of-choice]]).
+
+[L4] Under AC the set $W$ admits a well-order ([[thm-well-ordering-theorem]]).
+
+[L5] Induction over a well-ordered set is valid ([[thm-transfinite-induction]]).
+
 ## Proof
 
-**Given:** a basis of $F$, a submodule $N\subseteq F$, and the Axiom of
-Choice. By the well-ordering theorem, index the basis as
-$(e_\alpha)_{\alpha<\kappa}$.
+1.1 Use [L4] to well-order $W$. For $a\in W$ let $F_{\le a}$ and $F_{<a}$ be the spans of the corresponding basis initial segments. Let $I_a$ be the image of $N\cap F_{\le a}$ under the $a$-coordinate map. This image is an ideal because the coordinate map is $R$-linear. [L2, L4, construct]
 
-1.1 Put $F_\alpha=\langle e_\beta:\beta<\alpha\rangle$ and $N_\alpha=N\cap F_\alpha$. The image of $N_{\alpha+1}$ in $F_{\alpha+1}/F_\alpha\cong R$ is an ideal $I_\alpha$ of $R$, hence is either zero or free of rank one. Thus $0\to N_\alpha\to N_{\alpha+1}\to I_\alpha\to0$ splits. [given, algebra]
+2.1 If $I_a\ne0$, [L1] supplies a nonzero generator $r_a$ and the definition of the image supplies $x_a\in N\cap F_{\le a}$ with $a$-coordinate $r_a$. The sets of such pairs $(r_a,x_a)$ are nonempty and indexed by a subset of $W$; use [L3] to choose them simultaneously. This is the second use of AC, after well-ordering the basis. [step 1.1, L1, L3, choose]
 
-2.1 At each successor with $I_\alpha\ne0$, choose a generator and a lift $x_\alpha\in N_{\alpha+1}$; the splitting gives $N_{\alpha+1}=N_\alpha\oplus Rx_\alpha$. At a limit $\lambda$, every element has finite support, so $N_\lambda=\bigcup_{\alpha<\lambda}N_\alpha$ and the nested union of the earlier bases is a basis. Transfinite induction through the terminal stage $\kappa$ therefore gives a basis of $N_\kappa=N$. For $\kappa=0$, this is the empty basis of $N=0$. [step 1.1, construct] ∎
+3.1 If $y\in N\cap F_{\le a}$ and $I_a=0$, then $y\in F_{<a}$. If $I_a\ne0$, write its $a$-coordinate as $c r_a$; then $y-cx_a\in N\cap F_{<a}$. In either case the remainder has finite support below $a$. [step 1.1, step 2.1, L2, algebra]
+
+4.1 Induct on $a$ using [L5] to show that $N\cap F_{\le a}$ is spanned by the chosen $x_b$ with $b\le a$. By step 3.1 it suffices to handle a finite-support remainder in $F_{<a}$. A zero remainder needs no generators; otherwise its support has a greatest element $b<a$, so the induction hypothesis at $b$ applies. This includes least and limit positions without selecting a cofinal sequence. Every nonzero element of $N$ has a greatest support element, so the chosen family spans $N$. [step 3.1, L2, L5]
+
+5.1 In a nonzero finite relation among the chosen $x_a$, take the greatest index $a$ with nonzero coefficient $c_a$. Its $a$-coordinate is $c_a r_a$: all smaller-index vectors have zero coordinate there. Since $R$ is a domain and $r_a\ne0$, this coordinate is nonzero, a contradiction. Thus the family is independent and is a basis by step 4.1. If $W$ or $N$ is empty or zero as applicable, the same argument gives the empty basis. [step 1.1, step 2.1, step 4.1, L1, L2] ∎

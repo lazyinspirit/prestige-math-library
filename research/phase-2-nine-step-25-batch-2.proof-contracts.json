@@ -1,0 +1,1063 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-two-signs-detect-an-operator-increment",
+    "thm-sequential-uniform-boundedness-under-countable-choice",
+    "ex-sequential-uniform-boundedness-for-coordinate-partial-sums",
+    "cex-sequential-uniform-boundedness-needs-a-complete-domain"
+  ],
+  "contracts": {
+    "lem-two-signs-detect-an-operator-increment": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-bounded-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[rem-real-and-complex-normed-space-convention]]. A linear map\n$T:X\\to Y$ ([[def-linear-map]]) is a **bounded linear operator** when there is a\nreal constant $C \\ge 0$ such that\n\n$$\\|Tx\\| \\le C\\|x\\| \\qquad \\text{for all } x \\in X.$$\n\nAny such $C$ is called a **bound** for $T$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "application": "A bounded linear operator is in particular linear, and its domain and codomain have the scalar homogeneity and triangle inequality of normed spaces ([[def-bounded-linear-operator]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "T(x+u)-T(x-u)=2Tu.",
+          "inputs": [
+            "F1",
+            "T linear; x,u in X; vector addition and subtraction."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The maximum of the two image norms is at least ||Tu||, including zero cases.",
+          "inputs": [
+            "F1",
+            "1.1",
+            "The difference identity; triangle inequality; ||2Tu||=2||Tu||; 2>0."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement normed spaces contain zero; step 2.1 covers the only possible empty unit-sphere situation (zero space) without using a sphere."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 includes u=0 and T=0, with both sides nonnegative and ||Tu||=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses coefficients +1 and -1; no normalization or exclusion of unit vectors occurs in the statement."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 includes zero domain/codomain and permits equality of the two norms."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The lemma has no interval or limiting parameter; x,u range over whole vector spaces."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "not_applicable",
+          "reason": "Both vectors and the operator are given; the maximum of two real numbers requires no selection axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The claim is a one-way norm inequality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse inequality or equivalence is asserted."
+        }
+      ],
+      "axiom_accounting": "ZF only; linearity and norm axioms. No completeness or selection.",
+      "source_evidence": [
+        {
+          "url": "https://staff.fnwi.uva.nl/r.p.stevenson/1005.1585.pdf",
+          "locator": "Printed p.2, equation (2) and its following sentence",
+          "excerpt": "where the second ≥ uses the triangle inequality",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "application": "Equation (2) is the two-sign maximum estimate. The local argument derives it from linearity and the triangle inequality over either scalar field."
+        }
+      ]
+    },
+    "thm-sequential-uniform-boundedness-under-countable-choice": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "cor-cauchy-reals-lub-complete",
+          "source_section": "Statement",
+          "quote": "The Cauchy-sequence reals $\\mathbb{R}_C$ have the **least-upper-bound property**:\nevery nonempty $S \\subseteq \\mathbb{R}_C$ that is bounded above has a least upper\nbound $\\sup S \\in \\mathbb{R}_C$. Hence, together with [[thm-reals-ordered-field]],\n$\\mathbb{R}_C$ is a **complete ordered field** ([[def-complete-ordered-field]]).",
+          "uses": [
+            "1.1",
+            "1.2",
+            "11.1"
+          ],
+          "application": "The library's reals have the least-upper-bound property and form a complete ordered field ([[cor-cauchy-reals-lub-complete]])."
+        },
+        {
+          "fact": "F2",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ],
+          "application": "The operator norm is the unit-ball supremum; the zero-domain norm is zero ([[def-operator-norm]])."
+        },
+        {
+          "fact": "F3",
+          "source": "thm-well-ordering-principle",
+          "source_section": "Statement",
+          "quote": "Every nonempty subset $S \\subseteq \\mathbb{N}$ has a least element: there is $\\ell \\in S$ with $\\ell \\le s$ for all $s \\in S$.",
+          "uses": [
+            "2.1"
+          ],
+          "application": "Every nonempty subset of $\\mathbb N$ has a least element ([[thm-well-ordering-principle]])."
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable-choice",
+          "source_section": "Definition",
+          "quote": "> For every family $(X_n)_{n \\in \\mathbb{N}}$ of nonempty sets indexed by\n> $\\mathbb{N}$ there is a function $f$ with domain $\\mathbb{N}$ such that\n> $f(n) \\in X_n$ for every $n \\in \\mathbb{N}$.",
+          "uses": [
+            "4.1"
+          ],
+          "application": "Countable Choice selects one member from each nonempty set in a given $\\mathbb N$-indexed family ([[def-countable-choice]]); only this defining clause is assumed."
+        },
+        {
+          "fact": "F5",
+          "source": "thm-recursion",
+          "source_section": "Statement",
+          "quote": "Let $(N,0,\\sigma)$ be a Peano system ([[def-peano-system]]), in particular the natural numbers $\\mathbb{N}$ ([[def-natural-numbers]]). For any set $A$, any element $a \\in A$, and any function $f : A \\to A$, there is a unique function $g : N \\to A$ such that $g(0) = a$ and $g(\\sigma(n)) = f(g(n))$ for all $n \\in N$.",
+          "uses": [
+            "5.1"
+          ],
+          "application": "A fixed total map $A\\to A$ and starting element determine a unique recursive sequence ([[thm-recursion]])."
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "1.2",
+            "5.1",
+            "7.1",
+            "11.1"
+          ],
+          "application": "Properties with a zero base and a successor step hold for all naturals ([[thm-induction-principle]])."
+        },
+        {
+          "fact": "F7",
+          "source": "lem-two-signs-detect-an-operator-increment",
+          "source_section": "Statement",
+          "quote": "Let $T:X\\to Y$ be a bounded linear operator between normed spaces over the same field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. For all $x,u\\in X$,\n$$\\max\\{\\|T(x+u)\\|,\\|T(x-u)\\|\\}\\ge\\|Tu\\|.$$\nNo completeness or choice principle is assumed.",
+          "uses": [
+            "6.1"
+          ],
+          "application": "The two-sign bound applies to any bounded linear $S:X\\to Y$ and any two domain vectors ([[lem-two-signs-detect-an-operator-increment]])."
+        },
+        {
+          "fact": "F8",
+          "source": "def-finite-sum",
+          "source_section": "Definition",
+          "quote": "When $m = n + 1$ we have $d = 0$ and the sum is **empty**, with value $0$, while\nthe empty product has value $1$.",
+          "uses": [
+            "7.1"
+          ],
+          "application": "Real finite sums include empty sums and obey scaling, splitting, and telescoping ([[def-finite-sum]], [[lem-finite-sum-laws]])."
+        },
+        {
+          "fact": "F8",
+          "source": "lem-finite-sum-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b, c : \\mathbb{N} \\to \\mathbb{R}$ be sequences of reals, let\n$\\lambda \\in \\mathbb{R}$, and let $m, n \\in \\mathbb{N}$, with finite sums and\nfinite products as in [[def-finite-sum]]. Then:\n\n1. **Additivity.** $\\displaystyle\\sum_{k<n}(a_k + b_k) = \\sum_{k<n} a_k + \\sum_{k<n} b_k$.\n2. **Scaling.** $\\displaystyle\\sum_{k<n} \\lambda a_k = \\lambda \\sum_{k<n} a_k$; in particular $\\displaystyle\\sum_{k<n} \\lambda = n\\lambda$, where $n$ denotes the canonical natural $\\iota(n) \\in \\mathbb{R}$ ([[lem-of-q-embeds]], [[lem-of-naturals-positive]]).\n3. **Splitting.** If $m \\le n$ then $\\displaystyle\\sum_{k<n} a_k = \\sum_{k<m} a_k + \\sum_{k=m}^{n-1} a_k$, and $\\displaystyle\\prod_{k<n} a_k = \\Big(\\prod_{k<m} a_k\\Big)\\Big(\\prod_{k=m}^{n-1} a_k\\Big)$.\n4. **Monotonicity.** If $a_k \\le b_k$ for all $k < n$ then $\\displaystyle\\sum_{k<n} a_k \\le \\sum_{k<n} b_k$. In particular, if $a_k \\ge 0$ for all $k < n$ then $\\sum_{k<n} a_k \\ge 0$, every single term satisfies $a_j \\le \\sum_{k<n} a_k$ for $j < n$, and $\\sum_{k<n} a_k = 0$ forces $a_k = 0$ for every $k < n$.\n5. **Telescoping.** $\\displaystyle\\sum_{k<n}\\big(c_{k+1} - c_k\\big) = c_n - c_0$.\n6. **Products.** $\\displaystyle\\prod_{k<n}(a_k b_k) = \\Big(\\prod_{k<n} a_k\\Big)\\Big(\\prod_{k<n} b_k\\Big)$; if $a_k \\ge 0$ for all $k < n$ then $\\prod_{k<n} a_k \\ge 0$, and if $a_k > 0$ for all $k < n$ then $\\prod_{k<n} a_k > 0$.",
+          "uses": [
+            "7.1"
+          ],
+          "application": "Real finite sums include empty sums and obey scaling, splitting, and telescoping ([[def-finite-sum]], [[lem-finite-sum-laws]])."
+        },
+        {
+          "fact": "F9",
+          "source": "def-integer-power",
+          "source_section": "Definition",
+          "quote": "$$a^0 = 1, \\qquad a^{n+1} = a^n \\cdot a \\quad (n \\in \\mathbb{N}).$$\n\nThus $a^1 = a$, $a^2 = a \\cdot a$, and so on. Note that this is defined for\n**every** $a$, including $a = 0$.\n\n**Negative exponents.** If $a \\ne 0$ and $n \\in \\mathbb{N}$ with $n \\ge 1$, set\n\n$$a^{-n} := (a^n)^{-1}.$$",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1",
+            "7.1",
+            "10.1",
+            "11.1"
+          ],
+          "application": "Integer powers of nonzero reals are defined and obey addition-of-exponents and product laws ([[def-integer-power]], [[lem-power-laws]])."
+        },
+        {
+          "fact": "F9",
+          "source": "lem-power-laws",
+          "source_section": "Statement",
+          "quote": "Let $a, b$ be elements of a field ([[def-field]]) and let integer powers be as in\n[[def-integer-power]].\n\n1. For all $m, n \\in \\mathbb{N}$: $a^{m+n} = a^m a^n$, $(a^m)^n = a^{mn}$ and $(ab)^n = a^n b^n$.\n2. If $a \\ne 0$ then $a^n \\ne 0$ for every $n \\in \\mathbb{N}$, and $a^{-m} = (a^m)^{-1}$ for every $m \\in \\mathbb{Z}$ ([[def-int-operations]]).\n3. If $a \\ne 0$ and $b \\ne 0$ then all three identities of claim 1 hold for all $m, n \\in \\mathbb{Z}$.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "4.1",
+            "7.1",
+            "10.1",
+            "11.1"
+          ],
+          "application": "Integer powers of nonzero reals are defined and obey addition-of-exponents and product laws ([[def-integer-power]], [[lem-power-laws]])."
+        },
+        {
+          "fact": "F10",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "1.2",
+            "11.1"
+          ],
+          "application": "In a complete ordered field, natural numbers are cofinal, and for each $\\eta>0$ some positive natural has reciprocal less than $\\eta$ ([[thm-of-archimedean]], [[cor-archimedean-reciprocal]])."
+        },
+        {
+          "fact": "F10",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "1.2",
+            "11.1"
+          ],
+          "application": "In a complete ordered field, natural numbers are cofinal, and for each $\\eta>0$ some positive natural has reciprocal less than $\\eta$ ([[thm-of-archimedean]], [[cor-archimedean-reciprocal]])."
+        },
+        {
+          "fact": "F11",
+          "source": "def-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space in the sense of [[def-norm-and-normed-space]], with\ninduced metric $d(x,y)=\\|x-y\\|$. Then $V$ is a **Banach space** when this\nmetric space is complete in the sense of [[def-complete-metric-space]].\n\nEquivalently: every Cauchy sequence in $V$ for the norm metric converges to a\npoint of $V$.",
+          "uses": [
+            "8.1"
+          ],
+          "application": "Banach completeness gives a limit in $X$ for every norm-Cauchy sequence ([[def-banach-space]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Each operator norm exists; ||Sz||<=||S||||z||; zero domain or codomain gives bound zero.",
+          "inputs": [
+            "F1",
+            "F2",
+            "Unit ball contains 0; S has a finite bound; z/||z|| has norm one when z is nonzero."
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "3^n>=n+1 and 3^(-n) tends to zero.",
+          "inputs": [
+            "F1",
+            "F6",
+            "F9",
+            "F10",
+            "Zero base 1>=1; successor inequality 3(n+1)>=n+2; positive reciprocals reverse order."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Unbounded norms define unique least indices k_n with ||T_k_n||>=4^n>0.",
+          "inputs": [
+            "F3",
+            "F9",
+            "1.1",
+            "Assumed failure of a finite uniform bound; n>=1; nonempty natural-index threshold sets."
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Each E_n of unit vectors with ||S_n v||>2||S_n||/3 is nonempty.",
+          "inputs": [
+            "F2",
+            "1.1",
+            "2.1",
+            "a=||S_n||>0; unit-ball vector w exceeding 2a/3; w nonzero and ||w||<=1."
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "One AC_omega instance fixes v_n in E_n; u_n=3^(-n)v_n has norm 3^(-n).",
+          "inputs": [
+            "F4",
+            "F9",
+            "3.1",
+            "The independent family (E_(r+1)) indexed by r in N; positive real scale 3^(-n)."
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "A total deterministic state map gives x_0=0 and x_n=x_(n-1)+e(n,x_(n-1))u_n.",
+          "inputs": [
+            "F5",
+            "F6",
+            "4.1",
+            "Fixed S_n,u_n; comparison of two real norms with +1 on equality; state set N x X; first coordinate increases from zero."
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "||S_n x_n||>(2/3)3^(-n)||S_n|| and ||x_n-x_(n-1)||=3^(-n).",
+          "inputs": [
+            "F7",
+            "4.1",
+            "5.1",
+            "The chosen sign realizes the larger image norm; v_n belongs to E_n; n>=1."
+          ]
+        },
+        {
+          "id": "derive-7.1",
+          "step": "7.1",
+          "claim": "For m>n, ||x_m-x_n||<=3^(-n)(1-3^(-(m-n)))/2<=3^(-n)/2; m=n gives zero.",
+          "inputs": [
+            "6.1",
+            "F6",
+            "F8",
+            "F9",
+            "Triangle inequality along finitely many increments; q=sum_{j=n+1}^m 3^(-j); cancellation gives 3q-q=3^(-n)-3^(-m)."
+          ]
+        },
+        {
+          "id": "derive-8.1",
+          "step": "8.1",
+          "claim": "The displayed sequence is Cauchy and has a limit x in X.",
+          "inputs": [
+            "7.1",
+            "F11",
+            "1.2",
+            "For m,n>=N, the geometric tail bounds the distance uniformly; X is Banach by hypothesis."
+          ]
+        },
+        {
+          "id": "derive-9.1",
+          "step": "9.1",
+          "claim": "||x-x_n||<=3^(-n)/2 for every fixed n.",
+          "inputs": [
+            "7.1",
+            "8.1",
+            "||x-x_n||<=||x-x_m||+3^(-n)/2 for m>n; a positive excess d is contradicted by error <d/2."
+          ]
+        },
+        {
+          "id": "derive-10.1",
+          "step": "10.1",
+          "claim": "||S_n x||>(1/6)3^(-n)||S_n||>=(1/6)(4/3)^n.",
+          "inputs": [
+            "F9",
+            "1.1",
+            "2.1",
+            "6.1",
+            "9.1",
+            "Reverse triangle estimate at x_n; lower increment coefficient 2/3 minus tail coefficient 1/2 equals 1/6; ||S_n||>=4^n."
+          ]
+        },
+        {
+          "id": "derive-11.1",
+          "step": "11.1",
+          "claim": "A pointwise bound M_x is contradicted, so a finite uniform bound exists.",
+          "inputs": [
+            "10.1",
+            "F1",
+            "F6",
+            "F9",
+            "F10",
+            "(4/3)^0=1; successor lower bound gains n/9; choose n>18M_x; S_n=T_k_n belongs to the original sequence."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 uses a nonempty unit-ball image containing zero; step 3.1 proves each selected set E_n nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles z=0 and zero spaces before division; step 5.1 starts at x_0=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 checks the zero exponent 3^0=1; step 11.1 checks (4/3)^0=1; step 3.1 normalizes to norm one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 handles X={0}, Y={0}; step 5.1 resolves tied image norms by +1; step 2.1 allows repeated indices k_n."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Statement uses k>=0 while step 2.1 starts auxiliary n at 1; step 7.1 includes m=n with zero tail."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 proves nonemptiness before step 4.1 uses AC_omega exactly once; step 5.1 is total deterministic recursion."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem asserts pointwise boundedness implies uniform norm boundedness; it is not stated as an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reverse implication is not a promised clause of this theorem."
+        }
+      ],
+      "axiom_accounting": "ZF + AC_omega only; exactly step 4.1 selects independent E_n vectors. Least indices are unique; signs are deterministic and recursion is on a set. Full AC, DC, HB and completeness of Y are not used.",
+      "source_evidence": [
+        {
+          "url": "https://staff.fnwi.uva.nl/r.p.stevenson/1005.1585.pdf",
+          "locator": "Printed p.2, proof following the Lemma; complete passage read",
+          "uses": [
+            "2.1",
+            "6.1",
+            "7.1",
+            "8.1",
+            "9.1",
+            "10.1",
+            "11.1"
+          ],
+          "application": "Source supplies the gliding-hump scales and coefficients. The local proof derives every inequality. Steps 3.1–5.1 independently replace recursive point selection with one countable selection of fixed unit vectors followed by deterministic signs; this is a library adaptation, not a quoted axiom theorem."
+        },
+        {
+          "url": "https://ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf",
+          "locator": "Printed p.17, Theorem 36 and entire proof",
+          "uses": [
+            "Statement"
+          ],
+          "application": "Corroborates the sequence analytic conclusion for Banach domain and normed codomain. Its Baire argument is not used as a logical input."
+        },
+        {
+          "url": "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf",
+          "locator": "Section 4.1, printed p.103, Corollary 4.4; preceding Theorem 4.3 proof also read",
+          "excerpt": "Let X be a Banach space and Y some normed vector space.",
+          "uses": [
+            "Statement"
+          ],
+          "application": "Corroborates the domain/codomain hypotheses of the family statement; the sequence claim is proved locally without importing its Baire route."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b-2",
+        "notes": "Accepted after reading authored steps 1.1–11.1 and cited dependency statements. Unit-ball suprema exist by the real LUB result; normalization divides only by a positive norm. Each threshold set has a unique least natural index; repeated indices are harmless. Each E_n is nonempty before the sole AC_omega use in 4.1. The state map on N x X is total, ties use +1, and ordinary recursion plus induction gives x_n without DC. The finite geometric tail is at most 3^(-n)/2, tends to zero by the proved Archimedean estimates, and Banach completeness is used only in X. The limiting reverse-triangle estimate leaves coefficient 2/3-1/2=1/6; n>18M_x contradicts pointwise boundedness. Zero spaces, z=0, n=0 power bases and m=n tail are handled. Both fields use the same norm axioms. Sokal printed p.2 equation (2) and full proof checked; the AC_omega refinement is locally proved, not attributed to that source. No unresolved risk."
+      }
+    },
+    "ex-sequential-uniform-boundedness-for-coordinate-partial-sums": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-c-zero-and-ell-infinity",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K=\\mathbb R$ or $\\mathbb C$, with absolute value in the real\ncase and modulus $|a+ib|=\\sqrt{a^2+b^2}$ in the complex case. A scalar\nsequence here is a function $x:\\mathbb N\\to\\mathbb K$, including index zero. Let\n\n$$\\ell^\\infty=\\{x=(x_n)_{n\\in\\mathbb N}:\\text{there is }C\\ge0\\text{ with }|x_n|\\le C\\text{ for all }n\\},\\qquad c_0=\\{x\\in\\ell^\\infty:x_n\\to0\\},$$\n\nboth equipped with $\\|x\\|_\\infty=\\sup_{n\\in\\mathbb N}|x_n|$.  Thus $c_0$ is\na specified linear subspace of the bounded-sequence space $\\ell^\\infty$.\n\nFor each bounded sequence, the nonempty real set $\\{|x_n|:n\\in\\mathbb N\\}$\nhas a finite supremum by [[cor-cauchy-reals-lub-complete]]. This proves that\nthe displayed norm exists, rather than presuming existence in the definition\nof boundedness. Its uniqueness requires no choice of supremum witnesses.\n\nHere $x_n\\to0$ means that for every real $\\varepsilon>0$ there is\n$N\\in\\mathbb N$ such that $|x_n|<\\varepsilon$ for all $n\\ge N$.\nAddition and scalar multiplication are coordinatewise. The scalar triangle\ninequality makes bounded sequences and null sequences linear spaces and gives\nthe triangle inequality for the displayed supremum norm. Absolute homogeneity\nfollows coordinatewise, and a zero supremum forces every coordinate to vanish.",
+          "uses": [
+            "1.2",
+            "2.3",
+            "3.1",
+            "4.1",
+            "5.1"
+          ],
+          "application": "$c_0$ consists of bounded null sequences, with coordinatewise operations and the supremum norm ([[def-c-zero-and-ell-infinity]])."
+        },
+        {
+          "fact": "F2",
+          "source": "cor-cauchy-reals-lub-complete",
+          "source_section": "Statement",
+          "quote": "The Cauchy-sequence reals $\\mathbb{R}_C$ have the **least-upper-bound property**:\nevery nonempty $S \\subseteq \\mathbb{R}_C$ that is bounded above has a least upper\nbound $\\sup S \\in \\mathbb{R}_C$. Hence, together with [[thm-reals-ordered-field]],\n$\\mathbb{R}_C$ is a **complete ordered field** ([[def-complete-ordered-field]]).",
+          "uses": [
+            "1.1",
+            "4.1"
+          ],
+          "application": "Every nonempty bounded-above set of reals has a supremum ([[cor-cauchy-reals-lub-complete]]); applying this to negatives also supplies infima of nonempty bounded-below sets."
+        },
+        {
+          "fact": "F3",
+          "source": "rem-real-and-complex-normed-space-convention",
+          "source_section": "Remark",
+          "quote": "The published definition [[def-norm-and-normed-space]] is written for vector\nspaces over $\\mathbb{R}$. On this page the same language is used over\n$\\mathbb{C}$ as well: a complex normed space is a complex vector space with a\nfunction $\\|\\cdot\\|:V\\to\\mathbb{R}$ satisfying the same separation and triangle\ninequality clauses, while absolute homogeneity is read with the complex modulus\n$|\\lambda|$ of\n[[def-complex-conjugate-real-imaginary-part-and-modulus]] instead of the real\nabsolute value.\n\nNothing else changes. The induced metric is still $d(x,y)=\\|x-y\\|$, Banach\nmeans complete for that metric, and every estimate on this page that uses only\nthe triangle inequality and $|\\lambda|$ is valid verbatim over either scalar\nfield. When scalar continuity in the complex case is mentioned, the scalar field\nis the field of complex numbers already constructed in\n[[thm-complex-numbers-form-a-field]].",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ],
+          "application": "Complex norms use the modulus; norm-metric completeness has the same meaning over either scalar field ([[rem-real-and-complex-normed-space-convention]]). Modulus is definite, multiplicative, and subadditive ([[lem-complex-conjugation-and-modulus-laws]])."
+        },
+        {
+          "fact": "F3",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ],
+          "application": "Complex norms use the modulus; norm-metric completeness has the same meaning over either scalar field ([[rem-real-and-complex-normed-space-convention]]). Modulus is definite, multiplicative, and subadditive ([[lem-complex-conjugation-and-modulus-laws]])."
+        },
+        {
+          "fact": "F4",
+          "source": "def-axiom-schema-of-replacement",
+          "source_section": "Definition",
+          "quote": "The **Axiom Schema of Replacement** is the collection of all these sentences, one\nfor each such $\\varphi$. In words: if for every $z \\in A$ there is exactly one\n$w$ with $\\varphi(z,w,\\bar p)$, then there is a set $B$ whose elements are\nexactly those $w$.",
+          "uses": [
+            "3.1"
+          ],
+          "application": "Replacement forms the image of a set under a uniquely specified assignment ([[def-axiom-schema-of-replacement]])."
+        },
+        {
+          "fact": "F5",
+          "source": "def-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space in the sense of [[def-norm-and-normed-space]], with\ninduced metric $d(x,y)=\\|x-y\\|$. Then $V$ is a **Banach space** when this\nmetric space is complete in the sense of [[def-complete-metric-space]].\n\nEquivalently: every Cauchy sequence in $V$ for the norm metric converges to a\npoint of $V$.",
+          "uses": [
+            "5.1"
+          ],
+          "application": "A normed space is Banach if every norm-Cauchy sequence converges in it ([[def-banach-space]])."
+        },
+        {
+          "fact": "F6",
+          "source": "def-linear-combination-and-span",
+          "source_section": "Definition",
+          "quote": "so that $\\sum_{i<0} u_i = 0_V$ and $\\sum_{i<\\sigma(n)} u_i = \\bigl(\\sum_{i<n} u_i\\bigr) + u_n$,\nand the value depends only on $u_0, \\dots, u_{n-1}$.",
+          "uses": [
+            "1.2"
+          ],
+          "application": "Finite vector sums start at the zero vector and append one summand at each successor ([[def-linear-combination-and-span]])."
+        },
+        {
+          "fact": "F7",
+          "source": "def-bounded-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[rem-real-and-complex-normed-space-convention]]. A linear map\n$T:X\\to Y$ ([[def-linear-map]]) is a **bounded linear operator** when there is a\nreal constant $C \\ge 0$ such that\n\n$$\\|Tx\\| \\le C\\|x\\| \\qquad \\text{for all } x \\in X.$$\n\nAny such $C$ is called a **bound** for $T$.",
+          "uses": [
+            "1.2"
+          ],
+          "application": "A linear map with a bound $\\|Tx\\|\\le C\\|x\\|$ is bounded ([[def-bounded-linear-operator]])."
+        },
+        {
+          "fact": "F8",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "2.2"
+          ],
+          "application": "The norm of a bounded operator is its unit-ball supremum ([[def-operator-norm]])."
+        },
+        {
+          "fact": "F9",
+          "source": "thm-sequential-uniform-boundedness-under-countable-choice",
+          "source_section": "Statement",
+          "quote": "Work in ZF and assume $\\mathrm{AC}_\\omega$. Let $X$ be Banach and $Y$ normed over the same field $\\mathbb K\\in\\{\\mathbb R,\\mathbb C\\}$. Let $(T_k)_{k\\in\\mathbb N}$, with $\\mathbb N=\\{0,1,\\ldots\\}$, be a given sequence of bounded linear maps $X\\to Y$. If\n$$\\forall x\\in X\\ \\exists M_x\\in[0,\\infty)\\ \\forall k\\in\\mathbb N:\\quad\\|T_kx\\|\\le M_x,$$\nthen there is $M\\in[0,\\infty)$ with $\\|T_k\\|\\le M$ for every $k$. Completeness of $Y$, Hahn–Banach, Dependent Choice, and full Choice are not hypotheses.",
+          "uses": [
+            "6.1"
+          ],
+          "application": "Under $\\mathrm{AC}_\\omega$, a pointwise bounded sequence from a Banach space to a normed space has uniformly bounded operator norms ([[thm-sequential-uniform-boundedness-under-countable-choice]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Every real scalar Cauchy sequence has the unique limit sup_N inf_{m>=N} a_m.",
+          "inputs": [
+            "F2",
+            "Cauchy tail is within 1 of a_M; finite earlier magnitudes have an iterated maximum; all tail infima lie in [-B,B]; a Cauchy tail of diameter eta traps L within eta of each late a_m."
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "P_N is coordinate truncation, maps c_0 to c_0, is linear, and satisfies ||P_N x||<=||x||.",
+          "inputs": [
+            "F1",
+            "F6",
+            "F7",
+            "Finite vector sum of x_j e_j; at coordinate i only the j=i summand can survive; all coordinates beyond N vanish."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Complex scalar Cauchy sequences have unique limits.",
+          "inputs": [
+            "1.1",
+            "F3",
+            "For z=a+ib, |a|,|b|<=|z|<=|a|+|b| from the nonnegative square comparisons; real coordinate limits."
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "||P_N||=1 for all N>=0 and P_N0=0.",
+          "inputs": [
+            "1.2",
+            "F8",
+            "Unit-ball upper bound 1; unit vector e_0 with P_N e_0=e_0, including N=0."
+          ]
+        },
+        {
+          "id": "derive-2.3",
+          "step": "2.3",
+          "claim": "||P_N x-x|| equals the null-tail supremum and tends to zero.",
+          "inputs": [
+            "F1",
+            "1.2",
+            "The coordinate truncation formula; for any epsilon>0, all sufficiently late |x_j|<epsilon/2; finite-support inputs eventually have zero error."
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Unique coordinate limits form a scalar sequence x without choice.",
+          "inputs": [
+            "F1",
+            "F4",
+            "1.1",
+            "2.1",
+            "Arbitrary norm-Cauchy (x^(m)); coordinate errors dominated by norm errors; apply Replacement to the unique pair (j,x_j)."
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "The sequence x is bounded and x^(m) converges to x in supremum norm.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "3.1",
+            "Uniform Cauchy inequality at scale eta; fix m,j and let l tend to infinity; positive-excess contradiction; eta=1 bounds x; eta=epsilon/2 gives convergence."
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "x is null, so every c_0 Cauchy sequence converges in c_0 and c_0 is Banach.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "4.1",
+            "One approximant within epsilon/2 in norm; its coordinates eventually smaller than epsilon/2; triangle inequality."
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "Under AC_omega the sequential theorem applies to (P_N); the exact bound and convergence already hold in ZF.",
+          "inputs": [
+            "5.1",
+            "1.2",
+            "2.2",
+            "2.3",
+            "F9",
+            "Domain and codomain c_0; proved completeness; each P_N bounded linear; pointwise bound M_x=||x||; optional AC_omega assumption."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The example is indexed by nonempty N; step 1.1 uses nonempty scalar tails even when the finite initial segment is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 gives P_N0=0, and step 2.3 gives zero error for eventually-supported inputs after the cutoff."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 uses the unit vector e_0 and proves exact operator norm one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.2 includes the rank-one projection P_0; step 2.3 includes inputs already fixed by sufficiently long truncations."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 includes coordinate N and deletes only i>N; step 2.3 uses exactly the tail j>N."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses Replacement for uniquely determined coordinate limits; step 5.1 takes only finitely many witnesses for each epsilon; only step 6.1 assumes AC_omega."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This example asserts completeness, norm values and convergence, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterization of c_0 or arbitrary bases is claimed."
+        }
+      ],
+      "axiom_accounting": "ZF for all direct claims; coordinate graph uses Replacement and uniqueness in step 3.1. Only optional step 6.1 assumes AC_omega via the new theorem.",
+      "source_evidence": [
+        {
+          "url": "https://ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf",
+          "locator": "Printed pp.5–6, Definition 14, Example 15, complete Theorem 16 proof, and following c_0 exercise",
+          "excerpt": "A normed space is a Banach space if it is complete",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "5.1"
+          ],
+          "application": "The source motivates the candidate coordinate-limit and uniform-Cauchy method. The c_0 proof, its null-tail check, scalar tail-infimum construction, and Replacement accounting are supplied here. Source leaves c_0 as an exercise; the exact projections are generated locally."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b-2",
+        "notes": "Accepted after reviewing all nine authored verification steps, contract citations and current suppliers. The bounded real Cauchy sequence has nonempty bounded tails; their unique infima and the supremum of those infima give the scalar limit with epsilon/2 slack. Complex coordinate inequalities transfer existence and uniqueness. Replacement is applied to unique ordered pairs (j,x_j), so no choice is concealed. Passing the uniform Cauchy bound to each coordinate first proves boundedness of x, then legitimate supremum-norm convergence; the epsilon/2 null-tail argument puts x in c_0. Finite vector sums have the declared recursive interface. Projection images are eventually zero, linearity is coordinatewise, and e_0 attains norm one even at N=0. Error is exactly sup_{j>N}|x_j| and finite-support/zero cases hold. Optional theorem application explicitly assumes AC_omega and supplies all its hypotheses; direct claims remain choice-free. MIT printed pp.5–6 Theorem 16 proof and c_0 exercise read; no general basis result is imported. No unresolved risk."
+      }
+    },
+    "cex-sequential-uniform-boundedness-needs-a-complete-domain": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-c-zero-and-ell-infinity",
+          "source_section": "Definition",
+          "quote": "Let $\\mathbb K=\\mathbb R$ or $\\mathbb C$, with absolute value in the real\ncase and modulus $|a+ib|=\\sqrt{a^2+b^2}$ in the complex case. A scalar\nsequence here is a function $x:\\mathbb N\\to\\mathbb K$, including index zero. Let\n\n$$\\ell^\\infty=\\{x=(x_n)_{n\\in\\mathbb N}:\\text{there is }C\\ge0\\text{ with }|x_n|\\le C\\text{ for all }n\\},\\qquad c_0=\\{x\\in\\ell^\\infty:x_n\\to0\\},$$\n\nboth equipped with $\\|x\\|_\\infty=\\sup_{n\\in\\mathbb N}|x_n|$.  Thus $c_0$ is\na specified linear subspace of the bounded-sequence space $\\ell^\\infty$.\n\nFor each bounded sequence, the nonempty real set $\\{|x_n|:n\\in\\mathbb N\\}$\nhas a finite supremum by [[cor-cauchy-reals-lub-complete]]. This proves that\nthe displayed norm exists, rather than presuming existence in the definition\nof boundedness. Its uniqueness requires no choice of supremum witnesses.\n\nHere $x_n\\to0$ means that for every real $\\varepsilon>0$ there is\n$N\\in\\mathbb N$ such that $|x_n|<\\varepsilon$ for all $n\\ge N$.\nAddition and scalar multiplication are coordinatewise. The scalar triangle\ninequality makes bounded sequences and null sequences linear spaces and gives\nthe triangle inequality for the displayed supremum norm. Absolute homogeneity\nfollows coordinatewise, and a zero supremum forces every coordinate to vanish.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2"
+          ],
+          "application": "$c_0(\\mathbb K)$ is the normed space of bounded null sequences with coordinatewise operations and supremum norm ([[def-c-zero-and-ell-infinity]])."
+        },
+        {
+          "fact": "F2",
+          "source": "def-normed-subspace",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space and let $W\\subseteq V$ be a linear subspace in the\nsense of [[def-linear-subspace]]. The **normed subspace** $W$ is the vector\nspace $W$ equipped with the restricted norm\n$$\\|w\\|_W:=\\|w\\|_V \\qquad (w\\in W).$$\n\nIts induced metric is the restriction of the ambient norm metric to\n$W\\times W$, so the inclusion $W\\hookrightarrow V$ is an isometric embedding in\nthe sense of [[def-isometry-and-metric-embedding]].",
+          "uses": [
+            "1.1"
+          ],
+          "application": "A linear subspace carries the restriction of the ambient norm ([[def-normed-subspace]])."
+        },
+        {
+          "fact": "F3",
+          "source": "cor-cauchy-reals-lub-complete",
+          "source_section": "Statement",
+          "quote": "The Cauchy-sequence reals $\\mathbb{R}_C$ have the **least-upper-bound property**:\nevery nonempty $S \\subseteq \\mathbb{R}_C$ that is bounded above has a least upper\nbound $\\sup S \\in \\mathbb{R}_C$. Hence, together with [[thm-reals-ordered-field]],\n$\\mathbb{R}_C$ is a **complete ordered field** ([[def-complete-ordered-field]]).",
+          "uses": [
+            "2.2",
+            "3.1",
+            "3.2"
+          ],
+          "application": "The real field has the least-upper-bound property and is a complete ordered field ([[cor-cauchy-reals-lub-complete]])."
+        },
+        {
+          "fact": "F4",
+          "source": "def-countable",
+          "source_section": "Definition",
+          "quote": "- $A$ is **finite** if $A \\approx n$ for some $n \\in \\mathbb{N}$.",
+          "uses": [
+            "2.1"
+          ],
+          "application": "A finite set admits a bijection from a von Neumann natural $m=\\{0,\\ldots,m-1\\}$ ([[def-countable]]); a subset of a finite set is finite ([[thm-subset-of-a-finite-set]], clause 1)."
+        },
+        {
+          "fact": "F4",
+          "source": "thm-subset-of-a-finite-set",
+          "source_section": "Statement",
+          "quote": "Let $A$ be a finite set ([[def-countable]]) and let $B \\subseteq A$. Then:\n\n1. $B$ is finite;\n2. $\\lvert B\\rvert \\le \\lvert A\\rvert$ ([[def-finite-cardinality]]);\n3. $\\lvert B\\rvert = \\lvert A\\rvert$ if and only if $B = A$;\n4. every injection $f : A \\to A$ is a bijection, and every surjection\n   $f : A \\to A$ is a bijection.\n\nClause 3 is the finite form of the Dedekind statement: a finite set is not\nequinumerous with a proper subset of itself. Clause 4 is its working form, and\n**finiteness is exactly the hypothesis that fails in general**: the successor map\nis an injection of $\\mathbb{N}$ into itself that is not surjective, which is the\nfalse statement recorded on this page's companion.",
+          "uses": [
+            "2.1"
+          ],
+          "application": "A finite set admits a bijection from a von Neumann natural $m=\\{0,\\ldots,m-1\\}$ ([[def-countable]]); a subset of a finite set is finite ([[thm-subset-of-a-finite-set]], clause 1)."
+        },
+        {
+          "fact": "F5",
+          "source": "def-nat-order",
+          "source_section": "Definition",
+          "quote": "For $m, n \\in \\mathbb{N}$, define the **order** by\n\n$$m \\le n \\iff \\exists k \\in \\mathbb{N}\\ (m + k = n),$$\n\nand the **strict order** by $m < n \\iff (m \\le n \\text{ and } m \\neq n)$, using\naddition ([[def-nat-addition]]).",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "application": "The natural order is defined additively and has trichotomy ([[def-nat-order]], [[lem-nat-trichotomy]])."
+        },
+        {
+          "fact": "F5",
+          "source": "lem-nat-trichotomy",
+          "source_section": "Statement",
+          "quote": "For all $m, n \\in \\mathbb{N}$ exactly one of $m < n$, $m = n$, $m > n$ holds. In particular the order ([[def-nat-order]]) is total.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "application": "The natural order is defined additively and has trichotomy ([[def-nat-order]], [[lem-nat-trichotomy]])."
+        },
+        {
+          "fact": "F6",
+          "source": "thm-induction-principle",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{N}$. If $0 \\in S$ and $\\sigma(n) \\in S$ whenever $n \\in S$, then $S = \\mathbb{N}$. Equivalently (property form): if a property $P$ satisfies $P(0)$ and ($P(n) \\Rightarrow P(\\sigma(n))$) for all $n$, then $P(n)$ holds for all $n \\in \\mathbb{N}$. This is the induction principle, the basis of proof by induction.",
+          "uses": [
+            "2.1"
+          ],
+          "application": "The zero base and successor implication prove a property for every natural ([[thm-induction-principle]])."
+        },
+        {
+          "fact": "F7",
+          "source": "rem-real-and-complex-normed-space-convention",
+          "source_section": "Remark",
+          "quote": "The published definition [[def-norm-and-normed-space]] is written for vector\nspaces over $\\mathbb{R}$. On this page the same language is used over\n$\\mathbb{C}$ as well: a complex normed space is a complex vector space with a\nfunction $\\|\\cdot\\|:V\\to\\mathbb{R}$ satisfying the same separation and triangle\ninequality clauses, while absolute homogeneity is read with the complex modulus\n$|\\lambda|$ of\n[[def-complex-conjugate-real-imaginary-part-and-modulus]] instead of the real\nabsolute value.\n\nNothing else changes. The induced metric is still $d(x,y)=\\|x-y\\|$, Banach\nmeans complete for that metric, and every estimate on this page that uses only\nthe triangle inequality and $|\\lambda|$ is valid verbatim over either scalar\nfield. When scalar continuity in the complex case is mentioned, the scalar field\nis the field of complex numbers already constructed in\n[[thm-complex-numbers-form-a-field]].",
+          "uses": [
+            "1.1",
+            "2.2"
+          ],
+          "application": "Complex norm terminology uses modulus and the same norm metric ([[rem-real-and-complex-normed-space-convention]]); scalar modulus is multiplicative and subadditive ([[lem-complex-conjugation-and-modulus-laws]])."
+        },
+        {
+          "fact": "F7",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "1.1",
+            "2.2"
+          ],
+          "application": "Complex norm terminology uses modulus and the same norm metric ([[rem-real-and-complex-normed-space-convention]]); scalar modulus is multiplicative and subadditive ([[lem-complex-conjugation-and-modulus-laws]])."
+        },
+        {
+          "fact": "F8",
+          "source": "def-bounded-linear-operator",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field $\\mathbb K$, read in\nthe real case from [[def-norm-and-normed-space]] and in the complex case from\n[[rem-real-and-complex-normed-space-convention]]. A linear map\n$T:X\\to Y$ ([[def-linear-map]]) is a **bounded linear operator** when there is a\nreal constant $C \\ge 0$ such that\n\n$$\\|Tx\\| \\le C\\|x\\| \\qquad \\text{for all } x \\in X.$$\n\nAny such $C$ is called a **bound** for $T$.",
+          "uses": [
+            "2.2"
+          ],
+          "application": "A bound $\\|Tx\\|\\le C\\|x\\|$ makes a linear map bounded ([[def-bounded-linear-operator]]), and its operator norm is the unit-ball supremum ([[def-operator-norm]])."
+        },
+        {
+          "fact": "F8",
+          "source": "def-operator-norm",
+          "source_section": "Definition",
+          "quote": "Let $X$ and $Y$ be normed spaces over the same scalar field, and let\n$T:X\\to Y$ be bounded in the sense of [[def-bounded-linear-operator]]. The\n**operator norm** of $T$ is\n\n$$\\|T\\| := \\sup\\{\\|Tx\\| : x \\in X,\\ \\|x\\| \\le 1\\}.$$\n\nThe set on the right contains $0$ and every bound $C$ for $T$ bounds it\nabove. Thus its finite real supremum exists by the proved least-upper-bound\nproperty of the library's real field ([[cor-cauchy-reals-lub-complete]]).\nIn particular every number strictly below the supremum is exceeded by a\nmember of this set; otherwise it would be a smaller upper bound. No choice\nprinciple is used for this assertion.\n\nThe same number is the least bound of $T$:\n\n$$\\|T\\| = \\inf\\{C \\ge 0 : \\|Tx\\| \\le C\\|x\\| \\text{ for all } x \\in X\\}.$$\n\nIf $X \\ne \\{0\\}$, positive homogeneity also gives\n\n$$\\|T\\| = \\sup\\{\\|Tx\\| : \\|x\\| = 1\\}.$$\n\nWhen $X = \\{0\\}$, the unit sphere is empty and the unit-ball supremum is $0$,\nso $\\|T\\| = 0$.",
+          "uses": [
+            "2.2"
+          ],
+          "application": "A bound $\\|Tx\\|\\le C\\|x\\|$ makes a linear map bounded ([[def-bounded-linear-operator]]), and its operator norm is the unit-ball supremum ([[def-operator-norm]])."
+        },
+        {
+          "fact": "F9",
+          "source": "thm-of-archimedean",
+          "source_section": "Statement",
+          "quote": "Every complete ordered field $F$ ([[def-complete-ordered-field]]) is Archimedean:\nfor every $x \\in F$ there is a natural number $n \\ge 1$ with $x < n \\cdot 1_F$,\nwhere $n \\cdot 1_F$ is the canonical natural of the ordered field $F$\n([[def-ordered-field]]). Equivalently, the canonical naturals are cofinal in $F$.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ],
+          "application": "The naturals are cofinal in a complete ordered field, and their positive reciprocals get below every positive bound ([[thm-of-archimedean]], [[cor-archimedean-reciprocal]])."
+        },
+        {
+          "fact": "F9",
+          "source": "cor-archimedean-reciprocal",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a complete ordered field ([[def-complete-ordered-field]]) and let\n$\\varepsilon \\in F$ with $\\varepsilon > 0$. Then there is a natural number\n$n \\ge 1$ such that\n\n$$\\frac{1}{n \\cdot 1_F} < \\varepsilon ,$$\n\nwhere $n \\cdot 1_F$ is the canonical natural of $F$ ([[thm-of-archimedean]]) and\n$1/(n \\cdot 1_F)$ is its multiplicative inverse ([[def-field]]). As is standard\nwe abbreviate $n \\cdot 1_F$ to $n$ and write the conclusion $1/n < \\varepsilon$.\n\nThis is the **reciprocal form** of the Archimedean property.\n[[thm-of-archimedean]] on its own delivers only the assertion that the canonical\nnaturals are cofinal, $x < n \\cdot 1_F$; the form actually used in analysis, that\nthe reciprocals of the naturals get below every positive bound, is the statement\nabove, and it is recorded separately so that no proof has to reconstruct the\ninversion step in passing.",
+          "uses": [
+            "3.1",
+            "3.2"
+          ],
+          "application": "The naturals are cofinal in a complete ordered field, and their positive reciprocals get below every positive bound ([[thm-of-archimedean]], [[cor-archimedean-reciprocal]])."
+        },
+        {
+          "fact": "F10",
+          "source": "def-banach-space",
+          "source_section": "Definition",
+          "quote": "Let $V$ be a normed space in the sense of [[def-norm-and-normed-space]], with\ninduced metric $d(x,y)=\\|x-y\\|$. Then $V$ is a **Banach space** when this\nmetric space is complete in the sense of [[def-complete-metric-space]].\n\nEquivalently: every Cauchy sequence in $V$ for the norm metric converges to a\npoint of $V$.",
+          "uses": [
+            "4.1"
+          ],
+          "application": "Banach means that every norm-Cauchy sequence converges in the space ([[def-banach-space]])."
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Eventually-zero sequences form a normed subspace c_00 of c_0 over either field.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F7",
+            "Zero cutoff 0; cutoffs M,N for x,y; ax+by vanishes beyond M+N; restricted supremum norm."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Eventual zero is equivalent to finite support, including arbitrary finite-support scalar sequences.",
+          "inputs": [
+            "F1",
+            "F4",
+            "F5",
+            "F6",
+            "1.1",
+            "Support contained in finite M in the forward direction; bijection f:m->F and finite-list bound induction in reverse; new value is f(r), not f(r+1); finite magnitude maximum ensures boundedness."
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "T_n x=n x_n is bounded linear with exact norm n, including T_0=0 and ||T_1||=1.",
+          "inputs": [
+            "F3",
+            "F7",
+            "F8",
+            "1.1",
+            "Coordinate linearity; |n x_n|<=n||x||; e_n has norm one and T_n e_n=n for n>=1; zero operator separately."
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Every orbit is bounded by M||x|| and eventually zero, but the operator norms are unbounded.",
+          "inputs": [
+            "F3",
+            "F9",
+            "1.1",
+            "2.2",
+            "Cutoff M for x; n<M or n>=M; real Archimedean cofinality applied to ||T_n||=n."
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "step": "3.2",
+          "claim": "Reciprocal truncations z^(N) are in c_00 and norm-Cauchy, with distance 1/(N+2) for M>N.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F9",
+            "2.1",
+            "Difference supported on N<j<=M; largest coordinate attained at N+1; reciprocal property controls all M,N>=K; equal-index distance zero."
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "The Cauchy truncations have no c_00 norm limit; the complete-domain hypothesis fails.",
+          "inputs": [
+            "1.1",
+            "3.1",
+            "F10",
+            "3.2",
+            "For fixed j, truncations stabilize at 1/(j+1); coordinate distance is dominated by norm distance; any limit must have every coordinate nonzero, contradicting its cutoff."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 gives zero cutoff M=0; step 2.1 bounds the empty finite list by 0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 computes T_0=0 and its norm; step 3.1 includes x=0 and M=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 verifies T_1 e_1=1 and the unit-vector norm witness."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.2 separates M=N (zero distance) from M>N (attained reciprocal maximum)."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses valid last list index r at length r+1; step 3.2 attains the difference norm at N+1 and uses denominator N+2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 gives a finite induction after a single finite enumeration; steps 2.2 and 3.2 define all witnesses explicitly, without countable choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves cutoff M implies support contained in finite M and hence finite."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves finite support is naturally bounded, ensures the scalar sequence is bounded and null, and supplies an eventual-zero cutoff."
+        }
+      ],
+      "axiom_accounting": "ZF throughout. Finite support bounds and operators/truncations are explicit. This refutes removal of completeness, not a choice principle.",
+      "source_evidence": [
+        {
+          "url": "https://ocw.mit.edu/courses/18-102-introduction-to-functional-analysis-spring-2021/8fb8d5c170f1613151aca71de21027bc_MIT18_102s21_full_lec.pdf",
+          "locator": "Printed pp.5–6, Definition 14 and the sequence-space discussion after Theorem 16",
+          "uses": [
+            "1.1",
+            "3.2",
+            "4.1"
+          ],
+          "application": "Context for norm completeness only. The design fixes T_n x=n x_n; all finite-support and reciprocal-truncation computations are local, with no attribution of this witness to MIT."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-b-2",
+        "notes": "Accepted after all six authored counterexample steps, full contract and dependency interfaces. Eventual-zero sequences are a subspace with cutoff M+N. Support contained in finite M is finite; conversely a bijection f:m->F and induction with new value f(r) at length r+1 produce an upper bound and cutoff L+1, including the empty list. Finite magnitudes give boundedness for arbitrary finite-support sequences. T_n is linear with upper bound n and attained norm n at e_n for n>=1; T_0=0 is separate. Cutoff M gives orbit bound M||x|| even at M=0. Archimedean cofinality makes the norms unbounded. For M>N reciprocal truncations differ by exactly 1/(N+2), attained at j=N+1; equal indices give zero and reciprocal cofinality proves the Cauchy condition. Any norm limit must have every coordinate 1/(j+1), contradicting eventual zero. Scalar modulus covers both fields. All witnesses are explicit; no choice axiom or assertion about choice failure. MIT pp.5–6 supplies only completeness context, as correctly attributed. No unresolved risk."
+      }
+    }
+  }
+}

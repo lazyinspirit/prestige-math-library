@@ -6,7 +6,7 @@ status: published
 origin: session
 provenance:
   statement: ai-altered
-  proof: ai-generated
+  proof: ai-altered
 deps: [def-topology-of-pointwise-convergence, lem-convergence-in-the-pointwise-topology,
        thm-uniform-limit-theorem, def-continuous-map-top, def-metric-continuity,
        lem-continuity-is-local-and-pastes, def-interval, lem-real-line-is-a-metric-space,
@@ -23,11 +23,12 @@ short: "pointwise limit of continuous need not be continuous"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
+  verified:
+    model: gpt-6-astra
     verdict: pass
-    date: 2026-07-28
-  audited: 2026-07-29
+    date: 2026-09-09
+    scope: "Owner-authorized local endpoint and estimate repair; complete target and used supplier interfaces read; targeted precheck/rendercheck. No independent judgment or whole-closure certification."
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -42,8 +43,8 @@ pipeline_run: null
 
 **Refuted claim:** for a topological space $X$ and a metric space $Y$ the set
 $C(X,Y)$ is closed in $Y^{X}$ for the topology of pointwise convergence
-([[def-topology-of-pointwise-convergence]]); equivalently, a pointwise limit of
-continuous functions is continuous.
+([[def-topology-of-pointwise-convergence]]). In particular, this would imply
+that every pointwise limit of a sequence of continuous functions is continuous.
 
 The witness is the sequence of **ramps** on $I := [0,1]$. With
 $a_k := 1/\iota(k+2)$ ([[def-canonical-natural]]), so that $0 < a_k \le 1/2$,
@@ -60,16 +61,18 @@ and $\chi$ is not continuous at $1$. So $C(I,\mathbb{R})$ is not closed in
 $\mathbb{R}^{I}$ for the topology of pointwise convergence.
 
 **The sequence is moreover pointwise nonincreasing**, $r_{k+1}(t) \le r_k(t)$ for
-every $t \in I$ and every $k \in \mathbb{N}$ (step 2.2 below). That is recorded
+every $t \in I$ and every $k \in \mathbb{N}$ (step 2.1 below). That is recorded
 here because it is the configuration Dini's theorem rules out on a compact domain
 *when the limit is continuous*; here the limit is not continuous, and the
 conclusion of Dini's theorem fails.
 
 **This is exactly what the uniform topology repairs.** For the uniform metric
 $C(X,Y)$ *is* closed ([[thm-uniform-limit-theorem]], claim 3), so the convergence
-above cannot be uniform, and it is not: the ramps stay at distance $1$ from
-$\chi$ in the sense that $r_k(1-a_k) = 0$ while $\chi$ jumps to $1$ arbitrarily
-close by.
+above cannot be uniform. Explicitly, for $0<\eta<1$, take
+$t=1-\eta a_k<1$. Then $\chi(t)=0$ and $r_k(t)=1-\eta$.
+Since both functions take values in $[0,1]$, this proves
+$\sup_{t\in I}|r_k(t)-\chi(t)|=1$ for every $k$. The supremum is not
+attained: below $1$ the ramp is less than $1$, and at $1$ the difference is zero.
 
 ## Facts & Assumptions
 
@@ -99,9 +102,9 @@ close by.
 
 1.3 Let $t \in I$ with $t < 1$; by [L2] there is a natural $m \ge 1$ with $1/\iota(m) < 1 - t$, and then every $k \ge m$ has $a_k = 1/\iota(k+2) \le 1/\iota(m) < 1 - t$, hence $t < 1 - a_k$ and $r_k(t) = 0$. [L1, L2]
 
-1.4 $\chi$ is not continuous at $1$: take $\varepsilon := 1/2$ and let $\delta > 0$ be any real; put $s := \max\{1 - \delta/2,\ 1/2\}$, which lies in $I$ and satisfies $s < 1$, both candidates being below $1$, and satisfies $|s-1| < \delta$, since $s = 1 - \delta/2$ gives $|s-1| = \delta/2 < \delta$ while $s = 1/2$ occurs only when $1 - \delta/2 < 1/2$, that is $\delta > 1$, and then $|s-1| = 1/2 < 1 < \delta$; yet $|\chi(s) - \chi(1)| = |0 - 1| = 1$, which is not below $1/2$. [L6, L7]
+1.4 $\chi$ is not continuous at $1$: take $\varepsilon := 1/2$ and let $\delta > 0$ be any real. Put $s := 1-\min\{\delta/2,1/2\}$. Then $1/2\le s<1$ and $|s-1|=\min\{\delta/2,1/2\}\le\delta/2<\delta$, yet $|\chi(s)-\chi(1)|=1$, which is not below $1/2$. [L6, L7]
 
-2.1 $(r_k)$ is pointwise nonincreasing: for $t \le 1 - a_{k+1}$ one has $r_{k+1}(t) = 0 \le r_k(t)$, the values of $r_k$ being nonnegative; and for $t > 1 - a_{k+1}$, which forces $t > 1 - a_k$ since $a_{k+1} < a_k$, writing $u := 1 - t$ with $0 < u < a_{k+1}$ gives $r_k(t) = 1 - u/a_k$ and $r_{k+1}(t) = 1 - u/a_{k+1}$, and $a_{k+1} < a_k$ gives $u/a_k \le u/a_{k+1}$, hence $r_{k+1}(t) \le r_k(t)$. [step 1.1, L1]
+2.1 $(r_k)$ is pointwise nonincreasing: for $t \le 1 - a_{k+1}$ one has $r_{k+1}(t) = 0 \le r_k(t)$, the values of $r_k$ being nonnegative; and for $t > 1 - a_{k+1}$, which forces $t > 1 - a_k$ since $a_{k+1} < a_k$, writing $u := 1 - t$ with $0 \le u < a_{k+1}$ gives $r_k(t) = 1 - u/a_k$ and $r_{k+1}(t) = 1 - u/a_{k+1}$, and $a_{k+1} < a_k$ gives $u/a_k \le u/a_{k+1}$, hence $r_{k+1}(t) \le r_k(t)$. This includes $t=1$, where $u=0$ and both ramps equal $1$. [step 1.1, L1]
 
 2.2 By steps 1.2 and 1.3 the sequence $(r_k(t))$ is eventually equal to $\chi(t)$ for every $t \in I$, so $r_k(t) \to \chi(t)$ for every $t$, and therefore $r_k \to \chi$ in the topology of pointwise convergence on $\mathbb{R}^{I}$. [step 1.2, step 1.3, L5]
 

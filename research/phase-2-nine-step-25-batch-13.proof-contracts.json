@@ -1,0 +1,2395 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-normalized-fixed-halting-machine-for-boone-simulation",
+    "def-boone-machine-semigroup-and-augmented-configurations",
+    "lem-boone-semigroup-histories-detect-halting",
+    "thm-fixed-finite-semigroup-has-undecidable-terminal-equality",
+    "def-boone-group-presentation-and-special-word",
+    "lem-boone-base-groups-and-associated-free-bases",
+    "lem-boone-hnn-tower-and-auxiliary-subgroups",
+    "lem-boone-positive-history-pushing",
+    "lem-boone-commutator-extracts-an-auxiliary-history",
+    "lem-boone-reduced-auxiliary-words-have-no-rule-pinches",
+    "lem-boone-positive-history-reconstruction",
+    "thm-boone-special-word-equivalence",
+    "thm-novikov-boone-undecidability-of-the-word-problem",
+    "ex-boone-sharp-is-not-word-inversion",
+    "ex-boone-halting-cleanup-through-an-empty-right-tape",
+    "ex-fixed-boone-undecidability-implies-uniform-undecidability"
+  ],
+  "contracts": {
+    "lem-normalized-fixed-halting-machine-for-boone-simulation": {
+      "claim": "Fix the deterministic one-tape recognizer $R$ of $HALT_{TM}$. There is a fixed finite deterministic machine $T$ on a two-sided blank tape whose instructions each either write without moving, move left without writing, or move right without writing. It has exactly one stopping state $q_0$, and exactly one instruction for every other state and tape symbol. With $v(\\varepsilon)=s_0$ (blank) and $v(w)=w$ for nonempty binary $w$, it stops on $v(w)$ exactly when $R$ accepts $w$. Consequently its stopping language is undecidable.",
+      "assumptions": "The fixed recognizer $R$; its input alphabet excludes blank. No choice axiom is needed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-halting-is-recognizable-and-undecidable",
+          "source_section": "Statement",
+          "quote": "The language $HALT_{TM}$ of [[def-halting-problem]] is recognizable but not\ndecidable.",
+          "uses": [
+            "5.1"
+          ],
+          "application": "[F1] $HALT_{TM}$ is recognizable and undecidable; the proof constructs the fixed recognizer $R$. ([[thm-halting-is-recognizable-and-undecidable]])"
+        },
+        {
+          "fact": "F2",
+          "source": "def-deterministic-one-tape-turing-machine",
+          "source_section": "Definition",
+          "quote": "A **deterministic one-tape Turing machine with designated accept and reject\nstates** is a tuple\n$$ M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta) $$\nsuch that:\n\n- $Q$ is a finite set of states.\n- $\\Sigma$ is a finite input alphabet.\n- $\\Gamma$ is a finite tape alphabet with $\\Sigma\\subseteq\\Gamma\\setminus\\{\\sqcup\\}$.\n- $\\sqcup\\in\\Gamma$ is the blank symbol.\n- $q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\in Q$ are pairwise distinct.\n- $\\delta$ is a function\n  $$ \\delta:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma\\to Q\\times\\Gamma\\times\\{L,R\\}. $$\n\nThus whenever the machine is in a nonhalting state $q$ and scans a symbol\n$a\\in\\Gamma$, the value\n$$ \\delta(q,a)=(q',b,D) $$\nspecifies exactly one next state $q'$, exactly one symbol $b$ to write in the\ncurrently scanned cell, and exactly one head move $D\\in\\{L,R\\}$.\n\nThe intended tape is right-infinite and indexed by the natural numbers\n([[def-computation-alphabet-and-word-convention]], [[def-function]]); the tape\ncontents, configurations, and one-step dynamics are fixed in the next items.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ],
+          "application": "[F2] The finite table has entries $\\delta(p,a)=(p',b,D)$ for every nonhalting state and symbol, with two designated halting states and $D\\in\\{L,R\\}$. ([[def-deterministic-one-tape-turing-machine]])"
+        },
+        {
+          "fact": "F3",
+          "source": "def-turing-machine-initial-and-halting-configuration-interface",
+          "source_section": "Definition",
+          "quote": "A **raw Turing-machine tuple** is\n$$M=(Q,\\Sigma,\\Gamma,\\sqcup,q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}},\\delta),$$\nwhere $Q,\\Sigma,\\Gamma$ are finite sets, $\\sqcup\\in\\Gamma$ is the blank symbol, $\\Sigma\\subseteq\\Gamma\\setminus\\{\\sqcup\\}$, the three designated states $q_0,q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\in Q$ are pairwise distinct, and\n$$\\delta:(Q\\setminus\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\})\\times\\Gamma\\longrightarrow Q\\times\\Gamma\\times\\{\\mathsf L,\\mathsf R\\}$$\nis a total function. The direction tags $\\mathsf L,\\mathsf R$ are distinct. There are no transition entries at halting states.\n\nA **tape** for this tuple is a function $t:\\mathbb N\\to\\Gamma$ with finite support\n$$\\operatorname{supp}(t)=\\{i\\in\\mathbb N:t(i)\\ne\\sqcup\\}.$$\nWrite $\\mathcal T_M$ for the set of these tapes. A **configuration** is a triple $C=(q,h,t)\\in Q\\times\\mathbb N\\times\\mathcal T_M$. The tape has cells $0,1,2,\\ldots$. The left-boundary convention leaves a left-moving head at zero when it is already at zero; at a positive cell it moves to its predecessor. Right movement increases the cell number by one. No permanent end marker is imposed.\n\nFor an input word $w:m\\to\\Sigma$ in the convention of [[def-computation-alphabet-and-word-convention]], define\n$$t_w(i)=\\begin{cases}w(i),&i<m,\\\\\\sqcup,&i\\ge m,\\end{cases}\\qquad I_M(w)=(q_0,0,t_w).$$\nThus the initial head scans the first input cell for nonempty input, and cell zero for empty input. In both cases it is a valid tape coordinate.\n\nRelative to $M$, a configuration $(q,h,t)$ is **accepting** iff $q=q_{\\mathrm{acc}}$, **rejecting** iff $q=q_{\\mathrm{rej}}$, and **halting** iff $q\\in\\{q_{\\mathrm{acc}},q_{\\mathrm{rej}}\\}$. It is **nonhalting** otherwise. These are predicates on configurations, not claims that configurations are reachable. The initial configuration is always nonhalting.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ],
+          "application": "[F3] Initial input starts at cell zero; an empty input scans blank. A left move at zero stays at zero. ([[def-turing-machine-initial-and-halting-configuration-interface]])"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Give each symbol $a$ an undotted copy $a$ and a dotted copy $\\dot a$. Let $f$ send accepting state to $q_0$, rejecting state to a new state $\\ell$, and each other state to its tagged simulator copy. Add a new start state $z$. On any undotted $a$, its instruction writes $\\dot a$ and enters $f(p_{\\rm start})$. This also defines initialization for empty input, by writing $\\dot s_0$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "The fixed recognizer $R$; its input alphabet excludes blank. No choice axiom is needed."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For each table entry $(p,a)\\mapsto(p',b,D)$ and bit $d\\in\\{0,1\\}$, add a fresh intermediate state $j_{p,a,d}$. In state $f(p)$ scanning $a^{(d)}$, write $b^{(d)}$ and enter $j_{p,a,d}$. On $b^{(d)}$, this intermediate state moves in direction $D$ and enters $f(p')$, except that for $d=1,D=L$ it writes the same $b^{(1)}$ without moving and enters $f(p')$. Every other symbol in that intermediate state goes by a no-op write to $\\ell$. State $\\ell$ no-op writes every symbol and stays in $\\ell$. The unused dotted inputs at $z$ also go to $\\ell$. There are no entries at $q_0$. The cases are disjoint and exhaust every nonstopping state/symbol pair. Their indexing sets are finite, so this is a literal finite deterministic table.",
+          "inputs": [
+            "F2",
+            "F3",
+            "1.1",
+            "The fixed recognizer $R$; its input alphabet excludes blank. No choice axiom is needed."
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "After initialization, the unique dot is at cell zero; undotting the nonnegative tape gives precisely $R$'s initial tape, and all negative cells are blank. Suppose this invariant holds at a simulated nonhalting state. The first instruction writes precisely $R$'s new symbol, retaining the dot bit. The second instruction scans that very symbol, so it follows the designated intermediate branch. Away from zero it makes $R$'s move. At zero a left move is the no-op specified in step 2.1, while a right move reaches cell one. Thus no negative cell is visited and the unique dot is neither lost nor copied. The next macro boundary has exactly $R$'s new head, tape and mapped state. Repeating this calculation proves the invariant after every simulated step.",
+          "inputs": [
+            "2.1",
+            "F2",
+            "F3",
+            "1.1",
+            "The fixed recognizer $R$; its input alphabet excludes blank. No choice axiom is needed."
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "The macro boundaries occur at times $1+2n$ until a halting outcome. Every intervening time is the intermediate state for the preceding table entry, so a run cannot reach $q_0$ in an unaccounted intermediate step. If $R$ accepts at step $n$, $T$ reaches $q_0$ at time $1+2n$. Conversely the only reached entry into $q_0$ finishes a macro whose target is acceptance. Rejection reaches $\\ell$ and loops forever; an infinite nonhalting run gives infinitely many two-instruction macros. This proves both stopping directions and divergence.",
+          "inputs": [
+            "2.1",
+            "3.1",
+            "The fixed recognizer $R$; its input alphabet excludes blank. No choice axiom is needed."
+          ]
+        },
+        {
+          "id": "derive-4.2",
+          "step": "4.2",
+          "claim": "Represent the two-sided tape after any finite time by the finite interval containing the input and all visited cells, including the scanned cell. A move out of that interval adjoins one blank at the appropriate end; a write changes only its scanned cell. These are exactly the five finite-description cases (write, internal/end right, internal/end left), with nonempty scanned right segment. Extra unvisited blanks do not change the infinite-tape run. Thus the constructed machine has the finite-description interface used by the semigroup construction.",
+          "inputs": [
+            "2.1",
+            "3.1",
+            "The fixed recognizer $R$; its input alphabet excludes blank. No choice axiom is needed."
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Computing $v$ merely tests whether the input is empty and, in that case, writes one blank symbol in its finite-word encoding. A decider for $T$'s stopping language composed with this procedure would decide membership of every binary $w$ in $HALT_{TM}$ by step 4.1, contradicting [F1]. The same fixed table works for all $w$, including words of lengths zero and one.",
+          "inputs": [
+            "4.1",
+            "F1",
+            "4.2",
+            "The fixed recognizer $R$; its input alphabet excludes blank. No choice axiom is needed."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 dots the blank for empty input; step 5.1 defines its encoding."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 preserves cell zero and its unique dot; step 4.1 starts macro counting at n=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 5.1 includes one-symbol inputs, and step 2.1 defines their scanned-symbol transitions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 2.1 sends rejecting and unused branches to a total loop, with only q_0 stopping."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 verifies the clamped left endpoint; step 4.2 adjoins blanks at finite-description ends."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1 uses finite tagged products of the supplied table; no nonempty-family selections occur."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 4.1 shows stopping of T implies acceptance by R."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 4.1 shows acceptance by R implies stopping of T."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.420–425, definitions of quadruple/basic move, Exercise 12.11",
+          "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-13",
+        "notes": "Accepted: Proof 1.1–5.1 compiles each supplied total table entry into a write and designated move, preserves the unique dot at zero, and sends rejection/unreachable branches into a total loop. The source start is distinct from both halting states. At times 1+2n, undotting recovers exactly the original configuration; intermediate states cannot stop. Empty input is represented by one blank; the finite visited interval supplies all five description cases. The finite word map reduces HALT_TM to stopping for the single table. All three published supplier statements and the recognizer proof were read. No AC. Rotman printed pp.420–422 defines the target convention; the local compiler supplies the different boundary convention."
+      }
+    },
+    "def-boone-machine-semigroup-and-augmented-configurations": {
+      "claim": "Let $T$ be the fixed machine of [[lem-normalized-fixed-halting-machine-for-boone-simulation]], with tape alphabet $S$, blank $s_0$, states $Q$, start $q_{\\rm start}$ and stop $q_0$. Take new, mutually distinct symbols $h,q$. Set $A=S\\sqcup Q\\sqcup\\{h,q\\}$. Words and concatenation have the convention of [[def-computation-alphabet-and-word-convention]]. On the nonempty words $A^+$ use the following equations, oriented as displayed:\n\n| Instruction of $T$ | Relations (for every $s_\\beta\\in S$) |\n|---|---|\n| write $s_k$, enter $q_b$, from $(q_a,s_j)$ | $q_a s_j=q_b s_k$ |\n| move right, enter $q_b$, from $(q_a,s_j)$ | $q_a s_j s_\\beta=s_jq_b s_\\beta$; $q_a s_jh=s_jq_b s_0h$ |\n| move left, enter $q_b$, from $(q_a,s_j)$ | $s_\\beta q_a s_j=q_b s_\\beta s_j$; $h q_a s_j=hq_b s_0s_j$ |\n\nAdd $q_0s=q_0$ and $s q_0h=q_0h$ for every $s\\in S$, and $h q_0h=q$. Erasure never ranges over $h$.\n\nAn elementary replacement substitutes either side of an equation for the other inside arbitrary contexts $u,v\\in A^*$. Write $a\\sim b$ when a finite sequence of such symmetric replacements joins them; the sequence of length zero is allowed. Define $\\Gamma=A^+/{\\sim}$ with multiplication $[a][b]=[ab]$, using the quotient-set convention of [[def-equivalence-relation]]. Its well-definedness is verified below.\n\nThe **augmented configurations** are $q$ and words $hUq_aVh$, where $U,V\\in S^*$, $q_a\\in Q$, and $V\\ne\\varepsilon$ unless $q_a=q_0$. The initial word is $C(w)=h q_{\\rm start}v(w)h$. The symbol $q$ has no outgoing oriented rule.\n\nFor subsequent algebra put $\\bar S=S\\sqcup\\{h\\}$ and $\\bar Q=Q\\sqcup\\{q\\}$. Index the finite relation list by $I$ and write each relation as\n$$F_i q_{a(i)}G_i=H_i q_{b(i)}K_i,$$\nwhere $F_i,G_i,H_i,K_i\\in\\bar S^*$, possibly empty, and both sides have exactly one state letter. This change of notation adds no erasure rule.",
+      "assumptions": "The displayed relation list and contextual replacement on nonempty words.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-normalized-fixed-halting-machine-for-boone-simulation",
+          "source_section": "Statement",
+          "quote": "Fix the deterministic one-tape recognizer $R$ of $HALT_{TM}$. There is a fixed finite deterministic machine $T$ on a two-sided blank tape whose instructions each either write without moving, move left without writing, or move right without writing. It has exactly one stopping state $q_0$, and exactly one instruction for every other state and tape symbol. With $v(\\varepsilon)=s_0$ (blank) and $v(w)=w$ for nonempty binary $w$, it stops on $v(w)$ exactly when $R$ accepts $w$. Consequently its stopping language is undecidable.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "[F1] The machine has finite tape and state sets and a finite table. ([[lem-normalized-fixed-halting-machine-for-boone-simulation]])"
+        },
+        {
+          "fact": "F2",
+          "source": "def-computation-alphabet-and-word-convention",
+          "source_section": "Definition",
+          "quote": "Let $\\Sigma$ be a finite set, called an **alphabet**. For each natural number\n$n$, a **word of length $n$ over $\\Sigma$** is a function $w:n\\to\\Sigma$,\nequivalently an element of $\\Sigma^{n}$\n([[def-the-set-of-functions-from-one-set-to-another]]). Writing\n$w(i)=a_i$ for $i<n$, we display the word as $a_0a_1\\cdots a_{n-1}$. This is\nthe same finite-word convention already used in\n[[def-finite-words-factor-avoidance-and-prefix-states]].\n\nThe unique word of length $0$ is the **empty word** $\\varepsilon$.\n\nIf $u:m\\to\\Sigma$ and $v:n\\to\\Sigma$ are words, their **concatenation** is the\nword $uv:(m+n)\\to\\Sigma$ defined by\n$$ (uv)(i):=\\begin{cases}u(i),&i<m,\\\\v(i-m),&m\\le i<m+n.\\end{cases} $$\n\nThe set of **all finite words over $\\Sigma$** is\n$$ \\Sigma^*:=\\bigcup_{n\\in\\mathbb N}\\Sigma^n, $$\nan indexed union in the sense of [[def-indexed-union-and-intersection]].",
+          "uses": [
+            "3.1",
+            "4.1"
+          ],
+          "application": "[F2] Concatenation joins finite words, including the empty word. ([[def-computation-alphabet-and-word-convention]])"
+        },
+        {
+          "fact": "F3",
+          "source": "def-equivalence-relation",
+          "source_section": "Definition",
+          "quote": "A **binary relation** on a set $A$ is a subset $R \\subseteq A \\times A$\n([[def-relation-domain-range-and-field]], [[def-cartesian-product]]); we write\n$a \\sim b$ for $(a,b) \\in R$ and read it \"$a$ is related to $b$\".\n\nA binary relation $\\sim$ on $A$ is an **equivalence relation** when it is reflexive\non $A$, symmetric and transitive ([[def-properties-of-a-relation-on-a-set]]), that\nis, when it is\n\n- **reflexive**: $a \\sim a$ for every $a \\in A$;\n- **symmetric**: $a \\sim b$ implies $b \\sim a$, for all $a, b \\in A$;\n- **transitive**: $a \\sim b$ and $b \\sim c$ imply $a \\sim c$, for all\n  $a, b, c \\in A$.\n\nLet $\\sim$ be an equivalence relation on $A$. For $a \\in A$, the **equivalence\nclass** of $a$ is the subset\n\n$$[a] \\;:=\\; \\{\\, b \\in A \\;:\\; a \\sim b \\,\\} \\;\\subseteq\\; A,$$\n\nand any $b$ with $[b] = C$ is called a **representative** of the class $C$. The\n**quotient set** is the set of all classes,\n\n$$A/{\\sim} \\;:=\\; \\{\\, [a] \\;:\\; a \\in A \\,\\},$$\n\na subset of the power set of $A$ ([[def-power-set]]). The map\n$\\pi : A \\to A/{\\sim}$ ([[def-function]]) with $\\pi(a) = [a]$ is the **quotient\nmap**; it is surjective by construction ([[def-injection-surjection-bijection]]).",
+          "uses": [
+            "2.1"
+          ],
+          "application": "[F3] A reflexive, symmetric, transitive relation defines the quotient set of equivalence classes. ([[def-equivalence-relation]])"
+        },
+        {
+          "fact": "F4",
+          "source": "def-semigroup-and-monoid",
+          "source_section": "Definition",
+          "quote": "A **semigroup** is a pair $(S,*)$ consisting of a set $S$ and an associative\nbinary operation $*$ on $S$ ([[def-binary-operation]]).\n\nA **monoid** is a triple $(M,*,e)$ in which $(M,*)$ is a semigroup and $e \\in M$\nis a two-sided identity for $*$ ([[def-identity-element]]), that is,\n\n$$e * x \\;=\\; x \\;=\\; x * e \\qquad \\text{for every } x \\in M .$$\n\nBy [[lem-identity-unique]] a binary operation has at most one two-sided identity,\nso $e$ is determined by $(M,*)$ and may be called **the identity of $M$**; it is\nwritten $e$, or $e_M$ when several monoids are in play, and $1$ or $0$ in\nmultiplicative or additive notation. For that reason a monoid is often written\nsimply as $(M,*)$, or as $M$.\n\nA semigroup or monoid is **commutative** (for monoids also called **abelian**)\nwhen its operation is commutative.\n\nA subset $N \\subseteq M$ is a **submonoid** when $e \\in N$ and $N$ is closed under\n$*$; the restricted operation then makes $(N,*,e)$ a monoid, associativity being\ninherited ([[def-binary-operation]]).",
+          "uses": [
+            "4.1"
+          ],
+          "application": "[F4] A set with an associative binary operation is a semigroup. ([[def-semigroup-and-monoid]])"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Every table entry contributes at most $|S|+1$ transition equations, and cleanup contributes $2|S|+1$. Every side is nonempty and contains exactly one state letter, including $q$ on the final right side. Thus replacements stay in $A^+$ and the list is finite.",
+          "inputs": [
+            "F1",
+            "The displayed relation list and contextual replacement on nonempty words."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The length-zero path proves $a\\sim a$. Reversing a path proves symmetry because each replacement permits both directions. Joining two finite paths with common endpoint proves transitivity. Hence $\\sim$ is an equivalence relation and its classes form a set.",
+          "inputs": [
+            "F3",
+            "1.1",
+            "The displayed relation list and contextual replacement on nonempty words."
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Prefixing and suffixing every word of a path by fixed words prefixes and suffixes every replacement context. Therefore $a\\sim a'$ implies $uav\\sim ua'v$. If also $b\\sim b'$, first use the path from $a$ to $a'$ with suffix $b$, then the path from $b$ to $b'$ with prefix $a'$, obtaining $ab\\sim a'b'$. Thus $[a][b]=[ab]$ is independent of both representatives.",
+          "inputs": [
+            "F2",
+            "2.1",
+            "The displayed relation list and contextual replacement on nonempty words."
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Word concatenation is associative: both $(ab)c$ and $a(bc)$ list the letters of $a$, then $b$, then $c$ at the same indices. Consequently $([a][b])[c]=[(ab)c]=[a(bc)]=[a]([b][c])$. Products stay nonempty, so this is the claimed semigroup. Empty contexts and one-letter words cause no exception; an empty word is not adjoined as an identity element.",
+          "inputs": [
+            "F2",
+            "F4",
+            "3.1",
+            "The displayed relation list and contextual replacement on nonempty words."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition permits empty contexts but excludes the empty carrier word; step 4.1 checks concatenation."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 uses zero-length paths for reflexivity."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 checks every relation side is nonempty, including the single letter q."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition separates S from S union {h}, so blank erasure does not erase markers."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition lists both internal and end left/right relations."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1 proves independence of representatives without choosing them simultaneously."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This item defines a quotient and verifies its operations, rather than asserting an iff result."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This item defines a quotient and verifies its operations, rather than asserting an iff result."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.426–427, associated semigroup presentation",
+          "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-13",
+        "notes": "Accepted: Verification 1.1–4.1 establishes finiteness, the equivalence relation by finite symmetric paths, compatibility with both concatenation arguments, and associativity. Every relation has one state and nonempty sides; contexts may be empty. The eight families retain the write rule and restrict erasure to S, excluding h. Augmented stopping configurations expressly allow empty right tape. The three published definition suppliers were read in full. No AC or additional supplier is required."
+      }
+    },
+    "lem-boone-semigroup-histories-detect-halting": {
+      "claim": "For every binary word $w$, the initial word $C(w)$ equals $q$ in $\\Gamma$ if and only if $T$ stops on $v(w)$.",
+      "assumptions": "The machine, semigroup and initial-word conventions above.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-boone-machine-semigroup-and-augmented-configurations",
+          "source_section": "Definition",
+          "quote": "Let $T$ be the fixed machine of [[lem-normalized-fixed-halting-machine-for-boone-simulation]], with tape alphabet $S$, blank $s_0$, states $Q$, start $q_{\\rm start}$ and stop $q_0$. Take new, mutually distinct symbols $h,q$. Set $A=S\\sqcup Q\\sqcup\\{h,q\\}$. Words and concatenation have the convention of [[def-computation-alphabet-and-word-convention]]. On the nonempty words $A^+$ use the following equations, oriented as displayed:\n\n| Instruction of $T$ | Relations (for every $s_\\beta\\in S$) |\n|---|---|\n| write $s_k$, enter $q_b$, from $(q_a,s_j)$ | $q_a s_j=q_b s_k$ |\n| move right, enter $q_b$, from $(q_a,s_j)$ | $q_a s_j s_\\beta=s_jq_b s_\\beta$; $q_a s_jh=s_jq_b s_0h$ |\n| move left, enter $q_b$, from $(q_a,s_j)$ | $s_\\beta q_a s_j=q_b s_\\beta s_j$; $h q_a s_j=hq_b s_0s_j$ |\n\nAdd $q_0s=q_0$ and $s q_0h=q_0h$ for every $s\\in S$, and $h q_0h=q$. Erasure never ranges over $h$.\n\nAn elementary replacement substitutes either side of an equation for the other inside arbitrary contexts $u,v\\in A^*$. Write $a\\sim b$ when a finite sequence of such symmetric replacements joins them; the sequence of length zero is allowed. Define $\\Gamma=A^+/{\\sim}$ with multiplication $[a][b]=[ab]$, using the quotient-set convention of [[def-equivalence-relation]]. Its well-definedness is verified below.\n\nThe **augmented configurations** are $q$ and words $hUq_aVh$, where $U,V\\in S^*$, $q_a\\in Q$, and $V\\ne\\varepsilon$ unless $q_a=q_0$. The initial word is $C(w)=h q_{\\rm start}v(w)h$. The symbol $q$ has no outgoing oriented rule.\n\nFor subsequent algebra put $\\bar S=S\\sqcup\\{h\\}$ and $\\bar Q=Q\\sqcup\\{q\\}$. Index the finite relation list by $I$ and write each relation as\n$$F_i q_{a(i)}G_i=H_i q_{b(i)}K_i,$$\nwhere $F_i,G_i,H_i,K_i\\in\\bar S^*$, possibly empty, and both sides have exactly one state letter. This change of notation adds no erasure rule.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2"
+          ],
+          "application": "[F1] Equality in $\\Gamma$ means a finite symmetric contextual derivation using the five transition and three cleanup families; augmented configurations allow empty right tape exactly at $q_0$. ([[def-boone-machine-semigroup-and-augmented-configurations]])"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "A write replacement in either direction changes the state and its following scanned symbol, retaining the two outer markers and a nonempty right segment. Internal right swaps $q_a s_j s_\\beta$ with $s_jq_b s_\\beta$; both sides retain a scanned symbol. End right swaps $q_a s_jh$ with $s_jq_b s_0h$; the displayed $h$ must be the right outer marker, so the inverse deletes exactly the added blank and restores the earlier scanned cell. Internal left swaps $s_\\beta q_a s_j$ with $q_b s_\\beta s_j$; both sides have a scanned cell. End left swaps $hq_a s_j$ with $hq_b s_0s_j$; the displayed $h$ must be the left outer marker, and the inverse again restores a nonempty scanned segment. Since there is exactly one state letter, any applicable contextual transition occurs at that state. All five families therefore preserve augmented shape in both directions.",
+          "inputs": [
+            "F1",
+            "The machine, semigroup and initial-word conventions above."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "At $q_0$, erasing or inserting the first right tape letter via $q_0s=q_0$ preserves augmented shape, including the empty segment. The equation $s q_0h=q_0h$ applies exactly when the right segment is empty, removing or inserting the last left tape symbol. Finally $hq_0h=q$ changes exactly the whole word: the markers must be the two outer markers and there are no remaining tape symbols. Conversely $q$ occurs alone in the augmented domain and expands to $hq_0h$. Thus every symmetric derivation starting at $C(w)$ stays in the augmented domain.",
+          "inputs": [
+            "F1",
+            "1.1",
+            "The machine, semigroup and initial-word conventions above."
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "At a nonstopping configuration the unique table entry fixes the instruction. The symbol adjacent to the moved side is either a tape symbol or the outer marker, so exactly one internal/end family applies. At $q_0$ with nonempty right tape the unique forward rule erases its first symbol. With empty right tape and nonempty left tape it erases the last left symbol. With both empty it sends $hq_0h$ to $q$, which has no successor. Thus the oriented graph on augmented configurations has at most one successor per vertex. Self-loops, if present, do not affect this assertion.",
+          "inputs": [
+            "F1",
+            "1.1",
+            "2.1",
+            "The machine, semigroup and initial-word conventions above."
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "If $T$ stops, its finite description history gives the same transition replacements until $hUq_0Vh$. Erase the $|V|$ right symbols, then the $|U|$ left symbols, then use $hq_0h=q$. This constructs a finite derivation from $C(w)$ to $q$.",
+          "inputs": [
+            "F1",
+            "3.1",
+            "The machine, semigroup and initial-word conventions above."
+          ]
+        },
+        {
+          "id": "derive-4.2",
+          "step": "4.2",
+          "claim": "Conversely, suppose $C(w)=q$. Among finite derivations choose one of least length, $z_0=C(w),\\ldots,z_n=q$. It has no repeated vertex or self-loop, since deleting the intervening segment would shorten it. The last edge is forward because $q$ has no successor. If any earlier edge were backward, there would be consecutive edges $z_{j-1}\\leftarrow z_j\\to z_{j+1}$. Uniqueness of the successor would give $z_{j-1}=z_{j+1}$, contrary to minimality. Every edge is therefore forward. The initial state is not $q_0$; reaching $q$ requires first reaching $q_0$, and before that first occurrence all edges are actual machine steps. Thus $T$ stops. Least length is a least natural number of a nonempty set; it uses no arbitrary choice.",
+          "inputs": [
+            "F1",
+            "2.1",
+            "3.1",
+            "The machine, semigroup and initial-word conventions above."
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Steps 4.1 and 4.2 prove the two implications. For empty input $v(w)=s_0$ supplies the scanned cell; for one-symbol input the end rules apply as specified. Empty cleanup segments were included explicitly, so these cases do not require a stronger invariant.",
+          "inputs": [
+            "4.1",
+            "4.2",
+            "The machine, semigroup and initial-word conventions above."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 verifies empty-right cleanup and reverse insertion; step 5.1 covers empty input."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 4.2 excludes a zero-length path from initial word to the distinct terminal q."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 5.1 checks one-symbol input using end rules."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1 permits self-loops; step 4.2 deletes them from a shortest path."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.1 checks internal and end moves in both orientations and preserves outer markers."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 4.2 chooses a least natural path length from an existing finite derivation, not an arbitrary-index family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 4.2 turns semigroup equality into an actual stopping computation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 4.1 builds the semigroup derivation from a stopping computation."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.427–428, Lemmas 12.3–12.4 (corrected augmented invariant)",
+          "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-13",
+        "notes": "Accepted: Proof 1.1–5.1 checks all five transition families and all three cleanup families in both directions. Every applicable replacement uses the sole state; end markers remain outer markers. Reverse cleanup permits the empty right segment exactly at the stopping state. On this closed domain the oriented graph has a unique successor except at q. A shortest undirected path to the sink cannot contain a backward-forward valley, so its pre-stop segment is a genuine machine run. Cleanup gives the other direction. Self-loops and empty input are covered. Rotman pp.427–428 Lemmas 12.3–12.4 were read; the local augmented domain corrects the source invariant. No AC."
+      }
+    },
+    "thm-fixed-finite-semigroup-has-undecidable-terminal-equality": {
+      "claim": "There is one fixed finite positive semigroup presentation, with one state letter on each side of every relation, for which deciding $C(w)=q$ on encoded initial words is impossible. In particular both unrestricted equality to $q$ and unrestricted word equality in this same semigroup are undecidable.",
+      "assumptions": "The fixed machine and semigroup already constructed; all inputs $w$ are binary finite words.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-normalized-fixed-halting-machine-for-boone-simulation",
+          "source_section": "Statement",
+          "quote": "Fix the deterministic one-tape recognizer $R$ of $HALT_{TM}$. There is a fixed finite deterministic machine $T$ on a two-sided blank tape whose instructions each either write without moving, move left without writing, or move right without writing. It has exactly one stopping state $q_0$, and exactly one instruction for every other state and tape symbol. With $v(\\varepsilon)=s_0$ (blank) and $v(w)=w$ for nonempty binary $w$, it stops on $v(w)$ exactly when $R$ accepts $w$. Consequently its stopping language is undecidable.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "application": "[F1] The fixed $T$ stops on $v(w)$ exactly for $w\\in HALT_{TM}$, an undecidable language. ([[lem-normalized-fixed-halting-machine-for-boone-simulation]])"
+        },
+        {
+          "fact": "F2",
+          "source": "def-boone-machine-semigroup-and-augmented-configurations",
+          "source_section": "Definition",
+          "quote": "An elementary replacement substitutes either side of an equation for the other inside arbitrary contexts $u,v\\in A^*$. Write $a\\sim b$ when a finite sequence of such symmetric replacements joins them; the sequence of length zero is allowed. Define $\\Gamma=A^+/{\\sim}$ with multiplication $[a][b]=[ab]$, using the quotient-set convention of [[def-equivalence-relation]]. Its well-definedness is verified below.\n\nThe **augmented configurations** are $q$ and words $hUq_aVh$, where $U,V\\in S^*$, $q_a\\in Q$, and $V\\ne\\varepsilon$ unless $q_a=q_0$. The initial word is $C(w)=h q_{\\rm start}v(w)h$. The symbol $q$ has no outgoing oriented rule.\n\nFor subsequent algebra put $\\bar S=S\\sqcup\\{h\\}$ and $\\bar Q=Q\\sqcup\\{q\\}$. Index the finite relation list by $I$ and write each relation as\n$$F_i q_{a(i)}G_i=H_i q_{b(i)}K_i,$$\nwhere $F_i,G_i,H_i,K_i\\in\\bar S^*$, possibly empty, and both sides have exactly one state letter. This change of notation adds no erasure rule.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "[F2] For this fixed $T$, the construction gives one finite positive semigroup presentation $\\Gamma$, its fixed terminal letter $q$, and the computable initial words $C(w)=hq_{\\rm start}v(w)h$. Every defining relation has exactly one state letter on each side. ([[def-boone-machine-semigroup-and-augmented-configurations]])"
+        },
+        {
+          "fact": "F3",
+          "source": "lem-boone-semigroup-histories-detect-halting",
+          "source_section": "Statement",
+          "quote": "For every binary word $w$, the initial word $C(w)$ equals $q$ in $\\Gamma$ if and only if $T$ stops on $v(w)$.",
+          "uses": [
+            "2.1"
+          ],
+          "application": "[F3] $C(w)=q$ in $\\Gamma$ exactly when $T$ stops on $v(w)$. ([[lem-boone-semigroup-histories-detect-halting]])"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Fix the table of $T$ and hence the finite relation list of $\\Gamma$ once. On input $w$, test emptiness, write the encoding of $s_0$ in the empty case and otherwise copy $w$, and prefix $h q_{\\rm start}$ and suffix $h$. This computes $C(w)$ by finite-symbol scans; no part of the presentation depends on $w$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "The fixed machine and semigroup already constructed; all inputs $w$ are binary finite words."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "A decider answering whether this $C(w)$ equals $q$ would answer yes exactly when $T$ stops on $v(w)$, hence exactly when $w\\in HALT_{TM}$. Running it after the terminating encoding in step 1.1 would be a total decider of that language, contradicting [F1].",
+          "inputs": [
+            "1.1",
+            "F1",
+            "F3",
+            "The fixed machine and semigroup already constructed; all inputs $w$ are binary finite words."
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "An unrestricted terminal-equality decider could be run on these initial words; an unrestricted two-word equality decider could be run on $(C(w),q)$. Each would give the impossible decider in step 2.1. The reductions include $C(\\varepsilon)=h q_{\\rm start}s_0h$.",
+          "inputs": [
+            "2.1",
+            "1.1",
+            "The fixed machine and semigroup already constructed; all inputs $w$ are binary finite words."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1 displays C(epsilon) with its blank scanned cell."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no numerical zero parameter; the empty input is handled separately."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 copies any nonempty word, including length one, with the same fixed prefix and suffix."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1 restricts unrestricted equality deciders to (C(w),q) in the same presentation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "This is a language reduction on finite words, with no ordered interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 fixes the previously constructed machine and presentation, without an additional selection axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Undecidability is the conclusion; the cited halting/equality equivalence is applied in step 2.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This theorem asserts no new converse; step 2.1 uses the already proved equivalence."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.428–430, Theorem 12.5 and Corollary 12.6",
+          "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-13",
+        "notes": "Accepted: Proof 1.1–3.1 fixes the machine and finite presentation before varying binary input. The explicit terminating prefix/suffix encoding, including a blank for empty input, composes with the proved halting equivalence to contradict HALT_TM undecidability. Restricting either unrestricted terminal equality or two-word equality gives the same impossible decider. Rotman pp.428–430 Theorem 12.5 and Corollary 12.6 corroborate these quantifiers; no closure theorem or Choice is imported."
+      }
+    },
+    "def-boone-group-presentation-and-special-word": {
+      "claim": "Use the finite positive presentation $\\Gamma$ and its relation notation $F_iq_{a(i)}G_i=H_iq_{b(i)}K_i$ from [[def-boone-machine-semigroup-and-augmented-configurations]]. All generator alphabets below are disjointly tagged.\n\nFor a signed tape word $U=s_1^{e_1}\\cdots s_m^{e_m}$, $e_j\\in\\{1,-1\\}$, set $U^\\#=s_1^{-e_1}\\cdots s_m^{-e_m}$. Thus $(UV)^\\#=U^\\#V^\\#$, $(U^\\#)^\\#=U$, and $\\varepsilon^\\#=\\varepsilon$. A cancellation pair is carried to a cancellation pair; applying $\\#$ twice recovers the original pair. Consequently this operation is well-defined on free tape words modulo free cancellation. It is neither reversal nor a claimed operation on the semigroup quotient.\n\nDefine $\\mathcal B$ by generators $\\bar S\\sqcup\\bar Q\\sqcup\\{r_i:i\\in I\\}\\sqcup\\{x,t,k\\}$ and the following relations for every $s\\in\\bar S$ and $i\\in I$:\n$$xs=sx^2,\\qquad r_i s=sxr_ix,$$\n$$r_i^{-1}(F_i^\\#q_{a(i)}G_i)r_i=H_i^\\#q_{b(i)}K_i,$$\n$$tr_i=r_it,\\qquad tx=xt,\\qquad kr_i=r_ik,\\qquad kx=xk,$$\n$$k(q^{-1}tq)=(q^{-1}tq)k.$$\nEach displayed equation $u=v$ means the relator $uv^{-1}$ in the free-group quotient of [[def-recursive-and-finite-group-presentations]]. Both the generating set and relator list are finite. There are no other defining equations, in particular none commuting state letters with $x$.\n\nA **special word** is the spelled word $\\Sigma=X^\\#q_jY$, where $X,Y\\in\\bar S^*$ are positive tape words (empty is allowed) and $q_j\\in\\bar Q$. Set $\\Sigma^*=Xq_jY$, a nonempty positive semigroup word, and\n$$W(\\Sigma)=k\\Sigma^{-1}t\\Sigma k^{-1}\\Sigma^{-1}t^{-1}\\Sigma.$$\nThe operation $\\#$ is on the tape words in this spelling, not on arbitrary elements of $\\mathcal B$. For empty tape contexts, $\\Sigma=q_j$ and $\\Sigma^*=q_j$.",
+      "assumptions": "The explicit finite presentation and word conventions in the definition.",
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition sets epsilon sharp to epsilon and permits empty X,Y and every empty rule context."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The definition has no numerical zero case; q_0 is a state name rather than a scalar."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition takes X=Y=epsilon to give Sigma=q_j and a nonempty Sigma-star."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition disjointly tags letters, separates sharp from inversion, and imposes no state/x relation."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Signed words and group presentations have no ordered-domain endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition is a fixed finite list and a free-group quotient; no representative selection is needed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a definition, not the special-word equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a definition, not the special-word equivalence theorem."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.430–431, sharp notation and Boone presentation",
+          "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+        }
+      ],
+      "definition_obligations": [
+        {
+          "claim": "Sharp preserves concatenation, is involutive, and carries cancellation pairs to cancellation pairs.",
+          "evidence": "Definition, paragraph beginning For a signed tape word: applying the sign change twice fixes each letter and a cancellation pair remains an inverse pair."
+        },
+        {
+          "claim": "The Boone group is finitely presented with exactly the displayed relations.",
+          "evidence": "Definition: all disjoint alphabets and the rule index set are finite; each equation is converted to uv^-1 in the free-group quotient."
+        },
+        {
+          "claim": "Sigma-star is a nonempty positive word even with empty tape contexts.",
+          "evidence": "Definition, final paragraph: the state letter q_j remains between the contexts."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-13",
+        "notes": "Accepted: The finite, disjoint generator sets and explicit equations define a group through the published finite-presentation quotient convention, whose definition was read. Sharp changes signs in place, preserves cancellation pairs and concatenation, and squares to the identity; it is not asserted on the semigroup quotient or whole Boone group. Every special word retains one state with empty contexts allowed. The commutator uses full word inverses. Rotman pp.430–431 were read and every displayed family compared; state/x commutation is absent as required."
+      }
+    },
+    "lem-boone-base-groups-and-associated-free-bases": {
+      "claim": "Assume AC. Put $H=\\langle x,\\bar S\\mid s^{-1}xs=x^2\\ (s\\in\\bar S)\\rangle$ and $G_0=H*F(\\bar Q)$. Then $\\langle x\\rangle$ is infinite cyclic and embeds in $H$. For each rule $i$, put $a_i=F_i^\\#q_{a(i)}G_i$, $b_i=H_i^\\#q_{b(i)}K_i$. The subgroups\n$$A_i=\\langle a_i,sx\\ (s\\in\\bar S)\\rangle,\\qquad B_i=\\langle b_i,sx^{-1}\\ (s\\in\\bar S)\\rangle$$\nare free on the indicated bases. The correspondence $a_i\\mapsto b_i$, $sx\\mapsto sx^{-1}$ is an isomorphism $\\phi_i:A_i\\to B_i$. The map $\\theta(x)=x^{-1}$, $\\theta(s)=s$ is an involutive automorphism of $H$.\n\nThe retraction $\\rho:H\\to F(\\bar S)$ sending $x\\mapsto1$, $s\\mapsto s$ is injective on each $T_\\eta=\\langle sx^\\eta:s\\in\\bar S\\rangle$, for $\\eta=\\pm1$. The automorphism of $G_0$ fixing $H$ and all other states and sending $q_{a(i)}\\mapsto a_i$ identifies $\\langle q_{a(i)}\\rangle*T_1$ with $A_i$; the corresponding automorphism identifies $\\langle q_{b(i)}\\rangle*T_{-1}$ with $B_i$.\n\nWe also use the following finite multiple-letter version of Britton's lemma: for finitely many isomorphisms between subgroups of one base, the successive HNN construction embeds that base; a word with stable letters equal to a base element contains a pinch for an original edge subgroup. Two reduced words representing the same element have the same ordered sequence of signed stable letters.",
+      "assumptions": "The finite alphabets and rule contexts of the Boone presentation.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-boone-group-presentation-and-special-word",
+          "source_section": "Definition",
+          "quote": "Use the finite positive presentation $\\Gamma$ and its relation notation $F_iq_{a(i)}G_i=H_iq_{b(i)}K_i$ from [[def-boone-machine-semigroup-and-augmented-configurations]]. All generator alphabets below are disjointly tagged.\n\nFor a signed tape word $U=s_1^{e_1}\\cdots s_m^{e_m}$, $e_j\\in\\{1,-1\\}$, set $U^\\#=s_1^{-e_1}\\cdots s_m^{-e_m}$. Thus $(UV)^\\#=U^\\#V^\\#$, $(U^\\#)^\\#=U$, and $\\varepsilon^\\#=\\varepsilon$. A cancellation pair is carried to a cancellation pair; applying $\\#$ twice recovers the original pair. Consequently this operation is well-defined on free tape words modulo free cancellation. It is neither reversal nor a claimed operation on the semigroup quotient.\n\nDefine $\\mathcal B$ by generators $\\bar S\\sqcup\\bar Q\\sqcup\\{r_i:i\\in I\\}\\sqcup\\{x,t,k\\}$ and the following relations for every $s\\in\\bar S$ and $i\\in I$:\n$$xs=sx^2,\\qquad r_i s=sxr_ix,$$\n$$r_i^{-1}(F_i^\\#q_{a(i)}G_i)r_i=H_i^\\#q_{b(i)}K_i,$$\n$$tr_i=r_it,\\qquad tx=xt,\\qquad kr_i=r_ik,\\qquad kx=xk,$$\n$$k(q^{-1}tq)=(q^{-1}tq)k.$$\nEach displayed equation $u=v$ means the relator $uv^{-1}$ in the free-group quotient of [[def-recursive-and-finite-group-presentations]]. Both the generating set and relator list are finite. There are no other defining equations, in particular none commuting state letters with $x$.\n\nA **special word** is the spelled word $\\Sigma=X^\\#q_jY$, where $X,Y\\in\\bar S^*$ are positive tape words (empty is allowed) and $q_j\\in\\bar Q$. Set $\\Sigma^*=Xq_jY$, a nonempty positive semigroup word, and\n$$W(\\Sigma)=k\\Sigma^{-1}t\\Sigma k^{-1}\\Sigma^{-1}t^{-1}\\Sigma.$$\nThe operation $\\#$ is on the tape words in this spelling, not on arbitrary elements of $\\mathcal B$. For empty tape contexts, $\\Sigma=q_j$ and $\\Sigma^*=q_j$.",
+          "uses": [
+            "3.2",
+            "7.1"
+          ],
+          "application": "[F1] These are the specified tape relations and rule words. ([[def-boone-group-presentation-and-special-word]])"
+        },
+        {
+          "fact": "F2",
+          "source": "thm-reduced-words-form-the-free-group",
+          "source_section": "Statement",
+          "quote": "Let $X$ be a set. The reduced words on $X\\sqcup X^{-1}$ form a group when the\nproduct of reduced words is their concatenation followed by free reduction. The\nmap sending $x\\in X$ to the one-letter word $x$ has the universal property of\nthe free group on $X$.",
+          "uses": [
+            "3.2",
+            "4.1",
+            "5.1",
+            "6.1"
+          ],
+          "application": "[F2] Reduced words give free groups and their universal property; nonempty reduced words are nonidentity. ([[thm-reduced-words-form-the-free-group]])"
+        },
+        {
+          "fact": "F3",
+          "source": "thm-normal-form-for-free-products",
+          "source_section": "Statement",
+          "quote": "Every element of $\\ast_{i\\in I}G_i$ has a unique reduced syllable expression. The identity is represented by the empty word, and no nonempty reduced word represents the identity.",
+          "uses": [
+            "3.2",
+            "5.1",
+            "6.1"
+          ],
+          "application": "[F3] Reduced syllable expressions in a free product are unique. ([[thm-normal-form-for-free-products]])"
+        },
+        {
+          "fact": "F4",
+          "source": "thm-brittons-lemma",
+          "source_section": "Statement",
+          "quote": "Let\n\n$$w=a_0t^{\\varepsilon_1}a_1\\cdots t^{\\varepsilon_n}a_n$$\n\nbe a Britton-reduced HNN word. If $w$ represents the identity, then $n=0$ and\n$a_0=e_A$. Equivalently, every Britton-reduced HNN word containing a stable\nletter is nontrivial.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "application": "[F4] A reduced single-letter HNN word containing a stable letter cannot be the identity. ([[thm-brittons-lemma]])"
+        },
+        {
+          "fact": "F5",
+          "source": "cor-the-base-group-embeds-in-its-hnn-extension",
+          "source_section": "Statement",
+          "quote": "In an HNN extension, the canonical map from the base group $A$ to the presented\ngroup is injective. Equivalently, a base-group element represents the identity\nin the HNN extension only when it is already the identity in $A$.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "[F5] The base embeds in a single-letter HNN extension. ([[cor-the-base-group-embeds-in-its-hnn-extension]])"
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "[A1] Assume the Axiom of Choice. ([[def-axiom-of-choice]])"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "For finitely many edge maps between subgroups of a base $E$, adjoin their letters successively. The edge subgroups remain embedded after each addition by [F5], so the next map is still an isomorphism of actual subgroups. AC chooses representatives of their nonempty cosets for the single-letter normal forms underlying [F4]. This is the choice use throughout the construction.",
+          "inputs": [
+            "F5",
+            "F4",
+            "A1",
+            "The finite alphabets and rule contexts of the Boone presentation."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Prove the multiple-letter pinch assertion by induction on the number of letters. With no letters there is nothing to assert; with one letter apply [F4] to the word times the inverse of its asserted base value. For the next letter, regard all older-letter blocks as coefficients. If the new letter occurs, single-letter Britton supplies a new-letter pinch whose intervening older-letter block represents an element of an original edge subgroup in $E$. If that block contains older letters, the induction hypothesis supplies an older-letter pinch in the original spelling. Otherwise the new-letter pinch is already a pinch over $E$. If the new letter never occurs, use the induction hypothesis directly. This proves the assertion for every finite family, without changing any edge subgroup.",
+          "inputs": [
+            "F4",
+            "1.1",
+            "The finite alphabets and rule contexts of the Boone presentation."
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "For completeness, compare two multiple-letter reduced words $U,V$ with $U=V$. In $UV^{-1}$ a pinch can occur only across the seam, since neither side has an internal pinch. It must pair the last signed letter of $U$ with the inverse of the last signed letter of $V$, with the same label. Reducing this pinch replaces the seam coefficient by a base element, leaving shortened prefixes of the original reduced words. Repeat. If one prefix had stable letters after the other ran out, it would be a reduced word equal to a base element, contradicting step 2.1. Hence all paired letters agree in reverse order and both prefixes run out together. This proves the sequence assertion, including length zero.",
+          "inputs": [
+            "2.1",
+            "The finite alphabets and rule contexts of the Boone presentation."
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "step": "3.2",
+          "claim": "Start with the free group on $x$. By [F2], $x^n\\ne1$ for every nonzero integer $n$. The map $x^n\\mapsto x^{2n}$ is an isomorphism $\\langle x\\rangle\\to\\langle x^2\\rangle$: it preserves addition of exponents, is injective and has precisely that image. Successively adjoin each $s$ with $s^{-1}xs=x^2$. Steps 1.1–2.1 apply (the local stable letter is $s^{-1}$), giving $H$ and preserving the infinite order of $x$. Form $G_0=H*F(\\bar Q)$ using [F3]; states have no relations with $H$.",
+          "inputs": [
+            "F2",
+            "1.1",
+            "2.1",
+            "F3",
+            "F1",
+            "The finite alphabets and rule contexts of the Boone presentation."
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Sending $x\\mapsto1$ and $s\\mapsto s$ respects every relator of $H$, giving $\\rho:H\\to F(\\bar S)$. For either $\\eta=1$ or $\\eta=-1$, a nonempty reduced word in the abstract letters $z_s$ maps under $z_s\\mapsto sx^\\eta$ and then $\\rho$ to the same nonempty reduced tape word. By [F2] it is nonidentity. Thus $T_\\eta=\\langle sx^\\eta:s\\in\\bar S\\rangle$ is free on that displayed basis, and $\\rho$ restricts injectively to $T_\\eta$.",
+          "inputs": [
+            "F2",
+            "3.2",
+            "The finite alphabets and rule contexts of the Boone presentation."
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "In $G_0$, the subgroup $\\langle q_{a(i)}\\rangle*T_1$ is a free product: any alternating product of its nonidentity state powers and tape elements is a nonempty reduced syllable word by [F3]. The assignment fixing $H$ and all other states and sending $q_{a(i)}$ to $F_i^\\#q_{a(i)}G_i$ defines an automorphism of $G_0$. Its inverse sends that state to $(F_i^\\#)^{-1}q_{a(i)}G_i^{-1}$ and fixes the same other generators; substitution verifies both composites on every generator. This automorphism carries the preceding free product to $A_i$, proving its asserted free basis. Empty $F_i$ or $G_i$ give the same substitution with an identity factor.",
+          "inputs": [
+            "F3",
+            "F2",
+            "4.1",
+            "The finite alphabets and rule contexts of the Boone presentation."
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "Replace the state by $q_{b(i)}$, the contexts by $H_i^\\#,K_i$, and $T_1$ by $T_{-1}$ in the explicit automorphism construction of step 5.1. Its inverse is $q_{b(i)}\\mapsto(H_i^\\#)^{-1}q_{b(i)}K_i^{-1}$. Thus $B_i$ is free on the stated basis. The unique homomorphisms given by the forward and reverse basis correspondences compose to the identity on every basis element, hence on both groups. They are inverse isomorphisms, proving the assertion about $\\phi_i$.",
+          "inputs": [
+            "5.1",
+            "F2",
+            "F3",
+            "4.1",
+            "The finite alphabets and rule contexts of the Boone presentation."
+          ]
+        },
+        {
+          "id": "derive-7.1",
+          "step": "7.1",
+          "claim": "Inverting the equation $s^{-1}xs=x^2$ gives $s^{-1}x^{-1}s=x^{-2}$, exactly its image under $\\theta$. Thus $\\theta$ defines an endomorphism of $H$. Its square fixes $x$ and every $s$, so it is an involutive automorphism. It interchanges $T_1$ and $T_{-1}$. All claims now follow.",
+          "inputs": [
+            "F1",
+            "3.2",
+            "6.1",
+            "The finite alphabets and rule contexts of the Boone presentation."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 5.1 checks empty F_i or G_i; step 6.1 applies the explicit inverse map to the other contexts."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 handles no stable letters in the auxiliary finite-family assertion; step 3.2 checks nonzero powers of x."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 treats the single-letter HNN case and step 3.2 begins with the rank-one free group."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1 treats both signs eta and proves injection rather than assuming generated subgroups are free."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 pairs last stable letters across the comparison seam, including when a side runs out."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 1.1 applies AC to nonempty cosets; no extra choice is used for the explicit free-product automorphisms."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "No iff theorem is asserted; step 6.1 constructs the forward basis homomorphism."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No iff theorem is asserted; step 6.1 constructs its inverse and checks both composites."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.438–440, Lemma 12.11 and Corollary 12.12 (corrected free factor)",
+          "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-13",
+        "notes": "Accepted: Proof 1.1–7.1 derives the finite multiple-letter pinch assertion from the actual single-letter Britton theorem and base embedding, then proves stable-letter sequence comparison by seam cancellation. The x-to-x-squared map is an isomorphism onto its specified subgroup and preserves infinite order under the finite tower. Retraction proves freeness and injectivity on both T signs; explicit mutually inverse twists of the free state factor prove the exact A_i/B_i bases, including empty contexts. The basis correspondence and tape involution are checked on generators. All five published suppliers were read, including the normal-form proof behind Britton. AC is used for nonempty coset transversals. Rotman pp.438–440 were read; the local free state factor avoids the erroneous state/x relation in the printed source."
+      }
+    },
+    "lem-boone-hnn-tower-and-auxiliary-subgroups": {
+      "claim": "Assume AC. The multiple HNN extension\n$$G_2=\\langle G_0,r_i\\ (i\\in I)\\mid r_i^{-1}a r_i=\\phi_i(a)\\ (a\\in A_i)\\rangle$$\nembeds $G_0$, and $C=\\langle x,r_i:i\\in I\\rangle$ is free on these generators. Let $G_3$ be the HNN extension of $G_2$ with letter $t$ centralizing the actual subgroup $C$. Let $D=\\langle C,q^{-1}tq\\rangle\\le G_3$. The HNN extension of $G_3$ with letter $k$ centralizing the actual subgroup $D$ is exactly $\\mathcal B$. All these base maps are injective. Moreover $A_i\\cap\\langle x\\rangle=B_i\\cap\\langle x\\rangle=\\{1\\}$. These are associated subgroups, without a claim about full centralizers or a free basis for $D$.",
+      "assumptions": "The groups, free bases and maps from the preceding lemma.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-boone-base-groups-and-associated-free-bases",
+          "source_section": "Statement",
+          "quote": "Assume AC. Put $H=\\langle x,\\bar S\\mid s^{-1}xs=x^2\\ (s\\in\\bar S)\\rangle$ and $G_0=H*F(\\bar Q)$. Then $\\langle x\\rangle$ is infinite cyclic and embeds in $H$. For each rule $i$, put $a_i=F_i^\\#q_{a(i)}G_i$, $b_i=H_i^\\#q_{b(i)}K_i$. The subgroups\n$$A_i=\\langle a_i,sx\\ (s\\in\\bar S)\\rangle,\\qquad B_i=\\langle b_i,sx^{-1}\\ (s\\in\\bar S)\\rangle$$\nare free on the indicated bases. The correspondence $a_i\\mapsto b_i$, $sx\\mapsto sx^{-1}$ is an isomorphism $\\phi_i:A_i\\to B_i$. The map $\\theta(x)=x^{-1}$, $\\theta(s)=s$ is an involutive automorphism of $H$.\n\nThe retraction $\\rho:H\\to F(\\bar S)$ sending $x\\mapsto1$, $s\\mapsto s$ is injective on each $T_\\eta=\\langle sx^\\eta:s\\in\\bar S\\rangle$, for $\\eta=\\pm1$. The automorphism of $G_0$ fixing $H$ and all other states and sending $q_{a(i)}\\mapsto a_i$ identifies $\\langle q_{a(i)}\\rangle*T_1$ with $A_i$; the corresponding automorphism identifies $\\langle q_{b(i)}\\rangle*T_{-1}$ with $B_i$.\n\nWe also use the following finite multiple-letter version of Britton's lemma: for finitely many isomorphisms between subgroups of one base, the successive HNN construction embeds that base; a word with stable letters equal to a base element contains a pinch for an original edge subgroup. Two reduced words representing the same element have the same ordered sequence of signed stable letters.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ],
+          "application": "[F1] $A_i,B_i$ are free on the displayed bases, $\\phi_i$ is their basis isomorphism, $\\rho$ is injective on $T_\\eta$, and finite multiple-letter Britton and stable-letter comparison hold. ([[lem-boone-base-groups-and-associated-free-bases]])"
+        },
+        {
+          "fact": "F2",
+          "source": "thm-hnn-normal-form-theorem",
+          "source_section": "Statement",
+          "quote": "Fix an HNN extension in associated-subgroup notation and choose transversal data\n$(S_-,S_+)$ as in [[def-choice-of-transversals-for-hnn-normal-forms]]. Then\nevery element of the HNN extension is represented by a unique transversal normal\nform\n\n$$a_0t^{\\varepsilon_1}a_1\\cdots t^{\\varepsilon_n}a_n.$$\n\nIn particular, the identity has the unique normal form with $n=0$ and\n$a_0=e_A$.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ],
+          "application": "[F2] Single-letter HNN normal forms exist and are unique after choosing transversals. ([[thm-hnn-normal-form-theorem]])"
+        },
+        {
+          "fact": "F3",
+          "source": "thm-brittons-lemma",
+          "source_section": "Statement",
+          "quote": "Let\n\n$$w=a_0t^{\\varepsilon_1}a_1\\cdots t^{\\varepsilon_n}a_n$$\n\nbe a Britton-reduced HNN word. If $w$ represents the identity, then $n=0$ and\n$a_0=e_A$. Equivalently, every Britton-reduced HNN word containing a stable\nletter is nontrivial.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ],
+          "application": "[F3] A reduced HNN word with a stable letter is nonidentity. ([[thm-brittons-lemma]])"
+        },
+        {
+          "fact": "F4",
+          "source": "def-boone-machine-semigroup-and-augmented-configurations",
+          "source_section": "Definition",
+          "quote": "For subsequent algebra put $\\bar S=S\\sqcup\\{h\\}$ and $\\bar Q=Q\\sqcup\\{q\\}$. Index the finite relation list by $I$ and write each relation as\n$$F_i q_{a(i)}G_i=H_i q_{b(i)}K_i,$$\nwhere $F_i,G_i,H_i,K_i\\in\\bar S^*$, possibly empty, and both sides have exactly one state letter. This change of notation adds no erasure rule.",
+          "uses": [
+            "4.1"
+          ],
+          "application": "[F4] The semigroup construction introduces the distinguished terminal symbol $q$ and places it in the subsequent state alphabet $\\bar Q=Q\\sqcup\\{q\\}$. ([[def-boone-machine-semigroup-and-augmented-configurations]])"
+        },
+        {
+          "fact": "F5",
+          "source": "def-boone-group-presentation-and-special-word",
+          "source_section": "Definition",
+          "quote": "Define $\\mathcal B$ by generators $\\bar S\\sqcup\\bar Q\\sqcup\\{r_i:i\\in I\\}\\sqcup\\{x,t,k\\}$ and the following relations for every $s\\in\\bar S$ and $i\\in I$:\n$$xs=sx^2,\\qquad r_i s=sxr_ix,$$\n$$r_i^{-1}(F_i^\\#q_{a(i)}G_i)r_i=H_i^\\#q_{b(i)}K_i,$$\n$$tr_i=r_it,\\qquad tx=xt,\\qquad kr_i=r_ik,\\qquad kx=xk,$$\n$$k(q^{-1}tq)=(q^{-1}tq)k.$$",
+          "uses": [
+            "1.1",
+            "4.1"
+          ],
+          "application": "[F5] The Boone presentation defines $\\mathcal B$ and lists its rule-letter, $t$-centralizer, and $k$-centralizer relations, including commutation with $q^{-1}tq$. ([[def-boone-group-presentation-and-special-word]])"
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ],
+          "application": "[A1] Assume AC to choose the coset representatives used in HNN normal forms. ([[def-axiom-of-choice]])"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Since every $\\phi_i$ is an isomorphism of actual subgroups of $G_0$, the successive construction in [F1] forms $G_2$ with embedded bases. Its relations need only be imposed on the free bases, because conjugation and $\\phi_i$ preserve products and inverses. The tape relation $r_i^{-1}(sx)r_i=sx^{-1}$ is equivalent to $sx r_i=r_i s x^{-1}$ and then $r_i s=sxr_ix$. By [F5], the finite presentation of $G_2$ is exactly the tape/state/rule portion of $\\mathcal B$.",
+          "inputs": [
+            "F1",
+            "F5",
+            "A1",
+            "The groups, free bases and maps from the preceding lemma."
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "The automorphism used in [F1] fixes $H$ and carries $\\langle q_{a(i)}\\rangle*T_1$ onto $A_i$. A reduced free-product word with a state syllable cannot belong to $H$, so $A_i\\cap H=T_1$. Similarly $B_i\\cap H=T_{-1}$. If an element of $T_\\eta$ equals $x^m$, applying $\\rho$ gives identity, and the injectivity on $T_\\eta$ gives that element equal to $1$. The infinite order of $x$ then gives $m=0$. Hence $A_i\\cap\\langle x\\rangle=B_i\\cap\\langle x\\rangle=\\{1\\}$.",
+          "inputs": [
+            "F1",
+            "The groups, free bases and maps from the preceding lemma."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Let a nonempty freely reduced word on $x,r_i$ be given, consolidating consecutive $x$ letters into powers. A possible rule pinch has the form $r_i^{\\epsilon}x^m r_i^{-\\epsilon}$. If $m\\ne0$, step 1.2 excludes subgroup membership. If $m=0$, the displayed pair would cancel freely, contrary to the chosen spelling. Thus a word with rule letters is nonidentity by multiple-letter Britton in [F1]; without rule letters it is a nonzero power of the embedded $x$. This proves freeness of $C$ on $x,r_i$, including the case of zero rule letters.",
+          "inputs": [
+            "1.2",
+            "F1",
+            "The groups, free bases and maps from the preceding lemma."
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The identity map of the actual subgroup $C\\le G_2$ is an isomorphism, so adjoining $t$ with that edge map is an HNN extension. Choose representatives by [A1]; [F2]–[F3] embed $G_2$ in $G_3$. Commutation with each $x,r_i$ is equivalent to commutation with every product and inverse, hence with all of $C$.",
+          "inputs": [
+            "A1",
+            "F2",
+            "F3",
+            "2.1",
+            "The groups, free bases and maps from the preceding lemma."
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "By [F4], $q$ is a specified generator in the embedded state group, so $q^{-1}tq\\in G_3$ is defined. Let $D$ be the subgroup generated by the finite list $x,r_i,q^{-1}tq$. Its identity map is an isomorphism regardless of relations among that list. Adjoining $k$ with this edge map therefore embeds $G_3$ by [F2]–[F3], again using [A1]. Requiring commutation with the displayed generators is equivalent to commutation with $D$. By [F5], these are exactly the remaining defining relations of $\\mathcal B$; both presentations are the same free-group quotient. This proves the tower and every asserted embedding.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "A1",
+            "1.1",
+            "3.1",
+            "The groups, free bases and maps from the preceding lemma."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 handles a word with no rule letters; the empty word is the identity in the proved free subgroup."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.2 forces m=0 in the intersection test."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 proves a single x or rule letter is nonidentity by the appropriate base or HNN argument."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1 uses D as an actual subgroup even if its displayed generators satisfy relations."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "The finite succession of extensions has initial and final groups explicitly in steps 1.1 and 4.1, not interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 3.1 and 4.1 use AC for HNN coset transversals."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 derives r_i s=s x r_i x from the associated tape relation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 1.1 consists of reversible multiplications, so also derives the associated tape relation from that presentation relation."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.438–440, Lemma 12.11",
+          "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+        },
+        {
+          "title": "Stephen G. Simpson, A Slick Proof, Definition 1, p.1 (independent HNN convention cross-check)",
+          "url": "https://sgslogic.net/t20/logic/seminar/050517.pdf"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-13",
+        "notes": "Accepted: Proof 1.1–4.1 uses the proved basis isomorphisms and reversibly identifies the rule relations. The free-product twist fixes H, giving A_i intersect H=T_1 and B_i intersect H=T_-1; retraction and infinite order then give trivial intersection with x powers. This excludes every pinch of a freely reduced auxiliary word and proves C free. The t and k extensions centralize actual subgroups by their identity isomorphisms, so no unproved basis for D or full-centralizer assertion is needed. AC is declared and used for HNN transversals. Rotman pp.438–440 and Simpson Definition 1 p.1 were read, checking the inverse-stable-letter convention."
+      }
+    },
+    "lem-boone-positive-history-pushing": {
+      "claim": "Assume AC. If a special word $\\Sigma$ satisfies $\\Sigma^*=q$ in the positive semigroup, then $\\Sigma=LqR$ in $G_2$ for words $L,R$ on $x,r_i$. Consequently $W(\\Sigma)=1$ in $\\mathcal B$.",
+      "assumptions": "A positive special word and a finite symmetric semigroup history to $q$.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-boone-group-presentation-and-special-word",
+          "source_section": "Definition",
+          "quote": "Use the finite positive presentation $\\Gamma$ and its relation notation $F_iq_{a(i)}G_i=H_iq_{b(i)}K_i$ from [[def-boone-machine-semigroup-and-augmented-configurations]]. All generator alphabets below are disjointly tagged.\n\nFor a signed tape word $U=s_1^{e_1}\\cdots s_m^{e_m}$, $e_j\\in\\{1,-1\\}$, set $U^\\#=s_1^{-e_1}\\cdots s_m^{-e_m}$. Thus $(UV)^\\#=U^\\#V^\\#$, $(U^\\#)^\\#=U$, and $\\varepsilon^\\#=\\varepsilon$. A cancellation pair is carried to a cancellation pair; applying $\\#$ twice recovers the original pair. Consequently this operation is well-defined on free tape words modulo free cancellation. It is neither reversal nor a claimed operation on the semigroup quotient.\n\nDefine $\\mathcal B$ by generators $\\bar S\\sqcup\\bar Q\\sqcup\\{r_i:i\\in I\\}\\sqcup\\{x,t,k\\}$ and the following relations for every $s\\in\\bar S$ and $i\\in I$:\n$$xs=sx^2,\\qquad r_i s=sxr_ix,$$\n$$r_i^{-1}(F_i^\\#q_{a(i)}G_i)r_i=H_i^\\#q_{b(i)}K_i,$$\n$$tr_i=r_it,\\qquad tx=xt,\\qquad kr_i=r_ik,\\qquad kx=xk,$$\n$$k(q^{-1}tq)=(q^{-1}tq)k.$$\nEach displayed equation $u=v$ means the relator $uv^{-1}$ in the free-group quotient of [[def-recursive-and-finite-group-presentations]]. Both the generating set and relator list are finite. There are no other defining equations, in particular none commuting state letters with $x$.\n\nA **special word** is the spelled word $\\Sigma=X^\\#q_jY$, where $X,Y\\in\\bar S^*$ are positive tape words (empty is allowed) and $q_j\\in\\bar Q$. Set $\\Sigma^*=Xq_jY$, a nonempty positive semigroup word, and\n$$W(\\Sigma)=k\\Sigma^{-1}t\\Sigma k^{-1}\\Sigma^{-1}t^{-1}\\Sigma.$$\nThe operation $\\#$ is on the tape words in this spelling, not on arbitrary elements of $\\mathcal B$. For empty tape contexts, $\\Sigma=q_j$ and $\\Sigma^*=q_j$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ],
+          "application": "[F1] The group relations are $xs=sx^2$, $r_is=sxr_ix$, and $r_i^{-1}a_ir_i=b_i$, where $a_i=F_i^\\#q_{a(i)}G_i$, $b_i=H_i^\\#q_{b(i)}K_i$; sharp preserves order. ([[def-boone-group-presentation-and-special-word]])"
+        },
+        {
+          "fact": "F2",
+          "source": "lem-boone-hnn-tower-and-auxiliary-subgroups",
+          "source_section": "Statement",
+          "quote": "Assume AC. The multiple HNN extension\n$$G_2=\\langle G_0,r_i\\ (i\\in I)\\mid r_i^{-1}a r_i=\\phi_i(a)\\ (a\\in A_i)\\rangle$$\nembeds $G_0$, and $C=\\langle x,r_i:i\\in I\\rangle$ is free on these generators. Let $G_3$ be the HNN extension of $G_2$ with letter $t$ centralizing the actual subgroup $C$. Let $D=\\langle C,q^{-1}tq\\rangle\\le G_3$. The HNN extension of $G_3$ with letter $k$ centralizing the actual subgroup $D$ is exactly $\\mathcal B$. All these base maps are injective. Moreover $A_i\\cap\\langle x\\rangle=B_i\\cap\\langle x\\rangle=\\{1\\}$. These are associated subgroups, without a claim about full centralizers or a free basis for $D$.",
+          "uses": [
+            "6.1"
+          ],
+          "application": "[F2] $G_2$ embeds in $\\mathcal B$; $t$ centralizes $C=\\langle x,r_i\\rangle$, and $k$ centralizes $C$ and $q^{-1}tq$. ([[lem-boone-hnn-tower-and-auxiliary-subgroups]])"
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "6.1"
+          ],
+          "application": "[A1] Assume AC as in the embedded tower. ([[def-axiom-of-choice]])"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "For every integer $a$, $x^as=sx^{2a}$ follows by taking powers in $s^{-1}xs=x^2$. The rule relation also gives $r_i^{-1}s=sx^{-1}r_i^{-1}x^{-1}$: from $r_is=sxr_ix$, obtain $r_i^{-1}sx=sx^{-1}r_i^{-1}$ and multiply on the right by $x^{-1}$. Thus for either $\\epsilon=1$ or $-1$, $r_i^\\epsilon s=sx^\\epsilon r_i^\\epsilon x^\\epsilon$.",
+          "inputs": [
+            "F1",
+            "A positive special word and a finite symmetric semigroup history to $q$."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For a positive word $V$ of length $m$, set $d_m=2^m-1$. At $m=0$, $r_i^\\epsilon V=Vx^{\\epsilon d_m}r_i^\\epsilon x^{\\epsilon d_m}$. If this holds for $V$ and $a=\\epsilon d_m$, then $$r_i^\\epsilon Vs=Vx^ar_i^\\epsilon x^as=Vx^ar_i^\\epsilon s x^{2a}=Vs x^{2a+\\epsilon}r_i^\\epsilon x^{2a+\\epsilon}.$$ Since $2a+\\epsilon=\\epsilon d_{m+1}$, this proves the formula for all $m$, for both signs.",
+          "inputs": [
+            "1.1",
+            "A positive special word and a finite symmetric semigroup history to $q$."
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Let $U$ be positive of length $n$, let $Z$ be its reversal and put $e=2^n-1$. Then $U^\\#=Z^{-1}$. Applying step 2.1 to $r_i^\\epsilon Z=Zx^{\\epsilon e}r_i^\\epsilon x^{\\epsilon e}$ and multiplying by $Z^{-1}$ gives $$U^\\#r_i^\\epsilon=x^{\\epsilon e}r_i^\\epsilon x^{\\epsilon e}U^\\#.$$ Together with step 2.1 these are all four signed pushing identities, including $n=0$ and $m=0$.",
+          "inputs": [
+            "2.1",
+            "F1",
+            "A positive special word and a finite symmetric semigroup history to $q$."
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Every word in a history beginning at $\\Sigma^*$ has exactly one positive state letter, since every relation preserves that count. Hence a contextual forward replacement has old word $UF_iq_{a(i)}G_iV$ and new word $UH_iq_{b(i)}K_iV$ with positive tape contexts $U,V$. With $e=2^{|U|}-1$, $d=2^{|V|}-1$, the corresponding special spellings $Z_{\\rm old},Z_{\\rm new}$ satisfy $$Z_{\\rm new}=U^\\#r_i^{-1}a_ir_iV=(x^{-e}r_i^{-1}x^{-e})Z_{\\rm old}(x^dr_ix^d).$$ The reverse replacement uses $a_i=r_i b_i r_i^{-1}$ and gives $$Z_{\\rm old}=(x^er_ix^e)Z_{\\rm new}(x^{-d}r_i^{-1}x^{-d}).$$ These equalities use only relations of $G_2$.",
+          "inputs": [
+            "F1",
+            "2.1",
+            "3.1",
+            "A positive special word and a finite symmetric semigroup history to $q$."
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Along the finite symmetric path choose, at each edge, the applicable equality expressing the earlier spelling as an auxiliary left factor times the later spelling times an auxiliary right factor. Substitution multiplies the left factors in path order and the right factors in reverse path order. Since the last spelling is $q$, it yields $\\Sigma=LqR$. For a path of length zero both factors are empty. This is a finite product of explicitly given factors, with no choice of infinite histories.",
+          "inputs": [
+            "4.1",
+            "A positive special word and a finite symmetric semigroup history to $q$."
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "Put $g=q^{-1}tq$. Since $t$ commutes with $L$, $\\Sigma^{-1}t\\Sigma=R^{-1}gR$. Since $k$ commutes with $R$ and $g$, $$W(\\Sigma)=kR^{-1}gRk^{-1}R^{-1}g^{-1}R=R^{-1}(kgk^{-1}g^{-1})R=1.$$ These equalities hold in $\\mathcal B$ by the embedded tower, under its stated AC assumption.",
+          "inputs": [
+            "F2",
+            "A1",
+            "5.1",
+            "A positive special word and a finite symmetric semigroup history to $q$."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 sets d_0=0 and step 3.1 treats empty U; step 5.1 treats the zero-length history."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 calculates d_0=2^0-1=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 proves the length-one signed pushing equations."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1 permits empty rule contexts and keeps exactly one state throughout a symmetric history."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 handles left sharp boundaries, and step 4.1 handles both context interfaces explicitly."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 5.1 forms finitely many explicit factors from the supplied history; step 6.1 inherits AC only for the embedded tower."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This lemma proves the semigroup-to-group implication only, in steps 5.1 and 6.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The reverse implication is the later extraction and reconstruction argument, not a claim of this lemma."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.432–433, Lemma 12.10 and sufficiency proof",
+          "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-13",
+        "notes": "Accepted: Proof 1.1–6.1 derives the negative rule-letter identity algebraically and checks the exponent recurrence d_(m+1)=2d_m+1 for both signs. Applying it to the reversal gives the two left sharp identities. Every symmetric history word has exactly one state, hence positive tape-only contexts; both contextual replacement formulas have the correct signs and factors. Finite substitution yields LqR, including a zero-length history. The displayed commutator then cancels because t centralizes L and k centralizes R and q-inverse t q. AC is inherited from the tower, with no further selection. Rotman pp.432–433 Lemma 12.10 and the complete sufficiency argument were read."
+      }
+    },
+    "lem-boone-commutator-extracts-an-auxiliary-history": {
+      "claim": "Assume AC. For a special word $\\Sigma$, if $W(\\Sigma)=1$ in $\\mathcal B$, then there are freely reduced auxiliary words $L,R$ on $x,r_i$ with $L\\Sigma R=q$ in the embedded rule group $G_2$.",
+      "assumptions": "$\\Sigma\\in G_0\\le G_2$ with $W(\\Sigma)=1$.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-boone-hnn-tower-and-auxiliary-subgroups",
+          "source_section": "Statement",
+          "quote": "Assume AC. The multiple HNN extension\n$$G_2=\\langle G_0,r_i\\ (i\\in I)\\mid r_i^{-1}a r_i=\\phi_i(a)\\ (a\\in A_i)\\rangle$$\nembeds $G_0$, and $C=\\langle x,r_i:i\\in I\\rangle$ is free on these generators. Let $G_3$ be the HNN extension of $G_2$ with letter $t$ centralizing the actual subgroup $C$. Let $D=\\langle C,q^{-1}tq\\rangle\\le G_3$. The HNN extension of $G_3$ with letter $k$ centralizing the actual subgroup $D$ is exactly $\\mathcal B$. All these base maps are injective. Moreover $A_i\\cap\\langle x\\rangle=B_i\\cap\\langle x\\rangle=\\{1\\}$. These are associated subgroups, without a claim about full centralizers or a free basis for $D$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ],
+          "application": "[F1] $G_3$ is the $t$-HNN extension centralizing $C=\\langle x,r_i\\rangle$; $\\mathcal B$ is the $k$-HNN extension centralizing $D=\\langle C,q^{-1}tq\\rangle$, with all bases embedded. ([[lem-boone-hnn-tower-and-auxiliary-subgroups]])"
+        },
+        {
+          "fact": "F2",
+          "source": "thm-brittons-lemma",
+          "source_section": "Statement",
+          "quote": "Let\n\n$$w=a_0t^{\\varepsilon_1}a_1\\cdots t^{\\varepsilon_n}a_n$$\n\nbe a Britton-reduced HNN word. If $w$ represents the identity, then $n=0$ and\n$a_0=e_A$. Equivalently, every Britton-reduced HNN word containing a stable\nletter is nontrivial.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ],
+          "application": "[F2] A reduced HNN word with a stable letter is nonidentity; an identity word with stable letters therefore has a pinch. ([[thm-brittons-lemma]])"
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "[A1] Assume AC for the HNN transversals. ([[def-axiom-of-choice]])"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Set $g=\\Sigma^{-1}t\\Sigma\\in G_3$. It has one $t$, hence is nonidentity by [F2]. In the identity word $kgk^{-1}g^{-1}$ the only two $k$ letters must form a pinch. For the identity edge map of $D$ this says precisely $g\\in D$, with membership in the embedded base $G_3$.",
+          "inputs": [
+            "F2",
+            "F1",
+            "A1",
+            "$\\Sigma\\in G_0\\le G_2$ with $W(\\Sigma)=1$."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Write $$g^{-1}=R_0(q^{-1}t^{e_1}q)R_1\\cdots(q^{-1}t^{e_n}q)R_n,$$ where $R_j\\in C$ are auxiliary words and $e_j\\in\\{1,-1\\}$, and choose the least possible $n$. Such finite expressions exist by $g\\in D$ and the definition of generated subgroup. If $n=0$, the equality $\\Sigma^{-1}t\\Sigma R_0=1$ has exactly one $t$ and violates [F2]. Thus $n\\ge1$.",
+          "inputs": [
+            "F2",
+            "F1",
+            "1.1",
+            "$\\Sigma\\in G_0\\le G_2$ with $W(\\Sigma)=1$."
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Apply [F2] to the displayed word for $gg^{-1}$ in $G_3$. If a pinch uses its first $t$, it pairs that $t$ with $t^{e_1}$, so $e_1=-1$ and $\\Sigma R_0q^{-1}=P\\in C$ in $G_2$. Multiplying gives $P^{-1}\\Sigma R_0=q$. This is the desired auxiliary equation.",
+          "inputs": [
+            "F2",
+            "F1",
+            "2.1",
+            "$\\Sigma\\in G_0\\le G_2$ with $W(\\Sigma)=1$."
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "step": "3.2",
+          "claim": "Any other pinch pairs consecutive $t^{e_j},t^{e_{j+1}}$ with $e_{j+1}=-e_j$ and $qR_jq^{-1}\\in C$. Since $t$ commutes with $C$, for either sign $e_j$ the corresponding subexpression satisfies $$(q^{-1}t^{e_j}q)R_j(q^{-1}t^{-e_j}q)=q^{-1}(qR_jq^{-1})q=R_j.$$ Replacing it combines the neighboring auxiliary factors and gives an expression for $g^{-1}$ with $n-2$ such occurrences, contrary to minimality. Thus this kind of pinch cannot occur.",
+          "inputs": [
+            "F1",
+            "2.1",
+            "$\\Sigma\\in G_0\\le G_2$ with $W(\\Sigma)=1$."
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "A pinch exists, so step 3.1 must apply. Freely reducing $P^{-1}$ and $R_0$ changes neither represented element nor alphabet, and yields the claimed $L,R$. All coefficient equalities were obtained in $G_2$, by the embedded-base clause in [F1]. Least finite length and finite free reduction need no additional choice.",
+          "inputs": [
+            "3.1",
+            "F1",
+            "3.2",
+            "$\\Sigma\\in G_0\\le G_2$ with $W(\\Sigma)=1$."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 permits empty auxiliary factors; step 4.1 freely reduces the output words."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 2.1 excludes n=0 by the one-t-letter Britton obstruction."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 3.1 handles a pinch with the first t, including n=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.2 removes a later pinch for either sign e_j and so contradicts the least n."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 distinguishes the first t from later occurrences in step 3.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.1 minimizes a natural count among existing finite expressions; step 1.1 states the inherited AC normal-form use."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Only the implication from W(Sigma)=1 to an auxiliary equation is asserted and proved in step 4.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "A converse implication is not claimed by this extraction lemma."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.440–441, Lemma 12.13",
+          "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-13",
+        "notes": "Accepted: Proof 1.1–4.1 first applies Britton at the two k letters to obtain actual D-membership in G_3. A minimal expression in conjugated t letters cannot have length zero; every later t pinch, for either sign, deletes two occurrences using actual C-membership and t centralization. Therefore a pinch with the initial t gives P-inverse Sigma R_0=q in the embedded G_2. Free reduction preserves the auxiliary alphabet. The minimization is over finite natural lengths and adds no Choice use beyond the declared HNN transversals. Rotman pp.440–441 Lemma 12.13 was read through its QED."
+      }
+    },
+    "lem-boone-reduced-auxiliary-words-have-no-rule-pinches": {
+      "claim": "Assume AC. Each freely reduced auxiliary word on $x,r_i$ has no rule-letter HNN pinch. For freely reduced signed tape words $X,Y$ and freely reduced auxiliary words $L,R$, an equality $LX^\\#q_jYR=q$ in $G_2$ forces $L$ and $R$ to have the same number of rule letters. If that number is positive, an identity spelling $LX^\\#q_jYRq^{-1}$ has a central pinch\n$$r_i^\\epsilon(x^mX^\\#q_jYx^n)r_i^{-\\epsilon}.$$",
+      "assumptions": "The specified freely reduced words and the rule HNN extension.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-boone-base-groups-and-associated-free-bases",
+          "source_section": "Statement",
+          "quote": "Assume AC. Put $H=\\langle x,\\bar S\\mid s^{-1}xs=x^2\\ (s\\in\\bar S)\\rangle$ and $G_0=H*F(\\bar Q)$. Then $\\langle x\\rangle$ is infinite cyclic and embeds in $H$. For each rule $i$, put $a_i=F_i^\\#q_{a(i)}G_i$, $b_i=H_i^\\#q_{b(i)}K_i$. The subgroups\n$$A_i=\\langle a_i,sx\\ (s\\in\\bar S)\\rangle,\\qquad B_i=\\langle b_i,sx^{-1}\\ (s\\in\\bar S)\\rangle$$\nare free on the indicated bases. The correspondence $a_i\\mapsto b_i$, $sx\\mapsto sx^{-1}$ is an isomorphism $\\phi_i:A_i\\to B_i$. The map $\\theta(x)=x^{-1}$, $\\theta(s)=s$ is an involutive automorphism of $H$.\n\nThe retraction $\\rho:H\\to F(\\bar S)$ sending $x\\mapsto1$, $s\\mapsto s$ is injective on each $T_\\eta=\\langle sx^\\eta:s\\in\\bar S\\rangle$, for $\\eta=\\pm1$. The automorphism of $G_0$ fixing $H$ and all other states and sending $q_{a(i)}\\mapsto a_i$ identifies $\\langle q_{a(i)}\\rangle*T_1$ with $A_i$; the corresponding automorphism identifies $\\langle q_{b(i)}\\rangle*T_{-1}$ with $B_i$.\n\nWe also use the following finite multiple-letter version of Britton's lemma: for finitely many isomorphisms between subgroups of one base, the successive HNN construction embeds that base; a word with stable letters equal to a base element contains a pinch for an original edge subgroup. Two reduced words representing the same element have the same ordered sequence of signed stable letters.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ],
+          "application": "[F1] The free associated bases, tape retraction, infinite cyclic subgroup and multiple-letter pinch/comparison results hold. ([[lem-boone-base-groups-and-associated-free-bases]])"
+        },
+        {
+          "fact": "F2",
+          "source": "lem-boone-hnn-tower-and-auxiliary-subgroups",
+          "source_section": "Statement",
+          "quote": "Assume AC. The multiple HNN extension\n$$G_2=\\langle G_0,r_i\\ (i\\in I)\\mid r_i^{-1}a r_i=\\phi_i(a)\\ (a\\in A_i)\\rangle$$\nembeds $G_0$, and $C=\\langle x,r_i:i\\in I\\rangle$ is free on these generators. Let $G_3$ be the HNN extension of $G_2$ with letter $t$ centralizing the actual subgroup $C$. Let $D=\\langle C,q^{-1}tq\\rangle\\le G_3$. The HNN extension of $G_3$ with letter $k$ centralizing the actual subgroup $D$ is exactly $\\mathcal B$. All these base maps are injective. Moreover $A_i\\cap\\langle x\\rangle=B_i\\cap\\langle x\\rangle=\\{1\\}$. These are associated subgroups, without a claim about full centralizers or a free basis for $D$.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ],
+          "application": "[F2] In $G_2$, $A_i\\cap\\langle x\\rangle=B_i\\cap\\langle x\\rangle=\\{1\\}$, as proved in the tower construction; $G_0$ embeds in $G_2$. ([[lem-boone-hnn-tower-and-auxiliary-subgroups]])"
+        },
+        {
+          "fact": "F3",
+          "source": "thm-hnn-normal-form-theorem",
+          "source_section": "Statement",
+          "quote": "Fix an HNN extension in associated-subgroup notation and choose transversal data\n$(S_-,S_+)$ as in [[def-choice-of-transversals-for-hnn-normal-forms]]. Then\nevery element of the HNN extension is represented by a unique transversal normal\nform\n\n$$a_0t^{\\varepsilon_1}a_1\\cdots t^{\\varepsilon_n}a_n.$$\n\nIn particular, the identity has the unique normal form with $n=0$ and\n$a_0=e_A$.",
+          "uses": [
+            "3.1"
+          ],
+          "application": "[F3] HNN normal forms relative to chosen transversals are unique. ([[thm-hnn-normal-form-theorem]])"
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ],
+          "application": "[A1] Assume AC for those transversals. ([[def-axiom-of-choice]])"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Here is also the intersection check directly. Undoing the state-twisting automorphism in [F1] fixes $H$. A reduced word with a state syllable then cannot lie in $H$, so an element of $A_i\\cap\\langle x\\rangle$ must lie in $T_1=\\langle sx\\rangle$. The tape retraction sends a nonempty reduced basis word there to a nonempty reduced tape word, whereas it sends $x^m$ to identity. Therefore the basis word is empty and $x^m=1$, whence $m=0$. For $B_i$ the same computation uses $T_{-1}=\\langle sx^{-1}\\rangle$, with the identical retraction image. This verifies the intersections used in [F2].",
+          "inputs": [
+            "F1",
+            "F2",
+            "The specified freely reduced words and the rule HNN extension."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "An internal pinch in a reduced auxiliary word must pair $r_i^\\epsilon,r_i^{-\\epsilon}$ across a pure power $x^m$. By step 1.1 membership in the requisite edge subgroup forces $m=0$. But then the two letters freely cancel, contrary to reducedness. There is thus no internal pinch.",
+          "inputs": [
+            "1.1",
+            "The specified freely reduced words and the rule HNN extension."
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Rewrite the given equality as $LX^\\#q_j=qR^{-1}Y^{-1}$. Both sides are rule-reduced by step 2.1, since all their rule letters occur in their single auxiliary block. The multiple-letter comparison of [F1], derived by successively pairing letters across the seam, shows their signed rule sequences agree. In particular their lengths agree. This is consistent with the single-letter normal-form invariant [F3], with choices licensed by [A1]; the finite comparison here uses the proved multiple-letter version.",
+          "inputs": [
+            "2.1",
+            "F1",
+            "F3",
+            "A1",
+            "The specified freely reduced words and the rule HNN extension."
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "If the common length is positive, multiple-letter Britton applied to $LX^\\#q_jYRq^{-1}=1$ supplies a pinch. It cannot be wholly within either auxiliary block by step 2.1. The only other consecutive pair of rule letters is the last one of $L$ and the first one of $R$, with intervening coefficient $x^mX^\\#q_jYx^n$ for their adjacent terminal/initial powers. Thus it has exactly the central form in the statement. If the common length is zero, the whole equality is in $G_0$ by base embedding.",
+          "inputs": [
+            "2.1",
+            "F1",
+            "F2",
+            "3.1",
+            "The specified freely reduced words and the rule HNN extension."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 4.1 treats the comparison with no rule letters as an equality in G_0."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.1 forces x^m=1 and m=0; step 2.1 then excludes a freely cancelling pinch."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 4.1 applies to common length one, locating the last L and first R letters."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 treats both associated subgroup signs through T_1 and T_-1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 4.1 identifies the only remaining interface for a central pinch."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1 states AC for HNN transversals; no words are chosen from an infinite family."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The comparison is a consequence of the given equality, not an iff assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Equal rule-letter counts alone are not asserted to imply the auxiliary equation."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.442–444, Lemma 12.14 and reduced-length comparison",
+          "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-13",
+        "notes": "Accepted: Proof 1.1–4.1 checks both edge-subgroup intersections using the state twist, tape retraction and infinite order of x. An internal rule pinch would force zero intermediate exponent and violate free reduction. Both rearranged comparison words are therefore rule-reduced; the previously proved multiple-letter sequence comparison gives equal lengths. At positive common length Britton leaves only the last-L/first-R central pinch. The zero-length equation lies in G_0 by embedding. AC and its normal-form use remain explicit. Rotman pp.442–444 Lemma 12.14 and the start of Lemma 12.15 were read."
+      }
+    },
+    "lem-boone-positive-history-reconstruction": {
+      "claim": "Assume AC. If $\\Sigma=X^\\#q_jY$ is special and $L\\Sigma R=q$ in $G_2$ for auxiliary words $L,R$ on $x,r_i$, then $\\Sigma^*=Xq_jY=q$ in the positive semigroup $\\Gamma$.",
+      "assumptions": "The auxiliary equation in the embedded group $G_2$. All equalities of spelled tape words below are explicitly distinguished from group equalities.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-boone-reduced-auxiliary-words-have-no-rule-pinches",
+          "source_section": "Statement",
+          "quote": "Assume AC. Each freely reduced auxiliary word on $x,r_i$ has no rule-letter HNN pinch. For freely reduced signed tape words $X,Y$ and freely reduced auxiliary words $L,R$, an equality $LX^\\#q_jYR=q$ in $G_2$ forces $L$ and $R$ to have the same number of rule letters. If that number is positive, an identity spelling $LX^\\#q_jYRq^{-1}$ has a central pinch\n$$r_i^\\epsilon(x^mX^\\#q_jYx^n)r_i^{-\\epsilon}.$$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.4",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-boone-base-groups-and-associated-free-bases",
+          "source_section": "Statement",
+          "quote": "Assume AC. Put $H=\\langle x,\\bar S\\mid s^{-1}xs=x^2\\ (s\\in\\bar S)\\rangle$ and $G_0=H*F(\\bar Q)$. Then $\\langle x\\rangle$ is infinite cyclic and embeds in $H$. For each rule $i$, put $a_i=F_i^\\#q_{a(i)}G_i$, $b_i=H_i^\\#q_{b(i)}K_i$. The subgroups\n$$A_i=\\langle a_i,sx\\ (s\\in\\bar S)\\rangle,\\qquad B_i=\\langle b_i,sx^{-1}\\ (s\\in\\bar S)\\rangle$$\nare free on the indicated bases. The correspondence $a_i\\mapsto b_i$, $sx\\mapsto sx^{-1}$ is an isomorphism $\\phi_i:A_i\\to B_i$. The map $\\theta(x)=x^{-1}$, $\\theta(s)=s$ is an involutive automorphism of $H$.\n\nThe retraction $\\rho:H\\to F(\\bar S)$ sending $x\\mapsto1$, $s\\mapsto s$ is injective on each $T_\\eta=\\langle sx^\\eta:s\\in\\bar S\\rangle$, for $\\eta=\\pm1$. The automorphism of $G_0$ fixing $H$ and all other states and sending $q_{a(i)}\\mapsto a_i$ identifies $\\langle q_{a(i)}\\rangle*T_1$ with $A_i$; the corresponding automorphism identifies $\\langle q_{b(i)}\\rangle*T_{-1}$ with $B_i$.\n\nWe also use the following finite multiple-letter version of Britton's lemma: for finitely many isomorphisms between subgroups of one base, the successive HNN construction embeds that base; a word with stable letters equal to a base element contains a pinch for an original edge subgroup. Two reduced words representing the same element have the same ordered sequence of signed stable letters.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-boone-hnn-tower-and-auxiliary-subgroups",
+          "source_section": "Statement",
+          "quote": "Assume AC. The multiple HNN extension\n$$G_2=\\langle G_0,r_i\\ (i\\in I)\\mid r_i^{-1}a r_i=\\phi_i(a)\\ (a\\in A_i)\\rangle$$\nembeds $G_0$, and $C=\\langle x,r_i:i\\in I\\rangle$ is free on these generators. Let $G_3$ be the HNN extension of $G_2$ with letter $t$ centralizing the actual subgroup $C$. Let $D=\\langle C,q^{-1}tq\\rangle\\le G_3$. The HNN extension of $G_3$ with letter $k$ centralizing the actual subgroup $D$ is exactly $\\mathcal B$. All these base maps are injective. Moreover $A_i\\cap\\langle x\\rangle=B_i\\cap\\langle x\\rangle=\\{1\\}$. These are associated subgroups, without a claim about full centralizers or a free basis for $D$.",
+          "uses": [
+            "1.4",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-normal-form-for-free-products",
+          "source_section": "Statement",
+          "quote": "Every element of $\\ast_{i\\in I}G_i$ has a unique reduced syllable expression. The identity is represented by the empty word, and no nonempty reduced word represents the identity.",
+          "uses": [
+            "1.2",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-brittons-lemma",
+          "source_section": "Statement",
+          "quote": "Let\n\n$$w=a_0t^{\\varepsilon_1}a_1\\cdots t^{\\varepsilon_n}a_n$$\n\nbe a Britton-reduced HNN word. If $w$ represents the identity, then $n=0$ and\n$a_0=e_A$. Equivalently, every Britton-reduced HNN word containing a stable\nletter is nontrivial.",
+          "uses": [
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-boone-machine-semigroup-and-augmented-configurations",
+          "source_section": "Definition",
+          "quote": "Let $T$ be the fixed machine of [[lem-normalized-fixed-halting-machine-for-boone-simulation]], with tape alphabet $S$, blank $s_0$, states $Q$, start $q_{\\rm start}$ and stop $q_0$. Take new, mutually distinct symbols $h,q$. Set $A=S\\sqcup Q\\sqcup\\{h,q\\}$. Words and concatenation have the convention of [[def-computation-alphabet-and-word-convention]]. On the nonempty words $A^+$ use the following equations, oriented as displayed:\n\n| Instruction of $T$ | Relations (for every $s_\\beta\\in S$) |\n|---|---|\n| write $s_k$, enter $q_b$, from $(q_a,s_j)$ | $q_a s_j=q_b s_k$ |\n| move right, enter $q_b$, from $(q_a,s_j)$ | $q_a s_j s_\\beta=s_jq_b s_\\beta$; $q_a s_jh=s_jq_b s_0h$ |\n| move left, enter $q_b$, from $(q_a,s_j)$ | $s_\\beta q_a s_j=q_b s_\\beta s_j$; $h q_a s_j=hq_b s_0s_j$ |\n\nAdd $q_0s=q_0$ and $s q_0h=q_0h$ for every $s\\in S$, and $h q_0h=q$. Erasure never ranges over $h$.\n\nAn elementary replacement substitutes either side of an equation for the other inside arbitrary contexts $u,v\\in A^*$. Write $a\\sim b$ when a finite sequence of such symmetric replacements joins them; the sequence of length zero is allowed. Define $\\Gamma=A^+/{\\sim}$ with multiplication $[a][b]=[ab]$, using the quotient-set convention of [[def-equivalence-relation]]. Its well-definedness is verified below.\n\nThe **augmented configurations** are $q$ and words $hUq_aVh$, where $U,V\\in S^*$, $q_a\\in Q$, and $V\\ne\\varepsilon$ unless $q_a=q_0$. The initial word is $C(w)=h q_{\\rm start}v(w)h$. The symbol $q$ has no outgoing oriented rule.\n\nFor subsequent algebra put $\\bar S=S\\sqcup\\{h\\}$ and $\\bar Q=Q\\sqcup\\{q\\}$. Index the finite relation list by $I$ and write each relation as\n$$F_i q_{a(i)}G_i=H_i q_{b(i)}K_i,$$\nwhere $F_i,G_i,H_i,K_i\\in\\bar S^*$, possibly empty, and both sides have exactly one state letter. This change of notation adds no erasure rule.",
+          "uses": [
+            "1.4",
+            "3.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-boone-group-presentation-and-special-word",
+          "source_section": "Definition",
+          "quote": "Use the finite positive presentation $\\Gamma$ and its relation notation $F_iq_{a(i)}G_i=H_iq_{b(i)}K_i$ from [[def-boone-machine-semigroup-and-augmented-configurations]]. All generator alphabets below are disjointly tagged.\n\nFor a signed tape word $U=s_1^{e_1}\\cdots s_m^{e_m}$, $e_j\\in\\{1,-1\\}$, set $U^\\#=s_1^{-e_1}\\cdots s_m^{-e_m}$. Thus $(UV)^\\#=U^\\#V^\\#$, $(U^\\#)^\\#=U$, and $\\varepsilon^\\#=\\varepsilon$. A cancellation pair is carried to a cancellation pair; applying $\\#$ twice recovers the original pair. Consequently this operation is well-defined on free tape words modulo free cancellation. It is neither reversal nor a claimed operation on the semigroup quotient.\n\nDefine $\\mathcal B$ by generators $\\bar S\\sqcup\\bar Q\\sqcup\\{r_i:i\\in I\\}\\sqcup\\{x,t,k\\}$ and the following relations for every $s\\in\\bar S$ and $i\\in I$:\n$$xs=sx^2,\\qquad r_i s=sxr_ix,$$\n$$r_i^{-1}(F_i^\\#q_{a(i)}G_i)r_i=H_i^\\#q_{b(i)}K_i,$$\n$$tr_i=r_it,\\qquad tx=xt,\\qquad kr_i=r_ik,\\qquad kx=xk,$$\n$$k(q^{-1}tq)=(q^{-1}tq)k.$$\nEach displayed equation $u=v$ means the relator $uv^{-1}$ in the free-group quotient of [[def-recursive-and-finite-group-presentations]]. Both the generating set and relator list are finite. There are no other defining equations, in particular none commuting state letters with $x$.\n\nA **special word** is the spelled word $\\Sigma=X^\\#q_jY$, where $X,Y\\in\\bar S^*$ are positive tape words (empty is allowed) and $q_j\\in\\bar Q$. Set $\\Sigma^*=Xq_jY$, a nonempty positive semigroup word, and\n$$W(\\Sigma)=k\\Sigma^{-1}t\\Sigma k^{-1}\\Sigma^{-1}t^{-1}\\Sigma.$$\nThe operation $\\#$ is on the tape words in this spelling, not on arbitrary elements of $\\mathcal B$. For empty tape contexts, $\\Sigma=q_j$ and $\\Sigma^*=q_j$.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "We prove a stronger assertion: for freely reduced, possibly signed tape words $X,Y$, the equation $LX^\\#q_jYR=q$ forces $X,Y$ to be positive and $Xq_jY=q$ in $\\Gamma$. Freely reduce $L,R$, which does not change their elements. By [F1] their rule-letter counts have a common value $p$. We use strong induction on $p$, under the AC normal-form assumptions.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "A1",
+            "given",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-1-2",
+          "claim": "If $p=0$, the equation is $x^mX^\\#q_jYx^n=q$ in $G_0=H*F(\\bar Q)$, since the base embeds. Unique reduced syllables give $q_j=q$, $x^mX^\\#=1$ and $Yx^n=1$. Applying $\\rho$ shows the freely reduced tape words $X^\\#,Y$ are empty. Infinite order of $x$ then gives $m=n=0$. Thus $X,Y$ are empty positive words and $Xq_jY=q$ literally, proving the initial case.",
+          "step": "1.2",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-1-3",
+          "claim": "We first establish the tape sign test used at a pinch. Suppose $Z$ is a freely reduced signed tape word and $Zx^a\\in T_1=\\langle sx\\rangle$. Choose its reduced basis spelling $u$ in $sx$. Then $x^a u^{-1}Z=1$ in $H$. Expand $u^{-1}$ in tape stable letters and $x$. This expansion has no tape pinch: opposite successive tape signs of the same label would come from consecutive inverse basis letters, forbidden by basis reduction; opposite signs of different labels are not a pinch. Any cancellations of neighboring $x,x^{-1}$ do not change this observation. The same is true of $Z$, since it is freely reduced. If $Z$ began with $s^{-1}$, the only possible first pinch in $x^a u^{-1}Z$ would be across that seam. The last basis letter of $u^{-1}$ would have to be $sx$, giving exactly $sxs^{-1}$. For the tape relation $s^{-1}xs=x^2$, such a pinch requires $x\\in\\langle x^2\\rangle$, impossible because $x$ has infinite order and $1$ is not an even integer. If $u$ is empty there is no seam pinch at all. Multiple-letter Britton therefore rules out a negative first letter of $Z$. Thus $Z$ is empty or begins positively.",
+          "step": "1.3",
+          "inputs": [
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1-4",
+          "claim": "Suppose $p>0$ and assume the stronger assertion for all smaller counts. By [F1], write $$L=L_3r_i^\\epsilon x^m,\\qquad R=x^n r_i^{-\\epsilon}L_4,$$ where $x^mX^\\#q_jYx^n$ lies in $A_i$ if $\\epsilon=-1$, or in $B_i$ if $\\epsilon=1$. Each of $L_3,L_4$ has $p-1$ rule letters. To treat both orientations uniformly, put $$ (P,q_c,Q',P',q_d,Q'',\\eta)=\\begin{cases}(F_i,q_{a(i)},G_i,H_i,q_{b(i)},K_i,1),&\\epsilon=-1,\\\\(H_i,q_{b(i)},K_i,F_i,q_{a(i)},G_i,-1),&\\epsilon=1.\\end{cases}$$ Then the edge subgroup is $E=\\langle P^\\#q_cQ',T_\\eta\\rangle$ and conjugation by $r_i^\\epsilon$ carries $P^\\#q_cQ'$ to $(P')^\\#q_dQ''$ and sends $sx^\\eta$ to $sx^{-\\eta}$.",
+          "step": "1.4",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "given",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "If instead $Zx^a\\in T_{-1}$, apply $\\theta$. It fixes every signed tape word and sends $Zx^a$ to $Zx^{-a}\\in T_1$, so the same sign test holds. A mirrored test also holds: if $x^aZ\\in T_\\eta$, invert to obtain $Z^{-1}x^{-a}\\in T_\\eta$. The first-letter test for $Z^{-1}$ says that $Z$ is empty or ends negatively. These conclusions cover both $\\eta=1,-1$ and $a=0$ without exception.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "step 1.3"
+          ]
+        },
+        {
+          "id": "step-2-2",
+          "claim": "Membership of $x^mX^\\#q_jYx^n$ in $E$ gives a word in $T_\\eta$ and $a=P^\\#q_cQ'$. Choose one with the fewest occurrences of $a^{\\pm1}$ and reduce every intervening $T_\\eta$ basis word. There cannot be zero occurrences, since a tape element has no state syllable. In the product of this expression with the inverse of $x^mX^\\#q_jYx^n$, free-product reduction must cancel state letters. A state cancellation entirely among two consecutive $a$ occurrences with opposite signs has intervening coefficient either $Q' u(Q')^{-1}$ or $(P^\\#)^{-1}uP^\\#$, where $u\\in T_\\eta$. Its being identity forces $u=1$, so the two inverse occurrences could be removed, contradicting minimality. Therefore the single state letter of the coefficient must cancel with one of these occurrences, and after that no further state occurrences can remain: any further reduction would again remove an inverse pair already excluded by minimality. Exactly one positive $a$ occurs, $q_j=q_c$, and comparison of its left and right coefficients yields $$x^mX^\\#=uP^\\#,\\qquad Yx^n=Q'v\\qquad(u,v\\in T_\\eta).$$ The state sign is positive because the original coefficient contains $q_j$, not $q_j^{-1}$, in the free state factor.",
+          "step": "2.2",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.4"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "Reduce $(Q')^{-1}Y$ freely to $Z$. From step 2.2, $Zx^n=v\\in T_\\eta$. If any letter of $(Q')^{-1}$ survived the seam cancellation, $Z$ would start negatively, since $Q'$ is positive. This contradicts steps 1.3 and 2.1. Thus $Y=Q'Y_1$ as an exact spelling, and $Y_1$ is empty or starts positively. Likewise reduce $X^\\#(P^\\#)^{-1}$ to $Z'$. Then $x^mZ'=u\\in T_\\eta$. If any letter from $(P^\\#)^{-1}$ survived, $Z'$ would end positively; the mirrored test in step 2.1 excludes this. Hence $X=X_1P$ as a spelling, and $X_1^\\#$ is empty or ends negatively. Both $X_1,Y_1$ are subwords of the original reduced words and so are reduced. These conclusions include completely empty remainders and empty $P,Q'$.",
+          "step": "3.1",
+          "inputs": [
+            "step 1.3",
+            "step 2.1",
+            "step 2.2",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "Substituting the spellings from step 3.1 into the coefficient equations and cancelling the terminal/initial tape factors gives $$u=x^mX_1^\\#,\\qquad v=Y_1x^n.$$ By [F2]–[F3], the applicable edge isomorphism restricts to $\\theta$ on $T_\\eta$, because it sends each of its basis elements $sx^\\eta$ to $sx^{-\\eta}$. Thus its values on these particular elements are $\\theta(u)=x^{-m}X_1^\\#$ and $\\theta(v)=Y_1x^{-n}$. Replacing the central pinch in the original equation gives $$(L_3x^{-m})X_1^\\#(P')^\\#q_dQ''Y_1(x^{-n}L_4)=q.$$ This computation is valid for both signs of $\\epsilon$; for $\\epsilon=1$ it uses the inverse edge map, which still restricts to the same involution $\\theta$.",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.4",
+            "step 2.2",
+            "step 3.1",
+            "algebra",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-5-1",
+          "claim": "The word $X_1^\\#(P')^\\#$ is freely reduced: each factor is reduced, the second is negative, and a nonempty first factor ends negatively by step 3.1. No opposite pair can occur at the seam. Similarly $Q''Y_1$ is reduced, since $Q''$ is positive and a nonempty $Y_1$ starts positively. Empty factors introduce no seam. Sharp preserves free reduction, so $X_1P'$ is also freely reduced. Freely reduce the two auxiliary factors in step 4.1; their rule counts can only decrease and are at most $p-1$. By [F1] their new counts agree. The induction hypothesis therefore applies and makes $X_1P'$ and $Q''Y_1$ positive, with $$X_1P'q_dQ''Y_1=q\\quad\\hbox{in }\\Gamma.$$ Because the two concatenations were freely reduced spellings, their subwords $X_1,Y_1$ are themselves positive. Consequently $X=X_1P$ and $Y=Q'Y_1$ are positive.",
+          "step": "5.1",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 4.1",
+            "step 1.1",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "step-6-1",
+          "claim": "If $\\epsilon=-1$, the original positive word is $X_1F_iq_{a(i)}G_iY_1$, which rewrites by rule $i$ to $X_1H_iq_{b(i)}K_iY_1=q$. If $\\epsilon=1$, it is $X_1H_iq_{b(i)}K_iY_1$, which rewrites by the reverse of the same semigroup equation to $X_1F_iq_{a(i)}G_iY_1=q$. Both uses have positive contexts by step 5.1. This completes the induction for signed words. For the special words of the statement, positivity was already given, so the resulting equality is exactly $\\Sigma^*=q$.",
+          "step": "6.1",
+          "inputs": [
+            "step 1.4",
+            "step 5.1",
+            "step 1.1",
+            "F6",
+            "F7"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 3.1 handles empty P,Q-prime and empty remainders; step 5.1 handles seams with an empty factor."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 1.2 proves the p=0 case and forces m=n=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "steps 4.1 and 5.1 reduce p=1 to the zero-rule case after free reduction."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.4 lists both orientations and step 6.1 performs both positive semigroup replacements."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "steps 1.3 and 2.1 establish the right and mirrored left tape sign tests; step 5.1 excludes cancellation at replacement seams."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 2.2 minimizes a finite state-occurrence count; step 1.1 records inherited AC for HNN normal forms."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The exported claim is one implication; step 6.1 completes it from the auxiliary equation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse is asserted; the separate pushing lemma supplies the other part of the eventual equivalence."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, pp.443–447, Lemma 12.15",
+          "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-13",
+        "notes": "Accepted: Read Proof 1.1–6.1 against Rotman pp.443–447 through the formal reconstruction QED. The stronger signed-word induction is necessary and is actually proved. At p=0 free-product uniqueness and tape retraction force empty tapes and zero x exponents. The tape sign test is sound: reduced sx-basis expansions have no internal tape pinch, and a negative first remainder would force the seam s x s-inverse with x in the even-power subgroup, impossible. Theta gives the other subgroup sign and inversion the mirrored endpoint test. Minimal twisted-state occurrences give exactly one positive state generator and the two tape equations. Those endpoint tests force literal context divisibility, including empty remainders. Both edge orientations restrict to theta, so the displayed replacement negates m,n correctly. The new tape seams are freely reduced; common rule length strictly decreases after auxiliary reduction. Induction yields positivity before the final forward or reverse positive semigroup replacement. All exact hypotheses of the free-product and Britton suppliers were checked; AC is precisely the declared normal-form assumption."
+      }
+    },
+    "thm-boone-special-word-equivalence": {
+      "claim": "Assume AC. For every special word $\\Sigma=X^\\#q_jY$, with $X,Y$ positive tape words, possibly empty,\n$$W(\\Sigma)=1\\text{ in }\\mathcal B\\quad\\Longleftrightarrow\\quad\\Sigma^*=Xq_jY=q\\text{ in }\\Gamma.$$",
+      "assumptions": "A positive special word $\\Sigma$ in the stated domain.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-boone-positive-history-pushing",
+          "source_section": "Statement",
+          "quote": "Assume AC. If a special word $\\Sigma$ satisfies $\\Sigma^*=q$ in the positive semigroup, then $\\Sigma=LqR$ in $G_2$ for words $L,R$ on $x,r_i$. Consequently $W(\\Sigma)=1$ in $\\mathcal B$.",
+          "uses": [
+            "2.1"
+          ],
+          "application": "[F1] A positive semigroup history $\\Sigma^*=q$ gives $\\Sigma=LqR$ and $W(\\Sigma)=1$. ([[lem-boone-positive-history-pushing]])"
+        },
+        {
+          "fact": "F2",
+          "source": "lem-boone-commutator-extracts-an-auxiliary-history",
+          "source_section": "Statement",
+          "quote": "Assume AC. For a special word $\\Sigma$, if $W(\\Sigma)=1$ in $\\mathcal B$, then there are freely reduced auxiliary words $L,R$ on $x,r_i$ with $L\\Sigma R=q$ in the embedded rule group $G_2$.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "[F2] $W(\\Sigma)=1$ gives $L\\Sigma R=q$ in the embedded $G_2$ for freely reduced auxiliary words. ([[lem-boone-commutator-extracts-an-auxiliary-history]])"
+        },
+        {
+          "fact": "F3",
+          "source": "lem-boone-positive-history-reconstruction",
+          "source_section": "Statement",
+          "quote": "Assume AC. If $\\Sigma=X^\\#q_jY$ is special and $L\\Sigma R=q$ in $G_2$ for auxiliary words $L,R$ on $x,r_i$, then $\\Sigma^*=Xq_jY=q$ in the positive semigroup $\\Gamma$.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "[F3] Such an auxiliary equation for a special word gives $\\Sigma^*=q$ in $\\Gamma$. ([[lem-boone-positive-history-reconstruction]])"
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "application": "[A1] Assume AC for the HNN arguments in these facts. ([[def-axiom-of-choice]])"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Suppose $W(\\Sigma)=1$. The given positive special spelling satisfies the domain of [F2], so it supplies auxiliary $L,R$ with equality in $G_2$. This is exactly the group and equation required by [F3], and that fact yields $\\Sigma^*=q$ in $\\Gamma$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "A1",
+            "A positive special word $\\Sigma$ in the stated domain."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Conversely, suppose $\\Sigma^*=q$. Equality in the presented semigroup is a finite symmetric history, and the special spelling has positive contexts. Thus [F1] applies and gives $W(\\Sigma)=1$. The two implications include $X=Y=\\varepsilon$; for $q_j=q$ they reduce to the defining commutation of $k$ and $q^{-1}tq$. This proves the stated equivalence on precisely the positive special-word domain.",
+          "inputs": [
+            "F1",
+            "A1",
+            "1.1",
+            "A positive special word $\\Sigma$ in the stated domain."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 explicitly includes empty tape contexts."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "No scalar zero parameter occurs; an empty derivation is already permitted by the cited pushing result."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 checks Sigma=q as the defining centralizer relation and W(q)=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement restricts to positive special words; no arbitrary signed-word equivalence is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Positive tape words have no interval-domain endpoints; the interfaces are handled by the cited reconstruction lemma."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 explicitly inherit AC from the HNN lemmas, with no new choice construction."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 1.1 derives Sigma-star=q from W(Sigma)=1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 derives W(Sigma)=1 from Sigma-star=q."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, p.431, Lemma 12.7; pp.432–447, both proof directions",
+          "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-13",
+        "notes": "Accepted: Proof 1.1–2.1 composes extraction and reconstruction with precisely their shared G_2 equation and positive special-word hypotheses; pushing supplies the converse from finite symmetric semigroup equality. Empty tape contexts remain in the domain, and Sigma=q is the defining conjugated-t commutation. The statement retains AC and does not export the stronger signed induction as an unrestricted equivalence. Rotman p.431 Lemma 12.7 and the complete two algebraic proof directions were checked."
+      }
+    },
+    "thm-novikov-boone-undecidability-of-the-word-problem": {
+      "claim": "Assume AC. There exists a single finite presentation $\\mathcal P_{\\mathcal B}$ of a group $\\mathcal B$ whose word problem is undecidable: no Turing machine halts on every signed word over its fixed finite generating alphabet and correctly decides whether the word represents identity.",
+      "assumptions": "The fixed normalized recognizer, positive semigroup $\\Gamma$, and associated Boone presentation.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-fixed-finite-semigroup-has-undecidable-terminal-equality",
+          "source_section": "Statement",
+          "quote": "There is one fixed finite positive semigroup presentation, with one state letter on each side of every relation, for which deciding $C(w)=q$ on encoded initial words is impossible. In particular both unrestricted equality to $q$ and unrestricted word equality in this same semigroup are undecidable.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-boone-group-presentation-and-special-word",
+          "source_section": "Definition",
+          "quote": "Use the finite positive presentation $\\Gamma$ and its relation notation $F_iq_{a(i)}G_i=H_iq_{b(i)}K_i$ from [[def-boone-machine-semigroup-and-augmented-configurations]]. All generator alphabets below are disjointly tagged.\n\nFor a signed tape word $U=s_1^{e_1}\\cdots s_m^{e_m}$, $e_j\\in\\{1,-1\\}$, set $U^\\#=s_1^{-e_1}\\cdots s_m^{-e_m}$. Thus $(UV)^\\#=U^\\#V^\\#$, $(U^\\#)^\\#=U$, and $\\varepsilon^\\#=\\varepsilon$. A cancellation pair is carried to a cancellation pair; applying $\\#$ twice recovers the original pair. Consequently this operation is well-defined on free tape words modulo free cancellation. It is neither reversal nor a claimed operation on the semigroup quotient.\n\nDefine $\\mathcal B$ by generators $\\bar S\\sqcup\\bar Q\\sqcup\\{r_i:i\\in I\\}\\sqcup\\{x,t,k\\}$ and the following relations for every $s\\in\\bar S$ and $i\\in I$:\n$$xs=sx^2,\\qquad r_i s=sxr_ix,$$\n$$r_i^{-1}(F_i^\\#q_{a(i)}G_i)r_i=H_i^\\#q_{b(i)}K_i,$$\n$$tr_i=r_it,\\qquad tx=xt,\\qquad kr_i=r_ik,\\qquad kx=xk,$$\n$$k(q^{-1}tq)=(q^{-1}tq)k.$$\nEach displayed equation $u=v$ means the relator $uv^{-1}$ in the free-group quotient of [[def-recursive-and-finite-group-presentations]]. Both the generating set and relator list are finite. There are no other defining equations, in particular none commuting state letters with $x$.\n\nA **special word** is the spelled word $\\Sigma=X^\\#q_jY$, where $X,Y\\in\\bar S^*$ are positive tape words (empty is allowed) and $q_j\\in\\bar Q$. Set $\\Sigma^*=Xq_jY$, a nonempty positive semigroup word, and\n$$W(\\Sigma)=k\\Sigma^{-1}t\\Sigma k^{-1}\\Sigma^{-1}t^{-1}\\Sigma.$$\nThe operation $\\#$ is on the tape words in this spelling, not on arbitrary elements of $\\mathcal B$. For empty tape contexts, $\\Sigma=q_j$ and $\\Sigma^*=q_j$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-boone-special-word-equivalence",
+          "source_section": "Statement",
+          "quote": "Assume AC. For every special word $\\Sigma=X^\\#q_jY$, with $X,Y$ positive tape words, possibly empty,\n$$W(\\Sigma)=1\\text{ in }\\mathcal B\\quad\\Longleftrightarrow\\quad\\Sigma^*=Xq_jY=q\\text{ in }\\Gamma.$$",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-word-problem-for-a-fixed-finite-presentation",
+          "source_section": "Definition",
+          "quote": "Fix a finite presentation $\\mathcal P=\\langle X\\mid R\\rangle$. Its\n**word problem** is the decision problem whose input is a word $w$ on\n$X\\sqcup X^{-1}$ and whose question is whether $w$ represents the identity in\nthe group presented by $\\mathcal P$.",
+          "uses": [
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-boone-machine-semigroup-and-augmented-configurations",
+          "source_section": "Definition",
+          "quote": "Let $T$ be the fixed machine of [[lem-normalized-fixed-halting-machine-for-boone-simulation]], with tape alphabet $S$, blank $s_0$, states $Q$, start $q_{\\rm start}$ and stop $q_0$. Take new, mutually distinct symbols $h,q$. Set $A=S\\sqcup Q\\sqcup\\{h,q\\}$. Words and concatenation have the convention of [[def-computation-alphabet-and-word-convention]]. On the nonempty words $A^+$ use the following equations, oriented as displayed:\n\n| Instruction of $T$ | Relations (for every $s_\\beta\\in S$) |\n|---|---|\n| write $s_k$, enter $q_b$, from $(q_a,s_j)$ | $q_a s_j=q_b s_k$ |\n| move right, enter $q_b$, from $(q_a,s_j)$ | $q_a s_j s_\\beta=s_jq_b s_\\beta$; $q_a s_jh=s_jq_b s_0h$ |\n| move left, enter $q_b$, from $(q_a,s_j)$ | $s_\\beta q_a s_j=q_b s_\\beta s_j$; $h q_a s_j=hq_b s_0s_j$ |\n\nAdd $q_0s=q_0$ and $s q_0h=q_0h$ for every $s\\in S$, and $h q_0h=q$. Erasure never ranges over $h$.\n\nAn elementary replacement substitutes either side of an equation for the other inside arbitrary contexts $u,v\\in A^*$. Write $a\\sim b$ when a finite sequence of such symmetric replacements joins them; the sequence of length zero is allowed. Define $\\Gamma=A^+/{\\sim}$ with multiplication $[a][b]=[ab]$, using the quotient-set convention of [[def-equivalence-relation]]. Its well-definedness is verified below.\n\nThe **augmented configurations** are $q$ and words $hUq_aVh$, where $U,V\\in S^*$, $q_a\\in Q$, and $V\\ne\\varepsilon$ unless $q_a=q_0$. The initial word is $C(w)=h q_{\\rm start}v(w)h$. The symbol $q$ has no outgoing oriented rule.\n\nFor subsequent algebra put $\\bar S=S\\sqcup\\{h\\}$ and $\\bar Q=Q\\sqcup\\{q\\}$. Index the finite relation list by $I$ and write each relation as\n$$F_i q_{a(i)}G_i=H_i q_{b(i)}K_i,$$\nwhere $F_i,G_i,H_i,K_i\\in\\bar S^*$, possibly empty, and both sides have exactly one state letter. This change of notation adds no erasure rule.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-normalized-fixed-halting-machine-for-boone-simulation",
+          "source_section": "Statement",
+          "quote": "Fix the deterministic one-tape recognizer $R$ of $HALT_{TM}$. There is a fixed finite deterministic machine $T$ on a two-sided blank tape whose instructions each either write without moving, move left without writing, or move right without writing. It has exactly one stopping state $q_0$, and exactly one instruction for every other state and tape symbol. With $v(\\varepsilon)=s_0$ (blank) and $v(w)=w$ for nonempty binary $w$, it stops on $v(w)$ exactly when $R$ accepts $w$. Consequently its stopping language is undecidable.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1-1",
+          "claim": "Fix $\\mathcal P_{\\mathcal B}$ before reading any input. For binary $w$, compute $v(w)$ using [F6]: if the input is empty, write the single symbol $s_0$ in the finite-word encoding; otherwise copy the binary letters unchanged. Both branches terminate and give a nonempty positive tape word. Then write $\\Sigma(w)=h^{-1}q_{\\rm start}v(w)h$. By [F5], its positive contexts are $X=h$ and $Y=v(w)h$; by [F2], it is special and its associated positive word is exactly $C(w)$. In particular $\\Sigma(\\varepsilon)=h^{-1}q_{\\rm start}s_0h$.",
+          "step": "1.1",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5",
+            "F6",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-2-1",
+          "claim": "There is a finite-tape procedure computing $W(\\Sigma(w))$. Store a delimited copy of $\\Sigma(w)$. To copy it, mark each next uncopied source symbol, carry that symbol in finite control, scan to the output end, append it and return to the source; reset the marks after the copy. To copy its inverse, scan source symbols in reverse order and invert each signed letter by a fixed finite lookup. Repeat this for the four displayed copies, inserting the fixed letters $k,t,k^{-1},t^{-1}$. Each scan is between finite delimiters and each copy marks one previously unmarked position, so all loops terminate. Erase the source workspace and move the output left one symbol at a time by the same marking procedure. This produces a valid signed input word for the fixed presentation using a deterministic one-tape machine; no model-equivalence thesis is involved.",
+          "step": "2.1",
+          "inputs": [
+            "F2",
+            "F4",
+            "step 1.1",
+            "construct"
+          ]
+        },
+        {
+          "id": "step-3-1",
+          "claim": "If a total decider $D$ of the word problem for $\\mathcal P_{\\mathcal B}$ existed, first run step 2.1 and then $D$ on its output. By [F3], its answer would be yes exactly when $C(w)=q$. The encoder terminates on every $w$, and the assumed decider terminates on every encoded word, so this would be a total decider of the language ruled out by [F1]. Hence no such $D$ exists.",
+          "step": "3.1",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "A1",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4-1",
+          "claim": "The generators and relation list are finite by [F2] and never depend on $w$. Step 3.1 therefore proves undecidability for one fixed presentation, as asserted, with AC used only through the group equivalence [F3].",
+          "step": "4.1",
+          "inputs": [
+            "F2",
+            "step 3.1",
+            "F3"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 1.1 displays Sigma(epsilon)=h^-1 q_start s_0 h."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "The reduction has no numerical zero parameter beyond the separately checked empty input."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 terminates for a source word of any finite length, including one-letter input after step 1.1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 4.1 fixes the whole presentation before varying w; the undecidability is not merely uniform."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 2.1 uses finite delimiters for scans and reverses the full word for inverse copies."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1 explicitly invokes AC through the special-word equivalence; the transducer in step 2.1 makes no arbitrary choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 3.1 uses W(Sigma(w))=1 implies C(w)=q to ensure no false positive answers."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 3.1 uses C(w)=q implies W(Sigma(w))=1 to ensure no false negative answers."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Joseph J. Rotman, An Introduction to the Theory of Groups, Chapter 12, p.431, Theorem 12.8",
+          "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+        },
+        {
+          "title": "Stephen G. Simpson, A Slick Proof, Theorem 8, p.4 (independent fixed-presentation quantifier cross-check)",
+          "url": "https://sgslogic.net/t20/logic/seminar/050517.pdf"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-13",
+        "notes": "Accepted: Proof 1.1–4.1 fixes the whole finite presentation before varying binary input. Sigma(w) has X=h and Y=v(w)h, hence its star is exactly C(w), including empty input. Copying, reverse scanning and finite sign lookup compute the full four-copy commutator by terminating finite delimited procedures. Composing with a total fixed-presentation decider contradicts the already proved terminal-equality undecidability. The published fixed-word-problem definition was read and matches the input domain. AC is inherited only through the group equivalence. Rotman p.431 Theorem 12.8 and Simpson p.4 Theorem 8, including its surrounding proof, confirm the fixed-presentation quantifier; the misprinted short test in Rotman Corollary 12.9 is not used."
+      }
+    },
+    "ex-boone-sharp-is-not-word-inversion": {
+      "claim": "Choose the distinct tape symbols $a=s_0$ and $b=h$ in $\\bar S$. Then $(ab)^\\#=a^{-1}b^{-1}$, whereas $(ab)^{-1}=b^{-1}a^{-1}$. These have different spellings.",
+      "assumptions": "$a=s_0$ and $b=h$, distinct because $h$ is a new symbol.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-boone-machine-semigroup-and-augmented-configurations",
+          "source_section": "Definition",
+          "quote": "Let $T$ be the fixed machine of [[lem-normalized-fixed-halting-machine-for-boone-simulation]], with tape alphabet $S$, blank $s_0$, states $Q$, start $q_{\\rm start}$ and stop $q_0$. Take new, mutually distinct symbols $h,q$. Set $A=S\\sqcup Q\\sqcup\\{h,q\\}$.",
+          "uses": [
+            "1.1"
+          ],
+          "application": "[F1] The machine tape alphabet $S$ contains its blank $s_0$, while $h$ is a new symbol distinct from every member of $S$; the subsequent tape alphabet is $\\bar S=S\\cup\\{h\\}$. ([[def-boone-machine-semigroup-and-augmented-configurations]])"
+        },
+        {
+          "fact": "F2",
+          "source": "def-boone-group-presentation-and-special-word",
+          "source_section": "Definition",
+          "quote": "Use the finite positive presentation $\\Gamma$ and its relation notation $F_iq_{a(i)}G_i=H_iq_{b(i)}K_i$ from [[def-boone-machine-semigroup-and-augmented-configurations]]. All generator alphabets below are disjointly tagged.\n\nFor a signed tape word $U=s_1^{e_1}\\cdots s_m^{e_m}$, $e_j\\in\\{1,-1\\}$, set $U^\\#=s_1^{-e_1}\\cdots s_m^{-e_m}$. Thus $(UV)^\\#=U^\\#V^\\#$, $(U^\\#)^\\#=U$, and $\\varepsilon^\\#=\\varepsilon$. A cancellation pair is carried to a cancellation pair; applying $\\#$ twice recovers the original pair. Consequently this operation is well-defined on free tape words modulo free cancellation. It is neither reversal nor a claimed operation on the semigroup quotient.\n\nDefine $\\mathcal B$ by generators $\\bar S\\sqcup\\bar Q\\sqcup\\{r_i:i\\in I\\}\\sqcup\\{x,t,k\\}$ and the following relations for every $s\\in\\bar S$ and $i\\in I$:\n$$xs=sx^2,\\qquad r_i s=sxr_ix,$$\n$$r_i^{-1}(F_i^\\#q_{a(i)}G_i)r_i=H_i^\\#q_{b(i)}K_i,$$\n$$tr_i=r_it,\\qquad tx=xt,\\qquad kr_i=r_ik,\\qquad kx=xk,$$\n$$k(q^{-1}tq)=(q^{-1}tq)k.$$\nEach displayed equation $u=v$ means the relator $uv^{-1}$ in the free-group quotient of [[def-recursive-and-finite-group-presentations]]. Both the generating set and relator list are finite. There are no other defining equations, in particular none commuting state letters with $x$.\n\nA **special word** is the spelled word $\\Sigma=X^\\#q_jY$, where $X,Y\\in\\bar S^*$ are positive tape words (empty is allowed) and $q_j\\in\\bar Q$. Set $\\Sigma^*=Xq_jY$, a nonempty positive semigroup word, and\n$$W(\\Sigma)=k\\Sigma^{-1}t\\Sigma k^{-1}\\Sigma^{-1}t^{-1}\\Sigma.$$\nThe operation $\\#$ is on the tape words in this spelling, not on arbitrary elements of $\\mathcal B$. For empty tape contexts, $\\Sigma=q_j$ and $\\Sigma^*=q_j$.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ],
+          "application": "[F2] Sharp reverses each tape-letter sign in the same order; an inverse word reverses the whole order as well. ([[def-boone-group-presentation-and-special-word]])"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Applying the defining letter substitution to the two positions gives $(ab)^\\#=a^\\#b^\\#=a^{-1}b^{-1}$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "$a=s_0$ and $b=h$, distinct because $h$ is a new symbol."
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "The word $b^{-1}a^{-1}$ is the inverse spelling: $(ab)(b^{-1}a^{-1})$ cancels first $bb^{-1}$ and then $aa^{-1}$; the product in the other order cancels first $a^{-1}a$ and then $b^{-1}b$. Thus $(ab)^{-1}=b^{-1}a^{-1}$.",
+          "inputs": [
+            "F2",
+            "$a=s_0$ and $b=h$, distinct because $h$ is a new symbol."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The two outputs start with different symbols and neither has adjacent inverse pairs, so their reduced spellings differ. For a single tape letter the two operations agree, and both send the empty word to the empty word. The length-two instance displays why sharp cannot be replaced by word inversion; no inequality in an arbitrary quotient group is inferred from spelling alone.",
+          "inputs": [
+            "1.1",
+            "1.2",
+            "$a=s_0$ and $b=h$, distinct because $h$ is a new symbol."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 records that both operations fix the empty word."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "s_0 names the blank letter; the example performs no scalar-zero operation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 records agreement for a single tape letter."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Example chooses s_0 and the new h, guaranteeing distinct letters even with a one-symbol original tape alphabet."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 1.2 verifies cancellation in both concatenation orders; step 2.1 compares the first symbols."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Example specifies a=s_0 and b=h explicitly, so no choice of two letters is assumed."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example computes two operations rather than asserting an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example computes two operations rather than asserting an iff."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Rotman, Chapter 12, pp.430–431",
+          "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-13",
+        "notes": "Accepted: Verification 1.1–2.1 computes sign change in place and inverse spelling in both cancellation orders. The explicit symbols s_0,h are distinct even for a singleton machine tape alphabet. The two reduced length-two spellings differ, while empty and length-one cases agree. The example correctly limits the distinction to spellings and does not infer inequality in an arbitrary quotient. Its generated provenance is appropriate for this leaf calculation. Source convention checked at Rotman pp.430–431."
+      }
+    },
+    "ex-boone-halting-cleanup-through-an-empty-right-tape": {
+      "claim": "For any tape symbols $a,b\\in S$, including $a=b=s_0$, the augmented stopping configuration $h a q_0 b h$ has the cleanup\n$$h a q_0 b h\\longrightarrow h a q_0 h\\longrightarrow h q_0 h\\longrightarrow q.$$\nThe middle two words have empty right tape.",
+      "assumptions": "Tape symbols $a,b\\in S$ and the displayed stopping configuration. No reachability from a particular input is claimed.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-boone-machine-semigroup-and-augmented-configurations",
+          "source_section": "Definition",
+          "quote": "Let $T$ be the fixed machine of [[lem-normalized-fixed-halting-machine-for-boone-simulation]], with tape alphabet $S$, blank $s_0$, states $Q$, start $q_{\\rm start}$ and stop $q_0$. Take new, mutually distinct symbols $h,q$. Set $A=S\\sqcup Q\\sqcup\\{h,q\\}$. Words and concatenation have the convention of [[def-computation-alphabet-and-word-convention]]. On the nonempty words $A^+$ use the following equations, oriented as displayed:\n\n| Instruction of $T$ | Relations (for every $s_\\beta\\in S$) |\n|---|---|\n| write $s_k$, enter $q_b$, from $(q_a,s_j)$ | $q_a s_j=q_b s_k$ |\n| move right, enter $q_b$, from $(q_a,s_j)$ | $q_a s_j s_\\beta=s_jq_b s_\\beta$; $q_a s_jh=s_jq_b s_0h$ |\n| move left, enter $q_b$, from $(q_a,s_j)$ | $s_\\beta q_a s_j=q_b s_\\beta s_j$; $h q_a s_j=hq_b s_0s_j$ |\n\nAdd $q_0s=q_0$ and $s q_0h=q_0h$ for every $s\\in S$, and $h q_0h=q$. Erasure never ranges over $h$.\n\nAn elementary replacement substitutes either side of an equation for the other inside arbitrary contexts $u,v\\in A^*$. Write $a\\sim b$ when a finite sequence of such symmetric replacements joins them; the sequence of length zero is allowed. Define $\\Gamma=A^+/{\\sim}$ with multiplication $[a][b]=[ab]$, using the quotient-set convention of [[def-equivalence-relation]]. Its well-definedness is verified below.\n\nThe **augmented configurations** are $q$ and words $hUq_aVh$, where $U,V\\in S^*$, $q_a\\in Q$, and $V\\ne\\varepsilon$ unless $q_a=q_0$. The initial word is $C(w)=h q_{\\rm start}v(w)h$. The symbol $q$ has no outgoing oriented rule.\n\nFor subsequent algebra put $\\bar S=S\\sqcup\\{h\\}$ and $\\bar Q=Q\\sqcup\\{q\\}$. Index the finite relation list by $I$ and write each relation as\n$$F_i q_{a(i)}G_i=H_i q_{b(i)}K_i,$$\nwhere $F_i,G_i,H_i,K_i\\in\\bar S^*$, possibly empty, and both sides have exactly one state letter. This change of notation adds no erasure rule.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ],
+          "application": "[F1] Cleanup relations are $q_0s=q_0$, $s q_0h=q_0h$ for $s\\in S$, and $hq_0h=q$. Stopping configurations may have empty right tape. ([[def-boone-machine-semigroup-and-augmented-configurations]])"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Substitute $q_0b=q_0$ with prefix $ha$ and suffix $h$. The result is $haq_0h$, whose left tape is the one-letter word $a$ and whose right tape is empty. It is augmented because its state is $q_0$.",
+          "inputs": [
+            "F1",
+            "Tape symbols $a,b\\in S$ and the displayed stopping configuration. No reachability from a particular input is claimed."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Substitute $a q_0h=q_0h$ with prefix $h$. The result is $hq_0h$, with both tape contexts empty and the same stopping state.",
+          "inputs": [
+            "F1",
+            "1.1",
+            "Tape symbols $a,b\\in S$ and the displayed stopping configuration. No reachability from a particular input is claimed."
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Substitute $hq_0h=q$ with both contexts empty. This produces the terminal augmented word $q$. Each preceding word had one state and the two outer markers; this last rule removes the markers. The three substitutions remain valid for $a=b=s_0$, giving a concrete all-blank instance. Thus requiring nonempty right tape throughout cleanup would exclude the explicitly reached middle words.",
+          "inputs": [
+            "F1",
+            "2.1",
+            "Tape symbols $a,b\\in S$ and the displayed stopping configuration. No reachability from a particular input is claimed."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "steps 1.1 and 2.1 display the empty right tape and then both empty tapes."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "step 3.1 permits a=b=s_0, the all-blank instance."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 1.1 begins with one symbol on each side of q_0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 3.1 verifies the substitutions even when a and b coincide."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "step 3.1 removes the two outer markers only at the last cleanup step."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "step 3.1 supplies a=b=s_0 explicitly; arbitrary tape-letter choices are unnecessary for existence."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a forward cleanup trace, not an iff assertion or a reachability assertion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse to the displayed cleanup trace is claimed."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Rotman, Chapter 12, p.427, cleanup relations",
+          "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-13",
+        "notes": "Accepted: Verification 1.1–3.1 gives the exact contexts for right erasure, left erasure and final marker deletion. Both intermediate words are valid augmented stopping configurations with empty right tape. The trace remains valid when a=b=s_0, and no reachability from a selected input is assumed. This is a sound generated leaf example of the actual three cleanup relations, checked against Rotman p.427 and the local definition."
+      }
+    },
+    "ex-fixed-boone-undecidability-implies-uniform-undecidability": {
+      "claim": "Assume AC. Specialize a proposed uniform word-problem algorithm to the single Boone presentation $\\mathcal P_{\\mathcal B}$. This gives the impossible fixed-presentation decider\n$$D(z)=U(\\mathcal P_{\\mathcal B},z).$$\nConsequently no Turing-machine algorithm decides identity for every pair consisting of a finite presentation and a signed word in its generators.",
+      "assumptions": "A proposed algorithm $U$ which terminates and answers correctly on every valid pair $(\\mathcal P,z)$. Assume AC as in the theorem supplying the fixed instance.",
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-novikov-boone-undecidability-of-the-word-problem",
+          "source_section": "Statement",
+          "quote": "Assume AC. There exists a single finite presentation $\\mathcal P_{\\mathcal B}$ of a group $\\mathcal B$ whose word problem is undecidable: no Turing machine halts on every signed word over its fixed finite generating alphabet and correctly decides whether the word represents identity.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ],
+          "application": "[F1] There is one fixed finite presentation $\\mathcal P_{\\mathcal B}$ whose identity language is undecidable. ([[thm-novikov-boone-undecidability-of-the-word-problem]])"
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Hard-code the finite string describing $\\mathcal P_{\\mathcal B}$ in a wrapper machine. On input $z$ over its signed generating alphabet, the wrapper writes this constant string and the pair delimiter, copies $z$, and runs $U$. This explicitly computes $D(z)=U(\\mathcal P_{\\mathcal B},z)$; the preprocessor terminates because the prefix is fixed and $z$ is finite.",
+          "inputs": [
+            "F1",
+            "A proposed algorithm $U$ which terminates and answers correctly on every valid pair $(\\mathcal P,z)$. Assume AC as in the theorem supplying the fixed instance."
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Every such pair is a valid input for $U$, so $D$ halts on every $z$ and satisfies $D(z)=\\mathrm{yes}$ exactly when $z=1$ in $\\mathcal B$. For instance $D(\\varepsilon)=U(\\mathcal P_{\\mathcal B},\\varepsilon)=\\mathrm{yes}$, and $D(xx^{-1})=\\mathrm{yes}$ by cancellation. The claimed behavior for all words, rather than these two calculations alone, makes $D$ a decider forbidden by [F1]. Thus the proposed uniform algorithm cannot exist.",
+          "inputs": [
+            "F1",
+            "1.1",
+            "A proposed algorithm $U$ which terminates and answers correctly on every valid pair $(\\mathcal P,z)$. Assume AC as in the theorem supplying the fixed instance."
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "step 2.1 calculates D(epsilon)=yes."
+        },
+        {
+          "case": "zero",
+          "status": "not_applicable",
+          "reason": "There is no numerical zero parameter in this specialization of a decision procedure."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "step 2.1 calculates identity on x x^-1 and includes the identity represented by the empty word."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "step 1.1 hard-codes one fixed presentation; no variation in presentations is needed for the contradiction."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "Valid encoded presentation/word pairs form a discrete input domain without interval endpoints."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Statement assumes AC as inherited from the fixed-presentation theorem; step 1.1 fixes its supplied witness once."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "step 2.1 obtains yes implies z=1 from correctness of the proposed U."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "step 2.1 obtains z=1 implies yes from the same correctness, giving a forbidden total decider."
+        }
+      ],
+      "source_locators": [
+        {
+          "title": "Rotman, Chapter 12, p.431, Theorem 12.8",
+          "url": "https://math.uchicago.edu/~shmuel/lg-readings/Joseph%20J.%20Rotman%2C%20The%20Word%20Problem%20.pdf"
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "alpha-6b-f-13",
+        "notes": "Accepted: Verification 1.1–2.1 hard-codes the single finite presentation in a terminating wrapper. Correctness and totality of the proposed uniform algorithm on all valid pairs give a forbidden total fixed-presentation decider; the empty and cancellation-word computations are illustrations, not the logical basis of the contradiction. AC is expressly propagated in the statement, Given paragraph and contract from the cited theorem; the wrapper itself uses no new choice. The generated example remains a leaf. Rotman p.431 Theorem 12.8 supplies the stated fixed-instance context."
+      }
+    }
+  }
+}

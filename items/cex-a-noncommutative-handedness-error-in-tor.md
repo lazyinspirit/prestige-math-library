@@ -19,7 +19,7 @@ verification:
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
-    date: 2026-09-06
+    date: 2026-09-10
 ---
 
 ## Statement refuted

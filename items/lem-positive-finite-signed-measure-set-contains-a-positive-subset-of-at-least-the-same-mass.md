@@ -6,16 +6,17 @@ status: published
 origin: session
 provenance:
   statement: literature-derived
-  proof: ai-generated
-deps: [def-positive-negative-and-null-sets-for-a-signed-measure, lem-finite-signed-measure-sets-have-only-finite-subset-values, prop-finite-union-values-force-absolute-convergence-for-signed-measure-additivity]
+  proof: ai-altered
+deps: [def-positive-negative-and-null-sets-for-a-signed-measure, lem-finite-signed-measure-sets-have-only-finite-subset-values, prop-finite-union-values-force-absolute-convergence-for-signed-measure-additivity, def-axiom-of-choice]
 proof_strategy: direct
 verification:
-  audited: 2026-08-30
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
+  verified:
+    model: "gpt-6-astra"
     verdict: pass
-    date: 2026-08-30
+    date: 2026-09-09
+    scope: "Owner-authorized local defect repair; no independent judge or owner audit"
+    delegated_by: owner
 sources:
   references:
     - title: "John K. Hunter, Measure Theory, Lemma 6.17"
@@ -26,14 +27,14 @@ sources:
 
 ## Statement
 
-Let $\nu$ be a signed measure on $(X,\mathcal A)$ and let $A\in\mathcal A$
+Assume the Axiom of Choice. Let $\nu$ be a signed measure on $(X,\mathcal A)$ and let $A\in\mathcal A$
 satisfy $0<\nu(A)<+\infty$. Then there exists a positive set $P\subseteq A$
 such that
 $$\nu(P)\ge \nu(A).$$
 
 ## Facts & Assumptions
 
-**Given:** A signed measure $\nu$ and a measurable set $A$ with $0<\nu(A)<+\infty$.
+**Given:** A signed measure $\nu$, a measurable set $A$ with $0<\nu(A)<+\infty$, and the Axiom of Choice ([[def-axiom-of-choice]]).
 
 [L1] A measurable set is positive when every measurable subset has nonnegative signed measure. ([[def-positive-negative-and-null-sets-for-a-signed-measure]])
 
@@ -45,9 +46,9 @@ $$\nu(P)\ge \nu(A).$$
 
 **Proof technique:** direct.
 
-1.1 Define $R_1:=A$. If $R_n$ is not positive, choose a measurable subset $B_n\subseteq R_n$ with $\nu(B_n)<0$, set $$\delta_n:=\inf\{\nu(E):E\in\mathcal A,\ E\subseteq R_n\},$$ and choose $A_n\subseteq R_n$ so that either $$\delta_n\le\nu(A_n)\le \delta_n/2<0\qquad\text{when }\delta_n>-\infty,$$ or $$\nu(A_n)\le-n\qquad\text{when }\delta_n=-\infty.$$ If $R_n$ is positive, put $A_n=\varnothing$ and $\delta_n=0$. In every case define $R_{n+1}:=R_n\setminus A_n$. Then the $A_n$ are pairwise disjoint subsets of $A$ and each $\nu(A_n)\le0$. [L1, L2, choose]
+1.1 For each $n\ge1$ and measurable $R\subseteq A$, put $\delta(R)=\inf\{\nu(E):E\in\mathcal A,\ E\subseteq R\}$. If $R$ is positive, prescribe the subset $\varnothing$. Otherwise $\delta(R)<0$: if it is finite, the subsets $E\subseteq R$ with $\nu(E)\le\delta(R)/2$ form a nonempty family; if it is $-\infty$, use the nonempty family with $\nu(E)\le-n$. Apply AC to this set-indexed family of nonempty admissible-subset families to fix a selector $E(n,R)$. Define recursively $R_1=A$, $A_n=E(n,R_n)$, $\delta_n=\delta(R_n)$ and $R_{n+1}=R_n\setminus A_n$. The $A_n$ are pairwise disjoint, have finite nonpositive values by [L2], and satisfy $\delta_n\le\nu(A_n)\le\delta_n/2$ when $\delta_n$ is finite, and $\nu(A_n)\le-n$ otherwise. This selector is the precise use of AC; no minimal choice principle is asserted. [given, L1, L2, choose]
 
-2.1 Put $B:=\bigcup_{n\ge1} A_n$ and $P:=A\setminus B$. Because $B\subseteq A$, [L2] makes $\nu(B)$ finite, and [L3] makes the real series $\sum_{n\ge1} \nu(A_n)$ absolutely convergent. Since every nonzero term is nonpositive, only finitely many satisfy $\nu(A_n)\le-1$; therefore the $\delta_n=-\infty$ branch of step 1.1 occurs only finitely often. For all large $n$ one then has $\delta_n>-\infty$ and $$0\ge\delta_n\ge 2\nu(A_n).$$ Hence $\sum_{n\ge1} |\delta_n|$ converges by comparison with $2\sum_{n\ge1} |\nu(A_n)|$, so $\delta_n\to0$. [L2, L3, step 1.1]
+2.1 Put $B:=\bigcup_{n\ge1} A_n$ and $P:=A\setminus B$. Because $B\subseteq A$, [L2] makes $\nu(B)$ finite, and [L3] makes $\sum_{n\ge1}\nu(A_n)$ absolutely convergent. Thus $\nu(A_n)\to0$, and only finitely many terms satisfy $\nu(A_n)\le-1$. The $\delta_n=-\infty$ branch therefore occurs only finitely often. For some $n_0$ and every $n\ge n_0$, $\delta_n$ is finite and $0\ge\delta_n\ge2\nu(A_n)$. Comparison proves convergence of the tail $\sum_{n\ge n_0}|\delta_n|$, and in particular $\delta_n\to0$. No assertion about summing earlier infinite values is needed. [L2, L3, step 1.1]
 
 3.1 If $E\subseteq P$ is measurable, then $E\subseteq R_n$ for every $n$, so $\nu(E)\ge\delta_n$ by definition of $\delta_n$. Letting $n\to\infty$ in step 2.1 gives $\nu(E)\ge0$, so [L1] shows that $P$ is positive. [L1, step 1.1, step 2.1]
 

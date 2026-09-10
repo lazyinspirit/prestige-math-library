@@ -1,32 +1,35 @@
 ---
 id: thm-metric-continuity-characterisations
 kind: theorem
-title: "For a map of metric spaces the following agree: $\\varepsilon$-$\\delta$ continuity everywhere, preimages of open sets are open, preimages of closed sets are closed, sequential continuity, and $f(\\overline{A}) \\subseteq \\overline{f(A)}$"
+title: "Metric continuity characterisations, with countable choice for the sequential converse"
 status: published
 origin: session
 provenance:
   statement: ai-altered
-  proof: ai-generated
+  proof: ai-altered
 deps: [def-metric-continuity, def-metric-topology, thm-metric-sequential-closure,
        thm-metric-closure-characterisation, def-metric-convergence, def-countable-choice,
        def-metric-ball, thm-metric-open-set-algebra, def-metric-interior-closure-boundary,
        def-injection-surjection-bijection, def-metric-space, lem-rat-embeds-dense,
-       def-real-limit, def-complete-ordered-field, def-ordered-field]
+       def-real-limit, def-complete-ordered-field, def-ordered-field, def-axiom-of-choice]
 justified_by: []
 aliases: []
 landmark: true
-short: "four faces of continuity"
+short: "continuity characterisations"
 proof_strategy: direct
 verification:
   precheck: pass
-  judge:
-    model: z-ai/glm-5.2
+  verified:
+    model: gpt-6-astra
     verdict: pass
-    date: 2026-07-26
-  audited: 2026-07-26
+    date: 2026-09-09
+    scope: "Owner-authorized local choice-scope repair; targeted precheck/rendercheck. No independent judgment or whole-closure certification."
+    delegated_by: owner
 sources:
   scraped: []
   references:
+    - title: "J. Cichon, Some remarks about two definitions of continuity, Section 1, Definition 1 and following paragraph"
+      url: "https://cs.pwr.edu.pl/cichon/prace/Cont20020709.pdf"
     - title: "Continuous function (Wikipedia)"
       url: "https://en.wikipedia.org/wiki/Continuous_function"
     - title: "Sequential continuity (Wikipedia)"
@@ -44,8 +47,11 @@ pipeline_run: null
 
 Let $(X,d_X)$ and $(Y,d_Y)$ be metric spaces ([[def-metric-space]]) and let
 $f : X \to Y$ be a function, with images and preimages written $f[\,\cdot\,]$
-and $f^{-1}[\,\cdot\,]$ ([[def-injection-surjection-bijection]]). The following
-five statements are equivalent.
+and $f^{-1}[\,\cdot\,]$ ([[def-injection-surjection-bijection]]). Conditions
+(a), (b), (c), and (e) below are equivalent without choice, and each implies
+(d). Assuming Countable Choice ([[def-countable-choice]]), all five are
+equivalent. The authorized Axiom of Choice ([[def-axiom-of-choice]]) suffices;
+only its countable instance is used for the converse from (d).
 
 - **(a)** $f$ is continuous at every point of $X$ in the $\varepsilon$-$\delta$
   sense ([[def-metric-continuity]]).
@@ -66,7 +72,7 @@ the implication (a) $\Rightarrow$ (d) are choice free.
 
 ## Facts & Assumptions
 
-**Given:** Metric spaces $(X,d_X)$, $(Y,d_Y)$ and a function $f : X \to Y$; a point $a \in X$, a real $\varepsilon > 0$, subsets $A \subseteq X$, $V \subseteq Y$ open and $G \subseteq Y$ closed, and a sequence $(x_k)$ in $X$.
+**Given:** Metric spaces $(X,d_X)$, $(Y,d_Y)$ and a function $f : X \to Y$; a point $a \in X$, a real $\varepsilon > 0$, subsets $A \subseteq X$, $V \subseteq Y$ open and $G \subseteq Y$ closed, and a sequence $(x_k)$ in $X$. Assume Countable Choice for (d) implies (e), and hence for the five-way equivalence; the other stated implications require no choice.
 
 [A1] Continuity at $a$: for every real $\varepsilon > 0$ there is $\delta > 0$ with $f[B_X(a,\delta)] \subseteq B_Y(f(a),\varepsilon)$ ([[def-metric-continuity]], [[def-metric-ball]]).
 
@@ -76,7 +82,7 @@ the implication (a) $\Rightarrow$ (d) are choice free.
 
 [L2] Closure: $\overline{A}$ consists of the points every ball around which meets $A$; it is closed, contains $A$, and is contained in every closed superset of $A$ ([[def-metric-interior-closure-boundary]], [[thm-metric-closure-characterisation]]).
 
-[L3] Sequential description of the closure: $x \in \overline{A}$ if and only if some sequence in $A$ converges to $x$; the direction producing the sequence uses countable choice ([[thm-metric-sequential-closure]], [[def-countable-choice]]).
+[L3] Under Countable Choice, $x \in \overline{A}$ if and only if some sequence in $A$ converges to $x$; the direction producing the sequence uses countable choice, while the converse is choice free ([[thm-metric-sequential-closure]], [[def-countable-choice]]). AC supplies the needed indexed choices: choose from the family of nonempty sets and compose that choice function with the indexing map ([[def-axiom-of-choice]]).
 
 [L4] Convergence: $x_k \to x$ means that for every rational $\varepsilon > 0$ there is $K$ with $d_X(x_k,x) < \varepsilon$ for $k \ge K$, and producing such a $K$ for every REAL $\varepsilon > 0$ is equivalent, since below any positive real lies a positive rational ([[def-metric-convergence]], [[def-real-limit]], [[lem-rat-embeds-dense]]).
 
@@ -96,9 +102,9 @@ the implication (a) $\Rightarrow$ (d) are choice free.
 
 1.5 (a) implies (d): let $x_k \to x$ and let a real $\varepsilon > 0$ be given; continuity at $x$ supplies $\delta > 0$ with $f[B_X(x,\delta)] \subseteq B_Y(f(x),\varepsilon)$, and convergence supplies $K$ with $d_X(x_k,x) < \delta$, that is $x_k \in B_X(x,\delta)$, for all $k \ge K$; then $d_Y(f(x_k),f(x)) < \varepsilon$ for all $k \ge K$, so $f(x_k) \to f(x)$. [A1, L4, L5]
 
-1.6 (d) implies (e): let $A \subseteq X$ and let $y \in f[\overline{A}]$, say $y = f(x)$ with $x \in \overline{A}$; by [L3] there is a sequence $(a_k)$ in $A$ with $a_k \to x$, by (d) $f(a_k) \to f(x)$, and $f(a_k) \in f[A]$ for every $k$, so [L3] applied in $Y$ gives $f(x) \in \overline{f[A]}$. [L3]
+1.6 Assume Countable Choice. For (d) implies (e), let $A \subseteq X$ and $y \in f[\overline{A}]$, say $y=f(x)$ with $x\in\overline{A}$. Apply [L3] using Countable Choice (the countable instance of AC) to select a sequence $(a_k)$ in $A$ converging to $x$. This is the only use of choice in this proof. By (d), $f(a_k)\to f(x)$; since $f(a_k)\in f[A]$, the choice-free converse of [L3] gives $f(x)\in\overline{f[A]}$. [given, L3]
 
-2.1 Steps 1.1, 1.2, 1.3 and 1.4 close the cycle (a), (b), (c), (e), (a), so those four are equivalent; step 1.5 gives (a) implies (d) and step 1.6 gives (d) implies (e), which is one of the four, so (d) is equivalent to them as well; hence all five statements are equivalent. [step 1.1, step 1.2, step 1.3, step 1.4, step 1.5, step 1.6] ∎
+2.1 Steps 1.1–1.4 give the choice-free equivalence of (a), (b), (c), and (e); step 1.5 shows each implies (d) without choice. Under Countable Choice, step 1.6 closes the converse and all five conditions are equivalent. [step 1.1, step 1.2, step 1.3, step 1.4, step 1.5, step 1.6] ∎
 
 ## Remarks
 
@@ -106,8 +112,8 @@ the implication (a) $\Rightarrow$ (d) are choice free.
   what makes the metric $\varepsilon$-$\delta$ definition agree with it. Once (b)
   is available, continuity can be discussed without ever mentioning a metric,
   which is what the later topology pages do.
-- **(d) owes its strength to first countability.** Sequential continuity
-  implies continuity here only because metric spaces are first countable
+- **The sequential converse uses first countability and countable choice.**
+  The proof uses that metric spaces are first countable
   ([[lem-metric-ball-neighbourhood-base]]), which is what
   [[thm-metric-sequential-closure]] rests on. Nothing above should be read as
   saying that sequential continuity always suffices.

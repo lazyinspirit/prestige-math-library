@@ -16,6 +16,10 @@ provenance:
 verification:
   audited: 2026-09-06
   precheck: pass
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-10
 ---
 
 ## Statement

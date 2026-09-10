@@ -1,16 +1,76 @@
 # Phase 2: nine-step migration
 
-Current handoff, 2026-09-10: both impact gates now pass. The 5,483-row receipt
+Current handoff, 2026-09-10: Step 8 closed at 12:34:31 UTC and Step 9 is
+running. Contract/defect closure passed; mechanical pathway placement is next.
+The 85 impact rows closed without mathematical edits or new judgments.
+Receipt recovery supplied 39 missing reused Tor contracts, preserving all 58
+spine readings. Original attempts remain on disk; no budget reset occurred.
+Commit `5f94a2c8f` routes receipt recovery only to failed checks. Commit
+`ae8249173` recognizes Verification-preamble facts, separates context caches
+from judge ledgers, skips hashes for missing ledgers and drains large contract
+reports. Root regenerated three example citation/step maps and corrected stale
+boundary notes without item edits. All 731 contracts pass strict validation;
+2,370 citations have no missing quotes or widening candidates. Whole-level
+coverage, 38 dispatch regressions, 27 parser/terminal regressions and typechecking
+pass. Continue supervising Step 9; no new frontier or publication is authorized.
+The conditional-density example's deferral rationale is an owner-decision in
+the scope register, not a demonstrated defect in the current operator proofs.
+Controller session 46479 / PID 918002 remains the controller. Active run is
+`phase-2-nine-step-25`, covering only the authorized 25 pairs.
+
+Step 7 cleanup replaces early final handoffs and post-final repair stages with:
+`7-adjudicate` → `7-preflight` → `7-rejudge` (one paid sweep and one terminal
+FA pass) → `7-freeze` → Step 8. No `7-close` or `7-final` stage remains. Terminal
+FA cannot add items or edit suppliers; unresolved work stops. Retry cannot
+reset the terminal pass. Historical receipts and all paid-cycle records remain.
+128 focused workflow tests and typechecking pass.
+
+Preflight passed at 11:20:25 UTC. The seven-item rejudge already in flight when
+paused completed at 11:23:10: five accepts and two rejects (`def-metric-continuity`
+and `cex-separately-continuous-not-jointly-continuous`). At 11:31:31 UTC,
+recomputed closure dispatched those two contested published repairs (group h)
+and `thm-uniqueness-of-left-haar-measure-up-to-scale` (group e) for the single
+terminal adjudication pass. Live state has `paused: false`, `fixRounds: 1`;
+no further paid rejudge or repair wave is authorized by this stage.
+
+Group e accepted Haar. Group h repaired both items. The legacy alphabetical
+queue caused a supplier-context recording conflict; owner-authorized attempt 2
+verified the exact dependency delta and appended both current resolutions,
+preserving the frozen queue and old evidence. No mathematical items were edited
+by that recovery. Commit `ace0c8e6b` orders future queues dependency-first and
+validates inherited Step-5 history against the baseline while retaining separate
+current-edit licensing. 62 focused tests passed; the final targeted rerun of 52
+tests and typechecking also passed. All five terminal gates pass: 84/84 changes
+licensed, 25 current terminal resolutions, no rejudge debt, unadjudicated rows
+or open fatal findings. The automatic terminal budget remains 1; no Terra
+sweep was repeated. Both canonical published-defect entries are reconciled.
+Haar's licensed local repair now proves AC→DC directly using the earlier
+`thm-recursion`; its contract, manifest and plan are synchronized. No new pair
+or published-page reordering was needed. Its prior paid verdict remains on disk
+and must not be bought again.
+
+The published sphere-degree item's agent-added owner-audit date was replaced
+with an explicitly bounded supervising-session delegated review. Its fresh
+Terra verdict accepted the current text; canonical published-defect ledger
+records the verification correction without changing the A-R classification.
+
+Scope remains these 25 pairs only: no new frontier, publication or push.
+Independent published-proof pool repair remains suspended. Workflow status
+belongs here and in `.autopilot/`, never in the published-defect ledger.
+
+Pre-judging reconciliation: both impact gates passed. The 5,483-row receipt
 reconciles 666 current reviews, 4,764 unchanged historical consumers, 41 recorded
 subsequent repairs, two preserved debts and ten CW interface mappings. The
 post-5a window separately covers ten unchanged consumers of the circle repair.
 No new broad audit or scaffold is required. The owner explicitly directed
-moving to Step 6 judging; the engine is resumed for closure and judging.
+moving to Step 6 judging; that transition is complete.
 An unnecessary reharvest worker (81410) was stopped before rebuilding content:
 the failing Vivaldi URL was a connection reset and returned HTTP 200 on the
 operator's next request. Commit `68fea4956` routes such transport-only failures
 to outage waiting, not source retirement/reharvesting; all 37 dispatch tests pass.
-Current ledger totals: U-P1449, U-C8, A-R186, A-P150. No new pairs or publication.
+Current ledger totals: U-P1449, U-C8, A-R187, A-P150. The published Tor definition
+repair was added and the existing Tor-coherence repair evidence reconciled.
+No new pairs or publication.
 
 Owner request: install the local workflow rewrite, carry forward Step 6 fixes,
 retire the old engine and finish the existing 25 pairs. No new frontier or
@@ -20,8 +80,8 @@ Source branch: `workflow/group-author-nine-step` in
 `/home/lazyinspirit/Projects/workflow-rewrite-RzZro4`.
 Integration worktree: `/home/lazyinspirit/Projects/workflow-integration-20260910`.
 Old run: `phase-2-merged-25`; source runs are paused and inactive.
-The old controller is stopped. Its 760 items and 784 review obligations pass
-the old routing gate with zero errors. No judgment stage has started.
+The old controller is stopped. Its 760 items and 784 review obligations passed
+the old routing gate with zero errors before the new run's judgment stages.
 
 Pre-cutover bookkeeping correction: the detector defect was incorrectly
 attached to 21 accepted-item decisions. The reference is retained under

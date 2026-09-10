@@ -1,5 +1,16 @@
 # Commutative algebra — subject-track prose scaffold
 
+## Binding UC34 repair reconciliation — 2026-09-09
+
+`lem-flat-local-depth-formula-regular-sequence-split` now locally proves
+lifting regular elements and every intervening quotient's flatness, using
+graded pieces, Krull intersection and the ideal criterion under explicit AC.
+This supplies the missing clause for `cor-flat-local-depth-additivity`; that
+consumer remains pending its own proof/AC repair. Completion's CM equivalence
+is repaired with explicit AC and faithful-flatness use. All suppliers are
+published; no new pair. Exact dependencies are synchronized in the canonical
+plan; proof receipts and pending consumers are in the consumer ledger.
+
 ## Summary for the orchestrator
 
 **Commission and placement.** This is the sole scaffold for the
@@ -1362,6 +1373,36 @@ proofs are ZF; constructing an unbounded resolution is not needed here.
 
 ### CA-16M. Koszul Euler characteristics and Hilbert–Samuel multiplicity — U-C19 addition
 
+Step5 dependency synchronization (2026-09-09): the completed batch7 manifest
+and canonical plan explicitly include coefficient Koszul-complex definitions,
+length additivity, Noetherian finite-module finiteness and the degree-indexed
+multiplicity convention wherever the authored arguments use them. See
+`phase-2-catchup-24-step5-dependency-reconciliation.md`. These are eleven
+edges across six items, not new pages or published-consumer repairs. Step6
+review and supplier publication remain pending.
+
+Binding Step-3 amendment, 2026-09-09: the synchronized inventory has 7 A
+and 3 B items and also requires `prime-spectra-and-radicals`. Replace the
+three inherited example-page edges by their A companions: Koszul complexes
+requires Zariski topology; Zariski topology requires Henselian/Cohen structure;
+that page requires inverse limits/completion. No example item supplies these
+proofs. Canonical page edges now implement these previously authorized repairs.
+
+Prepend `lem-module-relative-hilbert-samuel-polynomial-for-koszul-comparison`.
+For finite M over Noetherian local R and length(M/IM) finite, prove eventual
+polynomiality of length(M/I^(n+1)M), with zero polynomial for I=R or M=0.
+Reduce the associated graded module to the finite-length coefficient ring
+R/m^c, where a composition series gives m^c(M/IM)=0. Induct on the number
+of ideal generators using the kernel/cokernel of multiplication by the last
+variable; Noetherianity makes that kernel finite. Length additivity gives
+Hilbert-series rationality; cumulative coefficients are eventual binomial
+polynomials. Do not import a support-dimension theorem or the defective
+published Hilbert–Serre proof. Exact dependencies and the expanded finite
+generation argument are in the synchronized canonical item. Sources:
+Stacks 10.58.7 and 10.59.5, https://stacks.math.columbia.edu/tag/00JV and
+https://stacks.math.columbia.edu/tag/00K4. Subsequent definition and comparison
+contracts use this local lemma rather than the old general polynomial item.
+
 A/B IDs: `koszul-euler-characteristics-and-hilbert-samuel-multiplicity` and `koszul-euler-characteristics-and-hilbert-samuel-multiplicity-examples`, at 365.9021/365.9022. Both are new waiting Phase-2 pages; no published page receives draft items. Requires: `koszul-complexes-and-regular-sequences`, `chain-conditions-and-semisimple-modules`, `rees-modules-artin-rees-and-hilbert-samuel-theory`, `localisation-of-modules-and-support`, `relations-functions-and-quotients`, `long-exact-sequences-in-homology`, `noetherian-rings-and-hilbert-basis`, `valuation-rings-and-discrete-valuation-rings`. AC is available for the inherited Nakayama and finite-module inputs, with exact uses stated in proofs.
 
 This supplies `thm-multiplicity-under-reduction-by-a-parameter`, whose current proof remains pending Phase 3. Its superficial-regular-parameter alternative in CA-11 is strictly weaker. The prose-only CA-11 heading `graded-rees-artin-rees-and-hilbert-samuel` maps to canonical published `rees-modules-artin-rees-and-hilbert-samuel-theory`; do not add a backward Koszul prerequisite to that page. At Phase 3, relocate the repaired consumer after this bridge and reconcile its consumers and page headers; do not modify current published content merely to claim closure.
@@ -1482,7 +1523,31 @@ Ext long exact sequences prove the depth lemma and one-step quotient formula;
 prime avoidance produces regular elements until the first nonzero Ext.
 Induction along systems of parameters compares the one-step drops in depth and
 dimension.  The flat-local formula combines faithful flatness with the closed
-fibre sequence.  Dimension of a module always means dimension of its support;
+fibre sequence. For the Phase-3 repairs of `cor-flat-local-depth-additivity` and
+`lem-flat-local-depth-formula-regular-sequence-split`, prove the fibre-lifting
+lemma locally rather than cite an unspecified local flatness criterion.
+For flat local Noetherian R to S, fibre-regular y acts injectively on the
+m-adic graded pieces, then on every S/m^nS, then on S by Krull intersection.
+Repeat after base change R to R/I. The resulting injectivity on S/IS shows
+IS/yIS injects into S/yS; tensor right exactness and the ideal criterion make
+S/yS R-flat. Iterate for regular sequences. Existing published Krull,
+tensor-exactness and flatness-criterion items supply this bounded argument;
+check their interfaces and declare inherited AC. Stacks Tag 00ME is the
+source comparison. No extra Phase-2 pair is required for this gap; the
+separate dimension formula is not supplied by the depth argument.
+
+For `cor-flat-local-cohen-macaulay-fibre-criterion`, also prove dimension
+additivity locally: base parameters plus lifted fibre parameters generate
+an ideal with maximal radical, giving the upper bound by
+`thm-dimension-as-minimal-number-of-radical-generators`; extend a maximal
+fibre prime chain down a maximal base chain using `thm-flat-going-down`
+for the lower bound. Noetherian local dimensions are finite by the height
+theorem. Declare AC for prime lifting. Stacks Tag 00ON supplies the source
+comparison. Repair depth additivity first, then use depth<=dimension to
+deduce the CM equivalence. No extra Phase-2 pair is needed for this local
+dimension argument; publication of the current inputs alone is not the repair.
+
+Dimension of a module always means dimension of its support;
 the zero/infinity conventions are fixed in the definitions.  Given finite
 sequences and resolutions, the arguments are ZF; associated-prime/maximal-ideal
 steps inherit AC/DC exactly from CA-5.
@@ -1560,6 +1625,150 @@ existence.
 | `ex-cusp-local-ring-not-regular` | `ex` | Compute dimension and cotangent-space dimension at the cusp. | L/A; Huneke/Stone CA II Ch. 1. |
 | `ex-betti-numbers-from-a-koszul-resolution` | `ex` | Read Betti numbers and projective dimension from a Koszul resolution. | L/A; Mustaţă 12.27--12.30. |
 | `ex-residue-field-infinite-projective-dimension-singular` | `ex` | Use Auslander--Buchsbaum--Serre to prove the residue field of a singular local ring has infinite projective dimension. | L/A; Mustaţă 12.33. |
+
+#### Retained Tor harvest enrichment at CA16 and CA18 — 2026-09-09
+
+These are exact future proof/authoring obligations on existing later pages,
+not claims that the published text already contains them. No current24 item,
+new live pair, or current-run prerequisite is added. Root owns canonical
+scope reconciliation. Preserve the existing 60 A items at CA18 by extending
+the existing `lem-global-dimension-is-detected-on-cyclic-modules` contract,
+not adding a 61st item. The lemma already states its global-dimension clause
+for arbitrary unital rings; keep that scope and its original injective-
+dimension equality, rather than silently restricting the new clauses to
+commutative rings. All added statements are literature-derived, with proposed
+ai-altered proofs. Sources are Weibel 3.2.4–3.2.7, pp.69–71 and
+4.1.3–4.1.11, pp.92–95, read in full from
+https://math.mit.edu/~hrm/palestine/weibel/03-tor_and_ext.pdf and
+https://math.mit.edu/~hrm/palestine/weibel/04-homological_dimension.pdf .
+
+**CA16 B, `koszul-complexes-and-regular-sequences-examples` (365.902).**
+Enrich the existing `ex-koszul-complex-polynomial-variables` with the complete
+Sharifi Example 3.5.13 counterexample, explicitly R=Q[x,y], J=(x,y),
+Q=R/J. Prove the kernel of (a,b)↦ax+by is R(y,−x): reducing modulo x
+gives by=0 in Q[y], so b=xc and a=−yc. Thus
+0→R→R²→R→Q→0 is a free resolution. Tensoring with Q makes both
+differentials zero and gives Tor_2^R(Q,Q)=Q; the LES of
+0→J→R→Q→0 gives Tor_1^R(J,Q)=Q. Hence J is nonflat but torsion-free,
+being a submodule of the domain R. The same proof over every field k is
+Weibel Exercise 3.2.3. Keep the explicit Q specialization, the complete
+resolution and nonflatness witness. Use existing earlier Tor LES and the
+Koszul coefficient formulas; no arbitrary-flat-resolution theorem is needed.
+Ordinary Tor interpretation inherits the actual resolution choice contracts;
+the displayed finite free calculation is choice-free. Source: Sharifi,
+https://math.ucla.edu/~sharifi/homalg.pdf , Example 3.5.13, printed p.76.
+No new CA16 B item is needed: the current twelve-item inventory is retained.
+
+**CA18 A, `regular-local-rings-and-homological-dimension` (365.905).**
+The future expanded `lem-global-dimension-is-detected-on-cyclic-modules`
+must contain the following separately numbered clauses and proofs before
+any consumer is allowed to use the new interfaces:
+
+1. Original clause: left global dimension is the supremum of pd(R/I) over
+   left ideals I and of injective dimensions of left modules; include the
+   right-handed statement over the opposite ring. Keep the existing Baer/
+   injective-cosyzygy proof and its AC existence hypotheses.
+2. Choice-free algebra clause: for arbitrary unital R, a left module M is
+   flat iff I⊗_R M→M is injective for every right ideal I; equivalently,
+   test only finitely generated right ideals. State the right-module dual.
+3. Choice-free finite-presentation clause: every finitely presented flat
+   left or right R-module is projective, with no Noetherian hypothesis.
+4. Under AC, the suprema of fd(R/I) over left ideals, fd(R/J) over right
+   ideals, flat dimensions of all left modules, flat dimensions of all right
+   modules, and nonvanishing Tor degrees agree, allowing infinity. This is
+   Weibel 4.1.3 with neither handedness discarded.
+5. Under AC, for a right-Noetherian ring R (every right ideal is finitely
+   generated as a right module), every finitely generated right
+   module M has fd_R M=pd_R M, and right global dimension equals weak
+   dimension. For left-Noetherian R give the sided dual. Consequently, if R
+   is both left and right Noetherian its two global dimensions agree.
+   This retains Weibel 4.1.5 and Exercise 4.1.1 without a commutative
+   narrowing. Exercises 4.1.2–4.1.3 have their distinct exact-sequence and
+   sum/restriction destinations on `derived-categories-examples`, not here.
+
+**Complete local proof for clauses 2–3, fixing the missing arbitrary-ring
+interfaces.** The existing published
+`thm-flatness-criteria-by-injections-and-ideals` and
+`thm-right-exactness-of-tensor-products` are commutative-only. They may
+motivate this argument but cannot supply these statements. Instead use
+`def-tensor-product-of-modules-by-generators-and-relations` (explicitly right
+times left over arbitrary R), `def-left-and-right-flat-modules-over-an-arbitrary-ring`,
+and the arbitrary-ring `thm-unit-isomorphisms-for-module-tensor-products`.
+The following elementary arguments are part of this future A proof, not a
+request to assume an absent lemma:
+
+- Tensor right exactness on right modules: for L⊆E, the maps
+  (e+L)⊗m↦[e⊗m] and [e⊗m]↦(e+L)⊗m give inverse additive
+  isomorphisms (E/L)⊗M≅(E⊗M)/image(L⊗M). Well-definedness follows
+  from the additive/balance relations and independence of the representative
+  e. Surjectivity follows because tensors are finite sums. Thus any exact
+  sequence ending in a cokernel remains right exact. This argument uses
+  quotients of abelian groups, not an unavailable R-module action on tensor.
+  Also R_right^n⊗M≅M^n by the explicit coordinate maps and their inverse
+  (m_i)↦sum e_i⊗m_i.
+- Ideal test implies submodule test in finite free modules by induction.
+  For L⊆R_right^n put L'=L∩(R⊕0) and L''=image(L→R^(n−1)).
+  In the right-exact tensor diagram from L'→L→L''→0 and
+  R→R^n→R^(n−1)→0, a tensor in L killed below has zero image in
+  L''⊗M by induction; lift it from L'⊗M. Its image in R⊗M is zero
+  since R⊗M→R^n⊗M is the split coordinate inclusion, and injectivity
+  for the right ideal L' kills that lift. Include n=0 and n=1.
+- For an injection A⊆B and a tensor z∈A⊗M killed in B⊗M, a finite
+  expression for z and a finite derivation of its zero image use only
+  finitely many elements of B. Let B0 be the right submodule they generate,
+  and A0⊆A∩B0 the right submodule generated by the coefficients of z.
+  Choose finitely many generators to give R_right^n→B0, with kernel L
+  and inverse image L' of A0. The previous bullet embeds both L⊗M and
+  L'⊗M in R^n⊗M. The quotient description identifies A0⊗M with
+  (L'⊗M)/image(L⊗M), so its map to B0⊗M is injective; z is zero.
+  This proves flatness. Conversely flatness tests all ideal inclusions.
+  Testing only finitely generated ideals suffices because a particular
+  ideal tensor comes from the right ideal generated by its finitely many
+  coefficients. No infinite selections or commutation of coefficients occur.
+- For clause 3 first treat a left module M with a finite presentation by
+  generators m_1,...,m_n and relations sum_i a_ji m_i=0, j=1,...,s.
+  Define the **right-linear** map A:R_right^n→R_right^s by
+  A(e_i)=sum_j e_j a_ji, and put L=ker A. Flatness and the preceding
+  right-exactness argument identify ker(A⊗M) with image(L⊗M).
+  Hence the tuple (m_i), which belongs to that kernel, can be written
+  m_i=sum_t b_it z_t for finitely many z_t∈M, where each column
+  (b_it)_i belongs to L, so sum_i a_ji b_it=0 for every j,t.
+  Lift the finitely many z_t to elements z'_t in the presenting free left
+  module E=R_left^n. Put u_i=sum_t b_it z'_t. Then u_i maps to m_i
+  and every defining relation sum_i a_ji u_i is zero. Therefore m_i↦u_i
+  descends to a section M→E of E→M. A finite free module is projective
+  by lifting finitely many basis images through an epimorphism; a summand
+  is projective by composing a lift with the inclusion and projection.
+  This proves the claim without arbitrary-basis choice. Apply it to R^op
+  for right modules. Empty generator/relation lists cause no exception.
+
+**Proof of clauses 4–5.** The LES identifies Tor_1(R/J,M) with the
+kernel of J⊗M→M; combine with clause 2. If fd(R/J)≤d for all right
+ideals J, take d steps of a free resolution of any left M. Dimension
+shifting makes Tor_1(R/J,K_d)=0 for its dth syzygy, so K_d is flat.
+Thus every left module has flat dimension ≤d. Exchange sides and use the
+existing Tor-degree detection to obtain all five equalities. For d=0 take
+K_0=M; infinity is handled by testing each finite bound.
+
+For a right-Noetherian ring, every right submodule of R^n is finitely
+generated: induct on n using its intersection with the first coordinate
+and projected image, then lift a finite generating list of the latter and
+adjoin generators of the former. Consequently finite modules admit finite
+free presentation and successive finitely generated syzygies. If fd M=d
+is finite, the dth syzygy of such a free resolution is flat by the Tor
+dimension-shift criterion and finitely presented by the same Noetherian
+argument. Clause 3 makes it projective, so pd M≤d; the reverse inequality
+is projective⇒flat. If fd M=infinity equality follows from fd≤pd.
+Apply clause 1 to cyclic right modules and clause 4 to compare the ring
+dimensions. Repeat for the opposite ring to get Exercise 4.1.1. AC supplies
+arbitrary resolutions and the injective/Baer route of clause 1; the finite
+algebra in clauses 2–3 and finite Noetherian syzygy induction uses only
+finite choices. Do not claim that AC is logically necessary for the results.
+
+This closes the previously untyped ideal-test and finitely-presented-flat
+proof obligations as proposed future local arguments. Their authoring and
+independent review are still owed. It does not certify unchanged published
+proofs or introduce these strengthened clauses into a current24 proof.
 
 ---
 

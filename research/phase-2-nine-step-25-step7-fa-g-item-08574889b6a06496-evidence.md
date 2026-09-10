@@ -1,0 +1,47 @@
+# FA terminal evidence — group g, queue position 1 of 1
+
+Item: `def-effective-interpretation-and-proof-translation`.
+Run: `phase-2-nine-step-25`. Decision: **repaired**. Source status: **familiar**.
+
+## Independent mathematical decision
+
+The Step-6 Terra rejection (context `c103666b1a9372103a0449c7e814e74bde4bf7ed11c1672cbf71d51f6615b50f`) correctly found that mere total primitive recursiveness did not express correctness of a proof translation. Sol's `confirmed_fatal` adjudication is in `research/phase-2-nine-step-25-judge-adjudications.jsonl`, with its repair rationale in the item's section of `research/phase-2-nine-step-25-alpha-step7-g.md`. Sol added the guarded source-proof to target-proof correctness condition. The once-only Terra rejudge (context `9f56b0988b00533673beaf8b1006c8b5d2cfb7724d1739edf08259ce1a528536`, 2026-09-10T08:07:47.520Z) rejected the missing effective signature and numerical coding hypotheses. Both exact verdict rows were read from `research/phase-2-nine-step-25-judge.jsonl`; neither is overwritten.
+
+I uphold the substance of the rejudge: the opening abstract sentence theories can have arbitrary set signatures. A later appeal to primitive-recursive proof checking must explicitly enter the fixed effective-signature and sentinel-code setting of that lemma. Sol's correctness repair is retained and made fully numerical. This is a definition, with no Proof section to certify; the decision concerns completeness and coherence of its specified data, not a newly asserted theorem about every abstract interpretation.
+
+The abstract layer retains nonempty D, equivalence E on D, relation and graph congruence, totality and uniqueness modulo E, and translated sentence axioms. The term-value construction is coherent: under domain guards variable values exist by E-reflexivity, function values by graph totality, and equality of values is modulo E, requiring no representative selection. Boolean and existential translation uses fresh variables. Empty guards and nullary functions remain covered. The surrounding transport lemma uses exactly these obligations in its term/formula induction, logical schemes and three inference rules. Its contradiction is the fixed sentence exists v0 not(v0=v0), not an unspecified arithmetic 0=1. These conventions are preserved.
+
+The numerical layers now fix independently for S and T effective countable finite-arity signatures with primitive-recursive symbol/arity tests, primitive-recursive axiom-certificate predicates, and the existing sentinel list coding. The new direct citation to `def-effective-theory-and-certified-godel-numbering` supplies these data; it was already a transitive prerequisite through `lem-primitive-recursive-syntax-and-proof-checking`. Certified proofs carry witnesses at nonlogical axiom lines, so no decidable axiom-membership assumption is introduced. The checking lemma's statement and complete proof supply recognition, substitution and certified checking for precisely these fixed presentations, rejecting malformed inputs.
+
+Effective interpretation formulas and obligation certificates are supplied uniformly on symbol codes; axiom translation certificates are supplied on certified source axioms. Guard order and fresh-variable conventions fix an actual translation code. The stronger formalized layer supplies total PR maps t (guarded formulas) and r (proofs), with specified arithmetic representations. It requires B proofs of totality and uniqueness of the graphs and the universal correctness formula Prf_S(p,a) implies Prf_T(r(p),t(a)). The text also expands this using graph variables, avoiding an undeclared function-symbol extension of B. t has default 0 on nonformulas; invalid proof inputs impose no correctness obligation on r.
+
+The contradiction block is separately supplied and verified in B. Its appending/explosion map c has a chosen graph with B-proved totality and uniqueness, and maps target proofs of t(b_S) to target proofs of b_T. Thus, within B, a source contradiction certificate p gives r(p), then c(r(p)), a target contradiction certificate. This elementary composition exactly matches the hypothesis used by `thm-formal-relative-consistency-from-verified-proof-reduction`. External effectiveness, PR totality, and uniform verification inside B are not conflated. No representation-existence theorem or proof of totality in an arbitrary weak B is claimed: the functions, representations and verifications are required input data.
+
+## Material inspected and source assessment
+
+Read `CLAUDE.md`, `README.md`, `SCHEMA.md`, `WORKFLOW.md` and the exact dispatch queue before repair. Read the current item, the complete definitions in `items/def-set-coded-formal-derivation.md` and `items/def-effective-theory-and-certified-godel-numbering.md`, and the complete statement/facts/proof in `items/lem-primitive-recursive-syntax-and-proof-checking.md`. Read the complete transport argument in `items/lem-interpretation-translates-finite-derivations.md` and the formal consistency-transfer statement/facts/proof in `items/thm-formal-relative-consistency-from-verified-proof-reduction.md`.
+
+Read both A/B pages `library/foundations/arithmetization-incompleteness-and-relative-consistency{,-examples}.md`; the item's manifest entry, proof contract including all boundary cases and risk review, and its coverage/source notes in the owning `research/phase-2-nine-step-25-batch-14.*` artifacts. The A page explicitly constructs certified syntax first and distinguishes external arguments from verified internal reductions. The B page retains external consistency hypotheses. The old risk review correctly protects domain guards and no-choice semantics but does not discharge the missing numerical presentation condition. Its historical text is preserved, with a separate FA review added.
+
+The mathematics used here—finite syntax coding interfaces, specified functional graphs, and first-order composition of universally verified reductions—is familiar to me and required no external verification. I did not browse or claim to reread the literature references listed in the items. This receipt relies on the complete local interfaces and the explicit logical argument above, not on search snippets or an uninspected source attribution.
+
+## Scope and consumer-batch reconciliation
+
+Only the queued mathematical item was edited. Its owning batch-14 manifest, its own entries in the batch and merged proof contracts, and its own coverage note were reconciled. Original independent reviews were retained. No existing dependency item, published item, other group's item, page inventory, or Step-7 scope inventory was edited. There is no missing lemma: the existing certified-numbering definition supplies the missing hypothesis. Consequently no owner-prerequisite-repair licence or new-lemma judgment is needed.
+
+Following `briefs/tasks/frontier-dependency-ledger.md`, revalidated and atomically rewrote the owning input `research/phase-2-nine-step-25-batch-14.cross-batch-dependencies.json` as `[]`, then refreshed the unified ledger through its tool. The additional direct supplier and proof-checking supplier are both on this same batch's A page before the consumer; the formal-calculus supplier is published, outside the run-local cross-batch census. Batch 14 has no cross-batch consumer edge, so adding a same-batch review row would be an orphaned review. The unchanged empty array is the correct current consumer-batch record. The shared brief and unified ledger were not edited by hand.
+
+## Focused checks and completion
+
+- `node tools/tsx-run.mjs tools/precheck.mts items/def-effective-interpretation-and-proof-translation.md`: exit 0, **0 checked, 0 failing**; definitions have no proof-bearing section, so this is not a proof pass.
+- `node tools/proof-contract.mjs research/phase-2-nine-step-25-batch-14.proof-contracts.json --items def-effective-interpretation-and-proof-translation --strict`: exit 0, 0 errors, 0 warnings, 1/1 checked.
+- The same focused strict command against `research/phase-2-nine-step-25-proof-contracts.json`: exit 0, 0 errors, 0 warnings, 1/1 checked.
+- `node tools/rendercheck.mjs items/def-effective-interpretation-and-proof-translation.md`: exit 0, one file; actual KaTeX math and renderer YAML parse successfully.
+- `node tools/frontier-dependency-ledger.mjs refresh --run phase-2-nine-step-25`: exit 0, refreshed and deduplicated.
+- Focused inspection through the ledger's `collect` function and batch manifest: all declared suppliers resolve; run-local suppliers precede this consumer; batch 14 has no cross-batch edges or orphaned reviews. The added edge shortcuts an existing prerequisite path and cannot introduce a cycle.
+
+Final `itemHashGuard`: `1a1f17287f7991832b27da87f393280b9a97a16e011c81f5d031e77420afe788`.
+
+No mathematical uncertainty or missing dependency remains for this queued definition. No third consumer judgment was requested and no pass stamp was created. Next action: record disposition `repaired`, source status `familiar`, with the authorized terminal-resolution recorder; the engine and owning Alpha retain subsequent workflow closure duties.
+
+Recorder completion: the authorized `record` command exited 0 and recorded this item at context `e783fc459ecd79a1341a1259913b5015f3bf0b732f92f665ae7787a3ff77f6e2` in `research/phase-2-nine-step-25-step7-terminal-resolutions.jsonl`. The one-item FA queue is complete. Next action belongs to the engine/owning Alpha; no further FA edit is pending.

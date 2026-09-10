@@ -1,5 +1,32 @@
 # Measure theory track — measure, integration, differentiation, duality, and ergodic theory
 
+## Binding UC34 repair reconciliation — 2026-09-09
+
+Published Lebesgue decomposition and RN density proofs now explicitly assume
+AC. The decomposition supplies null-normalized finite densities, annular
+assembly, one finite global Jordan sign and finite-piece L1. RN uniqueness
+subtracts only after finite-piece integrability is established. Use these
+precise contracts and propagate AC to consumers; do not subtract undefined
+infinite signed integrals. All suppliers are published; no new pair is needed.
+Hahn decomposition and its positive-subset supplier now state their AC
+selections; Jordan existence inherits AC. Uniqueness for given decompositions
+and canonical Hahn/Jordan data for a supplied real L1 density remain
+choice-free. Complex RN existence, measure classification, finite Lp duality,
+RN chain/additivity/reciprocal rules, polar decomposition and Borel-measure
+differentiation have separate completed local repairs. Vitali's finite and
+given-countable geometric clauses are choice-free; its measure estimate
+states countable choice. The maximal inequality uses the family of all
+witness balls, not an unstated simultaneous radius selection. None of these
+bounded audits certifies the whole closure. Exact receipts, hashes, remaining
+consumer candidates and states are in `published-consumer-supplier-ledger.md`.
+
+The published L1 change-of-variables corollary now constructs its Borel
+extension locally: identify continuous compact-support Riemann/Lebesgue
+integrals by Darboux sums, approximate rational boxes, apply pi-lambda to
+finite localized measures, then complete null sets and pass to L1. Countable
+choice is explicit. No later PDE Radon bridge or defective nonnegative
+substitution theorem is consumed; its separate published proof remains debt.
+
 Prose scaffold, owner-commissioned 2026-08-13 (run `subjects-01`, track
 `measure-theory`, wave 1). Machine-readable half: `research/plan-spec.json`.
 Seam contract: `research/subjects-01-SEAMS.md`, which outranks this file on every
@@ -4539,6 +4566,15 @@ $\{0,1\}^{\mathbb{N}}$.
 
 ## MT-23. The Ergodic Theorems of von Neumann and Birkhoff
 
+**Phase-2 reconciliation, 2026-09-09.** This full pair remains in future
+Phase 2, including the general nonergodic/sigma-finite theorem
+`thm-birkhoff-ergodic-theorem` and the complete inventory below. The owner
+rejected adding it to the current 24-pair run. PT-6 now supplies its own
+finite-probability maximal lemma and ergodic Birkhoff specialization from
+MT-21a and published integration, so its IID agreement proof no longer
+consumes the unbuilt general theorem. PT-17's general stationary-process
+interface still requires this full programme. No mathematics is dropped.
+
 `requires`: MT-22, MT-14, MT-10, MT-13, MT-8, `sequences-and-limits`,
 `approximation-and-compactness-in-ck`
 
@@ -4627,8 +4663,10 @@ explicitly.
 **Traps.** (i) Birkhoff's limit is **not** a constant unless $T$ is ergodic; the
 non-ergodic statement is the one to prove, with the ergodic case as a corollary.
 (ii) The maximal ergodic theorem's set is defined by $\sup_{n\ge1}S_nf>0$, strictly,
-and with $S_n$ **not** normalised by $n$; the normalised version is a different (and
-false) statement. (iii) Garsia's proof needs $f\in\mathcal{L}^1$ real-valued; the
+and uses the unnormalised partial sums in its finite proof. The positivity
+set is unchanged if $S_n$ is replaced by $A_n=S_n/n$, since $n>0$; do not
+mistakenly call that equivalent set formulation false.
+(iii) Garsia's proof needs $f\in\mathcal{L}^1$ real-valued; the
 complex case is by parts. (iv) Do not identify the limit as a "conditional
 expectation" — that vocabulary belongs to `probability-theory` (§8 amendment 3f); the
 characterising property is stated instead and is complete. (v) Unique ergodicity is a
@@ -4699,3 +4737,10 @@ Delete the placement-only page edge `sigma-algebras-and-borel-sets` ->
 `stone-weierstrass-general-examples`. No Measure Theory item consumes that
 Topology B page, so no replacement edge is required. This Phase-3 page repair
 has zero item-level impact and creates no MT Phase-2 root.
+# Step-5 dependency synchronization, 2026-09-09
+
+Completed batch1's measure-preserving items now explicitly declare their
+measure-completion, integer-part/Archimedean, subadditivity, integral-linearity
+and complex-Lp suppliers. The canonical plan matches the authored manifest;
+see `phase-2-catchup-24-step5-dependency-reconciliation.md`. No pair is added
+and authored drafts still await Step6. Existing published consumer debt remains.

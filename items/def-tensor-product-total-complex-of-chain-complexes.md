@@ -13,6 +13,10 @@ sources:
 verification:
   audited: 2026-09-07
   precheck: n/a
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-10
 provenance:
   statement: literature-derived
   proof: not-applicable

@@ -3123,6 +3123,15 @@ uses only the already-published raw machine/configuration/one-step items on the
 Turing-machine A page and the earlier boundary interface; it does not consume
 the old draft stay-put theorem.
 
+Step-5 dependency reconciliation (2026-09-09): the explicit simulation theorem
+also declares `lem-nat-add-successor-left`, `lem-nat-add-identity`, and
+`lem-nat-discrete` for its macro-time identities and interval partition.
+These already-published arithmetic suppliers are synchronized in the canonical
+plan and authored manifest. All five scoped items are authored drafts awaiting
+Step 6; no pair or published-proof repair is added.
+
+Source reconciliation (2026-09-09): the current 24-pair run retains Checkoway and Savage as active backing. UNSW Lecture7's persistent HTTP403 and failed alternate/archival recovery have a documented source drop, preserving its historical record and every selected result. The complete tagged right-left macro, finite-support and macro-time proofs are local and require no new pair. Independent Step3 still judges the mathematics.
+
 #### Effective numberings, reductions, resources, and randomness
 
 ```yaml

@@ -1,5 +1,17 @@
 # Algebraic geometry track — classical varieties, schemes, sheaves, curves, and blowups
 
+## Binding UC34 repair reconciliation — 2026-09-09
+
+`def-base-change-classical-varieties` is now explicitly conditional on a
+pullback in a fixed category and uses the published categorical definition.
+It asserts no product existence and no longer consumes the defective product
+chain; remove it from active AV-1 construction debt. Segre–Veronese remains
+pending: rewire the old affine/product interfaces to AV-1's now-published
+classical affine definitions and coordinate-ring antiequivalences, then
+revalidate projective products and multihomogeneous maps. No new pair is
+needed. Keep empty/reducible category boundaries explicit. Exact item
+receipts and remaining edges are in the canonical consumer ledger.
+
 ## UC-73 reconciliation — 2026-09-08
 
 The canonical `published-consumer-supplier-ledger.md` classification index and

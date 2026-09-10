@@ -6,28 +6,33 @@ status: published
 origin: pipeline
 deps: [def-schur-covering-group-of-a-finite-group, thm-schur-multiplier-of-an-abelian-group-is-its-exterior-square]
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: ai-generated
 sources:
   scraped: []
   references:
+    - title: "Y. Bazlov and A. Berenstein, Cocycle twists and extensions of braided doubles, Sections 2.2–2.3"
+      url: https://pages.uoregon.edu/arkadiy/cocycle.pdf
     - title: "Clara Löh, Group Cohomology"
       url: https://loeh.app.uni-regensburg.de/teaching/grouphom_ss19/lecture_notes.pdf
 proof_strategy: direct
 verification:
-  audited: 2026-09-06
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
+  verified:
+    model: gpt-6-astra
     verdict: pass
-    date: 2026-09-06
+    date: 2026-09-09
+    scope: "Owner-authorized statement/refutation alignment repair; complete target and direct supplier texts read; targeted precheck/rendercheck. Not an independent judgment or whole-closure certification."
+    delegated_by: owner
 ---
 
 ## Statement refuted
 
-D8 and Q8 are nonisomorphic Schur covers of C2×C2.
+Every finite group has a unique Schur covering group up to isomorphism.
 
 ## Counterexample
+
+The groups $D_8$ and $Q_8$ are nonisomorphic Schur covers of $C_2\times C_2$.
 
 **Given:** Both $D_8$ and $Q_8$ have central commutator subgroup of order two and quotient $C_2\times C_2$.
 

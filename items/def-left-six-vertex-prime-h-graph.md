@@ -5,19 +5,20 @@ title: "The left six-vertex prime $\\mathcal H$-graph"
 status: published
 origin: session
 provenance:
-  statement: literature-derived
+  statement: ai-altered
   proof: not-applicable
 deps: []
 justified_by: []
 aliases: []
 landmark: false
 verification:
-  audited: 2026-09-01
   precheck: n/a
-  judge:
-    model: "gpt-5.6-terra"
+  verified:
+    model: gpt-6-astra
     verdict: pass
-    date: 2026-08-31
+    date: 2026-09-09
+    scope: "Owner-authorized graph-identity repair against visually inspected NSS Figure 1; targeted rendercheck; no independent judgment."
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -32,11 +33,21 @@ pipeline_run: null
 
 The **left six-vertex prime $\mathcal H$-graph** is the graph $L$ on vertices
 
-$$\{t_1,t_2,t_3,\ell_1,\ell_2,\ell_3\}$$
+$$\{a,b,c,d,e,f\}$$
 
 with edge set
 
-$$\{t_1t_2,t_2t_3,t_1t_3,\ell_1t_1,\ell_2t_2,\ell_3t_3\}.$$
+$$\{ab,bc,ad,bd,be,de,ef\}.$$
 
-Thus $t_1,t_2,t_3$ span a triangle, and each $\ell_i$ is a leaf attached only
-to the corresponding triangle vertex $t_i$.
+The labels follow the left drawing in Nguyen–Scott–Seymour, Figure 1:
+$a,b,c$ run from left to right along its top row and $d,e,f$ along its bottom
+row. The vertices $a,b,d,e$ form a diamond (a complete four-vertex graph
+with the edge $ae$ removed); $c$ is attached only to $b$ and $f$ only to $e$.
+Their degrees in the displayed order are $2,4,1,3,3,1$.
+
+## Remarks
+
+The earlier triangle-with-three-pendant-leaves description specified the
+net, a different graph with degree sequence $3,3,3,1,1,1$. It is superseded
+here; conclusions about that earlier graph do not establish conclusions
+about the Figure 1 graph.

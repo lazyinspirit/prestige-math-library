@@ -6,17 +6,22 @@ status: published
 origin: session
 provenance:
   statement: ai-altered
-  proof: ai-generated
+  proof: ai-altered
 deps: [def-positive-continuous-error-function-for-strong-approximation,
-       thm-whitney-approximation-for-euclidean-valued-maps,
-       thm-euclidean-tubular-neighbourhood-theorem]
+       def-tubular-neighbourhood-of-an-embedded-submanifold,
+       lem-distance-to-set-is-lipschitz]
 justified_by: []
 aliases: []
 landmark: false
 proof_strategy: direct
 verification:
-  audited: 2026-09-01
   precheck: pass
+  verified:
+    model: gpt-6-astra
+    verdict: certify
+    date: 2026-09-09
+    scope: owner-authorized-local-empty-complement-repair
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -39,13 +44,38 @@ for all $p$ has image contained in $U$.
 
 [F1] A positive continuous error function is a continuous map into $(0,\infty)$ ([[def-positive-continuous-error-function-for-strong-approximation]]).
 
-[L1] Euclidean embedded submanifolds admit tubular neighbourhoods ([[thm-euclidean-tubular-neighbourhood-theorem]]).
+[L1] The prescribed tubular neighbourhood is open and contains $j(N)$.
+([[def-tubular-neighbourhood-of-an-embedded-submanifold]])
+
+[L2] Distance to a fixed nonempty set is a finite nonnegative real-valued
+$1$-Lipschitz function. ([[lem-distance-to-set-is-lipschitz]])
 
 ## Proof
 **Proof technique:** direct.
 
-1.1 For each $p\in M$, the point $j(F(p))$ lies in the open set $U$, so its Euclidean distance to the closed complement $\mathbb R^m\setminus U$ is positive. Define $$\varepsilon(p):=\frac{1}{2}\operatorname{dist}\!\bigl(j(F(p)),\mathbb R^m\setminus U\bigr).$$ Because $j\circ F$ is continuous and the distance-to-a-fixed-closed-set function is continuous, [F1] shows that $\varepsilon$ is a positive continuous error function. [F1, L1, given, construct]
+1.1 Put $C=\mathbb R^m\setminus U$. If $C=\varnothing$, take [given, F1, L1]
+$\varepsilon\equiv1$. It is positive and continuous, and every map into
+$\mathbb R^m=U$ already has the required image. This also covers $m=0$.
+If $M$ is empty the unique error function and the conclusion are vacuous.
 
-2.1 If $\|\widetilde H(p)-j(F(p))\|<\varepsilon(p)$, then $\widetilde H(p)$ lies in the open Euclidean ball of radius $\varepsilon(p)$ around $j(F(p))$. By the definition of $\varepsilon(p)$, that ball is contained in $U$. Hence $\widetilde H(p)\in U$. [step 1.1, algebra]
+1.2 Suppose $C\ne\varnothing$. Set [given, F1, L1, L2, construct]
+$$\varepsilon(p)=\min\{1,\tfrac12 d(j(F(p)),C)\}.$$
+The distance is a finite real number by [L2]. For each $p$, openness of $U$
+gives a ball of some radius $r>0$ about $j(F(p))$ contained in $U$;
+every point of $C$ is therefore at distance at least $r$. Thus
+$d(j(F(p)),C)\ge r>0$. By [L2] the distance function is continuous;
+composing with $j\circ F$ and taking its minimum with $1$ preserves
+continuity. Explicitly, $|\min(1,a)-\min(1,b)|\le|a-b|$ by the three
+cases $a,b\le1$, $a,b\ge1$, and one on each side. Hence $\varepsilon$
+is positive, finite, continuous and at most $1$, without making any
+simultaneous choices of the pointwise radii.
 
-3.1 Therefore every approximation with error bound $\varepsilon$ lands in the prescribed tubular neighbourhood $U$. [step 2.1] ∎
+2.1 If $\widetilde H(p)\in C$, the defining infimum gives [step 1.2, L2]
+$d(j(F(p)),C)\le\|\widetilde H(p)-j(F(p))\|$.
+This contradicts the assumed bound, since
+$\varepsilon(p)\le d(j(F(p)),C)/2<d(j(F(p)),C)$.
+Thus $\widetilde H(p)\in U$ for every $p$.
+
+3.1 Therefore every approximation with the specified error bound lands in [step 1.1, step 2.1]
+the prescribed $U$. The construction is choice-free and uses neither an
+approximation existence theorem nor a new tubular neighbourhood. ∎

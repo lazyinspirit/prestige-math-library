@@ -24,8 +24,13 @@ parts:
       - cardinal-arithmetic-and-cofinality
       - weak-choice-principles-and-sierpinskis-theorem
       - club-stationary-sets-and-pressing-down
+      - borel-analytic-sets-perfect-sets-and-determinacy
       - set-theoretic-trees-delta-systems-and-diamond
       - deduction-soundness-completeness-and-compactness
+      - pcf-scales-and-zfc-dowker-spaces
+      - reflection-absoluteness-and-elementary-submodels
+      - boolean-algebras-stone-duality-and-the-prime-ideal-theorem
+      - arithmetization-incompleteness-and-relative-consistency
 ---
 
 ## sets-relations-and-functions
@@ -49,12 +54,12 @@ first application of full choice: a maximal filter exists because Zorn says so.
 
 ## ordinals-and-cardinals
 
-Well-ordering extends induction past the finite, and transfinite recursion makes staged
-definitions legitimate. Well-founded relations, rank, and Mostowski collapse lead to the
-cumulative hierarchy; ordinal arithmetic, cardinals, cofinality, and alephs measure size.
-The weak-choice page keeps ZF distinctions explicit, while clubs, stationarity, normality,
-pressing down, and stationary partitions provide large-ordinal combinatorics. Trees and finite
-delta systems organize branch, antichain, and compatibility arguments; Diamond is explicitly
-assumed where it constructs a normal Suslin tree. The logic page then uses set-coded derivations
-for deduction and soundness, Henkin constructions for countable-language completeness and
-compactness, and elementary embeddings and diagrams for its stated Löwenheim--Skolem results.
+Well-ordering and transfinite recursion support rank, hierarchy, ordinal arithmetic, cardinals,
+cofinality, and alephs. Weak-choice distinctions stay within ZF; clubs, stationarity, normality,
+pressing down, trees, delta systems, and the stated Diamond hypothesis supply the combinatorics. Borel codes, analytic
+sets, games, and local Choice, AD, and DC hypotheses separate regularity from pathological
+constructions. PCF scales feed the ZFC Dowker-space constructions, while reflection,
+absoluteness, and collapses control finite fragments and elementary submodels. Boolean ideals,
+BPI, Stone duality, completions, and forcing conventions clarify further choice boundaries.
+Finally, coded syntax, representability, diagonalization, incompleteness, and relative-consistency
+interfaces complement deduction, soundness, Henkin completeness, and Löwenheim--Skolem methods.

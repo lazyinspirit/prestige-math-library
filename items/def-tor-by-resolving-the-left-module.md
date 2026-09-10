@@ -19,9 +19,14 @@ verification:
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
-    date: 2026-09-06
+    date: 2026-09-10
 ---
 
 ## Definition
 
-For a right $R$-module $N$ and a left $R$-module $M$ with projective resolution $P\to M$, set $\operatorname{Tor}^R_n(N,M)=H_n(N\otimes_RP)$.
+For a right $R$-module $N$ and a left $R$-module $M$ with a specified
+projective resolution $P_\bullet\twoheadrightarrow M$, define the
+left-resolution construction
+$$\operatorname{Tor}^{R,P}_n(N,M):=H_n(N\otimes_RP_\bullet).$$
+The datum $P$ remains in the notation until the balance and
+change-of-resolution results prove that it may be suppressed.

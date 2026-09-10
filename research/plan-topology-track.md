@@ -1,5 +1,16 @@
 # Topology track — my own draft (pre-merge)
 
+## Binding UC34 repair reconciliation — 2026-09-09
+
+`cor-urysohn-metrization` now proves the metric directly using countably many
+Urysohn functions under explicit AC, without a recorded Nagata theorem.
+Its local normality argument removes only finitely many closed sets in
+each open summand. The separate published
+`lem-regular-lindelof-spaces-are-normal` was subsequently repaired by root
+using two countable covers and those finite removals, without AC. Item
+precheck and rendercheck pass. No new Phase-2 prerequisite is needed;
+exact evidence is in the canonical consumer ledger.
+
 > **T-NUMBERING WARNING (Alpha-9, 2026-07-27) — read before trusting any
 > "T\<n\>" in this file.** This file's `T1 ... T10` number the GENERAL-topology
 > pages. `research/gen-spec.mjs` separately uses `t(1), t(2), t(3)` for the

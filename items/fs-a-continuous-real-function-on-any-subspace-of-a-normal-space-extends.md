@@ -20,15 +20,11 @@ proof_strategy: contradiction
 verification:
   precheck: pass
   verified:
-    model: claude-fable-5
-    verdict: certify
-    date: 2026-07-29
-    scope: page
-    delegated_by: owner
-  judge:
-    model: z-ai/glm-5.2
+    model: gpt-6-astra
     verdict: pass
-    date: 2026-07-29
+    date: 2026-09-09
+    scope: "Local Tietze comparison repair and direct proof/interface review; no independent judgment or transitive closure certification."
+    delegated_by: owner
 sources:
   scraped: []
   references:
@@ -44,11 +40,13 @@ pipeline_run: null
 **FALSE.** Every continuous real-valued function on a subspace of a normal
 space extends continuously to the whole space.
 
-This shows that the hypothesis "$A$ closed" in
-[[thm-tietze-extension-theorem]] and [[cor-tietze-for-unbounded-and-open-interval-valued-maps]]
-is not decoration: the witness below is a continuous function on a subspace
-of a normal space that has no continuous extension at all, and the only
-hypothesis it fails is closedness of the subspace.
+The witness isolates the closed-subspace hypothesis in the real-valued form,
+clause 1 of [[cor-tietze-for-unbounded-and-open-interval-valued-maps]]. Even
+under that corollary's dependent-choice assumption, dropping closedness permits
+a continuous map with no continuous extension. The nonextension proof below
+uses no choice principle. The bounded-range version
+[[thm-tietze-extension-theorem]] is a different comparison: the reciprocal
+violates its bounded-range hypothesis as well as closedness.
 
 ## Facts & Assumptions
 
@@ -86,6 +84,13 @@ hypothesis it fails is closedness of the subspace.
 
 ## Remarks
 
-- **No property but closedness fails.** $\mathbb{R}$ is normal (step 1.1), $f$ is continuous on $A$ (step 1.1), and the target is all of $\mathbb{R}$, so every hypothesis of [[thm-tietze-extension-theorem]] holds except that $A$ is not closed in $\mathbb{R}$ — its closure is $[0,1]$, one point larger.
+- **Closedness is isolated in the real-valued form.** $\mathbb{R}$ is normal
+  and $f$ is continuous on $A$ (step 1.1), but $A$ is not closed: its closure
+  is $[0,1]$. Thus, even assuming dependent choice, the witness meets every
+  hypothesis of clause 1 of
+  [[cor-tietze-for-unbounded-and-open-interval-valued-maps]] except
+  closedness. It does not isolate closedness in
+  [[thm-tietze-extension-theorem]], since step 1.2 also rules out any bounded
+  interval containing its range.
 
 - **The obstruction is unboundedness near the missing point, not discontinuity.** $f$ itself is continuous at every point of its own domain $A$; nothing about $f$ is badly behaved on $A$. What blocks an extension is that $f$ has no finite value it could sensibly take at the boundary point $0 \notin A$, and step 1.2 makes that failure of boundedness explicit rather than appealing to a limit that does not exist.

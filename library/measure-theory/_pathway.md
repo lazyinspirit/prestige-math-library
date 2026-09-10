@@ -26,18 +26,19 @@ parts:
       - radon-measures-and-the-riesz-markov-kakutani-theorem
       - complex-lp-spaces-and-test-function-conventions
       - differentiation-of-monotone-functions-and-the-vitali-covering-theorem
+      - measure-preserving-systems-and-mixing-criteria
+      - complex-riesz-thorin-endpoint-interpolation
       - absolute-continuity-and-the-sharp-fundamental-theorem-of-calculus
 ---
 
 ## sigma-algebras-and-borel-sets
 
-A sigma-algebra supplies closure for countable additivity; outer measure and Carathéodory build
-Lebesgue measure, measurable functions, and integration. Convergence, products, signed
-measures, Radon--Nikodym decomposition, the $L^p$ inequalities, density, convolution, and
-$L^p$--$L^q$ duality make an analytic calculus. Riesz--Markov, Vitali covering, maximal
-estimates, differentiation, and Hausdorff measure lead to the stated representation, FTC,
-and dimension results. The complex $L^p$ page fixes measurable-component and almost-everywhere
-conventions, proves the first-variable-linear $L^2$ interface, and gives finite-$p$ density
-and duality tests under their sigma-finite or semifinite hypotheses. Its complex translation
-and convolution estimates give the stated approximation results without a general
-infinity-norm assertion.
+A sigma-algebra, outer measure, and Carathéodory lead to Lebesgue measure, measurable functions,
+integration, convergence, products, signed measures, Radon--Nikodym decomposition, and the
+$L^p$ calculus. Riesz--Markov, Vitali covering, maximal estimates, differentiation, and Hausdorff
+measure supply the stated representation, FTC, and dimension results. Complex $L^p$ conventions
+keep measurable components, almost-everywhere equality, finite-$p$ density, and the applicable
+sigma-finite or semifinite hypotheses explicit. Riesz--Thorin interpolates complex endpoint
+bounds from finite simple cores, with countable choice only for full-space extensions. Measure
+preservation yields Koopman isometries, invariant sigma-algebras, ergodicity, and strong/weak
+mixing criteria through generating families and complex $L^2$ correlations.

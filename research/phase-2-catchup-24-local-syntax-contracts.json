@@ -1,0 +1,90 @@
+{
+  "run": "phase-2-catchup-24",
+  "date": "2026-09-09",
+  "status": "integrated-proposed-contracts-pending-independent-Step-3",
+  "scope": "Original 24 pairs only. Local closure of batch-14 B14-DEP-1; no new pair, rehoming, publication or verdict.",
+  "evidence": {
+    "scan": "All current 16 batch manifests' direct deps checked against scoped IDs and published item frontmatter. Four direct outside-run nonpublished edges, all batch 14; this does not certify implicit or transitive mathematics.",
+    "draft_suppliers": [
+      "def-initial-arithmetic-functions",
+      "def-composition-and-primitive-recursion-schemes",
+      "def-primitive-recursive-function",
+      "def-natural-number-coding-of-finite-sequences",
+      "prop-basic-arithmetic-and-bounded-quantification-are-primitive-recursive",
+      "thm-sequence-length-and-coordinate-functions-are-primitive-recursive"
+    ],
+    "published_read_in_full": [
+      "def-bounded-arithmetic-formula",
+      "lem-bounded-quantifiers-preserve-primitive-recursiveness",
+      "thm-recursion"
+    ],
+    "authoritative_read": [
+      {
+        "url": "https://www.cs.cmu.edu/~cdm/resources/00-primrec.pdf",
+        "read": "Printed slides 13–38 (definitions/arity/recurrences), 42–59 (cases, predicates, sums, bounded search). Full PDF genuinely downloaded; relevant full text read. Source's bounded-search proof is an exercise, supplied explicitly below."
+      },
+      {
+        "url": "https://www.cs.cmu.edu/~cdm/resources/02-coding.pdf",
+        "read": "Printed slides 9–35, full text including pairing, length coding, defaults, history recursion. Its coding differs from the existing sentinel format; the argument below is a local construction, not attributed to its displayed formulas."
+      }
+    ],
+    "local_downloads": [
+      "/tmp/local-syntax-proof.68t6k3/primrec.pdf",
+      "/tmp/local-syntax-proof.68t6k3/coding.pdf"
+    ]
+  },
+  "integration": {
+    "page": "arithmetization-incompleteness-and-relative-consistency",
+    "remove_requires": "primitive-recursive-and-partial-computable-functions",
+    "add_requires": "the-arithmetical-hierarchy-and-posts-theorem",
+    "definition": "Replace the two draft PR/list definitions in def-effective-theory-and-certified-godel-numbering deps by published def-bounded-arithmetic-formula; retain def-set-coded-formal-derivation. Include the exact sentinel coding in that definition, with justified_by the new coding lemma. Do not infer bare arithmetic bounded definability for arbitrary PR predicates.",
+    "insertion": "Insert the new coding lemma immediately after that definition, before all syntax/representability consumers.",
+    "consumers": "Replace both draft supplier deps in lem-primitive-recursive-syntax-and-proof-checking by lem-certified-syntax-coding-operations-are-primitive-recursive; keep the effective-theory definition. Its scans then use the explicit fixed-state recursion and list update closure below. Synchronize canonical plan, SET-3 prose, batch14 manifest/coverage/notes, Phase-2 manifest, cross-batch inputs and existing ledger evidence; no new pair.",
+    "existing_drafts": "Leave A609 files, homes, and future scope unchanged. They are not silently published or accepted."
+  },
+  "definition_addition": {
+    "statement": "For a binary word w set c(w)=1^{|w|}0w. With bin(0)=0 and otherwise canonical binary numerals, encode (a0,...,a{k-1}) by the natural number with binary word 1 1^k 0 c(bin(a0))...c(bin(a{k-1})). The empty code is 2. Invalid numerical words have validity false and length/entries zero; out-of-range coordinates return zero. These operations, fixed-arity encoding, append and finite histories are supplied by the following local lemma.",
+    "strategy": "The primitive-recursive class, all arities including nullary zero, parameter recursion and totality come from the published bounded-arithmetic definition, not A609. The initial 1 prevents leading-zero ambiguity. The unary length and payload lengths make parsing deterministic; the following lemma proves injectivity, primitive-recursive validity and operations. Each certified proof is a coded finite list and each nonlogical axiom carries its finite E-witness. A c.e. enumeration certificate records a finite transition history, not a decision oracle."
+  },
+  "item": {
+    "id": "lem-certified-syntax-coding-operations-are-primitive-recursive",
+    "kind": "lemma",
+    "title": "Primitive-recursive sentinel coding for certified syntax",
+    "deps": [
+      "def-effective-theory-and-certified-godel-numbering",
+      "def-bounded-arithmetic-formula",
+      "lem-bounded-quantifiers-preserve-primitive-recursiveness"
+    ],
+    "statement": "In ZF, the specified sentinel sequence coding is injective. Its validity predicate, total length and coordinate functions (zero on invalid inputs or out-of-range coordinates), append and concatenation operations, and each fixed-arity encoder are primitive recursive. Fixed finite-state numerical recursions and recursions recording their finite histories are primitive recursive. No A609, choice axiom, unbounded minimization, universal PR evaluator or general Turing/PR equivalence is assumed.",
+    "strategy": "Arithmetic closure is proved from the published initial-function/recursion definition. Addition and multiplication use a+0=a, a+S n=S(a+n), a·0=0 and a·S n=a·n+a. Define pred(0)=0, pred(S n)=n; truncated subtraction sub(a,0)=a and sub(a,S n)=pred(sub(a,n)); zero test z(0)=1,z(S n)=0. Equality is z(sub(a,b)+sub(b,a)), and a≤b is z(sub(a,b)). Boolean conjunction/product and complement 1−r give all finite tests; a case split is rg+(1−r)h. Bounded sums/products start at 0/1 and append one term. These are explicit primitive recursions. For a 0–1 predicate r, the least j<N satisfying r(j), or N if none, equals Σ_{j<N} Π_{i≤j}(1−r(i)); hence bounded minimization with any PR bound is PR. Exponentiation pow(b,0)=1,pow(b,S n)=b·pow(b,n). For d>0 the quotient of a by d is Σ_{q=1}^a [dq≤a], and the remainder is a−d·quotient; set both to zero for d=0. The natural-number division property follows directly by maximality and (q+1)d>a.\n\nA fixed tuple of state registers can be stored by iterating P(u,v)=(u+v)^2+u. For fixed sum t its codes lie in [t²,t²+t], before the next interval [(t+1)²,...], and within it the u coordinate is distinct. Thus P is injective, and u,v≤P(u,v) for every pair. Its range test and inverse coordinates, returning zero off-range, are bounded searches u,v≤code. Therefore a simultaneous update of a fixed finite number of registers with PR coordinate updates reduces to one ordinary primitive recursion; no prior sequence-coding or loop theorem is used here. Updates may have arbitrarily large values; only the number of iterations must have a PR bound.\n\nFor s>0 its binary width is ell(s)=1+Σ_{j=1}^s [2^j≤s], and ell(0)=1. The jth left-to-right bit, for j<ell(s), is rem(quot(s,2^{ell(s)-1-j}),2); elsewhere use zero. Horner iteration v↦2v+b evaluates a payload. All are PR by the preceding formulas; powers of two increase and eventually exceed s by induction, so these formulas give the canonical binary word without a logarithm oracle.\n\nThe parser first checks s>0 and leading bit 1. Starting at position 1 it counts the consecutive 1s before the first 0; that 0 must exist, and its count k is the list length. Starting just after it, repeat k block parses. At a block start p, find the first following zero with bounded search below ell(s). Let m be its distance from p; require m≥1, the delimiter to exist, and m payload bits to fit after it. Require either m=1 or the first payload bit to be 1 (canonical numerals, with 0 permitted only as a one-bit payload). Horner evaluation gives that entry. Advance p by 2m+1. After exactly k blocks require p=ell(s). All position calculations are total, bounded-search failure sets a persistent invalid flag, and later iterations in invalid state do nothing. Counters, position, flag and the requested coordinate form finitely many registers; perform at most ell(s)+1 iterations per scan/block and at most ell(s)+1 block iterations. Nested bounded loops are compositions of the fixed-state recursion just proved. Thus validity, length and entries are PR, with an explicit final validity check resetting outputs to zero. The empty code 2 has k=0 and succeeds with no payload. Conversely deterministic delimiter lengths recover the unique original list, proving injectivity and correctness; no appeal to effective prefix coding is needed.\n\nFor construction keep a word as its value v together with its width L. Concatenating a width-M word of value w sends (v,L) to (v·2^M+w,L+M). Start the header at (2^{k+2}−2,k+2), which is precisely 1 1^k 0, including k=0. For an entry a of width m=ell(a), its block has width 2m+1 and value (2^m−1)·2^{m+1}+a. Iteratively concatenate these blocks; fixed-arity encoding is PR. For append or concatenation, use the validated input length(s) as the iteration bound, read each entry and add a block under the enlarged header. Default invalid inputs to the empty code 2. These definitions give PR operations and their intended effect by induction on the number of copied entries.\n\nA numerical recursion that needs previous entries stores the entire current list code as its one state. If its initial value and next-value map are PR, combine next-value computation with the PR append operation, then invoke ordinary parameter recursion. Reading the last coordinate returns the requested output. This proves the needed history/course-of-values closure without a universal PR evaluation claim. For syntax operations every fixed-signature scanning instruction and each specified finite certificate transition is a combination of these arithmetic, list, case and iteration operations; the existing syntax lemma must still state its own bounds and correctness invariants.",
+    "axiom_base": "ZF",
+    "provenance": {
+      "statement": "ai-altered",
+      "proof": "ai-altered"
+    },
+    "sources": [
+      {
+        "title": "Klaus Sutner, Primitive Recursion",
+        "url": "https://www.cs.cmu.edu/~cdm/resources/00-primrec.pdf",
+        "locator": "Printed slides 13–38, 42–59; bounded-search exercise supplied by the local formula"
+      },
+      {
+        "title": "Klaus Sutner, Coding Functions",
+        "url": "https://www.cs.cmu.edu/~cdm/resources/02-coding.pdf",
+        "locator": "Printed slides 9–35; coding/state recursion framework, with the sentinel variant proved locally"
+      }
+    ],
+    "justified_by": [],
+    "forward_refs": []
+  },
+  "checks": {
+    "mathematical_review": "Root defect-focused local proof design; independent Step 3 required.",
+    "published_edits": "none",
+    "ledger": "Existing ledger updated with exact new supplier and owned consumers; no published item classification changed.",
+    "finite_formulas": {
+      "checks": 66962,
+      "result": "PASS",
+      "scope": "bounded search, quotient and sentinel coding; not proof certification"
+    }
+  }
+}

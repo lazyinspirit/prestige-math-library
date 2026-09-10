@@ -41,7 +41,7 @@ monomorphism ([[def-the-quotient-of-an-object-by-a-subobject]]).
 ([[thm-mutual-factorisation-defines-subobject-and-quotient-object-equivalence]]).
 
 [L3] The cokernel assignment depends only on the subobject class and gives the
-inverse order-anti-isomorphism to the kernel assignment
+inverse order-preserving correspondence to the kernel assignment
 ([[thm-kernel-and-cokernel-are-mutually-inverse-order-anti-isomorphisms-between-subobjects-and-quotient-objects]]).
 
 ## Proof

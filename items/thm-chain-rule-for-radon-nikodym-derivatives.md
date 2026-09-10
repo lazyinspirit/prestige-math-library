@@ -7,11 +7,16 @@ origin: session
 landmark: true
 provenance:
   statement: literature-derived
-  proof: ai-generated
-deps: [cor-finite-complex-measures-admit-integrable-radon-nikodym-densities, def-radon-nikodym-derivative, prop-real-and-imaginary-parts-of-a-complex-measure-are-finite-signed-measures, thm-absolute-continuity-is-equivalent-for-a-signed-or-complex-measure-its-variation-and-its-jordan-data, thm-integration-against-a-density, thm-jordan-decomposition-for-signed-measures, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]
+  proof: ai-altered
+deps: [def-axiom-of-choice, def-absolutely-continuous-with-respect-to-a-positive-measure, def-integrable-real-and-complex-functions-and-their-integrals, def-radon-nikodym-derivative, thm-integration-against-a-density, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, cor-finite-complex-measures-admit-integrable-radon-nikodym-densities, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, cor-integral-over-a-null-set-vanishes]
 proof_strategy: direct
 verification:
-  audited: 2026-08-31
+  verified:
+    model: gpt-6-astra
+    verdict: pass
+    date: 2026-09-09
+    scope: owner-authorized local defect repair; no independent judge
+    delegated_by: owner
   precheck: pass
 sources:
   references:
@@ -23,7 +28,7 @@ sources:
 
 ## Statement
 
-Let $\lambda$ and $\mu$ be sigma-finite positive measures and let $\nu$ be a
+Assume the Axiom of Choice. Let $\lambda$ and $\mu$ be sigma-finite positive measures and let $\nu$ be a
 signed measure or a finite complex measure on the same measurable space.
 Assume there is an increasing measurable exhaustion $(X_n)_{n\in\mathbb N}$
 with $\bigcup_nX_n=X$, $\lambda(X_n)<+\infty$, $\mu(X_n)<+\infty$, and
@@ -32,24 +37,26 @@ $$\frac{d\nu}{d\lambda}=\frac{d\nu}{d\mu}\frac{d\mu}{d\lambda}\qquad\lambda\text
 
 ## Facts & Assumptions
 
-**Given:** Measures $\lambda,\mu,\nu$ with the common finite-exhaustion hypothesis and $\nu\ll\mu\ll\lambda$.
+**Given:** AC and measures $\lambda,\mu,\nu$ with the common finite-exhaustion hypothesis and $\nu\ll\mu\ll\lambda$.
 
-[L1] A nonnegative density composes through another density: if $\eta(E)=\int_E h\,d\mu$ and $\mu(E)=\int_E k\,d\lambda$ with $h,k\ge0$, then $\eta(E)=\int_E hk\,d\lambda$. ([[thm-integration-against-a-density]])
+[L1] Under AC, RN gives finite-valued measurable densities on a common finite exhaustion, unique almost everywhere, with all measurable-set integrals defined and finite-piece L1 bounds; for finite complex measures the density is L1. ([[def-axiom-of-choice]], [[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]], [[cor-finite-complex-measures-admit-integrable-radon-nikodym-densities]], [[def-radon-nikodym-derivative]])
 
-[L2] The Radon-Nikodym density is unique up to almost-everywhere equality. ([[thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality]])
+[L2] Nonnegative density substitution gives $\int q\,d(k\,d\lambda)=\int qk\,d\lambda$. ([[thm-integration-against-a-density]])
 
-[L3] If a signed measure is absolutely continuous with respect to $\mu$, then its Jordan parts are too. ([[thm-absolute-continuity-is-equivalent-for-a-signed-or-complex-measure-its-variation-and-its-jordan-data]])
+[L3] Real integrals are differences of positive and negative integrals when at least one is finite; complex L1 integration uses real and imaginary parts. ([[def-integrable-real-and-complex-functions-and-their-integrals]])
 
-[L4] Jordan decomposition writes a signed measure as $\nu=\nu^+-\nu^-$. ([[thm-jordan-decomposition-for-signed-measures]])
+[L4] A nonnegative function has zero integral exactly when it vanishes almost everywhere; null-set integrals vanish. ([[thm-nonnegative-integral-zero-iff-zero-almost-everywhere]], [[cor-integral-over-a-null-set-vanishes]])
 
-[L5] The real and imaginary parts of a finite complex measure are finite signed measures. ([[prop-real-and-imaginary-parts-of-a-complex-measure-are-finite-signed-measures]])
+[L5] Absolute continuity means vanishing on all measurable null sets and is transitive. ([[def-absolutely-continuous-with-respect-to-a-positive-measure]])
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 First assume that $\nu$ is a positive measure. Choose the nonnegative representatives $h$ of $d\nu/d\mu$ and $k$ of $d\mu/d\lambda$ furnished by the positive-measure case of the Radon-Nikodym theorem. For every measurable set $E$, that theorem gives $$\nu(E)=\int_E h\,d\mu,\qquad \mu(E)=\int_E k\,d\lambda.$$ Applying [L1] to the nonnegative density $h$ therefore yields $$\nu(E)=\int_E hk\,d\lambda\qquad(E\in\mathcal A).$$ Hence [L2] gives $d\nu/d\lambda=hk$ $\lambda$-almost everywhere in the positive case. [L1, L2, choose]
+1.1 Apply [L1] under AC to choose finite-valued $k$ representing $d\mu/d\lambda$. It may be made nonnegative everywhere: on $E_{n,m}=X_n\cap\{k\le-1/m\}$, finite-piece integrability gives $0\le\mu(E_{n,m})=\int_{E_{n,m}}k\,d\lambda\le-\lambda(E_{n,m})/m$, so each set is null. Their countable union is $\{k<0\}$. Replacing $k$ there by zero leaves its integrals unchanged by [L4]. Thus $\mu=k\,d\lambda$ with finite nonnegative $k$. [L1, L4, given, choose]
 
-2.1 Now assume that $\nu$ is a signed measure. By [L4], write $\nu=\nu^+-\nu^-$. Because $\nu\ll\mu$, [L3] gives $\nu^\pm\ll\mu$. Apply step 1.1 to $\nu^+$ and $\nu^-$ separately to obtain nonnegative representatives $h^+,h^-$ with $$\frac{d\nu^+}{d\lambda}=h^+k,\qquad \frac{d\nu^-}{d\lambda}=h^-k\qquad\lambda\text{-almost everywhere.}$$ Then $h:=h^+-h^-$ represents $d\nu/d\mu$, while $(h^+-h^-)k$ represents $d\nu/d\lambda$. Uniqueness from [L2] therefore gives $$\frac{d\nu}{d\lambda}=hk=\frac{d\nu}{d\mu}\frac{d\mu}{d\lambda}\qquad\lambda\text{-almost everywhere.}$$ [L2, L3, L4, step 1.1, algebra]
+2.1 If $\nu$ is signed, [L1] gives a finite real density $h$ for $\nu$ with respect to $\mu$. Its integral on $X$ is defined, so at least one of $\int h^+\,d\mu$ and $\int h^-\,d\mu$ is finite. Since $(hk)^\pm=h^\pm k$, [L2] gives $\int_E(hk)^\pm\,d\lambda=\int_Eh^\pm\,d\mu$ for every measurable $E$. The same finite-sign bound permits subtraction, proving $\int_Ehk\,d\lambda=\nu(E)$. By [L5], $\nu\ll\lambda$ and the given exhaustion permits [L1] for this pair. Its uniqueness clause identifies $hk=d\nu/d\lambda$ almost everywhere. [L1, L2, L3, L5, step 1.1, algebra]
 
-3.1 Finally assume that $\nu$ is a finite complex measure, and choose a representative $h=u+iv$ of $d\nu/d\mu$. By [L5], the finite signed measures $\operatorname{Re}\nu$ and $\operatorname{Im}\nu$ are both absolutely continuous with respect to $\mu$, and the measurable-set identity for $h$ shows that $u$ and $v$ represent $d(\operatorname{Re}\nu)/d\mu$ and $d(\operatorname{Im}\nu)/d\mu$. Applying step 2.1 to those signed measures gives $$\frac{d(\operatorname{Re}\nu)}{d\lambda}=u\frac{d\mu}{d\lambda},\qquad \frac{d(\operatorname{Im}\nu)}{d\lambda}=v\frac{d\mu}{d\lambda}\qquad\lambda\text{-almost everywhere.}$$ Therefore, for every measurable set $E$, $$\nu(E)=\operatorname{Re}\nu(E)+i\,\operatorname{Im}\nu(E)=\int_Eu\frac{d\mu}{d\lambda}\,d\lambda+i\int_Ev\frac{d\mu}{d\lambda}\,d\lambda=\int_Eh\frac{d\mu}{d\lambda}\,d\lambda.$$ So $h(d\mu/d\lambda)$ represents $d\nu/d\lambda$, and [L2] yields $$\frac{d\nu}{d\lambda}=h\frac{d\mu}{d\lambda}=\frac{d\nu}{d\mu}\frac{d\mu}{d\lambda}\qquad\lambda\text{-almost everywhere.}$$ [L2, L5, step 2.1, choose, algebra] ∎
+2.2 If $\nu$ is finite complex, [L1] gives $h=u+iv\in L^1(\mu)$. By [L2], $\int|hk|\,d\lambda=\int|h|\,d\mu<\infty$. Apply [L2] to the four nonnegative parts of $u,v$ and combine their finite integrals by [L3]; this yields $\int_Ehk\,d\lambda=\nu(E)$ for every $E$. Transitivity [L5] and the complex uniqueness clause [L1] again give $hk=d\nu/d\lambda$ almost everywhere. [L1, L2, L3, L5, step 1.1, algebra]
+
+3.1 The product is independent of finite-valued representatives. If $h'$ agrees with $h$ outside a measurable $\mu$-null set $Z$, then $\int_Zk\,d\lambda=\mu(Z)=0$, so [L4] gives $k=0$ $\lambda$-almost everywhere on $Z$. Hence $h'k=hk$ $\lambda$-almost everywhere. Changing $k$ on a $\lambda$-null set also leaves the product class unchanged. Thus the preceding identities give the stated identity of RN classes in both cases. [L4, step 1.1, step 2.1, step 2.2, algebra] ∎

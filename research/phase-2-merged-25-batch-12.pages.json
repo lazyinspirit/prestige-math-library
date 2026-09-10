@@ -1,0 +1,198 @@
+[
+  {
+    "order": 598.2,
+    "id": "one-tape-simulation-normal-forms",
+    "kind": "A",
+    "category": "computability-theory",
+    "title": "One-Tape Simulation Normal Forms",
+    "companion": "one-tape-simulation-normal-forms-examples",
+    "requires": [
+      "turing-machine-configuration-boundary-interface",
+      "turing-machines-configurations-and-computation"
+    ],
+    "items": [
+      {
+        "id": "def-stay-put-one-tape-machine-and-run-interface",
+        "title": "Stay-put one-tape machines and their runs",
+        "kind": "definition",
+        "deps": [
+          "def-deterministic-one-tape-turing-machine",
+          "def-one-step-configuration-relation",
+          "def-turing-machine-initial-and-halting-configuration-interface",
+          "thm-recursion",
+          "thm-induction-principle",
+          "thm-subset-of-a-finite-set"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Stephen Checkoway, CS 301, Lecture 16: Turing machine variants",
+              "url": "https://checkoway.net/teaching/cs301/2018-spring/slides/Lecture-16-tm-variants.pdf"
+            },
+            {
+              "title": "John E. Savage, Models of Computation, Chapter 5",
+              "url": "https://cs.brown.edu/people/jsavage/book/pdfs/ModelsOfComputation_Chapter5.pdf"
+            }
+          ]
+        },
+        "statement": "Extend the base finite tuple by a third direction S, keeping the transition function total exactly on nonhalting state-symbol pairs. Configurations are (q,h,t) with finite-support t:N→Gamma, clamped L at zero, R taking h to h+1, and S fixing h. Writing changes only t(h). Initial and halting predicates are the same formulas as the earlier boundary interface, now explicitly applied to the extended tuple. A run follows these steps until the first designated halting state, or is infinite if none occurs; accepting/rejecting refer only to the two respective states, divergence only to an infinite run.",
+        "proof_plan": "Form the tape/configuration sets exactly as in the boundary interface: its proof uses only Q, Gamma and blank, not the direction codomain. Separate each update graph inside N×Gamma. A finite support F remains inside F union {h}: append h to an enumeration if absent, obtaining a finite set; use finite-subset closure. Totality and uniqueness of delta and the three head clauses give a unique successor at nonhalting states, none at halting states. For a formal infinite ambient sequence extend the successor map by the identity at halting states and apply thm-recursion on the configuration set; this artificial constant tail is not a computation. Induction gives uniqueness of all genuine prefixes. The first halt, if any, is the least index (prove the bounded least-index fact by induction); otherwise the full sequence is an infinite genuine run. ZF, no Choice."
+      },
+      {
+        "id": "lem-stay-put-right-left-macro-simulation",
+        "title": "The right-left macro simulates one stay-put step",
+        "kind": "lemma",
+        "deps": [
+          "def-stay-put-one-tape-machine-and-run-interface",
+          "def-one-step-configuration-relation",
+          "def-finite-cardinality",
+          "def-cartesian-product",
+          "thm-the-characterising-property-of-ordered-pairs",
+          "thm-induction-principle",
+          "thm-omega-is-peano-system"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Stephen Checkoway, CS 301, Lecture 16: Turing machine variants",
+              "url": "https://checkoway.net/teaching/cs301/2018-spring/slides/Lecture-16-tm-variants.pdf"
+            },
+            {
+              "title": "John E. Savage, Models of Computation, Chapter 5",
+              "url": "https://cs.brown.edu/people/jsavage/book/pdfs/ModelsOfComputation_Chapter5.pdf"
+            }
+          ]
+        },
+        "statement": "For each stay-put machine M construct an ordinary machine N with states Q×{0,1}, unchanged input/tape alphabets and blank, and designated states (q0,0),(qacc,0),(qrej,0). Let E(q,h,t)=((q,0),h,t). For delta(q,a)=(p,b,D), set deltaN((q,0),a)=((p,0),b,D) when D=L or R, and ((p,1),b,R) when D=S. For every p in Q and c in Gamma set deltaN((p,1),c)=((p,0),c,L). Then each genuine M step C→Cprime gives a one-step N segment E(C)→E(Cprime) for L/R or exactly a two-step segment for S; the latter intermediate configuration is ((p,1),h+1,t[h:=b]) and is nonhalting. These are precisely the segments from an unmarked state to the next unmarked state.",
+        "proof_plan": "Tagged pairs separate old and intermediate states even if original state objects happen to be pairs. Finiteness of Q×{0,1} follows by induction on a finite enumeration of Q: append its two distinct tags; give the finite-adjunction bijection inline. The transition clauses are disjoint and exhaustive on N nonhalting states; tagged copies of original halting states at tag 1 still have outgoing transitions. L/R is literal equality with the published one-step formula. In the S case the first write occurs at h, the second preserves the arbitrary neighbor symbol, and predecessor(h+1)=h since successor is injective and never zero. This includes h=0, blank neighbor and p a halting state. No extra tape symbol, permanent marker or inverse-left-at-zero assumption is used. Inspect the only intermediate transition to prove converse and absence of earlier unmarked states."
+      },
+      {
+        "id": "thm-stay-put-elimination-with-explicit-simulation-interface",
+        "title": "Stay-put elimination with an explicit simulation interface",
+        "kind": "theorem",
+        "deps": [
+          "def-stay-put-one-tape-machine-and-run-interface",
+          "lem-stay-put-right-left-macro-simulation",
+          "thm-recursion",
+          "thm-induction-principle",
+          "def-nat-addition",
+          "def-nat-order",
+          "lem-nat-order-add-compatible",
+          "thm-nat-linear-order",
+          "lem-nat-add-successor-left",
+          "lem-nat-add-identity",
+          "lem-nat-discrete"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Stephen Checkoway, CS 301, Lecture 16: Turing machine variants",
+              "url": "https://checkoway.net/teaching/cs301/2018-spring/slides/Lecture-16-tm-variants.pdf"
+            },
+            {
+              "title": "John E. Savage, Models of Computation, Chapter 5",
+              "url": "https://cs.brown.edu/people/jsavage/book/pdfs/ModelsOfComputation_Chapter5.pdf"
+            }
+          ]
+        },
+        "statement": "Every deterministic right-infinite one-tape stay-put machine has the ordinary simulator N of the macro lemma. For every starting configuration C, its maximal run and the run of N from E(C) have identical original-state, head and whole-tape data at macro boundaries. If C_i is the original run, let s_i count S steps among its first i transitions and k_i=i+s_i. Then N at time k_i equals E(C_i). Both runs halt accepting, halt rejecting, or diverge together. A halt after t steps occurs after exactly t+s_t simulator steps, between t and t+t, with exactly the same tape and head. Applied to the initial configuration of every input (including empty input), this preserves recognition, decision and any output read from the halting tape.",
+        "proof_plan": "Recursively accumulate (C_i,k_i,s_i), using identity extensions after halting only for set-theoretic recursion, never as genuine transitions. Base k0=s0=0. The macro lemma increments k by 1 or 2 and s by 0 or 1; induction proves k_i=i+s_i and equality of boundary configurations, and 0≤s_i≤i. Every simulator time before termination is a boundary or the sole interior time of an S macro: prove this partition inductively by appending segments. For an infinite original run k_i≥i ensures every simulator index is covered (the first i+1 macro lengths already exceed i), all interiors nonhalting. If original halts, its finite expansion halts in the same tagged state, so the simulator cannot diverge or halt oppositely. Conversely an infinite original has an infinite simulator, and no other finite outcome is possible by uniqueness. Initial embedding preserves the tape formula, head zero and designated start state. No general multitape simulation, universal machine or old draft stay-put theorem is a premise."
+      }
+    ]
+  },
+  {
+    "order": 598.4,
+    "id": "one-tape-simulation-normal-forms-examples",
+    "kind": "B",
+    "category": "computability-theory",
+    "title": "One-Tape Simulation Normal Forms: Examples",
+    "companion": "one-tape-simulation-normal-forms",
+    "requires": [
+      "one-tape-simulation-normal-forms"
+    ],
+    "items": [
+      {
+        "id": "ex-eliminating-a-stay-put-transition",
+        "title": "Eliminating a stay-put transition at the left boundary",
+        "kind": "example",
+        "deps": [
+          "def-stay-put-one-tape-machine-and-run-interface",
+          "lem-stay-put-right-left-macro-simulation"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Stephen Checkoway, CS 301, Lecture 16: Turing machine variants",
+              "url": "https://checkoway.net/teaching/cs301/2018-spring/slides/Lecture-16-tm-variants.pdf"
+            },
+            {
+              "title": "John E. Savage, Models of Computation, Chapter 5",
+              "url": "https://cs.brown.edu/people/jsavage/book/pdfs/ModelsOfComputation_Chapter5.pdf"
+            }
+          ]
+        },
+        "statement": "Take Q={q0,qacc,qrej}, Sigma={a}, Gamma={a,blank}, with delta(q0,c)=(qacc,c,S) for both tape symbols c. On input a the original accepts in one step at cell zero with tape a followed by blanks. Its simulator first reaches ((qacc,1),1,t), then ((qacc,0),0,t), accepting only on step two. The same trace on empty input has an entirely blank tape.",
+        "proof_plan": "List the two q0 transition entries and all six marked-state entries via the macro formula; qacc and qrej have no original entries. Calculate both successor configurations directly. Check the marked accept copy is nonhalting. For an arbitrary tape with nonblank right neighbor the return move rewrites that neighbor unchanged; include this boundary calculation as a caution.",
+        "generation": {
+          "role": "example"
+        }
+      },
+      {
+        "id": "cex-deleting-stay-put-moves-does-not-preserve-computation",
+        "title": "Deleting stay-put instructions destroys the computation",
+        "kind": "counterexample",
+        "deps": [
+          "def-stay-put-one-tape-machine-and-run-interface",
+          "lem-stay-put-right-left-macro-simulation"
+        ],
+        "justified_by": [],
+        "provenance": {
+          "statement": "ai-generated",
+          "proof": "ai-generated"
+        },
+        "sources": {
+          "scraped": [],
+          "references": [
+            {
+              "title": "Stephen Checkoway, CS 301, Lecture 16: Turing machine variants",
+              "url": "https://checkoway.net/teaching/cs301/2018-spring/slides/Lecture-16-tm-variants.pdf"
+            },
+            {
+              "title": "John E. Savage, Models of Computation, Chapter 5",
+              "url": "https://cs.brown.edu/people/jsavage/book/pdfs/ModelsOfComputation_Chapter5.pdf"
+            }
+          ]
+        },
+        "statement": "Refute the claim that simply deleting S instructions preserves a machine computation. In the machine delta(q0,c)=(qacc,c,S), deleting both entries leaves the transition undefined at the initial nonhalting state, so it is not even a legal total-transition machine. Under the proposed partial-transition interpretation that halts rejecting when an entry is missing, empty input changes from acceptance to rejection. Merely replacing S by R can also change acceptance, not just head position.",
+        "proof_plan": "For the second witness use Q={q0,p,qacc,qrej}, Sigma={a}, Gamma={a,blank}; delta(q0,a)=(p,a,S), delta(q0,blank)=(qrej,blank,R), delta(p,a)=(qacc,a,R), delta(p,blank)=(qrej,blank,R). These are all nonhalting entries. On input a the original accepts in two steps, but replacing its sole S by R reaches p scanning blank and rejects in two. Distinguish deletion (invalid tuple) from total naive replacement (valid but inequivalent). Finally calculate that L then R from h=0 ends at 1; this explains why the correct macro orders R before L.",
+        "generation": {
+          "role": "counterexample"
+        }
+      }
+    ]
+  }
+]

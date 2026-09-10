@@ -4,40 +4,51 @@ title: A flat local map splits regular sequences into base and fibre parts
 kind: lemma
 status: published
 origin: pipeline
-deps: [def-flat-and-faithfully-flat-modules-and-ring-maps, def-regular-sequence-on-a-module, thm-localisation-and-flat-base-change-of-regular-sequences]
+deps: [def-flat-and-faithfully-flat-modules-and-ring-maps, def-regular-sequence-on-a-module, thm-localisation-and-flat-base-change-of-regular-sequences, thm-krull-intersection-theorem, thm-flatness-criteria-by-injections-and-ideals, thm-right-exactness-of-tensor-products, thm-universal-property-of-module-tensor-products, cor-tensor-product-with-a-quotient-ring, def-axiom-of-choice]
 proof_strategy: direct
 provenance:
   statement: literature-derived
   proof: ai-altered
 sources:
   references:
-    - title: Depth and Cohen--Macaulay modules source treatment
-      url: https://stacks.math.columbia.edu/download/algebra.pdf
+    - title: "Stacks Project, Lemma 10.99.1"
+      url: https://stacks.math.columbia.edu/tag/00ME
 verification:
-  audited: 2026-09-07
   precheck: pass
-  judge:
-    model: "gpt-5.6-terra"
+  verified:
+    model: "gpt-6-astra"
     verdict: pass
-    date: 2026-09-06
+    date: 2026-09-09
+    scope: "Owner-authorized local defect repair; no independent judge or owner audit"
+    delegated_by: owner
 ---
 ## Statement
 
-Let $(R,\mathfrak m,k)\to(S,\mathfrak n,\ell)$ be a flat local homomorphism
+Assume the Axiom of Choice. Let $(R,\mathfrak m,k)\to(S,\mathfrak n,\ell)$ be a flat local homomorphism
 of Noetherian local rings. If $x_1,\ldots,x_r$ is an $R$-regular sequence
 and $\bar y_1,\ldots,\bar y_s$ is regular on the closed fibre
 $S/\mathfrak mS$, then arbitrary lifts $y_j\in\mathfrak n$ make
 $$x_1,\ldots,x_r,y_1,\ldots,y_s$$
-an $S$-regular sequence.
+an $S$-regular sequence. Moreover, each $S/(x_1,\ldots,x_r,y_1,\ldots,y_j)S$ is flat over $R/(x_1,\ldots,x_r)R$.
 
 ## Facts & Assumptions
 
-**Given:** a flat local map is faithfully flat.
+**Given:** the stated Noetherian local rings and regular sequences, with the Axiom of Choice ([[def-axiom-of-choice]]).
 
 ## Proof
 
 **Proof technique:** direct.
 
-1.1 Flat base change preserves the injectivity of multiplication by each $x_i$ on the successive source quotients, and faithful flatness preserves their nonzero terminal quotient. Thus the $x_i$ form an $S$-regular sequence. [given]
+1.1 For any ideal $I\subset R$ and $R/I$-module $L$, balanced maps give $L\otimes_{R/I}(S/IS)\cong L\otimes_RS$, by $l\otimes(s+IS)\mapsto l\otimes s$, with inverse $l\otimes s\mapsto l\otimes(s+IS)$. These formulas are independent of representatives because $IL=0$, by [[thm-universal-property-of-module-tensor-products]]. Hence $S/IS$ is flat over $R/I$. The quotient identification is also [[cor-tensor-product-with-a-quotient-ring]]. [given, algebra]
 
-2.1 After quotienting by the $x_i$, the induced map remains flat and has the same closed fibre. The local flatness criterion applied successively to the lifts $y_j$ promotes injectivity on the fibre quotients to injectivity on the corresponding $S$-quotients. Nakayama preserves the nonzero terminal fibre quotient. Hence the concatenated sequence is regular. [step 1.1, algebra] ∎
+2.1 First establish the lifting assertion for a single $y\in\mathfrak n$ which is a nonzerodivisor on $S/\mathfrak mS$. Flatness identifies $\mathfrak m^aS/\mathfrak m^{a+1}S$ with $(\mathfrak m^a/\mathfrak m^{a+1})\otimes_RS$, by tensoring the inclusion and quotient sequences of these ideals. The latter is $(\mathfrak m^a/\mathfrak m^{a+1})\otimes_k(S/\mathfrak mS)$, by the same balanced formulas as step 1.1. The first factor is finite dimensional over $k$, since $R$ is Noetherian; a finite basis identifies this with finitely many copies of the fibre. Multiplication by $y$ is therefore injective on each graded piece. [step 1.1, algebra]
+
+3.1 The exact sequences $0\to\mathfrak m^aS/\mathfrak m^{a+1}S\to S/\mathfrak m^{a+1}S\to S/\mathfrak m^aS\to0$ now show inductively that $y$ acts injectively on every $S/\mathfrak m^aS$: an element killed by $y$ maps to zero in the last quotient and then is zero in the first term. If $ys=0$ in $S$, this implies $s\in\bigcap_a\mathfrak m^aS=0$ by [[thm-krull-intersection-theorem]], applied to the finite $S$-module $S$ and the ideal $\mathfrak mS\subseteq\mathfrak n=J(S)$. This invocation uses that theorem's stated AC boundary. [step 2.1, algebra]
+
+4.1 For every proper ideal $I\subset R$, step 1.1 gives a flat local map $R/I\to S/IS$ of Noetherian local rings, with the same closed fibre. Applying steps 2.1–3.1 to this map proves that $y$ is also a nonzerodivisor on $S/IS$. Thus $ys\in IS$ implies $s\in IS$. [step 1.1, step 3.1, algebra]
+
+5.1 Put $T=S/yS$. Right exactness ([[thm-right-exactness-of-tensor-products]]) applied to $S\xrightarrow yS\to T\to0$ identifies $I\otimes_RT$ with $IS/yIS$, because flatness identifies $I\otimes_RS$ with $IS$. The multiplication map $I\otimes_RT\to T$ is injective: if $u\in IS$ equals $ys$, step 4.1 gives $s\in IS$, so $u\in yIS$. For $I=R$ it is the identity. The ideal criterion [[thm-flatness-criteria-by-injections-and-ideals]] proves $T$ flat over $R$. [step 4.1, algebra]
+
+6.1 Flat tensoring preserves injectivity of each base regular element $x_i$ on the successive quotients. Those quotients remain flat over the corresponding base quotient by step 1.1. The ideals generated by the images of $x_i$ are contained in $\mathfrak n$, so their quotients are nonzero. Thus the base sequence is $S$-regular, in agreement with [[thm-localisation-and-flat-base-change-of-regular-sequences]]. Set $R'=R/(x_1,\ldots,x_r)R$ and $S'=S/(x_1,\ldots,x_r)S$; this is flat local with unchanged closed fibre. [step 1.1, step 5.1, algebra]
+
+7.1 Apply steps 2.1–5.1 repeatedly to $R'\to S'$ and the successive $y_j$ quotients. Fibre regularity supplies the nonzerodivisor hypothesis at each stage; the conclusion supplies both the lifted nonzerodivisor and flatness needed at the next stage. The final quotient is nonzero because all generators lie in $\mathfrak n$. This proves regularity in the convention of [[def-regular-sequence-on-a-module]] and every asserted quotient-flatness statement, including empty sequences. [step 5.1, step 6.1, algebra] ∎
