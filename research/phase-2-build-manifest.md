@@ -10,7 +10,7 @@ Admitted additions: **FA22 Fourier transform/convolution** and **FA23 Schwartz/P
 Three slots remain unused. The25-pair expansion proposal is superseded.
 Programme: **147 pairs =44 published +20 original selected +2 added selected
 +81 waiting**. Original run:40 pages/14 batches, Step1 held at543 items
-(88 current ready records,455 escalations). Supplemental run:4 pages/1 batch,
+(101 current ready records,442 escalations). Supplemental run:4 pages/1 batch,
 with FA22 before FA23. Admission evidence: `phase-2-five-cap-admission.md`
 and its exact published-interface census JSON. No original pair was removed.
 The supplemental scaffold now has57/57 current ready records and8/8
@@ -19,9 +19,9 @@ engine advances. Independent author/review gates remain.
 The RL14 chamber gap is resolved by three local supporting items; finite-Weyl
 and large-cardinal prerequisite gaps, source exceptions and other local
 proof work are not claimed resolved by these two additions.
-Locally convex batch2 source evidence is now resolved by complete local
-alternatives; its prerequisite audit remains held. See
-`phase-2-next-20-local-convex-source-resolution.md`.
+Locally convex batch2 now has13/13 ready construction records after source
+and used-prerequisite reconciliation. See
+`phase-2-next-20-local-convex-readiness-resolution.md`.
 Build completion leaves new content draft pending owner publication.
 
 Local prerequisite resolution: `phase-2-next-20-affine-level-local-resolution.md`.

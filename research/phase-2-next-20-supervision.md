@@ -210,3 +210,12 @@ reconciliation. The auditor retains the rule for subsequent batches.
 Owner reiterated that root should supervise the workflow. Root focus is now
 engine transitions, actual worker progress and exact original-run unblock work;
 separate Sol retains ongoing published audit and canonical ledger ownership.
+
+Locally convex original batch2 now13/13 construction-ready following the
+completed used-clause review and source resolution. All prior decisions are
+archived. Root inspected full local strategies plus underlying topology/basis,
+closure/continuity, vector/scalar, finite-choice, infimum and compactness/HB
+interfaces; unused supplier clauses are not conflated with actual prerequisites.
+No published repair or extra pair required. Readiness receipt:
+phase-2-next-20-local-convex-readiness-resolution.md. Original run now543items,
+101ready/442held. Do not retry its whole gate while other holds remain.
