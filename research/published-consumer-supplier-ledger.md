@@ -4,9 +4,34 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1438, U-C 15, A-R 187, A-P 158. The
+Current classifications: U-P 1435, U-C 16, A-R 187, A-P 158. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Locally convex published-prerequisite audit — 2026-09-11
+
+The complete current `def-algebraic-dual-and-linear-functional` defines a
+linear functional as a linear map into the field `F`, “where F is regarded as a
+vector space over itself,” and then forms `L(V,F)`. Its only dependencies are
+`def-linear-map` and `def-vector-space-of-linear-maps`; both require their
+source and target already to be vector spaces and neither proves the required
+field-as-vector-space structure. The missing result is not in their dependency
+closure. Exact earlier published supplier: `lem-restriction-of-scalars`, claim
+1, which checks the five vector-space axioms for `F` acting on itself. Repair by
+declaring and citing that supplier at the construction. No Phase-2 pair is
+needed. This is a confirmed definition/dependency defect, newly classified U-C
+pending complete repair audit; the published file remains unchanged.
+
+The compact-image, compact-Hausdorff, finite-product, Euclidean Heine-Borel,
+product-universal-property, relative Hahn-Banach, restriction-of-scalars,
+infimum and closure clauses actually used by the original next-20 batch 2 were
+also read in full. Thirteen items have bounded no-repair-needed receipts in the
+deduplicated index, including three moved from U-P. `lem-finite-choice`,
+`def-infimum`, and `thm-heine-borel-rn` already had bounded dispositions and
+were reconfirmed without duplicate rows. Exact hashes, clause evidence and
+audit limits are in
+`phase-2-next-20-published-locally-convex-prerequisite-audit.md`. This focused
+audit does not certify unused clauses or transitive closures.
 
 ## Finite-dimensional cohomology duality choice interface — 2026-09-11
 
@@ -27558,11 +27583,11 @@ This index retains the **2185 distinct published item IDs in the initial
 classification reference pool**, plus **5 newly identified published supplier
 items from U-C19**, **1 new 6c remark finding**, **1 Step-9 repaired definition**,
 **3 HG-P published prerequisite repairs**, **1 diagram-boundary consumer finding**,
-and **16 subsequent frontier-supervision findings**, plus **135 UC34 supplier findings**, plus **4 newly indexed Step3b Tor findings**, plus **2 Step3b real-integrability findings**, plus **2 recovered HG continuity repair rows**, plus **1 resolution-dependent Tor definition repair**, plus **1 sequence-space proof-interface candidate**, plus **2 Green-correspondence prerequisite findings**, plus **1 Cayley-tree proof finding**, plus **3 cohomology extension-map findings**, plus **1 Doob–Dynkin choice finding**, plus **1 finite-dimensional cohomology duality finding**, for **2365 indexed items**. It is not a census of defective items or a
+and **16 subsequent frontier-supervision findings**, plus **135 UC34 supplier findings**, plus **4 newly indexed Step3b Tor findings**, plus **2 Step3b real-integrability findings**, plus **2 recovered HG continuity repair rows**, plus **1 resolution-dependent Tor definition repair**, plus **1 sequence-space proof-interface candidate**, plus **2 Green-correspondence prerequisite findings**, plus **1 Cayley-tree proof finding**, plus **3 cohomology extension-map findings**, plus **1 Doob–Dynkin choice finding**, plus **1 finite-dimensional cohomology duality finding**, plus **11 locally convex prerequisite audit additions**, for **2376 indexed items**. It is not a census of defective items or a
 claim that every supplier later cited by an audit is a defect candidate.
 The publication census, checked 2026-09-10 from item front matter, has
-**15930 published items**. All 2365 indexed IDs are published;
-**13565 published items remain outside this index** and require census
+**15930 published items**. All 2376 indexed IDs are published;
+**13554 published items remain outside this index** and require census
 reconciliation. This is a status census, not a mathematical audit of those
 outside-index items.
 The initial extraction also contained
@@ -27571,14 +27596,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1438 | Evidence/role reconciliation incomplete; not a defect verdict. |
-| U-C | Unaudited and confirmed defective items | 15 | Confirmed mathematical or prerequisite defect; repair audit pending. |
+| U-P | Unaudited and potentially defective items | 1435 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-C | Unaudited and confirmed defective items | 16 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 158 | Recorded direct review and an unresolved item-specific repair. |
 
-567 further reference-pool items have bounded no-repair-needed dispositions
+580 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1798 items and the expanded reference pool contains 2365 unique items.
+1796 items and the expanded reference pool contains 2376 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28252,6 +28277,19 @@ owner's scan policy.
 | `def-axiom-schema-of-separation` | U-P300 Sol 1: Free of defects within item/dependency-interface scan; no repair. Full findings, exact suppliers, sources and strategy in U-P300 scan evidence above. |
 | `cor-noetherian-modules-are-hopfian` | Noetherian direct-consumer follow-up: only finite-generation-to-ACC is used; the stabilized-kernel argument needs no DC. No repair identified in this scope. |
 | `cor-principal-ideal-domains-are-noetherian` | Noetherian direct-consumer follow-up: every ideal is singly generated; no DC or local proof defect. Removing an unnecessary supplier is optional cleanup, not confirmed proof debt. |
+| `thm-compactness-under-continuous-maps` | Next-20 batch-2 actual-prerequisite audit: full current proof read. Continuous image, extreme value and compact-to-Hausdorff clauses are supplied; all witness recovery after cover thinning is finite. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
+| `thm-compact-subset-of-a-hausdorff-space-is-closed` | Next-20 batch-2 actual-prerequisite audit: full current proof read. All-admissible-open-set construction avoids point-indexed choice and only finite witness recovery remains. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
+| `thm-compactness-agrees-with-metric-compactness` | Next-20 batch-2 actual-prerequisite audit: full current item read; metric/topological compactness and subspace clauses are the same open-cover condition under the proved topology identity. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
+| `thm-finite-products-of-compact-spaces` | Next-20 batch-2 actual-prerequisite audit: full current proof read. Slice compactness, admissible bands, finite subcover and finite witness recovery establish the used finite-product clause in ZF. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
+| `lem-tube-lemma-for-a-compact-factor` | Next-20 batch-2 actual-prerequisite audit: full current proof read. Pair-indexed basic opens carry both coordinates through finite cover extraction, so no arbitrary choice is used. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
+| `cor-heine-borel-in-the-product-topology` | Next-20 batch-2 actual-prerequisite audit: full current item and its actual metric/topology suppliers read. Product and Euclidean topology identification and closed-bounded compactness support the simplex use. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
+| `lem-product-topology-on-rn` | Next-20 batch-2 actual-prerequisite audit: full current proof read. The box/maximum-metric comparison uses only finite coordinate choice and proves the used topology identity. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
+| `thm-product-universal-property` | Next-20 batch-2 actual-prerequisite audit: full current proof read. The used projection and componentwise-continuity clauses are choice-free; arbitrary-product choice is isolated to the unused surjectivity clause. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
+| `def-hahn-banach-extension-principle-relative` | Next-20 batch-2 actual-prerequisite audit: full current definition read. HB is explicitly an additional principle over ZF with the exact real dominated-extension contract used by the new separation theorem. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
+| `thm-relative-hahn-banach-dominated-extension` | Next-20 batch-2 actual-prerequisite audit: full current proof read. The theorem assumes the named HB principle and correctly derives the two-sided estimate from one-sided domination. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
+| `lem-restriction-of-scalars` | Next-20 batch-2 actual-prerequisite audit: full current proof read. Claim 1 checks the field-as-vector-space structure and the remaining clauses correctly restrict a common-field action. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
+| `thm-infimum-property` | Next-20 batch-2 actual-prerequisite audit: full current proof read. Reflection and completeness establish the precise nonempty bounded-below infimum used by the gauge construction. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
+| `thm-closure-characterisation-top` | Next-20 batch-2 actual-prerequisite audit: full current proof read. The neighbourhood characterization supplies the convex-closure argument without an extra separation or choice assumption. No repair in this scope. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
 
 
 ### A-P — Audited items pending Phase 3 repair
@@ -28426,6 +28464,7 @@ owner's scan policy.
 
 | Published item | Exact prerequisite debt at classification |
 |---|---|
+| `def-algebraic-dual-and-linear-functional` | Next-20 batch-2 published-interface audit: definition forms `L(V,F)` while merely saying `F` is regarded as a vector space over itself; neither declared dependency proves that structure. Add exact earlier published `lem-restriction-of-scalars`, claim 1. No Phase-2 pair; U-C pending complete repair audit. Exact hash/evidence: research/phase-2-next-20-published-locally-convex-prerequisite-audit.md. |
 | `cor-cohomology-over-a-field-is-dual-to-homology-for-finite-dimensional-complexes` | Batch8/root2026-09-11: finite-dimensional statement invokes choice-bearing general UCT/injectivity without assumptions. Local finite-basis evaluation proof can repair it; no new Phase2 supplier. See Finite-dimensional cohomology duality choice interface. |
 | `thm-doob-dynkin-lemma` | Batch3/root full target reading 2026-09-11: rational Borel lifts selected simultaneously without a choice contract. Existing def-countable-choice or def-axiom-of-choice suffices; no new pair. See Doob–Dynkin choice-interface finding. |
 | `thm-the-cohomology-universal-coefficient-sequence-splits-nonnaturally` | Batch8 2026-09-11 confirmed extension-map well-definedness/choice-contract debt; exact local earlier HA suppliers and repair identity recorded in Cohomology extension-map prerequisite findings and phase-2-next-20-batch-8.notes.md. New topological supplier is scaffolded/escalated, never a forward repair premise. No new Phase 2 pair. |
@@ -29801,9 +29840,6 @@ mathematical repairs. Evidence:
 | `thm-closed-hyperplanes-are-kernels-of-nonzero-functionals` | norming-and-separation-under-hahn-banach |
 | `thm-closed-projective-embedding-by-homogeneous-generators` | AV-1 draft-page impact partition (Phase 3 only) |
 | `thm-cofinality-basics` | 7.1 Recorded-Not-Proved closure and prose defects |
-| `thm-compact-subset-of-a-hausdorff-space-is-closed` | Chart-bump follow-up |
-| `thm-compactness-agrees-with-metric-compactness` | Chart-bump follow-up |
-| `thm-compactness-under-continuous-maps` | Chart-bump follow-up |
 | `thm-compactness-variants-hierarchy` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-completion-measurable-functions-have-base-measurable-representatives` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-completion-of-a-measure-space` | Nonmeasurable-set counterexample: missing witness supply |
