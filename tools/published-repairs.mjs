@@ -94,7 +94,7 @@ try {
         || typeof row.group !== 'string' || typeof row.found_via !== 'string') {
         throw new Error('each row requires kind repaired|escalated, id, group, and found_via');
       }
-      if (row.found_at_stage === '6a-read') {
+      if (['6a-read', '6c-cross'].includes(row.found_at_stage)) {
         const claim = claims.find((candidate) => candidate.id === row.id);
         if (!claim || row.repair_owner_group !== claim.group || row.pre_sha256 !== claim.pre_sha256) {
           throw new Error(`${row.id} Step-6 receipt does not match its pre-edit ownership claim`);

@@ -31,3 +31,8 @@ Next: finish regression tests, commit/install the integrated workflow, import
 the checkpoint into fresh run `phase-2-nine-step-25`, run doctor and full gates,
 then supervise fresh cross-group closure and remaining canonical stages.
 Original state and execution receipts must not be renumbered or adopted.
+
+Integration regression result: 648 TypeScript workflow tests passed, zero failed
+or skipped, including type checking. Three checkpoint migration tests passed.
+The source snapshot also contains the published-repair append guard for both
+reader and cross-group repairs; preserve the matching live edit during merge.
