@@ -1,14 +1,14 @@
 # Phase 2 A/B-pair build manifest
 
-Snapshot date: 2026-09-10.
+Snapshot date: 2026-09-11 (Australia/Sydney).
 
 Active run: `phase-2-next-20`, state `.autopilot/phase-2-next-20`.
 The owner authorized building all 20 pairs presented as buildable, supervising
 the engine through completion, resolving blockers and inefficiency, recording
 potential published-item defects in the canonical ledger, and keeping Phase 2 current.
 Scope: **20 pairs / 40 pages / 14 batches**. Programme: **147 pairs = 44 published
-+ 20 selected + 83 waiting**. Planning and doctor checks pass; Step 1 drift review found an affine-level interface gap; root resolved it
-with a local RL-14 central-coroot lemma, preserving all twenty pairs.
++ 20 selected + 83 waiting**. Planning and doctor checks pass; Step 1 drift and materialization passed after root resolved the affine-level
+interface locally. All 14 scaffold batches are running; all twenty pairs remain.
 Build completion leaves new content draft pending owner publication.
 
 Local prerequisite resolution: `phase-2-next-20-affine-level-local-resolution.md`.
