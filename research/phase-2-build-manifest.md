@@ -8,16 +8,18 @@ that one frontier: `phase-2-next-20` owns the original20 and
 `phase-2-fourier-support-2` owns the2 Fourier pairs. They share prerequisite
 and completion scope; the Fourier pairs do not replace any original pair.
 
-The owner now explicitly directs authoring all22 immediately. **All22 pairs now have live author coverage:** eight groups cover the original20
-and the existing Fourier author covers the other2. Neither execution partition
-is paused. The original101 ready and442 held item records remain unchanged evidence.
-Open findings transfer as explicit author repair obligations. The owner has
-recorded proceed for all20 current pair scopes. No proof approval or source
-retrieval evidence is manufactured. See
-`phase-2-next-20-owner-authoring-direction.md`.
-The existing Fourier author continues; its57-item scaffold passed Step1 with
-8/8 verified source fetches. All authored-content and independent review gates
-remain binding, and frontier completion requires closing all22 pairs.
+The owner directs authoring all22 immediately. All22 received live author
+coverage at16:21 UTC. At17:03 UTC, six original author groups continue; the
+locally convex, computability and Fourier author passes have finished. The
+computability time-simulator escalation is repaired and its two unavailable
+source obligations are resolved by complete local alternatives. Fourier's
+57 items pass authored content policy; its final author gate currently waits
+on a missing draft supplier being written by another frontier author.
+Neither execution partition is paused. Original101 ready/442 held scaffold
+records remain historical evidence; current authored decisions track repairs.
+Scope approval does not approve proofs. All independent review gates remain,
+and frontier completion requires closing all22 pairs. See
+`phase-2-next-20-owner-authoring-direction.md` and the supervision record.
 
 Programme: **147 pairs =44 published +22 selected in this frontier +81 waiting**.
 Only FA22 Fourier transform/convolution and FA23 Schwartz/Plancherel were
