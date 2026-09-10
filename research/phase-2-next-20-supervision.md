@@ -186,3 +186,27 @@ Auditor reports dedup check:2376rows/2376unique published IDs,zero cross-class
 duplicates, all identities exist/published. It searched whole-ledger titles,
 aliases, mechanisms and suppliers before the new algebraic-dual finding;
 reconfirmations reuse existing records. Future audit batches retain this rule.
+
+15:37:15 UTC supervision checkpoint: original20 remains at the held Step1 gate
+with no worker in flight; supplemental Fourier beta has materially progressed
+to57/57 current ready records and8/8verified source occurrences, zero coverage
+open obligations. Its dispatch remains live while final checks are completed.
+No stall intervention or retry is warranted. Root forwarded its entire new
+published-defect handoff to the separate auditor for prompt deduplication.
+After the local Hanche backing resolution,16 distinct original source URLs
+remain owner-escalated (previous17 count was prior to that resolution).
+
+Classification correction: root found the canonical index’s rule that correct
+implicit use of an adequate published supplier is clear, not metadata-only
+repair debt. Auditor is reconciling its algebraic-dual, finite-radius-choice
+and complex metric-subspace suggestions to bounded clears. Earlier wording
+calling these confirmed blockers is superseded; the explicit local edges are
+valid clarifications, not evidence of false published results. The metric
+neighbourhood terminology discrepancy is separately tracked; new scaffold
+explicitly uses the general-topology convention. Root independently counted
+2376classification rows/2376unique IDs with zero duplicates before this next
+reconciliation. The auditor retains the rule for subsequent batches.
+
+Owner reiterated that root should supervise the workflow. Root focus is now
+engine transitions, actual worker progress and exact original-run unblock work;
+separate Sol retains ongoing published audit and canonical ledger ownership.
