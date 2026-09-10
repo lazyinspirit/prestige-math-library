@@ -52,6 +52,12 @@ read the complete published complex field, modulus-law, complex metric and
 metric-open-set-algebra items. All new supplier homes already lie in the
 existing canonical prerequisite closure; no page prerequisite was added.
 Coverage alternative records include these strengthened strategies and deps.
+The auditor additionally found the finite-choice edge omitted at step1.3 of
+`thm-metric-open-set-algebra`. The local TVS definition explicitly supplies
+`lem-finite-choice`: choose radii from the finite indexed family of nonempty
+admissible-radius sets, then take their minimum. The operator reread the
+complete finite-choice proof. This closes the local interface while published
+dependency-declaration debt remains in the canonical ledger.
 
 ## Gate status
 
