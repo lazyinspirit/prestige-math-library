@@ -2780,9 +2780,15 @@ export const stages = [
         return;
       }
       const { ctx, executor, stage, round } = args;
+      const task = `research/${ctx.run}-receipts-fix-${round}.task.md`;
+      writeFileSync(R(ctx, task), [
+        readFileSync(R(ctx, 'briefs/tasks/alpha-receipts-repair.md'), 'utf8').trim(),
+        '', `Run: ${ctx.run}`, '', '## Failed checks', '',
+        repairGateOutput(args.failure), '',
+      ].join('\n'));
       executor.start(stage, {
         role: 'alpha', label: `receipts-fix-${round}`, job: 'audit', covers: [], brief: 'briefs/alpha.md',
-        task: [`research/${ctx.run}-alpha-receipts.task.md`, `research/${ctx.run}-alpha-step8.task.md`], timeout: 14400,
+        task: [task], timeout: 14400,
       });
     },
   },

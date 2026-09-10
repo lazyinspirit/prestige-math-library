@@ -44,6 +44,26 @@ function fixtureRepo() {
   return dir;
 }
 
+test('receipt recovery targets failed evidence without replaying completed audits', async () => {
+  const repo = fixtureRepo();
+  try {
+    const stage: any = stages.find(s => s.id === '8-receipt');
+    const plans: any[] = [];
+    await stage.onGateFailure({
+      ctx: { repo, run: 'demo' }, stage, round: 1,
+      executor: { start: (_s: any, p: any) => plans.push(p) },
+      failure: { id: 'level-coverage', output: 'ERROR contract-missing-proof [thm-demo]: missing contract' },
+    });
+    assert.equal(plans.length, 1);
+    assert.deepEqual(plans[0].task, ['research/demo-receipts-fix-1.task.md']);
+    const text = readFileSync(join(repo, plans[0].task[0]), 'utf8');
+    assert.match(text, /contract-missing-proof \[thm-demo\]/);
+    assert.match(text, /do not regenerate templates or repeat completed/);
+    assert.match(text, /Fix the evidence instead of merely reporting/);
+    assert.doesNotMatch(text, /spine-audit --template|alpha-step8.task/);
+  } finally { rmSync(repo, { recursive: true, force: true }); }
+});
+
 function executorAt(repo: string) {
   const config: any = { repo, stateDir: join(repo, '.autopilot'), run: 'demo', argv: ['true'], dispatchDir: join(repo, 'research', 'demo-dispatch'), coversMap: {}, adoptCommand: false, dispatchStaggerMs: 0 };
   const state = new State(statePath(config.stateDir)).init('demo');

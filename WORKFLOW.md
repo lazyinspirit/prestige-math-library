@@ -169,7 +169,9 @@ and their historical repaired content to match the Step-7 baseline; this
 recognition grants no licence for a new edit or exemption from later certification.
 
 Step 8 reviews scope and post-repair changes, closes impact and applies current
-stamps through the tool. Step 9 requires contracts, ledger, pathways, readiness
+stamps through the tool. Receipt recovery addresses only failed checks and
+missing contracts; it preserves completed spine readings and valid evidence.
+Step 9 requires contracts, ledger, pathways, readiness
 and owner-report evidence before committing. New content remains draft. Reused
 published identities require evidence at the pinned ancestor baseline. Only the
 owner publishes and pushes. Close-out means publishable pending owner approval.
