@@ -1277,6 +1277,22 @@ function readPublishedRepairs(ctx): string[] {
 
 /** Durable paid Step-7 rejudge counts. The receipt, not the stage-wide repair
  * counter, owns the one-Terra-rejudge lifetime ceiling for each item. */
+export function hasCompletedPaidVerdict(ctx: any, id: string): boolean {
+  try {
+    const cycles = JSON.parse(readFileSync(R(ctx, `research/${ctx.run}-step7-rejudge-cycles.json`), 'utf8')).cycles ?? [];
+    const verdicts = readFileSync(R(ctx, `research/${ctx.run}-judge.jsonl`), 'utf8')
+      .split(/\r?\n/).filter(Boolean).map(line => JSON.parse(line));
+    return cycles.some((cycle: any) => !String(cycle.kind).startsWith('initial-')
+      && cycle.items?.includes(id) && cycle.exit_code === 0
+      && verdicts.some((v: any) => v.id === id && typeof v.keep === 'boolean'
+        && String(cycle.lineup).split(':').at(-1) === v.model
+        && /^[a-f0-9]{64}$/.test(v.item_sha256 ?? '')
+        && /^[a-f0-9]{64}$/.test(v.context_sha256 ?? '')
+        && Date.parse(v.at) >= Date.parse(cycle.started_at)
+        && Date.parse(v.at) <= Date.parse(cycle.completed_at)));
+  } catch { return false; }
+}
+
 function rejudgeCycleCounts(ctx): Map<string, number> {
   const p = R(ctx, `research/${ctx.run}-step7-rejudge-cycles.json`);
   const counts = new Map<string, number>();
@@ -1284,6 +1300,7 @@ function rejudgeCycleCounts(ctx): Map<string, number> {
   try {
     const receipt = JSON.parse(readFileSync(p, 'utf8'));
     for (const cycle of receipt?.cycles ?? []) {
+      if (String(cycle.kind).startsWith('initial-')) continue;
       for (const id of new Set<string>((cycle?.items ?? []).map(String))) {
         counts.set(id, (counts.get(id) ?? 0) + 1);
       }
@@ -2423,8 +2440,10 @@ export const stages = [
       // audit rejudge of 13 ids died on two long-published items), so the union
       // needs no new machinery.
       const published = readPublishedClosure(ctx);
+      const counts = rejudgeCycleCounts(ctx);
       const ids = [...new Set([...(readClosure(ctx)?.needs_rejudge ?? []),
-        ...(published ? published.needs_rejudge : readPublishedRepairs(ctx))])];
+        ...(published ? published.needs_rejudge : readPublishedRepairs(ctx))])]
+        .filter(id => (counts.get(id) ?? 0) === 0);
       return [{
         role: 'tool',
         label: 'rejudge',
@@ -2514,7 +2533,12 @@ export const stages = [
         // only with ids whose durable per-item budget remains.
         const cycleCounts = rejudgeCycleCounts(ctx);
         const exhausted = owed.filter((id) => (cycleCounts.get(id) ?? 0) >= 1);
-        for (const id of exhausted) {
+        // A licensed later correction can stale a successfully completed
+        // review. Refresh it with the independent final adjudicator, never
+        // another Terra call. A paid call with no real verdict still blocks.
+        const refresh = exhausted.filter(id => hasCompletedPaidVerdict(ctx, id));
+        if (refresh.length) startFinalAdjudicators(ctx, executor, stage, round, refresh);
+        for (const id of exhausted.filter(id => !refresh.includes(id))) {
           const message = `${id}: the one paid Terra rejudge produced no current verdict; intervention is required and no second rejudge is permitted`;
           if (executor.state?.addBlocker?.(stage.id, message, `step7-one-rejudge-owed:${id}`))
             executor.reporter?.notify?.('blocked', message, { stage: stage.id, item: id });

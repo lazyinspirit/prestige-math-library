@@ -150,6 +150,10 @@ repeat unchanged attempts. Per-item licence, precheck and contract checks run
 before spending; whole-run preflight/closure remain mandatory joins. Concurrent
 handoffs reserve the shared one-rejudge budget under short receipt locks.
 An interrupted handoff resumes existing evidence, never spends a second call.
+If a licensed later correction stales a completed paid verdict, final
+adjudication refreshes that item. Missing or failed paid verdicts still block;
+the initial rejudge dispatch excludes already-spent items so they cannot hold
+up other items with unused budgets.
 The sandboxed Alpha writes an item request and waits; the controller's progress
 hook launches the tool, judge and final adjudicator outside the Alpha sandbox.
 Request/response files and normal dispatch records preserve ownership and errors.

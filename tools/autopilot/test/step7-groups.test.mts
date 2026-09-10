@@ -363,6 +363,43 @@ test('Step-7 rejudge blocks exhausted owed items without stranding eligible page
   rmSync(repo, { recursive: true, force: true });
 });
 
+test('initial fatal provenance does not consume a paid rejudge', () => {
+  const repo = fixtureRepoWithGroups();
+  try {
+    writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({needs_rejudge: ['thm-demo-x']}));
+    writeFileSync(join(repo, 'research', 'demo-step7-rejudge-cycles.json'), JSON.stringify({
+      cycles: [{kind: 'initial-fatal', items: ['thm-demo-x']}],
+    }));
+    const s: any = stage('7-rejudge');
+    assert.ok(s.plan({run: 'demo', repo})[0].argv.includes('thm-demo-x'));
+  } finally { rmSync(repo, {recursive: true, force: true}); }
+});
+
+test('a completed paid verdict made stale by later licensed work goes to FA, never a second paid call', async () => {
+  const repo = fixtureRepoWithGroups();
+  try {
+    const ctx: any = { run: 'demo', repo, config: { stateDir: '.autopilot/demo' } };
+    writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
+      needs_rejudge: ['thm-demo-x'], unadjudicated: [], open_fatal: [], closed: false,
+    }));
+    writeFileSync(join(repo, 'research', 'demo-step7-rejudge-cycles.json'), JSON.stringify({
+      cycles: [{ kind: 'repair', items: ['thm-demo-x'], lineup: 'terra:gpt-5.6-terra', exit_code: 0,
+        started_at: '2026-09-10T00:00:00Z', completed_at: '2026-09-10T00:02:00Z' }],
+    }));
+    writeFileSync(join(repo, 'research', 'demo-judge.jsonl'), JSON.stringify({
+      id: 'thm-demo-x', model: 'gpt-5.6-terra', keep: true, at: '2026-09-10T00:01:00Z',
+      item_sha256: 'a'.repeat(64), context_sha256: 'b'.repeat(64),
+    }) + '\n');
+    const s: any = stage('7-rejudge');
+    assert.ok(!s.plan(ctx)[0].argv.includes('tools/step7-rejudge-cycle.mjs'));
+    const started: any[] = [];
+    await s.onGateFailure({ctx, stage: s, round: 1, failure: {id: 'judge-closure'},
+      executor: {start: (_s: any, p: any) => started.push(p)}});
+    assert.equal(started.length, 1);
+    assert.equal(started[0].role, 'final-adjudicator');
+  } finally { rmSync(repo, {recursive: true, force: true}); }
+});
+
 test('adjudication closure sends stale immediate terminal receipts to FA, not Sol or another judge', async () => {
   const repo = fixtureRepoWithGroups();
   writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
