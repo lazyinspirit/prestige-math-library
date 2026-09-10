@@ -8,22 +8,30 @@ that one frontier: `phase-2-next-20` owns the original20 and
 `phase-2-fourier-support-2` owns the2 Fourier pairs. They share prerequisite
 and completion scope; the Fourier pairs do not replace any original pair.
 
-The owner directs authoring all22 immediately. All22 received live author
-coverage at16:21 UTC. At18:10 UTC, the original topology author continues;
-the other original author passes and Fourier authoring have finished, with
-remaining mathematical and source obligations retained explicitly. Current
-closed authoring decisions include Chacon/ergodic24/24, probability and
-martingales81/81, hyperbolic toolkit36/36, convergence batch55/55 and
-computability22/22. Closed authoring decisions are not independent review.
-Laver-function existence is repaired; preparation and PMEA remain incomplete.
-Carleson and finite-Weyl repairs continue within the selected existing pages.
-Fourier's57 items passed author gates and Step4 splicing, then independent
-Step5a review; Step5b reconciliation is resolving its recorded workflow findings.
-Neither execution partition is paused. Original101 ready/442 held scaffold
-records remain historical evidence; current authored decisions track repairs.
-Scope approval does not approve proofs. All independent review gates remain,
-and frontier completion requires closing all22 pairs. See
-`phase-2-next-20-owner-authoring-direction.md` and the supervision record.
+The owner directs authoring all22 immediately. At18:36 UTC, seven mathematical
+authoring/repair workers are assigned: original AT6, supplemental connections,
+smooth cohomology, fibrations and forcing, plus finite-Weyl repairs and the
+Carleson author now resolving the fibration scope escalation. Supplemental lanes
+write disjoint items and isolated fragments, serially merged by root; the engine
+retains every transition. Forcing completed one local coordinate supplier and
+its persistent session was resumed with the requested partial measure candidate.
+Preparation and full PMEA remain mathematically incomplete.
+
+Carleson-Hunt proofs are fully authored and locally owner-reviewed, including
+all-p interpolation, averaged reconstruction, strong-L2 extension and exact
+normalized torus transfer. Fremlin backing is resolved using14 exact hashed local
+alternatives; this is not a source fetch stamp or independent adjudication.
+Finite-Weyl core and Killing/Engel/trace repairs are locally closed; four general
+Lie/Kostant claims remain held. Earlier closed authoring groups include
+Chacon24/24, probability81/81, hyperbolic36/36, convergence55/55 and computability22/22;
+transitive hash changes are reconciled before engine acceptance.
+
+Fourier57/57 passed author gates, Step4 and independent Step5a. Step5b impact
+closure continues while peer authors change the shared frontier. Neither engine
+is paused. Current original-run inventory554 includes necessary local A suppliers;
+no pair has been added. Scope approval and local proof review do not replace the
+independent gates. See `phase-2-next-20-owner-authoring-direction.md` and the
+supervision record for exact completed work and outstanding obligations.
 
 Programme: **147 pairs =44 published +22 selected in this frontier +81 waiting**.
 Only FA22 Fourier transform/convolution and FA23 Schwartz/Plancherel were
