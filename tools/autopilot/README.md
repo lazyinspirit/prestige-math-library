@@ -14,6 +14,8 @@ operating contract and CLAUDE.md for agent instructions.
 Step3 groups audit scaffolds, repair local gaps and author everything. The
 pre-author snapshot precedes them. Step4 still splices the plan and snapshots
 content. Step5a reviews authored arguments; Step5b reconciles and closes them.
+Step7 completes repairs and checks, runs one rejudge and one terminal
+adjudication pass, then snapshots for Step8. No post-final repair loop exists.
 Coverage, artifacts and gates are independently required. Every agent must be
 honest about uncertainty and read authoritative sources when unsure.
 

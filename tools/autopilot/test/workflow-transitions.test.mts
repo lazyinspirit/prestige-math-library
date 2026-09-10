@@ -21,7 +21,7 @@ test('author, splice, review, cross-closure and judgment are ordered barriers', 
     '5a-prepare', '5a-adjudicate', '5a-baseline', '5b-edges', '5b-cross',
     '5b-close', '6-scope', '6-judge',
   ]);
-  assert.ok(ids.includes('7-final') && ids.includes('8-receipt') && ids.includes('9-close-v2'));
+  assert.ok(ids.includes('7-rejudge') && ids.includes('8-receipt') && ids.includes('9-close-v2'));
   for (const s of stages.filter(s => /^[3456]/.test(s.id))) assert.equal(s.pipeline, undefined);
   const ctx = { repo, run: 'test' };
   assert.equal(stage('3-baseline').plan(ctx)[0].argv.at(-1), 'pre-author');

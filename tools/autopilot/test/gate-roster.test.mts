@@ -33,7 +33,7 @@ test('the step-7 window is guarded end to end', async () => {
     assert.ok(!tools.includes('tools/proof-contract.mjs'),
       `${id} lets contract bookkeeping consume the bounded judge loop`);
   }
-  for (const id of ['7-preflight', '7-close']) {
+  for (const id of ['7-preflight']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const tools = st.gates(ctx)
       .map((g: any) => (typeof g.argv === 'function' ? g.argv() : g.argv))
@@ -53,7 +53,7 @@ test('the scope-loss gate never switches off once content exists', async () => {
   // in-flight items as needed"). Step 8 built two items on frontier-14.
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['5a-adjudicate', '5b-cross', '7-preflight', '7-close', '8-scope', '9-readiness-v2']) {
+  for (const id of ['5a-adjudicate', '5b-cross', '7-preflight', '8-scope', '9-readiness-v2']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const tools = st.gates(ctx)
       .map((g: any) => (typeof g.argv === 'function' ? g.argv() : g.argv))

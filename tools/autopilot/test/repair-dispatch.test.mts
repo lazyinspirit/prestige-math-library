@@ -178,15 +178,15 @@ test('contract residue cannot consume rejudge budget and is routed at Step-7 clo
     stage, round: 1, failure: { id: 'risk-report', why: 'risk-review-missing [thm-demo-x]' },
   });
   assert.equal(started.length, 0, 'rejudge owns mathematical currency only');
-  const close: any = stages.find((candidate: any) => candidate.id === '7-close');
+  const close: any = stages.find((candidate: any) => candidate.id === '7-preflight');
   await close.onGateFailure({
     ctx: { run: 'demo', repo }, executor: { start: (_s: any, plan: any) => started.push(plan) },
     stage: close, round: 1, failure: { id: 'risk-report', why: 'risk-review-missing [thm-demo-x]' },
   });
   assert.equal(started.length, 1);
-  assert.equal(started[0].label, 'step7-close-a-1');
+  assert.equal(started[0].label, 'step7-preflight-a-1');
   assert.equal(started[0].role, 'alpha-adjudicate');
-  assert.deepEqual(started[0].task, ['research/demo-7-close-repair-envelope-1-a.task.md']);
+  assert.deepEqual(started[0].task, ['research/demo-7-preflight-repair-envelope-1-a.task.md']);
   const envelope = readFileSync(join(repo, started[0].task[0]), 'utf8');
   assert.match(envelope, /"id": "risk-report"/);
   assert.match(envelope, /"scope": "run"/);
@@ -194,7 +194,7 @@ test('contract residue cannot consume rejudge budget and is routed at Step-7 clo
 });
 
 test('Step-7 repair removes mechanically handled owners and serializes unknown scope', async () => {
-  for (const stageId of ['7-preflight', '7-close']) {
+  for (const stageId of ['7-preflight']) {
     const repo = groupedFixture();
     writeFileSync(join(repo, 'tools', 'splice-plan.mjs'), 'process.exit(0);\n');
     writeFileSync(join(repo, 'tools', 'manifest-deps.mjs'),
@@ -232,7 +232,7 @@ test('preflight retains original fatal licences after live rejection closure; fr
   put('judge.jsonl', { ...row, keep: false });
   put('judge-adjudications.jsonl', row);
   put('touches.json', { snapshots: [{ label: 'pre-step7', hashes: { 'thm-demo-x': 'b'.repeat(16) } }] });
-  for (const id of ['7-preflight', '7-close']) {
+  for (const id of ['7-preflight']) {
     const stage: any = stages.find((s: any) => s.id === id);
     const plans: any[] = [];
     await stage.onGateFailure({ ctx: { run: 'demo', repo }, stage, round: 1,
@@ -265,7 +265,7 @@ test('passing risk inventory does not expand the Step-7 repair assignment', asyn
 test('Step-7 close routes boundary-audit item summaries to their exact owners', async () => {
   const repo = groupedFixture();
   const started: any[] = [];
-  const close: any = stages.find((candidate: any) => candidate.id === '7-close');
+  const close: any = stages.find((candidate: any) => candidate.id === '7-preflight');
   await close.onGateFailure({
     ctx: { run: 'demo', repo }, executor: { start: (_s: any, plan: any) => started.push(plan) },
     stage: close, round: 1,
@@ -281,7 +281,7 @@ test('Step-7 close routes boundary-audit item summaries to their exact owners', 
       ].join('\n'),
     },
   });
-  assert.deepEqual(started.map((plan) => plan.label).sort(), ['step7-close-a-1', 'step7-close-b-1']);
+  assert.deepEqual(started.map((plan) => plan.label).sort(), ['step7-preflight-a-1', 'step7-preflight-b-1']);
   for (const plan of started) {
     const envelope = readFileSync(join(repo, plan.task[0]), 'utf8');
     assert.match(envelope, /"assigned_items": \[\s*\{/);

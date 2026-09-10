@@ -15,7 +15,7 @@ mathlib.step5.mts are authoritative. There is no LLM orchestrator.
 | 5a — review | 5a-prepare, 5a-adjudicate, 5a-baseline | Direct group review and frozen post-review evidence |
 | 5b — reconcile and close | 5b-edges, 5b-cross, 5b-close | Cross-group dependency audit, impact accounting and closure receipt |
 | 6 — judge | 6-scope, 6-judge | Frozen item judgments and group reader digests |
-| 7 — repair | 7-baseline, 7-scope, 7-adjudicate, 7-preflight, 7-rejudge, 7-close, 7-final, 7-freeze | Licensed repairs and current terminal judgments |
+| 7 — repair | 7-baseline, 7-scope, 7-adjudicate, 7-preflight, 7-rejudge, 7-freeze | Repairs/checks, one rejudge, one final adjudication, then Step 8 |
 | 8 — certify changes | 8-scope, 8-scope-render, 8-scope-freeze, 8-changes-judge, 8-close, 8-changes-stamp, 8-receipt | Scope review, change judgments, impact closure and stamps |
 | 9 — close run | 9-contract-close through 9-close-v2 | Contracts, pathways, readiness, evidence, owner report and commit |
 
@@ -139,38 +139,23 @@ proofs are judged separately. Verdicts bind to item, model and context hashes.
 Group readers supply Step 7 evidence. Step 7 resolves each reader concern, alert
 and rejection. Only confirmed fatal findings license mathematical repair;
 published repairs need separate authority. Register necessary suppliers before
-consumers and give each its own first judgment. Each repaired consumer gets one
-paid Terra rejudge immediately after its focused checks, through
-`tools/autopilot/bin/complete-step7-item.mjs`. The owning Alpha awaits this
-handoff and does not edit group files while its item is with the judge or final
-adjudicator. Other groups continue independently; no whole-run barrier delays
-an item. Rejection goes immediately to a fresh Astra final adjudicator, which
-accepts or repairs without another consumer judge call. Never invent stamps or
-repeat unchanged attempts. Per-item licence, precheck and contract checks run
-before spending; whole-run preflight/closure remain mandatory joins. Concurrent
-handoffs reserve the shared one-rejudge budget under short receipt locks.
-An interrupted handoff resumes existing evidence, never spends a second call.
-If a licensed later correction stales a completed paid verdict, final
-adjudication refreshes that item. Missing or failed paid verdicts still block;
-the initial rejudge dispatch excludes already-spent items so they cannot hold
-up other items with unused budgets.
-The sandboxed Alpha writes an item request and waits; the controller's progress
-hook launches the tool, judge and final adjudicator outside the Alpha sandbox.
-Request/response files and normal dispatch records preserve ownership and errors.
-Failed preflight responses include the exact diagnostic so the owning Alpha can
-correct licensed metadata before retrying; failed model calls remain held.
-Repair routing extracts subjects from each failing gate separately. Dependency
-error sections exclude warning inventories; contract errors must not hide other
-gates' published-audit or forward-reference failures.
-Boundary routing uses complete JSON diagnostics, assigns only unresolved
-template/contradiction records, and excludes upheld reviews. Cited suppliers
-remain diagnostic context, not repair targets. Repair envelopes retain full
-reports in a separate evidence artifact; prompts contain only relevant failures
-and the focused repair brief, never the old whole-group reading assignment.
-Forward-reference gates suppress the inventory and drain stdout before exit so
-the actual error cannot be lost behind thousands of inherited-reference rows.
+consumers and give each its own first judgment.
+
+Step 7 is: group repairs → preflight checks → one Terra rejudge → one Astra
+final-adjudication pass → snapshot → Step 8. Only the engine dispatches judges.
+Final adjudicators accept or repair queued items using existing suppliers.
+New prerequisites, missing paid verdicts or unresolved mathematics stop the run;
+they do not trigger another sweep. A completed paid verdict made stale by a
+licensed correction goes to the terminal pass, never another Terra call.
+Initial defect records do not count as paid reviews.
+
+There is no post-final repair or judging loop. The terminal pass cannot be reset
+by retry. Preflight retains dependency, contract, boundary, citation and ledger
+checks before judging. Repair prompts contain only unresolved findings; upheld
+records and cited suppliers are not repair targets. Full reports stay on disk.
+Forward-reference gates suppress inventories and drain their output before exit.
 Inherited published items need not acquire a new-batch proof contract merely
-to enter the handoff; their licence, precheck and final published-repair checks
+to enter certification; their licence, precheck and final published-repair checks
 remain mandatory. New proof-bearing items require their owning contract;
 definitions explicitly marked proof-not-applicable need no new proof contract.
 Contract ownership comes from its explicit `scope`, never textual dependency mentions.
@@ -178,13 +163,6 @@ Inherited Step-5 cross-group published repairs retain their original provenance.
 The Step-7 guard requires their claim file to match the frozen Step-5 receipt
 and their repaired content to remain unchanged from the Step-7 baseline; this
 recognition grants no licence for a new edit or exemption from later certification.
-If a later supplier repair makes an immediate final-adjudication receipt stale,
-the adjudication-stage closure sends it to an independent final adjudicator for
-current-context review. It never buys a second consumer rejudge or substitutes
-a group Alpha's decision for final adjudication.
-After fixing an infrastructure failure, the operator may queue a `resume-group`
-request for a stopped owning group; it retains completed decisions and resumes
-owed handoffs. It must not overlap a live writer for that group.
 
 Step 8 reviews scope and post-repair changes, closes impact and applies current
 stamps through the tool. Step 9 requires contracts, ledger, pathways, readiness

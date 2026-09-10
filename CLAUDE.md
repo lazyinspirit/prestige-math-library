@@ -96,6 +96,12 @@ prerequisites that cannot be supplied locally; never accept unresolved mathemati
 Record every published defect in the canonical ledger. Preserve cross-group
 dependency, impact and exact-hash closure checks.
 
+**Step 7.** Repair and reconcile all assigned findings before rejudging.
+The engine runs one rejudge, then one terminal final-adjudication pass. No
+early final handoffs, post-final repair stages, repeat judge waves or new
+prerequisites at final adjudication. Unresolved work escalates and stops.
+Successful final adjudication freezes the result and proceeds to Step 8.
+
 **12. Phase-3 repair ledger.** Throughout Phase 2, maintain
 `research/published-consumer-supplier-ledger.md` as the existing canonical
 record of published items needing Phase-3 proof, definition, dependency or

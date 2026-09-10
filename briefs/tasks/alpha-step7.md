@@ -5,27 +5,10 @@ and incoming alerts. Read each owned rejection against the current item and its
 cited dependencies; the exact `(id, model, context_sha256)` tuple identifies
 one adjudication.
 
-Audit one item, record its decision, complete any authorized repair and focused
-checks, then immediately finish its engine-managed handoff:
-
-`node tools/autopilot/bin/complete-step7-item.mjs --run {{run}} --id ITEM --group GROUP`
-
-Replace ITEM and GROUP with the exact owned IDs. Await the command before
-editing another item or shared group file. It checks the repair, runs the one
-Terra rejudge, and immediately dispatches Astra/medium final adjudication on a
-rejection. Other groups continue independently. Do not make another Sol repair
-after the rejudge. A preflight-only contract or ledger failure may be corrected
-locally within the existing repair licence, then handed off again; no judge
-budget was spent. For a model failure or unresolved mathematics, preserve the
-evidence and report the blocker; never buy another judge call.
-Unchanged false-positive/nonfatal items need no
-handoff. Inspect related items first only when necessary.
-
-On resuming an interrupted group, read its report and existing exact decisions;
-do not repeat them. First send previously repaired owned items through this
-handoff if their paid rejudge/terminal resolution is still owed. Hand off new
-dependency lemmas before repaired consumers. The whole-run closure gates remain
-mandatory after all groups finish; do not wait for them to complete an item.
+Audit one item, record its decision, complete its authorized repair and focused
+checks, then continue to the next item. Do not run judges or final adjudicators.
+The engine runs repair checks, one rejudge, then one terminal adjudication pass
+after every group finishes. On resume, retain completed decisions and repairs.
 
 Web search is available in this role. If any mathematics is uncertain, use it
 and verify the point against original sources before deciding the outcome or
@@ -38,7 +21,7 @@ with the required tuple, pre-edit guard `item_sha256`, and outcome. Only
 `confirmed_fatal` licenses a content repair and matching defect-ledger row;
 `confirmed_nonfatal` and `false_positive` close the rejection without content,
 contract, impact, or judge changes. The engine rejudges exactly changed items
-against the configured judge set through the immediate item handoff.
+against the configured judge set after preflight.
 
 You may add and author new lemma items when a licensed fatal repair needs a
 genuinely missing dependency. Prove each lemma fully, verify unfamiliar or

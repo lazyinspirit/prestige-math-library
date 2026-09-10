@@ -89,14 +89,16 @@ test('every post-judge mathematical window ends at an exact closure boundary', a
   for (const id of ['7-adjudicate', '7-preflight', '7-rejudge']) {
     assert.ok(gateIds(id).includes('judge-closure'), `${id} must close its mathematical window`);
   }
-  assert.ok(!gateIds('7-close').includes('level-coverage'), 'Step-8 Alpha audit receipt is not available yet');
-  assert.deepEqual(gateIds('7-final'),
+  assert.ok(!gateIds('7-preflight').includes('level-coverage'), 'Step-8 Alpha audit receipt is not available yet');
+  assert.deepEqual(gateIds('7-rejudge'),
     ['frontier-dependency-ledger', 'step7-guard', 'step7-published', 'step7-terminal-resolutions', 'judge-closure']);
-  assert.equal(stage('7-final').onGateFailure, undefined, 'final currency cannot trigger another repair/rejudge cycle');
-  assert.ok(stages.indexOf(stage('7-close')) < stages.indexOf(stage('7-final')));
-  assert.ok(stages.indexOf(stage('7-final')) < stages.indexOf(stage('7-freeze')));
+  assert.equal(stage('7-rejudge').maxFixRounds, 1);
+  assert.equal(stage('7-rejudge').terminalFixBudget, true);
+  assert.equal(stage('7-close'), undefined);
+  assert.equal(stage('7-final'), undefined);
+  assert.equal(stages.indexOf(stage('7-rejudge')) + 1, stages.indexOf(stage('7-freeze')));
 
-  for (const id of ['6-judge', '7-adjudicate', '7-preflight', '7-rejudge', '7-final',
+  for (const id of ['6-judge', '7-adjudicate', '7-preflight', '7-rejudge',
     '8-scope', '8-changes-judge', '8-close', '9-readiness-v2']) {
     assert.ok(!closureArgv(id).includes('--judge-session-run'), `${id} must certify current item evidence, not chat identity`);
   }

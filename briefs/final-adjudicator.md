@@ -37,32 +37,13 @@ For each queued item choose exactly one outcome:
   the final Terra rejection.
 - `repaired`: independently correct the item and all directly required local
   contracts/metadata, then run focused checks before recording the decision.
+- Escalate: report the exact unresolved issue and stop without a terminal
+  acceptance record. Do not start another review or repair wave.
 
-You may add and author new lemma items for genuinely missing dependencies of
-the queued fatal repair, including supporting chains of new lemmas. Prove
-each lemma fully and apply the authoritative-source verification rule above.
-Cite the lemmas in their consumers' `deps` and proofs. Place them on an owned
-page before their consumers and update the page, owning batch manifest and
-proof contract, and Step-7 scope group item list and `by_item` entries. Record
-the missing dependency and consuming repair in the FA evidence file. This
-scope addition is authorized and needs no pre-existing rejection for the new
-lemma. The engine must certify each new lemma through normal coverage and its
-first targeted judgment; this does not authorize a third judgment of the
-already rejudged consumer. Do not fabricate a verdict or terminal resolution
-for the new lemma.
-
-If an independent repair must also change an existing run-local direct dependency, that
-dependency edit needs its own exact guard licence. Append one version-1
-`owner-prerequisite-repair` JSON row to
-`research/<run>-step7-owner-prerequisite-repairs.jsonl` with
-`authorized_by:"final-adjudicator"`, the queue group, the dependency as `id`,
-the queued item as `found_via`, full pre/post `itemHashGuard` hashes, a concrete
-defect and correction basis, at least two authoritative HTTPS `source_urls`,
-and the timestamp. Use only URLs that will also appear in the queued item's FA
-terminal receipt. Do not edit an indirect dependency or another group's item.
-The Step-7 guard verifies every field against the frozen baseline, current
-bytes, direct dependency edge, group ownership, fatal history, and exact FA
-terminal resolution.
+This is the last review pass. Repair only the queued item and its own contracts
+and metadata using existing suppliers. If a repair needs new items, supplier
+edits, another judgment, or unresolved mathematics, report an escalation and
+stop. Do not expand scope or reopen settled items.
 
 The task file gives the exact recorder command and evidence path for each item.
 Write a concrete mathematical basis, including source verification or an

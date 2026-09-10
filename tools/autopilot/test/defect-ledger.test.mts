@@ -427,7 +427,7 @@ test('render leads with outcomes, never a bare total', () => {
 test('the check gate closes the ledger outside the bounded judge loop', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['7-preflight', '7-close', '8-scope', '9-contract-close']) {
+  for (const id of ['7-preflight', '8-scope', '9-contract-close']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const g = st.gates(ctx).find((x: any) => {
       const argv = typeof x.argv === 'function' ? x.argv() : x.argv;
@@ -524,7 +524,7 @@ test('a pre-contract run with 5a reports and no decisions files remains historic
 test('only the terminal stage passes --no-open; earlier stages tolerate a deliberate open row', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['7-preflight', '7-close', '8-scope', '9-contract-close']) {
+  for (const id of ['7-preflight', '8-scope', '9-contract-close']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const g = st.gates(ctx).find((x: any) => {
       const argv = typeof x.argv === 'function' ? x.argv() : x.argv;

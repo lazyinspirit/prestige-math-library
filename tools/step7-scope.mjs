@@ -95,7 +95,6 @@ const alertsPath = R('research', `${run}-step7-alerts.json`);
 const alertDecisionsPath = R('research', `${run}-step7-alert-decisions.jsonl`);
 const rulesPath = R('briefs/tasks/alpha-step7.md');
 const recoveryPath = R('briefs/tasks/alpha-step7-closure-recovery.md');
-const preflightPath = R('briefs/tasks/alpha-step7-preflight.md');
 const readPath = R('briefs/tasks/alpha-step6-read.md');
 const digestPath = (label) => R('research', `${run}-alpha-${label}-step7-context.json`);
 
@@ -561,8 +560,6 @@ if (mode === 'render') {
     const header = groupHeader(g, index, seam.get(g.label), rejections, alertReceipt.alerts);
     writeFileSync(R('research', `${run}-alpha-${g.label}-step7.task.md`), compose(header, rulesPath));
     writeFileSync(R('research', `${run}-alpha-${g.label}-step7-recovery.task.md`), compose(header, recoveryPath));
-    writeFileSync(R('research', `${run}-alpha-${g.label}-step7-preflight.task.md`), compose(header, preflightPath));
-    writeFileSync(R('research', `${run}-alpha-${g.label}-step7-close.task.md`), compose(header, R('briefs/tasks/alpha-step7-close.md')));
     const readingHeader = groupHeader(g, index, seam.get(g.label), [], [], 'step6');
     writeFileSync(R('research', `${run}-alpha-${g.label}-step6-read.task.md`), compose(readingHeader, readPath));
   }

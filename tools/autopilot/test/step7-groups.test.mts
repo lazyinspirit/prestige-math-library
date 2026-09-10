@@ -185,59 +185,26 @@ test('7-adjudicate runs one Alpha per group over the group cohort', () => {
   assert.ok(!units.includes('all'), 'the single-lead unit is gone');
 });
 
-test('Step 7 separates repair integrity, judge retries, and final closure', () => {
-  const preflight = stage('7-preflight');
-  const rejudge = stage('7-rejudge');
-  const close = stage('7-close');
-  const final = stage('7-final');
-  const freeze = stage('7-freeze');
-  assert.ok(stages.indexOf(stage('7-adjudicate')) < stages.indexOf(preflight));
-  assert.ok(stages.indexOf(preflight) < stages.indexOf(rejudge));
-  assert.ok(stages.indexOf(rejudge) < stages.indexOf(close));
-  assert.ok(stages.indexOf(close) < stages.indexOf(final));
-  assert.ok(stages.indexOf(final) < stages.indexOf(freeze));
-  assert.ok(stages.indexOf(freeze) < stages.indexOf(stage('8-scope')));
-  const futureRepo = fixtureRepoWithGroups();
-  const futureCtx = { run: 'demo', repo: futureRepo };
-  const freezePlan = freeze.plan(futureCtx);
-  const step8Plan = stage('8-scope').plan(futureCtx, ['all']);
-  assert.equal(freezePlan.filter((p: any) => p.argv?.includes('post-step7')).length, 1,
-    '7-freeze must create the Step-8 baseline exactly once');
-  assert.equal(step8Plan.filter((p: any) => p.argv?.includes('post-step7')).length, 0,
-    '8-scope must consume the frozen baseline, not try to recreate it');
-
-  const judgeGateIds = rejudge.gates(futureCtx).map((g: any) => g.id);
-  assert.deepEqual(judgeGateIds, ['step7-guard', 'step7-published', 'step7-terminal-resolutions', 'judge-closure'],
-    'contract/repository repairs cannot consume the one-rejudge budget');
-  assert.equal(rejudge.maxFixRounds, 3,
-    'orchestration retries do not create a second Sol pass or another judge call');
-  assert.equal(rejudge.terminalFixBudget, undefined,
-    'the stage-wide repair counter must be re-armable; the durable rejudge-cycle receipt owns the per-item lifetime cap');
-  assert.equal(rejudge.maxAttempts, 1, 'a failed funded-lane preflight is not immediately repeated');
-  assert.ok(preflight.gates(futureCtx).some((g: any) => g.id === 'proof-contract'));
-  assert.ok(close.gates(futureCtx).some((g: any) => g.id === 'proof-contract'));
-  assert.ok(!close.gates(futureCtx).some((g: any) => g.id === 'level-coverage'),
-    'the full audit receipt is not authored until Step 8');
-  assert.deepEqual(final.gates(futureCtx).map((g: any) => g.id),
-    ['frontier-dependency-ledger', 'step7-guard', 'step7-published', 'step7-terminal-resolutions', 'judge-closure']);
-  assert.equal(final.onGateFailure, undefined, 'final currency cannot open a third repair/judge cycle');
-  assert.ok(!preflight.terminalFixBudget && !close.terminalFixBudget,
-    'non-judge repair rounds have separate budgets');
-  rmSync(futureRepo, { recursive: true, force: true });
-
-  const migratedRepo = fixtureRepoWithGroups();
-  mkdirSync(join(migratedRepo, '.autopilot'));
-  mkdirSync(join(migratedRepo, 'research', 'demo-dispatch'));
-  writeFileSync(join(migratedRepo, 'research', 'demo-dispatch', 'tool-rejudge.result.json'),
-    JSON.stringify({ run: 'demo', ok: true }));
-  writeFileSync(join(migratedRepo, '.autopilot', 'state.json'),
-    JSON.stringify({ run: 'demo', stages: { '7-rejudge': { gatesPassedAt: '2026-08-25T00:00:00.000Z' } } }));
-  writeFileSync(join(migratedRepo, 'research', 'demo-step7-cutover.json'),
-    JSON.stringify({ version: 1, run: 'demo', mode: 'post-rejudge-frozen' }));
-  const migrated = close.gates({ run: 'demo', repo: migratedRepo }).map((g: any) => g.id);
-  assert.deepEqual(migrated, ['step7-cutover-frozen'],
-    'an already-rejudged run uses its explicit frozen migration instead of retroactively inserting work');
-  rmSync(migratedRepo, { recursive: true, force: true });
+test('Step 7 has one terminal pass followed only by snapshot and Step 8', () => {
+  const ids = stages.map(s => s.id);
+  assert.deepEqual(ids.filter(id => id.startsWith('7-')), [
+    '7-baseline', '7-scope', '7-adjudicate', '7-preflight', '7-rejudge', '7-freeze',
+  ]);
+  assert.equal(ids[ids.indexOf('7-rejudge') + 1], '7-freeze');
+  assert.equal(ids[ids.indexOf('7-freeze') + 1], '8-scope');
+  const terminal = stage('7-rejudge');
+  assert.equal(terminal.maxFixRounds, 1);
+  assert.equal(terminal.terminalFixBudget, true);
+  assert.equal(terminal.maxAttempts, 1);
+  assert.equal(stage('7-adjudicate').onProgress, undefined);
+  const repo = fixtureRepoWithGroups();
+  try {
+    const ctx = {run: 'demo', repo};
+    assert.ok(stage('7-preflight').gates(ctx).some((g: any) => g.id === 'proof-contract'));
+    assert.ok(!terminal.gates(ctx).some((g: any) => g.id === 'proof-contract'));
+    assert.equal(stage('7-freeze').plan(ctx).filter((p: any) => p.argv?.includes('post-step7')).length, 1);
+    assert.equal(stage('7-freeze').onGateFailure, undefined);
+  } finally { rmSync(repo, {recursive: true, force: true}); }
 });
 
 test('Step-7 preflight adjudicates existing rejection rows before any rejudge', async () => {
@@ -308,7 +275,7 @@ test('Step-7 groups retain full shared evidence but receive only relevant diagno
   } finally { rmSync(repo, { recursive: true, force: true }); }
 });
 
-test('Step-7 rejudge sends contested Terra rows only to Astra and tools only for missing verdicts', async () => {
+test('terminal review sends contested rows to Astra and never launches another judge sweep', async () => {
   const repo = fixtureRepoWithGroups();
   const s: any = stage('7-rejudge');
   const runHook = async (closure: any) => {
@@ -325,9 +292,7 @@ test('Step-7 rejudge sends contested Terra rows only to Astra and tools only for
   assert.ok(contested.every((p) => !String(p.label).includes('adjudicate-rejudge')),
     'a Terra rejudge rejection never returns to the Sol group adjudicator');
   const missing = await runHook({ needs_rejudge: ['thm-demo-y'], unadjudicated: [], open_fatal: [], closed: false });
-  assert.equal(missing.length, 1);
-  assert.equal(missing[0].role, 'tool');
-  assert.match(missing[0].argv.join(' '), /step7-rejudge-cycle\.mjs .*--items thm-demo-y/);
+  assert.equal(missing.length, 0);
   rmSync(repo, { recursive: true, force: true });
 });
 
@@ -354,12 +319,10 @@ test('Step-7 rejudge blocks exhausted owed items without stranding eligible page
     },
     stage: s, round: 1, failure: { id: 'judge-closure', why: 'not closed' }, prevRoundAt: null,
   });
-  assert.equal(blockers.length, 1);
-  assert.match(blockers[0][1], /thm-demo-x.*one paid Terra rejudge/);
+  assert.equal(blockers.length, 2);
+  assert.match(blockers[0][1], /thm-demo-x.*required verdict missing/);
   assert.equal(notices[0][0], 'blocked');
-  assert.equal(started.length, 1);
-  assert.match(started[0].argv.join(' '), /--items thm-demo-y(?: |$)/);
-  assert.ok(!started[0].argv.join(' ').includes('thm-demo-x'));
+  assert.equal(started.length, 0);
   rmSync(repo, { recursive: true, force: true });
 });
 
@@ -400,26 +363,16 @@ test('a completed paid verdict made stale by later licensed work goes to FA, nev
   } finally { rmSync(repo, {recursive: true, force: true}); }
 });
 
-test('adjudication closure sends stale immediate terminal receipts to FA, not Sol or another judge', async () => {
+test('repair stage never launches final adjudication before preflight', async () => {
   const repo = fixtureRepoWithGroups();
-  writeFileSync(join(repo, 'research', 'demo-judge-closure.json'), JSON.stringify({
-    unadjudicated: ['thm-demo-x'], needs_rejudge: [], open_fatal: [], closed: false,
-  }));
-  const started: any[] = [];
-  const s: any = stage('7-adjudicate');
-  await s.onGateFailure({
-    ctx: { run: 'demo', repo, config: { stateDir: '.autopilot/demo' } },
-    executor: { start: (_s: any, plan: any) => started.push(plan) }, stage: s, round: 2,
-    failure: { id: 'judge-closure', output: 'ERROR terminal-resolution-stale [thm-demo-x]: changed pair context' },
-  });
-  assert.equal(started.length, 1);
-  assert.equal(started[0].role, 'final-adjudicator');
-  const queue = JSON.parse(readFileSync(join(repo,
-    'research/demo-step7-fa-a-7-adjudicate-round-2.json'), 'utf8'));
-  assert.equal(queue.stage, '7-rejudge', 'the existing terminal evidence protocol is preserved');
-  assert.deepEqual(queue.items.map((x: any) => x.id), ['thm-demo-x']);
-  assert.equal(queue.dispatch_label, started[0].label);
-  rmSync(repo, { recursive: true, force: true });
+  try {
+    const started: any[] = [];
+    const s: any = stage('7-adjudicate');
+    await s.onGateFailure({ctx: {run: 'demo', repo}, stage: s, round: 1,
+      executor: {start: (_s: any, p: any) => started.push(p)},
+      failure: {id: 'judge-closure', output: 'ERROR terminal-resolution-stale [thm-demo-x]: changed context'}});
+    assert.ok(started.every(p => p.role !== 'final-adjudicator'));
+  } finally { rmSync(repo, {recursive: true, force: true}); }
 });
 
 test('Step-7 sends every rejected Terra rejudge directly to one ordered Astra-medium FA per group', async () => {

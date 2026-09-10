@@ -747,7 +747,6 @@ const touchesPath = (ctx) => `research/${ctx.run}-touches.json`;
 const closurePath = (ctx) => `research/${ctx.run}-judge-closure.json`;
 const terminalResolutionsPath = (ctx) => `research/${ctx.run}-step7-terminal-resolutions.jsonl`;
 const publishedClosurePath = (ctx) => `research/${ctx.run}-step7-published-closure.json`;
-const cutoverPath = (ctx) => `research/${ctx.run}-step7-cutover.json`;
 const step8ChangesPath = (ctx) => `research/${ctx.run}-step8-changes.json`;
 const step8ChangesScopePath = (ctx) => `research/${ctx.run}-step8-changes.pages.json`;
 const step8ClosurePath = (ctx) => `research/${ctx.run}-step8-judge-closure.json`;
@@ -861,20 +860,6 @@ function refreshStep7Scope(ctx: any): void {
   }
 }
 
-/** The cutover tool materialises this receipt only when 7-rejudge had already
- * completed before the rebuilt preflight stage ran.  Rechecking the live
- * rejudge result here is not equivalent: every ordinary run has necessarily
- * completed rejudge by the time it enters 7-close, which made that stage
- * misclassify live frontier-21 as a historical migration. */
-function hasHistoricalRejudgeCutover(ctx: any): boolean {
-  const receiptPath = R(ctx, cutoverPath(ctx));
-  if (!existsSync(receiptPath)) return false;
-  try {
-    const receipt = JSON.parse(readFileSync(receiptPath, 'utf8'));
-    return receipt.version === 1 && receipt.run === ctx.run
-      && receipt.mode === 'post-rejudge-frozen';
-  } catch { return false; }
-}
 
 const step7GuardGate = (ctx) => gate('step7-guard', ['node', 'tools/step7-guard.mjs',
   '--touches', touchesPath(ctx), '--baseline', 'pre-step7',
@@ -1021,9 +1006,9 @@ function writeFinalAdjudicatorTask(ctx: any, stage: any, round: number, group: s
       `## ${position}. \`${row.id}\` (${row.scope})`,
       '',
       `1. Read \`items/${row.id}.md\`, its cited dependencies, pair/page context, proof contract, judge and Alpha evidence, and this group's conventions.`,
-      '2. Independently adjudicate the Terra rejudge rejection and decide whether the current Sol repair is correct. If unfamiliar or uncertain, use web search and verify against authoritative sources.',
+      '2. Independently review the current repair, the Terra verdict and any later licensed correction. If unfamiliar or uncertain, use web search and verify against authoritative sources.',
       `3. Write concrete evidence to \`${evidenceRel}\`, including exact source URLs and what they support, or explain why the mathematics was familiar.`,
-      '4. Either accept the current Sol repair or independently repair it and its directly required local metadata/contracts. You may author new missing-dependency lemmas and register them as specified in the FA brief. If the repair changes an existing run-local direct dependency, record the exact final-adjudicator prerequisite-repair licence. Run focused checks. Do not append a Sol adjudication or request another judge call for the already rejudged consumer; new lemmas still require their first engine-managed judgment.',
+      '4. Accept or repair the queued item and its own contracts/metadata using existing suppliers. Run focused checks and record the final decision. If new items or supplier edits are necessary, escalate instead. Do not launch another judge, reopen settled items, or expand scope.',
       '5. Record the exact final bytes with exactly one of these commands:',
       '',
       '```bash',
@@ -1139,7 +1124,7 @@ function writeStep7RepairEnvelope({ ctx, stage, round, group, mode, failures, me
   ];
   const assignedIds = new Set(assigned.map((row) => row.id));
   let repairLicences: any[] = [];
-  if (mode === 'preflight' && !hasHistoricalRejudgeCutover(ctx) && existsSync(R(ctx, touchesPath(ctx)))) {
+  if (mode === 'preflight' && existsSync(R(ctx, touchesPath(ctx)))) {
     const touches = JSON.parse(readFileSync(R(ctx, touchesPath(ctx)), 'utf8'));
     const baseline = [...(touches.snapshots ?? [])].reverse().find((row: any) => row.label === 'pre-step7');
     const evidence = loadStep7JudgeEvidence(R(ctx, `research/${ctx.run}-judge.jsonl`),
@@ -2125,36 +2110,6 @@ export const stages = [
     cohort: alphaCohort,
     pattern: resultPattern('alpha-adjudicate', 'step7-[a-z]+'),
     concurrency: 9,
-    onProgress: ({ ctx, executor, stage }) => {
-      const directory = R(ctx, 'research');
-      const prefix = `${ctx.run}-step7-handoff-request-`;
-      for (const name of readdirSync(directory).filter(name => name.startsWith(prefix) && name.endsWith('.json'))) {
-        const path = join(directory, name);
-        const request = JSON.parse(readFileSync(path, 'utf8'));
-        if (request.run !== ctx.run || !/^[a-z0-9-]+$/.test(request.id ?? '')
-          || !/^[a-z]+$/.test(request.group ?? '') || !/^[a-f0-9]{24}$/.test(request.key ?? ''))
-          throw new Error(`invalid Step-7 handoff request: ${path}`);
-        if (existsSync(R(ctx, `research/${ctx.run}-step7-handoff-response-${request.key}.json`))) continue;
-        const label = `step7-item-${request.key}`;
-        if (executor.state.data.dispatches[`${stage.id}:${label}`]) continue;
-        if (request.kind === 'resume-group') {
-          const g = alphaGroups(ctx).find((group: any) => group.label === request.group);
-          if (!g)
-            throw new Error(`unknown handoff recovery group ${request.group}`);
-          executor.start(stage, {
-            role: 'alpha-adjudicate', label, job: 'adjudication', covers: [], timeout: 21600,
-            brief: 'briefs/alpha.md', task: [`research/${ctx.run}-alpha-${g.label}-step7.task.md`],
-          });
-          continue;
-        }
-        executor.start(stage, {
-          role: 'tool', label, job: 'judgement', covers: [], timeout: 43200,
-          argv: ['node', 'tools/autopilot/bin/complete-step7-item.mjs', '--run', ctx.run,
-            '--id', request.id, '--group', request.group, '--state-dir', ctx.config.stateDir ?? `.autopilot/${ctx.run}`,
-            '--execute', '--request-key', request.key],
-        });
-      }
-    },
     plan: (ctx, pendingUnits) => alphaGroups(ctx)
       .filter((g: any) => g.covers.some((c: any) => pendingUnits.includes(String(c))))
       .map((g: any) => ({
@@ -2259,15 +2214,6 @@ export const stages = [
         return;
       }
       const closure = readClosure(ctx);
-      // Immediate FA receipts can become stale when a later supplier repair
-      // changes their context. Only an independent FA can renew that judgment.
-      const staleTerminalIds = [...new Set(failures.flatMap((entry: any) =>
-        [...`${entry.output ?? ''}\n${entry.why ?? ''}`.matchAll(/terminal-resolution-stale \[([a-z0-9-]+)\]/g)]
-          .map(match => match[1])))];
-      if (staleTerminalIds.length) {
-        startFinalAdjudicators(ctx, executor, stage, round, staleTerminalIds);
-        return; // Other unfinished decisions are routed after this queue drains.
-      }
       if (failure.id === 'judge-closure' && (closure?.unadjudicated?.length ?? 0) > 0) {
         refreshStep7Scope(ctx);
         // A group Alpha can miss rejection rows even though its stage result
@@ -2350,19 +2296,9 @@ export const stages = [
       label: 'step7-preflight',
       job: 'bookkeeping-mechanical',
       covers: ['all'],
-      argv: ['node', 'tools/step7-cutover.mjs', 'prepare', '--run', ctx.run,
-        '--dispatch-dir', ctx.dispatchDir, '--out', cutoverPath(ctx)],
+      argv: ['node', 'tools/step7-scope.mjs', 'render', '--run', ctx.run],
     }],
-    gates: (ctx) => hasHistoricalRejudgeCutover(ctx)
-      ? [
-          gate('step7-cutover-frozen', ['node', 'tools/step7-cutover.mjs', 'check', '--run', ctx.run,
-            '--dispatch-dir', ctx.dispatchDir, '--out', cutoverPath(ctx)]),
-          step7GuardGate(ctx),
-          ...repoWide(ctx),
-          ...contractGates(ctx, { reviewed: true }),
-          ledgerGate(ctx),
-        ]
-      : [
+    gates: (ctx) => [
           step7GuardGate(ctx),
           ...repoWide(ctx),
           ...contractGates(ctx, { reviewed: true }),
@@ -2393,11 +2329,7 @@ export const stages = [
       const owners = named.length ? step7RepairOwners(ctx, named) : [null];
       for (const g of owners) {
         const recoveringRejection = (closure?.unadjudicated?.length ?? 0) > 0;
-        const baseTask = hasHistoricalRejudgeCutover(ctx)
-          ? (g
-            ? [`research/${ctx.run}-alpha-${g}-step7-close.task.md`, 'briefs/tasks/alpha-step7-close.md']
-            : 'briefs/tasks/alpha-step7-close.md')
-          : recoveringRejection
+        const baseTask = recoveringRejection
           ? (g
             ? [`research/${ctx.run}-alpha-${g}-step7-recovery.task.md`, 'briefs/tasks/alpha-step7-closure-recovery.md']
             : 'briefs/tasks/alpha-step7-closure-recovery.md')
@@ -2424,7 +2356,7 @@ export const stages = [
   // there is no reading of the rules under which those repairs were signed off.
   {
     id: '7-rejudge',
-    label: 'rejudge the repaired items',
+    label: 'one rejudge and terminal final adjudication',
     units: () => ['all'],
     pattern: resultPattern('tool', 'rejudge'),
     concurrency: 1,
@@ -2482,185 +2414,31 @@ export const stages = [
       terminalResolutionGate(ctx),
       closureGate(ctx),
     ],
-    // A rejudge can surface a NEW rejection on repaired text. It goes directly
-    // to one independent Astra FA per owning group for adjudication, any final
-    // repair, and exact-hash terminal closure. It never returns to Sol and no
-    // third judge call exists.
-    // The one-paid-rejudge ceiling is PER ITEM and is enforced durably by
-    // step7-rejudge-cycle.mjs before it probes or spends a judge call.  Keep
-    // this stage's orchestration budget re-armable after a supervising
-    // intervention: one set of exhausted items can otherwise consume the
-    // stage-wide counter and strand different items that still need their one
-    // legal rejudge (frontier-19). Re-arming the stage cannot buy a second paid
-    // rejudge because the per-item cycle receipt remains authoritative.
-    // Stage repair rounds are orchestration retries, not extra mathematical
-    // cycles: contested Terra output always routes to Astra, while a missing
-    // Terra result blocks rather than buying another call.
-    maxFixRounds: 3,
-    onGateFailure: async ({ ctx, executor, stage, round, failure, prevRoundAt = null }) => {
+    // One terminal adjudication pass. No new sweeps or repair waves follow it.
+    maxFixRounds: 1,
+    terminalFixBudget: true,
+    onGateFailure: async ({ ctx, executor, stage, round }) => {
       const closure = readClosure(ctx);
       const published = readPublishedClosure(ctx);
-      if (!closure && !published) return;
-      // Decide every rejection already on disk before buying another verdict.
-      // Frontier-18 had current unadjudicated rows and repaired items together;
-      // the old order swept first, then adjudicated those pre-existing rows,
-      // spending a judge pass that could not help close them.
-      const runContested = [...new Set([...(closure?.unadjudicated ?? []), ...(closure?.open_fatal ?? [])])];
-      const publishedContested = [...new Set([...(published?.unadjudicated ?? []), ...(published?.open_fatal ?? [])])];
-      const contested = [...new Set([...runContested, ...publishedContested])];
-      if (contested.length) {
-        // The initial Sol group adjudicator has already had its one opportunity
-        // to decide and repair the Step-6 evidence. A rejection from the one
-        // paid Terra rejudge goes directly to the independent Astra final
-        // adjudicator; it never returns to Sol and never buys a third verdict.
-        startFinalAdjudicators(ctx, executor, stage, round, contested);
-        return;
-      }
-
-      // With all existing decisions closed, items with no current pair need
-      // JUDGING. The same union includes published repairs outside run scope.
-      // The same union the stage's own plan takes, and for the same reason: a
-      // published item repaired during THIS repair loop is outside the run's
-      // scope, so the closure receipt will never name it, and the lane that must
-      // certify it is the one being dispatched right here.
-      const owed = [...new Set([...(closure?.needs_rejudge ?? []), ...(published?.needs_rejudge ?? [])])];
-      if (owed.length) {
-        // A repair makes the condemning verdict stale, so exhausted items appear
-        // in `needs_rejudge` rather than `open_fatal`.  Do not pass them to the
-        // wrapper as part of a mixed batch: it correctly rejects the whole
-        // argv before spending, which used to strand unrelated eligible items.
-        // Name each exhausted item as the intervention blocker and continue
-        // only with ids whose durable per-item budget remains.
-        const cycleCounts = rejudgeCycleCounts(ctx);
-        const exhausted = owed.filter((id) => (cycleCounts.get(id) ?? 0) >= 1);
-        // A licensed later correction can stale a successfully completed
-        // review. Refresh it with the independent final adjudicator, never
-        // another Terra call. A paid call with no real verdict still blocks.
-        const refresh = exhausted.filter(id => hasCompletedPaidVerdict(ctx, id));
-        if (refresh.length) startFinalAdjudicators(ctx, executor, stage, round, refresh);
-        for (const id of exhausted.filter(id => !refresh.includes(id))) {
-          const message = `${id}: the one paid Terra rejudge produced no current verdict; intervention is required and no second rejudge is permitted`;
-          if (executor.state?.addBlocker?.(stage.id, message, `step7-one-rejudge-owed:${id}`))
-            executor.reporter?.notify?.('blocked', message, { stage: stage.id, item: id });
-        }
-        const liveOwed = owed.filter((id) => !exhausted.includes(id));
-        if (!liveOwed.length) return;
-        // The rejudge sweep runs as an ASYNC dispatch, so its outage shows up
-        // one round late: if everything the PREVIOUS round's sweep produced was
-        // outage-signature nulls, the lane is down — report it rather than
-        // re-dispatch into it, and the executor refunds this round and waits.
-        const reason = prevRoundAt ? judgeOutageSince(ctx, prevRoundAt) : null;
-        if (reason) return { outage: { reason } };
-        executor.start(stage, {
-          role: 'tool',
-          label: `rejudge-round-${round}`,
-          job: 'judgement',
-          covers: [],                       // declares no coverage: this is extra work, not the stage's unit
-          timeout: 43200,
-          argv: ['node', 'tools/step7-rejudge-cycle.mjs', '--run', ctx.run,
-            '--ledger', `research/${ctx.run}-judge.jsonl`,
-            '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
-            '--cost', `research/${ctx.run}-judge-cost.jsonl`,
-            '--items', liveOwed.join(','), '--kind', 'repair'],
-        });
-        return;
-      }
-
-      // No contested rows and no missing verdicts: a non-closure failure belongs
-      // to 7-preflight/7-close and may not consume this terminal judge budget.
-    },
-  },
-
-  // FINAL NON-JUDGE STEP-7 INTEGRITY. Full repository, contract and
-  // defect-ledger checks run once on the final live state. The Alpha audit
-  // receipt does not exist until 8-receipt, so full `level-coverage` cannot
-  // honestly run here; `7-final` below closes exact judge currency instead.
-  // Repair rounds here may update receipts or contracts only. The task makes
-  // an item edit a visible blocker because the one-rejudge stage is
-  // already closed.
-  {
-    id: '7-close',
-    batchRepairs: true,
-    repairFingerprint: step7RepairFingerprint,
-    label: 'final Step-7 integrity closure',
-    units: () => ['all'],
-    pattern: resultPattern('tool', 'step7-close-scope'),
-    artifacts: (ctx) => `research/${ctx.run}-step7-scope.json`,
-    concurrency: 1,
-    plan: (ctx) => [{
-      role: 'tool', label: 'step7-close-scope', job: 'bookkeeping-mechanical', covers: ['all'],
-      argv: hasHistoricalRejudgeCutover(ctx)
-        ? ['node', '-e', 'console.log("step7 close: frozen cutover already ran the final integrity battery")']
-        : ['node', 'tools/step7-scope.mjs', 'render', '--run', ctx.run],
-    }],
-    gates: (ctx) => hasHistoricalRejudgeCutover(ctx)
-      ? [gate('step7-cutover-frozen', ['node', 'tools/step7-cutover.mjs', 'check', '--run', ctx.run,
-          '--dispatch-dir', ctx.dispatchDir, '--out', cutoverPath(ctx)])]
-      : [
-          step7GuardGate(ctx),
-          publishedGate(ctx),
-          terminalResolutionGate(ctx),
-          ...repoWide(ctx),
-          ...contractGates(ctx, { reviewed: true }),
-          ledgerGate(ctx),
-        ],
-    maxFixRounds: 3,
-    onGateFailure: async ({ ctx, executor, stage, round, failure }: any) => {
-      const mechanical = await mechanicalRepair({ ctx, failure });
-      if (mechanical.outcome === 'outage') return { outage: { reason: mechanical.reason! } };
-      const failures = [failure, ...(failure?.advisory ?? [])].filter((entry: any) => entry?.id
-        && !mechanical.handledIds?.includes(entry.id));
-      if (!failures.length) return;
-      refreshStep7Scope(ctx);
-      const named = [...new Set([
-        ...failures.flatMap(itemsFromGateFailure),
-        ...itemsFromGateFailure({ output: mechanical.stderr ?? '' }),
+      const contested = [...new Set([
+        ...(closure?.unadjudicated ?? []), ...(closure?.open_fatal ?? []),
+        ...(published?.unadjudicated ?? []), ...(published?.open_fatal ?? []),
       ])];
-      // Final closure never turns an unscoped detector message into four
-      // duplicated whole-group reviews. One focused reviewer diagnoses the
-      // residue; exact item failures still go to their owning conversation.
-      const owners = named.length ? step7RepairOwners(ctx, named) : [null];
-      for (const g of owners) {
-        const baseTask = g
-          ? [`research/${ctx.run}-alpha-${g}-step7-close.task.md`, 'briefs/tasks/alpha-step7-close.md']
-          : 'briefs/tasks/alpha-step7-close.md';
-        const envelopeTask = writeStep7RepairEnvelope({
-          ctx, stage, round, group: g, mode: 'close', failures,
-          mechanicalStderr: mechanical.stderr, named, task: baseTask,
-        });
-        startStep7Group(ctx, executor, stage, {
-          label: g ? `step7-close-${g}-${round}` : `step7-close-review-${round}`,
-          job: 'adjudication',
-          task: [envelopeTask],
-          timeout: 7200,
-        }, g);
+      const owed = [...new Set([...(closure?.needs_rejudge ?? []), ...(published?.needs_rejudge ?? [])])];
+      const refresh = owed.filter(id => hasCompletedPaidVerdict(ctx, id));
+      const blocked = [...new Set([
+        ...owed.filter(id => !refresh.includes(id)),
+      ])];
+      for (const id of blocked) {
+        const message = id + ': required verdict missing; the terminal pass cannot launch another judge wave';
+        if (executor.state?.addBlocker?.(stage.id, message, 'step7-terminal-missing:' + id))
+          executor.reporter?.notify?.('blocked', message, { stage: stage.id, item: id });
       }
+      const queue = [...new Set([...contested.filter(id => !blocked.includes(id)), ...refresh])];
+      if (queue.length) startFinalAdjudicators(ctx, executor, stage, round, queue);
     },
   },
 
-  // HARD MATHEMATICAL CLOSE. Integrity repair is now drained; recompute exact
-  // judge currency once against those final bytes. There is deliberately no
-  // repair hook and no round budget here. A failure means a post-budget item
-  // edit, missing verdict, unadjudicated rejection or open fatal, each of which
-  // requires the supervising session/owner under the terminal-resolution rule
-  // rather than an implicit third judge cycle.
-  {
-    id: '7-final',
-    label: 'final Step-7 mathematical currency',
-    units: () => ['all'],
-    pattern: resultPattern('tool', 'step7-final-currency'),
-    concurrency: 1,
-    plan: () => [{
-      role: 'tool', label: 'step7-final-currency', job: 'bookkeeping-mechanical', covers: ['all'],
-      argv: ['node', '-e', 'console.log("step7 final currency boundary")'],
-    }],
-    gates: (ctx) => [
-      step7GuardGate(ctx),
-      publishedGate(ctx),
-      terminalResolutionGate(ctx),
-      closureGate(ctx),
-    ],
-  },
 
   {
     id: '7-freeze',
@@ -2673,7 +2451,7 @@ export const stages = [
       role: 'tool', label: 'snap-after-step7-close', job: 'bookkeeping-mechanical', covers: ['all'],
       argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), 'post-step7'],
     }],
-    gatesWaived: 'The preceding 7-final stage validated exact mathematical currency and this immediately following '
+    gatesWaived: 'The preceding terminal adjudication validated exact mathematical currency and this immediately following '
       + 'mechanical snapshot freezes that exact item state for Step 8; its artifact existence is required.',
   },
 
@@ -3275,7 +3053,7 @@ for (const stage of stages) {
   // Refresh the one frontier index at mutable joins, not frozen judge/stamp
   // stages. Reviewers maintain batch-owned evidence; this merge is mechanical.
   if (['3a-scope', '3b-author', '4-splice',
-    '5a-adjudicate', '5b-cross', '7-adjudicate', '7-preflight', '7-final',
+    '5a-adjudicate', '5b-cross', '7-adjudicate', '7-preflight', '7-rejudge',
     '8-scope', '8-close'].includes(stage.id)) {
     const previousGates = stage.gates;
     stage.gates = (ctx: any) => [gate('frontier-dependency-ledger',
