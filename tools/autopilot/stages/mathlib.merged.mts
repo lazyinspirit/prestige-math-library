@@ -1,13 +1,19 @@
 // A new run imports existing reviewed work through a verified checkpoint.
 // No prior author/reviewer dispatches or historical gate timestamps are invented.
-import canonical, { authoredContentGates } from './mathlib.mts';
+import { statSync } from 'node:fs';
+const canonicalUrl = new URL('./mathlib.mts', import.meta.url);
+const revision = ['./mathlib.mts', './mathlib.step5.mts'].map(path => {
+  const stat = statSync(new URL(path, import.meta.url));
+  return `${stat.mtimeMs}:${stat.size}`;
+}).join(':');
+const { default: canonical, authoredContentGates } = await import(`${canonicalUrl.href}?v=${revision}`);
 const verify = (ctx: any) => ['node', 'tools/autopilot/bin/migrate-checkpoint.mjs', 'verify', '--run', ctx.run];
-const first = canonical.stages.findIndex(stage => stage.id === '5a-baseline');
+const first = canonical.stages.findIndex((stage: any) => stage.id === '5a-baseline');
 if (first < 0) throw new Error('canonical post-review continuation is missing');
-const adjudicate = canonical.stages.find(stage => stage.id === '5a-adjudicate')!;
+const adjudicate = canonical.stages.find((stage: any) => stage.id === '5a-adjudicate')!;
 const joinGates = (ctx: any) => [
-  ...authoredContentGates(ctx).map(gate => ({ ...gate, id: `import-author-${gate.id}` })),
-  ...adjudicate.gates!(ctx).map(gate => ({ ...gate, id: `import-review-${gate.id}` })),
+  ...authoredContentGates(ctx).map((gate: any) => ({ ...gate, id: `import-author-${gate.id}` })),
+  ...adjudicate.gates!(ctx).map((gate: any) => ({ ...gate, id: `import-review-${gate.id}` })),
 ];
 export const workflowRevision = canonical.workflowRevision;
 export const stages = [{

@@ -231,8 +231,10 @@ backoff. Doctor checks commands/tasks, not mathematical correctness or quotas.
 Frontier selection requires strictly more than 95% of each page's same-category
 prerequisites published, excluding partner/cross-category edges. Explicit in-run
 dependencies require planning authorization; missing suppliers are not pulled in
-automatically. Stage files hot-reload; configuration/imported registry changes
-require restart. Never hot-install this renumbering into an existing run.
+automatically. Stage files hot-reload; the continuation entrypoint versions its
+canonical-table import against both stage modules so reloads execute fresh code.
+Configuration/imported registry changes require restart. Never hot-install this
+renumbering into an existing run.
 Historical RESUME files do not establish live state. Supervise every ten minutes,
 intervening on blockers or nonclosing loops. Protected readiness/report bytes
 must remain unchanged until close-out.
