@@ -38,6 +38,21 @@ Continuity follows directly from |s²-t²|=|s-t||s+t|≤2|s-t| on the interval. 
 
 Declared suppliers: `def-locally-convex-topological-vector-space`, `cor-heine-borel-in-the-product-topology`.
 
+## Scalar-interface follow-through
+
+The TVS definition now names the published real and complex metrics and the
+metric topology, with its open-set algebra supplying the topology axioms.
+The translation/scaling lemma also proves that scalar addition and multiplication
+are jointly continuous, using modulus triangle and multiplication laws:
+`|st-ab| ≤ (|b|+1)|s-a| + |a||t-b|` when `|t-b|<1`.
+Choose each error below `min(1, ε/(2(|a|+|b|+1)))`.
+Addition uses errors below `ε/2`. These are direct product-neighborhood
+arguments, so no sequential continuity criterion is needed. The operator
+read the complete published complex field, modulus-law, complex metric and
+metric-open-set-algebra items. All new supplier homes already lie in the
+existing canonical prerequisite closure; no page prerequisite was added.
+Coverage alternative records include these strengthened strategies and deps.
+
 ## Gate status
 
 These complete alternative arguments satisfy the source-drop evidence contract. The original batch remains escalated for the remaining dependency/readiness audit; this receipt clears only this source backing requirement. Step 3 must independently judge the authored arguments. No additional pair or published-item edit is made.

@@ -177,3 +177,12 @@ arbitrary compact sets. Pair readiness stays held for the remaining closure
 review. Receipt:phase-2-next-20-local-convex-source-resolution.md.
 Next: continue exact locally-convex prerequisite review and remaining original
 blockers; inspect Fourier worker progress at the next ten-minute checkpoint.
+
+Scalar-interface follow-through: explicit real/complex metric topology suppliers
+and a direct modulus-estimate proof of joint scalar addition/multiplication
+continuity are now in batch2. Existing canonical page closure already contains
+every new home. No extra page edge/pair; original readiness stays543/88.
+Auditor reports dedup check:2376rows/2376unique published IDs,zero cross-class
+duplicates, all identities exist/published. It searched whole-ledger titles,
+aliases, mechanisms and suppliers before the new algebraic-dual finding;
+reconfirmations reuse existing records. Future audit batches retain this rule.

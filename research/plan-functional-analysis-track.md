@@ -3048,6 +3048,9 @@ need this pair rather than the metric theorem.
 
 1. `def-topological-vector-space-for-local-convexity` — joint continuity of
    addition and scalar multiplication; Hausdorffness is stated separately.
+   Declare the published real/complex metrics and metric-topology interfaces.
+   The local translation/scaling lemma also proves joint scalar addition and
+   multiplication continuity by explicit modulus estimates.
 2. `def-locally-convex-topological-vector-space` — a convex zero-neighborhood
    base and the continuous real/complex scalar-linear dual. Explicitly use
    `lem-restriction-of-scalars` claim 1 for the scalar-field vector space.
