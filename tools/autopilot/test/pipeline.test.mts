@@ -415,19 +415,21 @@ test('a non-pipelined stage waits for every dispatch in the group ahead of it', 
   assert.deepEqual(gateRuns(fx), ['g1', 'g2'], 'and it runs the moment the group drains');
 });
 
-test('restart adopts repair-hook work outside the primary pattern and holds the join', async () => {
+for (const covers of [['1'], []]) test(`restart adopts repair-hook work with covers ${JSON.stringify(covers)} and holds the join`, async () => {
   const fx = fixture();
   const ex = makeExecutor(fx, pipelinedStages(fx), {
-    adoptCommand: "printf '%s\\n' '123 node dispatch --run testrun --role repairer --label repair-1 --covers 1'",
+    adoptCommand: `printf '%s\\n' '123 node dispatch --run testrun --role repairer --label repair-1${covers.length ? ' --covers 1' : ''}'`,
   });
   for (const u of ['1', '2']) {
     cover(fx, 'worker', `a${u}`, [u]);
     cover(fx, 'checker', `b${u}`, [u]);
   }
   ex.state.recordDispatchStart('s2:repair-1', {
-    stage: 's2', role: 'repairer', label: 'repair-1', covers: ['1'],
+    stage: 's2', role: 'repairer', label: 'repair-1', covers,
   });
-  assert.deepEqual([...ex.adoptedUnits(ex.stages[1])], ['1']);
+  assert.deepEqual([...ex.adoptedUnits(ex.stages[1])], covers);
+  assert.equal(ex.hasAdoptedWork(ex.stages[1]), true);
+  assert.equal(ex.hasAdoptedWork(ex.stages[0]), false);
   assert.deepEqual([...ex.adoptedUnits(ex.stages[0])], []);
   assert.equal(await ex.tick(), 'working');
   assert.deepEqual(gateRuns(fx), [], 'a live adopted repair must prevent gates and duplicate repair rounds');

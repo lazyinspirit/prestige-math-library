@@ -217,7 +217,9 @@ without killing workers. Stage skipping needs explicit owner authority.
 
 Stages clear only after successful matching coverage, artifacts and gates. The
 engine adopts compatible workers and waits for repair jobs before spending another
-round. Infrastructure retries are bounded; unchanged mathematical failures hold.
+round. Restart adoption includes recorded recovery workers with empty `covers`:
+they add no primary coverage but hold the whole-stage gate until they exit.
+Infrastructure retries are bounded; unchanged mathematical failures hold.
 Step 5 budgets three repairs per gate/item, mechanical fixes first, then disjoint
 groups or a serial writer. Recognized outages can refund a round with 20-minute
 backoff. Doctor checks commands/tasks, not mathematical correctness or quotas.

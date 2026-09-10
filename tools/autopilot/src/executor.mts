@@ -821,6 +821,14 @@ export class Executor {
     return out;
   }
 
+  /** Recovery dispatches may cover no primary units but still own live writes. */
+  hasAdoptedWork(stage: Stage): boolean {
+    if (this.adoptedUnits(stage).size) return true;
+    const mine = new Set([...this.inflight.values()].map((d: any) => d.meta.label));
+    return this.liveDispatchLabels().some(({ label }) =>
+      !mine.has(label) && Boolean(this.state.dispatch(`${stage.id}:${label}`)));
+  }
+
   /** Units claimed by live dispatch processes this engine did not start.
    *
    *  Reads `--covers` off the command line of any running dispatch for this
@@ -1142,7 +1150,7 @@ export class Executor {
     const unitsAllDone = statuses.every(({ st }: any) => st.unitsDone);
     const gatesPending = statuses.some(({ st }: any) => !st.gatesPassed);
     const externalWork = !this.inflight.size
-      && active.some((s: Stage) => this.adoptedUnits(s).size > 0);
+      && active.some((s: Stage) => this.hasAdoptedWork(s));
     if (unitsAllDone && gatesPending && !this.inflight.size && !externalWork) {
       const outcome = await this.runGroupGates(statuses, ctx, group);
       if (outcome !== 'ok') return outcome;
