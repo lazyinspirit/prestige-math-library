@@ -1307,7 +1307,7 @@ not a synthetic “all directions determine everything” summary.
 
 1. `ex-characteristic-functions-of-bernoulli-binomial-and-poisson-laws` — the Poisson law is a distribution example, not a Poisson-process construction.
 2. `ex-characteristic-function-of-the-uniform-law`.
-3. `ex-characteristic-function-of-a-gaussian-law` — complete the square without using an unproved contour integral.
+3. `ex-characteristic-function-of-a-gaussian-law` — compute the transform by the complete real integration-by-parts/ODE argument, with absolute first-moment and boundary estimates and the zero-variance case; no unproved contour integral.
 4. `ex-cauchy-law-and-its-characteristic-function` — source the Fourier integral and note the absent first moment.
 5. `ex-independent-sums-via-characteristic-functions`.
 6. `ex-density-inversion-for-a-triangular-characteristic-function`.
@@ -1463,7 +1463,7 @@ version mechanics.  Exact headings and theorem hypotheses are recorded in
 Items:
 
 1. `def-measure-kernel-and-probability-kernel` (definition) — $K(x,A)$ is a measure in $A$ for each $x$ and measurable in $x$ for each measurable $A$; total mass one gives a probability kernel.
-2. `thm-measurability-of-integration-against-a-kernel` (theorem) — for nonnegative measurable $f(x,y)$, $x\mapsto\int f(x,y)K(x,dy)$ is measurable; extend to integrable signed functions.
+2. `thm-measurability-of-integration-against-a-kernel` (theorem) — for a finite kernel, or a kernel with a specified common measurable finite-mass exhaustion, and nonnegative product-measurable $f(x,y)$, $x\mapsto\int f(x,y)K(x,dy)$ is measurable; extend signed integrals on the measurable finite absolute-integrability locus by zero. This includes all probability-kernel consumers. The unrestricted measure-kernel version is false: the complete counting-measure diagonal counterexample is recorded in `phase-2-next-20-kernel-scope-resolution.md`.
 3. `def-composition-of-probability-kernels` (definition) — $(KL)(x,A)=\int L(y,A)K(x,dy)$.
 4. `lem-kernel-composition-is-well-defined-and-associative` (lemma) — measurability comes from item 2 and associativity from Tonelli; equality is pointwise for the selected kernels.
 5. `def-conditional-probability-given-a-sigma-algebra` (definition) — $P(A\mid\mathcal G)$ is the conditional-expectation class $E[1_A\mid\mathcal G]$.
