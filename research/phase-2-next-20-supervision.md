@@ -295,3 +295,10 @@ Refreshed Carleson owner scope after authorized explicit AC propagation and nonz
 ### Gallier source alternative resolution —2026-09-10T17:01:49.687241+00:00
 
 Root read all six complete alternative item arguments, the full history predicate/coding definition and direct published recursion, induction and interpreter suppliers. The explicit PR arithmetic and bounded list tests, exact first-halting-history normal form, strict partial compilation, finite specialization and s(q,q) proof resolve the remaining Gallier backing hold without dropping any claim. Original six failures/searches and earlier escalation retained in source_resolution_history. No complete original or recovery-edition reading is claimed. This is operator source closure, with independent mathematical review still required.
+
+
+### Fourier advances to independent review —17:07 UTC
+
+After the original author wrote the missing Kac–Moody coroot sign supplier, whole-repo depcheck passed. Root read five Fourier items fully and upheld their empty-boundary candidates with exact fixed/nonempty-index reasons in batch1 contracts. Added one meaningful exact finite Gaussian derivative check: compare differentiated Taylor jets with polynomial recurrence for8 polynomials (including0/signs),3 positive parameters,orders0–6,2184 exact coefficient comparisons. Wrong-sign/missing-factor-two mutations are detected. This is bounded algebraic falsification, not proof of decay/inversion/Schwartz completeness. Strict57/57 contracts pass. Changes committed943bb4027.
+
+Engine independently remerged contracts, passed final author gates, spliced four pages/57 items into the canonical plan, took post-author snapshot and entered5a-adjudicate at17:07:25.127UTC; alpha/5a-a dispatched17:07:25.222UTC. Root did not manually splice or skip gates. Review owns Fourier content/contracts now. Six original authors a,c,d,e,f,h remain active with recent checkpoints, original20scopeclosed. Sol b6aa34d8b reconciled Fourier eight findings and HG increment defect without duplicates:2431unique published IDs, U-P1407/U-C15/A-R187/A-P169/clear653. Ledger remains exclusively Sol-owned.

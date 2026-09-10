@@ -9,12 +9,12 @@ that one frontier: `phase-2-next-20` owns the original20 and
 and completion scope; the Fourier pairs do not replace any original pair.
 
 The owner directs authoring all22 immediately. All22 received live author
-coverage at16:21 UTC. At17:03 UTC, six original author groups continue; the
+coverage at16:21 UTC. At17:07 UTC, six original author groups continue; the
 locally convex, computability and Fourier author passes have finished. The
 computability time-simulator escalation is repaired and its two unavailable
 source obligations are resolved by complete local alternatives. Fourier's
-57 items pass authored content policy; its final author gate currently waits
-on a missing draft supplier being written by another frontier author.
+57 items cleared final author gates, the engine completed its plan splice and
+post-author snapshot, and independent group review started17:07 UTC.
 Neither execution partition is paused. Original101 ready/442 held scaffold
 records remain historical evidence; current authored decisions track repairs.
 Scope approval does not approve proofs. All independent review gates remain,
