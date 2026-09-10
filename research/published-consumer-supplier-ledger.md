@@ -4,9 +4,66 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1435, U-C 16, A-R 187, A-P 158. The
+Current classifications: U-P 1434, U-C 16, A-R 187, A-P 165. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Fourier support published-prerequisite reconciliation — 2026-09-11
+
+All six rows in the Fourier beta published-finding handoff were reconciled
+against the whole ledger by exact ID, aliases, mechanism and supplier IDs. All
+six targets have empty alias lists. `thm-riesz-thorin-interpolation` retains its
+single A-P row: its step 3.1 endpoint-power substitution and step 4.1 missing
+normalization are the already recorded defect. The same row now also records
+that its extension uses the countable-choice-qualified Riesz--Fischer theorem,
+so the repair must propagate that assumption. This is an extension, not a new
+classification.
+
+`thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value`
+moves from U-P to A-P after full-target and used-interface review. Its L3 and
+steps 1.1--1.2 invoke signed and complex Radon--Nikodym existence theorems which
+now explicitly assume full Choice, while the target states no choice
+assumption. Repair either by adding AC, or state the theorem conditionally for
+a supplied `L^1` density and apply the already-published real/complex density
+variation formulas directly. No new Phase-2 pair is needed.
+
+Four handoff targets are newly A-P. In
+`lem-euclidean-balls-have-positive-finite-lebesgue-measure`, containment between
+measurable cubes is used circularly to write the ball's measure and does not
+prove the ball measurable. Published Euclidean-metric, metric-ball-openness and
+Borel-to-Lebesgue-measurability interfaces give a complete repair under the
+countable choice already stated. In `thm-total-variation-is-a-measure`, proof
+1.2 chooses a partition for every disjoint piece and then illegitimately takes
+the sum of their suprema; use only finitely many near-maximizing partitions for
+each finite partial sum, with published finite choice, and then take the
+nonnegative-series supremum. In
+`cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences`,
+the sole Riesz--Fischer supplier explicitly assumes countable choice but the
+corollary does not. In
+`thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals`, proof
+3.1 merely names regular approximation by compactly supported phase functions
+without constructing them or controlling their norm and integral error; the
+published simple-test variation formula, regular approximation and cutoffs
+give the repair once the choice contracts below are exposed.
+
+The last repair-path review found two additional published supplier defects,
+also newly A-P. `lem-positive-c-zero-functionals-have-finite-regular-representing-measures`
+silently uses the DC-qualified LCH cutoff in proof 1.1, and proof 3.1 omits the
+compact tightness step needed to promote Radon regularity to all-Borel inner
+regularity on a noncompact space. `thm-c-c-is-dense-in-l-p-for-radon-measures`
+likewise invokes that DC-qualified cutoff without stating DC. The former is a
+direct RMK supplier and the latter is an exact general-LCH norm-repair
+supplier. These are hypothesis/proof gaps, not missing redundant dependency
+edges.
+
+The general Radon density finding does not block the live Fourier scaffold.
+Its Euclidean smooth-density path uses countable choice explicitly and ends at
+the published distance-to-the-complement cutoff on bounded Euclidean opens,
+without the general LCH Urysohn/DC supplier. Exact hashes, proof clauses,
+repair strategies, supplier states and audit limits are in
+`phase-2-fourier-support-2-published-prerequisite-audit.md`. Six IDs are new,
+one existing U-P row moves to A-P, and one existing A-P row is extended; no
+duplicate row is introduced. Published files remain unchanged.
 
 ## Locally convex published-prerequisite audit — 2026-09-11
 
@@ -27608,11 +27665,11 @@ This index retains the **2185 distinct published item IDs in the initial
 classification reference pool**, plus **5 newly identified published supplier
 items from U-C19**, **1 new 6c remark finding**, **1 Step-9 repaired definition**,
 **3 HG-P published prerequisite repairs**, **1 diagram-boundary consumer finding**,
-and **16 subsequent frontier-supervision findings**, plus **135 UC34 supplier findings**, plus **4 newly indexed Step3b Tor findings**, plus **2 Step3b real-integrability findings**, plus **2 recovered HG continuity repair rows**, plus **1 resolution-dependent Tor definition repair**, plus **1 sequence-space proof-interface candidate**, plus **2 Green-correspondence prerequisite findings**, plus **1 Cayley-tree proof finding**, plus **3 cohomology extension-map findings**, plus **1 Doob–Dynkin choice finding**, plus **1 finite-dimensional cohomology duality finding**, plus **11 locally convex prerequisite audit additions**, plus **10 scalar-topology audit additions**, for **2386 indexed items**. It is not a census of defective items or a
+and **16 subsequent frontier-supervision findings**, plus **135 UC34 supplier findings**, plus **4 newly indexed Step3b Tor findings**, plus **2 Step3b real-integrability findings**, plus **2 recovered HG continuity repair rows**, plus **1 resolution-dependent Tor definition repair**, plus **1 sequence-space proof-interface candidate**, plus **2 Green-correspondence prerequisite findings**, plus **1 Cayley-tree proof finding**, plus **3 cohomology extension-map findings**, plus **1 Doob–Dynkin choice finding**, plus **1 finite-dimensional cohomology duality finding**, plus **11 locally convex prerequisite audit additions**, plus **10 scalar-topology audit additions**, plus **6 Fourier-support prerequisite audit additions**, for **2392 indexed items**. It is not a census of defective items or a
 claim that every supplier later cited by an audit is a defect candidate.
 The publication census, checked 2026-09-10 from item front matter, has
-**15930 published items**. All 2386 indexed IDs are published;
-**13544 published items remain outside this index** and require census
+**15930 published items**. All 2392 indexed IDs are published;
+**13538 published items remain outside this index** and require census
 reconciliation. This is a status census, not a mathematical audit of those
 outside-index items.
 The initial extraction also contained
@@ -27621,14 +27678,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1435 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1434 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 16 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 158 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 165 | Recorded direct review and an unresolved item-specific repair. |
 
 590 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1796 items and the expanded reference pool contains 2386 unique items.
+1802 items and the expanded reference pool contains 2392 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28331,6 +28388,13 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `thm-bounded-c-zero-functionals-are-regular-complex-measure-integrals` | Fourier support audit 2026-09-11: proof 3.1 proves only the upper norm bound, then asserts compactly supported phase approximation without construction or error/norm control. Repair from the published unit-simple-test variation formula and regular compact/open approximation, with pairwise-disjoint LCH cutoffs or repaired Radon `C_c` density; explicitly propagate DC from the cutoff contract and repair the two supplier findings below. No new Phase-2 pair. Exact clauses and hashes: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `lem-positive-c-zero-functionals-have-finite-regular-representing-measures` | Fourier support closure audit 2026-09-11: proof 1.1 silently uses the DC-qualified LCH cutoff. Proof 3.1 also omits the compact tightness core needed for all-Borel inner regularity; an open complement in noncompact `X` need not have compact complement. Add DC/exact cutoff use and prove the compact-core/outer-regularity argument. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `thm-c-c-is-dense-in-l-p-for-radon-measures` | Fourier support closure audit 2026-09-11: proof 2.1 invokes `lem-lch-urysohn-cutoff-for-a-compact-set-inside-an-open-set`, whose contract assumes DC, while this theorem states no DC. Add and declare DC or give a choice-free cutoff construction. This affects the general LCH RMK repair path; live Fourier Euclidean density instead uses its explicit distance cutoff under stated countable choice. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `lem-euclidean-balls-have-positive-finite-lebesgue-measure` | Fourier support audit 2026-09-11: steps 2.1--3.1 infer measurability from containment between measurable cubes and use `lambda(B)` before the domain claim; the inference is invalid. First use published Euclidean-metric, metric-ball-openness and Borel-to-Lebesgue interfaces under the target's stated countable choice, then apply the sound cube bounds. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `thm-total-variation-is-a-measure` | Fourier support audit 2026-09-11: proof 1.2 chooses partitions for every disjoint piece and then takes a sum of suprema without near-maximality or a valid selection. Repair choice-free via finitely many near-max partitions for each finite partial sum, published finite choice and the nonnegative-series supremum; handle infinite variations by arbitrary finite thresholds. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `cor-l-p-convergent-sequences-have-almost-everywhere-convergent-subsequences` | Fourier support audit 2026-09-11: proof 1.1 directly applies `thm-riesz-fischer-completeness-of-l-p`, whose representative-subsequence clause explicitly assumes countable choice, but the corollary has no such hypothesis. State/declare countable choice and identify the inherited representative selection. The complex-Lp consumer already carries CC. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value` | Fourier support audit 2026-09-11 promotes the existing U-P row after full-target/used-interface review: L3 and steps 1.1--1.2 invoke AC-qualified RN existence with no AC. Either add AC, or state a supplied `L^1` density conditionally and directly apply the published real/complex density variation formulas. No new Phase-2 pair. Exact clauses/hashes and scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`; earlier UC34 evidence is retained above. |
 | `thm-enveloping-algebra-is-free-over-its-center` | Batch10 full-target audit: harmonic decomposition and filtered lifting premises; exact selected suppliers respectively scaffolded/escalated and scaffolded/ready, unpublished. See Hyperbolic and finite-Weyl scaffold audit findings — 2026-09-11 and batch6/10 reports. |
 | `lem-weyl-invariant-cartan-polynomials-extend-to-g-invariants` | Batch10 full-target audit: unitriangular character premise; exact selected supplier scaffolded/escalated, unpublished. See Hyperbolic and finite-Weyl scaffold audit findings — 2026-09-11 and batch6/10 reports. |
 | `thm-finite-dimensional-simple-modules-are-classified-by-dominant-highest-weights` | Batch10 full-target audit: highest-weight existence/finite-dimensionality assumed in F1/F2; exact DG32 classification and nine local suppliers planned/unbuilt. See Hyperbolic and finite-Weyl scaffold audit findings — 2026-09-11 and batch6/10 reports. |
@@ -28339,7 +28403,7 @@ owner's scan policy.
 | `lem-open-subspace-complete-remetrisation` | Root 2026-09-11 full target/all three direct suppliers read: stale F3 equivalence plus unwritten metric compatibility/denominator/Cauchy-limit arguments in 4.1–5.1. Complete local distance-reciprocal estimates recorded; existing published metric/real suppliers suffice, no Phase 2 pair. Evidence: research/phase-2-next-20-published-remetrisation-audit.md. |
 | `cex-strict-contraction-without-a-fixed-point` | Root 2026-09-10 full target/choice-supplier review: L2 and proof 1.1 use sequentially closed implies closed without supplier CC qualification. Replace with explicit radius (1-x)/2 for x<1, then published closed-implies-complete claim 2. No pending Phase 2 supplier; actual counterexample remains sound. Evidence: research/phase-2-next-20-published-metric-choice-audit.md. |
 | `cex-an-incomplete-subspace-need-not-be-closed` | Root 2026-09-10 full item/direct-interface audit: L3 and proof 2.1 omit supplier countable-choice assumption; explicit c00/c0 counterexample does not need L3. Remove ancillary general claim and use canonical truncations; no pending Phase 2 supplier. Evidence: research/phase-2-next-20-published-sequence-space-audit.md. |
-| `thm-riesz-thorin-interpolation` | Alpha 6b-a-1, 2026-09-10: full current item read; normalization failures in steps 3.1–4.1 remain. See complex-riesz-thorin-endpoint-interpolation evidence above. Five complex-Lp suppliers and three-lines are published; normalized core and compatible extensions are authored/6B-accepted drafts. Atomic Phase-3 rehome and proof repair remain open; no publication repair or whole-closure audit. |
+| `thm-riesz-thorin-interpolation` | Alpha 6b-a-1, 2026-09-10 and Fourier handoff reconciliation 2026-09-11: full current item read; normalization failures in steps 3.1–4.1 remain, with the one-atom `p0=1,p1=2,q0=q1=2,theta=1/2,f=4` contradiction recorded above. Its extension also applies the explicitly countable-choice-qualified Riesz--Fischer supplier, so the repair must propagate CC. Five complex-Lp suppliers and three-lines are published; normalized core and compatible extensions are authored/6B-accepted drafts. Atomic Phase-3 rehome and proof repair remain open; no publication repair or whole-closure audit. Exact refreshed evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `cor-flat-local-depth-additivity` | UC34 supplier reconciliation 2026-09-09: Already audited/deferred. Repaired regular-sequence-split lemma now supplies needed quotient flatness. Reverify induction and explicitly propagate AC; no unpublished/new Phase-2 prerequisite for this clause. Bounded full-body direct-consumer impact pass in UC34 Astra2 report; no whole-closure certification. |
 | `cor-the-center-is-a-polynomial-algebra-of-rank-many-generators` | Astra/medium 2 audit, root reconciled 2026-09-09: Await scoped finite-Weyl CST and unitriangular highest-weight character supplier for Harish-Chandra extension; waiting pair unchanged. See UC34 receipt above and research/uc34-2026-09-09-astra-2.md. |
 | `cor-the-loglog-bound-eventually-dominates-the-classical-bound` | Astra/medium 1 audit, root reconciled 2026-09-09: Numerical comparison sound; rewire actual loglog theorem to now-published density supplier with empty-H boundary, parameter extraction and finite-size correction. See UC34 receipt above and research/uc34-2026-09-09-astra-1.md. |
@@ -28786,7 +28850,6 @@ mathematical repairs. Evidence:
 | `lem-minimal-free-resolution-reduces-to-zero-differential` | UC34 supplier reconciliation 2026-09-09: Astra3 exact-ID textual direct-consumer scan of repaired def-balanced-tor-bifunctor / thm-tor-symmetry-over-a-commutative-ring (and dimension-shifting for flat-dimension theorem). Exact supplier grouping copied in bounded impact receipt; no full target proof audit or confirmed defect yet. Check actual supplied-resolution calculation versus comparison/coherence DC use and existing AC; correct conditional uses may clear without repair. Suppliers are published/repaired, no new Phase-2 pair established. If AC-to-DC needed before665, prove successor selection plus earlier recursion locally, do not add later theorem. Report uc34-2026-09-09-tor-followups-astra-3.md. |
 | `def-betti-numbers-of-a-finite-local-module` | UC34 supplier reconciliation 2026-09-09: Astra3 exact-ID textual direct-consumer scan of repaired def-balanced-tor-bifunctor / thm-tor-symmetry-over-a-commutative-ring (and dimension-shifting for flat-dimension theorem). Exact supplier grouping copied in bounded impact receipt; no full target proof audit or confirmed defect yet. Check actual supplied-resolution calculation versus comparison/coherence DC use and existing AC; correct conditional uses may clear without repair. Suppliers are published/repaired, no new Phase-2 pair established. If AC-to-DC needed before665, prove successor selection plus earlier recursion locally, do not add later theorem. Report uc34-2026-09-09-tor-followups-astra-3.md. |
 | `thm-integration-against-a-radon-nikodym-derivative` | UC34 supplier reconciliation 2026-09-09: Astra1 direct-consumer pass: density h is supplied, so no existence choice. Review finite-piece L1 before linearity and remove unused existence edges where possible. This is incomplete impact review, not a confirmed AC defect; no new Phase-2 supplier indicated. |
-| `thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value` | UC34 supplier reconciliation 2026-09-09: Conditional supplied-density statement need not incur general RN existence. Review local L1-from-set-representation proof and remove unnecessary existence appeal; full closure unreviewed. Astra1 bounded direct-consumer full-body pass; exact clauses/frozen hashes in report and copied ledger receipt. All required suppliers already published; no new Phase-2 pair indicated. |
 | `def-radon-nikodym-derivative` | UC34 supplier reconciliation 2026-09-09: Complex derivative definition depends on unrepaired complex-density existence; reconcile after that consumer. Signed clause incorporates RN hypotheses by reference, so no blanket silent-AC verdict. Astra1 bounded direct-consumer full-body pass; exact clauses/frozen hashes in report and copied ledger receipt. All required suppliers already published; no new Phase-2 pair indicated. |
 | `thm-completion-preserves-cohen-macaulayness` | UC34 supplier reconciliation 2026-09-09: Direct completed CM-equivalence corollary now assumes AC explicitly; consumer retains undefined stated choice convention. Review statement/facts/deps and inherited completion dimension/faithful-flatness use. Bounded full-body direct-consumer impact pass in UC34 Astra2 report; no whole-closure certification. |
 | `fs-kunneth-over-a-pid-is-always-a-tensor-product-isomorphism` | UC34 supplier reconciliation 2026-09-09: Concrete multiplication-by-two tensor witness can be calculated choice-free; review general Kunneth appeal and malformed )cong notation. Bounded full-body direct-consumer impact pass in UC34 Astra2 report; no whole-closure certification. |

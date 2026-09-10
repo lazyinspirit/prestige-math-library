@@ -54,14 +54,42 @@ published supplier is clear; missing redundant direct edges alone are not
 repair debt. A distinct defect on an indexed item extends its existing evidence
 and retains one classification row.
 
+## Completed bounded batch: Fourier support published handoff
+
+Evidence:
+`research/phase-2-fourier-support-2-published-prerequisite-audit.md`.
+
+All six beta handoff targets were reconciled. The existing Riesz--Thorin A-P
+record was extended with the inherited countable-choice extension clause but
+not duplicated. The existing total-variation-density U-P record moved to A-P
+after full-target/used-interface review. Four handoff targets were newly A-P:
+the unproved complex RMK norm lower bound, Euclidean-ball measurability
+circularity, invalid total-variation superadditivity/supremum step, and omitted
+countable choice in the real Lp subsequence corollary.
+
+Following the RMK repair path found two further A-P supplier defects: the
+positive `C_0` representation lemma silently uses the DC-qualified LCH cutoff
+and omits the compact-core argument for all-Borel inner regularity, and the
+general Radon `C_c` density theorem also silently invokes that DC-qualified
+cutoff. The live Fourier Euclidean density chain is unaffected: it explicitly
+states countable choice and ends at the published distance-to-complement
+Euclidean cutoff, without general LCH Urysohn/DC.
+
+Post-Fourier-handoff canonical index, mechanically recounted and
+cross-class-deduplicated: 2,392 unique published IDs; U-P 1,434, U-C 16, A-R
+187, A-P 165, and 590 bounded clears. Six IDs were newly introduced, one U-P
+moved to A-P, and one A-P was extended. Every indexed ID resolves to a current
+published item.
+
 ## Next target
 
-1. Reconcile any further exact batch-2 published-interface issues reported by
-   the root worker without auditing draft readiness.
-2. Audit the two Fourier support pairs' pinned published suppliers once their
-   current scaffold evidence identifies the clauses actually used.
+1. Reconcile any further exact next-20 or Fourier published-interface issues
+   reported by the root worker without auditing draft readiness.
+2. Continue the regular-measure/RMK direct supplier chain only where it affects
+   an actual published proof or a selected repair path; keep general LCH debt
+   distinct from the explicit Euclidean Fourier path.
 3. Continue through original next-20 batches by actual prerequisite pressure,
-   then sample published items outside the existing 2,376-ID reference pool.
+   then sample published items outside the existing 2,392-ID reference pool.
 
-No exhaustive discovery claim is authorized while 13,544 published items
+No exhaustive discovery claim is authorized while 13,538 published items
 remain outside the index and dependency interfaces remain unaudited.
