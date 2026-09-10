@@ -1716,7 +1716,9 @@ export const stages = [
       .filter(g => g.covers.some(b => pending.includes(String(b))))
       .map(g => step3Plan(ctx, g, 'final')),
     gates: ctx => [scopeGate(ctx), step3Gate(ctx, 'final'),
-      ...coverageGates(ctx, { requireDestination: true }), ...policyGates(ctx),
+      // Authored IDs exist before Step 4 splices them into the plan. Scaffold
+      // mint checks would reject those IDs; item mode below checks their content.
+      ...coverageGates(ctx, { requireDestination: true }),
       extGate(), manifestDepsGate(ctx), scopeDecisionsGate(ctx),
       urlGate(ctx), backingGate(ctx), fetchGate(ctx),
       ...repoWide(ctx).filter(g => g.id !== 'splice-verify'),

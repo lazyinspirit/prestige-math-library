@@ -49,7 +49,7 @@ test('the scaffold stages keep manifest mode — item files do not exist yet', a
 test('scaffold policy resolves same-run cross-batch dependencies at the level join', async () => {
   const mod = await import('../stages/mathlib.mts');
   const ctx = { run: 'frontier-14', repo: REPO };
-  for (const id of ['1-scaffold', '3b-author']) {
+  for (const id of ['1-scaffold']) {
     const st = mod.stages.find((s: any) => s.id === id);
     const policy = st.gates(ctx).filter((g: any) =>
       argvOf(g).includes('tools/content-policy.mjs') && argvOf(g).includes('--manifest-only'));
@@ -59,6 +59,20 @@ test('scaffold policy resolves same-run cross-batch dependencies at the level jo
     assert.ok(manifests.length > 1, `${id} passed only one batch to scaffold policy`);
     assert.ok(policy[0].liveness, `${id} scaffold policy needs a non-empty scope floor`);
   }
+});
+
+test('author closure checks authored content before plan splicing, not scaffold minting', async () => {
+  const mod = await import('../stages/mathlib.mts');
+  const ctx = { run: 'frontier-14', repo: REPO };
+  const gates = mod.stages.find((s: any) => s.id === '3b-author').gates(ctx);
+  assert.ok(!gates.some((g: any) => argvOf(g).includes('--manifest-only')),
+    'scaffold mint checks reject newly authored IDs before Step 4 splices them');
+  assert.equal(gates.filter((g: any) => g.id === 'manifest-deps').length, 1);
+  const policy = gates.filter((g: any) => g.id === 'content-policy-items');
+  assert.equal(policy.length, 1);
+  const manifests = argvOf(policy[0]).filter((arg: string) =>
+    arg.startsWith(`research/${ctx.run}-batch-`) && arg.endsWith('.pages.json'));
+  assert.ok(manifests.length > 1, 'authored policy must check the whole level');
 });
 
 test('both scaffold closure joins enforce the recorded-not-proved boundary', async () => {

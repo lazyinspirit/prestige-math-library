@@ -77,6 +77,9 @@ A-page definitions/lemmas only with complete current author decisions, retained
 existing inventory/order and actual owned consumers. Other scope changes require
 explicit authorization. Pre-splice author checks do not demand a completed splice;
 Step 4 and later gates enforce exact canonical-plan agreement.
+Scaffold ID-minting policy runs only before authoring. Step 3 checks actual item
+content and whole-run manifest dependencies; authored files are expected to exist
+before Step 4 places their IDs in the canonical plan.
 
 A scaffold strategy is not proof text. Scripts may format completed arguments,
 not manufacture generic proofs/contracts. Structural checks and finite tests do
