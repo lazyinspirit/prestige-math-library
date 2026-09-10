@@ -520,6 +520,22 @@ are now 2,490 unique published IDs: U-P 1,410, U-C 15, A-R 187, A-P 189 and 689
 bounded clears; 13,440 remain outside the index. Evidence:
 `research/phase-2-next-20-published-hg-cone-minsize-audit.md`.
 
+The AT6 compact-CW handoff adds one A-P item and three new U-P direct impact
+candidates, while extending two existing U-P rows.
+`lem-a-compact-subspace-of-a-cw-complex-meets-only-finitely-many-cells`
+selects a countably infinite subfamily from an arbitrary infinite family of met
+cells and then a point from every selected cell intersection, with no choice
+hypothesis or supplier. Adding published AC makes the remaining weak-topology
+and closed-discrete contradiction sound; no necessity claim is made. The
+compact-image corollary, skeletal homology colimit, relative skeletal homology,
+finite axiomatic support and Hawaiian-earring counterexample use the affected
+clause directly; their exact local alternatives are recorded without promoting
+them to confirmed defects before the supplier repair choice is fixed. The live
+infinite-wedge draft already states AC. Counts are now 2,494 unique published
+IDs: U-P 1,413, U-C 15, A-R 187, A-P 190 and 689 bounded clears; 13,436 remain
+outside the index. Evidence:
+`research/phase-2-next-20-published-cw-compactness-choice-audit.md`.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
@@ -530,5 +546,5 @@ bounded clears; 13,440 remain outside the index. Evidence:
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,440 published items
+No exhaustive discovery claim is authorized while 13,436 published items
 remain outside the index and dependency interfaces remain unaudited.

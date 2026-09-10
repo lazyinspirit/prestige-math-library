@@ -28038,11 +28038,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,490 unique
+subsequently reconciled published IDs. It currently contains **2,494 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,490 indexed IDs are published; **13,440 published items remain outside this
+2,494 indexed IDs are published; **13,436 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28051,14 +28051,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1410 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1413 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 15 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 189 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 190 | Recorded direct review and an unresolved item-specific repair. |
 
 689 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,801 items and the expanded reference pool contains 2,490 unique items.
+1,805 items and the expanded reference pool contains 2,494 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28874,6 +28874,7 @@ owner's scan policy.
 | `prop-root-space-brackets-add-their-roots` | Finite-Weyl/Kostant root-chain audit 2026-09-11: proof 1.1's derivation/Jacobi calculation is sound, but proof 2.1 uses the exact affected exhaustiveness clause of the unsupported root decomposition to identify the resulting weight space and make all other weights zero. Repairing that decomposition closes this proof. No additional pair. Exact hash/scope: `research/phase-2-next-20-published-killing-form-prerequisite-audit.md`. |
 | `def-killing-dual-vector-attached-to-a-root` | Finite-Weyl/Kostant root-chain audit 2026-09-11: the unique vector `H_alpha` is defined through the exact affected nondegenerate restriction of the Killing form to the Cartan subalgebra. Repair the Killing and opposite-root pairing suppliers, after which finite-dimensional duality gives the stated vector. No additional pair. Exact hash/scope: `research/phase-2-next-20-published-killing-form-prerequisite-audit.md`. |
 | `prop-opposite-root-spaces-bracket-to-the-killing-dual-line` | Finite-Weyl/Kostant root-chain audit 2026-09-11: proofs 1.1--2.1 need the affected root decomposition and Cartan nondegeneracy. Proof 3.1 additionally chooses `x,y` with nonzero Killing pairing without deriving existence. From a nonzero root vector, apply global nondegeneracy, decompose a witness, and use root-space orthogonality to obtain a nonzero opposite-root component; also derive `H_alpha != 0` from `alpha != 0`. This proves the whole-line clause. It is the exact input to the already-A-P root-system theorem. No additional pair. Exact hash/scope: `research/phase-2-next-20-published-killing-form-prerequisite-audit.md`. |
+| `lem-a-compact-subspace-of-a-cw-complex-meets-only-finitely-many-cells` | AT6 author-handoff reconciliation 2026-09-11: proof 1.1 selects countably many distinct met cells from an arbitrary infinite family and then one point from each nonempty cell intersection, but the Statement and both declared dependencies supply no choice principle. Add and declare published `def-axiom-of-choice`, then retain the sound weak-topology/closed-discrete contradiction, or give a complete weaker-choice/choice-free replacement. No necessity claim and no new pair. Five direct published consumers remain U-P impact candidates. The live infinite-wedge draft explicitly assumes AC, so it is not blocked. Exact hashes/clauses/impact/dedup: `research/phase-2-next-20-published-cw-compactness-choice-audit.md`; originating handoff `research/phase-2-next-20-step3b-e.md`. |
 | `cor-quasi-isometries-are-exactly-the-coarsely-dense-quasi-isometric-embeddings` | Active HG handoff audit 2026-09-11: under the library definition a quasi-isometry is a coarse Lipschitz map with a coarse Lipschitz quasi-inverse. Proof 2.1 proves coarse density from `f g` close to the identity, but omits the required lower bound making `f` a quasi-isometric embedding. If `g f` is `D`-close and `g` has coarse constants `A >= 1,B`, then `d_X(x,x') <= 2D+A d_Y(fx,fx')+B`; rearrange and combine with `f`'s upper bound. The live HG consumer supplies this locally, so it is not blocked. Existing definitions suffice; no new Phase-2 pair. Exact hash/source/impact/scope: `research/phase-2-next-20-published-quasi-isometry-characterization-audit.md`. |
 | `thm-a-quasi-isometric-embedding-with-coarsely-dense-image-admits-a-quasi-inverse` | Active HG adjacent-supplier audit 2026-09-11: proof 2.1 says the "upper inequality for `f`" gives its first displayed chain, but that chain uses the lower quasi-isometric-embedding inequality to derive an upper coarse-Lipschitz bound for `g`. Replace "upper" with "lower." The displayed estimates, AC-qualified selector, quasi-inverse bounds and theorem are otherwise sound, so no consumer blocker or new supplier is created. Exact hash/scope: `research/phase-2-next-20-published-quasi-isometry-characterization-audit.md`. |
 | `thm-two-metric-spaces-are-quasi-isometric-exactly-when-they-contain-bilipschitz-equivalent-separated-nets` | Active HG direct-consumer audit 2026-09-11: proof 1.1 invokes the exact affected converse of the quasi-isometry characterization without reproducing its missing coarse-inverse lower-bound estimate. The same step writes `d(x,A)` after obtaining a maximal separated set but before proving `A` nonempty; point-to-set distance is undefined for the empty set, including the unhandled `X=empty` case. Insert the elementary lower-bound proof, handle empty spaces, and otherwise prove maximal `A` nonempty before using distance, or state the quantified net argument directly. The remaining positive-coefficient and bilipschitz/net calculations are sound. Existing suppliers suffice; no new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-quasi-isometry-characterization-audit.md`. |
@@ -30003,6 +30004,9 @@ mathematical repairs. Evidence:
 | `lem-elementary-detection-at-a-fixed-element` | Transitive consumers (166), grouped by home page |
 | `lem-elementary-duality-formula-for-nonnegative-l-p-functions` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `lem-elementary-kernel-range-annihilator-identities` | norming-and-separation-under-hahn-banach |
+| `cor-the-image-of-a-compact-space-lies-in-a-finite-cw-subcomplex` | AT6 compact-CW choice impact 2026-09-11: proof 1.1 directly invokes the newly A-P compact-subspace lemma; its finite closure-finiteness calculation is otherwise sound. Qualify the use if the supplier is repaired with AC, or retain this item unchanged if that supplier receives a choice-free proof. Exact hash/path/scope: `research/phase-2-next-20-published-cw-compactness-choice-audit.md`. |
+| `lem-homology-of-an-infinite-cw-complex-is-the-colimit-of-skeletal-homology` | AT6 compact-CW choice impact 2026-09-11: both surjectivity and injectivity use the affected compact-image corollary for finite singular chains. The colimit calculation is otherwise sound. Propagate the supplier's eventual choice contract or use a choice-free compact-support replacement. Exact hash/path/scope: `research/phase-2-next-20-published-cw-compactness-choice-audit.md`. |
+| `cex-the-hawaiian-earring-is-not-a-cw-complex-with-its-circle-cells` | AT6 compact-CW choice impact 2026-09-11: proof 2.1 invokes the affected compact-subspace lemma, but the concrete compact earring has an explicit countable family of proposed cells. Repair locally by running the selected-point/weak-topology contradiction on that explicit family, or inherit the supplier's eventual choice contract. Exact hash/path/scope: `research/phase-2-next-20-published-cw-compactness-choice-audit.md`. |
 | `lem-equal-plane-face-boundaries-force-a-cycle` | Scaffold III.4.1 — plane dual dependency |
 | `lem-expander-size-adjustment-and-laziness` | 51. Exact live-plan metadata resynchronization set |
 | `lem-expander-walk-bad-edge-return` | 51. Exact live-plan metadata resynchronization set |
@@ -30016,7 +30020,7 @@ mathematical repairs. Evidence:
 | `lem-finite-b-stable-generators-and-weight-flags-in-category-o` | Cross-category Phase-2 roots and their published impact |
 | `lem-finite-coordinate-cylinder-sets-form-an-algebra` | 0A.2 Exact Phase-3 defects in published content |
 | `lem-finite-cw-pairs-admit-finite-simplicial-homotopy-models` | Continuing personal audit: exact examination pool and AT-24 contracts |
-| `lem-finite-dimensional-axiomatic-homology-has-finite-subcomplex-support` | Continuing personal audit: exact examination pool and AT-24 contracts |
+| `lem-finite-dimensional-axiomatic-homology-has-finite-subcomplex-support` | Continuing personal audit pool, now extended by AT6 compact-CW choice impact 2026-09-11: proof 2.1 invokes the affected compact-image corollary for closures of finitely many support cells. A choice-free local repair is immediate from CW closure finiteness: those finitely many closures already meet only finitely many cells and form a finite subcomplex. Exact hash/path/scope: `research/phase-2-next-20-published-cw-compactness-choice-audit.md`; retain the earlier AT-24 contract context. |
 | `lem-finite-dot-orbit-weight-spaces-detect-o-subquotients` | Supplier-to-published-consumer map |
 | `lem-finite-evaluations-separate-from-a-dual-subspace` | norming-and-separation-under-hahn-banach |
 | `lem-finite-measure-uniqueness-on-a-pi-system` | Completed-measurable change of variables |
@@ -30637,7 +30641,7 @@ mathematical repairs. Evidence:
 | `thm-regular-quotients-and-cohen-macaulayness` | Item-exact impact of the Dependent Choice rehome |
 | `thm-relative-cellular-homology-computes-relative-singular-homology` | Continuing personal audit: exact examination pool and AT-24 contracts |
 | `thm-relative-halting-is-oracle-ce-complete` | 51. Exact live-plan metadata resynchronization set |
-| `thm-relative-homology-of-consecutive-cw-skeleta` | Singular subdivision and simplicial comparison |
+| `thm-relative-homology-of-consecutive-cw-skeleta` | Singular subdivision and simplicial comparison, now extended by AT6 compact-CW choice impact 2026-09-11: proof 2.1 uses the affected compact-subspace lemma to force every singular chain in the infinite wedge quotient to have finite summand support. The direct-sum conclusion is sound after that input is repaired or qualified. Exact hash/path/scope: `research/phase-2-next-20-published-cw-compactness-choice-audit.md`. |
 | `thm-sard-smale-residual-regular-values-for-fredholm-maps` | banach-space-differential-calculus-and-banach-manifolds |
 | `thm-sat-search-reduces-to-sat-decision` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `thm-scalar-extension-of-an-irreducible-finite-group-representation` | Transitive consumers (166), grouped by home page |
