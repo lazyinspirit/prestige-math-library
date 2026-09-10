@@ -84,6 +84,10 @@ before Step 4 places their IDs in the canonical plan.
 A scaffold strategy is not proof text. Scripts may format completed arguments,
 not manufacture generic proofs/contracts. Structural checks and finite tests do
 not establish mathematical validity. Preserve provenance and generated-leaf rules.
+The finite-smoke registry includes an exact Gaussian derivative check: finite
+Taylor jets are compared with polynomial differentiation, including zero and
+signed coefficients. Its bounded success does not certify decay or Fourier
+analysis proofs; contracts must name the actual assertion it checks.
 
 ## Review, sources and impact
 

@@ -85,6 +85,49 @@ function runSmoke(id, smoke) {
 }
 
 function makeChecks() { return {
+  'polynomial-gaussian-derivatives': () => {
+    // Compare two independently computed finite jets: differentiate the
+    // product's Taylor coefficients, versus the claimed polynomial recurrence.
+    // a=pi*t is sampled at positive integers. BigInt scaling keeps this exact;
+    // this does not test decay at infinity or prove the Schwartz assertion.
+    const degree = 24;
+    const factorial = [1n];
+    for (let k = 1; k <= degree; k++) factorial[k] = factorial[k - 1] * BigInt(k);
+    const scale = factorial[degree];
+    const multiply = (p, q) => {
+      const out = Array(degree + 1).fill(0n);
+      for (let i = 0; i < p.length; i++)
+        for (let j = 0; j < q.length && i + j <= degree; j++) out[i + j] += p[i] * q[j];
+      return out;
+    };
+    const polynomials = [[0n], [1n], [-1n], [0n, 1n], [0n, 0n, 1n],
+      [0n, 0n, 0n, 1n], [0n, 0n, 0n, 0n, 1n], [1n, -2n, 3n]];
+    let coefficients = 0;
+    for (const a of [1n, 2n, 3n]) {
+      const exponential = Array(degree + 1).fill(0n);
+      for (let j = 0; 2 * j <= degree; j++) exponential[2 * j] = scale / factorial[j] * (-a) ** BigInt(j);
+      for (const p of polynomials) {
+        const original = multiply(p, exponential);
+        let q = p;
+        for (let order = 0; order <= 6; order++) {
+          const predicted = multiply(q, exponential);
+          for (let k = 0; k <= 12; k++) {
+            const actual = original[k + order] * factorial[k + order] / factorial[k];
+            if (predicted[k] !== actual) return { ok: false,
+              summary: `Gaussian derivative mismatch: a=${a}, P=${p}, derivative=${order}, coefficient=${k}` };
+            coefficients++;
+          }
+          const next = Array(q.length + 1).fill(0n);
+          for (let k = 0; k < q.length; k++) {
+            if (k) next[k - 1] += BigInt(k) * q[k];
+            next[k + 1] -= 2n * a * q[k];
+          }
+          q = next;
+        }
+      }
+    }
+    return { ok: true, summary: `checked ${coefficients} exact Taylor coefficients for 8 polynomials, 3 positive Gaussian parameters and derivative orders 0–6; no decay or general proof claim` };
+  },
   'tree-characterisation': ({ max_vertices = 5 }) => {
     const max = boundedInteger(max_vertices, 5, 0, 5);
     for (let vertices = 0; vertices <= max; vertices += 1) {
