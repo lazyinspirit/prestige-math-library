@@ -161,6 +161,9 @@ authoring convention, not a renderer-enforced mapping.
 Separate facts and proof rows with blank lines. Facts use `[F1]`, `[A1]`,
 or `[L1]` labels and source wikilinks. Proof rows start `phase.step` and end
 with one comma-separated justification group; the final row ends with QED.
+For existing examples without a separate Facts section, labelled facts in the
+`Verification` preamble are also checked. Only facts before its first numbered
+step count; later proof citations are not fact declarations.
 An optional `**Proof technique:**` paragraph displays separately.
 
 Precheck requires `**Given:**`, at least two numbered steps, final QED with

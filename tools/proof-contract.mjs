@@ -42,12 +42,12 @@ try {
   document = JSON.parse(readFileSync(resolvePath(contractPath), 'utf8'));
 } catch (cause) {
   error('contract-read', `${contractPath}: ${cause.message}`);
-  finish({ scope: [], checked: [] });
+  await finish({ scope: [], checked: [] });
 }
 
 if (!document || typeof document !== 'object' || Array.isArray(document)) {
   error('contract-shape', 'top-level contract must be an object');
-  finish({ scope: [], checked: [] });
+  await finish({ scope: [], checked: [] });
 }
 if (document.version !== 1) error('contract-version', 'contract version must be 1');
 if (!Array.isArray(document.scope) || document.scope.some((id) => typeof id !== 'string' || !id)) {
@@ -83,7 +83,7 @@ for (const id of selected) {
 for (const id of Object.keys(document.contracts ?? {})) {
   if (!scope.includes(id)) error('contract-outside-scope', `${id} has an entry but is not in scope`, id);
 }
-finish({ scope: selected, checked });
+await finish({ scope: selected, checked });
 
 function validateItem(id, item, entry) {
   const facts = factsByLabel(item.body);
@@ -344,7 +344,7 @@ function usage() {
   console.error('usage: node tools/proof-contract.mjs <contract.json> [--strict] [--items id,id] [--json]');
   process.exit(2);
 }
-function finish(summary) {
+async function finish(summary) {
   const result = { ok: errors.length === 0, errors, warnings, ...summary };
   if (asJson) console.log(JSON.stringify(result, null, 2));
   else {
@@ -352,5 +352,9 @@ function finish(summary) {
     for (const record of warnings) console.warn(`WARN ${record.code}${record.id ? ` [${record.id}]` : ''}: ${record.message}`);
     console.log(`proof-contract: ${errors.length} error(s), ${warnings.length} warning(s), ${summary.checked.length}/${summary.scope.length} item(s) checked`);
   }
+  await Promise.all([
+    new Promise(resolve => process.stdout.write('', resolve)),
+    new Promise(resolve => process.stderr.write('', resolve)),
+  ]);
   process.exit(errors.length ? 1 : 0);
 }

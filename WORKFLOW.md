@@ -171,6 +171,10 @@ recognition grants no licence for a new edit or exemption from later certificati
 Step 8 reviews scope and post-repair changes, closes impact and applies current
 stamps through the tool. Receipt recovery addresses only failed checks and
 missing contracts; it preserves completed spine readings and valid evidence.
+Coverage checks skip context hashing when the judge ledger is missing and keep
+the hash cache separate from the ledger, including nonstandard filenames.
+Proof-contract reports drain stdout/stderr before exit so large JSON diagnostics
+remain complete when piped.
 Step 9 requires contracts, ledger, pathways, readiness
 and owner-report evidence before committing. New content remains draft. Reused
 published identities require evidence at the pinned ancestor baseline. Only the

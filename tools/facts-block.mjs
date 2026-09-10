@@ -74,9 +74,13 @@ export function sectionText(body, heading) {
  *
  *  Accepts a whole item file or a bare body. */
 export function factsSectionText(text) {
-  const match = splitFrontmatter(text).body
+  const body = splitFrontmatter(text).body;
+  const match = body
     .match(/^##\s+Facts[^\n]*\r?\n([\s\S]*?)(?=^##\s+|(?![\s\S]))/m);
-  return match?.[1] ?? '';
+  if (match) return match[1];
+  // Published examples also put labelled facts in the Verification preamble.
+  // Stop before the first proof step: later uses of [L1] are not definitions.
+  return sectionText(body, 'Verification').split(/^\d+\.\d+\s/m)[0];
 }
 
 /** One fact entry's opening line: `[L2] restatement… ([[cited-id]])`. */

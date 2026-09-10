@@ -110,6 +110,8 @@ test('one current Terra verdict completes singleton judge coverage', () => {
     const result = run(['tools/level-coverage.mjs', '--judge-only', '--verify-current-context',
       '--judge-ledger', ledger, '--out', closure, manifest]);
     assert.equal(result.status, 0, result.stderr || result.stdout);
+    assert.equal(JSON.parse(readFileSync(ledger, 'utf8')).id, ITEM,
+      'a noncanonical ledger filename must never be overwritten by the context cache');
     assert.match(result.stdout, /1\/1 current configured-judge verdict set/);
     assert.match(result.stdout, /1\/1 current pair/,
       'the live pre-singleton-lineup engine must still be able to parse its liveness counter');
@@ -120,6 +122,13 @@ test('one current Terra verdict completes singleton judge coverage', () => {
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
+});
+
+test('coverage rejects a cache/ledger collision before reading or writing evidence', () => {
+  const result = run(['tools/level-coverage.mjs', '--judge-ledger', '/tmp/same-ledger.jsonl',
+    '--context-hash-cache', '/tmp/same-ledger.jsonl']);
+  assert.equal(result.status, 2);
+  assert.match(result.stderr, /cache must not overwrite the judge ledger/);
 });
 
 test('an exact terminal resolution closes missing judge coverage without fabricating a verdict or being poisoned by a published sibling', () => {

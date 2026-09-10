@@ -30,9 +30,13 @@ const verifyCurrent = argv.includes('--verify-current-context');
 const contractsPath = option('--contracts');
 const judgePath = option('--judge-ledger');
 const contextHashCachePath = option('--context-hash-cache')
-  || (judgePath?.endsWith('.jsonl')
+  || (judgePath?.endsWith('-judge.jsonl')
     ? judgePath.replace(/-judge\.jsonl$/, '-judge-context-hashes.json')
     : `${judgePath ?? 'judge'}-context-hashes.json`);
+if (judgePath && resolvePath(contextHashCachePath) === resolvePath(judgePath)) {
+  console.error('context hash cache must not overwrite the judge ledger');
+  process.exit(2);
+}
 const judgeAdjudicationsPath = option('--judge-adjudications');
 const terminalResolutionsPath = option('--terminal-resolutions');
 const judgeTargetsPath = option('--judge-targets');
@@ -424,7 +428,7 @@ if (judgeAdjudicationsPath) {
 // Exact prompt assembly is unchanged; only its local scheduling is concurrent.
 // Keeping the failures item-scoped preserves the gate's report-all behaviour.
 const currentHashes = new Map();
-if (verifyCurrent && judgePath) {
+if (verifyCurrent && judgePath && existsSync(resolvePath(judgePath))) {
   try {
     for (const result of await buildCurrentContextHashes(judgeScope, { cwd: REPO, cachePath: contextHashCachePath })) {
       if (result.ok) currentHashes.set(result.id, { context: result.context, item: result.item });

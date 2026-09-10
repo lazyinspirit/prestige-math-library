@@ -13,7 +13,7 @@
 // now both do.
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, writeFileSync, readFileSync, mkdirSync } from 'node:fs';
+import { mkdtempSync, writeFileSync, readFileSync, mkdirSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
@@ -47,6 +47,32 @@ recorded by [[def-colour]].
 `;
 
 // --------------------------------------------------------------- the grammar
+
+test('proof-contract drains large JSON reports before exiting', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'contract-pipe-'));
+  try {
+    const file = join(dir, 'contract.json');
+    const scope = Array.from({ length: 1500 }, (_, i) => `thm-nonexistent-pipe-fixture-${i}`);
+    writeFileSync(file, JSON.stringify({ version: 1, scope, contracts: {} }));
+    const result = spawnSync('node', ['tools/proof-contract.mjs', file, '--strict', '--json'],
+      { cwd: REPO, encoding: 'utf8', maxBuffer: 4 * 1024 * 1024 });
+    assert.equal(result.status, 1);
+    assert.ok(result.stdout.length > 65536);
+    const report = JSON.parse(result.stdout);
+    assert.equal(report.errors.length, scope.length);
+    assert.equal(report.scope.length, scope.length);
+  } finally { rmSync(dir, { recursive: true, force: true }); }
+});
+
+test('Verification preamble facts are recognized without treating proof uses as facts', () => {
+  const body = '## Verification\n\n**Given:** fixed modules.\n\n'
+    + '[L1] A supplied theorem ([[thm-source]]).\n\n'
+    + '1.1 Apply [L1]. [given, L1]\n\n[L2] This is after a step, not a preamble fact.\n';
+  assert.deepEqual(factLines(body).map(f => f.fact), ['L1']);
+  assert.deepEqual([...factParagraphs(body).keys()], ['L1']);
+  const withFacts = '## Facts & Assumptions\n\n[F1] Primary fact.\n\n' + body;
+  assert.deepEqual(factLines(withFacts).map(f => f.fact), ['F1']);
+});
 
 test('sectionText anchors the heading to its own line: Statement is not Statement refuted', () => {
   const body = `## Statement refuted\n\nNot every widget is blue.\n\n## Proof\n\n1.1 …\n`;
