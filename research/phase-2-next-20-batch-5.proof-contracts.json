@@ -1,0 +1,1537 @@
+{
+  "version": 1,
+  "scope": [
+    "def-kolmogorov-analytic-partial-sum-maximal-function",
+    "lem-kolmogorov-simultaneous-phase-approximation",
+    "lem-kolmogorov-atomic-kernel-maxima",
+    "lem-kolmogorov-block-polynomial-with-large-partial-sums",
+    "lem-separated-frequency-blocks-do-not-disturb-earlier-partial-sum-maxima",
+    "lem-kolmogorov-gliding-hump-series-converges-in-lone",
+    "lem-kolmogorov-block-maxima-diverge-off-a-null-limsup-set",
+    "thm-kolmogorov-lone-fourier-series-diverges-almost-everywhere",
+    "ex-one-finite-kolmogorov-frequency-block",
+    "ex-summable-exceptional-measures-in-the-kolmogorov-induction",
+    "def-carleson-operator-and-measurable-linearisation",
+    "def-carleson-tiles-wave-packets-and-tile-order",
+    "lem-wave-packet-model-dominates-the-linearised-carleson-operator",
+    "def-density-size-and-tree-count-for-carleson-tiles",
+    "lem-carleson-density-selection",
+    "lem-carleson-size-selection",
+    "lem-carleson-single-tree-estimate",
+    "lem-carleson-forest-summation-gives-restricted-weak-ltwo",
+    "lem-carleson-signed-tree-weak-one-one-estimate",
+    "lem-hunt-exceptional-set-and-distribution-estimates",
+    "lem-carleson-restricted-weak-interpolation",
+    "thm-carleson-maximal-operator-is-strong-ltwo",
+    "lem-carleson-real-line-to-torus-transfer",
+    "thm-carleson-hunt-maximal-inequality-on-the-torus",
+    "ex-two-comparable-and-two-incomparable-carleson-tiles",
+    "ex-balancing-density-and-size-levels-in-the-carleson-sum",
+    "rem-carleson-hunt-does-not-include-the-lone-endpoint"
+  ],
+  "contracts": {
+    "def-kolmogorov-analytic-partial-sum-maximal-function": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition assigns A_-1=0 for the empty initial range."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition represents the zero polynomial at d=0 and gives maximal value zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition gives A_0 of the constant polynomial one as one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition explains why trailing zero coefficients do not change the maximum."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition includes n=0, d=0 and n beyond the degree."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition uses explicit finite sums and finite coefficient integrals; no simultaneous representative choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a definition with finite consistency checks, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse convergence criterion is asserted."
+        }
+      ]
+    },
+    "lem-kolmogorov-simultaneous-phase-approximation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "source_section": "Definition",
+          "quote": "Write $\\mathbb T := \\mathbb R / \\mathbb Z$ and represent a function on\n$\\mathbb T$ by a one-periodic function on $\\mathbb R$.\n\nFor $k \\in \\mathbb Z$, define the $k$-th character\n$e_k(x) := e^{2\\pi i kx}$.\n\nIf $f$ is integrable on one period, its Fourier coefficients are\n\n$$\\widehat f(k) := \\int_0^1 f(t)e^{-2\\pi i kt}\\,dt \\qquad (k \\in \\mathbb Z).$$\n\nFor $N \\ge 0$, the $N$-th Fourier partial sum of $f$ is\n\n$$S_Nf(x) := \\sum_{|k| \\le N}\\widehat f(k)e_k(x).$$\n\nA **trigonometric polynomial** on $\\mathbb T$ is a finite linear combination of\nthe characters $e_k$.\n\nIf $f,g \\in L^1(\\mathbb T)$, their convolution is the $L^1(\\mathbb T)$ class\ndefined for almost every $x$ by\n\n$$(f*g)(x) := \\int_0^1 f(x-t)g(t)\\,dt,$$\n\nwhere $f$ and $g$ are read as one-periodic representatives. More precisely,\nthe integrand is absolutely integrable for almost every $x$, and the displayed\nformula gives an almost-everywhere-defined integrable function whose class is\nindependent of the chosen representatives. When one factor is bounded, as for\nthe Dirichlet kernels below, the integral exists at every $x$ for which the\nother representative is integrable on one period.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-fejer-uniform-convergence-for-continuous-periodic-functions",
+          "source_section": "Statement",
+          "quote": "Let $f:\\mathbb R\\to\\mathbb C$ be one-periodic and continuous. Then\n\n$$\\sup_{x\\in\\mathbb R}|\\sigma_Nf(x)-f(x)|\\longrightarrow0 \\qquad (N\\to\\infty).$$",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "For $r=0$, take $L=1$. Otherwise put $b_j(t)=\\max(0,1-2|e^{2\\pi it}-z_j|/\\varepsilon)$. This continuous periodic function lies between zero and one and is positive only when $|e^{2\\pi it}-z_j|<\\varepsilon/2$. It equals one at an argument of $z_j$, and continuity makes its integral $\\beta_j$ strictly positive. Set $b(t_1,\\ldots,t_r)=\\prod_jb_j(t_j)$ and $\\beta=\\prod_j\\beta_j>0$.",
+          "inputs": [
+            "F1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "By F2, approximate each $b_j$ uniformly within $\\rho\\le1$ by a trigonometric polynomial $p_j$. Then $|p_j|\\le2$, and telescoping products yields $\\sup|\\prod_jp_j-\\prod_jb_j|\\le r2^{r-1}\\rho$. The constant coefficient of $p=\\prod_jp_j$ as a polynomial in $r$ coordinates is the product of the individual constant coefficients. Each differs from $\\beta_j$ by at most $\\rho$, by the integral definition in F1. Thus that coefficient differs from $\\beta$ by at most $r2^{r-1}\\rho$ as well. This argument needs no multivariable approximation theorem or interchange of infinite series.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "For each nonzero integer vector $k\\in\\mathbb Z^r$, independence gives $k\\cdot x\\notin\\mathbb Z$. Put $u=e^{2\\pi i k\\cdot x}\\ne1$. Then $M^{-1}\\sum_{L=1}^M u^L=u(1-u^M)/(M(1-u))\\to0$. The zero vector gives average one. Applying these identities to the finitely many terms of $p$ proves that $M^{-1}\\sum_{L=1}^M p(Lx_1,\\ldots,Lx_r)$ tends to its constant coefficient. Step 2.1 bounds the limsup of the absolute difference between the corresponding average of $b$ and $\\beta$ by $2r2^{r-1}\\rho$. Since every positive $\\rho\\le1$ is allowed, the average of $b$ tends to $\\beta>0$.",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "Some positive integer $L$ therefore has $b(Lx_1,\\ldots,Lx_r)>0$. Every factor is positive, so step 1.1 gives all the required strict phase inequalities (indeed with epsilon/2). Positivity of $L$ follows from using averages indexed from one, not from a symmetry argument about negative times. Only finitely many approximants are selected for each fixed rho; the proof uses no axiom of choice.",
+          "inputs": [
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 handles r=0 with L=1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 isolates the zero frequency before dividing by 1-u."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 uses independence with the constant 1 to exclude integer k dot x."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 has positive integral for every bump, including any target equal to one."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 gives a strictly positive integer and strict epsilon inequalities."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1–4.1 use finite approximant choices for fixed rho; no infinite choice sequence is required."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "Rational independence is a sufficient hypothesis; necessity is not asserted."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse characterizes independence from a single phase approximation."
+        }
+      ]
+    },
+    "lem-kolmogorov-atomic-kernel-maxima": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-kolmogorov-simultaneous-phase-approximation",
+          "source_section": "Statement",
+          "quote": "Let $r\\ge0$ be an integer such that $1,x_1,\\ldots,x_r$ are linearly independent over $\\mathbb Q$. For every $\\varepsilon>0$ and $z_1,\\ldots,z_r\\in\\mathbb C$ of modulus one, there is a positive integer $L$ such that $|e^{2\\pi iLx_j}-z_j|<\\varepsilon$ for all $1\\le j\\le r$.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel",
+          "source_section": "Statement",
+          "quote": "For every integer $N \\ge 0$,\n\n$$D_N(t) = 1 + 2\\sum_{k=1}^N \\cos(2\\pi kt).$$\n\nIf $t \\notin \\mathbb Z$, then\n\n$$D_N(t) = \\frac{\\sin((2N+1)\\pi t)}{\\sin(\\pi t)}.$$\n\nIf $m \\in \\mathbb Z$, then $D_N(m)=2N+1$. In particular $D_N$ is even and\n\n$$|D_N(t)| \\le 2N+1 \\qquad (t \\in \\mathbb R),$$\n\nwhile for $t \\notin \\mathbb Z$,\n\n$$|D_N(t)| \\le \\frac{1}{|\\sin(\\pi t)|}.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-countable-subsets-of-rn-are-lebesgue-null",
+          "source_section": "Statement",
+          "quote": "Let $n \\ge 1$ and **assume the Axiom of Countable Choice**\n([[def-countable-choice]]). Every at most countable subset $E \\subseteq \\mathbb{R}^n$\n([[def-countable]]) is Lebesgue measurable with\n\n$$\\lambda_n(E) \\;=\\; 0,$$\n\nso $E$ is a $\\lambda_n$-null set ([[def-measure-null-set-and-almost-everywhere]]).\nIn particular every singleton is null, and on the real line the set\n$\\mathbb{Q}_{\\mathbb{R}}$ of rational reals ([[lem-rat-embeds-dense]]) satisfies\n$\\lambda_1(\\mathbb{Q}_{\\mathbb{R}}) = 0$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "At step $j$, the rational linear span of $1,t_1,\\ldots,t_{j-1}$ is countable: enumerate rational tuples by listing integer numerators and positive denominators of bounded absolute size, then increase the bound; evaluate each tuple. F3 makes this span null. The open cell $((j-1)/n,j/n)$ has measure $1/n>0$, so contains a point $t_j$ outside the span. Finite induction chooses these points and proves their independence. Let $V$ be their full rational linear span with one; the same enumeration makes $V$ countable and null. AC supplies the countable-choice measure hypotheses in F3; selecting this fixed finite tuple adds no arbitrary-index choice.",
+          "inputs": [
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Fix $x\\in[0,1)\\setminus V$ and write $y_j=x-t_j$. If $q_0+\\sum_jq_jy_j=0$ for rational coefficients, put $q=\\sum_jq_j$. If $q=0$, independence of $1,t_1,\\ldots,t_n$ forces all coefficients zero. If $q\\ne0$, the equation puts $x=(\\sum_jq_jt_j-q_0)/q$ in $V$, impossible. Thus $1,y_1,\\ldots,y_n$ are independent, and none of the $y_j$ is an integer.",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Set $z_j=i e^{-\\pi iy_j}\\operatorname{sgn}(\\sin(\\pi y_j))$, which has modulus one. Apply F1 with error $1/2$ to obtain $L\\ge1$. Multiplying the approximation by $e^{\\pi iy_j}\\operatorname{sgn}(\\sin(\\pi y_j))$ shows $|e^{(2L+1)\\pi iy_j}\\operatorname{sgn}(\\sin(\\pi y_j))-i|<1/2$. Its imaginary part exceeds $1/2$, hence F2 gives $D_L(y_j)>1/(2|\\sin(\\pi y_j)|)\\ge1/(2\\pi|y_j|)$. All terms have the same positive sign; there is no cancellation in their average.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "Let $k\\in\\{1,\\ldots,n\\}$ be the cell index with $(k-1)/n\\le x<k/n$. Cell placement implies $|x-t_j|\\le(|j-k|+1)/n$. At least one side from $k$ to an endpoint contains $m+1\\ge n/2$ indices with distances $\\ell=0,\\ldots,m$. Therefore $n^{-1}\\sum_j|x-t_j|^{-1}\\ge\\sum_{\\ell=0}^m(\\ell+1)^{-1}\\ge\\log(m+2)\\ge\\log(n/2)\\ge(\\log n)/2$. The harmonic bound follows by integrating $1/t$ over each $[\\ell+1,\\ell+2]$, where it is at most $1/(\\ell+1)$. Step 3.1 now gives $B_L(x)>(\\log n)/(4\\pi)$. This holds off the single countable null set $V$, proving the assertion with the stated uniform constant. Grid endpoints are covered by the half-open choice of k; singular points $t_j$ were excluded in step 2.1.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 proves each cell minus the rational span is nonempty before choosing a point."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 excludes zero denominators sin(pi y_j) before step 3.1 uses their reciprocals."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the constant-one coefficient and the q=0 alternative separately."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 chooses all signs coherently and proves positive contributions, excluding cancellation."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 covers cell endpoints and n=4; log(n/2)>=log(n)/2 uses n>=4."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 states AC’s inherited countable-choice measure use and finite nature of the point selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result is an existence and lower-bound theorem, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "Large kernel maxima are not claimed to characterize rational independence."
+        }
+      ]
+    },
+    "lem-kolmogorov-block-polynomial-with-large-partial-sums": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kolmogorov-analytic-partial-sum-maximal-function",
+          "source_section": "Definition",
+          "quote": "Use $\\mathbb T=\\mathbb R/\\mathbb Z$, normalized measure $dx$ and $e_k(x)=e^{2\\pi ikx}$ as in [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]. An **analytic trigonometric polynomial** is $P=\\sum_{k=0}^d a_ke_k$ for an integer $d\\ge0$, with no negative-frequency terms. Set\n$$A_nP=\\sum_{k=0}^{\\min(n,d)}a_ke_k\\quad(n\\ge0),\\qquad A_{-1}P=0,\\qquad A_*^dP=\\max_{0\\le n\\le d}|A_nP|.$$\nTrailing zero coefficients do not affect this maximum: every cutoff beyond the degree equals $P$, already attained at its degree. The zero polynomial may be represented with $d=0$ and has maximal function zero. Each partial sum and the finite maximum are continuous, hence measurable.\n\nThe coefficients agree with the integral Fourier coefficients of the cited convention: finite linearity reduces to $\\int_0^1e_{k-\\ell}(x)\\,dx$, which is one for $k=\\ell$ and is $[e^{2\\pi i(k-\\ell)x}/(2\\pi i(k-\\ell))]_0^1=0$ otherwise. Thus for an analytic polynomial, the symmetric partial sum $S_nP$ equals $A_nP$. No infinite series or choice of representatives is involved in these finite identities.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-kolmogorov-atomic-kernel-maxima",
+          "source_section": "Statement",
+          "quote": "Assume AC. For every integer $n\\ge4$ there are $t_j\\in((j-1)/n,j/n)$, $1\\le j\\le n$, such that $1,t_1,\\ldots,t_n$ are rationally independent and, for $B_L(x)=n^{-1}\\sum_{j=1}^nD_L(x-t_j)$, $\\sup_{L\\ge1}|B_L(x)|\\ge c\\log n$ almost everywhere on $\\mathbb T$. One may take $c=1/(4\\pi)$, with the natural logarithm. In particular such $n$ are arbitrarily large.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-fejer-kernel-is-a-positive-approximate-identity",
+          "source_section": "Statement",
+          "quote": "For every $N \\ge 0$, the Fejer kernel satisfies\n\n$$F_N(t)=\\frac{1}{N+1}\\left|\\sum_{j=0}^N e_j(t)\\right|^2.$$\n\nHence, for $t \\notin \\mathbb Z$,\n\n$$F_N(t)=\\frac{1}{N+1}\\left(\\frac{\\sin((N+1)\\pi t)}{\\sin(\\pi t)}\\right)^2,$$\n\nso $F_N(t)\\ge0$ for all $t$, $\\int_0^1F_N(t)\\,dt=1$, and for every\n$\\delta\\in(0,1/2]$,\n\n$$\\int_\\delta^{1-\\delta}F_N(t)\\,dt \\le \\frac{1}{(N+1)\\sin^2(\\pi\\delta)}.$$\n\nIn particular,\n\n$$\\int_\\delta^{1-\\delta}F_N(t)\\,dt \\longrightarrow 0 \\qquad (N\\to\\infty).$$",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-continuity-from-below-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be an increasing sequence of measurable sets for a measure $\\mu$, so $E_n\\subseteq E_{n+1}$. Then\n\n$$\\mu\\left(\\bigcup_{n\\in\\mathbb N}E_n\\right)=\\sup_{n\\in\\mathbb N}\\mu(E_n).$$\n\nNo finiteness hypothesis is required.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Choose an atomic configuration from F2 with $c\\log n>2H+2$, and write $b_k=n^{-1}\\sum_je_{-k}(t_j)$. Then $|b_k|\\le1$ and $B_L=\\sum_{|k|\\le L}b_ke_k$, by expanding its finite kernel sum. The increasing measurable sets $E_K=\\{x:\\max_{1\\le L\\le K}|B_L(x)|>2H+2\\}$ have union of measure one, so some finite $K\\ge1$ has $m(E_K)>1-\\eta$ by F4. Strict inequality in the chosen logarithmic threshold ensures that a finite cutoff attains the threshold used here, even if the original supremum is not attained.",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Choose $M\\ge K$ so large that $K(K+1)/(M+1)<1$. Set $g(x)=n^{-1}\\sum_jF_M(x-t_j)$. F3 gives $g\\ge0$ and $\\int g=1$, hence $\\|g\\|_1=1$. Its coefficients are $b_k(1-|k|/(M+1))$ for $|k|\\le M$. Consequently, for every $1\\le L\\le K$ and every x, $|S_Lg(x)-B_L(x)|\\le\\sum_{|k|\\le L}|k|/(M+1)=L(L+1)/(M+1)<1$. For every $x\\in E_K$ there is therefore an L with $|S_Lg(x)|>2H+1>H$. This proves the nonnegative symmetric-frequency interface by finite coefficient computation alone.",
+          "inputs": [
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Put $P=e_Mg$, an analytic polynomial of degree at most $2M$. Since $|e_M|=1$, $\\|P\\|_1=1$. For $0\\le L\\le M$, direct reindexing gives $e_MS_Lg=A_{M+L}P-A_{M-L-1}P$. At each point of $E_K$, the L from step 2.1 is at most K and hence at most M; the difference has modulus greater than $2H+1$. The triangle inequality implies one of its two terms has modulus greater than H. If the second index is -1, that term is zero by F1, and the first supplies the bound. Thus $A_*^{2M}P>H$ throughout $E_K$, proving the analytic interface with the same measure bound. AC is propagated from F2; the subsequent K and M may be chosen as least integers, and no Recorded block theorem is used.",
+          "inputs": [
+            "F1",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "F2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 uses A_-1=0 when L=M, so the empty lower cutoff is explicit."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 has positive norm one and never divides by an unknown polynomial norm."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 proves the norm is exactly one by positivity and the mass of each translated Fejer kernel."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 permits degree less than 2M through trailing zeros and F1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses strict thresholds before finite-cutoff selection; step 3.1 checks L<=K<=M."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 propagates AC from F2 and identifies deterministic least-integer later choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The two polynomial existence interfaces are jointly proved, not asserted equivalent for arbitrary polynomials."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from large analytic maxima to nonnegative blocks is claimed."
+        }
+      ]
+    },
+    "lem-separated-frequency-blocks-do-not-disturb-earlier-partial-sum-maxima": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kolmogorov-analytic-partial-sum-maximal-function",
+          "source_section": "Definition",
+          "quote": "Use $\\mathbb T=\\mathbb R/\\mathbb Z$, normalized measure $dx$ and $e_k(x)=e^{2\\pi ikx}$ as in [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]. An **analytic trigonometric polynomial** is $P=\\sum_{k=0}^d a_ke_k$ for an integer $d\\ge0$, with no negative-frequency terms. Set\n$$A_nP=\\sum_{k=0}^{\\min(n,d)}a_ke_k\\quad(n\\ge0),\\qquad A_{-1}P=0,\\qquad A_*^dP=\\max_{0\\le n\\le d}|A_nP|.$$\nTrailing zero coefficients do not affect this maximum: every cutoff beyond the degree equals $P$, already attained at its degree. The zero polynomial may be represented with $d=0$ and has maximal function zero. Each partial sum and the finite maximum are continuous, hence measurable.\n\nThe coefficients agree with the integral Fourier coefficients of the cited convention: finite linearity reduces to $\\int_0^1e_{k-\\ell}(x)\\,dx$, which is one for $k=\\ell$ and is $[e^{2\\pi i(k-\\ell)x}/(2\\pi i(k-\\ell))]_0^1=0$ otherwise. Thus for an analytic polynomial, the symmetric partial sum $S_nP$ equals $A_nP$. No infinite series or choice of representatives is involved in these finite identities.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "source_section": "Definition",
+          "quote": "Write $\\mathbb T := \\mathbb R / \\mathbb Z$ and represent a function on\n$\\mathbb T$ by a one-periodic function on $\\mathbb R$.\n\nFor $k \\in \\mathbb Z$, define the $k$-th character\n$e_k(x) := e^{2\\pi i kx}$.\n\nIf $f$ is integrable on one period, its Fourier coefficients are\n\n$$\\widehat f(k) := \\int_0^1 f(t)e^{-2\\pi i kt}\\,dt \\qquad (k \\in \\mathbb Z).$$\n\nFor $N \\ge 0$, the $N$-th Fourier partial sum of $f$ is\n\n$$S_Nf(x) := \\sum_{|k| \\le N}\\widehat f(k)e_k(x).$$\n\nA **trigonometric polynomial** on $\\mathbb T$ is a finite linear combination of\nthe characters $e_k$.\n\nIf $f,g \\in L^1(\\mathbb T)$, their convolution is the $L^1(\\mathbb T)$ class\ndefined for almost every $x$ by\n\n$$(f*g)(x) := \\int_0^1 f(x-t)g(t)\\,dt,$$\n\nwhere $f$ and $g$ are read as one-periodic representatives. More precisely,\nthe integrand is absolutely integrable for almost every $x$, and the displayed\nformula gives an almost-everywhere-defined integrable function whose class is\nindependent of the chosen representatives. When one factor is bounded, as for\nthe Dirichlet kernels below, the integral exists at every $x$ for which the\nother representative is integrable on one period.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Multiplying the finite sum gives $Q=\\sum_{k=0}^dac_ke_{m+k}$. Orthogonality of the characters, verified in F1, identifies the coefficient at $m+k$ with $ac_k$ and all other coefficients with zero. Thus the claimed support containment holds, even when some coefficients vanish. At $N<m$ the cutoff contains no supported frequency, so $A_NQ=0$.",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "At $N=m+r$, $0\\le r\\le d$, exactly the terms with $k\\le r$ occur, so $A_{m+r}Q=\\sum_{k=0}^rac_ke_{m+k}=ae_mA_rP$. Taking absolute values and the finite maximum gives $\\max_{0\\le r\\le d}|A_{m+r}Q|=|a|A_*^dP$. By linearity of a finite coefficient sum, adding any polynomial supported strictly beyond a cutoff leaves that cutoff unchanged; the same conclusion applies to any finite list of later separated blocks.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Since $|e_m(x)|=1$ for every x, $|Q(x)|=|a||P(x)|$ at every point, and every separately supplied amplitude bound on E transfers unchanged. If $a=0$, Q is zero regardless of E; for E empty the pointwise bound is vacuous (use supremum zero for nonnegative functions on the empty set). In particular $a=1$, $P=1$ gives $|Q|=1$ for every m, so frequency shifts cannot make it smaller than one on a nonempty set. These are finite algebraic identities and use no choice axiom.",
+          "inputs": [
+            "F2",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 specifies the empty-set convention and the vacuous pointwise bound."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 3.1 cover a=0 and zero coefficients without asserting support equality."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 uses P=1 and a=1 as an explicit witness against modulation smallness."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 permits degree zero and missing coefficients inside the support interval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 include N=m-1, r=0 and r=d."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 states that finite algebra and coefficient identities require no AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 transfers a pointwise amplitude bound using equality of moduli."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 3.1 also gives the reverse amplitude implication by the same equality; no converse frequency-support theorem is asserted."
+        }
+      ]
+    },
+    "lem-kolmogorov-gliding-hump-series-converges-in-lone": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-kolmogorov-block-polynomial-with-large-partial-sums",
+          "source_section": "Statement",
+          "quote": "Assume AC. For every $H>0$ and $0<\\eta<1$ there is an analytic polynomial $P$ with $\\|P\\|_1=1$ and $m\\{A_*P>H\\}>1-\\eta$. There is also a nonnegative trigonometric polynomial $g=\\sum_{|k|\\le d}b_ke_k$ with $\\|g\\|_1=1$ and $m\\{\\sup_{N\\ge0}|S_Ng|>H\\}>1-\\eta$. Here “symmetric” refers to the frequency interval and the partial-sum cutoff, not to evenness of $g$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-separated-frequency-blocks-do-not-disturb-earlier-partial-sum-maxima",
+          "source_section": "Statement",
+          "quote": "Let $P=\\sum_{k=0}^dc_ke_k$, $m\\ge1$ an integer, $a\\in\\mathbb C$, and $Q=ae_mP$. Its Fourier support is contained in $[m,m+d]$, $A_NQ=0$ for $N<m$, and $A_{m+r}Q=ae_mA_rP$ for $0\\le r\\le d$. Thus disjoint later blocks leave earlier cutoffs unchanged, and internal maxima scale by $|a|$. Pointwise $|Q|=|a||P|$; for any set E, a separate bound $|a||P(x)|\\le\\varepsilon$ for all $x\\in E$ implies $|Q(x)|\\le\\varepsilon$ there. When the supremum of $|P|$ on E is finite, this is equivalently the stated bound $|a|\\sup_E|P|\\le\\varepsilon$. Modulation alone gives no magnitude reduction.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
+          "source_section": "Statement",
+          "quote": "Assume countable choice. For every measure space and $1\\le p\\le\\infty$, $L^p(\\mu;\\mathbb C)$ is complete. Every sequence converging in this norm has a subsequence of measurable representatives converging a.e. to a measurable representative of its norm limit. For finite $p$ no pointwise convergence of the whole sequence is asserted.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Apply F1 for each $j\\ge1$ with $H=j2^j$ and $\\eta=2^{-j}$. AC selects one polynomial from each nonempty set of possible polynomials. Its degree can be taken as its greatest nonzero coefficient index, which exists because its norm is one. The stated exceptional sets are measurable because the maxima are finite continuous maxima. The recursion for $m_j$ is explicit; it gives $m_{j+1}>m_j+d_j$ and $m_j\\ge j\\ge1$. F2 therefore places each $Q_j$ in the claimed disjoint positive interval and gives $\\|Q_j\\|_1=a_j=2^{-j}$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "For partial sums $f_J=\\sum_{j\\le J}Q_j$ and $K>J$, the triangle inequality gives $\\|f_K-f_J\\|_1\\le\\sum_{j=J+1}^K2^{-j}\\le2^{-J}$. They are Cauchy, so F3 supplies an $L^1$ limit f. Passing K to infinity in the norm inequality gives $\\|f-f_J\\|_1\\le2^{-J}$, and $\\|f\\|_1\\le\\sum_{j\\ge1}2^{-j}=1$. AC includes the countable choice required by F3.",
+          "inputs": [
+            "F3",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Apply F4 to $G_J=\\sum_{j\\le J}|Q_j|$. Its increasing limit G is measurable and has integral $\\int G=\\lim_J\\sum_{j\\le J}2^{-j}=1$. For every positive integer M, $M m\\{G=\\infty\\}\\le\\int G=1$, so $G<\\infty$ off a null set. There the numerical series converges absolutely; set its sum h to zero on that measurable exceptional set. The resulting function is measurable, $|h|\\le G$ a.e., and $|h-f_J|\\le\\sum_{j>J}|Q_j|$ a.e. A further application of F4 to the nonnegative tail gives $\\|h-f_J\\|_1\\le2^{-J}$. Consequently $\\|h-f\\|_1\\le\\|h-f_J\\|_1+\\|f_J-f\\|_1\\to0$, so h represents f. No smallness of completed blocks is attributed to their frequency shifts.",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 also permits the empty initial sum with total norm bound one."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 uses norm one to exclude zero polynomials before choosing a degree."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 computes the integral of the nonnegative absolute sum as exactly one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 allows d_j=0 in the support recursion, without a zero-width frequency interval."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 uses j>=1 so eta=2^-j lies strictly between zero and one; step 2.1 gives explicit tails."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses AC for the countable family of blocks; step 2.1 propagates countable choice for completeness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result constructs one sequence and proves its convergence, not a characterization."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from L1 convergence to separated supports or large maxima is asserted."
+        }
+      ]
+    },
+    "lem-kolmogorov-block-maxima-diverge-off-a-null-limsup-set": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-kolmogorov-gliding-hump-series-converges-in-lone",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $j\\ge1$ one can choose analytic polynomials $P_j$ of degree $d_j$ with $\\|P_j\\|_1=1$ and $m(E_j)<2^{-j}$, where $E_j=\\{A_*P_j\\le j2^j\\}$. Set $a_j=2^{-j}$, $m_1=1$, $m_{j+1}=m_j+d_j+1$ and $Q_j=a_je_{m_j}P_j$. Their positive frequency intervals are pairwise disjoint and increasing. The series $\\sum_jQ_j$ converges in complex $L^1(\\mathbb T)$ to f, with $\\|f\\|_1\\le1$ and $\\|f-\\sum_{j\\le J}Q_j\\|_1\\le2^{-J}$. Moreover $\\sum_j|Q_j(x)|<\\infty$ almost everywhere, and its pointwise sum represents f.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-kolmogorov-block-polynomial-with-large-partial-sums",
+          "source_section": "Statement",
+          "quote": "Assume AC. For every $H>0$ and $0<\\eta<1$ there is an analytic polynomial $P$ with $\\|P\\|_1=1$ and $m\\{A_*P>H\\}>1-\\eta$. There is also a nonnegative trigonometric polynomial $g=\\sum_{|k|\\le d}b_ke_k$ with $\\|g\\|_1=1$ and $m\\{\\sup_{N\\ge0}|S_Ng|>H\\}>1-\\eta$. Here “symmetric” refers to the frequency interval and the partial-sum cutoff, not to evenness of $g$.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-separated-frequency-blocks-do-not-disturb-earlier-partial-sum-maxima",
+          "source_section": "Statement",
+          "quote": "Let $P=\\sum_{k=0}^dc_ke_k$, $m\\ge1$ an integer, $a\\in\\mathbb C$, and $Q=ae_mP$. Its Fourier support is contained in $[m,m+d]$, $A_NQ=0$ for $N<m$, and $A_{m+r}Q=ae_mA_rP$ for $0\\le r\\le d$. Thus disjoint later blocks leave earlier cutoffs unchanged, and internal maxima scale by $|a|$. Pointwise $|Q|=|a||P|$; for any set E, a separate bound $|a||P(x)|\\le\\varepsilon$ for all $x\\in E$ implies $|Q(x)|\\le\\varepsilon$ there. When the supremum of $|P|$ on E is finite, this is equivalently the stated bound $|a|\\sup_E|P|\\le\\varepsilon$. Modulation alone gives no magnitude reduction.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-first-borel-cantelli",
+          "source_section": "Statement",
+          "quote": "Let $(E_k)_{k\\in\\mathbb N}$ be measurable sets in a measure space. If the nonnegative extended sum satisfies\n\n$$\\sum_{k=0}^{\\infty}\\mu(E_k)<+\\infty,$$\n\nthen\n\n$$\\mu\\left(\\limsup_{k\\to\\infty}E_k\\right)=0.$$\n\nNo independence hypothesis and no finiteness hypothesis on the whole space are required.",
+          "uses": [
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-period-one-fourier-coefficients-partial-sums-and-convolution",
+          "source_section": "Definition",
+          "quote": "Write $\\mathbb T := \\mathbb R / \\mathbb Z$ and represent a function on\n$\\mathbb T$ by a one-periodic function on $\\mathbb R$.\n\nFor $k \\in \\mathbb Z$, define the $k$-th character\n$e_k(x) := e^{2\\pi i kx}$.\n\nIf $f$ is integrable on one period, its Fourier coefficients are\n\n$$\\widehat f(k) := \\int_0^1 f(t)e^{-2\\pi i kt}\\,dt \\qquad (k \\in \\mathbb Z).$$\n\nFor $N \\ge 0$, the $N$-th Fourier partial sum of $f$ is\n\n$$S_Nf(x) := \\sum_{|k| \\le N}\\widehat f(k)e_k(x).$$\n\nA **trigonometric polynomial** on $\\mathbb T$ is a finite linear combination of\nthe characters $e_k$.\n\nIf $f,g \\in L^1(\\mathbb T)$, their convolution is the $L^1(\\mathbb T)$ class\ndefined for almost every $x$ by\n\n$$(f*g)(x) := \\int_0^1 f(x-t)g(t)\\,dt,$$\n\nwhere $f$ and $g$ are read as one-periodic representatives. More precisely,\nthe integrand is absolutely integrable for almost every $x$, and the displayed\nformula gives an almost-everywhere-defined integrable function whose class is\nindependent of the chosen representatives. When one factor is bounded, as for\nthe Dirichlet kernels below, the integral exists at every $x$ for which the\nother representative is integrable on one period.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "For any integer k and integrable functions u,v, the definition gives $|\\widehat u(k)-\\widehat v(k)|\\le\\int|u-v|$, since $|e_{-k}|=1$. Hence the coefficients of F1's partial block sums converge to those of f. For each fixed k, the polynomial coefficients stabilize once the block containing k has been included; if no block contains k, all are zero. Thus f has exactly the prescribed block coefficients and no negative coefficients. In particular every fixed symmetric partial sum is determined by finitely many of these coefficients, with no pointwise infinite-series interchange.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "By F4 and F1, $m(\\limsup_jE_j)=0$. Remove this set and F1's null set on which $G(x)=\\sum_j|Q_j(x)|$ may be infinite. Fix any remaining x. There is $j_0(x)$ such that for all $j\\ge j_0(x)$ the point lies in the strict good set of F2, so some $0\\le r_j\\le d_j$ has $|A_{r_j}P_j(x)|>j2^j$. These witnesses may be taken as least indices; no choice of a measurable family of cutoffs is needed for a pointwise supremum.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Set $N_j=m_j+r_j$. At this cutoff every earlier block is completed and every later block is absent. Steps 1.1 and F3 give the exact identity $S_{N_j}f(x)=\\sum_{i<j}Q_i(x)+a_je_{m_j}(x)A_{r_j}P_j(x)$. Consequently $|S_{N_j}f(x)|>j-\\sum_{i<j}|Q_i(x)|\\ge j-G(x)\\to\\infty$. Also $N_j\\ge m_j\\ge j$, so these are unbounded cutoffs. This proves the assertion. AC is inherited from F1's countable block choice; Borel–Cantelli requires no independence.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F6",
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 allows an empty sum of earlier blocks for the first block."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 handles all negative and unsupported coefficients as zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 uses the normalized finite measure and the geometric exceptional bound, not an independence assumption."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 allows the selected cutoff r_j to equal zero or the degree."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 proves N_j>=j and the explicit lower bound j-G(x), hence divergence at unbounded indices."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.2 selects least finite indices pointwise; step 2.1 propagates AC solely from the constructed supplier."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The result proves unboundedness for the constructed limit, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from divergent sums to this particular block decomposition is claimed."
+        }
+      ]
+    },
+    "thm-kolmogorov-lone-fourier-series-diverges-almost-everywhere": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-kolmogorov-gliding-hump-series-converges-in-lone",
+          "source_section": "Statement",
+          "quote": "Assume AC. For $j\\ge1$ one can choose analytic polynomials $P_j$ of degree $d_j$ with $\\|P_j\\|_1=1$ and $m(E_j)<2^{-j}$, where $E_j=\\{A_*P_j\\le j2^j\\}$. Set $a_j=2^{-j}$, $m_1=1$, $m_{j+1}=m_j+d_j+1$ and $Q_j=a_je_{m_j}P_j$. Their positive frequency intervals are pairwise disjoint and increasing. The series $\\sum_jQ_j$ converges in complex $L^1(\\mathbb T)$ to f, with $\\|f\\|_1\\le1$ and $\\|f-\\sum_{j\\le J}Q_j\\|_1\\le2^{-J}$. Moreover $\\sum_j|Q_j(x)|<\\infty$ almost everywhere, and its pointwise sum represents f.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-kolmogorov-block-maxima-diverge-off-a-null-limsup-set",
+          "source_section": "Statement",
+          "quote": "Assume AC. For the sequence and $L^1$ limit f constructed in the preceding gliding-hump lemma, $\\sup_{N\\ge0}|S_Nf(x)|=\\infty$ off a measurable null set.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Take f to be the $L^1$ limit supplied by F1, represented by the absolutely convergent block sum where defined and zero on its measurable null exceptional set. This is a complex integrable function with norm at most one, so all its Fourier coefficients are well defined.",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "F2 applies to exactly this sequence and limit. It gives $\\sup_N|S_Nf(x)|=\\infty$ outside a measurable null set. A convergent complex sequence is bounded: beyond some index it lies within one of its limit, and its finite initial segment has a finite maximum. Therefore these partial sums in particular fail to converge almost everywhere. The choice assumption is the one used for the countable norm-one block selection and the complex completeness supplier in F1.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "F1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 constructs an actual integrable function on the mass-one torus."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves unbounded sums, hence the constructed function cannot be the zero class."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 retains norm at most one, without claiming norm exactly one for the final sum."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 fixes the representative on the exceptional set; Fourier coefficients are unchanged by null modifications."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 uses all integer cutoffs N>=0 and the unbounded subsequence furnished by F2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 explicitly propagates AC for the block choices and completeness."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a counterexample existence theorem, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "It does not assert that every L1 function has divergent Fourier sums."
+        }
+      ]
+    },
+    "ex-one-finite-kolmogorov-frequency-block": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-kolmogorov-analytic-partial-sum-maximal-function",
+          "source_section": "Definition",
+          "quote": "Use $\\mathbb T=\\mathbb R/\\mathbb Z$, normalized measure $dx$ and $e_k(x)=e^{2\\pi ikx}$ as in [[def-period-one-fourier-coefficients-partial-sums-and-convolution]]. An **analytic trigonometric polynomial** is $P=\\sum_{k=0}^d a_ke_k$ for an integer $d\\ge0$, with no negative-frequency terms. Set\n$$A_nP=\\sum_{k=0}^{\\min(n,d)}a_ke_k\\quad(n\\ge0),\\qquad A_{-1}P=0,\\qquad A_*^dP=\\max_{0\\le n\\le d}|A_nP|.$$\nTrailing zero coefficients do not affect this maximum: every cutoff beyond the degree equals $P$, already attained at its degree. The zero polynomial may be represented with $d=0$ and has maximal function zero. Each partial sum and the finite maximum are continuous, hence measurable.\n\nThe coefficients agree with the integral Fourier coefficients of the cited convention: finite linearity reduces to $\\int_0^1e_{k-\\ell}(x)\\,dx$, which is one for $k=\\ell$ and is $[e^{2\\pi i(k-\\ell)x}/(2\\pi i(k-\\ell))]_0^1=0$ otherwise. Thus for an analytic polynomial, the symmetric partial sum $S_nP$ equals $A_nP$. No infinite series or choice of representatives is involved in these finite identities.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Multiplication gives $Q(x)=e^{10\\pi ix}+e^{12\\pi ix}=e_5(x)+e_6(x)$. Both coefficients are one and all others zero by the character-integral calculation in F1, so its support is exactly $\\{5,6\\}$. The cutoff through four is the empty supported sum, through five is $e_5$, and through six is $e_5+e_6=Q$.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Since $|e_5(x)|=1$, $|Q(x)|=|1+e^{2\\pi ix}|$. Factoring gives $1+e^{2\\pi ix}=2e^{\\pi ix}\\cos(\\pi x)$, hence both magnitudes are $2|\\cos(\\pi x)|$. At x=0 they equal two, and at x=1/2 they vanish. This concrete shift changes the frequencies while preserving every pointwise magnitude.",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the empty supported sum at cutoff four."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 checks the zero at x=1/2."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 checks both nonzero coefficients equal one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 shows frequency shifting does not suppress the maximum value two."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 computes all three adjacent cutoffs four, five and six."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1–2.1 use explicit finite arithmetic and no choice axiom."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a polynomial calculation, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse about general frequency blocks is asserted."
+        }
+      ]
+    },
+    "ex-summable-exceptional-measures-in-the-kolmogorov-induction": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-first-borel-cantelli",
+          "source_section": "Statement",
+          "quote": "Let $(E_k)_{k\\in\\mathbb N}$ be measurable sets in a measure space. If the nonnegative extended sum satisfies\n\n$$\\sum_{k=0}^{\\infty}\\mu(E_k)<+\\infty,$$\n\nthen\n\n$$\\mu\\left(\\limsup_{k\\to\\infty}E_k\\right)=0.$$\n\nNo independence hypothesis and no finiteness hypothesis on the whole space are required.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Finite geometric cancellation gives $\\sum_{j=1}^J2^{-j}=1-2^{-J}$, hence $\\sum_{j\\ge1}m(E_j)\\le1<\\infty$. More precisely, the tail satisfies $\\sum_{j\\ge J}m(E_j)\\le2^{1-J}$.",
+          "inputs": [
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "F1 applies to these measurable sets and the finite sum proved in step 1.1; it gives $m(\\bigcap_J\\bigcup_{j\\ge J}E_j)=0$. Equivalently, outside this null intersection, some J has the point outside every $E_j$ for $j\\ge J$, which is the asserted eventual good-set property. The proof of F1 bounds the limsup measure by each tail, here explicitly $2^{1-J}\\to0$. No independence or choice assumption on the supplied sequence is needed.",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 permits any or all E_j to be empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 proves exactly zero limsup measure by arbitrarily small tails."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 computes the full geometric sum as one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 requires no independence and allows repeated sets consistent with the bounds."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 checks j starts at one and gives tail 2^(1-J), not 2^-J."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 applies F1 to an already supplied measurable sequence, with no choice selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 expands complement of the limsup into eventual avoidance."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1’s set identity also shows eventual avoidance excludes membership in the limsup."
+        }
+      ]
+    },
+    "def-carleson-operator-and-measurable-linearisation": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition requires a nonempty finite cutoff list, so a maximizing index exists."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition sets u=1 where h=0; the zero input has maximal function zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition handles M=1 by its least-index selector."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition freezes the input-dependent selector before treating its operator as linear."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition proves continuity in cutoff, rational supremum equality and frequency-tail control at infinity."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition declares AC and its inherited countable-choice analytic use; finite selectors are deterministic."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Definition shows every rational cutoff is a real cutoff, giving one supremum inequality."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Definition’s cutoff continuity approximates every real cutoff by rationals, giving the reverse supremum inequality."
+        }
+      ]
+    },
+    "def-carleson-tiles-wave-packets-and-tile-order": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition permits an empty tree and declares its zero contribution."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition constructs psi equal to one near zero, so the packet cannot vanish identically."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition imposes tile area one and permits singleton trees."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition includes a designated top not necessarily in the tree and avoids claiming packet orthogonality."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition fixes half-open halves and strict packet support inside the lower half."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition propagates AC from the Fourier suppliers; its smooth cutoff is explicit, with positive denominator."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Definition gives both interval inclusions required for s<=t."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Definition verifies mutual inclusions force equality, establishing antisymmetry."
+        }
+      ]
+    },
+    "def-density-size-and-tree-count-for-carleson-tiles": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "The Definition sets density, size and count to zero for empty families."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "The Definition proves null E gives zero density and size zero iff every coefficient vanishes."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "The Definition includes singleton plus trees, which detects each individual coefficient."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Definition distinguishes designated-top multiplicity from an intrinsic count and includes overlapping top intervals."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "The Definition takes all dominating tiles, including s, and the whole frequency interval; kappa=20 fixes integrable tails."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "The Definition inherits AC from the earlier packet conventions; suprema exist by real completeness with explicit finite bounds."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Definition proves size zero forces each coefficient zero by singleton trees."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Definition proves zero coefficients make every candidate square sum zero."
+        }
+      ]
+    },
+    "lem-carleson-density-selection": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-density-size-and-tree-count-for-carleson-tiles",
+          "source_section": "Definition",
+          "quote": "Assume [[def-axiom-of-choice]] as inherited from the packet and real-line analytic conventions. Use the tiles, plus trees, fixed packets and finite model of [[def-carleson-tiles-wave-packets-and-tile-order]], and a measurable selector $N:\\mathbb R\\to\\mathbb R$ as in [[def-carleson-operator-and-measurable-linearisation]]. Fix $f\\in L^2(\\mathbb R)$, a measurable testing set E of finite measure, and the integer $\\kappa=20$. Put\n$$\\chi_I(x)=|I|^{-1}\\bigl(1+|x-c(I)|/|I|\\bigr)^{-\\kappa}.$$\nFor a tile s and a finite tile set S, define\n$$\\operatorname{dens}_{E,N}(s)=\\sup_{t\\ge s}\\int_{E\\cap\\{x:N(x)\\in\\omega_t\\}}\\chi_{I_t}(x)\\,dx,\\qquad\\operatorname{dens}_{E,N}(S)=\\sup_{s\\in S}\\operatorname{dens}_{E,N}(s).$$\nThe supremum over t ranges over all tiles above s, including s, not just members of S. The integral tests the whole frequency interval $\\omega_t$. Every integrand is nonnegative measurable. Substitution $u=(x-c(I))/|I|$ and the antiderivative of $(1+u)^{-20}$ on $[0,\\infty)$ give $\\int\\chi_I=2/19$, so densities are finite and between zero and $2/19$. For empty S define density zero; for null E every integral is zero. Null modifications of N or E leave each integral, and hence its supremum, unchanged.\n\nDefine\n$$\\operatorname{size}_f(S)=\\sup_{(T,t)}\\left(\\frac1{|I_t|}\\sum_{s\\in T}|\\langle f,\\phi_s\\rangle|^2\\right)^{1/2},$$\nwhere the supremum ranges over nonempty plus subtrees $T\\subseteq S$ with designated top t. In particular singleton trees with their own tile as top are allowed. Empty S has size zero. This supremum is finite: if $\\ell=\\min_{s\\in S}|I_s|>0$, each candidate top has length at least ell and the numerator is at most the finite sum over S of the finite squared coefficients. Size zero is equivalent to every coefficient being zero: the forward implication follows from singleton trees and the reverse from the displayed sum. The pairing depends only on the $L^2$ class of f.\n\nA displayed **forest** is a finite family of disjoint tile subcollections, each equipped with a designated top and forming a tree. Its count is $\\sum_T|I_T|$, where $I_T$ means its designated top interval. This counts top lengths with multiplicity even when intervals overlap. The empty forest has count zero. A different assignment of tops may change the count; no intrinsic count is attached to a tile set without a forest or an explicit existence assertion about such a decomposition. Restricting S can only decrease density and size, because it restricts the families in their suprema. No selection estimate is part of these definitions.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Write $d(t)=\\int_{E\\cap\\{N\\in\\omega_t\\}}\\chi_{I_t}$. Consider all tiles t dominating some s in S and satisfying $d(t)>\\delta/2$. They form a finite nonempty set: $d(t)\\le m(E)/|I_t|$ implies $|I_t|<2m(E)/\\delta$, while domination implies $|I_t|\\ge\\min_{s\\in S}|I_s|>0$. Only finitely many dyadic scales lie in this range; at each scale there is one spatial ancestor of each fixed s and finitely many frequency subintervals of its frequency interval. Nonemptiness follows from the definition of positive supremum delta. Let Tops be the maximal members of this finite set. Assign each s lying below a member of Tops to one such top using a fixed finite ordering. This gives disjoint trees. Every s left over has density at most $\\delta/2$: otherwise a witness t with $d(t)>\\delta/2$ would dominate s and extend to a maximal candidate.",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "For a top t let $I=I_t$, $\\omega=\\omega_t$, and let $2^kI$ be the interval with the same center and length $2^k|I|$. There is an integer $k\\ge0$ with $m(E\\cap\\{N\\in\\omega\\}\\cap2^kI)\\ge c\\delta2^{2k}|I|$, where c is an absolute positive constant fixed below. Indeed, partition the line into I and the shells $2^kI\\setminus2^{k-1}I$ for k>=1. On the kth shell $\\chi_I\\le A\\cdot2^{-20k}/|I|$ for $A=2^{40}$, and the same bound with k=0 dominates its value on I. If every proposed mass bound failed, then $d(t)\\le Ac\\delta\\sum_{k\\ge0}2^{-18k}$. Taking $c=(8A)^{-1}$ makes this less than $\\delta/2$, contradicting the choice of t. Assign the least successful k to t, and call its assigned family $\\mathcal T_k$.",
+          "inputs": [
+            "F1",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Fix k. Greedily choose from $\\mathcal T_k$ a tile with greatest spatial length, retain it, and remove every remaining tile whose enlarged rectangle $2^kI_s\\times\\omega_s$ intersects its enlarged rectangle. Continue until none remain; this is a finite procedure. Retained enlarged rectangles are disjoint, so their sets $E\\cap\\{N\\in\\omega_t\\}\\cap2^kI_t$ are disjoint. Step 2.1 gives $\\sum_{t\\text{ retained}}|I_t|\\le(c\\delta2^{2k})^{-1}m(E)$.",
+          "inputs": [
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "A tile s removed by a retained t has $|I_s|\\le|I_t|$ and overlapping frequency intervals; dyadic nesting and reciprocal lengths imply $\\omega_t\\subseteq\\omega_s$. All tiles removed by this same t therefore have mutually overlapping, hence nested, frequency intervals. Since Tops is an antichain, their original spatial intervals must be pairwise disjoint: otherwise dyadic nesting of both coordinates would make two tops comparable. Also overlap of the enlarged spatial intervals implies each original $I_s$ lies in the interval centered at $c(I_t)$ of radius $(3/2)2^k|I_t|$. Thus the sum of their lengths is at most $3\\cdot2^k|I_t|$. Including t itself in its removed family, and using step 3.1, yields $\\sum_{s\\in\\mathcal T_k}|I_s|\\le(3/c)2^{-k}\\delta^{-1}m(E)$. Summing over k gives $\\sum_{t\\in\\mathrm{Tops}}|I_t|\\le(6/c)\\delta^{-1}m(E)$. Together with step 1.1 this proves the partition and count assertion. Empty assigned trees may be deleted, only reducing the count. AC is inherited; the selections here are finite greedy choices and least integers.",
+          "inputs": [
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1’s positive delta excludes empty S; step 4.1 allows deletion of empty assigned trees."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves m(E)>0 from positive delta before bounding candidate scales."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 covers a singleton family and permits a dominating top outside S."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 uses antichain geometry, not disjointness of enlarged rectangles for all tops."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 includes shell k=0 and fixes the constant before selecting the least successful k."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 propagates AC from F1–F2; every actual selection is finite or least-integer."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The theorem is a decomposition estimate, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse recovers positive density from the displayed count bound."
+        }
+      ]
+    },
+    "ex-two-comparable-and-two-incomparable-carleson-tiles": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-carleson-tiles-wave-packets-and-tile-order",
+          "source_section": "Definition",
+          "quote": "Assume [[def-axiom-of-choice]] for the countable-choice Fourier suppliers. A **dyadic interval** is $[j2^k,(j+1)2^k)$ with $j,k\\in\\mathbb Z$; its length is positive. A **tile** is $s=I_s\\times\\omega_s$ with both intervals dyadic and $|I_s||\\omega_s|=1$. Their centers are denoted c. Write $\\omega_{s,-}$ and $\\omega_{s,+}$ for the left and right half-open halves. The midpoint belongs only to the right half.\n\nHere is an explicit nonzero packet convention. Define $\\rho(t)=\\exp(-1/t)$ for $t>0$ and $\\rho(t)=0$ for $t\\le0$. Here is the complete smoothness justification. Put $P_0(u)=1$ and recursively $P_{k+1}(u)=u^2(P_k(u)-P_k'(u))$. The exponential derivative, chain rule and product/quotient rules ([[thm-derivative-of-exponential]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]]) show on $t>0$ that the kth derivative is $P_k(1/t)\\exp(-1/t)$. For each polynomial P and each integer r>=0, $t^{-r}P(1/t)\\exp(-1/t)\\to0$ as $t\\downarrow0$: expand P into finitely many monomials, put u=1/t, and apply [[thm-exponential-beats-every-polynomial]] with parameter one and [[cor-exponential-reciprocal-and-positivity]]. Extend each displayed kth-derivative formula by zero on $t\\le0$. Each extension is continuous at zero (r=0); its difference quotient at zero tends to zero (r=1), so its derivative there equals the next extension's value. On the two open half-lines differentiation already gives the next extension. Induction therefore proves $\\rho\\in C^\\infty(\\mathbb R)$ and $\\rho^{(k)}(0)=0$ for every k. Positivity of the exponential makes $\\rho(t)>0$ exactly when $t>0$. Set $a=1/9$, $b=1/8$ and\n$$\\psi(\\xi)=\\frac{\\rho(b^2-\\xi^2)}{\\rho(b^2-\\xi^2)+\\rho(\\xi^2-a^2)}.$$\nThe denominator is positive: for $|\\xi|\\le a$ its first term is positive, for $|\\xi|\\ge b$ its second term is positive, and between a and b both are positive. Thus $\\psi$ is smooth, $0\\le\\psi\\le1$, equals one on $[-a,a]$ and vanishes outside $[-b,b]$. Every derivative is bounded on its compact support, so it is Schwartz under [[def-schwartz-space-and-its-seminorms]]. Define $\\phi(x)=\\widehat\\psi(-x)$. The transform theorem [[thm-fourier-transform-maps-schwartz-space-continuously-to-itself]] makes this Schwartz, and [[thm-fourier-inversion-on-schwartz-space]] gives $\\widehat\\phi=\\psi$. In detail inversion applied to $\\psi$ says $\\int\\widehat\\psi(y)e^{2\\pi iy\\xi}\\,dy=\\psi(\\xi)$; changing $y=-x$ gives the claimed transform. All integrals are absolute by [[lem-schwartz-functions-and-all-derivatives-are-integrable]]. In particular $\\phi$ is not zero. No unspecified zero packet is allowed.\n\nUse $\\operatorname{Tr}_y h(x)=h(x-y)$, $\\operatorname{Mod}_\\xi h(x)=e^{2\\pi i\\xi x}h(x)$ and $\\operatorname{Dil}^2_\\ell h(x)=\\ell^{-1/2}h(x/\\ell)$ for $\\ell>0$. Define\n$$\\phi_s(x)=|I_s|^{-1/2}e^{2\\pi i c(\\omega_{s,-})x}\\phi\\bigl((x-c(I_s))/|I_s|\\bigr).$$\nThe translation, modulation and dilation laws [[thm-fourier-translation-modulation-dilation-and-reflection-laws]] give\n$$\\widehat{\\phi_s}(\\xi)=|I_s|^{1/2}e^{-2\\pi i c(I_s)(\\xi-c(\\omega_{s,-}))}\\psi\\bigl(|I_s|(\\xi-c(\\omega_{s,-}))\\bigr).$$\nIts support lies strictly inside $\\omega_{s,-}$, since its half-width is $1/(8|I_s|)$ whereas that half-interval has half-width $1/(4|I_s|)$. For every integer M there is a finite constant $C_M$ with $|\\phi_s(x)|\\le C_M|I_s|^{-1/2}(1+|x-c(I_s)|/|I_s|)^{-M}$, directly from the Schwartz seminorms. The pairing is $\\langle f,h\\rangle=\\int f\\overline h$, linear in f. The fixed packet is not assumed to have norm one; its fixed norm and seminorms enter constants.\n\nSet $s\\le t$ when $I_s\\subseteq I_t$ and $\\omega_t\\subseteq\\omega_s$. This is a partial order: reflexivity and transitivity follow from inclusions, and mutual comparability gives equality of both intervals. A finite **tree** is a set T with a designated top tile t such that $s\\le t$ for every $s\\in T$; the top need not belong to T and is part of the data. A **plus tree** has, in addition, $\\omega_t\\subseteq\\omega_{s,+}$ for every $s\\in T\\setminus\\{t\\}$. The top alone is allowed. Empty trees have no contribution; any assigned top is retained only when a forest count is explicitly specified. For a finite tile set S, a measurable selector $N:\\mathbb R\\to\\mathbb R$ and $f\\in L^2$, define the finite model\n$$C_{S,N}f(x)=\\sum_{s\\in S}\\langle f,\\phi_s\\rangle\\mathbf1_{\\omega_{s,+}}(N(x))\\phi_s(x).$$\nThe coefficients exist by Cauchy–Schwarz [[thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz]] and Schwartz integrability. Each summand is measurable, the sum is finite and for fixed S,N it is linear in f. Its testing form for $|g|\\le\\mathbf1_E$, $m(E)<\\infty$, is the sum of $\\langle f,\\phi_s\\rangle\\langle\\mathbf1_{\\omega_{s,+}}(N)\\phi_s,g\\rangle$; these integrals exist since the packets are integrable and g is bounded. These definitions do not assert orthogonality of overlapping packets.",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "All four displayed intervals are half-open dyadic intervals. The area products are $1\\cdot1=1$ for s,u,v and $2\\cdot(1/2)=1$ for t. Moreover $[0,1)\\subset[0,2)$ and $[0,1/2)\\subset[0,1)$, so $s\\le t$ by the two defining inclusions. The reverse order fails because $1\\in[0,2)$ but $1\\notin[0,1)$.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-1.2",
+          "step": "1.2",
+          "claim": "For u,v the frequency intervals agree, but neither spatial interval contains the other: $0\\in I_u\\setminus I_v$ and $1\\in I_v\\setminus I_u$. Thus both possible order relations fail, while every tile is comparable to itself.",
+          "inputs": [
+            "F1",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Steps 1.1 and 1.2 verify the claimed comparable pair and the two failures for the incomparable pair, with midpoint and endpoint membership fixed by the half-open convention.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "All four tiles are explicitly nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 verifies positive interval lengths; no zero-area tile is used."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 checks reflexivity as well as distinct tiles."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 handles equal frequency intervals without assuming comparability."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 1.2 explicitly check membership of 0 and 1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses four tiles specified by rational endpoints; no choice is used."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The assertion consists of two explicit examples, not an iff statement."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The two failures of comparability are proved separately in step 1.2, not asserted as an iff."
+        }
+      ]
+    },
+    "ex-balancing-density-and-size-levels-in-the-carleson-sum": {
+      "citations": [],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "For $n\\ge0$ the minimum is $2^{-n}$, whereas for $n\\le-1$ it is $2^n$. Finite geometric cancellation therefore gives, for integers $M\\ge1$ and $N\\ge0$, $\\sum_{n=-M}^N\\min(2^n,2^{-n})=(1-2^{-M})+(2-2^{-N})=3-2^{-M}-2^{-N}$. In particular the index zero is counted once and contributes one.",
+          "inputs": [
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Every finite set of integer indices lies in an interval $[-M,N]$ of the above form, and all summands are nonnegative. Thus the supremum of finite subsums is bounded above by three by step 1.1. Taking $M=N\\to\\infty$ in that same formula gives the lower bound three, since $2^{-M}\\to0$. The series is therefore three.",
+          "inputs": [
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 includes the empty finite subsum, which is zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 counts the n=0 term exactly once with value one."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 gives M=1,N=0 sum 3/2, agreeing with its two terms."
+        },
+        {
+          "case": "degenerate",
+          "status": "not_applicable",
+          "reason": "There is no variable density or size parameter in this numerical example."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 treats negative indices and the nonnegative endpoint separately."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 uses explicit symmetric intervals, without any choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example asserts a numerical equality, not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No reverse implication is asserted."
+        }
+      ]
+    },
+    "rem-carleson-hunt-does-not-include-the-lone-endpoint": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-kolmogorov-lone-fourier-series-diverges-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Assume AC. There exists a complex-valued $f\\in L^1(\\mathbb T)$ such that $\\sup_{N\\ge0}|S_Nf(x)|=\\infty$ for almost every x. The torus has normalized measure and $e_k(x)=e^{2\\pi ikx}$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "Put $Mf=\\sup_{N\\ge0}|S_Nf|$. Each finite partial sum is measurable, hence this countable supremum is measurable. By F1 it equals infinity outside a null set on a space of measure one. For every positive integer k, the nonnegative simple function k on that conull set is bounded above by Mf, so the definition of the nonnegative integral gives $\\int Mf\\ge k$. Consequently $\\|Mf\\|_1=\\infty$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given",
+            "algebra"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "Since $\\|f\\|_1<\\infty$ by F1, step 1.1 contradicts every proposed finite-constant inequality $\\|Mh\\|_1\\le C\\|h\\|_1$ for all $h\\in L^1$. It also contradicts every finite weak-(1,1) constant: $m\\{Mf>t\\}=1$ for all t, whereas $C\\|f\\|_1/t<1$ for sufficiently large t. Thus neither assertion follows by adjoining the endpoint to the proposed positive-p range.",
+          "inputs": [
+            "F1",
+            "step 1.1",
+            "algebra"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The witness lives on a probability space of measure one, not an empty space."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 shows this witness cannot be zero in L1, since all partial sums of zero vanish."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 uses the conull set of measure one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 excludes every finite constant, including zero."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 addresses exactly p=1; no claim at infinity or below one is made."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 inherits the countable witness construction in F2; it makes no additional choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a one-way endpoint obstruction."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No sufficiency assertion or equivalence is made."
+        }
+      ]
+    }
+  }
+}
