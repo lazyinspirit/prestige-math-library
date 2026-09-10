@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1432, U-C 16, A-R 187, A-P 167. The
+Current classifications: U-P 1431, U-C 16, A-R 187, A-P 166. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -115,6 +115,21 @@ square-root selection are coherent in the used scope. `thm-gaussian-integral`
 moves from U-P to bounded clear; its three immediate lemmas are new bounded
 clear census entries. This receipt does not certify the unused clauses or full
 transitive closures of their suppliers.
+
+The adjacent approximate-identity reread corrects an older A-P classification
+under the canonical implicit-use rule. The published
+`thm-l-one-approximate-identities-converge-in-l-p` explicitly assumes countable
+choice. That assumption licenses the published completion-to-Borel
+representative supplier; the published Borel convolution lemma then gives the
+joint measurability needed by Minkowski. Translation invariance gives the
+isometry and `2||f||_p` estimate, and the definition's strict tail outside
+`delta/2` controls the proof's tail at least `delta`. These are correct implicit
+uses of adequate published interfaces, not unresolved repair debt. Young's
+inequality is unnecessary to this proof. The theorem moves A-P to bounded
+clear, preserving the earlier monitoring history. Its exact approximate-identity
+definition is also sound and moves U-P to bounded clear. The newer complex
+wrapper remains A-P for its separate black-box Young use, while its finite-p
+approximation steps already spell out the Borel-envelope/Minkowski route.
 
 ## Locally convex published-prerequisite audit — 2026-09-11
 
@@ -27729,14 +27744,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1432 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1431 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 16 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 167 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 166 | Recorded direct review and an unresolved item-specific repair. |
 
-594 further reference-pool items have bounded no-repair-needed dispositions
+596 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1802 items and the expanded reference pool contains 2396 unique items.
+1800 items and the expanded reference pool contains 2396 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -27801,6 +27816,8 @@ The separate page-header cutover obligations remain in their category sections.
 | `lem-gaussian-integral-is-finite-and-positive` | Fourier Gaussian supplier audit, 2026-09-11: full proof read; the reciprocal-quadratic tail bound, reflected negative tail, positive compact middle and mixed-improper recombination establish a finite positive integral. New bounded-clear census entry; no published edit or new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `lem-gaussian-square-is-the-plane-gaussian-integral` | Fourier Gaussian supplier audit, 2026-09-11: full proof read; product integration on symmetric squares and compact-Jordan exhaustion give the square identity. New bounded-clear census entry; no published edit or new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `lem-plane-gaussian-integral-in-polar-coordinates` | Fourier Gaussian supplier audit, 2026-09-11: full proof read; positive-radius upper/lower polar charts are injective, overlaps have content zero, and the inner-disc and outer exhaustion limits yield pi. New bounded-clear census entry; no published edit or new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `thm-l-one-approximate-identities-converge-in-l-p` | Fourier approximate-identity classification correction, 2026-09-11: full target and exact used interfaces reread. The theorem states CC, so published Borel representatives and joint convolution measurability supply Minkowski; translation invariance gives the isometry/far bound, and the strict tail at `delta/2` controls the weak tail at `delta`. Correct implicit adequate uses are clear under the canonical rule; Young is unnecessary. A-P to bounded clear, preserving earlier monitoring history. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `def-l-one-approximate-identity-on-rn` | Fourier approximate-identity classification correction, 2026-09-11: full definition read. The complex mass-one, uniformly `L^1`-bounded and strict-tail clauses are sound; later weak-tail use follows from the strict tail at half the radius. U-P to bounded clear; no published edit or new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-weak-global-dimension-is-detected-by-tor-and-is-left-right-symmetric` | Root bounded dependency review, 2026-09-09 15:46 UTC: full target and opposite-ring/weak-dimension definitions read; flat-dimension criterion, balance and tensor interfaces checked. Existing DC and supplied resolutions suffice, including the zero-ring case. No published edit or new prerequisite. Exact supplier IDs and current acceptance hashes are in phase-2-catchup-24-cyclic-tor-root-repair.md and the item review JSON. U-P to bounded clear; not a repair, independent judgment or whole-library certification. |
 
 Root review on 2026-09-09: read the complete polynomial-bump primitive
@@ -28548,7 +28565,6 @@ owner's scan policy.
 | `thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions` | Completed-measurable change of variables |
 | `thm-continuous-mean-value-functions-are-harmonic` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-existence-of-associated-primes` | Noetherian direct-consumer follow-up — early-repair impact |
-| `thm-l-one-approximate-identities-converge-in-l-p` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound` | Personal monitoring audit 2026-09-08, reconfirmed by Fourier Step-3B 2026-09-11: proof 1.1 chooses Borel representatives of completed-Lebesgue classes without the countable choice required by `thm-completion-measurable-functions-have-base-measurable-representatives`. Add the assumption/supplier, retain the product-measurability and Tonelli envelope, and use the repaired conditional representative-independence lemma. Live Fourier bypasses this proof via the newer complex interface under CC. Exact refreshed evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-smooth-partitions-of-unity-exist-on-manifolds` | Open findings from the bump-consumer audit — 2026-09-08  See also Batch 9 Step 6B supplier reread — 2026-09-10. |
 | `thm-young-convolution-inequality` | Personal monitoring audit 2026-09-08, load-bearing use reconfirmed in Fourier Step-3B 2026-09-11: the `L^1`-by-`L^p` branch used by the complex convolution wrapper still inherits the missing Borel/product-measurability, Tonelli and translation proof interfaces; finite-r powers also require zero-norm cases first. Repair from Borel representatives, Tonelli/translation and the existing Minkowski route. No new Phase-2 pair. Exact refreshed evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
@@ -28981,7 +28997,6 @@ mathematical repairs. Evidence:
 | `def-integral-weyl-group-of-a-weight` | Cross-category Phase-2 roots and their published impact |
 | `def-killing-form-of-a-semisimple-lie-algebra` | Exact Phase-3 published repairs |
 | `def-l-and-nl` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
-| `def-l-one-approximate-identity-on-rn` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `def-language-concatenation-powers-and-kleene-star` | 51. Exact live-plan metadata resynchronization set |
 | `def-language-generated-by-a-cfg` | 51. Exact live-plan metadata resynchronization set |
 | `def-language-recognized-and-decided` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |

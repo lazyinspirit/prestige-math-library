@@ -121,6 +121,21 @@ U-C 16, A-R 187, A-P 167 and 594 bounded clears. Mechanical recount confirms
 2,396 unique rows with no cross-class duplicate; every indexed ID resolves to
 a current published item.
 
+The approximate-identity classification correction moves
+`thm-l-one-approximate-identities-converge-in-l-p` from A-P to bounded clear.
+Its explicit CC hypothesis supports the implicit Borel-representative and joint
+measurability construction, translation invariance supplies the norm bound, and
+the strict tail outside `delta/2` controls the weak tail at `delta`. Under the
+canonical correct-implicit-use rule, these are not repair debt; Young is unused.
+The sound `def-l-one-approximate-identity-on-rn` also moves U-P to bounded
+clear after full-definition review. The newer complex wrapper retains its A-P
+classification for the separate Young call in convolution existence.
+
+Post-correction target index: 2,396 unique published IDs; U-P 1,431, U-C 16,
+A-R 187, A-P 166 and 596 bounded clears. Mechanical recount confirms 2,396
+unique rows with no cross-class duplicate; every indexed ID resolves to a
+current published item.
+
 ## Next target
 
 1. Reconcile any further exact next-20 or Fourier published-interface issues

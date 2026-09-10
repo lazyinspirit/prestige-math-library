@@ -339,3 +339,48 @@ at their exact used clauses. No defect was identified in this bounded path.
 `thm-gaussian-integral` moves from U-P to bounded clear, and the other three
 items are new bounded-clear census entries. This is not a certification of
 unused supplier clauses or full transitive closures.
+
+## Approximate-identity classification correction
+
+The ledger was searched by the exact IDs below, their empty alias lists, the
+product-measurability, translation-isometry and strict-tail mechanisms, and the
+published Borel-representative, convolution-measurability, translation and
+Minkowski supplier IDs. This reread applies the canonical rule that a correct
+implicit use of an adequate published supplier is clear rather than a
+metadata-only defect.
+
+`thm-l-one-approximate-identities-converge-in-l-p` (current SHA-256
+`9db922386d3d5e159f677b6c9470d298fcccb5b02fe2144b18b5eb1dc63eb263`)
+explicitly assumes countable choice. For complex `L^1`/`L^p` representatives,
+that hypothesis permits componentwise application of
+`thm-completion-measurable-functions-have-base-measurable-representatives`, and
+`lem-borel-representatives-make-the-convolution-integrand-borel-measurable`
+then gives the joint measurability needed in proof 1.1. Translation invariance
+gives `||tau_y f||_p=||f||_p` and hence the far-part bound
+`||tau_y f-f||_p <= 2||f||_p`. Finally,
+`{|y| >= delta}` is contained in `{|y| > delta/2}`, so the definition's strict
+tail condition gives the limit used in proof 2.1. All three are exact,
+adequate published interfaces under the theorem's stated CC. The Young
+dependency is unnecessary; no claim from its defective proof is needed.
+
+The near/far estimate therefore proves the stated finite-p convergence in the
+audited scope. The older monitoring note correctly identified places where the
+interfaces should be made explicit, but under the corrected classification
+rule those suggestions do not establish repair debt. The single existing A-P
+row moves to bounded clear; the history remains in the ledger. No published
+item changes and no new Phase-2 pair are required.
+
+`def-l-one-approximate-identity-on-rn` (current SHA-256
+`8e39dd20f63416e622501c5668e2cc6eec3b365c339b5f3a1276c7cf592f5ed9`)
+was read in full. Its mass-one, uniform absolute `L^1` bound and strict-tail
+conditions are well-defined for the published complex `L^1` representatives,
+and the strict/weak boundary distinction is handled as above. It moves from
+U-P to bounded clear. This is an exact-definition and used-interface receipt,
+not a full audit of every later consumer.
+
+The live Fourier corollary and Gaussian summability theorem both list the old
+theorem, but their Facts/Proof use the newer complex interface instead. The old
+edge is redundant. The newer interface remains A-P because proof 1.2 actually
+black-boxes defective Young for convolution existence; its finite-p
+approximation proof in steps 2.2--3.1 can be used locally after replacing that
+existence call by the already-recorded Borel-envelope/Minkowski construction.
