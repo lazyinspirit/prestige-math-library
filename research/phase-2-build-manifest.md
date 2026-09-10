@@ -8,9 +8,9 @@ that one frontier: `phase-2-next-20` owns the original20 and
 `phase-2-fourier-support-2` owns the2 Fourier pairs. They share prerequisite
 and completion scope; the Fourier pairs do not replace any original pair.
 
-The owner now explicitly directs authoring all22 immediately. The original
-run advances from its completed scaffolds to assignment/authoring under that
-direction; its101 ready and442 held item records remain unchanged evidence.
+The owner now explicitly directs authoring all22 immediately. **All22 pairs now have live author coverage:** eight groups cover the original20
+and the existing Fourier author covers the other2. Neither execution partition
+is paused. The original101 ready and442 held item records remain unchanged evidence.
 Open findings transfer as explicit author repair obligations. The owner has
 recorded proceed for all20 current pair scopes. No proof approval or source
 retrieval evidence is manufactured. See
