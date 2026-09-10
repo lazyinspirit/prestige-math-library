@@ -28,6 +28,7 @@ import { scopedGateOutput } from '../src/repair-evidence.mts';
 import { loadStep7JudgeEvidence } from '../../step7-evidence.mjs';
 import { repairFingerprint } from './authored-repairs.mts';
 import { holdStep1 } from './step1-hold.mts';
+import { yaml } from '../../pathway-lib.mjs';
 
 // Version the composed Step-5 module independently. The executor watches both
 // files and re-imports this root when either changes; the query prevents Node's
@@ -968,12 +969,42 @@ function writeFrozenFile(path: string, body: string): void {
   writeFileSync(path, body, { flag: 'wx' });
 }
 
+/** Stable dependency-first order, including dependencies through unqueued items. */
+export function dependencyFirst(ids: string[], dependencies: (id: string) => string[]): string[] {
+  const queued = new Set(ids);
+  const visiting = new Set<string>();
+  const visited = new Set<string>();
+  const ordered: string[] = [];
+  const visit = (id: string) => {
+    if (visited.has(id)) return;
+    if (visiting.has(id)) throw new Error(`Final-adjudicator dependency cycle at ${id}`);
+    visiting.add(id);
+    for (const dep of [...dependencies(id)].sort()) visit(dep);
+    visiting.delete(id);
+    visited.add(id);
+    if (queued.has(id)) ordered.push(id);
+  };
+  for (const id of [...queued].sort()) visit(id);
+  return ordered;
+}
+
 /** Materialise one deterministic, strictly ordered final-adjudicator queue for
  * an affected Alpha group.  The terminal recorder reads this same JSON and
  * refuses position N until positions 1..N-1 have current resolutions. */
 function writeFinalAdjudicatorTask(ctx: any, stage: any, round: number, group: string,
   assignments: Array<{ id: string; scope: Step7RepairScope; owner: string | null }>): string {
-  const ordered = [...assignments].sort((a, b) => a.id.localeCompare(b.id));
+  const dependencyCache = new Map<string, string[]>();
+  const dependencies = (id: string): string[] => {
+    if (!dependencyCache.has(id)) {
+      const path = R(ctx, 'items', `${id}.md`);
+      const text = existsSync(path) ? readFileSync(path, 'utf8') : '';
+      const fm = yaml().parse(text.match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? '') ?? {};
+      dependencyCache.set(id, Array.isArray(fm.deps) ? fm.deps : []);
+    }
+    return dependencyCache.get(id)!;
+  };
+  const byId = new Map(assignments.map(row => [row.id, row]));
+  const ordered = dependencyFirst([...byId.keys()], dependencies).map(id => byId.get(id)!);
   const dispatchLabel = stage.id === '7-rejudge'
     ? `step7-fa-${group}-round-${round}` : `step7-fa-${group}-${stage.id}-round-${round}`;
   const queueRel = `research/${ctx.run}-${dispatchLabel}.json`;

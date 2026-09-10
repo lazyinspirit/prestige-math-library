@@ -144,6 +144,10 @@ consumers and give each its own first judgment.
 Step 7 is: group repairs → preflight checks → one Terra rejudge → one Astra
 final-adjudication pass → snapshot → Step 8. Only the engine dispatches judges.
 Final adjudicators accept or repair queued items using existing suppliers.
+Within each queue, process suppliers before consumers, including transitive
+prerequisites, with stable ID ordering for unrelated items. Preserve frozen
+queues and append-only decisions. Legacy queue/hash conflicts require explicit
+operator recovery, not an automatic new judge wave.
 New prerequisites, missing paid verdicts or unresolved mathematics stop the run;
 they do not trigger another sweep. A completed paid verdict made stale by a
 licensed correction goes to the terminal pass, never another Terra call.
@@ -161,7 +165,7 @@ definitions explicitly marked proof-not-applicable need no new proof contract.
 Contract ownership comes from its explicit `scope`, never textual dependency mentions.
 Inherited Step-5 cross-group published repairs retain their original provenance.
 The Step-7 guard requires their claim file to match the frozen Step-5 receipt
-and their repaired content to remain unchanged from the Step-7 baseline; this
+and their historical repaired content to match the Step-7 baseline; this
 recognition grants no licence for a new edit or exemption from later certification.
 
 Step 8 reviews scope and post-repair changes, closes impact and applies current

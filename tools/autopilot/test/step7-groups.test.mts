@@ -21,7 +21,7 @@ import { spawnSync } from 'node:child_process';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
-import { stages } from '../stages/mathlib.mts';
+import { stages, dependencyFirst } from '../stages/mathlib.mts';
 import { MODELS, resolveLineup } from '../../models.mjs';
 import { tsxLoader } from '../../paths.mjs';
 import { validateCodexOutputSchema } from '../../codex-output-schema.mjs';
@@ -32,6 +32,14 @@ const REPO: string = process.env.AUTOPILOT_TEST_REPO
 const READER_WARNING_ITEM = 'ex-the-mobius-band-presented-by-two-regular-patches';
 
 const stage = (id: string): any => stages.find((s: any) => s.id === id);
+
+test('FA queues put suppliers before consumers, including transitive suppliers', () => {
+  const deps: Record<string, string[]> = { 'a-consumer': ['middle'], middle: ['z-supplier'] };
+  assert.deepEqual(dependencyFirst(['a-consumer', 'z-supplier'], id => deps[id] ?? []),
+    ['z-supplier', 'a-consumer']);
+  assert.deepEqual(dependencyFirst(['b', 'a'], () => []), ['a', 'b']);
+  assert.throws(() => dependencyFirst(['a'], id => id === 'a' ? ['b'] : ['a']), /dependency cycle/);
+});
 
 test('the step-6 reader output schema is accepted by the dispatcher', () => {
   const schema = JSON.parse(readFileSync(join(REPO, 'briefs/schemas/step7-context.json'), 'utf8'));
@@ -377,6 +385,8 @@ test('repair stage never launches final adjudication before preflight', async ()
 
 test('Step-7 sends every rejected Terra rejudge directly to one ordered Astra-medium FA per group', async () => {
   const repo = fixtureRepoWithGroups();
+  mkdirSync(join(repo, 'items'));
+  writeFileSync(join(repo, 'items', 'thm-demo-x.md'), '---\nid: thm-demo-x\ndeps: [thm-demo-z]\n---\n');
   writeFileSync(join(repo, 'research', 'demo-step7-scope.json'), JSON.stringify({
     by_item: { 'thm-demo-x': 'a', 'thm-demo-z': 'a', 'thm-demo-y': 'b' },
   }));
@@ -400,7 +410,7 @@ test('Step-7 sends every rejected Terra rejudge directly to one ordered Astra-me
   const queueA = JSON.parse(readFileSync(join(repo, 'research', 'demo-step7-fa-a-round-1.json'), 'utf8'));
   const queueB = JSON.parse(readFileSync(join(repo, 'research', 'demo-step7-fa-b-round-1.json'), 'utf8'));
   assert.deepEqual(queueA.items.map((row: any) => [row.id, row.position]),
-    [['thm-demo-x', 1], ['thm-demo-z', 2]], 'one group shares one deterministic serial queue');
+    [['thm-demo-z', 1], ['thm-demo-x', 2]], 'the supplier precedes its alphabetically earlier consumer');
   assert.deepEqual(queueB.items.map((row: any) => [row.id, row.position]), [['thm-demo-y', 1]]);
   const taskA = readFileSync(join(repo, 'research', 'demo-step7-fa-a-round-1.task.md'), 'utf8');
   assert.match(taskA, /Do not substantively review the next item until the recorder accepts the current one/);

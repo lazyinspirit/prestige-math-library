@@ -31,7 +31,9 @@ test('inherited Step-5 cross repairs require frozen claims and cannot license ne
       'research/demo-step5-published-claims.jsonl': createHash('sha256').update(claimsText).digest('hex'),
     } } };
   assert.equal(isFrozenStep5CrossRepair(record, context), true);
-  assert.equal(isFrozenStep5CrossRepair(record, { ...context, currentHash: 'c'.repeat(16) }), false);
+  const laterEdit = { ...context, currentHash: 'c'.repeat(16) };
+  assert.equal(isFrozenStep5CrossRepair(record, laterEdit), true,
+    'historical provenance survives a later edit; the guard must license that edit separately');
   assert.equal(isFrozenStep5CrossRepair(record, { ...context, baselineHash: 'c'.repeat(16) }), false);
   assert.equal(isFrozenStep5CrossRepair(record, { ...context, claimsText: claimsText + '\n' }), false);
   assert.equal(isFrozenStep5CrossRepair({ ...record, group: 'b' }, context), false);

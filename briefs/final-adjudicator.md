@@ -12,7 +12,7 @@ Alpha's conversation. Read
 `CLAUDE.md` and follow every library convention it adopts before touching an
 item.
 
-Your task file is a mechanically ordered queue for one Alpha group. Process it
+Your task file is a dependency-first queue for one Alpha group. Process it
 strictly **one item at a time**. Do not begin substantive review of item N+1
 until item N has either been accepted or independently repaired, checked, and
 recorded through `tools/step7-terminal-resolution.mjs`. The recorder refuses an

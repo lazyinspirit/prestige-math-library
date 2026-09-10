@@ -284,11 +284,11 @@ if (publishedRepairsPath && existsSync(resolvePath(publishedRepairsPath))) {
           run: scope.run,
           closure: JSON.parse(readFileSync(resolvePath(`research/${scope.run}-step5-closure.json`), 'utf8')),
           claimsText: readFileSync(resolvePath(`research/${scope.run}-step5-published-claims.jsonl`), 'utf8'),
-          baselineHash: baseline.hashes?.[record.id], currentHash: now[record.id],
+          baselineHash: baseline.hashes?.[record.id],
         });
       } catch { /* Missing or malformed frozen evidence fails below. */ }
       if (!inherited) error('published-repair-step5-provenance',
-        `${publishedRepairsPath}:${index + 1}: inherited cross-group repair must match frozen Step-5 claims and unchanged pre-Step-7 content`, record.id);
+        `${publishedRepairsPath}:${index + 1}: inherited cross-group repair must match frozen Step-5 claims and the pre-Step-7 baseline`, record.id);
       continue; // Historical evidence grants no licence for a later edit.
     }
     if (!runItems.has(record.found_via) || scope.by_item?.[record.found_via] !== String(record.group)) {
