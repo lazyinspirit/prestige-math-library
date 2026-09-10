@@ -2343,6 +2343,174 @@
           "evidence": "The Statement claims no converse or lower bound; step 6.1 only combines two upper bounds."
         }
       ]
+    },
+    "lem-carleson-restricted-weak-interpolation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-layer-cake-formula-for-l-p-powers",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space, let $f : X \\to \\mathbb C$ be\nmeasurable, and let $0<p<\\infty$. Then\n$$\\int_X |f|^p\\,d\\mu = p\\int_0^\\infty t^{p-1}\\mu(\\{|f|>t\\})\\,dt = p\\int_0^\\infty t^{p-1}A_f(t)\\,dt,$$\nwhere either side may be $+\\infty$.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-sublinear-operator-weak-and-strong-type-p-q",
+          "source_section": "Definition",
+          "quote": "Let $(X,\\mathcal{A},\\mu)$ and $(Y,\\mathcal{B},\\nu)$ be measure spaces, and let\n$T$ assign to each measurable function on $X$ a measurable function on $Y$.\n\nThe operator $T$ is **sublinear** if for all scalars $a,b$ and measurable\nfunctions $f,g$ one has\n$$|T(af+bg)|\\le |a|\\,|Tf|+|b|\\,|Tg|.$$\n\nFor $1\\le p\\le\\infty$ and $1\\le q\\le\\infty$, we say that $T$ is of\n**strong type $(p,q)$** if there is a constant $C\\ge0$ such that\n$$\\|Tf\\|_{L^q(\\nu)}\\le C\\|f\\|_{L^p(\\mu)}$$\nfor every $f\\in L^p(\\mu)$ ([[def-l-p-space-as-a-quotient-by-null-functions]],\n[[def-l-infinity-on-a-measure-space]]).\n\nFor $1\\le p<\\infty$ and $1\\le q<\\infty$, we say that $T$ is of\n**weak type $(p,q)$** if there is a constant $C\\ge0$ such that for every\n$f\\in L^p(\\mu)$ and every $t>0$,\n$$\\nu(\\{|Tf|>t\\})\\le\\left(\\frac{C\\|f\\|_{L^p(\\mu)}}{t}\\right)^q.$$\nEquivalently, the distribution function of $Tf$\n([[def-distribution-function-of-absolute-value]]) obeys\n$$A_{Tf}(t)\\le\\left(\\frac{C\\|f\\|_{L^p(\\mu)}}{t}\\right)^q\\qquad(t>0).$$",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-carleson-tiles-wave-packets-and-tile-order",
+          "source_section": "Definition",
+          "quote": "Assume [[def-axiom-of-choice]] for the countable-choice Fourier suppliers. A **dyadic interval** is $[j2^k,(j+1)2^k)$ with $j,k\\in\\mathbb Z$; its length is positive. A **tile** is $s=I_s\\times\\omega_s$ with both intervals dyadic and $|I_s||\\omega_s|=1$. Their centers are denoted c. Write $\\omega_{s,-}$ and $\\omega_{s,+}$ for the left and right half-open halves. The midpoint belongs only to the right half.\n\nHere is an explicit nonzero packet convention. Define $\\rho(t)=\\exp(-1/t)$ for $t>0$ and $\\rho(t)=0$ for $t\\le0$. Here is the complete smoothness justification. Put $P_0(u)=1$ and recursively $P_{k+1}(u)=u^2(P_k(u)-P_k'(u))$. The exponential derivative, chain rule and product/quotient rules ([[thm-derivative-of-exponential]], [[thm-chain-rule]], [[thm-algebra-of-derivatives]]) show on $t>0$ that the kth derivative is $P_k(1/t)\\exp(-1/t)$. For each polynomial P and each integer r>=0, $t^{-r}P(1/t)\\exp(-1/t)\\to0$ as $t\\downarrow0$: expand P into finitely many monomials, put u=1/t, and apply [[thm-exponential-beats-every-polynomial]] with parameter one and [[cor-exponential-reciprocal-and-positivity]]. Extend each displayed kth-derivative formula by zero on $t\\le0$. Each extension is continuous at zero (r=0); its difference quotient at zero tends to zero (r=1), so its derivative there equals the next extension's value. On the two open half-lines differentiation already gives the next extension. Induction therefore proves $\\rho\\in C^\\infty(\\mathbb R)$ and $\\rho^{(k)}(0)=0$ for every k. Positivity of the exponential makes $\\rho(t)>0$ exactly when $t>0$. Set $a=1/9$, $b=1/8$ and\n$$\\psi(\\xi)=\\frac{\\rho(b^2-\\xi^2)}{\\rho(b^2-\\xi^2)+\\rho(\\xi^2-a^2)}.$$\nThe denominator is positive: for $|\\xi|\\le a$ its first term is positive, for $|\\xi|\\ge b$ its second term is positive, and between a and b both are positive. Thus $\\psi$ is smooth, $0\\le\\psi\\le1$, equals one on $[-a,a]$ and vanishes outside $[-b,b]$. Every derivative is bounded on its compact support, so it is Schwartz under [[def-schwartz-space-and-its-seminorms]]. Define $\\phi(x)=\\widehat\\psi(-x)$. The transform theorem [[thm-fourier-transform-maps-schwartz-space-continuously-to-itself]] makes this Schwartz, and [[thm-fourier-inversion-on-schwartz-space]] gives $\\widehat\\phi=\\psi$. In detail inversion applied to $\\psi$ says $\\int\\widehat\\psi(y)e^{2\\pi iy\\xi}\\,dy=\\psi(\\xi)$; changing $y=-x$ gives the claimed transform. All integrals are absolute by [[lem-schwartz-functions-and-all-derivatives-are-integrable]]. In particular $\\phi$ is not zero. No unspecified zero packet is allowed.\n\nUse $\\operatorname{Tr}_y h(x)=h(x-y)$, $\\operatorname{Mod}_\\xi h(x)=e^{2\\pi i\\xi x}h(x)$ and $\\operatorname{Dil}^2_\\ell h(x)=\\ell^{-1/2}h(x/\\ell)$ for $\\ell>0$. Define\n$$\\phi_s(x)=|I_s|^{-1/2}e^{2\\pi i c(\\omega_{s,-})x}\\phi\\bigl((x-c(I_s))/|I_s|\\bigr).$$\nThe translation, modulation and dilation laws [[thm-fourier-translation-modulation-dilation-and-reflection-laws]] give\n$$\\widehat{\\phi_s}(\\xi)=|I_s|^{1/2}e^{-2\\pi i c(I_s)(\\xi-c(\\omega_{s,-}))}\\psi\\bigl(|I_s|(\\xi-c(\\omega_{s,-}))\\bigr).$$\nIts support lies strictly inside $\\omega_{s,-}$, since its half-width is $1/(8|I_s|)$ whereas that half-interval has half-width $1/(4|I_s|)$. For every integer M there is a finite constant $C_M$ with $|\\phi_s(x)|\\le C_M|I_s|^{-1/2}(1+|x-c(I_s)|/|I_s|)^{-M}$, directly from the Schwartz seminorms. The pairing is $\\langle f,h\\rangle=\\int f\\overline h$, linear in f. The fixed packet is not assumed to have norm one; its fixed norm and seminorms enter constants.\n\nSet $s\\le t$ when $I_s\\subseteq I_t$ and $\\omega_t\\subseteq\\omega_s$. This is a partial order: reflexivity and transitivity follow from inclusions, and mutual comparability gives equality of both intervals. A finite **tree** is a set T with a designated top tile t such that $s\\le t$ for every $s\\in T$; the top need not belong to T and is part of the data. A **plus tree** has, in addition, $\\omega_t\\subseteq\\omega_{s,+}$ for every $s\\in T\\setminus\\{t\\}$. The top alone is allowed. Empty trees have no contribution; any assigned top is retained only when a forest count is explicitly specified. For a finite tile set S, a measurable selector $N:\\mathbb R\\to\\mathbb R$ and $f\\in L^2$, define the finite model\n$$C_{S,N}f(x)=\\sum_{s\\in S}\\langle f,\\phi_s\\rangle\\mathbf1_{\\omega_{s,+}}(N(x))\\phi_s(x).$$\nThe coefficients exist by Cauchy–Schwarz [[thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz]] and Schwartz integrability. Each summand is measurable, the sum is finite and for fixed S,N it is linear in f. Its testing form for $|g|\\le\\mathbf1_E$, $m(E)<\\infty$, is the sum of $\\langle f,\\phi_s\\rangle\\langle\\mathbf1_{\\omega_{s,+}}(N)\\phi_s,g\\rangle$; these integrals exist since the packets are integrable and g is bounded. These definitions do not assert orthogonality of overlapping packets.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-complex-holder-minkowski-and-the-quotient-norm",
+          "source_section": "Statement",
+          "quote": "On any measure space, if $p,p^{\\prime}\\in[1,\\infty]$ are conjugate, $f\\in L^p(\\mu;\\mathbb C)$ and $g\\in L^{p^{\\prime}}(\\mu;\\mathbb C)$, then\n$$\\int|fg|\\,d\\mu\\le\\|f\\|_p\\|g\\|_{p^{\\prime}},\\qquad \\left|\\int fg\\,d\\mu\\right|\\le\\|f\\|_p\\|g\\|_{p^{\\prime}}.$$\nFor every $1\\le p\\le\\infty$, complex vector operations and $\\|[f]\\|_p=N_p(f)$ are well-defined on the a.e. quotient and give a norm, with\n$$\\|f+g\\|_p\\le\\|f\\|_p+\\|g\\|_p,\\qquad \\|\\overline f\\|_p=\\|f\\|_p,$$\n$$\\|\\operatorname{Re}f\\|_p,\\|\\operatorname{Im}f\\|_p\\le\\|f\\|_p\\le\\|\\operatorname{Re}f\\|_p+\\|\\operatorname{Im}f\\|_p.$$",
+          "uses": [
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-dominated-convergence",
+          "source_section": "Statement",
+          "quote": "Let $f$ and $(f_n)$ be measurable complex-valued functions such that\n$f_n\\to f$ almost everywhere and $|f_n|\\le g$ almost everywhere for a single\nnonnegative measurable function $g$ with $\\int g\\,d\\mu<+\\infty$. Then\n$f\\in L^1(\\mu)$,\n$$\\int|f_n-f|\\,d\\mu\\longrightarrow0,$$\nand hence\n$$\\int f_n\\,d\\mu\\longrightarrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "6.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "step-1.1",
+          "step": "1.1",
+          "claim": "For q>1 define the testing functional $N_q(h)=\\sup_B m(B)^{-1+1/q}\\int_B|h|$, where the supremum is over measurable B of finite positive measure. It is homogeneous and subadditive by the integral triangle inequality. If $m\\{|h|>t\\}\\le(K/t)^q$, F1 with exponent one, applied on B, gives $\\int_B|h|\\le\\int_0^\\infty\\min(m(B),(K/t)^q)dt=\\frac q{q-1}K m(B)^{1-1/q}$. For K>0 split the integral at $t=K m(B)^{-1/q}$; for K=0 every positive level set is null and the bound is zero. Thus $N_q(h)\\le q'K$, where $q'=q/(q-1)$. Conversely, if $N_q(h)=D<\\infty$, apply the definition to $B=\\{|h|>t\\}\\cap[-R,R]$. When its measure is positive, $t m(B)^{1/q}\\le D$; when zero the same measure bound holds. Increasing R gives $m\\{|h|>t\\}\\le(D/t)^q$. This proves both comparisons even if the original level set could have infinite measure.",
+          "inputs": [
+            "F1",
+            "F2",
+            "given"
+          ]
+        },
+        {
+          "id": "step-2.1",
+          "step": "2.1",
+          "claim": "If u is a nonnegative simple function with $0\\le u\\le a\\mathbf1_E$, list its finitely many positive values in increasing order. It is the sum of their successive nonnegative differences times the indicators of the corresponding superlevel sets. Each such set lies in E and the differences sum to at most a. Linearity and step 1.1 therefore give $N_q(Au)\\le q'K_q a m(E)^{1/q}$ for q=r,s. A complex simple u with $|u|\\le a\\mathbf1_E$ is the sum of the positive and negative real parts and i times the positive and negative imaginary parts, each bounded by $a\\mathbf1_E$. Hence $N_q(Au)\\le4q'K_q a m(E)^{1/q}$. The same result is zero for null E because its indicator has zero output almost everywhere by the assumed restricted bound and linearity of the finite coefficient formula.",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "given"
+          ]
+        },
+        {
+          "id": "step-3.1",
+          "step": "3.1",
+          "claim": "Let f be a complex simple function supported on a set of finite measure. Put $E_k=\\{2^k<|f|\\le2^{k+1}\\}$, $m_k=m(E_k)$ and $f_k=f\\mathbf1_{E_k}$. There are only finitely many nonempty E_k, they are disjoint, and $f=\\sum_k f_k$ almost everywhere. For each integer n, split $f=f^{\\rm high}_n+f^{\\rm low}_n$ by summing over k>=n and k<n respectively. Subadditivity of the testing functional and step 2.1 give $N_r(Af^{\\rm high}_n)\\le C_r\\sum_{k\\ge n}2^k m_k^{1/r}$ and $N_s(Af^{\\rm low}_n)\\le C_s\\sum_{k<n}2^k m_k^{1/s}$, with $C_q=8q'K_q$. Since $|Af|>2^n$ implies that one of the two pieces has magnitude greater than $2^{n-1}$, the converse comparison in step 1.1 bounds its level-set measure by $$m\\{|Af|>2^n\\}\\le(2C_r)^r2^{-nr}\\Bigl(\\sum_{k\\ge n}2^k m_k^{1/r}\\Bigr)^r+(2C_s)^s2^{-ns}\\Bigl(\\sum_{k<n}2^k m_k^{1/s}\\Bigr)^s.$$",
+          "inputs": [
+            "F3",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "step-4.1",
+          "step": "4.1",
+          "claim": "Set $b_k=2^{pk}m_k$. The sum over n of $2^{np}$ times the first term in step 3.1, apart from its constant, is $$\\sum_{n\\in\\mathbb Z}\\Bigl(\\sum_{j\\ge0}2^{-(p-r)j/r}b_{n+j}^{1/r}\\Bigr)^r.$$ For nonnegative numbers x_j and summable nonnegative weights w_j, finite Hölder gives $(\\sum_j w_jx_j)^r\\le(\\sum_jw_j)^{r-1}\\sum_jw_jx_j^r$. Here $w_j=2^{-(p-r)j/r}$ has finite sum W_r because p>r. Applying this inequality, then summing over n, bounds the display by $W_r^r\\sum_k b_k$. One may first use finite sets of n,j and then increase them: every summand is nonnegative and each shifted sum of the finitely supported b is at most $\\sum_k b_k$. Likewise the second term gives $$\\sum_{n\\in\\mathbb Z}\\Bigl(\\sum_{j\\ge1}2^{-(s-p)j/s}b_{n-j}^{1/s}\\Bigr)^s\\le W_s^s\\sum_k b_k,$$ where $W_s=\\sum_{j\\ge1}2^{-(s-p)j/s}<\\infty$ since s>p. These are two explicit geometric sums, not an interpolation theorem used as an undeclared supplier.",
+          "inputs": [
+            "F4",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "step-5.1",
+          "step": "5.1",
+          "claim": "Apply F1 to Af and split the positive t-axis into $[2^n,2^{n+1})$. Monotonicity of its level-set measure yields $\\|Af\\|_p^p\\le(2^p-1)\\sum_n2^{np}m\\{|Af|>2^n\\}$. The nonnegative sum is valid whether or not finiteness is known initially. Steps 3.1 and 4.1 bound it by $C\\sum_k2^{pk}m_k\\le C\\int|f|^p$, because $|f|>2^k$ on E_k. Thus the strong bound is established for every finite-support simple f, with C depending only on r,p,s and the two restricted constants, not on the finite family or selector.",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "step-6.1",
+          "step": "6.1",
+          "claim": "For general $f\\in L^p(\\mathbb R)$, the same finite model formula makes sense: each packet belongs to $L^{p'}$ and $L^p$ by its Schwartz decay, so F4 makes the coefficients absolute. More explicitly an exponent M with Mp>1 and Mp'>1 gives integrable powers of the packet bound. Construct simple f_j by cutting off outside [-j,j], clamping each real and imaginary component to [-j,j], and rounding its magnitude toward zero to the nearest multiple of1/j. Then $|f_j|\\le|f|$, $f_j\\to f$ almost everywhere, each f_j has finite support measure, and $|f_j-f|^p\\le2^p|f|^p$. F5 gives $\\|f_j-f\\|_p\\to0$. Hölder gives convergence of every packet coefficient; more strongly, the triangle inequality and selector bound give $$\\|Af_j-Af\\|_p\\le\\sum_{u\\in S}\\|\\phi_u\\|_p\\|\\phi_u\\|_{p'}\\|f_j-f\\|_p\\longrightarrow0.$$ This finite auxiliary sum may depend on S; it is used only to identify the limit, not in the uniform estimate. Pass to the limit in step 5.1 using Minkowski's norm continuity to obtain the stated uniform strong bound. Empty finite families, zero simple functions and zero endpoint constants are covered without division by them. The strict inequalities r<p<s are exactly what makes the two geometric weights summable; no endpoint weak-to-strong inference is made. AC is inherited as identified in F6. This conditional interpolation proof does not assume that the Hunt restricted estimates have already been proved.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 6.1 covers empty finite families; step 3.1 has empty high or low sums without difficulty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 treats K=0 and null testing sets; step 6.1 covers zero input and endpoint constants."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes one-valued characteristic inputs as its starting case."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 6.1 extends the finite formula to Lp inputs even when they are not L2."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 needs r<p<s for the two geometric sums; step 6.1 explicitly excludes an endpoint weak-to-strong inference."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 6.1 gives deterministic finite-range approximants and records inherited AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "The Statement is the conditional implication proved by steps 1.1 through 6.1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "The Statement makes no converse assertion and does not certify the separate Hunt endpoint hypotheses."
+        }
+      ]
     }
   }
 }
