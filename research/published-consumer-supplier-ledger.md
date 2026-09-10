@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1431, U-C 16, A-R 187, A-P 166. The
+Current classifications: U-P 1428, U-C 16, A-R 187, A-P 166. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -130,6 +130,22 @@ clear, preserving the earlier monitoring history. Its exact approximate-identity
 definition is also sound and moves U-P to bounded clear. The newer complex
 wrapper remains A-P for its separate black-box Young use, while its finite-p
 approximation steps already spell out the Borel-envelope/Minkowski route.
+
+The next radial-summability interface batch clears five high-use measure items.
+Tonelli's increasing-simple-function proof is sound after the already-repaired
+section-measure theorem, and Fubini obtains almost-everywhere section
+integrability from Tonelli and the measurable complex section integrals by
+recombining four nonnegative parts in step 3. Its step-2 integrability sentence
+appears before that recombination, but the later step supplies the claimed
+measurability; this is proof order, not an unresolved gap. The CC-qualified
+linear change-of-variables theorem correctly treats invertible measurable sets
+through a Borel-plus-null decomposition and singular images through null
+subspaces. The Borel-to-Lebesgue theorem states CC explicitly, and the
+Lebesgue-point definition is coherent for specified representative values.
+Tonelli, Fubini and linear change move U-P to bounded clear; the other two are
+new bounded-clear census entries. The live radial-majorant draft also repairs
+the already-A-P Euclidean-ball lemma locally by proving ball measurability
+before using its valid cube bounds.
 
 ## Locally convex published-prerequisite audit — 2026-09-11
 
@@ -27731,11 +27747,11 @@ This index retains the **2185 distinct published item IDs in the initial
 classification reference pool**, plus **5 newly identified published supplier
 items from U-C19**, **1 new 6c remark finding**, **1 Step-9 repaired definition**,
 **3 HG-P published prerequisite repairs**, **1 diagram-boundary consumer finding**,
-and **16 subsequent frontier-supervision findings**, plus **135 UC34 supplier findings**, plus **4 newly indexed Step3b Tor findings**, plus **2 Step3b real-integrability findings**, plus **2 recovered HG continuity repair rows**, plus **1 resolution-dependent Tor definition repair**, plus **1 sequence-space proof-interface candidate**, plus **2 Green-correspondence prerequisite findings**, plus **1 Cayley-tree proof finding**, plus **3 cohomology extension-map findings**, plus **1 Doob–Dynkin choice finding**, plus **1 finite-dimensional cohomology duality finding**, plus **11 locally convex prerequisite audit additions**, plus **10 scalar-topology audit additions**, plus **7 Fourier-support prerequisite audit additions**, plus **3 Gaussian-supplier audit additions**, for **2396 indexed items**. It is not a census of defective items or a
+and **16 subsequent frontier-supervision findings**, plus **135 UC34 supplier findings**, plus **4 newly indexed Step3b Tor findings**, plus **2 Step3b real-integrability findings**, plus **2 recovered HG continuity repair rows**, plus **1 resolution-dependent Tor definition repair**, plus **1 sequence-space proof-interface candidate**, plus **2 Green-correspondence prerequisite findings**, plus **1 Cayley-tree proof finding**, plus **3 cohomology extension-map findings**, plus **1 Doob–Dynkin choice finding**, plus **1 finite-dimensional cohomology duality finding**, plus **11 locally convex prerequisite audit additions**, plus **10 scalar-topology audit additions**, plus **7 Fourier-support prerequisite audit additions**, plus **3 Gaussian-supplier audit additions**, plus **2 radial-measure audit additions**, for **2398 indexed items**. It is not a census of defective items or a
 claim that every supplier later cited by an audit is a defect candidate.
 The publication census, checked 2026-09-10 from item front matter, has
-**15930 published items**. All 2396 indexed IDs are published;
-**13534 published items remain outside this index** and require census
+**15930 published items**. All 2398 indexed IDs are published;
+**13532 published items remain outside this index** and require census
 reconciliation. This is a status census, not a mathematical audit of those
 outside-index items.
 The initial extraction also contained
@@ -27744,14 +27760,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1431 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1428 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 16 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 166 | Recorded direct review and an unresolved item-specific repair. |
 
-596 further reference-pool items have bounded no-repair-needed dispositions
+601 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1800 items and the expanded reference pool contains 2396 unique items.
+1797 items and the expanded reference pool contains 2398 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -27818,6 +27834,11 @@ The separate page-header cutover obligations remain in their category sections.
 | `lem-plane-gaussian-integral-in-polar-coordinates` | Fourier Gaussian supplier audit, 2026-09-11: full proof read; positive-radius upper/lower polar charts are injective, overlaps have content zero, and the inner-disc and outer exhaustion limits yield pi. New bounded-clear census entry; no published edit or new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-l-one-approximate-identities-converge-in-l-p` | Fourier approximate-identity classification correction, 2026-09-11: full target and exact used interfaces reread. The theorem states CC, so published Borel representatives and joint convolution measurability supply Minkowski; translation invariance gives the isometry/far bound, and the strict tail at `delta/2` controls the weak tail at `delta`. Correct implicit adequate uses are clear under the canonical rule; Young is unnecessary. A-P to bounded clear, preserving earlier monitoring history. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `def-l-one-approximate-identity-on-rn` | Fourier approximate-identity classification correction, 2026-09-11: full definition read. The complex mass-one, uniformly `L^1`-bounded and strict-tail clauses are sound; later weak-tail use follows from the strict tail at half the radius. U-P to bounded clear; no published edit or new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `thm-tonelli-theorem-for-sigma-finite-product-spaces` | Fourier radial-summability measure audit, 2026-09-11: full target and used section/MCT interfaces read. Increasing simple approximants and the repaired section-measure identity prove both measurable iterated integrals and equality. U-P to bounded clear; no published edit or new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces` | Fourier radial-summability measure audit, 2026-09-11: full target and Tonelli/complex-integral interfaces read. Tonelli on `|f|` gives a.e. absolute section integrability; step 3's four-part recombination supplies section measurability, so the earlier step-2 wording is proof order, not a gap. U-P to bounded clear. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `thm-linear-change-of-variables-for-lebesgue-measure` | Fourier radial-summability measure audit, 2026-09-11: full target/used clauses read. Under explicit CC, elementary factors give the invertible determinant scale, Borel-plus-null decomposition covers completed measurable sets, and singular images lie in a null subspace. U-P to bounded clear. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `thm-borel-sets-are-lebesgue-measurable` | Fourier radial-summability measure audit, 2026-09-11: full target read. Under explicit CC, the Lebesgue sigma-algebra contains half-open boxes and hence their generated Euclidean Borel sigma-algebra. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
+| `def-lebesgue-point-and-lebesgue-set` | Fourier radial-summability measure audit, 2026-09-11: full definition read. Representative-relative values and the existential class-level Lebesgue set are coherent under the stated CC convention; the live radial lemma uses a specified value. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-weak-global-dimension-is-detected-by-tor-and-is-left-right-symmetric` | Root bounded dependency review, 2026-09-09 15:46 UTC: full target and opposite-ring/weak-dimension definitions read; flat-dimension criterion, balance and tensor interfaces checked. Existing DC and supplied resolutions suffice, including the zero-ring case. No published edit or new prerequisite. Exact supplier IDs and current acceptance hashes are in phase-2-catchup-24-cyclic-tor-root-repair.md and the item review JSON. U-P to bounded clear; not a repair, independent judgment or whole-library certification. |
 
 Root review on 2026-09-09: read the complete polynomial-bump primitive
@@ -30084,7 +30105,6 @@ mathematical repairs. Evidence:
 | `thm-forest-free-graphs-have-a-linear-anticomplete-pair-or-a-high-degree-vertex` | Expansion audit: published orphan suppliers |
 | `thm-frobenius-formula-for-induced-characters` | Transitive consumers (166), grouped by home page |
 | `thm-ftc-second-part` | Published Marcinkiewicz interpolation: local repair, no new pair |
-| `thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-fundamental-groups-from-different-maximal-trees-are-isomorphic` | 30.3 Published item-order and metadata repairs (Phase 3) |
 | `thm-fundamental-theorem-of-calculus-for-absolutely-continuous-functions` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-gallagher-correspondence-for-an-extendible-character` | Transitive consumers (166), grouped by home page |
@@ -30145,7 +30165,6 @@ mathematical repairs. Evidence:
 | `thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-levin-schnorr-characterization` | 51. Exact live-plan metadata resynchronization set |
 | `thm-limits-in-probability-are-unique-almost-surely` | 0A.6 Planned-supplier consumer ledger and phase classification |
-| `thm-linear-change-of-variables-for-lebesgue-measure` | euclidean-surface-measure-divergence-and-green-identities |
 | `thm-linear-isoperimetric-characterisation-of-hyperbolic-groups` | HG consumer map |
 | `thm-linearity-of-the-lebesgue-integral-on-l-one` | Exact direct impact-review queue |
 | `thm-liouville-theorem-for-bounded-harmonic-functions` | euclidean-surface-measure-divergence-and-green-identities |
@@ -30284,7 +30303,6 @@ mathematical repairs. Evidence:
 | `thm-three-definitions-of-uniform-space-are-equivalent` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-three-sat-reduces-to-subset-sum` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `thm-tietze-extension-theorem` | Early-repair direct-consumer inventory — 2026-09-08 |
-| `thm-tonelli-theorem-for-sigma-finite-product-spaces` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-topological-manifolds-are-metrizable-and-paracompact` | Recorded-material path classification — 2026-09-08 |
 | `thm-total-variation-function-of-an-absolutely-continuous-function` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-totality-is-not-recognizable` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |

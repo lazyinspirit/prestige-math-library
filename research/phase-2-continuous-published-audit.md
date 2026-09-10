@@ -136,6 +136,20 @@ A-R 187, A-P 166 and 596 bounded clears. Mechanical recount confirms 2,396
 unique rows with no cross-class duplicate; every indexed ID resolves to a
 current published item.
 
+The radial-summability measure batch clears Tonelli, Fubini and Euclidean
+linear change of variables from U-P after full target/used-interface review.
+The earlier ledger already records the repaired section-measure supplier and
+that Fubini's delayed measurable recombination is only proof order. The
+CC-qualified Borel-to-Lebesgue theorem and the Lebesgue-point definition are
+new bounded-clear census entries. The live radial-majorant draft explicitly
+repairs ball measurability before using the valid cube bounds of the A-P ball
+lemma, so no authoring blocker remains on that path.
+
+Post-measure-interface target index: 2,398 unique published IDs; U-P 1,428,
+U-C 16, A-R 187, A-P 166 and 601 bounded clears. Mechanical recount confirms
+2,398 unique rows with no cross-class duplicate; every indexed ID resolves to
+a current published item.
+
 ## Next target
 
 1. Reconcile any further exact next-20 or Fourier published-interface issues
@@ -144,7 +158,7 @@ current published item.
    an actual published proof or a selected repair path; keep general LCH debt
    distinct from the explicit Euclidean Fourier path.
 3. Continue through original next-20 batches by actual prerequisite pressure,
-   then sample published items outside the existing 2,396-ID reference pool.
+   then sample published items outside the existing 2,398-ID reference pool.
 
-No exhaustive discovery claim is authorized while 13,534 published items
+No exhaustive discovery claim is authorized while 13,532 published items
 remain outside the index and dependency interfaces remain unaudited.

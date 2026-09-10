@@ -384,3 +384,32 @@ edge is redundant. The newer interface remains A-P because proof 1.2 actually
 black-boxes defective Young for convolution existence; its finite-p
 approximation proof in steps 2.2--3.1 can be used locally after replacing that
 existence call by the already-recorded Borel-envelope/Minkowski construction.
+
+## Radial summability measure-interface batch
+
+The ledger was searched by the five exact IDs below, their empty alias lists,
+the section-measurability, product-integration, Borel-plus-null and ball-average
+mechanisms, and all supplier IDs named here. Tonelli, Fubini and linear change
+each had one U-P impact row; the other two items were outside the index. No
+existing confirmed-defect record uses these mechanisms.
+
+| Item | SHA-256 | Bounded conclusion |
+|---|---|---|
+| `thm-tonelli-theorem-for-sigma-finite-product-spaces` | `3598dd104d71485eec332cb97197b8541c917473e2e1b4a6010f7fa1ff485dfb` | Increasing nonnegative simple approximants, the repaired measurable section-measure identity and two applications of monotone convergence prove measurability and equality of the three integrals. |
+| `thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces` | `805e764f513b1de1f1baf0a013b3c6a249400b0ff5198e264b0e9a32300cfc1a` | Tonelli applied to `|f|` gives a.e. absolute section integrability; applying it to the four nonnegative real/imaginary parts supplies measurable section integrals and their recombination. The step-2 integrability sentence precedes that construction, but step 3 supplies it, so the issue is order rather than a missing proof. |
+| `thm-linear-change-of-variables-for-lebesgue-measure` | `da28bb1d36428386c42d849171ea8cdf420bffc9fd6f35e91158f2836df84aa2` | Under its explicit CC hypothesis, elementary-matrix factorization determines the invertible scale; Borel-plus-null decomposition extends it to completed measurable sets, while a singular map has image in a null proper subspace. |
+| `thm-borel-sets-are-lebesgue-measurable` | `364ff366c04eb4cb149505f319e43bff9d8a6119434501015b1a4b82c85af018` | Under its explicit CC hypothesis, the Lebesgue sigma-algebra contains the half-open boxes and therefore their generated Euclidean Borel sigma-algebra. |
+| `def-lebesgue-point-and-lebesgue-set` | `3dc9f5df0c7ec75dade96ceee7f77befc7330352c1cf4d81f82e794cdc14dfdf` | The representative-relative Lebesgue-point value and existential class-level Lebesgue set are well-defined under the stated CC Euclidean measure convention; the live lemma correctly uses a specified value through `A(r)=o(r^n)`. |
+
+The first three items move from U-P to bounded clear, and the last two are new
+bounded-clear census entries. This used-interface review relies on the existing
+published repairs of the section-measure/product construction recorded in the
+canonical ledger and does not recertify unrelated clauses or every consumer.
+No published edit or new Phase-2 pair is required.
+
+The live `lem-radial-majorized-kernels-recover-lebesgue-point-values` cites the
+already-A-P `lem-euclidean-balls-have-positive-finite-lebesgue-measure`, but its
+proof 1.1 first proves balls open and applies the CC-qualified Borel-to-Lebesgue
+theorem. It then uses only the sound positive finite cube bounds from the
+published lemma. This is an exact local bypass of the recorded circular
+measurability step, so it leaves no live prerequisite blocker.
