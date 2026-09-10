@@ -10,7 +10,6 @@ items:
   - def-bruhat-order-on-a-finite-weyl-group
   - def-weyl-orbit-sum-in-a-group-algebra
   - lem-weyl-orbit-sums-form-a-basis-of-finite-weyl-invariants
-  - lem-highest-weight-characters-are-unitriangular-in-weyl-orbit-sums
   - def-finite-linear-invariant-and-coinvariant-polynomial-algebras
   - lem-finite-linear-group-invariant-polynomials-separate-orbits
   - def-weyl-discriminant-and-reflecting-hyperplane-arrangement
@@ -23,7 +22,9 @@ items:
   - lem-finite-lie-engel-trace-criterion-and-killing-nondegeneracy
   - lem-finite-lie-triangularization-and-rank-one-complete-reducibility
   - lem-finite-semisimple-cartan-root-and-string-structure
+  - lem-finite-semisimple-pbw-and-highest-weight-construction
   - def-kostant-harmonic-subspace-of-the-symmetric-algebra
+  - lem-highest-weight-characters-are-unitriangular-in-weyl-orbit-sums
   - lem-kostant-harmonics-give-an-invariant-polynomial-complement
   - lem-local-chevalley-restriction-for-kostant-freeness
   - thm-kostant-harmonic-decomposition-of-the-symmetric-algebra
