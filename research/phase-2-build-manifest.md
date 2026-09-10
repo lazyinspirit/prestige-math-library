@@ -13,9 +13,9 @@ Programme: **147 pairs =44 published +20 original selected +2 added selected
 (101 current ready records,442 escalations). Supplemental run:4 pages/1 batch,
 with FA22 before FA23. Admission evidence: `phase-2-five-cap-admission.md`
 and its exact published-interface census JSON. No original pair was removed.
-The supplemental scaffold now has57/57 current ready records and8/8
-source fetches verified; its worker is completing final checks before the
-engine advances. Independent author/review gates remain.
+The supplemental run passed Step1 (57/57 ready;8/8 source fetches verified),
+completed assignment and entered Step3 authoring-scope preparation at15:41 UTC.
+Independent author/review gates remain.
 The RL14 chamber gap is resolved by three local supporting items; finite-Weyl
 and large-cardinal prerequisite gaps, source exceptions and other local
 proof work are not claimed resolved by these two additions.
