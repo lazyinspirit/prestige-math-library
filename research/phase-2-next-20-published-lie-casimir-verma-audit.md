@@ -107,7 +107,62 @@ after their independently recorded repairs.
 
 ## Limits
 
+## Remaining direct root-decomposition consumers
+
+A follow-up reads the four remaining direct published consumers of
+`thm-root-space-decomposition-relative-to-a-cartan-subalgebra` that had no
+classification row, plus the Harish-Chandra definition used by one of them.
+Exact-ID, aliases, mechanism and both affected supplier IDs were searched
+before classification.
+
+`thm-triangular-decomposition-from-a-chosen-positive-root-system`, SHA-256
+`2d16494dccfb3a24a653fb3fca52fee8f860d5f1baa03e4ba06219b3935cfb09`, is a
+U-P exact impact candidate. Proof 1.1 uses the affected exhaustiveness/direct
+sum of the root decomposition, and proof 1.2 uses the newly A-P root-bracket
+proposition. Conditional on those repairs, grouping positive and negative root
+spaces is correct; closure follows because a root sum of positive roots is
+positive and zero cannot occur; concatenated finite bases and the published
+PBW theorem give the multiplication isomorphism. No additional proof defect is
+identified in this scope.
+
+`def-regular-root-hyperplane-arrangement-in-a-cartan-subalgebra`, SHA-256
+`26246eea22f649bc9101ae034d380135b41d56d459b1d73592ed1a60364a0b3b`, is a
+U-P exact impact candidate. It uses only the affected finite root-set
+interface. Its displayed complement of the root kernels is internally
+consistent and needs revalidation after the decomposition repair; no separate
+false definition is identified.
+
+`prop-centralizer-of-a-cartan-element-from-its-vanishing-roots`, SHA-256
+`886380a64511a7ac1edabe131a291fdc192a1f168ba1a802065be11bb4b45cc8`, is a
+U-P exact impact candidate. Its proof uses precisely the affected direct-sum
+exhaustiveness: after writing `x=x_0+sum x_alpha`, the identity
+`[h,x]=sum alpha(h)x_alpha` and directness give the displayed centralizer. The
+calculation is sound after that supplier is repaired.
+
+`lem-central-elements-have-weight-zero`, SHA-256
+`2a253fbe2242ebf9e2a6c64516e494c3f3c5fc5675119ce7b409f4354714a3ba`, does
+not use an affected root-space clause despite declaring two such dependencies.
+Centrality directly gives `[h,z]=0` for every Cartan element, which is exactly
+membership in the zero-weight subspace for the adjoint action. The full
+`def-harish-chandra-projection` was read to check that convention. This item is
+a bounded clear; removing unused dependencies is optional cleanup.
+
+`def-harish-chandra-projection`, SHA-256
+`def2263b271e6c97c41783ad497871c9d51bf9e6bbfe8444d81b9420fe48cebc`, is a
+U-P exact impact candidate through the triangular-decomposition theorem. Its
+PBW complement is correct: ordered monomials with a nontrivial negative factor
+lie in `n^- U(g)`, those with only a nontrivial positive factor lie in
+`U(g)n^+`, and the remaining terms form `U(h)`. The restricted projection on
+the zero-weight subspace is therefore coherent once the upstream triangular
+interface is repaired. No independent defect is identified.
+
+This completes only the direct-consumer disposition of the affected published
+root-decomposition theorem. It does not audit every downstream consumer of the
+triangular or Harish-Chandra interfaces.
+
+## Limits
+
 The closure recomputation is mechanical front-matter evidence. The
-mathematical audit here is confined to the five complete targets and their
-actually used clauses. Other members of `ROOT-74` retain their existing
-classifications and require their own item-level review.
+mathematical audit here is confined to the ten complete targets and their
+actually used clauses. Other members of `ROOT-74` and downstream Lie items
+retain their existing classifications and require their own item-level review.

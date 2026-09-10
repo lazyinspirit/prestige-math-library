@@ -411,6 +411,21 @@ Post-Casimir/Verma counts: 2,466 unique published IDs; U-P 1,406, U-C 15,
 A-R 187, A-P 188 and 670 bounded clears. The current census leaves 13,464
 published IDs outside the index.
 
+The remaining unclassified direct consumers of the affected root-decomposition
+theorem have exact-use dispositions. Triangular decomposition, the regular
+root-hyperplane definition and the Cartan-element centralizer proposition are
+U-P impact candidates through their explicit affected clauses; their inspected
+local calculations remain sound. The Harish-Chandra projection definition is
+also U-P through triangular decomposition and has a sound PBW complement. The
+central-elements-have-weight-zero lemma is a bounded clear because centrality
+alone gives its conclusion and its affected declared dependencies are unused.
+This finishes only the direct root-decomposition consumer pass. Evidence is in
+the Casimir/Verma audit file.
+
+Post-root-decomposition-direct-consumer counts: 2,471 unique published IDs;
+U-P 1,410, U-C 15, A-R 187, A-P 188 and 671 bounded clears. The current census
+leaves 13,459 published IDs outside the index.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface

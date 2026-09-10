@@ -27991,15 +27991,29 @@ sound. Existing published suppliers suffice after their separately recorded
 repairs, so no new Phase-2 pair is needed. This five-item pass is bounded and
 does not certify the remaining root closure.
 
+The remaining unclassified direct consumers of the affected root-decomposition
+theorem now have bounded exact-use dispositions. The triangular-decomposition
+theorem uses both the affected decomposition and root-bracket proposition; the
+regular-hyperplane definition uses the finite root set; and the Cartan-element
+centralizer proposition uses the direct-sum expansion. Their local statements
+and calculations are sound conditional on those repairs, so all three are U-P
+impact candidates rather than new confirmed defects. The Harish-Chandra
+projection definition is likewise U-P through its exact triangular/PBW
+decomposition. The central-elements-have-weight-zero lemma does not use the
+affected root clauses: centrality itself gives every displayed commutator, so
+it receives a bounded clear. Exact hashes and clauses are in the same
+Casimir/Verma audit evidence. This completes only the direct-consumer pass for
+the root-decomposition theorem, not a transitive Lie audit.
+
 <!-- phase3-classification-index:start -->
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,466 unique
+subsequently reconciled published IDs. It currently contains **2,471 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,466 indexed IDs are published; **13,464 published items remain outside this
+2,471 indexed IDs are published; **13,459 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28008,14 +28022,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1406 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1410 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 15 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 188 | Recorded direct review and an unresolved item-specific repair. |
 
-670 further reference-pool items have bounded no-repair-needed dispositions
+671 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,792 items and the expanded reference pool contains 2,461 unique items.
+1,800 items and the expanded reference pool contains 2,471 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28076,6 +28090,7 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `lem-central-elements-have-weight-zero` | Finite-Weyl/root-decomposition follow-up 2026-09-11: full item and the Harish-Chandra zero-weight convention read. The declared root-space and bracket suppliers are unused: centrality directly gives `[h,z]=0` for every Cartan element, exactly the zero-weight condition. Removing unused dependencies is optional cleanup, not repair debt. Exact hash/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `lem-central-action-on-a-cyclic-highest-weight-module-is-scalar` | Finite-Weyl/Casimir follow-up 2026-09-11: full item and exact PBW interfaces read. Proof 1.1 abbreviates one-dimensionality of the top weight in a cyclic highest-weight module, but the published Verma universal property, PBW model and weight-cone proposition supply it exactly; proof 2.1 then correctly propagates scalar action from the cyclic generator. Correct implicit use of adequate published suppliers is clear, so an explicit edge is optional exposition rather than repair debt. Exact hashes/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `thm-extension-of-a-bounded-map-from-a-dense-subspace` | Fourier Step-5A functional-interface audit, 2026-09-11: full target read. Explicit CC selects an approximating sequence at each fixed point; target completeness, the Lipschitz bound and unique limits make the extension well defined, linear and unique. The same least operator-norm bound passes to the extension, including the zero case. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`. |
 | `thm-complex-stone-weierstrass-self-adjoint` | Fourier Step-5A functional-interface audit, 2026-09-11: full theorem and direct real spine read. Self-adjointness puts real/imaginary parts in the algebra; real density or the unique-common-zero ideal transfers componentwise, with the empty and unital cases explicit. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`. |
@@ -29237,6 +29252,10 @@ mathematical repairs. Evidence:
 
 | Published item | Existing evidence section / reconciliation locator |
 |---|---|
+| `thm-triangular-decomposition-from-a-chosen-positive-root-system` | Finite-Weyl/root-decomposition follow-up 2026-09-11: exact impact candidate through the already-A-P root decomposition and root-bracket proposition. Grouping positive/zero/negative spaces, bracket closure and the concatenated PBW-basis argument are sound once those suppliers are repaired; no independent defect identified in this scope. Exact hash/clauses: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
+| `def-regular-root-hyperplane-arrangement-in-a-cartan-subalgebra` | Finite-Weyl/root-decomposition follow-up 2026-09-11: exact impact candidate through the affected finite root-set interface. The displayed complement of root kernels is internally consistent; revalidate after the root-decomposition repair. Exact hash/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
+| `prop-centralizer-of-a-cartan-element-from-its-vanishing-roots` | Finite-Weyl/root-decomposition follow-up 2026-09-11: exact impact candidate through the affected direct-sum decomposition. The displayed commutator calculation and componentwise centralizer criterion are sound after that supplier is repaired. Exact hash/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
+| `def-harish-chandra-projection` | Finite-Weyl/root-decomposition follow-up 2026-09-11: exact impact candidate through triangular decomposition. The full PBW complement and zero-weight restriction were read and are coherent once the upstream root interfaces are repaired; no independent defect identified. Exact hash/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `prop-casimir-eigenvalue-on-a-highest-weight-module` | Finite-Weyl/Casimir follow-up 2026-09-11: exact impact candidate through direct use of the already-A-P Killing, root-decomposition, opposite-pairing and root-system clauses. Its full displayed dual-basis, bracket and rho calculation is sound once those suppliers are repaired; no independent defect identified. This item was one of four omitted from the prior published root closure, now corrected to ROOT-74. Exact hash/path/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `ex-sl2-casimir-and-its-highest-weight-eigenvalue` | Finite-Weyl/Casimir follow-up 2026-09-11: exact impact candidate through the Casimir-eigenvalue proposition. Its direct `sl2` Killing-form values, dual basis, Casimir normalization and eigenvalue arithmetic are sound in the inspected scope. Revalidate after upstream root/Killing repairs; no independent defect identified. Exact hash/path/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `thm-verma-homomorphism-spaces-have-dimension-at-most-one` | Finite-Weyl/Verma-chain follow-up 2026-09-11: exact impact candidate through the newly A-P simple-Verma-submodule lemma. The theorem's own restriction, proportionality and injectivity argument is sound in the inspected scope. Revalidate after its supplier's finite-induction repair. This was one of four omitted IDs in the corrected ROOT-74 closure. Exact hash/path/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
