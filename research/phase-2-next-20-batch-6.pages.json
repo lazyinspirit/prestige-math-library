@@ -12,7 +12,8 @@
       "cayley-graphs-word-metrics-and-quasi-isometry",
       "geometric-actions-svarc-milnor-and-growth",
       "small-cancellation-and-dehn-algorithms",
-      "free-groups-and-presentations"
+      "free-groups-and-presentations",
+      "the-logarithm-and-general-powers"
     ],
     "items": [
       {
@@ -77,7 +78,7 @@
         "strategy": "Do not use independence of generating set as a prerequisite. Prove stable-length existence inline using subadditivity and division by a fixed integer. All later counting statements use finiteness of S. Write a_n=|g^n| and a_0=0. The power law and length subadditivity give a_(n+m)<=a_n+a_m. Put t=inf_(k>=1) a_k/k. For each fixed k, n=qk+r with 0<=r<k gives a_n/n<=q a_k/n+max_(r<k)a_r/n, hence limsup a_n/n<=a_k/k. Taking the infimum gives convergence to t; the lower bound t is immediate. This is the full Fekete argument, not a later theorem. The group definition assumes a specified geodesic unit-edge Cayley realization; the finite endpoint-candidate minimum supplies that realization and its vertex metric, using shortest words and partial endpoint edges.",
         "provenance": {
           "statement": "ai-altered",
-          "proof": "not-applicable"
+          "proof": "ai-altered"
         },
         "sources": {
           "references": [
@@ -253,7 +254,11 @@
         "kind": "lemma",
         "title": "Exponential contraction of projection away from a quasiconvex set",
         "deps": [
-          "def-hg-toolkit-local-geodesics-and-hausdorff-control"
+          "def-hg-toolkit-local-geodesics-and-hausdorff-control",
+          "lem-the-gromov-product-inequality-implies-the-four-point-condition",
+          "thm-exponential-addition-formula",
+          "thm-exponential-is-strictly-increasing",
+          "def-natural-logarithm"
         ],
         "statement": "Let a geodesic space have product-hyperbolicity constant κ≥0 and let ρ>κ. Here Y is K-quasiconvex if every two points of Y admit a geodesic contained in its closed K-neighbourhood. Let supplied closest points p_a,p_b project the endpoints of a (λ,ε)-quasi-geodesic map [a,b] to a K-quasiconvex set Y. If the whole image stays distance at least D from Y and D≥15ρ/2+K+ε/2, then d(p_a,p_b) is at most 2K+8ρ plus the maximum of 5κ and 4√2λ(b−a)exp(−(D−K−ε/2)log(2)/(5ρ)). No existence of closest points to an arbitrary nonproper quasiconvex set is asserted.",
         "strategy": "Reproduce the corrected projection proof from Gouëzel–Shchur Lemmas 2.4–2.5 and the AFP theory. Work with ρ>κ. First prove the basic closest-point inequality for the supplied endpoint projections to a K-quasiconvex target. Subdivide the parameter interval into 2^N pieces whose images are at most 10ρ+ε apart, move the subdivision points 5ρ toward the target, discard alternate points, and induct for k=floor((D−K−ε/2−15ρ/2)/(5ρ)) stages. Treat separately the short interval and block-decomposition cases and sum the surviving projection gaps; the ceiling/floor inequalities give the displayed exponential term. For a geodesic segment, compactness supplies closest points; in the nested-neighborhood application construct the projections explicitly along the compact base segment. This is the corrected decreasing-sequence estimate; do not use the reversed integral inequality from the superseded 2013 proof. A later limit ρ↓κ removes the strict auxiliary inequality; the κ=0 Morse case is handled without dividing by κ.",
@@ -410,11 +415,10 @@
         "title": "Infinite order elements have positive stable translation length",
         "deps": [
           "def-hg-toolkit-hyperbolic-group-and-stable-length",
-          "thm-morse-stability-with-explicit-parameter-dependence",
           "prop-word-metric-balls-are-finite-exactly-when-the-generating-set-is-finite"
         ],
         "statement": "For every infinite-order element g of a finitely generated hyperbolic group, n↦g^n is a quasi-isometric embedding and τ_S(g)>0.",
-        "strategy": "Use Hamann 5.2.5 midpoint counting with n0=|B_(4δ+1)(1)| to prove linear lower growth, then divide by n and use the subadditive limit. Spell out graph integer rounding and the midpoint-neighbourhood count. This is for the Cayley action, not arbitrary hyperbolic-space isometries.",
+        "strategy": "Choice-free midpoint counting: tube count corrected to B*(2R+2a+1), using a=ceil(2delta+2). For each positive integer R some f<=CR has |g^f|>R. The already proved subadditive limit forces tau>=1/C. Derive all integer orbit estimates from tau and word-length upper bound; no Morse dependency.",
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
@@ -525,11 +529,10 @@
         "title": "Hg toolkit proper ray compactness and sequence comparison",
         "deps": [
           "lem-boundary-products-are-independent-of-representative-and-basepoint",
-          "thm-morse-stability-with-explicit-parameter-dependence",
           "def-axiom-of-choice"
         ],
         "statement": "Assume AC for the simultaneous representative/geodesic selections and diagonal subsequences. For a proper geodesic hyperbolic space, each Gromov-sequence class has a geodesic ray representative from a fixed basepoint. The ray quotient topology agrees with the product topology, and the boundary is compact.",
-        "strategy": "Choose representatives with products tending to infinity and geodesic segments from the basepoint. Properness makes each closed integer-radius ball compact; successively extract subsequences converging on every integer ball and diagonalize. The 1-Lipschitz parametrizations converge uniformly on compact intervals to a geodesic ray. Slim triangles and product inequalities show the ray's integer sequence is equivalent to the original Gromov sequence. The representative comparison bound from the preceding lemma identifies product and fellow-travelling neighbourhoods. Repeating the diagonal argument for arbitrary boundary sequences gives sequential compactness; the countable product-neighbourhood basis is metrizable, hence compactness.",
+        "strategy": "Direct compact ray-space quotient proof. Prove compactness of the uniform-on-bounded-interval ray metric by a rational-time diagonal subsequence and the compact-metric sequential criterion proved locally. Obtain rays from selected endpoint segments, compare sequence products by the product inequality, identify bounded-Hausdorff fibers, then use continuous compact-to-Hausdorff surjection as quotient map. No Morse input.",
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
@@ -576,13 +579,15 @@
         "deps": [
           "def-hg-toolkit-gromov-sequences-and-boundary-product",
           "lem-infinite-order-elements-have-positive-stable-translation-length",
-          "lem-asymptotic-gromov-sequences-form-an-equivalence-relation"
+          "lem-asymptotic-gromov-sequences-form-an-equivalence-relation",
+          "def-hg-toolkit-slim-triangles-products-and-four-point-constants",
+          "def-complete-ordered-field"
         ],
         "statement": "An isometry is loxodromic when its integer orbit is a quasi-isometric embedding of Z. Its two boundary limits are its poles. Two loxodromics are independent when their two pole sets are disjoint.",
-        "strategy": "Prove existence and distinctness of the two poles using orbit quasi-geodesicity and Morse, before using the terminology. In the finitely generated hyperbolic group case every infinite-order element is loxodromic by the earlier lemma.",
+        "strategy": "Complete local subadditive orbit-length and finite-chain Gromov-product proof: joint divergence of both half-orbits, bounded opposite products, remainder/basepoint independence and fixed poles. No Morse or properness.",
         "provenance": {
           "statement": "ai-altered",
-          "proof": "not-applicable"
+          "proof": "ai-generated"
         },
         "sources": {
           "references": [
@@ -591,7 +596,8 @@
               "url": "https://www.math.uni-hamburg.de/home/hamann/Lehre/GeoGrTh/GeoGrThEn.pdf"
             }
           ]
-        }
+        },
+        "proof_strategy": "direct"
       },
       {
         "id": "lem-hg-toolkit-finitely-many-cayley-cone-types",
@@ -599,10 +605,11 @@
         "title": "Hg toolkit finitely many cayley cone types",
         "deps": [
           "def-hg-toolkit-hyperbolic-group-and-stable-length",
-          "prop-word-metric-balls-are-finite-exactly-when-the-generating-set-is-finite"
+          "prop-word-metric-balls-are-finite-exactly-when-the-generating-set-is-finite",
+          "lem-slim-triangles-imply-the-gromov-product-inequality"
         ],
         "statement": "For a finite generating set of a hyperbolic group, only finitely many geodesic cone types occur; a cone at g records all h for which |gh|=|g|+|h|.",
-        "strategy": "Use the standard finite-cone-type proof in a δ-hyperbolic Cayley graph. The values |gv|−|g| for |v|≤2δ+1 determine whether a geodesic word from 1 to g can be extended by any word: thin quadrilaterals reduce the first possible failure of additivity to that ball. These values are integers in a finite interval, and the ball is finite, so only finitely many patterns and hence cone types occur. Include the first-failure induction rather than cite finite generation alone.",
+        "strategy": "Author first-failure induction using radius r=max(1,ceil(12delta)), with the equal-radius bound 4kappa derived from two product inequalities and kappa=3delta. This replaces the unproved sharper exercise estimate; preserve the cone-finiteness claim.",
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
@@ -869,12 +876,11 @@
         "kind": "example",
         "title": "Ping pong for two loxodromics",
         "deps": [
-          "lem-independent-loxodromics-have-disjoint-pole-neighbourhoods",
-          "lem-loxodromic-elements-have-north-south-boundary-dynamics",
-          "def-free-group"
+          "def-free-group",
+          "thm-reduced-words-form-the-free-group"
         ],
         "statement": "If independent loxodromics satisfy the four uniform pole-neighbourhood inclusions, sufficiently large positive powers generate a rank-two free subgroup.",
-        "strategy": "Give the reduced-word ping-pong proof, including cyclic conjugation of a reduced word when its first and last letters require it. Do not replace uniform neighbourhood inclusions by pointwise convergence.",
+        "strategy": "Prove the conditional four-domain ping-pong implication directly for a supplied group action and supplied disjoint nonempty domains. The uniform inclusions are hypotheses, not consumed dynamics results. A reduced word sends a point in a domain distinct from its first-letter domain and inverse-last-letter domain into its first-letter domain. Use reduced-word freeness to identify the rank-two subgroup.",
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
