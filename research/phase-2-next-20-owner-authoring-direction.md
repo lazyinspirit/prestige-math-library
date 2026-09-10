@@ -1,3 +1,7 @@
+# Latest owner delegation — remaining authoring
+
+The owner requests finishing remaining145 items using idle authoring capacity. Original e: continue singular-cohomology-and-coefficient-theorems A/B (AT6) and your already authored batch7 reconciliation. Additional authors now own the untouched fibration A/B, singular/smooth-comparison A/B, and connections A/B; do not start those pages. Their isolated manifest/contract fragments will be serially merged by root. e retains canonical batch8 manifest coordination for AT6 until release; root merges other pair fragments without overwriting e changes. A separate forcing author owns the two remaining batch14 held theorems. See phase-2-next-20-remaining-author-delegation.json. No pair dropped or added. All workers must consult authoritative sources whenever uncertain and never claim proof completion from a strategy.
+
 # Owner-directed authoring of the 22-pair frontier
 
 The owner has explicitly instructed: “Author all 22 pairs”, “All 22 pairs belong to the same frontier”, and “Author all 22 pairs right now”. The frontier is recorded in `research/phase-2-frontier-22.json`. The existing run names identify two execution partitions of that one frontier; they are not separate selection waves.

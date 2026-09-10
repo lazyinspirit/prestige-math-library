@@ -1,0 +1,963 @@
+[
+  {
+    "order": 473,
+    "id": "singular-cochains-mayer-vietoris-and-smooth-singular-comparison",
+    "kind": "A",
+    "category": "differential-geometry",
+    "title": "Singular Cochains Mayer Vietoris and Smooth Singular Comparison",
+    "companion": "singular-cochains-mayer-vietoris-and-smooth-singular-comparison-examples",
+    "requires": [
+      "whitney-embedding-tubular-neighbourhoods-and-approximation",
+      "manifolds-with-boundary-collars-and-orientations",
+      "the-de-rham-complex-homotopy-and-mayer-vietoris",
+      "singular-chains-and-singular-homology",
+      "relative-homology-excision-and-mayer-vietoris",
+      "singular-cohomology-and-coefficient-theorems",
+      "free-modules-and-exact-sequences",
+      "homotopy-and-homotopy-equivalence",
+      "chain-complexes-and-homology",
+      "chain-homotopy-and-the-homotopy-category",
+      "long-exact-sequences-in-homology"
+    ],
+    "items": [
+      {
+        "id": "def-continuous-singular-simplex-and-real-singular-chain-group",
+        "kind": "definition",
+        "title": "Continuous singular simplex and real singular chain group",
+        "deps": [
+          "def-singular-simplex-and-singular-chain-group-with-coefficients"
+        ],
+        "statement": "For a topological space X, C_k(X;R) is the finite-support real vector space on maps Delta^k to X; zero for k<0.",
+        "proof_plan": "For a topological space X, C_k(X;R) is the finite-support real vector space on maps Delta^k to X; zero for k<0. Identify Z[S_k] tensor_Z R with R[S_k] by [sigma] tensor r -> r[sigma], using the inverse on each supplied generator.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 item 1; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-real-singular-chain-complex",
+        "kind": "definition",
+        "title": "Real singular chain complex",
+        "deps": [
+          "def-continuous-singular-simplex-and-real-singular-chain-group",
+          "def-singular-boundary-operator"
+        ],
+        "statement": "Boundary is the alternating sum of affine faces; d_0=0.",
+        "proof_plan": "Boundary is the alternating sum of affine faces; d_0=0. The two occurrences of each codimension-two face have opposite signs. This verifies d squared equals zero over R and fixes the unaugmented convention.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 item 2; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-singular-chains-are-covariantly-functorial",
+        "kind": "proposition",
+        "title": "Singular chains are covariantly functorial",
+        "deps": [
+          "def-real-singular-chain-complex",
+          "prop-singular-chains-and-homology-are-covariantly-functorial"
+        ],
+        "statement": "Send [sigma] to [f composed sigma] and extend R-linearly.",
+        "proof_plan": "Send [sigma] to [f composed sigma] and extend R-linearly. Composition commutes with every face inclusion, hence with boundary. Identity and composition laws follow on generators.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 item 3; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-real-singular-cochains-identify-with-functions-on-the-supplied-simplex-basis",
+        "kind": "lemma",
+        "title": "Real singular cochains identify with functions on the supplied simplex basis",
+        "deps": [
+          "def-continuous-singular-simplex-and-real-singular-chain-group"
+        ],
+        "statement": "Evaluation on [sigma] identifies Hom_R(R[S],R) and Hom_Z(Z[S],R) with all functions S->R; the inverse evaluates finite sums by sum r_sigma f(sigma).",
+        "proof_plan": "Evaluation on [sigma] identifies Hom_R(R[S],R) and Hom_Z(Z[S],R) with all functions S->R; the inverse evaluates finite sums by sum r_sigma f(sigma). The two inverses and boundary compatibility are checked on generators, without choosing a vector-space basis.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "Explicit coefficient specialization preceding DG-16 item 4; Hatcher \u00a73.1"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-real-singular-cochain-complex",
+        "kind": "definition",
+        "title": "Real singular cochain complex",
+        "deps": [
+          "def-real-singular-chain-complex",
+          "lem-real-singular-cochains-identify-with-functions-on-the-supplied-simplex-basis",
+          "def-singular-cochain-complex-with-coefficients"
+        ],
+        "statement": "Define C^k=Hom_R(C_k,R), delta(phi)=phi composed boundary.",
+        "proof_plan": "Define C^k=Hom_R(C_k,R), delta(phi)=phi composed boundary. Use the preceding explicit identification with Hom_Z(C_k(X;Z),R) to specialize AT-6; do not use Hom_Z(C_k(X;R),R). Delta squared vanishes by boundary squared.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 item 4; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-real-singular-cohomology",
+        "kind": "definition",
+        "title": "Real singular cohomology",
+        "deps": [
+          "def-real-singular-cochain-complex",
+          "def-cohomology-object-of-a-cochain-complex"
+        ],
+        "statement": "Define H^k as ker(delta_k)/im(delta_(k-1)); inclusion of boundaries in cycles follows from delta squared.",
+        "proof_plan": "Define H^k as ker(delta_k)/im(delta_(k-1)); inclusion of boundaries in cycles follows from delta squared. No identification with dual homology is part of this definition.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 item 5; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cor-singular-cohomology-is-homotopy-invariant",
+        "kind": "corollary",
+        "title": "Singular cohomology is homotopy invariant",
+        "deps": [
+          "prop-singular-chains-are-covariantly-functorial",
+          "def-real-singular-cohomology",
+          "thm-singular-chain-homotopy-formula"
+        ],
+        "statement": "For a supplied homotopy use its signed prism P, with dP+Pd=g_*-f_*.",
+        "proof_plan": "For a supplied homotopy use its signed prism P, with dP+Pd=g_*-f_*. Precomposition gives a cochain homotopy, so cocycle pullbacks differ by a coboundary. Apply both inverse homotopies for a homotopy equivalence.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 item 6; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-short-exact-two-open-cover-small-singular-chain-sequence",
+        "kind": "theorem",
+        "title": "Short exact two open cover small singular chain sequence",
+        "deps": [
+          "def-real-singular-chain-complex",
+          "thm-short-exact-two-open-singular-chain-mayer-vietoris-sequence"
+        ],
+        "statement": "For X=U union V open use i(c)=(-c,c), j(a,b)=a+b into the cover-small complex.",
+        "proof_plan": "For X=U union V open use i(c)=(-c,c), j(a,b)=a+b into the cover-small complex. This differs from the published supplier by precomposing i with -1. Basis coefficients prove intersection=overlap, kernel=image, and surjectivity; both arrows commute with boundary.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 item 7; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-canonical-extension-by-zero-of-a-singular-cochain-on-a-simplex-basis",
+        "kind": "lemma",
+        "title": "Canonical extension by zero of a singular cochain on a simplex basis",
+        "deps": [
+          "def-real-singular-cochain-complex"
+        ],
+        "statement": "For overlap functional eta, define E_U eta on each U-simplex as eta(sigma) if its image lies in U intersect V, and zero otherwise, then extend linearly.",
+        "proof_plan": "For overlap functional eta, define E_U eta on each U-simplex as eta(sigma) if its image lies in U intersect V, and zero otherwise, then extend linearly. This is canonical in classical ZF and is a degreewise section of restriction, not generally a cochain map.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 item 8; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-short-exact-two-open-singular-cochain-mayer-vietoris-sequence",
+        "kind": "theorem",
+        "title": "Short exact two open singular cochain mayer vietoris sequence",
+        "deps": [
+          "thm-short-exact-two-open-cover-small-singular-chain-sequence",
+          "lem-canonical-extension-by-zero-of-a-singular-cochain-on-a-simplex-basis"
+        ],
+        "statement": "The first cochain term is Hom_R(C_*^{U,V},R).",
+        "proof_plan": "The first cochain term is Hom_R(C_*^{U,V},R). Send a functional to its two restrictions and use (phi,psi)->psi|overlap-phi|overlap. Kernel pairs glue as functions on the union of bases. Surjectivity uses (-E_U eta,0). Only the sequence arrows, not that section, commute with delta.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 item 9; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-mayer-vietoris-sequence-in-real-singular-cohomology",
+        "kind": "theorem",
+        "title": "Mayer vietoris sequence in real singular cohomology",
+        "deps": [
+          "thm-short-exact-two-open-singular-cochain-mayer-vietoris-sequence",
+          "thm-cover-small-inclusion-is-a-chain-homotopy-equivalence",
+          "thm-long-exact-sequence-in-cohomology",
+          "thm-mayer-vietoris-sequence-in-singular-cohomology"
+        ],
+        "statement": "Dualize the actual chain-homotopy inverse and homotopy of the cover-small inclusion, then apply the cohomology LES.",
+        "proof_plan": "Dualize the actual chain-homotopy inverse and homotopy of the cover-small inclusion, then apply the cohomology LES. This identifies the first cohomology term with H^*(X). Reconcile the overlap minus sign with AT-6 before identifying connectors; AT-6 is an unbuilt batch-8 supplier.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 item 10; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-naturality-of-singular-mayer-vietoris-connectors",
+        "kind": "theorem",
+        "title": "Naturality of singular mayer vietoris connectors",
+        "deps": [
+          "thm-mayer-vietoris-sequence-in-real-singular-cohomology",
+          "thm-naturality-of-the-cohomology-connecting-morphism"
+        ],
+        "statement": "For f:(X;U,V)->(Y;Uprime,Vprime) require f(U) subset Uprime and f(V) subset Vprime, in the specified order.",
+        "proof_plan": "For f:(X;U,V)->(Y;Uprime,Vprime) require f(U) subset Uprime and f(V) subset Vprime, in the specified order. The induced cochain SES diagram commutes. The lift-coboundary connector construction commutes on classes even though basis extension itself need not be natural.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 item 11; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-smooth-singular-simplex",
+        "kind": "definition",
+        "title": "Smooth singular simplex",
+        "deps": [
+          "def-standard-topological-simplex-and-its-affine-face-maps",
+          "def-smooth-map-between-manifolds-with-boundary"
+        ],
+        "statement": "A smooth simplex is a map on Delta^k that extends to an open neighbourhood in its k-dimensional affine span.",
+        "proof_plan": "A smooth simplex is a map on Delta^k that extends to an open neighbourhood in its k-dimensional affine span. Distinguish this from facewise smoothness. Boundaryless targets are supplied by DG-7; the extension-into-boundary-target case remains an explicit scope question.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf",
+              "locator": "DG-16 item 12; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-smooth-singular-chain-and-cochain-complexes",
+        "kind": "definition",
+        "title": "Smooth singular chain and cochain complexes",
+        "deps": [
+          "def-real-singular-chain-complex",
+          "def-real-singular-cochain-complex",
+          "def-smooth-singular-simplex"
+        ],
+        "statement": "Take finite real sums of smooth simplices, boundary the same signed face sum, and the R-linear dual for cochains.",
+        "proof_plan": "Take finite real sums of smooth simplices, boundary the same signed face sum, and the R-linear dual for cochains. Affine face maps pull an open extension back to an open neighbourhood of the face; thus it is a subcomplex. Define its cohomology by cycles modulo boundaries.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf",
+              "locator": "DG-16 item 13; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-smooth-singular-chains-and-cochains-are-functorial-for-smooth-maps",
+        "kind": "proposition",
+        "title": "Smooth singular chains and cochains are functorial for smooth maps",
+        "deps": [
+          "def-smooth-singular-chain-and-cochain-complexes",
+          "prop-identity-maps-and-composites-of-smooth-maps-are-smooth"
+        ],
+        "statement": "Postcompose smooth simplices with a smooth map and restrict extension neighbourhoods if necessary.",
+        "proof_plan": "Postcompose smooth simplices with a smooth map and restrict extension neighbourhoods if necessary. Face commutation gives a chain map; duality gives contravariant cochains and cohomology. Identity and composition hold on each generator.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf",
+              "locator": "DG-16 item 14; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-barycentric-subdivision-and-prism-preserve-smooth-singular-chains",
+        "kind": "proposition",
+        "title": "Barycentric subdivision and prism preserve smooth singular chains",
+        "deps": [
+          "def-smooth-singular-chain-and-cochain-complexes",
+          "def-barycentric-subdivision-chain-operator",
+          "def-barycentric-subdivision-prism-homotopy",
+          "thm-singular-chain-homotopy-formula"
+        ],
+        "statement": "Subdivision and its subdivision homotopy compose with affine simplex maps, so preserve smooth chains.",
+        "proof_plan": "Subdivision and its subdivision homotopy compose with affine simplex maps, so preserve smooth chains. A homotopy prism preserves smooth chains only when the supplied homotopy is smooth; arbitrary continuous homotopies do not qualify. Check the extension near each compact prism simplex.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf",
+              "locator": "DG-16 item 15; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-smooth-singular-mayer-vietoris-sequence",
+        "kind": "theorem",
+        "title": "Smooth singular mayer vietoris sequence",
+        "deps": [
+          "thm-short-exact-two-open-singular-cochain-mayer-vietoris-sequence",
+          "def-smooth-singular-chain-and-cochain-complexes",
+          "prop-barycentric-subdivision-and-prism-preserve-smooth-singular-chains",
+          "thm-cover-small-inclusion-is-a-chain-homotopy-equivalence",
+          "thm-long-exact-sequence-in-cohomology"
+        ],
+        "statement": "Repeat the least subdivision depth recursion inside smooth chains: m(sigma)=max of its least small depth and the face depths; D sigma=sum_{i<m(sigma)} T S^i sigma; r=1-dD-Dd.",
+        "proof_plan": "Repeat the least subdivision depth recursion inside smooth chains: m(sigma)=max of its least small depth and the face depths; D sigma=sum_{i<m(sigma)} T S^i sigma; r=1-dD-Dd. Each correction on a face starts at that face depth and is small and smooth. Then repeat the basis SES and degreewise zero extension, followed by the LES. This proves smooth MV independently of the comparison theorem.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf",
+              "locator": "DG-16 item 16; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-compatible-smooth-simplex-faces-have-a-neighbourhood-extension",
+        "kind": "lemma",
+        "title": "Compatible smooth simplex faces have a neighbourhood extension",
+        "deps": [
+          "def-smooth-singular-simplex",
+          "thm-relative-whitney-approximation-for-manifold-valued-maps",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "statement": "For a boundaryless target, compatible smooth maps on the faces of a simplex locally extend near their union.",
+        "proof_plan": "For a boundaryless target, compatible smooth maps on the faces of a simplex locally extend near their union. Near a point omit a barycentric coordinate that is positive; incident faces become coordinate hyperplanes. In a target chart inductively correct an extension F by F-F composed projection_j+F_j composed projection_j. Compatibility on intersections preserves prior faces; restrict neighbourhoods so the image stays in the target chart. Global neighbourhood extension uses an embedding, a finite partition on the compact boundary and tubular retraction. The supplied relative Whitney theorem assumes smoothness on a neighbourhood, so this missing bridge must precede its use. Audit that global extension and boundary-target variant before readiness.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf",
+              "locator": "Park Lemma 2.1; neighbourhood-extension bridge"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-relative-smoothing-of-a-continuous-simplex-along-its-faces",
+        "kind": "lemma",
+        "title": "Relative smoothing of a continuous simplex along its faces",
+        "deps": [
+          "def-smooth-singular-simplex",
+          "lem-compatible-smooth-simplex-faces-have-a-neighbourhood-extension",
+          "thm-relative-whitney-approximation-for-manifold-valued-maps",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "statement": "Prescribed face smoothings require compatible homotopies from the original faces, not merely arbitrary new face maps.",
+        "proof_plan": "Prescribed face smoothings require compatible homotopies from the original faces, not merely arbitrary new face maps. Extend the homotopy from bottom plus sides of Delta times I by the explicit radial retraction from (barycentre,2). At the top use the local face-extension lemma, an embedded-target retraction and a cutoff to make the top map smooth near the boundary. Apply relative Whitney on an open neighbourhood in affine space, fixed near the boundary. Delay this last homotopy by a continuous u(x)<1 in the interior with u=1 at the boundary, so prescribed face homotopies keep their original time. Compactness proves continuity at boundary time 1. AC_omega is inherited from Whitney; no selection over all simplices. Collar/extension details and boundary targets remain held for review.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf",
+              "locator": "DG-16 item 17; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-smooth-singular-chains-compute-singular-homology",
+        "kind": "theorem",
+        "title": "Smooth singular chains compute singular homology",
+        "deps": [
+          "def-smooth-singular-chain-and-cochain-complexes",
+          "prop-barycentric-subdivision-and-prism-preserve-smooth-singular-chains",
+          "lem-relative-smoothing-of-a-continuous-simplex-along-its-faces"
+        ],
+        "statement": "For each particular cycle, take its finite support and all iterated faces and perform the relative smoothing induction on distinct maps, so repeated faces receive identical choices.",
+        "proof_plan": "For each particular cycle, take its finite support and all iterated faces and perform the relative smoothing induction on distinct maps, so repeated faces receive identical choices. The prism identity shows the cycle homologous to its smooth image. For injectivity start with a finite bounding chain and fix its already-smooth faces; its smoothed boundary is the original smooth cycle. No globally selected smoothing operator is asserted.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf",
+              "locator": "DG-16 item 18; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "def-restriction-from-continuous-to-smooth-singular-cochains",
+        "kind": "definition",
+        "title": "Restriction from continuous to smooth singular cochains",
+        "deps": [
+          "def-real-singular-cohomology",
+          "def-smooth-singular-chain-and-cochain-complexes"
+        ],
+        "statement": "Restriction is precomposition by the inclusion C_*smooth -> C_*continuous; inclusion commutes with d, so restriction commutes with delta and descends to cohomology.",
+        "proof_plan": "Restriction is precomposition by the inclusion C_*smooth -> C_*continuous; inclusion commutes with d, so restriction commutes with delta and descends to cohomology. For smooth maps the square commutes on every smooth simplex.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "not-applicable"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf",
+              "locator": "DG-16 item 19; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "prop-smooth-continuous-singular-cohomology-comparison-is-an-isomorphism-on-convex-coordinate-domains",
+        "kind": "proposition",
+        "title": "Smooth continuous singular cohomology comparison is an isomorphism on convex coordinate domains",
+        "deps": [
+          "cor-singular-cohomology-is-homotopy-invariant",
+          "prop-smooth-singular-chains-and-cochains-are-functorial-for-smooth-maps",
+          "prop-barycentric-subdivision-and-prism-preserve-smooth-singular-chains",
+          "def-restriction-from-continuous-to-smooth-singular-cochains"
+        ],
+        "statement": "In a nonempty convex coordinate domain fix one point and use the smooth affine contraction.",
+        "proof_plan": "In a nonempty convex coordinate domain fix one point and use the smooth affine contraction. Both prism homotopies identify cohomology with that of a point: R in degree zero, zero in higher degrees. The restriction map at a point is the identity, so naturality gives the comparison isomorphism. Empty domains give zero complexes. For boundary charts use convex half-boxes only after their extension convention is resolved.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf",
+              "locator": "DG-16 item 20; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-de-rham-and-singular-cohomology-respect-countable-disjoint-unions",
+        "kind": "lemma",
+        "title": "De rham and singular cohomology respect countable disjoint unions",
+        "deps": [
+          "def-real-singular-cohomology",
+          "def-smooth-singular-chain-and-cochain-complexes",
+          "def-de-rham-cochain-complex",
+          "def-axiom-of-choice",
+          "def-countable-choice"
+        ],
+        "statement": "For a supplied countable disjoint family every simplex has connected domain and lies in one component; chains are a direct sum, cochains a product.",
+        "proof_plan": "For a supplied countable disjoint family every simplex has connected domain and lies in one component; chains are a direct sum, cochains a product. Smooth forms are likewise products by local smoothness. Kernels are products without choice; under AC_omega choose one primitive for each component boundary to obtain image(delta)=product image(delta_i). Therefore H(product)=product H, naturally. State AC_omega and identify this exact choice use, not full injectivity of R.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 item 21; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-countable-mayer-vietoris-open-set-principle",
+        "kind": "theorem",
+        "title": "Countable mayer vietoris open set principle",
+        "deps": [
+          "lem-de-rham-and-singular-cohomology-respect-countable-disjoint-unions",
+          "thm-five-lemma-for-modules"
+        ],
+        "statement": "Required open-set principle: a natural cohomology comparison commuting with two-open MV and countable disjoint unions, and an isomorphism on rational boxes, is an isomorphism on manifolds with a supplied countable coordinate cover.",
+        "proof_plan": "Required open-set principle: a natural cohomology comparison commuting with two-open MV and countable disjoint unions, and an isomorphism on rational boxes, is an isomorphism on manifolds with a supplied countable coordinate cover. Finite unions follow from MV and five lemma, using intersections. For increasing unions one must construct the exhaustion bands, prove the odd/even disjoint decomposition and verify their overlaps are already in the class. Then first apply this to Euclidean opens and only afterwards to finite intersections of manifold charts. Exact exhaustion/band proof and a complete authoritative source remain unresolved; do not replace this by an unjustified direct-limit assertion.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 item 22; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "thm-smooth-and-continuous-real-singular-cohomology-agree",
+        "kind": "theorem",
+        "title": "Smooth and continuous real singular cohomology agree",
+        "deps": [
+          "thm-mayer-vietoris-sequence-in-real-singular-cohomology",
+          "thm-naturality-of-singular-mayer-vietoris-connectors",
+          "thm-smooth-singular-mayer-vietoris-sequence",
+          "def-restriction-from-continuous-to-smooth-singular-cochains",
+          "prop-smooth-continuous-singular-cohomology-comparison-is-an-isomorphism-on-convex-coordinate-domains",
+          "lem-de-rham-and-singular-cohomology-respect-countable-disjoint-unions",
+          "thm-countable-mayer-vietoris-open-set-principle"
+        ],
+        "statement": "Apply the preceding principle to restriction from continuous to smooth cochains, checking the two MV diagrams and product maps.",
+        "proof_plan": "Apply the preceding principle to restriction from continuous to smooth cochains, checking the two MV diagrams and product maps. Rational boxes and their nonempty finite intersections use the common contraction. The resulting isomorphism is natural for smooth maps. This remains blocked by item 22 and batch-8 suppliers, independently of the finite-chain homology argument.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf",
+              "locator": "DG-16 item 23; Hatcher \u00a73.1 or Park \u00a72 as applicable; source audit limitations in batch notes"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-the-singular-boundary-of-a-simplex-is-the-unsigned-sum-of-its-faces",
+        "kind": "false-statement",
+        "title": "The singular boundary of a simplex is the unsigned sum of its faces",
+        "deps": [
+          "def-real-singular-chain-complex"
+        ],
+        "statement": "Use the affine triangle with distinct vertex images: unsigned boundary squared counts each vertex twice, whereas alternating signs cancel..",
+        "proof_plan": "Use the affine triangle with distinct vertex images: unsigned boundary squared counts each vertex twice, whereas alternating signs cancel.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 false-statement inventory; exact refutation or unresolved wording recorded in proof_plan"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-a-singular-cochain-is-a-finite-linear-combination-of-singular-simplices",
+        "kind": "false-statement",
+        "title": "A singular cochain is a finite linear combination of singular simplices",
+        "deps": [
+          "def-continuous-singular-simplex-and-real-singular-chain-group",
+          "def-real-singular-cochain-complex"
+        ],
+        "statement": "A chain is a finite sum in R[S_k]; a cochain is a function S_k->R.",
+        "proof_plan": "A chain is a finite sum in R[S_k]; a cochain is a function S_k->R. On a space with infinitely many vertices the constant-one degree-zero cochain has infinite support as a function and is still a legitimate functional on finite chains.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 false-statement inventory; exact refutation or unresolved wording recorded in proof_plan"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-dualizing-every-short-exact-sequence-is-automatically-exact-in-zf",
+        "kind": "false-statement",
+        "title": "Dualizing every short exact sequence is automatically exact in zf",
+        "deps": [
+          "lem-canonical-extension-by-zero-of-a-singular-cochain-on-a-simplex-basis",
+          "thm-short-exact-two-open-singular-cochain-mayer-vietoris-sequence"
+        ],
+        "statement": "Escalated logical scope: for arbitrary modules Hom(-,R) is not exact without an injectivity hypothesis; for real vector spaces in ZF the claim is a nonprovability/choice assertion, not refuted by an ordinary ZFC vector-space example.",
+        "proof_plan": "Escalated logical scope: for arbitrary modules Hom(-,R) is not exact without an injectivity hypothesis; for real vector spaces in ZF the claim is a nonprovability/choice assertion, not refuted by an ordinary ZFC vector-space example. Obtain an exact axiom-sensitive formulation and authoritative independence argument. Do not claim zero extension proves the blanket falsehood.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 false-statement inventory; exact refutation or unresolved wording recorded in proof_plan"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-one-fixed-number-of-barycentric-subdivisions-makes-every-singular-simplex-cover-small",
+        "kind": "false-statement",
+        "title": "One fixed number of barycentric subdivisions makes every singular simplex cover small",
+        "deps": [
+          "prop-barycentric-subdivision-and-prism-preserve-smooth-singular-chains"
+        ],
+        "statement": "For each fixed m take sigma(t)=sin(2*pi*2^m*t) into R with cover U=(-infinity,1/2), V=(-1/2,infinity).",
+        "proof_plan": "For each fixed m take sigma(t)=sin(2*pi*2^m*t) into R with cover U=(-infinity,1/2), V=(-1/2,infinity). Every dyadic interval of length 2^-m traverses both extremes, so the m-th barycentric subdivision is not small. A continuous finite chain still eventually becomes small.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 false-statement inventory; exact refutation or unresolved wording recorded in proof_plan"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-every-continuous-singular-simplex-is-smooth",
+        "kind": "false-statement",
+        "title": "Every continuous singular simplex is smooth",
+        "deps": [
+          "def-smooth-singular-simplex"
+        ],
+        "statement": "The path t->abs(t-1/2) into R is continuous and fails differentiability at the midpoint, hence is not a smooth simplex..",
+        "proof_plan": "The path t->abs(t-1/2) into R is continuous and fails differentiability at the midpoint, hence is not a smooth simplex.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf",
+              "locator": "DG-16 false-statement inventory; exact refutation or unresolved wording recorded in proof_plan"
+            }
+          ]
+        }
+      },
+      {
+        "id": "fs-a-homology-isomorphism-of-chain-complexes-automatically-gives-a-cohomology-isomorphism-after-dualizing-without-further-machinery",
+        "kind": "false-statement",
+        "title": "A homology isomorphism of chain complexes automatically gives a cohomology isomorphism after dualizing without further machinery",
+        "deps": [
+          "def-restriction-from-continuous-to-smooth-singular-cochains",
+          "thm-smooth-and-continuous-real-singular-cohomology-agree"
+        ],
+        "statement": "Escalated logical scope: under AC over a field a quasi-isomorphism does dualize to a quasi-isomorphism, while over Z the acyclic complex Z --2--> Z -> Z/2 has non-acyclic Z-dual.",
+        "proof_plan": "Escalated logical scope: under AC over a field a quasi-isomorphism does dualize to a quasi-isomorphism, while over Z the acyclic complex Z --2--> Z -> Z/2 has non-acyclic Z-dual. The design must specify whether the false claim concerns arbitrary coefficients or the absence of justified machinery in ZF; retain the item pending owner wording resolution.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 false-statement inventory; exact refutation or unresolved wording recorded in proof_plan"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "order": 474,
+    "id": "singular-cochains-mayer-vietoris-and-smooth-singular-comparison-examples",
+    "kind": "B",
+    "category": "differential-geometry",
+    "title": "Singular Cochains Mayer Vietoris and Smooth Singular Comparison \u2014 Examples",
+    "companion": "singular-cochains-mayer-vietoris-and-smooth-singular-comparison",
+    "requires": [
+      "singular-cochains-mayer-vietoris-and-smooth-singular-comparison"
+    ],
+    "items": [
+      {
+        "id": "ex-a-finite-chain-needing-different-subdivision-depths-on-its-simplices",
+        "kind": "example",
+        "title": "A finite chain needing different subdivision depths on its simplices",
+        "deps": [
+          "prop-barycentric-subdivision-and-prism-preserve-smooth-singular-chains"
+        ],
+        "statement": "Use cover (-infinity,3/4),(1/4,infinity) of R.",
+        "proof_plan": "Use cover (-infinity,3/4),(1/4,infinity) of R. Compare a constant zero simplex (already small) with t->t (not initially small, small after one bisection). Their finite sum exhibits different least depths without claiming no common finite maximum.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 B inventory; explicit verification or unresolved witness in proof_plan"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-canonical-zero-extension-of-an-overlap-cochain",
+        "kind": "example",
+        "title": "Canonical zero extension of an overlap cochain",
+        "deps": [
+          "lem-canonical-extension-by-zero-of-a-singular-cochain-on-a-simplex-basis"
+        ],
+        "statement": "Take an overlap vertex p and a U-only vertex q.",
+        "proof_plan": "Take an overlap vertex p and a U-only vertex q. Extend eta(p)=2 by E_U eta(q)=0; on 3[p]-[q] its value is 6. For arbitrary overlap values the same basis rule applies.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 B inventory; explicit verification or unresolved witness in proof_plan"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-smooth-singular-simplices-in-a-coordinate-ball",
+        "kind": "example",
+        "title": "Smooth singular simplices in a coordinate ball",
+        "deps": [
+          "def-smooth-singular-simplex"
+        ],
+        "statement": "For a convex chart, an affine map from Delta to a compact subset of the chart image extends to a neighbourhood still inside the image; compose with inverse chart.",
+        "proof_plan": "For a convex chart, an affine map from Delta to a compact subset of the chart image extends to a neighbourhood still inside the image; compose with inverse chart. Explain why compactness supplies a single neighbourhood.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf",
+              "locator": "DG-16 B inventory; explicit verification or unresolved witness in proof_plan"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-a-continuous-nowhere-differentiable-singular-one-simplex",
+        "kind": "counterexample",
+        "title": "A continuous nowhere differentiable singular one simplex",
+        "deps": [
+          "def-smooth-singular-simplex"
+        ],
+        "statement": "The assigned nowhere-differentiable witness needs a full Weierstrass or Takagi proof and an actual earlier supplier.",
+        "proof_plan": "The assigned nowhere-differentiable witness needs a full Weierstrass or Takagi proof and an actual earlier supplier. No adequate supplier has yet been verified; an abs-value cusp would not preserve the requested nowhere-differentiable claim. Escalate rather than silently replace it.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 B inventory; explicit verification or unresolved witness in proof_plan"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-relative-smoothing-fixes-the-endpoints-of-a-path",
+        "kind": "example",
+        "title": "Relative smoothing fixes the endpoints of a path",
+        "deps": [
+          "lem-relative-smoothing-of-a-continuous-simplex-along-its-faces"
+        ],
+        "statement": "For a continuous path from p to q, the two prescribed zero-faces are already smooth.",
+        "proof_plan": "For a continuous path from p to q, the two prescribed zero-faces are already smooth. Relative smoothing gives a smooth path and an endpoint-fixed homotopy; use a boundary neighbourhood before relative Whitney, not merely endpoint values.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://people.math.harvard.edu/~pspark/derham.pdf",
+              "locator": "DG-16 B inventory; explicit verification or unresolved witness in proof_plan"
+            }
+          ]
+        }
+      },
+      {
+        "id": "ex-singular-cohomology-of-a-point-from-the-cochain-complex",
+        "kind": "example",
+        "title": "Singular cohomology of a point from the cochain complex",
+        "deps": [
+          "def-real-singular-cohomology"
+        ],
+        "statement": "For a point there is one simplex in every degree.",
+        "proof_plan": "For a point there is one simplex in every degree. Its boundary scalar is sum_{i=0}^k(-1)^i, equal to 1 for even positive k and 0 for odd k. Thus cochain delta alternates 0,1,0,1 and cohomology is R in degree zero and zero above.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 B inventory; explicit verification or unresolved witness in proof_plan"
+            }
+          ]
+        }
+      },
+      {
+        "id": "cex-hom-of-homology-is-not-used-as-the-definition-of-singular-cohomology",
+        "kind": "counterexample",
+        "title": "Hom of homology is not used as the definition of singular cohomology",
+        "deps": [
+          "def-real-singular-cohomology"
+        ],
+        "statement": "Retain as a reminder of the distinction of definitions, not a false assertion that real-coefficient UCT fails in ZFC.",
+        "proof_plan": "Retain as a reminder of the distinction of definitions, not a false assertion that real-coefficient UCT fails in ZFC. The cex kind requires an actual statement refuted and witness; escalate the design-kind conflict instead of fabricating a counterexample.",
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "DG-16 design; Hatcher/Park control",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "DG-16 B inventory; explicit verification or unresolved witness in proof_plan"
+            }
+          ]
+        }
+      }
+    ]
+  }
+]
