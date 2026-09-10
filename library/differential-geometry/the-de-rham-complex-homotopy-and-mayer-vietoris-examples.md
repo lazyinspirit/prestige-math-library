@@ -1,7 +1,7 @@
 ---
 page: the-de-rham-complex-homotopy-and-mayer-vietoris-examples
 title: "The De Rham Complex Homotopy and Mayer Vietoris — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-de-rham-cohomology-of-a-point", "ex-de-rham-cohomology-of-euclidean-space", "ex-de-rham-cohomology-of-a-finite-discrete-manifold", "ex-de-rham-cohomology-of-the-circle-from-mayer-vietoris", "ex-the-angular-form-generates-the-first-de-rham-cohomology-of-the-circle", "ex-de-rham-cohomology-of-the-two-sphere", "ex-the-standard-volume-form-generates-top-cohomology-of-a-sphere", "ex-de-rham-cohomology-of-punctured-three-space", "ex-homotopy-equivalent-annulus-and-circle-have-isomorphic-de-rham-rings", "cex-the-closed-angular-form-on-the-punctured-plane-is-not-exact", "cex-the-pullback-on-cohomology-reverses-composition-order", "ex-an-explicit-mayer-vietoris-connecting-form-on-the-circle"]
 ---

@@ -1,7 +1,7 @@
 ---
 page: blocks-defect-groups-and-the-brauer-homomorphism-examples
 title: Blocks Defect Groups and the Brauer Homomorphism — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-defect-and-brauer-pairs-for-a4-in-characteristic-three

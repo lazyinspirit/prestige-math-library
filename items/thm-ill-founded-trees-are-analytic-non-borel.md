@@ -2,7 +2,7 @@
 id: thm-ill-founded-trees-are-analytic-non-borel
 kind: theorem
 title: "Ill-founded trees form an analytic non-Borel set"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-descriptive-tree-rank", "lem-countable-tree-ranks-and-rank-monotonicity", "thm-analytic-families-of-well-founded-trees-have-bounded-rank", "lem-analytic-countable-operations-and-borel-inclusion", "def-axiom-of-choice"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

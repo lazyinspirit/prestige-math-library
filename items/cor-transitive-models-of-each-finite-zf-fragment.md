@@ -2,7 +2,7 @@
 id: cor-transitive-models-of-each-finite-zf-fragment
 kind: corollary
 title: "Transitive models of fixed finite axiom fragments"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-montague-levy-finite-reflection, def-coded-first-order-zf-theory, def-axiom-of-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -40,4 +41,3 @@ For each fixed external finite $\Gamma\subseteq\mathrm{ZF}$, ZF proves that some
 1.1 List the finitely many sentences $\gamma_1,\ldots,\gamma_k$ of $\Gamma$ using the axiom serialization in F2. Each is an axiom of the ambient theory, so their finite conjunction is a theorem there. If the ambient theory is ZFC and one of these sentences is Choice, use F3 exactly for that sentence. No Choice premise is needed for the ZF branch. [F2, F3, given]
 
 2.1 Apply F1 to that fixed finite list and the desired bound. It gives a $\beta$ such that each $\gamma_i^{V_\beta}\leftrightarrow\gamma_i$. Step 1.1 gives the right-hand sides, hence every relativized axiom. The cumulative stage is transitive, so it is the required transitive model. For an infinite carrier begin with a bound at least $\omega$. For $k=0$ any nonempty stage above the bound works. [F1, step 1.1] ∎
-

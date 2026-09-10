@@ -1,7 +1,7 @@
 ---
 page: "reflection-absoluteness-and-elementary-submodels-examples"
 title: "Reflection, Absoluteness, and Elementary Submodels: Examples and Counterexamples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-bounded-set-formulas-and-witness-direction", "ex-internal-power-set-can-miss-an-external-subset", "ex-reflection-of-two-formulas-with-parameters", "fs-a-countable-elementary-submodel-is-a-transitive-subset", "ex-collapse-chain-maps-need-not-be-inclusions"]
 ---

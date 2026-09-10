@@ -2,7 +2,7 @@
 id: lem-terminal-reachability-and-residual-game-positions
 kind: lemma
 title: "Terminal reachability and residual positions"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-game-trees-with-terminal-taboos", "def-axiom-of-choice", "thm-transfinite-recursion"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

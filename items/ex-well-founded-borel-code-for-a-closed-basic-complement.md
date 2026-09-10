@@ -2,7 +2,7 @@
 id: ex-well-founded-borel-code-for-a-closed-basic-complement
 kind: example
 title: "Evaluating elementary Borel codes"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-well-founded-borel-evaluation-codes", "lem-well-founded-borel-code-evaluation"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

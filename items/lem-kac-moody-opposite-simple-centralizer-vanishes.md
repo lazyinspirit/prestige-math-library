@@ -2,13 +2,14 @@
 id: lem-kac-moody-opposite-simple-centralizer-vanishes
 kind: lemma
 title: "The opposite simple centralizer in a Kac Moody half vanishes"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-kac-moody-algebra-associated-to-a-gcm", "prop-kac-moody-root-spaces-are-finite-dimensional"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

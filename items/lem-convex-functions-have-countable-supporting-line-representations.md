@@ -2,7 +2,7 @@
 id: lem-convex-functions-have-countable-supporting-line-representations
 kind: lemma
 title: "Convex functions have countable supporting line representations"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-supporting-lines-for-convex-functions, thm-one-sided-derivatives-of-convex-functions, thm-rationals-countable, lem-rat-embeds-dense, thm-continuous-preimages-of-borel-sets-are-borel]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,9 @@
 id: lem-sequence-spaces-continuously-inject-into-the-real-line
 kind: lemma
 title: "Continuous injections of sequence spaces into the real line"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: ["lem-cantor-and-baire-sequence-coding", "thm-cantor-set-ternary-description", "def-continuous-map-top"]
 justified_by: []

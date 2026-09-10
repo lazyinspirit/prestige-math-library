@@ -1,7 +1,7 @@
 ---
 page: boolean-algebras-stone-duality-and-the-prime-ideal-theorem
 title: "Boolean Algebras, Stone Duality, and the Prime Ideal Theorem"
-status: draft
+status: published
 items:
   - def-boolean-algebra-for-stone-duality
   - def-boolean-ideals-filters-and-primality

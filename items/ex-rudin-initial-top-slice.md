@@ -2,7 +2,7 @@
 id: ex-rudin-initial-top-slice
 kind: example
 title: A concrete Rudin slice
-status: draft
+status: published
 origin: pipeline
 deps: [def-rudin-ordinal-box-space, def-axiom-of-choice, thm-regularity-of-the-alephs, lem-rudin-neighborhoods-of-initial-top-slices-contain-tails]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

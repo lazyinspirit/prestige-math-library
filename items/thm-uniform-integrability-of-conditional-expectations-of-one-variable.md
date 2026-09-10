@@ -2,7 +2,7 @@
 id: thm-uniform-integrability-of-conditional-expectations-of-one-variable
 kind: theorem
 title: "Uniform integrability of conditional expectations of one variable"
-status: draft
+status: published
 origin: pipeline
 deps: [def-conditional-expectation-as-an-ae-class, thm-basic-algebra-and-order-properties-of-conditional-expectation, thm-taking-out-what-is-known, def-uniformly-integrable-family, thm-absolute-continuity-of-the-integral, def-axiom-of-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-explicit-definitions-give-conservative-extensions
 kind: theorem
 title: "Explicit definitions are conservative"
-status: draft
+status: published
 origin: pipeline
 deps: [def-first-order-syntactic-consistency, def-effective-interpretation-and-proof-translation, lem-interpretation-translates-finite-derivations]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -52,4 +53,3 @@ If $L\subseteq L'$ and $T\subseteq U$ are sentence theories in their respective 
 2.1 For an old term t, induction gives $V_t(z)\leftrightarrow z=t$. At a variable this is equality; at an old function node, replace argument witnesses by their old terms using the induction hypothesis, so its graph reduces to $z=f(\bar t)$. Conversely those term values are witnesses. Induction on old formulas now gives $\phi^I\leftrightarrow\phi$: atoms eliminate term-value witnesses, Boolean cases preserve equivalence, and quantifier cases use full-domain guards and fresh-variable quantifier rules. Thus translation is provably equivalent to the old formula, although its witness-expanded syntax is not literally identical. [step 1.1, algebra]
 
 3.1 Translate any extension proof of an old-language sentence phi by F2, remove its tautological guard and apply step 2.1 to get a T proof of phi. This is conservativity in the sense of F3. A refutation is an old-language sentence, so an extension refutation would give a T refutation; conversely a T refutation remains an extension refutation by inclusion. This gives both consistency directions. Each proof uses only finitely many defining symbols and obligation proofs, whose finite assembly is part of F2; no AC or completeness argument is needed. [F2, F3, step 1.1, step 2.1] ∎
-

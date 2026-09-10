@@ -2,7 +2,7 @@
 id: def-conditional-expectation-for-nonnegative-variables
 kind: definition
 title: "Conditional expectation for nonnegative variables"
-status: draft
+status: published
 origin: pipeline
 deps: [def-conditional-expectation-as-an-ae-class, thm-basic-algebra-and-order-properties-of-conditional-expectation, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable, def-axiom-of-choice]
 justified_by: [thm-conditional-monotone-convergence]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

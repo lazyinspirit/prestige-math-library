@@ -2,7 +2,7 @@
 id: lem-boone-base-groups-and-associated-free-bases
 kind: lemma
 title: "Boone base groups and associated free bases"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-boone-group-presentation-and-special-word", "thm-reduced-words-form-the-free-group", "thm-normal-form-for-free-products", "thm-brittons-lemma", "cor-the-base-group-embeds-in-its-hnn-extension", "def-axiom-of-choice"]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

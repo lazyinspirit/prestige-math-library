@@ -2,13 +2,14 @@
 id: "ex-scaling-distinguishes-sublinear-minsize-from-bounded-perimeter"
 kind: "example"
 title: "Scaling distinguishes sublinear minsize from a fixed perimeter cutoff"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-real-tree-tripods-and-geodesic-triangle-minsize", "lem-bounded-real-ultralimits-and-free-tail-extension", "lem-metrics-on-rn", "thm-of-square-roots"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

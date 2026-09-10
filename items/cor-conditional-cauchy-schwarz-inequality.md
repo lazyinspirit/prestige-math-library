@@ -2,7 +2,7 @@
 id: cor-conditional-cauchy-schwarz-inequality
 kind: corollary
 title: "Conditional cauchy schwarz inequality"
-status: draft
+status: published
 origin: pipeline
 deps: [def-conditional-expectation-as-an-ae-class, thm-basic-algebra-and-order-properties-of-conditional-expectation, cor-cauchy-schwarz-inequality-for-l-two, def-axiom-of-choice, lem-rat-embeds-dense, thm-rationals-countable]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

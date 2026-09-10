@@ -2,7 +2,7 @@
 id: ex-conditioning-on-a-finite-partition
 kind: example
 title: "Conditioning on a finite partition"
-status: draft
+status: published
 origin: pipeline
 deps: [def-conditional-expectation-as-an-ae-class, lem-conditional-expectation-is-unique-almost-surely, def-axiom-of-choice, thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

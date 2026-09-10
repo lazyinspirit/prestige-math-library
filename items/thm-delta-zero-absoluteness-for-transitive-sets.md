@@ -2,7 +2,7 @@
 id: thm-delta-zero-absoluteness-for-transitive-sets
 kind: theorem
 title: "Bounded formulas are absolute for transitive sets"
-status: draft
+status: published
 origin: pipeline
 deps: [def-set-theoretic-levy-hierarchy-and-absoluteness, thm-structural-recursion-on-set-coded-syntax]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -40,4 +41,3 @@ If $M\subseteq N$ are nonempty transitive sets, every $\Delta_0$ formula is abso
 3.1 Let $a,\bar b\in M$. A witness $c$ for $\exists x\in a\,\phi(x,\bar b)$ in either structure is an actual member of $a$. Transitivity puts every such $c$ in $M$, hence also in $N$. The induction hypothesis at $(c,\bar b)$ transfers the matrix in either direction, retaining the same witness. If $a=\varnothing$, both existential statements are false. Universal bounded quantifiers follow by negation. [step 2.1, given]
 
 4.1 Constructor induction now gives the asserted equivalence for every bounded formula. For fixed class definitions the same induction is a finite metatheoretic induction on the chosen formula, with each quantifier relativized; it requires no class satisfaction set. [F1, step 3.1] ∎
-

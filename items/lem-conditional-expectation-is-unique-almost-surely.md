@@ -2,7 +2,7 @@
 id: lem-conditional-expectation-is-unique-almost-surely
 kind: lemma
 title: "Conditional expectation is unique almost surely"
-status: draft
+status: published
 origin: pipeline
 deps: [def-conditional-expectation-given-a-sigma-algebra, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, prop-closure-properties-of-measurable-functions-used-by-the-integral]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

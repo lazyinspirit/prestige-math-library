@@ -2,7 +2,7 @@
 id: thm-ad-implies-countable-choice-for-baire-space
 kind: theorem
 title: "AD implies countable choice for subsets of Baire space"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-axiom-of-determinacy-for-natural-number-games"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

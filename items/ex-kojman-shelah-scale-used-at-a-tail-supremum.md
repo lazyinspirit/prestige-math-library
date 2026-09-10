@@ -2,7 +2,7 @@
 id: ex-kojman-shelah-scale-used-at-a-tail-supremum
 kind: example
 title: A scale used in the Dowker subspace
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-scale-tail-suprema-have-prescribed-cofinality, def-kojman-shelah-scale-subspace, thm-cofinality-basics, thm-regularity-of-the-alephs, thm-transfinite-recursion]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

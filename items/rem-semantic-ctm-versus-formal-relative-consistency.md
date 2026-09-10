@@ -2,13 +2,14 @@
 id: rem-semantic-ctm-versus-formal-relative-consistency
 kind: remark
 title: "Two distinct outputs of a consistency construction"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-transitive-model-and-fragment-transfer, thm-finite-fragment-relative-consistency-transfer, thm-formal-relative-consistency-from-verified-proof-reduction, thm-consistency-does-not-supply-a-transitive-zfc-model]
 provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

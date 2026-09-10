@@ -2,7 +2,7 @@
 id: lem-polish-closed-products-and-baire-parametrization
 kind: lemma
 title: "Closed subspaces, products, and Baire parametrization"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-polish-space", "lem-cantor-and-baire-sequence-coding", "def-product-topology", "def-axiom-of-choice"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

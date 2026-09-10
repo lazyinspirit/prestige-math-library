@@ -1,7 +1,7 @@
 ---
 page: sequential-uniform-boundedness-with-countable-choice
 title: "Sequential Uniform Boundedness with Countable Choice"
-status: draft
+status: published
 items: [lem-two-signs-detect-an-operator-increment, thm-sequential-uniform-boundedness-under-countable-choice]
 examples: []
 ---

@@ -2,7 +2,7 @@
 id: lem-taboo-games-reduce-to-pruned-residual-games
 kind: lemma
 title: "Taboo games reduce to pruned residual games"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-terminal-reachability-and-residual-game-positions", "def-game-trees-with-terminal-taboos", "def-axiom-of-choice"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

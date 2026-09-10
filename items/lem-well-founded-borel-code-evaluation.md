@@ -2,7 +2,7 @@
 id: lem-well-founded-borel-code-evaluation
 kind: lemma
 title: "Existence and uniqueness of Borel-code evaluation"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-well-founded-borel-evaluation-codes", "thm-recursion-on-well-founded-setlike-relations", "thm-induction-on-well-founded-relations", "def-axiom-of-choice"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

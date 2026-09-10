@@ -4,6 +4,7 @@ kind: counterexample
 title: Boundedness of first moments alone does not give uniform integrability
 deps: ["def-uniformly-integrable-family", "def-weak-convergence-of-borel-probability-measures", "def-tight-family-of-probability-measures", "cor-markov-inequality-for-random-variables", "thm-heine-borel-rn"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

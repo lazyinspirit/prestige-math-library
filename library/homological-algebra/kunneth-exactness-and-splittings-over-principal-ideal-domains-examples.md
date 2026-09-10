@@ -1,7 +1,7 @@
 ---
 page: kunneth-exactness-and-splittings-over-principal-ideal-domains-examples
 title: "Kunneth Exactness and Splittings over Principal Ideal Domains — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-pid-polynomial-ring-kunneth-tor-class", "ex-pid-kunneth-over-a-field-has-no-tor-correction"]
 ---

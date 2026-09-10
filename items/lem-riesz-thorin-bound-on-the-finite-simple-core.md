@@ -9,6 +9,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -18,7 +19,7 @@ sources:
     - title: Teschl Theorem 15.2 pp.414–415; Laugesen Theorem C.6 pp.168–173, including p.172 norm-recovery caveat
       url: https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf
   scraped: []
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

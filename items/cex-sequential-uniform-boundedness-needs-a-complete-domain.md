@@ -2,7 +2,7 @@
 id: cex-sequential-uniform-boundedness-needs-a-complete-domain
 kind: counterexample
 title: "A complete domain is necessary for sequential uniform boundedness"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-catchup-24
 deps: [def-c-zero-and-ell-infinity, def-normed-subspace, def-bounded-linear-operator, def-operator-norm, def-banach-space, cor-cauchy-reals-lub-complete, thm-of-archimedean, cor-archimedean-reciprocal, def-countable, def-nat-order, lem-nat-trichotomy, thm-induction-principle, thm-subset-of-a-finite-set, rem-real-and-complex-normed-space-convention, lem-complex-conjugation-and-modulus-laws]
@@ -17,6 +17,7 @@ provenance:
 generation:
   role: counterexample
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

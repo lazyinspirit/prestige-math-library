@@ -2,7 +2,7 @@
 id: lem-collapse-fixes-transitive-parts-and-orders-ordinals
 kind: lemma
 title: "What the collapse fixes"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-collapse-of-elementary-membership-submodels, def-ordinal]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -56,4 +57,3 @@ $\alpha$.
 1.2 The restriction of $\pi$ to $X\cap\alpha$ is an order isomorphism onto the elements of $\pi(\alpha)$, by its equation and injectivity. This image is transitive: if $v\in\pi(u)$ and $u\in X\cap\alpha$, then $v=\pi(t)$ for $t\in X\cap u$; ordinal transitivity gives $t\in\alpha$, so $v\in\pi(\alpha)$. The induced membership order is a well-order since $X\cap\alpha$ inherits one from $\alpha$ (F2). Thus $\pi(\alpha)$ is an ordinal of the indicated order type. [F1, F2, given]
 
 2.1 If $X\cap\alpha$ is transitive it is itself an ordinal, and the unique ordinal isomorphic to its membership order is itself. Therefore its order type, hence $\pi(\alpha)$, equals $X\cap\alpha$. Without the hypothesis $\alpha\subseteq X$ this need not equal $\alpha$. [step 1.2, algebra] ∎
-

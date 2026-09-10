@@ -4,6 +4,7 @@ kind: theorem
 title: Integrability is necessary for an iid finite mean strong law
 deps: ["def-identically-distributed-and-iid-random-variables", "cor-second-borel-cantelli-lemma-under-pairwise-independence", "lem-tail-sum-integrability-equivalence", "thm-kolmogorov-iid-l1-strong-law"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

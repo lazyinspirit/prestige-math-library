@@ -2,7 +2,7 @@
 id: lem-conditioning-a-known-variable-and-an-independent-variable
 kind: lemma
 title: "Conditioning a known variable and an independent variable"
-status: draft
+status: published
 origin: pipeline
 deps: [def-conditional-expectation-as-an-ae-class, lem-conditional-expectation-is-unique-almost-surely, thm-increasing-simple-approximation-of-a-nonnegative-measurable-function, thm-monotone-convergence-for-the-integral, thm-linearity-of-the-lebesgue-integral-on-l-one, def-axiom-of-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

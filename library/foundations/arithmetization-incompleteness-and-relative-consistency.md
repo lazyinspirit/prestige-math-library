@@ -1,7 +1,7 @@
 ---
 page: "arithmetization-incompleteness-and-relative-consistency"
 title: "Arithmetization, Incompleteness, and Relative Consistency"
-status: "draft"
+status: published
 items: ["def-robinson-q-and-peano-arithmetic", "def-effective-theory-and-certified-godel-numbering", "lem-certified-syntax-coding-operations-are-primitive-recursive", "lem-q-numeral-calculation-and-bounded-cases", "lem-godel-beta-coding-and-q-remainder", "def-numeralwise-representability-and-arithmetic-sigma-one", "thm-primitive-recursive-numeralwise-representability", "lem-primitive-recursive-syntax-and-proof-checking", "def-effective-interpretation-and-proof-translation", "lem-interpretation-translates-finite-derivations", "def-arithmetic-provability-and-consistency", "thm-arithmetic-diagonal-lemma", "thm-first-incompleteness-with-explicit-soundness", "thm-rosser-incompleteness-for-effective-theories", "lem-pa-uniform-bounded-truth-proof-certificates", "thm-hilbert-bernays-lob-derivability-conditions", "thm-lob-from-derivability-conditions", "thm-second-incompleteness-for-standard-provability", "thm-tarski-arithmetic-truth-undefinability", "thm-explicit-definitions-give-conservative-extensions", "lem-zf-arithmetic-interpretation-and-effective-axioms", "thm-model-existence-versus-syntactic-consistency", "def-countable-transitive-model-and-fragment-transfer", "lem-transitive-zf-models-have-correct-proof-codes", "thm-consistency-does-not-supply-a-transitive-zfc-model", "thm-finite-fragment-relative-consistency-transfer", "thm-formal-relative-consistency-from-verified-proof-reduction", "rem-semantic-ctm-versus-formal-relative-consistency"]
 examples: []
 ---

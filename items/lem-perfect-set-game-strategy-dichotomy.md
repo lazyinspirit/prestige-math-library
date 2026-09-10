@@ -2,7 +2,9 @@
 id: lem-perfect-set-game-strategy-dichotomy
 kind: lemma
 title: "Perfect-set game strategy dichotomy on Cantor space"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: ["lem-cantor-and-baire-sequence-coding", "def-gale-stewart-games-on-pruned-trees"]
 justified_by: []

@@ -2,7 +2,7 @@
 id: thm-fixed-finite-semigroup-has-undecidable-terminal-equality
 kind: theorem
 title: "Fixed finite semigroup has undecidable terminal equality"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-normalized-fixed-halting-machine-for-boone-simulation", "def-boone-machine-semigroup-and-augmented-configurations", "lem-boone-semigroup-histories-detect-halting"]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

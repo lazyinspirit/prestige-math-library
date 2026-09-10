@@ -2,13 +2,14 @@
 id: def-kac-moody-algebra-associated-to-a-gcm
 kind: definition
 title: "Kac moody algebra associated to a gcm"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-the-sum-of-triangularly-disjoint-graded-ideals-is-disjoint-from-h"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

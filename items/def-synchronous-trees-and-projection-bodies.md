@@ -2,7 +2,7 @@
 id: def-synchronous-trees-and-projection-bodies
 kind: definition
 title: "Synchronous trees and projection bodies"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-trees-and-bodies-on-discrete-alphabets", "def-baire-sequence-space"]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

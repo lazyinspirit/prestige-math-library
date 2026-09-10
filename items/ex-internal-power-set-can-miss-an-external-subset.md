@@ -2,7 +2,7 @@
 id: ex-internal-power-set-can-miss-an-external-subset
 kind: example
 title: "Power sets need not agree across transitive models"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-rank-and-hierarchy-membership-absoluteness, lem-bounded-definitions-of-basic-set-operations, thm-ordinals-and-omega-are-absolute-in-transitive-models]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -42,4 +43,3 @@ If $M$ is a countable transitive model of ZF, then externally its internal power
 2.1 Let $d=\{n\in\omega:n\notin A_n\}$. For every $k$, $k\in d$ iff $k\notin A_k$, so $d\ne A_k$. If $d\in M$, surjectivity gives $e(k)=d$ for some $k$, whence $A_k=d$ because $d\subseteq\omega$, a contradiction. Therefore $d$ is a subset of the actual omega outside $M$. [step 1.1, algebra]
 
 3.1 Let $p$ be the internal power set of omega. Transitivity gives $p\subseteq M$. Bounded subset agreement F2 and the internal power-set axiom give $p=\{x\in M:x\subseteq\omega\}$. Restricting $h$ to $p$ proves countability, and step 2.1 proves $d\notin p$. Thus the hierarchy intersection identity in F3 does not imply equality of internal and external power sets. [F2, F3, step 1.1, step 2.1] ∎
-

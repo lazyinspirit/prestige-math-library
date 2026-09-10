@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: Einsiedler–Ward Exercise 2.1.3, p.19; Sarig Proposition 1.4 preservation proof, p.8
       url: https://www.weizmann.ac.il/math/sarigo/sites/math.sarigo/files/uploads/ergodicnotes.pdf
   scraped: []
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

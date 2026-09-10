@@ -4,6 +4,7 @@ kind: lemma
 title: Probability laws on a compact metric space have weakly convergent subsequences
 deps: ["lem-countable-uniformly-dense-tests-on-a-compact-metric-space", "def-weak-convergence-of-borel-probability-measures", "thm-rmk-positive-functional-is-integration-against-its-representing-measure", "thm-bolzano-weierstrass", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

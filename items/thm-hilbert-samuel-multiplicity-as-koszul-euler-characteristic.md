@@ -2,7 +2,7 @@
 id: thm-hilbert-samuel-multiplicity-as-koszul-euler-characteristic
 kind: theorem
 title: "degree-r Hilbert–Samuel coefficient as Koszul Euler characteristic"
-status: draft
+status: published
 origin: pipeline
 deps: [def-koszul-euler-characteristic-and-degree-indexed-multiplicity, lem-koszul-homology-finite-length-for-an-ideal-of-definition, lem-bounded-finite-length-complex-euler-identities, lem-shifted-adic-koszul-filtration-euler-comparison, lem-module-relative-hilbert-samuel-polynomial-for-koszul-comparison, def-axiom-of-choice, cor-length-is-additive-in-short-exact-sequences]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cex-a-version-can-fail-a-pointwise-identity-on-a-null-set
 kind: counterexample
 title: "A version can fail a pointwise identity on a null set"
-status: draft
+status: published
 origin: pipeline
 deps: [def-conditional-expectation-as-an-ae-class, def-axiom-of-choice]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: counterexample
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

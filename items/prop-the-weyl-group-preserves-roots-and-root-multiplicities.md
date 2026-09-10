@@ -2,13 +2,14 @@
 id: prop-the-weyl-group-preserves-roots-and-root-multiplicities
 kind: proposition
 title: "The weyl group preserves roots and root multiplicities"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-simple-reflections-and-the-kac-moody-weyl-group", "lem-serre-elements-vanish-before-serre-generation", "prop-kac-moody-root-spaces-are-finite-dimensional"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

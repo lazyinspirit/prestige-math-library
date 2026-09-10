@@ -2,7 +2,9 @@
 id: lem-interpretation-translates-finite-derivations
 kind: lemma
 title: "Interpretation transports derivations and inconsistency"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: [def-effective-interpretation-and-proof-translation, def-set-coded-formal-derivation, thm-first-order-sentence-deduction, lem-hilbert-propositional-and-equality-rules, lem-derivation-finite-support-and-concatenation]
 provenance:
@@ -113,4 +115,3 @@ the structure convention; no model-existence theorem is assumed here.
 5.1 Induct over source proof lines. Sentence axioms use their supplied translation proofs. For MP enlarge both guards to their union, apply propositional MP and remove surplus guards. For generalization in x, write the transformed premise as $G\to(D(x)\to A)$ with x absent from G, generalize and distribute to obtain $G\to\forall x(D(x)\to A)$; F2 identifies the expanded universal translation. For existential elimination with x absent from the source consequent B, rearrange the premise to $(D(x)\land A)\to(G\to B)$ with x absent from G,B, eliminate x and rearrange back. Step 3.1 then removes surplus guards. These are exactly the three rules in F4. [F2, F4, step 3.1, step 4.1]
 
 6.1 The source contradiction is $\exists x\neg(x=x)$. Its translation is refuted in T by domain-guarded E-reflexivity and step 1.1. Hence its translated proof and that refutation give the fixed target contradiction by explosion F2. Finite support and concatenation F5 assemble the finitely many obligation and axiom proofs used by step 5.1; finite selection is provable in ZF by induction on their number. Effective certificate data makes every such substitution and assembly effective. Finally, if B verifies a total contradiction-code map r, a hypothetical source contradiction code maps to a target one; under Con(T) that is impossible. Quantifying over the source code inside B gives Con(S). The totality verification is a separate hypothesis. [F2, F5, step 1.1, step 5.1] ∎
-

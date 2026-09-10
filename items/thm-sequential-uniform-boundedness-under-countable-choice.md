@@ -2,7 +2,7 @@
 id: thm-sequential-uniform-boundedness-under-countable-choice
 kind: theorem
 title: "Sequential uniform boundedness under countable choice"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-catchup-24
 deps: [lem-two-signs-detect-an-operator-increment, cor-cauchy-reals-lub-complete, def-operator-norm, def-banach-space, def-countable-choice, thm-well-ordering-principle, thm-recursion, thm-induction-principle, def-finite-sum, lem-finite-sum-laws, def-integer-power, lem-power-laws, thm-of-archimedean, cor-archimedean-reciprocal]
@@ -15,6 +15,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

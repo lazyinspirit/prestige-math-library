@@ -4,6 +4,7 @@ kind: definition
 title: Borel probability law on a polish space
 deps: ["def-polish-space", "def-probability-measure", "def-borel-sigma-algebra"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: draft
+status: published
 origin: pipeline
 ---
 

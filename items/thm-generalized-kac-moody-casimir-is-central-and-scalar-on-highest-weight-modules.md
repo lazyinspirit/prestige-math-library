@@ -2,13 +2,14 @@
 id: thm-generalized-kac-moody-casimir-is-central-and-scalar-on-highest-weight-modules
 kind: theorem
 title: "Generalized kac moody casimir is central and scalar on highest weight modules"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-generalized-casimir-on-restricted-kac-moody-modules", "thm-invariant-bilinear-form-for-a-symmetrizable-kac-moody-algebra"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

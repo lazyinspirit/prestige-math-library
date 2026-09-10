@@ -2,7 +2,7 @@
 id: lem-koszul-euler-characteristic-first-element-reduction
 kind: lemma
 title: "koszul euler characteristic first element reduction"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-koszul-homology-finite-length-for-an-ideal-of-definition, lem-bounded-finite-length-complex-euler-identities, thm-long-exact-sequence-in-homology, def-axiom-of-choice, thm-support-and-annihilator-of-a-finite-module, thm-localisation-of-modules-is-exact, thm-nakayama-lemma, lem-koszul-complex-concatenation-tensor-isomorphism, thm-finitely-generated-modules-over-noetherian-rings-are-noetherian]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

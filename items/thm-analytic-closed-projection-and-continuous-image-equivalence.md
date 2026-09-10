@@ -2,7 +2,7 @@
 id: thm-analytic-closed-projection-and-continuous-image-equivalence
 kind: theorem
 title: "Equivalent analytic normal forms and Borel maps"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-polish-closed-products-and-baire-parametrization", "lem-analytic-countable-operations-and-borel-inclusion", "def-analytic-and-coanalytic-by-closed-projection", "def-countable-borel-hierarchy", "def-axiom-of-choice"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

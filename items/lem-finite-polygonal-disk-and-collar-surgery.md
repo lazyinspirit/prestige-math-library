@@ -2,13 +2,14 @@
 id: "lem-finite-polygonal-disk-and-collar-surgery"
 kind: "lemma"
 title: "Finite polygonal disk parametrizations and boundary surgery"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-ordered-field", "def-continuous-map-top", "def-subspace-topology-top", "thm-compactness-under-continuous-maps", "cor-cauchy-reals-lub-complete"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

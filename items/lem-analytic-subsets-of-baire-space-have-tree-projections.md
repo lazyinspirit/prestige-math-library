@@ -2,7 +2,7 @@
 id: lem-analytic-subsets-of-baire-space-have-tree-projections
 kind: lemma
 title: "Analytic subsets of Baire space have tree projections"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-synchronous-trees-and-projection-bodies", "def-analytic-and-coanalytic-by-closed-projection", "lem-closed-subsets-of-baire-space-are-tree-bodies"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

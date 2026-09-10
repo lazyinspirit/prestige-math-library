@@ -4,6 +4,7 @@ kind: example
 title: Uniform laws on expanding finite grids converge to uniform zero one
 deps: ["def-weak-convergence-of-borel-probability-measures", "thm-heine-cantor-r", "thm-lebesgue-measure-of-a-box-of-every-kind", "def-axiom-of-choice", "def-countable-choice", "prop-the-nonnegative-integral-agrees-with-the-simple-integral", "thm-linearity-of-the-lebesgue-integral-on-l-one", "thm-integral-triangle-inequality"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

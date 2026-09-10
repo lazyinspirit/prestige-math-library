@@ -2,7 +2,7 @@
 id: lem-cantor-and-baire-sequence-coding
 kind: lemma
 title: "Cantor and Baire sequence spaces and coordinate codings"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-cantor-sequence-space-for-descriptive-set-theory", "def-polish-space", "def-metric-space", "def-compact-space", "def-continuous-map-top"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

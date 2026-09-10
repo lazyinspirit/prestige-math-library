@@ -2,13 +2,14 @@
 id: def-stay-put-one-tape-machine-and-run-interface
 kind: definition
 title: "Stay-put one-tape machines and their runs"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-deterministic-one-tape-turing-machine", "def-one-step-configuration-relation", "def-turing-machine-initial-and-halting-configuration-interface", "thm-recursion", "thm-induction-principle", "thm-subset-of-a-finite-set"]
 justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

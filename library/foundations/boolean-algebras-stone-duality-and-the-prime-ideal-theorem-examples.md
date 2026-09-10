@@ -1,7 +1,7 @@
 ---
 page: boolean-algebras-stone-duality-and-the-prime-ideal-theorem-examples
 title: "Boolean Algebras, Stone Duality, and the Prime Ideal Theorem: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-finite-powerset-stone-space, ex-finite-boolean-quotient-and-dual-map, ex-finite-forcing-filter-versus-boolean-filter]
 ---

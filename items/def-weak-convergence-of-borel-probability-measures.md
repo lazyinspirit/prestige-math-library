@@ -4,6 +4,7 @@ kind: definition
 title: Weak convergence of borel probability measures
 deps: ["def-probability-measure", "def-borel-sigma-algebra", "def-metric-continuity", "def-integrable-real-and-complex-functions-and-their-integrals"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: draft
+status: published
 origin: pipeline
 ---
 

@@ -2,7 +2,7 @@
 id: ex-fixed-boone-undecidability-implies-uniform-undecidability
 kind: example
 title: "Fixed boone undecidability implies uniform undecidability"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-novikov-boone-undecidability-of-the-word-problem"]
 justified_by: []
@@ -14,6 +14,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

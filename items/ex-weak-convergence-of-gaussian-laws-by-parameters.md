@@ -4,6 +4,7 @@ kind: example
 title: Weak convergence of gaussian laws by parameters
 deps: ["def-weak-convergence-of-borel-probability-measures", "thm-dominated-convergence", "thm-change-of-variables-for-expectation", "def-standard-normal-and-normal-laws", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

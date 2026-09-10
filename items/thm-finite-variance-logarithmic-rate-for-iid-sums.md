@@ -4,6 +4,7 @@ kind: theorem
 title: Finite variance logarithmic rate for iid sums
 deps: ["thm-kolmogorov-strong-law-under-summable-normalized-variances", "def-integer-power", "def-real-power", "thm-natural-logarithm-laws", "thm-real-power-laws", "thm-real-power-continuity-and-derivatives", "thm-p-series-real-exponents", "thm-direct-comparison-test"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

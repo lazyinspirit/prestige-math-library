@@ -2,7 +2,7 @@
 id: lem-bounded-finite-length-complex-euler-identities
 kind: lemma
 title: "bounded finite length complex euler identities"
-status: draft
+status: published
 origin: pipeline
 deps: [def-koszul-euler-characteristic-and-degree-indexed-multiplicity, cor-length-is-additive-in-short-exact-sequences, thm-long-exact-sequence-in-homology]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

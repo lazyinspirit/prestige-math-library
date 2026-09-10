@@ -2,13 +2,14 @@
 id: prop-real-root-spaces-are-one-dimensional-sl2-roots
 kind: proposition
 title: "Real root spaces are one dimensional sl2 roots"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-real-and-imaginary-kac-moody-roots", "prop-the-weyl-group-preserves-roots-and-root-multiplicities", "prop-kac-moody-root-spaces-are-finite-dimensional"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

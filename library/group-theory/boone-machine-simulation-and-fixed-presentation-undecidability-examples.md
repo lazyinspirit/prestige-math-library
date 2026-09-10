@@ -1,7 +1,7 @@
 ---
 page: boone-machine-simulation-and-fixed-presentation-undecidability-examples
 title: "Boone Machine Simulation and Fixed-Presentation Undecidability — Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-boone-sharp-is-not-word-inversion", "ex-boone-halting-cleanup-through-an-empty-right-tape", "ex-fixed-boone-undecidability-implies-uniform-undecidability"]
 ---

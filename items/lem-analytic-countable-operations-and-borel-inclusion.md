@@ -2,7 +2,7 @@
 id: lem-analytic-countable-operations-and-borel-inclusion
 kind: lemma
 title: "Analytic countable operations and inclusion of Borel sets"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-analytic-and-coanalytic-by-closed-projection", "lem-cantor-and-baire-sequence-coding", "lem-polish-closed-products-and-baire-parametrization", "lem-metric-borel-hierarchy-monotonicity-and-operations", "def-continuous-map-top", "def-axiom-of-choice"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

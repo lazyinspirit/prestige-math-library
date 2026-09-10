@@ -2,7 +2,7 @@
 id: lem-q-numeral-calculation-and-bounded-cases
 kind: lemma
 title: "Q calculates numerals and finite bounded cases"
-status: draft
+status: published
 origin: pipeline
 deps: [def-robinson-q-and-peano-arithmetic]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -49,4 +50,3 @@ Use def-set-coded-formal-derivation for the six logical schemes and three rules.
 2.2 For every fixed $k$, external induction proves $z+\bar k=S^kz$ and $S z+\bar k=z+\overline{k+1}$. Repeatedly applying the predecessor axiom $n+1$ times gives the finite disjunction: $x=0$, ..., $x=\bar n$, or $x=S^{n+1}z$ for some $z$. In a numeral case, a numeral left-addend witness proves $x\le\bar n$ by step 1.1. In the last case, $z+\overline{n+1}=x$ proves $\overline{n+1}\le x$. This gives the second scheme without internal induction. The same calculation shows $\overline{n+1}\le x\to\bar n\le x$ by replacing z with Sz. [F1, step 1.1]
 
 3.1 A numeral instance of $\le$ is true exactly when its first numeral is among those allowed by step 2.1. If it is, a numeral witness proves it; otherwise the finite disjunction and the unequal-numeral proofs refute it. Thus closed order atoms are decided as well. For a closed bounded quantifier first reduce its bounding term to $\bar n$, then use step 2.1 to replace the bounded variable by the finite list of possible numerals. Induction on the formula gives a proof or a refutation for each substituted matrix. Existential introduction proves a true existential; the finite case disjunction refutes a false one. Negation handles universal quantifiers; Boolean truth tables combine the remaining cases. The zero bound yields either a singleton test for <= or no candidates for <. [step 1.1, step 2.1, step 2.2] ∎
-

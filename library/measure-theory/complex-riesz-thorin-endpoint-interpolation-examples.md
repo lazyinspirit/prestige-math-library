@@ -1,7 +1,7 @@
 ---
 page: "complex-riesz-thorin-endpoint-interpolation-examples"
 title: "Complex Riesz–Thorin Endpoint Interpolation: Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-endpoint-interpolation-for-a-finite-matrix", "ex-hausdorff-young-endpoint-exponent-arithmetic", "cex-finite-target-interpolation-does-not-state-an-infinite-endpoint", "ex-interpolation-of-an-integral-averaging-operator"]
 ---

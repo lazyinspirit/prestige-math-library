@@ -2,13 +2,14 @@
 id: def-conditional-expectation-given-a-sigma-algebra
 kind: definition
 title: "Conditional expectation given a sigma algebra"
-status: draft
+status: published
 origin: pipeline
 deps: [def-expectation-of-a-nonnegative-or-integrable-random-variable, def-l-one-of-a-measure]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

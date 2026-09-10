@@ -2,7 +2,7 @@
 id: ex-boone-halting-cleanup-through-an-empty-right-tape
 kind: example
 title: "Boone halting cleanup through an empty right tape"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-boone-machine-semigroup-and-augmented-configurations"]
 justified_by: []
@@ -14,6 +14,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

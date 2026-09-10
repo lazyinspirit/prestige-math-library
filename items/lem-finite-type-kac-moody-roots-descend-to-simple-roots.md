@@ -2,13 +2,14 @@
 id: lem-finite-type-kac-moody-roots-descend-to-simple-roots
 kind: lemma
 title: "Finite-type Kac–Moody roots descend to simple roots"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-finite-affine-indefinite-trichotomy-for-indecomposable-gcms", "thm-invariant-bilinear-form-for-a-symmetrizable-kac-moody-algebra", "prop-the-weyl-group-preserves-roots-and-root-multiplicities", "prop-kac-moody-root-spaces-are-finite-dimensional", "prop-real-root-spaces-are-one-dimensional-sl2-roots"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

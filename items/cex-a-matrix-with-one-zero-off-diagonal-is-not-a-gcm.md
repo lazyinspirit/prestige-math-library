@@ -2,13 +2,14 @@
 id: cex-a-matrix-with-one-zero-off-diagonal-is-not-a-gcm
 kind: counterexample
 title: "A matrix with one zero off diagonal is not a gcm"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-generalized-cartan-matrix"]
 provenance:
   statement: ai-generated
   proof: ai-generated
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

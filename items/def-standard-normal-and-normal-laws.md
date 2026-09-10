@@ -4,6 +4,7 @@ kind: definition
 title: Standard normal and normal laws
 deps: ["lem-normal-density-has-total-mass-one", "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure", "def-probability-measure", "def-law-or-distribution-of-a-random-element", "lem-law-of-a-random-element-is-a-probability-measure", "cor-continuous-functions-are-borel-measurable", "def-dirac-measure", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: draft
+status: published
 origin: pipeline
 ---
 

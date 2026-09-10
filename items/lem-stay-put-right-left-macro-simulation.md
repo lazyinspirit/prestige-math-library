@@ -2,13 +2,14 @@
 id: lem-stay-put-right-left-macro-simulation
 kind: lemma
 title: "The right-left macro simulates one stay-put step"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-stay-put-one-tape-machine-and-run-interface", "def-one-step-configuration-relation", "def-finite-cardinality", "def-cartesian-product", "thm-the-characterising-property-of-ordered-pairs", "thm-induction-principle", "thm-omega-is-peano-system"]
 justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

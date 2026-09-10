@@ -2,13 +2,14 @@
 id: thm-invariant-bilinear-form-for-a-symmetrizable-kac-moody-algebra
 kind: theorem
 title: "Invariant bilinear form for a symmetrizable kac moody algebra"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-symmetrizable-generalized-cartan-matrix", "prop-kac-moody-root-spaces-are-finite-dimensional", "lem-kac-moody-opposite-simple-centralizer-vanishes"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

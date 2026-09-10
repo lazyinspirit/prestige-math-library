@@ -2,7 +2,7 @@
 id: thm-finite-fragment-relative-consistency-transfer
 kind: theorem
 title: "Finite-fragment model transfer proves relative consistency"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-transitive-model-and-fragment-transfer, thm-model-existence-versus-syntactic-consistency, lem-derivation-finite-support-and-concatenation]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -44,4 +45,3 @@ The model convention is def-theories-models-and-semantic-consequence, and the sc
 1.1 If U had an actual refutation p, F1 extracts the finite set Delta of its nonlogical axiom lines. The same annotated proof is a Delta refutation. Apply the stipulated fragment data F2 to exactly this Delta: its two T proofs give a suitable source model and a model N of Delta. Finite assembly of these proofs is licensed by F1. [F1, F2, given]
 
 2.1 Inside T, formal soundness applied to the fixed finite derivation p says every nonempty model of Delta satisfies its contradictory last sentence. The model N just obtained cannot satisfy that sentence; thus T proves a contradiction. The set-model soundness principle is part of the stated strength hypothesis on T, consistent with the external model/consistency direction F3. Therefore Con(T) rules out every actual U refutation, giving Con(U). Only the single finite support of the alleged proof was used. [F3, step 1.1] ∎
-

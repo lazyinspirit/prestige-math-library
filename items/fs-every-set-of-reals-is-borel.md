@@ -2,7 +2,7 @@
 id: fs-every-set-of-reals-is-borel
 kind: false-statement
 title: "Every set of reals is Borel"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-choice-produces-an-undetermined-natural-number-game", "thm-borel-games-are-determined", "lem-sequence-spaces-continuously-inject-into-the-real-line", "lem-countable-borel-hierarchy-exhaustion-and-pullbacks", "def-axiom-of-choice"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

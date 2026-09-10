@@ -2,13 +2,14 @@
 id: ex-the-affine-a1-gcm-has-singular-rank-one-realization-data
 kind: example
 title: "The affine a1 gcm has singular rank one realization data"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-minimal-realizations-exist-and-are-unique-up-to-isomorphism"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

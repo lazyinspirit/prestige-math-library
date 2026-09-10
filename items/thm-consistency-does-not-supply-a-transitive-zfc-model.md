@@ -2,7 +2,7 @@
 id: thm-consistency-does-not-supply-a-transitive-zfc-model
 kind: theorem
 title: "The transitive-model consistency-strength gap"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-transitive-zf-models-have-correct-proof-codes, thm-second-incompleteness-for-standard-provability, thm-model-existence-versus-syntactic-consistency, lem-zf-arithmetic-interpretation-and-effective-axioms, thm-first-order-sentence-deduction]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

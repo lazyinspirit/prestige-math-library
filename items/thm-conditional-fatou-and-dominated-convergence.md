@@ -2,7 +2,9 @@
 id: thm-conditional-fatou-and-dominated-convergence
 kind: theorem
 title: "Conditional fatou and dominated convergence"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: [thm-conditional-monotone-convergence, thm-basic-algebra-and-order-properties-of-conditional-expectation, thm-dominated-convergence, def-conditional-expectation-as-an-ae-class, def-axiom-of-choice, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable]
 provenance:

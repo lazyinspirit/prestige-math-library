@@ -2,7 +2,7 @@
 id: lem-shifted-adic-koszul-filtration-euler-comparison
 kind: lemma
 title: "shifted adic koszul filtration euler comparison"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-koszul-homology-finite-length-for-an-ideal-of-definition, lem-bounded-finite-length-complex-euler-identities, def-associated-graded-ring-and-module, thm-hilbert-basis-theorem, thm-artin-rees-lemma, thm-nakayama-lemma, thm-long-exact-sequence-in-homology, def-axiom-of-choice, cor-sequence-ideal-annihilates-koszul-homology, lem-koszul-generator-contraction-homotopy, thm-finitely-generated-modules-over-noetherian-rings-are-noetherian, thm-noetherian-ring-quotients-and-localisations, def-koszul-complex-of-a-sequence-with-coefficients, cor-length-is-additive-in-short-exact-sequences]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

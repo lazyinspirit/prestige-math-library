@@ -2,7 +2,7 @@
 id: thm-collapse-of-elementary-membership-submodels
 kind: theorem
 title: "Collapse of elementary membership submodels"
-status: draft
+status: published
 origin: pipeline
 deps: [def-elementary-set-structure-embedding, thm-mostowski-collapse-for-extensional-relations, prop-isomorphism-invariance-of-satisfaction]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -52,4 +53,3 @@ Conventions and prerequisites: def-set-structures-and-variable-assignments, def-
 1.2 For distinct $a,b\in X$, Extensionality in $M$ implies that some $u\in M$ belongs to exactly one of $a,b$. Elementarity F1 applied with parameters $a,b$ gives such a $u\in X$. Thus the predecessor sets of $a,b$ within $X$ differ: restricted membership is extensional. [F1, given]
 
 2.1 F2 now supplies a unique isomorphism onto a transitive set $\bar X$, satisfying $\pi(a)=\{\pi(u):u\in X\cap a\}$. Its inverse is an isomorphism onto $X$. For any formula and tuple in $\bar X$, F3 transfers satisfaction to $X$, and F1 then transfers it to $M$. This is precisely elementarity of the inverse collapse into $M$. Composing any injection $X\to\omega$ with $\pi^{-1}$ shows the same countability for $\bar X$. [F1, F2, F3, step 1.1, step 1.2] ∎
-

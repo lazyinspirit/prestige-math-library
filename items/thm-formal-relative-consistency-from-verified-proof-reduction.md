@@ -2,7 +2,7 @@
 id: thm-formal-relative-consistency-from-verified-proof-reduction
 kind: theorem
 title: "Formal consistency transfer from a verified reduction"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-finite-fragment-relative-consistency-transfer, lem-interpretation-translates-finite-derivations, def-arithmetic-provability-and-consistency]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -44,4 +45,3 @@ For theories extending Q, $0=1$ may replace the fixed contradiction: Q proves $0
 1.1 Work in B and assume Con(T) in the convention F1. For arbitrary p, totality of r provides its value q. If $\operatorname{Prf}_U(p,\ulcorner\bot\urcorner)$ held, the verified reduction would give $\operatorname{Prf}_T(q,\ulcorner\bot\urcorner)$, contrary to Con(T). Hence B proves the negated U-proof instance for every p under that assumption. [F1, given]
 
 2.1 Universal generalization on p gives Con(U), and discharging the Con(T) assumption gives the desired implication. For the finite-fragment route F2 supplies only an external finite assembly until each constituent map and its verification is supplied; the analogous distinction for interpretations is F3. No uniform proof generator follows merely from the existence of the external assemblies. [F2, F3, step 1.1] ∎
-

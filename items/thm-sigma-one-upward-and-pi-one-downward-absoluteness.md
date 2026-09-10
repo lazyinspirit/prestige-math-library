@@ -2,7 +2,7 @@
 id: thm-sigma-one-upward-and-pi-one-downward-absoluteness
 kind: theorem
 title: "Sigma-one truth goes upward"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-delta-zero-absoluteness-for-transitive-sets, lem-levy-sigma-one-existential-normal-form]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -40,4 +41,3 @@ For nonempty transitive $M\subseteq N$, a literal existential block over a $\Del
 2.1 If a universal dual were true in $N$ and false in $M$, its existential negation would be true in $M$ and hence in $N$ by step 1.1. This contradicts its truth in $N$, proving downward transfer. [step 1.1, algebra]
 
 3.1 When classification is modulo ZF, F2 supplies a ZF equivalence to the literal normal form. Each model satisfies that equivalence under the extra hypothesis. Translate to the normal form in the source model, apply steps 1.1 or 2.1, and translate back in the destination model. [F2, step 1.1, step 2.1] ∎
-

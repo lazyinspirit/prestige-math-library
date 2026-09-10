@@ -2,7 +2,7 @@
 id: cor-conditional-variance-decomposition
 kind: corollary
 title: "Conditional variance decomposition"
-status: draft
+status: published
 origin: pipeline
 deps: [def-conditional-variance, thm-basic-algebra-and-order-properties-of-conditional-expectation, def-moments-variance-and-covariance, lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula, def-axiom-of-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

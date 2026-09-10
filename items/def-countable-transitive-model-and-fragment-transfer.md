@@ -2,13 +2,14 @@
 id: def-countable-transitive-model-and-fragment-transfer
 kind: definition
 title: "Transitive models and finite-fragment transfer data"
-status: draft
+status: published
 origin: pipeline
 deps: [def-theories-models-and-semantic-consequence, def-relativization-to-a-definable-class, def-coded-first-order-zf-theory]
 provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

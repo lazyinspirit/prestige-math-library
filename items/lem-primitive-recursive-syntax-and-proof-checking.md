@@ -2,7 +2,9 @@
 id: lem-primitive-recursive-syntax-and-proof-checking
 kind: lemma
 title: "Primitive-recursive syntax and certified proof checking"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: [def-effective-theory-and-certified-godel-numbering, lem-certified-syntax-coding-operations-are-primitive-recursive]
 provenance:
@@ -47,4 +49,3 @@ The initial sentinel prevents leading-zero ambiguity. The following well-defined
 4.1 A proof line contains its formula, a scheme/rule tag and its finite annotation. For scheme 1, the annotation gives the Boolean skeleton and substituted formulas; check the rebuilt formula and all at most $2^l$ Boolean valuations of its l-or-fewer skeleton letters. For schemes 2 and 4, the annotation supplies formula, variable and term; check free-for and exact substitution, then the instantiation/introduction template. For scheme 3 check its distribution template and that x is absent from the antecedent free list. Scheme 5 is term reflexivity. Scheme 6 checks both free-for conditions and the two exact substituted formulas in equality substitution. Thus every one of the six schemes is checked by steps 1.1–3.1 and bounded finite tests. An axiom instance always has such finite annotation; annotations never replace a test of validity. [F1, step 1.1, step 2.1, step 3.1]
 
 5.1 For MP check the two earlier premise indices and the implication shape; for generalization check the earlier premise and bound variable; for restricted existential elimination check the earlier implication, the resulting quantified antecedent, and absence of the eliminated variable from the consequent free list. At a nonlogical axiom line check sentencehood and E(a,w) from the supplied certificate (F2), rather than searching for w. A loop over the decoded number of lines checks every line and the final conclusion; reject an empty derivation, malformed annotation or non-earlier premise. Induction on lines gives soundness of acceptance for the specified calculus, and conversely each certified derivation meets these tests. All bounds are input lengths, explicit exponentials for Boolean valuations, or bounds of already constructed primitive-recursive loops, proving the claim. [F1, F2, step 4.1] ∎
-

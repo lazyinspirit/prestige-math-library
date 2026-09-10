@@ -2,7 +2,7 @@
 id: cor-conditional-lp-contraction
 kind: corollary
 title: "Conditional lp contraction"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-conditional-jensen-inequality, lem-absolute-real-powers-are-convex, thm-basic-algebra-and-order-properties-of-conditional-expectation, def-l-p-space-as-a-quotient-by-null-functions, thm-finite-measure-l-r-includes-into-l-p-for-p-less-r, def-axiom-of-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -8,6 +8,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
     - title: Einsiedler–Ward §2.4 opening, pp.28–29 (isometry paragraph, not Lemma 2.18)
       url: https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf
   scraped: []
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

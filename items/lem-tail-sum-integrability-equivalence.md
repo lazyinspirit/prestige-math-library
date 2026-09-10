@@ -4,6 +4,7 @@ kind: lemma
 title: Tail sum integrability equivalence
 deps: ["cor-layer-cake-formulas-for-random-variables", "thm-monotone-convergence", "thm-monotone-convergence-for-the-integral"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

@@ -2,13 +2,14 @@
 id: prop-finite-type-kac-moody-algebras-recover-the-dg-semisimple-algebras
 kind: proposition
 title: "Finite type kac moody algebras recover the dg semisimple algebras"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-serre-presentation-of-a-kac-moody-algebra", "thm-finite-affine-indefinite-trichotomy-for-indecomposable-gcms", "lem-finite-type-kac-moody-roots-descend-to-simple-roots", "lem-nonsingular-indecomposable-kac-moody-algebras-are-simple"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

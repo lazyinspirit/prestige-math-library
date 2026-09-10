@@ -2,7 +2,7 @@
 id: def-conditional-variance
 kind: definition
 title: "Conditional variance"
-status: draft
+status: published
 origin: pipeline
 deps: [def-conditional-expectation-as-an-ae-class, cor-conditional-lp-contraction, thm-taking-out-what-is-known, def-axiom-of-choice]
 justified_by: [lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula]
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

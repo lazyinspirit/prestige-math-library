@@ -2,7 +2,9 @@
 id: thm-primitive-recursive-numeralwise-representability
 kind: theorem
 title: "Primitive-recursive functions are representable in Q"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: [def-effective-theory-and-certified-godel-numbering, lem-q-numeral-calculation-and-bounded-cases, lem-godel-beta-coding-and-q-remainder, def-numeralwise-representability-and-arithmetic-sigma-one]
 provenance:
@@ -43,4 +45,3 @@ Every primitive-recursive function has a numeralwise unique-value representing f
 6.1 We prove the complexity claim simultaneously with construction. The beta and initial graphs are bounded. At later stages replace earlier graphs by their PA-equivalent existential bounded forms, and replace negative occurrences by the distinct-output existential formula of step 5.1. Positive Boolean combinations and existential prefixes combine by fresh-variable prenexing. For bounded universal closure PA proves $\forall i<t\exists w\,\delta(i,w)\leftrightarrow\exists B\,\forall i<t\exists w\le B\,\delta(i,w)$: induction on t starts with B=0, and adjoining the next witness replaces B by its maximum with that witness. Repeating this for a fixed finite witness tuple supplies a common bound. The remaining matrix is bounded. Therefore every constructed graph is PA-equivalent to a syntactic Sigma1 graph, while its original strengthened form retains the Q assertion. [step 1.1, step 2.1, step 3.1, step 5.1]
 
 7.1 For a primitive-recursive relation use the representing graph of its 0–1 characteristic function at output 1. The numeralwise unique-value theorem proves the instance when the value is 1, and proves its negation when the value is 0 since Q proves $0\ne1$ by F1. This completes the function and relation assertions. [F1, step 4.1, step 6.1] ∎
-

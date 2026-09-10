@@ -2,13 +2,14 @@
 id: thm-serre-presentation-of-a-kac-moody-algebra
 kind: theorem
 title: "Serre presentation of a kac moody algebra"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-the-serre-quotient-has-weyl-symmetry-and-no-residual-kac-moody-kernel", "lem-pbw-for-countably-presented-kac-moody-lie-algebras"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

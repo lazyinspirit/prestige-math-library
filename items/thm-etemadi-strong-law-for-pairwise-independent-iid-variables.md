@@ -4,6 +4,7 @@ kind: theorem
 title: Etemadi strong law for pairwise independent iid variables
 deps: ["def-pairwise-independence", "lem-iid-linear-truncation-occurs-only-finitely-often", "lem-summability-of-truncated-normalized-variances", "lem-cesaro-limit-of-truncated-means", "cor-chebyshev-inequality-for-random-variables", "cor-covariance-vanishes-under-independence", "lem-variance-and-covariance-identities-for-random-variables", "lem-measurable-functions-preserve-independence", "cor-first-borel-cantelli-lemma-for-events", "thm-monotone-convergence", "lem-integer-part", "def-integer-power", "thm-geometric-series"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

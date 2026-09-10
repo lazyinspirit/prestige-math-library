@@ -2,13 +2,14 @@
 id: def-kac-moody-root-lattice-height-and-positive-cone
 kind: definition
 title: "Kac Moody root lattice height and positive cone"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-realization-of-a-generalized-cartan-matrix"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

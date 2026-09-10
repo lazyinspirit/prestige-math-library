@@ -2,7 +2,7 @@
 id: def-game-trees-with-terminal-taboos
 kind: definition
 title: "Game trees with terminal taboos"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-trees-and-bodies-on-discrete-alphabets", "def-gale-stewart-games-on-pruned-trees"]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

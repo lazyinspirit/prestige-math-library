@@ -2,7 +2,7 @@
 id: def-rational-determinacy-measure-game
 kind: definition
 title: "The rational measure game"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-cantor-sequence-space-for-descriptive-set-theory", "def-gale-stewart-games-on-pruned-trees", "thm-rationals-countable"]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

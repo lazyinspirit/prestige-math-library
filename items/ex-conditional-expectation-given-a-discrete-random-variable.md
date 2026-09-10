@@ -2,7 +2,7 @@
 id: ex-conditional-expectation-given-a-discrete-random-variable
 kind: example
 title: "Conditional expectation given a discrete random variable"
-status: draft
+status: published
 origin: pipeline
 deps: [def-conditional-expectation-as-an-ae-class, lem-conditional-expectation-is-unique-almost-surely, def-axiom-of-choice, thm-monotone-convergence-for-the-integral, thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

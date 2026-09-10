@@ -2,7 +2,9 @@
 id: thm-conditional-monotone-convergence
 kind: theorem
 title: "Conditional monotone convergence"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: [def-conditional-expectation-for-nonnegative-variables, lem-conditional-expectation-is-unique-almost-surely, thm-basic-algebra-and-order-properties-of-conditional-expectation, thm-monotone-convergence-for-the-integral, prop-closure-properties-of-measurable-functions-used-by-the-integral, def-axiom-of-choice, cor-integral-over-a-null-set-vanishes]
 provenance:

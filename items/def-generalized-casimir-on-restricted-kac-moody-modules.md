@@ -2,13 +2,14 @@
 id: def-generalized-casimir-on-restricted-kac-moody-modules
 kind: definition
 title: "Generalized casimir on restricted kac moody modules"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-invariant-bilinear-form-for-a-symmetrizable-kac-moody-algebra", "prop-kac-moody-root-spaces-are-finite-dimensional", "def-universal-enveloping-algebra-as-a-tensor-quotient"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

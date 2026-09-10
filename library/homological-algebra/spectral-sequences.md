@@ -1,7 +1,7 @@
 ---
 page: spectral-sequences
 title: Spectral Sequences
-status: draft
+status: published
 items:
 - lem-spectral-sequence-subquotient-and-local-lifting-calculus
 - def-increasing-and-decreasing-filtration-of-an-object

@@ -2,7 +2,7 @@
 id: cex-taboo-winning-positions-need-not-contain-their-children
 kind: counterexample
 title: "A winning taboo position can have a nonwinning child"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-game-trees-with-terminal-taboos"]
 justified_by: []
@@ -15,6 +15,7 @@ generation:
   role: counterexample
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

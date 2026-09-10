@@ -11,7 +11,9 @@ sources:
     - title: Hatcher, Algebraic Topology
       url: https://pi.math.cornell.edu/~hatcher/AT/AT.pdf
       locator: Local expansion of Hatcher Example 2.31 pp136–137 using finite affine charts and explicit cubical group laws; Gram–Schmidt is a published supplier
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 proof_strategy: direct
 ---

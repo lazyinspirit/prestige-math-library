@@ -12,7 +12,9 @@ sources:
     - title: E–W Proposition 2.14 pp.24–25
       url: https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf
   scraped: []
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 proof_strategy: direct
 ---

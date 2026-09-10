@@ -2,7 +2,7 @@
 id: ex-first-move-clopen-game
 kind: example
 title: "A clopen game decided by the first move"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-gale-stewart-games-on-pruned-trees", "def-baire-sequence-space"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

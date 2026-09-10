@@ -2,7 +2,7 @@
 id: ex-law-of-total-variance
 kind: example
 title: "Law of total variance"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-conditional-variance-decomposition, lem-conditioning-a-known-variable-and-an-independent-variable, thm-basic-algebra-and-order-properties-of-conditional-expectation, def-axiom-of-choice, thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces, def-conditional-variance]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

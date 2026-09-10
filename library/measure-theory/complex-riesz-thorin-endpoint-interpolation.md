@@ -1,7 +1,7 @@
 ---
 page: "complex-riesz-thorin-endpoint-interpolation"
 title: "Complex Riesz–Thorin Endpoint Interpolation"
-status: "draft"
+status: published
 items: ["lem-endpoint-interpolation-simple-analytic-families", "lem-riesz-thorin-bound-on-the-finite-simple-core", "cor-complex-interpolation-extensions-agree-on-intersections", "cor-l-one-l-infinity-and-l-two-bounds-interpolate-to-l-p-l-p-prime"]
 examples: []
 ---

@@ -2,13 +2,14 @@
 id: "lem-sublinear-minsize-makes-every-cone-geodesic-a-limit-geodesic"
 kind: "lemma"
 title: "Sublinear minsize identifies every cone segment with a limit segment"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-rescaled-ultralimit-and-asymptotic-cone", "lem-geodesic-segments-have-isometric-ultralimits", "lem-triangle-extrema-and-real-tree-tripod-rules", "lem-bounded-real-ultralimits-and-free-tail-extension", "def-axiom-of-choice"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

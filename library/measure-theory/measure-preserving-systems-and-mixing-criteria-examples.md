@@ -1,7 +1,7 @@
 ---
 page: "measure-preserving-systems-and-mixing-criteria-examples"
 title: "Measure-Preserving Systems and Mixing Criteria — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-two-point-preserving-permutation", "cex-identity-on-two-points-is-not-ergodic", "ex-koopman-on-a-finite-probability-space"]
 ---

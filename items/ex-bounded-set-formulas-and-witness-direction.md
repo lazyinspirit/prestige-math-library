@@ -2,7 +2,7 @@
 id: ex-bounded-set-formulas-and-witness-direction
 kind: example
 title: "Bounded formulas and the direction of absoluteness"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-delta-zero-absoluteness-for-transitive-sets, thm-sigma-one-upward-and-pi-one-downward-absoluteness, lem-bounded-definitions-of-basic-set-operations]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -42,4 +43,3 @@ Bounded graph agreement can be checked explicitly on $a=\{0\}$, $b=\{0,1\}$ and 
 2.1 Use the bounded $K(p,x,y)$ graph of F1. A bounded injection test is: every $p\in f$ has coordinates $x\in a,y\in b$ with $K(p,x,y)$; every $x\in a$ occurs in such a $p$; and for $p,q\in f$ and their coordinates in $a,b$, equal first coordinates imply equal second coordinates and conversely. Here $\langle0,1\rangle=\{\{0\},\{0,1\}\}$ is the sole pair, its first coordinate is $0$, its value is $1\in b$, and comparing the only pair with itself verifies both uniqueness and injection. [F1, step 1.1]
 
 3.1 In transitive domains containing $a,b,f$, F2 preserves these bounded graph tests. If the smaller domain contains the displayed witness $f$, F3 transfers the sentence $\exists f\,(f:a\hookrightarrow b)$ upward by retaining it. If only $a,b$ are present, graph absoluteness alone neither constructs $f$ in that domain nor supplies downward transfer of its existence. [F2, F3, step 2.1] ∎
-

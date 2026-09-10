@@ -1,7 +1,7 @@
 ---
 page: borel-analytic-sets-perfect-sets-and-determinacy-examples
 title: "Borel and Analytic Sets, Perfect Sets, and Determinacy: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: ["ex-empty-and-single-branch-tree-bodies", "ex-first-move-clopen-game", "cex-taboo-winning-positions-need-not-contain-their-children", "fs-every-set-of-reals-is-borel", "ex-well-founded-borel-code-for-a-closed-basic-complement"]
 ---

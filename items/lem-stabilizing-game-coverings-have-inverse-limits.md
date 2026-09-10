@@ -2,7 +2,7 @@
 id: lem-stabilizing-game-coverings-have-inverse-limits
 kind: lemma
 title: "Stabilizing systems of game coverings have inverse limits"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-game-covering-and-k-covering", "lem-game-covering-composition-and-continuity", "def-axiom-of-choice", "thm-transfinite-recursion"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

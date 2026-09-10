@@ -2,7 +2,7 @@
 id: thm-lob-from-derivability-conditions
 kind: theorem
 title: "Löb theorem"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-arithmetic-diagonal-lemma, thm-hilbert-bernays-lob-derivability-conditions]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

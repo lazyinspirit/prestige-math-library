@@ -4,6 +4,7 @@ kind: definition
 title: Convergence in distribution of random elements
 deps: ["def-law-or-distribution-of-a-random-element", "def-weak-convergence-of-borel-probability-measures"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: draft
+status: published
 origin: pipeline
 ---
 

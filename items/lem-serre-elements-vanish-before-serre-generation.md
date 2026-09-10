@@ -2,13 +2,14 @@
 id: lem-serre-elements-vanish-before-serre-generation
 kind: lemma
 title: "Serre elements vanish before Serre generation"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-kac-moody-opposite-simple-centralizer-vanishes", "def-kac-moody-algebra-associated-to-a-gcm", "def-contragredient-lie-algebra-before-the-maximal-ideal-quotient"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

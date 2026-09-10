@@ -2,13 +2,14 @@
 id: def-realization-of-a-generalized-cartan-matrix
 kind: definition
 title: "Realization of a generalized cartan matrix"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-generalized-cartan-matrix"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

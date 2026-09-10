@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: Laugesen Appendix C proof of Theorem C.6, pp.170–172, equations (C.4)–(C.6); Teschl Theorem 15.2, p.415
       url: https://arxiv.org/pdf/0903.3845
   scraped: []
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

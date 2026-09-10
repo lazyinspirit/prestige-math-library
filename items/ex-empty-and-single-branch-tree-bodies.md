@@ -2,7 +2,7 @@
 id: ex-empty-and-single-branch-tree-bodies
 kind: example
 title: "Empty and single-branch tree codes"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-trees-and-bodies-on-discrete-alphabets"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

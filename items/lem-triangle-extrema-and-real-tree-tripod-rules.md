@@ -2,13 +2,14 @@
 id: "lem-triangle-extrema-and-real-tree-tripod-rules"
 kind: "lemma"
 title: "Triangle extrema and the tripod and branch rules for real trees"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-real-tree-tripods-and-geodesic-triangle-minsize", "def-geodesic-rays-and-lines", "def-complete-ordered-field", "cor-cauchy-reals-lub-complete", "thm-well-ordering-principle"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

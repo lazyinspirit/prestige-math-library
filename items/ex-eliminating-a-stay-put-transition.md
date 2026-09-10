@@ -2,13 +2,14 @@
 id: ex-eliminating-a-stay-put-transition
 kind: example
 title: "Eliminating a stay-put transition at the left boundary"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-stay-put-one-tape-machine-and-run-interface", "lem-stay-put-right-left-macro-simulation"]
 justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

@@ -4,6 +4,7 @@ kind: counterexample
 title: A nontight sequence with no probability law subsequence limit
 deps: ["def-tight-family-of-probability-measures", "thm-portmanteau-theorem", "thm-continuity-from-below-for-measures", "thm-compact-subset-is-closed-and-bounded"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

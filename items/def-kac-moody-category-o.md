@@ -2,13 +2,14 @@
 id: def-kac-moody-category-o
 kind: definition
 title: "Kac moody category o"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-kac-moody-root-spaces-are-finite-dimensional", "def-kac-moody-root-lattice-height-and-positive-cone"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

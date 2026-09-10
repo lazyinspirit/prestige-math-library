@@ -2,7 +2,9 @@
 id: lem-boone-positive-history-reconstruction
 kind: lemma
 title: "Boone positive history reconstruction"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: ["lem-boone-commutator-extracts-an-auxiliary-history", "lem-boone-reduced-auxiliary-words-have-no-rule-pinches", "lem-boone-positive-history-pushing", "lem-boone-hnn-tower-and-auxiliary-subgroups", "def-axiom-of-choice", "lem-boone-base-groups-and-associated-free-bases", "thm-normal-form-for-free-products", "thm-brittons-lemma", "def-boone-machine-semigroup-and-augmented-configurations", "def-boone-group-presentation-and-special-word"]
 justified_by: []

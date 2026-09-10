@@ -2,7 +2,7 @@
 id: thm-ad-implies-baire-property
 kind: theorem
 title: "AD implies the Baire property for subsets of sequence spaces and the real line"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-banach-mazur-game-category-characterization", "thm-ad-implies-countable-choice-for-baire-space", "def-property-of-baire-for-subsets", "def-axiom-of-determinacy-for-natural-number-games"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

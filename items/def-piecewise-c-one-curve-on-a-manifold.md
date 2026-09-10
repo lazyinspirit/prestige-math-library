@@ -10,7 +10,9 @@ sources:
   references:
     - title: "John M. Lee, Introduction to Smooth Manifolds, second edition"
       url: "https://dokumen.pub/introduction-to-smooth-manifolds-2nd-ed-9781441999818-9781441999825-1441999817-1441999825.html"
-status: "draft"
+status: published
+verification:
+  audited: 2026-09-10
 origin: "pipeline"
 ---
 

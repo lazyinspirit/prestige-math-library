@@ -2,7 +2,7 @@
 id: lem-koszul-homology-finite-length-for-an-ideal-of-definition
 kind: lemma
 title: "koszul homology finite length for an ideal of definition"
-status: draft
+status: published
 origin: pipeline
 deps: [def-koszul-euler-characteristic-and-degree-indexed-multiplicity, cor-sequence-ideal-annihilates-koszul-homology, thm-finitely-generated-modules-over-noetherian-rings-are-noetherian, thm-support-and-annihilator-of-a-finite-module, thm-nakayama-lemma, cor-length-is-additive-in-short-exact-sequences, def-axiom-of-choice, thm-radical-as-intersection-of-primes, cor-koszul-homology-localises, thm-localisation-of-modules-is-exact, thm-noetherian-ring-ideal-characterisations, def-koszul-complex-of-a-sequence-with-coefficients]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

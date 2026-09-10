@@ -2,7 +2,7 @@
 id: lem-pid-submodules-of-free-modules-are-free-with-choice
 kind: lemma
 title: "Under Choice, a submodule of an arbitrary-rank free module over a PID is free"
-status: draft
+status: published
 origin: pipeline
 deps: [def-principal-ideal-domain, def-free-module-on-a-set-and-standard-basis, def-axiom-of-choice, thm-well-ordering-theorem, thm-transfinite-induction]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

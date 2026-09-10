@@ -2,7 +2,7 @@
 id: thm-conditional-expectation-is-the-l2-orthogonal-projection
 kind: theorem
 title: "Conditional expectation is the l2 orthogonal projection"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-conditional-lp-contraction, lem-conditioning-a-known-variable-and-an-independent-variable, thm-taking-out-what-is-known, cor-cauchy-schwarz-inequality-for-l-two, thm-riesz-fischer-completeness-of-l-p, def-axiom-of-choice, thm-basic-algebra-and-order-properties-of-conditional-expectation]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

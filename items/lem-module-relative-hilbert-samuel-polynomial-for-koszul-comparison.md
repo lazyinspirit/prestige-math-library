@@ -2,7 +2,7 @@
 id: lem-module-relative-hilbert-samuel-polynomial-for-koszul-comparison
 kind: lemma
 title: "The module-relative Hilbert–Samuel polynomial exists without a dimension theorem"
-status: draft
+status: published
 origin: pipeline
 deps: [def-associated-graded-ring-and-module, def-composition-series-and-length-of-a-module, cor-length-is-additive-in-short-exact-sequences, thm-hilbert-basis-theorem, thm-finitely-generated-modules-over-noetherian-rings-are-noetherian, thm-noetherian-ring-quotients-and-localisations, def-local-ring, thm-noetherian-ring-ideal-characterisations]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

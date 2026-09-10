@@ -2,13 +2,14 @@
 id: "lem-relator-disks-give-area-controlled-coarse-fillings"
 kind: "lemma"
 title: "Algebraic relator area controls coarse filling area"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-singular-planar-diagrams-have-controlled-coarse-disk-thickenings", "def-bounded-edge-coarse-triangular-filling", "thm-well-ordering-principle", "thm-the-word-metric-is-a-left-invariant-metric-and-is-the-path-metric-of-the-cayley-graph", "lem-relator-expressions-give-controlled-singular-planar-diagrams", "prop-normal-closure-is-products-of-conjugates", "def-group-presentation"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

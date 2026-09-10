@@ -2,7 +2,7 @@
 id: lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces
 kind: lemma
 title: "A free PID complex decomposes into two-term cycle-boundary pieces"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, lem-cycle-boundary-short-exact-sequences-for-a-free-complex-over-a-pid, lem-pid-submodules-of-free-modules-are-free-with-choice, thm-free-modules-are-projective-with-choice-boundary]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

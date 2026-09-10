@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: Hatcher, Algebraic Topology, Chapter 4
       url: https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf
       locator: §4.1, Definitions and Basic Constructions, pp.340–346
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

@@ -2,7 +2,7 @@
 id: def-analytic-and-coanalytic-by-closed-projection
 kind: definition
 title: "Analytic and coanalytic sets by closed projection"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-polish-space", "def-baire-sequence-space", "def-product-topology"]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

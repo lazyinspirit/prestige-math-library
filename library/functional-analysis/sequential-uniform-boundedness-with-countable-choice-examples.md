@@ -1,7 +1,7 @@
 ---
 page: sequential-uniform-boundedness-with-countable-choice-examples
 title: "Sequential Uniform Boundedness with Countable Choice: Examples"
-status: draft
+status: published
 items: []
 examples: [ex-sequential-uniform-boundedness-for-coordinate-partial-sums, cex-sequential-uniform-boundedness-needs-a-complete-domain]
 ---

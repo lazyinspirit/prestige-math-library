@@ -2,13 +2,14 @@
 id: "lem-bounded-real-ultralimits-and-free-tail-extension"
 kind: "lemma"
 title: "Free tail ultrafilters and bounded real ultralimit calculus"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-rescaled-ultralimit-and-asymptotic-cone", "thm-ultrafilter-lemma", "thm-ultrafilter-characterisation", "def-complete-ordered-field", "def-axiom-of-choice", "cor-cauchy-reals-lub-complete", "lem-cauchy-away-from-zero", "thm-cauchy-ring", "lem-null-ideal", "lem-rat-triangle", "def-null-sequence", "thm-rat-ordered-field"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

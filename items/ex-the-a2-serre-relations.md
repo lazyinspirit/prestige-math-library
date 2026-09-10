@@ -2,13 +2,14 @@
 id: ex-the-a2-serre-relations
 kind: example
 title: "The a2 serre relations"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-serre-presentation-of-a-kac-moody-algebra"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

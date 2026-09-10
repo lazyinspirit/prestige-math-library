@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: May, A Concise Course in Algebraic Topology
       url: https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf
       locator: Chapter 6 §3 p.45; Chapter 8 §4 p.59
-status: draft
+status: published
 origin: pipeline
 ---
 

@@ -4,6 +4,7 @@ kind: lemma
 title: Summability of truncated normalized variances
 deps: ["def-truncation-at-a-fixed-level", "lem-variance-and-covariance-identities-for-random-variables", "thm-change-of-variables-for-expectation", "thm-monotone-convergence-for-the-integral", "thm-integral-test-for-series", "lem-integer-part"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

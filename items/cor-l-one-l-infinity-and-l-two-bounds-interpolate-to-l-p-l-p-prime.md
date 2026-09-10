@@ -8,6 +8,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
     - title: Laugesen Theorem C.6 pp.168–173; Teschl Corollary 15.4 p.415 as application motivation
       url: https://arxiv.org/pdf/0903.3845
   scraped: []
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

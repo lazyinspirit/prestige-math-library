@@ -1,7 +1,7 @@
 ---
 page: "weak-convergence-tightness-and-representation"
 title: "Weak Convergence Tightness and Representation"
-status: "draft"
+status: published
 items: ["def-borel-probability-law-on-a-polish-space", "def-weak-convergence-of-borel-probability-measures", "def-convergence-in-distribution-of-random-elements", "thm-portmanteau-theorem", "lem-real-cdf-and-bounded-continuous-definitions-agree", "cor-weak-limits-are-unique", "thm-continuous-mapping-theorem", "thm-converging-together-lemma", "def-tight-family-of-probability-measures", "def-relative-sequential-compactness-for-weak-convergence", "thm-every-borel-probability-on-a-polish-space-is-tight", "lem-countable-uniformly-dense-tests-on-a-compact-metric-space", "lem-probability-laws-on-a-compact-metric-space-have-weakly-convergent-subsequences", "thm-prokhorov-tightness-theorem-on-polish-spaces", "cor-weakly-convergent-sequences-are-tight", "cor-tightness-extracts-a-weakly-convergent-subsequence", "def-levy-prokhorov-metric", "lem-levy-prokhorov-distance-is-a-metric", "lem-countable-boundary-null-partitions-of-a-separable-metric-space", "thm-levy-prokhorov-metric-metrizes-weak-convergence", "lem-interval-realization-from-refining-small-diameter-partitions", "thm-skorokhod-representation-on-polish-spaces", "rem-skorokhod-representation-does-not-couple-the-original-variables", "lem-countable-compactly-supported-tests-determine-euclidean-weak-convergence", "thm-empirical-measures-of-iid-euclidean-samples-converge-weakly", "lem-normal-density-has-total-mass-one", "def-standard-normal-and-normal-laws"]
 examples: []
 ---

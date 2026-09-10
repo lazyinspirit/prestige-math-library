@@ -2,13 +2,14 @@
 id: "lem-rescaled-ultradistance-is-a-quotient-metric"
 kind: "lemma"
 title: "The rescaled ultradistance defines a metric"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-rescaled-ultralimit-and-asymptotic-cone", "lem-bounded-real-ultralimits-and-free-tail-extension", "def-metric-space"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

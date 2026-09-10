@@ -2,7 +2,9 @@
 id: ex-a-symmetrizable-indefinite-rank-two-gcm
 kind: example
 title: "A symmetrizable indefinite rank two gcm"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: ["thm-serre-presentation-of-a-kac-moody-algebra", "thm-invariant-bilinear-form-for-a-symmetrizable-kac-moody-algebra", "def-real-and-imaginary-kac-moody-roots", "thm-finite-affine-indefinite-trichotomy-for-indecomposable-gcms"]
 provenance:

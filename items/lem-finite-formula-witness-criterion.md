@@ -2,7 +2,7 @@
 id: lem-finite-formula-witness-criterion
 kind: lemma
 title: "A finite witness criterion for reflection"
-status: draft
+status: published
 origin: pipeline
 deps: [def-set-theoretic-levy-hierarchy-and-absoluteness, thm-structural-recursion-on-set-coded-syntax]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -38,4 +39,3 @@ Let $\Phi$ be a finite family of membership formulas closed under subformulas, a
 1.2 Conversely assume the witness condition. Atomic equality and membership agree by restriction. Constructor induction (F1) gives agreement for negation and conjunction from agreement of their subformulas, since the Boolean truth tables are the same. [F1, given]
 
 2.1 For an existential with parameters in $C$, a witness in $C$ for its truth in $C$ satisfies the matrix in $D$ by induction, so also witnesses truth in $D$. If it is true in $D$, the stipulated witness condition gives $b\in C$ satisfying the matrix in $D$, and induction transfers the matrix to $C$. Thus the existential agrees in both directions. Subformula closure licenses each invocation of induction. This proves sufficiency and the equivalence; the finite class version uses the same fixed list of relativizations. [step 1.1, step 1.2, given] ∎
-

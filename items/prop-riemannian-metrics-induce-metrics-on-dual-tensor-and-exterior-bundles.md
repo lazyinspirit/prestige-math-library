@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       url: "https://dokumen.pub/introduction-to-smooth-manifolds-2nd-ed-9781441999818-9781441999825-1441999817-1441999825.html"
     - title: "Ved Datar, Lectures on Riemannian Geometry, September 2025"
       url: "https://math.iisc.ac.in/~vvdatar/Lecture_Notes/RG_Lectures_typesett_published.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

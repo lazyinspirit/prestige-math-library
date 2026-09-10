@@ -2,7 +2,9 @@
 id: lem-boone-commutator-extracts-an-auxiliary-history
 kind: lemma
 title: "Boone commutator extracts an auxiliary history"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: ["lem-boone-hnn-tower-and-auxiliary-subgroups", "thm-brittons-lemma", "def-axiom-of-choice"]
 justified_by: []

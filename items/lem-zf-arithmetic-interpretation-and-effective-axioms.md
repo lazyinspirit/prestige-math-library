@@ -2,7 +2,7 @@
 id: lem-zf-arithmetic-interpretation-and-effective-axioms
 kind: lemma
 title: "ZF has an effective standard arithmetic interpretation"
-status: draft
+status: published
 origin: pipeline
 deps: [def-robinson-q-and-peano-arithmetic, def-effective-interpretation-and-proof-translation, lem-primitive-recursive-syntax-and-proof-checking, def-coded-first-order-zf-theory, thm-recursion, thm-induction-principle, thm-hilbert-bernays-lob-derivability-conditions]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -101,4 +102,3 @@ Use def-set-coded-formal-derivation for the six logical schemes and three rules.
 2.1 For a fixed arithmetic formula phi and its translated parameters, Separation forms $A=\{n\in\omega:\phi^I(n,\bar p)\}$. The translated induction antecedent says $0\in A$ and that A is successor-closed. F5 gives A=omega, precisely the induction conclusion. This construction works for every formula with its parameters and uses no Choice. The domain is nonempty because 0 belongs to omega. [F1, F5, step 1.2]
 
 3.1 The formula-to-Separation-instance map consists of the fixed relativization/term-graph templates and the least-fresh-variable operations of F2. The proof of its induction conclusion is a fixed proof template using that Separation instance and the fixed omega-induction theorem. Consequently its code and schema certificate are primitive-recursive functions of the formula code. The finitely many Q-axiom translation blocks are fixed; replacing each PA-axiom line by the corresponding block, shifting premise indices, and appending the translated logical-rule blocks constructs the arithmetic proof map. Induction over the source lines verifies this map in the interpreted PA arithmetic: a schema line passes the explicit schema test in step 1.1, a fixed line uses its fixed certificate, and a rule line has exactly the shifted earlier premises. The primitive-recursive arithmetic/list constructors are total there by the representation construction and PA induction. Thus the standard checks meet the formalization requirements of F7, giving D1–D3 for ZF, ZFC and their finite effective extensions. [F2, F7, step 1.1, step 1.2, step 2.1] ∎
-

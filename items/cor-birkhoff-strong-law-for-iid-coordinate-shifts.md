@@ -4,6 +4,7 @@ kind: corollary
 title: Birkhoff strong law for iid coordinate shifts
 deps: ["thm-birkhoff-ergodic-probability-case-for-strong-laws", "thm-countable-product-of-probability-spaces", "cor-coordinate-random-elements-on-a-countable-product-are-independent", "thm-kolmogorov-zero-one-law", "thm-measure-preservation-on-a-generating-pi-system", "def-ergodic-measure-preserving-system", "def-axiom-of-choice", "def-countable-choice", "def-dependent-choice", "thm-recursion"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

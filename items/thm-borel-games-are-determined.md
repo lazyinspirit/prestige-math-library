@@ -2,7 +2,7 @@
 id: thm-borel-games-are-determined
 kind: theorem
 title: "Borel games are determined"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-borel-payoffs-admit-unraveling-covers", "cor-unraveling-covers-give-determinacy", "def-axiom-of-choice"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

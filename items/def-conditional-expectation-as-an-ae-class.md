@@ -2,13 +2,14 @@
 id: def-conditional-expectation-as-an-ae-class
 kind: definition
 title: "Conditional expectation as an ae class"
-status: draft
+status: published
 origin: pipeline
 deps: [def-conditional-expectation-given-a-sigma-algebra, thm-conditional-expectation-exists-by-radon-nikodym, lem-conditional-expectation-is-unique-almost-surely, def-l-p-space-as-a-quotient-by-null-functions, thm-the-lebesgue-integral-respects-almost-everywhere-equality, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

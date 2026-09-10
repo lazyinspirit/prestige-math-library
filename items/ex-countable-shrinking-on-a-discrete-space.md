@@ -2,7 +2,7 @@
 id: ex-countable-shrinking-on-a-discrete-space
 kind: example
 title: A countable shrinking computed
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-paracompactness-and-dowker-space]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

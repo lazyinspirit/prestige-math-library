@@ -2,7 +2,9 @@
 id: def-boone-group-presentation-and-special-word
 kind: definition
 title: "Boone group presentation and special word"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: ["def-boone-machine-semigroup-and-augmented-configurations", "def-recursive-and-finite-group-presentations"]
 justified_by: []

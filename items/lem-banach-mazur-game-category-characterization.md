@@ -2,7 +2,7 @@
 id: lem-banach-mazur-game-category-characterization
 kind: lemma
 title: "Category-game strategies characterize meagreness and local comeagreness"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-banach-mazur-category-game", "def-nowhere-dense-meagre-and-residual-subsets", "thm-recursion"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -4,6 +4,7 @@ kind: lemma
 title: Interval realization from refining small diameter partitions
 deps: ["lem-countable-boundary-null-partitions-of-a-separable-metric-space", "cor-weak-limits-are-unique", "thm-dominated-convergence", "def-complete-metric-space", "def-axiom-of-choice", "thm-lebesgue-measure-of-a-box-of-every-kind", "prop-countable-subsets-of-rn-are-lebesgue-null", "def-countable-choice"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

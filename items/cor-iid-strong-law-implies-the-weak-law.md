@@ -4,6 +4,7 @@ kind: corollary
 title: Iid strong law implies the weak law
 deps: ["thm-kolmogorov-iid-l1-strong-law", "thm-almost-sure-convergence-implies-convergence-in-probability"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

@@ -2,7 +2,7 @@
 id: ex-pid-polynomial-ring-kunneth-tor-class
 kind: example
 title: "A polynomial PID has a nonzero Kunneth Tor class"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-pid-kunneth-exactness-from-cycle-boundary-presentations, thm-pid-kunneth-splitting-from-cycle-boundary-presentations, def-balanced-tor-bifunctor, thm-polynomial-degree-of-a-product-over-a-domain, thm-polynomial-division-algorithm-over-a-field, thm-euclidean-domain-is-a-pid, lem-pid-tensor-two-term-pieces-have-the-kunneth-kernel-and-cokernel, thm-recursion, def-dependent-choice]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

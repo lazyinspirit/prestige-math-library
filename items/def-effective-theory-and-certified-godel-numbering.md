@@ -2,7 +2,7 @@
 id: def-effective-theory-and-certified-godel-numbering
 kind: definition
 title: "Effective theories and certified numerical proof codes"
-status: draft
+status: published
 origin: pipeline
 deps: [def-bounded-arithmetic-formula, def-set-coded-formal-derivation]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "not-applicable"
 justified_by: [lem-certified-syntax-coding-operations-are-primitive-recursive]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

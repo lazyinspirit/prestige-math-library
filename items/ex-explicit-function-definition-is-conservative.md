@@ -2,7 +2,7 @@
 id: ex-explicit-function-definition-is-conservative
 kind: example
 title: "A uniquely defined function adds no old-language theorems"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-explicit-definitions-give-conservative-extensions, def-robinson-q-and-peano-arithmetic]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -47,4 +48,3 @@ Use def-set-coded-formal-derivation for the six logical schemes and three rules.
 1.1 Use the graph $F(x,y):=y=x+x$. For every x, taking the term x+x gives existence, and equality transitivity gives uniqueness. Hence F1 applies. Eliminating f from $f(\bar2)=\bar4$ gives $\exists y(y=\bar2+\bar2\land y=\bar4)$, equivalent to $\bar2+\bar2=\bar4$. By the addition axioms F2, $\bar2+S(S0)=S(\bar2+S0)=S(S(\bar2+0))=S(S\bar2)=\bar4$. [F1, F2, given]
 
 2.1 At zero the same graph gives $f(0)=0+0=0$. At one, $f(S0)=S0+S0=S(S0+0)=S(S0)=\bar2$. In contrast the formulas $\bar n<c$ form a separate infinite family indexed externally by n; they contain no old-language uniquely total defining graph for c as specified. The conservativity conclusion above comes from the displayed graph F, not from misclassifying that family as one defining equation. [F2, step 1.1] ∎
-

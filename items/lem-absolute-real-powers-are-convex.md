@@ -2,7 +2,7 @@
 id: lem-absolute-real-powers-are-convex
 kind: lemma
 title: "Absolute real powers are Borel measurable and convex"
-status: draft
+status: published
 origin: pipeline
 deps: [def-real-power, thm-real-power-continuity-and-derivatives, thm-natural-logarithm-laws, thm-exponential-is-strictly-increasing, cor-exponential-reciprocal-and-positivity, thm-algebra-of-derivatives, thm-monotonicity-from-the-derivative, cor-second-derivative-characterises-convexity, def-convex-concave-and-midpoint-convex-functions, lem-of-triangle-inequality, lem-of-abs-value, thm-algebra-of-continuous-functions, thm-squeeze-for-function-limits, thm-continuous-preimages-of-borel-sets-are-borel, def-measurable-function-between-measurable-spaces, def-natural-logarithm]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

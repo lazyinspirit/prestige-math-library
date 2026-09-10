@@ -2,7 +2,7 @@
 id: ex-finite-boolean-quotient-and-dual-map
 kind: example
 title: A finite quotient and its dual inclusion
-status: draft
+status: published
 origin: pipeline
 deps: [lem-boolean-quotient-congruence, def-boolean-homomorphism-and-quotient, def-stone-ultrafilter-space-and-clopens, lem-finite-boolean-algebras-are-powersets-of-atoms]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

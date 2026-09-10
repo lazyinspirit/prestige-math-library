@@ -1,7 +1,7 @@
 ---
 page: kunneth-exactness-and-splittings-over-principal-ideal-domains
 title: "Kunneth Exactness and Splittings over Principal Ideal Domains"
-status: draft
+status: published
 items: ["lem-pid-submodules-of-free-modules-are-free-with-choice", "lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces", "lem-pid-tensor-two-term-pieces-have-the-kunneth-kernel-and-cokernel", "thm-pid-kunneth-exactness-from-cycle-boundary-presentations", "thm-pid-kunneth-splitting-from-cycle-boundary-presentations"]
 examples: []
 ---

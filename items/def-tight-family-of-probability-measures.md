@@ -4,6 +4,7 @@ kind: definition
 title: Tight family of probability measures
 deps: ["def-metric-compactness", "def-probability-measure"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: draft
+status: published
 origin: pipeline
 ---
 

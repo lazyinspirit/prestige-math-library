@@ -2,7 +2,7 @@
 id: cex-conditioning-does-not-preserve-strict-inequalities
 kind: counterexample
 title: "Conditioning does not preserve strict inequalities"
-status: draft
+status: published
 origin: pipeline
 deps: [def-conditional-expectation-as-an-ae-class, thm-basic-algebra-and-order-properties-of-conditional-expectation, def-axiom-of-choice]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: counterexample
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

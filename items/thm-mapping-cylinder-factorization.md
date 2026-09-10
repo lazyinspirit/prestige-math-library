@@ -11,7 +11,9 @@ sources:
     - title: May, A Concise Course in Algebraic Topology
       url: https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf
       locator: Chapter 6 §3 p.45
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 proof_strategy: direct
 ---

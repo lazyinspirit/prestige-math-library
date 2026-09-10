@@ -1,7 +1,7 @@
 ---
 page: blocks-defect-groups-and-the-brauer-homomorphism
 title: Blocks Defect Groups and the Brauer Homomorphism
-status: draft
+status: published
 items:
   - def-block-bimodule-for-the-double-group
   - lem-group-algebra-bimodule-is-induced-from-the-diagonal

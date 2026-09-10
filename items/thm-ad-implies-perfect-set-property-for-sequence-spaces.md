@@ -2,7 +2,9 @@
 id: thm-ad-implies-perfect-set-property-for-sequence-spaces
 kind: theorem
 title: "AD gives the perfect-set property in sequence spaces and the real line"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: ["def-axiom-of-determinacy-for-natural-number-games", "lem-perfect-set-game-strategy-dichotomy", "lem-cantor-and-baire-sequence-coding", "lem-dyadic-coding-coin-measure-and-lebesgue-transfer", "thm-ad-implies-countable-choice-for-baire-space", "thm-of-archimedean"]
 justified_by: []

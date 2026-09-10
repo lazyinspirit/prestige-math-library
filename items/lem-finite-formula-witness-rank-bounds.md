@@ -2,7 +2,7 @@
 id: lem-finite-formula-witness-rank-bounds
 kind: lemma
 title: "Least witness ranks give choice-free bounds"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-finite-formula-witness-criterion, prop-minimum-rank-selection-and-collection, thm-membership-rank-and-hierarchy-levels]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

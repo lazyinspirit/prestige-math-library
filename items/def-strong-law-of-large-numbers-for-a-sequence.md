@@ -4,6 +4,7 @@ kind: definition
 title: Strong law of large numbers for a sequence
 deps: ["def-partial-sums-and-sample-means", "def-almost-sure-convergence-of-random-variables", "def-expectation-of-a-nonnegative-or-integrable-random-variable"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: draft
+status: published
 origin: pipeline
 ---
 

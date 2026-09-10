@@ -2,7 +2,7 @@
 id: thm-rank-and-hierarchy-membership-absoluteness
 kind: theorem
 title: "Ranks agree and hierarchy membership is absolute"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-ordinals-and-omega-are-absolute-in-transitive-models, lem-bounded-definitions-of-basic-set-operations, def-membership-rank-of-a-set, thm-membership-rank-and-hierarchy-levels]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -54,4 +55,3 @@ Thus $\operatorname{rank}(x)$ is the least $\alpha$ with $x\subseteq V_\alpha$, 
 2.1 By F2, each rank of $x$ is the supremum of the predecessor ranks plus one. Ordinal successor and union have their actual values by F3, so both suprema are the same actual ordinal. For $x=\varnothing$ both are the empty supremum $0$. Foundation validates this external induction, proving rank agreement for every $x\in M$. [F2, F3, step 1.1]
 
 3.1 For $x\in M$, F4 applied inside the two ZF models gives $x\in(V_\alpha)^M\leftrightarrow\operatorname{rank}^M(x)<\alpha\leftrightarrow\operatorname{rank}^N(x)<\alpha\leftrightarrow x\in(V_\alpha)^N$. Also every element of $(V_\alpha)^M$ belongs to $M$ by transitivity. These two statements give precisely the displayed intersection equality. [F4, step 2.1] ∎
-

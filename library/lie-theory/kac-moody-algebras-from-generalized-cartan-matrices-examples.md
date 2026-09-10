@@ -1,7 +1,7 @@
 ---
 page: "kac-moody-algebras-from-generalized-cartan-matrices-examples"
 title: "Kac Moody Algebras from Generalized Cartan Matrices — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-rank-one-gcm-recovers-sl2", "ex-the-a2-serre-relations", "ex-the-affine-a1-gcm-has-singular-rank-one-realization-data", "ex-a-symmetrizable-indefinite-rank-two-gcm", "cex-a-matrix-with-one-zero-off-diagonal-is-not-a-gcm", "cex-imaginary-root-spaces-need-not-have-multiplicity-one"]
 ---

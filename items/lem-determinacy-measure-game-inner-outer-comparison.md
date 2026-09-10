@@ -2,7 +2,7 @@
 id: lem-determinacy-measure-game-inner-outer-comparison
 kind: lemma
 title: "Winning measure-game strategies bound inner and outer measure"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-rational-determinacy-measure-game", "lem-dyadic-coding-coin-measure-and-lebesgue-transfer", "thm-rationals-countable", "lem-rat-embeds-dense", "thm-recursion"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

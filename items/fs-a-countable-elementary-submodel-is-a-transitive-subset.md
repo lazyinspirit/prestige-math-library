@@ -2,7 +2,7 @@
 id: fs-a-countable-elementary-submodel-is-a-transitive-subset
 kind: false-statement
 title: "A countable elementary submodel need not be transitive"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-countable-elementary-submodels-and-transitive-collapses, lem-collapse-fixes-transitive-parts-and-orders-ordinals, def-axiom-of-choice, thm-hartogs]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -55,4 +56,3 @@ ordinal too long to be laid inside $A$.
 2.1 If $X$ were transitive, $\kappa\in X$ would imply $\kappa\subseteq X$. Composing this inclusion with a countability injection $X\to\omega$ would inject $\kappa$ into $\omega$, contradicting its definition. Thus this $X$ satisfies the hypotheses of the proposed assertion and fails its conclusion. [step 1.1, algebra]
 
 3.1 F3 computes the collapse value of $\kappa$ as $\operatorname{ot}(X\cap\kappa)$, a countable ordinal because the trace is countable. It cannot equal the uncountable $\kappa$. The transitive collapse is therefore a different membership presentation, as required. [F3, step 1.1, step 2.1] ∎
-

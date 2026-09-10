@@ -2,7 +2,7 @@
 id: cor-standard-borel-spaces-have-countable-generating-and-measure-determining-algebras
 kind: corollary
 title: "Standard borel spaces have countable generating and measure determining algebras"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-standard-borel-spaces-admit-bimeasurable-real-codings, thm-dynkin-pi-lambda, thm-seven-generators-of-the-borel-sigma-algebra-on-r, def-axiom-of-choice, thm-rationals-countable, thm-countable-union-of-countable, def-countable-choice, lem-rat-embeds-dense]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

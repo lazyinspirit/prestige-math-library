@@ -4,6 +4,7 @@ kind: lemma
 title: Countable compactly supported tests determine euclidean weak convergence
 deps: ["def-weak-convergence-of-borel-probability-measures", "thm-portmanteau-theorem", "thm-heine-borel-rn", "thm-monotone-convergence-for-the-integral"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

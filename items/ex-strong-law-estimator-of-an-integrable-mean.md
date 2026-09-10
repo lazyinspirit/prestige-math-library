@@ -4,6 +4,7 @@ kind: example
 title: Strong law estimator of an integrable mean
 deps: ["thm-kolmogorov-iid-l1-strong-law", "cor-countable-independent-copies-exist", "thm-probability-law-and-distribution-function-correspondence", "cor-layer-cake-formulas-for-random-variables", "thm-layer-cake-formula-for-l-p-powers", "def-real-power", "thm-real-power-continuity-and-derivatives", "def-countable-choice", "def-axiom-of-choice", "thm-ftc-second-part", "thm-continuous-implies-integrable", "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral", "thm-monotone-convergence-for-the-integral", "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure", "thm-measure-uniqueness-on-a-sigma-finite-pi-system", "def-dependent-choice", "thm-recursion"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

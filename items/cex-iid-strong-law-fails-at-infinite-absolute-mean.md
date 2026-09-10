@@ -4,6 +4,7 @@ kind: counterexample
 title: Iid strong law fails at infinite absolute mean
 deps: ["cor-countable-independent-copies-exist", "thm-integrability-is-necessary-for-an-iid-finite-mean-strong-law", "thm-independent-random-elements-have-product-joint-law", "thm-tonelli-theorem-for-sigma-finite-product-spaces", "thm-change-of-variables-for-expectation", "thm-probability-law-and-distribution-function-correspondence", "thm-principal-inverse-tangent-calculus", "thm-substitution-for-improper-integrals", "thm-logarithm-derivative-and-integral", "thm-natural-logarithm-laws", "def-countable-choice", "def-axiom-of-choice", "thm-ftc-second-part", "thm-continuous-implies-integrable", "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral", "thm-monotone-convergence-for-the-integral", "thm-indefinite-integral-of-a-nonnegative-function-is-a-measure", "thm-measure-uniqueness-on-a-sigma-finite-pi-system", "def-dependent-choice", "thm-recursion", "def-principal-inverse-tangent", "thm-lebesgue-measure-of-a-box-of-every-kind"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

@@ -2,13 +2,14 @@
 id: "ex-euclidean-triangle-has-positive-linear-minsize"
 kind: "example"
 title: "A Euclidean right triangle has minsize proportional to its scale"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-real-tree-tripods-and-geodesic-triangle-minsize", "lem-metrics-on-rn", "thm-of-square-roots"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

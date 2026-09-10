@@ -2,7 +2,7 @@
 id: lem-hilbert-cube-has-a-bimeasurable-real-coding
 kind: lemma
 title: "Hilbert cube has a bimeasurable real coding"
-status: draft
+status: published
 origin: pipeline
 deps: [def-borel-sigma-algebra, def-product-topology, thm-seven-generators-of-the-borel-sigma-algebra-on-r, thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable, thm-geometric-series, thm-rationals-countable, lem-rat-embeds-dense, lem-integer-part, def-integer-power, thm-n-cross-n-countable]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

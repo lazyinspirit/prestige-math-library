@@ -2,7 +2,7 @@
 id: ex-euclidean-borel-spaces-are-standard-borel
 kind: example
 title: "Euclidean borel spaces are standard borel"
-status: draft
+status: published
 origin: pipeline
 deps: [def-standard-borel-space, def-polish-space, thm-reals-cauchy-complete, thm-rationals-countable, lem-rat-embeds-dense, lem-metrics-on-rn, thm-product-of-countable]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -8,6 +8,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
     - title: E–W Lemma 2.6, pp.15–16
       url: https://maths.qmul.ac.uk/~fvivaldi/teaching/ETAD/NotesI.pdf
   scraped: []
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

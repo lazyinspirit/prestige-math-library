@@ -1,7 +1,7 @@
 ---
 page: one-tape-simulation-normal-forms-examples
 title: "One-Tape Simulation Normal Forms: Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-eliminating-a-stay-put-transition", "cex-deleting-stay-put-moves-does-not-preserve-computation"]
 ---

@@ -2,7 +2,9 @@
 id: lem-nonsingular-indecomposable-kac-moody-algebras-are-simple
 kind: lemma
 title: "Nonsingular indecomposable Kac–Moody algebras are simple"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: ["def-kac-moody-algebra-associated-to-a-gcm", "prop-kac-moody-root-spaces-are-finite-dimensional", "prop-minimal-realizations-exist-and-are-unique-up-to-isomorphism", "def-generalized-cartan-matrix"]
 provenance:

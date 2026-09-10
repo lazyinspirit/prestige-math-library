@@ -4,6 +4,7 @@ kind: lemma
 title: The standard normal density has total mass one
 deps: ["thm-gaussian-integral", "thm-substitution", "thm-continuous-implies-integrable", "thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral", "thm-monotone-convergence-for-the-integral", "thm-exponential-definition-equivalence", "thm-derivative-of-exponential", "cor-continuous-functions-are-borel-measurable", "thm-of-square-roots", "prop-order-and-scalar-rules-for-the-nonnegative-integral", "def-axiom-of-choice", "def-countable-choice"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

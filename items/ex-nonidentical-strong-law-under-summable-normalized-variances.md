@@ -4,6 +4,7 @@ kind: example
 title: Nonidentical strong law under summable normalized variances
 deps: ["cor-countable-independent-copies-exist", "thm-kolmogorov-strong-law-under-summable-normalized-variances", "def-probability-measure", "def-expectation-of-a-nonnegative-or-integrable-random-variable", "lem-variance-and-covariance-identities-for-random-variables", "def-real-power", "thm-real-power-laws", "thm-p-series-real-exponents", "def-axiom-of-choice", "def-countable-choice", "def-dependent-choice", "thm-recursion"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

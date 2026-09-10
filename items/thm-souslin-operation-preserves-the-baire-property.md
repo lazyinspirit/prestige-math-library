@@ -2,7 +2,7 @@
 id: thm-souslin-operation-preserves-the-baire-property
 kind: theorem
 title: "The Souslin operation preserves the Baire property"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-baire-property-sigma-algebra-and-borel-regularity", "def-souslin-operation-on-set-schemes", "thm-analytic-sets-are-souslin-operations-on-closed-sets", "def-axiom-of-choice"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: ex-rank-one-gcm-recovers-sl2
 kind: example
 title: "Rank one gcm recovers sl2"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-serre-presentation-of-a-kac-moody-algebra"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

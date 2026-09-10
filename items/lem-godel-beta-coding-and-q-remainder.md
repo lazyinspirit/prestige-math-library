@@ -2,7 +2,7 @@
 id: lem-godel-beta-coding-and-q-remainder
 kind: lemma
 title: "Beta coding and arithmetic sequence witnesses"
-status: draft
+status: published
 origin: pipeline
 deps: [def-robinson-q-and-peano-arithmetic, lem-q-numeral-calculation-and-bounded-cases]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

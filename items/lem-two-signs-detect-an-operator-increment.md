@@ -2,7 +2,7 @@
 id: lem-two-signs-detect-an-operator-increment
 kind: lemma
 title: "Two signs detect an operator increment"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-catchup-24
 deps: [def-bounded-linear-operator]
@@ -15,6 +15,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

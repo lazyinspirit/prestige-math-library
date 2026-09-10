@@ -2,13 +2,14 @@
 id: def-real-and-imaginary-kac-moody-roots
 kind: definition
 title: "Real and imaginary kac moody roots"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-the-weyl-group-preserves-roots-and-root-multiplicities"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: koszul-euler-characteristics-and-hilbert-samuel-multiplicity-examples
 title: "Koszul Euler Characteristics and Hilbert–Samuel Multiplicity — Examples"
-status: draft
+status: published
 items: []
 examples: [ex-koszul-euler-characteristic-empty-sequence, ex-koszul-euler-characteristic-annihilator-correction, ex-koszul-euler-characteristic-redundant-zero-generator]
 ---

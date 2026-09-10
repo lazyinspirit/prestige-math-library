@@ -2,7 +2,9 @@
 id: thm-souslin-operation-preserves-lebesgue-measurability
 kind: theorem
 title: "The Souslin operation preserves Lebesgue measurability"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: ["def-souslin-operation-on-set-schemes", "thm-analytic-sets-are-souslin-operations-on-closed-sets", "cor-lebesgue-outer-measure-is-regular-with-borel-measurable-hulls", "thm-lebesgue-measure-is-a-complete-measure", "thm-borel-sets-are-lebesgue-measurable", "def-caratheodory-measurable-set", "def-axiom-of-choice"]
 justified_by: []

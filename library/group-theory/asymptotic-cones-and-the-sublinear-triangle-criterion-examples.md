@@ -1,7 +1,7 @@
 ---
 page: "asymptotic-cones-and-the-sublinear-triangle-criterion-examples"
 title: "Asymptotic Cones and the Sublinear Triangle Criterion: Examples"
-status: "draft"
+status: published
 items: ["ex-asymptotic-cones-of-lines-and-trees", "ex-euclidean-triangle-has-positive-linear-minsize", "ex-scaling-distinguishes-sublinear-minsize-from-bounded-perimeter"]
 ---
 

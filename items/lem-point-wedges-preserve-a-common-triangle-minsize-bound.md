@@ -2,13 +2,14 @@
 id: "lem-point-wedges-preserve-a-common-triangle-minsize-bound"
 kind: "lemma"
 title: "Point wedges preserve common triangle minsize bounds"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-real-tree-tripods-and-geodesic-triangle-minsize", "lem-triangle-extrema-and-real-tree-tripod-rules", "def-axiom-of-choice"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

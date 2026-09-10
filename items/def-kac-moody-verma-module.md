@@ -2,7 +2,9 @@
 id: def-kac-moody-verma-module
 kind: definition
 title: "Kac moody verma module"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: ["def-kac-moody-category-o", "lem-pbw-for-countably-presented-kac-moody-lie-algebras", "def-universal-enveloping-algebra-as-a-tensor-quotient"]
 provenance:

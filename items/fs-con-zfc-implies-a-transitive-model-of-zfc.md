@@ -2,7 +2,7 @@
 id: fs-con-zfc-implies-a-transitive-model-of-zfc
 kind: false-statement
 title: "Consistency does not justify a transitive ZFC model"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-consistency-does-not-supply-a-transitive-zfc-model]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

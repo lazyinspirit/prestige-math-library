@@ -2,7 +2,7 @@
 id: thm-disjoint-analytic-sets-have-borel-separators
 kind: theorem
 title: "Borel separation of disjoint analytic sets"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-analytic-closed-projection-and-continuous-image-equivalence", "def-countable-borel-hierarchy", "def-axiom-of-choice"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,9 @@
 id: cor-elementary-membership-chains-and-collapse-compatibility
 kind: corollary
 title: "Elementary chains and compatible collapses"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: [thm-elementary-ordinal-chain-union, thm-collapse-of-elementary-membership-submodels]
 provenance:
@@ -35,4 +37,3 @@ A nonempty set-ordinal elementary chain of actual membership structures satisfyi
 2.1 Define $j_{\alpha\beta}=\pi_\beta\circ\iota_{\alpha\beta}\circ\pi_\alpha^{-1}$ and $j_\alpha=\pi\circ\iota_\alpha\circ\pi_\alpha^{-1}$. The inverse and forward collapses are isomorphisms and the inclusions are elementary, so each composite is elementary by the satisfaction equivalences. Its codomain is the corresponding transitive collapse, not the original carrier. [F2, step 1.1]
 
 3.1 For $\alpha\le\beta\le\gamma$, cancellation gives $j_{\beta\gamma}j_{\alpha\beta}=\pi_\gamma\iota_{\beta\gamma}(\pi_\beta^{-1}\pi_\beta)\iota_{\alpha\beta}\pi_\alpha^{-1}=j_{\alpha\gamma}$. The same calculation gives $j_\beta j_{\alpha\beta}=j_\alpha$, and $j_{\alpha\alpha}$ is the identity. This proves coherence without identifying any composite with a literal inclusion. [step 2.1, algebra] ∎
-

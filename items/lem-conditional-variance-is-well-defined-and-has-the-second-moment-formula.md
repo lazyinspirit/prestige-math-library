@@ -2,7 +2,7 @@
 id: lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula
 kind: lemma
 title: "Conditional variance is well-defined and has the second-moment formula"
-status: draft
+status: published
 origin: pipeline
 deps: [def-conditional-variance, thm-taking-out-what-is-known, cor-conditional-lp-contraction, thm-basic-algebra-and-order-properties-of-conditional-expectation, thm-the-lebesgue-integral-respects-almost-everywhere-equality, def-axiom-of-choice, cor-cauchy-schwarz-inequality-for-l-two, lem-conditioning-a-known-variable-and-an-independent-variable]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

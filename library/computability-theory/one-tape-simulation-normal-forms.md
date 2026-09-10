@@ -1,7 +1,7 @@
 ---
 page: one-tape-simulation-normal-forms
 title: "One-Tape Simulation Normal Forms"
-status: draft
+status: published
 items: ["def-stay-put-one-tape-machine-and-run-interface", "lem-stay-put-right-left-macro-simulation", "thm-stay-put-elimination-with-explicit-simulation-interface"]
 examples: []
 ---

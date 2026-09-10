@@ -4,6 +4,7 @@ kind: example
 title: Empirical laws of a finite valued iid sample
 deps: ["thm-empirical-measures-of-iid-euclidean-samples-converge-weakly", "def-weak-convergence-of-borel-probability-measures", "thm-finite-and-countable-subadditivity-of-measures"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

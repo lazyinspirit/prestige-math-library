@@ -2,7 +2,7 @@
 id: lem-levy-sigma-one-existential-normal-form
 kind: lemma
 title: "Sigma-one formulas admit existential bounded matrices"
-status: draft
+status: published
 origin: pipeline
 deps: [def-set-theoretic-levy-hierarchy-and-absoluteness, prop-minimum-rank-selection-and-collection, lem-bounded-definitions-of-basic-set-operations]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -40,4 +41,3 @@ Over ZF, every $\Sigma_1$ formula in the bounded-closure convention is equivalen
 2.1 A bounded existential $\exists x\in a\,\exists\bar u\,\delta$ is $\exists x\bar u(x\in a\land\delta)$. To treat a bounded universal, encode a finite tuple of witnesses as a set using successive ordered pairs, whose coordinate assertions are bounded by F2. For $\forall x\in a\,\exists u\,\delta(x,u)$, Collection (F1) supplies a set $b$ meeting the witness class for every $x\in a$. Thus this formula implies $\exists b\,\forall x\in a\,\exists u\in b\,\delta(x,u)$. Conversely any such $b$ supplies the original witnesses by dropping the bound. If $a=\varnothing$, take $b=\varnothing$. [F1, F2, step 1.1]
 
 3.1 The matrix in the last display is bounded, and decoding a fixed finite tuple adds only bounded quantifiers over its pair components. Induction over the closure clauses now gives the claimed normal form, in both directions at every clause. The only collection of an arbitrary family of witnesses was step 2.1, where Collection selected a bounding set rather than a choice function. [step 1.1, step 2.1] ∎
-

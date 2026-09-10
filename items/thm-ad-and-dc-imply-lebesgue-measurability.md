@@ -2,7 +2,9 @@
 id: thm-ad-and-dc-imply-lebesgue-measurability
 kind: theorem
 title: "Under AD and DC every real set is Lebesgue measurable"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: ["def-axiom-of-determinacy-for-natural-number-games", "def-dependent-choice", "lem-determinacy-measure-game-inner-outer-comparison", "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant", "thm-of-archimedean", "lem-dyadic-coding-coin-measure-and-lebesgue-transfer", "lem-rat-embeds-dense"]
 justified_by: []

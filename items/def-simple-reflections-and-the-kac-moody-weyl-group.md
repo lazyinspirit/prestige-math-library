@@ -2,13 +2,14 @@
 id: def-simple-reflections-and-the-kac-moody-weyl-group
 kind: definition
 title: "Simple reflections and the kac moody weyl group"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-realization-of-a-generalized-cartan-matrix", "def-kac-moody-root-lattice-height-and-positive-cone"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

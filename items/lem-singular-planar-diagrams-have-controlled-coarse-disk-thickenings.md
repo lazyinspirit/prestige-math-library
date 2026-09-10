@@ -2,13 +2,14 @@
 id: "lem-singular-planar-diagrams-have-controlled-coarse-disk-thickenings"
 kind: "lemma"
 title: "Controlled coarse triangulation of singular planar diagrams"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-relator-expressions-give-controlled-singular-planar-diagrams", "def-bounded-edge-coarse-triangular-filling", "lem-finite-polygonal-disk-and-collar-surgery"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

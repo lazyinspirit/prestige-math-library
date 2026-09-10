@@ -11,7 +11,9 @@ sources:
     - title: Hatcher, Algebraic Topology
       url: https://pi.math.cornell.edu/~hatcher/AT/AT.pdf
       locator: Hatcher degree properties p134 and Proposition 2.30/Example 2.31 pp136–137; local signed-bubble proof supplies the converse; Proposition 2.33 p137; finite HEP bridge from May Chapter6 pp43–46
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 proof_strategy: direct
 ---

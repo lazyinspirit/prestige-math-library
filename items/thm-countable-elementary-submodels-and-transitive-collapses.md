@@ -2,7 +2,7 @@
 id: thm-countable-elementary-submodels-and-transitive-collapses
 kind: theorem
 title: "Countable elementary submodels and their collapses"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-collapse-of-elementary-membership-submodels, thm-downward-lowenheim-skolem-with-parameters, def-axiom-of-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -40,4 +41,3 @@ In ZFC, if an infinite set membership structure $M$ satisfies Extensionality, th
 1.1 The language has one binary membership symbol, so $\max(|L|,\aleph_0)=\aleph_0$. As $M$ is infinite, $\aleph_0\le |M|$ in ZFC; the parameter set has size at most $\aleph_0$. F1 therefore applies with $\kappa=\aleph_0$ and gives $A\subseteq X\prec M$ of size exactly $\aleph_0$. The AC premise F3 is used in this supplier to select Skolem witnesses and the size enumerations. [F1, F3, given]
 
 2.1 F2 applies to the actual membership on $X$ and the Extensionality hypothesis on $M$, giving its transitive collapse. The collapse bijection transports the countable enumeration of $X$ to its image. For a named parameter $a$, containment of $\{a\}$ gives $a\in X$ and does not require every member of $a$ to lie in $X$. [F2, step 1.1] ∎
-

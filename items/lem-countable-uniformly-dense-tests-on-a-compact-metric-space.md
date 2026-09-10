@@ -4,6 +4,7 @@ kind: lemma
 title: Countable uniformly dense tests on a compact metric space
 deps: ["def-metric-compactness", "def-totally-bounded", "lem-distance-to-set-is-lipschitz", "thm-compact-implies-complete-and-totally-bounded", "def-axiom-of-choice", "thm-heine-cantor-metric"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

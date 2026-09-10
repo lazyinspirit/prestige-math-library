@@ -2,13 +2,14 @@
 id: "def-geodesic-rays-and-lines"
 kind: "definition"
 title: "Oriented geodesic rays, lines, parameters and tails"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-geodesic-and-geodesic-metric-space"]
 provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

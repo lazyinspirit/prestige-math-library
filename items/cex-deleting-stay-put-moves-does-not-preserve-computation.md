@@ -2,13 +2,14 @@
 id: cex-deleting-stay-put-moves-does-not-preserve-computation
 kind: counterexample
 title: "Deleting stay-put instructions need not preserve computation"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-stay-put-one-tape-machine-and-run-interface", "lem-stay-put-right-left-macro-simulation"]
 justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

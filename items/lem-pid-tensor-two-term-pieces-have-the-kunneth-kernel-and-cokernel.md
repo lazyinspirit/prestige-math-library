@@ -2,7 +2,9 @@
 id: lem-pid-tensor-two-term-pieces-have-the-kunneth-kernel-and-cokernel
 kind: lemma
 title: "The cycle-boundary tensor sequence has the Kunneth kernel and cokernel"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: [def-axiom-of-choice, lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces, def-balanced-tor-bifunctor, def-tensor-product-total-complex-of-chain-complexes, lem-the-tensor-total-differential-is-well-defined-and-squares-to-zero, lem-the-kunneth-tor-map, thm-long-exact-sequence-in-homology, thm-right-exactness-of-tensor-products, thm-tensor-products-commute-with-arbitrary-direct-sums, thm-free-modules-are-projective-with-choice-boundary, thm-recursion, def-dependent-choice]
 proof_strategy: direct

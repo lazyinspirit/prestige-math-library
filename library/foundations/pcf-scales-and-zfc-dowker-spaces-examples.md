@@ -1,7 +1,7 @@
 ---
 page: pcf-scales-and-zfc-dowker-spaces-examples
 title: "PCF Scales and ZFC Dowker Spaces: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: [ex-countable-shrinking-on-a-discrete-space, ex-rudin-initial-top-slice, ex-kojman-shelah-scale-used-at-a-tail-supremum, fs-normality-is-preserved-by-product-with-the-unit-interval]
 ---

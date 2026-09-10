@@ -2,7 +2,7 @@
 id: thm-choice-bernstein-set-pathology
 kind: theorem
 title: "Choice gives a Bernstein set with no perfect-set, Baire or measure regularity"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-axiom-of-choice", "thm-well-ordering-theorem", "thm-bernstein-sets-exist-under-a-well-ordering-of-r", "def-bernstein-set-on-r", "cor-a-bernstein-set-is-not-lebesgue-measurable", "thm-a-bernstein-set-has-inner-measure-zero-and-full-outer-measure-in-every-interval", "lem-baire-property-sigma-algebra-and-borel-regularity", "thm-nested-interval-property", "lem-rat-embeds-dense", "thm-rationals-countable", "def-perfect-set-r", "cor-archimedean-reciprocal", "thm-recursion"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

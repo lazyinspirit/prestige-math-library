@@ -2,7 +2,7 @@
 id: thm-borel-payoffs-admit-unraveling-covers
 kind: theorem
 title: "Borel payoffs admit unraveling covers"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-countable-borel-hierarchy-exhaustion-and-pullbacks", "lem-closed-payoffs-admit-unraveling-covers", "lem-stabilizing-game-coverings-have-inverse-limits", "lem-game-covering-composition-and-continuity", "thm-transfinite-induction", "def-axiom-of-choice", "prop-minimum-rank-selection-and-collection", "thm-transfinite-recursion"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

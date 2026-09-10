@@ -2,7 +2,7 @@
 id: lem-bounded-definitions-of-basic-set-operations
 kind: lemma
 title: "Absolute basic set operations and relations"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-delta-zero-absoluteness-for-transitive-sets]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -44,4 +45,3 @@ The graphs of empty set, subset, unordered pair, singleton, union, intersection 
 4.1 Functionhood is $R(r)$ together with: for all $p,q\in r$, all $x,y\in\bigcup p$ and all $u,v\in\bigcup q$, $(K(p,x,y)\land K(q,u,v)\land x=u)\to y=v$. Injection replaces the last implication by $y=v\to x=u$, while retaining functionhood. Evaluation at $x$ with value $y$ is functionhood and $E(r,x,y)$. For $r:a\to b$ also require domain $a$ by the preceding graph and $\forall p\in r\,\forall x,y\in\bigcup p\,(K(p,x,y)\to y\in b)$. These formulas quantify only through supplied sets. [step 3.1, algebra]
 
 5.1 Expanding each finite abbreviation gives bounded membership formulas. Their truth therefore agrees by bounded absoluteness, with every input and candidate output in the smaller transitive structure. Each formula characterizes its actual graph by the calculations above, so an output present there has the same value outside. No clause quantifies over all subsets of an input or produces an output set inside a domain. [F1, step 1.1, step 2.1, step 2.2, step 3.1, step 4.1] ∎
-

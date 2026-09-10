@@ -2,13 +2,14 @@
 id: "lem-geodesic-segments-have-isometric-ultralimits"
 kind: "lemma"
 title: "Limits of geodesic segments, rays and lines"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-rescaled-ultralimit-and-asymptotic-cone", "lem-rescaled-ultradistance-is-a-quotient-metric", "lem-bounded-real-ultralimits-and-free-tail-extension", "def-geodesic-and-geodesic-metric-space", "def-geodesic-rays-and-lines", "def-axiom-of-choice"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

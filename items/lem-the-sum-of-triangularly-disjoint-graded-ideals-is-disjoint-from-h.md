@@ -2,13 +2,14 @@
 id: lem-the-sum-of-triangularly-disjoint-graded-ideals-is-disjoint-from-h
 kind: lemma
 title: "The sum of triangularly disjoint graded ideals is disjoint from h"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-contragredient-algebra-has-a-triangular-decomposition"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

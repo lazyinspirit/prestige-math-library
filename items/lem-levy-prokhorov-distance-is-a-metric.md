@@ -4,6 +4,7 @@ kind: lemma
 title: Levy prokhorov distance is a metric
 deps: ["def-levy-prokhorov-metric", "thm-continuity-from-above-for-measures", "thm-dynkin-pi-lambda", "lem-distance-to-set-is-lipschitz"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

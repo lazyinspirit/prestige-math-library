@@ -2,7 +2,7 @@
 id: fs-normality-is-preserved-by-product-with-the-unit-interval
 kind: false-statement
 title: Normality need not survive product with the interval
-status: draft
+status: published
 origin: pipeline
 deps: [thm-rudin-dowker-space-and-cardinality, thm-dowker-product-characterization, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

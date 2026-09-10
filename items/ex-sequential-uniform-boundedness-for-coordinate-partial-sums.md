@@ -2,7 +2,7 @@
 id: ex-sequential-uniform-boundedness-for-coordinate-partial-sums
 kind: example
 title: "Coordinate partial sums on c_0"
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-catchup-24
 deps: [thm-sequential-uniform-boundedness-under-countable-choice, def-c-zero-and-ell-infinity, cor-cauchy-reals-lub-complete, def-banach-space, def-bounded-linear-operator, def-operator-norm, def-linear-combination-and-span, rem-real-and-complex-normed-space-convention, lem-complex-conjugation-and-modulus-laws, def-axiom-schema-of-replacement]
@@ -17,6 +17,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

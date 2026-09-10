@@ -2,7 +2,7 @@
 id: ex-countable-discrete-spaces-are-standard-borel
 kind: example
 title: "Countable discrete spaces are standard borel"
-status: draft
+status: published
 origin: pipeline
 deps: [def-standard-borel-space, def-polish-space]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

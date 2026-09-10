@@ -4,6 +4,7 @@ kind: lemma
 title: The maximal ergodic inequality on a probability space
 deps: ["def-measure-preserving-transformation-and-system", "thm-integrals-are-invariant-under-measure-preserving-maps", "thm-arithmetic-and-lattice-operations-preserve-measurability", "thm-linearity-of-the-lebesgue-integral-on-l-one", "thm-integral-triangle-inequality", "thm-dominated-convergence", "prop-order-and-scalar-rules-for-the-nonnegative-integral"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

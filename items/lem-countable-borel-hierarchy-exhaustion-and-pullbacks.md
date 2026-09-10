@@ -2,7 +2,7 @@
 id: lem-countable-borel-hierarchy-exhaustion-and-pullbacks
 kind: lemma
 title: "Borel hierarchy exhaustion and preservation by continuous pullback"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-countable-borel-hierarchy", "thm-countable-subsets-of-omega-one-are-bounded", "def-axiom-of-choice", "thm-transfinite-induction", "def-continuous-map-top", "def-subspace-topology-top"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

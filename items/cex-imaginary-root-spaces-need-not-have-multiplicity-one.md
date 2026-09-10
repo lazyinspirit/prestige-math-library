@@ -2,13 +2,14 @@
 id: cex-imaginary-root-spaces-need-not-have-multiplicity-one
 kind: counterexample
 title: "Imaginary root spaces need not have multiplicity one"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-serre-presentation-of-a-kac-moody-algebra", "def-kac-moody-algebra-associated-to-a-gcm", "def-real-and-imaginary-kac-moody-roots", "thm-invariant-bilinear-form-for-a-symmetrizable-kac-moody-algebra"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

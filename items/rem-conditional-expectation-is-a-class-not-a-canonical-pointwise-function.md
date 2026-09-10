@@ -2,13 +2,14 @@
 id: rem-conditional-expectation-is-a-class-not-a-canonical-pointwise-function
 kind: remark
 title: "Conditional expectation is a class not a canonical pointwise function"
-status: draft
+status: published
 origin: pipeline
 deps: [def-conditional-expectation-as-an-ae-class, def-axiom-of-choice]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

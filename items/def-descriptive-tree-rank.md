@@ -2,7 +2,7 @@
 id: def-descriptive-tree-rank
 kind: definition
 title: "The Polish space of trees and its well-founded rank"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-trees-and-bodies-on-discrete-alphabets", "lem-cantor-and-baire-sequence-coding", "lem-polish-closed-products-and-baire-parametrization", "def-rank-of-a-well-founded-relation", "def-axiom-of-choice"]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,9 @@
 id: "def-singular-planar-labelled-relator-diagram"
 kind: "definition"
 title: "Singular planar labelled relator diagrams and their outer walks"
-status: "draft"
+status: published
+verification:
+  audited: 2026-09-10
 origin: "pipeline"
 deps: ["def-group-presentation", "def-alphabet-words-and-reduction", "def-multigraph-loop-and-digraph"]
 provenance:

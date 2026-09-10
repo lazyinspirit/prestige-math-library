@@ -2,7 +2,7 @@
 id: lem-boone-hnn-tower-and-auxiliary-subgroups
 kind: lemma
 title: "Boone hnn tower and auxiliary subgroups"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-boone-machine-semigroup-and-augmented-configurations", "def-boone-group-presentation-and-special-word", "lem-boone-base-groups-and-associated-free-bases", "thm-hnn-normal-form-theorem", "thm-brittons-lemma", "def-axiom-of-choice"]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

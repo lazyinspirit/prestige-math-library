@@ -2,13 +2,14 @@
 id: "thm-all-asymptotic-cones-are-trees-implies-uniform-slimness"
 kind: "theorem"
 title: "Tree cones at all basepoints and scales imply uniform slimness"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-tree-cones-give-uniform-two-side-control", "lem-geodesic-segments-have-isometric-ultralimits", "lem-triangle-extrema-and-real-tree-tripod-rules", "def-geodesic-rays-and-lines", "def-axiom-of-choice"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

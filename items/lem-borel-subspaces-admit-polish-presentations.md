@@ -2,7 +2,7 @@
 id: lem-borel-subspaces-admit-polish-presentations
 kind: lemma
 title: "Borel subspaces admit polish presentations"
-status: draft
+status: published
 origin: pipeline
 deps: [def-standard-borel-space, def-polish-space, thm-g-delta-subspaces-of-complete-metric-spaces-are-completely-metrizable, lem-standard-complete-metric-on-a-countable-product, prop-polish-space-countability-conventions-agree, def-axiom-of-choice, thm-countable-union-of-countable, thm-product-of-countable]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

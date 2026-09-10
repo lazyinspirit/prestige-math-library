@@ -2,13 +2,14 @@
 id: "lem-coarse-triangle-minsize-is-bounded-by-square-root-area"
 kind: "lemma"
 title: "Coarse triangle minsize is bounded by square root of area"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-polygonal-boundary-crossing-for-affine-disk-maps", "def-bounded-edge-coarse-triangular-filling", "def-real-tree-tripods-and-geodesic-triangle-minsize", "thm-of-square-roots"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

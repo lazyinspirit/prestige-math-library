@@ -4,6 +4,7 @@ kind: theorem
 title: Every borel probability on a polish space is tight
 deps: ["def-borel-probability-law-on-a-polish-space", "def-tight-family-of-probability-measures", "thm-borel-probability-measures-on-polish-spaces-are-inner-regular", "def-axiom-of-choice", "thm-continuity-from-below-for-measures", "thm-finite-and-countable-subadditivity-of-measures", "thm-complete-and-totally-bounded-implies-compact"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

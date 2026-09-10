@@ -2,13 +2,14 @@
 id: def-numeralwise-representability-and-arithmetic-sigma-one
 kind: definition
 title: "Numeralwise representation and arithmetic complexity"
-status: draft
+status: published
 origin: pipeline
 deps: [def-robinson-q-and-peano-arithmetic]
 provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

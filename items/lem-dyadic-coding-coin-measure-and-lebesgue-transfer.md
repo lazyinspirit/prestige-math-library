@@ -2,7 +2,7 @@
 id: lem-dyadic-coding-coin-measure-and-lebesgue-transfer
 kind: lemma
 title: "Dyadic coding supplies coin measure and its completed Lebesgue transfer"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-dependent-choice", "def-countable-choice", "lem-cantor-and-baire-sequence-coding", "thm-lebesgue-measure-is-a-complete-measure", "thm-borel-sets-are-lebesgue-measurable", "thm-lebesgue-measure-of-a-box-of-every-kind", "thm-continuity-from-above-for-measures", "thm-continuity-from-below-for-measures", "def-borel-sigma-algebra", "def-measure", "thm-recursion", "cor-archimedean-reciprocal", "thm-nested-interval-property", "def-continuous-map-top", "def-compact-space"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

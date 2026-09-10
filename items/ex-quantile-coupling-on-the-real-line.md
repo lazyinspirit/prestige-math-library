@@ -4,6 +4,7 @@ kind: example
 title: Quantile coupling on the real line
 deps: ["thm-probability-law-and-distribution-function-correspondence", "thm-portmanteau-theorem", "thm-froda", "thm-lebesgue-measure-of-a-box-of-every-kind", "prop-countable-subsets-of-rn-are-lebesgue-null", "def-countable-choice", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

@@ -4,6 +4,7 @@ kind: theorem
 title: Kolmogorov iid l1 strong law
 deps: ["def-identically-distributed-and-iid-random-variables", "lem-iid-linear-truncation-occurs-only-finitely-often", "lem-summability-of-truncated-normalized-variances", "lem-cesaro-limit-of-truncated-means", "lem-measurable-functions-preserve-independence", "thm-kolmogorov-strong-law-under-summable-normalized-variances"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

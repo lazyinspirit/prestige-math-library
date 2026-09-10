@@ -2,7 +2,7 @@
 id: def-countable-borel-hierarchy
 kind: definition
 title: "The countable Borel hierarchy and its limit convention"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-topological-space", "def-first-uncountable-ordinal", "thm-transfinite-recursion"]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

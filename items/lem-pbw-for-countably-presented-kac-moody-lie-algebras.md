@@ -2,13 +2,14 @@
 id: lem-pbw-for-countably-presented-kac-moody-lie-algebras
 kind: lemma
 title: "PBW for countably presented Kac Moody Lie algebras"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-universal-enveloping-algebra-as-a-tensor-quotient"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

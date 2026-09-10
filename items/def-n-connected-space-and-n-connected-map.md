@@ -11,7 +11,9 @@ sources:
     - title: Hatcher, Algebraic Topology, Chapter 4
       url: https://pi.math.cornell.edu/~hatcher/AT/ATch4.pdf
       locator: §4.1 p.346; mapping-cylinder formulation
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 ---
 

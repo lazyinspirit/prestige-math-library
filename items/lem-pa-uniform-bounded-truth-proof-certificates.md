@@ -2,7 +2,7 @@
 id: lem-pa-uniform-bounded-truth-proof-certificates
 kind: lemma
 title: "PA verifies proof certificates for bounded arithmetic truth"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-q-numeral-calculation-and-bounded-cases, lem-godel-beta-coding-and-q-remainder, thm-primitive-recursive-numeralwise-representability, lem-primitive-recursive-syntax-and-proof-checking, def-arithmetic-provability-and-consistency]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -54,4 +55,3 @@ For theories extending Q, $0=1$ may replace the fixed contradiction: Q proves $0
 5.1 Consider $\exists u\le t(\bar x)\,\epsilon(u,\bar x)$ and let $b=t(\bar x)$. On truth, bounded search below b+1 returns the first true matrix value k; concatenate its positive certificate, the bound certificate k<=b, the term-evaluation proof and existential introduction. On falsity, recursively concatenate negative matrix certificates for k=0,...,b. Combine them with the uniformly generated case theorem $u\le\bar b\to\bigvee_{k\le b}u=\bar k$ and equality substitution to derive $\forall u\le\bar b\neg\epsilon(u,\overline{\bar x})$, then negate the existential. The list invariant after k iterations is that exactly the first k signed instances have valid certificates with earlier premise indices. PA induction on k proves it; at b+1 the finite case proof yields the desired formula. Bounded universals are handled by the negated existential of the negated matrix. At an empty strict bound the universal certificate is the zero-case bound proof and the existential is refuted with no matrix list. [F1, F4, step 2.1, step 4.1]
 
 6.1 For $\sigma=\exists\bar x\,\delta(\bar x)$, a witness tuple in PA satisfies the bounded matrix, so the invariant just proved supplies a Q certificate for its numeral instance. Append one existential introduction per witness coordinate to obtain a certificate ending with the fixed sentence sigma, and existentially quantify the certificate code. This proves the concluding implication. If another formula chi is only PA-equivalent to sigma, this conclusion gives Q proofs of sigma; a target extending PA must embed those proofs and append the fixed equivalence proof to get chi. No Q proof of that equivalence is inferred. [F3, step 5.1] ∎
-

@@ -2,7 +2,7 @@
 id: thm-choice-hamel-basis-pathology
 kind: theorem
 title: "A Hamel coefficient has dense graph and a nonmeasurable kernel"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-hamel-basis-exists", "def-axiom-of-choice", "lem-rat-embeds-dense", "thm-rationals-countable", "thm-of-archimedean", "thm-lebesgue-outer-measure-and-measurability-are-translation-invariant", "thm-lebesgue-measure-is-a-complete-measure", "thm-lebesgue-measure-of-a-box-of-every-kind", "def-measure", "def-borel-and-lebesgue-measurable-function-on-rn", "def-borel-sigma-algebra", "def-linear-subspace", "def-continuity-real"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

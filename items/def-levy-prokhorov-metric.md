@@ -10,7 +10,9 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 ---
 

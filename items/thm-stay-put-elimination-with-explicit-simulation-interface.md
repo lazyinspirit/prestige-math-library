@@ -2,13 +2,14 @@
 id: thm-stay-put-elimination-with-explicit-simulation-interface
 kind: theorem
 title: "Stay-put elimination with an explicit simulation interface"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-stay-put-one-tape-machine-and-run-interface", "lem-stay-put-right-left-macro-simulation", "thm-recursion", "thm-induction-principle", "def-nat-addition", "def-nat-order", "lem-nat-order-add-compatible", "thm-nat-linear-order", "lem-nat-add-successor-left", "lem-nat-add-identity", "lem-nat-discrete"]
 justified_by: []
 landmark: false
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   precheck: pass
   judge:
     model: "gpt-5.6-terra"

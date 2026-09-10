@@ -4,6 +4,7 @@ kind: theorem
 title: Portmanteau theorem
 deps: ["def-weak-convergence-of-borel-probability-measures", "lem-distance-to-set-is-lipschitz", "thm-dominated-convergence", "thm-continuity-from-above-for-measures", "thm-dynkin-pi-lambda", "thm-change-of-variables-for-expectation"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

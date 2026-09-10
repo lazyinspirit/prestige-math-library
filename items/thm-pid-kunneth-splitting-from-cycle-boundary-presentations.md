@@ -2,7 +2,7 @@
 id: thm-pid-kunneth-splitting-from-cycle-boundary-presentations
 kind: theorem
 title: "The PID Kunneth sequence admits a section after choices"
-status: draft
+status: published
 origin: pipeline
 landmark: true
 deps: [def-axiom-of-choice, thm-pid-kunneth-exactness-from-cycle-boundary-presentations, lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces, thm-a-chain-map-induces-a-well-defined-map-on-homology, def-tensor-product-total-complex-of-chain-complexes]
@@ -11,6 +11,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

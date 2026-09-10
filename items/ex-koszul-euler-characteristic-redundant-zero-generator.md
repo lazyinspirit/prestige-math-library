@@ -2,7 +2,7 @@
 id: ex-koszul-euler-characteristic-redundant-zero-generator
 kind: example
 title: "koszul euler characteristic redundant zero generator"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-hilbert-samuel-multiplicity-as-koszul-euler-characteristic, lem-koszul-euler-characteristic-first-element-reduction, thm-dvr-ideal-and-module-length, def-axiom-of-choice, thm-ideals-in-a-dvr, def-koszul-complex-of-a-sequence-with-coefficients, def-koszul-euler-characteristic-and-degree-indexed-multiplicity, cor-length-is-additive-in-short-exact-sequences]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

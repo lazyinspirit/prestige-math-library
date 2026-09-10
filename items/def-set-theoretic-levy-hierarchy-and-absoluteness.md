@@ -2,13 +2,14 @@
 id: def-set-theoretic-levy-hierarchy-and-absoluteness
 kind: definition
 title: "The Lévy hierarchy and absoluteness"
-status: draft
+status: published
 origin: pipeline
 deps: [def-set-coded-terms-and-formulas, def-relativization-to-a-definable-class]
 provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

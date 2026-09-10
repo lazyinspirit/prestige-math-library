@@ -4,6 +4,7 @@ kind: corollary
 title: Tightness extracts a weakly convergent subsequence
 deps: ["thm-prokhorov-tightness-theorem-on-polish-spaces", "def-axiom-of-choice"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

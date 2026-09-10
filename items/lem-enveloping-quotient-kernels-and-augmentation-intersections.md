@@ -2,13 +2,14 @@
 id: lem-enveloping-quotient-kernels-and-augmentation-intersections
 kind: lemma
 title: "Enveloping quotient kernels and augmentation intersections"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-pbw-for-countably-presented-kac-moody-lie-algebras", "def-universal-enveloping-algebra-as-a-tensor-quotient"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

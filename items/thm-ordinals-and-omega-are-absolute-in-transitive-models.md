@@ -2,7 +2,7 @@
 id: thm-ordinals-and-omega-are-absolute-in-transitive-models
 kind: theorem
 title: "Ordinals and omega in transitive models"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-delta-zero-absoluteness-for-transitive-sets, lem-bounded-definitions-of-basic-set-operations, def-ordinal]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -60,4 +61,3 @@ $\alpha$.
 3.1 The internal $w=\omega^M$ satisfies the bounded description: $w$ is a nonzero ordinal, is not a successor, and each $u\in w$ is zero or a successor ordinal. Successor is expressed by $\exists v\in u\,[u=v\cup\{v\}]$, using the bounded graphs in F3. Thus the description holds externally. By step 2.1, $\omega\subseteq w$. If $w\ne\omega$, ordinal comparison gives $\omega\in w$, contrary to the description since $\omega$ is neither zero nor a successor. Hence $w=\omega$. [F1, F3, step 1.1, step 2.1]
 
 4.1 If $\alpha$ is an ordinal of $M$ and $\beta<\alpha$, transitivity puts $\beta$ in $M$, and step 1.1 makes it an ordinal there. Thus the ordinals of $M$ are downward closed among actual ordinals, as claimed. [step 1.1, given] ∎
-

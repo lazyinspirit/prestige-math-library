@@ -2,7 +2,7 @@
 id: def-souslin-operation-on-set-schemes
 kind: definition
 title: "The Souslin operation"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-baire-sequence-space", "def-trees-and-bodies-on-discrete-alphabets"]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

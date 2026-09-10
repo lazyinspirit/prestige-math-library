@@ -2,7 +2,9 @@
 id: cor-unraveling-covers-give-determinacy
 kind: corollary
 title: "Unraveling covers give determinacy"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: ["lem-game-covering-transfers-winning-strategies", "thm-gale-stewart-open-determinacy", "def-axiom-of-choice"]
 justified_by: []

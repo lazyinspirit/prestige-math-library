@@ -2,13 +2,14 @@
 id: rem-shoenfield-absoluteness-scope-orientation
 kind: remark
 title: "Shoenfield orientation and hierarchy conventions"
-status: draft
+status: published
 origin: pipeline
 deps: [def-set-theoretic-levy-hierarchy-and-absoluteness, thm-sigma-one-upward-and-pi-one-downward-absoluteness]
 provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

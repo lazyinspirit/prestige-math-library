@@ -2,13 +2,14 @@
 id: def-contragredient-lie-algebra-before-the-maximal-ideal-quotient
 kind: definition
 title: "Contragredient lie algebra before the maximal ideal quotient"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-minimal-realizations-exist-and-are-unique-up-to-isomorphism", "lem-free-lie-construction-for-finite-kac-moody-generators", "def-kac-moody-root-lattice-height-and-positive-cone"]
 provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

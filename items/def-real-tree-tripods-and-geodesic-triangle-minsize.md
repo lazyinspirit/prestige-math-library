@@ -2,13 +2,14 @@
 id: "def-real-tree-tripods-and-geodesic-triangle-minsize"
 kind: "definition"
 title: "Real trees, tripod triangles, slimness and minsize"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-geodesic-and-geodesic-metric-space", "def-metric-space", "thm-heine-borel-r", "thm-metric-hausdorff-separation", "thm-metric-continuity-characterisations", "thm-compactness-under-continuous-maps"]
 provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

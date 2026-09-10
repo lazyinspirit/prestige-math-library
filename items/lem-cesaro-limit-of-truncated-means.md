@@ -4,6 +4,7 @@ kind: lemma
 title: Cesaro limit of truncated means
 deps: ["thm-dominated-convergence", "thm-change-of-variables-for-expectation", "thm-cesaro-mean-theorem", "def-truncation-at-a-fixed-level"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

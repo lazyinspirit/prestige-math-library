@@ -1,7 +1,7 @@
 ---
 page: standard-borel-real-codings-and-determining-classes
 title: "Standard-Borel Real Codings and Determining Classes"
-status: draft
+status: published
 items: [lem-hilbert-cube-has-a-bimeasurable-real-coding, thm-standard-borel-spaces-admit-bimeasurable-real-codings, cor-standard-borel-spaces-have-countable-generating-and-measure-determining-algebras, lem-borel-subspaces-admit-polish-presentations]
 examples: []
 ---

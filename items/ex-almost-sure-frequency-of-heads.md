@@ -4,6 +4,7 @@ kind: example
 title: Almost sure frequency of heads
 deps: ["thm-countable-product-of-probability-spaces", "cor-coordinate-random-elements-on-a-countable-product-are-independent", "cor-iid-finite-variance-strong-law", "def-axiom-of-choice", "def-probability-measure", "def-expectation-of-a-nonnegative-or-integrable-random-variable", "lem-variance-and-covariance-identities-for-random-variables", "def-countable-choice", "def-dependent-choice", "thm-recursion"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

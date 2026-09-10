@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: N. P. Strickland, The category of CGWH spaces
       url: https://www.math.ksu.edu/~dav/diffeos/StricklandCGHWSpaces.pdf
       locator: Definitions1.1–1.2 and2.8, pp.1,4; May p39 explicitly uses compact Hausdorff convention
-status: draft
+status: published
 origin: pipeline
 ---
 

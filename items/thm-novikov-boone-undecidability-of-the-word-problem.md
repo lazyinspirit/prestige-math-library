@@ -2,7 +2,9 @@
 id: thm-novikov-boone-undecidability-of-the-word-problem
 kind: theorem
 title: "Novikov boone undecidability of the word problem"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: ["lem-normalized-fixed-halting-machine-for-boone-simulation", "thm-fixed-finite-semigroup-has-undecidable-terminal-equality", "def-boone-machine-semigroup-and-augmented-configurations", "def-boone-group-presentation-and-special-word", "thm-boone-special-word-equivalence", "def-word-problem-for-a-fixed-finite-presentation", "def-axiom-of-choice"]
 justified_by: []

@@ -4,6 +4,7 @@ kind: theorem
 title: Continuous mapping theorem
 deps: ["thm-portmanteau-theorem", "lem-laws-commute-with-measurable-maps", "def-metric-continuity"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

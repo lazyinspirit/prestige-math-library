@@ -1,7 +1,7 @@
 ---
 page: "arithmetization-incompleteness-and-relative-consistency-examples"
 title: "Arithmetization, Incompleteness, and Relative Consistency: Examples and Counterexamples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-godel-diagonal-substitution-calculation", "ex-consistent-theory-with-an-internal-false-proof", "ex-explicit-function-definition-is-conservative", "fs-con-zfc-implies-a-transitive-model-of-zfc", "ex-finite-proof-support-in-relative-consistency"]
 ---

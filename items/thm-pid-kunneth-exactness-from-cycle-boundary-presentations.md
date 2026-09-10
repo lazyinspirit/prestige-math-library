@@ -2,7 +2,9 @@
 id: thm-pid-kunneth-exactness-from-cycle-boundary-presentations
 kind: theorem
 title: "The natural PID Kunneth sequence is exact"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 landmark: true
 deps: [def-axiom-of-choice, lem-pid-tensor-two-term-pieces-have-the-kunneth-kernel-and-cokernel, lem-the-kunneth-cross-product-map-is-well-defined-and-natural, lem-the-kunneth-tor-map, cor-the-long-exact-homology-sequence-is-natural]

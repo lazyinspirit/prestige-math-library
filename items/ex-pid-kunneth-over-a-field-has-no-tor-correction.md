@@ -2,7 +2,7 @@
 id: ex-pid-kunneth-over-a-field-has-no-tor-correction
 kind: example
 title: "Over a field the cross product itself is a natural isomorphism"
-status: draft
+status: published
 origin: pipeline
 deps: [def-axiom-of-choice, thm-pid-kunneth-exactness-from-cycle-boundary-presentations, prop-modules-over-a-field-are-projective-flat-and-injective, def-balanced-tor-bifunctor, thm-recursion, def-dependent-choice]
 proof_strategy: direct
@@ -12,6 +12,7 @@ provenance:
 generation:
   role: example
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: thm-uncountable-analytic-sets-contain-cantor-copies
 kind: theorem
 title: "Uncountable analytic sets contain compact Cantor copies"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-analytic-closed-projection-and-continuous-image-equivalence", "lem-uncountable-analytic-splitting", "lem-cantor-and-baire-sequence-coding", "def-axiom-of-choice"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

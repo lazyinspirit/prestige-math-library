@@ -2,7 +2,7 @@
 id: lem-certified-syntax-coding-operations-are-primitive-recursive
 kind: lemma
 title: "Primitive-recursive sentinel coding for certified syntax"
-status: draft
+status: published
 origin: pipeline
 deps: [def-effective-theory-and-certified-godel-numbering, def-bounded-arithmetic-formula, lem-bounded-quantifiers-preserve-primitive-recursiveness]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -65,4 +66,3 @@ is primitive recursive.
 6.1 The header and every block delimiter determine their lengths uniquely. Each canonical payload therefore recovers its unique original natural number. Induction over the blocks proves that parsing an encoded list returns that list; conversely, a successful parse consumes the whole word and reconstruction reproduces it. Thus two lists with the same code have equal length and equal entries. The word 10 has k=0 and no payload, so parses successfully as the empty list. [step 5.1]
 
 7.1 For construction represent a word by value and width $(v,L)$; concatenating $(w,M)$ gives $(v2^M+w,L+M)$. The length-k header is $(2^{k+2}-2,k+2)$. For $m=\ell(a)$ the entry block has width $2m+1$ and value $(2^m-1)2^{m+1}+a$. Fixed-arity encoders concatenate finitely many such blocks. Append and concatenation build the enlarged header and copy coordinates from the validated inputs, followed by the new entry or second list, using their lengths as bounds. Induction on the number copied gives exactly the required output list. Invalid inputs return 2. Finally a history recursion stores its current list code, computes the primitive-recursive next value from it and appends. This is one ordinary parameter recursion; retrieving a coordinate supplies the result. [step 1.1, step 3.1, step 5.1, step 6.1] ∎
-

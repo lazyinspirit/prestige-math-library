@@ -2,13 +2,14 @@
 id: lem-strict-linear-alternative-for-gcm-trichotomy
 kind: lemma
 title: "Strict linear alternative for GCM trichotomy"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-euclidean-heine-borel-pseudocompactness-and-extreme-values"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

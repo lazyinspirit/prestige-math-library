@@ -2,13 +2,14 @@
 id: prop-minimal-realizations-exist-and-are-unique-up-to-isomorphism
 kind: proposition
 title: "Minimal realizations exist and are unique up to isomorphism"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-realization-of-a-generalized-cartan-matrix"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

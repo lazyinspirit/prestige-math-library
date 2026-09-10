@@ -2,7 +2,7 @@
 id: lem-transitive-zf-models-have-correct-proof-codes
 kind: lemma
 title: "Transitive ZF models have standard arithmetic and proof codes"
-status: draft
+status: published
 origin: pipeline
 deps: [def-countable-transitive-model-and-fragment-transfer, lem-zf-arithmetic-interpretation-and-effective-axioms, lem-primitive-recursive-syntax-and-proof-checking]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -40,4 +41,3 @@ A transitive set model M of ZF has the real omega and natural arithmetic, and al
 2.1 The arithmetic recursion of F1 then agrees on each natural input by external induction: both additions start at a and both successors add one; both multiplications start at zero and add the same a at each successor. Every finite list of natural numbers is present via its natural code, and F2 decodes it using this same arithmetic. Induction on a fixed arithmetic formula transfers atoms and Boolean operations, and transfers quantifiers because both range over the identical omega. Thus every fixed effective proof predicate, and also its Con sentence, is absolute. [F1, F2, step 1.1]
 
 3.1 If $M\models\mathrm{ZFC}$, an actual ZFC-refutation would, by induction on its finitely many lines, be true in M: each axiom line holds by the model assumption, and each logical axiom and rule preserves truth in a nonempty structure. Its last contradictory sentence cannot hold. Therefore no actual refutation exists. The standard proof predicate is correct on those natural codes by step 2.1, so its universal absence assertion Con(ZFC) holds both externally and in M. [step 1.1, step 2.1] ∎
-

@@ -2,7 +2,9 @@
 id: thm-tarski-arithmetic-truth-undefinability
 kind: theorem
 title: "Arithmetic truth is not arithmetically definable"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: [thm-arithmetic-diagonal-lemma, def-robinson-q-and-peano-arithmetic, thm-set-language-first-order-soundness]
 provenance:

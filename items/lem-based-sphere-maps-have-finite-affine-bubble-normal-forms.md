@@ -11,7 +11,9 @@ sources:
     - title: Hatcher, Algebraic Topology
       url: https://pi.math.cornell.edu/~hatcher/AT/AT.pdf
       locator: Hatcher §2.C finite approximation and Proposition 2.30/Example 2.31 pp136–137 as ingredients; local explicit double-cube and radial-collapse construction
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 proof_strategy: direct
 ---

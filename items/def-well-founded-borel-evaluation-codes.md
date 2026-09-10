@@ -2,7 +2,7 @@
 id: def-well-founded-borel-evaluation-codes
 kind: definition
 title: "Well-founded Borel evaluation codes"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-trees-and-bodies-on-discrete-alphabets", "def-countable-borel-hierarchy", "def-well-founded-setlike-relations"]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

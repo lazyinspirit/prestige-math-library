@@ -2,7 +2,9 @@
 id: ex-consistent-theory-with-an-internal-false-proof
 kind: example
 title: "A consistent theory can believe it has a proof of contradiction"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: [thm-second-incompleteness-for-standard-provability, thm-model-existence-versus-syntactic-consistency, thm-first-order-sentence-deduction, def-robinson-q-and-peano-arithmetic]
 provenance:

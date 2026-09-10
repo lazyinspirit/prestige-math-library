@@ -2,7 +2,7 @@
 id: thm-gale-stewart-open-determinacy
 kind: theorem
 title: "Open and closed Gale–Stewart games are determined"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-gale-stewart-games-on-pruned-trees", "lem-taboo-games-reduce-to-pruned-residual-games", "def-axiom-of-choice"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

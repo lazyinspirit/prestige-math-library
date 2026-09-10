@@ -2,7 +2,7 @@
 id: ex-finite-proof-support-in-relative-consistency
 kind: example
 title: "A hypothetical refutation selects one finite target fragment"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-finite-fragment-relative-consistency-transfer, thm-formal-relative-consistency-from-verified-proof-reduction]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -40,4 +41,3 @@ A finite derivation uses only its finite axiom support. For a concrete refutatio
 2.1 For this Delta the hypotheses of F1 would give a finite source fragment Gamma, a T proof of its suitable source-model existence, and a T proof converting that model into a model of Delta. But any Delta model satisfies both A and not-A, impossible, so appending the formal soundness proof of the displayed five-line derivation compiles a T-refutation. For a general proof with k axiom lines, taking their set gives at most k distinct axioms, and the same assembly depends only on that set. [F1, step 1.1]
 
 3.1 To make this a B proof of a Con implication via F2, verify in B each arrow: extracting Delta from p, computing Gamma, generating its existence proof, generating the transfer proof, and appending the soundness/refutation block. A fixed finite assembly in step 2.1 does not by itself verify those maps uniformly. In the concrete proof, the extractor merely reads lines 0 and 1; its output contains neither the tautology nor the MP lines. [F2, step 1.1, step 2.1] ∎
-

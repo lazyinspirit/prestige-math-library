@@ -2,7 +2,9 @@
 id: lem-natural-number-game-strategies-have-continuum-many-plays
 kind: lemma
 title: "Coding strategies and their compatible plays"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: ["def-gale-stewart-games-on-pruned-trees", "lem-cantor-and-baire-sequence-coding", "thm-schroder-bernstein"]
 justified_by: []

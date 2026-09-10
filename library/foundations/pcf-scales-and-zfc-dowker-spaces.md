@@ -1,7 +1,7 @@
 ---
 page: pcf-scales-and-zfc-dowker-spaces
 title: PCF Scales and ZFC Dowker Spaces
-status: draft
+status: published
 items:
   - def-countable-paracompactness-and-dowker-space
   - thm-countable-paracompactness-shrinking-criterion
@@ -82,4 +82,3 @@ dated literature status, not an additional theorem.
 Uses of the Axiom of Choice are identified in individual items. The recorded
 Set Theory catalogue supplies no proof prerequisite. Worked instances and
 the interval-product counterexample are on the companion examples page.
-

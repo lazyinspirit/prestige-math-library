@@ -2,7 +2,7 @@
 id: ex-l2-best-prediction-by-conditional-expectation
 kind: example
 title: "$L^2$ best prediction by conditional expectation"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-conditional-expectation-is-the-l2-orthogonal-projection, def-axiom-of-choice, thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces, def-conditional-expectation-as-an-ae-class]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

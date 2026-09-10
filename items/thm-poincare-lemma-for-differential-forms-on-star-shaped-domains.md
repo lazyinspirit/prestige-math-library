@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -18,7 +19,7 @@ sources:
     - title: "Nigel Hitchin, Differentiable Manifolds (2014)"
       url: "https://people.maths.ox.ac.uk/~joyce/Nairobi2019/Hitchin-DifferentiableManifolds.pdf"
 landmark: true
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

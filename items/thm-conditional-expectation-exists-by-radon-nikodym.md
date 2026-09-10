@@ -2,7 +2,7 @@
 id: thm-conditional-expectation-exists-by-radon-nikodym
 kind: theorem
 title: "Conditional expectation exists by radon nikodym"
-status: draft
+status: published
 origin: pipeline
 deps: [def-conditional-expectation-given-a-sigma-algebra, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, thm-indefinite-integral-of-a-nonnegative-function-is-a-measure, thm-linearity-of-the-lebesgue-integral-on-l-one, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, def-axiom-of-choice, cor-integral-over-a-null-set-vanishes]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: "thm-sublinear-triangle-minsize-implies-hyperbolicity"
 kind: "theorem"
 title: "Sublinear triangle minsize implies hyperbolicity"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-sublinear-minsize-makes-every-cone-geodesic-a-limit-geodesic", "thm-all-asymptotic-cones-are-trees-implies-uniform-slimness", "lem-triangle-extrema-and-real-tree-tripod-rules", "def-axiom-of-choice", "lem-bounded-real-ultralimits-and-free-tail-extension"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: def-trees-and-bodies-on-discrete-alphabets
 kind: definition
 title: "Trees and their bodies"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-the-set-of-functions-from-one-set-to-another"]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

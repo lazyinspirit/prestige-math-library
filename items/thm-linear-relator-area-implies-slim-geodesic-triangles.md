@@ -2,13 +2,14 @@
 id: "thm-linear-relator-area-implies-slim-geodesic-triangles"
 kind: "theorem"
 title: "Linear algebraic relator area implies slim Cayley triangles"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-relator-disks-give-area-controlled-coarse-fillings", "lem-coarse-triangle-minsize-is-bounded-by-square-root-area", "thm-sublinear-triangle-minsize-implies-hyperbolicity", "def-axiom-of-choice"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

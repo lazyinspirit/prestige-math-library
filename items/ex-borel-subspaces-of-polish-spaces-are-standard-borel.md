@@ -2,7 +2,7 @@
 id: ex-borel-subspaces-of-polish-spaces-are-standard-borel
 kind: example
 title: "Borel subspaces of polish spaces are standard borel"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-borel-subspaces-admit-polish-presentations, def-axiom-of-choice, thm-rationals-countable, thm-reals-cauchy-complete, lem-rat-embeds-dense]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: haar-measure-existence-and-uniqueness
 title: Haar Measure Existence and Uniqueness
-status: draft
+status: published
 items:
   - def-left-haar-integral-and-left-haar-measure
   - lem-translations-preserve-compactly-supported-continuous-functions

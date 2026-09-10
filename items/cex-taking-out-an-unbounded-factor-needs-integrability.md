@@ -2,7 +2,7 @@
 id: cex-taking-out-an-unbounded-factor-needs-integrability
 kind: counterexample
 title: "Taking out an unbounded factor needs integrability"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-taking-out-what-is-known, def-conditional-expectation-as-an-ae-class, def-axiom-of-choice, def-integer-power, thm-geometric-series, def-probability-measure, def-dirac-measure, prop-dirac-measure-is-a-probability-measure, def-nonnegative-weighted-sum-of-measures, thm-nonnegative-weighted-sums-of-measures, thm-monotone-convergence-for-the-integral]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: counterexample
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

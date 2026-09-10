@@ -4,6 +4,7 @@ kind: theorem
 title: Empirical measures of iid euclidean samples converge weakly
 deps: ["thm-kolmogorov-iid-l1-strong-law", "lem-countable-compactly-supported-tests-determine-euclidean-weak-convergence", "lem-measurable-functions-preserve-independence", "thm-change-of-variables-for-expectation", "thm-finite-and-countable-subadditivity-of-measures"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

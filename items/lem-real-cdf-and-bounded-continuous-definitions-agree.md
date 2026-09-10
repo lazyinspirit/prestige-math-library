@@ -4,6 +4,7 @@ kind: lemma
 title: Real cdf and bounded continuous definitions agree
 deps: ["thm-portmanteau-theorem", "def-convergence-in-distribution-for-real-random-variables", "thm-continuity-from-above-for-measures", "thm-continuity-from-below-for-measures", "thm-heine-borel-rn"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

@@ -2,7 +2,9 @@
 id: prop-kac-moody-root-spaces-are-finite-dimensional
 kind: proposition
 title: "Kac moody root spaces are finite dimensional"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: ["def-kac-moody-algebra-associated-to-a-gcm", "prop-contragredient-algebra-has-a-triangular-decomposition"]
 provenance:

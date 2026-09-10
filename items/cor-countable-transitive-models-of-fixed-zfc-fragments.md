@@ -2,7 +2,7 @@
 id: cor-countable-transitive-models-of-fixed-zfc-fragments
 kind: corollary
 title: "Countable transitive models of fixed finite fragments"
-status: draft
+status: published
 origin: pipeline
 deps: [cor-transitive-models-of-each-finite-zf-fragment, thm-countable-elementary-submodels-and-transitive-collapses, def-axiom-of-choice]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -40,4 +41,3 @@ For every fixed external finite $\Gamma\subseteq\mathrm{ZFC}$, ZFC proves that $
 1.1 Enlarge the fixed finite fragment by Extensionality, and use F1 to reflect it to $V_\beta$ for $\beta>\omega$. This is an infinite transitive membership structure satisfying Extensionality and every original axiom of $\Gamma$. In the ZFC branch, ambient AC (F3) supplies a reflected Choice axiom if present. [F1, F3, given]
 
 2.1 Apply F2 with empty parameter set to obtain a countable elementary submodel of this stage and its transitive collapse $C$. Elementarity preserves each sentence of $\Gamma$, and the collapse isomorphism preserves the same sentences. Thus $(C,\in)\models\Gamma$. AC is used in F2 even when $\Gamma\subseteq\mathrm{ZF}$; the earlier reflection of ZF axioms alone does not use it. [F2, step 1.1] ∎
-

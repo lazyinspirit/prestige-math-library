@@ -4,6 +4,7 @@ kind: theorem
 title: Levy prokhorov metric metrizes weak convergence
 deps: ["lem-levy-prokhorov-distance-is-a-metric", "lem-countable-boundary-null-partitions-of-a-separable-metric-space", "thm-portmanteau-theorem", "thm-continuity-from-below-for-measures", "def-axiom-of-choice", "thm-continuity-from-above-for-measures"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

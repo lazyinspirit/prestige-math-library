@@ -2,7 +2,7 @@
 id: thm-hilbert-bernays-lob-derivability-conditions
 kind: theorem
 title: "Derivability conditions for the chosen proof predicate"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-pa-uniform-bounded-truth-proof-certificates, def-arithmetic-provability-and-consistency, lem-primitive-recursive-syntax-and-proof-checking, lem-interpretation-translates-finite-derivations]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

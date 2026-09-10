@@ -2,7 +2,7 @@
 id: def-banach-mazur-category-game
 kind: definition
 title: "The Banach–Mazur category game on sequence spaces and the real line"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-baire-sequence-space", "def-cantor-sequence-space-for-descriptive-set-theory", "def-gale-stewart-games-on-pruned-trees", "thm-rationals-countable", "lem-rat-embeds-dense", "thm-nested-interval-property"]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

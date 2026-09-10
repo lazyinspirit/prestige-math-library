@@ -2,13 +2,14 @@
 id: lem-the-serre-quotient-has-weyl-symmetry-and-no-residual-kac-moody-kernel
 kind: lemma
 title: "The serre quotient has weyl symmetry and no residual kac moody kernel"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-kac-moody-relation-module-embeds-in-verma-modules-and-obeys-the-casimir-constraint", "lem-serre-elements-vanish-before-serre-generation", "def-simple-reflections-and-the-kac-moody-weyl-group", "thm-invariant-bilinear-form-for-a-symmetrizable-kac-moody-algebra"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

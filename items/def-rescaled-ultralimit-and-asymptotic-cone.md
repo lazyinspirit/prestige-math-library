@@ -2,13 +2,14 @@
 id: "def-rescaled-ultralimit-and-asymptotic-cone"
 kind: "definition"
 title: "Rescaled ultralimits and asymptotic cones"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-metric-space", "def-ultrafilter"]
 provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,9 @@
 id: ex-godel-diagonal-substitution-calculation
 kind: example
 title: "A diagonal substitution worked symbolically"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: [thm-arithmetic-diagonal-lemma]
 provenance:

@@ -4,6 +4,7 @@ kind: theorem
 title: Birkhoff's theorem for an ergodic probability system
 deps: ["lem-finite-probability-maximal-ergodic-inequality", "def-ergodic-measure-preserving-system", "thm-integrals-are-invariant-under-measure-preserving-maps", "thm-arithmetic-and-lattice-operations-preserve-measurability", "thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable", "thm-linearity-of-the-lebesgue-integral-on-l-one", "thm-integral-triangle-inequality", "thm-dominated-convergence", "thm-finite-and-countable-subadditivity-of-measures"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

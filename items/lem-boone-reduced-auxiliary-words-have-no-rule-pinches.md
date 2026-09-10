@@ -2,7 +2,7 @@
 id: lem-boone-reduced-auxiliary-words-have-no-rule-pinches
 kind: lemma
 title: "Boone reduced auxiliary words have no rule pinches"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-boone-base-groups-and-associated-free-bases", "lem-boone-hnn-tower-and-auxiliary-subgroups", "thm-hnn-normal-form-theorem", "def-axiom-of-choice"]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

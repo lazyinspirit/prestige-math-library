@@ -2,7 +2,7 @@
 id: ex-conditioning-on-trivial-and-full-sigma-algebras
 kind: example
 title: "Conditioning on trivial and full sigma algebras"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-conditioning-a-known-variable-and-an-independent-variable, def-axiom-of-choice, thm-finite-probability-spaces-are-exactly-finite-full-power-set-probability-spaces]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

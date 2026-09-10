@@ -2,7 +2,7 @@
 id: def-game-covering-and-k-covering
 kind: definition
 title: "Game coverings, k-coverings and unraveling"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-game-trees-with-terminal-taboos"]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

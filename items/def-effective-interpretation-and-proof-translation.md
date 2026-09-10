@@ -2,7 +2,9 @@
 id: def-effective-interpretation-and-proof-translation
 kind: definition
 title: "Interpretations with proof-translation data"
-status: draft
+status: published
+verification:
+  audited: 2026-09-10
 origin: pipeline
 deps: [def-set-coded-formal-derivation, def-effective-theory-and-certified-godel-numbering, lem-primitive-recursive-syntax-and-proof-checking]
 provenance:

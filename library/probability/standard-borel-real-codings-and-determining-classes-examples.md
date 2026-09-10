@@ -1,7 +1,7 @@
 ---
 page: standard-borel-real-codings-and-determining-classes-examples
 title: "Standard-Borel Real Codings and Determining Classes: Examples"
-status: draft
+status: published
 items: [ex-countable-discrete-spaces-are-standard-borel, ex-euclidean-borel-spaces-are-standard-borel, ex-borel-subspaces-of-polish-spaces-are-standard-borel]
 examples: []
 ---

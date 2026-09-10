@@ -2,13 +2,14 @@
 id: thm-finite-affine-indefinite-trichotomy-for-indecomposable-gcms
 kind: theorem
 title: "Finite affine indefinite trichotomy for indecomposable gcms"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-generalized-cartan-matrix", "def-symmetrizable-generalized-cartan-matrix", "lem-strict-linear-alternative-for-gcm-trichotomy"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

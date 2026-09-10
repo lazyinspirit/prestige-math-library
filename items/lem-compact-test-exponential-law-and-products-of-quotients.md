@@ -7,6 +7,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -16,7 +17,7 @@ sources:
     - title: N. P. Strickland, The category of CGWH spaces
       url: https://www.math.ksu.edu/~dav/diffeos/StricklandCGHWSpaces.pdf
       locator: Propositions2.11–2.12 and2.17–2.20, pp.4–6; corrected map domains
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

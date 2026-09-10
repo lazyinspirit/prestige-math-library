@@ -2,7 +2,7 @@
 id: cor-borel-iff-analytic-and-coanalytic
 kind: corollary
 title: "Borel sets are exactly analytic and coanalytic sets"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-disjoint-analytic-sets-have-borel-separators", "lem-analytic-countable-operations-and-borel-inclusion", "def-axiom-of-choice"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

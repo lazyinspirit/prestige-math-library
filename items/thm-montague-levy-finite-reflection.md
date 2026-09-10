@@ -2,7 +2,7 @@
 id: thm-montague-levy-finite-reflection
 kind: theorem
 title: "Montague–Lévy reflection for a finite formula family"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-finite-formula-witness-rank-bounds, lem-finite-formula-witness-criterion, def-cumulative-hierarchy-stages, prop-cumulative-hierarchy-transitivity-and-growth, thm-recursion]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -52,4 +53,3 @@ Conventions and prerequisites: thm-transfinite-recursion, lem-ordinal-basics, de
 3.1 Continuity and monotonicity give $W_\beta=\bigcup_n W_{\beta_n}$: any earlier index is below some $\beta_n$. A finite tuple from this union is contained in one stage, by taking the maximum of finitely many indices; the empty tuple is in every stage. If an existential from the closed family is true in $W$ at that tuple, F1 gives a witness in $W_{\beta_{n+1}}\subseteq W_\beta$. [F1, step 2.1]
 
 4.1 The finite witness criterion F2 therefore gives agreement for every member of the closed family, hence for $\Phi$. For $V$, F3 supplies the increasing transitive hierarchy and its limit clause is F4; Foundation supplies exhaustion. Power Set constructs successor stages, Separation and Replacement construct the rank bounds, and Infinity, Replacement and Union supply step 2.1. For an empty $W$ every positive-arity tuple assertion is vacuous and closed-formula relativizations agree because both domains are empty. The entire construction is choice-free. [F2, F3, F4, step 3.1] ∎
-

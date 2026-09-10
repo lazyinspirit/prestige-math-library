@@ -2,7 +2,7 @@
 id: ex-koszul-euler-characteristic-empty-sequence
 kind: example
 title: "koszul euler characteristic empty sequence"
-status: draft
+status: published
 origin: pipeline
 deps: [def-koszul-euler-characteristic-and-degree-indexed-multiplicity, thm-hilbert-samuel-multiplicity-as-koszul-euler-characteristic, def-axiom-of-choice]
 provenance:
@@ -12,6 +12,7 @@ generation:
   role: example
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

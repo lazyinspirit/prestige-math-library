@@ -2,13 +2,14 @@
 id: "lem-relator-expressions-give-controlled-singular-planar-diagrams"
 kind: "lemma"
 title: "Relator expressions admit singular planar diagrams with controlled incidence"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-bounded-edge-coarse-triangular-filling", "def-singular-planar-labelled-relator-diagram", "prop-normal-closure-is-products-of-conjugates", "thm-reduced-words-form-the-free-group", "def-group-presentation", "lem-finite-polygonal-disk-and-collar-surgery"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

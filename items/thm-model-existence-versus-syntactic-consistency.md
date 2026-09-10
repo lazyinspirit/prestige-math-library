@@ -2,7 +2,7 @@
 id: thm-model-existence-versus-syntactic-consistency
 kind: theorem
 title: "Models and consistency for countable theories"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-countable-first-order-completeness, thm-set-language-first-order-soundness, def-arithmetic-provability-and-consistency]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -48,4 +49,3 @@ For theories extending Q, $0=1$ may replace the fixed contradiction: Q proves $0
 2.1 Fix one element a of that nonempty carrier. Interpret every unused constant by a, every unused positive-arity function by the constant-a function, and every unused relation by the empty relation. Replacement on the set signature collects these assignments. A term/formula induction shows that old-language evaluations and satisfaction are unchanged, as none of those new interpretations occurs there. Thus the expansion models the original theory and keeps the same countability injection. One element a suffices for all defaults, so no countable choice is used. [step 1.1]
 
 3.1 Any at most countable model is a set model, and F2 sends every set model to consistency. These implications together with steps 1.1–2.1 prove both equivalences. For an effective presentation, each finite formal proof has finitely many axiom witnesses and hence a numerical certificate, and conversely the checker decodes every accepted certificate to a proof. Numeralwise correctness of F3 therefore makes absence of any actual refutation exactly truth in standard omega of its Con sentence. The construction places no condition making the relation actual membership. [F2, F3, step 1.1, step 2.1] ∎
-

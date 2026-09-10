@@ -2,7 +2,7 @@
 id: thm-standard-borel-spaces-admit-bimeasurable-real-codings
 kind: theorem
 title: "Standard borel spaces admit bimeasurable real codings"
-status: draft
+status: published
 origin: pipeline
 deps: [lem-hilbert-cube-has-a-bimeasurable-real-coding, def-standard-borel-space, thm-hilbert-cube-universal-for-separable-metrizable-spaces, thm-completely-metrizable-subspaces-of-metric-spaces-are-g-delta, def-axiom-of-choice, lem-standard-complete-metric-on-a-countable-product, thm-reals-cauchy-complete]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

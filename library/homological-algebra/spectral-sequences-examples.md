@@ -1,7 +1,7 @@
 ---
 page: spectral-sequences-examples
 title: Spectral Sequences — Examples
-status: draft
+status: published
 items: []
 examples:
 - ex-the-two-step-filtration-and-its-spectral-sequence

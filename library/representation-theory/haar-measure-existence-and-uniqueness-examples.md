@@ -1,7 +1,7 @@
 ---
 page: haar-measure-existence-and-uniqueness-examples
 title: Haar Measure Existence and Uniqueness — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-counting-measure-as-haar-measure-on-a-discrete-group

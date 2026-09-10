@@ -2,7 +2,7 @@
 id: lem-game-covering-composition-and-continuity
 kind: lemma
 title: "Composition and continuity of game coverings"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-game-covering-and-k-covering"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

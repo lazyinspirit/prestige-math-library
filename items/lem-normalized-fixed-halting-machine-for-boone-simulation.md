@@ -2,7 +2,7 @@
 id: lem-normalized-fixed-halting-machine-for-boone-simulation
 kind: lemma
 title: "Normalized fixed halting machine for boone simulation"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-halting-is-recognizable-and-undecidable", "def-deterministic-one-tape-turing-machine", "def-turing-machine-initial-and-halting-configuration-interface"]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

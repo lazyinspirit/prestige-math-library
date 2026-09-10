@@ -2,7 +2,7 @@
 id: thm-rosser-incompleteness-for-effective-theories
 kind: theorem
 title: "Rosser incompleteness from consistency"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-arithmetic-diagonal-lemma, def-arithmetic-provability-and-consistency, lem-q-numeral-calculation-and-bounded-cases, lem-interpretation-translates-finite-derivations]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -48,4 +49,3 @@ For theories extending Q, $0=1$ may replace the fixed contradiction: Q proves $0
 2.1 If n proves not-R, consistency implies that Q refutes every proof-of-R check for p at most n. F3 gives their bounded universal and splits arbitrary p into $p\le\bar n$ or $\overline{n+1}\le p$. The first case has false antecedent. In the second, the numeral order calculation in F3 gives $\bar n\le p$; the positive check at n witnesses the consequent. Q thus proves the right side for every p and hence proves R, again a contradiction. Neither R nor its negation is provable. [F2, F3, step 1.1]
 
 3.1 For an interpretation I, define arithmetic predicates P(p,e) and N(p,e) to check proofs of the translated sentence with code e and its translated negation. The formula translation itself is primitive recursive from its finite syntactic data, so these are primitive-recursive checks; the supplied effective axiom-proof certificates are used only when translating Q theorems. Diagonalize the Rosser formula in Q using P,N. An actual proof of $R^I$ gives by the finite argument of step 1.1 a Q proof of not-R; F4 translates it to a T proof of $\neg R^I$. An actual proof of $\neg R^I$ is a proof of $(\neg R)^I$, since translation commutes with negation; step 2.1 gives a Q proof of R, which F4 translates. Thus both alternatives contradict consistency in this case as well. [F1, F2, F3, F4, step 1.1, step 2.1] ∎
-

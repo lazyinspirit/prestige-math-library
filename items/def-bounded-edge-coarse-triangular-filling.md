@@ -2,7 +2,9 @@
 id: "def-bounded-edge-coarse-triangular-filling"
 kind: "definition"
 title: "Bounded-edge coarse fillings of loops and triangles"
-status: "draft"
+status: published
+verification:
+  audited: 2026-09-10
 origin: "pipeline"
 deps: ["def-metric-space", "def-algebraic-relator-area-and-dehn-function-of-a-finite-presentation"]
 provenance:

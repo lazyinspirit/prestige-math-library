@@ -2,13 +2,14 @@
 id: "lem-polygonal-boundary-crossing-for-affine-disk-maps"
 kind: "lemma"
 title: "Polygonal boundary crossing forces coverage by affine triangles"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-bounded-edge-coarse-triangular-filling", "def-complete-ordered-field", "cor-cauchy-reals-lub-complete"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

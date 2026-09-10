@@ -4,6 +4,7 @@ kind: example
 title: Tightness from a uniform moment bound
 deps: ["def-tight-family-of-probability-measures", "cor-markov-inequality-for-random-variables", "thm-heine-borel-rn", "lem-metrics-on-rn", "def-real-power", "thm-real-power-laws", "thm-real-power-continuity-and-derivatives"]
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

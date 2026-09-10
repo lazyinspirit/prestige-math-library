@@ -2,13 +2,14 @@
 id: "ex-asymptotic-cones-of-lines-and-trees"
 kind: "example"
 title: "Cones of a line and of real trees"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-rescaled-ultralimit-and-asymptotic-cone", "lem-bounded-real-ultralimits-and-free-tail-extension", "lem-geodesic-segments-have-isometric-ultralimits", "lem-triangle-extrema-and-real-tree-tripod-rules", "lem-sublinear-minsize-makes-every-cone-geodesic-a-limit-geodesic", "lem-real-line-is-a-metric-space", "def-axiom-of-choice"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: lem-kac-moody-relation-module-embeds-in-verma-modules-and-obeys-the-casimir-constraint
 kind: lemma
 title: "Kac moody relation module embeds in verma modules and obeys the casimir constraint"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-enveloping-quotient-kernels-and-augmentation-intersections", "lem-bounded-above-kac-moody-weight-modules-are-generated-by-primitive-vectors", "thm-generalized-kac-moody-casimir-is-central-and-scalar-on-highest-weight-modules", "prop-contragredient-algebra-has-a-triangular-decomposition", "def-kac-moody-verma-module"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

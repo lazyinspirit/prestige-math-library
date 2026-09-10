@@ -2,7 +2,7 @@
 id: lem-boone-semigroup-histories-detect-halting
 kind: lemma
 title: "Boone semigroup histories detect halting"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-boone-machine-semigroup-and-augmented-configurations"]
 justified_by: []
@@ -12,6 +12,7 @@ provenance:
   proof: ai-altered
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

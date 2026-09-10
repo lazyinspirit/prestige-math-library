@@ -2,13 +2,14 @@
 id: prop-contragredient-algebra-has-a-triangular-decomposition
 kind: proposition
 title: "Contragredient algebra has a triangular decomposition"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-contragredient-lie-algebra-before-the-maximal-ideal-quotient", "lem-free-lie-construction-for-finite-kac-moody-generators"]
 provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

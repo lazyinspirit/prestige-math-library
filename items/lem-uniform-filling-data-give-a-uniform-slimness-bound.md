@@ -2,13 +2,14 @@
 id: "lem-uniform-filling-data-give-a-uniform-slimness-bound"
 kind: "lemma"
 title: "Filling constants give a uniform slimness bound"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-linear-relator-area-implies-slim-geodesic-triangles", "lem-point-wedges-preserve-a-common-triangle-minsize-bound", "thm-sublinear-triangle-minsize-implies-hyperbolicity", "def-axiom-of-choice"]
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

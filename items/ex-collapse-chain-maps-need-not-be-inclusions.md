@@ -2,7 +2,7 @@
 id: ex-collapse-chain-maps-need-not-be-inclusions
 kind: example
 title: "Transporting an elementary-chain map through collapse"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-countable-elementary-submodels-and-transitive-collapses, thm-hartogs, def-axiom-of-choice, cor-elementary-membership-chains-and-collapse-compatibility, lem-collapse-fixes-transitive-parts-and-orders-ordinals]
 provenance:
@@ -10,6 +10,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: direct
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

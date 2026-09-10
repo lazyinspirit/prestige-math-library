@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
     - title: Hatcher, Algebraic Topology, Example 2.32
       url: https://pi.math.cornell.edu/~hatcher/AT/AT.pdf
       locator: §2.2, Example 2.32, p.137
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

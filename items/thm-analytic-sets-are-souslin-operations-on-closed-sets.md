@@ -2,7 +2,7 @@
 id: thm-analytic-sets-are-souslin-operations-on-closed-sets
 kind: theorem
 title: "Closed Souslin schemes characterize analytic sets"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-souslin-operation-on-set-schemes", "thm-analytic-closed-projection-and-continuous-image-equivalence", "def-axiom-of-choice"]
 justified_by: []
@@ -13,6 +13,7 @@ provenance:
   proof: ai-altered
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,13 +2,14 @@
 id: def-koszul-euler-characteristic-and-degree-indexed-multiplicity
 kind: definition
 title: "koszul euler characteristic and degree indexed multiplicity"
-status: draft
+status: published
 origin: pipeline
 deps: [def-koszul-complex-of-a-sequence-with-coefficients, def-composition-series-and-length-of-a-module, lem-module-relative-hilbert-samuel-polynomial-for-koszul-comparison]
 provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-10
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
