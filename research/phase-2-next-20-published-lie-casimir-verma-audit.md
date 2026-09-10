@@ -160,9 +160,42 @@ This completes only the direct-consumer disposition of the affected published
 root-decomposition theorem. It does not audit every downstream consumer of the
 triangular or Harish-Chandra interfaces.
 
+## Finite-Weyl convention interfaces
+
+The four short convention items nearest the active finite-Weyl work were read
+completely. Three already had one U-P row under the broad root impact map; those
+rows are extended rather than duplicated. The Weyl-vector definition had no
+row and is added as one U-P exact impact candidate.
+
+`def-root-reflections-and-the-weyl-group-action`, SHA-256
+`363ca0453e01b1ea078f5739b6fcdda041705a5717ad929b13d7e0ef21fb8600`, uses
+the exact affected `H_alpha` and root-system clauses. Once repaired, the
+denominator is nonzero and `alpha(alpha^vee)=2`, so the displayed linear map
+is an involution and belongs to `GL(h*)`; generating a subgroup is then
+well-defined. No separate formula defect is identified.
+
+`def-fundamental-weights-for-a-chosen-simple-root-system`, SHA-256
+`bf1316662b8d35392b85036f6c79d86dc1f1d4258719c310a757077c53d420fd`, uses
+the exact affected root-system interface. For a simple system in the spanning
+reduced root system, the simple coroots form a basis of the Cartan subalgebra,
+so finite-dimensional duality gives the unique displayed functionals. This is
+a coherent impact candidate pending the root repair, not a separately false
+definition.
+
+`def-weyl-vector-rho-for-a-chosen-positive-system`, SHA-256
+`9bd9a10bda75c3edaa7acd5938254926323c7b161d9c70c57d10fa9b701f889a`, is
+newly U-P through the affected triangular/positive-root interface. The finite
+half-sum itself is well-defined and no independent defect is identified.
+
+`lem-rho-shift-intertwines-the-dot-and-ordinary-weyl-actions`, SHA-256
+`8e74ff783818228b757c12658185eaee481e0003c5ebcea032bb1e13ead9be05`, uses
+the reflection action and Weyl vector above. Both directions of its proof are
+the correct conjugation calculation for `Tf(lambda)=f(lambda-rho)`. Its
+existing U-P row remains an impact candidate only.
+
 ## Limits
 
 The closure recomputation is mechanical front-matter evidence. The
-mathematical audit here is confined to the ten complete targets and their
+mathematical audit here is confined to the fourteen complete targets and their
 actually used clauses. Other members of `ROOT-74` and downstream Lie items
 retain their existing classifications and require their own item-level review.

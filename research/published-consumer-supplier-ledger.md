@@ -28005,15 +28005,26 @@ it receives a bounded clear. Exact hashes and clauses are in the same
 Casimir/Verma audit evidence. This completes only the direct-consumer pass for
 the root-decomposition theorem, not a transitive Lie audit.
 
+The four short finite-Weyl convention interfaces were then read in full. The
+existing U-P rows for root reflections, fundamental weights and rho-shift now
+carry exact formula evidence rather than only the broad root closure. The
+Weyl-vector definition is newly U-P through the affected triangular/positive-
+root supplier. After the upstream repairs, the coroot normalization makes each
+reflection an involution, simple coroots support the fundamental-weight dual
+basis, the Weyl vector is a finite half-sum, and both rho-shift directions are
+the displayed conjugation calculation. No independent defect was found in
+these four items. Evidence and current hashes are in the same bounded Lie
+audit file.
+
 <!-- phase3-classification-index:start -->
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,471 unique
+subsequently reconciled published IDs. It currently contains **2,472 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,471 indexed IDs are published; **13,459 published items remain outside this
+2,472 indexed IDs are published; **13,458 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28022,14 +28033,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1410 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1411 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 15 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 188 | Recorded direct review and an unresolved item-specific repair. |
 
 671 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,800 items and the expanded reference pool contains 2,471 unique items.
+1,801 items and the expanded reference pool contains 2,472 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -29252,6 +29263,7 @@ mathematical repairs. Evidence:
 
 | Published item | Existing evidence section / reconciliation locator |
 |---|---|
+| `def-weyl-vector-rho-for-a-chosen-positive-system` | Finite-Weyl convention audit 2026-09-11: exact impact candidate through the affected triangular/positive-root interface. The finite half-sum defining rho is coherent and no independent defect was found. Revalidate after the triangular/root supplier repair. Exact hash/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `thm-triangular-decomposition-from-a-chosen-positive-root-system` | Finite-Weyl/root-decomposition follow-up 2026-09-11: exact impact candidate through the already-A-P root decomposition and root-bracket proposition. Grouping positive/zero/negative spaces, bracket closure and the concatenated PBW-basis argument are sound once those suppliers are repaired; no independent defect identified in this scope. Exact hash/clauses: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `def-regular-root-hyperplane-arrangement-in-a-cartan-subalgebra` | Finite-Weyl/root-decomposition follow-up 2026-09-11: exact impact candidate through the affected finite root-set interface. The displayed complement of root kernels is internally consistent; revalidate after the root-decomposition repair. Exact hash/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `prop-centralizer-of-a-cartan-element-from-its-vanishing-roots` | Finite-Weyl/root-decomposition follow-up 2026-09-11: exact impact candidate through the affected direct-sum decomposition. The displayed commutator calculation and componentwise centralizer criterion are sound after that supplier is repaired. Exact hash/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
@@ -29355,7 +29367,7 @@ mathematical repairs. Evidence:
 | `def-finite-torus-fourier-transform` | 51. Exact live-plan metadata resynchronization set |
 | `def-first-uncountable-ordinal` | 7.1 Recorded-Not-Proved closure and prose defects |
 | `def-folner-set-and-folner-condition` | 30.3 Published item-order and metadata repairs (Phase 3) |
-| `def-fundamental-weights-for-a-chosen-simple-root-system` | Cross-category Phase-2 roots and their published impact |
+| `def-fundamental-weights-for-a-chosen-simple-root-system` | Cross-category root impact, exact finite-Weyl follow-up 2026-09-11: full definition read. After the affected root-system repair, simple coroots form a Cartan basis and finite-dimensional duality gives the displayed fundamental weights. No independent definition defect identified. Exact hash/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `def-gap-csp` | 51. Exact live-plan metadata resynchronization set |
 | `def-generalized-central-character-subcategory-of-o` | Cross-category Phase-2 roots and their published impact |
 | `def-generated-sigma-algebra` | 0A.2 Exact Phase-3 defects in published content |
@@ -29437,7 +29449,7 @@ mathematical repairs. Evidence:
 | `def-relativized-complexity-class` | 51. Exact live-plan metadata resynchronization set |
 | `def-relativizing-proof-technique` | 51. Exact live-plan metadata resynchronization set |
 | `def-riemann-integral-over-a-jordan-set` | 9.5 Forward order and load-bearing body links |
-| `def-root-reflections-and-the-weyl-group-action` | Cross-category Phase-2 roots and their published impact |
+| `def-root-reflections-and-the-weyl-group-action` | Cross-category root impact, exact finite-Weyl follow-up 2026-09-11: full definition read. Repaired `H_alpha` and root-system clauses give a nonzero denominator and `alpha(alpha^vee)=2`, so the displayed map is a linear involution and generates a well-defined subgroup of `GL(h*)`. No independent formula defect identified. Exact hash/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `def-scalar-and-vector-line-integrals-along-piecewise-c1-paths` | 9.5 Forward order and load-bearing body links |
 | `def-scheme-theoretic-inverse-image-subscheme` | Published scheme-pair repair |
 | `def-schur-covering-group-of-a-finite-group` | 30.7 Group-owned low-degree (co)homology Phase-2 supplier |
@@ -30094,7 +30106,7 @@ mathematical repairs. Evidence:
 | `lem-regular-semisimple-elements-form-a-dense-open-subset` | Cross-category Phase-2 roots and their published impact |
 | `lem-regularization-preserves-value-quantitatively` | 51. Exact live-plan metadata resynchronization set |
 | `lem-relative-homology-of-the-standard-handle-pair` | Continuing personal audit: exact examination pool and AT-24 contracts |
-| `lem-rho-shift-intertwines-the-dot-and-ordinary-weyl-actions` | Cross-category Phase-2 roots and their published impact |
+| `lem-rho-shift-intertwines-the-dot-and-ordinary-weyl-actions` | Cross-category root impact, exact finite-Weyl follow-up 2026-09-11: full proof read. Both implications correctly conjugate the dot action by `Tf(lambda)=f(lambda-rho)`; retain U-P only through the affected reflection/Weyl-vector interfaces. Exact hash/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `lem-riemann-integrable-function-has-borel-darboux-envelopes` | Exact direct impact-review queue |
 | `lem-riemannian-gradient-vanishes-exactly-at-critical-points` | riemannian-metrics-length-distance-and-volume and |
 | `lem-samuel-uniformity-preserves-the-induced-topology-under-dependent-choice` | Early-repair direct-consumer inventory — 2026-09-08 |

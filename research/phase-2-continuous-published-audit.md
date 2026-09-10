@@ -426,6 +426,17 @@ Post-root-decomposition-direct-consumer counts: 2,471 unique published IDs;
 U-P 1,410, U-C 15, A-R 187, A-P 188 and 671 bounded clears. The current census
 leaves 13,459 published IDs outside the index.
 
+The finite-Weyl convention pass fully reads root reflections, fundamental
+weights, the Weyl vector and rho-shift. The first, second and fourth already had
+U-P rows, now extended with their exact sound formulas and affected supplier
+paths. The Weyl-vector definition is one new U-P impact candidate through the
+triangular/positive-root interface. No independent defect was found in these
+four items. Evidence remains in the bounded Lie audit file.
+
+Post-finite-Weyl-convention counts: 2,472 unique published IDs; U-P 1,411,
+U-C 15, A-R 187, A-P 188 and 671 bounded clears. The current census leaves
+13,458 published IDs outside the index.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
