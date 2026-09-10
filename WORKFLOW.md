@@ -163,6 +163,8 @@ template/contradiction records, and excludes upheld reviews. Cited suppliers
 remain diagnostic context, not repair targets. Repair envelopes retain full
 reports in a separate evidence artifact; prompts contain only relevant failures
 and the focused repair brief, never the old whole-group reading assignment.
+Forward-reference gates suppress the inventory and drain stdout before exit so
+the actual error cannot be lost behind thousands of inherited-reference rows.
 Inherited published items need not acquire a new-batch proof contract merely
 to enter the handoff; their licence, precheck and final published-repair checks
 remain mandatory. New proof-bearing items require their owning contract;

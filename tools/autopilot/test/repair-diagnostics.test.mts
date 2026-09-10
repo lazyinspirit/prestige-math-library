@@ -1,6 +1,7 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
 import { itemsFromGateFailure, repairGateOutput } from '../stages/mathlib.mts';
+import { stages } from '../stages/mathlib.mts';
 
 test('mixed gate reports retain dependency failures without routing warning inventories', () => {
   const failures = [
@@ -35,4 +36,11 @@ test('boundary repair scope excludes upheld records and retains every unresolved
 test('historical boundary text drops its upheld inventory', () => {
   const failure = { id: 'boundary-audit', output: 'TEMPLATE REUSE — 1 cluster\n    items: lem-live-template\nCONTRADICTED DISPOSITIONS — none\nUPHELD BY REVIEW — 1 row\n  lem-upheld-boundary  [empty] by reviewer' };
   assert.deepEqual(itemsFromGateFailure(failure), ['lem-live-template']);
+});
+
+test('preflight requests compact forward checks and complete structured boundary evidence', () => {
+  const stage: any = stages.find(s => s.id === '7-preflight');
+  const gates = stage.gates({run: 'diagnostic-fixture', repo: new URL('../../..', import.meta.url).pathname});
+  assert.ok(gates.find((g: any) => g.id === 'fwdcheck').argv.includes('--quiet'));
+  assert.ok(gates.find((g: any) => g.id === 'boundary-audit').argv.includes('--json'));
 });

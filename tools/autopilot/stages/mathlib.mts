@@ -152,7 +152,7 @@ const repoWide = (ctx, { pendingAuditOk = false }: { pendingAuditOk?: boolean } 
     liveness: { pattern: /(\d+)\s+checked/.source, min: 1, unit: 'items checked' },
   }),
   gate('depcheck', ['node', 'tools/depcheck.mjs', ...(pendingAuditOk ? ['--pending-audit-ok'] : [])]),
-  gate('fwdcheck', ['node', 'tools/fwdcheck.mjs']),
+  gate('fwdcheck', ['node', 'tools/fwdcheck.mjs', '--quiet']),
   extGate(),
   gate('rendercheck', ['node', 'tools/rendercheck.mjs']),
   // gates.mjs listed these two as gates of record at steps 3/5/8/9 and

@@ -465,4 +465,6 @@ if (asJson) {
   }
 }
 
-process.exit(errors.length ? 1 : 0);
+// Let stdout drain: an immediate exit can discard the final diagnostics when
+// the inventory is larger than the pipe buffer.
+process.exitCode = errors.length ? 1 : 0;
