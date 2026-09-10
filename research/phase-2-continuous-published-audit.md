@@ -536,6 +536,17 @@ IDs: U-P 1,413, U-C 15, A-R 187, A-P 190 and 689 bounded clears; 13,436 remain
 outside the index. Evidence:
 `research/phase-2-next-20-published-cw-compactness-choice-audit.md`.
 
+The deeper active HG planar-filling route adds eight bounded clears after full
+body reads: its two definitions, finite polygonal disk/collar surgery, affine
+boundary crossing, complete-occurrence relator folding, singular-diagram
+thickening, the controlled coarse-filling theorem and the final linear-area
+slimness theorem. Loop/bridge occurrences, empty relators, zero-edge diagrams,
+finite area counts, the third-side crossing barrier and the `P+6` side
+approximation are explicit and coherent. This does not certify every lower
+topology/group supplier. Counts are now 2,502 unique published IDs: U-P 1,413,
+U-C 15, A-R 187, A-P 190 and 697 bounded clears; 13,428 remain outside the
+index. Evidence: `research/phase-2-next-20-published-hg-planar-filling-audit.md`.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
@@ -546,5 +557,5 @@ outside the index. Evidence:
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,436 published items
+No exhaustive discovery claim is authorized while 13,428 published items
 remain outside the index and dependency interfaces remain unaudited.

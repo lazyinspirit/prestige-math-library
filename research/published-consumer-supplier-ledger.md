@@ -28038,11 +28038,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,494 unique
+subsequently reconciled published IDs. It currently contains **2,502 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,494 indexed IDs are published; **13,436 published items remain outside this
+2,502 indexed IDs are published; **13,428 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28056,9 +28056,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 190 | Recorded direct review and an unresolved item-specific repair. |
 
-689 further reference-pool items have bounded no-repair-needed dispositions
+697 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,805 items and the expanded reference pool contains 2,494 unique items.
+1,805 items and the expanded reference pool contains 2,502 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28854,6 +28854,14 @@ owner's scan policy.
 | `lem-sublinear-minsize-makes-every-cone-geodesic-a-limit-geodesic` | Active HG cone/minsize audit 2026-09-11: complete item read. Above/below-threshold bounds make scaled minsize vanish; minimizing triples coalesce, and distance additivity forces every arbitrary cone-segment point onto the prescribed side limit. Isometric parameters give equality and uniqueness. AC is explicit. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-cone-minsize-audit.md`. |
 | `thm-sublinear-triangle-minsize-implies-hyperbolicity` | Active HG cone/minsize audit 2026-09-11: complete theorem read. For arbitrary basepoints/scales, sublinear minsize coalesces each represented triangle to a tripod in its uniquely geodesic cone; the all-tree-cones theorem then yields a finite uniform slimness constant. The free ultrafilter and representative selections are under stated AC. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-cone-minsize-audit.md`. |
 | `lem-coarse-triangle-minsize-is-bounded-by-square-root-area` | Active HG cone/minsize audit 2026-09-11: complete item read. The third-side affine barrier correctly retains the loss `h=m/2-r`; crossing gives the square-root bound, with nonpositive and zero cases explicit. Hausdorff approximation of the three continuous sides costs exactly `2e` by a limiting argument. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-cone-minsize-audit.md`. |
+| `def-bounded-edge-coarse-triangular-filling` | Active HG planar-filling audit 2026-09-11: complete definition read. Exact boundary lists, repetition refinements, marked corner occurrences and the singleton convention for a length-zero loop are precise; only a vertex map is required, so no continuous target-space filling is imported. No repair or new pair in the used scope. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-planar-filling-audit.md`. |
+| `def-singular-planar-labelled-relator-diagram` | Active HG planar-filling audit 2026-09-11: complete definition read. Edge occurrences, occupied shores, distinct loop germs, thin edges, bridges and the directed outer walk are consistently separated and match the literal-folding proof. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-planar-filling-audit.md`. |
+| `lem-finite-polygonal-disk-and-collar-surgery` | Active HG planar-filling audit 2026-09-11: complete item read. Parity separation, finite diagonal triangulation, prescribed-boundary convex fan transfer and vertex-disk/edge-band surface analysis supply the exact disk, strip and filled-hole clauses used later, including loop germs. It does not assert an ambient-plane extension. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-planar-filling-audit.md`. |
+| `lem-polygonal-boundary-crossing-for-affine-disk-maps` | Active HG planar-filling audit 2026-09-11: complete item read. Oriented internal-edge counts cancel, clamping preserves the boundary count outside the test point, generic coverage closes by finite closedness, and polygonal subdivision proves union area at most the triangle-area sum. The resulting `h^2<=Nr^2` clause is sound. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-planar-filling-audit.md`. |
+| `lem-relator-expressions-give-controlled-singular-planar-diagrams` | Active HG planar-filling audit 2026-09-11: complete item read. The collapse handles complete inverse-labelled occurrences, loop/equal-endpoint circles and exterior spurs without partial labelled edges or faces. Face peeling proves contractibility, literal-word restoration adds spurs, and incidence plus twice-traversed thin bridges gives `E<=Lm+n` independently of conjugator length. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-planar-filling-audit.md`. |
+| `lem-singular-planar-diagrams-have-controlled-coarse-disk-thickenings` | Active HG planar-filling audit 2026-09-11: complete item read. Compatible vertex, band and cap fans contribute `8E+8E+4I`; labels give edge bound `max(1,L)`, boundary repetitions preserve occurrences, and the isolated zero-edge case supplies four triangles. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-planar-filling-audit.md`. |
+| `lem-relator-disks-give-area-controlled-coarse-fillings` | Active HG planar-filling audit 2026-09-11: complete item read. A least relator-expression length, controlled diagram and thickening give the printed area bound. Consistent corner endpoint choices turn arbitrary geodesic sides into a null whole-edge word of length at most `P+6`, with finite arc vertices within three of the sides. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-planar-filling-audit.md`. |
+| `thm-linear-relator-area-implies-slim-geodesic-triangles` | Active HG planar-filling audit 2026-09-11: complete theorem and exact filling/minsize/cone clauses read. Its substitutions give the printed `A(K,L) sqrt(P+7)+B(L)` bound; the explicit epsilon estimate is sublinear, and the AC-qualified cone criterion yields uniform slimness. Zero constants and `P=0` are covered. This reconciles the older planned-item mention. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-planar-filling-audit.md`. |
 
 
 ### A-P — Audited items pending Phase 3 repair
