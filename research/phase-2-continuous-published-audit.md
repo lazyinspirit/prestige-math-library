@@ -495,6 +495,19 @@ choice or live blocker. Counts are now 2,476 unique published IDs: U-P 1,410,
 U-C 15, A-R 187, A-P 189 and 675 bounded clears; 13,454 remain outside the
 index. Evidence: `research/phase-2-next-20-published-lebesgue-number-audit.md`.
 
+The active draft Killing replacement's published algebraic inputs receive five
+new bounded clears: primary decomposition, finite CRT, complex-polynomial
+growth/global-minimum, local minimum-modulus descent and the resulting FTA.
+The primary kernels and proper-annihilator contradiction, finite Bézout residue
+interpolation, and full leading-term/minimum/local-descent route are sound in
+the exact used clauses. In the descent proof the squared-modulus estimate holds
+for every positive parameter below a fixed bound, hence for arbitrarily small
+parameters; naming a neighbourhood radius would be optional exposition. These
+clears do not close the published Killing A-P row because its local replacement
+remains draft. Counts are now 2,481 unique published IDs: U-P 1,410, U-C 15,
+A-R 187, A-P 189 and 680 bounded clears; 13,449 remain outside the index.
+Evidence: `research/phase-2-next-20-published-killing-algebraic-suppliers-audit.md`.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
@@ -505,5 +518,5 @@ index. Evidence: `research/phase-2-next-20-published-lebesgue-number-audit.md`.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,454 published items
+No exhaustive discovery claim is authorized while 13,449 published items
 remain outside the index and dependency interfaces remain unaudited.

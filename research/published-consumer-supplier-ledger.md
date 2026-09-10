@@ -28038,11 +28038,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,476 unique
+subsequently reconciled published IDs. It currently contains **2,481 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,476 indexed IDs are published; **13,454 published items remain outside this
+2,481 indexed IDs are published; **13,449 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28056,9 +28056,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 189 | Recorded direct review and an unresolved item-specific repair. |
 
-675 further reference-pool items have bounded no-repair-needed dispositions
+680 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,801 items and the expanded reference pool contains 2,476 unique items.
+1,801 items and the expanded reference pool contains 2,481 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28840,6 +28840,11 @@ owner's scan policy.
 | `lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval` | Active connection-supplier audit 2026-09-11: full lemma and its continuation/Gronwall interfaces read. The declared first-order-IVP definition fixes positive state dimension, so the short Statement's failure to repeat `n>=1` is optional exposition; the live draft invokes this lemma only for positive rank and separately handles rank zero. Constant coefficient extension, two-sided Gronwall bounds, compact-interior continuation and local uniqueness prove the exact published clause. Four direct published consumers remain in the same positive-dimensional variational-system scope or are explicitly two-dimensional. No repair or new pair. Exact hashes/clauses/dedup: `research/phase-2-next-20-published-linear-matrix-ode-audit.md`. |
 | `lem-ode-extension-from-a-compact-interior-region` | Active connection-supplier continuation audit 2026-09-11: full statement, proof and exact Picard, gluing and vector-integral interfaces read. Compactness yields an interior endpoint-state subsequence; the compact-cylinder field bound and first-exit estimate control the whole tail; local existence and uniqueness glue the endpoint solution. The sequence is supplied by the hypothesis, so no choice sequence is constructed. No repair or new pair in this used scope. Exact hashes/clauses/dedup: `research/phase-2-next-20-published-linear-matrix-ode-audit.md`. |
 | `thm-lebesgue-number-lemma` | Active connection-supplier audit 2026-09-11: complete theorem and exact compactness, distance-to-complement, diameter and extreme-value clauses read. Empty-space and whole-cover-member cases are separated before complements are used. The finite maximum of complement distances is positive pointwise and attains a positive minimum; a set of smaller diameter lies in the corresponding cover member. Only finite choices occur. This consolidates the historical clear comparison mention under its single alias and supplies the live compact-interval mesh exactly. No repair or new pair. Exact hashes/clauses/dedup: `research/phase-2-next-20-published-lebesgue-number-audit.md`. |
+| `thm-primary-decomposition-for-an-endomorphism` | Active Killing-supplier audit 2026-09-11: complete theorem and exact kernel/minimal-polynomial clauses read. Pairwise coprime irreducible powers iterate the two-factor kernel split; a proper restriction factor would create a lower-degree annihilator. The zero-space branch is explicit. Over `C`, the separately audited FTA clause gives the generalized eigenspaces used by the draft. No repair, choice use or new pair. Exact hashes/scope/dedup: `research/phase-2-next-20-published-killing-algebraic-suppliers-audit.md`. |
+| `thm-chinese-remainder-theorem-for-comaximal-ideals` | Active Killing-supplier audit 2026-09-11: complete finite theorem read. Complementary products of pairwise Bézout residues give elements congruent to one modulo one ideal and zero modulo all others; finite linear combination realizes the requested residues, and induction gives intersection equals product. This supplies the draft's finite Hermite interpolation exactly and uses only finite choices. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-killing-algebraic-suppliers-audit.md`. |
+| `lem-complex-polynomial-growth-and-minimum-modulus` | Active Killing/FTA supplier audit 2026-09-11: complete lemma read. Leading-term domination outside a large square, finite polynomial continuity and compact extreme value give a global modulus minimizer. The outer-square comparison is correctly strict. No repair or new pair in this exact clause. Exact hash/scope/dedup: `research/phase-2-next-20-published-killing-algebraic-suppliers-audit.md`. |
+| `lem-dalembert-minimum-modulus-descent` | Active Killing/FTA supplier audit 2026-09-11: complete lemma read. The chosen unit direction makes the first nonzero translated term decrease squared modulus; the displayed estimate holds for every positive `t` below one fixed open bound, hence for arbitrarily small `t`. Naming an additional neighbourhood-radius bound would be optional exposition, not a proof gap. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-killing-algebraic-suppliers-audit.md`. |
+| `thm-fundamental-theorem-of-algebra-minimum-modulus-proof` | Active Killing-supplier audit 2026-09-11: complete two-step theorem and both complete direct suppliers read. Global minimum plus arbitrary-small local descent forces the minimum value to vanish, supplying a complex root. This is the exact finite spectrum clause used in the draft Killing proof. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-killing-algebraic-suppliers-audit.md`. |
 
 
 ### A-P — Audited items pending Phase 3 repair
