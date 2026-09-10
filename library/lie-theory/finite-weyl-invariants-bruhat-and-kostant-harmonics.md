@@ -21,6 +21,7 @@ items:
   - thm-chevalley-shephard-todd-for-finite-weyl-groups
   - def-finite-semisimple-lie-algebra-and-symmetric-adjoint-action
   - lem-finite-lie-engel-trace-criterion-and-killing-nondegeneracy
+  - lem-finite-lie-triangularization-and-rank-one-complete-reducibility
   - def-kostant-harmonic-subspace-of-the-symmetric-algebra
   - lem-kostant-harmonics-give-an-invariant-polynomial-complement
   - lem-local-chevalley-restriction-for-kostant-freeness
