@@ -386,7 +386,8 @@ opposite-root bracket proposition uses both and omits the derivation of a
 nonzero opposite-root pairing needed for its whole-line clause. Global
 nondegeneracy, the repaired decomposition and orthogonality supply that local
 derivation. This final proposition is the exact published input to the already
-A-P root-system theorem. No additional pair is needed.
+A-P root-system theorem, whose existing row is extended with this clause rather
+than duplicated. No additional pair is needed.
 
 Post-root-chain counts: 2,461 unique published IDs; U-P 1,403, U-C 15, A-R 187,
 A-P 187 and 669 bounded clears. The current census leaves 13,469 published IDs
