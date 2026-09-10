@@ -234,3 +234,22 @@ partition/frame selections. Two exact holds resolved, but their decisions
 remain escalated for source-reading/remaining prerequisite review. Original
 count remains543/101ready/442held. Receipt:connection-local-resolution.md
 with the current run prefix. No source retry, published edit or extra pair.
+
+15:58:03 UTC checkpoint: supplemental author dispatch is live in3b-author,
+zero blockers,9/57owned item files written. Source/baseline gates completed
+normally before dispatch. Do not run pre-splice mint-policy checks against
+those files as though they were unexpected collisions.
+
+Chacon original-paper candidate had only3 recorded prior failures, so root
+made its permitted fourth attempt at15:54:19 UTC; AMS returned403. Two attempts
+remain for that candidate. No exhausted KT/Creutz allowance was reset. A
+bounded independent-source search examined Zizza’s canonical construction
+and complete two-dimensional proof, but did not certify it as the second
+complete proof of the exact owned one-dimensional map. S1/S2 stay open.
+Receipt:phase-2-next-20-chacon-original-recovery.json. No new source stamp or
+ready record was fabricated.
+
+Sol committed the latest deduplicated ledger reconciliation asb3e0d0155:
+2392unique IDs, no duplicate rows, U-P1434/U-C16/A-R187/A-P165/bounded590.
+Its exact path review confirms Fourier’s CC-explicit Euclidean density route
+does not use the defective general-LCH/DC route. No live blocker from it.

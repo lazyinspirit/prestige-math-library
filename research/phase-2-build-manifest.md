@@ -14,7 +14,7 @@ Programme: **147 pairs =44 published +20 original selected +2 added selected
 with FA22 before FA23. Admission evidence: `phase-2-five-cap-admission.md`
 and its exact published-interface census JSON. No original pair was removed.
 The supplemental run passed Step1 (57/57 ready;8/8 source fetches verified),
-completed assignment and entered Step3 authoring-scope preparation at15:41 UTC.
+completed assignment/scope/baseline and entered Step3 authoring at15:47 UTC.
 Independent author/review gates remain.
 The RL14 chamber gap is resolved by three local supporting items; finite-Weyl
 and large-cardinal prerequisite gaps, source exceptions and other local
