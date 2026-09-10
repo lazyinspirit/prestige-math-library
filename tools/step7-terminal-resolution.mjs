@@ -188,7 +188,7 @@ export function terminalResolutionIsCurrent(row, now) {
     && row.item_sha256 === now.item_sha256);
 }
 
-function currentHashes(root, id) {
+export function currentHashes(root, id) {
   const loader = tsxLoader();
   const scratch = mkdtempSync(join(tmpdir(), 'step7-terminal-hash-'));
   try {
@@ -282,6 +282,7 @@ export function terminalEvidence(root, run, id, stateDir = '.autopilot') {
     throw new Error(`${id}: completed ${paidCycles.length}/${TERMINAL_REJUDGE_ROUNDS} paid Terra rejudge; final adjudication is not licensed`);
 
   const candidates = [
+    join(root, 'research', `${run}-step7-item-${id}-closure.json`),
     join(root, 'research', `${run}-judge-closure.json`),
     join(root, 'research', `${run}-step7-published-closure.json`),
   ];

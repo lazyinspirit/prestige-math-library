@@ -140,9 +140,16 @@ Group readers supply Step 7 evidence. Step 7 resolves each reader concern, alert
 and rejection. Only confirmed fatal findings license mathematical repair;
 published repairs need separate authority. Register necessary suppliers before
 consumers and give each its own first judgment. Each repaired consumer gets one
-paid Terra rejudge. Rejection goes to a fresh Astra final adjudicator, which
+paid Terra rejudge immediately after its focused checks, through
+`tools/autopilot/bin/complete-step7-item.mjs`. The owning Alpha awaits this
+handoff and does not edit group files while its item is with the judge or final
+adjudicator. Other groups continue independently; no whole-run barrier delays
+an item. Rejection goes immediately to a fresh Astra final adjudicator, which
 accepts or repairs without another consumer judge call. Never invent stamps or
-repeat unchanged attempts. Preflight closes integrity before rejudgment.
+repeat unchanged attempts. Per-item licence, precheck and contract checks run
+before spending; whole-run preflight/closure remain mandatory joins. Concurrent
+handoffs reserve the shared one-rejudge budget under short receipt locks.
+An interrupted handoff resumes existing evidence, never spends a second call.
 
 Step 8 reviews scope and post-repair changes, closes impact and applies current
 stamps through the tool. Step 9 requires contracts, ledger, pathways, readiness

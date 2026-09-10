@@ -14,6 +14,7 @@ import { fileURLToPath } from 'node:url';
 import { resolveLineup } from './models.mjs';
 import { tsxLoader } from './paths.mjs';
 import { loadStep7JudgeEvidence, rejectionKey } from './step7-evidence.mjs';
+import { withReceiptLock } from './autopilot/src/receipt-lock.mjs';
 
 export const STEP7_MAX_REJUDGE_CYCLES = 1;
 export const STEP7_REJUDGE_RECEIPT_VERSION = 2;
@@ -73,10 +74,32 @@ export function seedInitialFatalContexts(receipt, evidence, ids, run) {
   return changed;
 }
 
+export function mergeCycleReceipts(current, incoming) {
+  if (!current) return incoming;
+  if (current.run !== incoming.run) throw new Error('rejudge receipt run mismatch');
+  const cycles = new Map(current.cycles.map(row => [row.cycle_id, row]));
+  for (const row of incoming.cycles) {
+    const prior = cycles.get(row.cycle_id);
+    if (!prior && !String(row.kind).startsWith('initial-')) {
+      const used = cycleCounts({ cycles: [...cycles.values()] });
+      if (row.items.some(id => (used.get(id) ?? 0) >= STEP7_MAX_REJUDGE_CYCLES))
+        throw new Error('rejudge-cycle-exhausted: concurrent reservation already spent this item');
+    }
+    if (!prior?.completed_at || row.completed_at) cycles.set(row.cycle_id, row);
+  }
+  return { ...incoming, initial_fatal_contexts: {
+    ...current.initial_fatal_contexts, ...incoming.initial_fatal_contexts,
+  }, cycles: [...cycles.values()] };
+}
+
 function writeJsonAtomic(path, value) {
-  const tmp = `${path}.tmp`;
-  writeFileSync(tmp, `${JSON.stringify(value, null, 2)}\n`);
-  renameSync(tmp, path);
+  withReceiptLock(path, () => {
+    const merged = Array.isArray(value.cycles) && existsSync(path)
+      ? mergeCycleReceipts(JSON.parse(readFileSync(path, 'utf8')), value) : value;
+    const tmp = `${path}.${process.pid}.tmp`;
+    writeFileSync(tmp, `${JSON.stringify(merged, null, 2)}\n`);
+    renameSync(tmp, path);
+  });
 }
 
 function value(argv, flag, fallback = '') {
