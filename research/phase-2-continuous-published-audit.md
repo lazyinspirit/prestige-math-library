@@ -19,7 +19,26 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: conditional-variance propagation
+## Latest checkpoint: density, CDF and Stieltjes
+
+Evidence:
+`research/phase-2-frontier-22-published-density-cdf-stieltjes-audit.md`.
+
+Two U-P rows and three new IDs enter A-P. Density integration uses the affected
+integral chain and has an early proof terminator. Three explicit Countable-
+Choice statements omit `def-countable-choice`, contrary to rule 11. Stieltjes
+uniqueness also omits the empty set from its alleged pi-system; adjoining it is
+a complete repair. Extended-real arithmetic/lattice measurability moves U-P to
+bounded clear. Active CDF-kernel impact was reported immediately; no new pair
+is needed.
+
+Post-batch target index: 2,872 unique published IDs; U-P 1,379, U-C 0,
+A-R 187, A-P 280 and 1,026 bounded clears; 13,058 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks must be rerun before commit. Next target is any new exact reviewer
+handoff, then the next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: conditional-variance propagation
 
 Evidence:
 `research/phase-2-frontier-22-published-conditional-variance-propagation-audit.md`.

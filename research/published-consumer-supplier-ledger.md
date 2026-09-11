@@ -4,9 +4,21 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1382, U-C 0, A-R 187, A-P 275. The
+Current classifications: U-P 1379, U-C 0, A-R 187, A-P 280. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Density, CDF and Stieltjes audit — 2026-09-11
+
+Two U-P rows and three new IDs enter A-P. Density integration uses the affected
+nonnegative-integral chain and has a misplaced proof terminator. Three
+Countable-Choice statements omit their direct rule-11 dependency. The
+Stieltjes uniqueness proof also calls the nonempty family of half-open
+intervals a pi-system despite disjoint intersections; adjoining the empty set
+repairs it. The third U-P target, extended-real arithmetic/lattice
+measurability, is a bounded clear. Active CDF-kernel impact was reported; the
+local repair is one line and needs no pair. Exact evidence:
+`research/phase-2-frontier-22-published-density-cdf-stieltjes-audit.md`.
 
 ## Conditional-variance propagation audit — 2026-09-11
 
@@ -28932,6 +28944,7 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `thm-arithmetic-and-lattice-operations-preserve-measurability` | Frontier-22 density/CDF/Stieltjes audit 2026-09-11: threshold identities handle scalar, lattice and defined sums; positive products respect the zero-times-infinity convention, and positive/negative parts avoid undefined infinity subtraction. U-P to bounded clear; prior monitoring row retained. Exact hash/scope: `research/phase-2-frontier-22-published-density-cdf-stieltjes-audit.md`. |
 | `def-real-power` | Frontier-22 real-power/convexity audit 2026-09-11: Positive-base exponential/logarithm definition and restricted zero-base convention are coherent. U-P to bounded clear; prior forward-order impact retained. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
 | `thm-real-power-continuity-and-derivatives` | Frontier-22 real-power/convexity audit 2026-09-11: Chain rule gives both displayed derivatives on the stated domains; the derivative-algebra alias collision does not affect this exact-ID use. U-P to bounded clear; prior Marcinkiewicz impact retained. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
 | `def-convex-concave-and-midpoint-convex-functions` | Frontier-22 real-power/convexity audit 2026-09-11: Interval, endpoint-weight and strictness conventions are coherent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
@@ -30013,6 +30026,11 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `thm-integration-against-a-density` | Frontier-22 density/CDF/Stieltjes audit 2026-09-11: the simple-to-MCT proof uses the A-P density measure, nonnegative integral algebra/simple agreement and MCT; proof 2.1 puts its citation/terminator before the displayed result. Apply the common repair and move the marker. U-P to A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-density-cdf-stieltjes-audit.md`. |
+| `thm-existence-of-the-lebesgue-stieltjes-measure` | Frontier-22 density/CDF/Stieltjes audit 2026-09-11: the extension and compact-finiteness proof is sound, but this theorem explicitly assumes Countable Choice without declaring `def-countable-choice`. Add the direct rule-11 edge. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-density-cdf-stieltjes-audit.md`. |
+| `thm-uniqueness-of-the-lebesgue-stieltjes-measure-on-r` | Frontier-22 density/CDF/Stieltjes audit 2026-09-11: proof 1.1 defines only nonempty half-open intervals and calls them a pi-system, although disjoint intersections are empty. Adjoin the empty set; generation and finite exhaustion are unchanged. New A-P; active CDF-kernel impact reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-density-cdf-stieltjes-audit.md`. |
+| `thm-lebesgue-stieltjes-correspondence-with-distribution-functions` | Frontier-22 density/CDF/Stieltjes audit 2026-09-11: interval/right-continuity arguments are sound after the uniqueness repair, but the theorem uses affected Stieltjes existence/uniqueness and explicitly assumes Countable Choice without a direct dependency. Add `def-countable-choice` and repair the pi-system upstream. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-density-cdf-stieltjes-audit.md`. |
+| `thm-probability-law-and-distribution-function-correspondence` | Frontier-22 density/CDF/Stieltjes audit 2026-09-11: both directions are sound after the Stieltjes repair, but the theorem uses the affected correspondence and explicitly assumes Countable Choice without declaring `def-countable-choice`. U-P to A-P; active unique-fibre use reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-density-cdf-stieltjes-audit.md`. |
 | `def-expectation-of-a-nonnegative-or-integrable-random-variable` | Frontier-22 conditional-variance audit 2026-09-11: The nonnegative and finite signed/complex cases are correctly separated, but both use the affected Lebesgue integral. Clear to A-P; prior characteristic-function receipt retained. Apply the common integral/conditional repair; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-conditional-variance-propagation-audit.md`. |
 | `def-moments-variance-and-covariance` | Frontier-22 conditional-variance audit 2026-09-11: Absolute moments, means, variance and covariance use affected expectation; square-integrability adequately supplies product integrability. New A-P. Apply the common integral/conditional repair; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-conditional-variance-propagation-audit.md`. |
 | `def-conditional-variance` | Frontier-22 conditional-variance audit 2026-09-11: The squared-residual class uses affected conditional-class, contraction and taking-out interfaces; its stated well-definedness obligation is correctly assigned to the next lemma. New A-P. Apply the common integral/conditional repair; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-conditional-variance-propagation-audit.md`. |
@@ -31557,7 +31575,6 @@ mathematical repairs. Evidence:
 | `thm-an-oracle-separates-p-from-np` | 51. Exact live-plan metadata resynchronization set |
 | `thm-an-unrecognizable-language-exists` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `thm-analytic-sine-cosine-agree-with-right-triangle-ratios` | 9.6 Membership and plan drift |
-| `thm-arithmetic-and-lattice-operations-preserve-measurability` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-arithmetical-hierarchy-is-strict` | def-numbering-of-partial-computable-functions (home: acceptable-numberings-smn-and-the-recursion-theorem) |
 | `thm-artin-induction-for-rational-characters` | Transitive consumers (166), grouped by home page |
 | `thm-arzela-ascoli-for-real-ck` | 9.2 Recorded-not-proved quarantine and the DC rehome |
@@ -31724,7 +31741,6 @@ mathematical repairs. Evidence:
 | `thm-immerman-szelepcsenyi-nl-equals-conl` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `thm-independent-series-probability-and-almost-sure-convergence-agree` | 0A.2 Exact Phase-3 defects in published content |
 | `thm-infinite-order-elements-of-hyperbolic-groups-are-undistorted` | HG consumer map |
-| `thm-integration-against-a-density` | Exact direct impact-review queue |
 | `thm-integration-by-parts-for-absolutely-continuous-functions` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-invariance-of-dimension-for-euclidean-spaces` | Continuing personal audit: exact examination pool and AT-24 contracts |
 | `thm-invariance-theorem-for-plain-complexity` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
@@ -31816,7 +31832,6 @@ mathematical repairs. Evidence:
 | `thm-primes-residue-class-dirichlet-density` | Transitive consumers (166), grouped by home page |
 | `thm-private-coin-ip-equals-public-coin-ip` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `thm-probability-convergence-is-metrized-by-d-zero` | 0A.2 Exact Phase-3 defects in published content |
-| `thm-probability-law-and-distribution-function-correspondence` | 0A.2 Exact Phase-3 defects in published content |
 | `thm-product-dirichlet-l-nonvanishing-line-one` | Transitive consumers (166), grouped by home page |
 | `thm-projective-comparison-map-exists` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-projective-comparison-maps-are-unique-up-to-chain-homotopy` | Early-repair direct-consumer inventory — 2026-09-08 |
