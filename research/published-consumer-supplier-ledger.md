@@ -4,18 +4,28 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1407, U-C 0, A-R 189, A-P 208. The
+Current classifications: U-P 1407, U-C 0, A-R 189, A-P 210. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Total-variation consumer audit — 2026-09-11
+
+Two new simple-function interfaces are bounded clear. The integration definition
+moves from its just-added clear row to A-P, and the simple-integral domination
+proposition is new A-P: both load-bearingly use the already-A-P theorem that
+total variation is a measure. The existing supplier finding remains one row.
+Its finite-partial-sum repair is choice-free and needs no new pair. The active
+finite-complex-measure Fourier transform was reported as an exact downstream
+impact. Evidence:
+`research/phase-2-frontier-22-published-total-variation-consumer-audit.md`.
+
 ## Complex-measure foundation audit — 2026-09-11
 
-Three previously unclassified Fourier-measure interfaces are bounded clear.
-Complex countable additivity transfers componentwise to finite signed measures.
-Total variation defines the integrable class and bounds simple integrals, making
-the approximating integral sequence Cauchy and its limit independent of the one
-chosen sequence. No choice or current Step-5 blocker was found. Exact hashes,
-deduplication and limits are in
+Two Fourier-measure interfaces are bounded clear: complex countable additivity
+transfers componentwise to finite signed measures. The integration definition's
+formula and approximation-independence argument are sound, but a deeper supplier
+pass moved that item to A-P for its exact reliance on the already-A-P proof that
+total variation is a measure. Exact hashes, deduplication and limits are in
 `research/phase-2-frontier-22-published-complex-measure-foundation-audit.md`.
 
 ## L1 and Lebesgue-point audit — 2026-09-11
@@ -28700,9 +28710,10 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-simple-integral-against-a-signed-or-complex-measure` | Frontier-22 total-variation consumer audit 2026-09-11: unique nonzero level sets and finite variation make every finite displayed sum well defined; a one-piece partition gives the needed value bound without countable additivity. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-total-variation-consumer-audit.md`. |
+| `thm-l-one-functions-admit-dominated-complex-simple-approximations` | Frontier-22 total-variation consumer audit 2026-09-11: four supplied monotone simple approximations need only finite choice; componentwise MCT and the modulus bound give dominated complex `L^1` convergence. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-total-variation-consumer-audit.md`. |
 | `def-complex-measure` | Frontier-22 complex-measure audit 2026-09-11: complex-valued countable additivity and the empty-set clause define a finite-valued complex measure with no extended-complex ambiguity. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-complex-measure-foundation-audit.md`. |
 | `prop-real-and-imaginary-parts-of-a-complex-measure-are-finite-signed-measures` | Frontier-22 complex-measure audit 2026-09-11: convergent complex sums pass componentwise to finite real-valued countably additive parts, and their pointwise recombination is exact. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-complex-measure-foundation-audit.md`. |
-| `def-integration-against-a-signed-or-complex-measure` | Frontier-22 complex-measure audit 2026-09-11: `L^1(nu)=L^1(|nu|)` and total-variation domination make the supplied simple-approximation integrals Cauchy and approximation-independent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-complex-measure-foundation-audit.md`. |
 | `def-l-one-of-a-measure` | Frontier-22 L1/Lebesgue-point audit 2026-09-11: this is exactly the class of integrable complex representatives and explicitly defers a.e.-class quotienting. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-l-one-lebesgue-point-audit.md`. |
 | `def-translation-of-a-function-on-rn` | Frontier-22 L1/Lebesgue-point audit 2026-09-11: `tau_h f(x)=f(x-h)` unambiguously shifts the graph in the positive `h` direction. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-l-one-lebesgue-point-audit.md`. |
 | `def-c-zero-on-rn` | Frontier-22 L1/Lebesgue-point audit 2026-09-11: the real compact-tail definition is equivalent to Euclidean ball tails, and the separate published complex convention extends it componentwise. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-l-one-lebesgue-point-audit.md`. |
@@ -29680,6 +29691,8 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `def-integration-against-a-signed-or-complex-measure` | Frontier-22 total-variation consumer audit 2026-09-11 corrects its initial same-day clear: defining `L^1(nu)=L^1(|nu|)` and the approximation integral requires `|nu|` to be a measure, but that exact supplier remains A-P for its countable partition-selection/supremum proof. Repair the upstream theorem by finite near-maximal partitions and partial sums; the remaining Cauchy/independence argument is sound. Active finite-complex-measure Fourier use was reported. Clear to A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-total-variation-consumer-audit.md`. |
+| `prop-simple-integrals-are-bounded-by-total-variation` | Frontier-22 total-variation consumer audit 2026-09-11: the finite weighted-sum inequality is sound, but the proof invokes the already-A-P total-variation-measure theorem to integrate `|s|` and use monotonicity without inlining the finite-additivity bypass. Repair that supplier or prove its finite clauses locally. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-total-variation-consumer-audit.md`. |
 | `thm-the-pullback-fibre-product-is-a-smooth-vector-bundle` | Frontier-22 pullback-topology audit 2026-09-11: proof 1.1 gives only set bijections and 2.1 only smooth overlap formulas, without assigning the fibre product a topology, proving the bijections homeomorphisms, or proving the Hausdorff/second-countable total-space contract. Give it the subspace topology from `N x E`; published product-manifold and hereditary suppliers give separation/countability, and the explicit inverse `(q,v)->(q,Phi_alpha^{-1}(f(q),v))` proves the pulled-back trivializations are homeomorphisms. Two active draft definitions use the affected existence clause and need this local proof until the published item is repaired. New A-P; no new pair. Exact hash/impact: `research/phase-2-frontier-22-published-pullback-bundle-topology-audit.md`. |
 | `thm-dual-and-hom-transition-functions-define-smooth-bundles` | Frontier-22 dual/Hom audit 2026-09-11: inverse-transpose and conjugation formulas are correct, but proof 2.1 neither constructs the fibrewise-union topology nor proves the new total spaces second countable. The published cocycle route needs a supplied countable cover and hence `AC_omega` to extract subcovers here. A complete choice-free strategy instead takes the open quotient of the second-countable finite-product subspace of source frames and image tuples; local coordinates are `(p,C,V)->(p,VC^(-1))`, and images of a countable domain base form a quotient base. Inline that proof and declare the exact topology/smooth-inversion interfaces. New A-P; no new pair. The local repair is installed in all four affected drafts and 62 exact post-5a consumers were read, so there is no live draft blocker; this does not repair the published item. Exact hash/plan/scope: `research/phase-2-frontier-22-published-dual-hom-bundle-audit.md`; completion: `research/phase-2-next-20-hom-bundle-repair-completion.md`. |
 | `lem-normalizing-a-locally-finite-positive-smooth-family` | Manifold-null/normalization audit 2026-09-11: the conclusion calls `(supp(g_i))` an open cover for subordination, but supports are closed and the exact partition definition requires an open cover. Supply `(U_i)` with `supp(g_i) subset U_i`, use equality of cozero sets/supports after positive division, and prove reciprocal smoothness from earlier smooth algebra/composition. U-C to A-P; active consumers use the valid formula with actual open-cover containment. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |

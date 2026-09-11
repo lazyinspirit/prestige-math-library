@@ -27,22 +27,20 @@ imaginary series. Taking components in the countable-additivity identity thus
 gives countably additive finite real-valued set functions, hence finite signed
 measures, and the pointwise complex decomposition is exact.
 
-For signed or complex `nu`, the total variation is a positive measure and
-`L^1(nu)` is unambiguously `L^1(|nu|)`. A dominated complex-simple
-approximation to one fixed integrable function is supplied as a sequence; no
-family selection is needed. The total-variation estimate makes the integrals a
-Cauchy sequence, and applying it to the difference of two approximations proves
-the same limit. Indicator multiplication defines restriction to a measurable
-set. These are the exact clauses used by the active finite-complex-measure
-Fourier transform.
+The integration definition's formula and approximation-independence argument
+are correct conditional on total variation being a measure. A deeper supplier
+pass found that this condition is load-bearing on the already-A-P proof of
+`thm-total-variation-is-a-measure`; the initial clear disposition for this one
+definition is therefore corrected to A-P in
+`research/phase-2-frontier-22-published-total-variation-consumer-audit.md`.
 
-Classification: three new bounded no-repair-needed dispositions. No current
-Step-5 blocker, choice use, new Phase-2 supplier or new pair was found.
+Classification after the follow-up: two new bounded no-repair-needed
+dispositions and one A-P item. No new Phase-2 supplier or pair is needed.
 
 ## Limits
 
-This pass certifies the three complete targets and their exact integration
-interface. It does not re-audit the total-variation construction, its separate
-Radon–Nikodym density finding, or every Fourier-measure consumer. No external
-source was newly consulted, no published item was edited, and no independent
-judgment or exhaustive discovery claim is made.
+This pass certifies the two measure/component targets. The integration
+definition's corrected supplier impact is in the follow-up named above. It does
+not re-audit the separate Radon–Nikodym density finding or every Fourier-measure
+consumer. No external source was newly consulted, no published item was edited,
+and no independent judgment or exhaustive discovery claim is made.
