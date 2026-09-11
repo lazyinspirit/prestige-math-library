@@ -8,6 +8,18 @@ Current classifications: U-P 1407, U-C 0, A-R 189, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Homological-foundation audit — 2026-09-11
+
+Eight previously unclassified categorical and homological interfaces are
+bounded clear. Limits, abelian categories, chain complexes, homology and
+quasi-isomorphisms have the correct universal-property types. The cycle-boundary
+sequences are exact. Explicit AC supplies arbitrary-rank PID freeness and one
+differential section in every degree, giving the stated two-term complex
+decomposition without splitting boundaries inside cycles. Separate UCT and
+Kunneth consumer defects remain unchanged. No current Step-5 blocker was found.
+Exact hashes, deduplication and limits are in
+`research/phase-2-frontier-22-published-homological-foundation-audit.md`.
+
 ## Bounds and finite-extrema audit — 2026-09-11
 
 Four previously unclassified real-order interfaces are bounded clear. Lower
@@ -28611,6 +28623,14 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-limit-and-colimit-of-a-diagram` | Frontier-22 homological-foundation audit 2026-09-11: terminal cones and initial cocones give the displayed limit/colimit factorization equations in the correct directions. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-homological-foundation-audit.md`. |
+| `def-abelian-category` | Frontier-22 homological-foundation audit 2026-09-11: additivity, all kernels/cokernels and invertible canonical coimage-to-image comparison give the standard exact contract. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-homological-foundation-audit.md`. |
+| `def-chain-complex-in-an-abelian-category` | Frontier-22 homological-foundation audit 2026-09-11: the integer-graded differential has degree minus one and the correctly indexed square-zero law. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-homological-foundation-audit.md`. |
+| `def-homology-object-of-a-chain-complex` | Frontier-22 homological-foundation audit 2026-09-11: the chain identity factors the image boundary subobject through the kernel cycle subobject, and the cokernel is the well-typed homology object. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-homological-foundation-audit.md`. |
+| `def-quasi-isomorphism` | Frontier-22 homological-foundation audit 2026-09-11: the published induced-homology-map theorem makes the all-degree isomorphism condition well typed. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-homological-foundation-audit.md`. |
+| `lem-cycle-boundary-short-exact-sequences-for-a-free-complex-over-a-pid` | Frontier-22 homological-foundation audit 2026-09-11: corestricted differentials and cycle quotients have exactly the displayed kernels and images; the stronger general abelian-category proof is sound despite redundant PID metadata. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-homological-foundation-audit.md`. |
+| `lem-pid-submodules-of-free-modules-are-free-with-choice` | Frontier-22 homological-foundation audit 2026-09-11: explicit AC well-orders the basis and selects coordinate-ideal generators/lifts; transfinite induction proves spanning and the greatest-coordinate argument proves independence. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-homological-foundation-audit.md`. |
+| `lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces` | Frontier-22 homological-foundation audit 2026-09-11: explicit AC frees boundaries and selects degreewise differential sections; the coordinate maps give the stated locally finite two-term decomposition and do not split boundaries inside cycles. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-homological-foundation-audit.md`. |
 | `def-bounded-set` | Frontier-22 bounds/extrema audit 2026-09-11: lower/upper bounds have the standard quantifiers, making the empty set vacuously bounded without assigning it extrema. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-bounds-finite-extrema-audit.md`. |
 | `def-max-min` | Frontier-22 bounds/extrema audit 2026-09-11: membership distinguishes extrema from bounds, and order antisymmetry proves uniqueness, including the correct empty-set exclusion. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-bounds-finite-extrema-audit.md`. |
 | `lem-finite-set-has-max` | Frontier-22 bounds/extrema audit 2026-09-11: induction proves extrema for every finite real list, with totality and transitivity covering ties and duplicates; its later broad finite-set reading is discharged separately. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-bounds-finite-extrema-audit.md`. |
