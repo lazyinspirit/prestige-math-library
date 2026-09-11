@@ -4,9 +4,20 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1409, U-C 0, A-R 188, A-P 207. The
+Current classifications: U-P 1409, U-C 0, A-R 189, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Field-contract audit — 2026-09-11
+
+The current field contract and two immediate consequences are reconciled. The
+definition's 2026-07-28 owner-approved repair made multiplication associative,
+commutative and unital on all elements, fixing older wording that left products
+with zero unconstrained; it enters A-R with exact commit and hashes. The current
+contract then proves no zero divisors and multiplicative cancellation, so those
+two lemmas are new bounded clears. No current Step-5 blocker was found. Exact
+evidence and limits are in
+`research/phase-2-frontier-22-published-field-contract-audit.md`.
 
 ## Archimedean-core audit — 2026-09-11
 
@@ -28434,11 +28445,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,664 unique
+subsequently reconciled published IDs. It currently contains **2,667 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,664 indexed IDs are published; **13,266 published items remain outside this
+2,667 indexed IDs are published; **13,263 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28449,12 +28460,12 @@ Supplier mappings and subsequent item-specific findings remain above.
 |---|---|---:|---|
 | U-P | Unaudited and potentially defective items | 1409 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
-| A-R | Audited and repaired items | 188 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
+| A-R | Audited and repaired items | 189 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 207 | Recorded direct review and an unresolved item-specific repair. |
 
-860 further reference-pool items have bounded no-repair-needed dispositions
+862 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,804 items and the expanded reference pool contains 2,664 unique items.
+1,805 items and the expanded reference pool contains 2,667 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28515,6 +28526,8 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `lem-of-no-zero-divisors` | Frontier-22 field-contract audit 2026-09-11: multiplying `ab=0` by the inverse of a nonzero first factor gives the second factor zero under the current total multiplication contract. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-field-contract-audit.md`. |
+| `lem-of-mult-cancel` | Frontier-22 field-contract audit 2026-09-11: multiplying `ac=bc` by the inverse of the nonzero common factor and using associativity proves cancellation. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-field-contract-audit.md`. |
 | `def-archimedean-field` | Frontier-22 Archimedean-core audit 2026-09-11: cofinality is exactly the quantified canonical-natural condition, and the reciprocal remark follows from the published positive-inverse order law. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-archimedean-core-audit.md`. |
 | `lem-of-naturals-positive` | Frontier-22 Archimedean-core audit 2026-09-11: induction proves positivity/successor growth, while separate inductions prove compatibility with natural addition and multiplication. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-archimedean-core-audit.md`. |
 | `thm-of-archimedean` | Frontier-22 Archimedean-core audit 2026-09-11: the supremum-minus-one contradiction proves cofinality without choice. Its old U-P label was a supplier-impact tag from an unrelated repaired counterexample, not an item defect; moved U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-archimedean-core-audit.md`. |
@@ -29662,6 +29675,7 @@ The historical U-P300 scan’s 19 findings completed repair audit (7 A-R, 12 A-P
 
 | Published item | Repair evidence and scope |
 |---|---|
+| `def-field` | Frontier-22 field-contract audit 2026-09-11: commit `369534ce2b43b80abc28fae2a5af336c2ae5457d` repaired the older multiplication clause by asserting associativity, commutativity and the unit law on all field elements, including zero; owner approval and the countermodel are recorded in the item. Exact before/after/current hashes and bounded scope: `research/phase-2-frontier-22-published-field-contract-audit.md`. |
 | `def-c-zero-and-ell-infinity` | Manifold-null/normalization audit 2026-09-11 restores A-R after dismissing the later complex-scalar concern under the adequate-implicit-use rule. The actual LUB repair remains in the current file; published complex-norm conventions and modulus laws prove its coordinatewise norm claims. Historical reopening retained; no second repair. Exact current hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
 | `def-tor-by-resolving-the-left-module` | Repaired 2026-09-10: retain the supplied resolution P in `Tor^{R,P}_n(N,M)` until balance/change-of-resolution proves independence, instead of prematurely writing `Tor^R_n(N,M)`. Existing published right-resolution and balance interfaces suffice. No new Phase-2 supplier. The definition's notation/interface defect is closed; proof precheck is not applicable. Defect-focused review evidence: `phase-2-nine-step-25-alpha-step7-c.md`. |
 | `prop-degree-of-identity-constant-reflection-and-antipodal-sphere-maps` | Repaired 2026-09-10: replace the unsupported relative-homology calculation by the explicit two-vertex, two-edge cellular cycle. Published `thm-cellular-boundary-is-the-incidence-degree-matrix` and `thm-cellular-homology-computes-singular-homology` supply the boundary calculation and natural transfer to singular homology. Both dependencies are declared. Focused proof/render checks passed. No new Phase-2 supplier. Defect-focused evidence is in the reflection-degree finding below; this is not a whole-closure audit. |
