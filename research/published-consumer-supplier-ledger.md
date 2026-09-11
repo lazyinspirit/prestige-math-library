@@ -4,9 +4,20 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1400, U-C 0, A-R 187, A-P 230. The
+Current classifications: U-P 1392, U-C 0, A-R 187, A-P 230. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Kolmogorov-extension audit — 2026-09-11
+
+Eight U-P targets and three new IDs are bounded clears. Finite product sigma
+algebras, unordered cylinders, consistency, standard-Borel presentations,
+compact inner approximation, the cylinder premeasure, Caratheodory extension
+and the arbitrary-index diagonal proof are coherent. Full AC selects the
+coordinate presentations, covers countable choices and fills inactive
+coordinates; singleton marginal laws force every coordinate space nonempty.
+This supplies the current product-measure pullback without a blocker. Evidence:
+`research/phase-2-frontier-22-published-kolmogorov-extension-audit.md`.
 
 ## Finite-measure uniqueness audit — 2026-09-11
 
@@ -28686,11 +28697,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,741 unique
+subsequently reconciled published IDs. It currently contains **2,744 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,741 indexed IDs are published; **13,189 published items remain outside this
+2,744 indexed IDs are published; **13,186 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28699,14 +28710,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1400 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1392 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 230 | Recorded direct review and an unresolved item-specific repair. |
 
-924 further reference-pool items have bounded no-repair-needed dispositions
+935 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,817 items and the expanded reference pool contains 2,741 unique items.
+1,809 items and the expanded reference pool contains 2,744 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28767,6 +28778,17 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-product-sigma-algebra-and-finite-product-sigma-algebras` | Frontier-22 Kolmogorov audit 2026-09-11: binary, empty and recursively finite product sigma-algebras are coherently defined by measurable rectangles. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-kolmogorov-extension-audit.md`. |
+| `def-coordinate-maps-and-cylinder-sigma-algebra` | Frontier-22 Kolmogorov audit 2026-09-11: unordered finite coordinate generators agree under every enumeration, and the arbitrary product sigma-algebra is exactly the generated cylinder sigma-algebra. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-kolmogorov-extension-audit.md`. |
+| `def-consistent-family-of-finite-dimensional-distributions` | Frontier-22 Kolmogorov audit 2026-09-11: restriction pushforwards give the exact unordered finite-law compatibility, including the singleton empty product; coordinate permutations only relabel one finite support. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-kolmogorov-extension-audit.md`. |
+| `def-standard-borel-space` | Frontier-22 Kolmogorov audit 2026-09-11: the definition fixes the measurable structure through some Polish Borel presentation without selecting a topology, exactly matching the main theorem's explicit AC selection. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-kolmogorov-extension-audit.md`. |
+| `lem-finite-products-of-standard-borel-spaces-are-standard-borel` | Frontier-22 Kolmogorov audit 2026-09-11: finite presentation choice and the product Polish topology transport the Borel coordinate generators to the finite product sigma-algebra; the empty product is the singleton case. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-kolmogorov-extension-audit.md`. |
+| `lem-finite-coordinate-cylinder-sets-form-an-algebra` | Frontier-22 Kolmogorov audit 2026-09-11: empty-support cylinders and pullback to the union of two finite supports prove complement and finite-union closure. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-kolmogorov-extension-audit.md`. |
+| `lem-finite-coordinate-cylinders-form-a-pi-system` | Frontier-22 Kolmogorov audit 2026-09-11: pulling two bases to their finite support union proves intersection closure, and the whole product is an empty-support cylinder. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-kolmogorov-extension-audit.md`. |
+| `lem-cylinder-premeasure-from-consistent-finite-dimensional-laws-is-well-defined` | Frontier-22 Kolmogorov audit 2026-09-11: one point of the nonempty full product turns cylinder equality into equality on a common finite base; consistency and one common support give well-definedness and finite additivity. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-kolmogorov-extension-audit.md`. |
+| `thm-borel-probability-measures-on-polish-spaces-are-inner-regular` | Frontier-22 Kolmogorov audit 2026-09-11: summably tight dense-ball covers give a compact core, distance cores handle open sets and a lambda-system argument handles all Borel sets. Declared countable choice covers simultaneous approximants. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-kolmogorov-extension-audit.md`. |
+| `thm-caratheodory-extension-theorem` | Frontier-22 Kolmogorov audit 2026-09-11: the published outer-measure, source-algebra measurability and agreement clauses imply the extension on the generated sigma-algebra under the explicit countable-choice hypothesis. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-kolmogorov-extension-audit.md`. |
+| `thm-kolmogorov-extension-for-standard-borel-coordinate-spaces` | Frontier-22 Kolmogorov audit 2026-09-11: full AC selects compatible coordinate presentations and inactive values; compact inner approximants plus a diagonal subsequence prove cylinder-premeasure continuity, and Caratheodory/pi-lambda give existence/uniqueness on the cylinder sigma-algebra. Singleton laws imply coordinate nonemptiness. U-P to bounded clear; active pullback use is adequate. Exact hash/scope: `research/phase-2-frontier-22-published-kolmogorov-extension-audit.md`. |
 | `def-pi-system` | Frontier-22 finite-measure uniqueness audit 2026-09-11: nonempty binary-intersection closure is coherent and deliberately does not require the whole space. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-measure-uniqueness-audit.md`. |
 | `prop-measure-of-a-set-difference` | Frontier-22 finite-measure uniqueness audit 2026-09-11: disjoint additivity gives the sum formula; finite real cancellation and the separate infinite-total case avoid undefined extended subtraction. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-measure-uniqueness-audit.md`. |
 | `thm-continuity-from-below-for-measures` | Frontier-22 finite-measure uniqueness audit 2026-09-11: successive differences disjointify the union; either an infinite stage settles both sides or finite partial sums telescope to the extended-series supremum. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-measure-uniqueness-audit.md`. |
@@ -30298,12 +30320,10 @@ mathematical repairs. Evidence:
 | `def-conditional-kolmogorov-complexity` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-conjugate-representation-and-inertia-group` | Transitive consumers (166), grouped by home page |
 | `def-conp` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
-| `def-consistent-family-of-finite-dimensional-distributions` | 0A.2 Exact Phase-3 defects in published content |
 | `def-constraint-graph-and-labeling-value` | 51. Exact live-plan metadata resynchronization set |
 | `def-constraint-graph-regularization` | 51. Exact live-plan metadata resynchronization set |
 | `def-constructible-subset-variety` | AV-1 draft-page impact partition (Phase 3 only) |
 | `def-convergence-in-probability` | 0A.2 Exact Phase-3 defects in published content |
-| `def-coordinate-maps-and-cylinder-sigma-algebra` | 0A.2 Exact Phase-3 defects in published content |
 | `def-cyclic-induction-subgroup` | Transitive consumers (166), grouped by home page |
 | `def-decidable-and-recognizable-language` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-decomposition-map-from-ordinary-to-modular-grothendieck-groups` | 30.3 Published item-order and metadata repairs (Phase 3) |
@@ -30377,7 +30397,6 @@ mathematical repairs. Evidence:
 | `def-private-coin-public-coin-and-arthur-merlin-protocol` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-probability-convergence-metric` | 0A.2 Exact Phase-3 defects in published content |
 | `def-product-measure-on-sigma-finite-spaces` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
-| `def-product-sigma-algebra-and-finite-product-sigma-algebras` | 0A.2 Exact Phase-3 defects in published content |
 | `def-projective-indecomposable-characters-and-cartan-invariants` | Transitive consumers (166), grouped by home page |
 | `def-promise-preserving-reduction` | 51. Exact live-plan metadata resynchronization set |
 | `def-promise-problem` | 51. Exact live-plan metadata resynchronization set |
@@ -30413,7 +30432,6 @@ mathematical repairs. Evidence:
 | `def-spectral-edge-and-vertex-expansion` | 51. Exact live-plan metadata resynchronization set |
 | `def-spherical-averages-and-local-ball-means-in-rn` | euclidean-surface-measure-divergence-and-green-identities |
 | `def-standard-and-costandard-objects-in-category-o` | Supplier-to-published-consumer map |
-| `def-standard-borel-space` | 0A.7 Cross-category ownership seams |
 | `def-standard-inner-product-on-complex-class-functions` | finite-averaging-and-character-theory-prerequisites |
 | `def-strong-linkage-order-on-weights` | Cross-category Phase-2 roots and their published impact |
 | `def-sum-check-instance-and-protocol` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
@@ -30929,13 +30947,11 @@ mathematical repairs. Evidence:
 | `lem-face-containment-under-plane-subgraphs` | Scaffold III.4.1 — plane dual dependency |
 | `lem-finitary-monad-algebras-have-coequalizers-under-dependent-choice` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `lem-finite-b-stable-generators-and-weight-flags-in-category-o` | Cross-category Phase-2 roots and their published impact |
-| `lem-finite-coordinate-cylinder-sets-form-an-algebra` | 0A.2 Exact Phase-3 defects in published content |
 | `lem-finite-cw-pairs-admit-finite-simplicial-homotopy-models` | Continuing personal audit: exact examination pool and AT-24 contracts |
 | `lem-finite-dimensional-axiomatic-homology-has-finite-subcomplex-support` | Continuing personal audit pool, now extended by AT6 compact-CW choice impact 2026-09-11: proof 2.1 invokes the affected compact-image corollary for closures of finitely many support cells. A choice-free local repair is immediate from CW closure finiteness: those finitely many closures already meet only finitely many cells and form a finite subcomplex. Exact hash/path/scope: `research/phase-2-next-20-published-cw-compactness-choice-audit.md`; retain the earlier AT-24 contract context. |
 | `lem-finite-dot-orbit-weight-spaces-detect-o-subquotients` | Supplier-to-published-consumer map |
 | `lem-finite-evaluations-separate-from-a-dual-subspace` | norming-and-separation-under-hahn-banach |
 | `lem-finite-modules-over-noetherian-rings-are-noetherian` | Existing published suppliers consumed by published Complex Analysis |
-| `lem-finite-products-of-standard-borel-spaces-are-standard-borel` | 0A.2 Exact Phase-3 defects in published content |
 | `lem-finite-refining-small-diameter-covers-of-compact-metric-spaces` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `lem-finite-residue-field-projective-dimension-forces-depth-equals-dimension` | Item-exact impact of the Dependent Choice rehome |
 | `lem-finite-simplicial-approximation-for-homology-comparison` | 13.5 Supplier-pair to consumer map |
@@ -31278,7 +31294,6 @@ mathematical repairs. Evidence:
 | `thm-bing-metrization` | Recorded-material path classification — 2026-09-08 |
 | `thm-bipolar-closure-for-linear-subspaces` | norming-and-separation-under-hahn-banach |
 | `thm-blocks-partition-ordinary-and-brauer-irreducible-characters` | Transitive consumers (166), grouped by home page |
-| `thm-borel-probability-measures-on-polish-spaces-are-inner-regular` | 0A.2 Exact Phase-3 defects in published content |
 | `thm-boundary-maximum-modulus-principle` | complex-riesz-thorin-endpoint-interpolation |
 | `thm-boundary-topology-is-well-defined-and-quasi-isometry-invariant` | HG consumer map |
 | `thm-bounded-alternation-qbf-is-level-complete` | 51. Exact live-plan metadata resynchronization set |
@@ -31442,7 +31457,6 @@ mathematical repairs. Evidence:
 | `thm-kernel-of-a-complex-character-agrees-with-the-representation-kernel` | Transitive consumers (166), grouped by home page |
 | `thm-kernel-range-annihilator-identities` | norming-and-separation-under-hahn-banach |
 | `thm-kolmogorov-complexity-is-not-computable` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
-| `thm-kolmogorov-extension-for-standard-borel-coordinate-spaces` | 0A.2 Exact Phase-3 defects in published content |
 | `thm-kolmogorov-three-series-theorem` | 0A.6 Planned-supplier consumer ledger and phase classification |
 | `thm-kolmogorov-zero-one-law` | 0A.2 Exact Phase-3 defects in published content |
 | `thm-konig` | 7.4 Published metadata snapshot amendments |
