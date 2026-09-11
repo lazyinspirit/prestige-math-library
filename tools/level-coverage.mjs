@@ -22,6 +22,8 @@ import { JUDGE_LINEUPS, DEFAULT_LINEUP, KNOWN_JUDGES } from './models.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
 import { parseTerminalResolutions, terminalResolutionStatus } from './step7-terminal-resolution.mjs';
 import { buildCurrentContextHashes } from './context-hash-pool.mjs';
+import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
+import { itemHashJudge } from './item-hash.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -39,6 +41,7 @@ if (judgePath && resolvePath(contextHashCachePath) === resolvePath(judgePath)) {
 }
 const judgeAdjudicationsPath = option('--judge-adjudications');
 const terminalResolutionsPath = option('--terminal-resolutions');
+const auditorCertificationsArg = option('--auditor-certifications');
 const judgeTargetsPath = option('--judge-targets');
 const receiptPath = option('--audit-receipt');
 const spineReceiptPath = option('--spine-receipt');
@@ -67,7 +70,7 @@ const allowPendingRejudge = argv.includes('--allow-pending-rejudge');
 const outPath = option('--out');
 const batchFiles = argv.filter((arg, index) => {
   if (arg.startsWith('--')) return false;
-  return !['--contracts', '--judge-ledger', '--context-hash-cache', '--judge-adjudications', '--terminal-resolutions', '--judge-targets', '--audit-receipt', '--spine-receipt', '--template', '--out'].includes(argv[index - 1]);
+  return !['--contracts', '--judge-ledger', '--context-hash-cache', '--judge-adjudications', '--terminal-resolutions', '--auditor-certifications', '--judge-targets', '--audit-receipt', '--spine-receipt', '--template', '--out'].includes(argv[index - 1]);
 });
 if (!batchFiles.length) usage();
 if (judgeOnly) {
@@ -248,6 +251,24 @@ for (const id of scope) {
   }
 }
 const proofScope = scope.filter((id) => isProofBearing(items.get(resolve(id) ?? id)?.body ?? ''));
+
+// Auditor/adjudicator-created items are an explicit non-judge certification
+// class. Only Step-7/8 receipts are relevant here. The receipt is hash-bound to
+// the current judge-form item bytes and never manufactures ledger rows.
+const auditorCertified = new Map();
+for (const path of (auditorCertificationsArg ?? '').split(',').map(value => value.trim()).filter(Boolean)) {
+  let rows = [];
+  try { rows = loadAuditorCreatedCertifications(resolvePath(path), { steps: [7, 8] }); }
+  catch (cause) { error('auditor-certification-shape', cause.message); continue; }
+  for (const row of rows) {
+    const item = items.get(resolve(row.id) ?? row.id);
+    if (!item || !judgeScope.includes(row.id)) continue;
+    const source = readFileSync(join(REPO, item.file), 'utf8');
+    if (itemHashJudge(source) !== row.judge_sha256) continue;
+    const prior = auditorCertified.get(row.id);
+    if (!prior || row.step > prior.step) auditorCertified.set(row.id, row);
+  }
+}
 
 // Contracts must cover every actual proof-bearing item, not merely the subset a
 // batch author remembered to put in its own contract file.
@@ -430,7 +451,7 @@ if (judgeAdjudicationsPath) {
 const currentHashes = new Map();
 if (verifyCurrent && judgePath && existsSync(resolvePath(judgePath))) {
   try {
-    for (const result of await buildCurrentContextHashes(judgeScope, { cwd: REPO, cachePath: contextHashCachePath })) {
+    for (const result of await buildCurrentContextHashes(judgeScope.filter(id => !auditorCertified.has(id)), { cwd: REPO, cachePath: contextHashCachePath })) {
       if (result.ok) currentHashes.set(result.id, { context: result.context, item: result.item });
       else error('context-hash', result.error, result.id);
     }
@@ -479,6 +500,12 @@ const judgeCoverage = [];
 const terminalResolved = [];
 const terminalSuperseded = [];
 for (const id of judgePath ? judgeScope : []) {
+  const auditor = auditorCertified.get(id);
+  if (auditor) {
+    judgeCoverage.push({ id, auditor_certified: true, certification_step: auditor.step,
+      item_sha256: auditor.judge_sha256, author_result: auditor.author_result });
+    continue;
+  }
   const contexts = verdicts.get(id) ?? new Map();
   const now = verifyCurrent ? currentHashes.get(id) ?? null : null;
   const current = now?.context ?? null;
@@ -571,7 +598,8 @@ for (const id of judgePath ? judgeScope : []) {
 }
 
 const summary = { scope: scope.length, proof_scope: proofScope.length, relationships: relationships.length, plan_drift: planDrift.length, judge_scope: judgeScope.length, judge_complete: judgeCoverage.length, errors: errors.length, warnings: warnings.length };
-const result = { summary, manifest_sha256: manifestSha256, manifest, judge_coverage: judgeCoverage, judge_adjudications: judgeAdjudicationsPath ?? null, errors, warnings };
+const result = { summary, manifest_sha256: manifestSha256, manifest, judge_coverage: judgeCoverage,
+  auditor_certified: [...auditorCertified.keys()].sort(), judge_adjudications: judgeAdjudicationsPath ?? null, errors, warnings };
 
 // The closure receipt. Written whether or not the gate passes — a failing gate
 // is exactly when the ids it names need to become someone's work.
@@ -587,6 +615,7 @@ if (outPath) {
     pairs_complete: judgeCoverage.length,
     terminal_resolved: terminalResolved.sort((a, b) => a.id.localeCompare(b.id)),
     terminal_superseded: terminalSuperseded.sort((a, b) => a.id.localeCompare(b.id)),
+    auditor_certified: [...auditorCertified.keys()].sort(),
     needs_rejudge: needsRejudge.sort(),
     unadjudicated: unadjudicated.sort(),
     unadjudicated_rows: unadjudicatedRows.sort((a, b) =>

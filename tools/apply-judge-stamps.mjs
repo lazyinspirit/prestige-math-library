@@ -60,6 +60,7 @@ import { itemHashJudge } from './item-hash.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
 import { JUDGE_LINEUPS, DEFAULT_LINEUP } from './models.mjs';
 import { parseTerminalResolutions, terminalResolutionStatus } from './step7-terminal-resolution.mjs';
+import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 
 const argv = process.argv.slice(2);
 const value = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : ''; };
@@ -68,13 +69,14 @@ const manifestsArg = value('--manifests');
 const itemsArg = value('--items');
 const targetedReceiptPath = value('--audit-targeted-rejudges');
 const terminalResolutionsPath = value('--terminal-resolutions');
+const auditorCertificationsArg = value('--auditor-certifications');
 const reportPath = value('--report');
 const apply = argv.includes('--apply');
 const verify = argv.includes('--verify');
 const ordinaryScopes = [manifestsArg, itemsArg, targetedReceiptPath].filter(Boolean);
 if (!ledgerPath || ordinaryScopes.length !== 1
   || (verify && (apply || targetedReceiptPath))) {
-  console.error('usage: node tools/apply-judge-stamps.mjs --ledger <judge.jsonl> (--manifests <a.pages.json,...> | --items <item-a,item-b> | --audit-targeted-rejudges <targeted-rejudge-receipt.json>) [--terminal-resolutions <step7.jsonl>] [--verify] [--apply] [--report <out.json>]');
+  console.error('usage: node tools/apply-judge-stamps.mjs --ledger <judge.jsonl> (--manifests <a.pages.json,...> | --items <item-a,item-b> | --audit-targeted-rejudges <targeted-rejudge-receipt.json>) [--terminal-resolutions <step7.jsonl>] [--auditor-certifications <step7.json,step8.json>] [--verify] [--apply] [--report <out.json>]');
   process.exit(2);
 }
 
@@ -129,6 +131,16 @@ const ids = manifestsArg
   })();
 
 const rows = readFileSync(ledgerPath, 'utf8').split('\n').filter(Boolean).map((line) => JSON.parse(line));
+const auditorRows = new Map();
+for (const path of auditorCertificationsArg.split(',').map(entry => entry.trim()).filter(Boolean)) {
+  let loaded;
+  try { loaded = loadAuditorCreatedCertifications(path, { steps: [7, 8] }); }
+  catch (cause) { console.error(`apply-judge-stamps: ${cause.message}`); process.exit(2); }
+  for (const row of loaded) {
+    const prior = auditorRows.get(row.id);
+    if (!prior || row.step > prior.step) auditorRows.set(row.id, row);
+  }
+}
 // The lineup this tool stamps for is configuration, not a constant. Resolve it
 // the way judge.mts, judge-sweep.mjs, judge-compare.mjs and level-coverage.mjs
 // already do, so one env var stays the single source of truth and a future lane
@@ -256,6 +268,15 @@ for (const id of ids) {
     result.skipped.push({ id, reason: 'recorded-not-proved', ...(stale ? { stripped_stale_pass: apply } : {}) });
     continue;
   }
+  const auditor = auditorRows.get(id);
+  if (auditor && attestedItemHash(text) === auditor.judge_sha256) {
+    const stale = judgeBlockRe.test(text);
+    if (stale && apply) writeFileSync(file, text.replace(judgeBlockRe, ''));
+    if (stale && verify) problems.push(`${id}: a judge pass block sits on an auditor-created certified item`);
+    result.skipped.push({ id, reason: 'auditor-created-certified', step: auditor.step,
+      author_result: auditor.author_result, ...(stale ? { stripped_stale_pass: apply } : {}) });
+    continue;
+  }
   const terminal = terminalParsed.latest.get(id);
   let staleTerminal = null;
   if (terminal) {
@@ -363,7 +384,7 @@ const byReason = {};
 for (const s of result.skipped) byReason[s.reason] = (byReason[s.reason] ?? 0) + 1;
 if (verify) {
   const missing = result.stamped.filter((s) => s.changed).length;
-  console.log(`judge-stamps: ${ids.length} item(s) in scope — ${result.stamped.length - missing} stamped current, ${byReason['lane-rejected'] ?? 0} lane-rejected, ${byReason['terminal-manual-resolution'] ?? 0} terminal manual, ${byReason['recorded-not-proved'] ?? 0} recorded-not-proved, ${problems.length} problem(s)`);
+  console.log(`judge-stamps: ${ids.length} item(s) in scope — ${result.stamped.length - missing} stamped current, ${byReason['lane-rejected'] ?? 0} lane-rejected, ${byReason['terminal-manual-resolution'] ?? 0} terminal manual, ${byReason['recorded-not-proved'] ?? 0} recorded-not-proved, ${problems.length} problem(s); ${byReason['auditor-created-certified'] ?? 0} auditor-created certified`);
   for (const p of problems) console.error(`ERROR ${p}`);
   if (reportPath) {
     result.problems = problems;

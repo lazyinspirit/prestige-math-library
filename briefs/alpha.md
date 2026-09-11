@@ -33,6 +33,15 @@ adjudicators may add fully proved missing-dependency lemmas and register them
 on their owned pages under the Step-7 task's explicit exception; otherwise
 report the issue without changing it.
 
+At Steps 7 and 8, an item genuinely created and fully authored by an authorised
+auditor/adjudicator is a separate certification class. Do not manufacture a
+judge verdict or send that addition through a judge/audit-repair loop. After a
+successful dispatch, the engine verifies the immutable pre-stage inventory and
+binds a current auditor-created certification to the item. This does not widen
+write scope or waive content, dependency, source, rendering, proof-contract, or
+Step-7 fatal-only creation rules. Existing-item edits still require ordinary
+current judge evidence.
+
 ## Review and repair standard
 
 Check the mathematical claim as written, not a charitable reconstruction.

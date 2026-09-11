@@ -91,7 +91,7 @@ test('every post-judge mathematical window ends at an exact closure boundary', a
   }
   assert.ok(!gateIds('7-preflight').includes('level-coverage'), 'Step-8 Alpha audit receipt is not available yet');
   assert.deepEqual(gateIds('7-rejudge'),
-    ['frontier-dependency-ledger', 'step7-guard', 'step7-published', 'step7-terminal-resolutions', 'judge-closure']);
+    ['frontier-dependency-ledger', 'step7-auditor-created-certifications', 'step7-guard', 'step7-published', 'step7-terminal-resolutions', 'judge-closure']);
   assert.equal(stage('7-rejudge').maxFixRounds, 1);
   assert.equal(stage('7-rejudge').terminalFixBudget, true);
   assert.equal(stage('7-close'), undefined);

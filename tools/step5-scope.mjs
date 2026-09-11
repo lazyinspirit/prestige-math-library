@@ -18,6 +18,7 @@ import { fileURLToPath } from 'node:url';
 import { split, yaml } from './pathway-lib.mjs';
 import { itemHashGuard } from './item-hash.mjs';
 import { step5Escalations } from './step5-escalations.mjs';
+import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 
 const argv = process.argv.slice(2);
 const command = argv[0];
@@ -40,6 +41,7 @@ const decisionsPath = (group) => R('research', `${run}-alpha-${group}-5a-decisio
 const ledgerPath = R(option('ledger', 'research/defect-ledger.jsonl'));
 const publishedRepairsPath = R('research', `${run}-step7-published-repairs.jsonl`);
 const publishedClaimsPath = R('research', `${run}-step5-published-claims.jsonl`);
+const auditorCertificationsPath = R('research', `${run}-step5-auditor-certifications.json`);
 
 if (command === 'check-escalations') {
   const holds = step5Escalations(ROOT, run);
@@ -218,6 +220,15 @@ function currentDecisionCarrier(decision, target, live) {
   if (live?.items[decision.id]) return live.items[decision.id];
   if (live?.pages[decision.id]) return pageCarrier(live.pages[decision.id]);
   return undefined;
+}
+
+function currentAuditorCertification(target, live) {
+  if (!target?.direct || target.route !== 'item' || !target.added) return null;
+  let rows = [];
+  try { rows = loadAuditorCreatedCertifications(auditorCertificationsPath, { steps: [5] }); }
+  catch (cause) { fail(`step5-scope: ${cause.message}`, 1); }
+  const row = rows.find(candidate => candidate.id === target.id && String(candidate.batch) === String(target.batch));
+  return row && row.step5_subject_sha256 === hashValue(live?.items?.[target.id]) ? row : null;
 }
 
 function hashSnapshotErrors(doc, batch, label) {
@@ -1032,7 +1043,11 @@ if (command === 'check') {
           }
         }
       }
-      for (const [obligation, target] of expected) if (!seen.has(obligation)) error('decision-missing', `[${target.id}] ${group.label} did not decide ${obligation}`);
+      for (const [obligation, target] of expected) if (!seen.has(obligation)) {
+        if (target?.direct && target.route === 'item' && target.added
+          && currentAuditorCertification(target, liveFor(target.batch))) continue;
+        error('decision-missing', `[${target.id}] ${group.label} did not decide ${obligation}`);
+      }
     }
     let publishedRows = [];
     if (existsSync(publishedRepairsPath)) {

@@ -112,6 +112,25 @@ test('--items stamps an explicitly certified subset without needing a manifest-w
   assert.equal(result.status, 0, result.stderr);
 });
 
+test('a current Step-8 auditor-created certification needs no judge stamp or ledger pass', () => {
+  const dir = fixture(['lem-auditor-created']);
+  const text = readFileSync(join(dir, 'items', 'lem-auditor-created.md'), 'utf8');
+  const h = itemHashJudge(text);
+  // Keep configured lanes present in the append-only ledger, but deliberately
+  // give this item no usable judge pass. Its separate receipt is the authority.
+  writeLedger(dir, LANES.map((model) => ledgerRow('unrelated', model, false, '0'.repeat(64))));
+  writeFileSync(join(dir, 'research', 'auditor.json'), JSON.stringify({
+    version: 1, run: 'r', step: 8, policy: 'auditor-created-stage-bypass-v1',
+    items: [{ id: 'lem-auditor-created', judge_sha256: h, author_result: 'alpha-step8-lead.result.json' }],
+  }));
+  const result = spawnSync(process.execPath, [TOOL, '--ledger', 'research/judge.jsonl',
+    '--items', 'lem-auditor-created', '--auditor-certifications', 'research/auditor.json', '--verify'],
+  { cwd: dir, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  assert.match(result.stdout, /1 auditor-created certified/);
+  assert.doesNotMatch(text, /^ {2}judge:/m);
+});
+
 test('apply creates verification for a definition with no precheck and preserves verdict currency', () => {
   const dir = fixture(['def-no-precheck']);
   const file = join(dir, 'items', 'def-no-precheck.md');

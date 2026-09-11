@@ -57,6 +57,14 @@ An accepted scaffold or owner repair still needs authored content and contracts.
 Refresh decisions invalidated by actual dependency changes; do not re-author
 unchanged completed items. Never use --owner or add judge/audit stamps.
 
+Items you create and fully author during this dispatch are a separate class:
+do not send them through a Step 3 self-review or review-repair-author loop.
+Register each in the manifest, coverage, contracts, and authored item/page as
+usual. The engine compares the post-author inventory with its immutable
+pre-author baseline and, after your successful dispatch, gives those additions
+the current scope and item certifications needed to enter Step 4. This exception
+does not waive content, dependency, source, rendering, or proof-contract gates.
+
 For each batch, run explicit-path precheck and rendering, content-policy,
 strict proof-contract checks, and validate-plan with research/plan-spec.json.
 Report pre-splice plan mismatches for Step 4; do not hide actual unresolved

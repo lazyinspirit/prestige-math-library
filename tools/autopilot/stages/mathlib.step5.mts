@@ -24,6 +24,8 @@ export function step5Stages(d: any) {
       });
   const decisionStampGate = (ctx: any) => gate('step5-decision-stamp',
     ['node', 'tools/step5-scope.mjs', 'stamp', '--run', ctx.run]);
+  const auditorCreatedGate = (ctx: any) => gate('step5-auditor-created-certifications',
+    ['node', 'tools/auditor-created-items.mjs', 'certify', '--run', ctx.run, '--step', '5']);
 
   /** Give each repair lane the exact current failure. Event order is not a
    * task contract: advisory events may be newer, and exhausted item ids remain
@@ -191,10 +193,11 @@ export function step5Stages(d: any) {
       pattern: resultPattern('tool', 'prepare-5a'),
       artifacts: (ctx: any) => batches(ctx).flatMap((batch: string) => [
           `research/${ctx.run}-step5-hash-${batch}-pre-5a.json`,
-          `research/${ctx.run}-step5-scope-${batch}.json`]),
+          `research/${ctx.run}-step5-scope-${batch}.json`])
+        .concat(`research/${ctx.run}-step5-auditor-baseline.json`),
       concurrency: 1,
       plan: (ctx: any) => [{ role: 'tool', label: 'prepare-5a', job: 'bookkeeping-mechanical', covers: ['all'],
-        argv: ['node', 'tools/step5-scope.mjs', 'prepare-direct', '--run', ctx.run], timeout: 600 }],
+        argv: ['node', 'tools/step5-prepare.mjs', '--run', ctx.run], timeout: 600 }],
       gatesWaived: 'Runs after Step 3 gates pass; freezes the complete authored inventory without reader or refuter artifacts.',
     },
     {
@@ -222,6 +225,7 @@ export function step5Stages(d: any) {
         })),
       gates: (ctx: any) => [
         gate('step5-owner-escalations', ['node', 'tools/step5-scope.mjs', 'check-escalations', '--run', ctx.run]),
+        auditorCreatedGate(ctx),
         ...repoWide(ctx).filter((candidate: any) => candidate.id !== 'splice-verify'),
         ...contractGates(ctx, { reviewed: true }), decisionStampGate(ctx), routingGate(ctx, 'adjudicate'),
       ],
@@ -277,6 +281,7 @@ export function step5Stages(d: any) {
         timeout: 14400,
       }],
       gates: (ctx: any) => [
+        auditorCreatedGate(ctx),
         gate('cross-group-edges', ['node', 'tools/cross-group-edges.mjs', 'check', '--run', ctx.run, '--reconcile-plan']),
         routingGate(ctx, 'final'),
         gate('step5-ledger-valid', ['node', 'tools/defect-ledger.mjs', 'validate', '--run', ctx.run]),

@@ -74,10 +74,15 @@ reconciler updates published-consumer-supplier-ledger.md.
 
 Use tools/step1-decisions.mjs and tools/step3-decisions.mjs for current evidence.
 Step 3 item decisions are recorded after authoring and bind to transitive examined
-dependencies. An approved scaffold or empty contract cannot satisfy authoring.
-Refresh sufficient scope evidence after local additions/repairs; never overwrite
-owner-held decisions. Authors maintain batch-owned manifests, contracts, coverage,
-notes and dependency inputs. Shared prose/plan amendments go in the group handoff.
+dependencies. A genuine post-baseline item created and fully authored by the
+Step-3 auditor is instead certified mechanically after that successful dispatch;
+it does not enter a self-review/repair/author loop. Its item and scope-delta
+certificates are hash-bound, and the scope delta inherits (but cannot replace)
+the approved pre-author scope decision. An approved scaffold or empty contract
+cannot satisfy authoring. Refresh sufficient scope evidence after local
+additions/repairs; never overwrite owner-held decisions. Authors maintain
+batch-owned manifests, contracts, coverage, notes and dependency inputs. Shared
+prose/plan amendments go in the group handoff.
 
 Step 4 keeps its mechanical splice and snapshot. The splice permits new local
 A-page definitions/lemmas only with complete current author decisions, retained
@@ -100,9 +105,13 @@ analysis proofs; contracts must name the actual assertion it checks.
 
 Step 5a reviews actual authored mathematics directly, not scaffolds again.
 Accept sound content, repair locally with fully authored suppliers, or escalate
-substantial gaps. Every item/page, including new suppliers, needs evidence;
-high-risk review occurs during the same read. Step 5b reconciles cross-batch
-dependencies, changed consumers, exact hashes, coverage, sources and ledger.
+substantial gaps. Every baseline item/page needs a direct decision. A genuine
+post-baseline supplier created and fully authored by the Step-5 auditor receives
+a hash-bound item/manifest/contract certificate after the successful dispatch
+and does not require a self-review decision. High-risk and every static content,
+dependency, source and contract gate remain mandatory. Step 5b reconciles
+cross-batch dependencies, changed consumers, exact hashes, coverage, sources
+and ledger.
 
 Snapshot order is pre-author before Step 3b, post-author in Step 4, post-5a after
 group review, and post-step7 after repair. Impact checks include authoring changes.
@@ -169,7 +178,9 @@ proofs are judged separately. Verdicts bind to item, model and context hashes.
 Group readers supply Step 7 evidence. Step 7 resolves each reader concern, alert
 and rejection. Only confirmed fatal findings license mathematical repair;
 published repairs need separate authority. Register necessary suppliers before
-consumers and give each its own first judgment.
+consumers. A genuinely new supplier fully authored by the Step-7 adjudicator is
+mechanically certified as a distinct class and receives no fabricated judge row;
+existing-item repairs still require the configured rejudge route.
 
 Step 7 is: group repairs → preflight checks → one Terra rejudge → one Astra
 final-adjudication pass → snapshot → Step 8. Only the engine dispatches judges.
@@ -199,7 +210,9 @@ and their historical repaired content to match the Step-7 baseline; this
 recognition grants no licence for a new edit or exemption from later certification.
 
 Step 8 reviews scope and post-repair changes, closes impact and applies current
-stamps through the tool. Receipt recovery addresses only failed checks and
+stamps through the tool. Genuine Step-8 auditor/adjudicator-created additions
+receive the same distinct hash-bound certification and are excluded from the
+judge/re-adjudication loop; edits to baseline items are not. Receipt recovery addresses only failed checks and
 missing contracts; it preserves completed spine readings and valid evidence.
 Coverage checks skip context hashing when the judge ledger is missing and keep
 the hash cache separate from the ledger, including nonstandard filenames.

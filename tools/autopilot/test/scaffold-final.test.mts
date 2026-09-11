@@ -8,6 +8,7 @@ import { join } from 'node:path';
 import { loadStep3, scopeHash, itemHash, recordStep3, checkStep3 } from '../../step3-decisions.mjs';
 import { stages, step3Plan } from '../stages/mathlib.mts';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
+import { writeAuditorBaseline, certifyAuditorItems } from '../../step3-auditor-items.mjs';
 
 function fixture(t: any) {
   const root = mkdtempSync(join(tmpdir(), 'step3-'));
@@ -55,6 +56,44 @@ test('scope is required; legacy sufficient pair verdicts cannot approve items', 
   f.scope();
   assert.equal(f.check('scope').closed, true);
   assert.equal(f.check().closed, false);
+});
+
+test('Step-3 auditor-created items bypass self-review but inherit the approved baseline scope', t => {
+  const f = fixture(t);
+  f.scope();
+  writeAuditorBaseline(f.root, 'demo');
+  f.pages[0].items.push({ id: 'lem-created', kind: 'lemma', statement: 'Created', strategy: 'Direct', deps: [] });
+  f.put('demo-batch-1.pages.json', f.pages);
+  writeFileSync(join(f.root, 'items', 'lem-created.md'), '---\nid: lem-created\nstatus: draft\ndeps: []\n---\n\n## Statement\n\nCreated.\n\n## Proof\n\nDirect.\n');
+  mkdirSync(join(f.root, 'research', 'demo-dispatch'));
+  f.put('demo-dispatch/alpha-high-step3b-a.result.json', {
+    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a', covers: ['1'],
+    ended_at: '2100-01-01T00:00:00.000Z',
+  });
+  certifyAuditorItems(f.root, 'demo');
+  assert.equal(f.check('scope').closed, true, 'the reviewed baseline plus exact addition closes current scope');
+  for (const id of ['lem-a', 'thm-b', 'ex-c']) f.audit(id);
+  const final = f.check();
+  assert.equal(final.closed, true);
+  assert.equal(final.accepted, 4);
+});
+
+test('Step-3 auditor additions cannot turn an insufficient baseline scope into approval', t => {
+  const f = fixture(t);
+  f.record({ phase: 'scope', page: 'a', decision: 'insufficient' });
+  writeAuditorBaseline(f.root, 'demo');
+  f.pages[0].items.push({ id: 'lem-created', kind: 'lemma', statement: 'Created', strategy: 'Direct', deps: [] });
+  f.put('demo-batch-1.pages.json', f.pages);
+  writeFileSync(join(f.root, 'items', 'lem-created.md'), '---\nid: lem-created\nstatus: draft\ndeps: []\n---\nCreated.\n');
+  mkdirSync(join(f.root, 'research', 'demo-dispatch'));
+  f.put('demo-dispatch/alpha-high-step3b-a.result.json', {
+    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a', covers: ['1'],
+    ended_at: '2100-01-01T00:00:00.000Z',
+  });
+  certifyAuditorItems(f.root, 'demo');
+  const result = f.check('scope');
+  assert.equal(result.closed, false);
+  assert.equal(result.work[0].owner, true);
 });
 
 test('insufficient scope requires owner action; merge/enrich do not mean proceed', t => {

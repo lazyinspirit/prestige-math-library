@@ -21,6 +21,28 @@ function receipt(s, phase, id, owner) {
   return row;
 }
 
+function auditorCertifications(s) {
+  if (Object.prototype.hasOwnProperty.call(s, 'auditorCertifications')) return s.auditorCertifications;
+  const row = read(join(s.root, 'research', `${s.run}-step3-auditor-certifications.json`));
+  if (row && (row.version !== 1 || row.run !== s.run
+    || row.policy !== 'auditor-authored-step3-bypass-v1'
+    || !Array.isArray(row.items) || !Array.isArray(row.scopes)))
+    throw Error('Invalid Step 3 auditor certification receipt');
+  s.auditorCertifications = row;
+  return row;
+}
+
+function auditorScopeCertification(s, id) {
+  const row = auditorCertifications(s)?.scopes.find(value => value.page === id);
+  return row?.sha256 === scopeHash(s, id) && /^[a-f0-9]{64}$/.test(row?.baseline_sha256 ?? '') ? row : null;
+}
+
+function auditorItemCertification(s, id) {
+  const row = auditorCertifications(s)?.items.find(value => value.id === id);
+  if (!row || !Array.isArray(row.dependencies)) return null;
+  return row.sha256 === itemHash(s, id, row.dependencies) ? row : null;
+}
+
 export function loadStep3(root, run) {
   safe(run);
   const dir = join(root, 'research'), pages = [], items = new Map(), pairs = new Map();
@@ -28,10 +50,11 @@ export function loadStep3(root, run) {
     const batch = f.match(/-batch-(\d+)\./)[1];
     const coverage = read(join(dir, f.replace('.pages.json', '.coverage.json')));
     for (const page of json(join(dir, f))) {
-      pages.push({ ...page, batch, coverage: coverage?.pages?.find(p => p.page === page.id) });
+      const livePage = { ...page, batch, coverage: coverage?.pages?.find(p => p.page === page.id) };
+      pages.push(livePage);
       for (const item of page.items ?? []) {
         if (items.has(item.id)) throw Error(`Duplicate item ${item.id}`);
-        items.set(item.id, { item, page });
+        items.set(item.id, { item, page: livePage });
       }
     }
   }
@@ -96,26 +119,48 @@ export function scopeDecision(s, id) {
   const owner = receipt(s, 'scope', id, true);
   const review = receipt(s, 'scope', id, false);
   const current = scopeHash(s, id);
-  if (owner) return owner.sha256 === current && owner.decision === 'proceed'
+  if (owner?.sha256 === current) return owner.decision === 'proceed'
     ? { closed: true, decision: owner } : { closed: false, owner: true, reason: `${id}: owner ${owner.decision}; apply amendments and record proceed for current scope` };
+  const auditor = auditorScopeCertification(s, id);
+  if (auditor) {
+    const baseOwner = owner?.sha256 === auditor.baseline_sha256 ? owner : null;
+    const baseReview = review?.sha256 === auditor.baseline_sha256 ? review : null;
+    if (baseOwner?.decision === 'proceed' || baseReview?.decision === 'sufficient') {
+      return { closed: true, decision: { ...auditor, decision: 'auditor-authored', owner: false,
+        baseline_decision: baseOwner ?? baseReview } };
+    }
+    if (baseOwner || baseReview?.decision === 'insufficient') return { closed: false, owner: true,
+      reason: `${id}: auditor additions cannot bypass the baseline scope owner decision` };
+  }
+  if (owner) return { closed: false, owner: true,
+    reason: `${id}: owner ${owner.decision}; apply amendments and record proceed for current scope` };
   if (review?.decision === 'insufficient') return { closed: false, owner: true, reason: `${id}: insufficient scope; owner must proceed, merge or enrich` };
   return review?.sha256 === current && review.decision === 'sufficient'
     ? { closed: true, decision: review } : { closed: false, reason: `${id}: current scope review required` };
 }
 
 export function itemDecision(s, id) {
-  for (const owner of [true, false]) {
-    const row = receipt(s, 'item', id, owner);
-    if (!row) continue;
-    if (!Array.isArray(row.dependencies)) throw Error(`Missing dependency audit for ${id}`);
-    if (row.sha256 !== itemHash(s, id, row.dependencies)) {
-      if (owner || row.decision === 'escalate') return { closed: false, owner: true, decision: row,
+  const owner = receipt(s, 'item', id, true);
+  if (owner) {
+    if (!Array.isArray(owner.dependencies)) throw Error(`Missing dependency audit for ${id}`);
+    if (owner.sha256 !== itemHash(s, id, owner.dependencies)) return { closed: false, owner: true, decision: owner,
+      reason: `${id}: changed inputs require a current owner decision` };
+    const closed = owner.decision === 'repaired';
+    return { closed, owner: !closed, decision: owner, reason: closed ? undefined : `${id}: ${owner.reason}` };
+  }
+  const auditor = auditorItemCertification(s, id);
+  if (auditor) return { closed: true, owner: false,
+    decision: { ...auditor, decision: 'auditor-authored', owner: false, confidence: 1 } };
+  const review = receipt(s, 'item', id, false);
+  if (review) {
+    if (!Array.isArray(review.dependencies)) throw Error(`Missing dependency audit for ${id}`);
+    if (review.sha256 !== itemHash(s, id, review.dependencies)) {
+      if (review.decision === 'escalate') return { closed: false, owner: true, decision: review,
         reason: `${id}: changed inputs require a current owner decision` };
-      continue;
+    } else {
+      const closed = ['accept', 'repaired'].includes(review.decision) && review.confidence === 1;
+      return { closed, owner: !closed, decision: review, reason: closed ? undefined : `${id}: ${review.reason}` };
     }
-    const closed = owner ? row.decision === 'repaired'
-      : ['accept', 'repaired'].includes(row.decision) && row.confidence === 1;
-    return { closed, owner: !closed, decision: row, reason: closed ? undefined : `${id}: ${row.reason}` };
   }
   return { closed: false, reason: `${id}: current item audit required` };
 }

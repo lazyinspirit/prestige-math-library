@@ -21,7 +21,8 @@ import { readdirSync, existsSync, readFileSync, writeFileSync, statSync } from '
 import { spawnSync } from 'node:child_process';
 import { createHash } from 'node:crypto';
 import { join } from 'node:path';
-import { itemHashGuard, shortHash } from '../../item-hash.mjs';
+import { itemHashGuard, itemHashJudge, shortHash } from '../../item-hash.mjs';
+import { loadAuditorCreatedCertifications } from '../../auditor-created-items.mjs';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { loadStep3, scopeHash, itemHash, checkStep3 } from '../../step3-decisions.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
@@ -370,6 +371,7 @@ export const MECHANICAL_REPAIRS: Record<string, (ctx: any) => string[] | string[
     '--ledger', R(ctx, 'research', `${ctx.run}-judge.jsonl`),
     '--manifests', batches(ctx).map((b: any) => join(ctx.repo, 'research', `${ctx.run}-batch-${b}.pages.json`)).join(','),
     '--terminal-resolutions', R(ctx, terminalResolutionsPath(ctx)),
+    ...auditorCertificationArgs(ctx),
     '--apply', '--report', R(ctx, 'research', `${ctx.run}-judge-stamps.json`)],
   // a dirty tree at 9-close-v2 means repairs landed after the close-out
   // commit: commit again. Idempotent; refuses any branch but main.
@@ -755,6 +757,23 @@ const step8ClosurePath = (ctx) => `research/${ctx.run}-step8-judge-closure.json`
 const step8ScopeDeltaPath = (ctx) => `research/${ctx.run}-step8-scope-delta.json`;
 const step8ScopeReviewPath = (ctx) => `research/${ctx.run}-alpha-step8-review.md`;
 const step8ScopeRegisterPath = (ctx) => `research/${ctx.run}-alpha-step8.md`;
+const auditorCertificationsPath = (ctx, step: number) => `research/${ctx.run}-step${step}-auditor-certifications.json`;
+const auditorCertificationArgs = (ctx) => ['--auditor-certifications',
+  [7, 8].map(step => auditorCertificationsPath(ctx, step)).join(',')];
+const auditorCreatedGate = (ctx, step: 7 | 8) => gate(`step${step}-auditor-created-certifications`,
+  ['node', 'tools/auditor-created-items.mjs', 'certify', '--run', ctx.run, '--step', String(step)]);
+
+function currentAuditorCreatedIds(ctx, step: 7 | 8): Set<string> {
+  const path = R(ctx, auditorCertificationsPath(ctx, step));
+  let rows: any[] = [];
+  try { rows = loadAuditorCreatedCertifications(path, { steps: [step] }); } catch { return new Set(); }
+  return new Set(rows.filter(row => {
+    try {
+      const source = readFileSync(R(ctx, 'items', `${row.id}.md`), 'utf8');
+      return itemHashJudge(source) === row.judge_sha256;
+    } catch { return false; }
+  }).map(row => row.id));
+}
 
 const step8ChangesRefreshArgv = (ctx: any): string[] => ['tools/step8-changes.mjs',
   '--touches', touchesPath(ctx), '--baseline', 'post-step7',
@@ -825,11 +844,12 @@ function readStep8Changes(ctx): string[] {
  * dispatch already has the exact set. */
 function step8ChangesOnDisk(ctx): string[] {
   try {
+    const certified = currentAuditorCreatedIds(ctx, 8);
     const touches = JSON.parse(readFileSync(R(ctx, touchesPath(ctx)), 'utf8'));
     const baseline = [...(touches.snapshots ?? [])].reverse().find((s: any) => s.label === 'post-step7');
     if (!baseline?.hashes) return [];
     return readdirSync(R(ctx, 'items')).filter((name) => name.endsWith('.md'))
-      .map((name) => name.slice(0, -3)).filter((id) => {
+      .map((name) => name.slice(0, -3)).filter((id) => !certified.has(id)).filter((id) => {
         const hash = shortHash(itemHashGuard(readFileSync(R(ctx, 'items', `${id}.md`), 'utf8')));
         return !(id in baseline.hashes) || baseline.hashes[id] !== hash;
       }).sort();
@@ -844,6 +864,7 @@ const step8ChangesGate = (ctx) => gate('step8-changes', ['node', 'tools/step8-ch
 const step8ClosureGate = (ctx) => gate('step8-judge-closure', ['node', 'tools/level-coverage.mjs',
   '--judge-only', '--verify-current-context', '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
   '--judge-adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
+  ...auditorCertificationArgs(ctx),
   '--out', step8ClosurePath(ctx), step8ChangesScopePath(ctx)]);
 
 const scopeDecisionsGate = (ctx) => gate('scope-decisions', ['node', 'tools/scope-decisions.mjs',
@@ -868,6 +889,7 @@ const step7GuardGate = (ctx) => gate('step7-guard', ['node', 'tools/step7-guard.
   '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
   '--adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
   '--scope', `research/${ctx.run}-step7-scope.json`,
+  '--auditor-certifications', auditorCertificationsPath(ctx, 7),
   '--terminal-resolutions', terminalResolutionsPath(ctx),
   '--published-repairs', `research/${ctx.run}-step7-published-repairs.jsonl`,
   '--owner-prerequisite-repairs', `research/${ctx.run}-step7-owner-prerequisite-repairs.jsonl`]);
@@ -1445,6 +1467,7 @@ const closureGate = (ctx, { allowUnadjudicated = false, pendingRejudge = false }
     '--judge-only', '--verify-current-context',
     '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
     '--judge-adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
+    ...auditorCertificationArgs(ctx),
     '--terminal-resolutions', terminalResolutionsPath(ctx),
     ...(allowUnadjudicated ? ['--allow-unadjudicated'] : []),
     ...(pendingRejudge ? ['--allow-pending-rejudge'] : []),
@@ -1459,6 +1482,7 @@ const levelCoverageGate = (ctx) => gate('level-coverage', ['node', 'tools/level-
   '--contracts', contractsPath(ctx),
   '--judge-ledger', `research/${ctx.run}-judge.jsonl`,
   '--judge-adjudications', `research/${ctx.run}-judge-adjudications.jsonl`,
+  ...auditorCertificationArgs(ctx),
   '--terminal-resolutions', terminalResolutionsPath(ctx),
   '--spine-receipt', `research/${ctx.run}-spine-audit.json`,
   '--audit-receipt', `research/${ctx.run}-audit-coverage.json`,
@@ -1697,11 +1721,12 @@ export const stages = [
     label: 'pre-authoring touch snapshot (mechanical)',
     units: () => ['all'],
     pattern: resultPattern('tool', 'snap-pre-author'),
-    artifacts: ctx => touchesPath(ctx),
+    artifacts: ctx => [touchesPath(ctx), `research/${ctx.run}-step3-auditor-baseline.json`],
     concurrency: 1,
     plan: ctx => [{ role: 'tool', label: 'snap-pre-author',
       job: 'bookkeeping-mechanical', covers: ['all'],
-      argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), 'pre-author'] }],
+      argv: ['node', 'tools/step3-baseline.mjs', '--run', ctx.run,
+        '--touches', touchesPath(ctx), '--label', 'pre-author'] }],
     gatesWaived: 'The snapshot is the input to the authored-content impact check.',
   },
   {
@@ -1716,7 +1741,15 @@ export const stages = [
     plan: (ctx, pending) => alphaGroups(ctx)
       .filter(g => g.covers.some(b => pending.includes(String(b))))
       .map(g => step3Plan(ctx, g, 'final')),
-    gates: ctx => [scopeGate(ctx), step3Gate(ctx, 'final'),
+    gates: ctx => [scopeGate(ctx),
+      // A successful group auditor may create and fully author local supplier
+      // items. They are absent from the pre-author scaffold inventory and are
+      // certified mechanically as a distinct owner-authorized class before the
+      // ordinary Step 3 receipt gate. They do not enter a review/repair/author
+      // loop merely to review their own work (owner, 2026-09-12).
+      gate('auditor-created-certifications', ['node', 'tools/step3-auditor-items.mjs',
+        'certify', '--run', ctx.run]),
+      step3Gate(ctx, 'final'),
       // Authored IDs exist before Step 4 splices them into the plan. Scaffold
       // mint checks would reject those IDs; item mode below checks their content.
       ...coverageGates(ctx, { requireDestination: true }),
@@ -2067,13 +2100,15 @@ export const stages = [
     label: 'pre-adjudication touch snapshot (mechanical)',
     units: () => ['all'],
     pattern: resultPattern('tool', 'snap-pre-step7'),
+    artifacts: (ctx) => [touchesPath(ctx), `research/${ctx.run}-step7-auditor-baseline.json`],
     concurrency: 1,
     plan: (ctx) => [{
       role: 'tool',
       label: 'snap-pre-step7',
       job: 'bookkeeping-mechanical',
       covers: ['all'],
-      argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), 'pre-step7'],
+      argv: ['node', 'tools/stage-touch-baseline.mjs', '--run', ctx.run, '--step', '7',
+        '--touches', touchesPath(ctx), '--label', 'pre-step7'],
     }],
     gatesWaived: 'A snapshot has nothing to check beyond its own existence; it is the baseline '
       + 'the step-7 guard measures the next stage against.',
@@ -2172,6 +2207,7 @@ export const stages = [
         timeout: 21600,
       })),
     gates: (ctx) => [
+      auditorCreatedGate(ctx, 7),
       // The partition is re-checked here, not only at `7-scope`: the group
       // Alphas are what write the cross-group findings, so the direction that
       // says "the owning group answered it" can only fail after they have run.
@@ -2346,6 +2382,7 @@ export const stages = [
       argv: ['node', 'tools/step7-scope.mjs', 'render', '--run', ctx.run],
     }],
     gates: (ctx) => [
+          auditorCreatedGate(ctx, 7),
           step7GuardGate(ctx),
           ...repoWide(ctx),
           ...contractGates(ctx, { reviewed: true }),
@@ -2452,6 +2489,7 @@ export const stages = [
     // integrity has its own preflight/close stages and its own budget, so a
     // proof-contract row can never trigger or consume a judge round.
     gates: (ctx) => [
+      auditorCreatedGate(ctx, 7),
       step7GuardGate(ctx),
       // The terminal check on the published route: this stage is where the
       // repaired published items were actually swept, so this is where "the
@@ -2492,11 +2530,12 @@ export const stages = [
     label: 'freeze the closed Step-7 item state',
     units: () => ['all'],
     pattern: resultPattern('tool', 'snap-after-step7-close'),
-    artifacts: (ctx) => touchesPath(ctx),
+    artifacts: (ctx) => [touchesPath(ctx), `research/${ctx.run}-step8-auditor-baseline.json`],
     concurrency: 1,
     plan: (ctx) => [{
       role: 'tool', label: 'snap-after-step7-close', job: 'bookkeeping-mechanical', covers: ['all'],
-      argv: ['node', 'tools/touchlog.mjs', 'snap', touchesPath(ctx), 'post-step7'],
+      argv: ['node', 'tools/stage-touch-baseline.mjs', '--run', ctx.run, '--step', '8',
+        '--touches', touchesPath(ctx), '--label', 'post-step7'],
     }],
     gatesWaived: 'The preceding terminal adjudication validated exact mathematical currency and this immediately following '
       + 'mechanical snapshot freezes that exact item state for Step 8; its artifact existence is required.',
@@ -2529,7 +2568,7 @@ export const stages = [
         task: `research/${ctx.run}-alpha-step8.task.md`, timeout: 14400,
       }];
     },
-    gates: (ctx) => [scopeDecisionsGate(ctx), ...repoWide(ctx), ...contractGates(ctx, { reviewed: true }),
+    gates: (ctx) => [auditorCreatedGate(ctx, 8), scopeDecisionsGate(ctx), ...repoWide(ctx), ...contractGates(ctx, { reviewed: true }),
       closureGate(ctx, { pendingRejudge: true }), ledgerGate(ctx)],
   },
 
@@ -2592,7 +2631,7 @@ export const stages = [
           : ['node', '-e', 'console.log("step8 changes: nothing to judge")'],
       }];
     },
-    gates: (ctx) => [step8ChangesGate(ctx), ...repoWide(ctx),
+    gates: (ctx) => [auditorCreatedGate(ctx, 8), step8ChangesGate(ctx), ...repoWide(ctx),
       ...contractGates(ctx, { reviewed: true }), step8ClosureGate(ctx), closureGate(ctx), ledgerGate(ctx)],
     maxFixRounds: 3,
     onGateFailure: async ({ ctx, executor, stage, round, prevRoundAt, failure }: any) => {
@@ -2668,6 +2707,7 @@ export const stages = [
     plan: (ctx) => [{ role: 'tool', label: 'close-splice', job: 'bookkeeping-mechanical', covers: ['all'], timeout: 600,
       argv: ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--all', '--fail-on-refusal'] }],
     gates: (ctx) => [
+      auditorCreatedGate(ctx, 8),
       manifestDepsGate(ctx),
       gate('splice-verify', ['node', 'tools/splice-plan.mjs', '--run', ctx.run, '--verify']),
       gate('impact-receipt', ['node', 'tools/impact-audit.mjs',
@@ -2756,6 +2796,7 @@ export const stages = [
         argv: ids.length
           ? ['node', 'tools/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
             '--items', ids.join(','), '--terminal-resolutions', terminalResolutionsPath(ctx),
+            ...auditorCertificationArgs(ctx),
             '--apply', '--report', `research/${ctx.run}-step8-judge-stamps.json`]
           : ['node', '-e', 'console.log("step8 changes: nothing to stamp")'] }];
     },
@@ -2764,7 +2805,7 @@ export const stages = [
       return [step8ChangesGate(ctx), step8ClosureGate(ctx), closureGate(ctx),
         ...(ids.length ? [gate('judge-stamps', ['node', 'tools/apply-judge-stamps.mjs',
           '--ledger', `research/${ctx.run}-judge.jsonl`, '--items', ids.join(','),
-          '--terminal-resolutions', terminalResolutionsPath(ctx), '--verify'])] : [])];
+          '--terminal-resolutions', terminalResolutionsPath(ctx), ...auditorCertificationArgs(ctx), '--verify'])] : [])];
     },
   },
 
@@ -2951,10 +2992,11 @@ export const stages = [
       argv: ['node', 'tools/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
         '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
         '--terminal-resolutions', terminalResolutionsPath(ctx),
+        ...auditorCertificationArgs(ctx),
         '--apply', '--report', `research/${ctx.run}-judge-stamps.json`] }],
     gates: (ctx) => [gate('judge-stamps', ['node', 'tools/apply-judge-stamps.mjs', '--ledger', `research/${ctx.run}-judge.jsonl`,
       '--manifests', batches(ctx).map((b: any) => `research/${ctx.run}-batch-${b}.pages.json`).join(','),
-      '--terminal-resolutions', terminalResolutionsPath(ctx), '--verify'], {
+      '--terminal-resolutions', terminalResolutionsPath(ctx), ...auditorCertificationArgs(ctx), '--verify'], {
       liveness: { pattern: /judge-stamps: (\d+) item\(s\) in scope/.source, min: 1, unit: 'items in scope' } }), closureGate(ctx)],
   },
   {

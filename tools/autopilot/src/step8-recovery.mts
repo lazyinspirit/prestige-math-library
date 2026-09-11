@@ -69,8 +69,8 @@ export function recoverStep8({
     fail(`authorization must reopen exactly ${REOPEN.join(', ')}`);
   const recoveryId = String(auth?.recovery_id ?? '');
   if (!/^[a-z0-9][a-z0-9-]*$/.test(recoveryId)) fail('authorization needs a safe recovery_id');
-  const required = new Set(Array.isArray(auth.required_targets) ? auth.required_targets : []);
-  const allowed = new Set(Array.isArray(auth.allowed_targets) ? auth.allowed_targets : []);
+  const required = new Set<string>((Array.isArray(auth.required_targets) ? auth.required_targets : []).map(String));
+  const allowed = new Set<string>((Array.isArray(auth.allowed_targets) ? auth.allowed_targets : []).map(String));
   if (!required.size || [...required].some((id) => !allowed.has(id)))
     fail('required_targets must be a nonempty subset of allowed_targets');
 

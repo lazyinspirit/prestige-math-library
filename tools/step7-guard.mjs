@@ -45,6 +45,7 @@ import { itemHashGuard, itemHashJudge, shortHash } from './item-hash.mjs';
 import { parseTerminalResolutions } from './step7-terminal-resolution.mjs';
 import { loadStep7JudgeEvidence, rejectionKey, isFrozenStep5CrossRepair } from './step7-evidence.mjs';
 import { permittedNewLemmas } from './step7-new-lemmas.mjs';
+import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const ITEMS = join(REPO, 'items');
@@ -74,6 +75,7 @@ const againstLabel = option('--against');
 // the flag leaves the guard exactly as strict as it was.
 const publishedRepairsPath = option('--published-repairs');
 const terminalResolutionsPath = option('--terminal-resolutions');
+const auditorCertificationsPath = option('--auditor-certifications');
 // A fatal repair can expose a defect in one of its own run-local prerequisites.
 // That prerequisite has no judge row of its own, so the ordinary fatal licence
 // cannot name it.  After automatic repair exhaustion, either the owner or the
@@ -86,7 +88,7 @@ const terminalResolutionsPath = option('--terminal-resolutions');
 const ownerPrerequisiteRepairsPath = option('--owner-prerequisite-repairs');
 
 const usage = () => {
-  console.error('usage: node tools/step7-guard.mjs --touches <ledger.json> --baseline "<label>" --judge-ledger <file.jsonl> --adjudications <file.jsonl> --scope <step7-scope.json> [--published-repairs <file.jsonl>] [--owner-prerequisite-repairs <file.jsonl>] [--terminal-resolutions <file.jsonl>] [--against "<label>"] [--json]');
+  console.error('usage: node tools/step7-guard.mjs --touches <ledger.json> --baseline "<label>" --judge-ledger <file.jsonl> --adjudications <file.jsonl> --scope <step7-scope.json> [--auditor-certifications <file.json>] [--published-repairs <file.jsonl>] [--owner-prerequisite-repairs <file.jsonl>] [--terminal-resolutions <file.jsonl>] [--against "<label>"] [--json]');
   process.exit(2);
 };
 if (!touchesPath || !baselineLabel || !judgeLedgerPath || !adjudicationsPath || !scopePath) usage();
@@ -469,6 +471,17 @@ const newLemmas = permittedNewLemmas({ created, licensedConsumers,
   readItem: (id) => readFileSync(join(ITEMS, `${id}.md`), 'utf8') });
 for (const id of created) if (!newLemmas.has(id)) error('step7-creation',
   `${id}: a new Step-7 item must be a dependency lemma used by a licensed fatal repair`, id);
+if (auditorCertificationsPath) {
+  let certified = [];
+  try { certified = loadAuditorCreatedCertifications(resolvePath(auditorCertificationsPath), { steps: [7] }); }
+  catch (cause) { error('auditor-certification-shape', cause.message); }
+  const current = new Map(certified.map(row => [row.id, row]));
+  for (const id of created) {
+    const row = current.get(id);
+    if (!row || shortHash(row.guard_sha256) !== now[id]) error('step7-creation-uncertified',
+      `${id}: new Step-7 lemma lacks a current auditor/adjudicator-created certification`, id);
+  }
+}
 for (const id of deleted) error('step7-deletion', `${id}: removed since "${baselineLabel}"; deleting results is not licensed at Step 7`, id);
 
 // ---- report -----------------------------------------------------------------

@@ -87,7 +87,8 @@ test('Step 5 has only direct group review and unchanged closure stages', async (
   assert.equal(byId('5a-adjudicate').plan(ctx, ['1'])[0].task, 'briefs/tasks/alpha-5a-direct.md');
   assert.equal(byId('5b-cross').plan(ctx, ['all'])[0].task, 'briefs/tasks/alpha-5b-edges.md');
   assert.deepEqual(byId('5a-prepare').plan(ctx)[0].argv,
-    ['node', 'tools/step5-scope.mjs', 'prepare-direct', '--run', 'r']);
+    ['node', 'tools/step5-prepare.mjs', '--run', 'r']);
+  assert.ok(byId('5a-adjudicate').gates(ctx).some((g: any) => g.id === 'step5-auditor-created-certifications'));
   assert.ok(byId('5a-adjudicate').gates(ctx).some((g: any) => g.id === 'step5-routing-adjudicate'));
   assert.ok(byId('5b-cross').gates(ctx).some((g: any) => g.id === 'step5-routing-final'));
 });
