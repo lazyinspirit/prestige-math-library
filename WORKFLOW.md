@@ -109,7 +109,14 @@ group review, and post-step7 after repair. Impact checks include authoring chang
 Maintain consumer inputs under briefs/tasks/frontier-dependency-ledger.md; the
 engine merges them at mutable joins. Graph/hash checks do not certify proofs.
 The Step 5b lead owns both impact receipts: pre-author to post-5a, and post-5a
-to current content. Empty windows still need reviewer attribution. Historical
+to current content. Closed repository runtime incidents on a peer draft use the
+existing `kind: "gate"` receipt with the stable ledger subject as `id` and explicit
+`carrier_run` / `carrier_id`. Only fixed `breaking-runtime`, `engine-stage`,
+`stage-unowned` rows qualify. The evidence must name the actual foreign draft;
+the hash binds its owner's current item, contract and manifest. This receipt
+resolves the runtime incident, not that draft's mathematical review. Ordinary
+gate verdicts retain their own-run or claimed-published carrier rule.
+Empty windows still need reviewer attribution. Historical
 reviews may supply evidence only after current hash and interface reconciliation;
 never reset a baseline or bulk-approve candidates to close a gate. Narrow gate
 repairs retain their assigned scope.
@@ -249,9 +256,22 @@ engine adopts compatible workers and waits for repair jobs before spending anoth
 round. Restart adoption includes recorded recovery workers with empty `covers`:
 they add no primary coverage but hold the whole-stage gate until they exit.
 Infrastructure retries are bounded; unchanged mathematical failures hold.
+
+An owner-authorized fatal finding discovered after Step 7 may use
+`recover-step8 --authorization FILE` only while the run is paused, inactive and
+has not entered Step 9. The authorization must bind the exact run,
+`post-step7` baseline, required repair targets and a bounded allowlist. The
+command archives successful result receipts and reopens only
+`8-changes-judge`, `8-close`, `8-changes-stamp` and `8-receipt`; it preserves
+Step 7 history and leaves the run paused. This is recovery from a newly
+discovered defect, not an additional ordinary repair loop.
 Step 5 budgets three repairs per gate/item, mechanical fixes first, then disjoint
 groups or a serial writer. Failures naming only carriers outside the run hold for
 their actual owners; warning inventories do not establish repair ownership.
+Step 5b applies this rule to precheck, depcheck and rendercheck content failures;
+foreign-consumer impact receipts remain lead-Alpha work. Precheck FAIL/REPAIR
+headers identify retry subjects; PASS rows and the printed proof's citations do
+not. Unknown or mixed diagnostics retain serial repair routing.
 Depcheck accepts numeric Unicode escapes in quoted YAML while still detecting
 undoubled TeX backslashes. Recognized outages can refund a round with 20-minute
 backoff. Doctor checks commands/tasks, not mathematical correctness or quotas.

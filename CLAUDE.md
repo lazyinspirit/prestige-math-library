@@ -101,6 +101,11 @@ The engine runs one rejudge, then one terminal final-adjudication pass. No
 early final handoffs, post-final repair stages, repeat judge waves or new
 prerequisites at final adjudication. Unresolved work escalates and stops.
 Successful final adjudication freezes the result and proceeds to Step 8.
+If the owner explicitly authorizes recovery for a fatal defect discovered after
+that freeze, use the guarded `recover-step8` command: preserve the Step-7
+snapshot and judgment history, repair only the hash-bound allowlist, and reopen
+only changed-item judgment, impact closure, stamps and receipts before Step 9.
+This bounded recovery is not permission for an ordinary repeat judge wave.
 
 **12. Phase-3 repair ledger.** Throughout Phase 2, maintain
 `research/published-consumer-supplier-ledger.md` as the existing canonical

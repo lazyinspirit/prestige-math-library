@@ -33,6 +33,9 @@ Step 5a reviews authored content; Step 5b reconciles dependencies and closes it.
 Every agent must acknowledge uncertainty and consult authoritative sources when unsure.
 Step 7 is repairs/checks → one rejudge → one final adjudication → Step 8.
 Unresolved terminal findings stop the run; no post-final repair loop exists.
+An explicitly owner-authorized fatal finding discovered after the freeze uses
+the guarded Step-8 recovery command documented in WORKFLOW; it preserves Step 7
+and recertifies only the changed suffix before Step 9.
 See [WORKFLOW.md](WORKFLOW.md) for source recovery, reconciliation and controls.
 
 Verify active runs against their state directory and Git history.
