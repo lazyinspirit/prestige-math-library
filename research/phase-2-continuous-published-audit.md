@@ -19,6 +19,33 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
+## Latest checkpoint: Green-foundation audit
+
+Evidence: `research/phase-2-next-20-published-green-foundation-audit.md`.
+
+The existing Krull--Schmidt U-P record moves to A-P after complete target and
+exact supplier review. Its proof assumes finite composition length but cites a
+general theorem whose converse explicitly needs dependent choice; the target
+does not assume DC or derive the needed finite length from finite dimension.
+Direct dimension induction and dimension-bounded Fitting stabilization repair
+the proof choice-free. The theorem is true, and active Green consumers already
+assume AC, so this is not a live authoring blocker.
+
+Higman's criterion and the Green existence/conjugacy theorem are new bounded
+clears. In particular, Green proof 1.2's compressed trace identity is recovered
+by the finite diagonal action on pairs of left cosets: the representative
+`(Q,xR)` has stabilizer `Q cap xRx^{-1}` and its composite is linear over that
+intersection. Under the adequate-implicit-proof rule this is not a distinct
+missing Mackey-supplier defect. The Green target retains only the separately
+indexed upstream Krull--Schmidt repair.
+
+Post-batch target index: 2,519 unique published IDs; U-P 1,412, U-C 15,
+A-R 187, A-P 192 and 713 bounded clears. Recount and cross-class deduplication
+must be rerun before commit. Next frontier targets are the already-read
+transfinite recursion/local continuity/Kac--Moody definition interfaces, then
+the next exact author handoff. Do not infer a defect from a missing direct edge
+when the proof correctly uses an adequate published supplier.
+
 ## Completed bounded batch: next-20 batch 2 published prerequisites
 
 Evidence: `research/phase-2-next-20-published-locally-convex-prerequisite-audit.md`.

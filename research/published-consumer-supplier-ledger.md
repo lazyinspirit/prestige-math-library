@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1403, U-C 15, A-R 187, A-P 187. The
+Current classifications: U-P 1412, U-C 15, A-R 187, A-P 192. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -480,16 +480,26 @@ judgment claimed.
   that declaration while retaining the assumption and finite-dimensional
   distinction. No Phase 2 supplier or pair is required. This is a confirmed
   declaration defect, not a false relative-projectivity definition.
-- `thm-krull-schmidt-for-finite-dimensional-kg-modules` — U-P, newly indexed
-  from the existing chain-condition impact list. Its L1 invokes
-  `thm-composition-series-iff-noetherian-and-artinian` without exposing that
-  supplier's converse DC assumption. This is a potential inherited-interface
-  concern; finite-dimensional length and Fitting stabilization have direct
-  bounded-dimension proofs. Recommended audit/repair route: write that finite
-  dimension induction and stabilization explicitly, retaining choice-free
-  scope; alternatively qualify the exact stronger supplier use with AC and
-  `def-axiom-of-choice`. No pending Phase 2 supplier. Do not infer a false
-  Krull–Schmidt theorem or a whole-closure audit from this finding.
+- `thm-krull-schmidt-for-finite-dimensional-kg-modules` — U-P to A-P after
+  complete target and exact used-supplier review. Its L1 says finite-dimensional
+  modules have finite length, but the cited chain-condition theorem supplies
+  the converse only under dependent choice; the target neither assumes DC nor
+  derives finite length from finite dimension. Repair choice-free by dimension
+  induction and dimension-bounded Fitting stabilization, then spell out that
+  an invertible composite splits one indecomposable summand off the other.
+  Existing published algebra suffices; no pending Phase-2 supplier. Exact
+  evidence and limitations are in
+  `phase-2-next-20-published-green-foundation-audit.md`.
+
+The same focused audit gives bounded-clear dispositions to the published
+Higman criterion and Green existence/conjugacy theorem. Higman's two counit
+constructions are finite and inverse in the needed sense. Green proof 1.2's
+compressed relative-trace calculation is a correct finite orbit decomposition:
+the orbit of `(Q,xR)` has stabilizer `Q cap xRx^{-1}`, and its representative
+composite is linear over that intersection. This is an adequate implicit
+finite calculation, not an additional missing Mackey supplier. The Green page
+retains the separate upstream Krull--Schmidt repair, which active AC-bearing
+consumers can discharge locally.
 
 ## Hyperbolic and finite-Weyl scaffold audit findings — 2026-09-11
 
@@ -28038,11 +28048,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,517 unique
+subsequently reconciled published IDs. It currently contains **2,519 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,517 indexed IDs are published; **13,413 published items remain outside this
+2,519 indexed IDs are published; **13,411 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28051,14 +28061,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1413 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1412 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 15 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 191 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 192 | Recorded direct review and an unresolved item-specific repair. |
 
-711 further reference-pool items have bounded no-repair-needed dispositions
+713 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,806 items and the expanded reference pool contains 2,517 unique items.
+1,806 items and the expanded reference pool contains 2,519 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28119,6 +28129,8 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `thm-higman-criterion-for-relative-projectivity` | Active Green-foundation audit 2026-09-11: full proof and exact counit/transversal interfaces read. Evaluation at the identity recovers the relative trace from a splitting, and the displayed balanced equivariant function constructs a splitting from a trace witness. Every sum is finite and no arbitrary witness family is selected. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-next-20-published-green-foundation-audit.md`. |
+| `thm-green-vertex-source-existence-and-conjugacy` | Active Green-foundation audit 2026-09-11: full target and exact Higman/Krull--Schmidt uses read. The compressed double-coset trace line is a correct finite orbit regrouping: the orbit represented by `(Q,xR)` has stabilizer `Q cap xRx^{-1}` and its representative composite is linear over that intersection. The remaining minimality, locality and source-conjugacy steps are sound. The separate upstream Krull--Schmidt repair remains A-P. New bounded-clear census entry; no live blocker for AC-bearing consumers. Exact hash/scope/dedup: `research/phase-2-next-20-published-green-foundation-audit.md`. |
 | `lem-central-elements-have-weight-zero` | Finite-Weyl/root-decomposition follow-up 2026-09-11: full item and the Harish-Chandra zero-weight convention read. The declared root-space and bracket suppliers are unused: centrality directly gives `[h,z]=0` for every Cartan element, exactly the zero-weight condition. Removing unused dependencies is optional cleanup, not repair debt. Exact hash/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `lem-central-action-on-a-cyclic-highest-weight-module-is-scalar` | Finite-Weyl/Casimir follow-up 2026-09-11: full item and exact PBW interfaces read. Proof 1.1 abbreviates one-dimensionality of the top weight in a cyclic highest-weight module, but the published Verma universal property, PBW model and weight-cone proposition supply it exactly; proof 2.1 then correctly propagates scalar action from the cyclic generator. Correct implicit use of adequate published suppliers is clear, so an explicit edge is optional exposition rather than repair debt. Exact hashes/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `thm-extension-of-a-bounded-map-from-a-dense-subspace` | Fourier Step-5A functional-interface audit, 2026-09-11: full target read. Explicit CC selects an approximating sequence at each fixed point; target completeness, the Lipschitz bound and unique limits make the extension well defined, linear and unique. The same least operator-norm bound passes to the extension, including the zero case. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-step5a-functional-interface-audit.md`. |
@@ -28886,6 +28898,7 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `thm-krull-schmidt-for-finite-dimensional-kg-modules` | Active Green-foundation audit 2026-09-11: proof 1.1 starts induction on composition length and proof 2.1 uses finite-length stabilization, but L1's cited `thm-composition-series-iff-noetherian-and-artinian` obtains its converse only under DC. The target neither assumes DC nor derives finite length from finite dimension. Repair choice-free by induction on supplied vector-space dimension and dimension-bounded kernel/image stabilization; an invertible composite then splits one indecomposable summand off the other before cancellation. Existing published interfaces suffice; theorem remains true and active Green consumers explicitly assume AC. U-P to A-P, exact hashes/dedup/limits: `research/phase-2-next-20-published-green-foundation-audit.md`. |
 | `thm-tonelli-and-fubini-for-completed-product-measures` | Frontier-22 completed-product audit 2026-09-11: both statement parts display iterated integrals although exceptional sections may be nonmeasurable, so their inner integrals are undefined there; neither statement nor proof assigns zero on the measurable factor-null exceptional sets. In the nonnegative branch, the completion representative is only ae equal to nonnegative `f`, but proof 2.1 applies Tonelli before replacing it by `g^+`. Name the exceptional sets, define section-integral functions as zero there, and use the positive part; existing published completion, Tonelli/Fubini and ae interfaces suffice. The active kernel draft already chooses a product-measurable representative and explicitly installs the zero convention, so no live blocker/new pair. Exact hashes/consumer path/dedup: `research/phase-2-frontier-22-published-complex-lp-completed-product-audit.md`. |
 | `thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary` | Connection-author partition reconciliation 2026-09-11: the statement explicitly assumes `AC_omega`, but proofs 1.1--2.1 do not construct or cite a boundary half-ball cover/shrinking and inherit the already-A-P boundaryless selection route while asserting the same choice bound. The conclusion also uses a partition definition whose exact domain is a boundaryless smooth manifold. Extend that definition to boundary objects, repair the upstream cover/shrinking/partition contracts, and give the all-eligible-half-ball plus countable annular/bump selection under `AC_omega`. Existing suppliers suffice; the live full-AC connection proof supplies its argument locally, so no new pair/current blocker. Exact hash/clauses/dedup: `research/phase-2-next-20-published-boundary-partition-audit.md`. |
 | `lem-every-verma-module-contains-a-simple-verma-submodule` | Finite-Weyl/Verma-chain audit 2026-09-11: proof 1.1 obtains an infinite descending chain by repeatedly choosing a proper submodule and singular vector, but states no choice hypothesis. Avoid DC by first bounding the finite set of positive-lattice solutions to the Casimir sphere equation and constructing only one more than that many successive proper embedded Vermas by finite induction; strictly increasing heights then contradict finiteness. Existing published singular-vector, injectivity, Casimir and weight-cone suppliers suffice after their separately recorded repairs. No new Phase-2 pair. Exact hash/path/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
@@ -29336,7 +29349,6 @@ mathematical repairs. Evidence:
 | `prop-casimir-eigenvalue-on-a-highest-weight-module` | Finite-Weyl/Casimir follow-up 2026-09-11: exact impact candidate through direct use of the already-A-P Killing, root-decomposition, opposite-pairing and root-system clauses. Its full displayed dual-basis, bracket and rho calculation is sound once those suppliers are repaired; no independent defect identified. This item was one of four omitted from the prior published root closure, now corrected to ROOT-74. Exact hash/path/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `ex-sl2-casimir-and-its-highest-weight-eigenvalue` | Finite-Weyl/Casimir follow-up 2026-09-11: exact impact candidate through the Casimir-eigenvalue proposition. Its direct `sl2` Killing-form values, dual basis, Casimir normalization and eigenvalue arithmetic are sound in the inspected scope. Revalidate after upstream root/Killing repairs; no independent defect identified. Exact hash/path/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `thm-verma-homomorphism-spaces-have-dimension-at-most-one` | Finite-Weyl/Verma-chain follow-up 2026-09-11: exact impact candidate through the newly A-P simple-Verma-submodule lemma. The theorem's own restriction, proportionality and injectivity argument is sound in the inspected scope. Revalidate after its supplier's finite-induction repair. This was one of four omitted IDs in the corrected ROOT-74 closure. Exact hash/path/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
-| `thm-krull-schmidt-for-finite-dimensional-kg-modules` | Batch11/root 2026-09-11: potential inherited DC mismatch in finite-length supplier L1. Audit bounded-dimension argument before inferring defect; explicit dimension induction/Fitting stabilization can avoid choice. Existing chain-condition theorem and AC interface published; no new Phase 2 pair. See Green-correspondence prerequisite findings and phase-2-next-20-batch-11.notes.md. |
 | `ex-c0-is-a-banach-space` | Root 2026-09-10 potential proof-interface concern: 3.1 infers closedness from an already supplied convergent sequence; exact ZF bridge absent. Direct given-Cauchy-sequence proof via published ex-ell-infinity-is-a-banach-space and existing epsilon/2 estimate avoids the inference. No pending Phase 2 supplier identified; bounded audit, no false-theorem verdict. Evidence: research/phase-2-next-20-published-sequence-space-audit.md. |
 | `thm-singular-homology-satisfies-homotopy-exactness-and-excision` | UC34 supplier reconciliation 2026-09-09: Astra2 bounded AT10 review: proof1.3 double-mapping-cylinder collapse relative to V lacks written relative homotopies/exact supplier in inspected argument. Incomplete audit candidate, NOT confirmed fatal; refined live degree bridge instead uses elementary S0 augmentation/finite-sum and n0 suspension clauses. No newPhase2 supplier established. Dedicated audit needed; report research/phase-2-catchup-24-owner-step3-at-astra.md. |
 | `thm-euclidean-inverse-function-theorem` | UC34 supplier reconciliation 2026-09-09: Direction-specific impact candidate only after thm-complete-subspace-iff-closed repair: inspect whether complete-implies-closed (CC), closed-implies-complete (ZF), or supplied-sequence clause is used. Not a confirmed defect or semantic audit. Receipt research/uc34-2026-09-09-complete-subspace-astra-3.md; no Phase2 prerequisite identified. |
