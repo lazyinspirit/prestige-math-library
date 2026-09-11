@@ -4,9 +4,23 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1389, U-C 0, A-R 187, A-P 231. The
+Current classifications: U-P 1386, U-C 0, A-R 187, A-P 241. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Ergodic Lp integral-propagation audit — 2026-09-11
+
+Six new IDs, two prior bounded clears and one U-P item enter A-P along the exact
+finite-`p` path from the affected simple/nonnegative integral foundation through
+the raw `L^p` carrier, Minkowski, null kernel, quotient norm, integral invariance
+and Koopman isometry. Their formulas and visible algebra are sound after the
+common finite zero-complement repair. A second U-P item, the dyadic
+simple-approximation theorem, enters A-P for a separate misplaced proof
+citation/terminator, while its mathematical construction is sound. Two
+measure-preserving definitions are new
+clears and the least-essential-bound proposition moves U-P to clear. Active
+ergodic/Chacon impact was reported immediately. Exact evidence:
+`research/phase-2-frontier-22-published-ergodic-lp-integral-propagation-audit.md`.
 
 ## HG metric and word-interface audit — 2026-09-11
 
@@ -28781,11 +28795,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,818 unique
+subsequently reconciled published IDs. It currently contains **2,826 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,818 indexed IDs are published; **13,112 published items remain outside this
+2,826 indexed IDs are published; **13,104 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28794,14 +28808,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1389 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1386 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 231 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 241 | Recorded direct review and an unresolved item-specific repair. |
 
-1,011 further reference-pool items have bounded no-repair-needed dispositions
+1,012 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,807 items and the expanded reference pool contains 2,818 unique items.
+1,814 items and the expanded reference pool contains 2,826 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28862,6 +28876,9 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-measure-preserving-transformation-and-system` | Frontier-22 ergodic/Lp propagation audit 2026-09-11: the measurable inverse-image identity is precise and explicitly independent of invertibility, completeness and finiteness. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-lp-integral-propagation-audit.md`. |
+| `def-invertible-measure-preserving-system` | Frontier-22 ergodic/Lp propagation audit 2026-09-11: actual invertibility and invertibility on one invariant measurable conull restriction are separated, with no exceptional-point inverse choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-lp-integral-propagation-audit.md`. |
+| `prop-essential-supremum-is-attained-as-the-least-essential-bound` | Frontier-22 ergodic/Lp propagation audit 2026-09-11: upward closure of essential bounds makes every `s+1/n` a bound, and countable subadditivity removes their exceptional-set union, proving attainment/leastness. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-lp-integral-propagation-audit.md`. |
 | `def-metric-space` | Frontier-22 HG metric/word audit 2026-09-11: separation, symmetry and triangle force nonnegativity; the exact supplier has an independent strong-triangle branch, so the ultrametric equivalence is not circular. Its three metric aliases are the same item. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hg-metric-word-interface-audit.md`. |
 | `def-geodesic-and-geodesic-metric-space` | Frontier-22 HG metric/word audit 2026-09-11: an isometric interval map forces its length to equal endpoint distance, with degenerate endpoints and the every-pair space convention coherent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hg-metric-word-interface-audit.md`. |
 | `def-quasi-geodesic-and-quasi-geodesic-metric-space` | Frontier-22 HG metric/word audit 2026-09-11: the two-sided `(lambda,c)` bounds, bounded closed segment domains and uniform space constants match the active toolkit. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hg-metric-word-interface-audit.md`. |
@@ -29090,7 +29107,6 @@ The separate page-header cutover obligations remain in their category sections.
 | `lem-formula-substitution-satisfaction` | Frontier-22 set-semantics audit 2026-09-11: the free-for condition fixes the term value through binder updates and distinct-variable updates commute, proving the substitution equivalence. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-set-semantics-soundness-audit.md`. |
 | `lem-satisfaction-coincidence` | Frontier-22 set-semantics audit 2026-09-11: constructor induction proves free-variable coincidence and reduct invariance, including the existential update clause. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-set-semantics-soundness-audit.md`. |
 | `def-theories-models-and-semantic-consequence` | Frontier-22 set-semantics audit 2026-09-11: sentence models, assignment-wise consequence, validity and universal closure consistently use nonempty set structures and coincidence. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-set-semantics-soundness-audit.md`. |
-| `def-l-p-space-as-a-quotient-by-null-functions` | Frontier-22 Lp/normal/measure audit 2026-09-11: null equality coherently defines classes for every positive `p`; the raw/quotient `L^infinity` overload is explicitly staged and the later representative remark disambiguates uses. The finite-p and later quotient-structure clauses are sound. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-lp-normal-measure-audit.md`. |
 | `thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation` | Frontier-22 Lp/normal/measure audit 2026-09-11: the simple total-variation estimate controls an `L^1(|nu|)` approximating sequence, its limit and differences of approximants; applying it to `f 1_E` proves the restricted formula. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-lp-normal-measure-audit.md`. |
 | `thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable` | Frontier-22 Lp/normal/measure audit 2026-09-11: the rational threshold formulas for suprema and infima are correct; tail operations give limsup/liminf and agreement on every rational cut detects equality even at extended-real infinities. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-lp-normal-measure-audit.md`. |
 | `lem-normal-density-has-total-mass-one` | Frontier-22 Lp/normal/measure audit 2026-09-11: explicit AC covers all CC uses; the `x=sqrt(2)t` substitution, symmetric truncation MCT, Gaussian integral and positive square-root/scalar rules give mass one. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-lp-normal-measure-audit.md`. |
@@ -29218,7 +29234,6 @@ The separate page-header cutover obligations remain in their category sections.
 | `cor-measurable-functions-admit-dominated-simple-approximations` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Explicit positive/negative dyadic sequences recombine into finite real simple functions dominated by the modulus and converging also at either extended-real infinity. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
 | `thm-nonnegative-measurable-functions-admit-increasing-simple-approximations` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. The explicit dyadic truncations are measurable, increasing, dominated, pointwise convergent including at infinity, and uniformly convergent under a finite bound. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
 | `thm-holder-inequality-for-integrals` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Zero norms are separated before normalization; real Young proves strict exponents and least essential bounds prove both endpoints. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
-| `thm-minkowski-inequality-for-integrals` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Integrability is established before Holder, the zero norm is separated before division, and one/infinity endpoints are direct. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
 | `thm-integral-triangle-inequality` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Real order bounds and the nonzero-integral phase `conj(I)/|I|` establish the real and complex cases with the zero case separate. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
 | `thm-the-lebesgue-integral-respects-almost-everywhere-equality` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Null support proves equality of all indefinite integrals, and positive/negative tests for both components prove the converse. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
 | `thm-ftc-second-part` | Original-next-20 Levy-inversion prerequisite audit, 2026-09-11: full target and exact mean-value/Darboux interfaces read. Applying MVT to an arbitrary fixed interval yields universally quantified lower/upper inequalities, so the proof sums without selecting tags; telescoping and Darboux integrability give the endpoint formula. U-P to bounded clear. Exact aliases, hash and scope: `research/phase-2-next-20-published-levy-inversion-prerequisite-audit.md`. |
@@ -29929,6 +29944,16 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `def-calligraphic-l-p-on-a-measure-space` | Frontier-22 ergodic/Lp propagation audit 2026-09-11: the finite-`p` functional and carrier use the affected nonnegative integral of `abs(f)^p`. Retain the correct piecewise finite/infinite power convention and install the common finite zero-complement integral repair. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-ergodic-lp-integral-propagation-audit.md`. |
+| `def-l-p-space-as-a-quotient-by-null-functions` | Frontier-22 ergodic/Lp propagation audit 2026-09-11 corrects its bounded clear: the ae equivalence and quotient clauses are coherent, but the finite-`p` carrier is the affected `mathcal L^p` class. Repair the common simple/nonnegative-integral foundation. Clear to A-P; prior overload receipt retained, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-ergodic-lp-integral-propagation-audit.md`. |
+| `thm-minkowski-inequality-for-integrals` | Frontier-22 ergodic/Lp propagation audit 2026-09-11 corrects its bounded clear: integrability, Holder algebra and the infinity endpoint are sound, but proofs 1.1--1.2 directly use affected nonnegative homogeneity/additivity. Install the common finite zero-complement repair. Clear to A-P; prior endpoint audit retained, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-ergodic-lp-integral-propagation-audit.md`. |
+| `thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one` | Frontier-22 ergodic/Lp propagation audit 2026-09-11: finite-`p` closure directly uses the affected Minkowski/homogeneity chain; the infinity proof is independent. Repair upstream. U-P to A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-ergodic-lp-integral-propagation-audit.md`. |
+| `prop-null-functions-form-a-linear-subspace-and-are-exactly-the-zero-seminorm-class` | Frontier-22 ergodic/Lp propagation audit 2026-09-11: finite-`p` proof 1.2 invokes the already A-P nonnegative-integral zero criterion; null-set algebra and the infinity clause are sound. Apply the common repair. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-ergodic-lp-integral-propagation-audit.md`. |
+| `thm-the-l-p-norm-descends-to-the-quotient-and-makes-l-p-a-normed-space` | Frontier-22 ergodic/Lp propagation audit 2026-09-11: finite-`p` well-definedness and triangle use the affected null-kernel/Minkowski interfaces; quotient algebra and infinity are sound. Apply the common repair. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-ergodic-lp-integral-propagation-audit.md`. |
+| `thm-increasing-simple-approximation-of-a-nonnegative-measurable-function` | Frontier-22 ergodic/Lp propagation audit 2026-09-11: the dyadic construction is mathematically sound, but proof 3.1 places its citation and `QED` marker mid-sentence between “multiple of” and `2^(-n)`. Move both to the completed step's end. U-P to A-P; the active existence use is unblocked and no new pair is needed. Exact hash/line: `research/phase-2-frontier-22-published-ergodic-lp-integral-propagation-audit.md`. |
+| `thm-integrals-are-invariant-under-measure-preserving-maps` | Frontier-22 ergodic/Lp propagation audit 2026-09-11: simple invariance is sound after representation independence, but proof 2.1 directly uses affected MCT and proof 3.1 affected finite `L^1` linearity. Install the common finite zero-complement repair. New A-P; active Chacon impact reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-ergodic-lp-integral-propagation-audit.md`. |
+| `def-koopman-operator-on-l-p` | Frontier-22 ergodic/Lp propagation audit 2026-09-11: the pullback formula is correct, but its all-`p` mapping and representative-independence assertion is explicitly justified by the affected finite-`p` Koopman isometry path. Repair that path. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-ergodic-lp-integral-propagation-audit.md`. |
+| `thm-koopman-operator-is-a-linear-isometry-on-l-p` | Frontier-22 ergodic/Lp propagation audit 2026-09-11: proof 2.1 uses affected integral invariance on `abs(f)^p`, and proof 3.1 the affected quotient norm. Infinity and inverse/conull surjectivity clauses are sound. Apply the common repair. New A-P; active ergodic impact reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-ergodic-lp-integral-propagation-audit.md`. |
 | `def-kappa-tree-and-tree-property` | Frontier-22 cardinal/tree audit 2026-09-11: `|T_alpha|<kappa` is applied to arbitrary tree levels, but the item neither assumes AC nor proves levels well-orderable; a height-one tree may have an arbitrary root set, so cardinality is undefined under the published convention. Prefer the ZF smallness predicate that `T_alpha` injects into some `lambda<kappa`, or explicitly state/depend on AC and identify its use. The current weak-compactness consumer already declares ZFC/AC, so no frontier blocker; no new pair. Exact hash/proof: `research/phase-2-frontier-22-published-cardinal-tree-foundation-audit.md`. |
 | `def-integral-over-a-measurable-set` | Frontier-22 density/null-integral audit 2026-09-11: indicator multiplication is measurably defined, but the restricted integral directly uses the now-A-P nonnegative-integral definition. Install the finite zero-complement simple-integral repair. U-P to A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-density-null-integral-propagation-audit.md`. |
 | `thm-indefinite-integral-of-a-nonnegative-function-is-a-measure` | Frontier-22 density/null-integral audit 2026-09-11 corrects its bounded clear: countable additivity uses the now-A-P MCT and nonnegative-additivity clauses. Its visible finite-union/increasing-limit proof remains sound after the common foundation repair. Clear to A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-density-null-integral-propagation-audit.md`. |
@@ -31286,7 +31311,6 @@ mathematical repairs. Evidence:
 | `prop-degree-is-homotopy-invariant-and-multiplicative-under-composition` | Continuing personal audit: exact examination pool and AT-24 contracts |
 | `prop-elementary-high-low-identities` | 51. Exact live-plan metadata resynchronization set |
 | `prop-equivalent-support-description-of-category-o` | Cross-category Phase-2 roots and their published impact |
-| `prop-essential-supremum-is-attained-as-the-least-essential-bound` | Step-3 scope intervention — actual suppliers versus page-wide debt |
 | `prop-every-integer-occurs-as-the-degree-of-a-sphere-map` | Continuing personal audit: exact examination pool and AT-24 contracts |
 | `prop-expander-walk-hits-bad-edges` | 51. Exact live-plan metadata resynchronization set |
 | `prop-expander-walk-sampled-and-moving-sets` | 51. Exact live-plan metadata resynchronization set |
@@ -31467,7 +31491,6 @@ mathematical repairs. Evidence:
 | `thm-burnsides-p-a-q-b-theorem` | Transitive consumers (166), grouped by home page |
 | `thm-busy-beaver-dominates-every-total-computable-function` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `thm-c-c-infinity-rn-is-dense-in-l-p-of-rn` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
-| `thm-calligraphic-l-p-and-l-infinity-are-vector-spaces-for-p-at-least-one` | Exact direct impact-review queue |
 | `thm-canonical-bidual-map-is-an-isometry` | norming-and-separation-under-hahn-banach |
 | `thm-cantor-space-surjects-onto-every-nonempty-compact-metric-space` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-cardinal-arithmetic-agrees-with-finite-counting` | 7.4 Published metadata snapshot amendments |
@@ -31599,7 +31622,6 @@ mathematical repairs. Evidence:
 | `thm-hyperbolic-groups-have-bounded-orders-of-finite-subgroups` | 30.4 Recorded-result isolation and other Phase-3 repairs |
 | `thm-hyperbolicity-is-invariant-under-quasi-isometry-for-geodesic-spaces` | HG consumer map |
 | `thm-immerman-szelepcsenyi-nl-equals-conl` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
-| `thm-increasing-simple-approximation-of-a-nonnegative-measurable-function` | Exact direct impact-review queue |
 | `thm-independent-series-probability-and-almost-sure-convergence-agree` | 0A.2 Exact Phase-3 defects in published content |
 | `thm-infinite-order-elements-of-hyperbolic-groups-are-undistorted` | HG consumer map |
 | `thm-integration-against-a-density` | Exact direct impact-review queue |

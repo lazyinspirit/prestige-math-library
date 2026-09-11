@@ -19,7 +19,27 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: HG metric and word interfaces
+## Latest checkpoint: ergodic Lp integral propagation
+
+Evidence:
+`research/phase-2-frontier-22-published-ergodic-lp-integral-propagation-audit.md`.
+
+Six new IDs, two old bounded clears and one U-P item enter A-P on the exact
+finite-`p` path from the affected simple/nonnegative integral through the raw
+carrier, Minkowski, null kernel, quotient norm, integral invariance and Koopman
+isometry. A second U-P theorem has a misplaced mid-sentence proof marker,
+though its dyadic construction is sound. Two measure-preserving definitions
+are new clears and the least-essential-bound proposition moves U-P to clear.
+Active Chacon/ergodic impact was reported immediately; the common finite
+zero-complement repair supplies the local route and no new pair is needed.
+
+Post-batch target index: 2,826 unique published IDs; U-P 1,386, U-C 0,
+A-R 187, A-P 241 and 1,012 bounded clears; 13,104 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks must be rerun before commit. Next target is any new exact reviewer
+handoff, then the next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: HG metric and word interfaces
 
 Evidence:
 `research/phase-2-frontier-22-published-hg-metric-word-interface-audit.md`.
