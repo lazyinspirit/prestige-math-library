@@ -4,9 +4,27 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1408, U-C 6, A-R 187, A-P 200. The
+Current classifications: U-P 1410, U-C 0, A-R 188, A-P 206. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Manifold-null and normalization audit — 2026-09-11
+
+`def-c-zero-and-ell-infinity` returns to A-R: its real LUB repair remains
+valid, and its complex norm calculation correctly uses adequate published
+complex-norm and modulus interfaces implicitly. The remaining five U-C items
+move to A-P. The normalization theorem calls closed supports an open cover;
+the atlas-null chain omits countable-choice propagation and applies global
+Lipschitz conclusions to compact-local maps; and weak Whitney inherits both an
+explicit CC-qualified embedding supplier and the affected null-image chain.
+
+A newly inspected local-diffeomorphism null supplier is also A-P. Five exact
+direct consumers enter U-P as impact candidates, while nine sound support
+interfaces receive bounded clears. Current authored manifold consumers use
+local rational-cube or arbitrary-dimensional embedding proofs and do not import
+these defects, so no current Step-3 blocker results. Exact hashes, proof gaps,
+repair strategies, supplier maps and bounded limits are in
+`research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`.
 
 ## Confirmed frontier-handoff reconciliation — 2026-09-11
 
@@ -28202,11 +28220,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,575 unique
+subsequently reconciled published IDs. It currently contains **2,587 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,575 indexed IDs are published; **13,355 published items remain outside this
+2,587 indexed IDs are published; **13,343 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28215,14 +28233,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1408 | Evidence/role reconciliation incomplete; not a defect verdict. |
-| U-C | Unaudited and confirmed defective items | 6 | Confirmed mathematical or prerequisite defect; repair audit pending. |
-| A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 200 | Recorded direct review and an unresolved item-specific repair. |
+| U-P | Unaudited and potentially defective items | 1410 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
+| A-R | Audited and repaired items | 188 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
+| A-P | Audited items pending Phase 3 repair | 206 | Recorded direct review and an unresolved item-specific repair. |
 
-774 further reference-pool items have bounded no-repair-needed dispositions
+783 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,801 items and the expanded reference pool contains 2,575 unique items.
+1,804 items and the expanded reference pool contains 2,587 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28283,6 +28301,15 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `rem-real-and-complex-normed-space-convention` | Manifold-null/normalization audit 2026-09-11: the real norm axioms extend coherently to complex scalars by replacing absolute value with the published complex modulus, while the induced metric and completeness conventions remain unchanged. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
+| `def-smooth-partition-of-unity-subordinate-to-an-open-cover` | Manifold-null/normalization audit 2026-09-11: the definition correctly requires a locally finite support family, each support contained in its corresponding member of a supplied open cover, and pointwise sum one. New bounded clear; it exposes the normalization theorem's separate type error. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
+| `thm-a-locally-finite-sum-of-smooth-functions-is-smooth` | Manifold-null/normalization audit 2026-09-11: at each fixed point local finiteness reduces the sum to one finite smooth sum on a neighbourhood; smoothness is local. The per-point existential proof is not a simultaneous family choice. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
+| `lem-locally-finite-families-of-supports-have-locally-finite-cozero-families` | Manifold-null/normalization audit 2026-09-11: every cozero set lies in its support, so a neighbourhood meeting finitely many supports meets only those cozero sets. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
+| `lem-a-generic-projection-can-preserve-properness` | Manifold-null/normalization audit 2026-09-11: for a supplied nonbad direction, the secant/tangent calculations give injectivity and immersion; projection of the proper coordinate is a positive multiple plus a bounded term, hence remains proper. It does not assert existence of the direction. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
+| `lem-a-c1-map-is-locally-lipschitz-on-compact-coordinate-subsets` | Manifold-null/normalization audit 2026-09-11: for each fixed point a compactly contained Euclidean ball, the derivative maximum and the mean-value inequality give precisely the stated local Lipschitz restriction. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
+| `thm-lipschitz-images-of-null-sets-in-rn-are-null` | Manifold-null/normalization audit 2026-09-11: in fixed positive dimension, scaling every elementary cube cover by the Lipschitz/dimension factor gives the output budget; the constant-map case is explicit. The older U-P occurrence concerned a different Lebesgue-null conversion target. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
+| `lem-null-sets-in-rn-closed-under-subsets-and-countable-unions` | Manifold-null/normalization audit 2026-09-11: explicit countable choice selects geometrically budgeted covers and countability of `N times N` enumerates their union; nonnegative-series bounds give the required total. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
+| `thm-second-countable-implies-lindelof` | Manifold-null/normalization audit 2026-09-11: explicit countable choice selects one cover member for each eligible member of a countable basis, and those selected members cover. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
 | `def-relative-projectivity` | Frontier-22 confirmed-handoff reconciliation 2026-09-11: the `H=1` comparison explicitly assumes AC; the published basis-existence and projective free-summand theorems supply the exact argument with that boundary. Missing redundant direct edges are optional under the adequate-implicit-use rule. U-C to bounded clear with history preserved. Exact hashes/scope: `research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`. |
 | `thm-finitely-many-discontinuities-integrable` | Frontier-22 confirmed-handoff reconciliation 2026-09-11: the Darboux proof is complete; its only countable-choice cost is inside directly cited `thm-heine-cantor-r`, which declares the axiom and exact use, and this consumer's Choice remark identifies the inheritance. Repeating the direct axiom edge is optional. U-C to bounded clear with history preserved. Exact hash/scope: `research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`. |
 | `def-subspace-topology-top` | Frontier-22 high-use structural-supplier audit 2026-09-11: the canonical trace representative proves arbitrary-union closure without choice; closed sets, bases, subbases, inclusion, restriction and the map-into-subspace property follow from exact trace identities. New bounded clear; both aliases deduplicated. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
@@ -29113,6 +29140,12 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `lem-normalizing-a-locally-finite-positive-smooth-family` | Manifold-null/normalization audit 2026-09-11: the conclusion calls `(supp(g_i))` an open cover for subordination, but supports are closed and the exact partition definition requires an open cover. Supply `(U_i)` with `supp(g_i) subset U_i`, use equality of cozero sets/supports after positive division, and prove reciprocal smoothness from earlier smooth algebra/composition. U-C to A-P; active consumers use the valid formula with actual open-cover containment. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
+| `lem-c1-local-diffeomorphisms-preserve-null-sets-locally` | Manifold-null/normalization audit 2026-09-11: compact-local Lipschitz restrictions do not by themselves globalize to every subset of one neighbourhood or meet the whole-domain Lipschitz theorem, and the proof presupposes unqualified nullity while supplying atlas independence. Restate chartwise and use nested cubes plus coordinate clamps for global Lipschitz extensions in both directions. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
+| `prop-the-null-set-definition-is-independent-of-the-smooth-atlas` | Manifold-null/normalization audit 2026-09-11: proof 1.1 uses the already-A-P coordinate-ball cover, selects one containing source chart for each countable ball, and proof 3.1 uses CC-qualified countable null unions, but no choice hypothesis/suppliers are stated. Add `AC_omega`, retain cover witnesses and use chartwise clamped transition maps rather than the affected local-diffeomorphism conclusion. U-C to A-P; no new pair/current blocker. Exact hash/path: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
+| `prop-every-smooth-manifold-admits-a-countable-smooth-atlas-with-relatively-compact-domains` | Manifold-null/normalization audit 2026-09-11: it directly invokes the affected coordinate-ball cover but does not propagate the supplier's required countable choice. Add `AC_omega` and use the repaired all-eligible-ball/Lindelof construction. U-C to A-P; no new pair/current blocker. Exact hash/path: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
+| `prop-an-equidimensional-c1-map-sends-null-sets-to-null-sets` | Manifold-null/normalization audit 2026-09-11: it inherits the atlas-choice defects; independently, proof 2.1 covers a chart-domain closure that need not lie in the chart and applies a whole-domain Lipschitz theorem to compact-local maps. Under `AC_omega`, use countably many nested rational cubes, derivative bounds and coordinate clamps before the null union. U-C to A-P; no new pair/current blocker. Exact hash/path: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
+| `thm-weak-whitney-proper-embedding-theorem` | Manifold-null/normalization audit 2026-09-11: its initial embedding supplier explicitly assumes `AC_omega`, omitted by this Statement/Given/deps, and the generic-projection supplier reaches the affected lower-dimensional null chain. Add CC and repair that chain or reproduce the rational-cube bad-parameter proof from the repaired arbitrary-dimensional embedding. The finite projection/proper-coordinate induction is sound. U-C to A-P; active consumers bypass it. Exact hash/path: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
 | `thm-doob-dynkin-lemma` | Frontier-22 confirmed-handoff reconciliation 2026-09-11: proof 2.1 simultaneously selects a Borel lift for every rational threshold without a choice hypothesis. Add `def-countable-choice` and the rational indexing supplier. Proof 3.1 must also establish the special right-intersection identity `B_q=intersection_(r>q) B_r`; monotonicity alone does not imply its infimum-cut equality. U-C to A-P. Active kernel factorization supplies a local pointwise AC proof, so no current blocker/new pair. Exact hash, calculation and limits: `research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`. |
 | `thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree` | Frontier-22 confirmed-handoff reconciliation 2026-09-11: proof 1.2 uses `g_(j+1)g_j^(-1)` on right Cayley edges, but the basis-letter increment is `g_j^(-1)g_(j+1)`; the edge `a -> ab` exposes the error. Correct the order, use distinct vertices to exclude adjacent cancellation and telescope the cyclic word to the identity. Existing Cayley/reduced-word/normal-form suppliers suffice. U-C to A-P; active HG proves this locally, so no current blocker/new pair. Exact hash/scope: `research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`. |
 | `def-metric-topology` | Frontier-22 confirmed-handoff reconciliation 2026-09-11: its unqualified neighbourhood means only an open set containing the point, conflicting with canonical `def-neighbourhood-top`, where arbitrary supersets of open sets are neighbourhoods. Rewrite as “open neighbourhood” or state the ball-base fact; the metric topology is sound. U-C to A-P; active locally convex work uses the canonical definition. Exact hashes/scope: `research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`. |
@@ -29246,7 +29279,7 @@ owner's scan policy.
 | `lem-c-one-diffeomorphisms-map-lebesgue-null-sets-to-null-sets` | Null preservation: newly identified repair target |
 | `lem-compactly-supported-continuous-functions-are-translation-continuous-in-l-p` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `lem-convolution-is-independent-of-the-chosen-borel-representatives` | Personal monitoring audit 2026-09-08, reconfirmed by Fourier Step-3B 2026-09-11: proof 1.1 needs reflection as well as translation to make `x-N_f` null; the published reflection route carries countable choice, absent from the target. Proof 2.1 is only conditional on absolute-integral existence, while 3.1 asserts an a.e. domain without proving it. Split conditional representative independence from later Tonelli existence, or prove the envelope locally and expose choice. Exact refreshed evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
-| `lem-every-open-cover-of-a-manifold-has-a-countable-cover-by-relatively-compact-coordinate-balls-subordinate-to-it` | Open findings from the bump-consumer audit — 2026-09-08 |
+| `lem-every-open-cover-of-a-manifold-has-a-countable-cover-by-relatively-compact-coordinate-balls-subordinate-to-it` | Manifold-null follow-up 2026-09-11 confirms proof 1.1 makes arbitrary point-indexed cover/chart-ball choices and proof 2.1 invokes the explicitly CC-qualified Lindelof theorem without assuming CC. Repair by forming all eligible ball/containing-cover-member witness tuples, then apply `thm-second-countable-implies-lindelof` under declared `def-countable-choice`. Existing suppliers suffice; no new pair. Exact downstream path and limits: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
 | `prop-indicator-function-is-measurable-iff-its-set-is-measurable` | Nonmeasurable-set counterexample: missing witness supply |
 | `rem-noetherian-conventions-and-choice` | Noetherian direct-consumer follow-up — early-repair impact |
 | `thm-c-one-change-of-variables-for-nonnegative-lebesgue-measurable-functions` | Completed-measurable change of variables |
@@ -29323,12 +29356,6 @@ owner's scan policy.
 
 | Published item | Exact prerequisite debt at classification |
 |---|---|
-| `def-c-zero-and-ell-infinity` | REOPENED2026-09-10: Step3b-b full actual definition reading, confirmed by root: complex scalar triangle inequality and homogeneity have no declared complex convention/modulus supplier. Prior LUB repair remains valid. Add earlier published rem-real-and-complex-normed-space-convention and lem-complex-conjugation-and-modulus-laws, preserve choice-free construction, then targeted checks and canonical sync. No unpublished Phase2 supplier. Live sequential counterexample repaired locally; source report research/phase-2-catchup-24-step3b-b.md. |
-| `lem-normalizing-a-locally-finite-positive-smooth-family` | UC34 supplier reconciliation 2026-09-09: Astra1 DG review and root full target/partition-definition reading: conclusion calls closed supports an open cover for subordination, without openness; actual definition requires an open cover and locally finite SUPPORTS, not merely cozero sets. Confirmed contract/interface wording gap pending full repair audit. Repair by requiring locally finite supports, proving support equality after positive normalization, sum1 and 0<=phi<=1, and state subordination only for a supplied open cover containing supports. Exact suppliers already published: local finite smooth sums, partition definition, reciprocal/composition; no Phase2 pair identified. DG15 imports only valid normalization/support calculations, not faulty stronger terminology. Report research/phase-2-catchup-24-owner-step3-dg-astra.md. |
-| `thm-weak-whitney-proper-embedding-theorem` | UC34 supplier reconciliation 2026-09-09: Root read complete target: L1/step1.1 now consumes repaired finite-dimensional embedding, whose statement explicitly assumes CC, but weak Whitney statement/deps omit it. Generic-projection/null-image route also needs a separate exact interface audit; adding CC alone is not a claimed full repair. DG15 and both repaired manifold-Whitney consumers now use the earlier arbitrary finite-dimensional embedding directly, not this stronger dimension bound. No new Phase2 prerequisite established. |
-| `prop-the-null-set-definition-is-independent-of-the-smooth-atlas` | UC34 supplier reconciliation 2026-09-09: Full actual supplier audit by Astra1, same report: countably many overlap-tuple selections and countable null-image union omit inherited CC. Resolve the equidimensional C1-image domain mismatch too (local closed cubes plus clamp extension into globally Lipschitz theorem); prove each exact overlap closure lies in the chosen target-chart inverse image. Published repair obligations; no new Phase2 supplier established. Do not infer repair from the embedding's independent cube proof. |
-| `prop-every-smooth-manifold-admits-a-countable-smooth-atlas-with-relatively-compact-domains` | UC34 supplier reconciliation 2026-09-09: Full actual supplier audit by Astra1, read-only null-image/atlas section in uc34-2026-09-09-manifold-whitney-followups-astra-1.md: unqualified atlas existence inherits the unrepaired countable-coordinate-cover selections. Local repair route: all admissible coordinate tuples plus countable basis witnesses under explicit CC. No new Phase2 supplier established; newly repaired embedding proves its needed atlas locally and does not consume this item. |
-| `prop-an-equidimensional-c1-map-sends-null-sets-to-null-sets` | UC34 supplier reconciliation 2026-09-09: Astra1 actual proof audit in uc34-2026-09-09-manifold-whitney-followups-astra-1.md: step2 applies global-domain Lipschitz-null-image theorem to a map only Lipschitz on a local compact coordinate piece. Repair with rational closed cubes inside domain and coordinatewise 1-Lipschitz clamp extension f composed with clamp_Q, then apply global theorem; propagate exact countable atlas/null-union choice. Confirmed pending full repair audit; no new Phase2 supplier established. |
 
 The original 73-item audit is complete; its results are recorded in the
 A-R/A-P queues and uc73-astra-agent-1.md through uc73-astra-agent-5.md.
@@ -29343,6 +29370,7 @@ The historical U-P300 scan’s 19 findings completed repair audit (7 A-R, 12 A-P
 
 | Published item | Repair evidence and scope |
 |---|---|
+| `def-c-zero-and-ell-infinity` | Manifold-null/normalization audit 2026-09-11 restores A-R after dismissing the later complex-scalar concern under the adequate-implicit-use rule. The actual LUB repair remains in the current file; published complex-norm conventions and modulus laws prove its coordinatewise norm claims. Historical reopening retained; no second repair. Exact current hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
 | `def-tor-by-resolving-the-left-module` | Repaired 2026-09-10: retain the supplied resolution P in `Tor^{R,P}_n(N,M)` until balance/change-of-resolution proves independence, instead of prematurely writing `Tor^R_n(N,M)`. Existing published right-resolution and balance interfaces suffice. No new Phase-2 supplier. The definition's notation/interface defect is closed; proof precheck is not applicable. Defect-focused review evidence: `phase-2-nine-step-25-alpha-step7-c.md`. |
 | `prop-degree-of-identity-constant-reflection-and-antipodal-sphere-maps` | Repaired 2026-09-10: replace the unsupported relative-homology calculation by the explicit two-vertex, two-edge cellular cycle. Published `thm-cellular-boundary-is-the-incidence-degree-matrix` and `thm-cellular-homology-computes-singular-homology` supply the boundary calculation and natural transfer to singular homology. Both dependencies are declared. Focused proof/render checks passed. No new Phase-2 supplier. Defect-focused evidence is in the reflection-degree finding below; this is not a whole-closure audit. |
 | `lem-boundary-label-of-a-van-kampen-diagram-is-null-in-the-presented-group` | Owner-delegated root repair, 2026-09-10: free-edge existence and collapse proved locally; stronger closed-walk induction covers singular diagrams, monogons, repeated occurrences and a leaf basepoint. Published circle theorem supplies graph-cycle obstruction; all other suppliers already published. Precheck/rendercheck pass, global depcheck0 errors. No new Phase2 dependency. Local audit, not independent judgment. Exact source and repair argument: research/phase-2-merged-25-boundary-label-root-repair.md. |
@@ -29555,6 +29583,11 @@ mathematical repairs. Evidence:
 
 | Published item | Existing evidence section / reconciliation locator |
 |---|---|
+| `def-null-subset-of-a-smooth-manifold` | Manifold-null direct impact candidate 2026-09-11: atlas-relative definition is coherent, but its `justified_by` edge uses the now-A-P atlas-independence proposition before unqualified manifold nullity is available. Exact hash/path: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
+| `prop-a-countable-chart-cover-detects-manifold-null-sets` | Manifold-null direct impact candidate 2026-09-11: proof directly uses both affected atlas independence and countable-atlas existence. No independent defect verdict. Exact hash/path: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
+| `prop-the-image-of-a-lower-dimensional-c1-manifold-is-null` | Manifold-null direct impact candidate 2026-09-11: proof directly uses affected equidimensional null preservation and countable-atlas existence. No independent defect verdict. Exact hash/path: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
+| `lem-a-generic-linear-projection-preserves-injectivity-and-immersion` | Manifold-null direct impact candidate 2026-09-11: density of good directions is proved through the affected lower-dimensional image-null proposition. Its secant/tangent exclusion calculation is locally sound. Exact hash/path: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
+| `prop-a-null-set-has-dense-complement-in-a-positive-dimensional-manifold` | Manifold-null direct impact candidate 2026-09-11: proof cites the affected countable-chart detector; its positive-cube contradiction is sound once atlas-independent nullity is repaired. No independent defect verdict. Exact hash/path: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
 | `def-weyl-vector-rho-for-a-chosen-positive-system` | Finite-Weyl convention audit 2026-09-11: exact impact candidate through the affected triangular/positive-root interface. The finite half-sum defining rho is coherent and no independent defect was found. Revalidate after the triangular/root supplier repair. Exact hash/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `thm-triangular-decomposition-from-a-chosen-positive-root-system` | Finite-Weyl/root-decomposition follow-up 2026-09-11: exact impact candidate through the already-A-P root decomposition and root-bracket proposition. Grouping positive/zero/negative spaces, bracket closure and the concatenated PBW-basis argument are sound once those suppliers are repaired; no independent defect identified in this scope. Exact hash/clauses: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
 | `def-regular-root-hyperplane-arrangement-in-a-cartan-subalgebra` | Finite-Weyl/root-decomposition follow-up 2026-09-11: exact impact candidate through the affected finite root-set interface. The displayed complement of root kernels is internally consistent; revalidate after the root-decomposition repair. Exact hash/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
@@ -30586,7 +30619,6 @@ mathematical repairs. Evidence:
 | `thm-a-finite-group-is-abelian-iff-all-its-irreducible-complex-characters-have-degree-one` | finite-averaging-and-character-theory-prerequisites |
 | `thm-a-forest-complement-and-its-star-expansion-have-the-erdos-hajnal-property` | Expansion audit: published orphan suppliers |
 | `thm-a-locally-compact-hausdorff-space-is-completely-regular` | Early-repair direct-consumer inventory — 2026-09-08 |
-| `thm-a-locally-finite-sum-of-smooth-functions-is-smooth` | Open findings from the bump-consumer audit — 2026-09-08 |
 | `thm-a-prime-power-conjugacy-class-forces-a-proper-nontrivial-normal-subgroup` | Transitive consumers (166), grouped by home page |
 | `thm-a-space-is-perfectly-normal-iff-it-is-normal-and-every-closed-set-is-a-zero-set` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-a-sphere-has-a-nowhere-zero-tangent-vector-field-iff-its-dimension-is-odd` | Continuing personal audit: exact examination pool and AT-24 contracts |
@@ -30808,7 +30840,6 @@ mathematical repairs. Evidence:
 | `thm-linear-isoperimetric-characterisation-of-hyperbolic-groups` | HG consumer map |
 | `thm-liouville-theorem-for-bounded-harmonic-functions` | euclidean-surface-measure-divergence-and-green-identities |
 | `thm-lipschitz-characterisation-within-absolutely-continuous-functions` | Early-repair direct-consumer inventory — 2026-09-08 |
-| `thm-lipschitz-images-of-null-sets-in-rn-are-null` | Null preservation: newly identified repair target |
 | `thm-localisation-and-polynomial-extension-of-regular-rings` | Item-exact impact of the Dependent Choice rehome |
 | `thm-localisation-of-cohen-macaulay-modules` | Item-exact impact of the Dependent Choice rehome |
 | `thm-loglog-erdos-hajnal-bound` | Recorded-material path classification — 2026-09-08 |
@@ -30898,7 +30929,6 @@ mathematical repairs. Evidence:
 | `thm-schur-index-as-minimal-realization-multiplicity` | Transitive consumers (166), grouped by home page |
 | `thm-schur-index-equals-division-algebra-index` | Transitive consumers (166), grouped by home page |
 | `thm-second-column-orthogonality-relation-for-irreducible-complex-characters` | finite-averaging-and-character-theory-prerequisites |
-| `thm-second-countable-implies-lindelof` | Open findings from the bump-consumer audit — 2026-09-08 |
 | `thm-sections-of-product-measurable-sets-are-measurable` | Nonmeasurable-set counterexample: missing witness supply |
 | `thm-segre-image-rank-one-minors` | AV-1 draft-page impact partition (Phase 3 only) |
 | `thm-separation-of-an-open-convex-set-and-a-point` | norming-and-separation-under-hahn-banach |

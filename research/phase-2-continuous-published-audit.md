@@ -19,7 +19,32 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: confirmed frontier handoffs
+## Latest checkpoint: manifold-null and normalization chain
+
+Evidence:
+`research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`.
+
+All six remaining U-C rows now have full repair audits. Five move to A-P: the
+normalization theorem's closed-support/open-cover mismatch, three atlas-null
+choice/domain gaps and weak Whitney's missing CC plus affected null-image path.
+The local-diffeomorphism null supplier is one new A-P item after its
+compact-local/global-domain and circular unqualified-null uses were read.
+
+The repaired `c_0`/`ell^infinity` definition returns to A-R because its LUB
+repair remains valid and adequate published complex norm/modulus suppliers
+make the later missing-edge concern clear. Five exact direct atlas-null nodes
+enter U-P as impact candidates. Nine sound norm, partition, local-finiteness,
+projection, Lipschitz, elementary-null and Lindelof interfaces receive bounded
+clears. Active manifold consumers already use local cube or repaired
+arbitrary-dimensional embedding arguments, so no Step-3 blocker was found.
+
+Post-batch target index: 2,587 unique published IDs; U-P 1,410, U-C 0,
+A-R 188, A-P 206 and 783 bounded clears; 13,343 published items remain outside
+the index. Recount, publication-state and cross-class deduplication checks must
+be rerun before commit. Next target is any new exact reviewer handoff, then the
+next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: confirmed frontier handoffs
 
 Evidence:
 `research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`.
