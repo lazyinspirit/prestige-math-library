@@ -19,7 +19,26 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: ergodic invariance and measure completion
+## Latest checkpoint: Prokhorov and weak convergence
+
+Evidence:
+`research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`.
+
+Nine Polish, tightness, compactness and pushforward-law interfaces are bounded
+clears, including one U-P move. Eight weak-convergence, RMK, compact-law,
+Portmanteau, Prokhorov and continuous-mapping interfaces are new A-P impacts
+through the existing common integral and outline-only Hilbert-cube repairs.
+Their visible arguments are otherwise sound. Active impact was reported; no
+new pair or distinct blocker was found.
+
+Post-batch target index: 2,924 unique published IDs; U-P 1,370, U-C 0,
+A-R 186, A-P 304 and 1,064 bounded clears; 13,006 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks must be rerun before commit. Next target is any new exact reviewer
+handoff, then other high-frequency direct frontier prerequisites outside the
+index.
+
+## Completed checkpoint: ergodic invariance and measure completion
 
 Evidence:
 `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`.

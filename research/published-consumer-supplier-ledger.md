@@ -4,9 +4,20 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1371, U-C 0, A-R 186, A-P 296. The
+Current classifications: U-P 1370, U-C 0, A-R 186, A-P 304. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Prokhorov and weak-convergence interfaces — 2026-09-11
+
+Nine Polish, tightness, compactness and law-pushforward interfaces are bounded
+clears; the old `def-polish-space` U-P row moves to clear on its exact sound
+definition use. Eight weak-convergence, RMK, compact-law, Portmanteau,
+Prokhorov and continuous-mapping interfaces enter A-P through the common
+integral repair and the two outline-only Hilbert-cube suppliers. Their visible
+arguments are otherwise sound. Active impact was reported; no new pair or
+distinct blocker results. Exact evidence:
+`research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`.
 
 ## Ergodic invariance and measure completion — 2026-09-11
 
@@ -28934,11 +28945,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,908 unique
+subsequently reconciled published IDs. It currently contains **2,924 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,908 indexed IDs are published; **13,022 published items remain outside this
+2,924 indexed IDs are published; **13,006 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28947,14 +28958,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1371 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1370 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 186 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 296 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 304 | Recorded direct review and an unresolved item-specific repair. |
 
-1,055 further reference-pool items have bounded no-repair-needed dispositions
+1,064 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,853 items and the expanded reference pool contains 2,908 unique items.
+1,860 items and the expanded reference pool contains 2,924 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -29015,6 +29026,15 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-separable-space` | Frontier-22 Prokhorov audit 2026-09-11: Existence of an at-most-countable dense subset and meeting every nonempty open set are equivalent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
+| `def-polish-space` | Frontier-22 Prokhorov audit 2026-09-11: Separable plus a compatible complete metric is the correct property-only definition. It uses only the sound definition clause of A-P complete remetrisation, not its defective converse. U-P to bounded clear; prior cross-category mention retained. Exact hash/scope: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
+| `def-borel-probability-law-on-a-polish-space` | Frontier-22 Prokhorov audit 2026-09-11: A probability on the Borel sigma-algebra is independent of a later fixed compatible metric, and the empty-space boundary is correct. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
+| `def-tight-family-of-probability-measures` | Frontier-22 Prokhorov audit 2026-09-11: One compact set is required uniformly over the family, with a sound empty-family convention. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
+| `thm-complete-and-totally-bounded-implies-compact` | Frontier-22 Prokhorov audit 2026-09-11: Countable Choice is stated/declared and used once for listed finite nets; least-ball recursion gives the Cauchy sequence and open-cover contradiction. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
+| `thm-bolzano-weierstrass` | Frontier-22 Prokhorov audit 2026-09-11: A monotone subsequence remains bounded and therefore converges, without a family choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
+| `lem-countable-uniformly-dense-tests-on-a-compact-metric-space` | Frontier-22 Prokhorov audit 2026-09-11: Under explicit AC, listed finite nets and rational finite distance-cone minima form a countable uniformly dense family. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
+| `thm-every-borel-probability-on-a-polish-space-is-tight` | Frontier-22 Prokhorov audit 2026-09-11: Inner regularity gives singleton-family tightness, and the explicit dense-ball construction is valid under the stated AC. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
+| `lem-laws-commute-with-measurable-maps` | Frontier-22 Prokhorov audit 2026-09-11: Composition and the exact preimage identity prove the pushforward-law formula. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
 | `prop-measure-monotonicity` | Frontier-22 ergodic/completion audit 2026-09-11: A disjoint split proves monotonicity without extended subtraction. U-P to bounded clear; prior reference-pool evidence retained. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
 | `prop-two-set-measure-identity` | Frontier-22 ergodic/completion audit 2026-09-11: A three-piece disjoint decomposition proves the identity with nonnegative extended sums, including infinite values. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
 | `prop-null-symmetric-difference-preserves-measure` | Frontier-22 ergodic/completion audit 2026-09-11: The two differences are null and two disjoint-union identities prove equal measures without subtracting infinities. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
@@ -30126,6 +30146,14 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `def-weak-convergence-of-borel-probability-measures` | Frontier-22 Prokhorov audit 2026-09-11: the bounded-continuous-test definition and finite bound are correct, but the integrals use A-P integrable-function/integral machinery. Apply the common repair. New A-P impact; active use reported. Exact hash/path: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
+| `def-relative-sequential-compactness-for-weak-convergence` | Frontier-22 Prokhorov audit 2026-09-11: the same-space/outside-family limit convention is precise, but directly embeds the affected weak-convergence definition. New A-P impact. Exact hash/path: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
+| `thm-rmk-positive-functional-is-integration-against-its-representing-measure` | Frontier-22 Prokhorov audit 2026-09-11: compact truncated layers correctly squeeze functional and integral values, but the integral side uses the affected simple/nonnegative foundation. Apply the common repair; prior RMK outer-content A-R remains valid. New A-P. Exact hash/path: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
+| `lem-probability-laws-on-a-compact-metric-space-have-weakly-convergent-subsequences` | Frontier-22 Prokhorov audit 2026-09-11: explicit AC supports nested subsequences; dense tests and RMK correctly construct the probability limit. The proof directly uses affected weak convergence and RMK integration. New A-P impact. Exact hash/path: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
+| `thm-portmanteau-theorem` | Frontier-22 Prokhorov audit 2026-09-11: the cutoff, complement, continuity-set and finite atom-avoiding partition arguments are sound, but the closed-set limit uses A-P DCT/common integrals. New A-P impact. Exact hash/path: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
+| `thm-prokhorov-tightness-theorem-on-polish-spaces` | Frontier-22 Prokhorov audit 2026-09-11: the non-Borel embedding-image workaround and reverse compact-core construction are sound under explicit AC. Repair the two outline-only Hilbert-cube suppliers and the affected compact-law/Portmanteau paths. New A-P impact; active use reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
+| `cor-weakly-convergent-sequences-are-tight` | Frontier-22 Prokhorov audit 2026-09-11: constant-or-increasing-index subsequences prove relative sequential compactness, but the final implication directly uses affected Prokhorov. Explicit AC is declared. New A-P impact. Exact hash/path: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
+| `thm-continuous-mapping-theorem` | Frontier-22 Prokhorov audit 2026-09-11: the oscillation-neighborhood and null-discontinuity closure argument is sound, but directly invokes affected Portmanteau. New A-P impact; active use reported. Exact hash/path: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
 | `prop-mixing-correlations-extend-to-l-two` | Frontier-22 ergodic/completion audit 2026-09-11: indicator/simple expansion and the uniform `2||h||_2||k||_2` density bound are correct, but the proof directly uses A-P Koopman isometry and `L2` Cauchy--Schwarz. Apply the common integral/`Lp` repair and revalidate both edges. New A-P impact; no distinct frontier blocker or pair. Exact hash/path: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
 | `thm-independent-random-elements-have-product-joint-law` | Frontier-22 independence/product-law audit 2026-09-11: tuple measurability, rectangle factorization and finite recursive uniqueness are sound, but the proof directly invokes A-P product-measure existence/uniqueness. Apply the common product-measure repair and revalidate this edge. Clear to A-P; prior receipt retained, no distinct active blocker or pair. Exact hash/path: `research/phase-2-frontier-22-published-independence-product-law-audit.md`. |
 | `cor-holder-inequality-for-random-variables` | Frontier-22 random-variable inequality audit 2026-09-11: its probability-space specialization is correct, but it directly uses A-P expectation and integral Hölder. Apply the common integral repair and retain the one-line specialization. New A-P impact; no distinct active blocker or pair. Exact hash/path: `research/phase-2-frontier-22-published-random-variable-inequality-impact-audit.md`. |
@@ -30808,7 +30836,6 @@ mathematical repairs. Evidence:
 | `def-plane-dual-multigraph` | Scaffold III.4.1 — plane dual dependency |
 | `def-plane-graph-face-and-boundary` | Scaffold III.4.1 — plane dual dependency |
 | `def-polar-surface-measure-on-the-unit-sphere` | Continuing personal audit: exact examination pool and AT-24 contracts |
-| `def-polish-space` | Other Phase-3 repairs and cross-category effects |
 | `def-polynomial-hierarchy-levels` | 51. Exact live-plan metadata resynchronization set |
 | `def-polynomial-time-many-one-reduction` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-polynomially-balanced-verifier` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
