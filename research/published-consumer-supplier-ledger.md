@@ -8,6 +8,17 @@ Current classifications: U-P 1410, U-C 0, A-R 188, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Differential-definition audit — 2026-09-11
+
+Two previously unclassified differential interfaces are bounded clear. Pulling
+a target germ back along a smooth map and applying a source derivation is
+representative-independent, linear and a derivation at the image point. For a
+real-valued function, evaluation on the identity coordinate identifies the
+real-line tangent space with the reals and turns the general formula into
+`df_p(v)=v([f])`. No current Step-5 blocker was found. Exact hashes,
+deduplication and limits are in
+`research/phase-2-frontier-22-published-differential-definition-audit.md`.
+
 ## Section and zero-bundle audit — 2026-09-11
 
 Three previously unclassified bundle foundations are bounded clear. The smooth
@@ -28362,11 +28373,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,638 unique
+subsequently reconciled published IDs. It currently contains **2,640 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,638 indexed IDs are published; **13,292 published items remain outside this
+2,640 indexed IDs are published; **13,290 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28380,9 +28391,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 188 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 207 | Recorded direct review and an unresolved item-specific repair. |
 
-833 further reference-pool items have bounded no-repair-needed dispositions
+835 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,805 items and the expanded reference pool contains 2,638 unique items.
+1,805 items and the expanded reference pool contains 2,640 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28443,6 +28454,8 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-differential-of-a-smooth-map` | Frontier-22 differential-definition audit 2026-09-11: pullback of target germs and source derivation evaluation give a representative-independent linear derivation at the image point. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-differential-definition-audit.md`. |
+| `def-differential-of-a-smooth-real-valued-function` | Frontier-22 differential-definition audit 2026-09-11: the canonical real-line tangent coordinate turns the general differential into the stated functional `df_p(v)=v([f])`. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-differential-definition-audit.md`. |
 | `def-smooth-vector-bundle-rank-fibre-and-trivial-bundle` | Frontier-22 section/zero-bundle audit 2026-09-11: the smooth fibre-bundle, finite real fibre, rank and fibrewise-linear trivialization clauses are coherent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-section-zero-bundle-audit.md`. |
 | `prop-the-zero-section-is-a-smooth-embedding` | Frontier-22 section/zero-bundle audit 2026-09-11: local charts give the embedded zero slice, and the restricted continuous bundle projection is the global inverse on its image. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-section-zero-bundle-audit.md`. |
 | `def-smooth-section-local-section-and-support` | Frontier-22 section/zero-bundle audit 2026-09-11: global/local sections are maps over the correct identity, and support/compact support use the closure of the fibrewise nonzero locus in the base. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-section-zero-bundle-audit.md`. |
