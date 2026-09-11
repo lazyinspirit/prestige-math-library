@@ -41,6 +41,7 @@ import { readFileSync, readdirSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { sectionText } from './facts-block.mjs';
+import { frontmatterList } from './frontmatter-list.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const asJson = process.argv.includes('--json');
@@ -102,22 +103,7 @@ function scalar(fm, key) {
   return m[1].trim().replace(/^['"]|['"]$/g, '') || undefined;
 }
 
-/** Array value of `key: [...]`, tolerating multi-line arrays. */
-function list(fm, key) {
-  const start = fm.search(new RegExp(`^${key}:[ \\t]*\\[`, 'm'));
-  if (start < 0) return [];
-  const open = fm.indexOf('[', start);
-  let depth = 0, end = -1;
-  for (let i = open; i < fm.length; i++) {
-    if (fm[i] === '[') depth++;
-    else if (fm[i] === ']' && --depth === 0) { end = i; break; }
-  }
-  if (end < 0) return [];
-  return fm.slice(open + 1, end)
-    .split(',')
-    .map((s) => s.trim().replace(/^['"]|['"]$/g, ''))
-    .filter(Boolean);
-}
+function list(fm, key) { return frontmatterList(fm, key); }
 
 /** Nested scalar, e.g. verification.audited — matched by indentation. */
 function nested(fm, parent, child) {

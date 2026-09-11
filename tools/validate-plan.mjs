@@ -58,6 +58,7 @@
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { join, relative } from 'node:path';
 import { REPO } from './paths.mjs';
+import { frontmatterList } from './frontmatter-list.mjs';
 
 const args = process.argv.slice(2);
 const specPath = args.find((a) => !a.startsWith('--'));
@@ -106,12 +107,6 @@ const spec = JSON.parse(readFileSync(specPath, 'utf8'));
 const existing = new Set();
 const canonicalExisting = new Map();
 const existingItemEdges = new Map();
-function frontmatterList(src, key) {
-  const match = src.match(new RegExp(`^${key}:\\s*\\[([\\s\\S]*?)\\]`, 'm'));
-  return match
-    ? match[1].split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean)
-    : [];
-}
 try {
   for (const f of readdirSync(join(repo, 'items'))) {
     if (!f.endsWith('.md')) continue;
@@ -221,8 +216,7 @@ try {
         pageLocationOf.set(pageId, { category: rel.split(/[\\/]/)[0], file: rel });
         const pageItems = [];
         for (const key of ['items', 'examples']) {
-          const m = src.match(new RegExp(`^${key}:\\s*\\[([\\s\\S]*?)\\]`, 'm'));
-          if (m) for (const id of m[1].split(',').map((s) => s.trim())) if (id) {
+          for (const id of frontmatterList(src, key)) {
             publishedPageItems.add(id);
             if (!homePageOf.has(id)) homePageOf.set(id, pageId);
             pageItems.push(id);

@@ -11,6 +11,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { frontmatterList } from './frontmatter-list.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -44,10 +45,7 @@ const itemText = (id) => {
   const path = join(REPO, 'items', `${id}.md`);
   return existsSync(path) ? readFileSync(path, 'utf8') : null;
 };
-const deps = (source) => {
-  const match = source.match(/^deps:[ \t]*\[([\s\S]*?)\]/m);
-  return match ? match[1].split(',').map((v) => v.trim()).filter(Boolean) : [];
-};
+const deps = (source) => frontmatterList(source, 'deps');
 
 const parts = [];
 parts.push(`run: ${run}\nrole: refuter\nlabel: ${label}\n`);

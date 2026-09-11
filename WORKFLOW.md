@@ -315,8 +315,12 @@ foreign-consumer impact receipts remain lead-Alpha work. Precheck FAIL/REPAIR
 headers identify retry subjects; PASS rows and the printed proof's citations do
 not. Unknown or mixed diagnostics retain serial repair routing.
 Depcheck accepts numeric Unicode escapes in quoted YAML while still detecting
-undoubled TeX backslashes. Recognized outages can refund a round with 20-minute
-backoff. Doctor checks commands/tasks, not mathematical correctness or quotas.
+undoubled TeX backslashes. Deterministic gates that read frontmatter ID lists
+share `tools/frontmatter-list.mjs`; it accepts same-line and next-line flow
+arrays plus indented and indentationless block sequences, and its corpus test
+requires exact agreement with the renderer's YAML parser. Recognized outages can
+refund a round with 20-minute backoff. Doctor checks commands/tasks, not
+mathematical correctness or quotas.
 
 Frontier selection requires strictly more than 95% of each page's same-category
 prerequisites published, excluding partner/cross-category edges. Explicit in-run

@@ -11,6 +11,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync } from 'node:fs';
 import { basename, join, relative } from 'node:path';
 import { REPO } from './paths.mjs';
+import { frontmatterList } from './frontmatter-list.mjs';
 
 export const sha256 = (value) => createHash('sha256').update(value).digest('hex');
 
@@ -20,11 +21,7 @@ export function splitFrontmatter(text) {
   return { frontmatter: m[1], body: m[2] };
 }
 
-function listValue(frontmatter, key) {
-  const line = frontmatter.match(new RegExp(`^${key}:\\s*\\[([^\\]]*)\\]\\s*$`, 'm'));
-  if (!line) return [];
-  return line[1].split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean);
-}
+const listValue = frontmatterList;
 
 function scalarValue(frontmatter, key) {
   const line = frontmatter.match(new RegExp(`^${key}:\\s*(.+?)\\s*$`, 'm'));

@@ -11,6 +11,7 @@
 import { existsSync, readFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { frontmatterList } from './frontmatter-list.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -106,17 +107,7 @@ function scalar(fm, key) {
   const match = fm.match(new RegExp(`^${key}:[ \\t]*(.*)$`, 'm'));
   return match?.[1]?.trim().replace(/^['"]|['"]$/g, '') ?? undefined;
 }
-function list(fm, key) {
-  const start = fm.search(new RegExp(`^${key}:[ \\t]*\\[`, 'm'));
-  if (start < 0) return [];
-  const open = fm.indexOf('[', start);
-  let depth = 0;
-  for (let index = open; index < fm.length; index += 1) {
-    if (fm[index] === '[') depth += 1;
-    else if (fm[index] === ']' && --depth === 0) return fm.slice(open + 1, index).split(',').map((value) => value.trim()).filter(Boolean);
-  }
-  return [];
-}
+function list(fm, key) { return frontmatterList(fm, key); }
 function section(body, heading) {
   const escaped = heading.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
   return body.match(new RegExp(`^##\\s+${escaped}\\s*$\\r?\\n([\\s\\S]*?)(?=^##\\s+|(?![\\s\\S]))`, 'm'))?.[1] ?? '';

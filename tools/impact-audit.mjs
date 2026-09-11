@@ -18,6 +18,7 @@ import { readFileSync, writeFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { itemHashGuard, itemSurfaceHash, shortHash } from './item-hash.mjs';
+import { frontmatterList } from './frontmatter-list.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -44,20 +45,7 @@ function scalar(fm, key) {
   const match = fm.match(new RegExp(`^${key}:[ \\t]*(.*)$`, 'm'));
   return match ? match[1].trim().replace(/^['"]|['"]$/g, '') || undefined : undefined;
 }
-function list(fm, key) {
-  const start = fm.search(new RegExp(`^${key}:[ \\t]*\\[`, 'm'));
-  if (start < 0) return [];
-  const open = fm.indexOf('[', start);
-  let depth = 0;
-  for (let index = open; index < fm.length; index += 1) {
-    if (fm[index] === '[') depth += 1;
-    else if (fm[index] === ']' && --depth === 0) {
-      return fm.slice(open + 1, index).split(',')
-        .map((value) => value.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean);
-    }
-  }
-  return [];
-}
+function list(fm, key) { return frontmatterList(fm, key); }
 function option(flag) {
   const index = argv.indexOf(flag);
   return index >= 0 ? argv[index + 1] : undefined;

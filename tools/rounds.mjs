@@ -41,6 +41,7 @@
 import { readFileSync, existsSync, mkdirSync, writeFileSync, readdirSync, statSync } from 'node:fs';
 import { join } from 'node:path';
 import { REPO } from './paths.mjs';
+import { frontmatterList } from './frontmatter-list.mjs';
 
 const args = process.argv.slice(2);
 const has = (f) => args.includes(f);
@@ -202,19 +203,7 @@ if (has('--audit-batches')) {
   const outdir = flag('--outdir', 'research/audit');
   const onlyWave = flag('--wave', null);
   const fmOf = (path) => readFileSync(path, 'utf8').match(/^---\r?\n([\s\S]*?)\r?\n---/)?.[1] ?? '';
-  const fmList = (fm, key) => {
-    const start = fm.search(new RegExp(`^${key}:[ \\t]*\\[`, 'm'));
-    if (start < 0) return [];
-    const open = fm.indexOf('[', start);
-    let depth = 0;
-    for (let i = open; i < fm.length; i += 1) {
-      if (fm[i] === '[') depth += 1;
-      else if (fm[i] === ']' && --depth === 0) {
-        return fm.slice(open + 1, i).split(',').map((v) => v.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean);
-      }
-    }
-    return [];
-  };
+  const fmList = frontmatterList;
   const fmNested = (fm, parent, child) => {
     const start = fm.search(new RegExp(`^${parent}:[ \\t]*(?:#.*)?$`, 'm'));
     if (start < 0) return undefined;

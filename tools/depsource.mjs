@@ -32,6 +32,7 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { frontmatterList } from './frontmatter-list.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -60,21 +61,7 @@ const split = (src) => {
   const m = src.match(/^---\r?\n([\s\S]*?)\r?\n---\r?\n?([\s\S]*)$/);
   return m ? { fm: m[1], body: m[2] } : { fm: '', body: src };
 };
-const listOf = (fm, key) => {
-  const start = fm.search(new RegExp(`^${key}:[ \\t]*\\[`, 'm'));
-  if (start < 0) return [];
-  const open = fm.indexOf('[', start);
-  let depth = 0, end = open;
-  for (let i = open; i < fm.length; i++) {
-    if (fm[i] === '[') depth++;
-    else if (fm[i] === ']' && --depth === 0) { end = i; break; }
-  }
-  return fm
-    .slice(open + 1, end)
-    .split(',')
-    .map((s) => s.trim().replace(/^['"]|['"]$/g, ''))
-    .filter(Boolean);
-};
+const listOf = frontmatterList;
 
 const authored = new Map(); // id -> {status, aliases}
 const itemsDir = join(REPO, 'items');

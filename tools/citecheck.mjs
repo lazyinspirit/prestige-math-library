@@ -51,6 +51,7 @@
 import { readFileSync, readdirSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { frontmatterList } from './frontmatter-list.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -138,18 +139,7 @@ function scalar(fm, key) {
   const m = fm.match(new RegExp(`^${key}:[ \\t]*(.*)$`, 'm'));
   return m ? m[1].trim().replace(/^['"]|['"]$/g, '') || undefined : undefined;
 }
-function list(fm, key) {
-  const start = fm.search(new RegExp(`^${key}:[ \\t]*\\[`, 'm'));
-  if (start < 0) return [];
-  const open = fm.indexOf('[', start);
-  let depth = 0, end = -1;
-  for (let i = open; i < fm.length; i++) {
-    if (fm[i] === '[') depth++;
-    else if (fm[i] === ']' && --depth === 0) { end = i; break; }
-  }
-  if (end < 0) return [];
-  return fm.slice(open + 1, end).split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean);
-}
+function list(fm, key) { return frontmatterList(fm, key); }
 
 const LOAD_BEARING = [
   'Statement', 'Statement refuted', 'Facts & Assumptions',

@@ -21,6 +21,17 @@ test('initial or final licensed repairs may add missing dependency lemma chains'
     licensedConsumers: ['thm-consumer'] })].sort(), ['lem-missing', 'lem-support']);
 });
 
+test('block-form dependencies preserve the same narrow new-lemma authority', () => {
+  const blockTexts: Record<string, string> = {
+    'thm-consumer': 'kind: theorem\ndeps:\n  - lem-missing\n',
+    'lem-missing': 'kind: lemma\ndeps:\n- lem-support\n',
+    'lem-support': 'kind: lemma\ndeps: []\n',
+    'lem-unrelated': 'kind: lemma\ndeps: []\n',
+  };
+  assert.deepEqual([...permittedNewLemmas({ created, readItem: (id: string) => blockTexts[id],
+    licensedConsumers: ['thm-consumer'] })].sort(), ['lem-missing', 'lem-support']);
+});
+
 test('unlicensed consumers cannot authorize new lemmas', () => {
   assert.equal(permittedNewLemmas({ created, readItem, licensedConsumers: [] }).size, 0);
 });

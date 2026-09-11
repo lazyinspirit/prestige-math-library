@@ -33,6 +33,7 @@
 import { readFileSync, readdirSync, statSync, existsSync, writeFileSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { frontmatterList } from './frontmatter-list.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const args = process.argv.slice(2);
@@ -66,12 +67,7 @@ function nested(fm, parent, child) {
   const m = fm.slice(start).match(new RegExp('^[ \\t]+' + child + ':[ \\t]*(.*)$', 'm'));
   return m ? m[1].trim().replace(/^['"]|['"]$/g, '') : '';
 }
-function list(fm, key) {
-  const m = fm.match(new RegExp(`^${key}:[ \\t]*(?:\\r?\\n((?:[ \\t]*-[^\\n]*\\r?\\n?)+)|\\[([^\\]]*)\\])`, 'm'));
-  if (!m) return [];
-  if (m[2] != null) return m[2].split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean);
-  return m[1].split(/\r?\n/).map((l) => l.replace(/^[ \t]*-[ \t]*/, '').trim().replace(/^['"]|['"]$/g, '')).filter(Boolean);
-}
+function list(fm, key) { return frontmatterList(fm, key); }
 function walk(dir, out=[]) {
   if (!existsSync(dir)) return out;
   for (const f of readdirSync(dir)) {

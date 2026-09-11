@@ -17,6 +17,7 @@ import { fileURLToPath } from 'node:url';
 import {
   SOURCE_SECTIONS, factParagraphs, numberedProofSteps, sourceSectionText, splitFrontmatter,
 } from './facts-block.mjs';
+import { frontmatterList } from './frontmatter-list.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const STANDARD_BOUNDARIES = [
@@ -305,20 +306,7 @@ function nested(fm, parent, child) {
   const match = fm.slice(start).match(new RegExp('^[ \\t]+' + child + ':[ \\t]*(.*)$', 'm'));
   return match ? match[1].trim().replace(/^['"]|['"]$/g, '') || undefined : undefined;
 }
-function list(fm, key) {
-  const start = fm.search(new RegExp(`^${key}:[ \\t]*\\[`, 'm'));
-  if (start < 0) return [];
-  const open = fm.indexOf('[', start);
-  let depth = 0;
-  for (let index = open; index < fm.length; index += 1) {
-    if (fm[index] === '[') depth += 1;
-    else if (fm[index] === ']' && --depth === 0) {
-      return fm.slice(open + 1, index).split(',')
-        .map((value) => value.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean);
-    }
-  }
-  return [];
-}
+function list(fm, key) { return frontmatterList(fm, key); }
 // The Facts block, the section reader and the citation's source sections all
 // come from tools/facts-block.mjs, the one parser for this grammar.
 function factsByLabel(body) { return factParagraphs(body); }

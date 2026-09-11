@@ -6,6 +6,7 @@ import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 
 import { stages } from '../stages/mathlib.mts';
+import { runContentHash, runScope } from '../../step9-lib.mjs';
 
 const REPO = process.env.AUTOPILOT_TEST_REPO ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 const TOOL = join(REPO, 'tools', 'step9-report.mjs');
@@ -48,6 +49,29 @@ function fixture() {
   ].join('\n') + '\n');
   return root;
 }
+
+test('Step 9 scopes indentationless page inventories and hashes their item content', () => {
+  const root = mkdtempSync(join(tmpdir(), 'step9-block-scope-'));
+  try {
+    mkdirSync(join(root, 'research'));
+    mkdirSync(join(root, 'items'));
+    mkdirSync(join(root, 'library', 'algebra'), { recursive: true });
+    writeFileSync(join(root, 'research', 'demo-scope-ledger.json'), JSON.stringify({
+      pages: [{ id: 'block-page', kind: 'A', batch: '1' }],
+    }));
+    writeFileSync(join(root, 'library', 'algebra', 'block-page.md'),
+      '---\npage: block-page\nstatus: draft\nitems:\n- def-first\n- lem-second\n---\nPage\n');
+    writeFileSync(join(root, 'items', 'def-first.md'), 'first\n');
+    writeFileSync(join(root, 'items', 'lem-second.md'), 'second\n');
+
+    assert.deepEqual(runScope('demo', root).items.map((row: any) => row.id), ['def-first', 'lem-second']);
+    const before = runContentHash('demo', root);
+    writeFileSync(join(root, 'items', 'lem-second.md'), 'changed second\n');
+    assert.notEqual(runContentHash('demo', root), before);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
 
 test('Step 9 mechanically reconciles and renders every fatal row', () => {
   const root = fixture();

@@ -216,7 +216,7 @@ function fixture() {
   mkdirSync(join(root, 'items'), { recursive: true });
   mkdirSync(join(root, 'tools'), { recursive: true });
   mkdirSync(join(root, 'library', 'test'), { recursive: true });
-  for (const tool of ['risk-report.mjs']) {
+  for (const tool of ['risk-report.mjs', 'frontmatter-list.mjs']) {
     execFileSync('cp', [join(REPO, 'tools', tool), join(root, 'tools', tool)]);
   }
   const ids = ['lem-ordinary-item', 'thm-touched-high-risk', 'cex-flagged-item'];

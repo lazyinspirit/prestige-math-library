@@ -46,6 +46,7 @@ import { parseTerminalResolutions } from './step7-terminal-resolution.mjs';
 import { loadStep7JudgeEvidence, rejectionKey, isFrozenStep5CrossRepair } from './step7-evidence.mjs';
 import { permittedNewLemmas } from './step7-new-lemmas.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
+import { frontmatterList } from './frontmatter-list.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const ITEMS = join(REPO, 'items');
@@ -377,8 +378,7 @@ if (ownerPrerequisiteRepairsPath && existsSync(resolvePath(ownerPrerequisiteRepa
       continue;
     }
     const exposingText = readFileSync(join(ITEMS, `${record.found_via}.md`), 'utf8');
-    const deps = (exposingText.match(/^deps:\s*\[([^\]]*)\]/m)?.[1] ?? '')
-      .split(',').map((dep) => dep.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean);
+    const deps = frontmatterList(exposingText, 'deps');
     if (!deps.includes(record.id)) {
       error('owner-prerequisite-repair-not-direct', `${where}: ${record.id} is not a direct dependency of ${record.found_via}`, record.id);
       continue;

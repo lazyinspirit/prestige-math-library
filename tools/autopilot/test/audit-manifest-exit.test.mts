@@ -21,6 +21,7 @@ import { spawnSync } from 'node:child_process';
 const REPO: string = process.env.AUTOPILOT_TEST_REPO
   ?? new URL('../../..', import.meta.url).pathname.replace(/\/$/, '');
 const TOOL = join(REPO, 'tools', 'audit-manifest.mjs');
+const FRONTMATTER_LIST = join(REPO, 'tools', 'frontmatter-list.mjs');
 
 /** audit-manifest reads items/ and library/ from the REPO it lives in, so a
  *  fixture cannot relocate the corpus. It builds its manifest out of two real
@@ -45,6 +46,7 @@ function pageHomeFixture(pageStatus: 'draft' | 'published') {
   mkdirSync(join(root, 'items'), { recursive: true });
   mkdirSync(join(root, 'library', 'demo'), { recursive: true });
   copyFileSync(TOOL, join(root, 'tools', 'audit-manifest.mjs'));
+  copyFileSync(FRONTMATTER_LIST, join(root, 'tools', 'frontmatter-list.mjs'));
   writeFileSync(join(root, 'items', 'thm-source.md'), `---\nid: thm-source\nstatus: draft\ndeps: [thm-target]\n---\n`);
   writeFileSync(join(root, 'items', 'thm-target.md'), `---\nid: thm-target\nstatus: draft\n---\n`);
   writeFileSync(join(root, 'library', 'demo', 'target-page.md'), `---\npage: target-page\nstatus: ${pageStatus}\nitems: [thm-target]\n---\n`);
@@ -70,6 +72,7 @@ function largeOutputFixture(repetitions = 4_000) {
   mkdirSync(join(root, 'items'), { recursive: true });
   mkdirSync(join(root, 'library', 'demo'), { recursive: true });
   copyFileSync(TOOL, join(root, 'tools', 'audit-manifest.mjs'));
+  copyFileSync(FRONTMATTER_LIST, join(root, 'tools', 'frontmatter-list.mjs'));
   const deps = Array.from({ length: repetitions }, () => '  - thm-target').join('\n');
   writeFileSync(join(root, 'items', 'thm-source.md'), `---\nid: thm-source\nstatus: draft\ndeps:\n${deps}\n---\n`);
   writeFileSync(join(root, 'items', 'thm-target.md'), `---\nid: thm-target\nstatus: published\n---\n`);

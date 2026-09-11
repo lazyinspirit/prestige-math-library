@@ -24,6 +24,7 @@ import { parseTerminalResolutions, terminalResolutionStatus } from './step7-term
 import { buildCurrentContextHashes } from './context-hash-pool.mjs';
 import { loadAuditorCreatedCertifications } from './auditor-created-items.mjs';
 import { itemHashJudge } from './item-hash.mjs';
+import { frontmatterList } from './frontmatter-list.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
 const argv = process.argv.slice(2);
@@ -128,20 +129,7 @@ function nested(fm, parent, child) {
   const match = rest.match(new RegExp(`^[ \\t]+${child}:[ \\t]*(.*)$`, 'm'));
   return match ? match[1].trim().replace(/^['"]|['"]$/g, '') || undefined : undefined;
 }
-function list(fm, key) {
-  const start = fm.search(new RegExp(`^${key}:[ \\t]*\\[`, 'm'));
-  if (start < 0) return [];
-  const open = fm.indexOf('[', start);
-  let depth = 0;
-  for (let index = open; index < fm.length; index += 1) {
-    if (fm[index] === '[') depth += 1;
-    else if (fm[index] === ']' && --depth === 0) {
-      return fm.slice(open + 1, index).split(',')
-        .map((value) => value.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean);
-    }
-  }
-  return [];
-}
+function list(fm, key) { return frontmatterList(fm, key); }
 function option(flag) {
   const index = argv.indexOf(flag);
   return index >= 0 ? argv[index + 1] : undefined;

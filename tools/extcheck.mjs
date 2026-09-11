@@ -69,6 +69,7 @@
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs';
 import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
+import { frontmatterList } from './frontmatter-list.mjs';
 
 const args = process.argv.slice(2);
 const argVal = (flag) => {
@@ -93,18 +94,7 @@ function scalar(fm, key) {
   const m = fm.match(new RegExp(`^${key}:[ \\t]*(.*)$`, 'm'));
   return m ? m[1].trim().replace(/^['"]|['"]$/g, '') || undefined : undefined;
 }
-function list(fm, key) {
-  const start = fm.search(new RegExp(`^${key}:[ \\t]*\\[`, 'm'));
-  if (start < 0) return [];
-  const open = fm.indexOf('[', start);
-  let depth = 0, end = -1;
-  for (let i = open; i < fm.length; i++) {
-    if (fm[i] === '[') depth++;
-    else if (fm[i] === ']' && --depth === 0) { end = i; break; }
-  }
-  if (end < 0) return [];
-  return fm.slice(open + 1, end).split(',').map((s) => s.trim().replace(/^['"]|['"]$/g, '')).filter(Boolean);
-}
+function list(fm, key) { return frontmatterList(fm, key); }
 function nested(fm, parent, child) {
   const p = fm.search(new RegExp(`^${parent}:`, 'm'));
   if (p < 0) return undefined;

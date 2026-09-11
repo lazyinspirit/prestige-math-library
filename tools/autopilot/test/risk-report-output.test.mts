@@ -11,6 +11,7 @@ test('risk-report drains large piped JSON and preserves error exits', () => {
     mkdirSync(join(root, 'tools'));
     mkdirSync(join(root, 'items'));
     copyFileSync(new URL('../../risk-report.mjs', import.meta.url), join(root, 'tools/risk-report.mjs'));
+    copyFileSync(new URL('../../frontmatter-list.mjs', import.meta.url), join(root, 'tools/frontmatter-list.mjs'));
     writeFileSync(join(root, 'items/thm-fixture.md'), '---\nid: thm-fixture\ndeps: []\n---\n## Statement\nA fixture.\n');
     const path = join(root, 'contracts.json');
     const notes = 'complete review evidence '.repeat(100000);
