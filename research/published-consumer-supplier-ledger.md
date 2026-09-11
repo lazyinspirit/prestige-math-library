@@ -4,9 +4,19 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1375, U-C 0, A-R 186, A-P 292. The
+Current classifications: U-P 1375, U-C 0, A-R 186, A-P 294. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Random-variable inequality impacts — 2026-09-11
+
+The published random-variable Hölder and Cauchy--Schwarz corollaries are sound
+specializations, including the equality clause, but directly use already A-P
+expectation/integral inequalities. They are two new A-P impacts pending the
+common integral repair. Their active martingale uses require only the same
+finite-valued clauses, so no distinct frontier blocker or pair results. Exact
+evidence:
+`research/phase-2-frontier-22-published-random-variable-inequality-impact-audit.md`.
 
 ## Random-element and independence interfaces — 2026-09-11
 
@@ -28904,11 +28914,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,885 unique
+subsequently reconciled published IDs. It currently contains **2,887 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,885 indexed IDs are published; **13,045 published items remain outside this
+2,887 indexed IDs are published; **13,043 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28920,11 +28930,11 @@ Supplier mappings and subsequent item-specific findings remain above.
 | U-P | Unaudited and potentially defective items | 1375 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 186 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 292 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 294 | Recorded direct review and an unresolved item-specific repair. |
 
 1,032 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,853 items and the expanded reference pool contains 2,885 unique items.
+1,855 items and the expanded reference pool contains 2,887 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -30073,6 +30083,8 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `cor-holder-inequality-for-random-variables` | Frontier-22 random-variable inequality audit 2026-09-11: its probability-space specialization is correct, but it directly uses A-P expectation and integral Hölder. Apply the common integral repair and retain the one-line specialization. New A-P impact; no distinct active blocker or pair. Exact hash/path: `research/phase-2-frontier-22-published-random-variable-inequality-impact-audit.md`. |
+| `cor-cauchy-schwarz-for-random-variables` | Frontier-22 random-variable inequality audit 2026-09-11: the bound and equality clause correctly specialize the affected random-variable Hölder and `L2` Cauchy--Schwarz suppliers. Complete the common repair and revalidate both edges. New A-P impact; no distinct active blocker or pair. Exact hash/path: `research/phase-2-frontier-22-published-random-variable-inequality-impact-audit.md`. |
 | `thm-hilbert-cube-universal-for-separable-metrizable-spaces` | Frontier-22 standard-Borel audit 2026-09-11: Proofs 2.1--5.1 are outline commands and omit the dense-distance formula, separation/continuity estimates and inverse-continuity neighbourhood. Supply `e(x)=(rho(x,d_n))` and the one-coordinate epsilon estimate. New A-P; active kernel impact reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-standard-borel-coding-audit.md`. |
 | `lem-standard-complete-metric-on-a-countable-product` | Frontier-22 standard-Borel audit 2026-09-11: Proofs 1.1--4.1 only instruct metricity/topology/completeness. Supply termwise metric checks, geometric-tail comparison with finite-coordinate boxes, unique coordinate limits and the finite-head/tail estimate. New A-P; active kernel impact reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-standard-borel-coding-audit.md`. |
 | `thm-standard-borel-spaces-admit-bimeasurable-real-codings` | Frontier-22 standard-Borel audit 2026-09-11: Its own G-delta and restriction argument is sound, but it directly uses the two proof-incomplete Hilbert-cube suppliers. Complete or inline those estimates. New A-P; active kernel impact reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-standard-borel-coding-audit.md`. |

@@ -19,7 +19,24 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: random-element and independence interfaces
+## Latest checkpoint: random-variable inequality impacts
+
+Evidence:
+`research/phase-2-frontier-22-published-random-variable-inequality-impact-audit.md`.
+
+The published random-variable Hölder and Cauchy--Schwarz corollaries are two
+new A-P impacts through the existing common expectation/integral repair. Their
+own specialization and equality arguments are sound. The active martingale
+uses need only the finite-valued clauses already covered by that repair, so no
+distinct frontier blocker, supplier or pair was found.
+
+Post-batch target index: 2,887 unique published IDs; U-P 1,375, U-C 0,
+A-R 186, A-P 294 and 1,032 bounded clears; 13,043 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks must be rerun before commit. Next target is any new exact reviewer
+handoff, then the active independence/product-law chain.
+
+## Completed checkpoint: random-element and independence interfaces
 
 Evidence:
 `research/phase-2-frontier-22-published-random-element-independence-audit.md`.
