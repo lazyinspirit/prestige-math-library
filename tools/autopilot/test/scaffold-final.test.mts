@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, utimesSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, utimesSync, statSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -167,6 +167,53 @@ test('recovery certification does not wait for a sibling author result', t => {
   f.put('demo-batch-1.pages.json', f.pages);
   assert.throws(() => certifyCompletedAuditorItems(f.root, 'demo'), /existed on disk before Step 3/);
   assert.equal(readFileSync(path, 'utf8'), before, 'structural refusal preserves eligible receipts too');
+});
+
+test('unchanged V2 recovery receipts preserve bytes and mtime while pending diagnostics refresh', t => {
+  const f = fixture(t); f.scope();
+  writeAuditorBaseline(f.root, 'demo');
+  f.pages[0].items.push(...['lem-ready', 'lem-pending'].map(id =>
+    ({ id, kind: 'lemma', statement: id, deps: [] })));
+  f.put('demo-batch-1.pages.json', f.pages);
+  writeFileSync(join(f.root, 'items/lem-ready.md'), '---\ndeps: []\n---\nReady proof.\n');
+  mkdirSync(join(f.root, 'research/demo-dispatch'));
+  const resultPath = 'demo-dispatch/alpha-high-step3b-a.result.json';
+  const author = { run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a', covers: ['1'],
+    ended_at: '2100-01-01T00:00:00.000Z' };
+  f.put(resultPath, author);
+  const first = certifyCompletedAuditorItems(f.root, 'demo');
+  assert.match(first.pending[0], /no authored item file/);
+  const path = join(f.root, 'research/demo-step3-auditor-certifications.json');
+  const before = readFileSync(path, 'utf8'), old = new Date('2001-01-01T00:00:00.000Z');
+  utimesSync(path, old, old);
+  const mtime = statSync(path).mtimeMs;
+  assert.deepEqual(certifyCompletedAuditorItems(f.root, 'demo'), first);
+  assert.equal(readFileSync(path, 'utf8'), before);
+  assert.equal(statSync(path).mtimeMs, mtime);
+
+  writeFileSync(join(f.root, 'items/lem-pending.md'), '---\ndeps: []\n---\nLater proof.\n');
+  const later = new Date('2100-01-02T00:00:00.000Z');
+  utimesSync(join(f.root, 'items/lem-pending.md'), later, later);
+  const refreshed = certifyCompletedAuditorItems(f.root, 'demo');
+  assert.match(refreshed.pending[0], /changed after its latest successful/);
+  assert.deepEqual(refreshed.items, first.items);
+  assert.equal(refreshed.at, first.at);
+  assert.equal(readFileSync(path, 'utf8'), before);
+  assert.equal(statSync(path).mtimeMs, mtime);
+  assert.throws(() => certifyAuditorItems(f.root, 'demo'), /changed after its latest successful/);
+  assert.equal(readFileSync(path, 'utf8'), before);
+  assert.equal(statSync(path).mtimeMs, mtime);
+
+  f.put(resultPath, { ...author, ended_at: '2100-01-03T00:00:00.000Z' });
+  const complete = certifyAuditorItems(f.root, 'demo');
+  assert.equal(complete.items.length, 2);
+  assert.equal(complete.scopes.length, 1);
+  assert.notEqual(readFileSync(path, 'utf8'), before, 'new evidence must still be written');
+  const finalBytes = readFileSync(path, 'utf8');
+  utimesSync(path, old, old);
+  assert.deepEqual(certifyAuditorItems(f.root, 'demo'), complete);
+  assert.equal(readFileSync(path, 'utf8'), finalBytes);
+  assert.equal(statSync(path).mtimeMs, mtime, 'the strict gate is idempotent too');
 });
 
 test('stalemate recovery certifies completed groups before routing only the named inactive owner', async t => {

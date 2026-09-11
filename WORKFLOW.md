@@ -110,6 +110,8 @@ by the failure, and a group with a live writer is not redispatched. Completed
 groups do not receive self-review jobs merely because a restart precedes issuance
 of their mechanical certificates. Receipt-only closure outside that artifact
 failure waits for the normal item-decision gate.
+When V2 items, scope certificates and baseline binding are unchanged, certification
+preserves the receipt bytes and timestamp; recovery still refreshes pending diagnostics.
 
 Step 4 keeps its mechanical splice and snapshot. The splice permits new local
 A-page definitions/lemmas only with complete current author decisions, retained

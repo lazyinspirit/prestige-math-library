@@ -96,12 +96,13 @@ function certify(root, run, partial) {
   const additions = [...s.items].filter(([id]) => !original.has(id));
   const results = successfulAuthorResults(root, run);
   const certificationPath = auditorCertificationsPath(root, run);
-  let priorById = new Map();
+  let priorById = new Map(), priorReceipt;
   if (existsSync(certificationPath)) {
     try {
       const prior = json(certificationPath);
       if (prior.version === 1 && prior.run === run && prior.policy === CERTIFICATION_POLICY
         && prior.baseline_sha256 === digest(baseline) && Array.isArray(prior.items)) {
+        priorReceipt = prior;
         priorById = new Map(prior.items.map(row => [row.id, row]));
       }
     } catch { /* replace only after all current inputs validate */ }
@@ -167,6 +168,11 @@ function certify(root, run, partial) {
     items: certified.sort((a, b) => a.id.localeCompare(b.id)),
     scopes: scopes.sort((a, b) => a.page.localeCompare(b.page)),
   };
+  // A blocked recovery tick may refresh diagnostics without changing any
+  // certified evidence. Preserve the original bytes, timestamp and file mtime.
+  if (priorReceipt && JSON.stringify(priorReceipt.items) === JSON.stringify(receipt.items)
+    && JSON.stringify(priorReceipt.scopes) === JSON.stringify(receipt.scopes))
+    return partial ? { ...priorReceipt, pending } : priorReceipt;
   writeFileSync(certificationPath, JSON.stringify(receipt, null, 2) + '\n');
   return partial ? { ...receipt, pending } : receipt;
 }
