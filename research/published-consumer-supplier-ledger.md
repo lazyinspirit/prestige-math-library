@@ -4,9 +4,21 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1407, U-C 0, A-R 189, A-P 207. The
+Current classifications: U-P 1407, U-C 0, A-R 189, A-P 208. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Pullback-bundle topology audit — 2026-09-11
+
+Eight previously unclassified product, subspace, quotient and pullback-set
+interfaces are bounded clear. The published pullback-bundle theorem is new A-P:
+it constructs local bijections and smooth overlap formulas but never topologizes
+the fibre-product set, proves the bijections homeomorphisms, or proves the total
+space Hausdorff and second countable. A choice-free subspace-topology proof from
+`N x E` and the existing hereditary/product suppliers repairs it. Two active
+draft definitions consume the affected smooth-structure clause and were
+reported immediately. Exact hashes, repair and impact limits are in
+`research/phase-2-frontier-22-published-pullback-bundle-topology-audit.md`.
 
 ## Singular-chain foundation audit — 2026-09-11
 
@@ -28635,6 +28647,14 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-product-topology` | Frontier-22 pullback-topology audit 2026-09-11: product/box bases, finite-support restrictions, empty product and finite-versus-arbitrary choice boundaries are coherent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-pullback-bundle-topology-audit.md`. |
+| `thm-product-of-countable` | Frontier-22 pullback-topology audit 2026-09-11: two supplied enumerations and the natural pairing bijection explicitly enumerate the product; only finite existential selection is used. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-pullback-bundle-topology-audit.md`. |
+| `prop-second-countability-is-hereditary` | Frontier-22 pullback-topology audit 2026-09-11: nonempty traces of a countable ambient basis form a countable subspace basis. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-pullback-bundle-topology-audit.md`. |
+| `lem-t0-t1-and-hausdorff-are-hereditary` | Frontier-22 pullback-topology audit 2026-09-11: tracing the relevant separating opens proves all three hereditary clauses. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-pullback-bundle-topology-audit.md`. |
+| `def-quotient-topology` | Frontier-22 pullback-topology audit 2026-09-11: final topology, quotient biconditional, saturated opens and equivalence-relation quotient are mutually coherent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-pullback-bundle-topology-audit.md`. |
+| `lem-open-or-closed-surjection-is-quotient` | Frontier-22 pullback-topology audit 2026-09-11: images of preimages prove the open/closed cases, while a continuous section proves the quotient converse and surjectivity. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-pullback-bundle-topology-audit.md`. |
+| `prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure` | Frontier-22 pullback-topology audit 2026-09-11: finite product bases give second countability, separation is productive and product charts have smooth componentwise transitions. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-pullback-bundle-topology-audit.md`. |
+| `def-pullback-vector-bundle-as-a-fibre-product` | Frontier-22 pullback-topology audit 2026-09-11: the set-level fibre product and projection/fibre identifications are sound and explicitly defer the smooth structure. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-pullback-bundle-topology-audit.md`. |
 | `def-singular-simplex-and-singular-chain-group-with-coefficients` | Frontier-22 singular-chain audit 2026-09-11: integral chains are finite formal sums and arbitrary abelian coefficients are attached by tensoring, without choosing a coefficient basis. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-singular-chain-foundation-audit.md`. |
 | `def-singular-boundary-operator` | Frontier-22 singular-chain audit 2026-09-11: the alternating affine-face formula extends linearly and has coherent zero/negative degree conventions. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-singular-chain-foundation-audit.md`. |
 | `thm-the-singular-boundary-squares-to-zero` | Frontier-22 singular-chain audit 2026-09-11: cosimplicial identities pair every codimension-two face with the opposite sign, including low degrees and tensor coefficients. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-singular-chain-foundation-audit.md`. |
@@ -29591,6 +29611,7 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `thm-the-pullback-fibre-product-is-a-smooth-vector-bundle` | Frontier-22 pullback-topology audit 2026-09-11: proof 1.1 gives only set bijections and 2.1 only smooth overlap formulas, without assigning the fibre product a topology, proving the bijections homeomorphisms, or proving the Hausdorff/second-countable total-space contract. Give it the subspace topology from `N x E`; published product-manifold and hereditary suppliers give separation/countability, and the explicit inverse `(q,v)->(q,Phi_alpha^{-1}(f(q),v))` proves the pulled-back trivializations are homeomorphisms. Two active draft definitions use the affected existence clause and need this local proof until the published item is repaired. New A-P; no new pair. Exact hash/impact: `research/phase-2-frontier-22-published-pullback-bundle-topology-audit.md`. |
 | `thm-dual-and-hom-transition-functions-define-smooth-bundles` | Frontier-22 dual/Hom audit 2026-09-11: inverse-transpose and conjugation formulas are correct, but proof 2.1 neither constructs the fibrewise-union topology nor proves the new total spaces second countable. The published cocycle route needs a supplied countable cover and hence `AC_omega` to extract subcovers here. A complete choice-free strategy instead takes the open quotient of the second-countable finite-product subspace of source frames and image tuples; local coordinates are `(p,C,V)->(p,VC^(-1))`, and images of a countable domain base form a quotient base. Inline that proof and declare the exact topology/smooth-inversion interfaces. New A-P; no new pair. The local repair is installed in all four affected drafts and 62 exact post-5a consumers were read, so there is no live draft blocker; this does not repair the published item. Exact hash/plan/scope: `research/phase-2-frontier-22-published-dual-hom-bundle-audit.md`; completion: `research/phase-2-next-20-hom-bundle-repair-completion.md`. |
 | `lem-normalizing-a-locally-finite-positive-smooth-family` | Manifold-null/normalization audit 2026-09-11: the conclusion calls `(supp(g_i))` an open cover for subordination, but supports are closed and the exact partition definition requires an open cover. Supply `(U_i)` with `supp(g_i) subset U_i`, use equality of cozero sets/supports after positive division, and prove reciprocal smoothness from earlier smooth algebra/composition. U-C to A-P; active consumers use the valid formula with actual open-cover containment. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
 | `lem-c1-local-diffeomorphisms-preserve-null-sets-locally` | Manifold-null/normalization audit 2026-09-11: compact-local Lipschitz restrictions do not by themselves globalize to every subset of one neighbourhood or meet the whole-domain Lipschitz theorem, and the proof presupposes unqualified nullity while supplying atlas independence. Restate chartwise and use nested cubes plus coordinate clamps for global Lipschitz extensions in both directions. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
