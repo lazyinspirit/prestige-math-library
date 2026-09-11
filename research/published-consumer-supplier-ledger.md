@@ -4,9 +4,21 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1404, U-C 0, A-R 187, A-P 225. The
+Current classifications: U-P 1403, U-C 0, A-R 187, A-P 230. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Density and null-integral propagation audit — 2026-09-11
+
+Three new IDs, one U-P item and one bounded clear enter A-P. The measurable-set
+integral, indefinite-integral measure, density-measure definition,
+finite-almost-everywhere corollary and null-set integral all directly use the
+affected arbitrary simple/nonnegative integral foundation. Their displayed
+restriction, monotone-limit, threshold and null-support arguments are sound
+after the same finite zero-complement refinement. The current Lebesgue
+decomposition uses all three latter clauses, so the active Solovay impact was
+reported immediately. Exact hashes and limits:
+`research/phase-2-frontier-22-published-density-null-integral-propagation-audit.md`.
 
 ## Integral and Radon--Nikodym propagation audit — 2026-09-11
 
@@ -28664,11 +28676,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,737 unique
+subsequently reconciled published IDs. It currently contains **2,740 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,737 indexed IDs are published; **13,193 published items remain outside this
+2,740 indexed IDs are published; **13,190 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28677,14 +28689,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1404 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1403 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 225 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 230 | Recorded direct review and an unresolved item-specific repair. |
 
-921 further reference-pool items have bounded no-repair-needed dispositions
+920 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,816 items and the expanded reference pool contains 2,737 unique items.
+1,820 items and the expanded reference pool contains 2,740 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -29708,7 +29720,6 @@ owner's scan policy.
 | `def-conditional-expectation-as-an-ae-class` | Frontier-22 conditional-expectation audit 2026-09-11: the fully read existence and uniqueness interfaces determine one `L^1` class, and ae-invariance of the integral makes it independent of the input representative. The inherited AC assumption and supplier are explicit. No repair in the current ae-class scope. Exact hash/path/dedup: `research/phase-2-frontier-22-published-core-analysis-probability-audit.md`. |
 | `thm-basic-algebra-and-order-properties-of-conditional-expectation` | Frontier-22 conditional-expectation audit 2026-09-11: event-integral identities prove linearity; discrepancy-set tests prove positivity/order. For the delicate strict clause, if `W>0` ae and `T=E[W|G]`, then `{T=0}` has zero integral of `W` and hence zero probability. Explicit AC covers existence. No repair in the exact clauses used by current martingale and conditional-law drafts. Evidence/dedup: `research/phase-2-frontier-22-published-core-analysis-probability-audit.md`. |
 | `lem-conditioning-a-known-variable-and-an-independent-variable` | Frontier-22 conditional-expectation audit 2026-09-11: a known integrable variable meets the version definition; rectangle independence extends from Borel indicators through nonnegative simple approximation/MCT and then positive/negative parts to give the constant version `EX`. Explicit AC covers existence. No repair in the active known-variable/independence uses. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-core-analysis-probability-audit.md`. |
-| `thm-indefinite-integral-of-a-nonnegative-function-is-a-measure` | Frontier-22 measure-supplier audit 2026-09-11: finite disjoint unions increase to the countable union, and pointwise MCT plus finite additivity identifies the limit with the nonnegative extended series. This supplies the exact density-measure clause used by conditional expectation and density inversion. No repair or arbitrary choice in this scope. Exact hash/uses/dedup: `research/phase-2-frontier-22-published-core-analysis-probability-audit.md`. |
 | `thm-finite-and-countable-subadditivity-of-measures` | Frontier-22 measure-supplier audit 2026-09-11: least-index disjointification preserves the union; countable additivity and termwise monotonicity give the inequality, including the empty finite case. Current drafts use its finite-union and countable-null-union clauses exactly. No repair or choice use. Exact hash/uses/dedup: `research/phase-2-frontier-22-published-core-analysis-probability-audit.md`. |
 | `thm-nonnegative-weighted-sums-of-measures` | Frontier-22 measure-supplier audit 2026-09-11: separate zero, finite-positive and positive-infinity scalar branches avoid undefined extended multiplication; each is a measure, and nonnegative double-series Tonelli proves weighted-sum additivity. This supplies the exact discrete-law construction in current examples. No repair or arbitrary choice. Exact hash/uses/dedup: `research/phase-2-frontier-22-published-core-analysis-probability-audit.md`. |
 
@@ -29722,6 +29733,11 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `def-integral-over-a-measurable-set` | Frontier-22 density/null-integral audit 2026-09-11: indicator multiplication is measurably defined, but the restricted integral directly uses the now-A-P nonnegative-integral definition. Install the finite zero-complement simple-integral repair. U-P to A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-density-null-integral-propagation-audit.md`. |
+| `thm-indefinite-integral-of-a-nonnegative-function-is-a-measure` | Frontier-22 density/null-integral audit 2026-09-11 corrects its bounded clear: countable additivity uses the now-A-P MCT and nonnegative-additivity clauses. Its visible finite-union/increasing-limit proof remains sound after the common foundation repair. Clear to A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-density-null-integral-propagation-audit.md`. |
+| `def-measure-with-density` | Frontier-22 density/null-integral audit 2026-09-11: the definition names the affected indefinite-integral theorem as the proof that its set function is a measure. Apply the common finite zero-complement repair upstream or inline. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-density-null-integral-propagation-audit.md`. |
+| `cor-finite-nonnegative-integral-implies-finite-almost-everywhere` | Frontier-22 density/null-integral audit 2026-09-11: positive integer threshold scaling is sound, but the proof directly uses the now-A-P zero-integral criterion and simple/nonnegative foundation. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-density-null-integral-propagation-audit.md`. |
+| `cor-integral-over-a-null-set-vanishes` | Frontier-22 density/null-integral audit 2026-09-11: the null-support argument is sound after repair, but it takes the supremum of arbitrary simple-minorant integrals and invokes the affected simple indefinite-measure theorem. New A-P; active decomposition use, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-density-null-integral-propagation-audit.md`. |
 | `cor-additivity-of-the-nonnegative-lebesgue-integral` | Frontier-22 integral/RN propagation audit 2026-09-11 corrects its bounded clear: its increasing-simple proof is visibly sound after repair, but it directly uses the now-A-P simple additivity and monotone-convergence clauses. Install the finite zero-complement refinement upstream or locally. Clear to A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-integral-rn-propagation-audit.md`. |
 | `def-integrable-real-and-complex-functions-and-their-integrals` | Frontier-22 integral/RN propagation audit 2026-09-11 corrects its bounded clear: positive/negative parts still avoid undefined infinity subtraction, but their integrals use the affected nonnegative-integral definition. Apply the upstream finite refinement. Clear to A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-integral-rn-propagation-audit.md`; prior receipt: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
 | `thm-linearity-of-the-lebesgue-integral-on-l-one` | Frontier-22 integral/RN propagation audit 2026-09-11 corrects its bounded clear: every integral in the visible sign/component proof is finite, so the algebra is sound and never forms zero times infinity, but it load-bearingly uses the affected integrable-function definition and nonnegative additivity. Clear to A-P; same finite repair, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-integral-rn-propagation-audit.md`; prior receipt: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
@@ -30306,7 +30322,6 @@ mathematical repairs. Evidence:
 | `def-incompressibility-method` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-indicator-random-variable` | 0A.2 Exact Phase-3 defects in published content |
 | `def-induction-ideal-of-a-family-of-subgroups` | Transitive consumers (166), grouped by home page |
-| `def-integral-over-a-measurable-set` | Exact direct impact-review queue |
 | `def-integral-weyl-group-of-a-weight` | Cross-category Phase-2 roots and their published impact |
 | `def-killing-form-of-a-semisimple-lie-algebra` | Exact Phase-3 published repairs |
 | `def-l-and-nl` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
