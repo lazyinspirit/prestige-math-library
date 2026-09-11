@@ -842,8 +842,8 @@ blocker. Counts are now 2,517 unique published IDs: U-P 1,413, U-C 15, A-R
 
 ## Current checkpoint — 2026-09-11
 
-The canonical ledger has since reached 2,607 unique published IDs: U-P 1,410,
-U-C 0, A-R 188, A-P 206 and 803 bounded clears. The set-semantics batch
+The canonical ledger has since reached 2,617 unique published IDs: U-P 1,411,
+U-C 0, A-R 188, A-P 207 and 811 bounded clears. The set-semantics batch
 fully reads relativization and arbitrary-signature soundness together with
 their six direct interfaces. Guarded formula induction, set-sized truth-set
 recursion, free-for substitution, coincidence and all six axiom/three rule
@@ -860,6 +860,18 @@ Finite depth selection needs no choice beyond the available ZF finite-choice
 principle. No current Step-5 blocker was found. Evidence:
 `research/phase-2-frontier-22-published-cover-small-chain-homotopy-audit.md`.
 
+The dual/Hom bundle target is newly A-P. Its transition formulas and smooth
+matrix inversion are sound, but the proof does not construct the topology or
+second-countable total space on the fibrewise union. The published cocycle
+construction requires a supplied countable cover, and obtaining countable
+trivializing subcovers from the arbitrary bundle covers uses countable choice
+under the library's ZF convention. One exact published consumer enters U-P;
+eight supporting interfaces are clear. Four current connection/tensor drafts
+use the affected existence clause and their no-choice claims were reported to
+the supervising worker immediately. Existing published suppliers suffice for
+repair; no new pair is needed. Evidence:
+`research/phase-2-frontier-22-published-dual-hom-bundle-audit.md`.
+
 The canonical adequate-implicit-use rule remains mandatory: a sound implicit
 use of an adequate published supplier is a bounded clear, even when a repeated
 direct dependency edge would improve exposition. Every future addition must be
@@ -873,9 +885,9 @@ supplier IDs, and each published ID must retain exactly one classification row.
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
    next examining the cover-small chain-homotopy and smooth-bundle transition
-   interfaces, then audit bounded samples outside the 2,607-ID index.
+   interfaces, then audit bounded samples outside the 2,617-ID index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,323 published items
+No exhaustive discovery claim is authorized while 13,313 published items
 remain outside the index and dependency interfaces remain unaudited.
