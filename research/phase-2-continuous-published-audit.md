@@ -19,7 +19,32 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: high-use structural suppliers
+## Latest checkpoint: confirmed frontier handoffs
+
+Evidence:
+`research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`.
+
+Five U-C handoffs have complete target and exact used-clause audits. The
+Doob--Dynkin rational Borel lifts require countable choice, and its infimum cut
+needs the special right-intersection calculation. The free-Cayley proof uses
+left-ordered quotients for right Cayley edges. The metric definition conflicts
+with the later canonical neighbourhood convention. These three items move to
+A-P with exact existing repair suppliers; active consumers have local bypasses,
+so none blocks current Step 3.
+
+The relative-projectivity `H=1` comparison already states AC and has adequate
+published basis/free-summand suppliers. The finite-discontinuity proof directly
+uses the published Heine--Cantor theorem, which explicitly declares its sole
+countable-choice use, and repeats that inheritance in its own Choice remark.
+Under the correct implicit-use rule these two move from U-C to bounded clear.
+
+Post-batch index remains 2,575 unique published IDs: U-P 1,408, U-C 6,
+A-R 187, A-P 200 and 774 bounded clears; 13,355 published items remain outside
+the index. Recount, publication-state and cross-class deduplication checks must
+be rerun before commit. Next target is any new exact reviewer handoff, then the
+next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: high-use structural suppliers
 
 Evidence:
 `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`.

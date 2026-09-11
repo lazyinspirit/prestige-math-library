@@ -4,9 +4,31 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1408, U-C 11, A-R 187, A-P 197. The
+Current classifications: U-P 1408, U-C 6, A-R 187, A-P 200. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Confirmed frontier-handoff reconciliation — 2026-09-11
+
+Five U-C handoffs now have complete target and exact used-interface audits.
+`thm-doob-dynkin-lemma` moves to A-P: its rational Borel lifts require
+countable choice, and its infimum-cut equality needs the right-intersection
+identity of the specially constructed `B_q`, not monotonicity alone. The
+free-Cayley-tree theorem moves to A-P because its right-edge labels use the
+quotient in the wrong order; correct increments telescope and give the intended
+normal-form contradiction. `def-metric-topology` moves to A-P for its exact
+conflict with the later canonical neighbourhood convention.
+
+`def-relative-projectivity` and
+`thm-finitely-many-discontinuities-integrable` move to bounded clear. The first
+states AC at the `H=1` comparison and has adequate published basis/free-summand
+suppliers. The second explicitly identifies its sole inherited choice cost in
+the directly cited, CC-declaring Heine--Cantor theorem. Repeated direct axiom
+edges are optional under the canonical adequate-implicit-use rule. Active
+consumers already use local proofs or the canonical convention, so none of the
+three open published repairs blocks current Step 3. Exact hashes, repair
+strategies, supplier IDs and limits are in
+`research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`.
 
 ## High-use structural-supplier audit — 2026-09-11
 
@@ -28194,13 +28216,13 @@ Supplier mappings and subsequent item-specific findings remain above.
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
 | U-P | Unaudited and potentially defective items | 1408 | Evidence/role reconciliation incomplete; not a defect verdict. |
-| U-C | Unaudited and confirmed defective items | 11 | Confirmed mathematical or prerequisite defect; repair audit pending. |
+| U-C | Unaudited and confirmed defective items | 6 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 197 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 200 | Recorded direct review and an unresolved item-specific repair. |
 
-772 further reference-pool items have bounded no-repair-needed dispositions
+774 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,803 items and the expanded reference pool contains 2,575 unique items.
+1,801 items and the expanded reference pool contains 2,575 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28261,6 +28283,8 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-relative-projectivity` | Frontier-22 confirmed-handoff reconciliation 2026-09-11: the `H=1` comparison explicitly assumes AC; the published basis-existence and projective free-summand theorems supply the exact argument with that boundary. Missing redundant direct edges are optional under the adequate-implicit-use rule. U-C to bounded clear with history preserved. Exact hashes/scope: `research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`. |
+| `thm-finitely-many-discontinuities-integrable` | Frontier-22 confirmed-handoff reconciliation 2026-09-11: the Darboux proof is complete; its only countable-choice cost is inside directly cited `thm-heine-cantor-r`, which declares the axiom and exact use, and this consumer's Choice remark identifies the inheritance. Repeating the direct axiom edge is optional. U-C to bounded clear with history preserved. Exact hash/scope: `research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`. |
 | `def-subspace-topology-top` | Frontier-22 high-use structural-supplier audit 2026-09-11: the canonical trace representative proves arbitrary-union closure without choice; closed sets, bases, subbases, inclusion, restriction and the map-into-subspace property follow from exact trace identities. New bounded clear; both aliases deduplicated. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
 | `def-compactly-generated-conventions-for-based-homotopy` | Frontier-22 high-use structural-supplier audit 2026-09-11: WH, compact-Hausdorff k-tests, kification, k-products and test-image compact-open mapping spaces are coherently fixed for the following exact proofs. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
 | `thm-quotient-universal-property` | Frontier-22 high-use structural-supplier audit 2026-09-11: finality proves the characteristic property and continuous fibre descent; the composite preimage calculation proves composite quotientness. A one-point existential instantiation in uniqueness is not family choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
@@ -29089,6 +29113,9 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `thm-doob-dynkin-lemma` | Frontier-22 confirmed-handoff reconciliation 2026-09-11: proof 2.1 simultaneously selects a Borel lift for every rational threshold without a choice hypothesis. Add `def-countable-choice` and the rational indexing supplier. Proof 3.1 must also establish the special right-intersection identity `B_q=intersection_(r>q) B_r`; monotonicity alone does not imply its infimum-cut equality. U-C to A-P. Active kernel factorization supplies a local pointwise AC proof, so no current blocker/new pair. Exact hash, calculation and limits: `research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`. |
+| `thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree` | Frontier-22 confirmed-handoff reconciliation 2026-09-11: proof 1.2 uses `g_(j+1)g_j^(-1)` on right Cayley edges, but the basis-letter increment is `g_j^(-1)g_(j+1)`; the edge `a -> ab` exposes the error. Correct the order, use distinct vertices to exclude adjacent cancellation and telescope the cyclic word to the identity. Existing Cayley/reduced-word/normal-form suppliers suffice. U-C to A-P; active HG proves this locally, so no current blocker/new pair. Exact hash/scope: `research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`. |
+| `def-metric-topology` | Frontier-22 confirmed-handoff reconciliation 2026-09-11: its unqualified neighbourhood means only an open set containing the point, conflicting with canonical `def-neighbourhood-top`, where arbitrary supersets of open sets are neighbourhoods. Rewrite as “open neighbourhood” or state the ball-base fact; the metric topology is sound. U-C to A-P; active locally convex work uses the canonical definition. Exact hashes/scope: `research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`. |
 | `def-complex-lp-and-euclidean-test-function-conventions` | Frontier-22 active-foundation follow-up 2026-09-11: for finite `p`, the displayed `N_p(f)=(integral |f|^p)^(1/p)` is applied to every measurable finite-valued complex function, although the integral may be `+infinity` and canonical `def-extended-reals` explicitly leaves exponentiation undefined. This makes `N_p` and the following membership predicate partial. Define `N_p=+infinity` in the infinite-integral case, or define the raw class by integral finiteness and its real norm afterward. Current Fourier/Schwartz consumers use finite-norm members and remain valid after stating this local convention, but the definition is load-bearing. Existing published power/integral interfaces suffice; no new pair. Exact hash/consumers/scope: `research/phase-2-frontier-22-published-active-foundation-followup-audit.md`. |
 | `def-period-one-fourier-coefficients-partial-sums-and-convolution` | Frontier-22 active-foundation follow-up 2026-09-11: with no dependencies or proof, the definition asserts that general `L^1(T)` convolution exists a.e., is integrable and descends independently of representatives. Supply one-periodic Borel representatives, joint measurability, finite-square Tonelli/Fubini, periodic translation and quotient-descent calculations, with the applicable choice contract. The current Carleson theorem consumes only the sound coefficient/finite-partial-sum normalization, and the bounded Dirichlet-kernel convolution exists pointwise, so no Step-3 blocker/new pair. Exact hash/impact/scope: `research/phase-2-frontier-22-published-active-foundation-followup-audit.md`. |
 | `lem-the-cohomology-universal-coefficient-extension-map` | Group-e UCT reconciliation 2026-09-11: target omits AC required by its free-cycle/boundary supplier and DC plus supplied-resolution data required by balanced Ext. Proof 2.1 does not prove descent, injectivity or naturality: for a cycle projection `pi`, changing `psi` by `g|B` changes `psi d` by `delta(g pi)`; conversely a primitive restricts to the required extension on cycles. Add AC and use the published PID-complex decomposition/projective-resolution interfaces, or state the exact balanced-Ext data and comparisons. U-C to A-P; draft singular UCT is not a published backward repair. Exact hashes/limits: `research/phase-2-next-20-published-group-e-uct-partition-reconciliation.md`. |
@@ -29296,10 +29323,6 @@ owner's scan policy.
 
 | Published item | Exact prerequisite debt at classification |
 |---|---|
-| `def-metric-topology` | Scalar-topology audit: unqualified neighbourhood is defined as only an open set containing the point, conflicting with later canonical `def-neighbourhood-top`, where neighbourhoods need not be open. Rewrite as “open neighbourhood” or state the ball-base fact. Metric topology itself remains sound; no Phase-2 pair. Exact hash/evidence: research/phase-2-next-20-published-scalar-topology-audit.md. |
-| `thm-doob-dynkin-lemma` | Batch3/root full target reading 2026-09-11: rational Borel lifts selected simultaneously without a choice contract. Existing def-countable-choice or def-axiom-of-choice suffices; no new pair. See Doob–Dynkin choice-interface finding. |
-| `thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree` | Confirmed wrong quotient order in cycle labels; actual right-edge increment is `g_j^(-1)g_(j+1)`, whose ordered product telescopes. Proof 1.2 instead uses `g_(j+1)g_j^(-1)`: on the edge `a -> ab` this is `aba^(-1)`, a reduced length-three word rather than the basis letter `b`. Existing `thm-reduced-words-form-the-free-group` and `def-cayley-graph` suffice; no Phase 2 pair. Root full target read; exact author reconfirmation: research/phase-2-next-20-step3b-d.md. See also Hyperbolic and finite-Weyl scaffold audit findings — 2026-09-11 and batch6/10 reports. |
-| `def-relative-projectivity` | Batch11/root 2026-09-11: explicit AC basis paragraph lacks direct def-axiom-of-choice dependency. Published supplier exists; preserve stated assumption. Confirmed declaration defect, repair audit pending; no Phase 2 pair. See Green-correspondence prerequisite findings and phase-2-next-20-batch-11.notes.md. |
 | `def-c-zero-and-ell-infinity` | REOPENED2026-09-10: Step3b-b full actual definition reading, confirmed by root: complex scalar triangle inequality and homogeneity have no declared complex convention/modulus supplier. Prior LUB repair remains valid. Add earlier published rem-real-and-complex-normed-space-convention and lem-complex-conjugation-and-modulus-laws, preserve choice-free construction, then targeted checks and canonical sync. No unpublished Phase2 supplier. Live sequential counterexample repaired locally; source report research/phase-2-catchup-24-step3b-b.md. |
 | `lem-normalizing-a-locally-finite-positive-smooth-family` | UC34 supplier reconciliation 2026-09-09: Astra1 DG review and root full target/partition-definition reading: conclusion calls closed supports an open cover for subordination, without openness; actual definition requires an open cover and locally finite SUPPORTS, not merely cozero sets. Confirmed contract/interface wording gap pending full repair audit. Repair by requiring locally finite supports, proving support equality after positive normalization, sum1 and 0<=phi<=1, and state subordination only for a supplied open cover containing supports. Exact suppliers already published: local finite smooth sums, partition definition, reciprocal/composition; no Phase2 pair identified. DG15 imports only valid normalization/support calculations, not faulty stronger terminology. Report research/phase-2-catchup-24-owner-step3-dg-astra.md. |
 | `thm-weak-whitney-proper-embedding-theorem` | UC34 supplier reconciliation 2026-09-09: Root read complete target: L1/step1.1 now consumes repaired finite-dimensional embedding, whose statement explicitly assumes CC, but weak Whitney statement/deps omit it. Generic-projection/null-image route also needs a separate exact interface audit; adding CC alone is not a claimed full repair. DG15 and both repaired manifold-Whitney consumers now use the earlier arbitrary finite-dimensional embedding directly, not this stronger dimension bound. No new Phase2 prerequisite established. |
@@ -29315,7 +29338,6 @@ The historical U-P300 scan’s 19 findings completed repair audit (7 A-R, 12 A-P
 |---|---|
 
 
-| `thm-finitely-many-discontinuities-integrable` | Step3b-d 2026-09-10: confirmed inherited countable-choice assumption omitted from statement/deps when using published thm-heine-cantor-r; final remarks acknowledge cost but do not repair contract. Exact proof steps and bounded source/interface audit: research/phase-2-catchup-24-step3b-d.md, Published assumption debt. Root repair audit pending. Preserve choice-free conclusion using all eligible oscillation balls, finite Heine–Borel subcover, minimum radius and thm-riemann-criterion; retain exceptional-interval estimates in finite-discontinuity case. Existing published suppliers suffice; no new Phase2 pair established. |
 
 ### A-R — Audited and repaired items
 
