@@ -8,6 +8,17 @@ Current classifications: U-P 1370, U-C 0, A-R 186, A-P 306. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Lower-sphere nullhomotopy interfaces — 2026-09-11
+
+Finite pair-relative simplicial approximation, straight-line homotopy and the
+lower-dimensional sphere nullhomotopy theorem are three new bounded clears.
+The lower-sphere row reconciles an earlier historical note written before the
+item was published; it was never a classification row. The finite simplicial
+image omits a top-simplex barycenter, and stereographic contraction fixes the
+chosen basepoint. Two batch-8 consumers use the sound clause directly. Exact
+hashes and bounded scope:
+`research/phase-2-frontier-22-published-lower-sphere-nullhomotopy-audit.md`.
+
 ## Principal-arctangent interfaces — 2026-09-11
 
 The principal tangent branch, inverse-tangent definition and inverse-tangent
@@ -28967,11 +28978,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,937 unique
+subsequently reconciled published IDs. It currently contains **2,940 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,937 indexed IDs are published; **12,993 published items remain outside this
+2,940 indexed IDs are published; **12,990 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28985,9 +28996,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 186 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 306 | Recorded direct review and an unresolved item-specific repair. |
 
-1,075 further reference-pool items have bounded no-repair-needed dispositions
+1,078 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,862 items and the expanded reference pool contains 2,937 unique items.
+1,862 items and the expanded reference pool contains 2,940 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -29048,6 +29059,9 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `thm-finite-simplicial-approximation-for-maps-of-pairs` | Frontier-22 lower-sphere audit 2026-09-11: the finite star choices, subcomplex-support argument and common-carrier homotopy give the stated map of pairs. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-lower-sphere-nullhomotopy-audit.md`. |
+| `lem-straight-line-homotopies-are-continuous` | Frontier-22 lower-sphere audit 2026-09-11: componentwise arithmetic continuity and subspace factorization prove the straight-line formula into a convex Euclidean subspace. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-lower-sphere-nullhomotopy-audit.md`. |
+| `thm-lower-dimensional-sphere-maps-are-based-nullhomotopic` | Frontier-22 lower-sphere audit 2026-09-11: finite pair approximation misses a target top-simplex barycenter, and stereographic affine contraction gives a based nullhomotopy, including `k=0`. Reconciles the prior prepublication historical note into one new bounded-clear row. Two batch-8 uses checked. Exact hash/scope: `research/phase-2-frontier-22-published-lower-sphere-nullhomotopy-audit.md`. |
 | `lem-tangent-principal-branch-is-bijective` | Frontier-22 arctangent audit 2026-09-11: positive derivative gives strict increase, and the explicit positive-cosine unit-circle point supplies every real tangent value. It uses only unaffected surjectivity from the A-P circle parametrization; injectivity is independent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-arctangent-audit.md`. |
 | `def-principal-inverse-tangent` | Frontier-22 arctangent audit 2026-09-11: the branch bijection and continuous-inverse theorem give the exact inverse, range, continuity and monotonicity. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-arctangent-audit.md`. |
 | `thm-principal-inverse-tangent-calculus` | Frontier-22 arctangent audit 2026-09-11: inverse differentiation, the FTC primitive, compact termwise integration and Abel endpoint passage prove all stated clauses. New bounded clear; two batch-3 uses checked. Exact hash/scope: `research/phase-2-frontier-22-published-arctangent-audit.md`. |

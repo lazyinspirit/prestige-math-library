@@ -19,7 +19,24 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: principal-arctangent interfaces
+## Latest checkpoint: lower-sphere nullhomotopy interfaces
+
+Evidence:
+`research/phase-2-frontier-22-published-lower-sphere-nullhomotopy-audit.md`.
+
+Finite pair-relative simplicial approximation, straight-line homotopy and the
+lower-dimensional sphere nullhomotopy theorem are three new bounded clears.
+The latter reconciles a historical prepublication note rather than duplicating
+it. Its finite-dimensional omitted-simplex and basepoint-fixed stereographic
+contraction proof is sound, including the zero-sphere case. Two batch-8 draft
+consumers use the clear clause directly; no active blocker or pair results.
+
+Post-batch target index: 2,940 unique published IDs; U-P 1,370, U-C 0,
+A-R 186, A-P 306 and 1,078 bounded clears; 12,990 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks passed before commit.
+
+## Completed checkpoint: principal-arctangent interfaces
 
 Evidence:
 `research/phase-2-frontier-22-published-arctangent-audit.md`.
@@ -1585,10 +1602,10 @@ supplier IDs, and each published ID must retain exactly one classification row.
    issues reported by the root worker, prioritizing items actually consumed by
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
-   then audit high-use active-frontier samples outside the 2,937-ID
+   then audit high-use active-frontier samples outside the 2,940-ID
    index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 12,993 published items
+No exhaustive discovery claim is authorized while 12,990 published items
 remain outside the index and dependency interfaces remain unaudited.
