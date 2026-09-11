@@ -8,6 +8,18 @@ Current classifications: U-P 1410, U-C 0, A-R 188, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Finite-sum, recursion and interval audit — 2026-09-11
+
+Four previously unclassified high-use foundations are bounded clear. The least
+closed-relation proof of recursion is total, functional and unique. Carrying the
+index in that recursion defines finite real sums/products without selection;
+universal property induction proves their algebra, order, splitting and
+telescoping laws. The natural truncated-difference notation has adequate
+published implicit suppliers. The nine displayed interval forms have the
+claimed convexity, degeneracy, boundedness and endpoint-length conventions. No
+current Step-5 blocker was found. Exact hashes, deduplication and limits are in
+`research/phase-2-frontier-22-published-finite-sum-recursion-audit.md`.
+
 ## Ordered-field foundation audit — 2026-09-11
 
 Nine previously unclassified field/order interfaces are bounded clear. The
@@ -28398,11 +28410,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,653 unique
+subsequently reconciled published IDs. It currently contains **2,657 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,653 indexed IDs are published; **13,277 published items remain outside this
+2,657 indexed IDs are published; **13,273 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28416,9 +28428,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 188 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 207 | Recorded direct review and an unresolved item-specific repair. |
 
-848 further reference-pool items have bounded no-repair-needed dispositions
+852 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,805 items and the expanded reference pool contains 2,653 unique items.
+1,805 items and the expanded reference pool contains 2,657 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28479,6 +28491,10 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `thm-recursion` | Frontier-22 finite-sum/recursion audit 2026-09-11: the least closed relation is set-sized, induction proves totality, deletion proves functionality, and induction proves uniqueness without choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-sum-recursion-audit.md`. |
+| `def-finite-sum` | Frontier-22 finite-sum/recursion audit 2026-09-11: product-valued recursion carries the running index, induction identifies it, and recursion uniqueness defines real finite sums/products including empty values. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-sum-recursion-audit.md`. |
+| `lem-finite-sum-laws` | Frontier-22 finite-sum/recursion audit 2026-09-11: universal property induction and trailing-length induction prove additivity, scaling, splitting, monotonicity, telescoping and product laws with all zero cases. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-sum-recursion-audit.md`. |
+| `def-interval` | Frontier-22 finite-sum/recursion audit 2026-09-11: the nine forms have the stated convexity, boundedness and degeneracy; midpoint and explicit unboundedness witnesses handle the nontrivial clauses. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-sum-recursion-audit.md`. |
 | `def-ordered-field` | Frontier-22 ordered-field foundation audit 2026-09-11: positive-cone trichotomy and closure induce the stated strict total order and its non-strict extension. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ordered-field-foundation-audit.md`. |
 | `def-complete-ordered-field` | Frontier-22 ordered-field foundation audit 2026-09-11: the nonempty bounded-above LUB property has the correct scope; negating a nonempty bounded-below set gives the stated infimum dual without selection. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ordered-field-foundation-audit.md`. |
 | `def-abs-value` | Frontier-22 ordered-field foundation audit 2026-09-11: trichotomy makes the two displayed branches exhaustive and compatible at zero. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ordered-field-foundation-audit.md`. |
