@@ -19,7 +19,25 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: conditional-expectation integral propagation
+## Latest checkpoint: active martingale integral propagation
+
+Evidence:
+`research/phase-2-frontier-22-published-active-martingale-integral-propagation-audit.md`.
+
+Five old bounded clears and one U-P item enter A-P on the exact path from Fatou,
+reverse Fatou and the integral triangle inequality through DCT, conditioning a
+known or independent variable, and taking out what is known. Their visible
+arguments are sound after the common finite zero-complement integral repair;
+Fatou also has a misplaced proof citation/terminator. Active martingale impact
+was reported immediately, with no new pair needed.
+
+Post-batch target index remains 2,832 unique published IDs; U-P 1,385, U-C 0,
+A-R 187, A-P 257 and 1,003 bounded clears; 13,098 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks must be rerun before commit. Next target is any new exact reviewer
+handoff, then the next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: conditional-expectation integral propagation
 
 Evidence:
 `research/phase-2-frontier-22-published-conditional-expectation-propagation-audit.md`.
