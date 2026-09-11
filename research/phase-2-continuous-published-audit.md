@@ -842,8 +842,8 @@ blocker. Counts are now 2,517 unique published IDs: U-P 1,413, U-C 15, A-R
 
 ## Current checkpoint — 2026-09-11
 
-The canonical ledger has since reached 2,627 unique published IDs: U-P 1,410,
-U-C 0, A-R 188, A-P 207 and 822 bounded clears. The set-semantics batch
+The canonical ledger has since reached 2,629 unique published IDs: U-P 1,410,
+U-C 0, A-R 188, A-P 207 and 824 bounded clears. The set-semantics batch
 fully reads relativization and arbitrary-signature soundness together with
 their six direct interfaces. Guarded formula induction, set-sized truth-set
 recursion, free-for substitution, coincidence and all six axiom/three rule
@@ -868,8 +868,12 @@ trivializing subcovers from the arbitrary bundle covers uses countable choice
 under the library's ZF convention. One exact published consumer enters U-P;
 eight supporting interfaces are clear. Four current connection/tensor drafts
 use the affected existence clause and their no-choice claims were reported to
-the supervising worker immediately. Existing published suppliers suffice for
-repair; no new pair is needed. Evidence:
+the supervising worker immediately. A complete choice-free local repair now
+uses the open quotient of the finite-product subspace of source frames and
+image tuples; images of its countable base form a quotient base. The repair is
+authorized for the drafts, so no live mathematical blocker remains. The
+published proof stays A-P until repaired. Existing published suppliers suffice;
+no new pair is needed. Evidence:
 `research/phase-2-frontier-22-published-dual-hom-bundle-audit.md`.
 
 The vector-field bracket batch adds six clear IDs and moves the derivation-to-
@@ -887,6 +891,13 @@ exact derivative-algebra ID, so that supplier's separate alias collision does
 not propagate. No current Step-5 blocker was found. Evidence:
 `research/phase-2-frontier-22-published-general-leibniz-audit.md`.
 
+The supplied-projective-resolution datum and fixed-resolution Ext definition
+add two bounded clears. The datum is explicit extra structure, the Hom
+differential has the correct degree and squares to zero, and the subscript
+retains dependence on the supply without importing choice or resolution
+independence. No current Step-5 blocker was found. Evidence:
+`research/phase-2-frontier-22-published-supplied-projective-ext-audit.md`.
+
 The canonical adequate-implicit-use rule remains mandatory: a sound implicit
 use of an adequate published supplier is a bounded clear, even when a repeated
 direct dependency edge would improve exposition. Every future addition must be
@@ -900,9 +911,9 @@ supplier IDs, and each published ID must retain exactly one classification row.
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
    next examining the cover-small chain-homotopy and smooth-bundle transition
-   interfaces, then audit bounded samples outside the 2,627-ID index.
+   interfaces, then audit bounded samples outside the 2,629-ID index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,303 published items
+No exhaustive discovery claim is authorized while 13,301 published items
 remain outside the index and dependency interfaces remain unaudited.

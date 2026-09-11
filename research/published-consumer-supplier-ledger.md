@@ -8,6 +8,19 @@ Current classifications: U-P 1410, U-C 0, A-R 188, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Supplied-projective Ext audit — 2026-09-11
+
+Two previously unclassified UCT interfaces are bounded clear. A supplied
+projective-resolution datum is explicitly objectwise extra structure and makes
+no existence or canonical-choice claim. Precomposition with the homological
+differential gives the correctly graded Hom cochain differential, and its
+square is zero. The notation `Ext_P` deliberately records the supplied choice
+and does not claim resolution independence or equality with injective Ext.
+This exact fixed-resolution definition remains available to the published UCT
+repair without erasing that consumer's separate debt. No current Step-5 blocker
+was found. Exact hashes, deduplication and limits are in
+`research/phase-2-frontier-22-published-supplied-projective-ext-audit.md`.
+
 ## General Leibniz audit — 2026-09-11
 
 Four previously unclassified active Fourier-calculus interfaces are bounded
@@ -42,14 +55,17 @@ from arbitrary original bundle charts to smooth total-space atlases without
 constructing the topology or proving second countability. The published cocycle
 construction requires a supplied countable cover; obtaining countable
 trivializing subcovers from the given covers uses countable choice under the
-library's ZF convention. Add that contract and the existing Lindelof, cocycle,
-smooth-inversion and bundle-gluing suppliers. No new pair is needed.
+library's ZF convention. A complete choice-free repair is now planned: use the
+open quotient of the finite-product subspace of source frames and image tuples,
+whose countable base descends through the open quotient. Existing topology,
+cocycle and smooth-inversion suppliers suffice; no new pair is needed.
 
 The one published Hom-section consumer enters U-P through that exact existence
 clause; its local matrix proof is sound. Eight algebraic and gluing interfaces
 are bounded clear. Four current connection/tensor drafts cite the affected
-clause and their no-choice claims were reported to the supervising worker for
-Step-5 repair. Exact hashes, clauses, supplier states, deduplication and limits
+clause. The supervising worker authorized the choice-free construction for
+local Step-5 repair, so no live mathematical blocker remains; the published
+finding stays open. Exact hashes, clauses, supplier states, deduplication and limits
 are in `research/phase-2-frontier-22-published-dual-hom-bundle-audit.md`.
 
 ## Cover-small chain-homotopy audit — 2026-09-11
@@ -28308,11 +28324,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,627 unique
+subsequently reconciled published IDs. It currently contains **2,629 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,627 indexed IDs are published; **13,303 published items remain outside this
+2,629 indexed IDs are published; **13,301 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28326,9 +28342,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 188 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 207 | Recorded direct review and an unresolved item-specific repair. |
 
-822 further reference-pool items have bounded no-repair-needed dispositions
+824 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,805 items and the expanded reference pool contains 2,627 unique items.
+1,805 items and the expanded reference pool contains 2,629 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28389,6 +28405,8 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-ext-via-a-projective-resolution-of-the-first-variable` | Frontier-22 supplied-projective Ext audit 2026-09-11: precomposition has the correct cochain degree and squares to zero; `Ext_P` explicitly retains the supplied datum and claims no resolution independence. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-supplied-projective-ext-audit.md`. |
+| `def-supplied-projective-resolution-datum` | Frontier-22 supplied-projective Ext audit 2026-09-11: the objectwise displayed resolutions are extra structure and do not assert global existence, canonical selection or a hidden choice function. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-supplied-projective-ext-audit.md`. |
 | `thm-general-leibniz-rule` | Frontier-22 general-Leibniz audit 2026-09-11: finite-sum differentiation, one index shift, Pascal's rule and the two coefficient-one boundary terms prove the formula for every natural order. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-general-leibniz-audit.md`. |
 | `def-higher-derivatives-and-smoothness` | Frontier-22 general-Leibniz audit 2026-09-11: zero order, recursive derivatives, interval endpoint one-sided derivatives and `C^k` continuity are coherently distinguished. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-general-leibniz-audit.md`. |
 | `def-binomial-coefficient` | Frontier-22 general-Leibniz audit 2026-09-11: finite subset families define natural coefficients and give the zero, diagonal and out-of-range values used by the derivative induction. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-general-leibniz-audit.md`. |
@@ -29267,7 +29285,7 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
-| `thm-dual-and-hom-transition-functions-define-smooth-bundles` | Frontier-22 dual/Hom audit 2026-09-11: inverse-transpose and conjugation formulas are correct, but proof 2.1 neither constructs the fibrewise-union topology nor proves the new total spaces second countable. The published cocycle construction requires a supplied countable cover, while extracting countable common trivializing subcovers from arbitrary bundle covers uses `AC_omega` under the library's ZF convention. Add that hypothesis and declare the published Lindelof, cocycle, smooth-inversion and cocycle-gluing suppliers; identify quotient fibres with the stated fibrewise sets. New A-P; no new pair. Exact hash/current draft impacts/scope: `research/phase-2-frontier-22-published-dual-hom-bundle-audit.md`. |
+| `thm-dual-and-hom-transition-functions-define-smooth-bundles` | Frontier-22 dual/Hom audit 2026-09-11: inverse-transpose and conjugation formulas are correct, but proof 2.1 neither constructs the fibrewise-union topology nor proves the new total spaces second countable. The published cocycle route needs a supplied countable cover and hence `AC_omega` to extract subcovers here. A later complete choice-free strategy instead takes the open quotient of the second-countable finite-product subspace of source frames and image tuples; local coordinates are `(p,C,V)->(p,VC^(-1))`, and images of a countable domain base form a quotient base. Inline that proof and declare the exact topology/smooth-inversion interfaces. New A-P; no new pair, and active drafts have an authorized local repair. Exact hash/plan/scope: `research/phase-2-frontier-22-published-dual-hom-bundle-audit.md`. |
 | `lem-normalizing-a-locally-finite-positive-smooth-family` | Manifold-null/normalization audit 2026-09-11: the conclusion calls `(supp(g_i))` an open cover for subordination, but supports are closed and the exact partition definition requires an open cover. Supply `(U_i)` with `supp(g_i) subset U_i`, use equality of cozero sets/supports after positive division, and prove reciprocal smoothness from earlier smooth algebra/composition. U-C to A-P; active consumers use the valid formula with actual open-cover containment. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
 | `lem-c1-local-diffeomorphisms-preserve-null-sets-locally` | Manifold-null/normalization audit 2026-09-11: compact-local Lipschitz restrictions do not by themselves globalize to every subset of one neighbourhood or meet the whole-domain Lipschitz theorem, and the proof presupposes unqualified nullity while supplying atlas independence. Restate chartwise and use nested cubes plus coordinate clamps for global Lipschitz extensions in both directions. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
 | `prop-the-null-set-definition-is-independent-of-the-smooth-atlas` | Manifold-null/normalization audit 2026-09-11: proof 1.1 uses the already-A-P coordinate-ball cover, selects one containing source chart for each countable ball, and proof 3.1 uses CC-qualified countable null unions, but no choice hypothesis/suppliers are stated. Add `AC_omega`, retain cover witnesses and use chartwise clamped transition maps rather than the affected local-diffeomorphism conclusion. U-C to A-P; no new pair/current blocker. Exact hash/path: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |

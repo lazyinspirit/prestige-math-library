@@ -51,14 +51,28 @@ from the second-countable base uses the published, countable-choice-qualified
 charts alone does not establish second countability of the new total spaces.
 
 This is a proof/prerequisite gap; no independence or necessity claim is made.
-Repair by adding and declaring `def-countable-choice`, taking countable
-subcovers of the common refinement of the `E` and `F` trivializing covers,
-checking the induced cocycles, and applying
-`thm-vector-bundle-construction-from-a-smooth-cocycle`. Declare
-`lem-matrix-inversion-preserves-ck-regularity` for the smooth inverse matrices.
-Identify the quotient cocycle fibres canonically with the fibrewise dual and
-Hom sets. All named suppliers are already published, so no new Phase-2 pair is
-needed.
+One repair is to add `def-countable-choice`, take countable subcovers of the
+common refinement of the `E` and `F` trivializing covers, check the induced
+cocycles, and apply `thm-vector-bundle-construction-from-a-smooth-cocycle`.
+Declare `lem-matrix-inversion-preserves-ck-regularity` for the smooth inverse
+matrices and identify the quotient cocycle fibres with the stated fibrewise
+sets.
+
+A subsequent active-frontier audit supplied a complete choice-free alternative
+in `research/phase-2-next-20-hom-bundle-local-repair-plan.md`. For positive
+source rank `r`, let `D` be the subspace of `E^r times F^r` consisting of a
+common-base-point source frame and arbitrary image tuple. Finite products of
+one supplied countable basis of each total space give `D` a countable basis.
+The surjection `q:D -> Hom(E,F)` sends a frame/image tuple to its unique linear
+map. In common local trivializations it is
+`(p,C,V) -> (p,V C^(-1))`, an open quotient after a homeomorphism and coordinate
+projection. Images of the countable `D`-basis form a countable basis of the
+quotient. These quotient charts are Hausdorff and have the correct smooth
+conjugation changes; zero ranks are separate canonical bundles. This route
+needs no simultaneous frame selection or choice axiom. It can be inlined in
+the published theorem using existing elementary topology, bundle and smooth-
+matrix interfaces. All suppliers needed by either repair route are published,
+so no new Phase-2 pair is needed.
 
 `prop-sections-of-hom-are-the-same-as-smooth-fibrewise-linear-maps` directly
 uses the affected smooth Hom-bundle existence clause. Its local matrix
@@ -68,10 +82,12 @@ choice contract is propagated or a choice-free construction is supplied.
 
 The same clause is live in the current draft definitions of a connection and
 dual connection, the draft difference-of-connections proposition and the
-draft finite tensor-product lemma. Those drafts currently state that no choice
-is used. Their owner was notified immediately to add the inherited countable
-choice contract or supply a complete choice-free construction before Step-5
-acceptance. Draft IDs are not entered in the published-item index.
+draft finite tensor-product lemma. The supervising worker authorized the
+choice-free construction above to be installed locally after the live Step-5b
+lead exits. Thus the published A-P gap remains open, but there is no unresolved
+current-frontier mathematical prerequisite once that local proof is recorded.
+Draft IDs are not entered in the published-item index, and a draft repair does
+not close this published finding.
 
 ## Bounded clears
 
