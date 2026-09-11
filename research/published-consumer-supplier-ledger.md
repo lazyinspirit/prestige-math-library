@@ -4,9 +4,27 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1412, U-C 15, A-R 187, A-P 192. The
+Current classifications: U-P 1411, U-C 15, A-R 187, A-P 192. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Kac--Moody construction-interface audit — 2026-09-11
+
+The ten published interfaces from finite GCM realizations through the largest
+Cartan-disjoint quotient have bounded-clear dispositions after complete target
+and exact used-supplier review. Finite elimination constructs and compares
+minimal realizations; unique simple-root coordinates define the grading; the
+countable PBW normal form and free-Lie universal property are choice-free; a
+tensor-module representation proves the triangular decomposition; and finite
+Cartan interpolation makes every ideal graded, so the algebraic sum of all
+Cartan-disjoint ideals is still disjoint and largest.
+
+Nine IDs are new to the index. The universal-enveloping-algebra definition
+moves from its single U-P row to bounded clear: its older Casimir appearance is
+an adequate-supplier mapping, not a defect in the tensor-quotient definition.
+No active Kac--Moody construction blocker or new pair was found. Exact hashes,
+deduplication and audit limits are in
+`phase-2-frontier-22-published-kac-moody-construction-audit.md`.
 
 ## Set-sized and setlike recursion audit — 2026-09-11
 
@@ -28067,11 +28085,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,527 unique
+subsequently reconciled published IDs. It currently contains **2,536 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,527 indexed IDs are published; **13,403 published items remain outside this
+2,536 indexed IDs are published; **13,394 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28080,14 +28098,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1412 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1411 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 15 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 192 | Recorded direct review and an unresolved item-specific repair. |
 
-721 further reference-pool items have bounded no-repair-needed dispositions
+731 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,806 items and the expanded reference pool contains 2,527 unique items.
+1,805 items and the expanded reference pool contains 2,536 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28148,6 +28166,16 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-realization-of-a-generalized-cartan-matrix` | Frontier-22 Kac--Moody construction audit 2026-09-11: full definition read. Independent indexed roots/coroots, evaluation convention, minimal dimension and realization isomorphisms are coherent. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-kac-moody-construction-audit.md`. |
+| `prop-minimal-realizations-exist-and-are-unique-up-to-isomorphism` | Frontier-22 Kac--Moody construction audit 2026-09-11: finite elimination complements the row image, proves the dimension lower bound and constructs the comparison isomorphism through finite linear sections. No arbitrary choice is used. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-kac-moody-construction-audit.md`. |
+| `def-kac-moody-root-lattice-height-and-positive-cone` | Frontier-22 Kac--Moody construction audit 2026-09-11: simple-root independence gives unique coordinates, so height, the positive cone and the induced partial order are well defined. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-kac-moody-construction-audit.md`. |
+| `def-universal-enveloping-algebra-as-a-tensor-quotient` | Frontier-22 Kac--Moody construction audit 2026-09-11: full definition read. The tensor quotient by `xy-yx-[x,y]` is coherent and supplies the exact universal relation used by the countable PBW/free-Lie chain. Its older Casimir repair-map occurrence is supplier evidence, not a defect on this definition. U-P to bounded clear. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-kac-moody-construction-audit.md`. |
+| `lem-pbw-for-countably-presented-kac-moody-lie-algebras` | Frontier-22 Kac--Moody construction audit 2026-09-11: full proof read. Length/inversion reduction terminates, the only overlap is Jacobi, and normal forms prove ordered-word independence. Fixed scans and finite row reduction give compatible homogeneous bases without arbitrary choice. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-kac-moody-construction-audit.md`. |
+| `lem-free-lie-construction-for-finite-kac-moody-generators` | Frontier-22 Kac--Moody construction audit 2026-09-11: recursive bracket evaluation proves the universal property; the mutually inverse enveloping/tensor maps and exact PBW injectivity identify the free Lie algebra inside the tensor algebra. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-kac-moody-construction-audit.md`. |
+| `def-contragredient-lie-algebra-before-the-maximal-ideal-quotient` | Frontier-22 Kac--Moody construction audit 2026-09-11: the homogeneous free-Lie quotient imposes exactly the Cartan/simple-generator relations; Cartan injectivity and freeness of the halves are correctly deferred to the later triangular proposition. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-kac-moody-construction-audit.md`. |
+| `prop-contragredient-algebra-has-a-triangular-decomposition` | Frontier-22 Kac--Moody construction audit 2026-09-11: full tensor-module proof read. Vacuum evaluation proves Cartan and free-half injectivity, bracket induction gives spanning, and degree separation gives the direct graded decomposition. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-kac-moody-construction-audit.md`. |
+| `lem-the-sum-of-triangularly-disjoint-graded-ideals-is-disjoint-from-h` | Frontier-22 Kac--Moody construction audit 2026-09-11: finite Cartan polynomial projections make every ideal graded; finite algebraic sums remain Cartan-disjoint, and degree/sign arguments split the unique largest ideal into positive and negative ideals. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-kac-moody-construction-audit.md`. |
+| `def-kac-moody-algebra-associated-to-a-gcm` | Frontier-22 Kac--Moody construction audit 2026-09-11: the quotient by the largest Cartan-disjoint ideal is well defined; disjointness embeds the Cartan, maximality descends the sign involution and forces every nonzero quotient ideal to meet the Cartan. No simplicity is inferred. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-kac-moody-construction-audit.md`. |
 | `def-initial-segment` | Frontier-22 set-recursion audit 2026-09-11: full definition read. Downward closure, principal proper initial segments, nesting and inherited well-order clauses are proved from the exact least-element/order interface used by transfinite induction and recursion. Its alias has no classification row. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-set-recursion-audit.md`. |
 | `thm-transfinite-induction` | Frontier-22 set-recursion audit 2026-09-11: full theorem read. The least counterexample in a supplied well-order proves the progressive property everywhere; no witness family or choice principle is used. Its alias has no classification row. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-set-recursion-audit.md`. |
 | `thm-transfinite-recursion` | Frontier-22 set-recursion audit 2026-09-11: full proof and exact induction/initial-segment uses read. Uniqueness makes every stage attempt functionally specified; Separation, Replacement and Union collect and assemble them, including the least-stage and full-domain cases. No Choice is hidden. Its alias has no classification row. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-set-recursion-audit.md`. |
@@ -29581,7 +29609,6 @@ mathematical repairs. Evidence:
 | `def-turing-degree-and-degree-order` | 51. Exact live-plan metadata resynchronization set |
 | `def-turing-jump` | 51. Exact live-plan metadata resynchronization set |
 | `def-turing-reducibility-and-equivalence` | 51. Exact live-plan metadata resynchronization set |
-| `def-universal-enveloping-algebra-as-a-tensor-quotient` | Exact Phase-3 published repairs |
 | `def-universal-turing-machine` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-veronese-map` | AV-1 draft-page impact partition (Phase 3 only) |
 | `def-virtual-character-and-character-ring-of-a-finite-group` | Transitive consumers (166), grouped by home page |

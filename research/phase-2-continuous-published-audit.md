@@ -19,7 +19,26 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: set-recursion audit
+## Latest checkpoint: Kac--Moody construction audit
+
+Evidence:
+`research/phase-2-frontier-22-published-kac-moody-construction-audit.md`.
+
+The ten-item published construction chain from finite GCM realizations through
+the largest Cartan-disjoint quotient is bounded clear. Finite elimination,
+countable PBW rewriting, the free-Lie universal property, the tensor-module
+triangular decomposition and finite Cartan spectral interpolation provide the
+exact used clauses without arbitrary choice. Nine IDs are new to the index;
+`def-universal-enveloping-algebra-as-a-tensor-quotient` moves from U-P because
+its historical Casimir occurrence is a supplier mapping rather than a defect.
+
+Post-batch target index: 2,536 unique published IDs; U-P 1,411, U-C 15,
+A-R 187, A-P 192 and 731 bounded clears. Recount and cross-class deduplication
+must be rerun before commit. Next targets are the already-read local continuity
+interfaces and then the next exact author handoff. Later Kac--Moody Serre,
+root-space, integrability and representation clauses remain outside this clear.
+
+## Completed checkpoint: set-recursion audit
 
 Evidence: `research/phase-2-frontier-22-published-set-recursion-audit.md`.
 
