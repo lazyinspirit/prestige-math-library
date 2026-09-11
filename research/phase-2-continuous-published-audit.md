@@ -19,7 +19,25 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: real-power and convexity calculus
+## Latest checkpoint: conditional-variance propagation
+
+Evidence:
+`research/phase-2-frontier-22-published-conditional-variance-propagation-audit.md`.
+
+Six new IDs and one old bounded clear enter A-P along the exact path from
+expectation/moments through conditional variance, its second-moment formula,
+variance decomposition and two finite `L^2` examples. The formulas and
+calculations are sound after the common integral/conditional repair. Active
+predictable-quadratic-variation drafts use a separate squared-increment route,
+so this adds no frontier blocker or pair.
+
+Post-batch target index: 2,869 unique published IDs; U-P 1,382, U-C 0,
+A-R 187, A-P 275 and 1,025 bounded clears; 13,061 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks must be rerun before commit. Next target is any new exact reviewer
+handoff, then the next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: real-power and convexity calculus
 
 Evidence:
 `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`.

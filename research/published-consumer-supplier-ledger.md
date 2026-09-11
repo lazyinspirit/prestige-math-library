@@ -4,9 +4,19 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1382, U-C 0, A-R 187, A-P 268. The
+Current classifications: U-P 1382, U-C 0, A-R 187, A-P 275. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Conditional-variance propagation audit — 2026-09-11
+
+Six new IDs and one prior bounded clear enter A-P along the exact path from
+expectation and moments through conditional variance, its second-moment formula,
+variance decomposition and two finite `L^2` examples. Their formulas and
+calculations are sound after the common integral/conditional repair. Active
+predictable-quadratic-variation drafts use a separate explicit squared-increment
+route, so this adds no frontier blocker or pair. Exact evidence:
+`research/phase-2-frontier-22-published-conditional-variance-propagation-audit.md`.
 
 ## Real-power and convexity-calculus audit — 2026-09-11
 
@@ -29320,7 +29330,6 @@ The separate page-header cutover obligations remain in their category sections.
 | `thm-change-of-variables-for-expectation` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: simple-law identity plus MCT proves the nonnegative formula, and absolute integrability with real/imaginary decomposition proves the signed and complex formulas. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
 | `thm-independent-random-elements-have-product-joint-law` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: full proof read. Tuple measurability, rectangle factorization and finite product-measure uniqueness identify the joint law. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
 | `lem-measurable-functions-preserve-independence` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: full proof read. Pullback of every finite measurable rectangle is exactly the original independence criterion. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
-| `def-expectation-of-a-nonnegative-or-integrable-random-variable` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: full definition read. Extended expectation is confined to nonnegative variables; signed and complex expectations require integrability, avoiding infinity subtraction. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
 | `thm-weak-global-dimension-is-detected-by-tor-and-is-left-right-symmetric` | Root bounded dependency review, 2026-09-09 15:46 UTC: full target and opposite-ring/weak-dimension definitions read; flat-dimension criterion, balance and tensor interfaces checked. Existing DC and supplied resolutions suffice, including the zero-ring case. No published edit or new prerequisite. Exact supplier IDs and current acceptance hashes are in phase-2-catchup-24-cyclic-tor-root-repair.md and the item review JSON. U-P to bounded clear; not a repair, independent judgment or whole-library certification. |
 
 Root review on 2026-09-09: read the complete polynomial-bump primitive
@@ -30004,6 +30013,13 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `def-expectation-of-a-nonnegative-or-integrable-random-variable` | Frontier-22 conditional-variance audit 2026-09-11: The nonnegative and finite signed/complex cases are correctly separated, but both use the affected Lebesgue integral. Clear to A-P; prior characteristic-function receipt retained. Apply the common integral/conditional repair; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-conditional-variance-propagation-audit.md`. |
+| `def-moments-variance-and-covariance` | Frontier-22 conditional-variance audit 2026-09-11: Absolute moments, means, variance and covariance use affected expectation; square-integrability adequately supplies product integrability. New A-P. Apply the common integral/conditional repair; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-conditional-variance-propagation-audit.md`. |
+| `def-conditional-variance` | Frontier-22 conditional-variance audit 2026-09-11: The squared-residual class uses affected conditional-class, contraction and taking-out interfaces; its stated well-definedness obligation is correctly assigned to the next lemma. New A-P. Apply the common integral/conditional repair; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-conditional-variance-propagation-audit.md`. |
+| `lem-conditional-variance-is-well-defined-and-has-the-second-moment-formula` | Frontier-22 conditional-variance audit 2026-09-11: Residual-square integrability, representative independence and expansion use affected contraction, `L2` Cauchy--Schwarz, ae event integrals, taking-out, algebra and known-variable clauses. The finite-product checks are complete. New A-P. Apply the common integral/conditional repair; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-conditional-variance-propagation-audit.md`. |
+| `cor-conditional-variance-decomposition` | Frontier-22 conditional-variance audit 2026-09-11: The expectation calculation uses the affected second-moment formula, expectation preservation and ordinary variance definition; its algebra is correct after repair. New A-P. Apply the common integral/conditional repair; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-conditional-variance-propagation-audit.md`. |
+| `ex-law-of-total-variance` | Frontier-22 conditional-variance audit 2026-09-11: The four-atom calculations are correct, but the example invokes affected known/independent conditioning, conditional variance and decomposition. New A-P. Apply the common integral/conditional repair; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-conditional-variance-propagation-audit.md`. |
+| `ex-l2-best-prediction-by-conditional-expectation` | Frontier-22 conditional-variance audit 2026-09-11: The orthogonal error identity and four-atom calculation are correct, but the example invokes the affected `L2` projection and conditional class. New A-P. Apply the common integral/conditional repair; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-conditional-variance-propagation-audit.md`. |
 | `thm-conditional-fatou-and-dominated-convergence` | Frontier-22 conditional-analysis audit 2026-09-11: conditional Fatou uses affected conditional MCT/order; its two-sided dominated argument and `L1` conclusion use affected conditional algebra and DCT. The common conditional dominator makes the almost-sure proof valid after repair. New A-P; no distinct frontier blocker or new pair. Exact hash/path: `research/phase-2-frontier-22-published-conditional-analysis-consequences-audit.md`. |
 | `thm-uniform-integrability-of-conditional-expectations-of-one-variable` | Frontier-22 conditional-analysis audit 2026-09-11: the tail estimate uses the affected conditional class/modulus/event integral and the affected absolute-continuity theorem. It makes no simultaneous version choice over all sigma-algebras. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-conditional-analysis-consequences-audit.md`. |
 | `cor-conditional-lp-contraction` | Frontier-22 conditional-analysis audit 2026-09-11: finite `p` uses affected conditional Jensen, finite-measure embedding and `L^p` carrier/quotient; infinity uses affected conditional order/class well-definedness. The norm inequalities are correct after repair. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-conditional-analysis-consequences-audit.md`. |
