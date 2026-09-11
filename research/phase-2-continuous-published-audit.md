@@ -547,6 +547,18 @@ topology/group supplier. Counts are now 2,502 unique published IDs: U-P 1,413,
 U-C 15, A-R 187, A-P 190 and 697 bounded clears; 13,428 remain outside the
 index. Evidence: `research/phase-2-next-20-published-hg-planar-filling-audit.md`.
 
+The finite-Weyl author has now produced four fully read draft suppliers for
+the existing root-structure, highest-weight, character and harmonic findings.
+The Cartan/root-string lemma supplies the exact mathematical repairs for six
+existing A-P rows; the finite PBW/highest-weight lemma supplies the published
+classification gap; the character lemma supplies the exact unitriangular
+premise; and the harmonic-complement lemma supplies its degreewise complement
+branch. All four remain unpublished and unreviewed. The Kostant decomposition
+file is still absent and filtered lifting remains required, so no published
+finding closes and no classification/count changes. Nine existing ledger rows
+were extended after exact-ID/mechanism/supplier deduplication. Evidence:
+`research/phase-2-next-20-published-finite-weyl-draft-supplier-map.md`.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface

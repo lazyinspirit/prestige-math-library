@@ -131,6 +131,17 @@ close or reclassify the published Killing proposition. Phase 3 should replace
 its unsupported proof 2.1 by the accepted/published lemma (or the same full
 argument), with the definition strictly earlier. No new page pair is needed.
 
+The subsequent draft
+`lem-finite-semisimple-cartan-root-and-string-structure`, SHA-256
+`dfe98901546beaac4fcdd72678c2e6979496a00b1a54ed87c36a2f9421db6479`,
+now carries this local repair through the full Cartan decomposition,
+opposite-root pairing, root brackets, rank-one triples, root strings and
+reduced crystallographic root-system conclusions. Its exact six-target map is
+recorded in
+`research/phase-2-next-20-published-finite-weyl-draft-supplier-map.md`. Because
+the whole replacement chain remains draft and unreviewed, all existing
+published A-P rows remain open.
+
 The next three published root-chain items were also read because they feed the
 already-A-P root-system theorem.
 
