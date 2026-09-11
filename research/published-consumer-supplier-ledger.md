@@ -4,9 +4,19 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1403, U-C 0, A-R 187, A-P 230. The
+Current classifications: U-P 1400, U-C 0, A-R 187, A-P 230. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Finite-measure uniqueness audit — 2026-09-11
+
+One new item and three U-P targets are bounded clears. The non-unital pi-system
+convention, finite measure-difference cases, increasing-union disjointification
+and equality-class lambda-system argument are sound. The separate total-mass
+hypothesis exactly handles a generating pi-system that need not contain the
+whole space. This supplies the current product-measure pullback without a
+frontier blocker. Evidence:
+`research/phase-2-frontier-22-published-finite-measure-uniqueness-audit.md`.
 
 ## Density and null-integral propagation audit — 2026-09-11
 
@@ -28676,11 +28686,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,740 unique
+subsequently reconciled published IDs. It currently contains **2,741 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,740 indexed IDs are published; **13,190 published items remain outside this
+2,741 indexed IDs are published; **13,189 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28689,14 +28699,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1403 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1400 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 230 | Recorded direct review and an unresolved item-specific repair. |
 
-920 further reference-pool items have bounded no-repair-needed dispositions
+924 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,820 items and the expanded reference pool contains 2,740 unique items.
+1,817 items and the expanded reference pool contains 2,741 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28757,6 +28767,10 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-pi-system` | Frontier-22 finite-measure uniqueness audit 2026-09-11: nonempty binary-intersection closure is coherent and deliberately does not require the whole space. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-measure-uniqueness-audit.md`. |
+| `prop-measure-of-a-set-difference` | Frontier-22 finite-measure uniqueness audit 2026-09-11: disjoint additivity gives the sum formula; finite real cancellation and the separate infinite-total case avoid undefined extended subtraction. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-measure-uniqueness-audit.md`. |
+| `thm-continuity-from-below-for-measures` | Frontier-22 finite-measure uniqueness audit 2026-09-11: successive differences disjointify the union; either an infinite stage settles both sides or finite partial sums telescope to the extended-series supremum. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-measure-uniqueness-audit.md`. |
+| `lem-finite-measure-uniqueness-on-a-pi-system` | Frontier-22 finite-measure uniqueness audit 2026-09-11: equality sets form a lambda-system by finite difference and increasing-union continuity; pi-lambda then gives equality on the generated sigma-algebra. The whole-space mass hypothesis correctly compensates for the non-unital pi-system convention. U-P to bounded clear; active pullback use is adequate. Exact hash/scope: `research/phase-2-frontier-22-published-finite-measure-uniqueness-audit.md`. |
 | `lem-extended-reals-complete` | Frontier-22 nonnegative-integral audit 2026-09-11: the exhaustive top/empty-real/bounded-real/unbounded-real cases and their duals prove extended suprema and infima, and the bounded-real agreement clause used by the probability-algebra draft is sound. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
 | `def-simple-integral-against-a-signed-or-complex-measure` | Frontier-22 total-variation consumer audit 2026-09-11: unique nonzero level sets and finite variation make every finite displayed sum well defined; a one-piece partition gives the needed value bound without countable additivity. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-total-variation-consumer-audit.md`. |
 | `thm-l-one-functions-admit-dominated-complex-simple-approximations` | Frontier-22 total-variation consumer audit 2026-09-11: four supplied monotone simple approximations need only finite choice; componentwise MCT and the modulus bound give dominated complex `L^1` convergence. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-total-variation-consumer-audit.md`. |
@@ -30920,7 +30934,6 @@ mathematical repairs. Evidence:
 | `lem-finite-dimensional-axiomatic-homology-has-finite-subcomplex-support` | Continuing personal audit pool, now extended by AT6 compact-CW choice impact 2026-09-11: proof 2.1 invokes the affected compact-image corollary for closures of finitely many support cells. A choice-free local repair is immediate from CW closure finiteness: those finitely many closures already meet only finitely many cells and form a finite subcomplex. Exact hash/path/scope: `research/phase-2-next-20-published-cw-compactness-choice-audit.md`; retain the earlier AT-24 contract context. |
 | `lem-finite-dot-orbit-weight-spaces-detect-o-subquotients` | Supplier-to-published-consumer map |
 | `lem-finite-evaluations-separate-from-a-dual-subspace` | norming-and-separation-under-hahn-banach |
-| `lem-finite-measure-uniqueness-on-a-pi-system` | Completed-measurable change of variables |
 | `lem-finite-modules-over-noetherian-rings-are-noetherian` | Existing published suppliers consumed by published Complex Analysis |
 | `lem-finite-products-of-standard-borel-spaces-are-standard-borel` | 0A.2 Exact Phase-3 defects in published content |
 | `lem-finite-refining-small-diameter-covers-of-compact-metric-spaces` | Early-repair direct-consumer inventory — 2026-09-08 |
@@ -31121,7 +31134,6 @@ mathematical repairs. Evidence:
 | `prop-maximal-plane-triangulation-characterisation` | Scaffold III.4.1 — plane dual dependency |
 | `prop-maximally-planar-edge-characterisation` | Scaffold III.4.1 — plane dual dependency |
 | `prop-measure-monotonicity` | 0A.2 Exact Phase-3 defects in published content |
-| `prop-measure-of-a-set-difference` | 0A.2 Exact Phase-3 defects in published content |
 | `prop-mollifier-families-are-l-one-approximate-identities` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `prop-nc-one-is-contained-in-l-and-l-in-nc-two` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `prop-np-and-conp-are-the-first-levels` | 51. Exact live-plan metadata resynchronization set |
@@ -31330,7 +31342,6 @@ mathematical repairs. Evidence:
 | `thm-complex-representations-are-determined-by-their-characters` | Transitive consumers (166), grouped by home page |
 | `thm-computably-dominated-characterizes-truth-table-reducibility` | 51. Exact live-plan metadata resynchronization set |
 | `thm-continuity-from-above-for-measures` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
-| `thm-continuity-from-below-for-measures` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-continuity-iff-oscillation-zero` | 9.5 Forward order and load-bearing body links |
 | `thm-coprime-conjugacy-class-size-forces-zero-character-or-scalar-action` | Transitive consumers (166), grouped by home page |
 | `thm-countable-product-of-probability-spaces` | Early-repair direct-consumer inventory — 2026-09-08 |
