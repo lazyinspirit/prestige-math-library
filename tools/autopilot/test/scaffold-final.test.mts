@@ -124,6 +124,21 @@ test('every A/B item needs a decision; uncertainty escalates; owner repair bypas
   f.audit('ex-c'); assert.equal(f.check().closed, true);
 });
 
+test('owner reopen authorizes a fresh audit without certifying the repair', t => {
+  const f = fixture(t); f.scope();
+  f.audit('lem-a', { decision: 'escalate', confidence: undefined });
+  const before = step3Plan(f.ctx, { label: 'a', covers: ['1'] }, 'final').label;
+  f.record({ phase: 'item', item: 'lem-a', owner: true, decision: 'reopen', dependencies: ['lem-published'],
+    reason: 'Supply the named local lemma and preserve the original claim.' });
+  const open = f.check().work.find((w: any) => w.item === 'lem-a');
+  assert.equal(open.owner, false);
+  assert.match(open.reason, /fresh post-reopen item audit/);
+  assert.notEqual(step3Plan(f.ctx, { label: 'a', covers: ['1'] }, 'final').label, before);
+  f.audit('lem-a', { decision: 'repaired', dependencies: ['lem-published'] });
+  assert.equal(f.check().accepted, 1);
+  assert.equal(f.check().closed, false);
+});
+
 test('proof changes invalidate the item and its consumers but not scope', t => {
   const f = fixture(t); f.scope();
   for (const id of ['lem-a', 'thm-b', 'ex-c']) f.audit(id);

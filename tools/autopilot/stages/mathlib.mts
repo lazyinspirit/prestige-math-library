@@ -1536,7 +1536,19 @@ export function step3Plan(ctx: any, group: any, phase: 'scope' | 'final') {
   const pairs = [...snapshot.pairs].filter(([, ps]: any) => group.covers.map(String).includes(String(ps[0].batch)));
   const inputs = phase === 'scope'
     ? pairs.map(([id]: any) => scopeHash(snapshot, id))
-    : pairs.flatMap(([, ps]: any) => ps.flatMap((p: any) => p.items.map((i: any) => itemHash(snapshot, i.id))));
+    : [
+      ...pairs.flatMap(([, ps]: any) => ps.flatMap((p: any) => p.items.map((i: any) => itemHash(snapshot, i.id)))),
+      // Owner repair authority is itself an input to a Step-3 author call.
+      // Without it, a reopened escalation on unchanged incomplete bytes hashes
+      // to the already-finished label and the engine correctly refuses to
+      // repeat the identical call. Include both the readable direction and
+      // per-item owner receipts so a genuine reopen gets a distinct dispatch.
+      ...[
+        R(ctx, 'research', `${ctx.run}-owner-authoring-direction.md`),
+        ...pairs.flatMap(([, ps]: any) => ps.flatMap((p: any) => p.items.map((i: any) =>
+          R(ctx, 'research', `${ctx.run}-step3b-owner-${i.id}.json`)))),
+      ].filter(existsSync).map(path => readFileSync(path, 'utf8')),
+    ];
   const key = createHash('sha256').update(JSON.stringify(inputs)).digest('hex').slice(0, 16);
   const prefix = phase === 'scope' ? 'step3a' : 'step3b';
   const label = `${prefix}-${group.label}-${key}`;

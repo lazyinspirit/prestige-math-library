@@ -141,17 +141,31 @@ export function scopeDecision(s, id) {
 
 export function itemDecision(s, id) {
   const owner = receipt(s, 'item', id, true);
+  let reopenedReviewHash = null;
   if (owner) {
     if (!Array.isArray(owner.dependencies)) throw Error(`Missing dependency audit for ${id}`);
-    if (owner.sha256 !== itemHash(s, id, owner.dependencies)) return { closed: false, owner: true, decision: owner,
-      reason: `${id}: changed inputs require a current owner decision` };
-    const closed = owner.decision === 'repaired';
-    return { closed, owner: !closed, decision: owner, reason: closed ? undefined : `${id}: ${owner.reason}` };
+    if (owner.decision === 'reopen') {
+      // Reopen is authority to do the named repair, not a mathematical verdict.
+      // It deliberately survives the ensuing content change; only a fresh
+      // post-reopen author receipt can close the item.
+      if (!/^[a-f0-9]{64}$/.test(owner.reopens_review_sha256 ?? ''))
+        throw Error(`Invalid owner reopen evidence for ${id}`);
+      reopenedReviewHash = owner.reopens_review_sha256;
+    } else {
+      if (owner.sha256 !== itemHash(s, id, owner.dependencies)) return { closed: false, owner: true, decision: owner,
+        reason: `${id}: changed inputs require a current owner decision` };
+      const closed = owner.decision === 'repaired';
+      return { closed, owner: !closed, decision: owner, reason: closed ? undefined : `${id}: ${owner.reason}` };
+    }
   }
   const auditor = auditorItemCertification(s, id);
   if (auditor) return { closed: true, owner: false,
     decision: { ...auditor, decision: 'auditor-authored', owner: false, confidence: 1 } };
   const review = receipt(s, 'item', id, false);
+  if (reopenedReviewHash !== null && (!review || hash(review) === reopenedReviewHash)) return {
+    closed: false, owner: false, decision: owner,
+    reason: `${id}: owner authorized repair; a fresh post-reopen item audit is required`,
+  };
   if (review) {
     if (!Array.isArray(review.dependencies)) throw Error(`Missing dependency audit for ${id}`);
     if (review.sha256 !== itemHash(s, id, review.dependencies)) {
@@ -184,7 +198,7 @@ export function recordStep3(root, { run, phase, page, item, decision, reason, ow
   const s = loadStep3(root, run), id = phase === 'scope' ? page : item;
   if (!['scope', 'item'].includes(phase)) throw Error('phase must be scope or item');
   const allowed = phase === 'scope' ? owner ? ['proceed', 'merge', 'enrich'] : ['sufficient', 'insufficient']
-    : owner ? ['repaired', 'hold'] : ['accept', 'repaired', 'escalate'];
+    : owner ? ['repaired', 'hold', 'reopen'] : ['accept', 'repaired', 'escalate'];
   if (!allowed.includes(decision)) throw Error('Invalid decision for this role and phase');
   if (!owner && phase === 'item' && decision !== 'escalate' && confidence !== 1)
     throw Error('Less than 100% confidence requires escalation');
@@ -195,11 +209,16 @@ export function recordStep3(root, { run, phase, page, item, decision, reason, ow
     if (!pair || !checkStep3(s, 'scope').closed) throw Error('Step 3a must clear before item auditing');
     if (!Array.isArray(dependencies)) throw Error('Record the examined dependency IDs, including an explicit empty list');
     const previous = itemDecision(s, id).decision;
-    if (!owner && (previous?.owner || previous?.decision === 'escalate'))
+    if (!owner && previous?.decision !== 'reopen' && (previous?.owner || previous?.decision === 'escalate'))
       throw Error('The owner must resolve this item decision');
   }
+  const reopenedReview = phase === 'item' && owner && decision === 'reopen'
+    ? receipt(s, 'item', id, false) : null;
+  if (phase === 'item' && owner && decision === 'reopen' && reopenedReview?.decision !== 'escalate')
+    throw Error('Owner reopen requires an existing escalation receipt');
   const row = { version: 1, run, phase, target: id, decision, owner, confidence: owner ? null : confidence,
     reason, ...(phase === 'item' ? { dependencies: [...new Set(dependencies)].sort() } : {}),
+    ...(reopenedReview ? { reopens_review_sha256: hash(reopenedReview) } : {}),
     sha256: phase === 'scope' ? scopeHash(s, id) : itemHash(s, id, dependencies), at: new Date().toISOString() };
   writeFileSync(file(root, run, phase === 'scope' ? '3a' : '3b', id, owner), JSON.stringify(row, null, 2) + '\n');
   return row;

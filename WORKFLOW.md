@@ -84,6 +84,14 @@ additions/repairs; never overwrite owner-held decisions. Authors maintain
 batch-owned manifests, contracts, coverage, notes and dependency inputs. Shared
 prose/plan amendments go in the group handoff.
 
+An owner may resolve an honest Step-3 escalation by recording the item decision
+`reopen` with exact repair direction and examined dependencies. Reopen is not an
+acceptance or proof certificate: it only makes the item eligible for a fresh
+author dispatch and suppresses the earlier escalation. The item remains open
+until a later, current confidence-1 author receipt replaces it. Owner direction
+and reopen receipts are part of the author-dispatch hash, so the authorized
+repair cannot collide with the already-completed pre-direction call.
+
 Step 4 keeps its mechanical splice and snapshot. The splice permits new local
 A-page definitions/lemmas only with complete current author decisions, retained
 existing inventory/order and actual owned consumers. Other scope changes require
