@@ -2,11 +2,11 @@
 
 Date: 2026-09-12 (Australia/Sydney)
 
-The owner authorizes a fresh Step-3 author repair pass for exactly the current
-thirteen escalated original items. This direction preserves all 17 selected
-pairs, every original item ID and every promised claim. It does not approve any
-unfinished proof, waive any gate, authorize a new pair, or permit edits to
-published content.
+The owner authorizes a fresh Step-3 author repair pass for the earlier thirteen
+escalated original items and the bounded horned-sphere reopen below. This
+direction preserves all 17 selected pairs, every original item ID and every
+promised claim. It does not approve any unfinished proof, waive any gate,
+authorize a new pair, or permit edits to published content.
 
 ## Batch 5: relative Künneth interface
 
@@ -26,6 +26,43 @@ Source boundary checked by the owner: Hatcher, *Algebraic Topology*, §3.B after
 Corollary 3B.7 gives the relative CW-pair quotient-chain isomorphism and relative
 Künneth sequence; Theorems 3.15–3.18 give the cohomological comparison route.
 The existing absolute supplier is not by itself a relative theorem.
+
+## Batch 5: Alexander horned sphere
+
+Reopen
+`cex-an-alexander-horned-sphere-has-complementary-components-that-need-not-be-balls`
+for fresh Step-3 repair authoring. Preserve its original ID, spherical
+statement, non-simply-connected complementary-component claim, and AC
+assumption. On the existing A page
+`orientations-poincare-lefschetz-and-alexander-duality`, fully author and
+register `lem-horn-replacement-block-has-injective-commutator-meridian` and
+`lem-controlled-nested-horn-construction-embeds-a-closed-three-ball` before
+their consumer, with dependencies in prerequisite order.
+
+Read all three horned-sphere support packages, treating the recursive-cap-control
+package as the proposed resolution of the earlier geometric hold, not as
+certification:
+
+- `research/support-phase-2-next-17-horned-sphere.md`
+- `research/support-phase-2-next-17-horned-sphere-geometric-pillbox.md`
+- `research/support-phase-2-next-17-horned-sphere-recursive-cap-control.md`
+
+Prove the explicit cap-marked pillbox complement, transported meridian word and
+collared open-cover calculation; relative-interior cuts and cap-only
+intersections; compatible finite source/target parametrizations; quantitative
+shrinking and the finite inverse-control maps; the limiting embedded closed
+ball and its spherical boundary; injective nonabelian stage maps; compact
+nullhomotopy exclusion; and the puncturing-at-infinity passage from the
+Euclidean exterior to the spherical exterior.
+
+Reject linking-number shortcuts, uniform-convergence-only injectivity,
+unproved Schoenflies/loop-theorem imports, and unrecorded basepoint
+conjugations. Locate AC both in inherited separation/invariance-of-domain
+suppliers and any countable selection of finite homeomorphisms. Register
+complete items, manifest entries, coverage, proof contracts, and actual
+dependency inputs; refresh affected scope and item decisions. Escalate any
+remaining uncertainty. This authorizes no acceptance, new pair,
+published-content edit, or gate waiver.
 
 ## Batch 11: constructibility and formal transfer
 
