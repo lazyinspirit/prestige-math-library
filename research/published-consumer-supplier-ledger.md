@@ -4,9 +4,21 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1392, U-C 0, A-R 187, A-P 230. The
+Current classifications: U-P 1391, U-C 0, A-R 187, A-P 230. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Large-cardinal set-foundation audit — 2026-09-11
+
+Six previously unclassified interfaces and one U-P target are bounded clears.
+The Hartogs and order-type constructions use definable Replacement rather than
+choice. Ordinal addition and multiplication have the asserted asymmetric
+monotonicity and limit behavior. The club, cofinality, partition-arrow and
+root-inclusive hereditary-size definitions handle their zero, endpoint,
+finite and infinite boundary cases. These clauses adequately supply the current
+large-cardinal consumers, with no frontier blocker. Exact hashes,
+deduplication and limits:
+`research/phase-2-frontier-22-published-large-cardinal-set-foundations-audit.md`.
 
 ## Kolmogorov-extension audit — 2026-09-11
 
@@ -28697,11 +28709,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,744 unique
+subsequently reconciled published IDs. It currently contains **2,750 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,744 indexed IDs are published; **13,186 published items remain outside this
+2,750 indexed IDs are published; **13,180 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28710,14 +28722,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1392 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1391 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 230 | Recorded direct review and an unresolved item-specific repair. |
 
-935 further reference-pool items have bounded no-repair-needed dispositions
+942 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,809 items and the expanded reference pool contains 2,744 unique items.
+1,808 items and the expanded reference pool contains 2,750 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28778,6 +28790,13 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `thm-hartogs` | Frontier-22 large-cardinal set-foundation audit 2026-09-11: collecting all well-order data and applying unique order type via Replacement yields the least non-injecting ordinal without choice; its active cardinal-above-a-bound use is sound. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-large-cardinal-set-foundations-audit.md`. |
+| `thm-mostowski-collapse` | Frontier-22 large-cardinal set-foundation audit 2026-09-11: definable recursion, ordinal induction and well-order rigidity produce the unique ordinal order type and unique collapse without choice; its active order-type use is sound. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-large-cardinal-set-foundations-audit.md`. |
+| `thm-ordinal-arithmetic-monotonicity` | Frontier-22 large-cardinal set-foundation audit 2026-09-11: zero/successor/limit induction proves right strictness, left weak monotonicity, cofinal-subset continuity and preservation of limits with the stated positive-factor condition. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-large-cardinal-set-foundations-audit.md`. |
+| `def-club-subsets-of-ordinals` | Frontier-22 large-cardinal set-foundation audit 2026-09-11: unboundedness and closure at nonzero limit accumulation points below the ambient nonzero limit ordinal give the exact regular-cardinal convention used by current consumers. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-large-cardinal-set-foundations-audit.md`. |
+| `def-cofinality` | Frontier-22 large-cardinal set-foundation audit 2026-09-11: the choice-free least cofinal-map length and its strictly increasing witness are supplied, while the later basics theorem correctly discharges regularity; the old U-P row recorded page reconciliation rather than an item defect. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-large-cardinal-set-foundations-audit.md`. |
+| `def-partition-arrow-notation` | Frontier-22 large-cardinal set-foundation audit 2026-09-11: fixed arity, nonzero color cardinal, cardinal-size target and the zero/vacuous/larger-target boundaries are coherent and supply the active unordered-pair convention. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-large-cardinal-set-foundations-audit.md`. |
+| `def-hereditary-size-and-h-kappa` | Frontier-22 large-cardinal set-foundation audit 2026-09-11: root-inclusive transitive closure is explicit, and adjoining the root is absorbed choice-free by `lambda+1` in the finite case and a canonical zero-avoiding self-injection in the infinite case. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-large-cardinal-set-foundations-audit.md`. |
 | `def-product-sigma-algebra-and-finite-product-sigma-algebras` | Frontier-22 Kolmogorov audit 2026-09-11: binary, empty and recursively finite product sigma-algebras are coherently defined by measurable rectangles. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-kolmogorov-extension-audit.md`. |
 | `def-coordinate-maps-and-cylinder-sigma-algebra` | Frontier-22 Kolmogorov audit 2026-09-11: unordered finite coordinate generators agree under every enumeration, and the arbitrary product sigma-algebra is exactly the generated cylinder sigma-algebra. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-kolmogorov-extension-audit.md`. |
 | `def-consistent-family-of-finite-dimensional-distributions` | Frontier-22 Kolmogorov audit 2026-09-11: restriction pushforwards give the exact unordered finite-law compatibility, including the singleton empty product; coordinate permutations only relabel one finite support. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-kolmogorov-extension-audit.md`. |
@@ -30310,7 +30329,6 @@ mathematical repairs. Evidence:
 | `def-classical-weierstrass-function` | 9.5 Forward order and load-bearing body links |
 | `def-clifford-ramification-index` | Transitive consumers (166), grouped by home page |
 | `def-codimension-irreducible-subvariety` | AV-1 draft-page impact partition (Phase 3 only) |
-| `def-cofinality` | 7.1 Recorded-Not-Proved closure and prose defects |
 | `def-complete-measure-space` | Nonmeasurable-set counterexample: missing witness supply |
 | `def-completeness-and-soundness` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-completion-of-a-measure-space` | Nonmeasurable-set counterexample: missing witness supply |
