@@ -2,7 +2,7 @@
 id: def-covariant-derivative-of-a-section-in-a-vector-field-direction
 kind: definition
 title: Covariant derivative of a section in a vector field direction
-status: draft
+status: published
 origin: pipeline
 deps: [def-connection-on-a-smooth-vector-bundle]
 provenance:

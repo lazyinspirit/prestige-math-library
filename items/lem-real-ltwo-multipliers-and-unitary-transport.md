@@ -3,7 +3,7 @@ id: lem-real-ltwo-multipliers-and-unitary-transport
 kind: lemma
 title: Real L2 multipliers and unitary transport
 deps: ["lem-complex-lp-completeness-density-and-inner-product", "thm-dominated-convergence", "thm-fatou-lemma", "thm-nonnegative-integral-zero-iff-zero-almost-everywhere", "thm-the-lebesgue-integral-respects-almost-everywhere-equality", "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity", "thm-complex-exponential-addition-and-real-extension", "thm-sine-and-cosine-derivatives", "lem-complex-integration-by-parts-on-intervals-and-decaying-lines", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

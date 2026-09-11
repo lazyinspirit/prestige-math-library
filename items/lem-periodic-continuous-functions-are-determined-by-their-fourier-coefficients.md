@@ -3,7 +3,7 @@ id: lem-periodic-continuous-functions-are-determined-by-their-fourier-coefficien
 kind: lemma
 title: Fourier uniqueness for continuous functions on the Euclidean torus
 deps: ["thm-complex-stone-weierstrass-self-adjoint", "thm-complex-exponential-addition-and-real-extension", "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity", "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces", "thm-heine-borel-rn", "thm-sine-and-cosine-parametrize-the-unit-circle", "thm-sine-and-cosine-subtraction-formulas", "thm-sine-cosine-zero-sets-and-fundamental-period", "thm-borel-sets-are-lebesgue-measurable", "thm-nonnegative-integral-zero-iff-zero-almost-everywhere", "def-countable-choice", "thm-continuous-image-of-a-compact-space-is-compact"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

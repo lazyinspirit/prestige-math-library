@@ -2,7 +2,7 @@
 id: thm-parallel-transport-is-a-linear-isomorphism
 kind: theorem
 title: "Parallel transport is a linear isomorphism"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-parallel-transport-along-a-piecewise-smooth-curve","thm-existence-and-uniqueness-of-parallel-sections"]
 provenance:

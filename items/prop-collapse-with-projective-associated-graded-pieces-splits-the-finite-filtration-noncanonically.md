@@ -2,7 +2,7 @@
 id: prop-collapse-with-projective-associated-graded-pieces-splits-the-finite-filtration-noncanonically
 kind: proposition
 title: Collapse with projective associated graded pieces splits the finite filtration noncanonically
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["def-projective-module", "def-weak-convergence-of-a-spectral-sequence", "def-exhaustive-separated-bounded-and-finite-filtration", "lem-abelian-group-model-for-spectral-sequence-computations"]

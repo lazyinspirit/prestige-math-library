@@ -2,7 +2,7 @@
 id: thm-spectral-sequence-comparison-theorem
 kind: theorem
 title: Spectral sequence comparison theorem
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["def-strong-convergence-of-a-spectral-sequence", "lem-finite-and-complete-filtered-isomorphism-lifting", "def-morphism-of-spectral-sequences", "def-homology-object-of-a-chain-complex"]

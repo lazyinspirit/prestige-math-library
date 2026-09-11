@@ -2,7 +2,7 @@
 id: prop-the-riemannian-hessian-is-symmetric
 kind: proposition
 title: "The riemannian hessian is symmetric"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-gradient-hessian-and-divergence-connection-formulas","thm-fundamental-theorem-of-riemannian-geometry","def-lie-bracket-of-smooth-vector-fields"]
 provenance:

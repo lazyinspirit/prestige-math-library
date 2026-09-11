@@ -2,7 +2,7 @@
 id: fs-exhaustive-filtration-implies-separated-and-complete-filtration
 kind: false-statement
 title: Exhaustive filtration implies separated and complete filtration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["lem-countable-sequence-groups-and-tail-filtrations", "def-strong-convergence-of-a-spectral-sequence", "lem-abelian-group-model-for-spectral-sequence-computations"]

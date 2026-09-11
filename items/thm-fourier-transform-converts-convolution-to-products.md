@@ -3,7 +3,7 @@ id: thm-fourier-transform-converts-convolution-to-products
 kind: theorem
 title: Fourier transform turns L1 convolution into multiplication
 deps: ["lem-l-one-fourier-transform-is-well-defined", "thm-fourier-translation-modulation-dilation-and-reflection-laws", "def-countable-choice", "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces", "thm-tonelli-theorem-for-sigma-finite-product-spaces", "lem-borel-representatives-make-the-convolution-integrand-borel-measurable", "lem-convolution-is-independent-of-the-chosen-borel-representatives", "thm-l-one-convolution-exists-almost-everywhere-and-obeys-the-l-one-bound", "lem-complex-translation-and-approximate-identity-interfaces", "thm-completion-measurable-functions-have-base-measurable-representatives"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

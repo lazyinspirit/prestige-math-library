@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Druţu–Kapovich Theorem 9.83 (proper ray case); nonproper sequence proof supplied locally"
       url: "https://www.math.ucdavis.edu/~kapovich/EPR/kapovich_drutu.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

@@ -3,7 +3,7 @@ id: lem-simultaneous-smooth-approximation-in-l-one-and-l-two
 kind: lemma
 title: Simultaneous L1 and L2 smooth approximation
 deps: ["thm-dominated-convergence", "thm-l-one-approximate-identities-converge-in-l-p", "thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign", "thm-support-of-a-convolution-lies-in-the-closure-of-the-support-sumset", "prop-mollifier-families-are-l-one-approximate-identities", "def-countable-choice", "lem-complex-translation-and-approximate-identity-interfaces", "lem-schwartz-cutoffs-from-the-standard-smooth-step"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

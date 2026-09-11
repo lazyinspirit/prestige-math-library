@@ -1,7 +1,7 @@
 ---
 page: finite-weyl-invariants-bruhat-and-kostant-harmonics
 title: Finite Weyl Invariants, Bruhat Order, and Kostant Harmonics
-status: draft
+status: published
 items:
   - def-finite-weyl-root-system-lattice-and-chamber-conventions
   - lem-finite-weyl-positive-roots-and-simple-reflections

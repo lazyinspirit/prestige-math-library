@@ -2,7 +2,7 @@
 id: thm-complete-exhaustive-filtered-complex-convergence-criterion
 kind: theorem
 title: Complete exhaustive filtered complex convergence criterion
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["def-weak-convergence-of-a-spectral-sequence", "def-strong-convergence-of-a-spectral-sequence", "def-lim-one-obstruction-to-completeness", "lem-countable-tower-completion-obstruction-exact-sequence", "def-filtered-chain-complex", "def-axiom-of-choice", "lem-boardman-approximate-cycle-obstruction-sequence", "lem-countable-tower-six-term-limit-sequence", "def-r-page-of-the-spectral-sequence-of-a-filtered-complex", "def-r-cycles-and-r-boundaries-of-an-increasingly-filtered-complex", "lem-the-filtered-differential-induces-d-r-on-the-r-page", "thm-the-next-page-is-the-homology-of-the-current-page", "def-limiting-cycles-boundaries-and-e-infinity", "def-induced-filtration-on-homology"]

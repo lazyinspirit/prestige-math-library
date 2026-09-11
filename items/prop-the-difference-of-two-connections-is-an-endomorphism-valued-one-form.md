@@ -2,7 +2,7 @@
 id: prop-the-difference-of-two-connections-is-an-endomorphism-valued-one-form
 kind: proposition
 title: "The difference of two connections is an endomorphism valued one form"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-local-coordinate-formula-for-a-bundle-connection","thm-connection-one-form-transformation-law","def-connection-on-a-smooth-vector-bundle"]
 provenance:

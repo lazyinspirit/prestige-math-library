@@ -3,7 +3,7 @@ id: cor-uniqueness-of-finite-borel-measures-from-their-fourier-transforms
 kind: corollary
 title: Uniqueness of finite Borel measures from their Fourier transforms
 deps: ["lem-gaussian-smoothing-of-finite-complex-measures", "cor-uniqueness-of-the-l-one-fourier-transform", "cor-second-countable-lch-locally-finite-borel-measures-are-regular", "def-axiom-of-choice", "thm-rmk-uniqueness-among-radon-measures", "thm-jordan-decomposition-for-signed-measures", "prop-real-and-imaginary-parts-of-a-complex-measure-are-finite-signed-measures", "thm-heine-borel-rn", "thm-rationals-countable"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Druţu–Kapovich Lemma 9.61, Corollary 9.62 and Lemma 9.66; full comparison still to be sourced"
       url: "https://www.math.ucdavis.edu/~kapovich/EPR/kapovich_drutu.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

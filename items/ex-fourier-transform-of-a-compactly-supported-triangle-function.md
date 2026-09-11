@@ -3,7 +3,7 @@ id: ex-fourier-transform-of-a-compactly-supported-triangle-function
 kind: example
 title: Triangle function and squared sinc
 deps: ["thm-fourier-transform-converts-convolution-to-products", "ex-fourier-transform-of-an-interval-indicator", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

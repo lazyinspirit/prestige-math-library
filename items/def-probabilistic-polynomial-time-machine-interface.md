@@ -2,7 +2,7 @@
 id: "def-probabilistic-polynomial-time-machine-interface"
 kind: "definition"
 title: "Probabilistic polynomial time machine interface"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-polynomial-time-verifier-and-reduction-interface", "def-independence-of-finite-random-variables"]
 justified_by: []

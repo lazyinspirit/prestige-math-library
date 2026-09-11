@@ -16,7 +16,7 @@ sources:
   references:
     - title: "van der Vaart, Martingales, Diffusions and Financial Mathematics"
       url: https://diamhomes.ewi.tudelft.nl/~avandervaart/books/stochint.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

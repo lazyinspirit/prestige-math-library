@@ -2,7 +2,7 @@
 id: def-metric-compatible-connection-on-a-riemannian-vector-bundle
 kind: definition
 title: "Metric compatible connection on a riemannian vector bundle"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-connection-laws-in-directional-form","def-smooth-bundle-metric","def-product-connection-on-tensor-and-hom-bundles"]
 provenance:

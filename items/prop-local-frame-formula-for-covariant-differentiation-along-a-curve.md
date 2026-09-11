@@ -2,7 +2,7 @@
 id: prop-local-frame-formula-for-covariant-differentiation-along-a-curve
 kind: proposition
 title: "Local frame formula for covariant differentiation along a curve"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-covariant-derivative-along-a-curve-is-independent-of-frame-and-extension","def-pullback-connection","thm-connection-one-form-transformation-law"]
 provenance:

@@ -2,7 +2,7 @@
 id: def-christoffel-symbols-of-an-affine-connection
 kind: definition
 title: "Christoffel symbols of an affine connection"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-affine-connection-on-a-smooth-manifold","def-connection-one-form-in-a-local-frame"]
 provenance:

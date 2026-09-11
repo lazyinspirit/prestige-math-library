@@ -2,7 +2,7 @@
 id: "def-minkowski-gauge-of-an-open-convex-zero-neighborhood"
 kind: "definition"
 title: "Minkowski gauge for an open convex zero-neighborhood"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-topological-vector-space-for-local-convexity", "def-locally-convex-topological-vector-space", "lem-topological-vector-space-translation-scaling-and-absorption", "thm-infimum-property", "def-infimum"]
 justified_by: []

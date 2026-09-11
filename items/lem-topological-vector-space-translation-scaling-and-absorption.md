@@ -2,7 +2,7 @@
 id: "lem-topological-vector-space-translation-scaling-and-absorption"
 kind: "lemma"
 title: "Translations, dilations and absorption in a topological vector space"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-topological-vector-space-for-local-convexity", "thm-product-universal-property", "lem-continuity-is-local-and-pastes", "lem-vector-space-elementary-consequences", "lem-complex-conjugation-and-modulus-laws", "lem-of-abs-value", "lem-of-triangle-inequality"]
 justified_by: []

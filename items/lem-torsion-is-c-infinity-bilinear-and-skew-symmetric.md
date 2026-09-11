@@ -2,7 +2,7 @@
 id: lem-torsion-is-c-infinity-bilinear-and-skew-symmetric
 kind: lemma
 title: "Torsion is c infinity bilinear and skew symmetric"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-torsion-tensor-of-an-affine-connection","prop-connection-laws-in-directional-form","prop-leibniz-rules-for-the-lie-bracket-with-function-multiples","prop-coordinate-formula-for-the-lie-bracket"]
 provenance:

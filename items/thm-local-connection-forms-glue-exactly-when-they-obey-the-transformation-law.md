@@ -2,7 +2,7 @@
 id: thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law
 kind: theorem
 title: "Local connection forms glue exactly when they obey the transformation law"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-connection-one-form-transformation-law","def-connection-on-a-smooth-vector-bundle"]
 provenance:

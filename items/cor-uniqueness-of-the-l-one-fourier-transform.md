@@ -3,7 +3,7 @@ id: cor-uniqueness-of-the-l-one-fourier-transform
 kind: corollary
 title: Uniqueness of the L1 Fourier transform
 deps: ["thm-l-one-fourier-inversion", "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

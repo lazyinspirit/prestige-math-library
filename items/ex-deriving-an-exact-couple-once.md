@@ -2,7 +2,7 @@
 id: ex-deriving-an-exact-couple-once
 kind: example
 title: Deriving an exact couple once
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["ex-the-exact-couple-of-a-two-step-filtration", "def-derived-exact-couple", "thm-the-derived-couple-is-exact"]

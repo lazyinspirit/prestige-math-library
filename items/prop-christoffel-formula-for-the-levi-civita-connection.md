@@ -2,7 +2,7 @@
 id: prop-christoffel-formula-for-the-levi-civita-connection
 kind: proposition
 title: "Christoffel formula for the levi civita connection"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-fundamental-theorem-of-riemannian-geometry","lem-koszul-formula-is-necessary-for-a-levi-civita-connection","def-christoffel-symbols-of-an-affine-connection","prop-coordinate-formula-for-the-lie-bracket"]
 provenance:

@@ -1,7 +1,7 @@
 ---
 page: finite-weyl-invariants-bruhat-and-kostant-harmonics-examples
 title: "Finite Weyl Invariants, Bruhat Order, and Kostant Harmonics: Examples"
-status: draft
+status: published
 items: []
 examples:
   - ex-s3-bruhat-order-and-inversion-sets

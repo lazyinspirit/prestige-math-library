@@ -2,7 +2,7 @@
 id: fs-direct-sum-and-product-totalisations-are-always-isomorphic
 kind: false-statement
 title: Direct sum and product totalisations are always isomorphic
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["cex-sum-and-product-totalisations-can-differ-on-infinite-diagonals", "lem-countable-sequence-groups-and-tail-filtrations", "def-direct-sum-total-complex-of-a-double-complex", "def-product-total-complex-of-a-double-complex"]

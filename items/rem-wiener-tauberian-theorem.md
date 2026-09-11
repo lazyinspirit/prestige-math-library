@@ -11,7 +11,7 @@ external_dependency:
   necessity: The design explicitly requests a Wiener Tauberian orientation. It supplies no logical dependency to any item in this batch.
 verification:
   precheck: n/a
-status: draft
+status: published
 origin: pipeline
 landmark: false
 provenance:

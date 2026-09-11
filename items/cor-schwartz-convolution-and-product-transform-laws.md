@@ -3,7 +3,7 @@ id: cor-schwartz-convolution-and-product-transform-laws
 kind: corollary
 title: Schwartz convolution and product laws
 deps: ["cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space", "thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space", "thm-fourier-transform-converts-convolution-to-products", "thm-fourier-transform-of-a-product-under-an-integrable-transform-hypothesis", "cor-uniqueness-of-the-l-one-fourier-transform", "def-countable-choice", "lem-schwartz-functions-and-all-derivatives-are-integrable", "thm-dominated-convergence"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

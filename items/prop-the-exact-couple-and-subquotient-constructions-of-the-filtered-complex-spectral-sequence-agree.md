@@ -2,7 +2,7 @@
 id: prop-the-exact-couple-and-subquotient-constructions-of-the-filtered-complex-spectral-sequence-agree
 kind: proposition
 title: The exact couple and subquotient constructions of the filtered complex spectral sequence agree
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [thm-an-exact-couple-generates-a-spectral-sequence, thm-a-filtered-complex-produces-an-exact-couple, def-r-page-of-the-spectral-sequence-of-a-filtered-complex, lem-the-filtered-differential-induces-d-r-on-the-r-page, thm-the-next-page-is-the-homology-of-the-current-page, prop-elementwise-formula-for-the-connecting-map-in-module-categories, lem-spectral-sequence-subquotient-and-local-lifting-calculus, def-preconnecting-arrow-on-cycles, def-connecting-morphism-in-homology, thm-snake-lemma-under-the-weaker-stacks-hypotheses]

@@ -2,7 +2,7 @@
 id: "lem-fixed-coding-primitive-recursive-arithmetic-and-sequences"
 kind: "lemma"
 title: "Fixed coding primitive recursive arithmetic and sequences"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-primitive-recursive-functions-by-initial-functions-and-schemes", "thm-induction-principle"]
 justified_by: []

@@ -3,7 +3,7 @@ id: thm-fourier-transform-maps-schwartz-space-continuously-to-itself
 kind: theorem
 title: Fourier transform acts continuously on Schwartz space
 deps: ["thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space", "lem-schwartz-functions-and-all-derivatives-are-integrable", "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions", "thm-dominated-convergence", "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces", "lem-complex-integration-by-parts-on-intervals-and-decaying-lines", "thm-sine-and-cosine-derivatives", "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

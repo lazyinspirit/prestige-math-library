@@ -1,7 +1,7 @@
 ---
 page: "quantitative-hyperbolic-geometry-toolkit-examples"
 title: "Quantitative Hyperbolic Geometry Toolkit: Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-morse-stability-in-a-tree", "ex-a-local-geodesic-constant-in-a-cayley-graph", "ex-boundary-extension-of-a-tree-quasi-isometry", "ex-ping-pong-for-two-loxodromics", "cex-properness-is-needed-for-the-compact-boundary-package"]
 ---

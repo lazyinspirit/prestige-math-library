@@ -2,7 +2,7 @@
 id: prop-a-connection-is-metric-compatible-iff-parallel-transport-is-isometric
 kind: proposition
 title: "A connection is metric compatible iff parallel transport is isometric"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-metric-compatible-connection-on-a-riemannian-vector-bundle","thm-parallel-transport-is-a-linear-isomorphism","prop-local-frame-formula-for-covariant-differentiation-along-a-curve"]
 provenance:

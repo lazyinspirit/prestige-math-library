@@ -3,7 +3,7 @@ id: cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space
 kind: corollary
 title: Fourier transform is a topological automorphism of Schwartz space
 deps: ["thm-fourier-inversion-on-schwartz-space", "thm-fourier-transform-maps-schwartz-space-continuously-to-itself", "thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

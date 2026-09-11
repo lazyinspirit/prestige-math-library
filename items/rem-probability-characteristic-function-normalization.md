@@ -3,7 +3,7 @@ id: rem-probability-characteristic-function-normalization
 kind: remark
 title: Characteristic-function normalization
 deps: ["def-integrable-real-and-complex-functions-and-their-integrals", "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 provenance:

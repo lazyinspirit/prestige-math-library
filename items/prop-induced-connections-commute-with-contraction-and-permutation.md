@@ -2,7 +2,7 @@
 id: prop-induced-connections-commute-with-contraction-and-permutation
 kind: proposition
 title: "Induced connections commute with contraction and permutation"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-product-connection-on-tensor-and-hom-bundles","def-dual-connection"]
 provenance:

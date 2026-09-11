@@ -3,7 +3,7 @@ id: thm-heisenberg-uncertainty-inequality
 kind: theorem
 title: Heisenberg uncertainty and Gaussian equality
 deps: ["thm-parseval-pairing-on-schwartz-space", "thm-fourier-transform-maps-schwartz-space-continuously-to-itself", "thm-fourier-translation-modulation-dilation-and-reflection-laws", "lem-complex-lp-completeness-density-and-inner-product", "lem-complex-integration-by-parts-on-intervals-and-decaying-lines", "def-countable-choice", "thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space", "lem-schwartz-functions-and-all-derivatives-are-integrable", "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces", "ex-gaussians-and-polynomials-times-gaussians-are-schwartz"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

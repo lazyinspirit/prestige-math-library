@@ -2,7 +2,7 @@
 id: "def-uniform-asymptotic-time-space-comparison"
 kind: "definition"
 title: "Uniform asymptotic time space comparison"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-natural-numbers", "def-multitape-and-nondeterministic-machines"]
 justified_by: []

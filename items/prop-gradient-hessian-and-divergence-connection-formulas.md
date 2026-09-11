@@ -2,7 +2,7 @@
 id: prop-gradient-hessian-and-divergence-connection-formulas
 kind: proposition
 title: "Gradient hessian and divergence connection formulas"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-christoffel-formula-for-the-levi-civita-connection","prop-levi-civita-connection-commutes-with-musical-isomorphisms","def-riemannian-gradient","prop-coordinate-formula-for-riemannian-divergence","prop-connection-laws-in-directional-form"]
 provenance:

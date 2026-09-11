@@ -2,7 +2,7 @@
 id: thm-connection-one-form-transformation-law
 kind: theorem
 title: "Connection one form transformation law"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-local-coordinate-formula-for-a-bundle-connection"]
 provenance:

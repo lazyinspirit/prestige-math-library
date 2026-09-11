@@ -2,7 +2,7 @@
 id: def-lim-one-obstruction-to-completeness
 kind: definition
 title: Lim one obstruction to completeness
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["lem-abelian-group-model-for-spectral-sequence-computations", "def-exhaustive-separated-bounded-and-finite-filtration", "def-limit-and-colimit-of-a-diagram"]

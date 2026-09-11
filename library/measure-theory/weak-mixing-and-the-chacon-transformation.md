@@ -1,7 +1,7 @@
 ---
 page: "weak-mixing-and-the-chacon-transformation"
 title: "Weak Mixing and the Chacon Transformation"
-status: "draft"
+status: published
 items: ["def-unitary-eigenfunction-for-a-probability-system", "def-l-two-operator-conventions-for-weak-mixing", "lem-closed-l-two-subspaces-have-orthogonal-projections", "lem-hilbert-cesaro-averages-converge-to-the-fixed-subspace", "lem-product-rectangle-kernels-are-dense-in-complex-l-two", "lem-square-integrable-kernels-define-bounded-compact-integral-operators", "lem-conjugate-transpose-kernels-give-adjoints", "lem-invariant-square-integrable-kernel-produces-a-compact-intertwiner", "lem-nonzero-compact-kernel-operators-yield-nonzero-positive-compact-k-star-k", "lem-nonzero-positive-compact-self-adjoint-operators-have-positive-finite-dimensional-eigenspaces", "lem-compact-intertwiners-produce-finite-dimensional-invariant-subspaces", "lem-nonzero-finite-dimensional-complex-invariant-subspaces-have-unitary-eigenvectors", "thm-weak-mixing-is-equivalent-to-absence-of-nonconstant-eigenfunctions", "def-chacon-three-cut-one-spacer-towers", "lem-chacon-partial-maps-extend-to-an-invertible-map-mod-null-sets", "lem-chacon-levels-approximate-measurable-sets", "thm-chacon-transformation-is-ergodic", "lem-chacon-eigenfunctions-are-constant", "lem-chacon-tower-height-correlations-obstruct-mixing", "thm-chacon-transformation-is-weakly-mixing-but-not-mixing", "fs-weak-mixing-implies-strong-mixing"]
 examples: []
 ---

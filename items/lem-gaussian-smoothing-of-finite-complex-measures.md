@@ -3,7 +3,7 @@ id: lem-gaussian-smoothing-of-finite-complex-measures
 kind: lemma
 title: Gaussian smoothing of finite measures
 deps: ["thm-fourier-transform-of-a-finite-complex-measure", "lem-gaussian-fourier-summability-kernel-is-an-approximate-identity", "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces", "thm-tonelli-theorem-for-sigma-finite-product-spaces", "thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation", "cor-finite-complex-measures-admit-integrable-radon-nikodym-densities", "def-complex-lp-and-euclidean-test-function-conventions", "thm-total-variation-of-an-absolutely-continuous-signed-or-complex-measure-has-density-the-absolute-value", "def-axiom-of-choice", "lem-complex-translation-and-approximate-identity-interfaces", "thm-fourier-translation-modulation-dilation-and-reflection-laws"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

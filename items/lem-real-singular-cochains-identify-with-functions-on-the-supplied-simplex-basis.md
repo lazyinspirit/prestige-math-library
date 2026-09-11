@@ -16,7 +16,7 @@ sources:
     - title: "DG-16 design; Hatcher/Park control"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
       locator: "Explicit coefficient specialization preceding DG-16 item 4; Hatcher §3.1"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

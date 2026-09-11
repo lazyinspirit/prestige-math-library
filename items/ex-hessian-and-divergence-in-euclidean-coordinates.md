@@ -2,7 +2,7 @@
 id: ex-hessian-and-divergence-in-euclidean-coordinates
 kind: example
 title: "Hessian and divergence in euclidean coordinates"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-gradient-hessian-and-divergence-connection-formulas","ex-the-euclidean-levi-civita-connection"]
 provenance:

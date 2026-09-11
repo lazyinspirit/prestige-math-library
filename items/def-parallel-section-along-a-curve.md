@@ -2,7 +2,7 @@
 id: def-parallel-section-along-a-curve
 kind: definition
 title: "Parallel section along a curve"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-local-frame-formula-for-covariant-differentiation-along-a-curve"]
 provenance:

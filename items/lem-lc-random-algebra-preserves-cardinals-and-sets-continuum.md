@@ -2,7 +2,7 @@
 id: lem-lc-random-algebra-preserves-cardinals-and-sets-continuum
 kind: lemma
 title: The inaccessible random algebra preserves cardinals and makes the continuum kappa
-status: draft
+status: published
 origin: pipeline
 deps: [lem-lc-boolean-generic-zfc-and-ordinals, lem-lc-boolean-generic-truth, lem-lc-generic-boolean-ground-joins, lem-lc-probability-algebra-completeness, lem-lc-inaccessible-size-and-rank-bounds, thm-hessenberg, thm-generic-extension-transitivity-and-rank-bound, thm-kolmogorov-extension-for-standard-borel-coordinate-spaces, def-axiom-of-choice]
 verification:

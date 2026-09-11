@@ -2,7 +2,7 @@
 id: thm-the-derived-couple-is-exact
 kind: theorem
 title: The derived couple is exact
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-derived-exact-couple, lem-the-derived-couple-maps-are-well-defined, def-exact-couple, lem-spectral-sequence-subquotient-and-local-lifting-calculus]

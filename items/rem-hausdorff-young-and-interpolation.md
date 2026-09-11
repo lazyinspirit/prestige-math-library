@@ -3,7 +3,7 @@ id: rem-hausdorff-young-and-interpolation
 kind: remark
 title: Hausdorff–Young and interpolation orientation
 deps: ["thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions", "thm-plancherel", "thm-l-one-l-two-agreement-of-fourier-transform", "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 provenance:

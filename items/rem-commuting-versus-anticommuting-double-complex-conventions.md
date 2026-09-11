@@ -2,7 +2,7 @@
 id: rem-commuting-versus-anticommuting-double-complex-conventions
 kind: remark
 title: Commuting versus anticommuting double complex conventions
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-homological-double-complex]

@@ -2,7 +2,7 @@
 id: thm-christoffel-symbol-transformation-law
 kind: theorem
 title: "Christoffel symbol transformation law"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-christoffel-symbols-of-an-affine-connection","prop-connection-laws-in-directional-form"]
 provenance:

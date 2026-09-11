@@ -2,7 +2,7 @@
 id: def-homological-double-complex
 kind: definition
 title: Homological double complex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-chain-complex-in-an-abelian-category]

@@ -2,7 +2,7 @@
 id: ex-gauge-transformation-of-a-connection-one-form
 kind: example
 title: "Gauge transformation of a connection one form"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-connection-one-form-transformation-law"]
 provenance:

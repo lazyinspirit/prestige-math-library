@@ -17,7 +17,7 @@ sources:
       url: https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf
     - title: "Norris, Probability and Measure"
       url: https://www.statslab.cam.ac.uk/~james/Lectures/pmall.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

@@ -2,7 +2,7 @@
 id: def-product-connection-on-tensor-and-hom-bundles
 kind: definition
 title: "Product connection on tensor and hom bundles"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-dual-connection","lem-finite-tensor-products-of-smooth-vector-bundles","thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law"]
 provenance:

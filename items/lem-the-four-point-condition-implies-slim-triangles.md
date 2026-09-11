@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Druţu–Kapovich Lemma 9.32; conservative two-inequality constant"
       url: "https://www.math.ucdavis.edu/~kapovich/EPR/kapovich_drutu.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

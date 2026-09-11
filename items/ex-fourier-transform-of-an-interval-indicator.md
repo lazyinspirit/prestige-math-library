@@ -3,7 +3,7 @@ id: ex-fourier-transform-of-an-interval-indicator
 kind: example
 title: Transform of an interval indicator
 deps: ["def-fourier-transform-on-l-one-of-rn", "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions", "thm-complex-exponential-addition-and-real-extension", "lem-complex-integration-by-parts-on-intervals-and-decaying-lines", "thm-sine-and-cosine-derivatives", "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

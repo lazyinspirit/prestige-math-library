@@ -1,7 +1,7 @@
 ---
 page: "forcing-orders-names-and-generic-extensions"
 title: "Forcing Orders, Names, and Generic Extensions"
-status: "draft"
+status: published
 items: ["def-dense-open-sets-and-model-generic-filters", "thm-rasiowa-sikorski-with-explicit-choice", "cor-generics-exist-over-countable-transitive-models", "def-forcing-names-and-name-rank", "lem-forcing-names-and-name-ranks-are-absolute", "def-forcing-name-valuation-and-generic-extension", "def-check-names-and-the-canonical-generic-name", "thm-check-name-evaluation-and-generic-reconstruction", "thm-generic-extension-transitivity-and-rank-bound", "lem-names-for-pairs-functions-and-ordinals", "def-boolean-valued-name-semantics", "lem-boolean-valued-semantics-is-well-defined", "prop-atomless-generics-are-not-ground-model-elements"]
 examples: []
 ---

@@ -15,7 +15,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: not-applicable
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

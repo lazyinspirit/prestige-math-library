@@ -11,7 +11,7 @@ sources:
     - title: "DG-16 design; Hatcher/Park control"
       url: "https://people.math.harvard.edu/~pspark/derham.pdf"
       locator: "Park Lemma 2.1; neighbourhood-extension bridge"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

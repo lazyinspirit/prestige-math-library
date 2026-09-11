@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Druţu–Kapovich Lemmas 9.25 and 9.31"
       url: "https://www.math.ucdavis.edu/~kapovich/EPR/kapovich_drutu.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

@@ -16,7 +16,7 @@ provenance:
   statement: ai-altered
   proof: ai-generated
 proof_strategy: direct
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

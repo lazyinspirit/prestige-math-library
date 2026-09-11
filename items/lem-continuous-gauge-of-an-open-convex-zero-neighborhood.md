@@ -2,7 +2,7 @@
 id: "lem-continuous-gauge-of-an-open-convex-zero-neighborhood"
 kind: "lemma"
 title: "Continuity, sublinearity and strict sublevels of an open convex gauge"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-minkowski-gauge-of-an-open-convex-zero-neighborhood", "lem-topological-vector-space-translation-scaling-and-absorption", "def-locally-convex-topological-vector-space", "def-sublinear-functional", "thm-infimum-property"]
 justified_by: []

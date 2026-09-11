@@ -2,7 +2,7 @@
 id: "def-pairwise-independent-hash-family-interface"
 kind: "definition"
 title: "Pairwise independent hash family interface"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-field", "def-independence-of-finite-random-variables"]
 justified_by: []

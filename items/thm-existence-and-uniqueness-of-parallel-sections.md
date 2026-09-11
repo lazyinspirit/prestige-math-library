@@ -2,7 +2,7 @@
 id: thm-existence-and-uniqueness-of-parallel-sections
 kind: theorem
 title: "Existence and uniqueness of parallel sections"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-parallel-section-along-a-curve","lem-linear-matrix-odes-have-unique-global-solutions-on-a-given-interval","thm-lebesgue-number-lemma"]
 provenance:

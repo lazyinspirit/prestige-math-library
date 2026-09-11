@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Hamann §5.3 after Proposition 5.2.5"
       url: "https://www.math.uni-hamburg.de/home/hamann/Lehre/GeoGrTh/GeoGrThEn.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

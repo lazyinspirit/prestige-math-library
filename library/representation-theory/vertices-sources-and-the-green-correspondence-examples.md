@@ -1,7 +1,7 @@
 ---
 page: vertices-sources-and-the-green-correspondence-examples
 title: Vertices Sources and the Green Correspondence — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-green-restriction-summand-with-the-same-vertex

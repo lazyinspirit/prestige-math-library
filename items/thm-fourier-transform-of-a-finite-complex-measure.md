@@ -3,7 +3,7 @@ id: thm-fourier-transform-of-a-finite-complex-measure
 kind: theorem
 title: Fourier transform of a finite complex Borel measure
 deps: ["def-complex-measure", "def-integration-against-a-signed-or-complex-measure", "thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation", "thm-dominated-convergence", "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity", "thm-complex-exponential-addition-and-real-extension", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

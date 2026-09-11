@@ -1,7 +1,7 @@
 ---
 page: connections-levi-civita-and-parallel-transport-examples
 title: "Connections Levi Civita and Parallel Transport — Examples"
-status: draft
+status: published
 items: ["ex-the-flat-connection-on-a-trivial-vector-bundle","ex-a-connection-one-form-on-a-trivial-line-bundle","ex-gauge-transformation-of-a-connection-one-form","ex-pullback-of-the-flat-connection","ex-parallel-transport-for-a-scalar-linear-ode","ex-the-euclidean-levi-civita-connection","ex-christoffel-symbols-in-polar-coordinates","ex-levi-civita-connection-of-a-conformal-plane-metric","ex-parallel-transport-on-the-round-sphere-along-the-equator","cex-a-torsion-free-connection-that-is-not-metric-compatible","cex-path-dependent-parallel-transport-on-the-sphere","ex-hessian-and-divergence-in-euclidean-coordinates"]
 examples: []
 ---

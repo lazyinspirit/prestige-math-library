@@ -2,7 +2,7 @@
 id: def-vector-field-and-section-along-a-smooth-curve
 kind: definition
 title: "Vector field and section along a smooth curve"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-products-preserve-t0-t1-and-hausdorff","prop-second-countability-is-hereditary","lem-t0-t1-and-hausdorff-are-hereditary"]
 provenance:

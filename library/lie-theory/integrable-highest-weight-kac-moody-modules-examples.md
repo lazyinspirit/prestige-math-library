@@ -1,7 +1,7 @@
 ---
 page: integrable-highest-weight-kac-moody-modules-examples
 title: Integrable Highest Weight Kac Moody Modules — Examples
-status: draft
+status: published
 items: []
 examples:
   - ex-integrable-highest-weight-modules-for-rank-one-gcm

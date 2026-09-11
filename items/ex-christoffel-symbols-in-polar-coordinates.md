@@ -2,7 +2,7 @@
 id: ex-christoffel-symbols-in-polar-coordinates
 kind: example
 title: "Christoffel symbols in polar coordinates"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-christoffel-formula-for-the-levi-civita-connection"]
 provenance:

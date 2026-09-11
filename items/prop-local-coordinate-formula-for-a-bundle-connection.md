@@ -2,7 +2,7 @@
 id: prop-local-coordinate-formula-for-a-bundle-connection
 kind: proposition
 title: "Local coordinate formula for a bundle connection"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-connection-one-form-in-a-local-frame","prop-connection-laws-in-directional-form"]
 provenance:

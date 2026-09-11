@@ -1,7 +1,7 @@
 ---
 page: "conditional-distributions-and-regular-conditional-probability-examples"
 title: "Conditional Distributions and Regular Conditional Probability \u2014 Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-regular-conditional-law-for-a-finite-partition", "ex-conditional-density-of-a-bivariate-normal-law", "ex-conditioning-independent-variables-leaves-the-marginal-law", "ex-bayes-formula-for-a-finite-mixture-with-continuous-observation", "ex-regular-conditional-law-of-one-coordinate-given-another", "ex-a-deterministic-kernel-from-a-measurable-map", "cex-the-density-ratio-is-undefined-on-zero-marginal-fibres", "cex-regular-conditional-laws-are-not-unique-on-null-conditioning-values"]
 ---

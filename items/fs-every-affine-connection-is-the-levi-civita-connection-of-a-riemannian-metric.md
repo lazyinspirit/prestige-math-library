@@ -2,7 +2,7 @@
 id: fs-every-affine-connection-is-the-levi-civita-connection-of-a-riemannian-metric
 kind: false-statement
 title: "Every affine connection is the levi civita connection of a riemannian metric"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law","def-torsion-tensor-of-an-affine-connection","def-levi-civita-connection"]
 provenance:

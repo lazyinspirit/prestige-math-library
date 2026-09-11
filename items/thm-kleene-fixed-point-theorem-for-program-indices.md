@@ -2,7 +2,7 @@
 id: "thm-kleene-fixed-point-theorem-for-program-indices"
 kind: "theorem"
 title: "Kleene fixed point theorem for program indices"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-smn-for-the-fixed-acceptable-numbering", "def-acceptable-numbering-with-universal-evaluation"]
 justified_by: []

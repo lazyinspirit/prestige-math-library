@@ -2,7 +2,7 @@
 id: thm-the-column-filtration-spectral-sequence-of-a-first-quadrant-double-complex
 kind: theorem
 title: The column filtration spectral sequence of a first quadrant double complex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-row-and-column-filtrations-of-a-first-quadrant-double-complex, thm-the-next-page-is-the-homology-of-the-current-page, thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology, def-induced-filtration-on-homology, thm-the-row-filtration-spectral-sequence-of-a-first-quadrant-double-complex]

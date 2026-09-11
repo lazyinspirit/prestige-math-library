@@ -3,7 +3,7 @@ id: lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization
 kind: lemma
 title: Euclidean Gaussian transform with the 2π normalization
 deps: ["lem-l-one-fourier-transform-is-well-defined", "cor-c-one-change-of-variables-for-l-one-functions", "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces", "thm-tonelli-theorem-for-sigma-finite-product-spaces", "thm-dominated-convergence", "thm-gaussian-integral", "thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line", "thm-differentiation-under-the-integral-sign", "lem-complex-integration-by-parts-on-intervals-and-decaying-lines", "thm-exponential-beats-every-polynomial", "thm-sine-and-cosine-derivatives", "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

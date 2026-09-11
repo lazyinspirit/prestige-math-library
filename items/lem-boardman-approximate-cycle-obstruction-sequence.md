@@ -2,7 +2,7 @@
 id: lem-boardman-approximate-cycle-obstruction-sequence
 kind: lemma
 title: Approximate cycle obstruction sequence for a complete filtered complex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-filtered-chain-complex, lem-countable-tower-completion-obstruction-exact-sequence, lem-countable-tower-six-term-limit-sequence, lem-two-by-two-delta-complex-for-a-double-tower, def-axiom-of-choice]

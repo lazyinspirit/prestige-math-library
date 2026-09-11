@@ -3,7 +3,7 @@ id: lem-smooth-compactly-supported-functions-are-dense-in-schwartz-space
 kind: lemma
 title: Smooth compact supports are dense in Schwartz space
 deps: ["def-schwartz-space-and-its-seminorms", "def-schwartz-topology-and-convergence", "lem-schwartz-cutoffs-from-the-standard-smooth-step", "def-ck-and-multi-index-notation-in-several-variables", "thm-general-leibniz-rule", "thm-symmetry-of-higher-mixed-partials"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

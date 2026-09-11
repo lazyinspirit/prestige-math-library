@@ -10,7 +10,7 @@ sources:
   references:
     - title: "Druţu–Kapovich §9.13, Theorem 9.108, Proposition 9.109 and Lemma 9.112 pp.246–249"
       url: "https://www.math.ucdavis.edu/~kapovich/EPR/kapovich_drutu.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

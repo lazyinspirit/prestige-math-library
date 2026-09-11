@@ -3,7 +3,7 @@ id: thm-fourier-translation-modulation-dilation-and-reflection-laws
 kind: theorem
 title: Translation, modulation, linear dilation and reflection laws
 deps: ["lem-l-one-fourier-transform-is-well-defined", "cor-c-one-change-of-variables-for-l-one-functions", "thm-complex-exponential-addition-and-real-extension", "def-translation-of-a-function-on-rn", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

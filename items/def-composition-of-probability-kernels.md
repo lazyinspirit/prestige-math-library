@@ -18,7 +18,7 @@ sources:
     - title: "Varadhan, Probability Theory, Chapter 4"
       url: https://math.nyu.edu/~varadhan/course/PROB.ch4.pdf
 justified_by: ["lem-kernel-composition-is-well-defined-and-associative"]
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

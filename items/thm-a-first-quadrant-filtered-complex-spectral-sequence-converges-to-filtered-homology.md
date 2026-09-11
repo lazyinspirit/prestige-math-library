@@ -2,7 +2,7 @@
 id: thm-a-first-quadrant-filtered-complex-spectral-sequence-converges-to-filtered-homology
 kind: theorem
 title: A first quadrant filtered complex spectral sequence converges to filtered homology
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["def-strong-convergence-of-a-spectral-sequence", "thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology", "def-induced-filtration-on-homology"]

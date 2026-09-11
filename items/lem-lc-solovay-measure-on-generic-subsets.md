@@ -2,7 +2,7 @@
 id: lem-lc-solovay-measure-on-generic-subsets
 kind: lemma
 title: Solovay measure on all ground-set subsets in a supplied generic extension
-status: draft
+status: published
 origin: pipeline
 deps: [lem-lc-solovay-density-locality-and-null-joins, lem-lc-generic-evaluation-of-measurable-densities, lem-lc-boolean-generic-truth, lem-lc-generic-boolean-ground-joins, thm-check-name-evaluation-and-generic-reconstruction, thm-generic-extension-transitivity-and-rank-bound, lem-bounded-definitions-of-basic-set-operations, def-axiom-of-choice]
 verification:

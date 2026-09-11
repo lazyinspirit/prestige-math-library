@@ -2,7 +2,7 @@
 id: "ex-schwartz-zippel-for-a-bivariate-polynomial"
 kind: "example"
 title: "Schwartz zippel for a bivariate polynomial"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-schwartz-zippel-over-finite-fields", "thm-z-mod-p-is-a-field"]
 justified_by: []

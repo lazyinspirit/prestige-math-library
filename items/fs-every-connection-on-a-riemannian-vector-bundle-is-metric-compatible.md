@@ -2,7 +2,7 @@
 id: fs-every-connection-on-a-riemannian-vector-bundle-is-metric-compatible
 kind: false-statement
 title: "Every connection on a riemannian vector bundle is metric compatible"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-metric-compatible-connection-on-a-riemannian-vector-bundle","thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law"]
 provenance:

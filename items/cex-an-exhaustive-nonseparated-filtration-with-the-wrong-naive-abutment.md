@@ -2,7 +2,7 @@
 id: cex-an-exhaustive-nonseparated-filtration-with-the-wrong-naive-abutment
 kind: counterexample
 title: An exhaustive nonseparated filtration with the wrong naive abutment
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["prop-failure-of-separatedness-or-completeness-can-destroy-the-claimed-abutment", "lem-abelian-group-model-for-spectral-sequence-computations", "lem-countable-sequence-groups-and-tail-filtrations", "def-induced-filtration-on-homology", "def-r-page-of-the-spectral-sequence-of-a-filtered-complex", "lem-the-filtered-differential-induces-d-r-on-the-r-page", "thm-the-next-page-is-the-homology-of-the-current-page"]

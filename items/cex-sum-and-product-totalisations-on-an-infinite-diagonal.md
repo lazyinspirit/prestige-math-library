@@ -2,7 +2,7 @@
 id: cex-sum-and-product-totalisations-on-an-infinite-diagonal
 kind: counterexample
 title: Sum and product totalisations on an infinite diagonal
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["cex-sum-and-product-totalisations-can-differ-on-infinite-diagonals", "lem-countable-sequence-groups-and-tail-filtrations", "def-homology-object-of-a-chain-complex", "def-direct-sum-total-complex-of-a-double-complex", "def-product-total-complex-of-a-double-complex"]

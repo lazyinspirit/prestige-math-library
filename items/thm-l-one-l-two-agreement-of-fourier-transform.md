@@ -3,7 +3,7 @@ id: thm-l-one-l-two-agreement-of-fourier-transform
 kind: theorem
 title: Agreement of the integral and L2 transforms
 deps: ["thm-plancherel", "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions", "lem-simultaneous-smooth-approximation-in-l-one-and-l-two", "lem-complex-lp-completeness-density-and-inner-product", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

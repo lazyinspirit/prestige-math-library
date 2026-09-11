@@ -2,7 +2,7 @@
 id: "thm-locally-convex-continuous-dual-separates-points"
 kind: "theorem"
 title: "The continuous dual separates points in a Hausdorff locally convex space"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-locally-convex-topological-vector-space", "lem-balanced-convex-zero-neighborhood-refinement", "thm-locally-convex-open-convex-separation", "def-hahn-banach-extension-principle-relative", "def-hausdorff-space"]
 justified_by: []

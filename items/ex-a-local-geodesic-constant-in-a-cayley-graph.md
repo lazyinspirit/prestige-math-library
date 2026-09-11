@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Druţu–Kapovich §9.2, free-tree specialization"
       url: "https://www.math.ucdavis.edu/~kapovich/EPR/kapovich_drutu.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

@@ -2,7 +2,7 @@
 id: ex-levi-civita-connection-of-a-conformal-plane-metric
 kind: example
 title: "Levi civita connection of a conformal plane metric"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-christoffel-formula-for-the-levi-civita-connection"]
 provenance:

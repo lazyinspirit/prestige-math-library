@@ -2,7 +2,7 @@
 id: lem-two-by-two-delta-complex-for-a-double-tower
 kind: lemma
 title: Two by two Delta complex for a double tower
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-lim-one-obstruction-to-completeness, def-axiom-of-choice]

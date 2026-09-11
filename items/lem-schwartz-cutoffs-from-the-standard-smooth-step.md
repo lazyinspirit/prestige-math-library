@@ -3,7 +3,7 @@ id: lem-schwartz-cutoffs-from-the-standard-smooth-step
 kind: lemma
 title: Explicit compactly supported smooth cutoffs
 deps: ["thm-exponential-beats-every-polynomial", "thm-chain-rule-for-total-derivatives", "def-ck-and-multi-index-notation-in-several-variables", "thm-heine-borel-rn"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

@@ -2,7 +2,7 @@
 id: lem-finite-tensor-products-of-smooth-vector-bundles
 kind: lemma
 title: "Finite tensor products of smooth vector bundles"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-connection-on-a-smooth-vector-bundle"]
 provenance:

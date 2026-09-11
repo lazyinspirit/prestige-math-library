@@ -3,7 +3,7 @@ id: rem-riesz-thorin-supplied-by-measure-theory
 kind: remark
 title: The interpolation input belongs to measure theory
 deps: ["thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 provenance:

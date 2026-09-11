@@ -2,7 +2,7 @@
 id: prop-the-two-double-complex-spectral-sequences-have-the-same-abutment-but-not-the-same-pages
 kind: proposition
 title: The two double complex spectral sequences have the same abutment but not the same pages
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [thm-the-row-filtration-spectral-sequence-of-a-first-quadrant-double-complex, thm-the-column-filtration-spectral-sequence-of-a-first-quadrant-double-complex, lem-abelian-group-model-for-spectral-sequence-computations]

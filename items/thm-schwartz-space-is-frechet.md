@@ -3,7 +3,7 @@ id: thm-schwartz-space-is-frechet
 kind: theorem
 title: Schwartz space is Fréchet
 deps: ["def-schwartz-topology-and-convergence", "thm-uniform-derivative-limit-on-a-closed-interval", "thm-uniform-cauchy-criterion-real-functions", "thm-uniform-limit-continuous-real-functions", "thm-symmetry-of-higher-mixed-partials"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

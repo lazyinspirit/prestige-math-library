@@ -21,7 +21,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

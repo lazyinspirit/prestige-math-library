@@ -3,7 +3,7 @@ id: thm-riemann-lebesgue
 kind: theorem
 title: Riemann–Lebesgue lemma
 deps: ["thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions", "thm-fourier-translation-modulation-dilation-and-reflection-laws", "def-countable-choice", "thm-translation-is-continuous-in-l-p-for-one-le-p-less-infinity", "def-c-zero-on-rn", "lem-complex-translation-and-approximate-identity-interfaces"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

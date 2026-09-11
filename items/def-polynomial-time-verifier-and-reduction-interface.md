@@ -2,7 +2,7 @@
 id: "def-polynomial-time-verifier-and-reduction-interface"
 kind: "definition"
 title: "Polynomial time verifier and reduction interface"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-uniform-asymptotic-time-space-comparison", "def-multitape-and-nondeterministic-machines", "def-partial-function-computed-by-a-machine"]
 justified_by: []

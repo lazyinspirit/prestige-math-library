@@ -2,7 +2,7 @@
 id: def-pullback-connection
 kind: definition
 title: "Pullback connection"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law","prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure","prop-second-countability-is-hereditary","lem-t0-t1-and-hausdorff-are-hereditary"]
 justified_by: [thm-pullback-connection-is-well-defined-and-functorial]

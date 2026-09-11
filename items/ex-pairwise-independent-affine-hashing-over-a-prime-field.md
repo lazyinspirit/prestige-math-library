@@ -2,7 +2,7 @@
 id: "ex-pairwise-independent-affine-hashing-over-a-prime-field"
 kind: "example"
 title: "Pairwise independent affine hashing over a prime field"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-pairwise-independent-hash-family-interface", "thm-z-mod-p-is-a-field"]
 justified_by: []

@@ -2,7 +2,7 @@
 id: thm-fundamental-theorem-of-riemannian-geometry
 kind: theorem
 title: "Fundamental theorem of riemannian geometry"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-the-koszul-formula-defines-an-affine-connection","lem-koszul-formula-is-necessary-for-a-levi-civita-connection","def-levi-civita-connection"]
 provenance:

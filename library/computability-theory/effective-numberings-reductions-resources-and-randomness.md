@@ -1,7 +1,7 @@
 ---
 page: "effective-numberings-reductions-resources-and-randomness"
 title: "Effective Numberings, Reductions, Resources, and Randomness"
-status: "draft"
+status: published
 items: ["def-uniform-asymptotic-time-space-comparison", "def-machine-time-and-space-constructibility", "thm-clocked-universal-simulation-with-time-and-space-bounds", "def-primitive-recursive-functions-by-initial-functions-and-schemes", "lem-fixed-coding-primitive-recursive-arithmetic-and-sequences", "def-kleene-computation-predicate-and-output-map", "lem-fixed-machine-history-predicate-is-primitive-recursive", "thm-kleene-normal-form-for-the-fixed-machine-coding", "def-computable-many-one-reducibility-interface", "def-oracle-turing-reducibility-interface", "def-acceptable-numbering-with-universal-evaluation", "thm-smn-for-the-fixed-acceptable-numbering", "thm-kleene-fixed-point-theorem-for-program-indices", "def-polynomial-time-verifier-and-reduction-interface", "def-probabilistic-polynomial-time-machine-interface", "def-rp-corp-zpp-bpp-and-pp-classes", "def-pairwise-independent-hash-family-interface", "lem-chernoff-bound-for-independent-bernoulli-trials", "thm-schwartz-zippel-over-finite-fields"]
 examples: []
 ---

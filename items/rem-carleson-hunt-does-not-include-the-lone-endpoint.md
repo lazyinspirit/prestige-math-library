@@ -17,7 +17,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 proof_strategy: "direct"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

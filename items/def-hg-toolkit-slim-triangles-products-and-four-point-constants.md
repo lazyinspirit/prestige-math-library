@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Druţu–Kapovich Chapter 9 §§9.1,9.5"
       url: "https://www.math.ucdavis.edu/~kapovich/EPR/kapovich_drutu.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

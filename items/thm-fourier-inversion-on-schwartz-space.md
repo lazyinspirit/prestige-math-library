@@ -3,7 +3,7 @@ id: thm-fourier-inversion-on-schwartz-space
 kind: theorem
 title: Fourier inversion on Schwartz space
 deps: ["thm-fourier-transform-maps-schwartz-space-continuously-to-itself", "lem-schwartz-functions-and-all-derivatives-are-integrable", "thm-l-one-fourier-inversion", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

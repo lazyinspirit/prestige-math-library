@@ -2,7 +2,7 @@
 id: ex-a-first-quadrant-five-term-exact-sequence
 kind: example
 title: A first quadrant five term exact sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["thm-five-term-exact-sequence-of-a-first-quadrant-cohomological-spectral-sequence", "thm-the-cohomological-filtered-complex-construction", "lem-abelian-group-model-for-spectral-sequence-computations", "lem-the-filtered-differential-induces-d-r-on-the-r-page"]

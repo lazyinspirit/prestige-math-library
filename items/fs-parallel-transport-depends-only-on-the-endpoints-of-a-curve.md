@@ -2,7 +2,7 @@
 id: fs-parallel-transport-depends-only-on-the-endpoints-of-a-curve
 kind: false-statement
 title: "Parallel transport depends only on the endpoints of a curve"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law","prop-local-frame-formula-for-covariant-differentiation-along-a-curve","prop-parallel-transport-under-reparametrization-reversal-and-concatenation"]
 provenance:

@@ -1,7 +1,7 @@
 ---
 page: "fourier-transform-convolution-and-approximate-identities-examples"
 title: "Fourier Transform Convolution and Approximate Identities — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-fourier-transform-of-an-interval-indicator", "ex-fourier-transform-of-a-gaussian", "ex-fourier-transform-of-the-poisson-kernel", "ex-fourier-transform-of-a-compactly-supported-triangle-function", "cex-fourier-transform-of-an-l-one-function-need-not-be-integrable", "cex-fourier-inversion-need-not-hold-at-every-point-of-an-l-one-representative", "cex-riemann-lebesgue-has-no-universal-rate", "rem-wiener-tauberian-theorem"]
 ---

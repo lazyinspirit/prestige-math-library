@@ -2,7 +2,7 @@
 id: def-levi-civita-connection
 kind: definition
 title: "Levi civita connection"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-affine-connection-on-a-smooth-manifold","def-metric-compatible-connection-on-a-riemannian-vector-bundle","def-torsion-tensor-of-an-affine-connection"]
 provenance:

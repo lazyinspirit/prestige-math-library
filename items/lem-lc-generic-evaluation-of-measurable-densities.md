@@ -2,7 +2,7 @@
 id: lem-lc-generic-evaluation-of-measurable-densities
 kind: lemma
 title: Generic evaluation of bounded measurable functions by rational cuts
-status: draft
+status: published
 origin: pipeline
 deps: [lem-lc-generic-boolean-ground-joins, lem-lc-probability-algebra-completeness, prop-closure-properties-of-measurable-functions-used-by-the-integral, def-extended-real-valued-measurable-function, def-dedekind-cut, def-cut-addition, thm-check-name-evaluation-and-generic-reconstruction, thm-ordinals-and-omega-are-absolute-in-transitive-models, def-axiom-of-choice]
 verification:

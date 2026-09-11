@@ -1,7 +1,7 @@
 ---
 page: "kolmogorov-block-construction-and-almost-everywhere-divergence-examples"
 title: "Kolmogorov’s Block Construction and Almost-Everywhere Divergence: Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-one-finite-kolmogorov-frequency-block", "ex-summable-exceptional-measures-in-the-kolmogorov-induction"]
 ---

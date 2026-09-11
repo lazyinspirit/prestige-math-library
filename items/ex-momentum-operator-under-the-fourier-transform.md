@@ -3,7 +3,7 @@ id: ex-momentum-operator-under-the-fourier-transform
 kind: example
 title: Momentum operator under the Fourier transform
 deps: ["lem-real-ltwo-multipliers-and-unitary-transport", "thm-plancherel", "thm-fourier-transform-maps-schwartz-space-continuously-to-itself", "thm-fourier-translation-modulation-dilation-and-reflection-laws", "lem-schwartz-space-is-dense-in-l-two", "thm-l-one-l-two-agreement-of-fourier-transform", "lem-complex-translation-and-approximate-identity-interfaces", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

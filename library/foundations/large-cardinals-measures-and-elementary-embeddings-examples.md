@@ -1,7 +1,7 @@
 ---
 page: "large-cardinals-measures-and-elementary-embeddings-examples"
 title: "Large Cardinals, Measures, and Elementary Embeddings: Examples and Counterexamples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-lc-principal-ultrapower-calculation", "ex-lc-normal-measure-identity-and-successor", "cex-lc-countably-incomplete-ultrapower", "ex-lc-first-inaccessible-is-not-mahlo", "fs-zfc-proves-there-is-an-inaccessible-cardinal"]
 ---

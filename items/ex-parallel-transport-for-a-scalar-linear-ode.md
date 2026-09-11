@@ -2,7 +2,7 @@
 id: ex-parallel-transport-for-a-scalar-linear-ode
 kind: example
 title: "Parallel transport for a scalar linear ode"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-local-frame-formula-for-covariant-differentiation-along-a-curve","thm-existence-and-uniqueness-of-parallel-sections"]
 provenance:

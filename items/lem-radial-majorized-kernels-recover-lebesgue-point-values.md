@@ -3,7 +3,7 @@ id: lem-radial-majorized-kernels-recover-lebesgue-point-values
 kind: lemma
 title: Lebesgue-point convergence for radial-majorized kernels
 deps: ["def-lebesgue-point-and-lebesgue-set", "def-l-one-approximate-identity-on-rn", "thm-tonelli-theorem-for-sigma-finite-product-spaces", "lem-euclidean-balls-have-positive-finite-lebesgue-measure", "thm-linear-change-of-variables-for-lebesgue-measure", "thm-borel-sets-are-lebesgue-measurable", "def-countable-choice", "cor-c-one-change-of-variables-for-l-one-functions"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

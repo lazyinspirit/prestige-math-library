@@ -2,7 +2,7 @@
 id: lem-lc-boolean-generic-truth
 kind: lemma
 title: Boolean truth for a supplied generic extension
-status: draft
+status: published
 origin: pipeline
 deps: [lem-lc-generic-boolean-ground-joins, def-boolean-valued-name-semantics, lem-boolean-valued-semantics-is-well-defined, def-forcing-name-valuation-and-generic-extension, lem-forcing-names-and-name-ranks-are-absolute, def-forcing-names-and-name-rank]
 verification:

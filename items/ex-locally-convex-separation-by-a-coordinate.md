@@ -2,7 +2,7 @@
 id: "ex-locally-convex-separation-by-a-coordinate"
 kind: "example"
 title: "Coordinate functionals give an explicit uniform separating gap"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["ex-product-scalar-topology-is-locally-convex", "def-locally-convex-topological-vector-space", "thm-product-universal-property", "lem-complex-conjugation-and-modulus-laws"]
 justified_by: []

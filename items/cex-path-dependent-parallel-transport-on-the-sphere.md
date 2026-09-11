@@ -2,7 +2,7 @@
 id: cex-path-dependent-parallel-transport-on-the-sphere
 kind: counterexample
 title: "Path dependent parallel transport on the sphere"
-status: draft
+status: published
 origin: pipeline
 deps: ["ex-parallel-transport-on-the-round-sphere-along-the-equator","prop-parallel-transport-under-reparametrization-reversal-and-concatenation","thm-existence-and-uniqueness-of-parallel-sections"]
 provenance:

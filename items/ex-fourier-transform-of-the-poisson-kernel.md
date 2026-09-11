@@ -3,7 +3,7 @@ id: ex-fourier-transform-of-the-poisson-kernel
 kind: example
 title: Poisson kernel transform and Abel summability on the line
 deps: ["def-fourier-transform-on-l-one-of-rn", "thm-l-one-fourier-inversion", "thm-fourier-translation-modulation-dilation-and-reflection-laws", "lem-radial-majorized-kernels-recover-lebesgue-point-values", "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces", "thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line", "lem-complex-integration-by-parts-on-intervals-and-decaying-lines", "thm-sine-and-cosine-derivatives", "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

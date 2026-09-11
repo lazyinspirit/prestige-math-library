@@ -2,7 +2,7 @@
 id: "thm-locally-convex-strict-separation"
 kind: "theorem"
 title: "Uniform strict separation of compact and closed convex sets"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-locally-convex-topological-vector-space", "lem-topological-vector-space-translation-scaling-and-absorption", "lem-balanced-convex-zero-neighborhood-refinement", "thm-locally-convex-open-convex-separation", "def-hahn-banach-extension-principle-relative", "def-compact-space", "def-subspace-topology-top", "lem-finite-choice", "thm-compactness-under-continuous-maps"]
 justified_by: []

@@ -2,7 +2,7 @@
 id: def-strong-convergence-of-a-spectral-sequence
 kind: definition
 title: Strong convergence of a spectral sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["def-regular-spectral-sequence", "def-weak-convergence-of-a-spectral-sequence", "def-exhaustive-separated-bounded-and-finite-filtration", "def-limit-and-colimit-of-a-diagram"]

@@ -2,7 +2,7 @@
 id: def-torsion-tensor-of-an-affine-connection
 kind: definition
 title: "Torsion tensor of an affine connection"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-affine-connection-on-a-smooth-manifold","prop-coordinate-formula-for-the-lie-bracket"]
 justified_by: [lem-torsion-is-c-infinity-bilinear-and-skew-symmetric]

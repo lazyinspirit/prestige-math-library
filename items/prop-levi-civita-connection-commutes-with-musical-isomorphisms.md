@@ -2,7 +2,7 @@
 id: prop-levi-civita-connection-commutes-with-musical-isomorphisms
 kind: proposition
 title: "Levi civita connection commutes with musical isomorphisms"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-fundamental-theorem-of-riemannian-geometry","def-dual-connection","thm-the-musical-maps-are-smooth-inverse-bundle-isomorphisms"]
 provenance:

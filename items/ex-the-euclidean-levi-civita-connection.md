@@ -2,7 +2,7 @@
 id: ex-the-euclidean-levi-civita-connection
 kind: example
 title: "The euclidean levi civita connection"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-christoffel-formula-for-the-levi-civita-connection","prop-local-frame-formula-for-covariant-differentiation-along-a-curve"]
 provenance:

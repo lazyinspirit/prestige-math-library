@@ -2,7 +2,7 @@
 id: cex-sum-and-product-totalisations-can-differ-on-infinite-diagonals
 kind: counterexample
 title: Sum and product totalisations can differ on infinite diagonals
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-direct-sum-total-complex-of-a-double-complex, lem-the-total-differential-squares-to-zero, def-product-total-complex-of-a-double-complex, lem-countable-sequence-groups-and-tail-filtrations]

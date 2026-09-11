@@ -2,7 +2,7 @@
 id: def-connection-one-form-in-a-local-frame
 kind: definition
 title: "Connection one form in a local frame"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-a-bundle-connection-is-local-and-restricts-to-open-sets","def-local-frame-and-global-frame-of-a-vector-bundle","prop-smoothness-of-a-section-is-equivalent-to-smooth-local-components"]
 provenance:

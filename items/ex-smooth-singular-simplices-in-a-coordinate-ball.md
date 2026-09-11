@@ -16,7 +16,7 @@ sources:
     - title: "DG-16 design; Hatcher/Park control"
       url: "https://people.math.harvard.edu/~pspark/derham.pdf"
       locator: "DG-16 B inventory; explicit verification or unresolved witness in proof_plan"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

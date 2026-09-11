@@ -2,7 +2,7 @@
 id: "thm-locally-convex-open-convex-separation"
 kind: "theorem"
 title: "Continuous separation when one convex set is open"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-locally-convex-topological-vector-space", "lem-topological-vector-space-translation-scaling-and-absorption", "lem-continuous-gauge-of-an-open-convex-zero-neighborhood", "def-hahn-banach-extension-principle-relative", "thm-relative-hahn-banach-dominated-extension", "lem-restriction-of-scalars", "thm-infimum-property"]
 justified_by: []

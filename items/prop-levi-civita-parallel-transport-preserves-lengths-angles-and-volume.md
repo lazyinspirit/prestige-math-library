@@ -2,7 +2,7 @@
 id: prop-levi-civita-parallel-transport-preserves-lengths-angles-and-volume
 kind: proposition
 title: "Levi civita parallel transport preserves lengths angles and volume"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-fundamental-theorem-of-riemannian-geometry","prop-a-connection-is-metric-compatible-iff-parallel-transport-is-isometric","def-riemannian-volume-density","def-riemannian-volume-form-on-an-oriented-manifold"]
 provenance:

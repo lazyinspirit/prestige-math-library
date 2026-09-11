@@ -10,7 +10,7 @@ sources:
   references:
     - title: "Druţu–Kapovich Corollary 9.62, explicit failure without properness"
       url: "https://www.math.ucdavis.edu/~kapovich/EPR/kapovich_drutu.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

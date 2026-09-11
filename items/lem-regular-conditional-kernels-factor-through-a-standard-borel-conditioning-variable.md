@@ -17,7 +17,7 @@ sources:
       url: https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf
     - title: "Varadhan, Probability Theory, Chapter 4"
       url: https://math.nyu.edu/~varadhan/course/PROB.ch4.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

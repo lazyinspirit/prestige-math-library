@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Druţu–Kapovich §9.9, ray topology; sequence-product comparison requires additional full treatment"
       url: "https://www.math.ucdavis.edu/~kapovich/EPR/kapovich_drutu.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

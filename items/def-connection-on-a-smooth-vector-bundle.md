@@ -2,7 +2,7 @@
 id: def-connection-on-a-smooth-vector-bundle
 kind: definition
 title: Connection on a smooth vector bundle
-status: draft
+status: published
 origin: pipeline
 deps: ["def-smooth-section-local-section-and-support", "def-differential-of-a-smooth-real-valued-function", "def-smooth-vector-bundle-rank-fibre-and-trivial-bundle", "def-product-topology", "thm-product-of-countable", "prop-second-countability-is-hereditary", "def-quotient-topology", "lem-matrix-inversion-preserves-ck-regularity", "lem-open-or-closed-surjection-is-quotient"]
 provenance:

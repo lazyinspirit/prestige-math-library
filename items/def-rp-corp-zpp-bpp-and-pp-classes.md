@@ -2,7 +2,7 @@
 id: "def-rp-corp-zpp-bpp-and-pp-classes"
 kind: "definition"
 title: "Rp corp zpp bpp and pp classes"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-probabilistic-polynomial-time-machine-interface", "thm-markov-inequality", "thm-nonnegative-series-bounded-partial-sums"]
 justified_by: []

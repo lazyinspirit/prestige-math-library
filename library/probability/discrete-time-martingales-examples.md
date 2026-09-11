@@ -1,7 +1,7 @@
 ---
 page: "discrete-time-martingales-examples"
 title: "Discrete Time Martingales — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-partial-sums-of-independent-centered-variables-are-a-martingale", "ex-product-martingale-from-independent-mean-one-factors", "ex-likelihood-ratio-martingale", "ex-polya-urn-proportion-martingale", "ex-dyadic-conditional-expectation-martingale", "ex-square-of-a-martingale-minus-quadratic-compensator", "cex-an-adapted-process-need-not-be-a-martingale", "cex-an-unbounded-predictable-transform-may-lose-integrability", "cex-a-submartingale-need-not-have-increasing-sample-paths"]
 ---

@@ -16,7 +16,7 @@ sources:
 provenance:
   statement: literature-derived
   proof: ai-altered
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

@@ -3,7 +3,7 @@ id: thm-fourier-inversion-at-lebesgue-points-under-summability
 kind: theorem
 title: Gaussian Fourier summability at Lebesgue points
 deps: ["thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions", "lem-gaussian-fourier-summability-kernel-is-an-approximate-identity", "lem-radial-majorized-kernels-recover-lebesgue-point-values", "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces", "def-countable-choice", "thm-l-one-approximate-identities-converge-in-l-p", "lem-complex-translation-and-approximate-identity-interfaces"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

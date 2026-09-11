@@ -3,7 +3,7 @@ id: thm-l-one-fourier-inversion
 kind: theorem
 title: L1 Fourier inversion with an integrable transform
 deps: ["thm-fourier-inversion-at-lebesgue-points-under-summability", "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions", "thm-fourier-translation-modulation-dilation-and-reflection-laws", "thm-dominated-convergence", "def-countable-choice", "thm-almost-every-point-is-a-lebesgue-point"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

@@ -2,7 +2,7 @@
 id: "lem-locally-convex-closures-and-finite-compact-convex-hulls"
 kind: "lemma"
 title: "Convex closures and hulls of finitely many compact convex sets"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-locally-convex-topological-vector-space", "lem-topological-vector-space-translation-scaling-and-absorption", "thm-closure-characterisation-top", "thm-finite-products-of-compact-spaces", "cor-heine-borel-in-the-product-topology", "thm-compactness-under-continuous-maps", "thm-compact-subset-of-a-hausdorff-space-is-closed", "lem-finite-choice"]
 justified_by: []

@@ -2,7 +2,7 @@
 id: "ex-product-scalar-topology-is-locally-convex"
 kind: "example"
 title: "Arbitrary products of the scalar field are locally convex"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-topological-vector-space-for-local-convexity", "def-locally-convex-topological-vector-space", "def-product-topology", "thm-product-universal-property", "def-hausdorff-space", "lem-topological-vector-space-translation-scaling-and-absorption", "lem-finite-choice"]
 justified_by: []

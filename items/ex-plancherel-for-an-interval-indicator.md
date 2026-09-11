@@ -3,7 +3,7 @@ id: ex-plancherel-for-an-interval-indicator
 kind: example
 title: Sinc-square integral from Plancherel
 deps: ["def-fourier-transform-on-l-one-of-rn", "thm-l-one-l-two-agreement-of-fourier-transform", "thm-plancherel", "lem-complex-integration-by-parts-on-intervals-and-decaying-lines", "thm-sine-and-cosine-derivatives", "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

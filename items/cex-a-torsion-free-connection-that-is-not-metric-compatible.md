@@ -2,7 +2,7 @@
 id: cex-a-torsion-free-connection-that-is-not-metric-compatible
 kind: counterexample
 title: "A torsion free connection that is not metric compatible"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law","prop-torsion-free-is-equivalent-to-symmetric-christoffel-symbols-in-coordinate-frames","def-metric-compatible-connection-on-a-riemannian-vector-bundle"]
 provenance:

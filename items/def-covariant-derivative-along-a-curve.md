@@ -2,7 +2,7 @@
 id: def-covariant-derivative-along-a-curve
 kind: definition
 title: "Covariant derivative along a curve"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-pullback-connection-is-well-defined-and-functorial","def-vector-field-and-section-along-a-smooth-curve"]
 provenance:

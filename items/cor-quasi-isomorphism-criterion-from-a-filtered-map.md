@@ -2,7 +2,7 @@
 id: cor-quasi-isomorphism-criterion-from-a-filtered-map
 kind: corollary
 title: Quasi isomorphism criterion from a filtered map
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["thm-spectral-sequence-comparison-theorem", "thm-a-first-quadrant-filtered-complex-spectral-sequence-converges-to-filtered-homology", "def-filtered-chain-map", "prop-a-filtered-chain-map-induces-a-morphism-of-spectral-sequences", "def-quasi-isomorphism", "prop-e-one-is-homology-of-the-associated-graded-complex", "thm-bounded-filtered-complex-spectral-sequence-abuts-to-filtered-homology", "def-strong-convergence-of-a-spectral-sequence", "def-induced-filtration-on-homology"]

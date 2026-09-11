@@ -3,7 +3,7 @@ id: thm-plancherel
 kind: theorem
 title: Plancherel theorem
 deps: ["thm-parseval-pairing-on-schwartz-space", "lem-schwartz-space-is-dense-in-l-two", "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space", "thm-extension-of-a-bounded-map-from-a-dense-subspace", "def-l-p-space-as-a-quotient-by-null-functions", "lem-complex-lp-completeness-density-and-inner-product", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

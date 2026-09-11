@@ -2,7 +2,7 @@
 id: thm-lc-supercompact-preparation-interface
 kind: theorem
 title: Supercompact preparation interface
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-lc-laver-function-existence", "thm-lc-supercompactness-closed-embedding-characterization", "thm-lc-measurability-normal-measures-and-embeddings", "lem-lc-inaccessible-size-and-rank-bounds", "lem-boolean-valued-semantics-is-well-defined", "lem-lc-boolean-generic-truth", "lem-lc-boolean-generic-zfc-and-ordinals", "lem-lc-generic-boolean-ground-joins", "def-forcing-name-valuation-and-generic-extension", "thm-transfinite-recursion", "def-axiom-of-choice"]
 provenance:

@@ -2,7 +2,7 @@
 id: ex-a-filtered-quasi-isomorphism-detected-on-associated-graded-complexes
 kind: example
 title: A filtered quasi isomorphism detected on associated graded complexes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["cor-quasi-isomorphism-criterion-from-a-filtered-map", "lem-abelian-group-model-for-spectral-sequence-computations"]

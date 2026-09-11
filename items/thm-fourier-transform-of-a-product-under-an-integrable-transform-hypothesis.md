@@ -3,7 +3,7 @@ id: thm-fourier-transform-of-a-product-under-an-integrable-transform-hypothesis
 kind: theorem
 title: Fourier transform of a product with one integrable transform
 deps: ["thm-l-one-fourier-inversion", "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions", "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

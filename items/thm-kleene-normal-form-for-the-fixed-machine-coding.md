@@ -2,7 +2,7 @@
 id: "thm-kleene-normal-form-for-the-fixed-machine-coding"
 kind: "theorem"
 title: "Kleene normal form for the fixed machine coding"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-fixed-machine-history-predicate-is-primitive-recursive", "def-primitive-recursive-functions-by-initial-functions-and-schemes", "lem-step-by-step-interpreter-for-machine-codes"]
 justified_by: []

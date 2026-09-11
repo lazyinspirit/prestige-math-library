@@ -3,7 +3,7 @@ id: lem-l-one-fourier-transform-is-well-defined
 kind: lemma
 title: The integral transform is representative independent
 deps: ["def-fourier-transform-on-l-one-of-rn", "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity", "thm-the-lebesgue-integral-respects-almost-everywhere-equality", "thm-integral-triangle-inequality"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

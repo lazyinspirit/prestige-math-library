@@ -2,7 +2,7 @@
 id: "def-kleene-computation-predicate-and-output-map"
 kind: "definition"
 title: "Kleene computation predicate and output map"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-fixed-coding-primitive-recursive-arithmetic-and-sequences", "def-effective-encoding-of-turing-machines", "def-turing-machine-configuration", "def-one-step-configuration-relation", "def-partial-function-computed-by-a-machine", "lem-finite-tuples-admit-effective-prefix-free-encodings"]
 justified_by: []

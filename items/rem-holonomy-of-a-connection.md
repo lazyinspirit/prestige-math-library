@@ -2,7 +2,7 @@
 id: rem-holonomy-of-a-connection
 kind: remark
 title: "Holonomy of a connection"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-parallel-transport-under-reparametrization-reversal-and-concatenation","thm-parallel-transport-is-a-linear-isomorphism"]
 provenance:

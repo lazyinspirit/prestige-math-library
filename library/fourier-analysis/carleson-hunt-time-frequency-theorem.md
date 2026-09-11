@@ -1,7 +1,7 @@
 ---
 page: "carleson-hunt-time-frequency-theorem"
 title: "The Carleson–Hunt Time–Frequency Theorem"
-status: "draft"
+status: published
 items: ["def-carleson-operator-and-measurable-linearisation", "def-carleson-tiles-wave-packets-and-tile-order", "lem-wave-packet-model-dominates-the-linearised-carleson-operator", "def-density-size-and-tree-count-for-carleson-tiles", "lem-carleson-density-selection", "lem-carleson-size-selection", "lem-carleson-single-tree-estimate", "lem-carleson-forest-summation-gives-restricted-weak-ltwo", "lem-carleson-signed-tree-weak-one-one-estimate", "lem-hunt-exceptional-set-and-distribution-estimates", "lem-carleson-restricted-weak-interpolation", "thm-carleson-maximal-operator-is-strong-ltwo", "lem-carleson-real-line-to-torus-transfer", "thm-carleson-hunt-maximal-inequality-on-the-torus"]
 examples: []
 ---

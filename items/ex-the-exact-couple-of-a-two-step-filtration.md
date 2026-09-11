@@ -2,7 +2,7 @@
 id: ex-the-exact-couple-of-a-two-step-filtration
 kind: example
 title: The exact couple of a two step filtration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["thm-a-filtered-complex-produces-an-exact-couple", "lem-abelian-group-model-for-spectral-sequence-computations", "def-exact-couple"]

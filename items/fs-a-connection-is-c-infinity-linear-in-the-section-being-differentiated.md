@@ -2,7 +2,7 @@
 id: fs-a-connection-is-c-infinity-linear-in-the-section-being-differentiated
 kind: false-statement
 title: "A connection is c infinity linear in the section being differentiated"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-connection-laws-in-directional-form","thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law"]
 provenance:

@@ -2,7 +2,7 @@
 id: "def-locally-convex-topological-vector-space"
 kind: "definition"
 title: "Local convexity, convex and balanced sets, and the continuous dual"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-topological-vector-space-for-local-convexity", "lem-topological-vector-space-translation-scaling-and-absorption", "def-algebraic-dual-and-linear-functional", "def-sublinear-functional", "lem-restriction-of-scalars"]
 justified_by: []

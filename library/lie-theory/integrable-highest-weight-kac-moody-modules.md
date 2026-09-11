@@ -1,7 +1,7 @@
 ---
 page: integrable-highest-weight-kac-moody-modules
 title: Integrable Highest Weight Kac Moody Modules
-status: draft
+status: published
 items:
   - thm-universal-property-and-pbw-character-of-kac-moody-verma-modules
   - thm-kac-moody-verma-module-has-a-unique-simple-quotient

@@ -3,7 +3,7 @@ id: thm-differentiation-polynomial-multiplication-translation-and-modulation-are
 kind: theorem
 title: Basic operations are continuous on Schwartz space
 deps: ["def-schwartz-space-and-its-seminorms", "def-schwartz-topology-and-convergence", "def-ck-and-multi-index-notation-in-several-variables", "thm-complex-exponential-addition-and-real-extension", "thm-sine-and-cosine-derivatives", "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity", "thm-general-leibniz-rule", "thm-symmetry-of-higher-mixed-partials"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

@@ -2,7 +2,7 @@
 id: "def-primitive-recursive-functions-by-initial-functions-and-schemes"
 kind: "definition"
 title: "Primitive recursive functions by initial functions and schemes"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-natural-numbers", "thm-recursion"]
 justified_by: []

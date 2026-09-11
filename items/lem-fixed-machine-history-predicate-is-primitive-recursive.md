@@ -2,7 +2,7 @@
 id: "lem-fixed-machine-history-predicate-is-primitive-recursive"
 kind: "lemma"
 title: "Fixed machine history predicate is primitive recursive"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-kleene-computation-predicate-and-output-map", "lem-fixed-coding-primitive-recursive-arithmetic-and-sequences", "thm-induction-principle"]
 justified_by: []

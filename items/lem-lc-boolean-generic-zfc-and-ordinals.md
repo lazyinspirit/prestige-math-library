@@ -2,7 +2,7 @@
 id: lem-lc-boolean-generic-zfc-and-ordinals
 kind: lemma
 title: ZFC and ordinal preservation for supplied transitive Boolean generic extensions
-status: draft
+status: published
 origin: pipeline
 deps: [lem-lc-boolean-generic-truth, lem-lc-generic-boolean-ground-joins, def-boolean-valued-name-semantics, thm-check-name-evaluation-and-generic-reconstruction, thm-generic-extension-transitivity-and-rank-bound, lem-forcing-names-and-name-ranks-are-absolute, thm-ordinals-and-omega-are-absolute-in-transitive-models, lem-bounded-definitions-of-basic-set-operations, def-axiom-of-choice]
 verification:

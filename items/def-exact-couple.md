@@ -2,7 +2,7 @@
 id: def-exact-couple
 kind: definition
 title: Exact couple
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-abelian-category, def-homology-object-of-a-chain-complex]

@@ -12,7 +12,7 @@ sources:
 provenance:
   statement: ai-altered
   proof: ai-generated
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

@@ -2,7 +2,7 @@
 id: thm-every-smooth-vector-bundle-admits-a-connection
 kind: theorem
 title: "Every smooth vector bundle admits a connection"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law","thm-smooth-partitions-of-unity-exist-on-manifolds","thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary","lem-locally-finite-linear-combinations-of-sections-are-smooth","def-axiom-of-choice"]
 provenance:

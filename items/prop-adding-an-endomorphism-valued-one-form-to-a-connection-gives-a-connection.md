@@ -2,7 +2,7 @@
 id: prop-adding-an-endomorphism-valued-one-form-to-a-connection-gives-a-connection
 kind: proposition
 title: "Adding an endomorphism valued one form to a connection gives a connection"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-the-difference-of-two-connections-is-an-endomorphism-valued-one-form","def-connection-on-a-smooth-vector-bundle"]
 provenance:

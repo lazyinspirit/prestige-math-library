@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Hamann Theorems 5.3.7–5.3.8 pp.91–94; complete torsion-allowed proof"
       url: "https://www.math.uni-hamburg.de/home/hamann/Lehre/GeoGrTh/GeoGrThEn.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

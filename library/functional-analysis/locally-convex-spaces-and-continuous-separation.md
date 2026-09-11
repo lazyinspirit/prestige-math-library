@@ -1,7 +1,7 @@
 ---
 page: "locally-convex-spaces-and-continuous-separation"
 title: "Locally Convex Spaces and Continuous Separation"
-status: "draft"
+status: published
 items: ["def-topological-vector-space-for-local-convexity", "lem-topological-vector-space-translation-scaling-and-absorption", "def-locally-convex-topological-vector-space", "lem-locally-convex-closures-and-finite-compact-convex-hulls", "lem-balanced-convex-zero-neighborhood-refinement", "def-minkowski-gauge-of-an-open-convex-zero-neighborhood", "lem-continuous-gauge-of-an-open-convex-zero-neighborhood", "thm-locally-convex-open-convex-separation", "thm-locally-convex-continuous-dual-separates-points", "thm-locally-convex-strict-separation"]
 examples: []
 ---

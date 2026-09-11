@@ -2,7 +2,7 @@
 id: def-derived-exact-couple
 kind: definition
 title: Derived exact couple
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-exact-couple, lem-the-exact-couple-differential-squares-to-zero, lem-spectral-sequence-subquotient-and-local-lifting-calculus]

@@ -2,7 +2,7 @@
 id: prop-torsion-free-is-equivalent-to-symmetric-christoffel-symbols-in-coordinate-frames
 kind: proposition
 title: "Torsion free is equivalent to symmetric christoffel symbols in coordinate frames"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-torsion-is-c-infinity-bilinear-and-skew-symmetric","def-christoffel-symbols-of-an-affine-connection","prop-coordinate-formula-for-the-lie-bracket"]
 provenance:

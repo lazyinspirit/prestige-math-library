@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Reduced-word construction: local adaptation of the earlier proved free-group item; Drutu–Kapovich metric tree discussion"
       url: "https://www.math.ucdavis.edu/~kapovich/EPR/kapovich_drutu.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

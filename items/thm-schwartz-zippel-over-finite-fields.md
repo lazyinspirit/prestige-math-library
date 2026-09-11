@@ -2,7 +2,7 @@
 id: "thm-schwartz-zippel-over-finite-fields"
 kind: "theorem"
 title: "Schwartz zippel over finite fields"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-monomials-multidegree-and-total-degree", "thm-root-bound-for-polynomials-over-a-domain", "def-field", "thm-induction-principle"]
 justified_by: []

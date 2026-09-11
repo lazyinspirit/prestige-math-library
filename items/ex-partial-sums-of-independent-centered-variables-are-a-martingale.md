@@ -16,7 +16,7 @@ sources:
   references:
     - title: "Durrett, Probability: Theory and Examples, fifth edition"
       url: https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

@@ -2,7 +2,7 @@
 id: lem-the-exact-couple-differential-squares-to-zero
 kind: lemma
 title: The exact couple differential squares to zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-differential-associated-to-an-exact-couple, def-exact-couple]

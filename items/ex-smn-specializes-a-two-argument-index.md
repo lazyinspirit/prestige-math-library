@@ -2,7 +2,7 @@
 id: "ex-smn-specializes-a-two-argument-index"
 kind: "example"
 title: "Smn specializes a two argument index"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-smn-for-the-fixed-acceptable-numbering", "lem-fixed-coding-primitive-recursive-arithmetic-and-sequences"]
 justified_by: []

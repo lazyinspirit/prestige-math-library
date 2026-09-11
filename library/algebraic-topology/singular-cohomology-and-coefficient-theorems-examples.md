@@ -1,7 +1,7 @@
 ---
 page: singular-cohomology-and-coefficient-theorems-examples
 title: Singular Cohomology and Coefficient Theorems — Examples
-status: draft
+status: published
 examples:
   - ex-integral-cohomology-of-real-projective-space-from-uct
   - ex-cohomology-of-lens-spaces-from-uct

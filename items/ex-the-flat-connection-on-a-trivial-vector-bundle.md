@@ -2,7 +2,7 @@
 id: ex-the-flat-connection-on-a-trivial-vector-bundle
 kind: example
 title: "The flat connection on a trivial vector bundle"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law","def-lie-bracket-of-smooth-vector-fields"]
 provenance:

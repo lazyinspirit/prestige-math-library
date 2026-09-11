@@ -2,7 +2,7 @@
 id: def-dual-connection
 kind: definition
 title: "Dual connection"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law","def-connection-on-a-smooth-vector-bundle","prop-local-coordinate-formula-for-a-bundle-connection"]
 provenance:

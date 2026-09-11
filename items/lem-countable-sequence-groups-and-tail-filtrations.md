@@ -2,7 +2,7 @@
 id: lem-countable-sequence-groups-and-tail-filtrations
 kind: lemma
 title: Countable sequence groups and tail filtrations
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [lem-abelian-group-model-for-spectral-sequence-computations, def-products-and-coproducts, def-limit-and-colimit-of-a-diagram, thm-division-algorithm-in-z]

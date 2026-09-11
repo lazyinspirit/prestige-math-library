@@ -22,7 +22,7 @@ sources:
     - title: "Peter Selick, MAT1345 lecture notes"
       url: "https://www.math.toronto.edu/selick/mat1345/notes.pdf"
       locator: "Chapter 1 Definition 1.1.4 p.2, associated construction p.3, section 1.2 pullback paragraph pp.7–8; right-action convention translated explicitly"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

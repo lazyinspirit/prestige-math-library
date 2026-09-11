@@ -2,7 +2,7 @@
 id: ex-a-connection-one-form-on-a-trivial-line-bundle
 kind: example
 title: "A connection one form on a trivial line bundle"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law"]
 provenance:

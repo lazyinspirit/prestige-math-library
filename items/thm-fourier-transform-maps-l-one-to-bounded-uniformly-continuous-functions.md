@@ -3,7 +3,7 @@ id: thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions
 kind: theorem
 title: The L1 transform is bounded and uniformly continuous
 deps: ["lem-l-one-fourier-transform-is-well-defined", "thm-dominated-convergence", "thm-complex-exponential-addition-and-real-extension", "thm-linearity-of-the-lebesgue-integral-on-l-one", "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity", "cor-mean-value-theorem", "thm-sine-and-cosine-derivatives", "thm-cauchy-schwarz-and-the-euclidean-norm", "lem-complex-conjugation-and-modulus-laws"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

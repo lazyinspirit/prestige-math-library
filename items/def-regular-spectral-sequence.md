@@ -2,7 +2,7 @@
 id: def-regular-spectral-sequence
 kind: definition
 title: Regular spectral sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["def-homological-spectral-sequence", "prop-degree-reasons-force-stabilization-in-a-bounded-region"]

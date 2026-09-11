@@ -2,7 +2,7 @@
 id: lem-lc-solovay-density-locality-and-null-joins
 kind: lemma
 title: Solovay densities and localized small null joins
-status: draft
+status: published
 origin: pipeline
 deps: [lem-lc-probability-algebra-completeness, def-lc-complete-ultrafilters-and-measurable-cardinals, thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality, thm-linearity-of-the-lebesgue-integral-on-l-one, prop-order-and-scalar-rules-for-the-nonnegative-integral, thm-monotone-convergence-for-the-integral, thm-nonnegative-integral-zero-iff-zero-almost-everywhere, def-axiom-of-choice, prop-closure-properties-of-measurable-functions-used-by-the-integral]
 verification:

@@ -2,7 +2,7 @@
 id: def-differential-associated-to-an-exact-couple
 kind: definition
 title: Differential associated to an exact couple
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-exact-couple]

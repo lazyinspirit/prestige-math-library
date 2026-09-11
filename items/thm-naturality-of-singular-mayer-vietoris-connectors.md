@@ -11,7 +11,7 @@ sources:
     - title: "DG-16 design; Hatcher/Park control"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
       locator: "DG-16 item 11; Hatcher §3.1 or Park §2 as applicable; source audit limitations in batch notes"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

@@ -1,7 +1,7 @@
 ---
 page: "schwartz-space-and-the-plancherel-theorem-examples"
 title: "Schwartz Space and the Plancherel Theorem — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-gaussians-and-polynomials-times-gaussians-are-schwartz", "cex-a-smooth-integrable-function-need-not-be-schwartz", "cex-a-schwartz-function-need-not-have-compact-support", "ex-hermite-functions-as-fourier-eigenfunctions", "ex-plancherel-for-an-interval-indicator", "ex-poisson-summation-for-the-gaussian-and-theta-functional-equation", "thm-heisenberg-uncertainty-inequality", "rem-hausdorff-young-and-interpolation", "ex-momentum-operator-under-the-fourier-transform"]
 ---

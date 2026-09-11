@@ -3,7 +3,7 @@ id: lem-schwartz-space-is-dense-in-l-two
 kind: lemma
 title: Schwartz space is dense in L2
 deps: ["def-schwartz-space-and-its-seminorms", "lem-schwartz-functions-and-all-derivatives-are-integrable", "thm-c-c-infinity-rn-is-dense-in-l-p-of-rn", "def-countable-choice", "lem-complex-lp-completeness-density-and-inner-product"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

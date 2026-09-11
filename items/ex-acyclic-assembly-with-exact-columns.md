@@ -2,7 +2,7 @@
 id: ex-acyclic-assembly-with-exact-columns
 kind: example
 title: Acyclic assembly with exact columns
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["thm-acyclic-assembly-lemma-for-a-first-quadrant-double-complex", "lem-abelian-group-model-for-spectral-sequence-computations", "def-direct-sum-total-complex-of-a-double-complex"]

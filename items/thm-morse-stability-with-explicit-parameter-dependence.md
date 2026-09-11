@@ -17,7 +17,7 @@ sources:
       url: "https://arxiv.org/pdf/1810.04579"
     - title: "Gouëzel, AFP Morse_Gromov_Theorem.thy, complete exact-constant proof"
       url: "https://www.isa-afp.org/browser_info/current/AFP/Gromov_Hyperbolicity/Morse_Gromov_Theorem.html"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

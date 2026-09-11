@@ -2,7 +2,7 @@
 id: lem-lc-fine-measure-coordinate-family
 kind: lemma
 title: Fine-measure coordinates avoiding small supports
-status: draft
+status: published
 origin: pipeline
 deps: [thm-lc-strong-compactness-fine-measures-and-logic, def-lc-fine-ultrafilters-strong-compactness-and-supercompactness, def-lc-complete-ultrafilters-and-measurable-cardinals, thm-ordinal-arithmetic-monotonicity, thm-hartogs, thm-mostowski-collapse]
 verification:

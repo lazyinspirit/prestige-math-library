@@ -1,7 +1,7 @@
 ---
 page: "fibrations-fiber-bundles-and-homotopy-exact-sequences-examples"
 title: "Fibrations Fiber Bundles and Homotopy Exact Sequences — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-path-loop-fibration-and-its-connecting-isomorphisms", "ex-hopf-circle-fibration", "ex-real-projective-space-cover-as-a-discrete-fiber-fibration", "ex-mobius-band-as-an-interval-bundle-with-monodromy", "cex-a-surjective-map-need-not-be-a-fibration", "cex-a-fibration-need-not-be-a-locally-trivial-bundle"]
 ---

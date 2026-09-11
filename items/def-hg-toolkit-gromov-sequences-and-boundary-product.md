@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Druţu–Kapovich §9.9 ray-boundary treatment; sequence comparison expanded locally"
       url: "https://www.math.ucdavis.edu/~kapovich/EPR/kapovich_drutu.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

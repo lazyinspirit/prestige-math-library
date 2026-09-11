@@ -3,7 +3,7 @@ id: thm-poisson-summation-for-schwartz-functions
 kind: theorem
 title: Poisson summation for Schwartz functions
 deps: ["thm-fourier-transform-maps-schwartz-space-continuously-to-itself", "lem-schwartz-functions-and-all-derivatives-are-integrable", "lem-periodic-continuous-functions-are-determined-by-their-fourier-coefficients", "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces", "thm-tonelli-theorem-for-sigma-finite-product-spaces", "thm-dominated-convergence", "thm-uniform-derivative-limit-on-a-closed-interval", "def-countable-choice", "lem-complex-integration-by-parts-on-intervals-and-decaying-lines", "cor-c-one-change-of-variables-for-l-one-functions"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

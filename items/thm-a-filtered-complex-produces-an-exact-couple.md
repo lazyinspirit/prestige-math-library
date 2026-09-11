@@ -2,7 +2,7 @@
 id: thm-a-filtered-complex-produces-an-exact-couple
 kind: theorem
 title: A filtered complex produces an exact couple
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-exact-couple, def-filtered-chain-complex, thm-long-exact-sequence-in-homology, lem-spectral-sequence-subquotient-and-local-lifting-calculus, def-short-exact-sequence-of-complexes]

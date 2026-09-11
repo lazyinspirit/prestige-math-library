@@ -2,7 +2,7 @@
 id: prop-connection-laws-in-directional-form
 kind: proposition
 title: Connection laws in directional form
-status: draft
+status: published
 origin: pipeline
 deps: [def-covariant-derivative-of-a-section-in-a-vector-field-direction, def-connection-on-a-smooth-vector-bundle, lem-chart-bump-at-a-point-with-prescribed-support, lem-euclidean-bump-for-a-compact-set-inside-an-open-set]
 proof_strategy: direct

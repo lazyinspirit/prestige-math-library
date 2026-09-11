@@ -3,7 +3,7 @@ id: cor-convolution-approximate-identities-from-fourier-multipliers
 kind: corollary
 title: Fourier multipliers of approximate identities
 deps: ["thm-fourier-transform-converts-convolution-to-products", "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions", "thm-l-one-approximate-identities-converge-in-l-p", "def-l-one-approximate-identity-on-rn", "lem-complex-translation-and-approximate-identity-interfaces", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

@@ -1,7 +1,7 @@
 ---
 page: vertices-sources-and-the-green-correspondence
 title: Vertices Sources and the Green Correspondence
-status: draft
+status: published
 items:
   - def-green-exceptional-intersection-families
   - lem-green-exceptional-family-containment-and-fusion

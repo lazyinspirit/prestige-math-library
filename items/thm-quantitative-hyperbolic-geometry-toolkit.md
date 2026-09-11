@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Druţu–Kapovich Chapter 9; Hamann §§5.1–5.3; Canary §§5,7"
       url: "https://www.math.ucdavis.edu/~kapovich/EPR/kapovich_drutu.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

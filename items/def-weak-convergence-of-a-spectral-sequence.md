@@ -2,7 +2,7 @@
 id: def-weak-convergence-of-a-spectral-sequence
 kind: definition
 title: Weak convergence of a spectral sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["def-abutment-to-a-filtered-object", "def-limiting-cycles-boundaries-and-e-infinity"]

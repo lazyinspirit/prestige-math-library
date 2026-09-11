@@ -2,7 +2,7 @@
 id: fs-every-exact-couple-is-a-long-exact-sequence-with-no-extra-grading-data
 kind: false-statement
 title: Every exact couple is a long exact sequence with no extra grading data
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["def-exact-couple", "lem-abelian-group-model-for-spectral-sequence-computations"]

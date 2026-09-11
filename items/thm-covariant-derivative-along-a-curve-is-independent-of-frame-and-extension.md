@@ -2,7 +2,7 @@
 id: thm-covariant-derivative-along-a-curve-is-independent-of-frame-and-extension
 kind: theorem
 title: "Covariant derivative along a curve is independent of frame and extension"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-covariant-derivative-along-a-curve","thm-pullback-connection-is-well-defined-and-functorial"]
 provenance:

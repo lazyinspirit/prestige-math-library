@@ -2,7 +2,7 @@
 id: lem-the-total-differential-squares-to-zero
 kind: lemma
 title: The total differential squares to zero
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-direct-sum-total-complex-of-a-double-complex, def-homological-double-complex, def-products-and-coproducts]

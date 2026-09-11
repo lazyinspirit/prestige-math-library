@@ -2,7 +2,7 @@
 id: def-row-and-column-filtrations-of-a-first-quadrant-double-complex
 kind: definition
 title: Row and column filtrations of a first quadrant double complex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-direct-sum-total-complex-of-a-double-complex, lem-the-total-differential-squares-to-zero, prop-sum-and-product-totalisations-agree-on-finite-diagonal-double-complexes, def-filtered-chain-complex]

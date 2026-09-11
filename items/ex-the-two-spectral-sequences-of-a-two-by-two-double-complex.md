@@ -2,7 +2,7 @@
 id: ex-the-two-spectral-sequences-of-a-two-by-two-double-complex
 kind: example
 title: The two spectral sequences of a two by two double complex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["thm-the-row-filtration-spectral-sequence-of-a-first-quadrant-double-complex", "thm-the-column-filtration-spectral-sequence-of-a-first-quadrant-double-complex", "lem-abelian-group-model-for-spectral-sequence-computations"]

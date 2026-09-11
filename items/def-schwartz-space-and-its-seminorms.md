@@ -3,7 +3,7 @@ id: def-schwartz-space-and-its-seminorms
 kind: definition
 title: Schwartz space and its seminorms
 deps: ["def-complex-lp-and-euclidean-test-function-conventions", "def-ck-and-multi-index-notation-in-several-variables", "def-c-c-and-c-c-infinity-on-rn"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 provenance:

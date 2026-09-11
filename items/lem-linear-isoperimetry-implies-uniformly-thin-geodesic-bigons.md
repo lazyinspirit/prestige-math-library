@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Druţu–Kapovich, revised Proposition 9.104, Proposition 11.176 and Theorem 11.181"
       url: "https://www.math.ucdavis.edu/~kapovich/EPR/ggt.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

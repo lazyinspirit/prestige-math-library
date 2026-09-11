@@ -3,7 +3,7 @@ id: ex-poisson-summation-for-the-gaussian-and-theta-functional-equation
 kind: example
 title: Gaussian Poisson summation and theta inversion
 deps: ["thm-poisson-summation-for-schwartz-functions", "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization", "def-countable-choice", "ex-gaussians-and-polynomials-times-gaussians-are-schwartz"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

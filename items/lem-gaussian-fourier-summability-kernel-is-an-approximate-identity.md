@@ -3,7 +3,7 @@ id: lem-gaussian-fourier-summability-kernel-is-an-approximate-identity
 kind: lemma
 title: Gaussian summability kernels
 deps: ["lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization", "thm-fourier-translation-modulation-dilation-and-reflection-laws", "def-l-one-approximate-identity-on-rn", "thm-dominated-convergence", "def-countable-choice", "cor-c-one-change-of-variables-for-l-one-functions"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

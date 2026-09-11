@@ -1,7 +1,7 @@
 ---
 page: "characteristic-functions-inversion-and-continuity"
 title: "Characteristic Functions Inversion and Continuity"
-status: "draft"
+status: published
 items: ["def-characteristic-function-of-a-real-random-variable", "lem-basic-properties-of-characteristic-functions", "lem-characteristic-functions-under-affine-maps-and-independent-sums", "def-positive-definite-function-on-the-real-line", "lem-characteristic-functions-are-positive-definite", "rem-characteristic-function-fourier-stieltjes-convention", "thm-uniqueness-of-a-law-from-its-characteristic-function", "lem-uniform-sine-integral-bound-and-dirichlet-value", "thm-levy-inversion-formula", "cor-density-inversion-from-an-integrable-characteristic-function", "lem-moments-give-derivatives-of-the-characteristic-function", "rem-derivatives-at-zero-do-not-in-general-determine-the-law", "thm-levy-continuity-theorem-forward-direction", "thm-tightness-from-characteristic-function-equicontinuity-at-zero", "thm-levy-continuity-theorem-converse", "cor-characteristic-function-criterion-for-weak-convergence", "thm-cramer-wold-device"]
 examples: []
 ---

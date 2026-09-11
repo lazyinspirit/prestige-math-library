@@ -3,7 +3,7 @@ id: lem-schwartz-functions-and-all-derivatives-are-integrable
 kind: lemma
 title: Schwartz derivatives are integrable
 deps: ["def-schwartz-space-and-its-seminorms", "thm-tonelli-theorem-for-sigma-finite-product-spaces", "thm-lebesgue-product-measure-agrees-with-euclidean-lebesgue-on-borel-sets", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

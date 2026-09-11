@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Druţu–Kapovich, revised Theorem 11.45 and Lemma 11.46, pp.375–378"
       url: "https://www.math.ucdavis.edu/~kapovich/EPR/ggt.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

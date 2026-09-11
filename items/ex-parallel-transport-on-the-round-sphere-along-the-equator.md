@@ -2,7 +2,7 @@
 id: ex-parallel-transport-on-the-round-sphere-along-the-equator
 kind: example
 title: "Parallel transport on the round sphere along the equator"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-fundamental-theorem-of-riemannian-geometry","prop-local-frame-formula-for-covariant-differentiation-along-a-curve","thm-existence-and-uniqueness-of-parallel-sections","def-riemannian-metric-and-riemannian-manifold","def-lie-bracket-of-smooth-vector-fields"]
 provenance:

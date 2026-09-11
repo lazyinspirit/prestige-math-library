@@ -17,7 +17,7 @@ sources:
       url: "https://arxiv.org/pdf/1810.04579"
     - title: "Gouëzel, AFP Gromov_Hyperbolicity, Isometries.thy, quasi_geodesic_made_lipschitz"
       url: "https://www.isa-afp.org/browser_info/current/AFP/Gromov_Hyperbolicity/Isometries.html"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

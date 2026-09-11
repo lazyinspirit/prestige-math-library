@@ -2,7 +2,7 @@
 id: lem-a-bundle-connection-is-local-and-restricts-to-open-sets
 kind: lemma
 title: A bundle connection is local and restricts to open sets
-status: draft
+status: published
 origin: pipeline
 deps: [prop-connection-laws-in-directional-form, def-connection-on-a-smooth-vector-bundle]
 proof_strategy: direct

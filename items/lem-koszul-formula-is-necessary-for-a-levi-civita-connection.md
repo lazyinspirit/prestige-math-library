@@ -2,7 +2,7 @@
 id: lem-koszul-formula-is-necessary-for-a-levi-civita-connection
 kind: lemma
 title: "Koszul formula is necessary for a levi civita connection"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-levi-civita-connection"]
 provenance:

@@ -3,7 +3,7 @@ id: ex-fourier-transform-of-a-gaussian
 kind: example
 title: Scaled and tensor Gaussian examples
 deps: ["lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization", "thm-fourier-translation-modulation-dilation-and-reflection-laws", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

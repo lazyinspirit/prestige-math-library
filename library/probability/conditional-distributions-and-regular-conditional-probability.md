@@ -1,7 +1,7 @@
 ---
 page: "conditional-distributions-and-regular-conditional-probability"
 title: "Conditional Distributions and Regular Conditional Probability"
-status: "draft"
+status: published
 items: ["def-measure-kernel-and-probability-kernel", "thm-measurability-of-integration-against-a-kernel", "def-composition-of-probability-kernels", "lem-kernel-composition-is-well-defined-and-associative", "def-conditional-probability-given-a-sigma-algebra", "def-regular-conditional-distribution", "def-regular-conditional-probability", "lem-simultaneous-rational-conditional-distribution-function-versions", "lem-rational-conditional-distribution-functions-produce-real-regular-kernels", "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets", "lem-simultaneous-ae-uniqueness-of-regular-conditional-distributions", "thm-conditional-integration-through-a-regular-conditional-law", "def-conditional-law-given-a-random-element", "lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable", "thm-disintegration-of-a-joint-law-on-standard-borel-spaces", "cor-conditional-expectation-as-a-measurable-function-of-the-conditioning-variable", "thm-conditional-density-formula", "thm-bayes-formula-for-dominated-kernels"]
 examples: []
 ---

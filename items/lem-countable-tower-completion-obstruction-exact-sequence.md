@@ -2,7 +2,7 @@
 id: lem-countable-tower-completion-obstruction-exact-sequence
 kind: lemma
 title: Countable tower completion obstruction exact sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["def-lim-one-obstruction-to-completeness", "def-axiom-of-choice"]

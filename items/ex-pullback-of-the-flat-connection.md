@@ -2,7 +2,7 @@
 id: ex-pullback-of-the-flat-connection
 kind: example
 title: "Pullback of the flat connection"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-pullback-connection-is-well-defined-and-functorial","ex-the-flat-connection-on-a-trivial-vector-bundle"]
 provenance:

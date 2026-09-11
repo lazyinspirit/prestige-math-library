@@ -2,7 +2,7 @@
 id: prop-failure-of-separatedness-or-completeness-can-destroy-the-claimed-abutment
 kind: proposition
 title: Failure of separatedness or completeness can destroy the claimed abutment
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["lem-countable-sequence-groups-and-tail-filtrations", "def-r-page-of-the-spectral-sequence-of-a-filtered-complex", "def-weak-convergence-of-a-spectral-sequence", "def-strong-convergence-of-a-spectral-sequence", "lem-abelian-group-model-for-spectral-sequence-computations", "lem-the-filtered-differential-induces-d-r-on-the-r-page", "thm-the-next-page-is-the-homology-of-the-current-page", "def-induced-filtration-on-homology"]

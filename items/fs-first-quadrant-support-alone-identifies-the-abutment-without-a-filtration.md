@@ -2,7 +2,7 @@
 id: fs-first-quadrant-support-alone-identifies-the-abutment-without-a-filtration
 kind: false-statement
 title: First quadrant support alone identifies the abutment without a filtration
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["def-homological-spectral-sequence", "lem-abelian-group-model-for-spectral-sequence-computations", "cex-isomorphic-associated-graded-objects-need-not-give-isomorphic-filtered-objects", "def-weak-convergence-of-a-spectral-sequence"]

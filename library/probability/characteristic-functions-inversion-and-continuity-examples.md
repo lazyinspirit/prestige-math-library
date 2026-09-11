@@ -1,7 +1,7 @@
 ---
 page: "characteristic-functions-inversion-and-continuity-examples"
 title: "Characteristic Functions Inversion and Continuity — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-characteristic-functions-of-bernoulli-binomial-and-poisson-laws", "ex-characteristic-function-of-the-uniform-law", "ex-characteristic-function-of-a-gaussian-law", "ex-cauchy-law-and-its-characteristic-function", "ex-independent-sums-via-characteristic-functions", "ex-density-inversion-for-a-triangular-characteristic-function", "cex-pointwise-limit-discontinuous-at-zero-signals-mass-escape", "cex-equal-finitely-many-moments-do-not-determine-a-law"]
 ---

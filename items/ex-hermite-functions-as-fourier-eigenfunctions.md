@@ -3,7 +3,7 @@ id: ex-hermite-functions-as-fourier-eigenfunctions
 kind: example
 title: Normalized Hermite Fourier eigenfunctions
 deps: ["def-schwartz-space-and-its-seminorms", "thm-fourier-transform-maps-schwartz-space-continuously-to-itself", "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization", "cor-uniqueness-of-the-l-one-fourier-transform", "thm-dominated-convergence", "thm-plancherel", "lem-complex-lp-completeness-density-and-inner-product", "lem-complex-integration-by-parts-on-intervals-and-decaying-lines", "def-complex-exponential", "def-countable-choice", "ex-gaussians-and-polynomials-times-gaussians-are-schwartz"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

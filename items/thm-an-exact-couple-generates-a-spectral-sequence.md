@@ -2,7 +2,7 @@
 id: thm-an-exact-couple-generates-a-spectral-sequence
 kind: theorem
 title: An exact couple generates a spectral sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 landmark: true

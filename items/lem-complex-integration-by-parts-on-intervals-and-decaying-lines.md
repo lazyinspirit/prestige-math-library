@@ -3,7 +3,7 @@ id: lem-complex-integration-by-parts-on-intervals-and-decaying-lines
 kind: lemma
 title: Complex integration by parts on intervals and decaying lines
 deps: ["thm-bounded-riemann-integrable-functions-are-lebesgue-measurable-and-have-the-same-integral", "thm-integration-by-parts", "thm-ftc-second-part", "thm-dominated-convergence", "def-complex-lp-and-euclidean-test-function-conventions", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

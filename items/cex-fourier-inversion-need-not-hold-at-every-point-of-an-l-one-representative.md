@@ -3,7 +3,7 @@ id: cex-fourier-inversion-need-not-hold-at-every-point-of-an-l-one-representativ
 kind: counterexample
 title: Null-set modifications defeat everywhere representative recovery
 deps: ["lem-l-one-fourier-transform-is-well-defined", "thm-l-one-fourier-inversion", "cor-integral-over-a-null-set-vanishes", "thm-affine-hyperplanes-and-proper-subspaces-of-rn-are-lebesgue-null", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

@@ -3,7 +3,7 @@ id: thm-parseval-pairing-on-schwartz-space
 kind: theorem
 title: Parseval pairing on Schwartz space
 deps: ["thm-fourier-inversion-on-schwartz-space", "lem-schwartz-functions-and-all-derivatives-are-integrable", "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

@@ -2,7 +2,7 @@
 id: prop-pullback-connections-intertwine-parallel-transport
 kind: proposition
 title: "Pullback connections intertwine parallel transport"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-pullback-connection-is-well-defined-and-functorial","thm-existence-and-uniqueness-of-parallel-sections","def-parallel-transport-along-a-piecewise-smooth-curve"]
 provenance:

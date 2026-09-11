@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Canary Proposition 5.1 pp.25–26 and Theorem 5.7 pp.28–29; complete convergence-action proof"
       url: "https://websites.umich.edu/~canary/lecnotespublic.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

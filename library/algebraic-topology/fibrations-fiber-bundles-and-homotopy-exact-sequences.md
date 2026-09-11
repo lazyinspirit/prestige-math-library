@@ -1,7 +1,7 @@
 ---
 page: "fibrations-fiber-bundles-and-homotopy-exact-sequences"
 title: "Fibrations Fiber Bundles and Homotopy Exact Sequences"
-status: "draft"
+status: published
 items: ["def-hurewicz-and-serre-fibrations", "prop-a-fibration-has-path-lifting-and-homotopy-lifting-relative-to-a-subspace", "def-fiber-and-fiber-homotopy-equivalence", "prop-pullbacks-of-fibrations-are-fibrations", "def-mapping-path-space-replacement-of-a-map", "thm-mapping-path-factorization", "def-homotopy-fiber-of-a-map", "def-fibration-connecting-homomorphism", "lem-the-fibration-connecting-map-is-independent-of-lift-and-representative", "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration", "thm-fibration-sequence-is-natural", "def-fiber-transport-and-monodromy-action", "prop-fibers-over-one-path-component-are-fiber-homotopy-equivalent", "def-locally-trivial-fiber-bundle", "thm-numerable-fiber-bundles-are-hurewicz-fibrations", "def-principal-g-bundle-and-associated-fiber-bundle", "prop-associated-bundle-is-locally-trivial-and-functorial-under-pullback", "lem-covering-homotopies-lift-by-finite-local-strips"]
 examples: []
 ---

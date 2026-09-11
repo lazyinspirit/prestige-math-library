@@ -1,7 +1,7 @@
 ---
 page: "schwartz-space-and-the-plancherel-theorem"
 title: "Schwartz Space and the Plancherel Theorem"
-status: "draft"
+status: published
 items: ["def-schwartz-space-and-its-seminorms", "def-schwartz-topology-and-convergence", "thm-schwartz-space-is-frechet", "lem-schwartz-functions-and-all-derivatives-are-integrable", "lem-schwartz-cutoffs-from-the-standard-smooth-step", "lem-smooth-compactly-supported-functions-are-dense-in-schwartz-space", "thm-differentiation-polynomial-multiplication-translation-and-modulation-are-continuous-on-schwartz-space", "thm-fourier-transform-maps-schwartz-space-continuously-to-itself", "thm-fourier-inversion-on-schwartz-space", "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space", "cor-schwartz-convolution-and-product-transform-laws", "thm-parseval-pairing-on-schwartz-space", "lem-schwartz-space-is-dense-in-l-two", "thm-plancherel", "lem-real-ltwo-multipliers-and-unitary-transport", "lem-simultaneous-smooth-approximation-in-l-one-and-l-two", "thm-l-one-l-two-agreement-of-fourier-transform", "thm-l-two-fourier-inversion", "lem-periodic-continuous-functions-are-determined-by-their-fourier-coefficients", "thm-poisson-summation-for-schwartz-functions"]
 examples: []
 ---

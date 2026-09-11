@@ -2,7 +2,7 @@
 id: lem-lc-generic-boolean-ground-joins
 kind: lemma
 title: Generic Boolean filters select ground-model joins
-status: draft
+status: published
 origin: pipeline
 deps: [def-dense-open-sets-and-model-generic-filters, def-forcing-preorder-compatibility-and-filter, def-complete-boolean-algebra-and-regular-open-sets, def-boolean-algebra-for-stone-duality]
 verification:

@@ -2,7 +2,7 @@
 id: prop-short-exact-sequences-of-filtered-complexes-give-compatible-exact-couples
 kind: proposition
 title: Short exact sequences of filtered complexes give compatible exact couples
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["thm-a-filtered-complex-produces-an-exact-couple", "prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences", "def-filtered-chain-map", "thm-naturality-of-the-homology-connecting-morphism", "lem-spectral-sequence-subquotient-and-local-lifting-calculus", "prop-homology-respects-identities-and-composition"]

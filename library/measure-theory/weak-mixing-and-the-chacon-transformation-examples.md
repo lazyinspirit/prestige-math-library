@@ -1,7 +1,7 @@
 ---
 page: "weak-mixing-and-the-chacon-transformation-examples"
 title: "Weak Mixing and the Chacon Transformation — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-first-three-chacon-tower-heights", "ex-chacon-spacer-measure-budget", "cex-chacon-correlation-subsequence-prevents-mixing"]
 ---

@@ -2,7 +2,7 @@
 id: def-affine-connection-on-a-smooth-manifold
 kind: definition
 title: "Affine connection on a smooth manifold"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-connection-on-a-smooth-vector-bundle"]
 provenance:

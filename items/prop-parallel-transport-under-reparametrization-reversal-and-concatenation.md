@@ -2,7 +2,7 @@
 id: prop-parallel-transport-under-reparametrization-reversal-and-concatenation
 kind: proposition
 title: "Parallel transport under reparametrization reversal and concatenation"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-parallel-transport-is-a-linear-isomorphism","prop-local-frame-formula-for-covariant-differentiation-along-a-curve","thm-existence-and-uniqueness-of-parallel-sections"]
 provenance:

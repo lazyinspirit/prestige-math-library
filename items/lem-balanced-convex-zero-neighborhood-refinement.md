@@ -2,7 +2,7 @@
 id: "lem-balanced-convex-zero-neighborhood-refinement"
 kind: "lemma"
 title: "Open and closed balanced convex zero-neighborhood refinements"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-locally-convex-topological-vector-space", "lem-topological-vector-space-translation-scaling-and-absorption", "lem-locally-convex-closures-and-finite-compact-convex-hulls", "thm-closure-characterisation-top"]
 justified_by: []

@@ -2,7 +2,7 @@
 id: "def-oracle-turing-reducibility-interface"
 kind: "definition"
 title: "Oracle turing reducibility interface"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-computable-many-one-reducibility-interface", "def-multitape-and-nondeterministic-machines"]
 justified_by: []

@@ -2,7 +2,7 @@
 id: "lem-chernoff-bound-for-independent-bernoulli-trials"
 kind: "lemma"
 title: "Chernoff bound for independent bernoulli trials"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-bernoulli-and-binomial-random-variables", "thm-expectation-of-products-of-independent-random-variables", "thm-markov-inequality", "def-real-exponential-function-and-e", "def-natural-logarithm", "thm-exponential-addition-formula", "cor-exponential-reciprocal-and-positivity", "thm-derivative-of-exponential", "thm-exponential-is-strictly-increasing", "thm-logarithm-derivative-and-integral", "thm-chain-rule", "thm-algebra-of-derivatives", "cor-mean-value-theorem"]
 justified_by: []

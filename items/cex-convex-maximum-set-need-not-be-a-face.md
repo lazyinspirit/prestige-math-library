@@ -2,7 +2,7 @@
 id: "cex-convex-maximum-set-need-not-be-a-face"
 kind: "counterexample"
 title: "A convex function can have a nonconvex maximum set"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-locally-convex-topological-vector-space", "cor-heine-borel-in-the-product-topology"]
 justified_by: []

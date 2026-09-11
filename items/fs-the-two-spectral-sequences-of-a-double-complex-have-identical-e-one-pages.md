@@ -2,7 +2,7 @@
 id: fs-the-two-spectral-sequences-of-a-double-complex-have-identical-e-one-pages
 kind: false-statement
 title: The two spectral sequences of a double complex have identical e one pages
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["prop-the-two-double-complex-spectral-sequences-have-the-same-abutment-but-not-the-same-pages", "thm-the-row-filtration-spectral-sequence-of-a-first-quadrant-double-complex", "thm-the-column-filtration-spectral-sequence-of-a-first-quadrant-double-complex", "lem-abelian-group-model-for-spectral-sequence-computations"]

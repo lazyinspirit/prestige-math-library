@@ -2,7 +2,7 @@
 id: lem-the-derived-couple-maps-are-well-defined
 kind: lemma
 title: The derived couple maps are well defined
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-derived-exact-couple, def-exact-couple, lem-spectral-sequence-subquotient-and-local-lifting-calculus]

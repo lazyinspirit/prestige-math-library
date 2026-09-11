@@ -1,7 +1,7 @@
 ---
 page: "singular-cochains-mayer-vietoris-and-smooth-singular-comparison-examples"
 title: "Singular Cochains Mayer Vietoris and Smooth Singular Comparison \u2014 Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-a-finite-chain-needing-different-subdivision-depths-on-its-simplices", "ex-canonical-zero-extension-of-an-overlap-cochain", "ex-smooth-singular-simplices-in-a-coordinate-ball", "cex-a-continuous-nowhere-differentiable-singular-one-simplex", "ex-relative-smoothing-fixes-the-endpoints-of-a-path", "ex-singular-cohomology-of-a-point-from-the-cochain-complex", "rem-hom-of-homology-is-not-the-definition-of-singular-cohomology"]
 ---

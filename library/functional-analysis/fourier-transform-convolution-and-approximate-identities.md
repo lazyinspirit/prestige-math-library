@@ -1,7 +1,7 @@
 ---
 page: "fourier-transform-convolution-and-approximate-identities"
 title: "Fourier Transform Convolution and Approximate Identities"
-status: "draft"
+status: published
 items: ["def-fourier-transform-on-l-one-of-rn", "lem-l-one-fourier-transform-is-well-defined", "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions", "thm-fourier-translation-modulation-dilation-and-reflection-laws", "thm-fourier-transform-converts-convolution-to-products", "lem-complex-integration-by-parts-on-intervals-and-decaying-lines", "lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization", "thm-riemann-lebesgue", "lem-gaussian-fourier-summability-kernel-is-an-approximate-identity", "lem-radial-majorized-kernels-recover-lebesgue-point-values", "thm-fourier-inversion-at-lebesgue-points-under-summability", "thm-l-one-fourier-inversion", "thm-fourier-transform-of-a-product-under-an-integrable-transform-hypothesis", "cor-uniqueness-of-the-l-one-fourier-transform", "cor-convolution-approximate-identities-from-fourier-multipliers", "thm-fourier-transform-of-a-finite-complex-measure", "lem-gaussian-smoothing-of-finite-complex-measures", "cor-uniqueness-of-finite-borel-measures-from-their-fourier-transforms", "rem-probability-characteristic-function-normalization", "rem-riesz-thorin-supplied-by-measure-theory"]
 examples: []
 ---

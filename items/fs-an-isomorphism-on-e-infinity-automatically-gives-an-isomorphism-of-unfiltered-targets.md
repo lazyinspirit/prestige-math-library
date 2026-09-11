@@ -2,7 +2,7 @@
 id: fs-an-isomorphism-on-e-infinity-automatically-gives-an-isomorphism-of-unfiltered-targets
 kind: false-statement
 title: An isomorphism on e infinity automatically gives an isomorphism of unfiltered targets
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["lem-countable-sequence-groups-and-tail-filtrations", "def-r-page-of-the-spectral-sequence-of-a-filtered-complex", "thm-spectral-sequence-comparison-theorem", "prop-failure-of-separatedness-or-completeness-can-destroy-the-claimed-abutment", "lem-the-filtered-differential-induces-d-r-on-the-r-page"]

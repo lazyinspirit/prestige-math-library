@@ -3,7 +3,7 @@ id: cex-a-smooth-integrable-function-need-not-be-schwartz
 kind: counterexample
 title: Smooth and integrable does not imply Schwartz
 deps: ["def-schwartz-space-and-its-seminorms", "thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

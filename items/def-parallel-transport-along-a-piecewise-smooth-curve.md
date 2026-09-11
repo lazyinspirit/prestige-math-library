@@ -2,7 +2,7 @@
 id: def-parallel-transport-along-a-piecewise-smooth-curve
 kind: definition
 title: "Parallel transport along a piecewise smooth curve"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-existence-and-uniqueness-of-parallel-sections"]
 provenance:

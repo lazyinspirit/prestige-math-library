@@ -2,7 +2,7 @@
 id: fs-torsion-free-means-curvature-free
 kind: false-statement
 title: "Torsion free means curvature free"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-christoffel-formula-for-the-levi-civita-connection","prop-connection-laws-in-directional-form","prop-leibniz-rules-for-the-lie-bracket-with-function-multiples","def-lie-bracket-of-smooth-vector-fields","prop-torsion-free-is-equivalent-to-symmetric-christoffel-symbols-in-coordinate-frames"]
 provenance:

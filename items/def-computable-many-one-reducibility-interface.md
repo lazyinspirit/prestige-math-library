@@ -2,7 +2,7 @@
 id: "def-computable-many-one-reducibility-interface"
 kind: "definition"
 title: "Computable many one reducibility interface"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-kleene-normal-form-for-the-fixed-machine-coding", "def-partial-function-computed-by-a-machine"]
 justified_by: []

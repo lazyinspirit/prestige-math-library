@@ -1,7 +1,7 @@
 ---
 page: "effective-numberings-reductions-resources-and-randomness-examples"
 title: "Effective Numberings, Reductions, Resources, and Randomness: Examples"
-status: "draft"
+status: published
 items: ["ex-smn-specializes-a-two-argument-index", "ex-pairwise-independent-affine-hashing-over-a-prime-field", "ex-schwartz-zippel-for-a-bivariate-polynomial"]
 examples: []
 ---

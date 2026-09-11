@@ -2,7 +2,7 @@
 id: lem-lc-random-coordinate-product-measure-pullback
 kind: lemma
 title: Random-coordinate pullback extends every fair-coin product measure
-status: draft
+status: published
 origin: pipeline
 deps: [lem-lc-fine-measure-coordinate-family, lem-lc-solovay-measure-on-generic-subsets, lem-lc-solovay-density-locality-and-null-joins, lem-lc-generic-evaluation-of-measurable-densities, lem-lc-generic-boolean-ground-joins, lem-lc-probability-algebra-completeness, thm-kolmogorov-extension-for-standard-borel-coordinate-spaces, lem-finite-measure-uniqueness-on-a-pi-system, def-axiom-of-choice]
 sources:

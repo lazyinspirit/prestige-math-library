@@ -1,7 +1,7 @@
 ---
 page: singular-cohomology-and-coefficient-theorems
 title: Singular Cohomology and Coefficient Theorems
-status: draft
+status: published
 items:
   - def-singular-cochain-complex-with-coefficients
   - lem-the-singular-coboundary-squares-to-zero

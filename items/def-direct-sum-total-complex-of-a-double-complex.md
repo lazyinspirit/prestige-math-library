@@ -2,7 +2,7 @@
 id: def-direct-sum-total-complex-of-a-double-complex
 kind: definition
 title: Direct sum total complex of a double complex
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-homological-double-complex, def-products-and-coproducts]

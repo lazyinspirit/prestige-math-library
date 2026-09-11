@@ -2,7 +2,7 @@
 id: prop-induced-connection-on-exterior-powers-is-a-degree-zero-derivation
 kind: proposition
 title: "Induced connection on exterior powers is a degree zero derivation"
-status: draft
+status: published
 origin: pipeline
 deps: ["prop-induced-connections-commute-with-contraction-and-permutation","def-product-connection-on-tensor-and-hom-bundles","def-alternating-k-covectors"]
 provenance:

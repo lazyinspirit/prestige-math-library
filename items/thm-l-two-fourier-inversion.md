@@ -3,7 +3,7 @@ id: thm-l-two-fourier-inversion
 kind: theorem
 title: L2 Fourier inversion
 deps: ["thm-plancherel", "cor-fourier-transform-is-a-topological-automorphism-of-schwartz-space", "thm-l-one-l-two-agreement-of-fourier-transform", "prop-lebesgue-measure-is-sigma-finite-and-finite-on-bounded-sets", "lem-complex-lp-completeness-density-and-inner-product", "def-countable-choice", "thm-dominated-convergence", "cor-c-one-change-of-variables-for-l-one-functions"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

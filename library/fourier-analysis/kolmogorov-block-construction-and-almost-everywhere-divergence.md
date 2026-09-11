@@ -1,7 +1,7 @@
 ---
 page: "kolmogorov-block-construction-and-almost-everywhere-divergence"
 title: "Kolmogorov’s Block Construction and Almost-Everywhere Divergence"
-status: "draft"
+status: published
 items: ["def-kolmogorov-analytic-partial-sum-maximal-function", "lem-kolmogorov-simultaneous-phase-approximation", "lem-kolmogorov-atomic-kernel-maxima", "lem-kolmogorov-block-polynomial-with-large-partial-sums", "lem-separated-frequency-blocks-do-not-disturb-earlier-partial-sum-maxima", "lem-kolmogorov-gliding-hump-series-converges-in-lone", "lem-kolmogorov-block-maxima-diverge-off-a-null-limsup-set", "thm-kolmogorov-lone-fourier-series-diverges-almost-everywhere"]
 examples: []
 ---

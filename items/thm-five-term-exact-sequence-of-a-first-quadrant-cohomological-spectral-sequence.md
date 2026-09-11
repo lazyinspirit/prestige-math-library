@@ -2,7 +2,7 @@
 id: thm-five-term-exact-sequence-of-a-first-quadrant-cohomological-spectral-sequence
 kind: theorem
 title: Five term exact sequence of a first quadrant cohomological spectral sequence
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["def-cohomological-spectral-sequence", "def-edge-homomorphisms-of-a-first-quadrant-spectral-sequence", "lem-spectral-sequence-subquotient-and-local-lifting-calculus"]

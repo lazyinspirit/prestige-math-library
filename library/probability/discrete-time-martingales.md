@@ -1,7 +1,7 @@
 ---
 page: "discrete-time-martingales"
 title: "Discrete Time Martingales"
-status: "draft"
+status: published
 items: ["def-filtration-and-filtered-probability-space", "def-adapted-and-integrable-stochastic-process", "def-natural-filtration-of-a-process", "def-martingale-submartingale-and-supermartingale", "lem-multistep-martingale-characterization", "lem-conditional-expectation-process-is-a-martingale", "def-martingale-difference-sequence", "thm-martingales-and-martingale-differences-correspond", "lem-martingale-differences-are-orthogonal-in-l2", "thm-convex-functions-of-martingales-are-submartingales", "cor-absolute-value-and-powers-of-a-martingale-are-submartingales", "def-predictable-discrete-time-process", "def-discrete-martingale-transform", "thm-bounded-predictable-transforms-preserve-martingales", "cor-nonnegative-predictable-transforms-preserve-submartingale-gains", "def-compensator-and-doob-decomposition", "thm-doob-decomposition-of-an-integrable-adapted-process", "cor-submartingale-doob-decomposition-has-increasing-compensator", "def-predictable-quadratic-variation-in-discrete-time", "thm-square-minus-predictable-quadratic-variation-is-a-martingale", "cor-second-moment-is-the-expected-predictable-quadratic-variation"]
 examples: []
 ---

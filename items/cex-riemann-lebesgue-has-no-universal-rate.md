@@ -5,7 +5,7 @@ title: There is no universal Riemann–Lebesgue decay rate
 deps: ["lem-euclidean-gaussian-fourier-transform-with-two-pi-normalization", "thm-fourier-translation-modulation-dilation-and-reflection-laws", "thm-fourier-transform-maps-l-one-to-bounded-uniformly-continuous-functions", "thm-dominated-convergence", "def-countable-choice"]
 generation:
   role: counterexample
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

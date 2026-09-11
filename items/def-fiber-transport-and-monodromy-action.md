@@ -19,7 +19,7 @@ sources:
     - title: "Hatcher, Algebraic Topology"
       url: "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf"
       locator: "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
-status: "draft"
+status: published
 origin: "pipeline"
 justified_by: ["prop-fibers-over-one-path-component-are-fiber-homotopy-equivalent"]
 ---

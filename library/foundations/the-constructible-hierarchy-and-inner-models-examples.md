@@ -1,7 +1,7 @@
 ---
 page: "the-constructible-hierarchy-and-inner-models-examples"
 title: "The Constructible Hierarchy and Inner Models: Examples and Counterexamples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-first-constructible-levels", "ex-canonical-l-well-order-first-stages", "ex-definable-subsets-of-omega-are-not-all-subsets"]
 ---

@@ -2,7 +2,7 @@
 id: "def-machine-time-and-space-constructibility"
 kind: "definition"
 title: "Machine time and space constructibility"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-uniform-asymptotic-time-space-comparison"]
 justified_by: []

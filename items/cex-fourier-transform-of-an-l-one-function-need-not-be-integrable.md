@@ -3,7 +3,7 @@ id: cex-fourier-transform-of-an-l-one-function-need-not-be-integrable
 kind: counterexample
 title: An L1 transform need not be integrable
 deps: ["ex-fourier-transform-of-an-interval-indicator", "def-countable-choice"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

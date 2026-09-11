@@ -2,7 +2,7 @@
 id: prop-a-map-of-exact-couples-induces-a-map-of-spectral-sequences
 kind: proposition
 title: A map of exact couples induces a map of spectral sequences
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["thm-an-exact-couple-generates-a-spectral-sequence", "def-morphism-of-spectral-sequences", "lem-spectral-sequence-subquotient-and-local-lifting-calculus", "def-exact-couple", "def-derived-exact-couple"]

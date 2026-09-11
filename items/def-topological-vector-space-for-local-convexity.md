@@ -2,7 +2,7 @@
 id: "def-topological-vector-space-for-local-convexity"
 kind: "definition"
 title: "Topological vector spaces over the real and complex fields"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-vector-space", "def-topological-space", "def-product-topology", "def-continuous-map-top", "def-neighbourhood-top", "def-hausdorff-space", "lem-real-line-is-a-metric-space", "def-complex-metric-convergence-and-continuity", "def-metric-topology", "thm-metric-open-set-algebra", "lem-finite-choice"]
 justified_by: []

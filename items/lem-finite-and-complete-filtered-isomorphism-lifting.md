@@ -2,7 +2,7 @@
 id: lem-finite-and-complete-filtered-isomorphism-lifting
 kind: lemma
 title: Finite and complete filtered isomorphism lifting
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: ["lem-spectral-sequence-subquotient-and-local-lifting-calculus", "def-strong-convergence-of-a-spectral-sequence"]

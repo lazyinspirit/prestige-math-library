@@ -4,7 +4,7 @@ kind: definition
 title: Fourier transform on complex L1 classes
 deps: ["def-complex-lp-and-euclidean-test-function-conventions", "def-l-p-space-as-a-quotient-by-null-functions", "def-l-one-of-a-measure", "def-complex-exponential", "cor-complex-exponential-cartesian-form-modulus-and-eulers-identity"]
 justified_by: ["lem-l-one-fourier-transform-is-well-defined"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 provenance:

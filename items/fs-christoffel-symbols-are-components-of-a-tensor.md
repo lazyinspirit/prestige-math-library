@@ -2,7 +2,7 @@
 id: fs-christoffel-symbols-are-components-of-a-tensor
 kind: false-statement
 title: "Christoffel symbols are components of a tensor"
-status: draft
+status: published
 origin: pipeline
 deps: ["thm-christoffel-symbol-transformation-law","thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law"]
 provenance:

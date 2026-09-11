@@ -2,7 +2,7 @@
 id: "def-acceptable-numbering-with-universal-evaluation"
 kind: "definition"
 title: "Acceptable numbering with universal evaluation"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-kleene-normal-form-for-the-fixed-machine-coding", "lem-step-by-step-interpreter-for-machine-codes", "def-kleene-computation-predicate-and-output-map"]
 justified_by: []

@@ -2,7 +2,7 @@
 id: thm-pullback-connection-is-well-defined-and-functorial
 kind: theorem
 title: "Pullback connection is well defined and functorial"
-status: draft
+status: published
 origin: pipeline
 deps: ["def-pullback-connection","thm-connection-one-form-transformation-law","thm-local-connection-forms-glue-exactly-when-they-obey-the-transformation-law","prop-pullback-is-functorial-up-to-canonical-bundle-isomorphism"]
 provenance:

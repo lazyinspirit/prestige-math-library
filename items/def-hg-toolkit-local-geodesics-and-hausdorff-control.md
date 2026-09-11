@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Druţu–Kapovich Theorem 9.38 and §9.6"
       url: "https://www.math.ucdavis.edu/~kapovich/EPR/kapovich_drutu.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

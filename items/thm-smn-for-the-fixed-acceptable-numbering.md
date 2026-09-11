@@ -2,7 +2,7 @@
 id: "thm-smn-for-the-fixed-acceptable-numbering"
 kind: "theorem"
 title: "Smn for the fixed acceptable numbering"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-acceptable-numbering-with-universal-evaluation", "lem-fixed-coding-primitive-recursive-arithmetic-and-sequences"]
 justified_by: []

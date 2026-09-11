@@ -3,7 +3,7 @@ id: ex-gaussians-and-polynomials-times-gaussians-are-schwartz
 kind: example
 title: Polynomial Gaussians are Schwartz
 deps: ["def-schwartz-space-and-its-seminorms", "thm-exponential-beats-every-polynomial", "thm-derivative-of-exponential", "def-ck-and-multi-index-notation-in-several-variables"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

@@ -1,7 +1,7 @@
 ---
 page: "locally-convex-spaces-and-continuous-separation-examples"
 title: "Locally Convex Spaces and Continuous Separation: Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-product-scalar-topology-is-locally-convex", "ex-locally-convex-separation-by-a-coordinate", "cex-convex-maximum-set-need-not-be-a-face"]
 ---

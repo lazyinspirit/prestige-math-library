@@ -2,7 +2,7 @@
 id: thm-the-koszul-formula-defines-an-affine-connection
 kind: theorem
 title: "The koszul formula defines an affine connection"
-status: draft
+status: published
 origin: pipeline
 deps: ["lem-koszul-formula-is-necessary-for-a-levi-civita-connection","thm-the-musical-maps-are-smooth-inverse-bundle-isomorphisms","prop-leibniz-rules-for-the-lie-bracket-with-function-multiples","prop-connection-laws-in-directional-form"]
 provenance:

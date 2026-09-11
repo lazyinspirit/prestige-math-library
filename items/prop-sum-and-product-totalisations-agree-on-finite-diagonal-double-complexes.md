@@ -2,7 +2,7 @@
 id: prop-sum-and-product-totalisations-agree-on-finite-diagonal-double-complexes
 kind: proposition
 title: Sum and product totalisations agree on finite diagonal double complexes
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-20
 deps: [def-direct-sum-total-complex-of-a-double-complex, lem-the-total-differential-squares-to-zero, def-product-total-complex-of-a-double-complex, def-additive-category, def-biproduct, def-products-and-coproducts]

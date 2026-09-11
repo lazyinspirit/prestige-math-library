@@ -3,7 +3,7 @@ id: def-schwartz-topology-and-convergence
 kind: definition
 title: Schwartz topology and convergence
 deps: ["def-schwartz-space-and-its-seminorms"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 provenance:

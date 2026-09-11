@@ -1,7 +1,7 @@
 ---
 page: "the-constructible-hierarchy-and-inner-models"
 title: "The Constructible Hierarchy and Inner Models"
-status: "draft"
+status: published
 items: ["lem-finite-tuple-satisfaction-is-absolute", "def-definable-subsets-of-a-membership-structure", "lem-def-operation-is-absolute", "def-constructible-hierarchy-and-constructible-rank", "prop-constructible-levels-transitivity-ordinals-and-rank", "lem-finite-reflection-along-constructible-levels", "thm-constructible-universe-basic-axioms", "thm-separation-in-the-constructible-universe", "thm-internal-power-set-in-the-constructible-universe", "thm-replacement-in-the-constructible-universe", "thm-constructibility-is-absolute-and-l-is-minimal", "lem-canonical-well-order-of-finite-definition-codes", "thm-canonical-definable-global-well-order-of-l", "thm-constructible-universe-satisfies-choice", "def-ordinal-definability-and-hod", "thm-hod-is-an-inner-model-containing-l", "thm-constructible-inner-model-semantic-and-formal-schema"]
 examples: []
 ---

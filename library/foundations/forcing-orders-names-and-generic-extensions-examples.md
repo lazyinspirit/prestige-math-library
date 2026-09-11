@@ -1,7 +1,7 @@
 ---
 page: "forcing-orders-names-and-generic-extensions-examples"
 title: "Forcing Orders, Names, and Generic Extensions: Examples and Counterexamples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-cohen-name-valuation-and-dense-set-meeting", "fs-a-generic-filter-belongs-to-the-ground-model", "ex-boolean-valued-one-bit-name"]
 ---

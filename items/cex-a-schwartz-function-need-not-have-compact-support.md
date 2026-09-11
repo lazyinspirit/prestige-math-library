@@ -3,7 +3,7 @@ id: cex-a-schwartz-function-need-not-have-compact-support
 kind: counterexample
 title: A Schwartz function need not have compact support
 deps: ["ex-gaussians-and-polynomials-times-gaussians-are-schwartz", "def-c-c-and-c-c-infinity-on-rn"]
-status: draft
+status: published
 origin: pipeline
 landmark: false
 proof_strategy: direct

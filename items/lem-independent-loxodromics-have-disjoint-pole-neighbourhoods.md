@@ -15,7 +15,7 @@ sources:
   references:
     - title: "Canary Theorem 7.3 pp.32–33; four-pole separation"
       url: "https://websites.umich.edu/~canary/lecnotespublic.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---
