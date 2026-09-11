@@ -32,10 +32,10 @@ The dispatcher and item-judge prompt apply this rule to every role.
 
 | Assignment | Model / effort |
 |---|---|
-| Scaffolding; Step 3b group authors | Astra / medium |
-| Step 3a scope; group Alpha | Sol / high |
-| Step 5a adjudicators and recovery | Astra / medium |
-| Assignment; Step 6 readers; ordinary Step 8/9 work | Terra / high |
+| Step 1 scaffolding; Step 3a scope; group Alpha | Sol / high |
+| Step 3b group authors | Astra / medium |
+| Step 5a/5b; Step 6 group readers; Step 9 agent closure | DeepSeek V4.1 Flash / max |
+| Assignment; ordinary Step 8 work | Terra / high |
 | Item judges | Terra / xhigh |
 | Step 7 adjudication | Sol / xhigh |
 | Step 7 final adjudication; Step 8 lead | Astra / medium |
@@ -47,6 +47,13 @@ Shared-file stages are serial. Writing agents checkpoint after each item and
 reread current proofs, dependencies and sources after compaction. Read-only
 roles write no extra files. Compaction starts at 200,000 total context tokens;
 usage telemetry is not a billing estimate.
+
+DeepSeek stages use the stable `deepseek-flash` API alias and maximum reasoning
+through an isolated Codex home. Their required read-only `web_search` MCP tool
+prefers Tavily when `TAVILY_API_KEY` is configured and otherwise uses Firecrawl.
+Dispatch fails before launching if the DeepSeek key or both supported web-search
+credentials are missing. Mechanical tool plans in these stages do not invoke an
+LLM.
 
 ## Scaffold, audit and author
 

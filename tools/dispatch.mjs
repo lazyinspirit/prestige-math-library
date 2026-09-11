@@ -19,6 +19,7 @@ import { REPO } from './paths.mjs';
 import { createSlotPool } from './slots.mjs';
 import { validateCodexOutputSchema } from './codex-output-schema.mjs';
 import { findRollout, readDispatchUsage } from './dispatch-usage.mjs';
+import { configureDeepSeekCodexHome } from './deepseek-codex.mjs';
 
 // tools/models.mjs owns model IDs and semantic lane assignments.
 import { lane, modelProfile } from './models.mjs';
@@ -84,8 +85,8 @@ const ROLES = Object.freeze({
   // mechanical rather than aspirational.
   'final-adjudicator': { ...lane('finalAdjudication'), sandbox: 'workspace-write', effort: 'medium', cap: 9, web: true, requiresTask: true, why: 'Step-7 final adjudication after the one paid Terra rejudge; one independent Astra-medium agent per affected group, with authoritative web verification' },
   // `alpha-group-read` — the step-6 pass that reads a group's A/B pairs while the
-  // judges are still sweeping (owner, 2026-08-25). Step 6 applies the Terra
-  // high profile; the durable digest hands its findings to a fresh Sol xhigh
+  // judges are still sweeping (owner, 2026-08-25). Step 6 applies the DeepSeek
+  // Flash max profile; the durable digest hands its findings to a fresh Sol xhigh
   // adjudicator at Step 7.
   //
   // READ-ONLY IS THE POINT, NOT A PRECAUTION. Step 6 judges a frozen text; an
@@ -102,7 +103,7 @@ const ROLES = Object.freeze({
   // later Sol adjudicator starts fresh rather than replaying a long transcript.
   //
   // Read-only readers also consult authoritative web sources when unsure.
-  'alpha-group-read': { ...lane('agentic'), sandbox: 'read-only', effort: 'high', cap: 9, why: 'Terra-high step-6 whole-group read; one read-only lane per group, handed to step 7 by compact digest' },
+  'alpha-group-read': { ...lane('agentic'), sandbox: 'read-only', effort: 'high', cap: 9, why: 'DeepSeek-Flash-max step-6 whole-group read; one read-only lane per group, handed to step 7 by compact digest' },
   // `effort: 'high'` (owner, 2026-08-24) — the thinking level for this lane.
   refuter:      { ...lane('secondary'), sandbox: 'read-only', effort: 'high', cap: 27, why: 'one independent read-only refuter per batch; returns evidence, never edits' },
 
@@ -263,12 +264,13 @@ const spec = Object.freeze({
   requestedEffort: ROLES[role].effort ?? 'xhigh',
   ...profileSpec,
   profile: profileName,
-  autoCompactTokenLimit: 200_000,
+  autoCompactTokenLimit: profileSpec?.provider === 'deepseek' ? null : 200_000,
 });
 const compactionArgs = spec.autoCompactTokenLimit == null ? [] : [
   '-c', `model_auto_compact_token_limit=${spec.autoCompactTokenLimit}`,
   '-c', 'model_auto_compact_token_limit_scope="total"',
 ];
+const contextArgs = spec.provider === 'deepseek' ? [] : ['-c', `model_context_window=${spec.contextWindow}`];
 
 // ---- prompt ------------------------------------------------------------------
 
@@ -525,7 +527,7 @@ const buildCodexResume = (sessionHome) => [
     '-c', `sandbox_mode="${spec.sandbox}"`,
     ...sourceNetworkArgs,
     '-c', `model_reasoning_effort="${spec.effort ?? 'xhigh'}"`,
-    '-c', `model_context_window=${spec.contextWindow}`,
+    ...contextArgs,
     ...compactionArgs,
     '-c', 'tools.web_search=true',
     ...imagePaths.flatMap((image) => ['--image', resolveFile(image)]),
@@ -552,7 +554,7 @@ const buildCodex = (temporaryHome) => [
     // model_context_window — is deliberately NOT inherited. Pass the owner's
     // 1,000,000-token window explicitly or the lane silently runs at the
     // built-in default.
-    '-c', `model_context_window=${spec.contextWindow}`,
+    ...contextArgs,
     ...compactionArgs,
     // Passed explicitly, never inherited. The temporary CODEX_HOME carries only
     // auth.json, and wave 1b's defect was exactly an implicitly inherited
@@ -679,11 +681,15 @@ const result = await new Promise((resolve) => {
   }
   const activeHome = persistentHome ?? temporaryHome;
   try {
-    const sourceAuth = join(codexHome, 'auth.json');
-    codexAuthPaths = { source: sourceAuth, temporary: join(activeHome, 'auth.json') };
-    if (existsSync(sourceAuth)) {
-      copyFileSync(sourceAuth, join(activeHome, 'auth.json'));
-      chmodSync(join(activeHome, 'auth.json'), 0o600);
+    if (spec.provider === 'deepseek') {
+      configureDeepSeekCodexHome({ home: activeHome, repo: REPO });
+    } else {
+      const sourceAuth = join(codexHome, 'auth.json');
+      codexAuthPaths = { source: sourceAuth, temporary: join(activeHome, 'auth.json') };
+      if (existsSync(sourceAuth)) {
+        copyFileSync(sourceAuth, join(activeHome, 'auth.json'));
+        chmodSync(join(activeHome, 'auth.json'), 0o600);
+      }
     }
   } catch (error) {
     const stderr = String(error?.message ?? error);

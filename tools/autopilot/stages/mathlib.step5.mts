@@ -6,7 +6,7 @@ import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { repairGateBatch, repairFingerprint } from './authored-repairs.mts';
 import { step5Escalations } from '../../step5-escalations.mjs';
 
-const ASTRA_MEDIUM = MODEL_PROFILE_NAMES.astraMedium;
+const DEEPSEEK_FLASH_MAX = MODEL_PROFILE_NAMES.deepseekFlashMax;
 
 /** Build Step 5 with the canonical gate helpers from mathlib.mts. */
 export function step5Stages(d: any) {
@@ -201,7 +201,7 @@ export function step5Stages(d: any) {
       id: '5a-adjudicate',
       label: 'group Alpha review of authored items and pages',
       role: 'alpha',
-      modelProfile: (plan: any) => plan.role === 'alpha' ? ASTRA_MEDIUM : undefined,
+      modelProfile: (plan: any) => plan.role === 'alpha' ? DEEPSEEK_FLASH_MAX : undefined,
       units: batches,
       pattern: resultPattern('alpha', '5a-[a-z]+'),
       artifacts: (ctx: any, unit: string) => {
@@ -266,6 +266,7 @@ export function step5Stages(d: any) {
     {
       id: '5b-cross',
       label: 'lead Alpha cross-batch audit and final Step 5 closure',
+      modelProfile: (plan: any) => plan.role === 'alpha' ? DEEPSEEK_FLASH_MAX : undefined,
       units: () => ['all'],
       pattern: resultPattern('alpha', '5b-[a-z-]+'),
       artifacts: (ctx: any) => [`research/${ctx.run}-alpha-5b.md`, `research/${ctx.run}-5b-verdicts.jsonl`],

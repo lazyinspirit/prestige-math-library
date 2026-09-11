@@ -36,14 +36,15 @@ const stages = step5Stages(deps) as any[];
 const byId = (id: string) => stages.find((stage) => stage.id === id);
 const ordinaryCtx = { run: 'future-run', repo: mkdtempSync(join(tmpdir(), 'step5-ctx-')), dispatchDir: '/tmp/none' };
 
-test('5a initial and repair Alpha dispatches use Astra medium; other roles are unchanged', async () => {
+test('5a and 5b initial and repair Alpha dispatches use DeepSeek V4.1 Flash max', async () => {
   const { MODEL_PROFILE_NAMES } = await import('../../models.mjs');
   const stage = byId('5a-adjudicate');
   for (const label of ['5a-a', 'gate-batch-1-a']) {
-    assert.equal(stage.modelProfile({ role: 'alpha', job: 'adjudication', label }), MODEL_PROFILE_NAMES.astraMedium);
+    assert.equal(stage.modelProfile({ role: 'alpha', job: 'adjudication', label }), MODEL_PROFILE_NAMES.deepseekFlashMax);
   }
   assert.equal(stage.modelProfile({ role: 'tool' }), undefined);
-  assert.equal(byId('5b-cross').modelProfile, undefined);
+  assert.equal(byId('5b-cross').modelProfile({ role: 'alpha' }), MODEL_PROFILE_NAMES.deepseekFlashMax);
+  assert.equal(byId('5b-cross').modelProfile({ role: 'tool' }), undefined);
 });
 
 test('5a escalation or sub-100% repair confidence holds any failed gate without dispatch', async () => {

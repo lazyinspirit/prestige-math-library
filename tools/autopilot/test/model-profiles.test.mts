@@ -48,9 +48,15 @@ test('registered owner profiles name the exact models, efforts, and windows', ()
   assert.equal(liveCompat.model, 'gpt-5.6-terra');
   assert.equal(liveCompat.effort, 'high');
   assert.equal(liveCompat.requestedEffort, 'high');
+
+  const deepseek = MODEL_PROFILES[MODEL_PROFILE_NAMES.deepseekFlashMax];
+  assert.equal(deepseek.model, 'deepseek-flash');
+  assert.equal(deepseek.provider, 'deepseek');
+  assert.equal(deepseek.effort, 'max');
+  assert.equal(deepseek.contextWindow, 1_048_576);
 });
 
-test('Step 3 authors and Step 5A use Astra medium; Step 6 readers retain Terra high', () => {
+test('Step 3 authors retain Astra while Step 5 and Step 6 readers use DeepSeek Flash max', () => {
   const authorStage = stage('3b-author');
   const author = { role: 'alpha-high', job: 'authoring' };
   assert.equal(selected(authorStage, author), MODEL_PROFILE_NAMES.astraMedium);
@@ -64,21 +70,23 @@ test('Step 3 authors and Step 5A use Astra medium; Step 6 readers retain Terra h
   assert.equal(astraMedium.effort, 'medium');
 
   const adjudicate = stage('5a-adjudicate');
-  assert.equal(selected(adjudicate, adjudicate.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.astraMedium);
+  assert.equal(selected(adjudicate, adjudicate.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.deepseekFlashMax);
+  const cross = stage('5b-cross');
+  assert.equal(selected(cross, cross.plan(ctx, ['all'])[0]), MODEL_PROFILE_NAMES.deepseekFlashMax);
 
   const judgeStage = stage('6-judge');
   const plans = judgeStage.plan(ctx, judgeStage.units(ctx));
   for (const plan of plans.filter((candidate: any) => candidate.role === 'alpha-group-read')) {
-    assert.equal(selected(judgeStage, plan), MODEL_PROFILE_NAMES.terraHigh);
+    assert.equal(selected(judgeStage, plan), MODEL_PROFILE_NAMES.deepseekFlashMax);
   }
   assert.equal(selected(judgeStage, plans.find((candidate: any) => candidate.role === 'tool')), undefined,
     'the judge tool is not a Step-6 reader agent');
 });
 
-test('Step 1 scaffolders use Astra medium', () => {
+test('Step 1 scaffolders use Sol high', () => {
   const scaffoldStage = stage('1-scaffold');
   const scaffold = scaffoldStage.plan(ctx, ['1'])[0];
-  assert.equal(selected(scaffoldStage, scaffold), MODEL_PROFILE_NAMES.astraMedium);
+  assert.equal(selected(scaffoldStage, scaffold), MODEL_PROFILE_NAMES.solHigh);
   assert.equal(selected(scaffoldStage, {
     role: 'beta', job: 'scouting', label: 'source-scout-1-b1',
   }), undefined, 'source scouting is not a Step 1 scaffolding dispatch');
@@ -115,8 +123,8 @@ test('Step-7 fatal group adjudicator uses Sol xhigh', () => {
   assert.equal(row.provider_effort, 'xhigh');
 });
 
-test('Step 8 Lead Alpha alone uses Astra medium among late-stage agents', () => {
-  for (const s of stages.filter((candidate: any) => /^(?:8|9)-/.test(candidate.id))) {
+test('Step 8 retains its lineup and every Step 9 agent uses DeepSeek Flash max', () => {
+  for (const s of stages.filter((candidate: any) => /^8-/.test(candidate.id))) {
     for (const role of ['alpha', 'alpha-high', 'alpha-report', 'beta']) {
       assert.equal(selected(s, { role, job: 'audit' }), MODEL_PROFILE_NAMES.terraHigh,
         `${s.id}/${role}`);
@@ -131,6 +139,14 @@ test('Step 8 Lead Alpha alone uses Astra medium among late-stage agents', () => 
   const profile = MODEL_PROFILES[MODEL_PROFILE_NAMES.astraMedium];
   assert.equal(profile.model, MODELS.astra.id);
   assert.equal(profile.effort, 'medium');
+  for (const s of stages.filter((candidate: any) => /^9-/.test(candidate.id))) {
+    for (const role of ['alpha', 'alpha-high', 'alpha-report', 'beta']) {
+      assert.equal(selected(s, { role, job: 'audit' }), MODEL_PROFILE_NAMES.deepseekFlashMax,
+        `${s.id}/${role}`);
+    }
+    assert.equal(selected(s, { role: 'tool', job: 'bookkeeping-mechanical' }), undefined,
+      `${s.id} changed a deterministic tool job into a model call`);
+  }
 });
 
 test('the shared Step-3 authoring brief mandates authoritative web verification', () => {

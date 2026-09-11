@@ -41,6 +41,7 @@ const { step5Stages } = await import(
 
 const TERRA_HIGH = MODEL_PROFILE_NAMES.terraHigh;
 const ASTRA_MEDIUM = MODEL_PROFILE_NAMES.astraMedium;
+const DEEPSEEK_FLASH_MAX = MODEL_PROFILE_NAMES.deepseekFlashMax;
 
 const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
 
@@ -1594,7 +1595,7 @@ export const stages = [
     id: '1-scaffold',
     label: 'Beta scaffolding',
     modelProfile: (plan: any) => plan.role === 'beta' && plan.job === 'scaffolding'
-      ? MODEL_PROFILE_NAMES.astraMedium
+      ? MODEL_PROFILE_NAMES.solHigh
       : undefined,
     units: (ctx: any) => batches(ctx),
     // Anchored and exact ON PURPOSE: an unanchored `beta-batch-` also matches
@@ -1923,7 +1924,7 @@ export const stages = [
     id: '6-judge',
     label: 'one stateless judge per item, with whole-group readers alongside',
     modelProfile: (plan: any) => plan.role === 'alpha-group-read'
-      ? TERRA_HIGH
+      ? DEEPSEEK_FLASH_MAX
       : undefined,
     // One unit for the sweep, one per group. The stage is done when the ledger
     // is covered AND every group has a digest — which is what makes the reading
@@ -3103,7 +3104,8 @@ for (const stage of stages) {
   if (/^(?:8|9)-/.test(stage.id)) {
     stage.modelProfile = (plan: any) => plan.role === 'tool' ? undefined
       : stage.id === '8-scope' && plan.role === 'alpha' && plan.label === 'step8-lead'
-        ? MODEL_PROFILE_NAMES.astraMedium : TERRA_HIGH;
+        ? MODEL_PROFILE_NAMES.astraMedium
+        : /^9-/.test(stage.id) ? DEEPSEEK_FLASH_MAX : TERRA_HIGH;
   }
 }
 

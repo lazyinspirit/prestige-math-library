@@ -105,6 +105,10 @@ export const katexCandidates = () =>
 export const yamlCandidates = () =>
   [APP_DIR ? join(WEB_DIR, 'node_modules/yaml') : null, 'yaml'].filter(Boolean);
 
+/** Existing private provider keys used by isolated workflow dispatch homes. */
+export const providerEnvFile = () =>
+  process.env.WORKFLOW_PROVIDER_ENV_FILE ?? (APP_DIR ? join(APP_DIR, '.env') : null);
+
 /** For `npx --prefix <dir> tsx ...`. */
 export const workerPrefix = () => {
   if (!WORKER_DIR) {

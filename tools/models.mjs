@@ -22,6 +22,11 @@ export const MODELS = Object.freeze({
     runner: 'codex',
     family: 'openai',
   }),
+  deepseekFlash: Object.freeze({
+    id: process.env.DEEPSEEK_FLASH_MODEL ?? 'deepseek-flash',
+    runner: 'codex',
+    family: 'deepseek',
+  }),
 });
 
 // Stage-scoped overrides. A role still owns its sandbox, web access and cap;
@@ -30,6 +35,7 @@ export const MODEL_PROFILE_NAMES = Object.freeze({
   astraMedium: 'gpt-6-astra-medium',
   solHigh: 'gpt-5.6-sol-high',
   terraHigh: 'gpt-5.6-terra-high',
+  deepseekFlashMax: 'deepseek-v4.1-flash-max',
 });
 
 // Controllers started before the 2026-09-05 lane change retain this literal
@@ -55,6 +61,15 @@ export const MODEL_PROFILES = Object.freeze({
     effort: 'high',
     requestedEffort: 'high',
     contextWindow: 872_000,
+  }),
+  [MODEL_PROFILE_NAMES.deepseekFlashMax]: Object.freeze({
+    model: MODELS.deepseekFlash.id,
+    runner: MODELS.deepseekFlash.runner,
+    family: MODELS.deepseekFlash.family,
+    provider: 'deepseek',
+    effort: 'max',
+    requestedEffort: 'max',
+    contextWindow: 1_048_576,
   }),
   [LIVE_TERRA_XHIGH_COMPAT]: Object.freeze({
     model: MODELS.terra.id,

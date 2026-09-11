@@ -26,3 +26,9 @@ Historical receipts are not migration aliases; cutover requires a fresh run
 and owner coordination. The verified checkpoint procedure in WORKFLOW.md preserves
 original evidence, creates no model-success receipts, and runs current gates
 before fresh cross-group closure and judgment.
+
+The active model boundary is stage-owned: Step 1 scaffolding uses Sol high;
+Steps 5a/5b, Step 6 group readers, and Step 9 agent closure use DeepSeek V4.1
+Flash max. DeepSeek dispatches require the repository's single-tool live web
+bridge. It prefers Tavily and falls back to Firecrawl when Tavily is not
+configured. Deterministic tool plans remain model-free.

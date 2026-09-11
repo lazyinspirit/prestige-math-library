@@ -18,11 +18,11 @@ import {
 
 const REPO = join(dirname(fileURLToPath(import.meta.url)), '..', '..', '..');
 
-test('every registered model names its Codex provider family', () => {
+test('every registered model names a supported Codex provider family', () => {
   for (const model of Object.values(MODELS)) {
     assert.equal(model.runner, 'codex');
-    assert.equal(model.family, 'openai');
-    assert.match(model.id, /^gpt-/);
+    assert.ok(['openai', 'deepseek'].includes(model.family));
+    assert.match(model.id, /^(?:gpt-|deepseek-)/);
   }
 });
 
