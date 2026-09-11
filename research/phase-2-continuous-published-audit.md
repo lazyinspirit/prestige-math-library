@@ -843,7 +843,7 @@ blocker. Counts are now 2,517 unique published IDs: U-P 1,413, U-C 15, A-R
 ## Current checkpoint — 2026-09-11
 
 The canonical ledger has since reached 2,737 unique published IDs: U-P 1,404,
-U-C 0, A-R 189, A-P 220 and 924 bounded clears. The set-semantics batch
+U-C 0, A-R 187, A-P 225 and 921 bounded clears. The set-semantics batch
 fully reads relativization and arbitrary-signature soundness together with
 their six direct interfaces. Guarded formula induction, set-sized truth-set
 recursion, free-for substitution, coincidence and all six axiom/three rule
@@ -1127,6 +1127,16 @@ zero-integral criterion from bounded clear to A-P. Their visible finite-sum,
 increasing-set and threshold arguments remain valid; each directly consumes the
 same affected arbitrary simple-integral foundation. These are exact active
 Solovay dependencies and the supervising worker was notified immediately.
+
+The finite-integral/RN propagation pass corrects three bounded clears to A-P
+and reopens two A-R items without adding an ID. Nonnegative additivity, the
+integrable-function definition and L1 linearity directly use the affected
+foundation. Lebesgue decomposition spends these exact clauses in its
+finite-density construction and annular assembly; RN uses that decomposition
+and finite-piece linearity. All prior visible arguments and repairs remain
+valid after the same finite zero-complement fix. These are exact active Solovay
+dependencies, and their Step-5 impact was reported immediately. Evidence:
+`research/phase-2-frontier-22-published-integral-rn-propagation-audit.md`.
 
 The canonical adequate-implicit-use rule remains mandatory: a sound implicit
 use of an adequate published supplier is a bounded clear, even when a repeated

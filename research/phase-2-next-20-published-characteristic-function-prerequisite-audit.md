@@ -60,3 +60,11 @@ is sound and does not inherit the defective nonnegative boundary.
 These seven items move from U-P to bounded clear. The prior dependency-repair
 history remains in the canonical ledger; the current files contain the exact
 interfaces used here. No new Phase-2 pair or published edit is required.
+
+Later correction: the visible finite-valued arguments for
+`def-integrable-real-and-complex-functions-and-their-integrals` and
+`thm-linearity-of-the-lebesgue-integral-on-l-one` remain sound, but a deeper
+audit found their arbitrary simple-integral foundation incomplete. These two
+items therefore move from bounded clear to A-P without changing the other
+dispositions in this receipt. Exact propagation and repair evidence:
+`research/phase-2-frontier-22-published-integral-rn-propagation-audit.md`.

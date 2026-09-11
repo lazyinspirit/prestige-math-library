@@ -4,9 +4,22 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1404, U-C 0, A-R 189, A-P 220. The
+Current classifications: U-P 1404, U-C 0, A-R 187, A-P 225. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Integral and Radon--Nikodym propagation audit — 2026-09-11
+
+Three bounded clears and two repaired items move to A-P without adding an ID.
+Nonnegative additivity, the real/complex integrable-function definition and L1
+linearity directly use the affected simple/nonnegative-integral foundation.
+The repaired Lebesgue-decomposition proof spends those exact clauses in its
+finite-density and annular assembly, and the repaired RN theorem uses the
+decomposition and finite-piece L1 uniqueness. Their visible arguments and prior
+repairs remain sound after the finite zero-complement fix, but the newly found
+load-bearing supplier defect reopens the two A-R rows. The active Solovay draft
+uses RN and linearity, so its exact Step-5 impact was reported. Evidence:
+`research/phase-2-frontier-22-published-integral-rn-propagation-audit.md`.
 
 ## Nonnegative-integral foundation audit — 2026-09-11
 
@@ -28666,12 +28679,12 @@ Supplier mappings and subsequent item-specific findings remain above.
 |---|---|---:|---|
 | U-P | Unaudited and potentially defective items | 1404 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
-| A-R | Audited and repaired items | 189 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 220 | Recorded direct review and an unresolved item-specific repair. |
+| A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
+| A-P | Audited items pending Phase 3 repair | 225 | Recorded direct review and an unresolved item-specific repair. |
 
-924 further reference-pool items have bounded no-repair-needed dispositions
+921 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,813 items and the expanded reference pool contains 2,737 unique items.
+1,816 items and the expanded reference pool contains 2,737 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -29015,8 +29028,6 @@ The separate page-header cutover obligations remain in their category sections.
 | `thm-borel-sets-are-lebesgue-measurable` | Fourier radial-summability measure audit, 2026-09-11: full target read. Under explicit CC, the Lebesgue sigma-algebra contains half-open boxes and hence their generated Euclidean Borel sigma-algebra. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `def-lebesgue-point-and-lebesgue-set` | Fourier radial-summability measure audit, 2026-09-11: full definition read. Representative-relative values and the existential class-level Lebesgue set are coherent under the stated CC convention; the live radial lemma uses a specified value. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-change-of-variables-for-expectation` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: simple-law identity plus MCT proves the nonnegative formula, and absolute integrability with real/imaginary decomposition proves the signed and complex formulas. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
-| `def-integrable-real-and-complex-functions-and-their-integrals` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: full definition read. Positive/negative parts avoid undefined infinity subtraction, and finite modulus integral correctly types complex integrability. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
-| `thm-linearity-of-the-lebesgue-integral-on-l-one` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: full proof read. Finite positive/negative parts prove real additivity and homogeneity, followed by valid real/imaginary recombination. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
 | `thm-dominated-convergence` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: full proof read. One measurable exceptional null set, reverse Fatou and the integral triangle inequality prove the complex `L^1` and integral conclusions. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
 | `thm-independent-random-elements-have-product-joint-law` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: full proof read. Tuple measurability, rectangle factorization and finite product-measure uniqueness identify the joint law. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
 | `lem-measurable-functions-preserve-independence` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: full proof read. Pullback of every finite measurable rectangle is exactly the original independence criterion. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
@@ -29182,7 +29193,6 @@ owner's scan policy.
 | `cor-busy-beaver-is-not-computable` | 2026-09-09 scan, Sol 3: Free of defects within item/used-interface scan; no repair. Exact evidence and suppliers in the dated scan evidence above. |
 | `cor-beppo-levi-theorem` | 2026-09-09 scan, Sol 3: Free of defects within item/used-interface scan; no repair. Exact evidence and suppliers in the dated scan evidence above. |
 | `cor-annihilator-detects-closure` | 2026-09-09 scan, Sol 3: Free of defects within item/used-interface scan; no repair. Exact evidence and suppliers in the dated scan evidence above. |
-| `cor-additivity-of-the-nonnegative-lebesgue-integral` | 2026-09-09 scan, Sol 3: Free of defects within item/used-interface scan; no repair. Exact evidence and suppliers in the dated scan evidence above. |
 | `cor-a-group-acting-freely-on-a-positive-even-sphere-has-at-most-two-elements` | 2026-09-09 scan, Sol 3: Free of defects within item/used-interface scan; no repair. Exact evidence and suppliers in the dated scan evidence above. |
 | `cor-entire-harmonic-functions-with-bounded-gradient-are-affine` | 2026-09-09 scan, Sol 2: Free of defects within item/used-interface scan; no repair. Exact evidence and suppliers in the dated scan evidence above. |
 | `cor-dual-separates-points` | 2026-09-09 scan, Sol 2: Free of defects within item/used-interface scan; no repair. Exact evidence and suppliers in the dated scan evidence above. |
@@ -29712,6 +29722,11 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `cor-additivity-of-the-nonnegative-lebesgue-integral` | Frontier-22 integral/RN propagation audit 2026-09-11 corrects its bounded clear: its increasing-simple proof is visibly sound after repair, but it directly uses the now-A-P simple additivity and monotone-convergence clauses. Install the finite zero-complement refinement upstream or locally. Clear to A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-integral-rn-propagation-audit.md`. |
+| `def-integrable-real-and-complex-functions-and-their-integrals` | Frontier-22 integral/RN propagation audit 2026-09-11 corrects its bounded clear: positive/negative parts still avoid undefined infinity subtraction, but their integrals use the affected nonnegative-integral definition. Apply the upstream finite refinement. Clear to A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-integral-rn-propagation-audit.md`; prior receipt: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
+| `thm-linearity-of-the-lebesgue-integral-on-l-one` | Frontier-22 integral/RN propagation audit 2026-09-11 corrects its bounded clear: every integral in the visible sign/component proof is finite, so the algebra is sound and never forms zero times infinity, but it load-bearingly uses the affected integrable-function definition and nonnegative additivity. Clear to A-P; same finite repair, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-integral-rn-propagation-audit.md`; prior receipt: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
+| `thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures` | Frontier-22 integral/RN propagation audit 2026-09-11: its prior AC, normalization, annular-assembly and finite-sign repairs remain valid, but current steps 2.1, 5.1 and 7.1 directly use the now-A-P MCT, nonnegative additivity and real-integral foundation. Reopen A-R to A-P until the finite zero-complement repair is installed; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-integral-rn-propagation-audit.md`; prior A-R receipt remains above. |
+| `thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality` | Frontier-22 integral/RN propagation audit 2026-09-11: its prior AC and finite-piece uniqueness repair remains valid, but existence uses the reopened Lebesgue-decomposition theorem and uniqueness uses the affected L1 linearity proof. Reopen A-R to A-P until the common finite foundation repair is installed. Active Solovay use reported; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-integral-rn-propagation-audit.md`; prior A-R receipt remains above. |
 | `thm-nonnegative-integral-zero-iff-zero-almost-everywhere` | Frontier-22 nonnegative-integral follow-up 2026-09-11 corrects its earlier bounded clear: the visible positive-threshold/null-support proof is sound, but its arbitrary simple-minorant integrals rely on the affected representation-independence foundation. Add the zero-complement refinement locally or upstream. Clear to A-P; active Solovay use reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`; prior receipt: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
 | `thm-simple-indefinite-integral-is-a-measure` | Frontier-22 nonnegative-integral follow-up 2026-09-11: the finite weighted-measure calculation is sound after the simple integral is well defined, but the proof directly uses the affected arbitrary-representation foundation without the zero-complement repair. Install that finite refinement locally or upstream. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
 | `thm-monotone-convergence-for-the-integral` | Frontier-22 nonnegative-integral follow-up 2026-09-11: its standard increasing-set/simple-minorant argument is sound after repair, but it load-bearingly uses the affected nonnegative-integral definition, simple-integral agreement, positive homogeneity and simple indefinite measure. U-P to A-P; same finite choice-free repair, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
@@ -30059,9 +30074,7 @@ mathematical repairs. Evidence:
 | `thm-the-kunneth-sequence-splits-nonnaturally` | Astra/medium 2 audit, root reconciled 2026-09-09: Cycle retractions give a tensor-homology left inverse and explicit section; published suppliers and explicit AC, no new splitting prerequisite. See UC34 receipt above and research/uc34-2026-09-09-astra-2.md. |
 | `cor-urysohn-metrization` | Astra/medium 1 audit, root reconciled 2026-09-09: Direct countable Urysohn-function metric and two-sided finite-removal normality replace recorded Nagata route. See UC34 receipt above and research/uc34-2026-09-09-astra-1.md. |
 | `thm-kunneth-theorem-for-free-complexes-over-a-pid` | Astra/medium 2 audit, root reconciled 2026-09-09: Published Tor-map construction and homology LES supply exactness locally; explicit AC. No longer awaits new PID exactness supplier. See UC34 receipt above and research/uc34-2026-09-09-astra-2.md. |
-| `thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality` | Astra/medium 1 audit, root reconciled 2026-09-09: Explicit AC and finite-piece integrability justify uniqueness subtraction; global L1 follows from sign sets. See UC34 receipt above and research/uc34-2026-09-09-astra-1.md. |
 | `prop-tor-zero-is-the-tensor-product-in-either-construction` | Astra/medium 2 audit, root reconciled 2026-09-09: Arbitrary-ring degree-zero tensor identification proved by balanced quotient maps in both variables; supplied resolutions only. See UC34 receipt above and research/uc34-2026-09-09-astra-2.md. |
-| `thm-lebesgue-decomposition-exists-for-sigma-finite-signed-measures` | Astra/medium 1 audit, root reconciled 2026-09-09: Explicit AC; finite-density normalization, annular assembly and global signed-integral definedness repaired using published suppliers. See UC34 receipt above and research/uc34-2026-09-09-astra-1.md. |
 | `lem-projective-modules-are-flat-over-an-arbitrary-ring` | Astra/medium 2 audit, root reconciled 2026-09-09: Repaired arbitrary-ring finite-support tensor identifications and retract exactness using published suppliers; choice-free, local precheck/render evidence. See UC34 receipt above and research/uc34-2026-09-09-astra-2.md. |
 | `thm-third-isomorphism-theorem-in-an-abelian-category` | Root 2026-09-09: repaired wrong universal-property appeal using published monomorphism normality; explicit epic cancellation and cokernel uniqueness. All direct suppliers read, plan synchronized, local precheck/rendercheck and canonical plan validation pass. No Phase-2 supplier or independent judgment. |
 | `thm-the-quotient-is-independent-of-the-representing-monomorphism` | Root 2026-09-09: corrected L3 to the published order-preserving convention after reading all direct suppliers; equality-based proof unchanged. Local checks pass; see opening receipt. |

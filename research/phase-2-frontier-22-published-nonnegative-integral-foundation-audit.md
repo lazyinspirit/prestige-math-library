@@ -93,7 +93,10 @@ well defined, but the current proof invokes the affected simple-integral
 foundation and does not install the zero-complement repair locally. Monotone
 convergence uses that indefinite measure, the affected nonnegative-integral
 definition, simple-integral agreement and positive-scalar homogeneity. Its
-standard increasing-set proof is otherwise sound. The zero-integral criterion
+standard increasing-set proof is otherwise sound; write its final
+`c_m=1-2^{-m}` limit with `m>=1`, so the first term does not accidentally form
+the separately undefined zero-times-infinity product when the simple integral
+is infinite. The zero-integral criterion
 uses positive threshold scalars and the simple-minorant definition; its prior
 clear correctly assessed the visible threshold argument but is corrected
 because the newly found representation defect is load-bearing underneath it.
