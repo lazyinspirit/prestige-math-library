@@ -8,6 +8,16 @@ Current classifications: U-P 1407, U-C 0, A-R 189, A-P 208. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Complex-measure foundation audit — 2026-09-11
+
+Three previously unclassified Fourier-measure interfaces are bounded clear.
+Complex countable additivity transfers componentwise to finite signed measures.
+Total variation defines the integrable class and bounds simple integrals, making
+the approximating integral sequence Cauchy and its limit independent of the one
+chosen sequence. No choice or current Step-5 blocker was found. Exact hashes,
+deduplication and limits are in
+`research/phase-2-frontier-22-published-complex-measure-foundation-audit.md`.
+
 ## L1 and Lebesgue-point audit — 2026-09-11
 
 Four previously unclassified Fourier-facing interfaces are bounded clear.
@@ -28690,6 +28700,9 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-complex-measure` | Frontier-22 complex-measure audit 2026-09-11: complex-valued countable additivity and the empty-set clause define a finite-valued complex measure with no extended-complex ambiguity. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-complex-measure-foundation-audit.md`. |
+| `prop-real-and-imaginary-parts-of-a-complex-measure-are-finite-signed-measures` | Frontier-22 complex-measure audit 2026-09-11: convergent complex sums pass componentwise to finite real-valued countably additive parts, and their pointwise recombination is exact. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-complex-measure-foundation-audit.md`. |
+| `def-integration-against-a-signed-or-complex-measure` | Frontier-22 complex-measure audit 2026-09-11: `L^1(nu)=L^1(|nu|)` and total-variation domination make the supplied simple-approximation integrals Cauchy and approximation-independent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-complex-measure-foundation-audit.md`. |
 | `def-l-one-of-a-measure` | Frontier-22 L1/Lebesgue-point audit 2026-09-11: this is exactly the class of integrable complex representatives and explicitly defers a.e.-class quotienting. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-l-one-lebesgue-point-audit.md`. |
 | `def-translation-of-a-function-on-rn` | Frontier-22 L1/Lebesgue-point audit 2026-09-11: `tau_h f(x)=f(x-h)` unambiguously shifts the graph in the positive `h` direction. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-l-one-lebesgue-point-audit.md`. |
 | `def-c-zero-on-rn` | Frontier-22 L1/Lebesgue-point audit 2026-09-11: the real compact-tail definition is equivalent to Euclidean ball tails, and the separate published complex convention extends it componentwise. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-l-one-lebesgue-point-audit.md`. |
