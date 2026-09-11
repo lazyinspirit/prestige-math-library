@@ -3,9 +3,6 @@ import assert from 'node:assert/strict';
 import { mergeCycleReceipts, cycleCounts } from '../../step7-rejudge-cycle.mjs';
 import { itemVerdict, scopedIntegrityErrors, contractContainsItem, requiresOwningContract } from '../bin/complete-step7-item.mjs';
 import { stages } from '../stages/mathlib.mts';
-import { mkdtempSync, mkdirSync, writeFileSync, rmSync } from 'node:fs';
-import { tmpdir } from 'node:os';
-import { join } from 'node:path';
 
 const receipt = (cycles: any[]) => ({run:'test', cycles, initial_fatal_contexts:{}});
 const cycle = (id: string, item: string, completed_at: string | null = null) =>
@@ -55,29 +52,10 @@ test('handoff never accepts an old context or another item verdict', () => {
   assert.equal(itemVerdict(rows,'missing',hashes),undefined);
 });
 
-test('controller dispatches an item while its Alpha is waiting, once only', async () => {
-  const repo=mkdtempSync(join(tmpdir(),'step7-handoff-test-'));
-  try {
-    mkdirSync(join(repo,'research'));
-    const key='a'.repeat(24), label=`step7-item-${key}`;
-    const path=join(repo,`research/demo-step7-handoff-request-${key}.json`);
-    writeFileSync(path,JSON.stringify({run:'demo',id:'thm-demo-item',group:'a',key}));
-    const started:any[]=[];
-    const executor={state:{data:{dispatches:{} as any}},start:(s:any,p:any)=>{
-      started.push(p);executor.state.data.dispatches[`${s.id}:${p.label}`]={};
-    }};
-    const stage:any=stages.find(s=>s.id==='7-adjudicate');
-    const ctx:any={repo,run:'demo',config:{stateDir:'.autopilot/demo'}};
-    await stage.onProgress({ctx,executor,stage});
-    await stage.onProgress({ctx,executor,stage});
-    assert.equal(started.length,1);
-    assert.equal(started[0].label,label);
-    assert.equal(started[0].role,'tool');
-    assert.ok(started[0].argv.includes('--execute'));
-    assert.deepEqual(started[0].covers,[]);
-    delete executor.state.data.dispatches[`7-adjudicate:${label}`];
-    writeFileSync(join(repo,`research/demo-step7-handoff-response-${key}.json`),'{}');
-    await stage.onProgress({ctx,executor,stage});
-    assert.equal(started.length,1);
-  } finally {rmSync(repo,{recursive:true,force:true});}
+test('Step 7 has no immediate handoff hook and permits one terminal pass', () => {
+  const adjudicate:any=stages.find(s=>s.id==='7-adjudicate');
+  const terminal:any=stages.find(s=>s.id==='7-rejudge');
+  assert.equal(adjudicate.onProgress,undefined);
+  assert.equal(terminal.maxFixRounds,1);
+  assert.equal(terminal.terminalFixBudget,true);
 });

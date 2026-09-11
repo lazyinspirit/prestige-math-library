@@ -161,10 +161,11 @@ test('the budget still exhausts on genuine failures', async () => {
   rmSync(repo, { recursive: true, force: true });
 });
 
-// ------------------------------------------- the async lane: 7-rejudge's hook
+// ----------------------------- Step 7: one sweep, then terminal adjudication
 
-test('7-rejudge reports the previous round\'s outage instead of re-dispatching into it', async () => {
+test('7-rejudge holds missing verdicts after its sole sweep instead of re-dispatching', async (t) => {
   const repo = fixtureRepo();
+  t.after(() => rmSync(repo, { recursive: true, force: true }));
   const ctx: any = { repo, run: 'demo' };
   const cut = '2026-08-17T03:00:00.000Z';
   const after = '2026-08-17T04:00:00.000Z';
@@ -172,29 +173,43 @@ test('7-rejudge reports the previous round\'s outage instead of re-dispatching i
     closed: false, needs_rejudge: ['thm-x'],
   }));
   const started: any[] = [];
-  const executor = { start: (_s: any, p: any) => started.push(p) };
-  const s8: any = stages.find((s: any) => s.id === '7-rejudge');
+  const blockers: any[] = [];
+  const executor = {
+    start: (_s: any, p: any) => started.push(p),
+    state: { addBlocker: (stage: string, message: string, key: string) => {
+      blockers.push({ stage, message, key });
+      return true;
+    } },
+  };
+  const terminal: any = stages.find((s: any) => s.id === '7-rejudge');
 
-  // the previous round's sweep produced only outage nulls -> report, no dispatch
-  writeLedger(repo, [{ id: 'thm-x', model: 'm', keep: null, reason: SESSION_LIMIT, at: after }]);
-  const r1 = await s8.onGateFailure({ ctx, executor, stage: s8, round: 2, prevRoundAt: cut,
-    failure: { id: 'judge-closure', ok: false, why: '' } });
-  assert.match(r1?.outage?.reason ?? '', /session limit/);
-  assert.equal(started.length, 0, 'never dispatch a sweep into a known outage');
+  // The normal stage plan, not the failure hook, owns the one paid sweep.
+  const [initial] = terminal.plan(ctx);
+  assert.equal(initial.label, 'rejudge');
+  assert.ok(initial.argv.includes('tools/step7-rejudge-cycle.mjs'));
+  assert.ok(initial.argv.includes('thm-x'));
+  assert.equal(terminal.maxAttempts, 1);
+  assert.equal(terminal.maxFixRounds, 1);
+  assert.equal(terminal.terminalFixBudget, true);
+  writeFileSync(join(repo, 'research', 'demo-step7-rejudge-cycles.json'), JSON.stringify({
+    cycles: [{ kind: 'initial', items: ['thm-x'], lineup: 'm', exit_code: 0,
+      started_at: cut, completed_at: after }],
+  }));
 
-  // a non-outage null -> the normal rejudge round dispatches
-  writeLedger(repo, [{ id: 'thm-x', model: 'm', keep: null, reason: UNPARSEABLE, at: after }]);
-  const r2 = await s8.onGateFailure({ ctx, executor, stage: s8, round: 2, prevRoundAt: cut,
-    failure: { id: 'judge-closure', ok: false, why: '' } });
-  assert.equal(r2?.outage, undefined);
-  assert.equal(started.length, 1);
-  assert.equal(started[0].label, 'rejudge-round-2');
-
-  // round 1 has no predecessor window and must dispatch, not classify
-  started.length = 0;
-  const r3 = await s8.onGateFailure({ ctx, executor, stage: s8, round: 1, prevRoundAt: null,
-    failure: { id: 'judge-closure', ok: false, why: '' } });
-  assert.equal(r3?.outage, undefined);
-  assert.equal(started.length, 1);
-  rmSync(repo, { recursive: true, force: true });
+  // Neither an outage nor malformed output is a completed paid verdict. The
+  // sole terminal pass must hold the item, not refund itself into another wave.
+  for (const reason of [SESSION_LIMIT, UNPARSEABLE]) {
+    blockers.length = 0;
+    writeLedger(repo, [{ id: 'thm-x', model: 'm', keep: null, reason, at: after,
+      item_sha256: 'a'.repeat(64), context_sha256: 'b'.repeat(64) }]);
+    const result = await terminal.onGateFailure({ ctx, executor, stage: terminal,
+      round: 1, prevRoundAt: null, failure: { id: 'judge-closure', ok: false, why: '' } });
+    assert.equal(result, undefined, 'terminal adjudication does not request an outage retry');
+    assert.equal(started.length, 0, 'missing verdicts cannot launch another judge or adjudicator');
+    assert.deepEqual(blockers, [{
+      stage: '7-rejudge',
+      message: 'thm-x: required verdict missing; the terminal pass cannot launch another judge wave',
+      key: 'step7-terminal-missing:thm-x',
+    }]);
+  }
 });
