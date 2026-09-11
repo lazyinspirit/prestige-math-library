@@ -19,7 +19,36 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: core calculus, mixed-partial, measure and category-O audit
+## Latest checkpoint: active-foundation follow-up audit
+
+Evidence:
+`research/phase-2-frontier-22-published-active-foundation-followup-audit.md`.
+
+Two previously unindexed definitions enter A-P. The complex finite-`p` gauge
+applies real exponentiation to an integral that can be `+infinity`, despite the
+canonical extended-real interface leaving exponentiation undefined. Define it
+piecewise, or define the raw class by integral finiteness before the real norm.
+This interface is load-bearing for current Fourier/Schwartz drafts; root was
+notified immediately, and their finite-norm calculations survive the explicit
+local convention.
+
+The period-one definition asserts general torus `L^1` convolution existence,
+integrability and representative independence without dependencies or proof.
+It needs periodic Borel representatives, joint measurability, Tonelli/Fubini,
+translation and quotient descent. Current Carleson uses only the sound Fourier
+coefficient/partial-sum normalization, so this is not a Step-3 blocker. Five
+other high-use interfaces are new bounded clears: Kac--Moody simple
+reflections, ordinal/omega absoluteness, singular chain homotopy, the
+nonnegative improper-integral bridge and real compactly supported smooth
+notation.
+
+Post-batch target index: 2,562 unique published IDs; U-P 1,408, U-C 11,
+A-R 187, A-P 197 and 759 bounded clears; 13,368 published items remain outside
+the index. Recount, publication-state and cross-class deduplication checks must
+be rerun before commit. Next target is any new exact reviewer handoff, then the
+next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: core calculus, mixed-partial, measure and category-O audit
 
 Evidence:
 `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`.

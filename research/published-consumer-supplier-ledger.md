@@ -4,9 +4,31 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1408, U-C 11, A-R 187, A-P 195. The
+Current classifications: U-P 1408, U-C 11, A-R 187, A-P 197. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Active foundation follow-up audit — 2026-09-11
+
+Two previously unindexed definitions enter A-P. The complex `L^p` convention
+raises a possibly infinite nonnegative integral to a real power although the
+canonical extended-real definition leaves exponentiation undefined; define the
+finite-`p` gauge piecewise or define the raw class by integral finiteness before
+introducing its real norm. This definition is load-bearing for the Fourier and
+Schwartz frontier, whose finite-norm calculations remain valid after that local
+convention is stated.
+
+The period-one Fourier definition also asserts general `L^1(T)` convolution
+existence, integrability and representative independence without dependencies
+or a well-definedness proof. Add periodic Borel representatives, joint
+measurability, Tonelli/Fubini, translation and quotient-descent calculations.
+The current Carleson theorem uses only its sound coefficient/partial-sum
+normalization, so this does not block Step 3. Five further active interfaces are
+bounded clear: Kac--Moody simple reflections, ordinal/omega absoluteness, the
+singular prism homotopy formula, the nonnegative improper-integral bridge and
+real compactly supported smooth-function notation. Exact hashes, repair paths,
+consumer scope and limits are in
+`phase-2-frontier-22-published-active-foundation-followup-audit.md`.
 
 ## Core calculus, mixed-partial, measure and Kac--Moody audit — 2026-09-11
 
@@ -28159,11 +28181,11 @@ Supplier mappings and subsequent item-specific findings remain above.
 | U-P | Unaudited and potentially defective items | 1408 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 11 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 195 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 197 | Recorded direct review and an unresolved item-specific repair. |
 
-754 further reference-pool items have bounded no-repair-needed dispositions
+759 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,801 items and the expanded reference pool contains 2,555 unique items.
+1,803 items and the expanded reference pool contains 2,562 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28224,6 +28246,11 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-simple-reflections-and-the-kac-moody-weyl-group` | Frontier-22 active-foundation follow-up 2026-09-11: the root/coroot formulas are dual, Cartan diagonal two makes each simple reflection involutive and the Cartan entries prove root-lattice preservation. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-active-foundation-followup-audit.md`. |
+| `thm-ordinals-and-omega-are-absolute-in-transitive-models` | Frontier-22 active-foundation follow-up 2026-09-11: bounded transitivity/linear-membership clauses plus ambient Foundation make ordinalhood absolute; internal ZF successor formation fixes the finite ordinals and the bounded least-limit description identifies actual omega. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-active-foundation-followup-audit.md`. |
+| `thm-singular-chain-homotopy-formula` | Frontier-22 active-foundation follow-up 2026-09-11: the oriented prism-boundary formula gives the chain identity on generators, including degree zero, and integer linearity plus the declared tensor extensions give every abelian coefficient group. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-active-foundation-followup-audit.md`. |
+| `thm-nonnegative-improper-riemann-integral-agrees-with-the-lebesgue-integral-on-a-half-line` | Frontier-22 active-foundation follow-up 2026-09-11: compact truncations increase pointwise; the explicit CC-bearing Riemann/Lebesgue bridge, monotone convergence and the improper-limit definition identify the finite values. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-active-foundation-followup-audit.md`. |
+| `def-c-c-and-c-c-infinity-on-rn` | Frontier-22 active-foundation follow-up 2026-09-11: compact support and ordered Euclidean smoothness coherently define the real spaces, with finite unions of compact supports supplying vector-space closure. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-active-foundation-followup-audit.md`. |
 | `thm-continuous-implies-integrable` | Frontier-22 core calculus audit 2026-09-11: the uniform-partition oscillation proof is complete. Its unconditional published Heine--Cantor supplier explicitly names and declares the sole CC use and is itself bounded clear, so the direct invocation is adequate under the correct-implicit-use rule; a repeated direct choice edge is optional metadata. A-P to bounded clear with history retained. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
 | `thm-integration-by-parts` | Frontier-22 core calculus audit 2026-09-11: product differentiation, continuity, product integrability, linearity and FTC give the stated formula after both integrands are shown integrable. The exact derivative-algebra ID avoids its separate alias collision. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
 | `thm-substitution` | Frontier-22 core calculus audit 2026-09-11: a primitive on the nondegenerate order-convex domain, the chain rule, oriented endpoints and proved composite/product integrability give the formula without injectivity or monotonicity. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
@@ -29034,6 +29061,8 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `def-complex-lp-and-euclidean-test-function-conventions` | Frontier-22 active-foundation follow-up 2026-09-11: for finite `p`, the displayed `N_p(f)=(integral |f|^p)^(1/p)` is applied to every measurable finite-valued complex function, although the integral may be `+infinity` and canonical `def-extended-reals` explicitly leaves exponentiation undefined. This makes `N_p` and the following membership predicate partial. Define `N_p=+infinity` in the infinite-integral case, or define the raw class by integral finiteness and its real norm afterward. Current Fourier/Schwartz consumers use finite-norm members and remain valid after stating this local convention, but the definition is load-bearing. Existing published power/integral interfaces suffice; no new pair. Exact hash/consumers/scope: `research/phase-2-frontier-22-published-active-foundation-followup-audit.md`. |
+| `def-period-one-fourier-coefficients-partial-sums-and-convolution` | Frontier-22 active-foundation follow-up 2026-09-11: with no dependencies or proof, the definition asserts that general `L^1(T)` convolution exists a.e., is integrable and descends independently of representatives. Supply one-periodic Borel representatives, joint measurability, finite-square Tonelli/Fubini, periodic translation and quotient-descent calculations, with the applicable choice contract. The current Carleson theorem consumes only the sound coefficient/finite-partial-sum normalization, and the bounded Dirichlet-kernel convolution exists pointwise, so no Step-3 blocker/new pair. Exact hash/impact/scope: `research/phase-2-frontier-22-published-active-foundation-followup-audit.md`. |
 | `lem-the-cohomology-universal-coefficient-extension-map` | Group-e UCT reconciliation 2026-09-11: target omits AC required by its free-cycle/boundary supplier and DC plus supplied-resolution data required by balanced Ext. Proof 2.1 does not prove descent, injectivity or naturality: for a cycle projection `pi`, changing `psi` by `g|B` changes `psi d` by `delta(g pi)`; conversely a primitive restricts to the required extension on cycles. Add AC and use the published PID-complex decomposition/projective-resolution interfaces, or state the exact balanced-Ext data and comparisons. U-C to A-P; draft singular UCT is not a published backward repair. Exact hashes/limits: `research/phase-2-next-20-published-group-e-uct-partition-reconciliation.md`. |
 | `thm-universal-coefficient-theorem-for-cohomology-over-a-pid` | Group-e UCT reconciliation 2026-09-11: explicit AC is adequate for choice, but the proof directly uses the affected extension map and compresses the same kernel quotient. A zero-evaluation cocycle vanishes on cycles and factors through `d_n`; identifying coboundaries with restrictions from `Z_{n-1}` requires a cycle projection. Repair the preceding map, write this calculation and check naturality. U-C to A-P; no new pair. Exact hashes/limits: `research/phase-2-next-20-published-group-e-uct-partition-reconciliation.md`. |
 | `thm-the-cohomology-universal-coefficient-sequence-splits-nonnaturally` | Group-e UCT reconciliation 2026-09-11: its explicit-AC section formula `sigma(f)=[f q pi]` is sound, but its Statement repeats and directly depends on the still-affected full UCT exact sequence. Retain that formula after repairing the left injection/exactness; the absent direct AC edge is optional metadata under the adequate-implicit-use rule. U-C to A-P; no independent section defect or new pair. Exact hash/path: `research/phase-2-next-20-published-group-e-uct-partition-reconciliation.md`. |
