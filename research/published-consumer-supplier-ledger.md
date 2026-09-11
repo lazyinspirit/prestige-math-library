@@ -4,9 +4,20 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1408, U-C 0, A-R 189, A-P 207. The
+Current classifications: U-P 1407, U-C 0, A-R 189, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Natural-order audit — 2026-09-11
+
+Five natural-order interfaces are bounded clear. The additive relation is a
+linear discrete order by natural arithmetic and induction. Separate induction
+on the von Neumann construction then proves strict order equals membership and
+nonstrict order equals inclusion, without circular use of ordinal order. The
+membership lemma's old U-P row tracked only a page-prerequisite amendment and
+named no item defect, so it moves to clear; four IDs are new. No current Step-5
+blocker was found. Exact hashes, deduplication and limits are in
+`research/phase-2-frontier-22-published-natural-order-audit.md`.
 
 ## Finite-cardinality audit — 2026-09-11
 
@@ -199,6 +210,17 @@ clause. The supervising worker authorized the choice-free construction for
 local Step-5 repair, so no live mathematical blocker remains; the published
 finding stays open. Exact hashes, clauses, supplier states, deduplication and limits
 are in `research/phase-2-frontier-22-published-dual-hom-bundle-audit.md`.
+
+Update 2026-09-11 (Step 5b proof-contract repair cycle 1): the authorized local
+construction is now installed in `items/def-connection-on-a-smooth-vector-bundle.md`,
+and `def-dual-connection`,
+`prop-the-difference-of-two-connections-is-an-endomorphism-valued-one-form` and
+`lem-finite-tensor-products-of-smooth-vector-bundles` route their Hom/dual/tensor
+interfaces through it. None of the four drafts now declares or cites the affected
+published clause, so their supplier mapping is local; the published finding itself
+is unchanged and remains open A-P pending its Phase-3 inline proof. Receipts:
+`research/phase-2-next-20-hom-bundle-repair-completion.md` and
+`research/phase-2-next-20-alpha-5b.md` (repair cycle 1).
 
 ## Cover-small chain-homotopy audit — 2026-09-11
 
@@ -28456,11 +28478,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,668 unique
+subsequently reconciled published IDs. It currently contains **2,672 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,668 indexed IDs are published; **13,262 published items remain outside this
+2,672 indexed IDs are published; **13,258 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28469,14 +28491,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1408 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1407 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 189 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 207 | Recorded direct review and an unresolved item-specific repair. |
 
-864 further reference-pool items have bounded no-repair-needed dispositions
+869 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,804 items and the expanded reference pool contains 2,668 unique items.
+1,803 items and the expanded reference pool contains 2,672 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28537,6 +28559,11 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-nat-order` | Frontier-22 natural-order audit 2026-09-11: the additive existence-of-a-gap relation coherently defines nonstrict and strict natural order; later theorems supply its advertised properties. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-natural-order-audit.md`. |
+| `lem-nat-trichotomy` | Frontier-22 natural-order audit 2026-09-11: induction over the second argument proves exhaustive comparison, while cancellation and nonzero-successor arithmetic make the cases disjoint. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-natural-order-audit.md`. |
+| `thm-nat-linear-order` | Frontier-22 natural-order audit 2026-09-11: zero gaps, concatenated gaps and cancellation prove reflexivity, transitivity and antisymmetry; the independent trichotomy lemma supplies totality. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-natural-order-audit.md`. |
+| `lem-nat-discrete` | Frontier-22 natural-order audit 2026-09-11: a nonzero additive gap is a successor and conversely, proving `m<n` iff `sigma(m)<=n` and excluding intermediate naturals. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-natural-order-audit.md`. |
+| `lem-nat-order-is-membership` | Frontier-22 natural-order audit 2026-09-11: induction from additive order proves strict order equals von Neumann membership and nonstrict order equals inclusion without circularity. Its old U-P label tracked only a page prerequisite; moved U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-natural-order-audit.md`. |
 | `lem-pigeonhole` | Frontier-22 finite-cardinality audit 2026-09-11: successor induction normalizes by an explicit transposition and restricts to the predecessor; all five consequences follow without family choice. Its old U-P label tracked only a page prerequisite and named no item defect; moved U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-cardinality-audit.md`. |
 | `def-finite-cardinality` | Frontier-22 finite-cardinality audit 2026-09-11: finiteness supplies existence of an equinumerous natural and pigeonhole supplies uniqueness, so `|A|` is well defined without selecting a bijection. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-cardinality-audit.md`. |
 | `lem-of-no-zero-divisors` | Frontier-22 field-contract audit 2026-09-11: multiplying `ab=0` by the inverse of a nonzero first factor gives the second factor zero under the current total multiplication contract. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-field-contract-audit.md`. |
@@ -30678,7 +30705,6 @@ mathematical repairs. Evidence:
 | `lem-most-strings-are-incompressible` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `lem-multitape-simulation-has-quadratic-time-overhead` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `lem-n-plus-invariants-exist-in-every-nonzero-o-module` | Cross-category Phase-2 roots and their published impact |
-| `lem-nat-order-is-membership` | 7.2 Page prerequisites, DC, and B-leaf repairs |
 | `lem-negative-gradient-energy-identity` | riemannian-metrics-length-distance-and-volume and |
 | `lem-nonreachability-has-an-inductive-counting-certificate` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `lem-nonreal-dirichlet-l-nonzero-at-one` | Transitive consumers (166), grouped by home page |
