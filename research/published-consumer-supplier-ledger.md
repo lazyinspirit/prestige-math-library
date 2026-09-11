@@ -4,9 +4,19 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1376, U-C 0, A-R 186, A-P 292. The
+Current classifications: U-P 1375, U-C 0, A-R 186, A-P 292. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Random-element and independence interfaces — 2026-09-11
+
+Six elementary structural interfaces are bounded clears after their complete
+statements/proofs and exact used clauses were read. One older U-P interface
+moves to clear and five previously unclassified IDs are new clears. Laws are
+well-defined pushforwards, measurable composition uses the exact preimage
+identity, and the independent-sigma-algebra grouping proof is complete without
+choice. No active-frontier blocker or new pair was found. Exact evidence:
+`research/phase-2-frontier-22-published-random-element-independence-audit.md`.
 
 ## Standard-Borel coding audit — 2026-09-11
 
@@ -28894,11 +28904,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,826 unique
+subsequently reconciled published IDs. It currently contains **2,885 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,826 indexed IDs are published; **13,104 published items remain outside this
+2,885 indexed IDs are published; **13,045 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28907,14 +28917,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1386 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1375 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
-| A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 241 | Recorded direct review and an unresolved item-specific repair. |
+| A-R | Audited and repaired items | 186 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
+| A-P | Audited items pending Phase 3 repair | 292 | Recorded direct review and an unresolved item-specific repair. |
 
-1,012 further reference-pool items have bounded no-repair-needed dispositions
+1,032 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,814 items and the expanded reference pool contains 2,826 unique items.
+1,853 items and the expanded reference pool contains 2,885 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28975,6 +28985,12 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-random-element-and-real-random-variable` | Frontier-22 random-element audit 2026-09-11: Measurability and the real/Borel specialization have the correct domains. U-P to bounded clear; prior active-interface mention retained. Exact hash/scope: `research/phase-2-frontier-22-published-random-element-independence-audit.md`. |
+| `def-law-or-distribution-of-a-random-element` | Frontier-22 random-element audit 2026-09-11: Measurability makes the pushforward set function well defined; probability-measure status is correctly deferred. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-random-element-independence-audit.md`. |
+| `lem-law-of-a-random-element-is-a-probability-measure` | Frontier-22 random-element audit 2026-09-11: Preimages preserve the measure operations, so the source probability axioms prove countable additivity and mass one. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-random-element-independence-audit.md`. |
+| `thm-composition-with-borel-functions-preserves-measurability` | Frontier-22 random-element audit 2026-09-11: The two-stage preimage identity proves the general composition claim and its Borel specialization. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-random-element-independence-audit.md`. |
+| `def-independent-random-elements` | Frontier-22 random-element audit 2026-09-11: The full preimage family is a sigma-algebra and its independence contract agrees with the supplied definitions. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-random-element-independence-audit.md`. |
+| `thm-grouping-independent-sigma-algebras` | Frontier-22 random-element audit 2026-09-11: Finite-intersection pi-systems generate the grouped sigma-algebras, and disjoint groups let original independence prove the required product formula without choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-random-element-independence-audit.md`. |
 | `thm-seven-generators-of-the-borel-sigma-algebra-on-r` | Frontier-22 standard-Borel audit 2026-09-11: Complementation and the rational interval/ray identities give both generator inclusions, with explicitly countable rational families. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-standard-borel-coding-audit.md`. |
 | `lem-hilbert-cube-has-a-bimeasurable-real-coding` | Frontier-22 standard-Borel audit 2026-09-11: Canonical binary rows, explicit interleaving and separated ternary cylinders give an injective Borel code, Borel image and coordinate-measurable inverse. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-standard-borel-coding-audit.md`. |
 | `def-sections-of-sets-and-functions-on-products` | Frontier-22 product-section audit 2026-09-11: Horizontal/vertical set and function sections freeze the stated variable with the correct domains. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-product-section-measure-audit.md`. |
@@ -30751,7 +30767,6 @@ mathematical repairs. Evidence:
 | `def-quasi-finite-morphism-classical` | AV-1 draft-page impact partition (Phase 3 only) |
 | `def-radial-mollifier-family-in-rn` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `def-radian-angle-by-unit-circle-arc-length` | 9.6 Membership and plan drift |
-| `def-random-element-and-real-random-variable` | 0A.2 Exact Phase-3 defects in published content |
 | `def-rational-character-ring` | Transitive consumers (166), grouped by home page |
 | `def-rayleigh-quotient-iteration` | 17. Exact B-leaf and body-link repairs |
 | `def-read-only-input-logspace-machine` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |

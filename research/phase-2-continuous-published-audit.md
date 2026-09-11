@@ -19,7 +19,24 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: standard-Borel coding
+## Latest checkpoint: random-element and independence interfaces
+
+Evidence:
+`research/phase-2-frontier-22-published-random-element-independence-audit.md`.
+
+Random elements, laws, pushforward probability, measurable composition,
+independent random elements and grouping independent sigma-algebras are six
+bounded clears after complete statement/proof and exact-clause reads. One U-P
+row moved to clear and five previously unclassified IDs were added. No defect,
+frontier blocker, supplier or new pair was found.
+
+Post-batch target index: 2,885 unique published IDs; U-P 1,375, U-C 0,
+A-R 186, A-P 292 and 1,032 bounded clears; 13,045 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks must be rerun before commit. Next target is any new exact reviewer
+handoff, then active expectation inequalities using these structural clauses.
+
+## Completed checkpoint: standard-Borel coding
 
 Evidence:
 `research/phase-2-frontier-22-published-standard-borel-coding-audit.md`.
