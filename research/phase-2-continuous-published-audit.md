@@ -840,15 +840,34 @@ blocker. Counts are now 2,517 unique published IDs: U-P 1,413, U-C 15, A-R
 187, A-P 191 and 711 bounded clears; 13,413 remain outside the index. Evidence:
 `research/phase-2-frontier-22-published-complex-lp-completed-product-audit.md`.
 
+## Current checkpoint — 2026-09-11
+
+The canonical ledger has since reached 2,601 unique published IDs: U-P 1,410,
+U-C 0, A-R 188, A-P 206 and 797 bounded clears. The latest set-semantics batch
+fully reads relativization and arbitrary-signature soundness together with
+their six direct interfaces. Guarded formula induction, set-sized truth-set
+recursion, free-for substitution, coincidence and all six axiom/three rule
+cases are sound in the exact active clauses. Restricted existential elimination
+uses one witness for one premise, not a family choice. No current Step-5 blocker
+was found. Evidence:
+`research/phase-2-frontier-22-published-set-semantics-soundness-audit.md`.
+
+The canonical adequate-implicit-use rule remains mandatory: a sound implicit
+use of an adequate published supplier is a bounded clear, even when a repeated
+direct dependency edge would improve exposition. Every future addition must be
+searched against the complete ledger by exact ID, aliases, mechanism and
+supplier IDs, and each published ID must retain exactly one classification row.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
    issues reported by the root worker, prioritizing items actually consumed by
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
-   then audit bounded samples of published items outside the 2,461-ID index.
+   next examining the cover-small chain-homotopy and smooth-bundle transition
+   interfaces, then audit bounded samples outside the 2,601-ID index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,428 published items
+No exhaustive discovery claim is authorized while 13,329 published items
 remain outside the index and dependency interfaces remain unaudited.

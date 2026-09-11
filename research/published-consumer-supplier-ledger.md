@@ -8,6 +8,20 @@ Current classifications: U-P 1410, U-C 0, A-R 188, A-P 206. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Set semantics and soundness audit — 2026-09-11
+
+Eight previously unclassified active set-theory interfaces are bounded clear.
+Formula-by-formula relativization agrees with satisfaction in the induced
+membership structure without transitivity or a class truth predicate. The
+set-sized satisfaction recursion uses truth subsets of the assignment set and
+canonical constructor operations. Free-for substitution and coincidence have
+the required binder-update calculations. The formal calculus's six schemes and
+three rules are all semantically sound for sentence theories; its restricted
+existential-elimination step takes one witness for one existential premise and
+does not use a choice family. No current Step-5 blocker was found. Exact hashes,
+used clauses, deduplication and limits are in
+`research/phase-2-frontier-22-published-set-semantics-soundness-audit.md`.
+
 ## Lp, normal-law and measure audit — 2026-09-11
 
 Six previously unclassified direct Fourier/probability interfaces are bounded
@@ -28234,11 +28248,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,593 unique
+subsequently reconciled published IDs. It currently contains **2,601 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,593 indexed IDs are published; **13,337 published items remain outside this
+2,601 indexed IDs are published; **13,329 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28252,9 +28266,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 188 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 206 | Recorded direct review and an unresolved item-specific repair. |
 
-789 further reference-pool items have bounded no-repair-needed dispositions
+797 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,804 items and the expanded reference pool contains 2,593 unique items.
+1,804 items and the expanded reference pool contains 2,601 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28315,6 +28329,14 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `thm-relativization-and-set-satisfaction` | Frontier-22 set-semantics audit 2026-09-11: atoms agree with the restricted membership structure, the guarded quantifier has exactly the satisfaction witnesses, and no transitivity or class truth predicate is used. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-set-semantics-soundness-audit.md`. |
+| `thm-set-language-first-order-soundness` | Frontier-22 set-semantics audit 2026-09-11: all six schemes and three rules preserve truth under every assignment; restricted existential elimination uses one witness for one premise and no family choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-set-semantics-soundness-audit.md`. |
+| `def-relativization-to-a-definable-class` | Frontier-22 set-semantics audit 2026-09-11: the recursive transformation is capture-avoiding, uses a fresh set parameter, and keeps proper-class use formula-by-formula. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-set-semantics-soundness-audit.md`. |
+| `thm-set-structure-satisfaction-recursion` | Frontier-22 set-semantics audit 2026-09-11: truth subsets of the assignment set, power-set constructor operations, structural recursion and Separation give the unique set satisfaction relation without a choice selection. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-set-semantics-soundness-audit.md`. |
+| `def-set-coded-formal-derivation` | Frontier-22 set-semantics audit 2026-09-11: the six schemes, three rules, substitution side conditions and sentence-theory boundary coherently specify finite proof codes in ZF. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-set-semantics-soundness-audit.md`. |
+| `lem-formula-substitution-satisfaction` | Frontier-22 set-semantics audit 2026-09-11: the free-for condition fixes the term value through binder updates and distinct-variable updates commute, proving the substitution equivalence. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-set-semantics-soundness-audit.md`. |
+| `lem-satisfaction-coincidence` | Frontier-22 set-semantics audit 2026-09-11: constructor induction proves free-variable coincidence and reduct invariance, including the existential update clause. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-set-semantics-soundness-audit.md`. |
+| `def-theories-models-and-semantic-consequence` | Frontier-22 set-semantics audit 2026-09-11: sentence models, assignment-wise consequence, validity and universal closure consistently use nonempty set structures and coincidence. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-set-semantics-soundness-audit.md`. |
 | `def-l-p-space-as-a-quotient-by-null-functions` | Frontier-22 Lp/normal/measure audit 2026-09-11: null equality coherently defines classes for every positive `p`; the raw/quotient `L^infinity` overload is explicitly staged and the later representative remark disambiguates uses. The finite-p and later quotient-structure clauses are sound. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-lp-normal-measure-audit.md`. |
 | `thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation` | Frontier-22 Lp/normal/measure audit 2026-09-11: the simple total-variation estimate controls an `L^1(|nu|)` approximating sequence, its limit and differences of approximants; applying it to `f 1_E` proves the restricted formula. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-lp-normal-measure-audit.md`. |
 | `thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable` | Frontier-22 Lp/normal/measure audit 2026-09-11: the rational threshold formulas for suprema and infima are correct; tail operations give limsup/liminf and agreement on every rational cut detects equality even at extended-real infinities. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-lp-normal-measure-audit.md`. |
