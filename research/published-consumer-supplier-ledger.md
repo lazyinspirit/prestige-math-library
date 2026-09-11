@@ -8,6 +8,17 @@ Current classifications: U-P 1407, U-C 0, A-R 189, A-P 208. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Hilbert and vertex-foundation audit — 2026-09-11
+
+Five previously unclassified algebraic interfaces are bounded clear. The Green
+vertex/source definition asserts only the exact minimality and summand data,
+leaving existence separate. Exact-degree leading-coefficient stages are ideals
+over rings with zero divisors and ascend; top-term cancellation uses no division.
+Noetherian stabilization and finitely many witness selections then prove the
+Hilbert basis theorem without choice. No current Step-5 blocker was found. Exact
+hashes, deduplication and limits are in
+`research/phase-2-frontier-22-published-hilbert-vertex-foundation-audit.md`.
+
 ## Serre-vanishing audit — 2026-09-11
 
 Two previously unclassified Kac–Moody suppliers are bounded clear. A homogeneous
@@ -28658,6 +28669,11 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-vertex-and-source-of-an-indecomposable-module` | Frontier-22 Hilbert/vertex audit 2026-09-11: vertex minimality and source summand/induction data are exact; existence and conjugacy are left to the separate indexed theorem. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hilbert-vertex-foundation-audit.md`. |
+| `lem-leading-coefficient-ideals` | Frontier-22 Hilbert/vertex audit 2026-09-11: exact-degree leading coefficients plus zero form ideals even with zero divisors, and multiplication by `x` proves stage ascent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hilbert-vertex-foundation-audit.md`. |
+| `lem-hilbert-basis-degree-cancellation` | Frontier-22 Hilbert/vertex audit 2026-09-11: a finite stage-generator combination cancels the top coefficient without division and strictly lowers degree unless the remainder is zero. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hilbert-vertex-foundation-audit.md`. |
+| `lem-polynomial-ideal-finite-generation` | Frontier-22 Hilbert/vertex audit 2026-09-11: Noetherian stabilization and finitely many stage/realiser choices reduce any least-degree omitted polynomial, proving finite generation without AC. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hilbert-vertex-foundation-audit.md`. |
+| `thm-hilbert-basis-theorem` | Frontier-22 Hilbert/vertex audit 2026-09-11: the sound polynomial-ideal finite-generation lemma and ideal characterization yield Noetherianity of `R[x]`, including zero divisors and the zero ring. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hilbert-vertex-foundation-audit.md`. |
 | `lem-kac-moody-opposite-simple-centralizer-vanishes` | Frontier-22 Serre audit 2026-09-11: positive/negative adjoint closure generates a one-sign ideal disjoint from the Cartan, so maximality forces the opposite-simple centralizer to vanish. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-serre-vanishing-audit.md`. |
 | `lem-serre-elements-vanish-before-serre-generation` | Frontier-22 Serre audit 2026-09-11: the adjoint `sl_2` identity vanishes at `m=1-a_ij`, and every opposite simple generator kills the vector, including the symmetric-zero boundary case. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-serre-vanishing-audit.md`. |
 | `def-product-topology` | Frontier-22 pullback-topology audit 2026-09-11: product/box bases, finite-support restrictions, empty product and finite-versus-arbitrary choice boundaries are coherent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-pullback-bundle-topology-audit.md`. |
