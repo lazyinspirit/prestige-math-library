@@ -842,8 +842,8 @@ blocker. Counts are now 2,517 unique published IDs: U-P 1,413, U-C 15, A-R
 
 ## Current checkpoint — 2026-09-11
 
-The canonical ledger has since reached 2,681 unique published IDs: U-P 1,407,
-U-C 0, A-R 189, A-P 207 and 878 bounded clears. The set-semantics batch
+The canonical ledger has since reached 2,685 unique published IDs: U-P 1,407,
+U-C 0, A-R 189, A-P 207 and 882 bounded clears. The set-semantics batch
 fully reads relativization and arbitrary-signature soundness together with
 their six direct interfaces. Guarded formula induction, set-sized truth-set
 recursion, free-for substitution, coincidence and all six axiom/three rule
@@ -1019,6 +1019,14 @@ scalar closure. Existing kernel/image classifications remain unchanged. No
 current Step-5 blocker was found. Evidence:
 `research/phase-2-frontier-22-published-linear-subspace-audit.md`.
 
+The lower/bounded and maximum/minimum definitions together with the finite-list
+extrema theorem and finite/listable equivalence add four bounded clears. Empty
+sets have vacuous bounds but no extrema. The two finite-set proofs separate the
+list-form induction from the cardinal/listable bridge, so their sanctioned
+`justified_by` cross-reference is not circular and uses no choice. No current
+Step-5 blocker was found. Evidence:
+`research/phase-2-frontier-22-published-bounds-finite-extrema-audit.md`.
+
 The canonical adequate-implicit-use rule remains mandatory: a sound implicit
 use of an adequate published supplier is a bounded clear, even when a repeated
 direct dependency edge would improve exposition. Every future addition must be
@@ -1031,10 +1039,10 @@ supplier IDs, and each published ID must retain exactly one classification row.
    issues reported by the root worker, prioritizing items actually consumed by
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
-   next examining the cover-small chain-homotopy and smooth-bundle transition
-   interfaces, then audit bounded samples outside the 2,681-ID index.
+   then audit high-use real-order and analysis samples outside the 2,685-ID
+   index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,249 published items
+No exhaustive discovery claim is authorized while 13,245 published items
 remain outside the index and dependency interfaces remain unaudited.

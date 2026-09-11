@@ -8,6 +8,17 @@ Current classifications: U-P 1407, U-C 0, A-R 189, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Bounds and finite-extrema audit — 2026-09-11
+
+Four previously unclassified real-order interfaces are bounded clear. Lower
+and upper bounds have the correct empty-set behavior, while maxima and minima
+require membership and are unique. Induction proves extrema for finite lists;
+the later finite/listable equivalence proves the broad finite-set reading
+without choice. Their `justified_by`/dependency cross-reference is the
+schema-sanctioned discharge pattern, not a circular proof. No current Step-5
+blocker was found. Exact hashes, deduplication and limits are in
+`research/phase-2-frontier-22-published-bounds-finite-extrema-audit.md`.
+
 ## Linear-subspace audit — 2026-09-11
 
 Two previously unclassified linear-subspace interfaces are bounded clear. The
@@ -28600,6 +28611,10 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-bounded-set` | Frontier-22 bounds/extrema audit 2026-09-11: lower/upper bounds have the standard quantifiers, making the empty set vacuously bounded without assigning it extrema. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-bounds-finite-extrema-audit.md`. |
+| `def-max-min` | Frontier-22 bounds/extrema audit 2026-09-11: membership distinguishes extrema from bounds, and order antisymmetry proves uniqueness, including the correct empty-set exclusion. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-bounds-finite-extrema-audit.md`. |
+| `lem-finite-set-has-max` | Frontier-22 bounds/extrema audit 2026-09-11: induction proves extrema for every finite real list, with totality and transitivity covering ties and duplicates; its later broad finite-set reading is discharged separately. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-bounds-finite-extrema-audit.md`. |
+| `lem-finite-subsets-listable` | Frontier-22 bounds/extrema audit 2026-09-11: a nonempty set equinumerous with a natural is one successor-natural image and finite list images are finite; the proof is choice-free and the extrema consequence uses the already proved list-form theorem. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-bounds-finite-extrema-audit.md`. |
 | `def-linear-subspace` | Frontier-22 linear-subspace audit 2026-09-11: zero/addition/scalar closure restrict the vector operations, and scalar `-1` supplies additive inverses, making the subset a vector space over the same field. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-linear-subspace-audit.md`. |
 | `lem-linear-subspace-criterion` | Frontier-22 linear-subspace audit 2026-09-11: one witness from the nonempty set yields zero; scalar `1` gives addition and the established zero gives scalar closure. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-linear-subspace-audit.md`. |
 | `lem-vector-space-elementary-consequences` | Frontier-22 linear-map foundation audit 2026-09-11: distributivity and cancellation prove both zero laws and both negation laws; a nonzero scalar inverse proves the annihilation alternative. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-linear-map-foundation-audit.md`. |
