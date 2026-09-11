@@ -8,6 +8,16 @@ Current classifications: U-P 1407, U-C 0, A-R 189, A-P 208. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Bounded-absoluteness audit — 2026-09-11
+
+Two previously unclassified set-theory suppliers are bounded clear. Formula
+induction and transitivity transfer every bounded witness. The basic set,
+Kuratowski pair, relation and function graphs bound all quantifiers through
+supplied sets, handle empty intersection explicitly and assert graph agreement
+without a closure claim. No choice or current Step-5 blocker was found. Exact
+hashes, deduplication and limits are in
+`research/phase-2-frontier-22-published-bounded-absoluteness-audit.md`.
+
 ## Hilbert and vertex-foundation audit — 2026-09-11
 
 Five previously unclassified algebraic interfaces are bounded clear. The Green
@@ -28669,6 +28679,8 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `thm-delta-zero-absoluteness-for-transitive-sets` | Frontier-22 bounded-absoluteness audit 2026-09-11: transitivity retains every bounded witness in the smaller domain, and structural formula induction transfers all Delta-zero truth values. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-bounded-absoluteness-audit.md`. |
+| `lem-bounded-definitions-of-basic-set-operations` | Frontier-22 bounded-absoluteness audit 2026-09-11: all basic set/relation/function graph formulas have genuinely bounded quantifiers, correct empty/intersection boundaries and no closure overclaim. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-bounded-absoluteness-audit.md`. |
 | `def-vertex-and-source-of-an-indecomposable-module` | Frontier-22 Hilbert/vertex audit 2026-09-11: vertex minimality and source summand/induction data are exact; existence and conjugacy are left to the separate indexed theorem. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hilbert-vertex-foundation-audit.md`. |
 | `lem-leading-coefficient-ideals` | Frontier-22 Hilbert/vertex audit 2026-09-11: exact-degree leading coefficients plus zero form ideals even with zero divisors, and multiplication by `x` proves stage ascent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hilbert-vertex-foundation-audit.md`. |
 | `lem-hilbert-basis-degree-cancellation` | Frontier-22 Hilbert/vertex audit 2026-09-11: a finite stage-generator combination cancels the top coefficient without division and strictly lowers degree unless the remainder is zero. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hilbert-vertex-foundation-audit.md`. |
