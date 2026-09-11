@@ -19,7 +19,27 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: ergodic Lp integral propagation
+## Latest checkpoint: conditional-expectation integral propagation
+
+Evidence:
+`research/phase-2-frontier-22-published-conditional-expectation-propagation-audit.md`.
+
+Five new IDs and five old bounded clears enter A-P on the exact path from the
+affected integral/RN foundation through conditional versions, existence,
+uniqueness, the ae class, algebra/order, extended nonnegative conditional
+expectation, tower, conditional MCT and Jensen. Their visible arguments are
+sound after the common finite zero-complement repair. The independent rational-
+contact supporting-line lemma is one new bounded clear. Active group-c impact
+was reported immediately; the shared repair supplies the local route and no new
+pair is needed.
+
+Post-batch target index: 2,832 unique published IDs; U-P 1,386, U-C 0,
+A-R 187, A-P 251 and 1,008 bounded clears; 13,098 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks must be rerun before commit. Next target is any new exact reviewer
+handoff, then the next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: ergodic Lp integral propagation
 
 Evidence:
 `research/phase-2-frontier-22-published-ergodic-lp-integral-propagation-audit.md`.
