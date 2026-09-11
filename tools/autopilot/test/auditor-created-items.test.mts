@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, utimesSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, utimesSync, rmSync } from 'node:fs';
 import { join } from 'node:path';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
@@ -29,6 +29,64 @@ function fixture() {
   }));
   return root;
 }
+
+function recoveryFixture(t: any, step = 7) {
+  const root = fixture();
+  t.after(() => rmSync(root, { recursive: true, force: true }));
+  writeAuditorCreatedBaseline(root, 'r', step);
+  const itemPath = join(root, 'items/lem-created.md');
+  const manifestPath = join(root, 'research/r-batch-1.pages.json');
+  const contractPath = join(root, 'research/r-batch-1.proof-contracts.json');
+  writeFileSync(itemPath, item('lem-created'));
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  manifest[0].items.push({ id: 'lem-created', deps: [] });
+  writeFileSync(manifestPath, JSON.stringify(manifest));
+  writeFileSync(contractPath, JSON.stringify({ contracts: { 'lem-created': { risk: 'low' } } }));
+  const at = new Date('2025-01-01T00:00:05.000Z');
+  for (const path of [itemPath, manifestPath, contractPath]) utimesSync(path, at, at);
+  const resultPath = join(root, 'research/r-dispatch/recovery.result.json');
+  const result = (label: string, changes: any = {}) => writeFileSync(resultPath, JSON.stringify({
+    run: 'r', role: 'alpha-adjudicate', ok: true, label, covers: [],
+    started_at: '2025-01-01T00:00:00.000Z', ended_at: '2025-01-01T00:00:10.000Z', ...changes,
+  }));
+  return { root, result };
+}
+
+for (const label of ['repair-8-a-round-1', 'cross-group-z-round-12',
+  'adjudicate-closure-recovery-a-1', 'repair-8-round-2', 'adjudicate-closure-recovery-3']) {
+  test(`Step 7 certifies its legitimate recovery dispatch ${label}`, t => {
+    const f = recoveryFixture(t); f.result(label);
+    const receipt = certifyAuditorCreatedItems(f.root, 'r', 7);
+    assert.equal(receipt.items.length, 1);
+    assert.equal(receipt.items[0].author_result, 'recovery.result.json');
+    assert.equal(receipt.items[0].judge_sha256, itemHashJudge(item('lem-created')));
+  });
+}
+
+test('Step-7 recovery recognition rejects malformed labels, wrong roles and invalid provenance', t => {
+  const f = recoveryFixture(t);
+  for (const label of ['repair-8-a-round-0', 'repair-8-aa-round-1', 'repair-8-a-round-01',
+    'repair-8-a-round-1-extra', 'prefix-cross-group-a-round-1', 'cross-group-round-1',
+    'cross-group-A-round-1', 'cross-group-a-round-x', 'adjudicate-closure-recovery-aa-1',
+    'adjudicate-closure-recovery-a-0', 'adjudicate-closure-recovery-a-1-extra']) {
+    f.result(label);
+    assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 7), /no successful Step 7/, label);
+  }
+  for (const changes of [{ role: 'alpha' }, { role: 'tool' }, { role: 'final-adjudicator' },
+    { run: 'other' }, { ok: false }, { covers: ['2'] },
+    { started_at: '2025-01-01T00:00:09.000Z' }, { ended_at: '2025-01-01T00:00:04.999Z' }]) {
+    f.result('repair-8-a-round-1', changes);
+    assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 7), /no successful Step 7/, JSON.stringify(changes));
+  }
+});
+
+for (const step of [5, 8]) test(`Step ${step} cannot use Step-7 recovery provenance`, t => {
+  const f = recoveryFixture(t, step);
+  for (const label of ['repair-8-a-round-1', 'cross-group-a-round-1', 'adjudicate-closure-recovery-a-1']) {
+    f.result(label);
+    assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', step), new RegExp(`no successful Step ${step}`));
+  }
+});
 
 test('auditor-created certification is baseline-exclusive, dispatch-backed, and hash-bound', () => {
   const root = fixture();
