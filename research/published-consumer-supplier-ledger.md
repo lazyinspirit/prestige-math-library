@@ -8,6 +8,19 @@ Current classifications: U-P 1410, U-C 0, A-R 188, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Turing-machine variant audit — 2026-09-11
+
+Two previously unclassified high-use machine definitions are bounded clear.
+The deterministic base tuple gives total transitions exactly at nonhalting
+state-symbol pairs and deliberately defers configuration dynamics. The positive
+finite-tape variant has the correct product transition signature, and the
+nondeterministic variant assigns a finite instruction set; an empty set is a
+coherent stuck branch. The later repaired acceptance definition supplies the
+same local rewrite and left-boundary convention, with existential finite-branch
+acceptance and no branch-family selection. No current Step-5 blocker was found.
+Exact hashes, deduplication and limits are in
+`research/phase-2-frontier-22-published-turing-machine-variant-audit.md`.
+
 ## Supplied-projective Ext audit — 2026-09-11
 
 Two previously unclassified UCT interfaces are bounded clear. A supplied
@@ -28324,11 +28337,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,629 unique
+subsequently reconciled published IDs. It currently contains **2,631 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,629 indexed IDs are published; **13,301 published items remain outside this
+2,631 indexed IDs are published; **13,299 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28342,9 +28355,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 188 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 207 | Recorded direct review and an unresolved item-specific repair. |
 
-824 further reference-pool items have bounded no-repair-needed dispositions
+826 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,805 items and the expanded reference pool contains 2,629 unique items.
+1,805 items and the expanded reference pool contains 2,631 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28405,6 +28418,8 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-deterministic-one-tape-turing-machine` | Frontier-22 machine-variant audit 2026-09-11: finite control, alphabet data, distinct halting states and the total nonhalting transition function coherently define the base syntax; later items deliberately supply configurations/dynamics. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-turing-machine-variant-audit.md`. |
+| `def-multitape-and-nondeterministic-machines` | Frontier-22 machine-variant audit 2026-09-11: the positive-finite-tape product signature and finite instruction-set nondeterminism are coherent; the repaired later acceptance item supplies the shared rewrite/boundary rule and existential branch semantics. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-turing-machine-variant-audit.md`. |
 | `def-ext-via-a-projective-resolution-of-the-first-variable` | Frontier-22 supplied-projective Ext audit 2026-09-11: precomposition has the correct cochain degree and squares to zero; `Ext_P` explicitly retains the supplied datum and claims no resolution independence. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-supplied-projective-ext-audit.md`. |
 | `def-supplied-projective-resolution-datum` | Frontier-22 supplied-projective Ext audit 2026-09-11: the objectwise displayed resolutions are extra structure and do not assert global existence, canonical selection or a hidden choice function. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-supplied-projective-ext-audit.md`. |
 | `thm-general-leibniz-rule` | Frontier-22 general-Leibniz audit 2026-09-11: finite-sum differentiation, one index shift, Pascal's rule and the two coefficient-one boundary terms prove the formula for every natural order. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-general-leibniz-audit.md`. |
