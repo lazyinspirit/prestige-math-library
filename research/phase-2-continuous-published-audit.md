@@ -19,7 +19,26 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: manifold-null and normalization chain
+## Latest checkpoint: Lp, normal-law and measure interfaces
+
+Evidence:
+`research/phase-2-frontier-22-published-lp-normal-measure-audit.md`.
+
+Six previously unclassified direct Fourier/probability interfaces are new
+bounded clears: the real Lp quotient, total-variation integral bound,
+sequential measurable operations, Gaussian normalization, normal-law
+definition and Dynkin pi-lambda theorem. The raw/quotient `L^infinity` notation
+is explicitly staged and later disambiguated; active frontier uses are at
+finite p. Explicit AC covers the normal-density and normal-law choice uses.
+No current Step-3/Step-5 blocker was found.
+
+Post-batch target index: 2,593 unique published IDs; U-P 1,410, U-C 0,
+A-R 188, A-P 206 and 789 bounded clears; 13,337 published items remain outside
+the index. Recount, publication-state and cross-class deduplication checks must
+be rerun before commit. Next target is any new exact reviewer handoff, then the
+next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: manifold-null and normalization chain
 
 Evidence:
 `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`.

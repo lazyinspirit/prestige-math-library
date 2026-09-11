@@ -8,6 +8,20 @@ Current classifications: U-P 1410, U-C 0, A-R 188, A-P 206. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Lp, normal-law and measure audit — 2026-09-11
+
+Six previously unclassified direct Fourier/probability interfaces are bounded
+clear. The generic real `L^p` quotient defines almost-everywhere classes
+coherently; its raw/quotient `L^infinity` symbol overload is explicitly staged,
+and current Fourier use is at finite `p`. Simple approximation proves the
+total-variation integral bound. Rational threshold identities prove sequential
+measurability. Explicit AC covers the Gaussian density and normal-law
+construction, and the substitution/monotone-limit normalization is correct.
+The Dynkin pi-lambda proof uses canonical generated intersections and no
+choice. No current Step-3/Step-5 blocker was found. Exact hashes, clause
+evidence, deduplication and limits are in
+`research/phase-2-frontier-22-published-lp-normal-measure-audit.md`.
+
 ## Manifold-null and normalization audit — 2026-09-11
 
 `def-c-zero-and-ell-infinity` returns to A-R: its real LUB repair remains
@@ -28220,11 +28234,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,587 unique
+subsequently reconciled published IDs. It currently contains **2,593 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,587 indexed IDs are published; **13,343 published items remain outside this
+2,593 indexed IDs are published; **13,337 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28238,9 +28252,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 188 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 206 | Recorded direct review and an unresolved item-specific repair. |
 
-783 further reference-pool items have bounded no-repair-needed dispositions
+789 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,804 items and the expanded reference pool contains 2,587 unique items.
+1,804 items and the expanded reference pool contains 2,593 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28301,6 +28315,12 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-l-p-space-as-a-quotient-by-null-functions` | Frontier-22 Lp/normal/measure audit 2026-09-11: null equality coherently defines classes for every positive `p`; the raw/quotient `L^infinity` overload is explicitly staged and the later representative remark disambiguates uses. The finite-p and later quotient-structure clauses are sound. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-lp-normal-measure-audit.md`. |
+| `thm-integrals-against-signed-or-complex-measures-are-bounded-by-total-variation` | Frontier-22 Lp/normal/measure audit 2026-09-11: the simple total-variation estimate controls an `L^1(|nu|)` approximating sequence, its limit and differences of approximants; applying it to `f 1_E` proves the restricted formula. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-lp-normal-measure-audit.md`. |
+| `thm-sequential-suprema-infima-limsup-liminf-and-pointwise-limits-are-measurable` | Frontier-22 Lp/normal/measure audit 2026-09-11: the rational threshold formulas for suprema and infima are correct; tail operations give limsup/liminf and agreement on every rational cut detects equality even at extended-real infinities. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-lp-normal-measure-audit.md`. |
+| `lem-normal-density-has-total-mass-one` | Frontier-22 Lp/normal/measure audit 2026-09-11: explicit AC covers all CC uses; the `x=sqrt(2)t` substitution, symmetric truncation MCT, Gaussian integral and positive square-root/scalar rules give mass one. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-lp-normal-measure-audit.md`. |
+| `def-standard-normal-and-normal-laws` | Frontier-22 Lp/normal/measure audit 2026-09-11: the normalized density gives a Borel probability measure, continuous affine pushforward gives `N(m,sigma^2)`, and the zero-scale inverse-image calculation gives the Dirac law. Explicit AC covers inherited uses. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-lp-normal-measure-audit.md`. |
+| `thm-dynkin-pi-lambda` | Frontier-22 Lp/normal/measure audit 2026-09-11: the generated lambda-system becomes intersection-closed by the two good-set arguments, hence a sigma-algebra, and the two minimality properties give equality and the arbitrary-system consequence. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-lp-normal-measure-audit.md`. |
 | `rem-real-and-complex-normed-space-convention` | Manifold-null/normalization audit 2026-09-11: the real norm axioms extend coherently to complex scalars by replacing absolute value with the published complex modulus, while the induced metric and completeness conventions remain unchanged. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
 | `def-smooth-partition-of-unity-subordinate-to-an-open-cover` | Manifold-null/normalization audit 2026-09-11: the definition correctly requires a locally finite support family, each support contained in its corresponding member of a supplied open cover, and pointwise sum one. New bounded clear; it exposes the normalization theorem's separate type error. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
 | `thm-a-locally-finite-sum-of-smooth-functions-is-smooth` | Manifold-null/normalization audit 2026-09-11: at each fixed point local finiteness reduces the sum to one finite smooth sum on a neighbourhood; smoothness is local. The per-point existential proof is not a simultaneous family choice. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
