@@ -8,6 +8,18 @@ Current classifications: U-P 1410, U-C 0, A-R 188, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Countability-core audit — 2026-09-11
+
+Four previously unclassified countability interfaces are bounded clear.
+Injection, surjection and bijection match the function/image contracts and do
+not infer a right inverse to an arbitrary surjection. The at-most-countable
+convention handles finite and empty sets consistently. Successive least
+elements enumerate each unbounded subset of the naturals, and least preimages
+turn a supplied enumeration into an injection, with no arbitrary family
+selection. No current Step-5 blocker was found. Exact hashes, deduplication and
+limits are in
+`research/phase-2-frontier-22-published-countability-core-audit.md`.
+
 ## Finite-sum, recursion and interval audit — 2026-09-11
 
 Four previously unclassified high-use foundations are bounded clear. The least
@@ -28410,11 +28422,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,657 unique
+subsequently reconciled published IDs. It currently contains **2,661 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,657 indexed IDs are published; **13,273 published items remain outside this
+2,661 indexed IDs are published; **13,269 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28428,9 +28440,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 188 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 207 | Recorded direct review and an unresolved item-specific repair. |
 
-852 further reference-pool items have bounded no-repair-needed dispositions
+856 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,805 items and the expanded reference pool contains 2,657 unique items.
+1,805 items and the expanded reference pool contains 2,661 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28491,6 +28503,10 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-injection-surjection-bijection` | Frontier-22 countability-core audit 2026-09-11: the three predicates match the function/image contracts; inverse claims use unique preimages and explicitly exclude arbitrary-surjection right inverses. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-countability-core-audit.md`. |
+| `def-countable` | Frontier-22 countability-core audit 2026-09-11: finite, countably infinite, at-most-countable and uncountable are coherent under the stated convention, including the empty set. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-countability-core-audit.md`. |
+| `lem-countable-iff-surjection-from-n` | Frontier-22 countability-core audit 2026-09-11: a finite nonempty bijection extends by one fixed value, and a supplied surjection gives the canonical least-preimage injection without choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-countability-core-audit.md`. |
+| `lem-subset-of-countable` | Frontier-22 countability-core audit 2026-09-11: bounded natural subsets are finite by strong induction; successive least elements give a choice-free bijection from the naturals onto each unbounded subset. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-countability-core-audit.md`. |
 | `thm-recursion` | Frontier-22 finite-sum/recursion audit 2026-09-11: the least closed relation is set-sized, induction proves totality, deletion proves functionality, and induction proves uniqueness without choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-sum-recursion-audit.md`. |
 | `def-finite-sum` | Frontier-22 finite-sum/recursion audit 2026-09-11: product-valued recursion carries the running index, induction identifies it, and recursion uniqueness defines real finite sums/products including empty values. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-sum-recursion-audit.md`. |
 | `lem-finite-sum-laws` | Frontier-22 finite-sum/recursion audit 2026-09-11: universal property induction and trailing-length induction prove additivity, scaling, splitting, monotonicity, telescoping and product laws with all zero cases. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-sum-recursion-audit.md`. |
