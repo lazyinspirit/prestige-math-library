@@ -19,7 +19,26 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: product sections and measure
+## Latest checkpoint: standard-Borel coding
+
+Evidence:
+`research/phase-2-frontier-22-published-standard-borel-coding-audit.md`.
+
+The seven Borel generators and explicit Hilbert-cube real coding are two new
+bounded clears. Hilbert-cube universality and the standard complete product
+metric are new A-P rows because their published proof bodies are only outline
+commands, omitting the actual metric/topology/inverse-continuity/completeness
+derivations. Standard-Borel real coding and its countable determining algebra
+are two new A-P impacts. Active kernel impact was reported immediately; short
+local repairs exist and no pair is needed.
+
+Post-batch target index: 2,880 unique published IDs; U-P 1,376, U-C 0,
+A-R 186, A-P 292 and 1,026 bounded clears; 13,050 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks must be rerun before commit. Next target is any new exact reviewer
+handoff, then the next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: product sections and measure
 
 Evidence:
 `research/phase-2-frontier-22-published-product-section-measure-audit.md`.

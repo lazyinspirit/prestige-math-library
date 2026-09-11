@@ -4,9 +4,20 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1376, U-C 0, A-R 186, A-P 288. The
+Current classifications: U-P 1376, U-C 0, A-R 186, A-P 292. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Standard-Borel coding audit — 2026-09-11
+
+Two previously unclassified interfaces are bounded clears: the seven real
+Borel generators and the explicit Hilbert-cube-to-real Borel coding. Two other
+Hilbert-cube suppliers enter A-P because their proof bodies are only outline
+commands and omit the metric, topology, separation, inverse-continuity and
+completeness estimates. Standard-Borel real coding and its countable measure-
+determining algebra are two new exact impacts. Short elementary repairs exist;
+active kernel impact was reported and no pair is needed. Exact evidence:
+`research/phase-2-frontier-22-published-standard-borel-coding-audit.md`.
 
 ## Product-section and measure audit — 2026-09-11
 
@@ -28964,6 +28975,8 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `thm-seven-generators-of-the-borel-sigma-algebra-on-r` | Frontier-22 standard-Borel audit 2026-09-11: Complementation and the rational interval/ray identities give both generator inclusions, with explicitly countable rational families. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-standard-borel-coding-audit.md`. |
+| `lem-hilbert-cube-has-a-bimeasurable-real-coding` | Frontier-22 standard-Borel audit 2026-09-11: Canonical binary rows, explicit interleaving and separated ternary cylinders give an injective Borel code, Borel image and coordinate-measurable inverse. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-standard-borel-coding-audit.md`. |
 | `def-sections-of-sets-and-functions-on-products` | Frontier-22 product-section audit 2026-09-11: Horizontal/vertical set and function sections freeze the stated variable with the correct domains. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-product-section-measure-audit.md`. |
 | `thm-sections-of-product-measurable-sets-are-measurable` | Frontier-22 product-section audit 2026-09-11: For a fixed parameter, sets with measurable sections form a sigma-algebra containing every rectangle. U-P to bounded clear; prior impact retained. Exact hash/scope: `research/phase-2-frontier-22-published-product-section-measure-audit.md`. |
 | `thm-sections-of-product-measurable-functions-are-measurable` | Frontier-22 product-section audit 2026-09-11: Section preimages are sections of product-measurable preimages, so the generating-family criterion applies. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-product-section-measure-audit.md`. |
@@ -30044,6 +30057,10 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `thm-hilbert-cube-universal-for-separable-metrizable-spaces` | Frontier-22 standard-Borel audit 2026-09-11: Proofs 2.1--5.1 are outline commands and omit the dense-distance formula, separation/continuity estimates and inverse-continuity neighbourhood. Supply `e(x)=(rho(x,d_n))` and the one-coordinate epsilon estimate. New A-P; active kernel impact reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-standard-borel-coding-audit.md`. |
+| `lem-standard-complete-metric-on-a-countable-product` | Frontier-22 standard-Borel audit 2026-09-11: Proofs 1.1--4.1 only instruct metricity/topology/completeness. Supply termwise metric checks, geometric-tail comparison with finite-coordinate boxes, unique coordinate limits and the finite-head/tail estimate. New A-P; active kernel impact reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-standard-borel-coding-audit.md`. |
+| `thm-standard-borel-spaces-admit-bimeasurable-real-codings` | Frontier-22 standard-Borel audit 2026-09-11: Its own G-delta and restriction argument is sound, but it directly uses the two proof-incomplete Hilbert-cube suppliers. Complete or inline those estimates. New A-P; active kernel impact reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-standard-borel-coding-audit.md`. |
+| `cor-standard-borel-spaces-have-countable-generating-and-measure-determining-algebras` | Frontier-22 standard-Borel audit 2026-09-11: The finite Boolean-algebra/pi-lambda proof is sound under explicit AC/CC, but it directly uses the affected standard-Borel real coding. New A-P; active kernel impact reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-standard-borel-coding-audit.md`. |
 | `thm-iterated-section-measures-agree-on-product-measurable-sets` | Frontier-22 product-section audit 2026-09-11: Its installed relative-complement/decreasing-intersection repair remains sound, but proofs 2.1 and 4.1 use the A-P nonnegative MCT/integral chain. Reopen A-R to A-P; prior repair receipt retained. Apply the common integral repair; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-product-section-measure-audit.md`. |
 | `def-product-measure-on-sigma-finite-spaces` | Frontier-22 product-section audit 2026-09-11: Its defining section integrals use the affected iterated-section theorem; section-measure measurability remains sound and repaired. U-P to A-P. Apply the common integral repair; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-product-section-measure-audit.md`. |
 | `thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique` | Frontier-22 product-section audit 2026-09-11: Rectangle/uniqueness arguments are sound, but countable additivity in proof 1.2 uses affected finite nonnegative additivity/MCT through the product definition. U-P to A-P. Apply the common integral repair; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-product-section-measure-audit.md`. |
