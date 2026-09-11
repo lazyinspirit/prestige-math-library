@@ -3,6 +3,11 @@ id: "lem-kolmogorov-gliding-hump-series-converges-in-lone"
 kind: "lemma"
 title: "Kolmogorov gliding hump series converges in lone"
 deps: ["lem-kolmogorov-block-polynomial-with-large-partial-sums", "lem-separated-frequency-blocks-do-not-disturb-earlier-partial-sum-maxima", "thm-complex-lp-completeness-and-almost-everywhere-subsequences", "thm-monotone-convergence-for-the-integral", "def-axiom-of-choice"]
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: Grafakos, Classical Fourier Analysis, third edition

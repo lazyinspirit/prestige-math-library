@@ -3,6 +3,11 @@ id: "lem-kolmogorov-atomic-kernel-maxima"
 kind: "lemma"
 title: "Kolmogorov atomic kernel maxima"
 deps: ["lem-kolmogorov-simultaneous-phase-approximation", "lem-closed-form-and-size-bounds-for-the-dirichlet-kernel", "prop-countable-subsets-of-rn-are-lebesgue-null", "def-axiom-of-choice"]
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: Grafakos, Classical Fourier Analysis, third edition

@@ -10,6 +10,26 @@ const REPO = join(import.meta.dirname, '..', '..', '..');
 const TOOL = join(REPO, 'tools', 'step5-close.mjs');
 const sha = (value: string | Buffer) => createHash('sha256').update(value).digest('hex');
 
+test('Step-5 closure accepts a successful validator with output above the default buffer', () => {
+  const root = mkdtempSync(join(tmpdir(), 'step5-close-large-output-'));
+  try {
+    for (const dir of ['research', 'items', 'tools']) mkdirSync(join(root, dir), { recursive: true });
+    for (const name of ['cross-group-edges', 'step5-scope', 'splice-plan', 'defect-ledger']) {
+      writeFileSync(join(root, 'tools', `${name}.mjs`), 'process.exit(0);\n');
+    }
+    writeFileSync(join(root, 'tools', 'validate-plan.mjs'), "process.stdout.write('x'.repeat(2 * 1024 * 1024));\n");
+    writeFileSync(join(root, 'research', 'r-alpha-5b.md'), '# reviewed\n');
+    const result = spawnSync(process.execPath,
+      [TOOL, 'close', '--run', 'r', '--root', root], { cwd: root, encoding: 'utf8' });
+    assert.equal(result.status, 0, result.stderr);
+    const verified = spawnSync(process.execPath,
+      [TOOL, 'verify', '--run', 'r', '--root', root], { cwd: root, encoding: 'utf8' });
+    assert.equal(verified.status, 0, verified.stderr);
+  } finally {
+    rmSync(root, { recursive: true, force: true });
+  }
+});
+
 test('Step-5 closure freezes exact reports and ledger rows without blocking later item repair', () => {
   const root = mkdtempSync(join(tmpdir(), 'step5-close-'));
   try {

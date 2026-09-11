@@ -3,6 +3,11 @@ id: "lem-carleson-single-tree-estimate"
 kind: "lemma"
 title: "Carleson single tree estimate"
 deps: ["def-density-size-and-tree-count-for-carleson-tiles", "def-carleson-tiles-wave-packets-and-tile-order", "cor-centered-hardy-littlewood-maximal-operator-is-l-p-bounded", "thm-plancherel", "def-axiom-of-choice", "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz", "cor-schwartz-convolution-and-product-transform-laws", "thm-fourier-inversion-on-schwartz-space", "thm-monotone-convergence-for-the-integral"]
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: 'Lacey, Carleson’s Theorem: Proof, Complements, Variations'

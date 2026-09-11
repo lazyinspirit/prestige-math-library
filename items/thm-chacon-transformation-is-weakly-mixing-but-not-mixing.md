@@ -3,6 +3,11 @@ id: "thm-chacon-transformation-is-weakly-mixing-but-not-mixing"
 kind: "theorem"
 title: "Chacon transformation is weakly mixing but not mixing"
 deps: ["lem-chacon-partial-maps-extend-to-an-invertible-map-mod-null-sets", "lem-chacon-eigenfunctions-are-constant", "thm-weak-mixing-is-equivalent-to-absence-of-nonconstant-eigenfunctions", "lem-chacon-tower-height-correlations-obstruct-mixing", "def-axiom-of-choice"]
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: Peter Varju, Topics in Ergodic Theory, Michaelmas 2016, section 11 pp.36–40 (complete Chacon argument; public mirror)

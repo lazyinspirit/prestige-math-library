@@ -6,6 +6,11 @@ deps: ["def-hg-toolkit-gromov-sequences-and-boundary-product", "lem-infinite-ord
 provenance:
   statement: "ai-altered"
   proof: "ai-generated"
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: "Hamann §5.3 after Proposition 5.2.5"

@@ -4245,7 +4245,7 @@ not propose a second subdivision or cover-small package.
     `[LA]`; apply item 22 to item 19 using items 10, 16, 20, and 21. No universal
     coefficient or injective-$\mathbb R$ argument is used. LANDMARK.
 
-### `fs-` items (A page)
+### False statements and choice-sensitive remarks (A page)
 
 - `fs-the-singular-boundary-of-a-simplex-is-the-unsigned-sum-of-its-faces` —
   **false statement** `[LL]`; AT-2's alternating boundary signs make
@@ -4253,17 +4253,23 @@ not propose a second subdivision or cover-small package.
 - `fs-a-singular-cochain-is-a-finite-linear-combination-of-singular-simplices` —
   **false statement** `[LL]`; chains have finite support, while a cochain is
   an arbitrary linear functional.
-- `fs-dualizing-every-short-exact-sequence-is-automatically-exact-in-zf` —
-  **false statement** `[LL]`; item 8 supplies the exact extension actually
-  needed.
+- `rem-dualizing-real-vector-space-sequences-and-the-choice-boundary` —
+  **remark** `[LA]`; prove exactness of algebraic real dualization under AC
+  by basis extension. Give the explicit conditional ZF+DC+BP($\mathbb R^{\mathbb N}$)
+  nonextendible sum functional on finite-support sequences. This conditional
+  calculation asserts no model construction or unproved ZF independence.
+  Item 8 supplies the canonical extension actually used in this page.
 - `fs-one-fixed-number-of-barycentric-subdivisions-makes-every-singular-simplex-cover-small` —
   **false statement** `[LL]`; AT-3 proves that the depth depends on the simplex
   or finite chain.
 - `fs-every-continuous-singular-simplex-is-smooth` — **false statement**
   `[LL]`.
-- `fs-a-homology-isomorphism-of-chain-complexes-automatically-gives-a-cohomology-isomorphism-after-dualizing-without-further-machinery` —
-  **false statement** `[LL]`; AT-3's chain-homotopy equivalence or items
-  19–23 are required.
+- `rem-dualizing-real-chain-complexes-requires-an-exactness-argument` —
+  **remark** `[LA]`; prove natural $H^n(C^*)\cong H_n(C)^*$ under AC and
+  hence preservation of quasi-isomorphisms. Under the exact conditional BP
+  assumptions above, compute the acyclic three-term complex whose dual has
+  nonzero second cohomology. The main comparison retains its explicit chain
+  homotopies and finite Mayer–Vietoris proof; no independence theorem is asserted.
 
 ### B page — `singular-cochains-mayer-vietoris-and-smooth-singular-comparison-examples`
 
@@ -4276,10 +4282,11 @@ not propose a second subdivision or cover-small package.
 5. `ex-relative-smoothing-fixes-the-endpoints-of-a-path` — **example** `[LA]`.
 6. `ex-singular-cohomology-of-a-point-from-the-cochain-complex` —
     **example** `[LL]`.
-7. `cex-hom-of-homology-is-not-used-as-the-definition-of-singular-cohomology` —
-    **counterexample/reminder** `[LN]`; it records the missing universal-
-    coefficient/injectivity step, without asserting a false finite-dimensional
-    identification.
+7. `rem-hom-of-homology-is-not-the-definition-of-singular-cohomology` —
+    **remark** `[LA]`; distinguish the specified cocycle/coboundary quotient
+    definition from the natural evaluation isomorphism with the real homology
+    dual under AC, and prove the latter. This is not a counterexample to the
+    correct real-vector-space identification.
 
 ### Sources and exact locators
 
@@ -5203,9 +5210,11 @@ separately.
 1–16), curve/frame/subdivision independence (17–28), tensorial torsion and
 non-tensorial Christoffel symbols (29–34), and Koszul existence/uniqueness
 (35–43).
-**Choice:** local and curvewise constructions are ZF. Existence of an arbitrary
-bundle connection inherits DG-2's partition-of-unity
-$\mathrm{AC}_\omega$ sufficient hypothesis. Levi–Civita itself is canonical
+**Choice:** local and curvewise constructions are ZF. The current authored
+existence proof for an arbitrary bundle connection assumes full AC and identifies
+its chart/frame, shrinking and partition selections explicitly. The published
+partition argument does not currently justify the smaller countable-choice bound;
+that published repair remains in the canonical ledger. Levi–Civita is canonical
 from a supplied metric and adds no choice.
 **Forward references:** DG-20 applies the Levi–Civita connection to geodesics;
 DG-21 defines its curvature; holonomy theory beyond the definition is deferred.
@@ -9733,7 +9742,7 @@ dimensional algebra/calculus inputs.
 | DG-14–DG-15 | inherits DG-2 for global partitions; ZF for each chart, Stokes reduction, homotopy operator, and finite Mayer–Vietoris diagram | A compact support meets finitely many members of a supplied locally finite refinement. Generic cohomological exactness inherits HA's ledger. |
 | DG-16 | inherits AT-2/AT-3/AT-6 for ordinary singular chains, subdivision/prism, and cohomology; its real two-open presentation is ZF, and \(\mathrm{AC}_\omega\) is sufficient for countable open-set globalization | AT owns the canonical finite-chain construction. The DG global comparison over a countable manifold basis inherits DG-2's countable organization, and relative smoothing inherits DG-7. No basis-wide smoothing and no injectivity/Zorn argument is used. |
 | DG-17 | inherits DG-7 for smooth approximation and DG-2 for globalization; finite five-lemma steps are ZF | The comparison smooths one finite chain relative to its faces. It does not choose a smoothing of every singular simplex simultaneously. |
-| DG-18–DG-19 | metric/connection formulas ZF once the objects are supplied; existence inherits DG-2 | Convex patching of local metrics and bundle connections uses a smooth partition. Parallel transport along one curve is constructive ODE theory. |
+| DG-18–DG-19 | metric/connection formulas ZF once the objects are supplied; current DG-19 connection existence assumes full AC | Convex patching uses smooth partition data. The current connection proof explicitly supplies chart/frame and shrinking selections under AC; a countable-choice-only bound is not inferred from the unrepaired published partition proof. Parallel transport along one curve is constructive ODE theory. |
 | DG-20 | ZF relative to the supplied metric under the selected compact-unit-sphere proof | The scaffold explicitly avoids the unused proof that selects one \(1/n\)-minimizer for each \(n\), which would require \(\mathrm{AC}_\omega\). Local geodesic and normal-neighborhood results are likewise ZF. |
 | DG-21–DG-22 | ZF relative to the chosen metric/connection for curvature, Jacobi, index, and cut-time geometry; DG-22 items 36–37 inherit MT | Finite-dimensional tensor calculations and Jacobi ODEs make no infinite family of choices. Cut-locus nullity and polar integration specifically inherit MT's Radon/Fubini/null-set ledger. |
 | DG-23 | inherits DG-20, the future covering-page ledger, and the measure track's Lebesgue/Radon ledger | Rauch and pointwise Riccati comparison are ZF. Bishop–Gromov and almost-everywhere polar integration use the measure machinery; lift arguments use covering theory. |

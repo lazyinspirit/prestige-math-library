@@ -6,6 +6,11 @@ deps: ["def-hg-toolkit-local-geodesics-and-hausdorff-control", "lem-the-gromov-p
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: "Gouëzel–Shchur, corrected quantitative Morse lemma, Lemmas 2.4–2.5"
@@ -39,7 +44,7 @@ For a specified geodesic segment $Y=H$, the sharper estimate holds with the addi
 
 1.1 We first justify projections to any specified geodesic segment $H=\gamma([0,\ell])$. The function $f(t)=d(x,\gamma(t))$ is $1$-Lipschitz. Let $m=\inf f([0,\ell])$. Bisect the interval, keeping the left half if its infimum is $m$, and otherwise the right half, whose infimum must be $m$ since the original interval is their union. Iteration gives nested closed intervals of length $\ell/2^n$, each with infimum $m$. Their left endpoints have a supremum $r$ belonging to all the intervals, by completeness. Lipschitz control gives $0\le f(r)-m\le\ell/2^n$, hence $f(r)=m$. This includes $\ell=0$. Moreover, if $p$ is a closest point of $x$ in $H$ and $x'$ lies on $[p,x]$, then $p$ is still closest to $x'$: for $z\in H$, $d(x',z)\ge d(x,z)-d(x,x')\ge d(x,p)-d(x,x')=d(x',p)$. [F1, given, algebra]
 
-1.2 For a closest point $p$ of $x$ on a segment $H$ and $z\in H$, put $t=(x|z)_p$ and choose $u\in[p,z]$ at radius $t$. Products give $(x|u)_p\ge t-\kappa$, hence $d(x,u)\le d(x,p)-t+2\kappa$. Minimality of $p$ forces $t\le2\kappa$, or equivalently $d(x,p)+d(p,z)\le d(x,z)+4\kappa$. For projections $p,r$ of $x,y$ to the same segment, put $A=d(x,p)$, $B=d(y,r)$ and $s=d(p,r)$. The just-proved estimate gives $d(x,r)+d(y,p)\ge A+B+2s-8\kappa$. By the four-point inequality this sum is at most $\max\{A+B,d(x,y)+s\}+2\kappa$. If $s>5\kappa$, the first entry of the maximum cannot suffice, and consequently $s\le d(x,y)-A-B+10\kappa$. Thus always $s\le\max\{5\kappa,d(x,y)-A-B+10\kappa\}$. [F2, given, algebra]
+1.2 For a closest point $p$ of $x$ on a segment $H$ and $z\in H$, put $t=(x|z)_p$ and choose $u\in[p,z]$ at radius $t$. Write $A=d(x,p)$ and $P=d(p,z)$; from the definition of $t$ we have $A+P=d(x,z)+2t$. Applying the product inequality at basepoint $x$ with bridge $u$ gives $(p|z)_x\ge\min\{(p|u)_x,(u|z)_x\}-\kappa$, and the products expand to $(p|z)_x=A-t$ and $(p|u)_x=(u|z)_x=(A+d(x,u)-t)/2$, since $d(p,u)=t$. Hence $d(x,u)\le d(x,p)-t+2\kappa$. Minimality of $p$ forces $t\le2\kappa$, or equivalently $d(x,p)+d(p,z)\le d(x,z)+4\kappa$. For projections $p,r$ of $x,y$ to the same segment, put $A=d(x,p)$, $B=d(y,r)$ and $s=d(p,r)$. The just-proved estimate gives $d(x,r)+d(y,p)\ge A+B+2s-8\kappa$. By the four-point inequality this sum is at most $\max\{A+B,d(x,y)+s\}+2\kappa$. If $s>5\kappa$, the first entry of the maximum cannot suffice, and consequently $s\le d(x,y)-A-B+10\kappa$. Thus always $s\le\max\{5\kappa,d(x,y)-A-B+10\kappa\}$. [F2, given, algebra]
 
 2.1 Here is the halving estimate. Suppose projections $p,r$ of $x,y$ lie on a segment $H$, $d(x,y)\le10\rho+c$, $c\ge0$, and $A,B\ge M+5\rho+c/2$, with $M\ge15\rho/2$. Step 1.2 gives $s=d(p,r)\le5\kappa\le5\rho$. Let $x',y'$ be the radius-$M$ points on $[p,x],[r,y]$. Step 1.1 preserves their projections. At basepoint $p$, all three products $(x'|x)_p,(x|y)_p,(y|y')_p$ are at least $M$: the first is exactly $M$; the second follows from $d(p,y)\ge B$ and $A+B-d(x,y)\ge2M$; the third follows from $d(p,y')\ge M$, $d(p,y)\ge B$ and $d(y,y')=B-M$. Two product inequalities give $(x'|y')_p\ge M-2\rho$. The same argument at $r$ gives the analogous bound. Writing $v=d(x',y')$, we obtain $d(p,y')\ge M-4\rho+v$ and $d(r,x')\ge M-4\rho+v$. Four-point control now yields $2M-10\rho+2v\le\max\{s+v,2M\}$. Since $s\le5\rho\le2M-10\rho$, if the first entry is maximal this forces $v=0$; otherwise it gives $v\le5\rho$. In either case $d(x',y')\le5\rho$. [step 1.1, step 1.2, F2, algebra]
 

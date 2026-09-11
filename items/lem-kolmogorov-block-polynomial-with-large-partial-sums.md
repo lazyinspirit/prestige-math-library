@@ -3,6 +3,11 @@ id: "lem-kolmogorov-block-polynomial-with-large-partial-sums"
 kind: "lemma"
 title: "Kolmogorov block polynomial with large partial sums"
 deps: ["def-kolmogorov-analytic-partial-sum-maximal-function", "lem-kolmogorov-atomic-kernel-maxima", "lem-fejer-kernel-is-a-positive-approximate-identity", "thm-continuity-from-below-for-measures", "def-axiom-of-choice"]
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: Grafakos, Classical Fourier Analysis, third edition

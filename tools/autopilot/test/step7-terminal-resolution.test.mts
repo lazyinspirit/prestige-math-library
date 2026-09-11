@@ -180,6 +180,41 @@ test('a terminal resolution becomes stale when either exact hash differs', () =>
   }
 });
 
+test('a fresh current judge pass supersedes a stale historical terminal resolution', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'step7-terminal-superseded-'));
+  try {
+    const manifest = join(dir, 'batch.pages.json');
+    const ledger = join(dir, 'judge.jsonl');
+    const receipt = join(dir, 'terminal.jsonl');
+    const closure = join(dir, 'closure.json');
+    const now = currentHashes();
+    const stale = { ...resolution(now), item_sha256: 'f'.repeat(64) };
+    writeFileSync(manifest, `${JSON.stringify([{ id: 'fixture-page', items: [{ id: ITEM, deps: [] }] }])}\n`);
+    writeFileSync(ledger, `${JSON.stringify({
+      id: ITEM, model: MODELS.terra.id, keep: true,
+      context_sha256: now.context_sha256, item_sha256: now.item_sha256,
+      at: '2026-09-11T00:00:00.000Z',
+    })}\n`);
+    writeFileSync(receipt, `${JSON.stringify(stale)}\n`);
+
+    const coverage = run(['tools/level-coverage.mjs', '--judge-only', '--verify-current-context',
+      '--judge-ledger', ledger, '--terminal-resolutions', receipt, '--out', closure, manifest]);
+    assert.equal(coverage.status, 0, coverage.stderr || coverage.stdout);
+    const parsed = JSON.parse(readFileSync(closure, 'utf8'));
+    assert.equal(parsed.closed, true);
+    assert.equal(parsed.verdicts_complete, 1);
+    assert.deepEqual(parsed.terminal_resolved, []);
+    assert.deepEqual(parsed.terminal_superseded.map((row: any) => row.id), [ITEM]);
+
+    const stamps = run(['tools/apply-judge-stamps.mjs', '--ledger', ledger, '--items', ITEM,
+      '--terminal-resolutions', receipt]);
+    assert.equal(stamps.status, 0, stamps.stderr || stamps.stdout);
+    assert.match(stamps.stdout, /scope 1 \| stamped 1 \| skipped 0/);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
+});
+
 test('stamp verification accepts terminal resolution but writes no pass stamp', () => {
   const dir = mkdtempSync(join(tmpdir(), 'step7-terminal-stamp-'));
   try {

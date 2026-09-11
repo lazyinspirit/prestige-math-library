@@ -52,6 +52,7 @@ import { buildCurrentContextHashes } from './context-hash-pool.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
 import { resolveLineup } from './models.mjs';
 import { itemHashGuard } from './item-hash.mjs';
+import { validateCodexOutput } from './codex-output-schema.mjs';
 import { parseTerminalResolutions, terminalResolutionIsCurrent } from './step7-terminal-resolution.mjs';
 import {
   exactSetProblems,
@@ -597,6 +598,7 @@ if (mode === 'render') {
 // that finds nothing thin is a result, and failing it would teach the lane to
 // manufacture concerns.
 if (mode === 'digests') {
+  const digestSchema = readJson(R('briefs', 'schemas', 'step7-context.json'));
   const groups = readGroups();
   const index = buildIndex(groups);
   const bad = [];
@@ -606,6 +608,11 @@ if (mode === 'digests') {
     if (!existsSync(p)) { bad.push(`group ${g.label}: no ${rel(p)} — the step-6 read produced no digest`); continue; }
     let d;
     try { d = readJson(p); } catch (e) { bad.push(`group ${g.label}: ${rel(p)} is not valid JSON (${e.message})`); continue; }
+    const schemaProblems = validateCodexOutput(d, digestSchema);
+    if (schemaProblems.length) {
+      bad.push(...schemaProblems.map((problem) => `group ${g.label}: schema ${problem}`));
+      continue;
+    }
     if (String(d.group) !== g.label) bad.push(`group ${g.label}: digest reports group "${d.group}"`);
     const owned = index.pagesOf.get(g.label);
     const ownedPages = owned.map((p2) => p2.id);

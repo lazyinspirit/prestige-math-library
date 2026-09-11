@@ -6,6 +6,11 @@ deps: ["def-group-presentation", "def-algebraic-relator-area-and-dehn-function-o
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: "Druţu–Kapovich, revised Proposition 9.104, Proposition 11.176 and Theorem 11.181"

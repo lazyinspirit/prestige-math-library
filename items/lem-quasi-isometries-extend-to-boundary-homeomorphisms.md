@@ -6,6 +6,11 @@ deps: ["lem-boundary-products-are-independent-of-representative-and-basepoint", 
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: "Druţu–Kapovich Theorem 9.83 (proper ray case); nonproper sequence proof supplied locally"

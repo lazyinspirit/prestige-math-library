@@ -3,7 +3,7 @@
 import { existsSync, readFileSync, writeFileSync } from 'node:fs';
 import { join } from 'node:path';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
-import { repairGateBatch, repairFingerprint } from './authored-repairs.mts';
+import { repairGateBatch, repairFingerprint, foreignGateSubjects } from './authored-repairs.mts';
 import { step5Escalations } from '../../step5-escalations.mjs';
 
 const DEEPSEEK_FLASH_MAX = MODEL_PROFILE_NAMES.deepseekFlashMax;
@@ -297,7 +297,15 @@ export function step5Stages(d: any) {
         }),
       ],
       perItemFixBudget: 3,
-      onGateFailure: (args: any) => handleGateFailure(args, '5b'),
+      onGateFailure: (args: any) => {
+        // Content diagnostics on peer drafts belong to their active authors.
+        // Impact receipts remain lead-Alpha work even for foreign consumers.
+        if (['precheck', 'depcheck', 'rendercheck'].includes(args.failure.id)) {
+          const foreign = foreignGateSubjects(args.ctx, [args.failure], alphaGroups(args.ctx));
+          if (foreign) return { owner: { reason: `Gate failures name only carriers outside this run: ${foreign.join(', ')}. Route repairs to their actual owners before retrying.` } };
+        }
+        return handleGateFailure(args, '5b');
+      },
     },
     {
       id: '5b-close',

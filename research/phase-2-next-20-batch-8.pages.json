@@ -19,9 +19,11 @@
         "kind": "definition",
         "title": "Singular cochain complex with coefficients",
         "deps": [
-          "def-singular-chain-complex-and-singular-homology"
+          "def-singular-chain-complex-and-singular-homology",
+          "def-singular-simplex-and-singular-chain-group-with-coefficients",
+          "def-singular-boundary-operator"
         ],
-        "statement": "For any space X and abelian G, C^n(X;G)=Hom_Z(C_n(X;Z),G), zero for n<0, with \u03b4^n\u03c6=\u03c6\u2202_(n+1). For a commutative ring R and R-module G this identifies with Hom_R(C_n(X;R),G).",
+        "statement": "For any space X and abelian G, C^n(X;G)=Hom_Z(C_n(X;Z),G), zero for n<0, with δ^nφ=φ∂_(n+1). For a commutative ring R and R-module G this identifies with Hom_R(C_n(X;R),G).",
         "strategy": "Identify both Hom descriptions with all functions on singular n-simplices, using the universal property of the free module. The differential has no extra sign; well-defined complex assertion is discharged by the next lemma. Empty X and G=0 give zero groups.",
         "proof_strategy": "direct",
         "provenance": {
@@ -31,7 +33,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -45,8 +47,8 @@
           "def-singular-cochain-complex-with-coefficients",
           "thm-the-singular-boundary-squares-to-zero"
         ],
-        "statement": "The singular coboundary satisfies \u03b4^(n+1)\u03b4^n=0 for every integer n.",
-        "strategy": "Evaluate on each (n+2)-chain: \u03b4\u03b4\u03c6(c)=\u03c6(\u2202\u2202c)=0. In negative degrees the domain or preceding differential is zero.",
+        "statement": "The singular coboundary satisfies δ^(n+1)δ^n=0 for every integer n.",
+        "strategy": "Evaluate on each (n+2)-chain: δδφ(c)=φ(∂∂c)=0. In negative degrees the domain or preceding differential is zero.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -55,7 +57,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -69,7 +71,7 @@
           "def-singular-cochain-complex-with-coefficients",
           "lem-the-singular-coboundary-squares-to-zero"
         ],
-        "statement": "H^n(X;G)=ker \u03b4^n/im \u03b4^(n\u22121), n\u22650, and H^n=0 for n<0.",
+        "statement": "H^n(X;G)=ker δ^n/im δ^(n−1), n≥0, and H^n=0 for n<0.",
         "strategy": "The preceding lemma puts the image inside the kernel. This is an abelian quotient, not the dual of homology by definition.",
         "proof_strategy": "direct",
         "provenance": {
@@ -79,7 +81,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -91,10 +93,11 @@
         "title": "Singular cohomology is contravariantly functorial",
         "deps": [
           "def-singular-cohomology-with-coefficients",
+          "def-singular-cochain-complex-with-coefficients",
           "def-induced-singular-chain-map",
           "lem-induced-singular-chain-maps-commute-with-boundaries"
         ],
-        "statement": "A continuous f:X\u2192Y induces f*:H^n(Y;G)\u2192H^n(X;G), contravariantly functorial and covariantly natural in G.",
+        "statement": "A continuous f:X→Y induces f*:H^n(Y;G)→H^n(X;G), contravariantly functorial and covariantly natural in G.",
         "strategy": "Precompose cochains by f_#. Chain commutation preserves cycles and coboundaries. Postcomposition by a coefficient homomorphism commutes with precomposition. Compute (g f)^*=f^*g^* and identities on actual cochains.",
         "proof_strategy": "direct",
         "provenance": {
@@ -104,7 +107,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -116,10 +119,12 @@
         "title": "Homotopic maps induce equal maps in singular cohomology",
         "deps": [
           "prop-singular-cohomology-is-contravariantly-functorial",
-          "thm-singular-chain-homotopy-formula"
+          "thm-singular-chain-homotopy-formula",
+          "def-singular-cochain-complex-with-coefficients",
+          "def-singular-cohomology-with-coefficients"
         ],
         "statement": "Homotopic maps induce the same map in singular cohomology, for arbitrary coefficients.",
-        "strategy": "For the prism P with g#\u2212f#=\u2202P+P\u2202 define K^n\u03c6=\u03c6P_(n\u22121). Then g*\u2212f*=\u03b4K+K\u03b4 with the positive \u03b4 convention; on cocycles the difference is a coboundary. For homotopies of pairs, P preserves chains in the subspace, so the same formula restricts to relative cochains. No AC.",
+        "strategy": "For the prism P with g#−f#=∂P+P∂ define K^nφ=φP_(n−1). Then g*−f*=δK+Kδ with the positive δ convention; on cocycles the difference is a coboundary. For homotopies of pairs, P preserves chains in the subspace, so the same formula restricts to relative cochains. No AC.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -128,7 +133,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -140,6 +145,7 @@
         "title": "Relative singular cochain complex",
         "deps": [
           "def-singular-cohomology-with-coefficients",
+          "def-singular-cochain-complex-with-coefficients",
           "def-singular-chain-complex-of-a-pair",
           "lem-singular-boundary-descends-to-relative-chains"
         ],
@@ -153,7 +159,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -164,10 +170,13 @@
         "kind": "theorem",
         "title": "Long exact sequence of a pair in singular cohomology",
         "deps": [
-          "def-relative-singular-cochain-complex"
+          "def-relative-singular-cochain-complex",
+          "def-singular-cochain-complex-with-coefficients",
+          "lem-the-singular-coboundary-squares-to-zero",
+          "prop-singular-cohomology-is-contravariantly-functorial"
         ],
-        "statement": "For every pair (X,A), ...\u2192H^n(X,A;G)\u2192H^n(X;G)\u2192H^n(A;G)\u2192H^(n+1)(X,A;G)\u2192... is exact. The connector is [a]\u21a6[\u03b4\u00e3], for any extension \u00e3 of a.",
-        "strategy": "Restriction of cochains is surjective by extension by zero on basis simplices outside A; its kernel is the relative complex. For a cocycle a its extended differential is relative and closed. Two extensions differ by a relative cochain; changing a by \u03b4b changes \u00e3 by an extension of \u03b4b, subtract \u03b4 of an extension of b to reduce to the former case. Exactness at H(A): connector zero iff \u03b4\u00e3=\u03b4r relative, then \u00e3\u2212r is a global cocycle lifting a. At H(X): if restriction is \u03b4b subtract \u03b4 of an extension of b to obtain a relative cocycle. At H(X,A): if r=\u03b4c globally then c|A is a cocycle whose connector is [r]. These checks work in every degree with negative groups zero, proving the LES without an undeclared exactness theorem.",
+        "statement": "For every pair (X,A), ...→H^n(X,A;G)→H^n(X;G)→H^n(A;G)→H^(n+1)(X,A;G)→... is exact. The connector is [a]↦[δã], for any extension ã of a.",
+        "strategy": "Restriction of cochains is surjective by extension by zero on basis simplices outside A; its kernel is the relative complex. For a cocycle a its extended differential is relative and closed. Two extensions differ by a relative cochain; changing a by δb changes ã by an extension of δb, subtract δ of an extension of b to reduce to the former case. Exactness at H(A): connector zero iff δã=δr relative, then ã−r is a global cocycle lifting a. At H(X): if restriction is δb subtract δ of an extension of b to obtain a relative cocycle. At H(X,A): if r=δc globally then c|A is a cocycle whose connector is [r]. These checks work in every degree with negative groups zero, proving the LES without an undeclared exactness theorem.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -176,7 +185,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -188,10 +197,11 @@
         "title": "Naturality of the singular cohomology pair sequence",
         "deps": [
           "thm-long-exact-sequence-of-a-pair-in-singular-cohomology",
-          "prop-singular-cohomology-is-contravariantly-functorial"
+          "prop-singular-cohomology-is-contravariantly-functorial",
+          "def-relative-singular-cochain-complex"
         ],
-        "statement": "Maps of pairs (X,A)\u2192(Y,B) induce commuting contravariant maps of pair sequences, also natural in coefficient homomorphisms.",
-        "strategy": "An extension of a cocycle on B pulls back to an extension of its pullback on A. Pullback commutes with \u03b4, so the two connecting representatives agree. Other squares are restriction compositions; coefficient maps commute with every operation.",
+        "statement": "Maps of pairs (X,A)→(Y,B) induce commuting contravariant maps of pair sequences, also natural in coefficient homomorphisms.",
+        "strategy": "An extension of a cocycle on B pulls back to an extension of its pullback on A. Pullback commutes with δ, so the two connecting representatives agree. Other squares are restriction compositions; coefficient maps commute with every operation.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -200,7 +210,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -212,10 +222,13 @@
         "title": "Excision for singular cohomology",
         "deps": [
           "def-relative-singular-cochain-complex",
-          "thm-cover-small-inclusion-is-a-chain-homotopy-equivalence"
+          "thm-cover-small-inclusion-is-a-chain-homotopy-equivalence",
+          "def-cover-small-singular-chain-subcomplex",
+          "def-singular-cochain-complex-with-coefficients",
+          "thm-naturality-of-the-singular-cohomology-pair-sequence"
         ],
-        "statement": "If Z\u2286A\u2286X and closure_X(Z)\u2286int_X(A), restriction H^n(X,A;G)\u2192H^n(X\u2212Z,A\u2212Z;G) is an isomorphism.",
-        "strategy": "Use the cover by A and X\u2212Z, whose interiors cover X. Inspect the supplier operators: every subdivision and prism term stays inside its original simplex image; thus R and D preserve C(A). They descend to a chain homotopy inverse for (C(A)+C(X\u2212Z))/C(A)\u2192C(X)/C(A). The first quotient is canonically C(X\u2212Z)/C(A\u2212Z) by basis intersection. Apply Hom(\u2212,G) to both chain maps and homotopies, not merely to a homology isomorphism. No flatness, injectivity or AC needed.",
+        "statement": "If Z⊆A⊆X and closure_X(Z)⊆int_X(A), restriction H^n(X,A;G)→H^n(X−Z,A−Z;G) is an isomorphism.",
+        "strategy": "Use the cover by A and X−Z, whose interiors cover X. Inspect the supplier operators: every subdivision and prism term stays inside its original simplex image; thus R and D preserve C(A). They descend to a chain homotopy inverse for (C(A)+C(X−Z))/C(A)→C(X)/C(A). The first quotient is canonically C(X−Z)/C(A−Z) by basis intersection. Apply Hom(−,G) to both chain maps and homotopies, not merely to a homology isomorphism. No flatness, injectivity or AC needed.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -224,7 +237,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -236,13 +249,14 @@
         "title": "Mayer vietoris sequence in singular cohomology",
         "deps": [
           "def-singular-cohomology-with-coefficients",
+          "def-singular-cochain-complex-with-coefficients",
           "prop-singular-cohomology-is-contravariantly-functorial",
           "thm-cover-small-inclusion-is-a-chain-homotopy-equivalence",
           "thm-short-exact-two-open-singular-chain-mayer-vietoris-sequence",
           "thm-long-exact-sequence-of-a-pair-in-singular-cohomology"
         ],
-        "statement": "For X=U\u222aV open, ...\u2192H^n(X;G)\u2192H^n(U;G)\u2295H^n(V;G)\u2192H^n(U\u2229V;G)\u2192H^(n+1)(X;G)\u2192... is natural and exact; the middle arrow is restriction from U minus restriction from V.",
-        "strategy": "The integral chain sequence has i(c)=(c,\u2212c), j(u,v)=u+v. It is degreewise split by assigning each small basis simplex to U when possible and otherwise V. Dualizing gives a cochain short exact sequence ending with the difference map; extension by zero in U makes it surjective. Apply the explicit three-term cocycle chase of the pair LES. Replace the dual small complex by C*(X) using the actual chain homotopy inverse. Naturality follows from natural inclusion of small chains and natural differences, even though the chosen inverse and extensions are not natural.",
+        "statement": "For X=U∪V open, ...→H^n(X;G)→H^n(U;G)⊕H^n(V;G)→H^n(U∩V;G)→H^(n+1)(X;G)→... is natural and exact; the middle arrow is restriction from U minus restriction from V.",
+        "strategy": "The integral chain sequence has i(c)=(c,−c), j(u,v)=u+v. It is degreewise split by assigning each small basis simplex to U when possible and otherwise V. Dualizing gives a cochain short exact sequence ending with the difference map; extension by zero in U makes it surjective. Apply the explicit three-term cocycle chase of the pair LES. Replace the dual small complex by C*(X) using the actual chain homotopy inverse. Naturality follows from natural inclusion of small chains and natural differences, even though the chosen inverse and extensions are not natural.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -251,7 +265,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -265,7 +279,7 @@
           "def-singular-cohomology-with-coefficients",
           "def-singular-chain-complex-and-singular-homology"
         ],
-        "statement": "For cocycle \u03c6 and cycle c in degree n, the proposed Kronecker pairing is <[\u03c6],[c]>=\u03c6(c) in G.",
+        "statement": "For cocycle φ and cycle c in degree n, the proposed Kronecker pairing is <[φ],[c]>=φ(c) in G.",
         "strategy": "Define first on cocycle/cycle representatives. The next lemma supplies descent, bilinearity and naturality, and must precede every quotient-level use.",
         "proof_strategy": "direct",
         "provenance": {
@@ -275,11 +289,14 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
-        }
+        },
+        "justified_by": [
+          "lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives"
+        ]
       },
       {
         "id": "lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives",
@@ -287,10 +304,14 @@
         "title": "The kronecker pairing is independent of cocycle and cycle representatives",
         "deps": [
           "def-kronecker-evaluation-pairing",
-          "prop-singular-cohomology-is-contravariantly-functorial"
+          "prop-singular-cohomology-is-contravariantly-functorial",
+          "prop-singular-chains-and-homology-are-covariantly-functorial",
+          "def-singular-cochain-complex-with-coefficients",
+          "def-singular-cohomology-with-coefficients",
+          "def-singular-chain-complex-and-singular-homology"
         ],
-        "statement": "The Kronecker pairing is well defined and bilinear, and satisfies <f*\u03b1,z>=<\u03b1,f*z>.",
-        "strategy": "Replacing \u03c6 by \u03c6+\u03b4\u03c8 adds \u03c8\u2202c=0; replacing c by c+\u2202b adds \u03c6\u2202b=\u03b4\u03c6(b)=0. Both changes together follow sequentially. Additivity is evaluation additivity; naturality is equality \u03c6(f#c) on representatives.",
+        "statement": "The Kronecker pairing is well defined and bilinear, and satisfies <f*α,z>=<α,f*z>.",
+        "strategy": "Replacing φ by φ+δψ adds ψ∂c=0; replacing c by c+∂b adds φ∂b=δφ(b)=0. Both changes together follow sequentially. Additivity is evaluation additivity; naturality is equality φ(f#c) on representatives.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -299,7 +320,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -313,10 +334,11 @@
           "def-axiom-of-choice",
           "lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces",
           "def-ext-via-a-projective-resolution-of-the-first-variable",
-          "def-singular-cochain-complex-with-coefficients"
+          "def-singular-cochain-complex-with-coefficients",
+          "thm-free-modules-are-projective-with-choice-boundary"
         ],
-        "statement": "Assume AC. For a nonnegative free PID complex C and R-module G, the length-one free resolution B_(n\u22121)\u21aaZ_(n\u22121)\u2192H_(n\u22121) gives an injective map Ext^1_R(H_(n\u22121),G)\u2192H^n(Hom_R(C,G)), [\u03c8]\u21a6[\u03c8d_n], whose image is the kernel of evaluation. Evaluation is surjective.",
-        "strategy": "Use the published cycle-boundary decomposition to choose \u03c0_j:C_j\u2192Z_j. If \u03c8 changes by g|B for g:Z_(n\u22121)\u2192G, its cochain changes by \u03b4(g\u03c0_(n\u22121)), closing the missing quotient check in the older published extension lemma. Conversely \u03c8d_n=hd_n implies \u03c8=h|B, whose extension h|Z proves injectivity. A cocycle with zero evaluation literally vanishes on Z_n and therefore uniquely factors through d_n onto B_(n\u22121). For u:H_n\u2192G, u q\u03c0_n is a cocycle with evaluation u. For a chain map, its restrictions to B,Z give a map of these explicit resolutions; the formula \u03c8d commutes with pullback. Compare other length-one free presentations by lifting basis vectors through Z\u2192H using AC; differences of two lifts land in B and supply the chain homotopy, so Ext identification is independent. Coefficient maps commute by postcomposition. AC is used for free-module sections and their degreewise selection, not inferred from finite choice.",
+        "statement": "Assume AC. For a nonnegative free PID complex C and R-module G, the length-one free resolution B_(n−1)↪Z_(n−1)→H_(n−1) gives an injective map Ext^1_R(H_(n−1),G)→H^n(Hom_R(C,G)), [ψ]↦[ψd_n], whose image is the kernel of evaluation. Evaluation is surjective.",
+        "strategy": "Use the published cycle-boundary decomposition to choose π_j:C_j→Z_j. If ψ changes by g|B for g:Z_(n−1)→G, its cochain changes by δ(gπ_(n−1)), closing the missing quotient check in the older published extension lemma. Conversely ψd_n=hd_n implies ψ=h|B, whose extension h|Z proves injectivity. A cocycle with zero evaluation literally vanishes on Z_n and therefore uniquely factors through d_n onto B_(n−1). For u:H_n→G, u qπ_n is a cocycle with evaluation u. For a chain map, its restrictions to B,Z give a map of these explicit resolutions; the formula ψd commutes with pullback. Compare other length-one free presentations by lifting basis vectors through Z→H using AC; differences of two lifts land in B and supply the chain homotopy, so Ext identification is independent. Coefficient maps commute by postcomposition. AC is used for free-module sections and their degreewise selection, not inferred from finite choice.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -325,7 +347,7 @@
         "sources": {
           "references": [
             {
-              "title": "Miller \u00a727, Theorem 27.1 and full proof, printed pp.73\u201375",
+              "title": "Miller §27, Theorem 27.1 and full proof, printed pp.73–75",
               "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
             }
           ]
@@ -339,9 +361,12 @@
           "def-singular-cohomology-with-coefficients",
           "lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives",
           "lem-singular-uct-extension-from-cycle-projections",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "def-singular-cochain-complex-with-coefficients",
+          "def-relative-singular-cochain-complex",
+          "prop-singular-chains-and-homology-are-covariantly-functorial"
         ],
-        "statement": "Assume AC. For all spaces X, abelian G and n\u22650 there is a natural exact sequence 0\u2192Ext^1_Z(H_(n\u22121)(X;Z),G)\u2192H^n(X;G)\u2192Hom_Z(H_n(X;Z),G)\u21920. It also holds for pairs; H_(\u22121)=0.",
+        "statement": "Assume AC. For all spaces X, abelian G and n≥0 there is a natural exact sequence 0→Ext^1_Z(H_(n−1)(X;Z),G)→H^n(X;G)→Hom_Z(H_n(X;Z),G)→0. It also holds for pairs; H_(−1)=0.",
         "strategy": "Integral absolute and relative singular chains are nonnegative free complexes on their respective simplex bases. Apply the local complete presentation lemma. Its evaluation is exactly the Kronecker map. Keep naturality in X and G distinct from choices used to prove surjectivity. This avoids the defective published extension lemma and does not presume the old UCT proof repaired.",
         "proof_strategy": "direct",
         "provenance": {
@@ -351,7 +376,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -364,10 +389,11 @@
         "deps": [
           "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology",
           "lem-singular-uct-extension-from-cycle-projections",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces"
         ],
         "statement": "Assume AC. The topological cohomology UCT splits as abelian groups, but no natural splitting in spaces and coefficients is asserted.",
-        "strategy": "Choose \u03c0_n:C_n\u2192Z_n and define a linear section u\u21a6[u q\u03c0_n]. Evaluation of this class is u, yielding an abstract direct sum. Dependence on \u03c0_n prevents claiming a canonical projection onto Ext. The B counterexample separately disproves a general natural choice.",
+        "strategy": "Choose π_n:C_n→Z_n and define a linear section u↦[u qπ_n]. Evaluation of this class is u, yielding an abstract direct sum. Dependence on π_n prevents claiming a canonical projection onto Ext. The B counterexample separately disproves a general natural choice.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -376,7 +402,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -389,10 +415,12 @@
         "deps": [
           "def-singular-cohomology-with-coefficients",
           "lem-singular-uct-extension-from-cycle-projections",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "def-singular-cochain-complex-with-coefficients",
+          "thm-every-independent-set-extends-to-a-basis"
         ],
         "statement": "Assume AC. For every field k and every space X, H^n(X;k) is naturally Hom_k(H_n(X;k),k), with no finite-dimensional restriction.",
-        "strategy": "Identify cochains with k-linear Hom from k singular chains. Choose vector-space bases/complements under AC; every vector space is free and projective, so the length-one presentation Ext term vanishes: Hom(Z,k)\u2192Hom(B,k) is onto by a chosen complement. Apply the local evaluation result over R=k. Naturality belongs to evaluation, not the complements.",
+        "strategy": "Identify cochains with k-linear Hom from k singular chains. Choose vector-space bases/complements under AC; every vector space is free and projective, so the length-one presentation Ext term vanishes: Hom(Z,k)→Hom(B,k) is onto by a chosen complement. Apply the local evaluation result over R=k. Naturality belongs to evaluation, not the complements.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -401,7 +429,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -415,10 +443,12 @@
           "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology",
           "prop-the-cohomology-universal-coefficient-sequence-splits-nonnaturally",
           "def-axiom-of-choice",
-          "cor-fundamental-theorem-of-finitely-generated-abelian-groups-from-pid-modules"
+          "cor-fundamental-theorem-of-finitely-generated-abelian-groups-from-pid-modules",
+          "lem-singular-uct-extension-from-cycle-projections",
+          "def-ext-via-a-projective-resolution-of-the-first-variable"
         ],
-        "statement": "Assume AC and H_n(X;Z), H_(n\u22121)(X;Z) finitely generated. The torsion subgroup of H^n(X;Z) is abstractly isomorphic to the torsion subgroup of H_(n\u22121)(X;Z); its free rank is rank H_n.",
-        "strategy": "Decompose each finitely generated group into Z summands and cyclic finite summands. Compute Hom(Z,Z)=Z, Hom(Z/m,Z)=0, Ext(Z,Z)=0, Ext(Z/m,Z)=Z/m by the resolution Z --m\u2192 Z. Hom of a finite direct sum and cohomology of its finite direct sum of resolutions split componentwise. Apply UCT and the nonnatural splitting; do not claim a canonical identification of a finite torsion group with its dual.",
+        "statement": "Assume AC and H_n(X;Z), H_(n−1)(X;Z) finitely generated. The torsion subgroup of H^n(X;Z) is abstractly isomorphic to the torsion subgroup of H_(n−1)(X;Z); its free rank is rank H_n.",
+        "strategy": "Decompose each finitely generated group into Z summands and cyclic finite summands. Compute Hom(Z,Z)=Z, Hom(Z/m,Z)=0, Ext(Z,Z)=0, Ext(Z/m,Z)=Z/m by the resolution Z --m→ Z. Hom of a finite direct sum and cohomology of its finite direct sum of resolutions split componentwise. Apply UCT and the nonnatural splitting; do not claim a canonical identification of a finite torsion group with its dual.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -427,7 +457,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -441,10 +471,11 @@
           "def-singular-chain-cross-product-on-generators",
           "lem-singular-chain-cross-product-boundary-formula",
           "prop-singular-chain-cross-products-are-natural",
-          "thm-singular-chain-homotopy-formula"
+          "thm-singular-chain-homotopy-formula",
+          "def-singular-cochain-complex-with-coefficients"
         ],
-        "statement": "For all spaces X,Y the singular shuffle chain map S:C*(X;Z)\u2297C*(Y;Z)\u2192C*(X\u00d7Y;Z) is a natural chain homotopy equivalence; the same holds over every commutative ring.",
-        "strategy": "Write F=C(X)\u2297C(Y), D=C(X\u00d7Y). Basis generators are uniquely induced from (id_\u0394p,id_\u0394q) in the model (\u0394p,\u0394q) for F, and from the diagonal \u0394n\u2192\u0394n\u00d7\u0394n for D. Contract each simplex affinely to its first vertex; the prism formula gives an explicit augmented chain contraction. On the tensor model use h_C\u22971+(i\u03b5)_C\u2297h_D with the tensor sign convention; it contracts to Z in degree zero. On the product model use affine contraction of \u0394p\u00d7\u0394q. Construct T:D\u2192F starting with the inverse identification on vertices. If T is defined below degree n, T\u2202(universal generator) is a cycle (augmentation-zero at n=1); apply the model contraction to choose its filling, and push it forward under the generator map. This gives a natural chain map without arbitrary choices. To homotope TS to 1 and ST to 1, recursively fill the cycle (u\u2212v)(generator)\u2212H\u2202(generator) in its target model, using the same contractions. The zero-degree differences are augmentation-zero. Push forward each filling; then \u2202H+H\u2202=u\u2212v. Extend scalars to R after constructing the integral maps. Explicit contractions avoid AC and avoid using Kunneth to prove itself.",
+        "statement": "For all spaces X,Y the singular shuffle chain map S:C*(X;Z)⊗C*(Y;Z)→C*(X×Y;Z) is a natural chain homotopy equivalence; the same holds over every commutative ring.",
+        "strategy": "Write F=C(X)⊗C(Y), D=C(X×Y). Basis generators are uniquely induced from (id_Δp,id_Δq) in the model (Δp,Δq) for F, and from the diagonal Δn→Δn×Δn for D. Contract each simplex affinely to its first vertex; the prism formula gives an explicit augmented chain contraction. On the tensor model use h_C⊗1+(iε)_C⊗h_D with the tensor sign convention; it contracts to Z in degree zero. On the product model use affine contraction of Δp×Δq. Construct T:D→F starting with the inverse identification on vertices. If T is defined below degree n, T∂(universal generator) is a cycle (augmentation-zero at n=1); apply the model contraction to choose its filling, and push it forward under the generator map. This gives a natural chain map without arbitrary choices. To homotope TS to 1 and ST to 1, recursively fill the cycle (u−v)(generator)−H∂(generator) in its target model, using the same contractions. The zero-degree differences are augmentation-zero. Push forward each filling; then ∂H+H∂=u−v. Extend scalars to R after constructing the integral maps. Explicit contractions avoid AC and avoid using Kunneth to prove itself.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -453,7 +484,7 @@
         "sources": {
           "references": [
             {
-              "title": "Miller \u00a725, Lemma 25.10, Theorem 25.11, Corollary 25.12, Theorem 25.13, printed pp.64\u201366",
+              "title": "Miller §25, Lemma 25.10, Theorem 25.11, Corollary 25.12, Theorem 25.13, printed pp.64–66",
               "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
             }
           ]
@@ -466,9 +497,11 @@
         "deps": [
           "lem-singular-product-chain-equivalence-by-simplex-models",
           "thm-pid-kunneth-exactness-from-cycle-boundary-presentations",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "def-singular-cochain-complex-with-coefficients",
+          "def-singular-chain-cross-product-on-generators"
         ],
-        "statement": "Assume AC. For any commutative PID R and spaces X,Y there is a natural exact sequence 0\u2192\u2295_(p+q=n)H_p(X;R)\u2297_R H_q(Y;R)\u2192H_n(X\u00d7Y;R)\u2192\u2295_(p+q=n\u22121)Tor^R_1(H_p(X;R),H_q(Y;R))\u21920. The left map is the singular cross product.",
+        "statement": "Assume AC. For any commutative PID R and spaces X,Y there is a natural exact sequence 0→⊕_(p+q=n)H_p(X;R)⊗_R H_q(Y;R)→H_n(X×Y;R)→⊕_(p+q=n−1)Tor^R_1(H_p(X;R),H_q(Y;R))→0. The left map is the singular cross product.",
         "strategy": "Both singular complexes are nonnegative and degreewise free of arbitrary rank, so the published corrected PID theorem applies with all flatness hypotheses met. Compose with the local shuffle equivalence. Identify its cycle map with the displayed left map and transfer the canonical Tor quotient. Each total-degree diagonal is finite. AC propagates from the PID supplier. Do not cite the legacy uncorrected Kunneth proof.",
         "proof_strategy": "direct",
         "provenance": {
@@ -478,7 +511,7 @@
         "sources": {
           "references": [
             {
-              "title": "Miller \u00a725, Theorem 25.15, printed p.66; corrected PID owner theorem",
+              "title": "Miller §25, Theorem 25.15, printed p.66; corrected PID owner theorem",
               "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
             }
           ]
@@ -491,10 +524,11 @@
         "deps": [
           "thm-topological-kunneth-short-exact-sequence-for-homology",
           "thm-pid-kunneth-splitting-from-cycle-boundary-presentations",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "lem-singular-product-chain-equivalence-by-simplex-models"
         ],
         "statement": "Assume AC. The PID homology Kunneth sequence splits as R-modules, generally nonnaturally.",
-        "strategy": "Use the published corrected cycle-retraction section in the tensor complex and carry it through the shuffle-induced homology isomorphism. No splitting of B\u21aaZ is assumed. Distinguish the canonical quotient from the chosen section.",
+        "strategy": "Use the published corrected cycle-retraction section in the tensor complex and carry it through the shuffle-induced homology isomorphism. No splitting of B↪Z is assumed. Distinguish the canonical quotient from the chosen section.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -503,7 +537,7 @@
         "sources": {
           "references": [
             {
-              "title": "Miller \u00a725, Theorem 25.15, printed p.66",
+              "title": "Miller §25, Theorem 25.15, printed p.66",
               "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
             }
           ]
@@ -515,9 +549,13 @@
         "title": "Field kunneth isomorphism for homology of products",
         "deps": [
           "thm-topological-kunneth-short-exact-sequence-for-homology",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "cor-every-vector-space-has-a-basis",
+          "thm-free-modules-are-projective-with-choice-boundary",
+          "def-balanced-tor-bifunctor",
+          "lem-pid-tensor-two-term-pieces-have-the-kunneth-kernel-and-cokernel"
         ],
-        "statement": "Assume AC. Over any field k the cross product \u2295_(p+q=n)H_p(X;k)\u2297_k H_q(Y;k)\u2192H_n(X\u00d7Y;k) is a natural isomorphism, for arbitrary spaces.",
+        "statement": "Assume AC. Over any field k the cross product ⊕_(p+q=n)H_p(X;k)⊗_k H_q(Y;k)→H_n(X×Y;k) is a natural isomorphism, for arbitrary spaces.",
         "strategy": "Every vector space is free under AC. Its length-zero projective resolution has zero positive Tor, so all correction terms vanish. No finite-dimensional hypothesis is needed.",
         "proof_strategy": "direct",
         "provenance": {
@@ -527,7 +565,7 @@
         "sources": {
           "references": [
             {
-              "title": "Miller \u00a725, Example 25.16, printed pp.66\u201367",
+              "title": "Miller §25, Example 25.16, printed pp.66–67",
               "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
             }
           ]
@@ -539,10 +577,11 @@
         "title": "Additive singular cohomology cross product",
         "deps": [
           "lem-singular-product-chain-equivalence-by-simplex-models",
-          "def-singular-cohomology-with-coefficients"
+          "def-singular-cohomology-with-coefficients",
+          "def-singular-cochain-complex-with-coefficients"
         ],
         "statement": "For a commutative ring R, define the additive cohomology cross product by composing the dual evaluation map on tensor chains with a chain homotopy inverse T to the shuffle map.",
-        "strategy": "For \u03c6 of degree p and \u03c8 of degree q evaluate \u03c6\u2297\u03c8 on x\u2297y as \u03c6(x)\u03c8(y) when |x|=p, |y|=q, and as zero otherwise. With \u03b4\u03c6=\u03c6\u2202 this satisfies \u03b4(\u03c6\u2297\u03c8)=\u03b4\u03c6\u2297\u03c8+(\u22121)^p\u03c6\u2297\u03b4\u03c8. Compose with T. A different natural inverse is homotopic by the preceding model lemma, and dual homotopies induce the same cohomology map. Thus this defines a natural bilinear product of cohomology groups. No cup product, ring theorem or later AT7 result is consumed.",
+        "strategy": "For φ of degree p and ψ of degree q evaluate φ⊗ψ on x⊗y as φ(x)ψ(y) when |x|=p, |y|=q, and as zero otherwise. With δφ=φ∂ this satisfies δ(φ⊗ψ)=δφ⊗ψ+(−1)^pφ⊗δψ. Compose with T. A different natural inverse is homotopic by the preceding model lemma, and dual homotopies induce the same cohomology map. Thus this defines a natural bilinear product of cohomology groups. No cup product, ring theorem or later AT7 result is consumed.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -551,7 +590,36 @@
         "sources": {
           "references": [
             {
-              "title": "Miller \u00a728, Construction 28.1, printed p.76; sign translated to positive coboundary",
+              "title": "Miller §28, Construction 28.1, printed p.76; sign translated to positive coboundary",
+              "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
+            }
+          ]
+        },
+        "justified_by": [
+          "lem-additive-singular-cohomology-cross-product-is-well-defined"
+        ]
+      },
+      {
+        "id": "lem-additive-singular-cohomology-cross-product-is-well-defined",
+        "kind": "lemma",
+        "title": "The additive singular cohomology cross product is well-defined",
+        "deps": [
+          "def-additive-singular-cohomology-cross-product",
+          "lem-singular-product-chain-equivalence-by-simplex-models",
+          "def-singular-cochain-complex-with-coefficients",
+          "def-singular-cohomology-with-coefficients"
+        ],
+        "statement": "Over a commutative unital ring the additive cohomology cross product is well-defined on both cocycle classes, independent of the shuffle inverse and natural in both spaces, with the positive coboundary convention.",
+        "strategy": "Expand the tensor differential in the two contributing bidegrees; exhibit signed coboundary changes; compare any two homotopy inverses explicitly, then dualize the homotopy on closed functionals.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Miller section28, Construction28.1, printed page76; positive differential convention verified locally",
               "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
             }
           ]
@@ -564,10 +632,14 @@
         "deps": [
           "def-additive-singular-cohomology-cross-product",
           "lem-pid-complex-decomposes-into-two-term-cycle-boundary-pieces",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "lem-additive-singular-cohomology-cross-product-is-well-defined",
+          "lem-singular-product-chain-equivalence-by-simplex-models",
+          "thm-free-modules-are-projective-with-choice-boundary",
+          "def-singular-cochain-complex-with-coefficients"
         ],
-        "statement": "Assume AC. Let R be a commutative PID, and X,Y spaces with every H_q(Y;R) finite free. Then \u2295_(p+q=n)H^p(X;R)\u2297_R H^q(Y;R)\u2192H^n(X\u00d7Y;R) is an isomorphism via the additive cross product. The symmetric version holds when X is the finite-free factor.",
-        "strategy": "Choose sections of Z_q(Y)\u2192H_q(Y) (free target) as well as C_q(Y)\u2192B_(q\u22121)(Y). Decompose C(Y) into its zero-differential homology and contractible B_q\u2192B_q pieces. The contraction is explicit on each identity pair and survives tensoring with C(X) and applying Hom. Hence compute using Hom(C(X)\u2297H(Y),R). In degree n only 0\u2264q\u2264n occur. Since each H_q(Y) is finite free, Hom(C_(n\u2212q)(X)\u2297H_q(Y),R)=Hom(C_(n\u2212q)(X),R)\u2297H_q(Y)^*. These are finite copies of the X cochain complex and taking cohomology commutes with them. Evaluation on homology shows this is precisely the previously defined cross product. State the finite rank hypothesis explicitly; no tensor-of-arbitrary-duals identity is used. The proof establishes the design homology hypothesis directly; Hatcher states a related CW/cohomology version.",
+        "statement": "Assume AC. Let R be a commutative PID, and X,Y spaces with every H_q(Y;R) finite free. Then ⊕_(p+q=n)H^p(X;R)⊗_R H^q(Y;R)→H^n(X×Y;R) is an isomorphism via the additive cross product. The symmetric version holds when X is the finite-free factor.",
+        "strategy": "Choose sections of Z_q(Y)→H_q(Y) (free target) as well as C_q(Y)→B_(q−1)(Y). Decompose C(Y) into its zero-differential homology and contractible B_q→B_q pieces. The contraction is explicit on each identity pair and survives tensoring with C(X) and applying Hom. Hence compute using Hom(C(X)⊗H(Y),R). In degree n only 0≤q≤n occur. Since each H_q(Y) is finite free, Hom(C_(n−q)(X)⊗H_q(Y),R)=Hom(C_(n−q)(X),R)⊗H_q(Y)^*. These are finite copies of the X cochain complex and taking cohomology commutes with them. Evaluation on homology shows this is precisely the previously defined cross product. State the finite rank hypothesis explicitly; no tensor-of-arbitrary-duals identity is used. The proof establishes the design homology hypothesis directly; Hatcher states a related CW/cohomology version.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -576,7 +648,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher Theorem 3.15 and proof, printed pp.215\u2013218; Miller \u00a728, p.76",
+              "title": "Hatcher Theorem 3.15 and proof, printed pp.215–218; Miller §28, p.76",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -591,9 +663,15 @@
           "thm-long-exact-sequence-of-a-pair-in-singular-cohomology",
           "thm-naturality-of-the-singular-cohomology-pair-sequence",
           "thm-excision-for-singular-cohomology",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "def-singular-cochain-complex-with-coefficients",
+          "def-relative-singular-cochain-complex",
+          "def-prism-operator-for-a-homotopy",
+          "thm-singular-chain-homotopy-formula",
+          "thm-path-connected-implies-connected",
+          "lem-finite-choice"
         ],
-        "statement": "Assume AC for arbitrary-index additivity. Singular cohomology has homotopy invariance, pair exactness, excision, the dimension axiom H^0(point;G)=G and H^n(point;G)=0 for n\u22600, and H^n(\u2210X_i;G)=\u220fH^n(X_i;G). Multiplication is additional structure.",
+        "statement": "Assume AC for arbitrary-index additivity. Singular cohomology has homotopy invariance, pair exactness, excision, the dimension axiom H^0(point;G)=G and H^n(point;G)=0 for n≠0, and H^n(∐X_i;G)=∏H^n(X_i;G). Multiplication is additional structure.",
         "strategy": "Reuse established homotopy, exactness and excision. On the point the boundary alternates between 0 and 1 in positive degrees, so direct calculation gives dimension. Every simplex has connected domain and lands in one summand of a disjoint union, so its cochain complex is the product of the summand complexes. Kernels commute with products; use AC to choose primitives for each component of a tuple of coboundaries and to choose cocycle representatives for a tuple of classes, proving passage to cohomology. Finite additivity needs only finite choices. Do not confuse the product-valued additivity axiom with a cup-product axiom.",
         "proof_strategy": "direct",
         "provenance": {
@@ -603,8 +681,38 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-real-projective-space-cellular-homology-and-pinch-map",
+        "kind": "lemma",
+        "title": "Real projective space cellular homology and the pinch map",
+        "deps": [
+          "thm-cellular-boundary-is-the-incidence-degree-matrix",
+          "thm-cellular-homology-computes-singular-homology",
+          "prop-cellular-maps-induce-cellular-chain-maps",
+          "prop-degree-of-identity-constant-reflection-and-antipodal-sphere-maps",
+          "thm-global-sphere-degree-is-the-sum-of-local-degrees",
+          "lem-local-sphere-orientations-and-finite-puncture-excision",
+          "cor-cohomology-over-a-field-is-dual-to-homology-over-that-field",
+          "def-axiom-of-choice"
+        ],
+        "statement": "RP^m has one cell in each degree0 throughm, with integral cellular boundary2 in positive even degrees and0 in odd degrees; its integral homology follows. Under AC the pinch RP^2→S^2 induces an isomorphism on degree-two F2 cohomology.",
+        "strategy": "Construct the quotient hemisphere cells, compute the two local contributions using antipodal degree, calculate kernels/images, and use the actual top-cell map on mod-two homology followed by natural field duality.",
+        "proof_strategy": "direct",
+        "provenance": {
+          "statement": "literature-derived",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "Miller section17, printed42–44; local pinch-map calculation",
+              "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
             }
           ]
         }
@@ -616,7 +724,7 @@
     "id": "singular-cohomology-and-coefficient-theorems-examples",
     "kind": "B",
     "category": "algebraic-topology",
-    "title": "Singular Cohomology and Coefficient Theorems \u2014 Examples",
+    "title": "Singular Cohomology and Coefficient Theorems — Examples",
     "companion": "singular-cohomology-and-coefficient-theorems",
     "requires": [
       "singular-cohomology-and-coefficient-theorems"
@@ -629,12 +737,11 @@
         "deps": [
           "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology",
           "cor-integral-cohomology-detects-adjacent-homology-torsion",
-          "def-axiom-of-choice",
-          "thm-cellular-boundary-is-the-incidence-degree-matrix",
-          "thm-cellular-homology-computes-singular-homology"
+          "lem-real-projective-space-cellular-homology-and-pinch-map",
+          "def-axiom-of-choice"
         ],
-        "statement": "For RP^m, H^0=Z; H^j=Z/2 for even 0<j\u2264m; H^m=Z if m is odd; all other positive groups vanish. RP^0 is a point.",
-        "strategy": "Build the quotient CW filtration with one cell per degree. The two hemispheres in an attaching map give degree 1+(\u22121)^j, so cellular boundaries are 2 in positive even degrees and zero in odd degrees. Compute integral homology and apply Hom/Ext with the degree shift n\u22121. No B-page homology example is a dependency.",
+        "statement": "For RP^m, H^0=Z; H^j=Z/2 for even 0<j≤m; H^m=Z if m is odd; all other positive groups vanish. RP^0 is a point.",
+        "strategy": "Build the quotient CW filtration with one cell per degree. The two hemispheres in an attaching map give degree 1+(−1)^j, so cellular boundaries are 2 in positive even degrees and zero in odd degrees. Compute integral homology and apply Hom/Ext with the degree shift n−1. No B-page homology example is a dependency.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -643,7 +750,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1 cohomology examples, pp.198\u2013205",
+              "title": "Hatcher §3.1 cohomology examples, pp.198–205",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -657,9 +764,13 @@
           "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology",
           "def-axiom-of-choice",
           "thm-cellular-boundary-is-the-incidence-degree-matrix",
-          "thm-cellular-homology-computes-singular-homology"
+          "thm-cellular-homology-computes-singular-homology",
+          "prop-cellular-maps-induce-cellular-chain-maps",
+          "lem-the-cellular-boundary-squares-to-zero",
+          "cor-homology-of-spheres",
+          "cor-integral-cohomology-detects-adjacent-homology-torsion"
         ],
-        "statement": "For L(p,q), p\u22651, gcd(p,q)=1, H^0=H^3=Z, H^2=Z/p, H^1=0, and higher cohomology vanishes.",
+        "statement": "For L(p,q), p≥1, gcd(p,q)=1, H^0=H^3=Z, H^2=Z/p, H^1=0, and higher cohomology vanishes.",
         "strategy": "Use the standard one-cell-per-degree quotient structure: degree-1 attaching boundary zero, degree-2 attaching loop has winding p, and oriented 3-cell has boundary zero. Hence H_1=Z/p and H_2=0. In UCT Ext^1(Z/p,Z)=Z/p is computed from multiplication by p on Z. Include p=1.",
         "proof_strategy": "direct",
         "provenance": {
@@ -669,7 +780,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -685,8 +796,8 @@
           "thm-cellular-boundary-is-the-incidence-degree-matrix",
           "thm-cellular-homology-computes-singular-homology"
         ],
-        "statement": "For a countably infinite CW wedge of circles, H^0(X;k)=k, H^1(X;k)=\u220f_(j\u22651)k, H^n=0 for n>1; homology H_1=\u2295_(j\u22651)k.",
-        "strategy": "The CW chain complex has one 0-cell and countably many 1-cells, all cellular boundaries zero; cellular comparison yields the direct-sum homology. Apply unrestricted field duality, and identify Hom(\u2295k,k) with unrestricted coordinate functions. For k=F_2, direct sum is countable and product is uncountable by diagonalization, making the distinction concrete.",
+        "statement": "For a countably infinite CW wedge of circles, H^0(X;k)=k, H^1(X;k)=∏_(j≥1)k, H^n=0 for n>1; homology H_1=⊕_(j≥1)k.",
+        "strategy": "The CW chain complex has one 0-cell and countably many 1-cells, all cellular boundaries zero; cellular comparison yields the direct-sum homology. Apply unrestricted field duality, and identify Hom(⊕k,k) with unrestricted coordinate functions. For k=F_2, direct sum is countable and product is uncountable by diagonalization, making the distinction concrete.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -695,7 +806,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -708,9 +819,12 @@
         "deps": [
           "thm-topological-kunneth-short-exact-sequence-for-homology",
           "cor-homology-of-spheres",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "def-balanced-tor-bifunctor",
+          "thm-free-modules-are-projective-with-choice-boundary",
+          "def-singular-chain-cross-product-on-generators"
         ],
-        "statement": "For m,n\u22651, integral homology of S^m\u00d7S^n is free on the point, each factor sphere, and their cross product in degrees 0,m,n,m+n; if m=n the middle rank is two.",
+        "statement": "For m,n≥1, integral homology of S^m×S^n is free on the point, each factor sphere, and their cross product in degrees 0,m,n,m+n; if m=n the middle rank is two.",
         "strategy": "The homology of each sphere is Z in degrees 0 and its dimension. All Tor terms vanish. Enumerate the four tensor pairs and identify their images with the actual shuffle cross products. State separately that S^0 has two H_0 generators if that boundary case is included.",
         "proof_strategy": "direct",
         "provenance": {
@@ -720,7 +834,7 @@
         "sources": {
           "references": [
             {
-              "title": "Miller \u00a725, Theorem 25.15 and field/product calculations, pp.66\u201367",
+              "title": "Miller §25, Theorem 25.15 and field/product calculations, pp.66–67",
               "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
             }
           ]
@@ -733,12 +847,13 @@
         "deps": [
           "thm-topological-kunneth-short-exact-sequence-for-homology",
           "prop-the-homology-kunneth-sequence-splits-nonnaturally",
-          "def-axiom-of-choice",
-          "thm-cellular-boundary-is-the-incidence-degree-matrix",
-          "thm-cellular-homology-computes-singular-homology"
+          "lem-real-projective-space-cellular-homology-and-pinch-map",
+          "def-balanced-tor-bifunctor",
+          "thm-free-modules-are-projective-with-choice-boundary",
+          "def-axiom-of-choice"
         ],
-        "statement": "For RP^3\u00d7RP^3, H_3 is Z^2\u2295Z/2; the Z/2 is the degree-three Tor correction from H_1 of the two factors.",
-        "strategy": "Calculate each RP^3 cellular homology as Z,Z/2,0,Z from the alternating incidence degrees. In total degree 3 the tensor contribution is Z^2. The only p+q=2 nonzero Tor pair is (1,1); the resolution Z --2\u2192 Z computes Tor(Z/2,Z/2)=Z/2. Apply the nonnatural splitting, explicitly retaining the correction term.",
+        "statement": "For RP^3×RP^3, H_3 is Z^2⊕Z/2; the Z/2 is the degree-three Tor correction from H_1 of the two factors.",
+        "strategy": "Calculate each RP^3 cellular homology as Z,Z/2,0,Z from the alternating incidence degrees. In total degree 3 the tensor contribution is Z^2. The only p+q=2 nonzero Tor pair is (1,1); the resolution Z --2→ Z computes Tor(Z/2,Z/2)=Z/2. Apply the nonnatural splitting, explicitly retaining the correction term.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -747,7 +862,7 @@
         "sources": {
           "references": [
             {
-              "title": "Miller \u00a725, Example 25.16, printed pp.66\u201367",
+              "title": "Miller §25, Example 25.16, printed pp.66–67",
               "url": "https://math.mit.edu/~hrm/papers/notes-905.pdf"
             }
           ]
@@ -761,10 +876,13 @@
           "lem-the-kronecker-pairing-is-independent-of-cocycle-and-cycle-representatives",
           "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology",
           "cor-homology-of-spheres",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "thm-cellular-boundary-is-the-incidence-degree-matrix",
+          "thm-cellular-homology-computes-singular-homology",
+          "lem-singular-uct-extension-from-cycle-projections"
         ],
-        "statement": "For an oriented circle and its positive integral H_1 generator z, a class \u03b1\u2208H^1(S^1;Z) evaluates to 1 on z.",
-        "strategy": "The oriented 1-cell determines the positive sphere-homology generator. H_0=Z implies Ext(H_0,Z)=0, so evaluation in degree 1 is an isomorphism. Take the unique class corresponding to the homomorphism z\u21a61. Explain that this is a singular cocycle class dual to the cellular generator, not an assertion that a cellular cochain is already a singular cochain.",
+        "statement": "For an oriented circle and its positive integral H_1 generator z, a class α∈H^1(S^1;Z) evaluates to 1 on z.",
+        "strategy": "The oriented 1-cell determines the positive sphere-homology generator. H_0=Z implies Ext(H_0,Z)=0, so evaluation in degree 1 is an isomorphism. Take the unique class corresponding to the homomorphism z↦1. Explain that this is a singular cocycle class dual to the cellular generator, not an assertion that a cellular cochain is already a singular cochain.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -773,7 +891,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -786,11 +904,12 @@
         "deps": [
           "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology",
           "def-axiom-of-choice",
-          "thm-cellular-boundary-is-the-incidence-degree-matrix",
-          "thm-cellular-homology-computes-singular-homology"
+          "lem-real-projective-space-cellular-homology-and-pinch-map",
+          "lem-singular-uct-extension-from-cycle-projections",
+          "def-ext-via-a-projective-resolution-of-the-first-variable"
         ],
         "statement": "For RP^2, H^2(RP^2;Z)=Z/2 while Hom(H_2(RP^2;Z),Z)=0, so evaluation is not injective.",
-        "strategy": "Compute cellular homology from Z --2\u2192 Z --0\u2192 Z; then the nonzero Ext^1(Z/2,Z) is the kernel of evaluation in degree 2. Exhibit its representative as the nonzero class of the multiplication-by-2 presentation cokernel, which maps to the UCT injection.",
+        "strategy": "Compute cellular homology from Z --2→ Z --0→ Z; then the nonzero Ext^1(Z/2,Z) is the kernel of evaluation in degree 2. Exhibit its representative as the nonzero class of the multiplication-by-2 presentation cokernel, which maps to the UCT injection.",
         "proof_strategy": "direct",
         "provenance": {
           "statement": "literature-derived",
@@ -799,7 +918,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -812,10 +931,12 @@
         "deps": [
           "thm-topological-universal-coefficient-short-exact-sequence-for-cohomology",
           "def-axiom-of-choice",
-          "thm-cellular-boundary-is-the-incidence-degree-matrix",
-          "thm-cellular-homology-computes-singular-homology"
+          "lem-real-projective-space-cellular-homology-and-pinch-map",
+          "cor-homology-of-spheres",
+          "lem-singular-uct-extension-from-cycle-projections",
+          "def-ext-via-a-projective-resolution-of-the-first-variable"
         ],
-        "statement": "The cohomology UCT cannot be split naturally in spaces for all coefficients. The quotient q:RP^2\u2192RP^2/RP^1=S^2 with coefficients F_2 is a counterexample.",
+        "statement": "The cohomology UCT cannot be split naturally in spaces for all coefficients. The quotient q:RP^2→RP^2/RP^1=S^2 with coefficients F_2 is a counterexample.",
         "strategy": "On cellular mod-2 cochains q* is an isomorphism in degree 2 because the unique top cell is preserved. On S^2 the UCT degree-2 evaluation map to Hom(Z,F_2) is an isomorphism and Ext(H_1,F_2)=0; on RP^2 the Hom(H_2,F_2) term is zero and Ext(Z/2,F_2)=F_2. Naturality of a section of evaluation would make the nonzero q* zero, contradiction. Establish the cellular-to-singular comparison on cohomology or compute q* with the relative pair LES before claiming this witness complete; a chain automorphism alone does not prove spatial nonnaturality.",
         "proof_strategy": "direct",
         "provenance": {
@@ -825,7 +946,7 @@
         "sources": {
           "references": [
             {
-              "title": "Hatcher \u00a73.1, pp.197\u2013202",
+              "title": "Hatcher §3.1, pp.197–202",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/ATch3.pdf"
             }
           ]
@@ -852,7 +973,7 @@
         "id": "def-hurewicz-and-serre-fibrations",
         "kind": "definition",
         "title": "Hurewicz and serre fibrations",
-        "statement": "A Hurewicz fibration has HLP for every space; a Serre fibration has HLP for every finite disk. We do not require surjectivity: empty fibers on whole path components are allowed. CGWH constructions use the already fixed k-products, while the all-spaces ordinary HLP is explicitly distinguished. The equivalence with CW test spaces is proved in the following proposition, under AC for arbitrary families of cell lifts.",
+        "statement": "Let $I=[0,1]$. A continuous map $p:E\\to B$ has the **homotopy lifting property for $X$** if for every continuous $f:X\\to E$ and $H:X\\times I\\to B$ satisfying $H(x,0)=p(f(x))$, there exists a continuous $\\widetilde H:X\\times I\\to E$ such that\n$$\\widetilde H(x,0)=f(x),\\qquad p(\\widetilde H(x,t))=H(x,t).$$\nHomotopies have the meaning of [[def-homotopy-relative-and-path-homotopy]]. Neither uniqueness nor stationarity over constant base paths is part of this condition.\n\nA **Hurewicz fibration in ordinary spaces** has this property for every topological space $X$, with ordinary products. A **Serre fibration** has it for each finite-dimensional closed disk $D^n$, $n\\ge0$; $D^0$ is one point. The relative CW formulation is established in the following proposition, with AC for arbitrary cell families.\n\nIn the CGWH convention of [[def-compactly-generated-conventions-for-based-homotopy]], a Hurewicz fibration tests every CGWH space and all constructions use k-products and kified subspaces. Products with $I$ have their ordinary topology. An assertion explicitly about all ordinary spaces uses the first convention, not merely the restricted test class. Disk tests agree in these conventions.\n\nWe do not impose surjectivity. For example the map from the empty space to any $B$ has the property: only the empty parameter space admits an initial map into its domain. Both conditions include prescribed-initial-point path lifting by taking $X=D^0$, so an image that meets a path component meets that entire component. For the unique map to an empty base the domain is empty. These are quantified definitions and use no choice principle.",
         "deps": [
           "def-homotopy-relative-and-path-homotopy",
           "def-compactly-generated-conventions-for-based-homotopy"
@@ -866,12 +987,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -880,11 +1001,15 @@
         "id": "prop-a-fibration-has-path-lifting-and-homotopy-lifting-relative-to-a-subspace",
         "kind": "proposition",
         "title": "A fibration has path lifting and homotopy lifting relative to a subspace",
-        "statement": "Hurewicz and Serre fibrations lift paths with prescribed initial point. Serre fibrations lift homotopies relative to a CW subcomplex (AC for unrestricted CW cell families). Hurewicz fibrations have the relative property for closed cofibration pairs in CGWH. An arbitrary subspace is not permitted.",
+        "statement": "Both kinds of fibration lift every path with any prescribed initial point. For a Serre fibration, every homotopy on a CW complex $X$ lifts with a prescribed compatible lift on $X\\times\\{0\\}\\cup A\\times I$, where $A$ is a CW subcomplex. This unrestricted CW clause assumes AC; finite CW pairs require no AC. Thus disk tests and CW tests are equivalent under AC. A Hurewicz fibration in CGWH has the same relative property for every closed cofibration pair $(X,A)$. This clause is choice-free. No assertion is made for arbitrary subspaces.",
         "deps": [
           "def-hurewicz-and-serre-fibrations",
           "def-cofibration-and-homotopy-extension-property",
           "lem-pushouts-and-products-preserve-the-cofibrations-used-here",
+          "lem-tube-lemma-for-a-compact-factor",
+          "lem-interval-exponential-law-and-quotient-homotopies",
+          "def-cw-complex-with-closure-finiteness-and-weak-topology",
+          "def-skeleta-cw-subcomplex-and-relative-cw-complex",
           "def-axiom-of-choice"
         ],
         "strategy": "For paths take the point as test domain. For a disk boundary, identify the cylinder bottom with bottom union sides by a boundary homeomorphism; extend to a ball homeomorphism by coning. Cell induction attaches relative lifts; AC selects extensions for the cells at each stage, and weak CW topology plus quotient-times-I proves continuity. For a general closed cofibration pair use its strip/NDR data to turn the partial lift into a disk-style lift extension problem; this must be given explicitly before using the stronger clause.",
@@ -897,12 +1022,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -911,7 +1036,7 @@
         "id": "def-fiber-and-fiber-homotopy-equivalence",
         "kind": "definition",
         "title": "Fiber and fiber homotopy equivalence",
-        "statement": "The fiber F_b is the subspace p^{-1}(b). A fiber homotopy equivalence between maps over the same B is a map over B with inverse and both homotopies over B; it is different from comparing two fibers over different points.",
+        "statement": "For a continuous $p:E\\to B$ and $b\\in B$, its **fiber over $b$** is $F_b=p^{-1}(\\{b\\})$ with the subspace topology of [[def-subspace-topology-top]]; in CGWH constructions take the kified subspace. The fiber may be empty.\n\nGiven $p:E\\to B$ and $q:E'\\to B$, a **map over $B$** is a continuous $u:E\\to E'$ with $qu=p$. A **homotopy over $B$** between such maps is $H:E\\times I\\to E'$ satisfying $qH(e,t)=p(e)$ at every time. A **fiber homotopy equivalence** is a map $u$ over $B$ for which a map $v:E'\\to E$ over $B$ exists with $vu\\simeq\\mathrm{id}_E$ and $uv\\simeq\\mathrm{id}_{E'}$ through homotopies over $B$. This strengthens [[def-homotopy-equivalence]] by fixing every base coordinate.\n\nRestriction gives ordinary homotopy equivalences $F_b\\simeq F'_b$. In particular an empty fiber cannot be fiber homotopy equivalent to a nonempty one. When $B$ is one point this is precisely ordinary homotopy equivalence; when $B$ is empty both total spaces are empty. Comparing fibers over two different points as spaces is not itself a map over the original base. These definitions require no AC.",
         "deps": [
           "def-subspace-topology-top",
           "def-homotopy-equivalence"
@@ -925,12 +1050,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -939,7 +1064,7 @@
         "id": "prop-pullbacks-of-fibrations-are-fibrations",
         "kind": "proposition",
         "title": "Pullbacks of fibrations are fibrations",
-        "statement": "For g:A\u2192B and either type of fibration p:E\u2192B, the projection {(a,e):g(a)=p(e)}\u2192A is the same type of fibration.",
+        "statement": "Let $p:E\\to B$ be a Hurewicz or Serre fibration and $g:A\\to B$ continuous. The pullback projection $q:g^*E\\to A$, where $g^*E=\\{(a,e):g(a)=p(e)\\}$ and $q(a,e)=a$, is a fibration of the same type. Use ordinary subspaces and products in ordinary spaces, and kified subspaces and k-products in CGWH. No surjectivity or AC is required.",
         "deps": [
           "def-hurewicz-and-serre-fibrations",
           "thm-product-universal-property",
@@ -955,12 +1080,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -969,7 +1094,7 @@
         "id": "def-mapping-path-space-replacement-of-a-map",
         "kind": "definition",
         "title": "Mapping path space replacement of a map",
-        "statement": "For f:X\u2192Y set E_f={(x,\u03b3)\u2208X\u00d7Y^I:\u03b3(0)=f(x)} and p_f(x,\u03b3)=\u03b3(1), j(x)=(x,const f(x)). Use ordinary compact-open paths for arbitrary spaces and the specified kification for CG spaces.",
+        "statement": "For a continuous map $f:X\\to Y$, let $Y^I=C_0(I,Y)$ with the ordinary compact-open topology. Define\n$$E_f=\\{(x,\\gamma)\\in X\\times Y^I:\\gamma(0)=f(x)\\},\\qquad p_f(x,\\gamma)=\\gamma(1),\\qquad j_f(x)=(x,c_{f(x)}),$$\nwhere $c_y$ is the constant path with value $y$. These use the product and subspace topologies of [[thm-product-universal-property]] and [[def-subspace-topology-top]]. They are called the **mapping-path space**, its **endpoint projection**, and its **constant-path inclusion**.\n\nEvaluation is continuous by [[lem-interval-exponential-law-and-quotient-homotopies]], so $p_f$ is continuous. The constant-path map $x\\mapsto c_{f(x)}$ is continuous by transposing $(x,t)\\mapsto f(x)$; pairing with $x$ and restricting to $E_f$ shows that $j_f$ is continuous. Also let $r_f(x,\\gamma)=x$; this is continuous as a restricted product projection. No arbitrary selection of paths is part of these definitions.\n\nFor CGWH spaces use the kified path space, k-product and kified indicated subspace instead; the same interval exponential law supplies these maps. Empty $X$ gives empty $E_f$. If $Y$ is empty then the existence of $f$ already forces $X$ empty. For a one-point domain this is the space of paths starting at its specified image; for a one-point target it identifies with $X$. The factorization and homotopy claims are proved next.",
         "deps": [
           "lem-interval-exponential-law-and-quotient-homotopies",
           "thm-product-universal-property",
@@ -984,12 +1109,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -998,14 +1123,14 @@
         "id": "thm-mapping-path-factorization",
         "kind": "theorem",
         "title": "Mapping path factorization",
-        "statement": "For any map f, f=p_f j, j is a homotopy equivalence and p_f is a Hurewicz fibration, with no surjectivity assertion over components not meeting f(X).",
+        "statement": "Every continuous $f:X\\to Y$ factors as $f=p_fj_f$, where $j_f:X\\to E_f$ is a homotopy equivalence and $p_f:E_f\\to Y$ is a Hurewicz fibration. This holds for all ordinary spaces and, with the specified kified constructions, in CGWH. No surjectivity onto components disjoint from $f(X)$ is asserted. The result is choice-free.",
         "deps": [
           "def-mapping-path-space-replacement-of-a-map",
           "def-hurewicz-and-serre-fibrations",
           "lem-interval-exponential-law-and-quotient-homotopies",
           "lem-continuity-is-local-and-pastes"
         ],
-        "strategy": "Projection r:E_f\u2192X has rj=id. Shrink \u03b3 by \u03b3((1-t)s) to obtain jr\u2243id. For initial path \u03b3_z and a base homotopy h(z,t) starting at \u03b3_z(1), keep x_z and use \u03b3_z((1+t)s) when (1+t)s\u22641, and h(z,(1+t)s\u22121) otherwise. Values coincide on the seam, at t=0 the initial path is unchanged, and at s=1 the endpoint is h(z,t). Closed pasting and interval exponential law establish continuity, including t=0.",
+        "strategy": "Projection r:E_f→X has rj=id. Shrink γ by γ((1-t)s) to obtain jr≃id. For initial path γ_z and a base homotopy h(z,t) starting at γ_z(1), keep x_z and use γ_z((1+t)s) when (1+t)s≤1, and h(z,(1+t)s−1) otherwise. Values coincide on the seam, at t=0 the initial path is unchanged, and at s=1 the endpoint is h(z,t). Closed pasting and interval exponential law establish continuity, including t=0.",
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
@@ -1015,12 +1140,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -1029,7 +1154,7 @@
         "id": "def-homotopy-fiber-of-a-map",
         "kind": "definition",
         "title": "Homotopy fiber of a map",
-        "statement": "For based f:(X,x0)\u2192(Y,y0), hofib(f)={(x,\u03b3):\u03b3(0)=f(x),\u03b3(1)=y0} with basepoint (x0,const y0). Maps of based arrows act by (x,\u03b3)\u21a6(a(x),b\u03b3).",
+        "statement": "For a based continuous map $f:(X,x_0)\\to(Y,y_0)$, its **homotopy fiber** is the fiber of $p_f:E_f\\to Y$ over $y_0$:\n$$\\operatorname{hofib}(f)=\\{(x,\\gamma):\\gamma(0)=f(x),\\ \\gamma(1)=y_0\\},$$\nwith basepoint $(x_0,c_{y_0})$. Its topology is the iterated subspace topology of [[def-mapping-path-space-replacement-of-a-map]] and [[def-fiber-and-fiber-homotopy-equivalence]], or the specified kified topology in CGWH. Basedness ensures the displayed basepoint belongs to it. Unlike a literal fiber, its points include a specified path from the image to the basepoint.\n\nFor a strictly commuting square of based maps $a:X\\to X'$, $b:Y\\to Y'$ with $bf=f'a$, the induced map is $(x,\\gamma)\\mapsto(a(x),b\\circ\\gamma)$. The endpoint equations hold since $b\\gamma(0)=f'a(x)$ and $b\\gamma(1)=y'_0$. Postcomposition on path spaces is continuous: the inverse image of the compact-open condition $\\eta(K)\\subseteq U$ is $\\gamma(K)\\subseteq b^{-1}U$; kification gives the CG version. Hence the indicated map is continuous and preserves basepoints. Identity and composite squares give the identity and composite formulas pointwise; no path choices are required.\n\nThe existence of a basepoint excludes empty $X$ and $Y$ here. When $X$ is one point, this construction is the based loop space of $Y$; when $Y$ is one point it is $X$. These are identities of the specified path-subspace constructions, not claims that arbitrary literal fibers already have the same homotopy type.",
         "deps": [
           "def-mapping-path-space-replacement-of-a-map",
           "def-fiber-and-fiber-homotopy-equivalence"
@@ -1043,12 +1168,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -1056,8 +1181,8 @@
       {
         "id": "def-fibration-connecting-homomorphism",
         "kind": "definition",
-        "title": "Fibration connecting homomorphism",
-        "statement": "With p(e0)=b0 and F=p^{-1}(b0), lift a based n-cube in B fixed to e0 on the union J of all faces except the last-coordinate-zero face. Restrict the lift to that distinguished face to define \u2202:\u03c0_n(B)\u2192\u03c0_{n-1}(F); n=1 gives the component of the initial endpoint, because the repository relative-path convention ends at e0. Well-definedness follows in the next lemma.",
+        "title": "Fibration connecting map",
+        "statement": "Let $p:(E,e_0)\\to(B,b_0)$ be a based Serre fibration and let $F=p^{-1}(b_0)$, with basepoint $e_0$, as in [[def-fiber-and-fiber-homotopy-equivalence]]. For $n\\ge1$, represent $[b]\\in\\pi_n(B,b_0)$ by a based cube $b:I^n\\to B$ as in [[def-higher-homotopy-group-by-based-cubes]]. Write $u\\in I^{n-1}$ and $t\\in I$ for its coordinates. The distinguished face is $t=0$; the union $J$ of all other faces is the relative convention of [[def-relative-homotopy-group]].\n\nApply [[prop-a-fibration-has-path-lifting-and-homotopy-lifting-relative-to-a-subspace]] to the homotopy $b(u,1-s)$, starting with the constant $e_0$ lift at $s=0$ and keeping $u\\in\\partial I^{n-1}$ fixed. Reversing $s$ gives a lift $\\widetilde b:I^n\\to E$ with $p\\widetilde b=b$ and $\\widetilde b|_J=e_0$. Its face $a(u)=\\widetilde b(u,0)$ lies in $F$ and is based on $\\partial I^{n-1}$.\n\nThe **connecting map** is\n$$\\partial_p[b]=[a]\\in\\pi_{n-1}(F,e_0)\\quad(n\\ge2).$$\nFor $n=1$ it is the path component $[\\widetilde b(0)]\\in\\pi_0(F,e_0)$. Thus a loop is lifted with its **terminal** point fixed to $e_0$, and the initial component is recorded. This orientation matters: it need not equal the endpoint component of a lift with initial point $e_0$.\n\nIndependence of representative and lift and the homomorphism property for $n\\ge2$ are proved in the next lemma, the declared justifier. No group structure on $\\pi_0(F)$ is assumed. Only finite cubical relative lifting is used here, so AC is unnecessary. The fiber is nonempty because $e_0$ is specified.",
         "deps": [
           "def-higher-homotopy-group-by-based-cubes",
           "def-relative-homotopy-group",
@@ -1073,21 +1198,24 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
-        }
+        },
+        "justified_by": [
+          "lem-the-fibration-connecting-map-is-independent-of-lift-and-representative"
+        ]
       },
       {
         "id": "lem-the-fibration-connecting-map-is-independent-of-lift-and-representative",
         "kind": "lemma",
         "title": "The fibration connecting map is independent of lift and representative",
-        "statement": "For a Serre fibration, p_*:\u03c0_n(E,F,e0)\u2192\u03c0_n(B,b0) is bijective for n\u22651, a group isomorphism for n\u22652; the cubical connecting map is well-defined and a homomorphism for n\u22652.",
+        "statement": "For a based Serre fibration $p:(E,e_0)\\to(B,b_0)$ and $F=p^{-1}(b_0)$, composition induces a bijection\n$$p_*:\\pi_n(E,F,e_0)\\longrightarrow\\pi_n(B,b_0)\\qquad(n\\ge1),$$\na group isomorphism for $n\\ge2$. The connecting map defined by lifting and restricting the distinguished face is independent of both choices, pointed, and a homomorphism for $n\\ge2$. No AC is required.",
         "deps": [
           "def-fibration-connecting-homomorphism",
           "lem-relative-homotopy-operations-are-well-defined-in-their-valid-degrees",
@@ -1103,12 +1231,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -1117,13 +1245,14 @@
         "id": "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
         "kind": "theorem",
         "title": "Long exact sequence of homotopy groups of a fibration",
-        "statement": "For a based Serre fibration the usual homotopy sequence is exact through \u03c01(B)\u2192\u03c00(F)\u2192\u03c00(E)\u2192\u03c00(B). Arrows between established groups are homomorphisms. Low terms are pointed sets; \u03c00(E)\u2192\u03c00(B) is onto only with the appropriate component-surjectivity hypothesis.",
+        "statement": "For a based Serre fibration $p:(E,e_0)\\to(B,b_0)$ with fiber $F=p^{-1}(b_0)$, the sequence\n$$\\cdots\\to\\pi_n(F)\\xrightarrow{i_*}\\pi_n(E)\\xrightarrow{p_*}\\pi_n(B)\\xrightarrow{\\partial_p}\\pi_{n-1}(F)\\to\\cdots\\to\\pi_1(B)\\xrightarrow{\\partial_p}\\pi_0(F)\\xrightarrow{i_*}\\pi_0(E)\\xrightarrow{p_*}\\pi_0(B)$$\nis exact wherever there is an incoming and outgoing arrow. Basepoints are $e_0,b_0$ as appropriate. Exactness means incoming image equals the inverse image of the distinguished element. Arrows are homomorphisms where both group structures are defined; the component terms are pointed sets. The last arrow is onto precisely when $p(E)$ meets every path component of $B$.\n\nThere is a right action of $\\pi_1(B,b_0)$ on $\\pi_0(F)$: $[e]\\cdot[\\gamma]$ is the endpoint component of a lift of $\\gamma$ starting at $e$, with loop products traversed left-to-right. Its orbits are precisely the fibers of $i_*:\\pi_0(F)\\to\\pi_0(E)$, and the stabilizer of $[e_0]$ is $p_*\\pi_1(E,e_0)$. Our boundary convention gives $\\partial_p[\\gamma]=[e_0]\\cdot[\\gamma]^{-1}$. These assertions require no AC.",
         "deps": [
           "lem-the-fibration-connecting-map-is-independent-of-lift-and-representative",
           "thm-long-exact-sequence-of-relative-homotopy-groups",
-          "def-path-connected"
+          "def-path-connected",
+          "prop-a-fibration-has-path-lifting-and-homotopy-lifting-relative-to-a-subspace"
         ],
-        "strategy": "Replace relative \u03c0_n(E,F) in the proved relative LES using the previous isomorphism. Check the resulting E\u2192B arrow is literal composition with p and the boundary is the prescribed face. At \u03c00(E), a point projects to the component b0 exactly when path lifting connects it to F, in both directions. Do not infer a terminal zero or any group structure on component sets.",
+        "strategy": "Replace relative π_n(E,F) in the proved relative LES using the previous isomorphism. Check the resulting E→B arrow is literal composition with p and the boundary is the prescribed face. At π0(E), a point projects to the component b0 exactly when path lifting connects it to F, in both directions. Do not infer a terminal zero or any group structure on component sets.",
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
@@ -1133,12 +1262,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -1147,7 +1276,7 @@
         "id": "thm-fibration-sequence-is-natural",
         "kind": "theorem",
         "title": "Fibration sequence is natural",
-        "statement": "A strictly commuting based square between Serre fibrations induces commuting arrows in the whole LES, including its pointed-set tail.",
+        "statement": "Let $p:(E,e_0)\\to(B,b_0)$ and $p':(E',e'_0)\\to(B',b'_0)$ be Serre fibrations, and let based maps $u:E\\to E'$, $v:B\\to B'$ satisfy $p'u=vp$ strictly. Then $u$ restricts to $u_F:F\\to F'$ and the induced maps commute with every arrow in the two fibration LESs, including the pointed-set tail. They also preserve the component actions: $u_{F*}(c\\cdot\\alpha)=u_{F*}(c)\\cdot v_*(\\alpha)$. No AC is needed.",
         "deps": [
           "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
           "lem-the-fibration-connecting-map-is-independent-of-lift-and-representative",
@@ -1163,12 +1292,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -1177,7 +1306,7 @@
         "id": "def-fiber-transport-and-monodromy-action",
         "kind": "definition",
         "title": "Fiber transport and monodromy action",
-        "statement": "For Hurewicz fibrations choose a continuous universal path-lifting function on E\u00d7_B B^I; its endpoint gives T_\u03b3:F_b\u2192F_c. On homology this yields a path-groupoid local system, hence monodromy of \u03c01(B,b). On higher based homotopy T_\u03b3 maps \u03c0_n(F_b,e) to \u03c0_n(F_c,T_\u03b3e); an automorphism of one fixed based group additionally requires an endpoint path and compatibility, or a specified section/simple-fiber hypothesis. The unqualified design action is retained as an owner-held claim requiring correction.",
+        "statement": "Let $p:E\\to B$ be a Hurewicz fibration, in ordinary spaces or in the explicitly chosen CGWH convention. Put $D_p=\\{(e,\\gamma):p(e)=\\gamma(0)\\}\\subseteq E\\times B^I$, with the corresponding path and pullback topology. Evaluation and the interval exponential law of [[lem-interval-exponential-law-and-quotient-homotopies]] make $((e,\\gamma),t)\\mapsto\\gamma(t)$ a continuous homotopy with initial lift $(e,\\gamma)\\mapsto e$. One application of [[def-hurewicz-and-serre-fibrations]] gives a **universal lifting function** $\\Lambda:D_p\\times I\\to E$ with\n$$\\Lambda(e,\\gamma,0)=e,\\qquad p\\Lambda(e,\\gamma,t)=\\gamma(t).$$\nIt is not assumed regular: $\\Lambda(e,c_{p(e)},t)$ may move in its fiber. Selecting this one map is a single existential choice, not an application of AC.\n\nFor a path $\\gamma:b\\to c$, define its **fiber transport** by $T_\\gamma:F_b\\to F_c$, $T_\\gamma(e)=\\Lambda(e,\\gamma,1)$; fibers have the meaning of [[def-fiber-and-fiber-homotopy-equivalence]]. The following proposition proves that its homotopy class is independent of the lifting function and of endpoint-fixed path homotopy, that $T_{\\gamma*\\eta}\\simeq T_\\eta T_\\gamma$, and that it is a homotopy equivalence. Those claims, used in the next definitions, are licensed by that declared justifier.\n\nFor every abelian coefficient group $G$ and $q\\ge0$, the maps $H_q(T_\\gamma;G)$ consequently form a **path-groupoid local system**: to each point assign $H_q(F_b;G)$ and to each endpoint-fixed path class assign its induced isomorphism. Here the path groupoid has points as objects and endpoint-fixed path classes as arrows, composed in traversal order. Homology functoriality and invariance are those used in [[thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology]]. Restriction to loops at $b$ is **monodromy**, written as a right action $z\\cdot[\\gamma]=H_q(T_\\gamma;G)(z)$ under the first-loop-first convention.\n\nFor $n\\ge1$, the induced based map instead has type\n$$(T_\\gamma)_*:\\pi_n(F_b,e)\\longrightarrow\\pi_n(F_c,T_\\gamma(e)).$$\nIt is an isomorphism by homotopy equivalence with moving-basepoint correction. The correction is [[prop-higher-homotopy-basepoint-transport-and-moving-homotopies]]: a path $a:e'\\to T_\\gamma(e)$ in $F_c$ gives $\\beta_a(T_\\gamma)_*$ with target $\\pi_n(F_c,e')$. Existence of such a path is additional data; its choice can change the resulting map. To obtain a fixed based group action one must supply endpoint paths with composition compatibility, or prove hypotheses making their effect independent of choices. A homology monodromy action alone supplies neither. Precisely, if $F_b$ is path connected and $\\beta_l=\\mathrm{id}$ on $\\pi_n(F_b,e)$ for every loop $l$ at $e$, define $x\\cdot[\\gamma]=\\beta_a(T_\\gamma)_*x$ using any $a:e\\to T_\\gamma(e)$. The declared justifier proves independence of $a$ and of the lifting function, and the right-action law. This hypothesis applies separately to each $n\\ge1$; for $n=1$ it is equivalent to abelianness, and a simply connected fiber satisfies it for every $n$. No unqualified fixed-basepoint action is part of the definition.\n\nEmpty fibers are allowed; the following proposition shows emptiness is constant along path components of the base. Point fibers give identity maps on their invariants. No canonical pointwise transport homeomorphism is asserted.",
         "deps": [
           "def-hurewicz-and-serre-fibrations",
           "def-fiber-and-fiber-homotopy-equivalence",
@@ -1194,27 +1323,32 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
-        }
+        },
+        "justified_by": [
+          "prop-fibers-over-one-path-component-are-fiber-homotopy-equivalent"
+        ]
       },
       {
         "id": "prop-fibers-over-one-path-component-are-fiber-homotopy-equivalent",
         "kind": "proposition",
         "title": "Fibers over one path component are fiber homotopy equivalent",
-        "statement": "For a Hurewicz fibration, fibers joined by a base path are homotopy equivalent, and T_\u03b3 depends only on endpoint-fixed homotopy of \u03b3 up to homotopy; concatenation gives composition in the same traversal order. This asserts equivalences of fibers as spaces; a fiber homotopy equivalence over an interval refers instead to the pulled-back family. For arbitrary Serre fibrations the unrestricted homotopy-equivalence assertion remains escalated.",
+        "statement": "For a Hurewicz fibration, fibers joined by a path in the base are homotopy equivalent as spaces. Transport $T_\\gamma$ is independent up to homotopy of its continuous lifting function and of endpoint-fixed homotopy of $\\gamma$. For consecutive paths $\\gamma,\\eta$,\n$$T_{\\gamma*\\eta}\\simeq T_\\eta T_\\gamma,\\qquad T_{c_b}\\simeq\\mathrm{id}_{F_b},\\qquad T_{\\bar\\gamma}T_\\gamma\\simeq\\mathrm{id}_{F_b},\\qquad T_\\gamma T_{\\bar\\gamma}\\simeq\\mathrm{id}_{F_c}.$$\nAll homotopies have fixed target fiber. The pullback to an interval along $\\gamma$ is fiber homotopy equivalent over the interval to $F_b\\times I$. This is choice-free. For a Serre fibration, the inclusions $F_b\\to\\gamma^*E\\leftarrow F_c$ are weak homotopy equivalences: they induce bijections on path components and isomorphisms on every positive homotopy group at every fiber basepoint. Arbitrary Serre fibers need not be homotopy equivalent, as the explicit ordinary-space counterexample below shows. For a Hurewicz fibration, if $F_b$ is path connected and every fiber loop acts trivially by basepoint transport on $\\pi_n(F_b,e)$, transport gives a canonical right action of $\\pi_1(B,b)$ on this fixed group, for that $n\\ge1$.",
         "deps": [
           "def-fiber-transport-and-monodromy-action",
           "prop-pullbacks-of-fibrations-are-fibrations",
-          "prop-a-fibration-has-path-lifting-and-homotopy-lifting-relative-to-a-subspace"
+          "prop-a-fibration-has-path-lifting-and-homotopy-lifting-relative-to-a-subspace",
+          "prop-higher-homotopy-basepoint-transport-and-moving-homotopies",
+          "thm-connected-subsets-of-r-are-intervals"
         ],
-        "strategy": "For Hurewicz p lift the path with parameter space the whole fiber. To compare two lifts of homotopic base paths use the homeomorphism of the square with three specified sides to a square with its bottom, tensor it with the starting fiber, and apply HLP directly. The fourth side is the endpoint homotopy. Thus no general closed-cofibration lifting theorem is needed for this comparison. Concatenation of lifted paths gives composition, a constant base path has endpoint map homotopic to identity via its lift, and path reversal plus the endpoint-fixed retracing contraction gives inverse transport. This is the complete two-parameter route in May printed pp53\u201354 and Hatcher Proposition4.61 p405.",
+        "strategy": "For Hurewicz p lift the path with parameter space the whole fiber. To compare two lifts of homotopic base paths use the homeomorphism of the square with three specified sides to a square with its bottom, tensor it with the starting fiber, and apply HLP directly. The fourth side is the endpoint homotopy. Thus no general closed-cofibration lifting theorem is needed for this comparison. Concatenation of lifted paths gives composition, a constant base path has endpoint map homotopic to identity via its lift, and path reversal plus the endpoint-fixed retracing contraction gives inverse transport. This is the complete two-parameter route in May printed pp53–54 and Hatcher Proposition4.61 p405.",
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
@@ -1224,12 +1358,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -1238,7 +1372,7 @@
         "id": "def-locally-trivial-fiber-bundle",
         "kind": "definition",
         "title": "Locally trivial fiber bundle",
-        "statement": "A locally trivial bundle with fixed fiber F is a continuous p:E\u2192B with an open cover and homeomorphisms p^{-1}(U)\u2245U\u00d7F over U. Coordinate changes are fiber-preserving homeomorphisms satisfying the cocycle identities. Numerable means there is a locally finite subordinate partition of unity and assigned trivializations; empty bases are allowed.",
+        "statement": "A **locally trivial fiber bundle with fiber $F$** is a continuous map $p:E\\to B$, an open cover $(U_i)_{i\\in S}$ of $B$, and homeomorphisms\n$$\\theta_i:p^{-1}(U_i)\\longrightarrow U_i\\times F,\\qquad \\operatorname{pr}_1\\theta_i=p|_{p^{-1}(U_i)}.$$\nHere bundle charts, including those used later for principal and associated bundles, are charts in ordinary topological spaces with ordinary product and subspace topologies. A bundle whose spaces are CGWH in addition can be considered in the CGWH fibration convention; we do not silently replace an ordinary product chart by a weaker k-product-chart assumption. Products and homeomorphisms have the meanings of [[thm-product-universal-property]] and [[def-homeomorphism-and-open-maps]].\n\nOn $U_i\\cap U_j$, the coordinate change has the form $(b,x)\\mapsto(b,g_{ji}(b,x))$, with continuous inverse $(b,y)\\mapsto(b,g_{ij}(b,y))$. In particular each $g_{ji}(b,-)$ is a homeomorphism of $F$. The identities $g_{ii}(b,x)=x$ and $g_{ki}(b,x)=g_{kj}(b,g_{ji}(b,x))$ hold because the corresponding chart composites cancel. No topology on a homeomorphism group of $F$ is assumed.\n\nThe bundle is **numerable** when the data include a partition $(\\rho_i:B\\to[0,1])_{i\\in S}$ with locally finite cozero sets, sum one, and\n$$\\operatorname{supp}(\\rho_i)=\\overline{\\{b:\\rho_i(b)>0\\}}\\subseteq U_i.$$\nThis is the support-subordinate convention of [[def-partition-of-unity-subordinate-to-a-cover]]. Repeating a chart with multiple indices is allowed, so a partition subordinate to a refinement can be accompanied by an explicitly assigned original chart. Merely having pointwise finite sums or cozero containment is not this specified numerating data.\n\nAn empty base forces $E$ empty and allows the empty cover and partition. The fiber $F$ may be empty: then every chart domain, hence $E$, is empty even when $B$ is nonempty. When $F$ is nonempty the charts imply surjectivity by taking one point in the chart fiber for each particular base point; this assertion does not require choosing a simultaneous section. Over a point a chart identifies $E$ with $F$. No AC is assumed in the definition.",
         "deps": [
           "thm-product-universal-property",
           "def-homeomorphism-and-open-maps",
@@ -1253,12 +1387,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -1267,15 +1401,20 @@
         "id": "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
         "kind": "theorem",
         "title": "Numerable fiber bundles are hurewicz fibrations",
-        "statement": "Assuming AC, every numerable fiber bundle is a Hurewicz fibration. The numerable cover, partition and trivializations are data; AC is used to well-order finite chart words for the global lift.",
+        "statement": "Assume AC. Every numerable fiber bundle, with its supplied ordinary local product charts and support-subordinate locally finite partition of unity, is a Hurewicz fibration in all ordinary spaces. In particular a bundle of CGWH spaces with these charts is a Hurewicz fibration in CGWH. AC is used to well-order the set of finite chart words. No selection of a chart for every base point or of a separate lift for every path is made.",
         "deps": [
           "def-locally-trivial-fiber-bundle",
           "def-hurewicz-and-serre-fibrations",
           "lem-interval-exponential-law-and-quotient-homotopies",
           "def-axiom-of-choice",
-          "lem-locally-finite-sums-are-continuous"
+          "lem-locally-finite-sums-are-continuous",
+          "lem-algebra-of-continuous-real-maps-on-a-space",
+          "thm-compactness-under-continuous-maps",
+          "thm-well-ordering-theorem",
+          "lem-continuity-is-local-and-pastes",
+          "cor-heine-borel-in-the-product-topology"
         ],
-        "strategy": "Use chartwise lifts that preserve the fiber coordinate, hence lift constant paths constantly. Pull the numerating cozero sets to path space using finite words of charts on equal subdivisions, allowing repetitions. For a word T of length n put \u03bb_T=min over its closed segments of its cozero functions; each fixed-length family is locally finite near any path by compactness. Put \u03b3_T=max(0,\u03bb_T\u2212n \u03a3_{|S|<n}\u03bb_S). Minimal positive length ensures a positive \u03b3; a positive lower-length \u03bb near any path forces all sufficiently long \u03b3 to vanish, giving local finiteness. Normalize \u03b3 by their positive locally finite sum, which is necessary and absent from the printed May formula. Order words using AC, and divide the time interval by cumulative normalized weights. On each time piece concatenate its chartwise lift, subdividing again at chart endpoints. Local finiteness reduces continuity to finitely many formulas; regular chart lifts make zero-length pieces converge to the current point. A full write-up must check the moving-segment and shrinking-piece continuity uniformly in the starting point.",
+        "strategy": "Use chartwise lifts that preserve the fiber coordinate, hence lift constant paths constantly. Pull the numerating cozero sets to path space using finite words of charts on equal subdivisions, allowing repetitions. For a word T of length n put λ_T=min over its closed segments of its cozero functions; each fixed-length family is locally finite near any path by compactness. Put γ_T=max(0,λ_T−n Σ_{|S|<n}λ_S). Minimal positive length ensures a positive γ; a positive lower-length λ near any path forces all sufficiently long γ to vanish, giving local finiteness. Normalize γ by their positive locally finite sum, which is necessary and absent from the printed May formula. Order words using AC, and divide the time interval by cumulative normalized weights. On each time piece concatenate its chartwise lift, subdividing again at chart endpoints. Local finiteness reduces continuity to finitely many formulas; regular chart lifts make zero-length pieces converge to the current point. A full write-up must check the moving-segment and shrinking-piece continuity uniformly in the starting point.",
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
@@ -1285,12 +1424,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -1299,7 +1438,7 @@
         "id": "def-principal-g-bundle-and-associated-fiber-bundle",
         "kind": "definition",
         "title": "Principal g bundle and associated fiber bundle",
-        "statement": "For topological group G, a principal right G-bundle has equivariant local charts U\u00d7G with the standard right action. For a continuous left G-space F form P\u00d7_G F=(P\u00d7F)/((pg,x)\u223c(p,gx)), with projection [p,x]\u21a6\u03c0(p). Principal freeness alone does not substitute for local triviality.",
+        "statement": "Let $G$ be a topological group, as in [[def-topological-group]], with identity $1$. A **right principal $G$-bundle** is a continuous map $\\pi:P\\to B$ with a continuous right action $(p,g)\\mapsto pg$, satisfying $p1=p$, $(pg)h=p(gh)$ and $\\pi(pg)=\\pi(p)$, together with equivariant bundle charts $\\theta_i:\\pi^{-1}(U_i)\\cong U_i\\times G$ over an open cover. Equivariance means $\\theta_i(pg)=(b,ag)$ whenever $\\theta_i(p)=(b,a)$. Charts use ordinary products as in [[def-locally-trivial-fiber-bundle]]. In each fiber the action is free and transitive: right multiplication on $G$ has those properties and the chart identifies the actions. Freeness alone is not the definition.\n\nA **left $G$-space** is a topological space $F$ with a continuous map $(g,x)\\mapsto gx$ such that $1x=x$ and $g(hx)=(gh)x$. Effectiveness of this action is not required. Define\n$$P\\times_G F=(P\\times F)/\\bigl((pg,x)\\sim(p,gx)\\bigr)$$\nwith the ordinary quotient topology, and write $[p,x]$ for its points. Precisely, the relation is the orbit relation of the right action $(p,x)\\cdot g=(pg,g^{-1}x)$. Its action law is $((p,x)\\cdot g)\\cdot h=(pgh,h^{-1}g^{-1}x)=(p,x)\\cdot(gh)$, and its generating relations are exactly the displayed ones. Thus the equivalence relation and quotient are defined without choosing orbit representatives.\n\nThe projection $r([p,x])=\\pi(p)$ is well-defined and continuous by [[thm-quotient-universal-property]], since $(p,x)\\mapsto\\pi(p)$ is continuous and constant on every orbit. This is the **associated fiber-bundle construction**; the next proposition proves its local triviality and pullback property. The quotient construction and projection already make sense before that proof.\n\nIf $B$ is empty then $P$ is empty. If $F$ is empty the associated space is empty even for nonempty $B$; this is allowed by our bundle convention. For singleton $F$ the construction is the orbit projection of the principal bundle. For the trivial group it is the product with $F$ over the chart-identified base. No AC is used.",
         "deps": [
           "def-topological-group",
           "def-locally-trivial-fiber-bundle",
@@ -1314,27 +1453,37 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
+            },
+            {
+              "title": "Peter Selick, MAT1345 lecture notes",
+              "url": "https://www.math.toronto.edu/selick/mat1345/notes.pdf",
+              "locator": "Chapter 1 Definition 1.1.4 p.2, associated construction p.3, section 1.2 pullback paragraph pp.7–8; right-action convention translated explicitly"
             }
           ]
-        }
+        },
+        "justified_by": [
+          "prop-associated-bundle-is-locally-trivial-and-functorial-under-pullback"
+        ]
       },
       {
         "id": "prop-associated-bundle-is-locally-trivial-and-functorial-under-pullback",
         "kind": "proposition",
         "title": "Associated bundle is locally trivial and functorial under pullback",
-        "statement": "The associated projection is a bundle with fiber F. For h:A\u2192B there is a canonical bundle isomorphism h^*(P\u00d7_G F)\u2245(h^*P)\u00d7_G F, natural for successive pullbacks.",
+        "statement": "For an ordinary right principal $G$-bundle $\\pi:P\\to B$ and a continuous left $G$-space $F$, the associated projection $r:P\\times_G F\\to B$ is a locally trivial bundle with fiber $F$. For every continuous $h:A\\to B$ there is a canonical bundle isomorphism\n$$\\Phi:(h^*P)\\times_G F\\longrightarrow h^*(P\\times_G F),\\qquad \\Phi([(a,p),x])=(a,[p,x]).$$\nIt respects identity and successive pullbacks. Neither AC nor effectiveness of the action on $F$ is required. All products, subspaces and quotients here are ordinary topological ones, as specified in the definition.",
         "deps": [
           "def-principal-g-bundle-and-associated-fiber-bundle",
           "thm-quotient-universal-property",
-          "thm-product-universal-property"
+          "thm-product-universal-property",
+          "def-subspace-topology-top",
+          "lem-continuity-is-local-and-pastes"
         ],
-        "strategy": "For local section s:U\u2192P write p=s(b)g uniquely and send [s(b)g,x] to (b,gx); the inverse is (b,y)\u21a6[s(b),y]. Equivalence invariance and continuity follow from the quotient property. Restricted quotients over open base U are quotient maps because their full preimages are saturated open sets. Base-change isomorphism sends [ (a,p),x] to (a,[p,x]); check it in these same local charts where it is identity on A_U\u00d7F. This avoids unjustified commuting of arbitrary products with quotient maps.",
+        "strategy": "For local section s:U→P write p=s(b)g uniquely and send [s(b)g,x] to (b,gx); the inverse is (b,y)↦[s(b),y]. Equivalence invariance and continuity follow from the quotient property. Restricted quotients over open base U are quotient maps because their full preimages are saturated open sets. Base-change isomorphism sends [ (a,p),x] to (a,[p,x]); check it in these same local charts where it is identity on A_U×F. This avoids unjustified commuting of arbitrary products with quotient maps.",
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
@@ -1344,12 +1493,49 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
+            },
+            {
+              "title": "Peter Selick, MAT1345 lecture notes",
+              "url": "https://www.math.toronto.edu/selick/mat1345/notes.pdf",
+              "locator": "Chapter 1 Definition 1.1.4 p.2, associated construction p.3, section 1.2 pullback paragraph pp.7–8; right-action convention translated explicitly"
+            }
+          ]
+        }
+      },
+      {
+        "id": "lem-covering-homotopies-lift-by-finite-local-strips",
+        "kind": "lemma",
+        "title": "Covering homotopies lift by finite local strips",
+        "statement": "Every covering map $p:E\\to B$ has unique homotopy lifting for every ordinary parameter space $X$, with a prescribed initial lift. In particular it is a Hurewicz fibration; if all spaces are CGWH the same assertion holds in that convention. No AC is used.",
+        "deps": [
+          "def-covering-map-and-evenly-covered-neighbourhoods",
+          "lem-tube-lemma-for-a-compact-factor",
+          "cor-heine-borel-in-the-product-topology",
+          "lem-continuity-is-local-and-pastes",
+          "def-hurewicz-and-serre-fibrations",
+          "thm-connected-subsets-of-r-are-intervals"
+        ],
+        "provenance": {
+          "statement": "ai-altered",
+          "proof": "ai-altered"
+        },
+        "sources": {
+          "references": [
+            {
+              "title": "May, A Concise Course in Algebraic Topology",
+              "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
+            },
+            {
+              "title": "Hatcher, Algebraic Topology",
+              "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -1361,7 +1547,7 @@
     "id": "fibrations-fiber-bundles-and-homotopy-exact-sequences-examples",
     "kind": "B",
     "category": "algebraic-topology",
-    "title": "Fibrations Fiber Bundles and Homotopy Exact Sequences \u2014 Examples",
+    "title": "Fibrations Fiber Bundles and Homotopy Exact Sequences — Examples",
     "companion": "fibrations-fiber-bundles-and-homotopy-exact-sequences",
     "requires": [
       "fibrations-fiber-bundles-and-homotopy-exact-sequences"
@@ -1371,13 +1557,13 @@
         "id": "ex-path-loop-fibration-and-its-connecting-isomorphisms",
         "kind": "example",
         "title": "Path loop fibration and its connecting isomorphisms",
-        "statement": "For based X, endpoint evaluation PX\u2192X from paths starting at x0 is Hurewicz; its fiber is \u03a9X and PX contracts. Hence \u2202:\u03c0_n(X)\u2245\u03c0_{n-1}(\u03a9X) for n\u22652 and a pointed-set bijection \u03c01(X)\u2245\u03c00(\u03a9X), with the repository boundary-direction convention stated.",
+        "statement": "For a based space $(X,x_0)$, let $PX=\\{\\alpha:I\\to X:\\alpha(0)=x_0\\}$ and $\\Omega X=\\{\\alpha\\in PX:\\alpha(1)=x_0\\}$ with the ordinary compact-open subspace topologies, or their specified kified versions. Endpoint evaluation gives the Hurewicz fibration $\\Omega X\\to PX\\to X$, with contractible total space. Its connecting map gives group isomorphisms $\\pi_n(X,x_0)\\cong\\pi_{n-1}(\\Omega X,c_{x_0})$ for $n\\ge2$ and a pointed-set bijection $\\pi_1(X,x_0)\\cong\\pi_0(\\Omega X,c_{x_0})$. The last bijection sends a loop to its reverse-loop component under our terminal-lift convention. No AC is used.",
         "deps": [
           "thm-mapping-path-factorization",
           "def-homotopy-fiber-of-a-map",
           "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration"
         ],
-        "strategy": "Take f:{*}\u2192X in mapping-path factorization. Shrinking paths fixes the constant basepoint so all positive homotopy groups of PX vanish; its components are one. Exactness gives the isomorphisms. Because relative paths end at e0 and the distinguished face is time zero, compare the cubical loop identification explicitly before naming \u2202 the identity.",
+        "strategy": "Take f:{*}→X in mapping-path factorization. Shrinking paths fixes the constant basepoint so all positive homotopy groups of PX vanish; its components are one. Exactness gives the isomorphisms. Because relative paths end at e0 and the distinguished face is time zero, compare the cubical loop identification explicitly before naming ∂ the identity.",
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
@@ -1387,12 +1573,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -1401,16 +1587,23 @@
         "id": "ex-hopf-circle-fibration",
         "kind": "example",
         "title": "Hopf circle fibration",
-        "statement": "The Hopf bundle S1\u2192S3\u2192S2 has \u2202:\u03c02(S2)\u2245\u03c01(S1)\u2245Z and \u03c0_k(S3)\u2245\u03c0_k(S2) for k\u22653; in particular \u03c03(S2)\u2245Z.",
+        "statement": "Assume AC for the numerable-bundle lifting theorem. The Hopf map $h:S^3\\subseteq\\mathbb C^2\\to S^2\\subseteq\\mathbb R^3$,\n$$h(z_1,z_2)=(2\\operatorname{Re}(z_1\\overline z_2),2\\operatorname{Im}(z_1\\overline z_2),|z_1|^2-|z_2|^2),$$\nis a numerable circle bundle and hence a Hurewicz fibration. Its LES gives $\\partial:\\pi_2(S^2)\\cong\\pi_1(S^1)\\cong\\mathbb Z$ and $h_*:\\pi_k(S^3)\\cong\\pi_k(S^2)$ for $k\\ge3$, in particular $\\pi_3(S^2)\\cong\\mathbb Z$. We assert that the connecting map is an isomorphism, without imposing an unchecked orientation sign on chosen generators.",
         "deps": [
           "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
           "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
           "thm-lower-dimensional-sphere-maps-are-based-nullhomotopic",
           "thm-based-sphere-maps-are-classified-by-geometric-degree",
           "cor-real-line-is-universal-cover-of-circle",
-          "def-axiom-of-choice"
+          "def-axiom-of-choice",
+          "lem-covering-homotopies-lift-by-finite-local-strips",
+          "thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle",
+          "thm-sine-and-cosine-subtraction-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "lem-algebra-of-continuous-real-maps-on-a-space"
         ],
-        "strategy": "Identify S2 with CP1 by the two coordinates w=z1/z0 and v=z0/z1 plus stereographic formulas. Sections (1,w)/sqrt(1+|w|\u00b2) and (v,1)/sqrt(1+|v|\u00b2) give S1 charts of S3. An explicit two-function partition from |z0|\u00b2 and |z1|\u00b2 on CP1 supplies numerability (use supported refinements if needed). Lower sphere vanishing gives \u03c01,\u03c02(S3)=0, while lifting sphere maps and homotopies to contractible R gives \u03c0_k(S1)=0 for k\u22652. The sphere degree supplier gives \u03c03(S3)=Z. LES yields the stated maps; fix generator orientation to determine the boundary sign.",
+        "strategy": "Identify S2 with CP1 by the two coordinates w=z1/z0 and v=z0/z1 plus stereographic formulas. Sections (1,w)/sqrt(1+|w|²) and (v,1)/sqrt(1+|v|²) give S1 charts of S3. An explicit two-function partition from |z0|² and |z1|² on CP1 supplies numerability. Before using the quotient-circle homeomorphism, derive its exact fibres locally from the subtraction formulas, the Pythagorean identity, the sine zero set, and the pi-shift formula and integer induction. Lower sphere vanishing gives π1,π2(S3)=0, while lifting sphere maps and homotopies to contractible R gives π_k(S1)=0 for k≥2. The sphere degree supplier gives π3(S3)=Z. LES yields the stated maps without imposing an unchecked generator sign.",
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
@@ -1420,12 +1613,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -1434,16 +1627,20 @@
         "id": "ex-real-projective-space-cover-as-a-discrete-fiber-fibration",
         "kind": "example",
         "title": "Real projective space cover as a discrete fiber fibration",
-        "statement": "For n\u22651 the antipodal quotient S^n\u2192RP^n is a two-sheeted Hurewicz fibration. For n\u22652, \u03c01(RP^n)=Z/2 and the higher homotopy groups agree with S^n; the n=1 covering instead induces multiplication by 2 on circle \u03c01.",
+        "statement": "For $n\\ge1$, define $\\mathbb{RP}^n=S^n/(x\\sim-x)$ with its quotient topology. The antipodal quotient $q:S^n\\to\\mathbb{RP}^n$ is a two-sheeted Hurewicz fibration. For $n\\ge2$,\n$$\\pi_1(\\mathbb{RP}^n)\\cong\\mathbb Z/2,\\qquad q_*:\\pi_k(S^n)\\cong\\pi_k(\\mathbb{RP}^n)\\quad(k\\ge2).$$\nFor $n=1$, the quotient identifies with a circle and $q_*$ on fundamental groups is multiplication by $2$, not a quotient onto $\\mathbb Z/2$. These conclusions are choice-free.",
         "deps": [
           "def-locally-trivial-fiber-bundle",
           "def-hurewicz-and-serre-fibrations",
-          "thm-homotopy-lifting-for-covering-maps",
+          "lem-covering-homotopies-lift-by-finite-local-strips",
           "thm-long-exact-sequence-of-homotopy-groups-of-a-fibration",
           "thm-lower-dimensional-sphere-maps-are-based-nullhomotopic",
-          "thm-based-sphere-maps-are-classified-by-geometric-degree"
+          "thm-based-sphere-maps-are-classified-by-geometric-degree",
+          "thm-quotient-universal-property",
+          "thm-compactness-under-continuous-maps",
+          "cor-heine-borel-in-the-product-topology",
+          "cor-geometric-unit-circle-has-fundamental-group-z"
         ],
-        "strategy": "Use coordinate hemispheres |x_j|>0 in the quotient, with the positive-coordinate normalization as one sheet and its negative as the other. The published covering HLP gives all-space HLP. A discrete fiber has zero positive homotopy groups, and n\u22652 sphere simple connectivity yields the two-element \u03c01 via the pointed tail plus monodromy. For n=1 identify lines with doubled angles; degree classification gives \u00d72.",
+        "strategy": "Use coordinate hemispheres |x_j|>0 in the quotient, with the positive-coordinate normalization as one sheet and its negative as the other. The published covering HLP gives all-space HLP. A discrete fiber has zero positive homotopy groups, and n≥2 sphere simple connectivity yields the two-element π1 via the pointed tail plus monodromy. For n=1 identify lines with doubled angles; degree classification gives ×2.",
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
@@ -1453,12 +1650,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -1467,13 +1664,26 @@
         "id": "ex-mobius-band-as-an-interval-bundle-with-monodromy",
         "kind": "example",
         "title": "Mobius band as an interval bundle with monodromy",
-        "statement": "The quotient [0,1]\u00d7[-1,1]/((0,u)\u223c(1,\u2212u)) is an interval bundle over S1. One circuit transports u to \u2212u. The induced action on interval homology is trivial, so visible geometric reversal must not be advertised as a nontrivial H_* or \u03c0_* action.",
+        "statement": "The quotient $M=([0,1]\\times[-1,1])/((0,u)\\sim(1,-u))$ projects to $S^1=\\mathbb R/\\mathbb Z$ by $[t,u]\\mapsto[t]$ and is a locally trivial interval bundle. A circuit represented by $s\\mapsto[s]$ has the chartwise transport $u\\mapsto-u$. This visible reversal induces the identity on interval homology; at the central basepoint zero all positive homotopy groups are zero. We assume AC only to infer Hurewicz HLP from the supplied numerable bundle, so that its homotopy-class transport has the preceding formal monodromy interpretation.",
         "deps": [
           "def-locally-trivial-fiber-bundle",
           "def-fiber-transport-and-monodromy-action",
-          "thm-quotient-universal-property"
+          "thm-quotient-universal-property",
+          "thm-numerable-fiber-bundles-are-hurewicz-fibrations",
+          "prop-fibers-over-one-path-component-are-fiber-homotopy-equivalent",
+          "thm-homotopy-equivalences-induce-isomorphisms-on-singular-homology",
+          "cor-homotopic-maps-induce-the-same-map-on-singular-homology",
+          "lem-continuity-is-local-and-pastes",
+          "def-axiom-of-choice",
+          "lem-open-quotient-arcs-in-real-line-mod-integers",
+          "thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle",
+          "thm-sine-and-cosine-subtraction-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "lem-algebra-of-continuous-real-maps-on-a-space"
         ],
-        "strategy": "Use two proper arcs of S1. On a chart crossing the seam replace u by \u2212u on the endpoint piece; this gives the local inverse charts. Lift the once-around angle by constant interval coordinate before gluing. Its endpoint is \u2212u. The interval contracts linearly, so no nontrivial positive homology or homotopy action follows.",
+        "strategy": "Use two proper arcs of S1. On a chart crossing the seam replace u by −u on the endpoint piece; this gives the local inverse charts. Verify the exact quotient fibres locally from the subtraction formulas, the Pythagorean identity, sine zero set, and pi-shift formula and integer induction before using the geometric-circle coordinate in the numerating partition. Lift the once-around angle by constant interval coordinate before gluing. Its endpoint is −u. The interval contracts linearly, so no nontrivial positive homology or homotopy action follows. Use homotopy invariance to identify the induced homology map of the reversal with the identity.",
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
@@ -1483,12 +1693,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -1497,12 +1707,20 @@
         "id": "cex-a-surjective-map-need-not-be-a-fibration",
         "kind": "counterexample",
         "title": "A surjective map need not be a fibration",
-        "statement": "The quotient q:[0,1]\u2192S1, q(t)=exp(2\u03c0it), is a continuous surjection with no path lift of \u03b2(s)=exp(\u2212\u03c0is) starting at 0.",
+        "statement": "Every continuous surjection is a Serre fibration (and hence, more strongly, every continuous surjection is a Hurewicz fibration).\n\n$q:[0,1]\\to S^1$, $q(t)=e^{2\\pi it}$, and the path $\\beta(s)=e^{-\\pi is}$ beginning at $1=q(0)$.",
         "deps": [
           "def-hurewicz-and-serre-fibrations",
-          "def-continuous-map-top"
+          "def-continuous-map-top",
+          "thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle",
+          "thm-sine-and-cosine-subtraction-formulas",
+          "cor-trigonometric-parity-and-pythagorean-identity",
+          "thm-sine-cosine-zero-sets-and-fundamental-period",
+          "thm-quarter-turn-values-and-shift-formulas",
+          "cor-heine-borel-in-the-product-topology",
+          "thm-closed-subspace-of-a-compact-space-is-compact",
+          "thm-compact-subset-of-a-hausdorff-space-is-closed"
         ],
-        "strategy": "If a continuous lift \u2113 starts at0, then for 0<s\u22641 it must equal 1\u2212s/2: this is the unique point of [0,1] with that image. Its right limit is1, contradicting continuity at0. Thus even path lifting fails. The finite interval-to-circle quotient verifies surjectivity directly.",
+        "strategy": "First derive the exponential map's exact fibres locally from the subtraction formulas, the Pythagorean identity, sine zero set, and the pi-shift formula and integer induction. If a continuous lift ℓ starts at0, then for 0<s≤1 it must equal 1−s/2: this is the unique point of [0,1] with that image. Its right limit is1, contradicting continuity at0. Thus even path lifting fails. The finite interval-to-circle quotient verifies surjectivity directly. Apply the locally proved fibre equality to the full real-line exponential before restricting its domain.",
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
@@ -1512,12 +1730,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }
@@ -1526,14 +1744,14 @@
         "id": "cex-a-fibration-need-not-be-a-locally-trivial-bundle",
         "kind": "counterexample",
         "title": "A fibration need not be a locally trivial bundle",
-        "statement": "The projection p:E\u2192[0,1], p(x,y)=x from the closed triangle E={(x,y):0\u2264y\u2264x\u22641} is a Hurewicz fibration but not a locally trivial bundle. The fiber over zero is a singleton, while positive fibers are nontrivial intervals.",
+        "statement": "Every Hurewicz fibration is a locally trivial fiber bundle.\n\nThe closed triangle $E=\\{(x,y)\\in\\mathbb R^2:0\\le y\\le x\\le1\\}$ and projection $p:E\\to[0,1]$, $p(x,y)=x$.",
         "deps": [
           "def-hurewicz-and-serre-fibrations",
           "def-locally-trivial-fiber-bundle",
           "thm-product-universal-property",
           "lem-algebra-of-continuous-real-maps-on-a-space"
         ],
-        "strategy": "For arbitrary initial map (a(z),b(z)) into E and base homotopy h(z,t) with h(z,0)=a(z), set the lift to (h(z,t),min(b(z),h(z,t))). Its coordinates are continuous, 0\u2264min(b,h)\u2264h, and at time zero min(b,a)=b. This gives the full all-spaces HLP without any choice or path-space theorem. A bundle chart about0 would identify its singleton fiber with the fiber over a positive point of that neighbourhood, impossible. This supplies a complete direct verification of Hatcher\u2019s triangle-projection example at printed p405; the original design mapping-path suggestion remains history, not a claim of a verified example.",
+        "strategy": "For arbitrary initial map (a(z),b(z)) into E and base homotopy h(z,t) with h(z,0)=a(z), set the lift to (h(z,t),min(b(z),h(z,t))). Its coordinates are continuous, 0≤min(b,h)≤h, and at time zero min(b,a)=b. This gives the full all-spaces HLP without any choice or path-space theorem. A bundle chart about0 would identify its singleton fiber with the fiber over a positive point of that neighbourhood, impossible. This supplies a complete direct verification of Hatcher’s triangle-projection example at printed p405; the original design mapping-path suggestion remains history, not a claim of a verified example.",
         "provenance": {
           "statement": "ai-altered",
           "proof": "ai-altered"
@@ -1543,12 +1761,12 @@
             {
               "title": "May, A Concise Course in Algebraic Topology",
               "url": "https://www.math.uchicago.edu/~may/CONCISE/ConciseRevised.pdf",
-              "locator": "Chapter7 pp49\u201356; Chapter9 \u00a73 p66 and \u00a75 pp68\u201369"
+              "locator": "Chapter7 pp49–56; Chapter9 §3 p66 and §5 pp68–69"
             },
             {
               "title": "Hatcher, Algebraic Topology",
               "url": "https://pi.math.cornell.edu/~hatcher/AT/AT.pdf",
-              "locator": "\u00a74.2 Theorem4.41 pp375\u2013377; Hopf example pp377\u2013378; \u00a74.3 pp405\u2013410"
+              "locator": "§4.2 Theorem4.41 pp375–377; Hopf example pp377–378; §4.3 pp405–410"
             }
           ]
         }

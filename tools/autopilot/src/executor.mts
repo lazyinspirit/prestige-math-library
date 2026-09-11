@@ -1587,6 +1587,12 @@ export class Executor {
     const ids = new Set<string>();
     const typed = /\b((?:def|thm|lem|prop|cor|ex|cex|fs|rem)-[a-z0-9]+(?:-[a-z0-9]+)*)\b/g;
     for (const line of text.split(/\r?\n/)) {
+      // Precheck emits FAIL/REPAIR headers, followed by indented proof text.
+      // Only the header owns a diagnostic; PASS rows and cited suppliers do not.
+      const precheck = /(?:^|-)precheck$/.test(failure.id ?? '')
+        ? /^(?:FAIL|REPAIR|REJECT) (?:.*\/)?items\/([a-z0-9]+(?:-[a-z0-9]+)+)\.md:/.exec(line)
+        : null;
+      if (precheck) { ids.add(precheck[1]); continue; }
       if (/^\s{2}([a-z0-9]+(?:-[a-z0-9]+)+)\s+\([^)]*\.pages\.json\):/i.test(line)) {
         ids.add(line.match(/^\s{2}([a-z0-9]+(?:-[a-z0-9]+)+)/i)![1]);
         continue;

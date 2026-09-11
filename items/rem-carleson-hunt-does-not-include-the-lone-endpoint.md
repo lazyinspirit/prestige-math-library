@@ -3,6 +3,11 @@ id: "rem-carleson-hunt-does-not-include-the-lone-endpoint"
 kind: "remark"
 title: "Carleson hunt does not include the lone endpoint"
 deps: ["thm-kolmogorov-lone-fourier-series-diverges-almost-everywhere", "thm-carleson-hunt-maximal-inequality-on-the-torus", "def-axiom-of-choice"]
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: 'Lacey, Carleson’s Theorem: Proof, Complements, Variations'

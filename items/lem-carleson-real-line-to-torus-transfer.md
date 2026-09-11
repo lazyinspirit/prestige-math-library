@@ -3,6 +3,11 @@ id: "lem-carleson-real-line-to-torus-transfer"
 kind: "lemma"
 title: "Carleson real line to torus transfer"
 deps: ["def-carleson-operator-and-measurable-linearisation", "def-carleson-tiles-wave-packets-and-tile-order", "def-period-one-fourier-coefficients-partial-sums-and-convolution", "thm-fourier-inversion-on-schwartz-space", "thm-fejer-convergence-in-lp", "def-cesaro-and-abel-means-of-a-fourier-series", "thm-complex-holder-minkowski-and-the-quotient-norm", "thm-tonelli-theorem-for-sigma-finite-product-spaces", "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces", "thm-monotone-convergence-for-the-integral", "def-axiom-of-choice"]
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: Fremlin, Measure Theory, volume 2

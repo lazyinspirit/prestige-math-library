@@ -564,3 +564,11 @@ Canonical item inventory empty; proposed additions above require owner allocatio
   ]
 }
 ```
+
+## Step 3b group h authoring handoff
+
+Current item-by-item arguments, exact conventions, local checks and open obligations are in `research/phase-2-next-20-step3b-h.md`. All original item/page IDs are materialized. 35 of 38 items are fully authored; the three Laver/preparation/PMEA targets retain explicit unresolved proof obligations and escalation decisions. Source retrieval histories above are preserved, not reset. Coverage `step3b_authoring` records current mathematical completion separately from inherited reading limits. The canonical plan and shared prose await serial Step 4.
+
+## Terminal review of the least-inaccessible example
+
+`ex-lc-first-inaccessible-is-not-mahlo`: the page tests stationarity of uncountable regular cardinals, so omega in the strong-limit club is harmless. The final local repair restores the accurate AC axiom fact and its direct dependency, identifying inherited uses through `lem-lc-inaccessible-size-and-rank-bounds` and `thm-lc-weakly-compact-stationary-reflection-and-mahlo`. The current contract and owning manifest retain this exact conditional ZFC claim. Under `briefs/tasks/frontier-dependency-ledger.md`, this consumer has no cross-batch edge: both theorem suppliers belong to batch 14, and `def-axiom-of-choice` is published outside this run. The existing batch-14 cross-batch input therefore needs no added/removed row; adding an AC row would be an orphan review under the collector. The derived ledger was refreshed successfully. Complete independent basis, validation, source status and terminal-record obligation are in `research/phase-2-next-20-step7-fa-h-1-ex-lc-first-inaccessible-is-not-mahlo.md`. No other batch consumer is reviewed or repaired by this note.

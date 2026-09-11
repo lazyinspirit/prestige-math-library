@@ -1,13 +1,13 @@
 # Defect ledger — generated view
 
-> GENERATED from `research/defect-ledger.jsonl` @ ff2a5ca1d837 by `tools/defect-ledger.mjs render` — do not edit.
+> GENERATED from `research/defect-ledger.jsonl` @ d3a2df3a20c5 by `tools/defect-ledger.mjs render` — do not edit.
 
 ## What the numbers mean, first
 
 | | |
 |---|---|
-| defects caught before publication | 7927 |
-| now mechanically prevented | 269 |
+| defects caught before publication | 8063 |
+| now mechanically prevented | 274 |
 | escaped to publication | 1 |
 | still open | 27 |
 
@@ -611,6 +611,14 @@
 | ill-typed-claim | 1 |
 | citation-inaccurate | 1 |
 
+## phase-2-fourier-support-2 — 4 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross |
+|---|---|---|
+| stage-unowned | 1 | 1 |
+| citation-inaccurate | 1 |  |
+| other | 1 |  |
+
 ## phase-2-hg-prerequisite — 7 row(s)
 
 | subclass | 6a-read | 6b-adjudicate | 6c-cross |
@@ -638,6 +646,30 @@
 | citation-inaccurate |  | 1 |  |
 | missing-choice-scope |  |  | 1 |
 | false-boundary-disposition |  | 1 |  |
+
+## phase-2-next-20 — 132 row(s)
+
+| subclass | 5a-adjudicate | 5b-cross | 6-judge | 7-adjudicate | 8-receipt |
+|---|---|---|---|---|---|
+| citation-inflated | 4 |  | 33 | 2 | 21 |
+| missing-hypothesis |  |  | 4 | 6 |  |
+| ill-typed-construction |  |  | 2 | 6 |  |
+| other | 7 |  |  |  |  |
+| invalid-inference | 5 |  | 1 |  |  |
+| citation-missing |  |  | 5 | 1 |  |
+| contract-mismatch |  | 5 |  |  |  |
+| undefined-notation |  |  | 4 |  | 1 |
+| false-or-overstrong-title |  |  | 3 | 1 | 1 |
+| citation-truncated |  |  |  |  | 5 |
+| ill-typed-claim |  |  | 2 | 2 |  |
+| false-claim |  |  | 1 | 2 |  |
+| unsupported-inference |  |  |  | 2 |  |
+| arithmetic-error | 1 |  |  |  |  |
+| citation-inaccurate |  |  | 1 |  |  |
+| missing-case |  |  | 1 |  |  |
+| false-computation |  |  | 1 |  |  |
+| citation-misattributed |  |  | 1 |  |  |
+| invalid-refutation |  |  |  | 1 |  |
 
 ## phase-2-nine-step-25 — 105 row(s)
 

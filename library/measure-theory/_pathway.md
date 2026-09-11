@@ -29,16 +29,19 @@ parts:
       - measure-preserving-systems-and-mixing-criteria
       - complex-riesz-thorin-endpoint-interpolation
       - absolute-continuity-and-the-sharp-fundamental-theorem-of-calculus
+      - weak-mixing-and-the-chacon-transformation
 ---
 
 ## sigma-algebras-and-borel-sets
 
-A sigma-algebra, outer measure, and Carathéodory lead to Lebesgue measure, measurable functions,
-integration, convergence, products, signed measures, Radon--Nikodym decomposition, and the
-$L^p$ calculus. Riesz--Markov, Vitali covering, maximal estimates, differentiation, and Hausdorff
-measure supply the stated representation, FTC, and dimension results. Complex $L^p$ conventions
-keep measurable components, almost-everywhere equality, finite-$p$ density, and the applicable
-sigma-finite or semifinite hypotheses explicit. Riesz--Thorin interpolates complex endpoint
-bounds from finite simple cores, with countable choice only for full-space extensions. Measure
-preservation yields Koopman isometries, invariant sigma-algebras, ergodicity, and strong/weak
-mixing criteria through generating families and complex $L^2$ correlations.
+A sigma-algebra, outer measure and Carathéodory give Lebesgue measure, measurable functions,
+integration, convergence, products, signed measures, Radon--Nikodym and the $L^p$ calculus;
+Riesz--Markov, Vitali covering, maximal estimates, differentiation and Hausdorff measure support
+the stated representation, FTC and dimension results; complex $L^p$ conventions keep components,
+almost-everywhere equality and the applicable sigma-finite or semifinite hypotheses explicit;
+Riesz--Thorin interpolates complex endpoint bounds from finite simple cores, with countable
+choice for full-space extensions. Measure preservation yields Koopman isometries, invariant
+sigma-algebras, ergodicity and strong mixing criteria through generating families, while weak
+mixing is characterized by vanishing Cesàro correlations, product ergodicity and absence of
+nonconstant eigenfunctions, proved via projections and compact intertwiners; the three-cut,
+one-spacer Chacon transformation is ergodic and weakly mixing but not strongly mixing.

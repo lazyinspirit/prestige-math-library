@@ -20,7 +20,7 @@ import { join, basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { JUDGE_LINEUPS, DEFAULT_LINEUP, KNOWN_JUDGES } from './models.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
-import { parseTerminalResolutions, terminalResolutionIsCurrent } from './step7-terminal-resolution.mjs';
+import { parseTerminalResolutions, terminalResolutionStatus } from './step7-terminal-resolution.mjs';
 import { buildCurrentContextHashes } from './context-hash-pool.mjs';
 
 const REPO = join(fileURLToPath(new URL('.', import.meta.url)), '..');
@@ -477,31 +477,12 @@ const openFatal = [];         // Alpha confirmed fatal against the text on disk
 const openFatalRows = [];     // exact current confirmed-fatal tuples for repair routing
 const judgeCoverage = [];
 const terminalResolved = [];
+const terminalSuperseded = [];
 for (const id of judgePath ? judgeScope : []) {
   const contexts = verdicts.get(id) ?? new Map();
   const now = verifyCurrent ? currentHashes.get(id) ?? null : null;
   const current = now?.context ?? null;
   const currentItem = now?.item ?? null;
-  const terminal = terminalParsed.latest.get(id);
-  if (terminal) {
-    if (!verifyCurrent) {
-      error('terminal-resolution-unverified', `${id}: terminal resolution requires --verify-current-context`, id);
-    } else if (!terminalResolutionIsCurrent(terminal, {
-      context_sha256: current,
-      item_sha256: currentItem,
-    })) {
-      error('terminal-resolution-stale', `${id}: terminal resolution does not match the current item and pair context`, id);
-    } else {
-      terminalResolved.push({
-        id,
-        context_sha256: terminal.context_sha256,
-        item_sha256: terminal.item_sha256,
-        resolved_by: terminal.resolved_by,
-        disposition: terminal.disposition,
-      });
-      continue;
-    }
-  }
   // The per-lane currency rule is tools/judge-currency.mjs, shared with
   // tools/judge-sweep.mjs — the tool that decides which items to SPEND a judge
   // call on. The two implemented it separately and disagreed: the sweep read
@@ -524,6 +505,32 @@ for (const id of judgePath ? judgeScope : []) {
   };
   const eligible = [...contexts.entries()].filter((entry) =>
     coversCurrent(entry) && JUDGES.every((model) => entry[1].has(model)));
+  const terminal = terminalParsed.latest.get(id);
+  if (terminal) {
+    if (!verifyCurrent) {
+      error('terminal-resolution-unverified', `${id}: terminal resolution requires --verify-current-context`, id);
+    } else {
+      const status = terminalResolutionStatus(terminal, {
+        context_sha256: current,
+        item_sha256: currentItem,
+      }, eligible.length > 0);
+      if (status === 'current') {
+        terminalResolved.push({
+          id,
+          context_sha256: terminal.context_sha256,
+          item_sha256: terminal.item_sha256,
+          resolved_by: terminal.resolved_by,
+          disposition: terminal.disposition,
+        });
+        continue;
+      }
+      if (status === 'stale') {
+        error('terminal-resolution-stale', `${id}: terminal resolution does not match the current item and pair context`, id);
+      } else {
+        terminalSuperseded.push({ id, context_sha256: current, item_sha256: currentItem });
+      }
+    }
+  }
   if (!eligible.length) {
     needsRejudge.push(id);
     (allowPendingRejudge ? warn : error)('judge-coverage-missing', `${id}: no complete verdict set from ${JUDGES.join('/')} ${verifyCurrent ? 'for the current frozen context, and none cast against the item\'s current text' : ''}`.trim(), id);
@@ -579,6 +586,7 @@ if (outPath) {
     // Legacy field retained while historical Step-9 receipts remain readable.
     pairs_complete: judgeCoverage.length,
     terminal_resolved: terminalResolved.sort((a, b) => a.id.localeCompare(b.id)),
+    terminal_superseded: terminalSuperseded.sort((a, b) => a.id.localeCompare(b.id)),
     needs_rejudge: needsRejudge.sort(),
     unadjudicated: unadjudicated.sort(),
     unadjudicated_rows: unadjudicatedRows.sort((a, b) =>

@@ -6,6 +6,11 @@ deps: ["thm-morse-stability-with-explicit-parameter-dependence", "lem-a-quasi-is
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: "Druţu–Kapovich Corollary 9.39"

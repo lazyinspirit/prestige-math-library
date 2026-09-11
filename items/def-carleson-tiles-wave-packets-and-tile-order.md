@@ -3,6 +3,11 @@ id: "def-carleson-tiles-wave-packets-and-tile-order"
 kind: "definition"
 title: "Carleson tiles wave packets and tile order"
 deps: ["def-schwartz-space-and-its-seminorms", "thm-fourier-inversion-on-schwartz-space", "thm-exponential-beats-every-polynomial", "thm-derivative-of-exponential", "thm-chain-rule", "thm-algebra-of-derivatives", "cor-exponential-reciprocal-and-positivity", "thm-fourier-transform-maps-schwartz-space-continuously-to-itself", "thm-fourier-translation-modulation-dilation-and-reflection-laws", "lem-schwartz-functions-and-all-derivatives-are-integrable", "def-axiom-of-choice", "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz"]
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: 'Lacey, Carleson’s Theorem: Proof, Complements, Variations'

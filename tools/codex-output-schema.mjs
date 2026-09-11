@@ -38,3 +38,38 @@ export function validateCodexOutputSchema(schema) {
   walk(schema, '$');
   return problems;
 }
+
+// Providers may wrap an otherwise exact response in one Markdown JSON block.
+// Never guess between multiple candidates or repair the contents of the JSON.
+export function parseCodexOutput(text) {
+  try { return JSON.parse(text); } catch (original) {
+    const blocks = [...text.matchAll(/^```(?:json)?[ \t]*\r?\n([\s\S]*?)^```[ \t]*$/gm)];
+    if (blocks.length !== 1) throw original;
+    return JSON.parse(blocks[0][1]);
+  }
+}
+
+export function validateCodexOutput(value, schema, path = '$') {
+  const errors = [];
+  if (schema === true) return errors;
+  if (schema === false) return [`${path}: forbidden value`];
+  const types = Array.isArray(schema.type) ? schema.type : [schema.type];
+  const matches = (type) => type === undefined || (type === 'null' ? value === null
+    : type === 'array' ? Array.isArray(value)
+      : type === 'object' ? value !== null && typeof value === 'object' && !Array.isArray(value)
+        : type === 'integer' ? Number.isInteger(value) : typeof value === type);
+  if (!types.some(matches)) return [`${path}: expected ${types.join('|')}`];
+  if (schema.enum && !schema.enum.some((entry) => JSON.stringify(entry) === JSON.stringify(value))) errors.push(`${path}: not an allowed enum value`);
+  if ('const' in schema && JSON.stringify(schema.const) !== JSON.stringify(value)) errors.push(`${path}: wrong constant`);
+  if (Array.isArray(value) && schema.items) value.forEach((entry, index) => errors.push(...validateCodexOutput(entry, schema.items, `${path}[${index}]`)));
+  if (value !== null && typeof value === 'object' && !Array.isArray(value)) {
+    for (const key of schema.required ?? []) if (!Object.hasOwn(value, key)) errors.push(`${path}.${key}: required field missing`);
+    for (const [key, entry] of Object.entries(value)) {
+      const child = schema.properties?.[key];
+      if (child !== undefined) errors.push(...validateCodexOutput(entry, child, `${path}.${key}`));
+      else if (schema.additionalProperties === false) errors.push(`${path}.${key}: unexpected field`);
+      else if (schema.additionalProperties && typeof schema.additionalProperties === 'object') errors.push(...validateCodexOutput(entry, schema.additionalProperties, `${path}.${key}`));
+    }
+  }
+  return errors;
+}

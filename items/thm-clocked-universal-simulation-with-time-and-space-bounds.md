@@ -3,6 +3,11 @@ id: thm-clocked-universal-simulation-with-time-and-space-bounds
 kind: theorem
 title: Clocked universal simulation with time and space bounds
 deps: ["def-machine-time-and-space-constructibility", "def-effective-encoding-of-turing-machines", "lem-machine-encoding-is-injective-and-decodable", "def-multitape-and-nondeterministic-machines", "def-turing-machine-initial-and-halting-configuration-interface", "def-one-step-configuration-relation"]
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: Arora–Barak, Appendix 1.A, printed35–38, time-buffer route; integral
@@ -33,7 +38,7 @@ There are two distinct fixed finite-alphabet multitape interpreters $U_{\rm time
 
 [F4] A deterministic $k$-tape step reads $k$ scanned symbols, selects one transition, writes $k$ symbols and prescribes $k$ left/right moves ([[def-multitape-and-nondeterministic-machines]]).
 
-[F5] Input occupies cells starting at zero, all heads start at zero, a left move at zero clamps there, and the initial state is nonhalting ([[def-turing-machine-initial-and-halting-configuration-interface]]).
+[F5] In the published one-tape interface, input occupies cells starting at zero, the head starts at zero, a left move at zero clamps there, and the initial state is nonhalting ([[def-turing-machine-initial-and-halting-configuration-interface]]). Step 1.1 explicitly extends this convention tape by tape to the multitape syntax used here.
 
 [F6] A step updates only the scanned cells, changes the state, and moves the heads as prescribed; no step starts from a halting state ([[def-one-step-configuration-relation]], tape by tape using F4).
 
@@ -41,7 +46,7 @@ There are two distinct fixed finite-alphabet multitape interpreters $U_{\rm time
 
 **Proof technique:** explicit construction and amortized counting.
 
-1.1 Fix the input syntax first. A model tag distinguishes the published one-tape code from its following multitape extension. For the latter, encode the tape count $k\ge1$, states $0,\ldots,m-1$ with start/accept/reject $0,1,2$, alphabet $0,\ldots,r-1$ with blank0, and input alphabet $1,\ldots,s$, where $m\ge3$ and $0\le s<r$. List the transition entries in lexicographic order of $(q,a_1,\ldots,a_k)$ for nonhalting $q$. Each entry records one next state, $k$ written symbols and $k$ directions. Apply the tuple blocks from F2 to these canonical numerals. A tagged old code is the case $k=1$ with its original interpretation. The tag changes its length by a constant. Encode the word $x$ by its tuple of canonical symbol numerals, explicitly allowing arity zero with code $0$ for the empty word. The outer tuple contains the program, word and canonical $\operatorname{bin}(b)$; its self-delimiting syntax is included in the input-length accounting. These explicit extensions do not reinterpret any published one-tape code. [F2, F4, F5, given]
+1.1 Fix the input syntax first. A model tag distinguishes the published one-tape code from its following multitape extension. For the latter, encode the tape count $k\ge1$, states $0,\ldots,m-1$ with start/accept/reject $0,1,2$, alphabet $0,\ldots,r-1$ with blank0, and input alphabet $1,\ldots,s$, where $m\ge3$ and $0\le s<r$. List the transition entries in lexicographic order of $(q,a_1,\ldots,a_k)$ for nonhalting $q$. Each entry records one next state, $k$ written symbols and $k$ directions. Apply the tuple blocks from F2 to these canonical numerals. A tagged old code is the case $k=1$ with its original interpretation. The tag changes its length by a constant. For either tagged form, define the initial multitape configuration to have state0 and every head at cell0, with $x$ in cells $0,1,\ldots$ of the first tape and every other cell of every tape blank; each tape uses F5's clamped left boundary. Encode the word $x$ by its tuple of canonical symbol numerals, explicitly allowing arity zero with code $0$ for the empty word. The outer tuple contains the program, word and canonical $\operatorname{bin}(b)$; its self-delimiting syntax is included in the input-length accounting. These explicit extensions do not reinterpret any published one-tape code. [F2, F4, F5, given]
 
 2.1 A finite parser reads unary lengths and the indicated blocks, verifies canonical numerals, the model tag, symbol/state ranges and the table's actual entry count, and rejects extra or missing bits. To check the expected count $(m-2)r^k$ against an actual count $a$, use integer arithmetic saturated at $a+1$: when $r\ge2$ stop exponentiation as soon as it exceeds $a$, and when $r=1$ the power is one. Thus an enormous malformed tape-count numeral cannot force an enormous allocation. All malformed inputs halt rejecting by finite scans and finite arithmetic loops. On valid inputs for a fixed $M$, the whole program, $k$, alphabet widths and table length are constants. Scan the word blocks once, consuming their unary length headers on spare tapes and checking each symbol against the fixed alphabet; copy the decoded word to a sequential archive. Validate/copy the binary clock by one scan. These routines cost $O_M(n+\log(b+2))$ time and space: every input bit is traversed a bounded number of times, except scans of fixed $M$-data. The theorem claims no uniform time bound on malformed descriptions. [step 1.1, F2, F3]
 

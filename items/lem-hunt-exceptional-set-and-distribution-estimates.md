@@ -3,6 +3,11 @@ id: "lem-hunt-exceptional-set-and-distribution-estimates"
 kind: "lemma"
 title: "Hunt exceptional set and distribution estimates"
 deps: ["def-carleson-tiles-wave-packets-and-tile-order", "def-density-size-and-tree-count-for-carleson-tiles", "lem-carleson-signed-tree-weak-one-one-estimate", "lem-carleson-density-selection", "lem-carleson-size-selection", "lem-carleson-single-tree-estimate", "thm-hardy-littlewood-maximal-inequality-for-balls", "thm-layer-cake-formula-for-l-p-powers", "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz", "thm-monotone-convergence-for-the-integral", "def-axiom-of-choice"]
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: 'Lacey, Carleson’s Theorem: Proof, Complements, Variations'

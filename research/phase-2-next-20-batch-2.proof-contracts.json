@@ -1,0 +1,1776 @@
+{
+  "version": 1,
+  "scope": [
+    "def-topological-vector-space-for-local-convexity",
+    "lem-topological-vector-space-translation-scaling-and-absorption",
+    "def-locally-convex-topological-vector-space",
+    "lem-locally-convex-closures-and-finite-compact-convex-hulls",
+    "lem-balanced-convex-zero-neighborhood-refinement",
+    "def-minkowski-gauge-of-an-open-convex-zero-neighborhood",
+    "lem-continuous-gauge-of-an-open-convex-zero-neighborhood",
+    "thm-locally-convex-open-convex-separation",
+    "thm-locally-convex-continuous-dual-separates-points",
+    "thm-locally-convex-strict-separation",
+    "ex-product-scalar-topology-is-locally-convex",
+    "ex-locally-convex-separation-by-a-coordinate",
+    "cex-convex-maximum-set-need-not-be-a-face"
+  ],
+  "contracts": {
+    "def-topological-vector-space-for-local-convexity": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A vector space contains its specified zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition permits the zero vector space."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition allows the singleton zero space with its unique topology."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition treats Hausdorffness separately."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "No interval or exponent parameter occurs in the TVS definition."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition supplies finite radius choice in ZF."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a joint-continuity definition, not an equivalence theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a joint-continuity definition, not an equivalence theorem."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step 5A Alpha group b (phase-2-next-20)",
+        "notes": "Checked the definition clause by clause. K is R or C with the published metric/usual topology; addition is required jointly continuous on X x X and scalar multiplication on K x X, both with product topologies; a zero-neighborhood need not be open and Hausdorffness is a separate hypothesis. The finite-intersection clause selects radii from finitely many nonempty admissible sets by lem-finite-choice, which is a theorem of ZF; the zero space with its unique topology is admissible. No norm, metric on X, local convexity, HB or choice is imported. The item's declared Teschl and Buehler-Salamon references anchor the convention; the local clauses are complete. No unresolved risk."
+      }
+    },
+    "lem-topological-vector-space-translation-scaling-and-absorption": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-topological-vector-space-for-local-convexity",
+          "source_section": "Definition",
+          "quote": "Fix $\\mathbb K=\\mathbb R$ or $\\mathbb C$, with metric $d(s,t)=|s-t|$ from [[lem-real-line-is-a-metric-space]] or [[def-complex-metric-convergence-and-continuity]] and topology [[def-metric-topology]]. The topology axioms follow from [[thm-metric-open-set-algebra]]. Its finite-intersection argument selects radii from finitely many nonempty admissible-radius sets by [[lem-finite-choice]], then takes their positive minimum. No AC is assumed.\n\nA **topological vector space** (TVS) is a $\\mathbb K$-vector space $X$ ([[def-vector-space]]) with a topology ([[def-topological-space]]) for which addition $(x,y)\\mapsto x+y$ on $X\\times X$ and scalar multiplication $(a,x)\\mapsto ax$ on $\\mathbb K\\times X$ are jointly continuous ([[def-continuous-map-top]]). Both domains have [[def-product-topology]].\n\nA **zero-neighborhood** contains an open set containing $0$ ([[def-neighbourhood-top]]); it need not be open. A **Hausdorff TVS** additionally has disjoint open neighborhoods for distinct points ([[def-hausdorff-space]]). Hausdorffness is a separate hypothesis.\n\nThe zero vector space with its unique topology is allowed. A vector space is nonempty because it contains its specified zero. No norm, metric on $X$, local convexity or choice assumption is included.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-product-universal-property",
+          "source_section": "Statement",
+          "quote": "Let $(X_i, \\mathcal{T}_i)_{i \\in I}$ be topological spaces and let\n$P := \\prod_{i \\in I} X_i$ carry the product topology, with projections $\\pi_j$\n([[def-product-topology]]). Then:\n\n1. **The projections are continuous**, and the product topology is the coarsest\n   topology on $P$ making all of them continuous.\n2. **Characteristic property.** For every space $Z$ and every function\n   $h : Z \\to P$,\n   $$h \\text{ is continuous } \\iff \\pi_i \\circ h \\text{ is continuous for every } i \\in I .$$\n   The functions $\\pi_i \\circ h$ are the **components** of $h$, and every family\n   of functions $h_i : Z \\to X_i$ arises from exactly one $h$, namely\n   $h(z)(i) := h_i(z)$.\n3. **The projections are open maps** ([[def-homeomorphism-and-open-maps]]), for\n   the product topology and for the box topology alike. They need not be closed;\n   that failure is recorded on this page as a false statement.\n4. **Surjectivity.** If every $X_i$ is nonempty then every $\\pi_j$ is surjective.\n   For $I$ a natural number this is a theorem of ZF ([[lem-finite-choice]]); for\n   an arbitrary $I$ it is the Axiom of Choice ([[def-axiom-of-choice]]), and this\n   is the only place in the item where a choice principle is used.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-continuity-is-local-and-pastes",
+          "source_section": "Statement",
+          "quote": "Let $X$, $Y$ and $Z$ be topological spaces, with subspaces carrying the subspace\ntopology ([[def-subspace-topology-top]]). Then:\n\n1. **Composites.** If $f : X \\to Y$ and $g : Y \\to Z$ are continuous\n   ([[def-continuous-map-top]]) then $g \\circ f : X \\to Z$ is continuous.\n2. **Open cover.** Let $f : X \\to Y$ be a function and let\n   $\\{\\, U_i : i \\in I \\,\\}$ be a family of open subsets of $X$ with\n   $\\bigcup_{i \\in I} U_i = X$. If $f|_{U_i} : U_i \\to Y$ is continuous for every\n   $i \\in I$, then $f$ is continuous.\n3. **Finite closed cover.** Let $f : X \\to Y$ be a function, let $n \\ge 1$ and\n   let $F_1, \\dots, F_n$ be closed subsets of $X$ with\n   $F_1 \\cup \\dots \\cup F_n = X$. If $f|_{F_k} : F_k \\to Y$ is continuous for\n   every $k$, then $f$ is continuous.\n\nThe converses of claims 2 and 3 hold with no hypothesis on the cover at all:\nevery restriction of a continuous map to a subspace is continuous\n([[def-subspace-topology-top]]). The finiteness in claim 3 is not removable; see\nthe remarks.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-vector-space-elementary-consequences",
+          "source_section": "Statement",
+          "quote": "Let $V$ be a vector space over a field $F$ ([[def-vector-space]]). For all\n$\\lambda \\in F$ and $v \\in V$:\n\n1. $0_F v = 0_V$;\n2. $\\lambda 0_V = 0_V$;\n3. $(-\\lambda)v = -(\\lambda v)$, and also $\\lambda(-v) = -(\\lambda v)$;\n4. $(-1_F)v = -v$;\n5. if $\\lambda v = 0_V$ then $\\lambda = 0_F$ or $v = 0_V$.\n\nHere $0_F$ and $1_F$ are the additive and multiplicative identities of $F$, $0_V$\nis the zero vector, $-\\lambda$ is the additive inverse of $\\lambda$ in $F$, and\n$-v$ is the additive inverse of $v$ in the abelian group $(V,+,0_V)$.",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-of-abs-value",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$, with\n$|x|$ the absolute value ([[def-abs-value]]). Then\n\n$$|x| \\ge 0; \\quad |x| = 0 \\iff x = 0; \\quad -|x| \\le x \\le |x|; \\quad |-x| = |x|; \\quad |xy| = |x|\\,|y|;$$\n\nand, for every $c > 0$, one has $|x| < c \\iff -c < x < c$.",
+          "uses": [
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-of-triangle-inequality",
+          "source_section": "Statement",
+          "quote": "Let $F$ be an ordered field ([[def-ordered-field]]) and let $x, y \\in F$. Then $$|x + y| \\le |x| + |y|.$$",
+          "uses": [
+            "3.2",
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Constant maps are continuous because the preimage of an open set is empty or the whole domain; identity maps are continuous by their preimages. Thus $x\\mapsto(a,x)$ and $x\\mapsto(x,a)$ into the appropriate products are continuous. Composing with the structure maps proves continuity of translations $x\\mapsto x+a$, fixed dilations $x\\mapsto bx$, and the orbit maps $s\\mapsto sx$ for fixed $x$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Translation by $-a$ inverts translation by $a$; when $b\\ne0$, dilation by $b^{-1}$ inverts dilation by $b$. The vector axioms and zero/negative identities verify these inverse formulas. The inverses are continuous by step 1.1, so these maps are homeomorphisms. Consequently translates of open sets and nonzero dilates of open sets are open.",
+          "inputs": [
+            "step 1.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "Fix an open $U_0$ with $0\\in U_0\\subseteq U$. Continuity of $s\\mapsto sx$ at $0$, where $0x=0$, gives $\\delta>0$ such that $|s|<\\delta$ implies $sx\\in U_0$. For every positive real $t>1/\\delta$, $(1/t)x\\in U$ and hence $x\\in tU$. For $x=0$ every positive $t$ works.",
+          "inputs": [
+            "step 1.1",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Joint addition continuity at $(0,0)$ gives open zero-neighborhoods $U_1,U_2$ with $U_1+U_2\\subseteq U_0$. Put $W=U_1\\cap U_2\\cap(-U_1)\\cap(-U_2)$. This is open, contains zero, satisfies $-W=W$, and has $W+W\\subseteq U_1+U_2\\subseteq U$.",
+          "inputs": [
+            "F1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "step": "3.2",
+          "claim": "For $\\varepsilon>0$ put $c=\\varepsilon/(M+1)>0$. The set $cN$ is a zero-neighborhood by step 2.1, and $h=cn$ in it satisfies $|f(h)|=c|f(n)|\\le cM<\\varepsilon$. Thus $f$ is continuous at zero. At $x$, the neighborhood $x+cN$ maps into the $\\varepsilon$-ball about $f(x)$ because $f(x+h)-f(x)=f(h)$. This includes $M=0$ and the zero functional.",
+          "inputs": [
+            "step 2.1",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "For scalar addition at $(a,b)$, errors $|s-a|,|t-b|<\\varepsilon/2$ give $|(s+t)-(a+b)|<\\varepsilon$. For multiplication, if $|t-b|<1$ then $$|st-ab|\\le |s-a||t|+|a||t-b|\\le (|b|+1)|s-a|+|a||t-b|.$$ Taking both errors below $\\min(1,\\varepsilon/(2(|a|+|b|+1)))$ makes this less than $\\varepsilon$. These are product-open neighborhoods, so they prove joint topological continuity, including $a=0$ or $b=0$. Together with the preceding steps this proves all assertions, without a choice principle or a separation axiom.",
+          "inputs": [
+            "F5",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "A TVS and its zero-neighborhoods contain zero."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.2 treats x=0; step 3.2 treats M=0 and f=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 includes unit dilation and the singleton TVS."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 excludes zero dilation from the inverse assertion."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 covers scalar centers zero; all radii are strictly positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 records no choice; each neighborhood is chosen for one fixed input."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This lemma asserts continuity and absorption, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This lemma asserts continuity and absorption, not an iff theorem."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step 5A Alpha group b (phase-2-next-20)",
+        "notes": "Checked steps 1.1-4.1. Inserting constant/identity maps into the jointly continuous structure maps gives continuity of x -> x+a, x -> bx, and s -> sx; the inverse maps (-a, and b^{-1} for b nonzero) are continuous, so these are homeomorphisms, and translates/dilates of open sets are open. Absorption: continuity of s -> sx at 0 gives delta>0 with (1/t)x in U for t>1/delta, hence x in tU. Symmetry: W=U1 cap U2 cap (-U1) cap (-U2) is an open symmetric zero-neighborhood and W+W is contained in U1+U2. The real and complex multiplicative and triangle inequalities are now separately cited. Modulus-bound continuity uses c=epsilon/(M+1), including M=0 and the zero functional. Joint scalar continuity uses |st-ab| <= (|b|+1)|s-a| + |a||t-b| with both coordinate errors below min(1, eps/(2(|a|+|b|+1))). No choice and no separation axiom."
+      }
+    },
+    "def-locally-convex-topological-vector-space": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Definition gives co(empty)=empty and vacuous convexity/balance."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition handles zero coefficients, scalar zero, zero seminorm and zero functional."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition handles one-term sums and terminal coefficient one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition permits seminorms with nontrivial kernels and non-Hausdorff spaces."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition handles t=0,1 in convexity and t_n=1 in hull induction."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses finite lists and explicit operations, with no family of arbitrary selections."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Definition proves a convex-neighborhood base gives an open convex base."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Definition proves an open convex base meets the neighborhood formulation."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step 5A Alpha group b (phase-2-next-20)",
+        "notes": "Checked the convex-hull description co(S): single-term containment, convexity by concatenating weighted lists, containment in every convex superset by induction with zero coefficients removed and the t_n=0/1 cases split; co(empty)=empty. Balance/absolute convexity: empty sets qualify, lambda=0 forces zero in every nonempty balanced set, and lambda=-1 twice gives symmetry. Local convexity is shown equivalent to a base of open convex zero-neighborhoods: for C convex with 0 in int C the set (1-t)int C + t int C is open, contains the convex combination and lies in C, with t=0,1 immediate. Seminorm axioms and the continuous dual as a pointwise subspace are checked; lem-restriction-of-scalars is used where K is viewed as a K-vector space. No HB or choice. No unresolved risk."
+      }
+    },
+    "lem-locally-convex-closures-and-finite-compact-convex-hulls": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-locally-convex-topological-vector-space",
+          "source_section": "Definition",
+          "quote": "This is the smallest convex superset of $S$",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-topological-vector-space-translation-scaling-and-absorption",
+          "source_section": "Statement",
+          "quote": "In a real or complex TVS $X$, translations and multiplication by a nonzero scalar are homeomorphisms. Every zero-neighborhood $U$ absorbs every $x$: $x\\in tU$ for all sufficiently large positive real $t$. There is a symmetric open zero-neighborhood $W$ with $W+W\\subseteq U$. Every scalar-linear functional bounded in modulus on a zero-neighborhood is continuous. Scalar addition and multiplication are jointly continuous in the usual real or complex topology.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3",
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-closure-characterisation-top",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space, let $\\mathcal{B}$ be a basis for\n$\\mathcal{T}$ ([[def-topology-basis-subbasis]]), let $A \\subseteq X$ and let\n$x \\in X$. Closure, derived set and limit points are as in\n[[def-interior-closure-boundary-top]]. Then:\n\n1. The following four conditions are equivalent.\n   - (a) $x \\in \\overline{A}$;\n   - (b) $N \\cap A \\ne \\varnothing$ for every neighbourhood $N$ of $x$\n     ([[def-neighbourhood-top]]);\n   - (c) $U \\cap A \\ne \\varnothing$ for every open $U$ with $x \\in U$;\n   - (d) $B \\cap A \\ne \\varnothing$ for every $B \\in \\mathcal{B}$ with $x \\in B$.\n2. $\\overline{A}$ is closed, contains $A$, and is contained in every closed\n   $F \\subseteq X$ with $A \\subseteq F$; so it is the smallest closed superset of\n   $A$, and $A$ is closed if and only if $A = \\overline{A}$.\n3. $\\overline{A} = A \\cup A'$.\n\nClaim 2 is recorded here for reference and is discharged in\n[[def-interior-closure-boundary-top]], where it is what makes the definition of\n$\\overline{A}$ well posed; claims 1 and 3 are proved below. Claim 1 is the form in\nwhich the closure is used everywhere afterwards, and clause (d) is what makes a\nclosure computable from a basis rather than from all open sets.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "1.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-finite-products-of-compact-spaces",
+          "source_section": "Statement",
+          "quote": "For every $n \\in \\mathbb{N}$ ([[def-natural-numbers]]) and every family\n$(X_k)_{k < n}$ of compact topological spaces ([[def-compact-space]],\n[[def-topological-space]]), the product\n\n$$\\prod_{k < n} X_k$$\n\nwith the product topology ([[def-product-topology]]) is compact. In particular a\nbinary product $X \\times Y$ of compact spaces is compact, and the empty product,\na one-point space, is compact.\n\n**No choice principle is used beyond [[lem-finite-choice]]**, which is a theorem\nof ZF. That is what separates the finite case from the arbitrary one, where the\nAxiom of Choice is genuinely spent.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "cor-heine-borel-in-the-product-topology",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ ([[lem-metrics-on-rn]]) carrying the product topology of $n$\ncopies of the usual topology of $\\mathbb{R}$ ([[def-product-topology]]), and let\n$d_2$ be the Euclidean metric. Then:\n\n1. The product topology on $\\mathbb{R}^n$ **is** the metric topology of $d_2$\n   ([[def-metric-topology]]), so $\\mathbb{R}^n$ as a product and $\\mathbb{R}^n$ as\n   a metric space are one topological space, and it is metrizable\n   ([[def-metrizable-space]]).\n2. A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset for the product\n   topology ([[def-compact-space]]) **if and only if** $K$ is closed in\n   $\\mathbb{R}^n$ and bounded ([[def-metric-bounded-diameter]]).\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its three metrics only there; for $n = 0$ the product is a\none-point space and is compact. **No choice principle is used**: the metric\nstatement it is read off from is proved by bisection\n([[thm-heine-borel-rn]]).",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-compactness-under-continuous-maps",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T}_X)$ and $(Y, \\mathcal{T}_Y)$ be topological spaces\n([[def-topological-space]]), and let $\\mathbb{R}$ carry its usual topology, the\nmetric topology of $d_{\\mathbb{R}}(s,t) = |s-t|$\n([[lem-real-line-is-a-metric-space]], [[def-metric-topology]],\n[[def-metrizable-space]]). Then:\n\n1. **Continuous images.** If $f : X \\to Y$ is continuous\n   ([[def-continuous-map-top]]) and $(X, \\mathcal{T}_X)$ is compact\n   ([[def-compact-space]]), then $f[X]$ is a compact subset of $Y$. More\n   generally, if $K \\subseteq X$ is a compact subset of $X$ then $f[K]$ is a\n   compact subset of $Y$.\n2. **Extreme values.** If $(X, \\mathcal{T}_X)$ is compact and nonempty and\n   $g : X \\to \\mathbb{R}$ is continuous, then $g[X]$ has a maximum and a minimum\n   ([[def-max-min]]): there are $x_{\\max}, x_{\\min} \\in X$ with\n   $$g(x_{\\min}) \\;\\le\\; g(x) \\;\\le\\; g(x_{\\max}) \\qquad \\text{for every } x \\in X .$$\n3. **Compact to Hausdorff.** If $(X, \\mathcal{T}_X)$ is compact, $(Y,\n   \\mathcal{T}_Y)$ is Hausdorff ([[def-hausdorff-space]]) and $f : X \\to Y$ is a\n   continuous bijection, then $f$ is a homeomorphism\n   ([[def-homeomorphism-and-open-maps]]).\n\nNonemptiness in claim 2 is a hypothesis and not an oversight: for\n$X = \\varnothing$ the image is empty and has neither a maximum nor a minimum. **No\nchoice principle is used**: the one selection made below is over a finite index\nset, where [[lem-finite-choice]] is a theorem of ZF.",
+          "uses": [
+            "1.4"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-compact-subset-of-a-hausdorff-space-is-closed",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T})$ be a Hausdorff topological space\n([[def-hausdorff-space]], [[def-topological-space]]), with compact subsets as in\n[[def-compact-space]]. Then:\n\n1. **A point and a disjoint compact set are separated.** If $K \\subseteq X$ is\n   compact and $x \\in X \\setminus K$, there are $U, V \\in \\mathcal{T}$ with\n   $$x \\in U, \\qquad K \\subseteq V, \\qquad U \\cap V = \\varnothing .$$\n2. **Two disjoint compact sets are separated.** If $K, L \\subseteq X$ are compact\n   and $K \\cap L = \\varnothing$, there are $U, V \\in \\mathcal{T}$ with\n   $$L \\subseteq U, \\qquad K \\subseteq V, \\qquad U \\cap V = \\varnothing .$$\n3. **Compact implies closed.** Every compact subset of $X$ is closed in $X$.\n4. **In a compact Hausdorff space the two classes coincide.** If in addition\n   $(X, \\mathcal{T})$ is compact, then a subset of $X$ is compact if and only if\n   it is closed.\n\n**The proof is written choice-free, and that is not a stylistic preference.** The\ntextbook argument says \"for each $y \\in K$ choose disjoint open $U_y, V_y$\",\nwhich is a selection over an arbitrary index set and therefore an appeal to the\nfull Axiom of Choice. What is done below instead is to take the family of **all**\nopen $V$ that admit some open $U \\ni x$ disjoint from them \u2014 a family cut out by\na formula, with nothing selected \u2014 extract a finite subcover from it, and only\nthen make finitely many selections, which [[lem-finite-choice]] supplies as a\ntheorem of ZF.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-finite-choice",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $F$ be a function with domain $n$ all of whose\nvalues are nonempty sets. Then the family of its values,\n$\\mathcal{F} = F[n] = \\{\\, F(i) : i \\in n \\,\\}$, has a choice function\n([[def-choice-function]]).\n\nThis is a theorem of ZF: its proof uses no form of the Axiom of Choice\n([[def-axiom-of-choice]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$. The\nnatural number $n$ serves as the index set in the von Neumann sense,\n$n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so \"$F$ has domain $n$\"\nsays precisely that the members of $\\mathcal{F}$ are listed as\n$F(0), \\dots, F(n-1)$. The listing need not be injective, and $\\mathcal{F}$ is the\nset of values, so repetitions are harmless and are not counted.\n\nThe displayed statement and its proof use only a natural-number-indexed\nfunction. They do not identify an arbitrary finite family with a particular\nenumeration.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Let $x,y\\in\\overline C$ for convex $C$, and $0<t<1$. The affine map $(a,b)\\mapsto(1-t)a+tb$ is continuous by the vector operations. For an open neighborhood $O$ of $(1-t)x+ty$, its preimage contains a product neighborhood $P\\times Q$ of $(x,y)$. There exist $a\\in P\\cap C$ and $b\\in Q\\cap C$ by the closure test. Their convex combination is in $O\\cap C$. Thus $(1-t)x+ty\\in\\overline C$. At $t=0,1$ the assertion follows from membership of $x,y$; for $C=\\varnothing$ its closure is empty.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "For $x,y\\in\\operatorname{int}C$ and $0<t<1$, the open set $(1-t)\\operatorname{int}C+t\\operatorname{int}C$ contains their combination and lies in $C$. It is open as a union of translates of a nonzero dilate of an open set. The endpoints $t=0,1$ are immediate, and an empty interior is convex vacuously. If $y\\in\\operatorname{int}C$ and $x\\in C$, then for $0<s\\le1$ the open set $(1-s)x+s\\operatorname{int}C$ lies in $C$. Hence $(1-s)x+sy$ belongs to its interior. Continuity of the orbit at $s=0$ shows every neighborhood of $x$ contains such a point, so $x\\in\\overline{\\operatorname{int}C}$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-1.3",
+          "step": "1.3",
+          "claim": "Let $C$ be balanced. For $0<|\\lambda|\\le1$, the homeomorphism $D_\\lambda:x\\mapsto\\lambda x$ carries $\\overline C$ onto $\\overline{\\lambda C}$. Indeed, pull an open neighborhood back by $D_\\lambda$ for one inclusion and use its inverse for the other. Since $\\lambda C\\subseteq C$, the closure test gives $\\overline{\\lambda C}\\subseteq\\overline C$. For $\\lambda=0$ and $C\\ne\\varnothing$, balance gives $0\\in C$, so $0\\overline C=\\{0\\}\\subseteq\\overline C$; for empty $C$ the dilation has empty image. Thus the closure is balanced.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-1.4",
+          "step": "1.4",
+          "claim": "Suppose $n\\ge1$ and each $K_j$ is nonempty. The simplex $\\Delta=\\{t\\in\\mathbb R^n:t_j\\ge0,\\ \\sum_jt_j=1\\}$ is closed: coordinate maps and their finite sum are continuous, and the conditions are inverse images of closed real rays and $\\{1\\}$. It is bounded since $0\\le t_j\\le1$ and $\\sum_jt_j^2\\le n$. It is compact by Heine\u2013Borel. Finite product compactness makes $\\Delta\\times\\prod_jK_j$ compact. The map $\\Phi(t,x)=\\sum_jt_jx_j$ is continuous: coordinate projections and inclusions are continuous by preimages of basic opens, scalar multiplication is jointly continuous, and iterating addition preserves continuity. Therefore its image is compact.",
+          "inputs": [
+            "F2",
+            "F4",
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Every value of $\\Phi$ is a convex combination from the union. Conversely, write a hull point as $\\sum_{\\ell=1}^m a_\\ell y_\\ell$. Assign each $y_\\ell$ the least index $j$ for which $y_\\ell\\in K_j$, and let $t_j$ be the sum of the weights with that label. For $t_j>0$, their normalized combination $x_j=t_j^{-1}\\sum_{\\ell\\text{ labelled }j}a_\\ell y_\\ell$ belongs to $K_j$ by finite convexity. For the finitely many zero $t_j$, choose any $x_j\\in K_j$ using finite choice. Then $t\\in\\Delta$ and $\\sum_jt_jx_j=\\sum_\\ell a_\\ell y_\\ell$. This proves equality of the two sets.",
+          "inputs": [
+            "F1",
+            "F8",
+            "step 1.4"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The hull is compact by step 1.4 and step 2.1, and Hausdorffness gives closedness. Each singleton is compact since any cover has one member covering its sole point, and convex since its every combination is that point; hence finite point hulls are covered. Delete empty members of a finite family in their original order. If none remain, its union and hull are empty, and the empty subcover proves compactness. For one nonempty convex member the hull is that member. All choices made above are finite.",
+          "inputs": [
+            "step 1.4",
+            "step 2.1",
+            "F1",
+            "F7"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 removes empty members and proves compactness of the empty hull."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.3 treats zero dilation; step 2.1 fills zero-weight coordinates."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 gives singleton compactness and the one-member hull."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 covers empty interiors; Hausdorffness is used only for closedness in step 3.1."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.1 and step 1.2 treat convex coefficients zero and one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 labels by least index and uses only finite choice for zero weights."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.1 proves every compact-image value is a hull value."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.1 proves every hull value has compact-image parameters."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step 5A Alpha group b (phase-2-next-20)",
+        "notes": "Checked 1.1-3.1. Convexity of closure: the continuous affine map pulls neighbourhoods back to product neighbourhoods meeting C x C. Interior: (1-t)int C + t int C is open and lies in C, and for y in int C the orbit (1-s)x+sy at small s>0 puts every x of C in the closure of the interior. Balance of the closure uses dilation homeomorphisms for lambda nonzero and 0 in C for lambda=0. For the finite hull, the simplex is closed and bounded (Heine-Borel in the product topology) and Delta x product K_j is compact by finite-product compactness; Phi(t,x)=sum t_j x_j is continuous, so the hull is compact, and Hausdorffness makes it closed. Equality of the two descriptions is proved by labelling each y_l with the least j having y_l in K_j, normalizing each positive label group inside K_j by finite convexity, and filling the finitely many zero groups by lem-finite-choice. Empty members, the empty family, singletons and the zero-space case are covered. No infinite product compactness or AC. No unresolved risk."
+      }
+    },
+    "lem-balanced-convex-zero-neighborhood-refinement": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-locally-convex-topological-vector-space",
+          "source_section": "Definition",
+          "quote": "Equivalently it has a base of open convex zero-neighborhoods.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-topological-vector-space-translation-scaling-and-absorption",
+          "source_section": "Statement",
+          "quote": "In a real or complex TVS $X$, translations and multiplication by a nonzero scalar are homeomorphisms. Every zero-neighborhood $U$ absorbs every $x$: $x\\in tU$ for all sufficiently large positive real $t$. There is a symmetric open zero-neighborhood $W$ with $W+W\\subseteq U$. Every scalar-linear functional bounded in modulus on a zero-neighborhood is continuous. Scalar addition and multiplication are jointly continuous in the usual real or complex topology.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-locally-convex-closures-and-finite-compact-convex-hulls",
+          "source_section": "Statement",
+          "quote": "In any real or complex TVS, the closure and interior of a convex set are convex, and the closure of a balanced set is balanced. If a convex set has nonempty interior, it is contained in the closure of its interior.\n\nFor finitely many nonempty compact convex subsets $K_1,\\ldots,K_n$, with $n\\ge1$,\n$$\\operatorname{co}\\left(\\bigcup_{j=1}^nK_j\\right)=\\left\\{\\sum_{j=1}^nt_jx_j:t_j\\ge0,\\ \\sum_{j=1}^nt_j=1,\\ x_j\\in K_j\\right\\}$$\nis compact, and is closed if the ambient TVS is Hausdorff. In particular finite point hulls are compact. Empty members may be removed; the hull of an empty family is empty and compact.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-closure-characterisation-top",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T})$ be a topological space, let $\\mathcal{B}$ be a basis for\n$\\mathcal{T}$ ([[def-topology-basis-subbasis]]), let $A \\subseteq X$ and let\n$x \\in X$. Closure, derived set and limit points are as in\n[[def-interior-closure-boundary-top]]. Then:\n\n1. The following four conditions are equivalent.\n   - (a) $x \\in \\overline{A}$;\n   - (b) $N \\cap A \\ne \\varnothing$ for every neighbourhood $N$ of $x$\n     ([[def-neighbourhood-top]]);\n   - (c) $U \\cap A \\ne \\varnothing$ for every open $U$ with $x \\in U$;\n   - (d) $B \\cap A \\ne \\varnothing$ for every $B \\in \\mathcal{B}$ with $x \\in B$.\n2. $\\overline{A}$ is closed, contains $A$, and is contained in every closed\n   $F \\subseteq X$ with $A \\subseteq F$; so it is the smallest closed superset of\n   $A$, and $A$ is closed if and only if $A = \\overline{A}$.\n3. $\\overline{A} = A \\cup A'$.\n\nClaim 2 is recorded here for reference and is discharged in\n[[def-interior-closure-boundary-top]], where it is what makes the definition of\n$\\overline{A}$ well posed; claims 1 and 3 are proved below. Claim 1 is the form in\nwhich the closure is used everywhere afterwards, and clause (d) is what makes a\nclosure computable from a basis rather than from all open sets.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Choose a symmetric open zero-neighborhood $O$ with $O+O\\subseteq U$, then an open convex zero-neighborhood $C\\subseteq O$. Joint scalar continuity at $(0,0)$ supplies $\\delta>0$ and an open zero-neighborhood $W$ with $\\{a:|a|<\\delta\\}W\\subseteq C$. Put $W_0=(\\delta/2)W$, which is open and contains zero.",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Define $B=\\bigcup_{|a|\\le1}aW_0$. If $aw\\in B$ and $|\\lambda|\\le1$, then $\\lambda(aw)=(\\lambda a)w\\in B$, so $B$ is balanced. It contains $W_0$. For $w=(\\delta/2)v\\in W_0$, $aw=(a\\delta/2)v\\in C$ since $|a\\delta/2|<\\delta$, so $B\\subseteq C$. Moreover $B$ is open: all nonzero dilates are open, and the zero dilate contributes only zero, which already belongs to $W_0$.",
+          "inputs": [
+            "F2",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Put $V=\\operatorname{co}(B)$. Then $W_0\\subseteq B\\subseteq V\\subseteq C\\subseteq O$, and $V$ is convex. For $|\\lambda|\\le1$, distributing $\\lambda$ through a finite convex sum leaves its summands in $B$, proving balance of $V$. To prove openness, represent $v=\\sum_jt_jb_j\\in V$. Some $t_k>0$, and $t_kB+\\sum_{j\\ne k}t_jb_j$ is an open subset of $V$ containing $v$. Thus $V$ is an open balanced convex zero-neighborhood. Zero coefficients cause no problem because the sum of the coefficients is one.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "If $x\\in\\overline V$, then $x-O$ is an open neighborhood of $x$ and meets $V$. Write $v=x-o\\in V$ with $o\\in O$; hence $x=v+o\\in V+O\\subseteq O+O\\subseteq U$. Thus $\\overline V\\subseteq U$. By closure preservation, $\\overline V$ is convex and balanced; it is closed and contains the open zero-neighborhood $V$. Finally balance implies $-V\\subseteq V$ and applying negation again gives $V=-V$; the same applies to every balanced set, including the empty set.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "U is a zero-neighborhood and therefore nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats the zero dilation, which adds only zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 uses unit dilation to include W_0."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 4.1 requires no Hausdorffness; the zero TVS also satisfies the construction."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 handles zero coefficients and a positive coefficient, including a coefficient equal to one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 takes all scalar dilates, with no choices over them."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refinement theorem is an existence assertion, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refinement theorem is an existence assertion, not an iff."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step 5A Alpha group b (phase-2-next-20)",
+        "notes": "Checked 1.1-4.1. O is symmetric with O+O contained in U; C is open convex inside O; joint scalar continuity at (0,0) gives delta>0 and W with {|a|<delta}W contained in C; W0=(delta/2)W is open and contains 0. B=union_{|a|<=1} aW0 is balanced, contains W0, lies in C (|a delta/2|<delta), and is open because the nonzero dilates are open and the zero dilate contributes only 0, already in W0. V=co(B) lies between W0 and C, is convex and balanced by distributing scalars through finite convex sums, and is open because each representation has a positive coefficient whose open summand varies with the others fixed. Closure step: x in closure V gives x-O a neighbourhood meeting V, so x=v+o in V+O contained in O+O contained in U; O is contained in U because 0 is in O. Closure preserves convexity and balance, and balance gives symmetry. No Hausdorffness, HB or choice. No unresolved risk."
+      }
+    },
+    "def-minkowski-gauge-of-an-open-convex-zero-neighborhood": {
+      "citations": [],
+      "derivations": [],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "U contains zero and absorption makes every defining set nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Definition proves p_U(0)=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Definition permits t=1 but does not assume the infimum is attained."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Definition computes p_X=0; positive definiteness is not asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Definition takes t>0, never t=0 in the infimum set."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Definition uses a unique infimum for each x, no arbitrary simultaneous selection."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This defines a gauge; its strict-sublevel equivalence is proved in the next lemma."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This defines a gauge; its strict-sublevel equivalence is proved in the next lemma."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step 5A Alpha group b (phase-2-next-20)",
+        "notes": "Checked well-definedness of the gauge: absorption of the preceding lemma makes {t>0 : x in tU} nonempty, 0 is a lower bound, thm-infimum-property supplies the unique finite infimum in R, and p_U(0)=0 follows because every t>0 is admissible (a purported positive lower bound b fails at t=b/2). The case U=X is recorded. The definition explicitly imposes neither symmetry, balance, positive definiteness, nor local convexity of X; convexity is read with real coefficients in the complex case, and no choice principle is used. Degenerate but legitimate cases are exercised by the consumer lemma. No unresolved risk."
+      }
+    },
+    "lem-continuous-gauge-of-an-open-convex-zero-neighborhood": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-minkowski-gauge-of-an-open-convex-zero-neighborhood",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a real or complex TVS ([[def-topological-vector-space-for-local-convexity]]) and let $U$ be an open convex zero-neighborhood, with convexity as in [[def-locally-convex-topological-vector-space]]. The **Minkowski gauge** of $U$ is\n$$p_U:X\\longrightarrow[0,\\infty),\\qquad p_U(x)=\\inf\\{t>0:x\\in tU\\}.$$\n\nThis is a well-defined finite real number for each $x$. Indeed, [[lem-topological-vector-space-translation-scaling-and-absorption]] gives $x\\in tU$ for every sufficiently large positive real $t$, so the defining set is nonempty; zero is a lower bound. The infimum therefore exists in $\\mathbb R$ by [[thm-infimum-property]] and is unique by the infimum convention of [[def-infimum]]. It is nonnegative, since zero is a lower bound.\n\nFor $x=0$ every $t>0$ is admissible, so $p_U(0)=0$: zero is a lower bound and a proposed positive lower bound $b$ fails at $t=b/2$. If $U=X$, the same argument gives $p_U(x)=0$ for every $x$.\n\nThe gauge is interpreted on the underlying real vector space. No symmetry, balance or positive definiteness is imposed on it by this definition. Convexity uses real coefficients even in the complex case. Neither local convexity of the whole space nor any choice principle is required.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-infimum-property",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ be nonempty and bounded below. Then $S$ has a\ngreatest lower bound in $\\mathbb{R}$ ([[def-infimum]]), and it is given by\n\n$$\\inf S = -\\sup(-S), \\qquad \\text{where } -S = \\{-s : s \\in S\\}.$$\n\nIn particular the complete ordered field $\\mathbb{R}$ has the\ngreatest-lower-bound property, which is therefore not an extra axiom: it is a\nconsequence of the least-upper-bound property.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-topological-vector-space-translation-scaling-and-absorption",
+          "source_section": "Statement",
+          "quote": "In a real or complex TVS $X$, translations and multiplication by a nonzero scalar are homeomorphisms. Every zero-neighborhood $U$ absorbs every $x$: $x\\in tU$ for all sufficiently large positive real $t$. There is a symmetric open zero-neighborhood $W$ with $W+W\\subseteq U$. Every scalar-linear functional bounded in modulus on a zero-neighborhood is continuous. Scalar addition and multiplication are jointly continuous in the usual real or complex topology.",
+          "uses": [
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-locally-convex-topological-vector-space",
+          "source_section": "Definition",
+          "quote": "$p(\\lambda x)=|\\lambda|p(x)$",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-sublinear-functional",
+          "source_section": "Definition",
+          "quote": "p(tx)=tp(x) \\qquad \\text{for all } x \\in X \\text{ and all } t \\ge 0.",
+          "uses": [
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Write $S_x=\\{t>0:x\\in tU\\}$. If $t\\in S_x$ and $a\\ge t$, then $x/a=(t/a)(x/t)+(1-t/a)0\\in U$, so $a\\in S_x$. If $a>p(x)$, it cannot be a lower bound of $S_x$; hence some $t\\in S_x$ satisfies $t<a$, and then $a\\in S_x$. This uses only the defining greatest-lower-bound property, not an assumption that the infimum is attained.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For $r>0$, $S_{rx}=rS_x$ by direct substitution, so $p(rx)=rp(x)$: multiplication by $r$ bijects lower bounds of $S_x$ with lower bounds of $rS_x$ and preserves their order. At $r=0$, both sides are zero. For $\\eta>0$ put $a=p(x)+\\eta$ and $b=p(y)+\\eta$. These are positive admissible numbers, and $$(x+y)/(a+b)=\\frac{a}{a+b}(x/a)+\\frac{b}{a+b}(y/b)\\in U.$$ Thus $p(x+y)\\le p(x)+p(y)+2\\eta$ for every $\\eta>0$. If subadditivity failed by a positive gap $d$, take $\\eta=d/4$ to contradict this bound. Hence $p$ is sublinear.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "If $p(x)<1$, choose $a$ with $p(x)<a<1$, for example $(p(x)+1)/2$. It is admissible, and convexity with zero gives $x\\in aU\\subseteq U$. Conversely, if $x\\in U$, continuity of $s\\mapsto sx$ at $s=1$ and openness of $U$ give an $\\eta>0$ with $(1+\\eta)x\\in U$. Thus $1/(1+\\eta)\\in S_x$, and $p(x)\\le1/(1+\\eta)<1$. These prove both inclusions of the strict-sublevel identity.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Given $\\varepsilon>0$, the open zero-neighborhood $N=\\varepsilon(U\\cap(-U))$ has $p(h)<\\varepsilon$ and $p(-h)<\\varepsilon$ for $h\\in N$, by homogeneity and the strict-sublevel identity. Subadditivity gives $p(x+h)-p(x)\\le p(h)$ and $p(x)-p(x+h)\\le p(-h)$, hence $|p(x+h)-p(x)|<\\varepsilon$. Translating $N$ proves continuity at every $x$. This argument does not assert absolute domination by an asymmetric gauge.",
+          "inputs": [
+            "F3",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Suppose $U$ is balanced. For $|a|=1$, balance gives $aU\\subseteq U$ and $a^{-1}U\\subseteq U$, whence $aU=U$ and $S_{ax}=S_x$. For $\\lambda\\ne0$, write $\\lambda=|\\lambda|a$ with $|a|=1$, and obtain $p(\\lambda x)=|\\lambda|p(ax)=|\\lambda|p(x)$. At $\\lambda=0$ this follows from $p(0)=0$. Thus the finite nonnegative continuous sublinear $p$ is a seminorm.",
+          "inputs": [
+            "F1",
+            "F4",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "For concrete boundary calculations on the real line, $U=(-1,1)$ gives $S_x=(|x|,\\infty)$ and $p(x)=|x|$, with $S_0=(0,\\infty)$. On $\\mathbb R^2$ the open strip $U=\\{(x,y):|x|<1\\}$ gives $p_U(x,y)=|x|$, since admissibility is exactly $t>|x|$; thus $p_U(0,1)=0$ despite $(0,1)\\ne0$. These computations show why no positive-definiteness conclusion is available. All claimed properties are established without HB or AC.",
+          "inputs": [
+            "F1",
+            "step 2.2",
+            "step 3.1",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "U contains zero; admissible dilations are nonempty by absorption."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 treats r=0 and step 4.1 treats scalar zero."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.2 proves the strict threshold one from both directions."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 5.1 calculates the strip gauge and its nonzero kernel."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.2 explains why the boundary p=1 is excluded from U."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 uses each infimum directly, with no selected sequence of approximants."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 2.2 proves x in U implies p(x)<1."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 2.2 proves p(x)<1 implies x in U."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step 5A Alpha group b (phase-2-next-20)",
+        "notes": "Checked 1.1-5.1. Admissible sets S_x are upper rays: t in S_x and a>=t give x/a as a convex combination of x/t and 0 since 0 is in U, so every a>p_U(x) is admissible. Subadditivity: for eta>0, (x+y)/(a+b) is a convex combination of x/a and y/b with a=p_U(x)+eta, b=p_U(y)+eta, so p_U(x+y)<=p_U(x)+p_U(y)+2eta; eta decreases to 0. Positive homogeneity uses S_{rx}=rS_x and treats r=0 separately. U={p<1}: if p_U(x)<1 an admissible a<1 gives x in aU contained in U; if x is in U, continuity of s->sx at s=1 gives (1+eta)x in U and p_U(x)<=1/(1+eta)<1. Continuity at every x uses N=eps(U cap (-U)) with both p_U(h)<eps and p_U(-h)<eps and the two subadditivity inequalities; no absolute domination of an asymmetric gauge is asserted. For balanced U every unit scalar a has aU=U, giving full absolute homogeneity. The boundary computations on R and R^2 are correct, including p_U(0,1)=0 for the strip. No HB or AC. No unresolved risk."
+      }
+    },
+    "thm-locally-convex-open-convex-separation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-locally-convex-topological-vector-space",
+          "source_section": "Definition",
+          "quote": "The **continuous dual** $X'$ consists of all continuous",
+          "uses": [
+            "1.1",
+            "4.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-topological-vector-space-translation-scaling-and-absorption",
+          "source_section": "Statement",
+          "quote": "In a real or complex TVS $X$, translations and multiplication by a nonzero scalar are homeomorphisms. Every zero-neighborhood $U$ absorbs every $x$: $x\\in tU$ for all sufficiently large positive real $t$. There is a symmetric open zero-neighborhood $W$ with $W+W\\subseteq U$. Every scalar-linear functional bounded in modulus on a zero-neighborhood is continuous. Scalar addition and multiplication are jointly continuous in the usual real or complex topology.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-continuous-gauge-of-an-open-convex-zero-neighborhood",
+          "source_section": "Statement",
+          "quote": "Let $U$ be an open convex zero-neighborhood in a real or complex TVS. Its gauge $p=p_U$ is finite, nonnegative, subadditive, positively real-homogeneous and continuous. Moreover\n$$U=\\{x:p(x)<1\\}.$$\nIf $U$ is balanced, then $p(\\lambda x)=|\\lambda|p(x)$ for every scalar, so $p$ is a continuous seminorm. It need not be positive definite.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "Work over ZF. The **real dominated-extension principle**, denoted **HB**, is the following assertion:\n\nFor every real vector space $X$, every sublinear functional $p:X\\to\\mathbb R$ in the sense of [[def-sublinear-functional]], every real linear subspace $M\\le X$ in the sense of [[def-linear-subspace]], and every real linear functional $g:M\\to\\mathbb R$ in the sense of [[def-algebraic-dual-and-linear-functional]],\n$$\\bigl(\\forall m\\in M,\\ g(m)\\le p(m)\\bigr)\\ \\Longrightarrow\\ \\exists F:X\\to\\mathbb R\\ \\bigl(F\\text{ is real linear},\\ F|_M=g,\\ \\forall x\\in X,\\ F(x)\\le p(x)\\bigr).$$\n\nThis names an additional principle; it does not assert a proof of HB in ZF. Subsequent results explicitly state when they assume HB. Neither topology nor completeness is part of this assertion. The subspace may be $\\{0\\}$ or all of $X$. Sublinearity at scalar zero gives $p(0)=0$, and a linear functional has value zero at zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-relative-hahn-banach-dominated-extension",
+          "source_section": "Statement",
+          "quote": "Assume HB. Let $X$ be a real vector space, $M\\le X$ a real linear subspace, $p:X\\to\\mathbb R$ sublinear, and $g:M\\to\\mathbb R$ real linear with $g(m)\\le p(m)$ for every $m\\in M$. There is a real linear extension $F:X\\to\\mathbb R$ satisfying\n$$-p(-x)\\le F(x)\\le p(x)\\qquad(x\\in X).$$\nNo topology, closedness, or completeness is required.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-restriction-of-scalars",
+          "source_section": "Statement",
+          "quote": "Let $F$ be a field ([[def-field]]).\n\n1. $F$ is a vector space over itself ([[def-vector-space]]): take the set to be\n   $F$, the vector addition to be the field addition, the zero vector to be\n   $0_F$, and the scalar multiplication $F \\times F \\to F$ to be the field\n   multiplication.\n2. Let $K \\subseteq F$ be a subfield ([[def-subfield]]) and let $V$ be a vector\n   space over $F$. Then $V$, with the same addition and the same zero vector and\n   with the scalar multiplication restricted to $K \\times V$, is a vector space\n   over $K$. This is called **restricting the scalars** from $F$ to $K$.\n3. In particular $F$ is a vector space over every subfield $K \\subseteq F$, with\n   the field multiplication restricted to $K \\times F$ as scalar multiplication.",
+          "uses": [
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-infimum-property",
+          "source_section": "Statement",
+          "quote": "Let $S \\subseteq \\mathbb{R}$ be nonempty and bounded below. Then $S$ has a\ngreatest lower bound in $\\mathbb{R}$ ([[def-infimum]]), and it is given by\n\n$$\\inf S = -\\sup(-S), \\qquad \\text{where } -S = \\{-s : s \\in S\\}.$$\n\nIn particular the complete ordered field $\\mathbb{R}$ has the\ngreatest-lower-bound property, which is therefore not an extra axiom: it is a\nconsequence of the least-upper-bound property.",
+          "uses": [
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "First work over the reals and let $D$ be nonempty open convex with $z\\notin D$. Fix $d_0\\in D$ and put $U=D-d_0$ and $v=z-d_0$. Then $U$ is an open convex zero-neighborhood, $v\\ne0$, and $p_U(v)\\ge1$ because $v\\notin U$. The set $M=\\{tv:t\\in\\mathbb R\\}$ is a real subspace: sums and real multiples remain on the line. If $tv=sv$ then multiplying $(t-s)v=0$ by $(t-s)^{-1}$ when $t\\ne s$ would give $v=0$, so the coefficient is unique. Thus $h(tv)=t$ is well-defined and real-linear.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For $t\\ge0$, $h(tv)=t\\le tp_U(v)=p_U(tv)$; for $t<0$, $h(tv)=t<0\\le p_U(tv)$. All hypotheses of the relative extension theorem are now met. Apply HB once to obtain real-linear $H:X\\to\\mathbb R$ extending $h$ with $-p_U(-x)\\le H(x)\\le p_U(x)$. In particular $H(v)=1$. This is the only non-ZF input in the proof.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "On the open zero-neighborhood $U\\cap(-U)$ both gauges $p_U(x),p_U(-x)$ are less than one. Hence $|H(x)|<1$ there, so $H$ is continuous by the modulus-bound criterion. For $d\\in D$, $H(d)-H(d_0)=H(d-d_0)\\le p_U(d-d_0)<1=H(z)-H(d_0)$. Therefore $H(d)<H(z)$, and $H\\ne0$ since $H(v)=1$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "For the given real $A,B$, take $D=A-B$ and $z=0$. This is open, since it is the union of the translates $A-b$ for $b\\in B$; it is convex by distributing each real convex combination through the difference. It is nonempty and excludes zero by disjointness. The preceding construction therefore produces a nonzero continuous real-linear $H$ with $H(a-b)<0$, or $H(a)<H(b)$ for every $a,b$. It also produces a vector $v$ with $H(v)=1$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "The set $-H(A)$ is nonempty and bounded below by $-H(b_0)$ for any fixed $b_0\\in B$. Let $\\alpha=-\\inf(-H(A))$. By reversing the defining lower-bound inequalities, $\\alpha$ is the least upper bound of $H(A)$. Every $H(b)$ is an upper bound, so $\\alpha\\le H(b)$. For $a\\in A$, openness and continuity of $s\\mapsto a+sv$ give a positive $s$ with $a+sv\\in A$; hence $H(a)<H(a)+s\\le\\alpha$. If $B$ is open and $H(b)=\\alpha$, a small $s>0$ with $b-sv\\in B$ would give $\\alpha\\le H(b-sv)=\\alpha-s$, an impossibility. Thus both inequalities are strict when both sets are open.",
+          "inputs": [
+            "F2",
+            "F7",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "For complex $X$, restrict scalars to $\\mathbb R$. The scalar inclusion $\\mathbb R\\to\\mathbb C$ is continuous since it preserves distance, so the restricted scalar action is jointly continuous. Convexity and openness are unchanged. Apply the real construction to obtain $H$ and $\\alpha$. Set $f(x)=H(x)-iH(ix)$. It is additive and real-homogeneous, and $f(ix)=H(ix)-iH(-x)=H(ix)+iH(x)=if(x)$. For $\\lambda=a+ib$, additivity and real homogeneity therefore give $f(\\lambda x)=af(x)+bf(ix)=\\lambda f(x)$. Both $H$ and $x\\mapsto H(ix)$ are continuous; scalar addition and multiplication are continuous, so $f$ is continuous. Its real part is $H$, so it is nonzero and obeys the same inequalities. This proves the complex case as well, with the same single HB application and no assumption of AC.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "step 4.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement explicitly requires A and B nonempty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 proves v is nonzero, and step 2.1 treats scalar t=0."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 normalizes H(v)=1; step 3.1 uses the strict gauge threshold one."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement needs no Hausdorffness; in the zero space two such nonempty disjoint sets cannot exist."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 treats positive, zero and negative line parameters; step 5.1 treats possible equality on B."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 2.1 spends exactly one HB application; step 5.1 uses one b_0, not a family of choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The conclusion is existence of a separator, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The conclusion is existence of a separator, not an iff."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step 5A Alpha group b (phase-2-next-20)",
+        "notes": "Checked 1.1-6.1. Real case: fix d0 in D, U=D-d0, v=z-d0 (nonzero since z is not in D); v not in U and U={p_U<1} give p_U(v)>=1; h(tv)=t is well defined and real-linear and satisfies h<=p_U on the line (t>=0 from p_U(v)>=1, t<0 from nonnegativity). One HB application through the published relative dominated-extension theorem gives real-linear H with -p_U(-x)<=H(x)<=p_U(x) and H(v)=1. On U cap (-U) both bounds are <1, so H is continuous; H(d)-H(d0)<=p_U(d-d0)<1=H(z)-H(d0) gives H(d)<H(z). For A,B: D=A-B is open (union of translates) convex and avoids 0, so H(a)<H(b) for all a,b. With alpha=sup H(A) (finite because B is nonempty), openness of A gives a+sv in A for small s>0 and hence H(a)<alpha; if B is open, H(b)=alpha would give alpha<=H(b-sv)=alpha-s, a contradiction. Complex case: restrict scalars to R, set f=H-iH(ix), and check additivity, f(ix)=if(x), f(lambda x)=lambda f(x), continuity and Re f=H. HB is the only non-ZF input; no AC, no Hausdorffness, no local convexity beyond the hypotheses. No unresolved risk."
+      }
+    },
+    "thm-locally-convex-continuous-dual-separates-points": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-locally-convex-topological-vector-space",
+          "source_section": "Definition",
+          "quote": "Pointwise operations make $X'$ a vector subspace of the algebraic dual",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-balanced-convex-zero-neighborhood-refinement",
+          "source_section": "Statement",
+          "quote": "For every zero-neighborhood $U$ in a locally convex real or complex TVS, there is an open balanced convex zero-neighborhood $V$ with $\\overline V\\subseteq U$. Consequently $U$ contains a closed balanced convex zero-neighborhood. Balanced sets are symmetric. No Hausdorffness, Hahn\u2013Banach or choice principle is assumed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-locally-convex-open-convex-separation",
+          "source_section": "Statement",
+          "quote": "Assume **HB**, the real dominated-extension principle over ZF. Let $A,B$ be nonempty disjoint convex subsets of a real or complex TVS $X$, and suppose $A$ is open. There are a nonzero continuous $\\mathbb K$-linear functional $f$ and $\\alpha\\in\\mathbb R$ such that\n$$\\operatorname{Re}f(a)<\\alpha\\le\\operatorname{Re}f(b)\\qquad(a\\in A,\\ b\\in B).$$\nIf $B$ is also open, the same $\\alpha$ may be chosen with both pointwise inequalities strict. Here $\\operatorname{Re}f=f$ over $\\mathbb R$. Neither Hausdorffness nor local convexity beyond the given open convex set is needed.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "Work over ZF. The **real dominated-extension principle**, denoted **HB**, is the following assertion:\n\nFor every real vector space $X$, every sublinear functional $p:X\\to\\mathbb R$ in the sense of [[def-sublinear-functional]], every real linear subspace $M\\le X$ in the sense of [[def-linear-subspace]], and every real linear functional $g:M\\to\\mathbb R$ in the sense of [[def-algebraic-dual-and-linear-functional]],\n$$\\bigl(\\forall m\\in M,\\ g(m)\\le p(m)\\bigr)\\ \\Longrightarrow\\ \\exists F:X\\to\\mathbb R\\ \\bigl(F\\text{ is real linear},\\ F|_M=g,\\ \\forall x\\in X,\\ F(x)\\le p(x)\\bigr).$$\n\nThis names an additional principle; it does not assert a proof of HB in ZF. Subsequent results explicitly state when they assume HB. Neither topology nor completeness is part of this assertion. The subspace may be $\\{0\\}$ or all of $X$. Sublinearity at scalar zero gives $p(0)=0$, and a linear functional has value zero at zero.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-hausdorff-space",
+          "source_section": "Definition",
+          "quote": "any two distinct points are separated by disjoint open sets",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Fix $x\\ne y$ and put $v=x-y\\ne0$. Hausdorffness gives an open neighborhood $U$ of zero not containing $v$, by taking disjoint open neighborhoods of zero and $v$. Refine $U$ to an open convex zero-neighborhood $V\\subseteq U$. The singleton $\\{v\\}$ is convex and nonempty, and misses $V$.",
+          "inputs": [
+            "F2",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Apply open separation to $V$ and $\\{v\\}$. There are $f\\in X'$ and $\\alpha\\in\\mathbb R$ with $0=\\operatorname{Re}f(0)<\\alpha\\le\\operatorname{Re}f(v)$. Consequently $\\operatorname{Re}f(x)-\\operatorname{Re}f(y)=\\operatorname{Re}f(v)>0$. The only non-ZF input is the HB application inside that separation theorem.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Every linear functional vanishes at zero, so zero belongs to the intersection of the kernels. For nonzero $v$, step 2.1 applied to $x=v,y=0$ gives a functional with nonzero real part at $v$, hence $v$ does not belong to that intersection. This proves the kernel identity from point separation.",
+          "inputs": [
+            "step 2.1",
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Conversely, assume the kernel identity and fix $x\\ne y$, with $v=x-y$. Some $f\\in X'$ has $z=f(v)\\ne0$. Over $\\mathbb R$ this already separates real parts. Over $\\mathbb C$, if $\\operatorname{Re}z\\ne0$ again use $f$; otherwise $\\operatorname{Im}z\\ne0$, and $g=-if\\in X'$ has $\\operatorname{Re}g(v)=\\operatorname{Im}z\\ne0$. Thus the kernel identity implies the stated real-part separation. For $X=\\{0\\}$ there are no distinct points, and the kernel identity still holds. The proof selects a functional only for one fixed pair, never a simultaneous family.",
+          "inputs": [
+            "F1",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "The continuous dual is nonempty because it contains the zero linear functional, so the displayed intersection is never indexed by an empty family.",
+          "reviewed": {
+            "upheld": true,
+            "by": "root \u2014 Step 3 boundary review",
+            "reason": "The detector sees the displayed intersection over X', but X' always contains the zero continuous linear functional. The proof's zero-space branch is separate and does not create an empty index set."
+          }
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 puts zero in every kernel."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 covers the singleton zero space."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 uses Hausdorffness exactly to exclude a nonzero vector from a neighborhood."
+        },
+        {
+          "case": "endpoints",
+          "status": "not_applicable",
+          "reason": "There is no interval parameter; the strict inequality is established in step 2.1."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 4.1 makes no simultaneous selection; HB is inherited once in step 2.1."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 3.1 derives the kernel identity from real-part separation."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 derives real-part separation from the kernel identity, including purely imaginary values."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step 5A Alpha group b (phase-2-next-20)",
+        "notes": "Checked 1.1-4.1. Hausdorffness gives a zero-neighborhood missing v=x-y; refine it to an open convex zero-neighborhood V. The singleton {v} is nonempty convex and disjoint from V, so open separation gives f in X' and alpha with 0=Re f(0)<alpha<=Re f(v), hence Re f(x) is not Re f(y). The kernel identity follows: every functional vanishes at 0, while each nonzero v has a functional with nonzero real part there. Conversely, the kernel identity implies real-part separation; over C, if Re z=0 with z=f(v) nonzero, then g=-if has Re g(v)=Im z nonzero. Only the inherited HB application is non-ZF, and one functional is selected per fixed pair, never simultaneously. The zero space is included. No unresolved risk."
+      }
+    },
+    "thm-locally-convex-strict-separation": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-locally-convex-topological-vector-space",
+          "source_section": "Definition",
+          "quote": "The real part is continuous",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-topological-vector-space-translation-scaling-and-absorption",
+          "source_section": "Statement",
+          "quote": "In a real or complex TVS $X$, translations and multiplication by a nonzero scalar are homeomorphisms. Every zero-neighborhood $U$ absorbs every $x$: $x\\in tU$ for all sufficiently large positive real $t$. There is a symmetric open zero-neighborhood $W$ with $W+W\\subseteq U$. Every scalar-linear functional bounded in modulus on a zero-neighborhood is continuous. Scalar addition and multiplication are jointly continuous in the usual real or complex topology.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-balanced-convex-zero-neighborhood-refinement",
+          "source_section": "Statement",
+          "quote": "For every zero-neighborhood $U$ in a locally convex real or complex TVS, there is an open balanced convex zero-neighborhood $V$ with $\\overline V\\subseteq U$. Consequently $U$ contains a closed balanced convex zero-neighborhood. Balanced sets are symmetric. No Hausdorffness, Hahn\u2013Banach or choice principle is assumed.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-compact-space",
+          "source_section": "Definition",
+          "quote": "**compact** when every open cover of it has a finite subcover",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-subspace-topology-top",
+          "source_section": "Definition",
+          "quote": "**Restriction of a continuous map.** If $f : X \\to Y$ is continuous and\n$S \\subseteq X$, then $f|_S : S \\to Y$ is continuous, since\n$(f|_S)^{-1}[V] = f^{-1}[V] \\cap S$ is open in $S$ for every open $V \\subseteq Y$\n([[def-continuous-map-top]], [[thm-continuity-characterisations-top]]).",
+          "uses": [
+            "1.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-finite-choice",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $F$ be a function with domain $n$ all of whose\nvalues are nonempty sets. Then the family of its values,\n$\\mathcal{F} = F[n] = \\{\\, F(i) : i \\in n \\,\\}$, has a choice function\n([[def-choice-function]]).\n\nThis is a theorem of ZF: its proof uses no form of the Axiom of Choice\n([[def-axiom-of-choice]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$. The\nnatural number $n$ serves as the index set in the von Neumann sense,\n$n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so \"$F$ has domain $n$\"\nsays precisely that the members of $\\mathcal{F}$ are listed as\n$F(0), \\dots, F(n-1)$. The listing need not be injective, and $\\mathcal{F}$ is the\nset of values, so repetitions are harmless and are not counted.\n\nThe displayed statement and its proof use only a natural-number-indexed\nfunction. They do not identify an arbitrary finite family with a particular\nenumeration.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-locally-convex-open-convex-separation",
+          "source_section": "Statement",
+          "quote": "Assume **HB**, the real dominated-extension principle over ZF. Let $A,B$ be nonempty disjoint convex subsets of a real or complex TVS $X$, and suppose $A$ is open. There are a nonzero continuous $\\mathbb K$-linear functional $f$ and $\\alpha\\in\\mathbb R$ such that\n$$\\operatorname{Re}f(a)<\\alpha\\le\\operatorname{Re}f(b)\\qquad(a\\in A,\\ b\\in B).$$\nIf $B$ is also open, the same $\\alpha$ may be chosen with both pointwise inequalities strict. Here $\\operatorname{Re}f=f$ over $\\mathbb R$. Neither Hausdorffness nor local convexity beyond the given open convex set is needed.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "thm-compactness-under-continuous-maps",
+          "source_section": "Statement",
+          "quote": "Let $(X, \\mathcal{T}_X)$ and $(Y, \\mathcal{T}_Y)$ be topological spaces\n([[def-topological-space]]), and let $\\mathbb{R}$ carry its usual topology, the\nmetric topology of $d_{\\mathbb{R}}(s,t) = |s-t|$\n([[lem-real-line-is-a-metric-space]], [[def-metric-topology]],\n[[def-metrizable-space]]). Then:\n\n1. **Continuous images.** If $f : X \\to Y$ is continuous\n   ([[def-continuous-map-top]]) and $(X, \\mathcal{T}_X)$ is compact\n   ([[def-compact-space]]), then $f[X]$ is a compact subset of $Y$. More\n   generally, if $K \\subseteq X$ is a compact subset of $X$ then $f[K]$ is a\n   compact subset of $Y$.\n2. **Extreme values.** If $(X, \\mathcal{T}_X)$ is compact and nonempty and\n   $g : X \\to \\mathbb{R}$ is continuous, then $g[X]$ has a maximum and a minimum\n   ([[def-max-min]]): there are $x_{\\max}, x_{\\min} \\in X$ with\n   $$g(x_{\\min}) \\;\\le\\; g(x) \\;\\le\\; g(x_{\\max}) \\qquad \\text{for every } x \\in X .$$\n3. **Compact to Hausdorff.** If $(X, \\mathcal{T}_X)$ is compact, $(Y,\n   \\mathcal{T}_Y)$ is Hausdorff ([[def-hausdorff-space]]) and $f : X \\to Y$ is a\n   continuous bijection, then $f$ is a homeomorphism\n   ([[def-homeomorphism-and-open-maps]]).\n\nNonemptiness in claim 2 is a hypothesis and not an oversight: for\n$X = \\varnothing$ the image is empty and has neither a maximum nor a minimum. **No\nchoice principle is used**: the one selection made below is over a finite index\nset, where [[lem-finite-choice]] is a theorem of ZF.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "A1",
+          "source": "def-hahn-banach-extension-principle-relative",
+          "source_section": "Definition",
+          "quote": "Work over ZF. The **real dominated-extension principle**, denoted **HB**, is the following assertion:\n\nFor every real vector space $X$, every sublinear functional $p:X\\to\\mathbb R$ in the sense of [[def-sublinear-functional]], every real linear subspace $M\\le X$ in the sense of [[def-linear-subspace]], and every real linear functional $g:M\\to\\mathbb R$ in the sense of [[def-algebraic-dual-and-linear-functional]],\n$$\\bigl(\\forall m\\in M,\\ g(m)\\le p(m)\\bigr)\\ \\Longrightarrow\\ \\exists F:X\\to\\mathbb R\\ \\bigl(F\\text{ is real linear},\\ F|_M=g,\\ \\forall x\\in X,\\ F(x)\\le p(x)\\bigr).$$\n\nThis names an additional principle; it does not assert a proof of HB in ZF. Subsequent results explicitly state when they assume HB. Neither topology nor completeness is part of this assertion. The subspace may be $\\{0\\}$ or all of $X$. Sublinearity at scalar zero gives $p(0)=0$, and a linear functional has value zero at zero.",
+          "uses": [
+            "4.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Consider all pairs $(k,N)$ with $k\\in K$ and $N$ an open convex zero-neighborhood such that $k+N\\subseteq X\\setminus C$. There is such a pair above every $k$: since $C$ is closed, $(X\\setminus C)-k$ is an open zero-neighborhood, and it admits an open convex refinement. Each $G_{k,N}=K\\cap(k+\\tfrac12N)$ is open in $K$ and contains $k$. The family of all such sets covers $K$; it is defined by a property, without choosing a neighborhood for every $k$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Compactness gives finitely many cover members $G_1,\\ldots,G_m$ with $m\\ge1$. For each $j$ its set of representing pairs $(k,N)$ is nonempty. Finite choice gives representatives $(k_j,N_j)$ for this finite list. Put $W=\\bigcap_{j=1}^m\\tfrac12N_j$. It is an open convex zero-neighborhood.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "For $k\\in K$, some $j$ has $k=k_j+n/2$ with $n\\in N_j$. If $w\\in W$, write $w=n'/2$ with $n'\\in N_j$. Convexity gives $n/2+n'/2\\in N_j$, so $k+w\\in k_j+N_j\\subseteq X\\setminus C$. Therefore $(K+W)\\cap C=\\varnothing$. The set $K+W$ is nonempty and open as a union of translates of $W$, and convex because the convex combinations of its $K$ and $W$ components stay in those respective sets.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Apply open separation to $K+W$ and $C$, using HB once. Obtain a nonzero continuous scalar-linear $f$ and $\\beta\\in\\mathbb R$ such that $u(k+w)<\\beta\\le u(c)$, where $u=\\operatorname{Re}f$. The restriction $u|_K$ is continuous, since real part is continuous and restrictions are continuous. It attains a maximum $d=u(k_*)$ for some $k_*\\in K$. Since $0\\in W$, the strict inequality at $k_*+0$ gives $d<\\beta$. This attainment step turns pointwise strict separation into a uniform gap.",
+          "inputs": [
+            "F1",
+            "F5",
+            "F7",
+            "F8",
+            "A1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Put $\\alpha=(d+\\beta)/2$ and $\\varepsilon=(\\beta-d)/2>0$. Then $\\alpha-\\varepsilon=d$ and $\\alpha+\\varepsilon=\\beta$, so $u(k)\\le d=\\alpha-\\varepsilon<\\alpha+\\varepsilon=\\beta\\le u(c)$ for all $k,c$. A singleton $K$ is allowed and simply has its sole value as the maximum. Nonemptiness of $K$ is used for attainment and of $C$ in open separation; no other separation axiom or choice principle is used.",
+          "inputs": [
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "not_applicable",
+          "reason": "Statement requires K and C nonempty; their uses are identified in step 5.1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 4.1 uses zero in W; the functional is nonzero by separation."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 5.1 explicitly covers singleton K."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement permits a non-Hausdorff TVS; step 4.1 uses compactness only in its intrinsic topology."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 5.1 permits attained equalities at both margins while the middle gap is strictly positive."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 takes all admissible pairs; step 2.1 recovers finitely many witnesses; step 4.1 spends HB once."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a uniform-gap existence theorem, not an iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a uniform-gap existence theorem, not an iff."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step 5A Alpha group b (phase-2-next-20)",
+        "notes": "Checked 1.1-5.1. The family of pairs (k,N) with k in K and k+N contained in X\\C is defined by a property, without choosing a neighbourhood per point; since C is closed each k admits one, and G_{k,N}=K cap (k+half N) is relatively open and contains k. Compactness extracts a finite subcover and lem-finite-choice recovers only the finitely many witnessing pairs. W=intersection of the half-neighbourhoods is an open convex zero-neighborhood; if k=k_j+n/2 with n in N_j and w=n'/2 with n' in N_j then convexity gives n/2+n'/2 in N_j, so (K+W) cap C is empty; K+W is open convex and nonempty. Open separation gives u(k+w)<beta<=u(c) for u=Re f; u restricted to K is continuous and attains its maximum d at some k_* in K, and 0 in W gives d<beta. Setting alpha=(d+beta)/2 and eps=(beta-d)/2 gives the uniform gap u(k)<=alpha-eps<alpha+eps<=u(c). Singletons are included; nonemptiness is used exactly as stated; Hausdorffness is not required. Only HB is non-ZF. No unresolved risk."
+      }
+    },
+    "ex-product-scalar-topology-is-locally-convex": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-topological-vector-space-for-local-convexity",
+          "source_section": "Definition",
+          "quote": "Fix $\\mathbb K=\\mathbb R$ or $\\mathbb C$, with metric $d(s,t)=|s-t|$ from [[lem-real-line-is-a-metric-space]] or [[def-complex-metric-convergence-and-continuity]] and topology [[def-metric-topology]]. The topology axioms follow from [[thm-metric-open-set-algebra]]. Its finite-intersection argument selects radii from finitely many nonempty admissible-radius sets by [[lem-finite-choice]], then takes their positive minimum. No AC is assumed.\n\nA **topological vector space** (TVS) is a $\\mathbb K$-vector space $X$ ([[def-vector-space]]) with a topology ([[def-topological-space]]) for which addition $(x,y)\\mapsto x+y$ on $X\\times X$ and scalar multiplication $(a,x)\\mapsto ax$ on $\\mathbb K\\times X$ are jointly continuous ([[def-continuous-map-top]]). Both domains have [[def-product-topology]].\n\nA **zero-neighborhood** contains an open set containing $0$ ([[def-neighbourhood-top]]); it need not be open. A **Hausdorff TVS** additionally has disjoint open neighborhoods for distinct points ([[def-hausdorff-space]]). Hausdorffness is a separate hypothesis.\n\nThe zero vector space with its unique topology is allowed. A vector space is nonempty because it contains its specified zero. No norm, metric on $X$, local convexity or choice assumption is included.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-locally-convex-topological-vector-space",
+          "source_section": "Definition",
+          "quote": "Equivalently it has a base of open convex zero-neighborhoods.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-product-topology",
+          "source_section": "Definition",
+          "quote": "the finite intersections of members",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-product-universal-property",
+          "source_section": "Statement",
+          "quote": "Let $(X_i, \\mathcal{T}_i)_{i \\in I}$ be topological spaces and let\n$P := \\prod_{i \\in I} X_i$ carry the product topology, with projections $\\pi_j$\n([[def-product-topology]]). Then:\n\n1. **The projections are continuous**, and the product topology is the coarsest\n   topology on $P$ making all of them continuous.\n2. **Characteristic property.** For every space $Z$ and every function\n   $h : Z \\to P$,\n   $$h \\text{ is continuous } \\iff \\pi_i \\circ h \\text{ is continuous for every } i \\in I .$$\n   The functions $\\pi_i \\circ h$ are the **components** of $h$, and every family\n   of functions $h_i : Z \\to X_i$ arises from exactly one $h$, namely\n   $h(z)(i) := h_i(z)$.\n3. **The projections are open maps** ([[def-homeomorphism-and-open-maps]]), for\n   the product topology and for the box topology alike. They need not be closed;\n   that failure is recorded on this page as a false statement.\n4. **Surjectivity.** If every $X_i$ is nonempty then every $\\pi_j$ is surjective.\n   For $I$ a natural number this is a theorem of ZF ([[lem-finite-choice]]); for\n   an arbitrary $I$ it is the Axiom of Choice ([[def-axiom-of-choice]]), and this\n   is the only place in the item where a choice principle is used.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-topological-vector-space-translation-scaling-and-absorption",
+          "source_section": "Statement",
+          "quote": "In a real or complex TVS $X$, translations and multiplication by a nonzero scalar are homeomorphisms. Every zero-neighborhood $U$ absorbs every $x$: $x\\in tU$ for all sufficiently large positive real $t$. There is a symmetric open zero-neighborhood $W$ with $W+W\\subseteq U$. Every scalar-linear functional bounded in modulus on a zero-neighborhood is continuous. Scalar addition and multiplication are jointly continuous in the usual real or complex topology.",
+          "uses": [
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-hausdorff-space",
+          "source_section": "Definition",
+          "quote": "any two distinct points are separated by disjoint open sets",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-finite-choice",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ and let $F$ be a function with domain $n$ all of whose\nvalues are nonempty sets. Then the family of its values,\n$\\mathcal{F} = F[n] = \\{\\, F(i) : i \\in n \\,\\}$, has a choice function\n([[def-choice-function]]).\n\nThis is a theorem of ZF: its proof uses no form of the Axiom of Choice\n([[def-axiom-of-choice]]).\n\nWhat is proved below is exactly the displayed statement, by induction on $n$. The\nnatural number $n$ serves as the index set in the von Neumann sense,\n$n = \\{0, 1, \\dots, n-1\\}$ ([[def-natural-numbers]]), so \"$F$ has domain $n$\"\nsays precisely that the members of $\\mathcal{F}$ are listed as\n$F(0), \\dots, F(n-1)$. The listing need not be injective, and $\\mathcal{F}$ is the\nset of values, so repetitions are harmless and are not counted.\n\nThe displayed statement and its proof use only a natural-number-indexed\nfunction. They do not identify an arbitrary finite family with a particular\nenumeration.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "The function $i\\mapsto0$ is a specified element of $\\mathbb K^I$, and $(x+y)(i)=x(i)+y(i)$, $(ax)(i)=ax(i)$ and $(-x)(i)=-x(i)$ define functions on $I$. Associativity, commutativity and the zero/inverse laws follow at each coordinate from the scalar field; the two distributive laws, associativity of scalar action and the unit action also follow at each coordinate. Function equality is coordinatewise, so these give every vector-space axiom.",
+          "inputs": [
+            "F1",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The $i$-th component of addition is $(x,y)\\mapsto x_i+y_i$, a composite of the continuous coordinate maps and scalar addition. The $i$-th component of scalar multiplication is $(a,x)\\mapsto ax_i$, similarly continuous by joint scalar multiplication. Therefore both vector operations are jointly continuous by product universality. This uses neither projection surjectivity nor nonemptiness of an arbitrary product of unrelated factors.",
+          "inputs": [
+            "F4",
+            "F5",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Each $N(F,\\varepsilon)$ is open, being a finite intersection of inverse images of open scalar disks, and contains zero. If $x,y$ are in it and $0\\le t\\le1$, then $|(1-t)x_i+ty_i|\\le(1-t)|x_i|+t|y_i|<\\varepsilon_i$ for $0<t<1$, with $t=0,1$ immediate. If $|a|\\le1$, then $|ax_i|\\le|x_i|<\\varepsilon_i$, including $a=0$. Thus these neighborhoods are convex and balanced. Given any basic zero-neighborhood, choose a positive radius inside each of its finitely many coordinate neighborhoods, by finite choice after listing those coordinates. The resulting $N(F,\\varepsilon)$ is contained in it. Hence these sets form a base and the TVS is locally convex. For $F=\\varnothing$, the set is the whole space.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F4",
+            "F7",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "If $x\\ne y$, some coordinate $i$ has $d=|x_i-y_i|>0$. The inverse images of the disks of radius $d/3$ about $x_i,y_i$ are open neighborhoods of $x,y$. They are disjoint, since a common scalar value would imply $d<2d/3$ by the triangle inequality. Thus the space is Hausdorff. For $I=\\varnothing$, its only element is the empty function; its only zero-neighborhood is the whole singleton, the vector operations are constant, and the Hausdorff assertion is vacuous.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F6",
+            "step 3.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 4.1 treats the empty index set explicitly."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 provides the zero function; step 3.1 treats zero scaling."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 gives the singleton empty product; one coordinate recovers the scalar topology."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 includes F empty, with N equal to the entire space."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 verifies coefficients t=0 and t=1 and scalar modulus one."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 uses finite choice for radii only; step 1.1 supplies the product point explicitly."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This is a concrete product construction, not an iff theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "This is a concrete product construction, not an iff theorem."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step 5A Alpha group b (phase-2-next-20)",
+        "notes": "Checked the verification steps. The vector axioms hold coordinatewise with the explicitly supplied zero function (no product nonemptiness is used). Joint continuity of addition and scalar multiplication follows from the choice-free clauses of the product universal property applied to the coordinate composites. Each N(F,eps) is open, contains zero, is convex ((1-t)x+ty has modulus below eps_i for 0<t<1, endpoints immediate) and balanced (|a|<=1); they refine every basic zero-neighborhood by finite choice over the listed coordinates, so they form a base and the space is locally convex. Distinct functions differ in one coordinate, where disjoint scalar disks at radius d/3 pull back to disjoint open neighborhoods, giving Hausdorffness. For empty I the unique element is the empty function and the assertions are vacuous or immediate. No choice. No unresolved risk."
+      }
+    },
+    "ex-locally-convex-separation-by-a-coordinate": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "ex-product-scalar-topology-is-locally-convex",
+          "source_section": "Example",
+          "quote": "For any set $I$ and $\\mathbb K=\\mathbb R$ or $\\mathbb C$, the vector space $\\mathbb K^I$ of all functions $I\\to\\mathbb K$, with pointwise operations and the product topology, is a Hausdorff locally convex TVS. Its zero-neighborhood base consists of\n$$N(F,\\varepsilon)=\\{x:|x_i|<\\varepsilon_i\\text{ for every }i\\in F\\},$$\nwhere $F\\subseteq I$ is finite and each $\\varepsilon_i>0$. The case $I=\\varnothing$ is included. No choice principle is needed.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-locally-convex-topological-vector-space",
+          "source_section": "Definition",
+          "quote": "Pointwise operations make $X'$ a vector subspace of the algebraic dual",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-product-universal-property",
+          "source_section": "Statement",
+          "quote": "Let $(X_i, \\mathcal{T}_i)_{i \\in I}$ be topological spaces and let\n$P := \\prod_{i \\in I} X_i$ carry the product topology, with projections $\\pi_j$\n([[def-product-topology]]). Then:\n\n1. **The projections are continuous**, and the product topology is the coarsest\n   topology on $P$ making all of them continuous.\n2. **Characteristic property.** For every space $Z$ and every function\n   $h : Z \\to P$,\n   $$h \\text{ is continuous } \\iff \\pi_i \\circ h \\text{ is continuous for every } i \\in I .$$\n   The functions $\\pi_i \\circ h$ are the **components** of $h$, and every family\n   of functions $h_i : Z \\to X_i$ arises from exactly one $h$, namely\n   $h(z)(i) := h_i(z)$.\n3. **The projections are open maps** ([[def-homeomorphism-and-open-maps]]), for\n   the product topology and for the box topology alike. They need not be closed;\n   that failure is recorded on this page as a false statement.\n4. **Surjectivity.** If every $X_i$ is nonempty then every $\\pi_j$ is surjective.\n   For $I$ a natural number this is a theorem of ZF ([[lem-finite-choice]]); for\n   an arbitrary $I$ it is the Axiom of Choice ([[def-axiom-of-choice]]), and this\n   is the only place in the item where a choice principle is used.",
+          "uses": [
+            "1.1",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-complex-conjugation-and-modulus-laws",
+          "source_section": "Statement",
+          "quote": "Complex conjugation is a real-field automorphism satisfying\n$$\\overline{z+w}=\\overline z+\\overline w,\\qquad \\overline{zw}=\\overline z\\,\\overline w,\\qquad \\overline{\\overline z}=z.$$\nFor every $z,w\\in\\mathbb C$,\n$$z\\overline z=|z|^2,\\qquad |z|\\ge0,\\qquad |z|=0\\Longleftrightarrow z=0,$$\n$$|zw|=|z||w|,\\qquad |z+w|\\le |z|+|w|.$$",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Pointwise operations give $f(x+y)=f(x)+f(y)$ and $f(cx)=cf(x)$, so the projection $f$ is scalar-linear; it is continuous. Thus $u=\\operatorname{Re}f$ is continuous and real-linear. The rays $(-\\infty,a]$ and $",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The constant functions with values $a$ and $b$ belong to $A$ and $B$, respectively, so both sets are nonempty. Their intersection is empty since $b>a$. Set $\\alpha=(a+b)/2$ and $\\varepsilon=(b-a)/2>0$. Then for every $x\\in A,y\\in B$, $$\\operatorname{Re}f(x)\\le a=\\alpha-\\varepsilon<\\alpha+\\varepsilon=b\\le\\operatorname{Re}f(y).$$ The constant-one function has $f(1)=1$, so $f$ is nonzero.",
+          "inputs": [
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "For distinct $x,y$, fix one index $i$ with $z=x_i-y_i\\ne0$. Over $\\mathbb C$ put $c=\\overline z/|z|$; then $|c|=1$ and $cz=|z|>0$. Over $\\mathbb R$ put $c=z/|z|$, which gives the same identities. Thus $g(w)=cw_i$ is continuous and scalar-linear, and $\\operatorname{Re}g(x)-\\operatorname{Re}g(y)=|z|>0$. The index and unit scalar are chosen for this one supplied pair; there is no simultaneous choice. If $I$ is empty there is no $i_0$ and no pair of distinct functions, so the respective hypotheses do not arise.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 explains why an empty I cannot meet the fixed-index or distinct-point hypotheses."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 excludes z=0 before dividing; arbitrary a=0 or b=0 is permitted by step 2.1."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 evaluates the constant-one function to prove f nonzero."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 2.1 uses a<b; equality is excluded since it gives no positive gap."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 attains the outer bounds at the two constant functions."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 needs only one differing index and gives the scalar explicitly; no HB."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The example constructs separators and asserts no iff."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The example constructs separators and asserts no iff."
+        }
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Step 5A Alpha group b (phase-2-next-20)",
+        "notes": "Checked 1.1-3.1. The coordinate projection f(x)=x_{i0} is continuous scalar-linear by the product universal property, so u=Re f is continuous real-linear; A={Re x_{i0}<=a} and B={Re x_{i0}>=b} are closed convex nonempty (constant witnesses a,b) with empty intersection for a<b. With alpha=(a+b)/2 and eps=(b-a)/2 the displayed uniform gap holds and f is nonzero (constant-one function). For distinct x,y choose i with z=x_i-y_i nonzero; over C the unit scalar c=zbar/|z| gives Re(c z)=|z|>0, and over R c=z/|z| gives the same, so g(w)=c w_i is a continuous scalar-linear separator. No HB, compactness or simultaneous selection is used; the empty-index hypotheses do not arise. No unresolved risk."
+      }
+    },
+    "cex-convex-maximum-set-need-not-be-a-face": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-locally-convex-topological-vector-space",
+          "source_section": "Definition",
+          "quote": "$0\\le t\\le1$",
+          "uses": [
+            "1.1",
+            "1.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "cor-heine-borel-in-the-product-topology",
+          "source_section": "Statement",
+          "quote": "Let $n \\in \\mathbb{N}$ with $n \\ge 1$, let $\\mathbb{R}^n$ be the set of functions\n$n \\to \\mathbb{R}$ ([[lem-metrics-on-rn]]) carrying the product topology of $n$\ncopies of the usual topology of $\\mathbb{R}$ ([[def-product-topology]]), and let\n$d_2$ be the Euclidean metric. Then:\n\n1. The product topology on $\\mathbb{R}^n$ **is** the metric topology of $d_2$\n   ([[def-metric-topology]]), so $\\mathbb{R}^n$ as a product and $\\mathbb{R}^n$ as\n   a metric space are one topological space, and it is metrizable\n   ([[def-metrizable-space]]).\n2. A subset $K \\subseteq \\mathbb{R}^n$ is a compact subset for the product\n   topology ([[def-compact-space]]) **if and only if** $K$ is closed in\n   $\\mathbb{R}^n$ and bounded ([[def-metric-bounded-diameter]]).\n\nThe hypothesis $n \\ge 1$ is inherited from [[lem-metrics-on-rn]], which defines\n$\\mathbb{R}^n$ and its three metrics only there; for $n = 0$ the product is a\none-point space and is compact. **No choice principle is used**: the metric\nstatement it is read off from is proved by bisection\n([[thm-heine-borel-rn]]).",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "The interval $[-1,1]$ is convex since $-1\\le s,t\\le1$ implies $-1\\le(1-r)s+rt\\le1$ for $0\\le r\\le1$. It is closed, its complement being the open rays $(-\\infty,-1)$ and $(1,\\infty)$, and bounded by one in absolute value. Hence it is nonempty compact convex. For $s,t\\in K$, $|q(s)-q(t)|=|s-t||s+t|\\le2|s-t|$, which proves continuity on $K$ directly.",
+          "inputs": [
+            "F1",
+            "F2"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "For $s,t\\in K$ and $0\\le r\\le1$, $$(1-r)s^2+rt^2-\\big((1-r)s+rt\\big)^2=r(1-r)(s-t)^2\\ge0.$$ Thus $q((1-r)s+rt)\\le(1-r)q(s)+rq(t)$, the defining convexity inequality for a function. It includes $r=0,1$ and $s=t$, where equality holds.",
+          "inputs": [
+            "F1"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "On $K$, $q(t)\\le1$ with equality exactly when $t=-1$ or $t=1$, because $1-t^2=(1-t)(1+t)$ and both factors are nonnegative. The maximum set is therefore $M=\\{-1,1\\}$. Its midpoint is zero, and $q(0)=0<1$, so $0\\notin M$. Thus $M$ is not convex and cannot be a face. This refutes the claim with a continuous convex function on a compact convex set.",
+          "inputs": [
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Nevertheless $M$ is extremal. If $(1-r)s+rt=1$ with $s,t\\in K$ and $0<r<1$, then $(1-r)(1-s)+r(1-t)=0$. Each summand is nonnegative and each coefficient is positive, so $s=t=1$. Similarly a combination equal to $-1$ gives $(1-r)(s+1)+r(t+1)=0$ and forces $s=t=-1$. Thus the endpoint property holds even though convexity fails. All witnesses and computations are explicit and choice-free.",
+          "inputs": [
+            "step 2.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 1.1 gives a nonempty compact domain, and step 2.1 gives a nonempty maximum set."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 2.1 computes q(0)=0, exhibiting the missing midpoint."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 2.1 computes the maximum one at both endpoints."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.2 includes s=t, showing equality for degenerate segments."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.2 covers r=0,1; step 3.1 uses strictly positive endpoint weights for the face property."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 records explicit witnesses and no choice principle."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The refuted universal statement is not an equivalence."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The refuted universal statement is not an equivalence."
+        }
+      ]
+    }
+  }
+}

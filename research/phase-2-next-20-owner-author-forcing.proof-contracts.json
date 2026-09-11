@@ -1,0 +1,1711 @@
+{
+  "version": 1,
+  "scope": [
+    "lem-lc-fine-measure-coordinate-family",
+    "lem-lc-generic-boolean-ground-joins",
+    "lem-lc-boolean-generic-truth",
+    "lem-lc-boolean-generic-zfc-and-ordinals",
+    "thm-lc-supercompact-preparation-interface",
+    "lem-lc-probability-algebra-completeness",
+    "lem-lc-solovay-density-locality-and-null-joins",
+    "lem-lc-generic-evaluation-of-measurable-densities",
+    "lem-lc-solovay-measure-on-generic-subsets",
+    "thm-lc-strong-compactness-product-measure-extension-interface"
+  ],
+  "contracts": {
+    "lem-lc-fine-measure-coordinate-family": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "thm-lc-strong-compactness-fine-measures-and-logic",
+          "source_section": "Statement",
+          "quote": "In ZFC, for a regular uncountable cardinal kappa, the following are equivalent: kappa is strongly compact; every P_kappa(lambda), for a cardinal lambda>=kappa, carries a fine kappa-complete ultrafilter; every less-than-kappa satisfiable set-sized $L_{\\kappa,\\kappa}$ theory has a model; and the same compactness assertion holds for $L_{\\kappa,\\omega}$. Languages may have arbitrary set size.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-lc-fine-ultrafilters-strong-compactness-and-supercompactness",
+          "source_section": "Definition",
+          "quote": "Work in ZFC, with [[def-axiom-of-choice]] for cardinal sizes, and fix a regular uncountable cardinal kappa as in [[def-cofinality]]. For a cardinal lambda>=kappa put\n\n$$P_\\kappa(\\lambda)=\\{x\\subseteq\\lambda:|x|<\\kappa\\}.$$\n\nThis is a set by Separation from the power set, and contains empty. A proper kappa-complete ultrafilter U on this index set, in the sense of [[def-lc-complete-ultrafilters-and-measurable-cardinals]], is **fine** if $\\{x:\\alpha\\in x\\}\\in U$ for every alpha<lambda. It is **normal** if whenever S belongs to U and $f:S\\to\\lambda$ satisfies f(x) in x for every x in S, some fibre of f belongs to U. In particular such a domain cannot contain the empty index x. Fineness alone does not assert normality.\n\nThe cardinal kappa is **strongly compact** if every proper kappa-complete filter on every set extends to a kappa-complete ultrafilter on that same set. It is **lambda-supercompact** if P_kappa(lambda) carries a normal fine kappa-complete ultrafilter; it is **supercompact** if it is lambda-supercompact for every cardinal lambda>=kappa. These are existence properties, not assertions that such cardinals or measures exist. Lambda=kappa is allowed. No comparison between strong compactness and supercompactness is assumed in this definition.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-lc-complete-ultrafilters-and-measurable-cardinals",
+          "source_section": "Definition",
+          "quote": "For an infinite cardinal kappa, a proper filter U on I is **kappa-complete** if $\\bigcap_{\\xi<\\eta}A_\\xi\\in U$ whenever $\\eta<\\kappa$ and each $A_\\xi\\in U$. The intersection with no factors is I. **Countably complete** means closed under countable intersections, equivalently omega_1-complete in ZFC. Ultrafilter and nonprincipal use [[def-ultrafilter]]; cardinals use [[def-cardinal]].\n\nA **measurable cardinal** is an uncountable kappa carrying a nonprincipal kappa-complete ultrafilter on the full power set of kappa. Such a U is a **normal measure** if every function $f:S\\to\\kappa$ with $S\\in U$, $0\\notin S$ and $f(\\alpha)<\\alpha$ is constant on a set in U contained in S. A set in U is called measure one.\n\nThe associated zero-one set function is $m_U(A)=1$ if $A\\in U$, and zero otherwise. It is not the definition of a real-valued measurable cardinal. The fixed-index filter and normality conditions are formulas of ZF and do not themselves use Choice. General cardinality language and the large-cardinal implications on this page use ZFC, with [[def-axiom-of-choice]] explicit. No ultrafilter or measurable-cardinal existence is asserted.",
+          "uses": [
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-ordinal-arithmetic-monotonicity",
+          "source_section": "Statement",
+          "quote": "**(b) Strictly increasing on the right, for $+$.**\n$\\beta \\in \\gamma$ implies $\\alpha + \\beta \\in \\alpha + \\gamma$; equivalently\n$\\beta < \\gamma \\Rightarrow \\alpha + \\beta < \\alpha + \\gamma$. Hence\n**left cancellation**: $\\alpha + \\beta = \\alpha + \\gamma$ implies\n$\\beta = \\gamma$; and $\\alpha \\le \\alpha + \\beta$, with equality exactly when\n$\\beta = 0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-hartogs",
+          "source_section": "Statement",
+          "quote": "For every set $A$ there is an ordinal ([[def-ordinal]]) that does not inject\ninto $A$, that is, admits no injective function into $A$. The least such\nordinal is the **Hartogs number** $\\aleph(A)$, and it is exactly\n\n$$\\aleph(A) = \\{\\mathrm{ot}(S, R) : S \\subseteq A \\text{ and } R \\text{ well-orders } S\\},$$\n\nthe set of order types ([[thm-mostowski-collapse]]) of the well-ordered subsets\nof $A$.\n\n**The proof is choice free.** That is the whole point of the theorem: in ZF\nalone, with no assumption that $A$ can be well ordered, one still gets an\nordinal too long to be laid inside $A$.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-mostowski-collapse",
+          "source_section": "Statement",
+          "quote": "Every well-order $(W, <)$ ([[def-well-order]]) is order isomorphic\n([[def-order-isomorphism]]) to **exactly one** ordinal ([[def-ordinal]]), called\nits **order type** and written $\\mathrm{ot}(W)$.\n\nThe isomorphism is the collapsing map $F(a) = \\{F(b) : b < a\\}$, and it is\nunique as well, by rigidity ([[lem-well-order-rigid]]).\n\n**This uses Replacement, and no form of the Axiom of Choice.**",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.",
+          "uses": [
+            "1.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Hartogs of the ordinal kappa+lambda is an initial ordinal strictly above it. A fine complete ultrafilter on its small subsets is nonprincipal, since every index omits some point whose cone lies in the ultrafilter.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "F7"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "The uniquely defined order types of x intersect (kappa+alpha) form set functions into kappa: order type has size below the initial ordinal kappa. Ordinal addition puts all cut points in the index cardinal and orders them strictly.",
+          "inputs": [
+            "F2",
+            "F4",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "On the cone containing kappa+alpha, its predecessor segment in x intersect (kappa+beta) is proper, so its order type is strictly smaller. Fineness and upward closure give the comparison set.",
+          "inputs": [
+            "F2",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "step": "3.2",
+          "claim": "The intersection of cones for xi<=delta forces the initial segment delta+1 into each coordinate domain. Its order type exceeds delta. The displayed finite and infinite injections justify delta+1<kappa.",
+          "inputs": [
+            "F2",
+            "F3",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Order-type enumeration of small S permits completeness to give avoidance for each coordinate; finite intersections with comparison sets give H(F,S). Empty F, empty S and singleton F are checked directly.",
+          "inputs": [
+            "F3",
+            "F6",
+            "step 2.1",
+            "step 3.1",
+            "step 3.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 2.1 defines every coordinate at the empty index as zero. Step 4.1 gives H(empty,S)=I and the empty support intersection I."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.2 handles delta=0 by the point cone at zero; alpha=0 has cut point kappa, so this domination argument still applies."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.1 treats a singleton F without pair comparisons. A singleton support uses precisely one domination set."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 1.1 excludes principal ultrafilters by a missing-point cone at each index. No normality assumption is hidden in order-type coordinates."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 2.1 permits lambda=kappa and every alpha<lambda, even at singular lambda. Step 3.2 proves the strict delta+1<kappa bound; support size equal to kappa is not asserted."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 1.1 inherits AC exactly from F1 cone-filter witness selection. Step 2.1 uses unique order types and Replacement; step 4.1 uses the inherited ordinal order of S, not arbitrary representative choices."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The statement constructs one coordinate family from strong compactness; it does not assert any equivalence or a characterization of strong compactness."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No implication from existence of these coordinates to strong compactness is claimed; such a converse is not used by the PMEA consumer."
+        }
+      ]
+    },
+    "lem-lc-probability-algebra-completeness": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-measure",
+          "source_section": "Definition",
+          "quote": "Let $X$ be a set and let $\\mathcal A$ be a sigma-algebra on $X$ ([[def-sigma-algebra]]). A **measure** on $(X,\\mathcal A)$ is a function\n\n$$\\mu:\\mathcal A\\longrightarrow[0,+\\infty]\\subseteq\\overline{\\mathbb R}$$\n\nsuch that:\n\n1. $\\mu(\\varnothing)=0$;\n2. for every pairwise disjoint sequence $(E_k)_{k\\in\\mathbb N}$ in $\\mathcal A$,\n   $$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)=\\sum_{k=0}^{\\infty}\\mu(E_k),$$\n   where the right side is the nonnegative extended sum of [[def-nonnegative-extended-series]].\n\nThe second condition is **countable additivity**. It begins at index $0$ and includes the case in which some term or the total sum is $+\\infty$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "thm-finite-and-countable-subadditivity-of-measures",
+          "source_section": "Statement",
+          "quote": "Let $\\mu$ be a measure and let $(E_k)_{k\\in\\mathbb N}$ be measurable. Then\n\n$$\\mu\\left(\\bigcup_{k\\in\\mathbb N}E_k\\right)\\le\\sum_{k=0}^{\\infty}\\mu(E_k).$$\n\nFor every $m\\in\\mathbb N$ one also has\n\n$$\\mu\\left(\\bigcup_{k<m}E_k\\right)\\le\\sum_{k<m}\\mu(E_k),$$\n\nincluding $m=0$, where both sides are $0$.",
+          "uses": [
+            "1.1",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-continuity-from-below-for-measures",
+          "source_section": "Statement",
+          "quote": "Let $(E_n)_{n\\in\\mathbb N}$ be an increasing sequence of measurable sets for a measure $\\mu$, so $E_n\\subseteq E_{n+1}$. Then\n\n$$\\mu\\left(\\bigcup_{n\\in\\mathbb N}E_n\\right)=\\sup_{n\\in\\mathbb N}\\mu(E_n).$$\n\nNo finiteness hypothesis is required.",
+          "uses": [
+            "3.1",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-boolean-algebra-for-stone-duality",
+          "source_section": "Definition",
+          "quote": "In ZF, a **Boolean algebra** is a set $B$ with binary operations $\\wedge,\\vee$, a unary operation $\\neg$, and elements $0,1$, satisfying the bounded distributive lattice laws and\n\n$$a\\wedge\\neg a=0,\\qquad a\\vee\\neg a=1\\quad(a\\in B).$$\n\nExplicitly, both binary operations are associative, commutative and idempotent; they satisfy absorption and both distributive laws; $a\\wedge1=a$, $a\\vee0=a$, $a\\wedge0=0$ and $a\\vee1=1$. Its order is $a\\le b$ if $a\\wedge b=a$, equivalently $a\\vee b=b$.\n\nThe algebra is nonempty because its bounds are elements. We allow $0=1$, in which case every $a$ equals $a\\wedge1=a\\wedge0=0$. This one-element algebra is called **trivial**. Otherwise the algebra is **nontrivial**. The empty join is $0$ and the empty meet is $1$.\n\nAll Boolean homomorphisms in this development preserve both bounds, as well as the operations.",
+          "uses": [
+            "1.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-complete-boolean-algebra-and-regular-open-sets",
+          "source_section": "Definition",
+          "quote": "A [[def-boolean-algebra-for-stone-duality|Boolean algebra]] $B$ is **complete**, or **Dedekind complete**, if every subset $A\\subseteq B$ has a least upper bound $\\bigvee A$. Complements then give greatest lower bounds by $\\bigwedge A=\\neg\\bigvee\\{\\neg a:a\\in A\\}$. The empty bounds are $\\bigvee\\varnothing=0$ and $\\bigwedge\\varnothing=1$. The one-element Boolean algebra is allowed.\n\nFor a [[def-topological-space|topological space]] $X$, $\\operatorname{int}E$ is the union of the open subsets of $E$, and $\\overline E$ is the intersection of the closed subsets containing $E$. An open set $U$ is **regular open** if $U=\\operatorname{int}\\overline U$. Write $\\operatorname{RO}(X)$ for the set of regular open subsets, ordered by inclusion. Its proposed operations, justified by [[thm-regular-open-sets-form-a-complete-boolean-algebra]], are\n\n$$\\bigvee\\mathcal U=\\operatorname{int}\\overline{\\bigcup\\mathcal U},\\qquad \\bigwedge\\mathcal U=\\operatorname{int}\\bigcap\\mathcal U,\\qquad \\neg U=\\operatorname{int}(X\\setminus U)=X\\setminus\\overline U.$$\n\nHere the empty union is $\\varnothing$ and the empty intersection is $X$; finite meets will be ordinary finite intersections, and the bounds will be $\\varnothing,X$. No separation axiom on $X$ is assumed.\n\nA [[def-boolean-homomorphism-and-quotient|Boolean homomorphism]] $h:B\\to C$ is **order-continuous** if it preserves every supremum and infimum that exists in $B$: whenever $b=\\bigvee_B A$ exists, $h(b)=\\bigvee_C h[A]$, and likewise for infima. This includes empty families. An **order-dense Boolean embedding** $i:B\\to C$ is an injective Boolean homomorphism such that each $0<c\\in C$ has some $b\\in B$ with $0<i(b)\\le c$. A **Boolean completion** is such an embedding into a complete Boolean algebra. This definition asserts neither existence of a completion nor extension of a homomorphism.",
+          "uses": [
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-extended-reals-complete",
+          "source_section": "Statement",
+          "quote": "Let $A \\subseteq \\overline{\\mathbb{R}}$ be **any** subset of the extended real\nline ([[def-extended-reals]]) and write $A_{\\mathbb{R}} := A \\cap \\mathbb{R}$.\nThen $A$ has a least upper bound and a greatest lower bound in\n$\\overline{\\mathbb{R}}$ ([[def-upper-bound]]), each unique, which we write\n$\\sup A$ and $\\inf A$ with the ambient set always $\\overline{\\mathbb{R}}$.\nExplicitly:\n\n- $\\sup A = +\\infty$ if $+\\infty \\in A$, or if $A_{\\mathbb{R}}$ is not bounded above in $\\mathbb{R}$;\n- $\\sup A = -\\infty$ if $+\\infty \\notin A$ and $A_{\\mathbb{R}} = \\emptyset$;\n- $\\sup A$ is the real supremum $\\sup A_{\\mathbb{R}}$ ([[def-complete-ordered-field]]) if $+\\infty \\notin A$ and $A_{\\mathbb{R}}$ is nonempty and bounded above in $\\mathbb{R}$;\n\nand dually, with $-\\infty$ and $+\\infty$ exchanged and \"above\" replaced by\n\"below\", for $\\inf A$ ([[def-infimum]], [[thm-infimum-property]]).\n\n**Agreement.** If $A \\subseteq \\mathbb{R}$ is nonempty and bounded above in\n$\\mathbb{R}$ ([[def-bounded-set]]) then $\\sup A$ computed in\n$\\overline{\\mathbb{R}}$ is the real number $\\sup A$ of\n[[def-complete-ordered-field]]; if $A \\subseteq \\mathbb{R}$ is nonempty and\nbounded below then $\\inf A$ computed in $\\overline{\\mathbb{R}}$ is the real\nnumber $\\inf A$ of [[thm-infimum-property]]. In particular the notation is\nunambiguous on the sets for which the real supremum and infimum are defined, and\n$\\sup \\emptyset = -\\infty$, $\\inf \\emptyset = +\\infty$ in\n$\\overline{\\mathbb{R}}$.\n\n**No hypothesis is placed on $A$.** This is exactly what the real supremum cannot\ndo, and it is why every $\\limsup$ statement on this page holds for every sequence\nrather than for bounded ones only. It is also not a weakening of the discipline\nthis library keeps around suprema: the operation supplied here is a *different*\noperation, taken in a *different* ordered set, and the agreement clause records\nexactly where the two coincide.",
+          "uses": [
+            "3.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Symmetric difference is symmetric, $A\\triangle A=\\varnothing$, and $A\\triangle C\\subseteq(A\\triangle B)\\cup(B\\triangle C)$. F1 and F2 therefore give an equivalence relation. Its classes form a set quotient of $\\Sigma$. Replacing either input of a union or intersection by an equivalent set changes the result only inside the union of the input symmetric differences; complement preserves symmetric difference. Hence the operations are well-defined and inherit all F4 identities from set operations. Splitting sets into disjoint differences shows that equivalent sets have equal measure, so $m$ is well-defined. It vanishes exactly on the zero class, and $m(1)=1$, making the algebra nontrivial. The equation $[A]\\wedge[B]=[A]$ is equivalent to $\\mu(A\\setminus B)=0$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For a sequence $(a_n)$ choose representatives $A_n$ by F6 and put $a=[\\bigcup_n A_n]$. This bounds every $a_n$. If $b=[B]$ is another upper bound, each $A_n\\setminus B$ is null; F2 makes their union null, so $a\\le b$. Thus $a$ is the supremum. Another sequence of representatives gives the same class, again by F2. For a disjoint sequence of Boolean elements, remove from $A_n$ all earlier $A_j$ to obtain literally disjoint representatives: the removed part is a finite union of null intersections. F1 then proves $m(\\bigvee_n a_n)=\\sum_n m(a_n)$. An empty sequence has supremum zero.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Given $D\\subseteq\\mathbb B$, let $s$ be the supremum supplied by F7 in $[0,1]$ of $m(\\bigvee F)$ over finite $F\\subseteq D$, including $F=\\varnothing$. Choose finite $F_n\\subseteq D$ with $m(\\bigvee F_n)>s-2^{-n}$; when $s=0$ all $F_n$ may be empty. Put $D_0=\\bigcup_n F_n$, which is countable by F6, and let $c=\\bigvee D_0$ using step 2.1. The finite joins over $F_0\\cup\\cdots\\cup F_n$ increase to $c$. Measurable representatives can be chosen increasing by taking successive finite unions, so F3 gives $m(c)=s$.",
+          "inputs": [
+            "F3",
+            "F6",
+            "F7",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "step": "3.2",
+          "claim": "Let $A$ be an antichain of nonzero elements. For each positive integer $n$ put $A_n=\\{a\\in A:m(a)\\ge1/n\\}$. Any $n+1$ distinct members of $A_n$ would have disjoint join of measure at least $(n+1)/n>1$, contrary to step 2.1. Thus $A_n$ has at most $n$ elements. Strict positivity gives $A=\\bigcup_{n\\ge1}A_n$, and F6 makes this union countable. The empty antichain and singleton antichains satisfy the same bound.",
+          "inputs": [
+            "F6",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "For any $d\\in D$, the finite joins in step 3.1 with $d$ adjoined still have measure at most $s$. F3 gives $m(c\\vee d)\\le s=m(c)$. Disjoint additivity then gives $m(d\\wedge\\neg c)=m(c\\vee d)-m(c)=0$, hence $d\\le c$ by strict positivity. Any upper bound of $D$ bounds $D_0$ and thus bounds $c$ by step 2.1. Therefore $c=\\bigvee D$, proving completeness and the countable-subfamily assertion. If $D$ is empty the construction gives $c=0$; if it is a singleton its supremum is that element.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F5",
+            "step 1.1",
+            "step 2.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Put $u=\\bigvee D$ and $v=\\bigvee\\{c\\wedge d:d\\in D\\}$. Each joined term lies below $c\\wedge u$, so $v\\le c\\wedge u$. Conversely $c\\wedge d\\le v$ implies $d=(c\\wedge d)\\vee(\\neg c\\wedge d)\\le v\\vee\\neg c$. Hence $u\\le v\\vee\\neg c$, and finite distributivity gives $c\\wedge u\\le c\\wedge(v\\vee\\neg c)\\le v$. This proves the identity, including $c=0$, $c=1$ and $D=\\varnothing$. Only the established Boolean supremum is used, not the possibly nonmeasurable union of an arbitrary family of representatives.",
+          "inputs": [
+            "F4",
+            "step 4.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 give empty join zero, including the countable approximating family when D is empty."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 identifies precisely the zero-measure class; step 5.1 handles c=0 without division."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 has m(1)=1 and excludes the trivial algebra; steps 4.1 and 5.1 treat singleton D and c=1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Atoms are allowed; step 5.1 uses only Boolean order, so no atomlessness or measurable arbitrary union is assumed."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 permits s=0 and s=1 and uses empty finite joins to keep the supremum set nonempty."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1, 3.1 and 3.2 specify representative selection, finite approximants and enumeration of finite pieces under AC."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 1.1: [A] meet [B]=[A] holds exactly when the symmetric difference of A intersect B and A is null; that difference is A minus B, proving both directions of the stated order criterion."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 1.1: [A] meet [B]=[A] holds exactly when the symmetric difference of A intersect B and A is null; that difference is A minus B, proving both directions of the stated order criterion."
+        }
+      ]
+    },
+    "lem-lc-solovay-density-locality-and-null-joins": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-lc-probability-algebra-completeness",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X,\\Sigma,\\mu)$ be a probability space, so $\\mu(X)=1$. Identify $A,B\\in\\Sigma$ when $\\mu(A\\mathbin{\\triangle}B)=0$, and write $\\mathbb B$ for the set of equivalence classes. Set operations induce Boolean operations on $\\mathbb B$, and $m([A])=\\mu(A)$ is a well-defined strictly positive probability on it. The order is $[A]\\le[B]$ exactly when $\\mu(A\\setminus B)=0$.\n\nThe Boolean algebra $\\mathbb B$ is complete. Every subset $D\\subseteq\\mathbb B$ has a countable subset $D_0\\subseteq D$ with $\\bigvee D=\\bigvee D_0$, allowing $D_0=\\varnothing$. Every antichain of nonzero elements is countable. For arbitrary $D\\subseteq\\mathbb B$ and $c\\in\\mathbb B$,\n\n$$c\\wedge\\bigvee D=\\bigvee\\{c\\wedge d:d\\in D\\}.$$\n\nCountable joins are represented by countable unions of measurable representatives. No assertion that an arbitrary union of representatives is measurable or represents its Boolean join is made.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.1",
+            "4.2",
+            "4.3",
+            "5.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-lc-complete-ultrafilters-and-measurable-cardinals",
+          "source_section": "Definition",
+          "quote": "For an infinite cardinal kappa, a proper filter U on I is **kappa-complete** if $\\bigcap_{\\xi<\\eta}A_\\xi\\in U$ whenever $\\eta<\\kappa$ and each $A_\\xi\\in U$. The intersection with no factors is I. **Countably complete** means closed under countable intersections, equivalently omega_1-complete in ZFC. Ultrafilter and nonprincipal use [[def-ultrafilter]]; cardinals use [[def-cardinal]].\n\nA **measurable cardinal** is an uncountable kappa carrying a nonprincipal kappa-complete ultrafilter on the full power set of kappa. Such a U is a **normal measure** if every function $f:S\\to\\kappa$ with $S\\in U$, $0\\notin S$ and $f(\\alpha)<\\alpha$ is constant on a set in U contained in S. A set in U is called measure one.\n\nThe associated zero-one set function is $m_U(A)=1$ if $A\\in U$, and zero otherwise. It is not the definition of a real-valued measurable cardinal. The fixed-index filter and normality conditions are formulas of ZF and do not themselves use Choice. General cardinality language and the large-cardinal implications on this page use ZFC, with [[def-axiom-of-choice]] explicit. No ultrafilter or measurable-cardinal existence is asserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "4.1",
+            "4.2",
+            "4.3",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "thm-radon-nikodym-density-exists-and-is-unique-up-to-almost-everywhere-equality",
+          "source_section": "Statement",
+          "quote": "Assume the Axiom of Choice. Let $\\mu$ be a positive measure and let $\\nu$ be a signed measure on $(X,\\mathcal A)$. Assume there is an increasing measurable exhaustion $(X_n)$ with $\\bigcup_nX_n=X$, $\\mu(X_n)<+\\infty$, and $|\\nu|(X_n)<+\\infty$ for every $n$. If $\\nu\\ll\\mu$, then there exists a measurable real-valued function $f$, unique up to $\\mu$-almost-everywhere equality, such that\n$$\\nu(E)=\\int_Ef\\,d\\mu\\qquad(E\\in\\mathcal A).$$\nIf in addition $|\\nu|(X)<+\\infty$, then $f\\in L^1(\\mu)$.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-linearity-of-the-lebesgue-integral-on-l-one",
+          "source_section": "Statement",
+          "quote": "The class $L^1(\\mu)$ is a complex vector space, and the Lebesgue integral is\ncomplex-linear on it:\n$$\\int (\\alpha f+\\beta g)\\,d\\mu=\\alpha\\int f\\,d\\mu+\\beta\\int g\\,d\\mu \\qquad(\\alpha,\\beta\\in\\mathbb C,\\ f,g\\in L^1(\\mu)).$$",
+          "uses": [
+            "3.1",
+            "4.2",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "prop-order-and-scalar-rules-for-the-nonnegative-integral",
+          "source_section": "Statement",
+          "quote": "Let $f,g:X\\to[0,+\\infty]$ be measurable and let $c\\ge0$.\n\n1. If $f\\le g$, then $\\int f\\,d\\mu\\le\\int g\\,d\\mu$.\n2. $\\int cf\\,d\\mu=c\\int f\\,d\\mu$.",
+          "uses": [
+            "3.1",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-monotone-convergence-for-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $0\\le f_1\\le f_2\\le\\cdots$ be measurable and suppose $f_n(x)\\uparrow f(x)$\nfor every $x$. Then\n$$\\int f_n\\,d\\mu\\uparrow\\int f\\,d\\mu.$$",
+          "uses": [
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-nonnegative-integral-zero-iff-zero-almost-everywhere",
+          "source_section": "Statement",
+          "quote": "Let $f:X\\to[0,+\\infty]$ be measurable. Then\n$$\\int f\\,d\\mu=0 \\qquad\\Longleftrightarrow\\qquad f=0 \\text{ almost everywhere.}$$",
+          "uses": [
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.1",
+            "3.1",
+            "4.3"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $f,g:X\\to\\overline{\\mathbb R}$ are measurable and $f+g$ is defined\n   pointwise, then $f+g$ is measurable.\n2. If $c\\in\\mathbb R$ and $f:X\\to\\mathbb R$ is measurable, then $cf$ is\n   measurable.\n3. If $f:X\\to\\mathbb R$ is measurable, then $f^+=\\max\\{f,0\\}$,\n   $f^-=\\max\\{-f,0\\}$, and $|f|=f^++f^-$ are measurable.\n4. If $E\\in\\mathcal A$ and $f:X\\to[0,+\\infty]$ is measurable, then\n   $f\\chi_E$ is measurable, where this function equals $f$ on $E$ and $0$\n   off $E$ (in particular, $0\\cdot(+\\infty)=0$ here).\n5. If $(f_n)$ is a sequence of measurable functions $X\\to\\overline{\\mathbb R}$,\n   then $\\inf_n f_n$ is measurable; if moreover $f_n\\uparrow f$ pointwise, then\n   $f$ is measurable.",
+          "uses": [
+            "3.1",
+            "4.3"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Every function $v:I\\to[0,1]$ has exactly one $U$-large fibre. If none were large, the complements of all its fibres would belong to $U$. The range has cardinality below $\\kappa$, so indexing it by an ordinal below $\\kappa$ using F8 and applying F2 would put their empty intersection in the proper ultrafilter. Two disjoint fibres cannot both belong to a proper filter. Apply this to $v(i)=m(c\\wedge a_i)$ for each $(a,c)$ to define the unique number $\\nu_a(c)$. Uniqueness and Replacement give a set function of $(a,c)$, with $0\\le\\nu_a(c)\\le m(c)$ and $\\nu_a(0)=0$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F8"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Fix $a$ and pairwise disjoint $c_n\\in\\mathbb B$, and put $c=\\bigvee_n c_n$. Intersect the $U$-large fibres defining $\\nu_a(c)$ and all $\\nu_a(c_n)$. This countable intersection is in $U$ by F2 and is nonempty. At any $i$ in it, meet-distributivity and countable additivity from F1 give $m(c\\wedge a_i)=\\sum_n m(c_n\\wedge a_i)$, hence $\\nu_a(c)=\\sum_n\\nu_a(c_n)$. Thus $E\\mapsto\\nu_a([E])$ is a finite positive measure on $\\Sigma$, dominated by $\\mu$. It is absolutely continuous, and its total variation equals itself: each measurable finite partition sums to the measure of its union because all values are nonnegative. F3 therefore applies with the constant finite exhaustion $X$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Let $h$ be the integrable real RN density from step 2.1. For each positive integer $n$, put $E_n=\\{h\\le-1/n\\}$ and $T_n=\\{h\\ge1+1/n\\}$. Linearity and monotonicity give $\\nu_a([E_n])=\\int_{E_n}h\\,d\\mu\\le-\\mu(E_n)/n$ and $\\nu_a([T_n])\\ge(1+1/n)\\mu(T_n)$. Since $0\\le\\nu_a([E_n])$ and $\\nu_a([T_n])\\le\\mu(T_n)$, both sets are null. Their countable union contains the set where $h\\notin[0,1]$. Replacing $h$ by $\\min(1,\\max(0,h))$ gives a measurable $[0,1]$-valued density; integration is unchanged on the null exceptional set. F3 gives almost-everywhere uniqueness. The set of all measurable functions $X\\to[0,1]$ is a subset of $[0,1]^X$; each equivalence class of densities is thus a nonempty set, uniquely specified by $a$. Replacement gives the class assignment as a set function, and F8 permits simultaneous representatives if desired. Integrals over equivalent measurable representatives of $c$ agree, because these functions are bounded and the symmetric difference is null.",
+          "inputs": [
+            "F1",
+            "F3",
+            "F4",
+            "F5",
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Suppose the hypothesis of locality holds on $J\\in U$, and let $d\\le c$. For $i\\in J$, $d\\wedge a_i=d\\wedge b_i$. Intersecting $J$ with the two defining large fibres in step 1.1 proves $\\nu_a(d)=\\nu_b(d)$. Choose a measurable representative $C$ of $c$. Consequently $1_C h_a$ and $1_C h_b$ have identical integrals over every $E\\in\\Sigma$, since those integrals equal $\\nu_a([E]\\wedge c)$ and $\\nu_b([E]\\wedge c)$. Both are densities of the same finite measure, so F3 gives their equality almost everywhere, which is exactly equality on $c$.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derive-4.2",
+          "step": "4.2",
+          "claim": "For the indicator family of $Z$, the values $m(c\\wedge a_i)$ are $m(c)$ on $Z$ and zero off $Z$. The ultrafilter decides $Z$, so step 1.1 gives $\\nu_a(c)=m(c)$ or zero accordingly, including $c=0$. Constant densities $1$ and $0$ represent these measures, so uniqueness gives the assertion. For complements, $m(c\\wedge\\neg a_i)=m(c)-m(c\\wedge a_i)$ for every $i$, and the large-fibre equation yields $\\nu_{\\neg a}(c)=m(c)-\\nu_a(c)$. F4 shows that $1-h_a$ represents this measure, so uniqueness gives the complement identity.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derive-4.3",
+          "step": "4.3",
+          "claim": "For the sequence in clause 3 and any $d\\le c$, the family $(d\\wedge a_i^n)_n$ is disjoint for every $i$. Meet-distributivity and countable additivity give $m(d\\wedge a_i)=\\sum_n m(d\\wedge a_i^n)$. Intersect the countably many defining large fibres, including that for $a$, to obtain $\\nu_a(d)=\\sum_n\\nu_{a^n}(d)$. Choose nonnegative representatives of all these densities by F8. For a measurable representative $C$ of $c$, F4 and F6 applied to $1_C\\sum_{n<N}h_{a^n}$ show that its increasing pointwise limit has integral over $E$ equal to $\\nu_a([E]\\wedge c)$. Its total integral is at most $1$, so the set where the limit is infinite is null: on that set every constant bound has integral at most $1$, forcing its measure to be zero. Replace the limit there by zero to obtain a real integrable density of the same finite measure as $1_C h_a$. F3 gives equality almost everywhere, proving clause 3 and the asserted finiteness on $c$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F5",
+            "F6",
+            "F8",
+            "F9",
+            "step 1.1",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "For clause 4, the hypotheses and F7 give $\\nu_{a^\\xi}(c)=0$ for every $\\xi<\\beta$. By step 1.1 each set $J_\\xi=\\{i:m(c\\wedge a_i^\\xi)=0\\}$ belongs to $U$. Their intersection $J$ is in $U$ by F2. For $i\\in J$, strict positivity in F1 makes every $c\\wedge a_i^\\xi$ the zero Boolean element. Meet-distributivity now gives $c\\wedge a_i=\\bigvee_{\\xi<\\beta}(c\\wedge a_i^\\xi)=0$. Thus $\\nu_a(c)=0$ by the unique large-fibre rule, and F7 gives $h_a=0$ almost everywhere on $c$. For $\\beta=0$, $J=I$, every $a_i=0$ and step 4.2 gives the zero density directly. No union of fewer than $\\kappa$ measurable exceptional sets has been formed.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F7",
+            "step 1.1",
+            "step 3.1",
+            "step 4.2"
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "The zero set of each density is measurable and its class is independent of its representative, by almost-everywhere uniqueness. Put $c=\\bigwedge_{\\xi<\\beta}z(a^\\xi)$ using F1. For each $\\xi$, the inequality $c\\le z(a^\\xi)$ means precisely that $h_{a^\\xi}$ vanishes almost everywhere on a representative of $c$. Step 5.1 then gives $c\\le z(a)$. This includes the empty meet $c=1$, the singleton family and the zero condition. All constructions and identities concern sets and functions in the original universe; no generic interpretation has entered the argument.",
+          "inputs": [
+            "F1",
+            "step 3.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 5.1 handles beta=0 with J=I and the all-zero vector; step 6.1 treats the empty meet as 1."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 1.1 and 4.2 give nu_a(0)=0 and the density of the all-zero vector; steps 5.1 and 6.1 allow the zero localizing condition."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 4.2 gives the constant-one vector its density 1; step 6.1 explicitly includes the singleton family."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "The Statement permits a principal ultrafilter and an atomic probability algebra. Steps 1.1 and 5.1 use completeness and strictly positive quotient measure, without a free-ultrafilter or atomlessness premise."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 clamps only after proving the exceptional sets null, retaining density values 0 and 1; step 5.1 requires beta strictly below kappa and never assumes kappa-sized completeness."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.1, 3.1 and 4.3 specify indexing of real fibres and set-indexed RN representative choices under AC. The function of density classes itself is obtained by uniqueness and Replacement."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "This statement asserts density existence and four conditional identities, with no iff characterization; the zero-integral equivalence used inside step 5.1 is the separately contracted F7 theorem."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "No converse from a density identity or a localized null join to ultrafilter completeness is claimed; such implications are not used by the PMEA target."
+        }
+      ]
+    },
+    "lem-lc-generic-boolean-ground-joins": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "def-dense-open-sets-and-model-generic-filters",
+          "source_section": "Definition",
+          "quote": "Use [[def-forcing-preorder-compatibility-and-filter]]: $q\\le p$ means stronger, and a filter is nonempty, upward closed and internally downward directed. A subset $D\\subseteq P$ is **dense** if $\\forall p\\in P\\ \\exists q\\in D\\ (q\\le p)$, and **open** if $p\\in D$ and $q\\le p$ imply $q\\in D$.\n\nFor a transitive ZF model M containing P and its order, a filter $G\\subseteq P$ is **M-generic** if $G\\cap D\\ne\\varnothing$ for every dense $D\\subseteq P$ with $D\\in M$. The displayed density condition is the same inside and outside M: all its quantifiers range over the identical sets P and D, with identical order relation. No largest condition, countability or existence of a generic filter is assumed by the definition. When M is called countable, this means countable externally; its natural numbers agree with actual omega by [[thm-ordinals-and-omega-are-absolute-in-transitive-models]].",
+          "uses": [
+            "2.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-forcing-preorder-compatibility-and-filter",
+          "source_section": "Definition",
+          "quote": "A **forcing preorder** $(P,\\le)$ is a nonempty set with a reflexive transitive relation. The convention is that $q\\le p$ means $q$ is stronger than $p$; antisymmetry is not required. Conditions $p,q$ are **compatible** if there exists $r\\in P$ with $r\\le p$ and $r\\le q$. They are **incompatible**, written $p\\perp q$, if there is no such $r$.\n\nA **forcing filter** is a nonempty subset $G\\subseteq P$ that is upward closed and internally downward directed: if $p\\in G$ and $p\\le q$, then $q\\in G$; if $p,q\\in G$, some $r\\in G$ satisfies $r\\le p,q$. In particular the empty subset is not a forcing filter. A subset $D\\subseteq P$ is **dense** when for every $p\\in P$ there exists $q\\in D$ with $q\\le p$.\n\nThere need not be a weakest condition, binary meets, or a zero condition. The directedness condition does not presume a meet operation or demand closure under a nonexistent operation. No genericity requirement is included in the definition of a forcing filter. All conventions are over ZF.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-complete-boolean-algebra-and-regular-open-sets",
+          "source_section": "Definition",
+          "quote": "A [[def-boolean-algebra-for-stone-duality|Boolean algebra]] $B$ is **complete**, or **Dedekind complete**, if every subset $A\\subseteq B$ has a least upper bound $\\bigvee A$. Complements then give greatest lower bounds by $\\bigwedge A=\\neg\\bigvee\\{\\neg a:a\\in A\\}$. The empty bounds are $\\bigvee\\varnothing=0$ and $\\bigwedge\\varnothing=1$. The one-element Boolean algebra is allowed.\n\nFor a [[def-topological-space|topological space]] $X$, $\\operatorname{int}E$ is the union of the open subsets of $E$, and $\\overline E$ is the intersection of the closed subsets containing $E$. An open set $U$ is **regular open** if $U=\\operatorname{int}\\overline U$. Write $\\operatorname{RO}(X)$ for the set of regular open subsets, ordered by inclusion. Its proposed operations, justified by [[thm-regular-open-sets-form-a-complete-boolean-algebra]], are\n\n$$\\bigvee\\mathcal U=\\operatorname{int}\\overline{\\bigcup\\mathcal U},\\qquad \\bigwedge\\mathcal U=\\operatorname{int}\\bigcap\\mathcal U,\\qquad \\neg U=\\operatorname{int}(X\\setminus U)=X\\setminus\\overline U.$$\n\nHere the empty union is $\\varnothing$ and the empty intersection is $X$; finite meets will be ordinary finite intersections, and the bounds will be $\\varnothing,X$. No separation axiom on $X$ is assumed.\n\nA [[def-boolean-homomorphism-and-quotient|Boolean homomorphism]] $h:B\\to C$ is **order-continuous** if it preserves every supremum and infimum that exists in $B$: whenever $b=\\bigvee_B A$ exists, $h(b)=\\bigvee_C h[A]$, and likewise for infima. This includes empty families. An **order-dense Boolean embedding** $i:B\\to C$ is an injective Boolean homomorphism such that each $0<c\\in C$ has some $b\\in B$ with $0<i(b)\\le c$. A **Boolean completion** is such an embedding into a complete Boolean algebra. This definition asserts neither existence of a completion nor extension of a homomorphism.",
+          "uses": [
+            "1.2",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-boolean-algebra-for-stone-duality",
+          "source_section": "Definition",
+          "quote": "In ZF, a **Boolean algebra** is a set $B$ with binary operations $\\wedge,\\vee$, a unary operation $\\neg$, and elements $0,1$, satisfying the bounded distributive lattice laws and\n\n$$a\\wedge\\neg a=0,\\qquad a\\vee\\neg a=1\\quad(a\\in B).$$\n\nExplicitly, both binary operations are associative, commutative and idempotent; they satisfy absorption and both distributive laws; $a\\wedge1=a$, $a\\vee0=a$, $a\\wedge0=0$ and $a\\vee1=1$. Its order is $a\\le b$ if $a\\wedge b=a$, equivalently $a\\vee b=b$.\n\nThe algebra is nonempty because its bounds are elements. We allow $0=1$, in which case every $a$ equals $a\\wedge1=a\\wedge0=0$. This one-element algebra is called **trivial**. Otherwise the algebra is **nontrivial**. The empty join is $0$ and the empty meet is $1$.\n\nAll Boolean homomorphisms in this development preserve both bounds, as well as the operations.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Every element of $\\mathbb B$ and each of its Boolean operation values lies in $M$, by transitivity. The operation tables and their finite identities agree internally and externally. Since $G$ is nonempty and upward closed, $1\\in G$; by its domain $0\\notin G$. If $a,b\\in G$, F2 gives a nonzero $r\\in G$ below both. The Boolean meet bounds $r$ above and is nonzero, so $a\\wedge b\\in G$. Thus $G$ is a proper Boolean filter.",
+          "inputs": [
+            "F2",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Let $A\\in M$ be a subset of $\\mathbb B$ and set $a=\\bigvee{}^M A$. This is also the least upper bound among the actual elements of $\\mathbb B$: every candidate upper bound lies in $M$ and the bounding relation quantifies only over the identical sets $A$ and $\\mathbb B$. Put $D=\\{p\\ne0:p\\le\\neg a\\text{ or }\\exists b\\in A\\ (p\\le b)\\}$, a set in $M$. To prove density, fix $p\\ne0$. If $p\\wedge a=0$, then $p\\le\\neg a$. If $p\\wedge a\\ne0$, some $b\\in A$ satisfies $p\\wedge b\\ne0$: otherwise every $b\\le\\neg p$, making $a\\le\\neg p$ by leastness and contradicting this case. The nonzero meet $p\\wedge b$ extends $p$ into $D$. Thus $D$ is dense.",
+          "inputs": [
+            "F3",
+            "F4"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "Fix $b\\in\\mathbb B$. The set $D_b=\\{p\\ne0:p\\le b\\text{ or }p\\le\\neg b\\}$ belongs to $M$ by Separation. It is dense: if $p\\wedge b\\ne0$, this meet extends $p$ into $D_b$; otherwise distributivity gives $p\\le\\neg b$. F1 makes $G$ meet $D_b$, and upward closure implies $b\\in G$ or $\\neg b\\in G$. Both cannot hold, since their meet is zero. Hence $G$ decides every element and is a proper ultrafilter.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "If $a\\in G$, meet $D$ using F1. A member of $G$ below $\\neg a$ would contradict properness, so the meeting condition lies below some $b\\in A$ and upward closure gives $b\\in G$. Conversely $b\\in A\\cap G$ and $b\\le a$ imply $a\\in G$. This proves both join directions. If $A=\\varnothing$, $a=0\\notin G$ and $A\\cap G=\\varnothing$, as required.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Put $d=\\bigwedge{}^M A=\\neg\\bigvee{}^M\\{\\neg b:b\\in A\\}$. The complemented family belongs to $M$ by Replacement. If $d\\in G$, every $b\\in A$ is above $d$, so $A\\subseteq G$. Conversely suppose $A\\subseteq G$ but $d\\notin G$. Step 2.1 puts $\\neg d$ in $G$, and step 2.2 gives some $b\\in A$ with $\\neg b\\in G$, contradicting $b\\in G$. For empty $A$ this says $1\\in G$; for singleton $A$ the equivalence is immediate. The only family to which join selection was applied is a member of $M$, so this proves no assertion for arbitrary external subsets of $G$. Every witness was used individually in an existence proof; no family of witnesses was selected.",
+          "inputs": [
+            "F2",
+            "F3",
+            "step 1.1",
+            "step 2.1",
+            "step 2.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 3.1 prove empty join is not in G and empty meet is in G."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.1 excludes zero from G and step 2.2 handles zero join."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.1 proves one belongs to G."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement excludes the trivial Boolean algebra, whose positive forcing order is empty."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 3.1 treats singleton families explicitly; all ground families are allowed without a size bound."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 3.1 explains witnesses are used individually; the proof works in ZF with M and G supplied."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 3.1 prove the forward directions for ground joins and meets."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.2 and 3.1 prove the reverse directions for ground joins and meets."
+        }
+      ]
+    },
+    "lem-lc-boolean-generic-truth": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-lc-generic-boolean-ground-joins",
+          "source_section": "Statement",
+          "quote": "Work in ZF. Let $M$ be a transitive set model of ZF, let $\\mathbb B\\in M$ be a Boolean algebra which $M$ regards as complete and nontrivial, and let $G\\subseteq\\mathbb B\\setminus\\{0\\}$ be an externally supplied $M$-generic forcing filter, ordered by the Boolean order. Then $G$ is a proper Boolean ultrafilter. For every $A\\in M$ with $A\\subseteq\\mathbb B$,\n\n$$\\bigvee{}^M A\\in G\\quad\\Longleftrightarrow\\quad A\\cap G\\ne\\varnothing,\\qquad \\bigwedge{}^M A\\in G\\quad\\Longleftrightarrow\\quad A\\subseteq G.$$\n\nThe superscript indicates joins and meets computed in $M$. These conclusions apply to ground-model families only; $G$ itself need not be in $M$. No existence of $M$ or $G$, no external completeness of $\\mathbb B$, and no form of Choice are assumed.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "def-boolean-valued-name-semantics",
+          "source_section": "Definition",
+          "quote": "In ZF let B be a complete set Boolean algebra with $0\\ne1$, using the abstract completeness clause of [[def-complete-boolean-algebra-and-regular-open-sets]]. Use the name construction of [[def-forcing-names-and-name-rank]] with coefficients in B, including zero. Write E(s,t) and I(s,t) for Boolean equality and membership values, prescribed by\n\n$$I(s,t)=\\bigvee_{\\langle u,b\\rangle\\in t}(b\\wedge E(s,u)),$$\n$$E(s,t)=\\left(\\bigwedge_{\\langle u,b\\rangle\\in s}(\\neg b\\vee I(u,t))\\right)\\wedge\\left(\\bigwedge_{\\langle u,b\\rangle\\in t}(\\neg b\\vee I(u,s))\\right).$$\n\nExistence and uniqueness of this atomic recursion are proved in the following lemma using [[thm-recursion-on-well-founded-setlike-relations]] on sets of descendant pairs. Put $\\|s\\in t\\|=I(s,t)$ and $\\|s=t\\|=E(s,t)$. Boolean connectives use the corresponding Boolean operations. For each fixed formula phi, define its existential value by\n\n$$\\|\\exists x\\,\\phi(x,t)\\|=\\bigvee\\{b\\in B:\\exists\\text{ B-name }s\\ (b=\\|\\phi(s,t)\\|)\\}.$$\n\nThe join ranges over the set of attained values, not over a set of all names. This is a formula-by-formula definition; it asserts neither a uniform truth predicate for V nor a generic truth theorem. Empty joins are zero and empty meets are one. Completeness inside a ground model refers only to its subsets of B; no external completeness or absoluteness of quantified Boolean values is asserted.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "2.2",
+            "3.1",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-boolean-valued-semantics-is-well-defined",
+          "source_section": "Statement",
+          "quote": "In ZF the atomic Boolean recursions and the interpretation of each fixed finite membership formula have unique values in the complete Boolean algebra B, definable from B and their name parameters. When constructed internally in a ground model, only completeness for subsets belonging to that model is used.",
+          "uses": [
+            "1.1",
+            "6.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-forcing-name-valuation-and-generic-extension",
+          "source_section": "Definition",
+          "quote": "In ZF, for any $G\\subseteq P$ and P-name tau define\n\n$$\\operatorname{val}_G(\\tau)=\\{\\operatorname{val}_G(\\sigma):\\exists p\\in G\\ (\\langle\\sigma,p\\rangle\\in\\tau)\\}.$$\n\nThe subname relation is well-founded and setlike, as in [[lem-forcing-names-and-name-ranks-are-absolute]] and its name definition. For a supplied set function on the predecessors, Separation selects those with a coefficient in G and Replacement takes their values. This is a uniquely valued set rule, so [[thm-recursion-on-well-founded-setlike-relations]] gives a unique definable valuation and all its set restrictions. The empty name evaluates to empty. Even G empty is permitted here; then every name evaluates to empty.\n\nFor a transitive set ground model M containing P, write\n\n$$M[G]=\\{\\operatorname{val}_G(\\tau):\\tau\\in M\\text{ is a P-name}\\}.$$\n\nSeparation on M and Replacement make this an external set. If M satisfies ZF, namehood in this display agrees with its internal namehood by [[lem-forcing-names-and-name-ranks-are-absolute]]. The notation asserts neither genericity of G nor that M[G] is a model of ZF. For a definable class ground model the same display is interpreted as a definable class.",
+          "uses": [
+            "2.1",
+            "2.2",
+            "3.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "lem-forcing-names-and-name-ranks-are-absolute",
+          "source_section": "Statement",
+          "quote": "In ZF, let M be a transitive ZF model containing P. Its P-names are exactly the actual P-names that belong to M, and internal and external name ranks agree on these names. Equality of internal and external name-stage power sets is not asserted.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "def-forcing-names-and-name-rank",
+          "source_section": "Definition",
+          "quote": "In ZF let P be the nonempty forcing preorder of [[def-forcing-preorder-compatibility-and-filter]]. A **P-name** is a set of pairs $\\langle\\sigma,p\\rangle$, with name first and condition second, where $p\\in P$ and every sigma is again a P-name. The empty set is a name. Formally use [[thm-transfinite-recursion]] to define\n\n$$N_0=\\varnothing,\\qquad N_{\\alpha+1}=\\mathcal P(N_\\alpha\\times P),\\qquad N_\\lambda=\\bigcup_{\\beta<\\lambda}N_\\beta\\quad(\\lambda\\text{ a nonzero limit}),$$\n\nand call elements of the union of these levels names. The levels nest: $N_0\\subseteq N_1$, successor inclusions follow by monotonicity of the product and power set, and at a limit each earlier member is already a set of pairs with first coordinate in the union, so belongs to its next power-set stage.\n\nThe first-coordinate predecessor relation on names is setlike: predecessors of tau are obtained from its pair entries by Replacement. It is well-founded because the actual membership rank of the first coordinate of a Kuratowski pair in tau is strictly less than the rank of tau. Hence [[thm-recursion-on-well-founded-setlike-relations]] defines the **name rank**\n\n$$\\operatorname{rk}_P(\\tau)=\\sup\\{\\operatorname{rk}_P(\\sigma)+1:\\exists p\\in P\\ (\\langle\\sigma,p\\rangle\\in\\tau)\\}.$$\n\nThe empty supremum is zero. Conversely a set of pairs whose first coordinates are names belongs to a level: Replacement collects their least containing-stage indices, a common ordinal bounds them, and the set of pairs belongs to the next stage. This verifies the recursive description without an unbounded set of names. Every descendant of a name is a name. These are definable classes and set-valued recursions, not class objects; no Choice is used. Name rank is distinct from the membership rank of a condition.",
+          "uses": [
+            "1.2"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "F3 supplies internally the values of each fixed formula on its parameters. In particular, all atomic term families, and each fixed existential's set of attained values, are members of $M$ by its Replacement or Separation. All their elements are actual elements of $\\mathbb B$ by transitivity. F5 identifies all ground subnames and their ranks with the external ones. Thus F1 applies to these families, although the externally supplied $G$ need not belong to $M$. No assertion of absoluteness of existential Boolean values is needed.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Fix ground names $s,t$. Their descendant closure $C\\in M$ is a set closed under subnames: take the union of the finite iterations adjoining first coordinates of pair entries. On $C\\times C$, order the complexity pairs $(\\max(\\operatorname{rk}_{\\mathbb B}(u),\\operatorname{rk}_{\\mathbb B}(v)),\\min(\\operatorname{rk}_{\\mathbb B}(u),\\operatorname{rk}_{\\mathbb B}(v)))$ lexicographically. Any nonempty set of these pairs has a least first coordinate and then a least second coordinate. Lowering either rank and retaining the other lowers this sorted pair, even when the coordinates exchange positions. Consequently simultaneous induction for equality and membership is legitimate: if some pair fails one of the two assertions, a least-complexity failing pair has all recursive subname pairs correct.",
+          "inputs": [
+            "F5",
+            "F6"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For membership, F2 and F1 give $I(s,t)^M\\in G$ exactly when some $\\langle u,b\\rangle\\in t$ satisfies $b\\wedge E(s,u)^M\\in G$. In a proper Boolean filter this is equivalent to $b\\in G$ and $E(s,u)^M\\in G$: one direction uses upward closure and the other meet closure. Since $u$ is a proper subname of $t$, induction changes the equality clause to $\\operatorname{val}_G(s)=\\operatorname{val}_G(u)$. F4 now identifies the existence of this pair exactly with $\\operatorname{val}_G(s)\\in\\operatorname{val}_G(t)$. This proves both membership directions at this pair.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "For equality, F1 applied to each of the two ground meets in F2 says $E(s,t)^M\\in G$ exactly when every $\\langle u,b\\rangle\\in s$ satisfies $\\neg b\\vee I(u,t)^M\\in G$, and every $\\langle u,b\\rangle\\in t$ satisfies $\\neg b\\vee I(u,s)^M\\in G$. Ultrafilterhood makes $\\neg b\\vee d\\in G$ equivalent to the implication $b\\in G\\Rightarrow d\\in G$. Indeed, if $b\\notin G$ then $\\neg b\\in G$; if $d\\in G$ the join is in $G$; and if both the join and $b$ are in $G$, their meet lies below $d$, so $d\\in G$. Each membership call lowers the complexity by step 1.2. The induction hypotheses and F4 therefore identify the two conditions respectively with $\\operatorname{val}_G(s)\\subseteq\\operatorname{val}_G(t)$ and the reverse inclusion. Actual Extensionality makes their conjunction equivalent to equality of the valuations. Both equality directions hold.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "The simultaneous induction in steps 2.1\u20132.2 proves the assertion for all atomic formulas on ground names. Empty names cause no exception: their membership joins are zero and their empty equality requirements are one, matching empty valuation. A zero coefficient never belongs to $G$, and its implication clause is one, so zero coefficients impose no unwanted membership or equality condition. Since any two names admit the set descendant domain of step 1.2, this argument covers all the ground-name parameters.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Induct now on a fixed finite formula, using negation, conjunction and existential quantification as primitive logical operations. By F1, $\\neg b\\in G$ iff $b\\notin G$, and $b\\wedge c\\in G$ iff both are in $G$. The corresponding external satisfaction clauses and the formula induction hypothesis establish the assertion for negation and conjunction, in both directions. Other finite Boolean connectives are their usual logical abbreviations.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "For an existential with ground tuple $\\vec t$, put $A=\\{b\\in\\mathbb B:M\\models\\exists\\text{ Boolean name }s\\ (b=\\|\\psi(s,\\vec t)\\|)\\}$. This is the internally defined attained-value set in F2, so $A\\in M$ by step 1.1. F1 says $\\bigvee{}^M A\\in G$ iff some $b\\in A\\cap G$ exists. Membership in this actual set $A$ means there is a witness name $s\\in M$ with internal matrix value $b$; this is the semantics of the displayed existential in the supplied set structure $M$, and namehood agrees by F5. The formula induction hypothesis turns $b\\in G$ into $M[G]\\models\\psi(\\operatorname{val}_G(s),\\operatorname{val}_G(\\vec t))$. Conversely every witness in $M[G]$ has a ground name by F4, so an existentially true matrix supplies an attained value in $G$ and hence the join in $G$. This proves both existential directions without choosing a name for every element simultaneously.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F5",
+            "step 1.1",
+            "step 4.1"
+          ]
+        },
+        {
+          "id": "derive-6.1",
+          "step": "6.1",
+          "claim": "The finite formula induction proves the statement, including universal quantification by negation and existential quantification. It concerns external satisfaction for the set structures supplied, with one Boolean defining formula for each fixed object-language formula. The proof used neither a uniform truth predicate for the universe nor a Boolean validity proof for any ZF axiom. The only choices of names or join witnesses were single existential witnesses within implications, so the argument remains in ZF.",
+          "inputs": [
+            "F3",
+            "step 3.1",
+            "step 4.1",
+            "step 5.1"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Step 3.1 treats empty names with zero membership joins and one empty equality meets."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 3.1 proves zero coefficients contribute no members and only vacuous equality requirements."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 uses one for empty equality requirements, consistent with the proper ultrafilter in F1."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement excludes the trivial algebra and assumes supplied M and G; it asserts no existence for either."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Steps 4.1 and 5.1 cover each finite formula, including negation and quantification, without any rank endpoint omitted by step 1.2."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 5.1 and 6.1 explicitly use only individual existential names, no simultaneous witness selection or Choice."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 prove both atomic equivalences and steps 4.1 and 5.1 transfer satisfaction to Boolean membership."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 2.2 prove both atomic equivalences and steps 4.1 and 5.1 transfer Boolean membership to satisfaction."
+        }
+      ]
+    },
+    "lem-lc-generic-evaluation-of-measurable-densities": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-lc-generic-boolean-ground-joins",
+          "source_section": "Statement",
+          "quote": "Work in ZF. Let $M$ be a transitive set model of ZF, let $\\mathbb B\\in M$ be a Boolean algebra which $M$ regards as complete and nontrivial, and let $G\\subseteq\\mathbb B\\setminus\\{0\\}$ be an externally supplied $M$-generic forcing filter, ordered by the Boolean order. Then $G$ is a proper Boolean ultrafilter. For every $A\\in M$ with $A\\subseteq\\mathbb B$,\n\n$$\\bigvee{}^M A\\in G\\quad\\Longleftrightarrow\\quad A\\cap G\\ne\\varnothing,\\qquad \\bigwedge{}^M A\\in G\\quad\\Longleftrightarrow\\quad A\\subseteq G.$$\n\nThe superscript indicates joins and meets computed in $M$. These conclusions apply to ground-model families only; $G$ itself need not be in $M$. No existence of $M$ or $G$, no external completeness of $\\mathbb B$, and no form of Choice are assumed.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-lc-probability-algebra-completeness",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $(X,\\Sigma,\\mu)$ be a probability space, so $\\mu(X)=1$. Identify $A,B\\in\\Sigma$ when $\\mu(A\\mathbin{\\triangle}B)=0$, and write $\\mathbb B$ for the set of equivalence classes. Set operations induce Boolean operations on $\\mathbb B$, and $m([A])=\\mu(A)$ is a well-defined strictly positive probability on it. The order is $[A]\\le[B]$ exactly when $\\mu(A\\setminus B)=0$.\n\nThe Boolean algebra $\\mathbb B$ is complete. Every subset $D\\subseteq\\mathbb B$ has a countable subset $D_0\\subseteq D$ with $\\bigvee D=\\bigvee D_0$, allowing $D_0=\\varnothing$. Every antichain of nonzero elements is countable. For arbitrary $D\\subseteq\\mathbb B$ and $c\\in\\mathbb B$,\n\n$$c\\wedge\\bigvee D=\\bigvee\\{c\\wedge d:d\\in D\\}.$$\n\nCountable joins are represented by countable unions of measurable representatives. No assertion that an arbitrary union of representatives is measurable or represents its Boolean join is made.",
+          "uses": [
+            "2.1",
+            "3.1",
+            "3.2",
+            "3.3",
+            "4.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "prop-closure-properties-of-measurable-functions-used-by-the-integral",
+          "source_section": "Statement",
+          "quote": "Let $(X,\\mathcal A,\\mu)$ be a measure space.\n\n1. If $f,g:X\\to\\overline{\\mathbb R}$ are measurable and $f+g$ is defined\n   pointwise, then $f+g$ is measurable.\n2. If $c\\in\\mathbb R$ and $f:X\\to\\mathbb R$ is measurable, then $cf$ is\n   measurable.\n3. If $f:X\\to\\mathbb R$ is measurable, then $f^+=\\max\\{f,0\\}$,\n   $f^-=\\max\\{-f,0\\}$, and $|f|=f^++f^-$ are measurable.\n4. If $E\\in\\mathcal A$ and $f:X\\to[0,+\\infty]$ is measurable, then\n   $f\\chi_E$ is measurable, where this function equals $f$ on $E$ and $0$\n   off $E$ (in particular, $0\\cdot(+\\infty)=0$ here).\n5. If $(f_n)$ is a sequence of measurable functions $X\\to\\overline{\\mathbb R}$,\n   then $\\inf_n f_n$ is measurable; if moreover $f_n\\uparrow f$ pointwise, then\n   $f$ is measurable.",
+          "uses": [
+            "2.1",
+            "3.3",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "def-dedekind-cut",
+          "source_section": "Definition",
+          "quote": "Work over the totally ordered field $\\mathbb{Q}$ of rationals\n([[def-rationals]], [[thm-rat-ordered-field]]). A subset $A \\subseteq \\mathbb{Q}$\nis a **Dedekind cut** iff it satisfies all three of:\n\n- **(C1)** $A \\ne \\emptyset$ and $A \\ne \\mathbb{Q}$ (proper and nonempty);\n- **(C2)** *downward closed*: if $p \\in A$ and $q < p$, then $q \\in A$;\n- **(C3)** *no greatest element*: if $p \\in A$, then there exists $r \\in A$ with $p < r$.",
+          "uses": [
+            "1.1",
+            "2.1",
+            "3.2",
+            "4.1",
+            "4.2",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "def-cut-addition",
+          "source_section": "Definition",
+          "quote": "Let $A, B \\in \\mathbb{R}$ be Dedekind cuts of $\\mathbb{Q}$\n([[def-dedekind-cut]], [[def-real-dedekind]]).\n\n**Sum.** The sum is the Minkowski sumset in $\\mathbb{Q}$:\n$$A + B := \\{\\, a + b : a \\in A,\\ b \\in B \\,\\}.$$\n\n**Additive identity.** $0^{*} := \\{\\, q \\in \\mathbb{Q} : q < 0 \\,\\}$, the cut of\nthe rational $0$ under the embedding $q \\mapsto q^{*} = \\{\\, r \\in \\mathbb{Q} : r < q \\,\\}$\n([[def-real-dedekind]]).\n\n**Additive inverse.** For a cut $A$,\n$$-A := \\{\\, p \\in \\mathbb{Q} : \\exists\\, r \\in \\mathbb{Q},\\ r > 0,\\ \\text{with } -p - r \\notin A \\,\\}.$$\nEquivalently, $p \\in -A$ iff there is a rational $s \\notin A$ with $s < -p$\n(set $s = -p - r$; conversely $r = -p - s > 0$). Intuitively $-p$ is bounded\naway from $A$ from below: some rational strictly beneath $-p$ already fails to\nlie in $A$.\n\n**Subtraction.** $A - B := A + (-B)$.",
+          "uses": [
+            "1.1",
+            "3.3",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-check-name-evaluation-and-generic-reconstruction",
+          "source_section": "Statement",
+          "quote": "In ZF, for every nonempty $G\\subseteq P$, $\\operatorname{val}_G(\\check x)=x$ and $\\operatorname{val}_G(\\dot G)=G$. Hence for a transitive ZF model M containing P, $M\\subseteq M[G]$ and $G\\in M[G]$. The inclusion is not asserted to be elementary.",
+          "uses": [
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-ordinals-and-omega-are-absolute-in-transitive-models",
+          "source_section": "Statement",
+          "quote": "In ambient ZF, ordinalhood is absolute between transitive membership domains containing the parameter. A transitive set model of ZF contains precisely the real finite ordinals as its natural numbers and has $\\omega^M=\\omega$. Its ordinals form an initial segment of the actual ordinals.",
+          "uses": [
+            "1.1"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "By F7 the internal finite integers are the actual ones. Integer and rational arithmetic constructed from pairs of these integers agrees with the external construction: each quotient class has precisely the pairs satisfying the same finite cross-multiplication equation. Thus the rational set, its order and its arithmetic agree. F4's cut clauses quantify over this identical rational set, so every internal cut is an actual cut. Inclusion and F5's sumset also agree, since their rational membership tests have exactly the same witnesses. In particular ground rational bounds and ground real cuts can be read externally without choosing representatives of equivalence classes of real sequences.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F7"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "For each rational $q$ put $b_q(h)=[\\{h>q\\}]$. These coefficients form a ground set function; F3 makes the level sets measurable. If $q<r$ then $b_r(h)\\le b_q(h)$, and $b_q(h)=\\bigvee_{r\\in\\mathbb Q,\\ r>q}b_r(h)$. For the latter equality, membership of $q$ in each value cut has a larger member by F4, so the corresponding measurable union is exactly $\\{h>q\\}$; F2 turns this countable union into the stated join. Here rationals are countable by their explicit integer-pair enumeration. If $h\\ge0$ and $h\\le K$ for a ground bound, all negative rational coefficients are one and any rational above $K$ has coefficient zero. A rational above a cut bound exists because its complement is nonempty and upward closed. F1 now makes $h_G$ nonempty, proper and downward closed, and its ground-join property gives no greatest element. Hence $h_G$ is a nonnegative real cut.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F4",
+            "F8",
+            "step 1.1"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Form in $M$ the name $\\dot r_h=\\{\\langle\\check q,b_q(h)\\rangle:q\\in\\mathbb Q\\}$. Its entries form a set by Replacement, and are pairs of names and Boolean coefficients, so it is a Boolean name. F6 and valuation give $\\operatorname{val}_G(\\dot r_h)=\\{q:b_q(h)\\in G\\}=h_G$. Thus the cut belongs to $M[G]$ without using Separation in $M[G]$. If $h=k$ almost everywhere, every pair of corresponding level sets differs only on that same null set, so the coefficients coincide and the displayed names coincide. For a ground constant $r\\ge0$, $b_q(r)$ is one exactly for $q\\in r$, and otherwise zero; F1 proves $r_G=r$, including zero and one.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F6",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "step": "3.2",
+          "claim": "Suppose $c\\in G$ and $h\\le k$ almost everywhere on a representative of $c$. For every rational $q$, $c\\wedge b_q(h)\\le c\\wedge b_q(k)$. If $q\\in h_G$, meet closure puts the left side in $G$ and upward closure puts $b_q(k)$ in $G$, so $q\\in k_G$. Thus $h_G\\subseteq k_G$, which is the order of cuts. Equality almost everywhere on $c$ supplies both inclusions. The conclusion is independent of the representative of $c$, since equivalent representatives differ by a null set.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derive-3.3",
+          "step": "3.3",
+          "claim": "For bounded nonnegative $h,k$ and rational $q$, the sumset formula F5 yields the ground identity $b_q(h+k)=\\bigvee_{r,s\\in\\mathbb Q,\\ r+s=q}(b_r(h)\\wedge b_s(k))$: at a point, $q$ is in the sum cut exactly when it is a sum of a member of each input cut. The countable union is measurable by F3, and F2 gives its Boolean join. By F1 this coefficient belongs to $G$ exactly when some such pair has both coefficients in $G$. The resulting rational cut is precisely the sumset $h_G+k_G$. Hence $(h+k)_G=h_G+k_G$, with all functions bounded at this finite stage. No pair of witnesses is selected simultaneously for all $q$; each equivalence uses its own existential witness.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3",
+            "F5",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Put $z=[\\{h=0\\}]$. If $z\\in G$, step 3.2 compares $h$ with the zero function on $z$ and gives $h_G=0$. Conversely if $h_G=0$, none of the coefficients $b_q(h)$ for positive rational $q$ is in $G$. Their complements are all in $G$ by F1. The ground-family meet of these complements is $z$: for nonnegative value cuts, a strictly positive value has a positive rational strictly below it, since a cut strictly containing the zero cut has, by no greatest element, a positive member. The countable intersection therefore describes exactly $h=0$. F2 and F1 give $z\\in G$. This proves both zero-test directions without assuming that generic filters preserve external families of meets.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 3.1",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "derive-4.2",
+          "step": "4.2",
+          "claim": "Let $s_N=\\sum_{n<N}h_n$. For the ground sequence in the statement, F3 makes every $s_N$ measurable and bounded, and step 3.3 gives $(s_N)_G=\\sum_{n<N}(h_n)_G$. The assumed equality on $c$ implies $s_N\\le h$ there, so step 3.2 bounds every evaluated partial sum by $h_G$. Their increasing union of lower cuts is a real cut: it contains the zero cut, is bounded by the proper cut $h_G$, is downward closed, and has no greatest element by the same property in each term. This union is their least upper bound under inclusion and thus is the nonnegative series sum.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5",
+            "step 3.2",
+            "step 3.3"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "For any rational $q\\in h_G$, the ground almost-everywhere identity on $c$ gives $c\\wedge b_q(h)=\\bigvee_{N<\\omega}(c\\wedge b_q(s_N))$. Indeed, the cut of the pointwise nonnegative series is the union of its partial-sum cuts wherever the assumed equality holds; a single null exceptional set does not change the Boolean identity. By F2 this is a countable join. Since its left side is in $G$, F1 selects an $N$ with $b_q(s_N)\\in G$, so $q\\in(s_N)_G$. Thus $h_G$ is contained in the union from step 4.2, and the reverse inclusion was already proved there. This proves the countable-sum identity. At an empty sum both cuts are zero by step 3.1; for a singleton it reduces to locality. Only ground sequences and joins were used. AC was inherited exactly through F2 as specified in F8; no existence of a generic or axiom satisfaction for its extension has been used.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F8",
+            "step 2.1",
+            "step 3.1",
+            "step 4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Statement and step 5.1 explicitly give zero for empty sums."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.1 evaluate the zero constant and prove both directions of the exact zero test."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 evaluates the constant one to one; step 2.1 uses one for negative rational level coefficients."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement permits atomic probability spaces but excludes a trivial algebra via probability one; no generic existence is asserted."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.1 handles exactly zero, not only small positive values; step 5.1 treats singleton and empty sums."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Step 5.1 identifies AC inherited through probability-algebra completeness, and steps 3.3 and 5.1 use individual join witnesses only."
+        },
+        {
+          "case": "iff-forward",
+          "status": "checked",
+          "evidence": "Step 4.1 proves a zero-valued generic cut puts the zero-set class in G by a ground meet."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "checked",
+          "evidence": "Step 4.1 uses locality on the zero-set class in G to prove the generic value is zero."
+        }
+      ]
+    },
+    "lem-lc-solovay-measure-on-generic-subsets": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-lc-solovay-density-locality-and-null-joins",
+          "source_section": "Statement",
+          "quote": "Assume ZFC. Let $\\kappa$ be an uncountable cardinal with $|[0,1]|<\\kappa$, let $U$ be a proper $\\kappa$-complete ultrafilter on a set $I$, and let $(X,\\Sigma,\\mu)$ be a probability space with probability algebra $(\\mathbb B,m)$. For every $a=(a_i)_{i\\in I}\\in\\mathbb B^I$ there is a unique almost-everywhere class of measurable functions $h_a:X\\to[0,1]$ such that, for every $c\\in\\mathbb B$,\n\n$$\\int_c h_a\\,d\\mu=\\nu_a(c),\\qquad \\{i:m(c\\wedge a_i)=\\nu_a(c)\\}\\in U.$$\n\nHere $\\int_c$ means integration over any measurable representative of $c$. This class assignment is a set function on $\\mathbb B^I$. The following identities are independent of the chosen representatives of the densities:\n\n1. If $c\\wedge a_i=c\\wedge b_i$ for all $i$ in some member of $U$, then $h_a=h_b$ almost everywhere on $c$.\n2. If $Z\\subseteq I$ and $a_i=1$ on $Z$, $a_i=0$ off $Z$, then $h_a$ is the constant $1$ when $Z\\in U$ and the constant $0$ otherwise. Coordinatewise complementation gives $h_{\\neg a}=1-h_a$ almost everywhere.\n3. For a sequence $(a^n)_{n<\\omega}$ in $\\mathbb B^I$, let $a_i=\\bigvee_n a_i^n$. If $c\\wedge a_i^n\\wedge a_i^r=0$ for every $i\\in I$ and $n\\ne r$, then $h_a=\\sum_n h_{a^n}$ almost everywhere on $c$. The sum is finite almost everywhere on $c$.\n4. For any ordinal $\\beta<\\kappa$ and family $(a^\\xi)_{\\xi<\\beta}$ in $\\mathbb B^I$, set $a_i=\\bigvee_{\\xi<\\beta}a_i^\\xi$. If every $h_{a^\\xi}$ is zero almost everywhere on the same $c$, then $h_a$ is zero almost everywhere on $c$.\n\nIn particular, writing $z(a)=[\\{x:h_a(x)=0\\}]\\in\\mathbb B$, the last assertion is the Boolean inequality\n\n$$\\bigwedge_{\\xi<\\beta}z(a^\\xi)\\le z(a).$$\n\nThis is a theorem inside the original probability space and its algebra. It does not assert a forcing truth lemma or the existence of a measure on new subsets in a generic extension.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2",
+            "5.1",
+            "5.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-lc-generic-evaluation-of-measurable-densities",
+          "source_section": "Statement",
+          "quote": "Assume AC. Let $M$ be a transitive set model of ZFC containing a probability space $(X,\\Sigma,\\mu)$, let $\\mathbb B$ be its probability algebra computed in $M$, and let $G\\subseteq\\mathbb B\\setminus\\{0\\}$ be an externally supplied $M$-generic filter. All measurable functions, sequences, null equalities and algebra operations below are ground-model objects computed in $M$. Represent real numbers as lower Dedekind cuts. For a bounded nonnegative measurable function $h$, define the rational set\n\n$$h_G=\\{q\\in\\mathbb Q:[\\{x:h(x)>q\\}]\\in G\\}.$$\n\nThis is a nonnegative real cut and is the valuation of a Boolean name in $M$, hence belongs to $M[G]$. It depends only on the almost-everywhere class of $h$. Constants evaluate to the same real, and evaluation preserves addition of bounded nonnegative functions. If $c\\in G$ and $h\\le k$ almost everywhere on a measurable representative of $c$, then $h_G\\le k_G$; equality on $c$ gives equality of evaluations. For bounded nonnegative $h$,\n\n$$h_G=0\\quad\\Longleftrightarrow\\quad [\\{h=0\\}]\\in G.$$\n\nIf a ground sequence of bounded nonnegative measurable functions $(h_n)$ and a bounded nonnegative measurable $h$ satisfy $h=\\sum_{n<\\omega}h_n$ almost everywhere on $c\\in G$, then $h_G=\\sum_{n<\\omega}(h_n)_G$. Empty sums evaluate to zero. The conclusions concern this explicitly supplied generic and ground sequences; ZFC preservation and generic existence are not asserted.",
+          "uses": [
+            "1.2",
+            "2.1",
+            "3.1",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "lem-lc-boolean-generic-truth",
+          "source_section": "Statement",
+          "quote": "Work in ZF. Let $M$ be a transitive set model of ZF, let $\\mathbb B\\in M$ be internally complete and nontrivial, and let $G\\subseteq\\mathbb B\\setminus\\{0\\}$ be an externally supplied $M$-generic filter in the Boolean order. Use Boolean names with coefficients in all of $\\mathbb B$, including zero, and valuation by $G$. For each fixed finite formula $\\varphi$ in the language of membership and every finite tuple of Boolean names $\\vec\\tau$ in $M$,\n\n$$M[G]\\models\\varphi(\\operatorname{val}_G(\\vec\\tau))\\quad\\Longleftrightarrow\\quad \\|\\varphi(\\vec\\tau)\\|^M\\in G.$$\n\nHere $M[G]$ is the set of valuations of Boolean names in $M$, with its actual membership relation, and Boolean values are computed internally in $M$. The assertion does not presume that $M[G]$ satisfies ZF, does not assert existence of $M$ or $G$, and does not give a formal consistency transfer. No form of Choice is used.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "lem-lc-generic-boolean-ground-joins",
+          "source_section": "Statement",
+          "quote": "Work in ZF. Let $M$ be a transitive set model of ZF, let $\\mathbb B\\in M$ be a Boolean algebra which $M$ regards as complete and nontrivial, and let $G\\subseteq\\mathbb B\\setminus\\{0\\}$ be an externally supplied $M$-generic forcing filter, ordered by the Boolean order. Then $G$ is a proper Boolean ultrafilter. For every $A\\in M$ with $A\\subseteq\\mathbb B$,\n\n$$\\bigvee{}^M A\\in G\\quad\\Longleftrightarrow\\quad A\\cap G\\ne\\varnothing,\\qquad \\bigwedge{}^M A\\in G\\quad\\Longleftrightarrow\\quad A\\subseteq G.$$\n\nThe superscript indicates joins and meets computed in $M$. These conclusions apply to ground-model families only; $G$ itself need not be in $M$. No existence of $M$ or $G$, no external completeness of $\\mathbb B$, and no form of Choice are assumed.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "2.1",
+            "3.2",
+            "4.1",
+            "4.2"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-check-name-evaluation-and-generic-reconstruction",
+          "source_section": "Statement",
+          "quote": "In ZF, for every nonempty $G\\subseteq P$, $\\operatorname{val}_G(\\check x)=x$ and $\\operatorname{val}_G(\\dot G)=G$. Hence for a transitive ZF model M containing P, $M\\subseteq M[G]$ and $G\\in M[G]$. The inclusion is not asserted to be elementary.",
+          "uses": [
+            "1.1",
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "thm-generic-extension-transitivity-and-rank-bound",
+          "source_section": "Statement",
+          "quote": "In ZF, for a transitive ZF ground model M and any $G\\subseteq P$, $M[G]$ is transitive. For each name tau, $\\operatorname{rank}(\\operatorname{val}_G(\\tau))\\le\\operatorname{rk}_P(\\tau)$. No axiom satisfaction or no-new-ordinals theorem is asserted here.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "lem-bounded-definitions-of-basic-set-operations",
+          "source_section": "Statement",
+          "quote": "The graphs of empty set, subset, unordered pair, singleton, union, intersection (with $\\bigcap\\varnothing=\\varnothing$), difference, Kuratowski ordered pair, Cartesian product, relation domain/range, functionhood, evaluation and injection have $\\Delta_0$ definitions. Thus their values agree between transitive membership structures whenever the input and output sets are in the smaller domain. This is graph agreement, not an assertion that an arbitrary transitive domain is closed under these operations.",
+          "uses": [
+            "2.2"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "1.2",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Let $T=(\\mathbb B^I)^M$, a set in $M$. For $a\\in T$ form $\\sigma_a=\\{\\langle\\check i,a_i\\rangle:i\\in I\\}$. This is a name in $M$ by internal Replacement. F5 and valuation give $A(a):=\\operatorname{val}_G(\\sigma_a)=\\{i\\in I:a_i\\in G\\}$. Conversely, for any $A\\in M[G]$ with $A\\subseteq I$, take one name $\\tau\\in M$ whose valuation is $A$. Internal definability of the fixed atomic Boolean value gives the vector $a_i=\\|\\check i\\in\\tau\\|^M$ in $T$. F3 says $a_i\\in G$ iff $i\\in A$, so $A=A(a)$. No simultaneous choice of a name for all such $A$ was used. The name $\\dot{\\mathcal D}=\\{\\langle\\sigma_a,1\\rangle:a\\in T\\}\\in M$ evaluates exactly to $\\mathcal D$, so this full collection belongs to $M[G]$ without an appeal to its Power Set axiom.",
+          "inputs": [
+            "F3",
+            "F4",
+            "F5"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "Internally apply F1 to all $a\\in T$, and select measurable $[0,1]$-valued representatives $h_a$ by F8. Their assignment is a set function in $M$. F2 supplies the associated rational-cut names $\\rho_a$ as a set-indexed assignment. For any two names $s,t$, the name $P(s,t)=\\{\\langle s,1\\rangle,\\langle t,1\\rangle\\}$ evaluates to the unordered pair of their valuations since $1\\in G$. Therefore $K(s,t)=P(P(s,s),P(s,t))$ evaluates to their Kuratowski ordered pair. These finite constructions are internal set operations and yield names in $M$. Define the graph name $\\dot\\eta=\\{\\langle K(\\sigma_a,\\rho_a),1\\rangle:a\\in T\\}$. Its valuation is the relation $\\{(A(a),(h_a)_G):a\\in T\\}$, which belongs to $M[G]$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "F8"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "If $A(a)=A(b)$, then for every $i\\in I$ either both $a_i,b_i$ belong to $G$ or neither does. Ultrafilterhood puts $e_i=(a_i\\wedge b_i)\\vee(\\neg a_i\\wedge\\neg b_i)$ in $G$. The family $(e_i)_{i\\in I}$ is a ground family, so its meet $c$ belongs to $G$ by F4, even when $I$ is large. Since $c\\le e_i$, Boolean distributivity gives $c\\wedge a_i=c\\wedge b_i$ for every $i$. F1 locality gives $h_a=h_b$ almost everywhere on $c$, and F2 gives $(h_a)_G=(h_b)_G$. Consequently the relation from step 1.2 is a function on exactly $\\mathcal D$. Null modifications of the selected representatives do not change its values, by F2. Every value is between zero and one, by the same evaluation lemma.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derive-2.2",
+          "step": "2.2",
+          "claim": "Let $\\beta\\in M$ be an ordinal and let $f=(A_\\xi)_{\\xi<\\beta}\\in M[G]$ be a function with values in $\\mathcal D$. Take a single name $\\tau\\in M$ for its graph. For $(i,\\xi)\\in I\\times\\beta$, define $a_i^\\xi=\\|\\exists y\\,\\exists p\\,(p=\\langle\\check\\xi,y\\rangle\\ \\land\\ p\\in\\tau\\ \\land\\ \\check i\\in y)\\|^M$, where the ordered-pair expression abbreviates its membership-language definition. This is a ground table by internal Replacement and fixed-formula definability in F3. F6 ensures transitivity of $M[G]$, F5 supplies $i,\\xi$ there, and step 1.2 supplies its finite-pair closure. Thus F7 identifies the displayed pair formula with actual ordered pairs. Since the valuation of $\\tau$ is the actual graph $f$, F3 proves $a_i^\\xi\\in G$ iff $i\\in A_\\xi$. Hence all family members are represented simultaneously by this single ground table. This conclusion does not assume that the family $f$ itself belongs to $M$.",
+          "inputs": [
+            "F3",
+            "F5",
+            "F6",
+            "F7",
+            "step 1.1",
+            "step 1.2"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "For a ground $Z\\subseteq I$, use the vector $a_i=1$ on $Z$ and zero elsewhere, which evaluates to $Z$. F1 says its density is almost everywhere constant one or zero according as $Z\\in U$ or not. F2 evaluates those constants to themselves, proving the extension assertion. A proper ultrafilter contains $I$ and excludes the empty set, so in particular $\\eta(I)=1$ and $\\eta(\\varnothing)=0$. Properness also rules out the degenerate case $I=\\varnothing$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.1",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derive-3.2",
+          "step": "3.2",
+          "claim": "Put $a_i=\\bigvee_{\\xi<\\beta}a_i^\\xi$ internally. F4 gives $a_i\\in G$ iff some $a_i^\\xi\\in G$, because each coordinate's joined family belongs to $M$. Thus $A(a)=\\bigcup_{\\xi<\\beta}A_\\xi$, and this union lies in $\\mathcal D$ by step 1.1. For $\\beta=0$ the vector is constantly zero and the union empty. This works for any ground ordinal $\\beta$; no completeness property of $U$ has been used in this union calculation.",
+          "inputs": [
+            "F4",
+            "step 1.1",
+            "step 2.2"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "Suppose now $\\beta=\\omega$ and the $A_n$ are disjoint. For each $i\\in I$ and $n<r<\\omega$, the element $\\neg(a_i^n\\wedge a_i^r)$ lies in $G$, since otherwise ultrafilterhood would put both coefficients in $G$ and hence $i$ in both sets. These elements form one ground family, so F4 puts their common meet $c$ in $G$. On this $c$, every coordinatewise intersection $c\\wedge a_i^n\\wedge a_i^r$ is zero. F1 then proves $h_a=\\sum_n h_{a^n}$ almost everywhere on $c$, where $a$ is the union vector of step 3.2. The density representatives are a ground sequence of bounded nonnegative functions, so F2 gives $(h_a)_G=\\sum_n(h_{a^n})_G$. Step 2.1 identifies these values with $\\eta(\\bigcup_n A_n)$ and $\\eta(A_n)$, respectively. This proves the asserted countable additivity for every extension sequence in the statement.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 2.1",
+            "step 2.2",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "derive-4.2",
+          "step": "4.2",
+          "claim": "Finally let $\\beta<\\kappa$ and suppose every $\\eta(A_\\xi)=0$. For the ground table of step 2.2, F2 says each zero-set class $z(a^\\xi)$ belongs to $G$. The density assignment and this table are in $M$, so this is a ground family of zero-set classes. F4 places $c=\\bigwedge_{\\xi<\\beta}z(a^\\xi)$ in $G$. Internally F1 gives $c\\le z(a)$ for the coordinatewise union vector, since $\\beta<\\kappa$ there. Upward closure and the reverse zero-test direction in F2 give $\\eta(A(a))=(h_a)_G=0$. Step 3.2 identifies $A(a)$ with the required union. For the empty family F1 uses its empty-meet inequality, and step 3.1 already gives the same conclusion; the singleton case gives the original null set. This proves the full stated indexed null closure without taking an uncountable union of exceptional measurable null sets.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F4",
+            "step 2.1",
+            "step 3.1",
+            "step 2.2",
+            "step 3.2"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "The names in steps 1.1\u20131.2 witness that both the full subset collection and its measure graph are elements of $M[G]$. Steps 2.2\u20134.2 cover new indexed families by one ground Boolean table, rather than by an assumption that the new family is ground. Their only cardinal comparison is the ground comparison $\\beta<\\kappa$; preservation of $\\kappa$ and its relation to the new continuum are not conclusions here. AC was used for the ground set of density representatives and the prerequisites in F1, as specified in F8. Every other selected name was one existential witness. The argument proves exactly the supplied-model statement, with no inference from it to formal Con.",
+          "inputs": [
+            "F1",
+            "F8",
+            "step 1.1",
+            "step 1.2",
+            "step 2.1",
+            "step 2.2",
+            "step 3.1",
+            "step 4.1",
+            "step 4.2"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 3.2 prove empty measure and empty union, with empty null closure in step 4.2."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Steps 3.1 and 4.2 prove zero constants and the full indexed null-union conclusion using exact zero-set tests."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 3.1 proves eta(I)=1; steps 1.1 and 1.2 use coefficient one to construct collection and graph names."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Step 3.1 excludes I empty by properness of U; atomic probability spaces and principal U are allowed by the Statement."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 4.2 treats empty and singleton null families, and restricts exactly to ground ordinals beta below kappa without claiming preservation."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 1.2 and 5.1 identify the set-indexed ground density representative choice; steps 1.1 and 2.2 require only individual names."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement asserts construction and additivity, not an iff theorem; its intermediate zero tests are explicitly supplied by F2 and used in step 4.2."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement has no iff conclusion; reverse zero-test use is explicitly carried out in step 4.2."
+        }
+      ]
+    },
+    "lem-lc-boolean-generic-zfc-and-ordinals": {
+      "citations": [
+        {
+          "fact": "F1",
+          "source": "lem-lc-boolean-generic-truth",
+          "source_section": "Statement",
+          "quote": "Work in ZF. Let $M$ be a transitive set model of ZF, let $\\mathbb B\\in M$ be internally complete and nontrivial, and let $G\\subseteq\\mathbb B\\setminus\\{0\\}$ be an externally supplied $M$-generic filter in the Boolean order. Use Boolean names with coefficients in all of $\\mathbb B$, including zero, and valuation by $G$. For each fixed finite formula $\\varphi$ in the language of membership and every finite tuple of Boolean names $\\vec\\tau$ in $M$,\n\n$$M[G]\\models\\varphi(\\operatorname{val}_G(\\vec\\tau))\\quad\\Longleftrightarrow\\quad \\|\\varphi(\\vec\\tau)\\|^M\\in G.$$\n\nHere $M[G]$ is the set of valuations of Boolean names in $M$, with its actual membership relation, and Boolean values are computed internally in $M$. The assertion does not presume that $M[G]$ satisfies ZF, does not assert existence of $M$ or $G$, and does not give a formal consistency transfer. No form of Choice is used.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F2",
+          "source": "lem-lc-generic-boolean-ground-joins",
+          "source_section": "Statement",
+          "quote": "Work in ZF. Let $M$ be a transitive set model of ZF, let $\\mathbb B\\in M$ be a Boolean algebra which $M$ regards as complete and nontrivial, and let $G\\subseteq\\mathbb B\\setminus\\{0\\}$ be an externally supplied $M$-generic forcing filter, ordered by the Boolean order. Then $G$ is a proper Boolean ultrafilter. For every $A\\in M$ with $A\\subseteq\\mathbb B$,\n\n$$\\bigvee{}^M A\\in G\\quad\\Longleftrightarrow\\quad A\\cap G\\ne\\varnothing,\\qquad \\bigwedge{}^M A\\in G\\quad\\Longleftrightarrow\\quad A\\subseteq G.$$\n\nThe superscript indicates joins and meets computed in $M$. These conclusions apply to ground-model families only; $G$ itself need not be in $M$. No existence of $M$ or $G$, no external completeness of $\\mathbb B$, and no form of Choice are assumed.",
+          "uses": [
+            "1.2",
+            "1.3",
+            "1.4",
+            "3.1"
+          ]
+        },
+        {
+          "fact": "F3",
+          "source": "def-boolean-valued-name-semantics",
+          "source_section": "Definition",
+          "quote": "In ZF let B be a complete set Boolean algebra with $0\\ne1$, using the abstract completeness clause of [[def-complete-boolean-algebra-and-regular-open-sets]]. Use the name construction of [[def-forcing-names-and-name-rank]] with coefficients in B, including zero. Write E(s,t) and I(s,t) for Boolean equality and membership values, prescribed by\n\n$$I(s,t)=\\bigvee_{\\langle u,b\\rangle\\in t}(b\\wedge E(s,u)),$$\n$$E(s,t)=\\left(\\bigwedge_{\\langle u,b\\rangle\\in s}(\\neg b\\vee I(u,t))\\right)\\wedge\\left(\\bigwedge_{\\langle u,b\\rangle\\in t}(\\neg b\\vee I(u,s))\\right).$$\n\nExistence and uniqueness of this atomic recursion are proved in the following lemma using [[thm-recursion-on-well-founded-setlike-relations]] on sets of descendant pairs. Put $\\|s\\in t\\|=I(s,t)$ and $\\|s=t\\|=E(s,t)$. Boolean connectives use the corresponding Boolean operations. For each fixed formula phi, define its existential value by\n\n$$\\|\\exists x\\,\\phi(x,t)\\|=\\bigvee\\{b\\in B:\\exists\\text{ B-name }s\\ (b=\\|\\phi(s,t)\\|)\\}.$$\n\nThe join ranges over the set of attained values, not over a set of all names. This is a formula-by-formula definition; it asserts neither a uniform truth predicate for V nor a generic truth theorem. Empty joins are zero and empty meets are one. Completeness inside a ground model refers only to its subsets of B; no external completeness or absoluteness of quantified Boolean values is asserted.",
+          "uses": [
+            "1.3",
+            "1.4",
+            "2.1"
+          ]
+        },
+        {
+          "fact": "F4",
+          "source": "thm-check-name-evaluation-and-generic-reconstruction",
+          "source_section": "Statement",
+          "quote": "In ZF, for every nonempty $G\\subseteq P$, $\\operatorname{val}_G(\\check x)=x$ and $\\operatorname{val}_G(\\dot G)=G$. Hence for a transitive ZF model M containing P, $M\\subseteq M[G]$ and $G\\in M[G]$. The inclusion is not asserted to be elementary.",
+          "uses": [
+            "1.1",
+            "1.5",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F5",
+          "source": "thm-generic-extension-transitivity-and-rank-bound",
+          "source_section": "Statement",
+          "quote": "In ZF, for a transitive ZF ground model M and any $G\\subseteq P$, $M[G]$ is transitive. For each name tau, $\\operatorname{rank}(\\operatorname{val}_G(\\tau))\\le\\operatorname{rk}_P(\\tau)$. No axiom satisfaction or no-new-ordinals theorem is asserted here.",
+          "uses": [
+            "1.1",
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F6",
+          "source": "lem-forcing-names-and-name-ranks-are-absolute",
+          "source_section": "Statement",
+          "quote": "In ZF, let M be a transitive ZF model containing P. Its P-names are exactly the actual P-names that belong to M, and internal and external name ranks agree on these names. Equality of internal and external name-stage power sets is not asserted.",
+          "uses": [
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F7",
+          "source": "thm-ordinals-and-omega-are-absolute-in-transitive-models",
+          "source_section": "Statement",
+          "quote": "In ambient ZF, ordinalhood is absolute between transitive membership domains containing the parameter. A transitive set model of ZF contains precisely the real finite ordinals as its natural numbers and has $\\omega^M=\\omega$. Its ordinals form an initial segment of the actual ordinals.",
+          "uses": [
+            "1.5"
+          ]
+        },
+        {
+          "fact": "F8",
+          "source": "lem-bounded-definitions-of-basic-set-operations",
+          "source_section": "Statement",
+          "quote": "The graphs of empty set, subset, unordered pair, singleton, union, intersection (with $\\bigcap\\varnothing=\\varnothing$), difference, Kuratowski ordered pair, Cartesian product, relation domain/range, functionhood, evaluation and injection have $\\Delta_0$ definitions. Thus their values agree between transitive membership structures whenever the input and output sets are in the smaller domain. This is graph agreement, not an assertion that an arbitrary transitive domain is closed under these operations.",
+          "uses": [
+            "1.1",
+            "1.2",
+            "4.1"
+          ]
+        },
+        {
+          "fact": "F9",
+          "source": "def-axiom-of-choice",
+          "source_section": "Definition",
+          "quote": "The **Axiom of Choice** (AC) is the following statement.\n\n> Every family of nonempty sets has a choice function\n> ([[def-choice-function]]).\n\nWritten out: for every set $\\mathcal{F}$ all of whose members are nonempty,\nthere exists a function $g$ with domain $\\mathcal{F}$ satisfying $g(S) \\in S$ for\nall $S \\in \\mathcal{F}$.\n\nAn equivalent formulation is that a product of nonempty sets is nonempty: if\n$X_i \\ne \\emptyset$ for every $i \\in I$, then $\\prod_{i \\in I} X_i \\ne \\emptyset$.\nHere $\\prod_{i \\in I} X_i$ is the set of functions $f$ with domain $I$ such that\n$f(i) \\in X_i$ for every $i \\in I$; when a family of nonempty sets is indexed by\nitself, such an $f$ is precisely a choice function for it.",
+          "uses": [
+            "2.1",
+            "4.1",
+            "5.1"
+          ]
+        }
+      ],
+      "derivations": [
+        {
+          "id": "derive-1.1",
+          "step": "1.1",
+          "claim": "Put $N=M[G]$. By F5 it is transitive and by F4 it contains $M$. Extensionality holds in $N$: every member of either compared set is already in $N$, so agreement about all members in $N$ is actual agreement. Foundation holds as well: if $a\\in N$ is nonempty, ambient Foundation gives $x\\in a$ with $x\\cap a=\\varnothing$; transitivity puts $x$ in $N$, so this is the required witness there. The empty name evaluates to the empty set. The ground set $\\omega$ belongs to $N$ by F4 and is an inductive set there: each actual finite successor and zero belong to $M$, and F8 identifies the needed finite-set relations. Thus Infinity holds.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F8"
+          ]
+        },
+        {
+          "id": "derive-1.2",
+          "step": "1.2",
+          "claim": "For ground names $s,t$, the name $P(s,t)=\\{\\langle s,1\\rangle,\\langle t,1\\rangle\\}$ evaluates to the unordered pair of the valuations, since $1\\in G$. Thus Pairing holds and $K(s,t)=P(P(s,s),P(s,t))$ names their Kuratowski ordered pair. For a name $t$, form $u=\\{\\langle v,b\\wedge c\\rangle:\\exists s\\ (\\langle s,b\\rangle\\in t\\ \\land\\ \\langle v,c\\rangle\\in s)\\}$. The entries form a set in $M$ by Replacement and Union. Its valuation consists exactly of the members of members of the valuation of $t$: meet membership is equivalent to both coefficient memberships by F2. Hence Union holds. Zero coefficients contribute nothing to either construction.",
+          "inputs": [
+            "F2",
+            "F8"
+          ]
+        },
+        {
+          "id": "derive-1.3",
+          "step": "1.3",
+          "claim": "Fix a formula $\\varphi(x,\\vec z)$ and ground names $t,\\vec r$. The name $s=\\{\\langle u,b\\wedge\\|\\varphi(u,\\vec r)\\|^M\\rangle:\\langle u,b\\rangle\\in t\\}$ is a set in $M$ by fixed-formula definability and Replacement. F1 and F2 show that its valuation is exactly $\\{x\\in\\operatorname{val}_G(t):N\\models\\varphi(x,\\operatorname{val}_G(\\vec r))\\}$. Indeed, a selected pair gives both membership in the original set and truth of the formula, and every member of that set has a selected subname pair in $t$ that gives the converse. Thus every Separation instance holds, with all parameters in $N$ allowed by their names.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-1.4",
+          "step": "1.4",
+          "claim": "For a name $t$, let $D$ be its set of first-coordinate subnames and put $d_u=\\bigvee\\{b:\\langle u,b\\rangle\\in t\\}$ for $u\\in D$. F2 implies $\\operatorname{val}_G(t)=\\{\\operatorname{val}_G(u):u\\in D,\\ d_u\\in G\\}$. For each $v\\in(\\mathbb B^D)^M$, form $t_v=\\{\\langle u,d_u\\wedge v_u\\rangle:u\\in D\\}$. Every valuation of $t_v$ is a subset of the valuation of $t$. Conversely, if $a\\in N$ is such a subset, take one name $r$ for $a$ and define the ground vector $v_u=\\|u\\in r\\|^M$. F1 makes the valuation of $t_v$ exactly $a$, including where different subnames have the same valuation. Thus $\\{\\langle t_v,1\\rangle:v\\in(\\mathbb B^D)^M\\}$ names exactly the collection of all subsets of $\\operatorname{val}_G(t)$ present in $N$. This proves Power Set inside $N$, not the assertion that all external subsets belong to $N$.",
+          "inputs": [
+            "F1",
+            "F2",
+            "F3"
+          ]
+        },
+        {
+          "id": "derive-1.5",
+          "step": "1.5",
+          "claim": "If $\\alpha$ is an ordinal in $N$, F5 and F7 make it an actual ordinal. Choose a name $t\\in M$ with value $\\alpha$. Its name rank $\\gamma$ lies in $M$ and agrees internally and externally by F6. F5 gives $\\operatorname{rank}(\\alpha)\\le\\gamma$. The actual rank of an ordinal is itself, by induction from the rank recursion, so $\\alpha\\le\\gamma$. Every ordinal at most $\\gamma$ belongs to $M$, by transitivity and $\\gamma\\in M$. Thus $\\alpha\\in M$. Conversely every ordinal of $M$ belongs to $N$ by F4 and is an ordinal there by F7. The two structures therefore have exactly the same ordinals.",
+          "inputs": [
+            "F4",
+            "F5",
+            "F6",
+            "F7"
+          ]
+        },
+        {
+          "id": "derive-2.1",
+          "step": "2.1",
+          "claim": "We justify the set of witnesses needed for Replacement before constructing its name. Fix a formula $\\varphi(x,y,\\vec z)$ and names $t,\\vec r$. For each subname $u\\in D$ as in step 1.4, internal Separation forms $S_u=\\{b\\in\\mathbb B:\\exists\\text{ name }w\\ (b=\\|\\varphi(u,w,\\vec r)\\|^M)\\}$. The set of pairs $(u,b)$ with $b\\in S_u$ belongs to $M$. Internal Collection supplies a set $W$ of names containing a witnessing $w$ for each such pair; equivalently, bound a witness for each pair by its least possible membership rank and use Replacement to obtain one common rank bound, then take all witnesses below that bound. Both procedures are theorems in the ground ZFC model, not assumptions about $N$. F9 now selects one witness $w_{u,b}$ from the nonempty subsets of this ground set $W$. F3 gives $\\|\\exists y\\,\\varphi(u,y,\\vec r)\\|^M=\\bigvee S_u$. No set of all names and no Global Choice was used.",
+          "inputs": [
+            "F3",
+            "F9",
+            "step 1.4"
+          ]
+        },
+        {
+          "id": "derive-3.1",
+          "step": "3.1",
+          "claim": "Suppose in $N$ the formula $\\varphi$ defines a total single-valued relation on $a=\\operatorname{val}_G(t)$. Form the ground name $r=\\{\\langle w_{u,b},d_u\\wedge b\\rangle:u\\in D,\\ b\\in S_u\\}$. Every selected term has $d_u,b\\in G$, so its valuation is a value $y$ of $\\varphi$ at some $x\\in a$, by F1. Conversely, given $x\\in a$, choose $u\\in D$ with value $x$ and $d_u\\in G$ using step 1.4. Totality and F1 put $\\bigvee S_u$ in $G$. F2 selects $b\\in S_u\\cap G$, and $w_{u,b}$ evaluates to the required value by F1 and uniqueness in $N$. Hence the valuation of $r$ is exactly the image set, proving Replacement. Replacing each output name $w_{u,b}$ by $K(u,w_{u,b})$ gives the graph of the function in $N$ as well. The empty domain yields the empty name.",
+          "inputs": [
+            "F1",
+            "F2",
+            "step 1.2",
+            "step 1.4",
+            "step 2.1"
+          ]
+        },
+        {
+          "id": "derive-4.1",
+          "step": "4.1",
+          "claim": "To prove Choice, fix any $a\\in N$ and a ground name $t$ for it. By F9 enumerate the ground set $D$ of subnames by a ground ordinal $\\delta$, writing $u_\\xi$ for its entries, with no repetitions unless $D$ is empty, in which case $\\delta=0$. The name $\\{\\langle K(\\check\\xi,u_\\xi),1\\rangle:\\xi<\\delta\\}$ evaluates to the graph of a function $e$ on $\\delta$ in $N$ by F4 and step 1.2. Its range contains $a$. By Separation and Replacement already proved, the domain $J=\\{\\xi<\\delta:e(\\xi)\\in a\\}$ and the assignment sending each $x\\in a$ to the least $\\xi\\in J$ with $e(\\xi)=x$ belong to $N$. Each fibre has an actual least ordinal; it is also least in $N$, since every ordinal below $\\delta$ is in $M$ and the comparisons are actual membership. This embeds $a$ into the ground ordinal $\\delta$ and gives a well-order of $a$ in $N$. For an arbitrary set $\\mathcal F\\in N$ of nonempty sets, apply this to its union, which exists by step 1.2; Replacement then assigns to each member of $\\mathcal F$ its least element in that well-order. The resulting function is a choice function in $N$. Empty families give the empty function. Thus AC holds in $N$.",
+          "inputs": [
+            "F4",
+            "F8",
+            "F9",
+            "step 1.2",
+            "step 1.3",
+            "step 3.1"
+          ]
+        },
+        {
+          "id": "derive-5.1",
+          "step": "5.1",
+          "claim": "Steps 1.1\u20134.1 prove Extensionality, Foundation, Empty Set, Pairing, Union, Infinity, Power Set, every Separation and Replacement instance, and Choice. These are ZFC, so $N\\models\\mathrm{ZFC}$; step 1.5 gives ordinal preservation. All infinite name selections occurred in the set-indexed ground construction of step 2.1 and the ground well-ordering in step 4.1, under F9. The proof is a semantic theorem for the supplied transitive set model; no arithmetic statement Con was derived from this conditional premise.",
+          "inputs": [
+            "F9",
+            "step 1.1",
+            "step 1.2",
+            "step 1.3",
+            "step 1.4",
+            "step 2.1",
+            "step 3.1",
+            "step 4.1",
+            "step 1.5"
+          ]
+        }
+      ],
+      "routine_steps": [],
+      "boundaries": [
+        {
+          "case": "empty",
+          "status": "checked",
+          "evidence": "Steps 1.1, 3.1 and 4.1 handle empty name, empty Replacement domain and empty choice family."
+        },
+        {
+          "case": "zero",
+          "status": "checked",
+          "evidence": "Step 1.2 explicitly notes zero coefficients contribute no elements to name constructions."
+        },
+        {
+          "case": "one",
+          "status": "checked",
+          "evidence": "Step 1.2 uses one in G to construct unordered and ordered pairs; step 1.4 does so for the Power Set name."
+        },
+        {
+          "case": "degenerate",
+          "status": "checked",
+          "evidence": "Statement requires an internally nontrivial Boolean algebra and supplied M,G; no existence claim is made."
+        },
+        {
+          "case": "endpoints",
+          "status": "checked",
+          "evidence": "Step 1.5 handles alpha equal to the name-rank bound gamma as well as smaller ordinals; step 4.1 handles the empty ordinal enumeration."
+        },
+        {
+          "case": "nonempty-choice",
+          "status": "checked",
+          "evidence": "Steps 2.1 and 4.1 use AC in M for a set-indexed collection of name witnesses and a well-ordering of subnames, with a ground set bound supplied first."
+        },
+        {
+          "case": "iff-forward",
+          "status": "not_applicable",
+          "reason": "The Statement is axiom and ordinal preservation, not an iff claim; step 1.5 proves every extension ordinal is ground."
+        },
+        {
+          "case": "iff-reverse",
+          "status": "not_applicable",
+          "reason": "The Statement is not an iff theorem; the reverse ordinal inclusion is proved in step 1.5 using check names and absoluteness."
+        }
+      ]
+    }
+  }
+}

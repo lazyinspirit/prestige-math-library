@@ -195,6 +195,44 @@ test('5b records a clean false-positive gate outcome for a claimed published rep
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
 
+test('5b binds a repository-scoped engine-stage defect to its foreign current carrier', () => {
+  const fx = fixture(false);
+  try {
+    writeFileSync(join(fx.root, 'items', 'lem-foreign.md'), item('lem-foreign'));
+    writeFileSync(join(fx.root, 'research', 'foreign-batch-1.pages.json'), JSON.stringify([
+      { id: 'foreign-page', category: 'test', items: ['lem-foreign'] },
+    ]));
+    writeFileSync(join(fx.root, 'research', 'foreign-alpha-groups.json'), JSON.stringify([
+      { label: 'foreign-a', covers: ['1'] },
+    ]));
+    writeFileSync(join(fx.root, 'research', 'foreign-batch-1.proof-contracts.json'), JSON.stringify({
+      contracts: { 'lem-foreign': {} },
+    }));
+    assert.equal(fx.run('list').status, 0);
+    const foreignCarrier = spawnSync(process.execPath,
+      [TOOL, 'carrier', '--run', 'foreign', '--id', 'lem-foreign', '--root', fx.root],
+      { cwd: REPO, encoding: 'utf8', timeout: 60_000 }).stdout.trim();
+    const subject = '5b-cross unowned foreign precheck failure';
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), `${JSON.stringify({
+      defect_id: 'r-5b-unowned-precheck', run: 'r', location: 'engine-stage', subject,
+      caught_at_stage: '5b-cross', severity: 'fatal', disposition: 'fixed',
+      class: 'breaking-runtime', subclass: 'stage-unowned', evidence: [{ path: 'items/lem-foreign.md' }],
+    })}\n`);
+    writeFileSync(join(fx.root, 'research', 'r-5b-verdicts.jsonl'), `${JSON.stringify({
+      kind: 'gate', id: subject, gate: 'precheck', verdict: 'confirmed_fatal',
+      carrier_run: 'foreign', carrier_id: 'lem-foreign', subject_sha256: foreignCarrier,
+      defect_ids: ['r-5b-unowned-precheck'], note: 'The foreign current carrier contains the repaired gate target.',
+    })}\n`);
+    let result = fx.run('check');
+    assert.equal(result.status, 0, result.stderr);
+
+    writeFileSync(join(fx.root, 'items', 'lem-foreign.md'), item('lem-foreign') + '\nChanged after the verdict.\n');
+    result = fx.run('check');
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /gate-verdict-stale/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
 test('5b distinguishes page additions and removals and creates an empty verdict artifact', () => {
   const fx = fixture(false);
   try {
@@ -211,3 +249,79 @@ test('5b distinguishes page additions and removals and creates an empty verdict 
     assert.ok(list.changes.some((change: any) => change.kind === 'page-removal' && change.id === 'page-two'));
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
+
+function foreignRuntimeFixture() {
+  const fx = fixture(false);
+  const id = 'lem-peer-draft';
+  writeFileSync(join(fx.root, 'items', `${id}.md`), item(id));
+  writeFileSync(join(fx.root, 'research', 'peer-batch-1.pages.json'), JSON.stringify([
+    { id: 'peer-page', category: 'test', items: [{ id }] },
+  ]));
+  writeFileSync(join(fx.root, 'research', 'peer-alpha-groups.json'), JSON.stringify([{ label: 'a', covers: ['1'] }]));
+  writeFileSync(join(fx.root, 'research', 'peer-batch-1.proof-contracts.json'), JSON.stringify({ contracts: { [id]: { derivations: [] } } }));
+  const ledger = { defect_id: 'r-runtime-peer', run: 'r', subject: '5b-cross peer precheck incident',
+    caught_at_stage: '5b-cross', disposition: 'fixed', class: 'breaking-runtime', location: 'engine-stage',
+    subclass: 'stage-unowned', severity: 'fatal', evidence: [{ path: `items/${id}.md` }] };
+  const result = spawnSync(process.execPath,
+    [TOOL, 'carrier', '--run', 'peer', '--id', id, '--root', fx.root], { cwd: REPO, encoding: 'utf8' });
+  assert.equal(result.status, 0, result.stderr);
+  const verdict = { kind: 'gate', id: ledger.subject, gate: 'precheck', verdict: 'confirmed_fatal',
+    defect_ids: [ledger.defect_id], note: 'Exact canonical labels repaired; peer mathematical obligations remain with its author.',
+    carrier_run: 'peer', carrier_id: id, subject_sha256: result.stdout.trim() };
+  const save = () => {
+    writeFileSync(join(fx.root, 'research', 'defect-ledger.jsonl'), `${JSON.stringify(ledger)}\n`);
+    writeFileSync(join(fx.root, 'research', 'r-5b-verdicts.jsonl'), `${JSON.stringify(verdict)}\n`);
+  };
+  assert.equal(fx.run('list').status, 0);
+  save();
+  return { ...fx, id, ledger, verdict, save };
+}
+
+test('5b binds a foreign runtime repair without inventing an in-run mathematical carrier', () => {
+  const fx = foreignRuntimeFixture();
+  try {
+    assert.equal(fx.run('check').status, 0);
+    const ordinary = { kind: 'gate', id: fx.id, gate: 'precheck', verdict: 'false_positive',
+      defect_ids: [], subject_sha256: fx.verdict.subject_sha256, note: 'Not authorized.' };
+    writeFileSync(join(fx.root, 'research/r-5b-verdicts.jsonl'), `${JSON.stringify(ordinary)}\n`);
+    const rejected = fx.run('check');
+    assert.notEqual(rejected.status, 0);
+    assert.match(rejected.stderr, /gate-subject-out-of-scope/);
+    assert.match(rejected.stderr, /defect-ledger-unowned/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+for (const changed of ['item', 'contract', 'manifest']) test(`foreign runtime receipt rejects changed ${changed} bytes`, () => {
+  const fx = foreignRuntimeFixture();
+  try {
+    if (changed === 'item') writeFileSync(join(fx.root, 'items', `${fx.id}.md`), item(fx.id) + '\nLater peer edit.\n');
+    if (changed === 'contract') writeFileSync(join(fx.root, 'research/peer-batch-1.proof-contracts.json'),
+      JSON.stringify({ contracts: { [fx.id]: { derivations: ['changed'] } } }));
+    if (changed === 'manifest') writeFileSync(join(fx.root, 'research/peer-batch-1.pages.json'),
+      JSON.stringify([{ id: 'peer-page', category: 'test', items: [{ id: fx.id, statement: 'changed' }] }]));
+    const result = fx.run('check');
+    assert.notEqual(result.status, 0);
+    assert.match(result.stderr, /gate-verdict-stale/);
+  } finally { rmSync(fx.root, { recursive: true, force: true }); }
+});
+
+for (const bad of ['wrong-owner', 'own-run', 'open', 'mathematics', 'unbound-evidence', 'published', 'in-run-item', 'ambiguous-owner']) {
+  test(`foreign runtime receipt rejects ${bad}`, () => {
+    const fx = foreignRuntimeFixture();
+    try {
+      if (bad === 'wrong-owner') fx.verdict.carrier_run = 'missing';
+      if (bad === 'own-run') fx.verdict.carrier_run = 'r';
+      if (bad === 'open') fx.ledger.disposition = 'open';
+      if (bad === 'mathematics') fx.ledger.location = 'proof';
+      if (bad === 'unbound-evidence') fx.ledger.evidence = [];
+      if (bad === 'published') writeFileSync(join(fx.root, 'items', `${fx.id}.md`), item(fx.id).replace('status: draft', 'status: published'));
+      if (bad === 'in-run-item') fx.verdict.carrier_id = 'lem-source';
+      if (bad === 'ambiguous-owner') writeFileSync(join(fx.root, 'research/peer-batch-2.pages.json'),
+        JSON.stringify([{ id: 'other-peer-page', category: 'test', items: [{ id: fx.id }] }]));
+      fx.save();
+      const result = fx.run('check');
+      assert.notEqual(result.status, 0, bad);
+      assert.match(result.stderr, /gate-carrier-|gate-subject-out-of-scope|defect-ledger-disposition/);
+    } finally { rmSync(fx.root, { recursive: true, force: true }); }
+  });
+}

@@ -31,6 +31,9 @@ parts:
       - reflection-absoluteness-and-elementary-submodels
       - boolean-algebras-stone-duality-and-the-prime-ideal-theorem
       - arithmetization-incompleteness-and-relative-consistency
+      - large-cardinals-measures-and-elementary-embeddings
+      - the-constructible-hierarchy-and-inner-models
+      - forcing-orders-names-and-generic-extensions
 ---
 
 ## sets-relations-and-functions
@@ -54,12 +57,14 @@ first application of full choice: a maximal filter exists because Zorn says so.
 
 ## ordinals-and-cardinals
 
-Well-ordering and transfinite recursion support rank, hierarchy, ordinal arithmetic, cardinals,
-cofinality, and alephs. Weak-choice distinctions stay within ZF; clubs, stationarity, normality,
-pressing down, trees, delta systems, and the stated Diamond hypothesis supply the combinatorics. Borel codes, analytic
-sets, games, and local Choice, AD, and DC hypotheses separate regularity from pathological
-constructions. PCF scales feed the ZFC Dowker-space constructions, while reflection,
-absoluteness, and collapses control finite fragments and elementary submodels. Boolean ideals,
-BPI, Stone duality, completions, and forcing conventions clarify further choice boundaries.
-Finally, coded syntax, representability, diagonalization, incompleteness, and relative-consistency
-interfaces complement deduction, soundness, Henkin completeness, and Löwenheim--Skolem methods.
+Well-ordering and transfinite recursion give rank, the cumulative hierarchy, ordinal and
+cardinal arithmetic, cofinality and alephs; weak-choice distinctions stay inside ZF. Then come
+clubs, stationarity, normality, pressing down, trees, delta systems and the stated Diamond
+hypothesis; Borel codes, analytic sets, games, local Choice, AD and DC hypotheses; deduction,
+soundness, completeness, compactness, coded syntax and incompleteness; PCF scales and ZFC
+Dowker spaces; reflection, absoluteness, collapses, elementary submodels; Boolean ideals, BPI,
+Stone duality. Large cardinals follow: inaccessibility, Mahloness, weak compactness,
+measurability, strong compactness and supercompactness, via ultrafilters, ultrapowers, normal
+and fine measures and covering embeddings; the constructible hierarchy and HOD give inner models
+with definable well-orders and choice; and forcing, dense sets, generics, check names and
+Boolean-valued semantics close the part.

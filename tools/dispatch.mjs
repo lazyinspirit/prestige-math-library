@@ -17,7 +17,7 @@ import { dirname, join, relative, resolve, resolve as pathResolve } from 'node:p
 import { homedir } from 'node:os';
 import { REPO } from './paths.mjs';
 import { createSlotPool } from './slots.mjs';
-import { validateCodexOutputSchema } from './codex-output-schema.mjs';
+import { parseCodexOutput, validateCodexOutput, validateCodexOutputSchema } from './codex-output-schema.mjs';
 import { findRollout, readDispatchUsage } from './dispatch-usage.mjs';
 import { configureDeepSeekCodexHome } from './deepseek-codex.mjs';
 
@@ -786,18 +786,21 @@ if (temporaryHome) { try { rmSync(temporaryHome, { recursive: true, force: true 
 // model—materialises the schema-constrained final response. This keeps such a
 // role unable to edit the evidence it is judging while still giving the next
 // gate a durable JSON receipt. A missing or malformed final message turns the
-// dispatch red. No role routes here today: the step-9 visual lane was the last
-// user and was deleted on 2026-08-23. The path stays because `--result-artifact`
-// is generic, engine-level plumbing with its own test coverage.
+// dispatch red. Step-6 group readers use this path for their Step-7 digests.
+// Validate locally as well: not every provider enforces --output-schema.
 if (resultArtifactPath && result.code === 0 && !result.timedOut) {
   try {
-    const parsed = JSON.parse(readFileSync(lastMessagePath, 'utf8'));
+    const parsed = parseCodexOutput(readFileSync(lastMessagePath, 'utf8'));
+    if (outputSchemaPath) {
+      const problems = validateCodexOutput(parsed, JSON.parse(readFileSync(resolveFile(outputSchemaPath), 'utf8')));
+      if (problems.length) throw new Error(`output schema mismatch: ${problems.join('; ')}`);
+    }
     const target = resolve(REPO, resultArtifactPath);
     mkdirSync(dirname(target), { recursive: true });
     writeFileSync(target, JSON.stringify(parsed, null, 2) + '\n');
   } catch (error) {
     result.code = 1;
-    result.stderr += `\nresult artifact was not valid JSON: ${error?.message ?? error}`;
+    result.stderr += `\nresult artifact was not valid structured output: ${error?.message ?? error}`;
   }
 }
 

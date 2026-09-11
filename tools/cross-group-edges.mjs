@@ -29,6 +29,10 @@
 //   {"kind":"forward","item":"<id>","target":"<id>","decision":"lemmas-added|dropped","note":"..."}
 //   {"kind":"addition|removal|page","batch":"<n>","id":"<id>","verdict":"...","note":"..."}
 //   {"kind":"gate","id":"<id>","gate":"<gate>","verdict":"confirmed_fatal|confirmed_nonfatal|false_positive","note":"..."}
+// A repository-scoped engine-stage gate defect may bind its stable ledger
+// subject in `id` to a carrier owned by another active run with the explicit
+// pair `carrier_run` / `carrier_id`. Ordinary item and page gate verdicts may
+// not proxy their carrier this way.
 // A mechanical false-positive gate row is clean (`defect_ids: []`); confirmed
 // gate defects must own exactly one closed 5b defect row.
 
@@ -55,13 +59,13 @@ const reconcilePlan = argv.includes('--reconcile-plan');
 const strList = (v) => (Array.isArray(v) ? v.filter((x) => typeof x === 'string') : []);
 
 /** Item id -> owning batch, and batch -> owning group. */
-function ownership() {
+function ownership(ownerRun = run) {
   const batchOf = new Map();
   const itemsByBatch = new Map();
   const itemRowsByBatch = new Map();
   const pagesByBatch = new Map();
   for (const f of readdirSync(R('research'))) {
-    const m = f.match(new RegExp(`^${run}-batch-(\\d+)\\.pages\\.json$`));
+    const m = f.match(new RegExp(`^${ownerRun}-batch-(\\d+)\\.pages\\.json$`));
     if (!m) continue;
     const batchItems = [], batchPages = [], batchItemRows = [];
     for (const p of JSON.parse(readFileSync(R('research', f), 'utf8'))) {
@@ -81,8 +85,8 @@ function ownership() {
     itemRowsByBatch.set(m[1], batchItemRows);
     pagesByBatch.set(m[1], batchPages);
   }
-  const gp = R('research', `${run}-alpha-groups.json`);
-  if (!existsSync(gp)) die(`cross-group-edges: no ${run}-alpha-groups.json — 2-assign has not run`);
+  const gp = R('research', `${ownerRun}-alpha-groups.json`);
+  if (!existsSync(gp)) die(`cross-group-edges: no ${ownerRun}-alpha-groups.json — 2-assign has not run`);
   const raw = JSON.parse(readFileSync(gp, 'utf8'));
   const groupOf = new Map();
   for (const g of (Array.isArray(raw) ? raw : raw.groups ?? [])) {
@@ -119,19 +123,20 @@ function claimedPublishedCarrier(id) {
 }
 
 const contractCache = new Map();
-function contractRows(batch) {
-  if (contractCache.has(batch)) return contractCache.get(batch);
-  const path = R('research', `${run}-batch-${batch}.proof-contracts.json`);
+function contractRows(batch, ownerRun = run) {
+  const key = `${ownerRun}\0${batch}`;
+  if (contractCache.has(key)) return contractCache.get(key);
+  const path = R('research', `${ownerRun}-batch-${batch}.proof-contracts.json`);
   const rows = existsSync(path) ? JSON.parse(readFileSync(path, 'utf8')).contracts ?? {} : {};
-  contractCache.set(batch, rows);
+  contractCache.set(key, rows);
   return rows;
 }
 
-function itemCarrier(batch, id, metadata) {
+function itemCarrier(batch, id, metadata, ownerRun = run) {
   const path = R('items', `${id}.md`);
   return {
     item_sha256: existsSync(path) ? hash(readFileSync(path)) : null,
-    contract_sha256: hashValue(contractRows(batch)[id] ?? null),
+    contract_sha256: hashValue(contractRows(batch, ownerRun)[id] ?? null),
     manifest_sha256: hashValue(metadata ?? { id }),
   };
 }
@@ -519,6 +524,7 @@ if (cmd === 'check') {
   }
   for (const verdict of gateV.values()) {
     const ids = Array.isArray(verdict.defect_ids) ? verdict.defect_ids.map(String) : [];
+    const defect = ids.length === 1 ? ledger.find((candidate) => candidate.defect_id === ids[0]) : null;
     const cleanFalsePositive = verdict.verdict === 'false_positive' && ids.length === 0;
     if (!cleanFalsePositive && ids.length !== 1) {
       err('gate-defect-cardinality', `[${verdict.id}] gate verdict must name exactly one defect id`);
@@ -530,14 +536,51 @@ if (cmd === 'check') {
     if (typeof verdict.gate !== 'string' || !verdict.gate.trim()) {
       err('gate-origin-missing', `[${verdict.id}] gate verdict must name the originating gate`);
     }
-    const itemBatch = now.owned.batchOf.get(verdict.id);
-    const page = currentPages.get(verdict.id);
-    const pageBatch = currentPageBatch.get(verdict.id);
-    const carrier = itemBatch ? itemCarrier(itemBatch, verdict.id, currentItemMetadata.get(verdict.id))
-      : pageBatch && page ? pageCarrier(page) : claimedPublishedCarrier(verdict.id);
-    if (!carrier) {
-      err('gate-subject-out-of-scope', `[${verdict.id}] gate verdict does not name a current in-flight item or page`);
-    } else if (verdict.subject_sha256 !== hashValue(carrier)) {
+    const hasCarrierRun = typeof verdict.carrier_run === 'string' && verdict.carrier_run.trim();
+    const hasCarrierId = typeof verdict.carrier_id === 'string' && verdict.carrier_id.trim();
+    if (Boolean(hasCarrierRun) !== Boolean(hasCarrierId)) {
+      err('gate-carrier-proxy-incomplete', `[${verdict.id}] must name both carrier_run and carrier_id`);
+    }
+    const proxiedCarrier = Boolean(hasCarrierRun && hasCarrierId);
+    if (proxiedCarrier && (!defect || defect.location !== 'engine-stage'
+        || defect.class !== 'breaking-runtime' || defect.subclass !== 'stage-unowned'
+        || defect.subject !== verdict.id || defect.disposition !== 'fixed')) {
+      err('gate-carrier-proxy-invalid', `[${verdict.id}] may proxy only its exact closed stage-unowned runtime defect`);
+    }
+    let carrierHash = null;
+    if (proxiedCarrier) {
+      const ownerRun = verdict.carrier_run;
+      const id = verdict.carrier_id;
+      if (!/^[a-z0-9][a-z0-9-]*$/.test(ownerRun) || !/^[a-z0-9][a-z0-9-]*$/.test(id)
+          || ownerRun === run || now.owned.batchOf.has(id) || currentPages.has(id)) {
+        err('gate-carrier-owner-invalid', `[${id}] must belong to a distinct actual owner run`);
+      } else if (existsSync(R('research', `${ownerRun}-alpha-groups.json`))) {
+        const owner = ownership(ownerRun);
+        const batch = owner.batchOf.get(id);
+        const rows = [...owner.itemRowsByBatch.values()].flat().filter((entry) => String(entry.id) === id);
+        const path = R('items', `${id}.md`);
+        if (batch && owner.groupOf.has(batch) && rows.length === 1 && existsSync(path)) {
+          let status;
+          try { status = yaml().parse(split(readFileSync(path, 'utf8')).fm)?.status; } catch { /* rejected below */ }
+          if (status !== 'draft') err('gate-carrier-not-draft', `[${id}] requires the ordinary published-claim route`);
+          carrierHash = hashValue(itemCarrier(batch, id, rows[0].metadata, ownerRun));
+        }
+      }
+      if (defect && !(defect.evidence ?? []).some((evidence) => evidence.path === `items/${id}.md`)) {
+        err('gate-carrier-evidence-unbound', `${defect.defect_id} does not identify items/${id}.md in its evidence`);
+      }
+    } else {
+      const itemBatch = now.owned.batchOf.get(verdict.id);
+      const page = currentPages.get(verdict.id);
+      const pageBatch = currentPageBatch.get(verdict.id);
+      const carrier = itemBatch ? itemCarrier(itemBatch, verdict.id, currentItemMetadata.get(verdict.id))
+        : pageBatch && page ? pageCarrier(page) : claimedPublishedCarrier(verdict.id);
+      carrierHash = carrier ? hashValue(carrier) : null;
+    }
+    if (!carrierHash) {
+      const label = proxiedCarrier ? `${verdict.carrier_run}:${verdict.carrier_id}` : verdict.id;
+      err('gate-subject-out-of-scope', `[${label}] gate verdict does not name a current in-flight item or page`);
+    } else if (verdict.subject_sha256 !== carrierHash) {
       err('gate-verdict-stale', `[${verdict.id}] gate verdict hash does not match the current composite carrier`);
     }
     const allowed = verdict.verdict === 'false_positive' ? ['false-positive']
@@ -545,7 +588,7 @@ if (cmd === 'check') {
         : repairedDispositions;
     bindDefects(verdict, String(verdict.id), !cleanFalsePositive,
       cleanFalsePositive ? `gate ${verdict.gate}:${verdict.id}` : `gate ${verdict.defect_ids?.[0]}`, allowed);
-    const row = ids.length === 1 ? ledger.find((candidate) => candidate.defect_id === ids[0]) : null;
+    const row = defect;
     if (row && verdict.verdict === 'confirmed_fatal' && row.severity !== 'fatal') {
       err('gate-defect-severity', `${ids[0]} is ${row.severity}, not fatal`);
     }

@@ -19,6 +19,11 @@ addition, removal, item, page, or gate outcome to
 `research/<run>-5b-verdicts.jsonl`; use the exact kind and verdict vocabulary
 accepted by `tools/cross-group-edges.mjs`. Obtain a current carrier hash with
 `node tools/cross-group-edges.mjs carrier --run <run> --id ITEM_ID` after edits.
+For a fixed repository runtime incident on a foreign draft, retain the stable
+ledger subject in `id` and explicitly supply `carrier_run` / `carrier_id`;
+compute the hash under that actual owner run. Only closed `breaking-runtime`,
+`engine-stage`, `stage-unowned` rows whose evidence names that draft qualify.
+This is a runtime receipt, not a mathematical acceptance or peer-edit authority.
 
 Clean outcomes use `defect_ids:[]`. Every repair, strike, drop, removal, or
 reversion names one closed, uniquely owned `5b-cross` ledger row. Restore a

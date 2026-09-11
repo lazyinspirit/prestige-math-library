@@ -257,3 +257,7 @@ independent mathematical review. Engine final gating has not been invoked.
 Commands used: `node tools/coverage-checklist.mjs research/phase-2-next-20-batch-13.coverage.json --require-destination`; `node tools/manifest-deps.mjs research/phase-2-next-20-batch-*.pages.json`; `node tools/content-policy.mjs --manifest-only research/phase-2-next-20-batch-*.pages.json`; `node tools/validate-plan.mjs research/plan-spec.json`; the same validator against the temporary owned overlay; `node tools/extcheck.mjs --quiet`; `node tools/source-fetch-check.mjs --coverage research/phase-2-next-20-batch-13.coverage.json --stamp --timeout-sec 5` and subsequent check mode; `node tools/frontier-dependency-ledger.mjs refresh --run phase-2-next-20`.
 
 These are actual local results, not whole-run engine approval. Other batches were being written concurrently, so whole-run inventory counts are this check snapshot. No tests or judges were dispatched. All 36 owned decision files exist and remain escalated.
+
+## Step 3b group h authoring handoff
+
+Current item-by-item arguments, exact conventions, local checks and open obligations are in `research/phase-2-next-20-step3b-h.md`. All original item/page IDs are materialized. All 36 item arguments/definitions are authored. Source retrieval histories above are preserved, not reset. Coverage `step3b_authoring` records current mathematical completion separately from inherited reading limits. The canonical plan and shared prose await serial Step 4.

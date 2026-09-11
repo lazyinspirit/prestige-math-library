@@ -3,6 +3,11 @@ id: "lem-kolmogorov-simultaneous-phase-approximation"
 kind: "lemma"
 title: "Kolmogorov simultaneous phase approximation"
 deps: ["def-period-one-fourier-coefficients-partial-sums-and-convolution", "thm-fejer-uniform-convergence-for-continuous-periodic-functions"]
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: Grafakos, Classical Fourier Analysis, third edition

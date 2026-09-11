@@ -6,6 +6,11 @@ deps: ["lem-infinite-order-elements-have-positive-stable-translation-length", "d
 provenance:
   statement: "ai-altered"
   proof: "ai-generated"
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: "Hamann Theorem 5.2.6 pp.89–90, complete proof read"

@@ -24,6 +24,31 @@ export function repairFingerprint(ctx: any): string {
   return hash.digest('hex');
 }
 
+/** Exact foreign-only diagnostics share one ownership rule in 5a and 5b.
+ * Warning inventories cannot authorize a repair of an otherwise owned item. */
+export function foreignGateSubjects(ctx: any, failures: any[], groups: any[]): string[] | null {
+  const owned = new Set<string>();
+  for (const group of groups) for (const batch of group.covers) {
+    const path = join(ctx.repo, 'research', `${ctx.run}-batch-${batch}.pages.json`);
+    if (!existsSync(path)) continue;
+    for (const page of JSON.parse(readFileSync(path, 'utf8'))) {
+      owned.add(String(page.id));
+      for (const item of page.items ?? []) owned.add(String(item.id ?? item));
+    }
+  }
+  const diagnosed = failures.map((entry) => {
+    const output = entry.output ?? '';
+    const errors = entry.id === 'depcheck' ? /^\s*\d+ ERROR\(s\):\s*$/m.exec(output) : null;
+    return Executor.itemsNamedBy(errors
+      ? { ...entry, output: output.slice(errors.index + errors[0].length) } : entry);
+  });
+  const subjects = diagnosed.flat();
+  return owned.size && diagnosed.length && diagnosed.every((ids) => ids.length > 0)
+    && subjects.every((id) => !owned.has(id))
+    && !failures.some((entry) => entry.id === 'validate-plan')
+    ? [...new Set(subjects)] : null;
+}
+
 /** One writer per group owns all gate findings on its carriers. Unscoped
  * failures use one serial lane, since their write set cannot be proven disjoint. */
 export async function repairGateBatch(args: any, deps: any) {
@@ -67,18 +92,9 @@ export async function repairGateBatch(args: any, deps: any) {
       for (const item of page.items ?? []) own(item.id ?? item, group.label);
     }
   }
-  // depcheck prints warning inventories before its error section. Those IDs
-  // cannot establish ownership of a failing diagnostic.
-  const diagnosed = failures.map((entry) => {
-    const output = entry.output ?? '';
-    const errors = entry.id === 'depcheck' ? /^\s*\d+ ERROR\(s\):\s*$/m.exec(output) : null;
-    return Executor.itemsNamedBy(errors
-      ? { ...entry, output: output.slice(errors.index + errors[0].length) } : entry);
-  });
-  const subjects = diagnosed.flat();
-  if (diagnosed.every((ids) => ids.length > 0) && subjects.every((id) => !owners.has(id))
-      && !failures.some((entry) => entry.id === 'validate-plan')) {
-    return { owner: { reason: `Gate failures name only carriers outside this run: ${[...new Set(subjects)].join(', ')}. Route repairs to their actual owners before retrying.` } };
+  const foreign = foreignGateSubjects(ctx, failures, groups);
+  if (foreign) {
+    return { owner: { reason: `Gate failures name only carriers outside this run: ${foreign.join(', ')}. Route repairs to their actual owners before retrying.` } };
   }
   const named = failures.flatMap((entry) => entry.liveItems?.filter((id: string) => id !== '*')
     ?? Executor.itemsNamedBy(entry));

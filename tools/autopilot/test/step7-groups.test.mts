@@ -109,6 +109,25 @@ test('the step-6 reader cannot write, and it is the kernel that says so', () => 
     'a prompt-level instruction is not the guarantee step 6 needs');
 });
 
+test('digest recovery supplies exact diagnostics and the prior evidence instead of a blind reread', async () => {
+  const root = fixtureRepoWithGroups();
+  try {
+    const started: any[] = [];
+    const s = stage('6-judge');
+    await s.onGateFailure({
+      ctx: { run: 'demo', repo: root }, stage: s, round: 1,
+      executor: { start: (_stage: any, plan: any) => started.push(plan) },
+      failure: { id: 'step7-digests', output: 'group b: schema $.seams_checked[0].opened: unexpected field' },
+    });
+    assert.equal(started.length, 1);
+    const task = readFileSync(join(root, started[0].task), 'utf8');
+    assert.match(task, /seams_checked\[0\]\.opened: unexpected field/);
+    assert.match(task, /demo-alpha-b-step7-context\.json/);
+    assert.match(task, /preserve supported findings/);
+    assert.deepEqual(started[0].covers, []);
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
 test('a re-read round is not mistaken for the unit it repairs', { skip: !existsSync(join(REPO, 'research/frontier-18-alpha-groups.json')) }, () => {
   const s = stage('6-judge');
   const started: any[] = [];
@@ -125,6 +144,7 @@ test('a re-read round is not mistaken for the unit it repairs', { skip: !existsS
     assert.deepEqual(p.covers, [], 'a repair round manufactures no coverage');
     assert.ok(!s.pattern.test(`${p.role}-${p.label}.result.json`),
       `${p.label} would satisfy the stage's own coverage`);
+    rmSync(join(REPO, p.task), { force: true });
   }
 });
 
@@ -955,20 +975,29 @@ test('step7 digest coverage is an exact inventory, not a self-attested count', (
       { cwd: REPO, encoding: 'utf8' });
     const oldShape = command();
     assert.notEqual(oldShape.status, 0);
-    assert.match(`${oldShape.stdout}${oldShape.stderr}`, /exact id array, not a self-attested count/);
+    assert.match(`${oldShape.stdout}${oldShape.stderr}`, /items_read: expected array/);
     writeFileSync(join(REPO, 'research', `${run}-alpha-a-step7-context.json`), JSON.stringify({
       group: 'a',
+      batches: ['1'],
       pages_read: ['page-demo'],
       items_read: ['thm-demo-one', 'lem-demo-two'],
       seams_checked: [],
-      conventions: ['Definitions are stated before dependent theorems.'],
-      load_bearing: ['thm-demo-one'],
+      conventions: [{ convention: 'Definitions precede uses.', fixed_by: 'thm-demo-one', matters_for: ['lem-demo-two'] }],
+      load_bearing: [{ id: 'thm-demo-one', statement: 'Demo statement.', used_by: ['lem-demo-two'] }],
+      published_dependencies: [],
       concerns: [],
       alerts: [],
     }));
     const exact = command();
     assert.equal(exact.status, 0, `${exact.stdout}${exact.stderr}`);
     assert.match(exact.stdout, /2 item\(s\) opened/);
+    const path = join(REPO, 'research', `${run}-alpha-a-step7-context.json`);
+    const incomplete = JSON.parse(readFileSync(path, 'utf8'));
+    delete incomplete.concerns;
+    writeFileSync(path, JSON.stringify(incomplete));
+    const missing = command();
+    assert.notEqual(missing.status, 0);
+    assert.match(`${missing.stdout}${missing.stderr}`, /concerns: required field missing/);
   });
 });
 

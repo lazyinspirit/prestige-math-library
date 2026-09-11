@@ -3,6 +3,11 @@ id: "lem-separated-frequency-blocks-do-not-disturb-earlier-partial-sum-maxima"
 kind: "lemma"
 title: "Separated frequency blocks do not disturb earlier partial sum maxima"
 deps: ["def-kolmogorov-analytic-partial-sum-maximal-function", "def-period-one-fourier-coefficients-partial-sums-and-convolution"]
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: Grafakos, Classical Fourier Analysis, third edition

@@ -3,6 +3,11 @@ id: "lem-carleson-signed-tree-weak-one-one-estimate"
 kind: "lemma"
 title: "Carleson signed tree weak one one estimate"
 deps: ["def-carleson-tiles-wave-packets-and-tile-order", "thm-plancherel", "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz", "thm-almost-every-point-is-a-lebesgue-point", "thm-monotone-convergence-for-the-integral", "def-axiom-of-choice"]
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: 'Lacey, Carleson’s Theorem: Proof, Complements, Variations'
@@ -22,7 +27,7 @@ Assume AC. Let T be a finite plus tree with designated top t, $J_0=I_t$, and $L=
 $$P_{T,\varepsilon}f=\sum_{s\in T}\varepsilon_s\langle f,\phi_s\rangle\phi_s.$$
 There is a constant C depending only on the fixed packet, independent of T, its top, the coefficients epsilon, f and lambda, such that for every $\lambda>0$,
 $$m\{x:|P_{T,\varepsilon}f(x)|>\lambda\}\le\frac C\lambda\int_{\mathbb R}|f(y)|w_{J_0}(y)\,dy.$$
-In particular this includes arbitrary signs and the localization $L\chi_{J_0}=w_{J_0}$ required in Lacey (7.11).
+In the normalized bump notation of Lacey (3.4), specialized to the exponent twenty used here, $\chi_{J_0}(y)=L^{-1}(1+|y-c(J_0)|/L)^{-20}=L^{-1}w_{J_0}(y)$. Thus the right-hand side is exactly the $\|fL\chi_{J_0}\|_1$ localization in Lacey (7.11), and the estimate includes arbitrary signs.
 
 ## Facts & Assumptions
 

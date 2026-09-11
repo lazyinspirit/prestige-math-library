@@ -59,7 +59,7 @@ import { tsxLoader } from './paths.mjs';
 import { itemHashJudge } from './item-hash.mjs';
 import { verdictIsCurrent } from './judge-currency.mjs';
 import { JUDGE_LINEUPS, DEFAULT_LINEUP } from './models.mjs';
-import { parseTerminalResolutions, terminalResolutionIsCurrent } from './step7-terminal-resolution.mjs';
+import { parseTerminalResolutions, terminalResolutionStatus } from './step7-terminal-resolution.mjs';
 
 const argv = process.argv.slice(2);
 const value = (flag) => { const i = argv.indexOf(flag); return i >= 0 ? argv[i + 1] : ''; };
@@ -257,6 +257,7 @@ for (const id of ids) {
     continue;
   }
   const terminal = terminalParsed.latest.get(id);
+  let staleTerminal = null;
   if (terminal) {
     let now;
     try {
@@ -266,17 +267,15 @@ for (const id of ids) {
       result.skipped.push({ id, reason: 'terminal-resolution-unverifiable' });
       continue;
     }
-    if (!terminalResolutionIsCurrent(terminal, now)) {
-      problems.push(`${id}: terminal resolution is stale against current item/context`);
-      result.skipped.push({ id, reason: 'terminal-resolution-stale' });
+    if (terminalResolutionStatus(terminal, now) === 'current') {
+      const stale = judgeBlockRe.test(text);
+      if (stale && apply) writeFileSync(file, text.replace(judgeBlockRe, ''));
+      if (stale && verify) problems.push(`${id}: a judge pass block sits on a terminal manually resolved item`);
+      result.skipped.push({ id, reason: 'terminal-manual-resolution', resolved_by: terminal.resolved_by,
+        disposition: terminal.disposition, ...(stale ? { stripped_stale_pass: apply } : {}) });
       continue;
     }
-    const stale = judgeBlockRe.test(text);
-    if (stale && apply) writeFileSync(file, text.replace(judgeBlockRe, ''));
-    if (stale && verify) problems.push(`${id}: a judge pass block sits on a terminal manually resolved item`);
-    result.skipped.push({ id, reason: 'terminal-manual-resolution', resolved_by: terminal.resolved_by,
-      disposition: terminal.disposition, ...(stale ? { stripped_stale_pass: apply } : {}) });
-    continue;
+    staleTerminal = { terminal, now };
   }
   const target = targeted.get(id);
   if (target && attestedItemHash(text) !== target.item_sha256) {
@@ -319,6 +318,12 @@ for (const id of ids) {
     models.every((model) => byModel.has(model)
       && isCurrent({ context_sha256: hash, item_sha256: byModel.get(model).item_sha256 })));
   if (!eligible.length) {
+    if (staleTerminal
+      && terminalResolutionStatus(staleTerminal.terminal, staleTerminal.now, false) === 'stale') {
+      result.skipped.push({ id, reason: 'terminal-resolution-stale' });
+      problems.push(`${id}: terminal resolution is stale against current item/context and no current configured-judge verdict supersedes it`);
+      continue;
+    }
     const seen = [...groups.values()].flatMap((byModel) => [...byModel.keys()]);
     result.skipped.push({ id, reason: 'no-current-verdict', models: models.filter((m) => !seen.includes(m)) });
     problems.push(`${id}: no current configured-judge verdict — at closure this is a currency defect, not a normal case`);

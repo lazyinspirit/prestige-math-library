@@ -188,6 +188,14 @@ export function terminalResolutionIsCurrent(row, now) {
     && row.item_sha256 === now.item_sha256);
 }
 
+// Terminal resolution is a fallback for a judge cycle that could not close.
+// Once a later complete judge set covers the current bytes, that newer evidence
+// supersedes the old fallback without deleting its append-only history.
+export function terminalResolutionStatus(row, now, hasCurrentJudgeCoverage = false) {
+  if (terminalResolutionIsCurrent(row, now)) return 'current';
+  return hasCurrentJudgeCoverage ? 'superseded-by-current-judge' : 'stale';
+}
+
 export function currentHashes(root, id) {
   const loader = tsxLoader();
   const scratch = mkdtempSync(join(tmpdir(), 'step7-terminal-hash-'));

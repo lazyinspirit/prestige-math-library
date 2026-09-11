@@ -3,6 +3,11 @@ id: "lem-carleson-size-selection"
 kind: "lemma"
 title: "Carleson size selection"
 deps: ["def-density-size-and-tree-count-for-carleson-tiles", "def-carleson-tiles-wave-packets-and-tile-order", "thm-plancherel", "def-axiom-of-choice", "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz"]
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: 'Lacey, Carleson’s Theorem: Proof, Complements, Variations'

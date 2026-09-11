@@ -3,6 +3,11 @@ id: "lem-chacon-tower-height-correlations-obstruct-mixing"
 kind: "lemma"
 title: "Chacon tower height correlations obstruct mixing"
 deps: ["def-chacon-three-cut-one-spacer-towers", "lem-chacon-partial-maps-extend-to-an-invertible-map-mod-null-sets", "lem-chacon-levels-approximate-measurable-sets", "def-strong-and-weak-mixing", "def-axiom-of-choice"]
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: Peter Varju, Topics in Ergodic Theory, Michaelmas 2016, section 11 pp.36–40 (complete Chacon argument; public mirror)

@@ -3,6 +3,11 @@ id: "lem-carleson-forest-summation-gives-restricted-weak-ltwo"
 kind: "lemma"
 title: "Carleson forest summation gives restricted weak ltwo"
 deps: ["lem-carleson-density-selection", "lem-carleson-size-selection", "lem-carleson-single-tree-estimate", "def-axiom-of-choice", "def-density-size-and-tree-count-for-carleson-tiles"]
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: 'Lacey, Carleson’s Theorem: Proof, Complements, Variations'
@@ -24,7 +29,7 @@ Assume AC. For every finite linearised tile family, $|\langle C_{S,N}f,g\rangle|
 
 [F1] A finite positive-density family can be partitioned into trees of total top length at most $C\delta^{-1}m(E)$ and a remainder of density at most $\delta/2$ [[lem-carleson-density-selection]].
 
-[F2] A finite positive-size family can be partitioned into trees of total top length at most $C\sigma^{-2}\|f\|_2^2$ and a remainder of size at most $\sigma/2$ [[lem-carleson-size-selection]].
+[F2] From a finite family of positive size $\sigma$, one can choose finitely many trees of total top length at most $C\sigma^{-2}\|f\|_2^2$ such that deleting their union leaves a remainder of size at most $\sigma/2$ [[lem-carleson-size-selection]].
 
 [F3] A finite tree's absolute bilinear contribution is at most its density times its size times $C|I_T|$ [[lem-carleson-single-tree-estimate]].
 
@@ -42,7 +47,7 @@ Assume AC. For every finite linearised tile family, $|\langle C_{S,N}f,g\rangle|
 
 3.1 First reduce the density of $R_n$ to $d_{n+1}$. If its density is already at most that threshold, do nothing. Otherwise apply F1 using its actual density delta. Each such application removes trees of count at most $Ce/\delta\le Ce/d_{n+1}$ and halves the remaining density. For n<0 no application is needed, since $d_n=d_{n+1}=D$. For n>=0, $d_n=4d_{n+1}$, so at most two applications suffice, even when the first remaining density is zero. The removed trees all lie in $R_n$. For n>=0 their combined count is at most $2Ce/d_{n+1}=8CD^{-1}e4^n$. [F1, F4, step 2.1]
 
-4.1 The remainder after step 3.1 still has size at most $s_n$. If its actual size sigma exceeds $s_{n+1}$, apply F2 once. Its output remainder has size at most $\sigma/2\le s_{n+1}$ and its removed forest has count at most $CF^2/\sigma^2\le CF^2/s_{n+1}^2=4Ce4^n$. Otherwise remove nothing. Density cannot increase in this step. Call the resulting remainder $R_{n+1}$ and combine all forests removed by the two selections into $\mathcal F_n$. They are disjoint as tile collections, because each selection operates on what remains. Their designated tops may overlap; the count bounds already include this multiplicity. This proves the induction and the promised bound with a fixed $C_0$. [F2, F4, step 1.1, step 2.1, step 3.1]
+4.1 The remainder after step 3.1 still has size at most $s_n$. If its actual size sigma exceeds $s_{n+1}$, apply F2 once. Its output remainder has size at most $\sigma/2\le s_{n+1}$ and its selected trees have total top length at most $CF^2/\sigma^2\le CF^2/s_{n+1}^2=4Ce4^n$. Order those finitely many trees and replace the ith one by the tiles in it which occur in none of the earlier trees, retaining its designated top and discarding it if empty. Every resulting nonempty collection is still a tree, their union and hence the output remainder are unchanged, and their total top length cannot increase. Thus they form a forest in the required partition sense. Otherwise remove nothing. Density cannot increase in this step. Call the resulting remainder $R_{n+1}$ and combine this forest with all forests removed by the density selections into $\mathcal F_n$. Tile collections coming from different selections are disjoint because each selection operates on what remains. Their designated tops may overlap; the count bounds already include this multiplicity. This proves the induction and the promised bound with a fixed $C_0$. [F2, F4, step 1.1, step 2.1, step 3.1]
 
 5.1 Only finitely many nonzero coefficient tiles can survive this process. More explicitly, for each such s in the original finite S the positive number $|\langle f,\phi_s\rangle|/\sqrt{|I_s|}$ is a lower bound for the size of any remainder containing s, by the singleton-tree case of F4. The minimum b of these finitely many positive numbers is positive. Choose $n_1>n_0$ with $s_{n_1}<b$. Then $R_{n_1}$ contains only zero-coefficient tiles and has zero testing contribution. Thus the finite forests $\mathcal F_n$ for $n_0\le n<n_1$ account for the whole testing form; no infinite decomposition, limiting selector or interchange of integrals is required. If no coefficient was nonzero, step 1.1 already handled the case. [F4, step 1.1, step 4.1]
 

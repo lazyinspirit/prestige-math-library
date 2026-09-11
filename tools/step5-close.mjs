@@ -109,7 +109,10 @@ const checks = [
   ['defect-ledger', ['tools/defect-ledger.mjs', 'validate', '--run', run]],
 ];
 for (const [label, args] of checks) {
-  const result = spawnSync(process.execPath, args, { cwd: root, encoding: 'utf8', timeout: 300_000 });
+  const result = spawnSync(process.execPath, args, {
+    cwd: root, encoding: 'utf8', timeout: 300_000, maxBuffer: 32 * 1024 * 1024,
+  });
+  if (result.error) fail(`${label} could not complete: ${result.error.message}`);
   if (result.status !== 0) fail(`${label} failed\n${result.stderr || result.stdout}`);
 }
 const artifacts = artifactHashes();

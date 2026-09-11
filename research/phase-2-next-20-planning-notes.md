@@ -6,7 +6,7 @@ is a judgement about mathematics.
 
 ## Scope
 
-20 A/B pair(s), 40 pages, 14 batch(es).
+22 A/B pair(s), 44 pages, 15 batch(es).
 
 | batch | pair | category | order | design |
 |---|---|---|---|---|
@@ -30,6 +30,9 @@ is a judgement about mathematics.
 | 13 | `the-constructible-hierarchy-and-inner-models` | foundations | 675 | `research/plan-set-theory-completion-track.md` L556 |
 | 13 | `forcing-orders-names-and-generic-extensions` | foundations | 679 | `research/plan-set-theory-completion-track.md` L581 |
 | 14 | `large-cardinals-measures-and-elementary-embeddings` | foundations | 699 | `research/plan-set-theory-completion-track.md` L772 |
+
+| 15 | `fourier-transform-convolution-and-approximate-identities` | functional-analysis | 288.089 | imported from `phase-2-fourier-support-2` |
+| 15 | `schwartz-space-and-the-plancherel-theorem` | functional-analysis | 288.091 | imported from `phase-2-fourier-support-2` |
 
 ## Design-vs-spec drift
 

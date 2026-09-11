@@ -6,6 +6,11 @@ deps: ["lem-hg-toolkit-infinite-hyperbolic-groups-have-infinite-order-elements",
 provenance:
   statement: "ai-altered"
   proof: "ai-generated"
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: "Hamann Theorems 5.3.7–5.3.8 pp.91–94; complete torsion-allowed proof"

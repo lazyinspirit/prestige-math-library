@@ -6,6 +6,11 @@ deps: ["def-hg-toolkit-loxodromics-and-independent-poles", "lem-boundary-product
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: "Canary Theorem 7.3 pp.32–33; four-pole separation"

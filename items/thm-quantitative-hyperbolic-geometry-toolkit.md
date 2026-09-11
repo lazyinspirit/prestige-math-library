@@ -6,6 +6,11 @@ deps: ["lem-geodesic-triangles-in-trees-are-tripods", "lem-slim-triangles-imply-
 provenance:
   statement: "ai-altered"
   proof: "ai-altered"
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: "Druţu–Kapovich Chapter 9; Hamann §§5.1–5.3; Canary §§5,7"
@@ -21,7 +26,7 @@ The following toolkit holds, with each clause under its own stated hypotheses. W
 
 1. A connected cycle-free unit-edge graph has unique geodesics and tripod triangles, hence is $0$-slim. In any geodesic space, $\delta$-slimness implies product constant $3\delta$. In any metric space, product constant $\kappa$ at every basepoint is equivalent to the four-point condition with largest two opposite-pair sums differing by at most $2\kappa$. In a geodesic space that condition implies $4\kappa$-slimness.
 
-2. For $\delta>0$, a $k$-local arc-length geodesic with $k\ge6\delta$ is a $(3,4\delta)$-quasi-geodesic. When $\delta=0$, every positive-locality geodesic is globally geodesic. Under AC, every possibly discontinuous $(\lambda,\varepsilon)$-quasi-geodesic on a nonempty compact real interval in a geodesic $\delta$-slim space has Hausdorff distance at most $M(\lambda,\varepsilon,\delta)$ from every specified endpoint geodesic. Properness is unnecessary.
+2. In a geodesic $\delta$-slim space, for $\delta>0$, a $k$-local arc-length geodesic with $k\ge6\delta$ is a $(3,4\delta)$-quasi-geodesic. When $\delta=0$, every positive-locality geodesic is globally geodesic. Under AC, every possibly discontinuous $(\lambda,\varepsilon)$-quasi-geodesic on a nonempty compact real interval in such a space has Hausdorff distance at most $M(\lambda,\varepsilon,\delta)$ from every specified endpoint geodesic. Properness is unnecessary.
 
 3. For a $(\lambda,\varepsilon)$ embedding $f:X\to Y$ with attained coarse-density radius $R$, AC supplies an inverse selector $g$ with $d_Y(fg(y),y)\le R$, $d_X(gf(x),x)\le\lambda(R+\varepsilon)$ and embedding constants $(\lambda,\lambda(2R+\varepsilon))$; these estimates are choice-free if the selector is supplied, and do not require geodesicity. Under AC, if $X,Y$ are geodesic and $Y$ is $\delta$-slim, the embedding $f$ alone implies that $X$ is $\lambda(2M(\lambda,\varepsilon,\delta)+\delta+\varepsilon)$-slim. Consequently quasi-isometric geodesic spaces share hyperbolicity.
 

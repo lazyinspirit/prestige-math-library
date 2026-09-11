@@ -6,6 +6,11 @@ deps: ["lem-finite-semisimple-pbw-and-highest-weight-construction", "lem-weyl-or
 provenance:
   statement: "ai-altered"
   proof: "ai-generated"
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: "Pavel Etingof, Lie Groups and Lie Algebras, \u00a7\u00a725\u201326; local orbit-sum triangular inversion"

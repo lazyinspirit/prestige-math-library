@@ -812,3 +812,37 @@ test('direct preparation refuses to overwrite historical Step 5 evidence', () =>
     assert.equal(readFileSync(path, 'utf8'), before);
   } finally { rmSync(fx.root, { recursive: true, force: true }); }
 });
+
+test('5b content gates route exclusively foreign diagnostics to the actual author', async () => {
+  const root = mkdtempSync(join(tmpdir(), 'step5-peer-author-'));
+  try {
+    mkdirSync(join(root, 'research'));
+    writeFileSync(join(root, 'research/r-batch-1.pages.json'), JSON.stringify([
+      { id: 'owned-page', items: [{ id: 'thm-owned' }] },
+    ]));
+    const stage = byId('5b-cross');
+    for (const [id, output] of [
+      ['precheck', 'REPAIR items/thm-foreign.md: canonical labels'],
+      ['rendercheck', 'ERROR [thm-foreign]: malformed display'],
+      ['depcheck', '1 WARNING(s):\n [orphan] items/thm-owned.md\n1 ERROR(s):\n [bad] items/thm-foreign.md'],
+    ]) {
+      const outcome = await stage.onGateFailure({ ctx: { repo: root, run: 'r' }, stage, round: 1,
+        failure: { id, output, liveItems: ['*'] },
+        executor: { start() { assert.fail('a 5b worker must not race the peer author'); } } });
+      assert.match(outcome.owner.reason, /thm-foreign/);
+      assert.doesNotMatch(outcome.owner.reason, /thm-owned/);
+    }
+  } finally { rmSync(root, { recursive: true, force: true }); }
+});
+
+
+test('precheck diagnostic headers own retry subjects without PASS rows or proof citations', () => {
+  const output = 'PASS items/thm-owned.md (direct)\n'
+    + 'REPAIR items/prop-foreign-labels.md: adopt canonical form\n'
+    + '  | [F1] [[thm-owned]]\n  | 1.1 Use lem-unrelated-supplier. [F1]\n'
+    + 'FAIL /tmp/repo/items/lem-foreign-gap.md: missing strategy\n'
+    + 'REJECT items/thm-rejected.md: rejected\n';
+  assert.deepEqual(Executor.itemsNamedBy({ id: 'precheck', output } as any),
+    ['prop-foreign-labels', 'lem-foreign-gap', 'thm-rejected']);
+  assert.deepEqual(Executor.itemsNamedBy({ id: 'other-gate', output } as any), []);
+});

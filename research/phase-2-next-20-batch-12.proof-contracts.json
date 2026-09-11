@@ -48,12 +48,12 @@
         {
           "case": "degenerate",
           "status": "checked",
-          "evidence": "Definition does not assign a finite worst-case time to a nonhalting run."
+          "evidence": "Definition restricts these resource conventions to deterministic machines and does not assign a finite worst-case time to a nonhalting run."
         },
         {
           "case": "endpoints",
           "status": "checked",
-          "evidence": "Definition clamps the left endpoint and quantifies all clocks including zero."
+          "evidence": "Definition locally specifies each left move as max{h-1,0}, each right move as h+1, and initial heads at zero; clamping is not attributed to the variant supplier. All clocks including zero are quantified."
         },
         {
           "case": "nonempty-choice",
@@ -195,7 +195,12 @@
           "status": "not_applicable",
           "reason": " Machine computability equivalence is a later theorem, not claimed here."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-5a-g (phase-2-next-20 batch 12, group g)",
+        "notes": "Read the definition, facts block and both verification steps. Checked that the initial functions, composition (including r=0 constants) and the primitive recursion scheme f(a,0)=g(a), f(a,y+1)=h(a,y,f(a,y)) are exactly the standard ones with nullary parameter tuples allowed, and that the class is the least arity-indexed class closed under the rules via tree induction. Verified step 1.1 is a legitimate application of thm-recursion: for fixed parameters the state map is total on N x N with a designated initial point, so the recursion gives a unique total sequence whose first coordinate is y and whose second satisfies both defining equations. Step 2.1's totality/uniqueness by induction on the finite derivation tree uses a functional graph, not a choice of recursion solutions; composition of total functions is total. Boundary cases checked: arity 0, empty parameter tuple, y=0, and the excluded zero-arity projections. No AC and no unresolved obligation."
+      }
     },
     "lem-fixed-coding-primitive-recursive-arithmetic-and-sequences": {
       "citations": [
@@ -329,7 +334,12 @@
           "status": "checked",
           "evidence": "Step 4.1 also constructs a code for every finite list by cons; no codes are left uninterpreted."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-5a-g (phase-2-next-20 batch 12, group g)",
+        "notes": "Read the statement, facts and all six steps. Verified each recursion is an instance of composition/primitive recursion: addition, multiplication, exponentiation, predecessor, truncated subtraction, zero test, bounded sums/products, and the bounded least-witness formula sum over j<=B of prod over i<=j of (1-[R(a,i)]), which I recomputed to return the least witness r<=B and B+1 when absent. Checked the cons code pair(a,b)=2^a(2b+1): it is a bijection from N x N onto the positive integers, so the head (2-adic valuation) and tail ((odd part-1)/2) are total mutually inverse decoders; valuation existence and uniqueness follow from the odd-quotient and cancellation arguments, bounded by z. Verified tail(z)<z for z>0, the strictly decreasing iteration t(z,j), and the length identity sum over j<z of (1-Z(t(z,j))): the positive prefix has at most z terms and the sequence is constantly zero afterwards, so the count is the length with coordinate(z,i)=0 beyond it. Checked the reverse fold, the accumulator appends/concatenation, the empty list/singleton cases, and that the parser and numeral conversions are bounded folds of already-PR functions rather than an appeal from computability to primitive recursiveness. No AC."
+      }
     },
     "def-kleene-computation-predicate-and-output-map": {
       "citations": [],
@@ -376,7 +386,12 @@
           "status": "checked",
           "evidence": "Definition does not assume the PR or recognition theorem; the reverse recognition is a later obligation."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-5a-g (phase-2-next-20 batch 12, group g)",
+        "notes": "Read the definition clause by clause. Verified the length-lex indexing e -> bin(e+1) minus its leading 1, the injected prefix-free tuple encoder E with arity header 1^k0, the letter map bit 0/1 -> machine letters 1/2 with the requirement s>=2, and the canonical configuration code [q,h,v] with q<m, symbols <r, l(v)>=h+1 and either l(v)=h+1 or a nonblank last symbol. Compared that trim convention with the published def-turing-machine-configuration (r=max({h} union supp(t)) includes the scanned cell even when blank) and def-one-step-configuration-relation (single write at h, clamped left move, finite support): the authored triple/list encoding is faithful and unique, and it also avoids the untagged Q-union-Gamma word ambiguity. Verified the numeric output convention: the maximal initial {1,2}-segment is read back to bits, the empty output is invalid (not zero), the single bit 0 is numeric zero, and halt state accept/reject does not change the output. T is a conjunction of finite decidable checks and U is total with fallback zero; PR-ness is explicitly deferred to the following lemma. Malformed programs are stipulated to denote the empty partial function, with the looping-wrapper explanation matching def-partial-function-computed-by-a-machine. No unresolved obligation."
+      }
     },
     "lem-fixed-machine-history-predicate-is-primitive-recursive": {
       "citations": [
@@ -450,7 +465,7 @@
         {
           "id": "derive-4.1",
           "step": "4.1",
-          "claim": "A bounded conjunction over the history list tests all configurations and all adjacent pairs. Nonemptiness and first/last entry checks are PR. For terminal output, find the first coordinate of the last tape list not in $\\{1,2\\}$, using its length as the value if no such coordinate occurs. The implicit next cell is blank, so this is exactly the maximal bit prefix. Reject an empty prefix; accept a leading $1$ bit or the single bit $0$. Horner accumulation computes its value. On any syntactic failure set $U$ to zero. All scans are bounded by a decoded finite length, proving that $U$ is total PR and the conjunction $T_k$ is PR. No search for a halting time occurs in these tests.",
+          "claim": "A bounded conjunction over the history list tests all configurations and all adjacent pairs. Nonemptiness and first/last entry checks are PR. For terminal output, find the first coordinate of the last tape list not in $\\{1,2\\}$, using its length as the value if no such coordinate occurs. This stopping rule gives exactly the maximal bit prefix; only in the latter case is its next implicit cell necessarily blank. Reject an empty prefix; accept a leading $1$ bit or the single bit $0$. Horner accumulation computes its value. On any syntactic failure set $U$ to zero. All scans are bounded by a decoded finite length, proving that $U$ is total PR and the conjunction $T_k$ is PR. No search for a halting time occurs in these tests.",
           "inputs": [
             "F1",
             "F2",
@@ -523,7 +538,12 @@
           "status": "checked",
           "evidence": "Step 5.1 constructs a passing history from every actual canonical-output halt."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-5a-g (phase-2-next-20 batch 12, group g)",
+        "notes": "Read all six steps and the contract. Checked each required test is primitive recursive: decoding the index word by binary expansion, the bounded unary-block parser (block count bounded by the decoded word length, a PR function of e), the machine-shape checks m>=3, r>=1, s<r, s>=2 with table length 3+3(m-2)r, bounded verification of every triple, and the bounded table lookup with fixed zero fallback. Verified the configuration-validity and step tests against the published one-step relation: q'=p, v'_h=b, v'_j=v_j for j<max(l(v),l(v')) other than h, and h'=h+1 or max(h-1,0). Untrimmed trailing blanks in v' are excluded by the configuration-validity clause, and a spurious nonblank coordinate beyond l(v) would contradict the off-h agreement, so the test is exact. The scan for the first coordinate outside {1,2} with Horner fold and zero fallback is total PR. Determinism gives coincidence of any two witnesses at common times by induction; since intermediate entries are nonhalting and terminal entries halting, a shorter witness cannot end earlier, so all witnesses have the same U value. Conversely a genuine finite canonical-output run is encoded by finite cons recursion, and a length-one history is impossible because the start is nonhalting. Checked empty histories, malformed indices and invalid outputs. No AC and no unbounded halting-time search."
+      }
     },
     "thm-kleene-normal-form-for-the-fixed-machine-coding": {
       "citations": [
@@ -659,7 +679,12 @@
           "status": "checked",
           "evidence": "Steps 2.1–5.1 compile each partial recursive construction to a machine with the same domain."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-5a-g (phase-2-next-20 batch 12, group g)",
+        "notes": "Read the statement, facts and all five steps. Forward direction: T_k is total and PR, so least-witness search on 1-[T_k] diverges exactly when no witness exists, and the preceding uniqueness lemma makes U(mu z T_k) the correct value; PR functions lie in the partial recursive class, so every machine function is partial recursive. Converse: the compiler for zero, successor and projections, strict composition, strict primitive recursion (retain parameters and the target, run g(a) then exactly y applications of h, propagating divergence in any required subcall, base case y=0 with no h call) and strict minimization (run g(a,0),g(a,1),... sequentially and never dovetail past an undefined smaller value) is described with explicit finite tape routines, literal state renaming and delimited zones, and uses the published one-step interpreter to simulate compiled subprograms with scratch kept outside the simulated tape. Verified that the compiled programs write canonical output and halt only on a defined value, that domains (including the empty domain) agree, and that no compiler time bound is asserted. No AC and no unresolved obligation."
+      }
     },
     "def-computable-many-one-reducibility-interface": {
       "citations": [
@@ -737,7 +762,12 @@
           "status": "checked",
           "evidence": "Step 2.1 decodes such a string map into a total numeric reduction."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-5a-g (phase-2-next-20 batch 12, group g)",
+        "notes": "Read the definition and both verification steps. Verified the direction convention (membership of the source decides through the target), totality of f, reflexivity by the identity, and transitivity by sequential composition of two total computable maps with the iff chain n in A iff f(n) in B iff g(f(n)) in C. Checked the oracle version: a query instruction reads a canonical numeral on the query tape and receives the membership bit in one transition, malformed queries receive zero, and writing the query costs ordinary transitions; no computability of X is assumed. Checked the string-language variant with a total string-valued map, and the restricted numeric/string bridge that only claims the membership equivalence at canonical inputs whose outputs are canonical, with the explicit caveat that the unrestricted numeral-image language formulation is not inferred. No AC."
+      }
     },
     "def-oracle-turing-reducibility-interface": {
       "citations": [
@@ -813,7 +843,12 @@
           "status": "not_applicable",
           "reason": " No claim that Turing reducibility implies many-one reducibility is made."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-5a-g (phase-2-next-20 batch 12, group g)",
+        "notes": "Read the definition, facts and both verification steps. Verified the oracle instruction model (extra query tape, query state, two answer states, maximal initial bit word read, malformed answers zero, ordinary tapes and head positions unchanged), the definitions of X-computability and X-c.e. (a recognizer may reject or diverge), and that A<=_T B requires a total decider. Checked that many-one reducibility implies Turing reducibility by one query after running the total map, and transitivity of <=_T by simulating the A-decider and answering each B-query with the total B-decider in separate work zones; on a fixed input there are finitely many transitions and queries, so induction on the simulation reaches the same halt and bit without any uniform bound, and the text explicitly refuses to substitute a recognizer at a negative query. Boundary: empty oracle, empty query word answered zero, zero as a valid queried number, malformed inputs unconstrained for a numeric decider. No AC."
+      }
     },
     "def-acceptable-numbering-with-universal-evaluation": {
       "citations": [
@@ -920,7 +955,12 @@
           "status": "checked",
           "evidence": "Step 3.1 proves that defined component calls yield the same defined composite value."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-5a-g (phase-2-next-20 batch 12, group g)",
+        "notes": "Read the definition and all three verification steps. Verified the composition formulation of acceptability (evaluation partial computable plus a total computable c with phi_c(e,d) = phi_e composed with phi_d strictly) matches the linked Gallier edition's composition-function presentation (s-m-n Theorem 5.1, printed p.152 of cis5110/tcbook-comp.pdf; the item locator names the cis2620 recovery edition, and the coverage record keeps those editions distinct). Step 1.1 builds the universal evaluator from the finite compiler and the published one-step interpreter and identifies its domain and value with phi_e(x). Step 2.1 compiles the strict composition program by literal insertion of e and d, disjoint renamed state intervals, delimited zones, canonical table emission and the length-lex index formula 2^{|w|}-1+val(w); code generation halts for every input, so c is total even when e or d is malformed or divergent. Step 3.1 proves exact domain and value agreement with divergence propagation, and the arity convention (the unary case is a one-entry tuple, not a numeral misread as a tuple) is stated explicitly. No AC."
+      }
     },
     "thm-smn-for-the-fixed-acceptable-numbering": {
       "citations": [
@@ -1115,7 +1155,7 @@
         {
           "id": "derive-1.1",
           "step": "1.1",
-          "claim": "A head visits at most T new cells in T transitions. Thus an output word occupies at most its initially occupied input extent plus T plus one cells: a polynomial time bound gives a polynomial output-length bound when input and output share a tape, and at most T plus one on an initially blank output tape. For composition of reductions with time/length bounds $C(n+1)^a$ and $D(n+1)^b$, retain the first result on work tapes and run the second fixed machine on it. The two fixed programs can be joined on finitely many tapes, with linear copying/preparation time. Their combined time is bounded by a constant multiple of $C(n+1)^a+D(C(n+1)^a+1)^b+n+1$, a polynomial. The membership iff composes, proving transitivity.",
+          "claim": "A head visits at most T new cells in T transitions. Thus an output word occupies at most its initially occupied input extent plus T plus one cells: a polynomial time bound gives a polynomial output-length bound when input and output share a tape, and at most T plus one on an initially blank output tape. For composition of reductions with time/length bounds $C(n+1)^a$ and $D(n+1)^b$, the first output has length at most $n+C(n+1)^a+1$. Retain that result on work tapes and run the second fixed machine on it. The two fixed programs can be joined on finitely many tapes, with linear copying/preparation time. Their combined time is bounded by a constant multiple of $C(n+1)^a+D(n+C(n+1)^a+2)^b+n+1$, a polynomial. The membership iff composes, proving transitivity.",
           "inputs": [
             "given"
           ]
@@ -1123,7 +1163,7 @@
         {
           "id": "derive-2.1",
           "step": "2.1",
-          "claim": "If fixed-length certificates are wanted, let $P=p(|x|)$. Encode a witness w of length $\\ell\\le P$ by the length field $1^\\ell0^{P+1-\\ell}$ followed by $w0^{P-\\ell}$, a word of length $2P+1$. The verifier first checks the field consists of at most P initial ones followed by zeros, then checks the last $P-\\ell$ payload bits are zero, and applies R to the first $\\ell$ payload bits. Every guarded witness has this encoding, and every accepted encoding decodes one guarded witness. Scanning and evaluating p in binary and writing at most polynomially many cells are polynomial operations for the fixed polynomial p (successive addition/multiplication of its fixed number of binary factors suffices). The case P=0 has certificate 0 and decoded empty witness. This optional padding therefore preserves the language and polynomial bounds.",
+          "claim": "If fixed-length certificates are wanted, let $P=p(|x|)$. Encode a witness w of length $\\ell\\le P$ by the length field $1^\\ell0^{P+1-\\ell}$ followed by $w0^{P-\\ell}$, a word of length $2P+1$. The verifier rejects certificates whose total length is not $2P+1$, then checks the field consists of at most P initial ones followed by zeros, then checks the last $P-\\ell$ payload bits are zero, and applies R to the first $\\ell$ payload bits. Every guarded witness has this encoding, and every accepted encoding decodes one guarded witness. Scanning and evaluating p in binary and writing at most polynomially many cells are polynomial operations for the fixed polynomial p (successive addition/multiplication of its fixed number of binary factors suffices). The case P=0 has certificate 0 and decoded empty witness. This optional padding therefore preserves the language and polynomial bounds.",
           "inputs": [
             "step 1.1",
             "given"
@@ -1172,7 +1212,12 @@
           "status": "checked",
           "evidence": "Step 2.1 decodes every accepted padded certificate to a guarded witness."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-5a-g (phase-2-next-20 batch 12, group g)",
+        "notes": "Read the definition and both verification steps. Verified P as all-input worst-case transition count C(n+1)^k, the verifier with an explicit polynomial witness guard and guarded language, the pair encoding 1^{|x|}0xw of length 2|x|+|w|+1, and polynomial many-one reductions as total transducers with polynomial time and polynomial output length. Step 1.1: a head visits at most T new cells in T transitions, so the output extent is bounded by the initially occupied input extent plus T plus one. After the Step-7 repair the first output length is bounded by n+C(n+1)^a+1, including the unchanged initial input extent when a=0; substituting that bound into the second machine's time gives C(n+1)^a + D(n+C(n+1)^a+2)^b + n+1, a polynomial, and the membership iff composes. Step 2.1: the optional fixed-length certificate 1^l 0^{P+1-l} w 0^{P-l} of length 2P+1 is decoded by counting leading ones, checking the trailing zeros and reading the first l payload bits, so the language is preserved; P=0 gives the single-letter certificate and empty witness. Boundary: empty x and w, k=0, the n+1 convention, and the guard retained even if the unguarded relation accepts longer witnesses. No AC. Terminal FA review: the encoded-function supplier is explicitly one-tape. The local definition now expressly extends its input/output semantics to fixed deterministic multitape transducers with identity binary-word encodings; composition stays within that model and needs no one-tape simulation. Output begins at cell zero and ends at the first non-bit delimiter/blank. The padded verifier explicitly rejects total lengths other than 2P+1."
+      }
     },
     "def-probabilistic-polynomial-time-machine-interface": {
       "citations": [
@@ -1380,7 +1425,12 @@
           "status": "checked",
           "evidence": "Step 2.2 proves bounded-unknown implies expected-time; step 3.1 supplies bounded-unknown from RP and coRP."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-5a-g (phase-2-next-20 batch 12, group g)",
+        "notes": "Read the definition and all four verification steps. Verified the RP/coRP/BPP thresholds and PP's strict majority (no bounded-error gap), the survival-sum expected time E T = sum_j q_j with the nonnegative-series supplier, and the finite-cutoff identity min(T,K)=sum over j<K of 1_{T>j} with expectation sum over j<K of q_j computed on the K-bit space. Markov applied to min(T,K)>=K gives q_K<=q_{K-1}<=E T/K, hence q_K->0 when E T is finite. Checked both directions of the bounded-unknown equivalence: truncation after 2p(n) transitions makes the unknown probability at most 1/2; the restart algorithm with disjoint fresh blocks has failure probability 2^{-(r-1)} by independence of complete blocks, expected runtime at most P(n) times sum_r 2^{-r} <= 2P(n), and halting probability one. Checked ZPP implies RP and coRP by running both machines (an erroneous conflicting certificate has probability zero and in fact cannot occur on a branch), and RP intersect coRP implies ZPP by interpreting unknown as no / unknown as yes. Boundary: empty and full languages, empty input, deterministic machines, and no inference from PP to BPP. No AC."
+      }
     },
     "def-pairwise-independent-hash-family-interface": {
       "citations": [
@@ -1747,7 +1797,12 @@
           "status": "not_applicable",
           "reason": " No converse from a tail estimate to mutual independence is asserted."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-5a-g (phase-2-next-20 batch 12, group g)",
+        "notes": "Read the statement, facts and all seven steps, and recomputed the analytic parts. Verified 1+u<=exp(u) for all real u from the derivative sign and the mean value theorem; that transforms of distinct independent variables are mutually independent (finite preimage summation distributing the product factorization); E exp(lambda S)=prod_i(1+p_i(e^lambda-1))<=exp(mu(e^lambda-1)); and both multiplicative tails by Markov with lambda=log(1+delta)>0 (upper) and lambda=log(1-delta)<0 (lower, using the reversed implication). Recomputed the elementary rate estimates: d/du of [log(1+u)-2u/(2+u)] equals u^2/((1+u)(2+u)^2)>=0, so log(1+u)>=2u/(2+u)>=2u/3 on [0,1] and (1+u)log(1+u)-u-u^2/3 has nonnegative derivative from value 0; d/du of [u+(1-u)log(1-u)-u^2/2] equals -log(1-u)-u>=0, which follows from the previous bound, giving the delta^2/2 lower rate. Checked delta=1 by P(S=0)=prod(1-p_i)<=exp(-mu) (also with some p_i=1), delta=0 as a trivial bound, mu=0 (S=0 a.s.), N=0, and the union bound for the two-sided statement. For the additive bound I verified g(lambda)=log(1-p+pe^lambda)-p lambda has g(0)=g'(0)=0 and g''=q(1-q)<=1/4, so two mean-value applications give g<=lambda^2/8, E exp(lambda(S-mu))<=exp(N lambda^2/8), and Markov at lambda=4t/N gives each side exp(-2t^2/N). All analytic suppliers are declared published items and were independently read in the published Chernoff prerequisite audit; mutual (not pairwise) independence is required and stated. No AC."
+      }
     },
     "thm-schwartz-zippel-over-finite-fields": {
       "citations": [
@@ -1881,7 +1936,12 @@
           "status": "not_applicable",
           "reason": " No converse from polynomial-function vanishing to formal zero is claimed; step 4.1 explicitly refutes it."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-5a-g (phase-2-next-20 batch 12, group g)",
+        "notes": "Read the statement, facts and all four steps. Verified the m=1 base from the published integral-domain root bound plus the field-is-an-integral-domain argument; the induction writing f=sum_{j=0}^r g_j x_m^j with g_r nonzero, deg g_r<=d-r, at most (d-r)q^{m-2} bad base tuples by the inductive hypothesis (valid because d-r<q in the remaining case), at most r roots over each good specialization, and r=0 as the nonzero-constant case; the count Bq+(q^{m-1}-B)r<=dq^{m-1} and division by q^m. Checked the d>=q endpoint (trivial bound 1), d=0, |A|=1 and the nonempty-A hypothesis, and that the univariate root bound is never applied to a zero specialization. Compared with Arora-Barak Appendix A Lemma A.25 (PDF p.474, printed p.459; PDF p.475 continues its proof), which proves the whole-field case; the item's nonempty-subset extension is the same counting argument supplied locally. The closing example correctly separates formal degree from the induced function. No recorded identity-testing item is consumed; no AC."
+      }
     },
     "ex-smn-specializes-a-two-argument-index": {
       "citations": [
@@ -1966,7 +2026,12 @@
           "status": "checked",
           "evidence": "Step 1.1 proves totality, so the domain equality in step 2.1 includes every natural."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-5a-g (phase-2-next-20 batch 12, group g)",
+        "notes": "Read the example and both verification steps. Verified the index formula e=2^{|w|}-1+val(w) is exactly the inverse of the length-lex decoding (e+1=val(1w)); the addition derivation A(a,0)=a, A(a,y+1)=S(A(a,y)) is compiled by the normal-form primitive-recursion routine; and the loop invariant (accumulator a+j, counter y-j, y=0 skipped) gives a+y. Recomputed both tuple encodings with c(w)=1^{|w|}0w: E(bin 3, bin 0)=110 11011 100 and E(bin 3, bin 4)=110 11011 1110100, with canonical outputs 11 (3) and 111 (7) and the displayed accumulator trace 3,4,5,6,7. The program index is specified by its finite compiled word, and no decimal index is invented. Boundary: y=0, zero-valued stored parameter, and the one-entry to two-entry arity change. No AC."
+      }
     },
     "ex-pairwise-independent-affine-hashing-over-a-prime-field": {
       "citations": [
@@ -2060,7 +2125,12 @@
           "status": "checked",
           "evidence": "Step 2.1 substitutes the resulting seed; step 3.1 displays the failed triple conclusion."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-5a-g (phase-2-next-20 batch 12, group g)",
+        "notes": "Read the example and all three verification steps. Verified F_5 = Z/5 is a field through the published prime-field theorem after checking primality of 5 (remainders of 2,3,4), and the inverse table 1,3,2,4 from 1,6,6,16 congruent to 1 mod 5. Checked the unique seed (1,1) for inputs 1,3 with outputs 2,4 via 2a=2, a=3*2=1, b=1; the general unique seed a=3(v-u), b=u-a; all 25 seeds counted with zero slope included; and the three-wise failure h(2)=2h(1)-h(0), so (h(0),h(1),h(2))=(0,0,1) is impossible although three independent uniform values would give 1/125. The pairwise conclusion is exactly one seed per ordered output pair, with no overclaim. No AC."
+      }
     },
     "ex-schwartz-zippel-for-a-bivariate-polynomial": {
       "citations": [
@@ -2145,7 +2215,12 @@
           "status": "checked",
           "evidence": "Step 1.1 checks each listed pair by multiplication, so all four candidates really are roots."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-5a-g (phase-2-next-20 batch 12, group g)",
+        "notes": "Read the example and both verification steps. Verified the prime-field construction is declared and checked, X=0 gives -1 (no root), and each nonzero X has the unique inverse Y listed explicitly as (1,1),(2,3),(3,2),(4,4) with products 1,6,6,16 congruent to 1 mod 5; cancellation excludes a second Y. Thus exactly four of the 25 uniform pairs are roots, so the zero probability is 4/25, and XY-1 has total degree 2 with min(1,2/5)=2/5=10/25, giving 4/25<10/25. The comparison is presented as the theorem's upper bound and not as an equality, and the common mass 1/25 uses independence of the two coordinates. No AC."
+      }
     },
     "thm-clocked-universal-simulation-with-time-and-space-bounds": {
       "citations": [
@@ -2220,7 +2295,7 @@
         {
           "id": "derive-1.1",
           "step": "1.1",
-          "claim": "Fix the input syntax first. A model tag distinguishes the published one-tape code from its following multitape extension. For the latter, encode the tape count $k\\ge1$, states $0,\\ldots,m-1$ with start/accept/reject $0,1,2$, alphabet $0,\\ldots,r-1$ with blank0, and input alphabet $1,\\ldots,s$, where $m\\ge3$ and $0\\le s<r$. List the transition entries in lexicographic order of $(q,a_1,\\ldots,a_k)$ for nonhalting $q$. Each entry records one next state, $k$ written symbols and $k$ directions. Apply the tuple blocks from F2 to these canonical numerals. A tagged old code is the case $k=1$ with its original interpretation. The tag changes its length by a constant. Encode the word $x$ by its tuple of canonical symbol numerals, explicitly allowing arity zero with code $0$ for the empty word. The outer tuple contains the program, word and canonical $\\operatorname{bin}(b)$; its self-delimiting syntax is included in the input-length accounting. These explicit extensions do not reinterpret any published one-tape code.",
+          "claim": "Fix the input syntax first. A model tag distinguishes the published one-tape code from its following multitape extension. For the latter, encode the tape count $k\\ge1$, states $0,\\ldots,m-1$ with start/accept/reject $0,1,2$, alphabet $0,\\ldots,r-1$ with blank0, and input alphabet $1,\\ldots,s$, where $m\\ge3$ and $0\\le s<r$. List the transition entries in lexicographic order of $(q,a_1,\\ldots,a_k)$ for nonhalting $q$. Each entry records one next state, $k$ written symbols and $k$ directions. Apply the tuple blocks from F2 to these canonical numerals. A tagged old code is the case $k=1$ with its original interpretation. The tag changes its length by a constant. For either tagged form, define the initial multitape configuration to have state0 and every head at cell0, with $x$ in cells $0,1,\\ldots$ of the first tape and every other cell of every tape blank; each tape uses F5's clamped left boundary. Encode the word $x$ by its tuple of canonical symbol numerals, explicitly allowing arity zero with code $0$ for the empty word. The outer tuple contains the program, word and canonical $\\operatorname{bin}(b)$; its self-delimiting syntax is included in the input-length accounting. These explicit extensions do not reinterpret any published one-tape code.",
           "inputs": [
             "F2",
             "F4",
@@ -2432,7 +2507,12 @@
           "status": "checked",
           "evidence": "An acceptance report in step 6.3 comes only from the corresponding simulated accepting state. Rejection is either a simulated rejecting state or expiry; it is not incorrectly equated with rejection by M alone."
         }
-      ]
+      ],
+      "risk_review": {
+        "status": "complete",
+        "reviewer": "Alpha-5a-g (phase-2-next-20 batch 12, group g)",
+        "notes": "Read the statement, facts block, all sixteen numbered steps and the full contract, plus research/phase-2-next-20-clocked-simulation-local-proof.md. I downloaded the cited source and confirmed the exact 4,572,986-byte Arora-Barak file with SHA-256 prefix da0881782a35bde6, then read Appendix 1.A, printed pp.35-38 (PDF pp.51-54), through the final shifted-zone count. Verified the buffer scheme against it: zones with complementary occupancy 0/h_i/2h_i, h_i=2^i, capacity 2h_i, ordered redistribution (right zone i loses h_i records: one becomes the centre, h_i-1 fill the lower right zones; the 2h_i-1 left-side records split into h_i-1 lower plus h_i at level i). Re-derived the reset invariant independently: q_i, the total lower-right occupancy, returns to H_i=2^i-1 after every event of level at least i, including events strictly above i; lower-level positive/negative moves change q_i by exactly -1/+1 and clamped moves by 0, so a level-at-least-i event needs at least H_i+1=2^i transitions since the previous reset, hence at most floor(b/2^i) level-i events, each costing O_M(2^i), for total O_M(b log(b+2)) plus the O_M(b log(b+2)) clock scans and O_M(n+log(b+2)) decoding. Checked b=0 (nonhalting initial state rejects before any transition; one-digit clock 0), b=1 (exactly one transition; a halt on the last allowed transition is reported), the explicit Step-7 local multitape initial convention (state0, all heads at zero, input on the first tape and all other cells blank), the immutable origin bit realizing the clamped left boundary, lazy archive initialization that allocates only reached levels (no O(n log n) preload), the saturated header/count check that avoids huge allocations on malformed tape-count numerals, and the stationary-to-left/right compilation (logical cell j at physical 2j; R,R / L,L / R,L with the write in the first and hold in the second step; clamped L at zero). Verified the separate U_space: rows through max(input extent, visited extent) give O_M(n+S+log(b+2)) visited cells and depend on no time bound of the other interpreter; malformed inputs halt rejecting; no AC. Remaining risk: the fixed finite-state realization (zone markers, unary capacity markers, two-symbol spacing copy) is argued at the same sketch level as the source; I found no incorrect inference and no missing hypothesis, but this is a group-Alpha read, not an independent judge."
+      }
     }
   }
 }

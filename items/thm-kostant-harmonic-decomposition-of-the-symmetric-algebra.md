@@ -8,6 +8,11 @@ deps: [lem-kostant-harmonics-give-an-invariant-polynomial-complement, lem-local-
 provenance:
   statement: literature-derived
   proof: ai-generated
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: Pavel Etingof, Representations of Lie Groups, Theorem 13.1, first proof paragraph; explicit lifting and harmonic identification below

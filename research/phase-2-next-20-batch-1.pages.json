@@ -18,15 +18,17 @@
       {
         "id": "def-unitary-eigenfunction-for-a-probability-system",
         "kind": "definition",
-        "title": "Unitary eigenfunction for a probability system",
+        "title": "Eigenfunction for a probability system",
         "statement": "For a measure-preserving probability system, an eigenfunction is a nonzero complex L2 class f with U_T f=lambda f. A nonconstant eigenfunction means a class not in C1. The pairing is <f,g>=integral f conjugate(g), linear in the first variable. U_T is unitary when the system is invertible modulo null sets; in general it is an isometry. H0={f: integral f=0}. Completed Lebesgue probability spaces here have the usual modulo-null interval-and-atoms convention; no classification theorem is invoked.",
         "deps": [
-          "thm-koopman-operator-is-a-linear-isometry-on-l-p",
+          "def-koopman-operator-on-l-p",
           "def-invertible-measure-preserving-system",
           "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
-          "thm-integrals-are-invariant-under-measure-preserving-maps"
+          "def-integral-of-a-nonnegative-simple-function",
+          "def-nonnegative-lebesgue-integral",
+          "thm-increasing-simple-approximation-of-a-nonnegative-measurable-function"
         ],
-        "strategy": "Fix representative-independent class language. Norm preservation gives |lambda|=1. Integrability of f follows from Cauchy–Schwarz with 1. The integral functional is continuous, so H0 is a closed subspace. Subtract the mean only when lambda=1; if lambda differs from 1, integral invariance forces the mean to vanish. No choice beyond the given measure-space objects is needed.",
+        "strategy": "First repair simple-integral representation independence by adjoining the zero-coefficient complement, separate zero from positive scalar homogeneity, and derive MCT. Canonical level sets and measure preservation then prove integral invariance and the L2 Koopman isometry directly. Fix representative-independent class language. Norm preservation gives |lambda|=1. Integrability of f follows from Cauchy–Schwarz with 1. The integral functional is continuous, so H0 is a closed subspace. Subtract the mean only when lambda=1; if lambda differs from 1, integral invariance forces the mean to vanish. No choice beyond the given measure-space objects is needed.",
         "sources": {
           "references": [
             {
@@ -73,7 +75,7 @@
           "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
           "def-axiom-of-choice"
         ],
-        "strategy": "AC selects g_n in M with ||f-g_n||²<d²+1/n. Derive the complex parallelogram identity by sesquilinear expansion from the declared complex pairing (the published real parallelogram proof is not a complex proof). The identity gives ||g_n-g_m||²<=2||f-g_n||²+2||f-g_m||²-4d², so completeness and closedness give g in M attaining d. Vary g by t h and i t h for real t to obtain <f-g,h>=0 for every h in M. Orthogonality implies uniqueness, linearity, and ||P_M f||<=||f|| by the Pythagorean expansion. Orthogonal complements are closed because each pairing is continuous. Apply the same argument to a closed subspace H, whose Cauchy sequences converge within H. AC is used only for minimizing sequences and inherited L2 completeness.",
+        "strategy": "AC selects a zero-based sequence g_n in M with ||f-g_n||²<d²+1/(n+1). Derive the complex parallelogram identity by sesquilinear expansion from the declared complex pairing (the published real parallelogram proof is not a complex proof). The identity gives ||g_n-g_m||²<=2||f-g_n||²+2||f-g_m||²-4d², so completeness and closedness give g in M attaining d. Vary g by t h and i t h for real t to obtain <f-g,h>=0 for every h in M. Orthogonality implies uniqueness, linearity, and ||P_M f||<=||f|| by the Pythagorean expansion. Orthogonal complements are closed because each pairing is continuous. Apply the same argument to a closed subspace H, whose Cauchy sequences converge within H. AC is used only for minimizing sequences and inherited L2 completeness.",
         "sources": {
           "references": [
             {
@@ -96,6 +98,7 @@
           "lem-closed-l-two-subspaces-have-orthogonal-projections",
           "def-l-two-operator-conventions-for-weak-mixing",
           "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
+          "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
           "def-axiom-of-choice"
         ],
         "strategy": "Closedness of range follows by pulling a Cauchy sequence U f_n back to f_n and using completeness inherited through projection. Range projection defines V without an abstract Riesz theorem. For z=P_range(U)g=Uh, <Uf,g>=<Uf,Uh>=<f,h>, hence V is the adjoint, and VU=I. Put M=closure((I-U)H). If h perpendicular to M, <h,h-Uh>=0 and ||Uh||=||h|| imply ||h-Uh||²=0; conversely Uh=h implies <h,g-Ug>=0 by isometry. Thus M-perp=F and projection gives H=M direct-sum F. A_N(I-U)g=(g-U^N g)/N tends to zero; ||A_N||<=1 extends this to M. On F all averages are identity. The limit is the orthogonal projection, not an unspecified invariant vector. AC is inherited from projection/completeness.",
@@ -151,13 +154,15 @@
         "deps": [
           "def-l-two-operator-conventions-for-weak-mixing",
           "lem-product-rectangle-kernels-are-dense-in-complex-l-two",
+          "thm-completion-measurable-functions-have-base-measurable-representatives",
           "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces",
           "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
           "thm-complex-lp-completeness-and-almost-everywhere-subsequences",
           "thm-bolzano-weierstrass",
           "def-axiom-of-choice"
         ],
-        "strategy": "First use completed Tonelli on |k|²: sections are square integrable almost everywhere. Cauchy–Schwarz gives |Kf(x)|²<=(integral |k(x,y)|²dy)||f||² and therefore ||Kf||<=||k||||f||. On a probability square |k(x,y)f(y)| is integrable by product Cauchy–Schwarz, so Fubini gives measurability; use the zero extension on exceptional parameters. Null changes do not alter the resulting class by Tonelli. Rectangle kernels have finite-dimensional range. Build a finite orthonormal basis by the finite Gram–Schmidt subtraction/normalization algorithm; coordinates of images of a bounded sequence are bounded, so apply real Bolzano–Weierstrass successively to the real and imaginary parts of the finitely many coordinates, retaining subsequences at each step. All coordinates then converge and their finite basis sum converges in L2. Approximate k by rectangle kernels k_m; ||K-K_m||<=||k-k_m||. Successively choose nested subsequences for K_m (AC) and take a diagonal subsequence; for fixed m the image error under K is bounded by two operator-norm errors plus the K_m Cauchy error. Completeness gives convergence. If K=0 then <K1_F,1_E>=integral_{E x F}k=0 for all rectangles; apply rectangle density. This also proves the norm-limit compactness fact needed later, without citing the later compact-operator page.",
+        "strategy": "Use the completion representative theorem on both components to obtain a finite product-measurable kernel. Completed Tonelli on |k|² gives square-integrable sections almost everywhere. Cauchy–Schwarz gives |Kf(x)|²<=(integral |k(x,y)|²dy)||f||² and therefore ||Kf||<=||k||||f||. On a probability square |k(x,y)f(y)| is integrable by product Cauchy–Schwarz. Apply the directly cited uncompleted Fubini theorem to the product-measurable integrand: its Statement gives an original-factor integrable section integral with zero extension on measurable exceptional parameters, including incomplete factors. Null changes do not alter the resulting class by Tonelli. Rectangle kernels have finite-dimensional range. Build a finite orthonormal basis by the finite Gram–Schmidt subtraction/normalization algorithm; coordinates of images of a bounded sequence are bounded, so apply real Bolzano–Weierstrass successively to the real and imaginary parts of the finitely many coordinates, retaining subsequences at each step. All coordinates then converge and their finite basis sum converges in L2. Approximate k by rectangle kernels k_m; ||K-K_m||<=||k-k_m||. Successively choose nested subsequences for K_m (AC) and take a diagonal subsequence; for fixed m the image error under K is bounded by two operator-norm errors plus the K_m Cauchy error. Completeness gives convergence. If K=0 then <K1_F,1_E>=integral_{E x F}k=0 for all rectangles; apply rectangle density. This also proves the norm-limit compactness fact needed later, without citing the later compact-operator page.",
         "sources": {
           "references": [
             {
@@ -207,13 +212,12 @@
           "lem-conjugate-transpose-kernels-give-adjoints",
           "lem-hilbert-cesaro-averages-converge-to-the-fixed-subspace",
           "lem-product-rectangle-kernels-are-dense-in-complex-l-two",
-          "thm-koopman-operator-is-a-linear-isometry-on-l-p",
           "thm-measure-preservation-on-a-generating-pi-system",
           "thm-tonelli-and-fubini-for-completed-product-measures",
           "def-axiom-of-choice",
           "def-unitary-eigenfunction-for-a-probability-system"
         ],
-        "strategy": "Prove T x T preserves the uncompleted product from rectangles and the generating-pi-system theorem. Its preimages of completed null subsets lie in product-measurable null preimages, so it also acts on the completion. Its Koopman pullback W is an isometry. Let V=U* supplied explicitly by the range-projection formula in the mean lemma. For a rectangle tensor k=a(x)b(y), check K_{Wk}=U K_k V: integral b(Ty)f(y)=<f,U conjugate(b)>=<Vf,conjugate(b)>. Extend to all kernels by rectangle density and the kernel norm estimate. Invariance gives K=UKV, hence KU=UK since VU=I. The conjugate-transpose kernel is also W-invariant, so the same calculation gives K*U=UK*. Zero marginals give K1=K*1=0; then <Kf,1>=<f,K*1>=0, and similarly for K*. Since every f is its mean plus an H0 vector, nonzero K with K1=0 has nonzero H0 restriction. No inverse of a noninvertible transformation is assumed.",
+        "strategy": "Prove T x T preserves the uncompleted product from rectangles and the generating-pi-system theorem. Its preimages of completed null subsets lie in product-measurable null preimages, so it also acts on the completion. The local canonical-simple/MCT interface in the eigenfunction definition makes its Koopman pullback W an isometry. Let V=U* supplied explicitly by the range-projection formula in the mean lemma. For a rectangle tensor k=a(x)b(y), check K_{Wk}=U K_k V: integral b(Ty)f(y)=<f,U conjugate(b)>=<Vf,conjugate(b)>. Extend to all kernels by rectangle density and the kernel norm estimate. Invariance gives K=UKV, hence KU=UK since VU=I. The conjugate-transpose kernel is also W-invariant, so the same calculation gives K*U=UK*. Zero marginals give K1=K*1=0; then <Kf,1>=<f,K*1>=0, and similarly for K*. Since every f is its mean plus an H0 vector, nonzero K with K1=0 has nonzero H0 restriction. No inverse of a noninvertible transformation is assumed.",
         "sources": {
           "references": [
             {
@@ -238,7 +242,6 @@
         "statement": "Assume AC. For a nonzero compact kernel operator K with K1=K*1=0, S=K*K on H0 is bounded, compact, self-adjoint, positive and nonzero. If K and K* commute with a Koopman isometry U then SU=US.",
         "deps": [
           "lem-conjugate-transpose-kernels-give-adjoints",
-          "lem-invariant-square-integrable-kernel-produces-a-compact-intertwiner",
           "def-l-two-operator-conventions-for-weak-mixing",
           "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
           "def-axiom-of-choice"
@@ -260,7 +263,7 @@
       {
         "id": "lem-nonzero-positive-compact-self-adjoint-operators-have-positive-finite-dimensional-eigenspaces",
         "kind": "lemma",
-        "title": "Nonzero positive compact self adjoint operators have positive finite dimensional eigenspaces",
+        "title": "The positive norm eigenvalue of a nonzero positive compact self-adjoint operator has a nonzero finite-dimensional eigenspace",
         "statement": "Assume AC. On a nonzero closed complex L2 subspace H, every nonzero bounded positive self-adjoint compact operator S has a positive eigenvalue alpha=||S||; its alpha-eigenspace is nonzero, closed and finite-dimensional.",
         "deps": [
           "def-l-two-operator-conventions-for-weak-mixing",
@@ -268,7 +271,7 @@
           "thm-complex-l-two-inner-product-is-well-defined-and-cauchy-schwarz",
           "def-axiom-of-choice"
         ],
-        "strategy": "Set alpha=sup_{||x||=1}<Sx,x>. Positivity of <S(x+t y),x+t y> for complex t proves |<Sx,y>|²<=<Sx,x><Sy,y> by minimizing the scalar quadratic (zero diagonal case follows by arbitrary small real/imaginary t). Taking sup over unit y gives ||Sx||²<=alpha<Sx,x>; hence ||S||<=alpha, while the reverse is immediate. If alpha=0 then S=0 by this estimate, so alpha>0. Use AC to select unit x_n with <Sx_n,x_n> tending to alpha. Expand ||Sx_n-alpha x_n||²<=alpha(alpha-<Sx_n,x_n>) tending to zero. Compactness gives Sx_nj tending to y; thus x_nj tends to x=y/alpha with ||x||=1, and continuity gives Sx=alpha x. The eigenspace is closed as a kernel. If it had no finite spanning set, AC and finite Gram–Schmidt recursively give an infinite orthonormal sequence in it; its S-images are pairwise distance alpha sqrt(2), contradicting compactness. This proves the needed eigenvalue fact without the Fredholm alternative, weak compactness, general spectral theorem or Zorn basis.",
+        "strategy": "Set alpha=sup_{||x||=1}<Sx,x>. Positivity of <S(x+t y),x+t y> for complex t proves |<Sx,y>|²<=<Sx,x><Sy,y> by minimizing the scalar quadratic (zero diagonal case follows by arbitrary small real/imaginary t). Taking sup over unit y gives ||Sx||²<=alpha<Sx,x>; hence ||S||<=alpha, while the reverse is immediate. If alpha=0 then S=0 by this estimate, so alpha>0. Use AC to select zero-based unit x_n with <Sx_n,x_n>>alpha-1/(n+1). Expand ||Sx_n-alpha x_n||²<=alpha(alpha-<Sx_n,x_n>) tending to zero. Compactness gives Sx_nj tending to y; thus x_nj tends to x=y/alpha with ||x||=1, and continuity gives Sx=alpha x. The eigenspace is closed as a kernel. If it had no finite spanning set, AC and finite Gram–Schmidt recursively give an infinite orthonormal sequence in it; its S-images are pairwise distance alpha sqrt(2), contradicting compactness. This proves the needed eigenvalue fact without the Fredholm alternative, weak compactness, general spectral theorem or Zorn basis.",
         "sources": {
           "references": [
             {
@@ -346,7 +349,6 @@
         "deps": [
           "def-unitary-eigenfunction-for-a-probability-system",
           "lem-hilbert-cesaro-averages-converge-to-the-fixed-subspace",
-          "lem-product-rectangle-kernels-are-dense-in-complex-l-two",
           "lem-invariant-square-integrable-kernel-produces-a-compact-intertwiner",
           "lem-compact-intertwiners-produce-finite-dimensional-invariant-subspaces",
           "lem-nonzero-finite-dimensional-complex-invariant-subspaces-have-unitary-eigenvectors",
@@ -354,9 +356,12 @@
           "prop-mixing-correlations-extend-to-l-two",
           "def-strong-and-weak-mixing",
           "thm-tonelli-and-fubini-for-completed-product-measures",
+          "thm-measure-preservation-on-a-generating-pi-system",
+          "def-completion-of-a-measure-space",
+          "lem-square-integrable-kernels-define-bounded-compact-integral-operators",
           "def-axiom-of-choice"
         ],
-        "strategy": "Weak mixing excludes an eigenfunction: after centering a lambda=1 eigenfunction (lambda!=1 already has mean zero), |<U^n f,f>|=||f||² for all n, contradicting the published L2 correlation criterion. Conversely absence of nonconstant eigenfunctions first implies ergodicity by invariant indicators. If W=U_(T x T) has a nonconstant invariant kernel k, subtract its total mean. Its kernel K is nonzero by rectangle density. K1 and K*1 are invariant by intertwining, hence constant by ergodicity; their integrals are zero, so both vanish. Thus K is nonzero on H0 and the K*K finite-dimensional invariant-subspace lemma plus the complex eigenvector lemma produce a nonconstant eigenfunction, contradiction. All W-fixed classes are therefore constants. Apply the local mean lemma on the completed product to F(x,y)=f0(x)conjugate(f0(y)), where f0=f-integral f. For G(x,y)=g(x)conjugate(g(y)), Fubini gives <W^n F,G>=|<U^n f0,g>|². Integral F=|integral f0|²=0, so its Cesaro pairing tends to zero. Finite Cauchy–Schwarz then gives average |<U^n f0,g>| <= sqrt(average |<U^n f0,g>|²), establishing absolute-Cesaro correlations and hence the set definition. Product ergodicity implies no eigenfunctions because f0(x)conjugate(f0(y)) is a nonzero invariant kernel of total mean zero. Conversely no eigenfunctions already showed product ergodicity. For completeness, the harvested density-zero variant follows by thresholds {n:a_n>1/j}: choose cutoffs N_j with density of that threshold below 1/j for N>=N_j, and take the union of each threshold in [N_j,N_(j+1)); nested thresholds bound the resulting exceptional density. The converse follows by bounding the exceptional part of a bounded sequence. No spectral measures, recurrence, or recorded results enter.",
+        "strategy": "Weak mixing excludes an eigenfunction: after centering a lambda=1 eigenfunction (lambda!=1 already has mean zero), |<U^n f,f>|=||f||² for all n, contradicting the published L2 correlation criterion. First prove T x T preserves the uncompleted product by checking rectangles and applying the generating-pi-system theorem, then extend preservation to the completion from the completion-domain definition; the Koopman theorem makes W=U_(T x T) an isometry. Conversely absence of nonconstant eigenfunctions first implies ergodicity by invariant indicators. If W has a nonconstant invariant kernel k, subtract its total mean. Its kernel K is nonzero by the direct square-integrable-kernel injectivity theorem. K1 and K*1 are invariant by intertwining, hence constant by ergodicity; their integrals are zero, so both vanish. Thus K is nonzero on H0 and the K*K finite-dimensional invariant-subspace lemma plus the complex eigenvector lemma produce a nonconstant eigenfunction, contradiction. All W-fixed classes are therefore constants. Apply the local mean lemma on the completed product to F(x,y)=f0(x)conjugate(f0(y)), where f0=f-integral f. For G(x,y)=g(x)conjugate(g(y)), Fubini gives <W^n F,G>=|<U^n f0,g>|². Integral F=|integral f0|²=0, so its Cesaro pairing tends to zero. Finite Cauchy–Schwarz then gives average |<U^n f0,g>| <= sqrt(average |<U^n f0,g>|²), establishing absolute-Cesaro correlations and hence the set definition. Product ergodicity implies no eigenfunctions because f0(x)conjugate(f0(y)) is a nonzero invariant kernel of total mean zero. Conversely no eigenfunctions already showed product ergodicity. For completeness, the harvested density-zero variant follows by thresholds {n:a_n>1/j}: choose cutoffs N_j with density of that threshold below 1/j for N>=N_j, and take the union of each threshold in [N_j,N_(j+1)); nested thresholds bound the resulting exceptional density. The converse follows by bounding the exceptional part of a bounded sequence. No spectral measures, recurrence, or recorded results enter.",
         "sources": {
           "references": [
             {
@@ -381,6 +386,7 @@
         "statement": "Assume AC for the Lebesgue measure assertions. Start with the ordered one-level tower L_(0,0)=[0,2/3) and reservoir R0=[2/3,1). At stage r divide every level into its left, middle and right thirds; stack first the left column, then the middle column, then a spacer of width w_(r+1) cut from the left end of R_r, then the right column. The tower order defines translations between consecutive levels, leaving its top undefined. h0=1, h_(r+1)=3h_r+1, w_r=2/3^(r+1), h_r=(3^(r+1)-1)/2. Tower mass is 1-3^(-r-1), reservoir mass 3^(-r-1). No limit map is claimed in this definition.",
         "deps": [
           "def-lebesgue-measure-and-the-lebesgue-sigma-algebra",
+          "thm-lebesgue-measure-is-a-complete-measure",
           "thm-lebesgue-measure-of-a-box-of-every-kind",
           "def-axiom-of-choice"
         ],
@@ -477,6 +483,7 @@
         "statement": "Assume AC. The normalized Chacon transformation is ergodic.",
         "deps": [
           "lem-chacon-partial-maps-extend-to-an-invertible-map-mod-null-sets",
+          "def-chacon-three-cut-one-spacer-towers",
           "lem-chacon-levels-approximate-measurable-sets",
           "def-ergodic-measure-preserving-system",
           "def-axiom-of-choice"
@@ -509,6 +516,7 @@
           "thm-chacon-transformation-is-ergodic",
           "lem-chacon-levels-approximate-measurable-sets",
           "lem-chacon-partial-maps-extend-to-an-invertible-map-mod-null-sets",
+          "def-chacon-three-cut-one-spacer-towers",
           "thm-ergodicity-and-invariant-functions",
           "def-axiom-of-choice"
         ],
@@ -619,6 +627,8 @@
         "title": "Weak mixing implies strong mixing",
         "statement": "False claim: every weakly mixing probability-preserving transformation is strongly mixing. Under AC the normalized Chacon system refutes it.",
         "deps": [
+          "def-chacon-three-cut-one-spacer-towers",
+          "lem-chacon-tower-height-correlations-obstruct-mixing",
           "thm-chacon-transformation-is-weakly-mixing-but-not-mixing",
           "def-strong-and-weak-mixing",
           "def-axiom-of-choice"
@@ -701,6 +711,7 @@
         "title": "Chacon correlation subsequence prevents mixing",
         "statement": "Under AC, A=[0,2/9) in the Chacon system has mu(A)=2/9 and correlations at h_r (r>=1) at least 2/27, exceeding mu(A)^2=4/81. It refutes strong mixing for that system.",
         "deps": [
+          "def-chacon-three-cut-one-spacer-towers",
           "lem-chacon-tower-height-correlations-obstruct-mixing",
           "def-axiom-of-choice"
         ],

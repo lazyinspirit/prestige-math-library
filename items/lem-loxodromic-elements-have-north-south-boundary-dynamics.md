@@ -6,6 +6,11 @@ deps: ["def-hg-toolkit-loxodromics-and-independent-poles", "lem-boundary-product
 provenance:
   statement: "ai-altered"
   proof: "ai-generated"
+verification:
+  judge:
+    model: "gpt-5.6-terra"
+    verdict: pass
+    date: 2026-09-11
 sources:
   references:
     - title: "Canary Proposition 5.1 pp.25–26 and Theorem 5.7 pp.28–29; complete convergence-action proof"
@@ -35,7 +40,7 @@ The proof is choice-free. In fact the same assertion holds for every loxodromic 
 
 ## Proof
 
-1.1 Put $z_n=g^no$, $w_n=g^{-n}o$ and $a_n=d(o,z_n)=d(o,w_n)$. Retain the constants from F1's verification: its positive integer $s$, step length $L=a_s$, turn $K=a_s-a_{2s}/2$, remainder bound $D=\max_{0\le r<s}a_r$, and $\tau>0$ with $a_n\ge n\tau$. Put $C=K+2\kappa+3D$. F1's subchain interior-product bound gives, for $0<q<r$, $(g^{qs}o|g^{rs}o)_o\ge a_{qs}-K-2\kappa$, with the stronger bound $a_{qs}$ at equal indices. For full indices $n=qs+u$, $m=rs+v$ with $m\ge n\ge s$, moving each input to its multiple of $s$ costs at most $2D$ in the product, and $a_{qs}\ge a_n-D$. Consequently $(z_n|z_m)_o\ge a_n-C$. Reversing all orbit indices gives $(w_n|w_m)_o\ge a_n-C$. Thus each pole's canonical sequence has product with its corresponding $n$th orbit point at least $a_n-C$ on its tail. [F1, F3, given, algebra]
+1.1 Put $z_n=g^no$, $w_n=g^{-n}o$ and $a_n=d(o,z_n)=d(o,w_n)$. By the quantitative conclusion in F1, choose $\tau>0$, an integer $s\ge1$ and $C\ge0$ such that $a_n\ge n\tau$ and, for every $m\ge n\ge s$, $$(z_n|z_m)_o\ge a_n-C,\qquad (w_n|w_m)_o\ge a_n-C.$$ Thus each pole's canonical sequence has product with its corresponding $n$th orbit point at least $a_n-C$ on its tail. [F1]
 
 1.2 For any Gromov sequence $(u_j)$ and fixed $v\in X$, put $b_v(u)=\liminf_j(u_j|v)_o$. It is finite in $[0,d(o,v)]$. For all sufficiently large $i,j$, the Gromov property gives $(u_i|u_j)_o>d(o,v)+\kappa$. Since $(u_j|v)_o\le d(o,v)$, F3 yields $(u_i|v)_o\ge(u_j|v)_o-\kappa$. Interchanging $i,j$ bounds every difference on that tail by $\kappa$. Taking tail infima and suprema therefore gives $\limsup_j(u_j|v)_o\le b_v(u)+\kappa$. This argument uses only bounded real sequences. [F3, given, algebra]
 

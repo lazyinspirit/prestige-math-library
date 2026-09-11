@@ -2022,6 +2022,19 @@ export const stages = [
         const selected = groups.filter((g: any) => named.has(String(g.label)));
         const retry = selected.length ? selected : groups;
         for (const g of retry) {
+          const repairTask = `research/${args.ctx.run}-alpha-${g.label}-step6-repair-${args.round}.task.md`;
+          writeFileSync(R(args.ctx, repairTask), [
+            `# Step 6 digest correction — group ${g.label}`,
+            '',
+            `Read research/${args.ctx.run}-alpha-${g.label}-step6-read.task.md for the exact assigned scope.`,
+            `Inspect the existing research/${args.ctx.run}-alpha-${g.label}-step7-context.json and preserve supported findings.`,
+            'Correct the specific failures below. Reopen the relevant items and sources where evidence is missing; do not repeat a completed reading solely to remove an extra JSON field.',
+            'Return the complete corrected schema-constrained digest. Do not invent missing evidence or erase a substantive finding just to pass a gate.',
+            '',
+            '## Exact gate diagnostics',
+            '',
+            text,
+          ].join('\n') + '\n');
           args.executor.start(args.stage, {
             role: 'alpha-group-read',
             // Not `<label>` alone: that matches the stage pattern, and a repair
@@ -2030,7 +2043,7 @@ export const stages = [
             job: 'audit',
             covers: [],
             brief: 'briefs/alpha.md',
-            task: [`research/${args.ctx.run}-alpha-${g.label}-step6-read.task.md`, 'briefs/tasks/alpha-step6-read.md'],
+            task: repairTask,
             outputSchema: 'briefs/schemas/step7-context.json',
             resultArtifact: `research/${args.ctx.run}-alpha-${g.label}-step7-context.json`,
             timeout: 21600,

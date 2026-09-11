@@ -1,0 +1,13 @@
+---
+page: "conditional-distributions-and-regular-conditional-probability"
+title: "Conditional Distributions and Regular Conditional Probability"
+status: "draft"
+items: ["def-measure-kernel-and-probability-kernel", "thm-measurability-of-integration-against-a-kernel", "def-composition-of-probability-kernels", "lem-kernel-composition-is-well-defined-and-associative", "def-conditional-probability-given-a-sigma-algebra", "def-regular-conditional-distribution", "def-regular-conditional-probability", "lem-simultaneous-rational-conditional-distribution-function-versions", "lem-rational-conditional-distribution-functions-produce-real-regular-kernels", "thm-existence-of-regular-conditional-distributions-for-standard-borel-targets", "lem-simultaneous-ae-uniqueness-of-regular-conditional-distributions", "thm-conditional-integration-through-a-regular-conditional-law", "def-conditional-law-given-a-random-element", "lem-regular-conditional-kernels-factor-through-a-standard-borel-conditioning-variable", "thm-disintegration-of-a-joint-law-on-standard-borel-spaces", "cor-conditional-expectation-as-a-measurable-function-of-the-conditioning-variable", "thm-conditional-density-formula", "thm-bayes-formula-for-dominated-kernels"]
+examples: []
+---
+
+A conditional probability for a single event is an almost-sure class. A regular conditional distribution packages all target events into one kernel whose sections are probability measures at every sample point. The opening items establish integration and composition for probability and finite kernels, and for kernels with a specified common finite-mass exhaustion.
+
+The existence proof chooses rational conditional distribution values, removes one measurable null union of all consistency failures, and builds real probability sections by CDF correspondence. Real coding then gives standard-Borel targets, with an explicit support repair. A countable determining algebra turns eventwise uniqueness into simultaneous equality of measures. AC is declared for rational version selection, coding and the inherited conditional-expectation and CDF constructions.
+
+Conditioning on a random element requires a kernel on its value space. The factorization proof supplies its scalar measurable construction locally, and disintegration extends the rectangle identity to every nonnegative joint test. The final formulas compute conditional expectations and dominated posteriors. Density normalization is restricted to finite positive marginal density; both zero and infinite normalizers receive a specified probability filler. The explicit density identities and kernel operations remain choice-free when their inputs are supplied.
