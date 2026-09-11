@@ -75,7 +75,8 @@ export function writeAuditorCreatedBaseline(root, run, step) {
 function authorResultAllowed(step, row) {
   if (row?.ok !== true || !row.ended_at || !row.started_at) return false;
   const label = String(row.label ?? '');
-  if (Number(step) === 5) return row.role === 'alpha' && /^5[ab]-/.test(label);
+  if (Number(step) === 5) return row.role === 'alpha'
+    && (/^5[ab]-/.test(label) || /^gate-batch-[1-9]\d*-(?:[a-z]|all)$/.test(label));
   if (Number(step) === 7) return (['alpha', 'alpha-adjudicate', 'final-adjudicator'].includes(row.role)
     && /(?:step7|rejudge|final-adjudicat)/.test(label))
     // These Step-7 recovery labels deliberately do not match the initial

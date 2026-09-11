@@ -88,6 +88,40 @@ for (const step of [5, 8]) test(`Step ${step} cannot use Step-7 recovery provena
   }
 });
 
+for (const label of ['gate-batch-1-a', 'gate-batch-12-z', 'gate-batch-2-all']) {
+  test(`Step 5 certifies its legitimate gate-repair dispatch ${label}`, t => {
+    const f = recoveryFixture(t, 5); f.result(label, { role: 'alpha' });
+    const receipt = certifyAuditorCreatedItems(f.root, 'r', 5);
+    assert.equal(receipt.items.length, 1);
+    assert.equal(receipt.items[0].author_result, 'recovery.result.json');
+    assert.equal(receipt.items[0].judge_sha256, itemHashJudge(item('lem-created')));
+  });
+}
+
+test('Step-5 gate-repair recognition rejects malformed labels, wrong roles and invalid provenance', t => {
+  const f = recoveryFixture(t, 5);
+  for (const label of ['gate-batch-0-a', 'gate-batch-01-a', 'gate-batch-x-a', 'gate-batch-1-aa',
+    'gate-batch-1-A', 'gate-batch-1-ALL', 'gate-batch-1-', 'gate-batch-1',
+    'prefix-gate-batch-1-a', 'gate-batch-1-a-extra']) {
+    f.result(label, { role: 'alpha' });
+    assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 5), /no successful Step 5/, label);
+  }
+  for (const changes of [{ role: 'alpha-adjudicate' }, { role: 'tool' }, { role: 'final-adjudicator' },
+    { run: 'other' }, { ok: false }, { covers: ['2'] },
+    { started_at: '2025-01-01T00:00:09.000Z' }, { ended_at: '2025-01-01T00:00:04.999Z' }]) {
+    f.result('gate-batch-1-a', { role: 'alpha', ...changes });
+    assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 5), /no successful Step 5/, JSON.stringify(changes));
+  }
+});
+
+for (const step of [7, 8]) test(`Step ${step} cannot use Step-5 gate-repair provenance`, t => {
+  const f = recoveryFixture(t, step);
+  for (const label of ['gate-batch-1-a', 'gate-batch-2-all']) {
+    f.result(label, { role: 'alpha' });
+    assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', step), new RegExp(`no successful Step ${step}`));
+  }
+});
+
 test('auditor-created certification is baseline-exclusive, dispatch-backed, and hash-bound', () => {
   const root = fixture();
   writeAuditorCreatedBaseline(root, 'r', 8);
