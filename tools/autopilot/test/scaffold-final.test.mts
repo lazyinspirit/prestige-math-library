@@ -8,7 +8,7 @@ import { join } from 'node:path';
 import { loadStep3, scopeHash, itemHash, itemDecision, recordStep3, checkStep3 } from '../../step3-decisions.mjs';
 import { stages, step3Plan } from '../stages/mathlib.mts';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
-import { writeAuditorBaseline, certifyAuditorItems } from '../../step3-auditor-items.mjs';
+import { writeAuditorBaseline, certifyAuditorItems, certifyCompletedAuditorItems } from '../../step3-auditor-items.mjs';
 
 function fixture(t: any) {
   const root = mkdtempSync(join(tmpdir(), 'step3-'));
@@ -96,6 +96,117 @@ test('Step-3 auditor additions cannot turn an insufficient baseline scope into a
   assert.equal(result.work[0].owner, true);
 });
 
+test('recovery certifies only completed V2 inputs and never approves an incomplete pair', t => {
+  const f = fixture(t); f.scope();
+  writeAuditorBaseline(f.root, 'demo');
+  f.pages[0].items.push(...['lem-ready', 'lem-unwritten', 'lem-stale'].map(id =>
+    ({ id, kind: 'lemma', statement: id, deps: id === 'lem-stale' ? ['lem-published'] : [] })));
+  f.put('demo-batch-1.pages.json', f.pages);
+  for (const id of ['lem-ready', 'lem-stale'])
+    writeFileSync(join(f.root, `items/${id}.md`), `---\nid: ${id}\ndeps: []\n---\nAuthored proof.\n`);
+  mkdirSync(join(f.root, 'research/demo-dispatch'));
+  f.put('demo-dispatch/alpha-high-step3b-a.result.json', {
+    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a', covers: ['1'],
+    ended_at: '2100-01-01T00:00:00.000Z',
+  });
+  const later = new Date('2100-01-02T00:00:00.000Z');
+  utimesSync(join(f.root, 'items/lem-published.md'), later, later);
+  const receipt = certifyCompletedAuditorItems(f.root, 'demo');
+  assert.equal(receipt.policy, 'auditor-authored-step3-bypass-v2');
+  assert.deepEqual(receipt.items.map((row: any) => row.id), ['lem-ready']);
+  assert.equal(receipt.pending.length, 2);
+  assert.deepEqual(receipt.scopes, []);
+  assert.equal(f.check('scope').closed, false);
+  assert.equal(itemDecision(loadStep3(f.root, 'demo'), 'lem-ready').closed, true);
+  assert.equal(itemDecision(loadStep3(f.root, 'demo'), 'lem-stale').closed, false);
+  const path = join(f.root, 'research/demo-step3-auditor-certifications.json');
+  const before = readFileSync(path, 'utf8');
+  assert.throws(() => certifyAuditorItems(f.root, 'demo'), /no authored item file/);
+  assert.equal(readFileSync(path, 'utf8'), before, 'strict refusal preserves the eligible receipts');
+
+  // A restart reuses current V2 rows even after harmless file touches.
+  utimesSync(join(f.root, 'items/lem-ready.md'), later, later);
+  assert.deepEqual(certifyCompletedAuditorItems(f.root, 'demo').items, receipt.items);
+  writeFileSync(join(f.root, 'items/lem-unwritten.md'), '---\ndeps: []\n---\nNew proof.\n');
+  f.put('demo-dispatch/alpha-high-step3b-a-fresh.result.json', {
+    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a-fresh', covers: ['1'],
+    ended_at: '2100-01-03T00:00:00.000Z',
+  });
+  assert.equal(certifyAuditorItems(f.root, 'demo').items.length, 3);
+  assert.equal(f.check('scope').closed, true);
+});
+
+test('recovery certification does not wait for a sibling author result', t => {
+  const f = fixture(t); f.scope();
+  const sibling = [
+    { id: 'c', kind: 'A', companion: 'd', items: [] as any[] },
+    { id: 'd', kind: 'B', companion: 'c', items: [] as any[] },
+  ];
+  f.put('demo-batch-2.pages.json', sibling);
+  f.record({ phase: 'scope', page: 'c', decision: 'sufficient' });
+  writeAuditorBaseline(f.root, 'demo');
+  f.pages[0].items.push({ id: 'lem-created', kind: 'lemma', statement: 'Created', deps: [] });
+  sibling[0].items.push({ id: 'lem-running', kind: 'lemma', statement: 'Running', deps: [] });
+  f.put('demo-batch-1.pages.json', f.pages); f.put('demo-batch-2.pages.json', sibling);
+  for (const id of ['lem-created', 'lem-running'])
+    writeFileSync(join(f.root, `items/${id}.md`), '---\ndeps: []\n---\nProof.\n');
+  mkdirSync(join(f.root, 'research/demo-dispatch'));
+  f.put('demo-dispatch/alpha-high-step3b-a.result.json', {
+    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a', covers: ['1'],
+    ended_at: '2100-01-01T00:00:00.000Z',
+  });
+  const receipt = certifyCompletedAuditorItems(f.root, 'demo');
+  assert.deepEqual(receipt.items.map((row: any) => row.id), ['lem-created']);
+  assert.deepEqual(receipt.scopes.map((row: any) => row.page), ['a']);
+  assert.match(receipt.pending[0], /no successful Step 3 auditor\/author result covers batch 2/);
+  assert.equal(itemDecision(loadStep3(f.root, 'demo'), 'lem-running').closed, false);
+  assert.throws(() => certifyAuditorItems(f.root, 'demo'), /no successful Step 3/);
+  const path = join(f.root, 'research/demo-step3-auditor-certifications.json');
+  const before = readFileSync(path, 'utf8');
+  f.pages[0].items.push({ id: 'lem-published', kind: 'lemma', statement: 'Preexisting', deps: [] });
+  f.put('demo-batch-1.pages.json', f.pages);
+  assert.throws(() => certifyCompletedAuditorItems(f.root, 'demo'), /existed on disk before Step 3/);
+  assert.equal(readFileSync(path, 'utf8'), before, 'structural refusal preserves eligible receipts too');
+});
+
+test('stalemate recovery certifies completed groups before routing only the named inactive owner', async t => {
+  const f = fixture(t), started: any[] = [];
+  const other = (a: string, b: string, id: string) => [
+    { id: a, kind: 'A', companion: b, order: 3, items: [{ id, kind: 'lemma', statement: id, deps: [] }] },
+    { id: b, kind: 'B', companion: a, order: 4, items: [] },
+  ];
+  f.put('demo-batch-2.pages.json', other('c', 'd', 'lem-owed'));
+  f.put('demo-batch-3.pages.json', other('e', 'f', 'lem-active'));
+  f.put('demo-alpha-groups.json', [
+    { label: 'a', covers: ['1'] }, { label: 'b', covers: ['2'] }, { label: 'c', covers: ['3'] },
+  ]);
+  f.scope();
+  for (const page of ['c', 'e']) f.record({ phase: 'scope', page, decision: 'sufficient' });
+  for (const id of ['lem-a', 'thm-b', 'ex-c']) f.audit(id);
+  writeAuditorBaseline(f.root, 'demo');
+  f.pages[0].items.push({ id: 'lem-created', kind: 'lemma', statement: 'Created', deps: [] });
+  f.put('demo-batch-1.pages.json', f.pages);
+  f.scope(); // Current scope already approved; only mechanical certification is owed by A.
+  writeFileSync(join(f.root, 'items/lem-created.md'), '---\ndeps: []\n---\nComplete proof.\n');
+  mkdirSync(join(f.root, 'research/demo-dispatch'));
+  f.put('demo-dispatch/alpha-high-step3b-a-old.result.json', {
+    run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a-old', covers: ['1'],
+    ended_at: '2100-01-01T00:00:00.000Z',
+  });
+  assert.ok(f.check().work.some((w: any) => w.item === 'lem-created'));
+  const stage: any = stages.find(s => s.id === '3b-author');
+  const outcome = await stage.onGateFailure({ ctx: f.ctx, stage,
+    failure: { id: 'stage-stalemate', units: ['2'] },
+    executor: { start: (_s: any, plan: any) => started.push(plan) },
+  });
+  assert.equal(outcome, undefined);
+  assert.deepEqual(started.map(plan => plan.covers), [['2']]);
+  assert.deepEqual(f.check().work.map((w: any) => w.item), ['lem-owed', 'lem-active']);
+  assert.equal(itemDecision(loadStep3(f.root, 'demo'), 'lem-created').decision.decision, 'auditor-authored');
+  f.put('demo-alpha-groups.json', [{ label: 'a', covers: ['1', '2'] }, { label: 'b', covers: ['3'] }]);
+  assert.deepEqual(stage.exclusiveCohort(f.ctx, '2'), ['1', '2']);
+});
+
 for (const source of ['proof', 'plan']) test(`Step-3 recertification rejects a transitive supplier ${source} changed after its author dispatch`, t => {
   const f = fixture(t);
   const plannedSupplier = { id: 'published-page', order: 0, requires: [],
@@ -175,6 +286,11 @@ for (const mode of ['legacy', 'post-end']) test(`Step-3 ${mode} supplier provena
   assert.throws(() => certifyAuditorItems(f.root, 'demo'), /changed after its latest successful Step 3/);
   assert.equal(readFileSync(receiptPath, 'utf8'), before);
   assert.equal(readFileSync(baselinePath, 'utf8'), baseline);
+
+  const partial = certifyCompletedAuditorItems(f.root, 'demo');
+  assert.deepEqual(partial.items, [], 'recovery cannot reuse stale or legacy provenance either');
+  assert.equal(partial.pending.length, 1);
+  assert.equal(itemDecision(loadStep3(f.root, 'demo'), 'lem-created').closed, false);
 
   f.put(resultPath, { ...author, ended_at: '2025-01-01T00:00:11.000Z' });
   const refreshed = certifyAuditorItems(f.root, 'demo');
@@ -294,6 +410,7 @@ test('fresh missing decisions dispatch only the owning groups', async t => {
   assert.deepEqual(started[0].covers, ['1']);
   assert.equal(started[0].profile, MODEL_PROFILE_NAMES.solHigh);
   f.scope(); started.length = 0;
+  writeAuditorBaseline(f.root, 'demo');
   const audit: any = stages.find(s => s.id === '3b-author');
   await audit.onGateFailure({ ...args, stage: audit });
   assert.equal(started.length, 1);
@@ -316,6 +433,7 @@ test('the CLI records scope and returns nonzero until every item clears', t => {
 
 test('escalations, unchanged incomplete audits and final mechanical failures never loop', async t => {
   const f = fixture(t); f.scope();
+  writeAuditorBaseline(f.root, 'demo');
   const s: any = stages.find(s => s.id === '3b-author');
   const args = { ctx: f.ctx, stage: s, failure: { id: 'step3-items' }, executor: { start: () => assert.fail('Unexpected dispatch') } };
   f.audit('lem-a', { decision: 'escalate', confidence: undefined });

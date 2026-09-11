@@ -23,6 +23,7 @@ import { createHash } from 'node:crypto';
 import { join } from 'node:path';
 import { itemHashGuard, itemHashJudge, shortHash } from '../../item-hash.mjs';
 import { loadAuditorCreatedCertifications } from '../../auditor-created-items.mjs';
+import { certifyCompletedAuditorItems } from '../../step3-auditor-items.mjs';
 import { MODEL_PROFILE_NAMES } from '../../models.mjs';
 import { loadStep3, scopeHash, itemHash, checkStep3 } from '../../step3-decisions.mjs';
 import { scopedGateOutput } from '../src/repair-evidence.mts';
@@ -1566,6 +1567,13 @@ const step3Gate = (ctx: any, phase: 'scope' | 'final') => gate(
   ['node', 'tools/step3-decisions.mjs', 'check', '--run', ctx.run, '--phase', phase]);
 
 async function step3Failure({ ctx, executor, stage, failure }: any, phase: 'scope' | 'final') {
+  // Artifact-incomplete recovery precedes the normal gate battery. Issue the
+  // completed authors' exact certifications before deciding who owes work;
+  // absent receipts must not turn their local additions into self-review jobs.
+  if (phase === 'final') {
+    try { certifyCompletedAuditorItems(ctx.repo, ctx.run); }
+    catch (error: any) { return { owner: { reason: `Step 3 certification failed: ${error.message}` } }; }
+  }
   const snapshot = loadStep3(ctx.repo, ctx.run);
   const result = checkStep3(snapshot, phase);
   const held = result.work.filter((w: any) => w.owner);
@@ -1578,7 +1586,11 @@ async function step3Failure({ ctx, executor, stage, failure }: any, phase: 'scop
   const owed = new Set(result.work.map((w: any) => w.item
     ? snapshot.pages.find((p: any) => p.items.some((i: any) => i.id === w.item))?.batch
     : snapshot.pairs.get(w.page)?.[0].batch).filter(Boolean));
-  const groups = alphaGroups(ctx).filter(g => g.covers.some(b => owed.has(String(b))));
+  // The synthetic failure names only inactive, artifact-incomplete units. Do
+  // not sweep in an active sibling (or receipt-only work outside this failure).
+  const recoveryUnits = failure.id === 'stage-stalemate' ? new Set((failure.units ?? []).map(String)) : null;
+  const groups = alphaGroups(ctx).filter(g => g.covers.some(b => owed.has(String(b))
+    && (!recoveryUnits || recoveryUnits.has(String(b)))));
   if (!groups.length) return { owner: { reason: 'No group owns the missing Step 3 decisions.' } };
   const plans = groups.map(g => step3Plan(ctx, g, phase));
   const dir = R(ctx, 'research', `${ctx.run}-dispatch`);
@@ -1747,6 +1759,7 @@ export const stages = [
     modelProfile: ASTRA_MEDIUM,
     role: 'alpha-high',
     units: batches,
+    exclusiveCohort: alphaCohort,
     artifacts: authorArtifacts,
     pattern: resultPattern('alpha-high', 'step3b-[a-z]+-[a-f0-9]+'),
     concurrency: 9,

@@ -70,6 +70,17 @@ function successfulAuthorResults(root, run) {
 }
 
 export function certifyAuditorItems(root, run) {
+  return certify(root, run, false);
+}
+
+// Recovery runs before the whole-stage artifact barrier. Certify completed
+// authors without requiring unfinished siblings to have supplied their inputs.
+// This is not the final gate: deferred rows remain ordinary open obligations.
+export function certifyCompletedAuditorItems(root, run) {
+  return certify(root, run, true);
+}
+
+function certify(root, run, partial) {
   safe(run);
   const baselinePath = auditorBaselinePath(root, run);
   if (!existsSync(baselinePath)) throw Error(`Missing Step 3 auditor baseline: ${baselinePath}`);
@@ -95,13 +106,20 @@ export function certifyAuditorItems(root, run) {
       }
     } catch { /* replace only after all current inputs validate */ }
   }
-  const certified = [];
+  const certified = [], pending = [];
+  const defer = reason => {
+    if (!partial) throw Error(reason);
+    pending.push(reason);
+  };
 
   for (const [id, value] of additions) {
     if (preexistingFiles.has(id))
       throw Error(`${id}: existed on disk before Step 3 and is not auditor-created`);
     const itemPath = join(root, 'items', `${safe(id)}.md`);
-    if (!existsSync(itemPath)) throw Error(`${id}: auditor-created manifest item has no authored item file`);
+    if (!existsSync(itemPath)) {
+      defer(`${id}: auditor-created manifest item has no authored item file`);
+      continue;
+    }
     const batch = String(value.page.batch);
     const dependencies = [...new Set([...(value.item.deps ?? []), ...(value.item.justified_by ?? []),
       ...(value.item.forward_refs ?? [])])].sort();
@@ -114,11 +132,16 @@ export function certifyAuditorItems(root, run) {
     else {
       author = results.filter(row => row.covers.map(String).includes(batch))
         .sort((a, b) => Date.parse(a.ended_at) - Date.parse(b.ended_at)).at(-1);
-      if (!author) throw Error(`${id}: no successful Step 3 auditor/author result covers batch ${batch}`);
+      if (!author) {
+        defer(`${id}: no successful Step 3 auditor/author result covers batch ${batch}`);
+        continue;
+      }
       const ended = Date.parse(author.ended_at);
       if (!Number.isFinite(ended)
-        || itemInputPaths(s, id, dependencies).some(path => statSync(path).mtimeMs > ended))
-        throw Error(`${id}: changed after its latest successful Step 3 auditor/author result`);
+        || itemInputPaths(s, id, dependencies).some(path => statSync(path).mtimeMs > ended)) {
+        defer(`${id}: changed after its latest successful Step 3 auditor/author result`);
+        continue;
+      }
     }
     certified.push({ id, page: value.page.id, batch, dependencies,
       sha256, author_result: author.label });
@@ -128,7 +151,9 @@ export function certifyAuditorItems(root, run) {
   for (const [page, pair] of s.pairs) {
     const ids = certified.filter(row => pair.some(p => p.id === row.page)).map(row => row.id).sort();
     const before = baseline.scopes.find(row => row.page === page);
-    if (ids.length) {
+    const added = additions.filter(([, value]) => pair.some(p => p.id === value.page.id));
+    // Never let one completed addition approve an unfinished pair's scope delta.
+    if (ids.length && ids.length === added.length) {
       if (!before?.sha256) throw Error(`${page}: missing pre-author scope hash`);
       scopes.push({ page, additions: ids, baseline_sha256: before.sha256, sha256: scopeHash(s, page) });
     }
@@ -143,7 +168,7 @@ export function certifyAuditorItems(root, run) {
     scopes: scopes.sort((a, b) => a.page.localeCompare(b.page)),
   };
   writeFileSync(certificationPath, JSON.stringify(receipt, null, 2) + '\n');
-  return receipt;
+  return partial ? { ...receipt, pending } : receipt;
 }
 
 if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1])).href) {

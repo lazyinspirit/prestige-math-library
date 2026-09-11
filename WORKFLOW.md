@@ -101,6 +101,16 @@ close decisions or reuse the unchanged-hash path. They must be revalidated
 against the original immutable v1 inventory baseline. No input write after
 the author result's `ended_at` is accepted, including subsecond writes.
 
+Before routing Step-3 artifact-incomplete recovery, the engine also certifies
+eligible completed authors while leaving unfinished or changed additions open.
+A pair with any uncertified addition receives no scope-delta certificate. This pass uses
+the same V2 hash/provenance checks; it does not replace strict final certification
+or any ordinary gate. Synthetic recovery is limited to the inactive units named
+by the failure, and a group with a live writer is not redispatched. Completed
+groups do not receive self-review jobs merely because a restart precedes issuance
+of their mechanical certificates. Receipt-only closure outside that artifact
+failure waits for the normal item-decision gate.
+
 Step 4 keeps its mechanical splice and snapshot. The splice permits new local
 A-page definitions/lemmas only with complete current author decisions, retained
 existing inventory/order and actual owned consumers. Other scope changes require
