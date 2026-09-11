@@ -92,8 +92,10 @@ function successfulAuthorResults(root, run, step) {
   return rows;
 }
 
-function coveringResult(results, itemPath, manifestPath, batch) {
-  const changedAt = Math.max(statSync(itemPath).mtimeMs, statSync(manifestPath).mtimeMs);
+function coveringResult(results, itemPath, manifestPath, contractPath, batch) {
+  const carriers = [itemPath, manifestPath];
+  if (existsSync(contractPath)) carriers.push(contractPath);
+  const changedAt = Math.max(...carriers.map(path => statSync(path).mtimeMs));
   return results.filter(row => {
     const started = Date.parse(row.started_at), ended = Date.parse(row.ended_at);
     if (!Number.isFinite(started) || !Number.isFinite(ended)
@@ -103,8 +105,7 @@ function coveringResult(results, itemPath, manifestPath, batch) {
   }).sort((a, b) => Date.parse(a.ended_at) - Date.parse(b.ended_at)).at(-1);
 }
 
-function contractEntry(root, run, batch, id) {
-  const path = join(root, 'research', `${run}-batch-${batch}.proof-contracts.json`);
+function contractEntry(path, id) {
   if (!existsSync(path)) return null;
   return read(path)?.contracts?.[id] ?? null;
 }
@@ -144,10 +145,11 @@ export function certifyAuditorCreatedItems(root, run, step) {
     if (preexisting.has(id)) throw Error(`${id}: existed on disk before Step ${step} and is not auditor-created`);
     const itemPath = join(root, 'items', `${safe(id, 'item ID')}.md`);
     const manifestPath = join(root, 'research', `${run}-batch-${batch}.pages.json`);
+    const contractPath = join(root, 'research', `${run}-batch-${batch}.proof-contracts.json`);
     if (!existsSync(itemPath)) throw Error(`${id}: auditor-created manifest item has no authored item file`);
     const text = readFileSync(itemPath, 'utf8');
     const itemFileSha = sha(text);
-    const contract = contractEntry(root, run, batch, id);
+    const contract = contractEntry(contractPath, id);
     const step5Carrier = { item_sha256: itemFileSha,
       contract_sha256: hashValue(contract), manifest_sha256: hashValue(row.manifest_entry) };
     const hashes = {
@@ -160,7 +162,7 @@ export function certifyAuditorCreatedItems(root, run, step) {
     const prior = priorById.get(id);
     const priorCurrent = prior && Object.entries(hashes).every(([key, value]) => prior[key] === value);
     const author = priorCurrent ? { result_file: prior.author_result }
-      : coveringResult(results, itemPath, manifestPath, batch);
+      : coveringResult(results, itemPath, manifestPath, contractPath, batch);
     if (!author) throw Error(`${id}: no successful Step ${step} auditor/adjudicator dispatch authored its current carriers`);
     certified.push({ id, page: row.page, batch,
       ...hashes,

@@ -92,6 +92,11 @@ until a later, current confidence-1 author receipt replaces it. Owner direction
 and reopen receipts are part of the author-dispatch hash, so the authorized
 repair cannot collide with the already-completed pre-direction call.
 
+Step-3 auditor certification checks writes across the same transitive item and
+manifest/plan inputs bound by its item hash. Changed supplier content requires
+a successful covering author dispatch after those writes. Unchanged certificates
+survive restart and file touches; failed recertification preserves prior receipts.
+
 Step 4 keeps its mechanical splice and snapshot. The splice permits new local
 A-page definitions/lemmas only with complete current author decisions, retained
 existing inventory/order and actual owned consumers. Other scope changes require
@@ -120,6 +125,12 @@ and does not require a self-review decision. High-risk and every static content,
 dependency, source and contract gate remain mandatory. Step 5b reconciles
 cross-batch dependencies, changed consumers, exact hashes, coverage, sources
 and ledger.
+
+Step-5/7/8 auditor-created certificates bind the item, manifest entry and owning
+contract. Initial certification and changed-carrier recertification require a
+successful author dispatch covering the latest item, manifest or contract write.
+Unchanged hash-bound evidence survives restart and metadata-only file touches;
+a contract-only edit requires fresh covering author evidence.
 
 Snapshot order is pre-author before Step 3b, post-author in Step 4, post-5a after
 group review, and post-step7 after repair. Impact checks include authoring changes.

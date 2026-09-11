@@ -101,7 +101,7 @@ function dependency(s, id) {
   return value;
 }
 
-export function itemHash(s, id, extra = []) {
+function itemInputs(s, id, extra = []) {
   if (!s.items.has(id)) throw Error(`Unknown run item ${id}`);
   if (!Array.isArray(extra) || extra.some(d => typeof d !== 'string')) throw Error('dependencies must be an ID array');
   const seen = new Map(), queue = [id, ...extra];
@@ -112,7 +112,25 @@ export function itemHash(s, id, extra = []) {
     seen.set(key, node.bytes);
     queue.push(...node.deps);
   }
-  return hash([...seen].sort(([a], [b]) => a.localeCompare(b)));
+  return seen;
+}
+
+export function itemHash(s, id, extra = []) {
+  return hash([...itemInputs(s, id, extra)].sort(([a], [b]) => a.localeCompare(b)));
+}
+
+// Use the same transitive closure as itemHash when checking who authored its
+// current inputs. Both item text and run/planned dependency metadata contribute.
+export function itemInputPaths(s, id, extra = []) {
+  const paths = new Set();
+  for (const key of itemInputs(s, id, extra).keys()) {
+    const itemPath = join(s.root, 'items', `${safe(key)}.md`);
+    if (existsSync(itemPath)) paths.add(itemPath);
+    const live = s.items.get(key);
+    if (live) paths.add(join(s.root, 'research', `${s.run}-batch-${live.page.batch}.pages.json`));
+    else if (s.planned.has(key)) paths.add(join(s.root, 'research', 'plan-spec.json'));
+  }
+  return [...paths];
 }
 
 export function scopeDecision(s, id) {

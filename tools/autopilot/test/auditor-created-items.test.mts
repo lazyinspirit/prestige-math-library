@@ -73,6 +73,47 @@ test('an item file already present at the baseline cannot be relabelled auditor-
   assert.throws(() => certifyAuditorCreatedItems(root, 'r', 7), /existed on disk before Step 7/);
 });
 
+for (const step of [5, 7, 8]) test(`Step ${step} contract-only changes require a covering author dispatch`, () => {
+  const root = fixture();
+  writeAuditorCreatedBaseline(root, 'r', step);
+  const itemPath = join(root, 'items', 'lem-created.md');
+  const manifestPath = join(root, 'research', 'r-batch-1.pages.json');
+  const contractPath = join(root, 'research', 'r-batch-1.proof-contracts.json');
+  const receiptPath = join(root, 'research', `r-step${step}-auditor-certifications.json`);
+  writeFileSync(itemPath, item('lem-created'));
+  const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+  manifest[0].items.push({ id: 'lem-created', deps: [] });
+  writeFileSync(manifestPath, JSON.stringify(manifest));
+  const contracts = { contracts: { 'lem-created': { risk: 'low' } } };
+  writeFileSync(contractPath, JSON.stringify(contracts));
+  const authoredAt = new Date('2025-01-01T00:00:00.000Z');
+  for (const path of [itemPath, manifestPath, contractPath]) utimesSync(path, authoredAt, authoredAt);
+  const label = step === 5 ? '5a-a' : `step${step}-a`;
+  const resultPath = join(root, 'research', 'r-dispatch', `alpha-${label}.result.json`);
+  const author = { run: 'r', role: 'alpha', label, covers: ['1'], ok: true,
+    started_at: '2024-12-31T00:00:00.000Z', ended_at: '2025-01-02T00:00:00.000Z' };
+  writeFileSync(resultPath, JSON.stringify(author));
+  const first = certifyAuditorCreatedItems(root, 'r', step);
+
+  // A restart may reuse unchanged hash-bound evidence despite carrier touches.
+  const later = new Date('2040-01-01T00:00:00.000Z');
+  utimesSync(contractPath, later, later);
+  assert.deepEqual(certifyAuditorCreatedItems(root, 'r', step).items, first.items);
+  const currentReceipt = readFileSync(receiptPath, 'utf8');
+
+  contracts.contracts['lem-created'].risk = 'high';
+  writeFileSync(contractPath, JSON.stringify(contracts));
+  utimesSync(contractPath, later, later);
+  assert.throws(() => certifyAuditorCreatedItems(root, 'r', step), new RegExp(`no successful Step ${step}`));
+  assert.equal(readFileSync(receiptPath, 'utf8'), currentReceipt, 'failure must preserve prior evidence');
+
+  writeFileSync(resultPath, JSON.stringify({ ...author,
+    started_at: '2039-12-31T00:00:00.000Z', ended_at: '2040-01-02T00:00:00.000Z' }));
+  const refreshed = certifyAuditorCreatedItems(root, 'r', step);
+  assert.notEqual(refreshed.items[0].contract_sha256, first.items[0].contract_sha256);
+  assert.notEqual(refreshed.items[0].step5_subject_sha256, first.items[0].step5_subject_sha256);
+});
+
 test('judge closure counts a current auditor-created receipt without fabricating a verdict', () => {
   const root = mkdtempSync(join(tmpdir(), 'auditor-closure-'));
   const id = 'def-algebra-of-subsets';

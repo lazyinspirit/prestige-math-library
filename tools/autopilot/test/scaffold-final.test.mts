@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, utimesSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { spawnSync } from 'node:child_process';
 import { fileURLToPath } from 'node:url';
@@ -94,6 +94,50 @@ test('Step-3 auditor additions cannot turn an insufficient baseline scope into a
   const result = f.check('scope');
   assert.equal(result.closed, false);
   assert.equal(result.work[0].owner, true);
+});
+
+for (const source of ['proof', 'plan']) test(`Step-3 recertification rejects a transitive supplier ${source} changed after its author dispatch`, t => {
+  const f = fixture(t);
+  const plannedSupplier = { id: 'published-page', order: 0, requires: [],
+    items: [{ id: 'lem-published', statement: 'Original supplier', deps: [] }] };
+  f.put('plan-spec.json', { pages: [...f.pages, plannedSupplier] });
+  f.scope();
+  writeAuditorBaseline(f.root, 'demo');
+  f.pages[0].items.push({ id: 'lem-created', kind: 'lemma', statement: 'Created', strategy: 'Direct', deps: ['lem-a'] });
+  f.put('demo-batch-1.pages.json', f.pages);
+  writeFileSync(join(f.root, 'items/lem-created.md'), '---\nid: lem-created\nstatus: draft\ndeps: [lem-a]\n---\n\n## Proof\n\nUses lem-a.\n');
+  mkdirSync(join(f.root, 'research/demo-dispatch'));
+  const resultPath = 'demo-dispatch/alpha-high-step3b-a.result.json';
+  const author = { run: 'demo', ok: true, role: 'alpha-high', label: 'step3b-a', covers: ['1'],
+    started_at: '2024-12-31T00:00:00.000Z', ended_at: '2025-01-02T00:00:00.000Z' };
+  f.put(resultPath, author);
+  const authoredAt = new Date('2025-01-01T00:00:00.000Z');
+  for (const path of ['items/lem-created.md', 'items/lem-published.md',
+    'research/demo-batch-1.pages.json', 'research/plan-spec.json']) {
+    utimesSync(join(f.root, path), authoredAt, authoredAt);
+  }
+  const first = certifyAuditorItems(f.root, 'demo');
+  const receiptPath = join(f.root, 'research/demo-step3-auditor-certifications.json');
+  const receipt = readFileSync(receiptPath, 'utf8');
+  const supplierPath = join(f.root, source === 'proof' ? 'items/lem-published.md' : 'research/plan-spec.json');
+  if (source === 'proof') f.published('Changed supplier proof');
+  else {
+    plannedSupplier.items[0].statement = 'Changed supplier statement';
+    f.put('plan-spec.json', { pages: [...f.pages, plannedSupplier] });
+  }
+  const changedAt = new Date('2040-01-01T00:00:00.000Z');
+  utimesSync(supplierPath, changedAt, changedAt);
+  assert.throws(() => certifyAuditorItems(f.root, 'demo'), /changed after its latest successful Step 3/);
+  assert.equal(readFileSync(receiptPath, 'utf8'), receipt, 'refusal preserves prior certification');
+
+  f.put(resultPath, { ...author,
+    started_at: '2039-12-31T00:00:00.000Z', ended_at: '2040-01-02T00:00:00.000Z' });
+  const refreshed = certifyAuditorItems(f.root, 'demo');
+  assert.notEqual(refreshed.items[0].sha256, first.items[0].sha256);
+  const touchedAt = new Date('2050-01-01T00:00:00.000Z');
+  utimesSync(supplierPath, touchedAt, touchedAt);
+  assert.deepEqual(certifyAuditorItems(f.root, 'demo').items, refreshed.items,
+    'unchanged hash-bound evidence survives restart and carrier touches');
 });
 
 test('insufficient scope requires owner action; merge/enrich do not mean proceed', t => {

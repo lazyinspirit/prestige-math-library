@@ -9,7 +9,7 @@ import { createHash } from 'node:crypto';
 import { existsSync, readFileSync, readdirSync, statSync, writeFileSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { pathToFileURL } from 'node:url';
-import { itemHash, loadStep3, scopeHash } from './step3-decisions.mjs';
+import { itemHash, itemInputPaths, loadStep3, scopeHash } from './step3-decisions.mjs';
 
 const safe = value => {
   if (!/^[a-zA-Z0-9_-]+$/.test(value ?? '')) throw Error('Invalid run or item ID');
@@ -80,6 +80,17 @@ export function certifyAuditorItems(root, run) {
   const s = loadStep3(root, run);
   const additions = [...s.items].filter(([id]) => !original.has(id));
   const results = successfulAuthorResults(root, run);
+  const certificationPath = auditorCertificationsPath(root, run);
+  let priorById = new Map();
+  if (existsSync(certificationPath)) {
+    try {
+      const prior = json(certificationPath);
+      if (prior.version === 1 && prior.run === run && prior.policy === baseline.policy
+        && prior.baseline_sha256 === digest(baseline) && Array.isArray(prior.items)) {
+        priorById = new Map(prior.items.map(row => [row.id, row]));
+      }
+    } catch { /* replace only after all current inputs validate */ }
+  }
   const certified = [];
 
   for (const [id, value] of additions) {
@@ -88,17 +99,25 @@ export function certifyAuditorItems(root, run) {
     const itemPath = join(root, 'items', `${safe(id)}.md`);
     if (!existsSync(itemPath)) throw Error(`${id}: auditor-created manifest item has no authored item file`);
     const batch = String(value.page.batch);
-    const author = results.filter(row => row.covers.map(String).includes(batch))
-      .sort((a, b) => Date.parse(a.ended_at) - Date.parse(b.ended_at)).at(-1);
-    if (!author) throw Error(`${id}: no successful Step 3 auditor/author result covers batch ${batch}`);
-    const ended = Date.parse(author.ended_at);
-    const manifestPath = join(root, 'research', `${run}-batch-${batch}.pages.json`);
-    if (!Number.isFinite(ended) || statSync(itemPath).mtimeMs > ended + 1000 || statSync(manifestPath).mtimeMs > ended + 1000)
-      throw Error(`${id}: changed after its latest successful Step 3 auditor/author result`);
     const dependencies = [...new Set([...(value.item.deps ?? []), ...(value.item.justified_by ?? []),
       ...(value.item.forward_refs ?? [])])].sort();
+    const sha256 = itemHash(s, id, dependencies);
+    const prior = priorById.get(id);
+    const priorCurrent = prior?.sha256 === sha256 && prior.page === value.page.id && prior.batch === batch
+      && JSON.stringify(prior.dependencies) === JSON.stringify(dependencies);
+    let author;
+    if (priorCurrent) author = { label: prior.author_result };
+    else {
+      author = results.filter(row => row.covers.map(String).includes(batch))
+        .sort((a, b) => Date.parse(a.ended_at) - Date.parse(b.ended_at)).at(-1);
+      if (!author) throw Error(`${id}: no successful Step 3 auditor/author result covers batch ${batch}`);
+      const ended = Date.parse(author.ended_at);
+      if (!Number.isFinite(ended)
+        || itemInputPaths(s, id, dependencies).some(path => statSync(path).mtimeMs > ended + 1000))
+        throw Error(`${id}: changed after its latest successful Step 3 auditor/author result`);
+    }
     certified.push({ id, page: value.page.id, batch, dependencies,
-      sha256: itemHash(s, id, dependencies), author_result: author.label });
+      sha256, author_result: author.label });
   }
 
   const scopes = [];
@@ -119,7 +138,7 @@ export function certifyAuditorItems(root, run) {
     items: certified.sort((a, b) => a.id.localeCompare(b.id)),
     scopes: scopes.sort((a, b) => a.page.localeCompare(b.page)),
   };
-  writeFileSync(auditorCertificationsPath(root, run), JSON.stringify(receipt, null, 2) + '\n');
+  writeFileSync(certificationPath, JSON.stringify(receipt, null, 2) + '\n');
   return receipt;
 }
 
