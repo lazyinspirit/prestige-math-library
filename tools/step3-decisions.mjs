@@ -23,11 +23,14 @@ function receipt(s, phase, id, owner) {
 
 function auditorCertifications(s) {
   if (Object.prototype.hasOwnProperty.call(s, 'auditorCertifications')) return s.auditorCertifications;
-  const row = read(join(s.root, 'research', `${s.run}-step3-auditor-certifications.json`));
+  let row = read(join(s.root, 'research', `${s.run}-step3-auditor-certifications.json`));
   if (row && (row.version !== 1 || row.run !== s.run
-    || row.policy !== 'auditor-authored-step3-bypass-v1'
+    || !['auditor-authored-step3-bypass-v1', 'auditor-authored-step3-bypass-v2'].includes(row.policy)
     || !Array.isArray(row.items) || !Array.isArray(row.scopes)))
     throw Error('Invalid Step 3 auditor certification receipt');
+  // Legacy hashes did not certify the provenance of every current input.
+  // Ignore them until the certifier revalidates against the immutable baseline.
+  if (row?.policy === 'auditor-authored-step3-bypass-v1') row = null;
   s.auditorCertifications = row;
   return row;
 }

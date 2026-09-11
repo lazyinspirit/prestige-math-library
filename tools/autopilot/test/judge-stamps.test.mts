@@ -120,7 +120,7 @@ test('a current Step-8 auditor-created certification needs no judge stamp or led
   // give this item no usable judge pass. Its separate receipt is the authority.
   writeLedger(dir, LANES.map((model) => ledgerRow('unrelated', model, false, '0'.repeat(64))));
   writeFileSync(join(dir, 'research', 'auditor.json'), JSON.stringify({
-    version: 1, run: 'r', step: 8, policy: 'auditor-created-stage-bypass-v1',
+    version: 1, run: 'r', step: 8, policy: 'auditor-created-stage-bypass-v2',
     items: [{ id: 'lem-auditor-created', judge_sha256: h, author_result: 'alpha-step8-lead.result.json' }],
   }));
   const result = spawnSync(process.execPath, [TOOL, '--ledger', 'research/judge.jsonl',
