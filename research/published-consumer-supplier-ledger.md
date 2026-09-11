@@ -8,6 +8,18 @@ Current classifications: U-P 1407, U-C 0, A-R 189, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Singular-chain foundation audit — 2026-09-11
+
+Ten previously unclassified singular-chain interfaces are bounded clear.
+Finite formal integral chains tensor with arbitrary abelian coefficients; face
+identities give the square-zero boundary and hence homology. Postcomposition
+commutes with boundaries and is covariantly functorial. The finite shuffle
+triangulation has pairwise-cancelling interior faces, the correct `(-1)^p`
+second-factor boundary sign and naturality under product maps. No choice is
+used, and no current Step-5 blocker was found. Exact hashes, deduplication and
+limits are in
+`research/phase-2-frontier-22-published-singular-chain-foundation-audit.md`.
+
 ## Homological-foundation audit — 2026-09-11
 
 Eight previously unclassified categorical and homological interfaces are
@@ -28623,6 +28635,16 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-singular-simplex-and-singular-chain-group-with-coefficients` | Frontier-22 singular-chain audit 2026-09-11: integral chains are finite formal sums and arbitrary abelian coefficients are attached by tensoring, without choosing a coefficient basis. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-singular-chain-foundation-audit.md`. |
+| `def-singular-boundary-operator` | Frontier-22 singular-chain audit 2026-09-11: the alternating affine-face formula extends linearly and has coherent zero/negative degree conventions. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-singular-chain-foundation-audit.md`. |
+| `thm-the-singular-boundary-squares-to-zero` | Frontier-22 singular-chain audit 2026-09-11: cosimplicial identities pair every codimension-two face with the opposite sign, including low degrees and tensor coefficients. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-singular-chain-foundation-audit.md`. |
+| `def-singular-chain-complex-and-singular-homology` | Frontier-22 singular-chain audit 2026-09-11: the square-zero boundary makes a chain complex, and its kernel/image/cokernel construction gives the stated homology groups. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-singular-chain-foundation-audit.md`. |
+| `def-induced-singular-chain-map` | Frontier-22 singular-chain audit 2026-09-11: postcomposition on simplex generators extends linearly and by tensoring to every coefficient group. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-singular-chain-foundation-audit.md`. |
+| `lem-induced-singular-chain-maps-commute-with-boundaries` | Frontier-22 singular-chain audit 2026-09-11: postcomposition commutes termwise with every face restriction, giving the exact chain-map identity in all degrees. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-singular-chain-foundation-audit.md`. |
+| `prop-singular-chains-and-homology-are-covariantly-functorial` | Frontier-22 singular-chain audit 2026-09-11: identity and composition hold on generators and transfer through the published homology functoriality interface. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-singular-chain-foundation-audit.md`. |
+| `def-singular-chain-cross-product-on-generators` | Frontier-22 singular-chain audit 2026-09-11: the finite signed shuffle triangulation defines an integral chain in the product with the correct point-factor convention. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-singular-chain-foundation-audit.md`. |
+| `lem-singular-chain-cross-product-boundary-formula` | Frontier-22 singular-chain audit 2026-09-11: internal shuffle faces cancel in pairs and the surviving second-factor faces acquire exactly the `(-1)^p` sign, including boundary degrees. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-singular-chain-foundation-audit.md`. |
+| `prop-singular-chain-cross-products-are-natural` | Frontier-22 singular-chain audit 2026-09-11: product postcomposition commutes with every shuffle simplex and hence with the finite signed sum. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-singular-chain-foundation-audit.md`. |
 | `def-limit-and-colimit-of-a-diagram` | Frontier-22 homological-foundation audit 2026-09-11: terminal cones and initial cocones give the displayed limit/colimit factorization equations in the correct directions. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-homological-foundation-audit.md`. |
 | `def-abelian-category` | Frontier-22 homological-foundation audit 2026-09-11: additivity, all kernels/cokernels and invertible canonical coimage-to-image comparison give the standard exact contract. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-homological-foundation-audit.md`. |
 | `def-chain-complex-in-an-abelian-category` | Frontier-22 homological-foundation audit 2026-09-11: the integer-graded differential has degree minus one and the correctly indexed square-zero law. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-homological-foundation-audit.md`. |
