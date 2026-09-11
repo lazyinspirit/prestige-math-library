@@ -4,9 +4,24 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1407, U-C 0, A-R 189, A-P 211. The
+Current classifications: U-P 1405, U-C 0, A-R 189, A-P 217. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Nonnegative-integral foundation audit — 2026-09-11
+
+The extended-real completeness lemma is a new bounded clear. Four newly indexed
+items and two U-P targets enter A-P. The simple-integral well-definedness proof
+incorrectly treats two arbitrary representations as covering partitions; add
+their zero-coefficient complement cells before refining. This propagates to
+the arbitrary-representation definition, the agreement proposition and the
+nonnegative-integral definition. Both simple and nonnegative homogeneity
+propositions also form the globally undefined product `0*(+infinity)`; split
+off the zero-scalar case or define the local action explicitly. The active
+Solovay-density draft uses only monotonicity and strictly positive finite
+scalars, so a short local restricted proof suffices. Exact hashes, impact and
+limits are in
+`research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`.
 
 ## Total-variation consumer audit — 2026-09-11
 
@@ -28634,11 +28649,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,731 unique
+subsequently reconciled published IDs. It currently contains **2,736 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,731 indexed IDs are published; **13,199 published items remain outside this
+2,736 indexed IDs are published; **13,194 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28647,14 +28662,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1407 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1405 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 189 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 211 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 217 | Recorded direct review and an unresolved item-specific repair. |
 
-924 further reference-pool items have bounded no-repair-needed dispositions
+925 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,807 items and the expanded reference pool contains 2,731 unique items.
+1,811 items and the expanded reference pool contains 2,736 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28715,6 +28730,7 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `lem-extended-reals-complete` | Frontier-22 nonnegative-integral audit 2026-09-11: the exhaustive top/empty-real/bounded-real/unbounded-real cases and their duals prove extended suprema and infima, and the bounded-real agreement clause used by the probability-algebra draft is sound. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
 | `def-simple-integral-against-a-signed-or-complex-measure` | Frontier-22 total-variation consumer audit 2026-09-11: unique nonzero level sets and finite variation make every finite displayed sum well defined; a one-piece partition gives the needed value bound without countable additivity. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-total-variation-consumer-audit.md`. |
 | `thm-l-one-functions-admit-dominated-complex-simple-approximations` | Frontier-22 total-variation consumer audit 2026-09-11: four supplied monotone simple approximations need only finite choice; componentwise MCT and the modulus bound give dominated complex `L^1` convergence. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-total-variation-consumer-audit.md`. |
 | `def-complex-measure` | Frontier-22 complex-measure audit 2026-09-11: complex-valued countable additivity and the empty-set clause define a finite-valued complex measure with no extended-complex ambiguity. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-complex-measure-foundation-audit.md`. |
@@ -29695,6 +29711,12 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `def-integral-of-a-nonnegative-simple-function` | Frontier-22 nonnegative-integral audit 2026-09-11: the formula is standard, but its named well-definedness justification incorrectly treats arbitrary displays as covering partitions. Add zero-coefficient complement cells before the common refinement. U-P to A-P; finite choice-free repair, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
+| `lem-well-definedness-of-the-simple-integral` | Frontier-22 nonnegative-integral audit 2026-09-11: proof 1.1 asserts `E_i=disjoint_union_j(E_i intersection F_j)` for arbitrary simple representations even though a zero-valued region may be omitted from the `F_j`. Adjoin both union complements with coefficient zero, then take the finite common refinement. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
+| `prop-basic-properties-of-the-nonnegative-simple-integral` | Frontier-22 nonnegative-integral audit 2026-09-11: its finite refinement argument is repairable through the preceding lemma, but zero-scalar homogeneity writes `0*(+infinity)` when the simple integral is infinite, contrary to the global extended-real convention. State the zero case separately or define the local scalar action. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
+| `def-nonnegative-lebesgue-integral` | Frontier-22 nonnegative-integral audit 2026-09-11: taking the supremum of arbitrary simple-integral values relies on the affected representation-independence justification. Repair that finite zero-complement refinement; extended-real completeness itself is clear. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
+| `prop-the-nonnegative-integral-agrees-with-the-simple-integral` | Frontier-22 nonnegative-integral audit 2026-09-11: its supremum argument is sound after the load-bearing arbitrary-representation well-definedness repair. Move the existing U-P row to A-P rather than duplicating it. No new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
+| `prop-order-and-scalar-rules-for-the-nonnegative-integral` | Frontier-22 nonnegative-integral audit 2026-09-11: monotonicity and positive-scalar homogeneity are sound after the simple-integral refinement repair, but the claimed zero-scalar equation forms the globally undefined `0*(+infinity)` when the integral is infinite. Split off `integral(0f)=0` without that product or define a local scalar action. New A-P; active Solovay uses only monotonicity and strictly positive finite scalars, so a local restricted proof suffices. Exact hash/impact: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
 | `def-relative-projectivity` | Frontier-22 choice-contract correction 2026-09-11: the relative-`1` comparison explicitly assumes AC and its basis/free-summand argument is mathematically sound, but the item contract omits `def-axiom-of-choice` despite the repository's specific rule 11 requiring every direct AC use to declare that dependency. Add the axiom and published basis supplier while retaining the exact qualification. Its active consumers either declare AC or use only the choice-free defining clause, so no current frontier blocker. Bounded clear to A-P with both earlier dispositions preserved as history; no new pair. Exact hashes/scope: `research/phase-2-frontier-22-published-choice-contract-reconciliation.md`. |
 | `def-integration-against-a-signed-or-complex-measure` | Frontier-22 total-variation consumer audit 2026-09-11 corrects its initial same-day clear: defining `L^1(nu)=L^1(|nu|)` and the approximation integral requires `|nu|` to be a measure, but that exact supplier remains A-P for its countable partition-selection/supremum proof. Repair the upstream theorem by finite near-maximal partitions and partial sums; the remaining Cauchy/independence argument is sound. Active finite-complex-measure Fourier use was reported. Clear to A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-total-variation-consumer-audit.md`. |
 | `prop-simple-integrals-are-bounded-by-total-variation` | Frontier-22 total-variation consumer audit 2026-09-11: the finite weighted-sum inequality is sound, but the proof invokes the already-A-P total-variation-measure theorem to integrate `|s|` and use monotonicity without inlining the finite-additivity bypass. Repair that supplier or prove its finite clauses locally. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-total-variation-consumer-audit.md`. |
@@ -30267,7 +30289,6 @@ mathematical repairs. Evidence:
 | `def-incompressibility-method` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-indicator-random-variable` | 0A.2 Exact Phase-3 defects in published content |
 | `def-induction-ideal-of-a-family-of-subgroups` | Transitive consumers (166), grouped by home page |
-| `def-integral-of-a-nonnegative-simple-function` | 0A.2 Exact Phase-3 defects in published content |
 | `def-integral-over-a-measurable-set` | Exact direct impact-review queue |
 | `def-integral-weyl-group-of-a-weight` | Cross-category Phase-2 roots and their published impact |
 | `def-killing-form-of-a-semisimple-lie-algebra` | Exact Phase-3 published repairs |
@@ -31092,7 +31113,6 @@ mathematical repairs. Evidence:
 | `prop-the-cone-connecting-map-agrees-with-the-shifted-identity-up-to-the-declared-sign` | Four-track reconciliation — 2026-09-08 |
 | `prop-the-exterior-derivative-commutes-with-restriction` | Open findings from the bump-consumer audit — 2026-09-08 |
 | `prop-the-grothendieck-group-of-o-has-simple-and-standard-bases` | Supplier-to-published-consumer map |
-| `prop-the-nonnegative-integral-agrees-with-the-simple-integral` | 0A.2 Exact Phase-3 defects in published content |
 | `prop-the-quadratic-casimir-element-is-central` | Exact Phase-3 published repairs |
 | `prop-truth-table-implies-turing-reduction` | 51. Exact live-plan metadata resynchronization set |
 | `prop-universal-central-extension-group-is-superperfect` | 30.7 Group-owned low-degree (co)homology Phase-2 supplier |

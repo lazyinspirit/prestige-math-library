@@ -842,8 +842,8 @@ blocker. Counts are now 2,517 unique published IDs: U-P 1,413, U-C 15, A-R
 
 ## Current checkpoint — 2026-09-11
 
-The canonical ledger has since reached 2,731 unique published IDs: U-P 1,407,
-U-C 0, A-R 189, A-P 211 and 924 bounded clears. The set-semantics batch
+The canonical ledger has since reached 2,736 unique published IDs: U-P 1,405,
+U-C 0, A-R 189, A-P 217 and 925 bounded clears. The set-semantics batch
 fully reads relativization and arbitrary-signature soundness together with
 their six direct interfaces. Guarded formula induction, set-sized truth-set
 recursion, free-for substitution, coincidence and all six axiom/three rule
@@ -1109,6 +1109,18 @@ Green consumers declare AC or use only the choice-free defining clause, so no
 frontier blocker results. Evidence:
 `research/phase-2-frontier-22-published-choice-contract-reconciliation.md`.
 
+The nonnegative-integral foundation pass adds one bounded clear, moves two U-P
+rows to A-P and adds four A-P IDs. The arbitrary simple-representation
+well-definedness proof omits zero-complement cells; that finite repair propagates
+to its definition and two exact consumers. Simple and nonnegative homogeneity
+also write the globally undefined product `0*(+infinity)`. Split the zero case
+from positive-scalar homogeneity or define a local action. The active
+probability-algebra draft uses the clear extended-supremum clause. The active
+Solovay-density draft uses only monotonicity and strictly positive finite
+scalars, but needs those restricted clauses proved locally until the published
+foundation is repaired. Evidence:
+`research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`.
+
 The canonical adequate-implicit-use rule remains mandatory: a sound implicit
 use of an adequate published supplier is a bounded clear, even when a repeated
 direct dependency edge would improve exposition. Every future addition must be
@@ -1121,10 +1133,10 @@ supplier IDs, and each published ID must retain exactly one classification row.
    issues reported by the root worker, prioritizing items actually consumed by
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
-   then audit high-use active-frontier samples outside the 2,731-ID
+   then audit high-use active-frontier samples outside the 2,736-ID
    index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,199 published items
+No exhaustive discovery claim is authorized while 13,194 published items
 remain outside the index and dependency interfaces remain unaudited.
