@@ -4,9 +4,20 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1384, U-C 0, A-R 187, A-P 268. The
+Current classifications: U-P 1382, U-C 0, A-R 187, A-P 268. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Real-power and convexity-calculus audit — 2026-09-11
+
+Twenty-two previously unclassified interfaces and two U-P rows are bounded
+clears after the complete real-power, secant, one-sided derivative, supporting-
+line, derivative-monotonicity, Caratheodory-continuity and Borel-preimage paths
+were read. The derivative-algebra supplier's recorded alias collision does not
+affect these exact-ID uses. This supplies the real-power convexity clause used
+by conditional `L^p` contraction without changing that theorem's separate
+integral-propagation repair. No new blocker or pair results. Exact evidence:
+`research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`.
 
 ## Conditional-analysis consequence audit — 2026-09-11
 
@@ -28911,6 +28922,30 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-real-power` | Frontier-22 real-power/convexity audit 2026-09-11: Positive-base exponential/logarithm definition and restricted zero-base convention are coherent. U-P to bounded clear; prior forward-order impact retained. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `thm-real-power-continuity-and-derivatives` | Frontier-22 real-power/convexity audit 2026-09-11: Chain rule gives both displayed derivatives on the stated domains; the derivative-algebra alias collision does not affect this exact-ID use. U-P to bounded clear; prior Marcinkiewicz impact retained. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `def-convex-concave-and-midpoint-convex-functions` | Frontier-22 real-power/convexity audit 2026-09-11: Interval, endpoint-weight and strictness conventions are coherent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `lem-three-slope-inequality-for-convex-functions` | Frontier-22 real-power/convexity audit 2026-09-11: The middle-point convex combination and positive-factor rearrangement give both secant inequalities. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `thm-convex-functions-are-locally-lipschitz-and-continuous` | Frontier-22 real-power/convexity audit 2026-09-11: Exterior secants bound all interior secants and their finite absolute maximum gives the Lipschitz constant. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `def-one-sided-derivatives-of-real-functions` | Frontier-22 real-power/convexity audit 2026-09-11: One-sided difference-quotient domains and agreement with the ordinary derivative are precise. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `thm-monotone-one-sided-limits-exist` | Frontier-22 real-power/convexity audit 2026-09-11: Order-convexity gives accumulation, completeness gives the bounded supremum/infimum, and epsilon bounds prove both limits. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `thm-one-sided-derivatives-of-convex-functions` | Frontier-22 real-power/convexity audit 2026-09-11: Locally bounded monotone secants have finite one-sided limits and the three-slope chain gives all displayed inequalities. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `def-supporting-line-for-a-real-function` | Frontier-22 real-power/convexity audit 2026-09-11: The affine global lower-support convention at an interior point is precise. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `thm-supporting-lines-for-convex-functions` | Frontier-22 real-power/convexity audit 2026-09-11: Left and right secant inequalities give the affine lower bound on both sides. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `thm-differentiable-convex-functions-and-monotone-derivatives` | Frontier-22 real-power/convexity audit 2026-09-11: Convexity orders derivatives; subtracting the tangent slope and applying derivative monotonicity proves the converse. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `cor-second-derivative-characterises-convexity` | Frontier-22 real-power/convexity audit 2026-09-11: Monotonicity of the first derivative is equivalent to convexity and exactly matches nonnegative second derivative. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `thm-monotonicity-from-the-derivative` | Frontier-22 real-power/convexity audit 2026-09-11: MVT proves the four forward sign clauses and signed difference quotients prove exactly the weak converse. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `thm-natural-logarithm-laws` | Frontier-22 real-power/convexity audit 2026-09-11: The increasing exponential inverse and its addition/reciprocal identities give all order, continuity, range and algebra clauses. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `thm-squeeze-for-function-limits` | Frontier-22 real-power/convexity audit 2026-09-11: The finite minimum of three local radii gives the direct epsilon-delta proof without choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `lem-of-triangle-inequality` | Frontier-22 real-power/convexity audit 2026-09-11: Adding the two absolute-value order intervals proves the ordered-field triangle inequality. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `cor-of-reverse-triangle` | Frontier-22 real-power/convexity audit 2026-09-11: Two triangle-inequality applications bound both signs of the modulus difference. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `thm-algebra-of-continuous-functions` | Frontier-22 real-power/convexity audit 2026-09-11: Isolated/limit cases, limit algebra, reverse triangle and affine max/min formulas establish all stated clauses. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `thm-caratheodory-characterisation` | Frontier-22 real-power/convexity audit 2026-09-11: Extending the difference quotient by its limit gives the continuous factor and the factorization recovers differentiability and uniqueness. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `cor-differentiable-implies-continuous` | Frontier-22 real-power/convexity audit 2026-09-11: The Caratheodory factor times `x-c` is continuous and reconstructs the function. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `def-borel-sigma-algebra` | Frontier-22 real-power/convexity audit 2026-09-11: The sigma-algebra generated by the open sets exists and is minimal by the stated supplier. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `thm-continuity-characterisations-top` | Frontier-22 real-power/convexity audit 2026-09-11: Preimage algebra, finite subbasic intersections and the neighbourhood closure criterion connect all five forms. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `thm-continuous-preimages-of-borel-sets-are-borel` | Frontier-22 real-power/convexity audit 2026-09-11: Sets with Borel preimages form a sigma-algebra containing the opens, so minimality applies. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
+| `lem-absolute-real-powers-are-convex` | Frontier-22 real-power/convexity audit 2026-09-11: Positive-base derivatives, continuity at zero and the ordinary triangle inequality prove finite convexity and Borel measurability for every `p>=1`. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
 | `lem-convex-functions-have-countable-supporting-line-representations` | Frontier-22 conditional-expectation propagation audit 2026-09-11: the deterministic left-derivative supporting lines lie below the convex function, secant bounds give local Lipschitz continuity, and rational contact points approximate every real contact point. No choice or affected integral clause is used. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-conditional-expectation-propagation-audit.md`. |
 | `def-measure-preserving-transformation-and-system` | Frontier-22 ergodic/Lp propagation audit 2026-09-11: the measurable inverse-image identity is precise and explicitly independent of invertibility, completeness and finiteness. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-lp-integral-propagation-audit.md`. |
 | `def-invertible-measure-preserving-system` | Frontier-22 ergodic/Lp propagation audit 2026-09-11: actual invertibility and invertibility on one invariant measurable conull restriction are separated, with no exceptional-point inverse choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-lp-integral-propagation-audit.md`. |
@@ -30648,7 +30683,6 @@ mathematical repairs. Evidence:
 | `def-real-beta-integral` | 9.5 Forward order and load-bearing body links |
 | `def-real-gamma-function-by-the-euler-integral` | 9.5 Forward order and load-bearing body links |
 | `def-real-limit` | 0A.2 Exact Phase-3 defects in published content |
-| `def-real-power` | 9.5 Forward order and load-bearing body links |
 | `def-reduction-gadget-and-interface-invariant` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-reflexive-banach-space` | norming-and-separation-under-hahn-banach |
 | `def-regular-multigraph-and-normalized-adjacency` | 51. Exact live-plan metadata resynchronization set |
@@ -31778,7 +31812,6 @@ mathematical repairs. Evidence:
 | `thm-read-only-input-savitch-simulation` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `thm-real-beta-integral-convergence` | 9.5 Forward order and load-bearing body links |
 | `thm-real-gamma-euler-integral-convergence` | 9.5 Forward order and load-bearing body links |
-| `thm-real-power-continuity-and-derivatives` | Published Marcinkiewicz interpolation: local repair, no new pair |
 | `thm-regular-interval-diffeomorphism` | riemannian-metrics-length-distance-and-volume and |
 | `thm-regular-local-rings-are-domains-and-cohen-macaulay` | Item-exact impact of the Dependent Choice rehome |
 | `thm-regular-local-rings-are-normal` | Item-exact impact of the Dependent Choice rehome |

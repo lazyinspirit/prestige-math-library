@@ -19,7 +19,26 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: conditional-analysis consequences
+## Latest checkpoint: real-power and convexity calculus
+
+Evidence:
+`research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`.
+
+Twenty-two previously unclassified interfaces and two old U-P rows are bounded
+clears after the complete real-power, convex-secant, one-sided derivative,
+supporting-line, derivative-monotonicity, Caratheodory-continuity and Borel-
+preimage paths were read. The derivative-algebra alias collision does not affect
+these exact-ID uses. This completes the deferred real-power convexity supplier
+audit without changing conditional contraction's integral repair. No new
+frontier blocker or pair results.
+
+Post-batch target index: 2,863 unique published IDs; U-P 1,382, U-C 0,
+A-R 187, A-P 268 and 1,026 bounded clears; 13,067 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks must be rerun before commit. Next target is any new exact reviewer
+handoff, then the next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: conditional-analysis consequences
 
 Evidence:
 `research/phase-2-frontier-22-published-conditional-analysis-consequences-audit.md`.
