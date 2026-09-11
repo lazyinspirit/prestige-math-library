@@ -8,6 +8,18 @@ Current classifications: U-P 1389, U-C 0, A-R 187, A-P 231. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Free-group and relator-area audit — 2026-09-11
+
+Fourteen previously unclassified group/word interfaces are bounded clears.
+Stack reduction gives unique reduced words and the free-group universal
+property; finite conjugate products give normal closure and the presentation
+quotient. Word length is a natural minimum. In a finite presentation there are
+only finitely many formal words of bounded length, while normal closure makes
+each null-word area finite, so the Dehn-function maximum exists by an adequate
+implicit finite argument. These clauses supply the active HG branch without a
+new blocker. Evidence, hashes, deduplication and limits:
+`research/phase-2-frontier-22-published-free-group-relator-area-audit.md`.
+
 ## Rational and lower-cut addition audit — 2026-09-11
 
 Fifteen previously unclassified rational and Dedekind-cut interfaces are bounded
@@ -28758,11 +28770,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,798 unique
+subsequently reconciled published IDs. It currently contains **2,812 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,798 indexed IDs are published; **13,132 published items remain outside this
+2,812 indexed IDs are published; **13,118 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28776,9 +28788,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 231 | Recorded direct review and an unresolved item-specific repair. |
 
-991 further reference-pool items have bounded no-repair-needed dispositions
+1,005 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,807 items and the expanded reference pool contains 2,798 unique items.
+1,807 items and the expanded reference pool contains 2,812 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28839,6 +28851,20 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-group` | Frontier-22 free-group/area audit 2026-09-11: the monoid plus two-sided inverse axioms and abelian specialization are coherent; alias `def-abelian-group` is the same item. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-free-group-relator-area-audit.md`. |
+| `def-alphabet-words-and-reduction` | Frontier-22 free-group/area audit 2026-09-11: the disjoint formal inverse alphabet, finite/empty words, adjacent cancellation and finite free equivalence are precise. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-free-group-relator-area-audit.md`. |
+| `def-free-group` | Frontier-22 free-group/area audit 2026-09-11: the arbitrary-set extension-and-uniqueness property correctly separates the abstract definition from its reduced-word realization. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-free-group-relator-area-audit.md`. |
+| `thm-reduced-words-form-the-free-group` | Frontier-22 free-group/area audit 2026-09-11: deterministic stack reduction is invariant under inverse-pair insertion/deletion, yielding unique normal forms, associative reduced concatenation and the universal evaluation homomorphism without Choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-free-group-relator-area-audit.md`. |
+| `def-normal-closure` | Frontier-22 free-group/area audit 2026-09-11: the nonempty family intersection is exactly the least normal subgroup containing the subset. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-free-group-relator-area-audit.md`. |
+| `prop-normal-closure-is-products-of-conjugates` | Frontier-22 free-group/area audit 2026-09-11: finite conjugate products form a normal subgroup containing the relators and lie in every such subgroup, including the empty product case. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-free-group-relator-area-audit.md`. |
+| `def-quotient-group` | Frontier-22 free-group/area audit 2026-09-11: normality and exact published justifications support the left-coset product and group laws; alias `def-factor-group` is the same item. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-free-group-relator-area-audit.md`. |
+| `def-group-presentation` | Frontier-22 free-group/area audit 2026-09-11: the free-group quotient by normal closure is well typed and imposes exactly the relators and their normal consequences. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-free-group-relator-area-audit.md`. |
+| `def-finitely-generated-group` | Frontier-22 free-group/area audit 2026-09-11: finite generation is the existence of one finite subset whose generated subgroup is the whole group, with no family selection. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-free-group-relator-area-audit.md`. |
+| `def-word-length-with-respect-to-a-generating-set` | Frontier-22 free-group/area audit 2026-09-11: generation makes the natural expression-length set nonempty, so its minimum exists; empty and formal-word clauses are explicit. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-free-group-relator-area-audit.md`. |
+| `lem-word-length-is-well-defined-and-satisfies-the-length-laws` | Frontier-22 free-group/area audit 2026-09-11: concatenation, reverse/invert and the empty expression prove subadditivity, inverse invariance and vanishing exactly at the identity. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-free-group-relator-area-audit.md`. |
+| `def-recursive-and-finite-group-presentations` | Frontier-22 free-group/area audit 2026-09-11: the definition fixes a finite alphabet and distinguishes recursively enumerable relators from a finite relator set. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-free-group-relator-area-audit.md`. |
+| `def-word-problem-for-a-fixed-finite-presentation` | Frontier-22 free-group/area audit 2026-09-11: the input and identity predicate in the fixed quotient are precise for arbitrary formal word representatives. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-free-group-relator-area-audit.md`. |
+| `def-algebraic-relator-area-and-dehn-function-of-a-finite-presentation` | Frontier-22 free-group/area audit 2026-09-11: normal closure makes every null-word area finite; finitely many bounded-length words over the finite alphabet and the empty word make the Dehn maximum exist. This adequate implicit finite argument is clear. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-free-group-relator-area-audit.md`. |
 | `def-rationals` | Frontier-22 rational/cut audit 2026-09-11: nonzero-denominator integer pairs modulo cross multiplication give the standard quotient. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`. |
 | `lem-rat-equivalence` | Frontier-22 rational/cut audit 2026-09-11: the two cross equations and nonzero middle-denominator cancellation prove transitivity; the other equivalence laws are ring identities. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`. |
 | `def-rat-operations` | Frontier-22 rational/cut audit 2026-09-11: the standard pair formulas keep legal denominators and explicitly identify their well-definedness suppliers. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`. |

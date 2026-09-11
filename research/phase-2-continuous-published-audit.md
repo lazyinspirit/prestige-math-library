@@ -19,7 +19,26 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: rational and lower-cut addition
+## Latest checkpoint: free groups and relator area
+
+Evidence:
+`research/phase-2-frontier-22-published-free-group-relator-area-audit.md`.
+
+Fourteen previously unclassified published group/word interfaces are new
+bounded clears. Stack reduction proves unique reduced words and the free-group
+universal property; finite conjugate products prove normal-closure
+factorization. Natural minima define word/relator length, and finiteness of the
+bounded formal-word set makes the Dehn maximum exist. These exact clauses
+supply active HG filling work. No new blocker was found; separate recorded
+free-Cayley and quasi-isometry defects remain unchanged.
+
+Post-batch target index: 2,812 unique published IDs; U-P 1,389, U-C 0,
+A-R 187, A-P 231 and 1,005 bounded clears; 13,118 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks must be rerun before commit. Next target is any new exact reviewer
+handoff, then the next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: rational and lower-cut addition
 
 Evidence:
 `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`.
