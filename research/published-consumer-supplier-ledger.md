@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1407, U-C 0, A-R 189, A-P 210. The
+Current classifications: U-P 1407, U-C 0, A-R 189, A-P 211. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -443,16 +443,21 @@ quotient in the wrong order; correct increments telescope and give the intended
 normal-form contradiction. `def-metric-topology` moves to A-P for its exact
 conflict with the later canonical neighbourhood convention.
 
-`def-relative-projectivity` and
-`thm-finitely-many-discontinuities-integrable` move to bounded clear. The first
-states AC at the `H=1` comparison and has adequate published basis/free-summand
-suppliers. The second explicitly identifies its sole inherited choice cost in
+`def-relative-projectivity` initially moved to bounded clear because it states
+AC at the `H=1` comparison and has adequate published basis/free-summand
+suppliers. A later rule-11 reconciliation corrects it to A-P: the explicit AC
+use must also declare `def-axiom-of-choice` in the item contract.
+`thm-finitely-many-discontinuities-integrable` remains bounded clear; it
+explicitly identifies its sole inherited choice cost in
 the directly cited, CC-declaring Heine--Cantor theorem. Repeated direct axiom
-edges are optional under the canonical adequate-implicit-use rule. Active
-consumers already use local proofs or the canonical convention, so none of the
-three open published repairs blocks current Step 3. Exact hashes, repair
-strategies, supplier IDs and limits are in
-`research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`.
+edges are optional under the canonical adequate-implicit-use rule when the
+consumer does not itself make an undeclared direct axiom use. Active consumers
+already declare AC or use only the choice-free defining clause, so the
+relative-projectivity repair does not block the current frontier. Exact hashes,
+repair strategies, supplier IDs and limits are in
+`research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`;
+the correction is in
+`research/phase-2-frontier-22-published-choice-contract-reconciliation.md`.
 
 ## High-use structural-supplier audit — 2026-09-11
 
@@ -28629,11 +28634,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,681 unique
+subsequently reconciled published IDs. It currently contains **2,731 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,681 indexed IDs are published; **13,249 published items remain outside this
+2,731 indexed IDs are published; **13,199 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28645,11 +28650,11 @@ Supplier mappings and subsequent item-specific findings remain above.
 | U-P | Unaudited and potentially defective items | 1407 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 189 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 207 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 211 | Recorded direct review and an unresolved item-specific repair. |
 
-878 further reference-pool items have bounded no-repair-needed dispositions
+924 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,803 items and the expanded reference pool contains 2,681 unique items.
+1,807 items and the expanded reference pool contains 2,731 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28861,7 +28866,6 @@ The separate page-header cutover obligations remain in their category sections.
 | `thm-lipschitz-images-of-null-sets-in-rn-are-null` | Manifold-null/normalization audit 2026-09-11: in fixed positive dimension, scaling every elementary cube cover by the Lipschitz/dimension factor gives the output budget; the constant-map case is explicit. The older U-P occurrence concerned a different Lebesgue-null conversion target. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
 | `lem-null-sets-in-rn-closed-under-subsets-and-countable-unions` | Manifold-null/normalization audit 2026-09-11: explicit countable choice selects geometrically budgeted covers and countability of `N times N` enumerates their union; nonnegative-series bounds give the required total. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
 | `thm-second-countable-implies-lindelof` | Manifold-null/normalization audit 2026-09-11: explicit countable choice selects one cover member for each eligible member of a countable basis, and those selected members cover. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-manifold-null-and-normalization-audit.md`. |
-| `def-relative-projectivity` | Frontier-22 confirmed-handoff reconciliation 2026-09-11: the `H=1` comparison explicitly assumes AC; the published basis-existence and projective free-summand theorems supply the exact argument with that boundary. Missing redundant direct edges are optional under the adequate-implicit-use rule. U-C to bounded clear with history preserved. Exact hashes/scope: `research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`. |
 | `thm-finitely-many-discontinuities-integrable` | Frontier-22 confirmed-handoff reconciliation 2026-09-11: the Darboux proof is complete; its only countable-choice cost is inside directly cited `thm-heine-cantor-r`, which declares the axiom and exact use, and this consumer's Choice remark identifies the inheritance. Repeating the direct axiom edge is optional. U-C to bounded clear with history preserved. Exact hash/scope: `research/phase-2-frontier-22-published-confirmed-handoff-reconciliation.md`. |
 | `def-subspace-topology-top` | Frontier-22 high-use structural-supplier audit 2026-09-11: the canonical trace representative proves arbitrary-union closure without choice; closed sets, bases, subbases, inclusion, restriction and the map-into-subspace property follow from exact trace identities. New bounded clear; both aliases deduplicated. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
 | `def-compactly-generated-conventions-for-based-homotopy` | Frontier-22 high-use structural-supplier audit 2026-09-11: WH, compact-Hausdorff k-tests, kification, k-products and test-image compact-open mapping spaces are coherently fixed for the following exact proofs. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
@@ -29691,6 +29695,7 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `def-relative-projectivity` | Frontier-22 choice-contract correction 2026-09-11: the relative-`1` comparison explicitly assumes AC and its basis/free-summand argument is mathematically sound, but the item contract omits `def-axiom-of-choice` despite the repository's specific rule 11 requiring every direct AC use to declare that dependency. Add the axiom and published basis supplier while retaining the exact qualification. Its active consumers either declare AC or use only the choice-free defining clause, so no current frontier blocker. Bounded clear to A-P with both earlier dispositions preserved as history; no new pair. Exact hashes/scope: `research/phase-2-frontier-22-published-choice-contract-reconciliation.md`. |
 | `def-integration-against-a-signed-or-complex-measure` | Frontier-22 total-variation consumer audit 2026-09-11 corrects its initial same-day clear: defining `L^1(nu)=L^1(|nu|)` and the approximation integral requires `|nu|` to be a measure, but that exact supplier remains A-P for its countable partition-selection/supremum proof. Repair the upstream theorem by finite near-maximal partitions and partial sums; the remaining Cauchy/independence argument is sound. Active finite-complex-measure Fourier use was reported. Clear to A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-total-variation-consumer-audit.md`. |
 | `prop-simple-integrals-are-bounded-by-total-variation` | Frontier-22 total-variation consumer audit 2026-09-11: the finite weighted-sum inequality is sound, but the proof invokes the already-A-P total-variation-measure theorem to integrate `|s|` and use monotonicity without inlining the finite-additivity bypass. Repair that supplier or prove its finite clauses locally. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-total-variation-consumer-audit.md`. |
 | `thm-the-pullback-fibre-product-is-a-smooth-vector-bundle` | Frontier-22 pullback-topology audit 2026-09-11: proof 1.1 gives only set bijections and 2.1 only smooth overlap formulas, without assigning the fibre product a topology, proving the bijections homeomorphisms, or proving the Hausdorff/second-countable total-space contract. Give it the subspace topology from `N x E`; published product-manifold and hereditary suppliers give separation/countability, and the explicit inverse `(q,v)->(q,Phi_alpha^{-1}(f(q),v))` proves the pulled-back trivializations are homeomorphisms. Two active draft definitions use the affected existence clause and need this local proof until the published item is repaired. New A-P; no new pair. Exact hash/impact: `research/phase-2-frontier-22-published-pullback-bundle-topology-audit.md`. |

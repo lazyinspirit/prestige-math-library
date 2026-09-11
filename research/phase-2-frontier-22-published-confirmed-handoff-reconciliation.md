@@ -83,16 +83,19 @@ Classification moves from U-C to A-P.
 Current locally convex drafts cite the later topological convention directly,
 so this interface repair does not block current Step 3.
 
-## Two corrected bounded clears
+## One corrected bounded clear and one later contract correction
 
 `def-relative-projectivity` states its `H=1` comparison only under AC. Published
 `cor-every-vector-space-has-a-basis`, SHA-256
 `947a554c3833cad8957a0b67be328ea8e532eb10282771dfc298f0ac16eafce0`,
 supplies the basis, and declared `thm-projective-module-characterizations`
 states the free-summand equivalence with the same AC boundary. The missing
-direct edges are optional metadata under the canonical adequate-implicit-use
-rule; the mathematical assumption and adequate suppliers are already clear.
-The item moves from U-C to bounded clear, preserving the historical concern.
+direct edges were initially treated as optional metadata under the canonical
+adequate-implicit-use rule. A later reconciliation against the more specific
+`CLAUDE.md` rule 11 corrects this item to A-P because an AC-using item must
+declare `def-axiom-of-choice` in its contract. The mathematics under AC remains
+sound. Exact correction evidence is in
+`research/phase-2-frontier-22-published-choice-contract-reconciliation.md`.
 
 `thm-finitely-many-discontinuities-integrable` gives a complete Darboux proof.
 Its only countable-choice cost is the direct invocation of published

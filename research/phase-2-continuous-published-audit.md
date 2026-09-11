@@ -843,7 +843,7 @@ blocker. Counts are now 2,517 unique published IDs: U-P 1,413, U-C 15, A-R
 ## Current checkpoint — 2026-09-11
 
 The canonical ledger has since reached 2,731 unique published IDs: U-P 1,407,
-U-C 0, A-R 189, A-P 210 and 925 bounded clears. The set-semantics batch
+U-C 0, A-R 189, A-P 211 and 924 bounded clears. The set-semantics batch
 fully reads relativization and arbitrary-signature soundness together with
 their six direct interfaces. Guarded formula induction, set-sized truth-set
 recursion, free-for substitution, coincidence and all six axiom/three rule
@@ -1099,6 +1099,15 @@ total-variation-measure proof without its finite-partial-sum repair. The active
 finite-complex-measure Fourier consumer was reported immediately. Existing
 suppliers suffice; no new pair is needed. Evidence:
 `research/phase-2-frontier-22-published-total-variation-consumer-audit.md`.
+
+The relative-projectivity classification is corrected from bounded clear to
+A-P after applying the repository's specific AC-contract rule. Its
+relative-`1` comparison states AC and is mathematically sound, but the item must
+also declare `def-axiom-of-choice`; that explicit rule takes priority over the
+general adequate-implicit-supplier rule for this direct axiom use. Current
+Green consumers declare AC or use only the choice-free defining clause, so no
+frontier blocker results. Evidence:
+`research/phase-2-frontier-22-published-choice-contract-reconciliation.md`.
 
 The canonical adequate-implicit-use rule remains mandatory: a sound implicit
 use of an adequate published supplier is a bounded clear, even when a repeated
