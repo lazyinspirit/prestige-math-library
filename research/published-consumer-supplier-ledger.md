@@ -8,6 +8,16 @@ Current classifications: U-P 1407, U-C 0, A-R 189, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Natural finite-sum audit — 2026-09-11
+
+Two natural-valued finite-sum interfaces are bounded clear. Product-valued
+recursion defines natural sums/products and their empty cases; additive-gap
+uniqueness defines truncated difference. The companion inductions prove the
+finite laws and all zero cases, then show the canonical real embedding preserves
+sums, products and strict order. No current Step-5 blocker was found. Exact
+hashes, deduplication and limits are in
+`research/phase-2-frontier-22-published-natural-finite-sum-audit.md`.
+
 ## Natural-order audit — 2026-09-11
 
 Five natural-order interfaces are bounded clear. The additive relation is a
@@ -28478,11 +28488,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,672 unique
+subsequently reconciled published IDs. It currently contains **2,674 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,672 indexed IDs are published; **13,258 published items remain outside this
+2,674 indexed IDs are published; **13,256 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28496,9 +28506,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 189 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 207 | Recorded direct review and an unresolved item-specific repair. |
 
-869 further reference-pool items have bounded no-repair-needed dispositions
+871 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,803 items and the expanded reference pool contains 2,672 unique items.
+1,803 items and the expanded reference pool contains 2,674 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28559,6 +28569,8 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-nat-finite-sum-and-product` | Frontier-22 natural finite-sum audit 2026-09-11: product-valued recursion defines natural sums/products, empty values and the unique truncated difference without selection. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-natural-finite-sum-audit.md`. |
+| `lem-nat-finite-sum-laws-and-the-canonical-embedding` | Frontier-22 natural finite-sum audit 2026-09-11: induction proves the natural finite laws and zero cases, and the canonical real embedding preserves both operations and strict order. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-natural-finite-sum-audit.md`. |
 | `def-nat-order` | Frontier-22 natural-order audit 2026-09-11: the additive existence-of-a-gap relation coherently defines nonstrict and strict natural order; later theorems supply its advertised properties. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-natural-order-audit.md`. |
 | `lem-nat-trichotomy` | Frontier-22 natural-order audit 2026-09-11: induction over the second argument proves exhaustive comparison, while cancellation and nonzero-successor arithmetic make the cases disjoint. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-natural-order-audit.md`. |
 | `thm-nat-linear-order` | Frontier-22 natural-order audit 2026-09-11: zero gaps, concatenated gaps and cancellation prove reflexivity, transitivity and antisymmetry; the independent trichotomy lemma supplies totality. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-natural-order-audit.md`. |
