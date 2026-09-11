@@ -4,7 +4,7 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1405, U-C 0, A-R 189, A-P 217. The
+Current classifications: U-P 1404, U-C 0, A-R 189, A-P 220. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
@@ -18,9 +18,11 @@ the arbitrary-representation definition, the agreement proposition and the
 nonnegative-integral definition. Both simple and nonnegative homogeneity
 propositions also form the globally undefined product `0*(+infinity)`; split
 off the zero-scalar case or define the local action explicitly. The active
-Solovay-density draft uses only monotonicity and strictly positive finite
-scalars, so a short local restricted proof suffices. Exact hashes, impact and
-limits are in
+Solovay-density draft also directly uses monotone convergence and the
+zero-integral criterion. Those targets and the simple indefinite-measure
+supplier join A-P because the same representation gap is load-bearing, although
+their visible arguments use only positive scalars and are otherwise sound. A
+short local restricted proof suffices. Exact hashes, impact and limits are in
 `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`.
 
 ## Total-variation consumer audit — 2026-09-11
@@ -28649,11 +28651,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,736 unique
+subsequently reconciled published IDs. It currently contains **2,737 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,736 indexed IDs are published; **13,194 published items remain outside this
+2,737 indexed IDs are published; **13,193 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28662,14 +28664,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1405 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1404 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 189 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 217 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 220 | Recorded direct review and an unresolved item-specific repair. |
 
-925 further reference-pool items have bounded no-repair-needed dispositions
+924 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,811 items and the expanded reference pool contains 2,736 unique items.
+1,813 items and the expanded reference pool contains 2,737 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28994,7 +28996,6 @@ The separate page-header cutover obligations remain in their category sections.
 | `thm-complex-holder-minkowski-and-the-quotient-norm` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Modulus reduction, endpoint essential bounds, representative independence and quotient definiteness supply the exact complex norm and Holder clauses. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
 | `cor-measurable-functions-admit-dominated-simple-approximations` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Explicit positive/negative dyadic sequences recombine into finite real simple functions dominated by the modulus and converging also at either extended-real infinity. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
 | `thm-nonnegative-measurable-functions-admit-increasing-simple-approximations` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. The explicit dyadic truncations are measurable, increasing, dominated, pointwise convergent including at infinity, and uniformly convergent under a finite bound. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
-| `thm-nonnegative-integral-zero-iff-zero-almost-everywhere` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Threshold null sets prove the forward direction and every simple minorant is null-supported in the reverse direction. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
 | `thm-holder-inequality-for-integrals` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Zero norms are separated before normalization; real Young proves strict exponents and least essential bounds prove both endpoints. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
 | `thm-minkowski-inequality-for-integrals` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Integrability is established before Holder, the zero norm is separated before division, and one/infinity endpoints are direct. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
 | `thm-integral-triangle-inequality` | Original-next-20 complex-L2 rectangle-density audit, 2026-09-11: full proof read. Real order bounds and the nonzero-integral phase `conj(I)/|I|` establish the real and complex cases with the zero case separate. New bounded-clear census entry. Exact hash/scope: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
@@ -29711,6 +29712,9 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `thm-nonnegative-integral-zero-iff-zero-almost-everywhere` | Frontier-22 nonnegative-integral follow-up 2026-09-11 corrects its earlier bounded clear: the visible positive-threshold/null-support proof is sound, but its arbitrary simple-minorant integrals rely on the affected representation-independence foundation. Add the zero-complement refinement locally or upstream. Clear to A-P; active Solovay use reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`; prior receipt: `research/phase-2-next-20-published-rectangle-density-prerequisite-audit.md`. |
+| `thm-simple-indefinite-integral-is-a-measure` | Frontier-22 nonnegative-integral follow-up 2026-09-11: the finite weighted-measure calculation is sound after the simple integral is well defined, but the proof directly uses the affected arbitrary-representation foundation without the zero-complement repair. Install that finite refinement locally or upstream. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
+| `thm-monotone-convergence-for-the-integral` | Frontier-22 nonnegative-integral follow-up 2026-09-11: its standard increasing-set/simple-minorant argument is sound after repair, but it load-bearingly uses the affected nonnegative-integral definition, simple-integral agreement, positive homogeneity and simple indefinite measure. U-P to A-P; same finite choice-free repair, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
 | `def-integral-of-a-nonnegative-simple-function` | Frontier-22 nonnegative-integral audit 2026-09-11: the formula is standard, but its named well-definedness justification incorrectly treats arbitrary displays as covering partitions. Add zero-coefficient complement cells before the common refinement. U-P to A-P; finite choice-free repair, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
 | `lem-well-definedness-of-the-simple-integral` | Frontier-22 nonnegative-integral audit 2026-09-11: proof 1.1 asserts `E_i=disjoint_union_j(E_i intersection F_j)` for arbitrary simple representations even though a zero-valued region may be omitted from the `F_j`. Adjoin both union complements with coefficient zero, then take the finite common refinement. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
 | `prop-basic-properties-of-the-nonnegative-simple-integral` | Frontier-22 nonnegative-integral audit 2026-09-11: its finite refinement argument is repairable through the preceding lemma, but zero-scalar homogeneity writes `0*(+infinity)` when the simple integral is infinite, contrary to the global extended-real convention. State the zero case separately or define the local scalar action. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`. |
@@ -31437,7 +31441,6 @@ mathematical repairs. Evidence:
 | `thm-mini-vitali-fine-cover-characterisation-of-null-sets` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `thm-minkowski-integral-inequality` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-monotone-class` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
-| `thm-monotone-convergence-for-the-integral` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-monotone-implies-integrable` | 9.5 Forward order and load-bearing body links |
 | `thm-monotone-with-prescribed-discontinuity-set` | 9.5 Forward order and load-bearing body links |
 | `thm-monotonicity-of-the-integral` | 9.5 Forward order and load-bearing body links |

@@ -69,6 +69,39 @@ undefined product. The latter is a direct choice-free repair.
 Classification: four new A-P items, two U-P-to-A-P moves and one new bounded
 clear.
 
+## Downstream convergence follow-up
+
+The same transaction was extended after reading the next three complete
+targets:
+
+| Published item | SHA-256 | Disposition |
+|---|---|---|
+| `thm-simple-indefinite-integral-is-a-measure` | `009a01e1eee2b54d6b9086d3dc77298d1212de43f05fcda75f4cd21cf69ae03f` | A-P |
+| `thm-monotone-convergence-for-the-integral` | `ef06079eb04f6b7c1b8816dbfd06912b4a6ef35304ddb2170981944cece65a9c` | U-P to A-P |
+| `thm-nonnegative-integral-zero-iff-zero-almost-everywhere` | `c78d28611462a43a216a8ab1f1145b0212f48ebce6c81f046da20eec4a8791bf` | clear to A-P correction |
+
+Exact IDs, aliases, indefinite-measure construction, increasing-set limit,
+threshold null sets, simple-minorant null support and the two upstream
+mechanisms were searched again across the whole ledger. Monotone convergence
+had one U-P row. The zero-integral theorem had one bounded-clear row from the
+rectangle-density audit. The indefinite-integral theorem was unclassified.
+Each is moved or added exactly once.
+
+The indefinite-integral proof computes a finite weighted sum of restricted
+measures. That calculation is sound after arbitrary simple integrals are made
+well defined, but the current proof invokes the affected simple-integral
+foundation and does not install the zero-complement repair locally. Monotone
+convergence uses that indefinite measure, the affected nonnegative-integral
+definition, simple-integral agreement and positive-scalar homogeneity. Its
+standard increasing-set proof is otherwise sound. The zero-integral criterion
+uses positive threshold scalars and the simple-minorant definition; its prior
+clear correctly assessed the visible threshold argument but is corrected
+because the newly found representation defect is load-bearing underneath it.
+
+Classification effect of this follow-up: one new A-P item, one U-P-to-A-P move
+and one bounded-clear-to-A-P correction. All three share the existing finite,
+choice-free upstream repair; no new supplier or pair is needed.
+
 ## Bounded clear
 
 `lem-extended-reals-complete` correctly partitions all subsets of the extended
@@ -93,7 +126,7 @@ exact Step-5 prerequisite issue; it does not make the draft claims false.
 
 ## Limits
 
-This pass audits the seven targets only through simple-representation
+This pass audits the ten targets only through simple-representation
 well-definedness, scalar homogeneity, extended suprema and the exact current
 uses. It does not audit every Lebesgue-integral theorem or every downstream
 consumer. No published or draft item was edited, no external source was newly

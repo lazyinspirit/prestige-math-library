@@ -99,3 +99,11 @@ Phase-2 pair is needed. The active rectangle-density draft assumes full Choice,
 uses the completion theorem only through AC implies CC, and supplies the
 finite-complex representative construction explicitly. This path has no
 uncovered published mathematical prerequisite in the audited scope.
+
+Later correction: the visible threshold/null-support argument for
+`thm-nonnegative-integral-zero-iff-zero-almost-everywhere` remains sound, but a
+deeper foundation audit found its arbitrary simple-integral well-definedness
+supplier incomplete. That one item therefore moves from bounded clear to A-P;
+the other dispositions in this receipt are unchanged. Exact repair and
+deduplication evidence:
+`research/phase-2-frontier-22-published-nonnegative-integral-foundation-audit.md`.
