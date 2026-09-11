@@ -4,9 +4,20 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1409, U-C 0, A-R 189, A-P 207. The
+Current classifications: U-P 1408, U-C 0, A-R 189, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Finite-cardinality audit — 2026-09-11
+
+The pigeonhole lemma and finite-cardinality definition are bounded clear. The
+successor induction uses one explicit transposition and restriction, then gives
+all finite-size consequences without choice. Finiteness supplies existence of
+a natural size and pigeonhole supplies uniqueness. The lemma's old U-P row
+tracked only a page-prerequisite amendment and named no item defect, so that
+single row moves to clear; the definition is new. No current Step-5 blocker was
+found. Exact hashes, deduplication and limits are in
+`research/phase-2-frontier-22-published-finite-cardinality-audit.md`.
 
 ## Field-contract audit — 2026-09-11
 
@@ -28445,11 +28456,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,667 unique
+subsequently reconciled published IDs. It currently contains **2,668 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,667 indexed IDs are published; **13,263 published items remain outside this
+2,668 indexed IDs are published; **13,262 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28458,14 +28469,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1409 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1408 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 189 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 207 | Recorded direct review and an unresolved item-specific repair. |
 
-862 further reference-pool items have bounded no-repair-needed dispositions
+864 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,805 items and the expanded reference pool contains 2,667 unique items.
+1,804 items and the expanded reference pool contains 2,668 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28526,6 +28537,8 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `lem-pigeonhole` | Frontier-22 finite-cardinality audit 2026-09-11: successor induction normalizes by an explicit transposition and restricts to the predecessor; all five consequences follow without family choice. Its old U-P label tracked only a page prerequisite and named no item defect; moved U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-cardinality-audit.md`. |
+| `def-finite-cardinality` | Frontier-22 finite-cardinality audit 2026-09-11: finiteness supplies existence of an equinumerous natural and pigeonhole supplies uniqueness, so `|A|` is well defined without selecting a bijection. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-finite-cardinality-audit.md`. |
 | `lem-of-no-zero-divisors` | Frontier-22 field-contract audit 2026-09-11: multiplying `ab=0` by the inverse of a nonzero first factor gives the second factor zero under the current total multiplication contract. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-field-contract-audit.md`. |
 | `lem-of-mult-cancel` | Frontier-22 field-contract audit 2026-09-11: multiplying `ac=bc` by the inverse of the nonzero common factor and using associativity proves cancellation. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-field-contract-audit.md`. |
 | `def-archimedean-field` | Frontier-22 Archimedean-core audit 2026-09-11: cofinality is exactly the quantified canonical-natural condition, and the reciprocal remark follows from the published positive-inverse order law. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-archimedean-core-audit.md`. |
@@ -30694,7 +30707,6 @@ mathematical repairs. Evidence:
 | `lem-ph-adaptive-oracle-transcript-normal-form` | 51. Exact live-plan metadata resynchronization set |
 | `lem-ph-circuit-matrix-final-block-encoding` | 51. Exact live-plan metadata resynchronization set |
 | `lem-ph-quantifier-block-closure` | 51. Exact live-plan metadata resynchronization set |
-| `lem-pigeonhole` | 7.2 Page prerequisites, DC, and B-leaf repairs |
 | `lem-plane-edge-face-incidence` | Scaffold III.4.1 — plane dual dependency |
 | `lem-plane-face-handshake-by-girth` | Scaffold III.4.1 — plane dual dependency |
 | `lem-plane-graph-faces-are-finite-with-one-unbounded-face` | Scaffold III.4.1 — plane dual dependency |
