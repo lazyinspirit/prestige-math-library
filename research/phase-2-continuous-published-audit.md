@@ -19,7 +19,26 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: active martingale integral propagation
+## Latest checkpoint: conditional-analysis consequences
+
+Evidence:
+`research/phase-2-frontier-22-published-conditional-analysis-consequences-audit.md`.
+
+Nine new IDs, one bounded clear and one U-P item enter A-P along the exact
+conditional Fatou/DCT, uniform-integrability, conditional `L^p`, `L^2`
+projection and conditional Cauchy--Schwarz paths. The proofs are sound after the
+common integral repair. Absolute continuity of the integral also has a
+misplaced proof citation/terminator. The real-power convexity supplier remains
+unclassified pending a bounded calculus-supplier audit. No distinct active
+frontier blocker or new pair results.
+
+Post-batch target index: 2,841 unique published IDs; U-P 1,384, U-C 0,
+A-R 187, A-P 268 and 1,002 bounded clears; 13,089 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks must be rerun before commit. Next target is the deferred real-power
+convexity supplier audit unless a new exact reviewer handoff arrives.
+
+## Completed checkpoint: active martingale integral propagation
 
 Evidence:
 `research/phase-2-frontier-22-published-active-martingale-integral-propagation-audit.md`.
