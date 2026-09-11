@@ -8,6 +8,19 @@ Current classifications: U-P 1410, U-C 0, A-R 188, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Bundle local-matrix audit — 2026-09-11
+
+Four previously unclassified bundle-map interfaces are bounded clear. Smooth
+frames and trivializations give one another by finite coordinate matrices, with
+smooth inversion supplied by the already audited matrix lemma. A fibrewise
+linear map over a smooth base map has local form `(p,v)->(f(p),A(p)v)`; finite
+Euclidean algebra proves it smooth exactly when the entries are smooth. The
+same chart calculation proves the local-component criterion for sections.
+There is no circular appeal to a map already assumed smooth and no selection
+of a chart family. No current Step-5 blocker was found. Exact hashes,
+deduplication and limits are in
+`research/phase-2-frontier-22-published-bundle-local-matrix-audit.md`.
+
 ## Turing-machine variant audit — 2026-09-11
 
 Two previously unclassified high-use machine definitions are bounded clear.
@@ -28337,11 +28350,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,631 unique
+subsequently reconciled published IDs. It currently contains **2,635 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,631 indexed IDs are published; **13,299 published items remain outside this
+2,635 indexed IDs are published; **13,295 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28355,9 +28368,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 188 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 207 | Recorded direct review and an unresolved item-specific repair. |
 
-826 further reference-pool items have bounded no-repair-needed dispositions
+830 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,805 items and the expanded reference pool contains 2,631 unique items.
+1,805 items and the expanded reference pool contains 2,635 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28418,6 +28431,10 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `prop-smoothness-of-a-bundle-map-is-equivalent-to-smooth-local-matrices` | Frontier-22 bundle local-matrix audit 2026-09-11: fibrewise linearity gives the unique form `(p,v)->(f(p),A(p)v)`, whose smoothness is equivalent to smoothness of the finite coefficient list. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-bundle-local-matrix-audit.md`. |
+| `def-vector-bundle-map-over-a-smooth-base-map` | Frontier-22 bundle local-matrix audit 2026-09-11: the total-space commutation, smoothness and fibrewise linearity clauses coherently define a vector bundle map. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-bundle-local-matrix-audit.md`. |
+| `prop-smoothness-of-a-section-is-equivalent-to-smooth-local-components` | Frontier-22 bundle local-matrix audit 2026-09-11: one bundle chart identifies a section with its finite component tuple, so chart smoothness is exactly componentwise smoothness. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-bundle-local-matrix-audit.md`. |
+| `prop-local-frames-and-local-trivializations-are-equivalent-data` | Frontier-22 bundle local-matrix audit 2026-09-11: unique fibre coordinates and the published smooth-inversion interface give a chart from a smooth frame; pulling back the standard basis gives the inverse construction. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-bundle-local-matrix-audit.md`. |
 | `def-deterministic-one-tape-turing-machine` | Frontier-22 machine-variant audit 2026-09-11: finite control, alphabet data, distinct halting states and the total nonhalting transition function coherently define the base syntax; later items deliberately supply configurations/dynamics. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-turing-machine-variant-audit.md`. |
 | `def-multitape-and-nondeterministic-machines` | Frontier-22 machine-variant audit 2026-09-11: the positive-finite-tape product signature and finite instruction-set nondeterminism are coherent; the repaired later acceptance item supplies the shared rewrite/boundary rule and existential branch semantics. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-turing-machine-variant-audit.md`. |
 | `def-ext-via-a-projective-resolution-of-the-first-variable` | Frontier-22 supplied-projective Ext audit 2026-09-11: precomposition has the correct cochain degree and squares to zero; `Ext_P` explicitly retains the supplied datum and claims no resolution independence. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-supplied-projective-ext-audit.md`. |
