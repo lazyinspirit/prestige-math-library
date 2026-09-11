@@ -572,6 +572,22 @@ affect the correct identity consumed by the exponential proof. Counts are now
 clears; 13,417 remain outside the index. Evidence:
 `research/phase-2-frontier-22-published-core-analysis-probability-audit.md`.
 
+The active complex-Lp/completed-product pass adds three bounded clears and one
+A-P item. The two complex-Lp interfaces explicitly carry countable choice and
+correctly derive component completeness, common a.e. subsequences, finite-p
+density and the complex inner-product wrapper. The false claim of pointwise
+section measurability is correctly refuted by a null-strip example. Published
+`thm-tonelli-and-fubini-for-completed-product-measures`, however, writes both
+iterated integrals although exceptional sections may be nonmeasurable and
+never defines their values there; its nonnegative proof also applies Tonelli
+to an ae-equal representative before replacing it by its nonnegative part.
+State explicit zero conventions and use the positive part. Existing suppliers
+suffice. The active kernel draft already makes the product-measurable
+representative and zero-exception convention explicit, so there is no live
+blocker. Counts are now 2,517 unique published IDs: U-P 1,413, U-C 15, A-R
+187, A-P 191 and 711 bounded clears; 13,413 remain outside the index. Evidence:
+`research/phase-2-frontier-22-published-complex-lp-completed-product-audit.md`.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
