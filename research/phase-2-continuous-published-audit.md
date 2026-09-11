@@ -19,7 +19,23 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: unit-circle and quotient-circle interfaces
+## Latest checkpoint: principal-arctangent interfaces
+
+Evidence:
+`research/phase-2-frontier-22-published-arctangent-audit.md`.
+
+The principal tangent branch, inverse-tangent definition and calculus theorem
+are three new bounded clears. The tangent branch uses only the unaffected
+surjectivity of the A-P circle parametrization, while its positive derivative
+proves injectivity independently. Its two batch-3 draft consumers use the
+integral and range clauses soundly; no distinct active blocker or pair results.
+
+Post-batch target index: 2,937 unique published IDs; U-P 1,370, U-C 0,
+A-R 186, A-P 306 and 1,075 bounded clears; 12,993 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks passed before commit.
+
+## Completed checkpoint: unit-circle and quotient-circle interfaces
 
 Evidence:
 `research/phase-2-frontier-22-published-unit-circle-quotient-audit.md`.
@@ -1569,10 +1585,10 @@ supplier IDs, and each published ID must retain exactly one classification row.
    issues reported by the root worker, prioritizing items actually consumed by
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
-   then audit high-use active-frontier samples outside the 2,934-ID
+   then audit high-use active-frontier samples outside the 2,937-ID
    index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 12,996 published items
+No exhaustive discovery claim is authorized while 12,993 published items
 remain outside the index and dependency interfaces remain unaudited.

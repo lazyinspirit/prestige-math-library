@@ -8,6 +8,16 @@ Current classifications: U-P 1370, U-C 0, A-R 186, A-P 306. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Principal-arctangent interfaces — 2026-09-11
+
+The principal tangent branch, inverse-tangent definition and inverse-tangent
+calculus theorem are three new bounded clears. The branch theorem uses only the
+unaffected surjectivity clause of the A-P circle parametrization; positive
+derivative supplies injectivity independently. The inverse derivative, FTC,
+power-series and Abel endpoint arguments are sound. Two exact batch-3 consumers
+were read and have no additional blocker on this path. Exact hashes and scope:
+`research/phase-2-frontier-22-published-arctangent-audit.md`.
+
 ## Unit-circle and quotient-circle interfaces — 2026-09-11
 
 The sine/cosine parametrization is new A-P: proof 2.1 incorrectly treats the
@@ -28957,11 +28967,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,934 unique
+subsequently reconciled published IDs. It currently contains **2,937 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,934 indexed IDs are published; **12,996 published items remain outside this
+2,937 indexed IDs are published; **12,993 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28975,9 +28985,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 186 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 306 | Recorded direct review and an unresolved item-specific repair. |
 
-1,072 further reference-pool items have bounded no-repair-needed dispositions
+1,075 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,862 items and the expanded reference pool contains 2,934 unique items.
+1,862 items and the expanded reference pool contains 2,937 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -29038,6 +29048,9 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `lem-tangent-principal-branch-is-bijective` | Frontier-22 arctangent audit 2026-09-11: positive derivative gives strict increase, and the explicit positive-cosine unit-circle point supplies every real tangent value. It uses only unaffected surjectivity from the A-P circle parametrization; injectivity is independent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-arctangent-audit.md`. |
+| `def-principal-inverse-tangent` | Frontier-22 arctangent audit 2026-09-11: the branch bijection and continuous-inverse theorem give the exact inverse, range, continuity and monotonicity. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-arctangent-audit.md`. |
+| `thm-principal-inverse-tangent-calculus` | Frontier-22 arctangent audit 2026-09-11: inverse differentiation, the FTC primitive, compact termwise integration and Abel endpoint passage prove all stated clauses. New bounded clear; two batch-3 uses checked. Exact hash/scope: `research/phase-2-frontier-22-published-arctangent-audit.md`. |
 | `thm-sine-cosine-zero-sets-and-fundamental-period` | Frontier-22 unit-circle audit 2026-09-11: integer shifts, the zero-set reduction and exclusion of `pi` as a common period are sound. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-unit-circle-quotient-audit.md`. |
 | `thm-sine-and-cosine-addition-formulas` | Frontier-22 unit-circle audit 2026-09-11: the harmonic-IVP uniqueness proof gives both addition identities. New bounded clear and repair supplier. Exact hash/scope: `research/phase-2-frontier-22-published-unit-circle-quotient-audit.md`. |
 | `thm-sine-and-cosine-subtraction-formulas` | Frontier-22 unit-circle audit 2026-09-11: parity applied to the addition formulas gives both subtraction identities. New bounded clear and exact repair supplier. Exact hash/scope: `research/phase-2-frontier-22-published-unit-circle-quotient-audit.md`. |
