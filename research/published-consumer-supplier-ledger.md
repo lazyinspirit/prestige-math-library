@@ -4,9 +4,30 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1411, U-C 15, A-R 187, A-P 192. The
+Current classifications: U-P 1411, U-C 11, A-R 187, A-P 196. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Group-e UCT and partition reconciliation — 2026-09-11
+
+Four existing U-C cohomology targets move to A-P after complete target and
+exact used-interface review. The extension-map lemma omits the AC/DC contracts
+of its free-submodule and balanced-Ext suppliers, does not prove descent or
+injectivity of the representative formula, and does not prove the naturality
+asserted in its Statement. The general UCT uses that exact map and compresses
+the same kernel calculation. Its explicit AC hypothesis is adequate; a missing
+direct AC edge alone is not a second defect. The nonnatural splitting formula
+is correct but repeats the still-affected exact sequence. The finite-dimensional
+field corollary silently invokes two AC-qualified general theorems and can
+instead be proved by finite basis extension.
+
+The compact-CW lemma and three boundaryless partition targets were reread and
+exactly match their existing single A-P records. Their current hashes and
+precise choice uses are reconfirmed without a new row or classification move.
+Active group-e drafts supply AC or local finite-dimensional arguments, so no
+new live blocker or pair is identified. Exact proof calculations, supplier
+states, deduplication and limits are in
+`phase-2-next-20-published-group-e-uct-partition-reconciliation.md`.
 
 ## Local continuity and locally finite sums audit — 2026-09-11
 
@@ -472,7 +493,9 @@ relevant chain degrees to prove surjectivity and identify coboundaries with
 functionals vanishing on cycles. That finite argument avoids arbitrary-rank
 injectivity and needs no new Phase2 pair. Alternatively explicitly declare
 the inherited AC assumption and dependency, after repairing the already
-recorded UCT interface. Class U-C pending complete repair audit.
+recorded UCT interface. It is now A-P after the complete target and exact
+used-interface audit in
+`phase-2-next-20-published-group-e-uct-partition-reconciliation.md`.
 
 The new unrestricted field-cohomology duality theorem in batch8 is an
 escalated scaffold and is not a published repair supplier for this earlier
@@ -605,9 +628,11 @@ execution decision; these published defects remain open regardless of it.
 ## Cohomology extension-map prerequisite findings — 2026-09-11
 
 Batch8 full written-interface audit and source comparison:
-`phase-2-next-20-batch-8.notes.md`, Published defects. These are three newly
-indexed U-C targets, pending repair audit; no published content changed and
-no independent judgment claimed.
+`phase-2-next-20-batch-8.notes.md`, Published defects. These three targets were
+initially indexed U-C and now move to A-P after the complete target and exact
+used-interface audit in
+`phase-2-next-20-published-group-e-uct-partition-reconciliation.md`; no
+published content changed and no independent judgment is claimed.
 
 `lem-the-cohomology-universal-coefficient-extension-map`: proof 2.1 omits
 well-definedness under changing psi by a map restricted from Z_(n-1). With a
@@ -626,10 +651,11 @@ Theorem 27.1 full proof, printed pp.73–75, especially p.74's extension Z→C.
 
 `thm-universal-coefficient-theorem-for-cohomology-over-a-pid` and
 `thm-the-cohomology-universal-coefficient-sequence-splits-nonnaturally` use that
-extension map and inherit the actual well-definedness gap. They state AC but
-omit direct `def-axiom-of-choice` dependencies. Repair the supplier, propagate
-the exact contracts and then recheck quotient/splitting formulas. No new
-Phase 2 prerequisite pair is needed. The selected topological UCT strategy
+extension map and inherit the actual well-definedness gap. They state AC, so
+under the adequate-implicit-use rule their missing direct AC edges are optional
+declaration cleanup rather than separate defects. Repair the supplier,
+propagate the exact contracts and then recheck quotient/splitting formulas. No
+new Phase 2 prerequisite pair is needed. The selected topological UCT strategy
 supplies its own correct extension map and does not assume these defects away.
 
 ## Published boundary-label repair — 2026-09-10
@@ -28111,9 +28137,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
 | U-P | Unaudited and potentially defective items | 1411 | Evidence/role reconciliation incomplete; not a defect verdict. |
-| U-C | Unaudited and confirmed defective items | 15 | Confirmed mathematical or prerequisite defect; repair audit pending. |
+| U-C | Unaudited and confirmed defective items | 11 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 192 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 196 | Recorded direct review and an unresolved item-specific repair. |
 
 733 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
@@ -28967,6 +28993,10 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `lem-the-cohomology-universal-coefficient-extension-map` | Group-e UCT reconciliation 2026-09-11: target omits AC required by its free-cycle/boundary supplier and DC plus supplied-resolution data required by balanced Ext. Proof 2.1 does not prove descent, injectivity or naturality: for a cycle projection `pi`, changing `psi` by `g|B` changes `psi d` by `delta(g pi)`; conversely a primitive restricts to the required extension on cycles. Add AC and use the published PID-complex decomposition/projective-resolution interfaces, or state the exact balanced-Ext data and comparisons. U-C to A-P; draft singular UCT is not a published backward repair. Exact hashes/limits: `research/phase-2-next-20-published-group-e-uct-partition-reconciliation.md`. |
+| `thm-universal-coefficient-theorem-for-cohomology-over-a-pid` | Group-e UCT reconciliation 2026-09-11: explicit AC is adequate for choice, but the proof directly uses the affected extension map and compresses the same kernel quotient. A zero-evaluation cocycle vanishes on cycles and factors through `d_n`; identifying coboundaries with restrictions from `Z_{n-1}` requires a cycle projection. Repair the preceding map, write this calculation and check naturality. U-C to A-P; no new pair. Exact hashes/limits: `research/phase-2-next-20-published-group-e-uct-partition-reconciliation.md`. |
+| `thm-the-cohomology-universal-coefficient-sequence-splits-nonnaturally` | Group-e UCT reconciliation 2026-09-11: its explicit-AC section formula `sigma(f)=[f q pi]` is sound, but its Statement repeats and directly depends on the still-affected full UCT exact sequence. Retain that formula after repairing the left injection/exactness; the absent direct AC edge is optional metadata under the adequate-implicit-use rule. U-C to A-P; no independent section defect or new pair. Exact hash/path: `research/phase-2-next-20-published-group-e-uct-partition-reconciliation.md`. |
+| `cor-cohomology-over-a-field-is-dual-to-homology-for-finite-dimensional-complexes` | Group-e UCT reconciliation 2026-09-11: target states no choice but invokes the AC-qualified general UCT and arbitrary-module injectivity theorem. Prove evaluation bijective directly by finite basis extension in degrees `n` and `n-1`, including the factor-through-boundaries coboundary argument, or add AC after the general UCT repair. U-C to A-P; finite-dimensional theorem remains true and needs no new supplier. Exact hash/path: `research/phase-2-next-20-published-group-e-uct-partition-reconciliation.md`. |
 | `thm-krull-schmidt-for-finite-dimensional-kg-modules` | Active Green-foundation audit 2026-09-11: proof 1.1 starts induction on composition length and proof 2.1 uses finite-length stabilization, but L1's cited `thm-composition-series-iff-noetherian-and-artinian` obtains its converse only under DC. The target neither assumes DC nor derives finite length from finite dimension. Repair choice-free by induction on supplied vector-space dimension and dimension-bounded kernel/image stabilization; an invertible composite then splits one indecomposable summand off the other before cancellation. Existing published interfaces suffice; theorem remains true and active Green consumers explicitly assume AC. U-P to A-P, exact hashes/dedup/limits: `research/phase-2-next-20-published-green-foundation-audit.md`. |
 | `thm-tonelli-and-fubini-for-completed-product-measures` | Frontier-22 completed-product audit 2026-09-11: both statement parts display iterated integrals although exceptional sections may be nonmeasurable, so their inner integrals are undefined there; neither statement nor proof assigns zero on the measurable factor-null exceptional sets. In the nonnegative branch, the completion representative is only ae equal to nonnegative `f`, but proof 2.1 applies Tonelli before replacing it by `g^+`. Name the exceptional sets, define section-integral functions as zero there, and use the positive part; existing published completion, Tonelli/Fubini and ae interfaces suffice. The active kernel draft already chooses a product-measurable representative and explicitly installs the zero convention, so no live blocker/new pair. Exact hashes/consumer path/dedup: `research/phase-2-frontier-22-published-complex-lp-completed-product-audit.md`. |
 | `thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary` | Connection-author partition reconciliation 2026-09-11: the statement explicitly assumes `AC_omega`, but proofs 1.1--2.1 do not construct or cite a boundary half-ball cover/shrinking and inherit the already-A-P boundaryless selection route while asserting the same choice bound. The conclusion also uses a partition definition whose exact domain is a boundaryless smooth manifold. Extend that definition to boundary objects, repair the upstream cover/shrinking/partition contracts, and give the all-eligible-half-ball plus countable annular/bump selection under `AC_omega`. Existing suppliers suffice; the live full-AC connection proof supplies its argument locally, so no new pair/current blocker. Exact hash/clauses/dedup: `research/phase-2-next-20-published-boundary-partition-audit.md`. |
@@ -29170,11 +29200,7 @@ owner's scan policy.
 | Published item | Exact prerequisite debt at classification |
 |---|---|
 | `def-metric-topology` | Scalar-topology audit: unqualified neighbourhood is defined as only an open set containing the point, conflicting with later canonical `def-neighbourhood-top`, where neighbourhoods need not be open. Rewrite as “open neighbourhood” or state the ball-base fact. Metric topology itself remains sound; no Phase-2 pair. Exact hash/evidence: research/phase-2-next-20-published-scalar-topology-audit.md. |
-| `cor-cohomology-over-a-field-is-dual-to-homology-for-finite-dimensional-complexes` | Batch8/root2026-09-11: finite-dimensional statement invokes choice-bearing general UCT/injectivity without assumptions. Local finite-basis evaluation proof can repair it; no new Phase2 supplier. See Finite-dimensional cohomology duality choice interface. |
 | `thm-doob-dynkin-lemma` | Batch3/root full target reading 2026-09-11: rational Borel lifts selected simultaneously without a choice contract. Existing def-countable-choice or def-axiom-of-choice suffices; no new pair. See Doob–Dynkin choice-interface finding. |
-| `thm-the-cohomology-universal-coefficient-sequence-splits-nonnaturally` | Batch8 2026-09-11 confirmed extension-map well-definedness/choice-contract debt; exact local earlier HA suppliers and repair identity recorded in Cohomology extension-map prerequisite findings and phase-2-next-20-batch-8.notes.md. New topological supplier is scaffolded/escalated, never a forward repair premise. No new Phase 2 pair. |
-| `thm-universal-coefficient-theorem-for-cohomology-over-a-pid` | Batch8 2026-09-11 confirmed extension-map well-definedness/choice-contract debt; exact local earlier HA suppliers and repair identity recorded in Cohomology extension-map prerequisite findings and phase-2-next-20-batch-8.notes.md. New topological supplier is scaffolded/escalated, never a forward repair premise. No new Phase 2 pair. |
-| `lem-the-cohomology-universal-coefficient-extension-map` | Batch8 2026-09-11 confirmed extension-map well-definedness/choice-contract debt; exact local earlier HA suppliers and repair identity recorded in Cohomology extension-map prerequisite findings and phase-2-next-20-batch-8.notes.md. New topological supplier is scaffolded/escalated, never a forward repair premise. No new Phase 2 pair. |
 | `thm-the-cayley-graph-of-a-free-group-with-respect-to-a-free-basis-is-a-tree` | Confirmed wrong quotient order in cycle labels; actual right-edge increment is `g_j^(-1)g_(j+1)`, whose ordered product telescopes. Proof 1.2 instead uses `g_(j+1)g_j^(-1)`: on the edge `a -> ab` this is `aba^(-1)`, a reduced length-three word rather than the basis letter `b`. Existing `thm-reduced-words-form-the-free-group` and `def-cayley-graph` suffice; no Phase 2 pair. Root full target read; exact author reconfirmation: research/phase-2-next-20-step3b-d.md. See also Hyperbolic and finite-Weyl scaffold audit findings — 2026-09-11 and batch6/10 reports. |
 | `def-relative-projectivity` | Batch11/root 2026-09-11: explicit AC basis paragraph lacks direct def-axiom-of-choice dependency. Published supplier exists; preserve stated assumption. Confirmed declaration defect, repair audit pending; no Phase 2 pair. See Green-correspondence prerequisite findings and phase-2-next-20-batch-11.notes.md. |
 | `def-c-zero-and-ell-infinity` | REOPENED2026-09-10: Step3b-b full actual definition reading, confirmed by root: complex scalar triangle inequality and homogeneity have no declared complex convention/modulus supplier. Prior LUB repair remains valid. Add earlier published rem-real-and-complex-normed-space-convention and lem-complex-conjugation-and-modulus-laws, preserve choice-free construction, then targeted checks and canonical sync. No unpublished Phase2 supplier. Live sequential counterexample repaired locally; source report research/phase-2-catchup-24-step3b-b.md. |

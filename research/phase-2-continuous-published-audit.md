@@ -19,7 +19,31 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: local continuity audit
+## Latest checkpoint: group-e UCT and partition reconciliation
+
+Evidence:
+`research/phase-2-next-20-published-group-e-uct-partition-reconciliation.md`.
+
+Four exact UCT targets move from U-C to A-P after full-target and used-interface
+review. The extension-map lemma omits its AC/DC contracts and the descent,
+injectivity and naturality calculations. The general UCT uses that exact map;
+its explicit AC is adequate under the implicit-use rule, but its kernel proof
+still needs the cycle projection. The nonnatural splitting formula is sound but
+inherits the affected exact sequence. The finite-dimensional field corollary
+silently invokes two AC-qualified general results and admits a direct finite
+basis proof.
+
+The compact-CW lemma and three boundaryless partition targets were reread and
+match their existing A-P mechanisms, so no row or count changes for those
+reconfirmations. Active group-e drafts supply AC or local finite-dimensional
+arguments; no live blocker or new pair was found.
+
+Post-batch target index: 2,538 unique published IDs; U-P 1,411, U-C 11,
+A-R 187, A-P 196 and 733 bounded clears. Recount and cross-class deduplication
+must be rerun before commit. Next target is the latest exact author handoff or
+the highest-use published frontier dependency outside the index.
+
+## Completed checkpoint: local continuity audit
 
 Evidence: `research/phase-2-frontier-22-published-local-continuity-audit.md`.
 
