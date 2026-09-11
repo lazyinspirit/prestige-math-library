@@ -80,14 +80,18 @@ bijection and smoothness comparison are sound, and no separate defect was
 found. It remains a U-P direct impact candidate until the supplier's repaired
 choice contract is propagated or a choice-free construction is supplied.
 
-The same clause is live in the current draft definitions of a connection and
-dual connection, the draft difference-of-connections proposition and the
-draft finite tensor-product lemma. The supervising worker authorized the
-choice-free construction above to be installed locally after the live Step-5b
-lead exits. Thus the published A-P gap remains open, but there is no unresolved
-current-frontier mathematical prerequisite once that local proof is recorded.
-Draft IDs are not entered in the published-item index, and a draft repair does
-not close this published finding.
+The same clause was live in the draft definitions of a connection and dual
+connection, the draft difference-of-connections proposition and the draft
+finite tensor-product lemma. After the live Step-5b lead exited, the authorized
+choice-free construction above was installed in all four drafts. All four now
+route through the local construction rather than cite the affected published
+existence clause. The exact 62 post-5a affected consumers were read in full and
+their unchanged local matrix, pairing, currying, transport and coordinate uses
+were reconciled. The requested focused and global checks passed. Thus the
+published A-P gap remains open, but there is no unresolved current-frontier
+mathematical prerequisite. Draft IDs are not entered in the published-item
+index, and a draft repair does not close this published finding. Completion
+evidence: `research/phase-2-next-20-hom-bundle-repair-completion.md`.
 
 ## Bounded clears
 

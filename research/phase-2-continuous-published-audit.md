@@ -871,9 +871,10 @@ use the affected existence clause and their no-choice claims were reported to
 the supervising worker immediately. A complete choice-free local repair now
 uses the open quotient of the finite-product subspace of source frames and
 image tuples; images of its countable base form a quotient base. The repair is
-authorized for the drafts, so no live mathematical blocker remains. The
-published proof stays A-P until repaired. Existing published suppliers suffice;
-no new pair is needed. Evidence:
+now installed in all four affected drafts, and the 62 exact post-5a consumers
+have full-read impact dispositions with the requested checks passing, so no
+live mathematical blocker remains. The published proof stays A-P until
+repaired. Existing published suppliers suffice; no new pair is needed. Evidence:
 `research/phase-2-frontier-22-published-dual-hom-bundle-audit.md`.
 
 The vector-field bracket batch adds six clear IDs and moves the derivation-to-
