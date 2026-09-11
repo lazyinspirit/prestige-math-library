@@ -28038,11 +28038,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,502 unique
+subsequently reconciled published IDs. It currently contains **2,513 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,502 indexed IDs are published; **13,428 published items remain outside this
+2,513 indexed IDs are published; **13,417 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28056,9 +28056,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 190 | Recorded direct review and an unresolved item-specific repair. |
 
-697 further reference-pool items have bounded no-repair-needed dispositions
+708 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,805 items and the expanded reference pool contains 2,502 unique items.
+1,805 items and the expanded reference pool contains 2,513 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28862,6 +28862,19 @@ owner's scan policy.
 | `lem-singular-planar-diagrams-have-controlled-coarse-disk-thickenings` | Active HG planar-filling audit 2026-09-11: complete item read. Compatible vertex, band and cap fans contribute `8E+8E+4I`; labels give edge bound `max(1,L)`, boundary repetitions preserve occurrences, and the isolated zero-edge case supplies four triangles. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-planar-filling-audit.md`. |
 | `lem-relator-disks-give-area-controlled-coarse-fillings` | Active HG planar-filling audit 2026-09-11: complete item read. A least relator-expression length, controlled diagram and thickening give the printed area bound. Consistent corner endpoint choices turn arbitrary geodesic sides into a null whole-edge word of length at most `P+6`, with finite arc vertices within three of the sides. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-planar-filling-audit.md`. |
 | `thm-linear-relator-area-implies-slim-geodesic-triangles` | Active HG planar-filling audit 2026-09-11: complete theorem and exact filling/minsize/cone clauses read. Its substitutions give the printed `A(K,L) sqrt(P+7)+B(L)` bound; the explicit epsilon estimate is sublinear, and the AC-qualified cone criterion yields uniform slimness. Zero constants and `P=0` are covered. This reconciles the older planned-item mention. No repair or new pair. Exact hash/scope/dedup: `research/phase-2-next-20-published-hg-planar-filling-audit.md`. |
+
+
+| `thm-sine-and-cosine-derivatives` | Frontier-22 active direct-supplier audit 2026-09-11: complete target and its three direct power-series interfaces read. Infinite radius and termwise differentiation give the two derivative series after factorial cancellation/reindexing; evaluation at zero gives the initial values. This is the exact component-derivative clause used by current characteristic-function, Levy, sine-integral and Schwartz drafts. No repair or choice use in this scope. Exact hash/uses/dedup: `research/phase-2-frontier-22-published-core-analysis-probability-audit.md`. |
+| `thm-complex-exponential-addition-and-real-extension` | Frontier-22 active direct-supplier audit 2026-09-11: absolute convergence licenses the complex Cauchy product, the finite binomial identity gives each coefficient, and the embedded real series agrees termwise with real exponential. The separately A-P binomial theorem's `n=0` wording error does not affect its correct displayed identity or this use. No repair in this scope. Exact hash/uses/dedup: `research/phase-2-frontier-22-published-core-analysis-probability-audit.md`. |
+| `cor-complex-exponential-cartesian-form-modulus-and-eulers-identity` | Frontier-22 active direct-supplier audit 2026-09-11: addition and Euler's formula give the Cartesian identity; multiplicative modulus, Pythagoras and real-exponential positivity give `|exp(x+iy)|=e^x`; the published quarter-turn values give Euler's identity. Every exact used clause was read and current consumers use these clauses directly. No repair in this scope. Exact hash/uses/dedup: `research/phase-2-frontier-22-published-core-analysis-probability-audit.md`. |
+| `lem-conditional-expectation-is-unique-almost-surely` | Frontier-22 conditional-expectation audit 2026-09-11: applying the common event-integral identity to the positive and negative discrepancy sets makes both parts vanish almost everywhere. This supplies the exact uniqueness clause used by the current conditional-law and martingale drafts. No repair or choice use. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-core-analysis-probability-audit.md`. |
+| `thm-conditional-expectation-exists-by-radon-nikodym` | Frontier-22 conditional-expectation audit 2026-09-11: under explicit AC, positive/negative indefinite integrals give finite measures absolutely continuous with respect to restricted probability; the already-A-R RN theorem supplies finite real densities whose difference has the required event integrals. The current drafts also state AC. No repair in this used scope. Exact hash/path/dedup: `research/phase-2-frontier-22-published-core-analysis-probability-audit.md`. |
+| `def-conditional-expectation-as-an-ae-class` | Frontier-22 conditional-expectation audit 2026-09-11: the fully read existence and uniqueness interfaces determine one `L^1` class, and ae-invariance of the integral makes it independent of the input representative. The inherited AC assumption and supplier are explicit. No repair in the current ae-class scope. Exact hash/path/dedup: `research/phase-2-frontier-22-published-core-analysis-probability-audit.md`. |
+| `thm-basic-algebra-and-order-properties-of-conditional-expectation` | Frontier-22 conditional-expectation audit 2026-09-11: event-integral identities prove linearity; discrepancy-set tests prove positivity/order. For the delicate strict clause, if `W>0` ae and `T=E[W|G]`, then `{T=0}` has zero integral of `W` and hence zero probability. Explicit AC covers existence. No repair in the exact clauses used by current martingale and conditional-law drafts. Evidence/dedup: `research/phase-2-frontier-22-published-core-analysis-probability-audit.md`. |
+| `lem-conditioning-a-known-variable-and-an-independent-variable` | Frontier-22 conditional-expectation audit 2026-09-11: a known integrable variable meets the version definition; rectangle independence extends from Borel indicators through nonnegative simple approximation/MCT and then positive/negative parts to give the constant version `EX`. Explicit AC covers existence. No repair in the active known-variable/independence uses. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-core-analysis-probability-audit.md`. |
+| `thm-indefinite-integral-of-a-nonnegative-function-is-a-measure` | Frontier-22 measure-supplier audit 2026-09-11: finite disjoint unions increase to the countable union, and pointwise MCT plus finite additivity identifies the limit with the nonnegative extended series. This supplies the exact density-measure clause used by conditional expectation and density inversion. No repair or arbitrary choice in this scope. Exact hash/uses/dedup: `research/phase-2-frontier-22-published-core-analysis-probability-audit.md`. |
+| `thm-finite-and-countable-subadditivity-of-measures` | Frontier-22 measure-supplier audit 2026-09-11: least-index disjointification preserves the union; countable additivity and termwise monotonicity give the inequality, including the empty finite case. Current drafts use its finite-union and countable-null-union clauses exactly. No repair or choice use. Exact hash/uses/dedup: `research/phase-2-frontier-22-published-core-analysis-probability-audit.md`. |
+| `thm-nonnegative-weighted-sums-of-measures` | Frontier-22 measure-supplier audit 2026-09-11: separate zero, finite-positive and positive-infinity scalar branches avoid undefined extended multiplication; each is a measure, and nonnegative double-series Tonelli proves weighted-sum additivity. This supplies the exact discrete-law construction in current examples. No repair or arbitrary choice. Exact hash/uses/dedup: `research/phase-2-frontier-22-published-core-analysis-probability-audit.md`. |
 
 
 ### A-P — Audited items pending Phase 3 repair

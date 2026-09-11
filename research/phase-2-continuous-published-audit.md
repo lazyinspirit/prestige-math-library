@@ -559,6 +559,19 @@ finding closes and no classification/count changes. Nine existing ledger rows
 were extended after exact-ID/mechanism/supplier deduplication. Evidence:
 `research/phase-2-next-20-published-finite-weyl-draft-supplier-map.md`.
 
+An active-frontier direct-supplier batch adds eleven bounded clears: sine and
+cosine derivatives, complex exponential addition/real extension, Cartesian
+form/modulus/Euler identity, the conditional-expectation ae-class definition,
+existence, uniqueness, basic algebra/order and known/independent-variable
+rules, and three measure construction/subadditivity suppliers. Complete target
+proofs and exact used clauses were read. AC is explicit throughout the RN and
+conditional-expectation route; the measure and power-series arguments use no
+arbitrary selection. The existing binomial base-case wording defect does not
+affect the correct identity consumed by the exponential proof. Counts are now
+2,513 unique published IDs: U-P 1,413, U-C 15, A-R 187, A-P 190 and 708 bounded
+clears; 13,417 remain outside the index. Evidence:
+`research/phase-2-frontier-22-published-core-analysis-probability-audit.md`.
+
 ## Next target
 
 1. Reconcile any further exact original-next-20 or Fourier published-interface
