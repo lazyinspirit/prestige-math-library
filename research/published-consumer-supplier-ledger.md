@@ -4,9 +4,20 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1379, U-C 0, A-R 187, A-P 285. The
+Current classifications: U-P 1376, U-C 0, A-R 186, A-P 288. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Product-section and measure audit — 2026-09-11
+
+Two new IDs and one U-P row are bounded clears for the ordinary product-
+measurable set/function section interfaces. The repaired section-measure
+measurability proposition remains A-R. The iterated-section theorem reopens
+from A-R to A-P because its repaired proof now uses the affected MCT/integral
+chain; the product-measure definition and existence theorem move U-P to A-P for
+the same path. This is distinct from the completed-product exceptional-section
+finding and adds no new frontier blocker or pair. Exact evidence:
+`research/phase-2-frontier-22-published-product-section-measure-audit.md`.
 
 ## Tonelli, expectation and normal-law propagation audit — 2026-09-11
 
@@ -28953,6 +28964,9 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-sections-of-sets-and-functions-on-products` | Frontier-22 product-section audit 2026-09-11: Horizontal/vertical set and function sections freeze the stated variable with the correct domains. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-product-section-measure-audit.md`. |
+| `thm-sections-of-product-measurable-sets-are-measurable` | Frontier-22 product-section audit 2026-09-11: For a fixed parameter, sets with measurable sections form a sigma-algebra containing every rectangle. U-P to bounded clear; prior impact retained. Exact hash/scope: `research/phase-2-frontier-22-published-product-section-measure-audit.md`. |
+| `thm-sections-of-product-measurable-functions-are-measurable` | Frontier-22 product-section audit 2026-09-11: Section preimages are sections of product-measurable preimages, so the generating-family criterion applies. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-product-section-measure-audit.md`. |
 | `thm-arithmetic-and-lattice-operations-preserve-measurability` | Frontier-22 density/CDF/Stieltjes audit 2026-09-11: threshold identities handle scalar, lattice and defined sums; positive products respect the zero-times-infinity convention, and positive/negative parts avoid undefined infinity subtraction. U-P to bounded clear; prior monitoring row retained. Exact hash/scope: `research/phase-2-frontier-22-published-density-cdf-stieltjes-audit.md`. |
 | `def-real-power` | Frontier-22 real-power/convexity audit 2026-09-11: Positive-base exponential/logarithm definition and restricted zero-base convention are coherent. U-P to bounded clear; prior forward-order impact retained. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
 | `thm-real-power-continuity-and-derivatives` | Frontier-22 real-power/convexity audit 2026-09-11: Chain rule gives both displayed derivatives on the stated domains; the derivative-algebra alias collision does not affect this exact-ID use. U-P to bounded clear; prior Marcinkiewicz impact retained. Exact hash/scope: `research/phase-2-frontier-22-published-real-power-convexity-calculus-audit.md`. |
@@ -30030,6 +30044,9 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `thm-iterated-section-measures-agree-on-product-measurable-sets` | Frontier-22 product-section audit 2026-09-11: Its installed relative-complement/decreasing-intersection repair remains sound, but proofs 2.1 and 4.1 use the A-P nonnegative MCT/integral chain. Reopen A-R to A-P; prior repair receipt retained. Apply the common integral repair; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-product-section-measure-audit.md`. |
+| `def-product-measure-on-sigma-finite-spaces` | Frontier-22 product-section audit 2026-09-11: Its defining section integrals use the affected iterated-section theorem; section-measure measurability remains sound and repaired. U-P to A-P. Apply the common integral repair; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-product-section-measure-audit.md`. |
+| `thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique` | Frontier-22 product-section audit 2026-09-11: Rectangle/uniqueness arguments are sound, but countable additivity in proof 1.2 uses affected finite nonnegative additivity/MCT through the product definition. U-P to A-P. Apply the common integral repair; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-product-section-measure-audit.md`. |
 | `thm-tonelli-theorem-for-sigma-finite-product-spaces` | Frontier-22 Tonelli/expectation audit 2026-09-11: Indicator/simple equality is sound after simple-integral well-definedness; proof 2.1 uses affected MCT for sections and product integral. Apply the common integral repair. Clear to A-P; prior receipt retained, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-tonelli-expectation-normal-propagation-audit.md`. |
 | `thm-fubini-theorem-for-l-one-on-sigma-finite-product-spaces` | Frontier-22 Tonelli/expectation audit 2026-09-11: Absolute section integrability uses affected Tonelli/finite-ae criteria and recombination uses affected integrability, `L1` linearity and triangle. Exceptional-set zero filling is measurable. Apply the common integral repair. Clear to A-P; prior receipt retained, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-tonelli-expectation-normal-propagation-audit.md`. |
 | `thm-change-of-variables-for-expectation` | Frontier-22 Tonelli/expectation audit 2026-09-11: The simple pushforward identity is correct; nonnegative limits and signed/complex decomposition use affected simple/nonnegative integration, MCT, expectation and `L1` linearity. Apply the common integral repair. Clear to A-P; prior receipt retained, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-tonelli-expectation-normal-propagation-audit.md`. |
@@ -30533,7 +30550,6 @@ mathematical repairs. Evidence:
 | `thm-chain-conditions-in-short-exact-sequences` | Codex; Owner-authorized choice-free finite-generation and DCC repair; local checks only, no independent judge |
 | `thm-convolution-with-a-mollifier-is-smooth-and-differentiates-under-the-integral-sign` | Codex; Owner-authorized measurable-input and derivative-continuity repair; local checks only, no independent judge |
 | `thm-equivalent-characterizations-of-noetherian-modules` | gpt-5.6-sol; owner-authorized-published-repair |
-| `thm-iterated-section-measures-agree-on-product-measurable-sets` | Codex; Owner-authorized missing decreasing-intersection argument; local checks only, no independent judge |
 
 | `prop-positive-tor-vanishes-when-the-resolved-variable-is-projective` | Root authorized local repair 2026-09-10: arbitrary supplied resolution, finite-degree projective splitting and explicit tensor boundary witness in both hands, no AC/DC. Added earlier published projective lifting and tensor universal-property suppliers; canonical/live/prose synchronized. Precheck and real KaTeX/YAML rendercheck pass, not independent review. Receipt research/phase-2-catchup-24-projective-tor-root-repair.md. |
 
@@ -30711,7 +30727,6 @@ mathematical repairs. Evidence:
 | `def-prefix-free-machine-and-prefix-complexity` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-private-coin-public-coin-and-arthur-merlin-protocol` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-probability-convergence-metric` | 0A.2 Exact Phase-3 defects in published content |
-| `def-product-measure-on-sigma-finite-spaces` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `def-projective-indecomposable-characters-and-cartan-invariants` | Transitive consumers (166), grouped by home page |
 | `def-promise-preserving-reduction` | 51. Exact live-plan metadata resynchronization set |
 | `def-promise-problem` | 51. Exact live-plan metadata resynchronization set |
@@ -31866,14 +31881,12 @@ mathematical repairs. Evidence:
 | `thm-schur-index-as-minimal-realization-multiplicity` | Transitive consumers (166), grouped by home page |
 | `thm-schur-index-equals-division-algebra-index` | Transitive consumers (166), grouped by home page |
 | `thm-second-column-orthogonality-relation-for-irreducible-complex-characters` | finite-averaging-and-character-theory-prerequisites |
-| `thm-sections-of-product-measurable-sets-are-measurable` | Nonmeasurable-set counterexample: missing witness supply |
 | `thm-segre-image-rank-one-minors` | AV-1 draft-page impact partition (Phase 3 only) |
 | `thm-separation-of-an-open-convex-set-and-a-point` | norming-and-separation-under-hahn-banach |
 | `thm-separation-of-disjoint-convex-sets-one-open` | norming-and-separation-under-hahn-banach |
 | `thm-serre-normality-criterion` | Item-exact impact of the Dependent Choice rehome |
 | `thm-shapovalov-determinant-formula` | Phase-3 local Shapovalov suppliers (not Phase 2) |
 | `thm-shoenfield-limit-lemma` | def-numbering-of-partial-computable-functions (home: acceptable-numberings-smn-and-the-recursion-theorem) |
-| `thm-sigma-finite-product-measure-exists-is-rectangular-and-is-unique` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `thm-sigma-k-equals-pi-k-implies-ph-collapse` | 51. Exact live-plan metadata resynchronization set |
 | `thm-simple-objects-of-category-o-are-highest-weight-modules` | Cross-category Phase-2 roots and their published impact |
 | `thm-simplicial-and-singular-homology-agree-for-simplicial-complexes` | Step-3 scope intervention — actual suppliers versus page-wide debt |

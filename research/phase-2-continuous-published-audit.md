@@ -19,7 +19,25 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: Tonelli, expectation and normal laws
+## Latest checkpoint: product sections and measure
+
+Evidence:
+`research/phase-2-frontier-22-published-product-section-measure-audit.md`.
+
+Two new IDs and one U-P row are bounded clears for ordinary product-measurable
+sections. The repaired section-measure measurability proposition remains A-R.
+The iterated-section theorem reopens A-R to A-P through the affected MCT/
+integral chain; the product-measure definition and existence theorem move U-P
+to A-P on that path. This remains separate from the completed-product
+exceptional-section defect and adds no frontier blocker or pair.
+
+Post-batch target index: 2,874 unique published IDs; U-P 1,376, U-C 0,
+A-R 186, A-P 288 and 1,024 bounded clears; 13,056 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks must be rerun before commit. Next target is any new exact reviewer
+handoff, then the next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: Tonelli, expectation and normal laws
 
 Evidence:
 `research/phase-2-frontier-22-published-tonelli-expectation-normal-propagation-audit.md`.
