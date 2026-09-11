@@ -19,7 +19,26 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: Green-foundation audit
+## Latest checkpoint: set-recursion audit
+
+Evidence: `research/phase-2-frontier-22-published-set-recursion-audit.md`.
+
+Eight fully read well-order and setlike-recursion interfaces enter the bounded
+clear census. Transfinite recursion collects uniquely specified attempts by
+Replacement; the setlike chain constructs set-sized predecessor cones and
+assembles compatible unique attempts by well-founded induction. No family of
+nonunique witnesses is selected, and the general setlike chain does not invoke
+ambient Foundation. These are exact suppliers for active forcing,
+constructibility, infinitary-syntax and large-cardinal items.
+
+Post-batch target index: 2,527 unique published IDs; U-P 1,412, U-C 15,
+A-R 187, A-P 192 and 721 bounded clears. Recount and cross-class deduplication
+must be rerun before commit. The historical `def-well-order` U-P record remains
+unchanged; this pass uses only its least-element clause. Next targets are the
+already-read local continuity and Kac--Moody definition interfaces, then the
+next exact author handoff.
+
+## Completed checkpoint: Green-foundation audit
 
 Evidence: `research/phase-2-next-20-published-green-foundation-audit.md`.
 

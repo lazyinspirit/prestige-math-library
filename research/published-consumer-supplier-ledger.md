@@ -8,6 +8,25 @@ Current classifications: U-P 1412, U-C 15, A-R 187, A-P 192. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Set-sized and setlike recursion audit — 2026-09-11
+
+Eight previously unindexed published recursion interfaces have bounded-clear
+dispositions after complete target and exact used-supplier review. The
+well-order chain obtains transfinite induction from a least counterexample and
+transfinite recursion from unique compatible attempts collected by
+Replacement. The setlike-relation chain builds each finite predecessor cone as
+a set, uses the supplied minimal-element property for induction, assembles
+unique compatible cone attempts and obtains the definable global recursion.
+None of these arguments selects from a family of nonunique witnesses, and
+ambient Foundation is not used in the setlike chain.
+
+These are exact inputs of active forcing, constructibility, infinitary-syntax
+and large-cardinal work. No live blocker or new pair was found. The separate
+existing U-P record for `def-well-order` is unchanged because its historical
+material lies outside the exact least-element clause used here. Exact hashes,
+alias/mechanism deduplication and audit limits are in
+`phase-2-frontier-22-published-set-recursion-audit.md`.
+
 ## Radon-regularity choice audit — 2026-09-11
 
 Two previously unindexed targets are newly A-P. In
@@ -28048,11 +28067,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,519 unique
+subsequently reconciled published IDs. It currently contains **2,527 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,519 indexed IDs are published; **13,411 published items remain outside this
+2,527 indexed IDs are published; **13,403 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28066,9 +28085,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 192 | Recorded direct review and an unresolved item-specific repair. |
 
-713 further reference-pool items have bounded no-repair-needed dispositions
+721 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,806 items and the expanded reference pool contains 2,519 unique items.
+1,806 items and the expanded reference pool contains 2,527 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28129,6 +28148,14 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-initial-segment` | Frontier-22 set-recursion audit 2026-09-11: full definition read. Downward closure, principal proper initial segments, nesting and inherited well-order clauses are proved from the exact least-element/order interface used by transfinite induction and recursion. Its alias has no classification row. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-set-recursion-audit.md`. |
+| `thm-transfinite-induction` | Frontier-22 set-recursion audit 2026-09-11: full theorem read. The least counterexample in a supplied well-order proves the progressive property everywhere; no witness family or choice principle is used. Its alias has no classification row. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-set-recursion-audit.md`. |
+| `thm-transfinite-recursion` | Frontier-22 set-recursion audit 2026-09-11: full proof and exact induction/initial-segment uses read. Uniqueness makes every stage attempt functionally specified; Separation, Replacement and Union collect and assemble them, including the least-stage and full-domain cases. No Choice is hidden. Its alias has no classification row. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-set-recursion-audit.md`. |
+| `def-well-founded-setlike-relations` | Frontier-22 set-recursion audit 2026-09-11: full definition read. Setlikeness, minimal-element well-foundedness, definable-class schema conventions and the absence of ambient-Foundation dependence are coherent in the exact recursion chain. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-set-recursion-audit.md`. |
+| `lem-finite-predecessor-closure-is-a-set` | Frontier-22 set-recursion audit 2026-09-11: full proof read. Natural-stage recursion plus Replacement and Union produces the set of nodes on finite predecessor paths; induction proves least predecessor closure, without well-foundedness or Choice. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-set-recursion-audit.md`. |
+| `thm-induction-on-well-founded-relations` | Frontier-22 set-recursion audit 2026-09-11: full proof read. Separating counterexamples inside the set-sized predecessor cone and taking an `R`-minimal member proves class induction without ambient Foundation or Choice. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-set-recursion-audit.md`. |
+| `lem-compatible-well-founded-recursion-attempts` | Frontier-22 set-recursion audit 2026-09-11: full proof read. Well-founded induction gives overlap compatibility; setlikeness and Replacement collect uniquely specified predecessor attempts; finite-path cones identify the one-point extension domain. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-set-recursion-audit.md`. |
+| `thm-recursion-on-well-founded-setlike-relations` | Frontier-22 set-recursion audit 2026-09-11: full theorem and complete attempt supplier read. Cone existence follows by well-founded induction, compatibility makes the global class definition functional, and Replacement yields every set restriction. No nonunique family is selected. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-set-recursion-audit.md`. |
 | `thm-higman-criterion-for-relative-projectivity` | Active Green-foundation audit 2026-09-11: full proof and exact counit/transversal interfaces read. Evaluation at the identity recovers the relative trace from a splitting, and the displayed balanced equivariant function constructs a splitting from a trace witness. Every sum is finite and no arbitrary witness family is selected. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-next-20-published-green-foundation-audit.md`. |
 | `thm-green-vertex-source-existence-and-conjugacy` | Active Green-foundation audit 2026-09-11: full target and exact Higman/Krull--Schmidt uses read. The compressed double-coset trace line is a correct finite orbit regrouping: the orbit represented by `(Q,xR)` has stabilizer `Q cap xRx^{-1}` and its representative composite is linear over that intersection. The remaining minimality, locality and source-conjugacy steps are sound. The separate upstream Krull--Schmidt repair remains A-P. New bounded-clear census entry; no live blocker for AC-bearing consumers. Exact hash/scope/dedup: `research/phase-2-next-20-published-green-foundation-audit.md`. |
 | `lem-central-elements-have-weight-zero` | Finite-Weyl/root-decomposition follow-up 2026-09-11: full item and the Harish-Chandra zero-weight convention read. The declared root-space and bracket suppliers are unused: centrality directly gives `[h,z]=0` for every Cartan element, exactly the zero-weight condition. Removing unused dependencies is optional cleanup, not repair debt. Exact hash/scope: `research/phase-2-next-20-published-lie-casimir-verma-audit.md`. |
