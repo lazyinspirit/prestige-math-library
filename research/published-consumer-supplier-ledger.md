@@ -8,6 +8,18 @@ Current classifications: U-P 1389, U-C 0, A-R 187, A-P 231. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Hierarchy, syntax and finite-reflection audit — 2026-09-11
+
+Sixteen previously unclassified interfaces are bounded clears. Delimited syntax
+has unique parsing and set-valued structural recursion. Cumulative hierarchy,
+transitive closure, Foundation and membership-rank interfaces handle their
+schema/set and Foundation-free/Foundation-dependent boundaries correctly. The
+finite-reflection chain collects unique least witness ranks or stages rather
+than choosing a family of witnesses, so its proof is choice-free as claimed.
+These exact clauses supply current constructibility and PMEA work without a
+frontier blocker. Evidence, hashes, deduplication and limits:
+`research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`.
+
 ## Collapse and Skolem-interface audit — 2026-09-11
 
 Eleven previously unclassified interfaces are bounded clears. Setlikeness and
@@ -28735,11 +28747,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,767 unique
+subsequently reconciled published IDs. It currently contains **2,783 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,767 indexed IDs are published; **13,163 published items remain outside this
+2,783 indexed IDs are published; **13,147 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28753,9 +28765,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 231 | Recorded direct review and an unresolved item-specific repair. |
 
-960 further reference-pool items have bounded no-repair-needed dispositions
+976 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,807 items and the expanded reference pool contains 2,767 unique items.
+1,807 items and the expanded reference pool contains 2,783 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28816,6 +28828,22 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-set-signature-and-finite-syntax-strings` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: tagged symbol sets, positive finite arities and set-coded finite words cover empty and uncountable signatures uniformly. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
+| `def-set-coded-terms-and-formulas` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: fully delimited constructor codes and natural-stage closure define the least term/formula sets, with each finite argument list appearing at a common stage. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
+| `lem-unique-parsing-of-set-coded-syntax` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: parenthesis balance and balance-one separators recover the unique outer tag, fields and shorter children. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
+| `thm-structural-recursion-on-set-coded-syntax` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: strong induction gives constructor induction, while natural recursion on set-valued partial graphs and their increasing union gives the unique evaluation. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
+| `def-set-structures-and-variable-assignments` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: nonempty carriers, interpretations, assignments and strong/embedding/isomorphism conventions are coherent with the positive-arity signature and separate constants. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
+| `def-cumulative-hierarchy-stages` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: interval transfinite recursion defines every stage without Foundation, uniqueness gives overlap agreement, and the global hierarchy is correctly schema/class-level. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
+| `prop-cumulative-hierarchy-transitivity-and-growth` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: simultaneous ordinal induction proves transitivity, nesting and the exact ordinal intersection; the final bounded-stage argument excludes both `alpha` and `V_alpha` from `V_alpha`. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
+| `def-transitive-closure-of-a-set` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: natural iteration plus Replacement/Union defines the least transitive superset without Foundation, explicitly distinguishing root inclusion as an element. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
+| `prop-transitive-closure-minimality` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: stage induction proves minimality, then monotonicity, idempotence and the root-inclusive HOD clause follow directly. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
+| `thm-foundation-equivalent-to-hierarchy-exhaustion` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: transitive closure localizes class induction, least stage indices give hierarchy exhaustion, and least height in a nonempty set proves Foundation without circular rank use. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
+| `def-membership-rank-of-a-set` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: Foundation is explicit before membership is specialized as a well-founded setlike relation; empty and strict-predecessor rank clauses follow. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
+| `thm-membership-rank-and-hierarchy-levels` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: successor/limit induction and the supremum rank equation give membership, subset, least-stage and shell equivalences, including empty/limit cases. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
+| `prop-minimum-rank-selection-and-collection` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: unique least ranks plus Replacement bound witnesses in one hierarchy stage without choosing them; the converse Collection-to-Replacement argument uses functionality. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
+| `lem-finite-formula-witness-criterion` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: restricted atomic truth, Boolean induction and the pointwise witness condition prove agreement, with subformula closure and class-schema scope explicit. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
+| `lem-finite-formula-witness-rank-bounds` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: unique least witness ranks/stages are collected as ordinals and bounded by a successor supremum; no witness family or Choice is used. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
+| `thm-montague-levy-finite-reflection` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: omega-iteration of the definable witness bound gives a limit stage closed under the finite witness requirements; continuity and the witness criterion prove reflection choice-free. New bounded clear; active constructibility/PMEA use is sound. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
 | `def-extensional-relation-and-collapse-map` | Frontier-22 collapse/Skolem audit 2026-09-11: setlikeness makes every predecessor domain a set, Replacement makes the range rule set-valued, and the published recursion theorem supplies the unique definable collapse map without ambient Foundation. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-collapse-skolem-audit.md`. |
 | `lem-extensional-collapse-is-injective` | Frontier-22 collapse/Skolem audit 2026-09-11: maximum-rank induction matches lower-rank predecessors in both directions, and extensionality gives equality, including the rank-zero case. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-collapse-skolem-audit.md`. |
 | `thm-mostowski-collapse-for-extensional-relations` | Frontier-22 collapse/Skolem audit 2026-09-11: the collapse equation makes the range transitive, injectivity reflects membership, and recursion uniqueness gives the unique class isomorphism; Replacement gives a set graph/image on a set domain. The active ultrapower supplies every hypothesis. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-collapse-skolem-audit.md`. |

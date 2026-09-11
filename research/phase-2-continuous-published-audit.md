@@ -19,7 +19,26 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: collapse and Skolem interfaces
+## Latest checkpoint: hierarchy, syntax and finite reflection
+
+Evidence:
+`research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`.
+
+Sixteen previously unclassified published interfaces are new bounded clears.
+The set-coded syntax/parser/recursion chain is coherent. Cumulative hierarchy,
+transitive closure, Foundation and membership-rank items preserve the exact
+Foundation boundary. Finite reflection is choice-free because unique least
+witness ranks or witness-containing stages, rather than witnesses themselves,
+are collected. These clauses supply active constructibility and PMEA work with
+no frontier blocker.
+
+Post-batch target index: 2,783 unique published IDs; U-P 1,389, U-C 0,
+A-R 187, A-P 231 and 976 bounded clears; 13,147 published items remain outside
+the index. Recount, publication-state and cross-class deduplication checks must
+be rerun before commit. Next target is any new exact reviewer handoff, then the
+next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: collapse and Skolem interfaces
 
 Evidence:
 `research/phase-2-frontier-22-published-collapse-skolem-audit.md`.
