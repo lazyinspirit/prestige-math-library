@@ -8,6 +8,18 @@ Current classifications: U-P 1410, U-C 0, A-R 188, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## General Leibniz audit — 2026-09-11
+
+Four previously unclassified active Fourier-calculus interfaces are bounded
+clear. Higher derivatives and one-sided interval endpoints are coherent; the
+finite-subset definition gives every binomial boundary value; and Pascal's
+partition proof covers all index ranges. Differentiating the finite Leibniz sum
+and shifting one index gives the two coefficient-one endpoints and Pascal's
+coefficient on each interior term. The proof cites the exact derivative-algebra
+ID, so that supplier's separate alias collision does not propagate. No current
+Step-5 blocker was found. Exact hashes, calculations, deduplication and limits
+are in `research/phase-2-frontier-22-published-general-leibniz-audit.md`.
+
 ## Vector-field bracket audit — 2026-09-11
 
 Seven active vector-field interfaces are bounded clear. Smooth coordinate
@@ -28296,11 +28308,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,623 unique
+subsequently reconciled published IDs. It currently contains **2,627 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,623 indexed IDs are published; **13,307 published items remain outside this
+2,627 indexed IDs are published; **13,303 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28314,9 +28326,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 188 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 207 | Recorded direct review and an unresolved item-specific repair. |
 
-818 further reference-pool items have bounded no-repair-needed dispositions
+822 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,805 items and the expanded reference pool contains 2,623 unique items.
+1,805 items and the expanded reference pool contains 2,627 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28377,6 +28389,10 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `thm-general-leibniz-rule` | Frontier-22 general-Leibniz audit 2026-09-11: finite-sum differentiation, one index shift, Pascal's rule and the two coefficient-one boundary terms prove the formula for every natural order. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-general-leibniz-audit.md`. |
+| `def-higher-derivatives-and-smoothness` | Frontier-22 general-Leibniz audit 2026-09-11: zero order, recursive derivatives, interval endpoint one-sided derivatives and `C^k` continuity are coherently distinguished. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-general-leibniz-audit.md`. |
+| `def-binomial-coefficient` | Frontier-22 general-Leibniz audit 2026-09-11: finite subset families define natural coefficients and give the zero, diagonal and out-of-range values used by the derivative induction. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-general-leibniz-audit.md`. |
+| `thm-pascals-rule` | Frontier-22 general-Leibniz audit 2026-09-11: partitioning by membership of one fixed element proves Pascal's rule with all boundary ranges, and the finite induction proves the stated hockey-stick supplement. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-general-leibniz-audit.md`. |
 | `def-action-of-a-vector-field-on-smooth-functions` | Frontier-22 vector-field bracket audit 2026-09-11: the following published proposition proves the pointwise action has smooth coordinate formula and hence lands in smooth functions; the staged definition is coherent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-vector-field-bracket-audit.md`. |
 | `prop-a-vector-field-acts-as-a-derivation-of-smooth-functions` | Frontier-22 vector-field bracket audit 2026-09-11: pointwise tangent derivations give linearity/Leibniz, while smooth coordinate coefficients and finite derivative products prove the output is smooth. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-vector-field-bracket-audit.md`. |
 | `def-lie-bracket-of-smooth-vector-fields` | Frontier-22 vector-field bracket audit 2026-09-11: the definition correctly introduces the operator commutator and explicitly defers vector-field closure to the following results. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-vector-field-bracket-audit.md`. |
