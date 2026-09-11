@@ -8,6 +8,18 @@ Current classifications: U-P 1410, U-C 0, A-R 188, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Induction-foundation audit — 2026-09-11
+
+Four previously unclassified set-theoretic foundations are bounded clear.
+Infinity supplies one inductive set; Separation inside it forms the elements
+belonging to every inductive set, and Extensionality proves uniqueness. Pairing
+and Union supply the successor operation. Minimality then proves both the subset
+and property forms of induction, with one further Separation instance and no
+witness-family selection. The older “ZFC” page wording is stronger than the
+displayed proof needs; the exact clauses used here are choice-free. No current
+Step-5 blocker was found. Exact hashes, deduplication and limits are in
+`research/phase-2-frontier-22-published-induction-foundation-audit.md`.
+
 ## Differential-definition audit — 2026-09-11
 
 Two previously unclassified differential interfaces are bounded clear. Pulling
@@ -28373,11 +28385,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,640 unique
+subsequently reconciled published IDs. It currently contains **2,644 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,640 indexed IDs are published; **13,290 published items remain outside this
+2,644 indexed IDs are published; **13,286 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28391,9 +28403,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 188 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 207 | Recorded direct review and an unresolved item-specific repair. |
 
-835 further reference-pool items have bounded no-repair-needed dispositions
+839 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,805 items and the expanded reference pool contains 2,640 unique items.
+1,805 items and the expanded reference pool contains 2,644 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28454,6 +28466,10 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `thm-induction-principle` | Frontier-22 induction-foundation audit 2026-09-11: least-inductive-set minimality proves subset induction, and Separation of the truth subset proves property induction, without witness selection. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-induction-foundation-audit.md`. |
+| `def-natural-numbers` | Frontier-22 induction-foundation audit 2026-09-11: the unique least inductive set, zero and von Neumann successor are coherently defined; the exact construction is choice-free despite an older stronger “ZFC” page label. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-induction-foundation-audit.md`. |
+| `def-inductive-set` | Frontier-22 induction-foundation audit 2026-09-11: Pairing and Union make the successor a set, so containing zero and closing under successor is a well-formed first-order condition. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-induction-foundation-audit.md`. |
+| `lem-omega-smallest-inductive` | Frontier-22 induction-foundation audit 2026-09-11: Infinity, Separation and Extensionality construct the unique least inductive subset without forming a set of all inductive sets or using choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-induction-foundation-audit.md`. |
 | `def-differential-of-a-smooth-map` | Frontier-22 differential-definition audit 2026-09-11: pullback of target germs and source derivation evaluation give a representative-independent linear derivation at the image point. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-differential-definition-audit.md`. |
 | `def-differential-of-a-smooth-real-valued-function` | Frontier-22 differential-definition audit 2026-09-11: the canonical real-line tangent coordinate turns the general differential into the stated functional `df_p(v)=v([f])`. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-differential-definition-audit.md`. |
 | `def-smooth-vector-bundle-rank-fibre-and-trivial-bundle` | Frontier-22 section/zero-bundle audit 2026-09-11: the smooth fibre-bundle, finite real fibre, rank and fibrewise-linear trivialization clauses are coherent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-section-zero-bundle-audit.md`. |
