@@ -19,7 +19,25 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: independence and product-joint-law interfaces
+## Latest checkpoint: ergodic invariance and measure completion
+
+Evidence:
+`research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`.
+
+Twenty invariant-set, ergodicity, measure-uniqueness and completion interfaces
+are bounded clears; four older U-P rows moved to clear. The completion chain
+states and spends Countable Choice exactly. The `L2` mixing-correlation
+extension is one new A-P impact through the common integral/Koopman repair.
+No distinct active blocker, supplier or pair was found.
+
+Post-batch target index: 2,908 unique published IDs; U-P 1,371, U-C 0,
+A-R 186, A-P 296 and 1,055 bounded clears; 13,022 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks must be rerun before commit. Next target is any new exact reviewer
+handoff, then other high-frequency direct frontier prerequisites outside the
+index.
+
+## Completed checkpoint: independence and product-joint-law interfaces
 
 Evidence:
 `research/phase-2-frontier-22-published-independence-product-law-audit.md`.

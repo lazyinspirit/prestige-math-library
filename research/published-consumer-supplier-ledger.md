@@ -4,9 +4,19 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1375, U-C 0, A-R 186, A-P 295. The
+Current classifications: U-P 1371, U-C 0, A-R 186, A-P 296. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Ergodic invariance and measure completion — 2026-09-11
+
+Twenty exact invariant-set, ergodicity, measure-uniqueness and completion
+interfaces are bounded clears. Four older U-P rows move to clear; Countable
+Choice is directly declared and spent in the completion construction. The
+`L2` mixing-correlation extension is one new A-P impact through the common
+integral/Koopman/Cauchy--Schwarz repair. No distinct frontier blocker or pair
+results. Exact evidence:
+`research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`.
 
 ## Independence and product-joint-law interfaces — 2026-09-11
 
@@ -28924,11 +28934,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,891 unique
+subsequently reconciled published IDs. It currently contains **2,908 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,891 indexed IDs are published; **13,039 published items remain outside this
+2,908 indexed IDs are published; **13,022 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28937,14 +28947,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1375 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1371 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 186 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 295 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 296 | Recorded direct review and an unresolved item-specific repair. |
 
-1,035 further reference-pool items have bounded no-repair-needed dispositions
+1,055 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,856 items and the expanded reference pool contains 2,891 unique items.
+1,853 items and the expanded reference pool contains 2,908 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -29005,6 +29015,26 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `prop-measure-monotonicity` | Frontier-22 ergodic/completion audit 2026-09-11: A disjoint split proves monotonicity without extended subtraction. U-P to bounded clear; prior reference-pool evidence retained. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `prop-two-set-measure-identity` | Frontier-22 ergodic/completion audit 2026-09-11: A three-piece disjoint decomposition proves the identity with nonnegative extended sums, including infinite values. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `prop-null-symmetric-difference-preserves-measure` | Frontier-22 ergodic/completion audit 2026-09-11: The two differences are null and two disjoint-union identities prove equal measures without subtracting infinities. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `def-complete-measure-space` | Frontier-22 ergodic/completion audit 2026-09-11: The arbitrary-subset-of-a-measurable-null-set convention is precise. U-P to bounded clear; prior interface mention retained. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `prop-null-sets-form-a-sigma-ideal-in-a-complete-space` | Frontier-22 ergodic/completion audit 2026-09-11: Subadditivity, monotonicity and completeness prove the three stated null-set closures. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `def-completion-of-a-measure-space` | Frontier-22 ergodic/completion audit 2026-09-11: Measurable-core-plus-subnull representations are precise and their well-definedness/sigma-algebra obligations are explicitly deferred under Countable Choice. U-P to bounded clear; prior interface mention retained. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `lem-completion-domain-is-a-sigma-algebra` | Frontier-22 ergodic/completion audit 2026-09-11: The complement formula is exact; Countable Choice is assumed, declared and used at the countable representation selection. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `lem-completed-measure-is-well-defined` | Frontier-22 ergodic/completion audit 2026-09-11: Two measurable cores differ only inside their null envelopes, proving equal values even at infinity. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `thm-completion-of-a-measure-space` | Frontier-22 ergodic/completion audit 2026-09-11: Selected disjoint cores prove additivity, completeness and uniqueness; Countable Choice is stated/Given/declared and used exactly. U-P to bounded clear; prior interface mention retained. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `prop-restriction-is-a-measure` | Frontier-22 ergodic/completion audit 2026-09-11: Intersection with a fixed measurable set preserves disjointness and countable unions, so additivity restricts directly. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `thm-measure-uniqueness-on-a-sigma-finite-pi-system` | Frontier-22 ergodic/completion audit 2026-09-11: Restriction to finite-mass exhaustion members and continuity from below prove equality on the full sigma-algebra. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `thm-measure-preservation-on-a-generating-pi-system` | Frontier-22 ergodic/completion audit 2026-09-11: The pullback is a measure sharing the finite-mass pi-system exhaustion; uniqueness proves preservation, with `X` handling finite measures. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `def-strict-and-mod-null-invariant-sigma-algebras` | Frontier-22 ergodic/completion audit 2026-09-11: Exact and symmetric-difference invariance are well typed; sigma-algebra status is correctly deferred. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `prop-invariant-families-are-sigma-algebras` | Frontier-22 ergodic/completion audit 2026-09-11: Preimage algebra handles strict invariance and the union of component discrepancies handles mod-null invariance. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `prop-measure-preserving-compositions-iterates-and-completions` | Frontier-22 ergodic/completion audit 2026-09-11: Composition/iteration and the explicitly Countable-Choice-qualified completion extension are correct. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `lem-mod-null-invariant-sets-have-strictly-invariant-representatives` | Frontier-22 ergodic/completion audit 2026-09-11: Iterate discrepancies lie in a countable null union and the limsup is strictly invariant, including noninvertible maps. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `def-ergodic-measure-preserving-system` | Frontier-22 ergodic/completion audit 2026-09-11: Null/conull invariance is correct generally and zero-or-one is correctly restricted to probability systems. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `lem-integer-part` | Frontier-22 ergodic/completion audit 2026-09-11: Archimedean bounds and least-natural selection construct the unique floor without choice; both aliases were checked. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `thm-ergodicity-and-invariant-functions` | Frontier-22 ergodic/completion audit 2026-09-11: Strict representatives prove set equivalence; unique conull floor cells make finite-valued invariant functions constant, including the complex componentwise clause. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
+| `def-strong-and-weak-mixing` | Frontier-22 ergodic/completion audit 2026-09-11: Correlation convergence and absolute Cesaro convergence have the correct pullback, `T^0` and positive-`N` conventions. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
 | `def-independent-families-of-event-classes` | Frontier-22 independence audit 2026-09-11: The finite-distinct-index product formula and empty/singleton boundaries are coherent; quantification over supplied finite data uses no choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-independence-product-law-audit.md`. |
 | `def-independent-sigma-algebras-and-events` | Frontier-22 independence audit 2026-09-11: Event-class independence specializes exactly to sub-sigma-algebras and singleton event classes. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-independence-product-law-audit.md`. |
 | `thm-pi-system-criterion-for-independent-sigma-algebras` | Frontier-22 independence audit 2026-09-11: Successive lambda-system promotion proves independence after replacing every pi-system by its generated sigma-algebra. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-independence-product-law-audit.md`. |
@@ -30096,6 +30126,7 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `prop-mixing-correlations-extend-to-l-two` | Frontier-22 ergodic/completion audit 2026-09-11: indicator/simple expansion and the uniform `2||h||_2||k||_2` density bound are correct, but the proof directly uses A-P Koopman isometry and `L2` Cauchy--Schwarz. Apply the common integral/`Lp` repair and revalidate both edges. New A-P impact; no distinct frontier blocker or pair. Exact hash/path: `research/phase-2-frontier-22-published-ergodic-invariance-completion-audit.md`. |
 | `thm-independent-random-elements-have-product-joint-law` | Frontier-22 independence/product-law audit 2026-09-11: tuple measurability, rectangle factorization and finite recursive uniqueness are sound, but the proof directly invokes A-P product-measure existence/uniqueness. Apply the common product-measure repair and revalidate this edge. Clear to A-P; prior receipt retained, no distinct active blocker or pair. Exact hash/path: `research/phase-2-frontier-22-published-independence-product-law-audit.md`. |
 | `cor-holder-inequality-for-random-variables` | Frontier-22 random-variable inequality audit 2026-09-11: its probability-space specialization is correct, but it directly uses A-P expectation and integral Hölder. Apply the common integral repair and retain the one-line specialization. New A-P impact; no distinct active blocker or pair. Exact hash/path: `research/phase-2-frontier-22-published-random-variable-inequality-impact-audit.md`. |
 | `cor-cauchy-schwarz-for-random-variables` | Frontier-22 random-variable inequality audit 2026-09-11: the bound and equality clause correctly specialize the affected random-variable Hölder and `L2` Cauchy--Schwarz suppliers. Complete the common repair and revalidate both edges. New A-P impact; no distinct active blocker or pair. Exact hash/path: `research/phase-2-frontier-22-published-random-variable-inequality-impact-audit.md`. |
@@ -30701,9 +30732,7 @@ mathematical repairs. Evidence:
 | `def-classical-weierstrass-function` | 9.5 Forward order and load-bearing body links |
 | `def-clifford-ramification-index` | Transitive consumers (166), grouped by home page |
 | `def-codimension-irreducible-subvariety` | AV-1 draft-page impact partition (Phase 3 only) |
-| `def-complete-measure-space` | Nonmeasurable-set counterexample: missing witness supply |
 | `def-completeness-and-soundness` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
-| `def-completion-of-a-measure-space` | Nonmeasurable-set counterexample: missing witness supply |
 | `def-complex-exponential` | 9.5 Forward order and load-bearing body links |
 | `def-computable-and-partial-computable-function` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-computably-dominated-oracle` | 51. Exact live-plan metadata resynchronization set |
@@ -31533,7 +31562,6 @@ mathematical repairs. Evidence:
 | `prop-machine-descriptions-form-a-decidable-language` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `prop-maximal-plane-triangulation-characterisation` | Scaffold III.4.1 — plane dual dependency |
 | `prop-maximally-planar-edge-characterisation` | Scaffold III.4.1 — plane dual dependency |
-| `prop-measure-monotonicity` | 0A.2 Exact Phase-3 defects in published content |
 | `prop-mollifier-families-are-l-one-approximate-identities` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `prop-nc-one-is-contained-in-l-and-l-in-nc-two` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `prop-np-and-conp-are-the-first-levels` | 51. Exact live-plan metadata resynchronization set |
@@ -31731,7 +31759,6 @@ mathematical repairs. Evidence:
 | `thm-closed-projective-embedding-by-homogeneous-generators` | AV-1 draft-page impact partition (Phase 3 only) |
 | `thm-cofinality-basics` | 7.1 Recorded-Not-Proved closure and prose defects |
 | `thm-compactness-variants-hierarchy` | Early-repair direct-consumer inventory — 2026-09-08 |
-| `thm-completion-of-a-measure-space` | Nonmeasurable-set counterexample: missing witness supply |
 | `thm-completion-preserves-regular-local-rings` | Item-exact impact of the Dependent Choice rehome |
 | `thm-complex-exponential-is-entire-with-derivative-itself` | Existing published suppliers consumed by published Complex Analysis |
 | `thm-complex-hahn-banach-norm-preserving-extension` | norming-and-separation-under-hahn-banach |
