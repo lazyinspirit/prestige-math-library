@@ -19,7 +19,25 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: hierarchy, syntax and finite reflection
+## Latest checkpoint: rational and lower-cut addition
+
+Evidence:
+`research/phase-2-frontier-22-published-rational-cut-addition-audit.md`.
+
+Fifteen previously unclassified rational/cut interfaces are new bounded clears.
+Integer-pair quotient operations and order are representative-independent, with
+positive denominators explicitly supplied. Lower cuts, the rational embedding,
+Minkowski addition and the positive-slack inverse satisfy their advertised
+axioms. The active generic-density evaluator uses only these sound lower-cut,
+inclusion, zero and finite-addition clauses, so no frontier blocker was found.
+
+Post-batch target index: 2,798 unique published IDs; U-P 1,389, U-C 0,
+A-R 187, A-P 231 and 991 bounded clears; 13,132 published items remain outside
+the index. Recount, publication-state and cross-class deduplication checks must
+be rerun before commit. Next target is any new exact reviewer handoff, then the
+next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: hierarchy, syntax and finite reflection
 
 Evidence:
 `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`.

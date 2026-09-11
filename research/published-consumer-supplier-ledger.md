@@ -8,6 +8,17 @@ Current classifications: U-P 1389, U-C 0, A-R 187, A-P 231. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Rational and lower-cut addition audit — 2026-09-11
+
+Fifteen previously unclassified rational and Dedekind-cut interfaces are bounded
+clears. Cross multiplication gives the quotient, operations and order independent
+of representatives; every class has a positive-denominator representative. The
+lower-cut definition, rational embedding, Minkowski addition and positive-slack
+inverse satisfy the cut axioms and additive group laws. These exact finite cut
+clauses supply the active generic-density evaluator without a frontier blocker.
+Evidence, hashes, deduplication and limits:
+`research/phase-2-frontier-22-published-rational-cut-addition-audit.md`.
+
 ## Hierarchy, syntax and finite-reflection audit — 2026-09-11
 
 Sixteen previously unclassified interfaces are bounded clears. Delimited syntax
@@ -28747,11 +28758,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,783 unique
+subsequently reconciled published IDs. It currently contains **2,798 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,783 indexed IDs are published; **13,147 published items remain outside this
+2,798 indexed IDs are published; **13,132 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28765,9 +28776,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 231 | Recorded direct review and an unresolved item-specific repair. |
 
-976 further reference-pool items have bounded no-repair-needed dispositions
+991 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,807 items and the expanded reference pool contains 2,783 unique items.
+1,807 items and the expanded reference pool contains 2,798 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28828,6 +28839,21 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-rationals` | Frontier-22 rational/cut audit 2026-09-11: nonzero-denominator integer pairs modulo cross multiplication give the standard quotient. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`. |
+| `lem-rat-equivalence` | Frontier-22 rational/cut audit 2026-09-11: the two cross equations and nonzero middle-denominator cancellation prove transitivity; the other equivalence laws are ring identities. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`. |
+| `def-rat-operations` | Frontier-22 rational/cut audit 2026-09-11: the standard pair formulas keep legal denominators and explicitly identify their well-definedness suppliers. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`. |
+| `lem-rat-ops-well-defined` | Frontier-22 rational/cut audit 2026-09-11: direct cross multiplication transports sum, product and negation across representatives. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`. |
+| `lem-rat-inverse-well-defined` | Frontier-22 rational/cut audit 2026-09-11: nonzero numerators keep reciprocal pairs legal and commutativity converts the original equivalence equation into the reciprocal equation. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`. |
+| `thm-rat-field` | Frontier-22 rational/cut audit 2026-09-11: fixed-representative calculations prove the field laws, including the distributive cross equation and reciprocal for a nonzero numerator. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`. |
+| `lem-rat-positive-denominator` | Frontier-22 rational/cut audit 2026-09-11: integer trichotomy either retains `(a,b)` or replaces it by equivalent `(-a,-b)`, covering every rational. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`. |
+| `def-rat-order` | Frontier-22 rational/cut audit 2026-09-11: cross-product order is restricted to positive denominators, whose existence is explicitly justified; numerator sign gives positivity. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`. |
+| `thm-rat-ordered-field` | Frontier-22 rational/cut audit 2026-09-11: positive scaling proves representative independence and transitivity; expansion proves translation invariance and positive numerators prove positive-product closure. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`. |
+| `def-dedekind-cut` | Frontier-22 rational/cut audit 2026-09-11: the nonempty proper downward set with no greatest member is a coherent lower-cut convention and has the stated member/complement ordering. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`. |
+| `def-real-dedekind` | Frontier-22 rational/cut audit 2026-09-11: Separation in the rational power set gives the carrier, while the rational embedding is tied to its explicit cut supplier. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`. |
+| `lem-rational-cut-is-cut` | Frontier-22 rational/cut audit 2026-09-11: rational bounds, transitivity and the midpoint verify all cut axioms for `q*`, including zero and one. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`. |
+| `def-cut-addition` | Frontier-22 rational/cut audit 2026-09-11: rational Minkowski addition and the positive-slack inverse formula are coherent and give the exact zero/sumset clauses used by active density evaluation. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`. |
+| `lem-cut-add-well-defined` | Frontier-22 rational/cut audit 2026-09-11: cut bounds, translation and no-greatest closure prove the sum is a cut; rational algebra and two explicit inclusions give the additive monoid laws. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`. |
+| `lem-cut-additive-inverse` | Frontier-22 rational/cut audit 2026-09-11: the slack formula is a cut and Archimedean integer bracketing decomposes each negative rational into `A+(-A)`, giving exact inverse equality without Choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-rational-cut-addition-audit.md`. |
 | `def-set-signature-and-finite-syntax-strings` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: tagged symbol sets, positive finite arities and set-coded finite words cover empty and uncountable signatures uniformly. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
 | `def-set-coded-terms-and-formulas` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: fully delimited constructor codes and natural-stage closure define the least term/formula sets, with each finite argument list appearing at a common stage. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
 | `lem-unique-parsing-of-set-coded-syntax` | Frontier-22 hierarchy/syntax/reflection audit 2026-09-11: parenthesis balance and balance-one separators recover the unique outer tag, fields and shorter children. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hierarchy-syntax-reflection-audit.md`. |
