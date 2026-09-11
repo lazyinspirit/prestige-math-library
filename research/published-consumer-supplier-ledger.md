@@ -4,9 +4,19 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1375, U-C 0, A-R 186, A-P 294. The
+Current classifications: U-P 1375, U-C 0, A-R 186, A-P 295. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Independence and product-joint-law interfaces — 2026-09-11
+
+Four previously unclassified event-class, sigma-algebra, pi-system and
+random-element rectangle interfaces are bounded clears. The previously clear
+finite product-joint-law theorem moves to A-P because it directly invokes the
+already A-P product-measure existence/uniqueness theorem. Its own tuple and
+rectangle proof is sound; the common product-measure repair closes this path,
+so no distinct frontier blocker or pair results. Exact evidence:
+`research/phase-2-frontier-22-published-independence-product-law-audit.md`.
 
 ## Random-variable inequality impacts — 2026-09-11
 
@@ -28914,11 +28924,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,887 unique
+subsequently reconciled published IDs. It currently contains **2,891 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,887 indexed IDs are published; **13,043 published items remain outside this
+2,891 indexed IDs are published; **13,039 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28930,11 +28940,11 @@ Supplier mappings and subsequent item-specific findings remain above.
 | U-P | Unaudited and potentially defective items | 1375 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 186 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 294 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 295 | Recorded direct review and an unresolved item-specific repair. |
 
-1,032 further reference-pool items have bounded no-repair-needed dispositions
+1,035 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,855 items and the expanded reference pool contains 2,887 unique items.
+1,856 items and the expanded reference pool contains 2,891 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28995,6 +29005,10 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-independent-families-of-event-classes` | Frontier-22 independence audit 2026-09-11: The finite-distinct-index product formula and empty/singleton boundaries are coherent; quantification over supplied finite data uses no choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-independence-product-law-audit.md`. |
+| `def-independent-sigma-algebras-and-events` | Frontier-22 independence audit 2026-09-11: Event-class independence specializes exactly to sub-sigma-algebras and singleton event classes. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-independence-product-law-audit.md`. |
+| `thm-pi-system-criterion-for-independent-sigma-algebras` | Frontier-22 independence audit 2026-09-11: Successive lambda-system promotion proves independence after replacing every pi-system by its generated sigma-algebra. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-independence-product-law-audit.md`. |
+| `thm-rectangle-criterion-for-independent-random-elements` | Frontier-22 independence audit 2026-09-11: Full preimage classes are generating pi-systems containing the whole space, so the rectangle and sigma-algebra formulations are equivalent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-independence-product-law-audit.md`. |
 | `def-random-element-and-real-random-variable` | Frontier-22 random-element audit 2026-09-11: Measurability and the real/Borel specialization have the correct domains. U-P to bounded clear; prior active-interface mention retained. Exact hash/scope: `research/phase-2-frontier-22-published-random-element-independence-audit.md`. |
 | `def-law-or-distribution-of-a-random-element` | Frontier-22 random-element audit 2026-09-11: Measurability makes the pushforward set function well defined; probability-measure status is correctly deferred. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-random-element-independence-audit.md`. |
 | `lem-law-of-a-random-element-is-a-probability-measure` | Frontier-22 random-element audit 2026-09-11: Preimages preserve the measure operations, so the source probability axioms prove countable additivity and mass one. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-random-element-independence-audit.md`. |
@@ -29398,7 +29412,6 @@ The separate page-header cutover obligations remain in their category sections.
 | `thm-linear-change-of-variables-for-lebesgue-measure` | Fourier radial-summability measure audit, 2026-09-11: full target/used clauses read. Under explicit CC, elementary factors give the invertible determinant scale, Borel-plus-null decomposition covers completed measurable sets, and singular images lie in a null subspace. U-P to bounded clear. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-borel-sets-are-lebesgue-measurable` | Fourier radial-summability measure audit, 2026-09-11: full target read. Under explicit CC, the Lebesgue sigma-algebra contains half-open boxes and hence their generated Euclidean Borel sigma-algebra. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `def-lebesgue-point-and-lebesgue-set` | Fourier radial-summability measure audit, 2026-09-11: full definition read. Representative-relative values and the existential class-level Lebesgue set are coherent under the stated CC convention; the live radial lemma uses a specified value. New bounded-clear census entry. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
-| `thm-independent-random-elements-have-product-joint-law` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: full proof read. Tuple measurability, rectangle factorization and finite product-measure uniqueness identify the joint law. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
 | `lem-measurable-functions-preserve-independence` | Original-next-20 characteristic-function prerequisite audit, 2026-09-11: full proof read. Pullback of every finite measurable rectangle is exactly the original independence criterion. U-P to bounded clear. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
 | `thm-weak-global-dimension-is-detected-by-tor-and-is-left-right-symmetric` | Root bounded dependency review, 2026-09-09 15:46 UTC: full target and opposite-ring/weak-dimension definitions read; flat-dimension criterion, balance and tensor interfaces checked. Existing DC and supplied resolutions suffice, including the zero-ring case. No published edit or new prerequisite. Exact supplier IDs and current acceptance hashes are in phase-2-catchup-24-cyclic-tor-root-repair.md and the item review JSON. U-P to bounded clear; not a repair, independent judgment or whole-library certification. |
 
@@ -30083,6 +30096,7 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `thm-independent-random-elements-have-product-joint-law` | Frontier-22 independence/product-law audit 2026-09-11: tuple measurability, rectangle factorization and finite recursive uniqueness are sound, but the proof directly invokes A-P product-measure existence/uniqueness. Apply the common product-measure repair and revalidate this edge. Clear to A-P; prior receipt retained, no distinct active blocker or pair. Exact hash/path: `research/phase-2-frontier-22-published-independence-product-law-audit.md`. |
 | `cor-holder-inequality-for-random-variables` | Frontier-22 random-variable inequality audit 2026-09-11: its probability-space specialization is correct, but it directly uses A-P expectation and integral Hölder. Apply the common integral repair and retain the one-line specialization. New A-P impact; no distinct active blocker or pair. Exact hash/path: `research/phase-2-frontier-22-published-random-variable-inequality-impact-audit.md`. |
 | `cor-cauchy-schwarz-for-random-variables` | Frontier-22 random-variable inequality audit 2026-09-11: the bound and equality clause correctly specialize the affected random-variable Hölder and `L2` Cauchy--Schwarz suppliers. Complete the common repair and revalidate both edges. New A-P impact; no distinct active blocker or pair. Exact hash/path: `research/phase-2-frontier-22-published-random-variable-inequality-impact-audit.md`. |
 | `thm-hilbert-cube-universal-for-separable-metrizable-spaces` | Frontier-22 standard-Borel audit 2026-09-11: Proofs 2.1--5.1 are outline commands and omit the dense-distance formula, separation/continuity estimates and inverse-continuity neighbourhood. Supply `e(x)=(rho(x,d_n))` and the one-coordinate epsilon estimate. New A-P; active kernel impact reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-standard-borel-coding-audit.md`. |

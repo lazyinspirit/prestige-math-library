@@ -19,7 +19,24 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: random-variable inequality impacts
+## Latest checkpoint: independence and product-joint-law interfaces
+
+Evidence:
+`research/phase-2-frontier-22-published-independence-product-law-audit.md`.
+
+Four previously unclassified foundations and rectangle criteria are bounded
+clears. The previously clear finite product-joint-law theorem moves to A-P on
+its exact use of the affected product-measure existence/uniqueness theorem.
+Its own finite independence argument is sound and the common repair covers the
+route, so no distinct frontier blocker, supplier or pair was found.
+
+Post-batch target index: 2,891 unique published IDs; U-P 1,375, U-C 0,
+A-R 186, A-P 295 and 1,035 bounded clears; 13,039 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks must be rerun before commit. Next target is any new exact reviewer
+handoff, then further direct active probability suppliers outside the index.
+
+## Completed checkpoint: random-variable inequality impacts
 
 Evidence:
 `research/phase-2-frontier-22-published-random-variable-inequality-impact-audit.md`.
