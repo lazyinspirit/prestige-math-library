@@ -436,6 +436,19 @@ test('Step-7 sends every rejected Terra rejudge directly to one ordered Astra-me
   assert.match(taskA, /Do not substantively review the next item until the recorder accepts the current one/);
   assert.match(taskA, /--resolved-by final-adjudicator/);
   assert.match(taskA, /authoritative http\(s\) URL/);
+  const brief = readFileSync(join(REPO, 'briefs/final-adjudicator.md'), 'utf8');
+  for (const text of [taskA, brief]) {
+    assert.match(text, /queued licensed fatal item/);
+    assert.match(text, /new dependency lemma chains directly\s+required by that repair/);
+    assert.match(text, /same owned page and within the same group/);
+    assert.match(text, /owning manifest, proof contract\s+and Step-7 scope/);
+    assert.match(text, /engine[\s\S]*hash-bound auditor\/adjudicator-created-item/i);
+    assert.match(text, /[Dd]o not create self-review\s+decisions, judge verdicts or pass stamps/);
+    assert.match(text, /[Ee]xisting supplier edits|editing existing suppliers/);
+    assert.match(text, /new theorems, pages or pairs|new theorem, page or pair/);
+    assert.match(text, /[Dd]o not launch another judge or review wave/);
+    assert.doesNotMatch(text, /If new items or supplier edits are necessary, escalate instead/);
+  }
   rmSync(repo, { recursive: true, force: true });
 });
 

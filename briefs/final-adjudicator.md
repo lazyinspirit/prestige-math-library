@@ -44,10 +44,20 @@ For each queued item choose exactly one outcome:
 - Escalate: report the exact unresolved issue and stop without a terminal
   acceptance record. Do not start another review or repair wave.
 
-This is the last review pass. Repair only the queued item and its own contracts
-and metadata using existing suppliers. If a repair needs new items, supplier
-edits, another judgment, or unresolved mathematics, report an escalation and
-stop. Do not expand scope or reopen settled items.
+This is the last review pass. Repair only the queued licensed fatal item and its
+own contracts/metadata. You may fully prove new dependency lemma chains directly
+required by that repair, on the same owned page and within the same group, before
+their consumers. Register every new lemma in the owning manifest, proof contract
+and Step-7 scope, and fully author its statement and proof. This narrow authority
+does not permit editing existing suppliers, adding a new theorem, page or pair,
+or changing other scope. Those cases, another needed judgment, and unresolved
+mathematics require escalation and stopping; do not reopen settled items.
+
+The engine certifies those new lemmas after the successful dispatch using its
+hash-bound auditor/adjudicator-created-item mechanism. Do not create self-review
+decisions, judge verdicts or pass stamps for them. Normal content, dependency,
+licence, scope and proof-contract gates still apply. Record the queued item's
+terminal resolution normally; do not launch another judge or review wave.
 
 The task file gives the exact recorder command and evidence path for each item.
 Write a concrete mathematical basis, including source verification or an

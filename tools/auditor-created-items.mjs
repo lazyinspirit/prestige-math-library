@@ -83,8 +83,9 @@ function authorResultAllowed(step, row) {
     // step7-GROUP coverage pattern. Only the adjudicator role emits them.
     || (row.role === 'alpha-adjudicate'
       && /^(?:repair-8-(?:[a-z]-)?round-[1-9]\d*|cross-group-[a-z]-round-[1-9]\d*|adjudicate-closure-recovery-(?:[a-z]-)?[1-9]\d*)$/.test(label));
-  return ['alpha', 'alpha-adjudicate', 'final-adjudicator'].includes(row.role)
-    && /(?:step8|impact-close)/.test(label);
+  return (['alpha', 'alpha-adjudicate', 'final-adjudicator'].includes(row.role)
+    && /(?:step8|impact-close)/.test(label))
+    || (Number(step) === 8 && row.role === 'alpha' && /^receipts(?:-fix-[1-9]\d*)?$/.test(label));
 }
 
 function successfulAuthorResults(root, run, step) {

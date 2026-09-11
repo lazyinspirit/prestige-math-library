@@ -122,6 +122,51 @@ for (const step of [7, 8]) test(`Step ${step} cannot use Step-5 gate-repair prov
   }
 });
 
+for (const label of ['receipts', 'receipts-fix-1']) {
+  test(`Step 8 recertifies contract-only changes from the covering ${label} author`, t => {
+    const f = recoveryFixture(t, 8);
+    f.result('step8-lead', { role: 'alpha' });
+    const first = certifyAuditorCreatedItems(f.root, 'r', 8);
+    const receiptPath = join(f.root, 'research/r-step8-auditor-certifications.json');
+    const before = readFileSync(receiptPath, 'utf8');
+    const contractPath = join(f.root, 'research/r-batch-1.proof-contracts.json');
+    writeFileSync(contractPath, JSON.stringify({ contracts: { 'lem-created': { risk: 'high' } } }));
+    const changed = new Date('2025-01-01T00:00:10.500Z');
+    utimesSync(contractPath, changed, changed);
+    for (const changes of [{}, { role: 'alpha-adjudicate' }, { role: 'tool' }, { role: 'final-adjudicator' },
+      { run: 'other' }, { ok: false }, { covers: ['2'] }, { started_at: '2025-01-01T00:00:14.000Z' }]) {
+      // The empty change uses the old ending, before the contract-only write.
+      f.result(label, { role: 'alpha', ...(Object.keys(changes).length
+        ? { ended_at: '2025-01-01T00:00:20.000Z' } : {}), ...changes });
+      assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 8), /no successful Step 8/);
+      assert.equal(readFileSync(receiptPath, 'utf8'), before, 'refusal preserves the prior receipt');
+    }
+    f.result(label, { role: 'alpha', ended_at: '2025-01-01T00:00:11.000Z' });
+    const current = certifyAuditorCreatedItems(f.root, 'r', 8);
+    assert.equal(current.items[0].item_file_sha256, first.items[0].item_file_sha256);
+    assert.notEqual(current.items[0].contract_sha256, first.items[0].contract_sha256);
+    assert.notEqual(current.items[0].step5_subject_sha256, first.items[0].step5_subject_sha256);
+    assert.equal(current.items[0].author_result, 'recovery.result.json');
+  });
+}
+
+test('Step 8 rejects malformed receipt repair labels', t => {
+  const f = recoveryFixture(t, 8);
+  for (const label of ['receipts-fix-0', 'receipts-fix-01', 'receipts-fix-x', 'receipts-fix-',
+    'receipts-fix-1-extra', 'prefix-receipts', 'receipts-extra', 'receipt']) {
+    f.result(label, { role: 'alpha' });
+    assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 8), /no successful Step 8/, label);
+  }
+});
+
+for (const step of [5, 7]) test(`Step ${step} cannot use Step-8 receipt-repair provenance`, t => {
+  const f = recoveryFixture(t, step);
+  for (const label of ['receipts', 'receipts-fix-1']) {
+    f.result(label, { role: 'alpha' });
+    assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', step), new RegExp(`no successful Step ${step}`));
+  }
+});
+
 test('auditor-created certification is baseline-exclusive, dispatch-backed, and hash-bound', () => {
   const root = fixture();
   writeAuditorCreatedBaseline(root, 'r', 8);

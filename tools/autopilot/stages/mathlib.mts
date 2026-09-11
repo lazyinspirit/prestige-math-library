@@ -1063,7 +1063,9 @@ function writeFinalAdjudicatorTask(ctx: any, stage: any, round: number, group: s
       `1. Read \`items/${row.id}.md\`, its cited dependencies, pair/page context, proof contract, judge and Alpha evidence, and this group's conventions.`,
       '2. Independently review the current repair, the Terra verdict and any later licensed correction. If unfamiliar or uncertain, use web search and verify against authoritative sources.',
       `3. Write concrete evidence to \`${evidenceRel}\`, including exact source URLs and what they support, or explain why the mathematics was familiar.`,
-      '4. Accept or repair the queued item and its own contracts/metadata using existing suppliers. Run focused checks and record the final decision. If new items or supplier edits are necessary, escalate instead. Do not launch another judge, reopen settled items, or expand scope.',
+      '4. Accept or repair the queued licensed fatal item and its own contracts/metadata. You may add only fully proved new dependency lemma chains directly required by that repair, on the same owned page and within the same group, before their consumers.',
+      '   Fully author each new lemma and register it in the owning manifest, proof contract and Step-7 scope. The engine supplies hash-bound auditor/adjudicator-created-item certification after the successful dispatch; do not create self-review decisions, judge verdicts or pass stamps for new lemmas. Normal content, dependency, licence, scope and proof-contract gates still apply.',
+      '   Existing supplier edits, new theorems, pages or pairs, other scope changes and unresolved mathematics require escalation. Run focused checks and record the queued item\'s final decision. Do not launch another judge or review wave or reopen settled items.',
       '5. Record the exact final bytes with exactly one of these commands:',
       '',
       '```bash',
@@ -2853,7 +2855,7 @@ export const stages = [
       task: [`research/${ctx.run}-alpha-receipts.task.md`, `research/${ctx.run}-alpha-step8.task.md`],
       timeout: 14400,
     }],
-    gates: (ctx) => [manifestDepsGate(ctx), levelCoverageGate(ctx)],
+    gates: (ctx) => [auditorCreatedGate(ctx, 8), manifestDepsGate(ctx), levelCoverageGate(ctx)],
     maxFixRounds: 2,
     onGateFailure: async (args: any) => {
       const repair = await mechanicalRepair(args);

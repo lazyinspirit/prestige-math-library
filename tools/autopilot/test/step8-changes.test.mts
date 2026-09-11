@@ -104,6 +104,10 @@ test('Step 8 closes impact work before stamping and receipts', () => {
   assert.ok(judge.gates(ctx).some((gate: any) => gate.id === 'step8-changes'));
   assert.ok(judge.gates(ctx).some((gate: any) => gate.id === 'step8-judge-closure'));
   assert.ok(close.gates(ctx).some((gate: any) => gate.id === 'step8-changes'), 'impact repairs must refresh the certification delta');
+  const receipts: any = stages.find((stage: any) => stage.id === '8-receipt');
+  assert.deepEqual(receipts.gates(ctx).map((gate: any) => gate.id),
+    ['step8-auditor-created-certifications', 'manifest-deps', 'level-coverage'],
+    'receipt authors may change certified contracts: refresh exact certification before coverage');
 });
 
 test('Step 8 prepares, reviews, renders, and freezes in strict sequence', () => {
