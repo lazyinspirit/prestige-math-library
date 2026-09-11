@@ -8,6 +8,19 @@ Current classifications: U-P 1389, U-C 0, A-R 187, A-P 231. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Collapse and Skolem-interface audit — 2026-09-11
+
+Eleven previously unclassified interfaces are bounded clears. Setlikeness and
+Replacement support the definable-class collapse recursion; rank induction and
+extensionality give injectivity and the unique transitive collapse. Ambient
+Foundation and elementarity supply the restricted membership hypotheses used
+for elementary-submodel collapse. The Skolem-hull chain explicitly states and
+declares AC for its witness family and countable family of stage injections;
+finite-word counting, cardinal absorption and Tarski--Vaught yield the advertised
+size and elementarity. These exact clauses supply the active large-cardinal
+consumers without a frontier blocker. Exact hashes, deduplication and limits:
+`research/phase-2-frontier-22-published-collapse-skolem-audit.md`.
+
 ## Cardinal and tree-foundation audit — 2026-09-11
 
 Five newly indexed items and two U-P targets are bounded clears. Initial-ordinal
@@ -28722,11 +28735,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,756 unique
+subsequently reconciled published IDs. It currently contains **2,767 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,756 indexed IDs are published; **13,174 published items remain outside this
+2,767 indexed IDs are published; **13,163 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28740,9 +28753,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 231 | Recorded direct review and an unresolved item-specific repair. |
 
-949 further reference-pool items have bounded no-repair-needed dispositions
+960 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,807 items and the expanded reference pool contains 2,756 unique items.
+1,807 items and the expanded reference pool contains 2,767 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28803,6 +28816,17 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-extensional-relation-and-collapse-map` | Frontier-22 collapse/Skolem audit 2026-09-11: setlikeness makes every predecessor domain a set, Replacement makes the range rule set-valued, and the published recursion theorem supplies the unique definable collapse map without ambient Foundation. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-collapse-skolem-audit.md`. |
+| `lem-extensional-collapse-is-injective` | Frontier-22 collapse/Skolem audit 2026-09-11: maximum-rank induction matches lower-rank predecessors in both directions, and extensionality gives equality, including the rank-zero case. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-collapse-skolem-audit.md`. |
+| `thm-mostowski-collapse-for-extensional-relations` | Frontier-22 collapse/Skolem audit 2026-09-11: the collapse equation makes the range transitive, injectivity reflects membership, and recursion uniqueness gives the unique class isomorphism; Replacement gives a set graph/image on a set domain. The active ultrapower supplies every hypothesis. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-collapse-skolem-audit.md`. |
+| `def-elementary-set-structure-embedding` | Frontier-22 collapse/Skolem audit 2026-09-11: equality gives injectivity and the atomic formulas give the exact structure-preservation/reflection clauses, with nonempty carriers explicit. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-collapse-skolem-audit.md`. |
+| `prop-isomorphism-invariance-of-satisfaction` | Frontier-22 collapse/Skolem audit 2026-09-11: constructor induction transports terms and atomic truth; strongness, injectivity and surjectivity supply relation reflection, equality and reverse existential witnesses respectively. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-collapse-skolem-audit.md`. |
+| `thm-collapse-of-elementary-membership-submodels` | Frontier-22 collapse/Skolem audit 2026-09-11: ambient Foundation gives external well-foundedness, internal Extensionality plus elementarity gives a distinguishing member in the submodel, and collapse/isomorphism invariance yields the elementary transitive copy. New bounded clear; active use is sound. Exact hash/scope: `research/phase-2-frontier-22-published-collapse-skolem-audit.md`. |
+| `def-skolem-witness-hull` | Frontier-22 collapse/Skolem audit 2026-09-11: a witness family is supplied data; a supplied well-order gives definable least witnesses, and natural recursion plus a default element defines nonempty closure stages without an implicit choice claim. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-collapse-skolem-audit.md`. |
+| `thm-tarski-vaught-set-structure-test` | Frontier-22 collapse/Skolem audit 2026-09-11: term/formula induction and the pointwise witness condition give precisely both existential directions, including empty tuples and vacuous quantifiers, without selecting a witness family. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-collapse-skolem-audit.md`. |
+| `lem-skolem-hull-size-and-elementarity` | Frontier-22 collapse/Skolem audit 2026-09-11: ZFC and `def-axiom-of-choice` are explicit for both the uniform witness family and simultaneous stage injections; finite-word/cardinal bounds and Tarski--Vaught give the stated size and elementarity. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-collapse-skolem-audit.md`. |
+| `cor-cardinal-absorption` | Frontier-22 collapse/Skolem audit 2026-09-11: explicit injections, monotonicity, the unit law and choice-free Hessenberg square prove sum/product absorption for cardinal representatives in ZF, with the zero-product exception stated. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-collapse-skolem-audit.md`. |
+| `thm-downward-lowenheim-skolem-with-parameters` | Frontier-22 collapse/Skolem audit 2026-09-11: the ZFC statement directly declares AC, enlarges the parameter set to cardinality `kappa`, and uses the explicitly AC-scoped Skolem hull plus absorption to obtain exact size. New bounded clear; active PMEA use is sound. Exact hash/scope: `research/phase-2-frontier-22-published-collapse-skolem-audit.md`. |
 | `def-cardinal` | Frontier-22 cardinal/tree audit 2026-09-11: initial ordinals are defined choice-free, while the cardinality assignment for an arbitrary set is explicitly scoped to AC and proved independent of the selected well-order. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-cardinal-tree-foundation-audit.md`. |
 | `lem-cardinality-of-a-well-orderable-set` | Frontier-22 cardinal/tree audit 2026-09-11: a supplied well-order gives one ordinal bound; minimization yields the unique least equinumerous ordinal and proves it initial, without a choice family. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-cardinal-tree-foundation-audit.md`. |
 | `lem-cardinal-operations-are-well-defined` | Frontier-22 cardinal/tree audit 2026-09-11: tagged sums, products, function spaces and power sets transport supplied bijections; explicit lexicographic orders give ZF sum/product cardinalities, while general function-space cardinality remains explicitly AC-scoped. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-cardinal-tree-foundation-audit.md`. |

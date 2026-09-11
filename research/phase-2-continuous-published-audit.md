@@ -19,7 +19,28 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: cardinal and tree foundations
+## Latest checkpoint: collapse and Skolem interfaces
+
+Evidence:
+`research/phase-2-frontier-22-published-collapse-skolem-audit.md`.
+
+Eleven previously unclassified published interfaces are new bounded clears.
+The setlike-recursion/rank chain proves the general Mostowski collapse without
+ambient Foundation; the elementary-submodel theorem derives well-foundedness
+from ambient Foundation and extensionality from elementarity. The Skolem hull,
+Tarski--Vaught and cardinal-absorption chain proves downward
+Loewenheim--Skolem with both direct AC uses stated and declared. These are the
+exact collapse and countable-submodel interfaces used by active group h, and no
+frontier blocker was found. The separate `def-relative-projectivity` rule-11
+issue is already represented by exactly one A-P row and needs no duplicate.
+
+Post-batch target index: 2,767 unique published IDs; U-P 1,389, U-C 0,
+A-R 187, A-P 231 and 960 bounded clears; 13,163 published items remain outside
+the index. Recount, publication-state and cross-class deduplication checks must
+be rerun before commit. Next target is any new exact reviewer handoff, then the
+next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: cardinal and tree foundations
 
 Evidence:
 `research/phase-2-frontier-22-published-cardinal-tree-foundation-audit.md`.
