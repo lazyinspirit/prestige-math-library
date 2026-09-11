@@ -19,7 +19,28 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: Prokhorov and weak convergence
+## Latest checkpoint: unit-circle and quotient-circle interfaces
+
+Evidence:
+`research/phase-2-frontier-22-published-unit-circle-quotient-audit.md`.
+
+The trigonometric parametrization and its quotient-circle-homeomorphism
+consumer are new A-P items. The former's injectivity proof attributes an exact
+fibre classification to a theorem proving only zero sets and the least global
+common period; the published subtraction formula gives a complete short local
+repair. Eight adjacent trigonometric and quotient-circle items are bounded
+clears. Full reads found four load-bearing current consumers: three batch-8
+fibration examples and one batch-15 Fourier uniqueness lemma. Their exact
+clauses were reported immediately; no new pair is needed.
+
+Post-batch target index: 2,934 unique published IDs; U-P 1,370, U-C 0,
+A-R 186, A-P 306 and 1,072 bounded clears; 12,996 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks passed before commit. Next target is any new exact reviewer
+handoff, then other high-frequency direct frontier prerequisites outside the
+index.
+
+## Completed checkpoint: Prokhorov and weak convergence
 
 Evidence:
 `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`.
@@ -1548,10 +1569,10 @@ supplier IDs, and each published ID must retain exactly one classification row.
    issues reported by the root worker, prioritizing items actually consumed by
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
-   then audit high-use active-frontier samples outside the 2,756-ID
+   then audit high-use active-frontier samples outside the 2,934-ID
    index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,174 published items
+No exhaustive discovery claim is authorized while 12,996 published items
 remain outside the index and dependency interfaces remain unaudited.

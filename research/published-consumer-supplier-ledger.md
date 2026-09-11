@@ -4,9 +4,21 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1370, U-C 0, A-R 186, A-P 304. The
+Current classifications: U-P 1370, U-C 0, A-R 186, A-P 306. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Unit-circle and quotient-circle interfaces — 2026-09-11
+
+The sine/cosine parametrization is new A-P: proof 2.1 incorrectly treats the
+least positive global common period as a classification of every fibre. The
+published subtraction formula plus the zero-set/shift theorem gives a complete
+two-line repair. The quotient-circle homeomorphism is a direct A-P impact
+through its injectivity proof. Eight adjacent trigonometric and quotient-circle
+interfaces are bounded clears. Four current draft consumers in batches 8 and
+15 use the affected clause load-bearingly; their exact IDs and proof steps were
+reported, and no new pair is needed. Exact hashes, repair and bounded scope:
+`research/phase-2-frontier-22-published-unit-circle-quotient-audit.md`.
 
 ## Prokhorov and weak-convergence interfaces — 2026-09-11
 
@@ -28945,11 +28957,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,924 unique
+subsequently reconciled published IDs. It currently contains **2,934 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,924 indexed IDs are published; **13,006 published items remain outside this
+2,934 indexed IDs are published; **12,996 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28961,11 +28973,11 @@ Supplier mappings and subsequent item-specific findings remain above.
 | U-P | Unaudited and potentially defective items | 1370 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 186 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 304 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 306 | Recorded direct review and an unresolved item-specific repair. |
 
-1,064 further reference-pool items have bounded no-repair-needed dispositions
+1,072 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,860 items and the expanded reference pool contains 2,924 unique items.
+1,862 items and the expanded reference pool contains 2,934 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -29026,6 +29038,14 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `thm-sine-cosine-zero-sets-and-fundamental-period` | Frontier-22 unit-circle audit 2026-09-11: integer shifts, the zero-set reduction and exclusion of `pi` as a common period are sound. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-unit-circle-quotient-audit.md`. |
+| `thm-sine-and-cosine-addition-formulas` | Frontier-22 unit-circle audit 2026-09-11: the harmonic-IVP uniqueness proof gives both addition identities. New bounded clear and repair supplier. Exact hash/scope: `research/phase-2-frontier-22-published-unit-circle-quotient-audit.md`. |
+| `thm-sine-and-cosine-subtraction-formulas` | Frontier-22 unit-circle audit 2026-09-11: parity applied to the addition formulas gives both subtraction identities. New bounded clear and exact repair supplier. Exact hash/scope: `research/phase-2-frontier-22-published-unit-circle-quotient-audit.md`. |
+| `def-circle-as-real-line-mod-integers` | Frontier-22 unit-circle audit 2026-09-11: the equivalence relation, quotient topology, exact fibres and integer-translation invariance are sound. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-unit-circle-quotient-audit.md`. |
+| `prop-real-line-mod-integers-is-compact-and-path-connected` | Frontier-22 unit-circle audit 2026-09-11: the compact-interval image and explicit affine paths prove both clauses. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-unit-circle-quotient-audit.md`. |
+| `lem-open-quotient-arcs-in-real-line-mod-integers` | Frontier-22 unit-circle audit 2026-09-11: the saturation formula, short-interval injectivity and inverse-continuity radius argument are sound. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-unit-circle-quotient-audit.md`. |
+| `thm-real-line-covers-real-line-mod-integers` | Frontier-22 unit-circle audit 2026-09-11: translated intervals of length `2/3` are disjoint sheets and restrict homeomorphically. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-unit-circle-quotient-audit.md`. |
+| `cor-real-line-is-universal-cover-of-circle` | Frontier-22 unit-circle audit 2026-09-11: the published covering and convex simply connected real line satisfy the universal-cover definition. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-unit-circle-quotient-audit.md`. |
 | `def-separable-space` | Frontier-22 Prokhorov audit 2026-09-11: Existence of an at-most-countable dense subset and meeting every nonempty open set are equivalent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
 | `def-polish-space` | Frontier-22 Prokhorov audit 2026-09-11: Separable plus a compatible complete metric is the correct property-only definition. It uses only the sound definition clause of A-P complete remetrisation, not its defective converse. U-P to bounded clear; prior cross-category mention retained. Exact hash/scope: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
 | `def-borel-probability-law-on-a-polish-space` | Frontier-22 Prokhorov audit 2026-09-11: A probability on the Borel sigma-algebra is independent of a later fixed compatible metric, and the empty-space boundary is correct. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
@@ -30146,6 +30166,8 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `thm-sine-and-cosine-parametrize-the-unit-circle` | Frontier-22 unit-circle audit 2026-09-11: proof 2.1 attributes exact fibre classification to a theorem that proves only zero sets and the least positive global common period. Add the published subtraction-formula supplier and derive `sin(s-t)=0`, `cos(s-t)=1`, hence `s-t` is an even multiple of `pi`. New A-P; four active consumers reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-unit-circle-quotient-audit.md`. |
+| `thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle` | Frontier-22 unit-circle audit 2026-09-11: continuity, descent, surjectivity and compact-Hausdorff closure are sound, but proof 3.1 directly invokes the affected parametrization injectivity clause. Revalidate after the same local subtraction-formula repair. New A-P impact; four active consumers reported, no new pair. Exact hash/path: `research/phase-2-frontier-22-published-unit-circle-quotient-audit.md`. |
 | `def-weak-convergence-of-borel-probability-measures` | Frontier-22 Prokhorov audit 2026-09-11: the bounded-continuous-test definition and finite bound are correct, but the integrals use A-P integrable-function/integral machinery. Apply the common repair. New A-P impact; active use reported. Exact hash/path: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
 | `def-relative-sequential-compactness-for-weak-convergence` | Frontier-22 Prokhorov audit 2026-09-11: the same-space/outside-family limit convention is precise, but directly embeds the affected weak-convergence definition. New A-P impact. Exact hash/path: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
 | `thm-rmk-positive-functional-is-integration-against-its-representing-measure` | Frontier-22 Prokhorov audit 2026-09-11: compact truncated layers correctly squeeze functional and integral values, but the integral side uses the affected simple/nonnegative foundation. Apply the common repair; prior RMK outer-content A-R remains valid. New A-P. Exact hash/path: `research/phase-2-frontier-22-published-prokhorov-weak-convergence-audit.md`. |
