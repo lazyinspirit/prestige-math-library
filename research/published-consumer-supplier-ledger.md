@@ -4,9 +4,23 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1411, U-C 0, A-R 188, A-P 207. The
+Current classifications: U-P 1410, U-C 0, A-R 188, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Vector-field bracket audit — 2026-09-11
+
+Seven active vector-field interfaces are bounded clear. Smooth coordinate
+coefficients make the pointwise vector-field action preserve smooth functions.
+The commutator's mixed terms cancel, so it is a derivation; the published
+derivation-to-vector-field theorem globalizes germs with the now-repaired
+manifold bump supplier and obtains smooth coordinate coefficients. Operator
+commutator identities give closure, bilinearity, antisymmetry and Jacobi, and
+the function-multiple formulas are direct Leibniz expansions. Six IDs are new;
+the derivation theorem moves from its sole historical U-P impact row to clear.
+No current Step-5 blocker was found. Exact hashes, calculations, deduplication
+and limits are in
+`research/phase-2-frontier-22-published-vector-field-bracket-audit.md`.
 
 ## Dual and Hom bundle audit — 2026-09-11
 
@@ -28282,11 +28296,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,617 unique
+subsequently reconciled published IDs. It currently contains **2,623 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,617 indexed IDs are published; **13,313 published items remain outside this
+2,623 indexed IDs are published; **13,307 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28295,14 +28309,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1411 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1410 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 188 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 207 | Recorded direct review and an unresolved item-specific repair. |
 
-811 further reference-pool items have bounded no-repair-needed dispositions
+818 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,806 items and the expanded reference pool contains 2,617 unique items.
+1,805 items and the expanded reference pool contains 2,623 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28363,6 +28377,13 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-action-of-a-vector-field-on-smooth-functions` | Frontier-22 vector-field bracket audit 2026-09-11: the following published proposition proves the pointwise action has smooth coordinate formula and hence lands in smooth functions; the staged definition is coherent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-vector-field-bracket-audit.md`. |
+| `prop-a-vector-field-acts-as-a-derivation-of-smooth-functions` | Frontier-22 vector-field bracket audit 2026-09-11: pointwise tangent derivations give linearity/Leibniz, while smooth coordinate coefficients and finite derivative products prove the output is smooth. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-vector-field-bracket-audit.md`. |
+| `def-lie-bracket-of-smooth-vector-fields` | Frontier-22 vector-field bracket audit 2026-09-11: the definition correctly introduces the operator commutator and explicitly defers vector-field closure to the following results. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-vector-field-bracket-audit.md`. |
+| `lem-the-commutator-of-vector-field-derivations-is-a-derivation` | Frontier-22 vector-field bracket audit 2026-09-11: two Leibniz expansions cancel the mixed first-order terms and leave exactly the derivation rule. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-vector-field-bracket-audit.md`. |
+| `thm-derivations-of-smooth-functions-are-smooth-vector-fields` | Frontier-22 vector-field bracket audit 2026-09-11: the repaired manifold bump globalizes germs and coordinate functions near one point; their images under the derivation are smooth local coefficients and give the unique inducing field. U-P to bounded clear after resolving the historical bump impact. Exact hash/scope: `research/phase-2-frontier-22-published-vector-field-bracket-audit.md`. |
+| `thm-vector-fields-form-a-lie-algebra` | Frontier-22 vector-field bracket audit 2026-09-11: derivation closure and the finite operator-commutator identities prove closure, bilinearity, antisymmetry and Jacobi. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-vector-field-bracket-audit.md`. |
+| `prop-leibniz-rules-for-the-lie-bracket-with-function-multiples` | Frontier-22 vector-field bracket audit 2026-09-11: direct action on a test function gives both displayed function-multiple formulas; tangent derivations detect equality. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-vector-field-bracket-audit.md`. |
 | `def-dual-and-hom-vector-bundles` | Frontier-22 dual/Hom audit 2026-09-11: the fibrewise dual and linear-map sets are coherent, and the definition explicitly defers their smooth structures to the following theorem. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-dual-hom-bundle-audit.md`. |
 | `def-vector-bundle-chart-and-transition-function` | Frontier-22 dual/Hom audit 2026-09-11: overlap maps have the stated orientation `v_beta=g_(beta alpha)v_alpha`, which gives the audited inverse-transpose and conjugation formulas. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-dual-hom-bundle-audit.md`. |
 | `def-transpose-of-a-linear-map` | Frontier-22 dual/Hom audit 2026-09-11: precomposition defines the algebraic transpose on duals with the correct variance and no inner-product assumption. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-dual-hom-bundle-audit.md`. |
@@ -30822,7 +30843,6 @@ mathematical repairs. Evidence:
 | `thm-depth-equals-maximal-regular-sequence-length` | Item-exact impact of the Dependent Choice rehome |
 | `thm-depth-lemma` | Item-exact impact of the Dependent Choice rehome |
 | `thm-depth-zero-associated-prime-criterion` | Item-exact impact of the Dependent Choice rehome |
-| `thm-derivations-of-smooth-functions-are-smooth-vector-fields` | Open findings from the bump-consumer audit — 2026-09-08 |
 | `thm-dimension-equals-transcendence-degree` | AV-1 draft-page impact partition (Phase 3 only) |
 | `thm-dimension-product-varieties` | AV-1 draft-page impact partition (Phase 3 only) |
 | `thm-dimension-theorem-intersection-projective` | AV-1 draft-page impact partition (Phase 3 only) |
