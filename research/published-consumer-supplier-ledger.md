@@ -8,6 +8,16 @@ Current classifications: U-P 1407, U-C 0, A-R 189, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Linear-map foundation audit — 2026-09-11
+
+Three previously unclassified vector/linear interfaces are bounded clear.
+Distributivity, additive cancellation and a nonzero scalar inverse prove the
+zero, negative and annihilation laws. The two-scalar linearity formula then
+gives preservation of zero, negatives and subtraction. The already classified
+vector-space and restriction-of-scalars suppliers remain single clear rows. No
+current Step-5 blocker was found. Exact hashes, deduplication and limits are in
+`research/phase-2-frontier-22-published-linear-map-foundation-audit.md`.
+
 ## Canonical rational-embedding audit — 2026-09-11
 
 Two canonical embedding interfaces are bounded clear. Recursion defines the
@@ -28499,11 +28509,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,676 unique
+subsequently reconciled published IDs. It currently contains **2,679 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,676 indexed IDs are published; **13,254 published items remain outside this
+2,679 indexed IDs are published; **13,251 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28517,9 +28527,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 189 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 207 | Recorded direct review and an unresolved item-specific repair. |
 
-873 further reference-pool items have bounded no-repair-needed dispositions
+876 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,803 items and the expanded reference pool contains 2,676 unique items.
+1,803 items and the expanded reference pool contains 2,679 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28580,6 +28590,9 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `lem-vector-space-elementary-consequences` | Frontier-22 linear-map foundation audit 2026-09-11: distributivity and cancellation prove both zero laws and both negation laws; a nonzero scalar inverse proves the annihilation alternative. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-linear-map-foundation-audit.md`. |
+| `def-linear-map` | Frontier-22 linear-map foundation audit 2026-09-11: the two-scalar formula coherently defines a linear map between vector spaces over the same field. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-linear-map-foundation-audit.md`. |
+| `lem-linear-map-elementary-properties` | Frontier-22 linear-map foundation audit 2026-09-11: linearity and additive cancellation prove preservation of zero, negatives and subtraction. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-linear-map-foundation-audit.md`. |
 | `def-canonical-natural` | Frontier-22 canonical rational-embedding audit 2026-09-11: unique recursion defines the field image of every natural, with zero and possible positive characteristic handled explicitly. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-canonical-rational-embedding-audit.md`. |
 | `lem-of-q-embeds` | Frontier-22 canonical rational-embedding audit 2026-09-11: cross-multiplication proves representative independence; signed integer algebra, positive inverses and order preservation give the unique injective rational embedding. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-canonical-rational-embedding-audit.md`. |
 | `def-nat-finite-sum-and-product` | Frontier-22 natural finite-sum audit 2026-09-11: product-valued recursion defines natural sums/products, empty values and the unique truncated difference without selection. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-natural-finite-sum-audit.md`. |
