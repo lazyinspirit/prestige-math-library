@@ -19,7 +19,26 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: free groups and relator area
+## Latest checkpoint: HG metric and word interfaces
+
+Evidence:
+`research/phase-2-frontier-22-published-hg-metric-word-interface-audit.md`.
+
+Six previously unclassified published interfaces are new bounded clears. The
+metric definition has a valid independent strong-triangle nonnegativity proof;
+geodesic and quasi-geodesic constants match the active HG conventions. Word
+length gives the word metric and Cayley path distance, with identity letters
+discarded, and group powers state the necessary commuting hypothesis. No new
+blocker was found. Existing word-ball, free-Cayley and quasi-isometry defects
+remain unchanged.
+
+Post-batch target index: 2,818 unique published IDs; U-P 1,389, U-C 0,
+A-R 187, A-P 231 and 1,011 bounded clears; 13,112 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks must be rerun before commit. Next target is any new exact reviewer
+handoff, then the next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: free groups and relator area
 
 Evidence:
 `research/phase-2-frontier-22-published-free-group-relator-area-audit.md`.

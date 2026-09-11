@@ -8,6 +8,17 @@ Current classifications: U-P 1389, U-C 0, A-R 187, A-P 231. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## HG metric and word-interface audit — 2026-09-11
+
+Six previously unclassified interfaces are bounded clears. The base metric
+definition's strong-triangle nonnegativity route is independently proved, so
+its ultrametric remark is not circular. Geodesic and quasi-geodesic constants
+match the active toolkit; word length gives the left-invariant word metric and
+its Cayley path distance, with identity letters safely discarded. Integer group
+powers retain the necessary commutativity hypothesis. No new HG blocker results.
+Evidence, hashes, deduplication and limits:
+`research/phase-2-frontier-22-published-hg-metric-word-interface-audit.md`.
+
 ## Free-group and relator-area audit — 2026-09-11
 
 Fourteen previously unclassified group/word interfaces are bounded clears.
@@ -28770,11 +28781,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,812 unique
+subsequently reconciled published IDs. It currently contains **2,818 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,812 indexed IDs are published; **13,118 published items remain outside this
+2,818 indexed IDs are published; **13,112 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28788,9 +28799,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 231 | Recorded direct review and an unresolved item-specific repair. |
 
-1,005 further reference-pool items have bounded no-repair-needed dispositions
+1,011 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,807 items and the expanded reference pool contains 2,812 unique items.
+1,807 items and the expanded reference pool contains 2,818 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28851,6 +28862,12 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-metric-space` | Frontier-22 HG metric/word audit 2026-09-11: separation, symmetry and triangle force nonnegativity; the exact supplier has an independent strong-triangle branch, so the ultrametric equivalence is not circular. Its three metric aliases are the same item. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hg-metric-word-interface-audit.md`. |
+| `def-geodesic-and-geodesic-metric-space` | Frontier-22 HG metric/word audit 2026-09-11: an isometric interval map forces its length to equal endpoint distance, with degenerate endpoints and the every-pair space convention coherent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hg-metric-word-interface-audit.md`. |
+| `def-quasi-geodesic-and-quasi-geodesic-metric-space` | Frontier-22 HG metric/word audit 2026-09-11: the two-sided `(lambda,c)` bounds, bounded closed segment domains and uniform space constants match the active toolkit. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hg-metric-word-interface-audit.md`. |
+| `def-word-metric` | Frontier-22 HG metric/word audit 2026-09-11: the generating-set word length gives `d_S(g,h)=|g^{-1}h|_S`, and its exact length laws supply all metric axioms. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hg-metric-word-interface-audit.md`. |
+| `thm-the-word-metric-is-a-left-invariant-metric-and-is-the-path-metric-of-the-cayley-graph` | Frontier-22 HG metric/word audit 2026-09-11: cancellation gives left invariance and paths correspond to expressions for `g^{-1}h`; deleting identity letters reconciles the simple Cayley graph without changing minima. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hg-metric-word-interface-audit.md`. |
+| `lem-group-power-laws` | Frontier-22 HG metric/word audit 2026-09-11: natural induction plus integer normal form/inverses prove the exponent laws, with `(gh)^n` correctly restricted to commuting elements; its alias is the same item. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hg-metric-word-interface-audit.md`. |
 | `def-group` | Frontier-22 free-group/area audit 2026-09-11: the monoid plus two-sided inverse axioms and abelian specialization are coherent; alias `def-abelian-group` is the same item. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-free-group-relator-area-audit.md`. |
 | `def-alphabet-words-and-reduction` | Frontier-22 free-group/area audit 2026-09-11: the disjoint formal inverse alphabet, finite/empty words, adjacent cancellation and finite free equivalence are precise. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-free-group-relator-area-audit.md`. |
 | `def-free-group` | Frontier-22 free-group/area audit 2026-09-11: the arbitrary-set extension-and-uniqueness property correctly separates the abstract definition from its reduced-word realization. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-free-group-relator-area-audit.md`. |
