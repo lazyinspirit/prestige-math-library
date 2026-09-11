@@ -8,6 +8,19 @@ Current classifications: U-P 1410, U-C 0, A-R 188, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Ordered-field foundation audit — 2026-09-11
+
+Nine previously unclassified field/order interfaces are bounded clear. The
+current field contract makes multiplication total, so distributivity and group
+uniqueness prove the zero and negation laws. Positive-cone trichotomy and
+closure give the total order, translation, product-sign and multiplication
+monotonicity clauses. The least-upper-bound and absolute-value definitions have
+the right boundary cases. Any omitted direct edge in the elementary proofs has
+an adequate published supplier and is clear under the canonical implicit-use
+rule. No current Step-5 blocker was found. Exact hashes, deduplication and
+limits are in
+`research/phase-2-frontier-22-published-ordered-field-foundation-audit.md`.
+
 ## Induction-foundation audit — 2026-09-11
 
 Four previously unclassified set-theoretic foundations are bounded clear.
@@ -28385,11 +28398,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,644 unique
+subsequently reconciled published IDs. It currently contains **2,653 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,644 indexed IDs are published; **13,286 published items remain outside this
+2,653 indexed IDs are published; **13,277 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28403,9 +28416,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 188 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 207 | Recorded direct review and an unresolved item-specific repair. |
 
-839 further reference-pool items have bounded no-repair-needed dispositions
+848 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,805 items and the expanded reference pool contains 2,644 unique items.
+1,805 items and the expanded reference pool contains 2,653 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28466,6 +28479,15 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-ordered-field` | Frontier-22 ordered-field foundation audit 2026-09-11: positive-cone trichotomy and closure induce the stated strict total order and its non-strict extension. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ordered-field-foundation-audit.md`. |
+| `def-complete-ordered-field` | Frontier-22 ordered-field foundation audit 2026-09-11: the nonempty bounded-above LUB property has the correct scope; negating a nonempty bounded-below set gives the stated infimum dual without selection. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ordered-field-foundation-audit.md`. |
+| `def-abs-value` | Frontier-22 ordered-field foundation audit 2026-09-11: trichotomy makes the two displayed branches exhaustive and compatible at zero. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ordered-field-foundation-audit.md`. |
+| `lem-of-abs-value` | Frontier-22 ordered-field foundation audit 2026-09-11: the three sign cases prove nonnegativity, definiteness and negation invariance; product signs and order translation prove multiplicativity and the interval characterization. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ordered-field-foundation-audit.md`. |
+| `lem-of-add-order` | Frontier-22 ordered-field foundation audit 2026-09-11: translated differences are unchanged, and the difference of the two sums is the sum of two positive differences. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ordered-field-foundation-audit.md`. |
+| `lem-of-sign-rules` | Frontier-22 ordered-field foundation audit 2026-09-11: cone multiplication gives the forward sign/monotonicity cases; trichotomy excludes equality and the reverse order in the converses. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ordered-field-foundation-audit.md`. |
+| `lem-of-mult-neg` | Frontier-22 ordered-field foundation audit 2026-09-11: distributivity, multiplication by zero and uniqueness of additive inverses prove both negation identities. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ordered-field-foundation-audit.md`. |
+| `lem-of-zero-mult` | Frontier-22 ordered-field foundation audit 2026-09-11: distributivity applied to `0+0` and additive cancellation prove multiplication by zero from the current total multiplication contract. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ordered-field-foundation-audit.md`. |
+| `lem-of-inverse-unique` | Frontier-22 ordered-field foundation audit 2026-09-11: the additive group and nonzero multiplicative group arguments prove uniqueness of identities and inverses. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-ordered-field-foundation-audit.md`. |
 | `thm-induction-principle` | Frontier-22 induction-foundation audit 2026-09-11: least-inductive-set minimality proves subset induction, and Separation of the truth subset proves property induction, without witness selection. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-induction-foundation-audit.md`. |
 | `def-natural-numbers` | Frontier-22 induction-foundation audit 2026-09-11: the unique least inductive set, zero and von Neumann successor are coherently defined; the exact construction is choice-free despite an older stronger “ZFC” page label. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-induction-foundation-audit.md`. |
 | `def-inductive-set` | Frontier-22 induction-foundation audit 2026-09-11: Pairing and Union make the successor a set, so containing zero and closing under successor is a well-formed first-order condition. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-induction-foundation-audit.md`. |

@@ -842,8 +842,8 @@ blocker. Counts are now 2,517 unique published IDs: U-P 1,413, U-C 15, A-R
 
 ## Current checkpoint — 2026-09-11
 
-The canonical ledger has since reached 2,644 unique published IDs: U-P 1,410,
-U-C 0, A-R 188, A-P 207 and 839 bounded clears. The set-semantics batch
+The canonical ledger has since reached 2,653 unique published IDs: U-P 1,410,
+U-C 0, A-R 188, A-P 207 and 848 bounded clears. The set-semantics batch
 fully reads relativization and arbitrary-signature soundness together with
 their six direct interfaces. Guarded formula induction, set-sized truth-set
 recursion, free-for substitution, coincidence and all six axiom/three rule
@@ -931,6 +931,15 @@ instance proves property induction. The exact proof uses no choice even though
 an older page label says “ZFC”. No current Step-5 blocker was found. Evidence:
 `research/phase-2-frontier-22-published-induction-foundation-audit.md`.
 
+The ordered-field foundation batch adds nine bounded clears. The current field
+contract supports multiplication by zero and both negation identities;
+positive-cone trichotomy and closure support translation, product signs and
+multiplication monotonicity. The least-upper-bound and absolute-value clauses
+have the right boundary cases. Omitted direct edges in the elementary proofs
+are adequate implicit uses of published suppliers. No current Step-5 blocker
+was found. Evidence:
+`research/phase-2-frontier-22-published-ordered-field-foundation-audit.md`.
+
 The canonical adequate-implicit-use rule remains mandatory: a sound implicit
 use of an adequate published supplier is a bounded clear, even when a repeated
 direct dependency edge would improve exposition. Every future addition must be
@@ -944,9 +953,9 @@ supplier IDs, and each published ID must retain exactly one classification row.
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
    next examining the cover-small chain-homotopy and smooth-bundle transition
-   interfaces, then audit bounded samples outside the 2,644-ID index.
+   interfaces, then audit bounded samples outside the 2,653-ID index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,286 published items
+No exhaustive discovery claim is authorized while 13,277 published items
 remain outside the index and dependency interfaces remain unaudited.
