@@ -8,6 +8,17 @@ Current classifications: U-P 1407, U-C 0, A-R 189, A-P 208. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## L1 and Lebesgue-point audit — 2026-09-11
+
+Four previously unclassified Fourier-facing interfaces are bounded clear.
+`L^1` distinguishes representatives from later a.e. classes, translation has
+the stated sign, and real `C_0` has the standard compact-tail definition; the
+published complex convention extends it componentwise. Countable choice is
+explicit where the Lebesgue-point proof selects and unions the countable family
+of exceptional sets. No current Step-5 blocker was found. Exact hashes,
+deduplication and limits are in
+`research/phase-2-frontier-22-published-l-one-lebesgue-point-audit.md`.
+
 ## Bounded-absoluteness audit — 2026-09-11
 
 Two previously unclassified set-theory suppliers are bounded clear. Formula
@@ -28679,6 +28690,10 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-l-one-of-a-measure` | Frontier-22 L1/Lebesgue-point audit 2026-09-11: this is exactly the class of integrable complex representatives and explicitly defers a.e.-class quotienting. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-l-one-lebesgue-point-audit.md`. |
+| `def-translation-of-a-function-on-rn` | Frontier-22 L1/Lebesgue-point audit 2026-09-11: `tau_h f(x)=f(x-h)` unambiguously shifts the graph in the positive `h` direction. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-l-one-lebesgue-point-audit.md`. |
+| `def-c-zero-on-rn` | Frontier-22 L1/Lebesgue-point audit 2026-09-11: the real compact-tail definition is equivalent to Euclidean ball tails, and the separate published complex convention extends it componentwise. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-l-one-lebesgue-point-audit.md`. |
+| `thm-almost-every-point-is-a-lebesgue-point` | Frontier-22 L1/Lebesgue-point audit 2026-09-11: differentiation of the countable dense family `|f-c|` and explicit countable choice give one null exceptional union; the triangle bound then proves averaged oscillation tends to zero. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-l-one-lebesgue-point-audit.md`. |
 | `thm-delta-zero-absoluteness-for-transitive-sets` | Frontier-22 bounded-absoluteness audit 2026-09-11: transitivity retains every bounded witness in the smaller domain, and structural formula induction transfers all Delta-zero truth values. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-bounded-absoluteness-audit.md`. |
 | `lem-bounded-definitions-of-basic-set-operations` | Frontier-22 bounded-absoluteness audit 2026-09-11: all basic set/relation/function graph formulas have genuinely bounded quantifiers, correct empty/intersection boundaries and no closure overclaim. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-bounded-absoluteness-audit.md`. |
 | `def-vertex-and-source-of-an-indecomposable-module` | Frontier-22 Hilbert/vertex audit 2026-09-11: vertex minimality and source summand/induction data are exact; existence and conjugacy are left to the separate indexed theorem. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-hilbert-vertex-foundation-audit.md`. |
