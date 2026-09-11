@@ -8,6 +8,19 @@ Current classifications: U-P 1410, U-C 0, A-R 188, A-P 206. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Cover-small chain-homotopy audit — 2026-09-11
+
+Six previously unclassified active singular-chain interfaces are bounded clear.
+Barycentric subdivision and its prism preserve cover-small supports. Finite
+chains become small at the maximum of finitely many subdivision depths. For the
+stronger result, recursively making a simplex's depth dominate all face depths
+lets the variable-depth prism correction land in the cover-small complex and
+vanish on it. The resulting retraction and homotopy identities tensor with any
+abelian coefficient group because the integral inclusion is split degreewise;
+no flatness or choice hypothesis is needed. No current Step-5 blocker was
+found. Exact hashes, calculations, deduplication and limits are in
+`research/phase-2-frontier-22-published-cover-small-chain-homotopy-audit.md`.
+
 ## Set semantics and soundness audit — 2026-09-11
 
 Eight previously unclassified active set-theory interfaces are bounded clear.
@@ -28248,11 +28261,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,601 unique
+subsequently reconciled published IDs. It currently contains **2,607 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,601 indexed IDs are published; **13,329 published items remain outside this
+2,607 indexed IDs are published; **13,323 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28266,9 +28279,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 188 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 206 | Recorded direct review and an unresolved item-specific repair. |
 
-797 further reference-pool items have bounded no-repair-needed dispositions
+803 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,804 items and the expanded reference pool contains 2,601 unique items.
+1,804 items and the expanded reference pool contains 2,607 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28329,6 +28342,12 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `thm-cover-small-inclusion-is-a-chain-homotopy-equivalence` | Frontier-22 cover-small audit 2026-09-11: face-monotone least subdivision depths make the variable prism correction small, define a retraction and vanish on the small complex; split integral chains allow arbitrary coefficients. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-cover-small-chain-homotopy-audit.md`. |
+| `thm-cover-small-singular-chains-compute-singular-homology` | Frontier-22 cover-small audit 2026-09-11: iterated subdivision gives cycle surjectivity, while subdividing a bounding chain and retaining the small prism correction gives injectivity. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-cover-small-chain-homotopy-audit.md`. |
+| `lem-every-finite-singular-chain-becomes-cover-small-after-enough-subdivision` | Frontier-22 cover-small audit 2026-09-11: pulled-back interiors cover each compact simplex, and the maximum of the finitely many mesh-decay depths works for the finite chain. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-cover-small-chain-homotopy-audit.md`. |
+| `thm-barycentric-subdivision-is-chain-homotopic-to-the-identity` | Frontier-22 cover-small audit 2026-09-11: the cone boundary formula and lower-dimensional prism identity give `1-S=boundary T+T boundary`; the pushed-forward signs and base case are coherent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-cover-small-chain-homotopy-audit.md`. |
+| `def-barycentric-subdivision-chain-operator` | Frontier-22 cover-small audit 2026-09-11: the recursive affine cone gives finite subdivisions inside each original simplex and extends linearly with the fixed cone orientation. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-cover-small-chain-homotopy-audit.md`. |
+| `def-barycentric-subdivision-prism-homotopy` | Frontier-22 cover-small audit 2026-09-11: universal affine prism chains push forward naturally and stay inside the original simplex, providing the required degree-one operator. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-cover-small-chain-homotopy-audit.md`. |
 | `thm-relativization-and-set-satisfaction` | Frontier-22 set-semantics audit 2026-09-11: atoms agree with the restricted membership structure, the guarded quantifier has exactly the satisfaction witnesses, and no transitivity or class truth predicate is used. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-set-semantics-soundness-audit.md`. |
 | `thm-set-language-first-order-soundness` | Frontier-22 set-semantics audit 2026-09-11: all six schemes and three rules preserve truth under every assignment; restricted existential elimination uses one witness for one premise and no family choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-set-semantics-soundness-audit.md`. |
 | `def-relativization-to-a-definable-class` | Frontier-22 set-semantics audit 2026-09-11: the recursive transformation is capture-avoiding, uses a fresh set parameter, and keeps proper-class use formula-by-formula. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-set-semantics-soundness-audit.md`. |
