@@ -4,9 +4,22 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1391, U-C 0, A-R 187, A-P 230. The
+Current classifications: U-P 1389, U-C 0, A-R 187, A-P 231. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Cardinal and tree-foundation audit — 2026-09-11
+
+Five newly indexed items and two U-P targets are bounded clears. Initial-ordinal
+cardinality, representative independence, tagged sums/products, explicitly
+AC-scoped exponentiation and the maximum-first proof of the cardinal-square
+theorem are sound. The base tree/height definition is also coherent.
+`def-kappa-tree-and-tree-property` is newly A-P: it applies the cardinality
+symbol to arbitrary tree levels without assuming AC or proving those levels
+well-orderable. Use an explicit injection into some ordinal below `kappa`, or
+state and declare AC. The current weak-compactness consumer already works in
+ZFC, so there is no frontier blocker. Exact hashes, repair and limits:
+`research/phase-2-frontier-22-published-cardinal-tree-foundation-audit.md`.
 
 ## Large-cardinal set-foundation audit — 2026-09-11
 
@@ -28709,11 +28722,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,750 unique
+subsequently reconciled published IDs. It currently contains **2,756 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,750 indexed IDs are published; **13,180 published items remain outside this
+2,756 indexed IDs are published; **13,174 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28722,14 +28735,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1391 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1389 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 230 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 231 | Recorded direct review and an unresolved item-specific repair. |
 
-942 further reference-pool items have bounded no-repair-needed dispositions
+949 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,808 items and the expanded reference pool contains 2,750 unique items.
+1,807 items and the expanded reference pool contains 2,756 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28790,6 +28803,13 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-cardinal` | Frontier-22 cardinal/tree audit 2026-09-11: initial ordinals are defined choice-free, while the cardinality assignment for an arbitrary set is explicitly scoped to AC and proved independent of the selected well-order. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-cardinal-tree-foundation-audit.md`. |
+| `lem-cardinality-of-a-well-orderable-set` | Frontier-22 cardinal/tree audit 2026-09-11: a supplied well-order gives one ordinal bound; minimization yields the unique least equinumerous ordinal and proves it initial, without a choice family. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-cardinal-tree-foundation-audit.md`. |
+| `lem-cardinal-operations-are-well-defined` | Frontier-22 cardinal/tree audit 2026-09-11: tagged sums, products, function spaces and power sets transport supplied bijections; explicit lexicographic orders give ZF sum/product cardinalities, while general function-space cardinality remains explicitly AC-scoped. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-cardinal-tree-foundation-audit.md`. |
+| `def-cardinal-arithmetic` | Frontier-22 cardinal/tree audit 2026-09-11: sum and product use explicitly well-orderable representatives in ZF, exponentiation is expressly conditional on its function space being well-orderable and general existence is stated under AC. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-cardinal-tree-foundation-audit.md`. |
+| `lem-cardinal-arithmetic-basic-laws` | Frontier-22 cardinal/tree audit 2026-09-11: explicit bijections prove algebra and exponent laws; the nonzero-base condition supports exponent monotonicity and every non-unit general exponential clause declares AC. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-cardinal-tree-foundation-audit.md`. |
+| `thm-hessenberg` | Frontier-22 cardinal/tree audit 2026-09-11: the maximum-first well-order bounds each initial segment by a smaller square, and transfinite induction plus the coordinate embedding proves every infinite cardinal is equinumerous with its square in ZF. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-cardinal-tree-foundation-audit.md`. |
+| `def-set-theoretic-tree-and-levels` | Frontier-22 cardinal/tree audit 2026-09-11: predecessor well-orders give unique ordinal heights, their set supremum gives tree height, and branch/cofinality plus empty/singleton conventions are coherent existence-free definitions. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-cardinal-tree-foundation-audit.md`. |
 | `thm-hartogs` | Frontier-22 large-cardinal set-foundation audit 2026-09-11: collecting all well-order data and applying unique order type via Replacement yields the least non-injecting ordinal without choice; its active cardinal-above-a-bound use is sound. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-large-cardinal-set-foundations-audit.md`. |
 | `thm-mostowski-collapse` | Frontier-22 large-cardinal set-foundation audit 2026-09-11: definable recursion, ordinal induction and well-order rigidity produce the unique ordinal order type and unique collapse without choice; its active order-type use is sound. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-large-cardinal-set-foundations-audit.md`. |
 | `thm-ordinal-arithmetic-monotonicity` | Frontier-22 large-cardinal set-foundation audit 2026-09-11: zero/successor/limit induction proves right strictness, left weak monotonicity, cofinal-subset continuity and preservation of limits with the stated positive-factor condition. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-large-cardinal-set-foundations-audit.md`. |
@@ -29788,6 +29808,7 @@ owner's scan policy.
 
 | Published item | Repair evidence and remaining obligation |
 |---|---|
+| `def-kappa-tree-and-tree-property` | Frontier-22 cardinal/tree audit 2026-09-11: `|T_alpha|<kappa` is applied to arbitrary tree levels, but the item neither assumes AC nor proves levels well-orderable; a height-one tree may have an arbitrary root set, so cardinality is undefined under the published convention. Prefer the ZF smallness predicate that `T_alpha` injects into some `lambda<kappa`, or explicitly state/depend on AC and identify its use. The current weak-compactness consumer already declares ZFC/AC, so no frontier blocker; no new pair. Exact hash/proof: `research/phase-2-frontier-22-published-cardinal-tree-foundation-audit.md`. |
 | `def-integral-over-a-measurable-set` | Frontier-22 density/null-integral audit 2026-09-11: indicator multiplication is measurably defined, but the restricted integral directly uses the now-A-P nonnegative-integral definition. Install the finite zero-complement simple-integral repair. U-P to A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-density-null-integral-propagation-audit.md`. |
 | `thm-indefinite-integral-of-a-nonnegative-function-is-a-measure` | Frontier-22 density/null-integral audit 2026-09-11 corrects its bounded clear: countable additivity uses the now-A-P MCT and nonnegative-additivity clauses. Its visible finite-union/increasing-limit proof remains sound after the common foundation repair. Clear to A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-density-null-integral-propagation-audit.md`. |
 | `def-measure-with-density` | Frontier-22 density/null-integral audit 2026-09-11: the definition names the affected indefinite-integral theorem as the proof that its set function is a measure. Apply the common finite zero-complement repair upstream or inline. New A-P; no new pair. Exact hash/path: `research/phase-2-frontier-22-published-density-null-integral-propagation-audit.md`. |
@@ -30896,8 +30917,6 @@ mathematical repairs. Evidence:
 | `lem-bounded-strip-maximum-principle` | complex-riesz-thorin-endpoint-interpolation |
 | `lem-c-one-diffeomorphisms-map-lebesgue-measurable-sets-to-lebesgue-measurable-sets` | Exact direct impact-review queue |
 | `lem-canonical-map-is-natural` | norming-and-separation-under-hahn-banach |
-| `lem-cardinal-arithmetic-basic-laws` | 7.4 Published metadata snapshot amendments |
-| `lem-cardinal-operations-are-well-defined` | 7.4 Published metadata snapshot amendments |
 | `lem-cauchy-in-probability-sequences-have-a-measurable-limit` | 0A.2 Exact Phase-3 defects in published content |
 | `lem-chain-rule-for-an-indefinite-integral-after-an-absolutely-continuous-composition` | Early-repair direct-consumer inventory — 2026-09-08 |
 | `lem-character-field-is-the-stabilizer-fixed-field` | Transitive consumers (166), grouped by home page |

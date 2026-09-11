@@ -19,20 +19,22 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: large-cardinal set foundations
+## Latest checkpoint: cardinal and tree foundations
 
 Evidence:
-`research/phase-2-frontier-22-published-large-cardinal-set-foundations-audit.md`.
+`research/phase-2-frontier-22-published-cardinal-tree-foundation-audit.md`.
 
-Six previously unclassified set-theory interfaces are new bounded clears, and
-`def-cofinality` moves from its historical page-reconciliation U-P row to
-clear. Hartogs, unique order type and the ordinal arithmetic clauses are
-choice-free and complete in the exact current uses. The club, cofinality,
-partition-arrow and hereditary-size conventions cover their relevant boundary
-cases. No current frontier blocker was found.
+Five previously unclassified cardinal/tree interfaces are new bounded clears,
+and two old metadata-snapshot U-P rows move to clear. Cardinality and cardinal
+arithmetic handle the ZF/AC boundary correctly; Hessenberg's square proof and
+the base tree/height convention are sound. `def-kappa-tree-and-tree-property`
+is new A-P because arbitrary levels need not be well-orderable in ZF, making
+its cardinality display undefined without an explicit smallness predicate or
+AC. The current weak-compactness consumer already states ZFC and AC, so no
+frontier blocker results.
 
-Post-batch target index: 2,750 unique published IDs; U-P 1,391, U-C 0,
-A-R 187, A-P 230 and 942 bounded clears; 13,180 published items remain outside
+Post-batch target index: 2,756 unique published IDs; U-P 1,389, U-C 0,
+A-R 187, A-P 231 and 949 bounded clears; 13,174 published items remain outside
 the index. Recount, publication-state and cross-class deduplication checks must
 be rerun before commit. Next target is any new exact reviewer handoff, then the
 next highest-use direct frontier supplier outside the index.
@@ -1175,10 +1177,10 @@ supplier IDs, and each published ID must retain exactly one classification row.
    issues reported by the root worker, prioritizing items actually consumed by
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
-   then audit high-use active-frontier samples outside the 2,750-ID
+   then audit high-use active-frontier samples outside the 2,756-ID
    index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,180 published items
+No exhaustive discovery claim is authorized while 13,174 published items
 remain outside the index and dependency interfaces remain unaudited.
