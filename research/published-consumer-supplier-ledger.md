@@ -8,6 +8,17 @@ Current classifications: U-P 1407, U-C 0, A-R 189, A-P 208. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Serre-vanishing audit — 2026-09-11
+
+Two previously unclassified Kac–Moody suppliers are bounded clear. A homogeneous
+opposite-simple centralizer generates a positive- or negative-degree ideal and
+therefore vanishes in the maximal Cartan-disjoint quotient. The adjoint
+`sl_2` commutator identity then kills the Serre vectors at exponent
+`1-a_ij`, including the off-diagonal zero case, without asserting ideal
+generation. No current Step-5 blocker was found. Exact hashes, deduplication and
+limits are in
+`research/phase-2-frontier-22-published-serre-vanishing-audit.md`.
+
 ## Pullback-bundle topology audit — 2026-09-11
 
 Eight previously unclassified product, subspace, quotient and pullback-set
@@ -28647,6 +28658,8 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `lem-kac-moody-opposite-simple-centralizer-vanishes` | Frontier-22 Serre audit 2026-09-11: positive/negative adjoint closure generates a one-sign ideal disjoint from the Cartan, so maximality forces the opposite-simple centralizer to vanish. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-serre-vanishing-audit.md`. |
+| `lem-serre-elements-vanish-before-serre-generation` | Frontier-22 Serre audit 2026-09-11: the adjoint `sl_2` identity vanishes at `m=1-a_ij`, and every opposite simple generator kills the vector, including the symmetric-zero boundary case. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-serre-vanishing-audit.md`. |
 | `def-product-topology` | Frontier-22 pullback-topology audit 2026-09-11: product/box bases, finite-support restrictions, empty product and finite-versus-arbitrary choice boundaries are coherent. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-pullback-bundle-topology-audit.md`. |
 | `thm-product-of-countable` | Frontier-22 pullback-topology audit 2026-09-11: two supplied enumerations and the natural pairing bijection explicitly enumerate the product; only finite existential selection is used. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-pullback-bundle-topology-audit.md`. |
 | `prop-second-countability-is-hereditary` | Frontier-22 pullback-topology audit 2026-09-11: nonempty traces of a countable ambient basis form a countable subspace basis. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-pullback-bundle-topology-audit.md`. |

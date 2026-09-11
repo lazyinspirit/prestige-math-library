@@ -842,8 +842,8 @@ blocker. Counts are now 2,517 unique published IDs: U-P 1,413, U-C 15, A-R
 
 ## Current checkpoint — 2026-09-11
 
-The canonical ledger has since reached 2,712 unique published IDs: U-P 1,407,
-U-C 0, A-R 189, A-P 208 and 908 bounded clears. The set-semantics batch
+The canonical ledger has since reached 2,714 unique published IDs: U-P 1,407,
+U-C 0, A-R 189, A-P 208 and 910 bounded clears. The set-semantics batch
 fully reads relativization and arbitrary-signature soundness together with
 their six direct interfaces. Guarded formula induction, set-sized truth-set
 recursion, free-for substitution, coincidence and all six axiom/three rule
@@ -1056,6 +1056,13 @@ this clause until that proof is installed. Existing suppliers suffice; no new
 pair is needed. Evidence:
 `research/phase-2-frontier-22-published-pullback-bundle-topology-audit.md`.
 
+The opposite-simple centralizer and pre-generation Serre-vanishing lemmas add
+two bounded clears. One-sign adjoint closure creates a Cartan-disjoint ideal,
+and the exact adjoint `sl_2` commutator coefficient vanishes at `1-a_ij`;
+the GCM symmetric-zero clause covers the remaining boundary case. No current
+Step-5 blocker was found. Evidence:
+`research/phase-2-frontier-22-published-serre-vanishing-audit.md`.
+
 The canonical adequate-implicit-use rule remains mandatory: a sound implicit
 use of an adequate published supplier is a bounded clear, even when a repeated
 direct dependency edge would improve exposition. Every future addition must be
@@ -1068,10 +1075,10 @@ supplier IDs, and each published ID must retain exactly one classification row.
    issues reported by the root worker, prioritizing items actually consumed by
    current independent review.
 2. Continue through original-next-20 prerequisites by load-bearing proof clause,
-   then audit high-use active-frontier samples outside the 2,712-ID
+   then audit high-use active-frontier samples outside the 2,714-ID
    index.
 3. Preserve the correct-implicit-use rule and consolidate any historical judge
    report into one canonical item row before classification.
 
-No exhaustive discovery claim is authorized while 13,218 published items
+No exhaustive discovery claim is authorized while 13,216 published items
 remain outside the index and dependency interfaces remain unaudited.
