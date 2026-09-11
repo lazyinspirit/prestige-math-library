@@ -19,7 +19,32 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: active-foundation follow-up audit
+## Latest checkpoint: high-use structural suppliers
+
+Evidence:
+`research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`.
+
+Thirteen previously unclassified direct or near-direct frontier interfaces are
+new bounded clears. The compact-generation chain from kification through the
+interval exponential law was read clause by clause: compact tests, tube
+arguments, quotient descent and closed fibre relations establish the exact
+cylinder, mapping-space, product-quotient and closed-pushout uses without
+hidden choice or an imported WH assumption. The subspace trace definition is
+also choice-free.
+
+The taking-out-known truncation argument, categorical products/coproducts,
+basiswise free-module lifting with its explicit choice boundary, generated
+sigma-algebra intersection and ultrafilter complement characterization are
+sound in their used scopes. Historical supplier-map occurrences were not
+mistaken for classification rows. No new Step-3 blocker was found.
+
+Post-batch target index: 2,575 unique published IDs; U-P 1,408, U-C 11,
+A-R 187, A-P 197 and 772 bounded clears. Recount, publication-state and
+cross-class deduplication checks must be rerun before commit. Next target is
+any new exact reviewer handoff, then the next highest-use direct frontier
+supplier outside the index.
+
+## Completed checkpoint: active-foundation follow-up audit
 
 Evidence:
 `research/phase-2-frontier-22-published-active-foundation-followup-audit.md`.

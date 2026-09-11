@@ -8,6 +8,21 @@ Current classifications: U-P 1408, U-C 11, A-R 187, A-P 197. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## High-use structural-supplier audit — 2026-09-11
+
+Thirteen previously unclassified direct or near-direct frontier interfaces are
+bounded clear. The subspace trace construction is choice-free. The compactly
+generated chain from kification through mapping spaces, product quotient maps,
+closed pushouts and the ordinary interval exponential law is sound on its exact
+used clauses; quotient inverses are constructed by descent rather than by
+choosing representatives. The taking-out-known truncation argument,
+categorical products/coproducts, free-module lifting with its stated choice
+boundary, generated sigma-algebra intersection and ultrafilter complement
+characterization are also sound in the inspected scopes. No current Step-3
+blocker was found. Exact hashes, proof evidence, deduplication searches and
+limits are in
+`research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`.
+
 ## Active foundation follow-up audit — 2026-09-11
 
 Two previously unindexed definitions enter A-P. The complex `L^p` convention
@@ -28165,11 +28180,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,538 unique
+subsequently reconciled published IDs. It currently contains **2,575 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,538 indexed IDs are published; **13,392 published items remain outside this
+2,575 indexed IDs are published; **13,355 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28183,9 +28198,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 197 | Recorded direct review and an unresolved item-specific repair. |
 
-759 further reference-pool items have bounded no-repair-needed dispositions
+772 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,803 items and the expanded reference pool contains 2,562 unique items.
+1,803 items and the expanded reference pool contains 2,575 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28246,6 +28261,19 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-subspace-topology-top` | Frontier-22 high-use structural-supplier audit 2026-09-11: the canonical trace representative proves arbitrary-union closure without choice; closed sets, bases, subbases, inclusion, restriction and the map-into-subspace property follow from exact trace identities. New bounded clear; both aliases deduplicated. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
+| `def-compactly-generated-conventions-for-based-homotopy` | Frontier-22 high-use structural-supplier audit 2026-09-11: WH, compact-Hausdorff k-tests, kification, k-products and test-image compact-open mapping spaces are coherently fixed for the following exact proofs. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
+| `thm-quotient-universal-property` | Frontier-22 high-use structural-supplier audit 2026-09-11: finality proves the characteristic property and continuous fibre descent; the composite preimage calculation proves composite quotientness. A one-point existential instantiation in uniqueness is not family choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
+| `lem-kification-compact-tests-and-finite-constructions` | Frontier-22 high-use structural-supplier audit 2026-09-11: compact tests prove idempotence, CG-source lifting and the finite constructions; the closed-interval/projection argument proves the ordinary `X times I` clause. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
+| `lem-compact-test-exponential-law-and-products-of-quotients` | Frontier-22 high-use structural-supplier audit 2026-09-11: closed compact test neighbourhoods and the tube lemma prove evaluation/currying; quotient descent plus uncurrying constructs the product-quotient inverse without choosing representatives. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
+| `lem-weak-hausdorff-diagonals-and-closed-quotients` | Frontier-22 high-use structural-supplier audit 2026-09-11: normal compact test fibres give Hausdorff test images, k-diagonals characterize WH, product quotientness gives the closed-fibre criterion, and point evaluations close the mapping-space diagonal. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
+| `lem-compact-generation-preserves-the-cylinder-and-closed-pushouts` | Frontier-22 high-use structural-supplier audit 2026-09-11: the four-piece pushout relation is closed by diagonal/graph inverse images; the closed-relation and quotient properties prove CGWH, pushout, pullback and target closed embedding. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
+| `lem-interval-exponential-law-and-quotient-homotopies` | Frontier-22 high-use structural-supplier audit 2026-09-11: the ordinary interval exponential law is proved by compact tubes; Sierpinski characteristic descent proves `q times id_I` quotient, and exact CG/CGWH suppliers prove the based and relative clauses. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
+| `thm-taking-out-what-is-known` | Frontier-22 high-use structural-supplier audit 2026-09-11: indicator/simple cases, dominated bounded approximation, the `R_n=|Z| wedge n` MCT estimate and final truncation/DCT prove all stated clauses. Explicit AC covers conditional-expectation existence. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
+| `def-products-and-coproducts` | Frontier-22 high-use structural-supplier audit 2026-09-11: discrete-diagram limit/colimit definitions give the correct pairing/copairing equations and empty/singleton consequences without asserting existence. Both aliases deduplicated. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
+| `thm-free-modules-are-projective-with-choice-boundary` | Frontier-22 high-use structural-supplier audit 2026-09-11: arbitrary AC selects one preimage per basis value, finite choice handles a supplied finite enumeration, the empty basis needs none, and the free-module universal property gives the lift. New bounded clear after reconciling historical supplier-map occurrences. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
+| `thm-generated-sigma-algebra-exists-and-is-minimal` | Frontier-22 high-use structural-supplier audit 2026-09-11: nonempty intersections preserve all sigma-algebra axioms and the power set canonically makes the containing family nonempty, giving existence and minimality without choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
+| `thm-ultrafilter-characterisation` | Frontier-22 high-use structural-supplier audit 2026-09-11: the explicit one-set filter extension proves complement decision from maximality, while properness proves the converse and exclusivity. This characterization invokes no ultrafilter-existence principle. New bounded clear after reconciling historical consumer-map occurrences. Exact hash/scope: `research/phase-2-frontier-22-published-high-use-structural-suppliers-audit.md`. |
 | `def-simple-reflections-and-the-kac-moody-weyl-group` | Frontier-22 active-foundation follow-up 2026-09-11: the root/coroot formulas are dual, Cartan diagonal two makes each simple reflection involutive and the Cartan entries prove root-lattice preservation. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-active-foundation-followup-audit.md`. |
 | `thm-ordinals-and-omega-are-absolute-in-transitive-models` | Frontier-22 active-foundation follow-up 2026-09-11: bounded transitivity/linear-membership clauses plus ambient Foundation make ordinalhood absolute; internal ZF successor formation fixes the finite ordinals and the bounded least-limit description identifies actual omega. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-active-foundation-followup-audit.md`. |
 | `thm-singular-chain-homotopy-formula` | Frontier-22 active-foundation follow-up 2026-09-11: the oriented prism-boundary formula gives the chain identity on generators, including degree zero, and integer linearity plus the declared tensor extensions give every abelian coefficient group. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-active-foundation-followup-audit.md`. |
