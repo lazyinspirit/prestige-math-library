@@ -8,6 +8,18 @@ Current classifications: U-P 1411, U-C 15, A-R 187, A-P 192. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
 
+## Local continuity and locally finite sums audit — 2026-09-11
+
+Two previously unindexed published topology interfaces have bounded-clear
+dispositions. `lem-continuity-is-local-and-pastes` correctly uses arbitrary
+unions for open-cover locality and finite unions for closed-cover pasting.
+`lem-locally-finite-sums-are-continuous` is locally a finite continuous sum;
+the canonical neighbourhood contains an open neighbourhood, so the preceding
+locality lemma supplies its final inference. That implicit published use is
+adequate under the ledger rule and is not dependency debt. Exact hashes,
+deduplication and limits are in
+`phase-2-frontier-22-published-local-continuity-audit.md`.
+
 ## Kac--Moody construction-interface audit — 2026-09-11
 
 The ten published interfaces from finite GCM realizations through the largest
@@ -28085,11 +28097,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,536 unique
+subsequently reconciled published IDs. It currently contains **2,538 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,536 indexed IDs are published; **13,394 published items remain outside this
+2,538 indexed IDs are published; **13,392 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28103,9 +28115,9 @@ Supplier mappings and subsequent item-specific findings remain above.
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 192 | Recorded direct review and an unresolved item-specific repair. |
 
-731 further reference-pool items have bounded no-repair-needed dispositions
+733 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,805 items and the expanded reference pool contains 2,536 unique items.
+1,805 items and the expanded reference pool contains 2,538 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28166,6 +28178,8 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `lem-continuity-is-local-and-pastes` | Frontier-22 local-continuity audit 2026-09-11: full proof and exact subspace/preimage interfaces read. Arbitrary open-cover locality uses arbitrary unions; finite closed-cover pasting uses finite unions; composition and restriction clauses are direct preimage calculations. Its supplier-map mention and alias are not classification rows. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-local-continuity-audit.md`. |
+| `lem-locally-finite-sums-are-continuous` | Frontier-22 local-continuity audit 2026-09-11: local finiteness makes the pointwise sum equal a finite continuous sum on a neighbourhood; the canonical neighbourhood contains an open one, and the preceding published locality lemma supplies continuity. This correct implicit use is not dependency debt. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-local-continuity-audit.md`. |
 | `def-realization-of-a-generalized-cartan-matrix` | Frontier-22 Kac--Moody construction audit 2026-09-11: full definition read. Independent indexed roots/coroots, evaluation convention, minimal dimension and realization isomorphisms are coherent. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-kac-moody-construction-audit.md`. |
 | `prop-minimal-realizations-exist-and-are-unique-up-to-isomorphism` | Frontier-22 Kac--Moody construction audit 2026-09-11: finite elimination complements the row image, proves the dimension lower bound and constructs the comparison isomorphism through finite linear sections. No arbitrary choice is used. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-kac-moody-construction-audit.md`. |
 | `def-kac-moody-root-lattice-height-and-positive-cone` | Frontier-22 Kac--Moody construction audit 2026-09-11: simple-root independence gives unique coordinates, so height, the positive cone and the induced partial order are well defined. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-kac-moody-construction-audit.md`. |

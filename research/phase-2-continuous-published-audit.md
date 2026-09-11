@@ -19,7 +19,22 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: Kac--Moody construction audit
+## Latest checkpoint: local continuity audit
+
+Evidence: `research/phase-2-frontier-22-published-local-continuity-audit.md`.
+
+The open-cover/finite-closed-cover pasting lemma and the locally finite
+nonnegative-sum lemma are new bounded clears. The latter agrees locally with a
+finite sum on a neighbourhood; passing to the open neighbourhood it contains
+is a correct implicit use of the published locality lemma under the canonical
+rule, rather than dependency debt.
+
+Post-batch target index: 2,538 unique published IDs; U-P 1,411, U-C 15,
+A-R 187, A-P 192 and 733 bounded clears. Recount and cross-class deduplication
+must be rerun before commit. Next target is the latest exact author handoff or,
+if none is pending, the next direct supplier outside the index.
+
+## Completed checkpoint: Kac--Moody construction audit
 
 Evidence:
 `research/phase-2-frontier-22-published-kac-moody-construction-audit.md`.
