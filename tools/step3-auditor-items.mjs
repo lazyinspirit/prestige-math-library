@@ -17,6 +17,10 @@ const safe = value => {
 };
 const json = path => JSON.parse(readFileSync(path, 'utf8'));
 const digest = value => createHash('sha256').update(JSON.stringify(value)).digest('hex');
+// Baselines are immutable inventories, not provenance certifications. Keep their
+// v1 identity so existing runs can revalidate without moving the stage boundary.
+const BASELINE_POLICY = 'auditor-authored-step3-bypass-v1';
+const CERTIFICATION_POLICY = 'auditor-authored-step3-bypass-v2';
 export const auditorBaselinePath = (root, run) => join(root, 'research', `${safe(run)}-step3-auditor-baseline.json`);
 export const auditorCertificationsPath = (root, run) => join(root, 'research', `${safe(run)}-step3-auditor-certifications.json`);
 
@@ -25,7 +29,7 @@ function snapshot(root, run) {
   return {
     version: 1,
     run,
-    policy: 'auditor-authored-step3-bypass-v1',
+    policy: BASELINE_POLICY,
     items: [...s.items].map(([id, value]) => ({ id, page: value.page.id, batch: String(value.page.batch) }))
       .sort((a, b) => a.id.localeCompare(b.id)),
     scopes: [...s.pairs.keys()].map(page => ({ page, sha256: scopeHash(s, page) }))
@@ -70,7 +74,7 @@ export function certifyAuditorItems(root, run) {
   const baselinePath = auditorBaselinePath(root, run);
   if (!existsSync(baselinePath)) throw Error(`Missing Step 3 auditor baseline: ${baselinePath}`);
   const baseline = json(baselinePath);
-  if (baseline.version !== 1 || baseline.run !== run || baseline.policy !== 'auditor-authored-step3-bypass-v1'
+  if (baseline.version !== 1 || baseline.run !== run || baseline.policy !== BASELINE_POLICY
     || !Array.isArray(baseline.items) || !Array.isArray(baseline.scopes)
     || !Array.isArray(baseline.existing_item_files))
     throw Error('Invalid Step 3 auditor baseline');
@@ -85,7 +89,7 @@ export function certifyAuditorItems(root, run) {
   if (existsSync(certificationPath)) {
     try {
       const prior = json(certificationPath);
-      if (prior.version === 1 && prior.run === run && prior.policy === baseline.policy
+      if (prior.version === 1 && prior.run === run && prior.policy === CERTIFICATION_POLICY
         && prior.baseline_sha256 === digest(baseline) && Array.isArray(prior.items)) {
         priorById = new Map(prior.items.map(row => [row.id, row]));
       }
@@ -113,7 +117,7 @@ export function certifyAuditorItems(root, run) {
       if (!author) throw Error(`${id}: no successful Step 3 auditor/author result covers batch ${batch}`);
       const ended = Date.parse(author.ended_at);
       if (!Number.isFinite(ended)
-        || itemInputPaths(s, id, dependencies).some(path => statSync(path).mtimeMs > ended + 1000))
+        || itemInputPaths(s, id, dependencies).some(path => statSync(path).mtimeMs > ended))
         throw Error(`${id}: changed after its latest successful Step 3 auditor/author result`);
     }
     certified.push({ id, page: value.page.id, batch, dependencies,
@@ -132,7 +136,7 @@ export function certifyAuditorItems(root, run) {
   const receipt = {
     version: 1,
     run,
-    policy: 'auditor-authored-step3-bypass-v1',
+    policy: CERTIFICATION_POLICY,
     baseline_sha256: digest(baseline),
     at: new Date().toISOString(),
     items: certified.sort((a, b) => a.id.localeCompare(b.id)),

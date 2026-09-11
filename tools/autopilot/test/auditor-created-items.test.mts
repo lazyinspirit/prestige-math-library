@@ -8,6 +8,7 @@ import { spawnSync } from 'node:child_process';
 import {
   writeAuditorCreatedBaseline,
   certifyAuditorCreatedItems,
+  loadAuditorCreatedCertifications,
 } from '../../auditor-created-items.mjs';
 import { itemHashJudge } from '../../item-hash.mjs';
 
@@ -112,7 +113,68 @@ for (const step of [5, 7, 8]) test(`Step ${step} contract-only changes require a
   const refreshed = certifyAuditorCreatedItems(root, 'r', step);
   assert.notEqual(refreshed.items[0].contract_sha256, first.items[0].contract_sha256);
   assert.notEqual(refreshed.items[0].step5_subject_sha256, first.items[0].step5_subject_sha256);
+  const current = readFileSync(receiptPath, 'utf8');
+  const touchedAt = new Date('2050-01-01T00:00:00.000Z');
+  utimesSync(contractPath, touchedAt, touchedAt);
+  for (const identity of [{ run: 'other' }, { baseline_sha256: '0'.repeat(64) }]) {
+    writeFileSync(receiptPath, JSON.stringify({ ...refreshed, ...identity }));
+    assert.throws(() => certifyAuditorCreatedItems(root, 'r', step), new RegExp(`no successful Step ${step}`),
+      'a receipt from another run or baseline cannot reuse the unchanged-hash path');
+  }
+  writeFileSync(receiptPath, current);
+  assert.deepEqual(certifyAuditorCreatedItems(root, 'r', step).items, refreshed.items);
 });
+
+for (const step of [5, 7, 8]) for (const mode of ['legacy', 'post-end']) {
+  test(`Step ${step} rejects ${mode} provenance until a fresh dispatch covers the contract`, () => {
+    const root = fixture();
+    writeAuditorCreatedBaseline(root, 'r', step);
+    const baselinePath = join(root, 'research', `r-step${step}-auditor-baseline.json`);
+    const baseline = readFileSync(baselinePath, 'utf8');
+    const itemPath = join(root, 'items', 'lem-created.md');
+    const manifestPath = join(root, 'research', 'r-batch-1.pages.json');
+    const contractPath = join(root, 'research', 'r-batch-1.proof-contracts.json');
+    const receiptPath = join(root, 'research', `r-step${step}-auditor-certifications.json`);
+    writeFileSync(itemPath, item('lem-created'));
+    const manifest = JSON.parse(readFileSync(manifestPath, 'utf8'));
+    manifest[0].items.push({ id: 'lem-created', deps: [] });
+    writeFileSync(manifestPath, JSON.stringify(manifest));
+    writeFileSync(contractPath, JSON.stringify({ contracts: { 'lem-created': { risk: 'low' } } }));
+    const authoredAt = new Date('2025-01-01T00:00:05.000Z');
+    for (const path of [itemPath, manifestPath, contractPath]) utimesSync(path, authoredAt, authoredAt);
+    const label = step === 5 ? '5a-a' : `step${step}-a`;
+    const resultPath = join(root, 'research', 'r-dispatch', `alpha-${label}.result.json`);
+    const author = { run: 'r', role: 'alpha', label, covers: ['1'], ok: true,
+      started_at: '2025-01-01T00:00:00.000Z', ended_at: '2025-01-01T00:00:10.000Z' };
+    writeFileSync(resultPath, JSON.stringify(author));
+    certifyAuditorCreatedItems(root, 'r', step);
+
+    writeFileSync(contractPath, JSON.stringify({ contracts: { 'lem-created': { risk: 'high' } } }));
+    const changedAt = new Date('2025-01-01T00:00:10.500Z');
+    utimesSync(contractPath, changedAt, changedAt);
+    const coveringAuthor = { ...author, ended_at: '2025-01-01T00:00:11.000Z' };
+    if (mode === 'legacy') {
+      // Reproduce a v1 receipt: its hashes include the later contract, but the
+      // old certifier never checked that carrier against the actual dispatch.
+      writeFileSync(resultPath, JSON.stringify(coveringAuthor));
+      const legacy = certifyAuditorCreatedItems(root, 'r', step);
+      legacy.policy = 'auditor-created-stage-bypass-v1';
+      writeFileSync(receiptPath, JSON.stringify(legacy));
+      writeFileSync(resultPath, JSON.stringify(author));
+      assert.throws(() => loadAuditorCreatedCertifications(receiptPath), /Invalid auditor-created/);
+    }
+    const before = readFileSync(receiptPath, 'utf8');
+    assert.throws(() => certifyAuditorCreatedItems(root, 'r', step), new RegExp(`no successful Step ${step}`));
+    assert.equal(readFileSync(receiptPath, 'utf8'), before, 'failed revalidation preserves the old receipt');
+    assert.equal(readFileSync(baselinePath, 'utf8'), baseline, 'migration cannot move the original boundary');
+
+    writeFileSync(resultPath, JSON.stringify(coveringAuthor));
+    const refreshed = certifyAuditorCreatedItems(root, 'r', step);
+    assert.equal(refreshed.policy, 'auditor-created-stage-bypass-v2');
+    assert.equal(loadAuditorCreatedCertifications(receiptPath).length, 1);
+    assert.equal(readFileSync(baselinePath, 'utf8'), baseline);
+  });
+}
 
 test('judge closure counts a current auditor-created receipt without fabricating a verdict', () => {
   const root = mkdtempSync(join(tmpdir(), 'auditor-closure-'));
@@ -125,7 +187,7 @@ test('judge closure counts a current auditor-created receipt without fabricating
   writeFileSync(manifest, JSON.stringify([{ id: 'page', items: [{ id }] }]));
   writeFileSync(ledger, '');
   writeFileSync(cert, JSON.stringify({
-    version: 1, run: 'r', step: 8, policy: 'auditor-created-stage-bypass-v1',
+    version: 1, run: 'r', step: 8, policy: 'auditor-created-stage-bypass-v2',
     items: [{ id, judge_sha256: itemHashJudge(source), author_result: 'alpha-step8-lead.result.json' }],
   }));
   const result = spawnSync(process.execPath, [join(REPO, 'tools', 'level-coverage.mjs'),

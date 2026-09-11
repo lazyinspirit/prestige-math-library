@@ -23,6 +23,9 @@ const canonical = value => Array.isArray(value) ? value.map(canonical)
     ? Object.fromEntries(Object.keys(value).sort().map(key => [key, canonical(value[key])]))
     : value;
 const hashValue = value => sha(JSON.stringify(canonical(value)) ?? 'undefined');
+// Preserve v1 stage inventories; only provenance receipts need a new policy.
+const BASELINE_POLICY = 'auditor-created-stage-bypass-v1';
+const CERTIFICATION_POLICY = 'auditor-created-stage-bypass-v2';
 
 export const auditorCreatedBaselinePath = (root, run, step) =>
   join(root, 'research', `${safe(run, 'run')}-step${safe(String(step), 'step')}-auditor-baseline.json`);
@@ -53,7 +56,7 @@ export function writeAuditorCreatedBaseline(root, run, step) {
   if (![5, 7, 8].includes(Number(step))) throw Error('Auditor baseline supports steps 5, 7, and 8');
   const path = auditorCreatedBaselinePath(root, run, step);
   const current = {
-    version: 1, run, step: Number(step), policy: 'auditor-created-stage-bypass-v1',
+    version: 1, run, step: Number(step), policy: BASELINE_POLICY,
     items: inventory(root, run).map(({ id, page, batch }) => ({ id, page, batch })),
     existing_item_files: readdirSync(join(root, 'items')).filter(file => file.endsWith('.md'))
       .map(file => file.slice(0, -3)).sort(),
@@ -99,7 +102,7 @@ function coveringResult(results, itemPath, manifestPath, contractPath, batch) {
   return results.filter(row => {
     const started = Date.parse(row.started_at), ended = Date.parse(row.ended_at);
     if (!Number.isFinite(started) || !Number.isFinite(ended)
-      || changedAt < started - 1500 || changedAt > ended + 1500) return false;
+      || changedAt < started - 1500 || changedAt > ended) return false;
     const covers = Array.isArray(row.covers) ? row.covers.map(String) : [];
     return !covers.length || covers.includes('all') || covers.includes(String(batch));
   }).sort((a, b) => Date.parse(a.ended_at) - Date.parse(b.ended_at)).at(-1);
@@ -110,14 +113,17 @@ function contractEntry(path, id) {
   return read(path)?.contracts?.[id] ?? null;
 }
 
-export function loadAuditorCreatedCertifications(path, { steps = null } = {}) {
-  if (!path || !existsSync(path)) return [];
-  const receipt = read(path);
-  if (receipt?.version !== 1 || receipt?.policy !== 'auditor-created-stage-bypass-v1'
+function certificationRows(receipt, path, { steps = null } = {}) {
+  if (receipt?.version !== 1 || receipt?.policy !== CERTIFICATION_POLICY
     || ![5, 7, 8].includes(receipt?.step) || !Array.isArray(receipt?.items))
     throw Error(`Invalid auditor-created certification receipt: ${path}`);
   if (steps && !steps.includes(receipt.step)) return [];
   return receipt.items.map(row => ({ ...row, step: receipt.step, run: receipt.run }));
+}
+
+export function loadAuditorCreatedCertifications(path, options = {}) {
+  if (!path || !existsSync(path)) return [];
+  return certificationRows(read(path), path, options);
 }
 
 export function certifyAuditorCreatedItems(root, run, step) {
@@ -126,7 +132,7 @@ export function certifyAuditorCreatedItems(root, run, step) {
   if (!existsSync(baselinePath)) throw Error(`Missing Step ${step} auditor baseline: ${baselinePath}`);
   const baseline = read(baselinePath);
   if (baseline?.version !== 1 || baseline?.run !== run || baseline?.step !== step
-    || baseline?.policy !== 'auditor-created-stage-bypass-v1'
+    || baseline?.policy !== BASELINE_POLICY
     || !Array.isArray(baseline.items) || !Array.isArray(baseline.existing_item_files))
     throw Error(`Invalid Step ${step} auditor baseline`);
   const original = new Set(baseline.items.map(row => row.id));
@@ -136,8 +142,13 @@ export function certifyAuditorCreatedItems(root, run, step) {
   let priorById = new Map();
   const certificationPath = auditorCreatedCertificationsPath(root, run, step);
   if (existsSync(certificationPath)) {
-    try { priorById = new Map(loadAuditorCreatedCertifications(certificationPath, { steps: [step] })
-      .map(row => [row.id, row])); } catch { /* rewritten below after complete validation */ }
+    try {
+      const prior = read(certificationPath);
+      if (prior.run === run && prior.baseline_sha256 === sha(JSON.stringify(baseline))) {
+        priorById = new Map(certificationRows(prior, certificationPath, { steps: [step] })
+          .map(row => [row.id, row]));
+      }
+    } catch { /* rewritten below after complete validation */ }
   }
   const certified = [];
   for (const row of additions) {
@@ -170,7 +181,7 @@ export function certifyAuditorCreatedItems(root, run, step) {
     });
   }
   const receipt = {
-    version: 1, run, step, policy: 'auditor-created-stage-bypass-v1',
+    version: 1, run, step, policy: CERTIFICATION_POLICY,
     baseline_sha256: sha(JSON.stringify(baseline)), at: new Date().toISOString(),
     items: certified.sort((a, b) => a.id.localeCompare(b.id)),
   };

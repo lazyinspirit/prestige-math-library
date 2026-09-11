@@ -96,6 +96,10 @@ Step-3 auditor certification checks writes across the same transitive item and
 manifest/plan inputs bound by its item hash. Changed supplier content requires
 a successful covering author dispatch after those writes. Unchanged certificates
 survive restart and file touches; failed recertification preserves prior receipts.
+Provenance receipts use `auditor-authored-step3-bypass-v2`; v1 receipts cannot
+close decisions or reuse the unchanged-hash path. They must be revalidated
+against the original immutable v1 inventory baseline. No input write after
+the author result's `ended_at` is accepted, including subsecond writes.
 
 Step 4 keeps its mechanical splice and snapshot. The splice permits new local
 A-page definitions/lemmas only with complete current author decisions, retained
@@ -131,6 +135,12 @@ contract. Initial certification and changed-carrier recertification require a
 successful author dispatch covering the latest item, manifest or contract write.
 Unchanged hash-bound evidence survives restart and metadata-only file touches;
 a contract-only edit requires fresh covering author evidence.
+These provenance receipts use `auditor-created-stage-bypass-v2`. Legacy v1
+receipts are rejected by consumers and revalidated by the certifier, retaining
+the immutable v1 inventory baseline. Reuse requires the same run and baseline
+hash. The latest carrier write must be no later than the dispatch's `ended_at`;
+there is no post-completion timestamp allowance. Failed migration leaves the
+old receipt untouched but unavailable as certification evidence.
 
 Snapshot order is pre-author before Step 3b, post-author in Step 4, post-5a after
 group review, and post-step7 after repair. Impact checks include authoring changes.
