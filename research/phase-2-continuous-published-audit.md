@@ -19,7 +19,24 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: density, CDF and Stieltjes
+## Latest checkpoint: Tonelli, expectation and normal laws
+
+Evidence:
+`research/phase-2-frontier-22-published-tonelli-expectation-normal-propagation-audit.md`.
+
+Five old bounded clears enter A-P on the exact sigma-finite Tonelli/Fubini,
+expectation change-of-variables and normal-density/law paths. Their statements
+and visible proofs are sound after the common simple/nonnegative-integral, MCT,
+`L1` and indefinite-measure repair. Active group-c impact was reported
+immediately; no distinct blocker or new pair results.
+
+Post-batch target index remains 2,872 unique published IDs; U-P 1,379, U-C 0,
+A-R 187, A-P 285 and 1,021 bounded clears; 13,058 published items remain
+outside the index. Recount, publication-state and cross-class deduplication
+checks must be rerun before commit. Next target is any new exact reviewer
+handoff, then the next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: density, CDF and Stieltjes
 
 Evidence:
 `research/phase-2-frontier-22-published-density-cdf-stieltjes-audit.md`.
