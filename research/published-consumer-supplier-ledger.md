@@ -4,9 +4,29 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1411, U-C 11, A-R 187, A-P 196. The
+Current classifications: U-P 1408, U-C 11, A-R 187, A-P 195. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Core calculus, mixed-partial, measure and Kac--Moody audit — 2026-09-11
+
+A bounded active-frontier pass adds seventeen previously unindexed bounded
+clears and moves four existing rows to that class. The exact integration by
+parts, substitution, continuous-composition, primitive, lattice-integrability,
+mixed-partial, Dirac/measure, Kac--Moody root/category and exponential clauses
+are sound. `def-measure`, `def-probability-measure` and the ordered `C^k`
+definition move from U-P after full used-interface review.
+
+The existing A-P `thm-continuous-implies-integrable` also moves to bounded
+clear under the canonical adequate-implicit-supplier rule. Its unconditional
+published Heine--Cantor supplier explicitly names and declares its sole
+countable-choice use and is already bounded clear; repeating that direct edge
+on every consumer is optional metadata. The uniform-partition proof itself is
+complete. Its historical classification is preserved in the audit evidence,
+and no transitive choice rows are multiplied across the sound calculus chain.
+No current Step-3 blocker is identified. Exact hashes, calculations,
+deduplication and limits are in
+`phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`.
 
 ## Group-e UCT and partition reconciliation — 2026-09-11
 
@@ -28136,14 +28156,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1411 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1408 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 11 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 187 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
-| A-P | Audited items pending Phase 3 repair | 196 | Recorded direct review and an unresolved item-specific repair. |
+| A-P | Audited items pending Phase 3 repair | 195 | Recorded direct review and an unresolved item-specific repair. |
 
-733 further reference-pool items have bounded no-repair-needed dispositions
+754 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,805 items and the expanded reference pool contains 2,538 unique items.
+1,801 items and the expanded reference pool contains 2,555 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28204,6 +28224,27 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `thm-continuous-implies-integrable` | Frontier-22 core calculus audit 2026-09-11: the uniform-partition oscillation proof is complete. Its unconditional published Heine--Cantor supplier explicitly names and declares the sole CC use and is itself bounded clear, so the direct invocation is adequate under the correct-implicit-use rule; a repeated direct choice edge is optional metadata. A-P to bounded clear with history retained. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `thm-integration-by-parts` | Frontier-22 core calculus audit 2026-09-11: product differentiation, continuity, product integrability, linearity and FTC give the stated formula after both integrands are shown integrable. The exact derivative-algebra ID avoids its separate alias collision. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `thm-substitution` | Frontier-22 core calculus audit 2026-09-11: a primitive on the nondegenerate order-convex domain, the chain rule, oriented endpoints and proved composite/product integrability give the formula without injectivity or monotonicity. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `thm-composition-with-a-continuous-function` | Frontier-22 core calculus audit 2026-09-11: the single per-index good/bad oscillation inequality and Riemann criterion prove integrability; its published uniform-continuity supplier is an adequate implicit interface. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `cor-integrability-of-absolute-values-products-and-lattice-operations` | Frontier-22 core calculus audit 2026-09-11: continuous composition supplies modulus and squares; polarization and finite linearity supply products and lattice operations, while monotonicity gives the correctly oriented integral bound. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `cor-primitives-of-a-continuous-function` | Frontier-22 core calculus audit 2026-09-11: the local closed-interval construction handles interior and one-sided endpoints, FTC supplies the derivative/evaluation claims and zero derivative gives uniqueness up to a constant. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `thm-exponential-beats-every-polynomial` | Frontier-22 core calculus audit 2026-09-11: retaining the nonnegative exponential-series term of degree `m+1` gives a constant multiple of `1/x`, whose epsilon proof at positive infinity is immediate. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `def-ck-and-multi-index-notation-in-several-variables` | Frontier-22 mixed-partial audit 2026-09-11: the ordered-word definition supplies all iterated derivatives through order `k` without presupposing symmetry, and its canonical multi-index notation is coherent. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `def-directional-and-partial-derivatives` | Frontier-22 mixed-partial audit 2026-09-11: directional and coordinate partial derivatives are correctly defined as vector-valued one-variable derivatives on line restrictions. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `lem-rectangle-second-difference-mean-value-formula` | Frontier-22 mixed-partial audit 2026-09-11: two one-variable mean-value applications under the stated neighbourhood hypotheses give the rectangular second-difference formula with the correct side-length signs. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `thm-peano-mixed-partial-theorem` | Frontier-22 mixed-partial audit 2026-09-11: continuity of one mixed partial gives the joint rectangle-quotient limit, while existence of the reversed partial gives the iterated limit; uniqueness identifies them. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `thm-clairaut-schwarz-mixed-partials` | Frontier-22 mixed-partial audit 2026-09-11: the ordered `C^2` convention supplies both mixed partials and continuity, so pointwise Peano applies without circularly assuming symmetry. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `thm-symmetry-of-higher-mixed-partials` | Frontier-22 mixed-partial audit 2026-09-11: adjacent Clairaut swaps reduce inversion number and generate every finite permutation; `C^k` supplies the remaining outer derivatives. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `def-nonnegative-extended-series` | Frontier-22 Dirac/measure audit 2026-09-11: recursion defines increasing extended-real partial sums and extended-real completeness supplies their supremum, including zero and infinite cases. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `def-measure` | Frontier-22 Dirac/measure audit 2026-09-11: the definition coherently states empty-set normalization and countable additivity using the published nonnegative extended sum. Its historical counterexample supplier occurrence is not a defect on this definition. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `def-measure-space` | Frontier-22 Dirac/measure audit 2026-09-11: the triple and measurable-set terminology exactly reuse the preceding measure interface. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `def-probability-measure` | Frontier-22 Dirac/measure audit 2026-09-11: probability measure is coherently defined as a measure of total mass one and the probability-space triple uses the exact measure-space interface. U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `def-dirac-measure` | Frontier-22 Dirac/measure audit 2026-09-11: membership of the distinguished point gives exhaustive disjoint zero/one branches on every measurable set. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `prop-dirac-measure-is-a-probability-measure` | Frontier-22 Dirac/measure audit 2026-09-11: in a disjoint sequence the distinguished point lies in at most one set, so both sides of countable additivity are zero or one; total mass is one. No choice is used. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `prop-kac-moody-root-spaces-are-finite-dimensional` | Frontier-22 Kac--Moody category audit 2026-09-11: the triangular grading gives root signs; right-nested words bound each finite-height component, and only the length-one generator survives on a simple-root line. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
+| `def-kac-moody-category-o` | Frontier-22 Kac--Moody category audit 2026-09-11: finite unions of downward cones leave only finitely many positive root degrees above each weight, while finite interpolation separates vector weights and proves submodule/quotient closure. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`. |
 | `lem-continuity-is-local-and-pastes` | Frontier-22 local-continuity audit 2026-09-11: full proof and exact subspace/preimage interfaces read. Arbitrary open-cover locality uses arbitrary unions; finite closed-cover pasting uses finite unions; composition and restriction clauses are direct preimage calculations. Its supplier-map mention and alias are not classification rows. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-local-continuity-audit.md`. |
 | `lem-locally-finite-sums-are-continuous` | Frontier-22 local-continuity audit 2026-09-11: local finiteness makes the pointwise sum equal a finite continuous sum on a neighbourhood; the canonical neighbourhood contains an open one, and the preceding published locality lemma supplies continuity. This correct implicit use is not dependency debt. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-local-continuity-audit.md`. |
 | `def-realization-of-a-generalized-cartan-matrix` | Frontier-22 Kac--Moody construction audit 2026-09-11: full definition read. Independent indexed roots/coroots, evaluation convention, minimal dimension and realization isomorphisms are coherent. New bounded-clear census entry. Exact hash/scope/dedup: `research/phase-2-frontier-22-published-kac-moody-construction-audit.md`. |
@@ -29026,7 +29067,6 @@ owner's scan policy.
 | `lem-complex-translation-and-approximate-identity-interfaces` | Fourier Step-3B load-bearing supplier audit 2026-09-11: proof 1.2 derives complex `L^1`-by-`L^p` convolution existence, norm and measurability by black-box use of the already-defective Young theorem in its exact affected branch. For finite `p`, use the declared jointly Borel envelope, translation isometry and Minkowski integral inequality; handle infinity with an essentially bounded Borel representative. The current L1 Fourier product draft can instead replay its own Tonelli envelope and direct reflection under stated CC. No new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-differentiation-under-the-integral-sign` | Fourier Gaussian supplier audit 2026-09-11 promotes the existing U-P row: proof 3.1 proves convergence along every supplied increment sequence, then concludes an epsilon-delta derivative through the exact Heine-converse direction whose published contract spends countable choice; the theorem states no CC. Its a.e. derivative is also integrated without a defined measurable representative on the exceptional set. Add CC, apply the real criterion to real/imaginary parts, and define the derivative as zero on one stated null set (or supply an equivalent representative). The live Gaussian draft already has CC and pointwise differentiability everywhere. No new Phase-2 pair. Exact hash/scope: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-factorization-of-expectations-for-independent-variables` | Original-next-20 characteristic-function prerequisite audit 2026-09-11 promotes the existing U-P row: the nonnegative clause writes a finite extended product without handling one zero and one infinite expectation, while canonical `0*(+infinity)` is undefined. State the mixed case separately or prove the zero-factor case before using the defined positive extended product. The integrable clause is sound and is the exact bounded sine/cosine branch used by the live author. No new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-characteristic-function-prerequisite-audit.md`. |
-| `thm-continuous-implies-integrable` | Original-next-20 Levy-inversion prerequisite audit 2026-09-11 promotes the existing U-C row after full-target and exact used-interface review. L3/step 2.1 invoke `thm-heine-cantor-r`, whose proof explicitly spends CC, while the consumer states no choice hypothesis; its final remark acknowledges but does not repair the contract. Add CC or use all admissible oscillation balls, a finite compactness subcover, a minimum radius and `thm-riemann-criterion`. The live sine lemma assumes AC and can discharge CC locally. Existing published suppliers suffice; no new Phase-2 pair. Exact hash/scope: `research/phase-2-next-20-published-levy-inversion-prerequisite-audit.md`; earlier Step3b-d evidence retained. |
 | `thm-algebra-of-derivatives` | Original-next-20 Chernoff prerequisite audit 2026-09-11 promotes the sole U-P row: its alias `thm-product-rule` collides with the exact ID of the published finite-cardinality Cartesian-product theorem, creating an ambiguous/wrong-type lookup interface. Remove the alias or replace it with an unused derivative-specific name. The Caratheodory-factor proofs of all four derivative rules are sound and choice-free, and the live consumer cites the exact derivative-algebra ID. No new Phase-2 pair. Exact hashes/alias search: `research/phase-2-next-20-published-chernoff-prerequisite-audit.md`. |
 | `lem-euclidean-balls-have-positive-finite-lebesgue-measure` | Fourier support audit 2026-09-11: steps 2.1--3.1 infer measurability from containment between measurable cubes and use `lambda(B)` before the domain claim; the inference is invalid. First use published Euclidean-metric, metric-ball-openness and Borel-to-Lebesgue interfaces under the target's stated countable choice, then apply the sound cube bounds. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
 | `thm-total-variation-is-a-measure` | Fourier support audit 2026-09-11: proof 1.2 chooses partitions for every disjoint piece and then takes a sum of suprema without near-maximality or a valid selection. Repair choice-free via finitely many near-max partitions for each finite partial sum, published finite choice and the nonnegative-series supremum; handle infinite variations by arbitrary finite thresholds. No new Phase-2 pair. Exact evidence: `research/phase-2-fourier-support-2-published-prerequisite-audit.md`. |
@@ -29501,7 +29541,6 @@ mathematical repairs. Evidence:
 | `def-cellular-homology` | Continuing personal audit: exact examination pool and AT-24 contracts |
 | `def-central-character-of-an-irreducible-complex-character` | Transitive consumers (166), grouped by home page |
 | `def-chain-homotopy` | Singular subdivision and simplicial comparison |
-| `def-ck-and-multi-index-notation-in-several-variables` | Manifold compact-set bump follow-up |
 | `def-class-function-and-the-space-of-complex-class-functions` | finite-averaging-and-character-theory-prerequisites |
 | `def-classical-weierstrass-function` | 9.5 Forward order and load-bearing body links |
 | `def-clifford-ramification-index` | Transitive consumers (166), grouped by home page |
@@ -29572,7 +29611,6 @@ mathematical repairs. Evidence:
 | `def-martin-lof-test-and-random-sequence` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-maximal-plane-and-maximally-planar-graph` | Scaffold III.4.1 — plane dual dependency |
 | `def-measurable-function-between-measurable-spaces` | Nonmeasurable-set counterexample: missing witness supply |
-| `def-measure` | Nonmeasurable-set counterexample: missing witness supply |
 | `def-mollifier-family-generated-by-a-unit-mass-smooth-bump` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `def-monomials-multidegree-and-total-degree` | 19. Cross-category ownership and consumer seams |
 | `def-morse-trajectory-from-p-to-q` | riemannian-metrics-length-distance-and-volume and |
@@ -29597,7 +29635,6 @@ mathematical repairs. Evidence:
 | `def-prefix-free-machine-and-prefix-complexity` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-private-coin-public-coin-and-arthur-merlin-protocol` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
 | `def-probability-convergence-metric` | 0A.2 Exact Phase-3 defects in published content |
-| `def-probability-measure` | 0A.2 Exact Phase-3 defects in published content |
 | `def-product-measure-on-sigma-finite-spaces` | Personal monitoring audit — 2026-09-08, from 10:02 UTC |
 | `def-product-sigma-algebra-and-finite-product-sigma-algebras` | 0A.2 Exact Phase-3 defects in published content |
 | `def-projective-indecomposable-characters-and-cartan-invariants` | Transitive consumers (166), grouped by home page |

@@ -19,7 +19,32 @@ progress and next targets. Published content is read-only in this role.
 - Unrelated modified Fourier scope/dispatch files were present before this
   role began and are excluded from this role's commits.
 
-## Latest checkpoint: group-e UCT and partition reconciliation
+## Latest checkpoint: core calculus, mixed-partial, measure and category-O audit
+
+Evidence:
+`research/phase-2-frontier-22-published-core-calculus-kac-measure-audit.md`.
+
+Twenty-one high-use published interfaces have complete target and exact
+used-clause readings in this bounded pass. Seventeen were previously outside
+the index. The integration-by-parts, substitution, continuous-composition,
+primitive, lattice-integrability, exponential, mixed-partial, Dirac/measure,
+Kac--Moody root-space and category-O clauses are sound.
+
+`def-measure`, `def-probability-measure` and the ordered `C^k` definition move
+from U-P to bounded clear. `thm-continuous-implies-integrable` moves from A-P
+to bounded clear under the canonical adequate-implicit-supplier rule: its
+unconditional published Heine--Cantor supplier explicitly declares its sole
+CC use and is itself already bounded clear. The historical finding remains in
+the evidence. No duplicate transitive choice rows are created on the five
+sound calculus consumers. No current Step-3 blocker was found.
+
+Post-batch target index: 2,555 unique published IDs; U-P 1,408, U-C 11,
+A-R 187, A-P 195 and 754 bounded clears; 13,375 published items remain outside
+the index. Recount, publication-state and cross-class deduplication checks must
+be rerun before commit. Next target is the latest exact author/reviewer handoff
+or the next highest-use direct frontier supplier outside the index.
+
+## Completed checkpoint: group-e UCT and partition reconciliation
 
 Evidence:
 `research/phase-2-next-20-published-group-e-uct-partition-reconciliation.md`.
