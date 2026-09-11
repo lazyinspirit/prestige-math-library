@@ -4,9 +4,21 @@ This ledger records published-item defects, audit classifications, prerequisite
 mappings, repair strategies and repair evidence. Workflow status, process history
 and draft-only implementation notes belong in run records, not here.
 
-Current classifications: U-P 1410, U-C 0, A-R 188, A-P 207. The
+Current classifications: U-P 1409, U-C 0, A-R 188, A-P 207. The
 [item classification index](#item-classification-index--2026-09-08) is the
 canonical deduplicated inventory; historical findings retain their dated scope.
+
+## Archimedean-core audit — 2026-09-11
+
+Four high-use Archimedean interfaces are bounded clear. Canonical naturals are
+positive, strictly increasing and compatible with natural addition and
+multiplication. The supremum contradiction proves every complete ordered field
+Archimedean, and positive inversion gives the reciprocal form. The theorem's
+old U-P row came only from a repaired nonmeasurable-set supplier-impact scan and
+identified no defect in this proof, so that single row moves to clear; three
+other IDs are new. No current Step-5 blocker was found. Exact hashes,
+deduplication and limits are in
+`research/phase-2-frontier-22-published-archimedean-core-audit.md`.
 
 ## Countability-core audit — 2026-09-11
 
@@ -28422,11 +28434,11 @@ argument, so no new pair or current blocker results. Exact evidence:
 ## Item classification index — 2026-09-08
 
 This index retains the initial 2,185-ID classification reference pool and all
-subsequently reconciled published IDs. It currently contains **2,661 unique
+subsequently reconciled published IDs. It currently contains **2,664 unique
 published items**. It is not a census of defective items or a claim that every
 supplier later cited by an audit is a defect candidate. The publication census,
 checked 2026-09-10 from item front matter, has **15,930 published items**. All
-2,661 indexed IDs are published; **13,269 published items remain outside this
+2,664 indexed IDs are published; **13,266 published items remain outside this
 index** and require census reconciliation. This is a status census, not a
 mathematical audit of those outside-index items.
 The initial extraction also contained
@@ -28435,14 +28447,14 @@ Supplier mappings and subsequent item-specific findings remain above.
 
 | Code | Classification | Items | Meaning |
 |---|---|---:|---|
-| U-P | Unaudited and potentially defective items | 1410 | Evidence/role reconciliation incomplete; not a defect verdict. |
+| U-P | Unaudited and potentially defective items | 1409 | Evidence/role reconciliation incomplete; not a defect verdict. |
 | U-C | Unaudited and confirmed defective items | 0 | Confirmed mathematical or prerequisite defect; repair audit pending. |
 | A-R | Audited and repaired items | 188 | Recorded defect-focused review and authorized repair; local checks are not a judge. |
 | A-P | Audited items pending Phase 3 repair | 207 | Recorded direct review and an unresolved item-specific repair. |
 
-856 further reference-pool items have bounded no-repair-needed dispositions
+860 further reference-pool items have bounded no-repair-needed dispositions
 below, outside these four active defect classes. Thus the four queues contain
-1,805 items and the expanded reference pool contains 2,661 unique items.
+1,804 items and the expanded reference pool contains 2,664 unique items.
 
 ### Classification rules and Phase-3 completion gate
 
@@ -28503,6 +28515,10 @@ The separate page-header cutover obligations remain in their category sections.
 
 | Item | Bounded review receipt |
 |---|---|
+| `def-archimedean-field` | Frontier-22 Archimedean-core audit 2026-09-11: cofinality is exactly the quantified canonical-natural condition, and the reciprocal remark follows from the published positive-inverse order law. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-archimedean-core-audit.md`. |
+| `lem-of-naturals-positive` | Frontier-22 Archimedean-core audit 2026-09-11: induction proves positivity/successor growth, while separate inductions prove compatibility with natural addition and multiplication. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-archimedean-core-audit.md`. |
+| `thm-of-archimedean` | Frontier-22 Archimedean-core audit 2026-09-11: the supremum-minus-one contradiction proves cofinality without choice. Its old U-P label was a supplier-impact tag from an unrelated repaired counterexample, not an item defect; moved U-P to bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-archimedean-core-audit.md`. |
+| `cor-archimedean-reciprocal` | Frontier-22 Archimedean-core audit 2026-09-11: apply cofinality to the positive inverse and reverse the strict positive inequality to obtain `1/n<epsilon`; all inverses are defined. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-archimedean-core-audit.md`. |
 | `def-injection-surjection-bijection` | Frontier-22 countability-core audit 2026-09-11: the three predicates match the function/image contracts; inverse claims use unique preimages and explicitly exclude arbitrary-surjection right inverses. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-countability-core-audit.md`. |
 | `def-countable` | Frontier-22 countability-core audit 2026-09-11: finite, countably infinite, at-most-countable and uncountable are coherent under the stated convention, including the empty set. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-countability-core-audit.md`. |
 | `lem-countable-iff-surjection-from-n` | Frontier-22 countability-core audit 2026-09-11: a finite nonempty bijection extends by one fixed value, and a supplied surjection gives the canonical least-preimage injection without choice. New bounded clear. Exact hash/scope: `research/phase-2-frontier-22-published-countability-core-audit.md`. |
@@ -31158,7 +31174,6 @@ mathematical repairs. Evidence:
 | `thm-number-field-integral-ideal-factorisation-in-zf` | 19. Cross-category ownership and recorded-only seams |
 | `thm-number-of-irreducible-representations-equals-the-number-of-conjugacy-classes-when-k-is-algebraically-closed-and-char-k-does-not-divide-group-order` | Transitive consumers (166), grouped by home page |
 | `thm-number-sat-is-sharpp-complete` | def-initial-accepting-and-rejecting-configurations (home: turing-machines-configurations-and-computation) |
-| `thm-of-archimedean` | Nonmeasurable-set counterexample: missing witness supply |
 | `thm-omega-one-is-the-least-uncountable-ordinal` | 7.1 Recorded-Not-Proved closure and prose defects |
 | `thm-one-critical-point-handle-attachment` | riemannian-metrics-length-distance-and-volume and |
 | `thm-one-dimensional-regular-local-rings-are-dvrs` | Item-exact impact of the Dependent Choice rehome |
