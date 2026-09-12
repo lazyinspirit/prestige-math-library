@@ -2,11 +2,12 @@
 id: "lem-zero-integral-compactly-supported-top-forms-on-euclidean-space-have-compactly-supported-primitives"
 kind: "lemma"
 title: "Zero-integral compactly supported top forms on Euclidean space have compactly supported primitives"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-integration-descends-to-compactly-supported-top-de-rham-cohomology","lem-smooth-bump-between-concentric-euclidean-balls","thm-multidimensional-integral-properties","thm-differentiation-under-the-integral-sign-on-a-compact-rectangle","thm-ftc-first-part","thm-jordan-fubini-by-sections","lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary","thm-heine-borel-rn","lem-compactness-of-a-subspace-is-ambient","thm-heine-cantor-metric","thm-continuous-on-a-rectangle-is-riemann-integrable","lem-finite-chart-localization-defines-choice-free-integration-and-compact-stokes","thm-change-of-variables-for-compact-jordan-sets"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

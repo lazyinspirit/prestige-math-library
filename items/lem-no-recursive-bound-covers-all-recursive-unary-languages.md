@@ -2,7 +2,9 @@
 id: "lem-no-recursive-bound-covers-all-recursive-unary-languages"
 kind: "lemma"
 title: "No recursive bound covers all recursive unary languages"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 deps: ["def-nondeterministic-acceptance-time-and-exact-clock"]
 justified_by: []

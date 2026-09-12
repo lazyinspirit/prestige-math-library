@@ -2,11 +2,12 @@
 id: "lem-manifold-exhaustion-passes-local-duality-to-the-colimit"
 kind: "lemma"
 title: "A manifold exhaustion passes duality to the colimit"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-topological-manifold-with-and-without-boundary","thm-heine-borel-rn","thm-locally-compact-hausdorff-basics","def-axiom-of-choice","lem-cap-duality-passes-to-increasing-open-unions","lem-duality-extends-from-two-open-sets-to-finite-unions-of-coordinate-balls","def-compactly-supported-singular-cohomology-of-a-locally-compact-space","thm-excision-for-singular-cohomology"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

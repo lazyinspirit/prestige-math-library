@@ -2,7 +2,9 @@
 id: "prop-the-first-hurewicz-map-in-degree-one-is-abelianization"
 kind: "proposition"
 title: "The first Hurewicz map is abelianization"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-hurewicz-homomorphism","def-based-loops-and-fundamental-group","def-singular-chain-complex-and-singular-homology","def-singular-boundary-operator","thm-singular-chain-homotopy-formula","thm-derived-subgroup-is-characteristic-and-abelianization-is-universal","lem-finite-choice","cor-homology-of-spheres","thm-fundamental-group-laws"]

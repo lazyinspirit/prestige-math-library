@@ -2,11 +2,12 @@
 id: "def-r-orientation-of-a-topological-manifold"
 kind: "definition"
 title: "R-orientation of a topological manifold"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-orientation-local-system-and-orientation-cover","def-commutative-ring","lem-coordinate-ball-classes-identify-local-homology-stalks","thm-local-homology-detects-interior-points-boundary-points-and-dimension"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

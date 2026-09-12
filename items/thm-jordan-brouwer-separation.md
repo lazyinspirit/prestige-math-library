@@ -2,7 +2,9 @@
 id: "thm-jordan-brouwer-separation"
 kind: "theorem"
 title: "Jordan–Brouwer separation"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere", "prop-zero-th-singular-homology-is-free-on-path-components", "cor-homology-of-spheres", "def-axiom-of-choice", "thm-homotopic-maps-induce-equal-maps-in-singular-cohomology", "prop-singular-cohomology-is-contravariantly-functorial", "cor-intermediate-value-theorem-topological"]

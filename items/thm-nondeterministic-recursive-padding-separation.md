@@ -2,7 +2,7 @@
 id: "thm-nondeterministic-recursive-padding-separation"
 kind: "theorem"
 title: "Nondeterministic recursive-padding separation"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-nondeterministic-acceptance-time-and-exact-clock", "lem-nondeterministic-two-tape-simulation-with-linear-acceptance-time", "lem-prefix-program-codes-admit-linear-nondeterministic-universal-simulation", "lem-time-controlled-self-reference-for-nondeterministic-machines", "lem-clock-cutoffs-and-unions-preserve-nondeterministic-time-bounds", "lem-no-recursive-bound-covers-all-recursive-unary-languages", "def-uniform-asymptotic-time-space-comparison"]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

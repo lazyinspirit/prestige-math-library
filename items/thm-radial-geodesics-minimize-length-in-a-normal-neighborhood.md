@@ -2,11 +2,12 @@
 id: "thm-radial-geodesics-minimize-length-in-a-normal-neighborhood"
 kind: "theorem"
 title: "Radial geodesics minimize length in a normal neighborhood"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-gauss-lemma","cor-polar-form-of-the-metric-in-normal-coordinates","def-riemannian-speed-and-length","thm-intermediate-value","thm-heine-borel-r","lem-closed-subset-of-a-compact-space-is-compact","thm-extreme-value-r","thm-newton-leibniz-with-interior-derivative","thm-monotonicity-of-the-integral","thm-linearity-of-the-integral","thm-nonnegative-continuous-with-zero-integral-vanishes","cor-zero-derivative-implies-constant","def-countable-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

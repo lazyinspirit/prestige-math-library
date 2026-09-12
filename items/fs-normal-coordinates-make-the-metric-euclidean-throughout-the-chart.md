@@ -2,11 +2,12 @@
 id: "fs-normal-coordinates-make-the-metric-euclidean-throughout-the-chart"
 kind: "false-statement"
 title: "Normal coordinates make the metric Euclidean throughout the chart"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-countable-choice", "thm-existence-uniqueness-and-smooth-dependence-of-geodesics", "thm-existence-of-normal-neighborhoods", "def-normal-neighborhood-and-normal-coordinate-chart", "prop-properties-of-normal-coordinates-at-the-center", "def-affine-connection-on-a-smooth-manifold", "def-covariant-derivative-along-a-curve", "thm-fundamental-theorem-of-riemannian-geometry", "thm-a-regular-level-set-is-an-embedded-submanifold", "prop-tangent-space-of-a-regular-level-set-is-the-kernel", "prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions", "def-riemannian-metric-and-riemannian-manifold", "thm-sine-cosine-signs-monotonicity-and-ranges", "thm-sine-and-cosine-derivatives", "cor-mean-value-theorem"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: "lem-simplex-factor-reversal-is-chain-homotopic-to-the-identity-diagonal"
 kind: "lemma"
 title: "Factor reversal gives the commutativity chain homotopy"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses","def-singular-chain-cross-product-on-generators"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

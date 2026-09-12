@@ -2,11 +2,12 @@
 id: "lem-relative-homotopy-compares-with-the-cw-quotient-in-the-connectivity-range"
 kind: "lemma"
 title: "Relative homotopy compares with the CW quotient in the connectivity range"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-n-connected-cw-pair","def-n-connected-space-and-n-connected-map","def-relative-homotopy-group","lem-cellular-mapping-cylinders-and-relative-cylinders-are-cw-complexes","lem-cellular-attachments-with-finite-boundary-support-form-a-cw-complex","def-adjunction-cone-suspension","thm-long-exact-sequence-of-relative-homotopy-groups","thm-homotopy-excision","lem-cw-quotients-and-collapse-of-a-contractible-subcomplex","lem-weak-equivalences-of-pairs-induce-isomorphisms-on-relative-homotopy"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

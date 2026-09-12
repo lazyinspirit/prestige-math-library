@@ -7,6 +7,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       url: "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
     - title: "Stacks Project, Tags 015M-015N"
       url: "https://stacks.math.columbia.edu/download/derived.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 proof_strategy: "direct"

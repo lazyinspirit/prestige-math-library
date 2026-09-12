@@ -2,7 +2,9 @@
 id: "ex-qbf-reachability-recursion-space-accounting"
 kind: "example"
 title: "Space accounting for the QBF reachability recursion"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 deps: ["lem-space-bounded-machine-configuration-count", "thm-tqbf-pspace-completeness-interface"]
 justified_by: []

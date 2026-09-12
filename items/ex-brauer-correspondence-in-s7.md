@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: Craven, The Brauer Correspondence, §1.6 example for S7, pp. 13–16
       url: https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

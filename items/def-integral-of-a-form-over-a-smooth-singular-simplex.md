@@ -2,13 +2,14 @@
 id: "def-integral-of-a-form-over-a-smooth-singular-simplex"
 kind: "definition"
 title: "Integral of a form over a smooth singular simplex"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 proof_strategy: direct
 deps: ["def-standard-orientation-of-the-affine-simplex","def-smooth-singular-simplex","prop-pullback-of-forms-is-smooth-functorial-and-preserves-wedges","prop-local-coordinate-expression-for-a-differential-form","cor-volume-under-a-continuous-graph-over-a-jordan-base","thm-continuous-functions-on-compact-jordan-sets-are-integrable","def-riemann-integral-over-a-jordan-set"]
 justified_by: ["lem-simplex-integrals-are-independent-of-affine-coordinate-identification"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

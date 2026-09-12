@@ -2,11 +2,12 @@
 id: "cex-an-alexander-horned-sphere-has-complementary-components-that-need-not-be-balls"
 kind: "counterexample"
 title: "A horned sphere has complementary components that need not be balls"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-jordan-brouwer-separation","def-axiom-of-choice","lem-horn-replacement-block-has-injective-commutator-meridian","lem-controlled-nested-horn-construction-embeds-a-closed-three-ball","thm-seifert-van-kampen","prop-fundamental-groups-of-punctured-euclidean-spaces","cor-geometric-unit-circle-has-fundamental-group-z","prop-retracts-inject-fundamental-groups","thm-heine-borel-rn","thm-compact-subset-of-a-hausdorff-space-is-closed"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

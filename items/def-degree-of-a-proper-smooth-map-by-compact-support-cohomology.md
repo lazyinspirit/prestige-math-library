@@ -2,13 +2,14 @@
 id: "def-degree-of-a-proper-smooth-map-by-compact-support-cohomology"
 kind: "definition"
 title: "Degree of a proper smooth map by compact-support cohomology"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 proof_strategy: direct
 deps: ["thm-integration-is-an-isomorphism-on-top-compactly-supported-de-rham-cohomology","prop-compactly-supported-de-rham-cohomology-is-contravariant-for-proper-smooth-maps"]
 justified_by: ["lem-degree-is-well-defined-and-independent-of-the-normalized-top-form"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

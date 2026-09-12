@@ -2,11 +2,12 @@
 id: "def-relative-fundamental-class-and-boundary-orientation"
 kind: "definition"
 title: "Relative fundamental class and boundary orientation"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-a-collar-identifies-boundary-local-homology-with-the-pair-fundamental-class"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

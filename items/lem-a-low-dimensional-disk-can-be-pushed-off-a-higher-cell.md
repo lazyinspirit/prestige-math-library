@@ -2,11 +2,12 @@
 id: "lem-a-low-dimensional-disk-can-be-pushed-off-a-higher-cell"
 kind: "lemma"
 title: "A low-dimensional disk can be pushed off a higher cell"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-cw-complex-with-closure-finiteness-and-weak-topology","def-skeleta-cw-subcomplex-and-relative-cw-complex","thm-heine-borel-rn","thm-compactness-agrees-with-metric-compactness","thm-closed-subspace-of-a-compact-space-is-compact","thm-compact-subset-of-a-hausdorff-space-is-closed","thm-the-exponential-law"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

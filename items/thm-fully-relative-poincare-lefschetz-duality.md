@@ -2,11 +2,12 @@
 id: "thm-fully-relative-poincare-lefschetz-duality"
 kind: "theorem"
 title: "Fully relative Poincaré–Lefschetz duality"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-poincare-lefschetz-duality","def-relative-cap-product","thm-excision-for-singular-homology","thm-five-lemma-for-a-morphism-of-long-exact-sequences","def-axiom-of-choice","thm-topological-collaring-for-manifold-boundaries","def-relative-cup-product","thm-excision-for-singular-cohomology","thm-long-exact-sequence-of-a-pair-in-singular-homology","thm-long-exact-sequence-of-a-pair-in-singular-cohomology","thm-homotopic-maps-induce-equal-maps-in-singular-cohomology","cor-homotopic-maps-induce-the-same-map-on-singular-homology","lem-a-collar-identifies-boundary-local-homology-with-the-pair-fundamental-class","lem-compatible-local-orientation-classes-exist-over-compact-subsets","thm-cap-product-boundary-identity","prop-cap-product-naturality-and-projection-formula"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

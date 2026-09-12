@@ -2,7 +2,9 @@
 id: "lem-weak-homotopy-equivalences-induce-integral-homology-isomorphisms-without-choice"
 kind: "lemma"
 title: "Weak homotopy equivalences induce integral homology isomorphisms without choice"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-a-weak-equivalence-of-cw-complexes-has-vanishing-relative-homotopy-groups","lem-interval-exponential-law-and-quotient-homotopies","thm-quotient-universal-property","lem-relative-cubical-disk-model-and-compression","prop-relative-cw-inclusions-are-cofibrations","lem-finite-choice","lem-cellular-attachments-with-finite-boundary-support-form-a-cw-complex","def-relative-singular-homology","thm-singular-chain-homotopy-formula","thm-long-exact-sequence-of-a-pair-in-singular-homology"]

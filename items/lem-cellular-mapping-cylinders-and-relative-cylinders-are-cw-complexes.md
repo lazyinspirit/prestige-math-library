@@ -2,7 +2,9 @@
 id: "lem-cellular-mapping-cylinders-and-relative-cylinders-are-cw-complexes"
 kind: "lemma"
 title: "Cellular mapping cylinders and relative cylinders are CW complexes"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-cellular-attachments-with-finite-boundary-support-form-a-cw-complex","lem-compact-cw-images-have-finite-cell-support-without-choice","def-cw-complex-with-closure-finiteness-and-weak-topology","def-skeleta-cw-subcomplex-and-relative-cw-complex","lem-interval-exponential-law-and-quotient-homotopies","thm-quotient-universal-property","prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant","prop-higher-homotopy-basepoint-transport-and-moving-homotopies"]

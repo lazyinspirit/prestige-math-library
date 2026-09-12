@@ -2,12 +2,13 @@
 id: "def-compactly-supported-de-rham-cochain-complex-and-cohomology"
 kind: "definition"
 title: "Compactly supported de Rham cohomology"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 proof_strategy: direct
 deps: ["def-compactly-supported-differential-form","def-de-rham-cochain-complex","lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary","def-interior-closure-boundary-top","lem-compactness-of-a-subspace-is-ambient"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

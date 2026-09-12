@@ -2,11 +2,12 @@
 id: "def-normal-neighborhood-and-normal-coordinate-chart"
 kind: "definition"
 title: "Normal neighborhood and normal coordinate chart"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-existence-of-normal-neighborhoods","def-countable-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

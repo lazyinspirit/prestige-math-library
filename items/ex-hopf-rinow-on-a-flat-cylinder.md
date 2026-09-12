@@ -2,11 +2,12 @@
 id: ex-hopf-rinow-on-a-flat-cylinder
 kind: example
 title: Hopf–Rinow on a flat cylinder
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-17
 deps: [def-countable-choice, def-circle-as-real-line-mod-integers, prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure, prop-coordinate-criterion-for-a-riemannian-metric, prop-real-line-mod-integers-is-compact-and-path-connected, thm-path-connected-implies-connected, cor-connected-subsets-of-the-line, thm-product-of-connected-spaces, prop-christoffel-formula-for-the-levi-civita-connection, prop-coordinate-geodesic-equation, thm-existence-uniqueness-and-smooth-dependence-of-geodesics, def-geodesically-complete-riemannian-manifold, def-domain-and-exponential-map-of-a-connection, thm-hopf-rinow, lem-integer-part, def-riemannian-speed-and-length, def-riemannian-distance-on-a-connected-manifold]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

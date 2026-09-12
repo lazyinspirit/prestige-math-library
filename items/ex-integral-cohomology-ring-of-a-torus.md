@@ -2,7 +2,9 @@
 id: "ex-integral-cohomology-ring-of-a-torus"
 kind: "example"
 title: "Integral cohomology ring of a torus"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism","cor-homology-of-spheres","thm-topological-universal-coefficient-short-exact-sequence-for-cohomology","def-axiom-of-choice","thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses","def-singular-chain-cross-product-on-generators","lem-singular-chain-cross-product-boundary-formula","thm-topological-kunneth-short-exact-sequence-for-homology","def-exterior-algebra-of-a-finite-free-module"]

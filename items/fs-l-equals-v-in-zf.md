@@ -2,7 +2,7 @@
 id: fs-l-equals-v-in-zf
 kind: false-statement
 title: "False statement: ZF proves L equals V"
-status: draft
+status: published
 origin: pipeline
 deps: [thm-formal-consistency-of-zfc-plus-gch-from-zf, lem-finite-support-constructibility-absoluteness, prop-atomless-generics-are-not-ground-model-elements, thm-forcing-preserves-ordinals, lem-forcing-transfer-for-finite-zfc-fragments, thm-finite-fragment-relative-consistency-transfer]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,9 @@
 id: "lem-homotopy-excision-for-a-single-relative-cell-layer"
 kind: "lemma"
 title: "Homotopy excision for a single relative cell layer"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-relative-homotopy-group","lem-relative-homotopy-operations-are-well-defined-in-their-valid-degrees","def-cw-complex-with-closure-finiteness-and-weak-topology","def-skeleta-cw-subcomplex-and-relative-cw-complex","thm-heine-borel-rn","thm-compactness-agrees-with-metric-compactness","thm-closed-subspace-of-a-compact-space-is-compact","thm-compact-subset-of-a-hausdorff-space-is-closed","lem-interval-exponential-law-and-quotient-homotopies","lem-weak-equivalences-of-pairs-induce-isomorphisms-on-relative-homotopy","def-weak-homotopy-equivalence","prop-higher-homotopy-basepoint-transport-and-moving-homotopies"]

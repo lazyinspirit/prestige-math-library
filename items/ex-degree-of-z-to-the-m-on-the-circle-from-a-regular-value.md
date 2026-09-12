@@ -2,11 +2,12 @@
 id: "ex-degree-of-z-to-the-m-on-the-circle-from-a-regular-value"
 kind: "example"
 title: "Degree of z to the m on the circle from a regular value"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-regular-value-formula-for-compact-support-degree","prop-degree-of-the-power-map-on-the-circle","prop-real-line-mod-integers-is-compact-and-path-connected","thm-compact-subset-of-a-hausdorff-space-is-closed","thm-closed-subspace-of-a-compact-space-is-compact"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

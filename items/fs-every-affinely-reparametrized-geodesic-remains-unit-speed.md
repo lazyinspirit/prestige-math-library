@@ -2,11 +2,12 @@
 id: "fs-every-affinely-reparametrized-geodesic-remains-unit-speed"
 kind: "false-statement"
 title: "Every affinely reparametrized geodesic remains unit speed"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["prop-christoffel-formula-for-the-levi-civita-connection", "prop-affine-reparametrization-of-a-geodesic-is-a-geodesic", "prop-coordinate-geodesic-equation"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

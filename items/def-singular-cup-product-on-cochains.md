@@ -2,7 +2,9 @@
 id: "def-singular-cup-product-on-cochains"
 kind: "definition"
 title: "Singular cup product on cochains"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-alexander-whitney-diagonal-approximation","def-additive-singular-cohomology-cross-product","def-singular-cochain-complex-with-coefficients","thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses","lem-additive-singular-cohomology-cross-product-is-well-defined"]

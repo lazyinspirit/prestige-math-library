@@ -2,7 +2,7 @@
 id: "ex-nondeterministic-polynomial-logarithmic-time-separation"
 kind: "example"
 title: "A nondeterministic polynomial/logarithmic time separation"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["thm-nondeterministic-recursive-padding-separation"]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-generated"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

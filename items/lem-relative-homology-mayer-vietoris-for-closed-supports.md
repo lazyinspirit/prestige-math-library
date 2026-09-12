@@ -2,11 +2,12 @@
 id: "lem-relative-homology-mayer-vietoris-for-closed-supports"
 kind: "lemma"
 title: "Relative homology Mayer–Vietoris for closed supports"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-relative-singular-homology","def-relative-cup-product","thm-long-exact-sequence-in-homology"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

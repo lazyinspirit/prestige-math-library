@@ -1,7 +1,7 @@
 ---
 page: the-weyl-kac-character-formula
 title: The Weyl Kac Character Formula
-status: draft
+status: published
 items:
 - def-kac-moody-formal-character-completion
 - def-kac-moody-weyl-vector

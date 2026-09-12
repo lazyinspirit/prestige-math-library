@@ -2,12 +2,13 @@
 id: "def-double-mapping-cylinder-homotopy-pushout-and-path-space-homotopy-pullback"
 kind: "definition"
 title: "Double-mapping-cylinder homotopy pushout and path-space homotopy pullback"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: direct
 pipeline_run: "phase-2-next-17"
 deps: ["def-compactly-generated-conventions-for-based-homotopy","def-mapping-cylinder-and-mapping-cone","lem-interval-exponential-law-and-quotient-homotopies","lem-compact-generation-preserves-the-cylinder-and-closed-pushouts","lem-kification-compact-tests-and-finite-constructions","lem-weak-hausdorff-diagonals-and-closed-quotients"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

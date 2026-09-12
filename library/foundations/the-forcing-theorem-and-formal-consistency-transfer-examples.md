@@ -1,7 +1,7 @@
 ---
 page: "the-forcing-theorem-and-formal-consistency-transfer-examples"
 title: "The Forcing Theorem and Formal Consistency Transfer: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: ["ex-atomic-forcing-of-check-names", "ex-trivial-forcing-recovers-the-ground-model", "cex-forcing-is-not-upward-monotone-to-weaker-conditions", "ex-dense-equivalent-forcing-presentations", "fs-the-ctm-presentation-proves-con-zfc", "fs-l-equals-v-in-zf"]
 ---

@@ -2,7 +2,9 @@
 id: "ex-first-nonzero-homotopy-group-of-a-sphere"
 kind: "example"
 title: "First nonzero homotopy group of a sphere"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-absolute-hurewicz-theorem","cor-homology-of-spheres","thm-based-sphere-maps-are-classified-by-geometric-degree","def-axiom-of-choice","lem-first-homotopy-group-of-a-wedge-of-higher-spheres-has-its-cell-basis","def-hurewicz-homomorphism"]

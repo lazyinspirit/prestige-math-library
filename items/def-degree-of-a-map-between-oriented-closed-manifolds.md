@@ -2,11 +2,12 @@
 id: "def-degree-of-a-map-between-oriented-closed-manifolds"
 kind: "definition"
 title: "Degree of a map between oriented closed manifolds"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-fundamental-class-of-a-compact-oriented-manifold","thm-top-homology-characterizes-compact-orientable-manifolds","prop-singular-chains-and-homology-are-covariantly-functorial"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

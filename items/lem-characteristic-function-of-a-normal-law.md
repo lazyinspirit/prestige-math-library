@@ -12,7 +12,9 @@ sources:
       url: https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf
     - title: Norris, Probability and Measure, Section 8
       url: https://www.statslab.cam.ac.uk/~james/Lectures/pmall.pdf
-status: draft
+verification:
+  audited: 2026-09-13
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

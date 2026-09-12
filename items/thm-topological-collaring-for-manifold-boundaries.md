@@ -2,11 +2,12 @@
 id: "thm-topological-collaring-for-manifold-boundaries"
 kind: "theorem"
 title: "Compact topological manifold boundaries admit collars"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-topological-manifold-with-and-without-boundary","thm-local-homology-detects-interior-points-boundary-points-and-dimension","thm-compact-subset-of-a-hausdorff-space-is-closed","thm-heine-borel-rn","thm-finite-products-of-compact-spaces","thm-quotient-universal-property"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

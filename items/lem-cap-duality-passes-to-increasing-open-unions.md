@@ -2,11 +2,12 @@
 id: "lem-cap-duality-passes-to-increasing-open-unions"
 kind: "lemma"
 title: "Cap duality passes to increasing open unions"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-compactly-supported-singular-cohomology-of-a-locally-compact-space","lem-cap-product-commutes-with-the-mayer-vietoris-duality-ladder","thm-heine-borel-rn"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

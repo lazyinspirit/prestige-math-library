@@ -2,7 +2,9 @@
 id: "ex-a-two-sheeted-orientation-preserving-cover-has-degree-two"
 kind: "example"
 title: "A displayed two-sheeted orientation-preserving covering has degree two"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-regular-value-formula-for-compact-support-degree","prop-degree-of-the-power-map-on-the-circle","prop-real-line-mod-integers-is-compact-and-path-connected","thm-compact-subset-of-a-hausdorff-space-is-closed","thm-closed-subspace-of-a-compact-space-is-compact"]

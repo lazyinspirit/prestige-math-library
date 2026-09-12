@@ -2,11 +2,12 @@
 id: "cex-a-nonorientable-manifold-has-no-ordinary-integral-fundamental-class"
 kind: "counterexample"
 title: "A nonorientable closed manifold has no integral fundamental class"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["ex-mod-two-duality-for-real-projective-space","lem-real-projective-space-cellular-homology-and-pinch-map","thm-cellular-homology-computes-singular-homology","thm-local-homology-detects-interior-points-boundary-points-and-dimension","thm-top-homology-characterizes-compact-orientable-manifolds"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

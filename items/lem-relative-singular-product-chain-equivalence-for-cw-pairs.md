@@ -2,7 +2,9 @@
 id: "lem-relative-singular-product-chain-equivalence-for-cw-pairs"
 kind: "lemma"
 title: "Relative singular product comparison for CW pairs"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["prop-relative-cw-inclusions-are-cofibrations","thm-cover-small-inclusion-is-a-chain-homotopy-equivalence","def-prism-operator-for-a-homotopy","lem-the-prism-triangulation-has-the-stated-oriented-boundary","thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses","def-relative-singular-cochain-complex","def-relative-cup-product"]

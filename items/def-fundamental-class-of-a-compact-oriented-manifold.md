@@ -2,11 +2,12 @@
 id: "def-fundamental-class-of-a-compact-oriented-manifold"
 kind: "definition"
 title: "Fundamental class of a compact oriented manifold"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-compatible-local-orientation-classes-exist-over-compact-subsets","thm-excision-for-singular-homology"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

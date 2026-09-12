@@ -2,11 +2,12 @@
 id: "thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses"
 kind: "theorem"
 title: "Alexander--Whitney and shuffle are natural chain-homotopy inverses"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-alexander-whitney-diagonal-approximation","def-singular-chain-cross-product-on-generators","lem-singular-chain-cross-product-boundary-formula","prop-singular-chain-cross-products-are-natural","lem-singular-product-chain-equivalence-by-simplex-models","thm-singular-chain-homotopy-formula","def-singular-cochain-complex-with-coefficients"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

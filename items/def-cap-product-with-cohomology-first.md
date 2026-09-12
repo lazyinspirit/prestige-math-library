@@ -2,11 +2,12 @@
 id: "def-cap-product-with-cohomology-first"
 kind: "definition"
 title: "Cap product with cohomology written first"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-singular-cup-product-on-cochains","def-singular-simplex-and-singular-chain-group-with-coefficients"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

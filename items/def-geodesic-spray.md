@@ -2,12 +2,13 @@
 id: "def-geodesic-spray"
 kind: "definition"
 title: "Geodesic spray"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["prop-coordinate-geodesic-equation","def-countable-choice","thm-the-tangent-bundle-has-a-canonical-smooth-2n-manifold-structure","def-induced-tangent-bundle-chart"]
 justified_by: ["lem-the-geodesic-spray-is-a-well-defined-smooth-vector-field-on-tm"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

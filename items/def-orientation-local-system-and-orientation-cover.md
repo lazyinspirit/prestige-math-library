@@ -2,11 +2,12 @@
 id: "def-orientation-local-system-and-orientation-cover"
 kind: "definition"
 title: "Orientation local system and orientation cover"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-coordinate-ball-classes-identify-local-homology-stalks","thm-local-homology-detects-interior-points-boundary-points-and-dimension","prop-relative-homology-is-functorial-for-maps-of-pairs","thm-heine-borel-rn","thm-lebesgue-number-lemma"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

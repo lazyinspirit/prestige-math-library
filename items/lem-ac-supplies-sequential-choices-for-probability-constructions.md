@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: Jech, The Axiom of Choice, §2.4, pp22–23; elementary AC-to-DC restriction proof
       url: https://gwern.net/doc/math/1973-jech-theaxiomofchoice.pdf
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

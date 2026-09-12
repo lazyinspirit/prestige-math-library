@@ -2,7 +2,9 @@
 id: "lem-finite-chart-localization-defines-choice-free-integration-and-compact-stokes"
 kind: "lemma"
 title: "Finite chart localization gives choice-free integration and compact Stokes"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-chart-bump-at-a-point-with-prescribed-support","thm-heine-borel-rn","thm-compactness-under-continuous-maps","def-the-standard-smooth-step-function","lem-compactness-of-a-subspace-is-ambient","def-integral-of-an-oriented-chart-supported-top-form","cor-change-of-variables-for-compactly-supported-functions","thm-multidimensional-integral-properties","thm-jordan-fubini-by-sections","thm-newton-leibniz-with-interior-derivative","lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary","thm-continuous-on-a-rectangle-is-riemann-integrable"]

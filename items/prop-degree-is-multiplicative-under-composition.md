@@ -2,11 +2,12 @@
 id: "prop-degree-is-multiplicative-under-composition"
 kind: "proposition"
 title: "Degree is multiplicative under composition"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-degree-of-a-proper-smooth-map-by-compact-support-cohomology","prop-compactly-supported-de-rham-cohomology-is-contravariant-for-proper-smooth-maps","thm-regular-value-formula-for-degree","prop-manifold-degree-is-functorial-and-detected-by-top-cohomology"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

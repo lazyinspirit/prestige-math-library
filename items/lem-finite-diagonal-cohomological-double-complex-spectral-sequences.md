@@ -10,7 +10,9 @@ sources:
   references:
     - title: "Stacks Project, Lemmas 12.25.1 and 12.25.3, with explicit dual filtration conversion"
       url: "https://stacks.math.columbia.edu/tag/012X"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 proof_strategy: "direct"

@@ -2,11 +2,12 @@
 id: "fs-the-de-rham-map-is-a-cochain-map-without-stokes-on-simplices"
 kind: "false-statement"
 title: "The de Rham map is a cochain map without Stokes on simplices"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-de-rham-integration-is-a-cochain-map"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

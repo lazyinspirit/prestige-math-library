@@ -2,11 +2,12 @@
 id: "thm-metric-completeness-implies-geodesic-completeness"
 kind: "theorem"
 title: "Metric completeness implies geodesic completeness"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["rem-boundaryless-convention-for-geodesic-flow-and-hopf-rinow","def-countable-choice","def-geodesically-complete-riemannian-manifold","def-geodesic-of-an-affine-connection","thm-existence-uniqueness-and-smooth-dependence-of-geodesics","prop-geodesics-have-constant-speed-for-a-metric-compatible-connection","prop-affine-reparametrization-of-a-geodesic-is-a-geodesic","lem-a-finite-endpoint-of-a-maximal-unit-speed-geodesic-produces-a-cauchy-curve","def-cauchy-in-metric","def-complete-metric-space","def-metric-convergence","thm-riemannian-distance-is-a-metric","thm-the-riemannian-distance-topology-is-the-manifold-topology","def-induced-tangent-bundle-chart","def-metric-topology","cor-heine-borel-in-the-product-topology","thm-compactness-under-continuous-maps","lem-local-comparison-of-a-riemannian-metric-with-the-euclidean-metric","lem-geodesics-can-be-continued-while-their-velocity-lifts-remain-in-a-compact-subset"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

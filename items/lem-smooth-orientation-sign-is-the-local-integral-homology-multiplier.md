@@ -2,7 +2,9 @@
 id: "lem-smooth-orientation-sign-is-the-local-integral-homology-multiplier"
 kind: "lemma"
 title: "Smooth orientation sign is the local integral homology multiplier"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-local-homology-detects-interior-points-boundary-points-and-dimension","thm-long-exact-sequence-of-a-pair-in-singular-homology","thm-singular-chain-homotopy-formula","prop-relative-homology-is-functorial-for-maps-of-pairs","prop-degree-of-identity-constant-reflection-and-antipodal-sphere-maps","thm-punctured-rn-deformation-retracts-onto-the-sphere","thm-invertible-matrices-factor-into-elementary-matrices","def-elementary-matrix","thm-determinant-under-elementary-row-operations","thm-determinant-multiplicative","def-total-derivative-in-euclidean-space","lem-euclidean-linear-maps-have-matrices-and-are-bounded","def-local-orientation-sign-of-a-regular-preimage","lem-coordinate-ball-classes-identify-local-homology-stalks","def-r-orientation-of-a-topological-manifold","thm-excision-for-singular-homology"]

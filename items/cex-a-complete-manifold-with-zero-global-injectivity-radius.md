@@ -2,7 +2,7 @@
 id: cex-a-complete-manifold-with-zero-global-injectivity-radius
 kind: counterexample
 title: A complete manifold with zero global injectivity radius
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-17
 deps:
@@ -32,6 +32,7 @@ deps:
   - def-standard-integer-loops-in-the-circle
   - thm-fundamental-group-of-the-circle
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: "lem-stokes-theorem-for-the-standard-simplex"
 kind: "lemma"
 title: "Stokes theorem for the standard simplex"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-integral-of-a-form-over-a-smooth-singular-simplex","def-standard-orientation-of-the-affine-simplex","thm-local-coordinate-formula-for-the-exterior-derivative","thm-newton-leibniz-with-interior-derivative","thm-jordan-fubini-by-sections","thm-change-of-variables-for-compact-jordan-sets","thm-continuous-functions-on-compact-jordan-sets-are-integrable","thm-multidimensional-integral-properties"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

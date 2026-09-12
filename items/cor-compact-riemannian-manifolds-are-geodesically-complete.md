@@ -2,11 +2,12 @@
 id: "cor-compact-riemannian-manifolds-are-geodesically-complete"
 kind: "corollary"
 title: "Compact Riemannian manifolds are geodesically complete"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-countable-choice","rem-boundaryless-convention-for-geodesic-flow-and-hopf-rinow","def-geodesically-complete-riemannian-manifold","prop-components-of-a-topological-manifold-are-open-and-at-most-countable","thm-components-partition-and-are-closed","thm-closed-subspace-of-a-compact-space-is-compact","thm-the-riemannian-distance-topology-is-the-manifold-topology","thm-compactness-agrees-with-metric-compactness","thm-compact-implies-complete-and-totally-bounded","thm-hopf-rinow"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

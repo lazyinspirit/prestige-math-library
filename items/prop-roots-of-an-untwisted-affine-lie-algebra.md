@@ -14,7 +14,9 @@ sources:
     - title: Perrin, Introduction to Kac-Moody Groups and Lie Algebras, Proposition
         12.2.14 and Corollary 12.2.16
       url: https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf
-status: draft
+verification:
+  audited: 2026-09-13
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

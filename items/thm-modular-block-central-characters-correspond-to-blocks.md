@@ -7,6 +7,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       url: https://www.uv.es/jomimar8/pdfs/course%20notes.pdf
     - title: Craven, The Brauer Correspondence, central-character setup, pp. 4–6
       url: https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

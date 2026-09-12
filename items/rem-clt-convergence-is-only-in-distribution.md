@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       url: https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf
     - title: Aldous and Chewi, Probability Theory notes, Lectures 5-6
       url: https://www.stat.berkeley.edu/users/aldous/205B/chewi_notes.pdf
-status: draft
+status: published
 origin: pipeline
 ---
 

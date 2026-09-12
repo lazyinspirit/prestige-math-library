@@ -2,7 +2,9 @@
 id: "thm-absolute-hurewicz-theorem"
 kind: "theorem"
 title: "Absolute Hurewicz theorem at the first nonzero degree"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-relative-hurewicz-theorem","prop-the-first-hurewicz-map-in-degree-one-is-abelianization","def-n-connected-space-and-n-connected-map","def-hurewicz-homomorphism","thm-long-exact-sequence-of-a-pair-in-singular-homology","cor-contractible-nonempty-spaces-have-the-homology-of-a-point","thm-singular-chain-homotopy-formula","def-relative-homotopy-group","def-n-connected-cw-pair","prop-higher-homotopy-basepoint-transport-and-moving-homotopies","def-zero-simplex-augmentation-and-reduced-singular-homology","prop-zero-th-singular-homology-is-free-on-path-components","lem-interval-exponential-law-and-quotient-homotopies","def-cw-complex-with-closure-finiteness-and-weak-topology","def-axiom-of-choice","lem-cw-quotient-induces-relative-singular-homology-isomorphisms"]

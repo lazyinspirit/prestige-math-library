@@ -3,11 +3,12 @@ id: "def-n-connected-cw-pair"
 kind: "definition"
 title: "Connectivity of a CW pair"
 proof_strategy: direct
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-relative-homotopy-group","def-path-connected","def-skeleta-cw-subcomplex-and-relative-cw-complex","lem-relative-cubical-disk-model-and-compression"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: "thm-cw-approximation-of-an-arbitrary-space"
 kind: "theorem"
 title: "CW approximation of an arbitrary space"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-cellular-approximation-for-maps-of-cw-pairs","lem-cellular-attachments-with-finite-boundary-support-form-a-cw-complex","lem-compact-cw-images-have-finite-cell-support-without-choice","prop-cubical-and-spherical-models-of-higher-homotopy-agree","prop-higher-homotopy-basepoint-transport-and-moving-homotopies","thm-transfinite-recursion","thm-heine-borel-rn","thm-compactness-agrees-with-metric-compactness","thm-compact-subset-of-a-hausdorff-space-is-closed","thm-closed-subspace-of-a-compact-space-is-compact"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

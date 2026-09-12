@@ -2,7 +2,9 @@
 id: "lem-cap-product-commutes-with-the-mayer-vietoris-duality-ladder"
 kind: "lemma"
 title: "Cap product and the Mayer–Vietoris duality ladder"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-cap-duality-map-for-an-oriented-manifold","def-compactly-supported-singular-cohomology-of-a-locally-compact-space","lem-compatible-local-orientation-classes-exist-over-compact-subsets","thm-excision-for-singular-cohomology","thm-excision-for-singular-homology","prop-cap-product-naturality-and-projection-formula","def-relative-cup-product","thm-long-exact-sequence-in-homology","thm-mayer-vietoris-sequence-in-singular-homology","thm-cover-small-inclusion-is-a-chain-homotopy-equivalence","thm-cap-product-boundary-identity","thm-locally-compact-hausdorff-basics"]

@@ -2,7 +2,7 @@
 id: "def-nondeterministic-acceptance-time-and-exact-clock"
 kind: "definition"
 title: "Nondeterministic acceptance time and exact clocks"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-nondeterministic-accepting-computation", "def-dtime-ntime-dspace-and-nspace", "def-worst-case-time-and-space-complexity", "def-uniform-asymptotic-time-space-comparison", "def-machine-time-and-space-constructibility"]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

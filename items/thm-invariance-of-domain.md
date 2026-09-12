@@ -2,11 +2,12 @@
 id: "thm-invariance-of-domain"
 kind: "theorem"
 title: "Invariance of domain"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-jordan-brouwer-separation","thm-compact-subset-of-a-hausdorff-space-is-closed","def-axiom-of-choice","thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere","prop-zero-th-singular-homology-is-free-on-path-components","thm-heine-borel-rn","thm-homotopic-maps-induce-equal-maps-in-singular-cohomology","prop-singular-cohomology-is-contravariantly-functorial"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

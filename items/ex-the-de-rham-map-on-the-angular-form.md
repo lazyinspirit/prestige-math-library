@@ -2,11 +2,12 @@
 id: "ex-the-de-rham-map-on-the-angular-form"
 kind: "example"
 title: "The de Rham map on the angular form"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-de-rham-integration-cochain-map","thm-sine-and-cosine-derivatives","cor-trigonometric-parity-and-pythagorean-identity","thm-chain-rule","prop-degree-of-the-power-map-on-the-circle"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

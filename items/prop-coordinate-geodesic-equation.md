@@ -2,11 +2,12 @@
 id: "prop-coordinate-geodesic-equation"
 kind: "proposition"
 title: "Coordinate geodesic equation"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-geodesic-of-an-affine-connection","def-christoffel-symbols-of-an-affine-connection"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

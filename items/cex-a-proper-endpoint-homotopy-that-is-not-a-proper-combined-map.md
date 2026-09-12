@@ -2,11 +2,12 @@
 id: "cex-a-proper-endpoint-homotopy-that-is-not-a-proper-combined-map"
 kind: "counterexample"
 title: "Proper endpoint maps joined by a nonproper combined homotopy"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-degree-is-invariant-under-proper-smooth-homotopy","thm-heine-borel-rn"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

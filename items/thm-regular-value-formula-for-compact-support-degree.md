@@ -2,11 +2,12 @@
 id: "thm-regular-value-formula-for-compact-support-degree"
 kind: "theorem"
 title: "Regular-value formula for compact-support degree"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-degree-is-well-defined-and-independent-of-the-normalized-top-form","def-local-orientation-sign-of-a-regular-preimage","def-regular-and-critical-points-and-values","thm-smooth-inverse-function-theorem-on-manifolds","lem-compactness-of-a-subspace-is-ambient","thm-compact-subset-of-a-hausdorff-space-is-closed","thm-heine-borel-rn","lem-compactly-supported-top-cohomology-propagates-across-overlapping-oriented-coordinate-balls","lem-finite-chart-localization-defines-choice-free-integration-and-compact-stokes","prop-pointwise-orientation-sign-of-a-local-diffeomorphism"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

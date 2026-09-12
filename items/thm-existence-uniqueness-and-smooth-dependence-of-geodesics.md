@@ -2,11 +2,12 @@
 id: "thm-existence-uniqueness-and-smooth-dependence-of-geodesics"
 kind: "theorem"
 title: "Existence uniqueness and smooth dependence of geodesics"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-the-geodesic-spray-is-a-well-defined-smooth-vector-field-on-tm","thm-unique-maximal-integral-curve-through-each-point","thm-local-existence-uniqueness-and-smooth-dependence-for-manifold-integral-curves","thm-fundamental-theorem-on-flows","def-countable-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

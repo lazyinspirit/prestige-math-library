@@ -2,11 +2,12 @@
 id: "fs-compactly-supported-cohomology-is-contravariant-for-every-smooth-map"
 kind: "false-statement"
 title: "Compactly supported cohomology is contravariant for every smooth map"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["prop-proper-smooth-maps-pull-back-compactly-supported-forms","lem-smooth-bump-between-concentric-euclidean-balls","thm-heine-borel-rn"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

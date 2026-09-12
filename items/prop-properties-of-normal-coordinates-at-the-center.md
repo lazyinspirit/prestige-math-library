@@ -2,11 +2,12 @@
 id: "prop-properties-of-normal-coordinates-at-the-center"
 kind: "proposition"
 title: "Properties of normal coordinates at the center"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-normal-neighborhood-and-normal-coordinate-chart","prop-coordinate-geodesic-equation","prop-christoffel-formula-for-the-levi-civita-connection","prop-exponential-map-scales-geodesic-time","thm-the-differential-of-exp-p-at-zero-is-the-identity","def-countable-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

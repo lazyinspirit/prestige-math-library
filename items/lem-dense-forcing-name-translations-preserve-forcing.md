@@ -2,7 +2,7 @@
 id: lem-dense-forcing-name-translations-preserve-forcing
 kind: lemma
 title: Dense forcing name translations preserve forcing
-status: draft
+status: published
 origin: pipeline
 deps: [def-forcing-relation-for-atomic-formulas, def-forcing-relation-for-formulas, lem-forcing-monotonicity-density-and-decision, def-forcing-names-and-name-rank, thm-recursion-on-well-founded-setlike-relations, def-forcing-name-valuation-and-generic-extension, def-dense-open-sets-and-model-generic-filters]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: "prop-relative-cup-products-are-natural-and-compatible-with-connectors"
 kind: "proposition"
 title: "Relative cup products are natural and connector-compatible"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-relative-cup-product","thm-long-exact-sequence-of-a-pair-in-singular-cohomology","thm-cup-product-leibniz-identity","prop-cup-product-is-natural-unital-and-associative"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

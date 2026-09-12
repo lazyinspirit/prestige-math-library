@@ -2,7 +2,9 @@
 id: "lem-cell-attachment-below-the-first-nonzero-homotopy-degree-preserves-the-required-connectivity"
 kind: "lemma"
 title: "Cellular reduction for a highly connected pair"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-a-connected-cw-pair-has-a-model-without-low-relative-cells","lem-high-relative-cells-do-not-change-lower-homotopy","lem-relative-homotopy-exact-sequence-of-a-triple-in-group-degrees","lem-relative-single-cell-layer-has-compatible-homotopy-and-homology-bases","lem-cw-quotients-and-collapse-of-a-contractible-subcomplex","lem-cw-quotient-induces-relative-singular-homology-isomorphisms","lem-integral-homology-of-a-wedge-of-higher-spheres-has-its-cell-basis","lem-first-homotopy-group-of-a-wedge-of-higher-spheres-has-its-cell-basis","def-relative-singular-homology","thm-long-exact-sequence-in-homology","thm-long-exact-sequence-of-a-pair-in-singular-homology","thm-singular-chain-homotopy-formula","def-hurewicz-homomorphism","def-degree-of-a-self-map-of-an-oriented-sphere","prop-degree-is-homotopy-invariant-and-multiplicative-under-composition","def-axiom-of-choice","lem-compact-cw-images-have-finite-cell-support-without-choice","thm-heine-borel-rn","thm-compactness-agrees-with-metric-compactness"]

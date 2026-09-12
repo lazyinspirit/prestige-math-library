@@ -2,11 +2,12 @@
 id: "ex-geodesics-of-a-riemannian-product"
 kind: "example"
 title: "Geodesics of a Riemannian product"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-countable-choice","thm-fundamental-theorem-of-riemannian-geometry","prop-christoffel-formula-for-the-levi-civita-connection","prop-coordinate-geodesic-equation","prop-a-riemannian-product-is-complete-iff-each-factor-is-complete"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

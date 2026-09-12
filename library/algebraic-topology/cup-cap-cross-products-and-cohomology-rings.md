@@ -1,7 +1,7 @@
 ---
 page: "cup-cap-cross-products-and-cohomology-rings"
 title: "Cup Cap Cross Products and Cohomology Rings"
-status: "draft"
+status: published
 items: ["def-alexander-whitney-diagonal-approximation","thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses","def-singular-cup-product-on-cochains","thm-cup-product-leibniz-identity","def-singular-cohomology-ring","prop-cup-product-is-natural-unital-and-associative","lem-simplex-factor-reversal-is-chain-homotopic-to-the-identity-diagonal","thm-singular-cohomology-is-graded-commutative","def-relative-cup-product","prop-relative-cup-products-are-natural-and-compatible-with-connectors","def-cap-product-with-cohomology-first","thm-cap-product-boundary-identity","prop-cap-product-naturality-and-projection-formula","def-relative-cap-product","lem-relative-singular-product-chain-equivalence-for-cw-pairs","lem-relative-cohomological-kunneth-under-finite-free-homology-hypotheses","thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism","lem-local-coordinate-cup-products-generate-top-relative-cohomology","def-cup-length-over-a-coefficient-ring","prop-positive-degree-cup-products-on-a-suspension-vanish","lem-integral-surface-cup-pairing-from-the-oriented-polygon"]
 examples: []
 ---

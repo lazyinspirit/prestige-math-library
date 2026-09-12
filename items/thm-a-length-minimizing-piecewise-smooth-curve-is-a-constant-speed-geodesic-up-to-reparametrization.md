@@ -2,7 +2,9 @@
 id: "thm-a-length-minimizing-piecewise-smooth-curve-is-a-constant-speed-geodesic-up-to-reparametrization"
 kind: "theorem"
 title: "Length minimizers are constant-speed geodesics up to reparametrization"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["rem-boundaryless-convention-for-geodesic-flow-and-hopf-rinow","def-countable-choice","def-piecewise-c-one-curve-on-a-manifold","def-riemannian-speed-and-length","lem-riemannian-length-is-independent-of-piecewise-c-one-subdivision","prop-length-is-additive-under-concatenation-and-invariant-under-reversal","prop-components-of-a-topological-manifold-are-open-and-at-most-countable","thm-path-connected-implies-connected","def-riemannian-distance-on-a-connected-manifold","thm-riemannian-distance-is-a-metric","def-the-integral-function","thm-the-integral-function-is-lipschitz","thm-intermediate-value","thm-the-riemannian-distance-topology-is-the-manifold-topology","thm-existence-of-geodesically-convex-neighborhoods","thm-riemannian-length-is-invariant-under-orientation-preserving-piecewise-c-one-reparametrization","prop-geodesics-have-constant-speed-for-a-metric-compatible-connection","prop-affine-reparametrization-of-a-geodesic-is-a-geodesic","thm-ftc-first-part","thm-chain-rule-for-differentials-of-smooth-maps","def-geodesic-of-an-affine-connection"]

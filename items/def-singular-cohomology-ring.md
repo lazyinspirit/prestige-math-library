@@ -2,11 +2,12 @@
 id: "def-singular-cohomology-ring"
 kind: "definition"
 title: "Singular cohomology ring"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-cup-product-leibniz-identity","def-singular-cohomology-with-coefficients"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

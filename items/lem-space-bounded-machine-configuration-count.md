@@ -2,7 +2,7 @@
 id: "lem-space-bounded-machine-configuration-count"
 kind: "lemma"
 title: "A space-bounded machine has exponentially many configurations"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-polynomial-space-and-nondeterministic-polynomial-space", "def-multitape-and-nondeterministic-machines", "def-turing-machine-configuration", "def-turing-machine-initial-and-halting-configuration-interface"]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

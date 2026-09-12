@@ -2,11 +2,12 @@
 id: "def-relative-cup-product"
 kind: "definition"
 title: "Relative cup product for an excisive triad"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-singular-cup-product-on-cochains","def-relative-singular-cochain-complex","lem-two-open-cover-small-chains-are-the-sum-of-the-two-singular-subcomplexes","thm-cover-small-inclusion-is-a-chain-homotopy-equivalence","lem-every-finite-singular-chain-becomes-cover-small-after-enough-subdivision","thm-barycentric-subdivision-is-chain-homotopic-to-the-identity","def-barycentric-subdivision-chain-operator","def-barycentric-subdivision-prism-homotopy","thm-cup-product-leibniz-identity"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

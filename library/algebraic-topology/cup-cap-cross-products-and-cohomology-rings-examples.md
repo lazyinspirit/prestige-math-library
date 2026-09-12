@@ -1,7 +1,7 @@
 ---
 page: "cup-cap-cross-products-and-cohomology-rings-examples"
 title: "Cup Cap Cross Products and Cohomology Rings — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-integral-cohomology-ring-of-a-torus","ex-integral-cohomology-ring-of-an-orientable-surface","ex-mod-two-cohomology-ring-of-real-projective-space","ex-integral-cohomology-ring-of-complex-projective-space","ex-cap-product-on-the-oriented-circle","ex-same-additive-cohomology-different-rings-cp-three-and-a-wedge","cex-the-cup-product-of-arbitrary-abelian-group-valued-cochains-is-not-canonical","cex-cochain-cup-product-is-not-graded-commutative-on-the-nose"]
 ---

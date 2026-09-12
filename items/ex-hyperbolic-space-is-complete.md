@@ -2,7 +2,9 @@
 id: ex-hyperbolic-space-is-complete
 kind: example
 title: Hyperbolic space is complete
-status: draft
+verification:
+  audited: 2026-09-13
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-17
 deps: [def-countable-choice, def-euclidean-inner-product, cor-differentiable-implies-continuous, thm-algebra-of-derivatives, def-ck-and-multi-index-notation-in-several-variables, prop-open-subsets-of-euclidean-space-have-the-standard-smooth-structure, prop-coordinate-criterion-for-a-riemannian-metric, thm-path-connected-implies-connected, def-geodesically-complete-riemannian-manifold, thm-hopf-rinow, ex-geodesics-in-the-poincare-upper-half-plane]

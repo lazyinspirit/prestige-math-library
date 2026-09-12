@@ -2,7 +2,7 @@
 id: thm-condensation-for-constructible-levels
 kind: theorem
 title: Condensation for constructible levels
-status: draft
+status: published
 origin: pipeline
 deps: [lem-finite-stage-l-history-and-limit-level-absoluteness, thm-collapse-of-elementary-membership-submodels, lem-collapse-fixes-transitive-parts-and-orders-ordinals]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

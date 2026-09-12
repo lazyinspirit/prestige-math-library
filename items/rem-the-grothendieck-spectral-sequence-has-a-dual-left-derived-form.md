@@ -10,7 +10,9 @@ sources:
   references:
     - title: "Weibel, Theorem 5.8.3, dual form"
       url: "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 ---

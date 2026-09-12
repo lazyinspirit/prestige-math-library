@@ -2,11 +2,12 @@
 id: "lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space"
 kind: "lemma"
 title: "Choice-free smooth inverse function theorem in Euclidean space"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-c-one-map-and-local-inverse","def-invertible-euclidean-linear-map","lem-newton-contraction-near-an-invertible-derivative","thm-banach-fixed-point","thm-euclidean-space-complete","def-total-derivative-in-euclidean-space","thm-chain-rule-for-total-derivatives","thm-total-differentiability-gives-a-local-linear-bound-and-continuity","def-ck-euclidean-maps-and-diffeomorphisms","thm-ck-euclidean-maps-closed-under-algebra-and-composition","lem-matrix-inversion-preserves-ck-regularity"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -10,7 +10,9 @@ sources:
   references:
     - title: "J. Lebl, Basic Analysis, Riemann Integral in Several Variables; Darboux criterion combined with the elementary Lebesgue simple-integral construction"
       url: "https://www.jirka.org/ra/html/sec_rirect.html"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

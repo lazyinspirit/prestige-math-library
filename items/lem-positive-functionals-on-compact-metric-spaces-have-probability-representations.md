@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: Compact-metric adaptation of the RMK construction; Cohn, Measure Theory, 2nd ed., Chapter 7
       url: https://math.bme.hu/~pitrik/2023_24_2/Measure_Cohn.pdf
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

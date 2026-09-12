@@ -2,11 +2,12 @@
 id: "lem-cw-quotients-and-collapse-of-a-contractible-subcomplex"
 kind: "lemma"
 title: "CW quotients and collapse of a contractible subcomplex"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-cellular-attachments-with-finite-boundary-support-form-a-cw-complex","def-skeleta-cw-subcomplex-and-relative-cw-complex","prop-relative-cw-inclusions-are-cofibrations","thm-quotient-universal-property","lem-interval-exponential-law-and-quotient-homotopies","prop-higher-homotopy-basepoint-transport-and-moving-homotopies","def-weak-homotopy-equivalence"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

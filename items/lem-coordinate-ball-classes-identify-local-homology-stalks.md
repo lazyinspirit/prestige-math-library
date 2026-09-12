@@ -2,7 +2,9 @@
 id: "lem-coordinate-ball-classes-identify-local-homology-stalks"
 kind: "lemma"
 title: "Coordinate-ball classes identify local homology stalks"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-local-homology-detects-interior-points-boundary-points-and-dimension","thm-excision-for-singular-homology","thm-long-exact-sequence-of-a-pair-in-singular-homology","def-relative-homology-connecting-homomorphism-on-cycles","cor-the-long-exact-homology-sequence-is-natural","cor-homotopic-maps-induce-the-same-map-on-singular-homology","prop-relative-homology-is-functorial-for-maps-of-pairs","thm-heine-borel-rn","thm-compact-subset-of-a-hausdorff-space-is-closed"]

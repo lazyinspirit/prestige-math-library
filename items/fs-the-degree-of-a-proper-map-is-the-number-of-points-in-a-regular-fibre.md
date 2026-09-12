@@ -2,11 +2,12 @@
 id: "fs-the-degree-of-a-proper-map-is-the-number-of-points-in-a-regular-fibre"
 kind: "false-statement"
 title: "Degree is the unsigned number of points in a regular fibre"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-regular-value-formula-for-compact-support-degree","thm-heine-borel-rn","thm-compact-subset-of-a-hausdorff-space-is-closed"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

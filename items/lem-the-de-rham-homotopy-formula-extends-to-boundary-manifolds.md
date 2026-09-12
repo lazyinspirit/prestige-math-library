@@ -2,11 +2,12 @@
 id: "lem-the-de-rham-homotopy-formula-extends-to-boundary-manifolds"
 kind: "lemma"
 title: "The de Rham homotopy formula extends to boundary manifolds"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary","def-integration-along-the-unit-interval-for-a-differential-form","thm-differentiation-under-the-integral-sign-on-a-compact-rectangle","thm-newton-leibniz-with-interior-derivative","def-the-standard-smooth-step-function","thm-heine-borel-rn","thm-heine-cantor-metric"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

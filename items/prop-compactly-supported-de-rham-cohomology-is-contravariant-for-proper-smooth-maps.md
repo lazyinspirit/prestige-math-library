@@ -2,11 +2,12 @@
 id: "prop-compactly-supported-de-rham-cohomology-is-contravariant-for-proper-smooth-maps"
 kind: "proposition"
 title: "Compactly supported de Rham cohomology is contravariant for proper smooth maps"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["prop-proper-smooth-maps-pull-back-compactly-supported-forms","thm-pullback-induces-a-well-defined-map-on-de-rham-cohomology","lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary","def-compactly-supported-de-rham-cochain-complex-and-cohomology"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

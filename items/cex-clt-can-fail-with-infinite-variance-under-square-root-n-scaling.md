@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       url: https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf
     - title: Billingsley, Probability and Measure, continuity theorem
       url: https://www.colorado.edu/amath/sites/default/files/attached-files/billingsley.pdf
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

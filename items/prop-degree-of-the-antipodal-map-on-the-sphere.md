@@ -2,11 +2,12 @@
 id: "prop-degree-of-the-antipodal-map-on-the-sphere"
 kind: "proposition"
 title: "Degree of the antipodal map on the sphere"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism","prop-pointwise-orientation-sign-of-a-local-diffeomorphism","def-induced-boundary-orientation"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

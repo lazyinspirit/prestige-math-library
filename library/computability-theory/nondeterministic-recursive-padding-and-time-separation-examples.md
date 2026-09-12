@@ -1,7 +1,7 @@
 ---
 page: nondeterministic-recursive-padding-and-time-separation-examples
 title: "Nondeterministic Recursive Padding and Time Separation: Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-nondeterministic-polynomial-logarithmic-time-separation", "ex-shortest-acceptance-and-clocked-all-branch-halting"]
 ---

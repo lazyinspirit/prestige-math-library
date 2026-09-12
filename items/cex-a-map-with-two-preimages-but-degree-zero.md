@@ -2,11 +2,12 @@
 id: "cex-a-map-with-two-preimages-but-degree-zero"
 kind: "counterexample"
 title: "A map with two preimages but degree zero"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-regular-value-formula-for-compact-support-degree","thm-real-line-mod-integers-is-homeomorphic-to-the-unit-circle","prop-real-line-mod-integers-is-compact-and-path-connected","prop-real-line-mod-integers-is-hausdorff","thm-compact-subset-of-a-hausdorff-space-is-closed","thm-closed-subspace-of-a-compact-space-is-compact","thm-sine-cosine-zero-sets-and-fundamental-period","thm-sine-and-cosine-derivatives","thm-chain-rule","cor-trigonometric-parity-and-pythagorean-identity","thm-quarter-turn-values-and-shift-formulas","lem-sine-positive-and-cosine-decreasing-on-zero-two","cor-pi-is-the-first-positive-sine-zero"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

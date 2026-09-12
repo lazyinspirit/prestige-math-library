@@ -2,7 +2,7 @@
 id: thm-v-equals-l-implies-diamond
 kind: theorem
 title: V equals L implies diamond
-status: draft
+status: published
 origin: pipeline
 deps: [lem-finite-stage-l-history-and-limit-level-absoluteness, lem-canonical-small-skolem-hulls-in-l, thm-condensation-for-constructible-levels, lem-collapse-fixes-transitive-parts-and-orders-ordinals, thm-canonical-definable-global-well-order-of-l, thm-transfinite-recursion, def-diamond-on-omega-one, def-club-subsets-of-ordinals, def-club-filter-and-nonstationary-ideal]
 proof_strategy: contradiction
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

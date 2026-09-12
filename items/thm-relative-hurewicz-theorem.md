@@ -2,11 +2,12 @@
 id: "thm-relative-hurewicz-theorem"
 kind: "theorem"
 title: "Relative Hurewicz theorem in the simple-connectivity range"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-hurewicz-homomorphism","lem-cell-attachment-below-the-first-nonzero-homotopy-degree-preserves-the-required-connectivity","def-axiom-of-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

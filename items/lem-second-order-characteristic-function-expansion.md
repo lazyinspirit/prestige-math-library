@@ -12,7 +12,9 @@ sources:
       url: https://www.stat.berkeley.edu/users/aldous/205B/chewi_notes.pdf
     - title: Varadhan, Probability Theory, Chapter 3, Section 3.6
       url: https://math.nyu.edu/~varadhan/course/PROB.ch3.pdf
-status: draft
+verification:
+  audited: 2026-09-13
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

@@ -2,7 +2,7 @@
 id: ex-diamond-seals-a-maximal-antichain-in-l
 kind: example
 title: Diamond sealing a maximal antichain in L
-status: draft
+status: published
 origin: pipeline
 deps: [thm-diamond-constructs-normal-suslin-tree, lem-countable-tree-antichain-sealing, lem-tree-predecessors-and-common-extensions, thm-countable-union-of-countable, thm-constructible-universe-satisfies-choice, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

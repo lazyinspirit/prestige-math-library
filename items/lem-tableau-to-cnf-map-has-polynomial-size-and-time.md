@@ -2,7 +2,7 @@
 id: "lem-tableau-to-cnf-map-has-polynomial-size-and-time"
 kind: "lemma"
 title: "Tableau formulas have polynomial-size polynomial-time CNF encodings"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-boolean-formulas-cnf-and-satisfiability-interface", "def-bounded-turing-computation-tableau-interface", "lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations"]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

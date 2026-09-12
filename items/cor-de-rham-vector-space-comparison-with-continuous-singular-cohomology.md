@@ -2,11 +2,12 @@
 id: "cor-de-rham-vector-space-comparison-with-continuous-singular-cohomology"
 kind: "corollary"
 title: "De Rham vector-space comparison with continuous singular cohomology"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-de-rham-theorem-for-smooth-singular-cohomology","thm-smooth-and-continuous-real-singular-cohomology-agree","def-countable-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

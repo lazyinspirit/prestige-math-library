@@ -13,7 +13,9 @@ sources:
     - title: Farrell–Lassueur, Modular Representation Theory of Finite Groups, Theorem
         40.4, §40 (printed pp.8–12 of upload17)
       url: https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload17.pdf
-status: draft
+verification:
+  audited: 2026-09-13
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

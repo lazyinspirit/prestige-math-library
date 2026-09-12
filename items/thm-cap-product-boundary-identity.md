@@ -2,11 +2,12 @@
 id: "thm-cap-product-boundary-identity"
 kind: "theorem"
 title: "Cap product boundary identity"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-cap-product-with-cohomology-first","def-singular-cochain-complex-with-coefficients","def-singular-boundary-operator"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

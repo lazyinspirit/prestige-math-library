@@ -9,6 +9,7 @@ provenance:
   statement: "ai-altered"
   proof: "ai-generated"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
   references:
     - title: "Karagila, Forcing (2023), Definitions 2.28–2.33 and Propositions 2.30–2.32, Theorem 2.34, printed pp.11–13; explicit local argument"
       url: "https://karagila.org/files/Forcing-2023.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

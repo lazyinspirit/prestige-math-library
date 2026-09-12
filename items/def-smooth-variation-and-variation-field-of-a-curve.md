@@ -2,11 +2,12 @@
 id: "def-smooth-variation-and-variation-field-of-a-curve"
 kind: "definition"
 title: "Smooth variation and variation field of a curve"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-smooth-map-between-manifolds-with-boundary","def-vector-field-and-section-along-a-smooth-curve"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

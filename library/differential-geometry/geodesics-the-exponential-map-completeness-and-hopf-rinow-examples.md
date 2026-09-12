@@ -1,7 +1,7 @@
 ---
 page: "geodesics-the-exponential-map-completeness-and-hopf-rinow-examples"
 title: "Geodesics, the Exponential Map, Completeness, and Hopf–Rinow — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-straight-lines-as-euclidean-geodesics","ex-great-circles-as-round-sphere-geodesics","ex-geodesics-of-a-riemannian-product","ex-geodesics-in-the-poincare-upper-half-plane","ex-normal-coordinates-on-the-round-sphere","ex-the-exponential-map-of-a-flat-torus-is-not-injective","ex-the-punctured-euclidean-plane-is-geodesically-incomplete","ex-an-open-unit-ball-with-euclidean-metric-is-metrically-incomplete","ex-hyperbolic-space-is-complete","cex-antipodal-points-on-a-round-sphere-have-many-minimizing-geodesics","cex-a-complete-manifold-with-zero-global-injectivity-radius","ex-hopf-rinow-on-a-flat-cylinder"]
 ---

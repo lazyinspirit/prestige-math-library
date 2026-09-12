@@ -2,11 +2,12 @@
 id: "lem-closed-oriented-pid-manifolds-have-finitely-generated-homology"
 kind: "lemma"
 title: "Finite generation from cap with a finite fundamental cycle"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-poincare-duality-for-oriented-topological-manifolds","def-cap-product-with-cohomology-first","cor-submodules-of-finite-free-pid-modules-are-free","def-axiom-of-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

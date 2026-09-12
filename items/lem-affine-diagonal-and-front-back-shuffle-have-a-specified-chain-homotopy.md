@@ -2,11 +2,12 @@
 id: "lem-affine-diagonal-and-front-back-shuffle-have-a-specified-chain-homotopy"
 kind: "lemma"
 title: "An affine cone homotopy from the diagonal to the front-back shuffle"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-standard-topological-simplex-and-its-affine-face-maps","def-alexander-whitney-diagonal-approximation","def-singular-chain-cross-product-on-generators","lem-singular-chain-cross-product-boundary-formula","def-integral-of-a-form-over-a-smooth-singular-simplex","lem-stokes-theorem-for-the-standard-simplex"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: "cor-geodesics-are-exactly-critical-points-of-energy-with-fixed-endpoints"
 kind: "corollary"
 title: "Geodesics are exactly critical points of energy with fixed endpoints"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-first-variation-formula-for-energy","def-geodesic-of-an-affine-connection","lem-smooth-bump-between-concentric-euclidean-balls","thm-heine-borel-r","thm-extreme-value-r","thm-nonnegative-continuous-with-zero-integral-vanishes"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

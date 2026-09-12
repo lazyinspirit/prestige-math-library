@@ -2,11 +2,12 @@
 id: "thm-de-rham-integration-is-a-cochain-map"
 kind: "theorem"
 title: "De Rham integration is a cochain map"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-de-rham-integration-cochain-map","thm-stokes-theorem-for-smooth-singular-chains","def-smooth-singular-chain-and-cochain-complexes"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

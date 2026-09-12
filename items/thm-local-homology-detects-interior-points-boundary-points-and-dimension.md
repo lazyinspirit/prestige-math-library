@@ -2,11 +2,12 @@
 id: "thm-local-homology-detects-interior-points-boundary-points-and-dimension"
 kind: "theorem"
 title: "Local homology detects manifold dimension, interior, and boundary"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-topological-manifold-with-and-without-boundary","thm-excision-for-singular-homology","cor-homology-of-spheres","thm-long-exact-sequence-of-a-pair-in-singular-homology","cor-homotopic-maps-induce-the-same-map-on-singular-homology","prop-relative-homology-is-functorial-for-maps-of-pairs"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

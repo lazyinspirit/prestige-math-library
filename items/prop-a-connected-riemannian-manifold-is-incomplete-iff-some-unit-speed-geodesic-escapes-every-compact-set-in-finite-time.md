@@ -2,11 +2,12 @@
 id: "prop-a-connected-riemannian-manifold-is-incomplete-iff-some-unit-speed-geodesic-escapes-every-compact-set-in-finite-time"
 kind: "proposition"
 title: "Incompleteness is finite-time geodesic escape"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-countable-choice","rem-boundaryless-convention-for-geodesic-flow-and-hopf-rinow","def-complete-metric-space","def-geodesically-complete-riemannian-manifold","thm-hopf-rinow","thm-existence-uniqueness-and-smooth-dependence-of-geodesics","prop-geodesics-have-constant-speed-for-a-metric-compatible-connection","prop-affine-reparametrization-of-a-geodesic-is-a-geodesic","lem-geodesics-can-be-continued-while-their-velocity-lifts-remain-in-a-compact-subset","lem-coordinate-balls-form-a-basis-of-a-topological-manifold","def-induced-tangent-bundle-chart","lem-local-comparison-of-a-riemannian-metric-with-the-euclidean-metric","cor-heine-borel-in-the-product-topology","thm-compactness-under-continuous-maps","thm-closed-subspace-of-a-compact-space-is-compact"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

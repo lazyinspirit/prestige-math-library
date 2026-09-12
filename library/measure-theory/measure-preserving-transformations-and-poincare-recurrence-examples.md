@@ -1,7 +1,7 @@
 ---
 page: "measure-preserving-transformations-and-poincare-recurrence-examples"
 title: "Measure Preserving Transformations and Poincare Recurrence — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-rational-rotation-invariant-set", "ex-doubling-dyadic-preimage-computation", "ex-base-three-cylinder-intervals-and-preimages", "ex-fair-coin-cylinder-measures-tabulated", "ex-doubling-recurrence-to-a-dyadic-interval", "ex-kac-mean-return-to-a-half-circle", "cex-mod-null-invariance-is-not-strict-invariance", "cex-doubling-ergodicity-depends-on-the-invariant-measure", "cex-irrational-rotation-is-not-weakly-mixing", "cex-kac-formula-needs-ergodicity", "ex-gauss-map-preserves-gauss-measure"]
 ---

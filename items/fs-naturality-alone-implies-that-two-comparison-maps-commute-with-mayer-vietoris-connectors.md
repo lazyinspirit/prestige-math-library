@@ -2,7 +2,9 @@
 id: "fs-naturality-alone-implies-that-two-comparison-maps-commute-with-mayer-vietoris-connectors"
 kind: "false-statement"
 title: "Naturality alone gives Mayer–Vietoris connector compatibility"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-the-de-rham-map-commutes-with-mayer-vietoris-connectors","thm-a-regular-level-set-is-an-embedded-submanifold","thm-zero-th-de-rham-cohomology-is-locally-constant-functions","thm-mayer-vietoris-sequence-in-de-rham-cohomology","def-countable-choice"]

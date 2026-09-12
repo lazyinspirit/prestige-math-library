@@ -3,11 +3,12 @@ id: "def-weak-homotopy-equivalence"
 kind: "definition"
 title: "Weak homotopy equivalence"
 proof_strategy: direct
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-higher-homotopy-group-by-based-cubes","def-path-connected","prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

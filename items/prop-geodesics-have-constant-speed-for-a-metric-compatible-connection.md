@@ -2,11 +2,12 @@
 id: "prop-geodesics-have-constant-speed-for-a-metric-compatible-connection"
 kind: "proposition"
 title: "Geodesics have constant speed for a metric-compatible connection"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-geodesic-of-an-affine-connection","def-metric-compatible-connection-on-a-riemannian-vector-bundle","cor-zero-derivative-implies-constant"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

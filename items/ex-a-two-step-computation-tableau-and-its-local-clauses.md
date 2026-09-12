@@ -2,7 +2,7 @@
 id: "ex-a-two-step-computation-tableau-and-its-local-clauses"
 kind: "example"
 title: "A two-step computation tableau and its local clauses"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-bounded-turing-computation-tableau-interface", "lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations"]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   statement: "ai-generated"
   proof: "ai-generated"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

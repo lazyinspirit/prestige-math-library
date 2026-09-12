@@ -2,11 +2,12 @@
 id: "ex-a-normalized-compactly-supported-top-form-on-euclidean-space"
 kind: "example"
 title: "A normalized compactly supported top form on Euclidean space"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-integration-is-an-isomorphism-on-top-compactly-supported-de-rham-cohomology","lem-smooth-bump-between-concentric-euclidean-balls","thm-continuous-on-a-rectangle-is-riemann-integrable","thm-multidimensional-integral-properties","thm-riemann-fubini-on-product-rectangles","thm-heine-borel-rn"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: cex-antipodal-points-on-a-round-sphere-have-many-minimizing-geodesics
 kind: counterexample
 title: Antipodal points on a round sphere have many minimizing geodesics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-17
 deps: [def-countable-choice, thm-a-regular-level-set-is-an-embedded-submanifold, prop-tangent-space-of-a-regular-level-set-is-the-kernel, prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions, cor-euclidean-spheres-are-path-connected, thm-path-connected-implies-connected, thm-coordinate-derivations-form-a-basis-of-the-tangent-space, thm-gram-schmidt-orthonormalisation, ex-great-circles-as-round-sphere-geodesics, thm-hopf-rinow, thm-riemannian-distance-is-a-metric, def-riemannian-speed-and-length, def-riemannian-distance-on-a-connected-manifold, thm-sine-cosine-signs-monotonicity-and-ranges, thm-quarter-turn-values-and-shift-formulas]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

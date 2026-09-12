@@ -2,11 +2,12 @@
 id: "def-energy-of-a-piecewise-smooth-curve"
 kind: "definition"
 title: "Energy of a piecewise smooth curve"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-riemannian-speed-and-length","lem-riemannian-length-is-independent-of-piecewise-c-one-subdivision"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

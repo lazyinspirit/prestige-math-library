@@ -2,11 +2,12 @@
 id: "lem-compactly-supported-top-cohomology-propagates-across-overlapping-oriented-coordinate-balls"
 kind: "lemma"
 title: "Compactly supported top cohomology propagates across overlapping oriented coordinate balls"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-zero-integral-compactly-supported-top-forms-on-euclidean-space-have-compactly-supported-primitives","thm-integration-descends-to-compactly-supported-top-de-rham-cohomology","lem-smooth-bump-between-concentric-euclidean-balls","lem-finite-chart-localization-defines-choice-free-integration-and-compact-stokes","lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary","lem-compactness-of-a-subspace-is-ambient","thm-heine-borel-rn","thm-multidimensional-integral-properties"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

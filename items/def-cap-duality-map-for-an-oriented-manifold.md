@@ -2,11 +2,12 @@
 id: "def-cap-duality-map-for-an-oriented-manifold"
 kind: "definition"
 title: "The cap-duality map of an oriented manifold"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-compactly-supported-singular-cohomology-of-a-locally-compact-space","lem-compatible-local-orientation-classes-exist-over-compact-subsets","def-relative-cap-product","thm-cap-product-boundary-identity","def-fundamental-class-of-a-compact-oriented-manifold"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

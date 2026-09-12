@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       url: https://www.statslab.cam.ac.uk/~james/Lectures/pmall.pdf
     - title: Aldous and Chewi, Probability Theory notes, Lecture 8
       url: https://www.stat.berkeley.edu/users/aldous/205B/chewi_notes.pdf
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

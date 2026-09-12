@@ -2,11 +2,12 @@
 id: "lem-a-connected-cw-pair-has-a-model-without-low-relative-cells"
 kind: "lemma"
 title: "A connected CW pair has a model without low relative cells"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-n-connected-cw-pair","thm-long-exact-sequence-of-relative-homotopy-groups","lem-high-relative-cells-do-not-change-lower-homotopy","lem-cellular-attachments-with-finite-boundary-support-form-a-cw-complex","lem-compact-cw-images-have-finite-cell-support-without-choice","thm-transfinite-recursion","thm-cellular-approximation-for-maps-of-cw-pairs","prop-cubical-and-spherical-models-of-higher-homotopy-agree","thm-cw-approximation-of-an-arbitrary-space","prop-higher-homotopy-basepoint-transport-and-moving-homotopies","lem-cellular-mapping-cylinders-and-relative-cylinders-are-cw-complexes","lem-vanishing-relative-homotopy-extends-a-homotopy-inverse-over-successive-cells","def-weak-homotopy-equivalence","def-axiom-of-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

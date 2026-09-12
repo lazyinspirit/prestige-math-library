@@ -2,11 +2,12 @@
 id: "ex-mod-two-duality-for-real-projective-space"
 kind: "example"
 title: "Mod-two duality for real projective space"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-topological-manifold-with-and-without-boundary","prop-every-manifold-is-f-two-orientable-and-orientability-is-componentwise","thm-poincare-duality-for-oriented-topological-manifolds","lem-real-projective-space-cellular-homology-and-pinch-map","thm-cellular-homology-computes-singular-homology","def-axiom-of-choice","thm-top-homology-characterizes-compact-orientable-manifolds","thm-heine-borel-rn","thm-local-homology-detects-interior-points-boundary-points-and-dimension","thm-relative-homology-of-consecutive-cw-skeleta","def-fundamental-class-of-a-compact-oriented-manifold","thm-path-connected-implies-connected"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

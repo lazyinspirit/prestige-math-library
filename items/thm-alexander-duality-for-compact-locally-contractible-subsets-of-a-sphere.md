@@ -2,11 +2,12 @@
 id: "thm-alexander-duality-for-compact-locally-contractible-subsets-of-a-sphere"
 kind: "theorem"
 title: "Alexander duality for compact locally contractible subsets of a sphere"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-poincare-duality-for-oriented-topological-manifolds", "def-compactly-supported-singular-cohomology-of-a-locally-compact-space", "thm-compact-locally-contractible-euclidean-subsets-are-neighborhood-retracts", "thm-long-exact-sequence-of-a-pair-in-singular-homology", "thm-excision-for-singular-cohomology", "thm-long-exact-sequence-of-a-pair-in-singular-cohomology", "thm-five-lemma-for-a-morphism-of-long-exact-sequences", "cor-homology-of-spheres", "def-axiom-of-choice", "def-zero-simplex-augmentation-and-reduced-singular-homology", "lem-coordinate-ball-classes-identify-local-homology-stalks", "def-orientation-local-system-and-orientation-cover", "cor-homotopic-maps-induce-the-same-map-on-singular-homology", "thm-heine-borel-rn"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

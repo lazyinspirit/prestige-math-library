@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: E–W Example 2.4 pp.14–15, base-three specialization; MT-22 binding example amendment
       url: https://webspace.maths.qmul.ac.uk/f.vivaldi/teaching/ETAD/NotesI.pdf
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

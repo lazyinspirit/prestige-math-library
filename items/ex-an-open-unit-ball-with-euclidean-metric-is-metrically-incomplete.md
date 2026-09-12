@@ -2,11 +2,12 @@
 id: ex-an-open-unit-ball-with-euclidean-metric-is-metrically-incomplete
 kind: example
 title: An open Euclidean unit ball is metrically incomplete
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-17
 deps: [def-complete-metric-space, def-cauchy-in-metric, def-metric-convergence, def-metric-space, lem-metrics-on-rn, lem-standard-basis-of-f-n, def-euclidean-inner-product, cor-archimedean-reciprocal, lem-of-inverse-positive]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

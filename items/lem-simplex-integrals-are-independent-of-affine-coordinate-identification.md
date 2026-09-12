@@ -2,11 +2,12 @@
 id: "lem-simplex-integrals-are-independent-of-affine-coordinate-identification"
 kind: "lemma"
 title: "Simplex integrals are independent of affine coordinate identification"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-integral-of-a-form-over-a-smooth-singular-simplex","thm-injective-c-one-images-of-compact-jordan-sets-are-jordan","thm-change-of-variables-for-compact-jordan-sets","def-pullback-of-a-differential-form"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

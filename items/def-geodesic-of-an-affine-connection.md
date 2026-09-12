@@ -2,11 +2,12 @@
 id: "def-geodesic-of-an-affine-connection"
 kind: "definition"
 title: "Geodesic of an affine connection"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["rem-boundaryless-convention-for-geodesic-flow-and-hopf-rinow","def-covariant-derivative-along-a-curve","def-affine-connection-on-a-smooth-manifold"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

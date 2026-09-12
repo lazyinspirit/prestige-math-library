@@ -2,7 +2,9 @@
 id: "lem-a-collar-identifies-boundary-local-homology-with-the-pair-fundamental-class"
 kind: "lemma"
 title: "A collar constructs the relative orientation class and its boundary class"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-topological-collaring-for-manifold-boundaries","def-topological-manifold-with-and-without-boundary","thm-local-homology-detects-interior-points-boundary-points-and-dimension","lem-compatible-local-orientation-classes-exist-over-compact-subsets","thm-long-exact-sequence-of-a-pair-in-singular-homology","thm-excision-for-singular-homology","cor-homotopic-maps-induce-the-same-map-on-singular-homology","thm-five-lemma-for-a-morphism-of-long-exact-sequences","thm-long-exact-sequence-in-homology","def-relative-cup-product","def-singular-chain-cross-product-on-generators","lem-singular-chain-cross-product-boundary-formula","def-fundamental-class-of-a-compact-oriented-manifold","cor-homology-of-spheres"]

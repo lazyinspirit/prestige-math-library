@@ -2,11 +2,12 @@
 id: "fs-the-de-rham-theorem-as-built-here-is-an-isomorphism-of-rings"
 kind: "false-statement"
 title: "The vector-space de Rham comparison is automatically a ring isomorphism"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-de-rham-integration-respects-wedge-and-cup-in-cohomology","def-singular-cohomology-ring"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

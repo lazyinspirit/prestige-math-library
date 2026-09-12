@@ -2,11 +2,12 @@
 id: "ex-connector-compatibility-for-a-two-arc-cover-of-the-circle"
 kind: "example"
 title: "Connector compatibility for a two-arc cover of the circle"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-the-de-rham-map-commutes-with-mayer-vietoris-connectors","def-countable-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

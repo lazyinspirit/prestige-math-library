@@ -2,11 +2,12 @@
 id: "def-injectivity-radius-at-a-point-and-of-a-manifold"
 kind: "definition"
 title: "Injectivity radius at a point and of a manifold"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-existence-of-normal-neighborhoods","def-extended-reals","def-countable-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

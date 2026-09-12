@@ -2,7 +2,7 @@
 id: thm-forcing-equivalence-and-boolean-completion
 kind: theorem
 title: Forcing equivalence and Boolean completion
-status: draft
+status: published
 origin: pipeline
 deps: [lem-separative-quotient-of-a-forcing-preorder, thm-forcing-preorders-have-regular-open-completions, lem-dense-forcing-name-translations-preserve-forcing]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

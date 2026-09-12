@@ -2,7 +2,9 @@
 id: "cor-de-rham-cohomology-depends-only-on-the-underlying-homotopy-type"
 kind: "corollary"
 title: "De Rham cohomology depends only on the underlying homotopy type"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["cor-de-rham-vector-space-comparison-with-continuous-singular-cohomology","cor-singular-cohomology-is-homotopy-invariant","thm-de-rham-cohomology-is-smooth-homotopy-invariant","lem-the-de-rham-homotopy-formula-extends-to-boundary-manifolds","def-countable-choice"]

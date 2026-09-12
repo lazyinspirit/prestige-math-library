@@ -2,11 +2,12 @@
 id: "thm-first-variation-formula-for-length"
 kind: "theorem"
 title: "First variation formula for length"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-smooth-variation-and-variation-field-of-a-curve","thm-first-variation-formula-for-energy","def-riemannian-speed-and-length","thm-fundamental-theorem-of-riemannian-geometry","def-levi-civita-connection","def-metric-compatible-connection-on-a-riemannian-vector-bundle","def-covariant-derivative-along-a-curve","prop-torsion-free-is-equivalent-to-symmetric-christoffel-symbols-in-coordinate-frames","thm-differentiation-under-the-integral-sign-on-a-compact-rectangle","thm-newton-leibniz-with-interior-derivative","thm-heine-borel-rn","thm-heine-cantor-metric","thm-extreme-value-r"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: "ex-whitehead-recognizes-a-homology-equivalence-between-simply-connected-cw-complexes-under-hurewicz-induction"
 kind: "example"
 title: "A simply connected CW homology equivalence is a homotopy equivalence under the stated choice conditions"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-cellular-approximation-for-maps-of-cw-pairs","lem-cellular-mapping-cylinders-and-relative-cylinders-are-cw-complexes","thm-singular-chain-homotopy-formula","thm-long-exact-sequence-of-a-pair-in-singular-homology","thm-long-exact-sequence-of-relative-homotopy-groups","def-n-connected-cw-pair","lem-relative-hurewicz-comparison-through-a-choice-free-weak-model","def-weak-homotopy-equivalence","thm-whitehead-theorem","def-axiom-of-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

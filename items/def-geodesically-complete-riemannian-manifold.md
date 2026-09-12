@@ -2,11 +2,12 @@
 id: "def-geodesically-complete-riemannian-manifold"
 kind: "definition"
 title: "Geodesically complete Riemannian manifold"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-existence-uniqueness-and-smooth-dependence-of-geodesics","def-countable-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

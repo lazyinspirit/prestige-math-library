@@ -2,11 +2,12 @@
 id: "lem-cap-product-duality-is-an-isomorphism-on-euclidean-balls"
 kind: "lemma"
 title: "Cap duality on a Euclidean coordinate ball"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-cap-duality-map-for-an-oriented-manifold","def-compactly-supported-singular-cohomology-of-a-locally-compact-space","lem-coordinate-ball-classes-identify-local-homology-stalks","lem-compatible-local-orientation-classes-exist-over-compact-subsets","cor-homology-of-spheres","thm-topological-universal-coefficient-short-exact-sequence-for-cohomology","thm-long-exact-sequence-of-a-pair-in-singular-homology","cor-homotopic-maps-induce-the-same-map-on-singular-homology","prop-cap-product-naturality-and-projection-formula","thm-heine-borel-rn","def-axiom-of-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

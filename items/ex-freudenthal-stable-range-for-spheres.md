@@ -2,11 +2,12 @@
 id: "ex-freudenthal-stable-range-for-spheres"
 kind: "example"
 title: "Freudenthal stable range for spheres"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-freudenthal-suspension-theorem","def-adjunction-cone-suspension","lem-first-homotopy-group-of-a-wedge-of-higher-spheres-has-its-cell-basis","thm-heine-borel-rn","thm-compact-subset-of-a-hausdorff-space-is-closed","prop-higher-homotopy-basepoint-transport-and-moving-homotopies"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

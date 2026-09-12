@@ -2,11 +2,12 @@
 id: "prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism"
 kind: "proposition"
 title: "Degree of an orientation-preserving or reversing diffeomorphism"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-degree-of-a-proper-smooth-map-by-compact-support-cohomology","thm-change-of-variables-for-oriented-manifold-diffeomorphisms"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

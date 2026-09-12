@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -18,7 +19,7 @@ sources:
     - title: Farrell–Lassueur, Modular Representation Theory of Finite Groups, Proposition
         40.3(i), §40 (printed pp.8–12 of upload17)
       url: https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload17.pdf
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

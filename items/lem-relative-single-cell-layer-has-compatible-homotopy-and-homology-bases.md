@@ -2,7 +2,9 @@
 id: "lem-relative-single-cell-layer-has-compatible-homotopy-and-homology-bases"
 kind: "lemma"
 title: "A relative single cell layer has compatible homotopy and homology bases"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-high-relative-cells-do-not-change-lower-homotopy","lem-relative-homotopy-compares-with-the-cw-quotient-in-the-connectivity-range","lem-first-homotopy-group-of-a-wedge-of-higher-spheres-has-its-cell-basis","lem-cw-quotients-and-collapse-of-a-contractible-subcomplex","lem-cw-quotient-induces-relative-singular-homology-isomorphisms","lem-integral-homology-of-a-wedge-of-higher-spheres-has-its-cell-basis","thm-long-exact-sequence-of-a-pair-in-singular-homology","cor-contractible-nonempty-spaces-have-the-homology-of-a-point","prop-relative-cw-inclusions-are-cofibrations","def-hurewicz-homomorphism"]

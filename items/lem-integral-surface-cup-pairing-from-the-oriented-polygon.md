@@ -2,7 +2,9 @@
 id: "lem-integral-surface-cup-pairing-from-the-oriented-polygon"
 kind: "lemma"
 title: "Integral surface cup pairing from the oriented polygon"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-cellular-homology-computes-singular-homology","def-cellular-boundary-from-three-consecutive-skeleta","def-oriented-cellular-chain-group","thm-long-exact-sequence-of-a-pair-in-singular-homology","cor-contractible-nonempty-spaces-have-the-homology-of-a-point","thm-topological-universal-coefficient-short-exact-sequence-for-cohomology","def-singular-cup-product-on-cochains","prop-cup-product-is-natural-unital-and-associative","thm-singular-cohomology-is-graded-commutative","def-axiom-of-choice"]

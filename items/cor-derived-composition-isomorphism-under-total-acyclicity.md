@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Weibel, Theorem 5.8.3"
       url: "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 proof_strategy: "direct"

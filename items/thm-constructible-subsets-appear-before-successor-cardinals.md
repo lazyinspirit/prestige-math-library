@@ -2,7 +2,7 @@
 id: thm-constructible-subsets-appear-before-successor-cardinals
 kind: theorem
 title: Constructible subsets appear before successor cardinals
-status: draft
+status: published
 origin: pipeline
 deps: [lem-canonical-small-skolem-hulls-in-l, thm-condensation-for-constructible-levels, lem-collapse-fixes-transitive-parts-and-orders-ordinals, lem-cardinality-of-infinite-constructible-levels, lem-successor-cardinal-exists, prop-constructible-levels-transitivity-ordinals-and-rank]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

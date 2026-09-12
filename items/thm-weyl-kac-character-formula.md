@@ -12,7 +12,9 @@ sources:
       url: https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf
     - title: Perrin, Theorem 11.2.1
       url: https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf
-status: draft
+verification:
+  audited: 2026-09-13
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

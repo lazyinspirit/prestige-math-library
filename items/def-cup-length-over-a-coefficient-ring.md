@@ -2,11 +2,12 @@
 id: "def-cup-length-over-a-coefficient-ring"
 kind: "definition"
 title: "Cup length over a coefficient ring"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-singular-cohomology-ring","thm-singular-cohomology-is-graded-commutative","prop-cup-product-is-natural-unital-and-associative"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

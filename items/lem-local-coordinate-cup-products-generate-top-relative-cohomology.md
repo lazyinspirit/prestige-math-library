@@ -2,7 +2,9 @@
 id: "lem-local-coordinate-cup-products-generate-top-relative-cohomology"
 kind: "lemma"
 title: "Local coordinate cup products generate top relative cohomology"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-relative-cohomological-kunneth-under-finite-free-homology-hypotheses","lem-relative-singular-product-chain-equivalence-for-cw-pairs","prop-relative-cup-products-are-natural-and-compatible-with-connectors","thm-long-exact-sequence-of-a-pair-in-singular-cohomology","thm-naturality-of-the-singular-cohomology-pair-sequence","thm-homotopic-maps-induce-equal-maps-in-singular-cohomology","thm-relative-homology-of-consecutive-cw-skeleta","def-oriented-cellular-chain-group","thm-topological-universal-coefficient-short-exact-sequence-for-cohomology","thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses","def-singular-chain-cross-product-on-generators","lem-singular-chain-cross-product-boundary-formula","def-axiom-of-choice"]

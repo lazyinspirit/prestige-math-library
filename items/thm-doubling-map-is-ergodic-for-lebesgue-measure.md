@@ -10,7 +10,9 @@ sources:
   references:
     - title: Sarig Proposition 1.5 p.9, conclusion; density argument is the MT-22 prescribed local replacement
       url: https://www.weizmann.ac.il/math/sarigo/sites/math.sarigo/files/uploads/ergodicnotes.pdf
-status: draft
+verification:
+  audited: 2026-09-13
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

@@ -2,11 +2,12 @@
 id: "cex-zero-lefschetz-number-does-not-imply-no-fixed-points"
 kind: "counterexample"
 title: "Zero Lefschetz number does not imply absence of fixed points"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-lefschetz-number-of-a-finite-cw-self-map","cor-homology-of-spheres"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

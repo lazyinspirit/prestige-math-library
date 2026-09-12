@@ -2,11 +2,12 @@
 id: "fs-the-exponential-map-is-defined-on-all-of-tm-for-every-riemannian-manifold"
 kind: "false-statement"
 title: "The exponential map is always defined on all of TM"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-countable-choice", "prop-open-subsets-of-euclidean-space-have-the-standard-smooth-structure", "def-riemannian-metric-and-riemannian-manifold", "prop-christoffel-formula-for-the-levi-civita-connection", "prop-coordinate-geodesic-equation", "def-domain-and-exponential-map-of-a-connection", "prop-components-of-a-topological-manifold-are-open-and-at-most-countable", "prop-an-open-subset-of-a-smooth-manifold-has-a-canonical-restricted-smooth-structure", "cor-connected-subsets-of-the-line", "thm-continuous-image-of-a-connected-space", "thm-hopf-rinow"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

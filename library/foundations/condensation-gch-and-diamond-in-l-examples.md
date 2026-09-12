@@ -1,7 +1,7 @@
 ---
 page: "condensation-gch-and-diamond-in-l-examples"
 title: "Condensation, GCH, and Diamond in L: Examples and Counterexamples"
-status: draft
+status: published
 items: []
 examples: ["ex-condensation-bounds-a-constructible-real", "ex-diamond-seals-a-maximal-antichain-in-l"]
 ---

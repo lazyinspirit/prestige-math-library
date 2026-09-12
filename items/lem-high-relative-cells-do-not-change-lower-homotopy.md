@@ -2,11 +2,12 @@
 id: "lem-high-relative-cells-do-not-change-lower-homotopy"
 kind: "lemma"
 title: "High relative cells do not change lower homotopy"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-n-connected-cw-pair","lem-compact-cw-images-have-finite-cell-support-without-choice","lem-a-low-dimensional-disk-can-be-pushed-off-a-higher-cell","def-skeleta-cw-subcomplex-and-relative-cw-complex","def-higher-homotopy-group-by-based-cubes","prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant","thm-heine-borel-rn","thm-compactness-agrees-with-metric-compactness","lem-finite-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

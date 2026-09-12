@@ -2,7 +2,7 @@
 id: "lem-time-controlled-self-reference-for-nondeterministic-machines"
 kind: "lemma"
 title: "Time-controlled self-reference for nondeterministic machines"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-prefix-program-codes-admit-linear-nondeterministic-universal-simulation", "thm-smn-for-the-fixed-acceptable-numbering", "thm-kleene-fixed-point-theorem-for-program-indices"]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: "def-topological-manifold-with-and-without-boundary"
 kind: "definition"
 title: "Topological manifolds with and without boundary"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-hausdorff-space","def-countable","def-topology-basis-subbasis","def-subspace-topology-top"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

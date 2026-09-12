@@ -2,7 +2,9 @@
 id: "def-bounded-turing-computation-tableau-interface"
 kind: "definition"
 title: "Bounded Turing-computation tableaux"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 deps: ["def-boolean-formulas-cnf-and-satisfiability-interface", "def-polynomial-time-verifier-and-reduction-interface", "def-turing-machine-configuration", "def-one-step-configuration-relation", "def-turing-machine-initial-and-halting-configuration-interface", "thm-multitape-machines-have-one-tape-simulations", "lem-multitape-simulation-has-quadratic-time-overhead"]
 justified_by: []

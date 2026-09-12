@@ -2,11 +2,12 @@
 id: "lem-degree-is-well-defined-and-independent-of-the-normalized-top-form"
 kind: "lemma"
 title: "Degree is well defined and independent of the normalized top form"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-degree-of-a-proper-smooth-map-by-compact-support-cohomology","thm-integration-is-an-isomorphism-on-top-compactly-supported-de-rham-cohomology","prop-proper-smooth-maps-pull-back-compactly-supported-forms","lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary","lem-finite-chart-localization-defines-choice-free-integration-and-compact-stokes"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

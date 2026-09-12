@@ -2,11 +2,12 @@
 id: "lem-cw-quotient-induces-relative-singular-homology-isomorphisms"
 kind: "lemma"
 title: "A CW quotient induces relative singular homology isomorphisms"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-cellular-mapping-cylinders-and-relative-cylinders-are-cw-complexes","lem-cw-quotients-and-collapse-of-a-contractible-subcomplex","cor-homology-of-good-pairs-is-reduced-homology-of-the-quotient","thm-long-exact-sequence-of-a-pair-in-singular-homology","thm-singular-chain-homotopy-formula","thm-quotient-universal-property","lem-interval-exponential-law-and-quotient-homotopies"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

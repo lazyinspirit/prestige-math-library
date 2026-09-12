@@ -2,11 +2,12 @@
 id: "prop-manifold-degree-is-functorial-and-detected-by-top-cohomology"
 kind: "proposition"
 title: "Manifold degree is functorial and detected in top cohomology"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-degree-of-a-map-between-oriented-closed-manifolds","prop-singular-chains-and-homology-are-covariantly-functorial","prop-singular-cohomology-is-contravariantly-functorial","thm-poincare-duality-for-oriented-topological-manifolds","prop-zero-th-singular-homology-is-free-on-path-components","def-cap-product-with-cohomology-first","def-axiom-of-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: def-alexander-whitney-diagonal-approximation
 kind: definition
 title: Alexander–Whitney map and diagonal approximation
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-17
 deps: [def-singular-cochain-complex-with-coefficients, def-induced-singular-chain-map, def-product-topology]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

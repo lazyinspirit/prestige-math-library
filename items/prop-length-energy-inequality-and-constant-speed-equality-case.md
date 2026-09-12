@@ -2,11 +2,12 @@
 id: "prop-length-energy-inequality-and-constant-speed-equality-case"
 kind: "proposition"
 title: "Length-energy inequality and constant-speed equality case"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-energy-of-a-piecewise-smooth-curve","def-riemannian-speed-and-length","thm-nonnegative-continuous-with-zero-integral-vanishes"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: ex-normal-coordinates-on-the-round-sphere
 kind: example
 title: Normal coordinates on the round sphere
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-17
 deps: [def-normal-neighborhood-and-normal-coordinate-chart, thm-existence-of-normal-neighborhoods, ex-great-circles-as-round-sphere-geodesics, def-domain-and-exponential-map-of-a-connection, def-countable-choice, thm-sine-and-cosine-derivatives, cor-differentiable-implies-continuous, thm-sine-cosine-signs-monotonicity-and-ranges, cor-pi-is-the-first-positive-sine-zero, thm-quarter-turn-values-and-shift-formulas]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

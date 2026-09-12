@@ -2,11 +2,12 @@
 id: ex-straight-lines-as-euclidean-geodesics
 kind: example
 title: Straight lines as Euclidean geodesics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-17
 deps: [prop-coordinate-geodesic-equation, prop-christoffel-formula-for-the-levi-civita-connection, cor-zero-derivative-implies-constant]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

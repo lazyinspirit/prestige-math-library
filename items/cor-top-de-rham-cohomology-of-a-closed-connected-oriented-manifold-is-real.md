@@ -2,11 +2,12 @@
 id: "cor-top-de-rham-cohomology-of-a-closed-connected-oriented-manifold-is-real"
 kind: "corollary"
 title: "Top de Rham cohomology of a closed connected oriented manifold is real"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-integration-is-an-isomorphism-on-top-compactly-supported-de-rham-cohomology","def-compactly-supported-de-rham-cochain-complex-and-cohomology"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

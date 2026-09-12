@@ -9,6 +9,7 @@ provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
   references:
     - title: "Lietz, Set Theory, section 7.2, Lemma 7.11 and Theorem 7.13 (hulls), Proposition 7.14 (counting), printed pp.57–59; local choice-free coding argument"
       url: "https://andreas-lietz.github.io/resources/PDFs/Lecture_Notes.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

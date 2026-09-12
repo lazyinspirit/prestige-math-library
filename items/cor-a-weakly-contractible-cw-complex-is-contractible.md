@@ -2,11 +2,12 @@
 id: "cor-a-weakly-contractible-cw-complex-is-contractible"
 kind: "corollary"
 title: "A weakly contractible CW complex is contractible"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-whitehead-theorem","def-weak-homotopy-equivalence","def-homotopy-equivalence","def-higher-homotopy-group-by-based-cubes","def-cw-complex-with-closure-finiteness-and-weak-topology","prop-higher-homotopy-basepoint-transport-and-moving-homotopies","def-axiom-of-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

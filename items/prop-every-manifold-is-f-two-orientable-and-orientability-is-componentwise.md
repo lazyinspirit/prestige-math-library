@@ -2,11 +2,12 @@
 id: "prop-every-manifold-is-f-two-orientable-and-orientability-is-componentwise"
 kind: "proposition"
 title: "Every manifold is F2-orientable and orientability is componentwise"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-r-orientation-of-a-topological-manifold","thm-local-homology-detects-interior-points-boundary-points-and-dimension","thm-path-connected-implies-connected","def-connected-component-and-quasicomponent","def-axiom-of-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

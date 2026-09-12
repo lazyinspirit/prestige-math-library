@@ -2,7 +2,9 @@
 id: "prop-cap-product-naturality-and-projection-formula"
 kind: "proposition"
 title: "Cap naturality and projection formula"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-cap-product-boundary-identity","def-singular-cup-product-on-cochains","prop-cup-product-is-natural-unital-and-associative"]

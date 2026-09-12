@@ -1,7 +1,7 @@
 ---
 page: affine-lie-algebras-and-loop-central-extensions
 title: Affine Lie Algebras and Loop Central Extensions
-status: draft
+status: published
 items:
 - def-loop-algebra-of-a-simple-lie-algebra
 - def-residue-two-cocycle-on-a-loop-algebra

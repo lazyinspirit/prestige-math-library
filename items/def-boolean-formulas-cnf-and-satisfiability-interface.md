@@ -2,7 +2,7 @@
 id: "def-boolean-formulas-cnf-and-satisfiability-interface"
 kind: "definition"
 title: "Boolean formulas, CNF, and satisfiability"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-polynomial-time-verifier-and-reduction-interface"]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

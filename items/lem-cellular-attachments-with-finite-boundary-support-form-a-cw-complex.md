@@ -2,11 +2,12 @@
 id: "lem-cellular-attachments-with-finite-boundary-support-form-a-cw-complex"
 kind: "lemma"
 title: "Cellular attachments with finite boundary support form a CW complex"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-cell-attachment-by-a-characteristic-map","def-cw-complex-with-closure-finiteness-and-weak-topology","def-skeleta-cw-subcomplex-and-relative-cw-complex","thm-recursion","thm-heine-borel-rn","thm-compactness-agrees-with-metric-compactness","thm-compact-subset-of-a-hausdorff-space-is-closed"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

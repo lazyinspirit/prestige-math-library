@@ -1,7 +1,7 @@
 ---
 page: "hurewicz-whitehead-freudenthal-and-cw-approximation-examples"
 title: "Hurewicz Whitehead Freudenthal and Cw Approximation — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-first-nonzero-homotopy-group-of-a-sphere","ex-hurewicz-calculation-for-a-wedge-of-simply-connected-spheres-in-the-first-degree","ex-whitehead-recognizes-a-homology-equivalence-between-simply-connected-cw-complexes-under-hurewicz-induction","ex-freudenthal-stable-range-for-spheres","cex-whitehead-theorem-fails-without-cw-type","cex-a-homology-equivalence-need-not-be-a-homotopy-equivalence-without-simple-connectivity"]
 ---

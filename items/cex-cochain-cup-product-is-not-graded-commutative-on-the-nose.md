@@ -2,11 +2,12 @@
 id: "cex-cochain-cup-product-is-not-graded-commutative-on-the-nose"
 kind: "counterexample"
 title: "Cochain cup product is not strictly graded commutative"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-singular-cup-product-on-cochains","thm-singular-cohomology-is-graded-commutative"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

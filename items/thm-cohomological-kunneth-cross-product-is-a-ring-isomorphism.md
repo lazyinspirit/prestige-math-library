@@ -2,11 +2,12 @@
 id: "thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism"
 kind: "theorem"
 title: "Cohomological Kunneth cross product is a ring isomorphism"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-cohomological-kunneth-isomorphism-under-finite-free-hypotheses","thm-singular-cohomology-is-graded-commutative","prop-cup-product-is-natural-unital-and-associative","def-relative-cup-product","def-axiom-of-choice","lem-relative-singular-product-chain-equivalence-for-cw-pairs","lem-relative-cohomological-kunneth-under-finite-free-homology-hypotheses","lem-simplex-factor-reversal-is-chain-homotopic-to-the-identity-diagonal","thm-cup-product-leibniz-identity","def-singular-cup-product-on-cochains","thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses","lem-additive-singular-cohomology-cross-product-is-well-defined"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

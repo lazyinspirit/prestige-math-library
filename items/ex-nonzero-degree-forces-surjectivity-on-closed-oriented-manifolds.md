@@ -2,11 +2,12 @@
 id: "ex-nonzero-degree-forces-surjectivity-on-closed-oriented-manifolds"
 kind: "example"
 title: "Nonzero degree forces surjectivity on closed oriented manifolds"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-degree-of-a-map-between-oriented-closed-manifolds","def-singular-chain-complex-of-a-pair","prop-relative-homology-is-functorial-for-maps-of-pairs","prop-degree-of-the-power-map-on-the-circle"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

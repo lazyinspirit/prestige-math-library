@@ -1,7 +1,7 @@
 ---
 page: "condensation-gch-and-diamond-in-l"
 title: "Condensation, GCH, and Diamond in L"
-status: draft
+status: published
 items: ["def-skolem-hulls-in-constructible-levels", "lem-canonical-small-skolem-hulls-in-l", "lem-finite-stage-l-history-and-limit-level-absoluteness", "lem-finite-support-constructibility-absoluteness", "thm-condensation-for-constructible-levels", "lem-cardinality-of-infinite-constructible-levels", "lem-definable-subsets-of-constructible-levels-are-small", "thm-constructible-subsets-appear-before-successor-cardinals", "thm-generalized-continuum-hypothesis-in-l", "thm-v-equals-l-implies-diamond", "cor-v-equals-l-gives-a-suslin-tree", "lem-finite-fragment-l-interpretation-with-gch", "thm-formal-consistency-of-zfc-plus-gch-from-zf", "cor-positive-relative-consistency-of-ch-and-gch"]
 examples: []
 ---

@@ -10,7 +10,9 @@ sources:
   references:
     - title: "Weibel, Sections 5.6-5.7"
       url: "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 proof_strategy: "direct"

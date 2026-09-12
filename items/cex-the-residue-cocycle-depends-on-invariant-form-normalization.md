@@ -7,6 +7,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       url: https://darkwing.uoregon.edu/~klesh/teaching/IDLALN3.pdf
     - title: Perrin, Introduction to Kac-Moody Groups and Lie Algebras, Sections 12.1-12.2
       url: https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

@@ -2,11 +2,12 @@
 id: "rem-boundaryless-convention-for-geodesic-flow-and-hopf-rinow"
 kind: "remark"
 title: "Boundaryless convention for geodesic flow and Hopf–Rinow"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-riemannian-metric-and-riemannian-manifold","def-topological-manifold-without-boundary","thm-heine-borel-rn","thm-compact-implies-complete-and-totally-bounded"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: "fs-any-two-points-of-a-riemannian-manifold-are-joined-by-a-minimizing-geodesic"
 kind: "false-statement"
 title: "Any two points admit a minimizing geodesic"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-countable-choice", "prop-open-subsets-of-euclidean-space-have-the-standard-smooth-structure", "def-riemannian-metric-and-riemannian-manifold", "lem-plane-exterior-of-a-closed-disc-is-path-connected", "def-riemannian-speed-and-length", "def-riemannian-distance-on-a-connected-manifold", "thm-gradient-theorem-for-line-integrals", "thm-scalar-and-vector-line-integral-estimates", "prop-length-is-additive-under-concatenation-and-invariant-under-reversal", "thm-intermediate-value", "thm-hopf-rinow"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

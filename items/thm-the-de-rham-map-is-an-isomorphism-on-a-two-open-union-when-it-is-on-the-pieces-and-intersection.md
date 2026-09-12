@@ -2,11 +2,12 @@
 id: "thm-the-de-rham-map-is-an-isomorphism-on-a-two-open-union-when-it-is-on-the-pieces-and-intersection"
 kind: "theorem"
 title: "The de Rham map is an isomorphism on a two-open union"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-the-de-rham-and-smooth-singular-mayer-vietoris-diagram-commutes-away-from-connectors","lem-the-de-rham-map-commutes-with-mayer-vietoris-connectors","thm-five-lemma-for-modules","def-countable-choice","lem-de-rham-mayer-vietoris-with-boundary-and-an-explicit-partition-lift","thm-smooth-singular-mayer-vietoris-sequence","prop-naturality-of-the-de-rham-map"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

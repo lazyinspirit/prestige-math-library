@@ -2,11 +2,12 @@
 id: "lem-compatible-local-orientation-classes-exist-over-compact-subsets"
 kind: "lemma"
 title: "Compatible orientation classes over compact subsets"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-r-orientation-of-a-topological-manifold","def-relative-singular-homology","thm-excision-for-singular-homology","lem-relative-homology-mayer-vietoris-for-closed-supports","thm-long-exact-sequence-of-a-pair-in-singular-homology","cor-homotopic-maps-induce-the-same-map-on-singular-homology","thm-heine-borel-rn","thm-compact-subset-of-a-hausdorff-space-is-closed","thm-path-connected-implies-connected","def-connected-component-and-quasicomponent","thm-local-homology-detects-interior-points-boundary-points-and-dimension"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

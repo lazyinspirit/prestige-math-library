@@ -1,7 +1,7 @@
 ---
 page: nondeterministic-recursive-padding-and-time-separation
 title: "Nondeterministic Recursive Padding and Time Separation"
-status: draft
+status: published
 items: ["def-nondeterministic-acceptance-time-and-exact-clock", "lem-nondeterministic-two-tape-simulation-with-linear-acceptance-time", "lem-prefix-program-codes-admit-linear-nondeterministic-universal-simulation", "lem-time-controlled-self-reference-for-nondeterministic-machines", "lem-clock-cutoffs-and-unions-preserve-nondeterministic-time-bounds", "lem-no-recursive-bound-covers-all-recursive-unary-languages", "thm-nondeterministic-recursive-padding-separation"]
 examples: []
 ---

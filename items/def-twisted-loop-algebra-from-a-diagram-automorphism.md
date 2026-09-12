@@ -7,6 +7,7 @@ provenance:
   statement: literature-derived
   proof: not-applicable
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -18,7 +19,7 @@ sources:
     - title: Perrin, Introduction to Kac-Moody Groups and Lie Algebras, Definition 14.1.2
         and Proposition 14.1.3
       url: https://lmv.math.cnrs.fr/wp-content/uploads/2019/09/km-suite.pdf
-status: draft
+status: published
 origin: pipeline
 ---
 

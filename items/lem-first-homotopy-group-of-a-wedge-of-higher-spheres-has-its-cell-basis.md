@@ -2,7 +2,9 @@
 id: "lem-first-homotopy-group-of-a-wedge-of-higher-spheres-has-its-cell-basis"
 kind: "lemma"
 title: "The first potentially nonzero homotopy group of a wedge of higher spheres has its cell basis"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-cellular-attachments-with-finite-boundary-support-form-a-cw-complex","prop-cubical-and-spherical-models-of-higher-homotopy-agree","thm-product-universal-property","thm-heine-borel-rn","thm-compactness-agrees-with-metric-compactness","thm-continuous-image-of-a-compact-space-is-compact","thm-compact-subset-of-a-hausdorff-space-is-closed","lem-high-relative-cells-do-not-change-lower-homotopy","thm-based-sphere-maps-are-classified-by-geometric-degree","thm-higher-homotopy-classes-form-groups-and-are-abelian-above-degree-one","lem-compact-cw-images-have-finite-cell-support-without-choice","def-free-abelian-group"]

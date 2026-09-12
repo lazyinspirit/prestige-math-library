@@ -2,11 +2,12 @@
 id: "prop-degree-of-the-power-map-on-the-circle"
 kind: "proposition"
 title: "Degree of the power map on the circle"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-circle-as-real-line-mod-integers","prop-real-line-mod-integers-is-compact-and-path-connected","thm-compact-subset-of-a-hausdorff-space-is-closed","thm-closed-subspace-of-a-compact-space-is-compact","thm-regular-value-formula-for-degree"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

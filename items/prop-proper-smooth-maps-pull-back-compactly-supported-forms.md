@@ -2,11 +2,12 @@
 id: "prop-proper-smooth-maps-pull-back-compactly-supported-forms"
 kind: "proposition"
 title: "Proper smooth maps pull back compactly supported forms"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-compactly-supported-de-rham-cochain-complex-and-cohomology","lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary","def-smooth-map-between-manifolds-with-boundary","def-interior-closure-boundary-top","lem-compactness-of-a-subspace-is-ambient"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

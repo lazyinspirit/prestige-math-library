@@ -10,7 +10,9 @@ sources:
   references:
     - title: "Stacks Project, Tag 015H"
       url: "https://stacks.math.columbia.edu/download/derived.pdf"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 ---

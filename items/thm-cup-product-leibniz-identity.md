@@ -2,11 +2,12 @@
 id: "thm-cup-product-leibniz-identity"
 kind: "theorem"
 title: "Cup product Leibniz identity"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-singular-cup-product-on-cochains","lem-additive-singular-cohomology-cross-product-is-well-defined"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: "thm-top-homology-characterizes-compact-orientable-manifolds"
 kind: "theorem"
 title: "Top homology of a connected manifold"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-compatible-local-orientation-classes-exist-over-compact-subsets","def-fundamental-class-of-a-compact-oriented-manifold","def-orientation-local-system-and-orientation-cover","def-r-orientation-of-a-topological-manifold","thm-long-exact-sequence-in-homology","thm-local-homology-detects-interior-points-boundary-points-and-dimension","cor-homology-of-spheres","thm-path-connected-implies-connected","thm-heine-borel-rn","thm-compact-subset-of-a-hausdorff-space-is-closed","thm-long-exact-sequence-of-a-pair-in-singular-homology","thm-excision-for-singular-homology","prop-relative-homology-is-functorial-for-maps-of-pairs","cor-the-long-exact-homology-sequence-is-natural","cor-homotopic-maps-induce-the-same-map-on-singular-homology"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

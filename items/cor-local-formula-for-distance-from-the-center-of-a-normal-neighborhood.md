@@ -2,11 +2,12 @@
 id: "cor-local-formula-for-distance-from-the-center-of-a-normal-neighborhood"
 kind: "corollary"
 title: "Local formula for distance from the centre of a normal neighbourhood"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-radial-geodesics-minimize-length-in-a-normal-neighborhood","def-riemannian-distance-on-a-connected-manifold","cor-polar-form-of-the-metric-in-normal-coordinates","def-riemannian-speed-and-length","thm-intermediate-value","thm-newton-leibniz-with-interior-derivative","thm-monotonicity-of-the-integral","def-normal-neighborhood-and-normal-coordinate-chart","thm-gram-schmidt-orthonormalisation","thm-heine-borel-rn","thm-compactness-agrees-with-metric-compactness","thm-compactness-under-continuous-maps","thm-compact-subset-of-a-hausdorff-space-is-closed","thm-heine-borel-r","lem-closed-subset-of-a-compact-space-is-compact","thm-extreme-value-r","def-countable-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

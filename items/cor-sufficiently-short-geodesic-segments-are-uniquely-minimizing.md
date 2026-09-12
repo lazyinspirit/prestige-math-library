@@ -2,11 +2,12 @@
 id: "cor-sufficiently-short-geodesic-segments-are-uniquely-minimizing"
 kind: "corollary"
 title: "Sufficiently short geodesic segments are uniquely minimizing"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-existence-of-normal-neighborhoods","def-normal-neighborhood-and-normal-coordinate-chart","thm-gram-schmidt-orthonormalisation","prop-exponential-map-scales-geodesic-time","thm-radial-geodesics-minimize-length-in-a-normal-neighborhood","cor-local-formula-for-distance-from-the-center-of-a-normal-neighborhood","prop-components-of-a-topological-manifold-are-open-and-at-most-countable","def-countable-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: ex-the-exponential-map-of-a-flat-torus-is-not-injective
 kind: example
 title: The exponential map of a flat torus is not injective
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-17
 deps: [def-domain-and-exponential-map-of-a-connection, def-countable-choice, def-quotient-topology, def-linear-isomorphism-and-invertible-linear-map, lem-euclidean-linear-maps-have-matrices-and-are-bounded, lem-standard-basis-of-f-n, thm-dimension-of-a-linear-subspace, prop-coordinate-criterion-for-a-riemannian-metric, prop-coordinate-geodesic-equation, prop-christoffel-formula-for-the-levi-civita-connection]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: "thm-whitehead-theorem"
 kind: "theorem"
 title: "Whitehead theorem"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-weak-homotopy-equivalence","thm-cellular-approximation-for-maps-of-cw-pairs","lem-cellular-mapping-cylinders-and-relative-cylinders-are-cw-complexes","lem-a-weak-equivalence-of-cw-complexes-has-vanishing-relative-homotopy-groups","lem-vanishing-relative-homotopy-extends-a-homotopy-inverse-over-successive-cells","prop-higher-homotopy-basepoint-transport-and-moving-homotopies","def-homotopy-equivalence","def-axiom-of-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

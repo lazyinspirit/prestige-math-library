@@ -2,11 +2,12 @@
 id: "cor-degree-is-an-integer-and-independent-of-the-regular-value"
 kind: "corollary"
 title: "Degree is an integer and independent of the regular value"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-regular-value-formula-for-compact-support-degree"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

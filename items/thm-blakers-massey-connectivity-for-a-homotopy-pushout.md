@@ -2,11 +2,12 @@
 id: "thm-blakers-massey-connectivity-for-a-homotopy-pushout"
 kind: "theorem"
 title: "Blakers--Massey connectivity for a homotopy-pushout square"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-homotopy-excision","def-double-mapping-cylinder-homotopy-pushout-and-path-space-homotopy-pullback","lem-interval-exponential-law-and-quotient-homotopies","def-compactly-generated-conventions-for-based-homotopy","thm-mapping-path-factorization","def-mapping-path-space-replacement-of-a-map","thm-long-exact-sequence-of-homotopy-groups-of-a-fibration","thm-long-exact-sequence-of-relative-homotopy-groups","def-n-connected-cw-pair","def-relative-homotopy-group","lem-relative-homotopy-operations-are-well-defined-in-their-valid-degrees","thm-cellular-approximation-for-maps-of-cw-pairs","lem-cellular-mapping-cylinders-and-relative-cylinders-are-cw-complexes","lem-cellular-attachments-with-finite-boundary-support-form-a-cw-complex","prop-higher-homotopy-basepoint-transport-and-moving-homotopies","def-cw-complex-with-closure-finiteness-and-weak-topology","thm-compact-subset-of-a-hausdorff-space-is-closed","thm-heine-borel-rn","thm-compactness-agrees-with-metric-compactness","def-axiom-of-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

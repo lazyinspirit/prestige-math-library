@@ -2,7 +2,9 @@
 id: "lem-finite-relative-homotopy-lifting-across-a-weak-equivalence"
 kind: "lemma"
 title: "Finite relative homotopy lifting across a weak equivalence"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-weak-homotopy-equivalence","lem-a-weak-equivalence-of-cw-complexes-has-vanishing-relative-homotopy-groups","lem-relative-cubical-disk-model-and-compression","prop-relative-cw-inclusions-are-cofibrations","def-skeleta-cw-subcomplex-and-relative-cw-complex","lem-interval-exponential-law-and-quotient-homotopies","lem-finite-choice"]

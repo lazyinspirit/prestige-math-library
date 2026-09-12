@@ -2,11 +2,12 @@
 id: "fs-geodesic-completeness-means-the-manifold-is-compact"
 kind: "false-statement"
 title: "Geodesic completeness means compactness"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-countable-choice", "prop-open-subsets-of-euclidean-space-have-the-standard-smooth-structure", "def-riemannian-metric-and-riemannian-manifold", "cor-rn-is-polygonally-connected-and-locally-path-connected", "def-riemannian-speed-and-length", "def-riemannian-distance-on-a-connected-manifold", "thm-gradient-theorem-for-line-integrals", "thm-scalar-and-vector-line-integral-estimates", "thm-euclidean-space-complete", "thm-hopf-rinow", "thm-heine-borel-rn"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: E–W Examples 2.2 and 2.4 pp.14–15
       url: https://webspace.maths.qmul.ac.uk/f.vivaldi/teaching/ETAD/NotesI.pdf
-status: draft
+status: published
 origin: pipeline
 ---
 

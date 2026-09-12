@@ -2,11 +2,12 @@
 id: "cex-whitehead-theorem-fails-without-cw-type"
 kind: "counterexample"
 title: "Whitehead theorem fails without CW type"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-weak-homotopy-equivalence","def-subspace-topology-top","def-homotopy-equivalence","thm-intermediate-value","lem-q-and-irrationals-dense-r"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -18,7 +19,7 @@ sources:
       url: https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload17.pdf
     - title: Craven, The Brauer Correspondence, Theorem 1.12, pp. 9–10
       url: https://web.mat.bham.ac.uk/D.A.Craven/docs/theses/2004diss.pdf
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

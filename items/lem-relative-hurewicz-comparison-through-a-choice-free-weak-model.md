@@ -2,11 +2,12 @@
 id: "lem-relative-hurewicz-comparison-through-a-choice-free-weak-model"
 kind: "lemma"
 title: "Relative Hurewicz comparison through a choice-free weak model"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-a-connected-cw-pair-has-a-model-without-low-relative-cells","lem-weak-equivalences-of-pairs-induce-isomorphisms-on-relative-homotopy","lem-weak-homotopy-equivalences-induce-integral-homology-isomorphisms-without-choice","lem-cell-attachment-below-the-first-nonzero-homotopy-degree-preserves-the-required-connectivity","def-hurewicz-homomorphism"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

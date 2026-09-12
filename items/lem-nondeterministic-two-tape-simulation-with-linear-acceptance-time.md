@@ -2,7 +2,7 @@
 id: "lem-nondeterministic-two-tape-simulation-with-linear-acceptance-time"
 kind: "lemma"
 title: "Linear acceptance-time simulation on two tapes"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-nondeterministic-acceptance-time-and-exact-clock", "def-multitape-and-nondeterministic-machines"]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

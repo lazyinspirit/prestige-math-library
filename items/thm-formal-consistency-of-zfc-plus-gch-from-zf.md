@@ -2,7 +2,9 @@
 id: thm-formal-consistency-of-zfc-plus-gch-from-zf
 kind: theorem
 title: Formal consistency of ZFC plus GCH relative to ZF
-status: draft
+verification:
+  audited: 2026-09-13
+status: published
 origin: pipeline
 deps: [lem-finite-fragment-l-interpretation-with-gch, thm-formal-relative-consistency-from-verified-proof-reduction, lem-hilbert-propositional-and-equality-rules, def-set-coded-formal-derivation]
 proof_strategy: direct

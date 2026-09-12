@@ -2,7 +2,7 @@
 id: "lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations"
 kind: "lemma"
 title: "The tableau formula characterizes accepting computations"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-bounded-turing-computation-tableau-interface", "def-one-step-configuration-relation", "def-turing-machine-initial-and-halting-configuration-interface"]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

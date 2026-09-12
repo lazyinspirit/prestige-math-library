@@ -7,6 +7,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: Saunders, Modular Representation Theory, Examples 4.31 and 5.5
       url: https://jpsaunders.uk/ModRep/NotesWebsite.pdf
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

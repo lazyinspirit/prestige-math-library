@@ -2,11 +2,12 @@
 id: "cor-complete-connected-riemannian-manifolds-are-proper-length-spaces"
 kind: "corollary"
 title: "Complete connected Riemannian manifolds are proper length spaces"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-countable-choice","rem-boundaryless-convention-for-geodesic-flow-and-hopf-rinow","def-riemannian-distance-on-a-connected-manifold","thm-hopf-rinow"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: "ex-the-local-de-rham-comparison-on-a-ball"
 kind: "example"
 title: "The local de Rham comparison on a ball"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-the-de-rham-map-is-an-isomorphism-on-convex-coordinate-domains"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

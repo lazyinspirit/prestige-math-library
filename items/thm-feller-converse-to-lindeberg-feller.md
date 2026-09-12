@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: Billingsley, Probability and Measure, Theorems 28.1-28.4 and Example 28.4
       url: https://www.colorado.edu/amath/sites/default/files/attached-files/billingsley.pdf
-status: draft
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

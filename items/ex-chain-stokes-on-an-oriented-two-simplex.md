@@ -2,11 +2,12 @@
 id: "ex-chain-stokes-on-an-oriented-two-simplex"
 kind: "example"
 title: "Chain Stokes on an oriented two-simplex"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-stokes-theorem-for-smooth-singular-chains"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

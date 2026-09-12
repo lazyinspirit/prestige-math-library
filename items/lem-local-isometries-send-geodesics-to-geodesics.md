@@ -2,7 +2,9 @@
 id: "lem-local-isometries-send-geodesics-to-geodesics"
 kind: "lemma"
 title: "Local isometries send geodesics to geodesics"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-riemannian-isometry-and-local-isometry","def-affine-connection-on-a-smooth-manifold","thm-fundamental-theorem-of-riemannian-geometry","def-covariant-derivative-along-a-curve","def-geodesic-of-an-affine-connection"]

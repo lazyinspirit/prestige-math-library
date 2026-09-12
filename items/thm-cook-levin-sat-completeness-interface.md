@@ -2,7 +2,7 @@
 id: "thm-cook-levin-sat-completeness-interface"
 kind: "theorem"
 title: "Cook-Levin: SAT is NP-complete"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-boolean-formulas-cnf-and-satisfiability-interface", "lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations", "lem-tableau-to-cnf-map-has-polynomial-size-and-time", "def-polynomial-time-verifier-and-reduction-interface"]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

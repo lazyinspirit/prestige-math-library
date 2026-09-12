@@ -2,7 +2,7 @@
 id: cor-v-equals-l-gives-a-suslin-tree
 kind: corollary
 title: V equals L gives a Suslin tree
-status: draft
+status: published
 origin: pipeline
 deps: [thm-v-equals-l-implies-diamond, thm-diamond-constructs-normal-suslin-tree, thm-constructible-universe-satisfies-choice, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

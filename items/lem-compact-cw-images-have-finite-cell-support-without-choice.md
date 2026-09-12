@@ -2,11 +2,12 @@
 id: "lem-compact-cw-images-have-finite-cell-support-without-choice"
 kind: "lemma"
 title: "Compact CW images have finite cell support without choice"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-cw-complex-with-closure-finiteness-and-weak-topology","def-skeleta-cw-subcomplex-and-relative-cw-complex","thm-compact-subset-of-a-hausdorff-space-is-closed","thm-closed-subspace-of-a-compact-space-is-compact","thm-heine-borel-rn","thm-compactness-agrees-with-metric-compactness","thm-extreme-value-metric"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

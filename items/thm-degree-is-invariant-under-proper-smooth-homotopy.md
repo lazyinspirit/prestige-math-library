@@ -2,11 +2,12 @@
 id: "thm-degree-is-invariant-under-proper-smooth-homotopy"
 kind: "theorem"
 title: "Degree is invariant under proper smooth homotopy"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-degree-of-a-proper-smooth-map-by-compact-support-cohomology","lem-finite-chart-localization-defines-choice-free-integration-and-compact-stokes","thm-de-rham-homotopy-formula-for-a-smooth-homotopy"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

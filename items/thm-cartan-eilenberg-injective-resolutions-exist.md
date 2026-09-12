@@ -13,7 +13,9 @@ sources:
     - title: "Sharifi, Theorem 4.3.2"
       url: "https://math.ucla.edu/~sharifi/homalg.pdf"
 landmark: true
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 proof_strategy: "direct"

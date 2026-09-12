@@ -2,11 +2,12 @@
 id: "ex-same-additive-cohomology-different-rings-cp-three-and-a-wedge"
 kind: "example"
 title: "Equal additive cohomology but different rings"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["ex-integral-cohomology-ring-of-complex-projective-space","thm-cellular-homology-computes-singular-homology","prop-cellular-maps-induce-cellular-chain-maps","thm-topological-universal-coefficient-short-exact-sequence-for-cohomology","prop-cup-product-is-natural-unital-and-associative","def-axiom-of-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

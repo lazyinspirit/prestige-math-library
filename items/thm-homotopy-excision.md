@@ -2,11 +2,12 @@
 id: "thm-homotopy-excision"
 kind: "theorem"
 title: "Homotopy excision"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-relative-homotopy-group","def-n-connected-cw-pair","lem-relative-homotopy-operations-are-well-defined-in-their-valid-degrees","lem-high-relative-cells-do-not-change-lower-homotopy","thm-long-exact-sequence-of-relative-homotopy-groups","lem-homotopy-excision-for-a-single-relative-cell-layer","lem-relative-homotopy-exact-sequence-of-a-triple-in-group-degrees","lem-compact-cw-images-have-finite-cell-support-without-choice","thm-heine-borel-rn","thm-compactness-agrees-with-metric-compactness","lem-a-connected-cw-pair-has-a-model-without-low-relative-cells","lem-weak-equivalences-glue-along-a-common-connected-cw-subcomplex","lem-weak-equivalences-of-pairs-induce-isomorphisms-on-relative-homotopy"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

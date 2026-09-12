@@ -2,11 +2,12 @@
 id: "lem-de-rham-integration-respects-wedge-and-cup-in-cohomology"
 kind: "lemma"
 title: "De Rham integration respects wedge and cup in cohomology"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-singular-cup-product-on-cochains","thm-cup-product-leibniz-identity","def-de-rham-integration-cochain-map","thm-de-rham-integration-is-a-cochain-map","lem-affine-diagonal-and-front-back-shuffle-have-a-specified-chain-homotopy","lem-integration-over-the-signed-shuffle-equals-the-product-of-simplex-integrals","lem-stokes-theorem-for-the-standard-simplex","lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary","def-smooth-singular-simplex"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

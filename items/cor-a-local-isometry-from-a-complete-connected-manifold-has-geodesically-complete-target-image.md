@@ -2,11 +2,12 @@
 id: "cor-a-local-isometry-from-a-complete-connected-manifold-has-geodesically-complete-target-image"
 kind: "corollary"
 title: "A local isometry from a complete connected manifold has geodesically complete target image"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-countable-choice","rem-boundaryless-convention-for-geodesic-flow-and-hopf-rinow","def-riemannian-isometry-and-local-isometry","def-geodesically-complete-riemannian-manifold","thm-hopf-rinow","thm-existence-uniqueness-and-smooth-dependence-of-geodesics","lem-local-isometries-send-geodesics-to-geodesics"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

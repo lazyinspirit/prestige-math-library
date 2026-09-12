@@ -2,12 +2,13 @@
 id: "def-local-orientation-sign-of-a-regular-preimage"
 kind: "definition"
 title: "Local orientation sign of a regular preimage"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 proof_strategy: direct
 deps: ["def-local-orientation-of-a-regular-c-one-map","def-oriented-smooth-manifold-and-oriented-chart","def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

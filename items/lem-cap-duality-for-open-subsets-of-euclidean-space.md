@@ -2,7 +2,9 @@
 id: "lem-cap-duality-for-open-subsets-of-euclidean-space"
 kind: "lemma"
 title: "Cap duality for open subsets of Euclidean space"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-cap-product-duality-is-an-isomorphism-on-euclidean-balls","def-compactly-supported-singular-cohomology-of-a-locally-compact-space","prop-cap-product-naturality-and-projection-formula","lem-cap-product-commutes-with-the-mayer-vietoris-duality-ladder","thm-five-lemma-for-a-morphism-of-long-exact-sequences","lem-cap-duality-passes-to-increasing-open-unions","thm-rationals-countable","lem-q-and-irrationals-dense-r","def-axiom-of-choice"]

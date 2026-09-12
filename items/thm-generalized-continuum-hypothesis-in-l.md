@@ -2,7 +2,7 @@
 id: thm-generalized-continuum-hypothesis-in-l
 kind: theorem
 title: The generalized continuum hypothesis holds in L
-status: draft
+status: published
 origin: pipeline
 deps: [thm-constructible-subsets-appear-before-successor-cardinals, lem-cardinality-of-infinite-constructible-levels, thm-constructible-universe-satisfies-choice, thm-constructible-inner-model-semantic-and-formal-schema, thm-cardinal-power-set-and-cantor, def-axiom-of-choice]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

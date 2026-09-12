@@ -2,11 +2,12 @@
 id: "def-compactly-supported-singular-cohomology-of-a-locally-compact-space"
 kind: "definition"
 title: "Compactly supported singular cohomology"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-relative-singular-cochain-complex","def-filtered-category-and-filtered-colimit","thm-locally-compact-hausdorff-basics"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,9 @@
 id: "lem-the-de-rham-map-commutes-with-mayer-vietoris-connectors"
 kind: "lemma"
 title: "The de Rham map commutes with Mayer–Vietoris connectors"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-de-rham-mayer-vietoris-with-boundary-and-an-explicit-partition-lift","thm-smooth-singular-mayer-vietoris-sequence","lem-canonical-extension-by-zero-of-a-singular-cochain-on-a-simplex-basis","thm-de-rham-integration-is-a-cochain-map","prop-naturality-of-the-de-rham-map","def-countable-choice","thm-barycentric-subdivision-is-chain-homotopic-to-the-identity","prop-barycentric-subdivision-and-prism-preserve-smooth-singular-chains","lem-every-finite-singular-chain-becomes-cover-small-after-enough-subdivision"]

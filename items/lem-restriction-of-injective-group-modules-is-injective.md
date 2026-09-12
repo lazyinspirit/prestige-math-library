@@ -10,7 +10,9 @@ sources:
   references:
     - title: "Weibel, Sections 6.3 and 6.8; finite-support choice-free induction argument supplied here"
       url: "https://math.mit.edu/~hrm/palestine/weibel/06-group_homology_and_cohomology.pdf"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 proof_strategy: "direct"

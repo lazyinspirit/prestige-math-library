@@ -1,7 +1,7 @@
 ---
 page: affine-lie-algebras-and-loop-central-extensions-examples
 title: Affine Lie Algebras and Loop Central Extensions — Examples
-status: draft
+status: published
 items:
 - ex-affine-sl2-mode-brackets
 - ex-the-heisenberg-subalgebra-of-an-affine-lie-algebra

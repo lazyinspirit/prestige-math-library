@@ -2,11 +2,12 @@
 id: "lem-relative-homotopy-exact-sequence-of-a-triple-in-group-degrees"
 kind: "lemma"
 title: "Relative homotopy exact sequence of a triple in group degrees"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-relative-homotopy-group","lem-relative-homotopy-operations-are-well-defined-in-their-valid-degrees","lem-relative-cubical-disk-model-and-compression","thm-long-exact-sequence-of-relative-homotopy-groups"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

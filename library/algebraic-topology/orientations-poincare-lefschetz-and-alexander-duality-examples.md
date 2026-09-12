@@ -1,7 +1,7 @@
 ---
 page: "orientations-poincare-lefschetz-and-alexander-duality-examples"
 title: "Orientations Poincare Lefschetz and Alexander Duality — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-fundamental-classes-and-duality-for-spheres-and-tori","ex-intersection-pairing-of-a-closed-oriented-surface","ex-poincare-lefschetz-duality-for-a-disk-and-its-boundary","ex-mod-two-duality-for-real-projective-space","ex-alexander-duality-for-the-standard-equator","ex-lefschetz-number-of-the-identity-is-euler-characteristic","cex-a-nonorientable-manifold-has-no-ordinary-integral-fundamental-class","cex-ordinary-cohomology-does-not-give-noncompact-poincare-duality","cex-an-alexander-horned-sphere-has-complementary-components-that-need-not-be-balls","cex-zero-lefschetz-number-does-not-imply-no-fixed-points"]
 ---

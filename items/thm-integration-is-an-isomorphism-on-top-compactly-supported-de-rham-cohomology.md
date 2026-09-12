@@ -2,11 +2,12 @@
 id: "thm-integration-is-an-isomorphism-on-top-compactly-supported-de-rham-cohomology"
 kind: "theorem"
 title: "Integration is an isomorphism on top compactly supported de Rham cohomology"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-compactly-supported-top-cohomology-propagates-across-overlapping-oriented-coordinate-balls","thm-integration-descends-to-compactly-supported-top-de-rham-cohomology","lem-finite-chart-localization-defines-choice-free-integration-and-compact-stokes","def-connected-space","def-compactly-supported-de-rham-cochain-complex-and-cohomology","lem-chart-bump-at-a-point-with-prescribed-support","def-the-standard-smooth-step-function","lem-compactness-of-a-subspace-is-ambient","thm-heine-borel-rn","thm-compactness-under-continuous-maps","thm-closed-subspace-of-a-compact-space-is-compact"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

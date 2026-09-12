@@ -2,7 +2,9 @@
 id: "cex-a-homology-equivalence-need-not-be-a-homotopy-equivalence-without-simple-connectivity"
 kind: "counterexample"
 title: "A homology equivalence need not be a homotopy equivalence without simple connectivity"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-cellular-attachments-with-finite-boundary-support-form-a-cw-complex","lem-cw-quotient-induces-relative-singular-homology-isomorphisms","thm-long-exact-sequence-of-a-pair-in-singular-homology","cor-homology-of-spheres","def-hurewicz-homomorphism","prop-the-first-hurewicz-map-in-degree-one-is-abelianization","thm-seifert-van-kampen","thm-fundamental-group-of-finite-wedge-of-circles","thm-fundamental-group-of-the-circle","prop-retracts-inject-fundamental-groups","prop-higher-homotopy-basepoint-transport-and-moving-homotopies","prop-zero-th-singular-homology-is-free-on-path-components","thm-quotient-universal-property","lem-interval-exponential-law-and-quotient-homotopies","cor-contractible-nonempty-spaces-have-the-homology-of-a-point"]

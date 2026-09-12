@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: not-applicable
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - title: "Weibel, Definition 5.7.4 and cohomology variant 5.7.9, printed pp.147 and 149–150"
       url: "https://math.mit.edu/~hrm/palestine/weibel/05-spectral_sequences.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 ---

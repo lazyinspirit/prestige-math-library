@@ -2,11 +2,12 @@
 id: "thm-gauss-lemma"
 kind: "theorem"
 title: "Gauss lemma"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-fundamental-theorem-of-riemannian-geometry","prop-exponential-map-scales-geodesic-time","thm-the-exponential-domain-is-open-and-the-exponential-map-is-smooth","prop-geodesics-have-constant-speed-for-a-metric-compatible-connection","def-levi-civita-connection","def-metric-compatible-connection-on-a-riemannian-vector-bundle","prop-torsion-free-is-equivalent-to-symmetric-christoffel-symbols-in-coordinate-frames","cor-zero-derivative-implies-constant","def-countable-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

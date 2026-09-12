@@ -2,11 +2,12 @@
 id: "thm-existence-of-geodesically-convex-neighborhoods"
 kind: "theorem"
 title: "Existence of geodesically convex neighborhoods"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-existence-of-normal-neighborhoods","def-normal-neighborhood-and-normal-coordinate-chart","thm-gram-schmidt-orthonormalisation","thm-existence-uniqueness-and-smooth-dependence-of-geodesics","thm-the-exponential-domain-is-open-and-the-exponential-map-is-smooth","thm-the-differential-of-exp-p-at-zero-is-the-identity","lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space","prop-properties-of-normal-coordinates-at-the-center","prop-coordinate-geodesic-equation","prop-geodesics-have-constant-speed-for-a-metric-compatible-connection","lem-local-comparison-of-a-riemannian-metric-with-the-euclidean-metric","thm-compactness-under-continuous-maps","cor-heine-borel-in-the-product-topology","thm-extreme-value-r","cor-sufficiently-short-geodesic-segments-are-uniquely-minimizing","def-product-topology","def-countable-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

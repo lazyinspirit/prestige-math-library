@@ -2,11 +2,12 @@
 id: "lem-the-de-rham-map-is-an-isomorphism-on-convex-coordinate-domains"
 kind: "lemma"
 title: "The de Rham map is an isomorphism on convex coordinate domains"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["prop-naturality-of-the-de-rham-map","lem-the-de-rham-homotopy-formula-extends-to-boundary-manifolds","prop-barycentric-subdivision-and-prism-preserve-smooth-singular-chains","def-smooth-singular-chain-and-cochain-complexes","def-de-rham-integration-cochain-map","prop-smooth-singular-chains-and-cochains-are-functorial-for-smooth-maps"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

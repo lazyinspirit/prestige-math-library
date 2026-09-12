@@ -2,11 +2,12 @@
 id: "prop-injectivity-radius-at-each-point-is-positive"
 kind: "proposition"
 title: "Injectivity radius at each point is positive"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-injectivity-radius-at-a-point-and-of-a-manifold","thm-existence-of-normal-neighborhoods","prop-coordinate-geodesic-equation","prop-christoffel-formula-for-the-levi-civita-connection","prop-coordinate-criterion-for-a-riemannian-metric","prop-countable-disjoint-unions-of-fixed-dimensional-smooth-manifolds-are-smooth-manifolds","thm-existence-uniqueness-and-smooth-dependence-of-geodesics","def-countable-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

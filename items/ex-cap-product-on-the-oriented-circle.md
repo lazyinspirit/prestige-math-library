@@ -2,11 +2,12 @@
 id: "ex-cap-product-on-the-oriented-circle"
 kind: "example"
 title: "Cap product on the oriented circle"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-cap-product-with-cohomology-first","thm-cap-product-boundary-identity","prop-zero-th-singular-homology-is-free-on-path-components","cor-homology-of-spheres"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

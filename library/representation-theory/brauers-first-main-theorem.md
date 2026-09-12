@@ -1,7 +1,7 @@
 ---
 page: brauers-first-main-theorem
 title: Brauers First Main Theorem
-status: draft
+status: published
 items:
 - thm-modular-block-central-characters-correspond-to-blocks
 - def-induced-block-from-a-subgroup

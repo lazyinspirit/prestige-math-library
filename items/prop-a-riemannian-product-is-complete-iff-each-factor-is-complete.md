@@ -2,11 +2,12 @@
 id: "prop-a-riemannian-product-is-complete-iff-each-factor-is-complete"
 kind: "proposition"
 title: "A Riemannian product is complete iff each factor is complete"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-countable-choice","rem-boundaryless-convention-for-geodesic-flow-and-hopf-rinow","thm-induction-principle","lem-finite-choice","prop-products-of-smooth-manifolds-have-a-canonical-product-smooth-structure","thm-product-of-connected-spaces","prop-christoffel-formula-for-the-levi-civita-connection","prop-coordinate-geodesic-equation","thm-existence-uniqueness-and-smooth-dependence-of-geodesics","def-geodesically-complete-riemannian-manifold","thm-hopf-rinow"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

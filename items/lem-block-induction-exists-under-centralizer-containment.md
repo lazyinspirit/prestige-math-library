@@ -13,7 +13,9 @@ sources:
       url: https://www.niamhfarrell.com/uploads/6/9/2/8/69286633/upload17.pdf
     - title: Martínez, Representation Theory of Finite Groups, Theorem 4.5, pp. 24–25
       url: https://www.uv.es/jomimar8/pdfs/course%20notes.pdf
-status: draft
+verification:
+  audited: 2026-09-13
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

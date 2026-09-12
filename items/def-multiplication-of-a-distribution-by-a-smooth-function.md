@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -15,7 +16,7 @@ sources:
   references:
     - url: "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf"
       title: "Semyon Dyatlov, Lecture notes for 18.155 (2022)"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

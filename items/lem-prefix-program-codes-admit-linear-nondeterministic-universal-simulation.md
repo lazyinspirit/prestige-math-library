@@ -2,7 +2,7 @@
 id: "lem-prefix-program-codes-admit-linear-nondeterministic-universal-simulation"
 kind: "lemma"
 title: "Prefix program codes admit linear nondeterministic universal simulation"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-nondeterministic-two-tape-simulation-with-linear-acceptance-time", "def-effective-encoding-of-turing-machines", "lem-machine-encoding-is-injective-and-decodable"]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

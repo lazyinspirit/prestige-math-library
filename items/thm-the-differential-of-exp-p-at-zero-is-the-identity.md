@@ -2,11 +2,12 @@
 id: "thm-the-differential-of-exp-p-at-zero-is-the-identity"
 kind: "theorem"
 title: "The differential of exp at zero is the identity"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["prop-exponential-map-scales-geodesic-time","thm-the-exponential-domain-is-open-and-the-exponential-map-is-smooth","def-countable-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

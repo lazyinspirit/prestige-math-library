@@ -2,11 +2,12 @@
 id: "thm-lefschetz-fixed-point-theorem-for-finite-complexes"
 kind: "theorem"
 title: "Lefschetz fixed-point theorem for finite complexes"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-lefschetz-number-of-a-finite-cw-self-map","lem-hopf-trace-formula","lem-finite-cw-complexes-are-euclidean-neighborhood-retracts","thm-trace-of-ab-equals-trace-of-ba","def-axiom-of-choice","lem-mesh-of-iterated-simplicial-barycentric-subdivision-tends-to-zero","lem-the-open-star-criterion-produces-a-simplicial-map","thm-lebesgue-number-lemma","prop-cellular-maps-induce-cellular-chain-maps","thm-relative-homology-of-consecutive-cw-skeleta","thm-heine-borel-rn"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

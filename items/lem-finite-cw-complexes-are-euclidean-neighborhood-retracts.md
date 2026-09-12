@@ -2,11 +2,12 @@
 id: "lem-finite-cw-complexes-are-euclidean-neighborhood-retracts"
 kind: "lemma"
 title: "Finite CW complexes are Euclidean neighborhood retracts"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-cw-complex-with-closure-finiteness-and-weak-topology","thm-compact-locally-contractible-euclidean-subsets-are-neighborhood-retracts","def-axiom-of-choice","thm-heine-borel-rn","thm-compact-subset-of-a-hausdorff-space-is-closed"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

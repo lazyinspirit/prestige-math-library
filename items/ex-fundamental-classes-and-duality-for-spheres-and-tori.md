@@ -2,11 +2,12 @@
 id: "ex-fundamental-classes-and-duality-for-spheres-and-tori"
 kind: "example"
 title: "Fundamental classes and duality for spheres and tori"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-poincare-duality-for-oriented-topological-manifolds","thm-cohomological-kunneth-cross-product-is-a-ring-isomorphism","cor-homology-of-spheres","def-axiom-of-choice","thm-topological-universal-coefficient-short-exact-sequence-for-cohomology","thm-topological-kunneth-short-exact-sequence-for-homology","thm-alexander-whitney-and-eilenberg-zilber-are-chain-homotopy-inverses","def-singular-chain-cross-product-on-generators","lem-singular-chain-cross-product-boundary-formula","prop-cap-product-naturality-and-projection-formula","def-cap-product-with-cohomology-first","def-fundamental-class-of-a-compact-oriented-manifold","thm-top-homology-characterizes-compact-orientable-manifolds","thm-heine-borel-rn","prop-cup-product-is-natural-unital-and-associative"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

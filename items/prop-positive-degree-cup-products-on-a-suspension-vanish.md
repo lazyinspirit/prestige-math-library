@@ -2,11 +2,12 @@
 id: "prop-positive-degree-cup-products-on-a-suspension-vanish"
 kind: "proposition"
 title: "Positive-degree cup products on a suspension vanish"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-relative-cup-product","thm-long-exact-sequence-of-a-pair-in-singular-cohomology","def-adjunction-cone-suspension","thm-homotopic-maps-induce-equal-maps-in-singular-cohomology","def-cup-length-over-a-coefficient-ring","thm-the-exponential-law"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: lem-finite-fragment-l-interpretation-with-gch
 kind: lemma
 title: Finite-fragment interpretation in L with GCH
-status: draft
+status: published
 origin: pipeline
 deps: [thm-constructible-inner-model-semantic-and-formal-schema, thm-generalized-continuum-hypothesis-in-l, def-effective-interpretation-and-proof-translation, lem-interpretation-translates-finite-derivations, def-coded-first-order-zf-theory]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

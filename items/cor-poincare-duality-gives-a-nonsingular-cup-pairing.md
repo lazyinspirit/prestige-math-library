@@ -2,11 +2,12 @@
 id: "cor-poincare-duality-gives-a-nonsingular-cup-pairing"
 kind: "corollary"
 title: "Poincaré duality gives a nonsingular cup pairing"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-poincare-duality-for-oriented-topological-manifolds","lem-closed-oriented-pid-manifolds-have-finitely-generated-homology","def-cap-product-with-cohomology-first","def-singular-cup-product-on-cochains","thm-singular-cohomology-is-graded-commutative","thm-topological-universal-coefficient-short-exact-sequence-for-cohomology","lem-singular-uct-extension-from-cycle-projections","def-singular-cochain-complex-with-coefficients","cor-fundamental-theorem-of-finitely-generated-abelian-groups-from-pid-modules","def-axiom-of-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: "thm-the-exponential-domain-is-open-and-the-exponential-map-is-smooth"
 kind: "theorem"
 title: "The exponential domain is open and the exponential map is smooth"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-domain-and-exponential-map-of-a-connection","thm-existence-uniqueness-and-smooth-dependence-of-geodesics","def-countable-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

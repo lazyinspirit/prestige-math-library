@@ -1,7 +1,7 @@
 ---
 page: the-weyl-kac-character-formula-examples
 title: "The Weyl Kac Character Formula \u2014 Examples"
-status: draft
+status: published
 items:
 - ex-finite-a1-specialization-of-weyl-kac
 - ex-real-and-imaginary-factors-in-the-affine-sl2-denominator

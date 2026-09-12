@@ -2,11 +2,12 @@
 id: ex-geodesics-in-the-poincare-upper-half-plane
 kind: example
 title: Geodesics in the Poincare upper half-plane
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-17
 deps: [prop-coordinate-geodesic-equation, prop-christoffel-formula-for-the-levi-civita-connection, cor-zero-derivative-implies-constant, thm-algebra-of-derivatives, thm-chain-rule, thm-logarithm-derivative-and-integral, def-natural-logarithm, def-hyperbolic-functions, thm-hyperbolic-identities-and-derivatives, thm-derivative-of-exponential, thm-exponential-addition-formula]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

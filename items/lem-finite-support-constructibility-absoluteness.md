@@ -12,7 +12,9 @@ sources:
   references:
     - title: "Kunen, Set Theory, Chapter VI Theorem 3.8 pp. 171–172 and Chapter VII section 1 pp. 184–186"
       url: "https://pages.jh.edu/rrynasi1/NewFoundations4Math/Literature/Set/Kunen1980SetTheory-AnIntroductionToIndependenceProofs.pdf"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

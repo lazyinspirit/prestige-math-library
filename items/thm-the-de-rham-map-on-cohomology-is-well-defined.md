@@ -2,11 +2,12 @@
 id: "thm-the-de-rham-map-on-cohomology-is-well-defined"
 kind: "theorem"
 title: "The de Rham map on cohomology is well defined"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-de-rham-integration-is-a-cochain-map","def-de-rham-cohomology","lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary","def-smooth-singular-chain-and-cochain-complexes","thm-a-chain-map-induces-a-well-defined-map-on-homology"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

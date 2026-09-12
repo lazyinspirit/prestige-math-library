@@ -2,11 +2,12 @@
 id: "lem-geodesics-can-be-continued-while-their-velocity-lifts-remain-in-a-compact-subset"
 kind: "lemma"
 title: "Geodesics continue while velocity lifts remain compact"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["rem-boundaryless-convention-for-geodesic-flow-and-hopf-rinow","def-countable-choice","lem-the-geodesic-spray-is-a-well-defined-smooth-vector-field-on-tm","thm-fundamental-theorem-on-flows","def-product-topology","def-compact-space","lem-compactness-of-a-subspace-is-ambient","lem-finite-set-has-max"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

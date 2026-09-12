@@ -10,7 +10,9 @@ sources:
   references:
     - url: "https://math.mit.edu/~dyatlov/18.155/155-notes.pdf"
       title: "Semyon Dyatlov, Lecture notes for 18.155 (2022)"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

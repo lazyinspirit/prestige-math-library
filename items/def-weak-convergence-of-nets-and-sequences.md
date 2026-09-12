@@ -7,6 +7,7 @@ provenance:
   statement: "ai-altered"
   proof: "not-applicable"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -17,7 +18,7 @@ sources:
       url: "https://uomustansiriyah.edu.iq/media/lectures/9/9_2021_09_21!12_02_01_AM.pdf"
     - title: "Teschl, Topics in Real and Functional Analysis (2017); exact harvest in batch coverage"
       url: "https://www.uomustansiriyah.edu.iq/media/lectures/9/9_2018_12_07!10_23_44_AM.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 ---
 

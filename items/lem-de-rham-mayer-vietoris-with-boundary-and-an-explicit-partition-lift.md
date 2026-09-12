@@ -2,11 +2,12 @@
 id: "lem-de-rham-mayer-vietoris-with-boundary-and-an-explicit-partition-lift"
 kind: "lemma"
 title: "De Rham Mayer–Vietoris with boundary and an explicit partition lift"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary","thm-smooth-partitions-of-unity-exist-on-manifolds-with-boundary","def-countable-choice","thm-long-exact-sequence-in-cohomology","def-smooth-partition-of-unity-subordinate-to-an-open-cover"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

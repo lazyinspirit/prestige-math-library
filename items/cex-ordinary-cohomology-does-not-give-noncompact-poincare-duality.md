@@ -2,11 +2,12 @@
 id: "cex-ordinary-cohomology-does-not-give-noncompact-poincare-duality"
 kind: "counterexample"
 title: "Ordinary cohomology does not give noncompact Poincaré duality"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-cap-product-duality-is-an-isomorphism-on-euclidean-balls","cor-contractible-nonempty-spaces-have-the-homology-of-a-point","def-singular-cohomology-with-coefficients","def-singular-cochain-complex-with-coefficients","def-axiom-of-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

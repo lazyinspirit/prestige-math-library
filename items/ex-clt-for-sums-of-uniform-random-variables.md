@@ -12,7 +12,9 @@ sources:
       url: https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf
     - title: Aldous and Chewi, Probability Theory notes, Theorem 5.2
       url: https://www.stat.berkeley.edu/users/aldous/205B/chewi_notes.pdf
-status: draft
+verification:
+  audited: 2026-09-13
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

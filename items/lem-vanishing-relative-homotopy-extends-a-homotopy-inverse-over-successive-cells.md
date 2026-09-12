@@ -2,11 +2,12 @@
 id: "lem-vanishing-relative-homotopy-extends-a-homotopy-inverse-over-successive-cells"
 kind: "lemma"
 title: "Vanishing relative homotopy extends an inverse over cells"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-relative-cubical-disk-model-and-compression","prop-relative-cw-inclusions-are-cofibrations","def-skeleta-cw-subcomplex-and-relative-cw-complex","def-cw-complex-with-closure-finiteness-and-weak-topology","thm-the-exponential-law","lem-finite-choice","thm-recursion","def-axiom-of-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

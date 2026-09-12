@@ -2,11 +2,12 @@
 id: "prop-cup-product-is-natural-unital-and-associative"
 kind: "proposition"
 title: "Cup product is natural, unital and associative"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-singular-cup-product-on-cochains","def-singular-cohomology-ring","thm-homotopic-maps-induce-equal-maps-in-singular-cohomology"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -1,7 +1,7 @@
 ---
 page: "central-limit-theorems-examples"
 title: "Central Limit Theorems — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-normal-approximation-to-binomial-probabilities", "ex-clt-for-sums-of-uniform-random-variables", "ex-lyapunov-condition-for-nonidentical-summands", "ex-lindeberg-array-with-no-identically-distributed-row", "ex-degenerate-multivariate-gaussian-limit", "cex-clt-can-fail-with-infinite-variance-under-square-root-n-scaling", "cex-feller-negligibility-cannot-be-removed-from-the-converse"]
 ---

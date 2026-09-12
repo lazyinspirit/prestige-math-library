@@ -2,11 +2,12 @@
 id: "ex-degree-of-a-reflection-of-a-sphere"
 kind: "example"
 title: "Degree of a reflection of a sphere"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["prop-degree-of-an-orientation-preserving-or-reversing-diffeomorphism","def-induced-boundary-orientation"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

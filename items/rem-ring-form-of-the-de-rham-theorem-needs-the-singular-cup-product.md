@@ -2,12 +2,13 @@
 id: "rem-ring-form-of-the-de-rham-theorem-needs-the-singular-cup-product"
 kind: "remark"
 title: "The ring form of de Rham’s theorem needs the singular cup product"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 proof_strategy: direct
 deps: ["thm-de-rham-theorem","lem-de-rham-integration-respects-wedge-and-cup-in-cohomology"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

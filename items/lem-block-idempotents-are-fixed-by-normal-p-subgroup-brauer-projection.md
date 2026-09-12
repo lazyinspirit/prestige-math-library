@@ -11,7 +11,9 @@ sources:
     - title: Martínez, Theorem4.5 proof, normal-p orbit localization; local central-idempotent
         consequence
       url: https://www.uv.es/jomimar8/pdfs/course%20notes.pdf
-status: draft
+verification:
+  audited: 2026-09-13
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

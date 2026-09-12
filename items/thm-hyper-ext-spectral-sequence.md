@@ -7,6 +7,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -19,7 +20,7 @@ sources:
       url: "https://stacks.math.columbia.edu/download/sites-cohomology.pdf"
     - title: "Stacks Project, Tag 0AVG (bounded-below second-variable Ext spectral sequence)"
       url: "https://stacks.math.columbia.edu/download/more-algebra.pdf"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 proof_strategy: "direct"

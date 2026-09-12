@@ -2,11 +2,12 @@
 id: "thm-poincare-duality-for-oriented-topological-manifolds"
 kind: "theorem"
 title: "Poincaré duality for oriented topological manifolds"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-cap-duality-map-for-an-oriented-manifold","lem-manifold-exhaustion-passes-local-duality-to-the-colimit","lem-duality-extends-from-two-open-sets-to-finite-unions-of-coordinate-balls","lem-cap-product-commutes-with-the-mayer-vietoris-duality-ladder","lem-compatible-local-orientation-classes-exist-over-compact-subsets","def-compactly-supported-singular-cohomology-of-a-locally-compact-space","def-fundamental-class-of-a-compact-oriented-manifold","def-axiom-of-choice","thm-path-connected-implies-connected","def-connected-component-and-quasicomponent","def-topological-manifold-with-and-without-boundary"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

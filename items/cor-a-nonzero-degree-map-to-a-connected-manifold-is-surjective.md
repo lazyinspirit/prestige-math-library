@@ -2,7 +2,9 @@
 id: "cor-a-nonzero-degree-map-to-a-connected-manifold-is-surjective"
 kind: "corollary"
 title: "A nonzero-degree map to a connected manifold is surjective"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-degree-of-a-proper-smooth-map-by-compact-support-cohomology","prop-topological-manifolds-are-locally-compact-and-locally-path-connected","thm-compactness-under-continuous-maps","thm-compact-subset-of-a-hausdorff-space-is-closed","lem-chart-bump-at-a-point-with-prescribed-support","def-integral-of-an-oriented-chart-supported-top-form","lem-finite-chart-localization-defines-choice-free-integration-and-compact-stokes","thm-multidimensional-integral-properties"]

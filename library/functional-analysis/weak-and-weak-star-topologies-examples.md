@@ -1,7 +1,7 @@
 ---
 page: "weak-and-weak-star-topologies-examples"
 title: "Weak and Weak Star Topologies — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-coordinate-vectors-converge-weakly-to-zero-in-ell-p", "cex-coordinate-vectors-do-not-converge-weakly-to-zero-in-ell-one", "ex-coordinate-evaluations-converge-weak-star-to-zero-in-ell-one-star", "cex-weak-star-and-weak-topologies-on-a-dual-can-differ", "cex-weak-closure-can-exceed-sequential-weak-closure", "ex-right-shift-powers-converge-in-wot-not-sot", "ex-left-shift-powers-converge-in-sot-not-operator-norm", "cex-pointwise-boundedness-without-a-uniform-bound-on-an-incomplete-domain", "cex-a-weakly-convergent-net-need-not-be-eventually-norm-bounded"]
 ---

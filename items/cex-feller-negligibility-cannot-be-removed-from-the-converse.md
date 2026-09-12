@@ -12,7 +12,9 @@ sources:
       url: https://sites.math.duke.edu/~rtd/PTE/PTE5_011119.pdf
     - title: Billingsley, Probability and Measure, Example 28.4
       url: https://www.colorado.edu/amath/sites/default/files/attached-files/billingsley.pdf
-status: draft
+verification:
+  audited: 2026-09-13
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

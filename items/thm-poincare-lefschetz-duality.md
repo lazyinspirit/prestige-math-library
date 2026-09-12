@@ -2,7 +2,9 @@
 id: "thm-poincare-lefschetz-duality"
 kind: "theorem"
 title: "Poincaré–Lefschetz duality"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-relative-fundamental-class-and-boundary-orientation","thm-poincare-duality-for-oriented-topological-manifolds","def-relative-cap-product","thm-five-lemma-for-a-morphism-of-long-exact-sequences","thm-long-exact-sequence-of-a-pair-in-singular-homology","thm-long-exact-sequence-of-a-pair-in-singular-cohomology","def-axiom-of-choice","thm-topological-collaring-for-manifold-boundaries","thm-excision-for-singular-cohomology","thm-excision-for-singular-homology","thm-homotopic-maps-induce-equal-maps-in-singular-cohomology","cor-homotopic-maps-induce-the-same-map-on-singular-homology","def-compactly-supported-singular-cohomology-of-a-locally-compact-space","lem-a-collar-identifies-boundary-local-homology-with-the-pair-fundamental-class","lem-compatible-local-orientation-classes-exist-over-compact-subsets","thm-cap-product-boundary-identity"]

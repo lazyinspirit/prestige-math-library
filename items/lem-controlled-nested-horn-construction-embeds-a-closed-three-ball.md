@@ -2,11 +2,12 @@
 id: "lem-controlled-nested-horn-construction-embeds-a-closed-three-ball"
 kind: "lemma"
 title: "A controlled nested horn construction embeds a closed three-ball"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-horn-replacement-block-has-injective-commutator-meridian","thm-banach-fixed-point","thm-euclidean-space-complete","thm-mean-value-inequality-for-total-derivatives","thm-heine-borel-rn","thm-compactness-agrees-with-metric-compactness","thm-compact-subset-of-a-hausdorff-space-is-closed","thm-extreme-value-metric","thm-intermediate-value","thm-invariance-of-domain","def-axiom-of-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

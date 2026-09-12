@@ -2,11 +2,12 @@
 id: "lem-weak-equivalences-of-pairs-induce-isomorphisms-on-relative-homotopy"
 kind: "lemma"
 title: "Weak equivalences of pairs induce isomorphisms on relative homotopy"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-weak-homotopy-equivalence","def-relative-homotopy-group","lem-relative-homotopy-operations-are-well-defined-in-their-valid-degrees","lem-finite-relative-homotopy-lifting-across-a-weak-equivalence","prop-relative-cw-inclusions-are-cofibrations"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

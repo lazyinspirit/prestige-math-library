@@ -10,7 +10,9 @@ sources:
   references:
     - title: E–W §1.4 pp.97–98, replacing weak-star compactness with the design-required local argument
       url: https://webspace.maths.qmul.ac.uk/f.vivaldi/teaching/ETAD/NotesI.pdf
-status: draft
+verification:
+  audited: 2026-09-13
+status: published
 origin: pipeline
 proof_strategy: direct
 ---

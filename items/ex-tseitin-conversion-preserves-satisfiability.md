@@ -2,7 +2,7 @@
 id: "ex-tseitin-conversion-preserves-satisfiability"
 kind: "example"
 title: "A Tseitin conversion preserves satisfiability"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["lem-tableau-to-cnf-map-has-polynomial-size-and-time"]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   statement: "ai-generated"
   proof: "ai-generated"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

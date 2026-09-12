@@ -2,12 +2,13 @@
 id: "def-hurewicz-homomorphism"
 kind: "definition"
 title: "Absolute and relative Hurewicz homomorphisms"
-status: "draft"
+status: published
 origin: "pipeline"
 proof_strategy: direct
 pipeline_run: "phase-2-next-17"
 deps: ["def-relative-homotopy-group","prop-cubical-and-spherical-models-of-higher-homotopy-agree","lem-relative-cubical-disk-model-and-compression","lem-relative-homotopy-operations-are-well-defined-in-their-valid-degrees","thm-higher-homotopy-classes-form-groups-and-are-abelian-above-degree-one","cor-homology-of-spheres","cor-contractible-nonempty-spaces-have-the-homology-of-a-point","thm-long-exact-sequence-of-a-pair-in-singular-homology","thm-singular-homology-satisfies-dimension-and-arbitrary-additivity","thm-singular-chain-homotopy-formula","lem-cubical-pinch-is-additive-on-relative-homology"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,7 +2,7 @@
 id: cor-positive-relative-consistency-of-ch-and-gch
 kind: corollary
 title: Positive relative consistency of CH and GCH
-status: draft
+status: published
 origin: pipeline
 deps: [thm-formal-consistency-of-zfc-plus-gch-from-zf]
 proof_strategy: direct
@@ -10,6 +10,7 @@ provenance:
   statement: ai-altered
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

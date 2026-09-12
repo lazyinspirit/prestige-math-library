@@ -2,11 +2,12 @@
 id: ex-great-circles-as-round-sphere-geodesics
 kind: example
 title: Great circles as round-sphere geodesics
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-17
 deps: [def-geodesic-of-an-affine-connection, prop-geodesics-have-constant-speed-for-a-metric-compatible-connection, def-affine-connection-on-a-smooth-manifold, def-covariant-derivative-along-a-curve, thm-fundamental-theorem-of-riemannian-geometry, prop-coordinate-formula-for-the-lie-bracket, thm-a-regular-level-set-is-an-embedded-submanifold, prop-tangent-space-of-a-regular-level-set-is-the-kernel, prop-pullback-of-a-riemannian-metric-is-riemannian-exactly-for-immersions, def-riemannian-metric-and-riemannian-manifold, thm-sine-and-cosine-derivatives, cor-trigonometric-parity-and-pythagorean-identity, thm-sine-and-cosine-parametrize-the-unit-circle, thm-chain-rule, cor-zero-derivative-implies-constant]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

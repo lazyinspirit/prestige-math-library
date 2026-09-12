@@ -2,11 +2,12 @@
 id: "thm-compact-locally-contractible-euclidean-subsets-are-neighborhood-retracts"
 kind: "theorem"
 title: "Compact locally contractible Euclidean subsets are neighborhood retracts"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-cw-complex-with-closure-finiteness-and-weak-topology","def-axiom-of-choice","thm-homotopic-maps-induce-equal-maps-in-singular-cohomology","prop-singular-cohomology-is-contravariantly-functorial"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

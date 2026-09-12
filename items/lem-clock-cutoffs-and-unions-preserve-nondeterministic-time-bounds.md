@@ -2,7 +2,7 @@
 id: "lem-clock-cutoffs-and-unions-preserve-nondeterministic-time-bounds"
 kind: "lemma"
 title: "Clocks, cutoffs, and finite unions preserve nondeterministic time bounds"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-nondeterministic-acceptance-time-and-exact-clock", "lem-nondeterministic-two-tape-simulation-with-linear-acceptance-time"]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   statement: "literature-derived"
   proof: "ai-altered"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

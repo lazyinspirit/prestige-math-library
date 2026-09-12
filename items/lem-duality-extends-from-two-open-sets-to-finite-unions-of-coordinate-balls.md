@@ -2,11 +2,12 @@
 id: "lem-duality-extends-from-two-open-sets-to-finite-unions-of-coordinate-balls"
 kind: "lemma"
 title: "Duality extends to finite unions of coordinate balls"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-cap-product-duality-is-an-isomorphism-on-euclidean-balls","lem-cap-product-commutes-with-the-mayer-vietoris-duality-ladder","thm-five-lemma-for-a-morphism-of-long-exact-sequences","lem-cap-duality-for-open-subsets-of-euclidean-space","prop-cap-product-naturality-and-projection-formula","lem-compatible-local-orientation-classes-exist-over-compact-subsets","def-compactly-supported-singular-cohomology-of-a-locally-compact-space","def-axiom-of-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

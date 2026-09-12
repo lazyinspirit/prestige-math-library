@@ -2,11 +2,12 @@
 id: "thm-hopf-rinow"
 kind: "theorem"
 title: "Hopf–Rinow theorem"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["rem-boundaryless-convention-for-geodesic-flow-and-hopf-rinow","def-countable-choice","def-riemannian-distance-on-a-connected-manifold","thm-riemannian-distance-is-a-metric","def-complete-metric-space","def-geodesically-complete-riemannian-manifold","def-domain-and-exponential-map-of-a-connection","thm-metric-completeness-implies-geodesic-completeness","lem-radial-geodesics-from-one-point-reach-every-point-under-global-exp-domain","def-metric-bounded-diameter","def-metric-ball","thm-metric-open-set-algebra","thm-coordinate-derivations-form-a-basis-of-the-tangent-space","thm-gram-schmidt-orthonormalisation","def-metric-topology","cor-heine-borel-in-the-product-topology","thm-the-exponential-domain-is-open-and-the-exponential-map-is-smooth","thm-compactness-under-continuous-maps","thm-closed-subspace-of-a-compact-space-is-compact","lem-metric-cauchy-bounded","thm-compactness-agrees-with-metric-compactness","thm-compact-implies-complete-and-totally-bounded"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

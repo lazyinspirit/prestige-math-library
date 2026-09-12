@@ -2,11 +2,12 @@
 id: "thm-integration-descends-to-compactly-supported-top-de-rham-cohomology"
 kind: "theorem"
 title: "Integration descends to compactly supported top de Rham cohomology"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-compactly-supported-de-rham-cochain-complex-and-cohomology","lem-finite-chart-localization-defines-choice-free-integration-and-compact-stokes","def-integral-of-a-compactly-supported-top-form-on-an-oriented-manifold","cor-integral-of-an-exact-compactly-supported-top-form-on-a-boundaryless-manifold-is-zero","lem-a-locally-finite-sum-is-finite-near-the-compact-support-of-a-form","def-countable-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

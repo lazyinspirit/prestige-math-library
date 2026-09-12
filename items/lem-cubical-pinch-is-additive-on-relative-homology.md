@@ -2,7 +2,9 @@
 id: "lem-cubical-pinch-is-additive-on-relative-homology"
 kind: "lemma"
 title: "Cubical pinch is additive on relative homology"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["prop-cubical-and-spherical-models-of-higher-homotopy-agree","lem-relative-cubical-disk-model-and-compression","def-higher-homotopy-group-by-based-cubes","def-relative-homotopy-group","def-relative-singular-homology","thm-long-exact-sequence-in-homology","thm-singular-homology-satisfies-homotopy-exactness-and-excision","lem-relative-homotopy-operations-are-well-defined-in-their-valid-degrees","lem-interval-exponential-law-and-quotient-homotopies"]

@@ -2,11 +2,12 @@
 id: "prop-naturality-of-the-de-rham-map"
 kind: "proposition"
 title: "Naturality of the de Rham map"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-the-de-rham-map-on-cohomology-is-well-defined","prop-smooth-singular-chains-and-cochains-are-functorial-for-smooth-maps","lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary","def-de-rham-integration-cochain-map"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

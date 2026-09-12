@@ -2,11 +2,12 @@
 id: "cor-homotopy-groups-of-a-cw-complex-depend-on-finite-skeleta-in-each-representative"
 kind: "corollary"
 title: "Each homotopy representative is supported on a finite CW subcomplex"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-cellular-approximation-for-maps-of-cw-pairs","lem-compact-cw-images-have-finite-cell-support-without-choice","thm-heine-borel-rn","thm-compactness-agrees-with-metric-compactness","thm-compact-subset-of-a-hausdorff-space-is-closed","thm-closed-subspace-of-a-compact-space-is-compact"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

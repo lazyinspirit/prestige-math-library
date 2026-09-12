@@ -2,11 +2,12 @@
 id: "ex-poincare-lefschetz-duality-for-a-disk-and-its-boundary"
 kind: "example"
 title: "Poincaré–Lefschetz duality for a disk"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-relative-fundamental-class-and-boundary-orientation","thm-poincare-lefschetz-duality","thm-long-exact-sequence-of-a-pair-in-singular-homology","cor-homology-of-spheres","def-axiom-of-choice","cor-contractible-nonempty-spaces-have-the-homology-of-a-point","def-singular-cohomology-with-coefficients","def-singular-cochain-complex-with-coefficients","def-relative-cap-product","thm-heine-borel-rn"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

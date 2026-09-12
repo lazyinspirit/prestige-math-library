@@ -2,11 +2,12 @@
 id: "thm-regular-value-formula-for-degree"
 kind: "theorem"
 title: "Regular-value formula for degree"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-regular-value-formula-for-compact-support-degree","lem-smooth-orientation-sign-is-the-local-integral-homology-multiplier","def-fundamental-class-of-a-compact-oriented-manifold","def-degree-of-a-map-between-oriented-closed-manifolds","thm-excision-for-singular-homology","thm-singular-homology-satisfies-dimension-and-arbitrary-additivity","prop-relative-homology-is-functorial-for-maps-of-pairs"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

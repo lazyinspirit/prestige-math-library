@@ -2,11 +2,12 @@
 id: "ex-de-rham-integration-cochain-on-a-smooth-path"
 kind: "example"
 title: "De Rham integration cochain on a smooth path"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-de-rham-integration-cochain-map"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

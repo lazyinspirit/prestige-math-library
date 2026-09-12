@@ -2,11 +2,12 @@
 id: "ex-lefschetz-number-of-the-identity-is-euler-characteristic"
 kind: "example"
 title: "The Lefschetz number of the identity is Euler characteristic"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-lefschetz-number-of-a-finite-cw-self-map","def-euler-characteristic-of-a-finite-cw-complex","lem-hopf-trace-formula","thm-relative-homology-of-consecutive-cw-skeleta","prop-cellular-maps-induce-cellular-chain-maps","cor-contractible-nonempty-spaces-have-the-homology-of-a-point"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

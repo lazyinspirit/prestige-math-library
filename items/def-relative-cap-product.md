@@ -2,11 +2,12 @@
 id: "def-relative-cap-product"
 kind: "definition"
 title: "Relative cap products with quotient domains displayed"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-relative-cup-product","thm-cap-product-boundary-identity","def-relative-singular-homology"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

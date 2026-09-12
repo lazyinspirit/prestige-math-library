@@ -7,6 +7,7 @@ provenance:
   statement: literature-derived
   proof: ai-altered
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
@@ -18,7 +19,7 @@ sources:
     - title: "Sharifi, Hochschild-Serre spectral sequence"
       url: "https://math.ucla.edu/~sharifi/homalg.pdf"
 landmark: true
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 proof_strategy: "direct"

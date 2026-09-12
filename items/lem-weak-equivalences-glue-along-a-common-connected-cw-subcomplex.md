@@ -2,7 +2,9 @@
 id: "lem-weak-equivalences-glue-along-a-common-connected-cw-subcomplex"
 kind: "lemma"
 title: "Weak equivalences glue along a common connected CW subcomplex"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-weak-homotopy-equivalence","def-n-connected-cw-pair","lem-cellular-attachments-with-finite-boundary-support-form-a-cw-complex","lem-compact-cw-images-have-finite-cell-support-without-choice","thm-heine-borel-rn","thm-compactness-agrees-with-metric-compactness","lem-finite-relative-homotopy-lifting-across-a-weak-equivalence","thm-cellular-approximation-for-maps-of-cw-pairs","lem-cellular-mapping-cylinders-and-relative-cylinders-are-cw-complexes","prop-higher-homotopy-basepoint-transport-and-moving-homotopies","def-higher-homotopy-group-by-based-cubes"]

@@ -2,7 +2,7 @@
 id: "cor-a-closed-embedded-submanifold-of-a-complete-riemannian-manifold-is-complete-in-the-induced-metric"
 kind: "corollary"
 title: "Closed embedded submanifolds of complete Riemannian manifolds are complete"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps:
@@ -23,6 +23,7 @@ provenance:
   proof: "ai-altered"
 proof_strategy: "direct"
 verification:
+  audited: 2026-09-13
   precheck: "pass"
   judge:
     model: "gpt-5.6-terra"

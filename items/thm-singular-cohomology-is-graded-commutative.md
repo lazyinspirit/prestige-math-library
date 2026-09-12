@@ -2,11 +2,12 @@
 id: "thm-singular-cohomology-is-graded-commutative"
 kind: "theorem"
 title: "Singular cohomology is graded commutative"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-simplex-factor-reversal-is-chain-homotopic-to-the-identity-diagonal","def-singular-cohomology-ring"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

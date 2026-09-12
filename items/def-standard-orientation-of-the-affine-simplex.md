@@ -2,12 +2,13 @@
 id: "def-standard-orientation-of-the-affine-simplex"
 kind: "definition"
 title: "Standard orientation of the affine simplex"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 proof_strategy: direct
 deps: ["def-standard-topological-simplex-and-its-affine-face-maps","def-orientation-of-a-simplex","def-determinant-line-orientation-of-a-finite-dimensional-real-vector-space","def-induced-boundary-orientation"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

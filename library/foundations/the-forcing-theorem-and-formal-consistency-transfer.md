@@ -1,7 +1,7 @@
 ---
 page: "the-forcing-theorem-and-formal-consistency-transfer"
 title: "The Forcing Theorem and Formal Consistency Transfer"
-status: draft
+status: published
 items: ["def-forcing-relation-for-atomic-formulas", "lem-atomic-forcing-relation-is-well-founded-and-definable", "def-forcing-relation-for-formulas", "lem-forcing-monotonicity-density-and-decision", "lem-forcing-truth-lemma", "thm-forcing-theorem", "thm-generic-extensions-satisfy-zf-and-zfc", "thm-forcing-preserves-ordinals", "lem-dense-forcing-name-translations-preserve-forcing", "thm-forcing-equivalence-and-boolean-completion", "rem-intermediate-models-and-complete-subalgebras", "thm-semantic-generic-extension-theorem-for-countable-transitive-models", "lem-forcing-transfer-for-finite-zfc-fragments", "thm-formal-consistency-transfer-by-forcing", "cor-relative-consistency-from-a-forced-sentence"]
 examples: []
 ---

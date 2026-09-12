@@ -1,7 +1,7 @@
 ---
 page: sat-tableaux-and-quantified-space-completeness
 title: "SAT Tableaux and Quantified-Space Completeness"
-status: draft
+status: published
 items: ["def-boolean-formulas-cnf-and-satisfiability-interface", "def-bounded-turing-computation-tableau-interface", "lem-tableau-formula-is-satisfiable-exactly-for-accepting-computations", "lem-tableau-to-cnf-map-has-polynomial-size-and-time", "thm-cook-levin-sat-completeness-interface", "thm-three-sat-completeness-interface", "def-polynomial-space-and-nondeterministic-polynomial-space", "lem-space-bounded-machine-configuration-count", "thm-tqbf-pspace-completeness-interface"]
 examples: []
 ---

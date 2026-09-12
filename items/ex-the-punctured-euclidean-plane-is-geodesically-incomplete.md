@@ -2,11 +2,12 @@
 id: ex-the-punctured-euclidean-plane-is-geodesically-incomplete
 kind: example
 title: The punctured Euclidean plane is geodesically incomplete
-status: draft
+status: published
 origin: pipeline
 pipeline_run: phase-2-next-17
 deps: [def-countable-choice, def-riemannian-metric-and-riemannian-manifold, prop-open-subsets-of-euclidean-space-have-the-standard-smooth-structure, prop-christoffel-formula-for-the-levi-civita-connection, prop-coordinate-geodesic-equation, thm-existence-uniqueness-and-smooth-dependence-of-geodesics, lem-the-geodesic-spray-is-a-well-defined-smooth-vector-field-on-tm, thm-local-existence-uniqueness-and-smooth-dependence-for-manifold-integral-curves, def-geodesically-complete-riemannian-manifold]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

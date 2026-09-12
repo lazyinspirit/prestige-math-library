@@ -2,7 +2,9 @@
 id: "ex-intersection-pairing-of-a-closed-oriented-surface"
 kind: "example"
 title: "Intersection pairing of a closed oriented surface"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-integral-surface-cup-pairing-from-the-oriented-polygon","def-fundamental-class-of-a-compact-oriented-manifold","thm-top-homology-characterizes-compact-orientable-manifolds","def-axiom-of-choice"]

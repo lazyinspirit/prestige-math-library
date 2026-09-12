@@ -14,7 +14,9 @@ sources:
       url: "https://andreas-lietz.github.io/resources/PDFs/Lecture_Notes.pdf"
     - title: "Moschovakis, Lecture Notes in Logic, formula coding and finite satisfaction recursion"
       url: "https://www.math.ucla.edu/~ynm/lectures/lnl.pdf"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 proof_strategy: "direct"
 ---

@@ -2,7 +2,9 @@
 id: "lem-integral-homology-of-a-wedge-of-higher-spheres-has-its-cell-basis"
 kind: "lemma"
 title: "Integral homology of a wedge of higher spheres has its cell basis"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-first-homotopy-group-of-a-wedge-of-higher-spheres-has-its-cell-basis","lem-cw-quotient-induces-relative-singular-homology-isomorphisms","thm-long-exact-sequence-of-a-pair-in-singular-homology","def-hurewicz-homomorphism","cor-homology-of-spheres","prop-zero-th-singular-homology-is-free-on-path-components","def-singular-simplex-and-singular-chain-group-with-coefficients","lem-compact-cw-images-have-finite-cell-support-without-choice","thm-heine-borel-rn","thm-compactness-agrees-with-metric-compactness"]

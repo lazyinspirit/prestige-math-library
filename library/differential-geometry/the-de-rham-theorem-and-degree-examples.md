@@ -1,7 +1,7 @@
 ---
 page: "the-de-rham-theorem-and-degree-examples"
 title: "The de Rham Theorem and Degree — Examples"
-status: "draft"
+status: published
 items: []
 examples: ["ex-de-rham-integration-cochain-on-a-smooth-path","ex-chain-stokes-on-an-oriented-two-simplex","ex-the-de-rham-map-on-the-angular-form","ex-the-local-de-rham-comparison-on-a-ball","ex-connector-compatibility-for-a-two-arc-cover-of-the-circle","ex-a-normalized-compactly-supported-top-form-on-euclidean-space","ex-degree-of-a-reflection-of-a-sphere","ex-degree-of-z-to-the-m-on-the-circle-from-a-regular-value","ex-a-two-sheeted-orientation-preserving-cover-has-degree-two","cex-a-map-with-two-preimages-but-degree-zero","cex-a-proper-endpoint-homotopy-that-is-not-a-proper-combined-map","ex-nonzero-degree-forces-surjectivity-on-closed-oriented-manifolds"]
 ---

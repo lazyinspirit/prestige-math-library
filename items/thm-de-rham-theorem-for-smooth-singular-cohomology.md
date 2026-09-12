@@ -2,11 +2,12 @@
 id: "thm-de-rham-theorem-for-smooth-singular-cohomology"
 kind: "theorem"
 title: "De Rham theorem for smooth singular cohomology"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-the-de-rham-map-is-an-isomorphism-on-convex-coordinate-domains","thm-the-de-rham-map-is-an-isomorphism-on-a-two-open-union-when-it-is-on-the-pieces-and-intersection","thm-countable-mayer-vietoris-open-set-principle","lem-de-rham-and-singular-cohomology-respect-countable-disjoint-unions","lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary","prop-naturality-of-the-de-rham-map","lem-the-de-rham-and-smooth-singular-mayer-vietoris-diagram-commutes-away-from-connectors","lem-the-de-rham-map-commutes-with-mayer-vietoris-connectors","def-countable-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

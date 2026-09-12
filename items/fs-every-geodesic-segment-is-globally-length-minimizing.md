@@ -2,11 +2,12 @@
 id: "fs-every-geodesic-segment-is-globally-length-minimizing"
 kind: "false-statement"
 title: "Every geodesic segment is globally length minimizing"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-countable-choice", "thm-existence-uniqueness-and-smooth-dependence-of-geodesics", "thm-radial-geodesics-minimize-length-in-a-normal-neighborhood", "prop-coordinate-geodesic-equation", "prop-christoffel-formula-for-the-levi-civita-connection", "def-circle-as-real-line-mod-integers", "prop-coordinate-criterion-for-a-riemannian-metric", "def-riemannian-metric-and-riemannian-manifold", "def-riemannian-speed-and-length"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

@@ -2,11 +2,12 @@
 id: "thm-freudenthal-suspension-theorem"
 kind: "theorem"
 title: "Freudenthal suspension theorem"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-homotopy-excision","def-adjunction-cone-suspension","thm-long-exact-sequence-of-relative-homotopy-groups","lem-cellular-mapping-cylinders-and-relative-cylinders-are-cw-complexes","lem-cw-quotients-and-collapse-of-a-contractible-subcomplex","lem-weak-equivalences-of-pairs-induce-isomorphisms-on-relative-homotopy","prop-higher-homotopy-basepoint-transport-and-moving-homotopies","lem-relative-cubical-disk-model-and-compression","lem-interval-exponential-law-and-quotient-homotopies"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

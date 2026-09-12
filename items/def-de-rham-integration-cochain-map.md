@@ -2,13 +2,14 @@
 id: "def-de-rham-integration-cochain-map"
 kind: "definition"
 title: "De Rham integration cochain"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 proof_strategy: direct
 deps: ["def-integral-of-a-form-over-a-smooth-singular-simplex","def-smooth-singular-chain-and-cochain-complexes","lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary","thm-multidimensional-integral-properties"]
 justified_by: ["thm-de-rham-integration-is-a-cochain-map"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

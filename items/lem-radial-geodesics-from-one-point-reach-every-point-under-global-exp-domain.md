@@ -2,11 +2,12 @@
 id: "lem-radial-geodesics-from-one-point-reach-every-point-under-global-exp-domain"
 kind: "lemma"
 title: "Radial geodesics from one point reach every point under global exponential domain"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-countable-choice","prop-components-of-a-topological-manifold-are-open-and-at-most-countable","def-riemannian-distance-on-a-connected-manifold","thm-riemannian-distance-is-a-metric","thm-the-riemannian-distance-topology-is-the-manifold-topology","def-riemannian-speed-and-length","prop-length-dominates-endpoint-distance","prop-length-is-additive-under-concatenation-and-invariant-under-reversal","thm-intermediate-value","thm-coordinate-derivations-form-a-basis-of-the-tangent-space","thm-gram-schmidt-orthonormalisation","def-metric-topology","cor-heine-borel-in-the-product-topology","thm-compactness-under-continuous-maps","thm-existence-of-normal-neighborhoods","cor-local-formula-for-distance-from-the-center-of-a-normal-neighborhood","prop-exponential-map-scales-geodesic-time","prop-geodesics-have-constant-speed-for-a-metric-compatible-connection","thm-existence-uniqueness-and-smooth-dependence-of-geodesics","thm-a-length-minimizing-piecewise-smooth-curve-is-a-constant-speed-geodesic-up-to-reparametrization","cor-cauchy-reals-lub-complete"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

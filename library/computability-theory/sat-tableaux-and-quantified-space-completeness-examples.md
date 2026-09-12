@@ -1,7 +1,7 @@
 ---
 page: sat-tableaux-and-quantified-space-completeness-examples
 title: "SAT Tableaux and Quantified-Space Completeness: Examples"
-status: draft
+status: published
 items: []
 examples: ["ex-a-two-step-computation-tableau-and-its-local-clauses", "ex-tseitin-conversion-preserves-satisfiability", "ex-qbf-reachability-recursion-space-accounting"]
 ---

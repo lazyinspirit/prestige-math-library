@@ -2,11 +2,12 @@
 id: "lem-a-weak-equivalence-of-cw-complexes-has-vanishing-relative-homotopy-groups"
 kind: "lemma"
 title: "A weak equivalence has vanishing mapping-cylinder relative groups"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-weak-homotopy-equivalence","thm-long-exact-sequence-of-relative-homotopy-groups","lem-interval-exponential-law-and-quotient-homotopies","prop-higher-homotopy-groups-are-functorial-and-based-homotopy-invariant","prop-higher-homotopy-basepoint-transport-and-moving-homotopies","thm-quotient-universal-property"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

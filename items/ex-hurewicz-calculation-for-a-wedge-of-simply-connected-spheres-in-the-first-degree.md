@@ -2,11 +2,12 @@
 id: "ex-hurewicz-calculation-for-a-wedge-of-simply-connected-spheres-in-the-first-degree"
 kind: "example"
 title: "Hurewicz calculation for a wedge of simply connected spheres"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-absolute-hurewicz-theorem","lem-first-homotopy-group-of-a-wedge-of-higher-spheres-has-its-cell-basis","lem-integral-homology-of-a-wedge-of-higher-spheres-has-its-cell-basis","def-hurewicz-homomorphism","def-axiom-of-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

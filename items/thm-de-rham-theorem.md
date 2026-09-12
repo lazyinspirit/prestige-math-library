@@ -2,11 +2,12 @@
 id: "thm-de-rham-theorem"
 kind: "theorem"
 title: "The de Rham theorem"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["cor-de-rham-vector-space-comparison-with-continuous-singular-cohomology","lem-de-rham-integration-respects-wedge-and-cup-in-cohomology","def-singular-cohomology-ring","thm-singular-cohomology-is-graded-commutative","def-countable-choice","def-de-rham-cohomology-ring","lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary","prop-differential-forms-form-a-graded-commutative-algebra"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

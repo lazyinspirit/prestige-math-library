@@ -2,7 +2,7 @@
 id: "ex-shortest-acceptance-and-clocked-all-branch-halting"
 kind: "example"
 title: "Shortest acceptance versus clocked all-branch halting"
-status: "draft"
+status: published
 origin: "pipeline"
 deps: ["def-nondeterministic-acceptance-time-and-exact-clock", "lem-clock-cutoffs-and-unions-preserve-nondeterministic-time-bounds"]
 justified_by: []
@@ -11,6 +11,7 @@ provenance:
   statement: "ai-generated"
   proof: "ai-generated"
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

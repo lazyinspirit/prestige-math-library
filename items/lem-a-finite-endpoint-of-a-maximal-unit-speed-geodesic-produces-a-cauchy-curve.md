@@ -2,11 +2,12 @@
 id: "lem-a-finite-endpoint-of-a-maximal-unit-speed-geodesic-produces-a-cauchy-curve"
 kind: "lemma"
 title: "A finite endpoint of a maximal unit-speed geodesic produces a Cauchy curve"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["prop-components-of-a-topological-manifold-are-open-and-at-most-countable","thm-path-connected-implies-connected","def-riemannian-distance-on-a-connected-manifold","thm-riemannian-distance-is-a-metric","def-riemannian-speed-and-length","prop-length-dominates-endpoint-distance"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

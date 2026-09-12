@@ -1,7 +1,7 @@
 ---
 page: brauers-first-main-theorem-examples
 title: "Brauers First Main Theorem \u2014 Examples"
-status: draft
+status: published
 items:
 - ex-brauer-correspondence-in-s7
 - ex-brauer-correspondence-for-sl2-over-fp

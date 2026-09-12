@@ -2,11 +2,12 @@
 id: "lem-the-de-rham-complex-and-pullback-extend-to-manifolds-with-boundary"
 kind: "lemma"
 title: "The de Rham complex and pullback extend to manifolds with boundary"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-smooth-chart-atlas-and-structure-on-a-manifold-with-boundary","lem-smooth-half-space-extensions-have-the-same-derivatives-on-the-half-space","thm-local-coordinate-formula-for-the-exterior-derivative","thm-the-exterior-derivative-commutes-with-pullback","thm-the-exterior-derivative-squares-to-zero","thm-the-exterior-derivative-is-a-graded-derivation","prop-pullback-of-forms-is-smooth-functorial-and-preserves-wedges","def-de-rham-cochain-complex","def-smooth-map-between-manifolds-with-boundary"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

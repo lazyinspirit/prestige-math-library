@@ -2,11 +2,12 @@
 id: "ex-integral-cohomology-ring-of-complex-projective-space"
 kind: "example"
 title: "Integral cohomology ring of complex projective space"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-cellular-homology-computes-singular-homology","def-oriented-cellular-chain-group","prop-cellular-maps-induce-cellular-chain-maps","thm-topological-universal-coefficient-short-exact-sequence-for-cohomology","thm-long-exact-sequence-of-a-pair-in-singular-cohomology","thm-naturality-of-the-singular-cohomology-pair-sequence","thm-homotopic-maps-induce-equal-maps-in-singular-cohomology","thm-excision-for-singular-cohomology","lem-local-coordinate-cup-products-generate-top-relative-cohomology","prop-relative-cup-products-are-natural-and-compatible-with-connectors","prop-cup-product-is-natural-unital-and-associative","def-axiom-of-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

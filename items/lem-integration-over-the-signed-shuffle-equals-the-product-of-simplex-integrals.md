@@ -2,7 +2,9 @@
 id: "lem-integration-over-the-signed-shuffle-equals-the-product-of-simplex-integrals"
 kind: "lemma"
 title: "Integration over the signed shuffle equals the product of simplex integrals"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["def-singular-chain-cross-product-on-generators","def-integral-of-a-form-over-a-smooth-singular-simplex","lem-simplex-integrals-are-independent-of-affine-coordinate-identification","prop-pullback-of-forms-is-smooth-functorial-and-preserves-wedges","thm-change-of-variables-for-compact-jordan-sets","lem-integral-additivity-over-a-content-zero-almost-partition","thm-jordan-fubini-by-sections","thm-jordan-boundary-criterion","thm-graphs-of-continuous-functions-have-content-zero","thm-continuous-functions-on-compact-jordan-sets-are-integrable","thm-heine-borel-rn"]

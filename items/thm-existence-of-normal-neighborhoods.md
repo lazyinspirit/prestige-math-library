@@ -2,11 +2,12 @@
 id: "thm-existence-of-normal-neighborhoods"
 kind: "theorem"
 title: "Existence of normal neighborhoods"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["thm-the-differential-of-exp-p-at-zero-is-the-identity","lem-choice-free-smooth-inverse-function-theorem-in-euclidean-space","thm-the-exponential-domain-is-open-and-the-exponential-map-is-smooth","def-c-r-and-smooth-maps-between-smooth-manifolds","thm-coordinate-formula-for-the-differential","def-countable-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

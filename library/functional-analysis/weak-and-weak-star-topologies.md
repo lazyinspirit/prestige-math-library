@@ -1,7 +1,7 @@
 ---
 page: "weak-and-weak-star-topologies"
 title: "Weak and Weak Star Topologies"
-status: "draft"
+status: published
 items: ["def-weak-topology-on-a-normed-space", "lem-basic-weak-neighborhoods", "thm-weak-topology-is-hausdorff", "def-weak-convergence-of-nets-and-sequences", "lem-basic-weak-star-neighborhoods", "def-weak-star-convergence", "thm-continuous-dual-of-a-weak-topology", "thm-continuous-dual-of-a-weak-star-topology", "thm-norm-closed-convex-iff-weakly-closed", "cor-weak-closure-of-the-unit-sphere-is-the-closed-unit-ball", "thm-weakly-convergent-sequences-are-norm-bounded", "cor-weak-convergence-implies-lower-semicontinuity-of-the-norm", "thm-weak-and-norm-topologies-agree-iff-finite-dimensional", "thm-infinite-dimensional-weak-topology-is-not-first-countable", "lem-annihilators-are-weak-and-weak-star-closed", "thm-transpose-is-weak-to-weak-continuous", "thm-transpose-is-weak-star-to-weak-star-continuous", "def-strong-and-weak-operator-topologies", "lem-norm-implies-strong-implies-weak-operator-convergence"]
 examples: []
 ---

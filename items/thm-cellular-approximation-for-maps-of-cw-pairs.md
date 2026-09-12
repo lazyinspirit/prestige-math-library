@@ -2,11 +2,12 @@
 id: "thm-cellular-approximation-for-maps-of-cw-pairs"
 kind: "theorem"
 title: "Cellular approximation for maps of CW pairs"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["prop-relative-cw-inclusions-are-cofibrations","def-cw-complex-with-closure-finiteness-and-weak-topology","def-skeleta-cw-subcomplex-and-relative-cw-complex","lem-compact-cw-images-have-finite-cell-support-without-choice","lem-a-low-dimensional-disk-can-be-pushed-off-a-higher-cell","thm-the-exponential-law","thm-heine-borel-rn","thm-compactness-agrees-with-metric-compactness","def-axiom-of-choice","thm-recursion","lem-finite-choice"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass

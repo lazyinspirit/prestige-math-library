@@ -2,7 +2,9 @@
 id: "thm-tqbf-pspace-completeness-interface"
 kind: "theorem"
 title: "TQBF is PSPACE-complete"
-status: "draft"
+verification:
+  audited: 2026-09-13
+status: published
 origin: "pipeline"
 deps: ["def-boolean-formulas-cnf-and-satisfiability-interface", "def-polynomial-space-and-nondeterministic-polynomial-space", "lem-space-bounded-machine-configuration-count", "def-multitape-and-nondeterministic-machines", "def-one-step-configuration-relation", "def-turing-machine-initial-and-halting-configuration-interface", "def-polynomial-time-verifier-and-reduction-interface", "lem-tableau-to-cnf-map-has-polynomial-size-and-time"]
 justified_by: []

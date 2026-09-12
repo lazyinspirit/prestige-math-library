@@ -2,11 +2,12 @@
 id: "thm-stokes-theorem-for-smooth-singular-chains"
 kind: "theorem"
 title: "Stokes theorem for smooth singular chains"
-status: "draft"
+status: published
 origin: "pipeline"
 pipeline_run: "phase-2-next-17"
 deps: ["lem-stokes-theorem-for-the-standard-simplex","def-smooth-singular-chain-and-cochain-complexes","def-integral-of-a-form-over-a-smooth-singular-simplex","lem-simplex-integrals-are-independent-of-affine-coordinate-identification","thm-the-exterior-derivative-commutes-with-pullback","prop-pullback-of-forms-is-smooth-functorial-and-preserves-wedges"]
 verification:
+  audited: 2026-09-13
   judge:
     model: "gpt-5.6-terra"
     verdict: pass
