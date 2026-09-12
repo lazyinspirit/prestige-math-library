@@ -10,6 +10,7 @@ import {
   certifyAuditorCreatedItems,
   loadAuditorCreatedCertifications,
   authorResultAllowed,
+  recordOwnerRecertification,
 } from '../../auditor-created-items.mjs';
 import { writeAuditorBaseline, certifyAuditorItems } from '../../step3-auditor-items.mjs';
 import { itemHashJudge } from '../../item-hash.mjs';
@@ -81,6 +82,31 @@ test('Step-7 recovery recognition rejects malformed labels, wrong roles and inva
     f.result('repair-8-a-round-1', changes);
     assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 7), /no successful Step 7/, JSON.stringify(changes));
   }
+});
+
+test('an owner-held Step-7 contract repair can recertify an already auditor-created item', t => {
+  const f = recoveryFixture(t);
+  const evidence = join(f.root, 'research', 'owner-lem-created.md');
+  assert.throws(() => recordOwnerRecertification(f.root, 'r', 7, 'lem-created', evidence,
+    'Reviewed the repaired contract'), /no prior auditor-created certification/);
+  f.result('step7-a');
+  const first = certifyAuditorCreatedItems(f.root, 'r', 7);
+  const contractPath = join(f.root, 'research', 'r-batch-1.proof-contracts.json');
+  writeFileSync(contractPath, JSON.stringify({ contracts: { 'lem-created': { risk: 'high' } } }));
+  const afterDispatch = new Date('2025-01-01T00:00:11.000Z');
+  utimesSync(contractPath, afterDispatch, afterDispatch);
+  assert.throws(() => certifyAuditorCreatedItems(f.root, 'r', 7), /no successful Step 7/);
+  writeFileSync(evidence, 'lem-created: owner checked the revised risk contract and the exact item.');
+  recordOwnerRecertification(f.root, 'r', 7, 'lem-created', evidence,
+    'Owner-held gate repair: the revised contract was checked against the item.');
+  const renewed = certifyAuditorCreatedItems(f.root, 'r', 7);
+  assert.notEqual(renewed.items[0].contract_sha256, first.items[0].contract_sha256);
+  assert.equal(renewed.items[0].author_result, first.items[0].author_result);
+  assert.ok(renewed.items[0].owner_recertification?.sha256);
+  const path = join(f.root, 'research', 'r-step7-auditor-certifications.json');
+  assert.equal(loadAuditorCreatedCertifications(path).length, 1);
+  writeFileSync(evidence, 'tampered evidence');
+  assert.throws(() => loadAuditorCreatedCertifications(path), /invalid owner recertification/);
 });
 
 for (const step of [5, 8]) test(`Step ${step} cannot use Step-7 recovery provenance`, t => {

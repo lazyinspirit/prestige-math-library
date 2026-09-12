@@ -26,11 +26,66 @@ const hashValue = value => sha(JSON.stringify(canonical(value)) ?? 'undefined');
 // Preserve v1 stage inventories; only provenance receipts need a new policy.
 const BASELINE_POLICY = 'auditor-created-stage-bypass-v1';
 const CERTIFICATION_POLICY = 'auditor-created-stage-bypass-v2';
+const OWNER_RECERTIFICATION_POLICY = 'auditor-created-owner-recertification-v1';
+const CARRIER_KEYS = ['guard_sha256', 'judge_sha256', 'item_file_sha256',
+  'manifest_sha256', 'contract_sha256', 'step5_subject_sha256'];
 
 export const auditorCreatedBaselinePath = (root, run, step) =>
   join(root, 'research', `${safe(run, 'run')}-step${safe(String(step), 'step')}-auditor-baseline.json`);
 export const auditorCreatedCertificationsPath = (root, run, step) =>
   join(root, 'research', `${safe(run, 'run')}-step${safe(String(step), 'step')}-auditor-certifications.json`);
+const ownerRecertificationPath = (root, run, step, id, hashes) =>
+  join(root, 'research', `${safe(run, 'run')}-step${safe(String(step), 'step')}-owner-recertification-${safe(id, 'item ID')}-${hashValue({ id, carriers: Object.fromEntries(CARRIER_KEYS.map(key => [key, hashes[key]])) }).slice(0, 16)}.json`);
+
+function ownerRecertification(root, run, step, id, hashes, authorResult) {
+  const path = ownerRecertificationPath(root, run, step, id, hashes);
+  if (!existsSync(path)) return null;
+  const bytes = readFileSync(path, 'utf8');
+  const receipt = JSON.parse(bytes);
+  const evidencePath = typeof receipt.evidence === 'string' ? resolve(root, receipt.evidence) : '';
+  const researchRoot = resolve(root, 'research');
+  if (receipt.version !== 1 || receipt.policy !== OWNER_RECERTIFICATION_POLICY
+    || receipt.run !== run || receipt.step !== Number(step) || receipt.id !== id
+    || receipt.owner !== true || receipt.author_result !== authorResult
+    || !String(receipt.reason ?? '').trim() || !Number.isFinite(Date.parse(receipt.at))
+    || !evidencePath.startsWith(`${researchRoot}/`) || !existsSync(evidencePath)
+    || sha(readFileSync(evidencePath, 'utf8')) !== receipt.evidence_sha256
+    || CARRIER_KEYS.some(key => receipt.carriers?.[key] !== hashes[key]))
+    throw Error(`${id}: invalid owner recertification receipt`);
+  return { path: `research/${path.split('/').at(-1)}`, sha256: sha(bytes) };
+}
+
+export function recordOwnerRecertification(root, run, step, id, evidence, reason) {
+  step = Number(step);
+  if (![5, 7, 8].includes(step)) throw Error('Owner recertification supports steps 5, 7, and 8');
+  safe(run, 'run'); safe(id, 'item ID');
+  if (!String(reason ?? '').trim()) throw Error(`${id}: owner recertification needs a reason`);
+  const priorPath = auditorCreatedCertificationsPath(root, run, step);
+  if (!existsSync(priorPath)) throw Error(`${id}: no prior auditor-created certification to recertify`);
+  const prior = provenanceRows(root, run, step).find(row => row.id === id);
+  if (!prior) throw Error(`${id}: no prior successful auditor/adjudicator author provenance`);
+  const row = inventory(root, run).find(row => row.id === id);
+  if (!row) throw Error(`${id}: item is absent from the current run manifest`);
+  const hashes = carrierHashes(root, run, row);
+  const evidencePath = resolve(root, evidence);
+  const researchRoot = resolve(root, 'research');
+  if (!evidencePath.startsWith(`${researchRoot}/`) || !existsSync(evidencePath)
+    || !readFileSync(evidencePath, 'utf8').includes(id))
+    throw Error(`${id}: owner evidence must be a research file naming the item`);
+  const path = ownerRecertificationPath(root, run, step, id, hashes);
+  if (existsSync(path)) {
+    ownerRecertification(root, run, step, id, hashes, prior.author_result);
+    return { path, reused: true };
+  }
+  const receipt = { version: 1, policy: OWNER_RECERTIFICATION_POLICY, run, step, id,
+    owner: true, at: new Date().toISOString(), reason: String(reason).trim(),
+    evidence: `research/${evidencePath.split('/').at(-1)}`,
+    evidence_sha256: sha(readFileSync(evidencePath, 'utf8')),
+    author_result: prior.author_result,
+    carriers: Object.fromEntries(CARRIER_KEYS.map(key => [key, hashes[key]])) };
+  writeFileSync(path, `${JSON.stringify(receipt, null, 2)}\n`);
+  return { path, reused: false };
+}
 
 function inventory(root, run) {
   const items = [];
@@ -194,6 +249,12 @@ function provenanceRows(root, run, step, cache = new Map()) {
         || !String(owner.reason ?? '').trim())
         throw Error(`${row.id}: invalid owner recertification provenance`);
     }
+    if (step !== 3 && row.owner_recertification !== undefined) {
+      const marker = ownerRecertification(root, run, step, row.id, row, row.author_result);
+      if (!marker || marker.path !== row.owner_recertification.path
+        || marker.sha256 !== row.owner_recertification.sha256)
+        throw Error(`${row.id}: invalid owner recertification provenance`);
+    }
     const originStep = row.origin_step ?? step;
     if (![3, 5, 7, 8].includes(originStep) || originStep > step)
       throw Error(`${row.id}: invalid auditor-created origin step`);
@@ -323,14 +384,19 @@ export function certifyAuditorCreatedItems(root, run, step) {
       const before = baseline.item_carriers?.[id];
       if (!before || matchesCarriers(before, row, hashes)) continue;
     }
+    const covering = priorCurrent ? null : coveringResult(results, itemPath, manifestPath, contractPath, batch);
+    const owner = !priorCurrent && !covering && prior
+      ? ownerRecertification(root, run, step, id, hashes, prior.author_result) : null;
     const author = priorCurrent ? { result_file: prior.author_result }
-      : coveringResult(results, itemPath, manifestPath, contractPath, batch);
+      : covering ?? (owner ? { result_file: prior.author_result } : null);
     if (!author) throw Error(`${id}: no successful Step ${step} auditor/adjudicator dispatch authored its current carriers`);
     const originStep = carried?.origin_step ?? carried?.step;
     if (priorCurrent) for (const key of Object.keys(hashes)) hashes[key] = prior[key];
     certified.push({ id, page: row.page, batch,
       ...hashes,
       author_result: author.result_file,
+      ...((priorCurrent && prior.owner_recertification) || owner
+        ? { owner_recertification: priorCurrent ? prior.owner_recertification : owner } : {}),
       ...(carried ? { origin_step: originStep,
         origin_baseline_sha256: sha(JSON.stringify(stageBaseline(root, run, originStep))) } : {}),
     });
@@ -349,13 +415,17 @@ if (process.argv[1] && import.meta.url === pathToFileURL(resolve(process.argv[1]
     const args = process.argv.slice(2), command = args[0];
     const value = flag => { const at = args.indexOf(flag); return at < 0 ? undefined : args[at + 1]; };
     const run = value('--run'), step = Number(value('--step'));
-    if (!run || ![5, 7, 8].includes(step))
-      throw Error('Usage: auditor-created-items.mjs baseline|certify --run RUN --step 5|7|8');
+    const usage = 'Usage: auditor-created-items.mjs baseline|certify --run RUN --step 5|7|8; owner-recertify --run RUN --step 5|7|8 --id ITEM --evidence research/FILE --reason TEXT';
+    if (!run || ![5, 7, 8].includes(step)) throw Error(usage);
     const result = command === 'baseline'
       ? writeAuditorCreatedBaseline(process.cwd(), run, step)
-      : command === 'certify' ? certifyAuditorCreatedItems(process.cwd(), run, step) : null;
-    if (!result) throw Error('Usage: auditor-created-items.mjs baseline|certify --run RUN --step 5|7|8');
-    console.log(`step${step}-auditor-${command === 'baseline' ? 'baseline' : 'certifications'}: ${result.items.length ?? result.items} item(s) ${result.reused ? 'reused' : command === 'baseline' ? 'recorded' : 'certified'}`);
+      : command === 'certify' ? certifyAuditorCreatedItems(process.cwd(), run, step)
+        : command === 'owner-recertify'
+          ? recordOwnerRecertification(process.cwd(), run, step, value('--id'), value('--evidence'), value('--reason'))
+          : null;
+    if (!result) throw Error(usage);
+    if (command === 'owner-recertify') console.log(`step${step}-owner-recertification: ${result.path} ${result.reused ? 'reused' : 'recorded'}`);
+    else console.log(`step${step}-auditor-${command === 'baseline' ? 'baseline' : 'certifications'}: ${result.items.length ?? result.items} item(s) ${result.reused ? 'reused' : command === 'baseline' ? 'recorded' : 'certified'}`);
   } catch (error) {
     console.error(error.message);
     process.exitCode = 1;

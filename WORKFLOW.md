@@ -163,10 +163,17 @@ cross-batch dependencies, changed consumers, exact hashes, coverage, sources
 and ledger.
 
 Step-5/7/8 auditor-created certificates bind the item, manifest entry and owning
-contract. Initial certification and changed-carrier recertification require a
-successful author dispatch covering the latest item, manifest or contract write.
-Unchanged hash-bound evidence survives restart and metadata-only file touches;
-a contract-only edit requires fresh covering author evidence.
+contract. Initial certification requires a successful auditor/adjudicator author
+dispatch. Changed-carrier recertification normally requires a successful covering
+author dispatch. For an owner-held gate repair of an already certified item, the
+owner may instead record an exact-carrier, evidence-hash-bound receipt with
+`node tools/auditor-created-items.mjs owner-recertify --run RUN --step 5|7|8
+--id ITEM --evidence research/FILE --reason TEXT`, then run `certify` again.
+This preserves the original successful author result as origin evidence and
+cannot certify a never-authored new item. The receipt is checked again by every
+consumer; editing it or its evidence revokes certification. Unchanged hash-bound
+evidence survives restart and metadata-only file touches; a contract-only edit
+requires either fresh covering author evidence or this explicit owner receipt.
 These provenance receipts use `auditor-created-stage-bypass-v2`. Legacy v1
 receipts are rejected by consumers and revalidated by the certifier, retaining
 the immutable v1 inventory baseline. Reuse requires the same run and baseline
