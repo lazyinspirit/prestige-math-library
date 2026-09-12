@@ -1651,10 +1651,21 @@ export class Executor {
   }
 
   private async spendRepairRound(stage: Stage, failure: GateResult, ctx: Ctx, describe: string): Promise<'spent' | 'waiting' | 'preflight-blocked' | 'none'> {
-    if (stage.onHold) {
+    // The production math-library workflow is owner-terminal at every gate.
+    // This policy is checked before stage hooks and budget accounting, so a
+    // local `onGateFailure` implementation cannot accidentally launch another
+    // repair wave. Synthetic artifact stalemates use this same path.
+    if (this.config.gateFailurePolicy === 'owner' || stage.onHold) {
       let reason: string;
-      try { reason = (await stage.onHold({ ctx, stage, failure })).owner.reason; }
-      catch (error: any) { reason = `hold report failed: ${error?.message ?? error}`; }
+      if (stage.onHold) {
+        try { reason = (await stage.onHold({ ctx, stage, failure })).owner.reason; }
+        catch (error: any) { reason = `hold report failed: ${error?.message ?? error}`; }
+      } else {
+        const detail = failure.why || failure.output || 'no gate diagnostic was emitted';
+        const advisory = (failure.advisory ?? []).map((row: any) =>
+          `${row.stage ?? stage.id}/${row.id}: ${row.why || row.output || 'failed'}`);
+        reason = [`${failure.id}: ${detail}`, ...advisory].join('; ');
+      }
       const message = `stage ${stage.id}: owner decision required — ${reason}`;
       if (this.state.addBlocker(stage.id, message, `owner:${stage.id}`))
         this.reporter.notify('owner-escalation', message);

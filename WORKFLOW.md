@@ -23,6 +23,13 @@ These are the only active step numbers. Historical run artifacts remain evidence
 not aliases or current instructions. Do not install this workflow under a live
 engine or reuse historical receipts: use a fresh run after owner coordination.
 
+Every failed gate in Steps 1–9 is owner-terminal. The production executor
+escalates it before consulting any stage repair hook or charging any repair
+budget. Normal first-pass authoring, adjudication, repair and judging stages are
+unchanged; only gate-triggered follow-up waves are forbidden. After an owner or
+authorized operator changes the evidence, `retry` re-arms the gates against the
+current disk state. It does not authorize an automatic repair round.
+
 ## Agents
 
 Every agent must be impartial and honest about its mathematical understanding.
@@ -32,8 +39,8 @@ The dispatcher and item-judge prompt apply this rule to every role.
 
 | Assignment | Model / effort |
 |---|---|
-| Step 1 scaffolding; Step 3a scope; group Alpha | Sol / high |
-| Step 3b group authors | Astra / medium |
+| Step 1 scaffolding; group Alpha | Sol / high |
+| Step 3a scope and Step 3b group authors | Sol / xhigh |
 | Step 5a/5b; Step 6 group readers; Step 9 agent closure | DeepSeek V4.1 Flash / max |
 | Assignment; ordinary Step 8 work | Terra / high |
 | Item judges | Terra / xhigh |
@@ -101,15 +108,12 @@ close decisions or reuse the unchanged-hash path. They must be revalidated
 against the original immutable v1 inventory baseline. No input write after
 the author result's `ended_at` is accepted, including subsecond writes.
 
-Before routing Step-3 artifact-incomplete recovery, the engine also certifies
-eligible completed authors while leaving unfinished or changed additions open.
-A pair with any uncertified addition receives no scope-delta certificate. This pass uses
-the same V2 hash/provenance checks; it does not replace strict final certification
-or any ordinary gate. Synthetic recovery is limited to the inactive units named
-by the failure, and a group with a live writer is not redispatched. Completed
-groups do not receive self-review jobs merely because a restart precedes issuance
-of their mechanical certificates. Receipt-only closure outside that artifact
-failure waits for the normal item-decision gate.
+Artifact-incomplete Step-3 results are owner-held and are not synthetically
+redispatched. After owner-authorized correction, eligible completed authors can
+still receive their mechanical V2 certificates while unfinished or changed
+additions remain open. A pair with any uncertified addition receives no
+scope-delta certificate. This does not replace strict final certification or
+any ordinary gate.
 When V2 items, scope certificates and baseline binding are unchanged, certification
 preserves the receipt bytes and timestamp; recovery still refreshes pending diagnostics.
 
@@ -300,8 +304,9 @@ stamps through the tool. Genuine Step-8 auditor/adjudicator-created additions
 receive the same distinct hash-bound certification and are excluded from the
 judge/re-adjudication loop. The same applies to legitimately refreshed earlier
 auditor-created items with retained origin evidence; ordinary baseline originals
-are not exempt. Receipt recovery addresses only failed checks and
-missing contracts; it preserves completed spine readings and valid evidence.
+are not exempt. A missing or failed receipt gate is owner-held; it does not
+launch another author. Owner-authorized correction preserves completed spine
+readings and valid evidence.
 Coverage checks skip context hashing when the judge ledger is missing and keep
 the hash cache separate from the ledger, including nonstandard filenames.
 Proof-contract reports drain stdout/stderr before exit so large JSON diagnostics
@@ -328,7 +333,8 @@ translated; mathematical prose, verdicts and original execution receipts are
 preserved. No old dispatch receipt or stage completion is copied into new state.
 The engine executes a real import check, all current authored-content/review
 gates, then fresh Step 5b reconciliation and closure before judgment. The original
-pre-author impact baseline survives. Repairs retain normal budgets and ownership.
+pre-author impact baseline survives. Gate failures remain owner-held throughout
+migration; no automatic repair budget is available.
 The private manifest hash-schema key is version-stable across step renumbering;
 stage names are not a reason to invalidate unchanged reviewed mathematics.
 Scope snapshots and cross-group carriers use that same schema.
@@ -349,13 +355,13 @@ node tools/tsx-run.mjs tools/autopilot/bin/autopilot.mts doctor --run RUN --stat
 The command also supports plan, start, pause, resume, retry, stop and report.
 pause stops new dispatches, not active work. resume clears pause but does not
 start a dead controller. retry re-arms unfinished work after intervention without
-erasing completed coverage or lifetime judge limits. stop exits the controller
+erasing completed coverage or lifetime judge limits; it does not turn a gate
+failure into an automatic repair wave. stop exits the controller
 without killing workers. Stage skipping needs explicit owner authority.
 
 Stages clear only after successful matching coverage, artifacts and gates. The
-engine adopts compatible workers and waits for repair jobs before spending another
-round. Restart adoption includes recorded recovery workers with empty `covers`:
-they add no primary coverage but hold the whole-stage gate until they exit.
+engine adopts compatible workers and waits for existing in-flight work. Any
+subsequent gate failure is owner-held before a repair hook or budget can run.
 Infrastructure retries are bounded; unchanged mathematical failures hold.
 
 An owner-authorized fatal finding discovered after Step 7 may use
@@ -366,13 +372,12 @@ command archives successful result receipts and reopens only
 `8-changes-judge`, `8-close`, `8-changes-stamp` and `8-receipt`; it preserves
 Step 7 history and leaves the run paused. This is recovery from a newly
 discovered defect, not an additional ordinary repair loop.
-Step 5 budgets three repairs per gate/item, mechanical fixes first, then disjoint
-groups or a serial writer. Failures naming only carriers outside the run hold for
-their actual owners; warning inventories do not establish repair ownership.
-Step 5b applies this rule to precheck, depcheck and rendercheck content failures;
-foreign-consumer impact receipts remain lead-Alpha work. Precheck FAIL/REPAIR
-headers identify retry subjects; PASS rows and the printed proof's citations do
-not. Unknown or mixed diagnostics retain serial repair routing.
+Step 5 gate diagnostics still identify exact items and ownership, but they no
+longer dispatch gate-triggered repair groups or a serial writer. Failures naming
+only foreign carriers remain with their actual owners; warning inventories do
+not establish repair ownership. Precheck FAIL/REPAIR headers identify owner-held
+subjects; PASS rows and the printed proof's citations do not. Unknown or mixed
+diagnostics are holders too, not repair-routing authority.
 Depcheck accepts numeric Unicode escapes in quoted YAML while still detecting
 undoubled TeX backslashes. Deterministic gates that read frontmatter ID lists
 share `tools/frontmatter-list.mjs`; it accepts same-line and next-line flow

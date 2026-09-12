@@ -137,7 +137,7 @@ test('final readiness runs whole-level closure once and terminal close verifies 
 // `fixRounds` was initialised and never read. A failing gate could only hold.
 // --------------------------------------------------------------------------
 
-function repairFixture(maxFixRounds: number) {
+function repairFixture(maxFixRounds: number, gateFailurePolicy: 'repair' | 'owner' = 'repair') {
   const repo = mkdtempSync(join(tmpdir(), 'ap-repair-'));
   const dispatchDir = join(repo, 'dispatch');
   mkdirSync(dispatchDir, { recursive: true });
@@ -182,7 +182,8 @@ function repairFixture(maxFixRounds: number) {
     cwd: repo,
   });
   const ex = new Executor({
-    config: { run: 't', repo, stateDir, dispatchDir, argv: ['true'], concurrency: 1, maxAttempts: 5, coversMap: {}, adoptCommand: false, dispatchStaggerMs: 0 } as any,
+    config: { run: 't', repo, stateDir, dispatchDir, argv: ['true'], concurrency: 1, maxAttempts: 5,
+      gateFailurePolicy, coversMap: {}, adoptCommand: false, dispatchStaggerMs: 0 } as any,
     stages, adapter, state, reporter,
   });
   return { ex, rounds, repo };
@@ -212,6 +213,16 @@ test('the repair loop stops at the cap instead of spending forever', async () =>
   assert.deepEqual(rounds, [1]);
   assert.ok(ex.state.data.blockers.some((b: any) => /gate converge failed/.test(b.message)),
     'and it must leave a blocker a person can read');
+});
+
+test('owner gate policy blocks before repair hooks or budgets can run', async () => {
+  const { ex, rounds } = repairFixture(3, 'owner');
+  assert.equal(await settle(ex), 'blocked');
+  assert.deepEqual(rounds, []);
+  assert.equal(ex.inflight.size, 0);
+  assert.equal(ex.state.stage('only').fixRounds, 0);
+  assert.equal(Object.keys(ex.state.data.gateAttempts ?? {}).length, 0);
+  assert.equal(ex.state.data.blockers.filter((b: any) => b.key === 'owner:only').length, 1);
 });
 
 // --------------------------------------------------------------------------

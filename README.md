@@ -33,6 +33,10 @@ Step 5a reviews authored content; Step 5b reconciles dependencies and closes it.
 Every agent must acknowledge uncertainty and consult authoritative sources when unsure.
 Step 7 is repairs/checks → one rejudge → one final adjudication → Step 8.
 Unresolved terminal findings stop the run; no post-final repair loop exists.
+Across Steps 1–9, every failed gate is immediately escalated to the owner. A
+gate failure never launches another automatic repair, review, author or judge
+round; after intervention, `retry` only re-arms checks against current disk
+state. Normal first-pass stages and their planned dispatches are unchanged.
 An explicitly owner-authorized fatal finding discovered after the freeze uses
 the guarded Step-8 recovery command documented in WORKFLOW; it preserves Step 7
 and recertifies only the changed suffix before Step 9.

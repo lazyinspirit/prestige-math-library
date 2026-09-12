@@ -231,6 +231,9 @@ export interface Config {
    *  own lane caps, which are the real constraint. */
   globalConcurrency?: number;
   maxAttempts?: number;
+  /** Production gate disposition. `owner` escalates immediately without
+   * invoking a stage repair hook or spending any repair budget. */
+  gateFailurePolicy?: 'repair' | 'owner';
   /** Minimum gap between two dispatch SPAWNS, in ms (default 2000; owner,
    *  2026-08-24). A stage fans out to its cap in the same millisecond, so up to
    *  twelve agent processes used to boot, read the repo and open their first
