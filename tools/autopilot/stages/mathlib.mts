@@ -43,6 +43,7 @@ const { step5Stages } = await import(
 
 const TERRA_HIGH = MODEL_PROFILE_NAMES.terraHigh;
 const ASTRA_MEDIUM = MODEL_PROFILE_NAMES.astraMedium;
+const SOL_XHIGH = MODEL_PROFILE_NAMES.solXHigh;
 const DEEPSEEK_FLASH_MAX = MODEL_PROFILE_NAMES.deepseekFlashMax;
 
 const R = (ctx: any, ...p: string[]) => join(ctx.repo, ...p);
@@ -1553,7 +1554,7 @@ export function step3Plan(ctx: any, group: any, phase: 'scope' | 'final') {
   const task = `research/${ctx.run}-${label}.task.md`;
   writeFileSync(R(ctx, task), `# ${prefix}: group ${group.label}\n\n- Run: ${ctx.run}\n- Batches: ${group.covers.join(', ')}\n- A pages: ${pairs.map(([id]: any) => id).join(', ')}\n- Read current manifests, coverage, prose, plan and dependency records.\n- Write research/${ctx.run}-${prefix}-${group.label}.md.\n`);
   return { role: phase === 'scope' ? 'alpha' : 'alpha-high', label,
-    profile: phase === 'scope' ? MODEL_PROFILE_NAMES.solHigh : ASTRA_MEDIUM,
+    profile: SOL_XHIGH,
     job: phase === 'scope' ? 'audit' : 'authoring', covers: group.covers,
     brief: phase === 'scope' ? 'briefs/step3-scope.md' : 'briefs/group-author.md',
     task, timeout: phase === 'scope' ? 10800 : 21600 };
@@ -1725,7 +1726,7 @@ export const stages = [
   {
     id: '3a-scope',
     label: 'Step 3a — scope review and owner decisions',
-    modelProfile: MODEL_PROFILE_NAMES.solHigh,
+    modelProfile: SOL_XHIGH,
     role: 'alpha',
     units: batches,
     pattern: resultPattern('alpha', 'step3a-[a-z]+-[a-f0-9]+'),
@@ -1753,7 +1754,7 @@ export const stages = [
   {
     id: '3b-author',
     label: 'Step 3b — group scaffold audit, repair and authoring',
-    modelProfile: ASTRA_MEDIUM,
+    modelProfile: SOL_XHIGH,
     role: 'alpha-high',
     units: batches,
     exclusiveCohort: alphaCohort,

@@ -34,6 +34,7 @@ export const MODELS = Object.freeze({
 export const MODEL_PROFILE_NAMES = Object.freeze({
   astraMedium: 'gpt-6-astra-medium',
   solHigh: 'gpt-5.6-sol-high',
+  solXHigh: 'gpt-5.6-sol-xhigh',
   terraHigh: 'gpt-5.6-terra-high',
   deepseekFlashMax: 'deepseek-v4.1-flash-max',
 });
@@ -52,6 +53,10 @@ export const MODEL_PROFILES = Object.freeze({
   [MODEL_PROFILE_NAMES.solHigh]: Object.freeze({
     model: MODELS.sol.id, runner: MODELS.sol.runner, family: MODELS.sol.family,
     provider: 'openai', effort: 'high', requestedEffort: 'high', contextWindow: 1_000_000,
+  }),
+  [MODEL_PROFILE_NAMES.solXHigh]: Object.freeze({
+    model: MODELS.sol.id, runner: MODELS.sol.runner, family: MODELS.sol.family,
+    provider: 'openai', effort: 'xhigh', requestedEffort: 'xhigh', contextWindow: 1_000_000,
   }),
   [MODEL_PROFILE_NAMES.terraHigh]: Object.freeze({
     model: MODELS.terra.id,

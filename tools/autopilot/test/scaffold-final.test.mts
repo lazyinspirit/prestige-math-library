@@ -40,7 +40,7 @@ test('Step 3 is two barriers with the requested profiles, not a Beta loop', t =>
   assert.deepEqual(pair.map(s => s.id), ['3a-scope', '3b-author']);
   assert.ok(!stages.some(s => ['3-review', '3-fix', '3-recheck'].includes(s.id)));
   assert.ok(pair.every(s => !s.pipeline));
-  for (const [s, profile, phase] of [[pair[0], MODEL_PROFILE_NAMES.solHigh, 'scope'], [pair[1], MODEL_PROFILE_NAMES.astraMedium, 'final']] as any) {
+  for (const [s, profile, phase] of [[pair[0], MODEL_PROFILE_NAMES.solXHigh, 'scope'], [pair[1], MODEL_PROFILE_NAMES.solXHigh, 'final']] as any) {
     assert.equal(s.modelProfile, profile);
     const plan = step3Plan(f.ctx, { label: 'a', covers: ['1'] }, phase);
     assert.equal(plan.profile, profile);
@@ -485,13 +485,13 @@ test('fresh missing decisions dispatch only the owning groups', async t => {
   await scope.onGateFailure(args);
   assert.equal(started.length, 1);
   assert.deepEqual(started[0].covers, ['1']);
-  assert.equal(started[0].profile, MODEL_PROFILE_NAMES.solHigh);
+  assert.equal(started[0].profile, MODEL_PROFILE_NAMES.solXHigh);
   f.scope(); started.length = 0;
   writeAuditorBaseline(f.root, 'demo');
   const audit: any = stages.find(s => s.id === '3b-author');
   await audit.onGateFailure({ ...args, stage: audit });
   assert.equal(started.length, 1);
-  assert.equal(started[0].profile, MODEL_PROFILE_NAMES.astraMedium);
+  assert.equal(started[0].profile, MODEL_PROFILE_NAMES.solXHigh);
 });
 
 test('the CLI records scope and returns nonzero until every item clears', t => {

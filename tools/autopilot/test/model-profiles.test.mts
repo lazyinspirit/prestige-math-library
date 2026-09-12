@@ -49,6 +49,12 @@ test('registered owner profiles name the exact models, efforts, and windows', ()
   assert.equal(liveCompat.effort, 'high');
   assert.equal(liveCompat.requestedEffort, 'high');
 
+  const solXHigh = MODEL_PROFILES[MODEL_PROFILE_NAMES.solXHigh];
+  assert.equal(solXHigh.model, 'gpt-5.6-sol');
+  assert.equal(solXHigh.effort, 'xhigh');
+  assert.equal(solXHigh.requestedEffort, 'xhigh');
+  assert.equal(solXHigh.contextWindow, 1_000_000);
+
   const deepseek = MODEL_PROFILES[MODEL_PROFILE_NAMES.deepseekFlashMax];
   assert.equal(deepseek.model, 'deepseek-flash');
   assert.equal(deepseek.provider, 'deepseek');
@@ -56,18 +62,14 @@ test('registered owner profiles name the exact models, efforts, and windows', ()
   assert.equal(deepseek.contextWindow, 1_048_576);
 });
 
-test('Step 3 authors retain Astra while Step 5 and Step 6 readers use DeepSeek Flash max', () => {
+test('Step 3 auditors and authors use Sol xhigh while Step 5 and Step 6 readers use DeepSeek Flash max', () => {
   const authorStage = stage('3b-author');
   const author = { role: 'alpha-high', job: 'authoring' };
-  assert.equal(selected(authorStage, author), MODEL_PROFILE_NAMES.astraMedium);
+  assert.equal(selected(authorStage, author), MODEL_PROFILE_NAMES.solXHigh);
   assert.equal(selected(authorStage, {
     role: 'beta', job: 'authoring', label: 'author-recover-1-1',
-  }), MODEL_PROFILE_NAMES.astraMedium, 'Step 3 recovery authors use the same profile');
-  assert.equal(selected(authorStage, { role: 'alpha-high', job: 'authoring' }), MODEL_PROFILE_NAMES.astraMedium);
-
-  const astraMedium = MODEL_PROFILES[MODEL_PROFILE_NAMES.astraMedium];
-  assert.equal(astraMedium.model, 'gpt-6-astra');
-  assert.equal(astraMedium.effort, 'medium');
+  }), MODEL_PROFILE_NAMES.solXHigh, 'Step 3 recovery authors use the same profile');
+  assert.equal(selected(authorStage, { role: 'alpha-high', job: 'authoring' }), MODEL_PROFILE_NAMES.solXHigh);
 
   const adjudicate = stage('5a-adjudicate');
   assert.equal(selected(adjudicate, adjudicate.plan(ctx, ['1'])[0]), MODEL_PROFILE_NAMES.deepseekFlashMax);
@@ -103,11 +105,12 @@ test('group Alpha resolves to Sol high', () => {
   assert.equal(row.provider_effort, 'high');
 });
 
-test('Step-3 scope uses Sol high and item adjudication uses Astra medium', () => {
-  for (const [id, model, effort] of [['3a-scope', MODELS.sol.id, 'high'], ['3b-author', MODELS.astra.id, 'medium']]) {
+test('Step-3 scope and item adjudication use Sol xhigh', () => {
+  for (const id of ['3a-scope', '3b-author']) {
     const profile = MODEL_PROFILES[stage(id).modelProfile];
-    assert.equal(profile.model, model);
-    assert.equal(profile.effort, effort);
+    assert.equal(profile.model, MODELS.sol.id);
+    assert.equal(profile.effort, 'xhigh');
+    assert.equal(profile.requestedEffort, 'xhigh');
   }
 });
 
