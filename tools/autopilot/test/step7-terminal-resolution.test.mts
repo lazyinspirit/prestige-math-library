@@ -11,6 +11,7 @@ import {
   finalAdjudicatorQueueProblems,
   parseTerminalResolutions,
   TERMINAL_RESOLUTION_VERSION,
+  OWNER_TERMINAL_RESOLUTION_VERSION,
 } from '../../step7-terminal-resolution.mjs';
 import { MODELS } from '../../models.mjs';
 
@@ -76,19 +77,49 @@ test('current final-adjudicator receipts require Astra medium after one Terra re
     assert.match(parseTerminalResolutions(path).errors.join('\n'), /gpt-6-astra\/medium/);
     const { final_adjudicator: _ignored, ...ownerRow } = row;
     writeFileSync(path, `${JSON.stringify({ ...ownerRow, resolved_by: 'owner' })}\n`);
-    assert.match(parseTerminalResolutions(path).errors.join('\n'), /only by final-adjudicator/);
+    assert.match(parseTerminalResolutions(path).errors.join('\n'), /requires final-adjudicator resolution/);
   } finally {
     rmSync(dir, { recursive: true, force: true });
   }
 });
 
-test('current terminal recording cannot bypass Astra with an owner or session resolution', () => {
+test('current terminal recording rejects session resolutions', () => {
   const result = run(['tools/step7-terminal-resolution.mjs', 'record',
     '--run', 'fixture', '--id', ITEM, '--resolved-by', 'session',
     '--disposition', 'accepted-after-review',
     '--basis', 'This deliberately long basis would otherwise satisfy the evidence-length check but may not bypass Astra.']);
   assert.equal(result.status, 2);
-  assert.match(result.stderr, /--resolved-by final-adjudicator/);
+  assert.match(result.stderr, /--resolved-by owner\|final-adjudicator/);
+});
+
+test('owner terminal receipts require bound research evidence and a rejected item hash', () => {
+  const dir = mkdtempSync(join(tmpdir(), 'step7-terminal-owner-v4-'));
+  try {
+    const path = join(dir, 'terminal.jsonl');
+    const row: any = {
+      version: OWNER_TERMINAL_RESOLUTION_VERSION,
+      run: 'fixture', stage: '7-rejudge', id: 'thm-demo',
+      resolved_by: 'owner', disposition: 'repaired',
+      rejudge_rounds_exhausted: 1, exhausted_at: '2026-09-13T00:00:00.000Z',
+      failure_evidence: {
+        cycle_ids: ['terra-rejudge-1'], closure_path: 'research/fixture-closure.json',
+        closure_sha256: 'a'.repeat(64), unresolved_as: 'unadjudicated',
+        rejected_item_sha256: 'b'.repeat(64),
+      },
+      context_sha256: 'c'.repeat(64), item_sha256: 'd'.repeat(64),
+      basis: 'The owner checked the rejected statement against its definitions and repaired the defect with a proof that handles the omitted case.',
+      owner_evidence: { path: 'research/fixture-owner.md', sha256: 'e'.repeat(64) },
+      at: '2026-09-13T00:01:00.000Z',
+    };
+    writeFileSync(path, `${JSON.stringify(row)}\n`);
+    assert.deepEqual(parseTerminalResolutions(path).errors, []);
+    writeFileSync(path, `${JSON.stringify({ ...row, owner_evidence: undefined })}\n`);
+    assert.match(parseTerminalResolutions(path).errors.join('\n'), /requires exact research evidence/);
+    writeFileSync(path, `${JSON.stringify({ ...row, resolved_by: 'session' })}\n`);
+    assert.match(parseTerminalResolutions(path).errors.join('\n'), /requires owner resolution/);
+  } finally {
+    rmSync(dir, { recursive: true, force: true });
+  }
 });
 
 test('one current Terra verdict completes singleton judge coverage', () => {

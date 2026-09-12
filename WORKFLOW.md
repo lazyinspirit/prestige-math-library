@@ -295,9 +295,16 @@ consumers. A genuinely new supplier fully authored by the Step-7 adjudicator is
 mechanically certified as a distinct class and receives no fabricated judge row;
 existing-item repairs still require the configured rejudge route.
 
-Step 7 is: group repairs → preflight checks → one Terra rejudge → one Astra
-final-adjudication pass → snapshot → Step 8. Only the engine dispatches judges.
-Final adjudicators accept or repair queued items using existing suppliers.
+Step 7 is: group repairs → preflight checks → one Terra rejudge → terminal
+resolution → snapshot → Step 8. Only the engine dispatches judges. A gate-held
+rejection is resolved by the owner against the exact rejected text and context:
+repair a real mathematical defect or write item-specific evidence for an
+accepted-after-review finding. The owner then recertifies changed items and
+records a hash-bound version-4 terminal receipt with the rejected verdict,
+closure, current item/context and research evidence. The gate verifies these
+bindings before a transition; a receipt is not a fabricated judge pass.
+Where the configured final-adjudicator route is used, final adjudicators accept
+or repair queued items using existing suppliers.
 Within each queue, process suppliers before consumers, including transitive
 prerequisites, with stable ID ordering for unrelated items. Preserve frozen
 queues and append-only decisions. Legacy queue/hash conflicts require explicit

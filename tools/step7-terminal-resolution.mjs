@@ -23,6 +23,7 @@ import { loadStep7JudgeEvidence, rejectionKey } from './step7-evidence.mjs';
 import { MODELS } from './models.mjs';
 
 export const TERMINAL_RESOLUTION_VERSION = 3;
+export const OWNER_TERMINAL_RESOLUTION_VERSION = 4;
 export const TERMINAL_REJUDGE_ROUNDS = 1;
 
 const HASH = /^[a-f0-9]{64}$/;
@@ -120,14 +121,18 @@ export function parseTerminalResolutions(path, { allowMissing = true } = {}) {
     const where = `${path}:${index + 1}`;
     const legacy = row?.version === 1;
     const previous = row?.version === 2;
-    if ((!legacy && !previous && row?.version !== TERMINAL_RESOLUTION_VERSION) || row?.stage !== '7-rejudge')
-      errors.push(`${where}: expected version 1, 2, or ${TERMINAL_RESOLUTION_VERSION} and stage "7-rejudge"`);
+    const ownerCurrent = row?.version === OWNER_TERMINAL_RESOLUTION_VERSION;
+    if ((!legacy && !previous && row?.version !== TERMINAL_RESOLUTION_VERSION && !ownerCurrent)
+      || row?.stage !== '7-rejudge')
+      errors.push(`${where}: expected version 1, 2, ${TERMINAL_RESOLUTION_VERSION}, or ${OWNER_TERMINAL_RESOLUTION_VERSION} and stage "7-rejudge"`);
     if (typeof row?.run !== 'string' || !row.run || typeof row?.id !== 'string' || !row.id)
       errors.push(`${where}: run and id are required`);
     if (!RESOLVERS.has(row?.resolved_by))
       errors.push(`${where}: resolved_by must be owner, session, or final-adjudicator`);
-    if (!legacy && !previous && row?.resolved_by !== 'final-adjudicator')
-      errors.push(`${where}: current terminal resolutions may be written only by final-adjudicator`);
+    if (ownerCurrent && row?.resolved_by !== 'owner')
+      errors.push(`${where}: version ${OWNER_TERMINAL_RESOLUTION_VERSION} requires owner resolution`);
+    if (row?.version === TERMINAL_RESOLUTION_VERSION && row?.resolved_by !== 'final-adjudicator')
+      errors.push(`${where}: version ${TERMINAL_RESOLUTION_VERSION} requires final-adjudicator resolution`);
     if (!DISPOSITIONS.has(row?.disposition))
       errors.push(`${where}: disposition must be repaired or accepted-after-review`);
     const expectedRounds = legacy ? 3 : previous ? 2 : TERMINAL_REJUDGE_ROUNDS;
@@ -151,6 +156,11 @@ export function parseTerminalResolutions(path, { allowMissing = true } = {}) {
         || !['needs_rejudge', 'unadjudicated', 'open_fatal'].includes(row?.failure_evidence?.unresolved_as))
         errors.push(`${where}: version ${row?.version} requires exact per-item cycle ids and hash-bound unresolved closure evidence`);
     }
+    if (ownerCurrent && (!relativeResearchPath(row?.owner_evidence?.path)
+      || !HASH.test(row?.owner_evidence?.sha256 ?? '')
+      || !HASH.test(row?.failure_evidence?.rejected_item_sha256 ?? '')
+      || row?.final_adjudicator != null))
+      errors.push(`${where}: owner resolution requires exact research evidence and rejected-item hash, without final-adjudicator metadata`);
     if (row?.resolved_by === 'final-adjudicator') {
       const fa = row?.final_adjudicator;
       const expectedModel = previous || legacy ? MODELS.sol.id : MODELS.astra.id;
@@ -322,13 +332,26 @@ export function terminalEvidence(root, run, id, stateDir = '.autopilot') {
   throw new Error(`${id}: not named in the current unresolved run or published Step-7 closure receipt`);
 }
 
+function rejectedVerdict(root, run, id, failureEvidence) {
+  const closure = JSON.parse(readFileSync(join(root, failureEvidence.closure_path), 'utf8'));
+  const unresolved = [...(closure.unadjudicated_rows ?? []), ...(closure.open_fatal_rows ?? [])]
+    .find(row => row.id === id && HASH.test(row.context_sha256 ?? ''));
+  if (!unresolved) throw new Error(`${id}: owner resolution needs an exact rejected closure row`);
+  const rows = readFileSync(join(root, 'research', `${run}-judge.jsonl`), 'utf8')
+    .split(/\r?\n/).filter(Boolean).map(JSON.parse);
+  const verdict = rows.reverse().find(row => row.id === id && row.keep === false
+    && row.context_sha256 === unresolved.context_sha256 && HASH.test(row.item_sha256 ?? ''));
+  if (!verdict) throw new Error(`${id}: owner resolution needs the rejected judge verdict bound by closure`);
+  return verdict;
+}
+
 function value(argv, flag) {
   const index = argv.indexOf(flag);
   return index >= 0 ? argv[index + 1] : '';
 }
 
 function usage() {
-  console.error('usage: node tools/step7-terminal-resolution.mjs record --run <run> --id <id> --resolved-by final-adjudicator --disposition repaired|accepted-after-review (--basis <evidence> | --basis-file <file>) [--root <repo>] [--state-dir <dir>]');
+  console.error('usage: node tools/step7-terminal-resolution.mjs record --run <run> --id <id> --resolved-by owner|final-adjudicator --disposition repaired|accepted-after-review --basis-file research/<evidence> [--root <repo>] [--state-dir <dir>]');
   console.error('       final-adjudicator requires --group <label> --queue <research/...json> --source-status verified|familiar');
   console.error('       node tools/step7-terminal-resolution.mjs check --run <run> [--root <repo>] [--allow-missing]');
   process.exit(2);
@@ -348,7 +371,7 @@ function main() {
     const errors = [...parsed.errors];
     for (const row of parsed.latest.values()) {
       if (row.run !== run) errors.push(`${row.id}: row run ${row.run} does not match ${run}`);
-      if (row.version === TERMINAL_RESOLUTION_VERSION) {
+      if (row.version === TERMINAL_RESOLUTION_VERSION || row.version === OWNER_TERMINAL_RESOLUTION_VERSION) {
         try {
           const cycleReceipt = JSON.parse(readFileSync(join(root, 'research', `${run}-step7-rejudge-cycles.json`), 'utf8'));
           const cycles = new Map((cycleReceipt.cycles ?? []).map((cycle) => [cycle.cycle_id, cycle]));
@@ -359,7 +382,7 @@ function main() {
               errors.push(`${row.id}: failure evidence cycle ${cycleId} does not bind this item`);
             else {
               selected.push(cycle);
-              if (row.version === TERMINAL_RESOLUTION_VERSION
+              if ((row.version === TERMINAL_RESOLUTION_VERSION || row.version === OWNER_TERMINAL_RESOLUTION_VERSION)
                 && (String(cycle.kind ?? '').startsWith('initial-')
                   || cycle.exit_code !== 0 || typeof cycle.completed_at !== 'string')) {
                 errors.push(`${row.id}: failure evidence cycle ${cycleId} is not a completed paid Terra rejudge`);
@@ -387,6 +410,17 @@ function main() {
         } catch (cause) {
           errors.push(`${row.id}: cannot verify unresolved closure evidence (${cause.message})`);
         }
+      }
+      if (row.version === OWNER_TERMINAL_RESOLUTION_VERSION) {
+        try {
+          const evidence = readFileSync(join(root, row.owner_evidence.path), 'utf8');
+          if (createHash('sha256').update(evidence).digest('hex') !== row.owner_evidence.sha256
+            || evidence.trim() !== row.basis)
+            errors.push(`${row.id}: owner mathematical evidence changed after resolution`);
+          const rejected = rejectedVerdict(root, run, row.id, row.failure_evidence);
+          if (rejected.item_sha256 !== row.failure_evidence.rejected_item_sha256)
+            errors.push(`${row.id}: owner resolution rejected-item hash does not match the bound verdict`);
+        } catch (cause) { errors.push(`${row.id}: cannot verify owner evidence (${cause.message})`); }
       }
       if (row.resolved_by === 'final-adjudicator' && row.final_adjudicator) {
         const fa = row.final_adjudicator;
@@ -420,6 +454,12 @@ function main() {
       try {
         const now = currentHashes(root, row.id);
         if (!terminalResolutionIsCurrent(row, now)) errors.push(`${row.id}: terminal resolution is stale against current item/context`);
+        if (row.version === OWNER_TERMINAL_RESOLUTION_VERSION) {
+          const sameText = now.item_sha256 === row.failure_evidence.rejected_item_sha256;
+          if ((row.disposition === 'repaired' && sameText)
+            || (row.disposition === 'accepted-after-review' && !sameText))
+            errors.push(`${row.id}: owner disposition does not match the current item versus rejected text`);
+        }
       } catch (cause) { errors.push(`${row.id}: ${cause.message}`); }
     }
     console.log(`step7-terminal-resolution: ${parsed.latest.size} current resolution(s), ${errors.length} error(s)`);
@@ -436,7 +476,9 @@ function main() {
     try { basis = readFileSync(resolve(root, basisFile), 'utf8'); }
     catch (cause) { console.error(`cannot read --basis-file ${basisFile}: ${cause.message}`); process.exit(2); }
   }
-  if (!id || resolvedBy !== 'final-adjudicator' || !DISPOSITIONS.has(disposition) || basis.trim().length < 80) usage();
+  if (!id || !['owner', 'final-adjudicator'].includes(resolvedBy)
+    || !DISPOSITIONS.has(disposition) || basis.trim().length < 80
+    || (resolvedBy === 'owner' && (!basisFile || !relativeResearchPath(basisFile)))) usage();
   let finalAdjudicator = null;
   if (resolvedBy === 'final-adjudicator') {
     const group = value(argv, '--group');
@@ -502,8 +544,21 @@ function main() {
   }
   const exhausted = terminalEvidence(root, run, id, value(argv, '--state-dir') || '.autopilot');
   const now = currentHashes(root, id);
+  let ownerEvidence = null;
+  if (resolvedBy === 'owner') {
+    if (!['unadjudicated', 'open_fatal'].includes(exhausted.evidence.unresolved_as))
+      throw new Error(`${id}: owner cannot replace a missing paid verdict with a terminal resolution`);
+    const rejected = rejectedVerdict(root, run, id, exhausted.evidence);
+    const sameText = now.item_sha256 === rejected.item_sha256;
+    if ((disposition === 'repaired' && sameText)
+      || (disposition === 'accepted-after-review' && !sameText))
+      throw new Error(`${id}: owner disposition does not match the current item versus rejected text`);
+    exhausted.evidence.rejected_item_sha256 = rejected.item_sha256;
+    ownerEvidence = { path: basisFile,
+      sha256: createHash('sha256').update(readFileSync(join(root, basisFile), 'utf8')).digest('hex') };
+  }
   const row = {
-    version: TERMINAL_RESOLUTION_VERSION,
+    version: resolvedBy === 'owner' ? OWNER_TERMINAL_RESOLUTION_VERSION : TERMINAL_RESOLUTION_VERSION,
     run,
     stage: '7-rejudge',
     id,
@@ -516,6 +571,7 @@ function main() {
     item_sha256: now.item_sha256,
     basis: basis.trim(),
     ...(finalAdjudicator ? { final_adjudicator: finalAdjudicator } : {}),
+    ...(ownerEvidence ? { owner_evidence: ownerEvidence } : {}),
     at: new Date().toISOString(),
   };
   appendFileSync(path, `${JSON.stringify(row)}\n`);
