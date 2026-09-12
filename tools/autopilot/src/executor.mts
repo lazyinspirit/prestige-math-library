@@ -1655,7 +1655,8 @@ export class Executor {
     // This policy is checked before stage hooks and budget accounting, so a
     // local `onGateFailure` implementation cannot accidentally launch another
     // repair wave. Synthetic artifact stalemates use this same path.
-    if (this.config.gateFailurePolicy === 'owner' || stage.onHold) {
+    const ownerRecertify = this.config.gateFailurePolicy === 'owner-recertify';
+    if (this.config.gateFailurePolicy === 'owner' || ownerRecertify || stage.onHold) {
       let reason: string;
       if (stage.onHold) {
         try { reason = (await stage.onHold({ ctx, stage, failure })).owner.reason; }
@@ -1666,7 +1667,10 @@ export class Executor {
           `${row.stage ?? stage.id}/${row.id}: ${row.why || row.output || 'failed'}`);
         reason = [`${failure.id}: ${detail}`, ...advisory].join('; ');
       }
-      const message = `stage ${stage.id}: owner decision required — ${reason}`;
+      const action = ownerRecertify
+        ? 'owner repair and recertification required; repair every rejected item, refresh all certifications invalidated by the repair, then retry the gate before transition'
+        : 'owner decision required';
+      const message = `stage ${stage.id}: ${action} — ${reason}`;
       if (this.state.addBlocker(stage.id, message, `owner:${stage.id}`))
         this.reporter.notify('owner-escalation', message);
       this.state.save();

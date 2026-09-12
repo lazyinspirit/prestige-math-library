@@ -18,9 +18,12 @@ Step7 completes repairs and checks, runs one rejudge and one terminal
 adjudication pass, then snapshots for Step8. No post-final repair loop exists.
 Coverage, artifacts and gates are independently required. Every agent must be
 honest about uncertainty and read authoritative sources when unsure.
-The production configuration makes all Step 1–9 gate failures owner-terminal:
-no failing gate invokes a stage repair hook or spends a repair budget. This does
-not suppress the workflow's normal first-pass dispatches.
+The production configuration makes all Step 1–9 gate failures
+owner-recertification holds: no failing gate invokes a stage repair hook or
+spends a repair budget. The owner/operator must repair every rejected item,
+refresh every certification invalidated by that repair, and retry the same gate;
+the stage cannot transition until the repaired, recertified carrier passes.
+This does not suppress the workflow's normal first-pass dispatches.
 
 Use tools/tsx-run.mjs from the repository root for status, doctor and tests.
 Tests use temporary fixtures and fake dispatches, never live state. Do not

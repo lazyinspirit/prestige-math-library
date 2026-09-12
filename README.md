@@ -35,8 +35,11 @@ Step 7 is repairs/checks → one rejudge → one final adjudication → Step 8.
 Unresolved terminal findings stop the run; no post-final repair loop exists.
 Across Steps 1–9, every failed gate is immediately escalated to the owner. A
 gate failure never launches another automatic repair, review, author or judge
-round; after intervention, `retry` only re-arms checks against current disk
-state. Normal first-pass stages and their planned dispatches are unchanged.
+round. The owner/operator repairs every rejected item, refreshes every
+certification invalidated by the repair, and only then uses `retry` to rerun the
+rejecting gate. No item can enter the next step until that gate passes on its
+repaired, recertified carrier. This rule applies uniformly to Steps 1–9. Normal
+first-pass stages and their planned dispatches are unchanged.
 An explicitly owner-authorized fatal finding discovered after the freeze uses
 the guarded Step-8 recovery command documented in WORKFLOW; it preserves Step 7
 and recertifies only the changed suffix before Step 9.

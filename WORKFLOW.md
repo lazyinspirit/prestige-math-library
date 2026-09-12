@@ -362,6 +362,11 @@ without killing workers. Stage skipping needs explicit owner authority.
 Stages clear only after successful matching coverage, artifacts and gates. The
 engine adopts compatible workers and waits for existing in-flight work. Any
 subsequent gate failure is owner-held before a repair hook or budget can run.
+For every step from 1 through 9, the owner/operator must repair each rejected
+item and refresh all certifications invalidated by that repair. `retry` then
+reruns the rejecting gate on the repaired, recertified carrier; transition to
+the next step is forbidden until it passes. Thus the universal order is
+certify, gate, owner repair on rejection, recertify, and rerun the same gate.
 Infrastructure retries are bounded; unchanged mathematical failures hold.
 
 An owner-authorized fatal finding discovered after Step 7 may use

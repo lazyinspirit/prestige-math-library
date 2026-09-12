@@ -137,7 +137,7 @@ test('final readiness runs whole-level closure once and terminal close verifies 
 // `fixRounds` was initialised and never read. A failing gate could only hold.
 // --------------------------------------------------------------------------
 
-function repairFixture(maxFixRounds: number, gateFailurePolicy: 'repair' | 'owner' = 'repair') {
+function repairFixture(maxFixRounds: number, gateFailurePolicy: 'repair' | 'owner' | 'owner-recertify' = 'repair') {
   const repo = mkdtempSync(join(tmpdir(), 'ap-repair-'));
   const dispatchDir = join(repo, 'dispatch');
   mkdirSync(dispatchDir, { recursive: true });
@@ -223,6 +223,19 @@ test('owner gate policy blocks before repair hooks or budgets can run', async ()
   assert.equal(ex.state.stage('only').fixRounds, 0);
   assert.equal(Object.keys(ex.state.data.gateAttempts ?? {}).length, 0);
   assert.equal(ex.state.data.blockers.filter((b: any) => b.key === 'owner:only').length, 1);
+});
+
+test('owner-recertify policy blocks with the repair, recertification and same-gate retry contract', async () => {
+  const { ex, rounds } = repairFixture(3, 'owner-recertify');
+  assert.equal(await settle(ex), 'blocked');
+  assert.deepEqual(rounds, []);
+  assert.equal(ex.inflight.size, 0);
+  assert.equal(ex.state.stage('only').fixRounds, 0);
+  assert.equal(Object.keys(ex.state.data.gateAttempts ?? {}).length, 0);
+  const blocker = ex.state.data.blockers.find((b: any) => b.key === 'owner:only');
+  assert.match(blocker?.message ?? '', /repair every rejected item/);
+  assert.match(blocker?.message ?? '', /refresh all certifications/);
+  assert.match(blocker?.message ?? '', /retry the gate before transition/);
 });
 
 // --------------------------------------------------------------------------

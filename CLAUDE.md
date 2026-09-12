@@ -33,10 +33,13 @@ credentials or transcripts.
 it every ten minutes for stalled work. Do not intervene unless a blocker exists
 or a stage fails to close. Every gate failure in Steps 1–9 is owner-held: the
 engine must not launch a gate-triggered repair, review, authoring, adjudication
-or judge round. Normal first-pass stage dispatches still run. After owner or
-authorized-operator intervention, `retry` may rerun checks but must not convert
-the same gate failure into an automatic repair wave. When intervention is
-required, resolve the blocker
+or judge round. Normal first-pass stage dispatches still run. The owner/operator
+must repair every rejected item and refresh every certification invalidated by
+that repair. Only then may `retry` rerun the rejecting gate; the stage cannot
+transition until it passes. This certify → gate → repair → recertify → same-gate
+sequence applies to every gate in Steps 1–9. `retry` must not convert the same
+gate failure into an automatic repair wave. When intervention is required,
+resolve the blocker
 autonomously while prioritizing mathematical accuracy, richness, token
 efficiency, and time efficiency.
 

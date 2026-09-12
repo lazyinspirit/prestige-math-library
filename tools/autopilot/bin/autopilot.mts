@@ -79,8 +79,8 @@ function loadConfig(): Config {
     coversMap: {},
   };
   if (existsSync(CONFIG_PATH)) Object.assign(base, JSON.parse(readFileSync(CONFIG_PATH, 'utf8')));
-  if (base.gateFailurePolicy != null && !['repair', 'owner'].includes(base.gateFailurePolicy)) {
-    throw new Error(`gateFailurePolicy must be "repair" or "owner"; got ${JSON.stringify(base.gateFailurePolicy)}`);
+  if (base.gateFailurePolicy != null && !['repair', 'owner', 'owner-recertify'].includes(base.gateFailurePolicy)) {
+    throw new Error(`gateFailurePolicy must be "repair", "owner", or "owner-recertify"; got ${JSON.stringify(base.gateFailurePolicy)}`);
   }
   // A checkpoint continuation may select a run-local stage table without
   // changing other live runs or the global model/concurrency configuration.

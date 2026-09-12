@@ -31,9 +31,9 @@ test('author, splice, review, cross-closure and judgment are ordered barriers', 
   assert.ok(!stage('5b-close').pattern.test('alpha-5b-lead.result.json'));
 });
 
-test('the production Steps 1 through 9 escalate every gate failure to the owner', () => {
+test('the production Steps 1 through 9 require owner repair, recertification and a gate retry', () => {
   const config = JSON.parse(readFileSync(join(repo, 'autopilot.config.json'), 'utf8'));
-  assert.equal(config.gateFailurePolicy, 'owner');
+  assert.equal(config.gateFailurePolicy, 'owner-recertify');
   assert.ok(stages.length > 0);
   assert.ok(stages.every(s => /^[1-9][ab]?-/.test(s.id)));
 });
