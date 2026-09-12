@@ -9,7 +9,7 @@ mathlib.step5.mts are authoritative. There is no LLM orchestrator.
 | Step | Stages | Required result |
 |---|---|---|
 | 1 — scaffold | 1-drift, 1-drift-apply, 1-scaffold | Reviewed prerequisites, reconciled scope, source-backed scaffolds and readiness records |
-| 2 — assign | 2-assign | Disjoint groups, each owning at most three batches |
+| 2 — assign | 2-assign | Disjoint, item-load-balanced groups, each owning at most three existing batches |
 | 3 — audit and author | 3a-scope, 3-baseline, 3b-author | Scope decisions, pre-author snapshot, complete authored items/pages/contracts and current item decisions |
 | 4 — materialize | 4-splice, 4-baseline | Mechanical plan splice and post-author snapshot |
 | 5a — review | 5a-prepare, 5a-adjudicate, 5a-baseline | Direct group review and frozen post-review evidence |
