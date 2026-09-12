@@ -345,6 +345,9 @@ Step 9 requires contracts, ledger, pathways, readiness
 and owner-report evidence before committing. New content remains draft. Reused
 published identities require evidence at the pinned ancestor baseline. Only the
 owner publishes and pushes. Close-out means publishable pending owner approval.
+The generated owner report counts terminal resolutions by each receipt's actual
+`resolved_by` role; it never describes owner resolutions as final-adjudicator
+work or invents a model endorsement.
 
 ## Controls
 

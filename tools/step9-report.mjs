@@ -290,6 +290,12 @@ if (command === 'check-response') {
 const { response, evidence } = parseResponse(value('--in') || responsePath);
 const out = value('--out') || reportPath;
 const cell = (text) => String(text ?? '').replaceAll('|', '\\|').replaceAll('\n', ' ');
+const terminalByResolver = Object.entries(evidence.verification.terminal_resolutions.reduce((counts, row) => {
+  const resolver = row.resolved_by || 'unspecified';
+  counts[resolver] = (counts[resolver] ?? 0) + 1;
+  return counts;
+}, {})).sort(([left], [right]) => left.localeCompare(right))
+  .map(([resolver, count]) => `${resolver}: ${count}`).join('; ');
 const lines = [`# ${run} — Step 9 owner report`, '', response.executive_summary.trim(), '',
   '## What was built', '',
   `- ${evidence.build.pages} pages and ${evidence.build.items} items across ${evidence.build.categories.length} categories.`,
@@ -298,7 +304,7 @@ const lines = [`# ${run} — Step 9 owner report`, '', response.executive_summar
   '## Verification closure', '',
   `- Judge lineup: ${evidence.verification.judge_lineup}.`,
   `- Current judge verdicts complete: ${evidence.verification.verdicts_complete}/${evidence.verification.scope}.`,
-  `- Astra final-adjudicator resolutions after the ${TERMINAL_REJUDGE_ROUNDS}-rejudge cap: ${evidence.verification.terminal_resolutions.length}${evidence.verification.terminal_resolutions.length ? ` (${evidence.verification.terminal_resolutions.map((row) => row.id).join(', ')})` : ''}.`,
+  `- Terminal resolutions after the ${TERMINAL_REJUDGE_ROUNDS}-rejudge cap: ${evidence.verification.terminal_resolutions.length}${evidence.verification.terminal_resolutions.length ? ` (${terminalByResolver}; items: ${evidence.verification.terminal_resolutions.map((row) => row.id).join(', ')})` : ''}.`,
   `- Judge closure: ${evidence.verification.closure_closed ? 'closed' : 'open'}; workflow-owned blockers: ${evidence.verification.workflow_owned_blockers}.`,
   `- Evidence fingerprint: \`${evidence.evidence_sha256}\`.`, '',
   '## Fatal mathematical defects — exhaustive ledger table', '',

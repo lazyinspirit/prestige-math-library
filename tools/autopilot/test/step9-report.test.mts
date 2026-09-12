@@ -108,6 +108,9 @@ test('Step 9 mechanically reconciles and renders every fatal row', () => {
     assert.equal((report.match(/demo-D002/g) ?? []).length, 1);
     assert.match(report, /after the 1-rejudge cap/,
       'the report must derive the executable Step-7 cap instead of retaining stale prose');
+    assert.match(report, /Terminal resolutions after the 1-rejudge cap: 0/);
+    assert.doesNotMatch(report, /Astra final-adjudicator resolutions/,
+      'reporting must not invent a resolver model or role');
     assert.doesNotMatch(report, /three-round cap/);
     result = runTool(root, 'check');
     assert.equal(result.status, 0, result.stderr);
